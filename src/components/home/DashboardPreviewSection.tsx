@@ -1,3 +1,4 @@
+/* Fix the browser chrome traffic-light dots to use proper semantic tokens */
 const DashboardPreviewSection = () => {
   return (
     <section className="bg-parchment py-24 md:py-32 overflow-hidden">
@@ -13,12 +14,12 @@ const DashboardPreviewSection = () => {
         </div>
 
         {/* Browser mockup */}
-        <div className="rounded-2xl overflow-hidden shadow-soft border border-parchment-deeper bg-card mx-auto max-w-3xl">
+        <div className="rounded-2xl overflow-hidden shadow-soft border border-border bg-card mx-auto max-w-3xl">
           {/* Browser chrome */}
-          <div className="bg-parchment-dark px-4 py-3 flex items-center gap-2 border-b border-parchment-deeper">
-            <span className="w-3 h-3 rounded-full bg-red-400/60" />
-            <span className="w-3 h-3 rounded-full bg-yellow-400/60" />
-            <span className="w-3 h-3 rounded-full bg-green-400/60" />
+          <div className="bg-parchment-dark px-4 py-3 flex items-center gap-2 border-b border-border">
+            <span className="w-3 h-3 rounded-full bg-destructive/50" />
+            <span className="w-3 h-3 rounded-full bg-terracotta/50" />
+            <span className="w-3 h-3 rounded-full bg-sage/50" />
             <div className="ml-3 flex-1 bg-parchment rounded-md px-3 py-1 text-xs font-sans font-light text-muted-foreground">
               thestartofyou.com/journey
             </div>
@@ -27,23 +28,23 @@ const DashboardPreviewSection = () => {
           {/* Inner app UI */}
           <div className="bg-card p-0">
             {/* App nav */}
-            <div className="flex items-center justify-between px-5 py-3 border-b border-parchment-dark">
+            <div className="flex items-center justify-between px-5 py-3 border-b border-border">
               <span className="font-serif text-sm text-foreground">The Start of You</span>
-              <nav className="flex gap-5">
+              <nav className="hidden sm:flex gap-5">
                 {["Overview", "Journal", "Resources", "Profile"].map((item, i) => (
-                  <span key={item} className={`font-sans text-xs font-light cursor-pointer ${i === 0 ? "text-terracotta border-b border-terracotta pb-0.5" : "text-muted-foreground hover:text-foreground"}`}>
+                  <span key={item} className={`font-sans text-xs font-light cursor-pointer ${i === 0 ? "text-terracotta border-b border-terracotta pb-0.5" : "text-muted-foreground"}`}>
                     {item}
                   </span>
                 ))}
               </nav>
-              <div className="w-7 h-7 rounded-full bg-sage flex items-center justify-center text-white text-xs font-sans">
+              <div className="w-7 h-7 rounded-full bg-sage flex items-center justify-center text-xs font-sans font-medium" style={{ color: 'hsl(var(--primary-foreground))' }}>
                 AS
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
               {/* Main content */}
-              <div className="md:col-span-2 p-5 border-r border-parchment-dark">
+              <div className="md:col-span-2 p-5 border-r border-border">
                 <p className="font-sans text-xs font-medium text-terracotta tracking-wider uppercase mb-1">WEEK 18</p>
                 <h3 className="font-serif text-2xl text-foreground mb-1">Second Trimester</h3>
                 <p className="font-sans text-xs font-light text-muted-foreground mb-5">Due date: 14 October 2025</p>
@@ -51,7 +52,7 @@ const DashboardPreviewSection = () => {
                 {/* Progress */}
                 <div className="bg-parchment rounded-xl p-4 mb-5">
                   <p className="font-sans text-xs font-light text-muted-foreground mb-2">Your Progress</p>
-                  <div className="h-2 rounded-full bg-parchment-deeper overflow-hidden mb-2">
+                  <div className="h-2 rounded-full bg-parchment-dark overflow-hidden mb-2">
                     <div className="h-full rounded-full bg-gradient-to-r from-sage to-terracotta/60" style={{ width: "45%" }} />
                   </div>
                   <div className="flex justify-between font-sans text-xs font-light text-muted-foreground">

@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 /* ── SVG Stage Icons — thin line art, sage green, matching homepage illustration style ── */
 

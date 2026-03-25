@@ -34,29 +34,26 @@ const FeaturesSection = () => {
           </div>
 
           {/* Center image */}
-          <div className="relative flex items-center justify-center order-1 md:order-2 mx-auto">
-            <div className="relative w-56 md:w-64 overflow-hidden rounded-[50%_50%_50%_50%/60%_60%_40%_40%] shadow-soft">
-              {/* Image */}
-              <img
-                src={pregnancyBump}
-                alt="Pregnant woman gently holding her bump"
-                width={640}
-                height={800}
-                loading="lazy"
-                className="w-full h-auto object-cover"
-              />
-
-              {/* Bottom caption overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/60 via-foreground/20 to-transparent px-4 pt-8 pb-5 text-center">
-                <p className="font-serif italic text-[0.65rem] leading-snug text-parchment/90 tracking-wide">
-                  Nothing more than what you need.<br />
-                  Nothing that pulls you ahead.
-                </p>
+          <div className="flex flex-col items-center gap-5 order-1 md:order-2 mx-auto">
+            <div className="relative flex items-center justify-center">
+              <div className="relative w-56 md:w-64 overflow-hidden rounded-[50%_50%_50%_50%/60%_60%_40%_40%] shadow-soft">
+                <img
+                  src={pregnancyBump}
+                  alt="Pregnant woman gently holding her bump"
+                  width={640}
+                  height={800}
+                  loading="lazy"
+                  className="w-full h-auto object-cover"
+                />
               </div>
+              {/* Decorative oval border ring around image */}
+              <div className="absolute inset-[-8px] rounded-[50%_50%_50%_50%/60%_60%_40%_40%] border border-sage-light pointer-events-none" />
             </div>
 
-            {/* Decorative oval border ring around image */}
-            <div className="absolute inset-[-8px] rounded-[50%_50%_50%_50%/60%_60%_40%_40%] border border-sage-light pointer-events-none" />
+            {/* Caption below image */}
+            <p className="font-serif italic text-lg md:text-xl text-foreground leading-snug text-center">
+              – Nothing more than what you need.<br />Nothing that pulls you ahead.
+            </p>
           </div>
 
           {/* Right features */}

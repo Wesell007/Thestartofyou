@@ -21,11 +21,14 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/90 backdrop-blur-sm border-b border-parchment-dark">
       <div className="container mx-auto px-6 md:px-10 h-16 flex items-center justify-between max-w-6xl">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 shrink-0">
-          <LogoSVG />
-          <span className="font-serif text-foreground leading-tight text-sm md:text-base">
-            The Start<br className="hidden sm:block" /><span className="sm:hidden"> </span>of You
-          </span>
+        <Link to="/" className="flex items-center shrink-0">
+          <img
+            src={logoSrc}
+            alt="The Start of You"
+            width={160}
+            height={60}
+            className="h-10 w-auto object-contain"
+          />
         </Link>
 
         {/* Desktop Nav */}

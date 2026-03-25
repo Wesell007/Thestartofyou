@@ -13,9 +13,11 @@ const CaptureJourney = () => {
             <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-6">
               Capture this journey
             </h2>
+            <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-4">
+              Pregnancy is full of moments that can feel intense, surprising, or easy to forget later on.
+            </p>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-8">
-              Many parents choose to write things down as they go — thoughts,
-              feelings, and moments that might otherwise be forgotten.
+              Many parents choose to write things down as they go — thoughts, feelings, and small moments that matter.
             </p>
             <a
               href="/"

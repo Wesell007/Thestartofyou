@@ -136,9 +136,13 @@ interface StageCardProps {
   subtle?: boolean;
 }
 
-const StageCard = ({ icon, title, desc, href, bgColor = "bg-card", subtle = false }: StageCardProps) => (
-  <a
-    href={href}
+const StageCard = ({ icon, title, desc, href, bgColor = "bg-card", subtle = false }: StageCardProps) => {
+  const isInternal = href.startsWith("/");
+  const Wrapper = isInternal ? Link : "a";
+  return (
+  <Wrapper
+    to={isInternal ? href : undefined}
+    href={!isInternal ? href : undefined}
     className={`group flex flex-col rounded-2xl p-6 md:p-7 border border-border/60 shadow-card-brand hover:shadow-soft hover:border-sage/40 transition-all duration-300 ${bgColor}`}
     aria-label={`Explore ${title}`}
   >
@@ -152,8 +156,9 @@ const StageCard = ({ icon, title, desc, href, bgColor = "bg-card", subtle = fals
     <span className="inline-flex items-center gap-1.5 font-sans text-xs font-medium text-sage group-hover:gap-2.5 transition-all">
       Explore <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
     </span>
-  </a>
-);
+  </Wrapper>
+  );
+};
 
 /* ── Section ── */
 

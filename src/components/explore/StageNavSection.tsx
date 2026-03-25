@@ -91,7 +91,7 @@ const mainStages = [
     icon: <PregnancyIcon />,
     title: "Pregnancy",
     desc: "Week-by-week guidance through each stage",
-    href: "#",
+    href: "/pregnancy",
     color: "bg-parchment-dark",
   },
   {

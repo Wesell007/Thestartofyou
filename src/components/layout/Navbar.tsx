@@ -10,15 +10,6 @@ const navLinks = [
   { label: "About", href: "#" },
 ];
 
-const LogoSVG = () => (
-  <svg width="28" height="32" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="1" y="1" width="22" height="28" rx="2" stroke="hsl(100,18%,52%)" strokeWidth="1.5" fill="none"/>
-    <path d="M5 8 Q14 4 23 8" stroke="hsl(100,18%,52%)" strokeWidth="1.2" fill="none"/>
-    <path d="M14 4 L14 1" stroke="hsl(100,18%,52%)" strokeWidth="1.2"/>
-    <circle cx="14" cy="3" r="1.5" fill="hsl(100,18%,52%)"/>
-    <path d="M6 15 L18 15M6 19 L15 19" stroke="hsl(100,18%,65%)" strokeWidth="1" strokeLinecap="round"/>
-  </svg>
-);
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);

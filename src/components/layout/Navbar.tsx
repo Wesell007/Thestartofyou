@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import logoSrc from "@/assets/logo.png";
 
 const navLinks = [
   { label: "My Journey", href: "#" },
@@ -9,15 +10,6 @@ const navLinks = [
   { label: "About", href: "#" },
 ];
 
-const LogoSVG = () => (
-  <svg width="28" height="32" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="1" y="1" width="22" height="28" rx="2" stroke="hsl(100,18%,52%)" strokeWidth="1.5" fill="none"/>
-    <path d="M5 8 Q14 4 23 8" stroke="hsl(100,18%,52%)" strokeWidth="1.2" fill="none"/>
-    <path d="M14 4 L14 1" stroke="hsl(100,18%,52%)" strokeWidth="1.2"/>
-    <circle cx="14" cy="3" r="1.5" fill="hsl(100,18%,52%)"/>
-    <path d="M6 15 L18 15M6 19 L15 19" stroke="hsl(100,18%,65%)" strokeWidth="1" strokeLinecap="round"/>
-  </svg>
-);
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -29,11 +21,14 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/90 backdrop-blur-sm border-b border-parchment-dark">
       <div className="container mx-auto px-6 md:px-10 h-16 flex items-center justify-between max-w-6xl">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 shrink-0">
-          <LogoSVG />
-          <span className="font-serif text-foreground leading-tight text-sm md:text-base">
-            The Start<br className="hidden sm:block" /><span className="sm:hidden"> </span>of You
-          </span>
+        <Link to="/" className="flex items-center shrink-0">
+          <img
+            src={logoSrc}
+            alt="The Start of You"
+            width={160}
+            height={60}
+            className="h-10 w-auto object-contain"
+          />
         </Link>
 
         {/* Desktop Nav */}

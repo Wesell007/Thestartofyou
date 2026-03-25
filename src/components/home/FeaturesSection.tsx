@@ -1,3 +1,5 @@
+import pregnancyBump from "@/assets/pregnancy-bump.jpg";
+
 const FeaturesSection = () => {
   const features = [
     { label: "Gentle insight into your baby's development" },
@@ -20,7 +22,7 @@ const FeaturesSection = () => {
           <p className="font-sans text-sm font-medium text-foreground mt-5">Each week offers:</p>
         </div>
 
-        {/* Features grid with center oval */}
+        {/* Features grid with center image */}
         <div className="relative flex flex-col md:grid md:grid-cols-3 items-center gap-8 md:gap-0">
           {/* Left features */}
           <div className="flex flex-col gap-10 md:text-right order-2 md:order-1">
@@ -31,61 +33,30 @@ const FeaturesSection = () => {
             ))}
           </div>
 
-          {/* Center oval */}
+          {/* Center image */}
           <div className="relative flex items-center justify-center order-1 md:order-2 mx-auto">
-            <div className="relative w-56 h-72 md:w-64 md:h-80">
-              {/* Oval border */}
-              <div className="absolute inset-0 rounded-[50%] border border-sage-light" />
+            <div className="relative w-56 md:w-64 overflow-hidden rounded-[50%_50%_50%_50%/60%_60%_40%_40%] shadow-soft">
+              {/* Image */}
+              <img
+                src={pregnancyBump}
+                alt="Pregnant woman gently holding her bump"
+                width={640}
+                height={800}
+                loading="lazy"
+                className="w-full h-auto object-cover"
+              />
 
-              {/* Decorative text arc (SVG) */}
-              <svg
-                className="absolute inset-0 w-full h-full"
-                viewBox="0 0 240 300"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path
-                  id="arcPath"
-                  d="M 30 220 A 100 140 0 0 1 210 220"
-                  fill="none"
-                  stroke="none"
-                />
-                <text fontSize="9.5" fill="hsl(271,22%,70%)" fontFamily="Jost, sans-serif" fontWeight="300" letterSpacing="2">
-                  <textPath href="#arcPath" startOffset="10%">
-                    This space exists to meet you where you are.
-                  </textPath>
-                </text>
-              </svg>
-
-              {/* Inner fill — sage tinted circle */}
-              <div className="absolute inset-4 rounded-[50%] bg-sage-bg/40 flex items-end justify-center overflow-hidden">
-                {/* Simple illustrated pregnant silhouette SVG */}
-                <svg
-                  viewBox="0 0 120 160"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-28 h-auto"
-                  aria-hidden="true"
-                >
-                  <circle cx="60" cy="22" r="13" stroke="hsl(30,15%,40%)" strokeWidth="1.2" fill="hsl(40,30%,96%)"/>
-                  {/* hair */}
-                  <path d="M47 18 Q50 8 60 8 Q70 8 73 18" stroke="hsl(30,15%,35%)" strokeWidth="1.2" fill="hsl(30,12%,25%)"/>
-                  {/* body */}
-                  <path d="M48 36 Q38 50 40 66 Q42 82 60 86 Q78 82 80 66 Q82 50 72 36" stroke="hsl(30,15%,40%)" strokeWidth="1.2" fill="hsl(36,30%,88%)"/>
-                  {/* bump highlight */}
-                  <ellipse cx="60" cy="68" rx="14" ry="14" stroke="hsl(30,15%,50%)" strokeWidth="0.8" fill="hsl(40,28%,92%)" opacity="0.6"/>
-                  {/* arms */}
-                  <path d="M48 44 Q42 58 46 66" stroke="hsl(30,15%,40%)" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
-                  <path d="M72 44 Q78 58 74 66" stroke="hsl(30,15%,40%)" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
-                  {/* clothing drape */}
-                  <path d="M40 52 Q48 48 56 54" stroke="hsl(30,15%,50%)" strokeWidth="0.8" fill="none"/>
-                  <path d="M80 52 Q72 48 64 54" stroke="hsl(30,15%,50%)" strokeWidth="0.8" fill="none"/>
-                  {/* legs */}
-                  <path d="M46 86 L42 130 L50 130 L60 105 L70 130 L78 130 L74 86" stroke="hsl(30,15%,40%)" strokeWidth="1.2" fill="hsl(36,28%,85%)"/>
-                </svg>
+              {/* Bottom caption overlay */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/60 via-foreground/20 to-transparent px-4 pt-8 pb-5 text-center">
+                <p className="font-serif italic text-[0.65rem] leading-snug text-parchment/90 tracking-wide">
+                  Nothing more than what you need.<br />
+                  Nothing that pulls you ahead.
+                </p>
               </div>
             </div>
+
+            {/* Decorative oval border ring around image */}
+            <div className="absolute inset-[-8px] rounded-[50%_50%_50%_50%/60%_60%_40%_40%] border border-sage-light pointer-events-none" />
           </div>
 
           {/* Right features */}

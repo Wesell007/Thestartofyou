@@ -27,7 +27,7 @@ const Navbar = () => {
             alt="The Start of You"
             width={240}
             height={90}
-            className="h-14 w-auto object-contain"
+            className="h-14 w-auto object-contain mix-blend-multiply"
           />
         </Link>
 

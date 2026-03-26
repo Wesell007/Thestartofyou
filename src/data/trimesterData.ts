@@ -61,6 +61,7 @@ export interface TrimesterData {
     quote: string;
   };
   capture: {
+    intro: string;
     prompt: string;
   };
 }

@@ -22,9 +22,9 @@ const WeekHero = ({ data, prevWeek, nextWeek }: Props) => {
           <span className="text-foreground">Week {data.week}</span>
         </nav>
 
-        {/* Week label */}
+        {/* Stage label */}
         <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
-          {data.trimesterLabel} · {data.keyFocus}
+          {data.trimesterLabel} · Week {data.week} of 40 · {data.keyFocus}
         </p>
 
         {/* Title */}
@@ -38,7 +38,7 @@ const WeekHero = ({ data, prevWeek, nextWeek }: Props) => {
         </p>
 
         {/* Reassurance line */}
-        <p className="font-serif italic text-sm text-sage-muted max-w-xl mb-10">
+        <p className="font-serif italic text-sm text-sage-muted max-w-xl mb-12">
           {data.reassurance}
         </p>
 

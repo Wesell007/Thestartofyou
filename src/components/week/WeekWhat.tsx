@@ -9,22 +9,19 @@ const WeekWhat = ({ data }: Props) => {
     {
       id: "baby",
       label: "Your baby",
-      summary: data.what.baby.summary,
-      detail: data.what.baby.detail,
+      item: data.what.baby,
       extra: `Size: ${data.what.baby.size}`,
     },
     {
       id: "body",
       label: "Your body",
-      summary: data.what.body.summary,
-      detail: data.what.body.why,
+      item: data.what.body,
       extra: null,
     },
     {
       id: "emotional",
       label: "Emotionally",
-      summary: data.what.emotional.summary,
-      detail: null,
+      item: data.what.emotional,
       extra: null,
     },
   ];
@@ -40,7 +37,7 @@ const WeekWhat = ({ data }: Props) => {
           What's happening this week
         </h2>
 
-        <div className="space-y-8">
+        <div className="space-y-6">
           {sections.map((s, i) => (
             <div
               key={s.id}
@@ -48,21 +45,35 @@ const WeekWhat = ({ data }: Props) => {
             >
               <div className="flex items-start gap-5">
                 {/* Number */}
-                <span className="font-serif text-2xl text-sage-muted opacity-50 mt-0.5 select-none shrink-0">
+                <span className="font-serif text-2xl text-sage-muted opacity-40 mt-0.5 select-none shrink-0 w-6">
                   {i + 1}
                 </span>
                 <div className="flex-1">
-                  <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-3">
+                  <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-4">
                     {s.label}
                   </p>
+
+                  {/* What */}
                   <p className="font-sans text-sm font-light text-foreground leading-relaxed mb-3">
-                    {s.summary}
+                    {s.item.what}
                   </p>
-                  {s.detail && (
+
+                  {/* Why */}
+                  <div className="border-l-2 border-sage-light/60 pl-4 mb-3">
+                    <p className="font-sans text-[11px] font-light tracking-[0.1em] uppercase text-sage-muted mb-1">Why</p>
                     <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-                      {s.detail}
+                      {s.item.why}
                     </p>
-                  )}
+                  </div>
+
+                  {/* What it means */}
+                  <div className="bg-sage-bg/40 rounded-md px-4 py-3">
+                    <p className="font-sans text-[11px] font-light tracking-[0.1em] uppercase text-sage-muted mb-1">What this means</p>
+                    <p className="font-sans text-sm font-light text-foreground leading-relaxed">
+                      {s.item.means}
+                    </p>
+                  </div>
+
                   {s.extra && (
                     <p className="mt-4 font-sans text-xs font-light text-sage-muted tracking-wide">
                       {s.extra}

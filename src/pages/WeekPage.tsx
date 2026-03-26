@@ -6,6 +6,8 @@ import WeekHero from "@/components/week/WeekHero";
 import WeekAtAGlance from "@/components/week/WeekAtAGlance";
 import WeekWhat from "@/components/week/WeekWhat";
 import WeekSymptoms from "@/components/week/WeekSymptoms";
+import WeekHumanTruth from "@/components/week/WeekHumanTruth";
+import WeekWhatThisMeans from "@/components/week/WeekWhatThisMeans";
 import WeekNormal from "@/components/week/WeekNormal";
 import WeekFocus from "@/components/week/WeekFocus";
 import WeekNormalRightNow from "@/components/week/WeekNormalRightNow";
@@ -20,7 +22,6 @@ const WeekPage = () => {
   const { week } = useParams<{ week: string }>();
   const weekNum = parseInt(week ?? "0", 10);
 
-  // Guard: must be 1–40
   if (isNaN(weekNum) || weekNum < 1 || weekNum > 40) {
     return <Navigate to="/pregnancy" replace />;
   }
@@ -35,6 +36,8 @@ const WeekPage = () => {
       <WeekAtAGlance data={data} />
       <WeekWhat data={data} />
       <WeekSymptoms data={data} />
+      <WeekHumanTruth data={data} />
+      <WeekWhatThisMeans data={data} />
       <WeekNormal data={data} />
       <WeekFocus data={data} />
       <WeekNormalRightNow data={data} />

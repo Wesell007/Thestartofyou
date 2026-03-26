@@ -19,9 +19,14 @@ const WeekTimeline = ({ data }: Props) => {
         <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
           Your journey
         </p>
-        <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-14">
+        <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-4">
           Your journey so far
         </h2>
+        {data.nextWeekPreview && (
+          <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-12 max-w-xl">
+            {data.nextWeekPreview}
+          </p>
+        )}
 
         {/* Timeline row */}
         <div className="flex items-stretch gap-3 overflow-x-auto pb-2">
@@ -53,7 +58,7 @@ const WeekTimeline = ({ data }: Props) => {
                 </span>
                 {isCurrent && (
                   <span className="mt-2 font-sans text-[9px] font-light tracking-wider uppercase text-primary-foreground/60">
-                    Now
+                    You are here
                   </span>
                 )}
               </Link>

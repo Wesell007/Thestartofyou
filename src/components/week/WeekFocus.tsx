@@ -18,7 +18,7 @@ const WeekFocus = ({ data }: Props) => {
               What to focus on this week
             </h2>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-              A short, realistic set of things that matter this week — nothing more.
+              A short, realistic set of things that actually matter this week — with the reason behind each one.
             </p>
           </div>
 
@@ -27,14 +27,21 @@ const WeekFocus = ({ data }: Props) => {
             {data.focusPoints.map((point, i) => (
               <div
                 key={i}
-                className="flex items-start gap-4 bg-card border border-border/50 rounded-lg px-6 py-5 shadow-card-brand"
+                className="bg-card border border-border/50 rounded-lg px-6 py-5 shadow-card-brand"
               >
-                <span className="font-serif text-lg text-sage-muted opacity-50 shrink-0 mt-0.5 select-none">
-                  {i + 1}
-                </span>
-                <p className="font-sans text-sm font-light text-foreground leading-relaxed">
-                  {point}
-                </p>
+                <div className="flex items-start gap-4">
+                  <span className="font-serif text-lg text-sage-muted opacity-40 shrink-0 mt-0.5 select-none w-5">
+                    {i + 1}
+                  </span>
+                  <div className="flex-1">
+                    <p className="font-sans text-sm font-light text-foreground leading-relaxed mb-1.5">
+                      {point.action}
+                    </p>
+                    <p className="font-sans text-xs font-light text-muted-foreground leading-relaxed">
+                      → {point.reason}
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

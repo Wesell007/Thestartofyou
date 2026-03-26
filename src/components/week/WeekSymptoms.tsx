@@ -16,7 +16,7 @@ const WeekSymptoms = ({ data }: Props) => {
           Common symptoms this week
         </h2>
         <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-14 max-w-xl">
-          Each symptom below includes why it happens — not just what it is.
+          Each symptom includes why it happens, when it typically appears, and what it can actually feel like.
         </p>
 
         <div className="space-y-5">
@@ -25,20 +25,37 @@ const WeekSymptoms = ({ data }: Props) => {
               key={i}
               className="bg-card border border-border/50 rounded-lg p-7 md:p-8 shadow-card-brand"
             >
-              <div className="flex flex-col sm:flex-row sm:items-start sm:gap-8">
-                <div className="sm:w-40 shrink-0 mb-3 sm:mb-0">
-                  <p className="font-serif text-base text-foreground">{symptom.name}</p>
-                </div>
-                <div className="flex-1">
-                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-2">
+              {/* Symptom name */}
+              <p className="font-serif text-base text-foreground mb-4">{symptom.name}</p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {/* Why */}
+                <div>
+                  <p className="font-sans text-[10px] font-light tracking-[0.15em] uppercase text-sage-muted mb-1.5">Why it happens</p>
+                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
                     {symptom.why}
                   </p>
-                  {symptom.when && (
-                    <p className="font-sans text-xs font-light text-sage-muted tracking-wide">
+                </div>
+
+                {/* When */}
+                {symptom.when && (
+                  <div>
+                    <p className="font-sans text-[10px] font-light tracking-[0.15em] uppercase text-sage-muted mb-1.5">When</p>
+                    <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
                       {symptom.when}
                     </p>
-                  )}
-                </div>
+                  </div>
+                )}
+
+                {/* What it feels like */}
+                {symptom.feelLike && (
+                  <div className={symptom.when ? "" : "sm:col-span-2"}>
+                    <p className="font-sans text-[10px] font-light tracking-[0.15em] uppercase text-sage-muted mb-1.5">What it can feel like</p>
+                    <p className="font-serif italic text-sm text-muted-foreground leading-relaxed">
+                      {symptom.feelLike}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           ))}

@@ -106,7 +106,7 @@ const mainStages = [
     icon: <FirstYearIcon />,
     title: "First year",
     desc: "Growth, change, and finding your rhythm",
-    href: "#",
+    href: "/first-year",
     color: "bg-lavender-bg/40",
   },
 ];

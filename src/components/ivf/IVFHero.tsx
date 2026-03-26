@@ -76,6 +76,26 @@ const IVFHero = ({ onCalculate }: IVFHeroProps) => {
                 </Popover>
               </div>
 
+              {/* Transfer type */}
+              <div>
+                <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-3 text-left">
+                  Transfer type
+                </p>
+                <div className="relative">
+                  <select
+                    value={transferType}
+                    onChange={(e) => setTransferType(e.target.value as "5day" | "3day")}
+                    className="w-full appearance-none bg-parchment border border-border/60 rounded-xl px-5 py-4 font-sans text-sm font-light text-foreground focus:outline-none focus:border-sage/50 hover:border-sage/40 transition-all pr-10"
+                  >
+                    <option value="5day">5-day transfer (blastocyst)</option>
+                    <option value="3day">3-day transfer (cleavage)</option>
+                  </select>
+                  <svg className="absolute right-4 top-1/2 -translate-y-1/2 text-sage-muted pointer-events-none w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+
               <button
                 onClick={handleTrack}
                 disabled={!transferDate}

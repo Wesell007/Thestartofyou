@@ -45,13 +45,8 @@ const IVFPathways = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {pathways.map((p, i) => {
             const isInternal = p.href.startsWith("/");
-            const Wrapper = isInternal ? Link : "div";
-            return (
-              <Wrapper
-                key={i}
-                {...(isInternal ? { to: p.href } : {})}
-                className={`group bg-card border border-border/50 rounded-lg p-7 shadow-card-brand flex flex-col gap-3 transition-all ${isInternal ? "hover:border-sage/40 hover:shadow-soft cursor-pointer" : "opacity-80"}`}
-              >
+            const inner = (
+              <>
                 <span className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
                   {p.label}
                 </span>
@@ -66,7 +61,23 @@ const IVFPathways = () => {
                     Explore <ArrowUpRight size={12} />
                   </span>
                 )}
-              </Wrapper>
+              </>
+            );
+            return isInternal ? (
+              <Link
+                key={i}
+                to={p.href}
+                className="group bg-card border border-border/50 rounded-lg p-7 shadow-card-brand flex flex-col gap-3 transition-all hover:border-sage/40 hover:shadow-soft"
+              >
+                {inner}
+              </Link>
+            ) : (
+              <div
+                key={i}
+                className="group bg-card border border-border/50 rounded-lg p-7 shadow-card-brand flex flex-col gap-3 opacity-80"
+              >
+                {inner}
+              </div>
             );
           })}
         </div>

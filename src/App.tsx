@@ -6,6 +6,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import Explore from "./pages/Explore.tsx";
 import Pregnancy from "./pages/Pregnancy.tsx";
+import FirstTrimester from "./pages/trimester/FirstTrimester.tsx";
+import SecondTrimester from "./pages/trimester/SecondTrimester.tsx";
+import ThirdTrimester from "./pages/trimester/ThirdTrimester.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();

@@ -1,8 +1,11 @@
+import { Link } from "react-router-dom";
+
 const trimesters = [
   {
     label: "First Trimester",
     range: "Weeks 1–12",
     sub: "Foundation & Early Development",
+    href: "/pregnancy/first-trimester",
     start: 1,
     end: 12,
     color: "bg-sage-bg",
@@ -11,6 +14,7 @@ const trimesters = [
     label: "Second Trimester",
     range: "Weeks 13–27",
     sub: "Growth & Increasing Awareness",
+    href: "/pregnancy/second-trimester",
     start: 13,
     end: 27,
     color: "bg-parchment-dark",
@@ -19,6 +23,7 @@ const trimesters = [
     label: "Third Trimester",
     range: "Weeks 28–40",
     sub: "Preparation & Arrival",
+    href: "/pregnancy/third-trimester",
     start: 28,
     end: 40,
     color: "bg-lavender-section",

@@ -17,6 +17,7 @@ interface IVFHeroProps {
 
 const IVFHero = ({ onCalculate }: IVFHeroProps) => {
   const [transferDate, setTransferDate] = useState<Date>();
+  const [transferType, setTransferType] = useState<"5day" | "3day">("5day");
   const [open, setOpen] = useState(false);
 
   const handleTrack = () => {

@@ -31,6 +31,7 @@ const App = () => (
           <Route path="/pregnancy/third-trimester" element={<ThirdTrimester />} />
           <Route path="/pregnancy/week/:week" element={<WeekPage />} />
           <Route path="/articles/:slug" element={<ArticlePage />} />
+          <Route path="/due-date-calculator" element={<DueDateCalculator />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

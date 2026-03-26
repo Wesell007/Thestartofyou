@@ -16,11 +16,14 @@ const WeekReflection = ({ data }: Props) => {
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-5 leading-snug max-w-md mx-auto">
             {data.reflectionPrompt}
           </h2>
+          <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-sm mx-auto mb-6">
+            {data.reflectionContext}
+          </p>
 
           <textarea
             rows={4}
             placeholder="Write your thoughts here…"
-            className="w-full mt-4 bg-background border border-border rounded-md px-5 py-4 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 resize-none focus:outline-none focus:ring-1 focus:ring-sage focus:border-sage transition-all leading-relaxed"
+            className="w-full mt-2 bg-background border border-border rounded-md px-5 py-4 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 resize-none focus:outline-none focus:ring-1 focus:ring-sage focus:border-sage transition-all leading-relaxed"
           />
 
           <button className="mt-6 flex items-center gap-2 mx-auto border border-foreground/20 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all">

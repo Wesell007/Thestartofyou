@@ -15,11 +15,14 @@ const WeekAISupport = ({ data }: Props) => {
             <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
               AI Support
             </p>
-            <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-6">
+            <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
               Ask about this week
             </h2>
-            <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-8">
-              If something feels unclear, you can ask about this stage and get guidance tailored to you.
+            <p className="font-serif italic text-base text-muted-foreground leading-relaxed mb-6">
+              "{data.aiContextPrompt}"
+            </p>
+            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-8">
+              If something feels unclear or you want to understand more about this stage, you can ask and get guidance tailored to you.
             </p>
             <button className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">
               <MessageCircle size={15} />

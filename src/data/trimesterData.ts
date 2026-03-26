@@ -61,6 +61,7 @@ export interface TrimesterData {
     quote: string;
   };
   capture: {
+    intro: string;
     prompt: string;
   };
 }
@@ -248,6 +249,7 @@ export const firstTrimester: TrimesterData = {
   },
 
   capture: {
+    intro: "This stage can feel intense and invisible all at once — full of internal change that nobody else can see yet.",
     prompt:
       "What has this first stage felt like for you — in ways you might not have expected?",
   },
@@ -439,6 +441,7 @@ export const secondTrimester: TrimesterData = {
   },
 
   capture: {
+    intro: "This stage can feel surprisingly complex — a mix of relief as symptoms ease, and new questions arriving as the pregnancy becomes more real.",
     prompt:
       "What has shifted for you in this stage — in your body, your thinking, or the way this pregnancy feels?",
   },
@@ -632,6 +635,7 @@ export const thirdTrimester: TrimesterData = {
   },
 
   capture: {
+    intro: "This stage can feel like holding a lot at once — physical demands, anticipation, and the quiet intensity of waiting for something you can't fully prepare for.",
     prompt:
       "What do you want to remember from this final stage — the waiting, the preparing, the feeling of nearly?",
   },

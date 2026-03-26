@@ -249,6 +249,7 @@ export const firstTrimester: TrimesterData = {
   },
 
   capture: {
+    intro: "This stage can feel intense and invisible all at once — full of internal change that nobody else can see yet.",
     prompt:
       "What has this first stage felt like for you — in ways you might not have expected?",
   },

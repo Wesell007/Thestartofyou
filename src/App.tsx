@@ -12,6 +12,7 @@ import ThirdTrimester from "./pages/trimester/ThirdTrimester.tsx";
 import WeekPage from "./pages/WeekPage.tsx";
 import ArticlePage from "./pages/ArticlePage.tsx";
 import DueDateCalculator from "./pages/DueDateCalculator.tsx";
+import TTC from "./pages/TTC.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();

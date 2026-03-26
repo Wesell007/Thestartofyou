@@ -85,7 +85,7 @@ const mainStages = [
     icon: <IVFIcon />,
     title: "IVF",
     desc: "A more supported path into pregnancy",
-    href: "#",
+    href: "/ivf",
     color: "bg-lavender-bg/60",
   },
   {

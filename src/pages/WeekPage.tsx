@@ -16,6 +16,7 @@ import WeekReflection from "@/components/week/WeekReflection";
 import WeekTimeline from "@/components/week/WeekTimeline";
 import WeekAISupport from "@/components/week/WeekAISupport";
 import WeekCapture from "@/components/week/WeekCapture";
+import WeekRelatedGuidance from "@/components/week/WeekRelatedGuidance";
 import WeekContinue from "@/components/week/WeekContinue";
 
 const WeekPage = () => {
@@ -46,6 +47,7 @@ const WeekPage = () => {
       <WeekTimeline data={data} />
       <WeekAISupport data={data} />
       <WeekCapture data={data} />
+      <WeekRelatedGuidance data={data} />
       <WeekContinue data={data} prevWeek={prev} nextWeek={next} />
       <Footer />
     </div>

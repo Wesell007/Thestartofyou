@@ -23,6 +23,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/pregnancy" element={<Pregnancy />} />
+          <Route path="/pregnancy/first-trimester" element={<FirstTrimester />} />
+          <Route path="/pregnancy/second-trimester" element={<SecondTrimester />} />
+          <Route path="/pregnancy/third-trimester" element={<ThirdTrimester />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

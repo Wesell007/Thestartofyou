@@ -130,21 +130,27 @@ const PregnancyTimeline = () => {
         {/* Trimester cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-14">
           {trimesters.map((t, i) => (
-            <div
+            <Link
               key={t.label}
-              className="bg-card border border-border/50 rounded-lg p-7 shadow-card-brand flex flex-col gap-3"
+              to={t.href}
+              className="group bg-card border border-border/50 rounded-lg p-7 shadow-card-brand flex flex-col gap-3 hover:border-sage/40 hover:shadow-soft transition-all"
             >
               <span className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="font-serif text-xl text-foreground">{t.label}</h3>
+              <h3 className="font-serif text-xl text-foreground group-hover:text-sage transition-colors">
+                {t.label}
+              </h3>
               <p className="font-sans text-xs font-light text-muted-foreground tracking-wide">
                 {t.range}
               </p>
               <p className="font-serif italic text-base text-foreground/70 leading-snug mt-1">
                 {t.sub}
               </p>
-            </div>
+              <span className="mt-auto pt-3 font-sans text-xs font-light text-sage opacity-0 group-hover:opacity-100 transition-opacity">
+                Explore this stage →
+              </span>
+            </Link>
           ))}
         </div>
       </div>

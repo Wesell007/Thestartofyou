@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const earlyWeeks = [1, 2, 3];
 
 const trimesterGroups = [
@@ -67,8 +69,9 @@ const WeekByWeek = () => {
               {/* Week grid */}
               <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
                 {group.weeks.map((week) => (
-                  <button
+                  <Link
                     key={week}
+                    to={`/pregnancy/week/${week}`}
                     className={`
                       relative flex flex-col items-center justify-center aspect-square rounded-md
                       border transition-all text-center
@@ -94,7 +97,7 @@ const WeekByWeek = () => {
                     {earlyWeeks.includes(week) && (
                       <span className="absolute -top-1.5 -right-1.5 w-3 h-3 rounded-full bg-sage opacity-70" />
                     )}
-                  </button>
+                  </Link>
                 ))}
               </div>
 

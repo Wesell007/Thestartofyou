@@ -1,4 +1,4 @@
-import { CheckCircle, AlertCircle, ShieldCheck } from "lucide-react";
+import { CheckCircle, AlertCircle } from "lucide-react";
 import type { ArticleData } from "@/data/articleData";
 
 interface Props {
@@ -16,7 +16,7 @@ const ArticleNormal = ({ data }: Props) => {
           What's normal — and when to seek support
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           {/* What's normal */}
           <div className="bg-card border border-border/50 rounded-lg p-7 shadow-card-brand">
             <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-6">
@@ -48,13 +48,10 @@ const ArticleNormal = ({ data }: Props) => {
           </div>
         </div>
 
-        {/* Disclaimer */}
-        <div className="flex items-start gap-3 bg-sage-bg/30 border border-sage-light/40 rounded-lg px-6 py-5">
-          <ShieldCheck size={14} className="text-sage mt-0.5 shrink-0" />
-          <p className="font-sans text-xs font-light text-muted-foreground leading-relaxed">
-            {data.disclaimer}
-          </p>
-        </div>
+        {/* Medical review signal — subtle, elegant */}
+        <p className="font-sans text-xs font-light text-sage-muted flex items-center gap-1.5">
+          <span className="text-sage">✔</span> Medically reviewed by Jenny Joines
+        </p>
       </div>
     </section>
   );

@@ -11,6 +11,7 @@ import SecondTrimester from "./pages/trimester/SecondTrimester.tsx";
 import ThirdTrimester from "./pages/trimester/ThirdTrimester.tsx";
 import WeekPage from "./pages/WeekPage.tsx";
 import ArticlePage from "./pages/ArticlePage.tsx";
+import DueDateCalculator from "./pages/DueDateCalculator.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/pregnancy/third-trimester" element={<ThirdTrimester />} />
           <Route path="/pregnancy/week/:week" element={<WeekPage />} />
           <Route path="/articles/:slug" element={<ArticlePage />} />
+          <Route path="/due-date-calculator" element={<DueDateCalculator />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

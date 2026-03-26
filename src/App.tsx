@@ -39,6 +39,7 @@ const App = () => (
           <Route path="/trying-to-conceive" element={<TTC />} />
           <Route path="/ivf" element={<IVF />} />
           <Route path="/postpartum" element={<Postpartum />} />
+          <Route path="/first-year" element={<FirstYear />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -78,7 +78,7 @@ const mainStages = [
     icon: <TTCIcon />,
     title: "Trying to conceive",
     desc: "Understanding your cycle, timing, and early steps",
-    href: "#",
+    href: "/trying-to-conceive",
     color: "bg-sage-bg/60",
   },
   {

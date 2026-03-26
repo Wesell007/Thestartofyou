@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { format } from "date-fns";
 import { CalendarIcon, MessageCircle, ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -12,12 +12,19 @@ const suggestedPrompts = [
   "Is this normal at this stage?",
 ];
 
-const IVFHero = () => {
+interface IVFHeroProps {
+  onCalculate: (date: Date) => void;
+}
+
+const IVFHero = ({ onCalculate }: IVFHeroProps) => {
   const [transferDate, setTransferDate] = useState<Date>();
+
+  const handleTrack = () => {
+    if (transferDate) onCalculate(transferDate);
+  };
 
   return (
     <section className="relative min-h-[90vh] bg-parchment overflow-hidden flex flex-col justify-center pt-24 pb-16">
-      {/* Soft radial glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-lavender-section/40 blur-3xl" />
       </div>
@@ -37,7 +44,6 @@ const IVFHero = () => {
               Understand where you are, what's happening, and what to expect next.
             </p>
 
-            {/* Suggested prompts */}
             <div className="space-y-2.5 animate-fade-up [animation-delay:0.2s]">
               <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-3">
                 Common questions
@@ -69,7 +75,6 @@ const IVFHero = () => {
                 Enter your embryo transfer date to understand where you are and what comes next.
               </p>
 
-              {/* Date input */}
               <div className="mb-6">
                 <label className="block font-sans text-xs font-light tracking-[0.1em] uppercase text-sage-muted mb-3">
                   Embryo transfer date
@@ -84,9 +89,7 @@ const IVFHero = () => {
                       )}
                     >
                       <CalendarIcon size={14} className="mr-2 text-sage shrink-0" />
-                      {transferDate
-                        ? format(transferDate, "d MMMM yyyy")
-                        : "Select transfer date"}
+                      {transferDate ? format(transferDate, "d MMMM yyyy") : "Select transfer date"}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
@@ -102,8 +105,8 @@ const IVFHero = () => {
                 </Popover>
               </div>
 
-              {/* Primary CTA */}
               <button
+                onClick={handleTrack}
                 className={cn(
                   "w-full flex items-center justify-center gap-2 rounded-pill px-7 py-3.5 font-sans text-sm font-medium transition-all",
                   transferDate
@@ -116,14 +119,12 @@ const IVFHero = () => {
                 Track your timeline
               </button>
 
-              {/* Divider */}
               <div className="flex items-center gap-4 my-5">
                 <div className="h-px flex-1 bg-border/40" />
                 <span className="font-sans text-xs font-light text-muted-foreground/50">or</span>
                 <div className="h-px flex-1 bg-border/40" />
               </div>
 
-              {/* Secondary CTA */}
               <button className="w-full flex items-center justify-center gap-2 border border-foreground/20 text-foreground rounded-pill px-7 py-3 font-sans text-sm font-light hover:bg-parchment-dark transition-all">
                 <ArrowDown size={14} />
                 Understand your IVF journey
@@ -134,7 +135,6 @@ const IVFHero = () => {
         </div>
       </div>
 
-      {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-parchment to-transparent pointer-events-none" />
     </section>
   );

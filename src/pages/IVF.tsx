@@ -19,10 +19,12 @@ import IVFFinalCTA from "@/components/ivf/IVFFinalCTA";
 
 const IVF = () => {
   const [transferDate, setTransferDate] = useState<Date | null>(null);
+  const [transferType, setTransferType] = useState<"5day" | "3day">("5day");
   const resultRef = useRef<HTMLDivElement>(null);
 
-  const handleCalculate = (date: Date) => {
+  const handleCalculate = (date: Date, type: "5day" | "3day") => {
     setTransferDate(date);
+    setTransferType(type);
     setTimeout(() => {
       resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 150);
@@ -38,7 +40,7 @@ const IVF = () => {
         {/* Timeline result — appears after calculation */}
         {transferDate && (
           <div ref={resultRef}>
-            <IVFTimelineResult transferDate={transferDate} />
+            <IVFTimelineResult transferDate={transferDate} transferType={transferType} />
           </div>
         )}
 

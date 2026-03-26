@@ -129,13 +129,14 @@ const FadeIn = ({ children, delay = 0, className = "" }: { children: React.React
 
 interface IVFTimelineResultProps {
   transferDate: Date;
+  transferType?: "5day" | "3day";
 }
 
-const IVFTimelineResult = ({ transferDate }: IVFTimelineResultProps) => {
+const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineResultProps) => {
   const today = new Date();
   const dpt = differenceInDays(today, transferDate);
   const clampedDpt = Math.max(0, dpt);
-  const insight = getDptInsight(clampedDpt);
+  const insight = getDptInsight(clampedDpt, transferType);
   const [aiQuestion, setAiQuestion] = useState("");
 
   // Progress along the 14-day post-transfer window

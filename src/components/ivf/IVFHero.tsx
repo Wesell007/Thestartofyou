@@ -12,7 +12,7 @@ const suggestedPrompts = [
 ];
 
 interface IVFHeroProps {
-  onCalculate: (date: Date) => void;
+  onCalculate: (date: Date, type: "5day" | "3day") => void;
 }
 
 const IVFHero = ({ onCalculate }: IVFHeroProps) => {
@@ -21,7 +21,7 @@ const IVFHero = ({ onCalculate }: IVFHeroProps) => {
   const [open, setOpen] = useState(false);
 
   const handleTrack = () => {
-    if (transferDate) onCalculate(transferDate);
+    if (transferDate) onCalculate(transferDate, transferType);
   };
 
   return (

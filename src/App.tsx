@@ -6,6 +6,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import Explore from "./pages/Explore.tsx";
 import Pregnancy from "./pages/Pregnancy.tsx";
+import FirstTrimester from "./pages/trimester/FirstTrimester.tsx";
+import SecondTrimester from "./pages/trimester/SecondTrimester.tsx";
+import ThirdTrimester from "./pages/trimester/ThirdTrimester.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -20,6 +23,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/pregnancy" element={<Pregnancy />} />
+          <Route path="/pregnancy/first-trimester" element={<FirstTrimester />} />
+          <Route path="/pregnancy/second-trimester" element={<SecondTrimester />} />
+          <Route path="/pregnancy/third-trimester" element={<ThirdTrimester />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

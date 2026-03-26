@@ -14,6 +14,7 @@ import ArticlePage from "./pages/ArticlePage.tsx";
 import DueDateCalculator from "./pages/DueDateCalculator.tsx";
 import TTC from "./pages/TTC.tsx";
 import IVF from "./pages/IVF.tsx";
+import Postpartum from "./pages/Postpartum.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();

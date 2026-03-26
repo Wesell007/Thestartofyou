@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import botanicalCorner from "@/assets/botanical-corner.png";
+import heroIllustration from "@/assets/hero-illustration.png";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
 import DueDateCalculatorResult from "@/components/shared/DueDateCalculatorResult";
 

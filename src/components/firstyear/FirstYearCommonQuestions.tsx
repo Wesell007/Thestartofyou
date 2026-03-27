@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const questions = [
   { q: "When will my baby sleep through the night?", sub: "Sleep patterns and development" },
   { q: "Is my baby developing normally?", sub: "Growth and milestones" },
@@ -20,9 +22,10 @@ const FirstYearCommonQuestions = () => {
 
         <div className="divide-y divide-border/50">
           {questions.map((item, i) => (
-            <div
+            <Link
               key={i}
-              className="group flex items-center justify-between py-6 cursor-pointer hover:pl-2 transition-all"
+              to={`/ask?q=${encodeURIComponent(item.q)}`}
+              className="group flex items-center justify-between py-6 hover:pl-2 transition-all"
             >
               <div className="flex flex-col gap-1">
                 <p className="font-serif text-xl text-foreground leading-snug group-hover:text-sage transition-colors">
@@ -33,7 +36,7 @@ const FirstYearCommonQuestions = () => {
               <span className="text-muted-foreground/40 group-hover:text-sage transition-colors ml-6 shrink-0 font-serif text-2xl leading-none">
                 →
               </span>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

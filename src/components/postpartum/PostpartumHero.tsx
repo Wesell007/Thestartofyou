@@ -2,35 +2,35 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 const PostpartumHero = () => {
   return (
-    <section className="relative min-h-[80vh] bg-parchment overflow-hidden flex flex-col justify-center pt-24 pb-20">
+    <section className="relative min-h-[80vh] bg-parchment overflow-hidden flex flex-col justify-center pt-28 pb-24">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-sage-bg/20 blur-3xl" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-sage-bg/15 blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-6 md:px-10 max-w-4xl relative z-10 text-center">
-        <p className="font-sans text-xs font-light tracking-[0.25em] uppercase text-sage-muted mb-6">
+      <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10 text-center">
+        <p className="font-sans text-[11px] font-light tracking-[0.3em] uppercase text-sage-muted mb-7">
           Postpartum
         </p>
-        <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-foreground leading-[1.1] mb-7 animate-fade-up">
+        <h1 className="font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-foreground mb-8 animate-fade-up">
           Your <span className="italic">postpartum journey</span>
         </h1>
-        <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed mb-12 max-w-2xl mx-auto animate-fade-up [animation-delay:0.1s]">
+        <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed mb-14 max-w-xl mx-auto animate-fade-up [animation-delay:0.1s]">
           Recovery, adjustment, and the early weeks with your baby — one step at a time.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up [animation-delay:0.2s]">
-          <button className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">
+          <button className="flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300">
             <ArrowUpRight size={15} />
             Start your postpartum journey
           </button>
-          <button className="flex items-center gap-2 border border-foreground/15 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all">
+          <button className="flex items-center gap-2.5 border border-foreground/12 text-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-light hover:bg-parchment-dark transition-all duration-300">
             <ArrowDown size={15} />
             Jump to your week
           </button>
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-parchment to-transparent pointer-events-none" />
+      <div className="section-fade-bottom" />
     </section>
   );
 };

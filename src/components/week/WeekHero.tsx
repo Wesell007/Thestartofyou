@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { WeekData } from "@/data/weekData";
+import WeekIllustration from "@/components/week/WeekIllustration";
 
 interface Props {
   data: WeekData;

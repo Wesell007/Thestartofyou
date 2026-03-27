@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSearchParams, Navigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import IVFTimelineResult from "@/components/ivf/IVFTimelineResult";
@@ -8,7 +8,7 @@ const IVFTimeline = () => {
   const [searchParams] = useSearchParams();
   const [transferDate, setTransferDate] = useState<Date | null>(null);
   const [transferType, setTransferType] = useState<"5day" | "3day">("5day");
-  const resultsRef = useRef<HTMLDivElement>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const dateParam = searchParams.get("date");
@@ -20,7 +20,10 @@ const IVFTimeline = () => {
     if (typeParam === "3day" || typeParam === "5day") {
       setTransferType(typeParam);
     }
+    setReady(true);
   }, [searchParams]);
+
+  if (!ready) return null;
 
   if (!transferDate) {
     return (
@@ -43,9 +46,7 @@ const IVFTimeline = () => {
   return (
     <div className="min-h-screen bg-parchment">
       <Navbar />
-      <div ref={resultsRef}>
-        <IVFTimelineResult transferDate={transferDate} transferType={transferType} />
-      </div>
+      <IVFTimelineResult transferDate={transferDate} transferType={transferType} />
       <Footer />
     </div>
   );

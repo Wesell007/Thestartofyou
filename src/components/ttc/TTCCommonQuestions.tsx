@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const questions = [
   {
     q: "When am I most fertile?",
@@ -21,7 +23,6 @@ const TTCCommonQuestions = () => {
   return (
     <section className="bg-parchment py-24 md:py-32">
       <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        {/* Header */}
         <div className="mb-14">
           <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
             Guidance
@@ -31,12 +32,12 @@ const TTCCommonQuestions = () => {
           </h2>
         </div>
 
-        {/* Questions list */}
         <div className="divide-y divide-border/50">
           {questions.map((item, i) => (
-            <div
+            <Link
               key={i}
-              className="group flex items-center justify-between py-6 cursor-pointer hover:pl-2 transition-all"
+              to={`/ask?q=${encodeURIComponent(item.q)}`}
+              className="group flex items-center justify-between py-6 hover:pl-2 transition-all"
             >
               <div className="flex flex-col gap-1">
                 <p className="font-serif text-xl text-foreground leading-snug group-hover:text-sage transition-colors">
@@ -49,7 +50,7 @@ const TTCCommonQuestions = () => {
               <span className="text-muted-foreground/40 group-hover:text-sage transition-colors ml-6 shrink-0 font-serif text-2xl leading-none">
                 →
               </span>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

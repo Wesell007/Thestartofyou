@@ -12,6 +12,7 @@ import ThirdTrimester from "./pages/trimester/ThirdTrimester.tsx";
 import WeekPage from "./pages/WeekPage.tsx";
 import ArticlePage from "./pages/ArticlePage.tsx";
 import DueDateCalculator from "./pages/DueDateCalculator.tsx";
+import DueDateResults from "./pages/DueDateResults.tsx";
 import TTC from "./pages/TTC.tsx";
 import IVF from "./pages/IVF.tsx";
 import Postpartum from "./pages/Postpartum.tsx";
@@ -43,6 +44,7 @@ const App = () => (
           <Route path="/pregnancy/week/:week" element={<WeekPage />} />
           <Route path="/articles/:slug" element={<ArticlePage />} />
           <Route path="/due-date-calculator" element={<DueDateCalculator />} />
+          <Route path="/due-date-results" element={<DueDateResults />} />
           <Route path="/trying-to-conceive" element={<TTC />} />
           <Route path="/ovulation-calculator" element={<OvulationCalculator />} />
           <Route path="/ivf" element={<IVF />} />

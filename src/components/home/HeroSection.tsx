@@ -7,7 +7,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   const handleResult = (lmpDate: Date) => {
-    navigate(`/due-date-calculator?lmp=${lmpDate.getTime()}`);
+    navigate(`/due-date-results?lmp=${lmpDate.getTime()}`);
   };
 
   return (

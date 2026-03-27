@@ -387,7 +387,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
               to="/ivf"
               className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
             >
-              Start my journey
+              Start your journey
               <ArrowRight size={15} />
             </Link>
           </FadeIn>
@@ -466,7 +466,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                 Some people find it helpful to write things down as they go — not to analyse, just to have somewhere for it all.
               </p>
               <a href="/" className="inline-flex items-center gap-2 border border-foreground/20 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all">
-                Explore The Start of You
+                Explore the journal
                 <ArrowUpRight size={14} />
               </a>
             </FadeIn>

@@ -122,7 +122,7 @@ const supportStages = [
     icon: <SupportIcon />,
     title: "Support",
     desc: "For moments that feel uncertain, overwhelming, or different",
-    href: "#",
+    href: "/support",
   },
 ];
 

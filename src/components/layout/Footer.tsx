@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logoSrc from "@/assets/logo-dark.png";
 
 const Footer = () => {
   return (
@@ -14,17 +15,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="flex items-center gap-2.5 mb-4">
-              <svg width="24" height="28" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect x="1" y="1" width="22" height="28" rx="2" stroke="hsl(100,18%,52%)" strokeWidth="1.5" fill="none"/>
-                <path d="M5 8 Q14 4 23 8" stroke="hsl(100,18%,52%)" strokeWidth="1.2" fill="none"/>
-                <path d="M14 4 L14 1" stroke="hsl(100,18%,52%)" strokeWidth="1.2"/>
-                <circle cx="14" cy="3" r="1.5" fill="hsl(100,18%,52%)"/>
-              </svg>
-              <span className="font-serif text-foreground text-base">
-                The Start of You
-              </span>
-            </div>
+            <Link to="/" className="inline-block mb-4">
+              <img
+                src={logoSrc}
+                alt="The Start of You"
+                width={240}
+                height={90}
+                className="h-9 w-auto object-contain"
+              />
+            </Link>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-xs">
               Your trusted companion through pregnancy, offering calm guidance and space for reflection.
             </p>

@@ -1,18 +1,23 @@
+import { Link } from "react-router-dom";
+
 const stages = [
   {
     num: "01",
     title: "Before transfer",
     sub: "Preparation, medication, understanding your protocol, and getting ready physically and mentally",
+    href: "/ivf/before-transfer",
   },
   {
     num: "02",
     title: "After transfer",
     sub: "The waiting period — often the most uncertain stage, where questions and emotions can feel heightened",
+    href: "/ivf/after-transfer",
   },
   {
     num: "03",
     title: "Early pregnancy",
     sub: "Monitoring, early scans, and cautious progress as things begin to develop",
+    href: "/ivf/early-pregnancy",
   },
 ];
 
@@ -33,20 +38,21 @@ const IVFStages = () => {
         {/* Stages */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {stages.map((stage) => (
-            <div
+            <Link
               key={stage.num}
-              className="bg-card border border-border/50 rounded-lg p-8 shadow-card-brand flex flex-col gap-4"
+              to={stage.href}
+              className="group bg-card border border-border/50 rounded-lg p-8 shadow-card-brand flex flex-col gap-4 hover:border-sage/40 hover:shadow-soft transition-all"
             >
               <span className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
                 {stage.num}
               </span>
-              <h3 className="font-serif text-xl text-foreground leading-snug">
+              <h3 className="font-serif text-xl text-foreground leading-snug group-hover:text-sage transition-colors">
                 {stage.title}
               </h3>
               <p className="font-serif italic text-base text-foreground/60 leading-relaxed">
                 {stage.sub}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

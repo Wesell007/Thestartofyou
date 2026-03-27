@@ -1,15 +1,11 @@
 import { useState } from "react";
-import { Search, ArrowUpRight } from "lucide-react";
+import { Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface AISearchBarProps {
-  /** Placeholder text — rotates if multiple provided */
   placeholder?: string;
-  /** Suggested prompts shown below */
   suggestions?: string[];
-  /** Context passed to AI (e.g. "Week 12 of pregnancy") */
   context?: string;
-  /** Visual variant */
   variant?: "hero" | "section";
 }
 
@@ -24,6 +20,7 @@ const AISearchBar = ({
   variant = "section",
 }: AISearchBarProps) => {
   const [query, setQuery] = useState("");
+  const [focused, setFocused] = useState(false);
   const navigate = useNavigate();
 
   const handleAsk = () => {
@@ -49,9 +46,11 @@ const AISearchBar = ({
     <div className={isHero ? "" : "max-w-xl mx-auto"}>
       {/* Search input */}
       <div
-        className={`relative bg-card border border-border ${
-          isHero ? "rounded-pill" : "rounded-lg"
-        } px-5 py-4 flex items-center gap-3 shadow-card-brand focus-within:border-sage focus-within:shadow-soft transition-all`}
+        className={`relative bg-card border ${
+          focused ? "border-sage/50 shadow-soft" : "border-border/50 shadow-card-brand"
+        } ${
+          isHero ? "rounded-[2rem]" : "rounded-xl"
+        } px-6 py-4.5 flex items-center gap-4 transition-all duration-300`}
       >
         <Search size={18} className="text-sage-muted shrink-0" />
         <input
@@ -59,12 +58,14 @@ const AISearchBar = ({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
           placeholder={placeholder}
-          className="flex-1 bg-transparent font-sans text-sm font-light text-foreground placeholder:text-muted-foreground focus:outline-none"
+          className="flex-1 bg-transparent font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
         />
         <button
           onClick={handleAsk}
-          className="bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all shrink-0"
+          className="bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300 shrink-0"
         >
           Ask now
         </button>
@@ -72,12 +73,12 @@ const AISearchBar = ({
 
       {/* Suggestion chips */}
       {suggestions.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-4 justify-center">
+        <div className="flex flex-wrap gap-2.5 mt-5 justify-center">
           {suggestions.map((s) => (
             <button
               key={s}
               onClick={() => handleSuggestion(s)}
-              className="font-sans text-xs font-light text-muted-foreground border border-border rounded-pill px-3.5 py-1.5 hover:border-sage hover:text-foreground transition-all bg-card"
+              className="font-sans text-xs font-light text-muted-foreground border border-border/50 rounded-pill px-4 py-2 hover:border-sage/40 hover:text-foreground hover:bg-card/80 transition-all duration-200 bg-transparent"
             >
               {s}
             </button>

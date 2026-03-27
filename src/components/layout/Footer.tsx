@@ -4,22 +4,22 @@ import logoSrc from "@/assets/logo-dark.png";
 const Footer = () => {
   return (
     <footer className="bg-parchment-dark relative overflow-hidden">
-      {/* Wavy divider top */}
+      {/* Soft wave divider */}
       <div className="absolute top-0 left-0 right-0 overflow-hidden leading-none">
-        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0,40 C240,70 480,10 720,40 C960,70 1200,10 1440,40 L1440,0 L0,0 Z" fill="hsl(40,30%,96%)" />
+        <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0,32 C360,56 720,8 1080,32 C1260,44 1380,24 1440,32 L1440,0 L0,0 Z" fill="hsl(40,30%,96%)" />
         </svg>
       </div>
 
-      <div className="container mx-auto px-6 md:px-10 max-w-6xl pt-28 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16">
+      <div className="container mx-auto px-6 md:px-10 max-w-6xl pt-28 pb-14">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-14 md:gap-16">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link to="/" className="inline-block mb-5">
+            <Link to="/" className="inline-block mb-6">
               <img
                 src={logoSrc}
                 alt="The Start of You"
-                className="w-[140px] h-auto object-contain"
+                className="w-[130px] h-auto object-contain opacity-90"
               />
             </Link>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-xs">
@@ -29,44 +29,61 @@ const Footer = () => {
 
           {/* Journey */}
           <div>
-            <h4 className="font-serif text-foreground text-base mb-5">Journey</h4>
-            <ul className="space-y-3">
-              <li><Link to="/trying-to-conceive" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Trying to Conceive</Link></li>
-              <li><Link to="/ivf" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">IVF</Link></li>
-              <li><Link to="/pregnancy" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Pregnancy</Link></li>
-              <li><Link to="/postpartum" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Postpartum</Link></li>
-              <li><Link to="/first-year" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">First Year</Link></li>
+            <h4 className="font-serif text-foreground text-base mb-6">Journey</h4>
+            <ul className="space-y-3.5">
+              {[
+                { to: "/trying-to-conceive", label: "Trying to Conceive" },
+                { to: "/ivf", label: "IVF" },
+                { to: "/pregnancy", label: "Pregnancy" },
+                { to: "/postpartum", label: "Postpartum" },
+                { to: "/first-year", label: "First Year" },
+              ].map(l => (
+                <li key={l.to}><Link to={l.to} className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-200">{l.label}</Link></li>
+              ))}
             </ul>
           </div>
 
           {/* Resources */}
           <div>
-            <h4 className="font-serif text-foreground text-base mb-5">Resources</h4>
-            <ul className="space-y-3">
-              <li><Link to="/explore" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Explore</Link></li>
-              <li><Link to="/due-date-calculator" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Due Date Calculator</Link></li>
-              <li><Link to="/ovulation-calculator" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Ovulation Calculator</Link></li>
-              <li><Link to="/support" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Support</Link></li>
-              <li><Link to="/product" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Journal</Link></li>
+            <h4 className="font-serif text-foreground text-base mb-6">Resources</h4>
+            <ul className="space-y-3.5">
+              {[
+                { to: "/explore", label: "Explore" },
+                { to: "/due-date-calculator", label: "Due Date Calculator" },
+                { to: "/ovulation-calculator", label: "Ovulation Calculator" },
+                { to: "/support", label: "Support" },
+                { to: "/product", label: "Journal" },
+              ].map(l => (
+                <li key={l.to}><Link to={l.to} className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-200">{l.label}</Link></li>
+              ))}
             </ul>
           </div>
 
           {/* About */}
           <div>
-            <h4 className="font-serif text-foreground text-base mb-5">About</h4>
-            <ul className="space-y-3">
-              <li><Link to="/about" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Our Story</Link></li>
-              <li><Link to="/about" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Editorial Standards</Link></li>
-              <li><Link to="/about" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Contact</Link></li>
+            <h4 className="font-serif text-foreground text-base mb-6">About</h4>
+            <ul className="space-y-3.5">
+              {[
+                { to: "/about", label: "Our Story" },
+                { to: "/about", label: "Editorial Standards" },
+                { to: "/about", label: "Contact" },
+              ].map((l, i) => (
+                <li key={i}><Link to={l.to} className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-200">{l.label}</Link></li>
+              ))}
             </ul>
           </div>
         </div>
 
-        <div className="mt-16 pt-7 border-t border-parchment-deeper flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light text-muted-foreground font-sans">
-          <span>© 2026 The Start of You. All rights reserved.</span>
-          <span className="flex items-center gap-1.5">
-            <span>♡</span> Made with care for expecting parents
-          </span>
+        {/* Bottom bar */}
+        <div className="mt-20 pt-8 border-t border-parchment-deeper/60">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <span className="font-sans text-xs font-light text-muted-foreground/70">
+              © 2026 The Start of You. All rights reserved.
+            </span>
+            <span className="font-sans text-xs font-light text-muted-foreground/50 flex items-center gap-1.5">
+              <span className="text-sage">♡</span> Made with care for expecting parents
+            </span>
+          </div>
         </div>
       </div>
     </footer>

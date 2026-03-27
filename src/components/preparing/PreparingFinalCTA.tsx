@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
 const PreparingFinalCTA = () => {
@@ -13,10 +14,13 @@ const PreparingFinalCTA = () => {
         <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-10 max-w-lg mx-auto">
           You don't need to have everything figured out. Start with what matters, and the rest will follow.
         </p>
-        <button className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">
+        <Link
+          to="/pregnancy"
+          className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
+        >
+          Continue your journey
           <ArrowUpRight size={15} />
-          Start your journey
-        </button>
+        </Link>
       </div>
     </section>
   );

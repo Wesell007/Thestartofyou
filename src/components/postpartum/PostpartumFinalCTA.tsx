@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
 const PostpartumFinalCTA = () => {
@@ -14,10 +15,13 @@ const PostpartumFinalCTA = () => {
           Guidance that supports recovery, adjustment, and the early weeks — one day at a time.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">
+          <Link
+            to="/postpartum/early-days"
+            className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
+          >
             Start your journey
             <ArrowUpRight size={16} />
-          </button>
+          </Link>
         </div>
       </div>
     </section>

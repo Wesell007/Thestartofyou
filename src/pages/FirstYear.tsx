@@ -12,7 +12,7 @@ import FirstYearCommonQuestions from "@/components/firstyear/FirstYearCommonQues
 import FirstYearAISupport from "@/components/firstyear/FirstYearAISupport";
 import FirstYearEmotionalReminder from "@/components/firstyear/FirstYearEmotionalReminder";
 import FirstYearReflection from "@/components/firstyear/FirstYearReflection";
-import FirstYearCapture from "@/components/firstyear/FirstYearCapture";
+
 import FirstYearPathways from "@/components/firstyear/FirstYearPathways";
 import FirstYearFinalCTA from "@/components/firstyear/FirstYearFinalCTA";
 

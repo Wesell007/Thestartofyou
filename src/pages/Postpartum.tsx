@@ -12,7 +12,7 @@ import PostpartumCommonQuestions from "@/components/postpartum/PostpartumCommonQ
 import PostpartumAISupport from "@/components/postpartum/PostpartumAISupport";
 import PostpartumEmotionalReminder from "@/components/postpartum/PostpartumEmotionalReminder";
 import PostpartumReflection from "@/components/postpartum/PostpartumReflection";
-import PostpartumCapture from "@/components/postpartum/PostpartumCapture";
+
 import PostpartumPathways from "@/components/postpartum/PostpartumPathways";
 import PostpartumFinalCTA from "@/components/postpartum/PostpartumFinalCTA";
 

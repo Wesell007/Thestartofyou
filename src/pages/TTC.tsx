@@ -10,7 +10,7 @@ import TTCCommonQuestions from "@/components/ttc/TTCCommonQuestions";
 import TTCAISupport from "@/components/ttc/TTCAISupport";
 import TTCEmotionalReminder from "@/components/ttc/TTCEmotionalReminder";
 import TTCReflection from "@/components/ttc/TTCReflection";
-import TTCCapture from "@/components/ttc/TTCCapture";
+
 import TTCPathways from "@/components/ttc/TTCPathways";
 import TTCFinalCTA from "@/components/ttc/TTCFinalCTA";
 

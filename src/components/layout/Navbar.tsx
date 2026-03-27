@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import logoSrc from "@/assets/logo.png";
+import logoSrc from "@/assets/logo-dark.png";
 
 const navLinks = [
   { label: "Explore", href: "/explore" },
@@ -26,7 +26,7 @@ const Navbar = () => {
             alt="The Start of You"
             width={320}
             height={120}
-            className="h-16 w-auto object-contain mix-blend-multiply"
+            className="h-10 md:h-12 w-auto object-contain"
           />
         </Link>
 

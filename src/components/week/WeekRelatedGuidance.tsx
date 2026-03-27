@@ -1,12 +1,23 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import type { WeekData } from "@/data/weekData";
+import nauseaImg from "@/assets/article-nausea.jpg";
+import fatigueImg from "@/assets/article-fatigue.jpg";
+import implantationImg from "@/assets/article-implantation.jpg";
+import symptomsStoppingImg from "@/assets/article-symptoms-stopping.jpg";
 
 interface RelatedArticle {
   slug: string;
   title: string;
   tag: string;
 }
+
+const articleImages: Record<string, string> = {
+  "nausea-in-early-pregnancy": nauseaImg,
+  "fatigue-in-early-pregnancy": fatigueImg,
+  "implantation-bleeding": implantationImg,
+  "pregnancy-symptoms-stopping": symptomsStoppingImg,
+};
 
 // Map week ranges to relevant article slugs + display metadata
 const getRelatedArticles = (week: number): RelatedArticle[] => {
@@ -42,7 +53,6 @@ const getRelatedArticles = (week: number): RelatedArticle[] => {
       { slug: "pregnancy-symptoms-stopping", title: "Pregnancy symptoms stopping: what it means and when to seek support", tag: "Reassurance" },
     ];
   }
-  // Third trimester
   return [
     { slug: "fatigue-in-early-pregnancy", title: "Fatigue in pregnancy: why it happens and what helps", tag: "Symptoms" },
     { slug: "pregnancy-symptoms-stopping", title: "Pregnancy symptoms stopping: what it means and when to seek support", tag: "Reassurance" },
@@ -60,7 +70,6 @@ const WeekRelatedGuidance = ({ data }: Props) => {
     <section className="bg-parchment py-20 md:py-24">
       <div className="container mx-auto px-6 md:px-10 max-w-4xl">
 
-        {/* Header */}
         <div className="mb-10">
           <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-3">
             Guidance
@@ -73,28 +82,40 @@ const WeekRelatedGuidance = ({ data }: Props) => {
           </p>
         </div>
 
-        {/* Article cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           {articles.map((article) => (
             <Link
               key={article.slug}
               to={`/articles/${article.slug}`}
-              className="group flex flex-col bg-card rounded-2xl p-6 border border-border/60 shadow-card-brand hover:shadow-soft hover:border-sage/30 transition-all duration-300"
+              className="group flex flex-col bg-card rounded-2xl overflow-hidden border border-border/20 shadow-card-brand hover:shadow-soft hover:border-sage/20 hover:-translate-y-1 transition-all duration-500"
             >
-              <span className="font-sans text-[10px] font-medium tracking-widest uppercase text-terracotta mb-3">
-                {article.tag}
-              </span>
-              <h3 className="font-serif text-sm text-foreground leading-snug flex-1 mb-5 group-hover:text-sage transition-colors">
-                {article.title}
-              </h3>
-              <span className="inline-flex items-center gap-1.5 font-sans text-xs font-light text-sage group-hover:gap-2.5 transition-all">
-                Read more <ArrowRight size={11} />
-              </span>
+              {articleImages[article.slug] && (
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={articleImages[article.slug]}
+                    alt={article.title}
+                    loading="lazy"
+                    width={640}
+                    height={512}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+              )}
+              <div className="p-6 flex flex-col flex-1">
+                <span className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-terracotta/80 mb-3">
+                  {article.tag}
+                </span>
+                <h3 className="font-serif text-sm text-foreground leading-snug flex-1 mb-4 group-hover:text-sage transition-colors duration-300">
+                  {article.title}
+                </h3>
+                <span className="inline-flex items-center gap-1.5 font-sans text-xs font-light text-sage group-hover:gap-2.5 transition-all duration-300">
+                  Read more <ArrowRight size={11} />
+                </span>
+              </div>
             </Link>
           ))}
         </div>
 
-        {/* Trimester hub link */}
         <div className="mt-10 pt-8 border-t border-border/40">
           <Link
             to={data.trimesterPath}

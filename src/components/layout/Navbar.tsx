@@ -18,15 +18,13 @@ const Navbar = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/90 backdrop-blur-sm border-b border-parchment-dark">
-      <div className="container mx-auto px-6 md:px-10 h-20 flex items-center justify-between max-w-6xl">
+      <div className="container mx-auto px-6 md:px-10 h-24 flex items-center justify-between max-w-6xl">
         {/* Logo */}
         <Link to="/" className="flex items-center shrink-0">
           <img
             src={logoSrc}
             alt="The Start of You"
-            width={320}
-            height={120}
-            className="h-10 md:h-12 w-auto object-contain"
+            className="w-[100px] md:w-[150px] h-auto object-contain"
           />
         </Link>
 

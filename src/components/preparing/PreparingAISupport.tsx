@@ -1,4 +1,4 @@
-import { MessageCircle } from "lucide-react";
+import AISearchBar from "@/components/shared/AISearchBar";
 
 const PreparingAISupport = () => {
   return (
@@ -15,26 +15,18 @@ const PreparingAISupport = () => {
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-8">
               If you're unsure about what you need or what matters most, you can ask and get guidance tailored to your situation.
             </p>
-            <button className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">
-              <MessageCircle size={15} />
-              Ask now
-            </button>
           </div>
 
-          <div className="bg-card border border-border/50 rounded-lg p-7 shadow-card-brand space-y-4">
-            <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
-              Suggested questions
-            </p>
-            {[
-              "Do I really need this?",
-              "What should I prioritise?",
-              "What can wait?",
-            ].map((q, i) => (
-              <div key={i} className="flex items-start gap-3 py-3 border-b border-border/40 last:border-0">
-                <MessageCircle size={14} className="text-sage mt-0.5 shrink-0" />
-                <p className="font-sans text-sm font-light text-foreground leading-relaxed">{q}</p>
-              </div>
-            ))}
+          <div>
+            <AISearchBar
+              placeholder="What's on your mind?"
+              suggestions={[
+                "Do I really need this?",
+                "What should I prioritise?",
+                "What can wait?",
+              ]}
+              context="Preparing for baby"
+            />
           </div>
         </div>
       </div>

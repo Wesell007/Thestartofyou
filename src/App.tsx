@@ -26,6 +26,7 @@ import OvulationCalculator from "./pages/OvulationCalculator.tsx";
 import IVFTimeline from "./pages/IVFTimeline.tsx";
 import AskPage from "./pages/AskPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import BotanicalCorner from "./components/layout/BotanicalCorner.tsx";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <BotanicalCorner />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />

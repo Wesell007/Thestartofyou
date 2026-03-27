@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import logoSrc from "@/assets/logo-dark.png";
-import botanicalSrc from "@/assets/botanical-corner.png";
+
 
 const navLinks = [
   { label: "Explore", href: "/explore" },
@@ -19,13 +19,6 @@ const Navbar = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/95 backdrop-blur-lg border-b border-border/30">
-      {/* Botanical corner decoration */}
-      <img
-        src={botanicalSrc}
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute top-0 right-0 w-[120px] md:w-[180px] h-auto opacity-40 select-none"
-      />
       <div className="container mx-auto px-6 md:px-10 h-20 md:h-[5.5rem] flex items-center justify-between max-w-6xl relative">
         {/* Logo */}
         <Link to="/" className="flex items-center shrink-0">

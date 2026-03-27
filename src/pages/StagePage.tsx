@@ -4,11 +4,17 @@ import Footer from "@/components/layout/Footer";
 import { MessageCircle, PenLine, ArrowUpRight, ArrowDown, CheckCircle2 } from "lucide-react";
 import JournalPromotion from "@/components/shared/JournalPromotion";
 import { ttcStages, type StageData } from "@/data/stageData";
+import { postpartumStages } from "@/data/postpartumStageData";
+import { ivfStages } from "@/data/ivfStageData";
+import { firstYearStages } from "@/data/firstYearStageData";
 import NotFound from "@/pages/NotFound";
 
 // Registry of all stage data by journey prefix
 const stageRegistry: Record<string, Record<string, StageData>> = {
   "trying-to-conceive": ttcStages,
+  postpartum: postpartumStages,
+  ivf: ivfStages,
+  "first-year": firstYearStages,
 };
 
 const StagePage = () => {

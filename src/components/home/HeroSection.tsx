@@ -11,28 +11,28 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-parchment overflow-hidden flex flex-col justify-center pt-24 md:pt-28 pb-20">
-      {/* Top-right botanical decoration */}
+    <section className="relative min-h-screen bg-parchment overflow-hidden flex flex-col justify-center pt-28 md:pt-32 pb-24">
+      {/* Botanical accent */}
       <img
         src={botanicalCorner}
         alt=""
         aria-hidden="true"
         width={340}
         height={340}
-        className="absolute -top-6 -right-10 w-60 md:w-80 opacity-60 pointer-events-none select-none"
+        className="absolute -top-6 -right-10 w-60 md:w-80 opacity-50 pointer-events-none select-none"
       />
 
       <div className="container mx-auto px-6 md:px-10 max-w-6xl relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-10 items-center">
 
           {/* Left: copy + calculator */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-xl mx-auto md:mx-0">
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-foreground leading-[1.08] mb-6 animate-fade-up">
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] text-foreground leading-[1.08] mb-7 animate-fade-up">
               Your Pregnancy Journey,{" "}
               <span className="italic">Week by Week</span>
             </h1>
 
-            <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-12 animate-fade-up [animation-delay:0.1s] max-w-md">
+            <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-14 animate-fade-up [animation-delay:0.1s] max-w-md">
               A structured system that adapts to your stage. Enter your details
               to begin your personalised{" "}
               <strong className="font-medium text-foreground">40-week guide</strong>.
@@ -59,7 +59,7 @@ const HeroSection = () => {
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-parchment to-transparent pointer-events-none" />
+      <div className="section-fade-bottom" />
     </section>
   );
 };

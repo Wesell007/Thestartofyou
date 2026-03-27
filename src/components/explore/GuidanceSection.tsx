@@ -24,10 +24,10 @@ const articles = [
 
 const GuidanceSection = () => {
   return (
-    <section className="bg-parchment py-24 md:py-32">
+    <section className="bg-parchment section-spacing">
       <div className="container mx-auto px-6 md:px-10 max-w-5xl">
-        <div className="mb-14">
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-3">
+        <div className="mb-16">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-4">
             Guidance and answers
           </h2>
           <p className="font-sans text-base font-light text-muted-foreground max-w-sm leading-relaxed">
@@ -35,36 +35,37 @@ const GuidanceSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-7">
           {articles.map((a) => (
             <Link
               key={a.title}
               to={a.href}
-              className="group flex flex-col bg-card rounded-2xl p-7 md:p-8 border border-border/40 shadow-card-brand hover:shadow-soft hover:border-sage/30 hover:-translate-y-0.5 transition-all duration-300"
+              className="group flex flex-col bg-card rounded-2xl p-8 md:p-9 border border-border/20 shadow-card-brand hover:shadow-soft hover:border-sage/20 hover:-translate-y-1 transition-all duration-500"
             >
-              <span className="font-sans text-[10px] font-medium tracking-widest uppercase text-terracotta mb-4">
+              <span className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-terracotta/80 mb-5">
                 {a.tag}
               </span>
-              <h3 className="font-serif text-base md:text-lg text-foreground leading-snug mb-3 group-hover:text-sage transition-colors">
+              <h3 className="font-serif text-base md:text-lg text-foreground leading-snug mb-4 group-hover:text-sage transition-colors duration-300">
                 {a.title}
               </h3>
-              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed flex-1 mb-6">
+              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed flex-1 mb-7">
                 {a.desc}
               </p>
-              <span className="inline-flex items-center gap-1.5 font-sans text-xs font-light text-sage group-hover:gap-2.5 transition-all">
+              <span className="inline-flex items-center gap-1.5 font-sans text-xs font-light text-sage group-hover:gap-3 transition-all duration-300">
                 Read more <ArrowRight size={11} />
               </span>
             </Link>
           ))}
         </div>
 
-        {/* Link to explore */}
-        <div className="mt-10 text-center">
+        <div className="mt-12 text-center">
           <Link
             to="/ask"
-            className="font-sans text-sm font-light text-muted-foreground border-b border-border hover:text-foreground hover:border-foreground transition-all pb-0.5"
+            className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-all duration-200 group inline-flex items-center gap-1.5"
           >
-            Ask a question
+            <span className="border-b border-transparent group-hover:border-foreground/30 pb-0.5 transition-all">
+              Ask a question
+            </span>
           </Link>
         </div>
       </div>

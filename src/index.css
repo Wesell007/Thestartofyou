@@ -5,12 +5,9 @@
 @tailwind utilities;
 
 /* ─── Design System: The Start of You ─────────────────────────────────── */
-/* Palette: warm cream bg · sage green · terracotta CTA · soft lavender   */
-/* All colors MUST be HSL.                                                  */
 
 @layer base {
   :root {
-    /* Background — warm cream */
     --background: 40 30% 96%;
     --foreground: 30 15% 14%;
 
@@ -20,19 +17,15 @@
     --popover: 40 25% 98%;
     --popover-foreground: 30 15% 14%;
 
-    /* Sage green — primary accent */
     --primary: 100 18% 52%;
     --primary-foreground: 40 30% 98%;
 
-    /* Soft warm tone */
     --secondary: 40 20% 90%;
     --secondary-foreground: 30 15% 22%;
 
-    /* Muted cream */
     --muted: 40 18% 92%;
     --muted-foreground: 30 8% 48%;
 
-    /* Accent — same as muted for now */
     --accent: 40 18% 88%;
     --accent-foreground: 30 15% 22%;
 
@@ -45,39 +38,35 @@
 
     --radius: 2rem;
 
-    /* ─── Brand-specific tokens ──────────────────────── */
-
-    /* Terracotta — CTA buttons */
+    /* Brand tokens */
     --terracotta: 16 44% 58%;
     --terracotta-foreground: 40 30% 98%;
     --terracotta-hover: 16 44% 52%;
 
-    /* Lavender — feature section bg */
     --lavender: 271 22% 80%;
-    --lavender-bg: 271 22% 88%;
+    --lavender-bg: 271 20% 92%;
     --lavender-foreground: 271 18% 22%;
 
-    /* Sage tones */
     --sage: 100 18% 52%;
     --sage-light: 100 14% 80%;
     --sage-muted: 100 10% 66%;
-    --sage-bg: 100 14% 88%;
+    --sage-bg: 100 14% 90%;
 
-    /* Warm parchment tones */
     --parchment: 40 30% 96%;
-    --parchment-dark: 38 22% 90%;
-    --parchment-deeper: 36 20% 84%;
+    --parchment-dark: 38 22% 92%;
+    --parchment-deeper: 36 20% 86%;
 
-    /* Typography */
     --font-serif: 'Playfair Display', Georgia, serif;
     --font-sans: 'Jost', system-ui, sans-serif;
 
-    /* Shadows */
-    --shadow-soft: 0 4px 24px -4px hsl(30 15% 14% / 0.08);
-    --shadow-card: 0 2px 16px -2px hsl(30 15% 14% / 0.06);
-    --shadow-button: 0 4px 16px -4px hsl(16 44% 58% / 0.35);
+    /* Refined shadows */
+    --shadow-soft: 0 8px 32px -8px hsl(30 15% 14% / 0.07);
+    --shadow-card: 0 2px 12px -2px hsl(30 15% 14% / 0.04);
+    --shadow-card-hover: 0 12px 40px -8px hsl(30 15% 14% / 0.1);
+    --shadow-button: 0 4px 20px -4px hsl(16 44% 58% / 0.3);
+    --shadow-elevated: 0 20px 60px -15px hsl(30 15% 14% / 0.1);
 
-    /* Sidebar (unused but required) */
+    /* Sidebar */
     --sidebar-background: 40 25% 97%;
     --sidebar-foreground: 30 12% 30%;
     --sidebar-primary: 100 18% 52%;
@@ -130,25 +119,32 @@
     font-weight: 300;
     letter-spacing: 0.01em;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5 {
     font-family: var(--font-serif);
+    font-weight: 500;
   }
 
   h1 {
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
   }
 
   h2 {
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  h3 {
+    letter-spacing: -0.01em;
   }
 
   p {
-    line-height: 1.7;
+    line-height: 1.75;
   }
 
-  /* Smooth section transitions */
   section {
     position: relative;
   }
@@ -162,94 +158,52 @@
     font-family: var(--font-sans);
   }
 
-  /* Terracotta button helpers */
-  .bg-terracotta {
-    background-color: hsl(var(--terracotta));
-  }
-  .text-terracotta {
-    color: hsl(var(--terracotta));
-  }
-  .border-terracotta {
-    border-color: hsl(var(--terracotta));
-  }
-  .hover\:bg-terracotta-hover:hover {
-    background-color: hsl(var(--terracotta-hover));
+  /* Terracotta */
+  .bg-terracotta { background-color: hsl(var(--terracotta)); }
+  .text-terracotta { color: hsl(var(--terracotta)); }
+  .border-terracotta { border-color: hsl(var(--terracotta)); }
+  .hover\:bg-terracotta-hover:hover { background-color: hsl(var(--terracotta-hover)); }
+
+  /* Sage */
+  .bg-sage { background-color: hsl(var(--sage)); }
+  .text-sage { color: hsl(var(--sage)); }
+  .bg-sage-light { background-color: hsl(var(--sage-light)); }
+  .bg-sage-bg { background-color: hsl(var(--sage-bg)); }
+  .text-sage-muted { color: hsl(var(--sage-muted)); }
+
+  /* Lavender */
+  .bg-lavender-section { background-color: hsl(var(--lavender-bg)); }
+  .bg-lavender-bg { background-color: hsl(var(--lavender-bg)); }
+  .text-lavender-fg { color: hsl(var(--lavender-foreground)); }
+
+  /* Parchment */
+  .bg-parchment { background-color: hsl(var(--parchment)); }
+  .bg-parchment-dark { background-color: hsl(var(--parchment-dark)); }
+
+  /* Shadows */
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-card-brand { box-shadow: var(--shadow-card); }
+  .shadow-card-hover { box-shadow: var(--shadow-card-hover); }
+  .shadow-cta { box-shadow: var(--shadow-button); }
+  .shadow-elevated { box-shadow: var(--shadow-elevated); }
+
+  /* Section spacing */
+  .section-spacing { @apply py-28 md:py-40; }
+  .section-spacing-sm { @apply py-20 md:py-28; }
+
+  /* Editorial decorative line */
+  .editorial-rule {
+    @apply w-12 h-px mx-auto;
+    background: hsl(var(--sage-light));
   }
 
-  /* Sage helpers */
-  .bg-sage {
-    background-color: hsl(var(--sage));
+  /* Subtle section transition */
+  .section-fade-top {
+    background: linear-gradient(to bottom, hsl(var(--parchment)) 0%, transparent 100%);
+    @apply absolute top-0 left-0 right-0 h-20 pointer-events-none;
   }
-  .text-sage {
-    color: hsl(var(--sage));
-  }
-  .bg-sage-light {
-    background-color: hsl(var(--sage-light));
-  }
-  .bg-sage-bg {
-    background-color: hsl(var(--sage-bg));
-  }
-  .text-sage-muted {
-    color: hsl(var(--sage-muted));
-  }
-
-  /* Lavender helpers */
-  .bg-lavender-section {
-    background-color: hsl(var(--lavender-bg));
-  }
-  .text-lavender-fg {
-    color: hsl(var(--lavender-foreground));
-  }
-
-  /* Parchment helpers */
-  .bg-parchment {
-    background-color: hsl(var(--parchment));
-  }
-  .bg-parchment-dark {
-    background-color: hsl(var(--parchment-dark));
-  }
-
-  /* Shadow helpers */
-  .shadow-soft {
-    box-shadow: var(--shadow-soft);
-  }
-  .shadow-card-brand {
-    box-shadow: var(--shadow-card);
-  }
-  .shadow-cta {
-    box-shadow: var(--shadow-button);
-  }
-
-  /* Decorative corners (thin line frames) */
-  .frame-corner {
-    position: relative;
-  }
-  .frame-corner::before,
-  .frame-corner::after {
-    content: '';
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    border-color: hsl(var(--sage-light));
-    border-style: solid;
-    pointer-events: none;
-  }
-  .frame-corner::before {
-    top: 24px;
-    left: 24px;
-    border-width: 1px 0 0 1px;
-  }
-  .frame-corner::after {
-    bottom: 24px;
-    right: 24px;
-    border-width: 0 1px 1px 0;
-  }
-
-  /* Section spacing utilities */
-  .section-spacing {
-    @apply py-28 md:py-36;
-  }
-  .section-spacing-sm {
-    @apply py-20 md:py-28;
+  .section-fade-bottom {
+    background: linear-gradient(to top, hsl(var(--parchment)) 0%, transparent 100%);
+    @apply absolute bottom-0 left-0 right-0 h-20 pointer-events-none;
   }
 }

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { WeekData } from "@/data/weekData";
+import WeekIllustration from "@/components/week/WeekIllustration";
 
 interface Props {
   data: WeekData;
@@ -42,19 +43,29 @@ const WeekHero = ({ data, prevWeek, nextWeek }: Props) => {
           {data.reassurance}
         </p>
 
-        {/* Stat cards */}
-        <div className="flex flex-wrap gap-4 mb-12">
-          <div className="bg-card border border-border/50 rounded-lg px-5 py-4 shadow-card-brand">
-            <p className="font-sans text-[10px] font-light tracking-[0.15em] uppercase text-sage-muted mb-1">Baby size</p>
-            <p className="font-serif text-base text-foreground">{data.what.baby.size}</p>
+        {/* Visual stat row */}
+        <div className="flex items-center gap-6 sm:gap-10 mb-12">
+          {/* Baby size with illustration */}
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-card border-2 border-sage/30 flex items-center justify-center shadow-card-brand">
+              <WeekIllustration week={data.week} className="w-12 h-12 sm:w-14 sm:h-14" />
+            </div>
+            <p className="font-sans text-xs font-light text-muted-foreground text-center max-w-[120px]">
+              {data.what.baby.size}
+            </p>
           </div>
-          <div className="bg-card border border-border/50 rounded-lg px-5 py-4 shadow-card-brand">
-            <p className="font-sans text-[10px] font-light tracking-[0.15em] uppercase text-sage-muted mb-1">Trimester</p>
-            <p className="font-serif text-base text-foreground">{data.trimesterLabel}</p>
-          </div>
-          <div className="bg-card border border-border/50 rounded-lg px-5 py-4 shadow-card-brand">
-            <p className="font-sans text-[10px] font-light tracking-[0.15em] uppercase text-sage-muted mb-1">Week</p>
-            <p className="font-serif text-base text-foreground">{data.week} of 40</p>
+
+          {/* Divider */}
+          <div className="w-px h-16 bg-border/60 hidden sm:block" />
+
+          {/* Weeks to go */}
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent/30 border-2 border-accent/50 flex items-center justify-center shadow-card-brand">
+              <span className="font-serif text-3xl sm:text-4xl text-foreground">{40 - data.week}</span>
+            </div>
+            <p className="font-sans text-xs font-light text-muted-foreground text-center">
+              {40 - data.week === 0 ? "Due this week!" : `Week${40 - data.week === 1 ? "" : "s"} to go`}
+            </p>
           </div>
         </div>
 

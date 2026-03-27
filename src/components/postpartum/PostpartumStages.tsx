@@ -1,21 +1,26 @@
+import { Link } from "react-router-dom";
+
 const stages = [
   {
     num: "01",
     title: "Early days",
     range: "Week 1–2",
     sub: "Recovery, feeding, sleep disruption, and immediate adjustment",
+    href: "/postpartum/early-days",
   },
   {
     num: "02",
     title: "Early weeks",
     range: "Week 3–6",
     sub: "Gradual healing, emotional shifts, and small routines beginning to form",
+    href: "/postpartum/early-weeks",
   },
   {
     num: "03",
     title: "Ongoing adjustment",
     range: "Week 7–12",
     sub: "Building rhythm, confidence, and adapting to a new normal",
+    href: "/postpartum/ongoing-adjustment",
   },
 ];
 
@@ -34,15 +39,16 @@ const PostpartumStages = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {stages.map((stage) => (
-            <div
+            <Link
               key={stage.num}
-              className="bg-card border border-border/50 rounded-lg p-8 shadow-card-brand flex flex-col gap-4"
+              to={stage.href}
+              className="group bg-card border border-border/50 rounded-lg p-8 shadow-card-brand flex flex-col gap-4 hover:border-sage/40 hover:shadow-soft transition-all"
             >
               <span className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
                 {stage.num}
               </span>
               <div>
-                <h3 className="font-serif text-xl text-foreground leading-snug mb-1">
+                <h3 className="font-serif text-xl text-foreground leading-snug mb-1 group-hover:text-sage transition-colors">
                   {stage.title}
                 </h3>
                 <p className="font-sans text-xs font-light tracking-[0.1em] text-sage-muted">
@@ -52,7 +58,7 @@ const PostpartumStages = () => {
               <p className="font-serif italic text-base text-foreground/60 leading-relaxed">
                 {stage.sub}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

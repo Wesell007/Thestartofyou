@@ -117,7 +117,7 @@ const OvulationResult = ({ lmp, cycleLength, ovulationDay, fertileStart, fertile
             {/* Legend */}
             <div className="flex flex-wrap gap-5 mb-6">
               {[
-                { color: "bg-rose-200", label: "Period" },
+                { color: "bg-rose-100", label: "Period" },
                 { color: "bg-sage-bg", label: "Fertile window" },
                 { color: "bg-terracotta", label: "Ovulation" },
                 { color: "bg-lavender-bg", label: "Test day" },

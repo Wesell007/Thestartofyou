@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="bg-parchment-dark relative overflow-hidden">
@@ -28,37 +30,39 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Links */}
-          {[
-            {
-              heading: "About",
-              links: ["Our Story", "Editorial Standards", "Contact"],
-            },
-            {
-              heading: "Resources",
-              links: ["Weekly Guides", "Journal Prompts", "Support"],
-            },
-            {
-              heading: "Legal",
-              links: ["Privacy Policy", "Terms of Service", "Cookie Policy"],
-            },
-          ].map((col) => (
-            <div key={col.heading}>
-              <h4 className="font-serif text-foreground text-base mb-4">{col.heading}</h4>
-              <ul className="space-y-2.5">
-                {col.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Journey */}
+          <div>
+            <h4 className="font-serif text-foreground text-base mb-4">Journey</h4>
+            <ul className="space-y-2.5">
+              <li><Link to="/trying-to-conceive" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Trying to Conceive</Link></li>
+              <li><Link to="/ivf" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">IVF</Link></li>
+              <li><Link to="/pregnancy" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Pregnancy</Link></li>
+              <li><Link to="/postpartum" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Postpartum</Link></li>
+              <li><Link to="/first-year" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">First Year</Link></li>
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h4 className="font-serif text-foreground text-base mb-4">Resources</h4>
+            <ul className="space-y-2.5">
+              <li><Link to="/explore" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Explore</Link></li>
+              <li><Link to="/due-date-calculator" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Due Date Calculator</Link></li>
+              <li><Link to="/ovulation-calculator" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Ovulation Calculator</Link></li>
+              <li><Link to="/support" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Support</Link></li>
+              <li><Link to="/product" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Journal</Link></li>
+            </ul>
+          </div>
+
+          {/* About */}
+          <div>
+            <h4 className="font-serif text-foreground text-base mb-4">About</h4>
+            <ul className="space-y-2.5">
+              <li><Link to="/about" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Our Story</Link></li>
+              <li><Link to="/about" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Editorial Standards</Link></li>
+              <li><Link to="/about" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Contact</Link></li>
+            </ul>
+          </div>
         </div>
 
         <div className="mt-14 pt-6 border-t border-parchment-deeper flex flex-col md:flex-row justify-between items-center gap-3 text-xs font-light text-muted-foreground font-sans">

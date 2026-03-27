@@ -1,4 +1,5 @@
 import { Calculator, Heart, MessageCircle, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const tools = [
   {
@@ -6,21 +7,21 @@ const tools = [
     title: "Calculate your due date",
     desc: "Enter your last period to find your estimated due date and current week.",
     cta: "Calculate",
-    href: "#",
+    href: "/due-date-calculator",
   },
   {
     icon: <Heart size={20} className="text-sage" />,
     title: "Find your fertile window",
     desc: "Understand your cycle and identify the days most likely for conception.",
-    cta: "Find out",
-    href: "#",
+    cta: "Show Fertility Dates",
+    href: "/ovulation-calculator",
   },
   {
     icon: <MessageCircle size={20} className="text-sage" />,
     title: "Ask a question",
     desc: "Not sure where to start? Ask anything — symptoms, timing, or what to expect.",
     cta: "Ask now",
-    href: "#",
+    href: "/ask",
   },
 ];
 
@@ -37,9 +38,9 @@ const QuickActionsSection = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {tools.map((t) => (
-            <a
+            <Link
               key={t.title}
-              href={t.href}
+              to={t.href}
               className="group flex flex-col gap-4 bg-card rounded-2xl p-6 border border-border/60 shadow-card-brand hover:shadow-soft hover:border-sage/40 transition-all duration-300"
             >
               <div className="w-10 h-10 rounded-full bg-sage-bg flex items-center justify-center shrink-0">
@@ -54,7 +55,7 @@ const QuickActionsSection = () => {
               <span className="mt-auto inline-flex items-center gap-1.5 font-sans text-xs font-medium text-terracotta group-hover:gap-2.5 transition-all">
                 {t.cta} <ArrowRight size={11} />
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

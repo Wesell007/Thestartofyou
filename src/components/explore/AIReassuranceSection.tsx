@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const AIReassuranceSection = () => {
   return (
@@ -15,13 +16,13 @@ const AIReassuranceSection = () => {
           You can ask anything — whether it's about symptoms, timing, or what to expect next.
         </p>
 
-        <a
-          href="#"
+        <Link
+          to="/ask"
           className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
         >
           Ask now
           <ArrowRight size={14} />
-        </a>
+        </Link>
 
         <p className="font-sans text-xs font-light text-lavender-foreground/50 mt-5">
           No sign-in required · Calm, private guidance

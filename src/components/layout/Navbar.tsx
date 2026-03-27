@@ -4,12 +4,11 @@ import { Link, useLocation } from "react-router-dom";
 import logoSrc from "@/assets/logo.png";
 
 const navLinks = [
-  { label: "My Journey", href: "#" },
   { label: "Explore", href: "/explore" },
+  { label: "Pregnancy", href: "/pregnancy" },
   { label: "Journal", href: "/product" },
   { label: "About", href: "/about" },
 ];
-
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -33,37 +32,27 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
-          {navLinks.map(({ label, href }) =>
-            href.startsWith("/") ? (
-              <Link
-                key={label}
-                to={href}
-                className={`font-sans text-sm font-light tracking-wide transition-colors ${
-                  isActive(href) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {label}
-              </Link>
-            ) : (
-              <a
-                key={label}
-                href={href}
-                className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors tracking-wide"
-              >
-                {label}
-              </a>
-            )
-          )}
+          {navLinks.map(({ label, href }) => (
+            <Link
+              key={label}
+              to={href}
+              className={`font-sans text-sm font-light tracking-wide transition-colors ${
+                isActive(href) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {label}
+            </Link>
+          ))}
         </nav>
 
         {/* Sign In */}
         <div className="hidden md:flex items-center">
-          <a
-            href="#"
+          <Link
+            to="/explore"
             className="font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-5 py-2 rounded-pill hover:bg-terracotta-hover transition-colors shadow-cta"
           >
-            Sign In
-          </a>
+            Start your journey
+          </Link>
         </div>
 
         {/* Mobile toggle */}
@@ -79,36 +68,25 @@ const Navbar = () => {
       {/* Mobile drawer */}
       {mobileOpen && (
         <div className="md:hidden bg-parchment border-t border-parchment-dark px-6 py-6 flex flex-col gap-5">
-          {navLinks.map(({ label, href }) =>
-            href.startsWith("/") ? (
-              <Link
-                key={label}
-                to={href}
-                className={`font-sans text-base font-light transition-colors ${
-                  isActive(href) ? "text-sage" : "text-foreground hover:text-sage"
-                }`}
-                onClick={() => setMobileOpen(false)}
-              >
-                {label}
-              </Link>
-            ) : (
-              <a
-                key={label}
-                href={href}
-                className="font-sans text-base font-light text-foreground hover:text-sage transition-colors"
-                onClick={() => setMobileOpen(false)}
-              >
-                {label}
-              </a>
-            )
-          )}
-          <a
-            href="#"
+          {navLinks.map(({ label, href }) => (
+            <Link
+              key={label}
+              to={href}
+              className={`font-sans text-base font-light transition-colors ${
+                isActive(href) ? "text-sage" : "text-foreground hover:text-sage"
+              }`}
+              onClick={() => setMobileOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
+          <Link
+            to="/explore"
             className="mt-2 text-center font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-5 py-3 rounded-pill hover:bg-terracotta-hover transition-colors"
             onClick={() => setMobileOpen(false)}
           >
-            Sign In
-          </a>
+            Start your journey
+          </Link>
         </div>
       )}
     </header>

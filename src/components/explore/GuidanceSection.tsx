@@ -1,23 +1,24 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const articles = [
   {
-    tag: "This week's guidance",
-    title: "What to expect in Week 10",
-    desc: "Your baby is now the size of a strawberry. Here's what's changing for you and your body right now.",
-    href: "#",
+    tag: "Symptoms",
+    title: "Nausea in early pregnancy",
+    desc: "Why it happens, when it peaks, and what you can realistically do — clear, reassuring guidance.",
+    href: "/articles/nausea-in-early-pregnancy",
   },
   {
-    tag: "Popular question",
-    title: "When do pregnancy symptoms start?",
-    desc: "Most symptoms begin between weeks 5 and 8, though the timing varies more than you'd expect.",
-    href: "#",
+    tag: "Symptoms",
+    title: "Fatigue in early pregnancy",
+    desc: "Extreme tiredness is one of the most underestimated symptoms. Here's why it happens.",
+    href: "/articles/fatigue-in-early-pregnancy",
   },
   {
-    tag: "Key article",
-    title: "What do I need for a newborn?",
-    desc: "A calm, honest list of what genuinely matters — without the overwhelming product guides.",
-    href: "#",
+    tag: "Early pregnancy",
+    title: "Implantation bleeding explained",
+    desc: "What it is, what it looks like, and how it differs from a period.",
+    href: "/articles/implantation-bleeding",
   },
 ];
 
@@ -36,9 +37,9 @@ const GuidanceSection = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
           {articles.map((a) => (
-            <a
+            <Link
               key={a.title}
-              href={a.href}
+              to={a.href}
               className="group flex flex-col bg-card rounded-2xl p-6 md:p-7 border border-border/60 shadow-card-brand hover:shadow-soft hover:border-sage/30 transition-all duration-300"
             >
               <span className="font-sans text-[10px] font-medium tracking-widest uppercase text-terracotta mb-3">
@@ -53,18 +54,18 @@ const GuidanceSection = () => {
               <span className="inline-flex items-center gap-1.5 font-sans text-xs font-light text-sage group-hover:gap-2.5 transition-all">
                 Read more <ArrowRight size={11} />
               </span>
-            </a>
+            </Link>
           ))}
         </div>
 
-        {/* Restrained "see all" link — not a button */}
+        {/* Link to explore */}
         <div className="mt-8 text-center">
-          <a
-            href="#"
+          <Link
+            to="/ask"
             className="font-sans text-sm font-light text-muted-foreground border-b border-border hover:text-foreground hover:border-foreground transition-all pb-0.5"
           >
-            Browse all guidance
-          </a>
+            Ask a question
+          </Link>
         </div>
       </div>
     </section>

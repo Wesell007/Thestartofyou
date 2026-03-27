@@ -1,18 +1,23 @@
+import { Link } from "react-router-dom";
+
 const stages = [
   {
     num: "01",
     title: "Understanding your cycle",
     sub: "Learning how your cycle works, including ovulation and timing",
+    slug: "understanding-your-cycle",
   },
   {
     num: "02",
     title: "Timing and tracking",
     sub: "Identifying your fertile window and recognising patterns",
+    slug: "timing-and-tracking",
   },
   {
     num: "03",
     title: "Waiting and testing",
     sub: "The period after ovulation, where uncertainty is often highest",
+    slug: "waiting-and-testing",
   },
 ];
 
@@ -33,20 +38,21 @@ const TTCStages = () => {
         {/* Stages */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {stages.map((stage) => (
-            <div
+            <Link
               key={stage.num}
-              className="bg-card border border-border/50 rounded-lg p-8 shadow-card-brand flex flex-col gap-4"
+              to={`/trying-to-conceive/${stage.slug}`}
+              className="group bg-card border border-border/50 rounded-lg p-8 shadow-card-brand flex flex-col gap-4 hover:border-sage/40 hover:shadow-soft transition-all"
             >
               <span className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
                 {stage.num}
               </span>
-              <h3 className="font-serif text-xl text-foreground leading-snug">
+              <h3 className="font-serif text-xl text-foreground leading-snug group-hover:text-sage transition-colors">
                 {stage.title}
               </h3>
               <p className="font-serif italic text-base text-foreground/60 leading-relaxed">
                 {stage.sub}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

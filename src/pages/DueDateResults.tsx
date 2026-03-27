@@ -7,6 +7,7 @@ import DueDateCalculatorResult from "@/components/shared/DueDateCalculatorResult
 const DueDateResults = () => {
   const [searchParams] = useSearchParams();
   const [lmp, setLmp] = useState<Date | null>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const lmpParam = searchParams.get("lmp");
@@ -14,7 +15,10 @@ const DueDateResults = () => {
       const ts = parseInt(lmpParam, 10);
       if (!isNaN(ts)) setLmp(new Date(ts));
     }
+    setReady(true);
   }, [searchParams]);
+
+  if (!ready) return null;
 
   if (!lmp) {
     return <Navigate to="/due-date-calculator" replace />;

@@ -6,7 +6,7 @@ import logoSrc from "@/assets/logo.png";
 const navLinks = [
   { label: "My Journey", href: "#" },
   { label: "Explore", href: "/explore" },
-  { label: "Journal", href: "#" },
+  { label: "Journal", href: "/product" },
   { label: "About", href: "/about" },
 ];
 

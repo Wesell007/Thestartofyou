@@ -93,7 +93,9 @@ export default {
       boxShadow: {
         soft: "var(--shadow-soft)",
         "card-brand": "var(--shadow-card)",
+        "card-hover": "var(--shadow-card-hover)",
         cta: "var(--shadow-button)",
+        elevated: "var(--shadow-elevated)",
       },
       spacing: {
         "18": "4.5rem",

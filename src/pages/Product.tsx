@@ -22,7 +22,7 @@ const insideItems = [
 const familiarItems = [
   "You have a lot on your mind, but nowhere to put it",
   "Things feel important, but easy to forget later",
-  "You keep thinking "I'll remember this" — but don't",
+  "You keep thinking \u201cI'll remember this\u201d \u2014 but don't",
   "Some moments feel bigger than they look",
 ];
 

@@ -11,11 +11,11 @@ const Footer = () => {
         </svg>
       </div>
 
-      <div className="container mx-auto px-6 md:px-10 max-w-6xl pt-28 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16">
+      <div className="container mx-auto px-6 md:px-10 max-w-6xl pt-28 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link to="/" className="inline-block mb-4">
+            <Link to="/" className="inline-block mb-5">
               <img
                 src={logoSrc}
                 alt="The Start of You"
@@ -29,8 +29,8 @@ const Footer = () => {
 
           {/* Journey */}
           <div>
-            <h4 className="font-serif text-foreground text-base mb-4">Journey</h4>
-            <ul className="space-y-2.5">
+            <h4 className="font-serif text-foreground text-base mb-5">Journey</h4>
+            <ul className="space-y-3">
               <li><Link to="/trying-to-conceive" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Trying to Conceive</Link></li>
               <li><Link to="/ivf" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">IVF</Link></li>
               <li><Link to="/pregnancy" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Pregnancy</Link></li>
@@ -41,8 +41,8 @@ const Footer = () => {
 
           {/* Resources */}
           <div>
-            <h4 className="font-serif text-foreground text-base mb-4">Resources</h4>
-            <ul className="space-y-2.5">
+            <h4 className="font-serif text-foreground text-base mb-5">Resources</h4>
+            <ul className="space-y-3">
               <li><Link to="/explore" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Explore</Link></li>
               <li><Link to="/due-date-calculator" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Due Date Calculator</Link></li>
               <li><Link to="/ovulation-calculator" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Ovulation Calculator</Link></li>
@@ -53,8 +53,8 @@ const Footer = () => {
 
           {/* About */}
           <div>
-            <h4 className="font-serif text-foreground text-base mb-4">About</h4>
-            <ul className="space-y-2.5">
+            <h4 className="font-serif text-foreground text-base mb-5">About</h4>
+            <ul className="space-y-3">
               <li><Link to="/about" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Our Story</Link></li>
               <li><Link to="/about" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Editorial Standards</Link></li>
               <li><Link to="/about" className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors">Contact</Link></li>
@@ -62,7 +62,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-14 pt-6 border-t border-parchment-deeper flex flex-col md:flex-row justify-between items-center gap-3 text-xs font-light text-muted-foreground font-sans">
+        <div className="mt-16 pt-7 border-t border-parchment-deeper flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light text-muted-foreground font-sans">
           <span>© 2026 The Start of You. All rights reserved.</span>
           <span className="flex items-center gap-1.5">
             <span>♡</span> Made with care for expecting parents

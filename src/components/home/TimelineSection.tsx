@@ -25,10 +25,11 @@ const TimelineSection = () => {
   const getWeekPercent = (week: number) => ((week - 1) / 39) * 100;
 
   return (
-    <section className="bg-parchment py-28 md:py-36">
+    <section className="bg-parchment section-spacing">
       <div className="container mx-auto px-6 md:px-10 max-w-5xl">
-        <div className="text-center mb-18">
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-6">
+        <div className="text-center mb-20">
+          <div className="editorial-rule mb-8" />
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-7">
             Your Complete Pregnancy Timeline
           </h2>
           <p className="font-sans text-base font-light text-muted-foreground max-w-xl mx-auto leading-relaxed">
@@ -37,9 +38,9 @@ const TimelineSection = () => {
         </div>
 
         {/* Trimester labels */}
-        <div className="grid grid-cols-3 gap-1 mb-5 text-center">
+        <div className="grid grid-cols-3 gap-1 mb-6 text-center">
           {trimesterBoundaries.map((t) => (
-            <p key={t.label} className="font-sans text-xs font-light tracking-[0.15em] text-muted-foreground uppercase">
+            <p key={t.label} className="font-sans text-[10px] font-light tracking-[0.2em] text-muted-foreground/70 uppercase">
               {t.label}
             </p>
           ))}
@@ -49,18 +50,18 @@ const TimelineSection = () => {
         <div className="relative h-32 select-none">
           {/* Trimester background zones */}
           <div className="absolute inset-y-0 left-0 right-0 flex rounded-2xl overflow-hidden" style={{ top: "40%", bottom: "20%" }}>
-            <div className="flex-1 bg-sage-bg/60" />
+            <div className="flex-1 bg-sage-bg/50" />
             <div className="flex-1 bg-parchment-dark" />
-            <div className="flex-1 bg-parchment-deeper/70" />
+            <div className="flex-1 bg-parchment-deeper/60" />
           </div>
 
           {/* Connector line */}
           <div
-            className="absolute top-1/2 left-0 right-0 h-px bg-muted-foreground/20"
+            className="absolute top-1/2 left-0 right-0 h-px bg-muted-foreground/15"
             style={{ transform: "translateY(-50%)" }}
           />
 
-          {/* Progress fill up to current week */}
+          {/* Progress fill */}
           <div
             className="absolute top-1/2 left-0 h-px bg-sage"
             style={{
@@ -78,17 +79,16 @@ const TimelineSection = () => {
             >
               {m.current ? (
                 <>
-                  {/* Tooltip */}
-                  <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-terracotta text-terracotta-foreground font-sans text-xs font-medium px-3 py-1.5 rounded-pill whitespace-nowrap shadow-cta">
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-terracotta text-terracotta-foreground font-sans text-[11px] font-medium px-3.5 py-1.5 rounded-pill whitespace-nowrap shadow-cta">
                     You are here — Week {currentWeek}
                   </div>
                   <div className="w-4 h-4 rounded-full border-2 border-terracotta bg-terracotta-foreground shadow-cta" />
                 </>
               ) : (
-                <div className="w-3 h-3 rounded-full border border-foreground/30 bg-card" />
+                <div className="w-2.5 h-2.5 rounded-full border border-foreground/20 bg-card" />
               )}
               {m.label && (
-                <p className="absolute top-7 left-1/2 -translate-x-1/2 font-sans text-[11px] font-light text-muted-foreground whitespace-nowrap">
+                <p className="absolute top-7 left-1/2 -translate-x-1/2 font-sans text-[10px] font-light text-muted-foreground/60 whitespace-nowrap">
                   {m.label}
                 </p>
               )}
@@ -97,9 +97,9 @@ const TimelineSection = () => {
         </div>
 
         {/* Trimester sub labels */}
-        <div className="grid grid-cols-3 gap-1 mt-7 text-center">
+        <div className="grid grid-cols-3 gap-1 mt-8 text-center">
           {trimesterBoundaries.map((t) => (
-            <p key={t.sub} className="font-serif italic text-sm text-muted-foreground">
+            <p key={t.sub} className="font-serif italic text-sm text-muted-foreground/70">
               {t.sub}
             </p>
           ))}

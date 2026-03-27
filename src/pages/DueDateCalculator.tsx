@@ -1,33 +1,13 @@
-import { useState, useRef } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
 
 const DueDateCalculator = () => {
-  const [searchParams] = useSearchParams();
-  const [lmp, setLmp] = useState<Date | null>(null);
-  const resultsRef = useRef<HTMLDivElement>(null);
-
-  // If arriving with ?lmp= param, auto-populate result
-  useEffect(() => {
-    const lmpParam = searchParams.get("lmp");
-    if (lmpParam) {
-      const ts = parseInt(lmpParam, 10);
-      if (!isNaN(ts)) {
-        setLmp(new Date(ts));
-        setTimeout(() => {
-          resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 200);
-      }
-    }
-  }, [searchParams]);
+  const navigate = useNavigate();
 
   const handleResult = (lmpDate: Date) => {
-    setLmp(lmpDate);
-    setTimeout(() => {
-      resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 150);
+    navigate(`/due-date-results?lmp=${lmpDate.getTime()}`);
   };
 
   return (
@@ -55,21 +35,6 @@ const DueDateCalculator = () => {
           </div>
         </div>
       </section>
-
-      {/* ── Results ──────────────────────────────────────────────────────── */}
-      {lmp ? (
-        <div ref={resultsRef}>
-          <DueDateCalculatorResult lmp={lmp} />
-        </div>
-      ) : (
-        <section className="pb-32">
-          <div className="container mx-auto px-6 md:px-10 max-w-xl text-center">
-            <p className="font-sans text-sm font-light text-muted-foreground/60 leading-relaxed">
-              Select your method and enter a date above to see your results.
-            </p>
-          </div>
-        </section>
-      )}
 
       <Footer />
     </div>

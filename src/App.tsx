@@ -21,6 +21,7 @@ import Support from "./pages/Support.tsx";
 import About from "./pages/About.tsx";
 import Product from "./pages/Product.tsx";
 import StagePage from "./pages/StagePage.tsx";
+import OvulationCalculator from "./pages/OvulationCalculator.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/articles/:slug" element={<ArticlePage />} />
           <Route path="/due-date-calculator" element={<DueDateCalculator />} />
           <Route path="/trying-to-conceive" element={<TTC />} />
+          <Route path="/ovulation-calculator" element={<OvulationCalculator />} />
           <Route path="/ivf" element={<IVF />} />
           <Route path="/postpartum" element={<Postpartum />} />
           <Route path="/first-year" element={<FirstYear />} />

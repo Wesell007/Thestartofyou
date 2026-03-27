@@ -49,8 +49,6 @@ const TTC = () => {
         {/* 10. Reflection prompt */}
         <TTCReflection />
 
-        {/* 11. Capture this stage — soft product integration */}
-        <TTCCapture />
 
         {/* 12. Pathways — system connections */}
         <TTCPathways />

@@ -57,8 +57,6 @@ const Postpartum = () => {
         {/* 12. Reflection prompt */}
         <PostpartumReflection />
 
-        {/* 13. Capture — soft product integration */}
-        <PostpartumCapture />
 
         {/* 14. Pathways */}
         <PostpartumPathways />

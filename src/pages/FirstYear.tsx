@@ -57,8 +57,6 @@ const FirstYear = () => {
         {/* 12. Reflection prompt */}
         <FirstYearReflection />
 
-        {/* 13. Capture — product integration */}
-        <FirstYearCapture />
 
         {/* 14. Pathways */}
         <FirstYearPathways />

@@ -34,7 +34,7 @@ const Support = () => {
       <SupportAISupport />
       <SupportEmotionalReminder />
       <SupportReflection />
-      <SupportCapture />
+      
       <SupportPathways />
       <SupportFinalCTA />
       <Footer />

@@ -26,7 +26,7 @@ const WeekContinue = ({ data, prevWeek, nextWeek }: Props) => {
             to="/pregnancy"
             className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
           >
-            Start my journey
+            Continue your journey
             <ArrowRight size={15} />
           </Link>
         </div>

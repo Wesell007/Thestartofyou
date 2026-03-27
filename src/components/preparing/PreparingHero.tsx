@@ -21,11 +21,11 @@ const PreparingHero = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up [animation-delay:0.2s]">
           <button className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">
             <ArrowUpRight size={15} />
-            Start preparing
+            Start your journey
           </button>
           <button className="flex items-center gap-2 border border-foreground/20 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all">
             <ArrowDown size={15} />
-            Explore what you need
+            Explore your journey
           </button>
         </div>
       </div>

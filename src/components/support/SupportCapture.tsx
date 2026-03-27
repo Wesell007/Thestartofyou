@@ -20,7 +20,7 @@ const SupportCapture = () => {
           href="#"
           className="inline-flex items-center gap-2 border border-foreground/20 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment transition-all"
         >
-          Explore The Start of You
+          Explore the journal
           <ArrowUpRight size={14} />
         </a>
       </div>

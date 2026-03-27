@@ -410,7 +410,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
               to={`/pregnancy/week/${result.currentWeek}`}
               className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all mb-4"
             >
-              Start my journey
+              Start your journey
               <ArrowRight size={15} />
             </Link>
             <p className="font-sans text-xs font-light text-muted-foreground/60 block">
@@ -518,7 +518,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                 Many parents choose to write things down as they go — thoughts, changes, and how this experience really feels.
               </p>
               <a href="/" className="inline-flex items-center gap-2 border border-foreground/20 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all">
-                Explore The Start of You
+                Explore the journal
                 <ArrowUpRight size={14} />
               </a>
             </Fade>

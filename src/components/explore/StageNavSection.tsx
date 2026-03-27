@@ -116,7 +116,7 @@ const supportStages = [
     icon: <PreparingIcon />,
     title: "Preparing for your baby",
     desc: "What you need, what matters, and how to prepare",
-    href: "#",
+    href: "/preparing-for-baby",
   },
   {
     icon: <SupportIcon />,

@@ -24,6 +24,7 @@ import Product from "./pages/Product.tsx";
 import StagePage from "./pages/StagePage.tsx";
 import OvulationCalculator from "./pages/OvulationCalculator.tsx";
 import IVFTimeline from "./pages/IVFTimeline.tsx";
+import AskPage from "./pages/AskPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -55,6 +56,7 @@ const App = () => (
           <Route path="/support" element={<Support />} />
           <Route path="/about" element={<About />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/ask" element={<AskPage />} />
           <Route path="/:journey/:stage" element={<StagePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

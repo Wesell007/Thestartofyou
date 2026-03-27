@@ -10,7 +10,7 @@ import TTCCommonQuestions from "@/components/ttc/TTCCommonQuestions";
 import TTCAISupport from "@/components/ttc/TTCAISupport";
 import TTCEmotionalReminder from "@/components/ttc/TTCEmotionalReminder";
 import TTCReflection from "@/components/ttc/TTCReflection";
-import TTCCapture from "@/components/ttc/TTCCapture";
+
 import TTCPathways from "@/components/ttc/TTCPathways";
 import TTCFinalCTA from "@/components/ttc/TTCFinalCTA";
 
@@ -49,8 +49,6 @@ const TTC = () => {
         {/* 10. Reflection prompt */}
         <TTCReflection />
 
-        {/* 11. Capture this stage — soft product integration */}
-        <TTCCapture />
 
         {/* 12. Pathways — system connections */}
         <TTCPathways />

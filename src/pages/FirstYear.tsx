@@ -12,7 +12,7 @@ import FirstYearCommonQuestions from "@/components/firstyear/FirstYearCommonQues
 import FirstYearAISupport from "@/components/firstyear/FirstYearAISupport";
 import FirstYearEmotionalReminder from "@/components/firstyear/FirstYearEmotionalReminder";
 import FirstYearReflection from "@/components/firstyear/FirstYearReflection";
-import FirstYearCapture from "@/components/firstyear/FirstYearCapture";
+
 import FirstYearPathways from "@/components/firstyear/FirstYearPathways";
 import FirstYearFinalCTA from "@/components/firstyear/FirstYearFinalCTA";
 
@@ -57,8 +57,6 @@ const FirstYear = () => {
         {/* 12. Reflection prompt */}
         <FirstYearReflection />
 
-        {/* 13. Capture — product integration */}
-        <FirstYearCapture />
 
         {/* 14. Pathways */}
         <FirstYearPathways />

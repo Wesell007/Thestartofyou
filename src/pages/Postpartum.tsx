@@ -12,7 +12,7 @@ import PostpartumCommonQuestions from "@/components/postpartum/PostpartumCommonQ
 import PostpartumAISupport from "@/components/postpartum/PostpartumAISupport";
 import PostpartumEmotionalReminder from "@/components/postpartum/PostpartumEmotionalReminder";
 import PostpartumReflection from "@/components/postpartum/PostpartumReflection";
-import PostpartumCapture from "@/components/postpartum/PostpartumCapture";
+
 import PostpartumPathways from "@/components/postpartum/PostpartumPathways";
 import PostpartumFinalCTA from "@/components/postpartum/PostpartumFinalCTA";
 
@@ -57,8 +57,6 @@ const Postpartum = () => {
         {/* 12. Reflection prompt */}
         <PostpartumReflection />
 
-        {/* 13. Capture — soft product integration */}
-        <PostpartumCapture />
 
         {/* 14. Pathways */}
         <PostpartumPathways />

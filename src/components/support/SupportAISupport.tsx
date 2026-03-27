@@ -1,10 +1,5 @@
 import { ArrowUpRight, MessageCircle } from "lucide-react";
-
-const suggestions = [
-  "Is this normal?",
-  "Should I be worried?",
-  "What should I do next?",
-];
+import AISearchBar from "@/components/shared/AISearchBar";
 
 const SupportAISupport = () => {
   return (
@@ -25,27 +20,14 @@ const SupportAISupport = () => {
             You don't need to have the right words. Just describe what's on your mind, and get gentle, personalised guidance.
           </p>
 
-          <textarea
-            rows={3}
+          <AISearchBar
             placeholder="Tell me what's been feeling off…"
-            className="w-full bg-background border border-border rounded-md px-5 py-4 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 resize-none focus:outline-none focus:ring-1 focus:ring-sage focus:border-sage transition-all leading-relaxed"
+            suggestions={[
+              "Is this normal?",
+              "Should I be worried?",
+              "What should I do next?",
+            ]}
           />
-
-          <div className="flex flex-wrap gap-2 mt-5">
-            {suggestions.map((s, i) => (
-              <button
-                key={i}
-                className="border border-border rounded-pill px-4 py-2 font-sans text-xs font-light text-muted-foreground hover:border-sage/40 hover:text-foreground transition-all"
-              >
-                {s}
-              </button>
-            ))}
-          </div>
-
-          <button className="mt-8 flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">
-            Ask now
-            <ArrowUpRight size={14} />
-          </button>
         </div>
       </div>
     </section>

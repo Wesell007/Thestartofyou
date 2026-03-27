@@ -1,4 +1,5 @@
 import { MessageCircle } from "lucide-react";
+import AISearchBar from "@/components/shared/AISearchBar";
 import type { TrimesterData } from "@/data/trimesterData";
 
 interface Props {
@@ -20,10 +21,15 @@ const TrimesterAISupport = ({ data, bg = "bg-sage-bg/30" }: Props) => {
           If something feels unclear or unexpected during the {data.shortLabel.toLowerCase()} trimester,
           you can ask a question and get guidance that helps you understand what's happening at your stage.
         </p>
-        <button className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">
-          <MessageCircle size={15} />
-          Ask now
-        </button>
+        <AISearchBar
+          placeholder="What's on your mind?"
+          suggestions={[
+            "Is this normal right now?",
+            "What should I expect next?",
+            "Something feels different",
+          ]}
+          context={`${data.shortLabel} trimester of pregnancy`}
+        />
       </div>
     </section>
   );

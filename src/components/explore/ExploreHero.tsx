@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Search, ArrowUpRight, Calculator } from "lucide-react";
+import { Calculator } from "lucide-react";
+import AISearchBar from "@/components/shared/AISearchBar";
 
-const prompts = [
+const explorePrompts = [
   "Is this normal?",
   "When should I test?",
   "What should I expect this week?",
@@ -9,8 +9,6 @@ const prompts = [
 ];
 
 const ExploreHero = () => {
-  const [query, setQuery] = useState("");
-
   return (
     <section className="relative bg-parchment overflow-hidden pt-28 pb-20 md:pt-36 md:pb-28">
       {/* Soft radial glow behind hero */}
@@ -24,49 +22,24 @@ const ExploreHero = () => {
           Explore
         </p>
         <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-foreground leading-[1.1] mb-5 animate-fade-up">
-          Explore your journey
+          Start with a question or thought
         </h1>
         <p className="font-sans text-base md:text-lg font-light text-muted-foreground mb-10 max-w-lg mx-auto leading-relaxed animate-fade-up [animation-delay:0.1s]">
           Guidance, support, and answers — tailored to where you are.
         </p>
 
-        {/* Search bar */}
-        <div className="animate-fade-up [animation-delay:0.2s]">
-          <div className="relative bg-card border border-border rounded-pill px-5 py-4 flex items-center gap-3 shadow-card-brand focus-within:border-sage focus-within:shadow-soft transition-all max-w-xl mx-auto">
-            <Search size={18} className="text-sage-muted shrink-0" />
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="What's on your mind today?"
-              className="flex-1 bg-transparent font-sans text-sm font-light text-foreground placeholder:text-muted-foreground focus:outline-none"
-            />
-            <button
-              className="bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all shrink-0"
-              aria-label="Ask now"
-            >
-              Ask now
-            </button>
-          </div>
-
-          {/* Suggested prompts */}
-          <div className="flex flex-wrap gap-2 justify-center mt-4">
-            {prompts.map((p) => (
-              <button
-                key={p}
-                onClick={() => setQuery(p)}
-                className="font-sans text-xs font-light text-muted-foreground border border-border rounded-pill px-3.5 py-1.5 hover:border-sage hover:text-foreground transition-all bg-card"
-              >
-                {p}
-              </button>
-            ))}
-          </div>
+        <div className="animate-fade-up [animation-delay:0.2s] max-w-xl mx-auto">
+          <AISearchBar
+            variant="hero"
+            placeholder="What's on your mind today?"
+            suggestions={explorePrompts}
+          />
         </div>
 
         {/* Secondary CTA */}
         <div className="mt-8 animate-fade-up [animation-delay:0.3s]">
           <a
-            href="#"
+            href="/due-date-calculator"
             className="inline-flex items-center gap-2 font-sans text-sm font-light text-muted-foreground border-b border-border hover:text-foreground hover:border-foreground transition-all pb-0.5"
           >
             <Calculator size={14} className="text-sage" />

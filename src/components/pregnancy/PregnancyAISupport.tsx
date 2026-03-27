@@ -1,4 +1,5 @@
 import { MessageCircle } from "lucide-react";
+import AISearchBar from "@/components/shared/AISearchBar";
 
 const PregnancyAISupport = () => {
   return (
@@ -18,35 +19,19 @@ const PregnancyAISupport = () => {
               and get guidance that helps you understand what's happening at
               your stage.
             </p>
-            <button className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">
-              <MessageCircle size={15} />
-              Ask now
-            </button>
           </div>
 
-          {/* Right — illustrative prompt card */}
-          <div className="bg-card border border-border/50 rounded-lg p-7 shadow-card-brand space-y-4">
-            <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
-              Example questions
-            </p>
-            {[
-              "Is it normal to feel this tired at week 8?",
-              "Why have my symptoms suddenly changed?",
-              "What should I be aware of this week?",
-            ].map((q, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3 py-3 border-b border-border/40 last:border-0"
-              >
-                <MessageCircle
-                  size={14}
-                  className="text-sage mt-0.5 shrink-0"
-                />
-                <p className="font-sans text-sm font-light text-foreground leading-relaxed">
-                  {q}
-                </p>
-              </div>
-            ))}
+          {/* Right — search bar */}
+          <div>
+            <AISearchBar
+              placeholder="What's on your mind?"
+              suggestions={[
+                "Is it normal to feel this tired?",
+                "Why have my symptoms changed?",
+                "What should I be aware of?",
+              ]}
+              context="Pregnancy"
+            />
           </div>
         </div>
       </div>

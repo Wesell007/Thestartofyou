@@ -1,4 +1,5 @@
 import { MessageCircle } from "lucide-react";
+import AISearchBar from "@/components/shared/AISearchBar";
 import type { WeekData } from "@/data/weekData";
 
 interface Props {
@@ -24,28 +25,15 @@ const WeekAISupport = ({ data }: Props) => {
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-8">
               If something feels unclear or you want to understand more about this stage, you can ask and get guidance tailored to you.
             </p>
-            <button className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">
-              <MessageCircle size={15} />
-              Ask now
-            </button>
           </div>
 
-          {/* Right — suggested prompts */}
-          <div className="bg-card border border-border/50 rounded-lg p-7 shadow-card-brand space-y-4">
-            <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
-              Suggested questions
-            </p>
-            {data.aiPrompts.map((prompt, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3 py-3 border-b border-border/40 last:border-0"
-              >
-                <MessageCircle size={14} className="text-sage mt-0.5 shrink-0" />
-                <p className="font-sans text-sm font-light text-foreground leading-relaxed">
-                  {prompt}
-                </p>
-              </div>
-            ))}
+          {/* Right — search bar with stage-aware prompts */}
+          <div>
+            <AISearchBar
+              placeholder="What's on your mind this week?"
+              suggestions={data.aiPrompts.slice(0, 3)}
+              context={`Week ${data.week} of pregnancy`}
+            />
           </div>
         </div>
       </div>

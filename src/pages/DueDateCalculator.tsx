@@ -1,12 +1,28 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
 import DueDateCalculatorResult from "@/components/shared/DueDateCalculatorResult";
 
 const DueDateCalculator = () => {
+  const [searchParams] = useSearchParams();
   const [lmp, setLmp] = useState<Date | null>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
+
+  // If arriving with ?lmp= param, auto-populate result
+  useEffect(() => {
+    const lmpParam = searchParams.get("lmp");
+    if (lmpParam) {
+      const ts = parseInt(lmpParam, 10);
+      if (!isNaN(ts)) {
+        setLmp(new Date(ts));
+        setTimeout(() => {
+          resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 200);
+      }
+    }
+  }, [searchParams]);
 
   const handleResult = (lmpDate: Date) => {
     setLmp(lmpDate);

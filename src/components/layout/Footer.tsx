@@ -19,7 +19,7 @@ const Footer = () => {
               <img
                 src={logoSrc}
                 alt="The Start of You"
-                className="w-[120px] h-auto object-contain"
+                className="w-[140px] h-auto object-contain"
               />
             </Link>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-xs">

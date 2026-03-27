@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import WeekIllustration from "@/components/week/WeekIllustration";
 
 const earlyWeeks = [1, 2, 3];
 
@@ -74,7 +75,7 @@ const WeekByWeek = () => {
                     to={`/pregnancy/week/${week}`}
                     className={`
                       relative flex flex-col items-center justify-center aspect-square rounded-md
-                      border transition-all text-center
+                      border transition-all text-center gap-0.5 p-1
                       ${
                         earlyWeeks.includes(week)
                           ? "border-sage/40 bg-card hover:border-sage hover:shadow-card-brand"
@@ -82,17 +83,9 @@ const WeekByWeek = () => {
                       }
                     `}
                   >
-                    <span className="font-sans text-[11px] font-light text-muted-foreground leading-none">
-                      Wk
-                    </span>
-                    <span
-                      className={`font-serif text-lg leading-tight ${
-                        earlyWeeks.includes(week)
-                          ? "text-sage"
-                          : "text-foreground"
-                      }`}
-                    >
-                      {week}
+                    <WeekIllustration week={week} className="w-7 h-7 sm:w-8 sm:h-8" />
+                    <span className="font-sans text-[10px] font-light text-muted-foreground leading-none">
+                      Week {week}
                     </span>
                     {earlyWeeks.includes(week) && (
                       <span className="absolute -top-1.5 -right-1.5 w-3 h-3 rounded-full bg-sage opacity-70" />

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { WeekData } from "@/data/weekData";
+import WeekIllustration from "@/components/week/WeekIllustration";
 
 interface Props {
   data: WeekData;
@@ -39,8 +40,8 @@ const WeekTimeline = ({ data }: Props) => {
                 key={week}
                 to={`/pregnancy/week/${week}`}
                 className={`
-                  flex-1 min-w-[72px] flex flex-col items-center justify-center
-                  rounded-lg border px-3 py-5 transition-all text-center
+                  flex-1 min-w-[80px] flex flex-col items-center justify-center
+                  rounded-lg border px-3 py-4 transition-all text-center gap-1
                   ${
                     isCurrent
                       ? "bg-foreground border-foreground text-primary-foreground shadow-card-brand"
@@ -50,14 +51,12 @@ const WeekTimeline = ({ data }: Props) => {
                   }
                 `}
               >
-                <span className={`font-sans text-[10px] font-light tracking-[0.1em] uppercase mb-1 ${isCurrent ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
-                  Wk
-                </span>
-                <span className={`font-serif text-xl leading-tight ${isCurrent ? "text-primary-foreground" : isPast ? "text-sage" : "text-foreground"}`}>
-                  {week}
+                <WeekIllustration week={week} className="w-8 h-8" />
+                <span className={`font-sans text-[10px] font-light leading-tight ${isCurrent ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
+                  Week {week}
                 </span>
                 {isCurrent && (
-                  <span className="mt-2 font-sans text-[9px] font-light tracking-wider uppercase text-primary-foreground/60">
+                  <span className="font-sans text-[9px] font-light tracking-wider uppercase text-primary-foreground/60">
                     You are here
                   </span>
                 )}

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { TrimesterData } from "@/data/trimesterData";
+import WeekIllustration from "@/components/week/WeekIllustration";
 
 interface Props {
   data: TrimesterData;
@@ -51,13 +52,11 @@ const TrimesterWeeks = ({ data, bg = "bg-parchment-dark" }: Props) => {
                   <Link
                     key={week}
                     to={`/pregnancy/week/${week}`}
-                    className="relative flex flex-col items-center justify-center aspect-square rounded-md border border-border/40 bg-card/70 hover:border-sage/60 hover:bg-card hover:shadow-card-brand transition-all text-center"
+                    className="relative flex flex-col items-center justify-center aspect-square rounded-md border border-border/40 bg-card/70 hover:border-sage/60 hover:bg-card hover:shadow-card-brand transition-all text-center gap-0.5 p-1"
                   >
-                    <span className="font-sans text-[11px] font-light text-muted-foreground leading-none">
-                      Wk
-                    </span>
-                    <span className="font-serif text-lg leading-tight text-foreground">
-                      {week}
+                    <WeekIllustration week={week} className="w-7 h-7 sm:w-8 sm:h-8" />
+                    <span className="font-sans text-[10px] font-light text-muted-foreground leading-none">
+                      Week {week}
                     </span>
                   </Link>
                 ))}

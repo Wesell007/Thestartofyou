@@ -1,5 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import nauseaImg from "@/assets/article-nausea.jpg";
+import fatigueImg from "@/assets/article-fatigue.jpg";
+import implantationImg from "@/assets/article-implantation.jpg";
 
 const articles = [
   {
@@ -7,18 +10,21 @@ const articles = [
     title: "Nausea in early pregnancy",
     desc: "Why it happens, when it peaks, and what you can realistically do — clear, reassuring guidance.",
     href: "/articles/nausea-in-early-pregnancy",
+    image: nauseaImg,
   },
   {
     tag: "Symptoms",
     title: "Fatigue in early pregnancy",
     desc: "Extreme tiredness is one of the most underestimated symptoms. Here's why it happens.",
     href: "/articles/fatigue-in-early-pregnancy",
+    image: fatigueImg,
   },
   {
     tag: "Early pregnancy",
     title: "Implantation bleeding explained",
     desc: "What it is, what it looks like, and how it differs from a period.",
     href: "/articles/implantation-bleeding",
+    image: implantationImg,
   },
 ];
 
@@ -40,20 +46,32 @@ const GuidanceSection = () => {
             <Link
               key={a.title}
               to={a.href}
-              className="group flex flex-col bg-card rounded-2xl p-8 md:p-9 border border-border/20 shadow-card-brand hover:shadow-soft hover:border-sage/20 hover:-translate-y-1 transition-all duration-500"
+              className="group flex flex-col bg-card rounded-2xl overflow-hidden border border-border/20 shadow-card-brand hover:shadow-soft hover:border-sage/20 hover:-translate-y-1 transition-all duration-500"
             >
-              <span className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-terracotta/80 mb-5">
-                {a.tag}
-              </span>
-              <h3 className="font-serif text-base md:text-lg text-foreground leading-snug mb-4 group-hover:text-sage transition-colors duration-300">
-                {a.title}
-              </h3>
-              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed flex-1 mb-7">
-                {a.desc}
-              </p>
-              <span className="inline-flex items-center gap-1.5 font-sans text-xs font-light text-sage group-hover:gap-3 transition-all duration-300">
-                Read more <ArrowRight size={11} />
-              </span>
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src={a.image}
+                  alt={a.title}
+                  loading="lazy"
+                  width={640}
+                  height={512}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <div className="p-6 md:p-7 flex flex-col flex-1">
+                <span className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-terracotta/80 mb-3">
+                  {a.tag}
+                </span>
+                <h3 className="font-serif text-base md:text-lg text-foreground leading-snug mb-3 group-hover:text-sage transition-colors duration-300">
+                  {a.title}
+                </h3>
+                <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed flex-1 mb-5">
+                  {a.desc}
+                </p>
+                <span className="inline-flex items-center gap-1.5 font-sans text-xs font-light text-sage group-hover:gap-3 transition-all duration-300">
+                  Read more <ArrowRight size={11} />
+                </span>
+              </div>
             </Link>
           ))}
         </div>

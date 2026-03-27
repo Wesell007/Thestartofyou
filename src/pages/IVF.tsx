@@ -13,7 +13,7 @@ import IVFCommonQuestions from "@/components/ivf/IVFCommonQuestions";
 import IVFAISupport from "@/components/ivf/IVFAISupport";
 import IVFEmotionalReminder from "@/components/ivf/IVFEmotionalReminder";
 import IVFReflection from "@/components/ivf/IVFReflection";
-import IVFCapture from "@/components/ivf/IVFCapture";
+import JournalPromotion from "@/components/shared/JournalPromotion";
 import IVFPathways from "@/components/ivf/IVFPathways";
 import IVFFinalCTA from "@/components/ivf/IVFFinalCTA";
 
@@ -74,8 +74,8 @@ const IVF = () => {
         {/* 11. Reflection prompt */}
         <IVFReflection />
 
-        {/* 12. Capture — soft product integration */}
-        <IVFCapture />
+        {/* 12. Journal companion */}
+        <JournalPromotion contextCopy="Capture your thoughts and reflections as you move through each IVF stage." />
 
         {/* 13. Pathways */}
         <IVFPathways />

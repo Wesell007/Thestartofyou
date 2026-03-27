@@ -11,7 +11,7 @@ import CommonQuestions from "@/components/pregnancy/CommonQuestions";
 import PregnancyAISupport from "@/components/pregnancy/PregnancyAISupport";
 import EmotionalReminder from "@/components/pregnancy/EmotionalReminder";
 import ReflectionSection from "@/components/pregnancy/ReflectionSection";
-import CaptureJourney from "@/components/pregnancy/CaptureJourney";
+import JournalPromotion from "@/components/shared/JournalPromotion";
 import PregnancyFinalCTA from "@/components/pregnancy/PregnancyFinalCTA";
 
 const Pregnancy = () => {
@@ -52,8 +52,8 @@ const Pregnancy = () => {
         {/* 11. Reflection prompt */}
         <ReflectionSection />
 
-        {/* 12. Capture the journey */}
-        <CaptureJourney />
+        {/* 12. Journal companion */}
+        <JournalPromotion />
 
         {/* 13. Final CTA */}
         <PregnancyFinalCTA />

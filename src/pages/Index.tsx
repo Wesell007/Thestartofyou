@@ -5,7 +5,7 @@ import HowItWorksSection from "@/components/home/HowItWorksSection";
 import DashboardPreviewSection from "@/components/home/DashboardPreviewSection";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import TimelineSection from "@/components/home/TimelineSection";
-import JournalSection from "@/components/home/JournalSection";
+import JournalPromotion from "@/components/shared/JournalPromotion";
 import CTASection from "@/components/home/CTASection";
 
 const Index = () => {
@@ -18,7 +18,7 @@ const Index = () => {
         <DashboardPreviewSection />
         <FeaturesSection />
         <TimelineSection />
-        <JournalSection />
+        <JournalPromotion />
         <CTASection />
       </main>
       <Footer />

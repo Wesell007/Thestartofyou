@@ -7,6 +7,7 @@ import QuickActionsSection from "@/components/explore/QuickActionsSection";
 import GuidanceSection from "@/components/explore/GuidanceSection";
 import AIReassuranceSection from "@/components/explore/AIReassuranceSection";
 import BrandPositioningSection from "@/components/explore/BrandPositioningSection";
+import JournalPromotion from "@/components/shared/JournalPromotion";
 
 // Temporarily simulate logged-out state — replace with real auth context when available
 const isLoggedIn = false;
@@ -38,7 +39,10 @@ const Explore = () => {
         {/* 6. AI reassurance nudge */}
         <AIReassuranceSection />
 
-        {/* 7. Brand positioning / trust */}
+        {/* 7. Journal companion */}
+        <JournalPromotion contextCopy="Keep a thoughtful, private record of your journey with The Start of You journal." />
+
+        {/* 8. Brand positioning / trust */}
         <BrandPositioningSection />
       </main>
       <Footer />

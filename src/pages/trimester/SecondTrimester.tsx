@@ -10,7 +10,7 @@ import TrimesterWeeks from "@/components/trimester/TrimesterWeeks";
 import TrimesterQuestions from "@/components/trimester/TrimesterQuestions";
 import TrimesterEmotional from "@/components/trimester/TrimesterEmotional";
 import TrimesterAISupport from "@/components/trimester/TrimesterAISupport";
-import TrimesterCapture from "@/components/trimester/TrimesterCapture";
+import JournalPromotion from "@/components/shared/JournalPromotion";
 import TrimesterFinalCTA from "@/components/trimester/TrimesterFinalCTA";
 import { secondTrimester } from "@/data/trimesterData";
 
@@ -50,8 +50,8 @@ const SecondTrimester = () => {
         {/* 10. Emotional moment */}
         <TrimesterEmotional data={data} bg="bg-parchment-dark" />
 
-        {/* 11. Capture / reflection */}
-        <TrimesterCapture data={data} bg="bg-parchment" />
+        {/* 11. Journal companion */}
+        <JournalPromotion />
 
         {/* 12. Final CTA */}
         <TrimesterFinalCTA data={data} />

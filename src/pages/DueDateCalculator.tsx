@@ -1,9 +1,8 @@
-import { useState, useRef, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState, useRef } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
-import DueDateCalculatorResult from "@/components/shared/DueDateCalculatorResult";
 
 const DueDateCalculator = () => {
   const [searchParams] = useSearchParams();

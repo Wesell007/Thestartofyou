@@ -33,20 +33,16 @@ const PregnancyIcon = () => (
 
 const PostpartumIcon = () => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    {/* mother */}
     <circle cx="18" cy="11" r="5" stroke="hsl(var(--sage))" strokeWidth="1.3" fill="none"/>
     <path d="M10 22 Q10 18 14 17 L18 17 L22 17 Q26 18 26 22 L26 36 Q26 38 24 38 L12 38 Q10 38 10 36Z" stroke="hsl(var(--sage))" strokeWidth="1.3" fill="hsl(var(--sage-bg) / 0.4)"/>
-    {/* baby */}
     <circle cx="32" cy="28" r="6" stroke="hsl(var(--sage))" strokeWidth="1.2" fill="hsl(var(--sage-bg) / 0.6)"/>
     <path d="M28 27 Q30 25 32 26" stroke="hsl(var(--sage-muted))" strokeWidth="0.9" strokeLinecap="round"/>
-    {/* arm holding baby */}
     <path d="M26 28 Q29 24 32 22" stroke="hsl(var(--sage))" strokeWidth="1.1" strokeLinecap="round"/>
   </svg>
 );
 
 const FirstYearIcon = () => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    {/* growth plant */}
     <path d="M24 40 L24 20" stroke="hsl(var(--sage))" strokeWidth="1.3" strokeLinecap="round"/>
     <path d="M24 30 Q18 25 14 26 Q16 32 24 30" stroke="hsl(var(--sage))" strokeWidth="1.2" fill="hsl(var(--sage-bg) / 0.5)" strokeLinejoin="round"/>
     <path d="M24 24 Q30 19 34 20 Q32 26 24 24" stroke="hsl(var(--sage))" strokeWidth="1.2" fill="hsl(var(--sage-bg) / 0.5)" strokeLinejoin="round"/>
@@ -143,14 +139,14 @@ const StageCard = ({ icon, title, desc, href, bgColor = "bg-card", subtle = fals
   <Wrapper
     to={isInternal ? href : undefined}
     href={!isInternal ? href : undefined}
-    className={`group flex flex-col rounded-2xl p-6 md:p-7 border border-border/60 shadow-card-brand hover:shadow-soft hover:border-sage/40 transition-all duration-300 ${bgColor}`}
+    className={`group flex flex-col rounded-2xl p-7 md:p-8 border border-border/40 shadow-card-brand hover:shadow-soft hover:border-sage/30 hover:-translate-y-0.5 transition-all duration-300 ${bgColor}`}
     aria-label={`Explore ${title}`}
   >
-    <div className="mb-4">{icon}</div>
-    <h3 className={`font-serif mb-2 text-foreground leading-snug ${subtle ? "text-base" : "text-lg"}`}>
+    <div className="mb-5">{icon}</div>
+    <h3 className={`font-serif mb-2.5 text-foreground leading-snug ${subtle ? "text-base" : "text-lg md:text-xl"}`}>
       {title}
     </h3>
-    <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed flex-1 mb-5">
+    <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed flex-1 mb-6">
       {desc}
     </p>
     <span className="inline-flex items-center gap-1.5 font-sans text-xs font-medium text-sage group-hover:gap-2.5 transition-all">
@@ -166,19 +162,19 @@ const StageNavSection = () => {
   return (
     <>
       {/* ── Main stages ── */}
-      <section className="bg-parchment py-20 md:py-28">
+      <section className="bg-parchment py-24 md:py-32">
         <div className="container mx-auto px-6 md:px-10 max-w-5xl">
-          <div className="mb-12 md:mb-14">
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-3">
+          <div className="mb-14 md:mb-16">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-4">
               Start where you are
             </h2>
-            <p className="font-sans text-base font-light text-muted-foreground max-w-md">
+            <p className="font-sans text-base font-light text-muted-foreground max-w-md leading-relaxed">
               Choose your current stage and find the guidance that's right for you.
             </p>
           </div>
 
           {/* 5-card grid: 2+3 on desktop, stacked on mobile */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
             {mainStages.map((s) => (
               <StageCard key={s.title} {...s} bgColor={s.color} />
             ))}
@@ -187,18 +183,18 @@ const StageNavSection = () => {
       </section>
 
       {/* ── Additional support ── */}
-      <section className="bg-parchment pb-20 md:pb-28">
+      <section className="bg-parchment pb-24 md:pb-32">
         <div className="container mx-auto px-6 md:px-10 max-w-5xl">
-          <div className="mb-10">
-            <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-2">
+          <div className="mb-12">
+            <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-3">
               Additional support
             </h2>
-            <p className="font-sans text-sm font-light text-muted-foreground max-w-md">
+            <p className="font-sans text-sm font-light text-muted-foreground max-w-md leading-relaxed">
               Resources for specific moments and needs.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 max-w-2xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 max-w-2xl">
             {supportStages.map((s) => (
               <StageCard key={s.title} {...s} bgColor="bg-parchment-dark/70" subtle />
             ))}

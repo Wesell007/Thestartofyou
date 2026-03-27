@@ -17,8 +17,8 @@ const Navbar = () => {
   const isActive = (href: string) => location.pathname === href;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/90 backdrop-blur-sm border-b border-parchment-dark">
-        <div className="container mx-auto px-6 md:px-10 h-20 md:h-24 flex items-center justify-between max-w-6xl">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/90 backdrop-blur-md border-b border-parchment-dark/60">
+      <div className="container mx-auto px-6 md:px-10 h-20 md:h-24 flex items-center justify-between max-w-6xl">
         {/* Logo */}
         <Link to="/" className="flex items-center shrink-0">
           <img
@@ -29,7 +29,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+        <nav className="hidden md:flex items-center gap-10" aria-label="Main navigation">
           {navLinks.map(({ label, href }) => (
             <Link
               key={label}
@@ -47,7 +47,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center">
           <Link
             to="/explore"
-            className="font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-5 py-2 rounded-pill hover:bg-terracotta-hover transition-colors shadow-cta"
+            className="font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-6 py-2.5 rounded-pill hover:bg-terracotta-hover transition-all shadow-cta"
           >
             Start your journey
           </Link>
@@ -59,13 +59,13 @@ const Navbar = () => {
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
-          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
       {/* Mobile drawer */}
       {mobileOpen && (
-        <div className="md:hidden bg-parchment border-t border-parchment-dark px-6 py-6 flex flex-col gap-5">
+        <div className="md:hidden bg-parchment border-t border-parchment-dark/60 px-6 py-8 flex flex-col gap-6">
           {navLinks.map(({ label, href }) => (
             <Link
               key={label}
@@ -80,7 +80,7 @@ const Navbar = () => {
           ))}
           <Link
             to="/explore"
-            className="mt-2 text-center font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-5 py-3 rounded-pill hover:bg-terracotta-hover transition-colors"
+            className="mt-2 text-center font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-6 py-3.5 rounded-pill hover:bg-terracotta-hover transition-all"
             onClick={() => setMobileOpen(false)}
           >
             Start your journey

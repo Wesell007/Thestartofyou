@@ -25,10 +25,10 @@ const TimelineSection = () => {
   const getWeekPercent = (week: number) => ((week - 1) / 39) * 100;
 
   return (
-    <section className="bg-parchment py-24 md:py-32">
+    <section className="bg-parchment py-28 md:py-36">
       <div className="container mx-auto px-6 md:px-10 max-w-5xl">
-        <div className="text-center mb-16">
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-5">
+        <div className="text-center mb-18">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-6">
             Your Complete Pregnancy Timeline
           </h2>
           <p className="font-sans text-base font-light text-muted-foreground max-w-xl mx-auto leading-relaxed">
@@ -37,7 +37,7 @@ const TimelineSection = () => {
         </div>
 
         {/* Trimester labels */}
-        <div className="grid grid-cols-3 gap-1 mb-4 text-center">
+        <div className="grid grid-cols-3 gap-1 mb-5 text-center">
           {trimesterBoundaries.map((t) => (
             <p key={t.label} className="font-sans text-xs font-light tracking-[0.15em] text-muted-foreground uppercase">
               {t.label}
@@ -56,7 +56,7 @@ const TimelineSection = () => {
 
           {/* Connector line */}
           <div
-            className="absolute top-1/2 left-0 right-0 h-px bg-muted-foreground/25"
+            className="absolute top-1/2 left-0 right-0 h-px bg-muted-foreground/20"
             style={{ transform: "translateY(-50%)" }}
           />
 
@@ -79,16 +79,16 @@ const TimelineSection = () => {
               {m.current ? (
                 <>
                   {/* Tooltip */}
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-terracotta text-terracotta-foreground font-sans text-xs font-medium px-3 py-1 rounded-pill whitespace-nowrap">
+                  <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-terracotta text-terracotta-foreground font-sans text-xs font-medium px-3 py-1.5 rounded-pill whitespace-nowrap shadow-cta">
                     You are here — Week {currentWeek}
                   </div>
                   <div className="w-4 h-4 rounded-full border-2 border-terracotta bg-terracotta-foreground shadow-cta" />
                 </>
               ) : (
-                <div className="w-3 h-3 rounded-full border border-foreground/40 bg-card" />
+                <div className="w-3 h-3 rounded-full border border-foreground/30 bg-card" />
               )}
               {m.label && (
-                <p className="absolute top-6 left-1/2 -translate-x-1/2 font-sans text-[11px] font-light text-muted-foreground whitespace-nowrap">
+                <p className="absolute top-7 left-1/2 -translate-x-1/2 font-sans text-[11px] font-light text-muted-foreground whitespace-nowrap">
                   {m.label}
                 </p>
               )}
@@ -97,7 +97,7 @@ const TimelineSection = () => {
         </div>
 
         {/* Trimester sub labels */}
-        <div className="grid grid-cols-3 gap-1 mt-6 text-center">
+        <div className="grid grid-cols-3 gap-1 mt-7 text-center">
           {trimesterBoundaries.map((t) => (
             <p key={t.sub} className="font-serif italic text-sm text-muted-foreground">
               {t.sub}

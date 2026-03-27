@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
 const FirstYearFinalCTA = () => {
@@ -13,10 +14,13 @@ const FirstYearFinalCTA = () => {
         <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-10 max-w-lg mx-auto">
           Every stage brings something new. You don't have to figure it all out at once.
         </p>
-        <button className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">
-          <ArrowUpRight size={15} />
+        <Link
+          to="/first-year/0-3-months"
+          className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
+        >
           Start your journey
-        </button>
+          <ArrowUpRight size={15} />
+        </Link>
       </div>
     </section>
   );

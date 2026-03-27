@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { MessageCircle, PenLine, ArrowUpRight, ArrowDown, CheckCircle2 } from "lucide-react";
@@ -341,9 +341,10 @@ const StagePage = () => {
             </div>
             <div className="divide-y divide-border/50">
               {data.questions.map((item, i) => (
-                <div
+                <Link
                   key={i}
-                  className="group flex items-center justify-between py-6 cursor-pointer hover:pl-2 transition-all"
+                  to={`/ask?q=${encodeURIComponent(item.q)}`}
+                  className="group flex items-center justify-between py-6 hover:pl-2 transition-all"
                 >
                   <div className="flex flex-col gap-1">
                     <p className="font-serif text-xl text-foreground leading-snug group-hover:text-sage transition-colors">
@@ -354,7 +355,7 @@ const StagePage = () => {
                   <span className="text-muted-foreground/40 group-hover:text-sage transition-colors ml-6 shrink-0 font-serif text-2xl leading-none">
                     →
                   </span>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -374,20 +375,23 @@ const StagePage = () => {
                 <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-8">
                   If something feels unclear, you can ask about what you're experiencing right now.
                 </p>
-                <button className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">
+                <Link
+                  to="/ask"
+                  className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all w-fit"
+                >
                   <MessageCircle size={15} />
                   Ask now
-                </button>
+                </Link>
               </div>
               <div className="bg-card border border-border/50 rounded-lg p-7 shadow-card-brand space-y-4">
                 <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
                   Suggested questions
                 </p>
                 {data.aiPrompts.map((q, i) => (
-                  <div key={i} className="flex items-start gap-3 py-3 border-b border-border/40 last:border-0">
+                  <Link key={i} to={`/ask?q=${encodeURIComponent(q)}`} className="flex items-start gap-3 py-3 border-b border-border/40 last:border-0 hover:bg-parchment/50 transition-colors rounded px-2 -mx-2">
                     <MessageCircle size={14} className="text-sage mt-0.5 shrink-0" />
                     <p className="font-sans text-sm font-light text-foreground leading-relaxed">{q}</p>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>

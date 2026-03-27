@@ -1,12 +1,7 @@
+import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
 const pathways = [
-  {
-    label: "Month by Month",
-    title: "Month-by-month guide",
-    sub: "Guidance that moves with you, one month at a time",
-    href: "#",
-  },
   {
     label: "Previous Stage",
     title: "Postpartum hub",
@@ -17,13 +12,19 @@ const pathways = [
     label: "Support",
     title: "Support hub",
     sub: "For moments that feel uncertain, heavy, or hard",
-    href: "#",
+    href: "/support",
   },
   {
-    label: "Articles",
-    title: "Development guidance",
-    sub: "Answers to common questions about your baby's growth",
-    href: "#",
+    label: "Preparation",
+    title: "Preparing for your baby",
+    sub: "Practical guidance for what you need",
+    href: "/preparing-for-baby",
+  },
+  {
+    label: "Journey",
+    title: "Explore your journey",
+    sub: "Return to the full journey overview",
+    href: "/explore",
   },
 ];
 
@@ -42,20 +43,24 @@ const FirstYearPathways = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {pathways.map((p, i) => (
-            <div
+            <Link
               key={i}
-              className="group bg-card border border-border/50 rounded-lg p-7 shadow-card-brand flex flex-col gap-3 opacity-90"
+              to={p.href}
+              className="group bg-card border border-border/50 rounded-lg p-7 shadow-card-brand flex flex-col gap-3 hover:border-sage/40 hover:shadow-soft transition-all"
             >
               <span className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
                 {p.label}
               </span>
-              <h3 className="font-serif text-xl text-foreground">
+              <h3 className="font-serif text-xl text-foreground group-hover:text-sage transition-colors">
                 {p.title}
               </h3>
               <p className="font-serif italic text-sm text-foreground/60 leading-snug">
                 {p.sub}
               </p>
-            </div>
+              <span className="mt-auto pt-3 flex items-center gap-1 font-sans text-xs font-light text-sage opacity-0 group-hover:opacity-100 transition-opacity">
+                Explore <ArrowUpRight size={12} />
+              </span>
+            </Link>
           ))}
         </div>
       </div>

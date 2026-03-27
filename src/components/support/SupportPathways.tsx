@@ -9,16 +9,16 @@ const pathways = [
     href: "/explore",
   },
   {
-    label: "This week",
-    title: "Explore your current week",
+    label: "Pregnancy",
+    title: "Explore pregnancy",
     sub: "Guidance for where you are right now",
     href: "/pregnancy",
   },
   {
-    label: "Continue",
-    title: "Continue your journey",
-    sub: "Next steps, at your own pace",
-    href: "/explore",
+    label: "Postpartum",
+    title: "Postpartum guidance",
+    sub: "Recovery, adjustment, and early weeks",
+    href: "/postpartum",
   },
 ];
 

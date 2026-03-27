@@ -231,10 +231,10 @@ const DueDateCalculatorForm = ({ onResult, compact = false }: Props) => {
           onClick={handleCalculate}
           disabled={!canCalculate()}
           className={cn(
-            "w-full flex items-center justify-center gap-2 rounded-pill px-7 py-4 font-sans text-sm font-medium transition-all",
+            "w-full flex items-center justify-center gap-2 rounded-pill px-7 py-4 font-sans text-sm font-medium transition-all bg-terracotta text-terracotta-foreground shadow-cta",
             canCalculate()
-              ? "bg-terracotta text-terracotta-foreground shadow-cta hover:bg-terracotta-hover"
-              : "bg-muted text-muted-foreground cursor-not-allowed"
+              ? "hover:bg-terracotta-hover"
+              : "opacity-50 cursor-not-allowed"
           )}
         >
           <ArrowRight size={15} />

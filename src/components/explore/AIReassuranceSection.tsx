@@ -3,28 +3,29 @@ import { Link } from "react-router-dom";
 
 const AIReassuranceSection = () => {
   return (
-    <section className="bg-lavender-bg py-24 md:py-32 relative overflow-hidden">
-      {/* Soft corner marks */}
-      <div className="absolute top-8 left-8 w-20 h-20 border-t border-l border-lavender/40 pointer-events-none" />
-      <div className="absolute bottom-8 right-8 w-20 h-20 border-b border-r border-lavender/40 pointer-events-none" />
+    <section className="bg-lavender-bg section-spacing relative overflow-hidden">
+      {/* Subtle corner accents */}
+      <div className="absolute top-10 left-10 w-16 h-16 border-t border-l border-lavender/30 pointer-events-none rounded-tl-sm" />
+      <div className="absolute bottom-10 right-10 w-16 h-16 border-b border-r border-lavender/30 pointer-events-none rounded-br-sm" />
 
       <div className="container mx-auto px-6 md:px-10 max-w-2xl text-center relative z-10">
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-lavender-foreground mb-6 leading-snug">
+        <div className="editorial-rule mb-8" style={{ background: 'hsl(var(--lavender))' }} />
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-lavender-foreground mb-7 leading-snug">
           Not sure where to start?
         </h2>
-        <p className="font-sans text-base font-light text-lavender-foreground/70 mb-12 max-w-md mx-auto leading-relaxed">
+        <p className="font-sans text-base font-light text-lavender-foreground/65 mb-14 max-w-md mx-auto leading-relaxed">
           You can ask anything — whether it's about symptoms, timing, or what to expect next.
         </p>
 
         <Link
           to="/ask"
-          className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
+          className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
         >
           Ask now
           <ArrowRight size={14} />
         </Link>
 
-        <p className="font-sans text-xs font-light text-lavender-foreground/50 mt-6">
+        <p className="font-sans text-xs font-light text-lavender-foreground/40 mt-7">
           No sign-in required · Calm, private guidance
         </p>
       </div>

@@ -6,7 +6,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { addDays, differenceInDays, format } from "date-fns";
-import { ArrowRight, MessageCircle, BookOpen, ArrowUpRight } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
+import JournalPromotion from "@/components/shared/JournalPromotion";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -504,44 +505,8 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
         </div>
       </section>
 
-      {/* ── S9: Product integration ───────────────────────────────────────── */}
-      <section className="bg-lavender-section py-24 md:py-28">
-        <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
-            <Fade delay={0}>
-              <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">Your Story</p>
-              <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-6">Capture this moment</h2>
-              <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-4">
-                The early weeks can feel new, uncertain, and easy to forget later on.
-              </p>
-              <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-8">
-                Many parents choose to write things down as they go — thoughts, changes, and how this experience really feels.
-              </p>
-              <a href="/" className="inline-flex items-center gap-2 border border-foreground/20 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all">
-                Explore the journal
-                <ArrowUpRight size={14} />
-              </a>
-            </Fade>
-
-            <Fade delay={120}>
-              <div className="flex flex-col gap-4">
-                {[
-                  `Week ${result.currentWeek} — The moment I found out. Things start to feel very real.`,
-                  "Week 12 — The first scan. I want to remember how this felt.",
-                  "Week 20 — Halfway there. Something has shifted.",
-                ].map((entry, i) => (
-                  <div key={i} className="bg-card border border-border/40 rounded-xl px-6 py-4 shadow-card-brand">
-                    <div className="flex items-start gap-3">
-                      <BookOpen size={14} className="text-sage mt-0.5 shrink-0" />
-                      <p className="font-serif italic text-base text-foreground/70 leading-relaxed">{entry}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Fade>
-          </div>
-        </div>
-      </section>
+      {/* ── S9: Journal companion ───────────────────────────────────────── */}
+      <JournalPromotion />
 
       {/* ── S10: Quick links + trust ──────────────────────────────────────── */}
       <section className="bg-parchment py-20 md:py-24">

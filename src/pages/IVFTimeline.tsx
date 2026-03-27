@@ -1,0 +1,54 @@
+import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import IVFTimelineResult from "@/components/ivf/IVFTimelineResult";
+
+const IVFTimeline = () => {
+  const [searchParams] = useSearchParams();
+  const [transferDate, setTransferDate] = useState<Date | null>(null);
+  const [transferType, setTransferType] = useState<"5day" | "3day">("5day");
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const dateParam = searchParams.get("date");
+    const typeParam = searchParams.get("type");
+    if (dateParam) {
+      const ts = parseInt(dateParam, 10);
+      if (!isNaN(ts)) setTransferDate(new Date(ts));
+    }
+    if (typeParam === "3day" || typeParam === "5day") {
+      setTransferType(typeParam);
+    }
+  }, [searchParams]);
+
+  if (!transferDate) {
+    return (
+      <div className="min-h-screen bg-parchment">
+        <Navbar />
+        <section className="pt-28 pb-32 md:pt-36">
+          <div className="container mx-auto px-6 md:px-10 max-w-xl text-center">
+            <p className="font-sans text-sm font-light text-muted-foreground/60 leading-relaxed">
+              No transfer date provided. Please use the calculator on the{" "}
+              <a href="/ivf" className="text-sage underline hover:text-sage-muted transition-colors">IVF hub</a>{" "}
+              to track your timeline.
+            </p>
+          </div>
+        </section>
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-parchment">
+      <Navbar />
+      <div ref={resultsRef}>
+        <IVFTimelineResult transferDate={transferDate} transferType={transferType} />
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default IVFTimeline;

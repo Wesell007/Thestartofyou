@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { CalendarIcon, MessageCircle, ArrowDown, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -11,17 +12,16 @@ const suggestedPrompts = [
   "Is this normal at this stage?",
 ];
 
-interface IVFHeroProps {
-  onCalculate: (date: Date, type: "5day" | "3day") => void;
-}
-
-const IVFHero = ({ onCalculate }: IVFHeroProps) => {
+const IVFHero = () => {
+  const navigate = useNavigate();
   const [transferDate, setTransferDate] = useState<Date>();
   const [transferType, setTransferType] = useState<"5day" | "3day">("5day");
   const [open, setOpen] = useState(false);
 
   const handleTrack = () => {
-    if (transferDate) onCalculate(transferDate, transferType);
+    if (transferDate) {
+      navigate(`/ivf-timeline?date=${transferDate.getTime()}&type=${transferType}`);
+    }
   };
 
   return (
@@ -45,7 +45,7 @@ const IVFHero = ({ onCalculate }: IVFHeroProps) => {
               Understand where you are, what's happening, and what to expect next.
             </p>
 
-            {/* IVF Timeline Calculator — sits where the form sits on homepage */}
+            {/* IVF Timeline Calculator */}
             <div className="w-full animate-fade-up [animation-delay:0.2s] space-y-5">
               <div>
                 <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-3 text-left">
@@ -116,7 +116,7 @@ const IVFHero = ({ onCalculate }: IVFHeroProps) => {
             </div>
           </div>
 
-          {/* Right: suggested prompts as visual companion */}
+          {/* Right: suggested prompts */}
           <div className="flex justify-center md:justify-end animate-fade-up [animation-delay:0.15s]">
             <div className="w-full max-w-sm md:max-w-md space-y-4">
               <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-5 text-left">

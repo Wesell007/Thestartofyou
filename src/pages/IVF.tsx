@@ -1,8 +1,6 @@
-import { useState, useRef } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import IVFHero from "@/components/ivf/IVFHero";
-import IVFTimelineResult from "@/components/ivf/IVFTimelineResult";
 import IVFWhatThisIs from "@/components/ivf/IVFWhatThisIs";
 import IVFStages from "@/components/ivf/IVFStages";
 import IVFFocus from "@/components/ivf/IVFFocus";
@@ -18,31 +16,12 @@ import IVFPathways from "@/components/ivf/IVFPathways";
 import IVFFinalCTA from "@/components/ivf/IVFFinalCTA";
 
 const IVF = () => {
-  const [transferDate, setTransferDate] = useState<Date | null>(null);
-  const [transferType, setTransferType] = useState<"5day" | "3day">("5day");
-  const resultRef = useRef<HTMLDivElement>(null);
-
-  const handleCalculate = (date: Date, type: "5day" | "3day") => {
-    setTransferDate(date);
-    setTransferType(type);
-    setTimeout(() => {
-      resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 150);
-  };
-
   return (
     <div className="min-h-screen font-sans">
       <Navbar />
       <main>
-        {/* 1. Hero — tool-first */}
-        <IVFHero onCalculate={handleCalculate} />
-
-        {/* Timeline result — appears after calculation */}
-        {transferDate && (
-          <div ref={resultRef}>
-            <IVFTimelineResult transferDate={transferDate} transferType={transferType} />
-          </div>
-        )}
+        {/* 1. Hero — tool-first, navigates to /ivf-timeline on calculate */}
+        <IVFHero />
 
         {/* 2. What this journey is */}
         <IVFWhatThisIs />
@@ -53,7 +32,7 @@ const IVF = () => {
         {/* 4. What to focus on */}
         <IVFFocus />
 
-        {/* 5. What to expect — body, care, emotional, waiting */}
+        {/* 5. What to expect */}
         <IVFWhatToExpect />
 
         {/* 6. What makes this different */}

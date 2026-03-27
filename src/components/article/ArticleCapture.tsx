@@ -23,7 +23,7 @@ const ArticleCapture = ({ data }: Props) => {
               {data.captureIntro}
             </p>
             <button className="flex items-center gap-2 border border-foreground/20 text-foreground rounded-pill px-6 py-3 font-sans text-sm font-light hover:bg-parchment-dark transition-all">
-              Explore The Start of You
+              Explore the journal
               <ArrowUpRight size={14} />
             </button>
           </div>

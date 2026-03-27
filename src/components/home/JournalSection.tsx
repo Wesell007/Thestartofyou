@@ -57,7 +57,7 @@ const JournalSection = () => {
                 href="#"
                 className="flex items-center justify-between bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
               >
-                <span>Learn about the journal</span>
+                <span>Explore the journal</span>
                 <ArrowRight size={16} />
               </a>
               <p className="font-sans text-xs font-light text-muted-foreground pl-2">

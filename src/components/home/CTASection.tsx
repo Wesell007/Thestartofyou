@@ -23,7 +23,7 @@ const CTASection = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
           <button className="w-full sm:flex-1 bg-terracotta text-terracotta-foreground rounded-pill py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">
-            Create Your Pregnancy Profile
+            Start your journey
           </button>
           <button className="w-12 h-12 rounded-full bg-lavender flex items-center justify-center shrink-0 hover:bg-lavender/80 transition-colors">
             <ArrowUpRight size={18} className="text-lavender-foreground" />

@@ -19,7 +19,7 @@ const AIReassuranceSection = () => {
           href="#"
           className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
         >
-          Ask your question
+          Ask now
           <ArrowRight size={14} />
         </a>
 

@@ -52,7 +52,7 @@ const Product = () => {
                     href="#"
                     className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
                   >
-                    Get The Start of You
+                    Get the journal
                     <ExternalLink size={14} />
                   </a>
                   <span className="font-sans text-xs font-light text-muted-foreground">
@@ -140,7 +140,7 @@ const Product = () => {
               to="/explore"
               className="inline-flex items-center gap-2 font-sans text-sm font-light text-muted-foreground border-b border-border hover:text-foreground hover:border-foreground transition-all pb-0.5"
             >
-              Start your journey
+              Explore your journey
               <ArrowRight size={14} />
             </Link>
           </div>
@@ -232,7 +232,7 @@ const Product = () => {
                 href="#"
                 className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
               >
-                Get The Start of You
+                Get the journal
                 <ExternalLink size={14} />
               </a>
               <span className="font-sans text-xs font-light text-muted-foreground">
@@ -259,7 +259,7 @@ const Product = () => {
                 href="#"
                 className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
               >
-                Get The Start of You
+                Get the journal
                 <ExternalLink size={14} />
               </a>
               <span className="font-sans text-xs font-light text-muted-foreground">

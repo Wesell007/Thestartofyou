@@ -19,7 +19,7 @@ const ArticleJourneyCTA = ({ data }: Props) => {
             Continue
           </p>
           <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
-            Follow your journey
+            Continue your journey
           </h2>
           <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-md mx-auto mb-10">
             Get week-by-week guidance tailored to your stage of pregnancy.

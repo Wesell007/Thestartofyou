@@ -14,7 +14,7 @@ import ArticleAction from "@/components/article/ArticleAction";
 import ArticleWhatNext from "@/components/article/ArticleWhatNext";
 import ArticleRelatedStage from "@/components/article/ArticleRelatedStage";
 import ArticleAISupport from "@/components/article/ArticleAISupport";
-import ArticleCapture from "@/components/article/ArticleCapture";
+import JournalPromotion from "@/components/shared/JournalPromotion";
 import ArticleJourneyCTA from "@/components/article/ArticleJourneyCTA";
 
 const ArticlePage = () => {
@@ -40,7 +40,7 @@ const ArticlePage = () => {
       <ArticleWhatNext data={data} />
       <ArticleRelatedStage data={data} />
       <ArticleAISupport data={data} />
-      <ArticleCapture data={data} />
+      <JournalPromotion contextCopy="Keep a record of what this stage feels like, alongside the guidance you're reading." />
       <ArticleJourneyCTA data={data} />
       <Footer />
     </div>

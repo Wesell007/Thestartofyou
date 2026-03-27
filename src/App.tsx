@@ -17,6 +17,7 @@ import IVF from "./pages/IVF.tsx";
 import Postpartum from "./pages/Postpartum.tsx";
 import FirstYear from "./pages/FirstYear.tsx";
 import PreparingForBaby from "./pages/PreparingForBaby.tsx";
+import Support from "./pages/Support.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/postpartum" element={<Postpartum />} />
           <Route path="/first-year" element={<FirstYear />} />
           <Route path="/preparing-for-baby" element={<PreparingForBaby />} />
+          <Route path="/support" element={<Support />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

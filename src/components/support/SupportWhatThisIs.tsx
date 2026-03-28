@@ -2,8 +2,8 @@ import supportJourneyImg from "@/assets/support-journey.jpg";
 
 const SupportWhatThisIs = () => {
   return (
-    <section className="bg-parchment py-28 md:py-36">
-      <div className="container mx-auto px-6 md:px-10 max-w-3xl">
+    <section className="bg-parchment-dark py-24 md:py-32">
+      <div className="container mx-auto px-6 md:px-10 max-w-4xl">
         {/* Feature image */}
         <div className="mb-14 rounded-2xl overflow-hidden border border-border/40 shadow-card-brand">
           <img
@@ -19,22 +19,24 @@ const SupportWhatThisIs = () => {
           </p>
         </div>
 
-        <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
-          This space
-        </p>
-        <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-8 max-w-lg">
-          What this space is for
-        </h2>
-        <div className="space-y-5">
-          <p className="font-sans text-base font-light text-muted-foreground leading-relaxed">
-            Sometimes things don't feel quite right — physically, emotionally, or both.
+        <div className="max-w-2xl">
+          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+            About This Space
           </p>
-          <p className="font-sans text-base font-light text-muted-foreground leading-relaxed">
-            You might not know exactly what you're looking for, only that something feels off.
-          </p>
-          <p className="font-sans text-base font-light text-muted-foreground leading-relaxed">
-            This space is here to help you make sense of that, and guide you gently towards what to do next.
-          </p>
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-8 leading-tight">
+            What this space is for
+          </h2>
+          <div className="space-y-5 font-sans text-base font-light text-muted-foreground leading-relaxed">
+            <p>
+              Sometimes things don't feel quite right — physically, emotionally, or both.
+            </p>
+            <p>
+              You might not know exactly what you're looking for, only that something feels off.
+            </p>
+            <p>
+              This space is here to help you make sense of that, and guide you gently towards what to do next.
+            </p>
+          </div>
         </div>
       </div>
     </section>

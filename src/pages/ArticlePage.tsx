@@ -3,7 +3,6 @@ import { getArticle } from "@/data/articleData";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ArticleHero from "@/components/article/ArticleHero";
-import ArticleQuickAnswer from "@/components/article/ArticleQuickAnswer";
 import ArticleHowThisFeels from "@/components/article/ArticleHowThisFeels";
 import ArticleWhatHappening from "@/components/article/ArticleWhatHappening";
 import ArticleTiming from "@/components/article/ArticleTiming";
@@ -28,19 +27,31 @@ const ArticlePage = () => {
   return (
     <div className="min-h-screen bg-parchment">
       <Navbar />
+      {/* Hero now includes Quick Answer */}
       <ArticleHero data={data} />
-      <ArticleQuickAnswer data={data} />
+      {/* Emotional bridge */}
       <ArticleHowThisFeels data={data} />
+      {/* Core explanation */}
       <ArticleWhatHappening data={data} />
+      {/* Timing */}
       <ArticleTiming data={data} />
+      {/* Real experience */}
       <ArticleRealExperience data={data} />
+      {/* Interpretation — reassurance moment */}
       <ArticleInterpretation data={data} />
+      {/* Safety & support */}
       <ArticleNormal data={data} />
+      {/* Practical guidance */}
       <ArticleAction data={data} />
+      {/* What happens next */}
       <ArticleWhatNext data={data} />
+      {/* Stage navigation */}
       <ArticleRelatedStage data={data} />
+      {/* AI support */}
       <ArticleAISupport data={data} />
+      {/* Journal */}
       <JournalPromotion contextCopy="Keep a record of what this stage feels like, alongside the guidance you're reading." />
+      {/* Continue journey + related articles */}
       <ArticleJourneyCTA data={data} />
       <Footer />
     </div>

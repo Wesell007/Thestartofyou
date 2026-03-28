@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import trimesterFirstImg from "@/assets/trimester-first.jpg";
+import trimesterSecondImg from "@/assets/trimester-second.jpg";
+import trimesterThirdImg from "@/assets/trimester-third.jpg";
 
 const trimesters = [
   {
@@ -9,6 +12,7 @@ const trimesters = [
     start: 1,
     end: 12,
     color: "bg-sage-bg",
+    image: trimesterFirstImg,
   },
   {
     label: "Second Trimester",
@@ -18,6 +22,7 @@ const trimesters = [
     start: 13,
     end: 27,
     color: "bg-parchment-dark",
+    image: trimesterSecondImg,
   },
   {
     label: "Third Trimester",
@@ -27,6 +32,7 @@ const trimesters = [
     start: 28,
     end: 40,
     color: "bg-lavender-section",
+    image: trimesterThirdImg,
   },
 ];
 
@@ -133,23 +139,35 @@ const PregnancyTimeline = () => {
             <Link
               key={t.label}
               to={t.href}
-              className="group bg-card border border-border/50 rounded-lg p-7 shadow-card-brand flex flex-col gap-3 hover:border-sage/40 hover:shadow-soft transition-all"
+              className="group bg-card border border-border/50 rounded-lg overflow-hidden shadow-card-brand flex flex-col hover:border-sage/40 hover:shadow-soft transition-all"
             >
-              <span className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="font-serif text-xl text-foreground group-hover:text-sage transition-colors">
-                {t.label}
-              </h3>
-              <p className="font-sans text-xs font-light text-muted-foreground tracking-wide">
-                {t.range}
-              </p>
-              <p className="font-serif italic text-base text-foreground/70 leading-snug mt-1">
-                {t.sub}
-              </p>
-              <span className="mt-auto pt-3 font-sans text-xs font-light text-sage opacity-0 group-hover:opacity-100 transition-opacity">
-                Explore this stage →
-              </span>
+              <div className="h-40 overflow-hidden">
+                <img
+                  src={t.image}
+                  alt={t.label}
+                  loading="lazy"
+                  width={640}
+                  height={400}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-7 flex flex-col gap-3 flex-1">
+                <span className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="font-serif text-xl text-foreground group-hover:text-sage transition-colors">
+                  {t.label}
+                </h3>
+                <p className="font-sans text-xs font-light text-muted-foreground tracking-wide">
+                  {t.range}
+                </p>
+                <p className="font-serif italic text-base text-foreground/70 leading-snug mt-1">
+                  {t.sub}
+                </p>
+                <span className="mt-auto pt-3 font-sans text-xs font-light text-sage opacity-0 group-hover:opacity-100 transition-opacity">
+                  Explore this stage →
+                </span>
+              </div>
             </Link>
           ))}
         </div>

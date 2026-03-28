@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import ppEarlyDaysImg from "@/assets/postpartum-stage-early-days.jpg";
+import ppEarlyWeeksImg from "@/assets/postpartum-stage-early-weeks.jpg";
+import ppAdjustmentImg from "@/assets/postpartum-stage-adjustment.jpg";
 
 const stages = [
   {
@@ -7,6 +10,7 @@ const stages = [
     range: "Week 1–2",
     sub: "Recovery, feeding, sleep disruption, and immediate adjustment",
     href: "/postpartum/early-days",
+    image: ppEarlyDaysImg,
   },
   {
     num: "02",
@@ -14,6 +18,7 @@ const stages = [
     range: "Week 3–6",
     sub: "Gradual healing, emotional shifts, and small routines beginning to form",
     href: "/postpartum/early-weeks",
+    image: ppEarlyWeeksImg,
   },
   {
     num: "03",
@@ -21,6 +26,7 @@ const stages = [
     range: "Week 7–12",
     sub: "Building rhythm, confidence, and adapting to a new normal",
     href: "/postpartum/ongoing-adjustment",
+    image: ppAdjustmentImg,
   },
 ];
 
@@ -42,22 +48,34 @@ const PostpartumStages = () => {
             <Link
               key={stage.num}
               to={stage.href}
-              className="group bg-card border border-border/50 rounded-lg p-8 shadow-card-brand flex flex-col gap-4 hover:border-sage/40 hover:shadow-soft transition-all"
+              className="group bg-card border border-border/50 rounded-lg overflow-hidden shadow-card-brand flex flex-col hover:border-sage/40 hover:shadow-soft transition-all"
             >
-              <span className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
-                {stage.num}
-              </span>
-              <div>
-                <h3 className="font-serif text-xl text-foreground leading-snug mb-1 group-hover:text-sage transition-colors">
-                  {stage.title}
-                </h3>
-                <p className="font-sans text-xs font-light tracking-[0.1em] text-sage-muted">
-                  {stage.range}
+              <div className="h-40 overflow-hidden">
+                <img
+                  src={stage.image}
+                  alt={stage.title}
+                  loading="lazy"
+                  width={640}
+                  height={512}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-7 flex flex-col gap-4 flex-1">
+                <span className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
+                  {stage.num}
+                </span>
+                <div>
+                  <h3 className="font-serif text-xl text-foreground leading-snug mb-1 group-hover:text-sage transition-colors">
+                    {stage.title}
+                  </h3>
+                  <p className="font-sans text-xs font-light tracking-[0.1em] text-sage-muted">
+                    {stage.range}
+                  </p>
+                </div>
+                <p className="font-serif italic text-base text-foreground/60 leading-relaxed">
+                  {stage.sub}
                 </p>
               </div>
-              <p className="font-serif italic text-base text-foreground/60 leading-relaxed">
-                {stage.sub}
-              </p>
             </Link>
           ))}
         </div>

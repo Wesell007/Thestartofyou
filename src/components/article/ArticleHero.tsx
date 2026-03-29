@@ -17,7 +17,7 @@ const ArticleHero = ({ data }: Props) => {
           aria-hidden="true"
           width={768}
           height={896}
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-top"
         />
         {/* Left fade into parchment */}
         <div className="absolute inset-0 bg-gradient-to-r from-parchment via-parchment/80 to-transparent" />

@@ -1,16 +1,17 @@
-import { ArrowUpRight, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import AISearchBar from "@/components/shared/AISearchBar";
 
 const SupportAISupport = () => {
   return (
-    <section id="ai-support" className="bg-parchment py-28 md:py-36">
-      <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-        <div className="bg-card border border-border/50 rounded-lg p-10 md:p-14 shadow-card-brand">
+    <section id="ai-support" className="relative bg-parchment section-spacing overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] glow-lavender" />
+
+      <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
+        <div className="card-elevated p-10 md:p-14">
           <div className="flex items-center gap-3 mb-6">
             <MessageCircle size={20} className="text-sage" />
-            <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted">
-              AI Support
-            </p>
+            <p className="stage-label">AI Support</p>
           </div>
 
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-4 leading-snug max-w-md">

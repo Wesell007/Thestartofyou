@@ -5,6 +5,7 @@ const PostpartumFinalCTA = () => {
   return (
     <section className="bg-parchment-dark py-24 md:py-32 frame-corner">
       <div className="container mx-auto px-6 md:px-10 max-w-3xl text-center">
+        <div className="editorial-rule mb-10" />
         <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-6">
           Begin
         </p>

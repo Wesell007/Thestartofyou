@@ -206,4 +206,27 @@
     background: linear-gradient(to top, hsl(var(--parchment)) 0%, transparent 100%);
     @apply absolute bottom-0 left-0 right-0 h-20 pointer-events-none;
   }
+
+  /* Corner frame accents for CTA / feature sections */
+  .frame-corner {
+    @apply relative;
+  }
+  .frame-corner::before,
+  .frame-corner::after {
+    content: '';
+    @apply absolute w-20 h-20 pointer-events-none;
+  }
+  .frame-corner::before {
+    @apply top-10 left-10 border-t border-l;
+    border-color: hsl(var(--sage-light) / 0.4);
+  }
+  .frame-corner::after {
+    @apply bottom-10 right-10 border-b border-r;
+    border-color: hsl(var(--sage-light) / 0.4);
+  }
+
+  /* Elevated card — backdrop blur with refined border */
+  .card-elevated {
+    @apply bg-card/90 backdrop-blur-sm border border-border/40 rounded-2xl shadow-elevated;
+  }
 }

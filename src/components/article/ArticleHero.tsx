@@ -1,18 +1,30 @@
 import { Link } from "react-router-dom";
 import type { ArticleData } from "@/data/articleData";
-import articleHeroImage from "@/assets/article-hero-lifestyle.jpg";
+import heroNausea from "@/assets/article-hero-nausea.jpg";
+import heroFatigue from "@/assets/article-hero-fatigue.jpg";
+import heroImplantation from "@/assets/article-hero-implantation.jpg";
+import heroSymptomsStopping from "@/assets/article-hero-symptoms-stopping.jpg";
+
+const heroImageMap: Record<string, string> = {
+  "nausea-in-early-pregnancy": heroNausea,
+  "fatigue-in-early-pregnancy": heroFatigue,
+  "implantation-bleeding": heroImplantation,
+  "symptoms-stopping-early-pregnancy": heroSymptomsStopping,
+};
 
 interface Props {
   data: ArticleData;
 }
 
 const ArticleHero = ({ data }: Props) => {
+  const heroImage = heroImageMap[data.slug] || heroFatigue;
+
   return (
     <section className="relative bg-parchment pt-28 pb-0 md:pt-36 overflow-hidden">
       {/* Background lifestyle image — fades naturally into the page */}
       <div className="absolute top-0 right-0 w-[55%] h-full hidden md:block pointer-events-none select-none">
         <img
-          src={articleHeroImage}
+          src={heroImage}
           alt=""
           aria-hidden="true"
           width={768}

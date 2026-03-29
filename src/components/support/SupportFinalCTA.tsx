@@ -3,8 +3,9 @@ import { ArrowUpRight } from "lucide-react";
 
 const SupportFinalCTA = () => {
   return (
-    <section className="bg-parchment-dark py-28 md:py-36 frame-corner">
+    <section className="bg-parchment py-28 md:py-36 frame-corner">
       <div className="container mx-auto px-6 md:px-10 max-w-3xl text-center">
+        <div className="editorial-rule mb-10" />
         <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-6">
           Continue
         </p>

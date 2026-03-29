@@ -4,6 +4,9 @@ import supportIllustration from "@/assets/support-illustration.png";
 const SupportHero = () => {
   return (
     <section className="relative bg-parchment pt-36 pb-32 md:pt-44 md:pb-40 overflow-hidden">
+      {/* Radial glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-sage-bg/15 blur-3xl pointer-events-none" />
+
       {/* Illustration accent */}
       <img
         src={supportIllustration}
@@ -18,13 +21,13 @@ const SupportHero = () => {
         <p className="font-sans text-[11px] font-light tracking-[0.3em] uppercase text-sage-muted mb-7">
           Support
         </p>
-        <h1 className="font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-foreground mb-8">
+        <h1 className="font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-foreground mb-8 animate-fade-up">
           Support, when you need it
         </h1>
-        <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed max-w-xl mx-auto mb-14">
+        <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed max-w-xl mx-auto mb-14 animate-fade-up [animation-delay:0.1s]">
           If something feels uncertain, overwhelming, or different, you're not alone — this space is here to help you understand what's going on.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up [animation-delay:0.2s]">
           <a
             href="#ai-support"
             className="flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
@@ -40,6 +43,8 @@ const SupportHero = () => {
           </a>
         </div>
       </div>
+
+      <div className="section-fade-bottom" />
     </section>
   );
 };

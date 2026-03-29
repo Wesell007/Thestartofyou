@@ -11,7 +11,7 @@ const PreparingHero = () => {
         <p className="font-sans text-[11px] font-light tracking-[0.3em] uppercase text-sage-muted mb-7">
           Preparing
         </p>
-        <h1 className="font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-foreground mb-8 animate-fade-up">
+        <h1 className="font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-foreground mb-8 animate-fade-up leading-[1.1]">
           Preparing for <span className="italic">your baby</span>
         </h1>
         <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed mb-14 max-w-xl mx-auto animate-fade-up [animation-delay:0.1s]">

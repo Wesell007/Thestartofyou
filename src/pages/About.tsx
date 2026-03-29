@@ -31,12 +31,11 @@ const About = () => {
       <Navbar />
       <main>
         {/* ── HERO ── */}
-        <section className="bg-parchment pt-28 pb-20 md:pt-36 md:pb-28">
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl text-center">
-            <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-4">
-              About
-            </p>
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-foreground leading-[1.1] mb-6 animate-fade-up">
+        <section className="relative bg-parchment pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden">
+          <div className="absolute top-1/3 right-0 w-[600px] h-[400px] glow-sage" />
+          <div className="container mx-auto px-6 md:px-10 max-w-3xl text-center relative z-10">
+            <p className="stage-label mb-5 animate-fade-up">About</p>
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-foreground leading-[1.1] mb-6 animate-fade-up [animation-delay:0.05s]">
               The start of something different
             </h1>
             <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed max-w-xl mx-auto animate-fade-up [animation-delay:0.1s]">
@@ -46,8 +45,10 @@ const About = () => {
         </section>
 
         {/* ── THE PROBLEM ── */}
-        <section className="bg-card py-20 md:py-28 border-t border-border/40">
+        <section className="relative bg-card section-spacing-sm overflow-hidden">
+          <div className="section-divider absolute top-0 left-0 right-0" />
           <div className="container mx-auto px-6 md:px-10 max-w-2xl">
+            <div className="editorial-rule mb-8" />
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-6 text-center leading-snug">
               Most journeys don't feel guided
             </h2>
@@ -76,8 +77,10 @@ const About = () => {
         </section>
 
         {/* ── OUR APPROACH ── */}
-        <section className="bg-parchment py-20 md:py-28 border-t border-border/40">
+        <section className="relative bg-parchment section-spacing-sm overflow-hidden">
+          <div className="section-divider absolute top-0 left-0 right-0" />
           <div className="container mx-auto px-6 md:px-10 max-w-2xl text-center">
+            <div className="editorial-rule mb-8" />
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-6 leading-snug">
               So we built something different
             </h2>
@@ -108,8 +111,10 @@ const About = () => {
         </section>
 
         {/* ── HOW IT WORKS ── */}
-        <section className="bg-card py-20 md:py-28 border-t border-border/40">
+        <section className="relative bg-card section-spacing-sm overflow-hidden">
+          <div className="section-divider absolute top-0 left-0 right-0" />
           <div className="container mx-auto px-6 md:px-10 max-w-2xl text-center">
+            <div className="editorial-rule mb-8" />
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-10 leading-snug">
               A journey that grows with you
             </h2>
@@ -123,9 +128,7 @@ const About = () => {
                 </span>
               ))}
             </div>
-            <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage mb-3">
-              Supporting layers
-            </p>
+            <p className="stage-label mb-3">Supporting layers</p>
             <div className="flex flex-wrap justify-center gap-3 mb-10">
               {supportingLayers.map((s) => (
                 <span
@@ -143,14 +146,16 @@ const About = () => {
         </section>
 
         {/* ── WHAT MAKES THIS DIFFERENT ── */}
-        <section className="bg-parchment py-20 md:py-28 border-t border-border/40">
+        <section className="relative bg-parchment section-spacing-sm overflow-hidden">
+          <div className="section-divider absolute top-0 left-0 right-0" />
           <div className="container mx-auto px-6 md:px-10 max-w-3xl">
+            <div className="editorial-rule mb-8" />
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-12 text-center leading-snug">
               Designed differently
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
               {differentiators.map((d) => (
-                <div key={d.title}>
+                <div key={d.title} className="card-elevated p-6 md:p-7">
                   <h3 className="font-serif text-lg text-foreground mb-2">{d.title}</h3>
                   <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
                     {d.desc}
@@ -170,8 +175,11 @@ const About = () => {
         </section>
 
         {/* ── AI + PERSONALISATION ── */}
-        <section className="bg-card py-20 md:py-28 border-t border-border/40">
-          <div className="container mx-auto px-6 md:px-10 max-w-2xl text-center">
+        <section className="relative bg-card section-spacing-sm overflow-hidden">
+          <div className="section-divider absolute top-0 left-0 right-0" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] glow-lavender" />
+          <div className="container mx-auto px-6 md:px-10 max-w-2xl text-center relative z-10">
+            <div className="editorial-rule mb-8" />
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-6 leading-snug">
               Support that adapts to you
             </h2>
@@ -187,39 +195,11 @@ const About = () => {
           </div>
         </section>
 
-        {/* ── TRUST ── */}
-        <section className="bg-parchment py-16 md:py-20 border-t border-border/40">
-          <div className="container mx-auto px-6 md:px-10 max-w-2xl text-center">
-            <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-5 leading-snug">
-              Built with care and clarity
-            </h2>
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-lg mx-auto mb-3">
-              Our content is designed to be clear, supportive, and grounded in reliable information. Where relevant, guidance is reviewed by qualified healthcare professionals.
-            </p>
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-md mx-auto">
-              This platform is here to support you — not replace professional medical advice.
-            </p>
-          </div>
-        </section>
-
-        {/* ── BUILT WITH CARE ── */}
-        <section className="bg-card py-16 md:py-20 border-t border-border/40">
-          <div className="container mx-auto px-6 md:px-10 max-w-2xl text-center">
-            <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-5 leading-snug">
-              Built with care
-            </h2>
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-lg mx-auto mb-3">
-              This platform was created with a clear goal — to make this journey feel more guided, less overwhelming, and easier to navigate.
-            </p>
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-md mx-auto">
-              It brings together real experiences, thoughtful design, and reliable guidance to support you at every stage.
-            </p>
-          </div>
-        </section>
-
         {/* ── BRAND MISSION ── */}
-        <section className="bg-parchment py-20 md:py-28 border-t border-border/40">
+        <section className="relative bg-parchment section-spacing-sm overflow-hidden">
+          <div className="section-divider absolute top-0 left-0 right-0" />
           <div className="container mx-auto px-6 md:px-10 max-w-2xl text-center">
+            <div className="editorial-rule mb-8" />
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-6 leading-snug">
               Why this exists
             </h2>
@@ -229,12 +209,14 @@ const About = () => {
             <p className="font-sans text-sm font-light text-muted-foreground mb-4">
               We believe support should feel:
             </p>
-            <div className="flex justify-center gap-6">
-              {missionValues.map((v) => (
-                <span key={v} className="font-serif text-lg italic text-foreground/80">
-                  {v}
-                </span>
-              ))}
+            <div className="flanking-lines mb-4">
+              <div className="flex gap-6">
+                {missionValues.map((v) => (
+                  <span key={v} className="font-serif text-lg italic text-foreground/80">
+                    {v}
+                  </span>
+                ))}
+              </div>
             </div>
             <p className="font-sans text-xs font-light text-muted-foreground mt-4">
               At every stage.
@@ -243,8 +225,10 @@ const About = () => {
         </section>
 
         {/* ── FINAL CTA ── */}
-        <section className="bg-card py-20 md:py-28 border-t border-border/40">
+        <section className="page-ending frame-corner overflow-hidden">
           <div className="container mx-auto px-6 md:px-10 max-w-xl text-center">
+            <div className="editorial-rule mb-10" />
+            <p className="stage-label mb-6">Your Journey</p>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-8 leading-snug">
               Start your journey
             </h2>

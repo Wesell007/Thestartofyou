@@ -14,10 +14,11 @@ const DueDateCalculator = () => {
     <div className="min-h-screen bg-parchment">
       <Navbar />
 
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="pt-28 pb-16 md:pt-36 md:pb-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl text-center">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">Tools</p>
+      {/* Hero */}
+      <section className="relative pt-28 pb-16 md:pt-36 md:pb-20 overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[400px] glow-sage" />
+        <div className="container mx-auto px-6 md:px-10 max-w-3xl text-center relative z-10">
+          <p className="stage-label mb-5">Tools</p>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-foreground leading-tight mb-6 animate-fade-up">
             Pregnancy due date <span className="italic">calculator</span>
           </h1>
@@ -27,12 +28,21 @@ const DueDateCalculator = () => {
         </div>
       </section>
 
-      {/* ── Calculator input ─────────────────────────────────────────────── */}
+      {/* Calculator input */}
       <section className="pb-20 md:pb-24">
         <div className="container mx-auto px-6 md:px-10 max-w-xl">
-          <div className="bg-card border border-border/60 rounded-2xl p-8 md:p-10 shadow-card-brand">
+          <div className="card-elevated p-8 md:p-10">
             <DueDateCalculatorForm onResult={handleResult} />
           </div>
+        </div>
+      </section>
+
+      {/* Designed ending */}
+      <section className="page-ending">
+        <div className="container mx-auto px-6 md:px-10 max-w-2xl text-center">
+          <p className="font-serif text-sm italic text-foreground/80">
+            Your journey starts with one simple date.
+          </p>
         </div>
       </section>
 

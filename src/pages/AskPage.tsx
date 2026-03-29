@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { ArrowLeft, MessageCircle, Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AISearchBar from "@/components/shared/AISearchBar";
@@ -50,16 +50,14 @@ const AskPage = () => {
 
           {/* User's question */}
           <div className="mb-10">
-            <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-3">
-              Your question
-            </p>
+            <p className="stage-label mb-3">Your question</p>
             <h1 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug">
               {query}
             </h1>
           </div>
 
           {/* AI Answer */}
-          <div className="bg-card border border-border/50 rounded-lg p-8 md:p-12 shadow-card-brand mb-10">
+          <div className="card-elevated p-8 md:p-12 mb-10">
             {isLoading && !answer && (
               <div className="flex items-center gap-3 text-sage-muted">
                 <Loader2 size={18} className="animate-spin" />
@@ -97,9 +95,7 @@ const AskPage = () => {
           {/* Follow-up prompts */}
           {answer && !isLoading && (
             <div className="mb-16">
-              <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-4">
-                Follow up
-              </p>
+              <p className="stage-label mb-4">Follow up</p>
               <div className="flex flex-wrap gap-2">
                 {followUpPrompts.map((p) => (
                   <Link
@@ -117,15 +113,13 @@ const AskPage = () => {
           {/* Related guidance */}
           {answer && !isLoading && (
             <div className="mb-16">
-              <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-4">
-                Related guidance
-              </p>
+              <p className="stage-label mb-4">Continue your journey</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {relatedLinks.map((l) => (
                   <Link
                     key={l.href}
                     to={l.href}
-                    className="bg-card border border-border/50 rounded-lg px-5 py-4 font-sans text-sm font-light text-foreground hover:border-sage/40 hover:shadow-soft transition-all text-center"
+                    className="card-elevated px-5 py-4 font-sans text-sm font-light text-foreground hover:border-sage/40 hover:shadow-soft transition-all text-center"
                   >
                     {l.label}
                   </Link>
@@ -137,9 +131,8 @@ const AskPage = () => {
           {/* Ask another */}
           {answer && !isLoading && (
             <div>
-              <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-4 text-center">
-                Ask something else
-              </p>
+              <div className="section-divider mb-10" />
+              <p className="stage-label mb-4 text-center">Ask something else</p>
               <AISearchBar
                 placeholder="What else is on your mind?"
                 suggestions={["Is this normal?", "What should I expect?", "I'm not sure what I'm feeling"]}

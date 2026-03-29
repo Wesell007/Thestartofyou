@@ -3,13 +3,13 @@ import { ArrowUpRight } from "lucide-react";
 
 const CTASection = () => {
   return (
-    <section className="relative bg-parchment py-36 md:py-44 overflow-hidden">
-      {/* Corner frames */}
-      <div className="absolute top-12 left-12 w-20 h-20 border-t border-l border-sage-light/40 pointer-events-none" />
-      <div className="absolute bottom-12 right-12 w-20 h-20 border-b border-r border-sage-light/40 pointer-events-none" />
+    <section className="page-ending frame-corner overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] glow-sage" />
 
       <div className="container mx-auto px-6 md:px-10 max-w-2xl text-center relative z-10">
         <div className="editorial-rule mb-10" />
+        <p className="stage-label mb-6">Your Journey</p>
         <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-7">
           Start Your Journey
         </h2>
@@ -28,7 +28,7 @@ const CTASection = () => {
             to="/due-date-calculator"
             className="w-12 h-12 rounded-full bg-lavender/80 flex items-center justify-center shrink-0 hover:bg-lavender transition-colors duration-300"
           >
-            <ArrowUpRight size={18} className="text-lavender-foreground" />
+            <ArrowUpRight size={18} className="text-lavender-fg" />
           </Link>
         </div>
 

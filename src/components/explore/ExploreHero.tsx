@@ -13,10 +13,7 @@ const ExploreHero = () => {
   return (
     <section className="relative bg-parchment overflow-hidden pt-32 pb-28 md:pt-40 md:pb-36">
       {/* Radial glow */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, hsl(var(--sage-bg) / 0.4) 0%, transparent 70%)" }}
-      />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] glow-sage" />
 
       {/* Illustration accent */}
       <img
@@ -29,10 +26,8 @@ const ExploreHero = () => {
       />
 
       <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10 text-center">
-        <p className="font-sans text-[11px] font-light tracking-[0.3em] uppercase text-sage mb-6">
-          Explore
-        </p>
-        <h1 className="font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-foreground mb-7 animate-fade-up">
+        <p className="stage-label mb-6 animate-fade-up">Explore</p>
+        <h1 className="font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-foreground mb-7 animate-fade-up [animation-delay:0.05s]">
           Start with a question or thought
         </h1>
         <p className="font-sans text-base md:text-lg font-light text-muted-foreground mb-14 max-w-lg mx-auto leading-relaxed animate-fade-up [animation-delay:0.1s]">

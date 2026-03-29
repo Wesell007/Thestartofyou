@@ -1,6 +1,6 @@
 const BrandPositioningSection = () => {
   return (
-    <section className="bg-parchment py-28 md:py-36 border-t border-border/20">
+    <section className="page-ending overflow-hidden">
       <div className="container mx-auto px-6 md:px-10 max-w-3xl text-center">
         {/* Decorative leaf */}
         <div className="flex justify-center mb-8" aria-hidden="true">

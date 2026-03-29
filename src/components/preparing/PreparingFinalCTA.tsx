@@ -3,12 +3,11 @@ import { ArrowUpRight } from "lucide-react";
 
 const PreparingFinalCTA = () => {
   return (
-    <section className="bg-parchment py-28 md:py-36 frame-corner">
-      <div className="container mx-auto px-6 md:px-10 max-w-3xl text-center">
+    <section className="page-ending frame-corner overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] glow-sage" />
+      <div className="container mx-auto px-6 md:px-10 max-w-3xl text-center relative z-10">
         <div className="editorial-rule mb-10" />
-        <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-6">
-          Your Journey
-        </p>
+        <p className="stage-label mb-6">Your Journey</p>
         <h2 className="font-serif text-4xl sm:text-5xl text-foreground mb-5 leading-tight">
           Continue your journey
         </h2>

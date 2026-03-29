@@ -12,6 +12,9 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen bg-parchment overflow-hidden flex flex-col justify-center pt-28 md:pt-32 pb-24">
+      {/* Ambient glow */}
+      <div className="absolute top-1/3 left-1/4 w-[600px] h-[400px] glow-sage" />
+
       {/* Botanical accent */}
       <img
         src={botanicalCorner}
@@ -27,7 +30,8 @@ const HeroSection = () => {
 
           {/* Left: copy + calculator */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-xl mx-auto md:mx-0">
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] text-foreground leading-[1.08] mb-7 animate-fade-up">
+            <p className="stage-label mb-5 animate-fade-up">Your Pregnancy Journey</p>
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] text-foreground leading-[1.08] mb-7 animate-fade-up [animation-delay:0.05s]">
               Your Pregnancy Journey,{" "}
               <span className="italic">Week by Week</span>
             </h1>

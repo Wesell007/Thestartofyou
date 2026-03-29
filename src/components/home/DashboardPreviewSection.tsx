@@ -1,11 +1,14 @@
-/* Fix the browser chrome traffic-light dots to use proper semantic tokens */
 const DashboardPreviewSection = () => {
   return (
-    <section className="bg-parchment section-spacing overflow-hidden">
-      <div className="container mx-auto px-6 md:px-10 max-w-5xl">
+    <section className="relative bg-parchment section-spacing overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-0 right-0 w-[500px] h-[400px] glow-sage" />
+
+      <div className="container mx-auto px-6 md:px-10 max-w-5xl relative z-10">
         {/* Header */}
         <div className="text-center mb-20">
           <div className="editorial-rule mb-8" />
+          <p className="stage-label mb-5">Your Dashboard</p>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-7">
             A Structured View of Your Journey
           </h2>

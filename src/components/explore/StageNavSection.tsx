@@ -65,7 +65,6 @@ const SupportIcon = () => (
 );
 
 /* ── Stage data ── */
-
 const mainStages = [
   { icon: <TTCIcon />, title: "Trying to conceive", desc: "Understanding your cycle, timing, and early steps", href: "/trying-to-conceive", color: "bg-sage-bg/50" },
   { icon: <IVFIcon />, title: "IVF", desc: "A more supported path into pregnancy", href: "/ivf", color: "bg-lavender-bg/50" },
@@ -96,7 +95,7 @@ const StageCard = ({ icon, title, desc, href, bgColor = "bg-card", subtle = fals
     <Wrapper
       to={isInternal ? href : undefined}
       href={!isInternal ? href : undefined}
-      className={`group flex flex-col rounded-2xl p-8 md:p-9 border border-border/20 shadow-card-brand hover:shadow-soft hover:border-sage/20 hover:-translate-y-1 transition-all duration-500 ${bgColor}`}
+      className={`group flex flex-col rounded-2xl p-8 md:p-9 border border-border/20 shadow-card-brand hover:shadow-soft hover:border-sage/20 hover:-translate-y-1 transition-all duration-500 backdrop-blur-sm ${bgColor}`}
       aria-label={`Explore ${title}`}
     >
       <div className="mb-6 opacity-80 group-hover:opacity-100 transition-opacity duration-300">{icon}</div>
@@ -114,13 +113,13 @@ const StageCard = ({ icon, title, desc, href, bgColor = "bg-card", subtle = fals
 };
 
 /* ── Section ── */
-
 const StageNavSection = () => {
   return (
     <>
       {/* Main stages */}
-      <section className="bg-parchment section-spacing">
-        <div className="container mx-auto px-6 md:px-10 max-w-5xl">
+      <section className="relative bg-parchment section-spacing overflow-hidden">
+        <div className="absolute top-1/4 right-0 w-[500px] h-[400px] glow-sage" />
+        <div className="container mx-auto px-6 md:px-10 max-w-5xl relative z-10">
           <div className="mb-16 md:mb-20">
             <div className="editorial-rule mb-8" />
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-5 text-center">
@@ -143,6 +142,7 @@ const StageNavSection = () => {
       <section className="bg-parchment pb-28 md:pb-40">
         <div className="container mx-auto px-6 md:px-10 max-w-5xl">
           <div className="mb-14">
+            <div className="editorial-rule-left mb-6" />
             <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-3">
               Additional support
             </h2>

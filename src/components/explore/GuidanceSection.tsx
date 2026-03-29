@@ -30,9 +30,13 @@ const articles = [
 
 const GuidanceSection = () => {
   return (
-    <section className="bg-parchment section-spacing">
-      <div className="container mx-auto px-6 md:px-10 max-w-5xl">
+    <section className="relative bg-parchment section-spacing overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute bottom-0 left-1/3 w-[500px] h-[300px] glow-sage" />
+
+      <div className="container mx-auto px-6 md:px-10 max-w-5xl relative z-10">
         <div className="mb-16">
+          <div className="editorial-rule-left mb-6" />
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-4">
             Guidance and answers
           </h2>
@@ -46,7 +50,7 @@ const GuidanceSection = () => {
             <Link
               key={a.title}
               to={a.href}
-              className="group flex flex-col bg-card rounded-2xl overflow-hidden border border-border/20 shadow-card-brand hover:shadow-soft hover:border-sage/20 hover:-translate-y-1 transition-all duration-500"
+              className="group flex flex-col bg-card/90 backdrop-blur-sm rounded-2xl overflow-hidden border border-border/20 shadow-card-brand hover:shadow-soft hover:border-sage/20 hover:-translate-y-1 transition-all duration-500"
             >
               <div className="aspect-[4/3] overflow-hidden">
                 <img
@@ -59,7 +63,7 @@ const GuidanceSection = () => {
                 />
               </div>
               <div className="p-6 md:p-7 flex flex-col flex-1">
-                <span className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-terracotta/80 mb-3">
+                <span className="stage-label text-terracotta/80 mb-3">
                   {a.tag}
                 </span>
                 <h3 className="font-serif text-base md:text-lg text-foreground leading-snug mb-3 group-hover:text-sage transition-colors duration-300">

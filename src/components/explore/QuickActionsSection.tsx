@@ -27,9 +27,13 @@ const tools = [
 
 const QuickActionsSection = () => {
   return (
-    <section className="bg-parchment-dark py-28 md:py-32">
-      <div className="container mx-auto px-6 md:px-10 max-w-5xl">
+    <section className="relative bg-parchment-dark section-spacing overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-0 right-1/4 w-[500px] h-[300px] glow-sage" />
+
+      <div className="container mx-auto px-6 md:px-10 max-w-5xl relative z-10">
         <div className="mb-14">
+          <div className="editorial-rule-left mb-6" />
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-4">Helpful tools</h2>
           <p className="font-sans text-base font-light text-muted-foreground leading-relaxed">
             Practical support, ready when you need it.
@@ -41,7 +45,7 @@ const QuickActionsSection = () => {
             <Link
               key={t.title}
               to={t.href}
-              className="group flex flex-col gap-6 bg-card rounded-2xl p-8 border border-border/20 shadow-card-brand hover:shadow-soft hover:border-sage/20 hover:-translate-y-1 transition-all duration-500"
+              className="group flex flex-col gap-6 card-elevated p-8 hover:shadow-soft hover:border-sage/20 hover:-translate-y-1 transition-all duration-500"
             >
               <div className="w-12 h-12 rounded-full bg-sage-bg/80 flex items-center justify-center shrink-0 group-hover:bg-sage-bg transition-colors duration-300">
                 {t.icon}

@@ -11,13 +11,13 @@ const sections = [
   },
   {
     tag: "Daily life",
-    title: "Life may begin to feel more structured — but not consistently.",
+    title: "Life may begin to feel more structured, but not consistently.",
     bullets: [
       "Routines starting to form, then changing again",
       "Better days followed by more difficult ones",
       "Ongoing adjustment as new phases begin",
     ],
-    meaning: "This stage is about building rhythm — not achieving perfect consistency.",
+    meaning: "This stage is about building rhythm, not achieving perfect consistency.",
   },
   {
     tag: "Emotionally",
@@ -28,7 +28,7 @@ const sections = [
       "A mix of enjoyment and exhaustion",
       "Pressure to feel like things should be \"settled\"",
     ],
-    meaning: "Confidence builds gradually — but it's not constant.",
+    meaning: "Confidence builds gradually, but it's not constant.",
   },
   {
     tag: "Ongoing change",
@@ -38,7 +38,7 @@ const sections = [
       "New challenges replacing old ones",
       "Phases that feel temporary, even when they matter a lot",
     ],
-    meaning: "This stage isn't about reaching a fixed point — it's about adapting as things evolve.",
+    meaning: "This stage isn't about reaching a fixed point, it's about adapting as things evolve.",
   },
   {
     tag: "When things change again",
@@ -46,7 +46,7 @@ const sections = [
     bullets: [
       "Sleep improving, then becoming disrupted again",
       "Routines working, then suddenly not",
-      "Feeling like you've figured something out — then needing to adjust again",
+      "Feeling like you've figured something out, then needing to adjust again",
     ],
     meaning: "Progress often comes in phases, not permanent solutions.",
   },

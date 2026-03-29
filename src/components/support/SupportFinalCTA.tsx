@@ -13,7 +13,7 @@ const SupportFinalCTA = () => {
           Continue your journey
         </h2>
         <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-10 max-w-md mx-auto">
-          Wherever you are, there's a next step — and you don't have to take it alone.
+          Wherever you are, there's a next step, and you don't have to take it alone.
         </p>
         <Link
           to="/explore"

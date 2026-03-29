@@ -20,7 +20,7 @@ const IVF = () => {
     <div className="min-h-screen font-sans">
       <Navbar />
       <main>
-        {/* 1. Hero — tool-first, navigates to /ivf-timeline on calculate */}
+        {/* 1. Hero, tool-first, navigates to /ivf-timeline on calculate */}
         <IVFHero />
 
         {/* 2. What this journey is */}

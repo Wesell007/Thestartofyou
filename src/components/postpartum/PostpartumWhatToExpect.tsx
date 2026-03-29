@@ -8,7 +8,7 @@ const sections = [
       "Changes that don't follow a clear timeline",
       "Sensations that feel unfamiliar or unexpected",
     ],
-    meaning: "Recovery is not linear. Some days may feel easier, others more difficult — and both are normal.",
+    meaning: "Recovery is not linear. Some days may feel easier, others more difficult, and both are normal.",
   },
   {
     tag: "Your baby",
@@ -19,7 +19,7 @@ const sections = [
       "Sensitivity to environment",
       "Constant change in behaviour",
     ],
-    meaning: "Your baby's needs may feel unpredictable at first — this is part of early development.",
+    meaning: "Your baby's needs may feel unpredictable at first, this is part of early development.",
   },
   {
     tag: "Daily life",
@@ -51,7 +51,7 @@ const sections = [
       "Feeling unsure how you fit into your previous life",
       "Balancing who you were with who you are now",
     ],
-    meaning: "This stage isn't just about caring for your baby — it's also about adjusting to a new identity, which takes time.",
+    meaning: "This stage isn't just about caring for your baby, it's also about adjusting to a new identity, which takes time.",
   },
   {
     tag: "Uncertainty",
@@ -61,7 +61,7 @@ const sections = [
       "Comparing yourself to others",
       "Wanting reassurance frequently",
     ],
-    meaning: "Uncertainty is part of learning and adjusting — not a sign you're doing something wrong.",
+    meaning: "Uncertainty is part of learning and adjusting, not a sign you're doing something wrong.",
   },
 ];
 

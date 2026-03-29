@@ -24,7 +24,7 @@ const cards = [
       "A gradual sense of progress rather than sudden change",
     ],
     meaning:
-      "A lot is happening behind the scenes — especially in early pregnancy — even when you can't feel it yet.",
+      "A lot is happening behind the scenes, especially in early pregnancy, even when you can't feel it yet.",
   },
   {
     id: "emotional",
@@ -38,7 +38,7 @@ const cards = [
       "A mix of calm, worry, and anticipation",
     ],
     meaning:
-      "Emotional shifts are part of how people process change — especially when things are new or uncertain.",
+      "Emotional shifts are part of how people process change, especially when things are new or uncertain.",
   },
   {
     id: "uncertainty",
@@ -52,7 +52,7 @@ const cards = [
       "Wanting reassurance, even when everything is progressing normally",
     ],
     meaning:
-      "Pregnancy is not always linear or predictable — and uncertainty is part of the experience, not a sign something is wrong.",
+      "Pregnancy is not always linear or predictable, and uncertainty is part of the experience, not a sign something is wrong.",
   },
 ];
 

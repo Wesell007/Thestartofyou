@@ -8,14 +8,14 @@ const TTCWhatThisIs = () => {
         <div className="mb-14 rounded-2xl overflow-hidden border border-border/40 shadow-card-brand">
           <img
             src={ttcJourneyImg}
-            alt="A quiet moment of hope — the beginning of a new chapter"
+            alt="A quiet moment of hope, the beginning of a new chapter"
             loading="lazy"
             width={1024}
             height={640}
             className="w-full h-64 sm:h-80 md:h-96 object-cover"
           />
           <p className="px-6 py-3 bg-card font-serif italic text-sm text-muted-foreground">
-            — A quiet moment of hope — the beginning of a new chapter
+          , A quiet moment of hope, the beginning of a new chapter
           </p>
         </div>
 
@@ -31,7 +31,7 @@ const TTCWhatThisIs = () => {
               Trying to conceive can feel both straightforward and uncertain at the same time.
             </p>
             <p>
-              While there are clear biological patterns — such as ovulation and fertile windows — the experience itself often involves waiting, timing, and not always knowing exactly what's happening.
+              While there are clear biological patterns, such as ovulation and fertile windows, the experience itself often involves waiting, timing, and not always knowing exactly what's happening.
             </p>
             <p>
               This space is here to guide you through that process clearly and calmly.

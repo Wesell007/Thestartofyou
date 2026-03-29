@@ -13,7 +13,7 @@ const DashboardPreviewSection = () => {
             A Structured View of Your Journey
           </h2>
           <p className="font-sans text-base font-light text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            Your personal dashboard organises everything you need for each stage: weekly guidance, milestone tracking, reflection prompts, and curated resources — all in one calm, clear interface.
+            Your personal dashboard organises everything you need for each stage: weekly guidance, milestone tracking, reflection prompts, and curated resources, all in one calm, clear interface.
           </p>
         </div>
 

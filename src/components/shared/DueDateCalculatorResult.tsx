@@ -1,5 +1,5 @@
 /**
- * DueDateCalculatorResult — shared result screen.
+ * DueDateCalculatorResult, shared result screen.
  * Receives a computed LMP date and renders all 10 sections.
  * Used on: homepage (inline), pregnancy hub (inline), /due-date-calculator page.
  */
@@ -40,11 +40,11 @@ export interface CalcResult {
 // ─── Content ──────────────────────────────────────────────────────────────────
 
 const MILESTONES: Milestone[] = [
-  { week: 8,  label: "First scan window",      detail: "Typically 8–10 weeks" },
+  { week: 8,  label: "First scan window",      detail: "Typically 8-10 weeks" },
   { week: 12, label: "12-week scan",            detail: "Nuchal translucency screening" },
   { week: 16, label: "Midwife appointment",     detail: "Routine antenatal check" },
   { week: 20, label: "20-week scan",            detail: "Anatomy and anomaly screening" },
-  { week: 24, label: "Glucose tolerance test",  detail: "Usually offered 24–28 weeks" },
+  { week: 24, label: "Glucose tolerance test",  detail: "Usually offered 24-28 weeks" },
   { week: 28, label: "Third trimester begins",  detail: "Final stage of pregnancy" },
   { week: 32, label: "Growth scan",             detail: "Monitoring size and position" },
   { week: 36, label: "Antenatal check",         detail: "Positioning and birth planning" },
@@ -56,7 +56,7 @@ const getInsight = (week: number): WeekInsight => {
   if (week <= 4) return {
     weekSummary: "The very earliest days. Most changes are invisible right now.",
     whatThisMeans: [
-      "You're in the very earliest stage of pregnancy — changes are happening at a cellular level.",
+      "You're in the very earliest stage of pregnancy, changes are happening at a cellular level.",
       "Your body hasn't yet had time to react hormonally, which is why symptoms are rare this early.",
     ],
     whatToExpect: [
@@ -70,7 +70,7 @@ const getInsight = (week: number): WeekInsight => {
     weekSummary: "Hormone levels are rising rapidly. Your body is beginning to respond.",
     whatThisMeans: [
       "You're in the early stages of pregnancy, where hormone levels are rising and your body is beginning to adjust.",
-      "Some people begin to notice symptoms around this time, while others feel relatively normal — both are common.",
+      "Some people begin to notice symptoms around this time, while others feel relatively normal, both are common.",
     ],
     whatToExpect: [
       "Fatigue that arrives without warning",
@@ -83,7 +83,7 @@ const getInsight = (week: number): WeekInsight => {
   if (week <= 9) return {
     weekSummary: "Symptoms are often at their most intense right now. This is temporary.",
     whatThisMeans: [
-      "You're in the middle of the first trimester — a phase of rapid change for both you and your baby.",
+      "You're in the middle of the first trimester, a phase of rapid change for both you and your baby.",
       "Symptoms can feel very present during this period. This often begins to ease as the trimester progresses.",
     ],
     whatToExpect: [
@@ -96,7 +96,7 @@ const getInsight = (week: number): WeekInsight => {
   if (week <= 12) return {
     weekSummary: "You're approaching the end of the first trimester. The 12-week scan is near.",
     whatThisMeans: [
-      "You're nearing the end of the first trimester — a significant milestone for many people.",
+      "You're nearing the end of the first trimester, a significant milestone for many people.",
       "Your baby's major organs are formed. The focus now shifts to growth and development.",
     ],
     whatToExpect: [
@@ -109,7 +109,7 @@ const getInsight = (week: number): WeekInsight => {
   if (week <= 20) return {
     weekSummary: "The second trimester. Energy often improves and nausea eases for many.",
     whatThisMeans: [
-      "You're in the second trimester — often described as the most comfortable phase of pregnancy.",
+      "You're in the second trimester, often described as the most comfortable phase of pregnancy.",
       "Your bump will become visible, and you may feel more like yourself again.",
     ],
     whatToExpect: [
@@ -135,7 +135,7 @@ const getInsight = (week: number): WeekInsight => {
   if (week <= 32) return {
     weekSummary: "Third trimester. Your baby is gaining weight and preparing for birth.",
     whatThisMeans: [
-      "You're in the third trimester — the final stage before birth.",
+      "You're in the third trimester, the final stage before birth.",
       "Your baby is growing rapidly now, and your body is doing significant work to support this.",
     ],
     whatToExpect: [
@@ -270,7 +270,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
 
           <Fade delay={300}>
             <p className="font-serif italic text-base text-foreground/60 leading-relaxed text-center max-w-md mx-auto">
-              Pregnancy timelines can vary — this gives a helpful estimate of where you are.
+              Pregnancy timelines can vary, this gives a helpful estimate of where you are.
             </p>
           </Fade>
         </div>
@@ -301,7 +301,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
               <div className="flex justify-between mb-2">
                 <span className="font-sans text-[10px] font-light text-sage-muted">Week 1</span>
                 <span className="font-sans text-[10px] font-light text-terracotta font-medium">
-                  You are here — week {result.currentWeek}
+                  You are here, week {result.currentWeek}
                 </span>
                 <span className="font-sans text-[10px] font-light text-sage-muted">Week 40</span>
               </div>
@@ -316,9 +316,9 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                 </div>
               </div>
               <div className="flex text-[10px] font-sans font-light text-muted-foreground/50 mt-5 pt-5 border-t border-border/20 gap-px">
-                <div className="flex-none w-[30%]">1st trimester<br />1–12</div>
-                <div className="flex-1 text-center">2nd trimester<br />13–27</div>
-                <div className="flex-none w-[33%] text-right">3rd trimester<br />28–40</div>
+                <div className="flex-none w-[30%]">1st trimester<br />1-12</div>
+                <div className="flex-1 text-center">2nd trimester<br />13-27</div>
+                <div className="flex-none w-[33%] text-right">3rd trimester<br />28-40</div>
               </div>
             </div>
           </Fade>
@@ -358,7 +358,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
         </div>
       </section>
 
-      {/* ── S5: This week — core product entry ───────────────────────────── */}
+      {/* ── S5: This week, core product entry ───────────────────────────── */}
       <section className="bg-parchment py-20 md:py-24">
         <div className="container mx-auto px-6 md:px-10 max-w-3xl">
           <Fade delay={0}>
@@ -405,7 +405,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
               Follow your pregnancy week by week
             </h2>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-md mx-auto mb-8">
-              Get guidance tailored to your stage — what's happening, what's normal, and what to focus on.
+              Get guidance tailored to your stage, what's happening, what's normal, and what to focus on.
             </p>
             <Link
               to={`/pregnancy/week/${result.currentWeek}`}
@@ -429,7 +429,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
               <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">AI Support</p>
               <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-6">Ask about your stage</h2>
               <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-6">
-                Whatever's on your mind about week {result.currentWeek} — symptoms, what to expect, or what's normal.
+                Whatever's on your mind about week {result.currentWeek}, symptoms, what to expect, or what's normal.
               </p>
               <div className="relative mb-5">
                 <input

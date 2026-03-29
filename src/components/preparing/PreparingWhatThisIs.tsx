@@ -8,14 +8,14 @@ const PreparingWhatThisIs = () => {
         <div className="mb-14 rounded-2xl overflow-hidden border border-border/40 shadow-card-brand">
           <img
             src={preparingJourneyImg}
-            alt="Getting ready together — focusing on what truly matters"
+            alt="Getting ready together, focusing on what truly matters"
             loading="lazy"
             width={1024}
             height={640}
             className="w-full h-64 sm:h-80 md:h-96 object-cover"
           />
           <p className="px-6 py-3 bg-card font-serif italic text-sm text-muted-foreground">
-            — Getting ready together — focusing on what truly matters
+          , Getting ready together, focusing on what truly matters
           </p>
         </div>
 
@@ -31,7 +31,7 @@ const PreparingWhatThisIs = () => {
               Preparing for your baby can feel both exciting and overwhelming.
             </p>
             <p>
-              There's often a lot of information — and it's not always clear what's essential and what's optional.
+              There's often a lot of information, and it's not always clear what's essential and what's optional.
             </p>
             <p>
               This space is here to simplify things, so you can focus on what actually matters.

@@ -33,7 +33,7 @@ const FirstYear = () => {
         {/* 4. What to focus on right now */}
         <FirstYearFocus />
 
-        {/* 5. What to expect — baby, daily life, emotional, change */}
+        {/* 5. What to expect, baby, daily life, emotional, change */}
         <FirstYearWhatToExpect />
 
         {/* 6. What can feel challenging + mental load */}

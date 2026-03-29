@@ -105,7 +105,7 @@ const PreparingCanWait = () => {
                   What this means
                 </p>
                 <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-                  There's rarely one perfect choice — simple and safe is often enough.
+                  There's rarely one perfect choice, simple and safe is often enough.
                 </p>
               </div>
             </div>

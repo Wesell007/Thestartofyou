@@ -33,7 +33,7 @@ const PostpartumProgression = () => {
                 What this means
               </p>
               <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-                Things don't suddenly become easier — they become more familiar over time.
+                Things don't suddenly become easier, they become more familiar over time.
               </p>
             </div>
           </div>

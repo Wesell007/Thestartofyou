@@ -16,7 +16,7 @@ const EmotionalReminder = () => {
         </h2>
 
         <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-lg mx-auto">
-          Some weeks feel clear, others feel uncertain — and both can be
+          Some weeks feel clear, others feel uncertain, and both can be
           completely normal.
         </p>
       </div>

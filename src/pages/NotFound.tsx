@@ -25,7 +25,7 @@ const NotFound = () => {
               404
             </h1>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-md mx-auto mb-12 animate-fade-up [animation-delay:0.1s]">
-              This page doesn't exist — but your journey does. Let's get you back on track.
+              This page doesn't exist, but your journey does. Let's get you back on track.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up [animation-delay:0.2s]">
               <Link

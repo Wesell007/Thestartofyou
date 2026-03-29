@@ -17,7 +17,7 @@ const TrimesterNormal = ({ data, bg = "bg-parchment-dark" }: Props) => {
             Reassurance
           </p>
           <h2 className="font-serif text-3xl sm:text-4xl text-foreground mb-4 leading-tight">
-            What's normal — and when to seek support
+            What's normal, and when to seek support
           </h2>
           <p className="font-sans text-sm font-light text-muted-foreground max-w-lg mx-auto leading-relaxed">
             This is one of the most common questions in pregnancy. Here's what

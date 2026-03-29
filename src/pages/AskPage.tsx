@@ -104,7 +104,7 @@ const AskPage = () => {
             </div>
           )}
 
-          {/* Question title — editorial */}
+          {/* Question title, editorial */}
           <div className="mb-6">
             <h1 className="font-serif text-[1.75rem] sm:text-[2.1rem] md:text-[2.5rem] text-foreground leading-[1.12] tracking-[-0.01em]">
               {query}
@@ -157,7 +157,7 @@ const AskPage = () => {
         )}
 
         {/* ══════════════════════════════════════════════════
-            QUICK ANSWER — the hero moment
+            QUICK ANSWER, the hero moment
             ══════════════════════════════════════════════════ */}
         {parsed?.quickAnswer && (
           <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-16">
@@ -181,7 +181,7 @@ const AskPage = () => {
                   </div>
                 </div>
 
-                {/* Answer text — larger, more dominant */}
+                {/* Answer text, larger, more dominant */}
                 <p className="font-serif text-lg md:text-xl text-foreground leading-[1.6] max-w-2xl">
                   <span className="font-medium">{parsed.quickAnswer.split(" ").slice(0, 8).join(" ")}</span>
                   {" "}{parsed.quickAnswer.split(" ").slice(8).join(" ")}
@@ -239,7 +239,7 @@ const AskPage = () => {
               </div>
             </div>
 
-            {/* ── Reassurance — emotionally designed ── */}
+            {/* ── Reassurance, emotionally designed ── */}
             <div className="mt-12 mb-16">
               <div className="relative bg-gradient-to-b from-sage-bg/15 via-parchment to-parchment">
                 <div className="container mx-auto px-6 md:px-10 max-w-3xl py-14 md:py-20">
@@ -257,7 +257,7 @@ const AskPage = () => {
                       Whatever you're going through, it's okay to ask.
                     </p>
                     <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-md mx-auto">
-                      You're doing the right thing by looking for answers — and you don't need to have it all figured out. Trust yourself.
+                      You're doing the right thing by looking for answers, and you don't need to have it all figured out. Trust yourself.
                     </p>
                   </div>
                 </div>
@@ -315,7 +315,7 @@ const AskPage = () => {
             </div>
 
             {/* ══════════════════════════════════════════════════
-                ASK AGAIN — premium continuation module
+                ASK AGAIN, premium continuation module
                 ══════════════════════════════════════════════════ */}
             <div className="relative">
               {/* Full-width background wash */}
@@ -334,7 +334,7 @@ const AskPage = () => {
                     </div>
                     <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Ask Something Else</h2>
                     <p className="font-sans text-xs font-light text-muted-foreground max-w-sm mx-auto">
-                      Still have questions? Keep going — we're here for every part of the journey.
+                      Still have questions? Keep going, we're here for every part of the journey.
                     </p>
                   </div>
 

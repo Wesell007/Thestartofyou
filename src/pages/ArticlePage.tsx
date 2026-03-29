@@ -37,7 +37,7 @@ const ArticlePage = () => {
       <ArticleTiming data={data} />
       {/* Real experience */}
       <ArticleRealExperience data={data} />
-      {/* Interpretation — reassurance moment */}
+      {/* Interpretation, reassurance moment */}
       <ArticleInterpretation data={data} />
       {/* Safety & support */}
       <ArticleNormal data={data} />

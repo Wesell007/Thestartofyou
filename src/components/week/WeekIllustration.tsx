@@ -1,5 +1,5 @@
 /**
- * Inline SVG illustrations for pregnancy weeks 1–40.
+ * Inline SVG illustrations for pregnancy weeks 1-40.
  * Each icon represents the baby's approximate size comparison
  * using the brand palette (sage, terracotta, lavender, warm tones).
  */
@@ -19,7 +19,7 @@ const WeekIllustration = ({ week, className = "w-10 h-10" }: Props) => {
 
 function getIllustration(week: number) {
   switch (week) {
-    // Weeks 1-3: Tiny dot / seed — microscopic stage
+    // Weeks 1-3: Tiny dot / seed, microscopic stage
     case 1:
       return (
         <>
@@ -383,7 +383,7 @@ function getIllustration(week: number) {
           ))}
         </>
       );
-    // Week 40: Pumpkin — full term!
+    // Week 40: Pumpkin, full term!
     case 40:
       return (
         <>

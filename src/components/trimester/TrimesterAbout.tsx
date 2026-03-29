@@ -10,9 +10,9 @@ const trimesterImages: Record<number, string> = {
 };
 
 const trimesterCaptions: Record<number, string> = {
-  1: "The quiet beginning — a time of invisible change",
-  2: "Growing into visibility — connection deepens",
-  3: "The final stretch — preparing to meet your baby",
+  1: "The quiet beginning, a time of invisible change",
+  2: "Growing into visibility, connection deepens",
+  3: "The final stretch, preparing to meet your baby",
 };
 
 interface Props {
@@ -38,12 +38,12 @@ const TrimesterAbout = ({ data, bg = "bg-parchment" }: Props) => {
             className="w-full h-64 sm:h-80 md:h-96 object-cover"
           />
           <p className="px-6 py-3 bg-card font-serif italic text-sm text-muted-foreground">
-            — {caption}
+          , {caption}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
-          {/* Left — title */}
+          {/* Left, title */}
           <div>
             <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
               This Stage
@@ -53,7 +53,7 @@ const TrimesterAbout = ({ data, bg = "bg-parchment" }: Props) => {
             </h2>
           </div>
 
-          {/* Right — paragraphs */}
+          {/* Right, paragraphs */}
           <div className="space-y-5">
             {data.about.paragraphs.map((para, i) => (
               <p

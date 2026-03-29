@@ -21,7 +21,7 @@ const FocusRightNow = () => {
             </h2>
           </div>
 
-          {/* Right — list */}
+          {/* Right, list */}
           <div className="space-y-5">
             {focusItems.map((item, i) => (
               <div key={i} className="flex items-start gap-4">

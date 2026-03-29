@@ -15,7 +15,7 @@ const PostpartumHero = () => {
           Your <span className="italic">postpartum journey</span>
         </h1>
         <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed mb-14 max-w-xl mx-auto animate-fade-up [animation-delay:0.1s]">
-          Recovery, adjustment, and the early weeks with your baby — one step at a time.
+          Recovery, adjustment, and the early weeks with your baby, one step at a time.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up [animation-delay:0.2s]">

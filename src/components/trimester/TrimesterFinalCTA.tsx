@@ -26,7 +26,7 @@ const TrimesterFinalCTA = ({ data }: Props) => {
         </h2>
         <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-10 max-w-md mx-auto">
           {nextTrimester
-            ? `When you're ready, the ${nextTrimester.label} is waiting — week by week, at your own pace.`
+            ? `When you're ready, the ${nextTrimester.label} is waiting, week by week, at your own pace.`
             : "The third trimester ends with birth, and a new journey begins. Explore postnatal support when you're ready."}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

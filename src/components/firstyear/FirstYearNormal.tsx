@@ -21,7 +21,7 @@ const FirstYearNormal = () => {
             Guidance
           </p>
           <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight max-w-xl">
-            What's normal — and when to seek support
+            What's normal, and when to seek support
           </h2>
         </div>
 

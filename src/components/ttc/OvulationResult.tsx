@@ -64,7 +64,7 @@ const OvulationResult = ({ lmp, cycleLength, ovulationDay, fertileStart, fertile
                 Fertile window
               </p>
               <p className="font-serif text-xl text-foreground leading-snug mb-1">
-                {format(fertileStart, "d MMM")} – {format(fertileEnd, "d MMM")}
+                {format(fertileStart, "d MMM")} - {format(fertileEnd, "d MMM")}
               </p>
               <p className="font-sans text-xs font-light text-muted-foreground">
                 6 days
@@ -186,7 +186,7 @@ const OvulationResult = ({ lmp, cycleLength, ovulationDay, fertileStart, fertile
             {[
               "These are the days you're most likely to conceive",
               "Focus on the fertile window, not a single perfect day",
-              "This is an estimate, not a guarantee — cycles can vary",
+              "This is an estimate, not a guarantee, cycles can vary",
             ].map((item, i) => (
               <div key={i} className={cn(
                 "flex items-start gap-5 py-6",
@@ -213,10 +213,10 @@ const OvulationResult = ({ lmp, cycleLength, ovulationDay, fertileStart, fertile
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {[
-              { title: "Focus on your fertile window", desc: "The days before ovulation are your most fertile — not just ovulation day itself." },
+              { title: "Focus on your fertile window", desc: "The days before ovulation are your most fertile, not just ovulation day itself." },
               { title: "Keep timing simple", desc: "Every other day during your fertile window is usually enough." },
               { title: "Avoid overtracking every sign", desc: "Monitoring can be helpful, but obsessing over every symptom adds unnecessary stress." },
-              { title: "Consistency matters more than perfection", desc: "There is no single perfect moment — a calm, steady approach works best." },
+              { title: "Consistency matters more than perfection", desc: "There is no single perfect moment, a calm, steady approach works best." },
             ].map((item, i) => (
               <div key={i} className="bg-card border border-border/50 rounded-2xl p-7 shadow-card-brand">
                 <p className="font-sans text-sm font-medium text-foreground mb-2">{item.title}</p>
@@ -238,7 +238,7 @@ const OvulationResult = ({ lmp, cycleLength, ovulationDay, fertileStart, fertile
           </h2>
           <div className="bg-card border border-border/50 rounded-2xl p-8 shadow-card-brand">
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-4">
-              For the most reliable result, wait until at least <strong className="font-medium text-foreground">{format(testDay, "d MMMM")}</strong> — around 15 days after ovulation.
+              For the most reliable result, wait until at least <strong className="font-medium text-foreground">{format(testDay, "d MMMM")}</strong>, around 15 days after ovulation.
             </p>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-4">
               Testing too early can give a false negative, even if conception has occurred. The pregnancy hormone (hCG) needs time to build to detectable levels.

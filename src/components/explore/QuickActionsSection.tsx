@@ -19,7 +19,7 @@ const tools = [
   {
     icon: <MessageCircle size={20} className="text-sage" />,
     title: "Ask a question",
-    desc: "Not sure where to start? Ask anything — symptoms, timing, or what to expect.",
+    desc: "Not sure where to start? Ask anything, symptoms, timing, or what to expect.",
     cta: "Ask now",
     href: "/ask",
   },

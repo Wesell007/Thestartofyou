@@ -17,7 +17,7 @@ const IVFCapture = () => {
               This stage can feel full of waiting, uncertainty, and moments that are easy to overlook or move past quickly.
             </p>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-8">
-              Some people choose to write things down as they go — thoughts, feelings, and reflections across each stage.
+              Some people choose to write things down as they go, thoughts, feelings, and reflections across each stage.
             </p>
             <a
               href="/"
@@ -28,12 +28,12 @@ const IVFCapture = () => {
             </a>
           </div>
 
-          {/* Right — soft journal entries */}
+          {/* Right, soft journal entries */}
           <div className="flex flex-col gap-4">
             {[
-              "After transfer — Trying to stay calm and not over-read things…",
-              "Day 5 — The waiting feels different than I expected.",
-              "First scan — Something shifted when I saw it.",
+              "After transfer, Trying to stay calm and not over-read things…",
+              "Day 5, The waiting feels different than I expected.",
+              "First scan, Something shifted when I saw it.",
             ].map((entry, i) => (
               <div
                 key={i}

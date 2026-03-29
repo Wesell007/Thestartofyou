@@ -31,7 +31,7 @@ const ExploreHero = () => {
           Start with a question or thought
         </h1>
         <p className="font-sans text-base md:text-lg font-light text-muted-foreground mb-14 max-w-lg mx-auto leading-relaxed animate-fade-up [animation-delay:0.1s]">
-          Guidance, support, and answers — tailored to where you are.
+          Guidance, support, and answers, tailored to where you are.
         </p>
 
         <div className="animate-fade-up [animation-delay:0.2s] max-w-xl mx-auto">

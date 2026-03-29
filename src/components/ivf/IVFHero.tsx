@@ -111,7 +111,7 @@ const IVFHero = () => {
               </button>
 
               <p className="font-sans text-[11px] font-light text-muted-foreground/60 text-center leading-relaxed">
-                This gives an estimate based on your transfer date — experiences can vary.
+                This gives an estimate based on your transfer date, experiences can vary.
               </p>
             </div>
           </div>

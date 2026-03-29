@@ -21,7 +21,7 @@ const ArticleHero = ({ data }: Props) => {
 
   return (
     <section className="relative bg-parchment pt-28 pb-0 md:pt-36 overflow-hidden">
-      {/* Background lifestyle image — fades naturally into the page */}
+      {/* Background lifestyle image, fades naturally into the page */}
       <div className="absolute top-0 right-0 w-[55%] h-full hidden md:block pointer-events-none select-none">
         <img
           src={heroImage}
@@ -78,7 +78,7 @@ const ArticleHero = ({ data }: Props) => {
             </div>
           )}
 
-          {/* Quick Answer — elevated into hero */}
+          {/* Quick Answer, elevated into hero */}
           <div className="bg-card/90 backdrop-blur-sm border border-border/40 rounded-2xl px-7 py-7 md:px-9 md:py-8 shadow-elevated">
             <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage mb-4">
               Quick Answer

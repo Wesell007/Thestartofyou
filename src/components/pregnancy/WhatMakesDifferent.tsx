@@ -20,7 +20,7 @@ const WhatMakesDifferent = () => {
             </h2>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
               This isn't a fixed checklist. It's a space that acknowledges the
-              real experience of pregnancy — including the parts that feel
+              real experience of pregnancy, including the parts that feel
               unclear.
             </p>
           </div>

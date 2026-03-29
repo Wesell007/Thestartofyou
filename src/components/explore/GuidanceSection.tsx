@@ -8,7 +8,7 @@ const articles = [
   {
     tag: "Symptoms",
     title: "Nausea in early pregnancy",
-    desc: "Why it happens, when it peaks, and what you can realistically do — clear, reassuring guidance.",
+    desc: "Why it happens, when it peaks, and what you can realistically do, clear, reassuring guidance.",
     href: "/articles/nausea-in-early-pregnancy",
     image: nauseaImg,
   },
@@ -41,7 +41,7 @@ const GuidanceSection = () => {
             Guidance and answers
           </h2>
           <p className="font-sans text-base font-light text-muted-foreground max-w-sm leading-relaxed">
-            A curated selection — not a feed.
+            A curated selection, not a feed.
           </p>
         </div>
 

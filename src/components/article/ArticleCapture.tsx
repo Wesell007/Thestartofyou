@@ -35,7 +35,7 @@ const ArticleCapture = ({ data }: Props) => {
             </p>
             <textarea
               rows={5}
-              placeholder="Write anything — a worry, a question, a feeling worth keeping..."
+              placeholder="Write anything, a worry, a question, a feeling worth keeping..."
               className="w-full bg-card border border-border/60 rounded-lg px-5 py-4 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 leading-relaxed resize-none focus:outline-none focus:border-sage/40 transition-colors shadow-card-brand"
             />
             <button className="self-start flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all">

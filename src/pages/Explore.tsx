@@ -9,7 +9,7 @@ import AIReassuranceSection from "@/components/explore/AIReassuranceSection";
 import BrandPositioningSection from "@/components/explore/BrandPositioningSection";
 import JournalPromotion from "@/components/shared/JournalPromotion";
 
-// Temporarily simulate logged-out state — replace with real auth context when available
+// Temporarily simulate logged-out state, replace with real auth context when available
 const isLoggedIn = false;
 
 const Explore = () => {
@@ -17,10 +17,10 @@ const Explore = () => {
     <div className="min-h-screen font-sans">
       <Navbar />
       <main>
-        {/* 1. Entry point — search + AI bar */}
+        {/* 1. Entry point, search + AI bar */}
         <ExploreHero />
 
-        {/* 2. Core stage navigation — dominates the page */}
+        {/* 2. Core stage navigation, dominates the page */}
         <StageNavSection />
 
         {/* 3. Personalised continue block (only if logged in) */}
@@ -33,7 +33,7 @@ const Explore = () => {
         {/* 4. Utility tools strip */}
         <QuickActionsSection />
 
-        {/* 5. Curated guidance — secondary, not a feed */}
+        {/* 5. Curated guidance, secondary, not a feed */}
         <GuidanceSection />
 
         {/* 6. AI reassurance nudge */}

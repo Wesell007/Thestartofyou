@@ -90,10 +90,10 @@ export const ttcStages: Record<string, StageData> = {
     journeyLabel: "Trying to Conceive",
     stageIndicator: "Stage 1 of 3",
     title: "Understanding your cycle",
-    subtitle: "Learning how your body works — including ovulation, timing, and the patterns that matter most.",
+    subtitle: "Learning how your body works, including ovulation, timing, and the patterns that matter most.",
 
     whatThisIs: [
-      "This stage is about building a foundation — understanding how your menstrual cycle works and what influences it.",
+      "This stage is about building a foundation, understanding how your menstrual cycle works and what influences it.",
       "For many, this is the first time paying close attention to cycle patterns, and it can feel both empowering and overwhelming.",
       "There's no pressure to become an expert overnight. Familiarity builds naturally over time.",
     ],
@@ -102,14 +102,14 @@ export const ttcStages: Record<string, StageData> = {
       "Getting familiar with your typical cycle length",
       "Learning the basics of ovulation",
       "Not overcomplicating things too early",
-      "Starting simple — you can refine later",
+      "Starting simple, you can refine later",
     ],
 
     actionItems: [
       "Start noting cycle start dates",
       "Learn what cervical mucus changes look like",
       "Download a simple tracking app if it feels helpful",
-      "Read about ovulation basics once — then give yourself time to absorb",
+      "Read about ovulation basics once, then give yourself time to absorb",
     ],
 
     reassuranceBehaviours: [
@@ -124,7 +124,7 @@ export const ttcStages: Record<string, StageData> = {
       "Having irregular cycles",
       "Feeling unsure about what to track",
     ],
-    overthinkMeaning: "Most people don't have perfect cycles or perfect knowledge — and that's completely normal at this stage.",
+    overthinkMeaning: "Most people don't have perfect cycles or perfect knowledge, and that's completely normal at this stage.",
 
     expectSections: [
       {
@@ -158,7 +158,7 @@ export const ttcStages: Record<string, StageData> = {
 
     interpretation: [
       "This stage is about learning, not perfecting.",
-      "You don't need to understand everything right now — just enough to feel grounded.",
+      "You don't need to understand everything right now, just enough to feel grounded.",
       "Progress here looks like growing familiarity, not flawless tracking.",
     ],
 
@@ -183,7 +183,7 @@ export const ttcStages: Record<string, StageData> = {
     aiInputPlaceholder: "What would you like to understand about your cycle?",
 
     emotionalTitle: "You don't need to have it all figured out yet.",
-    emotionalBody: "Learning about your body is a process — not a test you need to pass.",
+    emotionalBody: "Learning about your body is a process, not a test you need to pass.",
 
     reflectionPrompt: "What has felt most new or surprising to you about understanding your cycle?",
 
@@ -196,7 +196,7 @@ export const ttcStages: Record<string, StageData> = {
     ],
 
     finalCtaTitle: "Continue your journey",
-    finalCtaSub: "Move at your own pace — there's no rush.",
+    finalCtaSub: "Move at your own pace, there's no rush.",
   },
 
   "timing-and-tracking": {
@@ -206,7 +206,7 @@ export const ttcStages: Record<string, StageData> = {
     subtitle: "Identifying your fertile window and recognising the patterns that help.",
 
     whatThisIs: [
-      "This stage is about putting your cycle knowledge into practice — learning when your fertile window opens and how to work with it.",
+      "This stage is about putting your cycle knowledge into practice, learning when your fertile window opens and how to work with it.",
       "It can feel exciting and pressured at the same time. Timing matters, but it doesn't need to be perfect.",
       "The goal is awareness, not obsession.",
     ],
@@ -215,7 +215,7 @@ export const ttcStages: Record<string, StageData> = {
       "Identifying your fertile window each cycle",
       "Keeping tracking simple and consistent",
       "Not letting timing become a source of stress",
-      "Remembering that timing helps — but doesn't guarantee outcomes",
+      "Remembering that timing helps, but doesn't guarantee outcomes",
     ],
 
     actionItems: [
@@ -248,7 +248,7 @@ export const ttcStages: Record<string, StageData> = {
           "Mild ovulation discomfort",
           "Shifts in basal body temperature",
         ],
-        meaning: "These signs confirm your body is doing what it should — even if they're subtle.",
+        meaning: "These signs confirm your body is doing what it should, even if they're subtle.",
       },
       {
         tag: "Emotionally",
@@ -280,7 +280,7 @@ export const ttcStages: Record<string, StageData> = {
     ],
 
     interpretation: [
-      "This stage is about finding a sustainable rhythm — not creating a military schedule.",
+      "This stage is about finding a sustainable rhythm, not creating a military schedule.",
       "Awareness of your fertile window significantly helps, but no single cycle carries all the weight.",
       "If tracking feels overwhelming, simplifying your method is a valid choice.",
     ],
@@ -305,7 +305,7 @@ export const ttcStages: Record<string, StageData> = {
     aiPrompts: ["When is my fertile window?", "Are OPKs reliable?", "How precise does timing need to be?"],
     aiInputPlaceholder: "What's on your mind about timing and tracking?",
 
-    emotionalTitle: "Timing is a tool — not a test.",
+    emotionalTitle: "Timing is a tool, not a test.",
     emotionalBody: "You don't need to get every cycle perfect. You just need to be in the right area.",
 
     reflectionPrompt: "What has felt most challenging about tracking and timing so far?",
@@ -326,11 +326,11 @@ export const ttcStages: Record<string, StageData> = {
     journeyLabel: "Trying to Conceive",
     stageIndicator: "Stage 3 of 3",
     title: "Waiting and testing",
-    subtitle: "The time between ovulation and testing — often the most uncertain part of the journey.",
+    subtitle: "The time between ovulation and testing, often the most uncertain part of the journey.",
 
     whatThisIs: [
       "This stage begins after ovulation and continues until you test.",
-      "It can feel like nothing is happening — while at the same time, everything feels important.",
+      "It can feel like nothing is happening, while at the same time, everything feels important.",
       "There are fewer actions to take, but more time to think.",
     ],
 
@@ -371,7 +371,7 @@ export const ttcStages: Record<string, StageData> = {
           "Sensations that are hard to interpret",
           "Symptoms that come and go",
         ],
-        meaning: "Not every symptom has a clear meaning — and that's normal.",
+        meaning: "Not every symptom has a clear meaning, and that's normal.",
       },
       {
         tag: "Emotionally",
@@ -405,7 +405,7 @@ export const ttcStages: Record<string, StageData> = {
 
     interpretation: [
       "This stage is naturally uncertain.",
-      "It doesn't mean something is wrong — it means you're in a part of the process where clarity comes later.",
+      "It doesn't mean something is wrong, it means you're in a part of the process where clarity comes later.",
     ],
 
     normalItems: [

@@ -28,7 +28,7 @@ const PregnancyHero = () => {
               <span className="italic">from the very beginning</span>
             </h1>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-6 max-w-sm animate-fade-up [animation-delay:0.1s]">
-              A week-by-week path through pregnancy — helping you understand what's
+              A week-by-week path through pregnancy, helping you understand what's
               happening, what's normal, and what to focus on.
             </p>
             <p className="font-sans text-xs font-light text-muted-foreground/60 animate-fade-up [animation-delay:0.2s]">
@@ -46,7 +46,7 @@ const PregnancyHero = () => {
                 Find your due date
               </h2>
               <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-7">
-                Understand what stage you're in — with guidance tailored to you.
+                Understand what stage you're in, with guidance tailored to you.
               </p>
               <DueDateCalculatorForm onResult={handleResult} compact />
             </div>

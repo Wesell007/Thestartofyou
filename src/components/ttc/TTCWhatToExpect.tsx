@@ -42,7 +42,7 @@ const sections = [
       "Difficulty staying present",
     ],
     meaning:
-      "This stage is often less about action and more about patience — which can be the hardest part.",
+      "This stage is often less about action and more about patience, which can be the hardest part.",
   },
 ];
 

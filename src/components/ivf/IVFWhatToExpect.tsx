@@ -9,7 +9,7 @@ const sections = [
       "Changes that don't follow a clear pattern",
     ],
     meaning:
-      "Not every symptom has a clear meaning — and that uncertainty is part of this stage.",
+      "Not every symptom has a clear meaning, and that uncertainty is part of this stage.",
   },
   {
     tag: "Your care and monitoring",
@@ -17,7 +17,7 @@ const sections = [
     bullets: [
       "Regular scans and blood tests",
       "Specific timing for key milestones",
-      "Clear next steps — but also periods of waiting",
+      "Clear next steps, but also periods of waiting",
     ],
     meaning:
       "Your journey may feel medically structured, but emotionally uncertain between milestones.",
@@ -43,7 +43,7 @@ const sections = [
       "Difficulty staying present in the moment",
     ],
     meaning:
-      "This stage often involves less action and more patience — which can be the hardest part.",
+      "This stage often involves less action and more patience, which can be the hardest part.",
   },
 ];
 

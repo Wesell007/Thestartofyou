@@ -13,7 +13,7 @@ const PostpartumFinalCTA = () => {
           Continue your journey
         </h2>
         <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-10 max-w-md mx-auto">
-          Guidance that supports recovery, adjustment, and the early weeks — one day at a time.
+          Guidance that supports recovery, adjustment, and the early weeks, one day at a time.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link

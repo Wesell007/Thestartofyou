@@ -20,7 +20,7 @@ const TrimesterFocus = ({ data, bg = "bg-parchment" }: Props) => {
             </h2>
           </div>
 
-          {/* Right — list */}
+          {/* Right, list */}
           <div className="space-y-5">
             {data.focus.map((item, i) => (
               <div key={i} className="flex items-start gap-4">

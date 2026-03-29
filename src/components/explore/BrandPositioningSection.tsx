@@ -15,7 +15,7 @@ const BrandPositioningSection = () => {
           Guidance that grows with you
         </h2>
         <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-xl mx-auto">
-          From trying to conceive to your baby's first year, everything here is designed to support you — clearly, calmly, and without overwhelm.
+          From trying to conceive to your baby's first year, everything here is designed to support you, clearly, calmly, and without overwhelm.
         </p>
       </div>
     </section>

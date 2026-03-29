@@ -20,7 +20,7 @@ const TTCWhatMakesDifferent = () => {
             </h2>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
               This isn't a fixed checklist. It's a space that acknowledges the
-              real experience of trying to conceive — including the parts that
+              real experience of trying to conceive, including the parts that
               feel uncertain or slow.
             </p>
           </div>

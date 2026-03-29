@@ -18,7 +18,7 @@ const AIReassuranceSection = () => {
           Not sure where to start?
         </h2>
         <p className="font-sans text-base font-light text-lavender-foreground/65 mb-14 max-w-md mx-auto leading-relaxed">
-          You can ask anything — whether it's about symptoms, timing, or what to expect next.
+          You can ask anything, whether it's about symptoms, timing, or what to expect next.
         </p>
 
         <Link

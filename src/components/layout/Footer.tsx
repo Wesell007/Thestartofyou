@@ -3,15 +3,11 @@ import logoSrc from "@/assets/logo-dark.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-parchment-dark relative overflow-hidden">
-      {/* Soft wave divider */}
-      <div className="absolute top-0 left-0 right-0 overflow-hidden leading-none">
-        <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0,32 C360,56 720,8 1080,32 C1260,44 1380,24 1440,32 L1440,0 L0,0 Z" fill="hsl(40,30%,96%)" />
-        </svg>
-      </div>
+    <footer className="relative bg-parchment-dark overflow-hidden">
+      {/* Soft divider */}
+      <div className="section-divider" />
 
-      <div className="container mx-auto px-6 md:px-10 max-w-6xl pt-28 pb-14">
+      <div className="container mx-auto px-6 md:px-10 max-w-6xl pt-20 pb-14">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-14 md:gap-16">
           {/* Brand */}
           <div className="md:col-span-1">

@@ -12,7 +12,7 @@ const commonQuestions = [
   "Am I ovulating yet?",
 ];
 
-const cycleLengths = Array.from({ length: 16 }, (_, i) => i + 21); // 21–36
+const cycleLengths = Array.from({ length: 16 }, (_, i) => i + 21); // 21-36
 
 const TTCHero = () => {
   const navigate = useNavigate();

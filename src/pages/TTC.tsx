@@ -19,7 +19,7 @@ const TTC = () => {
     <div className="min-h-screen font-sans">
       <Navbar />
       <main>
-        {/* 1. Hero — orientation */}
+        {/* 1. Hero, orientation */}
         <TTCHero />
 
         {/* 2. What this journey is */}
@@ -31,7 +31,7 @@ const TTC = () => {
         {/* 4. What to focus on right now */}
         <TTCFocus />
 
-        {/* 5. What to expect — body, timing, emotionally, waiting */}
+        {/* 5. What to expect, body, timing, emotionally, waiting */}
         <TTCWhatToExpect />
 
         {/* 6. What makes this journey different */}
@@ -50,7 +50,7 @@ const TTC = () => {
         <TTCReflection />
 
 
-        {/* 12. Pathways — system connections */}
+        {/* 12. Pathways, system connections */}
         <TTCPathways />
 
         {/* 13. Final CTA */}

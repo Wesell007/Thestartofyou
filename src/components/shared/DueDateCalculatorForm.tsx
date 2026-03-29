@@ -1,10 +1,10 @@
 /**
- * DueDateCalculatorForm — shared, reusable calculator input block.
+ * DueDateCalculatorForm, shared, reusable calculator input block.
  * Used on: homepage, pregnancy hub, /due-date-calculator page.
  *
  * Props:
- *  onResult(lmp: Date) — called with the computed LMP when the user submits.
- *  compact — if true, renders a condensed single-column card form (for hero cards).
+ *  onResult(lmp: Date), called with the computed LMP when the user submits.
+ *  compact, if true, renders a condensed single-column card form (for hero cards).
  */
 
 import { useState } from "react";
@@ -241,7 +241,7 @@ const DueDateCalculatorForm = ({ onResult, compact = false }: Props) => {
           Calculate my due date
         </button>
         <p className="font-sans text-[11px] font-light text-muted-foreground/60 text-center mt-3 leading-relaxed">
-          This gives an estimate — your healthcare provider may adjust your due date based on scans.
+          This gives an estimate, your healthcare provider may adjust your due date based on scans.
         </p>
       </div>
     </div>

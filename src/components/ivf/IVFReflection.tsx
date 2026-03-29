@@ -9,7 +9,7 @@ const IVFReflection = () => {
             Take a moment
           </p>
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-5 leading-snug max-w-md mx-auto">
-            What has felt most present for you during this stage — hope, waiting, uncertainty, or something else?
+            What has felt most present for you during this stage, hope, waiting, uncertainty, or something else?
           </h2>
 
           <textarea

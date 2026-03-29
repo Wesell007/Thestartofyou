@@ -13,10 +13,10 @@ const PostpartumCapture = () => {
               Capture this stage
             </h2>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-4">
-              This stage can feel like a blur — long days that are hard to remember clearly later on.
+              This stage can feel like a blur, long days that are hard to remember clearly later on.
             </p>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-8">
-              Many parents choose to write things down as they go — small moments, thoughts, and how this time really felt.
+              Many parents choose to write things down as they go, small moments, thoughts, and how this time really felt.
             </p>
             <a
               href="/"
@@ -29,9 +29,9 @@ const PostpartumCapture = () => {
 
           <div className="flex flex-col gap-4">
             {[
-              "Day 3 — I didn't expect to feel this tired and this in love at the same time.",
-              "Week 2 — Still no real routine, but we're figuring it out.",
-              "Week 6 — Something shifted today. It feels slightly more familiar.",
+              "Day 3, I didn't expect to feel this tired and this in love at the same time.",
+              "Week 2, Still no real routine, but we're figuring it out.",
+              "Week 6, Something shifted today. It feels slightly more familiar.",
             ].map((entry, i) => (
               <div key={i} className="bg-card border border-border/40 rounded-md px-6 py-4 shadow-card-brand">
                 <div className="flex items-start gap-3">

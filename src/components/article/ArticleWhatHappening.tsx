@@ -17,7 +17,7 @@ const ArticleWhatHappening = ({ data }: Props) => {
           </h2>
         </div>
 
-        {/* Common causes — numbered horizontal cards */}
+        {/* Common causes, numbered horizontal cards */}
         <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
           Common causes
         </p>
@@ -56,7 +56,7 @@ const ArticleWhatHappening = ({ data }: Props) => {
           </div>
         )}
 
-        {/* Why it varies — full-width quiet card */}
+        {/* Why it varies, full-width quiet card */}
         <div className="bg-sage-bg/25 border border-sage-light/30 rounded-xl px-7 py-6">
           <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-sage-muted mb-3">
             Why it varies

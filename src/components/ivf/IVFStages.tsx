@@ -14,7 +14,7 @@ const stages = [
   {
     num: "02",
     title: "After transfer",
-    sub: "The waiting period — often the most uncertain stage, where questions and emotions can feel heightened",
+    sub: "The waiting period, often the most uncertain stage, where questions and emotions can feel heightened",
     href: "/ivf/after-transfer",
     image: ivfAfterImg,
   },

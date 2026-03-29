@@ -11,10 +11,10 @@ const SupportCapture = () => {
           Capture what this feels like
         </h2>
         <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-md mx-auto mb-4">
-          Moments like this can be hard to process — and easy to move past without fully understanding them.
+          Moments like this can be hard to process, and easy to move past without fully understanding them.
         </p>
         <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-md mx-auto mb-10">
-          Some people find it helpful to write things down as they go — what they're feeling, thinking, and working through.
+          Some people find it helpful to write things down as they go, what they're feeling, thinking, and working through.
         </p>
         <a
           href="#"

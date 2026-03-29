@@ -23,23 +23,23 @@ const getDptInsight = (dpt: number, transferType: "5day" | "3day" = "5day"): Dpt
     stageDetail: "The embryo has just been placed",
     whatHappening: [
       "The embryo is settling in the uterine environment",
-      "No implantation has occurred yet — this is completely normal",
+      "No implantation has occurred yet, this is completely normal",
       "Hormonal support (progesterone) is doing its work",
     ],
     whatThisMeans: "There is nothing yet to feel or interpret. The embryo is exactly where it needs to be.",
-    whatToExpect: ["Rest and gentle activity are appropriate", "Implantation typically begins 1–3 days post transfer", "Symptoms at this stage are not meaningful indicators"],
+    whatToExpect: ["Rest and gentle activity are appropriate", "Implantation typically begins 1-3 days post transfer", "Symptoms at this stage are not meaningful indicators"],
     testDay: 10,
   };
   if (dpt <= 3) return {
     stage: "Implantation window",
     stageDetail: "The embryo may be beginning to implant",
     whatHappening: [
-      "For a 5-day transfer, implantation typically occurs around days 1–3",
+      "For a 5-day transfer, implantation typically occurs around days 1-3",
       "The blastocyst is hatching from its shell and beginning to attach",
       "hCG production begins once implantation starts",
     ],
-    whatThisMeans: "The implantation window is one of the most significant — and invisible — moments of IVF. What you feel (or don't feel) is not a reliable indicator of whether implantation is happening.",
-    whatToExpect: ["Mild cramping or pelvic sensation can occur — but absence of this is equally normal", "Very light spotting (implantation bleeding) is possible", "Most people feel nothing notable during this window"],
+    whatThisMeans: "The implantation window is one of the most significant, and invisible, moments of IVF. What you feel (or don't feel) is not a reliable indicator of whether implantation is happening.",
+    whatToExpect: ["Mild cramping or pelvic sensation can occur, but absence of this is equally normal", "Very light spotting (implantation bleeding) is possible", "Most people feel nothing notable during this window"],
     testDay: 10,
   };
   if (dpt <= 6) return {
@@ -50,32 +50,32 @@ const getDptInsight = (dpt: number, transferType: "5day" | "3day" = "5day"): Dpt
       "The embryo is developing rapidly at a cellular level",
       "Your body is adjusting to rising hormone levels",
     ],
-    whatThisMeans: "Symptoms — or lack of symptoms — at this stage are not a reliable indicator of outcome. hCG levels are still too low to be detectable by home tests for a few more days.",
+    whatThisMeans: "Symptoms, or lack of symptoms, at this stage are not a reliable indicator of outcome. hCG levels are still too low to be detectable by home tests for a few more days.",
     whatToExpect: ["Breast tenderness or sensitivity may begin", "Fatigue is common and can be hard to separate from progesterone effects", "Some people experience mild nausea", "Testing too early will likely show a negative, even if pregnancy has occurred"],
     testDay: 10,
   };
   if (dpt <= 9) return {
     stage: "Pre-test window",
-    stageDetail: "hCG is rising — testing is approaching",
+    stageDetail: "hCG is rising, testing is approaching",
     whatHappening: [
       "If implantation has occurred, hCG is now doubling roughly every 48 hours",
       "Progesterone support continues",
       "Your body may begin showing early pregnancy signals",
     ],
-    whatThisMeans: "You are close to your test date. This is often the most emotionally intense part of the IVF process. Whatever you're feeling — or not feeling — is valid.",
-    whatToExpect: ["Testing before your official test date may give inaccurate results", "Symptom intensity does not correlate with outcome", "Your clinic will confirm your beta hCG date — this is the most accurate measure"],
+    whatThisMeans: "You are close to your test date. This is often the most emotionally intense part of the IVF process. Whatever you're feeling, or not feeling, is valid.",
+    whatToExpect: ["Testing before your official test date may give inaccurate results", "Symptom intensity does not correlate with outcome", "Your clinic will confirm your beta hCG date, this is the most accurate measure"],
     testDay: 10,
   };
   if (dpt <= 12) return {
     stage: "Test window",
     stageDetail: "Official testing is typically done at this stage",
     whatHappening: [
-      "Your clinic's official test day (OTD) is typically around day 10–12",
+      "Your clinic's official test day (OTD) is typically around day 10-12",
       "Blood hCG testing is the most accurate measure at this stage",
       "Home pregnancy tests may now be more reliable",
     ],
     whatThisMeans: "This is your test window. A blood test from your clinic measures hCG with much greater accuracy than home tests. Both positive and negative results need time to process.",
-    whatToExpect: ["Your clinic will guide next steps based on results", "If positive: an early scan will typically be arranged for 6–7 weeks", "If results are uncertain: repeat testing may be advised"],
+    whatToExpect: ["Your clinic will guide next steps based on results", "If positive: an early scan will typically be arranged for 6-7 weeks", "If results are uncertain: repeat testing may be advised"],
     testDay: 10,
   };
   return {
@@ -83,7 +83,7 @@ const getDptInsight = (dpt: number, transferType: "5day" | "3day" = "5day"): Dpt
     stageDetail: "Monitoring and early scan stage",
     whatHappening: [
       "If your test was positive, your clinic will be monitoring hCG levels",
-      "An early viability scan is typically arranged around 6–7 weeks",
+      "An early viability scan is typically arranged around 6-7 weeks",
       "This is a period of medical monitoring and emotional adjustment",
     ],
     whatThisMeans: "This stage involves both medical monitoring and significant emotional adjustment. Uncertainty doesn't necessarily mean something is wrong.",
@@ -219,7 +219,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           <FadeIn delay={280}>
             <div className="bg-sage-bg/30 border border-sage-light/30 rounded-xl px-6 py-5">
               <p className="font-serif italic text-base text-foreground/70 leading-relaxed text-center">
-                This stage can feel uncertain. Experiences can vary — both feeling symptoms and feeling nothing can be normal.
+                This stage can feel uncertain. Experiences can vary, both feeling symptoms and feeling nothing can be normal.
               </p>
             </div>
           </FadeIn>
@@ -332,7 +332,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                 {/* Anxiety-reducing callout */}
                 <div className="mt-6 bg-sage-bg/30 border border-sage-light/30 rounded-lg px-5 py-4">
                   <p className="font-serif italic text-sm text-foreground/70 leading-relaxed">
-                    Symptoms — or lack of symptoms — are not a reliable indicator of outcome at this stage.
+                    Symptoms, or lack of symptoms, are not a reliable indicator of outcome at this stage.
                   </p>
                 </div>
               </div>
@@ -382,7 +382,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
               Follow your IVF journey
             </h2>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-md mx-auto mb-8">
-              Get guidance tailored to your stage — what's happening, what's normal, and what to expect next.
+              Get guidance tailored to your stage, what's happening, what's normal, and what to expect next.
             </p>
             <Link
               to="/ivf"
@@ -407,7 +407,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                 Ask about this stage
               </h2>
               <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-6">
-                Whatever's been on your mind — symptoms, the wait, what's normal — you can ask and get guidance tailored to where you are right now.
+                Whatever's been on your mind, symptoms, the wait, what's normal, you can ask and get guidance tailored to where you are right now.
               </p>
               <div className="relative mb-5">
                 <input
@@ -464,7 +464,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
             {[
               { label: "After transfer guidance", sub: "What to expect in the days following transfer", href: "/ivf" },
               { label: "Early IVF pregnancy", sub: "What happens if your test is positive", href: "/ivf" },
-              { label: "Common concerns at this stage", sub: "What's normal — and when to contact your clinic", href: "/ivf" },
+              { label: "Common concerns at this stage", sub: "What's normal, and when to contact your clinic", href: "/ivf" },
             ].map((link, i) => (
               <FadeIn key={i} delay={i * 60}>
                 <Link

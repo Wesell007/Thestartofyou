@@ -27,7 +27,7 @@ const WeekAISupport = ({ data }: Props) => {
             </p>
           </div>
 
-          {/* Right — search bar with stage-aware prompts */}
+          {/* Right, search bar with stage-aware prompts */}
           <div>
             <AISearchBar
               placeholder="What's on your mind this week?"

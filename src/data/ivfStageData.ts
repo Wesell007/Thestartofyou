@@ -144,7 +144,7 @@ export const ivfStages: Record<string, StageData> = {
         "What can I let go of right now?",
       ],
       aiInputPlaceholder: "What's been most challenging before transfer?",
-      emotionalTitle: "Preparation can feel intense — that's understandable.",
+      emotionalTitle: "Preparation can feel intense, that's understandable.",
       emotionalBody: "You're carrying a lot, and consistency is already meaningful progress.",
       reflectionPrompt: "What has helped you stay grounded in this prep phase?",
       pathways: [
@@ -174,7 +174,7 @@ export const ivfStages: Record<string, StageData> = {
       stageIndicator: "Stage 2 of 3",
       title: "After transfer",
       subtitle:
-        "The waiting period — often the most uncertain stage, where questions and emotions can feel heightened.",
+        "The waiting period, often the most uncertain stage, where questions and emotions can feel heightened.",
     },
     {
       whatThisIs: [
@@ -237,7 +237,7 @@ export const ivfStages: Record<string, StageData> = {
       ],
       interpretation: [
         "After transfer is about waiting with care, not control.",
-        "If this feels hard, that reflects the stage — not your strength.",
+        "If this feels hard, that reflects the stage, not your strength.",
       ],
       questions: [
         { q: "Is this symptom meaningful?", sub: "How to interpret changes cautiously" },

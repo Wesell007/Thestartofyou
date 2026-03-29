@@ -24,7 +24,7 @@ const SupportNoRightWords = () => {
         </ul>
         <div className="border-l-2 border-sage/30 pl-6">
           <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-            You can start from wherever you are — even if it's just a feeling.
+            You can start from wherever you are, even if it's just a feeling.
           </p>
         </div>
       </div>

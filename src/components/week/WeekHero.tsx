@@ -58,7 +58,7 @@ const WeekHero = ({ data, prevWeek, nextWeek }: Props) => {
         </div>
       </div>
 
-      {/* Stat circles — overlapping the banner/content boundary */}
+      {/* Stat circles, overlapping the banner/content boundary */}
       <div className="relative -mt-16 mb-16">
         <div className="flex items-end justify-center gap-5 sm:gap-8">
           {/* Baby size illustration */}

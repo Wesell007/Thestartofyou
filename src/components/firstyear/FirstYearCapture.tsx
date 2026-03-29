@@ -16,7 +16,7 @@ const FirstYearCapture = () => {
               This year can pass quickly, even when the days feel long.
             </p>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-8">
-              Many parents look back and realise how much changed — and how hard it is to remember the details clearly. Writing things down as you go can help capture what this time really felt like.
+              Many parents look back and realise how much changed, and how hard it is to remember the details clearly. Writing things down as you go can help capture what this time really felt like.
             </p>
             <a
               href="/"
@@ -29,9 +29,9 @@ const FirstYearCapture = () => {
 
           <div className="flex flex-col gap-4">
             {[
-              "Month 2 — I didn't expect to feel this mix of exhaustion and wonder every single day.",
-              "Month 5 — We finally found something that works. For now.",
-              "Month 9 — Everything is changing again. But so am I.",
+              "Month 2, I didn't expect to feel this mix of exhaustion and wonder every single day.",
+              "Month 5, We finally found something that works. For now.",
+              "Month 9, Everything is changing again. But so am I.",
             ].map((entry, i) => (
               <div key={i} className="bg-card border border-border/40 rounded-md px-6 py-4 shadow-card-brand">
                 <div className="flex items-start gap-3">

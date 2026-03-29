@@ -15,7 +15,7 @@ const PreparingHero = () => {
           Preparing for <span className="italic">your baby</span>
         </h1>
         <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed mb-14 max-w-xl mx-auto animate-fade-up [animation-delay:0.1s]">
-          What you need, what matters, and how to prepare — without overwhelm.
+          What you need, what matters, and how to prepare, without overwhelm.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up [animation-delay:0.2s]">

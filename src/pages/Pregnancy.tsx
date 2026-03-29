@@ -19,7 +19,7 @@ const Pregnancy = () => {
     <div className="min-h-screen font-sans">
       <Navbar />
       <main>
-        {/* 1. Hero — orientation */}
+        {/* 1. Hero, orientation */}
         <PregnancyHero />
 
         {/* 2. What this journey is */}
@@ -28,13 +28,13 @@ const Pregnancy = () => {
         {/* 3. What to focus on right now */}
         <FocusRightNow />
 
-        {/* 4. What to expect — body, baby, emotions, uncertainty */}
+        {/* 4. What to expect, body, baby, emotions, uncertainty */}
         <WhatToExpect />
 
         {/* 5. What makes this journey different */}
         <WhatMakesDifferent />
 
-        {/* 6. Pregnancy timeline — visual system */}
+        {/* 6. Pregnancy timeline, visual system */}
         <PregnancyTimeline />
 
         {/* 7. Week-by-week navigation */}

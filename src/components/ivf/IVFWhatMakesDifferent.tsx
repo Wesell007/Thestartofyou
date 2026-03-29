@@ -19,7 +19,7 @@ const IVFWhatMakesDifferent = () => {
               What makes this journey different
             </h2>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-              IVF follows a structured medical process, but the emotional experience often has its own rhythm — one that doesn't always align with the clinical steps.
+              IVF follows a structured medical process, but the emotional experience often has its own rhythm, one that doesn't always align with the clinical steps.
             </p>
           </div>
 

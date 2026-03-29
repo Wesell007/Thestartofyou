@@ -37,7 +37,7 @@ const postpartumBase: Omit<
   ],
   includeJournal: false,
   finalCtaTitle: "Continue your journey",
-  finalCtaSub: "You don't need to do this perfectly — just one step at a time.",
+  finalCtaSub: "You don't need to do this perfectly, just one step at a time.",
 };
 
 const makePostpartumStage = (
@@ -66,13 +66,13 @@ export const postpartumStages: Record<string, StageData> = {
       stageIndicator: "Stage 1 of 3",
       title: "Early days",
       subtitle:
-        "The first days after birth — where recovery, adjustment, and caring for your baby all happen at once.",
+        "The first days after birth, where recovery, adjustment, and caring for your baby all happen at once.",
     },
     {
       whatThisIs: [
         "This stage begins immediately after birth and can feel both intense and disorienting.",
         "Your body is recovering while your baby adjusts to life outside the womb.",
-        "There may be very little structure at first — just immediate needs and constant change.",
+        "There may be very little structure at first, just immediate needs and constant change.",
       ],
       focusItems: [
         "Recovery and rest where possible",
@@ -139,7 +139,7 @@ export const postpartumStages: Record<string, StageData> = {
       ],
       interpretation: [
         "The early days are about stabilising, not mastering.",
-        "If things feel intense, that reflects the stage — not your capability.",
+        "If things feel intense, that reflects the stage, not your capability.",
       ],
       questions: [
         { q: "Is this level of exhaustion normal?", sub: "Understanding early postpartum load" },
@@ -269,7 +269,7 @@ export const postpartumStages: Record<string, StageData> = {
       aiInputPlaceholder: "What feels most uncertain in these weeks?",
       emotionalTitle: "You're still in a phase of adjustment.",
       emotionalBody: "Not feeling fully settled yet is common at this point.",
-      reflectionPrompt: "What has become easier — and what still feels heavy?",
+      reflectionPrompt: "What has become easier, and what still feels heavy?",
       pathways: [
         {
           label: "Next Stage",
@@ -302,7 +302,7 @@ export const postpartumStages: Record<string, StageData> = {
       whatThisIs: [
         "This stage is less about immediate recovery and more about sustainable rhythm.",
         "You may feel more capable, while still navigating ongoing change.",
-        "Progress here usually looks like adaptation — not full predictability.",
+        "Progress here usually looks like adaptation, not full predictability.",
       ],
       focusItems: [
         "Strengthening routines that actually fit your life",
@@ -332,7 +332,7 @@ export const postpartumStages: Record<string, StageData> = {
       expectSections: [
         {
           tag: "Rhythm",
-          title: "You may notice more consistency — with interruptions.",
+          title: "You may notice more consistency, with interruptions.",
           bullets: [
             "Some routines become easier to repeat",
             "New phases can disrupt what was working",
@@ -382,7 +382,7 @@ export const postpartumStages: Record<string, StageData> = {
         "How do I avoid burnout in this stage?",
       ],
       aiInputPlaceholder: "What's feeling most important right now?",
-      emotionalTitle: "You're still adapting — and that's healthy.",
+      emotionalTitle: "You're still adapting, and that's healthy.",
       emotionalBody: "Postpartum is a process, not a single moment to complete.",
       reflectionPrompt: "What has helped you feel more grounded in this stage?",
       pathways: [

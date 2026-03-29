@@ -35,7 +35,7 @@ const PreparingEssentials = () => {
             </ul>
 
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mt-2">
-              Everything else is additional — not essential.
+              Everything else is additional, not essential.
             </p>
 
             <div className="bg-sage-bg/40 border border-sage-light/30 rounded-md px-5 py-4 mt-2">

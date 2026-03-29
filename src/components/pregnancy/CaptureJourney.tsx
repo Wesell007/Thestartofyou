@@ -17,7 +17,7 @@ const CaptureJourney = () => {
               Pregnancy is full of moments that can feel intense, surprising, or easy to forget later on.
             </p>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-8">
-              Many parents choose to write things down as they go — thoughts, feelings, and small moments that matter.
+              Many parents choose to write things down as they go, thoughts, feelings, and small moments that matter.
             </p>
             <a
               href="/"
@@ -28,12 +28,12 @@ const CaptureJourney = () => {
             </a>
           </div>
 
-          {/* Right — soft visual */}
+          {/* Right, soft visual */}
           <div className="flex flex-col gap-4">
             {[
-              "Week 8 — I noticed something shift today…",
-              "Week 12 — We heard the heartbeat for the first time.",
-              "Week 20 — Things feel more real now.",
+              "Week 8, I noticed something shift today…",
+              "Week 12, We heard the heartbeat for the first time.",
+              "Week 20, Things feel more real now.",
             ].map((entry, i) => (
               <div
                 key={i}

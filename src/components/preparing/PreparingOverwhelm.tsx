@@ -46,7 +46,7 @@ const PreparingOverwhelm = () => {
                   What this means
                 </p>
                 <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-                  Feeling unsure doesn't mean you're unprepared — it means there's too much noise.
+                  Feeling unsure doesn't mean you're unprepared, it means there's too much noise.
                 </p>
               </div>
             </div>
@@ -76,7 +76,7 @@ const PreparingOverwhelm = () => {
                   What this means
                 </p>
                 <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-                  There's no clear moment where everything feels fully ready — and that's normal.
+                  There's no clear moment where everything feels fully ready, and that's normal.
                 </p>
               </div>
             </div>

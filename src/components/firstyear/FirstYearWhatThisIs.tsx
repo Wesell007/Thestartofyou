@@ -8,14 +8,14 @@ const FirstYearWhatThisIs = () => {
         <div className="mb-14 rounded-2xl overflow-hidden border border-border/40 shadow-card-brand">
           <img
             src={firstyearJourneyImg}
-            alt="Discovering the world together — one small moment at a time"
+            alt="Discovering the world together, one small moment at a time"
             loading="lazy"
             width={1024}
             height={640}
             className="w-full h-64 sm:h-80 md:h-96 object-cover"
           />
           <p className="px-6 py-3 bg-card font-serif italic text-sm text-muted-foreground">
-            — Discovering the world together — one small moment at a time
+          , Discovering the world together, one small moment at a time
           </p>
         </div>
 
@@ -28,13 +28,13 @@ const FirstYearWhatThisIs = () => {
           </h2>
           <div className="space-y-5 font-sans text-base font-light text-muted-foreground leading-relaxed">
             <p>
-              The first year is a period of constant change — for both your baby and you.
+              The first year is a period of constant change, for both your baby and you.
             </p>
             <p>
               While things may begin to feel more manageable than the early weeks, this stage rarely feels fully settled. Patterns start to form, then shift again, and new phases often arrive just as others begin to feel familiar.
             </p>
             <p>
-              This space is here to guide you through that — clearly, calmly, and without pressure.
+              This space is here to guide you through that, clearly, calmly, and without pressure.
             </p>
           </div>
         </div>

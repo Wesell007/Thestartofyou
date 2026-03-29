@@ -13,10 +13,10 @@ const PreparingCapture = () => {
               Capture this stage
             </h2>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-4">
-              Preparing for your baby often brings a lot of thoughts — what you need, what you might be missing, and how this will all feel.
+              Preparing for your baby often brings a lot of thoughts, what you need, what you might be missing, and how this will all feel.
             </p>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-8">
-              Many parents choose to write things down during this stage — not just plans, but what's on their mind as they get ready.
+              Many parents choose to write things down during this stage, not just plans, but what's on their mind as they get ready.
             </p>
             <a
               href="/"
@@ -29,7 +29,7 @@ const PreparingCapture = () => {
 
           <div className="flex flex-col gap-4">
             {[
-              "I keep adding things to the list — I think I need to stop and ask what actually matters.",
+              "I keep adding things to the list, I think I need to stop and ask what actually matters.",
               "We don't have much space. I want to keep things simple but I'm worried it's not enough.",
               "I just want to feel ready. But I'm not sure what 'ready' even looks like.",
             ].map((entry, i) => (

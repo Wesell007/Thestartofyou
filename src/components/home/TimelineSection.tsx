@@ -80,7 +80,7 @@ const TimelineSection = () => {
               {m.current ? (
                 <>
                   <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-terracotta text-terracotta-foreground font-sans text-[11px] font-medium px-3.5 py-1.5 rounded-pill whitespace-nowrap shadow-cta">
-                    You are here — Week {currentWeek}
+                    You are here, Week {currentWeek}
                   </div>
                   <div className="w-4 h-4 rounded-full border-2 border-terracotta bg-terracotta-foreground shadow-cta" />
                 </>

@@ -17,10 +17,10 @@ const supportingLayers = [
 ];
 
 const differentiators = [
-  { title: "Guidance, not overload", desc: "We focus on what matters now — not everything at once." },
+  { title: "Guidance, not overload", desc: "We focus on what matters now, not everything at once." },
   { title: "Built around real experiences", desc: "Not just timelines, but how each stage actually feels." },
   { title: "Support when it matters most", desc: "Including the moments that are often overlooked." },
-  { title: "A system, not just content", desc: "Everything connects — from tools to guidance to support." },
+  { title: "A system, not just content", desc: "Everything connects, from tools to guidance to support." },
 ];
 
 const missionValues = ["clear", "calm", "human"];
@@ -39,7 +39,7 @@ const About = () => {
               The start of something different
             </h1>
             <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed max-w-xl mx-auto animate-fade-up [animation-delay:0.1s]">
-              We're here to guide you through one of the most important journeys of your life — clearly, calmly, and without overwhelm.
+              We're here to guide you through one of the most important journeys of your life, clearly, calmly, and without overwhelm.
             </p>
           </div>
         </section>
@@ -63,7 +63,7 @@ const About = () => {
               ))}
             </ul>
             <p className="font-sans text-sm font-light text-muted-foreground text-center leading-relaxed max-w-md mx-auto mb-3">
-              You search, scroll, compare — and still feel unsure what actually matters.
+              You search, scroll, compare, and still feel unsure what actually matters.
             </p>
             <div className="text-center space-y-1.5 mt-8">
               <p className="font-serif text-sm italic text-foreground/80">
@@ -85,7 +85,7 @@ const About = () => {
               So we built something different
             </h2>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-lg mx-auto mb-10">
-              Instead of endless content, we've created a structured system that guides you through each stage — step by step.
+              Instead of endless content, we've created a structured system that guides you through each stage, step by step.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto text-left">
               {[
@@ -95,7 +95,7 @@ const About = () => {
                 "Support you emotionally as well as practically",
               ].map((point) => (
                 <p key={point} className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-                  — {point}
+                , {point}
                 </p>
               ))}
             </div>
@@ -140,7 +140,7 @@ const About = () => {
               ))}
             </div>
             <p className="font-serif text-sm italic text-foreground/80 max-w-sm mx-auto">
-              Each stage connects — so you're never starting over, just moving forward.
+              Each stage connects, so you're never starting over, just moving forward.
             </p>
           </div>
         </section>
@@ -184,7 +184,7 @@ const About = () => {
               Support that adapts to you
             </h2>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-lg mx-auto mb-4">
-              As you move through your journey, the experience adapts with you — helping you understand what's happening, what to expect, and what matters next.
+              As you move through your journey, the experience adapts with you, helping you understand what's happening, what to expect, and what matters next.
             </p>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-md mx-auto">
               You can ask questions, explore your stage, and get guidance that reflects where you are.
@@ -204,7 +204,7 @@ const About = () => {
               Why this exists
             </h2>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-md mx-auto mb-8">
-              Because this journey isn't just about what happens — it's about how it feels along the way.
+              Because this journey isn't just about what happens, it's about how it feels along the way.
             </p>
             <p className="font-sans text-sm font-light text-muted-foreground mb-4">
               We believe support should feel:

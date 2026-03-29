@@ -71,7 +71,7 @@ const Product = () => {
                     className="w-full rounded-2xl shadow-elevated object-cover"
                   />
                   <p className="font-serif text-sm italic text-muted-foreground mt-4 text-center">
-                    — A space for what you're feeling right now
+                  , A space for what you're feeling right now
                   </p>
                 </div>
               </div>
@@ -106,7 +106,7 @@ const Product = () => {
               What is The Start of You?
             </h2>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-lg mx-auto">
-              A guided journal designed to support you through pregnancy and beyond — helping you capture your thoughts, experiences, and moments as they happen.
+              A guided journal designed to support you through pregnancy and beyond, helping you capture your thoughts, experiences, and moments as they happen.
             </p>
           </div>
         </section>
@@ -143,7 +143,7 @@ const Product = () => {
             <div className="flex flex-col gap-5 max-w-sm mx-auto text-left">
               {insideItems.map((item) => (
                 <p key={item} className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-                  — {item}
+                , {item}
                 </p>
               ))}
             </div>
@@ -167,7 +167,7 @@ const Product = () => {
               className="w-full rounded-2xl shadow-elevated object-cover"
             />
             <p className="font-serif text-sm italic text-muted-foreground mt-5">
-              — Some things are worth holding onto
+            , Some things are worth holding onto
             </p>
           </div>
         </section>
@@ -178,10 +178,10 @@ const Product = () => {
           <div className="container mx-auto px-6 md:px-10 max-w-2xl text-center">
             <div className="editorial-rule mb-8" />
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-7 leading-snug">
-              Part of your journey — not separate from it
+              Part of your journey, not separate from it
             </h2>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-lg mx-auto mb-10">
-              This isn't something separate to figure out. It fits alongside your journey — a place to capture what you're experiencing as you move through each stage.
+              This isn't something separate to figure out. It fits alongside your journey, a place to capture what you're experiencing as you move through each stage.
             </p>
             <Link
               to="/explore"

@@ -7,7 +7,7 @@ const steps = [
   {
     phase: "Mid-year",
     title: "Small patterns begin to form",
-    detail: "Routines start to emerge — fragile at first, then more reliable over time.",
+    detail: "Routines start to emerge, fragile at first, then more reliable over time.",
   },
   {
     phase: "Later months",
@@ -17,7 +17,7 @@ const steps = [
   {
     phase: "Approaching one year",
     title: "Familiarity increases",
-    detail: "Things don't become fixed — they become more manageable.",
+    detail: "Things don't become fixed, they become more manageable.",
   },
 ];
 
@@ -59,7 +59,7 @@ const FirstYearProgression = () => {
             What this means
           </p>
           <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-            Things don't become fixed — they become more manageable.
+            Things don't become fixed, they become more manageable.
           </p>
         </div>
       </div>

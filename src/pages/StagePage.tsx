@@ -114,7 +114,7 @@ const StagePage = () => {
                   What to do right now
                 </h2>
                 <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-                  Simple, clear actions — not a rigid plan. Do what feels manageable.
+                  Simple, clear actions, not a rigid plan. Do what feels manageable.
                 </p>
               </div>
               <div className="space-y-4">
@@ -156,7 +156,7 @@ const StagePage = () => {
               </div>
               <div className="border-t border-border/40 pt-6">
                 <p className="font-serif italic text-lg text-foreground leading-snug">
-                  Then — {data.reassuranceClose}
+                  Then, {data.reassuranceClose}
                 </p>
               </div>
             </div>
@@ -291,7 +291,7 @@ const StagePage = () => {
                 Guidance
               </p>
               <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight max-w-lg">
-                What's normal — and when to seek support
+                What's normal, and when to seek support
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

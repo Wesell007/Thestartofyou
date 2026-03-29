@@ -13,10 +13,10 @@ const WeekNormal = ({ data }: Props) => {
           Safety & reassurance
         </p>
         <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
-          What's normal — and when to seek support
+          What's normal, and when to seek support
         </h2>
         <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-14 max-w-xl">
-          Variation is normal at this stage. The list below reflects what many people experience — and what's worth raising with your care team.
+          Variation is normal at this stage. The list below reflects what many people experience, and what's worth raising with your care team.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -51,7 +51,7 @@ const WeekNormal = ({ data }: Props) => {
           </div>
         </div>
 
-        {/* Medical review signal — subtle, elegant */}
+        {/* Medical review signal, subtle, elegant */}
         <p className="font-sans text-xs font-light text-sage-muted flex items-center gap-1.5">
           <span className="text-sage">✔</span> Medically reviewed by Jenny Joines
         </p>

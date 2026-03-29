@@ -5,7 +5,7 @@ const pathways = [
   {
     label: "After Transfer",
     title: "After transfer guidance",
-    sub: "The waiting period — what to expect and how to navigate it",
+    sub: "The waiting period, what to expect and how to navigate it",
     href: "/ivf/after-transfer",
   },
   {

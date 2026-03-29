@@ -8,14 +8,14 @@ const IVFWhatThisIs = () => {
         <div className="mb-14 rounded-2xl overflow-hidden border border-border/40 shadow-card-brand">
           <img
             src={ivfJourneyImg}
-            alt="Taking it one step at a time — your journey, your pace"
+            alt="Taking it one step at a time, your journey, your pace"
             loading="lazy"
             width={1024}
             height={640}
             className="w-full h-64 sm:h-80 md:h-96 object-cover"
           />
           <p className="px-6 py-3 bg-card font-serif italic text-sm text-muted-foreground">
-            — Taking it one step at a time — your journey, your pace
+          , Taking it one step at a time, your journey, your pace
           </p>
         </div>
 
@@ -34,7 +34,7 @@ const IVFWhatThisIs = () => {
               At the same time, it can involve waiting, uncertainty, and emotional highs and lows that feel different from other experiences.
             </p>
             <p>
-              This space is here to guide you through each stage — clearly and calmly.
+              This space is here to guide you through each stage, clearly and calmly.
             </p>
           </div>
         </div>

@@ -6,7 +6,7 @@ import trimesterThirdImg from "@/assets/trimester-third.jpg";
 const trimesters = [
   {
     label: "First Trimester",
-    range: "Weeks 1–12",
+    range: "Weeks 1-12",
     sub: "Foundation & Early Development",
     href: "/pregnancy/first-trimester",
     start: 1,
@@ -16,7 +16,7 @@ const trimesters = [
   },
   {
     label: "Second Trimester",
-    range: "Weeks 13–27",
+    range: "Weeks 13-27",
     sub: "Growth & Increasing Awareness",
     href: "/pregnancy/second-trimester",
     start: 13,
@@ -26,7 +26,7 @@ const trimesters = [
   },
   {
     label: "Third Trimester",
-    range: "Weeks 28–40",
+    range: "Weeks 28-40",
     sub: "Preparation & Arrival",
     href: "/pregnancy/third-trimester",
     start: 28,

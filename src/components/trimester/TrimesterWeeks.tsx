@@ -30,7 +30,7 @@ const TrimesterWeeks = ({ data, bg = "bg-parchment-dark" }: Props) => {
             Follow your journey week by week
           </h2>
           <p className="font-sans text-base font-light text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            {data.range} — each week builds on the last.
+            {data.range}, each week builds on the last.
           </p>
         </div>
 

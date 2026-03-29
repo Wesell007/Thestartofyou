@@ -15,7 +15,7 @@ const FirstYearHero = () => {
           Your baby's <span className="italic">first year</span>
         </h1>
         <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed mb-14 max-w-xl mx-auto animate-fade-up [animation-delay:0.1s]">
-          Growth, change, and learning to adapt — one stage at a time.
+          Growth, change, and learning to adapt, one stage at a time.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up [animation-delay:0.2s]">

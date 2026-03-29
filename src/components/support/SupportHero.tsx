@@ -25,7 +25,7 @@ const SupportHero = () => {
           Support, when you need it
         </h1>
         <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed max-w-xl mx-auto mb-14 animate-fade-up [animation-delay:0.1s]">
-          If something feels uncertain, overwhelming, or different, you're not alone — this space is here to help you understand what's going on.
+          If something feels uncertain, overwhelming, or different, you're not alone, this space is here to help you understand what's going on.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up [animation-delay:0.2s]">
           <a

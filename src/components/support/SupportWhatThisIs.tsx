@@ -8,14 +8,14 @@ const SupportWhatThisIs = () => {
         <div className="mb-14 rounded-2xl overflow-hidden border border-border/40 shadow-card-brand">
           <img
             src={supportJourneyImg}
-            alt="It's okay to pause — you don't have to have all the answers"
+            alt="It's okay to pause, you don't have to have all the answers"
             loading="lazy"
             width={1024}
             height={640}
             className="w-full h-64 sm:h-80 md:h-96 object-cover"
           />
           <p className="px-6 py-3 bg-card font-serif italic text-sm text-muted-foreground">
-            — It's okay to pause — you don't have to have all the answers
+          , It's okay to pause, you don't have to have all the answers
           </p>
         </div>
 
@@ -28,7 +28,7 @@ const SupportWhatThisIs = () => {
           </h2>
           <div className="space-y-5 font-sans text-base font-light text-muted-foreground leading-relaxed">
             <p>
-              Sometimes things don't feel quite right — physically, emotionally, or both.
+              Sometimes things don't feel quite right, physically, emotionally, or both.
             </p>
             <p>
               You might not know exactly what you're looking for, only that something feels off.

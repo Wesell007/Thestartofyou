@@ -16,7 +16,7 @@ const IVFEmotionalReminder = () => {
         </h2>
 
         <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-lg mx-auto">
-          You don't need to feel certain to keep moving forward — taking things one step at a time is enough.
+          You don't need to feel certain to keep moving forward, taking things one step at a time is enough.
         </p>
       </div>
     </section>

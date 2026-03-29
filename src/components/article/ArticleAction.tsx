@@ -19,7 +19,7 @@ const ArticleAction = ({ data }: Props) => {
             What you can do
           </h2>
           <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-md">
-            Simple, realistic steps — not a rigid plan. Do what works for you right now.
+            Simple, realistic steps, not a rigid plan. Do what works for you right now.
           </p>
         </div>
 

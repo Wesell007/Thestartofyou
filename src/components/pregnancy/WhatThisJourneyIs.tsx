@@ -8,14 +8,14 @@ const WhatThisJourneyIs = () => {
         <div className="mb-14 rounded-2xl overflow-hidden border border-border/40 shadow-card-brand">
           <img
             src={pregnancyJourneyImg}
-            alt="A quiet space waiting — the journey begins before you realise"
+            alt="A quiet space waiting, the journey begins before you realise"
             loading="lazy"
             width={1024}
             height={640}
             className="w-full h-64 sm:h-80 md:h-96 object-cover"
           />
           <p className="px-6 py-3 bg-card font-serif italic text-sm text-muted-foreground">
-            — A quiet space waiting — the journey begins before you realise
+          , A quiet space waiting, the journey begins before you realise
           </p>
         </div>
 
@@ -32,7 +32,7 @@ const WhatThisJourneyIs = () => {
             </p>
             <p>
               From early biological shifts and implantation through to birth,
-              each stage unfolds gradually — physically, emotionally, and
+              each stage unfolds gradually, physically, emotionally, and
               mentally.
             </p>
             <p>

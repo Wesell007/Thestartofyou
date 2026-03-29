@@ -24,7 +24,7 @@ const SupportEnoughToAsk = () => {
         </ul>
         <div className="border-l-2 border-sage/30 pl-6">
           <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-            If something is on your mind, it's valid to ask about it — even if you're unsure.
+            If something is on your mind, it's valid to ask about it, even if you're unsure.
           </p>
         </div>
       </div>

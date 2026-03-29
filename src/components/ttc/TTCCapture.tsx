@@ -17,7 +17,7 @@ const TTCCapture = () => {
               This stage can feel full of waiting, hope, and small moments that are easy to overlook.
             </p>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-10">
-              Many people choose to write things down as they go — thoughts, feelings, and reflections across each cycle.
+              Many people choose to write things down as they go, thoughts, feelings, and reflections across each cycle.
             </p>
             <a
               href="/"
@@ -28,12 +28,12 @@ const TTCCapture = () => {
             </a>
           </div>
 
-          {/* Right — journal entries */}
+          {/* Right, journal entries */}
           <div className="flex flex-col gap-4">
             {[
-              "Cycle 1 — Trying not to over-think the timing…",
-              "Cycle 2 — The waiting is harder than I expected.",
-              "Cycle 3 — Letting go of the need to know.",
+              "Cycle 1, Trying not to over-think the timing…",
+              "Cycle 2, The waiting is harder than I expected.",
+              "Cycle 3, Letting go of the need to know.",
             ].map((entry, i) => (
               <div
                 key={i}

@@ -29,7 +29,7 @@ const FeaturesSection = () => {
           <div className="flex flex-col gap-14 md:text-right order-2 md:order-1">
             {features.slice(0, 2).map((f) => (
               <p key={f.label} className="font-serif italic text-lg md:text-xl text-foreground/85 leading-snug">
-                – {f.label}
+                - {f.label}
               </p>
             ))}
           </div>
@@ -51,7 +51,7 @@ const FeaturesSection = () => {
             </div>
 
             <p className="font-serif italic text-lg md:text-xl text-foreground/85 leading-snug text-center mt-2">
-              – Nothing more than what you need.<br />Nothing that pulls you ahead.
+              - Nothing more than what you need.<br />Nothing that pulls you ahead.
             </p>
           </div>
 
@@ -59,7 +59,7 @@ const FeaturesSection = () => {
           <div className="flex flex-col gap-14 md:text-left order-3">
             {features.slice(2, 4).map((f) => (
               <p key={f.label} className="font-serif italic text-lg md:text-xl text-foreground/85 leading-snug">
-                – {f.label}
+                - {f.label}
               </p>
             ))}
           </div>

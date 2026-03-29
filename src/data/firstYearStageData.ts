@@ -37,7 +37,7 @@ const firstYearBase: Omit<
   ],
   includeJournal: false,
   finalCtaTitle: "Continue your journey",
-  finalCtaSub: "The first year is full of change — your adaptation is progress.",
+  finalCtaSub: "The first year is full of change, your adaptation is progress.",
 };
 
 const makeFirstYearStage = (
@@ -64,7 +64,7 @@ export const firstYearStages: Record<string, StageData> = {
   "0-3-months": makeFirstYearStage(
     {
       stageIndicator: "Stage 1 of 4",
-      title: "0–3 months",
+      title: "0-3 months",
       subtitle: "Adjustment, early patterns, and moving out of survival mode.",
     },
     {
@@ -147,7 +147,7 @@ export const firstYearStages: Record<string, StageData> = {
       pathways: [
         {
           label: "Next Stage",
-          title: "3–6 months",
+          title: "3-6 months",
           sub: "More interaction and emerging routines",
           href: "/first-year/3-6-months",
         },
@@ -169,7 +169,7 @@ export const firstYearStages: Record<string, StageData> = {
   "3-6-months": makeFirstYearStage(
     {
       stageIndicator: "Stage 2 of 4",
-      title: "3–6 months",
+      title: "3-6 months",
       subtitle: "More awareness, interaction, and early routines beginning to form.",
     },
     {
@@ -252,13 +252,13 @@ export const firstYearStages: Record<string, StageData> = {
       pathways: [
         {
           label: "Next Stage",
-          title: "6–9 months",
+          title: "6-9 months",
           sub: "Movement, curiosity, and new patterns",
           href: "/first-year/6-9-months",
         },
         {
           label: "Previous",
-          title: "0–3 months",
+          title: "0-3 months",
           sub: "Early adjustment",
           href: "/first-year/0-3-months",
         },
@@ -274,9 +274,9 @@ export const firstYearStages: Record<string, StageData> = {
   "6-9-months": makeFirstYearStage(
     {
       stageIndicator: "Stage 3 of 4",
-      title: "6–9 months",
+      title: "6-9 months",
       subtitle:
-        "A stage of movement, curiosity, and constant change — where your baby becomes more active and daily life shifts again.",
+        "A stage of movement, curiosity, and constant change, where your baby becomes more active and daily life shifts again.",
     },
     {
       whatThisIs: [
@@ -342,7 +342,7 @@ export const firstYearStages: Record<string, StageData> = {
             "still unsure when new things begin",
             "proud, tired, and stretched at the same time",
           ],
-          meaning: "Confidence in the first year tends to grow unevenly — not all at once.",
+          meaning: "Confidence in the first year tends to grow unevenly, not all at once.",
         },
         {
           tag: "🔄 Ongoing change",
@@ -381,9 +381,9 @@ export const firstYearStages: Record<string, StageData> = {
       aiInputPlaceholder: "What's been changing most for you lately?",
       emotionalTitle: "This stage often feels like constant adjustment.",
       emotionalBody:
-        "That doesn't mean you're doing it wrong — it means your baby is growing and changing.",
+        "That doesn't mean you're doing it wrong, it means your baby is growing and changing.",
       reflectionPrompt:
-        "What has felt most noticeable in this stage — movement, change, exhaustion, or something else?",
+        "What has felt most noticeable in this stage, movement, change, exhaustion, or something else?",
       pathways: [
         {
           label: "Hub",
@@ -393,7 +393,7 @@ export const firstYearStages: Record<string, StageData> = {
         },
         {
           label: "Next Stage",
-          title: "9–12 months",
+          title: "9-12 months",
           sub: "Mobility, personality, and transition",
           href: "/first-year/9-12-months",
         },
@@ -409,7 +409,7 @@ export const firstYearStages: Record<string, StageData> = {
   "9-12-months": makeFirstYearStage(
     {
       stageIndicator: "Stage 4 of 4",
-      title: "9–12 months",
+      title: "9-12 months",
       subtitle: "Mobility, personality, and transition into the next stage.",
     },
     {
@@ -498,7 +498,7 @@ export const firstYearStages: Record<string, StageData> = {
         },
         {
           label: "Previous",
-          title: "6–9 months",
+          title: "6-9 months",
           sub: "Movement and curiosity",
           href: "/first-year/6-9-months",
         },

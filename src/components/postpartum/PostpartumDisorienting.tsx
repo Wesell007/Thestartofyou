@@ -44,7 +44,7 @@ const PostpartumDisorienting = () => {
                 What this means
               </p>
               <p className="font-serif italic text-sm text-foreground/70 leading-relaxed">
-                This stage often lacks structure — and that can make everything feel more overwhelming, even when things are going well.
+                This stage often lacks structure, and that can make everything feel more overwhelming, even when things are going well.
               </p>
             </div>
           </div>

@@ -18,11 +18,11 @@ const WeekFocus = ({ data }: Props) => {
               What to focus on this week
             </h2>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-              A short, realistic set of things that actually matter this week — with the reason behind each one.
+              A short, realistic set of things that actually matter this week, with the reason behind each one.
             </p>
           </div>
 
-          {/* Right — focus list */}
+          {/* Right, focus list */}
           <div className="space-y-4">
             {data.focusPoints.map((point, i) => (
               <div

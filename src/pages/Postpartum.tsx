@@ -33,7 +33,7 @@ const Postpartum = () => {
         {/* 4. What to focus on right now */}
         <PostpartumFocus />
 
-        {/* 5. What to expect — body, baby, daily life, emotional, identity, uncertainty */}
+        {/* 5. What to expect, body, baby, daily life, emotional, identity, uncertainty */}
         <PostpartumWhatToExpect />
 
         {/* 6. What can feel disorienting + mental load */}

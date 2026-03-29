@@ -7,7 +7,7 @@ const stages = [
   {
     num: "01",
     title: "Early days",
-    range: "Week 1–2",
+    range: "Week 1-2",
     sub: "Recovery, feeding, sleep disruption, and immediate adjustment",
     href: "/postpartum/early-days",
     image: ppEarlyDaysImg,
@@ -15,7 +15,7 @@ const stages = [
   {
     num: "02",
     title: "Early weeks",
-    range: "Week 3–6",
+    range: "Week 3-6",
     sub: "Gradual healing, emotional shifts, and small routines beginning to form",
     href: "/postpartum/early-weeks",
     image: ppEarlyWeeksImg,
@@ -23,7 +23,7 @@ const stages = [
   {
     num: "03",
     title: "Ongoing adjustment",
-    range: "Week 7–12",
+    range: "Week 7-12",
     sub: "Building rhythm, confidence, and adapting to a new normal",
     href: "/postpartum/ongoing-adjustment",
     image: ppAdjustmentImg,

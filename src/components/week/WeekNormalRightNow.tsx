@@ -15,7 +15,7 @@ const WeekNormalRightNow = ({ data }: Props) => {
           What's normal right now
         </h2>
         <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-12 max-w-md mx-auto">
-          If you've found yourself asking "is this okay?" — this section is for you.
+          If you've found yourself asking "is this okay?", this section is for you.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">

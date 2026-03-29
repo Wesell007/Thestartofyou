@@ -7,21 +7,21 @@ const trimesterGroups = [
   {
     label: "First Trimester",
     sub: "Foundation & Early Development",
-    range: "Weeks 1–12",
+    range: "Weeks 1-12",
     weeks: Array.from({ length: 12 }, (_, i) => i + 1),
     bg: "bg-sage-bg/40",
   },
   {
     label: "Second Trimester",
     sub: "Growth & Increasing Awareness",
-    range: "Weeks 13–27",
+    range: "Weeks 13-27",
     weeks: Array.from({ length: 15 }, (_, i) => i + 13),
     bg: "bg-parchment-dark",
   },
   {
     label: "Third Trimester",
     sub: "Preparation & Arrival",
-    range: "Weeks 28–40",
+    range: "Weeks 28-40",
     weeks: Array.from({ length: 13 }, (_, i) => i + 28),
     bg: "bg-lavender-section",
   },
@@ -40,7 +40,7 @@ const WeekByWeek = () => {
             Follow your journey week by week
           </h2>
           <p className="font-sans text-base font-light text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            From the very first week through to week 40 — each week is a step
+            From the very first week through to week 40, each week is a step
             forward.
           </p>
         </div>
@@ -98,7 +98,7 @@ const WeekByWeek = () => {
               {group.label === "First Trimester" && (
                 <p className="mt-5 font-sans text-xs font-light text-sage flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-sage inline-block" />
-                  Weeks 1–3 mark the very beginning — before many people know
+                  Weeks 1-3 mark the very beginning, before many people know
                   they're pregnant.
                 </p>
               )}

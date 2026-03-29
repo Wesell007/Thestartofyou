@@ -7,7 +7,7 @@ import stage912Img from "@/assets/firstyear-stage-9-12.jpg";
 const stages = [
   {
     num: "01",
-    title: "0–3 months",
+    title: "0-3 months",
     range: "Newborn to 3 months",
     sub: "Adjustment, early patterns, and moving out of survival mode",
     href: "/first-year/0-3-months",
@@ -15,7 +15,7 @@ const stages = [
   },
   {
     num: "02",
-    title: "3–6 months",
+    title: "3-6 months",
     range: "3 to 6 months",
     sub: "More awareness, interaction, and early routines beginning to form",
     href: "/first-year/3-6-months",
@@ -23,7 +23,7 @@ const stages = [
   },
   {
     num: "03",
-    title: "6–9 months",
+    title: "6-9 months",
     range: "6 to 9 months",
     sub: "Movement, curiosity, and increasing engagement with the world",
     href: "/first-year/6-9-months",
@@ -31,7 +31,7 @@ const stages = [
   },
   {
     num: "04",
-    title: "9–12 months",
+    title: "9-12 months",
     range: "9 months to one year",
     sub: "Mobility, personality, and transition into the next stage",
     href: "/first-year/9-12-months",

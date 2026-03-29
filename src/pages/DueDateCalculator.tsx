@@ -23,7 +23,7 @@ const DueDateCalculator = () => {
             Pregnancy due date <span className="italic">calculator</span>
           </h1>
           <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-xl mx-auto animate-fade-up [animation-delay:0.1s]">
-            Find your due date and understand what stage you're in — with guidance tailored to you.
+            Find your due date and understand what stage you're in, with guidance tailored to you.
           </p>
         </div>
       </section>

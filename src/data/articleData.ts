@@ -942,6 +942,7 @@ const articleDatabase: ArticleData[] = [
         question: "Is light spotting in the first trimester normal?",
         answer: "Light spotting can be normal, particularly around the time implantation occurs. However, any bleeding is worth mentioning to your midwife or doctor.",
       },
+    ],
     productPromotion: "strong",
     keyTakeaways: [
       "All major organs begin forming in weeks 1-12",
@@ -954,7 +955,6 @@ const articleDatabase: ArticleData[] = [
     sources: ["NHS: Your pregnancy week by week", "NICE antenatal care guidelines", "Tommy's: First trimester"],
     lastUpdated: "March 2026",
     reviewedBy: "Jenny Joines",
-    ],
   },
 
   // ─── CORNERSTONE: EARLY PREGNANCY SYMPTOMS EXPLAINED ─────────────────────

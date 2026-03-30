@@ -92,6 +92,9 @@ const ArticlePage = () => {
       {/* FAQ section for AEO (only when real questions exist) */}
       {hasFAQ && <ArticleFAQ data={data} />}
 
+      {/* Full guide pathway (short articles with a cornerstone parent) */}
+      {!isDeep && data.cornerstoneSlug && <ArticleFullGuide data={data} />}
+
       {/* What happens next (always: provides forward motion) */}
       <ArticleWhatNext data={data} />
 

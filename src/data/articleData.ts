@@ -31,6 +31,8 @@ export interface ArticleCompare {
   whenToSeekHelp?: string;
 }
 
+export type ProductPromotionLevel = "strong" | "light" | "minimal" | "none";
+
 export interface ArticleData {
   slug: string;
   title: string;
@@ -105,6 +107,16 @@ export interface ArticleData {
   // Journey tags for library
   journey?: string[];
   topics?: string[];
+
+  // Deep article features
+  keyTakeaways?: string[];
+  inThisArticle?: string[];
+  sources?: string[];
+  lastUpdated?: string;
+  reviewedBy?: string;
+
+  // Product promotion level
+  productPromotion?: ProductPromotionLevel;
 }
 
 // ─── Article database ──────────────────────────────────────────────────────

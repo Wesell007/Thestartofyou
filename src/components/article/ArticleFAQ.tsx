@@ -86,23 +86,6 @@ const ArticleFAQ = ({ data }: Props) => {
           </Accordion>
         </div>
 
-        {/* Cornerstone upsell for short articles */}
-        {data.cornerstoneSlug && (
-          <div className="mt-10 flex items-center justify-between bg-sage-bg/30 rounded-xl px-7 py-5 border border-sage/10">
-            <div>
-              <p className="font-sans text-[13px] font-light text-muted-foreground mb-1">
-                Looking for a deeper guide on this topic?
-              </p>
-              <a
-                href={`/articles/${data.cornerstoneSlug}`}
-                className="inline-flex items-center gap-2 font-serif text-[15px] text-sage hover:text-sage-dark transition-colors"
-              >
-                Read the complete guide
-                <span className="text-base">→</span>
-              </a>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );

@@ -11,7 +11,6 @@ const ArticleJumpNav = ({ data }: Props) => {
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   const hasItems = data.inThisArticle && data.inThisArticle.length > 0;
-  const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const sentinel = sentinelRef.current;

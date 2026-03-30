@@ -1071,6 +1071,17 @@ const articleDatabase: ArticleData[] = [
         answer: "No. Every pregnancy is different. Symptom variation between pregnancies is completely normal.",
       },
     ],
+    productPromotion: "strong",
+    keyTakeaways: [
+      "Symptoms are caused by hormonal changes, primarily hCG and progesterone",
+      "Every pregnancy is different, and fewer symptoms does not indicate a problem",
+      "Most symptoms peak between weeks 6-10 and ease by weeks 12-14",
+      "Having no symptoms can be completely normal",
+    ],
+    inThisArticle: ["What causes early symptoms", "Common symptoms list", "When symptoms start", "When to seek support", "Common questions"],
+    sources: ["NHS: Signs and symptoms of pregnancy", "Tommy's: Early pregnancy symptoms"],
+    lastUpdated: "March 2026",
+    reviewedBy: "Jenny Joines",
   },
 
   // ─── CORNERSTONE: POSTPARTUM RECOVERY TIMELINE ───────────────────────────

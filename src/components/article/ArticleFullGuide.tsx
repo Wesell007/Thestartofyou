@@ -41,11 +41,6 @@ const ArticleFullGuide = ({ data }: Props) => {
 
             {/* Meta signals */}
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-7">
-              {cornerstone.readingTime && (
-                <span className="font-sans text-[11px] font-light text-muted-foreground/60">
-                  {cornerstone.readingTime} min read
-                </span>
-              )}
               {cornerstone.inThisArticle && (
                 <span className="font-sans text-[11px] font-light text-muted-foreground/60">
                   {cornerstone.inThisArticle.length} sections

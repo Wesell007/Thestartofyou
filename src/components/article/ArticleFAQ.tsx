@@ -14,7 +14,7 @@ interface Props {
 const ArticleFAQ = ({ data }: Props) => {
   const hasFaq = data.faq && data.faq.length > 0;
 
-  // Inject FAQ JSON-LD schema
+  // Inject FAQ JSON-LD schema for AEO
   useEffect(() => {
     if (!hasFaq) return;
     const schema = {
@@ -44,50 +44,63 @@ const ArticleFAQ = ({ data }: Props) => {
 
   if (!hasFaq) return null;
 
+  const isDeep = data.isCornerstone;
+
   return (
-    <section className="bg-parchment py-24 md:py-32">
+    <section className="bg-parchment py-20 md:py-28">
       <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-        {/* Header */}
-        <div className="mb-14">
-          <p className="stage-label mb-5">Common questions</p>
-          <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight max-w-lg">
+        {/* Section header */}
+        <div className="mb-10 md:mb-14">
+          <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage mb-4">
+            Common questions
+          </p>
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground leading-tight">
             What people often ask
           </h2>
+          {isDeep && (
+            <p className="font-sans text-[15px] font-light text-muted-foreground mt-3 leading-relaxed max-w-xl">
+              Answers to the questions that come up most around this topic.
+            </p>
+          )}
         </div>
 
-        {/* Accordion */}
-        <Accordion type="single" collapsible className="w-full">
-          {data.faq.map((item, i) => (
-            <AccordionItem
-              key={i}
-              value={`faq-${i}`}
-              className="border-b border-border/40"
-            >
-              <AccordionTrigger className="py-6 text-left font-serif text-lg sm:text-xl text-foreground leading-snug hover:no-underline hover:text-sage transition-colors [&[data-state=open]]:text-sage">
-                {item.question}
-              </AccordionTrigger>
-              <AccordionContent className="pb-6 pt-0">
-                <p className="font-sans text-base font-light leading-relaxed text-muted-foreground max-w-2xl">
-                  {item.answer}
-                </p>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        {/* Premium accordion */}
+        <div className="bg-card/50 backdrop-blur-sm border border-border/25 rounded-2xl overflow-hidden">
+          <Accordion type="single" collapsible className="w-full">
+            {data.faq!.map((item, i) => (
+              <AccordionItem
+                key={i}
+                value={`faq-${i}`}
+                className={`border-border/20 ${i === 0 ? "border-t-0" : ""} ${i === data.faq!.length - 1 ? "border-b-0" : ""}`}
+              >
+                <AccordionTrigger className="px-7 md:px-9 py-6 md:py-7 text-left font-serif text-[17px] sm:text-lg text-foreground leading-snug hover:no-underline hover:text-sage transition-colors [&[data-state=open]]:text-sage gap-4">
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent className="px-7 md:px-9 pb-7 pt-0">
+                  <p className="font-sans text-[15px] font-light leading-[1.85] text-muted-foreground max-w-2xl">
+                    {item.answer}
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
 
-        {/* Cornerstone link */}
+        {/* Cornerstone upsell for short articles */}
         {data.cornerstoneSlug && (
-          <div className="mt-12 pt-8 border-t border-border/30">
-            <p className="font-sans text-sm font-light text-muted-foreground mb-3">
-              Want a more comprehensive guide?
-            </p>
-            <a
-              href={`/articles/${data.cornerstoneSlug}`}
-              className="inline-flex items-center gap-2 font-serif text-base text-sage hover:text-sage-dark transition-colors"
-            >
-              Read the complete guide
-              <span className="text-lg">→</span>
-            </a>
+          <div className="mt-10 flex items-center justify-between bg-sage-bg/30 rounded-xl px-7 py-5 border border-sage/10">
+            <div>
+              <p className="font-sans text-[13px] font-light text-muted-foreground mb-1">
+                Looking for a deeper guide on this topic?
+              </p>
+              <a
+                href={`/articles/${data.cornerstoneSlug}`}
+                className="inline-flex items-center gap-2 font-serif text-[15px] text-sage hover:text-sage-dark transition-colors"
+              >
+                Read the complete guide
+                <span className="text-base">→</span>
+              </a>
+            </div>
           </div>
         )}
       </div>

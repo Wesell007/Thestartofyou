@@ -5,10 +5,12 @@ interface Props {
 }
 
 const ArticleRealExperience = ({ data }: Props) => {
+  if (!data.whatItFeelsLike?.length) return null;
+
   return (
-    <section className="bg-parchment-dark py-24 md:py-32">
+    <section className="bg-parchment-dark py-20 md:py-28">
       <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted mb-4">
             The real experience
           </p>

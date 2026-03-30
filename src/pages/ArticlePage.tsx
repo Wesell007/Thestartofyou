@@ -3,6 +3,7 @@ import { getArticle, getRelatedArticles } from "@/data/articleData";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ArticleHero from "@/components/article/ArticleHero";
+import ArticleInThisGuide from "@/components/article/ArticleInThisGuide";
 import ArticleHowThisFeels from "@/components/article/ArticleHowThisFeels";
 import ArticleWhatHappening from "@/components/article/ArticleWhatHappening";
 import ArticleTiming from "@/components/article/ArticleTiming";
@@ -31,47 +32,82 @@ const ArticlePage = () => {
   }
 
   const relatedArticles = getRelatedArticles(data.slug, 3);
-  const showJournal = data.productPromotion !== "none" && data.productPromotion !== "minimal";
   const isDeep = data.isCornerstone;
+
+  // Product promotion logic
+  const promoLevel = data.productPromotion ?? "none";
+  const showJournal = promoLevel === "strong" || promoLevel === "light";
+
+  // Conditional section flags for short guidance pages
+  const hasEmotionalLayer = data.howThisFeels?.length > 0;
+  const hasTiming = !!(data.timing?.whenStarts);
+  const hasRealExperience = data.whatItFeelsLike?.length > 0;
+  const hasActions = data.whatYouCanDo?.length > 0;
+  const hasCompare = !!data.compare;
+  const hasFAQ = data.faq && data.faq.length > 0;
 
   return (
     <div className="min-h-screen bg-parchment">
       <Navbar />
       <ArticleHero data={data} />
 
-      {/* Jump navigation for deep articles */}
+      {/* ── Deep article: jump nav ── */}
       {isDeep && data.inThisArticle && <ArticleJumpNav data={data} />}
 
-      {/* Key takeaways */}
+      {/* ── Short article: lightweight "In this guide" ── */}
+      {!isDeep && <ArticleInThisGuide data={data} />}
+
+      {/* ── Key takeaways (both formats, data-driven) ── */}
       {data.keyTakeaways && <ArticleKeyTakeaways data={data} />}
 
-      <ArticleHowThisFeels data={data} />
+      {/* ── CORE SECTIONS ── */}
+
+      {/* Emotional bridge (conditional) */}
+      {hasEmotionalLayer && <ArticleHowThisFeels data={data} />}
+
+      {/* Core explanation (always present) */}
       <ArticleWhatHappening data={data} />
-      <ArticleTiming data={data} />
-      <ArticleRealExperience data={data} />
+
+      {/* Timing (conditional: only when timing data exists meaningfully) */}
+      {hasTiming && <ArticleTiming data={data} />}
+
+      {/* Real experience / lived experience (conditional) */}
+      {hasRealExperience && <ArticleRealExperience data={data} />}
+
+      {/* Reassurance / "What this means" (always present for guidance) */}
       <ArticleInterpretation data={data} />
+
+      {/* Normal vs Seek Support (always present: core trust layer) */}
       <ArticleNormal data={data} />
-      <ArticleAction data={data} />
 
-      {/* Compare section for GEO */}
-      <ArticleCompare data={data} />
+      {/* Practical actions (conditional) */}
+      {hasActions && <ArticleAction data={data} />}
 
-      {/* FAQ section for AEO */}
-      <ArticleFAQ data={data} />
+      {/* ── CONDITIONAL SECTIONS ── */}
 
+      {/* Compare section for GEO (only when comparison intent exists) */}
+      {hasCompare && <ArticleCompare data={data} />}
+
+      {/* FAQ section for AEO (only when real questions exist) */}
+      {hasFAQ && <ArticleFAQ data={data} />}
+
+      {/* What happens next (always: provides forward motion) */}
       <ArticleWhatNext data={data} />
+
+      {/* Related stage links */}
       <ArticleRelatedStage data={data} />
 
       {/* Sources for deep articles */}
       {isDeep && data.sources && <ArticleSources data={data} />}
 
+      {/* AI support (always present: key product differentiator) */}
       <ArticleAISupport data={data} />
 
-      {/* Context-aware journal promotion */}
+      {/* Context-aware journal promotion (product-level controlled) */}
       {showJournal && (
         <JournalPromotion
           contextCopy={
-            data.productPromotion === "strong"
+            promoLevel === "strong"
               ? "Capture your experiences alongside your weekly guidance. Keep a thoughtful, private record of your journey."
               : "Keep a record of what this stage feels like, alongside the guidance you're reading."
           }

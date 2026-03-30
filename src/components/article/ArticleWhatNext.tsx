@@ -5,8 +5,10 @@ interface Props {
 }
 
 const ArticleWhatNext = ({ data }: Props) => {
+  if (!data.whatHappensNext) return null;
+
   return (
-    <section className="bg-parchment-dark py-24 md:py-32">
+    <section className="bg-parchment-dark py-20 md:py-28">
       <div className="container mx-auto px-6 md:px-10 max-w-3xl">
         <div className="bg-card border border-border/30 rounded-2xl px-8 py-9 md:px-10 md:py-10 shadow-soft relative overflow-hidden">
           <div className="absolute bottom-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl pointer-events-none translate-x-1/3 translate-y-1/3" />

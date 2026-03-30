@@ -5,8 +5,10 @@ interface Props {
 }
 
 const ArticleInterpretation = ({ data }: Props) => {
+  if (!data.whatThisMeans) return null;
+
   return (
-    <section className="bg-parchment py-24 md:py-32">
+    <section className="bg-parchment py-20 md:py-28">
       <div className="container mx-auto px-6 md:px-10 max-w-3xl">
         <div className="bg-sage-bg/30 border border-sage-light/30 rounded-2xl px-8 py-10 md:px-12 md:py-12 relative overflow-hidden">
           {/* Decorative corner glow */}

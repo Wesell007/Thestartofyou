@@ -12,10 +12,11 @@ interface Props {
 }
 
 const ArticleFAQ = ({ data }: Props) => {
-  if (!data.faq || data.faq.length === 0) return null;
+  const hasFaq = data.faq && data.faq.length > 0;
 
   // Inject FAQ JSON-LD schema
   useEffect(() => {
+    if (!hasFaq) return;
     const schema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -39,7 +40,9 @@ const ArticleFAQ = ({ data }: Props) => {
       const existing = document.getElementById(`faq-schema-${data.slug}`);
       if (existing) existing.remove();
     };
-  }, [data.slug, data.faq]);
+  }, [data.slug, data.faq, hasFaq]);
+
+  if (!hasFaq) return null;
 
   return (
     <section className="bg-parchment py-24 md:py-32">

@@ -803,6 +803,18 @@ const articleDatabase: ArticleData[] = [
       commonConfusion: "Many people worry that severe nausea automatically means hyperemesis gravidarum. The key distinction is whether you can maintain hydration, not how unpleasant the nausea feels.",
       whenToSeekHelp: "If you cannot keep any fluids down for more than 24 hours, are losing weight, have dark urine, or feel faint, contact your healthcare provider.",
     },
+    productPromotion: "strong",
+    keyTakeaways: [
+      "Morning sickness affects up to 80% of pregnant people",
+      "It can occur at any time of day, not just mornings",
+      "Nausea typically peaks between weeks 8-10 and eases by 12-16",
+      "Both strong nausea and very mild nausea are normal",
+      "Safe anti-nausea medications are available if symptoms are severe",
+    ],
+    inThisArticle: ["Why morning sickness happens", "When it starts and ends", "What helps", "Morning sickness vs hyperemesis", "When to seek support", "Common questions"],
+    sources: ["NHS: Vomiting and morning sickness in pregnancy", "RCOG: Management of Nausea and Vomiting in Pregnancy", "NICE Clinical Knowledge Summaries"],
+    lastUpdated: "March 2026",
+    reviewedBy: "Jenny Joines",
   },
 
   // ─── CORNERSTONE: FIRST TRIMESTER COMPLETE GUIDE ─────────────────────────
@@ -930,6 +942,18 @@ const articleDatabase: ArticleData[] = [
         question: "Is light spotting in the first trimester normal?",
         answer: "Light spotting can be normal, particularly around the time implantation occurs. However, any bleeding is worth mentioning to your midwife or doctor.",
       },
+    productPromotion: "strong",
+    keyTakeaways: [
+      "All major organs begin forming in weeks 1-12",
+      "Nausea, fatigue, and emotional intensity are the most common symptoms",
+      "Symptoms typically ease from weeks 12-14",
+      "Regular antenatal care should begin early",
+      "The first scan provides the most reliable reassurance",
+    ],
+    inThisArticle: ["What happens in weeks 1-12", "Common symptoms", "What to expect emotionally", "When to seek support", "Common questions"],
+    sources: ["NHS: Your pregnancy week by week", "NICE antenatal care guidelines", "Tommy's: First trimester"],
+    lastUpdated: "March 2026",
+    reviewedBy: "Jenny Joines",
     ],
   },
 

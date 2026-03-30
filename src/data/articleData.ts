@@ -387,6 +387,8 @@ const articleDatabase: ArticleData[] = [
         answer: "Fatigue on its own is almost always normal. If it is accompanied by rapid heartbeat, extreme dizziness, or breathlessness at rest, speak with your midwife.",
       },
     ],
+    productPromotion: "strong",
+    reviewedBy: "Jenny Joines",
   },
 
   // ─── IMPLANTATION BLEEDING ────────────────────────────────────────────────

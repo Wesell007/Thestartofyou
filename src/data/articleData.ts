@@ -1197,6 +1197,254 @@ const articleDatabase: ArticleData[] = [
       whenToSeekHelp: "If low mood, anxiety, or difficulty coping lasts beyond two weeks, or if you have intrusive thoughts, please speak with your midwife, health visitor, or GP.",
     },
   },
+
+  // ─── CORNERSTONE: TRYING TO CONCEIVE EXPLAINED ───────────────────────────
+  {
+    slug: "trying-to-conceive-explained",
+    title: "Trying to conceive: everything you need to know about getting pregnant",
+    metaDescription: "A comprehensive guide to trying to conceive. Understanding fertility, timing, ovulation, and what to expect on the journey to pregnancy.",
+    isCornerstone: true,
+    quickAnswer:
+      "Getting pregnant requires timing intercourse around ovulation, which typically occurs once per cycle. Most couples conceive within 12 months of trying. Understanding your cycle, recognising ovulation signs, and managing expectations are the most important steps.",
+    howThisFeels: [
+      "The hope and anxiety of each month",
+      "Not knowing if you're doing everything right",
+      "The loneliness of a journey that's hard to talk about",
+      "Watching for signs and symptoms constantly",
+      "The emotional weight of waiting",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "The ovulation window", body: "You can only conceive around ovulation. This window is roughly 12-24 hours, though sperm can survive for up to 5 days." },
+        { heading: "Cycle length variation", body: "Not all cycles are 28 days. Ovulation timing varies between people and between cycles." },
+        { heading: "Age and fertility", body: "Fertility gradually decreases with age, particularly after 35, but many people conceive naturally into their late 30s and beyond." },
+      ],
+      lessCauses: [
+        { heading: "Lifestyle factors", body: "Nutrition, weight, stress, smoking, and alcohol can all affect fertility for both partners." },
+        { heading: "Male fertility factors", body: "Roughly 30-40% of fertility challenges involve male factors." },
+      ],
+      whyItVaries: "The time it takes to conceive varies enormously. Some couples conceive in the first cycle; others take many months.",
+    },
+    timing: {
+      whenStarts: "Most people begin trying after deciding they want to start a family.",
+      whenPeaks: "Fertility is highest in the days around ovulation.",
+      whenEases: "If you haven't conceived after 12 months (or 6 months if over 35), speak with your GP.",
+    },
+    whatItFeelsLike: [
+      "A mix of excitement and anxiety each cycle",
+      "The two-week wait feeling interminable",
+      "Interpreting every sensation as a possible sign",
+      "The disappointment when a period arrives",
+    ],
+    whatThisMeans: "Trying to conceive is a process that takes time for most people. Not conceiving immediately does not mean something is wrong.",
+    normal: ["Taking up to 12 months to conceive", "Irregular cycles making timing difficult", "Feeling emotionally drained"],
+    seekSupport: ["No conception after 12 months (or 6 months if over 35)", "Very irregular or absent periods", "Significant emotional distress"],
+    disclaimer: "This is not medical advice. Speak with your GP or a fertility specialist if you have concerns.",
+    whatYouCanDo: [
+      { action: "Track your cycle", reason: "Understanding when you ovulate helps you time intercourse effectively." },
+      { action: "Take folic acid", reason: "Start at least one month before trying to conceive." },
+      { action: "Be patient with the process", reason: "Most couples take several months. This is normal." },
+    ],
+    whatHappensNext: "If you conceive, early pregnancy symptoms may appear from around weeks 4-6.",
+    relatedStage: {
+      intro: "Explore the trying to conceive journey:",
+      links: [
+        { label: "TTC Hub", href: "/trying-to-conceive" },
+        { label: "Ovulation Calculator", href: "/ovulation-calculator" },
+        { label: "IVF Hub", href: "/ivf" },
+      ],
+    },
+    aiPrompts: ["How can I tell when I'm ovulating?", "How long does it normally take?", "When should I see a doctor?"],
+    captureIntro: "The trying to conceive journey is full of hope, uncertainty, and private moments that deserve to be acknowledged.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines", "body-changes", "emotional-wellbeing", "practical-preparation"],
+    productPromotion: "light",
+    keyTakeaways: [
+      "Most couples conceive within 12 months",
+      "You can only conceive around ovulation",
+      "Tracking your cycle helps identify your fertile window",
+      "Seek medical advice after 12 months (or 6 months if over 35)",
+    ],
+    inThisArticle: ["How conception works", "Understanding ovulation", "What affects fertility", "When to seek support", "Common questions"],
+    sources: ["NICE guidelines on fertility (2013, updated 2017)", "NHS: How long does it usually take to get pregnant?", "HFEA"],
+    lastUpdated: "March 2026",
+    reviewedBy: "Jenny Joines",
+    faq: [
+      { question: "How long does it take to get pregnant?", answer: "Most couples conceive within 12 months of regular unprotected intercourse." },
+      { question: "What is the best time to have intercourse?", answer: "The 5 days before ovulation and the day of ovulation itself." },
+      { question: "When should I see a fertility specialist?", answer: "After 12 months of trying (or 6 months if over 35)." },
+    ],
+  },
+
+  // ─── CORNERSTONE: IVF TIMELINE ──────────────────────────────────────────
+  {
+    slug: "ivf-timeline-what-to-expect",
+    title: "IVF timeline: what to expect at every stage of treatment",
+    metaDescription: "A complete guide to the IVF process. From consultation through stimulation, egg collection, transfer, and the two-week wait.",
+    isCornerstone: true,
+    quickAnswer:
+      "A typical IVF cycle takes 4-6 weeks from the start of medication to pregnancy test. The process involves ovarian stimulation, egg collection, fertilisation, embryo development, and transfer.",
+    howThisFeels: [
+      "Navigating medical procedures while managing intense hope",
+      "The physical demands of daily injections",
+      "Feeling like your body is no longer entirely yours",
+      "Trying to stay hopeful while preparing for any outcome",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Ovarian stimulation", body: "Fertility medications stimulate your ovaries to produce multiple eggs. This phase lasts 10-14 days with regular monitoring." },
+        { heading: "Egg collection", body: "A minor procedure under sedation where eggs are retrieved using ultrasound guidance." },
+        { heading: "Fertilisation and embryo development", body: "Eggs are fertilised in the laboratory and monitored for 3-5 days." },
+        { heading: "Embryo transfer", body: "One or two embryos are placed into the uterus. The procedure is usually quick and painless." },
+      ],
+      lessCauses: [
+        { heading: "The two-week wait", body: "After transfer, you wait approximately two weeks before a pregnancy test. This is often the most emotionally difficult part." },
+      ],
+      whyItVaries: "Every IVF cycle is different. Response to medication, egg numbers, fertilisation rates, and embryo quality all vary.",
+    },
+    timing: {
+      whenStarts: "A cycle typically begins with medication on day 1-3 of your period.",
+      whenPeaks: "Egg collection usually occurs around day 12-14 of stimulation.",
+      whenEases: "A pregnancy test is taken approximately 14 days after embryo transfer.",
+    },
+    whatItFeelsLike: [
+      "Physical bloating and discomfort during stimulation",
+      "Emotional rollercoaster of hope and fear",
+      "Waiting for daily embryo update calls",
+      "The intensity of the two-week wait",
+    ],
+    whatThisMeans: "IVF is a medically intensive process with significant emotional weight. Whatever you are feeling is valid.",
+    normal: ["Bloating during stimulation", "Emotional intensity throughout", "Not all eggs fertilising", "Mild cramping after transfer"],
+    seekSupport: ["Severe abdominal pain or swelling", "Heavy bleeding after egg collection", "Symptoms of infection", "Emotional distress that feels unmanageable"],
+    disclaimer: "This is not medical advice. Your fertility clinic will provide specific guidance.",
+    whatYouCanDo: [
+      { action: "Follow your medication schedule precisely", reason: "Timing is critical during IVF." },
+      { action: "Stay hydrated and eat protein-rich foods", reason: "Supports your body during treatment." },
+      { action: "Be gentle with yourself during the two-week wait", reason: "Reduce pressure where you can." },
+    ],
+    whatHappensNext: "If successful, early pregnancy symptoms may begin within weeks. If not, your clinic will discuss next steps.",
+    relatedStage: {
+      intro: "Explore the IVF journey:",
+      links: [
+        { label: "IVF Hub", href: "/ivf" },
+        { label: "IVF Timeline Tool", href: "/ivf-timeline" },
+        { label: "Support Hub", href: "/support" },
+      ],
+    },
+    aiPrompts: ["What happens during IVF stimulation?", "What to expect after embryo transfer?", "How to cope with the two-week wait?"],
+    captureIntro: "The IVF journey is one of the most intense experiences many people go through.",
+    journey: ["ivf"],
+    topics: ["timelines", "body-changes", "emotional-wellbeing"],
+    productPromotion: "minimal",
+    keyTakeaways: [
+      "A typical IVF cycle takes 4-6 weeks",
+      "Stimulation involves daily injections for 10-14 days",
+      "Not all eggs will fertilise, and this is normal",
+      "The two-week wait is often the hardest part",
+      "Every cycle is different",
+    ],
+    inThisArticle: ["How IVF works", "Stimulation phase", "Egg collection", "Embryo transfer", "The two-week wait", "Common questions"],
+    sources: ["HFEA", "NICE guidelines on fertility treatment (CG156)", "NHS: IVF"],
+    lastUpdated: "March 2026",
+    reviewedBy: "Jenny Joines",
+    faq: [
+      { question: "What is the success rate of IVF?", answer: "Average live birth rate is approximately 23% per cycle for women under 35, decreasing with age." },
+      { question: "How many cycles does it usually take?", answer: "Many people succeed within 1-3 cycles, but this varies significantly." },
+      { question: "Is IVF painful?", answer: "Injections can be uncomfortable but manageable. Egg collection is done under sedation. Most find the emotional demands harder than the physical ones." },
+    ],
+    compare: {
+      heading: "IVF symptoms vs early pregnancy symptoms",
+      description: "During the two-week wait, it can be difficult to tell whether symptoms are from medication or early pregnancy.",
+      items: [
+        {
+          label: "IVF medication effects",
+          points: ["Bloating from stimulation", "Breast tenderness from progesterone", "Fatigue from hormonal changes", "Mood changes from medication"],
+        },
+        {
+          label: "Early pregnancy symptoms",
+          points: ["Bloating from rising hCG", "Breast tenderness from hormonal changes", "Fatigue from progesterone", "Mood changes from hormonal shifts"],
+        },
+      ],
+      commonConfusion: "The symptoms are nearly identical because many are caused by progesterone, which IVF medication provides.",
+      whenToSeekHelp: "Contact your clinic if you experience severe pain, heavy bleeding, or difficulty breathing.",
+    },
+  },
+
+  // ─── CORNERSTONE: BABY SLEEP IN THE FIRST YEAR ──────────────────────────
+  {
+    slug: "baby-sleep-first-year",
+    title: "Baby sleep in the first year: what to expect and what is normal",
+    metaDescription: "A comprehensive guide to baby sleep in the first year. What is normal, how sleep develops, and what helps.",
+    isCornerstone: true,
+    quickAnswer:
+      "Baby sleep changes dramatically throughout the first year. Newborns sleep in short cycles of 2-4 hours. By 6 months, many babies sleep longer stretches. By 12 months, most consolidate to 1-2 naps. There is enormous variation in what is normal.",
+    howThisFeels: [
+      "The exhaustion of broken sleep night after night",
+      "Comparing your baby's sleep to others",
+      "The pressure to have a baby who sleeps through",
+      "Not knowing whether to intervene or wait",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Developing circadian rhythm", body: "Newborns do not have a day-night cycle. This develops gradually over the first 3-4 months." },
+        { heading: "Sleep cycle maturation", body: "Baby sleep cycles are shorter than adults' (about 40-50 minutes). Babies naturally wake between cycles." },
+        { heading: "Growth and feeding needs", body: "Frequent waking for feeds is normal and necessary, particularly in the early months." },
+      ],
+      lessCauses: [
+        { heading: "Sleep regressions", body: "Disrupted sleep often coincides with developmental leaps (around 4, 8, 12, 18 months). These are temporary." },
+        { heading: "Teething and illness", body: "Physical discomfort can temporarily disrupt sleep." },
+      ],
+      whyItVaries: "Baby sleep varies enormously. Temperament, feeding method, developmental stage, and biology all play a role.",
+    },
+    timing: {
+      whenStarts: "Sleep challenges begin at birth and evolve throughout the first year.",
+      whenPeaks: "Most intense sleep deprivation is usually in the first 3-4 months.",
+      whenEases: "Many families notice improvement between 4-6 months, with further consolidation by 12 months.",
+    },
+    whatItFeelsLike: [
+      "Bone-deep exhaustion that affects everything",
+      "The desperation of 3am wakings",
+      "Questioning every decision about sleep",
+      "The gradual improvement that is hard to see in the moment",
+    ],
+    whatThisMeans: "Disrupted sleep in the first year is normal infant development, not a failure of parenting.",
+    normal: ["Newborns waking every 2-4 hours", "Sleep patterns changing frequently", "Not sleeping through by 6 or even 12 months"],
+    seekSupport: ["Baby seems excessively sleepy or difficult to wake", "Sleep deprivation significantly affecting your mental health", "Breathing difficulties during sleep"],
+    disclaimer: "This is not medical advice. Follow NHS and Lullaby Trust safe sleep guidelines.",
+    whatYouCanDo: [
+      { action: "Follow safe sleep guidelines", reason: "Place baby on their back in a clear, firm sleep space." },
+      { action: "Establish a bedtime routine from around 3-4 months", reason: "Consistent cues help signal sleep time." },
+      { action: "Share the load where possible", reason: "Sleep deprivation is cumulative." },
+    ],
+    whatHappensNext: "Sleep gradually consolidates. Most babies move to 1-2 naps and longer overnight stretches by 12-18 months.",
+    relatedStage: {
+      intro: "Explore the first year:",
+      links: [
+        { label: "First Year Hub", href: "/first-year" },
+        { label: "Postpartum Hub", href: "/postpartum" },
+      ],
+    },
+    aiPrompts: ["Is it normal for my baby to still wake at night?", "What is the 4-month sleep regression?", "How can I help my baby sleep better?"],
+    captureIntro: "The sleep-deprived early months are a blur that many parents wish they could remember more clearly.",
+    journey: ["first-year", "postpartum"],
+    topics: ["development", "timelines", "practical-preparation"],
+    productPromotion: "strong",
+    keyTakeaways: [
+      "Baby sleep varies enormously and most patterns are normal",
+      "A circadian rhythm develops around 3-4 months",
+      "Sleep regressions coincide with developmental leaps",
+      "Following safe sleep guidelines is the most important thing",
+    ],
+    inThisArticle: ["How baby sleep develops", "Month by month expectations", "Sleep regressions", "Safe sleep", "What helps", "Common questions"],
+    sources: ["NHS: Helping your baby to sleep", "The Lullaby Trust", "BASIS, Durham University"],
+    lastUpdated: "March 2026",
+    reviewedBy: "Jenny Joines",
+    faq: [
+      { question: "When do babies sleep through the night?", answer: "There is no single answer. Some from 3-4 months; others take much longer. Sleeping through at 12 months or later is normal." },
+      { question: "What is the 4-month sleep regression?", answer: "Around 4 months, sleep cycles mature and become more adult-like, temporarily increasing night waking. It is developmental, not a step backwards." },
+      { question: "Should I sleep train my baby?", answer: "This is a personal choice. There are many approaches. Choose what feels right for your family." },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

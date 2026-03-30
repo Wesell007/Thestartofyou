@@ -225,6 +225,8 @@ const articleDatabase: ArticleData[] = [
     cornerstoneSlug: "complete-guide-morning-sickness",
     journey: ["pregnancy"],
     topics: ["symptoms", "body-changes"],
+    productPromotion: "strong",
+    reviewedBy: "Jenny Joines",
     faq: [
       {
         question: "Is it normal to have nausea all day, not just in the morning?",
@@ -522,6 +524,8 @@ const articleDatabase: ArticleData[] = [
       commonConfusion: "The timing is the biggest source of confusion. Implantation bleeding can occur around the same time a period is expected, making it difficult to tell the difference without a pregnancy test.",
       whenToSeekHelp: "If you experience heavy bleeding with severe pain, or bleeding that concerns you at any stage, contact your healthcare provider.",
     },
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
   },
 
   // ─── SYMPTOMS STOPPING IN EARLY PREGNANCY ────────────────────────────────
@@ -633,6 +637,8 @@ const articleDatabase: ArticleData[] = [
         answer: "Most people notice symptoms easing from around weeks 12-14 as hormone levels stabilise. This is expected, not a warning sign.",
       },
     ],
+    productPromotion: "strong",
+    reviewedBy: "Jenny Joines",
   },
 
   // ─── CORNERSTONE: COMPLETE GUIDE TO MORNING SICKNESS ─────────────────────

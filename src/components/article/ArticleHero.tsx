@@ -8,6 +8,7 @@ import heroSymptomsStopping from "@/assets/article-hero-symptoms-stopping.jpg";
 
 const heroImageMap: Record<string, string> = {
   "nausea-in-early-pregnancy": heroNausea,
+  "complete-guide-morning-sickness": heroNausea,
   "fatigue-in-early-pregnancy": heroFatigue,
   "implantation-bleeding": heroImplantation,
   "symptoms-stopping-early-pregnancy": heroSymptomsStopping,

@@ -10,6 +10,8 @@ import ArticleRealExperience from "@/components/article/ArticleRealExperience";
 import ArticleInterpretation from "@/components/article/ArticleInterpretation";
 import ArticleNormal from "@/components/article/ArticleNormal";
 import ArticleAction from "@/components/article/ArticleAction";
+import ArticleCompare from "@/components/article/ArticleCompare";
+import ArticleFAQ from "@/components/article/ArticleFAQ";
 import ArticleWhatNext from "@/components/article/ArticleWhatNext";
 import ArticleRelatedStage from "@/components/article/ArticleRelatedStage";
 import ArticleAISupport from "@/components/article/ArticleAISupport";
@@ -27,31 +29,22 @@ const ArticlePage = () => {
   return (
     <div className="min-h-screen bg-parchment">
       <Navbar />
-      {/* Hero now includes Quick Answer */}
       <ArticleHero data={data} />
-      {/* Emotional bridge */}
       <ArticleHowThisFeels data={data} />
-      {/* Core explanation */}
       <ArticleWhatHappening data={data} />
-      {/* Timing */}
       <ArticleTiming data={data} />
-      {/* Real experience */}
       <ArticleRealExperience data={data} />
-      {/* Interpretation, reassurance moment */}
       <ArticleInterpretation data={data} />
-      {/* Safety & support */}
       <ArticleNormal data={data} />
-      {/* Practical guidance */}
       <ArticleAction data={data} />
-      {/* What happens next */}
+      {/* Compare section for GEO */}
+      <ArticleCompare data={data} />
+      {/* FAQ section for AEO */}
+      <ArticleFAQ data={data} />
       <ArticleWhatNext data={data} />
-      {/* Stage navigation */}
       <ArticleRelatedStage data={data} />
-      {/* AI support */}
       <ArticleAISupport data={data} />
-      {/* Journal */}
       <JournalPromotion contextCopy="Keep a record of what this stage feels like, alongside the guidance you're reading." />
-      {/* Continue journey + related articles */}
       <ArticleJourneyCTA data={data} />
       <Footer />
     </div>

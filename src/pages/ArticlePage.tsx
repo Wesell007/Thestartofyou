@@ -1,4 +1,4 @@
-import { useParams, Navigate, Link } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { getArticle, getRelatedArticles } from "@/data/articleData";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -19,7 +19,6 @@ import JournalPromotion from "@/components/shared/JournalPromotion";
 import ArticleJourneyCTA from "@/components/article/ArticleJourneyCTA";
 import ArticleKeyTakeaways from "@/components/article/ArticleKeyTakeaways";
 import ArticleJumpNav from "@/components/article/ArticleJumpNav";
-import ArticleTrustBar from "@/components/article/ArticleTrustBar";
 import ArticleSources from "@/components/article/ArticleSources";
 import ArticleRelatedReads from "@/components/article/ArticleRelatedReads";
 
@@ -40,13 +39,10 @@ const ArticlePage = () => {
       <Navbar />
       <ArticleHero data={data} />
 
-      {/* Trust bar for deep articles */}
-      {isDeep && <ArticleTrustBar data={data} />}
-
       {/* Jump navigation for deep articles */}
       {isDeep && data.inThisArticle && <ArticleJumpNav data={data} />}
 
-      {/* Key takeaways for deep articles */}
+      {/* Key takeaways */}
       {data.keyTakeaways && <ArticleKeyTakeaways data={data} />}
 
       <ArticleHowThisFeels data={data} />
@@ -83,7 +79,9 @@ const ArticlePage = () => {
       )}
 
       {/* Related reads */}
-      {relatedArticles.length > 0 && <ArticleRelatedReads articles={relatedArticles} />}
+      {relatedArticles.length > 0 && (
+        <ArticleRelatedReads articles={relatedArticles} isDeep={isDeep} />
+      )}
 
       <ArticleJourneyCTA data={data} />
       <Footer />

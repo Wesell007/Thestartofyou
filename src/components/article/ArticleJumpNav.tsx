@@ -6,10 +6,11 @@ interface Props {
 }
 
 const ArticleJumpNav = ({ data }: Props) => {
-  if (!data.inThisArticle || data.inThisArticle.length === 0) return null;
-
   const [isSticky, setIsSticky] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  const hasItems = data.inThisArticle && data.inThisArticle.length > 0;
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,9 +27,9 @@ const ArticleJumpNav = ({ data }: Props) => {
 
     observer.observe(sentinel);
     return () => observer.disconnect();
-  }, []);
+  }, [hasItems]);
 
-  return (
+  if (!hasItems) return null;
     <>
       {/* Sentinel element */}
       <div ref={sentinelRef} className="h-0" />

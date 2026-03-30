@@ -1231,6 +1231,18 @@ const articleDatabase: ArticleData[] = [
       commonConfusion: "Many people dismiss postnatal depression as \"just baby blues\" because they overlap in the early days. The key difference is duration and intensity.",
       whenToSeekHelp: "If low mood, anxiety, or difficulty coping lasts beyond two weeks, or if you have intrusive thoughts, please speak with your midwife, health visitor, or GP.",
     },
+    productPromotion: "strong",
+    keyTakeaways: [
+      "Physical healing from birth typically takes 6-8 weeks",
+      "Full recovery, including emotional adjustment, takes months",
+      "Baby blues in the first two weeks are normal; lasting low mood may need support",
+      "Sleep deprivation affects everything and sharing the load is important",
+      "Recovery is not linear, and there is no single timeline",
+    ],
+    inThisArticle: ["Physical recovery", "Hormonal changes", "Emotional adjustment", "Baby blues vs postnatal depression", "When to seek support", "Common questions"],
+    sources: ["NHS: Your body after pregnancy", "NICE postnatal care guidelines", "RCOG: Recovery after birth"],
+    lastUpdated: "March 2026",
+    reviewedBy: "Jenny Joines",
   },
 
   // ─── CORNERSTONE: TRYING TO CONCEIVE EXPLAINED ───────────────────────────

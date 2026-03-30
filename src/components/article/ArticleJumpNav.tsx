@@ -30,6 +30,8 @@ const ArticleJumpNav = ({ data }: Props) => {
   }, [hasItems]);
 
   if (!hasItems) return null;
+
+  return (
     <>
       {/* Sentinel element */}
       <div ref={sentinelRef} className="h-0" />

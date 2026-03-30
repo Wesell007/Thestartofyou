@@ -1,24 +1,14 @@
 import type { ArticleData } from "@/data/articleData";
-import botanicalAccent from "@/assets/article-botanical-accent.png";
 
 interface Props {
   data: ArticleData;
 }
 
 const ArticleHowThisFeels = ({ data }: Props) => {
-  return (
-    <section className="relative bg-parchment py-24 md:py-32 overflow-hidden">
-      {/* Subtle botanical accent */}
-      <img
-        src={botanicalAccent}
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-        width={200}
-        height={200}
-        className="absolute bottom-0 left-0 w-36 md:w-48 opacity-[0.08] pointer-events-none translate-y-1/4 -translate-x-1/4"
-      />
+  if (!data.howThisFeels?.length) return null;
 
+  return (
+    <section className="relative bg-parchment py-20 md:py-28 overflow-hidden">
       <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
         <div className="flex items-center gap-4 mb-4">
           <div className="h-px w-10 bg-sage-light" />

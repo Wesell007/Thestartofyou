@@ -5,10 +5,12 @@ interface Props {
 }
 
 const ArticleAction = ({ data }: Props) => {
+  if (!data.whatYouCanDo?.length) return null;
+
   return (
-    <section className="bg-parchment py-24 md:py-32">
+    <section className="bg-parchment py-20 md:py-28">
       <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-        <div className="mb-12">
+        <div className="mb-10">
           <div className="flex items-center gap-4 mb-4">
             <div className="h-px w-10 bg-sage-light" />
             <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted">
@@ -19,7 +21,7 @@ const ArticleAction = ({ data }: Props) => {
             What you can do
           </h2>
           <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-md">
-            Simple, realistic steps, not a rigid plan. Do what works for you right now.
+            Simple, realistic steps. Do what works for you right now.
           </p>
         </div>
 

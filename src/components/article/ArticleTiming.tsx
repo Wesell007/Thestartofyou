@@ -5,6 +5,8 @@ interface Props {
 }
 
 const ArticleTiming = ({ data }: Props) => {
+  if (!data.timing?.whenStarts) return null;
+
   const rows = [
     { label: "When it typically starts", value: data.timing.whenStarts, accent: "bg-sage/10 border-sage/20" },
     ...(data.timing.whenPeaks ? [{ label: "When it may peak", value: data.timing.whenPeaks, accent: "bg-accent/10 border-accent/20" }] : []),
@@ -12,7 +14,7 @@ const ArticleTiming = ({ data }: Props) => {
   ];
 
   return (
-    <section className="bg-parchment py-24 md:py-32">
+    <section className="bg-parchment py-20 md:py-28">
       <div className="container mx-auto px-6 md:px-10 max-w-3xl">
         <div className="flex items-center gap-4 mb-4">
           <div className="h-px w-10 bg-sage-light" />

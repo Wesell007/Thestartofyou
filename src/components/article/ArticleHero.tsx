@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Shield, Clock } from "lucide-react";
 import type { ArticleData } from "@/data/articleData";
 import heroNausea from "@/assets/article-hero-nausea.jpg";
 import heroFatigue from "@/assets/article-hero-fatigue.jpg";
@@ -29,6 +30,8 @@ interface Props {
 const ArticleHero = ({ data }: Props) => {
   const heroImage = heroImageMap[data.slug] || heroFatigue;
   const isDeep = data.isCornerstone;
+  const hasReview = data.reviewedBy;
+  const hasDate = data.lastUpdated;
 
   return (
     <section className="relative bg-parchment pt-28 pb-0 md:pt-36 overflow-hidden">
@@ -77,9 +80,18 @@ const ArticleHero = ({ data }: Props) => {
 
           {/* Stage label for short articles */}
           {!isDeep && (
-            <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted mb-4">
-              {data.trimester?.map(t => `Trimester ${t}`).join(' · ')} · Guidance
-            </p>
+            <div className="flex flex-wrap items-center gap-3 mb-5">
+              {data.trimester?.map(t => (
+                <span key={t} className="px-3 py-1 rounded-full bg-sage-bg/60 text-sage text-[10px] font-sans tracking-[0.15em] uppercase font-medium">
+                  Trimester {t}
+                </span>
+              ))}
+              {data.journey?.slice(0, 1).map((j) => (
+                <span key={j} className="px-3 py-1 rounded-full bg-muted/60 text-muted-foreground text-[10px] font-sans tracking-[0.15em] uppercase">
+                  {journeyLabels[j] ?? j}
+                </span>
+              ))}
+            </div>
           )}
 
           {/* Title */}
@@ -98,16 +110,20 @@ const ArticleHero = ({ data }: Props) => {
             </p>
           )}
 
-          {/* Trust signals inline for deep articles */}
-          {isDeep && (data.reviewedBy || data.lastUpdated) && (
+          {/* Trust signals (both formats) */}
+          {(hasReview || hasDate) && (
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-8 font-sans text-[11px] font-light text-muted-foreground">
-              {data.reviewedBy && (
+              {hasReview && (
                 <span className="flex items-center gap-1.5">
-                  <span className="text-sage">✔</span> Reviewed by {data.reviewedBy}
+                  <Shield className="w-3.5 h-3.5 text-sage/70" />
+                  Reviewed by {data.reviewedBy}
                 </span>
               )}
-              {data.lastUpdated && (
-                <span>Updated {data.lastUpdated}</span>
+              {hasDate && (
+                <span className="flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-muted-foreground/50" />
+                  Updated {data.lastUpdated}
+                </span>
               )}
             </div>
           )}
@@ -127,20 +143,29 @@ const ArticleHero = ({ data }: Props) => {
             </div>
           )}
 
-          {/* Quick Answer */}
+          {/* Quick Answer card */}
           <div className={`border rounded-2xl shadow-elevated ${
             isDeep
               ? 'bg-card/95 backdrop-blur-sm border-sage/15 px-8 py-8 md:px-10 md:py-10'
               : 'bg-card/90 backdrop-blur-sm border-border/40 px-7 py-7 md:px-9 md:py-8'
           }`}>
             <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage mb-4">
-              {isDeep ? 'At a glance' : 'Quick Answer'}
+              {isDeep ? 'At a glance' : 'Quick answer'}
             </p>
             <p className={`font-sans font-light text-foreground leading-[1.8] ${
               isDeep ? 'text-base' : 'text-[15px]'
             }`}>
               {data.quickAnswer}
             </p>
+
+            {/* Disclaimer for short articles with medical content */}
+            {!isDeep && data.disclaimer && (
+              <div className="mt-5 pt-4 border-t border-border/20">
+                <p className="font-sans text-[11px] font-light text-muted-foreground/60 leading-relaxed">
+                  {data.disclaimer}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

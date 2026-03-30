@@ -132,7 +132,7 @@ const ArticleHero = ({ data }: Props) => {
           {/* Week chips */}
           {data.relatedWeeks && data.relatedWeeks.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-10">
-              {data.relatedWeeks.slice(0, 5).map((week) => (
+              {data.relatedWeeks.slice(0, isDeep ? 8 : 5).map((week) => (
                 <Link
                   key={week}
                   to={`/pregnancy/week/${week}`}

@@ -7,6 +7,7 @@ import logoSrc from "@/assets/logo-dark.png";
 const navLinks = [
   { label: "Explore", href: "/explore" },
   { label: "Pregnancy", href: "/pregnancy" },
+  { label: "Guidance", href: "/guidance" },
   { label: "Journal", href: "/product" },
   { label: "About", href: "/about" },
 ];

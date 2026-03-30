@@ -22,6 +22,7 @@ import ArticleKeyTakeaways from "@/components/article/ArticleKeyTakeaways";
 import ArticleJumpNav from "@/components/article/ArticleJumpNav";
 import ArticleSources from "@/components/article/ArticleSources";
 import ArticleRelatedReads from "@/components/article/ArticleRelatedReads";
+import ArticleFullGuide from "@/components/article/ArticleFullGuide";
 
 const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -90,6 +91,9 @@ const ArticlePage = () => {
 
       {/* FAQ section for AEO (only when real questions exist) */}
       {hasFAQ && <ArticleFAQ data={data} />}
+
+      {/* Full guide pathway (short articles with a cornerstone parent) */}
+      {!isDeep && data.cornerstoneSlug && <ArticleFullGuide data={data} />}
 
       {/* What happens next (always: provides forward motion) */}
       <ArticleWhatNext data={data} />

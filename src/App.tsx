@@ -25,6 +25,7 @@ import StagePage from "./pages/StagePage.tsx";
 import OvulationCalculator from "./pages/OvulationCalculator.tsx";
 import IVFTimeline from "./pages/IVFTimeline.tsx";
 import AskPage from "./pages/AskPage.tsx";
+import GuidanceLibrary from "./pages/GuidanceLibrary.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import BotanicalCorner from "./components/layout/BotanicalCorner.tsx";
 
@@ -59,6 +60,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/product" element={<Product />} />
           <Route path="/ask" element={<AskPage />} />
+          <Route path="/guidance" element={<GuidanceLibrary />} />
           <Route path="/:journey/:stage" element={<StagePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

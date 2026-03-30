@@ -5,12 +5,30 @@
 export interface ArticleRelatedLink {
   label: string;
   href: string;
-  context?: string; // e.g. "If you're around week 6, this is often when…"
+  context?: string;
 }
 
 export interface ArticleWhatSection {
   heading: string;
   body: string;
+}
+
+export interface ArticleFAQItem {
+  question: string;
+  answer: string;
+}
+
+export interface ArticleCompareItem {
+  label: string;
+  points: string[];
+}
+
+export interface ArticleCompare {
+  heading: string;
+  description: string;
+  items: [ArticleCompareItem, ArticleCompareItem];
+  commonConfusion?: string;
+  whenToSeekHelp?: string;
 }
 
 export interface ArticleData {
@@ -71,6 +89,22 @@ export interface ArticleData {
   trimester?: (1 | 2 | 3)[];
   relatedWeeks?: number[];
   relatedSlugs?: string[];
+
+  // FAQ for AEO
+  faq?: ArticleFAQItem[];
+
+  // Compare section for GEO
+  compare?: ArticleCompare;
+
+  // Cornerstone / pillar article link
+  cornerstoneSlug?: string;
+
+  // Is this a cornerstone article?
+  isCornerstone?: boolean;
+
+  // Journey tags for library
+  journey?: string[];
+  topics?: string[];
 }
 
 // ─── Article database ──────────────────────────────────────────────────────
@@ -176,6 +210,53 @@ const articleDatabase: ArticleData[] = [
     trimester: [1],
     relatedWeeks: [5, 6, 7, 8, 9],
     relatedSlugs: ["fatigue-in-early-pregnancy", "implantation-bleeding", "first-trimester-symptoms"],
+    cornerstoneSlug: "complete-guide-morning-sickness",
+    journey: ["pregnancy"],
+    topics: ["symptoms", "body-changes"],
+    faq: [
+      {
+        question: "Is it normal to have nausea all day, not just in the morning?",
+        answer: "Yes. Despite the name \"morning sickness,\" nausea can occur at any time of day. Many people experience it more in the afternoon or evening. All-day nausea is common and does not indicate a problem.",
+      },
+      {
+        question: "Does no nausea mean something is wrong?",
+        answer: "No. Many healthy pregnancies involve very little or no nausea. The absence of nausea is not a reliable indicator of pregnancy health and is not, on its own, a reason for concern.",
+      },
+      {
+        question: "When should I see a doctor about nausea?",
+        answer: "If you cannot keep fluids down for 24 hours or more, are losing weight, have dark urine, or feel that your symptoms are severe, contact your midwife or doctor. Hyperemesis gravidarum is a recognised condition that can be treated.",
+      },
+      {
+        question: "How long does morning sickness last?",
+        answer: "For most people, nausea begins around weeks 5-6 and eases between weeks 12-14. Some experience it for longer. Every pregnancy is different.",
+      },
+    ],
+    compare: {
+      heading: "Morning sickness vs hyperemesis gravidarum",
+      description: "Most nausea in pregnancy is manageable, but severe cases may be hyperemesis gravidarum, a condition that requires medical support.",
+      items: [
+        {
+          label: "Morning sickness",
+          points: [
+            "Nausea with or without occasional vomiting",
+            "Able to keep some food and fluids down",
+            "Symptoms ease with rest and small meals",
+            "Usually improves by weeks 12-14",
+          ],
+        },
+        {
+          label: "Hyperemesis gravidarum",
+          points: [
+            "Severe, persistent vomiting multiple times a day",
+            "Unable to keep fluids down",
+            "Weight loss and signs of dehydration",
+            "May require medical treatment or hospitalisation",
+          ],
+        },
+      ],
+      commonConfusion: "Many people worry their nausea is \"too severe\" when it is still within the normal range. The key distinction is whether you can stay hydrated.",
+      whenToSeekHelp: "If you cannot keep fluids down for 24 hours, notice dark urine, feel dizzy when standing, or are losing weight, contact your midwife or doctor.",
+    },
   },
 
   // ─── FATIGUE IN EARLY PREGNANCY ───────────────────────────────────────────
@@ -275,6 +356,23 @@ const articleDatabase: ArticleData[] = [
     trimester: [1],
     relatedWeeks: [4, 5, 6, 7, 8],
     relatedSlugs: ["nausea-in-early-pregnancy", "first-trimester-symptoms"],
+    cornerstoneSlug: "first-trimester-complete-guide",
+    journey: ["pregnancy"],
+    topics: ["symptoms", "body-changes", "emotional-wellbeing"],
+    faq: [
+      {
+        question: "Is extreme tiredness normal in early pregnancy?",
+        answer: "Yes. First trimester fatigue can be significantly more intense than anything you've experienced before. It is caused by rising progesterone and the enormous energy demands of early pregnancy.",
+      },
+      {
+        question: "When does pregnancy fatigue get better?",
+        answer: "Most people notice improvement in the second trimester, typically around weeks 12-14. Energy often returns noticeably between weeks 13-20.",
+      },
+      {
+        question: "Can fatigue be a sign of something wrong?",
+        answer: "Fatigue on its own is almost always normal. If it is accompanied by rapid heartbeat, extreme dizziness, or breathlessness at rest, speak with your midwife.",
+      },
+    ],
   },
 
   // ─── IMPLANTATION BLEEDING ────────────────────────────────────────────────
@@ -368,6 +466,50 @@ const articleDatabase: ArticleData[] = [
     trimester: [1],
     relatedWeeks: [1, 4, 5],
     relatedSlugs: ["nausea-in-early-pregnancy", "first-trimester-symptoms"],
+    journey: ["pregnancy", "trying-to-conceive"],
+    topics: ["symptoms", "safety-and-support"],
+    faq: [
+      {
+        question: "How can I tell the difference between implantation bleeding and a period?",
+        answer: "Implantation bleeding is typically lighter, shorter (1-3 days), and does not increase in flow. It is often pink or brown rather than bright red. A period usually builds in flow and lasts longer.",
+      },
+      {
+        question: "Does everyone get implantation bleeding?",
+        answer: "No. Estimates suggest roughly 25-30% of people experience it. Its absence is completely normal and does not mean implantation hasn't occurred.",
+      },
+      {
+        question: "Can implantation bleeding be heavy?",
+        answer: "True implantation bleeding is light. If you experience heavy bleeding around the time of your expected period, it may be your period or another cause. Speak with your healthcare provider if you are unsure.",
+      },
+    ],
+    compare: {
+      heading: "Implantation bleeding vs period",
+      description: "Understanding the difference between implantation bleeding and a period is one of the most common questions in early pregnancy and when trying to conceive.",
+      items: [
+        {
+          label: "Implantation bleeding",
+          points: [
+            "Light pink or brown spotting",
+            "Lasts 1-3 days",
+            "Does not increase in flow",
+            "May include mild cramping",
+            "Occurs 6-12 days after ovulation",
+          ],
+        },
+        {
+          label: "Period",
+          points: [
+            "Usually bright red, builds in flow",
+            "Lasts 3-7 days typically",
+            "Flow increases before tapering off",
+            "Often accompanied by stronger cramping",
+            "Occurs on a regular cycle pattern",
+          ],
+        },
+      ],
+      commonConfusion: "The timing is the biggest source of confusion. Implantation bleeding can occur around the same time a period is expected, making it difficult to tell the difference without a pregnancy test.",
+      whenToSeekHelp: "If you experience heavy bleeding with severe pain, or bleeding that concerns you at any stage, contact your healthcare provider.",
+    },
   },
 
   // ─── SYMPTOMS STOPPING IN EARLY PREGNANCY ────────────────────────────────
@@ -462,6 +604,586 @@ const articleDatabase: ArticleData[] = [
     trimester: [1],
     relatedWeeks: [5, 6, 7, 8, 9, 10, 12],
     relatedSlugs: ["nausea-in-early-pregnancy", "fatigue-in-early-pregnancy", "first-trimester-symptoms"],
+    cornerstoneSlug: "first-trimester-complete-guide",
+    journey: ["pregnancy"],
+    topics: ["symptoms", "emotional-wellbeing"],
+    faq: [
+      {
+        question: "Is it normal for pregnancy symptoms to come and go?",
+        answer: "Yes. Symptoms fluctuate because hormone levels fluctuate. A good day does not mean something has changed with your pregnancy.",
+      },
+      {
+        question: "Should I be worried if my nausea suddenly stops?",
+        answer: "A sudden improvement in nausea is usually part of normal variation. If it is accompanied by heavy bleeding or significant pain, contact your healthcare provider.",
+      },
+      {
+        question: "When do pregnancy symptoms usually ease naturally?",
+        answer: "Most people notice symptoms easing from around weeks 12-14 as hormone levels stabilise. This is expected, not a warning sign.",
+      },
+    ],
+  },
+
+  // ─── CORNERSTONE: COMPLETE GUIDE TO MORNING SICKNESS ─────────────────────
+  {
+    slug: "complete-guide-morning-sickness",
+    title: "Morning sickness: the complete guide to nausea in pregnancy",
+    metaDescription: "Everything you need to know about morning sickness. Why it happens, when it starts and ends, what helps, when to seek support, and what is considered normal.",
+    isCornerstone: true,
+    quickAnswer:
+      "Morning sickness affects up to 80% of pregnant people and is caused primarily by rising hCG and progesterone levels. Despite its name, it can occur at any time of day. For most people it begins around weeks 5-6, peaks between weeks 8-10, and eases by weeks 12-14. While uncomfortable, it is almost always a normal part of pregnancy.",
+    howThisFeels: [
+      "Feeling profoundly unwell while trying to function normally",
+      "Wondering whether this level of sickness is normal",
+      "The isolation of an invisible symptom",
+      "Not being able to eat foods you usually enjoy",
+      "Counting down the weeks until the second trimester",
+    ],
+    whatHappening: {
+      commonCauses: [
+        {
+          heading: "hCG (human chorionic gonadotropin)",
+          body: "This pregnancy hormone rises rapidly in the first trimester and directly stimulates the nausea centre in the brain. The rate of rise, not just the level, appears to influence severity.",
+        },
+        {
+          heading: "Progesterone",
+          body: "Progesterone relaxes smooth muscle throughout the body, including the digestive system. This slows digestion, contributing to nausea, bloating, and reflux.",
+        },
+        {
+          heading: "Oestrogen and smell sensitivity",
+          body: "Rising oestrogen heightens your sense of smell, sometimes dramatically. Previously neutral smells can become powerful nausea triggers.",
+        },
+        {
+          heading: "Evolutionary protection theory",
+          body: "Some researchers believe nausea evolved as a protective mechanism to discourage consumption of potentially harmful foods during the critical early development period.",
+        },
+      ],
+      lessCauses: [
+        {
+          heading: "Blood sugar instability",
+          body: "Metabolic changes in early pregnancy can cause blood sugar to drop more rapidly, particularly overnight. Low blood sugar amplifies nausea.",
+        },
+        {
+          heading: "Stress and fatigue",
+          body: "Physical and emotional stress can worsen nausea. The relationship is bidirectional, nausea causes fatigue, and fatigue worsens nausea.",
+        },
+        {
+          heading: "Multiple pregnancies",
+          body: "Those carrying multiples often experience more intense nausea due to higher levels of hCG.",
+        },
+      ],
+      whyItVaries:
+        "Morning sickness varies enormously. Some people feel mildly queasy; others are severely affected for weeks. Genetics, hCG sensitivity, prior history, and overall health all play a role. There is no \"correct\" level of nausea, and severity is not a reliable measure of pregnancy health.",
+    },
+    timing: {
+      whenStarts: "Most commonly begins between weeks 4-6, when hCG levels start rising rapidly.",
+      whenPeaks: "Symptoms are typically most intense between weeks 8-10.",
+      whenEases: "The majority of people notice significant improvement between weeks 12-16 as the placenta takes over hormone production. Some experience relief earlier, others later.",
+    },
+    whatItFeelsLike: [
+      "A persistent underlying queasiness that doesn't fully resolve",
+      "Waves of nausea triggered by smells, movement, or an empty stomach",
+      "Food aversions that change day to day",
+      "The exhaustion of feeling unwell continuously",
+      "Good hours that give hope, followed by bad hours that take it away",
+    ],
+    whatThisMeans:
+      "Morning sickness is, for the vast majority of people, a sign that pregnancy hormones are active and doing their job. The presence or absence of nausea does not predict pregnancy outcome. This is important to remember on both the difficult days and the good ones.",
+    normal: [
+      "Nausea at any time of day",
+      "Vomiting occasionally without other concerning symptoms",
+      "Days that are worse than others",
+      "Symptoms that start, stop, and return",
+      "Very mild nausea or no nausea at all",
+      "Food aversions and changing preferences",
+    ],
+    seekSupport: [
+      "Unable to keep any fluids down for more than 24 hours",
+      "Significant unintentional weight loss",
+      "Dark, concentrated urine or infrequent urination",
+      "Vomiting blood",
+      "Feeling faint, dizzy, or confused",
+      "Symptoms that are worsening rather than improving after week 14",
+    ],
+    disclaimer: "This is not medical advice. If nausea is severely affecting your ability to eat, drink, or function, speak with your midwife or doctor. Hyperemesis gravidarum is a recognised medical condition with effective treatments.",
+    whatYouCanDo: [
+      { action: "Eat small amounts frequently", reason: "An empty stomach makes nausea worse. Small, bland snacks every 1-2 hours can help stabilise blood sugar." },
+      { action: "Stay hydrated in small sips", reason: "Sipping water, diluted juice, or ice chips throughout the day is more manageable than large drinks." },
+      { action: "Identify and avoid personal triggers", reason: "Common triggers include strong smells, rich foods, and warm environments. Reducing exposure can help." },
+      { action: "Try ginger in various forms", reason: "Ginger tea, ginger biscuits, and ginger supplements have evidence supporting mild anti-nausea effects." },
+      { action: "Prioritise rest", reason: "Fatigue worsens nausea. Resting when possible can reduce overall severity." },
+      { action: "Consider vitamin B6", reason: "Some studies suggest vitamin B6 can reduce nausea. Discuss dosage with your healthcare provider." },
+      { action: "Speak to your doctor about medication if needed", reason: "Safe anti-nausea medications are available. There is no need to suffer in silence." },
+    ],
+    whatHappensNext:
+      "For most people, the worst of morning sickness passes by weeks 12-16. The second trimester often brings welcome relief and renewed energy. If symptoms persist beyond week 16, this is less common but not dangerous, and is worth discussing with your care team.",
+    relatedStage: {
+      intro: "Morning sickness is primarily a first trimester experience. Explore the stages that relate to it:",
+      links: [
+        { label: "First Trimester Hub", href: "/pregnancy/first-trimester", context: "A comprehensive overview of what the first trimester involves." },
+        { label: "Week 6", href: "/pregnancy/week/6", context: "Often when nausea first becomes significant." },
+        { label: "Week 9", href: "/pregnancy/week/9", context: "Around the peak of nausea for many people." },
+        { label: "Week 13", href: "/pregnancy/week/13", context: "When improvement often begins." },
+      ],
+    },
+    aiPrompts: [
+      "What foods help with morning sickness?",
+      "Is my nausea normal for this stage of pregnancy?",
+      "When will morning sickness stop?",
+      "Should I take medication for morning sickness?",
+    ],
+    captureIntro: "Morning sickness is one of those experiences that is hard to describe until you've lived it. Many parents find it meaningful to write about what this stage was really like.",
+    trimester: [1],
+    relatedWeeks: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+    relatedSlugs: ["nausea-in-early-pregnancy", "fatigue-in-early-pregnancy", "symptoms-stopping-early-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["symptoms", "body-changes", "practical-preparation"],
+    faq: [
+      {
+        question: "Does morning sickness only happen in the morning?",
+        answer: "No. Despite the name, nausea can occur at any time of day. Many people experience it more in the afternoon or evening. The name is misleading.",
+      },
+      {
+        question: "Is morning sickness a good sign?",
+        answer: "Some research suggests nausea may be associated with lower miscarriage risk, but many healthy pregnancies involve little or no nausea. It is not a reliable positive or negative indicator.",
+      },
+      {
+        question: "Can morning sickness harm my baby?",
+        answer: "Normal morning sickness does not harm your baby. Your body prioritises the pregnancy even when you are unable to eat normally. However, severe dehydration from hyperemesis gravidarum does need treatment.",
+      },
+      {
+        question: "What is the difference between morning sickness and hyperemesis gravidarum?",
+        answer: "Morning sickness involves manageable nausea where you can still keep some food and fluids down. Hyperemesis gravidarum involves severe, persistent vomiting, inability to stay hydrated, and often requires medical treatment.",
+      },
+      {
+        question: "Will morning sickness be the same in every pregnancy?",
+        answer: "Not necessarily. Many people experience different levels of nausea in different pregnancies. Previous experience is not a reliable predictor.",
+      },
+      {
+        question: "Are there safe medications for morning sickness?",
+        answer: "Yes. Several anti-nausea medications are considered safe in pregnancy. Your doctor or midwife can discuss options if your symptoms are severe enough to affect daily life.",
+      },
+    ],
+    compare: {
+      heading: "Morning sickness vs hyperemesis gravidarum",
+      description: "Understanding the difference helps you know when to seek medical support.",
+      items: [
+        {
+          label: "Morning sickness",
+          points: [
+            "Nausea with or without occasional vomiting",
+            "Able to keep some food and fluids down",
+            "Uncomfortable but manageable",
+            "Eases with rest, small meals, and trigger avoidance",
+            "Usually resolves by weeks 12-16",
+          ],
+        },
+        {
+          label: "Hyperemesis gravidarum",
+          points: [
+            "Severe, persistent vomiting (often many times daily)",
+            "Unable to keep fluids or food down",
+            "May cause dehydration, weight loss, and ketosis",
+            "May require hospital treatment and IV fluids",
+            "Can persist throughout pregnancy",
+          ],
+        },
+      ],
+      commonConfusion: "Many people worry that severe nausea automatically means hyperemesis gravidarum. The key distinction is whether you can maintain hydration, not how unpleasant the nausea feels.",
+      whenToSeekHelp: "If you cannot keep any fluids down for more than 24 hours, are losing weight, have dark urine, or feel faint, contact your healthcare provider.",
+    },
+  },
+
+  // ─── CORNERSTONE: FIRST TRIMESTER COMPLETE GUIDE ─────────────────────────
+  {
+    slug: "first-trimester-complete-guide",
+    title: "First trimester: everything you need to know about weeks 1 to 12",
+    metaDescription: "A comprehensive guide to the first trimester of pregnancy. What happens week by week, common symptoms, what to expect, and when to seek support.",
+    isCornerstone: true,
+    quickAnswer:
+      "The first trimester covers weeks 1-12 of pregnancy and involves the most significant developmental changes of the entire pregnancy. During this time, all major organs begin forming, symptoms like nausea and fatigue are common, and your body undergoes enormous hormonal shifts. It is also the stage where uncertainty and anxiety are most common.",
+    howThisFeels: [
+      "A strange mix of excitement and fear",
+      "Feeling exhausted in ways you've never experienced",
+      "Wanting to tell people but not knowing when it's safe",
+      "The weight of a secret you're carrying alone or with a partner",
+      "Searching constantly for reassurance about what's normal",
+    ],
+    whatHappening: {
+      commonCauses: [
+        {
+          heading: "Rapid hormonal changes",
+          body: "hCG, progesterone, and oestrogen all rise dramatically in the first trimester. These hormones drive most of the symptoms you experience and are essential for maintaining the pregnancy.",
+        },
+        {
+          heading: "Organ and system development",
+          body: "By week 12, all major organ systems have begun forming. The heart starts beating around week 6, the brain is developing rapidly, and the basic body plan is established.",
+        },
+        {
+          heading: "Placenta formation",
+          body: "The placenta develops throughout the first trimester, gradually taking over hormone production from the corpus luteum. This transition is why many symptoms ease around weeks 12-14.",
+        },
+      ],
+      lessCauses: [
+        {
+          heading: "Increased blood volume",
+          body: "Your body begins producing significantly more blood to support the pregnancy, contributing to fatigue and sometimes light-headedness.",
+        },
+        {
+          heading: "Immune system adaptation",
+          body: "Your immune system adjusts to accommodate the pregnancy, which can make you more susceptible to colds and infections.",
+        },
+      ],
+      whyItVaries:
+        "No two first trimesters are alike. Some people experience every symptom intensely; others sail through with minimal disruption. Both experiences are entirely normal.",
+    },
+    timing: {
+      whenStarts: "The first trimester begins from the first day of your last menstrual period and runs through to the end of week 12.",
+      whenPeaks: "Symptoms are typically most intense between weeks 6-10.",
+      whenEases: "Most symptoms begin to improve from weeks 12-14 as you enter the second trimester.",
+    },
+    whatItFeelsLike: [
+      "Overwhelming fatigue that makes normal days feel impossible",
+      "Nausea that can range from mild to all-consuming",
+      "Emotional intensity, feeling everything more deeply",
+      "Anxiety about the unknown, especially before the first scan",
+      "A private, internal experience that the world around you cannot see",
+    ],
+    whatThisMeans:
+      "The first trimester is the most biologically intensive period of pregnancy. The symptoms you experience are directly caused by the enormous work your body is doing. Everything from fatigue to nausea to emotional sensitivity has a physiological basis. You are not being dramatic. Your body is doing something extraordinary.",
+    normal: [
+      "Intense fatigue",
+      "Nausea with or without vomiting",
+      "Breast tenderness and changes",
+      "Mood swings and emotional sensitivity",
+      "Light spotting in early weeks",
+      "Food aversions and cravings",
+      "Frequent urination",
+      "Bloating and digestive changes",
+    ],
+    seekSupport: [
+      "Heavy bleeding or severe cramping",
+      "Severe pain, especially on one side",
+      "Unable to keep any fluids down",
+      "High fever",
+      "Significant anxiety or depression affecting daily life",
+    ],
+    disclaimer: "This is not medical advice. Regular antenatal care is important from early pregnancy. Contact your midwife or doctor with any concerns.",
+    whatYouCanDo: [
+      { action: "Book your first midwife appointment", reason: "Antenatal care should begin as early as possible, usually around weeks 8-10." },
+      { action: "Take folic acid daily", reason: "Folic acid supports neural tube development and should be taken throughout the first trimester." },
+      { action: "Rest as much as you need", reason: "First trimester fatigue is biological. Your body needs more rest." },
+      { action: "Eat what you can manage", reason: "Food aversions are common. Eating what feels manageable is more important than eating perfectly." },
+      { action: "Be gentle with yourself emotionally", reason: "The first trimester is intense. Whatever you are feeling is valid." },
+    ],
+    whatHappensNext:
+      "The second trimester (weeks 13-27) is often described as the most comfortable period of pregnancy. Symptoms typically ease, energy returns, and the pregnancy becomes more visible and tangible. The first scan usually provides welcome reassurance.",
+    relatedStage: {
+      intro: "Explore the first trimester in more detail:",
+      links: [
+        { label: "First Trimester Hub", href: "/pregnancy/first-trimester", context: "Your complete guide to the first trimester." },
+        { label: "Week 5", href: "/pregnancy/week/5", context: "When most symptoms begin." },
+        { label: "Week 8", href: "/pregnancy/week/8", context: "Peak symptom intensity for many people." },
+        { label: "Week 12", href: "/pregnancy/week/12", context: "The milestone many people wait for." },
+      ],
+    },
+    aiPrompts: [
+      "What should I expect in my first trimester?",
+      "What symptoms are normal in early pregnancy?",
+      "When should I see a midwife?",
+    ],
+    captureIntro: "The first trimester is often kept secret, but it deserves to be remembered. Many parents find that writing about this stage helps them process an intense and transformative experience.",
+    trimester: [1],
+    relatedWeeks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    relatedSlugs: ["nausea-in-early-pregnancy", "fatigue-in-early-pregnancy", "implantation-bleeding", "symptoms-stopping-early-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["symptoms", "body-changes", "timelines", "emotional-wellbeing", "practical-preparation"],
+    faq: [
+      {
+        question: "What are the most common first trimester symptoms?",
+        answer: "Fatigue, nausea, breast tenderness, frequent urination, mood changes, food aversions, and bloating. Not everyone experiences all of these.",
+      },
+      {
+        question: "When is the first scan?",
+        answer: "In the UK, the first scan (dating scan) is usually offered between weeks 8-14. Your midwife will arrange this at your booking appointment.",
+      },
+      {
+        question: "Is it safe to exercise in the first trimester?",
+        answer: "For most people, gentle to moderate exercise is safe and beneficial. Avoid contact sports and activities with a high fall risk. Speak with your midwife if you have concerns.",
+      },
+      {
+        question: "When should I tell people I'm pregnant?",
+        answer: "There is no rule. Many people wait until after the first scan (around week 12), but some choose to share earlier. Do what feels right for you.",
+      },
+      {
+        question: "Is light spotting in the first trimester normal?",
+        answer: "Light spotting can be normal, particularly around the time implantation occurs. However, any bleeding is worth mentioning to your midwife or doctor.",
+      },
+    ],
+  },
+
+  // ─── CORNERSTONE: EARLY PREGNANCY SYMPTOMS EXPLAINED ─────────────────────
+  {
+    slug: "early-pregnancy-symptoms-explained",
+    title: "Early pregnancy symptoms: what to expect and what is normal",
+    metaDescription: "A comprehensive guide to early pregnancy symptoms. What causes them, when they start, what varies, and when to speak with your healthcare provider.",
+    isCornerstone: true,
+    quickAnswer:
+      "Early pregnancy symptoms are caused by hormonal changes, primarily rising hCG and progesterone. Common symptoms include nausea, fatigue, breast tenderness, mood changes, and food aversions. Every pregnancy is different, and having fewer symptoms does not indicate a problem.",
+    howThisFeels: [
+      "Constantly checking your body for clues",
+      "Not knowing what is normal and what isn't",
+      "Feeling everything more intensely than usual",
+      "The gap between what you expected and how it actually feels",
+      "Wanting reassurance you can't easily find",
+    ],
+    whatHappening: {
+      commonCauses: [
+        {
+          heading: "Hormonal surge",
+          body: "hCG, progesterone, and oestrogen all rise rapidly in early pregnancy. These hormones cause most of the symptoms you experience, from nausea to fatigue to breast changes.",
+        },
+        {
+          heading: "Metabolic changes",
+          body: "Your metabolism shifts to support the developing pregnancy. This affects blood sugar, digestion, and energy levels.",
+        },
+      ],
+      lessCauses: [
+        {
+          heading: "Psychological and emotional adaptation",
+          body: "The emotional weight of early pregnancy, with its uncertainty and significance, can amplify physical sensations and create new ones.",
+        },
+      ],
+      whyItVaries:
+        "No two pregnancies produce the same symptoms. Genetics, hormonal sensitivity, general health, and individual physiology all play a role. Comparing your experience to others' is natural but rarely helpful.",
+    },
+    timing: {
+      whenStarts: "Symptoms can begin as early as weeks 3-4, though most people notice them from weeks 5-6.",
+      whenPeaks: "Typically most noticeable between weeks 6-10.",
+      whenEases: "Most first trimester symptoms improve between weeks 12-14.",
+    },
+    whatItFeelsLike: [
+      "A combination of symptoms that can feel overwhelming together",
+      "Good days and bad days with no clear pattern",
+      "Physical discomfort alongside emotional intensity",
+      "The strange experience of your body changing before you can see it",
+    ],
+    whatThisMeans:
+      "Early pregnancy symptoms, whether intense or mild, are your body responding to the pregnancy. They are not a measure of how healthy the pregnancy is. Some people with no symptoms have perfectly healthy pregnancies. Some people with intense symptoms do too.",
+    normal: [
+      "Nausea (at any time of day)",
+      "Extreme fatigue",
+      "Breast tenderness and swelling",
+      "Frequent urination",
+      "Mood swings",
+      "Food aversions and cravings",
+      "Bloating and mild cramping",
+      "Heightened sense of smell",
+      "Light spotting",
+      "Having very few or no symptoms",
+    ],
+    seekSupport: [
+      "Severe vomiting preventing hydration",
+      "Heavy bleeding or severe cramping",
+      "Pain on one side of the abdomen",
+      "High fever",
+      "Feeling significantly unwell beyond normal pregnancy symptoms",
+    ],
+    disclaimer: "This is not medical advice. If you have concerns about any symptom, contact your midwife or doctor.",
+    whatYouCanDo: [
+      { action: "Track symptoms lightly, not obsessively", reason: "A brief daily note can help you see patterns and share useful information with your midwife." },
+      { action: "Eat what you can manage", reason: "Nutrition matters, but survival eating is fine during the first trimester." },
+      { action: "Rest", reason: "Your body is working harder than you realise." },
+      { action: "Seek reassurance when you need it", reason: "Contact your midwife. That is what they are there for." },
+    ],
+    whatHappensNext:
+      "Symptoms evolve throughout pregnancy. The first trimester is typically the most symptom-heavy period. The second trimester often brings relief, and the third trimester introduces new physical sensations as your baby grows.",
+    relatedStage: {
+      intro: "Explore early pregnancy in more depth:",
+      links: [
+        { label: "First Trimester Hub", href: "/pregnancy/first-trimester" },
+        { label: "Nausea guide", href: "/articles/nausea-in-early-pregnancy" },
+        { label: "Fatigue guide", href: "/articles/fatigue-in-early-pregnancy" },
+        { label: "Week 6", href: "/pregnancy/week/6", context: "Peak symptom week for many." },
+      ],
+    },
+    aiPrompts: [
+      "What symptoms should I expect this week?",
+      "Is it normal to feel this way in early pregnancy?",
+      "Which symptoms need medical attention?",
+    ],
+    captureIntro: "Early pregnancy is full of questions and feelings that are worth recording. Many parents look back and wish they'd written more about how the beginning really felt.",
+    trimester: [1],
+    relatedWeeks: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    relatedSlugs: ["nausea-in-early-pregnancy", "fatigue-in-early-pregnancy", "implantation-bleeding", "symptoms-stopping-early-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["symptoms", "body-changes", "emotional-wellbeing"],
+    faq: [
+      {
+        question: "What are the earliest signs of pregnancy?",
+        answer: "The earliest signs include a missed period, breast tenderness, fatigue, nausea, and frequent urination. Some people also notice light spotting or mood changes.",
+      },
+      {
+        question: "Can you have no symptoms and still be pregnant?",
+        answer: "Yes. Some people experience very few symptoms, especially in the first few weeks. This is normal and does not indicate a problem.",
+      },
+      {
+        question: "Do symptoms get worse before they get better?",
+        answer: "For many people, symptoms intensify between weeks 6-10 before gradually improving. But this pattern varies.",
+      },
+      {
+        question: "Should I worry if my symptoms are different from my last pregnancy?",
+        answer: "No. Every pregnancy is different. Symptom variation between pregnancies is completely normal.",
+      },
+    ],
+  },
+
+  // ─── CORNERSTONE: POSTPARTUM RECOVERY TIMELINE ───────────────────────────
+  {
+    slug: "postpartum-recovery-timeline",
+    title: "Postpartum recovery: what to expect in the weeks and months after birth",
+    metaDescription: "A comprehensive guide to postpartum recovery. Physical healing, emotional adjustment, and what to expect in the first days, weeks, and months after having a baby.",
+    isCornerstone: true,
+    quickAnswer:
+      "Postpartum recovery is a gradual process that unfolds over weeks and months, not days. Physical healing from birth typically takes 6-8 weeks, but full recovery, including hormonal adjustment, emotional processing, and finding a new rhythm, takes much longer. There is no single timeline that applies to everyone.",
+    howThisFeels: [
+      "Feeling like your body has been through something enormous",
+      "Navigating the gap between what you expected and how you actually feel",
+      "The intensity of caring for a newborn while you are still recovering",
+      "Not recognising your body or your emotions",
+      "Feeling invisible in a moment that everyone else focuses on the baby",
+    ],
+    whatHappening: {
+      commonCauses: [
+        {
+          heading: "Physical recovery from birth",
+          body: "Whether vaginal or caesarean, birth is a major physical event. Your body needs time to heal, manage bleeding (lochia), and recover muscle and tissue integrity.",
+        },
+        {
+          heading: "Hormonal crash",
+          body: "Oestrogen and progesterone drop dramatically after birth. This sudden change affects mood, energy, sleep, and physical symptoms. It takes weeks for hormones to stabilise.",
+        },
+        {
+          heading: "Sleep deprivation",
+          body: "Newborn feeding patterns mean broken sleep for weeks or months. This affects everything from mood to healing to cognitive function.",
+        },
+      ],
+      lessCauses: [
+        {
+          heading: "Breastfeeding demands",
+          body: "If breastfeeding, your body is producing milk around the clock, which has its own energy and nutritional cost.",
+        },
+        {
+          heading: "Identity and role adjustment",
+          body: "Becoming a parent changes how you relate to yourself, your partner, your work, and your life. This psychological adjustment is real and significant.",
+        },
+      ],
+      whyItVaries:
+        "Recovery depends on the type of birth, any complications, your physical health, your support system, your baby's temperament, and your emotional state. There is no \"normal\" speed of recovery.",
+    },
+    timing: {
+      whenStarts: "Recovery begins immediately after birth.",
+      whenPeaks: "The most intense physical recovery occurs in the first 2-4 weeks.",
+      whenEases: "Physical healing is generally well advanced by 6-8 weeks. Emotional and hormonal adjustment continues for months.",
+    },
+    whatItFeelsLike: [
+      "Physical soreness and exhaustion",
+      "Emotional highs and lows that can change hour by hour",
+      "A deep love alongside moments of overwhelm",
+      "Feeling proud and afraid at the same time",
+      "The strange loneliness of new parenthood",
+    ],
+    whatThisMeans:
+      "Postpartum recovery is not just about physical healing. It is a full-body, full-mind adjustment to a completely new life. The difficulty of it does not mean you are failing. It means you are going through something genuinely hard.",
+    normal: [
+      "Bleeding (lochia) for up to 6 weeks",
+      "Pain and discomfort at the birth site",
+      "Night sweats as hormones adjust",
+      "Mood swings and crying",
+      "Feeling overwhelmed by the responsibility",
+      "Difficulty bonding immediately",
+      "Hair loss from around month 3",
+      "Body shape and weight changes",
+    ],
+    seekSupport: [
+      "Feelings of despair, emptiness, or detachment lasting more than two weeks",
+      "Intrusive thoughts about harming yourself or your baby",
+      "Inability to sleep even when the baby is sleeping",
+      "Feeling unable to care for your baby",
+      "Signs of infection at a wound site",
+      "Heavy bleeding returning or worsening after it had reduced",
+    ],
+    disclaimer: "This is not medical advice. Your midwife, health visitor, and GP are available to support you in the postpartum period. If you are struggling emotionally, please reach out.",
+    whatYouCanDo: [
+      { action: "Accept that recovery takes time", reason: "Six weeks is a medical milestone, not a finish line. Full recovery takes much longer." },
+      { action: "Accept help without guilt", reason: "You do not have to do this alone. Let people support you." },
+      { action: "Eat and hydrate regularly", reason: "Your body is healing and, if breastfeeding, producing milk. Nutrition matters." },
+      { action: "Move gently when ready", reason: "Short walks and gentle movement support recovery. Don't rush back to exercise." },
+      { action: "Talk about how you're feeling", reason: "Emotional processing is part of recovery. Speak to your partner, a friend, or a professional." },
+    ],
+    whatHappensNext:
+      "Recovery is gradual. Most people feel physically more like themselves by 3-4 months, though emotional and hormonal adjustment continues. The first year involves constant adaptation as your baby grows and changes. It does get easier, but it takes longer than most people expect.",
+    relatedStage: {
+      intro: "Explore the postpartum journey in more detail:",
+      links: [
+        { label: "Postpartum Hub", href: "/postpartum", context: "Your complete guide to the postpartum period." },
+        { label: "First Year Hub", href: "/first-year", context: "What comes next as your baby grows." },
+        { label: "Support Hub", href: "/support", context: "If you need emotional or practical support." },
+      ],
+    },
+    aiPrompts: [
+      "What is normal postpartum recovery?",
+      "When will I feel like myself again?",
+      "How do I know if what I'm feeling is baby blues or postnatal depression?",
+    ],
+    captureIntro: "The postpartum period is one of the most transformative experiences of a lifetime, and also one of the least documented. Recording how you're feeling creates something meaningful for the future.",
+    journey: ["postpartum"],
+    topics: ["body-changes", "timelines", "emotional-wellbeing", "safety-and-support"],
+    faq: [
+      {
+        question: "How long does postpartum recovery take?",
+        answer: "Physical healing from birth typically takes 6-8 weeks, but full recovery, including hormonal, emotional, and lifestyle adjustment, unfolds over months. There is no single timeline.",
+      },
+      {
+        question: "What is the difference between baby blues and postnatal depression?",
+        answer: "Baby blues are mild mood swings, tearfulness, and overwhelm in the first two weeks after birth, caused by hormonal changes. Postnatal depression is more persistent, lasting beyond two weeks, and may involve feelings of hopelessness, detachment, or inability to cope. Seek support if symptoms last longer than two weeks.",
+      },
+      {
+        question: "When can I exercise after giving birth?",
+        answer: "Gentle walking is usually fine within days. More intensive exercise should wait until after your 6-week check, and longer after a caesarean. Listen to your body and speak with your healthcare provider.",
+      },
+      {
+        question: "Is it normal to not bond with my baby immediately?",
+        answer: "Yes. Bonding is a process, not a moment. Many parents take days or weeks to feel a strong connection. This is normal and does not mean anything is wrong.",
+      },
+    ],
+    compare: {
+      heading: "Baby blues vs postnatal depression",
+      description: "Understanding the difference helps you know when low mood is a temporary adjustment and when it may need additional support.",
+      items: [
+        {
+          label: "Baby blues",
+          points: [
+            "Mild mood swings and tearfulness",
+            "Usually starts within 2-3 days of birth",
+            "Resolves within 1-2 weeks",
+            "You can still function and care for your baby",
+            "Caused by the sudden hormonal drop after birth",
+          ],
+        },
+        {
+          label: "Postnatal depression",
+          points: [
+            "Persistent low mood, hopelessness, or emptiness",
+            "Lasts longer than two weeks and may worsen",
+            "May affect your ability to care for yourself or your baby",
+            "Can include anxiety, intrusive thoughts, or detachment",
+            "Requires professional support and is very treatable",
+          ],
+        },
+      ],
+      commonConfusion: "Many people dismiss postnatal depression as \"just baby blues\" because they overlap in the early days. The key difference is duration and intensity.",
+      whenToSeekHelp: "If low mood, anxiety, or difficulty coping lasts beyond two weeks, or if you have intrusive thoughts, please speak with your midwife, health visitor, or GP.",
+    },
   },
 ];
 
@@ -474,3 +1196,18 @@ export const getAllArticles = (): ArticleData[] => articleDatabase;
 
 export const getRelatedArticles = (slug: string, limit = 3): ArticleData[] =>
   articleDatabase.filter((a) => a.slug !== slug).slice(0, limit);
+
+export const getCornerstoneArticles = (): ArticleData[] =>
+  articleDatabase.filter((a) => a.isCornerstone);
+
+export const getArticlesByJourney = (journey: string): ArticleData[] =>
+  articleDatabase.filter((a) => a.journey?.includes(journey));
+
+export const getArticlesByTopic = (topic: string): ArticleData[] =>
+  articleDatabase.filter((a) => a.topics?.includes(topic));
+
+export const getAllJourneys = (): string[] =>
+  [...new Set(articleDatabase.flatMap((a) => a.journey ?? []))];
+
+export const getAllTopics = (): string[] =>
+  [...new Set(articleDatabase.flatMap((a) => a.topics ?? []))];

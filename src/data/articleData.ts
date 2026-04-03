@@ -836,7 +836,150 @@ const articleDatabase: ArticleData[] = [
       "Both strong nausea and very mild nausea are normal",
       "Safe anti-nausea medications are available if symptoms are severe",
     ],
-    inThisArticle: ["Why morning sickness happens", "When it starts and ends", "What helps", "Morning sickness vs hyperemesis", "When to seek support", "Common questions"],
+    inThisArticle: ["Why morning sickness happens", "When it starts and ends", "What variation looks like", "What may help", "Morning sickness vs hyperemesis", "When to seek support", "Common questions"],
+    editorialSections: [
+      {
+        id: "why-it-happens",
+        heading: "Why morning sickness happens",
+        lead: "Morning sickness is driven by a combination of hormonal shifts that begin almost immediately after implantation. Understanding these changes can help explain why nausea can feel so intense, and why it is almost always a normal part of early pregnancy.",
+        paragraphs: [
+          "The primary driver is human chorionic gonadotropin (hCG), the hormone your body begins producing shortly after a fertilised egg implants in the uterine lining. hCG levels rise rapidly in the first trimester, roughly doubling every 48 to 72 hours during the early weeks. This hormone directly stimulates the chemoreceptor trigger zone in the brain, which is the area responsible for triggering the nausea response.",
+          "At the same time, progesterone levels increase significantly. Progesterone is essential for maintaining the pregnancy, but it also relaxes smooth muscle throughout the body, including the muscles of the digestive tract. This slowing of digestion can lead to bloating, a feeling of fullness, and nausea, particularly when the stomach is empty.",
+          "Rising oestrogen plays a role too, especially by heightening the sense of smell. Many pregnant people report that previously neutral or pleasant smells suddenly become overwhelming or nauseating. This heightened sensitivity appears to be one of the earliest and most noticeable changes.",
+        ],
+        subsections: [
+          {
+            subheading: "The evolutionary theory",
+            paragraphs: [
+              "Some researchers believe morning sickness may have evolved as a protective mechanism. The theory suggests that nausea and food aversions during the critical early weeks of organ development may have helped our ancestors avoid potentially harmful or contaminated foods. While this remains a theory, it offers an interesting perspective on why nausea tends to be strongest during the period of most active embryonic development.",
+            ],
+          },
+          {
+            subheading: "Why some people are affected more than others",
+            paragraphs: [
+              "The severity of morning sickness varies enormously from person to person, and even from pregnancy to pregnancy. Genetics appear to play a significant role. If your mother experienced severe nausea in pregnancy, you may be more likely to as well. Individual sensitivity to hCG, baseline hormone levels, stress, fatigue, and even the number of embryos all contribute to the wide variation in experience.",
+              "It is important to know that the severity of your nausea is not a reliable indicator of pregnancy health. Some people with very healthy pregnancies experience minimal nausea, while others feel profoundly unwell. Both are normal.",
+            ],
+          },
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Morning sickness, while deeply uncomfortable, is one of the most common experiences of early pregnancy. It is not a sign that something is wrong. Your body is responding to the enormous hormonal shift required to sustain and support a new pregnancy.",
+        },
+      },
+      {
+        id: "when-it-starts-and-ends",
+        heading: "When it starts and ends",
+        lead: "One of the most common questions about morning sickness is timing. When will it start? When will it peak? And perhaps most importantly, when will it stop? While every pregnancy follows its own pattern, there is a general timeline that most people find helpful.",
+        subsections: [
+          {
+            subheading: "When nausea usually begins",
+            paragraphs: [
+              "Most people begin to notice nausea somewhere between weeks 5 and 6 of pregnancy, counting from the first day of the last menstrual period. For some, it appears gradually as a mild queasiness. For others, it arrives more abruptly. A smaller number of people notice symptoms as early as week 4, while others do not experience nausea until week 7 or 8.",
+              "The onset of nausea closely follows the rise in hCG levels, which is why it tends to appear around the time a pregnancy test first shows positive. If you are feeling nauseous before a missed period, it may be one of the earliest signs of pregnancy.",
+            ],
+          },
+          {
+            subheading: "When symptoms typically peak",
+            paragraphs: [
+              "For many people, the most intense period of nausea falls between weeks 8 and 10. This coincides with the period when hCG levels are rising most rapidly. During this window, nausea may feel constant, food aversions may be at their strongest, and daily functioning can feel significantly harder.",
+              "It can be helpful to know that this peak is temporary. The intensity during weeks 8 to 10 does not mean symptoms will continue at this level. For most people, this is the hardest stretch, and it does begin to ease.",
+            ],
+          },
+          {
+            subheading: "When it usually begins to ease",
+            paragraphs: [
+              "The majority of people notice a meaningful improvement somewhere between weeks 12 and 14. This improvement often coincides with the placenta taking over progesterone production from the corpus luteum, which leads to a stabilisation of hormone levels.",
+              "The easing is usually gradual rather than sudden. You may find that you have more good hours in a day, then more good days in a week, until the nausea fades into the background. Some people feel noticeably better by week 12. Others continue to experience mild symptoms into weeks 16 to 18. A small number of people experience nausea throughout pregnancy, though this is less common.",
+              "If your nausea persists beyond week 16, it is worth mentioning to your midwife or doctor. Persistent nausea is not typically dangerous, but it can affect quality of life and nutrition, and support is available.",
+            ],
+          },
+        ],
+        callout: {
+          tone: "info",
+          text: "There is no exact day or week when morning sickness switches off. The timeline above describes a general pattern, but your experience may differ. Variation is normal and does not mean something is wrong.",
+        },
+      },
+      {
+        id: "what-variation-looks-like",
+        heading: "What variation looks like",
+        lead: "One of the most reassuring things to understand about morning sickness is just how wide the range of normal really is. There is no single 'correct' way to experience nausea in pregnancy.",
+        paragraphs: [
+          "Some people feel nauseous primarily in the morning, which is where the name comes from. But many experience nausea more intensely in the afternoon or evening. Some feel it as an all-day low-level queasiness, while others experience sudden intense waves that come and go unpredictably.",
+          "Food aversions are extremely common. Foods you previously enjoyed may become impossible to tolerate, sometimes just the thought of them is enough to trigger nausea. Smell sensitivity often accompanies this, with cooking smells, perfumes, or even your partner's deodorant becoming overwhelming.",
+          "Some people vomit regularly; others feel profoundly nauseous without ever vomiting. Both experiences are considered normal morning sickness. The absence of vomiting does not mean the nausea is less real or less difficult.",
+        ],
+        subsections: [
+          {
+            subheading: "Symptoms that come and go",
+            paragraphs: [
+              "It is very common for nausea to fluctuate. You may have a terrible day followed by a day where you feel almost normal, only for symptoms to return. This pattern can be anxiety-inducing, as many people worry that an improvement in symptoms is a negative sign. In reality, fluctuation is one of the most common patterns of morning sickness.",
+              "Similarly, some people notice symptoms that ease for a few days around weeks 9 or 10, then return briefly before finally fading. This is not unusual and does not typically indicate a problem.",
+            ],
+          },
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "If your experience does not match what you have read online or what your friends describe, that does not mean something is wrong. The range of normal in morning sickness is genuinely enormous.",
+        },
+      },
+      {
+        id: "what-may-help",
+        heading: "What may help",
+        lead: "There is no cure for morning sickness, and what works for one person may not work for another. However, there are a number of strategies that many people find helpful in managing symptoms, even if they do not eliminate nausea entirely.",
+        subsections: [
+          {
+            subheading: "Eating patterns",
+            paragraphs: [
+              "One of the most consistently recommended approaches is eating small, frequent meals and snacks rather than three larger meals. An empty stomach tends to make nausea worse, so keeping something in your stomach, even if it is just a few crackers or a piece of toast, can help take the edge off.",
+              "Many people find that bland, carbohydrate-rich foods are the most tolerable. Toast, rice, pasta, crackers, and potatoes are common choices. Cold foods may be easier to manage than hot foods, as they tend to have less smell. Eating what you can manage is more important than eating a perfectly balanced diet during the worst weeks.",
+            ],
+          },
+          {
+            subheading: "Hydration",
+            paragraphs: [
+              "Staying hydrated is important, especially if you are vomiting. Small, frequent sips of water are often more manageable than drinking large amounts at once. Some people find that adding a slice of lemon or drinking slightly chilled water helps. Ice lollies, diluted juice, and herbal teas (particularly ginger or peppermint) can also be good alternatives if plain water is hard to keep down.",
+            ],
+          },
+          {
+            subheading: "Ginger and vitamin B6",
+            paragraphs: [
+              "Ginger has modest evidence supporting its use for pregnancy nausea. Ginger tea, ginger biscuits, ginger ale (with real ginger), and ginger supplements are all options. The effect is usually mild, but many people find it takes the edge off.",
+              "Vitamin B6 (pyridoxine) is sometimes recommended by healthcare providers for mild to moderate nausea. Some studies suggest it can reduce nausea severity. If you are considering supplements, it is worth discussing appropriate dosages with your midwife or doctor.",
+            ],
+          },
+          {
+            subheading: "Rest and environment",
+            paragraphs: [
+              "Fatigue makes nausea worse, and nausea makes fatigue worse. This cycle can be hard to break, but resting when you can, even short naps or lying down for 20 minutes, may help reduce symptom intensity. Avoiding strong smells, warm stuffy rooms, and rapid position changes can also make a difference.",
+            ],
+          },
+          {
+            subheading: "Medication",
+            paragraphs: [
+              "If your nausea is significantly affecting your ability to eat, drink, work, or care for yourself, it is worth speaking to your doctor about anti-nausea medication. Several options are considered safe in pregnancy and can make a meaningful difference to quality of life. There is no need to endure severe symptoms without support.",
+            ],
+          },
+        ],
+        callout: {
+          tone: "info",
+          text: "What helps most varies from person to person. Be patient with yourself as you figure out what works. If nothing seems to help, speak to your healthcare provider, as there are additional options available.",
+        },
+      },
+      {
+        id: "whats-normal-and-when-to-seek-support",
+        heading: "What is normal and when to seek support",
+        lead: "Understanding the boundary between uncomfortable-but-normal nausea and symptoms that need medical attention is one of the most important aspects of managing morning sickness.",
+        paragraphs: [
+          "Normal morning sickness, even when it feels severe, is characterised by nausea and occasional vomiting where you are still able to keep some food and fluids down, you are not losing significant weight, and while you feel unwell, you can broadly manage day-to-day activities even if they feel much harder than usual.",
+          "Morning sickness becomes a medical concern when it crosses into territory where your body is not getting the hydration and nutrition it needs. This is a condition called hyperemesis gravidarum, and it affects approximately 1-3% of pregnancies. It is a recognised medical condition with effective treatments, and getting help early makes a significant difference.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Contact your midwife or doctor if you are unable to keep any fluids down for more than 24 hours, you are producing very little or very dark urine, you have lost weight since becoming pregnant, you feel faint, dizzy, or confused, or you are vomiting blood. These symptoms should always be assessed, and treatment is available.",
+        },
+      },
+    ],
     sources: ["NHS: Vomiting and morning sickness in pregnancy", "RCOG: Management of Nausea and Vomiting in Pregnancy", "NICE Clinical Knowledge Summaries"],
     lastUpdated: "March 2026",
     reviewedBy: "Jenny Joines",

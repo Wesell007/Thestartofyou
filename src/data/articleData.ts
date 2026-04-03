@@ -31,6 +31,20 @@ export interface ArticleCompare {
   whenToSeekHelp?: string;
 }
 
+export interface EditorialSubsection {
+  subheading: string;
+  paragraphs: string[];
+}
+
+export interface EditorialSection {
+  id: string;
+  heading: string;
+  lead?: string;
+  paragraphs?: string[];
+  subsections?: EditorialSubsection[];
+  callout?: { tone: "reassurance" | "info" | "gentle-warning"; text: string };
+}
+
 export type ProductPromotionLevel = "strong" | "light" | "minimal" | "none";
 
 export interface ArticleData {

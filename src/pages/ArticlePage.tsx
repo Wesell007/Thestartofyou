@@ -23,6 +23,7 @@ import ArticleJumpNav from "@/components/article/ArticleJumpNav";
 import ArticleSources from "@/components/article/ArticleSources";
 import ArticleRelatedReads from "@/components/article/ArticleRelatedReads";
 import ArticleFullGuide from "@/components/article/ArticleFullGuide";
+import ArticleEditorialContent from "@/components/article/ArticleEditorialContent";
 
 const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -34,6 +35,7 @@ const ArticlePage = () => {
 
   const relatedArticles = getRelatedArticles(data.slug, 3);
   const isDeep = data.isCornerstone;
+  const hasEditorial = isDeep && data.editorialSections && data.editorialSections.length > 0;
 
   // Product promotion logic
   const promoLevel = data.productPromotion ?? "none";
@@ -61,41 +63,60 @@ const ArticlePage = () => {
       {/* ── Key takeaways (both formats, data-driven) ── */}
       {data.keyTakeaways && <ArticleKeyTakeaways data={data} />}
 
-      {/* ── CORE SECTIONS ── */}
+      {/* ── DEEP EDITORIAL FLOW ── */}
+      {hasEditorial ? (
+        <>
+          {/* Rich editorial prose sections */}
+          <ArticleEditorialContent sections={data.editorialSections!} />
 
-      {/* Emotional bridge (conditional) */}
-      {hasEmotionalLayer && <ArticleHowThisFeels data={data} />}
+          {/* Normal vs Seek Support (core trust layer) */}
+          <ArticleNormal data={data} />
 
-      {/* Core explanation (always present) */}
-      <ArticleWhatHappening data={data} />
+          {/* Compare section for GEO */}
+          {hasCompare && <ArticleCompare data={data} />}
 
-      {/* Timing (conditional: only when timing data exists meaningfully) */}
-      {hasTiming && <ArticleTiming data={data} />}
+          {/* FAQ section for AEO */}
+          {hasFAQ && <ArticleFAQ data={data} />}
+        </>
+      ) : (
+        <>
+          {/* ── SHORT GUIDANCE FLOW ── */}
 
-      {/* Real experience / lived experience (conditional) */}
-      {hasRealExperience && <ArticleRealExperience data={data} />}
+          {/* Emotional bridge (conditional) */}
+          {hasEmotionalLayer && <ArticleHowThisFeels data={data} />}
 
-      {/* Reassurance / "What this means" (always present for guidance) */}
-      <ArticleInterpretation data={data} />
+          {/* Core explanation (always present) */}
+          <ArticleWhatHappening data={data} />
 
-      {/* Normal vs Seek Support (always present: core trust layer) */}
-      <ArticleNormal data={data} />
+          {/* Timing (conditional) */}
+          {hasTiming && <ArticleTiming data={data} />}
 
-      {/* Practical actions (conditional) */}
-      {hasActions && <ArticleAction data={data} />}
+          {/* Real experience (conditional) */}
+          {hasRealExperience && <ArticleRealExperience data={data} />}
 
-      {/* ── CONDITIONAL SECTIONS ── */}
+          {/* Reassurance */}
+          <ArticleInterpretation data={data} />
 
-      {/* Compare section for GEO (only when comparison intent exists) */}
-      {hasCompare && <ArticleCompare data={data} />}
+          {/* Normal vs Seek Support */}
+          <ArticleNormal data={data} />
 
-      {/* FAQ section for AEO (only when real questions exist) */}
-      {hasFAQ && <ArticleFAQ data={data} />}
+          {/* Practical actions (conditional) */}
+          {hasActions && <ArticleAction data={data} />}
 
-      {/* Full guide pathway (short articles with a cornerstone parent) */}
-      {!isDeep && data.cornerstoneSlug && <ArticleFullGuide data={data} />}
+          {/* Compare section */}
+          {hasCompare && <ArticleCompare data={data} />}
 
-      {/* What happens next (always: provides forward motion) */}
+          {/* FAQ section */}
+          {hasFAQ && <ArticleFAQ data={data} />}
+
+          {/* Full guide pathway (short articles with a cornerstone parent) */}
+          {!isDeep && data.cornerstoneSlug && <ArticleFullGuide data={data} />}
+        </>
+      )}
+
+      {/* ── SHARED ENDING SECTIONS ── */}
+
+      {/* What happens next */}
       <ArticleWhatNext data={data} />
 
       {/* Related stage links */}
@@ -104,10 +125,10 @@ const ArticlePage = () => {
       {/* Sources for deep articles */}
       {isDeep && data.sources && <ArticleSources data={data} />}
 
-      {/* AI support (always present: key product differentiator) */}
+      {/* AI support */}
       <ArticleAISupport data={data} />
 
-      {/* Context-aware journal promotion (product-level controlled) */}
+      {/* Journal promotion */}
       {showJournal && (
         <JournalPromotion
           contextCopy={

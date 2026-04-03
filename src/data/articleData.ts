@@ -129,6 +129,9 @@ export interface ArticleData {
   lastUpdated?: string;
   reviewedBy?: string;
 
+  // Editorial prose sections for deep articles
+  editorialSections?: EditorialSection[];
+
   // Product promotion level
   productPromotion?: ProductPromotionLevel;
 }

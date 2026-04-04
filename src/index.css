@@ -280,7 +280,7 @@
 
   /* ─── Page Ending (designed close) ─── */
   .page-ending {
-    @apply relative bg-parchment py-28 md:py-36;
+    @apply relative bg-parchment py-16 sm:py-24 md:py-36;
   }
   .page-ending::before {
     content: '';

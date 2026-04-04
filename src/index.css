@@ -191,9 +191,9 @@
   .shadow-elevated { box-shadow: var(--shadow-elevated); }
 
   /* ─── Unified Section Spacing ─── */
-  .section-spacing { @apply py-28 md:py-40; }
-  .section-spacing-sm { @apply py-20 md:py-28; }
-  .section-spacing-lg { @apply py-32 md:py-44; }
+  .section-spacing { @apply py-16 sm:py-24 md:py-40; }
+  .section-spacing-sm { @apply py-14 sm:py-20 md:py-28; }
+  .section-spacing-lg { @apply py-20 sm:py-28 md:py-44; }
 
   /* ─── Editorial Decorative Elements ─── */
   .editorial-rule {

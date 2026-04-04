@@ -7,13 +7,13 @@ const CTASection = () => {
       {/* Ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] glow-sage" />
 
-      <div className="container mx-auto px-6 md:px-10 max-w-2xl text-center relative z-10">
-        <div className="editorial-rule mb-10" />
-        <p className="stage-label mb-6">Your Journey</p>
-        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-7">
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl text-center relative z-10">
+        <div className="editorial-rule mb-8 md:mb-10" />
+        <p className="stage-label mb-5 md:mb-6">Your Journey</p>
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-foreground mb-5 md:mb-7">
           Start Your Journey
         </h2>
-        <p className="font-sans text-base font-light text-muted-foreground mb-14 leading-relaxed max-w-lg mx-auto">
+        <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground mb-10 md:mb-14 leading-relaxed max-w-lg mx-auto">
           Create your free profile and access your complete 40-week guide. Your dashboard updates every Sunday with personalised guidance for your current stage.
         </p>
 
@@ -32,7 +32,7 @@ const CTASection = () => {
           </Link>
         </div>
 
-        <p className="font-sans text-sm font-light text-muted-foreground mt-10">
+        <p className="font-sans text-sm font-light text-muted-foreground mt-8 md:mt-10">
           Not sure where to start?{" "}
           <Link to="/ask" className="text-foreground underline underline-offset-4 decoration-sage/40 hover:decoration-sage transition-colors duration-200 inline-flex items-center gap-1">
             Ask a question <ArrowUpRight size={12} />

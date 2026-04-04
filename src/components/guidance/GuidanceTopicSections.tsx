@@ -47,19 +47,19 @@ const topicSections = [
 ];
 
 const GuidanceTopicSections = () => (
-  <section className="bg-parchment py-24 md:py-32">
-    <div className="container mx-auto px-6 md:px-10 max-w-5xl">
-      <div className="mb-16">
-        <p className="stage-label mb-4">Browse by topic</p>
-        <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight max-w-md">
+  <section className="bg-parchment py-14 sm:py-20 md:py-32">
+    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
+      <div className="mb-10 sm:mb-16">
+        <p className="stage-label mb-3 sm:mb-4">Browse by topic</p>
+        <h2 className="font-serif text-xl sm:text-2xl md:text-3xl text-foreground leading-tight max-w-md">
           Explore guidance across your journey
         </h2>
-        <p className="font-sans text-base font-light text-muted-foreground mt-3 max-w-lg leading-relaxed">
+        <p className="font-sans text-sm sm:text-base font-light text-muted-foreground mt-3 max-w-lg leading-relaxed">
           Curated guidance grouped around the stages and topics that matter most.
         </p>
       </div>
 
-      <div className="space-y-16 md:space-y-20">
+      <div className="space-y-12 sm:space-y-16 md:space-y-20">
         {topicSections.map((section) => {
           const articles = getArticlesByJourney(section.journeyFilter).filter(a => !a.isCornerstone).slice(0, 4);
           if (articles.length === 0) return null;
@@ -67,12 +67,12 @@ const GuidanceTopicSections = () => (
           return (
             <div key={section.id}>
               {/* Section header */}
-              <div className="flex items-end justify-between mb-8">
+              <div className="flex items-end justify-between mb-6 sm:mb-8">
                 <div>
-                  <h3 className="font-serif text-xl md:text-2xl text-foreground leading-snug">
+                  <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-foreground leading-snug">
                     {section.label}
                   </h3>
-                  <p className="font-sans text-sm font-light text-muted-foreground mt-1.5 leading-relaxed">
+                  <p className="font-sans text-[13px] sm:text-sm font-light text-muted-foreground mt-1.5 leading-relaxed">
                     {section.description}
                   </p>
                 </div>
@@ -90,7 +90,7 @@ const GuidanceTopicSections = () => (
                   <Link
                     key={article.slug}
                     to={`/articles/${article.slug}`}
-                    className="group flex items-start gap-4 py-5 md:py-6 hover:pl-1 transition-all"
+                    className="group flex items-start gap-3 sm:gap-4 py-4 sm:py-5 md:py-6 hover:pl-1 transition-all"
                   >
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap gap-1.5 mb-2">
@@ -105,14 +105,14 @@ const GuidanceTopicSections = () => (
                           </span>
                         )}
                       </div>
-                      <h4 className="font-serif text-base md:text-lg text-foreground leading-snug group-hover:text-sage transition-colors line-clamp-2">
+                      <h4 className="font-serif text-[15px] sm:text-base md:text-lg text-foreground leading-snug group-hover:text-sage transition-colors line-clamp-2">
                         {article.title}
                       </h4>
                       <p className="font-sans text-xs font-light text-muted-foreground leading-relaxed mt-1 line-clamp-1 max-w-lg">
                         {article.metaDescription}
                       </p>
                     </div>
-                    <span className="text-muted-foreground/30 group-hover:text-sage transition-colors font-serif text-lg shrink-0 pt-3">
+                    <span className="text-muted-foreground/30 group-hover:text-sage transition-colors font-serif text-lg shrink-0 pt-2 sm:pt-3">
                       →
                     </span>
                   </Link>
@@ -122,7 +122,7 @@ const GuidanceTopicSections = () => (
               {/* Mobile hub link */}
               <Link
                 to={section.hubLink}
-                className="md:hidden inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors mt-4"
+                className="md:hidden inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors mt-3 sm:mt-4"
               >
                 Explore {section.hubLabel.toLowerCase()} <span>→</span>
               </Link>

@@ -16,11 +16,11 @@ const GuidancePopularQuestions = () => {
   if (questions.length === 0) return null;
 
   return (
-    <section className="bg-card/60 py-24 md:py-32">
-      <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        <div className="text-center mb-14">
-          <p className="stage-label mb-4">Popular questions</p>
-          <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight">
+    <section className="bg-card/60 py-14 sm:py-20 md:py-32">
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
+        <div className="text-center mb-10 sm:mb-14">
+          <p className="stage-label mb-3 sm:mb-4">Popular questions</p>
+          <h2 className="font-serif text-xl sm:text-2xl md:text-3xl text-foreground leading-tight">
             Questions people ask most often
           </h2>
           <p className="font-sans text-sm font-light text-muted-foreground mt-3 max-w-md mx-auto leading-relaxed">
@@ -28,24 +28,24 @@ const GuidancePopularQuestions = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-x-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 md:gap-x-12">
           {questions.map((q, i) => (
             <Link
               key={i}
               to={`/articles/${q.slug}`}
-              className="group flex items-center justify-between py-4.5 border-b border-border/30 hover:pl-1 transition-all"
+              className="group flex items-center justify-between py-4 border-b border-border/30 hover:pl-1 transition-all"
             >
-              <span className="font-serif text-[15px] md:text-base text-foreground leading-snug group-hover:text-sage transition-colors">
+              <span className="font-serif text-[14px] sm:text-[15px] md:text-base text-foreground leading-snug group-hover:text-sage transition-colors">
                 {q.question}
               </span>
-              <span className="text-muted-foreground/30 group-hover:text-sage transition-colors ml-4 shrink-0 font-serif text-lg">
+              <span className="text-muted-foreground/30 group-hover:text-sage transition-colors ml-3 sm:ml-4 shrink-0 font-serif text-lg">
                 →
               </span>
             </Link>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-10 sm:mt-12">
           <Link
             to="/ask"
             className="inline-flex items-center gap-2 font-sans text-sm text-sage hover:text-sage-dark transition-colors"

@@ -35,7 +35,7 @@ const ArticleHero = ({ data }: Props) => {
   const hasDate = data.lastUpdated;
 
   return (
-    <section className="relative bg-parchment pt-28 pb-0 md:pt-36 overflow-hidden">
+    <section className="relative bg-parchment pt-20 pb-0 sm:pt-24 md:pt-36 overflow-hidden">
       {/* Background lifestyle image */}
       <div className="absolute top-0 right-0 w-[55%] h-full hidden md:block pointer-events-none select-none">
         <img
@@ -54,10 +54,10 @@ const ArticleHero = ({ data }: Props) => {
       {/* Soft radial glow */}
       <div className="absolute top-0 right-0 w-[600px] h-[500px] bg-sage-bg/20 rounded-full blur-[100px] pointer-events-none -translate-y-1/4 translate-x-1/4" />
 
-      <div className="container mx-auto px-6 md:px-10 max-w-5xl relative z-10">
-        <div className={`${isDeep ? 'max-w-2xl' : 'max-w-xl'} pb-12 md:pb-20`}>
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
+        <div className={`${isDeep ? 'max-w-2xl' : 'max-w-xl'} pb-8 sm:pb-12 md:pb-20`}>
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 mb-8 font-sans text-[11px] font-light text-muted-foreground tracking-wide flex-wrap">
+          <nav className="flex items-center gap-2 mb-5 sm:mb-8 font-sans text-[11px] font-light text-muted-foreground tracking-wide flex-wrap">
             <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
             <span className="opacity-40">/</span>
             <Link to="/guidance" className="hover:text-foreground transition-colors">Guidance</Link>
@@ -67,7 +67,7 @@ const ArticleHero = ({ data }: Props) => {
 
           {/* Deep article badges */}
           {isDeep && (
-            <div className="flex flex-wrap items-center gap-2 mb-5">
+            <div className="flex flex-wrap items-center gap-2 mb-4 sm:mb-5">
               <span className="px-3 py-1 rounded-full bg-sage/10 text-sage text-[10px] font-sans tracking-[0.15em] uppercase font-medium">
                 Complete guide
               </span>
@@ -81,14 +81,14 @@ const ArticleHero = ({ data }: Props) => {
 
           {/* Stage label for short articles */}
           {!isDeep && (
-            <div className="flex flex-wrap items-center gap-3 mb-5">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-5">
               {data.trimester?.map(t => (
-                <span key={t} className="px-3 py-1 rounded-full bg-sage-bg/60 text-sage text-[10px] font-sans tracking-[0.15em] uppercase font-medium">
+                <span key={t} className="px-2.5 sm:px-3 py-1 rounded-full bg-sage-bg/60 text-sage text-[10px] font-sans tracking-[0.15em] uppercase font-medium">
                   Trimester {t}
                 </span>
               ))}
               {data.journey?.slice(0, 1).map((j) => (
-                <span key={j} className="px-3 py-1 rounded-full bg-muted/60 text-muted-foreground text-[10px] font-sans tracking-[0.15em] uppercase">
+                <span key={j} className="px-2.5 sm:px-3 py-1 rounded-full bg-muted/60 text-muted-foreground text-[10px] font-sans tracking-[0.15em] uppercase">
                   {journeyLabels[j] ?? j}
                 </span>
               ))}
@@ -96,24 +96,24 @@ const ArticleHero = ({ data }: Props) => {
           )}
 
           {/* Title */}
-          <h1 className={`font-serif text-foreground leading-[1.15] tracking-tight mb-5 ${
+          <h1 className={`font-serif text-foreground leading-[1.15] tracking-tight mb-4 sm:mb-5 ${
             isDeep
-              ? 'text-3xl sm:text-4xl md:text-[2.8rem] lg:text-[3.2rem]'
-              : 'text-3xl sm:text-4xl md:text-[2.75rem]'
+              ? 'text-2xl sm:text-3xl md:text-[2.8rem] lg:text-[3.2rem]'
+              : 'text-2xl sm:text-3xl md:text-[2.75rem]'
           }`}>
             {data.title}
           </h1>
 
           {/* Deep article intro paragraph */}
           {isDeep && (
-            <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed mb-8 max-w-xl">
+            <p className="font-sans text-[15px] sm:text-base md:text-lg font-light text-muted-foreground leading-relaxed mb-6 sm:mb-8 max-w-xl">
               {data.metaDescription}
             </p>
           )}
 
           {/* Trust signals (both formats) */}
           {(hasReview || hasDate) && (
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-8 font-sans text-[11px] font-light text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-2 mb-6 sm:mb-8 font-sans text-[11px] font-light text-muted-foreground">
               {hasReview && (
                 <span className="flex items-center gap-1.5">
                   <Shield className="w-3.5 h-3.5 text-sage/70" />
@@ -131,12 +131,12 @@ const ArticleHero = ({ data }: Props) => {
 
           {/* Week chips */}
           {data.relatedWeeks && data.relatedWeeks.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-10">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-8 sm:mb-10">
               {data.relatedWeeks.slice(0, isDeep ? 8 : 5).map((week) => (
                 <Link
                   key={week}
                   to={`/pregnancy/week/${week}`}
-                  className="font-sans text-[11px] font-light text-sage-muted border border-sage-light/60 rounded-full px-3.5 py-1.5 hover:border-sage hover:text-sage hover:bg-sage-bg/30 transition-all"
+                  className="font-sans text-[11px] font-light text-sage-muted border border-sage-light/60 rounded-full px-3 py-1.5 hover:border-sage hover:text-sage hover:bg-sage-bg/30 transition-all"
                 >
                   Week {week}
                 </Link>
@@ -145,23 +145,23 @@ const ArticleHero = ({ data }: Props) => {
           )}
 
           {/* Quick Answer card */}
-          <div className={`border rounded-2xl shadow-elevated ${
+          <div className={`border rounded-xl sm:rounded-2xl shadow-elevated ${
             isDeep
-              ? 'bg-card/95 backdrop-blur-sm border-sage/15 px-8 py-8 md:px-10 md:py-10'
-              : 'bg-card/90 backdrop-blur-sm border-border/40 px-7 py-7 md:px-9 md:py-8'
+              ? 'bg-card/95 backdrop-blur-sm border-sage/15 px-5 py-6 sm:px-8 sm:py-8 md:px-10 md:py-10'
+              : 'bg-card/90 backdrop-blur-sm border-border/40 px-5 py-6 sm:px-7 sm:py-7 md:px-9 md:py-8'
           }`}>
-            <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage mb-4">
+            <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage mb-3 sm:mb-4">
               {isDeep ? 'At a glance' : 'Quick answer'}
             </p>
             <p className={`font-sans font-light text-foreground leading-[1.8] ${
-              isDeep ? 'text-base' : 'text-[15px]'
+              isDeep ? 'text-[15px] sm:text-base' : 'text-[14px] sm:text-[15px]'
             }`}>
               {data.quickAnswer}
             </p>
 
             {/* Disclaimer for short articles with medical content */}
             {!isDeep && data.disclaimer && (
-              <div className="mt-5 pt-4 border-t border-border/20">
+              <div className="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-border/20">
                 <p className="font-sans text-[11px] font-light text-muted-foreground/60 leading-relaxed">
                   {data.disclaimer}
                 </p>

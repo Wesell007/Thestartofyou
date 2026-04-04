@@ -223,14 +223,14 @@
   .frame-corner::before,
   .frame-corner::after {
     content: '';
-    @apply absolute w-20 h-20 pointer-events-none;
+    @apply absolute w-12 h-12 md:w-20 md:h-20 pointer-events-none hidden sm:block;
   }
   .frame-corner::before {
-    @apply top-10 left-10 border-t border-l;
+    @apply top-6 left-6 md:top-10 md:left-10 border-t border-l;
     border-color: hsl(var(--sage-light) / 0.4);
   }
   .frame-corner::after {
-    @apply bottom-10 right-10 border-b border-r;
+    @apply bottom-6 right-6 md:bottom-10 md:right-10 border-b border-r;
     border-color: hsl(var(--sage-light) / 0.4);
   }
 

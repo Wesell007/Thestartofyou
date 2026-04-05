@@ -4,10 +4,10 @@ import { getAllArticles } from "@/data/articleData";
 
 const GuidancePopularQuestions = () => {
   const questions = useMemo(() => {
-    const qs: Array<{ question: string; slug: string }> = [];
+    const qs: Array<{ question: string; slug: string; journey?: string }> = [];
     getAllArticles().forEach((a) => {
       a.faq?.slice(0, 1).forEach((f) => {
-        qs.push({ question: f.question, slug: a.slug });
+        qs.push({ question: f.question, slug: a.slug, journey: a.journey?.[0] });
       });
     });
     return qs.slice(0, 8);
@@ -16,8 +16,11 @@ const GuidancePopularQuestions = () => {
   if (questions.length === 0) return null;
 
   return (
-    <section className="bg-card/60 py-14 sm:py-20 md:py-32">
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
+    <section className="relative bg-sage/[0.04] py-16 sm:py-20 md:py-28 overflow-hidden">
+      {/* Subtle ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-sage/[0.03] blur-3xl pointer-events-none" />
+
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10">
         <div className="text-center mb-10 sm:mb-14">
           <p className="stage-label mb-3 sm:mb-4">Popular questions</p>
           <h2 className="font-serif text-xl sm:text-2xl md:text-3xl text-foreground leading-tight">
@@ -33,7 +36,7 @@ const GuidancePopularQuestions = () => {
             <Link
               key={i}
               to={`/articles/${q.slug}`}
-              className="group flex items-center justify-between py-4 border-b border-border/30 hover:pl-1 transition-all"
+              className="group flex items-center justify-between py-4 sm:py-5 border-b border-border/30 hover:pl-1 transition-all"
             >
               <span className="font-serif text-[14px] sm:text-[15px] md:text-base text-foreground leading-snug group-hover:text-sage transition-colors">
                 {q.question}
@@ -48,7 +51,7 @@ const GuidancePopularQuestions = () => {
         <div className="text-center mt-10 sm:mt-12">
           <Link
             to="/ask"
-            className="inline-flex items-center gap-2 font-sans text-sm text-sage hover:text-sage-dark transition-colors"
+            className="inline-flex items-center gap-2 bg-sage/10 text-sage hover:bg-sage/15 px-6 py-3 rounded-full font-sans text-sm transition-colors"
           >
             Ask your own question <span>→</span>
           </Link>

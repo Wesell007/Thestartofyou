@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
-import { type ArticleData, getArticlesByJourney } from "@/data/articleData";
+import { getArticlesByJourney } from "@/data/articleData";
+import ttcImg from "@/assets/guidance-ttc.jpg";
+import ivfImg from "@/assets/guidance-ivf.jpg";
+import postpartumImg from "@/assets/guidance-postpartum.jpg";
+import firstyearImg from "@/assets/guidance-firstyear.jpg";
 
 const journeyLabels: Record<string, string> = {
   "trying-to-conceive": "Trying to conceive",
@@ -19,6 +23,7 @@ const topicSections = [
     journeyFilter: "pregnancy",
     hubLink: "/pregnancy",
     hubLabel: "Pregnancy hub",
+    image: null as string | null,
   },
   {
     id: "fertility",
@@ -27,6 +32,7 @@ const topicSections = [
     journeyFilter: "trying-to-conceive",
     hubLink: "/trying-to-conceive",
     hubLabel: "TTC hub",
+    image: ttcImg,
   },
   {
     id: "ivf-treatment",
@@ -35,6 +41,7 @@ const topicSections = [
     journeyFilter: "ivf",
     hubLink: "/ivf",
     hubLabel: "IVF hub",
+    image: ivfImg,
   },
   {
     id: "postpartum-firstyear",
@@ -43,13 +50,24 @@ const topicSections = [
     journeyFilter: "postpartum",
     hubLink: "/postpartum",
     hubLabel: "Postpartum hub",
+    image: postpartumImg,
+  },
+  {
+    id: "first-year",
+    label: "First year milestones",
+    description: "Sleep, feeding, development, and the things no one warns you about",
+    journeyFilter: "first-year",
+    hubLink: "/first-year",
+    hubLabel: "First year hub",
+    image: firstyearImg,
   },
 ];
 
 const GuidanceTopicSections = () => (
-  <section className="bg-parchment py-14 sm:py-20 md:py-32">
+  <section className="bg-parchment py-16 sm:py-20 md:py-28">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-      <div className="mb-10 sm:mb-16">
+      <div className="mb-12 sm:mb-16">
+        <div className="editorial-rule-left mb-5" />
         <p className="stage-label mb-3 sm:mb-4">Browse by topic</p>
         <h2 className="font-serif text-xl sm:text-2xl md:text-3xl text-foreground leading-tight max-w-md">
           Explore guidance across your journey
@@ -59,29 +77,46 @@ const GuidanceTopicSections = () => (
         </p>
       </div>
 
-      <div className="space-y-12 sm:space-y-16 md:space-y-20">
-        {topicSections.map((section) => {
+      <div className="space-y-16 sm:space-y-20 md:space-y-24">
+        {topicSections.map((section, sectionIndex) => {
           const articles = getArticlesByJourney(section.journeyFilter).filter(a => !a.isCornerstone).slice(0, 4);
           if (articles.length === 0) return null;
 
+          const isImageRight = sectionIndex % 2 === 0;
+
           return (
             <div key={section.id}>
-              {/* Section header */}
-              <div className="flex items-end justify-between mb-6 sm:mb-8">
-                <div>
-                  <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-foreground leading-snug">
-                    {section.label}
-                  </h3>
-                  <p className="font-sans text-[13px] sm:text-sm font-light text-muted-foreground mt-1.5 leading-relaxed">
+              {/* Section header with optional image */}
+              <div className={`md:flex md:items-start md:gap-10 mb-8 ${!isImageRight ? 'md:flex-row-reverse' : ''}`}>
+                <div className="flex-1">
+                  <div className="flex items-end justify-between mb-2">
+                    <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-foreground leading-snug">
+                      {section.label}
+                    </h3>
+                    <Link
+                      to={section.hubLink}
+                      className="hidden md:inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors shrink-0 ml-6"
+                    >
+                      {section.hubLabel} <span>→</span>
+                    </Link>
+                  </div>
+                  <p className="font-sans text-[13px] sm:text-sm font-light text-muted-foreground mt-1.5 leading-relaxed max-w-md">
                     {section.description}
                   </p>
                 </div>
-                <Link
-                  to={section.hubLink}
-                  className="hidden md:inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors shrink-0 ml-6"
-                >
-                  {section.hubLabel} <span>→</span>
-                </Link>
+
+                {section.image && (
+                  <div className="hidden md:block w-48 lg:w-56 shrink-0 rounded-2xl overflow-hidden">
+                    <img
+                      src={section.image}
+                      alt={section.label}
+                      loading="lazy"
+                      width={640}
+                      height={512}
+                      className="w-full aspect-[4/3] object-cover"
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Article rows */}

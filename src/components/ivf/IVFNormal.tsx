@@ -16,7 +16,6 @@ const IVFNormal = () => {
   return (
     <section className="bg-parchment py-24 md:py-32">
       <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        {/* Header */}
         <div className="mb-14">
           <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
             Guidance
@@ -27,7 +26,6 @@ const IVFNormal = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Normal */}
           <div className="bg-card border border-border/50 rounded-lg p-8 shadow-card-brand">
             <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-6">
               What's normal
@@ -35,7 +33,10 @@ const IVFNormal = () => {
             <ul className="space-y-4">
               {normal.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage shrink-0" />
+                  <span
+                    className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
+                    style={{ backgroundColor: 'hsl(var(--stage-ivf-accent))' }}
+                  />
                   <p className="font-sans text-sm font-light text-foreground leading-relaxed">
                     {item}
                   </p>
@@ -44,7 +45,6 @@ const IVFNormal = () => {
             </ul>
           </div>
 
-          {/* Seek support */}
           <div className="bg-card border border-border/50 rounded-lg p-8 shadow-card-brand">
             <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-6">
               When to seek support
@@ -62,9 +62,8 @@ const IVFNormal = () => {
           </div>
         </div>
 
-        {/* Medical review */}
         <p className="mt-8 font-sans text-xs font-light text-muted-foreground flex items-center gap-2">
-          <span className="text-sage">✔</span> Medically reviewed by Jenny Joines
+          <span style={{ color: 'hsl(var(--stage-ivf-accent))' }}>✔</span> Medically reviewed by Jenny Joines
         </p>
       </div>
     </section>

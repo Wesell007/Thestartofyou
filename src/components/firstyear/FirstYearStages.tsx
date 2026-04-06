@@ -44,7 +44,10 @@ const FirstYearStages = () => {
     <section className="bg-parchment py-24 md:py-32">
       <div className="container mx-auto px-6 md:px-10 max-w-4xl">
         <div className="mb-16">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+          <p
+            className="font-sans text-xs font-light tracking-[0.2em] uppercase mb-5"
+            style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
+          >
             The Process
           </p>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight max-w-xl">
@@ -57,9 +60,11 @@ const FirstYearStages = () => {
             <Link
               key={stage.num}
               to={stage.href}
-              className="group bg-card border border-border/50 rounded-lg overflow-hidden shadow-card-brand flex flex-col hover:border-sage/40 hover:shadow-soft transition-all"
+              className="group bg-card border border-border/50 rounded-lg overflow-hidden shadow-card-brand flex flex-col transition-all hover:shadow-soft"
+              onMouseEnter={(e) => e.currentTarget.style.borderColor = 'hsl(var(--stage-firstyear-accent) / 0.4)'}
+              onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
             >
-              <div className="h-36 overflow-hidden">
+              <div className="h-36 overflow-hidden relative">
                 <img
                   src={stage.image}
                   alt={stage.title}
@@ -67,6 +72,10 @@ const FirstYearStages = () => {
                   width={640}
                   height={512}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-0.5"
+                  style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent))' }}
                 />
               </div>
               <div className="p-6 flex flex-col gap-3 flex-1">

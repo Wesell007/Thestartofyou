@@ -27,15 +27,20 @@ const IVFHero = () => {
   return (
     <section className="relative min-h-screen bg-parchment overflow-hidden flex flex-col justify-center pt-20 md:pt-24 pb-16">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-lavender-section/30 blur-3xl" />
+        <div
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-3xl"
+          style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.5)' }}
+        />
       </div>
 
       <div className="container mx-auto px-6 md:px-10 max-w-6xl relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-6 items-center">
 
-          {/* Left: copy + calculator form */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-xl mx-auto md:mx-0">
-            <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+            <p
+              className="font-sans text-xs font-light tracking-[0.2em] uppercase mb-5"
+              style={{ color: 'hsl(var(--stage-ivf-accent))' }}
+            >
               IVF Journey
             </p>
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-foreground leading-[1.1] mb-5 animate-fade-up">
@@ -45,7 +50,6 @@ const IVFHero = () => {
               Understand where you are, what's happening, and what to expect next.
             </p>
 
-            {/* IVF Timeline Calculator */}
             <div className="w-full animate-fade-up [animation-delay:0.2s] space-y-5">
               <div>
                 <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-3 text-left">
@@ -76,7 +80,6 @@ const IVFHero = () => {
                 </Popover>
               </div>
 
-              {/* Transfer type */}
               <div>
                 <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-3 text-left">
                   Transfer type
@@ -116,7 +119,6 @@ const IVFHero = () => {
             </div>
           </div>
 
-          {/* Right: suggested prompts */}
           <div className="flex justify-center md:justify-end animate-fade-up [animation-delay:0.15s]">
             <div className="w-full max-w-sm md:max-w-md space-y-4">
               <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-5 text-left">
@@ -125,9 +127,11 @@ const IVFHero = () => {
               {suggestedPrompts.map((prompt, i) => (
                 <button
                   key={i}
-                  className="group flex items-center gap-3 w-full text-left py-4 px-5 rounded-xl border border-border/40 bg-card/60 hover:border-sage/40 hover:bg-card shadow-card-brand transition-all"
+                  className="group flex items-center gap-3 w-full text-left py-4 px-5 rounded-xl border border-border/40 bg-card/60 hover:bg-card shadow-card-brand transition-all"
+                  onMouseEnter={(e) => e.currentTarget.style.borderColor = 'hsl(var(--stage-ivf-accent) / 0.4)'}
+                  onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
                 >
-                  <MessageCircle size={13} className="text-sage shrink-0" />
+                  <MessageCircle size={13} style={{ color: 'hsl(var(--stage-ivf-accent))' }} className="shrink-0" />
                   <span className="font-sans text-sm font-light text-foreground/80 group-hover:text-foreground transition-colors leading-relaxed">
                     {prompt}
                   </span>

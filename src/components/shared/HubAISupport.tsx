@@ -7,6 +7,10 @@ interface HubAISupportProps {
   placeholder?: string;
   suggestions: string[];
   context: string;
+  /** CSS custom property name for stage background, e.g. "--stage-ttc" */
+  stageBg?: string;
+  /** CSS custom property name for stage accent, e.g. "--stage-ttc-accent" */
+  stageAccent?: string;
 }
 
 const HubAISupport = ({
@@ -16,11 +20,20 @@ const HubAISupport = ({
   placeholder = "What's on your mind?",
   suggestions,
   context,
+  stageBg,
+  stageAccent,
 }: HubAISupportProps) => {
   return (
-    <section className="relative bg-sage-bg/40 section-spacing overflow-hidden">
+    <section
+      className="relative section-spacing overflow-hidden"
+      style={stageBg ? { backgroundColor: `hsl(var(${stageBg}) / 0.45)` } : undefined}
+    >
       {/* Ambient glow */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[400px] glow-sage" />
+      <div
+        className="absolute top-0 left-1/4 w-[500px] h-[400px] rounded-full blur-3xl opacity-30"
+        style={stageAccent ? { backgroundColor: `hsl(var(${stageAccent}) / 0.2)` } : undefined}
+      />
+      {!stageAccent && <div className="absolute top-0 left-1/4 w-[500px] h-[400px] glow-sage" />}
 
       <div className="container mx-auto px-6 md:px-10 max-w-4xl relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">

@@ -34,7 +34,10 @@ const PostpartumNormal = () => {
             <ul className="space-y-4">
               {normal.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage shrink-0" />
+                  <span
+                    className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
+                    style={{ backgroundColor: 'hsl(var(--stage-postpartum-accent))' }}
+                  />
                   <p className="font-sans text-sm font-light text-foreground leading-relaxed">{item}</p>
                 </li>
               ))}
@@ -57,7 +60,7 @@ const PostpartumNormal = () => {
         </div>
 
         <p className="mt-8 font-sans text-xs font-light text-muted-foreground flex items-center gap-2">
-          <span className="text-sage">✔</span> Medically reviewed by Jenny Joines
+          <span style={{ color: 'hsl(var(--stage-postpartum-accent))' }}>✔</span> Medically reviewed by Jenny Joines
         </p>
       </div>
     </section>

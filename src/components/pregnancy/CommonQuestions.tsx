@@ -18,13 +18,17 @@ const questions = [
     q: "Why do symptoms change week to week?",
     sub: "Variation is part of the process",
   },
+  {
+    q: "How accurate is my due date?",
+    sub: "What the estimated date really means",
+  },
 ];
 
 const CommonQuestions = () => {
   return (
     <section className="bg-parchment py-20 md:py-28">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-14">
           {/* Left header */}
           <div className="md:col-span-2">
             <p
@@ -34,7 +38,7 @@ const CommonQuestions = () => {
               Guidance
             </p>
             <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
-              Common questions about pregnancy
+              Common questions
             </h2>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
               Questions many people ask during pregnancy, answered with care.
@@ -43,29 +47,32 @@ const CommonQuestions = () => {
 
           {/* Right questions */}
           <div className="md:col-span-3">
-            <div className="divide-y" style={{ borderColor: 'hsl(var(--stage-pregnancy) / 0.5)' }}>
-              {questions.map((item, i) => (
-                <Link
-                  key={i}
-                  to={`/ask?q=${encodeURIComponent(item.q)}`}
-                  className="group flex items-center justify-between py-5 first:pt-0 last:pb-0 hover:pl-1 transition-all"
+            {questions.map((item, i) => (
+              <Link
+                key={i}
+                to={`/ask?q=${encodeURIComponent(item.q)}`}
+                className="group flex items-center justify-between py-4 sm:py-5 border-b transition-all hover:pl-1"
+                style={{ borderColor: 'hsl(var(--stage-pregnancy) / 0.4)' }}
+              >
+                <div className="flex flex-col gap-0.5 min-w-0">
+                  <p className="font-serif text-base sm:text-lg text-foreground leading-snug group-hover:text-foreground/70 transition-colors">
+                    {item.q}
+                  </p>
+                  <p className="font-sans text-xs font-light text-muted-foreground/70">
+                    {item.sub}
+                  </p>
+                </div>
+                <div
+                  className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 ml-4 group-hover:scale-110 transition-transform"
+                  style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.3)' }}
                 >
-                  <div className="flex flex-col gap-0.5">
-                    <p className="font-serif text-lg sm:text-xl text-foreground leading-snug group-hover:text-foreground/70 transition-colors">
-                      {item.q}
-                    </p>
-                    <p className="font-sans text-xs font-light text-muted-foreground">
-                      {item.sub}
-                    </p>
-                  </div>
                   <ChevronRight
-                    size={16}
-                    className="text-muted-foreground/30 group-hover:text-foreground/50 transition-colors ml-4 shrink-0"
-                    style={{ ['--tw-translate-x' as string]: '0' }}
+                    size={14}
+                    style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.6)' }}
                   />
-                </Link>
-              ))}
-            </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

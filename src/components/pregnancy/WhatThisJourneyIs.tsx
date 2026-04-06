@@ -4,7 +4,7 @@ const WhatThisJourneyIs = () => {
   return (
     <section className="bg-parchment-dark py-20 md:py-28">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center">
           {/* Image */}
           <div className="relative">
             <div className="rounded-2xl overflow-hidden border border-border/40 shadow-card-brand">
@@ -17,10 +17,7 @@ const WhatThisJourneyIs = () => {
                 className="w-full h-56 sm:h-72 md:h-80 object-cover"
               />
             </div>
-            {/* Caption bar */}
-            <div
-              className="mt-3 flex items-center gap-3"
-            >
+            <div className="mt-3 flex items-center gap-3">
               <div className="h-px w-6" style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.3)' }} />
               <p className="font-serif italic text-sm text-muted-foreground">
                 A quiet space waiting. The journey begins before you realise.
@@ -48,7 +45,14 @@ const WhatThisJourneyIs = () => {
                 each stage unfolds gradually, physically, emotionally, and
                 mentally.
               </p>
-              <p>
+            </div>
+
+            {/* Pull quote */}
+            <div
+              className="mt-6 pl-5 border-l-2"
+              style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.3)' }}
+            >
+              <p className="font-serif italic text-base text-foreground/75 leading-relaxed">
                 Some parts may feel clear, while others feel uncertain or hard to
                 interpret. This space is designed to guide you through it step by
                 step, without overwhelm.

@@ -1,26 +1,27 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Calendar } from "lucide-react";
 
 const PregnancyFinalCTA = () => {
   return (
-    <section className="relative bg-parchment py-16 sm:py-20 md:py-28 overflow-hidden">
+    <section className="relative overflow-hidden py-20 sm:py-24 md:py-32" style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.15)' }}>
       {/* Ambient glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full blur-3xl"
-        style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.3)' }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full blur-3xl"
+        style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.25)' }}
       />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl text-center relative z-10">
-        {/* Stage colour trail */}
-        <div className="flex items-center justify-center gap-1.5 mb-8">
-          {['--stage-ttc', '--stage-pregnancy', '--stage-ivf'].map((v, i) => (
+        {/* Trimester colour trail */}
+        <div className="flex items-center justify-center gap-1.5 mb-6">
+          {[
+            { var: '--stage-ttc-accent', w: 'w-4' },
+            { var: '--stage-pregnancy-accent', w: 'w-10' },
+            { var: '--stage-ivf-accent', w: 'w-4' },
+          ].map((t, i) => (
             <div
-              key={v}
-              className="h-1 rounded-full"
-              style={{
-                width: i === 1 ? '2rem' : '1rem',
-                backgroundColor: `hsl(var(${v}-accent) / ${i === 1 ? '0.5' : '0.2'})`,
-              }}
+              key={i}
+              className={`h-0.5 rounded-full ${t.w}`}
+              style={{ backgroundColor: `hsl(var(${t.var}) / ${i === 1 ? '0.6' : '0.2'})` }}
             />
           ))}
         </div>
@@ -29,21 +30,42 @@ const PregnancyFinalCTA = () => {
           className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
           style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
         >
-          Begin
+          Begin Your Journey
         </p>
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-4 leading-tight">
-          Start your pregnancy journey
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-foreground mb-4 leading-tight">
+          Your pregnancy guide is ready
         </h2>
-        <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed mb-8 max-w-md mx-auto">
-          Your week-by-week guide is ready. Enter your due date and begin.
+        <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground leading-relaxed mb-5 max-w-md mx-auto">
+          40 weeks of guidance, reflection, and support. Enter your due date to begin.
         </p>
+
+        {/* Stat chips */}
+        <div className="flex items-center justify-center gap-6 mb-8">
+          {[
+            { n: "40", label: "weeks" },
+            { n: "3", label: "trimesters" },
+            { n: "100+", label: "insights" },
+          ].map((s) => (
+            <div key={s.label} className="flex flex-col items-center">
+              <span className="font-serif text-xl text-foreground">{s.n}</span>
+              <span className="font-sans text-[10px] font-light text-muted-foreground/60 uppercase tracking-wide">{s.label}</span>
+            </div>
+          ))}
+        </div>
+
         <Link
           to="/due-date-calculator"
-          className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
+          className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
         >
+          <Calendar size={15} />
           Calculate your due date
-          <ArrowUpRight size={16} />
+          <ArrowUpRight size={15} />
         </Link>
+
+        {/* Closing editorial line */}
+        <p className="mt-10 font-serif italic text-sm text-muted-foreground/50">
+          One week at a time, from the very beginning.
+        </p>
       </div>
     </section>
   );

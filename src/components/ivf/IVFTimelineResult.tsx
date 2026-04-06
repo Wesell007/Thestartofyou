@@ -551,133 +551,221 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
 
       {/* ══════════════════════════════════════════════════════════════════
           S4: YOUR IVF TIMELINE
-          Journey map — emotional architecture, not a progress widget
+          Premium phase-based journey map with horizontal track + phase cards
       ══════════════════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32" style={{ background: "hsl(var(--parchment-dark))" }}>
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
           <Fade delay={0}>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="h-px w-10" style={{ background: "hsl(var(--stage-ivf-accent) / 0.3)" }} />
-              <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
-                Your IVF timeline
+            <div className="text-center mb-12 md:mb-14">
+              <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
+                Your IVF Timeline
+              </p>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-3 leading-tight">
+                Where you are in your journey
+              </h2>
+              <p className="font-sans text-[15px] font-light text-muted-foreground max-w-lg mx-auto leading-relaxed">
+                Six phases, one continuous path. From transfer to the start of pregnancy care.
               </p>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
-              Where you are now
-            </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed mb-14 max-w-lg">
-              A clearer view of what has happened, where you are, and what comes next.
-            </p>
           </Fade>
 
-          {/* Vertical timeline */}
-          <div className="relative">
-            {TIMELINE_NODES.map((node, i) => {
-              const isPast = clampedDpt > node.dpt;
-              const isCurrent = !isPast && (i === TIMELINE_NODES.length - 1 || clampedDpt < TIMELINE_NODES[i + 1].dpt) && clampedDpt >= node.dpt;
-              const isFuture = !isPast && !isCurrent;
-              const nodeDate = addDays(transferDate, node.dpt);
-              const isLast = i === TIMELINE_NODES.length - 1;
+          {/* ── Horizontal progress track — desktop ── */}
+          <Fade delay={80}>
+            <div className="hidden sm:block mb-14">
+              {/* Phase labels */}
+              <div className="flex mb-3">
+                {IVF_PHASES.map((phase) => {
+                  const widthPct = ((phase.endDpt - phase.startDpt + 1) / TOTAL_TRACK_DAYS) * 100;
+                  const phasePast = clampedDpt > phase.endDpt;
+                  const phaseCurrent = clampedDpt >= phase.startDpt && clampedDpt <= phase.endDpt;
+                  return (
+                    <p
+                      key={phase.id}
+                      className={cn(
+                        "font-sans text-[10px] font-light tracking-[0.12em] uppercase text-center truncate px-1",
+                        phaseCurrent ? "font-medium" : phasePast ? "opacity-60" : "opacity-30"
+                      )}
+                      style={{ width: `${widthPct}%`, color: "hsl(var(--stage-ivf-accent))" }}
+                    >
+                      {phase.label}
+                    </p>
+                  );
+                })}
+              </div>
+
+              {/* Track bar */}
+              <div className="relative h-16 select-none">
+                {/* Phase zones */}
+                <div className="absolute left-0 right-0 flex rounded-xl overflow-hidden" style={{ top: "30%", bottom: "30%" }}>
+                  {IVF_PHASES.map((phase, i) => {
+                    const widthPct = ((phase.endDpt - phase.startDpt + 1) / TOTAL_TRACK_DAYS) * 100;
+                    const phasePast = clampedDpt > phase.endDpt;
+                    const phaseCurrent = clampedDpt >= phase.startDpt && clampedDpt <= phase.endDpt;
+                    return (
+                      <div
+                        key={phase.id}
+                        style={{
+                          width: `${widthPct}%`,
+                          backgroundColor: phaseCurrent
+                            ? "hsl(var(--stage-ivf-accent) / 0.55)"
+                            : phasePast
+                              ? "hsl(var(--stage-ivf) / 0.9)"
+                              : "hsl(var(--stage-ivf) / 0.35)",
+                          borderRight: i < IVF_PHASES.length - 1 ? "1px solid hsl(var(--parchment-dark) / 0.5)" : "none",
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+
+                {/* Connector line */}
+                <div className="absolute top-1/2 left-0 right-0 h-px bg-foreground/8 -translate-y-1/2" />
+
+                {/* Milestone dots */}
+                {TRACK_MILESTONES.map((m) => (
+                  <div
+                    key={m.dpt}
+                    className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
+                    style={{ left: `${getDptPercent(m.dpt)}%` }}
+                  >
+                    <div
+                      className="w-2.5 h-2.5 rounded-full border bg-card"
+                      style={{ borderColor: clampedDpt >= m.dpt ? "hsl(var(--stage-ivf-accent) / 0.5)" : "hsl(var(--foreground) / 0.15)" }}
+                    />
+                    {m.label && (
+                      <p className="absolute top-5 left-1/2 -translate-x-1/2 font-sans text-[10px] font-light text-muted-foreground whitespace-nowrap">
+                        {m.label}
+                      </p>
+                    )}
+                  </div>
+                ))}
+
+                {/* "You are here" marker */}
+                <div
+                  className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-20"
+                  style={{ left: `${getDptPercent(clampedDpt)}%` }}
+                >
+                  <div
+                    className="w-4 h-4 rounded-full"
+                    style={{
+                      background: "hsl(var(--stage-ivf-accent))",
+                      boxShadow: "0 0 0 4px hsl(var(--stage-ivf-accent) / 0.2), 0 0 16px hsl(var(--stage-ivf-accent) / 0.15)",
+                    }}
+                  />
+                  <div className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                    <span className="font-sans text-[9px] font-medium tracking-[0.15em] uppercase px-2 py-0.5 rounded-full" style={{ color: "hsl(var(--stage-ivf-accent))", background: "hsl(var(--stage-ivf) / 0.6)" }}>
+                      You are here
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Phase sub-labels */}
+              <div className="flex mt-4">
+                {IVF_PHASES.map((phase) => {
+                  const widthPct = ((phase.endDpt - phase.startDpt + 1) / TOTAL_TRACK_DAYS) * 100;
+                  const phaseCurrent = clampedDpt >= phase.startDpt && clampedDpt <= phase.endDpt;
+                  return (
+                    <p
+                      key={phase.id + "-sub"}
+                      className={cn(
+                        "font-serif italic text-[11px] text-center truncate px-1",
+                        phaseCurrent ? "text-muted-foreground/80" : "text-muted-foreground/35"
+                      )}
+                      style={{ width: `${widthPct}%` }}
+                    >
+                      {phase.sub}
+                    </p>
+                  );
+                })}
+              </div>
+            </div>
+          </Fade>
+
+          {/* ── Phase cards ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            {IVF_PHASES.map((phase, i) => {
+              const phasePast = clampedDpt > phase.endDpt;
+              const phaseCurrent = clampedDpt >= phase.startDpt && clampedDpt <= phase.endDpt;
+              const phaseFuture = !phasePast && !phaseCurrent;
 
               return (
-                <Fade key={node.dpt} delay={80 + i * 60}>
-                  <div className="relative flex gap-6 md:gap-8">
-                    {/* Vertical spine */}
-                    <div className="flex flex-col items-center shrink-0 w-10">
-                      {/* Node dot */}
-                      <div
-                        className={cn(
-                          "relative z-10 w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all",
-                          isPast && "border-2",
-                          isFuture && "border border-dashed"
-                        )}
-                        style={
-                          isCurrent
-                            ? { background: "hsl(var(--stage-ivf-accent))", boxShadow: "0 0 0 5px hsl(var(--stage-ivf-accent) / 0.15), 0 0 20px hsl(var(--stage-ivf-accent) / 0.1)" }
-                            : isPast
-                              ? { background: "hsl(var(--stage-ivf-accent) / 0.15)", borderColor: "hsl(var(--stage-ivf-accent) / 0.3)" }
-                              : { background: "hsl(var(--parchment-dark))", borderColor: "hsl(var(--stage-ivf-accent) / 0.15)" }
-                        }
-                      >
-                        {isCurrent ? (
-                          <div className="w-2 h-2 rounded-full bg-card" />
-                        ) : isPast ? (
-                          <Check size={12} style={{ color: "hsl(var(--stage-ivf-accent))" }} />
-                        ) : (
-                          <span className="font-serif text-[10px]" style={{ color: "hsl(var(--stage-ivf-accent) / 0.35)" }}>{node.dpt}</span>
-                        )}
-                      </div>
-                      {/* Connecting line */}
-                      {!isLast && (
-                        <div
-                          className="w-px flex-1 min-h-[24px]"
-                          style={{
-                            background: isPast
-                              ? "hsl(var(--stage-ivf-accent) / 0.25)"
-                              : "hsl(var(--stage-ivf-accent) / 0.08)"
-                          }}
-                        />
-                      )}
-                    </div>
-
-                    {/* Content card */}
-                    <div className={cn(
-                      "flex-1 rounded-xl transition-all mb-3",
-                      isCurrent ? "px-6 py-5 -mt-1" : "px-1 py-3"
+                <Fade key={phase.id} delay={100 + i * 60}>
+                  <Link
+                    to={phase.href}
+                    className={cn(
+                      "group relative bg-card border rounded-2xl overflow-hidden flex flex-col transition-all duration-300",
+                      phaseCurrent
+                        ? "shadow-elevated border-transparent"
+                        : "shadow-card-brand hover:shadow-soft border-border/30 hover:border-border/50"
                     )}
-                    style={isCurrent ? { background: "hsl(var(--stage-ivf) / 0.25)", border: "1px solid hsl(var(--stage-ivf-accent) / 0.12)" } : {}}
-                    >
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2.5 flex-wrap">
-                            <p className={cn(
-                              "font-sans leading-snug",
-                              isCurrent ? "text-[15px] font-medium text-foreground" : isPast ? "text-[14px] font-light text-foreground/50" : "text-[14px] font-light text-foreground/30"
-                            )}>
-                              {node.label}
-                            </p>
-                            {isCurrent && (
-                              <span className="font-sans text-[9px] font-medium tracking-[0.2em] uppercase px-3 py-1 rounded-full" style={{ color: "hsl(var(--stage-ivf-accent))", background: "hsl(var(--stage-ivf) / 0.5)" }}>
-                                You are here
-                              </span>
-                            )}
-                          </div>
-                          <p className={cn(
-                            "font-sans text-xs font-light mt-1",
-                            isCurrent ? "text-foreground/50" : isPast ? "text-muted-foreground/35" : "text-muted-foreground/20"
-                          )}>
-                            {node.detail}
-                          </p>
-                          {/* Medical note — only show for current and adjacent */}
-                          {(isCurrent || (isPast && i >= TIMELINE_NODES.findIndex((n, j) => {
-                            const curr = clampedDpt >= n.dpt && (j === TIMELINE_NODES.length - 1 || clampedDpt < TIMELINE_NODES[j + 1].dpt);
-                            return curr;
-                          }) - 1)) && (
-                            <p className={cn(
-                              "font-sans text-[13px] font-light leading-[1.7] mt-2.5 max-w-md",
-                              isCurrent ? "text-foreground/55" : "text-muted-foreground/30"
-                            )}>
-                              {node.medicalNote}
-                            </p>
+                    style={phaseCurrent ? { borderColor: "hsl(var(--stage-ivf-accent) / 0.25)" } : {}}
+                  >
+                    {/* Accent bar */}
+                    <div
+                      className="h-1"
+                      style={{
+                        backgroundColor: phasePast
+                          ? "hsl(var(--stage-ivf-accent) / 0.35)"
+                          : phaseCurrent
+                            ? "hsl(var(--stage-ivf-accent) / 0.7)"
+                            : "hsl(var(--stage-ivf-accent) / 0.12)",
+                      }}
+                    />
+
+                    <div className="p-5 sm:p-6 flex flex-col gap-2 flex-1">
+                      <div className="flex items-center justify-between">
+                        <span
+                          className={cn(
+                            "font-sans text-[11px] font-light tracking-[0.15em] uppercase",
+                            phaseFuture ? "opacity-40" : ""
                           )}
-                        </div>
-                        <div className="shrink-0 text-right">
-                          <p className={cn(
-                            "font-sans text-xs tabular-nums",
-                            isCurrent ? "font-medium text-foreground/60" : isPast ? "font-light text-muted-foreground/30" : "font-light text-muted-foreground/18"
-                          )}>
-                            {format(nodeDate, "d MMM")}
-                          </p>
-                          <p className={cn(
-                            "font-sans text-[10px] tabular-nums mt-0.5",
-                            isCurrent ? "font-light text-foreground/40" : "font-light text-muted-foreground/15"
-                          )}>
-                            Day {node.dpt}
-                          </p>
+                          style={{ color: "hsl(var(--stage-ivf-accent))" }}
+                        >
+                          {phase.range}
+                        </span>
+                        <div className="flex items-center gap-2">
+                          {phasePast && <Check size={12} style={{ color: "hsl(var(--stage-ivf-accent) / 0.5)" }} />}
+                          {phaseCurrent && (
+                            <span className="font-sans text-[8px] font-medium tracking-[0.2em] uppercase px-2.5 py-0.5 rounded-full" style={{ color: "hsl(var(--stage-ivf-accent))", background: "hsl(var(--stage-ivf) / 0.5)" }}>
+                              Now
+                            </span>
+                          )}
+                          <span
+                            className="font-serif text-lg select-none"
+                            style={{ color: `hsl(var(--stage-ivf-accent) / ${phaseFuture ? "0.1" : phasePast ? "0.15" : "0.25"})` }}
+                          >
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
                         </div>
                       </div>
+
+                      <h3 className={cn(
+                        "font-serif text-xl",
+                        phaseFuture ? "text-foreground/30" : phasePast ? "text-foreground/55" : "text-foreground"
+                      )}>
+                        {phase.label}
+                      </h3>
+
+                      <p className={cn(
+                        "font-sans text-xs font-light leading-relaxed mt-1",
+                        phaseFuture ? "text-muted-foreground/25" : phasePast ? "text-muted-foreground/45" : "text-muted-foreground/70"
+                      )}>
+                        {phase.desc}
+                      </p>
+
+                      <span
+                        className={cn(
+                          "mt-auto pt-3 inline-flex items-center gap-1.5 font-sans text-xs font-light transition-opacity",
+                          phaseCurrent ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                        )}
+                        style={{ color: "hsl(var(--stage-ivf-accent))" }}
+                      >
+                        {phaseCurrent ? "Learn about this stage" : "Explore"}
+                        <ArrowRight size={12} />
+                      </span>
                     </div>
-                  </div>
+                  </Link>
                 </Fade>
               );
             })}
@@ -685,7 +773,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
 
           {/* Anxiety-killer */}
           <Fade delay={160}>
-            <div className="mt-6 rounded-2xl px-7 py-6 border" style={{ background: "hsl(var(--stage-ivf) / 0.2)", borderColor: "hsl(var(--stage-ivf-accent) / 0.08)" }}>
+            <div className="mt-10 rounded-2xl px-7 py-6 border" style={{ background: "hsl(var(--stage-ivf) / 0.2)", borderColor: "hsl(var(--stage-ivf-accent) / 0.08)" }}>
               <div className="flex items-start gap-4">
                 <Shield size={16} className="shrink-0 mt-0.5" style={{ color: "hsl(var(--stage-ivf-accent) / 0.7)" }} />
                 <div>

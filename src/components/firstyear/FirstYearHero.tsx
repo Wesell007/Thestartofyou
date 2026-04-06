@@ -4,11 +4,17 @@ const FirstYearHero = () => {
   return (
     <section className="relative min-h-[80vh] bg-parchment overflow-hidden flex flex-col justify-center pt-28 pb-24">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-sage-bg/15 blur-3xl" />
+        <div
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-3xl"
+          style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.5)' }}
+        />
       </div>
 
       <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10 text-center">
-        <p className="font-sans text-[11px] font-light tracking-[0.3em] uppercase text-sage-muted mb-7">
+        <p
+          className="font-sans text-[11px] font-light tracking-[0.3em] uppercase mb-7"
+          style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
+        >
           First Year
         </p>
         <h1 className="font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-foreground mb-8 animate-fade-up leading-[1.1]">

@@ -793,10 +793,10 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S5: WHAT TO EXPECT NEXT
           Structured milestones — guided, not overwhelming
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-parchment py-24 md:py-32">
+      <section className="bg-parchment py-28 md:py-36">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
           <Fade delay={0}>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-5">
               <div className="h-px w-10" style={{ background: "hsl(var(--stage-ivf-accent) / 0.3)" }} />
               <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
                 Looking ahead
@@ -805,7 +805,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
             <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-4">
               What to expect next
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed mb-14 max-w-lg">
+            <p className="font-sans text-[15px] font-light text-muted-foreground/70 leading-relaxed mb-14 max-w-lg">
               The next likely steps from where you are now, held clearly so you can follow what matters.
             </p>
           </Fade>

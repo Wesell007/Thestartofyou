@@ -13,74 +13,90 @@ const mentalLoadItems = [
 
 const PostpartumDisorienting = () => {
   return (
-    <section className="bg-parchment-dark py-24 md:py-32">
-      <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <section className="bg-parchment-dark py-20 md:py-28">
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-start">
+          {/* Left — editorial statement */}
+          <div className="md:col-span-2">
+            <p
+              className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
+              style={{ color: 'hsl(var(--stage-postpartum-accent))' }}
+            >
+              Reality Check
+            </p>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground leading-tight mb-5">
+              What can feel disorienting
+            </h2>
+            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
+              This stage often lacks structure, and that can make everything feel more overwhelming, even when things are going well.
+            </p>
+            {/* Editorial quote */}
+            <div
+              className="pl-5 border-l-2"
+              style={{ borderColor: 'hsl(var(--stage-postpartum-accent) / 0.25)' }}
+            >
+              <p className="font-serif italic text-base text-foreground/65 leading-relaxed">
+                "The mental load can be just as tiring as the physical demands."
+              </p>
+            </div>
+          </div>
 
-          {/* What can feel disorienting */}
-          <div className="bg-card border border-border/50 rounded-lg p-8 shadow-card-brand flex flex-col gap-6">
-            <div>
-              <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-4">
+          {/* Right — cards */}
+          <div className="md:col-span-3 space-y-4">
+            {/* Disorientation card */}
+            <div className="rounded-xl p-5 sm:p-6 bg-card border border-border/40">
+              <p
+                className="font-sans text-[11px] font-light tracking-[0.15em] uppercase mb-4"
+                style={{ color: 'hsl(var(--stage-postpartum-accent))' }}
+              >
                 Disorientation
               </p>
-              <h3 className="font-serif text-2xl text-foreground leading-snug mb-5">
-                What can feel disorienting
-              </h3>
+              <ul className="space-y-3">
+                {disorientingItems.map((item, i) => (
+                  <li key={i} className="flex items-start gap-4">
+                    <div
+                      className="mt-2 w-1.5 h-1.5 rounded-full shrink-0"
+                      style={{ backgroundColor: 'hsl(var(--stage-postpartum-accent) / 0.4)' }}
+                    />
+                    <p className="font-sans text-sm font-light text-foreground leading-relaxed">
+                      {item}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <ul className="space-y-4 flex-1">
-              {disorientingItems.map((item, i) => (
-                <li key={i} className="flex items-start gap-4">
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage shrink-0" />
-                  <p className="font-sans text-sm font-light text-foreground leading-relaxed">
-                    {item}
-                  </p>
-                </li>
-              ))}
-            </ul>
-
-            <div className="bg-sage-bg/40 border border-sage-light/30 rounded-md px-5 py-4 mt-2">
-              <p className="font-sans text-xs font-light tracking-[0.12em] uppercase text-sage-muted mb-1.5">
-                What this means
-              </p>
-              <p className="font-serif italic text-sm text-foreground/70 leading-relaxed">
-                This stage often lacks structure, and that can make everything feel more overwhelming, even when things are going well.
-              </p>
-            </div>
-          </div>
-
-          {/* The mental load */}
-          <div className="bg-card border border-border/50 rounded-lg p-8 shadow-card-brand flex flex-col gap-6">
-            <div>
-              <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-4">
+            {/* Mental load card */}
+            <div className="rounded-xl p-5 sm:p-6 bg-card border border-border/40">
+              <p
+                className="font-sans text-[11px] font-light tracking-[0.15em] uppercase mb-4"
+                style={{ color: 'hsl(var(--stage-postpartum-accent))' }}
+              >
                 Mental Load
               </p>
-              <h3 className="font-serif text-2xl text-foreground leading-snug mb-5">
-                The mental load
-              </h3>
-            </div>
-
-            <ul className="space-y-4 flex-1">
-              {mentalLoadItems.map((item, i) => (
-                <li key={i} className="flex items-start gap-4">
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage shrink-0" />
-                  <p className="font-sans text-sm font-light text-foreground leading-relaxed">
-                    {item}
-                  </p>
-                </li>
-              ))}
-            </ul>
-
-            <div className="bg-sage-bg/40 border border-sage-light/30 rounded-md px-5 py-4 mt-2">
-              <p className="font-sans text-xs font-light tracking-[0.12em] uppercase text-sage-muted mb-1.5">
-                What this means
-              </p>
-              <p className="font-serif italic text-sm text-foreground/70 leading-relaxed">
-                The mental load can be just as tiring as the physical demands.
-              </p>
+              <ul className="space-y-3">
+                {mentalLoadItems.map((item, i) => (
+                  <li key={i} className="flex items-start gap-4">
+                    <div
+                      className="mt-2 w-1.5 h-1.5 rounded-full shrink-0"
+                      style={{ backgroundColor: 'hsl(var(--stage-postpartum-accent) / 0.4)' }}
+                    />
+                    <p className="font-sans text-sm font-light text-foreground leading-relaxed">
+                      {item}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              <div
+                className="mt-4 pt-4 border-t"
+                style={{ borderColor: 'hsl(var(--stage-postpartum-accent) / 0.1)' }}
+              >
+                <p className="font-serif italic text-sm text-foreground/60 leading-relaxed">
+                  The mental load continues, even as things begin to feel more familiar.
+                </p>
+              </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

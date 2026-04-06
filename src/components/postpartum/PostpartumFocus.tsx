@@ -1,37 +1,79 @@
 const focusItems = [
-  "Prioritising recovery alongside caring for your baby",
-  "Taking each day as it comes",
-  "Letting routines develop gradually",
-  "Keeping expectations realistic",
-  "Accepting support where possible",
+  { text: "Prioritising recovery alongside caring for your baby", emphasis: true },
+  { text: "Taking each day as it comes", emphasis: false },
+  { text: "Letting routines develop gradually", emphasis: false },
+  { text: "Keeping expectations realistic", emphasis: false },
+  { text: "Accepting support where possible", emphasis: false },
 ];
 
 const PostpartumFocus = () => {
   return (
-    <section className="bg-parchment-dark py-24 md:py-32">
-      <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
+    <section className="bg-parchment py-20 md:py-28">
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start">
+          {/* Left */}
           <div>
-            <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+            <p
+              className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
+              style={{ color: 'hsl(var(--stage-postpartum-accent))' }}
+            >
               Right Now
             </p>
-            <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground leading-tight mb-4">
               What to focus on right now
             </h2>
+            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
+              Recovery takes time. Start with what matters most today.
+            </p>
+
+            {/* Anchoring stat */}
+            <div
+              className="inline-flex items-baseline gap-2 rounded-xl px-5 py-3"
+              style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.3)' }}
+            >
+              <span className="font-serif text-2xl text-foreground">1</span>
+              <span className="font-sans text-xs font-light text-muted-foreground">day at a time</span>
+            </div>
           </div>
 
-          <div className="space-y-5">
-            {focusItems.map((item, i) => (
-              <div key={i} className="flex items-start gap-4">
-                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-sage shrink-0" />
-                <p className="font-serif italic text-lg text-foreground leading-snug">
-                  {item}
-                </p>
-              </div>
-            ))}
-            <p className="font-sans text-sm font-light text-sage pt-4">
-              One day at a time is enough.
-            </p>
+          {/* Right */}
+          <div
+            className="rounded-2xl p-6 sm:p-8"
+            style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.3)' }}
+          >
+            <div className="space-y-4">
+              {focusItems.map((item, i) => (
+                <div key={i} className="flex items-start gap-4">
+                  <div
+                    className="mt-2.5 w-1.5 h-1.5 rounded-full shrink-0"
+                    style={{
+                      backgroundColor: item.emphasis
+                        ? 'hsl(var(--stage-postpartum-accent) / 0.7)'
+                        : 'hsl(var(--stage-postpartum-accent) / 0.35)',
+                    }}
+                  />
+                  <p
+                    className={`font-serif text-base sm:text-lg leading-snug ${
+                      item.emphasis ? 'text-foreground' : 'italic text-foreground/75'
+                    }`}
+                  >
+                    {item.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div
+              className="mt-6 pt-4 border-t"
+              style={{ borderColor: 'hsl(var(--stage-postpartum-accent) / 0.1)' }}
+            >
+              <p
+                className="font-sans text-xs font-light italic"
+                style={{ color: 'hsl(var(--stage-postpartum-accent) / 0.8)' }}
+              >
+                "One day at a time is enough."
+              </p>
+            </div>
           </div>
         </div>
       </div>

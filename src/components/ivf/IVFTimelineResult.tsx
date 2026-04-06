@@ -1063,22 +1063,22 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
             </Link>
 
             {/* Trust cues */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8 mt-10">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8 mt-12">
               {[
                 "Personalised to your stage",
                 "Built for IVF-specific timing",
                 "Save your place and return anytime",
               ].map((cue, i) => (
-                <p key={i} className="font-sans text-xs font-light text-muted-foreground/45 flex items-center gap-2">
-                  <Check size={11} style={{ color: "hsl(var(--stage-ivf-accent))" }} />
+                <p key={i} className="font-sans text-[11px] font-light text-muted-foreground/40 flex items-center gap-2">
+                  <Check size={10} style={{ color: "hsl(var(--stage-ivf-accent) / 0.6)" }} />
                   {cue}
                 </p>
               ))}
             </div>
 
             {/* Medical trust */}
-            <p className="mt-12 font-sans text-[11px] font-light text-muted-foreground/35 flex items-center justify-center gap-2">
-              <Shield size={11} style={{ color: "hsl(var(--stage-ivf-accent) / 0.4)" }} />
+            <p className="mt-14 font-sans text-[11px] font-light text-muted-foreground/30 flex items-center justify-center gap-2">
+              <Shield size={10} style={{ color: "hsl(var(--stage-ivf-accent) / 0.35)" }} />
               Medically reviewed by Jenny Joines
             </p>
           </Fade>

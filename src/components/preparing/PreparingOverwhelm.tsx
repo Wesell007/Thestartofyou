@@ -1,116 +1,72 @@
-const overwhelm = [
-  "Too many product recommendations",
-  "Conflicting advice",
-  "Pressure to be fully prepared",
-  "Not knowing what matters most",
-];
-
-const feelingReady = [
-  "Wondering if you've done enough",
-  "Feeling like there's something you might be missing",
-  "Wanting everything to be in place before your baby arrives",
-];
-
-const pressure = [
-  "Buying more to feel more prepared",
-  "Adding items \"just in case\"",
-  "Feeling like more preparation equals more control",
+const sections = [
+  {
+    tag: "Reality",
+    title: "Why this can feel overwhelming",
+    items: [
+      "Too many product recommendations",
+      "Conflicting advice from every direction",
+      "Pressure to be fully prepared before baby arrives",
+      "Not knowing what matters most",
+    ],
+    insight: "Feeling unsure doesn't mean you're unprepared — it means there's too much noise.",
+  },
+  {
+    tag: "Emotionally",
+    title: "The pressure to feel ready",
+    items: [
+      "Wondering if you've done enough",
+      "Feeling like there's something you might be missing",
+      "Wanting everything to be in place",
+    ],
+    insight: "There's no clear moment where everything feels fully ready — and that's normal.",
+  },
 ];
 
 const PreparingOverwhelm = () => {
   return (
-    <section className="bg-parchment-dark py-24 md:py-32">
+    <section className="bg-parchment-dark py-20 md:py-32">
       <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        <div className="space-y-0">
-          {/* Why this can feel overwhelming */}
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-14 pb-10">
-            <div className="flex flex-col gap-2 pt-1">
-              <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
-                Reality
-              </p>
-              <p className="font-serif text-lg text-foreground leading-snug">
-                Why this can feel overwhelming
-              </p>
-            </div>
-            <div>
-              <ul className="space-y-3 mb-6">
-                {overwhelm.map((b, j) => (
-                  <li key={j} className="flex items-start gap-3">
-                    <span className="mt-2 w-1 h-1 rounded-full bg-sage-muted shrink-0" />
-                    <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">{b}</p>
-                  </li>
-                ))}
-              </ul>
-              <div className="bg-sage-bg/40 border border-sage-light/30 rounded-md px-5 py-4">
-                <p className="font-sans text-xs font-light tracking-[0.12em] uppercase text-sage-muted mb-1.5">
-                  What this means
-                </p>
-                <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-                  Feeling unsure doesn't mean you're unprepared, it means there's too much noise.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="mb-12">
+          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+            Honesty
+          </p>
+          <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight max-w-lg">
+            What makes preparation feel harder than it needs to be
+          </h2>
+        </div>
 
-          {/* Feeling ready */}
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-14 py-10 border-t border-border/40">
-            <div className="flex flex-col gap-2 pt-1">
-              <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
-                Emotionally
-              </p>
-              <p className="font-serif text-lg text-foreground leading-snug">
-                Feeling ready
-              </p>
-            </div>
-            <div>
-              <ul className="space-y-3 mb-6">
-                {feelingReady.map((b, j) => (
-                  <li key={j} className="flex items-start gap-3">
-                    <span className="mt-2 w-1 h-1 rounded-full bg-sage-muted shrink-0" />
-                    <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">{b}</p>
-                  </li>
-                ))}
-              </ul>
-              <div className="bg-sage-bg/40 border border-sage-light/30 rounded-md px-5 py-4">
-                <p className="font-sans text-xs font-light tracking-[0.12em] uppercase text-sage-muted mb-1.5">
-                  What this means
-                </p>
-                <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-                  There's no clear moment where everything feels fully ready, and that's normal.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {sections.map((s, i) => (
+            <div key={i} className="bg-card border border-border/40 rounded-2xl p-7 md:p-8 shadow-card-brand flex flex-col">
+              <span className="font-sans text-[10px] font-light tracking-[0.2em] uppercase mb-4"
+                style={{ color: "hsl(var(--stage-preparing-accent))" }}>
+                {s.tag}
+              </span>
+              <h3 className="font-serif text-xl text-foreground mb-5 leading-snug">{s.title}</h3>
 
-          {/* When preparation becomes pressure */}
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-14 py-10 border-t border-border/40">
-            <div className="flex flex-col gap-2 pt-1">
-              <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
-                Pressure
-              </p>
-              <p className="font-serif text-lg text-foreground leading-snug">
-                When preparation becomes pressure
-              </p>
-            </div>
-            <div>
-              <ul className="space-y-3 mb-6">
-                {pressure.map((b, j) => (
+              <ul className="space-y-3 mb-6 flex-1">
+                {s.items.map((item, j) => (
                   <li key={j} className="flex items-start gap-3">
-                    <span className="mt-2 w-1 h-1 rounded-full bg-sage-muted shrink-0" />
-                    <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">{b}</p>
+                    <span className="mt-2 w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: "hsl(var(--stage-preparing-accent))" }} />
+                    <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">{item}</p>
                   </li>
                 ))}
               </ul>
-              <div className="bg-sage-bg/40 border border-sage-light/30 rounded-md px-5 py-4">
-                <p className="font-sans text-xs font-light tracking-[0.12em] uppercase text-sage-muted mb-1.5">
-                  What this means
-                </p>
-                <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-                  Sometimes, doing more can increase pressure rather than reduce it.
-                </p>
+
+              <div className="border-t border-border/30 pt-5">
+                <p className="font-serif italic text-sm text-foreground/65 leading-relaxed">{s.insight}</p>
               </div>
             </div>
-          </div>
+          ))}
+        </div>
+
+        {/* Pressure pull-quote */}
+        <div className="mt-10 border-l-2 pl-6 py-3 max-w-2xl"
+          style={{ borderColor: "hsl(var(--stage-preparing-accent))" }}>
+          <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-2">When preparation becomes pressure</p>
+          <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
+            Sometimes, buying more or researching more doesn't bring clarity — it increases the noise. Simple and safe is often enough.
+          </p>
         </div>
       </div>
     </section>

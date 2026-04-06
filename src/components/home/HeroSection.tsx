@@ -97,7 +97,7 @@ const HeroSection = () => {
                   </p>
                 </div>
               </div>
-              <DueDateCalculatorForm onResult={handleResult} compact />
+              <DueDateCalculatorForm onResult={handleResult} onIVFResult={handleIVFResult} compact />
             </div>
           </div>
         </div>

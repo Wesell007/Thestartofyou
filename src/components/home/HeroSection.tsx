@@ -11,6 +11,10 @@ const HeroSection = () => {
     navigate(`/due-date-results?lmp=${lmpDate.getTime()}`);
   };
 
+  const handleIVFResult = (transferDate: Date, transferType: string) => {
+    navigate(`/ivf-timeline?date=${transferDate.getTime()}&type=${transferType}`);
+  };
+
   return (
     <section className="relative min-h-[92vh] md:min-h-screen overflow-hidden flex flex-col justify-center pt-20 md:pt-0">
       {/* Desktop: full-bleed background image */}

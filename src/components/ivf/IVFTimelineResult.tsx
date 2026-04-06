@@ -154,14 +154,19 @@ interface TimelineNode {
   dpt: number;
   label: string;
   detail: string;
+  medicalNote: string;
 }
 
 const TIMELINE_NODES: TimelineNode[] = [
-  { dpt: 0,  label: "Transfer",            detail: "Day of transfer" },
-  { dpt: 2,  label: "Implantation window",  detail: "Typical implantation period" },
-  { dpt: 5,  label: "hCG rising",          detail: "Hormone levels increasing" },
-  { dpt: 10, label: "Test day",            detail: "Beta hCG blood test" },
-  { dpt: 14, label: "Early scan",          detail: "Viability confirmed" },
+  { dpt: 0,  label: "Embryo transfer",       detail: "Day of transfer",                    medicalNote: "Embryo placed into the uterus. Rest and progesterone support begin." },
+  { dpt: 1,  label: "Implantation begins",    detail: "Hatching and early attachment",      medicalNote: "The blastocyst hatches from its shell and begins attaching to the uterine lining." },
+  { dpt: 3,  label: "Implantation window",    detail: "Attachment completing",              medicalNote: "Full implantation typically completes. Most people feel nothing during this process." },
+  { dpt: 5,  label: "hCG rising",             detail: "Hormone levels beginning to climb",  medicalNote: "If implantation has occurred, hCG production starts — but levels are still too low to detect." },
+  { dpt: 8,  label: "hCG detectable",         detail: "Approaching test sensitivity",       medicalNote: "hCG may reach home-test sensitivity in some cases. Clinic blood tests are more reliable." },
+  { dpt: 10, label: "Beta hCG test",          detail: "First official blood test",          medicalNote: "Your clinic measures hCG levels to confirm pregnancy. A repeat test follows in 48–72 hours." },
+  { dpt: 14, label: "Early viability scan",   detail: "Ultrasound confirmation",            medicalNote: "Gestational sac visibility expected. Heartbeat may or may not be detectable yet." },
+  { dpt: 21, label: "Heartbeat scan",         detail: "Cardiac activity check",             medicalNote: "Heartbeat typically confirmed around 6–7 weeks gestational age. A key reassurance milestone." },
+  { dpt: 42, label: "Transition to OB care",  detail: "Graduating from fertility clinic",   medicalNote: "Many clinics discharge around 8–10 weeks. You transition into standard pregnancy care." },
 ];
 
 // ─── Fade-in wrapper ──────────────────────────────────────────────────────────
@@ -197,7 +202,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
   const insight = getDptInsight(clampedDpt);
   const [aiQuestion, setAiQuestion] = useState("");
 
-  const progressPct = Math.min((clampedDpt / 14) * 100, 100);
+  
 
   const testDate = addDays(transferDate, insight.testDay);
   const daysToTest = Math.max(differenceInDays(testDate, today), 0);
@@ -493,76 +498,118 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
             </p>
           </Fade>
 
-          <Fade delay={80}>
-            <div className="bg-card border border-border/25 rounded-2xl p-8 md:p-10 shadow-elevated">
-              {/* Progress bar */}
-              <div className="relative mb-12">
-                <div className="w-full rounded-full h-1" style={{ background: "hsl(var(--stage-ivf) / 0.35)" }}>
-                  <div
-                    className="rounded-full h-1 transition-all duration-1000"
-                    style={{ width: `${progressPct}%`, background: "hsl(var(--stage-ivf-accent))" }}
-                  />
-                </div>
-                <div
-                  className="absolute -top-2 transition-all duration-1000"
-                  style={{ left: `calc(${Math.max(progressPct, 2)}% - 10px)` }}
-                >
-                  <div className="w-5 h-5 rounded-full border-[3px] border-card shadow-md" style={{ background: "hsl(var(--stage-ivf-accent))" }} />
-                </div>
-              </div>
+          {/* Vertical timeline */}
+          <div className="relative">
+            {TIMELINE_NODES.map((node, i) => {
+              const isPast = clampedDpt > node.dpt;
+              const isCurrent = !isPast && (i === TIMELINE_NODES.length - 1 || clampedDpt < TIMELINE_NODES[i + 1].dpt) && clampedDpt >= node.dpt;
+              const isFuture = !isPast && !isCurrent;
+              const nodeDate = addDays(transferDate, node.dpt);
+              const isLast = i === TIMELINE_NODES.length - 1;
 
-              {/* Nodes */}
-              <div className="space-y-0">
-                {TIMELINE_NODES.map((node, i) => {
-                  const isPast = clampedDpt > node.dpt;
-                  const isCurrent = clampedDpt === node.dpt || (i < TIMELINE_NODES.length - 1 && clampedDpt > node.dpt && clampedDpt < TIMELINE_NODES[i + 1].dpt);
-                  const isFuture = !isPast && !isCurrent;
-                  const nodeDate = addDays(transferDate, node.dpt);
-                  return (
-                    <div key={node.dpt} className={cn(
-                      "flex items-center gap-5 py-5 rounded-xl px-5 -mx-5 transition-all",
-                      isCurrent && "bg-parchment/60"
-                    )}>
-                      <div className={cn(
-                        "w-10 h-10 rounded-full border-2 flex items-center justify-center shrink-0 font-serif text-xs transition-all",
-                        isPast && !isCurrent && "border-border/20 text-muted-foreground/30 bg-transparent",
-                        isFuture && "border-border/15 text-muted-foreground/20 bg-transparent"
-                      )}
-                      style={isCurrent ? { background: "hsl(var(--stage-ivf-accent))", borderColor: "hsl(var(--stage-ivf-accent))", color: "hsl(var(--card))" } : {}}
+              return (
+                <Fade key={node.dpt} delay={80 + i * 60}>
+                  <div className="relative flex gap-6 md:gap-8">
+                    {/* Vertical spine */}
+                    <div className="flex flex-col items-center shrink-0 w-10">
+                      {/* Node dot */}
+                      <div
+                        className={cn(
+                          "relative z-10 w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all",
+                          isPast && "border-2",
+                          isFuture && "border border-dashed"
+                        )}
+                        style={
+                          isCurrent
+                            ? { background: "hsl(var(--stage-ivf-accent))", boxShadow: "0 0 0 5px hsl(var(--stage-ivf-accent) / 0.15), 0 0 20px hsl(var(--stage-ivf-accent) / 0.1)" }
+                            : isPast
+                              ? { background: "hsl(var(--stage-ivf-accent) / 0.15)", borderColor: "hsl(var(--stage-ivf-accent) / 0.3)" }
+                              : { background: "hsl(var(--parchment-dark))", borderColor: "hsl(var(--stage-ivf-accent) / 0.15)" }
+                        }
                       >
-                        {node.dpt}
+                        {isCurrent ? (
+                          <div className="w-2 h-2 rounded-full bg-card" />
+                        ) : isPast ? (
+                          <Check size={12} style={{ color: "hsl(var(--stage-ivf-accent))" }} />
+                        ) : (
+                          <span className="font-serif text-[10px]" style={{ color: "hsl(var(--stage-ivf-accent) / 0.35)" }}>{node.dpt}</span>
+                        )}
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2.5">
+                      {/* Connecting line */}
+                      {!isLast && (
+                        <div
+                          className="w-px flex-1 min-h-[24px]"
+                          style={{
+                            background: isPast
+                              ? "hsl(var(--stage-ivf-accent) / 0.25)"
+                              : "hsl(var(--stage-ivf-accent) / 0.08)"
+                          }}
+                        />
+                      )}
+                    </div>
+
+                    {/* Content card */}
+                    <div className={cn(
+                      "flex-1 rounded-xl transition-all mb-3",
+                      isCurrent ? "px-6 py-5 -mt-1" : "px-1 py-3"
+                    )}
+                    style={isCurrent ? { background: "hsl(var(--stage-ivf) / 0.25)", border: "1px solid hsl(var(--stage-ivf-accent) / 0.12)" } : {}}
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2.5 flex-wrap">
+                            <p className={cn(
+                              "font-sans leading-snug",
+                              isCurrent ? "text-[15px] font-medium text-foreground" : isPast ? "text-[14px] font-light text-foreground/50" : "text-[14px] font-light text-foreground/30"
+                            )}>
+                              {node.label}
+                            </p>
+                            {isCurrent && (
+                              <span className="font-sans text-[9px] font-medium tracking-[0.2em] uppercase px-3 py-1 rounded-full" style={{ color: "hsl(var(--stage-ivf-accent))", background: "hsl(var(--stage-ivf) / 0.5)" }}>
+                                You are here
+                              </span>
+                            )}
+                          </div>
                           <p className={cn(
-                            "font-sans text-[15px] leading-snug",
-                            isCurrent ? "font-medium text-foreground" : isPast ? "font-light text-muted-foreground/40 line-through decoration-border/30" : "font-light text-muted-foreground/30"
+                            "font-sans text-xs font-light mt-1",
+                            isCurrent ? "text-foreground/50" : isPast ? "text-muted-foreground/35" : "text-muted-foreground/20"
                           )}>
-                            {node.label}
+                            {node.detail}
                           </p>
-                          {isCurrent && (
-                            <span className="font-sans text-[9px] font-medium tracking-[0.2em] uppercase px-3 py-1 rounded-full" style={{ color: "hsl(var(--stage-ivf-accent))", background: "hsl(var(--stage-ivf) / 0.5)" }}>
-                              You are here
-                            </span>
+                          {/* Medical note — only show for current and adjacent */}
+                          {(isCurrent || (isPast && i >= TIMELINE_NODES.findIndex((n, j) => {
+                            const curr = clampedDpt >= n.dpt && (j === TIMELINE_NODES.length - 1 || clampedDpt < TIMELINE_NODES[j + 1].dpt);
+                            return curr;
+                          }) - 1)) && (
+                            <p className={cn(
+                              "font-sans text-[13px] font-light leading-[1.7] mt-2.5 max-w-md",
+                              isCurrent ? "text-foreground/55" : "text-muted-foreground/30"
+                            )}>
+                              {node.medicalNote}
+                            </p>
                           )}
                         </div>
-                        <p className={cn(
-                          "font-sans text-xs font-light mt-1",
-                          isCurrent ? "text-muted-foreground/60" : "text-muted-foreground/25"
-                        )}>{node.detail}</p>
+                        <div className="shrink-0 text-right">
+                          <p className={cn(
+                            "font-sans text-xs tabular-nums",
+                            isCurrent ? "font-medium text-foreground/60" : isPast ? "font-light text-muted-foreground/30" : "font-light text-muted-foreground/18"
+                          )}>
+                            {format(nodeDate, "d MMM")}
+                          </p>
+                          <p className={cn(
+                            "font-sans text-[10px] tabular-nums mt-0.5",
+                            isCurrent ? "font-light text-foreground/40" : "font-light text-muted-foreground/15"
+                          )}>
+                            Day {node.dpt}
+                          </p>
+                        </div>
                       </div>
-                      <p className={cn(
-                        "font-sans text-xs font-light shrink-0 tabular-nums",
-                        isCurrent ? "text-muted-foreground/60" : "text-muted-foreground/25"
-                      )}>
-                        {format(nodeDate, "d MMM")}
-                      </p>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-          </Fade>
+                  </div>
+                </Fade>
+              );
+            })}
+          </div>
 
           {/* Anxiety-killer */}
           <Fade delay={160}>

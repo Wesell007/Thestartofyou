@@ -26,16 +26,15 @@ const TTCEmotionalReminder = () => {
         </h2>
 
         <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed max-w-md mx-auto mb-8">
-          Taking things one step at a time is enough.
+          Both are part of the process. Neither defines the outcome.
         </p>
 
-        {/* Reinforcing pull-quote */}
         <div
           className="inline-block rounded-xl px-6 py-4"
           style={{ backgroundColor: 'hsl(var(--stage-ttc) / 0.25)' }}
         >
           <p className="font-serif italic text-base text-foreground/60">
-            Your journey is yours.
+            Your journey is yours. Take it one cycle at a time.
           </p>
         </div>
       </div>

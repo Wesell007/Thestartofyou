@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 
 const TTCFinalCTA = () => {
   return (
-    <section className="relative overflow-hidden py-20 sm:py-24 md:py-32" style={{ backgroundColor: 'hsl(var(--stage-ttc) / 0.15)' }}>
+    <section className="relative overflow-hidden py-20 sm:py-24 md:py-32" style={{ backgroundColor: 'hsl(var(--stage-ttc) / 0.18)' }}>
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full blur-3xl"
         style={{ backgroundColor: 'hsl(var(--stage-ttc) / 0.25)' }}
@@ -42,8 +42,8 @@ const TTCFinalCTA = () => {
         <div className="flex items-center justify-center gap-6 mb-8">
           {[
             { n: "3", label: "stages" },
-            { n: "∞", label: "cycles" },
-            { n: "1", label: "step at a time" },
+            { n: "6", label: "fertile days" },
+            { n: "1", label: "cycle at a time" },
           ].map((s) => (
             <div key={s.label} className="flex flex-col items-center">
               <span className="font-serif text-xl text-foreground">{s.n}</span>

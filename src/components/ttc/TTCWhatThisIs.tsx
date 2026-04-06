@@ -54,6 +54,19 @@ const TTCWhatThisIs = () => {
                 This space is here to guide you through that process clearly and calmly, without pressure or false certainty.
               </p>
             </div>
+
+            {/* Anchoring stat */}
+            <div className="mt-6 flex items-center gap-5">
+              {[
+                { n: "28", label: "day avg cycle" },
+                { n: "5–6", label: "fertile days" },
+              ].map((s) => (
+                <div key={s.label} className="flex items-baseline gap-1.5">
+                  <span className="font-serif text-xl text-foreground">{s.n}</span>
+                  <span className="font-sans text-[10px] font-light text-muted-foreground/60 uppercase tracking-wide">{s.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

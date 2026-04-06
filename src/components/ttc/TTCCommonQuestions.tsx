@@ -6,11 +6,12 @@ const questions = [
   { q: "How do I know if I'm ovulating?", sub: "Signs and tracking methods explained" },
   { q: "How long does it usually take to get pregnant?", sub: "Timelines and what to expect" },
   { q: "When should I take a test?", sub: "Testing timing and accuracy" },
+  { q: "Does stress affect fertility?", sub: "What the evidence actually says" },
 ];
 
 const TTCCommonQuestions = () => {
   return (
-    <section className="bg-parchment py-20 md:py-28">
+    <section className="bg-parchment-dark py-20 md:py-28">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-14">
           {/* Left header */}
@@ -24,9 +25,19 @@ const TTCCommonQuestions = () => {
             <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
               Common questions
             </h2>
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
+            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-5">
               Questions many people ask when trying to conceive, answered with care.
             </p>
+
+            {/* Editorial quote */}
+            <div
+              className="pl-5 border-l-2"
+              style={{ borderColor: 'hsl(var(--stage-ttc-accent) / 0.2)' }}
+            >
+              <p className="font-serif italic text-sm text-foreground/50 leading-relaxed">
+                "There are no silly questions. Only ones you haven't found the right answer to yet."
+              </p>
+            </div>
           </div>
 
           {/* Right questions */}

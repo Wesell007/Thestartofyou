@@ -10,7 +10,7 @@ import TTCCommonQuestions from "@/components/ttc/TTCCommonQuestions";
 import TTCAISupport from "@/components/ttc/TTCAISupport";
 import TTCEmotionalReminder from "@/components/ttc/TTCEmotionalReminder";
 import TTCReflection from "@/components/ttc/TTCReflection";
-
+import TTCCapture from "@/components/ttc/TTCCapture";
 import TTCPathways from "@/components/ttc/TTCPathways";
 import TTCFinalCTA from "@/components/ttc/TTCFinalCTA";
 
@@ -19,10 +19,10 @@ const TTC = () => {
     <div className="min-h-screen font-sans">
       <Navbar />
       <main>
-        {/* 1. Hero, orientation */}
+        {/* 1. Hero — tool-first with calculator + questions */}
         <TTCHero />
 
-        {/* 2. What this journey is */}
+        {/* 2. What this journey is — editorial intro */}
         <TTCWhatThisIs />
 
         {/* 3. Stages of trying to conceive */}
@@ -31,7 +31,7 @@ const TTC = () => {
         {/* 4. What to focus on right now */}
         <TTCFocus />
 
-        {/* 5. What to expect, body, timing, emotionally, waiting */}
+        {/* 5. What to expect — body, timing, emotionally, waiting */}
         <TTCWhatToExpect />
 
         {/* 6. What makes this journey different */}
@@ -49,8 +49,10 @@ const TTC = () => {
         {/* 10. Reflection prompt */}
         <TTCReflection />
 
+        {/* 11. Capture / journal companion */}
+        <TTCCapture />
 
-        {/* 12. Pathways, system connections */}
+        {/* 12. Pathways */}
         <TTCPathways />
 
         {/* 13. Final CTA */}

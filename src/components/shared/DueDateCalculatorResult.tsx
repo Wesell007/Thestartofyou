@@ -303,15 +303,24 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
             </div>
           </Fade>
 
-          {/* Interpretive line */}
-          <Fade delay={220}>
-            <p className="font-serif italic text-base sm:text-lg text-foreground/50 leading-relaxed max-w-lg mx-auto text-center mb-14">
+          {/* Interpretive paragraph — makes the result feel explained, not just shown */}
+          <Fade delay={200}>
+            <div className="max-w-lg mx-auto text-center mb-8">
+              <p className="font-sans text-sm font-light text-foreground/60 leading-relaxed">
+                {result.insight.heroInterpretation}
+              </p>
+            </div>
+          </Fade>
+
+          {/* Emotional truth — quieter, underneath */}
+          <Fade delay={240}>
+            <p className="font-serif italic text-[15px] text-foreground/40 leading-relaxed max-w-md mx-auto text-center mb-14">
               {result.insight.emotionalTruth}
             </p>
           </Fade>
 
           {/* CTA cluster — dominant primary */}
-          <Fade delay={280}>
+          <Fade delay={300}>
             <div className="flex flex-col items-center gap-4">
               <Link
                 to="/pregnancy"
@@ -327,8 +336,8 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                 <MessageCircle size={13} className="text-sage/60" />
                 Ask about this stage
               </Link>
-              <p className="font-sans text-[11px] font-light text-muted-foreground/35 mt-1 max-w-xs text-center leading-relaxed">
-                This is your starting point. From here, your guidance can become personal.
+              <p className="font-sans text-[11px] font-light text-muted-foreground/30 mt-1 max-w-xs text-center leading-relaxed">
+                Save your stage and begin personalised guidance from week {result.currentWeek}
               </p>
             </div>
           </Fade>

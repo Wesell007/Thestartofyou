@@ -3,46 +3,50 @@ const sections = [
     tag: "Your body",
     title: "Your body follows a cycle, but it may not always feel predictable.",
     bullets: [
-      "Variations in cycle length from month to month",
-      "Subtle signs of ovulation that are easy to miss",
-      "Changes that can be misinterpreted or overlooked",
+      "Cycle length can vary by several days month to month",
+      "Ovulation signs are subtle and easy to miss",
+      "What feels normal one cycle may shift the next",
     ],
     meaning:
-      "Cycles don't always behave exactly the same each month, even when everything is functioning normally.",
+      "Cycles don't always behave the same way. Variation is the norm, not the exception.",
+    stat: { n: "21–35", label: "day range" },
   },
   {
-    tag: "Timing and patterns",
-    title: "You may become more aware of timing than ever before.",
+    tag: "Timing",
+    title: "Timing helps, but it cannot guarantee outcomes.",
     bullets: [
-      "Tracking fertile windows and ovulation signs",
-      "Learning to read cervical mucus and temperature shifts",
-      "Balancing awareness with not over-analysing",
+      "The fertile window is roughly 5–6 days per cycle",
+      "Ovulation prediction methods have real limitations",
+      "Perfectly timed cycles can still result in waiting",
     ],
     meaning:
-      "Timing can help, but it doesn't guarantee outcomes. Awareness without obsession is the goal.",
+      "Timing is useful. But it's not the only factor. The pressure to time everything perfectly can become its own problem.",
+    stat: { n: "5–6", label: "day window" },
   },
   {
     tag: "Emotionally",
-    title: "This stage can feel more uncertain than expected.",
+    title: "This stage can feel more intense than expected.",
     bullets: [
-      "Hopeful at the start of a new cycle",
-      "Anxious during the waiting period after ovulation",
-      "Disappointed if things don't happen as quickly as expected",
-      "Unsure how long the process might take",
+      "Hope at the start, anxiety in the middle, grief if it doesn't work",
+      "Symptom spotting becomes consuming for many",
+      "Comparison with others can amplify frustration",
+      "The emotional toll is often underestimated",
     ],
     meaning:
-      "This stage often involves cycles of expectation and waiting. Both are completely normal.",
+      "Cycles of expectation and waiting are emotionally demanding. That's not weakness. It's the reality of this experience.",
+    stat: { n: "2", label: "week wait" },
   },
   {
     tag: "The wait",
-    title: "A large part of trying to conceive is simply waiting.",
+    title: "The two-week wait is where patience is tested most.",
     bullets: [
-      "The time between ovulation and testing can feel disproportionately long",
-      "Symptom spotting can become consuming",
-      "Staying present can feel harder than expected",
+      "Time between ovulation and testing feels disproportionately long",
+      "Every sensation becomes a potential sign",
+      "Staying present during this phase is genuinely hard",
     ],
     meaning:
-      "This stage is often less about action and more about patience, which can be the hardest part.",
+      "This phase is less about action and more about endurance. It's often the hardest part of the entire process.",
+    stat: { n: "14", label: "days" },
   },
 ];
 
@@ -50,8 +54,8 @@ const TTCWhatToExpect = () => {
   return (
     <section className="bg-parchment py-20 md:py-28">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-        {/* Header — 2/5 split */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-14 mb-12">
+        {/* Header */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-14 mb-10">
           <div className="md:col-span-2">
             <p
               className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
@@ -60,40 +64,50 @@ const TTCWhatToExpect = () => {
               What to Expect
             </p>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground leading-tight">
-              What to expect during this journey
+              The real experience of TTC
             </h2>
           </div>
           <div className="md:col-span-3 flex items-end">
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-              Every TTC experience is different. These are some of the common realities people encounter across the process.
+              Not the simplified version. The actual physical, emotional, and psychological realities of trying to conceive.
             </p>
           </div>
         </div>
 
-        {/* Content grid — featured first card */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {/* Cards */}
+        <div className="space-y-4">
           {sections.map((s, i) => (
             <div
               key={i}
-              className={`rounded-2xl p-6 sm:p-7 border border-border/40 bg-card hover:shadow-card-brand transition-shadow ${
-                i === 0 ? 'md:col-span-2' : ''
-              }`}
+              className="rounded-2xl border border-border/40 bg-card hover:shadow-card-brand transition-shadow overflow-hidden"
             >
-              <div className={i === 0 ? 'grid grid-cols-1 md:grid-cols-2 gap-8' : ''}>
-                <div>
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-0">
+                {/* Left — tag + stat */}
+                <div
+                  className="md:col-span-1 p-5 sm:p-6 flex flex-col justify-between gap-4 md:border-r"
+                  style={{
+                    backgroundColor: 'hsl(var(--stage-ttc) / 0.12)',
+                    borderColor: 'hsl(var(--stage-ttc) / 0.2)',
+                  }}
+                >
                   <p
-                    className="font-sans text-[11px] font-light tracking-[0.15em] uppercase mb-3"
+                    className="font-sans text-[10px] font-light tracking-[0.15em] uppercase"
                     style={{ color: 'hsl(var(--stage-ttc-accent))' }}
                   >
                     {s.tag}
                   </p>
-                  <h3 className="font-serif text-lg sm:text-xl text-foreground leading-snug mb-4">
-                    {s.title}
-                  </h3>
+                  <div className="flex flex-col">
+                    <span className="font-serif text-2xl text-foreground leading-none">{s.stat.n}</span>
+                    <span className="font-sans text-[9px] font-light text-muted-foreground/55 uppercase tracking-widest mt-1">{s.stat.label}</span>
+                  </div>
                 </div>
 
-                <div>
-                  <ul className="space-y-2.5 mb-5">
+                {/* Right — content */}
+                <div className="md:col-span-4 p-5 sm:p-6">
+                  <h3 className="font-serif text-lg text-foreground leading-snug mb-4">
+                    {s.title}
+                  </h3>
+                  <ul className="space-y-2 mb-5">
                     {s.bullets.map((b, j) => (
                       <li key={j} className="flex items-start gap-3">
                         <div
@@ -106,18 +120,11 @@ const TTCWhatToExpect = () => {
                       </li>
                     ))}
                   </ul>
-
                   <div
                     className="rounded-xl px-5 py-4"
-                    style={{ backgroundColor: 'hsl(var(--stage-ttc) / 0.2)' }}
+                    style={{ backgroundColor: 'hsl(var(--stage-ttc) / 0.15)' }}
                   >
-                    <p
-                      className="font-sans text-[10px] font-light tracking-[0.12em] uppercase mb-1.5"
-                      style={{ color: 'hsl(var(--stage-ttc-accent) / 0.7)' }}
-                    >
-                      What this means
-                    </p>
-                    <p className="font-serif italic text-sm text-foreground/65 leading-relaxed">
+                    <p className="font-serif italic text-sm text-foreground/60 leading-relaxed">
                       {s.meaning}
                     </p>
                   </div>

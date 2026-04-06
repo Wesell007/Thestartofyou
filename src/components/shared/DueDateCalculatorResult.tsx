@@ -1018,22 +1018,32 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       {/* ═══════════════════════════════════════════════════════════════════
           S10: FINAL TRUST CTA — conviction, not fade
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-parchment-dark py-20 md:py-28">
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
+      <section className="bg-parchment-dark py-20 md:py-28 relative overflow-hidden">
+        {/* Subtle closing glow */}
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse, hsl(var(--stage-pregnancy) / 0.06) 0%, transparent 70%)' }}
+        />
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl relative z-10">
           <Fade delay={0}>
             <div className="text-center">
               <p
                 className="font-sans text-[10px] font-light tracking-[0.35em] uppercase mb-7"
                 style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.5)' }}
               >
-                Begin from here
+                Week {result.currentWeek} · {result.trimester}
               </p>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.25rem] text-foreground leading-snug mb-5">
-                You have your starting point.
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.25rem] text-foreground leading-snug mb-4">
+                You have your date.
+                <br />
+                <span className="font-serif italic text-foreground/50">Now your journey can begin.</span>
               </h2>
-              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-sm mx-auto mb-10">
-                You do not need to figure everything out at once. Save your stage, begin your journey,
-                and come back to support that understands where you are now.
+              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-sm mx-auto mb-4">
+                You do not need to figure everything out at once. Begin with guidance that moves with you,
+                one week at a time, from where you are now.
+              </p>
+              <p className="font-sans text-xs font-light text-muted-foreground/40 mb-10 max-w-xs mx-auto">
+                Starting your journey saves your stage, personalises your guidance, and gives you somewhere to come back to.
               </p>
 
               <Link
@@ -1053,13 +1063,13 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                 ].map((cue, i) => (
                   <div key={i} className="flex items-center gap-1.5">
                     <cue.icon size={11} className="text-sage/60" />
-                    <p className="font-sans text-[11px] font-light text-muted-foreground/60">{cue.text}</p>
+                    <p className="font-sans text-[11px] font-light text-muted-foreground/55">{cue.text}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="border-t border-border/20 pt-5 mx-auto max-w-xs">
-                <p className="font-sans text-[10px] font-light text-muted-foreground/40 leading-relaxed">
+              <div className="border-t border-border/15 pt-5 mx-auto max-w-xs">
+                <p className="font-sans text-[10px] font-light text-muted-foreground/35 leading-relaxed">
                   Pregnancy timelines are estimates. Always consult your healthcare provider for personalised medical advice.
                 </p>
               </div>

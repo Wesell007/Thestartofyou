@@ -1,80 +1,73 @@
 const canWait = [
-  { text: "Items you're unsure about", chip: "Wait" },
-  { text: "Products recommended but not immediately needed", chip: "Wait" },
-  { text: "Things that depend on your baby's preferences", chip: "Wait" },
+  { text: "Items you're unsure about", reason: "If you're debating it, you don't need it yet" },
+  { text: "Products that depend on preferences", reason: "You'll know what works once baby is here" },
+  { text: "Upgrades and nice-to-haves", reason: "Start basic — upgrade only if needed" },
 ];
 
 const wontKnow = [
-  "What your baby will prefer",
-  "What will actually be useful day-to-day",
-  "What your routine will look like",
-  "What the 'right' setup really is",
+  { text: "What your baby will prefer", icon: "?" },
+  { text: "What will actually be useful", icon: "◇" },
+  { text: "What your routine will look like", icon: "↻" },
+  { text: "What the 'right' setup is", icon: "—" },
 ];
 
 const PreparingCanWait = () => {
   return (
     <section className="py-20 md:py-32" style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.3)" }}>
       <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-          {/* What can wait */}
-          <div className="bg-card border border-border/40 rounded-2xl p-7 md:p-8 shadow-card-brand">
-            <span className="font-sans text-[10px] font-light tracking-[0.2em] uppercase mb-4 block"
-              style={{ color: "hsl(var(--stage-preparing-accent))" }}>
-              Patience
-            </span>
-            <h3 className="font-serif text-2xl text-foreground mb-6 leading-snug">
-              What can wait
-            </h3>
-            <ul className="space-y-4 mb-6">
-              {canWait.map((b, j) => (
-                <li key={j} className="flex items-start gap-3">
-                  <span className="mt-1 px-2 py-0.5 rounded text-[9px] font-sans font-light tracking-wider uppercase shrink-0"
-                    style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.8)", color: "hsl(var(--stage-preparing-accent))" }}>
-                    {b.chip}
-                  </span>
-                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">{b.text}</p>
-                </li>
-              ))}
-            </ul>
-            <div className="border-t border-border/30 pt-5">
-              <p className="font-serif italic text-sm text-foreground/65 leading-relaxed">
-                Not everything needs to be decided before your baby arrives.
-              </p>
-            </div>
-          </div>
+        {/* Header */}
+        <div className="mb-12 max-w-2xl">
+          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase mb-5"
+            style={{ color: "hsl(var(--stage-preparing-accent))" }}>
+            Permission
+          </p>
+          <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
+            What you don't need to decide yet
+          </h2>
+          <p className="font-sans text-base font-light text-muted-foreground leading-relaxed">
+            Not everything needs a decision before baby arrives. Here's what can genuinely wait.
+          </p>
+        </div>
 
-          {/* What you won't know yet */}
-          <div className="bg-card border border-border/40 rounded-2xl p-7 md:p-8 shadow-card-brand">
-            <span className="font-sans text-[10px] font-light tracking-[0.2em] uppercase mb-4 block"
-              style={{ color: "hsl(var(--stage-preparing-accent))" }}>
-              Permission
-            </span>
-            <h3 className="font-serif text-2xl text-foreground mb-6 leading-snug">
-              What you won't know yet
-            </h3>
-            <ul className="space-y-4 mb-6">
-              {wontKnow.map((b, j) => (
-                <li key={j} className="flex items-start gap-3">
-                  <span className="mt-2 w-1.5 h-1.5 rounded-full shrink-0"
-                    style={{ backgroundColor: "hsl(var(--stage-preparing-accent))" }} />
-                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">{b}</p>
-                </li>
-              ))}
-            </ul>
-            <div className="border-t border-border/30 pt-5">
-              <p className="font-serif italic text-sm text-foreground/65 leading-relaxed">
-                Some decisions can only be made once your baby is here — and that's completely okay.
-              </p>
+        {/* What can wait — horizontal cards */}
+        <div className="space-y-3 mb-10">
+          {canWait.map((b, j) => (
+            <div key={j} className="bg-card border border-border/40 rounded-xl shadow-card-brand overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-[auto_1fr_1.2fr] gap-4 md:gap-0 items-center">
+                <div className="px-5 py-4 md:py-0">
+                  <span className="px-3 py-1 rounded-full text-[9px] font-sans font-light tracking-wider uppercase"
+                    style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.8)", color: "hsl(var(--stage-preparing-accent))" }}>
+                    Can wait
+                  </span>
+                </div>
+                <p className="px-5 md:px-4 py-2 md:py-4 font-sans text-sm font-light text-foreground leading-relaxed">{b.text}</p>
+                <p className="px-5 md:px-4 py-3 md:py-4 font-sans text-sm font-light text-muted-foreground leading-relaxed md:border-l md:border-border/20 italic">{b.reason}</p>
+              </div>
             </div>
+          ))}
+        </div>
+
+        {/* What you won't know yet — 2x2 grid */}
+        <div className="mb-8">
+          <h3 className="font-serif text-xl text-foreground mb-5">What you won't know yet</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {wontKnow.map((b, j) => (
+              <div key={j} className="flex items-center gap-4 bg-card border border-border/40 rounded-xl px-5 py-4 shadow-card-brand">
+                <span className="w-8 h-8 rounded-full flex items-center justify-center text-sm shrink-0"
+                  style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.7)", color: "hsl(var(--stage-preparing-accent))" }}>
+                  {b.icon}
+                </span>
+                <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">{b.text}</p>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Decision fatigue pull-quote */}
-        <div className="mt-8 border-l-2 pl-6 py-3 max-w-2xl"
+        {/* Closing insight */}
+        <div className="border-l-2 pl-6 py-3 max-w-2xl"
           style={{ borderColor: "hsl(var(--stage-preparing-accent))" }}>
-          <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-sage-muted mb-2">Decision fatigue</p>
           <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-            There's rarely one perfect choice. Simple and safe is often enough.
+            Some decisions only make sense once your baby is here. Waiting isn't being unprepared — it's being realistic.
           </p>
         </div>
       </div>

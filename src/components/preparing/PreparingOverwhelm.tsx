@@ -1,71 +1,91 @@
-const sections = [
-  {
-    tag: "Reality",
-    title: "Why this can feel overwhelming",
-    items: [
-      "Too many product recommendations",
-      "Conflicting advice from every direction",
-      "Pressure to be fully prepared before baby arrives",
-      "Not knowing what matters most",
-    ],
-    insight: "Feeling unsure doesn't mean you're unprepared — it means there's too much noise.",
-  },
-  {
-    tag: "Emotionally",
-    title: "The pressure to feel ready",
-    items: [
-      "Wondering if you've done enough",
-      "Feeling like there's something you might be missing",
-      "Wanting everything to be in place",
-    ],
-    insight: "There's no clear moment where everything feels fully ready — and that's normal.",
-  },
-];
-
 const PreparingOverwhelm = () => {
   return (
     <section className="bg-parchment-dark py-20 md:py-32">
       <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        <div className="mb-12">
+        {/* Section header */}
+        <div className="mb-12 max-w-2xl">
           <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
             Honesty
           </p>
-          <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight max-w-lg">
-            What makes preparation feel harder than it needs to be
+          <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight">
+            Why preparation can feel harder than it should
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {sections.map((s, i) => (
-            <div key={i} className="bg-card border border-border/40 rounded-2xl p-7 md:p-8 shadow-card-brand flex flex-col">
-              <span className="font-sans text-[10px] font-light tracking-[0.2em] uppercase mb-4"
+        {/* Two cards side-by-side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          {/* Reality card */}
+          <div className="bg-card border border-border/40 rounded-2xl overflow-hidden shadow-card-brand"
+            style={{ borderTopWidth: "3px", borderTopColor: "hsl(var(--stage-preparing-accent))" }}>
+            <div className="p-7 md:p-8">
+              <span className="font-sans text-[10px] font-light tracking-[0.2em] uppercase mb-4 block"
                 style={{ color: "hsl(var(--stage-preparing-accent))" }}>
-                {s.tag}
+                The noise
               </span>
-              <h3 className="font-serif text-xl text-foreground mb-5 leading-snug">{s.title}</h3>
-
-              <ul className="space-y-3 mb-6 flex-1">
-                {s.items.map((item, j) => (
+              <h3 className="font-serif text-xl text-foreground mb-5 leading-snug">What floods in</h3>
+              <ul className="space-y-3">
+                {[
+                  "Too many product recommendations",
+                  "Conflicting advice from every direction",
+                  "Pressure to be fully prepared",
+                  "Not knowing what matters most",
+                ].map((item, j) => (
                   <li key={j} className="flex items-start gap-3">
-                    <span className="mt-2 w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: "hsl(var(--stage-preparing-accent))" }} />
+                    <span className="mt-1.5 px-2 py-0.5 rounded text-[8px] font-sans font-light tracking-wider uppercase shrink-0"
+                      style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.7)", color: "hsl(var(--stage-preparing-accent))" }}>
+                      noise
+                    </span>
                     <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">{item}</p>
                   </li>
                 ))}
               </ul>
-
-              <div className="border-t border-border/30 pt-5">
-                <p className="font-serif italic text-sm text-foreground/65 leading-relaxed">{s.insight}</p>
-              </div>
             </div>
-          ))}
+            <div className="px-7 md:px-8 py-5 border-t border-border/20"
+              style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.2)" }}>
+              <p className="font-serif italic text-sm text-foreground/65 leading-relaxed">
+                Feeling unsure doesn't mean you're unprepared — it means the signal-to-noise ratio is broken.
+              </p>
+            </div>
+          </div>
+
+          {/* Emotional card */}
+          <div className="bg-card border border-border/40 rounded-2xl overflow-hidden shadow-card-brand">
+            <div className="p-7 md:p-8">
+              <span className="font-sans text-[10px] font-light tracking-[0.2em] uppercase mb-4 block"
+                style={{ color: "hsl(var(--stage-preparing-accent))" }}>
+                The pressure
+              </span>
+              <h3 className="font-serif text-xl text-foreground mb-5 leading-snug">What builds up</h3>
+              <ul className="space-y-3">
+                {[
+                  "Wondering if you've done enough",
+                  "Feeling like you're missing something",
+                  "Buying more to feel more in control",
+                  "Researching endlessly without resolution",
+                ].map((item, j) => (
+                  <li key={j} className="flex items-start gap-3">
+                    <span className="mt-1.5 px-2 py-0.5 rounded text-[8px] font-sans font-light tracking-wider uppercase shrink-0 bg-parchment-dark text-muted-foreground">
+                      pressure
+                    </span>
+                    <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">{item}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="px-7 md:px-8 py-5 border-t border-border/20"
+              style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.15)" }}>
+              <p className="font-serif italic text-sm text-foreground/65 leading-relaxed">
+                There's no clear moment where everything feels fully ready — and that's normal. Not a failure.
+              </p>
+            </div>
+          </div>
         </div>
 
-        {/* Pressure pull-quote */}
-        <div className="mt-10 border-l-2 pl-6 py-3 max-w-2xl"
-          style={{ borderColor: "hsl(var(--stage-preparing-accent))" }}>
-          <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-2">When preparation becomes pressure</p>
-          <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-            Sometimes, buying more or researching more doesn't bring clarity — it increases the noise. Simple and safe is often enough.
+        {/* Central insight — stronger than a pull-quote */}
+        <div className="rounded-2xl px-7 py-6 text-center border border-border/30"
+          style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.35)" }}>
+          <p className="font-serif text-lg md:text-xl text-foreground/80 leading-relaxed max-w-xl mx-auto">
+            Sometimes, doing <span className="italic">less</span> research and buying <span className="italic">fewer</span> things is the most prepared you can be.
           </p>
         </div>
       </div>

@@ -154,14 +154,19 @@ interface TimelineNode {
   dpt: number;
   label: string;
   detail: string;
+  medicalNote: string;
 }
 
 const TIMELINE_NODES: TimelineNode[] = [
-  { dpt: 0,  label: "Transfer",            detail: "Day of transfer" },
-  { dpt: 2,  label: "Implantation window",  detail: "Typical implantation period" },
-  { dpt: 5,  label: "hCG rising",          detail: "Hormone levels increasing" },
-  { dpt: 10, label: "Test day",            detail: "Beta hCG blood test" },
-  { dpt: 14, label: "Early scan",          detail: "Viability confirmed" },
+  { dpt: 0,  label: "Embryo transfer",       detail: "Day of transfer",                    medicalNote: "Embryo placed into the uterus. Rest and progesterone support begin." },
+  { dpt: 1,  label: "Implantation begins",    detail: "Hatching and early attachment",      medicalNote: "The blastocyst hatches from its shell and begins attaching to the uterine lining." },
+  { dpt: 3,  label: "Implantation window",    detail: "Attachment completing",              medicalNote: "Full implantation typically completes. Most people feel nothing during this process." },
+  { dpt: 5,  label: "hCG rising",             detail: "Hormone levels beginning to climb",  medicalNote: "If implantation has occurred, hCG production starts — but levels are still too low to detect." },
+  { dpt: 8,  label: "hCG detectable",         detail: "Approaching test sensitivity",       medicalNote: "hCG may reach home-test sensitivity in some cases. Clinic blood tests are more reliable." },
+  { dpt: 10, label: "Beta hCG test",          detail: "First official blood test",          medicalNote: "Your clinic measures hCG levels to confirm pregnancy. A repeat test follows in 48–72 hours." },
+  { dpt: 14, label: "Early viability scan",   detail: "Ultrasound confirmation",            medicalNote: "Gestational sac visibility expected. Heartbeat may or may not be detectable yet." },
+  { dpt: 21, label: "Heartbeat scan",         detail: "Cardiac activity check",             medicalNote: "Heartbeat typically confirmed around 6–7 weeks gestational age. A key reassurance milestone." },
+  { dpt: 42, label: "Transition to OB care",  detail: "Graduating from fertility clinic",   medicalNote: "Many clinics discharge around 8–10 weeks. You transition into standard pregnancy care." },
 ];
 
 // ─── Fade-in wrapper ──────────────────────────────────────────────────────────

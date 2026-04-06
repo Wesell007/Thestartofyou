@@ -1,7 +1,8 @@
 /**
- * DueDateCalculatorResult — v4.
- * Not a calculator output. The beginning of a guided journey.
- * Reveal → Start Journey → Interpretation → Right Now → Timeline → Milestones → Ask → Journal → Explore → Final CTA
+ * DueDateCalculatorResult — v5.
+ * The conversion gateway into The Start of You.
+ * Result → Start Journey → What This Means → Your Pregnancy From Here →
+ * Milestones → Ask → Journal → Continue → Final Trust CTA
  */
 
 import { useEffect, useState } from "react";
@@ -203,19 +204,23 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
     <div>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          S1: THE REVEAL — ceremonial, personal, grounding
+          S1: THE REVEAL — ceremonial, personal, the moment that matters
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="relative bg-parchment-dark pt-14 pb-20 md:pt-20 md:pb-28 overflow-hidden">
-        {/* Ambient glow */}
+      <section className="relative bg-parchment-dark pt-12 pb-24 md:pt-16 md:pb-32 overflow-hidden">
+        {/* Layered ambient glow */}
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, hsl(var(--stage-pregnancy) / 0.12) 0%, transparent 70%)' }}
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse, hsl(var(--stage-pregnancy) / 0.1) 0%, transparent 65%)' }}
+        />
+        <div
+          className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+          style={{ background: 'linear-gradient(to top, hsl(var(--parchment)), transparent)' }}
         />
 
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl relative z-10">
           {/* Breadcrumb */}
           <Fade delay={0}>
-            <div className="flex items-center gap-2 font-sans text-[11px] font-light text-sage-muted mb-14 md:mb-20">
+            <div className="flex items-center gap-2 font-sans text-[11px] font-light text-sage-muted mb-16 md:mb-20">
               <Link to="/due-date-calculator" className="hover:text-sage transition-colors">Due date calculator</Link>
               <ChevronRight size={10} />
               <span className="text-foreground/60">Your results</span>
@@ -223,99 +228,106 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
           </Fade>
 
           {/* Due date — large, confident, centred */}
-          <Fade delay={100}>
-            <div className="text-center mb-10 md:mb-12">
+          <Fade delay={80}>
+            <div className="text-center">
               <p
-                className="font-sans text-[11px] font-light tracking-[0.3em] uppercase mb-6"
+                className="font-sans text-[10px] font-light tracking-[0.35em] uppercase mb-7"
                 style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
               >
                 Your estimated due date
               </p>
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-[4rem] text-foreground leading-[1.05] mb-3">
+              <h1 className="font-serif text-[2.75rem] sm:text-[3.5rem] md:text-[4.25rem] text-foreground leading-[1.02] mb-2">
                 {format(result.dueDate, "d MMMM yyyy")}
               </h1>
-              <p className="font-sans text-sm font-light text-muted-foreground/50 mb-10">
+              <p className="font-sans text-sm font-light text-muted-foreground/40 mb-12">
                 {format(result.dueDate, "EEEE")}
               </p>
+            </div>
+          </Fade>
 
-              {/* Orientation chips */}
-              <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
+          {/* Stat chips — restrained, elegant */}
+          <Fade delay={160}>
+            <div className="flex justify-center gap-3 sm:gap-5 mb-10">
+              {[
+                { top: `${result.currentWeek}`, bot: `week${result.currentDay > 0 ? ` + ${result.currentDay}d` : ""}` },
+                { top: `${result.weeksRemaining}`, bot: "weeks remaining" },
+              ].map((s, i) => (
                 <div
-                  className="rounded-xl px-5 py-3 border text-center"
+                  key={i}
+                  className="px-5 sm:px-6 py-3 rounded-xl border text-center"
                   style={{
-                    backgroundColor: 'hsl(var(--stage-pregnancy) / 0.06)',
-                    borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.08)',
+                    backgroundColor: 'hsl(var(--stage-pregnancy) / 0.05)',
+                    borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.07)',
                   }}
                 >
-                  <p className="font-serif text-2xl text-foreground leading-none mb-0.5">{result.currentWeek}</p>
-                  <p className="font-sans text-[10px] font-light text-sage-muted tracking-wider uppercase">
-                    week{result.currentDay > 0 ? ` + ${result.currentDay}d` : ""}
-                  </p>
+                  <p className="font-serif text-xl sm:text-2xl text-foreground leading-none mb-0.5">{s.top}</p>
+                  <p className="font-sans text-[9px] font-light text-sage-muted tracking-wider uppercase">{s.bot}</p>
                 </div>
-                <div
-                  className="rounded-xl px-5 py-3 border text-center"
-                  style={{
-                    backgroundColor: 'hsl(var(--stage-pregnancy) / 0.06)',
-                    borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.08)',
-                  }}
+              ))}
+              <Link
+                to={result.trimesterPath}
+                className="group px-5 sm:px-6 py-3 rounded-xl border text-center hover:shadow-card-brand transition-all"
+                style={{
+                  backgroundColor: 'hsl(var(--stage-pregnancy) / 0.05)',
+                  borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.07)',
+                }}
+              >
+                <p
+                  className="font-serif text-sm sm:text-base leading-tight mb-0.5"
+                  style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
                 >
-                  <p className="font-serif text-2xl text-foreground leading-none mb-0.5">{result.weeksRemaining}</p>
-                  <p className="font-sans text-[10px] font-light text-sage-muted tracking-wider uppercase">remaining</p>
-                </div>
-                <Link
-                  to={result.trimesterPath}
-                  className="group rounded-xl px-5 py-3 border text-center hover:shadow-card-brand transition-all"
-                  style={{
-                    backgroundColor: 'hsl(var(--stage-pregnancy) / 0.06)',
-                    borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.08)',
-                  }}
-                >
-                  <p
-                    className="font-serif text-base leading-tight mb-0.5"
-                    style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
-                  >
-                    {result.trimester}
-                  </p>
-                  <p className="font-sans text-[10px] font-light text-sage-muted tracking-wider uppercase group-hover:text-sage transition-colors">
-                    View guide
-                  </p>
-                </Link>
-              </div>
-
-              {/* Emotional truth */}
-              <p className="font-serif italic text-base sm:text-lg text-foreground/55 leading-relaxed max-w-xl mx-auto mb-12">
-                {result.insight.emotionalTruth}
-              </p>
-
-              {/* Primary CTA — dominant */}
-              <div className="flex flex-col items-center gap-3">
-                <Link
-                  to="/pregnancy"
-                  className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4.5 font-sans text-base font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all"
-                >
-                  Start your journey
-                  <ArrowRight size={16} />
-                </Link>
-                <p className="font-sans text-xs font-light text-muted-foreground/50">
-                  Save your stage and begin personalised guidance from week {result.currentWeek}
+                  {result.trimester}
                 </p>
-              </div>
+                <p className="font-sans text-[9px] font-light text-sage-muted tracking-wider uppercase group-hover:text-sage transition-colors">
+                  View guide
+                </p>
+              </Link>
+            </div>
+          </Fade>
+
+          {/* Interpretive line */}
+          <Fade delay={220}>
+            <p className="font-serif italic text-base sm:text-lg text-foreground/50 leading-relaxed max-w-lg mx-auto text-center mb-14">
+              {result.insight.emotionalTruth}
+            </p>
+          </Fade>
+
+          {/* CTA cluster — dominant primary */}
+          <Fade delay={280}>
+            <div className="flex flex-col items-center gap-4">
+              <Link
+                to="/pregnancy"
+                className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 sm:px-12 py-4 sm:py-[1.15rem] font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all"
+              >
+                Start your journey
+                <ArrowRight size={16} />
+              </Link>
+              <Link
+                to={`/ask?q=What should I know at ${result.currentWeek} weeks pregnant?`}
+                className="inline-flex items-center gap-2 font-sans text-sm font-light text-muted-foreground hover:text-sage transition-colors"
+              >
+                <MessageCircle size={13} className="text-sage/60" />
+                Ask about this stage
+              </Link>
+              <p className="font-sans text-[11px] font-light text-muted-foreground/35 mt-1 max-w-xs text-center leading-relaxed">
+                This is your starting point. From here, your guidance can become personal.
+              </p>
             </div>
           </Fade>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          S2: START YOUR JOURNEY — the conversion bridge
+          S2: THE CONVERSION BRIDGE — why starting matters
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-parchment py-0">
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl -mt-8 relative z-20">
+      <section className="bg-parchment pt-16 pb-16 md:pt-20 md:pb-20">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
           <Fade delay={0}>
             <div
-              className="rounded-2xl border shadow-soft overflow-hidden"
+              className="rounded-2xl border overflow-hidden"
               style={{
-                backgroundColor: 'hsl(var(--card))',
                 borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.1)',
+                boxShadow: '0 8px 40px -12px hsl(var(--stage-pregnancy-accent) / 0.08)',
               }}
             >
               <div className="grid grid-cols-1 md:grid-cols-2">
@@ -325,43 +337,44 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                   style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.06)' }}
                 >
                   <p
-                    className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
-                    style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
+                    className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-5"
+                    style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.7)' }}
                   >
-                    More than a due date
+                    What happens when you start
                   </p>
-                  <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-4">
-                    Your result is a starting point.
+                  <h2 className="font-serif text-2xl sm:text-[1.7rem] text-foreground leading-snug mb-5">
+                    Turn this date into
                     <br />
-                    <span className="font-serif italic text-foreground/60">
-                      Your journey is what comes next.
-                    </span>
+                    a guided journey
                   </h2>
-                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-                    You do not need to figure out everything at once. Starting your journey means the guidance moves with you,
-                    week by week, from where you are now.
+                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
+                    You do not need to figure out everything at once. Starting your journey
+                    means the guidance moves with you, week by week, from where you are now.
+                  </p>
+                  <p className="font-sans text-xs font-light text-muted-foreground/50 leading-relaxed">
+                    Starting your journey saves your stage and begins your personalised pregnancy guidance.
                   </p>
                 </div>
 
                 {/* Right — benefits + CTA */}
-                <div className="p-8 sm:p-10 md:p-12 flex flex-col justify-center">
-                  <div className="space-y-4 mb-8">
+                <div className="bg-card p-8 sm:p-10 md:p-12 flex flex-col justify-center">
+                  <div className="space-y-5 mb-8">
                     {[
                       { text: "Save your place in the journey", sub: "Your current week, stage, and progress" },
                       { text: "Unlock week-by-week guidance", sub: "Tailored to where you are right now" },
-                      { text: "Track what is happening and what is ahead", sub: "Milestones, scans, and key moments" },
-                      { text: "Come back to personalised support", sub: "Ask questions relevant to your stage" },
+                      { text: "See what is happening and what is ahead", sub: "Milestones, scans, and key moments" },
+                      { text: "Return to support that remembers you", sub: "Ask questions relevant to your stage" },
                     ].map((b, i) => (
-                      <div key={i} className="flex items-start gap-3">
+                      <div key={i} className="flex items-start gap-3.5">
                         <div
-                          className="mt-1 w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                          style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.15)' }}
+                          className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+                          style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.12)' }}
                         >
                           <Check size={11} style={{ color: 'hsl(var(--stage-pregnancy-accent))' }} />
                         </div>
                         <div>
-                          <p className="font-sans text-sm font-light text-foreground leading-snug">{b.text}</p>
-                          <p className="font-sans text-xs font-light text-muted-foreground/60">{b.sub}</p>
+                          <p className="font-sans text-sm text-foreground leading-snug">{b.text}</p>
+                          <p className="font-sans text-xs font-light text-muted-foreground/55 mt-0.5">{b.sub}</p>
                         </div>
                       </div>
                     ))}
@@ -373,7 +386,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     Start your journey
                     <ArrowRight size={14} />
                   </Link>
-                  <p className="font-sans text-[11px] font-light text-muted-foreground/40 mt-3">
+                  <p className="font-sans text-[11px] font-light text-muted-foreground/35 mt-3">
                     Takes a minute to begin
                   </p>
                 </div>
@@ -384,47 +397,53 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          S3: WHAT THIS MEANS — editorial interpretation
+          S3: WHAT THIS MEANS — editorial interpretation with week anchor
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-parchment pt-20 pb-20 md:pt-28 md:pb-24">
+      <section className="bg-parchment-dark py-20 md:py-28">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
           <Fade delay={0}>
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+              {/* Left — editorial interpretation */}
               <div className="md:col-span-7">
                 <p
-                  className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-5"
+                  className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-6"
                   style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
                 >
                   {result.insight.interpretationTitle}
                 </p>
-                <p className="font-serif text-lg sm:text-xl text-foreground/85 leading-[1.8] mb-8">
+                <p className="font-serif text-lg sm:text-xl text-foreground/80 leading-[1.85] mb-6">
                   {result.insight.interpretation}
                 </p>
-                <p className="font-serif italic text-sm text-foreground/50 leading-relaxed mb-8">
-                  {result.insight.reassurance}
-                </p>
+                <div
+                  className="border-l-2 pl-5 mb-8"
+                  style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.2)' }}
+                >
+                  <p className="font-serif italic text-sm text-foreground/45 leading-relaxed">
+                    {result.insight.reassurance}
+                  </p>
+                </div>
                 <div className="flex items-center gap-2">
-                  <Shield size={13} className="text-sage" />
-                  <p className="font-sans text-xs font-light text-muted-foreground">
+                  <Shield size={12} className="text-sage" />
+                  <p className="font-sans text-[11px] font-light text-muted-foreground/60">
                     Medically reviewed by Jenny Joines
                   </p>
                 </div>
               </div>
 
-              {/* Week anchor — the bridge to guidance */}
+              {/* Right — week anchor card */}
               <div className="md:col-span-5">
                 <Link
                   to={`/pregnancy/week/${result.currentWeek}`}
-                  className="group block rounded-2xl overflow-hidden border shadow-card-brand hover:shadow-soft transition-all"
-                  style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.12)' }}
+                  className="group block rounded-2xl overflow-hidden border hover:shadow-soft transition-all"
+                  style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.1)' }}
                 >
                   <div
-                    className="p-7 sm:p-8 flex flex-col items-center text-center"
-                    style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.08)' }}
+                    className="py-8 sm:py-10 flex flex-col items-center text-center"
+                    style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.07)' }}
                   >
                     <p
-                      className="font-sans text-[10px] font-light tracking-[0.2em] uppercase mb-3"
-                      style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.6)' }}
+                      className="font-sans text-[9px] font-light tracking-[0.25em] uppercase mb-3"
+                      style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.5)' }}
                     >
                       You are here
                     </p>
@@ -434,23 +453,23 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     >
                       {result.currentWeek}
                     </p>
-                    <p className="font-sans text-xs font-light text-muted-foreground">
+                    <p className="font-sans text-[11px] font-light text-muted-foreground/50">
                       of 40 weeks
                     </p>
                   </div>
-                  <div className="bg-card p-6 sm:p-7">
-                    <p className="font-sans text-[11px] font-light tracking-[0.15em] uppercase text-sage-muted mb-2">
-                      Your week {result.currentWeek} guide
+                  <div className="bg-card p-6">
+                    <p className="font-sans text-[10px] font-light tracking-[0.15em] uppercase text-sage-muted mb-2">
+                      Week {result.currentWeek} guide
                     </p>
-                    <h3 className="font-serif text-lg text-foreground leading-snug mb-2">
+                    <h3 className="font-serif text-base sm:text-lg text-foreground leading-snug mb-2">
                       {result.insight.weekSummary}
                     </h3>
                     <p className="font-sans text-xs font-light text-muted-foreground leading-relaxed mb-4">
-                      What is happening, how it can feel, and what to focus on right now.
+                      What is happening, how it can feel, and what to focus on.
                     </p>
                     <span className="inline-flex items-center gap-2 font-sans text-sm text-sage group-hover:text-sage-muted transition-colors">
                       Read your week guide
-                      <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
                 </Link>
@@ -461,76 +480,88 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          S4: RIGHT NOW — practical, stage-specific
+          S4: RIGHT NOW — three authored knowledge blocks
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-parchment-dark py-20 md:py-24">
+      <section className="bg-parchment py-20 md:py-24">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
           <Fade delay={0}>
-            <div className="flex items-center gap-3 mb-3">
-              <div
-                className="w-1.5 h-8 rounded-full"
-                style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.3)' }}
-              />
-              <p
-                className="font-sans text-[11px] font-light tracking-[0.2em] uppercase"
-                style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
-              >
-                Right now at week {result.currentWeek}
-              </p>
-            </div>
-            <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
-              What you need to know
-            </h2>
-            <p className="font-sans text-sm font-light text-muted-foreground mb-10 max-w-lg">
-              Three things that matter most at your stage right now.
-            </p>
-          </Fade>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              { icon: Baby, label: "Your body", text: result.insight.bodyText, num: "01" },
-              { icon: Heart, label: "What you may notice", text: result.insight.noticeText, num: "02" },
-              { icon: Calendar, label: "What to focus on", text: result.insight.focusText, num: "03" },
-            ].map((block, i) => (
-              <Fade key={i} delay={i * 80}>
-                <div className="bg-card border border-border/50 rounded-2xl shadow-card-brand h-full flex flex-col overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-14 items-start">
+              {/* Left intro */}
+              <div className="md:col-span-4">
+                <div className="flex items-center gap-3 mb-3">
                   <div
-                    className="h-0.5"
-                    style={{ backgroundColor: `hsl(var(--stage-pregnancy-accent) / ${0.15 + i * 0.12})` }}
+                    className="w-1 h-7 rounded-full"
+                    style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.3)' }}
                   />
-                  <div className="p-6 sm:p-7 flex flex-col flex-1">
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="flex items-center gap-3">
-                        <div
-                          className="w-8 h-8 rounded-lg flex items-center justify-center"
-                          style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.15)' }}
-                        >
-                          <block.icon size={15} style={{ color: 'hsl(var(--stage-pregnancy-accent))' }} />
+                  <p
+                    className="font-sans text-[10px] font-light tracking-[0.25em] uppercase"
+                    style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
+                  >
+                    Right now
+                  </p>
+                </div>
+                <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-4">
+                  What you need
+                  <br />to know at week {result.currentWeek}
+                </h2>
+                <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
+                  Three things that matter most at your stage right now. Not everything. Just what is relevant.
+                </p>
+              </div>
+
+              {/* Right — three blocks, varied hierarchy */}
+              <div className="md:col-span-8 space-y-5">
+                {[
+                  { icon: Baby, label: "What is happening", text: result.insight.bodyText, num: "01" },
+                  { icon: Heart, label: "What you may notice", text: result.insight.noticeText, num: "02" },
+                  { icon: Calendar, label: "What matters now", text: result.insight.focusText, num: "03" },
+                ].map((block, i) => (
+                  <Fade key={i} delay={i * 70}>
+                    <div
+                      className="rounded-2xl border overflow-hidden"
+                      style={{
+                        backgroundColor: i === 0 ? 'hsl(var(--card))' : 'hsl(var(--card) / 0.7)',
+                        borderColor: i === 0 ? 'hsl(var(--stage-pregnancy-accent) / 0.1)' : 'hsl(var(--border) / 0.4)',
+                        boxShadow: i === 0 ? '0 2px 16px -6px hsl(var(--stage-pregnancy-accent) / 0.06)' : 'none',
+                      }}
+                    >
+                      <div
+                        className="h-px"
+                        style={{ backgroundColor: `hsl(var(--stage-pregnancy-accent) / ${0.12 + i * 0.08})` }}
+                      />
+                      <div className="p-6 sm:p-7">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div
+                            className="w-7 h-7 rounded-lg flex items-center justify-center"
+                            style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.12)' }}
+                          >
+                            <block.icon size={14} style={{ color: 'hsl(var(--stage-pregnancy-accent))' }} />
+                          </div>
+                          <p className="font-sans text-xs font-light tracking-[0.1em] uppercase text-sage-muted flex-1">
+                            {block.label}
+                          </p>
+                          <span
+                            className="font-serif text-base select-none"
+                            style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.1)' }}
+                          >
+                            {block.num}
+                          </span>
                         </div>
-                        <p className="font-sans text-[11px] font-light tracking-[0.1em] uppercase text-sage-muted">
-                          {block.label}
+                        <p className="font-sans text-sm font-light text-muted-foreground leading-[1.8]">
+                          {block.text}
                         </p>
                       </div>
-                      <span
-                        className="font-serif text-lg select-none"
-                        style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.12)' }}
-                      >
-                        {block.num}
-                      </span>
                     </div>
-                    <p className="font-sans text-sm font-light text-muted-foreground leading-[1.8] flex-1">
-                      {block.text}
-                    </p>
-                  </div>
-                </div>
-              </Fade>
-            ))}
-          </div>
+                  </Fade>
+                ))}
+              </div>
+            </div>
+          </Fade>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          S5: JOURNEY TIMELINE — system map, alive, navigational
+          S5: YOUR PREGNANCY FROM HERE — system map, directional
       ═══════════════════════════════════════════════════════════════════ */}
       <section
         className="py-20 md:py-24"
@@ -538,25 +569,26 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       >
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
           <Fade delay={0}>
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-start">
-              <div className="md:col-span-2">
-                <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase text-sage-muted mb-3">
-                  Your journey
-                </p>
-                <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-4">
-                  What happens from here
-                </h2>
-                <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-8">
-                  Forty weeks. Three trimesters. One continuous, supported journey that moves with you.
-                </p>
+            <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted mb-3">
+              Your pregnancy from here
+            </p>
+            <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
+              One journey, one stage at a time
+            </h2>
+            <p className="font-sans text-sm font-light text-muted-foreground mb-12 max-w-lg">
+              From where you are now, guidance moves forward with you. Forty weeks. Three trimesters. One continuous, supported arc.
+            </p>
 
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-start">
+              {/* Stats */}
+              <div className="md:col-span-2">
                 <div className="flex gap-6 mb-6">
                   <div>
                     <p className="font-serif text-3xl text-foreground">{result.currentWeek - 1}</p>
                     <p className="font-sans text-[10px] font-light text-sage-muted tracking-wider uppercase">completed</p>
                   </div>
                   <div
-                    className="w-px"
+                    className="w-px self-stretch"
                     style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.1)' }}
                   />
                   <div>
@@ -564,18 +596,35 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     <p className="font-sans text-[10px] font-light text-sage-muted tracking-wider uppercase">remaining</p>
                   </div>
                 </div>
-
                 <p
-                  className="font-sans text-xs font-light"
-                  style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.6)' }}
+                  className="font-sans text-xs font-light mb-6"
+                  style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.55)' }}
                 >
                   {Math.round(progressPct)}% of the way through
                 </p>
+
+                {/* Next milestone callout */}
+                {result.upcomingMilestones[0] && (
+                  <div
+                    className="rounded-xl p-4 border"
+                    style={{
+                      backgroundColor: 'hsl(var(--stage-pregnancy) / 0.05)',
+                      borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.08)',
+                    }}
+                  >
+                    <p className="font-sans text-[9px] font-light tracking-wider uppercase text-sage-muted mb-2">Next milestone</p>
+                    <p className="font-sans text-sm text-foreground mb-0.5">{result.upcomingMilestones[0].label}</p>
+                    <p className="font-sans text-xs font-light text-muted-foreground/60">
+                      Week {result.upcomingMilestones[0].week} · {format(addDays(lmp, result.upcomingMilestones[0].week * 7), "d MMM")}
+                    </p>
+                  </div>
+                )}
               </div>
 
+              {/* Progress bar + trimester labels */}
               <div className="md:col-span-3">
-                <div className="bg-card border border-border/50 rounded-2xl p-6 sm:p-8 shadow-card-brand">
-                  {/* Progress bar */}
+                <div className="bg-card border border-border/40 rounded-2xl p-6 sm:p-8 shadow-card-brand">
+                  {/* Bar */}
                   <div className="relative mb-3">
                     <div className="flex rounded-full overflow-hidden h-3 bg-parchment-dark">
                       {trimesterZones.map((z, i) => {
@@ -606,41 +655,21 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     </div>
                   </div>
 
-                  <div className="flex justify-between mb-7">
+                  <div className="flex justify-between mb-6">
                     {trimesterZones.map((z, i) => (
-                      <div key={i} className={cn("text-center", result.trimesterNumber === i + 1 ? "opacity-100" : "opacity-40")}>
+                      <div key={i} className={cn("text-center", result.trimesterNumber === i + 1 ? "opacity-100" : "opacity-35")}>
                         <p className="font-sans text-[10px] font-light tracking-wider uppercase text-sage-muted">{z.label} trimester</p>
-                        <p className="font-sans text-[9px] font-light text-muted-foreground/50">Wk {z.start}–{z.end}</p>
+                        <p className="font-sans text-[9px] font-light text-muted-foreground/40">Wk {z.start}–{z.end}</p>
                       </div>
                     ))}
                   </div>
 
-                  {/* Next milestones preview */}
-                  <div className="border-t border-border/30 pt-5 space-y-4">
-                    <p className="font-sans text-[10px] font-light tracking-wider uppercase text-sage-muted mb-1">Coming up</p>
-                    {result.upcomingMilestones.slice(0, 2).map((m, i) => {
-                      const milestoneDate = addDays(lmp, m.week * 7);
-                      const daysAway = differenceInDays(milestoneDate, today);
-                      return (
-                        <div key={i} className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            <div className="w-7 h-7 rounded-full bg-parchment-dark flex items-center justify-center shrink-0">
-                              <span className="font-serif text-[11px] text-foreground/70">{m.week}</span>
-                            </div>
-                            <div>
-                              <p className="font-sans text-sm font-light text-foreground">{m.label}</p>
-                              <p className="font-sans text-[11px] font-light text-muted-foreground/60">{m.detail}</p>
-                            </div>
-                          </div>
-                          <div className="text-right shrink-0 ml-3">
-                            <p className="font-sans text-sm font-light text-foreground">{format(milestoneDate, "d MMM")}</p>
-                            <p className="font-sans text-[10px] font-light text-sage-muted">
-                              {daysAway > 0 ? `${daysAway}d away` : daysAway === 0 ? "today" : "passed"}
-                            </p>
-                          </div>
-                        </div>
-                      );
-                    })}
+                  {/* You are here annotation */}
+                  <div className="border-t border-border/25 pt-4 flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-terracotta shrink-0" />
+                    <p className="font-sans text-xs font-light text-foreground/70">
+                      You are at week {result.currentWeek} of 40 · {result.trimester}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -650,64 +679,64 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          S6: MILESTONES — forward-looking, structured, useful
+          S6: MILESTONES — elegant rail, forward-looking
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-parchment py-20 md:py-24">
+      <section className="bg-parchment-dark py-20 md:py-24">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
           <Fade delay={0}>
-            <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase text-sage-muted mb-3">
+            <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted mb-3">
               Looking ahead
             </p>
             <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-3">
               Your next milestones
             </h2>
             <p className="font-sans text-sm font-light text-muted-foreground mb-10 max-w-md">
-              Key checkpoints personalised to where you are now. Each one brings you closer.
+              Key moments ahead, personalised to where you are now.
             </p>
           </Fade>
 
           <div className="relative">
             <div
-              className="absolute left-[19px] top-5 bottom-5 w-px hidden sm:block"
-              style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.1)' }}
+              className="absolute left-[18px] top-5 bottom-5 w-px hidden sm:block"
+              style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.08)' }}
             />
-            <div className="space-y-4">
+            <div className="space-y-3.5">
               {result.upcomingMilestones.map((m, idx) => {
                 const milestoneDate = addDays(lmp, m.week * 7);
                 const daysAway = differenceInDays(milestoneDate, today);
                 const isFirst = idx === 0;
                 return (
-                  <Fade key={m.week} delay={idx * 60}>
-                    <div className="flex items-start gap-5 sm:gap-6">
+                  <Fade key={m.week} delay={idx * 50}>
+                    <div className="flex items-start gap-5">
                       <div
-                        className="relative z-10 shrink-0 w-10 h-10 rounded-full flex items-center justify-center shadow-sm border"
+                        className="relative z-10 shrink-0 w-9 h-9 rounded-full flex items-center justify-center border"
                         style={{
-                          backgroundColor: isFirst ? 'hsl(var(--stage-pregnancy) / 0.12)' : 'hsl(var(--card))',
-                          borderColor: isFirst ? 'hsl(var(--stage-pregnancy-accent) / 0.2)' : 'hsl(var(--border) / 0.5)',
+                          backgroundColor: isFirst ? 'hsl(var(--stage-pregnancy) / 0.1)' : 'hsl(var(--parchment-dark))',
+                          borderColor: isFirst ? 'hsl(var(--stage-pregnancy-accent) / 0.2)' : 'hsl(var(--border) / 0.4)',
                         }}
                       >
                         <span
-                          className="font-serif text-sm"
+                          className="font-serif text-xs"
                           style={{ color: isFirst ? 'hsl(var(--stage-pregnancy-accent))' : undefined }}
                         >
                           {m.week}
                         </span>
                       </div>
                       <div
-                        className="flex-1 rounded-2xl px-6 py-5 flex items-center justify-between gap-4 border"
+                        className="flex-1 rounded-xl px-5 py-4 flex items-center justify-between gap-3 border"
                         style={{
-                          backgroundColor: isFirst ? 'hsl(var(--card))' : 'hsl(var(--card) / 0.6)',
-                          borderColor: isFirst ? 'hsl(var(--stage-pregnancy-accent) / 0.12)' : 'hsl(var(--border) / 0.3)',
-                          boxShadow: isFirst ? '0 2px 12px -4px hsl(var(--stage-pregnancy-accent) / 0.08)' : 'none',
+                          backgroundColor: isFirst ? 'hsl(var(--card))' : 'hsl(var(--card) / 0.5)',
+                          borderColor: isFirst ? 'hsl(var(--stage-pregnancy-accent) / 0.1)' : 'hsl(var(--border) / 0.25)',
+                          boxShadow: isFirst ? '0 2px 12px -4px hsl(var(--stage-pregnancy-accent) / 0.06)' : 'none',
                         }}
                       >
                         <div>
-                          <p className={cn("font-sans text-sm mb-0.5", isFirst ? "font-normal text-foreground" : "font-light text-foreground")}>{m.label}</p>
-                          <p className="font-sans text-xs font-light text-muted-foreground">{m.detail}</p>
+                          <p className={cn("font-sans text-sm mb-0.5", isFirst ? "text-foreground" : "font-light text-foreground/80")}>{m.label}</p>
+                          <p className="font-sans text-[11px] font-light text-muted-foreground/55">{m.detail}</p>
                         </div>
                         <div className="text-right shrink-0">
                           <p className="font-sans text-sm font-light text-foreground">{format(milestoneDate, "d MMM")}</p>
-                          <p className="font-sans text-[10px] font-light text-sage-muted mt-0.5">
+                          <p className="font-sans text-[10px] font-light text-sage-muted">
                             {daysAway > 0 ? `in ${daysAway} days` : daysAway === 0 ? "today" : "passed"}
                           </p>
                         </div>
@@ -722,26 +751,26 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          S7: ASK — warm, stage-tied, supportive
+          S7: ASK — warm, human, stage-tied
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-parchment-dark py-20 md:py-24">
+      <section className="bg-parchment py-20 md:py-24">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-start">
             <Fade delay={0} className="md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
-                <Sparkles size={14} style={{ color: 'hsl(var(--stage-pregnancy-accent))' }} />
+                <Sparkles size={13} style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.7)' }} />
                 <p
-                  className="font-sans text-[11px] font-light tracking-[0.2em] uppercase"
-                  style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
+                  className="font-sans text-[10px] font-light tracking-[0.2em] uppercase"
+                  style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.7)' }}
                 >
-                  AI support for week {result.currentWeek}
+                  Ask about this stage
                 </p>
               </div>
-              <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-4">
+              <h2 className="font-serif text-2xl sm:text-[1.7rem] text-foreground leading-tight mb-4">
                 Something on your mind?
               </h2>
               <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
-                Ask anything about where you are right now. Your answer will be tailored to week {result.currentWeek} of pregnancy.
+                Whatever you are noticing, wondering, or unsure about. Your answer will be tailored to week {result.currentWeek}.
               </p>
               <div className="relative mb-4">
                 <input
@@ -750,22 +779,28 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                   onChange={(e) => setAiQuestion(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleAskNow()}
                   placeholder="What is on your mind?"
-                  className="w-full bg-card border border-border/60 rounded-xl px-5 py-4 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-sage/50 transition-all"
+                  className="w-full bg-card border border-border/50 rounded-xl px-5 py-3.5 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-sage/40 transition-all"
                 />
               </div>
               <button
                 onClick={handleAskNow}
-                className="flex items-center gap-2 border rounded-pill px-7 py-3 font-sans text-sm font-light text-foreground hover:shadow-card-brand transition-all"
-                style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.2)' }}
+                className="flex items-center gap-2 border rounded-pill px-6 py-2.5 font-sans text-sm font-light text-foreground hover:shadow-card-brand transition-all"
+                style={{ borderColor: 'hsl(var(--border) / 0.6)' }}
               >
-                <MessageCircle size={14} className="text-sage" />
+                <MessageCircle size={13} className="text-sage/70" />
                 Ask now
               </button>
             </Fade>
 
-            <Fade delay={100} className="md:col-span-3">
-              <div className="bg-card border border-border/50 rounded-2xl p-7 shadow-card-brand">
-                <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-5">
+            <Fade delay={80} className="md:col-span-3">
+              <div
+                className="rounded-2xl p-6 sm:p-7 border"
+                style={{
+                  backgroundColor: 'hsl(var(--stage-pregnancy) / 0.03)',
+                  borderColor: 'hsl(var(--border) / 0.4)',
+                }}
+              >
+                <p className="font-sans text-[10px] font-light tracking-[0.15em] uppercase text-sage-muted mb-5">
                   Common at week {result.currentWeek}
                 </p>
                 {[
@@ -781,10 +816,10 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                   <button
                     key={i}
                     onClick={() => setAiQuestion(q)}
-                    className="group w-full flex items-start gap-3 py-4 border-b border-border/30 last:border-0 text-left hover:pl-1 transition-all"
+                    className="group w-full flex items-start gap-3 py-3.5 border-b border-border/20 last:border-0 text-left hover:pl-1 transition-all"
                   >
-                    <MessageCircle size={12} className="text-sage mt-1 shrink-0" />
-                    <p className="font-sans text-sm font-light text-foreground leading-relaxed group-hover:text-sage transition-colors">{q}</p>
+                    <MessageCircle size={11} className="text-sage/50 mt-1 shrink-0" />
+                    <p className="font-sans text-sm font-light text-foreground/80 leading-relaxed group-hover:text-sage transition-colors">{q}</p>
                   </button>
                 ))}
               </div>
@@ -794,7 +829,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          S8: JOURNAL — tangible, premium, emotionally meaningful
+          S8: JOURNAL — tactile, intimate, meaningful
       ═══════════════════════════════════════════════════════════════════ */}
       <section
         className="py-20 md:py-24"
@@ -802,76 +837,80 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       >
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
           <Fade delay={0}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-center">
               {/* Left — emotional framing */}
-              <div>
-                <div className="flex items-center gap-3 mb-5">
-                  <BookOpen size={16} style={{ color: 'hsl(var(--stage-pregnancy-accent))' }} />
+              <div className="md:col-span-7">
+                <div className="flex items-center gap-2.5 mb-5">
+                  <BookOpen size={14} style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.7)' }} />
                   <p
-                    className="font-sans text-[11px] font-light tracking-[0.2em] uppercase"
-                    style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
+                    className="font-sans text-[10px] font-light tracking-[0.2em] uppercase"
+                    style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.7)' }}
                   >
-                    A companion to this journey
+                    A physical companion to your digital journey
                   </p>
                 </div>
-                <h3 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-4">
-                  Some moments deserve
-                  <br />
-                  to be held onto
+                <h3 className="font-serif text-2xl sm:text-[1.7rem] text-foreground leading-snug mb-5">
+                  Some moments deserve to be held onto
                 </h3>
                 <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-3">
-                  Week {result.currentWeek} will pass quickly. The feelings, questions, and quiet discoveries
-                  of this stage are worth recording.
+                  This stage will pass more quickly than it feels. The journal gives you a calm,
+                  private place to hold the thoughts, questions, and moments that matter as your journey unfolds.
                 </p>
                 <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-8">
-                  The Start of You Journal gives you a calm, private space to keep a record
-                  of how this journey unfolds. Alongside your digital guidance, a place to return to.
+                  Designed to sit alongside your weekly digital guidance. A record to return to, long after.
                 </p>
-                <div className="flex flex-wrap items-center gap-3">
+
+                <div className="flex flex-wrap items-center gap-4">
                   <Link
                     to="/journal"
-                    className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
+                    className="inline-flex items-center gap-2 border rounded-pill px-7 py-3 font-sans text-sm font-light text-foreground hover:shadow-card-brand transition-all"
+                    style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.15)' }}
                   >
                     Explore the journal
-                    <ArrowRight size={13} />
+                    <ArrowRight size={12} />
                   </Link>
+                  <p className="font-sans text-[11px] font-light text-muted-foreground/40">
+                    Available on Amazon
+                  </p>
                 </div>
               </div>
 
               {/* Right — product card */}
-              <div
-                className="rounded-2xl p-7 sm:p-8 border"
-                style={{
-                  backgroundColor: 'hsl(var(--stage-pregnancy) / 0.06)',
-                  borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.08)',
-                }}
-              >
-                <p className="font-sans text-[10px] font-light tracking-wider uppercase text-sage-muted mb-5">
-                  The Start of You Journal
-                </p>
-                <div className="space-y-3 mb-6">
-                  {[
-                    "Guided prompts for each stage of pregnancy",
-                    "Space for thoughts, feelings, and quiet moments",
-                    "A private record to return to, long after",
-                    "Works alongside your weekly digital guidance",
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div
-                        className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
-                        style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.35)' }}
-                      />
-                      <p className="font-sans text-sm font-light text-foreground/80 leading-relaxed">{item}</p>
-                    </div>
-                  ))}
-                </div>
+              <div className="md:col-span-5">
                 <div
-                  className="border-t pt-5"
-                  style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.08)' }}
+                  className="rounded-2xl p-6 sm:p-7 border"
+                  style={{
+                    backgroundColor: 'hsl(var(--stage-pregnancy) / 0.05)',
+                    borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.07)',
+                  }}
                 >
-                  <p className="font-serif italic text-sm text-foreground/50">
-                    "A quiet place to keep this part of your story."
+                  <p className="font-sans text-[9px] font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+                    The Start of You Journal
                   </p>
+                  <div className="space-y-3.5 mb-6">
+                    {[
+                      "Guided prompts for each stage of pregnancy",
+                      "Space for thoughts, feelings, and quiet moments",
+                      "A private record to return to, long after",
+                      "Works alongside your weekly digital guidance",
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <div
+                          className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
+                          style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.3)' }}
+                        />
+                        <p className="font-sans text-[13px] font-light text-foreground/75 leading-relaxed">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div
+                    className="border-t pt-5"
+                    style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.06)' }}
+                  >
+                    <p className="font-serif italic text-sm text-foreground/40">
+                      "A quiet place to keep this part of your story."
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -880,22 +919,17 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          S9: EXPLORE — intentional onward paths
+          S9: CONTINUE — slim, intentional onward paths
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-parchment py-16 md:py-20">
+      <section className="bg-parchment py-14 md:py-18">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
           <Fade delay={0}>
-            <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase text-sage-muted mb-6">
-              Explore your journey from here
+            <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted mb-6">
+              Continue from here
             </p>
           </Fade>
-          <div className="divide-y divide-border/40">
+          <div className="divide-y divide-border/30">
             {[
-              {
-                label: `Week ${result.currentWeek} guide`,
-                sub: "Your most relevant guidance right now",
-                href: `/pregnancy/week/${result.currentWeek}`,
-              },
               {
                 label: `${result.trimester} guide`,
                 sub: `Guidance for weeks ${result.trimesterNumber === 1 ? "1 to 12" : result.trimesterNumber === 2 ? "13 to 27" : "28 to 40"}`,
@@ -908,17 +942,17 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
               },
               {
                 label: "Guidance library",
-                sub: "Articles, guides, and answers for every stage",
+                sub: "Explore what matters next, at your stage",
                 href: "/guidance",
               },
             ].map((link, i) => (
-              <Fade key={i} delay={i * 50}>
-                <Link to={link.href} className="group flex items-center justify-between py-5 hover:pl-1 transition-all">
+              <Fade key={i} delay={i * 40}>
+                <Link to={link.href} className="group flex items-center justify-between py-4.5 hover:pl-1 transition-all">
                   <div>
-                    <p className="font-serif text-lg text-foreground group-hover:text-sage transition-colors leading-snug">{link.label}</p>
-                    <p className="font-sans text-sm font-light text-muted-foreground mt-0.5">{link.sub}</p>
+                    <p className="font-serif text-base sm:text-lg text-foreground group-hover:text-sage transition-colors leading-snug">{link.label}</p>
+                    <p className="font-sans text-xs font-light text-muted-foreground/60 mt-0.5">{link.sub}</p>
                   </div>
-                  <ArrowRight size={14} className="text-muted-foreground/40 group-hover:text-sage transition-colors ml-4 shrink-0" />
+                  <ArrowRight size={13} className="text-muted-foreground/30 group-hover:text-sage transition-colors ml-4 shrink-0" />
                 </Link>
               </Fade>
             ))}
@@ -927,54 +961,53 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          S10: FINAL CTA — trust-led closing with conviction
+          S10: FINAL TRUST CTA — conviction, not fade
       ═══════════════════════════════════════════════════════════════════ */}
       <section className="bg-parchment-dark py-20 md:py-28">
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl text-center">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
           <Fade delay={0}>
-            <p
-              className="font-sans text-[11px] font-light tracking-[0.3em] uppercase mb-6"
-              style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.6)' }}
-            >
-              Your starting point
-            </p>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground leading-snug mb-5">
-              You have your date.
-              <br />
-              <span className="font-serif italic text-foreground/60">Now your journey can begin.</span>
-            </h2>
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-md mx-auto mb-10">
-              You do not need to figure everything out today. You have your starting point.
-              We will help you take it one stage at a time, with guidance that moves with you.
-            </p>
-
-            <Link
-              to="/pregnancy"
-              className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4.5 font-sans text-base font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all mb-10"
-            >
-              Start your journey
-              <ArrowRight size={16} />
-            </Link>
-
-            {/* Trust cues */}
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 mb-8">
-              {[
-                { icon: Shield, text: "Medically reviewed" },
-                { icon: Calendar, text: "Personalised by stage" },
-                { icon: Clock, text: "Week-by-week support" },
-                { icon: Heart, text: "Save and return anytime" },
-              ].map((cue, i) => (
-                <div key={i} className="flex items-center gap-1.5">
-                  <cue.icon size={11} className="text-sage" />
-                  <p className="font-sans text-[11px] font-light text-muted-foreground">{cue.text}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="border-t border-border/30 pt-6 mx-auto max-w-sm">
-              <p className="font-sans text-[11px] font-light text-muted-foreground/50 leading-relaxed">
-                Pregnancy timelines are estimates. Always consult your healthcare provider for personalised medical advice.
+            <div className="text-center">
+              <p
+                className="font-sans text-[10px] font-light tracking-[0.35em] uppercase mb-7"
+                style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.5)' }}
+              >
+                Begin from here
               </p>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.25rem] text-foreground leading-snug mb-5">
+                You have your starting point.
+              </h2>
+              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-sm mx-auto mb-10">
+                You do not need to figure everything out at once. Save your stage, begin your journey,
+                and come back to support that understands where you are now.
+              </p>
+
+              <Link
+                to="/pregnancy"
+                className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 sm:px-12 py-4 sm:py-[1.15rem] font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all mb-10"
+              >
+                Start your journey
+                <ArrowRight size={16} />
+              </Link>
+
+              {/* Trust bar */}
+              <div className="flex flex-wrap justify-center gap-x-5 gap-y-2.5 mb-8">
+                {[
+                  { icon: Shield, text: "Medically reviewed guidance" },
+                  { icon: Calendar, text: "Personalised by your stage" },
+                  { icon: Heart, text: "Save your place and return anytime" },
+                ].map((cue, i) => (
+                  <div key={i} className="flex items-center gap-1.5">
+                    <cue.icon size={11} className="text-sage/60" />
+                    <p className="font-sans text-[11px] font-light text-muted-foreground/60">{cue.text}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="border-t border-border/20 pt-5 mx-auto max-w-xs">
+                <p className="font-sans text-[10px] font-light text-muted-foreground/40 leading-relaxed">
+                  Pregnancy timelines are estimates. Always consult your healthcare provider for personalised medical advice.
+                </p>
+              </div>
             </div>
           </Fade>
         </div>

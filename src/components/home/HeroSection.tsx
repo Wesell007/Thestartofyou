@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import heroLifestyle from "@/assets/home-hero-lifestyle.jpg";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
 import { Shield, BookOpen, Heart, Users } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -12,20 +13,34 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-[92vh] md:min-h-screen overflow-hidden flex flex-col justify-center pt-20 md:pt-0">
-      {/* Background image with gradient masks */}
-      <div className="absolute inset-0">
+      {/* Desktop: full-bleed background image */}
+      <div className="absolute inset-0 hidden md:block">
         <img
           src={heroLifestyle}
           alt=""
           aria-hidden="true"
           width={1920}
           height={1080}
-          className="w-full h-full object-cover object-[70%_20%] sm:object-[65%_25%] md:object-center"
+          className="w-full h-full object-cover object-center"
         />
-        {/* Mobile: softer overlay so image subject shows through; desktop: strong left wash for text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-parchment/95 via-parchment/80 via-45% to-parchment/10 md:from-parchment md:via-parchment/97 md:via-55% md:to-transparent" />
-        {/* Top vignette */}
+        <div className="absolute inset-0 bg-gradient-to-r from-parchment via-parchment/97 via-55% to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-b from-parchment/50 via-transparent to-parchment" />
+      </div>
+
+      {/* Mobile: intentional portrait image panel behind content */}
+      <div className="absolute inset-0 md:hidden">
+        <img
+          src={heroLifestyle}
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover object-[75%_15%] scale-110"
+        />
+        {/* Bottom-heavy gradient so text at top is readable, image shows at bottom */}
+        <div className="absolute inset-0 bg-gradient-to-b from-parchment via-parchment/90 via-35% to-parchment/30" />
+        {/* Left wash for text safety */}
+        <div className="absolute inset-0 bg-gradient-to-r from-parchment/80 via-transparent to-transparent" />
+        {/* Bottom fade */}
+        <div className="absolute inset-0 bg-gradient-to-t from-parchment via-transparent to-transparent" />
       </div>
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">

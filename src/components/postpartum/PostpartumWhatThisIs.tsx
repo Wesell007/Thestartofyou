@@ -30,7 +30,7 @@ const PostpartumWhatThisIs = () => {
             {/* Stat chip overlay */}
             <div
               className="absolute top-4 right-4 rounded-xl px-4 py-2.5 backdrop-blur-sm"
-              style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.7)' }}
+              style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.75)' }}
             >
               <span className="font-serif text-lg text-foreground">12</span>
               <span className="font-sans text-[10px] font-light text-foreground/60 uppercase tracking-wide ml-1.5">weeks of change</span>
@@ -45,15 +45,15 @@ const PostpartumWhatThisIs = () => {
             >
               About This Stage
             </p>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-6 leading-tight">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-5 leading-tight">
               What this stage is
             </h2>
             <div className="space-y-4 font-sans text-[15px] font-light text-muted-foreground leading-relaxed">
               <p>
-                Postpartum is a period of recovery, adjustment, and change, both physically and emotionally. It is one of the most significant transitions you will experience, and it rarely looks like what you expected.
+                Postpartum is one of the most significant transitions you will experience. It is recovery, adjustment, and change, happening physically and emotionally, all at once.
               </p>
               <p>
-                While there are common patterns, this stage often feels less structured than pregnancy. Days can blur together, routines take time to form, and experiences vary more than expected.
+                It rarely looks like what you expected. Days can blur together, routines take time, and the gap between what you imagined and what you're living can feel disorienting.
               </p>
             </div>
 
@@ -63,22 +63,28 @@ const PostpartumWhatThisIs = () => {
               style={{ borderColor: 'hsl(var(--stage-postpartum-accent) / 0.4)' }}
             >
               <p className="font-serif italic text-base text-foreground/75 leading-relaxed">
-                This space is here to guide you through it, clearly, calmly, and without overwhelm.
+                This space is here to guide you through it. Clearly, calmly, and without overwhelm.
               </p>
             </div>
 
-            {/* Emotional marker */}
-            <div
-              className="mt-6 inline-flex items-center gap-2 rounded-lg px-4 py-2"
-              style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.2)' }}
-            >
-              <div
-                className="w-1.5 h-1.5 rounded-full"
-                style={{ backgroundColor: 'hsl(var(--stage-postpartum-accent) / 0.5)' }}
-              />
-              <span className="font-sans text-xs font-light text-muted-foreground italic">
-                Adjustment and tenderness
-              </span>
+            {/* Emotional markers */}
+            <div className="mt-6 flex flex-wrap gap-2">
+              {["Recovery", "Adjustment", "Tenderness"].map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-sans text-xs font-light italic"
+                  style={{
+                    backgroundColor: 'hsl(var(--stage-postpartum) / 0.15)',
+                    color: 'hsl(var(--stage-postpartum-accent))',
+                  }}
+                >
+                  <span
+                    className="w-1 h-1 rounded-full"
+                    style={{ backgroundColor: 'hsl(var(--stage-postpartum-accent) / 0.4)' }}
+                  />
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
         </div>

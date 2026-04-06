@@ -1,46 +1,56 @@
-import { ExternalLink, BookOpen, Gift, Heart } from "lucide-react";
+import { ExternalLink, BookOpen, Gift, Heart, Star } from "lucide-react";
 
 const ProductFinalCTA = () => {
   return (
     <section className="page-ending frame-corner overflow-hidden">
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl text-center">
-        <div className="editorial-rule mb-8" />
-        <p className="stage-label mb-5">Your Journey</p>
-        <h2 className="font-serif text-3xl sm:text-4xl md:text-[2.8rem] text-foreground mb-5 leading-tight">
-          A place to come back to,{" "}
-          <span className="italic">long after the journey ends</span>
-        </h2>
-        <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-lg mx-auto mb-8">
-          The thoughts you capture now will mean something different in a year. Having somewhere to hold them is the gift. For yourself, or for someone you love.
-        </p>
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center">
+          {/* Left: emotional close */}
+          <div className="text-center md:text-left">
+            <div className="editorial-rule md:editorial-rule-left mb-6" />
+            <p className="stage-label mb-3">Worth having now</p>
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-[2.5rem] text-foreground mb-4 leading-tight">
+              A place to come back to,{" "}
+              <span className="italic">long after</span>
+            </h2>
+            <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-md mb-6">
+              The thoughts you write now will mean something different in a year. The moments you think you will remember are already fading. Having somewhere to hold them is the gift.
+            </p>
 
-        {/* Value anchors */}
-        <div className="flex flex-wrap justify-center gap-6 mb-10">
-          {[
-            { icon: BookOpen, label: "Guided prompts" },
-            { icon: Heart, label: "Emotional keepsake" },
-            { icon: Gift, label: "A meaningful gift" },
-          ].map((v) => (
-            <div key={v.label} className="flex items-center gap-2 text-center">
-              <v.icon size={14} className="text-sage" />
-              <span className="font-sans text-xs font-light text-muted-foreground">{v.label}</span>
+            {/* Value anchors */}
+            <div className="flex flex-wrap gap-4 mb-8 justify-center md:justify-start">
+              {[
+                { icon: BookOpen, label: "Guided prompts" },
+                { icon: Heart, label: "Emotional keepsake" },
+                { icon: Gift, label: "A meaningful gift" },
+              ].map((v) => (
+                <div key={v.label} className="flex items-center gap-2">
+                  <v.icon size={13} className="text-sage" />
+                  <span className="font-sans text-xs font-light text-muted-foreground">{v.label}</span>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* CTA */}
-        <div className="flex flex-col items-center gap-2.5">
-          <a
-            href="#"
-            className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
-          >
-            Get the journal
-            <ExternalLink size={14} />
-          </a>
-          <span className="inline-flex items-center gap-1.5 font-sans text-xs font-light text-muted-foreground">
-            <BookOpen size={11} className="text-sage" />
-            Available on Amazon
-          </span>
+          {/* Right: CTA card */}
+          <div className="card-elevated p-8 text-center" style={{ borderTopColor: 'hsl(var(--terracotta))', borderTopWidth: '2px' }}>
+            <div className="flex gap-0.5 justify-center mb-3">
+              {[1,2,3,4,5].map(i => <Star key={i} size={12} className="text-terracotta fill-terracotta" />)}
+            </div>
+            <p className="font-serif text-lg text-foreground mb-2">The Start of You Journal</p>
+            <p className="font-sans text-xs font-light text-muted-foreground mb-6">Guided pregnancy and postpartum journal</p>
+
+            <a
+              href="#"
+              className="flex items-center justify-center gap-2.5 w-full bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all mb-3"
+            >
+              Get the journal on Amazon
+              <ExternalLink size={14} />
+            </a>
+            <p className="font-sans text-[11px] font-light text-muted-foreground">
+              For yourself, or for someone who deserves a place to hold onto their journey.
+            </p>
+          </div>
         </div>
       </div>
     </section>

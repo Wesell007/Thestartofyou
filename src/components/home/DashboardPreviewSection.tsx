@@ -1,26 +1,27 @@
 const DashboardPreviewSection = () => {
   return (
-    <section className="relative bg-parchment section-spacing overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute top-0 right-0 w-[500px] h-[400px] glow-sage" />
+    <section className="relative bg-lavender-bg section-spacing overflow-hidden">
+      {/* Corner accents */}
+      <div className="absolute top-8 left-8 w-16 h-16 border-t border-l border-lavender/40 pointer-events-none hidden sm:block" />
+      <div className="absolute bottom-8 right-8 w-16 h-16 border-b border-r border-lavender/40 pointer-events-none hidden sm:block" />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
         {/* Header */}
-        <div className="text-center mb-12 sm:mb-16 md:mb-20">
-          <div className="editorial-rule mb-6 md:mb-8" />
+        <div className="text-center mb-10 sm:mb-14 md:mb-16">
+          <div className="editorial-rule mb-6 md:mb-8" style={{ background: 'hsl(var(--lavender))' }} />
           <p className="stage-label mb-4 md:mb-5">Your Dashboard</p>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-foreground mb-5 md:mb-7">
-            A Structured View of Your Journey
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-lavender-foreground mb-4 md:mb-6">
+            Everything you need, in one place
           </h2>
-          <p className="font-sans text-sm sm:text-base font-light text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            Your personal dashboard organises everything you need for each stage: weekly guidance, milestone tracking, reflection prompts, and curated resources.
+          <p className="font-sans text-sm sm:text-base font-light text-lavender-foreground/60 max-w-xl mx-auto leading-relaxed">
+            Your personal dashboard organises weekly guidance, milestone tracking, reflection prompts, and curated resources — updated every week.
           </p>
         </div>
 
-        {/* Browser mockup */}
-        <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-elevated border border-border/20 bg-card mx-auto max-w-3xl">
+        {/* Browser mockup — with shadow + scale */}
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-elevated border border-border/15 bg-card mx-auto max-w-4xl transform md:scale-[1.02] transition-transform">
           {/* Browser chrome */}
-          <div className="bg-parchment-dark px-4 sm:px-5 py-3 sm:py-4 flex items-center gap-2 border-b border-border/30">
+          <div className="bg-parchment-dark px-4 sm:px-5 py-3 sm:py-4 flex items-center gap-2 border-b border-border/20">
             <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-destructive/30" />
             <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-terracotta/30" />
             <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-sage/30" />
@@ -30,9 +31,9 @@ const DashboardPreviewSection = () => {
           </div>
 
           {/* Inner app UI */}
-          <div className="bg-card p-0">
+          <div className="bg-card">
             {/* App nav */}
-            <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-3.5 border-b border-border/30">
+            <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-3.5 border-b border-border/20">
               <span className="font-serif text-xs sm:text-sm text-foreground">The Start of You</span>
               <nav className="hidden sm:flex gap-5 md:gap-7">
                 {["Overview", "Journal", "Resources", "Profile"].map((item, i) => (
@@ -48,7 +49,7 @@ const DashboardPreviewSection = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
               {/* Main content */}
-              <div className="md:col-span-2 p-5 sm:p-7 md:border-r border-border/30">
+              <div className="md:col-span-2 p-5 sm:p-7 md:border-r border-border/20">
                 <p className="font-sans text-[10px] font-medium text-terracotta/80 tracking-[0.2em] uppercase mb-1.5">WEEK 18</p>
                 <h3 className="font-serif text-lg sm:text-xl text-foreground mb-1.5">Second Trimester</h3>
                 <p className="font-sans text-[11px] font-light text-muted-foreground/60 mb-5 sm:mb-7">Due date: 14 October 2025</p>
@@ -79,7 +80,7 @@ const DashboardPreviewSection = () => {
               </div>
 
               {/* Sidebar */}
-              <div className="p-5 sm:p-6 flex flex-col gap-5 sm:gap-7 border-t md:border-t-0 border-border/30">
+              <div className="p-5 sm:p-6 flex flex-col gap-5 sm:gap-7 border-t md:border-t-0 border-border/20">
                 <div className="bg-sage-bg/60 rounded-xl p-4 sm:p-5">
                   <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-sage/80 mb-4">UPCOMING</p>
                   {[
@@ -117,6 +118,11 @@ const DashboardPreviewSection = () => {
             </div>
           </div>
         </div>
+
+        {/* Supporting trust line */}
+        <p className="font-sans text-xs font-light text-lavender-foreground/40 text-center mt-8 md:mt-10">
+          Your dashboard updates every Sunday with personalised guidance for your current week.
+        </p>
       </div>
     </section>
   );

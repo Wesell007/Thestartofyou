@@ -120,6 +120,12 @@ const DueDateCalculatorForm = ({ onResult, onIVFResult, compact = false }: Props
   };
 
   const handleCalculate = () => {
+    // IVF-specific routing when callback provided
+    if (method === "ivf" && ivfDate && onIVFResult) {
+      onIVFResult(ivfDate, ivfType);
+      return;
+    }
+
     let lmp: Date | undefined;
     if (method === "lmp" && lmpDate) {
       lmp = addDays(lmpDate, -(cycleLength - 28));

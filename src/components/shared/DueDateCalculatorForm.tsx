@@ -160,7 +160,7 @@ const DueDateCalculatorForm = ({ onResult, compact = false }: Props) => {
           />
           <div>
             <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-3">Cycle length</p>
-            <div className="flex items-center gap-4">
+            <div className="relative inline-block">
               <select
                 value={cycleLength}
                 onChange={(e) => setCycleLength(Number(e.target.value))}
@@ -170,7 +170,7 @@ const DueDateCalculatorForm = ({ onResult, compact = false }: Props) => {
                   <option key={d} value={d}>{d} days{d === 28 ? " (average)" : ""}</option>
                 ))}
               </select>
-              <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-sage-muted pointer-events-none hidden" />
+              <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-sage-muted pointer-events-none" />
             </div>
             <p className="font-sans text-[11px] font-light text-muted-foreground/70 mt-2.5 leading-relaxed">
               28 days is average, but many cycles vary. Your estimate will adjust based on the cycle length you choose.

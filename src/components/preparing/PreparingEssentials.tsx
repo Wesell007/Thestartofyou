@@ -1,59 +1,58 @@
 const essentials = [
-  { icon: "◯", label: "A safe place to sleep" },
-  { icon: "◯", label: "A way to feed" },
-  { icon: "◯", label: "Clothing for warmth and comfort" },
-  { icon: "◯", label: "Basic care items" },
+  { label: "A safe place to sleep", why: "This is the single most important safety decision" },
+  { label: "A way to feed", why: "Breast or bottle — one clear plan is enough to start" },
+  { label: "Clothing for warmth and comfort", why: "Bodysuits and sleepsuits — nothing more needed" },
+  { label: "Basic care items", why: "Nappies, wipes, a changing surface — that's the core" },
 ];
 
 const PreparingEssentials = () => {
   return (
-    <section className="py-20 md:py-32" style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.35)" }}>
+    <section className="py-20 md:py-32" style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.4)" }}>
       <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-14 items-start">
-          <div>
-            <p className="font-sans text-xs font-light tracking-[0.2em] uppercase mb-5"
-              style={{ color: "hsl(var(--stage-preparing-accent))" }}>
-              Core Needs
-            </p>
-            <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-6">
-              What you <span className="italic">actually</span> need
-            </h2>
-            <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-6">
-              At its core, your baby needs four things. Everything else is additional — not essential.
-            </p>
+        {/* Section header — full width, editorial */}
+        <div className="mb-12 max-w-2xl">
+          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase mb-5"
+            style={{ color: "hsl(var(--stage-preparing-accent))" }}>
+            The only list that matters
+          </p>
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-[2.6rem] text-foreground leading-tight mb-5">
+            What you <span className="italic">actually</span> need
+          </h2>
+          <p className="font-sans text-base font-light text-muted-foreground leading-relaxed">
+            Your baby needs four things. Everything else — every product, every recommendation, every "must-have" list — is additional. Not essential.
+          </p>
+        </div>
 
-            {/* Stat chip */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border/40"
-              style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.7)" }}>
-              <span className="font-serif text-lg font-medium" style={{ color: "hsl(var(--stage-preparing-accent))" }}>4</span>
-              <span className="font-sans text-[10px] font-light tracking-widest uppercase text-muted-foreground">core needs</span>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            {essentials.map((item, i) => (
-              <div key={i} className="flex items-center gap-4 bg-card border border-border/40 rounded-xl px-6 py-4 shadow-card-brand">
-                <span className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-serif font-medium shrink-0"
+        {/* Essentials as horizontal cards with "why" */}
+        <div className="space-y-4 mb-8">
+          {essentials.map((item, i) => (
+            <div key={i} className="bg-card border border-border/40 rounded-xl shadow-card-brand overflow-hidden"
+              style={i === 0 ? { borderLeftWidth: "3px", borderLeftColor: "hsl(var(--stage-preparing-accent))" } : undefined}>
+              <div className="grid grid-cols-1 md:grid-cols-[auto_1fr_1.2fr] gap-4 md:gap-6 items-center px-6 py-5">
+                <span className="w-10 h-10 rounded-full flex items-center justify-center font-serif text-sm font-medium shrink-0"
                   style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.8)", color: "hsl(var(--stage-preparing-accent))" }}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="font-sans text-base font-light text-foreground leading-relaxed">
-                  {item.label}
+                <p className="font-serif text-lg text-foreground leading-snug">{item.label}</p>
+                <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed md:border-l md:border-border/30 md:pl-6">
+                  {item.why}
                 </p>
               </div>
-            ))}
-
-            {/* Meaning box */}
-            <div className="rounded-xl px-6 py-5 mt-2 border"
-              style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.5)", borderColor: "hsl(var(--stage-preparing-accent) / 0.2)" }}>
-              <p className="font-sans text-[10px] font-light tracking-[0.15em] uppercase mb-2"
-                style={{ color: "hsl(var(--stage-preparing-accent))" }}>
-                What this means
-              </p>
-              <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-                What matters most is not how much you have — but knowing these four things are covered.
-              </p>
             </div>
+          ))}
+        </div>
+
+        {/* Meaning box — wider, stronger */}
+        <div className="rounded-2xl px-7 py-6 border shadow-card-brand"
+          style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.6)", borderColor: "hsl(var(--stage-preparing-accent) / 0.25)" }}>
+          <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-5 items-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border/40 bg-card/60">
+              <span className="font-serif text-2xl font-medium" style={{ color: "hsl(var(--stage-preparing-accent))" }}>4</span>
+              <span className="font-sans text-[10px] font-light tracking-widest uppercase text-muted-foreground">core needs</span>
+            </div>
+            <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
+              If these four things are covered, you're prepared. Everything else can come later — or not at all.
+            </p>
           </div>
         </div>
       </div>

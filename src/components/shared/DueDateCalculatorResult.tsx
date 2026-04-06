@@ -374,12 +374,13 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     <br />
                     a guided journey
                   </h2>
-                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
+                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-4">
                     You do not need to figure out everything at once. Starting your journey
                     means the guidance moves with you, week by week, from where you are now.
                   </p>
-                  <p className="font-sans text-xs font-light text-muted-foreground/50 leading-relaxed">
-                    Starting your journey saves your stage and begins your personalised pregnancy guidance.
+                  <p className="font-sans text-xs font-light text-muted-foreground/45 leading-relaxed">
+                    Right now you are at week {result.currentWeek}. Starting your journey saves this, personalises your guidance,
+                    and gives you a place to return to whenever you need support.
                   </p>
                 </div>
 

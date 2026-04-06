@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Calendar } from "lucide-react";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
 
 const PregnancyHero = () => {
@@ -14,11 +15,11 @@ const PregnancyHero = () => {
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[500px] md:w-[700px] h-[400px] md:h-[600px] rounded-full blur-3xl"
-          style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.45)' }}
+          style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.5)' }}
         />
         <div
-          className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full blur-3xl opacity-30"
-          style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.15)' }}
+          className="absolute bottom-0 right-1/4 w-[300px] h-[350px] rounded-full blur-3xl"
+          style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.08)' }}
         />
       </div>
 
@@ -26,54 +27,77 @@ const PregnancyHero = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start">
 
           <div className="text-left">
-            {/* Stage trail */}
-            <div className="flex items-center gap-2 mb-5 md:mb-7">
-              <div className="h-px w-8" style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.4)' }} />
+            {/* Trimester colour trail */}
+            <div className="flex items-center gap-1.5 mb-5 md:mb-7 animate-fade-up">
+              {[
+                { var: '--stage-ttc-accent', w: 'w-5' },
+                { var: '--stage-pregnancy-accent', w: 'w-8' },
+                { var: '--stage-ivf-accent', w: 'w-5' },
+              ].map((t, i) => (
+                <div
+                  key={i}
+                  className={`h-0.5 rounded-full ${t.w}`}
+                  style={{ backgroundColor: `hsl(var(${t.var}) / ${i === 1 ? '0.6' : '0.25'})` }}
+                />
+              ))}
               <p
-                className="font-sans text-[11px] font-light tracking-[0.2em] uppercase"
+                className="font-sans text-[11px] font-light tracking-[0.2em] uppercase ml-2"
                 style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
               >
                 The Pregnancy Journey
               </p>
             </div>
 
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] text-foreground leading-[1.08] mb-5 md:mb-7 animate-fade-up">
-              Your week-by-week guide through pregnancy
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] text-foreground leading-[1.08] mb-4 md:mb-6 animate-fade-up">
+              Your week-by-week guide{" "}
+              <span className="italic">through pregnancy</span>
             </h1>
-            <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground leading-relaxed mb-4 md:mb-5 max-w-sm animate-fade-up [animation-delay:0.1s]">
-              Understand what's happening, what's normal, and what to focus on,
+            <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground leading-relaxed mb-5 md:mb-6 max-w-[22rem] animate-fade-up [animation-delay:0.1s]">
+              Understand what's happening, what's normal, and what to focus on
               from the very first week through to week 40.
             </p>
 
             {/* Trust markers */}
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 animate-fade-up [animation-delay:0.2s]">
-              {["40 weeks covered", "Updated weekly", "Free to start"].map((item) => (
-                <span key={item} className="flex items-center gap-2 font-sans text-xs font-light text-muted-foreground/70">
-                  <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.5)' }} />
-                  {item}
-                </span>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-6 md:mb-0 animate-fade-up [animation-delay:0.15s]">
+              {[
+                { label: "40 weeks", sub: "covered" },
+                { label: "3 trimesters", sub: "mapped" },
+                { label: "Free", sub: "to start" },
+              ].map((item) => (
+                <div key={item.label} className="flex flex-col">
+                  <span className="font-serif text-lg text-foreground leading-none">{item.label}</span>
+                  <span className="font-sans text-[10px] font-light text-muted-foreground/60 tracking-wide uppercase">{item.sub}</span>
+                </div>
               ))}
             </div>
           </div>
 
           <div className="animate-fade-up [animation-delay:0.15s]">
             <div
-              className="border rounded-2xl p-6 sm:p-8 shadow-card-brand"
+              className="border rounded-2xl p-6 sm:p-8 shadow-card-brand backdrop-blur-sm"
               style={{
-                backgroundColor: 'hsl(var(--stage-pregnancy) / 0.3)',
-                borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.12)',
+                backgroundColor: 'hsl(var(--stage-pregnancy) / 0.35)',
+                borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.15)',
               }}
             >
-              <p
-                className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-2"
-                style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
-              >
-                Due date calculator
-              </p>
+              <div className="flex items-center gap-2.5 mb-3">
+                <div
+                  className="w-7 h-7 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.12)' }}
+                >
+                  <Calendar size={13} style={{ color: 'hsl(var(--stage-pregnancy-accent))' }} />
+                </div>
+                <p
+                  className="font-sans text-[11px] font-light tracking-[0.2em] uppercase"
+                  style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
+                >
+                  Due date calculator
+                </p>
+              </div>
               <h2 className="font-serif text-xl sm:text-2xl text-foreground mb-1 leading-snug">
                 Find your due date
               </h2>
-              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-5 sm:mb-7">
+              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-5 sm:mb-6">
                 See what stage you're in and get guidance tailored to your week.
               </p>
               <DueDateCalculatorForm onResult={handleResult} compact />
@@ -83,7 +107,7 @@ const PregnancyHero = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-parchment-dark to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-parchment-dark to-transparent pointer-events-none" />
     </section>
   );
 };

@@ -44,11 +44,11 @@ const IVFCapture = () => {
               <div
                 key={i}
                 className="rounded-xl px-6 py-5 border shadow-card-brand"
-                style={{
-                  backgroundColor: i === 0 ? 'hsl(var(--stage-ivf) / 0.15)' : undefined,
-                  borderColor: i === 0 ? 'hsl(var(--stage-ivf-accent) / 0.15)' : 'hsl(var(--border) / 0.4)',
-                }}
-                className={`rounded-xl px-6 py-5 border shadow-card-brand ${i !== 0 ? 'bg-card border-border/40' : ''}`}
+                className={`rounded-xl px-6 py-5 border shadow-card-brand ${i === 0 ? '' : 'bg-card border-border/40'}`}
+                style={i === 0 ? {
+                  backgroundColor: 'hsl(var(--stage-ivf) / 0.15)',
+                  borderColor: 'hsl(var(--stage-ivf-accent) / 0.15)',
+                } : undefined}
               >
                 <p className="font-sans text-[10px] font-light tracking-[0.15em] uppercase text-muted-foreground/50 mb-2">{item.day}</p>
                 <div className="flex items-start gap-3">

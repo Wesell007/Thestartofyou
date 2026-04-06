@@ -70,11 +70,11 @@ const IVFWhatMakesDifferent = () => {
               <div
                 key={i}
                 className="rounded-xl p-5 sm:p-6 border flex items-start gap-5 hover:shadow-card-brand transition-shadow"
-                style={{
-                  backgroundColor: i === 0 ? 'hsl(var(--stage-ivf) / 0.12)' : undefined,
-                  borderColor: i === 0 ? 'hsl(var(--stage-ivf-accent) / 0.15)' : 'hsl(var(--border) / 0.4)',
-                }}
-                className={`rounded-xl p-5 sm:p-6 border flex items-start gap-5 hover:shadow-card-brand transition-shadow ${i !== 0 ? 'bg-card border-border/40' : ''}`}
+                className={`rounded-xl p-5 sm:p-6 border flex items-start gap-5 hover:shadow-card-brand transition-shadow ${i === 0 ? '' : 'bg-card border-border/40'}`}
+                style={i === 0 ? {
+                  backgroundColor: 'hsl(var(--stage-ivf) / 0.12)',
+                  borderColor: 'hsl(var(--stage-ivf-accent) / 0.15)',
+                } : undefined}
               >
                 <span
                   className="font-serif text-3xl leading-none select-none shrink-0"

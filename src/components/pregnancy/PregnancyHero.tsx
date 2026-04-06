@@ -9,6 +9,10 @@ const PregnancyHero = () => {
     navigate(`/due-date-results?lmp=${lmpDate.getTime()}`);
   };
 
+  const handleIVFResult = (transferDate: Date, transferType: string) => {
+    navigate(`/ivf-timeline?date=${transferDate.getTime()}&type=${transferType}`);
+  };
+
   return (
     <section className="relative bg-parchment overflow-hidden pt-20 pb-14 sm:pt-24 sm:pb-20 md:pt-36 md:pb-28">
       {/* Multi-layer ambient glow */}

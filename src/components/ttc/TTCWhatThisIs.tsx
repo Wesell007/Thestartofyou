@@ -16,11 +16,16 @@ const TTCWhatThisIs = () => {
                 height={640}
                 className="w-full h-56 sm:h-72 md:h-80 object-cover"
               />
+              {/* Stage accent overlay bar */}
+              <div
+                className="absolute bottom-0 left-0 right-0 h-1"
+                style={{ background: `linear-gradient(to right, hsl(var(--stage-ttc-accent) / 0.5), hsl(var(--stage-ttc-accent) / 0.1))` }}
+              />
             </div>
             <div className="mt-3 flex items-center gap-3">
-              <div className="h-px w-6" style={{ backgroundColor: 'hsl(var(--stage-ttc-accent) / 0.3)' }} />
-              <p className="font-serif italic text-sm text-muted-foreground">
-                A quiet moment of hope. The beginning of a new chapter.
+              <div className="h-px w-8" style={{ backgroundColor: 'hsl(var(--stage-ttc-accent) / 0.4)' }} />
+              <p className="font-serif italic text-sm text-muted-foreground/70">
+                The beginning is often quieter than you expect.
               </p>
             </div>
           </div>
@@ -33,39 +38,26 @@ const TTCWhatThisIs = () => {
             >
               About This Journey
             </p>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-6 leading-tight">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-5 leading-tight">
               What this journey is
             </h2>
             <div className="space-y-4 font-sans text-[15px] font-light text-muted-foreground leading-relaxed">
               <p>
-                Trying to conceive can feel both straightforward and uncertain at the same time.
+                Trying to conceive sits at the intersection of biology, timing, and emotional experience. The science is real, but the feelings are often harder to navigate than the process itself.
               </p>
               <p>
-                While there are clear biological patterns, such as ovulation and fertile windows, the experience itself often involves waiting, timing, and not always knowing exactly what's happening.
+                This guide exists to help you understand what's happening in your body, what to focus on, and what to let go of.
               </p>
             </div>
 
             {/* Pull quote */}
             <div
               className="mt-6 pl-5 border-l-2"
-              style={{ borderColor: 'hsl(var(--stage-ttc-accent) / 0.3)' }}
+              style={{ borderColor: 'hsl(var(--stage-ttc-accent) / 0.35)' }}
             >
-              <p className="font-serif italic text-base text-foreground/75 leading-relaxed">
-                This space is here to guide you through that process clearly and calmly, without pressure or false certainty.
+              <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
+                Not a countdown. Not a checklist. A space that understands that trying is its own experience.
               </p>
-            </div>
-
-            {/* Anchoring stat */}
-            <div className="mt-6 flex items-center gap-5">
-              {[
-                { n: "28", label: "day avg cycle" },
-                { n: "5–6", label: "fertile days" },
-              ].map((s) => (
-                <div key={s.label} className="flex items-baseline gap-1.5">
-                  <span className="font-serif text-xl text-foreground">{s.n}</span>
-                  <span className="font-sans text-[10px] font-light text-muted-foreground/60 uppercase tracking-wide">{s.label}</span>
-                </div>
-              ))}
             </div>
           </div>
         </div>

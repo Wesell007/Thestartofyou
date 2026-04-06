@@ -14,7 +14,6 @@ import SupportAISupport from "@/components/support/SupportAISupport";
 import SupportEmotionalReminder from "@/components/support/SupportEmotionalReminder";
 import SupportReflection from "@/components/support/SupportReflection";
 import SupportCapture from "@/components/support/SupportCapture";
-import SupportPathways from "@/components/support/SupportPathways";
 import SupportFinalCTA from "@/components/support/SupportFinalCTA";
 
 const Support = () => {
@@ -35,7 +34,6 @@ const Support = () => {
       <SupportEmotionalReminder />
       <SupportReflection />
       <SupportCapture />
-      <SupportPathways />
       <SupportFinalCTA />
       <Footer />
     </div>

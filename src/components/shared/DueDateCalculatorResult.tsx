@@ -23,10 +23,12 @@ interface StageInsight {
   bodyText: string;
   noticeText: string;
   focusText: string;
+  dontWorry: string;
   weekSummary: string;
   interpretationTitle: string;
   interpretation: string;
   emotionalTruth: string;
+  heroInterpretation: string;
 }
 
 export interface CalcResult {
@@ -63,80 +65,96 @@ const getInsight = (week: number): StageInsight => {
     bodyText: "Your body is beginning to produce pregnancy hormones at a cellular level. Implantation may have just occurred. Physical changes are almost entirely invisible at this stage.",
     noticeText: "Very little at this point. Some people notice mild cramping or spotting, but most feel no different from usual. Symptoms typically begin in the coming weeks.",
     focusText: "There is nothing urgent to do right now. Start prenatal vitamins if you have not already, and give yourself time to absorb the news at your own pace.",
+    dontWorry: "You do not need to tell anyone yet. You do not need to book every appointment today. You do not need symptoms to confirm what is real. This stage asks very little of you except patience.",
     weekSummary: "The very earliest days. Most changes are invisible right now.",
     interpretationTitle: "What this really means at this stage",
     interpretation: "You may not feel pregnant yet. That is not unusual. Pregnancy at this stage is measured from the first day of your last period, which means your body is only just beginning the process. There is no rush to plan, announce, or prepare. The most helpful thing right now is to take things slowly and trust that your body knows what it is doing.",
     emotionalTruth: "It is okay if this does not feel real yet. For many people, it takes weeks before it does.",
+    heroInterpretation: "You are at the very beginning. Most of what is happening right now is invisible, and that is completely normal. There is no rush to do anything except take this in.",
   };
   if (week <= 6) return {
     reassurance: "You are in the early weeks. Hormone levels are rising rapidly and your body is beginning to respond. It is normal if things still feel uncertain or not quite real.",
     bodyText: "HCG levels are climbing quickly. Your body is adjusting to support the pregnancy. Internally, the embryo is forming its earliest structures, including the foundations of the heart and nervous system.",
     noticeText: "Fatigue that arrives without warning. Breast tenderness. Nausea may be beginning or building. A heightened sense of smell. Some people feel very little at this stage, and that is also normal.",
     focusText: "Rest when your body asks for it. Think about booking your first midwife appointment. You do not need to plan everything right now. One thing at a time is enough.",
+    dontWorry: "You do not need to have chosen a hospital. You do not need to feel different every day. Symptoms that come and go are normal, not a warning sign. Give yourself permission to wait.",
     weekSummary: "Hormone levels are rising rapidly. Your body is beginning to respond.",
     interpretationTitle: "What this really means right now",
     interpretation: "This is the stage where pregnancy begins to become physical, but it may still feel abstract. Symptoms can arrive unevenly, some days more intense than others. There is no right way to feel at this point. Whether you are excited, anxious, or unsure, that is a normal part of early pregnancy. Your first scan is still a few weeks away, and that waiting period is one of the hardest parts.",
     emotionalTruth: "Feeling excited and scared at the same time is not contradictory. It is honest.",
+    heroInterpretation: "You are in the early weeks. Your body is beginning to change, even if you cannot always feel it. Things may still feel uncertain, and that is a normal part of this stage.",
   };
   if (week <= 9) return {
     reassurance: "Symptoms are often at their most intense around now. This phase is temporary, and what you are feeling is your body doing exactly what it needs to do.",
     bodyText: "Rapid development is happening. Your baby's major organs are beginning to form. Your body is working hard to support this, which is why symptoms can feel so present and sometimes overwhelming.",
     noticeText: "Nausea and morning sickness often peak during this window. Deep fatigue. Emotional sensitivity and mood changes. Your first scan is approaching, which can bring both relief and nervousness.",
     focusText: "Managing nausea and rest are priorities right now. Your first scan is near. Focus on getting through each day without expecting too much of yourself. This intensity does not last.",
+    dontWorry: "You do not need to be productive right now. You do not need to feel happy every day. The intensity of this stage does not mean something is wrong. Your body is doing enormous work and it is okay to slow down.",
     weekSummary: "Symptoms are often at their most intense right now. This is temporary.",
     interpretationTitle: "What this stage actually feels like",
     interpretation: "This is often the most physically demanding part of the first trimester. It can be hard to function normally while feeling this level of fatigue and nausea. Many people find it difficult to talk about because the pregnancy is often not yet shared. You are not being dramatic. What you are experiencing is significant, even if others cannot see it yet. Your first scan is close, and that can help things feel more real.",
     emotionalTruth: "You do not need to feel grateful every moment to be grateful overall. Hard days are part of this.",
+    heroInterpretation: "You are in one of the most physically intense stretches of early pregnancy. Your first scan is approaching, and this intensity is temporary. You are doing more than you think.",
   };
   if (week <= 12) return {
     reassurance: "You are approaching the end of the first trimester. This is a significant milestone. Many people begin to feel a shift in energy and confidence around this time.",
     bodyText: "Your baby's major organs are formed. The focus now shifts to growth and development. Your body is preparing for the second trimester, which often brings relief from early symptoms.",
     noticeText: "Nausea may begin to ease. Energy levels often start to improve. Your bump may not be visible yet, but internal changes are significant. The 12-week scan is near.",
     focusText: "Your 12-week scan is the major upcoming event. After that, many people begin to share their news. Focus on what feels right for you, there is no correct timeline for telling people.",
+    dontWorry: "You do not need to have told anyone yet. You do not need a visible bump to be properly pregnant. You do not need to have everything planned. The 12-week scan will bring more clarity.",
     weekSummary: "Approaching the end of the first trimester. The 12-week scan is near.",
     interpretationTitle: "Why this milestone matters",
     interpretation: "The 12-week mark carries weight for many people. It often represents the first moment the pregnancy begins to feel more certain. After the scan, symptoms typically begin to ease, energy returns, and there is often a shift from surviving to settling in. This is also when many people start to share their news. Whatever pace feels right for you is the right one.",
     emotionalTruth: "Reaching this point is significant. You have already been through a lot, even if it does not feel that way.",
+    heroInterpretation: "You are approaching a meaningful milestone. The first trimester is nearly behind you, and the 12-week scan will mark a shift in how this pregnancy feels. Energy often returns from here.",
   };
   if (week <= 20) return {
     reassurance: "You are in the second trimester. Energy often returns, nausea eases, and the pregnancy begins to feel more tangible. This is often a more comfortable phase.",
     bodyText: "Your baby is growing steadily. Organs are maturing and movement is increasing. Your bump is becoming visible. Internally, blood volume has increased significantly to support the pregnancy.",
     noticeText: "More energy. Less nausea. Your bump showing. You may feel baby movement for the first time. Round ligament discomfort as your body adjusts to accommodate growth.",
     focusText: "The 20-week anatomy scan is a key milestone ahead. Allow yourself to settle into this stage. Many people find this the most enjoyable phase of pregnancy.",
+    dontWorry: "You do not need to have bought anything yet. You do not need to have chosen a name. Not feeling movement every day at this stage is normal. Focus on settling in, not getting ahead.",
     weekSummary: "The second trimester. Energy often improves and nausea eases.",
     interpretationTitle: "What this stage feels like for most people",
     interpretation: "The second trimester is often described as the settling-in period. The intensity of the first trimester begins to lift, and things start to feel more manageable. Your bump becomes visible, movement may begin, and the pregnancy starts to feel more present in daily life. This is often a good time to plan, prepare, and enjoy the process before the third trimester brings a new set of physical demands.",
     emotionalTruth: "If the first trimester felt like surviving, this stage often feels like arriving.",
+    heroInterpretation: "You are in the second trimester now. Things may begin to feel more real, more present, and a little easier to hold. This is often the stage where pregnancy starts to feel like something you can settle into.",
   };
   if (week <= 27) return {
     reassurance: "You are well into the second trimester now. Your baby is becoming increasingly active and your body is adapting to support continued growth.",
     bodyText: "Your baby is developing rapidly. Movement becomes more noticeable and predictable. Your body is managing increased demands on circulation, digestion, and energy.",
     noticeText: "Regular baby movement becoming more familiar. Round ligament discomfort. Glucose tolerance testing may be offered soon. You may notice Braxton Hicks contractions beginning.",
     focusText: "Pay attention to movement patterns. Continue routine appointments. Begin thinking about birth preferences and the transition into the third trimester.",
+    dontWorry: "You do not need a finished nursery. You do not need a birth plan written yet. Braxton Hicks at this stage are normal practice contractions. There is time to prepare without pressure.",
     weekSummary: "Growing steadily. Your baby is becoming increasingly active.",
     interpretationTitle: "What to understand at this point",
     interpretation: "By now, the pregnancy is an established part of daily life. Movement patterns are becoming familiar, and the relationship with your baby is deepening. The third trimester is approaching, which brings more frequent appointments and a shift toward preparation. This is a good time to begin thinking about birth preferences, hospital bags, and practical arrangements without rushing.",
     emotionalTruth: "The middle of any journey can feel quiet. That does not mean nothing important is happening.",
+    heroInterpretation: "You are well into the second trimester. Your baby is increasingly active and the third trimester is approaching. This is a good time to begin thinking ahead, gently, without rushing.",
   };
   if (week <= 32) return {
     reassurance: "You are in the third trimester. Your baby is gaining weight and preparing for birth. The final stretch can feel both exciting and physically demanding.",
     bodyText: "Your baby is growing rapidly and laying down fat stores. Lungs are maturing. Your body is doing significant work, which is why discomfort often increases during this phase.",
     noticeText: "Back pressure and general discomfort increasing. Braxton Hicks contractions becoming more noticeable. Sleep becoming more difficult. Shortness of breath as your baby takes up more space.",
     focusText: "Begin finalising birth preparation and hospital bags. Rest when you can. Attend routine appointments and speak to your midwife about any concerns or questions.",
+    dontWorry: "You do not need to have everything ready right now. You do not need to know exactly what birth will look like. Discomfort at this stage is normal, not a sign that something is wrong. Your care team will guide the final steps.",
     weekSummary: "Third trimester. Your baby is gaining weight and preparing for birth.",
     interpretationTitle: "What to expect in the final stretch",
     interpretation: "The third trimester is physically demanding in a different way. Your body is carrying significant weight, sleep becomes harder, and daily tasks require more effort. This is normal and temporary. Many people feel a mix of readiness and anxiety as birth approaches. Focus on practical preparation without over-planning, and trust that your care team will guide you through the final stages.",
     emotionalTruth: "Feeling ready and not ready at the same time is not confusion. It is honesty.",
+    heroInterpretation: "You are in the third trimester. Your body is doing significant work and your baby is preparing for arrival. The final stretch can feel both exciting and heavy, and both of those feelings are valid.",
   };
   return {
     reassurance: "You are in the final weeks. Each day brings you closer. It is normal to feel a mix of anticipation, impatience, and readiness.",
     bodyText: "Your baby is fully formed and preparing for birth. They are gaining final weight and their lungs are completing maturation. Your body is preparing for labour.",
     noticeText: "Pelvic pressure as your baby descends. Nesting instinct may increase. Frequent Braxton Hicks. Weekly appointments with your care team to monitor progress.",
     focusText: "Focus on rest, preparation, and being ready without rushing. Your body and baby will set the pace. Trust your instincts and your care team.",
+    dontWorry: "You do not need to know exactly when it will happen. You do not need to feel completely ready. Very few people do. Your care team is monitoring you, and your body knows what to do when the time comes.",
     weekSummary: "The final weeks. Each day brings you closer.",
     interpretationTitle: "What this waiting period is really like",
     interpretation: "The final weeks are often a strange mix of urgency and stillness. You may feel completely ready one day and overwhelmed the next. Time can feel like it has slowed down. This is one of the most emotionally complex parts of the journey, and it is okay to feel all of it. Your baby will arrive, and you are more prepared than you think.",
     emotionalTruth: "The waiting is hard. But you have already done so much to get here.",
+    heroInterpretation: "You are in the final weeks of pregnancy. Each day brings you closer to meeting your baby. The waiting can feel long, but you are more prepared than you think.",
   };
 };
 
@@ -285,15 +303,24 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
             </div>
           </Fade>
 
-          {/* Interpretive line */}
-          <Fade delay={220}>
-            <p className="font-serif italic text-base sm:text-lg text-foreground/50 leading-relaxed max-w-lg mx-auto text-center mb-14">
+          {/* Interpretive paragraph — makes the result feel explained, not just shown */}
+          <Fade delay={200}>
+            <div className="max-w-lg mx-auto text-center mb-8">
+              <p className="font-sans text-sm font-light text-foreground/60 leading-relaxed">
+                {result.insight.heroInterpretation}
+              </p>
+            </div>
+          </Fade>
+
+          {/* Emotional truth — quieter, underneath */}
+          <Fade delay={240}>
+            <p className="font-serif italic text-[15px] text-foreground/40 leading-relaxed max-w-md mx-auto text-center mb-14">
               {result.insight.emotionalTruth}
             </p>
           </Fade>
 
           {/* CTA cluster — dominant primary */}
-          <Fade delay={280}>
+          <Fade delay={300}>
             <div className="flex flex-col items-center gap-4">
               <Link
                 to="/pregnancy"
@@ -309,8 +336,8 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                 <MessageCircle size={13} className="text-sage/60" />
                 Ask about this stage
               </Link>
-              <p className="font-sans text-[11px] font-light text-muted-foreground/35 mt-1 max-w-xs text-center leading-relaxed">
-                This is your starting point. From here, your guidance can become personal.
+              <p className="font-sans text-[11px] font-light text-muted-foreground/30 mt-1 max-w-xs text-center leading-relaxed">
+                Save your stage and begin personalised guidance from week {result.currentWeek}
               </p>
             </div>
           </Fade>
@@ -347,12 +374,13 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     <br />
                     a guided journey
                   </h2>
-                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
+                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-4">
                     You do not need to figure out everything at once. Starting your journey
                     means the guidance moves with you, week by week, from where you are now.
                   </p>
-                  <p className="font-sans text-xs font-light text-muted-foreground/50 leading-relaxed">
-                    Starting your journey saves your stage and begins your personalised pregnancy guidance.
+                  <p className="font-sans text-xs font-light text-muted-foreground/45 leading-relaxed">
+                    Right now you are at week {result.currentWeek}. Starting your journey saves this, personalises your guidance,
+                    and gives you a place to return to whenever you need support.
                   </p>
                 </div>
 
@@ -554,6 +582,34 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     </div>
                   </Fade>
                 ))}
+
+                {/* Anxiety killer — the thing that makes this genuinely helpful */}
+                <Fade delay={280}>
+                  <div
+                    className="rounded-2xl border overflow-hidden"
+                    style={{
+                      backgroundColor: 'hsl(var(--sage-bg) / 0.4)',
+                      borderColor: 'hsl(var(--sage) / 0.1)',
+                    }}
+                  >
+                    <div className="p-6 sm:p-7">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div
+                          className="w-7 h-7 rounded-lg flex items-center justify-center"
+                          style={{ backgroundColor: 'hsl(var(--sage) / 0.12)' }}
+                        >
+                          <Shield size={14} className="text-sage" />
+                        </div>
+                        <p className="font-sans text-xs font-light tracking-[0.1em] uppercase text-sage-muted flex-1">
+                          What you do not need to worry about yet
+                        </p>
+                      </div>
+                      <p className="font-sans text-sm font-light text-muted-foreground leading-[1.8]">
+                        {result.insight.dontWorry}
+                      </p>
+                    </div>
+                  </div>
+                </Fade>
               </div>
             </div>
           </Fade>
@@ -963,22 +1019,32 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       {/* ═══════════════════════════════════════════════════════════════════
           S10: FINAL TRUST CTA — conviction, not fade
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-parchment-dark py-20 md:py-28">
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
+      <section className="bg-parchment-dark py-20 md:py-28 relative overflow-hidden">
+        {/* Subtle closing glow */}
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse, hsl(var(--stage-pregnancy) / 0.06) 0%, transparent 70%)' }}
+        />
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl relative z-10">
           <Fade delay={0}>
             <div className="text-center">
               <p
                 className="font-sans text-[10px] font-light tracking-[0.35em] uppercase mb-7"
                 style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.5)' }}
               >
-                Begin from here
+                Week {result.currentWeek} · {result.trimester}
               </p>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.25rem] text-foreground leading-snug mb-5">
-                You have your starting point.
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.25rem] text-foreground leading-snug mb-4">
+                You have your date.
+                <br />
+                <span className="font-serif italic text-foreground/50">Now your journey can begin.</span>
               </h2>
-              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-sm mx-auto mb-10">
-                You do not need to figure everything out at once. Save your stage, begin your journey,
-                and come back to support that understands where you are now.
+              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-sm mx-auto mb-4">
+                You do not need to figure everything out at once. Begin with guidance that moves with you,
+                one week at a time, from where you are now.
+              </p>
+              <p className="font-sans text-xs font-light text-muted-foreground/40 mb-10 max-w-xs mx-auto">
+                Starting your journey saves your stage, personalises your guidance, and gives you somewhere to come back to.
               </p>
 
               <Link
@@ -998,13 +1064,13 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                 ].map((cue, i) => (
                   <div key={i} className="flex items-center gap-1.5">
                     <cue.icon size={11} className="text-sage/60" />
-                    <p className="font-sans text-[11px] font-light text-muted-foreground/60">{cue.text}</p>
+                    <p className="font-sans text-[11px] font-light text-muted-foreground/55">{cue.text}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="border-t border-border/20 pt-5 mx-auto max-w-xs">
-                <p className="font-sans text-[10px] font-light text-muted-foreground/40 leading-relaxed">
+              <div className="border-t border-border/15 pt-5 mx-auto max-w-xs">
+                <p className="font-sans text-[10px] font-light text-muted-foreground/35 leading-relaxed">
                   Pregnancy timelines are estimates. Always consult your healthcare provider for personalised medical advice.
                 </p>
               </div>

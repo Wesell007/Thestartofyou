@@ -1,22 +1,29 @@
 import { BookOpen, ArrowUpRight } from "lucide-react";
 
+const entries = [
+  "I keep adding things to the list — I think I need to stop and ask what actually matters.",
+  "We don't have much space. I want to keep things simple but I'm worried it's not enough.",
+  "I just want to feel ready. But I'm not sure what 'ready' even looks like.",
+];
+
 const PreparingCapture = () => {
   return (
-    <section className="bg-lavender-section py-24 md:py-32">
+    <section className="py-20 md:py-32" style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.35)" }}>
       <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-14 items-center">
           <div>
-            <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+            <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase mb-5"
+              style={{ color: "hsl(var(--stage-preparing-accent))" }}>
               Your Story
             </p>
             <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-6">
               Capture this stage
             </h2>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-4">
-              Preparing for your baby often brings a lot of thoughts, what you need, what you might be missing, and how this will all feel.
+              Preparing often brings a lot of thoughts — what you need, what you might be missing, and how this will all feel.
             </p>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-8">
-              Many parents choose to write things down during this stage, not just plans, but what's on their mind as they get ready.
+              Writing things down during this stage can help — not just plans, but what's on your mind as you get ready.
             </p>
             <a
               href="/"
@@ -28,14 +35,11 @@ const PreparingCapture = () => {
           </div>
 
           <div className="flex flex-col gap-4">
-            {[
-              "I keep adding things to the list, I think I need to stop and ask what actually matters.",
-              "We don't have much space. I want to keep things simple but I'm worried it's not enough.",
-              "I just want to feel ready. But I'm not sure what 'ready' even looks like.",
-            ].map((entry, i) => (
-              <div key={i} className="bg-card border border-border/40 rounded-md px-6 py-4 shadow-card-brand">
+            {entries.map((entry, i) => (
+              <div key={i} className="bg-card border border-border/40 rounded-xl px-6 py-5 shadow-card-brand"
+                style={i === 0 ? { borderLeftWidth: "3px", borderLeftColor: "hsl(var(--stage-preparing-accent))" } : undefined}>
                 <div className="flex items-start gap-3">
-                  <BookOpen size={14} className="text-sage mt-0.5 shrink-0" />
+                  <BookOpen size={14} className="mt-0.5 shrink-0" style={{ color: "hsl(var(--stage-preparing-accent))" }} />
                   <p className="font-serif italic text-base text-foreground/70 leading-relaxed">{entry}</p>
                 </div>
               </div>

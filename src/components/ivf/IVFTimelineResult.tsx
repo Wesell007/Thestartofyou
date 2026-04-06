@@ -286,16 +286,16 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S1: IVF RESULT HERO
           Cinematic — the emotional anchor of the page
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(var(--stage-ivf)) 0%, hsl(var(--stage-ivf) / 0.3) 70%, hsl(var(--parchment)) 100%)" }}>
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(var(--stage-ivf)) 0%, hsl(var(--stage-ivf) / 0.25) 75%, hsl(var(--parchment)) 100%)" }}>
         {/* Ambient layers */}
-        <div className="absolute inset-0 opacity-[0.035]" style={{ backgroundImage: "radial-gradient(circle at 15% 40%, hsl(var(--stage-ivf-accent)), transparent 45%), radial-gradient(circle at 85% 60%, hsl(var(--lavender)), transparent 45%)" }} />
-        <div className="absolute bottom-0 left-0 right-0 h-32" style={{ background: "linear-gradient(to top, hsl(var(--parchment)), transparent)" }} />
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 20% 35%, hsl(var(--stage-ivf-accent)), transparent 50%), radial-gradient(circle at 80% 65%, hsl(var(--lavender)), transparent 50%)" }} />
+        <div className="absolute bottom-0 left-0 right-0 h-40" style={{ background: "linear-gradient(to top, hsl(var(--parchment)), transparent)" }} />
 
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pt-32 md:pt-40 pb-24 md:pb-32 relative z-10">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pt-32 md:pt-44 pb-28 md:pb-36 relative z-10">
 
           {/* Eyebrow */}
           <Fade delay={0}>
-            <div className="flex items-center gap-3 mb-14">
+            <div className="flex items-center gap-3 mb-10">
               <div className="h-px w-10" style={{ background: "hsl(var(--stage-ivf-accent) / 0.3)" }} />
               <p className="font-sans text-[11px] font-light tracking-[0.3em] uppercase" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
                 Your IVF timeline
@@ -303,12 +303,12 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
             </div>
           </Fade>
 
-          {/* Primary result — dramatic scale */}
+          {/* Primary result */}
           <Fade delay={100}>
-            <p className="font-sans text-sm font-light text-foreground/40 mb-4 tracking-wide">You are currently</p>
-            <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-5 mb-4">
-              <span className="font-serif text-[4.5rem] sm:text-[6rem] md:text-[8rem] text-foreground leading-[0.85] tracking-tight">{clampedDpt}</span>
-              <span className="font-serif text-xl sm:text-2xl md:text-3xl font-light text-foreground/50 italic">
+            <p className="font-sans text-[13px] font-light text-foreground/35 mb-3 tracking-wide">You are currently</p>
+            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 mb-6">
+              <span className="font-serif text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] text-foreground leading-[0.85] tracking-tight">{clampedDpt}</span>
+              <span className="font-serif text-xl sm:text-2xl md:text-[1.75rem] font-light text-foreground/45 italic">
                 {clampedDpt === 1 ? "day" : "days"} post transfer
               </span>
             </div>

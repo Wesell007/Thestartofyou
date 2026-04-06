@@ -1,7 +1,19 @@
 const problems = [
-  { title: "Overwhelming", detail: "Hundreds of articles, apps, and opinions pulling in every direction." },
-  { title: "Disconnected", detail: "Information that doesn't know where you are or what you actually need." },
-  { title: "Hard to trust", detail: "Conflicting advice that leaves you more uncertain than before." },
+  {
+    num: "01",
+    title: "Overwhelming",
+    detail: "Every app, blog, and forum adds more. The volume of information grows, but clarity doesn't.",
+  },
+  {
+    num: "02",
+    title: "Disconnected",
+    detail: "Advice that doesn't know your stage, your context, or what you've already been through.",
+  },
+  {
+    num: "03",
+    title: "Hard to trust",
+    detail: "Conflicting opinions from every direction. The more you read, the less sure you feel.",
+  },
 ];
 
 const AboutProblem = () => {
@@ -10,40 +22,35 @@ const AboutProblem = () => {
       <div className="section-divider absolute top-0 left-0 right-0" />
       <div className="container mx-auto px-6 md:px-10 max-w-4xl">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-start">
-          {/* Left: headline + context */}
+          {/* Left */}
           <div className="md:col-span-2">
             <div className="editorial-rule mb-6" />
             <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-4">
-              Most journeys don't feel guided
+              The journey rarely<br />feels guided
             </h2>
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-              From trying to conceive to your baby's first year, there is no shortage of information. But most of it leaves you feeling further from clarity, not closer.
+            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-4">
+              From trying to conceive through to your baby's first year, there is no shortage of information. But most of it leaves you further from clarity, not closer.
+            </p>
+            <p className="font-serif text-sm italic text-foreground/70">
+              More information has not meant better support.
             </p>
           </div>
 
-          {/* Right: problem cards */}
-          <div className="md:col-span-3 space-y-4">
-            {problems.map((p, i) => (
+          {/* Right: numbered problem cards */}
+          <div className="md:col-span-3 space-y-3">
+            {problems.map((p) => (
               <div
-                key={p.title}
-                className="card-elevated p-5 md:p-6 border-l-2"
-                style={{ borderLeftColor: `hsl(var(--sage) / ${0.3 + i * 0.2})` }}
+                key={p.num}
+                className="card-elevated p-5 md:p-6 flex gap-4 items-start"
               >
-                <h3 className="font-serif text-base text-foreground mb-1">{p.title}</h3>
-                <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">{p.detail}</p>
+                <span className="font-serif text-lg text-sage/40 leading-none mt-0.5 select-none">{p.num}</span>
+                <div>
+                  <h3 className="font-serif text-base text-foreground mb-1">{p.title}</h3>
+                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">{p.detail}</p>
+                </div>
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Closing editorial line */}
-        <div className="text-center mt-12 space-y-1.5">
-          <p className="font-serif text-sm italic text-foreground/80">
-            The problem isn't a lack of information.
-          </p>
-          <p className="font-serif text-sm italic text-foreground/80">
-            It's a lack of clear, relevant guidance.
-          </p>
         </div>
       </div>
     </section>

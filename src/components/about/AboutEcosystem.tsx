@@ -1,16 +1,18 @@
+import { ArrowRight } from "lucide-react";
+
 const stages = [
-  { label: "Trying to conceive", color: "var(--stage-ttc-accent)" },
-  { label: "IVF", color: "var(--stage-ivf-accent)" },
-  { label: "Pregnancy", color: "var(--stage-pregnancy-accent)" },
-  { label: "Postpartum", color: "var(--stage-postpartum-accent)" },
-  { label: "First year", color: "var(--stage-firstyear-accent)" },
+  { label: "Trying to conceive", accent: "var(--stage-ttc-accent)" },
+  { label: "IVF", accent: "var(--stage-ivf-accent)" },
+  { label: "Pregnancy", accent: "var(--stage-pregnancy-accent)" },
+  { label: "Postpartum", accent: "var(--stage-postpartum-accent)" },
+  { label: "First year", accent: "var(--stage-firstyear-accent)" },
 ];
 
 const layers = [
-  "Preparing for baby",
-  "Emotional support",
-  "Guided journal",
-  "Tools and calculators",
+  { label: "Preparing for baby", desc: "Practical clarity without overwhelm" },
+  { label: "Emotional support", desc: "Recognising and navigating difficult feelings" },
+  { label: "Guided journal", desc: "A physical companion to the journey" },
+  { label: "Tools and calculators", desc: "Due dates, ovulation, timelines" },
 ];
 
 const AboutEcosystem = () => {
@@ -23,41 +25,47 @@ const AboutEcosystem = () => {
           A journey that grows with you
         </h2>
         <p className="font-sans text-sm font-light text-muted-foreground text-center mb-10 max-w-md mx-auto leading-relaxed">
-          Five core stages. Supporting layers that sit alongside every step. One connected experience.
+          Five core stages connected into one experience. Supporting layers that sit alongside every step.
         </p>
 
-        {/* Stage trail */}
-        <div className="flex flex-wrap justify-center gap-3 mb-8">
-          {stages.map((s) => (
-            <span
-              key={s.label}
-              className="font-sans text-xs font-light tracking-wide text-foreground border rounded-pill px-4 py-2 bg-parchment"
-              style={{ borderColor: `hsl(${s.color.replace("var(", "").replace(")", "")})`, borderWidth: "1.5px" }}
-            >
-              {s.label}
-            </span>
-          ))}
+        {/* Stage trail: connected line */}
+        <div className="relative max-w-2xl mx-auto mb-12">
+          <div className="absolute top-4 left-6 right-6 h-px bg-border hidden md:block" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+            {stages.map((s, i) => (
+              <div key={s.label} className="flex flex-col items-center text-center relative">
+                <div
+                  className="w-8 h-8 rounded-full border-2 bg-parchment flex items-center justify-center mb-2 relative z-10"
+                  style={{ borderColor: `hsl(${s.accent.replace("var(", "").replace(")", "")})` }}
+                >
+                  <span className="font-serif text-xs text-foreground/70">{i + 1}</span>
+                </div>
+                <span className="font-sans text-xs font-light text-foreground leading-tight">{s.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Supporting layers */}
-        <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="flex items-center justify-center gap-3 mb-5">
           <div className="h-px w-6 bg-border" />
           <p className="stage-label">Supporting layers</p>
           <div className="h-px w-6 bg-border" />
         </div>
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto mb-10">
           {layers.map((l) => (
-            <span
-              key={l}
-              className="font-sans text-xs font-light text-muted-foreground border border-border/60 rounded-pill px-4 py-2"
-            >
-              {l}
-            </span>
+            <div key={l.label} className="card-elevated p-4 flex items-start gap-3">
+              <ArrowRight size={14} className="text-sage mt-0.5 flex-shrink-0" />
+              <div>
+                <span className="font-sans text-sm text-foreground">{l.label}</span>
+                <p className="font-sans text-xs font-light text-muted-foreground">{l.desc}</p>
+              </div>
+            </div>
           ))}
         </div>
 
-        <p className="font-serif text-sm italic text-foreground/80 max-w-sm mx-auto text-center">
-          Each stage connects, so you're never starting over, just moving forward.
+        <p className="font-serif text-sm italic text-foreground/70 max-w-sm mx-auto text-center">
+          Each stage connects. You are never starting over, just moving forward.
         </p>
       </div>
     </section>

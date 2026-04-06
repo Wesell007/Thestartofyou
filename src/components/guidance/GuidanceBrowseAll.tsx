@@ -28,12 +28,12 @@ const GuidanceBrowseAll = () => {
   }, [activeFilter, allArticles]);
 
   return (
-    <section className="bg-card/60 py-20 md:py-28">
+    <section className="bg-parchment py-16 sm:py-20 md:py-28">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         <div className="mb-8 md:mb-10">
           <div className="editorial-rule-left mb-5" />
           <p className="stage-label mb-3">All guidance</p>
-          <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight">
+          <h2 className="font-serif text-xl sm:text-2xl md:text-3xl text-foreground leading-tight">
             Browse all articles
           </h2>
           <p className="font-sans text-sm font-light text-muted-foreground mt-2 max-w-lg leading-relaxed">
@@ -42,7 +42,7 @@ const GuidanceBrowseAll = () => {
         </div>
 
         {/* Filter chips */}
-        <div className="flex flex-wrap gap-2 mb-10 md:mb-12">
+        <div className="flex flex-wrap gap-2 mb-8 md:mb-10">
           <button
             onClick={() => setActiveFilter(null)}
             className={`px-4 py-2 rounded-full text-sm font-sans transition-all duration-200 ${
@@ -90,10 +90,10 @@ const GuidanceBrowseAll = () => {
 const ArticleCard = ({ article }: { article: ArticleData }) => (
   <Link
     to={`/articles/${article.slug}`}
-    className="group block rounded-2xl bg-parchment border border-border/30 hover:border-sage/20 hover:shadow-md transition-all duration-300 overflow-hidden"
+    className="group block rounded-2xl bg-card border border-border/30 hover:border-sage/20 hover:shadow-card-hover transition-all duration-300 overflow-hidden"
   >
-    <div className="p-6 md:p-7">
-      <div className="flex flex-wrap gap-1.5 mb-3.5">
+    <div className="p-5 sm:p-6">
+      <div className="flex flex-wrap gap-1.5 mb-3">
         {article.journey?.slice(0, 2).map((j) => (
           <span key={j} className="px-2 py-0.5 rounded-full bg-muted/60 text-muted-foreground text-[9px] font-sans tracking-[0.12em] uppercase">
             {journeyLabels[j] ?? j}
@@ -106,7 +106,7 @@ const ArticleCard = ({ article }: { article: ArticleData }) => (
         )}
       </div>
 
-      <h3 className="font-serif text-base md:text-lg text-foreground leading-snug mb-2 group-hover:text-sage transition-colors line-clamp-2">
+      <h3 className="font-serif text-[15px] md:text-base text-foreground leading-snug mb-2 group-hover:text-sage transition-colors line-clamp-2">
         {article.title}
       </h3>
 

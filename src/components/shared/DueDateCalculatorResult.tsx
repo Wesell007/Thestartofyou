@@ -581,6 +581,34 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     </div>
                   </Fade>
                 ))}
+
+                {/* Anxiety killer — the thing that makes this genuinely helpful */}
+                <Fade delay={280}>
+                  <div
+                    className="rounded-2xl border overflow-hidden"
+                    style={{
+                      backgroundColor: 'hsl(var(--sage-bg) / 0.4)',
+                      borderColor: 'hsl(var(--sage) / 0.1)',
+                    }}
+                  >
+                    <div className="p-6 sm:p-7">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div
+                          className="w-7 h-7 rounded-lg flex items-center justify-center"
+                          style={{ backgroundColor: 'hsl(var(--sage) / 0.12)' }}
+                        >
+                          <Shield size={14} className="text-sage" />
+                        </div>
+                        <p className="font-sans text-xs font-light tracking-[0.1em] uppercase text-sage-muted flex-1">
+                          What you do not need to worry about yet
+                        </p>
+                      </div>
+                      <p className="font-sans text-sm font-light text-muted-foreground leading-[1.8]">
+                        {result.insight.dontWorry}
+                      </p>
+                    </div>
+                  </div>
+                </Fade>
               </div>
             </div>
           </Fade>

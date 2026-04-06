@@ -898,91 +898,89 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          S8: JOURNAL — tactile, intimate, meaningful
+          S8: JOURNAL — tactile, intimate, premium companion
       ═══════════════════════════════════════════════════════════════════ */}
-      <section
-        className="py-20 md:py-24"
-        style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.04)' }}
-      >
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
+      <section className="py-20 md:py-28 bg-parchment">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
           <Fade delay={0}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
-              {/* Left — emotional framing */}
-              <div>
-                <div className="flex items-center gap-2.5 mb-5">
-                  <BookOpen size={14} style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.7)' }} />
-                  <p
-                    className="font-sans text-[10px] font-light tracking-[0.2em] uppercase"
-                    style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.7)' }}
-                  >
-                    A physical companion
-                  </p>
-                </div>
-                <h3 className="font-serif text-2xl sm:text-[1.7rem] text-foreground leading-snug mb-5">
-                  Some moments deserve
-                  <br />
-                  <span className="italic">to be held onto</span>
-                </h3>
-                <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-3">
-                  This stage will pass more quickly than it feels. The journal gives you a calm,
-                  private place to hold the thoughts, questions, and moments that matter as your journey unfolds.
-                </p>
-                <p className="font-sans text-sm font-light text-muted-foreground/60 leading-relaxed mb-8">
-                  Designed to sit alongside your weekly digital guidance. A record to return to, long after.
-                </p>
-
-                <div className="flex flex-wrap items-center gap-4">
-                  <Link
-                    to="/journal"
-                    className="inline-flex items-center gap-2 border rounded-pill px-7 py-3 font-sans text-sm font-light text-foreground hover:shadow-card-brand transition-all"
-                    style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.15)' }}
-                  >
-                    Explore the journal
-                    <ArrowRight size={12} />
-                  </Link>
-                  <p className="font-sans text-[11px] font-light text-muted-foreground/40">
-                    Available on Amazon
-                  </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+              {/* Left — journal image with badge */}
+              <div className="flex justify-center md:justify-start relative">
+                <div
+                  className="absolute -bottom-8 -left-8 w-44 h-44 rounded-full opacity-15 blur-3xl pointer-events-none"
+                  style={{ backgroundColor: 'hsl(var(--stage-pregnancy))' }}
+                />
+                <div className="relative">
+                  <img
+                    src={journalBook}
+                    alt="The Start of You pregnancy journal"
+                    width={400}
+                    height={400}
+                    loading="lazy"
+                    className="w-60 md:w-72 rounded-2xl shadow-elevated relative z-10"
+                  />
+                  {/* Star rating badge */}
+                  <div className="absolute top-4 right-4 z-20 bg-terracotta/90 backdrop-blur-sm text-terracotta-foreground rounded-lg px-3 py-1.5 shadow-sm">
+                    <div className="flex items-center gap-0.5 mb-0.5">
+                      {[1,2,3,4,5].map(s => (
+                        <Star key={s} size={10} fill="currentColor" strokeWidth={0} />
+                      ))}
+                    </div>
+                    <p className="font-sans text-[9px] font-light leading-none">Available on Amazon</p>
+                  </div>
                 </div>
               </div>
 
-              {/* Right — product detail card */}
+              {/* Right — editorial content */}
               <div>
-                <div
-                  className="rounded-2xl p-6 sm:p-7 border"
-                  style={{
-                    backgroundColor: 'hsl(var(--stage-pregnancy) / 0.05)',
-                    borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.07)',
-                  }}
-                >
-                  <p className="font-sans text-[9px] font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
-                    The Start of You Journal
-                  </p>
-                  <div className="space-y-3.5 mb-6">
-                    {[
-                      "Guided prompts for each stage of pregnancy",
-                      "Space for thoughts, feelings, and quiet moments",
-                      "A private record to return to, long after",
-                      "Works alongside your weekly digital guidance",
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <div
-                          className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
-                          style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.3)' }}
-                        />
-                        <p className="font-sans text-[13px] font-light text-foreground/75 leading-relaxed">{item}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div
-                    className="border-t pt-5"
-                    style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.06)' }}
+                <div className="flex items-center gap-2 mb-2">
+                  <p
+                    className="font-sans text-[10px] font-light tracking-[0.22em] uppercase"
+                    style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.6)' }}
                   >
-                    <p className="font-serif italic text-sm text-foreground/35">
-                      "A quiet place to keep this part of your story."
-                    </p>
-                  </div>
+                    Physical · Digital
+                  </p>
                 </div>
+                <h3 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-4">
+                  A physical companion to
+                  <br />
+                  your digital journey
+                </h3>
+                <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-7">
+                  Capture your experiences alongside your weekly guidance. Keep a thoughtful,
+                  private record of your journey with The Start of You Journal.
+                </p>
+
+                {/* Benefit chips — 2x2 grid */}
+                <div className="grid grid-cols-2 gap-2.5 mb-8">
+                  {[
+                    "Weekly reflection prompts",
+                    "Free-form entry space",
+                    "Private and personal",
+                    "A keepsake for life",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-center gap-2.5 rounded-xl border px-4 py-3"
+                      style={{ borderColor: 'hsl(var(--border) / 0.5)' }}
+                    >
+                      <Check
+                        size={13}
+                        className="shrink-0"
+                        style={{ color: 'hsl(var(--sage))' }}
+                      />
+                      <p className="font-sans text-[12px] font-light text-foreground/80 leading-snug">{item}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <Link
+                  to="/journal"
+                  className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
+                >
+                  Explore the journal
+                  <ArrowRight size={14} />
+                </Link>
               </div>
             </div>
           </Fade>

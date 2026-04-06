@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
+const featured = {
+  label: "Next Stage",
+  title: "First year hub",
+  sub: "Growth, milestones, and finding your rhythm as your baby develops through the first twelve months.",
+  href: "/first-year",
+  stat: { n: "12", label: "months ahead" },
+};
+
 const pathways = [
-  {
-    label: "Next Stage",
-    title: "First year hub",
-    sub: "Growth, milestones, and finding your rhythm",
-    href: "/first-year",
-  },
   {
     label: "Support",
     title: "Support hub",
@@ -31,41 +33,86 @@ const pathways = [
 const PostpartumPathways = () => {
   return (
     <section
-      className="py-24 md:py-32"
-      style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.35)' }}
+      className="py-16 md:py-24"
+      style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.2)' }}
     >
-      <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        <div className="mb-14">
-          <p
-            className="font-sans text-xs font-light tracking-[0.2em] uppercase mb-5"
-            style={{ color: 'hsl(var(--stage-postpartum-accent))' }}
-          >
-            Continue
-          </p>
-          <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight max-w-lg">
-            Where to go next
-          </h2>
+      <div className="container mx-auto px-6 md:px-10 max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-14 mb-10">
+          <div className="md:col-span-2">
+            <p
+              className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
+              style={{ color: 'hsl(var(--stage-postpartum-accent))' }}
+            >
+              Continue
+            </p>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground leading-tight">
+              Where to go next
+            </h2>
+          </div>
+          <div className="md:col-span-3">
+            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
+              Whether you're moving into the first year, looking for emotional support, or revisiting earlier stages, there's somewhere to go next.
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {/* Featured pathway */}
+        <Link
+          to={featured.href}
+          className="group block mb-5"
+        >
+          <div
+            className="rounded-2xl border border-border/30 p-7 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 transition-all hover:shadow-soft bg-card"
+          >
+            <div>
+              <span
+                className="font-sans text-[11px] font-light tracking-[0.15em] uppercase"
+                style={{ color: 'hsl(var(--stage-postpartum-accent))' }}
+              >
+                {featured.label}
+              </span>
+              <h3 className="font-serif text-2xl text-foreground mt-2 mb-3 group-hover:text-foreground/80 transition-colors">
+                {featured.title}
+              </h3>
+              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
+                {featured.sub}
+              </p>
+            </div>
+            <div className="flex items-center justify-end">
+              <div
+                className="flex flex-col items-center rounded-xl px-6 py-4"
+                style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.2)' }}
+              >
+                <span className="font-serif text-3xl text-foreground">{featured.stat.n}</span>
+                <span className="font-sans text-[10px] font-light text-muted-foreground/60 uppercase tracking-wide">{featured.stat.label}</span>
+              </div>
+            </div>
+          </div>
+        </Link>
+
+        {/* Other pathways */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {pathways.map((p, i) => (
             <Link
               key={i}
               to={p.href}
-              className="group bg-card border border-border/50 rounded-lg p-7 shadow-card-brand flex flex-col gap-3 transition-all hover:shadow-soft"
+              className="group bg-card border border-border/40 rounded-xl p-6 flex flex-col gap-3 transition-all hover:shadow-soft"
               onMouseEnter={(e) => e.currentTarget.style.borderColor = 'hsl(var(--stage-postpartum-accent) / 0.4)'}
               onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
             >
-              <span className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
+              <span
+                className="font-sans text-[11px] font-light tracking-[0.15em] uppercase"
+                style={{ color: 'hsl(var(--stage-postpartum-accent))' }}
+              >
                 {p.label}
               </span>
-              <h3 className="font-serif text-xl text-foreground group-hover:text-sage transition-colors">
+              <h3 className="font-serif text-lg text-foreground group-hover:text-foreground/80 transition-colors">
                 {p.title}
               </h3>
-              <p className="font-serif italic text-sm text-foreground/60 leading-snug">
+              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
                 {p.sub}
               </p>
-              <span className="mt-auto pt-3 flex items-center gap-1 font-sans text-xs font-light opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: 'hsl(var(--stage-postpartum-accent))' }}>
+              <span className="mt-auto pt-2 flex items-center gap-1 font-sans text-xs font-light opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: 'hsl(var(--stage-postpartum-accent))' }}>
                 Explore <ArrowUpRight size={12} />
               </span>
             </Link>

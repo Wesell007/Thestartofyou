@@ -7,16 +7,16 @@ const disorientingItems = [
 
 const mentalLoadItems = [
   "Constant decision-making",
-  "Thinking about feeding, sleep, recovery, and routines",
-  "Feeling like you're always \"on\"",
+  "Thinking about feeding, sleep, recovery, and routines simultaneously",
+  "Feeling like you're always on",
 ];
 
 const PostpartumDisorienting = () => {
   return (
-    <section className="bg-parchment-dark py-20 md:py-28">
+    <section className="bg-parchment-dark py-16 md:py-24">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-start">
-          {/* Left — editorial statement */}
+          {/* Left — editorial */}
           <div className="md:col-span-2">
             <p
               className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
@@ -30,10 +30,20 @@ const PostpartumDisorienting = () => {
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
               This stage often lacks structure, and that can make everything feel more overwhelming, even when things are going well.
             </p>
+
+            {/* Stat chip */}
+            <div
+              className="inline-flex items-baseline gap-2 rounded-xl px-5 py-3 mb-6"
+              style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.25)' }}
+            >
+              <span className="font-serif text-2xl text-foreground">24/7</span>
+              <span className="font-sans text-[10px] font-light text-muted-foreground/60 uppercase tracking-wide">mental load</span>
+            </div>
+
             {/* Editorial quote */}
             <div
               className="pl-5 border-l-2"
-              style={{ borderColor: 'hsl(var(--stage-postpartum-accent) / 0.25)' }}
+              style={{ borderColor: 'hsl(var(--stage-postpartum-accent) / 0.3)' }}
             >
               <p className="font-serif italic text-base text-foreground/65 leading-relaxed">
                 "The mental load can be just as tiring as the physical demands."
@@ -44,7 +54,10 @@ const PostpartumDisorienting = () => {
           {/* Right — cards */}
           <div className="md:col-span-3 space-y-4">
             {/* Disorientation card */}
-            <div className="rounded-xl p-5 sm:p-6 bg-card border border-border/40">
+            <div
+              className="rounded-xl p-5 sm:p-6 border border-border/30"
+              style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.1)' }}
+            >
               <p
                 className="font-sans text-[11px] font-light tracking-[0.15em] uppercase mb-4"
                 style={{ color: 'hsl(var(--stage-postpartum-accent))' }}
@@ -67,7 +80,10 @@ const PostpartumDisorienting = () => {
             </div>
 
             {/* Mental load card */}
-            <div className="rounded-xl p-5 sm:p-6 bg-card border border-border/40">
+            <div
+              className="rounded-xl p-5 sm:p-6 border border-border/30"
+              style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.15)' }}
+            >
               <p
                 className="font-sans text-[11px] font-light tracking-[0.15em] uppercase mb-4"
                 style={{ color: 'hsl(var(--stage-postpartum-accent))' }}
@@ -95,6 +111,22 @@ const PostpartumDisorienting = () => {
                   The mental load continues, even as things begin to feel more familiar.
                 </p>
               </div>
+            </div>
+
+            {/* Identity shift card */}
+            <div
+              className="rounded-xl p-5 sm:p-6 border border-border/30"
+              style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.08)' }}
+            >
+              <p
+                className="font-sans text-[11px] font-light tracking-[0.15em] uppercase mb-4"
+                style={{ color: 'hsl(var(--stage-postpartum-accent))' }}
+              >
+                Identity
+              </p>
+              <p className="font-sans text-sm font-light text-foreground leading-relaxed">
+                Adjusting to a new version of yourself, while still recovering, while caring for a baby. All of this is happening at once, and naming it can help.
+              </p>
             </div>
           </div>
         </div>

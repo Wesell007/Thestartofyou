@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import heroLifestyle from "@/assets/home-hero-lifestyle.jpg";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
 import { Shield, BookOpen, Heart, Users } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const HeroSection = () => {
   const navigate = useNavigate();

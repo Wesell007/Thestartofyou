@@ -56,7 +56,7 @@ const TimelineSection = () => {
         </div>
 
         {/* Timeline track */}
-        <div className="relative h-20 sm:h-28 select-none overflow-hidden">
+        <div className="relative h-20 sm:h-28 select-none overflow-hidden px-3 sm:px-0">
           {/* Trimester background zones */}
           <div className="absolute inset-y-0 left-0 right-0 flex rounded-xl overflow-hidden" style={{ top: "38%", bottom: "22%" }}>
             <div className="flex-1 bg-sage-bg/40" />

@@ -99,7 +99,7 @@ const SelectInput = ({
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
-const DueDateCalculatorForm = ({ onResult, compact = false }: Props) => {
+const DueDateCalculatorForm = ({ onResult, onIVFResult, compact = false }: Props) => {
   const [method, setMethod] = useState<Method>("lmp");
   const [lmpDate, setLmpDate] = useState<Date | undefined>();
   const [cycleLength, setCycleLength] = useState(28);

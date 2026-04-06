@@ -10,6 +10,10 @@ const DueDateCalculator = () => {
     navigate(`/due-date-results?lmp=${lmpDate.getTime()}`);
   };
 
+  const handleIVFResult = (transferDate: Date, transferType: string) => {
+    navigate(`/ivf-timeline?date=${transferDate.getTime()}&type=${transferType}`);
+  };
+
   return (
     <div className="min-h-screen bg-parchment">
       <Navbar />

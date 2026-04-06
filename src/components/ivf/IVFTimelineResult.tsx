@@ -334,22 +334,22 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           </Fade>
 
           {/* Two-column: interpretation + orientation card */}
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
             {/* Left: Interpretation + dominant CTA */}
             <div className="lg:col-span-3">
               <Fade delay={250}>
-                <p className="font-sans text-[15px] font-light text-foreground/60 leading-[1.85] max-w-lg mb-5">
+                <p className="font-sans text-[15px] font-light text-foreground/55 leading-[1.9] max-w-lg mb-6">
                   {insight.heroInterpretation}
                 </p>
-                <div className="flex items-start gap-2.5 mb-12">
-                  <Shield size={13} className="shrink-0 mt-1" style={{ color: "hsl(var(--stage-ivf-accent) / 0.5)" }} />
-                  <p className="font-sans text-[13px] font-light text-foreground/40 leading-relaxed italic">
+                <div className="flex items-start gap-2.5 mb-14">
+                  <Shield size={13} className="shrink-0 mt-1" style={{ color: "hsl(var(--stage-ivf-accent) / 0.45)" }} />
+                  <p className="font-sans text-[13px] font-light text-foreground/35 leading-relaxed italic">
                     {insight.heroReassurance}
                   </p>
                 </div>
               </Fade>
 
-              {/* CTA cluster — high intent */}
+              {/* CTA cluster */}
               <Fade delay={350}>
                 <div className="flex flex-wrap items-center gap-4">
                   <Link
@@ -361,7 +361,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                   </Link>
                   <Link
                     to="/ask"
-                    className="inline-flex items-center gap-2.5 rounded-pill px-7 py-4.5 font-sans text-sm font-light text-foreground/60 hover:text-foreground border border-border/25 hover:border-border/40 bg-card/40 backdrop-blur-sm transition-all"
+                    className="inline-flex items-center gap-2.5 rounded-pill px-7 py-4.5 font-sans text-sm font-light text-foreground/50 hover:text-foreground border border-border/20 hover:border-border/35 bg-card/30 backdrop-blur-sm transition-all"
                   >
                     <MessageCircle size={13} style={{ color: "hsl(var(--stage-ivf-accent))" }} />
                     Ask about this stage

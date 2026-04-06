@@ -473,10 +473,10 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S3: WHAT THIS STAGE MEANS IN IVF
           Editorial interpretation — the intelligence layer
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-parchment py-24 md:py-32">
+      <section className="bg-parchment py-28 md:py-36">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
           <Fade delay={0}>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-5">
               <div className="h-px w-10" style={{ background: "hsl(var(--stage-ivf-accent) / 0.3)" }} />
               <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
                 Understanding your stage
@@ -485,7 +485,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
             <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.2rem] text-foreground leading-tight mb-5 max-w-lg">
               What this stage means in IVF
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8] mb-16 max-w-lg">
+            <p className="font-sans text-[15px] font-light text-muted-foreground/70 leading-[1.85] mb-14 max-w-lg">
               IVF care is more structured than typical pregnancy. Your clinic is monitoring specific milestones, and the timeline is measured in days. That precision can feel both reassuring and pressurising.
             </p>
           </Fade>

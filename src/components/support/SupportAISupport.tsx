@@ -3,30 +3,29 @@ import AISearchBar from "@/components/shared/AISearchBar";
 
 const SupportAISupport = () => {
   return (
-    <section id="ai-support" className="relative bg-parchment-dark py-20 md:py-28 overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px]" style={{ background: 'radial-gradient(ellipse, hsl(260 22% 90% / 0.35), transparent 70%)' }} />
+    <section id="ai-support" className="relative bg-[hsl(var(--stage-support)/0.25)] py-16 md:py-24 overflow-hidden">
+      {/* Dual ambient glows */}
+      <div className="absolute top-1/3 left-1/3 w-[400px] h-[250px] rounded-full blur-3xl pointer-events-none" style={{ background: 'hsl(260 22% 88% / 0.3)' }} />
+      <div className="absolute bottom-1/4 right-1/3 w-[350px] h-[200px] rounded-full blur-3xl pointer-events-none" style={{ background: 'hsl(260 22% 92% / 0.25)' }} />
 
       <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
-        <div className="bg-card border border-[hsl(var(--stage-support-accent)/0.2)] rounded-2xl p-8 md:p-12 shadow-card-brand">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-9 h-9 rounded-full bg-[hsl(var(--stage-support)/0.5)] flex items-center justify-center">
-              <MessageCircle size={16} className="text-[hsl(var(--stage-support-accent))]" />
+        <div className="bg-card border-t-2 border-t-[hsl(var(--stage-support-accent)/0.5)] border border-[hsl(var(--stage-support-accent)/0.15)] rounded-2xl p-8 md:p-12 shadow-card-brand">
+          <div className="text-center mb-8">
+            <div className="w-11 h-11 rounded-full bg-[hsl(var(--stage-support)/0.5)] flex items-center justify-center mx-auto mb-4">
+              <MessageCircle size={18} className="text-[hsl(var(--stage-support-accent))]" />
             </div>
-            <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">Gentle guidance</p>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.2rem] text-foreground mb-3 leading-snug">
+              Ask what's been feeling off
+            </h2>
+            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-md mx-auto">
+              You don't need to have the right words. Just describe what's on your mind and get gentle, personalised guidance.
+            </p>
           </div>
 
-          <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-3 leading-snug max-w-md">
-            Ask what's been feeling off
-          </h2>
-          <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-4 max-w-md">
-            You don't need to have the right words. Just describe what's on your mind and get gentle, personalised guidance.
-          </p>
-
           {/* Prompt chips */}
-          <div className="flex flex-wrap gap-2 mb-8">
-            {["Is this normal?", "Should I be worried?", "What should I do next?"].map((chip, i) => (
-              <span key={i} className="font-sans text-xs font-light bg-[hsl(var(--stage-support)/0.35)] text-foreground/70 rounded-full px-4 py-1.5 border border-[hsl(var(--stage-support-accent)/0.1)]">
+          <div className="flex flex-wrap gap-2 mb-8 justify-center">
+            {["Is this normal?", "Should I be worried?", "What should I do next?", "I don't feel like myself"].map((chip, i) => (
+              <span key={i} className="font-sans text-xs font-light bg-[hsl(var(--stage-support)/0.35)] text-foreground/70 rounded-full px-4 py-2 border border-[hsl(var(--stage-support-accent)/0.1)] hover:border-[hsl(var(--stage-support-accent)/0.3)] transition-colors cursor-pointer">
                 {chip}
               </span>
             ))}
@@ -36,6 +35,10 @@ const SupportAISupport = () => {
             placeholder="Tell me what's been feeling off…"
             suggestions={[]}
           />
+
+          <p className="font-sans text-[10px] font-light text-muted-foreground/50 text-center mt-5">
+            ✔ Guidance reviewed by Jenny Joines
+          </p>
         </div>
       </div>
     </section>

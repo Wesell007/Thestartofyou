@@ -8,22 +8,17 @@ const items = [
 
 const SupportReassurance = () => {
   return (
-    <section className="bg-[hsl(var(--stage-support)/0.4)] py-16 md:py-20">
+    <section className="bg-[hsl(var(--stage-support)/0.35)] py-10 md:py-12">
       <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-        <div className="bg-card border border-[hsl(var(--stage-support-accent)/0.15)] rounded-xl p-8 md:p-10 shadow-card-brand">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-6 text-center">
-            A quick reassurance
-          </p>
-          <div className="flex flex-col items-center gap-4">
-            {items.map((item, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded-full bg-[hsl(var(--stage-support)/0.6)] flex items-center justify-center flex-shrink-0">
-                  <Check size={13} className="text-[hsl(var(--stage-support-accent))]" />
-                </div>
-                <p className="font-serif text-lg sm:text-xl text-foreground">{item}</p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+          {items.map((item, i) => (
+            <div key={i} className="flex items-center gap-2.5">
+              <div className="w-5 h-5 rounded-full bg-[hsl(var(--stage-support)/0.6)] flex items-center justify-center flex-shrink-0">
+                <Check size={11} className="text-[hsl(var(--stage-support-accent))]" />
               </div>
-            ))}
-          </div>
+              <p className="font-sans text-sm font-light text-foreground/75">{item}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

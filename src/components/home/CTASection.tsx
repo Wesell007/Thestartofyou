@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 const CTASection = () => {
   return (
@@ -9,26 +9,27 @@ const CTASection = () => {
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl text-center relative z-10">
         <div className="editorial-rule mb-8 md:mb-10" />
-        <p className="stage-label mb-5 md:mb-6">Your Journey</p>
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-foreground mb-5 md:mb-7">
-          Start Your Journey
+        <p className="stage-label mb-5 md:mb-6">Begin</p>
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-foreground mb-4 md:mb-6">
+          Your journey starts here
         </h2>
-        <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground mb-10 md:mb-14 leading-relaxed max-w-lg mx-auto">
-          Create your free profile and access your complete 40-week guide. Your dashboard updates every Sunday with personalised guidance for your current stage.
+        <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground mb-8 md:mb-12 leading-relaxed max-w-lg mx-auto">
+          Enter your due date, access your personalised 40-week guide, and begin your supported pregnancy journey — completely free.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
           <Link
-            to="/explore"
-            className="w-full sm:flex-1 bg-terracotta text-terracotta-foreground rounded-pill py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300 text-center"
+            to="/due-date-calculator"
+            className="w-full sm:flex-1 flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
           >
-            Explore your journey
+            Calculate your due date
+            <ArrowRight size={15} />
           </Link>
           <Link
-            to="/due-date-calculator"
-            className="w-12 h-12 rounded-full bg-lavender/80 flex items-center justify-center shrink-0 hover:bg-lavender transition-colors duration-300"
+            to="/explore"
+            className="w-full sm:flex-1 flex items-center justify-center gap-2 border border-foreground/20 text-foreground rounded-pill py-4 font-sans text-sm font-light hover:bg-parchment-dark transition-all duration-300"
           >
-            <ArrowUpRight size={18} className="text-lavender-fg" />
+            Explore the journey
           </Link>
         </div>
 

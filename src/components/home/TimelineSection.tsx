@@ -1,73 +1,76 @@
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
+const currentWeek = 12;
+
+const milestones = [
+  { week: 1, label: "Week 1" },
+  { week: 6, label: "" },
+  { week: 10, label: "Week 10" },
+  { week: 12, label: "", current: true },
+  { week: 16, label: "" },
+  { week: 20, label: "Week 20" },
+  { week: 24, label: "" },
+  { week: 28, label: "" },
+  { week: 30, label: "Week 30" },
+  { week: 34, label: "" },
+  { week: 37, label: "" },
+  { week: 40, label: "Week 40" },
+];
+
+const trimesterBoundaries = [
+  { label: "First Trimester", sub: "Foundation & Formation", start: 1, end: 13, color: "bg-sage-bg/60" },
+  { label: "Second Trimester", sub: "Growth & Awareness", start: 14, end: 26, color: "bg-lavender-bg/60" },
+  { label: "Third Trimester", sub: "Preparation & Arrival", start: 27, end: 40, color: "bg-parchment-deeper/60" },
+];
+
+const getWeekPercent = (week: number) => ((week - 1) / 39) * 100;
+
 const TimelineSection = () => {
-  const currentWeek = 12;
-
-  const milestones = [
-    { week: 1, label: "Week 1" },
-    { week: 6, label: "" },
-    { week: 10, label: "Week 10" },
-    { week: 12, label: "", current: true },
-    { week: 16, label: "" },
-    { week: 20, label: "Week 20" },
-    { week: 24, label: "" },
-    { week: 28, label: "" },
-    { week: 30, label: "Week 30" },
-    { week: 34, label: "" },
-    { week: 37, label: "" },
-    { week: 40, label: "Week 40" },
-  ];
-
-  const trimesterBoundaries = [
-    { label: "FIRST TRIMESTER", sub: "FOUNDATION & FORMATION", start: 1, end: 13 },
-    { label: "SECOND TRIMESTER", sub: "GROWTH & AWARENESS", start: 14, end: 26 },
-    { label: "THIRD TRIMESTER", sub: "PREPARATION & ARRIVAL", start: 27, end: 40 },
-  ];
-
-  const getWeekPercent = (week: number) => ((week - 1) / 39) * 100;
-
   return (
     <section className="bg-parchment section-spacing">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-        <div className="text-center mb-12 sm:mb-16 md:mb-20">
+        <div className="text-center mb-10 sm:mb-14 md:mb-16">
           <div className="editorial-rule mb-6 md:mb-8" />
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-foreground mb-5 md:mb-7">
-            Your Complete Pregnancy Timeline
+          <p className="stage-label mb-4">40-Week Journey</p>
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-foreground mb-4 md:mb-6">
+            Your complete pregnancy timeline
           </h2>
           <p className="font-sans text-sm sm:text-base font-light text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            Every pregnancy follows a structured 40-week journey. See where you are, what's coming next, and the key milestones that mark each stage.
+            Every pregnancy follows a structured 40-week journey. See where you are, what's ahead, and the milestones that mark each stage.
           </p>
         </div>
 
-        {/* Trimester labels */}
-        <div className="grid grid-cols-3 gap-1 mb-4 md:mb-6 text-center">
+        {/* Trimester cards */}
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 md:mb-8">
           {trimesterBoundaries.map((t) => (
-            <p key={t.label} className="font-sans text-[8px] sm:text-[10px] font-light tracking-[0.15em] sm:tracking-[0.2em] text-muted-foreground/70 uppercase">
-              {t.label}
-            </p>
+            <div key={t.label} className={`${t.color} rounded-xl sm:rounded-2xl py-3 sm:py-4 px-3 sm:px-4 text-center`}>
+              <p className="font-sans text-[9px] sm:text-[10px] font-medium tracking-[0.15em] uppercase text-foreground/70 mb-0.5">
+                {t.label}
+              </p>
+              <p className="font-serif italic text-[10px] sm:text-xs text-muted-foreground/60 hidden sm:block">
+                {t.sub}
+              </p>
+            </div>
           ))}
         </div>
 
         {/* Timeline track */}
-        <div className="relative h-24 sm:h-32 select-none overflow-hidden">
+        <div className="relative h-20 sm:h-28 select-none overflow-hidden">
           {/* Trimester background zones */}
-          <div className="absolute inset-y-0 left-0 right-0 flex rounded-xl sm:rounded-2xl overflow-hidden" style={{ top: "40%", bottom: "20%" }}>
-            <div className="flex-1 bg-sage-bg/50" />
-            <div className="flex-1 bg-parchment-dark" />
-            <div className="flex-1 bg-parchment-deeper/60" />
+          <div className="absolute inset-y-0 left-0 right-0 flex rounded-xl overflow-hidden" style={{ top: "38%", bottom: "22%" }}>
+            <div className="flex-1 bg-sage-bg/40" />
+            <div className="flex-1 bg-lavender-bg/40" />
+            <div className="flex-1 bg-parchment-deeper/40" />
           </div>
 
           {/* Connector line */}
-          <div
-            className="absolute top-1/2 left-0 right-0 h-px bg-muted-foreground/15"
-            style={{ transform: "translateY(-50%)" }}
-          />
+          <div className="absolute top-1/2 left-0 right-0 h-px bg-muted-foreground/15" style={{ transform: "translateY(-50%)" }} />
 
           {/* Progress fill */}
           <div
-            className="absolute top-1/2 left-0 h-px bg-sage"
-            style={{
-              transform: "translateY(-50%)",
-              width: `${getWeekPercent(currentWeek)}%`,
-            }}
+            className="absolute top-1/2 left-0 h-0.5 rounded-full bg-sage"
+            style={{ transform: "translateY(-50%)", width: `${getWeekPercent(currentWeek)}%` }}
           />
 
           {/* Milestone dots */}
@@ -96,13 +99,15 @@ const TimelineSection = () => {
           ))}
         </div>
 
-        {/* Trimester sub labels */}
-        <div className="grid grid-cols-3 gap-1 mt-6 md:mt-8 text-center">
-          {trimesterBoundaries.map((t) => (
-            <p key={t.sub} className="font-serif italic text-[11px] sm:text-sm text-muted-foreground/70">
-              {t.sub}
-            </p>
-          ))}
+        {/* CTA below timeline */}
+        <div className="text-center mt-8 md:mt-12">
+          <Link
+            to="/pregnancy"
+            className="inline-flex items-center gap-2 font-sans text-sm font-light text-foreground hover:text-terracotta transition-colors border-b border-border/40 hover:border-terracotta/40 pb-0.5"
+          >
+            Explore the full pregnancy journey
+            <ArrowRight size={14} />
+          </Link>
         </div>
       </div>
     </section>

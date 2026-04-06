@@ -1,25 +1,42 @@
 const FirstYearEmotionalReminder = () => {
   return (
-    <section className="bg-parchment-dark py-24 md:py-32">
-      <div className="container mx-auto px-6 md:px-10 max-w-3xl text-center">
-        <div className="flex items-center gap-5 mb-10 justify-center">
-          <div className="h-px w-16" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.3)' }} />
+    <section
+      className="relative py-16 md:py-24 overflow-hidden"
+      style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.2)' }}
+    >
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full blur-3xl"
+        style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.2)' }}
+      />
+
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl text-center relative z-10">
+        <div className="flex items-center gap-4 mb-7 justify-center">
+          <div className="h-px w-10" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.2)' }} />
           <span
-            className="font-sans text-xs font-light tracking-[0.2em] uppercase"
+            className="font-sans text-[11px] font-light tracking-[0.2em] uppercase"
             style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
           >
             A small reminder
           </span>
-          <div className="h-px w-16" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.3)' }} />
+          <div className="h-px w-10" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.2)' }} />
         </div>
 
-        <h2 className="font-serif text-3xl sm:text-4xl text-foreground mb-7 leading-tight">
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.5rem] text-foreground mb-5 leading-[1.15] max-w-lg mx-auto">
           This stage is full of change. It's okay if things don't feel settled.
         </h2>
 
-        <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-lg mx-auto">
+        <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed max-w-md mx-auto mb-8">
           Adapting as you go is part of the process.
         </p>
+
+        <div
+          className="inline-block rounded-xl px-6 py-4"
+          style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.25)' }}
+        >
+          <p className="font-serif italic text-base text-foreground/60">
+            You're finding your way, and that's enough.
+          </p>
+        </div>
       </div>
     </section>
   );

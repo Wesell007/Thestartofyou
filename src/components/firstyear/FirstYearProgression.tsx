@@ -1,66 +1,103 @@
 const steps = [
   {
-    phase: "Early months",
-    title: "Focused on adjustment",
-    detail: "The first weeks feel centred around recovery, feeding, and responding to constant change.",
+    label: "Early months",
+    desc: "Focused on adjustment and survival",
+    detail: "Feeding, sleep, recovery. The world narrows to the immediate. Everything is being learned.",
+    stat: { n: "0–3", label: "months" },
   },
   {
-    phase: "Mid-year",
-    title: "Small patterns begin to form",
-    detail: "Routines start to emerge, fragile at first, then more reliable over time.",
+    label: "Mid-year",
+    desc: "Small patterns begin to form",
+    detail: "Routines start to emerge. Your baby becomes more interactive. Things shift from survival to rhythm.",
+    stat: { n: "3–6", label: "months" },
   },
   {
-    phase: "Later months",
-    title: "Confidence builds gradually",
-    detail: "Understanding your baby's cues becomes more natural, even as new challenges arrive.",
+    label: "Later months",
+    desc: "Confidence builds, curiosity expands",
+    detail: "Movement, curiosity, engagement with the world. New challenges replace old ones.",
+    stat: { n: "6–9", label: "months" },
   },
   {
-    phase: "Approaching one year",
-    title: "Familiarity increases",
-    detail: "Things don't become fixed, they become more manageable.",
+    label: "Approaching one year",
+    desc: "Familiarity increases, personality emerges",
+    detail: "Things don't become fixed. They become more manageable. Your baby becomes more themselves.",
+    stat: { n: "9–12", label: "months" },
   },
 ];
 
 const FirstYearProgression = () => {
   return (
-    <section className="bg-parchment py-24 md:py-32">
-      <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        <div className="mb-16">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
-            Over Time
-          </p>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight max-w-xl">
-            How this stage changes
-          </h2>
-        </div>
-
-        <div className="relative pl-6 md:pl-10">
-          <div className="absolute left-0 top-0 bottom-0 w-px bg-border/50" />
-          <div className="space-y-10">
-            {steps.map((step, i) => (
-              <div key={i} className="relative">
-                <div className="absolute -left-6 md:-left-10 top-1.5 w-2.5 h-2.5 rounded-full bg-sage border-2 border-parchment" />
-                <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-1">
-                  {step.phase}
-                </p>
-                <h3 className="font-serif text-xl text-foreground mb-2">
-                  {step.title}
-                </h3>
-                <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-                  {step.detail}
-                </p>
-              </div>
-            ))}
+    <section className="bg-parchment py-16 md:py-24">
+      <div className="container mx-auto px-6 md:px-10 max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-start mb-10">
+          <div className="md:col-span-2">
+            <p
+              className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
+              style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
+            >
+              Over Time
+            </p>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground leading-tight mb-5">
+              How this stage changes
+            </h2>
+            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
+              The first year doesn't follow a straight line, but it does move forward. Each phase builds on what came before.
+            </p>
+            <div
+              className="pl-5 border-l-2"
+              style={{ borderColor: 'hsl(var(--stage-firstyear-accent) / 0.3)' }}
+            >
+              <p className="font-serif italic text-base text-foreground/65 leading-relaxed">
+                "Things don't become fixed. They become more familiar."
+              </p>
+            </div>
           </div>
-        </div>
 
-        <div className="mt-14 bg-sage-bg/40 border border-sage-light/30 rounded-md px-6 py-5 max-w-xl">
-          <p className="font-sans text-xs font-light tracking-[0.12em] uppercase text-sage-muted mb-1.5">
-            What this means
-          </p>
-          <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-            Things don't become fixed, they become more manageable.
-          </p>
+          <div className="md:col-span-3">
+            <div className="relative">
+              {/* Connecting line */}
+              <div
+                className="absolute left-[19px] top-[20px] bottom-[20px] w-px hidden md:block"
+                style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.12)' }}
+              />
+
+              <div className="space-y-4">
+                {steps.map((step, i) => (
+                  <div
+                    key={i}
+                    className="relative rounded-xl border border-border/20 p-6 flex gap-5"
+                    style={{ backgroundColor: `hsl(var(--stage-firstyear) / ${0.12 - i * 0.02})` }}
+                  >
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 font-serif text-sm border relative z-10"
+                      style={{
+                        backgroundColor: 'hsl(var(--stage-firstyear) / 0.25)',
+                        borderColor: 'hsl(var(--stage-firstyear-accent) / 0.2)',
+                        color: 'hsl(var(--stage-firstyear-accent))',
+                      }}
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-1">
+                        <p className="font-serif text-lg text-foreground leading-snug">{step.label}</p>
+                        <div className="flex items-baseline gap-1.5">
+                          <span className="font-serif text-base text-foreground">{step.stat.n}</span>
+                          <span className="font-sans text-[10px] font-light text-muted-foreground/50 uppercase tracking-wide">{step.stat.label}</span>
+                        </div>
+                      </div>
+                      <p className="font-sans text-sm font-light text-foreground/80 leading-relaxed mb-1.5">
+                        {step.desc}
+                      </p>
+                      <p className="font-sans text-xs font-light text-muted-foreground/60 leading-relaxed italic">
+                        {step.detail}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

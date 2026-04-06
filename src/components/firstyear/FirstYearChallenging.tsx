@@ -5,7 +5,7 @@ const challenges = [
   },
   {
     title: "Sleep changes and disruptions",
-    desc: "Progress isn't linear, regressions are a normal part of development",
+    desc: "Progress isn't linear. Regressions are a normal part of development.",
   },
   {
     title: "Constant adjustment",
@@ -18,17 +18,17 @@ const challenges = [
 ];
 
 const mentalLoad = [
-  "Constant decision-making",
-  "Thinking about sleep, feeding, development, and routines",
+  "Constant decision-making about sleep, feeding, and development",
+  "Thinking about routines that keep changing",
   "Feeling like you're always adapting to something new",
 ];
 
 const FirstYearChallenging = () => {
   return (
-    <section className="bg-parchment-dark py-20 md:py-28">
+    <section className="bg-parchment-dark py-16 md:py-24">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-start">
-          {/* Left — editorial statement */}
+          {/* Left — editorial */}
           <div className="md:col-span-2">
             <p
               className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
@@ -40,15 +40,25 @@ const FirstYearChallenging = () => {
               What can feel challenging
             </h2>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
-              The first year rarely feels settled. Just as one phase starts to feel familiar, another arrives.
+              The first year rarely feels settled. Just as one phase starts to feel familiar, another arrives with different demands.
             </p>
+
+            {/* Stat chip */}
+            <div
+              className="inline-flex items-baseline gap-2 rounded-xl px-5 py-3 mb-6"
+              style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.25)' }}
+            >
+              <span className="font-serif text-2xl text-foreground">4</span>
+              <span className="font-sans text-[10px] font-light text-muted-foreground/60 uppercase tracking-wide">phases of change</span>
+            </div>
+
             {/* Editorial quote */}
             <div
               className="pl-5 border-l-2"
-              style={{ borderColor: 'hsl(var(--stage-firstyear-accent) / 0.25)' }}
+              style={{ borderColor: 'hsl(var(--stage-firstyear-accent) / 0.3)' }}
             >
               <p className="font-serif italic text-base text-foreground/65 leading-relaxed">
-                "The mental load continues, even as things begin to feel more familiar."
+                "Just when you think you've figured it out, everything shifts again."
               </p>
             </div>
           </div>
@@ -58,7 +68,8 @@ const FirstYearChallenging = () => {
             {challenges.map((point, i) => (
               <div
                 key={i}
-                className="rounded-xl p-5 sm:p-6 bg-card border border-border/40 flex items-start gap-5 hover:shadow-card-brand transition-shadow"
+                className="rounded-xl p-5 sm:p-6 border border-border/30 flex items-start gap-5"
+                style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.06)' }}
               >
                 <span
                   className="font-serif text-3xl leading-none select-none shrink-0"
@@ -77,8 +88,8 @@ const FirstYearChallenging = () => {
 
             {/* Mental load card */}
             <div
-              className="rounded-xl p-5 sm:p-6 border border-border/40"
-              style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.2)' }}
+              className="rounded-xl p-5 sm:p-6 border border-border/30"
+              style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.15)' }}
             >
               <p
                 className="font-sans text-[11px] font-light tracking-[0.15em] uppercase mb-3"
@@ -99,6 +110,11 @@ const FirstYearChallenging = () => {
                   </li>
                 ))}
               </ul>
+              <div className="mt-4 pt-4 border-t" style={{ borderColor: 'hsl(var(--stage-firstyear-accent) / 0.1)' }}>
+                <p className="font-serif italic text-sm text-foreground/60 leading-relaxed">
+                  The mental load evolves as your baby grows, but it doesn't disappear.
+                </p>
+              </div>
             </div>
           </div>
         </div>

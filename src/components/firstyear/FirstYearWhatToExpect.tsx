@@ -1,4 +1,4 @@
-const sections = [
+const topSections = [
   {
     tag: "Your baby",
     title: "Your baby will change quickly throughout this year.",
@@ -21,94 +21,129 @@ const sections = [
   },
   {
     tag: "Emotionally",
-    title: "This stage can feel more stable than the early weeks, but still complex.",
+    title: "More stable than the early weeks, but still complex.",
     bullets: [
-      "More confident at times",
-      "Still unsure in new situations",
+      "More confident at times, still unsure in new situations",
       "A mix of enjoyment and exhaustion",
-      "Pressure to feel like things should be \"settled\"",
+      "Pressure to feel like things should be settled",
     ],
-    meaning: "Confidence builds gradually, but it's not constant.",
+    meaning: "Confidence builds gradually, but it's not constant. And that's normal.",
   },
+];
+
+const bottomSections = [
   {
     tag: "Ongoing change",
-    title: "Nothing stays the same for long during the first year.",
-    bullets: [
-      "Just as something starts to feel easier, it changes again",
-      "New challenges replacing old ones",
-      "Phases that feel temporary, even when they matter a lot",
-    ],
-    meaning: "This stage isn't about reaching a fixed point, it's about adapting as things evolve.",
+    insight: "Just as something starts to feel easier, it changes again. New challenges replace old ones. Phases feel temporary, even when they matter.",
+    meaning: "This stage isn't about reaching a fixed point. It's about adapting as things evolve.",
   },
   {
-    tag: "When things change again",
-    title: "Progress often comes in phases, not permanent solutions.",
-    bullets: [
-      "Sleep improving, then becoming disrupted again",
-      "Routines working, then suddenly not",
-      "Feeling like you've figured something out, then needing to adjust again",
-    ],
-    meaning: "Progress often comes in phases, not permanent solutions.",
+    tag: "When things shift",
+    insight: "Sleep improving, then becoming disrupted again. Routines working, then suddenly not. Feeling like you've figured it out, then needing to adjust.",
+    meaning: "Progress comes in phases, not permanent solutions.",
   },
   {
     tag: "Comparison",
-    title: "Comparing your baby's journey can create more pressure than clarity.",
-    bullets: [
-      "Comparing your baby's development to others",
-      "Questioning whether things are \"on track\"",
-      "Feeling unsure what is normal",
-    ],
-    meaning: "Every baby develops differently. Comparison often creates more pressure than clarity.",
+    insight: "Comparing your baby's development to others. Questioning whether things are on track. Feeling unsure what is normal.",
+    meaning: "Every baby develops differently. Comparison creates more pressure than clarity.",
   },
 ];
 
 const FirstYearWhatToExpect = () => {
   return (
-    <section className="bg-parchment py-24 md:py-32">
-      <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        <div className="mb-16">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
-            What to Expect
-          </p>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight max-w-2xl">
-            What to expect during this stage
-          </h2>
+    <section className="bg-parchment py-16 md:py-24">
+      <div className="container mx-auto px-6 md:px-10 max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-14 mb-12">
+          <div className="md:col-span-2">
+            <p
+              className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
+              style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
+            >
+              What to Expect
+            </p>
+            <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight">
+              What to expect during this stage
+            </h2>
+          </div>
+          <div className="md:col-span-3">
+            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
+              The first year touches development, routines, emotions, and identity. Here's what that actually looks like, practically and honestly.
+            </p>
+          </div>
         </div>
 
-        <div className="space-y-0">
-          {sections.map((s, i) => (
+        {/* Top 3: horizontal cards with sidebar insight */}
+        <div className="space-y-5 mb-10">
+          {topSections.map((s, i) => (
             <div
               key={i}
-              className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-14 py-10 border-t border-border/40 first:border-0 first:pt-0"
+              className="rounded-xl border border-border/30 grid grid-cols-1 md:grid-cols-[2fr_1fr] overflow-hidden"
+              style={{ backgroundColor: i === 0 ? 'hsl(var(--stage-firstyear) / 0.12)' : 'transparent' }}
             >
-              <div className="flex flex-col gap-2 pt-1">
-                <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
+              <div className="p-6 sm:p-7">
+                <p
+                  className="font-sans text-[11px] font-light tracking-[0.15em] uppercase mb-3"
+                  style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
+                >
                   {s.tag}
                 </p>
-                <p className="font-serif text-lg text-foreground leading-snug">
+                <h3 className="font-serif text-lg sm:text-xl text-foreground leading-snug mb-4">
                   {s.title}
-                </p>
-              </div>
-
-              <div>
-                <ul className="space-y-3 mb-6">
+                </h3>
+                <ul className="space-y-2.5">
                   {s.bullets.map((b, j) => (
                     <li key={j} className="flex items-start gap-3">
-                      <span className="mt-2 w-1 h-1 rounded-full bg-sage-muted shrink-0" />
-                      <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-                        {b}
-                      </p>
+                      <span
+                        className="mt-2 w-1.5 h-1.5 rounded-full shrink-0"
+                        style={{ backgroundColor: `hsl(var(--stage-firstyear-accent) / ${i === 0 ? '0.5' : '0.3'})` }}
+                      />
+                      <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">{b}</p>
                     </li>
                   ))}
                 </ul>
-                <div className="bg-sage-bg/40 border border-sage-light/30 rounded-md px-5 py-4">
-                  <p className="font-sans text-xs font-light tracking-[0.12em] uppercase text-sage-muted mb-1.5">
-                    What this means
-                  </p>
-                  <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
-                    {s.meaning}
-                  </p>
-                </div>
+              </div>
+              <div
+                className="p-6 sm:p-7 flex flex-col justify-center border-t md:border-t-0 md:border-l"
+                style={{
+                  backgroundColor: 'hsl(var(--stage-firstyear) / 0.1)',
+                  borderColor: 'hsl(var(--stage-firstyear) / 0.15)',
+                }}
+              >
+                <p
+                  className="font-sans text-[10px] font-light tracking-[0.12em] uppercase mb-2"
+                  style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
+                >
+                  What this means
+                </p>
+                <p className="font-serif italic text-base text-foreground/70 leading-relaxed">
+                  {s.meaning}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom 3: emotional/shift sections as 3-column grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {bottomSections.map((s, i) => (
+            <div
+              key={i}
+              className="rounded-xl p-6 border border-border/20"
+              style={{ backgroundColor: `hsl(var(--stage-firstyear) / ${0.12 - i * 0.02})` }}
+            >
+              <p
+                className="font-sans text-[11px] font-light tracking-[0.15em] uppercase mb-3"
+                style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
+              >
+                {s.tag}
+              </p>
+              <p className="font-sans text-sm font-light text-foreground leading-relaxed mb-4">
+                {s.insight}
+              </p>
+              <div className="pt-3 border-t" style={{ borderColor: 'hsl(var(--stage-firstyear-accent) / 0.1)' }}>
+                <p className="font-serif italic text-sm text-foreground/55 leading-relaxed">
+                  {s.meaning}
+                </p>
               </div>
             </div>
           ))}

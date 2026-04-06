@@ -415,21 +415,21 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S2: CONVERSION BRIDGE
           The strategic pivot — result becomes relationship
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-24 md:py-32 overflow-hidden" style={{ background: "hsl(var(--parchment-dark))" }}>
-        <div className="absolute top-0 left-0 w-full h-px" style={{ background: "linear-gradient(90deg, transparent 10%, hsl(var(--stage-ivf-accent) / 0.15), transparent 90%)" }} />
+      <section className="relative py-28 md:py-36 overflow-hidden" style={{ background: "hsl(var(--parchment-dark))" }}>
+        <div className="absolute top-0 left-0 w-full h-px" style={{ background: "linear-gradient(90deg, transparent 5%, hsl(var(--stage-ivf-accent) / 0.12), transparent 95%)" }} />
 
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Left: Editorial conviction */}
             <Fade delay={0}>
               <div>
-                <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase mb-6" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
+                <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase mb-7" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
                   Your next step
                 </p>
-                <h2 className="font-serif text-3xl sm:text-[2.2rem] md:text-[2.5rem] text-foreground leading-[1.15] mb-6">
-                  This is where your IVF journey <span className="italic">becomes personal</span>
+                <h2 className="font-serif text-3xl sm:text-[2.2rem] md:text-[2.5rem] text-foreground leading-[1.15] mb-7">
+                  This is where your IVF<br className="hidden sm:block" /> journey <span className="italic">becomes personal</span>
                 </h2>
-                <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8] mb-10 max-w-md">
+                <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.85] mb-12 max-w-md">
                   Starting saves your stage, personalises your guidance, and gives you a clear, supported path through IVF and beyond. No more guessing what comes next.
                 </p>
                 <Link
@@ -439,7 +439,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                   Start your journey
                   <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                 </Link>
-                <p className="mt-5 font-sans text-xs font-light text-muted-foreground/45">Takes a minute to begin.</p>
+                <p className="mt-4 font-sans text-[11px] font-light text-muted-foreground/40">Takes a minute to begin.</p>
               </div>
             </Fade>
 

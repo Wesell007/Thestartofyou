@@ -43,7 +43,6 @@ const IVFCapture = () => {
             ].map((item, i) => (
               <div
                 key={i}
-                className="rounded-xl px-6 py-5 border shadow-card-brand"
                 className={`rounded-xl px-6 py-5 border shadow-card-brand ${i === 0 ? '' : 'bg-card border-border/40'}`}
                 style={i === 0 ? {
                   backgroundColor: 'hsl(var(--stage-ivf) / 0.15)',

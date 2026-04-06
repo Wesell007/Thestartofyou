@@ -69,7 +69,6 @@ const IVFWhatMakesDifferent = () => {
             {points.map((point, i) => (
               <div
                 key={i}
-                className="rounded-xl p-5 sm:p-6 border flex items-start gap-5 hover:shadow-card-brand transition-shadow"
                 className={`rounded-xl p-5 sm:p-6 border flex items-start gap-5 hover:shadow-card-brand transition-shadow ${i === 0 ? '' : 'bg-card border-border/40'}`}
                 style={i === 0 ? {
                   backgroundColor: 'hsl(var(--stage-ivf) / 0.12)',

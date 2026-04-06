@@ -1,19 +1,19 @@
 const points = [
   {
     title: "Outcomes are not immediate",
-    desc: "Each cycle involves waiting, and results are never guaranteed",
+    desc: "Each cycle involves waiting, and results are never guaranteed. The process requires patience most people don't expect.",
   },
   {
     title: "Timing matters, but isn't controllable",
-    desc: "You can track and prepare, but you cannot force the outcome",
+    desc: "You can track and prepare, but you cannot force the outcome. Understanding this can reduce unnecessary pressure.",
   },
   {
     title: "Each cycle can feel like a reset",
-    desc: "Starting again can be emotionally demanding, even when expected",
+    desc: "Starting again can be emotionally demanding, even when expected. The emotional cost of repetition is real.",
   },
   {
     title: "Emotional experiences shift quickly",
-    desc: "Hope and disappointment can cycle within the same week",
+    desc: "Hope and disappointment can cycle within the same week. This is not a sign that something is wrong.",
   },
 ];
 
@@ -46,6 +46,19 @@ const TTCWhatMakesDifferent = () => {
               <p className="font-serif italic text-base text-foreground/65 leading-relaxed">
                 "Trying to conceive doesn't follow a script. The guide shouldn't either."
               </p>
+            </div>
+
+            {/* Stat reinforcement */}
+            <div className="mt-6 flex items-center gap-5">
+              {[
+                { n: "~6", label: "months avg" },
+                { n: "85%", label: "within a year" },
+              ].map((s) => (
+                <div key={s.label} className="flex items-baseline gap-1.5">
+                  <span className="font-serif text-xl text-foreground">{s.n}</span>
+                  <span className="font-sans text-[10px] font-light text-muted-foreground/60 uppercase tracking-wide">{s.label}</span>
+                </div>
+              ))}
             </div>
           </div>
 

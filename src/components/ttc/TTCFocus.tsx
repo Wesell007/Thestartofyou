@@ -3,11 +3,15 @@ const focusItems = [
   { text: "Focusing on timing rather than perfection", emphasis: false },
   { text: "Keeping expectations realistic", emphasis: false },
   { text: "Taking things one step at a time", emphasis: false },
+  { text: "Allowing your experience to unfold without comparison", emphasis: false },
 ];
 
 const TTCFocus = () => {
   return (
-    <section className="bg-parchment py-20 md:py-28">
+    <section
+      className="py-20 md:py-28"
+      style={{ backgroundColor: 'hsl(var(--stage-ttc) / 0.1)' }}
+    >
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start">
           {/* Left */}
@@ -33,12 +37,22 @@ const TTCFocus = () => {
               <span className="font-serif text-2xl text-foreground">1</span>
               <span className="font-sans text-xs font-light text-muted-foreground">cycle at a time</span>
             </div>
+
+            {/* Pull quote */}
+            <div
+              className="mt-6 pl-5 border-l-2"
+              style={{ borderColor: 'hsl(var(--stage-ttc-accent) / 0.2)' }}
+            >
+              <p className="font-serif italic text-sm text-foreground/55 leading-relaxed">
+                "You don't need to have it figured out. You just need to start where you are."
+              </p>
+            </div>
           </div>
 
           {/* Right */}
           <div
             className="rounded-2xl p-6 sm:p-8"
-            style={{ backgroundColor: 'hsl(var(--stage-ttc) / 0.3)' }}
+            style={{ backgroundColor: 'hsl(var(--stage-ttc) / 0.25)' }}
           >
             <div className="space-y-4">
               {focusItems.map((item, i) => (

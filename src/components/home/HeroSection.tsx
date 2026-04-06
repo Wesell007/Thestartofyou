@@ -20,10 +20,10 @@ const HeroSection = () => {
           aria-hidden="true"
           width={1920}
           height={1080}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-[70%_20%] sm:object-[65%_25%] md:object-center"
         />
-        {/* Stronger left gradient for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-parchment via-parchment/97 via-55% to-parchment/20 md:to-transparent" />
+        {/* Mobile: softer overlay so image subject shows through; desktop: strong left wash for text */}
+        <div className="absolute inset-0 bg-gradient-to-r from-parchment/95 via-parchment/80 via-45% to-parchment/10 md:from-parchment md:via-parchment/97 md:via-55% md:to-transparent" />
         {/* Top vignette */}
         <div className="absolute inset-0 bg-gradient-to-b from-parchment/50 via-transparent to-parchment" />
       </div>

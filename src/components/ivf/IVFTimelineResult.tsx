@@ -228,10 +228,10 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
 
           {/* Primary result — dramatic scale */}
           <Fade delay={100}>
-            <p className="font-sans text-sm font-light text-foreground/40 mb-3 tracking-wide">You are currently</p>
-            <div className="flex items-baseline gap-5 mb-3">
-              <span className="font-serif text-[6rem] sm:text-[7.5rem] md:text-[9rem] text-foreground leading-[0.8] tracking-tight">{clampedDpt}</span>
-              <span className="font-serif text-2xl sm:text-3xl md:text-4xl font-light text-foreground/50 italic -mb-2">
+            <p className="font-sans text-sm font-light text-foreground/40 mb-4 tracking-wide">You are currently</p>
+            <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-5 mb-4">
+              <span className="font-serif text-[4.5rem] sm:text-[6rem] md:text-[8rem] text-foreground leading-[0.85] tracking-tight">{clampedDpt}</span>
+              <span className="font-serif text-xl sm:text-2xl md:text-3xl font-light text-foreground/50 italic">
                 {clampedDpt === 1 ? "day" : "days"} post transfer
               </span>
             </div>

@@ -922,7 +922,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S7: JOURNAL COMPANION
           Emotionally integrated — not product-dropped
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="relative bg-parchment py-24 md:py-32 overflow-hidden">
+      <section className="relative bg-parchment py-28 md:py-36 overflow-hidden">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
             {/* Image — tactile, real */}

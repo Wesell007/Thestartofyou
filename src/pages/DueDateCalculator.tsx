@@ -36,7 +36,7 @@ const DueDateCalculator = () => {
       <section className="pb-20 md:pb-24">
         <div className="container mx-auto px-6 md:px-10 max-w-xl">
           <div className="card-elevated p-8 md:p-10">
-            <DueDateCalculatorForm onResult={handleResult} />
+            <DueDateCalculatorForm onResult={handleResult} onIVFResult={handleIVFResult} />
           </div>
         </div>
       </section>

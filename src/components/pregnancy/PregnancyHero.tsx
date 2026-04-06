@@ -104,7 +104,7 @@ const PregnancyHero = () => {
               <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-5 sm:mb-6">
                 See what stage you're in and get guidance tailored to your week.
               </p>
-              <DueDateCalculatorForm onResult={handleResult} compact />
+              <DueDateCalculatorForm onResult={handleResult} onIVFResult={handleIVFResult} compact />
             </div>
           </div>
 

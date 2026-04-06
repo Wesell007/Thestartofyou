@@ -3,59 +3,51 @@ import { ArrowUpRight, ArrowRight } from "lucide-react";
 
 const IVFFinalCTA = () => {
   return (
-    <section className="relative overflow-hidden py-20 sm:py-24 md:py-28" style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.12)' }}>
+    <section
+      className="relative overflow-hidden py-16 sm:py-20 md:py-24"
+      style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.15)' }}
+    >
+      {/* Ambient glows */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[350px] rounded-full blur-3xl"
+        className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[500px] h-[400px] rounded-full blur-3xl"
         style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.15)' }}
+      />
+      <div
+        className="absolute bottom-0 right-1/4 w-[300px] h-[300px] rounded-full blur-3xl"
+        style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.05)' }}
       />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
+        {/* Colour trail */}
+        <div className="flex items-center gap-1.5 mb-8">
+          {[
+            { var: '--stage-ttc-accent', w: 'w-5' },
+            { var: '--stage-ivf-accent', w: 'w-14' },
+            { var: '--stage-pregnancy-accent', w: 'w-5' },
+          ].map((t, i) => (
+            <div
+              key={i}
+              className={`h-0.5 rounded-full ${t.w}`}
+              style={{ backgroundColor: `hsl(var(${t.var}) / ${i === 1 ? '0.7' : '0.2'})` }}
+            />
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center">
           {/* Left — CTA */}
           <div>
-            {/* Colour trail */}
-            <div className="flex items-center gap-1.5 mb-6">
-              {[
-                { var: '--stage-ttc-accent', w: 'w-4' },
-                { var: '--stage-ivf-accent', w: 'w-12' },
-                { var: '--stage-pregnancy-accent', w: 'w-4' },
-              ].map((t, i) => (
-                <div
-                  key={i}
-                  className={`h-0.5 rounded-full ${t.w}`}
-                  style={{ backgroundColor: `hsl(var(${t.var}) / ${i === 1 ? '0.7' : '0.2'})` }}
-                />
-              ))}
-            </div>
-
-            <p
-              className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
-              style={{ color: 'hsl(var(--stage-ivf-accent))' }}
-            >
+            <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4" style={{ color: 'hsl(var(--stage-ivf-accent))' }}>
               Begin Your Journey
             </p>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-4 leading-tight">
-              Your IVF guide is ready
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-[2.75rem] text-foreground mb-4 leading-[1.08]">
+              Your IVF guide<br />
+              <span className="italic">is ready</span>
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed mb-6 max-w-md">
+            <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed mb-7 max-w-md">
               Understand your stage, navigate the waiting, and find guidance that moves with you through every step.
             </p>
 
-            {/* Stat chips */}
-            <div className="flex items-center gap-5 mb-8">
-              {[
-                { n: "3", label: "stages" },
-                { n: "14", label: "day wait" },
-                { n: "1", label: "step at a time" },
-              ].map((s) => (
-                <div key={s.label} className="flex flex-col">
-                  <span className="font-serif text-xl text-foreground">{s.n}</span>
-                  <span className="font-sans text-[10px] font-light text-muted-foreground/60 uppercase tracking-wide">{s.label}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 mb-6">
               <Link
                 to="/ivf/before-transfer"
                 className="inline-flex items-center justify-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
@@ -66,45 +58,60 @@ const IVFFinalCTA = () => {
               <Link
                 to="/ask"
                 className="inline-flex items-center justify-center gap-2 border rounded-pill px-7 py-3.5 font-sans text-sm font-light transition-all hover:bg-parchment-dark"
-                style={{ borderColor: 'hsl(var(--stage-ivf-accent) / 0.25)', color: 'hsl(var(--foreground))' }}
+                style={{ borderColor: 'hsl(var(--stage-ivf-accent) / 0.25)' }}
               >
                 Ask a question
                 <ArrowRight size={14} />
               </Link>
             </div>
+
+            <p className="font-serif italic text-sm text-foreground/35">
+              One stage at a time, with clarity and care.
+            </p>
           </div>
 
           {/* Right — stage summary */}
           <div className="space-y-3">
             {[
-              { num: "01", title: "Before transfer", desc: "Preparation, medication, your protocol" },
-              { num: "02", title: "After transfer", desc: "The two-week wait and what to expect" },
-              { num: "03", title: "Early pregnancy", desc: "Monitoring, scans, cautious progress" },
+              { num: "01", title: "Before transfer", desc: "Preparation, medication, your protocol", emotional: "Focus" },
+              { num: "02", title: "After transfer", desc: "The two-week wait and what to expect", emotional: "Patience" },
+              { num: "03", title: "Early pregnancy", desc: "Monitoring, scans, cautious progress", emotional: "Hope" },
             ].map((stage) => (
-              <div
+              <Link
                 key={stage.num}
-                className="rounded-xl px-5 py-4 border flex items-start gap-4"
+                to={`/ivf/${stage.title.toLowerCase().replace(/ /g, '-')}`}
+                className="group rounded-xl px-5 py-4 border flex items-start gap-4 transition-all hover:shadow-card-brand"
                 style={{
-                  backgroundColor: 'hsl(var(--stage-ivf) / 0.1)',
+                  backgroundColor: 'hsl(var(--stage-ivf) / 0.08)',
                   borderColor: 'hsl(var(--stage-ivf-accent) / 0.1)',
                 }}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = 'hsl(var(--stage-ivf-accent) / 0.3)'}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = 'hsl(var(--stage-ivf-accent) / 0.1)'}
               >
-                <span
-                  className="font-serif text-lg select-none shrink-0"
-                  style={{ color: 'hsl(var(--stage-ivf-accent) / 0.4)' }}
+                <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+                  style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.2)' }}
                 >
-                  {stage.num}
-                </span>
-                <div>
-                  <p className="font-serif text-base text-foreground mb-0.5">{stage.title}</p>
-                  <p className="font-sans text-xs font-light text-muted-foreground/60">{stage.desc}</p>
+                  <span className="font-serif text-sm" style={{ color: 'hsl(var(--stage-ivf-accent) / 0.6)' }}>{stage.num}</span>
                 </div>
-              </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <p className="font-serif text-base text-foreground group-hover:text-foreground/80 transition-colors">{stage.title}</p>
+                    <ArrowUpRight size={13} className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0" style={{ color: 'hsl(var(--stage-ivf-accent))' }} />
+                  </div>
+                  <p className="font-sans text-xs font-light text-muted-foreground/55">{stage.desc}</p>
+                </div>
+                <span
+                  className="font-sans text-[9px] font-light tracking-[0.1em] uppercase rounded-full px-2.5 py-1 shrink-0 self-center hidden sm:block"
+                  style={{
+                    backgroundColor: 'hsl(var(--stage-ivf) / 0.15)',
+                    color: 'hsl(var(--stage-ivf-accent) / 0.7)',
+                  }}
+                >
+                  {stage.emotional}
+                </span>
+              </Link>
             ))}
-
-            <p className="pt-3 font-serif italic text-sm text-foreground/40">
-              One stage at a time, with clarity and care.
-            </p>
           </div>
         </div>
       </div>

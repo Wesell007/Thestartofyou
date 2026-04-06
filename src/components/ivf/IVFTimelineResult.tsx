@@ -792,7 +792,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           </Fade>
 
           {/* ── Phase cards ── */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {IVF_PHASES.map((phase, i) => {
               const phasePast = clampedDpt > phase.endDpt;
               const phaseCurrent = clampedDpt >= phase.startDpt && clampedDpt <= phase.endDpt;

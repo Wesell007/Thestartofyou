@@ -158,19 +158,24 @@ const DueDateCalculatorForm = ({ onResult, compact = false }: Props) => {
             disabledAfter={today}
             disabledBefore={addDays(today, -300)}
           />
-          {!compact && (
-            <div>
-              <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-3">Average cycle length</p>
-              <div className="flex items-center gap-4">
-                <input
-                  type="number" min={21} max={45} value={cycleLength}
-                  onChange={(e) => setCycleLength(Number(e.target.value))}
-                  className="w-24 bg-parchment border border-border/60 rounded-xl px-4 py-3.5 font-sans text-sm font-light text-foreground focus:outline-none focus:border-sage/50 text-center"
-                />
-                <p className="font-sans text-sm font-light text-muted-foreground">days (default 28)</p>
-              </div>
+          <div>
+            <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-3">Cycle length</p>
+            <div className="relative inline-block">
+              <select
+                value={cycleLength}
+                onChange={(e) => setCycleLength(Number(e.target.value))}
+                className="appearance-none bg-parchment border border-border/60 rounded-xl px-5 py-4 pr-10 font-sans text-sm font-light text-foreground focus:outline-none focus:border-sage/50 hover:border-sage/40 transition-all"
+              >
+                {Array.from({ length: 25 }, (_, i) => i + 21).map((d) => (
+                  <option key={d} value={d}>{d} days{d === 28 ? " (average)" : ""}</option>
+                ))}
+              </select>
+              <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-sage-muted pointer-events-none" />
             </div>
-          )}
+            <p className="font-sans text-[11px] font-light text-muted-foreground/70 mt-2.5 leading-relaxed">
+              28 days is average, but many cycles vary. Your estimate will adjust based on the cycle length you choose.
+            </p>
+          </div>
         </>
       )}
 

@@ -20,6 +20,7 @@ type IVFType = "3day" | "5day";
 
 interface Props {
   onResult: (lmp: Date) => void;
+  onIVFResult?: (transferDate: Date, transferType: IVFType) => void;
   compact?: boolean;
 }
 
@@ -98,7 +99,7 @@ const SelectInput = ({
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
-const DueDateCalculatorForm = ({ onResult, compact = false }: Props) => {
+const DueDateCalculatorForm = ({ onResult, onIVFResult, compact = false }: Props) => {
   const [method, setMethod] = useState<Method>("lmp");
   const [lmpDate, setLmpDate] = useState<Date | undefined>();
   const [cycleLength, setCycleLength] = useState(28);
@@ -119,6 +120,12 @@ const DueDateCalculatorForm = ({ onResult, compact = false }: Props) => {
   };
 
   const handleCalculate = () => {
+    // IVF-specific routing when callback provided
+    if (method === "ivf" && ivfDate && onIVFResult) {
+      onIVFResult(ivfDate, ivfType);
+      return;
+    }
+
     let lmp: Date | undefined;
     if (method === "lmp" && lmpDate) {
       lmp = addDays(lmpDate, -(cycleLength - 28));

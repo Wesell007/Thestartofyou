@@ -8,36 +8,63 @@ const explorePrompts = [
   "What do I need to prepare?",
 ];
 
+/* Journey stage mini-pills in the hero */
+const stages = [
+  { label: "TTC", color: "--stage-ttc-accent" },
+  { label: "IVF", color: "--stage-ivf-accent" },
+  { label: "Pregnancy", color: "--stage-pregnancy-accent" },
+  { label: "Postpartum", color: "--stage-postpartum-accent" },
+  { label: "First year", color: "--stage-firstyear-accent" },
+];
+
 const ExploreHero = () => {
   return (
-    <section className="relative overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20 md:pt-36 md:pb-32" style={{ background: `linear-gradient(180deg, hsl(var(--parchment)) 0%, hsl(var(--parchment-dark)) 100%)` }}>
-      {/* Radial glows */}
+    <section
+      className="relative overflow-hidden pt-24 pb-14 sm:pt-28 sm:pb-18 md:pt-36 md:pb-28"
+      style={{
+        background: `linear-gradient(180deg, hsl(var(--parchment)) 0%, hsl(var(--parchment-dark)) 100%)`,
+      }}
+    >
+      {/* Ambient glows */}
       <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] glow-sage" />
       <div className="absolute bottom-0 right-1/4 w-[350px] h-[300px] glow-lavender" />
 
-      {/* Decorative stage colour dots */}
-      <div className="absolute top-20 right-[15%] hidden md:flex gap-2 opacity-40">
-        {['--stage-ttc', '--stage-ivf', '--stage-pregnancy', '--stage-postpartum', '--stage-firstyear'].map((c) => (
-          <div key={c} className="w-2 h-2 rounded-full" style={{ background: `hsl(var(${c}))` }} />
-        ))}
-      </div>
-
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl relative z-10 text-center">
         {/* Micro-label */}
-        <div className="inline-flex items-center gap-2 mb-6 md:mb-8 animate-fade-up">
+        <div className="inline-flex items-center gap-2 mb-5 md:mb-6 animate-fade-up">
           <Sparkles size={13} className="text-sage" />
-          <span className="stage-label">Your journey, guided</span>
+          <span className="stage-label">Explore</span>
         </div>
 
-        <h1 className="font-serif text-3xl sm:text-4xl md:text-[3.25rem] text-foreground mb-5 md:mb-7 animate-fade-up [animation-delay:0.05s] leading-tight">
-          Explore guidance for
-          <br className="hidden sm:block" />
+        <h1 className="font-serif text-3xl sm:text-4xl md:text-[3.25rem] text-foreground mb-5 md:mb-6 animate-fade-up [animation-delay:0.05s] leading-tight">
+          Guidance for
           <span className="italic font-normal"> every stage</span>
         </h1>
 
-        <p className="font-sans text-[15px] sm:text-base md:text-lg font-light text-muted-foreground mb-10 md:mb-14 max-w-lg mx-auto leading-relaxed animate-fade-up [animation-delay:0.1s]">
-          From trying to conceive through your baby's first year — answers, support, and tools designed for where you are right now.
+        <p className="font-sans text-[15px] sm:text-base md:text-lg font-light text-muted-foreground mb-8 md:mb-10 max-w-lg mx-auto leading-relaxed animate-fade-up [animation-delay:0.1s]">
+          Answers, support, and tools — designed for where you are right now.
         </p>
+
+        {/* Stage pill trail */}
+        <div className="flex items-center justify-center gap-1.5 sm:gap-2 mb-10 md:mb-12 animate-fade-up [animation-delay:0.15s]">
+          {stages.map((s, i) => (
+            <div key={s.label} className="flex items-center gap-1.5 sm:gap-2">
+              <span
+                className="font-sans text-[10px] sm:text-[11px] font-light tracking-wide px-2.5 py-1 rounded-pill border"
+                style={{
+                  color: `hsl(var(${s.color}))`,
+                  borderColor: `hsl(var(${s.color}) / 0.3)`,
+                  backgroundColor: `hsl(var(${s.color}) / 0.06)`,
+                }}
+              >
+                {s.label}
+              </span>
+              {i < stages.length - 1 && (
+                <div className="w-3 sm:w-4 h-px" style={{ backgroundColor: `hsl(var(--sage-light) / 0.4)` }} />
+              )}
+            </div>
+          ))}
+        </div>
 
         <div className="animate-fade-up [animation-delay:0.2s] max-w-xl mx-auto">
           <AISearchBar
@@ -48,7 +75,7 @@ const ExploreHero = () => {
         </div>
 
         {/* Secondary CTA */}
-        <div className="mt-10 md:mt-12 animate-fade-up [animation-delay:0.3s]">
+        <div className="mt-8 md:mt-10 animate-fade-up [animation-delay:0.3s]">
           <a
             href="/due-date-calculator"
             className="inline-flex items-center gap-2.5 font-sans text-[13px] font-light text-muted-foreground hover:text-foreground transition-all duration-200 group"
@@ -60,9 +87,6 @@ const ExploreHero = () => {
           </a>
         </div>
       </div>
-
-      {/* Bottom gradient blend into next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none" style={{ background: `linear-gradient(to top, hsl(var(--parchment)) 0%, transparent 100%)` }} />
     </section>
   );
 };

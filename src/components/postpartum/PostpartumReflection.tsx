@@ -2,26 +2,55 @@ import { PenLine } from "lucide-react";
 
 const PostpartumReflection = () => {
   return (
-    <section className="bg-parchment py-24 md:py-32">
-      <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-        <div className="bg-card border border-border/50 rounded-lg p-10 md:p-14 shadow-card-brand text-center">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-6">
-            Take a moment
-          </p>
-          <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-5 leading-snug max-w-md mx-auto">
-            What has felt most present for you today, tiredness, adjustment, connection, or something else?
-          </h2>
+    <section className="bg-parchment py-16 md:py-24">
+      <div className="container mx-auto px-6 md:px-10 max-w-5xl">
+        <div
+          className="rounded-2xl overflow-hidden border border-border/30 grid grid-cols-1 md:grid-cols-2"
+          style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.08)' }}
+        >
+          {/* Left — editorial */}
+          <div className="p-8 sm:p-10 flex flex-col justify-center">
+            <p
+              className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
+              style={{ color: 'hsl(var(--stage-postpartum-accent))' }}
+            >
+              Take a moment
+            </p>
+            <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-4 leading-snug">
+              What has felt most present for you today?
+            </h2>
+            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
+              Tiredness, adjustment, connection, or something else entirely. There's no right answer.
+            </p>
+            <div
+              className="pl-5 border-l-2"
+              style={{ borderColor: 'hsl(var(--stage-postpartum-accent) / 0.25)' }}
+            >
+              <p className="font-serif italic text-sm text-foreground/55 leading-relaxed">
+                Writing things down can help make sense of what feels blurred or overwhelming.
+              </p>
+            </div>
+          </div>
 
-          <textarea
-            rows={4}
-            placeholder="Write your thoughts here…"
-            className="w-full mt-4 bg-background border border-border rounded-md px-5 py-4 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 resize-none focus:outline-none focus:ring-1 focus:ring-sage focus:border-sage transition-all leading-relaxed"
-          />
-
-          <button className="mt-6 flex items-center gap-2 mx-auto border border-foreground/20 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all">
-            <PenLine size={14} />
-            Capture this thought
-          </button>
+          {/* Right — input */}
+          <div
+            className="p-8 sm:p-10 flex flex-col justify-center"
+            style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.12)' }}
+          >
+            <textarea
+              rows={5}
+              placeholder="Write your thoughts here…"
+              className="w-full bg-background border border-border rounded-lg px-5 py-4 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 resize-none focus:outline-none focus:ring-1 transition-all leading-relaxed"
+              style={{ '--tw-ring-color': 'hsl(var(--stage-postpartum-accent) / 0.3)' } as React.CSSProperties}
+            />
+            <button
+              className="mt-4 flex items-center gap-2 border rounded-pill px-6 py-3 font-sans text-sm font-light transition-all hover:bg-background/60"
+              style={{ borderColor: 'hsl(var(--stage-postpartum-accent) / 0.3)', color: 'hsl(var(--stage-postpartum-accent))' }}
+            >
+              <PenLine size={14} />
+              Capture this thought
+            </button>
+          </div>
         </div>
       </div>
     </section>

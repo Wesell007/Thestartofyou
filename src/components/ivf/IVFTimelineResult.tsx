@@ -314,18 +314,18 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
             </div>
           </Fade>
 
-          {/* Stage chips — compact, precise */}
+          {/* Stage chips */}
           <Fade delay={180}>
-            <div className="flex flex-wrap items-center gap-2.5 mb-12">
-              <span className="inline-flex items-center gap-2 font-sans text-[11px] font-medium px-4 py-2 rounded-full" style={{ color: "hsl(var(--stage-ivf-accent))", background: "hsl(var(--stage-ivf-accent) / 0.1)", border: "1px solid hsl(var(--stage-ivf-accent) / 0.15)" }}>
+            <div className="flex flex-wrap items-center gap-2 mb-14">
+              <span className="inline-flex items-center gap-2 font-sans text-[11px] font-medium px-4 py-2.5 rounded-full" style={{ color: "hsl(var(--stage-ivf-accent))", background: "hsl(var(--stage-ivf-accent) / 0.1)", border: "1px solid hsl(var(--stage-ivf-accent) / 0.15)" }}>
                 <Activity size={10} />
                 {insight.stage}
               </span>
-              <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light px-3 py-2 rounded-full text-foreground/40 bg-card/40 border border-border/20">
-                {transferType === "5day" ? "5-day blastocyst" : "3-day"} · {format(transferDate, "d MMM yyyy")}
+              <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light px-3.5 py-2.5 rounded-full text-foreground/35 bg-card/30 border border-border/15">
+                {transferType === "5day" ? "5-day blastocyst" : "3-day transfer"} · {format(transferDate, "d MMM yyyy")}
               </span>
               {daysToTest > 0 && (
-                <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light px-3 py-2 rounded-full text-foreground/40 bg-card/40 border border-border/20">
+                <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light px-3.5 py-2.5 rounded-full text-foreground/35 bg-card/30 border border-border/15">
                   <Clock size={9} />
                   {daysToTest} {daysToTest === 1 ? "day" : "days"} to test window
                 </span>

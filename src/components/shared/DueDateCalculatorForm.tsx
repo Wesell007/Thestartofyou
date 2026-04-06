@@ -20,6 +20,7 @@ type IVFType = "3day" | "5day";
 
 interface Props {
   onResult: (lmp: Date) => void;
+  onIVFResult?: (transferDate: Date, transferType: IVFType) => void;
   compact?: boolean;
 }
 

@@ -2,6 +2,7 @@ const cards = [
   {
     id: "body",
     label: "Your body",
+    icon: "○",
     intro:
       "Your body may change in ways that feel unpredictable. You might notice:",
     points: [
@@ -16,8 +17,9 @@ const cards = [
   {
     id: "baby",
     label: "Your baby",
+    icon: "◎",
     intro:
-      "Your baby is developing continuously, even when nothing feels different to you. You may notice:",
+      "Your baby is developing continuously, even when nothing feels different to you.",
     points: [
       "Weeks where development feels abstract or hard to visualise",
       "Milestones happening without clear physical signals",
@@ -29,6 +31,7 @@ const cards = [
   {
     id: "emotional",
     label: "Emotionally",
+    icon: "◈",
     intro:
       "This stage can feel less straightforward than expected. You may feel:",
     points: [
@@ -43,8 +46,9 @@ const cards = [
   {
     id: "uncertainty",
     label: "Uncertainty",
+    icon: "◇",
     intro:
-      "One of the most defining parts of pregnancy is not always knowing what things mean. You may experience:",
+      "One of the most defining parts of pregnancy is not always knowing what things mean.",
     points: [
       "Wondering if symptoms are normal",
       "Comparing your experience to others",
@@ -58,50 +62,80 @@ const cards = [
 
 const WhatToExpect = () => {
   return (
-    <section className="bg-lavender-section py-24 md:py-32">
-      <div className="container mx-auto px-6 md:px-10 max-w-5xl">
+    <section
+      className="py-20 md:py-28"
+      style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.25)' }}
+    >
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         {/* Header */}
-        <div className="text-center mb-16">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+        <div className="text-center mb-14">
+          <p
+            className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
+            style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
+          >
             The Full Picture
           </p>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-5 leading-tight max-w-2xl mx-auto">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-4 leading-tight max-w-2xl mx-auto">
             What to expect during pregnancy
           </h2>
-          <p className="font-sans text-base font-light text-muted-foreground max-w-xl mx-auto leading-relaxed">
+          <p className="font-sans text-[15px] font-light text-muted-foreground max-w-lg mx-auto leading-relaxed">
             Across your body, your emotions, and the space in between.
           </p>
         </div>
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {cards.map((card) => (
             <div
               key={card.id}
-              className="bg-card rounded-lg p-8 shadow-card-brand border border-border/50 flex flex-col gap-5"
+              className="bg-card rounded-2xl p-7 sm:p-8 shadow-card-brand border border-border/50 flex flex-col gap-4"
             >
-              <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">
-                {card.label}
-              </p>
+              {/* Card header */}
+              <div className="flex items-center gap-3">
+                <span
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-sm"
+                  style={{
+                    backgroundColor: 'hsl(var(--stage-pregnancy) / 0.5)',
+                    color: 'hsl(var(--stage-pregnancy-accent))',
+                  }}
+                >
+                  {card.icon}
+                </span>
+                <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-foreground/70">
+                  {card.label}
+                </p>
+              </div>
+
               <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
                 {card.intro}
               </p>
-              <ul className="space-y-2.5">
+
+              <ul className="space-y-2">
                 {card.points.map((pt, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="mt-2 w-1 h-1 rounded-full bg-foreground/30 shrink-0" />
+                    <span
+                      className="mt-2 w-1 h-1 rounded-full shrink-0"
+                      style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.4)' }}
+                    />
                     <span className="font-sans text-sm font-light text-foreground leading-relaxed">
                       {pt}
                     </span>
                   </li>
                 ))}
               </ul>
+
               {/* Meaning */}
-              <div className="pt-4 border-t border-border/50">
-                <p className="font-sans text-xs font-light tracking-[0.1em] uppercase text-sage-muted mb-2">
+              <div
+                className="pt-4 mt-auto border-t"
+                style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.1)' }}
+              >
+                <p
+                  className="font-sans text-[10px] font-light tracking-[0.1em] uppercase mb-1.5"
+                  style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
+                >
                   What this means
                 </p>
-                <p className="font-serif italic text-base text-foreground leading-relaxed">
+                <p className="font-serif italic text-sm sm:text-base text-foreground/80 leading-relaxed">
                   {card.meaning}
                 </p>
               </div>

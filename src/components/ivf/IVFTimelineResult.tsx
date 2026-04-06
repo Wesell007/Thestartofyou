@@ -202,7 +202,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
   const insight = getDptInsight(clampedDpt);
   const [aiQuestion, setAiQuestion] = useState("");
 
-  const progressPct = Math.min((clampedDpt / 14) * 100, 100);
+  
 
   const testDate = addDays(transferDate, insight.testDay);
   const daysToTest = Math.max(differenceInDays(testDate, today), 0);

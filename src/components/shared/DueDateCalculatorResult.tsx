@@ -23,10 +23,12 @@ interface StageInsight {
   bodyText: string;
   noticeText: string;
   focusText: string;
+  dontWorry: string;
   weekSummary: string;
   interpretationTitle: string;
   interpretation: string;
   emotionalTruth: string;
+  heroInterpretation: string;
 }
 
 export interface CalcResult {

@@ -286,16 +286,16 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S1: IVF RESULT HERO
           Cinematic — the emotional anchor of the page
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(var(--stage-ivf)) 0%, hsl(var(--stage-ivf) / 0.3) 70%, hsl(var(--parchment)) 100%)" }}>
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(var(--stage-ivf)) 0%, hsl(var(--stage-ivf) / 0.25) 75%, hsl(var(--parchment)) 100%)" }}>
         {/* Ambient layers */}
-        <div className="absolute inset-0 opacity-[0.035]" style={{ backgroundImage: "radial-gradient(circle at 15% 40%, hsl(var(--stage-ivf-accent)), transparent 45%), radial-gradient(circle at 85% 60%, hsl(var(--lavender)), transparent 45%)" }} />
-        <div className="absolute bottom-0 left-0 right-0 h-32" style={{ background: "linear-gradient(to top, hsl(var(--parchment)), transparent)" }} />
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 20% 35%, hsl(var(--stage-ivf-accent)), transparent 50%), radial-gradient(circle at 80% 65%, hsl(var(--lavender)), transparent 50%)" }} />
+        <div className="absolute bottom-0 left-0 right-0 h-40" style={{ background: "linear-gradient(to top, hsl(var(--parchment)), transparent)" }} />
 
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pt-32 md:pt-40 pb-24 md:pb-32 relative z-10">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pt-32 md:pt-44 pb-28 md:pb-36 relative z-10">
 
           {/* Eyebrow */}
           <Fade delay={0}>
-            <div className="flex items-center gap-3 mb-14">
+            <div className="flex items-center gap-3 mb-10">
               <div className="h-px w-10" style={{ background: "hsl(var(--stage-ivf-accent) / 0.3)" }} />
               <p className="font-sans text-[11px] font-light tracking-[0.3em] uppercase" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
                 Your IVF timeline
@@ -303,29 +303,29 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
             </div>
           </Fade>
 
-          {/* Primary result — dramatic scale */}
+          {/* Primary result */}
           <Fade delay={100}>
-            <p className="font-sans text-sm font-light text-foreground/40 mb-4 tracking-wide">You are currently</p>
-            <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-5 mb-4">
-              <span className="font-serif text-[4.5rem] sm:text-[6rem] md:text-[8rem] text-foreground leading-[0.85] tracking-tight">{clampedDpt}</span>
-              <span className="font-serif text-xl sm:text-2xl md:text-3xl font-light text-foreground/50 italic">
+            <p className="font-sans text-[13px] font-light text-foreground/35 mb-3 tracking-wide">You are currently</p>
+            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 mb-6">
+              <span className="font-serif text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] text-foreground leading-[0.85] tracking-tight">{clampedDpt}</span>
+              <span className="font-serif text-xl sm:text-2xl md:text-[1.75rem] font-light text-foreground/45 italic">
                 {clampedDpt === 1 ? "day" : "days"} post transfer
               </span>
             </div>
           </Fade>
 
-          {/* Stage chips — compact, precise */}
+          {/* Stage chips */}
           <Fade delay={180}>
-            <div className="flex flex-wrap items-center gap-2.5 mb-12">
-              <span className="inline-flex items-center gap-2 font-sans text-[11px] font-medium px-4 py-2 rounded-full" style={{ color: "hsl(var(--stage-ivf-accent))", background: "hsl(var(--stage-ivf-accent) / 0.1)", border: "1px solid hsl(var(--stage-ivf-accent) / 0.15)" }}>
+            <div className="flex flex-wrap items-center gap-2 mb-14">
+              <span className="inline-flex items-center gap-2 font-sans text-[11px] font-medium px-4 py-2.5 rounded-full" style={{ color: "hsl(var(--stage-ivf-accent))", background: "hsl(var(--stage-ivf-accent) / 0.1)", border: "1px solid hsl(var(--stage-ivf-accent) / 0.15)" }}>
                 <Activity size={10} />
                 {insight.stage}
               </span>
-              <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light px-3 py-2 rounded-full text-foreground/40 bg-card/40 border border-border/20">
-                {transferType === "5day" ? "5-day blastocyst" : "3-day"} · {format(transferDate, "d MMM yyyy")}
+              <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light px-3.5 py-2.5 rounded-full text-foreground/35 bg-card/30 border border-border/15">
+                {transferType === "5day" ? "5-day blastocyst" : "3-day transfer"} · {format(transferDate, "d MMM yyyy")}
               </span>
               {daysToTest > 0 && (
-                <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light px-3 py-2 rounded-full text-foreground/40 bg-card/40 border border-border/20">
+                <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light px-3.5 py-2.5 rounded-full text-foreground/35 bg-card/30 border border-border/15">
                   <Clock size={9} />
                   {daysToTest} {daysToTest === 1 ? "day" : "days"} to test window
                 </span>
@@ -334,22 +334,22 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           </Fade>
 
           {/* Two-column: interpretation + orientation card */}
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
             {/* Left: Interpretation + dominant CTA */}
             <div className="lg:col-span-3">
               <Fade delay={250}>
-                <p className="font-sans text-[15px] font-light text-foreground/60 leading-[1.85] max-w-lg mb-5">
+                <p className="font-sans text-[15px] font-light text-foreground/55 leading-[1.9] max-w-lg mb-6">
                   {insight.heroInterpretation}
                 </p>
-                <div className="flex items-start gap-2.5 mb-12">
-                  <Shield size={13} className="shrink-0 mt-1" style={{ color: "hsl(var(--stage-ivf-accent) / 0.5)" }} />
-                  <p className="font-sans text-[13px] font-light text-foreground/40 leading-relaxed italic">
+                <div className="flex items-start gap-2.5 mb-14">
+                  <Shield size={13} className="shrink-0 mt-1" style={{ color: "hsl(var(--stage-ivf-accent) / 0.45)" }} />
+                  <p className="font-sans text-[13px] font-light text-foreground/35 leading-relaxed italic">
                     {insight.heroReassurance}
                   </p>
                 </div>
               </Fade>
 
-              {/* CTA cluster — high intent */}
+              {/* CTA cluster */}
               <Fade delay={350}>
                 <div className="flex flex-wrap items-center gap-4">
                   <Link
@@ -361,7 +361,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                   </Link>
                   <Link
                     to="/ask"
-                    className="inline-flex items-center gap-2.5 rounded-pill px-7 py-4.5 font-sans text-sm font-light text-foreground/60 hover:text-foreground border border-border/25 hover:border-border/40 bg-card/40 backdrop-blur-sm transition-all"
+                    className="inline-flex items-center gap-2.5 rounded-pill px-7 py-4.5 font-sans text-sm font-light text-foreground/50 hover:text-foreground border border-border/20 hover:border-border/35 bg-card/30 backdrop-blur-sm transition-all"
                   >
                     <MessageCircle size={13} style={{ color: "hsl(var(--stage-ivf-accent))" }} />
                     Ask about this stage
@@ -415,21 +415,21 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S2: CONVERSION BRIDGE
           The strategic pivot — result becomes relationship
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-24 md:py-32 overflow-hidden" style={{ background: "hsl(var(--parchment-dark))" }}>
-        <div className="absolute top-0 left-0 w-full h-px" style={{ background: "linear-gradient(90deg, transparent 10%, hsl(var(--stage-ivf-accent) / 0.15), transparent 90%)" }} />
+      <section className="relative py-28 md:py-36 overflow-hidden" style={{ background: "hsl(var(--parchment-dark))" }}>
+        <div className="absolute top-0 left-0 w-full h-px" style={{ background: "linear-gradient(90deg, transparent 5%, hsl(var(--stage-ivf-accent) / 0.12), transparent 95%)" }} />
 
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Left: Editorial conviction */}
             <Fade delay={0}>
               <div>
-                <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase mb-6" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
+                <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase mb-7" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
                   Your next step
                 </p>
-                <h2 className="font-serif text-3xl sm:text-[2.2rem] md:text-[2.5rem] text-foreground leading-[1.15] mb-6">
-                  This is where your IVF journey <span className="italic">becomes personal</span>
+                <h2 className="font-serif text-3xl sm:text-[2.2rem] md:text-[2.5rem] text-foreground leading-[1.15] mb-7">
+                  This is where your IVF<br className="hidden sm:block" /> journey <span className="italic">becomes personal</span>
                 </h2>
-                <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8] mb-10 max-w-md">
+                <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.85] mb-12 max-w-md">
                   Starting saves your stage, personalises your guidance, and gives you a clear, supported path through IVF and beyond. No more guessing what comes next.
                 </p>
                 <Link
@@ -439,26 +439,26 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                   Start your journey
                   <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                 </Link>
-                <p className="mt-5 font-sans text-xs font-light text-muted-foreground/45">Takes a minute to begin.</p>
+                <p className="mt-4 font-sans text-[11px] font-light text-muted-foreground/40">Takes a minute to begin.</p>
               </div>
             </Fade>
 
             {/* Right: Benefits — structured, not card-heavy */}
             <Fade delay={120}>
-              <div className="space-y-5">
+              <div className="space-y-0">
                 {[
                   { icon: Clock, title: "Save where you are", body: "Your IVF timeline is remembered so you can return exactly where you left off." },
                   { icon: Activity, title: "Stage-based guidance", body: "Support that reflects IVF timing and milestones — not generic pregnancy advice." },
                   { icon: Shield, title: "Know what to expect", body: "Medically grounded next steps, both practical and emotional, for your specific stage." },
                   { icon: Heart, title: "Return anytime", body: "Your place is saved. Come back whenever you need guidance or reassurance." },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-5 py-5 border-b border-border/20 last:border-0">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: "hsl(var(--stage-ivf) / 0.5)" }}>
-                      <item.icon size={16} style={{ color: "hsl(var(--stage-ivf-accent))" }} />
+                  <div key={i} className="flex items-start gap-5 py-6 border-b border-border/15 last:border-0 first:border-t first:border-border/15">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: "hsl(var(--stage-ivf) / 0.4)" }}>
+                      <item.icon size={15} style={{ color: "hsl(var(--stage-ivf-accent))" }} />
                     </div>
                     <div>
-                      <p className="font-sans text-sm font-medium text-foreground mb-1.5">{item.title}</p>
-                      <p className="font-sans text-[13px] font-light text-muted-foreground/70 leading-relaxed">{item.body}</p>
+                      <p className="font-sans text-[14px] font-medium text-foreground mb-1">{item.title}</p>
+                      <p className="font-sans text-[13px] font-light text-muted-foreground/60 leading-relaxed">{item.body}</p>
                     </div>
                   </div>
                 ))}
@@ -473,10 +473,10 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S3: WHAT THIS STAGE MEANS IN IVF
           Editorial interpretation — the intelligence layer
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-parchment py-24 md:py-32">
+      <section className="bg-parchment py-28 md:py-36">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
           <Fade delay={0}>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-5">
               <div className="h-px w-10" style={{ background: "hsl(var(--stage-ivf-accent) / 0.3)" }} />
               <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
                 Understanding your stage
@@ -485,7 +485,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
             <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.2rem] text-foreground leading-tight mb-5 max-w-lg">
               What this stage means in IVF
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8] mb-16 max-w-lg">
+            <p className="font-sans text-[15px] font-light text-muted-foreground/70 leading-[1.85] mb-14 max-w-lg">
               IVF care is more structured than typical pregnancy. Your clinic is monitoring specific milestones, and the timeline is measured in days. That precision can feel both reassuring and pressurising.
             </p>
           </Fade>
@@ -793,10 +793,10 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S5: WHAT TO EXPECT NEXT
           Structured milestones — guided, not overwhelming
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-parchment py-24 md:py-32">
+      <section className="bg-parchment py-28 md:py-36">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
           <Fade delay={0}>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-5">
               <div className="h-px w-10" style={{ background: "hsl(var(--stage-ivf-accent) / 0.3)" }} />
               <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
                 Looking ahead
@@ -805,7 +805,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
             <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-4">
               What to expect next
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed mb-14 max-w-lg">
+            <p className="font-sans text-[15px] font-light text-muted-foreground/70 leading-relaxed mb-14 max-w-lg">
               The next likely steps from where you are now, held clearly so you can follow what matters.
             </p>
           </Fade>
@@ -843,7 +843,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S6: ASK ABOUT THIS STAGE
           IVF-contextualised support — warm, specific, integrated
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32" style={{ background: "hsl(var(--stage-ivf) / 0.2)" }}>
+      <section className="py-28 md:py-36" style={{ background: "hsl(var(--stage-ivf) / 0.15)" }}>
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-14 lg:gap-20 items-start">
             {/* Left: Prompt + input */}
@@ -922,7 +922,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S7: JOURNAL COMPANION
           Emotionally integrated — not product-dropped
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="relative bg-parchment py-24 md:py-32 overflow-hidden">
+      <section className="relative bg-parchment py-28 md:py-36 overflow-hidden">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
             {/* Image — tactile, real */}
@@ -997,16 +997,16 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S8: EXPLORE YOUR IVF JOURNEY
           Curated directional links — editorial, not nav-like
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-24" style={{ background: "hsl(var(--parchment-dark))" }}>
+      <section className="py-24 md:py-28" style={{ background: "hsl(var(--parchment-dark))" }}>
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
           <Fade delay={0}>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-5">
               <div className="h-px w-10" style={{ background: "hsl(var(--stage-ivf-accent) / 0.3)" }} />
               <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
                 Explore your journey
               </p>
             </div>
-            <p className="font-sans text-[15px] font-light text-muted-foreground mb-10 max-w-sm">
+            <p className="font-sans text-[15px] font-light text-muted-foreground/60 mb-8 max-w-sm">
               Guidance for what matters most from where you are now.
             </p>
           </Fade>
@@ -1040,18 +1040,18 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S9: FINAL TRUST CTA
           Decisive, warm, system-level close
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-28 md:py-36 overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(var(--stage-ivf) / 0.2) 0%, hsl(var(--parchment)) 100%)" }}>
-        <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 50% 40%, hsl(var(--stage-ivf-accent)), transparent 55%)" }} />
+      <section className="relative py-32 md:py-40 overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(var(--stage-ivf) / 0.15) 0%, hsl(var(--parchment)) 100%)" }}>
+        <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "radial-gradient(circle at 50% 40%, hsl(var(--stage-ivf-accent)), transparent 55%)" }} />
 
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl text-center relative z-10">
           <Fade delay={0}>
-            <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase mb-8" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
+            <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase mb-10" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
               Day {clampedDpt} post transfer · {insight.stage}
             </p>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-[2.8rem] text-foreground leading-[1.15] mb-6">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-[2.8rem] text-foreground leading-[1.15] mb-7">
               Begin with guidance that<br />understands <span className="italic">IVF</span>
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8] max-w-md mx-auto mb-12">
+            <p className="font-sans text-[15px] font-light text-muted-foreground/65 leading-[1.85] max-w-md mx-auto mb-14">
               Get guidance tailored to your stage — what is happening, what is normal, and what to expect next.
             </p>
             <Link
@@ -1063,22 +1063,22 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
             </Link>
 
             {/* Trust cues */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8 mt-10">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8 mt-12">
               {[
                 "Personalised to your stage",
                 "Built for IVF-specific timing",
                 "Save your place and return anytime",
               ].map((cue, i) => (
-                <p key={i} className="font-sans text-xs font-light text-muted-foreground/45 flex items-center gap-2">
-                  <Check size={11} style={{ color: "hsl(var(--stage-ivf-accent))" }} />
+                <p key={i} className="font-sans text-[11px] font-light text-muted-foreground/40 flex items-center gap-2">
+                  <Check size={10} style={{ color: "hsl(var(--stage-ivf-accent) / 0.6)" }} />
                   {cue}
                 </p>
               ))}
             </div>
 
             {/* Medical trust */}
-            <p className="mt-12 font-sans text-[11px] font-light text-muted-foreground/35 flex items-center justify-center gap-2">
-              <Shield size={11} style={{ color: "hsl(var(--stage-ivf-accent) / 0.4)" }} />
+            <p className="mt-14 font-sans text-[11px] font-light text-muted-foreground/30 flex items-center justify-center gap-2">
+              <Shield size={10} style={{ color: "hsl(var(--stage-ivf-accent) / 0.35)" }} />
               Medically reviewed by Jenny Joines
             </p>
           </Fade>

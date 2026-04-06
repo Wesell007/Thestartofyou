@@ -1040,18 +1040,18 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S9: FINAL TRUST CTA
           Decisive, warm, system-level close
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-28 md:py-36 overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(var(--stage-ivf) / 0.2) 0%, hsl(var(--parchment)) 100%)" }}>
-        <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle at 50% 40%, hsl(var(--stage-ivf-accent)), transparent 55%)" }} />
+      <section className="relative py-32 md:py-40 overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(var(--stage-ivf) / 0.15) 0%, hsl(var(--parchment)) 100%)" }}>
+        <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "radial-gradient(circle at 50% 40%, hsl(var(--stage-ivf-accent)), transparent 55%)" }} />
 
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl text-center relative z-10">
           <Fade delay={0}>
-            <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase mb-8" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
+            <p className="font-sans text-[11px] font-light tracking-[0.25em] uppercase mb-10" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
               Day {clampedDpt} post transfer · {insight.stage}
             </p>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-[2.8rem] text-foreground leading-[1.15] mb-6">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-[2.8rem] text-foreground leading-[1.15] mb-7">
               Begin with guidance that<br />understands <span className="italic">IVF</span>
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8] max-w-md mx-auto mb-12">
+            <p className="font-sans text-[15px] font-light text-muted-foreground/65 leading-[1.85] max-w-md mx-auto mb-14">
               Get guidance tailored to your stage — what is happening, what is normal, and what to expect next.
             </p>
             <Link

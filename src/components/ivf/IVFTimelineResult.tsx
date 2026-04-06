@@ -843,7 +843,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
           S6: ASK ABOUT THIS STAGE
           IVF-contextualised support — warm, specific, integrated
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32" style={{ background: "hsl(var(--stage-ivf) / 0.2)" }}>
+      <section className="py-28 md:py-36" style={{ background: "hsl(var(--stage-ivf) / 0.15)" }}>
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-14 lg:gap-20 items-start">
             {/* Left: Prompt + input */}

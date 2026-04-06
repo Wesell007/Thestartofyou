@@ -1,3 +1,6 @@
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+
 const DashboardPreviewSection = () => {
   return (
     <section className="relative bg-lavender-bg section-spacing overflow-hidden">
@@ -14,18 +17,18 @@ const DashboardPreviewSection = () => {
             Everything you need, in one place
           </h2>
           <p className="font-sans text-sm sm:text-base font-light text-lavender-foreground/60 max-w-xl mx-auto leading-relaxed">
-            Your personal dashboard organises weekly guidance, milestone tracking, reflection prompts, and curated resources — updated every week.
+            Your personal dashboard organises weekly guidance, milestone tracking, reflection prompts, and curated resources, updated every week.
           </p>
         </div>
 
-        {/* Browser mockup — with shadow + scale */}
-        <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-elevated border border-border/15 bg-card mx-auto max-w-4xl transform md:scale-[1.02] transition-transform">
+        {/* Browser mockup */}
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-elevated border border-border/15 bg-card mx-auto max-w-4xl transform md:scale-[1.03] transition-transform">
           {/* Browser chrome */}
           <div className="bg-parchment-dark px-4 sm:px-5 py-3 sm:py-4 flex items-center gap-2 border-b border-border/20">
-            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-destructive/30" />
-            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-terracotta/30" />
-            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-sage/30" />
-            <div className="ml-3 sm:ml-4 flex-1 bg-parchment rounded-lg px-3 sm:px-4 py-1 sm:py-1.5 text-[10px] sm:text-xs font-sans font-light text-muted-foreground/60 truncate">
+            <span className="w-2.5 h-2.5 rounded-full bg-destructive/30" />
+            <span className="w-2.5 h-2.5 rounded-full bg-terracotta/30" />
+            <span className="w-2.5 h-2.5 rounded-full bg-sage/30" />
+            <div className="ml-4 flex-1 bg-parchment rounded-lg px-4 py-1.5 text-[10px] sm:text-xs font-sans font-light text-muted-foreground/60 truncate">
               thestartofyou.com/journey
             </div>
           </div>
@@ -42,7 +45,7 @@ const DashboardPreviewSection = () => {
                   </span>
                 ))}
               </nav>
-              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-sage/80 flex items-center justify-center text-[9px] sm:text-[10px] font-sans font-medium" style={{ color: 'hsl(var(--primary-foreground))' }}>
+              <div className="w-7 h-7 rounded-full bg-sage/80 flex items-center justify-center text-[10px] font-sans font-medium" style={{ color: 'hsl(var(--primary-foreground))' }}>
                 AS
               </div>
             </div>
@@ -50,15 +53,21 @@ const DashboardPreviewSection = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
               {/* Main content */}
               <div className="md:col-span-2 p-5 sm:p-7 md:border-r border-border/20">
-                <p className="font-sans text-[10px] font-medium text-terracotta/80 tracking-[0.2em] uppercase mb-1.5">WEEK 18</p>
-                <h3 className="font-serif text-lg sm:text-xl text-foreground mb-1.5">Second Trimester</h3>
+                <div className="flex items-center gap-3 mb-1.5">
+                  <p className="font-sans text-[10px] font-medium text-terracotta/80 tracking-[0.2em] uppercase">WEEK 18</p>
+                  <span className="px-2 py-0.5 rounded-pill bg-sage/10 text-sage font-sans text-[9px] font-medium">Second Trimester</span>
+                </div>
+                <h3 className="font-serif text-lg sm:text-xl text-foreground mb-1">Your week at a glance</h3>
                 <p className="font-sans text-[11px] font-light text-muted-foreground/60 mb-5 sm:mb-7">Due date: 14 October 2025</p>
 
                 {/* Progress */}
                 <div className="bg-parchment rounded-xl p-4 sm:p-5 mb-5 sm:mb-7">
-                  <p className="font-sans text-[10px] font-light text-muted-foreground/60 mb-3">Your Progress</p>
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="font-sans text-[10px] font-light text-muted-foreground/60">Your Progress</p>
+                    <p className="font-sans text-[10px] font-medium text-terracotta/70">45%</p>
+                  </div>
                   <div className="h-1.5 rounded-full bg-parchment-dark overflow-hidden mb-3">
-                    <div className="h-full rounded-full bg-gradient-to-r from-sage to-terracotta/50" style={{ width: "45%" }} />
+                    <div className="h-full rounded-full bg-gradient-to-r from-sage to-terracotta/60 transition-all" style={{ width: "45%" }} />
                   </div>
                   <div className="flex justify-between font-sans text-[10px] font-light text-muted-foreground/50">
                     <span>18 weeks completed</span>
@@ -66,13 +75,13 @@ const DashboardPreviewSection = () => {
                   </div>
                 </div>
 
-                {/* Info rows */}
+                {/* Info rows with subtle left border accents */}
                 {[
-                  { label: "This Week's Development", val: "Baby's bones are hardening and facial features continue to develop" },
-                  { label: "Body Changes", val: "Increased energy and possible quickening movements" },
-                  { label: "This Week's Focus", val: "Consider starting birth preference discussions" },
+                  { label: "This Week's Development", val: "Baby's bones are hardening and facial features continue to develop", color: "border-sage/40" },
+                  { label: "Body Changes", val: "Increased energy and possible quickening movements", color: "border-lavender/40" },
+                  { label: "This Week's Focus", val: "Consider starting birth preference discussions", color: "border-terracotta/40" },
                 ].map((row) => (
-                  <div key={row.label} className="mb-4 sm:mb-5">
+                  <div key={row.label} className={`mb-4 sm:mb-5 pl-4 border-l-2 ${row.color}`}>
                     <p className="font-sans text-[12px] sm:text-[13px] font-medium text-foreground mb-1">{row.label}</p>
                     <p className="font-sans text-[11px] font-light text-muted-foreground/70 leading-relaxed">{row.val}</p>
                   </div>
@@ -120,9 +129,18 @@ const DashboardPreviewSection = () => {
         </div>
 
         {/* Supporting trust line */}
-        <p className="font-sans text-xs font-light text-lavender-foreground/40 text-center mt-8 md:mt-10">
-          Your dashboard updates every Sunday with personalised guidance for your current week.
-        </p>
+        <div className="text-center mt-8 md:mt-12">
+          <p className="font-sans text-xs font-light text-lavender-foreground/40 mb-4">
+            Your dashboard updates every Sunday with personalised guidance for your current week.
+          </p>
+          <Link
+            to="/due-date-calculator"
+            className="inline-flex items-center gap-2 font-sans text-sm font-medium text-terracotta hover:text-terracotta-hover transition-colors"
+          >
+            Try it with your due date
+            <ArrowRight size={14} />
+          </Link>
+        </div>
       </div>
     </section>
   );

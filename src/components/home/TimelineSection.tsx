@@ -19,9 +19,9 @@ const milestones = [
 ];
 
 const trimesterBoundaries = [
-  { label: "First Trimester", sub: "Foundation & Formation", start: 1, end: 13, color: "bg-sage-bg/60" },
-  { label: "Second Trimester", sub: "Growth & Awareness", start: 14, end: 26, color: "bg-lavender-bg/60" },
-  { label: "Third Trimester", sub: "Preparation & Arrival", start: 27, end: 40, color: "bg-parchment-deeper/60" },
+  { label: "First Trimester", sub: "Weeks 1-13", start: 1, end: 13, color: "bg-sage-bg/60", accent: "border-sage/30" },
+  { label: "Second Trimester", sub: "Weeks 14-26", start: 14, end: 26, color: "bg-lavender-bg/60", accent: "border-lavender/30" },
+  { label: "Third Trimester", sub: "Weeks 27-40", start: 27, end: 40, color: "bg-parchment-deeper/60", accent: "border-terracotta/20" },
 ];
 
 const getWeekPercent = (week: number) => ((week - 1) / 39) * 100;
@@ -37,18 +37,18 @@ const TimelineSection = () => {
             Your complete pregnancy timeline
           </h2>
           <p className="font-sans text-sm sm:text-base font-light text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            Every pregnancy follows a structured 40-week journey. See where you are, what's ahead, and the milestones that mark each stage.
+            Every pregnancy follows a structured 40-week journey. See where you are, what is ahead, and the milestones that mark each stage.
           </p>
         </div>
 
-        {/* Trimester cards */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 md:mb-8">
+        {/* Trimester cards — richer treatment */}
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-8 md:mb-10">
           {trimesterBoundaries.map((t) => (
-            <div key={t.label} className={`${t.color} rounded-xl sm:rounded-2xl py-3 sm:py-4 px-3 sm:px-4 text-center`}>
-              <p className="font-sans text-[9px] sm:text-[10px] font-medium tracking-[0.15em] uppercase text-foreground/70 mb-0.5">
+            <div key={t.label} className={`${t.color} rounded-xl sm:rounded-2xl py-4 sm:py-5 px-3 sm:px-5 text-center border ${t.accent}`}>
+              <p className="font-sans text-[9px] sm:text-[10px] font-medium tracking-[0.15em] uppercase text-foreground/70 mb-1">
                 {t.label}
               </p>
-              <p className="font-serif italic text-[10px] sm:text-xs text-muted-foreground/60 hidden sm:block">
+              <p className="font-sans text-[10px] sm:text-xs font-light text-muted-foreground/60">
                 {t.sub}
               </p>
             </div>
@@ -85,10 +85,10 @@ const TimelineSection = () => {
                   <div className="absolute -top-8 sm:-top-10 left-1/2 -translate-x-1/2 bg-terracotta text-terracotta-foreground font-sans text-[9px] sm:text-[11px] font-medium px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-pill whitespace-nowrap shadow-cta">
                     Week {currentWeek}
                   </div>
-                  <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-terracotta bg-terracotta-foreground shadow-cta" />
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-terracotta bg-terracotta-foreground shadow-cta animate-pulse" />
                 </>
               ) : (
-                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full border border-foreground/20 bg-card" />
+                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full border border-foreground/20 bg-card hover:bg-sage/20 transition-colors" />
               )}
               {m.label && (
                 <p className="absolute top-5 sm:top-7 left-1/2 -translate-x-1/2 font-sans text-[8px] sm:text-[10px] font-light text-muted-foreground/60 whitespace-nowrap">
@@ -100,10 +100,10 @@ const TimelineSection = () => {
         </div>
 
         {/* CTA below timeline */}
-        <div className="text-center mt-8 md:mt-12">
+        <div className="text-center mt-10 md:mt-14">
           <Link
             to="/pregnancy"
-            className="inline-flex items-center gap-2 font-sans text-sm font-light text-foreground hover:text-terracotta transition-colors border-b border-border/40 hover:border-terracotta/40 pb-0.5"
+            className="inline-flex items-center gap-2.5 bg-parchment-dark border border-border/40 rounded-pill px-7 py-3.5 font-sans text-sm font-medium text-foreground hover:bg-parchment-deeper hover:shadow-soft transition-all duration-300"
           >
             Explore the full pregnancy journey
             <ArrowRight size={14} />

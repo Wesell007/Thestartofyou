@@ -445,20 +445,20 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
 
             {/* Right: Benefits — structured, not card-heavy */}
             <Fade delay={120}>
-              <div className="space-y-5">
+              <div className="space-y-0">
                 {[
                   { icon: Clock, title: "Save where you are", body: "Your IVF timeline is remembered so you can return exactly where you left off." },
                   { icon: Activity, title: "Stage-based guidance", body: "Support that reflects IVF timing and milestones — not generic pregnancy advice." },
                   { icon: Shield, title: "Know what to expect", body: "Medically grounded next steps, both practical and emotional, for your specific stage." },
                   { icon: Heart, title: "Return anytime", body: "Your place is saved. Come back whenever you need guidance or reassurance." },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-5 py-5 border-b border-border/20 last:border-0">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: "hsl(var(--stage-ivf) / 0.5)" }}>
-                      <item.icon size={16} style={{ color: "hsl(var(--stage-ivf-accent))" }} />
+                  <div key={i} className="flex items-start gap-5 py-6 border-b border-border/15 last:border-0 first:border-t first:border-border/15">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: "hsl(var(--stage-ivf) / 0.4)" }}>
+                      <item.icon size={15} style={{ color: "hsl(var(--stage-ivf-accent))" }} />
                     </div>
                     <div>
-                      <p className="font-sans text-sm font-medium text-foreground mb-1.5">{item.title}</p>
-                      <p className="font-sans text-[13px] font-light text-muted-foreground/70 leading-relaxed">{item.body}</p>
+                      <p className="font-sans text-[14px] font-medium text-foreground mb-1">{item.title}</p>
+                      <p className="font-sans text-[13px] font-light text-muted-foreground/60 leading-relaxed">{item.body}</p>
                     </div>
                   </div>
                 ))}

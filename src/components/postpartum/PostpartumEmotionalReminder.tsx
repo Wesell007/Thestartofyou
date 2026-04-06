@@ -1,7 +1,19 @@
 const cards = [
-  { label: "Exhausted", note: "Even when things are going well, fatigue is real and valid." },
-  { label: "Overwhelmed", note: "Too many decisions, too little sleep. This is part of the adjustment." },
-  { label: "Grateful", note: "Joy and exhaustion can exist at the same time. Both are real." },
+  {
+    label: "Exhausted",
+    note: "Even when things are going well, fatigue is constant. It changes how everything feels.",
+    stat: { n: "24/7", label: "awareness" },
+  },
+  {
+    label: "Overwhelmed",
+    note: "Too many decisions, too little sleep. The mental load is invisible but real.",
+    stat: { n: "∞", label: "decisions" },
+  },
+  {
+    label: "Connected",
+    note: "Joy and exhaustion exist at the same time. Both are real. Both matter.",
+    stat: { n: "1", label: "moment" },
+  },
 ];
 
 const PostpartumEmotionalReminder = () => {
@@ -34,16 +46,24 @@ const PostpartumEmotionalReminder = () => {
             </h2>
 
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
-              Taking things one day at a time is enough. You don't need to have it all figured out.
+              Taking things one day at a time is enough. You don't need to have it all figured out right now, or ever all at once.
             </p>
 
             <div
-              className="pl-5 border-l-2"
-              style={{ borderColor: 'hsl(var(--stage-postpartum-accent) / 0.3)' }}
+              className="rounded-xl px-5 py-4 border border-border/20"
+              style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.2)' }}
             >
-              <p className="font-serif italic text-base text-foreground/60 leading-relaxed">
-                "You're doing more than you realise."
-              </p>
+              <div className="flex items-start gap-3">
+                <div
+                  className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                  style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.3)' }}
+                >
+                  <span className="font-serif text-xs" style={{ color: 'hsl(var(--stage-postpartum-accent))' }}>✦</span>
+                </div>
+                <p className="font-serif italic text-base text-foreground/60 leading-relaxed">
+                  "You're doing more than you realise."
+                </p>
+              </div>
             </div>
           </div>
 
@@ -52,7 +72,7 @@ const PostpartumEmotionalReminder = () => {
             {cards.map((card, i) => (
               <div
                 key={i}
-                className="rounded-xl p-5 border border-border/20"
+                className="rounded-xl p-5 border border-border/20 flex flex-col"
                 style={{ backgroundColor: `hsl(var(--stage-postpartum) / ${0.18 - i * 0.04})` }}
               >
                 <p
@@ -61,9 +81,16 @@ const PostpartumEmotionalReminder = () => {
                 >
                   {card.label}
                 </p>
-                <p className="font-sans text-sm font-light text-foreground/75 leading-relaxed">
+                <p className="font-sans text-sm font-light text-foreground/75 leading-relaxed mb-4 flex-1">
                   {card.note}
                 </p>
+                <div
+                  className="pt-3 border-t flex items-baseline gap-1.5"
+                  style={{ borderColor: 'hsl(var(--stage-postpartum-accent) / 0.1)' }}
+                >
+                  <span className="font-serif text-lg text-foreground">{card.stat.n}</span>
+                  <span className="font-sans text-[10px] font-light text-muted-foreground/50 uppercase tracking-wide">{card.stat.label}</span>
+                </div>
               </div>
             ))}
           </div>

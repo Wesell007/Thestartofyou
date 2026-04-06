@@ -150,24 +150,96 @@ const getDptInsight = (dpt: number): DptInsight => {
   };
 };
 
-interface TimelineNode {
-  dpt: number;
+// ─── IVF phases (horizontal track) ────────────────────────────────────────────
+
+interface IVFPhase {
+  id: string;
   label: string;
-  detail: string;
-  medicalNote: string;
+  range: string;
+  sub: string;
+  desc: string;
+  startDpt: number;
+  endDpt: number;
+  href: string;
 }
 
-const TIMELINE_NODES: TimelineNode[] = [
-  { dpt: 0,  label: "Embryo transfer",       detail: "Day of transfer",                    medicalNote: "Embryo placed into the uterus. Rest and progesterone support begin." },
-  { dpt: 1,  label: "Implantation begins",    detail: "Hatching and early attachment",      medicalNote: "The blastocyst hatches from its shell and begins attaching to the uterine lining." },
-  { dpt: 3,  label: "Implantation window",    detail: "Attachment completing",              medicalNote: "Full implantation typically completes. Most people feel nothing during this process." },
-  { dpt: 5,  label: "hCG rising",             detail: "Hormone levels beginning to climb",  medicalNote: "If implantation has occurred, hCG production starts — but levels are still too low to detect." },
-  { dpt: 8,  label: "hCG detectable",         detail: "Approaching test sensitivity",       medicalNote: "hCG may reach home-test sensitivity in some cases. Clinic blood tests are more reliable." },
-  { dpt: 10, label: "Beta hCG test",          detail: "First official blood test",          medicalNote: "Your clinic measures hCG levels to confirm pregnancy. A repeat test follows in 48–72 hours." },
-  { dpt: 14, label: "Early viability scan",   detail: "Ultrasound confirmation",            medicalNote: "Gestational sac visibility expected. Heartbeat may or may not be detectable yet." },
-  { dpt: 21, label: "Heartbeat scan",         detail: "Cardiac activity check",             medicalNote: "Heartbeat typically confirmed around 6–7 weeks gestational age. A key reassurance milestone." },
-  { dpt: 42, label: "Transition to OB care",  detail: "Graduating from fertility clinic",   medicalNote: "Many clinics discharge around 8–10 weeks. You transition into standard pregnancy care." },
+const IVF_PHASES: IVFPhase[] = [
+  {
+    id: "transfer",
+    label: "Transfer",
+    range: "Day 0",
+    sub: "The beginning",
+    desc: "Embryo placed and progesterone support begins. Rest and gentle routine are all that's needed.",
+    startDpt: 0, endDpt: 0,
+    href: "/ivf/before-transfer",
+  },
+  {
+    id: "implantation",
+    label: "Implantation Window",
+    range: "Days 1–3",
+    sub: "Invisible progress",
+    desc: "The embryo hatches and begins attaching. Most implantation happens without any noticeable sensation.",
+    startDpt: 1, endDpt: 3,
+    href: "/ivf/after-transfer",
+  },
+  {
+    id: "hcg-rising",
+    label: "hCG Rising",
+    range: "Days 4–9",
+    sub: "Building toward detection",
+    desc: "If implantation has occurred, hormone levels are climbing — but still too low for home tests to detect reliably.",
+    startDpt: 4, endDpt: 9,
+    href: "/ivf/after-transfer",
+  },
+  {
+    id: "test-window",
+    label: "Test Window",
+    range: "Days 10–12",
+    sub: "Official blood test",
+    desc: "Your clinic measures hCG to confirm pregnancy. Blood tests are significantly more accurate than home tests.",
+    startDpt: 10, endDpt: 12,
+    href: "/ivf/after-transfer",
+  },
+  {
+    id: "early-monitoring",
+    label: "Early Monitoring",
+    range: "Days 13–28",
+    sub: "Scans and reassurance",
+    desc: "Viability scan, heartbeat check, and continued progesterone support. Progress is tracked in careful steps.",
+    startDpt: 13, endDpt: 28,
+    href: "/ivf/early-pregnancy",
+  },
+  {
+    id: "ob-transition",
+    label: "OB Transition",
+    range: "Days 29–42+",
+    sub: "Graduating from clinic",
+    desc: "Many fertility clinics discharge around 8–10 weeks. You transition into standard pregnancy care with confidence.",
+    startDpt: 29, endDpt: 50,
+    href: "/ivf/early-pregnancy",
+  },
 ];
+
+// Milestone dots on the horizontal track
+interface TrackMilestone {
+  dpt: number;
+  label?: string;
+}
+
+const TRACK_MILESTONES: TrackMilestone[] = [
+  { dpt: 0, label: "Day 0" },
+  { dpt: 1 },
+  { dpt: 3 },
+  { dpt: 5 },
+  { dpt: 8 },
+  { dpt: 10, label: "Day 10" },
+  { dpt: 14 },
+  { dpt: 21, label: "Day 21" },
+  { dpt: 42, label: "Day 42" },
+];
+
+const TOTAL_TRACK_DAYS = 44; // visual range
+const getDptPercent = (dpt: number) => Math.min((dpt / TOTAL_TRACK_DAYS) * 100, 100);
 
 // ─── Fade-in wrapper ──────────────────────────────────────────────────────────
 

@@ -16,10 +16,11 @@ const stages = [
   {
     num: "02",
     title: "After transfer",
-    sub: "The waiting period, often the most uncertain stage, where questions and emotions can feel heightened.",
+    sub: "The waiting period. Often the most uncertain stage, where questions and emotions can feel heightened.",
     emotional: "Hope and uncertainty",
     href: "/ivf/after-transfer",
     image: ivfAfterImg,
+    featured: true,
   },
   {
     num: "03",
@@ -33,17 +34,14 @@ const stages = [
 
 const IVFStages = () => {
   return (
-    <section className="bg-parchment py-20 md:py-28">
+    <section className="bg-parchment py-16 md:py-24">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         {/* Header */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-14 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-14 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <div className="h-px w-6" style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.3)' }} />
-              <span
-                className="font-sans text-[11px] font-light tracking-[0.2em] uppercase"
-                style={{ color: 'hsl(var(--stage-ivf-accent))' }}
-              >
+              <span className="font-sans text-[11px] font-light tracking-[0.2em] uppercase" style={{ color: 'hsl(var(--stage-ivf-accent))' }}>
                 The Process
               </span>
             </div>
@@ -53,72 +51,80 @@ const IVFStages = () => {
           </div>
           <div className="md:col-span-3 flex items-end">
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-md">
-              IVF follows a structured path with distinct phases. Each stage has its own medical focus, emotional texture, and set of questions.
+              Each stage has its own medical focus, emotional texture, and set of questions. Select a stage to explore it in depth.
             </p>
           </div>
         </div>
 
-        {/* Stage cards */}
-        <div className="space-y-5">
-          {stages.map((stage, i) => (
-            <Link
-              key={stage.num}
-              to={stage.href}
-              className="group grid grid-cols-1 md:grid-cols-[200px_1fr] bg-card border border-border/50 rounded-2xl overflow-hidden shadow-card-brand transition-all hover:shadow-soft"
-              onMouseEnter={(e) => e.currentTarget.style.borderColor = 'hsl(var(--stage-ivf-accent) / 0.4)'}
-              onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
-            >
-              {/* Image */}
-              <div className="h-44 md:h-auto overflow-hidden relative">
-                <img
-                  src={stage.image}
-                  alt={stage.title}
-                  loading="lazy"
-                  width={640}
-                  height={512}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                {/* Stage number overlay */}
-                <div className="absolute top-4 left-4">
-                  <span
-                    className="font-serif text-2xl select-none"
-                    style={{ color: 'hsl(var(--stage-ivf-accent) / 0.6)' }}
-                  >
-                    {stage.num}
-                  </span>
-                </div>
-              </div>
+        {/* Stage cards — vertical with connecting line */}
+        <div className="relative">
+          {/* Connecting line */}
+          <div
+            className="absolute left-[28px] md:left-[100px] top-0 bottom-0 w-px hidden md:block"
+            style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.12)' }}
+          />
 
-              {/* Content */}
-              <div className="p-6 sm:p-8 flex flex-col justify-center gap-3">
-                <div className="flex items-center gap-3 mb-1">
-                  <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-snug group-hover:text-foreground/80 transition-colors">
-                    {stage.title}
-                  </h3>
-                  <ArrowUpRight
-                    size={16}
-                    className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-                    style={{ color: 'hsl(var(--stage-ivf-accent))' }}
+          <div className="space-y-4">
+            {stages.map((stage) => (
+              <Link
+                key={stage.num}
+                to={stage.href}
+                className={`group grid grid-cols-1 md:grid-cols-[200px_1fr] border rounded-2xl overflow-hidden shadow-card-brand transition-all hover:shadow-soft relative ${stage.featured ? '' : 'bg-card border-border/50'}`}
+                style={stage.featured ? {
+                  backgroundColor: 'hsl(var(--stage-ivf) / 0.1)',
+                  borderColor: 'hsl(var(--stage-ivf-accent) / 0.2)',
+                } : undefined}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = 'hsl(var(--stage-ivf-accent) / 0.4)'}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = stage.featured ? 'hsl(var(--stage-ivf-accent) / 0.2)' : ''}
+              >
+                {/* Image */}
+                <div className="h-40 md:h-auto overflow-hidden relative">
+                  <img
+                    src={stage.image}
+                    alt={stage.title}
+                    loading="lazy"
+                    width={640}
+                    height={512}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
+                  <div className="absolute top-4 left-4">
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm"
+                      style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.6)' }}
+                    >
+                      <span className="font-serif text-sm text-foreground select-none">{stage.num}</span>
+                    </div>
+                  </div>
                 </div>
-                <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-lg">
-                  {stage.sub}
-                </p>
-                {/* Emotional marker */}
-                <div className="mt-2">
+
+                {/* Content */}
+                <div className="p-6 sm:p-7 flex flex-col justify-center gap-2.5">
+                  <div className="flex items-center gap-3">
+                    <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-snug group-hover:text-foreground/80 transition-colors">
+                      {stage.title}
+                    </h3>
+                    <ArrowUpRight
+                      size={16}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+                      style={{ color: 'hsl(var(--stage-ivf-accent))' }}
+                    />
+                  </div>
+                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-lg">
+                    {stage.sub}
+                  </p>
                   <span
-                    className="inline-flex items-center gap-2 font-sans text-[11px] font-light tracking-[0.1em] uppercase rounded-full px-3 py-1"
+                    className="inline-flex items-center gap-2 font-sans text-[11px] font-light tracking-[0.1em] uppercase rounded-full px-3 py-1 self-start mt-1"
                     style={{
-                      backgroundColor: 'hsl(var(--stage-ivf) / 0.25)',
+                      backgroundColor: 'hsl(var(--stage-ivf) / 0.2)',
                       color: 'hsl(var(--stage-ivf-accent))',
                     }}
                   >
                     {stage.emotional}
                   </span>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>

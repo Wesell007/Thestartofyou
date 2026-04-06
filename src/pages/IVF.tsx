@@ -8,7 +8,6 @@ import IVFWhatToExpect from "@/components/ivf/IVFWhatToExpect";
 import IVFWhatMakesDifferent from "@/components/ivf/IVFWhatMakesDifferent";
 import IVFNormal from "@/components/ivf/IVFNormal";
 import IVFCommonQuestions from "@/components/ivf/IVFCommonQuestions";
-import IVFAISupport from "@/components/ivf/IVFAISupport";
 import IVFEmotionalReminder from "@/components/ivf/IVFEmotionalReminder";
 import IVFReflection from "@/components/ivf/IVFReflection";
 import IVFCapture from "@/components/ivf/IVFCapture";
@@ -28,7 +27,6 @@ const IVF = () => {
         <IVFWhatMakesDifferent />
         <IVFNormal />
         <IVFCommonQuestions />
-        <IVFAISupport />
         <IVFEmotionalReminder />
         <IVFReflection />
         <IVFCapture />

@@ -1,21 +1,22 @@
 import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const FirstYearHero = () => {
   return (
     <section className="relative min-h-[85vh] bg-parchment overflow-hidden flex flex-col justify-center pt-28 pb-20">
-      {/* Triple ambient glows */}
+      {/* Layered ambient glows — more dynamic than postpartum */}
       <div className="absolute inset-0 pointer-events-none">
         <div
-          className="absolute top-1/4 left-1/3 w-[500px] h-[500px] rounded-full blur-3xl"
-          style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.4)' }}
+          className="absolute top-[15%] left-[20%] w-[450px] h-[450px] rounded-full blur-3xl"
+          style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.45)' }}
         />
         <div
-          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full blur-3xl"
-          style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.25)' }}
+          className="absolute bottom-[20%] right-[15%] w-[350px] h-[350px] rounded-full blur-3xl"
+          style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.3)' }}
         />
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full blur-3xl"
-          style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.15)' }}
+          className="absolute top-[60%] left-[55%] w-[250px] h-[250px] rounded-full blur-3xl"
+          style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.2)' }}
         />
       </div>
 
@@ -23,26 +24,41 @@ const FirstYearHero = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
           {/* Left — headline */}
           <div>
+            {/* Stage colour trail — developmental momentum */}
+            <div className="flex items-center gap-1.5 mb-6">
+              {[
+                { var: '--stage-postpartum-accent', w: 'w-3' },
+                { var: '--stage-firstyear-accent', w: 'w-16' },
+                { var: '--stage-preparing-accent', w: 'w-5' },
+              ].map((t, i) => (
+                <div
+                  key={i}
+                  className={`h-0.5 rounded-full ${t.w}`}
+                  style={{ backgroundColor: `hsl(var(${t.var}) / ${i === 1 ? '0.7' : '0.25'})` }}
+                />
+              ))}
+            </div>
+
             <p
-              className="font-sans text-[11px] font-light tracking-[0.3em] uppercase mb-6"
+              className="font-sans text-[11px] font-light tracking-[0.3em] uppercase mb-5"
               style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
             >
               First Year
             </p>
             <h1 className="font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-foreground mb-5 animate-fade-up leading-[1.08]">
-              Everything changes. And then it{" "}
-              <span className="italic">changes again</span>.
+              They grow fast. You grow{" "}
+              <span className="italic">differently</span>.
             </h1>
             <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed mb-8 max-w-md animate-fade-up [animation-delay:0.1s]">
-              Twelve months of growth, development, and shifting patterns. This guide helps you understand each phase as it arrives.
+              Twelve months of development, shifting patterns, and constant adaptation. This guide helps you understand each phase as it arrives, without the pressure of keeping up.
             </p>
 
-            {/* Stat anchors */}
-            <div className="flex items-center gap-5 mb-10 animate-fade-up [animation-delay:0.15s]">
+            {/* Stat anchors — developmental framing */}
+            <div className="flex items-center gap-4 mb-10 animate-fade-up [animation-delay:0.15s]">
               {[
                 { n: "4", label: "phases" },
-                { n: "12", label: "months" },
-                { n: "∞", label: "small shifts" },
+                { n: "365", label: "days of change" },
+                { n: "∞", label: "small wins" },
               ].map((s) => (
                 <div
                   key={s.label}
@@ -56,13 +72,16 @@ const FirstYearHero = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row items-start gap-3.5 animate-fade-up [animation-delay:0.2s]">
-              <button className="flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300">
+              <Link
+                to="/first-year/0-3-months"
+                className="flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
+              >
                 <ArrowUpRight size={15} />
                 Start your first year journey
-              </button>
+              </Link>
               <button className="flex items-center gap-2.5 border border-foreground/12 text-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-light hover:bg-parchment-dark transition-all duration-300">
                 <ArrowDown size={15} />
-                Jump to your stage
+                Jump to your phase
               </button>
             </div>
           </div>
@@ -80,9 +99,18 @@ const FirstYearHero = () => {
                 >
                   What this year is really like
                 </p>
-                <div className="flex items-center gap-1.5">
-                  {[0.5, 0.35, 0.2, 0.1].map((o, i) => (
-                    <div key={i} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: `hsl(var(--stage-firstyear-accent) / ${o})` }} />
+                {/* Phase dots — visual momentum */}
+                <div className="flex items-center gap-1">
+                  {[0.6, 0.45, 0.3, 0.15].map((o, i) => (
+                    <div
+                      key={i}
+                      className="rounded-full"
+                      style={{
+                        backgroundColor: `hsl(var(--stage-firstyear-accent) / ${o})`,
+                        width: `${6 + i}px`,
+                        height: `${6 + i}px`,
+                      }}
+                    />
                   ))}
                 </div>
               </div>
@@ -90,9 +118,9 @@ const FirstYearHero = () => {
               <div className="space-y-4 mb-6">
                 {[
                   { t: "Your baby will change faster than you can keep up with", strong: true },
-                  { t: "Patterns form, then shift again. This is normal development.", strong: false },
+                  { t: "Patterns form, then shift. That is normal development, not failure.", strong: false },
                   { t: "What works this week may not work next week", strong: false },
-                  { t: "You're not falling behind. You're adapting to constant change.", strong: false },
+                  { t: "Confidence builds gradually, then gets tested again", strong: false },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <div

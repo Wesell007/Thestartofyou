@@ -27,13 +27,20 @@ const FirstYearWhatThisIs = () => {
               </p>
             </div>
 
-            {/* Stat chip overlay */}
+            {/* Dual stat chip overlay — distinguishes from postpartum */}
             <div
-              className="absolute top-4 right-4 rounded-xl px-4 py-2.5 backdrop-blur-sm"
-              style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.75)' }}
+              className="absolute top-4 right-4 rounded-xl px-4 py-2.5 backdrop-blur-sm flex items-center gap-4"
+              style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.8)' }}
             >
-              <span className="font-serif text-lg text-foreground">12</span>
-              <span className="font-sans text-[10px] font-light text-foreground/60 uppercase tracking-wide ml-1.5">months of change</span>
+              <div className="text-center">
+                <span className="font-serif text-lg text-foreground block leading-none">4</span>
+                <span className="font-sans text-[9px] font-light text-foreground/60 uppercase tracking-wide">phases</span>
+              </div>
+              <div className="w-px h-6" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.2)' }} />
+              <div className="text-center">
+                <span className="font-serif text-lg text-foreground block leading-none">365</span>
+                <span className="font-sans text-[9px] font-light text-foreground/60 uppercase tracking-wide">days</span>
+              </div>
             </div>
           </div>
 
@@ -63,13 +70,13 @@ const FirstYearWhatThisIs = () => {
               style={{ borderColor: 'hsl(var(--stage-firstyear-accent) / 0.4)' }}
             >
               <p className="font-serif italic text-base text-foreground/75 leading-relaxed">
-                This space helps you understand what's happening, phase by phase, without the pressure of comparison.
+                This space helps you understand what's happening, phase by phase, without the pressure of comparison or falling behind.
               </p>
             </div>
 
-            {/* Emotional markers */}
+            {/* Developmental markers — more active than postpartum's recovery tags */}
             <div className="mt-6 flex flex-wrap gap-2">
-              {["Growth", "Change", "Discovery"].map((tag) => (
+              {["Development", "Rhythm", "Adaptation", "Discovery"].map((tag) => (
                 <span
                   key={tag}
                   className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-sans text-xs font-light italic"

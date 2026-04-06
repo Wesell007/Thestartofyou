@@ -64,7 +64,7 @@ const FirstYearCommonQuestions = () => {
                 </div>
               </form>
               <div className="flex flex-wrap gap-2 mt-3">
-                {["Sleep regression", "Milestones", "Routine changes"].map((chip) => (
+                {["Sleep regression", "Milestones", "Routine changes", "Teething"].map((chip) => (
                   <button
                     key={chip}
                     onClick={() => navigate(`/ask?q=${encodeURIComponent(chip)}`)}
@@ -104,6 +104,19 @@ const FirstYearCommonQuestions = () => {
                 </div>
               </Link>
             ))}
+
+            {/* Bottom insight */}
+            <div className="mt-6 flex items-start gap-3">
+              <div
+                className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.2)' }}
+              >
+                <span className="font-serif text-xs" style={{ color: 'hsl(var(--stage-firstyear-accent))' }}>✦</span>
+              </div>
+              <p className="font-serif italic text-sm text-foreground/50 leading-relaxed">
+                There are no silly questions during the first year. Every concern is valid.
+              </p>
+            </div>
           </div>
         </div>
       </div>

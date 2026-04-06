@@ -8,6 +8,7 @@ const topSections = [
       "Behaviour changing as awareness increases",
     ],
     meaning: "Development is not linear. Progress often happens in bursts, not steady steps.",
+    stat: { n: "12", label: "months" },
   },
   {
     tag: "Daily life",
@@ -18,34 +19,30 @@ const topSections = [
       "Ongoing adjustment as new phases begin",
     ],
     meaning: "This stage is about building rhythm, not achieving perfect consistency.",
-  },
-  {
-    tag: "Emotionally",
-    title: "More stable than the early weeks, but still complex.",
-    bullets: [
-      "More confident at times, still unsure in new situations",
-      "A mix of enjoyment and exhaustion",
-      "Pressure to feel like things should be settled",
-    ],
-    meaning: "Confidence builds gradually, but it's not constant. And that's normal.",
+    stat: { n: "4", label: "phases" },
   },
 ];
 
-const bottomSections = [
+const emotionalInsights = [
   {
-    tag: "Ongoing change",
-    insight: "Just as something starts to feel easier, it changes again. New challenges replace old ones. Phases feel temporary, even when they matter.",
-    meaning: "This stage isn't about reaching a fixed point. It's about adapting as things evolve.",
+    tag: "Confidence",
+    insight: "More confident at times, still unsure in new situations. This unevenness is part of the process.",
+    icon: "↗",
   },
   {
-    tag: "When things shift",
-    insight: "Sleep improving, then becoming disrupted again. Routines working, then suddenly not. Feeling like you've figured it out, then needing to adjust.",
-    meaning: "Progress comes in phases, not permanent solutions.",
+    tag: "Ongoing change",
+    insight: "Just as something starts to feel easier, it changes again. New challenges replace old ones.",
+    icon: "⟳",
   },
   {
     tag: "Comparison",
-    insight: "Comparing your baby's development to others. Questioning whether things are on track. Feeling unsure what is normal.",
-    meaning: "Every baby develops differently. Comparison creates more pressure than clarity.",
+    insight: "Comparing your baby's development to others creates more pressure than clarity. Every baby is different.",
+    icon: "◇",
+  },
+  {
+    tag: "When things shift",
+    insight: "Sleep improving, then disrupted. Routines working, then suddenly not. This is phases, not failure.",
+    icon: "↕",
   },
 ];
 
@@ -72,8 +69,8 @@ const FirstYearWhatToExpect = () => {
           </div>
         </div>
 
-        {/* Top 3: horizontal cards with sidebar insight */}
-        <div className="space-y-5 mb-10">
+        {/* Top 2: featured horizontal cards with sidebar insight + stat */}
+        <div className="space-y-5 mb-8">
           {topSections.map((s, i) => (
             <div
               key={i}
@@ -81,12 +78,21 @@ const FirstYearWhatToExpect = () => {
               style={{ backgroundColor: i === 0 ? 'hsl(var(--stage-firstyear) / 0.12)' : 'transparent' }}
             >
               <div className="p-6 sm:p-7">
-                <p
-                  className="font-sans text-[11px] font-light tracking-[0.15em] uppercase mb-3"
-                  style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
-                >
-                  {s.tag}
-                </p>
+                <div className="flex items-center gap-3 mb-3">
+                  <p
+                    className="font-sans text-[11px] font-light tracking-[0.15em] uppercase"
+                    style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
+                  >
+                    {s.tag}
+                  </p>
+                  <div
+                    className="flex items-baseline gap-1.5 rounded-lg px-2.5 py-1"
+                    style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.15)' }}
+                  >
+                    <span className="font-serif text-sm text-foreground">{s.stat.n}</span>
+                    <span className="font-sans text-[9px] font-light text-muted-foreground/50 uppercase tracking-wide">{s.stat.label}</span>
+                  </div>
+                </div>
                 <h3 className="font-serif text-lg sm:text-xl text-foreground leading-snug mb-4">
                   {s.title}
                 </h3>
@@ -123,28 +129,26 @@ const FirstYearWhatToExpect = () => {
           ))}
         </div>
 
-        {/* Bottom 3: emotional/shift sections as 3-column grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {bottomSections.map((s, i) => (
+        {/* Bottom: 4-column emotional insight grid — more varied than postpartum's 3-col */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {emotionalInsights.map((s, i) => (
             <div
               key={i}
-              className="rounded-xl p-6 border border-border/20"
-              style={{ backgroundColor: `hsl(var(--stage-firstyear) / ${0.12 - i * 0.02})` }}
+              className="rounded-xl p-5 border border-border/20 flex flex-col"
+              style={{ backgroundColor: `hsl(var(--stage-firstyear) / ${0.12 - i * 0.015})` }}
             >
-              <p
-                className="font-sans text-[11px] font-light tracking-[0.15em] uppercase mb-3"
-                style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
-              >
-                {s.tag}
-              </p>
-              <p className="font-sans text-sm font-light text-foreground leading-relaxed mb-4">
+              <div className="flex items-center justify-between mb-3">
+                <p
+                  className="font-sans text-[11px] font-light tracking-[0.15em] uppercase"
+                  style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
+                >
+                  {s.tag}
+                </p>
+                <span className="font-serif text-sm" style={{ color: 'hsl(var(--stage-firstyear-accent) / 0.4)' }}>{s.icon}</span>
+              </div>
+              <p className="font-sans text-sm font-light text-foreground/75 leading-relaxed flex-1">
                 {s.insight}
               </p>
-              <div className="pt-3 border-t" style={{ borderColor: 'hsl(var(--stage-firstyear-accent) / 0.1)' }}>
-                <p className="font-serif italic text-sm text-foreground/55 leading-relaxed">
-                  {s.meaning}
-                </p>
-              </div>
             </div>
           ))}
         </div>

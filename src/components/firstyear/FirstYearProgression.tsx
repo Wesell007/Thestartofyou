@@ -4,24 +4,28 @@ const steps = [
     desc: "Focused on adjustment and survival",
     detail: "Feeding, sleep, recovery. The world narrows to the immediate. Everything is being learned.",
     stat: { n: "0–3", label: "months" },
+    keywords: ["Survival", "Bonding"],
   },
   {
-    label: "Mid-year",
+    label: "Building rhythm",
     desc: "Small patterns begin to form",
     detail: "Routines start to emerge. Your baby becomes more interactive. Things shift from survival to rhythm.",
     stat: { n: "3–6", label: "months" },
+    keywords: ["Interaction", "Pattern"],
   },
   {
-    label: "Later months",
-    desc: "Confidence builds, curiosity expands",
+    label: "Expanding world",
+    desc: "Curiosity and movement increase",
     detail: "Movement, curiosity, engagement with the world. New challenges replace old ones.",
     stat: { n: "6–9", label: "months" },
+    keywords: ["Curiosity", "Movement"],
   },
   {
     label: "Approaching one year",
-    desc: "Familiarity increases, personality emerges",
+    desc: "Familiarity and personality emerge",
     detail: "Things don't become fixed. They become more manageable. Your baby becomes more themselves.",
     stat: { n: "9–12", label: "months" },
+    keywords: ["Independence", "Growth"],
   },
 ];
 
@@ -66,12 +70,12 @@ const FirstYearProgression = () => {
                   <div
                     key={i}
                     className="relative rounded-xl border border-border/20 p-6 flex gap-5"
-                    style={{ backgroundColor: `hsl(var(--stage-firstyear) / ${0.12 - i * 0.02})` }}
+                    style={{ backgroundColor: `hsl(var(--stage-firstyear) / ${0.14 - i * 0.02})` }}
                   >
                     <div
                       className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 font-serif text-sm border relative z-10"
                       style={{
-                        backgroundColor: 'hsl(var(--stage-firstyear) / 0.25)',
+                        backgroundColor: 'hsl(var(--stage-firstyear) / 0.3)',
                         borderColor: 'hsl(var(--stage-firstyear-accent) / 0.2)',
                         color: 'hsl(var(--stage-firstyear-accent))',
                       }}
@@ -79,19 +83,34 @@ const FirstYearProgression = () => {
                       {String(i + 1).padStart(2, '0')}
                     </div>
                     <div className="flex-1">
-                      <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center justify-between mb-1.5">
                         <p className="font-serif text-lg text-foreground leading-snug">{step.label}</p>
                         <div className="flex items-baseline gap-1.5">
                           <span className="font-serif text-base text-foreground">{step.stat.n}</span>
                           <span className="font-sans text-[10px] font-light text-muted-foreground/50 uppercase tracking-wide">{step.stat.label}</span>
                         </div>
                       </div>
-                      <p className="font-sans text-sm font-light text-foreground/80 leading-relaxed mb-1.5">
+                      <p className="font-sans text-sm font-light text-foreground/80 leading-relaxed mb-2">
                         {step.desc}
                       </p>
-                      <p className="font-sans text-xs font-light text-muted-foreground/60 leading-relaxed italic">
+                      <p className="font-sans text-xs font-light text-muted-foreground/60 leading-relaxed italic mb-3">
                         {step.detail}
                       </p>
+                      {/* Phase keyword chips */}
+                      <div className="flex gap-2">
+                        {step.keywords.map((kw) => (
+                          <span
+                            key={kw}
+                            className="font-sans text-[9px] font-light uppercase tracking-wide px-2 py-0.5 rounded-full"
+                            style={{
+                              backgroundColor: 'hsl(var(--stage-firstyear) / 0.15)',
+                              color: 'hsl(var(--stage-firstyear-accent) / 0.7)',
+                            }}
+                          >
+                            {kw}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 ))}

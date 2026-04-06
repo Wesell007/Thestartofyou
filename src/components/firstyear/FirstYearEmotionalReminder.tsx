@@ -3,16 +3,19 @@ const cards = [
     label: "Adapting",
     note: "Every phase asks something different. Adapting is not falling behind, it's keeping up.",
     stat: { n: "4", label: "phases" },
+    icon: "⟳",
   },
   {
     label: "Growing",
     note: "Your baby is developing faster than at any other time. And so are you.",
-    stat: { n: "12", label: "months" },
+    stat: { n: "365", label: "days" },
+    icon: "↗",
   },
   {
     label: "Present",
     note: "You don't need to get ahead of it. Being here, right now, is enough.",
-    stat: { n: "1", label: "day" },
+    stat: { n: "1", label: "moment" },
+    icon: "◎",
   },
 ];
 
@@ -20,11 +23,16 @@ const FirstYearEmotionalReminder = () => {
   return (
     <section
       className="relative py-16 md:py-24 overflow-hidden"
-      style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.15)' }}
+      style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.18)' }}
     >
+      {/* Dual ambient glows — developmental energy */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full blur-3xl"
+        className="absolute top-0 left-1/3 w-[500px] h-[300px] rounded-full blur-3xl"
         style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.15)' }}
+      />
+      <div
+        className="absolute bottom-0 right-1/4 w-[400px] h-[250px] rounded-full blur-3xl"
+        style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.1)' }}
       />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
@@ -42,11 +50,11 @@ const FirstYearEmotionalReminder = () => {
             </div>
 
             <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.25rem] text-foreground mb-5 leading-[1.15]">
-              This stage is full of change. It's okay if things don't feel settled.
+              This stage is full of change. That's not a problem to solve.
             </h2>
 
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
-              Adapting as you go is part of the process. You don't need to have it all figured out.
+              Adapting as you go is part of the process. You don't need to have it all figured out. You just need to be here.
             </p>
 
             <div
@@ -61,26 +69,29 @@ const FirstYearEmotionalReminder = () => {
                   <span className="font-serif text-xs" style={{ color: 'hsl(var(--stage-firstyear-accent))' }}>✦</span>
                 </div>
                 <p className="font-serif italic text-base text-foreground/60 leading-relaxed">
-                  "You're finding your way, and that's enough."
+                  "You're growing too. Even when it doesn't feel like it."
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Right — emotional cards */}
+          {/* Right — emotional cards with icons */}
           <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
             {cards.map((card, i) => (
               <div
                 key={i}
                 className="rounded-xl p-5 border border-border/20 flex flex-col"
-                style={{ backgroundColor: `hsl(var(--stage-firstyear) / ${0.18 - i * 0.04})` }}
+                style={{ backgroundColor: `hsl(var(--stage-firstyear) / ${0.2 - i * 0.04})` }}
               >
-                <p
-                  className="font-sans text-[11px] font-light tracking-[0.15em] uppercase mb-3"
-                  style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
-                >
-                  {card.label}
-                </p>
+                <div className="flex items-center justify-between mb-3">
+                  <p
+                    className="font-sans text-[11px] font-light tracking-[0.15em] uppercase"
+                    style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
+                  >
+                    {card.label}
+                  </p>
+                  <span className="font-serif text-sm" style={{ color: 'hsl(var(--stage-firstyear-accent) / 0.4)' }}>{card.icon}</span>
+                </div>
                 <p className="font-sans text-sm font-light text-foreground/75 leading-relaxed mb-4 flex-1">
                   {card.note}
                 </p>

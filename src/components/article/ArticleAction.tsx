@@ -8,41 +8,34 @@ const ArticleAction = ({ data }: Props) => {
   if (!data.whatYouCanDo?.length) return null;
 
   return (
-    <section className="bg-parchment py-20 md:py-28">
-      <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-        <div className="mb-10">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="h-px w-10 bg-sage-light" />
-            <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted">
-              Practical
-            </p>
-          </div>
-          <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
-            What you can do
-          </h2>
-          <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-md">
-            Simple, realistic steps. Do what works for you right now.
+    <section id="what-you-can-do" className="bg-parchment py-16 sm:py-20 md:py-28">
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="h-px w-8 bg-sage-light" />
+          <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted">
+            Practical
           </p>
         </div>
+        <h2 className="font-serif text-xl sm:text-2xl md:text-[1.75rem] text-foreground leading-snug mb-2">
+          What you can do
+        </h2>
+        <p className="font-sans text-[13px] sm:text-[14px] font-light text-muted-foreground leading-relaxed mb-8 sm:mb-10">
+          Simple, realistic steps. Do what works for you right now.
+        </p>
 
-        <div className="space-y-3">
+        <div className="space-y-3 sm:space-y-4">
           {data.whatYouCanDo.map((item, i) => (
-            <div
-              key={i}
-              className="group bg-card border border-border/30 rounded-xl px-6 py-5 hover:border-sage-light/50 hover:shadow-soft transition-all duration-300"
-            >
-              <div className="flex items-start gap-4">
-                <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-sage-bg text-sage font-sans text-[11px] font-medium shrink-0 mt-0.5">
-                  {i + 1}
-                </span>
-                <div className="flex-1">
-                  <p className="font-sans text-sm font-medium text-foreground leading-relaxed mb-1">
-                    {item.action}
-                  </p>
-                  <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed">
-                    {item.reason}
-                  </p>
-                </div>
+            <div key={i} className="flex gap-4 sm:gap-5">
+              <span className="font-serif text-lg text-sage/25 tabular-nums leading-none mt-1 shrink-0 w-5 text-right">
+                {i + 1}
+              </span>
+              <div className="flex-1 pb-4 border-b border-border/20 last:border-0">
+                <p className="font-sans text-[14px] sm:text-[15px] font-medium text-foreground leading-relaxed mb-1">
+                  {item.action}
+                </p>
+                <p className="font-sans text-[13px] sm:text-[14px] font-light text-muted-foreground leading-relaxed">
+                  {item.reason}
+                </p>
               </div>
             </div>
           ))}

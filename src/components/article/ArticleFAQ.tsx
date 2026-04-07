@@ -44,48 +44,37 @@ const ArticleFAQ = ({ data }: Props) => {
 
   if (!hasFaq) return null;
 
-  const isDeep = data.isCornerstone;
-
   return (
-    <section className="bg-parchment py-14 sm:py-20 md:py-28">
+    <section id="faq" className="bg-parchment py-16 sm:py-20 md:py-28">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-        {/* Section header */}
-        <div className="mb-8 sm:mb-10 md:mb-14">
-          <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage mb-3 sm:mb-4">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="h-px w-8 bg-sage-light" />
+          <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage-muted">
             Common questions
           </p>
-          <h2 className="font-serif text-xl sm:text-2xl md:text-[2rem] text-foreground leading-tight">
-            What people often ask
-          </h2>
-          {isDeep && (
-            <p className="font-sans text-[14px] sm:text-[15px] font-light text-muted-foreground mt-3 leading-relaxed max-w-xl">
-              Answers to the questions that come up most around this topic.
-            </p>
-          )}
         </div>
+        <h2 className="font-serif text-xl sm:text-2xl md:text-[1.75rem] text-foreground leading-snug mb-8 sm:mb-10">
+          What people often ask
+        </h2>
 
-        {/* Premium accordion */}
-        <div className="bg-card/50 backdrop-blur-sm border border-border/25 rounded-xl sm:rounded-2xl overflow-hidden">
-          <Accordion type="single" collapsible className="w-full">
-            {data.faq!.map((item, i) => (
-              <AccordionItem
-                key={i}
-                value={`faq-${i}`}
-                className={`border-border/20 ${i === 0 ? "border-t-0" : ""} ${i === data.faq!.length - 1 ? "border-b-0" : ""}`}
-              >
-                <AccordionTrigger className="px-5 sm:px-7 md:px-9 py-5 sm:py-6 md:py-7 text-left font-serif text-[15px] sm:text-[17px] md:text-lg text-foreground leading-snug hover:no-underline hover:text-sage transition-colors [&[data-state=open]]:text-sage gap-3 sm:gap-4">
-                  {item.question}
-                </AccordionTrigger>
-                <AccordionContent className="px-5 sm:px-7 md:px-9 pb-5 sm:pb-7 pt-0">
-                  <p className="font-sans text-[14px] sm:text-[15px] font-light leading-[1.85] text-muted-foreground max-w-2xl">
-                    {item.answer}
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-
+        <Accordion type="single" collapsible className="w-full space-y-2 sm:space-y-2.5">
+          {data.faq!.map((item, i) => (
+            <AccordionItem
+              key={i}
+              value={`faq-${i}`}
+              className="bg-card/50 border border-border/25 rounded-lg sm:rounded-xl overflow-hidden data-[state=open]:border-sage/15 transition-colors"
+            >
+              <AccordionTrigger className="px-5 sm:px-6 py-4 sm:py-5 text-left font-serif text-[15px] sm:text-base text-foreground leading-snug hover:no-underline hover:text-sage transition-colors [&[data-state=open]]:text-sage gap-3">
+                {item.question}
+              </AccordionTrigger>
+              <AccordionContent className="px-5 sm:px-6 pb-5 pt-0">
+                <p className="font-sans text-[14px] sm:text-[15px] font-light leading-[1.85] text-foreground/75 max-w-2xl">
+                  {item.answer}
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
     </section>
   );

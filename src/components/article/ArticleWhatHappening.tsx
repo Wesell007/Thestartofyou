@@ -6,62 +6,64 @@ interface Props {
 
 const ArticleWhatHappening = ({ data }: Props) => {
   return (
-    <section className="bg-parchment-dark py-24 md:py-32">
-      <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        <div className="text-center mb-14">
-          <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted mb-4">
+    <section id="whats-happening" className="bg-parchment-dark py-16 sm:py-20 md:py-28">
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="h-px w-8 bg-sage-light" />
+          <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted">
             Explanation
           </p>
-          <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight">
-            What's Happening
-          </h2>
         </div>
+        <h2 className="font-serif text-xl sm:text-2xl md:text-[1.75rem] text-foreground leading-snug mb-8 sm:mb-10">
+          What's happening
+        </h2>
 
-        {/* Common causes, numbered horizontal cards */}
-        <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
-          Common causes
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+        {/* Primary causes — prose-led with subtle numbering */}
+        <div className="space-y-6 sm:space-y-8 mb-10 sm:mb-12">
           {data.whatHappening.commonCauses.map((cause, i) => (
-            <div
-              key={i}
-              className="bg-card border border-border/40 rounded-xl p-6 shadow-soft hover:shadow-card-hover transition-shadow duration-300"
-            >
-              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-sage-bg text-sage font-sans text-xs font-medium mb-4">
+            <div key={i} className="flex gap-4 sm:gap-5">
+              <span className="font-serif text-lg sm:text-xl text-sage/30 tabular-nums leading-none mt-1 shrink-0 w-6 text-right">
                 {i + 1}
               </span>
-              <p className="font-sans text-sm font-medium text-foreground mb-2.5">{cause.heading}</p>
-              <p className="font-sans text-[13px] font-light text-muted-foreground leading-[1.7]">{cause.body}</p>
+              <div className="flex-1">
+                <h3 className="font-sans text-[15px] sm:text-base font-medium text-foreground mb-1.5">
+                  {cause.heading}
+                </h3>
+                <p className="font-sans text-[14px] sm:text-[15px] font-light text-foreground/75 leading-[1.8]">
+                  {cause.body}
+                </p>
+              </div>
             </div>
           ))}
         </div>
 
         {/* Less common causes */}
         {data.whatHappening.lessCauses.length > 0 && (
-          <div className="mb-12">
-            <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+          <div className="mb-10 sm:mb-12">
+            <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-sage-muted mb-4 sm:mb-5">
               Less common, but relevant
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-4 sm:space-y-5">
               {data.whatHappening.lessCauses.map((cause, i) => (
-                <div
-                  key={i}
-                  className="bg-parchment border border-border/30 rounded-xl px-6 py-5"
-                >
-                  <p className="font-sans text-sm font-medium text-foreground mb-2">{cause.heading}</p>
-                  <p className="font-sans text-[13px] font-light text-muted-foreground leading-[1.7]">{cause.body}</p>
+                <div key={i} className="border-l-2 border-border/30 pl-5">
+                  <p className="font-sans text-[14px] sm:text-[15px] font-medium text-foreground mb-1">
+                    {cause.heading}
+                  </p>
+                  <p className="font-sans text-[13px] sm:text-[14px] font-light text-foreground/70 leading-[1.75]">
+                    {cause.body}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* Why it varies, full-width quiet card */}
-        <div className="bg-sage-bg/25 border border-sage-light/30 rounded-xl px-7 py-6">
-          <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-sage-muted mb-3">
+        {/* Why it varies */}
+        <div className="bg-sage-bg/20 border border-sage-light/25 rounded-xl px-5 py-5 sm:px-7 sm:py-6">
+          <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-sage-muted mb-2.5">
             Why it varies
           </p>
-          <p className="font-sans text-sm font-light text-foreground leading-[1.75]">
+          <p className="font-sans text-[14px] sm:text-[15px] font-light text-foreground/80 leading-[1.8]">
             {data.whatHappening.whyItVaries}
           </p>
         </div>

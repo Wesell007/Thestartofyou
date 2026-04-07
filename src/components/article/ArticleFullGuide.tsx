@@ -14,49 +14,31 @@ const ArticleFullGuide = ({ data }: Props) => {
   if (!cornerstone) return null;
 
   return (
-    <section className="bg-parchment py-14 sm:py-20 md:py-28">
+    <section className="bg-parchment py-16 sm:py-20 md:py-28">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-        <div className="relative bg-card/70 backdrop-blur-sm border border-sage/12 rounded-xl sm:rounded-2xl overflow-hidden">
+        <div className="relative bg-card border border-sage/10 rounded-xl sm:rounded-2xl overflow-hidden">
           {/* Accent edge */}
-          <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-sage/50 via-sage/20 to-transparent" />
+          <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-sage/40 via-sage/20 to-transparent" />
 
           <div className="px-6 py-6 sm:px-8 sm:py-8 md:px-10 md:py-10 pl-8 sm:pl-10 md:pl-12">
-            {/* Label */}
-            <div className="flex items-center gap-2.5 mb-4 sm:mb-5">
-              <BookOpen className="w-4 h-4 text-sage/60" />
+            <div className="flex items-center gap-2 mb-4">
+              <BookOpen className="w-4 h-4 text-sage/50" />
               <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage">
                 Full guide available
               </p>
             </div>
 
-            {/* Cornerstone title */}
-            <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-foreground leading-snug mb-3">
+            <h3 className="font-serif text-lg sm:text-xl text-foreground leading-snug mb-2">
               {cornerstone.title}
             </h3>
 
-            {/* Description */}
-            <p className="font-sans text-[14px] sm:text-[15px] font-light text-muted-foreground leading-[1.8] max-w-xl mb-5 sm:mb-7">
+            <p className="font-sans text-[14px] sm:text-[15px] font-light text-muted-foreground leading-[1.8] max-w-xl mb-6">
               {cornerstone.metaDescription}
             </p>
 
-            {/* Meta signals */}
-            <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-2 mb-5 sm:mb-7">
-              {cornerstone.inThisArticle && (
-                <span className="font-sans text-[11px] font-light text-muted-foreground/60">
-                  {cornerstone.inThisArticle.length} sections
-                </span>
-              )}
-              {cornerstone.reviewedBy && (
-                <span className="font-sans text-[11px] font-light text-muted-foreground/60">
-                  Reviewed by {cornerstone.reviewedBy}
-                </span>
-              )}
-            </div>
-
-            {/* CTA */}
             <Link
               to={`/articles/${data.cornerstoneSlug}`}
-              className="inline-flex items-center gap-2.5 font-sans text-sm font-medium text-white bg-sage hover:bg-sage-dark rounded-full px-6 py-3 transition-colors w-full sm:w-auto justify-center sm:justify-start"
+              className="inline-flex items-center gap-2.5 font-sans text-sm font-medium text-primary-foreground bg-sage hover:opacity-90 rounded-full px-6 py-3 transition-opacity"
             >
               Read the complete guide
               <span className="text-base">→</span>

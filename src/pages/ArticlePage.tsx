@@ -3,6 +3,7 @@ import { getArticle, getRelatedArticles } from "@/data/articleData";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ArticleHero from "@/components/article/ArticleHero";
+import ArticleQuickAnswer from "@/components/article/ArticleQuickAnswer";
 import ArticleInThisGuide from "@/components/article/ArticleInThisGuide";
 import ArticleHowThisFeels from "@/components/article/ArticleHowThisFeels";
 import ArticleWhatHappening from "@/components/article/ArticleWhatHappening";
@@ -41,7 +42,7 @@ const ArticlePage = () => {
   const promoLevel = data.productPromotion ?? "none";
   const showJournal = promoLevel === "strong" || promoLevel === "light";
 
-  // Conditional section flags for short guidance pages
+  // Conditional section flags
   const hasEmotionalLayer = data.howThisFeels?.length > 0;
   const hasTiming = !!(data.timing?.whenStarts);
   const hasRealExperience = data.whatItFeelsLike?.length > 0;
@@ -52,83 +53,48 @@ const ArticlePage = () => {
   return (
     <div className="min-h-screen bg-parchment">
       <Navbar />
+
+      {/* ── HERO → QUICK ANSWER (bridging card) ── */}
       <ArticleHero data={data} />
+      <ArticleQuickAnswer data={data} />
 
-      {/* ── Deep article: jump nav ── */}
+      {/* ── NAVIGATION ── */}
       {isDeep && data.inThisArticle && <ArticleJumpNav data={data} />}
-
-      {/* ── Short article: lightweight "In this guide" ── */}
       {!isDeep && <ArticleInThisGuide data={data} />}
 
-      {/* ── Key takeaways (both formats, data-driven) ── */}
+      {/* ── KEY TAKEAWAYS ── */}
       {data.keyTakeaways && <ArticleKeyTakeaways data={data} />}
 
       {/* ── DEEP EDITORIAL FLOW ── */}
       {hasEditorial ? (
         <>
-          {/* Rich editorial prose sections */}
           <ArticleEditorialContent sections={data.editorialSections!} />
-
-          {/* Normal vs Seek Support (core trust layer) */}
           <ArticleNormal data={data} />
-
-          {/* Compare section for GEO */}
           {hasCompare && <ArticleCompare data={data} />}
-
-          {/* FAQ section for AEO */}
           {hasFAQ && <ArticleFAQ data={data} />}
         </>
       ) : (
         <>
           {/* ── SHORT GUIDANCE FLOW ── */}
-
-          {/* Emotional bridge (conditional) */}
           {hasEmotionalLayer && <ArticleHowThisFeels data={data} />}
-
-          {/* Core explanation (always present) */}
           <ArticleWhatHappening data={data} />
-
-          {/* Timing (conditional) */}
           {hasTiming && <ArticleTiming data={data} />}
-
-          {/* Real experience (conditional) */}
           {hasRealExperience && <ArticleRealExperience data={data} />}
-
-          {/* Reassurance */}
           <ArticleInterpretation data={data} />
-
-          {/* Normal vs Seek Support */}
           <ArticleNormal data={data} />
-
-          {/* Practical actions (conditional) */}
           {hasActions && <ArticleAction data={data} />}
-
-          {/* Compare section */}
           {hasCompare && <ArticleCompare data={data} />}
-
-          {/* FAQ section */}
           {hasFAQ && <ArticleFAQ data={data} />}
-
-          {/* Full guide pathway (short articles with a cornerstone parent) */}
           {!isDeep && data.cornerstoneSlug && <ArticleFullGuide data={data} />}
         </>
       )}
 
-      {/* ── SHARED ENDING SECTIONS ── */}
-
-      {/* What happens next */}
+      {/* ── SHARED ENDING SEQUENCE ── */}
       <ArticleWhatNext data={data} />
-
-      {/* Related stage links */}
       <ArticleRelatedStage data={data} />
-
-      {/* Sources for deep articles */}
       {isDeep && data.sources && <ArticleSources data={data} />}
-
-      {/* AI support */}
       <ArticleAISupport data={data} />
 
-      {/* Journal promotion */}
       {showJournal && (
         <JournalPromotion
           contextCopy={
@@ -139,7 +105,6 @@ const ArticlePage = () => {
         />
       )}
 
-      {/* Related reads */}
       {relatedArticles.length > 0 && (
         <ArticleRelatedReads articles={relatedArticles} isDeep={isDeep} />
       )}

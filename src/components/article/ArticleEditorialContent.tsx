@@ -33,16 +33,16 @@ const ArticleEditorialContent = ({ sections }: Props) => {
         <section
           key={section.id}
           id={section.id}
-          className={`py-16 sm:py-20 md:py-28 ${sectionIdx % 2 === 0 ? "bg-parchment" : "bg-parchment-dark"}`}
+          className={`py-14 sm:py-18 md:py-24 ${sectionIdx % 2 === 0 ? "bg-parchment" : "bg-parchment-dark"}`}
         >
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-            {/* Section heading */}
+            {/* Section heading with editorial numbering */}
             <div className="mb-6 sm:mb-8">
               <div className="flex items-center gap-3 mb-3">
-                <div className="h-px w-8 bg-sage-light" />
-                <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted">
+                <span className="font-sans text-[11px] text-sage/40 tabular-nums">
                   {String(sectionIdx + 1).padStart(2, "0")}
-                </p>
+                </span>
+                <div className="h-px w-6 bg-sage-light" />
               </div>
               <h2 className="font-serif text-xl sm:text-2xl md:text-[1.75rem] text-foreground leading-snug">
                 {section.heading}

@@ -17,7 +17,7 @@ const ArticleFullGuide = ({ data }: Props) => {
   const sectionCount = cornerstone.editorialSections?.length ?? 0;
 
   return (
-    <section className="bg-parchment-dark py-16 sm:py-20 md:py-28">
+    <section id="full-guide" className="bg-parchment-dark py-16 sm:py-20 md:py-28">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
         {/* Section label */}
         <div className="flex items-center gap-3 mb-6 sm:mb-8">

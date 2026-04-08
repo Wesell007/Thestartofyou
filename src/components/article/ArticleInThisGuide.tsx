@@ -4,19 +4,20 @@ interface Props {
   data: ArticleData;
 }
 
-/** Lightweight "In this guide" anchor map for short guidance pages. */
+/** Lightweight anchor navigation for short-form guidance articles. */
 const ArticleInThisGuide = ({ data }: Props) => {
   const sections: { label: string; id: string }[] = [];
 
   if (data.howThisFeels?.length) sections.push({ label: "How this can feel", id: "how-this-feels" });
   if (data.whatHappening?.commonCauses?.length) sections.push({ label: "What's happening", id: "whats-happening" });
   if (data.timing?.whenStarts) sections.push({ label: "Timing", id: "timing" });
-  if (data.whatItFeelsLike?.length) sections.push({ label: "Real experience", id: "real-experience" });
   if (data.whatThisMeans) sections.push({ label: "What this means", id: "what-this-means" });
   if (data.normal?.length) sections.push({ label: "Normal vs seek support", id: "normal-vs-support" });
   if (data.whatYouCanDo?.length) sections.push({ label: "What you can do", id: "what-you-can-do" });
+  if (data.whatItFeelsLike?.length) sections.push({ label: "Real experience", id: "real-experience" });
   if (data.compare) sections.push({ label: "Understanding the difference", id: "compare" });
   if (data.faq?.length) sections.push({ label: "Common questions", id: "faq" });
+  if (data.cornerstoneSlug) sections.push({ label: "Complete guide", id: "full-guide" });
 
   if (sections.length < 3) return null;
 

@@ -12,6 +12,12 @@ const ArticleJumpNav = ({ data }: Props) => {
 
   const hasItems = data.inThisArticle && data.inThisArticle.length > 0;
 
+  // Build section IDs from headings
+  const sections = (data.inThisArticle ?? []).map((label) => ({
+    label,
+    id: label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
+  }));
+
   useEffect(() => {
     const sentinel = sentinelRef.current;
     if (!sentinel) return;
@@ -32,10 +38,9 @@ const ArticleJumpNav = ({ data }: Props) => {
 
   return (
     <>
-      {/* Sentinel element */}
       <div ref={sentinelRef} className="h-0" />
 
-      {/* Inline version */}
+      {/* Inline card version */}
       <section className="bg-parchment py-8 sm:py-10 md:py-14">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
           <div className="border border-border/30 rounded-xl sm:rounded-2xl px-5 py-5 sm:px-7 sm:py-6 md:px-9 md:py-8 bg-card/50">
@@ -43,22 +48,26 @@ const ArticleJumpNav = ({ data }: Props) => {
               In this guide
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 sm:gap-y-2.5">
-              {data.inThisArticle.map((section, i) => (
-                <div key={i} className="flex items-baseline gap-3">
+              {sections.map((section, i) => (
+                <a
+                  key={i}
+                  href={`#${section.id}`}
+                  className="flex items-baseline gap-3 group"
+                >
                   <span className="font-sans text-[11px] text-sage/50 tabular-nums shrink-0 w-5">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="font-sans text-[13px] sm:text-sm font-light text-foreground/80 leading-snug">
-                    {section}
+                  <span className="font-sans text-[13px] sm:text-sm font-light text-foreground/80 leading-snug group-hover:text-sage transition-colors">
+                    {section.label}
                   </span>
-                </div>
+                </a>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Sticky compact version (desktop only) */}
+      {/* Sticky compact bar (desktop) */}
       <div
         className={`fixed top-0 left-0 right-0 z-40 bg-parchment/95 backdrop-blur-sm border-b border-border/20 transition-all duration-300 hidden md:block ${
           isSticky ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
@@ -75,13 +84,14 @@ const ArticleJumpNav = ({ data }: Props) => {
 
             {isCollapsed && (
               <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide">
-                {data.inThisArticle.slice(0, 6).map((section, i) => (
-                  <span
+                {sections.slice(0, 6).map((section, i) => (
+                  <a
                     key={i}
-                    className="font-sans text-xs font-light text-muted-foreground whitespace-nowrap"
+                    href={`#${section.id}`}
+                    className="font-sans text-xs font-light text-muted-foreground whitespace-nowrap hover:text-sage transition-colors"
                   >
-                    {section}
-                  </span>
+                    {section.label}
+                  </a>
                 ))}
               </div>
             )}
@@ -89,11 +99,15 @@ const ArticleJumpNav = ({ data }: Props) => {
 
           {!isCollapsed && (
             <div className="pb-4 grid grid-cols-3 gap-x-8 gap-y-1.5">
-              {data.inThisArticle.map((section, i) => (
-                <span key={i} className="font-sans text-xs font-light text-muted-foreground leading-snug">
+              {sections.map((section, i) => (
+                <a
+                  key={i}
+                  href={`#${section.id}`}
+                  className="font-sans text-xs font-light text-muted-foreground leading-snug hover:text-sage transition-colors"
+                >
                   <span className="text-sage/40 mr-2">{String(i + 1).padStart(2, "0")}</span>
-                  {section}
-                </span>
+                  {section.label}
+                </a>
               ))}
             </div>
           )}

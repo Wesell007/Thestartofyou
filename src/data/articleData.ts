@@ -47,92 +47,103 @@ export interface EditorialSection {
 
 export type ProductPromotionLevel = "strong" | "light" | "minimal" | "none";
 
+export type ArticleType = "symptom" | "stage" | "emotional" | "practical" | "calculator-context";
+
+export type JourneyType = "pregnancy" | "ivf" | "trying-to-conceive" | "postpartum" | "first-year" | "preparing-for-baby" | "support";
+
 export interface ArticleData {
   slug: string;
   title: string;
+  metaTitle?: string;
   metaDescription: string;
 
-  // Quick answer, featured-snippet style
+  // ─── Classification ─────────────────────────────────────────────────
+  /** Content category — drives which optional modules appear */
+  type?: ArticleType;
+
+  // ─── Layer control ──────────────────────────────────────────────────
+  /** true = this is a deep/cornerstone article (Layer 2) */
+  isCornerstone?: boolean;
+  /** On short articles: slug of the deep companion */
+  cornerstoneSlug?: string;
+  /** On deep articles: slugs of supporting short articles */
+  supportingArticles?: string[];
+
+  // ─── Quick answer, featured-snippet style ───────────────────────────
   quickAnswer: string;
 
-  // How this can feel, emotional bridge
+  // ─── How this can feel, emotional bridge ────────────────────────────
   howThisFeels: string[];
 
-  // Core explanation, what's happening
+  // ─── Core explanation, what's happening ─────────────────────────────
   whatHappening: {
     commonCauses: ArticleWhatSection[];
     lessCauses: ArticleWhatSection[];
     whyItVaries: string;
   };
 
-  // Timing layer
+  // ─── Timing layer ──────────────────────────────────────────────────
   timing: {
     whenStarts: string;
     whenPeaks?: string;
     whenEases: string;
   };
 
-  // Real experience
+  // ─── Real experience ───────────────────────────────────────────────
   whatItFeelsLike: string[];
 
-  // Interpretation
+  // ─── Interpretation ────────────────────────────────────────────────
   whatThisMeans: string;
 
-  // Normal vs seek support
+  // ─── Normal vs seek support ────────────────────────────────────────
   normal: string[];
   seekSupport: string[];
   disclaimer: string;
 
-  // Action
+  // ─── Action ────────────────────────────────────────────────────────
   whatYouCanDo: Array<{ action: string; reason: string }>;
 
-  // What happens next
+  // ─── What happens next ─────────────────────────────────────────────
   whatHappensNext: string;
 
-  // Related stage links
+  // ─── Related stage links ───────────────────────────────────────────
   relatedStage: {
     intro: string;
     links: ArticleRelatedLink[];
   };
 
-  // AI prompts
+  // ─── AI prompts ────────────────────────────────────────────────────
   aiPrompts: string[];
 
-  // Product capture copy
+  // ─── Product capture copy ──────────────────────────────────────────
   captureIntro: string;
 
-  // Tags for cross-linking
+  // ─── Tags for cross-linking ────────────────────────────────────────
   trimester?: (1 | 2 | 3)[];
   relatedWeeks?: number[];
   relatedSlugs?: string[];
 
-  // FAQ for AEO
-  faq?: ArticleFAQItem[];
-
-  // Compare section for GEO
-  compare?: ArticleCompare;
-
-  // Cornerstone / pillar article link
-  cornerstoneSlug?: string;
-
-  // Is this a cornerstone article?
-  isCornerstone?: boolean;
-
-  // Journey tags for library
-  journey?: string[];
+  // ─── Journey + topic taxonomy ──────────────────────────────────────
+  journey?: JourneyType[];
   topics?: string[];
 
-  // Deep article features
+  // ─── FAQ for AEO ───────────────────────────────────────────────────
+  faq?: ArticleFAQItem[];
+
+  // ─── Compare section for GEO ───────────────────────────────────────
+  compare?: ArticleCompare;
+
+  // ─── Deep article features ─────────────────────────────────────────
   keyTakeaways?: string[];
   inThisArticle?: string[];
   sources?: string[];
   lastUpdated?: string;
   reviewedBy?: string;
 
-  // Editorial prose sections for deep articles
+  // ─── Editorial prose sections for deep articles ────────────────────
   editorialSections?: EditorialSection[];
 
-  // Product promotion level
+  // ─── Product promotion level ───────────────────────────────────────
   productPromotion?: ProductPromotionLevel;
 }
 

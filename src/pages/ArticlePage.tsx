@@ -1,9 +1,11 @@
 import { useParams, Navigate } from "react-router-dom";
+import { useEffect } from "react";
 import { getArticle, getRelatedArticles } from "@/data/articleData";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ArticleHero from "@/components/article/ArticleHero";
 import ArticleQuickAnswer from "@/components/article/ArticleQuickAnswer";
+import ArticleTrustBar from "@/components/article/ArticleTrustBar";
 import ArticleInThisGuide from "@/components/article/ArticleInThisGuide";
 import ArticleHowThisFeels from "@/components/article/ArticleHowThisFeels";
 import ArticleWhatHappening from "@/components/article/ArticleWhatHappening";
@@ -31,6 +33,22 @@ const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
   const data = getArticle(slug ?? "");
 
+  // ─── SEO: Set document title and meta description ───
+  useEffect(() => {
+    if (data) {
+      document.title = data.metaTitle || data.title;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute("content", data.metaDescription);
+      } else {
+        const meta = document.createElement("meta");
+        meta.name = "description";
+        meta.content = data.metaDescription;
+        document.head.appendChild(meta);
+      }
+    }
+  }, [data]);
+
   if (!data) {
     return <Navigate to="/explore" replace />;
   }
@@ -49,107 +67,123 @@ const ArticlePage = () => {
   const hasCompare = !!data.compare;
   const hasFAQ = data.faq && data.faq.length > 0;
 
-  // ─── DEEP ARTICLE (Layer 2: SEO / Cornerstone) ───
+  // ─────────────────────────────────────────────────────────────────────
+  // LAYER 2: Deep Article (Cornerstone / SEO)
+  // Template order per editorial system blueprint
+  // ─────────────────────────────────────────────────────────────────────
   if (isDeep) {
     return (
       <div className="min-h-screen bg-parchment">
         <Navbar />
 
-        {/* Hero with deep-article treatment */}
+        {/* 1. Hero */}
         <ArticleHero data={data} />
+
+        {/* 2. Quick answer — "At a glance" */}
         <ArticleQuickAnswer data={data} />
 
-        {/* Key takeaways for scanning */}
+        {/* 3. Key takeaways */}
         {data.keyTakeaways && <ArticleKeyTakeaways data={data} />}
 
-        {/* Structured jump navigation */}
+        {/* 4. Jump navigation */}
         {data.inThisArticle && <ArticleJumpNav data={data} />}
 
-        {/* Deep intro context */}
+        {/* 5. Deep intro — reading context */}
         <ArticleDeepIntro data={data} />
 
-        {/* Editorial prose sections */}
+        {/* 6. Editorial prose sections */}
         {hasEditorial && (
           <ArticleEditorialContent sections={data.editorialSections!} />
         )}
 
-        {/* Shared interpretive + practical blocks */}
+        {/* 7. Normal vs seek support */}
         <ArticleNormal data={data} />
+
+        {/* 8. Compare */}
         {hasCompare && <ArticleCompare data={data} />}
+
+        {/* 9. Full FAQ with JSON-LD */}
         {hasFAQ && <ArticleFAQ data={data} />}
 
-        {/* Forward momentum */}
+        {/* 10. What next */}
         <ArticleWhatNext data={data} />
+
+        {/* 11. Stage links */}
         <ArticleRelatedStage data={data} />
 
-        {/* Sources and trust */}
+        {/* 12. Sources */}
         {data.sources && <ArticleSources data={data} />}
 
-        {/* Support + conversion */}
+        {/* 13. AI support */}
         <ArticleAISupport data={data} />
 
+        {/* 14. Journal */}
         {showJournal && (
           <JournalPromotion
             contextCopy="Capture your experiences alongside your weekly guidance. Keep a thoughtful, private record of your journey."
           />
         )}
 
+        {/* 15. Related reads — links to supporting short articles */}
         {relatedArticles.length > 0 && (
           <ArticleRelatedReads articles={relatedArticles} isDeep />
         )}
 
+        {/* 16. Journey CTA */}
         <ArticleJourneyCTA data={data} />
         <Footer />
       </div>
     );
   }
 
-  // ─── SHORT ARTICLE (Layer 1: Instant Value / Brand) ───
+  // ─────────────────────────────────────────────────────────────────────
+  // LAYER 1: Short Article (Instant Value / Brand)
+  // Template order per editorial system blueprint
+  // ─────────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-parchment">
       <Navbar />
 
-      {/* 1. Hero → Quick answer bridge */}
+      {/* 1. Hero */}
       <ArticleHero data={data} />
+
+      {/* 2. Quick answer */}
       <ArticleQuickAnswer data={data} />
 
-      {/* 2. Anchor navigation */}
+      {/* 3. In this guide — anchor navigation */}
       <ArticleInThisGuide data={data} />
 
-      {/* 3. Emotional recognition (brand differentiator) */}
+      {/* 4. Emotional recognition */}
       {hasEmotionalLayer && <ArticleHowThisFeels data={data} />}
 
-      {/* 4. Core explanation */}
+      {/* 5. What's happening */}
       <ArticleWhatHappening data={data} />
 
-      {/* 5. Timing context */}
+      {/* 6. Timing */}
       {hasTiming && <ArticleTiming data={data} />}
 
-      {/* 6. Interpretation (meaning layer) */}
+      {/* 7. What this means */}
       <ArticleInterpretation data={data} />
 
-      {/* 7. Normal vs seek support */}
+      {/* 8. Normal vs seek support */}
       <ArticleNormal data={data} />
 
-      {/* 8. Practical actions */}
+      {/* 9. What you can do */}
       {hasActions && <ArticleAction data={data} />}
 
-      {/* 9. Real experience quotes */}
+      {/* 10. Real experience */}
       {hasRealExperience && <ArticleRealExperience data={data} />}
 
-      {/* 10. Comparison block */}
+      {/* 11. Compare */}
       {hasCompare && <ArticleCompare data={data} />}
 
-      {/* 11. FAQ */}
+      {/* 12. FAQ with JSON-LD */}
       {hasFAQ && <ArticleFAQ data={data} />}
 
-      {/* 12. BRIDGE TO DEEP GUIDE (key system connection) */}
+      {/* 13. Bridge to deep guide */}
       {data.cornerstoneSlug && <ArticleFullGuide data={data} />}
 
-      {/* 13. Forward momentum */}
-      <ArticleWhatNext data={data} />
-
-      {/* 14. Stage navigation */}
+      {/* 14. Stage links */}
       <ArticleRelatedStage data={data} />
 
       {/* 15. AI support */}

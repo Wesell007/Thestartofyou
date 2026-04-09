@@ -306,6 +306,7 @@ const articleDatabase: ArticleData[] = [
   // ─── FATIGUE IN EARLY PREGNANCY ───────────────────────────────────────────
   {
     slug: "fatigue-in-early-pregnancy",
+    type: "symptom",
     title: "Fatigue in early pregnancy: why it happens and what to expect",
     metaDescription: "Extreme tiredness in early pregnancy is very common. Understand why it happens, when it peaks, and what you can realistically do.",
     quickAnswer:
@@ -424,6 +425,7 @@ const articleDatabase: ArticleData[] = [
   // ─── IMPLANTATION BLEEDING ────────────────────────────────────────────────
   {
     slug: "implantation-bleeding",
+    type: "symptom",
     title: "Implantation bleeding: what it is, what it looks like, and whether to worry",
     metaDescription: "What is implantation bleeding? When does it happen, what does it look like, and how does it differ from a period? Clear, reassuring guidance.",
     quickAnswer:
@@ -563,6 +565,7 @@ const articleDatabase: ArticleData[] = [
   // ─── SYMPTOMS STOPPING IN EARLY PREGNANCY ────────────────────────────────
   {
     slug: "symptoms-stopping-early-pregnancy",
+    type: "symptom",
     title: "Symptoms stopping in early pregnancy: is it normal for symptoms to disappear?",
     metaDescription: "Is it normal for pregnancy symptoms to suddenly stop or ease? Understanding why symptoms come and go in early pregnancy, and when to seek reassurance.",
     quickAnswer:
@@ -676,8 +679,12 @@ const articleDatabase: ArticleData[] = [
   // ─── CORNERSTONE: COMPLETE GUIDE TO MORNING SICKNESS ─────────────────────
   {
     slug: "complete-guide-morning-sickness",
+    type: "symptom",
     title: "Morning sickness: the complete guide to nausea in pregnancy",
+    metaTitle: "Morning Sickness Complete Guide | Causes, Timeline & Relief",
     metaDescription: "Everything you need to know about morning sickness. Why it happens, when it starts and ends, what helps, when to seek support, and what is considered normal.",
+    isCornerstone: true,
+    supportingArticles: ["nausea-in-early-pregnancy", "fatigue-in-early-pregnancy", "symptoms-stopping-early-pregnancy"],
     isCornerstone: true,
     quickAnswer:
       "Morning sickness affects up to 80% of pregnant people and is caused primarily by rising hCG and progesterone levels. Despite its name, it can occur at any time of day. For most people it begins around weeks 5-6, peaks between weeks 8-10, and eases by weeks 12-14. While uncomfortable, it is almost always a normal part of pregnancy.",

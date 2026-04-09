@@ -2424,8 +2424,8 @@ export const getRelatedArticles = (slug: string, limit = 3): ArticleData[] =>
 export const getCornerstoneArticles = (): ArticleData[] =>
   articleDatabase.filter((a) => a.isCornerstone);
 
-export const getArticlesByJourney = (journey: JourneyType): ArticleData[] =>
-  articleDatabase.filter((a) => a.journey?.includes(journey));
+export const getArticlesByJourney = (journey: string): ArticleData[] =>
+  articleDatabase.filter((a) => a.journey?.includes(journey as JourneyType));
 
 export const getArticlesByTopic = (topic: string): ArticleData[] =>
   articleDatabase.filter((a) => a.topics?.includes(topic));

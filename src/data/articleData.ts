@@ -2445,8 +2445,36 @@ export const getArticle = (slug: string): ArticleData | null =>
 
 export const getAllArticles = (): ArticleData[] => articleDatabase;
 
-export const getRelatedArticles = (slug: string, limit = 3): ArticleData[] =>
-  articleDatabase.filter((a) => a.slug !== slug).slice(0, limit);
+export const getRelatedArticles = (slug: string, limit = 3): ArticleData[] => {
+  const current = articleDatabase.find((a) => a.slug === slug);
+  if (!current) return articleDatabase.slice(0, limit);
+
+  // Prioritise: related slugs → same journey → same topic → fallback
+  const relatedSlugs = current.relatedSlugs ?? [];
+  const scored = articleDatabase
+    .filter((a) => a.slug !== slug)
+    .map((a) => {
+      let score = 0;
+      if (relatedSlugs.includes(a.slug)) score += 10;
+      if (a.journey?.some((j) => current.journey?.includes(j))) score += 3;
+      if (a.topics?.some((t) => current.topics?.includes(t))) score += 2;
+      if (a.type === current.type) score += 1;
+      return { article: a, score };
+    })
+    .sort((a, b) => b.score - a.score);
+
+  return scored.slice(0, limit).map((s) => s.article);
+};
+
+/** Get supporting short articles for a cornerstone */
+export const getSupportingArticles = (slug: string, limit = 5): ArticleData[] => {
+  const cornerstone = articleDatabase.find((a) => a.slug === slug);
+  if (!cornerstone?.supportingArticles) return [];
+  return cornerstone.supportingArticles
+    .map((s) => articleDatabase.find((a) => a.slug === s))
+    .filter((a): a is ArticleData => !!a)
+    .slice(0, limit);
+};
 
 export const getCornerstoneArticles = (): ArticleData[] =>
   articleDatabase.filter((a) => a.isCornerstone);

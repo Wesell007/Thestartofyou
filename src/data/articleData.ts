@@ -154,7 +154,9 @@ const articleDatabase: ArticleData[] = [
   // ─── NAUSEA IN EARLY PREGNANCY ────────────────────────────────────────────
   {
     slug: "nausea-in-early-pregnancy",
+    type: "symptom",
     title: "Nausea in early pregnancy: what it is, why it happens, and when it eases",
+    metaTitle: "Nausea in Early Pregnancy | When It Starts, Peaks & Eases",
     metaDescription: "Why does early pregnancy cause nausea? When does it start, peak, and ease, and what can you do? Clear, reassuring guidance on morning sickness.",
     quickAnswer:
       "Nausea in early pregnancy is caused by rapidly rising levels of hCG, the hormone your body produces after implantation. It is one of the most common symptoms of the first trimester and, while it can feel intense, it is not usually a sign that anything is wrong. Both strong nausea and very mild nausea fall within the range of normal.",

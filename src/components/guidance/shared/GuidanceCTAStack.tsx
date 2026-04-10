@@ -1,6 +1,7 @@
 // ─── Guidance CTA Stack ─────────────────────────────────────────────────
 // Strict 3-tier hierarchy: AI (Tier 3) → Stage Links (Tier 2) → Journey CTA (Tier 1)
-// Reused across all guidance page families.
+// Unified across all guidance page families.
+// Uses section-dividers instead of bg alternation for cohesion.
 
 import { Link } from "react-router-dom";
 import { ArrowRight, MessageCircle } from "lucide-react";
@@ -19,17 +20,15 @@ const GuidanceCTAStack = ({ ai, stageLinks, journeyCTA, nextBestRoute }: Props) 
 
   return (
     <>
-      {/* ── Tier 3: AI Support (contained, tertiary) ── */}
-      <section className="bg-parchment-dark py-14 md:py-18">
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <MessageCircle size={14} className="text-sage-muted" />
-            <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-sage-muted">
-              Ask anything
-            </p>
+      {/* ── Tier 3: AI Support ── */}
+      <section className="py-10 sm:py-12">
+        <div className="container mx-auto px-5 sm:px-6 max-w-xl text-center">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <MessageCircle size={12} className="text-sage-muted" />
+            <p className="stage-label">Ask anything</p>
           </div>
-          <p className="font-sans text-sm font-light text-muted-foreground mb-6">
-            If something still feels unclear, you can ask a question and get guidance for your stage.
+          <p className="font-sans text-sm font-light text-muted-foreground mb-5">
+            If something still feels unclear, you can ask here.
           </p>
           <AISearchBar
             placeholder="What's on your mind?"
@@ -39,31 +38,31 @@ const GuidanceCTAStack = ({ ai, stageLinks, journeyCTA, nextBestRoute }: Props) 
         </div>
       </section>
 
-      {/* ── Tier 2: Stage Links (secondary routing) ── */}
+      <div className="section-divider" />
+
+      {/* ── Tier 2: Stage Links ── */}
       {visibleLinks.length > 0 && (
-        <section className="bg-parchment py-12 md:py-16">
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
-            <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-sage-muted text-center mb-6">
-              Related stages
-            </p>
-            <div className="grid gap-3">
+        <section className="py-10 sm:py-12">
+          <div className="container mx-auto px-5 sm:px-6 max-w-xl">
+            <p className="stage-label text-center mb-5">Related stages</p>
+            <div className="space-y-2">
               {visibleLinks.map((link) => (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="group flex items-center justify-between bg-card border border-border/40 rounded-xl px-5 py-4 hover:border-sage/30 hover:shadow-soft transition-all duration-200"
+                  className="group flex items-center justify-between border border-border/50 rounded-lg px-4 py-3 hover:border-sage/30 transition-all duration-200"
                 >
                   <div>
                     <p className="font-sans text-sm font-medium text-foreground group-hover:text-sage transition-colors">
                       {link.label}
                     </p>
                     {link.description && (
-                      <p className="font-sans text-xs font-light text-muted-foreground mt-0.5">
+                      <p className="font-sans text-[12px] font-light text-muted-foreground mt-0.5">
                         {link.description}
                       </p>
                     )}
                   </div>
-                  <ArrowRight size={14} className="text-muted-foreground group-hover:text-sage shrink-0 transition-colors" />
+                  <ArrowRight size={13} className="text-muted-foreground/40 group-hover:text-sage shrink-0 transition-colors" />
                 </Link>
               ))}
             </div>
@@ -71,46 +70,47 @@ const GuidanceCTAStack = ({ ai, stageLinks, journeyCTA, nextBestRoute }: Props) 
         </section>
       )}
 
-      {/* ── Next-best route (optional, max 1, below stage links) ── */}
+      {/* ── Next-best route (optional, subordinate) ── */}
       {nextBestRoute && (
-        <section className="bg-parchment pb-4">
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
+        <section className="pb-6">
+          <div className="container mx-auto px-5 sm:px-6 max-w-xl">
             <Link
               to={nextBestRoute.href}
-              className="group flex items-center justify-between border border-sage/20 bg-sage-bg/30 rounded-xl px-5 py-4 hover:border-sage/40 transition-all duration-200"
+              className="group flex items-center justify-between border border-sage/15 rounded-lg px-4 py-3 hover:border-sage/30 transition-all duration-200"
             >
               <div>
                 <p className="font-sans text-sm font-medium text-foreground">
                   {nextBestRoute.label}
                 </p>
                 {nextBestRoute.description && (
-                  <p className="font-sans text-xs font-light text-muted-foreground mt-0.5">
+                  <p className="font-sans text-[12px] font-light text-muted-foreground mt-0.5">
                     {nextBestRoute.description}
                   </p>
                 )}
               </div>
-              <ArrowRight size={14} className="text-sage-muted group-hover:text-sage shrink-0 transition-colors" />
+              <ArrowRight size={13} className="text-muted-foreground/40 group-hover:text-sage shrink-0 transition-colors" />
             </Link>
           </div>
         </section>
       )}
 
-      {/* ── Tier 1: Journey CTA (dominant, visually largest) ── */}
-      <section className="relative bg-parchment-dark py-16 sm:py-20 md:py-24 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[250px] bg-sage-bg/20 rounded-full blur-[80px] pointer-events-none" />
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-xl relative z-10 text-center">
-          <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
+      <div className="section-divider" />
+
+      {/* ── Tier 1: Journey CTA (dominant) ── */}
+      <section className="py-14 sm:py-18">
+        <div className="container mx-auto px-5 sm:px-6 max-w-lg text-center">
+          <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-tight mb-2">
             Continue your journey
           </h2>
-          <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-8">
+          <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
             {journeyCTA.description}
           </p>
           <Link
             to={journeyCTA.href}
-            className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-full px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
+            className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-full px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
           >
             {journeyCTA.label}
-            <ArrowRight size={15} />
+            <ArrowRight size={14} />
           </Link>
         </div>
       </section>

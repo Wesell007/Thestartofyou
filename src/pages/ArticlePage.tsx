@@ -1,11 +1,9 @@
 import { useParams, Navigate } from "react-router-dom";
-import { useEffect } from "react";
 import { getArticle, getRelatedArticles } from "@/data/articleData";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ArticleHero from "@/components/article/ArticleHero";
 import ArticleQuickAnswer from "@/components/article/ArticleQuickAnswer";
-import ArticleTrustBar from "@/components/article/ArticleTrustBar";
 import ArticleInThisGuide from "@/components/article/ArticleInThisGuide";
 import ArticleHowThisFeels from "@/components/article/ArticleHowThisFeels";
 import ArticleWhatHappening from "@/components/article/ArticleWhatHappening";
@@ -33,22 +31,6 @@ const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
   const data = getArticle(slug ?? "");
 
-  // ─── SEO: Set document title and meta description ───
-  useEffect(() => {
-    if (data) {
-      document.title = data.metaTitle || data.title;
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute("content", data.metaDescription);
-      } else {
-        const meta = document.createElement("meta");
-        meta.name = "description";
-        meta.content = data.metaDescription;
-        document.head.appendChild(meta);
-      }
-    }
-  }, [data]);
-
   if (!data) {
     return <Navigate to="/explore" replace />;
   }
@@ -67,137 +49,113 @@ const ArticlePage = () => {
   const hasCompare = !!data.compare;
   const hasFAQ = data.faq && data.faq.length > 0;
 
-  // ─────────────────────────────────────────────────────────────────────
-  // LAYER 2: Deep Article (Cornerstone / SEO)
-  // Template order per editorial system blueprint
-  // ─────────────────────────────────────────────────────────────────────
+  // ─── DEEP ARTICLE (Layer 2: SEO / Cornerstone) ───
   if (isDeep) {
     return (
       <div className="min-h-screen bg-parchment">
         <Navbar />
 
-        {/* 1. Hero */}
+        {/* Hero with deep-article treatment */}
         <ArticleHero data={data} />
-
-        {/* 2. Quick answer — "At a glance" */}
         <ArticleQuickAnswer data={data} />
 
-        {/* 3. Key takeaways */}
+        {/* Key takeaways for scanning */}
         {data.keyTakeaways && <ArticleKeyTakeaways data={data} />}
 
-        {/* 4. Jump navigation */}
+        {/* Structured jump navigation */}
         {data.inThisArticle && <ArticleJumpNav data={data} />}
 
-        {/* 5. Deep intro — reading context */}
+        {/* Deep intro context */}
         <ArticleDeepIntro data={data} />
 
-        {/* 6. Editorial prose sections */}
+        {/* Editorial prose sections */}
         {hasEditorial && (
           <ArticleEditorialContent sections={data.editorialSections!} />
         )}
 
-        {/* 7. Normal vs seek support */}
+        {/* Shared interpretive + practical blocks */}
         <ArticleNormal data={data} />
-
-        {/* 8. Compare */}
         {hasCompare && <ArticleCompare data={data} />}
-
-        {/* 9. Full FAQ with JSON-LD */}
         {hasFAQ && <ArticleFAQ data={data} />}
 
-        {/* 10. Sources */}
-        {data.sources && <ArticleSources data={data} />}
-
-        {/* 11. What next */}
+        {/* Forward momentum */}
         <ArticleWhatNext data={data} />
-
-        {/* ── Conversion sequence (Tier 3 → 2 → 1) ── */}
-        {/* 12. AI support — Tier 3 */}
-        <ArticleAISupport data={data} />
-
-        {/* 13. Stage links — Tier 2 */}
         <ArticleRelatedStage data={data} />
 
-        {/* 14. Journey CTA — Tier 1 (dominant action) */}
-        <ArticleJourneyCTA data={data} />
+        {/* Sources and trust */}
+        {data.sources && <ArticleSources data={data} />}
 
-        {/* ── Post-CTA: soft modules & browse ── */}
-        {/* 15. Journal — soft commercial, never competes with Tier 1 */}
+        {/* Support + conversion */}
+        <ArticleAISupport data={data} />
+
         {showJournal && (
           <JournalPromotion
             contextCopy="Capture your experiences alongside your weekly guidance. Keep a thoughtful, private record of your journey."
           />
         )}
 
-        {/* 16. Related reads — browse last (max 3) */}
         {relatedArticles.length > 0 && (
           <ArticleRelatedReads articles={relatedArticles} isDeep />
         )}
 
+        <ArticleJourneyCTA data={data} />
         <Footer />
       </div>
     );
   }
 
-  // ─────────────────────────────────────────────────────────────────────
-  // LAYER 1: Short Article (Instant Value / Brand)
-  // Template order per editorial system blueprint
-  // ─────────────────────────────────────────────────────────────────────
+  // ─── SHORT ARTICLE (Layer 1: Instant Value / Brand) ───
   return (
     <div className="min-h-screen bg-parchment">
       <Navbar />
 
-      {/* 1. Hero */}
+      {/* 1. Hero → Quick answer bridge */}
       <ArticleHero data={data} />
-
-      {/* 2. Quick answer */}
       <ArticleQuickAnswer data={data} />
 
-      {/* 3. In this guide — anchor navigation */}
+      {/* 2. Anchor navigation */}
       <ArticleInThisGuide data={data} />
 
-      {/* 4. Emotional recognition */}
+      {/* 3. Emotional recognition (brand differentiator) */}
       {hasEmotionalLayer && <ArticleHowThisFeels data={data} />}
 
-      {/* 5. What's happening */}
+      {/* 4. Core explanation */}
       <ArticleWhatHappening data={data} />
 
-      {/* 6. Timing */}
+      {/* 5. Timing context */}
       {hasTiming && <ArticleTiming data={data} />}
 
-      {/* 7. What this means */}
+      {/* 6. Interpretation (meaning layer) */}
       <ArticleInterpretation data={data} />
 
-      {/* 8. Normal vs seek support */}
+      {/* 7. Normal vs seek support */}
       <ArticleNormal data={data} />
 
-      {/* 9. What you can do */}
+      {/* 8. Practical actions */}
       {hasActions && <ArticleAction data={data} />}
 
-      {/* 10. Real experience */}
+      {/* 9. Real experience quotes */}
       {hasRealExperience && <ArticleRealExperience data={data} />}
 
-      {/* 11. Compare */}
+      {/* 10. Comparison block */}
       {hasCompare && <ArticleCompare data={data} />}
 
-      {/* 12. FAQ with JSON-LD */}
+      {/* 11. FAQ */}
       {hasFAQ && <ArticleFAQ data={data} />}
 
-      {/* 13. Bridge to deep guide */}
+      {/* 12. BRIDGE TO DEEP GUIDE (key system connection) */}
       {data.cornerstoneSlug && <ArticleFullGuide data={data} />}
 
-      {/* ── Conversion sequence (Tier 3 → 2 → 1) ── */}
-      {/* 14. AI support — Tier 3 */}
-      <ArticleAISupport data={data} />
+      {/* 13. Forward momentum */}
+      <ArticleWhatNext data={data} />
 
-      {/* 15. Stage links — Tier 2 */}
+      {/* 14. Stage navigation */}
       <ArticleRelatedStage data={data} />
 
-      {/* 16. Journey CTA — Tier 1 (dominant action) */}
-      <ArticleJourneyCTA data={data} />
+      {/* 15. AI support */}
+      <ArticleAISupport data={data} />
 
-      {/* ── Post-CTA: soft modules & browse ── */}
-      {/* 17. Journal — soft commercial, never competes with Tier 1 */}
+      {/* 16. Journal */}
       {showJournal && (
         <JournalPromotion
           contextCopy={
@@ -208,11 +166,13 @@ const ArticlePage = () => {
         />
       )}
 
-      {/* 18. Related reads — browse last (max 3) */}
+      {/* 17. Related reads */}
       {relatedArticles.length > 0 && (
         <ArticleRelatedReads articles={relatedArticles} />
       )}
 
+      {/* 18. Journey CTA */}
+      <ArticleJourneyCTA data={data} />
       <Footer />
     </div>
   );

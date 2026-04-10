@@ -47,103 +47,92 @@ export interface EditorialSection {
 
 export type ProductPromotionLevel = "strong" | "light" | "minimal" | "none";
 
-export type ArticleType = "symptom" | "emotional" | "practical" | "calculator-context";
-
-export type JourneyType = "pregnancy" | "ivf" | "trying-to-conceive" | "postpartum" | "first-year" | "preparing-for-baby" | "support";
-
 export interface ArticleData {
   slug: string;
   title: string;
-  metaTitle?: string;
   metaDescription: string;
 
-  // ─── Classification ─────────────────────────────────────────────────
-  /** Content category — drives which optional modules appear */
-  type?: ArticleType;
-
-  // ─── Layer control ──────────────────────────────────────────────────
-  /** true = this is a deep/cornerstone article (Layer 2) */
-  isCornerstone?: boolean;
-  /** On short articles: slug of the deep companion */
-  cornerstoneSlug?: string;
-  /** On deep articles: slugs of supporting short articles */
-  supportingArticles?: string[];
-
-  // ─── Quick answer, featured-snippet style ───────────────────────────
+  // Quick answer, featured-snippet style
   quickAnswer: string;
 
-  // ─── How this can feel, emotional bridge ────────────────────────────
+  // How this can feel, emotional bridge
   howThisFeels: string[];
 
-  // ─── Core explanation, what's happening ─────────────────────────────
+  // Core explanation, what's happening
   whatHappening: {
     commonCauses: ArticleWhatSection[];
     lessCauses: ArticleWhatSection[];
     whyItVaries: string;
   };
 
-  // ─── Timing layer ──────────────────────────────────────────────────
+  // Timing layer
   timing: {
     whenStarts: string;
     whenPeaks?: string;
     whenEases: string;
   };
 
-  // ─── Real experience ───────────────────────────────────────────────
+  // Real experience
   whatItFeelsLike: string[];
 
-  // ─── Interpretation ────────────────────────────────────────────────
+  // Interpretation
   whatThisMeans: string;
 
-  // ─── Normal vs seek support ────────────────────────────────────────
+  // Normal vs seek support
   normal: string[];
   seekSupport: string[];
   disclaimer: string;
 
-  // ─── Action ────────────────────────────────────────────────────────
+  // Action
   whatYouCanDo: Array<{ action: string; reason: string }>;
 
-  // ─── What happens next ─────────────────────────────────────────────
+  // What happens next
   whatHappensNext: string;
 
-  // ─── Related stage links ───────────────────────────────────────────
+  // Related stage links
   relatedStage: {
     intro: string;
     links: ArticleRelatedLink[];
   };
 
-  // ─── AI prompts ────────────────────────────────────────────────────
+  // AI prompts
   aiPrompts: string[];
 
-  // ─── Product capture copy ──────────────────────────────────────────
+  // Product capture copy
   captureIntro: string;
 
-  // ─── Tags for cross-linking ────────────────────────────────────────
+  // Tags for cross-linking
   trimester?: (1 | 2 | 3)[];
   relatedWeeks?: number[];
   relatedSlugs?: string[];
 
-  // ─── Journey + topic taxonomy ──────────────────────────────────────
-  journey?: JourneyType[];
-  topics?: string[];
-
-  // ─── FAQ for AEO ───────────────────────────────────────────────────
+  // FAQ for AEO
   faq?: ArticleFAQItem[];
 
-  // ─── Compare section for GEO ───────────────────────────────────────
+  // Compare section for GEO
   compare?: ArticleCompare;
 
-  // ─── Deep article features ─────────────────────────────────────────
+  // Cornerstone / pillar article link
+  cornerstoneSlug?: string;
+
+  // Is this a cornerstone article?
+  isCornerstone?: boolean;
+
+  // Journey tags for library
+  journey?: string[];
+  topics?: string[];
+
+  // Deep article features
   keyTakeaways?: string[];
   inThisArticle?: string[];
   sources?: string[];
   lastUpdated?: string;
   reviewedBy?: string;
 
-  // ─── Editorial prose sections for deep articles ────────────────────
+  // Editorial prose sections for deep articles
   editorialSections?: EditorialSection[];
 
-  // ─── Product promotion level ───────────────────────────────────────
+  // Product promotion level
   productPromotion?: ProductPromotionLevel;
 }
 
@@ -154,9 +143,7 @@ const articleDatabase: ArticleData[] = [
   // ─── NAUSEA IN EARLY PREGNANCY ────────────────────────────────────────────
   {
     slug: "nausea-in-early-pregnancy",
-    type: "symptom",
     title: "Nausea in early pregnancy: what it is, why it happens, and when it eases",
-    metaTitle: "Nausea in Early Pregnancy | When It Starts, Peaks & Eases",
     metaDescription: "Why does early pregnancy cause nausea? When does it start, peak, and ease, and what can you do? Clear, reassuring guidance on morning sickness.",
     quickAnswer:
       "Nausea in early pregnancy is caused by rapidly rising levels of hCG, the hormone your body produces after implantation. It is one of the most common symptoms of the first trimester and, while it can feel intense, it is not usually a sign that anything is wrong. Both strong nausea and very mild nausea fall within the range of normal.",
@@ -306,7 +293,6 @@ const articleDatabase: ArticleData[] = [
   // ─── FATIGUE IN EARLY PREGNANCY ───────────────────────────────────────────
   {
     slug: "fatigue-in-early-pregnancy",
-    type: "symptom",
     title: "Fatigue in early pregnancy: why it happens and what to expect",
     metaDescription: "Extreme tiredness in early pregnancy is very common. Understand why it happens, when it peaks, and what you can realistically do.",
     quickAnswer:
@@ -425,7 +411,6 @@ const articleDatabase: ArticleData[] = [
   // ─── IMPLANTATION BLEEDING ────────────────────────────────────────────────
   {
     slug: "implantation-bleeding",
-    type: "symptom",
     title: "Implantation bleeding: what it is, what it looks like, and whether to worry",
     metaDescription: "What is implantation bleeding? When does it happen, what does it look like, and how does it differ from a period? Clear, reassuring guidance.",
     quickAnswer:
@@ -565,7 +550,6 @@ const articleDatabase: ArticleData[] = [
   // ─── SYMPTOMS STOPPING IN EARLY PREGNANCY ────────────────────────────────
   {
     slug: "symptoms-stopping-early-pregnancy",
-    type: "symptom",
     title: "Symptoms stopping in early pregnancy: is it normal for symptoms to disappear?",
     metaDescription: "Is it normal for pregnancy symptoms to suddenly stop or ease? Understanding why symptoms come and go in early pregnancy, and when to seek reassurance.",
     quickAnswer:
@@ -679,12 +663,9 @@ const articleDatabase: ArticleData[] = [
   // ─── CORNERSTONE: COMPLETE GUIDE TO MORNING SICKNESS ─────────────────────
   {
     slug: "complete-guide-morning-sickness",
-    type: "symptom",
     title: "Morning sickness: the complete guide to nausea in pregnancy",
-    metaTitle: "Morning Sickness Complete Guide | Causes, Timeline & Relief",
     metaDescription: "Everything you need to know about morning sickness. Why it happens, when it starts and ends, what helps, when to seek support, and what is considered normal.",
     isCornerstone: true,
-    supportingArticles: ["nausea-in-early-pregnancy", "fatigue-in-early-pregnancy", "symptoms-stopping-early-pregnancy"],
     quickAnswer:
       "Morning sickness affects up to 80% of pregnant people and is caused primarily by rising hCG and progesterone levels. Despite its name, it can occur at any time of day. For most people it begins around weeks 5-6, peaks between weeks 8-10, and eases by weeks 12-14. While uncomfortable, it is almost always a normal part of pregnancy.",
     howThisFeels: [
@@ -1007,7 +988,6 @@ const articleDatabase: ArticleData[] = [
   // ─── CORNERSTONE: FIRST TRIMESTER COMPLETE GUIDE ─────────────────────────
   {
     slug: "first-trimester-complete-guide",
-    type: "practical",
     title: "First trimester: everything you need to know about weeks 1 to 12",
     metaDescription: "A comprehensive guide to the first trimester of pregnancy. What happens week by week, common symptoms, what to expect, and when to seek support.",
     isCornerstone: true,
@@ -1148,7 +1128,6 @@ const articleDatabase: ArticleData[] = [
   // ─── CORNERSTONE: EARLY PREGNANCY SYMPTOMS EXPLAINED ─────────────────────
   {
     slug: "early-pregnancy-symptoms-explained",
-    type: "symptom",
     title: "Early pregnancy symptoms: what to expect and what is normal",
     metaDescription: "A comprehensive guide to early pregnancy symptoms. What causes them, when they start, what varies, and when to speak with your healthcare provider.",
     isCornerstone: true,
@@ -1276,7 +1255,6 @@ const articleDatabase: ArticleData[] = [
   // ─── CORNERSTONE: POSTPARTUM RECOVERY TIMELINE ───────────────────────────
   {
     slug: "postpartum-recovery-timeline",
-    type: "symptom",
     title: "Postpartum recovery: what to expect in the weeks and months after birth",
     metaDescription: "A comprehensive guide to postpartum recovery. Physical healing, emotional adjustment, and what to expect in the first days, weeks, and months after having a baby.",
     isCornerstone: true,
@@ -1438,7 +1416,6 @@ const articleDatabase: ArticleData[] = [
   // ─── CORNERSTONE: TRYING TO CONCEIVE EXPLAINED ───────────────────────────
   {
     slug: "trying-to-conceive-explained",
-    type: "practical",
     title: "Trying to conceive: everything you need to know about getting pregnant",
     metaDescription: "A comprehensive guide to trying to conceive. Understanding fertility, timing, ovulation, and what to expect on the journey to pregnancy.",
     isCornerstone: true,
@@ -1517,7 +1494,6 @@ const articleDatabase: ArticleData[] = [
   // ─── CORNERSTONE: IVF TIMELINE ──────────────────────────────────────────
   {
     slug: "ivf-timeline-what-to-expect",
-    type: "practical",
     title: "IVF timeline: what to expect at every stage of treatment",
     metaDescription: "A complete guide to the IVF process. From consultation through stimulation, egg collection, transfer, and the two-week wait.",
     isCornerstone: true,
@@ -1612,7 +1588,6 @@ const articleDatabase: ArticleData[] = [
   // ─── CORNERSTONE: BABY SLEEP IN THE FIRST YEAR ──────────────────────────
   {
     slug: "baby-sleep-first-year",
-    type: "practical",
     title: "Baby sleep in the first year: what to expect and what is normal",
     metaDescription: "A comprehensive guide to baby sleep in the first year. What is normal, how sleep develops, and what helps.",
     isCornerstone: true,
@@ -1689,7 +1664,6 @@ const articleDatabase: ArticleData[] = [
   // ─── SECOND TRIMESTER COMPLETE GUIDE (Cornerstone) ──────────────────────
   {
     slug: "second-trimester-complete-guide",
-    type: "practical",
     title: "Second trimester: everything you need to know about weeks 13 to 27",
     metaDescription: "What happens in the second trimester? A complete guide to symptoms, baby development, body changes, and what to expect from weeks 13 to 27.",
     quickAnswer: "The second trimester often brings relief from early pregnancy symptoms and growing energy. Your baby develops rapidly, and you may start feeling movement. Most people consider this the most comfortable trimester.",
@@ -1768,7 +1742,6 @@ const articleDatabase: ArticleData[] = [
   // ─── THIRD TRIMESTER COMPLETE GUIDE (Cornerstone) ───────────────────────
   {
     slug: "third-trimester-complete-guide",
-    type: "practical",
     title: "Third trimester: everything you need to know about weeks 28 to birth",
     metaDescription: "What happens in the third trimester? A complete guide to symptoms, preparation, baby position, and what to expect from week 28 to birth.",
     quickAnswer: "The third trimester is the final stretch of pregnancy. Your baby gains weight rapidly, you may feel more tired and uncomfortable, and your body begins preparing for birth. It is a time of anticipation, physical change, and emotional intensity.",
@@ -1847,7 +1820,6 @@ const articleDatabase: ArticleData[] = [
   // ─── PREPARING FOR BABY COMPLETE GUIDE (Cornerstone) ────────────────────
   {
     slug: "preparing-for-baby-complete-guide",
-    type: "practical",
     title: "Preparing for baby: a calm, complete guide to getting ready",
     metaDescription: "How to prepare for a baby without the overwhelm. A calm, structured guide covering essentials, nursery, finances, relationships, and emotional readiness.",
     quickAnswer: "Preparing for a baby can feel overwhelming, but you do not need everything at once. Focus on the essentials first, give yourself time, and trust that you will figure the rest out as you go.",
@@ -1924,7 +1896,6 @@ const articleDatabase: ArticleData[] = [
   // ─── EMOTIONAL WELLBEING IN PREGNANCY (Cornerstone) ─────────────────────
   {
     slug: "emotional-wellbeing-pregnancy",
-    type: "emotional",
     title: "Emotional wellbeing in pregnancy: what is normal and when to seek support",
     metaDescription: "Mood changes, anxiety, and emotional ups and downs in pregnancy. What is normal, what is not, and where to find support when you need it.",
     quickAnswer: "Emotional changes in pregnancy are completely normal. Hormones, physical discomfort, life changes, and uncertainty all affect how you feel. Most mood shifts are a natural part of the journey, but persistent low mood or anxiety should always be taken seriously.",
@@ -2002,7 +1973,6 @@ const articleDatabase: ArticleData[] = [
   // ─── BREASTFEEDING AND FEEDING GUIDE (Cornerstone) ──────────────────────
   {
     slug: "feeding-your-baby-complete-guide",
-    type: "practical",
     title: "Feeding your baby: a complete guide to breastfeeding, formula, and combination feeding",
     metaDescription: "Everything you need to know about feeding your newborn. Breastfeeding, formula feeding, combination feeding, and when to seek help.",
     quickAnswer: "There is no single right way to feed your baby. Breastfeeding, formula, and combination feeding are all valid choices. What matters most is that your baby is fed, you are supported, and the method works for your family.",
@@ -2106,7 +2076,6 @@ const articleDatabase: ArticleData[] = [
   // ─── TTC: OVULATION SIGNS ─────────────────────────────────────────────────
   {
     slug: "signs-of-ovulation",
-    type: "symptom",
     title: "Signs of ovulation: how to tell when you're most fertile",
     metaDescription: "How to recognise ovulation signs, track your fertile window, and understand what your body is telling you each cycle.",
     quickAnswer: "Common signs of ovulation include changes in cervical mucus (becoming clear and stretchy), a slight rise in basal body temperature, mild pelvic pain, and increased libido. Not everyone notices obvious signs.",
@@ -2149,7 +2118,6 @@ const articleDatabase: ArticleData[] = [
   // ─── TTC: TWO-WEEK WAIT ──────────────────────────────────────────────────
   {
     slug: "two-week-wait",
-    type: "emotional",
     title: "The two-week wait: what happens after ovulation and how to cope",
     metaDescription: "What is the two-week wait? What happens in your body, what symptoms to expect, and how to manage the anxiety of waiting.",
     quickAnswer: "The two-week wait (TWW) is the time between ovulation and when you can take a pregnancy test. During this time, if fertilisation occurred, the embryo travels to the uterus and implants. Symptoms during this time are unreliable indicators of pregnancy.",
@@ -2190,7 +2158,6 @@ const articleDatabase: ArticleData[] = [
   // ─── IVF: EMOTIONAL IMPACT ───────────────────────────────────────────────
   {
     slug: "emotional-impact-of-ivf",
-    type: "emotional",
     title: "The emotional impact of IVF: what no one prepares you for",
     metaDescription: "The emotional side of IVF treatment — grief, hope, identity, relationships, and how to take care of yourself through it all.",
     quickAnswer: "IVF is one of the most emotionally demanding experiences many people go through. The combination of medical procedures, hormonal changes, financial pressure, and the intensity of hope and disappointment creates a unique emotional challenge.",
@@ -2231,7 +2198,6 @@ const articleDatabase: ArticleData[] = [
   // ─── POSTPARTUM: BODY AFTER BIRTH ────────────────────────────────────────
   {
     slug: "your-body-after-birth",
-    type: "symptom",
     title: "Your body after birth: what changes to expect and what is normal",
     metaDescription: "What happens to your body after giving birth. Physical changes, healing timelines, and what to expect in the weeks and months after delivery.",
     quickAnswer: "After birth, your body goes through significant physical changes as it heals and adjusts. Bleeding, soreness, hormonal shifts, breast changes, and body shape changes are all normal. Recovery takes longer than most people expect.",
@@ -2273,7 +2239,6 @@ const articleDatabase: ArticleData[] = [
   // ─── FIRST YEAR: DEVELOPMENTAL MILESTONES ────────────────────────────────
   {
     slug: "baby-milestones-first-year",
-    type: "practical",
     title: "Baby milestones in the first year: what to expect and when to relax",
     metaDescription: "A calm guide to baby milestones in the first year. What's typical, what varies, and when to speak with your health visitor.",
     quickAnswer: "Baby development follows a general pattern but varies enormously in timing. Most milestones have a wide 'normal' window. Comparing your baby to others is natural but rarely helpful.",
@@ -2315,7 +2280,6 @@ const articleDatabase: ArticleData[] = [
   // ─── PREPARING: WHAT TO BUY ──────────────────────────────────────────────
   {
     slug: "what-to-buy-for-a-new-baby",
-    type: "practical",
     title: "What to buy for a new baby: the honest essentials list",
     metaDescription: "What do you actually need for a new baby? An honest guide to the essentials — and what you can skip.",
     quickAnswer: "You need far less than the baby industry suggests. The genuine essentials are a safe sleep space, car seat, nappies, basic clothing, and feeding supplies. Everything else can wait until you know what your baby actually needs.",
@@ -2356,7 +2320,6 @@ const articleDatabase: ArticleData[] = [
   // ─── SUPPORT: PERINATAL ANXIETY ──────────────────────────────────────────
   {
     slug: "perinatal-anxiety",
-    type: "emotional",
     title: "Perinatal anxiety: when worry becomes more than worry",
     metaDescription: "Understanding perinatal anxiety — what it is, how it differs from normal worry, and where to find support.",
     quickAnswer: "Perinatal anxiety affects around 1 in 5 pregnant or postnatal people. It goes beyond normal worry, causing persistent, excessive anxiety that interferes with daily life, sleep, and enjoyment. It is treatable and support is available.",
@@ -2398,7 +2361,6 @@ const articleDatabase: ArticleData[] = [
   // ─── PREPARING: BIRTH PLAN ───────────────────────────────────────────────
   {
     slug: "writing-a-birth-plan",
-    type: "practical",
     title: "Writing a birth plan: what to include and why flexibility matters",
     metaDescription: "How to write a birth plan that supports your preferences while staying flexible. What to consider, what to include, and how to communicate your wishes.",
     quickAnswer: "A birth plan is a way to communicate your preferences to your care team. It should cover pain relief, birth environment, and immediate postnatal wishes. The most important thing is flexibility — birth rarely goes exactly to plan, and that's okay.",
@@ -2445,43 +2407,14 @@ export const getArticle = (slug: string): ArticleData | null =>
 
 export const getAllArticles = (): ArticleData[] => articleDatabase;
 
-export const getRelatedArticles = (slug: string, limit = 3): ArticleData[] => {
-  // Anti-drift rule: hard cap at 3 related reads
-  const cappedLimit = Math.min(limit, 3);
-  const current = articleDatabase.find((a) => a.slug === slug);
-  if (!current) return articleDatabase.slice(0, cappedLimit);
-
-  const relatedSlugs = current.relatedSlugs ?? [];
-  const scored = articleDatabase
-    .filter((a) => a.slug !== slug)
-    .map((a) => {
-      let score = 0;
-      if (relatedSlugs.includes(a.slug)) score += 10;
-      if (a.journey?.some((j) => current.journey?.includes(j))) score += 3;
-      if (a.topics?.some((t) => current.topics?.includes(t))) score += 2;
-      if (a.type === current.type) score += 1;
-      return { article: a, score };
-    })
-    .sort((a, b) => b.score - a.score);
-
-  return scored.slice(0, cappedLimit).map((s) => s.article);
-};
-
-/** Get supporting short articles for a cornerstone */
-export const getSupportingArticles = (slug: string, limit = 5): ArticleData[] => {
-  const cornerstone = articleDatabase.find((a) => a.slug === slug);
-  if (!cornerstone?.supportingArticles) return [];
-  return cornerstone.supportingArticles
-    .map((s) => articleDatabase.find((a) => a.slug === s))
-    .filter((a): a is ArticleData => !!a)
-    .slice(0, limit);
-};
+export const getRelatedArticles = (slug: string, limit = 3): ArticleData[] =>
+  articleDatabase.filter((a) => a.slug !== slug).slice(0, limit);
 
 export const getCornerstoneArticles = (): ArticleData[] =>
   articleDatabase.filter((a) => a.isCornerstone);
 
 export const getArticlesByJourney = (journey: string): ArticleData[] =>
-  articleDatabase.filter((a) => a.journey?.includes(journey as JourneyType));
+  articleDatabase.filter((a) => a.journey?.includes(journey));
 
 export const getArticlesByTopic = (topic: string): ArticleData[] =>
   articleDatabase.filter((a) => a.topics?.includes(topic));

@@ -3,6 +3,7 @@
 // Personality: decisive, clear, personalised, next-step oriented.
 
 import { useEffect } from "react";
+import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import GuidanceCTAStack from "@/components/guidance/shared/GuidanceCTAStack";
@@ -23,6 +24,7 @@ const ToolInterpretationTemplate = ({ data }: Props) => {
       el.content = data.metaDescription;
       document.head.appendChild(el);
     }
+    window.scrollTo(0, 0);
   }, [data]);
 
   return (
@@ -30,21 +32,21 @@ const ToolInterpretationTemplate = ({ data }: Props) => {
       <Navbar />
       <main>
         {/* ── Hero ── */}
-        <section className="pt-28 pb-6 sm:pt-32 sm:pb-8">
+        <section className="pt-28 pb-4 sm:pt-32 sm:pb-6">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <p className="stage-label mb-5">
+            <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-sage-muted mb-4">
               Understanding your {data.toolName}
             </p>
-            <h1 className="font-serif text-[1.75rem] sm:text-[2.125rem] text-foreground leading-[1.15]">
+            <h1 className="font-serif text-[1.65rem] sm:text-[2rem] text-foreground leading-[1.15]">
               {data.title}
             </h1>
           </div>
         </section>
 
-        {/* ── What this means (primary explanation, border-left accent) ── */}
-        <section className="pb-10 sm:pb-12">
+        {/* ── What this means (primary) ── */}
+        <section className="pb-8 sm:pb-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <div className="border-l-2 border-sage/30 pl-5 sm:pl-6">
+            <div className="border-l-2 pl-5 sm:pl-6" style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.3)' }}>
               <p className="font-sans text-[15px] font-light text-foreground leading-[1.8]">
                 {data.whatThisMeans}
               </p>
@@ -55,18 +57,18 @@ const ToolInterpretationTemplate = ({ data }: Props) => {
         <div className="section-divider" />
 
         {/* ── Key points ── */}
-        <section className="py-10 sm:py-12">
+        <section className="py-8 sm:py-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-5">
+            <h2 className="font-serif text-lg text-foreground mb-4">
               Key things to know
             </h2>
             <div className="space-y-4">
               {data.keyPoints.map((point, i) => (
-                <div key={i} className="border-l-2 border-border/50 pl-5">
-                  <p className="font-sans text-sm font-medium text-foreground mb-1">
+                <div key={i} className="border-l-2 border-border/40 pl-5">
+                  <p className="font-sans text-sm font-medium text-foreground mb-0.5">
                     {point.label}
                   </p>
-                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
+                  <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed">
                     {point.explanation}
                   </p>
                 </div>
@@ -78,28 +80,28 @@ const ToolInterpretationTemplate = ({ data }: Props) => {
         <div className="section-divider" />
 
         {/* ── What to expect now ── */}
-        <section className="py-10 sm:py-12">
+        <section className="py-8 sm:py-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-3">
+            <h2 className="font-serif text-lg text-foreground mb-2">
               What to expect now
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8]">
+            <p className="font-sans text-sm font-light text-muted-foreground leading-[1.85]">
               {data.whatToExpectNow}
             </p>
           </div>
         </section>
 
         {/* ── What not to worry about ── */}
-        <section className="py-10 sm:py-12">
+        <section className="py-8 sm:py-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-4">
+            <h2 className="font-serif text-lg text-foreground mb-3">
               What you don't need to worry about
             </h2>
             <ul className="space-y-2">
               {data.whatNotToWorry.map((item, i) => (
                 <li key={i} className="flex gap-3">
-                  <span className="text-sage/60 text-sm mt-0.5 shrink-0">✓</span>
-                  <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed">
+                  <span className="text-sage/50 text-sm mt-0.5 shrink-0">✓</span>
+                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
                     {item}
                   </p>
                 </li>

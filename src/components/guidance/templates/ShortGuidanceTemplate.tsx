@@ -24,6 +24,7 @@ const ShortGuidanceTemplate = ({ data }: Props) => {
       el.content = data.metaDescription;
       document.head.appendChild(el);
     }
+    window.scrollTo(0, 0);
   }, [data]);
 
   const journeyLabel =
@@ -39,23 +40,23 @@ const ShortGuidanceTemplate = ({ data }: Props) => {
     <div className="min-h-screen bg-parchment">
       <Navbar />
       <main>
-        {/* ── Hero: minimal, answer-oriented ── */}
-        <section className="pt-28 pb-6 sm:pt-32 sm:pb-8">
+        {/* ── Hero ── */}
+        <section className="pt-28 pb-4 sm:pt-32 sm:pb-6">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <p className="stage-label mb-5">
+            <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-sage-muted mb-4">
               Guidance · {journeyLabel}
             </p>
-            <h1 className="font-serif text-[1.75rem] sm:text-[2.125rem] text-foreground leading-[1.15] mb-0">
+            <h1 className="font-serif text-[1.65rem] sm:text-[2rem] text-foreground leading-[1.15]">
               {data.title}
             </h1>
           </div>
         </section>
 
-        {/* ── Quick Answer (visually dominant, the reason you're here) ── */}
-        <section className="pb-10 sm:pb-12">
+        {/* ── Quick Answer ── */}
+        <section className="pb-8 sm:pb-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <div className="border-l-2 border-sage/30 pl-5 sm:pl-6">
-              <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-sage mb-2">
+            <div className="border-l-2 pl-5 sm:pl-6" style={{ borderColor: 'hsl(var(--sage) / 0.35)' }}>
+              <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-sage mb-2">
                 Quick answer
               </p>
               <p className="font-sans text-[15px] font-light text-foreground leading-[1.8]">
@@ -68,24 +69,24 @@ const ShortGuidanceTemplate = ({ data }: Props) => {
         <div className="section-divider" />
 
         {/* ── What's happening ── */}
-        <section className="py-10 sm:py-12">
+        <section className="py-8 sm:py-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-3">
+            <h2 className="font-serif text-lg text-foreground mb-2">
               What's happening
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8]">
+            <p className="font-sans text-sm font-light text-muted-foreground leading-[1.85]">
               {data.whatIsHappening}
             </p>
           </div>
         </section>
 
         {/* ── What this means ── */}
-        <section className="py-10 sm:py-12">
+        <section className="py-8 sm:py-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-3">
+            <h2 className="font-serif text-lg text-foreground mb-2">
               What this means
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8]">
+            <p className="font-sans text-sm font-light text-muted-foreground leading-[1.85]">
               {data.whatThisMeans}
             </p>
           </div>
@@ -94,19 +95,19 @@ const ShortGuidanceTemplate = ({ data }: Props) => {
         <div className="section-divider" />
 
         {/* ── Normal vs Seek Support ── */}
-        <section className="py-10 sm:py-12">
+        <section className="py-8 sm:py-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <div className="grid sm:grid-cols-2 gap-5">
+            <div className="grid sm:grid-cols-2 gap-6">
               <div>
                 <div className="flex items-center gap-2 mb-3">
-                  <CheckCircle size={14} className="text-sage" />
+                  <CheckCircle size={13} className="text-sage" />
                   <p className="font-sans text-[10px] font-medium tracking-[0.15em] uppercase text-sage">
                     Normal
                   </p>
                 </div>
-                <ul className="space-y-2">
+                <ul className="space-y-1.5">
                   {data.normalItems.map((item, i) => (
-                    <li key={i} className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
+                    <li key={i} className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed">
                       {item}
                     </li>
                   ))}
@@ -115,19 +116,19 @@ const ShortGuidanceTemplate = ({ data }: Props) => {
 
               <div>
                 <div className="flex items-center gap-2 mb-3">
-                  <AlertCircle size={14} className="text-terracotta" />
+                  <AlertCircle size={13} className="text-terracotta" />
                   <p className="font-sans text-[10px] font-medium tracking-[0.15em] uppercase text-terracotta">
                     Seek support if
                   </p>
                 </div>
-                <ul className="space-y-2">
+                <ul className="space-y-1.5">
                   {data.seekSupport.map((item, i) => (
-                    <li key={i} className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
+                    <li key={i} className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed">
                       {item}
                     </li>
                   ))}
                 </ul>
-                <p className="font-sans text-[11px] font-light text-muted-foreground/60 mt-3 italic">
+                <p className="font-sans text-[11px] font-light text-muted-foreground/50 mt-3 italic">
                   {data.disclaimer}
                 </p>
               </div>
@@ -138,16 +139,16 @@ const ShortGuidanceTemplate = ({ data }: Props) => {
         <div className="section-divider" />
 
         {/* ── What you can do ── */}
-        <section className="py-10 sm:py-12">
+        <section className="py-8 sm:py-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-4">
+            <h2 className="font-serif text-lg text-foreground mb-3">
               What you can do
             </h2>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2">
               {data.whatYouCanDo.map((item, i) => (
                 <li key={i} className="flex gap-3">
-                  <span className="text-sage/60 text-sm mt-0.5 shrink-0">→</span>
-                  <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed">
+                  <span className="text-sage/50 text-sm mt-0.5 shrink-0">→</span>
+                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
                     {item}
                   </p>
                 </li>
@@ -155,6 +156,8 @@ const ShortGuidanceTemplate = ({ data }: Props) => {
             </ul>
           </div>
         </section>
+
+        <div className="section-divider" />
 
         {/* ── CTA Stack ── */}
         <GuidanceCTAStack

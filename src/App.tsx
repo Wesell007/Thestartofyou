@@ -26,6 +26,8 @@ import OvulationCalculator from "./pages/OvulationCalculator.tsx";
 import IVFTimeline from "./pages/IVFTimeline.tsx";
 import AskPage from "./pages/AskPage.tsx";
 import GuidanceLibrary from "./pages/GuidanceLibrary.tsx";
+import NauseaEarlyPregnancy from "./pages/guidance/NauseaEarlyPregnancy.tsx";
+import DueDateMeaning from "./pages/guidance/DueDateMeaning.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import BotanicalCorner from "./components/layout/BotanicalCorner.tsx";
 

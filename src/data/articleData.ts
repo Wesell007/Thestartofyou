@@ -2446,10 +2446,11 @@ export const getArticle = (slug: string): ArticleData | null =>
 export const getAllArticles = (): ArticleData[] => articleDatabase;
 
 export const getRelatedArticles = (slug: string, limit = 3): ArticleData[] => {
+  // Anti-drift rule: hard cap at 3 related reads
+  const cappedLimit = Math.min(limit, 3);
   const current = articleDatabase.find((a) => a.slug === slug);
-  if (!current) return articleDatabase.slice(0, limit);
+  if (!current) return articleDatabase.slice(0, cappedLimit);
 
-  // Prioritise: related slugs → same journey → same topic → fallback
   const relatedSlugs = current.relatedSlugs ?? [];
   const scored = articleDatabase
     .filter((a) => a.slug !== slug)
@@ -2463,7 +2464,7 @@ export const getRelatedArticles = (slug: string, limit = 3): ArticleData[] => {
     })
     .sort((a, b) => b.score - a.score);
 
-  return scored.slice(0, limit).map((s) => s.article);
+  return scored.slice(0, cappedLimit).map((s) => s.article);
 };
 
 /** Get supporting short articles for a cornerstone */

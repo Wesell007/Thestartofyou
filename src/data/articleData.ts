@@ -47,7 +47,7 @@ export interface EditorialSection {
 
 export type ProductPromotionLevel = "strong" | "light" | "minimal" | "none";
 
-export type ArticleType = "symptom" | "stage" | "emotional" | "practical" | "calculator-context";
+export type ArticleType = "symptom" | "emotional" | "practical" | "calculator-context";
 
 export type JourneyType = "pregnancy" | "ivf" | "trying-to-conceive" | "postpartum" | "first-year" | "preparing-for-baby" | "support";
 
@@ -1007,7 +1007,7 @@ const articleDatabase: ArticleData[] = [
   // ─── CORNERSTONE: FIRST TRIMESTER COMPLETE GUIDE ─────────────────────────
   {
     slug: "first-trimester-complete-guide",
-    type: "stage",
+    type: "practical",
     title: "First trimester: everything you need to know about weeks 1 to 12",
     metaDescription: "A comprehensive guide to the first trimester of pregnancy. What happens week by week, common symptoms, what to expect, and when to seek support.",
     isCornerstone: true,
@@ -1517,7 +1517,7 @@ const articleDatabase: ArticleData[] = [
   // ─── CORNERSTONE: IVF TIMELINE ──────────────────────────────────────────
   {
     slug: "ivf-timeline-what-to-expect",
-    type: "stage",
+    type: "practical",
     title: "IVF timeline: what to expect at every stage of treatment",
     metaDescription: "A complete guide to the IVF process. From consultation through stimulation, egg collection, transfer, and the two-week wait.",
     isCornerstone: true,
@@ -1689,7 +1689,7 @@ const articleDatabase: ArticleData[] = [
   // ─── SECOND TRIMESTER COMPLETE GUIDE (Cornerstone) ──────────────────────
   {
     slug: "second-trimester-complete-guide",
-    type: "stage",
+    type: "practical",
     title: "Second trimester: everything you need to know about weeks 13 to 27",
     metaDescription: "What happens in the second trimester? A complete guide to symptoms, baby development, body changes, and what to expect from weeks 13 to 27.",
     quickAnswer: "The second trimester often brings relief from early pregnancy symptoms and growing energy. Your baby develops rapidly, and you may start feeling movement. Most people consider this the most comfortable trimester.",
@@ -1768,7 +1768,7 @@ const articleDatabase: ArticleData[] = [
   // ─── THIRD TRIMESTER COMPLETE GUIDE (Cornerstone) ───────────────────────
   {
     slug: "third-trimester-complete-guide",
-    type: "stage",
+    type: "practical",
     title: "Third trimester: everything you need to know about weeks 28 to birth",
     metaDescription: "What happens in the third trimester? A complete guide to symptoms, preparation, baby position, and what to expect from week 28 to birth.",
     quickAnswer: "The third trimester is the final stretch of pregnancy. Your baby gains weight rapidly, you may feel more tired and uncomfortable, and your body begins preparing for birth. It is a time of anticipation, physical change, and emotional intensity.",
@@ -2273,7 +2273,7 @@ const articleDatabase: ArticleData[] = [
   // ─── FIRST YEAR: DEVELOPMENTAL MILESTONES ────────────────────────────────
   {
     slug: "baby-milestones-first-year",
-    type: "stage",
+    type: "practical",
     title: "Baby milestones in the first year: what to expect and when to relax",
     metaDescription: "A calm guide to baby milestones in the first year. What's typical, what varies, and when to speak with your health visitor.",
     quickAnswer: "Baby development follows a general pattern but varies enormously in timing. Most milestones have a wide 'normal' window. Comparing your baby to others is natural but rarely helpful.",

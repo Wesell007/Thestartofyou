@@ -29,7 +29,7 @@ import GuidanceLibrary from "./pages/GuidanceLibrary.tsx";
 import NauseaEarlyPregnancy from "./pages/guidance/NauseaEarlyPregnancy.tsx";
 import DueDateMeaning from "./pages/guidance/DueDateMeaning.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import BotanicalCorner from "./components/layout/BotanicalCorner.tsx";
+
 
 const queryClient = new QueryClient();
 
@@ -38,7 +38,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BotanicalCorner />
+      
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />

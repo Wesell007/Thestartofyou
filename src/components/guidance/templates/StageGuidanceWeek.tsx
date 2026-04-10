@@ -1,7 +1,6 @@
 // ─── Stage-Guidance Template (Week) ─────────────────────────────────────
 // Compressed product screen for individual pregnancy weeks.
 // Personality: concise, structured, reassuring dashboard — not editorial.
-// No journal promotion. No related reads. No browse loops.
 
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -27,11 +26,10 @@ const StageGuidanceWeek = ({ data, prevWeek, nextWeek }: Props) => {
     <div className="min-h-screen bg-parchment">
       <Navbar />
       <main>
-        {/* ── 1. Compact Hero ── */}
+        {/* ── Hero ── */}
         <section className="pt-24 pb-6 sm:pt-28 sm:pb-8">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            {/* Breadcrumb */}
-            <nav className="flex items-center gap-1.5 mb-4" aria-label="breadcrumb">
+            <nav className="flex items-center gap-1.5 mb-5" aria-label="breadcrumb">
               <Link to="/pregnancy" className="font-sans text-[11px] font-light text-muted-foreground hover:text-foreground transition-colors">
                 Pregnancy
               </Link>
@@ -44,57 +42,56 @@ const StageGuidanceWeek = ({ data, prevWeek, nextWeek }: Props) => {
             </nav>
 
             {/* Week nav + title */}
-            <div className="flex items-center gap-3 mb-3">
+            <div className="flex items-center gap-4 mb-3">
               {prevWeek ? (
-                <Link to={`/pregnancy/week/${prevWeek}`} className="border border-border/50 rounded-full p-1.5 hover:border-sage/30 transition-colors">
+                <Link to={`/pregnancy/week/${prevWeek}`} className="border border-border/40 rounded-full p-1.5 hover:border-sage/30 transition-colors" aria-label={`Week ${prevWeek}`}>
                   <ChevronLeft size={14} className="text-muted-foreground" />
                 </Link>
               ) : <div className="w-8" />}
               <div className="flex-1">
-                <p className="stage-label mb-1">
+                <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase mb-1" style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}>
                   {data.trimesterLabel} · {data.keyFocus}
                 </p>
-                <h1 className="font-serif text-[1.75rem] sm:text-[2.125rem] text-foreground leading-[1.15]">
+                <h1 className="font-serif text-[1.75rem] sm:text-[2rem] text-foreground leading-[1.15]">
                   Week {data.week}
                 </h1>
               </div>
               {nextWeek ? (
-                <Link to={`/pregnancy/week/${nextWeek}`} className="border border-border/50 rounded-full p-1.5 hover:border-sage/30 transition-colors">
+                <Link to={`/pregnancy/week/${nextWeek}`} className="border border-border/40 rounded-full p-1.5 hover:border-sage/30 transition-colors" aria-label={`Week ${nextWeek}`}>
                   <ChevronRight size={14} className="text-muted-foreground" />
                 </Link>
               ) : <div className="w-8" />}
             </div>
 
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed max-w-lg">
+            <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed max-w-md">
               {data.heroSubtitle}
             </p>
 
-            {/* Baby size chip */}
             <div className="flex items-center gap-2 mt-4">
               <span className="font-sans text-[11px] font-light text-sage-muted tracking-wide">Baby size</span>
-              <span className="font-serif text-sm font-medium text-foreground">{data.what.baby.size}</span>
+              <span className="font-serif text-sm text-foreground">{data.what.baby.size}</span>
             </div>
           </div>
         </section>
 
         <div className="section-divider" />
 
-        {/* ── 2. At a glance ── */}
-        <section className="py-10 sm:py-12">
+        {/* ── At a glance ── */}
+        <section className="py-8 sm:py-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-3">
+            <h2 className="font-serif text-lg text-foreground mb-2">
               At a glance
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8]">
+            <p className="font-sans text-sm font-light text-muted-foreground leading-[1.85]">
               {data.atAGlance}
             </p>
           </div>
         </section>
 
-        {/* ── 3. What's happening (Baby / Body / Emotional) ── */}
-        <section className="py-10 sm:py-12">
+        {/* ── What's happening ── */}
+        <section className="py-8 sm:py-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-5">
+            <h2 className="font-serif text-lg text-foreground mb-4">
               What's happening
             </h2>
             <div className="space-y-4">
@@ -103,12 +100,12 @@ const StageGuidanceWeek = ({ data, prevWeek, nextWeek }: Props) => {
                 { label: "Your body", item: data.what.body },
                 { label: "Emotionally", item: data.what.emotional },
               ].map(({ label, item }) => (
-                <div key={label} className="border-l-2 border-sage/20 pl-5">
-                  <p className="font-sans text-[10px] font-medium tracking-[0.15em] uppercase text-sage mb-1.5">
+                <div key={label} className="border-l-2 pl-5" style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.25)' }}>
+                  <p className="font-sans text-[10px] font-medium tracking-[0.15em] uppercase mb-1" style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}>
                     {label}
                   </p>
-                  <p className="font-sans text-sm font-light text-foreground mb-1">{item.what}</p>
-                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">{item.means}</p>
+                  <p className="font-sans text-sm font-light text-foreground mb-0.5">{item.what}</p>
+                  <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed">{item.means}</p>
                 </div>
               ))}
             </div>
@@ -117,16 +114,16 @@ const StageGuidanceWeek = ({ data, prevWeek, nextWeek }: Props) => {
 
         <div className="section-divider" />
 
-        {/* ── 4. Symptoms ── */}
+        {/* ── Symptoms ── */}
         {data.symptoms.length > 0 && (
-          <section className="py-10 sm:py-12">
+          <section className="py-8 sm:py-10">
             <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-              <h2 className="font-serif text-lg sm:text-xl text-foreground mb-4">
+              <h2 className="font-serif text-lg text-foreground mb-3">
                 What you might feel
               </h2>
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {data.symptoms.map((s, i) => (
-                  <div key={i} className="border-l-2 border-border/50 pl-4">
+                  <div key={i} className="border-l-2 border-border/40 pl-4">
                     <p className="font-sans text-sm font-medium text-foreground">{s.name}</p>
                     <p className="font-sans text-[13px] font-light text-muted-foreground mt-0.5 leading-relaxed">{s.why}</p>
                   </div>
@@ -136,13 +133,13 @@ const StageGuidanceWeek = ({ data, prevWeek, nextWeek }: Props) => {
           </section>
         )}
 
-        {/* ── 5. What this means (interpretation) ── */}
-        <section className="py-10 sm:py-12">
+        {/* ── What this means ── */}
+        <section className="py-8 sm:py-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-3">
+            <h2 className="font-serif text-lg text-foreground mb-2">
               What this means
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8]">
+            <p className="font-sans text-sm font-light text-muted-foreground leading-[1.85]">
               {data.whatThisMeans}
             </p>
           </div>
@@ -150,32 +147,32 @@ const StageGuidanceWeek = ({ data, prevWeek, nextWeek }: Props) => {
 
         <div className="section-divider" />
 
-        {/* ── 6. Normal vs Seek Support ── */}
-        <section className="py-10 sm:py-12">
+        {/* ── Normal vs Seek Support ── */}
+        <section className="py-8 sm:py-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <div className="grid sm:grid-cols-2 gap-5">
+            <div className="grid sm:grid-cols-2 gap-6">
               <div>
                 <div className="flex items-center gap-2 mb-3">
-                  <CheckCircle size={14} className="text-sage" />
+                  <CheckCircle size={13} className="text-sage" />
                   <p className="font-sans text-[10px] font-medium tracking-[0.15em] uppercase text-sage">Normal</p>
                 </div>
-                <ul className="space-y-2">
+                <ul className="space-y-1.5">
                   {data.normal.map((item, i) => (
-                    <li key={i} className="font-sans text-sm font-light text-muted-foreground">{item}</li>
+                    <li key={i} className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed">{item}</li>
                   ))}
                 </ul>
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-3">
-                  <AlertCircle size={14} className="text-terracotta" />
+                  <AlertCircle size={13} className="text-terracotta" />
                   <p className="font-sans text-[10px] font-medium tracking-[0.15em] uppercase text-terracotta">Seek support if</p>
                 </div>
-                <ul className="space-y-2">
+                <ul className="space-y-1.5">
                   {data.seekSupport.map((item, i) => (
-                    <li key={i} className="font-sans text-sm font-light text-muted-foreground">{item}</li>
+                    <li key={i} className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed">{item}</li>
                   ))}
                 </ul>
-                <p className="font-sans text-[11px] font-light text-muted-foreground/60 mt-3 italic">{data.disclaimer}</p>
+                <p className="font-sans text-[11px] font-light text-muted-foreground/50 mt-3 italic">{data.disclaimer}</p>
               </div>
             </div>
           </div>
@@ -183,16 +180,16 @@ const StageGuidanceWeek = ({ data, prevWeek, nextWeek }: Props) => {
 
         <div className="section-divider" />
 
-        {/* ── 7. Focus right now ── */}
-        <section className="py-10 sm:py-12">
+        {/* ── Focus right now ── */}
+        <section className="py-8 sm:py-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl">
-            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-4">
+            <h2 className="font-serif text-lg text-foreground mb-3">
               What to focus on right now
             </h2>
-            <ul className="space-y-2">
+            <ul className="space-y-2.5">
               {data.focusPoints.map((fp, i) => (
                 <li key={i} className="flex gap-3">
-                  <span className="text-sage/60 text-sm mt-0.5 shrink-0">→</span>
+                  <span className="text-sm mt-0.5 shrink-0" style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.5)' }}>→</span>
                   <div>
                     <p className="font-sans text-sm font-medium text-foreground">{fp.action}</p>
                     <p className="font-sans text-[13px] font-light text-muted-foreground mt-0.5">{fp.reason}</p>
@@ -203,11 +200,11 @@ const StageGuidanceWeek = ({ data, prevWeek, nextWeek }: Props) => {
           </div>
         </section>
 
-        {/* ── 8. Gentle reminder ── */}
-        <section className="py-10 sm:py-12">
-          <div className="container mx-auto px-5 sm:px-6 max-w-lg text-center">
-            <div className="editorial-rule mb-5" />
-            <p className="font-serif text-base sm:text-lg text-foreground leading-relaxed italic">
+        {/* ── Gentle reminder ── */}
+        <section className="py-8 sm:py-10">
+          <div className="container mx-auto px-5 sm:px-6 max-w-md text-center">
+            <div className="w-8 h-px mx-auto mb-5" style={{ background: 'hsl(var(--stage-pregnancy-accent) / 0.3)' }} />
+            <p className="font-serif text-base text-foreground leading-relaxed italic">
               {data.gentleReminder}
             </p>
           </div>
@@ -215,11 +212,11 @@ const StageGuidanceWeek = ({ data, prevWeek, nextWeek }: Props) => {
 
         <div className="section-divider" />
 
-        {/* ── 9. AI Support (Tier 3) ── */}
-        <section className="py-10 sm:py-12">
+        {/* ── AI Support (Tier 3) ── */}
+        <section className="py-8 sm:py-10">
           <div className="container mx-auto px-5 sm:px-6 max-w-xl text-center">
             <p className="stage-label mb-3">Ask anything</p>
-            <p className="font-sans text-sm font-light text-muted-foreground mb-5">
+            <p className="font-sans text-[13px] font-light text-muted-foreground mb-5">
               {data.aiContextPrompt}
             </p>
             <AISearchBar
@@ -232,22 +229,21 @@ const StageGuidanceWeek = ({ data, prevWeek, nextWeek }: Props) => {
 
         <div className="section-divider" />
 
-        {/* ── 10. Journey CTA (Tier 1) ── */}
-        <section className="py-14 sm:py-18">
-          <div className="container mx-auto px-5 sm:px-6 max-w-lg text-center">
-            <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-tight mb-2">
+        {/* ── Journey CTA (Tier 1) ── */}
+        <section className="py-12 sm:py-16">
+          <div className="container mx-auto px-5 sm:px-6 max-w-md text-center">
+            <h2 className="font-serif text-lg sm:text-xl text-foreground leading-tight mb-2">
               Continue your journey
             </h2>
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
+            <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mb-5">
               Get week-by-week guidance tailored to your stage of pregnancy.
             </p>
 
-            {/* Week navigation */}
-            <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="flex items-center justify-center gap-2 mb-5">
               {prevWeek && (
                 <Link
                   to={`/pregnancy/week/${prevWeek}`}
-                  className="border border-border/50 rounded-lg px-4 py-2 font-sans text-sm font-light text-foreground hover:border-sage/30 transition-all"
+                  className="border border-border/40 rounded-md px-3.5 py-1.5 font-sans text-[13px] font-light text-muted-foreground hover:border-sage/30 hover:text-foreground transition-all"
                 >
                   ← Week {prevWeek}
                 </Link>
@@ -255,7 +251,7 @@ const StageGuidanceWeek = ({ data, prevWeek, nextWeek }: Props) => {
               {nextWeek && (
                 <Link
                   to={`/pregnancy/week/${nextWeek}`}
-                  className="border border-border/50 rounded-lg px-4 py-2 font-sans text-sm font-light text-foreground hover:border-sage/30 transition-all"
+                  className="border border-border/40 rounded-md px-3.5 py-1.5 font-sans text-[13px] font-light text-muted-foreground hover:border-sage/30 hover:text-foreground transition-all"
                 >
                   Week {nextWeek} →
                 </Link>
@@ -264,7 +260,7 @@ const StageGuidanceWeek = ({ data, prevWeek, nextWeek }: Props) => {
 
             <Link
               to="/pregnancy"
-              className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-full px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
+              className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-full px-7 py-3 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
             >
               Start your journey
               <ArrowRight size={14} />

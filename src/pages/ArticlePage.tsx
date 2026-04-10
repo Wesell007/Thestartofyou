@@ -105,32 +105,35 @@ const ArticlePage = () => {
         {/* 9. Full FAQ with JSON-LD */}
         {hasFAQ && <ArticleFAQ data={data} />}
 
-        {/* 10. What next */}
-        <ArticleWhatNext data={data} />
-
-        {/* 11. Stage links */}
-        <ArticleRelatedStage data={data} />
-
-        {/* 12. Sources */}
+        {/* 10. Sources */}
         {data.sources && <ArticleSources data={data} />}
 
-        {/* 13. AI support */}
+        {/* 11. What next */}
+        <ArticleWhatNext data={data} />
+
+        {/* ── Conversion sequence (Tier 3 → 2 → 1) ── */}
+        {/* 12. AI support — Tier 3 */}
         <ArticleAISupport data={data} />
 
-        {/* 14. Journal */}
+        {/* 13. Stage links — Tier 2 */}
+        <ArticleRelatedStage data={data} />
+
+        {/* 14. Journey CTA — Tier 1 (dominant action) */}
+        <ArticleJourneyCTA data={data} />
+
+        {/* ── Post-CTA: soft modules & browse ── */}
+        {/* 15. Journal — soft commercial, never competes with Tier 1 */}
         {showJournal && (
           <JournalPromotion
             contextCopy="Capture your experiences alongside your weekly guidance. Keep a thoughtful, private record of your journey."
           />
         )}
 
-        {/* 15. Related reads — links to supporting short articles */}
+        {/* 16. Related reads — browse last (max 3) */}
         {relatedArticles.length > 0 && (
           <ArticleRelatedReads articles={relatedArticles} isDeep />
         )}
 
-        {/* 16. Journey CTA */}
-        <ArticleJourneyCTA data={data} />
         <Footer />
       </div>
     );
@@ -183,13 +186,18 @@ const ArticlePage = () => {
       {/* 13. Bridge to deep guide */}
       {data.cornerstoneSlug && <ArticleFullGuide data={data} />}
 
-      {/* 14. Stage links */}
-      <ArticleRelatedStage data={data} />
-
-      {/* 15. AI support */}
+      {/* ── Conversion sequence (Tier 3 → 2 → 1) ── */}
+      {/* 14. AI support — Tier 3 */}
       <ArticleAISupport data={data} />
 
-      {/* 16. Journal */}
+      {/* 15. Stage links — Tier 2 */}
+      <ArticleRelatedStage data={data} />
+
+      {/* 16. Journey CTA — Tier 1 (dominant action) */}
+      <ArticleJourneyCTA data={data} />
+
+      {/* ── Post-CTA: soft modules & browse ── */}
+      {/* 17. Journal — soft commercial, never competes with Tier 1 */}
       {showJournal && (
         <JournalPromotion
           contextCopy={
@@ -200,13 +208,11 @@ const ArticlePage = () => {
         />
       )}
 
-      {/* 17. Related reads */}
+      {/* 18. Related reads — browse last (max 3) */}
       {relatedArticles.length > 0 && (
         <ArticleRelatedReads articles={relatedArticles} />
       )}
 
-      {/* 18. Journey CTA */}
-      <ArticleJourneyCTA data={data} />
       <Footer />
     </div>
   );

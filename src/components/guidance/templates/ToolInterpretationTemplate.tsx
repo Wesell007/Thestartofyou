@@ -1,6 +1,6 @@
 // ─── Tool Interpretation Template ───────────────────────────────────────
-// Explains tool outputs clearly. Routes user into the right stage.
-// NO related reads. NO journal. NO browse loops.
+// Explains tool outputs. Routes into the right stage.
+// Personality: decisive, clear, personalised, next-step oriented.
 
 import { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
@@ -29,22 +29,22 @@ const ToolInterpretationTemplate = ({ data }: Props) => {
     <div className="min-h-screen bg-parchment">
       <Navbar />
       <main>
-        {/* ── 1. Hero ── */}
-        <section className="bg-parchment pt-28 pb-10 sm:pt-32 sm:pb-12">
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
-            <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted mb-4">
+        {/* ── Hero ── */}
+        <section className="pt-28 pb-6 sm:pt-32 sm:pb-8">
+          <div className="container mx-auto px-5 sm:px-6 max-w-xl">
+            <p className="stage-label mb-5">
               Understanding your {data.toolName}
             </p>
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-[2.75rem] text-foreground leading-[1.12]">
+            <h1 className="font-serif text-[1.75rem] sm:text-[2.125rem] text-foreground leading-[1.15]">
               {data.title}
             </h1>
           </div>
         </section>
 
-        {/* ── 2. What this means (primary explanation) ── */}
-        <section className="bg-parchment pb-8">
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
-            <div className="bg-card border border-sage/15 rounded-2xl p-6 sm:p-8 shadow-soft">
+        {/* ── What this means (primary explanation, border-left accent) ── */}
+        <section className="pb-10 sm:pb-12">
+          <div className="container mx-auto px-5 sm:px-6 max-w-xl">
+            <div className="border-l-2 border-sage/30 pl-5 sm:pl-6">
               <p className="font-sans text-[15px] font-light text-foreground leading-[1.8]">
                 {data.whatThisMeans}
               </p>
@@ -52,16 +52,18 @@ const ToolInterpretationTemplate = ({ data }: Props) => {
           </div>
         </section>
 
-        {/* ── 3. Key points (structured cards) ── */}
-        <section className="bg-parchment-dark py-12 md:py-16">
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
-            <h2 className="font-serif text-xl sm:text-2xl text-foreground mb-6">
+        <div className="section-divider" />
+
+        {/* ── Key points ── */}
+        <section className="py-10 sm:py-12">
+          <div className="container mx-auto px-5 sm:px-6 max-w-xl">
+            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-5">
               Key things to know
             </h2>
-            <div className="grid gap-4">
+            <div className="space-y-4">
               {data.keyPoints.map((point, i) => (
-                <div key={i} className="bg-card border border-border/40 rounded-xl p-5">
-                  <p className="font-sans text-sm font-medium text-foreground mb-1.5">
+                <div key={i} className="border-l-2 border-border/50 pl-5">
+                  <p className="font-sans text-sm font-medium text-foreground mb-1">
                     {point.label}
                   </p>
                   <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
@@ -73,10 +75,12 @@ const ToolInterpretationTemplate = ({ data }: Props) => {
           </div>
         </section>
 
-        {/* ── 4. What to expect now ── */}
-        <section className="bg-parchment py-12 md:py-16">
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
-            <h2 className="font-serif text-xl sm:text-2xl text-foreground mb-4">
+        <div className="section-divider" />
+
+        {/* ── What to expect now ── */}
+        <section className="py-10 sm:py-12">
+          <div className="container mx-auto px-5 sm:px-6 max-w-xl">
+            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-3">
               What to expect now
             </h2>
             <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8]">
@@ -85,16 +89,16 @@ const ToolInterpretationTemplate = ({ data }: Props) => {
           </div>
         </section>
 
-        {/* ── 5. What not to worry about ── */}
-        <section className="bg-parchment-dark py-12 md:py-16">
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
-            <h2 className="font-serif text-xl sm:text-2xl text-foreground mb-5">
+        {/* ── What not to worry about ── */}
+        <section className="py-10 sm:py-12">
+          <div className="container mx-auto px-5 sm:px-6 max-w-xl">
+            <h2 className="font-serif text-lg sm:text-xl text-foreground mb-4">
               What you don't need to worry about
             </h2>
-            <ul className="space-y-3">
+            <ul className="space-y-2">
               {data.whatNotToWorry.map((item, i) => (
                 <li key={i} className="flex gap-3">
-                  <span className="font-sans text-sage text-sm mt-0.5 shrink-0">✓</span>
+                  <span className="text-sage/60 text-sm mt-0.5 shrink-0">✓</span>
                   <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed">
                     {item}
                   </p>
@@ -104,7 +108,9 @@ const ToolInterpretationTemplate = ({ data }: Props) => {
           </div>
         </section>
 
-        {/* ── 6–8. CTA Stack ── */}
+        <div className="section-divider" />
+
+        {/* ── CTA Stack ── */}
         <GuidanceCTAStack
           ai={data.ai}
           stageLinks={data.stageLinks}

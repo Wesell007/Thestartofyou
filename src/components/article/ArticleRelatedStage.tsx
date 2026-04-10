@@ -23,8 +23,9 @@ const ArticleRelatedStage = ({ data }: Props) => {
           {data.relatedStage.intro}
         </p>
 
+        {/* Anti-drift: max 4 stage links */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-          {data.relatedStage.links.map((link, i) => (
+          {data.relatedStage.links.slice(0, 4).map((link, i) => (
             <Link
               key={i}
               to={link.href}

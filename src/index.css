@@ -8,89 +8,89 @@
 
 @layer base {
   :root {
-    --background: 40 30% 96%;
-    --foreground: 30 15% 14%;
+    --background: 0 0% 99%;
+    --foreground: 220 12% 14%;
 
-    --card: 40 25% 98%;
-    --card-foreground: 30 15% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 12% 14%;
 
-    --popover: 40 25% 98%;
-    --popover-foreground: 30 15% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 12% 14%;
 
-    --primary: 100 18% 52%;
-    --primary-foreground: 40 30% 98%;
+    --primary: 100 18% 48%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 40 20% 90%;
-    --secondary-foreground: 30 15% 22%;
+    --secondary: 220 6% 93%;
+    --secondary-foreground: 220 12% 18%;
 
-    --muted: 40 18% 92%;
-    --muted-foreground: 30 8% 48%;
+    --muted: 220 6% 94%;
+    --muted-foreground: 220 6% 40%;
 
-    --accent: 40 18% 88%;
-    --accent-foreground: 30 15% 22%;
+    --accent: 220 6% 92%;
+    --accent-foreground: 220 12% 18%;
 
     --destructive: 0 72% 51%;
-    --destructive-foreground: 40 30% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 35 18% 86%;
-    --input: 35 18% 86%;
-    --ring: 100 18% 52%;
+    --border: 220 8% 88%;
+    --input: 220 8% 88%;
+    --ring: 100 18% 48%;
 
     --radius: 2rem;
 
     /* Brand tokens */
-    --terracotta: 16 44% 58%;
-    --terracotta-foreground: 40 30% 98%;
-    --terracotta-hover: 16 44% 52%;
+    --terracotta: 14 52% 54%;
+    --terracotta-foreground: 0 0% 100%;
+    --terracotta-hover: 14 52% 48%;
 
-    --lavender: 271 22% 80%;
-    --lavender-bg: 271 20% 92%;
-    --lavender-foreground: 271 18% 22%;
+    --lavender: 271 28% 76%;
+    --lavender-bg: 271 18% 95%;
+    --lavender-foreground: 271 22% 18%;
 
-    --sage: 100 18% 52%;
-    --sage-light: 100 14% 80%;
-    --sage-muted: 100 10% 66%;
-    --sage-bg: 100 14% 90%;
+    --sage: 100 18% 48%;
+    --sage-light: 100 12% 78%;
+    --sage-muted: 100 10% 56%;
+    --sage-bg: 100 12% 94%;
 
-    --parchment: 40 30% 96%;
-    --parchment-dark: 38 22% 92%;
-    --parchment-deeper: 36 20% 86%;
+    --parchment: 40 12% 97%;
+    --parchment-dark: 40 8% 94%;
+    --parchment-deeper: 40 6% 90%;
 
-    /* Stage colour tokens — intentionally distinct */
-    --stage-ttc: 145 22% 88%;
-    --stage-ttc-accent: 145 28% 42%;
-    --stage-ivf: 275 24% 90%;
-    --stage-ivf-accent: 275 30% 62%;
-    --stage-pregnancy: 25 40% 90%;
-    --stage-pregnancy-accent: 18 42% 56%;
-    --stage-postpartum: 16 32% 89%;
-    --stage-postpartum-accent: 14 34% 54%;
-    --stage-firstyear: 340 24% 90%;
-    --stage-firstyear-accent: 340 28% 64%;
-    --stage-preparing: 42 30% 89%;
-    --stage-preparing-accent: 42 32% 50%;
-    --stage-support: 260 22% 90%;
-    --stage-support-accent: 260 26% 58%;
+    /* Stage colour tokens */
+    --stage-ttc: 145 16% 92%;
+    --stage-ttc-accent: 145 32% 38%;
+    --stage-ivf: 275 20% 93%;
+    --stage-ivf-accent: 275 34% 58%;
+    --stage-pregnancy: 25 28% 93%;
+    --stage-pregnancy-accent: 14 48% 52%;
+    --stage-postpartum: 16 22% 92%;
+    --stage-postpartum-accent: 14 38% 50%;
+    --stage-firstyear: 340 18% 93%;
+    --stage-firstyear-accent: 340 32% 60%;
+    --stage-preparing: 42 22% 93%;
+    --stage-preparing-accent: 42 36% 46%;
+    --stage-support: 260 18% 93%;
+    --stage-support-accent: 260 30% 54%;
 
     --font-serif: 'Playfair Display', Georgia, serif;
     --font-sans: 'Jost', system-ui, sans-serif;
 
     /* Refined shadows */
-    --shadow-soft: 0 8px 32px -8px hsl(30 15% 14% / 0.07);
-    --shadow-card: 0 2px 12px -2px hsl(30 15% 14% / 0.04);
-    --shadow-card-hover: 0 12px 40px -8px hsl(30 15% 14% / 0.1);
-    --shadow-button: 0 4px 20px -4px hsl(16 44% 58% / 0.3);
-    --shadow-elevated: 0 20px 60px -15px hsl(30 15% 14% / 0.1);
+    --shadow-soft: 0 8px 32px -8px hsl(220 12% 14% / 0.06);
+    --shadow-card: 0 2px 12px -2px hsl(220 12% 14% / 0.04);
+    --shadow-card-hover: 0 12px 40px -8px hsl(220 12% 14% / 0.09);
+    --shadow-button: 0 4px 20px -4px hsl(14 52% 54% / 0.3);
+    --shadow-elevated: 0 20px 60px -15px hsl(220 12% 14% / 0.08);
 
     /* Sidebar */
-    --sidebar-background: 40 25% 97%;
-    --sidebar-foreground: 30 12% 30%;
-    --sidebar-primary: 100 18% 52%;
-    --sidebar-primary-foreground: 40 30% 98%;
-    --sidebar-accent: 40 18% 90%;
-    --sidebar-accent-foreground: 30 15% 22%;
-    --sidebar-border: 35 18% 86%;
-    --sidebar-ring: 100 18% 52%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 220 8% 28%;
+    --sidebar-primary: 100 18% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 6% 93%;
+    --sidebar-accent-foreground: 220 12% 18%;
+    --sidebar-border: 220 8% 88%;
+    --sidebar-ring: 100 18% 48%;
   }
 
   .dark {

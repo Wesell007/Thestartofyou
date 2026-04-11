@@ -5,36 +5,36 @@ const CTASection = () => {
   return (
     <section className="page-ending frame-corner overflow-hidden">
       {/* Ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] glow-sage" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[250px] glow-sage" />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl text-center relative z-10">
-        <div className="w-10 h-10 rounded-full bg-sage/10 flex items-center justify-center mx-auto mb-6">
+        <div className="w-10 h-10 rounded-full bg-sage/10 flex items-center justify-center mx-auto mb-5">
           <Heart size={18} className="text-sage" />
         </div>
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-foreground mb-4 md:mb-6">
+        <h2 className="font-serif text-[1.75rem] sm:text-3xl md:text-[2.75rem] text-foreground mb-3 md:mb-4">
           Your journey starts here
         </h2>
-        <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground mb-10 md:mb-14 leading-relaxed max-w-lg mx-auto">
+        <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground mb-8 md:mb-10 leading-relaxed max-w-lg mx-auto">
           Enter your due date, access your personalised 40-week guide, and begin your supported pregnancy journey, completely free.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-8">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md mx-auto mb-6">
           <Link
             to="/due-date-calculator"
-            className="w-full sm:flex-1 flex items-center justify-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
+            className="w-full sm:flex-1 flex items-center justify-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
           >
             Calculate your due date
             <ArrowRight size={15} />
           </Link>
           <Link
             to="/explore"
-            className="w-full sm:flex-1 flex items-center justify-center gap-2 border border-foreground/20 text-foreground rounded-pill py-4 font-sans text-sm font-light hover:bg-parchment-dark transition-all duration-300"
+            className="w-full sm:flex-1 flex items-center justify-center gap-2 border border-foreground/20 text-foreground rounded-pill py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all duration-300"
           >
             Explore the journey
           </Link>
         </div>
 
-        <div className="h-px w-16 bg-border/40 mx-auto mb-6" />
+        <div className="h-px w-14 bg-border/40 mx-auto mb-5" />
 
         <p className="font-sans text-sm font-light text-muted-foreground">
           Not sure where to start?{" "}

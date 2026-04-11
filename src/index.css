@@ -9,31 +9,31 @@
 @layer base {
   :root {
     --background: 0 0% 99%;
-    --foreground: 220 12% 14%;
+    --foreground: 222 14% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 12% 14%;
+    --card-foreground: 222 14% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 12% 14%;
+    --popover-foreground: 222 14% 12%;
 
     --primary: 100 18% 48%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 6% 93%;
-    --secondary-foreground: 220 12% 18%;
+    --secondary: 220 8% 94%;
+    --secondary-foreground: 222 14% 16%;
 
-    --muted: 220 6% 94%;
-    --muted-foreground: 220 6% 40%;
+    --muted: 220 6% 95%;
+    --muted-foreground: 220 8% 36%;
 
-    --accent: 220 6% 92%;
-    --accent-foreground: 220 12% 18%;
+    --accent: 220 6% 93%;
+    --accent-foreground: 222 14% 16%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 8% 88%;
-    --input: 220 8% 88%;
+    --border: 220 10% 86%;
+    --input: 220 10% 86%;
     --ring: 100 18% 48%;
 
     --radius: 2rem;
@@ -43,44 +43,44 @@
     --terracotta-foreground: 0 0% 100%;
     --terracotta-hover: 14 52% 48%;
 
-    --lavender: 271 28% 76%;
-    --lavender-bg: 271 18% 95%;
-    --lavender-foreground: 271 22% 18%;
+    --lavender: 271 30% 74%;
+    --lavender-bg: 271 20% 96%;
+    --lavender-foreground: 271 24% 16%;
 
-    --sage: 100 18% 48%;
-    --sage-light: 100 12% 78%;
-    --sage-muted: 100 10% 56%;
-    --sage-bg: 100 12% 94%;
+    --sage: 100 20% 46%;
+    --sage-light: 100 14% 76%;
+    --sage-muted: 100 12% 48%;
+    --sage-bg: 100 14% 95%;
 
-    --parchment: 40 12% 97%;
-    --parchment-dark: 40 8% 94%;
-    --parchment-deeper: 40 6% 90%;
+    --parchment: 40 14% 97%;
+    --parchment-dark: 40 10% 95%;
+    --parchment-deeper: 40 8% 92%;
 
     /* Stage colour tokens */
-    --stage-ttc: 145 16% 92%;
-    --stage-ttc-accent: 145 32% 38%;
-    --stage-ivf: 275 20% 93%;
-    --stage-ivf-accent: 275 34% 58%;
-    --stage-pregnancy: 25 28% 93%;
-    --stage-pregnancy-accent: 14 48% 52%;
-    --stage-postpartum: 16 22% 92%;
-    --stage-postpartum-accent: 14 38% 50%;
-    --stage-firstyear: 340 18% 93%;
-    --stage-firstyear-accent: 340 32% 60%;
-    --stage-preparing: 42 22% 93%;
-    --stage-preparing-accent: 42 36% 46%;
-    --stage-support: 260 18% 93%;
-    --stage-support-accent: 260 30% 54%;
+    --stage-ttc: 145 18% 93%;
+    --stage-ttc-accent: 145 34% 36%;
+    --stage-ivf: 275 22% 94%;
+    --stage-ivf-accent: 275 36% 56%;
+    --stage-pregnancy: 25 30% 94%;
+    --stage-pregnancy-accent: 14 50% 50%;
+    --stage-postpartum: 16 24% 93%;
+    --stage-postpartum-accent: 14 40% 48%;
+    --stage-firstyear: 340 20% 94%;
+    --stage-firstyear-accent: 340 34% 58%;
+    --stage-preparing: 42 24% 94%;
+    --stage-preparing-accent: 42 38% 44%;
+    --stage-support: 260 20% 94%;
+    --stage-support-accent: 260 32% 52%;
 
     --font-serif: 'Playfair Display', Georgia, serif;
     --font-sans: 'Jost', system-ui, sans-serif;
 
     /* Refined shadows */
-    --shadow-soft: 0 8px 32px -8px hsl(220 12% 14% / 0.06);
-    --shadow-card: 0 2px 12px -2px hsl(220 12% 14% / 0.04);
-    --shadow-card-hover: 0 12px 40px -8px hsl(220 12% 14% / 0.09);
+    --shadow-soft: 0 8px 32px -8px hsl(222 14% 12% / 0.06);
+    --shadow-card: 0 2px 12px -2px hsl(222 14% 12% / 0.05);
+    --shadow-card-hover: 0 12px 40px -8px hsl(222 14% 12% / 0.10);
     --shadow-button: 0 4px 20px -4px hsl(14 52% 54% / 0.3);
-    --shadow-elevated: 0 20px 60px -15px hsl(220 12% 14% / 0.08);
+    --shadow-elevated: 0 20px 60px -15px hsl(222 14% 12% / 0.09);
 
     /* Sidebar */
     --sidebar-background: 0 0% 98%;
@@ -88,8 +88,8 @@
     --sidebar-primary: 100 18% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 220 6% 93%;
-    --sidebar-accent-foreground: 220 12% 18%;
-    --sidebar-border: 220 8% 88%;
+    --sidebar-accent-foreground: 222 14% 16%;
+    --sidebar-border: 220 10% 86%;
     --sidebar-ring: 100 18% 48%;
   }
 
@@ -145,20 +145,21 @@
 
   h1 {
     letter-spacing: -0.025em;
-    line-height: 1.1;
+    line-height: 1.08;
   }
 
   h2 {
     letter-spacing: -0.02em;
-    line-height: 1.15;
+    line-height: 1.12;
   }
 
   h3 {
     letter-spacing: -0.01em;
+    line-height: 1.2;
   }
 
   p {
-    line-height: 1.75;
+    line-height: 1.7;
   }
 
   section {
@@ -207,29 +208,29 @@
   .shadow-elevated { box-shadow: var(--shadow-elevated); }
 
   /* ─── Unified Section Spacing ─── */
-  .section-spacing { @apply py-16 sm:py-24 md:py-40; }
-  .section-spacing-sm { @apply py-14 sm:py-20 md:py-28; }
-  .section-spacing-lg { @apply py-20 sm:py-28 md:py-44; }
+  .section-spacing { @apply py-14 sm:py-20 md:py-28; }
+  .section-spacing-sm { @apply py-12 sm:py-16 md:py-22; }
+  .section-spacing-lg { @apply py-16 sm:py-22 md:py-32; }
 
   /* ─── Editorial Decorative Elements ─── */
   .editorial-rule {
-    @apply w-12 h-px mx-auto;
-    background: hsl(var(--sage-light));
+    @apply w-10 h-px mx-auto;
+    background: hsl(var(--sage));
   }
 
   .editorial-rule-left {
-    @apply w-12 h-px;
-    background: hsl(var(--sage-light));
+    @apply w-10 h-px;
+    background: hsl(var(--sage));
   }
 
   /* ─── Section Transitions (premium pacing) ─── */
   .section-fade-top {
     background: linear-gradient(to bottom, hsl(var(--parchment)) 0%, transparent 100%);
-    @apply absolute top-0 left-0 right-0 h-20 pointer-events-none z-10;
+    @apply absolute top-0 left-0 right-0 h-16 pointer-events-none z-10;
   }
   .section-fade-bottom {
     background: linear-gradient(to top, hsl(var(--parchment)) 0%, transparent 100%);
-    @apply absolute bottom-0 left-0 right-0 h-20 pointer-events-none z-10;
+    @apply absolute bottom-0 left-0 right-0 h-16 pointer-events-none z-10;
   }
 
   /* ─── Corner Frame Accents ─── */
@@ -239,15 +240,15 @@
   .frame-corner::before,
   .frame-corner::after {
     content: '';
-    @apply absolute w-12 h-12 md:w-20 md:h-20 pointer-events-none hidden sm:block;
+    @apply absolute w-10 h-10 md:w-16 md:h-16 pointer-events-none hidden sm:block;
   }
   .frame-corner::before {
-    @apply top-6 left-6 md:top-10 md:left-10 border-t border-l;
-    border-color: hsl(var(--sage-light) / 0.4);
+    @apply top-6 left-6 md:top-8 md:left-8 border-t border-l;
+    border-color: hsl(var(--sage-light) / 0.35);
   }
   .frame-corner::after {
-    @apply bottom-6 right-6 md:bottom-10 md:right-10 border-b border-r;
-    border-color: hsl(var(--sage-light) / 0.4);
+    @apply bottom-6 right-6 md:bottom-8 md:right-8 border-b border-r;
+    border-color: hsl(var(--sage-light) / 0.35);
   }
 
   /* ─── Elevated Card ─── */
@@ -261,26 +262,26 @@
     background: linear-gradient(
       to right,
       transparent 0%,
-      hsl(var(--sage-light) / 0.4) 20%,
-      hsl(var(--sage-light) / 0.4) 80%,
+      hsl(var(--border)) 20%,
+      hsl(var(--border)) 80%,
       transparent 100%
     );
   }
 
   /* ─── Radial Glow (ambient depth) ─── */
   .glow-sage {
-    background: radial-gradient(ellipse, hsl(var(--sage-bg) / 0.35) 0%, transparent 70%);
+    background: radial-gradient(ellipse, hsl(var(--sage-bg) / 0.3) 0%, transparent 70%);
     @apply pointer-events-none;
   }
   .glow-lavender {
-    background: radial-gradient(ellipse, hsl(var(--lavender-bg) / 0.4) 0%, transparent 70%);
+    background: radial-gradient(ellipse, hsl(var(--lavender-bg) / 0.35) 0%, transparent 70%);
     @apply pointer-events-none;
   }
 
   /* ─── Stage Label (unified micro-type) ─── */
   .stage-label {
-    @apply font-sans text-[10px] font-light tracking-[0.25em] uppercase;
-    color: hsl(var(--sage-muted));
+    @apply font-sans text-[11px] font-medium tracking-[0.2em] uppercase;
+    color: hsl(var(--sage));
   }
 
   /* ─── Flanking Lines (decorative context cue) ─── */
@@ -290,13 +291,13 @@
   .flanking-lines::before,
   .flanking-lines::after {
     content: '';
-    @apply h-px w-12 md:w-16;
+    @apply h-px w-10 md:w-14;
     background: hsl(var(--sage-light));
   }
 
   /* ─── Page Ending (designed close) ─── */
   .page-ending {
-    @apply relative bg-parchment py-16 sm:py-24 md:py-36;
+    @apply relative bg-parchment py-14 sm:py-20 md:py-28;
   }
   .page-ending::before {
     content: '';
@@ -304,8 +305,8 @@
     background: linear-gradient(
       to right,
       transparent 0%,
-      hsl(var(--sage-light) / 0.3) 30%,
-      hsl(var(--sage-light) / 0.3) 70%,
+      hsl(var(--border)) 30%,
+      hsl(var(--border)) 70%,
       transparent 100%
     );
   }

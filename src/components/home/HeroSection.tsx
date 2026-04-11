@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import heroLifestyle from "@/assets/home-hero-lifestyle.jpg";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
 import { Shield, BookOpen, Heart, Users } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -39,51 +38,48 @@ const HeroSection = () => {
           aria-hidden="true"
           className="w-full h-full object-cover object-[75%_15%] scale-110"
         />
-        {/* Bottom-heavy gradient so text at top is readable, image shows at bottom */}
         <div className="absolute inset-0 bg-gradient-to-b from-parchment via-parchment/90 via-35% to-parchment/30" />
-        {/* Left wash for text safety */}
         <div className="absolute inset-0 bg-gradient-to-r from-parchment/80 via-transparent to-transparent" />
-        {/* Bottom fade */}
         <div className="absolute inset-0 bg-gradient-to-t from-parchment via-transparent to-transparent" />
       </div>
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">
         <div className="max-w-xl">
           {/* Trust signal */}
-          <div className="flex items-center gap-2.5 mb-8 md:mb-10 animate-fade-up">
+          <div className="flex items-center gap-2.5 mb-6 md:mb-8 animate-fade-up">
             <div className="h-px w-10 bg-sage" />
-            <p className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-sage">
+            <p className="font-sans text-[11px] font-medium tracking-[0.2em] uppercase text-sage">
               Your Pregnancy Journey
             </p>
           </div>
 
-          <h1 className="font-serif text-[2rem] sm:text-[2.75rem] md:text-5xl lg:text-[3.75rem] text-foreground leading-[1.06] mb-6 md:mb-8 animate-fade-up [animation-delay:0.05s]">
+          <h1 className="font-serif text-[2.25rem] sm:text-[2.75rem] md:text-5xl lg:text-[3.75rem] text-foreground leading-[1.06] mb-5 md:mb-6 animate-fade-up [animation-delay:0.05s]">
             A calm, structured guide{" "}
             <span className="italic text-foreground/85">through every week</span>{" "}
             of pregnancy
           </h1>
 
-          <p className="font-sans text-[15px] sm:text-base md:text-[17px] font-light text-muted-foreground leading-[1.75] mb-6 md:mb-8 animate-fade-up [animation-delay:0.1s] max-w-[26rem]">
+          <p className="font-sans text-base sm:text-[17px] md:text-lg font-light text-muted-foreground leading-[1.7] mb-6 md:mb-8 animate-fade-up [animation-delay:0.1s] max-w-[28rem]">
             Week-by-week guidance, milestone tracking, and reflection prompts, personalised to your stage. Enter your due date to begin.
           </p>
 
           {/* Micro trust signals */}
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2.5 mb-10 md:mb-12 animate-fade-up [animation-delay:0.15s]">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2.5 mb-8 md:mb-10 animate-fade-up [animation-delay:0.15s]">
             {[
               { icon: Shield, label: "Evidence-informed" },
               { icon: BookOpen, label: "40-week guide" },
               { icon: Heart, label: "Free to start" },
               { icon: Users, label: "For every parent" },
             ].map(({ icon: Icon, label }) => (
-              <span key={label} className="flex items-center gap-1.5 font-sans text-[11px] font-light text-muted-foreground/80">
-                <Icon size={12} className="text-sage" /> {label}
+              <span key={label} className="flex items-center gap-1.5 font-sans text-xs font-light text-muted-foreground/70">
+                <Icon size={13} className="text-sage" /> {label}
               </span>
             ))}
           </div>
 
           {/* Calculator form in a card */}
           <div className="animate-fade-up [animation-delay:0.2s]">
-            <div className="bg-card/85 backdrop-blur-md border border-border/30 rounded-2xl p-6 sm:p-8 shadow-elevated">
+            <div className="bg-card/90 backdrop-blur-md border border-border/40 rounded-2xl p-6 sm:p-8 shadow-elevated">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-8 rounded-full bg-sage/10 flex items-center justify-center">
                   <BookOpen size={14} className="text-sage" />
@@ -92,7 +88,7 @@ const HeroSection = () => {
                   <p className="font-sans text-[11px] font-medium tracking-[0.15em] uppercase text-sage">
                     Due date calculator
                   </p>
-                  <p className="font-sans text-xs font-light text-muted-foreground/70">
+                  <p className="font-sans text-xs font-light text-muted-foreground/60">
                     Find your week and start your personalised journey
                   </p>
                 </div>

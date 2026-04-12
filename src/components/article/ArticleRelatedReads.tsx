@@ -20,12 +20,12 @@ const ArticleRelatedReads = ({ articles, isDeep }: Props) => {
   if (articles.length === 0) return null;
 
   return (
-    <section className="bg-parchment py-16 sm:py-20 md:py-28">
+    <section className="bg-parchment py-10 sm:py-14 md:py-18">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
-        <div className="mb-8 sm:mb-10">
+        <div className="mb-6 sm:mb-8">
           <div className="flex items-center gap-3 mb-3">
             <div className="h-px w-8 bg-sage-light" />
-            <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted">
+            <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage-muted">
               Keep reading
             </p>
           </div>
@@ -34,7 +34,7 @@ const ArticleRelatedReads = ({ articles, isDeep }: Props) => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           {articles.map((article) => (
             <Link
               key={article.slug}
@@ -44,8 +44,8 @@ const ArticleRelatedReads = ({ articles, isDeep }: Props) => {
               {article.isCornerstone && (
                 <div className="h-0.5 bg-gradient-to-r from-sage/15 via-sage/30 to-sage/15" />
               )}
-              <div className="p-5 sm:p-6">
-                <div className="flex flex-wrap gap-1.5 mb-3">
+              <div className="p-5">
+                <div className="flex flex-wrap gap-1.5 mb-2.5">
                   {article.isCornerstone && (
                     <span className="px-2 py-0.5 rounded-full bg-sage/10 text-sage text-[9px] font-sans tracking-[0.12em] uppercase">
                       Guide
@@ -57,7 +57,7 @@ const ArticleRelatedReads = ({ articles, isDeep }: Props) => {
                     </span>
                   ))}
                 </div>
-                <h3 className="font-serif text-[15px] text-foreground leading-snug mb-2 group-hover:text-sage transition-colors line-clamp-2">
+                <h3 className="font-serif text-[15px] text-foreground leading-snug mb-1.5 group-hover:text-sage transition-colors line-clamp-2">
                   {article.title}
                 </h3>
                 <p className="font-sans text-[12px] font-light text-muted-foreground leading-relaxed line-clamp-2">
@@ -68,7 +68,7 @@ const ArticleRelatedReads = ({ articles, isDeep }: Props) => {
           ))}
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="mt-6 text-center">
           <Link
             to="/guidance"
             className="inline-flex items-center gap-2 font-sans text-[13px] text-sage hover:text-foreground transition-colors"

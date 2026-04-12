@@ -49,14 +49,14 @@ const ArticleJourneyCTA = ({ data }: Props) => {
   const route = journeyRoutes[primaryJourney] ?? journeyRoutes.pregnancy;
 
   return (
-    <section className="relative bg-parchment-dark py-20 sm:py-24 md:py-32 overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-sage-bg/20 rounded-full blur-[100px] pointer-events-none" />
+    <section className="relative bg-parchment-dark py-14 sm:py-18 md:py-24 overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-sage-bg/15 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl relative z-10">
         <div className="text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
+          <div className="flex items-center justify-center gap-3 mb-3">
             <div className="h-px w-8 bg-sage-light" />
-            <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted">
+            <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage-muted">
               Continue
             </p>
             <div className="h-px w-8 bg-sage-light" />
@@ -64,7 +64,7 @@ const ArticleJourneyCTA = ({ data }: Props) => {
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
             Continue your journey
           </h2>
-          <p className="font-sans text-[14px] sm:text-[15px] font-light text-muted-foreground leading-relaxed max-w-md mx-auto mb-8">
+          <p className="font-sans text-[14px] sm:text-[15px] font-light text-muted-foreground leading-relaxed max-w-md mx-auto mb-6">
             {route.description}
           </p>
           <Link

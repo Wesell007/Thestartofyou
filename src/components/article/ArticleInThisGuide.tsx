@@ -22,17 +22,17 @@ const ArticleInThisGuide = ({ data }: Props) => {
   if (sections.length < 3) return null;
 
   return (
-    <section className="bg-parchment pt-10 pb-4 sm:pt-14 sm:pb-6 md:pt-16 md:pb-8">
+    <section className="bg-parchment pt-8 pb-2 sm:pt-10 sm:pb-3 md:pt-12 md:pb-4">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-        <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage mb-4 sm:mb-5">
+        <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage mb-3 sm:mb-4">
           In this guide
         </p>
-        <div className="flex flex-wrap gap-2 sm:gap-2.5">
+        <div className="flex flex-wrap gap-2">
           {sections.map((section) => (
             <a
               key={section.id}
               href={`#${section.id}`}
-              className="font-sans text-[12px] sm:text-[13px] font-light text-foreground/60 hover:text-sage border border-border/30 hover:border-sage/30 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 transition-all"
+              className="font-sans text-[12px] sm:text-[13px] font-light text-foreground/60 hover:text-sage hover:border-sage/30 border border-border/30 rounded-full px-3.5 py-1.5 transition-all"
             >
               {section.label}
             </a>

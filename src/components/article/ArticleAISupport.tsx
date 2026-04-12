@@ -8,11 +8,11 @@ interface Props {
 
 const ArticleAISupport = ({ data }: Props) => {
   return (
-    <section className="bg-parchment py-16 sm:py-20 md:py-28">
+    <section className="bg-parchment py-10 sm:py-14 md:py-18">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-        <div className="bg-card border border-border/30 rounded-xl sm:rounded-2xl px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 shadow-soft">
-          <div className="text-center mb-7 sm:mb-8">
-            <div className="inline-flex items-center gap-1.5 bg-sage-bg/40 rounded-full px-3.5 py-1.5 mb-4">
+        <div className="bg-card border border-border/30 rounded-xl sm:rounded-2xl px-6 py-7 sm:px-8 sm:py-9 md:px-10 md:py-10 shadow-soft">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center gap-1.5 bg-sage-bg/40 rounded-full px-3.5 py-1.5 mb-3">
               <Sparkles size={12} className="text-sage" />
               <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-sage">
                 AI guidance

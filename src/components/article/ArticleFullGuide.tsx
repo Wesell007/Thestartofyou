@@ -7,7 +7,6 @@ interface Props {
   data: ArticleData;
 }
 
-/** Strong bridge module connecting a short article to its cornerstone deep guide. */
 const ArticleFullGuide = ({ data }: Props) => {
   if (!data.cornerstoneSlug || data.isCornerstone) return null;
 
@@ -17,23 +16,21 @@ const ArticleFullGuide = ({ data }: Props) => {
   const sectionCount = cornerstone.editorialSections?.length ?? 0;
 
   return (
-    <section id="full-guide" className="bg-parchment-dark py-16 sm:py-20 md:py-28">
+    <section id="full-guide" className="bg-parchment-dark py-10 sm:py-14 md:py-18">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-        {/* Section label */}
-        <div className="flex items-center gap-3 mb-6 sm:mb-8">
+        <div className="flex items-center gap-3 mb-5 sm:mb-6">
           <div className="h-px w-8 bg-sage-light" />
-          <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase text-sage-muted">
+          <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage-muted">
             Go deeper
           </p>
         </div>
 
         <div className="relative bg-card border border-border/30 rounded-xl sm:rounded-2xl overflow-hidden shadow-soft">
-          {/* Top accent gradient */}
           <div className="h-[3px] bg-gradient-to-r from-sage/30 via-sage/50 to-sage/30" />
 
-          <div className="px-6 py-7 sm:px-8 sm:py-9 md:px-10 md:py-10">
+          <div className="px-6 py-6 sm:px-8 sm:py-8 md:px-10 md:py-9">
             {/* Badge */}
-            <div className="flex items-center gap-2 mb-5">
+            <div className="flex items-center gap-2 mb-4">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sage/8 text-sage text-[10px] font-sans tracking-[0.15em] uppercase font-medium">
                 <BookOpen className="w-3 h-3" />
                 Complete guide
@@ -45,20 +42,18 @@ const ArticleFullGuide = ({ data }: Props) => {
               )}
             </div>
 
-            {/* Title */}
-            <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-3">
+            <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-2">
               {cornerstone.title}
             </h3>
 
-            {/* Description */}
             <p className="font-sans text-[14px] sm:text-[15px] font-light text-muted-foreground leading-[1.8] max-w-xl mb-4">
               {cornerstone.metaDescription}
             </p>
 
             {/* What this guide covers */}
             {cornerstone.keyTakeaways && cornerstone.keyTakeaways.length > 0 && (
-              <div className="mb-6">
-                <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-sage/60 mb-3">
+              <div className="mb-5">
+                <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-sage/60 mb-2.5">
                   What this guide covers
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5">
@@ -74,7 +69,6 @@ const ArticleFullGuide = ({ data }: Props) => {
               </div>
             )}
 
-            {/* CTA */}
             <Link
               to={`/articles/${data.cornerstoneSlug}`}
               className="inline-flex items-center gap-2.5 font-sans text-sm font-medium text-primary-foreground bg-sage hover:opacity-90 rounded-full px-6 py-3 transition-opacity shadow-sm"

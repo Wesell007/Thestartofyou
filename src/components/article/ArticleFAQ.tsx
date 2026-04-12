@@ -14,7 +14,6 @@ interface Props {
 const ArticleFAQ = ({ data }: Props) => {
   const hasFaq = data.faq && data.faq.length > 0;
 
-  // Inject FAQ JSON-LD schema for AEO
   useEffect(() => {
     if (!hasFaq) return;
     const schema = {
@@ -45,7 +44,7 @@ const ArticleFAQ = ({ data }: Props) => {
   if (!hasFaq) return null;
 
   return (
-    <section id="faq" className="bg-parchment py-16 sm:py-20 md:py-28">
+    <section id="faq" className="bg-parchment py-10 sm:py-14 md:py-18">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
         <div className="flex items-center gap-3 mb-3">
           <div className="h-px w-8 bg-sage-light" />
@@ -53,21 +52,21 @@ const ArticleFAQ = ({ data }: Props) => {
             Common questions
           </p>
         </div>
-        <h2 className="font-serif text-xl sm:text-2xl md:text-[1.75rem] text-foreground leading-snug mb-8 sm:mb-10">
+        <h2 className="font-serif text-xl sm:text-2xl md:text-[1.75rem] text-foreground leading-snug mb-6 sm:mb-8">
           What people often ask
         </h2>
 
-        <Accordion type="single" collapsible className="w-full space-y-2 sm:space-y-2.5">
+        <Accordion type="single" collapsible className="w-full space-y-2">
           {data.faq!.map((item, i) => (
             <AccordionItem
               key={i}
               value={`faq-${i}`}
               className="bg-card/50 border border-border/25 rounded-lg sm:rounded-xl overflow-hidden data-[state=open]:border-sage/15 transition-colors"
             >
-              <AccordionTrigger className="px-5 sm:px-6 py-4 sm:py-5 text-left font-serif text-[15px] sm:text-base text-foreground leading-snug hover:no-underline hover:text-sage transition-colors [&[data-state=open]]:text-sage gap-3">
+              <AccordionTrigger className="px-5 sm:px-6 py-4 text-left font-serif text-[15px] sm:text-base text-foreground leading-snug hover:no-underline hover:text-sage transition-colors [&[data-state=open]]:text-sage gap-3">
                 {item.question}
               </AccordionTrigger>
-              <AccordionContent className="px-5 sm:px-6 pb-5 pt-0">
+              <AccordionContent className="px-5 sm:px-6 pb-4 pt-0">
                 <p className="font-sans text-[14px] sm:text-[15px] font-light leading-[1.85] text-foreground/75 max-w-2xl">
                   {item.answer}
                 </p>

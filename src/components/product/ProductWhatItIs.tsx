@@ -1,4 +1,4 @@
-import journalCover from "@/assets/journal-cover.jpg";
+import journalFlatlay from "@/assets/journal-flatlay.jpg";
 import { ExternalLink, BookOpen } from "lucide-react";
 
 const ProductWhatItIs = () => {

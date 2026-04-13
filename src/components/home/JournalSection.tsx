@@ -1,5 +1,4 @@
 import journalFlatlay from "@/assets/journal-flatlay.jpg";
-import journalCover from "@/assets/journal-cover.jpg";
 import botanicalBl from "@/assets/botanical-branch-bl.png";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";

@@ -9,12 +9,14 @@ const GuidanceHero = () => (
       <img
         src={heroImg}
         alt="Parent reading in soft morning light"
-        className="w-full h-full object-cover object-top"
+        className="w-full h-full object-cover object-[75%_15%] sm:object-top"
         width={1280}
         height={720}
       />
-      {/* Layered gradients for text legibility */}
-      <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-foreground/30 md:from-foreground/75 md:via-foreground/50 md:to-transparent" />
+      {/* Mobile: stronger overall overlay for text legibility */}
+      <div className="absolute inset-0 bg-foreground/60 sm:bg-transparent" />
+      {/* Desktop: directional gradient */}
+      <div className="absolute inset-0 hidden sm:block bg-gradient-to-r from-foreground/75 via-foreground/50 to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-foreground/70 to-transparent" />
     </div>
 

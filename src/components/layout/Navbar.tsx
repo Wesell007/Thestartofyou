@@ -26,20 +26,20 @@ const Navbar = () => {
           <img
             src={logoSrc}
             alt="The Start of You"
-            className="w-[115px] md:w-[180px] h-auto object-contain"
+            className="w-[120px] md:w-[185px] h-auto object-contain contrast-[1.1]"
           />
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-9" aria-label="Main navigation">
+        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
           {navLinks.map(({ label, href }) => (
             <Link
               key={label}
               to={href}
-              className={`font-sans text-sm font-normal tracking-wide transition-colors duration-200 ${
+              className={`font-sans text-[14.5px] tracking-wide transition-colors duration-200 ${
                 isActive(href)
                   ? "text-foreground font-medium"
-                  : "text-foreground/65 hover:text-foreground"
+                  : "text-foreground/70 font-normal hover:text-foreground"
               }`}
             >
               {label}
@@ -51,7 +51,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center">
           <Link
             to="/explore"
-            className="font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-7 py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
+            className="font-sans text-[14px] font-medium bg-terracotta text-terracotta-foreground px-7 py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
           >
             Start your journey
           </Link>

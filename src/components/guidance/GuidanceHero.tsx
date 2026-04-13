@@ -20,7 +20,7 @@ const GuidanceHero = () => (
       <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-foreground/70 to-transparent" />
     </div>
 
-    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10 pt-28 pb-16 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28">
+    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10 pt-32 pb-20 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 mb-8 sm:mb-12 font-sans text-[11px] font-light text-white/50 tracking-wide">
         <Link to="/" className="hover:text-white/80 transition-colors">Home</Link>

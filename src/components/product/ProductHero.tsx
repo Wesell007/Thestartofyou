@@ -1,5 +1,7 @@
 import { ExternalLink, BookOpen } from "lucide-react";
 import productHero from "@/assets/product-hero.jpg";
+import botanicalBl from "@/assets/botanical-branch-bl.png";
+import botanicalTr from "@/assets/botanical-branch-tr.png";
 
 const ProductHero = () => {
   return (
@@ -7,6 +9,20 @@ const ProductHero = () => {
       {/* Dual ambient glows */}
       <div className="absolute top-1/4 right-0 w-[500px] h-[400px] glow-sage" />
       <div className="absolute bottom-0 left-1/4 w-[300px] h-[300px] glow-sage opacity-50" />
+
+      {/* Botanical accents */}
+      <img
+        src={botanicalTr}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 right-0 w-[120px] md:w-[200px] opacity-20 select-none hidden sm:block"
+      />
+      <img
+        src={botanicalBl}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-0 w-[100px] md:w-[160px] opacity-15 select-none hidden sm:block"
+      />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">

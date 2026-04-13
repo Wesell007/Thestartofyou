@@ -39,16 +39,16 @@ const GuidanceHero = () => (
       </div>
 
       {/* Search card */}
-      <div className="max-w-lg">
+      <div className="max-w-xl">
         <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 p-5 sm:p-6">
           <p className="font-sans text-[11px] font-light text-white/50 mb-3">Ask anything or search our guidance</p>
           <AISearchBar
             variant="hero"
             placeholder="What would you like guidance on?"
             suggestions={[
-              "What should I expect at 8 weeks pregnant?",
-              "How do I know if my symptoms are normal?",
-              "When is the best time to take a pregnancy test?",
+              "What should I expect at 8 weeks?",
+              "Are my symptoms normal?",
+              "Best time to take a test?",
               "Help me understand my due date",
             ]}
             context="guidance-library"

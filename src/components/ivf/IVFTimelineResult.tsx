@@ -3,7 +3,7 @@ import { differenceInDays, addDays, format } from "date-fns";
 import { ArrowRight, MessageCircle, Shield, Check, Star, Heart, Clock, Activity, BookOpen, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import homeJournalFlatlay from "@/assets/home-journal-flatlay.jpg";
+import journalCover from "@/assets/journal-cover.jpg";
 
 // ─── Types & data ─────────────────────────────────────────────────────────────
 

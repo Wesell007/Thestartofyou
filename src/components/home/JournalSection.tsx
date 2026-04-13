@@ -1,11 +1,20 @@
-import journalBook from "@/assets/journal-book.jpg";
+import journalCover from "@/assets/journal-cover.jpg";
+import botanicalBl from "@/assets/botanical-branch-bl.png";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const JournalSection = () => {
   return (
-    <section className="bg-parchment py-28 md:py-36">
-      <div className="container mx-auto px-6 md:px-10 max-w-5xl">
+    <section className="relative bg-parchment py-28 md:py-36 overflow-hidden">
+      {/* Botanical accent — bottom-left */}
+      <img
+        src={botanicalBl}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-0 w-[140px] md:w-[200px] opacity-25 select-none"
+      />
+
+      <div className="container mx-auto px-6 md:px-10 max-w-5xl relative z-10">
         <div className="text-center mb-20">
           <div className="editorial-rule mb-8" />
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground mb-7">
@@ -17,16 +26,16 @@ const JournalSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-16 items-center">
-          {/* Book image */}
+          {/* Book image — real journal cover */}
           <div className="flex justify-center md:justify-start relative">
             <div className="absolute -bottom-6 -left-6 w-36 h-36 bg-sage-bg rounded-full opacity-15 blur-3xl pointer-events-none" />
             <img
-              src={journalBook}
-              alt="The Start of You pregnancy journal book"
+              src={journalCover}
+              alt="The Start of You pregnancy journal — front cover with woodland watercolour illustration"
               width={400}
               height={400}
               loading="lazy"
-              className="w-64 md:w-80 rounded-2xl shadow-elevated relative z-10"
+              className="w-64 md:w-80 rounded-2xl shadow-elevated relative z-10 object-cover"
             />
           </div>
 

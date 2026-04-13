@@ -14,16 +14,16 @@ const Product = () => {
   return (
     <div className="min-h-screen font-sans">
       <Navbar />
-      <main>
-        <ProductHero />
-        <ProductFamiliar />
-        <ProductWhatItIs />
-        <ProductStages />
-        <ProductInside />
-        <ProductGallery />
-        <ProductMoment />
-        <ProductEcosystem />
-        <ProductFinalCTA />
+      <main className="flex flex-col">
+        <div className="order-1"><ProductHero /></div>
+        <div className="order-3 md:order-2"><ProductFamiliar /></div>
+        <div className="order-2 md:order-6"><ProductGallery /></div>
+        <div className="order-4 md:order-3"><ProductWhatItIs /></div>
+        <div className="order-5 md:order-4"><ProductStages /></div>
+        <div className="order-6 md:order-5"><ProductInside /></div>
+        <div className="order-7"><ProductMoment /></div>
+        <div className="order-8"><ProductEcosystem /></div>
+        <div className="order-9"><ProductFinalCTA /></div>
       </main>
       <Footer />
     </div>

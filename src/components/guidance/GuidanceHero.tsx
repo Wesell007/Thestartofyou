@@ -9,16 +9,18 @@ const GuidanceHero = () => (
       <img
         src={heroImg}
         alt="Parent reading in soft morning light"
-        className="w-full h-full object-cover object-top"
+        className="w-full h-full object-cover object-[75%_15%] sm:object-top"
         width={1280}
         height={720}
       />
-      {/* Layered gradients for text legibility */}
-      <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-foreground/30 md:from-foreground/75 md:via-foreground/50 md:to-transparent" />
+      {/* Mobile: stronger overall overlay for text legibility */}
+      <div className="absolute inset-0 bg-foreground/60 sm:bg-transparent" />
+      {/* Desktop: directional gradient */}
+      <div className="absolute inset-0 hidden sm:block bg-gradient-to-r from-foreground/75 via-foreground/50 to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-foreground/70 to-transparent" />
     </div>
 
-    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10 pt-28 pb-16 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28">
+    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10 pt-32 pb-20 sm:pt-32 sm:pb-20 md:pt-40 md:pb-28">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 mb-8 sm:mb-12 font-sans text-[11px] font-light text-white/50 tracking-wide">
         <Link to="/" className="hover:text-white/80 transition-colors">Home</Link>
@@ -26,7 +28,7 @@ const GuidanceHero = () => (
         <span className="text-white/70">Guidance</span>
       </nav>
 
-      <div className="max-w-xl mb-10 sm:mb-14">
+      <div className="max-w-xl mb-12 sm:mb-14">
         <p className="font-sans text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-sage-light/80 mb-4 md:mb-5">
           Guidance library
         </p>

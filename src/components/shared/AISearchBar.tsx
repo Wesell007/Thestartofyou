@@ -78,7 +78,11 @@ const AISearchBar = ({
             <button
               key={s}
               onClick={() => handleSuggestion(s)}
-              className="font-sans text-xs font-light text-muted-foreground border border-border/50 rounded-pill px-4 py-2 hover:border-sage/40 hover:text-foreground hover:bg-card/80 transition-all duration-200 bg-transparent"
+              className={`font-sans text-[12px] rounded-pill px-4 py-2 transition-all duration-200 ${
+                isHero
+                  ? "font-normal text-white/90 border border-white/25 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/40 hover:text-white"
+                  : "font-light text-muted-foreground border border-border/50 bg-transparent hover:border-sage/40 hover:text-foreground hover:bg-card/80"
+              }`}
             >
               {s}
             </button>

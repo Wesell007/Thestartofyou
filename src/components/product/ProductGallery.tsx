@@ -1,109 +1,12 @@
-import { useState } from "react";
-import journalFlatlay from "@/assets/journal-flatlay.jpg";
 import journalWriting from "@/assets/journal-writing.jpg";
-import journalUltrasound from "@/assets/journal-ultrasound.jpg";
-import journalCloseup from "@/assets/journal-closeup.jpg";
-import journalFirstsPage from "@/assets/journal-firsts-page.jpg";
-import journalCoverHand from "@/assets/journal-cover-hand.jpg";
 import journalKeepsakes from "@/assets/journal-keepsakes.jpg";
-import journalNursery from "@/assets/journal-nursery-planning.jpg";
+import journalFirstsPage from "@/assets/journal-firsts-page.jpg";
 import journalBabyShower from "@/assets/journal-baby-shower.jpg";
-import journalFirstSeasons from "@/assets/journal-first-seasons.jpg";
-import journalNamesPlanning from "@/assets/journal-names-planning.jpg";
+import journalNursery from "@/assets/journal-nursery-planning.jpg";
 import journalCouple from "@/assets/journal-couple.jpg";
-import journalCoupleUltrasound from "@/assets/journal-couple-ultrasound.jpg";
-import productMoment from "@/assets/product-moment.jpg";
-
-const galleryItems = [
-  {
-    src: journalFlatlay,
-    alt: "The Start of You journal styled with baby clothes and keepsakes",
-    caption: "A premium guided journal designed for pregnancy and beyond",
-    category: "The journal",
-  },
-  {
-    src: journalFirstsPage,
-    alt: "Journal open to the Firsts milestone page with handwritten entries",
-    caption: "Track every precious first — from hearing the heartbeat to feeling the first kick",
-    category: "Milestone pages",
-  },
-  {
-    src: journalKeepsakes,
-    alt: "Journal open to Memories and Keepsakes envelope page with scan photos",
-    caption: "A built-in keepsake pocket for scan photos, cards, and treasured mementos",
-    category: "Keepsake pocket",
-  },
-  {
-    src: journalCoverHand,
-    alt: "Hands holding The Start of You journal with pen ready to write",
-    caption: "Beautiful botanical hardback design — a gift-worthy keepsake you will treasure",
-    category: "In your hands",
-  },
-  {
-    src: journalWriting,
-    alt: "Pregnant woman writing reflections in The Start of You journal",
-    caption: "Guided prompts for weekly reflection and emotional processing",
-    category: "Writing prompts",
-  },
-  {
-    src: journalUltrasound,
-    alt: "Journal open with ultrasound photo and handwritten notes",
-    caption: "Space for scan photos, milestones, and words of wisdom",
-    category: "Scan pages",
-  },
-  {
-    src: journalCloseup,
-    alt: "Close-up of handwritten journal entries with ultrasound nearby",
-    caption: "Free-form space to write what matters most to you",
-    category: "Open reflection",
-  },
-  {
-    src: journalNursery,
-    alt: "Journal open to Planning Your Nursery page with mood board and handwritten notes",
-    caption: "Nursery planning pages with space for themes, colours, and inspiration photos",
-    category: "Nursery planning",
-  },
-  {
-    src: journalBabyShower,
-    alt: "Journal open to Baby Shower Photos and Gift Log pages",
-    caption: "Dedicated baby shower pages — photo space and a gift log to remember who gave what",
-    category: "Baby shower",
-  },
-  {
-    src: journalFirstSeasons,
-    alt: "Journal open to First Summer and First Autumn seasonal memory pages with baby photo",
-    caption: "Seasonal memory pages — capture what you did, where you went, and your most memorable moments",
-    category: "First seasons",
-  },
-  {
-    src: journalNamesPlanning,
-    alt: "Journal open to baby name planning page and Planning & Organising section with scan photo",
-    caption: "Baby name shortlists, planning pages, and a beautiful woodland-illustrated organising section",
-    category: "Names & planning",
-  },
-  {
-    src: journalCouple,
-    alt: "Expecting couple reading through The Start of You journal together",
-    caption: "A shared moment — reading back through the journey together",
-    category: "Together",
-  },
-  {
-    src: journalCoupleUltrasound,
-    alt: "Expecting couple holding an ultrasound photo together",
-    caption: "An emotional lifestyle moment that reflects the memories this journal helps you hold onto",
-    category: "Shared journey",
-  },
-  {
-    src: productMoment,
-    alt: "Hands gently writing in a journal",
-    caption: "Designed to feel calm, personal, and never like homework",
-    category: "How it feels",
-  },
-];
+import journalFirstSeasons from "@/assets/journal-first-seasons.jpg";
 
 const ProductGallery = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
   return (
     <section className="relative bg-parchment py-16 md:py-24 overflow-hidden">
       <div className="section-divider absolute top-0 left-0 right-0" />
@@ -112,64 +15,138 @@ const ProductGallery = () => {
         {/* Section header */}
         <div className="text-center mb-10 md:mb-14">
           <div className="editorial-rule mb-5" />
-          <p className="stage-label mb-2.5">A closer look inside</p>
+          <p className="stage-label mb-2.5">See inside the journal</p>
           <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.25rem] text-foreground mb-3 leading-snug">
-            More than a notebook. See what's inside.
+            More than a notebook. A place for everything.
           </h2>
           <p className="font-sans text-sm sm:text-base font-light text-muted-foreground leading-relaxed max-w-lg mx-auto">
-            144 pages of guided prompts, keepsake pockets, milestone tracking, and space for the moments that matter most.
+            Guided prompts, keepsake pockets, milestone pages, and space for the moments that matter most.
           </p>
         </div>
 
-        {/* Gallery layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8">
-          {/* Main image — large */}
-          <div className="lg:col-span-3">
-            <div className="relative rounded-2xl overflow-hidden shadow-elevated group aspect-[4/3]">
-              <img
-                src={galleryItems[activeIndex].src}
-                alt={galleryItems[activeIndex].alt}
-                className="w-full h-full object-cover transition-all duration-500"
-              />
-              {/* Caption overlay */}
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/50 to-transparent p-5 md:p-7">
-                <p className="font-sans text-[10px] font-medium tracking-widest uppercase text-white/70 mb-1">
-                  {galleryItems[activeIndex].category}
-                </p>
-                <p className="font-serif text-sm sm:text-base text-white leading-snug max-w-md">
-                  {galleryItems[activeIndex].caption}
-                </p>
-              </div>
+        {/* Row 1 — Hero pair: Writing + Keepsakes */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-5 mb-4 md:mb-5">
+          <div className="md:col-span-3 relative rounded-2xl overflow-hidden shadow-elevated group aspect-[4/3]">
+            <img
+              src={journalWriting}
+              alt="Pregnant woman writing reflections in The Start of You journal"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+            />
+            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/50 to-transparent p-5 md:p-7">
+              <p className="font-sans text-[10px] font-medium tracking-widest uppercase text-white/70 mb-1">
+                Writing & reflection
+              </p>
+              <p className="font-serif text-sm sm:text-base text-white leading-snug max-w-sm">
+                Guided prompts for weekly reflection — designed to feel calm, personal, and never like homework
+              </p>
             </div>
           </div>
 
-          {/* Thumbnail grid — right side */}
-          <div className="lg:col-span-2 grid grid-cols-5 lg:grid-cols-2 gap-2 lg:gap-2.5">
-            {galleryItems.map((item, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveIndex(i)}
-                className={`relative rounded-xl overflow-hidden aspect-square transition-all duration-300 group/thumb ${
-                  i === activeIndex
-                    ? "ring-2 ring-sage shadow-soft"
-                    : "opacity-70 hover:opacity-100"
-                }`}
-              >
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div className={`absolute inset-0 flex items-end p-1.5 lg:p-2 transition-opacity duration-200 ${
-                  i === activeIndex ? "bg-sage/10" : "bg-black/0 group-hover/thumb:bg-black/20"
-                }`}>
-                  <span className="font-sans text-[8px] lg:text-[9px] font-medium tracking-wide uppercase text-white opacity-0 group-hover/thumb:opacity-100 transition-opacity">
-                    {item.category}
-                  </span>
-                </div>
-              </button>
-            ))}
+          <div className="md:col-span-2 relative rounded-2xl overflow-hidden shadow-elevated group aspect-[4/3] md:aspect-auto">
+            <img
+              src={journalKeepsakes}
+              alt="Journal open to Memories and Keepsakes envelope page with scan photos"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+            />
+            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/50 to-transparent p-5">
+              <p className="font-sans text-[10px] font-medium tracking-widest uppercase text-white/70 mb-1">
+                Keepsake pocket
+              </p>
+              <p className="font-serif text-sm text-white leading-snug">
+                Built-in pocket for scan photos, cards, and treasured mementos
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Row 2 — Interior spreads: Firsts, Baby Shower, Nursery */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5 mb-4 md:mb-5">
+          <div className="relative rounded-2xl overflow-hidden shadow-soft group aspect-[4/3]">
+            <img
+              src={journalFirstsPage}
+              alt="Journal open to the Firsts milestone page with handwritten entries"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              loading="lazy"
+            />
+            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/45 to-transparent p-4">
+              <p className="font-sans text-[9px] font-medium tracking-widest uppercase text-white/70 mb-0.5">
+                Milestone pages
+              </p>
+              <p className="font-serif text-xs sm:text-sm text-white leading-snug">
+                Track every precious first
+              </p>
+            </div>
+          </div>
+
+          <div className="relative rounded-2xl overflow-hidden shadow-soft group aspect-[4/3]">
+            <img
+              src={journalBabyShower}
+              alt="Journal open to Baby Shower Photos and Gift Log pages"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              loading="lazy"
+            />
+            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/45 to-transparent p-4">
+              <p className="font-sans text-[9px] font-medium tracking-widest uppercase text-white/70 mb-0.5">
+                Baby shower
+              </p>
+              <p className="font-serif text-xs sm:text-sm text-white leading-snug">
+                Photo space and gift log
+              </p>
+            </div>
+          </div>
+
+          <div className="relative rounded-2xl overflow-hidden shadow-soft group aspect-[4/3] col-span-2 md:col-span-1">
+            <img
+              src={journalNursery}
+              alt="Journal open to Planning Your Nursery page with mood board and handwritten notes"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              loading="lazy"
+            />
+            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/45 to-transparent p-4">
+              <p className="font-sans text-[9px] font-medium tracking-widest uppercase text-white/70 mb-0.5">
+                Nursery planning
+              </p>
+              <p className="font-serif text-xs sm:text-sm text-white leading-snug">
+                Themes, colours, and inspiration
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Row 3 — Lifestyle / Emotional: Couple + First Seasons */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+          <div className="relative rounded-2xl overflow-hidden shadow-soft group aspect-[16/10]">
+            <img
+              src={journalCouple}
+              alt="Expecting couple reading through The Start of You journal together"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              loading="lazy"
+            />
+            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/45 to-transparent p-5">
+              <p className="font-sans text-[9px] font-medium tracking-widest uppercase text-white/70 mb-0.5">
+                A shared experience
+              </p>
+              <p className="font-serif text-sm text-white leading-snug">
+                Reading back through the journey together
+              </p>
+            </div>
+          </div>
+
+          <div className="relative rounded-2xl overflow-hidden shadow-soft group aspect-[16/10]">
+            <img
+              src={journalFirstSeasons}
+              alt="Journal open to First Summer and First Autumn seasonal memory pages with baby photo"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              loading="lazy"
+            />
+            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/45 to-transparent p-5">
+              <p className="font-sans text-[9px] font-medium tracking-widest uppercase text-white/70 mb-0.5">
+                First seasons
+              </p>
+              <p className="font-serif text-sm text-white leading-snug">
+                Capture every season of baby's first year
+              </p>
+            </div>
           </div>
         </div>
 

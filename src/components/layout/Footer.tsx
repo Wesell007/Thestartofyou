@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logoSrc from "@/assets/logo-dark.png";
+import botanicalBl from "@/assets/botanical-branch-bl.png";
 
 const Footer = () => {
   return (
@@ -7,7 +8,15 @@ const Footer = () => {
       {/* Soft divider */}
       <div className="section-divider" />
 
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl pt-14 sm:pt-20 pb-10 sm:pb-14">
+      {/* Botanical accent — bottom-left */}
+      <img
+        src={botanicalBl}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-0 w-[120px] md:w-[180px] opacity-15 select-none"
+      />
+
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl pt-14 sm:pt-20 pb-10 sm:pb-14 relative z-10">
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-16">
           {/* Brand */}
           <div className="col-span-2 sm:col-span-2 md:col-span-1">

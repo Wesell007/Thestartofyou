@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Heart } from "lucide-react";
+import botanicalDivider from "@/assets/botanical-divider.png";
 
 const CTASection = () => {
   return (
@@ -34,7 +35,14 @@ const CTASection = () => {
           </Link>
         </div>
 
-        <div className="h-px w-14 bg-border/40 mx-auto mb-5" />
+        {/* Botanical divider instead of plain line */}
+        <img
+          src={botanicalDivider}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="w-28 md:w-36 h-auto mx-auto mb-5 opacity-30 select-none"
+        />
 
         <p className="font-sans text-sm font-light text-muted-foreground">
           Not sure where to start?{" "}

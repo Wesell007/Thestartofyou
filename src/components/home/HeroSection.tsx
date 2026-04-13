@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import heroLifestyle from "@/assets/home-hero-lifestyle.jpg";
+import botanicalTr from "@/assets/botanical-branch-tr.png";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
 import { Shield, BookOpen, Heart, Users } from "lucide-react";
 
@@ -42,6 +43,14 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-parchment/80 via-transparent to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-parchment via-transparent to-transparent" />
       </div>
+
+      {/* Botanical accent — top-right corner (desktop only) */}
+      <img
+        src={botanicalTr}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute top-4 right-4 w-[100px] md:w-[160px] lg:w-[200px] opacity-20 select-none hidden sm:block z-20"
+      />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">
         <div className="max-w-xl">

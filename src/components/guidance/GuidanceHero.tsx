@@ -46,10 +46,10 @@ const GuidanceHero = () => (
             variant="hero"
             placeholder="What would you like guidance on?"
             suggestions={[
-              "Is nausea normal in early pregnancy?",
-              "When do pregnancy symptoms start?",
-              "I'm feeling overwhelmed",
-              "Implantation bleeding vs period",
+              "What should I expect at 8 weeks pregnant?",
+              "How do I know if my symptoms are normal?",
+              "When is the best time to take a pregnancy test?",
+              "Help me understand my due date",
             ]}
             context="guidance-library"
           />

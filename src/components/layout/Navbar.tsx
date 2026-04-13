@@ -19,27 +19,27 @@ const Navbar = () => {
   const isActive = (href: string) => location.pathname === href;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/95 backdrop-blur-lg border-b border-border/30">
-      <div className="container mx-auto px-4 sm:px-6 md:px-10 h-16 md:h-[5.5rem] flex items-center justify-between max-w-6xl relative">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/97 backdrop-blur-lg border-b border-border/40">
+      <div className="container mx-auto px-4 sm:px-6 md:px-10 h-16 md:h-24 flex items-center justify-between max-w-6xl relative">
         {/* Logo */}
         <Link to="/" className="flex items-center shrink-0">
           <img
             src={logoSrc}
             alt="The Start of You"
-            className="w-[100px] md:w-[160px] h-auto object-contain"
+            className="w-[115px] md:w-[180px] h-auto object-contain"
           />
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-10" aria-label="Main navigation">
+        <nav className="hidden md:flex items-center gap-9" aria-label="Main navigation">
           {navLinks.map(({ label, href }) => (
             <Link
               key={label}
               to={href}
-              className={`font-sans text-[13px] font-light tracking-wide transition-colors duration-200 ${
+              className={`font-sans text-sm font-normal tracking-wide transition-colors duration-200 ${
                 isActive(href)
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-foreground font-medium"
+                  : "text-foreground/65 hover:text-foreground"
               }`}
             >
               {label}
@@ -51,7 +51,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center">
           <Link
             to="/explore"
-            className="font-sans text-[13px] font-medium bg-terracotta text-terracotta-foreground px-6 py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
+            className="font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-7 py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
           >
             Start your journey
           </Link>

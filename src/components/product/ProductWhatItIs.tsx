@@ -1,4 +1,5 @@
 import journalFlatlay from "@/assets/journal-flatlay.jpg";
+import journalCoverHand from "@/assets/journal-cover-hand.jpg";
 import { ExternalLink, BookOpen } from "lucide-react";
 
 const ProductWhatItIs = () => {
@@ -12,7 +13,7 @@ const ProductWhatItIs = () => {
             <div className="relative">
               <img
                 src={journalFlatlay}
-                alt="The Start of You Journal"
+                alt="The Start of You Journal flatlay with baby keepsakes"
                 width={400}
                 height={400}
                 loading="lazy"
@@ -20,8 +21,8 @@ const ProductWhatItIs = () => {
               />
               {/* Product spec badge */}
               <div className="absolute -bottom-3 -right-3 bg-card/90 backdrop-blur-sm rounded-xl px-3.5 py-2.5 border border-border/30 shadow-soft">
-                <p className="font-sans text-[10px] font-light text-muted-foreground">200+ pages</p>
-                <p className="font-sans text-[10px] font-light text-muted-foreground">Guided prompts</p>
+                <p className="font-sans text-[10px] font-light text-muted-foreground">144 pages · Hardback A5</p>
+                <p className="font-sans text-[10px] font-light text-muted-foreground">Guided prompts & keepsake pockets</p>
               </div>
             </div>
           </div>
@@ -39,7 +40,7 @@ const ProductWhatItIs = () => {
 
             {/* Value chips */}
             <div className="flex flex-wrap gap-2.5 mb-7">
-              {["Guided prompts", "Open reflection space", "Stage-by-stage structure", "Keepsake quality"].map((item) => (
+              {["Guided weekly prompts", "Keepsake pockets", "Milestone tracking", "Photo-friendly pages", "Gift-worthy design"].map((item) => (
                 <span key={item} className="bg-sage/8 border border-sage/15 rounded-pill px-4 py-2 font-sans text-xs font-light text-foreground">
                   {item}
                 </span>

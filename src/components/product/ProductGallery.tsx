@@ -3,7 +3,9 @@ import journalFlatlay from "@/assets/journal-flatlay.jpg";
 import journalWriting from "@/assets/journal-writing.jpg";
 import journalUltrasound from "@/assets/journal-ultrasound.jpg";
 import journalCloseup from "@/assets/journal-closeup.jpg";
-import journalCoverFull from "@/assets/journal-cover-full.jpg";
+import journalFirstsPage from "@/assets/journal-firsts-page.jpg";
+import journalCoverHand from "@/assets/journal-cover-hand.jpg";
+import journalKeepsakes from "@/assets/journal-keepsakes.jpg";
 import productMoment from "@/assets/product-moment.jpg";
 
 const galleryItems = [
@@ -12,6 +14,24 @@ const galleryItems = [
     alt: "The Start of You journal styled with baby clothes and keepsakes",
     caption: "A premium guided journal designed for pregnancy and beyond",
     category: "The journal",
+  },
+  {
+    src: journalFirstsPage,
+    alt: "Journal open to the Firsts milestone page with handwritten entries",
+    caption: "Track every precious first — from hearing the heartbeat to feeling the first kick",
+    category: "Milestone pages",
+  },
+  {
+    src: journalKeepsakes,
+    alt: "Journal open to Memories and Keepsakes envelope page with scan photos",
+    caption: "A built-in keepsake pocket for scan photos, cards, and treasured mementos",
+    category: "Keepsake pocket",
+  },
+  {
+    src: journalCoverHand,
+    alt: "Hands holding The Start of You journal with pen ready to write",
+    caption: "Beautiful botanical hardback design — a gift-worthy keepsake you will treasure",
+    category: "In your hands",
   },
   {
     src: journalWriting,
@@ -23,7 +43,7 @@ const galleryItems = [
     src: journalUltrasound,
     alt: "Journal open with ultrasound photo and handwritten notes",
     caption: "Space for scan photos, milestones, and words of wisdom",
-    category: "Keepsake pages",
+    category: "Scan pages",
   },
   {
     src: journalCloseup,
@@ -36,12 +56,6 @@ const galleryItems = [
     alt: "Hands gently writing in a journal",
     caption: "Designed to feel calm, personal, and never like homework",
     category: "How it feels",
-  },
-  {
-    src: journalCoverFull,
-    alt: "The Start of You journal cover with botanical illustration",
-    caption: "Soft botanical artwork throughout — a keepsake you'll treasure",
-    category: "The cover",
   },
 ];
 
@@ -61,7 +75,7 @@ const ProductGallery = () => {
             More than a notebook. See what's inside.
           </h2>
           <p className="font-sans text-sm sm:text-base font-light text-muted-foreground leading-relaxed max-w-lg mx-auto">
-            Guided prompts, reflection space, keepsake pages, and room for the moments that matter most.
+            144 pages of guided prompts, keepsake pockets, milestone tracking, and space for the moments that matter most.
           </p>
         </div>
 
@@ -88,7 +102,7 @@ const ProductGallery = () => {
           </div>
 
           {/* Thumbnail grid — right side */}
-          <div className="lg:col-span-2 grid grid-cols-3 lg:grid-cols-2 gap-3">
+          <div className="lg:col-span-2 grid grid-cols-4 lg:grid-cols-2 gap-2.5 lg:gap-3">
             {galleryItems.map((item, i) => (
               <button
                 key={i}
@@ -105,11 +119,10 @@ const ProductGallery = () => {
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
-                {/* Category label on hover */}
-                <div className={`absolute inset-0 flex items-end p-2 transition-opacity duration-200 ${
+                <div className={`absolute inset-0 flex items-end p-1.5 lg:p-2 transition-opacity duration-200 ${
                   i === activeIndex ? "bg-sage/10" : "bg-black/0 group-hover/thumb:bg-black/20"
                 }`}>
-                  <span className="font-sans text-[9px] font-medium tracking-wide uppercase text-white opacity-0 group-hover/thumb:opacity-100 transition-opacity">
+                  <span className="font-sans text-[8px] lg:text-[9px] font-medium tracking-wide uppercase text-white opacity-0 group-hover/thumb:opacity-100 transition-opacity">
                     {item.category}
                   </span>
                 </div>
@@ -121,10 +134,10 @@ const ProductGallery = () => {
         {/* Value strip below gallery */}
         <div className="mt-10 md:mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: "40+ weeks", detail: "of guided prompts" },
-            { label: "Keepsake pages", detail: "for scans, photos & memories" },
-            { label: "Open space", detail: "for free-form writing" },
-            { label: "4 life stages", detail: "pregnancy through first year" },
+            { label: "144 pages", detail: "Hardback A5 format" },
+            { label: "Guided prompts", detail: "Week-by-week reflection" },
+            { label: "Keepsake pockets", detail: "For scans, photos & memories" },
+            { label: "Gift-ready", detail: "A meaningful gift for expecting mums" },
           ].map((item) => (
             <div
               key={item.label}

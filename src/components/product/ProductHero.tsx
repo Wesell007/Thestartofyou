@@ -88,7 +88,7 @@ const ProductHero = () => {
                 <p className="font-serif text-[13px] italic text-foreground leading-snug mb-1.5">
                   "For the thoughts you do not want to lose"
                 </p>
-                <p className="font-sans text-[9px] font-light text-muted-foreground">Guided journal, 200+ pages</p>
+                <p className="font-sans text-[9px] font-light text-muted-foreground">Hardback · 144 pages · A5</p>
               </div>
             </div>
           </div>

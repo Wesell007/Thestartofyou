@@ -11,6 +11,7 @@ import journalBabyShower from "@/assets/journal-baby-shower.jpg";
 import journalFirstSeasons from "@/assets/journal-first-seasons.jpg";
 import journalNamesPlanning from "@/assets/journal-names-planning.jpg";
 import journalCouple from "@/assets/journal-couple.jpg";
+import journalCoupleUltrasound from "@/assets/journal-couple-ultrasound.jpg";
 import productMoment from "@/assets/product-moment.jpg";
 
 const galleryItems = [
@@ -85,6 +86,12 @@ const galleryItems = [
     alt: "Expecting couple reading through The Start of You journal together",
     caption: "A shared moment — reading back through the journey together",
     category: "Together",
+  },
+  {
+    src: journalCoupleUltrasound,
+    alt: "Expecting couple holding an ultrasound photo together",
+    caption: "An emotional lifestyle moment that reflects the memories this journal helps you hold onto",
+    category: "Shared journey",
   },
   {
     src: productMoment,

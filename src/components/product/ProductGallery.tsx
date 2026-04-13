@@ -6,6 +6,8 @@ import journalCloseup from "@/assets/journal-closeup.jpg";
 import journalFirstsPage from "@/assets/journal-firsts-page.jpg";
 import journalCoverHand from "@/assets/journal-cover-hand.jpg";
 import journalKeepsakes from "@/assets/journal-keepsakes.jpg";
+import journalNursery from "@/assets/journal-nursery-planning.jpg";
+import journalBabyShower from "@/assets/journal-baby-shower.jpg";
 import productMoment from "@/assets/product-moment.jpg";
 
 const galleryItems = [

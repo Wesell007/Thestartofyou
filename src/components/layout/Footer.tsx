@@ -16,18 +16,18 @@ const Footer = () => {
         className="pointer-events-none absolute bottom-0 left-0 w-[120px] md:w-[180px] opacity-15 select-none"
       />
 
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl pt-14 sm:pt-20 pb-10 sm:pb-14 relative z-10">
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl pt-16 sm:pt-24 pb-10 sm:pb-14 relative z-10">
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-16">
           {/* Brand */}
           <div className="col-span-2 sm:col-span-2 md:col-span-1">
-            <Link to="/" className="inline-block mb-5 md:mb-6">
+            <Link to="/" className="inline-block mb-6 md:mb-8">
               <img
                 src={logoSrc}
                 alt="The Start of You"
-                className="w-[130px] md:w-[160px] h-auto object-contain"
+                className="w-[150px] md:w-[190px] h-auto object-contain contrast-[1.1]"
               />
             </Link>
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-xs">
+            <p className="font-sans text-[14px] font-light text-foreground/55 leading-relaxed max-w-xs">
               Your trusted companion through pregnancy, offering calm guidance and space for reflection.
             </p>
           </div>

@@ -73,14 +73,14 @@ const AISearchBar = ({
 
       {/* Suggestion chips */}
       {suggestions.length > 0 && (
-        <div className="flex flex-wrap gap-2.5 mt-5 justify-center">
+        <div className="flex flex-wrap gap-2 sm:gap-2.5 mt-4 sm:mt-5 justify-center">
           {suggestions.map((s) => (
             <button
               key={s}
               onClick={() => handleSuggestion(s)}
-              className={`font-sans text-[12px] rounded-pill px-4 py-2 transition-all duration-200 ${
+              className={`font-sans text-[12px] sm:text-[13px] rounded-pill px-4 py-2 sm:py-2.5 transition-all duration-200 cursor-pointer ${
                 isHero
-                  ? "font-normal text-white/90 border border-white/25 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/40 hover:text-white"
+                  ? "font-medium text-foreground/80 border border-foreground/15 bg-card/60 backdrop-blur-sm shadow-sm hover:bg-card/90 hover:border-foreground/25 hover:text-foreground hover:shadow-md"
                   : "font-light text-muted-foreground border border-border/50 bg-transparent hover:border-sage/40 hover:text-foreground hover:bg-card/80"
               }`}
             >

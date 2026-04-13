@@ -50,8 +50,9 @@ const ExploreHero = () => {
         <div className="flex items-center justify-center gap-1.5 sm:gap-2 mb-10 md:mb-12 animate-fade-up [animation-delay:0.15s]">
           {stages.map((s, i) => (
             <div key={s.label} className="flex items-center gap-1.5 sm:gap-2">
-              <span
-                className="font-sans text-[10px] sm:text-[11px] font-light tracking-wide px-2.5 py-1 rounded-pill border"
+              <Link
+                to={s.href}
+                className="font-sans text-[10px] sm:text-[11px] font-light tracking-wide px-2.5 py-1 rounded-pill border hover:opacity-80 transition-opacity duration-200"
                 style={{
                   color: `hsl(var(${s.color}))`,
                   borderColor: `hsl(var(${s.color}) / 0.3)`,
@@ -59,7 +60,7 @@ const ExploreHero = () => {
                 }}
               >
                 {s.label}
-              </span>
+              </Link>
               {i < stages.length - 1 && (
                 <div className="w-3 sm:w-4 h-px" style={{ backgroundColor: `hsl(var(--sage-light) / 0.4)` }} />
               )}

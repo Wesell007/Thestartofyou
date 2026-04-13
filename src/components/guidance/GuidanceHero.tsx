@@ -28,7 +28,7 @@ const GuidanceHero = () => (
         <span className="text-white/70">Guidance</span>
       </nav>
 
-      <div className="max-w-xl mb-10 sm:mb-14">
+      <div className="max-w-xl mb-12 sm:mb-14">
         <p className="font-sans text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-sage-light/80 mb-4 md:mb-5">
           Guidance library
         </p>

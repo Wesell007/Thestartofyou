@@ -1,4 +1,5 @@
-import homeJournalFlatlay from "@/assets/home-journal-flatlay.jpg";
+import journalCover from "@/assets/journal-cover.jpg";
+import botanicalTr from "@/assets/botanical-branch-tr.png";
 import { ArrowRight, Star, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -13,15 +14,22 @@ const JournalPromotion = ({
     <section className="relative bg-parchment-dark section-spacing overflow-hidden">
       {/* Ambient glow */}
       <div className="absolute top-1/4 right-0 w-[350px] h-[350px] glow-sage" />
+      {/* Botanical accent — top-right */}
+      <img
+        src={botanicalTr}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 right-0 w-[120px] md:w-[180px] opacity-20 select-none"
+      />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center">
-          {/* Image */}
+          {/* Image — real journal cover */}
           <div className="flex justify-center md:justify-start relative">
             <div className="relative group">
               <img
-                src={homeJournalFlatlay}
-                alt="The Start of You pregnancy journal on a linen surface with dried flowers and tea"
+                src={journalCover}
+                alt="The Start of You pregnancy journal — front cover with woodland watercolour illustration"
                 width={1200}
                 height={800}
                 loading="lazy"

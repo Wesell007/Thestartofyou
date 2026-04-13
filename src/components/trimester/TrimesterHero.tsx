@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Calendar, ArrowDown, ChevronRight } from "lucide-react";
+import botanicalTr from "@/assets/botanical-branch-tr.png";
 import type { TrimesterData } from "@/data/trimesterData";
 
 interface Props {
@@ -24,6 +25,14 @@ const TrimesterHero = ({ data }: Props) => {
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-sage-bg/20 blur-3xl" />
       </div>
+
+      {/* Botanical accent — top-right */}
+      <img
+        src={botanicalTr}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 right-0 w-[100px] md:w-[160px] opacity-15 select-none hidden sm:block"
+      />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10 text-center">
         {/* Breadcrumb */}

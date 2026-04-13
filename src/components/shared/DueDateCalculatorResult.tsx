@@ -11,7 +11,7 @@ import {
   ArrowRight, MessageCircle, BookOpen, Calendar, Baby, Heart,
   Shield, Sparkles, ChevronRight, Check, Eye, Activity, Target, Star,
 } from "lucide-react";
-import journalBook from "@/assets/journal-book.jpg";
+import journalCover from "@/assets/journal-cover.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -912,7 +912,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                 />
                 <div className="relative">
                   <img
-                    src={journalBook}
+                    src={journalCover}
                     alt="The Start of You pregnancy journal"
                     width={400}
                     height={400}

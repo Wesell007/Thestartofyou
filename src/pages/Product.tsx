@@ -20,6 +20,7 @@ const Product = () => {
         <ProductWhatItIs />
         <ProductStages />
         <ProductInside />
+        <ProductGallery />
         <ProductMoment />
         <ProductEcosystem />
         <ProductFinalCTA />

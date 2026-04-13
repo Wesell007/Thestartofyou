@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import logoSrc from "@/assets/logo-dark.png";
-import botanicalTr from "@/assets/botanical-branch-tr.png";
+import botanicalBl from "@/assets/botanical-branch-bl.png";
 
 const Footer = () => {
   return (
@@ -8,34 +8,34 @@ const Footer = () => {
       {/* Soft divider */}
       <div className="section-divider" />
 
-      {/* Botanical accent */}
+      {/* Botanical accent — bottom-left */}
       <img
-        src={botanicalTr}
+        src={botanicalBl}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 right-0 w-[150px] md:w-[230px] opacity-35 select-none"
+        className="pointer-events-none absolute bottom-0 left-0 w-[120px] md:w-[180px] opacity-15 select-none"
       />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl pt-16 sm:pt-24 pb-10 sm:pb-14 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.45fr_0.82fr_0.92fr_0.76fr] gap-x-10 gap-y-10 md:gap-x-14 md:gap-y-12">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-16">
           {/* Brand */}
-          <div className="sm:col-span-2 md:col-span-1 max-w-[23rem] md:pr-6">
-            <Link to="/" className="inline-block mb-7 md:mb-8">
+          <div className="col-span-2 sm:col-span-2 md:col-span-1">
+            <Link to="/" className="inline-block mb-6 md:mb-8">
               <img
                 src={logoSrc}
                 alt="The Start of You"
-                className="w-[185px] md:w-[238px] h-auto object-contain brightness-[0.78] contrast-[1.14] saturate-[0.84]"
+                className="w-[150px] md:w-[190px] h-auto object-contain contrast-[1.1]"
               />
             </Link>
-            <p className="font-sans text-[15px] md:text-[15.5px] font-light text-foreground/65 leading-[1.55] max-w-[21rem]">
+            <p className="font-sans text-[14px] font-light text-foreground/55 leading-relaxed max-w-xs">
               Your trusted companion through pregnancy, offering calm guidance and space for reflection.
             </p>
           </div>
 
           {/* Journey */}
           <div>
-            <h4 className="font-serif text-[1.08rem] text-foreground mb-4 md:mb-6">Journey</h4>
-            <ul className="space-y-3.5">
+            <h4 className="font-serif text-foreground text-base mb-4 md:mb-6">Journey</h4>
+            <ul className="space-y-3">
               {[
                 { to: "/trying-to-conceive", label: "Trying to Conceive" },
                 { to: "/ivf", label: "IVF" },
@@ -43,15 +43,15 @@ const Footer = () => {
                 { to: "/postpartum", label: "Postpartum" },
                 { to: "/first-year", label: "First Year" },
               ].map(l => (
-                <li key={l.to}><Link to={l.to} className="font-sans text-[15px] font-normal text-foreground/72 hover:text-foreground transition-colors duration-200">{l.label}</Link></li>
+                <li key={l.to}><Link to={l.to} className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-200">{l.label}</Link></li>
               ))}
             </ul>
           </div>
 
           {/* Resources */}
           <div>
-            <h4 className="font-serif text-[1.08rem] text-foreground mb-4 md:mb-6">Resources</h4>
-            <ul className="space-y-3.5">
+            <h4 className="font-serif text-foreground text-base mb-4 md:mb-6">Resources</h4>
+            <ul className="space-y-3">
               {[
                 { to: "/explore", label: "Explore" },
                 { to: "/due-date-calculator", label: "Due Date Calculator" },
@@ -59,21 +59,21 @@ const Footer = () => {
                 { to: "/support", label: "Support" },
                 { to: "/product", label: "Journal" },
               ].map(l => (
-                <li key={l.to}><Link to={l.to} className="font-sans text-[15px] font-normal text-foreground/72 hover:text-foreground transition-colors duration-200">{l.label}</Link></li>
+                <li key={l.to}><Link to={l.to} className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-200">{l.label}</Link></li>
               ))}
             </ul>
           </div>
 
           {/* About */}
           <div className="hidden md:block">
-            <h4 className="font-serif text-[1.08rem] text-foreground mb-6">About</h4>
-            <ul className="space-y-3.5">
+            <h4 className="font-serif text-foreground text-base mb-6">About</h4>
+            <ul className="space-y-3">
               {[
                 { to: "/about", label: "Our Story" },
                 { to: "/about", label: "Editorial Standards" },
                 { to: "/about", label: "Contact" },
               ].map((l, i) => (
-                <li key={i}><Link to={l.to} className="font-sans text-[15px] font-normal text-foreground/72 hover:text-foreground transition-colors duration-200">{l.label}</Link></li>
+                <li key={i}><Link to={l.to} className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-200">{l.label}</Link></li>
               ))}
             </ul>
           </div>

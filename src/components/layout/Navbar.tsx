@@ -19,27 +19,27 @@ const Navbar = () => {
   const isActive = (href: string) => location.pathname === href;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/98 backdrop-blur-lg border-b border-border/45">
-      <div className="container mx-auto max-w-6xl px-4 sm:px-6 md:px-10 h-16 md:h-24 flex items-center justify-between md:grid md:grid-cols-[220px_1fr_200px] md:gap-6">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/97 backdrop-blur-lg border-b border-border/40">
+      <div className="container mx-auto px-4 sm:px-6 md:px-10 h-16 md:h-24 flex items-center justify-between max-w-6xl relative">
         {/* Logo */}
-        <Link to="/" className="flex items-center shrink-0 md:justify-self-start">
+        <Link to="/" className="flex items-center shrink-0">
           <img
             src={logoSrc}
             alt="The Start of You"
-            className="w-[126px] md:w-[206px] h-auto object-contain brightness-[0.78] contrast-[1.14] saturate-[0.84]"
+            className="w-[120px] md:w-[185px] h-auto object-contain contrast-[1.1]"
           />
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center justify-center gap-9" aria-label="Main navigation">
+        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
           {navLinks.map(({ label, href }) => (
             <Link
               key={label}
               to={href}
-              className={`font-sans text-[15px] leading-none tracking-[0.01em] transition-colors duration-200 ${
+              className={`font-sans text-[14.5px] tracking-wide transition-colors duration-200 ${
                 isActive(href)
                   ? "text-foreground font-medium"
-                  : "text-foreground/80 font-normal hover:text-foreground"
+                  : "text-foreground/70 font-normal hover:text-foreground"
               }`}
             >
               {label}
@@ -48,10 +48,10 @@ const Navbar = () => {
         </nav>
 
         {/* CTA */}
-        <div className="hidden md:flex items-center justify-self-end">
+        <div className="hidden md:flex items-center">
           <Link
             to="/explore"
-            className="whitespace-nowrap font-sans text-[14px] font-medium bg-terracotta text-terracotta-foreground px-6 py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
+            className="font-sans text-[14px] font-medium bg-terracotta text-terracotta-foreground px-7 py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
           >
             Start your journey
           </Link>

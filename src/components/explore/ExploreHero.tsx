@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Calculator, Sparkles } from "lucide-react";
 import AISearchBar from "@/components/shared/AISearchBar";
 

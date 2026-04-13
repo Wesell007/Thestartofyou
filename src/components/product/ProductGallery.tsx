@@ -10,6 +10,7 @@ import journalNursery from "@/assets/journal-nursery-planning.jpg";
 import journalBabyShower from "@/assets/journal-baby-shower.jpg";
 import journalFirstSeasons from "@/assets/journal-first-seasons.jpg";
 import journalNamesPlanning from "@/assets/journal-names-planning.jpg";
+import journalCouple from "@/assets/journal-couple.jpg";
 import productMoment from "@/assets/product-moment.jpg";
 
 const galleryItems = [

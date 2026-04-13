@@ -116,7 +116,7 @@ const ProductGallery = () => {
           </div>
 
           {/* Thumbnail grid — right side */}
-          <div className="lg:col-span-2 grid grid-cols-4 lg:grid-cols-2 gap-2.5 lg:gap-3">
+          <div className="lg:col-span-2 grid grid-cols-5 lg:grid-cols-2 gap-2 lg:gap-2.5">
             {galleryItems.map((item, i) => (
               <button
                 key={i}

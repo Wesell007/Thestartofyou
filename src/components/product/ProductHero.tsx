@@ -1,5 +1,5 @@
 import { ExternalLink, BookOpen } from "lucide-react";
-import productHero from "@/assets/product-hero.jpg";
+import productHero from "@/assets/journal-couple.jpg";
 import botanicalBl from "@/assets/botanical-branch-bl.png";
 import botanicalTr from "@/assets/botanical-branch-tr.png";
 

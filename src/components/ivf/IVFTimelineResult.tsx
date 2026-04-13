@@ -3,7 +3,7 @@ import { differenceInDays, addDays, format } from "date-fns";
 import { ArrowRight, MessageCircle, Shield, Check, Star, Heart, Clock, Activity, BookOpen, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import journalCover from "@/assets/journal-cover.jpg";
+import journalFlatlay from "@/assets/journal-flatlay.jpg";
 
 // ─── Types & data ─────────────────────────────────────────────────────────────
 
@@ -1039,7 +1039,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
               <div className="flex justify-center md:justify-start relative">
                 <div className="relative group">
                   <img
-                    src={journalCover}
+                    src={journalFlatlay}
                     alt="The Start of You Journal — a physical companion to the IVF journey"
                     width={1200}
                     height={800}

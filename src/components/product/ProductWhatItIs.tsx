@@ -1,4 +1,4 @@
-import journalCover from "@/assets/journal-cover.jpg";
+import journalFlatlay from "@/assets/journal-flatlay.jpg";
 import { ExternalLink, BookOpen } from "lucide-react";
 
 const ProductWhatItIs = () => {
@@ -11,7 +11,7 @@ const ProductWhatItIs = () => {
           <div className="md:col-span-2 flex justify-center md:justify-start relative">
             <div className="relative">
               <img
-                src={journalCover}
+                src={journalFlatlay}
                 alt="The Start of You Journal"
                 width={400}
                 height={400}

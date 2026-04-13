@@ -11,11 +11,11 @@ const explorePrompts = [
 
 /* Journey stage mini-pills in the hero */
 const stages = [
-  { label: "TTC", color: "--stage-ttc-accent" },
-  { label: "IVF", color: "--stage-ivf-accent" },
-  { label: "Pregnancy", color: "--stage-pregnancy-accent" },
-  { label: "Postpartum", color: "--stage-postpartum-accent" },
-  { label: "First year", color: "--stage-firstyear-accent" },
+  { label: "TTC", color: "--stage-ttc-accent", href: "/trying-to-conceive" },
+  { label: "IVF", color: "--stage-ivf-accent", href: "/ivf" },
+  { label: "Pregnancy", color: "--stage-pregnancy-accent", href: "/pregnancy" },
+  { label: "Postpartum", color: "--stage-postpartum-accent", href: "/postpartum" },
+  { label: "First year", color: "--stage-firstyear-accent", href: "/first-year" },
 ];
 
 const ExploreHero = () => {

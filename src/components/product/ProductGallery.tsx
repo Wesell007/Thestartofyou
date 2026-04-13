@@ -81,6 +81,12 @@ const galleryItems = [
     category: "Names & planning",
   },
   {
+    src: journalCouple,
+    alt: "Expecting couple reading through The Start of You journal together",
+    caption: "A shared moment — reading back through the journey together",
+    category: "Together",
+  },
+  {
     src: productMoment,
     alt: "Hands gently writing in a journal",
     caption: "Designed to feel calm, personal, and never like homework",

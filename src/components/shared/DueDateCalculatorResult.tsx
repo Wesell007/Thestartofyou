@@ -912,7 +912,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                 />
                 <div className="relative">
                   <img
-                    src={journalBook}
+                    src={journalCover}
                     alt="The Start of You pregnancy journal"
                     width={400}
                     height={400}

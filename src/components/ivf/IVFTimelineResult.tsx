@@ -1039,7 +1039,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
               <div className="flex justify-center md:justify-start relative">
                 <div className="relative group">
                   <img
-                    src={homeJournalFlatlay}
+                    src={journalCover}
                     alt="The Start of You Journal — a physical companion to the IVF journey"
                     width={1200}
                     height={800}

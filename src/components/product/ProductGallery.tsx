@@ -6,6 +6,8 @@ import journalCloseup from "@/assets/journal-closeup.jpg";
 import journalFirstsPage from "@/assets/journal-firsts-page.jpg";
 import journalCoverHand from "@/assets/journal-cover-hand.jpg";
 import journalKeepsakes from "@/assets/journal-keepsakes.jpg";
+import journalNursery from "@/assets/journal-nursery-planning.jpg";
+import journalBabyShower from "@/assets/journal-baby-shower.jpg";
 import productMoment from "@/assets/product-moment.jpg";
 
 const galleryItems = [
@@ -50,6 +52,18 @@ const galleryItems = [
     alt: "Close-up of handwritten journal entries with ultrasound nearby",
     caption: "Free-form space to write what matters most to you",
     category: "Open reflection",
+  },
+  {
+    src: journalNursery,
+    alt: "Journal open to Planning Your Nursery page with mood board and handwritten notes",
+    caption: "Nursery planning pages with space for themes, colours, and inspiration photos",
+    category: "Nursery planning",
+  },
+  {
+    src: journalBabyShower,
+    alt: "Journal open to Baby Shower Photos and Gift Log pages",
+    caption: "Dedicated baby shower pages — photo space and a gift log to remember who gave what",
+    category: "Baby shower",
   },
   {
     src: productMoment,
@@ -102,7 +116,7 @@ const ProductGallery = () => {
           </div>
 
           {/* Thumbnail grid — right side */}
-          <div className="lg:col-span-2 grid grid-cols-4 lg:grid-cols-2 gap-2.5 lg:gap-3">
+          <div className="lg:col-span-2 grid grid-cols-5 lg:grid-cols-2 gap-2 lg:gap-2.5">
             {galleryItems.map((item, i) => (
               <button
                 key={i}

@@ -54,6 +54,18 @@ const galleryItems = [
     category: "Open reflection",
   },
   {
+    src: journalNursery,
+    alt: "Journal open to Planning Your Nursery page with mood board and handwritten notes",
+    caption: "Nursery planning pages with space for themes, colours, and inspiration photos",
+    category: "Nursery planning",
+  },
+  {
+    src: journalBabyShower,
+    alt: "Journal open to Baby Shower Photos and Gift Log pages",
+    caption: "Dedicated baby shower pages — photo space and a gift log to remember who gave what",
+    category: "Baby shower",
+  },
+  {
     src: productMoment,
     alt: "Hands gently writing in a journal",
     caption: "Designed to feel calm, personal, and never like homework",

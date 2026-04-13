@@ -8,6 +8,8 @@ import journalCoverHand from "@/assets/journal-cover-hand.jpg";
 import journalKeepsakes from "@/assets/journal-keepsakes.jpg";
 import journalNursery from "@/assets/journal-nursery-planning.jpg";
 import journalBabyShower from "@/assets/journal-baby-shower.jpg";
+import journalFirstSeasons from "@/assets/journal-first-seasons.jpg";
+import journalNamesPlanning from "@/assets/journal-names-planning.jpg";
 import productMoment from "@/assets/product-moment.jpg";
 
 const galleryItems = [
@@ -64,6 +66,18 @@ const galleryItems = [
     alt: "Journal open to Baby Shower Photos and Gift Log pages",
     caption: "Dedicated baby shower pages — photo space and a gift log to remember who gave what",
     category: "Baby shower",
+  },
+  {
+    src: journalFirstSeasons,
+    alt: "Journal open to First Summer and First Autumn seasonal memory pages with baby photo",
+    caption: "Seasonal memory pages — capture what you did, where you went, and your most memorable moments",
+    category: "First seasons",
+  },
+  {
+    src: journalNamesPlanning,
+    alt: "Journal open to baby name planning page and Planning & Organising section with scan photo",
+    caption: "Baby name shortlists, planning pages, and a beautiful woodland-illustrated organising section",
+    category: "Names & planning",
   },
   {
     src: productMoment,

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Calculator, Sparkles } from "lucide-react";
 import AISearchBar from "@/components/shared/AISearchBar";
 
@@ -10,11 +11,11 @@ const explorePrompts = [
 
 /* Journey stage mini-pills in the hero */
 const stages = [
-  { label: "TTC", color: "--stage-ttc-accent" },
-  { label: "IVF", color: "--stage-ivf-accent" },
-  { label: "Pregnancy", color: "--stage-pregnancy-accent" },
-  { label: "Postpartum", color: "--stage-postpartum-accent" },
-  { label: "First year", color: "--stage-firstyear-accent" },
+  { label: "TTC", color: "--stage-ttc-accent", href: "/trying-to-conceive" },
+  { label: "IVF", color: "--stage-ivf-accent", href: "/ivf" },
+  { label: "Pregnancy", color: "--stage-pregnancy-accent", href: "/pregnancy" },
+  { label: "Postpartum", color: "--stage-postpartum-accent", href: "/postpartum" },
+  { label: "First year", color: "--stage-firstyear-accent", href: "/first-year" },
 ];
 
 const ExploreHero = () => {
@@ -49,8 +50,9 @@ const ExploreHero = () => {
         <div className="flex items-center justify-center gap-1.5 sm:gap-2 mb-10 md:mb-12 animate-fade-up [animation-delay:0.15s]">
           {stages.map((s, i) => (
             <div key={s.label} className="flex items-center gap-1.5 sm:gap-2">
-              <span
-                className="font-sans text-[10px] sm:text-[11px] font-light tracking-wide px-2.5 py-1 rounded-pill border"
+              <Link
+                to={s.href}
+                className="font-sans text-[10px] sm:text-[11px] font-light tracking-wide px-2.5 py-1 rounded-pill border hover:opacity-80 transition-opacity duration-200"
                 style={{
                   color: `hsl(var(${s.color}))`,
                   borderColor: `hsl(var(${s.color}) / 0.3)`,
@@ -58,7 +60,7 @@ const ExploreHero = () => {
                 }}
               >
                 {s.label}
-              </span>
+              </Link>
               {i < stages.length - 1 && (
                 <div className="w-3 sm:w-4 h-px" style={{ backgroundColor: `hsl(var(--sage-light) / 0.4)` }} />
               )}

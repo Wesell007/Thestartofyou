@@ -20,7 +20,7 @@ const Navbar = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/97 backdrop-blur-lg border-b border-border/40">
-      <div className="container mx-auto px-4 sm:px-6 md:px-10 h-16 md:h-24 flex items-center justify-between max-w-6xl relative">
+      <div className="container mx-auto px-4 sm:px-6 md:px-10 h-16 lg:h-24 flex items-center justify-between max-w-6xl relative">
         {/* Logo */}
         <Link to="/" className="flex items-center shrink-0">
           <img
@@ -31,7 +31,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+        <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
           {navLinks.map(({ label, href }) => (
             <Link
               key={label}
@@ -48,10 +48,10 @@ const Navbar = () => {
         </nav>
 
         {/* CTA */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden lg:flex items-center">
           <Link
             to="/explore"
-            className="font-sans text-[14px] font-medium bg-terracotta text-terracotta-foreground px-7 py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
+            className="font-sans text-[13px] lg:text-[14px] font-medium bg-terracotta text-terracotta-foreground px-5 lg:px-7 py-2 lg:py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
           >
             Start your journey
           </Link>
@@ -59,7 +59,7 @@ const Navbar = () => {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden p-2.5 -mr-1 text-muted-foreground hover:text-foreground transition-colors"
+          className="lg:hidden p-2.5 -mr-1 text-muted-foreground hover:text-foreground transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -69,7 +69,7 @@ const Navbar = () => {
 
       {/* Mobile drawer */}
       {mobileOpen && (
-        <div className="md:hidden bg-parchment/98 backdrop-blur-lg border-t border-border/30 px-6 py-8 flex flex-col gap-1 animate-fade-in">
+        <div className="lg:hidden bg-parchment/98 backdrop-blur-lg border-t border-border/30 px-6 py-8 flex flex-col gap-1 animate-fade-in">
           {navLinks.map(({ label, href }) => (
             <Link
               key={label}

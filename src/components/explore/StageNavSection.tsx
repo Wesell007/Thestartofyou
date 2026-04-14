@@ -4,7 +4,6 @@ import preparingImg from "@/assets/preparing-card.jpg";
 import supportImg from "@/assets/support-card.jpg";
 
 /* ── Illustrated Stage Icons (line-art style) ── */
-
 const TTCIcon = ({ className = "w-14 h-14" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <circle cx="40" cy="40" r="22" stroke="currentColor" strokeWidth="1.2" fill="none" opacity="0.6"/>
@@ -29,8 +28,6 @@ const IVFIcon = ({ className = "w-14 h-14" }: { className?: string }) => (
     <circle cx="43" cy="42" r="2" fill="currentColor" opacity="0.2"/>
     <path d="M40 22 L40 26" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" opacity="0.5"/>
     <path d="M40 56 L40 60" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" opacity="0.5"/>
-    <path d="M20 40 L24 40" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" opacity="0.5"/>
-    <path d="M56 40 L60 40" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" opacity="0.5"/>
   </svg>
 );
 
@@ -142,13 +139,10 @@ const StageNavSection = () => {
   return (
     <>
       {/* Journey stages */}
-      <section className="relative bg-parchment pt-16 sm:pt-20 md:pt-28 pb-12 sm:pb-16 md:pb-20">
-        {/* Ambient glow */}
-        <div className="absolute top-1/4 right-0 w-[500px] h-[400px] glow-sage pointer-events-none" />
-
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
+      <section className="bg-parchment pt-16 sm:pt-20 md:pt-28 pb-12 sm:pb-16 md:pb-20">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
           {/* Section header */}
-          <div className="mb-12 md:mb-16 lg:mb-20">
+          <div className="mb-12 md:mb-16">
             <p className="stage-label flanking-lines mb-4 md:mb-5">Your journey</p>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.75rem] text-foreground mb-3 md:mb-4 text-center leading-tight">
               Start where you are
@@ -158,121 +152,94 @@ const StageNavSection = () => {
             </p>
           </div>
 
-          {/* Journey timeline */}
+          {/* Journey timeline — vertical rail with cards */}
           <div className="relative">
-            {/* ── Connecting line (visible on all sizes) ── */}
+            {/* Connecting line */}
             <div
-              className="absolute left-5 sm:left-6 lg:left-1/2 top-0 bottom-0 w-px lg:-translate-x-1/2"
+              className="absolute left-[19px] sm:left-[23px] top-0 bottom-0 w-px"
               style={{
-                background: "linear-gradient(to bottom, hsl(var(--border) / 0.1), hsl(var(--border) / 0.5) 10%, hsl(var(--border) / 0.5) 90%, hsl(var(--border) / 0.1))",
+                background: "linear-gradient(to bottom, hsl(var(--border) / 0.05), hsl(var(--border) / 0.45) 8%, hsl(var(--border) / 0.45) 92%, hsl(var(--border) / 0.05))",
               }}
             />
 
-            {/* Stage rows */}
-            <div className="space-y-6 lg:space-y-0">
-              {stages.map((stage, i) => {
-                const isLeft = i % 2 === 0;
-
-                return (
-                  <div key={stage.title} className="relative">
-                    {/* ── Node on the line ── */}
+            {/* Stage items */}
+            <div className="space-y-4 sm:space-y-5">
+              {stages.map((stage) => (
+                <div key={stage.title} className="flex gap-4 sm:gap-5 items-stretch">
+                  {/* Timeline node */}
+                  <div className="flex flex-col items-center shrink-0 pt-6 sm:pt-7">
                     <div
-                      className="absolute left-5 sm:left-6 lg:left-1/2 -translate-x-1/2 top-6 sm:top-7 lg:top-8 z-20"
+                      className="w-10 h-10 rounded-full flex items-center justify-center bg-card shadow-sm z-10 shrink-0"
+                      style={{
+                        border: `2.5px solid hsl(var(${stage.accentVar}) / 0.5)`,
+                      }}
                     >
-                      <div
-                        className="w-10 h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center bg-card shadow-sm"
-                        style={{
-                          border: `2.5px solid hsl(var(${stage.accentVar}) / 0.5)`,
-                        }}
+                      <span
+                        className="font-sans text-[10px] font-semibold"
+                        style={{ color: `hsl(var(${stage.accentVar}))` }}
                       >
-                        <span
-                          className="font-sans text-[10px] lg:text-[11px] font-semibold"
-                          style={{ color: `hsl(var(${stage.accentVar}))` }}
-                        >
-                          {stage.number}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* ── Card ── */}
-                    <div
-                      className={`pl-14 sm:pl-16 lg:pl-0 lg:grid lg:grid-cols-2 lg:gap-6 ${
-                        i > 0 ? "pt-0 lg:pt-4" : ""
-                      }`}
-                    >
-                      {/* Spacer for desktop alternation */}
-                      {!isLeft && <div className="hidden lg:block" />}
-
-                      <Link
-                        to={stage.href}
-                        className={`group relative block rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-0.5 hover:shadow-soft p-6 sm:p-7 lg:p-8 ${
-                          isLeft ? "lg:text-right" : ""
-                        }`}
-                        style={{ backgroundColor: `hsl(var(${stage.colorVar}))` }}
-                        aria-label={`Explore ${stage.title}`}
-                      >
-                        {/* Accent border */}
-                        <div
-                          className={`absolute top-0 w-[3px] h-full ${
-                            isLeft
-                              ? "left-0 lg:left-auto lg:right-0"
-                              : "left-0"
-                          }`}
-                          style={{ background: `hsl(var(${stage.accentVar}))` }}
-                        />
-
-                        {/* Hover glow */}
-                        <div
-                          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                          style={{
-                            background: `radial-gradient(ellipse at ${isLeft ? "80%" : "20%"} 50%, hsl(var(${stage.accentVar}) / 0.06) 0%, transparent 70%)`,
-                          }}
-                        />
-
-                        <div className={`relative z-10 ${isLeft ? "lg:flex lg:flex-col lg:items-end" : ""}`}>
-                          {/* Illustrated icon */}
-                          <div style={{ color: `hsl(var(${stage.accentVar}))` }} className="mb-4">
-                            <stage.Icon className="w-12 h-12 sm:w-14 sm:h-14" />
-                          </div>
-
-                          <h3 className="font-serif text-lg lg:text-xl text-foreground leading-snug mb-2">
-                            {stage.title}
-                          </h3>
-                          <p className={`font-sans text-sm font-light text-muted-foreground leading-relaxed mb-5 max-w-sm ${isLeft ? "lg:ml-auto" : ""}`}>
-                            {stage.desc}
-                          </p>
-
-                          <span
-                            className={`inline-flex items-center gap-1.5 font-sans text-xs font-medium group-hover:gap-2.5 transition-all duration-300 ${
-                              isLeft ? "lg:flex-row-reverse" : ""
-                            }`}
-                            style={{ color: `hsl(var(${stage.accentVar}))` }}
-                          >
-                            <span>Explore</span>
-                            <ArrowRight
-                              size={12}
-                              className={`transition-transform duration-300 group-hover:translate-x-0.5 ${
-                                isLeft ? "lg:rotate-180 lg:group-hover:-translate-x-0.5 lg:group-hover:translate-x-0" : ""
-                              }`}
-                            />
-                          </span>
-                        </div>
-                      </Link>
-
-                      {/* Spacer for desktop alternation */}
-                      {isLeft && <div className="hidden lg:block" />}
+                        {stage.number}
+                      </span>
                     </div>
                   </div>
-                );
-              })}
+
+                  {/* Card */}
+                  <Link
+                    to={stage.href}
+                    className="group relative flex-1 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-0.5 hover:shadow-soft p-5 sm:p-6 md:p-7"
+                    style={{ backgroundColor: `hsl(var(${stage.colorVar}))` }}
+                    aria-label={`Explore ${stage.title}`}
+                  >
+                    {/* Accent border */}
+                    <div
+                      className="absolute top-0 left-0 w-[3px] h-full"
+                      style={{ background: `hsl(var(${stage.accentVar}))` }}
+                    />
+
+                    {/* Hover glow */}
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                      style={{
+                        background: `radial-gradient(ellipse at 20% 50%, hsl(var(${stage.accentVar}) / 0.06) 0%, transparent 70%)`,
+                      }}
+                    />
+
+                    {/* Icon */}
+                    <div
+                      className="shrink-0 relative z-10"
+                      style={{ color: `hsl(var(${stage.accentVar}))` }}
+                    >
+                      <stage.Icon className="w-12 h-12 sm:w-14 sm:h-14" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative z-10 flex-1 min-w-0">
+                      <h3 className="font-serif text-lg md:text-xl text-foreground leading-snug mb-1.5">
+                        {stage.title}
+                      </h3>
+                      <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-3 sm:mb-0 sm:max-w-sm">
+                        {stage.desc}
+                      </p>
+                    </div>
+
+                    {/* Explore arrow */}
+                    <span
+                      className="relative z-10 inline-flex sm:flex items-center gap-1.5 font-sans text-xs font-medium group-hover:gap-2.5 transition-all duration-300 shrink-0"
+                      style={{ color: `hsl(var(${stage.accentVar}))` }}
+                    >
+                      Explore <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                    </span>
+                  </Link>
+                </div>
+              ))}
             </div>
 
-            {/* Journey end */}
-            <div className="relative pt-8 lg:pt-10">
-              <div className="absolute left-5 sm:left-6 lg:left-1/2 -translate-x-1/2 top-0 z-20">
-                <div className="w-3 h-3 rounded-full bg-border/40" />
+            {/* Journey end marker */}
+            <div className="flex gap-4 sm:gap-5 items-start pt-6">
+              <div className="flex flex-col items-center shrink-0">
+                <div className="w-3 h-3 rounded-full bg-border/40 z-10" />
               </div>
-              <p className="pl-14 sm:pl-16 lg:pl-0 lg:text-center font-sans text-[11px] font-light text-muted-foreground/60 tracking-wider uppercase">
+              <p className="font-sans text-[11px] font-light text-muted-foreground/60 tracking-wider uppercase pt-0.5">
                 Your journey continues
               </p>
             </div>
@@ -284,8 +251,8 @@ const StageNavSection = () => {
       <EditorialBreak />
 
       {/* Beyond the stages */}
-      <section className="relative overflow-hidden pb-16 sm:pb-20 md:pb-28">
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
+      <section className="pb-16 sm:pb-20 md:pb-28">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
           <div className="mb-8 md:mb-10">
             <div className="editorial-rule-left mb-4" />
             <h2 className="font-serif text-xl sm:text-2xl md:text-3xl text-foreground mb-2">

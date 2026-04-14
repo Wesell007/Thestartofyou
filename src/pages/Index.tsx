@@ -2,7 +2,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import NewHeroSection from "@/components/home/NewHeroSection";
 import LightJourneyEntry from "@/components/home/LightJourneyEntry";
-import ValueProofSection from "@/components/home/ValueProofSection";
+import JourneyBrandedSection from "@/components/home/JourneyBrandedSection";
+import DashboardGlimpse from "@/components/home/DashboardGlimpse";
 import JournalMoment from "@/components/home/JournalMoment";
 
 const Index = () => {
@@ -12,7 +13,8 @@ const Index = () => {
       <main>
         <NewHeroSection />
         <LightJourneyEntry />
-        <ValueProofSection />
+        <JourneyBrandedSection />
+        <DashboardGlimpse />
         <JournalMoment />
       </main>
       <Footer />

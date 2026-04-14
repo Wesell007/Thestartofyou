@@ -286,7 +286,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     to="/pregnancy"
                     className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all"
                   >
-                    Start your journey
+                    Save your journey
                     <ArrowRight size={16} />
                   </Link>
                   <Link
@@ -437,11 +437,11 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     to="/pregnancy"
                     className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all self-start"
                   >
-                    Start your journey
+                    Save your journey
                     <ArrowRight size={14} />
                   </Link>
                   <p className="font-sans text-[11px] font-light text-muted-foreground/35 mt-3">
-                    Takes a minute to begin
+                    Takes a minute to save
                   </p>
                 </div>
               </div>
@@ -1058,14 +1058,14 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                   one week at a time, from where you are now.
                 </p>
                 <p className="font-sans text-xs font-light text-muted-foreground/35 mb-8 max-w-xs">
-                  Starting your journey saves your stage, personalises your guidance, and gives you somewhere to come back to.
+                  Saving your journey keeps your stage, personalises your guidance, and gives you somewhere to come back to.
                 </p>
 
                 <Link
                   to="/pregnancy"
                   className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all"
                 >
-                  Start your journey
+                  Save your journey
                   <ArrowRight size={16} />
                 </Link>
               </div>

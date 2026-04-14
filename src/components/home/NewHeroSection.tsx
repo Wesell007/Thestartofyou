@@ -55,28 +55,33 @@ const NewHeroSection = () => {
 
   return (
     <section className="relative min-h-[92vh] md:min-h-screen overflow-hidden flex items-end md:items-center">
-      {/* Video background with robust fallback */}
+      {/* Video background — always render, overlay tap-to-play if paused */}
       <div className="absolute inset-0">
-        {!videoFailed ? (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            poster={heroImage}
-            onError={() => setVideoFailed(true)}
-            className="w-full h-full object-cover object-[50%_35%] md:object-[50%_25%]"
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={heroImage}
+          onError={() => setVideoState("paused")}
+          className="w-full h-full object-cover object-[50%_35%] md:object-[50%_25%]"
+        >
+          <source src={heroVideoAsset.url} type="video/mp4" />
+        </video>
+
+        {/* Tap-to-play overlay when autoplay is blocked */}
+        {videoState === "paused" && (
+          <button
+            onClick={handleTapToPlay}
+            className="absolute inset-0 z-10 flex items-center justify-center bg-transparent cursor-pointer"
+            aria-label="Play video"
           >
-            <source src={heroVideoAsset.url} type="video/mp4" />
-          </video>
-        ) : (
-          <img
-            src={heroImage}
-            alt="Calm pregnancy moment in nature"
-            className="w-full h-full object-cover object-[50%_35%] md:object-[50%_25%]"
-          />
+            <div className="bg-parchment/60 backdrop-blur-sm rounded-full p-4 shadow-lg hover:bg-parchment/80 transition-all duration-300">
+              <Play size={28} className="text-foreground/70 ml-0.5" />
+            </div>
+          </button>
         )}
 
         {/* Cinematic gradient — stronger left anchor for text */}

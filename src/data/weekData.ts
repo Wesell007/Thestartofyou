@@ -63,6 +63,9 @@ export const getTrimesterForWeek = (
   return { trimester: 3, label: "Third Trimester", path: "/pregnancy/third-trimester" };
 };
 
+// Total supported pregnancy weeks (including post-due-date weeks 41-42)
+export const MAX_PREGNANCY_WEEK = 42;
+
 // ─── Week-specific data ────────────────────────────────────────────────────
 
 const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimesterLabel" | "trimesterPath">> = {
@@ -78,7 +81,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
       baby: {
         what: "No embryo yet, conception hasn't happened",
         why: "Pregnancy is dated from the first day of your last menstrual period, not from conception. This week, your body is preparing for ovulation.",
-        means: "The 40-week countdown starts here, even though the pregnancy hasn't technically begun yet.",
+        means: "The pregnancy countdown starts here, even though the pregnancy hasn't technically begun yet.",
         size: "Not yet present",
       },
       body: {
@@ -1123,5 +1126,5 @@ export const getWeekData = (week: number): WeekData => {
 
 export const getAdjacentWeeks = (week: number): { prev: number | null; next: number | null } => ({
   prev: week > 1 ? week - 1 : null,
-  next: week < 40 ? week + 1 : null,
+  next: week < MAX_PREGNANCY_WEEK ? week + 1 : null,
 });

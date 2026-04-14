@@ -453,12 +453,12 @@ export const thirdTrimester: TrimesterData = {
   number: 3,
   label: "Third Trimester",
   shortLabel: "Third",
-  range: "Weeks 28-40",
+  range: "Weeks 28-42",
   weekStart: 28,
-  weekEnd: 40,
+  weekEnd: 42,
   tagline: "Preparation & Arrival",
-  heroSubtitle:
-    "The final stretch of pregnancy, physically demanding, emotionally complex, and full of preparation for what comes next. Weeks 28 through 40.",
+    heroSubtitle:
+    "The final stretch of pregnancy, physically demanding, emotionally complex, and full of preparation for what comes next. Weeks 28 through to birth.",
   sectionBg: "bg-lavender-section",
   weekBg: "bg-lavender-section",
   accentColor: "text-sage",
@@ -605,6 +605,10 @@ export const thirdTrimester: TrimesterData = {
     {
       label: "The final approach (Weeks 37-40)",
       weeks: [37, 38, 39, 40],
+    },
+    {
+      label: "Beyond due date (Weeks 41-42)",
+      weeks: [41, 42],
     },
   ],
 

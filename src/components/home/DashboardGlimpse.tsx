@@ -5,7 +5,7 @@ const DashboardGlimpse = () => {
         {/* Minimal intro */}
         <div className="text-center mb-10 md:mb-14">
           <div className="editorial-rule mb-5" />
-          <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-muted-foreground/40 mb-3">
+          <p className="font-sans text-[10.5px] font-medium tracking-[0.25em] uppercase text-muted-foreground/50 mb-3">
             What you will see
           </p>
           <h2 className="font-serif text-xl sm:text-2xl md:text-[1.75rem] text-foreground">
@@ -28,7 +28,7 @@ const DashboardGlimpse = () => {
             {/* Progress */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <p className="font-sans text-[11px] font-light text-muted-foreground/50">Your progress</p>
+                <p className="font-sans text-[11px] font-light text-muted-foreground/60">Your progress</p>
                 <p className="font-sans text-[11px] font-medium text-terracotta/60">45%</p>
               </div>
               <div className="h-1 rounded-full bg-parchment-dark overflow-hidden">
@@ -49,10 +49,10 @@ const DashboardGlimpse = () => {
                 <div key={item.label} className="flex gap-3">
                   <span className="w-1 rounded-full bg-sage/25 shrink-0 mt-1" style={{ height: '14px' }} />
                   <div>
-                    <p className="font-sans text-[10px] font-medium text-muted-foreground/40 uppercase tracking-wider mb-0.5">
+                    <p className="font-sans text-[10.5px] font-medium text-muted-foreground/50 uppercase tracking-wider mb-0.5">
                       {item.label}
                     </p>
-                    <p className="font-sans text-[12.5px] font-light text-foreground/70 leading-relaxed">
+                    <p className="font-sans text-[13px] font-light text-foreground/75 leading-relaxed">
                       {item.value}
                     </p>
                   </div>
@@ -66,7 +66,7 @@ const DashboardGlimpse = () => {
         </div>
 
         {/* Quiet supporting line */}
-        <p className="text-center mt-6 font-sans text-[12px] font-light text-muted-foreground/35">
+        <p className="text-center mt-6 font-sans text-[12px] font-light text-muted-foreground/45">
           Updates every Sunday with guidance for your current week.
         </p>
       </div>

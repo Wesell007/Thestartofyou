@@ -9,9 +9,9 @@ const JournalMoment = () => {
       <div className="section-divider" />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-14 items-center py-16 md:py-24">
-          {/* Image — taller, edge-to-edge feel */}
-          <div className="relative rounded-2xl overflow-hidden h-[300px] sm:h-[360px] md:h-[440px] mb-10 md:mb-0 shadow-soft">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center py-16 md:py-24">
+          {/* Image */}
+          <div className="relative rounded-2xl overflow-hidden aspect-[4/5] sm:aspect-[3/4] md:aspect-auto md:h-[440px] shadow-soft">
             <img
               src={journalFlatlay}
               alt="The Start of You pregnancy journal styled with baby clothes and natural accessories"
@@ -20,8 +20,8 @@ const JournalMoment = () => {
             />
           </div>
 
-          {/* Copy — restrained */}
-          <div className="max-w-[22rem]">
+          {/* Copy */}
+          <div className="max-w-[22rem] mx-auto md:mx-0">
             <div className="h-px w-10 bg-sage/40 mb-6" />
             <p className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-sage mb-4">
               Physical + Digital
@@ -29,7 +29,7 @@ const JournalMoment = () => {
             <h2 className="font-serif text-[1.5rem] sm:text-[1.75rem] text-foreground leading-tight mb-4">
               A companion you can hold
             </h2>
-            <p className="font-sans text-[14px] font-light text-muted-foreground leading-[1.75] mb-7">
+            <p className="font-sans text-[14.5px] font-light text-muted-foreground leading-[1.75] mb-7">
               Capture your experiences week by week. A private, thoughtful record of the journey, designed to sit alongside your digital guide.
             </p>
             <Link

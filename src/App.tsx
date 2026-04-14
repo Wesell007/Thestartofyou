@@ -27,6 +27,7 @@ import IVFTimeline from "./pages/IVFTimeline.tsx";
 import AskPage from "./pages/AskPage.tsx";
 import GuidanceLibrary from "./pages/GuidanceLibrary.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import ScrollToTop from "./components/layout/ScrollToTop.tsx";
 
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
       <Sonner />
       
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/explore" element={<Explore />} />

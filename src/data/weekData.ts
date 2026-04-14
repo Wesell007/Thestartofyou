@@ -63,6 +63,9 @@ export const getTrimesterForWeek = (
   return { trimester: 3, label: "Third Trimester", path: "/pregnancy/third-trimester" };
 };
 
+// Total supported pregnancy weeks (including post-due-date weeks 41-42)
+export const MAX_PREGNANCY_WEEK = 42;
+
 // ─── Week-specific data ────────────────────────────────────────────────────
 
 const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimesterLabel" | "trimesterPath">> = {
@@ -78,7 +81,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
       baby: {
         what: "No embryo yet, conception hasn't happened",
         why: "Pregnancy is dated from the first day of your last menstrual period, not from conception. This week, your body is preparing for ovulation.",
-        means: "The 40-week countdown starts here, even though the pregnancy hasn't technically begun yet.",
+        means: "The pregnancy countdown starts here, even though the pregnancy hasn't technically begun yet.",
         size: "Not yet present",
       },
       body: {
@@ -982,6 +985,130 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     aiPrompts: ["What happens if I go past my due date?", "What are the signs of labour starting?", "What is induction and when is it offered?"],
     captureIntro: "The final days of pregnancy. Suspended, intense, and profoundly significant, even when nothing is happening.",
   },
+
+  // ─── WEEK 41 ──────────────────────────────────────────────────────────────
+  41: {
+    title: "41 Weeks Pregnant",
+    heroSubtitle: "What's happening this week, and how to navigate it.",
+    reassurance: "Going past your due date is common. Around 1 in 5 pregnancies continue beyond 40 weeks, and most progress safely with monitoring.",
+    keyFocus: "Monitoring & patience",
+    atAGlance: "Week 41 means you've gone past your estimated due date. This is more common than most people expect. Your midwife will be monitoring you more closely, and conversations about induction may begin. Your baby is fully developed and continues to gain weight.",
+    what: {
+      baby: {
+        what: "Fully developed and continuing to grow",
+        why: "Your baby is adding weight, building fat reserves, and their brain is still maturing. Meconium (the first stool) is accumulating in the bowels. The vernix coating may be thinning.",
+        means: "Your baby is ready. The additional time is not harmful in itself, but monitoring ensures everything remains on track.",
+        size: "Small pumpkin (~520mm)",
+      },
+      body: {
+        what: "Your body continues to prepare for labour",
+        why: "The cervix may be softening and thinning (effacing). Hormone levels continue to shift, and your body is building toward spontaneous labour even when it doesn't feel that way.",
+        means: "Going past your due date is not a failure of your body. Some pregnancies simply take longer, and that is a normal variation.",
+      },
+      emotional: {
+        what: "The waiting can feel particularly intense after the due date passes",
+        why: "Anticipation, frustration, and pressure from others asking 'any news yet?' can feel overwhelming. There's a unique emotional weight to waiting for something you expected to have happened already.",
+        means: "Feeling impatient, frustrated, or anxious is completely understandable. These feelings don't need to be managed away, they need to be acknowledged.",
+      },
+    },
+    symptoms: [
+      { name: "Increased Braxton Hicks contractions", why: "The uterus continues to practice for labour.", when: "Can increase noticeably in the evenings", feelLike: "Tightening across the abdomen, sometimes stronger than previous weeks but still irregular." },
+      { name: "Pelvic pressure and heaviness", why: "The baby is low in the pelvis.", when: "Constant, often worse when standing or walking", feelLike: "A heavy, pressing sensation low in the pelvis." },
+      { name: "Difficulty sleeping", why: "Physical discomfort, frequent toilet trips, and emotional anticipation.", when: "Ongoing", feelLike: "Fragmented, uncomfortable sleep despite being exhausted." },
+      { name: "Emotional intensity", why: "Waiting, physical discomfort, and external pressure.", when: "Ongoing", feelLike: "Frustration, tearfulness, impatience, and a particular kind of limbo." },
+    ],
+    humanTruth: [
+      "The relentless 'any news?' messages from well-meaning people",
+      "Feeling like your body should have done this by now",
+      "The strange limbo of being past a date you built your expectations around",
+      "Every twinge becoming a potential sign, and then not being one",
+      "The particular frustration of having no control over when labour begins",
+    ],
+    whatThisMeans: "Week 41 is within the normal range of pregnancy duration. Your midwife will offer additional monitoring, typically including fetal heart rate checks and discussions about induction.",
+    normal: ["Not being in labour yet", "Feeling frustrated or emotional", "Stronger Braxton Hicks", "Feeling physically at your limit", "Needing more rest than ever"],
+    seekSupport: ["Reduced fetal movement", "Regular contractions (every 5 minutes for an hour)", "Waters breaking", "Any sudden changes in how you feel"],
+    disclaimer: "This is not medical advice. Always consult your midwife, doctor, or healthcare provider with any concerns.",
+    focusPoints: [
+      { action: "Attend your post-dates monitoring appointments", reason: "Your midwife will check your baby's wellbeing and discuss your options" },
+      { action: "Continue monitoring fetal movement", reason: "This remains the most important thing to track" },
+      { action: "Discuss induction options with your midwife", reason: "Understanding what's available helps you make informed decisions" },
+      { action: "Rest, and protect your energy", reason: "Labour could begin at any time" },
+    ],
+    normalRightNow: [
+      "Feeling impatient and frustrated",
+      "Wondering if something is wrong (it usually isn't)",
+      "Wanting it to be over while also feeling nervous about what's next",
+      "Being tired of waiting",
+    ],
+    gentleReminder: "Your due date was always an estimate. Your baby will arrive. The waiting is hard, but it does end.",
+    reflectionPrompt: "What has this waiting taught you about patience, control, and letting go?",
+    reflectionContext: "The days beyond a due date have a specific emotional texture worth capturing honestly.",
+    nextWeekPreview: "If you reach week 42, your midwife will likely recommend induction. This is a conversation, not a directive.",
+    aiContextPrompt: "What's been on your mind this week?",
+    aiPrompts: ["What happens at week 41?", "What does post-dates monitoring involve?", "What are my options for induction?"],
+    captureIntro: "Beyond the due date. The waiting has its own quality, and it's worth recording honestly.",
+  },
+
+  // ─── WEEK 42 ──────────────────────────────────────────────────────────────
+  42: {
+    title: "42 Weeks Pregnant",
+    heroSubtitle: "What's happening this week, and how to navigate it.",
+    reassurance: "Reaching week 42 is uncommon but it does happen. You will be closely monitored, and your midwife will guide you through the options available.",
+    keyFocus: "Decision-making & support",
+    atAGlance: "Week 42 marks the point at which most healthcare providers recommend induction if labour hasn't begun. Your baby is fully mature, and additional monitoring ensures their wellbeing. This is a stage that requires close communication with your midwife or consultant.",
+    what: {
+      baby: {
+        what: "Fully mature and ready for birth",
+        why: "Your baby continues to grow but the placenta may begin to work less efficiently. Amniotic fluid levels can decrease. This is why monitoring intensifies.",
+        means: "Your baby is healthy and ready. The focus shifts to ensuring the environment remains optimal.",
+        size: "Small pumpkin (~530mm)",
+      },
+      body: {
+        what: "Your body is still working toward labour",
+        why: "The hormonal cascade that triggers labour can happen at any point. Some people's bodies take longer to reach the tipping point, and that variation is part of normal biology.",
+        means: "Reaching week 42 does not mean your body has failed. It means the timeline is slightly longer than average.",
+      },
+      emotional: {
+        what: "The emotional experience at week 42 can be particularly complex",
+        why: "Decisions about induction, pressure from others, exhaustion, and anxiety about the baby's wellbeing can all converge.",
+        means: "Whatever you're feeling is valid. Being asked to make decisions when you're exhausted and anxious is genuinely hard.",
+      },
+    },
+    symptoms: [
+      { name: "Continued discomfort", why: "All the physical symptoms of late pregnancy continue and may intensify.", when: "Ongoing", feelLike: "Exhaustion, pelvic pressure, back pain." },
+      { name: "Emotional exhaustion", why: "Two weeks past a due date creates sustained anticipatory stress.", when: "Ongoing and cumulative", feelLike: "Beyond impatience, a deeper weariness." },
+      { name: "Possible early labour signs", why: "Many people at 42 weeks begin to show signs of labour starting.", when: "Can happen at any point", feelLike: "Show, irregular contractions, lower back pain, or a general sense that something is shifting." },
+    ],
+    humanTruth: [
+      "Feeling like you're the only person who has ever been this pregnant",
+      "Navigating induction conversations while exhausted",
+      "The weight of making decisions that feel enormous",
+      "Wanting someone to just tell you what to do, and also wanting autonomy",
+      "A deep, bone-level readiness for this to be over",
+    ],
+    whatThisMeans: "Week 42 is the point at which most guidelines recommend induction, primarily because the placenta may become less efficient. This doesn't mean something is wrong, it means the balance of risks shifts.",
+    normal: ["Feeling overwhelmed by the decisions ahead", "Physical exhaustion at its peak", "Emotional complexity about induction", "Still not being in spontaneous labour"],
+    seekSupport: ["Reduced fetal movement at any point", "Any signs of labour", "Feeling unable to cope emotionally", "Any concern at all"],
+    disclaimer: "This is not medical advice. Always consult your midwife, doctor, or healthcare provider with any concerns.",
+    focusPoints: [
+      { action: "Have a conversation with your midwife about induction", reason: "Understanding the process and your options helps you feel more in control" },
+      { action: "Continue monitoring fetal movement closely", reason: "This remains the single most important thing" },
+      { action: "Make sure your hospital bag is ready", reason: "Whether labour starts naturally or through induction, you'll want to be prepared" },
+      { action: "Accept support from those around you", reason: "This stage is hard. You don't need to get through it alone" },
+    ],
+    normalRightNow: [
+      "Feeling completely done with pregnancy",
+      "Having mixed feelings about induction",
+      "Feeling anxious about your baby's wellbeing",
+      "Needing reassurance that this will end",
+    ],
+    gentleReminder: "You have navigated an entire pregnancy to get here. However your baby arrives, you have done something extraordinary.",
+    reflectionPrompt: "What do you most want to remember about the way this pregnancy ended?",
+    reflectionContext: "Week 42 is rare enough that few people write about it honestly. What you're experiencing now is worth capturing.",
+    aiContextPrompt: "What's been on your mind this week?",
+    aiPrompts: ["What happens at week 42?", "What does induction involve?", "Is my baby safe at 42 weeks?"],
+    captureIntro: "Week 42. The longest wait. However this ends, what you've carried deserves to be honoured.",
+  },
 };
 
 // ─── Fallback generator for weeks without specific data ────────────────────
@@ -1123,5 +1250,5 @@ export const getWeekData = (week: number): WeekData => {
 
 export const getAdjacentWeeks = (week: number): { prev: number | null; next: number | null } => ({
   prev: week > 1 ? week - 1 : null,
-  next: week < 40 ? week + 1 : null,
+  next: week < MAX_PREGNANCY_WEEK ? week + 1 : null,
 });

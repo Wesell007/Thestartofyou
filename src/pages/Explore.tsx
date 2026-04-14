@@ -27,7 +27,7 @@ const Explore = () => {
         <ContinueJourneySection
           isLoggedIn={isLoggedIn}
           currentStage="Week 12"
-          stageDetail="You're in your first trimester. Your 40-week guide is ready."
+          stageDetail="You're in your first trimester. Your week-by-week guide is ready."
         />
 
         {/* 4. Utility tools strip */}

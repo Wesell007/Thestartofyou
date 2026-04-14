@@ -71,7 +71,7 @@ const WeekTimeline = ({ data }: Props) => {
             to="/pregnancy#week-by-week"
             className="font-sans text-sm font-light text-sage-muted hover:text-sage transition-colors underline underline-offset-4"
           >
-            View all 40 weeks →
+            View all weeks →
           </Link>
         </div>
       </div>

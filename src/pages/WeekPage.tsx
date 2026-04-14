@@ -23,7 +23,7 @@ const WeekPage = () => {
   const { week } = useParams<{ week: string }>();
   const weekNum = parseInt(week ?? "0", 10);
 
-  if (isNaN(weekNum) || weekNum < 1 || weekNum > 40) {
+  if (isNaN(weekNum) || weekNum < 1 || weekNum > 42) {
     return <Navigate to="/pregnancy" replace />;
   }
 

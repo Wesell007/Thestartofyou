@@ -16,7 +16,7 @@ const CTASection = () => {
           Your journey starts here
         </h2>
         <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground mb-8 md:mb-10 leading-relaxed max-w-lg mx-auto">
-          Enter your due date, access your personalised 40-week guide, and begin your supported pregnancy journey, completely free.
+          Enter your due date, access your personalised week-by-week guide, and begin your supported pregnancy journey, completely free.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md mx-auto mb-6">

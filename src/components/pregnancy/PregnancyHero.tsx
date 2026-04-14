@@ -58,13 +58,13 @@ const PregnancyHero = () => {
             </h1>
             <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground leading-relaxed mb-5 md:mb-6 max-w-[22rem] animate-fade-up [animation-delay:0.1s]">
               Understand what's happening, what's normal, and what to focus on
-              from the very first week through to week 40.
+              from the very first week through to birth.
             </p>
 
             {/* Trust markers */}
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-6 md:mb-0 animate-fade-up [animation-delay:0.15s]">
               {[
-                { label: "40 weeks", sub: "covered" },
+                { label: "40+ weeks", sub: "covered" },
                 { label: "3 trimesters", sub: "mapped" },
                 { label: "Free", sub: "to start" },
               ].map((item) => (

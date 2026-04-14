@@ -27,11 +27,11 @@ const trimesterGroups = [
   {
     label: "Third Trimester",
     sub: "Preparation & Arrival",
-    range: "Weeks 28-40",
-    weeks: Array.from({ length: 13 }, (_, i) => i + 28),
+    range: "Weeks 28-42",
+    weeks: Array.from({ length: 15 }, (_, i) => i + 28),
     stageVar: "--stage-ivf",
     accentVar: "--stage-ivf-accent",
-    stat: "13 weeks",
+    stat: "15 weeks",
     statLabel: "until arrival",
   },
 ];

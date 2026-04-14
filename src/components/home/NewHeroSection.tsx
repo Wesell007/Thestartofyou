@@ -1,72 +1,87 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import heroImage from "@/assets/home-hero-premium.jpg";
 import heroVideoAsset from "@/assets/home-hero-video-new.mp4.asset.json";
 
 const NewHeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoFailed, setVideoFailed] = useState(false);
+  const [videoState, setVideoState] = useState<"loading" | "playing" | "paused">("loading");
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Force play attempt — handles iOS/Safari autoplay quirks
-    const attemptPlay = () => {
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // Autoplay blocked — show poster fallback
-          setVideoFailed(true);
-        });
+    let cancelled = false;
+
+    const attemptPlay = async () => {
+      try {
+        video.muted = true;
+        await video.play();
+        if (!cancelled) setVideoState("playing");
+      } catch {
+        if (!cancelled) setVideoState("paused");
       }
     };
 
-    // If video is ready, play immediately; otherwise wait for canplay
     if (video.readyState >= 3) {
       attemptPlay();
     } else {
       video.addEventListener("canplay", attemptPlay, { once: true });
     }
 
-    // Fallback timeout — if nothing plays within 4s, show poster
+    // Fallback — if nothing plays within 5s, mark paused
     const timeout = setTimeout(() => {
-      if (video.paused || video.readyState < 2) {
-        setVideoFailed(true);
+      if (!cancelled && video.paused) {
+        setVideoState("paused");
       }
-    }, 4000);
+    }, 5000);
 
     return () => {
+      cancelled = true;
       clearTimeout(timeout);
       video.removeEventListener("canplay", attemptPlay);
     };
   }, []);
 
+  const handleTapToPlay = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.play()
+      .then(() => setVideoState("playing"))
+      .catch(() => setVideoState("paused"));
+  }, []);
+
   return (
     <section className="relative min-h-[92vh] md:min-h-screen overflow-hidden flex items-end md:items-center">
-      {/* Video background with robust fallback */}
+      {/* Video background — always render, overlay tap-to-play if paused */}
       <div className="absolute inset-0">
-        {!videoFailed ? (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            poster={heroImage}
-            onError={() => setVideoFailed(true)}
-            className="w-full h-full object-cover object-[50%_35%] md:object-[50%_25%]"
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={heroImage}
+          onError={() => setVideoState("paused")}
+          className="w-full h-full object-cover object-[50%_35%] md:object-[50%_25%]"
+        >
+          <source src={heroVideoAsset.url} type="video/mp4" />
+        </video>
+
+        {/* Tap-to-play overlay when autoplay is blocked */}
+        {videoState === "paused" && (
+          <button
+            onClick={handleTapToPlay}
+            className="absolute inset-0 z-10 flex items-center justify-center bg-transparent cursor-pointer"
+            aria-label="Play video"
           >
-            <source src={heroVideoAsset.url} type="video/mp4" />
-          </video>
-        ) : (
-          <img
-            src={heroImage}
-            alt="Calm pregnancy moment in nature"
-            className="w-full h-full object-cover object-[50%_35%] md:object-[50%_25%]"
-          />
+            <div className="bg-parchment/60 backdrop-blur-sm rounded-full p-4 shadow-lg hover:bg-parchment/80 transition-all duration-300">
+              <Play size={28} className="text-foreground/70 ml-0.5" />
+            </div>
+          </button>
         )}
 
         {/* Cinematic gradient — stronger left anchor for text */}

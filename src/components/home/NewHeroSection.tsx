@@ -14,6 +14,12 @@ const NewHeroSection = () => {
 
     let cancelled = false;
 
+    // Sync state whenever video actually starts playing
+    const onPlaying = () => {
+      if (!cancelled) setVideoState("playing");
+    };
+    video.addEventListener("playing", onPlaying);
+
     const attemptPlay = async () => {
       try {
         video.muted = true;
@@ -30,7 +36,6 @@ const NewHeroSection = () => {
       video.addEventListener("canplay", attemptPlay, { once: true });
     }
 
-    // Fallback — if nothing plays within 5s, mark paused
     const timeout = setTimeout(() => {
       if (!cancelled && video.paused) {
         setVideoState("paused");
@@ -41,6 +46,7 @@ const NewHeroSection = () => {
       cancelled = true;
       clearTimeout(timeout);
       video.removeEventListener("canplay", attemptPlay);
+      video.removeEventListener("playing", onPlaying);
     };
   }, []);
 
@@ -66,7 +72,7 @@ const NewHeroSection = () => {
           preload="auto"
           poster={heroImage}
           onError={() => setVideoState("paused")}
-          className="w-full h-full object-cover object-[50%_35%] md:object-[50%_25%]"
+          className="w-full h-full object-cover object-[50%_35%] md:object-[50%_32%]"
         >
           <source src={heroVideoAsset.url} type="video/mp4" />
         </video>

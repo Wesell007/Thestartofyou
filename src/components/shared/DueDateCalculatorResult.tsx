@@ -331,7 +331,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                       {result.currentWeek}
                     </p>
                     <p className="font-sans text-[11px] font-light text-muted-foreground/45">
-                      of 40 weeks
+                      of your pregnancy
                     </p>
                   </div>
 
@@ -1001,12 +1001,12 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
             {[
               {
                 label: `${result.trimester} guide`,
-                sub: `Guidance for weeks ${result.trimesterNumber === 1 ? "1 to 12" : result.trimesterNumber === 2 ? "13 to 27" : "28 to 40"}`,
+                sub: `Guidance for weeks ${result.trimesterNumber === 1 ? "1 to 12" : result.trimesterNumber === 2 ? "13 to 27" : "28 to 42"}`,
                 href: result.trimesterPath,
               },
               {
                 label: "Your full pregnancy journey",
-                sub: "An overview of all 40 weeks with stage-by-stage guidance",
+                sub: "Your complete pregnancy journey with week-by-week guidance",
                 href: "/pregnancy",
               },
               {

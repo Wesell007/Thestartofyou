@@ -5,7 +5,7 @@ const steps = [
     num: "01",
     icon: CalendarDays,
     title: "Enter your due date",
-    desc: "Your 40-week journey begins with one simple date. We calculate your current stage and build your personalised timeline.",
+    desc: "Your pregnancy journey begins with one simple date. We calculate your current stage and build your personalised timeline.",
     accent: "bg-sage/8",
     iconBg: "bg-sage/15",
     iconColor: "text-sage",

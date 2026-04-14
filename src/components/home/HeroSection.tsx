@@ -78,7 +78,7 @@ const HeroSection = () => {
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2.5 animate-fade-up [animation-delay:0.15s]">
               {[
                 { icon: Shield, label: "Evidence-informed" },
-                { icon: BookOpen, label: "40-week guide" },
+                { icon: BookOpen, label: "Week-by-week guide" },
                 { icon: Heart, label: "Free to start" },
                 { icon: Users, label: "For every parent" },
               ].map(({ icon: Icon, label }) => (
@@ -132,7 +132,7 @@ const HeroSection = () => {
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2.5 mb-8 animate-fade-up [animation-delay:0.15s]">
             {[
               { icon: Shield, label: "Evidence-informed" },
-              { icon: BookOpen, label: "40-week guide" },
+              { icon: BookOpen, label: "Week-by-week guide" },
               { icon: Heart, label: "Free to start" },
               { icon: Users, label: "For every parent" },
             ].map(({ icon: Icon, label }) => (

@@ -394,6 +394,30 @@ function getIllustration(week: number) {
           <path d="M22 13 Q18 10 16 13" stroke="hsl(147 25% 50%)" strokeWidth="1.2" fill="none" />
         </>
       );
+    // Week 41: Pumpkin variant (slightly larger)
+    case 41:
+      return (
+        <>
+          <ellipse cx="24" cy="25" rx="15" ry="14" fill="hsl(25 70% 55%)" />
+          <ellipse cx="20" cy="25" rx="7" ry="13" fill="hsl(25 70% 60%)" opacity="0.3" />
+          <ellipse cx="28" cy="25" rx="7" ry="13" fill="hsl(25 70% 50%)" opacity="0.2" />
+          <rect x="22" y="9" width="4" height="5" rx="2" fill="hsl(147 25% 45%)" />
+          <path d="M22 12 Q18 9 16 12" stroke="hsl(147 25% 50%)" strokeWidth="1.2" fill="none" />
+          <circle cx="30" cy="15" r="2" fill="hsl(25 70% 65%)" opacity="0.4" />
+        </>
+      );
+    // Week 42: Pumpkin with a star / ready
+    case 42:
+      return (
+        <>
+          <ellipse cx="24" cy="25" rx="15" ry="14" fill="hsl(25 65% 52%)" />
+          <ellipse cx="20" cy="25" rx="7" ry="13" fill="hsl(25 65% 58%)" opacity="0.3" />
+          <ellipse cx="28" cy="25" rx="7" ry="13" fill="hsl(25 65% 48%)" opacity="0.2" />
+          <rect x="22" y="9" width="4" height="5" rx="2" fill="hsl(147 25% 45%)" />
+          <path d="M22 12 Q18 9 16 12" stroke="hsl(147 25% 50%)" strokeWidth="1.2" fill="none" />
+          <path d="M28 12 Q32 9 34 12" stroke="hsl(147 25% 50%)" strokeWidth="1.2" fill="none" />
+        </>
+      );
     default:
       // Fallback: generic circle
       return (

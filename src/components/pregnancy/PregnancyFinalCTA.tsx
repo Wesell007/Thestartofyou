@@ -36,13 +36,13 @@ const PregnancyFinalCTA = () => {
           Your pregnancy guide is ready
         </h2>
         <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground leading-relaxed mb-5 max-w-md mx-auto">
-          40 weeks of guidance, reflection, and support. Enter your due date to begin.
+          40+ weeks of guidance, reflection, and support. Enter your due date to begin.
         </p>
 
         {/* Stat chips */}
         <div className="flex items-center justify-center gap-6 mb-8">
           {[
-            { n: "40", label: "weeks" },
+            { n: "40+", label: "weeks" },
             { n: "3", label: "trimesters" },
             { n: "100+", label: "insights" },
           ].map((s) => (

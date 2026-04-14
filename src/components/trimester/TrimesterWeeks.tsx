@@ -71,7 +71,7 @@ const TrimesterWeeks = ({ data, bg = "bg-parchment-dark" }: Props) => {
             to="/pregnancy#week-by-week"
             className="font-sans text-sm font-light text-sage hover:text-sage-muted transition-colors underline underline-offset-4"
           >
-            View all 40 weeks →
+            View all weeks →
           </Link>
         </div>
       </div>

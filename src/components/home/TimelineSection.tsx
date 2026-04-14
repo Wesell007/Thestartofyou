@@ -32,12 +32,12 @@ const TimelineSection = () => {
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         <div className="text-center mb-8 sm:mb-10 md:mb-14">
           <div className="editorial-rule mb-5 md:mb-6" />
-          <p className="stage-label mb-3">40-Week Journey</p>
+          <p className="stage-label mb-3">Pregnancy Timeline</p>
           <h2 className="font-serif text-[1.75rem] sm:text-3xl md:text-[2.75rem] text-foreground mb-3 md:mb-4">
             Your complete pregnancy timeline
           </h2>
           <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            Every pregnancy follows a structured 40-week journey. See where you are, what is ahead, and the milestones that mark each stage.
+            Every pregnancy follows its own timeline. See where you are, what is ahead, and the milestones that mark each stage.
           </p>
         </div>
 

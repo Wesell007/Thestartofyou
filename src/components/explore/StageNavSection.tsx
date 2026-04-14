@@ -142,7 +142,7 @@ const StageNavSection = () => {
   return (
     <>
       {/* Journey stages */}
-      <section className="relative bg-parchment pt-16 sm:pt-20 md:pt-28 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
+      <section className="relative bg-parchment pt-16 sm:pt-20 md:pt-28 pb-12 sm:pb-16 md:pb-20">
         {/* Ambient glow */}
         <div className="absolute top-1/4 right-0 w-[500px] h-[400px] glow-sage pointer-events-none" />
 

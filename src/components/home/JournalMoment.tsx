@@ -11,11 +11,11 @@ const JournalMoment = () => {
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center py-16 md:py-24">
           {/* Image */}
-          <div className="relative rounded-2xl overflow-hidden aspect-[3/4] md:aspect-auto md:h-[440px] shadow-soft bg-[hsl(30,20%,95%)]">
+          <div className="relative rounded-2xl overflow-hidden shadow-soft">
             <img
               src={journalFlatlay}
               alt="The Start of You pregnancy journal styled with baby clothes and natural accessories"
-              className="w-full h-full object-contain md:object-cover object-center"
+              className="w-full h-auto block rounded-2xl"
               loading="lazy"
             />
           </div>

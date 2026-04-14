@@ -1,9 +1,9 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import NewHeroSection from "@/components/home/NewHeroSection";
+import LightJourneyEntry from "@/components/home/LightJourneyEntry";
 import ValueProofSection from "@/components/home/ValueProofSection";
-import JourneyEntrySection from "@/components/home/JourneyEntrySection";
-import CTASection from "@/components/home/CTASection";
+import JournalMoment from "@/components/home/JournalMoment";
 
 const Index = () => {
   return (
@@ -11,9 +11,9 @@ const Index = () => {
       <Navbar />
       <main>
         <NewHeroSection />
+        <LightJourneyEntry />
         <ValueProofSection />
-        <JourneyEntrySection />
-        <CTASection />
+        <JournalMoment />
       </main>
       <Footer />
     </div>

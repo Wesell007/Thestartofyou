@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import preparingImg from "@/assets/preparing-card.jpg";
+import supportImg from "@/assets/support-card.jpg";
 /* ── Compact SVG Stage Icons ── */
 const TTCIcon = () => (
   <svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -273,9 +274,39 @@ const StageNavSection = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-3xl">
-            {supportStages.map((s) => (
-              <StageCard key={s.title} {...s} compact />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 max-w-3xl">
+            {[
+              { title: "Preparing for baby", desc: "What you actually need, what matters, and how to prepare without overwhelm.", href: "/preparing-for-baby", img: preparingImg },
+              { title: "Emotional support", desc: "For moments that feel uncertain, overwhelming, or isolating — you're not alone in this.", href: "/support", img: supportImg },
+            ].map((card) => (
+              <Link
+                key={card.title}
+                to={card.href}
+                className="group relative flex flex-col rounded-2xl overflow-hidden bg-card border border-border/30 shadow-sm hover:shadow-soft hover:-translate-y-0.5 transition-all duration-500"
+                aria-label={`Explore ${card.title}`}
+              >
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={card.img}
+                    alt={card.title}
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                    loading="lazy"
+                    width={800}
+                    height={600}
+                  />
+                </div>
+                <div className="p-5 sm:p-6">
+                  <h3 className="font-serif text-base md:text-lg text-foreground leading-snug mb-2">
+                    {card.title}
+                  </h3>
+                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-4">
+                    {card.desc}
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 font-sans text-xs font-medium text-sage group-hover:gap-2.5 transition-all duration-300">
+                    Explore <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

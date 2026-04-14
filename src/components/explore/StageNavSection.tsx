@@ -69,14 +69,6 @@ const mainStages = [
     accentVar: "--stage-ttc-accent",
   },
   {
-    icon: <IVFIcon />,
-    title: "IVF & fertility",
-    desc: "A guided, supported path through treatment and the emotions that come with it.",
-    href: "/ivf",
-    colorVar: "--stage-ivf",
-    accentVar: "--stage-ivf-accent",
-  },
-  {
     icon: <PregnancyIcon />,
     title: "Pregnancy",
     desc: "Week-by-week guidance, symptoms, and support from confirmation to birth.",
@@ -84,6 +76,14 @@ const mainStages = [
     colorVar: "--stage-pregnancy",
     accentVar: "--stage-pregnancy-accent",
     featured: true,
+  },
+  {
+    icon: <IVFIcon />,
+    title: "IVF & fertility",
+    desc: "A guided, supported path through treatment and the emotions that come with it.",
+    href: "/ivf",
+    colorVar: "--stage-ivf",
+    accentVar: "--stage-ivf-accent",
   },
   {
     icon: <PostpartumIcon />,
@@ -248,11 +248,11 @@ const StageNavSection = () => {
           {/* Pregnancy featured, then 2x2 grid */}
           <div className="space-y-3 sm:space-y-4">
             {/* Featured: Pregnancy */}
-            <StageCard {...mainStages[2]} />
+            <StageCard {...mainStages[1]} />
 
             {/* 2x2 grid: TTC, IVF, Postpartum, First Year */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              {[mainStages[0], mainStages[1], mainStages[3], mainStages[4]].map((s) => (
+              {[mainStages[0], mainStages[2], mainStages[3], mainStages[4]].map((s) => (
                 <StageCard key={s.title} {...s} />
               ))}
             </div>

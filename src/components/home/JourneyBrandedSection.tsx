@@ -133,7 +133,7 @@ const JourneyBrandedSection = () => {
           </div>
 
           <p className="font-sans text-[11.5px] font-light text-lavender-foreground/45 mt-4">
-            Not sure?{" "}
+            Not sure of your dates or using IVF?{" "}
             <a href="/due-date-calculator" className="underline underline-offset-2 decoration-lavender-foreground/20 hover:text-lavender-foreground/50 transition-colors">
               Use the full calculator
             </a>

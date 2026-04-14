@@ -356,7 +356,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                     to="/ivf"
                     className="group inline-flex items-center gap-3 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-5 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all"
                   >
-                    Start your journey
+                    Save your journey
                     <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </Link>
                   <Link
@@ -430,16 +430,16 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                   This is where your IVF<br className="hidden sm:block" /> journey <span className="italic">becomes personal</span>
                 </h2>
                 <p className="font-sans text-[15px] font-light text-muted-foreground leading-[1.85] mb-12 max-w-md">
-                  Starting saves your stage, personalises your guidance, and gives you a clear, supported path through IVF and beyond. No more guessing what comes next.
+                  Saving keeps your stage, personalises your guidance, and gives you a clear, supported path through IVF and beyond. No more guessing what comes next.
                 </p>
                 <Link
                   to="/ivf"
                   className="group inline-flex items-center gap-3 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-5 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all"
                 >
-                  Start your journey
+                  Save your journey
                   <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                 </Link>
-                <p className="mt-4 font-sans text-[11px] font-light text-muted-foreground/40">Takes a minute to begin.</p>
+                <p className="mt-4 font-sans text-[11px] font-light text-muted-foreground/40">Takes a minute to save.</p>
               </div>
             </Fade>
 
@@ -1167,7 +1167,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
               to="/ivf"
               className="group inline-flex items-center gap-3 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-5 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all"
             >
-              Start your journey
+              Save your journey
               <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
 

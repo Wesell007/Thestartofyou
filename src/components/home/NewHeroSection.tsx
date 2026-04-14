@@ -1,24 +1,73 @@
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/home-hero-premium.jpg";
 import heroVideoAsset from "@/assets/home-hero-video-new.mp4.asset.json";
 
 const NewHeroSection = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoFailed, setVideoFailed] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Force play attempt — handles iOS/Safari autoplay quirks
+    const attemptPlay = () => {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay blocked — show poster fallback
+          setVideoFailed(true);
+        });
+      }
+    };
+
+    // If video is ready, play immediately; otherwise wait for canplay
+    if (video.readyState >= 3) {
+      attemptPlay();
+    } else {
+      video.addEventListener("canplay", attemptPlay, { once: true });
+    }
+
+    // Fallback timeout — if nothing plays within 4s, show poster
+    const timeout = setTimeout(() => {
+      if (video.paused || video.readyState < 2) {
+        setVideoFailed(true);
+      }
+    }, 4000);
+
+    return () => {
+      clearTimeout(timeout);
+      video.removeEventListener("canplay", attemptPlay);
+    };
+  }, []);
+
   return (
     <section className="relative min-h-[92vh] md:min-h-screen overflow-hidden flex items-end md:items-center">
-      {/* Video background (desktop) / Still image (mobile fallback) */}
+      {/* Video background with robust fallback */}
       <div className="absolute inset-0">
-        {/* Video — all viewports, still image poster as fallback */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={heroImage}
-          className="w-full h-full object-cover object-[50%_30%] md:object-center"
-        >
-          <source src={heroVideoAsset.url} type="video/mp4" />
-        </video>
+        {!videoFailed ? (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster={heroImage}
+            onError={() => setVideoFailed(true)}
+            className="w-full h-full object-cover object-[50%_35%] md:object-[50%_25%]"
+          >
+            <source src={heroVideoAsset.url} type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src={heroImage}
+            alt="Calm pregnancy moment in nature"
+            className="w-full h-full object-cover object-[50%_35%] md:object-[50%_25%]"
+          />
+        )}
 
         {/* Cinematic gradient — stronger left anchor for text */}
         <div className="absolute inset-0 bg-gradient-to-r from-parchment via-parchment/85 via-50% to-parchment/20 md:via-parchment/80 md:via-40% md:to-transparent" />
@@ -38,7 +87,7 @@ const NewHeroSection = () => {
             </p>
           </div>
 
-          {/* Headline — larger, more confident */}
+          {/* Headline */}
           <h1 className="font-serif text-[2.5rem] sm:text-[2.875rem] md:text-[3.25rem] lg:text-[3.75rem] text-foreground leading-[1.06] mb-5 md:mb-6">
             A calmer way{" "}
             <span className="italic text-foreground/80">through pregnancy</span>

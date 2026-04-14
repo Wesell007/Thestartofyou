@@ -247,12 +247,9 @@ const StageNavSection = () => {
 
           {/* Pregnancy featured, then 2x2 grid */}
           <div className="space-y-3 sm:space-y-4">
-            {/* Featured: Pregnancy */}
-            <StageCard {...mainStages[1]} />
-
-            {/* 2x2 grid: TTC, IVF, Postpartum, First Year */}
+            {/* All stages in life-stage order */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              {[mainStages[0], mainStages[2], mainStages[3], mainStages[4]].map((s) => (
+              {mainStages.map((s) => (
                 <StageCard key={s.title} {...s} />
               ))}
             </div>

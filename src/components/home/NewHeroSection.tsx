@@ -54,9 +54,14 @@ const NewHeroSection = () => {
     const video = videoRef.current;
     if (!video) return;
     video.muted = true;
-    video.play()
-      .then(() => setVideoState("playing"))
-      .catch(() => setVideoState("paused"));
+    // Force video to be ready and start from beginning
+    video.currentTime = 0;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => setVideoState("playing"))
+        .catch(() => setVideoState("paused"));
+    }
   }, []);
 
   return (
@@ -72,7 +77,7 @@ const NewHeroSection = () => {
           preload="auto"
           poster={heroImage}
           onError={() => setVideoState("paused")}
-          className="w-full h-full object-cover object-[50%_35%] md:object-[50%_32%]"
+          className="w-full h-full object-cover object-[50%_35%] md:object-[50%_45%]"
         >
           <source src={heroVideoAsset.url} type="video/mp4" />
         </video>

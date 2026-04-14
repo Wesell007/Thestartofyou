@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/home-hero-premium.jpg";
-import heroVideoAsset from "@/assets/home-hero-video-long.mp4.asset.json";
+import heroVideoAsset from "@/assets/home-hero-video-v2.mp4.asset.json";
 
 const NewHeroSection = () => {
   return (

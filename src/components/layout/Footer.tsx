@@ -4,16 +4,24 @@ import botanicalBl from "@/assets/botanical-branch-bl.png";
 
 const Footer = () => {
   return (
-    <footer className="relative bg-parchment-dark overflow-hidden">
+    <footer className="relative bg-[hsl(100_12%_90%)] overflow-hidden">
       {/* Soft divider */}
       <div className="section-divider" />
 
-      {/* Botanical accent — bottom-left */}
+      {/* Botanical accent — bottom-right (designer reference position) */}
       <img
         src={botanicalBl}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-0 w-[120px] md:w-[180px] opacity-15 select-none"
+        className="pointer-events-none absolute bottom-0 right-0 w-[180px] md:w-[280px] lg:w-[340px] opacity-25 select-none scale-x-[-1]"
+      />
+
+      {/* Secondary botanical — top-left, subtle */}
+      <img
+        src={botanicalBl}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 left-0 w-[100px] md:w-[160px] opacity-10 select-none rotate-180"
       />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl pt-16 sm:pt-24 pb-10 sm:pb-14 relative z-10">
@@ -27,14 +35,14 @@ const Footer = () => {
                 className="w-[140px] md:w-[190px] h-auto object-contain contrast-[1.1]"
               />
             </Link>
-            <p className="font-sans text-[14px] font-light text-foreground/55 leading-relaxed max-w-xs">
+            <p className="font-sans text-[14px] font-light text-foreground/50 leading-relaxed max-w-xs">
               Your trusted companion through pregnancy, offering calm guidance and space for reflection.
             </p>
           </div>
 
           {/* Journey */}
           <div>
-            <h4 className="font-serif text-foreground text-base mb-4 md:mb-6">Journey</h4>
+            <h4 className="font-serif text-foreground/85 text-base mb-4 md:mb-6">Journey</h4>
             <ul className="space-y-3">
               {[
                 { to: "/trying-to-conceive", label: "Trying to Conceive" },
@@ -43,14 +51,14 @@ const Footer = () => {
                 { to: "/postpartum", label: "Postpartum" },
                 { to: "/first-year", label: "First Year" },
               ].map(l => (
-                <li key={l.to}><Link to={l.to} className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-200">{l.label}</Link></li>
+                <li key={l.to}><Link to={l.to} className="font-sans text-sm font-light text-foreground/45 hover:text-foreground/70 transition-colors duration-200">{l.label}</Link></li>
               ))}
             </ul>
           </div>
 
           {/* Resources */}
           <div>
-            <h4 className="font-serif text-foreground text-base mb-4 md:mb-6">Resources</h4>
+            <h4 className="font-serif text-foreground/85 text-base mb-4 md:mb-6">Resources</h4>
             <ul className="space-y-3">
               {[
                 { to: "/explore", label: "Explore" },
@@ -59,33 +67,33 @@ const Footer = () => {
                 { to: "/support", label: "Support" },
                 { to: "/product", label: "Journal" },
               ].map(l => (
-                <li key={l.to}><Link to={l.to} className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-200">{l.label}</Link></li>
+                <li key={l.to}><Link to={l.to} className="font-sans text-sm font-light text-foreground/45 hover:text-foreground/70 transition-colors duration-200">{l.label}</Link></li>
               ))}
             </ul>
           </div>
 
           {/* About */}
           <div>
-            <h4 className="font-serif text-foreground text-base mb-4 md:mb-6">About</h4>
+            <h4 className="font-serif text-foreground/85 text-base mb-4 md:mb-6">About</h4>
             <ul className="space-y-3">
               {[
                 { to: "/about", label: "Our Story" },
                 { to: "/about", label: "Editorial Standards" },
                 { to: "/about", label: "Contact" },
               ].map((l, i) => (
-                <li key={i}><Link to={l.to} className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors duration-200">{l.label}</Link></li>
+                <li key={i}><Link to={l.to} className="font-sans text-sm font-light text-foreground/45 hover:text-foreground/70 transition-colors duration-200">{l.label}</Link></li>
               ))}
             </ul>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 sm:mt-20 pt-6 sm:pt-8 border-t border-parchment-deeper/60">
+        <div className="mt-12 sm:mt-20 pt-6 sm:pt-8 border-t border-foreground/8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
-            <span className="font-sans text-[11px] sm:text-xs font-light text-muted-foreground/70">
+            <span className="font-sans text-[11px] sm:text-xs font-light text-foreground/40">
               © 2026 The Start of You. All rights reserved.
             </span>
-            <span className="font-sans text-[11px] sm:text-xs font-light text-muted-foreground/50 flex items-center gap-1.5">
+            <span className="font-sans text-[11px] sm:text-xs font-light text-foreground/35 flex items-center gap-1.5">
               <span className="text-sage">♡</span> Made with care for expecting parents
             </span>
           </div>

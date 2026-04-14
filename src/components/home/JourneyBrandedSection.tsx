@@ -19,7 +19,7 @@ const JourneyBrandedSection = () => {
   };
 
   return (
-    <section className="relative bg-[hsl(271_20%_94%)] py-20 md:py-28 overflow-hidden">
+    <section className="relative bg-[hsl(271_18%_90%)] py-20 md:py-28 overflow-hidden">
       {/* Corner frames */}
       <CornerFrame position="top-left" />
       <CornerFrame position="top-right" />

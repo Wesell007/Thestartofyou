@@ -72,7 +72,7 @@ const NewHeroSection = () => {
           preload="auto"
           poster={heroImage}
           onError={() => setVideoState("paused")}
-          className="w-full h-full object-cover object-[50%_35%] md:object-[50%_25%]"
+          className="w-full h-full object-cover object-[50%_35%] md:object-[50%_32%]"
         >
           <source src={heroVideoAsset.url} type="video/mp4" />
         </video>

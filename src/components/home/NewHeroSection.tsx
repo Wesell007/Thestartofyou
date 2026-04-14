@@ -1,38 +1,31 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/home-hero-premium.jpg";
-import heroVideoAsset from "@/assets/home-hero-video.mp4.asset.json";
+import heroVideoAsset from "@/assets/home-hero-video-long.mp4.asset.json";
 
 const NewHeroSection = () => {
   return (
     <section className="relative min-h-[92vh] md:min-h-screen overflow-hidden flex items-end md:items-center">
       {/* Video background (desktop) / Still image (mobile fallback) */}
       <div className="absolute inset-0">
-        {/* Video — desktop only */}
+        {/* Video — all viewports, still image poster as fallback */}
         <video
           autoPlay
           muted
           loop
           playsInline
           poster={heroImage}
-          className="hidden md:block w-full h-full object-cover"
+          className="w-full h-full object-cover object-[50%_30%] md:object-center"
         >
           <source src={heroVideoAsset.url} type="video/mp4" />
         </video>
-        {/* Still — mobile */}
-        <img
-          src={heroImage}
-          alt=""
-          aria-hidden="true"
-          className="md:hidden w-full h-full object-cover object-[50%_30%]"
-        />
 
         {/* Cinematic gradient — stronger left anchor for text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-parchment via-parchment/80 via-40% to-transparent" />
-        {/* Bottom vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-parchment via-parchment/30 via-30% to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-parchment via-parchment/85 via-50% to-parchment/20 md:via-parchment/80 md:via-40% md:to-transparent" />
+        {/* Bottom vignette — stronger on mobile for text area */}
+        <div className="absolute inset-0 bg-gradient-to-t from-parchment via-parchment/50 via-40% to-transparent md:via-parchment/30 md:via-30%" />
         {/* Top vignette for navbar blending */}
-        <div className="absolute inset-0 bg-gradient-to-b from-parchment/50 via-transparent via-20% to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-parchment/60 via-transparent via-20% to-transparent md:from-parchment/50" />
       </div>
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">

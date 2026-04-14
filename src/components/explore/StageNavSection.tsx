@@ -70,6 +70,14 @@ const mainStages = [
     accentVar: "--stage-ttc-accent",
   },
   {
+    icon: <IVFIcon />,
+    title: "IVF & fertility",
+    desc: "A guided, supported path through treatment and the emotions that come with it.",
+    href: "/ivf",
+    colorVar: "--stage-ivf",
+    accentVar: "--stage-ivf-accent",
+  },
+  {
     icon: <PregnancyIcon />,
     title: "Pregnancy",
     desc: "Week-by-week guidance, symptoms, and support from confirmation to birth.",
@@ -77,14 +85,6 @@ const mainStages = [
     colorVar: "--stage-pregnancy",
     accentVar: "--stage-pregnancy-accent",
     featured: true,
-  },
-  {
-    icon: <IVFIcon />,
-    title: "IVF & fertility",
-    desc: "A guided, supported path through treatment and the emotions that come with it.",
-    href: "/ivf",
-    colorVar: "--stage-ivf",
-    accentVar: "--stage-ivf-accent",
   },
   {
     icon: <PostpartumIcon />,
@@ -195,7 +195,7 @@ const StageCard = ({ icon, title, desc, href, colorVar, accentVar, featured = fa
               className="absolute inset-0 flex items-center justify-center text-[2.5rem] md:text-[3rem] font-serif italic font-light"
               style={{ color: `hsl(var(${accentVar}) / 0.25)` }}
             >
-              40w
+              40+w
             </div>
           </div>
         </div>
@@ -210,7 +210,7 @@ const EditorialBreak = () => (
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
       <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16 md:gap-20 text-center">
         {[
-          { stat: "40", unit: "weeks", label: "of pregnancy guidance" },
+          { stat: "40+", unit: "weeks", label: "of pregnancy guidance" },
           { stat: "5", unit: "stages", label: "from TTC to first year" },
           { stat: "100+", unit: "", label: "evidence-based articles" },
         ].map((item) => (

@@ -1,17 +1,33 @@
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowRight, CalendarIcon } from "lucide-react";
+import { format, addDays, isBefore, isAfter } from "date-fns";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 const JourneyBrandedSection = () => {
+  const navigate = useNavigate();
+  const [date, setDate] = useState<Date | undefined>();
+  const [open, setOpen] = useState(false);
+  const today = new Date();
+
+  const handleStart = () => {
+    if (date) {
+      navigate(`/due-date-results?lmp=${date.getTime()}`);
+    }
+  };
+
   return (
     <section className="relative bg-[hsl(271_20%_94%)] py-20 md:py-28 overflow-hidden">
-      {/* Corner frames — inspired by the designer reference */}
+      {/* Corner frames */}
       <CornerFrame position="top-left" />
       <CornerFrame position="top-right" />
       <CornerFrame position="bottom-left" />
       <CornerFrame position="bottom-right" />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl relative z-10 text-center">
-        {/* Illustration — refined seated figure */}
+        {/* Line-art illustration */}
         <div className="mb-8 flex justify-center">
           <svg
             width="80"
@@ -21,7 +37,6 @@ const JourneyBrandedSection = () => {
             xmlns="http://www.w3.org/2000/svg"
             className="opacity-50"
           >
-            {/* Simplified seated figure with botanical element */}
             <ellipse cx="40" cy="68" rx="18" ry="4" fill="hsl(271 30% 74% / 0.2)" />
             <path
               d="M40 16c-3.5 0-6.5 3-6.5 6.5s3 6.5 6.5 6.5 6.5-3 6.5-6.5-3-6.5-6.5-6.5z"
@@ -43,7 +58,6 @@ const JourneyBrandedSection = () => {
               fill="none"
               strokeLinecap="round"
             />
-            {/* Small botanical leaf */}
             <path
               d="M54 36c4-8 8-14 14-16-2 8-6 14-14 16z"
               stroke="hsl(271 30% 60%)"
@@ -62,24 +76,69 @@ const JourneyBrandedSection = () => {
         </div>
 
         <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-lavender-foreground/40 mb-4">
-          Your journey
+          Your journey starts here
         </p>
 
         <h2 className="font-serif text-[1.75rem] sm:text-3xl md:text-[2.75rem] text-lavender-foreground leading-[1.2] mb-4">
           A calmer way to begin
         </h2>
 
-        <p className="font-sans text-[14.5px] font-light text-lavender-foreground/50 max-w-md mx-auto leading-relaxed mb-8">
+        <p className="font-sans text-[14.5px] font-light text-lavender-foreground/50 max-w-md mx-auto leading-relaxed mb-10">
           One date is all it takes. We build your personalised pregnancy timeline from there.
         </p>
 
-        <Link
-          to="/due-date-calculator"
-          className="inline-flex items-center gap-2.5 font-sans text-[13.5px] font-medium text-terracotta hover:text-terracotta-hover transition-colors"
-        >
-          Start with your due date
-          <ArrowRight size={14} />
-        </Link>
+        {/* Integrated calculator */}
+        <div className="max-w-sm mx-auto mb-6">
+          <p className="font-sans text-[11px] font-light text-lavender-foreground/40 mb-3">
+            First day of your last period
+          </p>
+          <div className="flex flex-col sm:flex-row items-stretch gap-2.5">
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <button
+                  className={cn(
+                    "flex-1 flex items-center justify-between bg-white/70 backdrop-blur-sm border border-lavender-foreground/10 rounded-xl px-5 py-3.5 font-sans text-[13.5px] font-light transition-all hover:border-lavender-foreground/20 focus:outline-none focus:border-lavender-foreground/25",
+                    date ? "text-lavender-foreground" : "text-lavender-foreground/40"
+                  )}
+                >
+                  <span>{date ? format(date, "d MMMM yyyy") : "Select date"}</span>
+                  <CalendarIcon size={14} className="text-lavender-foreground/30" />
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0 border border-border/50 shadow-soft rounded-xl" align="center">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={(d) => { setDate(d); setOpen(false); }}
+                  disabled={(d) =>
+                    isAfter(d, today) || isBefore(d, addDays(today, -300))
+                  }
+                  initialFocus
+                  className="p-3 pointer-events-auto"
+                />
+              </PopoverContent>
+            </Popover>
+
+            <button
+              onClick={handleStart}
+              disabled={!date}
+              className={cn(
+                "inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-xl px-7 py-3.5 font-sans text-[13.5px] font-medium shadow-cta transition-all",
+                date ? "hover:bg-terracotta-hover" : "opacity-40 cursor-not-allowed"
+              )}
+            >
+              Start
+              <ArrowRight size={14} />
+            </button>
+          </div>
+
+          <p className="font-sans text-[11px] font-light text-lavender-foreground/35 mt-4">
+            Not sure?{" "}
+            <a href="/due-date-calculator" className="underline underline-offset-2 decoration-lavender-foreground/20 hover:text-lavender-foreground/50 transition-colors">
+              Use the full calculator
+            </a>
+          </p>
+        </div>
       </div>
     </section>
   );
@@ -111,14 +170,12 @@ const CornerFrame = ({ position }: { position: "top-left" | "top-right" | "botto
         xmlns="http://www.w3.org/2000/svg"
         className={`w-full h-full ${rotation[position]}`}
       >
-        {/* Corner L-frame with botanical accent */}
         <path
           d="M8 8h40M8 8v40"
           stroke="hsl(271 30% 68%)"
           strokeWidth="0.75"
           opacity="0.35"
         />
-        {/* Small botanical branch */}
         <path
           d="M12 12c8 4 16 12 20 24"
           stroke="hsl(271 30% 68%)"

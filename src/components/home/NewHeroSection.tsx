@@ -21,11 +21,11 @@ const NewHeroSection = () => {
         </video>
 
         {/* Cinematic gradient — stronger left anchor for text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-parchment via-parchment/80 via-40% to-transparent" />
-        {/* Bottom vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-parchment via-parchment/30 via-30% to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-parchment via-parchment/85 via-50% to-parchment/20 md:via-parchment/80 md:via-40% md:to-transparent" />
+        {/* Bottom vignette — stronger on mobile for text area */}
+        <div className="absolute inset-0 bg-gradient-to-t from-parchment via-parchment/50 via-40% to-transparent md:via-parchment/30 md:via-30%" />
         {/* Top vignette for navbar blending */}
-        <div className="absolute inset-0 bg-gradient-to-b from-parchment/50 via-transparent via-20% to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-parchment/60 via-transparent via-20% to-transparent md:from-parchment/50" />
       </div>
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">

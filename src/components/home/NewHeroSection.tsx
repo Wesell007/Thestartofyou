@@ -1,46 +1,56 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import heroImage from "@/assets/home-hero-premium.jpg";
 import heroVideoAsset from "@/assets/home-hero-video-new.mp4.asset.json";
 
 const NewHeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoFailed, setVideoFailed] = useState(false);
+  const [videoState, setVideoState] = useState<"loading" | "playing" | "paused">("loading");
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Force play attempt — handles iOS/Safari autoplay quirks
-    const attemptPlay = () => {
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // Autoplay blocked — show poster fallback
-          setVideoFailed(true);
-        });
+    let cancelled = false;
+
+    const attemptPlay = async () => {
+      try {
+        video.muted = true;
+        await video.play();
+        if (!cancelled) setVideoState("playing");
+      } catch {
+        if (!cancelled) setVideoState("paused");
       }
     };
 
-    // If video is ready, play immediately; otherwise wait for canplay
     if (video.readyState >= 3) {
       attemptPlay();
     } else {
       video.addEventListener("canplay", attemptPlay, { once: true });
     }
 
-    // Fallback timeout — if nothing plays within 4s, show poster
+    // Fallback — if nothing plays within 5s, mark paused
     const timeout = setTimeout(() => {
-      if (video.paused || video.readyState < 2) {
-        setVideoFailed(true);
+      if (!cancelled && video.paused) {
+        setVideoState("paused");
       }
-    }, 4000);
+    }, 5000);
 
     return () => {
+      cancelled = true;
       clearTimeout(timeout);
       video.removeEventListener("canplay", attemptPlay);
     };
+  }, []);
+
+  const handleTapToPlay = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.play()
+      .then(() => setVideoState("playing"))
+      .catch(() => setVideoState("paused"));
   }, []);
 
   return (

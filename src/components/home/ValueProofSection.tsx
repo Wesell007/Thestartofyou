@@ -24,7 +24,7 @@ const ValueProofSection = () => {
               <h3 className="font-serif text-[1.05rem] text-foreground mb-2">
                 {v.title}
               </h3>
-              <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-relaxed max-w-[14rem] mx-auto">
+              <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed max-w-[14rem] mx-auto">
                 {v.desc}
               </p>
             </div>

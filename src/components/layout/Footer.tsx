@@ -17,14 +17,14 @@ const Footer = () => {
       />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl pt-16 sm:pt-24 pb-10 sm:pb-14 relative z-10">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-16">
           {/* Brand */}
-          <div className="col-span-2 sm:col-span-2 md:col-span-1">
+          <div className="col-span-1 sm:col-span-2 md:col-span-1">
             <Link to="/" className="inline-block mb-6 md:mb-8">
               <img
                 src={logoSrc}
                 alt="The Start of You"
-                className="w-[150px] md:w-[190px] h-auto object-contain contrast-[1.1]"
+                className="w-[140px] md:w-[190px] h-auto object-contain contrast-[1.1]"
               />
             </Link>
             <p className="font-sans text-[14px] font-light text-foreground/55 leading-relaxed max-w-xs">
@@ -65,8 +65,8 @@ const Footer = () => {
           </div>
 
           {/* About */}
-          <div className="hidden md:block">
-            <h4 className="font-serif text-foreground text-base mb-6">About</h4>
+          <div>
+            <h4 className="font-serif text-foreground text-base mb-4 md:mb-6">About</h4>
             <ul className="space-y-3">
               {[
                 { to: "/about", label: "Our Story" },

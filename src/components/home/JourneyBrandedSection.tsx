@@ -75,7 +75,7 @@ const JourneyBrandedSection = () => {
           </svg>
         </div>
 
-        <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-lavender-foreground/40 mb-4">
+        <p className="font-sans text-[10.5px] font-medium tracking-[0.25em] uppercase text-lavender-foreground/50 mb-4">
           Your journey starts here
         </p>
 
@@ -83,13 +83,13 @@ const JourneyBrandedSection = () => {
           A calmer way to begin
         </h2>
 
-        <p className="font-sans text-[14.5px] font-light text-lavender-foreground/50 max-w-md mx-auto leading-relaxed mb-10">
+        <p className="font-sans text-[14.5px] font-light text-lavender-foreground/60 max-w-md mx-auto leading-relaxed mb-10">
           One date is all it takes. We build your personalised pregnancy timeline from there.
         </p>
 
         {/* Integrated calculator */}
         <div className="max-w-sm mx-auto mb-6">
-          <p className="font-sans text-[11px] font-light text-lavender-foreground/40 mb-3">
+          <p className="font-sans text-[11.5px] font-light text-lavender-foreground/50 mb-3">
             First day of your last period
           </p>
           <div className="flex flex-col sm:flex-row items-stretch gap-2.5">
@@ -132,7 +132,7 @@ const JourneyBrandedSection = () => {
             </button>
           </div>
 
-          <p className="font-sans text-[11px] font-light text-lavender-foreground/35 mt-4">
+          <p className="font-sans text-[11.5px] font-light text-lavender-foreground/45 mt-4">
             Not sure?{" "}
             <a href="/due-date-calculator" className="underline underline-offset-2 decoration-lavender-foreground/20 hover:text-lavender-foreground/50 transition-colors">
               Use the full calculator

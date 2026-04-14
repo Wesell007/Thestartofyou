@@ -8,24 +8,17 @@ const NewHeroSection = () => {
     <section className="relative min-h-[92vh] md:min-h-screen overflow-hidden flex items-end md:items-center">
       {/* Video background (desktop) / Still image (mobile fallback) */}
       <div className="absolute inset-0">
-        {/* Video — desktop only */}
+        {/* Video — all viewports, still image poster as fallback */}
         <video
           autoPlay
           muted
           loop
           playsInline
           poster={heroImage}
-          className="hidden md:block w-full h-full object-cover"
+          className="w-full h-full object-cover object-[50%_30%] md:object-center"
         >
           <source src={heroVideoAsset.url} type="video/mp4" />
         </video>
-        {/* Still — mobile */}
-        <img
-          src={heroImage}
-          alt=""
-          aria-hidden="true"
-          className="md:hidden w-full h-full object-cover object-[50%_30%]"
-        />
 
         {/* Cinematic gradient — stronger left anchor for text */}
         <div className="absolute inset-0 bg-gradient-to-r from-parchment via-parchment/80 via-40% to-transparent" />

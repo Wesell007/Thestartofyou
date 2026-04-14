@@ -16,15 +16,16 @@ const milestones = [
   { week: 34, label: "" },
   { week: 37, label: "" },
   { week: 40, label: "Week 40" },
+  { week: 42, label: "42" },
 ];
 
 const trimesterBoundaries = [
   { label: "First Trimester", sub: "Weeks 1–13", start: 1, end: 13, color: "bg-sage-bg/60", accent: "border-sage/25" },
   { label: "Second Trimester", sub: "Weeks 14–26", start: 14, end: 26, color: "bg-lavender-bg/60", accent: "border-lavender/25" },
-  { label: "Third Trimester", sub: "Weeks 27–40", start: 27, end: 40, color: "bg-parchment-deeper/60", accent: "border-terracotta/15" },
+  { label: "Third Trimester", sub: "Weeks 27–42", start: 27, end: 42, color: "bg-parchment-deeper/60", accent: "border-terracotta/15" },
 ];
 
-const getWeekPercent = (week: number) => ((week - 1) / 39) * 100;
+const getWeekPercent = (week: number) => ((week - 1) / 41) * 100;
 
 const TimelineSection = () => {
   return (

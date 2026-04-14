@@ -713,7 +713,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                   <div className="border-t border-border/25 pt-4 flex items-center gap-3 mb-5">
                     <div className="w-2 h-2 rounded-full bg-terracotta shrink-0" />
                     <p className="font-sans text-xs font-light text-foreground/70">
-                      You are at week {result.currentWeek} of 40 · {result.trimester}
+                      You are at week {result.currentWeek} of 40+ · {result.trimester}
                     </p>
                   </div>
 

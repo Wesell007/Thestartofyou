@@ -10,7 +10,7 @@ interface Props {
 }
 
 const WeekHero = ({ data, prevWeek, nextWeek }: Props) => {
-  const weeksToGo = 40 - data.week;
+  const weeksToGo = Math.max(0, 40 - data.week);
 
   return (
     <section className="relative overflow-hidden">
@@ -79,7 +79,7 @@ const WeekHero = ({ data, prevWeek, nextWeek }: Props) => {
               </span>
             </div>
             <p className="font-sans text-[11px] font-light text-muted-foreground text-center">
-              {weeksToGo === 0 ? "Due this week!" : `Week${weeksToGo === 1 ? "" : "s"} to go!`}
+              {data.week >= 40 ? "Past due date" : weeksToGo === 1 ? "1 week to go!" : `${weeksToGo} weeks to go!`}
             </p>
           </div>
         </div>
@@ -89,7 +89,7 @@ const WeekHero = ({ data, prevWeek, nextWeek }: Props) => {
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl pb-12">
         <div className="text-center">
           <p className="stage-label mb-3">
-            {data.trimesterLabel} · Week {data.week} of 40 · {data.keyFocus}
+            {data.trimesterLabel} · Week {data.week} of 40+ · {data.keyFocus}
           </p>
           <p className="font-serif italic text-sm text-muted-foreground max-w-md mx-auto">
             {data.reassurance}

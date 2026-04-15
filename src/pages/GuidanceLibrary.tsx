@@ -114,26 +114,26 @@ function CarouselRow({ articles, accent }: { articles: ArticleData[]; accent: st
 
   return (
     <div className="relative group/carousel">
-      {/* Left arrow */}
+      {/* Scroll arrows — desktop only */}
       <button
         onClick={() => scroll("left")}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-10 hidden md:flex w-9 h-9 items-center justify-center rounded-full bg-card border border-border/40 shadow-soft text-muted-foreground hover:text-foreground opacity-0 group-hover/carousel:opacity-100 transition-opacity"
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-10 hidden lg:flex w-9 h-9 items-center justify-center rounded-full bg-card border border-border/40 shadow-soft text-muted-foreground hover:text-foreground opacity-0 group-hover/carousel:opacity-100 transition-opacity"
         aria-label="Scroll left"
       >
         ←
       </button>
-      {/* Right arrow */}
       <button
         onClick={() => scroll("right")}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-10 hidden md:flex w-9 h-9 items-center justify-center rounded-full bg-card border border-border/40 shadow-soft text-muted-foreground hover:text-foreground opacity-0 group-hover/carousel:opacity-100 transition-opacity"
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-10 hidden lg:flex w-9 h-9 items-center justify-center rounded-full bg-card border border-border/40 shadow-soft text-muted-foreground hover:text-foreground opacity-0 group-hover/carousel:opacity-100 transition-opacity"
         aria-label="Scroll right"
       >
         →
       </button>
 
+      {/* Mobile/tablet: horizontal scroll. Desktop: 3-col grid */}
       <div
         ref={scrollRef}
-        className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2 md:grid md:grid-cols-3 md:overflow-visible md:snap-none"
+        className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2 lg:grid lg:grid-cols-3 lg:overflow-visible lg:snap-none"
       >
         {articles.map((a) => (
           <Card key={a.slug} article={a} accent={accent} />

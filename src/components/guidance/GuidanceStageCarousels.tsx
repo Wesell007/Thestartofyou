@@ -270,7 +270,7 @@ const StageSection = ({ stage }: { stage: StageConfig }) => {
 /* ── Main export ──────────────────────────────────────────────── */
 
 const GuidanceStageCarousels = () => (
-  <section className="bg-parchment">
+  <section className="bg-parchment overflow-visible" style={{ minHeight: '200px' }}>
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
       {/* Section intro */}
       <div className="pt-16 sm:pt-20 md:pt-28 mb-2">

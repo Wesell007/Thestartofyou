@@ -86,7 +86,7 @@ const stages: StageConfig[] = [
 const ArticleCard = ({ article }: { article: ArticleData }) => (
   <Link
     to={`/articles/${article.slug}`}
-    className="group flex-shrink-0 w-[260px] sm:w-[280px] md:w-[300px] snap-start"
+    className="group block flex-shrink-0 w-[260px] sm:w-[280px] md:w-[300px] snap-start"
   >
     <div className="rounded-2xl bg-card border border-border/30 hover:border-sage/20 hover:shadow-card-hover transition-all duration-300 overflow-hidden h-full flex flex-col">
       {/* Colour accent strip */}

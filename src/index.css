@@ -299,6 +299,15 @@
   .page-ending {
     @apply relative bg-parchment py-14 sm:py-20 md:py-28;
   }
+  /* Hide scrollbar for horizontal carousels */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   .page-ending::before {
     content: '';
     @apply absolute top-0 left-0 right-0 h-px;

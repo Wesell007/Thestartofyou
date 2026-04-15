@@ -29,7 +29,7 @@ const topicImages: Record<string, string> = {
 function getCardImage(article: ArticleData): string {
   const topic = article.topics?.[0];
   if (topic && topicImages[topic]) return topicImages[topic];
-  return imgSymptoms; // fallback
+  return imgSymptoms;
 }
 
 /* ── Stage config ───────────────────────────────────── */
@@ -59,9 +59,8 @@ function Card({ article, accent }: { article: ArticleData; accent: string }) {
   return (
     <Link
       to={`/articles/${article.slug}`}
-      className="group block min-w-[260px] sm:min-w-[280px] md:min-w-0 w-[280px] sm:w-[300px] md:w-auto rounded-2xl bg-card border border-border/30 hover:border-sage/20 hover:shadow-card-hover transition-all duration-300 overflow-hidden flex-shrink-0 snap-start"
+      className="group block rounded-2xl bg-card border border-border/30 hover:border-sage/20 hover:shadow-card-hover transition-all duration-300 overflow-hidden"
     >
-      {/* Image */}
       <div className="relative h-36 sm:h-40 overflow-hidden">
         <img
           src={img}
@@ -72,14 +71,18 @@ function Card({ article, accent }: { article: ArticleData; accent: string }) {
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
-        {/* Stage accent line */}
-        <div className="absolute bottom-0 left-0 w-full h-[3px]" style={{ background: `hsl(${accent})` }} />
+        <div
+          className="absolute bottom-0 left-0 w-full h-[3px]"
+          style={{ background: `hsl(${accent})` }}
+        />
       </div>
-
       <div className="p-4 sm:p-5">
         <div className="flex flex-wrap gap-1.5 mb-2.5">
           {article.topics?.slice(0, 2).map((t) => (
-            <span key={t} className="px-2 py-0.5 rounded-full bg-muted/60 text-muted-foreground text-[9px] font-sans tracking-[0.1em] uppercase">
+            <span
+              key={t}
+              className="px-2 py-0.5 rounded-full bg-muted/60 text-muted-foreground text-[9px] font-sans tracking-[0.1em] uppercase"
+            >
               {t.replace(/-/g, " ")}
             </span>
           ))}
@@ -91,7 +94,9 @@ function Card({ article, accent }: { article: ArticleData; accent: string }) {
           {article.metaDescription}
         </p>
         {article.reviewedBy && (
-          <p className="font-sans text-[10px] text-muted-foreground/50 mb-2">✔ Reviewed by {article.reviewedBy}</p>
+          <p className="font-sans text-[10px] text-muted-foreground/50 mb-2">
+            ✔ Reviewed by {article.reviewedBy}
+          </p>
         )}
         <span className="inline-flex items-center gap-1.5 text-muted-foreground/40 group-hover:text-sage group-hover:gap-2 transition-all font-sans text-xs">
           Read more <span className="font-serif text-base">→</span>
@@ -101,94 +106,90 @@ function Card({ article, accent }: { article: ArticleData; accent: string }) {
   );
 }
 
-/* ── Carousel with scroll arrows ────────────────────── */
-
-function CarouselRow({ articles, accent }: { articles: ArticleData[]; accent: string }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    const amount = 320;
-    scrollRef.current.scrollBy({ left: dir === "left" ? -amount : amount, behavior: "smooth" });
-  };
-
-  return (
-    <div className="relative group/carousel">
-      {/* Scroll arrows — desktop only */}
-      <button
-        onClick={() => scroll("left")}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-10 hidden lg:flex w-9 h-9 items-center justify-center rounded-full bg-card border border-border/40 shadow-soft text-muted-foreground hover:text-foreground opacity-0 group-hover/carousel:opacity-100 transition-opacity"
-        aria-label="Scroll left"
-      >
-        ←
-      </button>
-      <button
-        onClick={() => scroll("right")}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-10 hidden lg:flex w-9 h-9 items-center justify-center rounded-full bg-card border border-border/40 shadow-soft text-muted-foreground hover:text-foreground opacity-0 group-hover/carousel:opacity-100 transition-opacity"
-        aria-label="Scroll right"
-      >
-        →
-      </button>
-
-      {/* Mobile/tablet: horizontal scroll. Desktop: 3-col grid */}
-      <div
-        ref={scrollRef}
-        className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2 lg:grid lg:grid-cols-3 lg:overflow-visible lg:snap-none"
-      >
-        {articles.map((a) => (
-          <Card key={a.slug} article={a} accent={accent} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 /* ── Stage section ──────────────────────────────────── */
 
-function StageSection({ stage }: { stage: typeof stages[0] }) {
+function StageSection({ stage }: { stage: (typeof stages)[0] }) {
   const [active, setActive] = useState<string | null>(null);
-  const all = useMemo(() => getArticlesByJourney(stage.filter), [stage.filter]);
+  const all = useMemo(
+    () => getArticlesByJourney(stage.filter),
+    [stage.filter]
+  );
   const filtered = useMemo(() => {
     if (!active) return all;
     return all.filter((a) => a.topics?.includes(active));
   }, [active, all]);
-  const validChips = stage.chips.filter((c) => all.some((a) => a.topics?.includes(c)));
+  const validChips = stage.chips.filter((c) =>
+    all.some((a) => a.topics?.includes(c))
+  );
 
   if (all.length === 0) return null;
 
   return (
     <div className="py-10 sm:py-12 md:py-14">
-      {/* Section header */}
       <div className="flex items-end justify-between mb-4 sm:mb-5">
         <div className="flex items-center gap-3">
-          <div className="w-1 h-6 rounded-full" style={{ background: `hsl(${stage.accent})` }} />
-          <h2 className="font-serif text-xl sm:text-2xl md:text-[1.7rem] text-foreground leading-tight">{stage.title}</h2>
+          <div
+            className="w-1 h-6 rounded-full"
+            style={{ background: `hsl(${stage.accent})` }}
+          />
+          <h2 className="font-serif text-xl sm:text-2xl md:text-[1.7rem] text-foreground leading-tight">
+            {stage.title}
+          </h2>
         </div>
-        <Link to={stage.href} className="hidden sm:inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors">
+        <Link
+          to={stage.href}
+          className="hidden sm:inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors"
+        >
           View all <span>→</span>
         </Link>
       </div>
 
-      {/* Topic chips */}
       {validChips.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-5 sm:mb-6">
-          <button onClick={() => setActive(null)} className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 ${!active ? "bg-sage text-white shadow-sm" : "bg-card text-muted-foreground hover:text-foreground border border-border/40"}`}>All</button>
+          <button
+            onClick={() => setActive(null)}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 ${
+              !active
+                ? "bg-sage text-white shadow-sm"
+                : "bg-card text-muted-foreground hover:text-foreground border border-border/40"
+            }`}
+          >
+            All
+          </button>
           {validChips.map((c) => (
-            <button key={c} onClick={() => setActive(active === c ? null : c)} className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 ${active === c ? "bg-sage text-white shadow-sm" : "bg-card text-muted-foreground hover:text-foreground border border-border/40"}`}>
-              {c.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())}
+            <button
+              key={c}
+              onClick={() => setActive(active === c ? null : c)}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 ${
+                active === c
+                  ? "bg-sage text-white shadow-sm"
+                  : "bg-card text-muted-foreground hover:text-foreground border border-border/40"
+              }`}
+            >
+              {c
+                .replace(/-/g, " ")
+                .replace(/\b\w/g, (l) => l.toUpperCase())}
             </button>
           ))}
         </div>
       )}
 
-      {/* Cards */}
       {filtered.length > 0 ? (
-        <CarouselRow articles={filtered.slice(0, 6)} accent={stage.accent} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filtered.slice(0, 6).map((a) => (
+            <Card key={a.slug} article={a} accent={stage.accent} />
+          ))}
+        </div>
       ) : (
-        <p className="font-sans text-sm text-muted-foreground/60 py-8">No articles match this topic yet.</p>
+        <p className="font-sans text-sm text-muted-foreground/60 py-8">
+          No articles match this topic yet.
+        </p>
       )}
 
-      <Link to={stage.href} className="sm:hidden inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors mt-3">
+      <Link
+        to={stage.href}
+        className="sm:hidden inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors mt-3"
+      >
         View all {stage.title.toLowerCase()} guidance <span>→</span>
       </Link>
     </div>
@@ -213,7 +214,8 @@ const GuidanceLibrary = () => {
                 Guidance for every part of your journey
               </h2>
               <p className="font-sans text-sm font-light text-muted-foreground mt-2.5 max-w-lg leading-relaxed">
-                Find trusted answers organised around the stage you're in right now.
+                Find trusted answers organised around the stage you're in right
+                now.
               </p>
             </div>
             {stages.map((stage, i) => (

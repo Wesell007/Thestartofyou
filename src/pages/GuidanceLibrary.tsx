@@ -65,20 +65,21 @@ function ArticleCard({ article, accent, index }: { article: ArticleData; accent:
   return (
     <Link
       to={`/articles/${article.slug}`}
-      className="group flex-shrink-0 w-[280px] sm:w-[300px] md:w-[320px] rounded-2xl bg-card border border-border/30 hover:border-sage/20 hover:shadow-card-hover transition-all duration-300 overflow-hidden snap-start"
-      style={{ display: 'block' }}
+      className="group block flex-shrink-0 w-[280px] sm:w-[300px] md:w-[320px] rounded-2xl bg-card border border-border/30 hover:border-sage/20 hover:shadow-card-hover transition-all duration-300 overflow-hidden snap-start"
     >
-      <div className="relative" style={{ height: '160px' }}>
+      <div className="relative h-40 overflow-hidden">
         <img
           src={img}
           alt={article.title}
           loading="lazy"
+          width={640}
+          height={320}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
         <div
-          className="absolute bottom-0 left-0 w-full"
-          style={{ height: '3px', background: `hsl(${accent})` }}
+          className="absolute bottom-0 left-0 w-full h-[3px]"
+          style={{ background: `hsl(${accent})` }}
         />
       </div>
       <div className="p-4 sm:p-5">
@@ -86,26 +87,25 @@ function ArticleCard({ article, accent, index }: { article: ArticleData; accent:
           {article.topics?.slice(0, 2).map((t) => (
             <span
               key={t}
-              className="px-2 py-0.5 rounded-full bg-muted/60 text-muted-foreground"
-              style={{ fontSize: '9px', fontFamily: 'var(--font-sans)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
+              className="px-2 py-0.5 rounded-full bg-muted/60 text-muted-foreground text-[9px] font-sans tracking-[0.1em] uppercase"
             >
               {t.replace(/-/g, " ")}
             </span>
           ))}
         </div>
-        <h3 className="font-serif text-foreground leading-snug mb-2 group-hover:text-sage transition-colors line-clamp-2" style={{ fontSize: '15px' }}>
+        <h3 className="font-serif text-[14px] sm:text-[15px] text-foreground leading-snug mb-2 group-hover:text-sage transition-colors line-clamp-2">
           {article.title}
         </h3>
-        <p className="font-sans text-muted-foreground leading-relaxed line-clamp-2 mb-3" style={{ fontSize: '12px', fontWeight: 300 }}>
+        <p className="font-sans text-xs font-light text-muted-foreground leading-relaxed line-clamp-2 mb-3">
           {article.metaDescription}
         </p>
         {article.reviewedBy && (
-          <p className="font-sans text-muted-foreground/50 mb-2" style={{ fontSize: '10px' }}>
+          <p className="font-sans text-[10px] text-muted-foreground/50 mb-2">
             ✔ Reviewed by {article.reviewedBy}
           </p>
         )}
-        <span className="inline-flex items-center gap-1.5 text-muted-foreground/40 group-hover:text-sage group-hover:gap-2 transition-all font-sans" style={{ fontSize: '12px' }}>
-          Read more <span className="font-serif" style={{ fontSize: '16px' }}>→</span>
+        <span className="inline-flex items-center gap-1.5 text-muted-foreground/40 group-hover:text-sage group-hover:gap-2 transition-all font-sans text-xs">
+          Read more <span className="font-serif text-base">→</span>
         </span>
       </div>
     </Link>
@@ -133,12 +133,12 @@ function ScrollRow({ children }: { children: React.ReactNode }) {
   }, [checkScroll]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className="relative group/scroll">
       {canLeft && (
         <button
           onClick={() => scroll("left")}
           aria-label="Scroll left"
-          style={{ position: 'absolute', left: '-16px', top: '50%', transform: 'translateY(-50%)', zIndex: 10, width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.9)', border: '1px solid rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 shadow-md flex items-center justify-center text-foreground/60 hover:text-foreground hover:shadow-lg transition-all -ml-4 opacity-0 group-hover/scroll:opacity-100"
         >
           ‹
         </button>
@@ -147,17 +147,18 @@ function ScrollRow({ children }: { children: React.ReactNode }) {
         <button
           onClick={() => scroll("right")}
           aria-label="Scroll right"
-          style={{ position: 'absolute', right: '-16px', top: '50%', transform: 'translateY(-50%)', zIndex: 10, width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.9)', border: '1px solid rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 shadow-md flex items-center justify-center text-foreground/60 hover:text-foreground hover:shadow-lg transition-all -mr-4 opacity-0 group-hover/scroll:opacity-100"
         >
           ›
         </button>
       )}
-
+      {canRight && (
+        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-parchment to-transparent z-[5] pointer-events-none" />
+      )}
       <div
         ref={ref}
         onScroll={checkScroll}
-        style={{ display: 'flex', gap: '16px', overflowX: 'auto', scrollSnapType: 'x mandatory', paddingBottom: '8px' }}
-        className="scrollbar-hide"
+        className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2 -mx-1 px-1"
       >
         {children}
       </div>
@@ -177,25 +178,24 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
   if (all.length === 0) return null;
 
   return (
-    <div style={{ paddingTop: '40px', paddingBottom: '40px' }}>
-      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '20px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ width: '4px', height: '24px', borderRadius: '4px', background: `hsl(${stage.accent})` }} />
-          <h2 className="font-serif text-foreground" style={{ fontSize: '1.7rem', lineHeight: 1.2 }}>
+    <div className="py-10 sm:py-12 md:py-14">
+      <div className="flex items-end justify-between mb-4 sm:mb-5">
+        <div className="flex items-center gap-3">
+          <div className="w-1 h-6 rounded-full" style={{ background: `hsl(${stage.accent})` }} />
+          <h2 className="font-serif text-xl sm:text-2xl md:text-[1.7rem] text-foreground leading-tight">
             {stage.title}
           </h2>
         </div>
-        <Link to={stage.href} className="hidden sm:inline-flex items-center gap-1.5 font-sans text-sage hover:text-sage-dark transition-colors" style={{ fontSize: '12px' }}>
+        <Link to={stage.href} className="hidden sm:inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors">
           View all <span>→</span>
         </Link>
       </div>
 
       {validChips.length > 0 && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
+        <div className="flex flex-wrap gap-2 mb-5 sm:mb-6">
           <button
             onClick={() => setActive(null)}
-            className="font-sans transition-all duration-200"
-            style={{ padding: '6px 14px', borderRadius: '9999px', fontSize: '12px', background: !active ? 'hsl(var(--sage))' : 'hsl(var(--card))', color: !active ? 'white' : 'hsl(var(--muted-foreground))', border: active ? '1px solid hsl(var(--border) / 0.4)' : 'none', cursor: 'pointer' }}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 cursor-pointer ${!active ? "bg-sage text-white shadow-sm" : "bg-card text-muted-foreground hover:text-foreground border border-border/40"}`}
           >
             All
           </button>
@@ -203,8 +203,7 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
             <button
               key={c}
               onClick={() => setActive(active === c ? null : c)}
-              className="font-sans transition-all duration-200"
-              style={{ padding: '6px 14px', borderRadius: '9999px', fontSize: '12px', background: active === c ? 'hsl(var(--sage))' : 'hsl(var(--card))', color: active === c ? 'white' : 'hsl(var(--muted-foreground))', border: active !== c ? '1px solid hsl(var(--border) / 0.4)' : 'none', cursor: 'pointer' }}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 cursor-pointer ${active === c ? "bg-sage text-white shadow-sm" : "bg-card text-muted-foreground hover:text-foreground border border-border/40"}`}
             >
               {c.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())}
             </button>
@@ -219,12 +218,12 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
           ))}
         </ScrollRow>
       ) : (
-        <p className="font-sans text-muted-foreground/60" style={{ padding: '32px 0', fontSize: '14px' }}>
+        <p className="font-sans text-sm text-muted-foreground/60 py-8">
           No articles match this topic yet.
         </p>
       )}
 
-      <Link to={stage.href} className="sm:hidden inline-flex items-center gap-1.5 font-sans text-sage hover:text-sage-dark transition-colors" style={{ fontSize: '12px', marginTop: '12px' }}>
+      <Link to={stage.href} className="sm:hidden inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors mt-3">
         View all {stage.title.toLowerCase()} guidance <span>→</span>
       </Link>
     </div>
@@ -238,21 +237,21 @@ const GuidanceLibrary = () => {
       <main>
         <GuidanceHero />
 
-        <section className="bg-parchment" style={{ position: 'relative', zIndex: 10 }}>
-          <div className="container mx-auto" style={{ maxWidth: '64rem', paddingLeft: '20px', paddingRight: '20px', paddingTop: '40px', paddingBottom: '64px' }}>
-            <div style={{ marginBottom: '32px' }}>
-              <div className="editorial-rule-left" style={{ marginBottom: '16px' }} />
-              <p className="stage-label" style={{ marginBottom: '8px' }}>Browse by stage</p>
-              <h2 className="font-serif text-foreground" style={{ fontSize: '1.875rem', lineHeight: 1.2, maxWidth: '28rem' }}>
+        <section className="relative z-10 bg-parchment pt-10 sm:pt-14 md:pt-16 pb-16 sm:pb-20 md:pb-28">
+          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
+            <div className="mb-6 sm:mb-8">
+              <div className="editorial-rule-left mb-4" />
+              <p className="stage-label mb-2">Browse by stage</p>
+              <h2 className="font-serif text-xl sm:text-2xl md:text-3xl text-foreground leading-tight max-w-md">
                 Guidance for every part of your journey
               </h2>
-              <p className="font-sans text-muted-foreground" style={{ fontSize: '14px', fontWeight: 300, marginTop: '10px', maxWidth: '32rem', lineHeight: 1.6 }}>
+              <p className="font-sans text-sm font-light text-muted-foreground mt-2.5 max-w-lg leading-relaxed">
                 Find trusted answers organised around the stage you're in right now.
               </p>
             </div>
             {stages.map((stage, i) => (
               <div key={stage.key}>
-                {i > 0 && <div style={{ borderTop: '1px solid hsl(var(--border) / 0.2)' }} />}
+                {i > 0 && <div className="border-t border-border/20" />}
                 <StageSection stage={stage} />
               </div>
             ))}

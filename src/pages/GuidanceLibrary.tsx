@@ -20,8 +20,6 @@ import imgReflection from "@/assets/guidance-card-reflection.jpg";
 import imgMilestones from "@/assets/guidance-card-milestones.jpg";
 import imgBonding from "@/assets/guidance-card-bonding.jpg";
 
-/* ── Image pool — rotated per-card to avoid duplication ──── */
-
 const imagePool = [
   imgSymptoms, imgDevelopment, imgBody, imgEmotional,
   imgPractical, imgTimelines, imgSafety, imgWellness,
@@ -44,8 +42,6 @@ function getCardImage(article: ArticleData, index: number): string {
   return imagePool[index % imagePool.length];
 }
 
-/* ── Stage config ───────────────────────────────────────── */
-
 const stages = [
   { key: "ttc", title: "Trying to conceive", filter: "trying-to-conceive", href: "/trying-to-conceive",
     accent: "var(--stage-ttc-accent)",
@@ -64,22 +60,20 @@ const stages = [
     chips: ["development", "timelines", "practical-preparation"] },
 ];
 
-/* ── Horizontal carousel card ──────────────────────────── */
-
-function Card({ article, accent, index }: { article: ArticleData; accent: string; index: number }) {
+function ArticleCard({ article, accent, index }: { article: ArticleData; accent: string; index: number }) {
   const img = getCardImage(article, index);
   return (
     <Link
       to={`/articles/${article.slug}`}
-      className="group flex-shrink-0 w-[280px] sm:w-[300px] md:w-[320px] block rounded-2xl bg-card border border-border/30 hover:border-sage/20 hover:shadow-card-hover transition-all duration-300 overflow-hidden snap-start"
+      className="group block flex-shrink-0 w-[280px] sm:w-[300px] md:w-[320px] rounded-2xl bg-card border border-border/30 hover:border-sage/20 hover:shadow-card-hover transition-all duration-300 overflow-hidden snap-start"
     >
       <div className="relative h-40 overflow-hidden">
         <img
           src={img}
           alt={article.title}
           loading="lazy"
-          width={768}
-          height={512}
+          width={640}
+          height={320}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
@@ -118,8 +112,6 @@ function Card({ article, accent, index }: { article: ArticleData; accent: string
   );
 }
 
-/* ── Scroll arrows ─────────────────────────────────────── */
-
 function ScrollRow({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const [canLeft, setCanLeft] = useState(false);
@@ -142,31 +134,27 @@ function ScrollRow({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="relative group/scroll">
-      {/* Left arrow */}
       {canLeft && (
         <button
           onClick={() => scroll("left")}
           aria-label="Scroll left"
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 shadow-md flex items-center justify-center text-foreground/60 hover:text-foreground hover:shadow-lg transition-all -ml-3 sm:-ml-4 opacity-0 group-hover/scroll:opacity-100"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 shadow-md flex items-center justify-center text-foreground/60 hover:text-foreground hover:shadow-lg transition-all -ml-4 opacity-0 group-hover/scroll:opacity-100"
         >
           ‹
         </button>
       )}
-      {/* Right arrow */}
       {canRight && (
         <button
           onClick={() => scroll("right")}
           aria-label="Scroll right"
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 shadow-md flex items-center justify-center text-foreground/60 hover:text-foreground hover:shadow-lg transition-all -mr-3 sm:-mr-4 opacity-0 group-hover/scroll:opacity-100"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 border border-border/40 shadow-md flex items-center justify-center text-foreground/60 hover:text-foreground hover:shadow-lg transition-all -mr-4 opacity-0 group-hover/scroll:opacity-100"
         >
           ›
         </button>
       )}
-      {/* Right fade */}
       {canRight && (
         <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-parchment to-transparent z-[5] pointer-events-none" />
       )}
-
       <div
         ref={ref}
         onScroll={checkScroll}
@@ -177,8 +165,6 @@ function ScrollRow({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-
-/* ── Stage section ──────────────────────────────────────── */
 
 function StageSection({ stage }: { stage: (typeof stages)[0] }) {
   const [active, setActive] = useState<string | null>(null);
@@ -193,7 +179,6 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
 
   return (
     <div className="py-10 sm:py-12 md:py-14">
-      {/* Heading row */}
       <div className="flex items-end justify-between mb-4 sm:mb-5">
         <div className="flex items-center gap-3">
           <div className="w-1 h-6 rounded-full" style={{ background: `hsl(${stage.accent})` }} />
@@ -206,12 +191,11 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
         </Link>
       </div>
 
-      {/* Topic chips */}
       {validChips.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-5 sm:mb-6">
           <button
             onClick={() => setActive(null)}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 ${!active ? "bg-sage text-white shadow-sm" : "bg-card text-muted-foreground hover:text-foreground border border-border/40"}`}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 cursor-pointer ${!active ? "bg-sage text-white shadow-sm" : "bg-card text-muted-foreground hover:text-foreground border border-border/40"}`}
           >
             All
           </button>
@@ -219,7 +203,7 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
             <button
               key={c}
               onClick={() => setActive(active === c ? null : c)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 ${active === c ? "bg-sage text-white shadow-sm" : "bg-card text-muted-foreground hover:text-foreground border border-border/40"}`}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 cursor-pointer ${active === c ? "bg-sage text-white shadow-sm" : "bg-card text-muted-foreground hover:text-foreground border border-border/40"}`}
             >
               {c.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())}
             </button>
@@ -227,11 +211,10 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
         </div>
       )}
 
-      {/* Horizontal carousel */}
       {filtered.length > 0 ? (
         <ScrollRow>
           {filtered.map((a, i) => (
-            <Card key={a.slug} article={a} accent={stage.accent} index={i} />
+            <ArticleCard key={a.slug} article={a} accent={stage.accent} index={i} />
           ))}
         </ScrollRow>
       ) : (
@@ -247,8 +230,6 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
   );
 }
 
-/* ── Page ────────────────────────────────────────────────── */
-
 const GuidanceLibrary = () => {
   return (
     <div className="min-h-screen bg-parchment">
@@ -256,7 +237,7 @@ const GuidanceLibrary = () => {
       <main>
         <GuidanceHero />
 
-        <section className="relative z-10 bg-parchment pt-10 sm:pt-14 md:pt-16 pb-16 sm:pb-20 md:pb-28" style={{ minHeight: '400px' }}>
+        <section className="relative z-10 bg-parchment pt-10 sm:pt-14 md:pt-16 pb-16 sm:pb-20 md:pb-28">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
             <div className="mb-6 sm:mb-8">
               <div className="editorial-rule-left mb-4" />

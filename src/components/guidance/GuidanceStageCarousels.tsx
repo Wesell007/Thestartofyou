@@ -81,9 +81,11 @@ function StageSection({ stage }: { stage: StageConfig }) {
       )}
 
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filtered.slice(0, 6).map((a) => (
-            <ArticleCard key={a.slug} article={a} />
+        <div className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2 -mx-1 px-1">
+          {filtered.slice(0, 8).map((a) => (
+            <div key={a.slug} className="flex-shrink-0 w-[280px] sm:w-[300px] md:w-[320px] snap-start">
+              <ArticleCard article={a} />
+            </div>
           ))}
         </div>
       ) : (

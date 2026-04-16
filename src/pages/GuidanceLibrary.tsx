@@ -205,7 +205,7 @@ const GuidanceLibrary = () => {
       <main>
         <GuidanceHero />
 
-        <section className="bg-parchment pt-10 sm:pt-14 md:pt-16 pb-16 sm:pb-20 md:pb-28">
+        <section className="bg-parchment pt-10 sm:pt-14 md:pt-16 pb-16 sm:pb-20 md:pb-28" style={{ border: '3px solid red' }}>
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
             <div className="mb-6 sm:mb-8">
               <div className="editorial-rule-left mb-4" />

@@ -251,13 +251,13 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
 
 const GuidanceLibrary = () => {
   return (
-    <div className="min-h-screen bg-parchment">
+    <div className="min-h-screen bg-parchment" style={{ overflow: 'visible' }}>
       <Navbar />
-      <main>
+      <main style={{ overflow: 'visible' }}>
         <GuidanceHero />
 
-        <section className="bg-parchment pt-10 sm:pt-14 md:pt-16 pb-16 sm:pb-20 md:pb-28">
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
+        <div className="bg-parchment" style={{ position: 'relative', zIndex: 20 }}>
+          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pt-10 sm:pt-14 md:pt-16 pb-16 sm:pb-20 md:pb-28">
             <div className="mb-6 sm:mb-8">
               <div className="editorial-rule-left mb-4" />
               <p className="stage-label mb-2">Browse by stage</p>
@@ -275,7 +275,7 @@ const GuidanceLibrary = () => {
               </div>
             ))}
           </div>
-        </section>
+        </div>
 
         <GuidanceAIBridge />
       </main>

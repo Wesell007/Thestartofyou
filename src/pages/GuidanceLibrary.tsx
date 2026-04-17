@@ -164,7 +164,7 @@ function ScrollRow({ children }: { children: React.ReactNode }) {
   );
 }
 
-function StageSection({ stage }: { stage: (typeof stages)[0] }) {
+function StageSection({ stage, stageIndex }: { stage: (typeof stages)[0]; stageIndex: number }) {
   const [active, setActive] = useState<string | null>(null);
   const all = useMemo(() => getArticlesByJourney(stage.filter), [stage.filter]);
   const filtered = useMemo(() => {
@@ -172,6 +172,24 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
     return all.filter((a) => a.topics?.includes(active));
   }, [active, all]);
   const validChips = stage.chips.filter((c) => all.some((a) => a.topics?.includes(c)));
+
+  // Pre-assign images so the row never duplicates an image until the pool is exhausted.
+  const cardImages = useMemo(() => {
+    const used = new Set<string>();
+    return filtered.map((a, i) => {
+      // Try a few hash-derived candidates before falling back to the first unused image.
+      for (let attempt = 0; attempt < imagePool.length; attempt++) {
+        const candidate = getCardImage(a, i + attempt, stageIndex);
+        if (!used.has(candidate)) {
+          used.add(candidate);
+          return candidate;
+        }
+      }
+      // Pool fully used (more articles than images) — start re-using.
+      const fallback = imagePool[(hashSlug(a.slug) + i) % imagePool.length];
+      return fallback;
+    });
+  }, [filtered, stageIndex]);
 
   if (all.length === 0) return null;
 
@@ -184,7 +202,7 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
             {stage.title}
           </h2>
         </div>
-        <Link to={stage.href} className="hidden sm:inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors">
+        <Link to={stage.href} className="hidden sm:inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium text-sage hover:text-sage-dark transition-colors">
           View all <span>→</span>
         </Link>
       </div>
@@ -193,7 +211,7 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
         <div className="flex flex-wrap gap-2 mb-5 sm:mb-6">
           <button
             onClick={() => setActive(null)}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 cursor-pointer ${!active ? "bg-sage text-white shadow-sm" : "bg-card text-muted-foreground hover:text-foreground border border-border/40"}`}
+            className={`px-3.5 py-1.5 rounded-full text-[12.5px] font-sans transition-all duration-200 cursor-pointer ${!active ? "bg-sage text-white shadow-sm font-medium" : "bg-card text-foreground/75 hover:text-foreground hover:bg-card border border-border/60 font-normal"}`}
           >
             All
           </button>
@@ -201,7 +219,7 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
             <button
               key={c}
               onClick={() => setActive(active === c ? null : c)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 cursor-pointer ${active === c ? "bg-sage text-white shadow-sm" : "bg-card text-muted-foreground hover:text-foreground border border-border/40"}`}
+              className={`px-3.5 py-1.5 rounded-full text-[12.5px] font-sans transition-all duration-200 cursor-pointer ${active === c ? "bg-sage text-white shadow-sm font-medium" : "bg-card text-foreground/75 hover:text-foreground hover:bg-card border border-border/60 font-normal"}`}
             >
               {c.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())}
             </button>
@@ -212,16 +230,16 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
       {filtered.length > 0 ? (
         <ScrollRow>
           {filtered.map((a, i) => (
-            <ArticleCard key={a.slug} article={a} accent={stage.accent} index={i} />
+            <ArticleCard key={a.slug} article={a} accent={stage.accent} image={cardImages[i]} />
           ))}
         </ScrollRow>
       ) : (
-        <p className="font-sans text-sm text-muted-foreground/60 py-8">
+        <p className="font-sans text-sm text-foreground/60 py-8">
           No articles match this topic yet.
         </p>
       )}
 
-      <Link to={stage.href} className="sm:hidden inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors mt-3">
+      <Link to={stage.href} className="sm:hidden inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium text-sage hover:text-sage-dark transition-colors mt-3">
         View all {stage.title.toLowerCase()} guidance <span>→</span>
       </Link>
     </div>
@@ -243,14 +261,14 @@ const GuidanceLibrary = () => {
               <h2 className="font-serif text-xl sm:text-2xl md:text-3xl text-foreground leading-tight max-w-md">
                 Guidance for every part of your journey
               </h2>
-              <p className="font-sans text-sm font-light text-muted-foreground mt-2.5 max-w-lg leading-relaxed">
+              <p className="font-sans text-[14.5px] font-light text-foreground/70 mt-2.5 max-w-lg leading-relaxed">
                 Find trusted answers organised around the stage you're in right now.
               </p>
             </div>
             {stages.map((stage, i) => (
               <div key={stage.key}>
-                {i > 0 && <div className="border-t border-border/20" />}
-                <StageSection stage={stage} />
+                {i > 0 && <div className="border-t border-border/30" />}
+                <StageSection stage={stage} stageIndex={i} />
               </div>
             ))}
           </div>

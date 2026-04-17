@@ -59,51 +59,50 @@ const stages = [
     chips: ["development", "timelines", "practical-preparation"] },
 ];
 
-function ArticleCard({ article, accent, index }: { article: ArticleData; accent: string; index: number }) {
-  const img = getCardImage(article, index);
+function ArticleCard({ article, accent, image }: { article: ArticleData; accent: string; image: string }) {
   return (
     <Link
       to={`/articles/${article.slug}`}
-      className="group block flex-shrink-0 w-[280px] sm:w-[300px] md:w-[320px] rounded-2xl bg-card border border-border/30 hover:border-sage/20 hover:shadow-card-hover transition-all duration-300 overflow-hidden snap-start"
+      className="group block flex-shrink-0 w-[280px] sm:w-[300px] md:w-[320px] rounded-2xl bg-card border border-border/50 hover:border-sage/40 hover:shadow-card-hover transition-all duration-300 overflow-hidden snap-start"
     >
       <div className="relative h-40 overflow-hidden">
         <img
-          src={img}
+          src={image}
           alt={article.title}
           loading="lazy"
           width={640}
           height={320}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/25 to-transparent" />
         <div
           className="absolute bottom-0 left-0 w-full h-[3px]"
           style={{ background: `hsl(${accent})` }}
         />
       </div>
       <div className="p-4 sm:p-5">
-        <div className="flex flex-wrap gap-1.5 mb-2.5">
+        <div className="flex flex-wrap gap-1.5 mb-3">
           {article.topics?.slice(0, 2).map((t) => (
             <span
               key={t}
-              className="px-2 py-0.5 rounded-full bg-muted/60 text-muted-foreground text-[9px] font-sans tracking-[0.1em] uppercase"
+              className="px-2 py-0.5 rounded-full bg-muted text-foreground/65 text-[10px] font-sans font-medium tracking-[0.08em] uppercase"
             >
               {t.replace(/-/g, " ")}
             </span>
           ))}
         </div>
-        <h3 className="font-serif text-[14px] sm:text-[15px] text-foreground leading-snug mb-2 group-hover:text-sage transition-colors line-clamp-2">
+        <h3 className="font-serif text-[15px] sm:text-[16px] text-foreground leading-snug mb-2 group-hover:text-sage transition-colors line-clamp-2">
           {article.title}
         </h3>
-        <p className="font-sans text-xs font-light text-muted-foreground leading-relaxed line-clamp-2 mb-3">
+        <p className="font-sans text-[13px] font-light text-foreground/70 leading-relaxed line-clamp-2 mb-3">
           {article.metaDescription}
         </p>
         {article.reviewedBy && (
-          <p className="font-sans text-[10px] text-muted-foreground/50 mb-2">
+          <p className="font-sans text-[10.5px] text-foreground/55 mb-2">
             ✔ Reviewed by {article.reviewedBy}
           </p>
         )}
-        <span className="inline-flex items-center gap-1.5 text-muted-foreground/40 group-hover:text-sage group-hover:gap-2 transition-all font-sans text-xs">
+        <span className="inline-flex items-center gap-1.5 text-sage/85 group-hover:text-sage group-hover:gap-2 transition-all font-sans text-[12.5px] font-medium">
           Read more <span className="font-serif text-base">→</span>
         </span>
       </div>

@@ -26,20 +26,19 @@ const imagePool = [
   imgNursery, imgJourney, imgReflection, imgMilestones, imgBonding,
 ];
 
-const topicImageMap: Record<string, string> = {
-  symptoms: imgSymptoms,
-  development: imgDevelopment,
-  "body-changes": imgBody,
-  "emotional-wellbeing": imgEmotional,
-  "practical-preparation": imgPractical,
-  timelines: imgTimelines,
-  "safety-and-support": imgSafety,
-};
+// Simple deterministic hash so each unique article slug maps to a stable image,
+// minimising visible duplication within a stage row.
+function hashSlug(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
 
-function getCardImage(article: ArticleData, index: number): string {
-  const topic = article.topics?.[0];
-  if (topic && topicImageMap[topic]) return topicImageMap[topic];
-  return imagePool[index % imagePool.length];
+function getCardImage(article: ArticleData, indexInRow: number, rowSeed: number): string {
+  // Combine slug hash with row seed and index → spreads images across the row
+  // and avoids the same topic always picking the same picture.
+  const idx = (hashSlug(article.slug) + indexInRow * 5 + rowSeed * 3) % imagePool.length;
+  return imagePool[idx];
 }
 
 const stages = [

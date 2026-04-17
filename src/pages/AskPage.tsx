@@ -75,6 +75,85 @@ const AskPage = () => {
 
   const parsed = answer ? parseAnswer(answer) : null;
   const isDone = answer && !isLoading;
+  const hasQuery = Boolean(query);
+
+  // ── Welcome state (no query yet) ──
+  if (!hasQuery) {
+    const welcomeSuggestions = [
+      "Is what I'm feeling normal at 8 weeks?",
+      "When should I take a pregnancy test?",
+      "How do I know if I'm ovulating?",
+      "What should I expect after birth?",
+    ];
+    return (
+      <div className="min-h-screen bg-parchment">
+        <Navbar />
+        <main className="pt-24 pb-24 md:pt-32 md:pb-32">
+          <div className="container mx-auto px-6 md:px-10 max-w-3xl">
+            <nav className="flex items-center gap-2 font-sans text-[11px] font-light tracking-wide text-muted-foreground mb-10 uppercase">
+              <Link to="/explore" className="hover:text-foreground transition-colors">Explore</Link>
+              <ChevronRight size={10} className="text-border" />
+              <span className="text-foreground/70">Ask</span>
+            </nav>
+
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sage-bg/60 mb-5">
+                <Sparkles size={18} className="text-sage" />
+              </div>
+              <h1 className="font-serif text-[2rem] sm:text-[2.4rem] md:text-[2.75rem] text-foreground leading-[1.12] tracking-[-0.01em] mb-4">
+                What would you like to ask?
+              </h1>
+              <p className="font-sans text-[14.5px] font-light text-muted-foreground max-w-md mx-auto leading-relaxed">
+                Private, calm, judgement-free guidance — for any stage of your journey.
+              </p>
+            </div>
+
+            <div className={`relative bg-card border rounded-2xl px-5 py-4 md:px-6 md:py-5 flex items-center gap-4 transition-all duration-300 shadow-soft ${
+              inputFocused ? "border-sage/40 ring-1 ring-sage/10" : "border-border/40"
+            }`}>
+              <Search size={16} className="text-sage-muted/70 shrink-0" />
+              <input
+                type="text"
+                value={newQuery}
+                onChange={(e) => setNewQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
+                onFocus={() => setInputFocused(true)}
+                onBlur={() => setInputFocused(false)}
+                autoFocus
+                placeholder="Ask anything…"
+                className="flex-1 bg-transparent font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
+              />
+              <button
+                onClick={handleAskAgain}
+                disabled={!newQuery.trim()}
+                className="bg-terracotta text-terracotta-foreground rounded-full px-6 py-2.5 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300 shrink-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
+              >
+                Ask
+              </button>
+            </div>
+
+            <div className="mt-8">
+              <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-muted-foreground/70 mb-4 text-center">
+                Try one of these
+              </p>
+              <div className="flex flex-wrap gap-2 justify-center">
+                {welcomeSuggestions.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => handleSuggestion(s)}
+                    className="font-sans text-[12.5px] font-light text-foreground/75 bg-card border border-border/40 rounded-full px-4 py-2 hover:border-sage/40 hover:text-foreground hover:bg-card transition-all duration-200"
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-parchment">

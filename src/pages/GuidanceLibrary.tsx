@@ -26,20 +26,19 @@ const imagePool = [
   imgNursery, imgJourney, imgReflection, imgMilestones, imgBonding,
 ];
 
-const topicImageMap: Record<string, string> = {
-  symptoms: imgSymptoms,
-  development: imgDevelopment,
-  "body-changes": imgBody,
-  "emotional-wellbeing": imgEmotional,
-  "practical-preparation": imgPractical,
-  timelines: imgTimelines,
-  "safety-and-support": imgSafety,
-};
+// Simple deterministic hash so each unique article slug maps to a stable image,
+// minimising visible duplication within a stage row.
+function hashSlug(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
 
-function getCardImage(article: ArticleData, index: number): string {
-  const topic = article.topics?.[0];
-  if (topic && topicImageMap[topic]) return topicImageMap[topic];
-  return imagePool[index % imagePool.length];
+function getCardImage(article: ArticleData, indexInRow: number, rowSeed: number): string {
+  // Combine slug hash with row seed and index → spreads images across the row
+  // and avoids the same topic always picking the same picture.
+  const idx = (hashSlug(article.slug) + indexInRow * 5 + rowSeed * 3) % imagePool.length;
+  return imagePool[idx];
 }
 
 const stages = [
@@ -60,51 +59,50 @@ const stages = [
     chips: ["development", "timelines", "practical-preparation"] },
 ];
 
-function ArticleCard({ article, accent, index }: { article: ArticleData; accent: string; index: number }) {
-  const img = getCardImage(article, index);
+function ArticleCard({ article, accent, image }: { article: ArticleData; accent: string; image: string }) {
   return (
     <Link
       to={`/articles/${article.slug}`}
-      className="group block flex-shrink-0 w-[280px] sm:w-[300px] md:w-[320px] rounded-2xl bg-card border border-border/30 hover:border-sage/20 hover:shadow-card-hover transition-all duration-300 overflow-hidden snap-start"
+      className="group block flex-shrink-0 w-[280px] sm:w-[300px] md:w-[320px] rounded-2xl bg-card border border-border/50 hover:border-sage/40 hover:shadow-card-hover transition-all duration-300 overflow-hidden snap-start"
     >
       <div className="relative h-40 overflow-hidden">
         <img
-          src={img}
+          src={image}
           alt={article.title}
           loading="lazy"
           width={640}
           height={320}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/25 to-transparent" />
         <div
           className="absolute bottom-0 left-0 w-full h-[3px]"
           style={{ background: `hsl(${accent})` }}
         />
       </div>
       <div className="p-4 sm:p-5">
-        <div className="flex flex-wrap gap-1.5 mb-2.5">
+        <div className="flex flex-wrap gap-1.5 mb-3">
           {article.topics?.slice(0, 2).map((t) => (
             <span
               key={t}
-              className="px-2 py-0.5 rounded-full bg-muted/60 text-muted-foreground text-[9px] font-sans tracking-[0.1em] uppercase"
+              className="px-2 py-0.5 rounded-full bg-muted text-foreground/65 text-[10px] font-sans font-medium tracking-[0.08em] uppercase"
             >
               {t.replace(/-/g, " ")}
             </span>
           ))}
         </div>
-        <h3 className="font-serif text-[14px] sm:text-[15px] text-foreground leading-snug mb-2 group-hover:text-sage transition-colors line-clamp-2">
+        <h3 className="font-serif text-[15px] sm:text-[16px] text-foreground leading-snug mb-2 group-hover:text-sage transition-colors line-clamp-2">
           {article.title}
         </h3>
-        <p className="font-sans text-xs font-light text-muted-foreground leading-relaxed line-clamp-2 mb-3">
+        <p className="font-sans text-[13px] font-light text-foreground/70 leading-relaxed line-clamp-2 mb-3">
           {article.metaDescription}
         </p>
         {article.reviewedBy && (
-          <p className="font-sans text-[10px] text-muted-foreground/50 mb-2">
+          <p className="font-sans text-[10.5px] text-foreground/55 mb-2">
             ✔ Reviewed by {article.reviewedBy}
           </p>
         )}
-        <span className="inline-flex items-center gap-1.5 text-muted-foreground/40 group-hover:text-sage group-hover:gap-2 transition-all font-sans text-xs">
+        <span className="inline-flex items-center gap-1.5 text-sage/85 group-hover:text-sage group-hover:gap-2 transition-all font-sans text-[12.5px] font-medium">
           Read more <span className="font-serif text-base">→</span>
         </span>
       </div>
@@ -166,7 +164,7 @@ function ScrollRow({ children }: { children: React.ReactNode }) {
   );
 }
 
-function StageSection({ stage }: { stage: (typeof stages)[0] }) {
+function StageSection({ stage, stageIndex }: { stage: (typeof stages)[0]; stageIndex: number }) {
   const [active, setActive] = useState<string | null>(null);
   const all = useMemo(() => getArticlesByJourney(stage.filter), [stage.filter]);
   const filtered = useMemo(() => {
@@ -174,6 +172,24 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
     return all.filter((a) => a.topics?.includes(active));
   }, [active, all]);
   const validChips = stage.chips.filter((c) => all.some((a) => a.topics?.includes(c)));
+
+  // Pre-assign images so the row never duplicates an image until the pool is exhausted.
+  const cardImages = useMemo(() => {
+    const used = new Set<string>();
+    return filtered.map((a, i) => {
+      // Try a few hash-derived candidates before falling back to the first unused image.
+      for (let attempt = 0; attempt < imagePool.length; attempt++) {
+        const candidate = getCardImage(a, i + attempt, stageIndex);
+        if (!used.has(candidate)) {
+          used.add(candidate);
+          return candidate;
+        }
+      }
+      // Pool fully used (more articles than images) — start re-using.
+      const fallback = imagePool[(hashSlug(a.slug) + i) % imagePool.length];
+      return fallback;
+    });
+  }, [filtered, stageIndex]);
 
   if (all.length === 0) return null;
 
@@ -186,7 +202,7 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
             {stage.title}
           </h2>
         </div>
-        <Link to={stage.href} className="hidden sm:inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors">
+        <Link to={stage.href} className="hidden sm:inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium text-sage hover:text-sage-dark transition-colors">
           View all <span>→</span>
         </Link>
       </div>
@@ -195,7 +211,7 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
         <div className="flex flex-wrap gap-2 mb-5 sm:mb-6">
           <button
             onClick={() => setActive(null)}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 cursor-pointer ${!active ? "bg-sage text-white shadow-sm" : "bg-card text-muted-foreground hover:text-foreground border border-border/40"}`}
+            className={`px-3.5 py-1.5 rounded-full text-[12.5px] font-sans transition-all duration-200 cursor-pointer ${!active ? "bg-sage text-white shadow-sm font-medium" : "bg-card text-foreground/75 hover:text-foreground hover:bg-card border border-border/60 font-normal"}`}
           >
             All
           </button>
@@ -203,7 +219,7 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
             <button
               key={c}
               onClick={() => setActive(active === c ? null : c)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-sans transition-all duration-200 cursor-pointer ${active === c ? "bg-sage text-white shadow-sm" : "bg-card text-muted-foreground hover:text-foreground border border-border/40"}`}
+              className={`px-3.5 py-1.5 rounded-full text-[12.5px] font-sans transition-all duration-200 cursor-pointer ${active === c ? "bg-sage text-white shadow-sm font-medium" : "bg-card text-foreground/75 hover:text-foreground hover:bg-card border border-border/60 font-normal"}`}
             >
               {c.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())}
             </button>
@@ -214,16 +230,16 @@ function StageSection({ stage }: { stage: (typeof stages)[0] }) {
       {filtered.length > 0 ? (
         <ScrollRow>
           {filtered.map((a, i) => (
-            <ArticleCard key={a.slug} article={a} accent={stage.accent} index={i} />
+            <ArticleCard key={a.slug} article={a} accent={stage.accent} image={cardImages[i]} />
           ))}
         </ScrollRow>
       ) : (
-        <p className="font-sans text-sm text-muted-foreground/60 py-8">
+        <p className="font-sans text-sm text-foreground/60 py-8">
           No articles match this topic yet.
         </p>
       )}
 
-      <Link to={stage.href} className="sm:hidden inline-flex items-center gap-1.5 font-sans text-xs text-sage hover:text-sage-dark transition-colors mt-3">
+      <Link to={stage.href} className="sm:hidden inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium text-sage hover:text-sage-dark transition-colors mt-3">
         View all {stage.title.toLowerCase()} guidance <span>→</span>
       </Link>
     </div>
@@ -245,14 +261,14 @@ const GuidanceLibrary = () => {
               <h2 className="font-serif text-xl sm:text-2xl md:text-3xl text-foreground leading-tight max-w-md">
                 Guidance for every part of your journey
               </h2>
-              <p className="font-sans text-sm font-light text-muted-foreground mt-2.5 max-w-lg leading-relaxed">
+              <p className="font-sans text-[14.5px] font-light text-foreground/70 mt-2.5 max-w-lg leading-relaxed">
                 Find trusted answers organised around the stage you're in right now.
               </p>
             </div>
             {stages.map((stage, i) => (
               <div key={stage.key}>
-                {i > 0 && <div className="border-t border-border/20" />}
-                <StageSection stage={stage} />
+                {i > 0 && <div className="border-t border-border/30" />}
+                <StageSection stage={stage} stageIndex={i} />
               </div>
             ))}
           </div>

@@ -19,10 +19,22 @@ import imgJourney from "@/assets/guidance-card-journey.jpg";
 import imgReflection from "@/assets/guidance-card-reflection.jpg";
 import imgMilestones from "@/assets/guidance-card-milestones.jpg";
 import imgBonding from "@/assets/guidance-card-bonding.jpg";
+import imgMorning from "@/assets/guidance-card-morning.jpg";
+import imgTextiles from "@/assets/guidance-card-textiles.jpg";
+import imgNourish from "@/assets/guidance-card-nourish.jpg";
+import imgQuiet from "@/assets/guidance-card-quiet.jpg";
+import imgComfort from "@/assets/guidance-card-comfort.jpg";
+import imgPlanning from "@/assets/guidance-card-planning.jpg";
+import imgRest from "@/assets/guidance-card-rest.jpg";
+import imgFresh from "@/assets/guidance-card-fresh.jpg";
 
+// Interleaved so visually-similar neighbours (e.g. two textile close-ups, two
+// flat-lays) are spaced apart in the pool — minimises adjacent near-duplicates.
 const imagePool = [
-  imgSymptoms, imgDevelopment, imgBody, imgEmotional,
-  imgPractical, imgTimelines, imgSafety, imgWellness,
+  imgSymptoms, imgMorning, imgDevelopment, imgTextiles,
+  imgBody, imgNourish, imgEmotional, imgQuiet,
+  imgPractical, imgComfort, imgTimelines, imgPlanning,
+  imgSafety, imgRest, imgWellness, imgFresh,
   imgNursery, imgJourney, imgReflection, imgMilestones, imgBonding,
 ];
 
@@ -85,24 +97,24 @@ function ArticleCard({ article, accent, image }: { article: ArticleData; accent:
           {article.topics?.slice(0, 2).map((t) => (
             <span
               key={t}
-              className="px-2 py-0.5 rounded-full bg-muted text-foreground/65 text-[10px] font-sans font-medium tracking-[0.08em] uppercase"
+              className="px-2 py-0.5 rounded-full bg-muted text-foreground/85 text-[10px] font-sans font-semibold tracking-[0.08em] uppercase"
             >
               {t.replace(/-/g, " ")}
             </span>
           ))}
         </div>
-        <h3 className="font-serif text-[15px] sm:text-[16px] text-foreground leading-snug mb-2 group-hover:text-sage transition-colors line-clamp-2">
+        <h3 className="font-serif text-[15.5px] sm:text-[16.5px] font-medium text-foreground leading-snug mb-2 group-hover:text-sage-dark transition-colors line-clamp-2">
           {article.title}
         </h3>
-        <p className="font-sans text-[13px] font-light text-foreground/70 leading-relaxed line-clamp-2 mb-3">
+        <p className="font-sans text-[13px] text-foreground/85 leading-relaxed line-clamp-2 mb-3">
           {article.metaDescription}
         </p>
         {article.reviewedBy && (
-          <p className="font-sans text-[10.5px] text-foreground/55 mb-2">
+          <p className="font-sans text-[10.5px] text-foreground/70 mb-2">
             ✔ Reviewed by {article.reviewedBy}
           </p>
         )}
-        <span className="inline-flex items-center gap-1.5 text-sage/85 group-hover:text-sage group-hover:gap-2 transition-all font-sans text-[12.5px] font-medium">
+        <span className="inline-flex items-center gap-1.5 text-sage-dark group-hover:gap-2 transition-all font-sans text-[12.5px] font-semibold">
           Read more <span className="font-serif text-base">→</span>
         </span>
       </div>
@@ -202,7 +214,7 @@ function StageSection({ stage, stageIndex }: { stage: (typeof stages)[0]; stageI
             {stage.title}
           </h2>
         </div>
-        <Link to={stage.href} className="hidden sm:inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium text-sage hover:text-sage-dark transition-colors">
+        <Link to={stage.href} className="hidden sm:inline-flex items-center gap-1.5 font-sans text-[12.5px] font-semibold text-sage-dark hover:text-foreground transition-colors">
           View all <span>→</span>
         </Link>
       </div>
@@ -211,7 +223,7 @@ function StageSection({ stage, stageIndex }: { stage: (typeof stages)[0]; stageI
         <div className="flex flex-wrap gap-2 mb-5 sm:mb-6">
           <button
             onClick={() => setActive(null)}
-            className={`px-3.5 py-1.5 rounded-full text-[12.5px] font-sans transition-all duration-200 cursor-pointer ${!active ? "bg-sage text-white shadow-sm font-medium" : "bg-card text-foreground/75 hover:text-foreground hover:bg-card border border-border/60 font-normal"}`}
+            className={`px-3.5 py-1.5 rounded-full text-[12.5px] font-sans transition-all duration-200 cursor-pointer ${!active ? "bg-sage text-white shadow-sm font-semibold" : "bg-card text-foreground/90 hover:text-foreground hover:border-sage/50 border border-border font-medium"}`}
           >
             All
           </button>
@@ -219,7 +231,7 @@ function StageSection({ stage, stageIndex }: { stage: (typeof stages)[0]; stageI
             <button
               key={c}
               onClick={() => setActive(active === c ? null : c)}
-              className={`px-3.5 py-1.5 rounded-full text-[12.5px] font-sans transition-all duration-200 cursor-pointer ${active === c ? "bg-sage text-white shadow-sm font-medium" : "bg-card text-foreground/75 hover:text-foreground hover:bg-card border border-border/60 font-normal"}`}
+              className={`px-3.5 py-1.5 rounded-full text-[12.5px] font-sans transition-all duration-200 cursor-pointer ${active === c ? "bg-sage text-white shadow-sm font-semibold" : "bg-card text-foreground/90 hover:text-foreground hover:border-sage/50 border border-border font-medium"}`}
             >
               {c.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())}
             </button>
@@ -239,7 +251,7 @@ function StageSection({ stage, stageIndex }: { stage: (typeof stages)[0]; stageI
         </p>
       )}
 
-      <Link to={stage.href} className="sm:hidden inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium text-sage hover:text-sage-dark transition-colors mt-3">
+      <Link to={stage.href} className="sm:hidden inline-flex items-center gap-1.5 font-sans text-[12.5px] font-semibold text-sage-dark hover:text-foreground transition-colors mt-3">
         View all {stage.title.toLowerCase()} guidance <span>→</span>
       </Link>
     </div>
@@ -261,7 +273,7 @@ const GuidanceLibrary = () => {
               <h2 className="font-serif text-xl sm:text-2xl md:text-3xl text-foreground leading-tight max-w-md">
                 Guidance for every part of your journey
               </h2>
-              <p className="font-sans text-[14.5px] font-light text-foreground/70 mt-2.5 max-w-lg leading-relaxed">
+              <p className="font-sans text-[14.5px] text-foreground/85 mt-2.5 max-w-lg leading-relaxed">
                 Find trusted answers organised around the stage you're in right now.
               </p>
             </div>

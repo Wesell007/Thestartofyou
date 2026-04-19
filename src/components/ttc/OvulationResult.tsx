@@ -104,94 +104,67 @@ const OvulationResult = ({
   const askLink = (q: string) =>
     `/ask?q=${encodeURIComponent(q)}&ctx=${encodeURIComponent("Trying to conceive — this cycle")}`;
 
+  const supportingDates = [
+    { label: "Likely ovulation", value: format(ovulationDay, "d MMMM"), meta: `Around day ${cycleLength - 14} of your cycle` },
+    { label: "Best days to try", value: `${format(bestDays[0], "d")} – ${format(bestDays[2], "d MMMM")}`, meta: "The two days before ovulation, and the day itself" },
+    { label: "Expected next period", value: format(nextPeriod, "d MMMM"), meta: daysToPeriod >= 0 ? `In ${daysToPeriod} days` : `${Math.abs(daysToPeriod)} days late` },
+  ];
+
   return (
     <div>
       {/* ── Primary result ──────────────────────────────────────────── */}
-      <section className="bg-parchment-dark pt-28 pb-16 md:pt-36 md:pb-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-          <div className="relative inline-flex items-center gap-2 mb-5">
+      <section className="relative bg-parchment-dark pt-28 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        {/* ambient glow */}
+        <div className="absolute inset-x-0 top-0 h-[420px] glow-sage opacity-60 pointer-events-none" aria-hidden="true" />
+        <div className="relative container mx-auto px-6 md:px-10 max-w-2xl text-center">
+          <div className="inline-flex items-center gap-2 mb-7">
             {reveal && (
-              <Sparkles
-                size={14}
-                className="text-sage animate-sparkle-fade"
-                aria-hidden="true"
-              />
+              <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
             )}
-            <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted">
+            <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage">
               Here's where you are this cycle
             </p>
+            {reveal && (
+              <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
+            )}
           </div>
 
-          <h1 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-3">
-            Your fertile window opens{" "}
-            <span
-              className={cn(
-                "inline-block",
-                reveal &&
-                  "animate-result-shimmer bg-clip-text text-transparent bg-gradient-to-r from-foreground via-sage to-foreground bg-[length:200%_100%]"
-              )}
-            >
-              {format(fertileStart, "d MMMM")}
-            </span>
-          </h1>
-          <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-10 max-w-xl">
-            A calm map of the days ahead. Use it as orientation, not pressure — bodies don't always follow the calendar.
+          <p className="font-serif text-lg sm:text-xl text-foreground/60 italic leading-snug mb-5">
+            Your fertile window opens
           </p>
-
-          {/* Four key dates */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            <div className="bg-card border border-border/50 rounded-2xl px-6 py-6 shadow-card-brand">
-              <p className="font-sans text-[11px] font-light tracking-[0.18em] uppercase text-sage-muted mb-2">
-                Likely ovulation
-              </p>
-              <p className="font-serif text-xl text-foreground leading-snug mb-1">
-                {format(ovulationDay, "d MMMM")}
-              </p>
-              <p className="font-sans text-xs font-light text-muted-foreground">
-                Around day {cycleLength - 14} of your cycle
-              </p>
-            </div>
-
-            <div className="bg-card border border-border/50 rounded-2xl px-6 py-6 shadow-card-brand">
-              <p className="font-sans text-[11px] font-light tracking-[0.18em] uppercase text-sage-muted mb-2">
-                Fertile window
-              </p>
-              <p className="font-serif text-xl text-foreground leading-snug mb-1">
-                {format(fertileStart, "d MMM")} – {format(fertileEnd, "d MMM")}
-              </p>
-              <p className="font-sans text-xs font-light text-muted-foreground">6 days</p>
-            </div>
-
-            <div className="bg-card border border-border/50 rounded-2xl px-6 py-6 shadow-card-brand">
-              <p className="font-sans text-[11px] font-light tracking-[0.18em] uppercase text-sage-muted mb-2">
-                Best days to try
-              </p>
-              <p className="font-serif text-xl text-foreground leading-snug mb-1">
-                {format(bestDays[0], "d")} – {format(bestDays[2], "d MMMM")}
-              </p>
-              <p className="font-sans text-xs font-light text-muted-foreground">
-                The two days before ovulation, plus ovulation itself
-              </p>
-            </div>
-
-            <div className="bg-card border border-border/50 rounded-2xl px-6 py-6 shadow-card-brand">
-              <p className="font-sans text-[11px] font-light tracking-[0.18em] uppercase text-sage-muted mb-2">
-                Expected next period
-              </p>
-              <p className="font-serif text-xl text-foreground leading-snug mb-1">
-                {format(nextPeriod, "d MMMM")}
-              </p>
-              <p className="font-sans text-xs font-light text-muted-foreground">
-                {daysToPeriod >= 0 ? `In ${daysToPeriod} days` : `${Math.abs(daysToPeriod)} days late`}
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-sage-bg/30 border border-sage-light/30 rounded-xl px-6 py-5">
-            <p className="font-serif italic text-base text-foreground/80 leading-relaxed text-center">
-              These dates are a gentle estimate based on a {cycleLength}-day cycle. Ovulation can shift from month to month, and that is completely normal.
+          <h1
+            className={cn(
+              "font-serif text-[2.75rem] sm:text-6xl md:text-7xl text-foreground leading-[1.05] tracking-tight mb-6",
+              reveal && "animate-result-shimmer"
+            )}
+          >
+            {format(fertileStart, "d MMMM")}
+          </h1>
+          <div className="flanking-lines mb-6">
+            <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted whitespace-nowrap">
+              through {format(fertileEnd, "d MMMM")}
             </p>
           </div>
+          <p className="font-sans text-base sm:text-[17px] font-light text-foreground/65 leading-relaxed max-w-lg mx-auto mb-14">
+            A quiet map of the days ahead. Hold it gently — bodies don't always follow the calendar, and that's part of this.
+          </p>
+
+          {/* Supporting dates — elegant inline rhythm, not a card grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border/40 rounded-2xl overflow-hidden border border-border/40 shadow-card-brand">
+            {supportingDates.map((d) => (
+              <div key={d.label} className="bg-card/80 backdrop-blur-sm px-6 py-7 text-left">
+                <p className="font-sans text-[10px] font-light tracking-[0.22em] uppercase text-sage-muted mb-2.5">
+                  {d.label}
+                </p>
+                <p className="font-serif text-lg text-foreground leading-snug mb-1.5">{d.value}</p>
+                <p className="font-sans text-xs font-light text-foreground/55 leading-relaxed">{d.meta}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="font-serif italic text-[15px] text-foreground/55 leading-relaxed mt-10 max-w-xl mx-auto">
+            These dates are a gentle estimate based on a {cycleLength}-day cycle. Ovulation can shift from month to month, and that is completely normal.
+          </p>
         </div>
       </section>
 
@@ -230,23 +203,23 @@ const OvulationResult = ({
       </section>
 
       {/* ── What to do this cycle ───────────────────────────────────── */}
-      <section className="bg-parchment-dark py-16 md:py-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
+      <section className="bg-parchment-dark py-20 md:py-28">
+        <div className="container mx-auto px-6 md:px-10 max-w-2xl">
           <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
             This cycle
           </p>
-          <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-8">
+          <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-10">
             What to do now
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-0">
             {[
               {
                 title: "Try on the best days",
-                desc: `Aim for ${format(bestDays[0], "d")}, ${format(bestDays[1], "d")} and ${format(bestDays[2], "d MMMM")} — every other day is usually enough.`,
+                desc: `Aim for ${format(bestDays[0], "d")}, ${format(bestDays[1], "d")} and ${format(bestDays[2], "d MMMM")}. Every other day is usually enough.`,
               },
               {
-                title: "Test on or after " + format(testDay, "d MMMM"),
-                desc: "Earlier tests can show a false negative. Use first morning urine for the clearest result.",
+                title: `Test on or after ${format(testDay, "d MMMM")}`,
+                desc: "Earlier tests can show a false negative. First morning urine gives the clearest result.",
               },
               {
                 title: "Don't overtrack every signal",
@@ -256,10 +229,16 @@ const OvulationResult = ({
                 title: "Be kind to yourself if it doesn't happen",
                 desc: "Healthy couples can take several cycles. One month is data, not a verdict.",
               },
-            ].map((item) => (
-              <div key={item.title} className="bg-card border border-border/50 rounded-2xl p-6 shadow-card-brand">
-                <p className="font-sans text-[15px] font-medium text-foreground mb-2">{item.title}</p>
-                <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed">{item.desc}</p>
+            ].map((item, i, arr) => (
+              <div
+                key={item.title}
+                className={cn(
+                  "py-7",
+                  i < arr.length - 1 && "border-b border-border/30"
+                )}
+              >
+                <p className="font-serif text-lg text-foreground leading-snug mb-2">{item.title}</p>
+                <p className="font-sans text-[15px] font-light text-foreground/65 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -267,111 +246,106 @@ const OvulationResult = ({
       </section>
 
       {/* ── Save this cycle (primary CTA) ───────────────────────────── */}
-      <section className="bg-parchment py-16 md:py-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-          <div className="bg-card border border-sage-light/40 rounded-3xl p-8 md:p-10 shadow-card-brand">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="w-10 h-10 rounded-full bg-sage-bg/60 border border-sage-light/40 flex items-center justify-center shrink-0">
-                <Bookmark size={16} className="text-sage" />
-              </div>
-              <div>
-                <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase text-sage-muted mb-1.5">
-                  Save and return
-                </p>
-                <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug">
-                  Save this cycle
-                </h2>
-              </div>
+      <section className="relative bg-parchment py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[520px] glow-sage opacity-50 pointer-events-none" aria-hidden="true" />
+        <div className="relative container mx-auto px-6 md:px-10 max-w-2xl">
+          {/* Editorial intro, no card frame */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-card border border-sage-light/50 shadow-card-brand mb-6">
+              <Bookmark size={16} className="text-sage" />
             </div>
-
-            <p className="font-sans text-[15px] font-light text-foreground/70 leading-relaxed mb-7 max-w-xl">
-              Saving this cycle keeps your fertile window, ovulation day and expected period in one place — and lets us send a calm reminder when each one arrives.
+            <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage mb-4">
+              The start of a calmer monthly rhythm
             </p>
+            <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
+              Save this cycle
+            </h2>
+            <p className="font-sans text-[16px] font-light text-foreground/65 leading-relaxed max-w-lg mx-auto">
+              Keep your fertile window, ovulation day and expected period in one place. We'll quietly check in on the days that matter, so you don't have to hold it all in your head.
+            </p>
+          </div>
 
-            {/* Reminder toggles */}
-            <div className="space-y-2.5 mb-7">
-              {([
-                { key: "fertile" as const, label: "When my fertile window opens", date: format(fertileStart, "d MMMM") },
-                { key: "ovulation" as const, label: "Around my likely ovulation day", date: format(ovulationDay, "d MMMM") },
-                { key: "test" as const, label: "When testing makes sense", date: format(testDay, "d MMMM") },
-                { key: "period" as const, label: "When my next period is due", date: format(nextPeriod, "d MMMM") },
-              ]).map(({ key, label, date }) => {
-                const on = reminders[key];
-                return (
-                  <button
-                    key={key}
-                    onClick={() => toggleReminder(key)}
-                    className={cn(
-                      "w-full flex items-center justify-between gap-4 px-5 py-4 rounded-xl border transition-all text-left",
-                      on
-                        ? "bg-sage-bg/30 border-sage-light/50"
-                        : "bg-parchment/60 border-border/40 hover:border-sage-light/40"
-                    )}
-                  >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div
-                        className={cn(
-                          "w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors",
-                          on ? "bg-sage text-sage-foreground" : "bg-card border border-border/60 text-muted-foreground"
-                        )}
-                      >
-                        {on ? <Check size={14} /> : <Bell size={13} />}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="font-sans text-sm font-medium text-foreground leading-tight">{label}</p>
-                        <p className="font-sans text-xs font-light text-muted-foreground mt-0.5">{date}</p>
-                      </div>
-                    </div>
-                    <span
+          {/* Reminder list — light dividers, no boxes */}
+          <div className="bg-card/70 backdrop-blur-sm border border-border/40 rounded-2xl shadow-card-brand divide-y divide-border/40 mb-8">
+            {([
+              { key: "fertile" as const, label: "When my fertile window opens", date: format(fertileStart, "d MMMM") },
+              { key: "ovulation" as const, label: "Around my likely ovulation day", date: format(ovulationDay, "d MMMM") },
+              { key: "test" as const, label: "When testing makes sense", date: format(testDay, "d MMMM") },
+              { key: "period" as const, label: "When my next period is due", date: format(nextPeriod, "d MMMM") },
+            ]).map(({ key, label, date }) => {
+              const on = reminders[key];
+              return (
+                <button
+                  key={key}
+                  onClick={() => toggleReminder(key)}
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-sage-bg/20 transition-colors first:rounded-t-2xl last:rounded-b-2xl"
+                >
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div
                       className={cn(
-                        "font-sans text-[11px] font-light tracking-[0.12em] uppercase shrink-0",
-                        on ? "text-sage" : "text-muted-foreground/70"
+                        "w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-colors",
+                        on ? "bg-sage text-sage-foreground" : "bg-parchment-deeper text-muted-foreground"
                       )}
                     >
-                      {on ? "On" : "Off"}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+                      {on ? <Check size={14} /> : <Bell size={13} />}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-sans text-[15px] font-light text-foreground leading-tight">{label}</p>
+                      <p className="font-sans text-xs font-light text-foreground/55 mt-1">{date}</p>
+                    </div>
+                  </div>
+                  <span
+                    className={cn(
+                      "font-sans text-[10px] font-light tracking-[0.18em] uppercase shrink-0",
+                      on ? "text-sage" : "text-foreground/35"
+                    )}
+                  >
+                    {on ? "On" : "Off"}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-            {/* Primary + secondary CTAs */}
-            <div className="flex flex-wrap gap-3">
-              <button
-                onClick={handleSave}
-                disabled={saved}
-                className={cn(
-                  "inline-flex items-center gap-2 rounded-pill px-7 py-3.5 font-sans text-sm font-medium transition-all shadow-cta",
-                  saved
-                    ? "bg-sage text-sage-foreground cursor-default"
-                    : "bg-terracotta text-terracotta-foreground hover:bg-terracotta-hover"
-                )}
-              >
-                {saved ? <Check size={15} /> : <Bookmark size={15} />}
-                {saved ? "Cycle saved" : "Save this cycle"}
-              </button>
-              <Link
-                to={askLink("Help me understand this cycle")}
-                className="inline-flex items-center gap-2 rounded-pill px-6 py-3.5 font-sans text-sm font-medium border border-foreground/20 text-foreground hover:bg-foreground/5 transition-all"
-              >
-                <MessageCircle size={14} />
-                Ask about this cycle
-              </Link>
-              <Link
-                to="/trying-to-conceive"
-                className="inline-flex items-center gap-2 rounded-pill px-6 py-3.5 font-sans text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-foreground/5 transition-all"
-              >
-                Read TTC guidance
-                <ArrowRight size={14} />
-              </Link>
-            </div>
+          {/* Primary action, centred and given space */}
+          <div className="flex flex-col items-center gap-5">
+            <button
+              onClick={handleSave}
+              disabled={saved}
+              className={cn(
+                "inline-flex items-center gap-2.5 rounded-pill px-9 py-4 font-sans text-[15px] font-medium transition-all shadow-cta",
+                saved
+                  ? "bg-sage text-sage-foreground cursor-default"
+                  : "bg-terracotta text-terracotta-foreground hover:bg-terracotta-hover hover:scale-[1.02]"
+              )}
+            >
+              {saved ? <Check size={16} /> : <Bookmark size={16} />}
+              {saved ? "Cycle saved" : "Save this cycle"}
+            </button>
 
             {saved && (
-              <p className="font-sans text-xs font-light text-sage mt-5 flex items-center gap-1.5">
+              <p className="font-sans text-xs font-light text-sage flex items-center gap-1.5 animate-fade-in">
                 <BellRing size={12} />
                 We'll quietly check in on the dates you've turned on.
               </p>
             )}
+
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-2">
+              <Link
+                to={askLink("Help me understand this cycle")}
+                className="inline-flex items-center gap-1.5 font-sans text-sm font-light text-foreground/70 hover:text-foreground transition-colors"
+              >
+                <MessageCircle size={13} />
+                Ask about this cycle
+              </Link>
+              <Link
+                to="/trying-to-conceive"
+                className="inline-flex items-center gap-1.5 font-sans text-sm font-light text-foreground/70 hover:text-foreground transition-colors"
+              >
+                Read TTC guidance
+                <ArrowRight size={13} />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

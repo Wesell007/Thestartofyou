@@ -274,10 +274,16 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
   const insight = getDptInsight(clampedDpt);
   const [aiQuestion, setAiQuestion] = useState("");
 
-  
+  // Brief, premium reveal moment — fades quickly, never gimmicky
+  const [reveal, setReveal] = useState(true);
+  useEffect(() => {
+    const t = setTimeout(() => setReveal(false), 4200);
+    return () => clearTimeout(t);
+  }, []);
 
   const testDate = addDays(transferDate, insight.testDay);
   const daysToTest = Math.max(differenceInDays(testDate, today), 0);
+  const transferLabel = transferType === "5day" ? "5-day blastocyst transfer" : "3-day embryo transfer";
 
   return (
     <div>

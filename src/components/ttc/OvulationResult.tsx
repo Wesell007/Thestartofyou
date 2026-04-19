@@ -104,94 +104,67 @@ const OvulationResult = ({
   const askLink = (q: string) =>
     `/ask?q=${encodeURIComponent(q)}&ctx=${encodeURIComponent("Trying to conceive — this cycle")}`;
 
+  const supportingDates = [
+    { label: "Likely ovulation", value: format(ovulationDay, "d MMMM"), meta: `Around day ${cycleLength - 14} of your cycle` },
+    { label: "Best days to try", value: `${format(bestDays[0], "d")} – ${format(bestDays[2], "d MMMM")}`, meta: "The two days before ovulation, and the day itself" },
+    { label: "Expected next period", value: format(nextPeriod, "d MMMM"), meta: daysToPeriod >= 0 ? `In ${daysToPeriod} days` : `${Math.abs(daysToPeriod)} days late` },
+  ];
+
   return (
     <div>
       {/* ── Primary result ──────────────────────────────────────────── */}
-      <section className="bg-parchment-dark pt-28 pb-16 md:pt-36 md:pb-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-          <div className="relative inline-flex items-center gap-2 mb-5">
+      <section className="relative bg-parchment-dark pt-28 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        {/* ambient glow */}
+        <div className="absolute inset-x-0 top-0 h-[420px] glow-sage opacity-60 pointer-events-none" aria-hidden="true" />
+        <div className="relative container mx-auto px-6 md:px-10 max-w-2xl text-center">
+          <div className="inline-flex items-center gap-2 mb-7">
             {reveal && (
-              <Sparkles
-                size={14}
-                className="text-sage animate-sparkle-fade"
-                aria-hidden="true"
-              />
+              <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
             )}
-            <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted">
+            <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage">
               Here's where you are this cycle
             </p>
+            {reveal && (
+              <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
+            )}
           </div>
 
-          <h1 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-3">
-            Your fertile window opens{" "}
-            <span
-              className={cn(
-                "inline-block",
-                reveal &&
-                  "animate-result-shimmer bg-clip-text text-transparent bg-gradient-to-r from-foreground via-sage to-foreground bg-[length:200%_100%]"
-              )}
-            >
-              {format(fertileStart, "d MMMM")}
-            </span>
-          </h1>
-          <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-10 max-w-xl">
-            A calm map of the days ahead. Use it as orientation, not pressure — bodies don't always follow the calendar.
+          <p className="font-serif text-lg sm:text-xl text-foreground/60 italic leading-snug mb-5">
+            Your fertile window opens
           </p>
-
-          {/* Four key dates */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            <div className="bg-card border border-border/50 rounded-2xl px-6 py-6 shadow-card-brand">
-              <p className="font-sans text-[11px] font-light tracking-[0.18em] uppercase text-sage-muted mb-2">
-                Likely ovulation
-              </p>
-              <p className="font-serif text-xl text-foreground leading-snug mb-1">
-                {format(ovulationDay, "d MMMM")}
-              </p>
-              <p className="font-sans text-xs font-light text-muted-foreground">
-                Around day {cycleLength - 14} of your cycle
-              </p>
-            </div>
-
-            <div className="bg-card border border-border/50 rounded-2xl px-6 py-6 shadow-card-brand">
-              <p className="font-sans text-[11px] font-light tracking-[0.18em] uppercase text-sage-muted mb-2">
-                Fertile window
-              </p>
-              <p className="font-serif text-xl text-foreground leading-snug mb-1">
-                {format(fertileStart, "d MMM")} – {format(fertileEnd, "d MMM")}
-              </p>
-              <p className="font-sans text-xs font-light text-muted-foreground">6 days</p>
-            </div>
-
-            <div className="bg-card border border-border/50 rounded-2xl px-6 py-6 shadow-card-brand">
-              <p className="font-sans text-[11px] font-light tracking-[0.18em] uppercase text-sage-muted mb-2">
-                Best days to try
-              </p>
-              <p className="font-serif text-xl text-foreground leading-snug mb-1">
-                {format(bestDays[0], "d")} – {format(bestDays[2], "d MMMM")}
-              </p>
-              <p className="font-sans text-xs font-light text-muted-foreground">
-                The two days before ovulation, plus ovulation itself
-              </p>
-            </div>
-
-            <div className="bg-card border border-border/50 rounded-2xl px-6 py-6 shadow-card-brand">
-              <p className="font-sans text-[11px] font-light tracking-[0.18em] uppercase text-sage-muted mb-2">
-                Expected next period
-              </p>
-              <p className="font-serif text-xl text-foreground leading-snug mb-1">
-                {format(nextPeriod, "d MMMM")}
-              </p>
-              <p className="font-sans text-xs font-light text-muted-foreground">
-                {daysToPeriod >= 0 ? `In ${daysToPeriod} days` : `${Math.abs(daysToPeriod)} days late`}
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-sage-bg/30 border border-sage-light/30 rounded-xl px-6 py-5">
-            <p className="font-serif italic text-base text-foreground/80 leading-relaxed text-center">
-              These dates are a gentle estimate based on a {cycleLength}-day cycle. Ovulation can shift from month to month, and that is completely normal.
+          <h1
+            className={cn(
+              "font-serif text-[2.75rem] sm:text-6xl md:text-7xl text-foreground leading-[1.05] tracking-tight mb-6",
+              reveal && "animate-result-shimmer"
+            )}
+          >
+            {format(fertileStart, "d MMMM")}
+          </h1>
+          <div className="flanking-lines mb-6">
+            <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted whitespace-nowrap">
+              through {format(fertileEnd, "d MMMM")}
             </p>
           </div>
+          <p className="font-sans text-base sm:text-[17px] font-light text-foreground/65 leading-relaxed max-w-lg mx-auto mb-14">
+            A quiet map of the days ahead. Hold it gently — bodies don't always follow the calendar, and that's part of this.
+          </p>
+
+          {/* Supporting dates — elegant inline rhythm, not a card grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border/40 rounded-2xl overflow-hidden border border-border/40 shadow-card-brand">
+            {supportingDates.map((d) => (
+              <div key={d.label} className="bg-card/80 backdrop-blur-sm px-6 py-7 text-left">
+                <p className="font-sans text-[10px] font-light tracking-[0.22em] uppercase text-sage-muted mb-2.5">
+                  {d.label}
+                </p>
+                <p className="font-serif text-lg text-foreground leading-snug mb-1.5">{d.value}</p>
+                <p className="font-sans text-xs font-light text-foreground/55 leading-relaxed">{d.meta}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="font-serif italic text-[15px] text-foreground/55 leading-relaxed mt-10 max-w-xl mx-auto">
+            These dates are a gentle estimate based on a {cycleLength}-day cycle. Ovulation can shift from month to month, and that is completely normal.
+          </p>
         </div>
       </section>
 

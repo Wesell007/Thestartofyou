@@ -206,7 +206,22 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
   const today = new Date();
   const progressPct = Math.min((result.currentWeek / 40) * 100, 100);
   const [aiQuestion, setAiQuestion] = useState("");
+  const [celebrate, setCelebrate] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const t = setTimeout(() => setCelebrate(true), 200);
+    const off = setTimeout(() => setCelebrate(false), 4200);
+    return () => { clearTimeout(t); clearTimeout(off); };
+  }, []);
+
+  // Tasteful long-form: "9 weeks 6 days" / "9 weeks" / "1 week 1 day"
+  const formatWeeksDays = (w: number, d: number) => {
+    const wk = `${w} ${w === 1 ? "week" : "weeks"}`;
+    if (d <= 0) return wk;
+    const dy = `${d} ${d === 1 ? "day" : "days"}`;
+    return `${wk} ${dy}`;
+  };
 
   const handleAskNow = () => {
     const q = aiQuestion.trim();
@@ -248,21 +263,61 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
             {/* Left — the date, the meaning */}
-            <div className="md:col-span-7">
+            <div className="md:col-span-7 relative">
+              {/* Soft sparkle reveal — premium, brief, fades away */}
+              {celebrate && (
+                <div className="pointer-events-none absolute -top-6 -left-2 right-0 h-40 overflow-visible z-0" aria-hidden="true">
+                  {[
+                    { l: "8%",  t: "30%", d: "0ms",   s: 8 },
+                    { l: "22%", t: "10%", d: "120ms", s: 6 },
+                    { l: "38%", t: "55%", d: "260ms", s: 5 },
+                    { l: "54%", t: "20%", d: "180ms", s: 7 },
+                    { l: "68%", t: "60%", d: "340ms", s: 5 },
+                    { l: "82%", t: "35%", d: "420ms", s: 6 },
+                  ].map((p, i) => (
+                    <Sparkles
+                      key={i}
+                      size={p.s}
+                      className="absolute animate-sparkle-fade"
+                      style={{
+                        left: p.l,
+                        top: p.t,
+                        color: 'hsl(var(--stage-pregnancy-accent))',
+                        opacity: 0,
+                        animationDelay: p.d,
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
+
               <Fade delay={60}>
+                <div className="flex items-center gap-2 mb-5">
+                  <span
+                    className="h-px w-6"
+                    style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.45)' }}
+                  />
+                  <p
+                    className="font-serif italic text-[13px] sm:text-sm"
+                    style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
+                  >
+                    Congratulations
+                  </p>
+                </div>
                 <p
-                  className="font-sans text-[10px] font-light tracking-[0.35em] uppercase mb-5"
-                  style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
+                  className="font-sans text-[10px] font-light tracking-[0.35em] uppercase mb-5 text-foreground/55"
                 >
                   Your estimated due date
                 </p>
               </Fade>
 
               <Fade delay={120}>
-                <h1 className="font-serif text-[2.5rem] sm:text-[3.25rem] md:text-[4rem] text-foreground leading-[1.02] mb-1.5">
-                  {format(result.dueDate, "d MMMM yyyy")}
+                <h1 className="font-serif text-[2.5rem] sm:text-[3.25rem] md:text-[4rem] text-foreground leading-[1.02] mb-1.5 relative">
+                  <span className={cn("inline-block", celebrate && "animate-result-shimmer")}>
+                    {format(result.dueDate, "d MMMM yyyy")}
+                  </span>
                 </h1>
-                <p className="font-sans text-sm font-light text-muted-foreground/35 mb-8">
+                <p className="font-sans text-sm font-light text-muted-foreground/55 mb-8">
                   {format(result.dueDate, "EEEE")}
                 </p>
               </Fade>
@@ -335,10 +390,19 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     </p>
                   </div>
 
+                  {/* Long-form current progress — clarity over shorthand */}
+                  <div className="bg-card px-5 pt-4 pb-3 text-center">
+                    <p className="font-sans text-[8px] font-light text-sage-muted tracking-wider uppercase mb-1">
+                      You are currently
+                    </p>
+                    <p className="font-serif text-base text-foreground leading-snug">
+                      {formatWeeksDays(result.currentWeek, result.currentDay)}
+                    </p>
+                  </div>
+
                   {/* Stats row */}
-                  <div className="bg-card px-5 py-4 grid grid-cols-3 divide-x divide-border/30">
+                  <div className="bg-card px-5 py-4 grid grid-cols-2 divide-x divide-border/30 border-t border-border/20">
                     {[
-                      { val: `${result.currentWeek}${result.currentDay > 0 ? `+${result.currentDay}` : ""}`, lab: "current week" },
                       { val: `${result.weeksRemaining}`, lab: "weeks left" },
                       { val: `T${result.trimesterNumber}`, lab: "trimester" },
                     ].map((s, i) => (

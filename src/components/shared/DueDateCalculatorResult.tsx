@@ -206,7 +206,22 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
   const today = new Date();
   const progressPct = Math.min((result.currentWeek / 40) * 100, 100);
   const [aiQuestion, setAiQuestion] = useState("");
+  const [celebrate, setCelebrate] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const t = setTimeout(() => setCelebrate(true), 200);
+    const off = setTimeout(() => setCelebrate(false), 4200);
+    return () => { clearTimeout(t); clearTimeout(off); };
+  }, []);
+
+  // Tasteful long-form: "9 weeks 6 days" / "9 weeks" / "1 week 1 day"
+  const formatWeeksDays = (w: number, d: number) => {
+    const wk = `${w} ${w === 1 ? "week" : "weeks"}`;
+    if (d <= 0) return wk;
+    const dy = `${d} ${d === 1 ? "day" : "days"}`;
+    return `${wk} ${dy}`;
+  };
 
   const handleAskNow = () => {
     const q = aiQuestion.trim();

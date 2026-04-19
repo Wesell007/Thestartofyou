@@ -319,4 +319,22 @@
       transparent 100%
     );
   }
+
+  /* Premium one-shot shimmer for celebratory result reveal */
+  .animate-result-shimmer {
+    background-image: linear-gradient(
+      100deg,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--foreground)) 38%,
+      hsl(var(--stage-pregnancy-accent)) 50%,
+      hsl(var(--foreground)) 62%,
+      hsl(var(--foreground)) 100%
+    );
+    background-size: 250% 100%;
+    background-position: -150% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
 }

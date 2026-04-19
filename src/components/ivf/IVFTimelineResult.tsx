@@ -422,13 +422,13 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
 
                   <div className="px-7 py-5 border-b border-border/15">
                     <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase mb-3" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
-                      {daysToTest > 0 ? "Test day" : "Test window"}
+                      {daysToTest > 0 ? "Your test day" : "Test window"}
                     </p>
                     {daysToTest > 0 ? (
-                      <div className="flex items-end gap-2">
+                      <div className="flex items-end gap-2 flex-wrap">
                         <span className="font-serif text-3xl text-foreground">{daysToTest}</span>
-                        <span className="font-sans text-[13px] font-light text-muted-foreground/50 pb-0.5">
-                          {daysToTest === 1 ? "day" : "days"} away · {format(testDate, "d MMM")}
+                        <span className="font-sans text-[13px] font-light text-foreground/60 pb-0.5">
+                          {daysToTest === 1 ? "day" : "days"} away · {format(testDate, "EEEE d MMMM")}
                         </span>
                       </div>
                     ) : (

@@ -274,10 +274,16 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
   const insight = getDptInsight(clampedDpt);
   const [aiQuestion, setAiQuestion] = useState("");
 
-  
+  // Brief, premium reveal moment — fades quickly, never gimmicky
+  const [reveal, setReveal] = useState(true);
+  useEffect(() => {
+    const t = setTimeout(() => setReveal(false), 4200);
+    return () => clearTimeout(t);
+  }, []);
 
   const testDate = addDays(transferDate, insight.testDay);
   const daysToTest = Math.max(differenceInDays(testDate, today), 0);
+  const transferLabel = transferType === "5day" ? "5-day blastocyst transfer" : "3-day embryo transfer";
 
   return (
     <div>
@@ -293,24 +299,58 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
 
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pt-32 md:pt-44 pb-28 md:pb-36 relative z-10">
 
-          {/* Eyebrow */}
+          {/* Eyebrow — gentle, IVF-appropriate (not "Congratulations") */}
           <Fade delay={0}>
-            <div className="flex items-center gap-3 mb-10">
-              <div className="h-px w-10" style={{ background: "hsl(var(--stage-ivf-accent) / 0.3)" }} />
-              <p className="font-sans text-[11px] font-light tracking-[0.3em] uppercase" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
-                Your IVF timeline
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-px w-10" style={{ background: "hsl(var(--stage-ivf-accent) / 0.35)" }} />
+              <p className="font-serif italic text-[13px] sm:text-sm" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
+                With you in this moment
               </p>
             </div>
+            <p className="font-sans text-[10px] font-light tracking-[0.35em] uppercase mb-8 text-foreground/60">
+              Your IVF timeline
+            </p>
           </Fade>
 
-          {/* Primary result */}
+          {/* Primary result — soft sparkle reveal + one-shot shimmer on the day number */}
           <Fade delay={100}>
-            <p className="font-sans text-[13px] font-light text-foreground/35 mb-3 tracking-wide">You are currently</p>
-            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 mb-6">
-              <span className="font-serif text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] text-foreground leading-[0.85] tracking-tight">{clampedDpt}</span>
-              <span className="font-serif text-xl sm:text-2xl md:text-[1.75rem] font-light text-foreground/45 italic">
-                {clampedDpt === 1 ? "day" : "days"} post transfer
-              </span>
+            <div className="relative">
+              {reveal && (
+                <div className="pointer-events-none absolute -top-4 -left-2 right-0 h-32 overflow-visible z-0" aria-hidden="true">
+                  {[
+                    { l: "6%",  t: "30%", d: "0ms",   s: 8 },
+                    { l: "20%", t: "10%", d: "140ms", s: 6 },
+                    { l: "34%", t: "55%", d: "280ms", s: 5 },
+                    { l: "50%", t: "20%", d: "200ms", s: 7 },
+                    { l: "64%", t: "60%", d: "360ms", s: 5 },
+                  ].map((p, i) => (
+                    <Sparkles
+                      key={i}
+                      size={p.s}
+                      className="absolute animate-sparkle-fade"
+                      style={{
+                        left: p.l,
+                        top: p.t,
+                        color: "hsl(var(--stage-ivf-accent))",
+                        opacity: 0,
+                        animationDelay: p.d,
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
+              <p className="font-sans text-[13px] font-light text-foreground/45 mb-3 tracking-wide relative z-10">You are currently</p>
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 mb-6 relative z-10">
+                <span className={cn(
+                  "font-serif text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] text-foreground leading-[0.85] tracking-tight inline-block",
+                  reveal && "animate-result-shimmer"
+                )}>
+                  {clampedDpt}
+                </span>
+                <span className="font-serif text-xl sm:text-2xl md:text-[1.75rem] font-light text-foreground/55 italic">
+                  {clampedDpt === 1 ? "day" : "days"} post transfer
+                </span>
+              </div>
             </div>
           </Fade>
 
@@ -321,13 +361,13 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                 <Activity size={10} />
                 {insight.stage}
               </span>
-              <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light px-3.5 py-2.5 rounded-full text-foreground/35 bg-card/30 border border-border/15">
-                {transferType === "5day" ? "5-day blastocyst" : "3-day transfer"} · {format(transferDate, "d MMM yyyy")}
+              <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light px-3.5 py-2.5 rounded-full text-foreground/55 bg-card/40 border border-border/20">
+                {transferLabel} · {format(transferDate, "d MMMM yyyy")}
               </span>
               {daysToTest > 0 && (
-                <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light px-3.5 py-2.5 rounded-full text-foreground/35 bg-card/30 border border-border/15">
+                <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light px-3.5 py-2.5 rounded-full text-foreground/55 bg-card/40 border border-border/20">
                   <Clock size={9} />
-                  {daysToTest} {daysToTest === 1 ? "day" : "days"} to test window
+                  {daysToTest} {daysToTest === 1 ? "day" : "days"} until your test window
                 </span>
               )}
             </div>
@@ -382,13 +422,13 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
 
                   <div className="px-7 py-5 border-b border-border/15">
                     <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase mb-3" style={{ color: "hsl(var(--stage-ivf-accent))" }}>
-                      {daysToTest > 0 ? "Test day" : "Test window"}
+                      {daysToTest > 0 ? "Your test day" : "Test window"}
                     </p>
                     {daysToTest > 0 ? (
-                      <div className="flex items-end gap-2">
+                      <div className="flex items-end gap-2 flex-wrap">
                         <span className="font-serif text-3xl text-foreground">{daysToTest}</span>
-                        <span className="font-sans text-[13px] font-light text-muted-foreground/50 pb-0.5">
-                          {daysToTest === 1 ? "day" : "days"} away · {format(testDate, "d MMM")}
+                        <span className="font-sans text-[13px] font-light text-foreground/60 pb-0.5">
+                          {daysToTest === 1 ? "day" : "days"} away · {format(testDate, "EEEE d MMMM")}
                         </span>
                       </div>
                     ) : (

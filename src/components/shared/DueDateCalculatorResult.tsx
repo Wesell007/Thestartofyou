@@ -390,10 +390,19 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     </p>
                   </div>
 
+                  {/* Long-form current progress — clarity over shorthand */}
+                  <div className="bg-card px-5 pt-4 pb-3 text-center">
+                    <p className="font-sans text-[8px] font-light text-sage-muted tracking-wider uppercase mb-1">
+                      You are currently
+                    </p>
+                    <p className="font-serif text-base text-foreground leading-snug">
+                      {formatWeeksDays(result.currentWeek, result.currentDay)}
+                    </p>
+                  </div>
+
                   {/* Stats row */}
-                  <div className="bg-card px-5 py-4 grid grid-cols-3 divide-x divide-border/30">
+                  <div className="bg-card px-5 py-4 grid grid-cols-2 divide-x divide-border/30 border-t border-border/20">
                     {[
-                      { val: `${result.currentWeek}${result.currentDay > 0 ? `+${result.currentDay}` : ""}`, lab: "current week" },
                       { val: `${result.weeksRemaining}`, lab: "weeks left" },
                       { val: `T${result.trimesterNumber}`, lab: "trimester" },
                     ].map((s, i) => (

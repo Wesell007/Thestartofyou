@@ -246,105 +246,109 @@ const OvulationResult = ({
       </section>
 
       {/* ── Save this cycle (primary CTA) ───────────────────────────── */}
-      <section className="bg-parchment py-16 md:py-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-          <div className="bg-card border border-sage-light/40 rounded-3xl p-8 md:p-10 shadow-card-brand">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="w-10 h-10 rounded-full bg-sage-bg/60 border border-sage-light/40 flex items-center justify-center shrink-0">
-                <Bookmark size={16} className="text-sage" />
-              </div>
-              <div>
-                <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase text-sage-muted mb-1.5">
-                  Save and return
-                </p>
-                <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug">
-                  Save this cycle
-                </h2>
-              </div>
+      <section className="relative bg-parchment py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[520px] glow-sage opacity-50 pointer-events-none" aria-hidden="true" />
+        <div className="relative container mx-auto px-6 md:px-10 max-w-2xl">
+          {/* Editorial intro, no card frame */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-card border border-sage-light/50 shadow-card-brand mb-6">
+              <Bookmark size={16} className="text-sage" />
             </div>
-
-            <p className="font-sans text-[15px] font-light text-foreground/70 leading-relaxed mb-7 max-w-xl">
-              Saving this cycle keeps your fertile window, ovulation day and expected period in one place — and lets us send a calm reminder when each one arrives.
+            <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage mb-4">
+              The start of a calmer monthly rhythm
             </p>
+            <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
+              Save this cycle
+            </h2>
+            <p className="font-sans text-[16px] font-light text-foreground/65 leading-relaxed max-w-lg mx-auto">
+              Keep your fertile window, ovulation day and expected period in one place. We'll quietly check in on the days that matter, so you don't have to hold it all in your head.
+            </p>
+          </div>
 
-            {/* Reminder toggles */}
-            <div className="space-y-2.5 mb-7">
-              {([
-                { key: "fertile" as const, label: "When my fertile window opens", date: format(fertileStart, "d MMMM") },
-                { key: "ovulation" as const, label: "Around my likely ovulation day", date: format(ovulationDay, "d MMMM") },
-                { key: "test" as const, label: "When testing makes sense", date: format(testDay, "d MMMM") },
-                { key: "period" as const, label: "When my next period is due", date: format(nextPeriod, "d MMMM") },
-              ]).map(({ key, label, date }) => {
-                const on = reminders[key];
-                return (
-                  <button
-                    key={key}
-                    onClick={() => toggleReminder(key)}
-                    className={cn(
-                      "w-full flex items-center justify-between gap-4 px-5 py-4 rounded-xl border transition-all text-left",
-                      on
-                        ? "bg-sage-bg/30 border-sage-light/50"
-                        : "bg-parchment/60 border-border/40 hover:border-sage-light/40"
-                    )}
-                  >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div
-                        className={cn(
-                          "w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors",
-                          on ? "bg-sage text-sage-foreground" : "bg-card border border-border/60 text-muted-foreground"
-                        )}
-                      >
-                        {on ? <Check size={14} /> : <Bell size={13} />}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="font-sans text-sm font-medium text-foreground leading-tight">{label}</p>
-                        <p className="font-sans text-xs font-light text-muted-foreground mt-0.5">{date}</p>
-                      </div>
-                    </div>
-                    <span
+          {/* Reminder list — light dividers, no boxes */}
+          <div className="bg-card/70 backdrop-blur-sm border border-border/40 rounded-2xl shadow-card-brand divide-y divide-border/40 mb-8">
+            {([
+              { key: "fertile" as const, label: "When my fertile window opens", date: format(fertileStart, "d MMMM") },
+              { key: "ovulation" as const, label: "Around my likely ovulation day", date: format(ovulationDay, "d MMMM") },
+              { key: "test" as const, label: "When testing makes sense", date: format(testDay, "d MMMM") },
+              { key: "period" as const, label: "When my next period is due", date: format(nextPeriod, "d MMMM") },
+            ]).map(({ key, label, date }) => {
+              const on = reminders[key];
+              return (
+                <button
+                  key={key}
+                  onClick={() => toggleReminder(key)}
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-sage-bg/20 transition-colors first:rounded-t-2xl last:rounded-b-2xl"
+                >
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div
                       className={cn(
-                        "font-sans text-[11px] font-light tracking-[0.12em] uppercase shrink-0",
-                        on ? "text-sage" : "text-muted-foreground/70"
+                        "w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-colors",
+                        on ? "bg-sage text-sage-foreground" : "bg-parchment-deeper text-muted-foreground"
                       )}
                     >
-                      {on ? "On" : "Off"}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+                      {on ? <Check size={14} /> : <Bell size={13} />}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-sans text-[15px] font-light text-foreground leading-tight">{label}</p>
+                      <p className="font-sans text-xs font-light text-foreground/55 mt-1">{date}</p>
+                    </div>
+                  </div>
+                  <span
+                    className={cn(
+                      "font-sans text-[10px] font-light tracking-[0.18em] uppercase shrink-0",
+                      on ? "text-sage" : "text-foreground/35"
+                    )}
+                  >
+                    {on ? "On" : "Off"}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-            {/* Primary + secondary CTAs */}
-            <div className="flex flex-wrap gap-3">
-              <button
-                onClick={handleSave}
-                disabled={saved}
-                className={cn(
-                  "inline-flex items-center gap-2 rounded-pill px-7 py-3.5 font-sans text-sm font-medium transition-all shadow-cta",
-                  saved
-                    ? "bg-sage text-sage-foreground cursor-default"
-                    : "bg-terracotta text-terracotta-foreground hover:bg-terracotta-hover"
-                )}
-              >
-                {saved ? <Check size={15} /> : <Bookmark size={15} />}
-                {saved ? "Cycle saved" : "Save this cycle"}
-              </button>
+          {/* Primary action, centred and given space */}
+          <div className="flex flex-col items-center gap-5">
+            <button
+              onClick={handleSave}
+              disabled={saved}
+              className={cn(
+                "inline-flex items-center gap-2.5 rounded-pill px-9 py-4 font-sans text-[15px] font-medium transition-all shadow-cta",
+                saved
+                  ? "bg-sage text-sage-foreground cursor-default"
+                  : "bg-terracotta text-terracotta-foreground hover:bg-terracotta-hover hover:scale-[1.02]"
+              )}
+            >
+              {saved ? <Check size={16} /> : <Bookmark size={16} />}
+              {saved ? "Cycle saved" : "Save this cycle"}
+            </button>
+
+            {saved && (
+              <p className="font-sans text-xs font-light text-sage flex items-center gap-1.5 animate-fade-in">
+                <BellRing size={12} />
+                We'll quietly check in on the dates you've turned on.
+              </p>
+            )}
+
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-2">
               <Link
                 to={askLink("Help me understand this cycle")}
-                className="inline-flex items-center gap-2 rounded-pill px-6 py-3.5 font-sans text-sm font-medium border border-foreground/20 text-foreground hover:bg-foreground/5 transition-all"
+                className="inline-flex items-center gap-1.5 font-sans text-sm font-light text-foreground/70 hover:text-foreground transition-colors"
               >
-                <MessageCircle size={14} />
+                <MessageCircle size={13} />
                 Ask about this cycle
               </Link>
               <Link
                 to="/trying-to-conceive"
-                className="inline-flex items-center gap-2 rounded-pill px-6 py-3.5 font-sans text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-foreground/5 transition-all"
+                className="inline-flex items-center gap-1.5 font-sans text-sm font-light text-foreground/70 hover:text-foreground transition-colors"
               >
                 Read TTC guidance
-                <ArrowRight size={14} />
+                <ArrowRight size={13} />
               </Link>
             </div>
-
+          </div>
+        </div>
+      </section>
             {saved && (
               <p className="font-sans text-xs font-light text-sage mt-5 flex items-center gap-1.5">
                 <BellRing size={12} />

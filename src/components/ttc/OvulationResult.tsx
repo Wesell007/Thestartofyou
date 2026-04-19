@@ -1,6 +1,7 @@
 import { format, eachDayOfInterval, isSameDay, isWithinInterval, addDays } from "date-fns";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, MessageCircle, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface OvulationResultProps {
@@ -13,6 +14,12 @@ interface OvulationResultProps {
 }
 
 const OvulationResult = ({ lmp, cycleLength, ovulationDay, fertileStart, fertileEnd, testDay }: OvulationResultProps) => {
+  const [reveal, setReveal] = useState(true);
+  useEffect(() => {
+    const t = setTimeout(() => setReveal(false), 4200);
+    return () => clearTimeout(t);
+  }, []);
+
   // Build a visual calendar spanning lmp to testDay+2
   const periodEnd = addDays(lmp, 4); // ~5 days of period
   const calendarDays = eachDayOfInterval({ start: lmp, end: addDays(testDay, 2) });
@@ -53,8 +60,33 @@ const OvulationResult = ({ lmp, cycleLength, ovulationDay, fertileStart, fertile
       {/* ── Primary result ──────────────────────────────────────────── */}
       <section className="bg-parchment-dark pt-28 pb-20 md:pt-36 md:pb-24">
         <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-8">
-            Your fertility dates
+          <div className="relative inline-flex items-center gap-2 mb-5">
+            {reveal && (
+              <Sparkles
+                size={14}
+                className="text-sage animate-sparkle-fade"
+                aria-hidden="true"
+              />
+            )}
+            <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted">
+              Here's where you are
+            </p>
+          </div>
+
+          <h1 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-3">
+            Your fertile window opens{" "}
+            <span
+              className={cn(
+                "inline-block",
+                reveal &&
+                  "animate-result-shimmer bg-clip-text text-transparent bg-gradient-to-r from-foreground via-sage to-foreground bg-[length:200%_100%]"
+              )}
+            >
+              {format(fertileStart, "d MMMM")}
+            </span>
+          </h1>
+          <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-10 max-w-xl">
+            A gentle map of the days ahead. Use it as orientation, not pressure — bodies don't always follow the calendar.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
@@ -64,7 +96,7 @@ const OvulationResult = ({ lmp, cycleLength, ovulationDay, fertileStart, fertile
                 Fertile window
               </p>
               <p className="font-serif text-xl text-foreground leading-snug mb-1">
-                {format(fertileStart, "d MMM")} - {format(fertileEnd, "d MMM")}
+                {format(fertileStart, "d MMMM")} – {format(fertileEnd, "d MMMM")}
               </p>
               <p className="font-sans text-xs font-light text-muted-foreground">
                 6 days
@@ -80,27 +112,27 @@ const OvulationResult = ({ lmp, cycleLength, ovulationDay, fertileStart, fertile
                 {format(ovulationDay, "d MMMM")}
               </p>
               <p className="font-sans text-xs font-light text-muted-foreground">
-                Day {cycleLength - 14} of your cycle
+                Around day {cycleLength - 14} of your cycle
               </p>
             </div>
 
             {/* Test day */}
             <div className="bg-card border border-border/50 rounded-2xl px-7 py-8 shadow-card-brand">
               <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-3">
-                Testing window
+                Earliest test
               </p>
               <p className="font-serif text-xl text-foreground leading-snug mb-1">
                 {format(testDay, "d MMMM")}
               </p>
               <p className="font-sans text-xs font-light text-muted-foreground">
-                Earliest reliable test
+                Around 15 days after ovulation
               </p>
             </div>
           </div>
 
           <div className="bg-sage-bg/30 border border-sage-light/30 rounded-xl px-6 py-5">
-            <p className="font-serif italic text-base text-foreground/70 leading-relaxed text-center">
-              These dates are estimates based on a {cycleLength}-day cycle. Ovulation can vary from month to month.
+            <p className="font-serif italic text-base text-foreground/75 leading-relaxed text-center">
+              These dates are a gentle estimate based on a {cycleLength}-day cycle. Ovulation can shift from month to month, and that is completely normal.
             </p>
           </div>
         </div>

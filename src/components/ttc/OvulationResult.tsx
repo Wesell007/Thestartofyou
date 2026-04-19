@@ -1,6 +1,7 @@
 import { format, eachDayOfInterval, isSameDay, isWithinInterval, addDays } from "date-fns";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, MessageCircle, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface OvulationResultProps {

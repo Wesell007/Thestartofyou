@@ -14,6 +14,12 @@ interface OvulationResultProps {
 }
 
 const OvulationResult = ({ lmp, cycleLength, ovulationDay, fertileStart, fertileEnd, testDay }: OvulationResultProps) => {
+  const [reveal, setReveal] = useState(true);
+  useEffect(() => {
+    const t = setTimeout(() => setReveal(false), 4200);
+    return () => clearTimeout(t);
+  }, []);
+
   // Build a visual calendar spanning lmp to testDay+2
   const periodEnd = addDays(lmp, 4); // ~5 days of period
   const calendarDays = eachDayOfInterval({ start: lmp, end: addDays(testDay, 2) });

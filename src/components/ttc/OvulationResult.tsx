@@ -203,23 +203,23 @@ const OvulationResult = ({
       </section>
 
       {/* ── What to do this cycle ───────────────────────────────────── */}
-      <section className="bg-parchment-dark py-16 md:py-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
+      <section className="bg-parchment-dark py-20 md:py-28">
+        <div className="container mx-auto px-6 md:px-10 max-w-2xl">
           <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
             This cycle
           </p>
-          <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-8">
+          <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-10">
             What to do now
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-0">
             {[
               {
                 title: "Try on the best days",
-                desc: `Aim for ${format(bestDays[0], "d")}, ${format(bestDays[1], "d")} and ${format(bestDays[2], "d MMMM")} — every other day is usually enough.`,
+                desc: `Aim for ${format(bestDays[0], "d")}, ${format(bestDays[1], "d")} and ${format(bestDays[2], "d MMMM")}. Every other day is usually enough.`,
               },
               {
-                title: "Test on or after " + format(testDay, "d MMMM"),
-                desc: "Earlier tests can show a false negative. Use first morning urine for the clearest result.",
+                title: `Test on or after ${format(testDay, "d MMMM")}`,
+                desc: "Earlier tests can show a false negative. First morning urine gives the clearest result.",
               },
               {
                 title: "Don't overtrack every signal",
@@ -229,10 +229,16 @@ const OvulationResult = ({
                 title: "Be kind to yourself if it doesn't happen",
                 desc: "Healthy couples can take several cycles. One month is data, not a verdict.",
               },
-            ].map((item) => (
-              <div key={item.title} className="bg-card border border-border/50 rounded-2xl p-6 shadow-card-brand">
-                <p className="font-sans text-[15px] font-medium text-foreground mb-2">{item.title}</p>
-                <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed">{item.desc}</p>
+            ].map((item, i, arr) => (
+              <div
+                key={item.title}
+                className={cn(
+                  "py-7",
+                  i < arr.length - 1 && "border-b border-border/30"
+                )}
+              >
+                <p className="font-serif text-lg text-foreground leading-snug mb-2">{item.title}</p>
+                <p className="font-sans text-[15px] font-light text-foreground/65 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>

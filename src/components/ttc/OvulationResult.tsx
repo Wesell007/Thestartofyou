@@ -349,15 +349,6 @@ const OvulationResult = ({
           </div>
         </div>
       </section>
-            {saved && (
-              <p className="font-sans text-xs font-light text-sage mt-5 flex items-center gap-1.5">
-                <BellRing size={12} />
-                We'll quietly check in on the dates you've turned on.
-              </p>
-            )}
-          </div>
-        </div>
-      </section>
 
       {/* ── End-of-cycle transition ─────────────────────────────────── */}
       <section className="bg-parchment-dark py-16 md:py-20">

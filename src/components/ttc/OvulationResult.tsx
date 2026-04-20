@@ -32,13 +32,13 @@ const BotanicalAccent = ({
 );
 
 /* ── Sprig (visible decorative mark) ───────────────────────────────── */
-const Sprig = ({ className, tone = "sage" }: { className?: string; tone?: "sage" | "lavender" }) => (
+const Sprig = ({ className, tone = "sage" }: { className?: string; tone?: "sage" | "ttc" }) => (
   <svg
     viewBox="0 0 64 64"
     aria-hidden="true"
     className={cn(
       "pointer-events-none select-none",
-      tone === "sage" ? "text-sage/85" : "text-lavender",
+      tone === "sage" ? "text-sage/85" : "text-[hsl(var(--stage-ttc-accent))]",
       className
     )}
     fill="none"
@@ -310,26 +310,50 @@ const OvulationResult = ({
         </div>
       </section>
 
-      {/* ── Save this cycle (lavender brand moment) ─────────────────── */}
-      <section className="relative bg-gradient-to-br from-lavender-bg via-lavender-bg/80 to-sage-bg/40 py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-lavender/50 to-transparent" aria-hidden="true" />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-lavender/50 to-transparent" aria-hidden="true" />
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[620px] glow-lavender opacity-90 pointer-events-none" aria-hidden="true" />
-        <div className="absolute -top-32 right-[-10%] w-[520px] h-[520px] glow-lavender opacity-60 rounded-full pointer-events-none" aria-hidden="true" />
+      {/* ── Save this cycle (TTC green brand moment) ────────────────── */}
+      <section
+        className="relative py-20 md:py-28 overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(135deg, hsl(var(--stage-ttc)) 0%, hsl(var(--sage-bg)) 55%, hsl(var(--stage-ttc) / 0.7) 100%)",
+        }}
+      >
+        <div
+          className="absolute inset-x-0 top-0 h-px"
+          style={{ background: "linear-gradient(to right, transparent, hsl(var(--stage-ttc-accent) / 0.4), transparent)" }}
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-x-0 bottom-0 h-px"
+          style={{ background: "linear-gradient(to right, transparent, hsl(var(--stage-ttc-accent) / 0.4), transparent)" }}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[620px] glow-sage opacity-90 pointer-events-none" aria-hidden="true" />
+        <div
+          className="absolute -top-32 right-[-10%] w-[520px] h-[520px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(ellipse, hsl(var(--stage-ttc-accent) / 0.18) 0%, transparent 70%)" }}
+          aria-hidden="true"
+        />
         <BotanicalAccent className="-bottom-6 -right-10 md:-right-2" flip opacity="opacity-[0.55]" size="w-[260px] md:w-[400px]" />
         <BotanicalAccent className="-top-4 -left-10 md:-left-2" opacity="opacity-[0.48]" size="w-[260px] md:w-[400px]" />
         <div className="relative container mx-auto px-6 md:px-10 max-w-2xl">
           {/* Editorial intro */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-card border border-lavender/50 shadow-elevated mb-6">
-              <Bookmark size={20} className="text-lavender-fg" />
+            <div
+              className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-card shadow-elevated mb-6"
+              style={{ borderWidth: 1, borderStyle: "solid", borderColor: "hsl(var(--stage-ttc-accent) / 0.45)" }}
+            >
+              <Bookmark size={20} style={{ color: "hsl(var(--stage-ttc-accent))" }} />
             </div>
             <div className="flex items-center justify-center gap-3 mb-4">
-              <Sprig tone="lavender" className="w-5 h-5 -rotate-[35deg]" />
-              <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-lavender-fg whitespace-nowrap">
+              <Sprig tone="ttc" className="w-5 h-5 -rotate-[35deg]" />
+              <p
+                className="font-sans text-[11px] font-light tracking-[0.24em] uppercase whitespace-nowrap"
+                style={{ color: "hsl(var(--stage-ttc-accent))" }}
+              >
                 The start of a calmer monthly rhythm
               </p>
-              <Sprig tone="lavender" className="w-5 h-5 rotate-[35deg] -scale-x-100" />
+              <Sprig tone="ttc" className="w-5 h-5 rotate-[35deg] -scale-x-100" />
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
               Save this cycle
@@ -339,27 +363,42 @@ const OvulationResult = ({
             </p>
           </div>
 
-          {/* Reminder list — lavender-toned branded surface */}
-          <div className="bg-card/95 backdrop-blur-sm border border-lavender/40 rounded-2xl shadow-elevated divide-y divide-lavender/25 mb-8">
+          {/* Reminder list — TTC-toned branded surface */}
+          <div
+            className="bg-card/95 backdrop-blur-sm rounded-2xl shadow-elevated mb-8"
+            style={{
+              borderWidth: 1,
+              borderStyle: "solid",
+              borderColor: "hsl(var(--stage-ttc-accent) / 0.28)",
+            }}
+          >
             {([
               { key: "fertile" as const, label: "When my fertile window opens", date: format(fertileStart, "d MMMM") },
               { key: "ovulation" as const, label: "Around my likely ovulation day", date: format(ovulationDay, "d MMMM") },
               { key: "test" as const, label: "When testing makes sense", date: format(testDay, "d MMMM") },
               { key: "period" as const, label: "When my next period is due", date: format(nextPeriod, "d MMMM") },
-            ]).map(({ key, label, date }) => {
+            ]).map(({ key, label, date }, i, arr) => {
               const on = reminders[key];
+              const isLast = i === arr.length - 1;
               return (
                 <button
                   key={key}
                   onClick={() => toggleReminder(key)}
-                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-lavender-bg/40 transition-colors first:rounded-t-2xl last:rounded-b-2xl"
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left transition-colors first:rounded-t-2xl last:rounded-b-2xl hover:bg-[hsl(var(--stage-ttc)/0.55)]"
+                  style={
+                    isLast
+                      ? undefined
+                      : { borderBottom: "1px solid hsl(var(--stage-ttc-accent) / 0.16)" }
+                  }
                 >
                   <div className="flex items-center gap-4 min-w-0">
                     <div
-                      className={cn(
-                        "w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-colors",
-                        on ? "bg-lavender text-lavender-fg" : "bg-parchment-deeper text-muted-foreground"
-                      )}
+                      className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-colors"
+                      style={
+                        on
+                          ? { background: "hsl(var(--stage-ttc-accent))", color: "hsl(0 0% 100%)" }
+                          : { background: "hsl(var(--parchment-deeper))", color: "hsl(var(--muted-foreground))" }
+                      }
                     >
                       {on ? <Check size={14} /> : <Bell size={13} />}
                     </div>
@@ -369,10 +408,8 @@ const OvulationResult = ({
                     </div>
                   </div>
                   <span
-                    className={cn(
-                      "font-sans text-[10px] font-light tracking-[0.18em] uppercase shrink-0",
-                      on ? "text-lavender-fg" : "text-foreground/35"
-                    )}
+                    className="font-sans text-[10px] font-light tracking-[0.18em] uppercase shrink-0"
+                    style={{ color: on ? "hsl(var(--stage-ttc-accent))" : "hsl(var(--foreground) / 0.35)" }}
                   >
                     {on ? "On" : "Off"}
                   </span>
@@ -473,7 +510,7 @@ const OvulationResult = ({
 
       {/* ── AI support ──────────────────────────────────────────────── */}
       <section className="relative bg-parchment py-16 md:py-20 overflow-hidden">
-        <div className="absolute -left-24 top-0 w-[380px] h-[380px] glow-lavender opacity-35 rounded-full pointer-events-none" aria-hidden="true" />
+        <div className="absolute -left-24 top-0 w-[380px] h-[380px] glow-sage opacity-50 rounded-full pointer-events-none" aria-hidden="true" />
         <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
           <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
             AI support

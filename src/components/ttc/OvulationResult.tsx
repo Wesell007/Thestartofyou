@@ -412,22 +412,24 @@ const OvulationResult = ({
       </section>
 
       {/* ── End-of-cycle transition ─────────────────────────────────── */}
-      <section className="bg-parchment-dark py-16 md:py-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+      <section className="relative bg-parchment-dark py-16 md:py-20 overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sage-light/40 to-transparent" aria-hidden="true" />
+        <div className="absolute -right-20 top-10 w-[360px] h-[360px] glow-sage opacity-30 rounded-full pointer-events-none" aria-hidden="true" />
+        <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
+          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
             When your period is due
           </p>
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-4">
             What's happening for you?
           </h2>
           <p className="font-sans text-[15px] font-light text-foreground/70 leading-relaxed mb-7 max-w-xl">
-            Around {format(nextPeriod, "d MMMM")}, come back and tell us where you are. We'll point you to the right next step — gently, with no assumptions.
+            Around {format(nextPeriod, "d MMMM")}, come back and tell us where you are. We'll point you to the right next step, gently and with no assumptions.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <button
               onClick={() => setShowTransition(true)}
-              className="group text-left bg-card border border-border/50 rounded-2xl p-6 shadow-card-brand hover:border-sage-light/50 transition-all"
+              className="group text-left bg-card/90 backdrop-blur-sm border border-sage-light/30 rounded-2xl p-6 shadow-card-brand hover:border-sage-light/70 hover:shadow-elevated transition-all"
             >
               <p className="font-serif text-lg text-foreground leading-snug mb-2">My period arrived</p>
               <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed">
@@ -436,7 +438,7 @@ const OvulationResult = ({
             </button>
             <button
               onClick={() => setShowTransition(true)}
-              className="group text-left bg-card border border-border/50 rounded-2xl p-6 shadow-card-brand hover:border-sage-light/50 transition-all"
+              className="group text-left bg-card/90 backdrop-blur-sm border border-sage-light/30 rounded-2xl p-6 shadow-card-brand hover:border-sage-light/70 hover:shadow-elevated transition-all"
             >
               <p className="font-serif text-lg text-foreground leading-snug mb-2">My period is late</p>
               <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed">
@@ -445,10 +447,10 @@ const OvulationResult = ({
             </button>
             <button
               onClick={() => setShowTransition(true)}
-              className="group text-left bg-card border border-lavender/40 rounded-2xl p-6 shadow-card-brand hover:border-lavender transition-all"
+              className="group text-left bg-lavender-bg/60 backdrop-blur-sm border border-lavender/40 rounded-2xl p-6 shadow-card-brand hover:border-lavender hover:shadow-elevated transition-all"
             >
               <p className="font-serif text-lg text-foreground leading-snug mb-2">I got a positive test</p>
-              <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed">
+              <p className="font-sans text-sm font-light text-foreground/70 leading-relaxed">
                 Move into pregnancy tracking when you're ready.
               </p>
             </button>

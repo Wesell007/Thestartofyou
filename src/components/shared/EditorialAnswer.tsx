@@ -1,44 +1,39 @@
 import ReactMarkdown from "react-markdown";
-import { Heart, LifeBuoy, Sparkles, Compass, BookOpen } from "lucide-react";
+import { Heart, LifeBuoy } from "lucide-react";
 import { Sprig } from "@/components/shared/StageBotanical";
 
 interface Props {
   markdown: string;
 }
 
-type ModuleTone = "neutral" | "help" | "seek" | "reassurance" | "next" | "expect";
+type ModuleTone = "neutral" | "help" | "seek" | "reassurance";
 
 interface AnswerModule {
   tone: ModuleTone;
   heading?: string;
-  body: string; // markdown
-  index: number;
+  body: string;
 }
 
 /**
- * Heuristically classify an H2/H3 heading into an editorial module type.
- * Falls back to "neutral" for normal narrative headings.
+ * Heuristically classify an H2/H3 heading. We deliberately collapse most
+ * headings into "neutral" so the answer reads as one fluid editorial piece,
+ * and reserve framed callouts for the few moments that genuinely deserve
+ * stronger emphasis (help, seek, reassurance).
  */
 const classify = (heading: string): ModuleTone => {
   const h = heading.toLowerCase();
-  if (/(seek|call|emergency|urgent|doctor|midwife|gp|warning|red flag|when to)/.test(h)) return "seek";
-  if (/(may help|what helps|try|tips|practical|gentle|do now|do today|relief|coping)/.test(h)) return "help";
-  if (/(remember|reassur|gentle reminder|kind|truth|you are not|it.s okay|trust)/.test(h)) return "reassurance";
-  if (/(next|continue|follow up|after|coming|further)/.test(h)) return "next";
-  if (/(expect|happening|going on|means|why|normal)/.test(h)) return "expect";
+  if (/(seek|call|emergency|urgent|red flag|warning|when to (call|see|contact))/.test(h)) return "seek";
+  if (/(may help|what helps|tips|practical|gentle (steps|practices)|relief|coping|do today|do now)/.test(h)) return "help";
+  if (/(remember|reassur|gentle reminder|you are not|it.s okay|trust your|kind reminder)/.test(h)) return "reassurance";
   return "neutral";
 };
 
-/**
- * Split the long-form markdown into modules at H2/H3 boundaries.
- * Anything before the first heading becomes an opening "neutral" block.
- */
+/** Split markdown at H2/H3 boundaries. */
 const splitIntoModules = (md: string): AnswerModule[] => {
   const lines = md.split("\n");
   const modules: AnswerModule[] = [];
   let currentHeading: string | undefined;
   let currentBuffer: string[] = [];
-  let idx = 0;
 
   const flush = () => {
     const body = currentBuffer.join("\n").trim();
@@ -47,9 +42,9 @@ const splitIntoModules = (md: string): AnswerModule[] => {
       tone: currentHeading ? classify(currentHeading) : "neutral",
       heading: currentHeading,
       body,
-      index: idx++,
     });
     currentBuffer = [];
+    currentHeading = undefined;
   };
 
   for (const line of lines) {
@@ -66,156 +61,148 @@ const splitIntoModules = (md: string): AnswerModule[] => {
   return modules.filter((m) => m.heading || m.body);
 };
 
-const toneStyles: Record<
-  ModuleTone,
-  {
-    label: string;
-    Icon: typeof Heart;
-    accent: string; // text color
-    chipBg: string;
-    cardBg?: string; // optional surface for emphasised modules
-    cardBorder?: string;
-    rule: string;
+/**
+ * Group consecutive neutral modules into a single fluid block so the body
+ * reads as one continuous editorial piece rather than many fragments.
+ */
+type Block =
+  | { kind: "flow"; items: AnswerModule[] }
+  | { kind: "callout"; tone: "help" | "seek" | "reassurance"; module: AnswerModule };
+
+const groupIntoBlocks = (modules: AnswerModule[]): Block[] => {
+  const blocks: Block[] = [];
+  let flow: AnswerModule[] = [];
+
+  const flushFlow = () => {
+    if (flow.length) {
+      blocks.push({ kind: "flow", items: flow });
+      flow = [];
+    }
+  };
+
+  for (const m of modules) {
+    if (m.tone === "neutral") {
+      flow.push(m);
+    } else {
+      flushFlow();
+      blocks.push({ kind: "callout", tone: m.tone, module: m });
+    }
   }
+  flushFlow();
+  return blocks;
+};
+
+const calloutMeta: Record<
+  "help" | "seek" | "reassurance",
+  { label: string; Icon: typeof Heart; accent: string; surface: string; border: string; sprigTone: "sage" | "ttc" }
 > = {
-  neutral: {
-    label: "Context",
-    Icon: BookOpen,
-    accent: "text-sage-muted",
-    chipBg: "bg-sage-bg/40",
-    rule: "bg-border/30",
-  },
-  expect: {
-    label: "What this means",
-    Icon: Sparkles,
-    accent: "text-sage",
-    chipBg: "bg-sage-bg/55",
-    rule: "bg-sage/30",
-  },
   help: {
     label: "What may help",
     Icon: Heart,
     accent: "text-lavender",
-    chipBg: "bg-lavender-bg/55",
-    cardBg: "bg-gradient-to-br from-lavender-bg/30 via-card to-card",
-    cardBorder: "border-lavender/20",
-    rule: "bg-lavender/30",
+    surface: "bg-gradient-to-br from-lavender-bg/35 via-card to-card",
+    border: "border-lavender/20",
+    sprigTone: "sage",
   },
   seek: {
     label: "When to seek support",
     Icon: LifeBuoy,
     accent: "text-terracotta",
-    chipBg: "bg-terracotta/10",
-    cardBg: "bg-gradient-to-br from-terracotta/[0.05] via-card to-card",
-    cardBorder: "border-terracotta/20",
-    rule: "bg-terracotta/30",
+    surface: "bg-gradient-to-br from-terracotta/[0.06] via-card to-card",
+    border: "border-terracotta/25",
+    sprigTone: "ttc",
   },
   reassurance: {
     label: "A gentle reminder",
     Icon: Heart,
     accent: "text-sage",
-    chipBg: "bg-sage-bg/55",
-    cardBg: "bg-gradient-to-br from-sage-bg/40 via-card to-card",
-    cardBorder: "border-sage/20",
-    rule: "bg-sage/30",
-  },
-  next: {
-    label: "What to do next",
-    Icon: Compass,
-    accent: "text-sage",
-    chipBg: "bg-sage-bg/50",
-    rule: "bg-sage/30",
+    surface: "bg-gradient-to-br from-sage-bg/45 via-card to-card",
+    border: "border-sage/20",
+    sprigTone: "sage",
   },
 };
 
-/** Shared prose styling — premium editorial reading rhythm. */
+/**
+ * Premium editorial prose — generous measure, confident rhythm, soft list
+ * markers, restrained heading hierarchy. No internal chips or dividers; the
+ * body is meant to flow as one continuous reading experience.
+ */
 const proseClasses = `
-  prose prose-sm max-w-none font-sans font-light text-foreground
-  prose-p:text-[15px] prose-p:font-light prose-p:leading-[1.9] prose-p:text-foreground/80 prose-p:mb-4 last:prose-p:mb-0
+  prose prose-base max-w-none font-sans font-light text-foreground/85
+  prose-p:text-[16px] md:prose-p:text-[17px] prose-p:font-light prose-p:leading-[1.85] prose-p:text-foreground/85 prose-p:mb-6 last:prose-p:mb-0
   prose-strong:text-foreground prose-strong:font-medium
-  prose-li:text-[15px] prose-li:text-foreground/80 prose-li:leading-[1.85] prose-li:mb-2
-  prose-ul:my-4 prose-ol:my-4 prose-ul:pl-1 prose-ol:pl-1
-  [&_ul>li]:relative [&_ul>li]:pl-6
-  [&_ul>li]:before:content-[''] [&_ul>li]:before:absolute [&_ul>li]:before:left-0 [&_ul>li]:before:top-[0.7em]
-  [&_ul>li]:before:w-3 [&_ul>li]:before:h-px [&_ul>li]:before:bg-current [&_ul>li]:before:opacity-40
+  prose-em:text-foreground/80
+  prose-li:text-[16px] md:prose-li:text-[17px] prose-li:text-foreground/85 prose-li:leading-[1.8] prose-li:mb-2.5
+  prose-ul:my-6 prose-ol:my-6 prose-ul:pl-1 prose-ol:pl-1
+  [&_ul>li]:relative [&_ul>li]:pl-7
+  [&_ul>li]:before:content-[''] [&_ul>li]:before:absolute [&_ul>li]:before:left-0 [&_ul>li]:before:top-[0.78em]
+  [&_ul>li]:before:w-3.5 [&_ul>li]:before:h-px [&_ul>li]:before:bg-current [&_ul>li]:before:opacity-35
   [&_ul]:list-none
-  prose-h4:font-serif prose-h4:text-[1rem] prose-h4:text-foreground prose-h4:mt-6 prose-h4:mb-2 prose-h4:font-medium
+  prose-h3:font-serif prose-h3:text-[1.2rem] md:prose-h3:text-[1.35rem] prose-h3:text-foreground prose-h3:mt-10 prose-h3:mb-3 prose-h3:font-normal prose-h3:tracking-[-0.01em] prose-h3:leading-[1.3]
+  prose-h4:font-serif prose-h4:text-[1.05rem] prose-h4:text-foreground prose-h4:mt-8 prose-h4:mb-2.5 prose-h4:font-medium
+  prose-blockquote:border-l-2 prose-blockquote:border-sage/40 prose-blockquote:pl-5 prose-blockquote:italic prose-blockquote:text-foreground/75 prose-blockquote:font-light prose-blockquote:my-7
 `;
 
 const EditorialAnswer = ({ markdown }: Props) => {
   const modules = splitIntoModules(markdown);
 
-  // Fallback: if no headings were found, render the full markdown as a single neutral module
   if (modules.length === 0) {
     return (
-      <article className={proseClasses}>
+      <article className={`${proseClasses} max-w-[68ch] mx-auto`}>
         <ReactMarkdown>{markdown}</ReactMarkdown>
       </article>
     );
   }
 
-  const total = modules.length;
+  const blocks = groupIntoBlocks(modules);
 
   return (
-    <div className="space-y-10 md:space-y-14">
-      {modules.map((m) => {
-        const style = toneStyles[m.tone];
-        const Icon = style.Icon;
-        const isCard = Boolean(style.cardBg);
-        const number = String(m.index + 1).padStart(2, "0");
-        const totalLabel = String(total).padStart(2, "0");
+    <div className="max-w-[68ch] mx-auto space-y-12 md:space-y-16">
+      {blocks.map((block, blockIdx) => {
+        if (block.kind === "flow") {
+          return (
+            <div key={`flow-${blockIdx}`} className="space-y-10 md:space-y-12">
+              {block.items.map((m, i) => (
+                <section key={i}>
+                  {m.heading && (
+                    <h2 className="font-serif text-[1.55rem] md:text-[1.85rem] text-foreground leading-[1.22] tracking-[-0.014em] mb-5 md:mb-6">
+                      {m.heading}
+                    </h2>
+                  )}
+                  <article className={proseClasses}>
+                    <ReactMarkdown>{m.body}</ReactMarkdown>
+                  </article>
+                </section>
+              ))}
+            </div>
+          );
+        }
+
+        const meta = calloutMeta[block.tone];
+        const Icon = meta.Icon;
+        const m = block.module;
 
         return (
-          <section key={m.index} className="relative">
-            {/* Module header */}
+          <aside
+            key={`callout-${blockIdx}`}
+            className={`relative ${meta.surface} border ${meta.border} rounded-[1.75rem] px-7 py-9 md:px-11 md:py-11 shadow-soft overflow-hidden`}
+          >
+            <Sprig tone={meta.sprigTone} className="absolute top-6 right-6 w-8 h-8 opacity-20" />
+            <div className={`flex items-center gap-2.5 mb-5 ${meta.accent}`}>
+              <Icon size={14} strokeWidth={1.75} />
+              <span className="font-sans text-[10px] font-medium tracking-[0.24em] uppercase">
+                {meta.label}
+              </span>
+            </div>
             {m.heading && (
-              <header className="mb-5 md:mb-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <span
-                    className={`inline-flex items-center gap-2 ${style.chipBg} ${style.accent} font-sans text-[10px] font-medium tracking-[0.22em] uppercase rounded-full px-3 py-1.5`}
-                  >
-                    <Icon size={11} strokeWidth={1.75} />
-                    {style.label}
-                  </span>
-                  <span className={`h-px flex-1 ${style.rule} opacity-60`} />
-                  <span className="font-sans text-[10px] font-light tracking-widest uppercase text-muted-foreground/45 tabular-nums">
-                    {number} / {totalLabel}
-                  </span>
-                </div>
-                <h2 className="font-serif text-[1.45rem] md:text-[1.7rem] text-foreground leading-[1.2] tracking-[-0.012em]">
-                  {m.heading}
-                </h2>
-              </header>
+              <h3 className="font-serif text-[1.35rem] md:text-[1.55rem] text-foreground leading-[1.25] tracking-[-0.012em] mb-4">
+                {m.heading}
+              </h3>
             )}
-
-            {/* Module body — either flat editorial or a soft card surface */}
-            {isCard ? (
-              <div
-                className={`relative ${style.cardBg} border ${style.cardBorder} rounded-[1.5rem] px-6 py-7 md:px-9 md:py-9 shadow-soft overflow-hidden`}
-              >
-                <Sprig
-                  tone={m.tone === "seek" ? "ttc" : "sage"}
-                  className="absolute top-5 right-5 w-7 h-7 opacity-25"
-                />
-                <article className={proseClasses}>
-                  <ReactMarkdown>{m.body}</ReactMarkdown>
-                </article>
-              </div>
-            ) : (
-              <article className={proseClasses}>
-                <ReactMarkdown>{m.body}</ReactMarkdown>
-              </article>
-            )}
-
-            {/* Editorial divider between modules */}
-            {m.index < total - 1 && (
-              <div className="flex items-center justify-center mt-10 md:mt-14">
-                <span className="h-px w-8 bg-border/40" />
-                <span className="mx-3 w-1 h-1 rounded-full bg-sage/40" />
-                <span className="h-px w-8 bg-border/40" />
-              </div>
-            )}
-          </section>
+            <article className={proseClasses}>
+              <ReactMarkdown>{m.body}</ReactMarkdown>
+            </article>
+          </aside>
         );
       })}
     </div>

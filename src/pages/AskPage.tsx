@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import EditorialAnswer from "@/components/shared/EditorialAnswer";
 import { ArrowLeft, Loader2, Search, ChevronRight, Heart, BookOpen, Compass, Sparkles, Shield, ArrowUpRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -329,25 +330,7 @@ const AskPage = () => {
               </span>
             </div>
 
-            <div className="prose prose-sm max-w-none font-sans font-light text-foreground leading-relaxed
-              prose-headings:font-serif prose-headings:text-foreground prose-headings:leading-tight prose-headings:tracking-[-0.005em]
-              prose-h2:text-[1.5rem] md:prose-h2:text-[1.65rem] prose-h2:mb-5 prose-h2:mt-14 prose-h2:pt-10 prose-h2:border-t prose-h2:border-border/25
-              prose-h3:text-[1.05rem] prose-h3:mt-10 prose-h3:mb-3 prose-h3:font-medium prose-h3:text-foreground/95
-              prose-p:text-[15px] prose-p:font-light prose-p:leading-[1.85] prose-p:text-muted-foreground prose-p:mb-5
-              prose-strong:text-foreground prose-strong:font-medium
-              prose-li:text-[15px] prose-li:text-muted-foreground prose-li:leading-[1.85] prose-li:mb-1.5
-              prose-ul:my-5 prose-ol:my-5
-              prose-ul:pl-1 prose-ol:pl-1
-              [&_ul>li]:relative [&_ul>li]:pl-1
-              [&_blockquote]:relative [&_blockquote]:bg-gradient-to-br [&_blockquote]:from-sage-bg/30 [&_blockquote]:to-sage-bg/10
-              [&_blockquote]:border-l-[3px] [&_blockquote]:border-sage/40
-              [&_blockquote]:rounded-r-2xl [&_blockquote]:px-7 [&_blockquote]:py-6 [&_blockquote]:my-10
-              [&_blockquote]:not-italic [&_blockquote]:shadow-soft
-              [&_blockquote_p]:text-foreground [&_blockquote_p]:font-serif [&_blockquote_p]:text-[16px] [&_blockquote_p]:leading-[1.65] [&_blockquote_p]:mb-0
-              [&_h2]:relative
-            ">
-              <ReactMarkdown>{parsed.rest}</ReactMarkdown>
-            </div>
+            <EditorialAnswer markdown={parsed.rest} />
           </div>
         )}
 

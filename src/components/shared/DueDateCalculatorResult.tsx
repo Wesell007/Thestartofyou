@@ -15,6 +15,7 @@ import journalFlatlay from "@/assets/journal-flatlay.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { BotanicalAccent, Sprig, SprigDivider, StageGlow } from "@/components/shared/StageBotanical";
+import { stashPendingJourney } from "@/lib/savedJourney";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -229,6 +230,11 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
     if (q) navigate(`/ask?q=${encodeURIComponent(q)}`);
   };
 
+  const handleSaveJourney = () => {
+    stashPendingJourney(lmp);
+    navigate("/auth");
+  };
+
   const trimesterZones = [
     { label: "1st", start: 1, end: 12, pct: 30 },
     { label: "2nd", start: 13, end: 27, pct: 37.5 },
@@ -352,13 +358,14 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
               {/* CTA — dominant */}
               <Fade delay={280}>
                 <div className="flex flex-col sm:flex-row items-start gap-4 mb-3">
-                  <Link
-                    to="/pregnancy"
+                  <button
+                    type="button"
+                    onClick={handleSaveJourney}
                     className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all"
                   >
                     Save your journey
                     <ArrowRight size={16} />
-                  </Link>
+                  </button>
                   <Link
                     to={`/ask?q=What should I know at ${result.currentWeek} weeks pregnant?`}
                     className="inline-flex items-center gap-2 font-sans text-sm font-light text-muted-foreground hover:text-sage transition-colors py-4"
@@ -521,13 +528,14 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                       </div>
                     ))}
                   </div>
-                  <Link
-                    to="/pregnancy"
+                  <button
+                    type="button"
+                    onClick={handleSaveJourney}
                     className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all self-start"
                   >
                     Save your journey
                     <ArrowRight size={14} />
-                  </Link>
+                  </button>
                   <p className="font-sans text-[11px] font-light text-muted-foreground/35 mt-3">
                     Takes a minute to save
                   </p>
@@ -1164,13 +1172,14 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                   Saving your journey keeps your stage, personalises your guidance, and gives you somewhere to come back to.
                 </p>
 
-                <Link
-                  to="/pregnancy"
+                <button
+                  type="button"
+                  onClick={handleSaveJourney}
                   className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all"
                 >
                   Save your journey
                   <ArrowRight size={16} />
-                </Link>
+                </button>
               </div>
 
               {/* Right — trust cues */}

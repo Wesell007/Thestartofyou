@@ -27,6 +27,8 @@ import IVFTimeline from "./pages/IVFTimeline.tsx";
 import AskPage from "./pages/AskPage.tsx";
 import GuidanceLibrary from "./pages/GuidanceLibrary.tsx";
 import MyWeek from "./pages/MyWeek.tsx";
+import Auth from "./pages/Auth.tsx";
+import Setup from "./pages/Setup.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ScrollToTop from "./components/layout/ScrollToTop.tsx";
 
@@ -65,6 +67,8 @@ const App = () => (
           <Route path="/ask" element={<AskPage />} />
           <Route path="/guidance" element={<GuidanceLibrary />} />
           <Route path="/my-week" element={<MyWeek />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/setup" element={<Setup />} />
           <Route path="/:journey/:stage" element={<StagePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

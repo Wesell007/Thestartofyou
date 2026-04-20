@@ -3,10 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { differenceInDays } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
-import { getMyWeekContent } from "@/data/myWeekContent";
+import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekHero from "@/components/myweek/MyWeekHero";
-import MyWeekOrientation from "@/components/myweek/MyWeekOrientation";
 import SlotWhatMatters from "@/components/myweek/SlotWhatMatters";
 import SlotOneFocus from "@/components/myweek/SlotOneFocus";
 import SlotReflection from "@/components/myweek/SlotReflection";
@@ -29,6 +28,7 @@ const computeWeek = (lmp: Date) => {
 };
 
 type Loaded = {
+  userId: string;
   firstName: string;
   currentWeek: number;
   dueDate: Date;
@@ -68,6 +68,7 @@ const MyWeek = () => {
       const lmp = new Date(journey.lmp_date);
       const due = new Date(journey.due_date);
       setState({
+        userId: user.id,
         firstName: profile.first_name,
         currentWeek: computeWeek(lmp),
         dueDate: due,
@@ -84,13 +85,18 @@ const MyWeek = () => {
     () => (state ? getMyWeekContent(state.currentWeek) : null),
     [state]
   );
+  const identity = useMemo(
+    () => (state ? getWeekIdentity(state.currentWeek) : null),
+    [state]
+  );
 
-  if (loading || !state || !content) {
+  if (loading || !state || !content || !identity) {
     return <div className="min-h-screen bg-parchment" />;
   }
 
-  const { firstName, currentWeek, dueDate } = state;
+  const { userId, firstName, currentWeek, dueDate } = state;
   const nextWeek = currentWeek < MAX_PREGNANCY_WEEK ? currentWeek + 1 : null;
+  const nextTheme = nextWeek ? getWeekIdentity(nextWeek).theme : undefined;
 
   const trimesterLabel =
     currentWeek <= 12
@@ -100,19 +106,6 @@ const MyWeek = () => {
       : currentWeek <= 40
       ? "Third trimester"
       : "Past your due date";
-
-  const arcPhrase =
-    currentWeek <= 12
-      ? "The earliest stretch — much is happening that no one can see yet."
-      : currentWeek <= 20
-      ? "Settling into the middle — pregnancy often starts to feel more real here."
-      : currentWeek <= 27
-      ? "The steadier middle stretch — a quieter chapter before things shift again."
-      : currentWeek <= 36
-      ? "The longer arc into the third trimester — preparation begins to gather."
-      : currentWeek <= 40
-      ? "The final weeks — the body and mind both begin to gather toward birth."
-      : "Past the date you were given — most pregnancies arrive in their own time.";
 
   const contextual =
     currentWeek <= 12
@@ -131,16 +124,14 @@ const MyWeek = () => {
           week={currentWeek}
           dueDateLabel={formatDueDate(dueDate)}
           trimesterLabel={trimesterLabel}
-        />
-        <MyWeekOrientation
-          trimesterLabel={trimesterLabel}
-          week={currentWeek}
-          arcPhrase={arcPhrase}
+          theme={identity.theme}
+          developmentCue={identity.developmentCue}
+          babyNote={identity.babyNote}
         />
         <SlotWhatMatters content={content} />
         <SlotOneFocus content={content} />
-        <SlotReflection content={content} />
-        <SlotWhatsNext content={content} nextWeek={nextWeek} />
+        <SlotReflection content={content} userId={userId} week={currentWeek} />
+        <SlotWhatsNext content={content} nextWeek={nextWeek} nextTheme={nextTheme} />
       </main>
       <MyWeekFooter contextual={contextual} />
     </div>

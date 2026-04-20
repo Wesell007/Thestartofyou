@@ -49,30 +49,27 @@ const SlotWhatMatters = ({ content, trimesterLabel, week }: Props) => {
         A short, guided lens on the week — your body, your baby, and what's quietly true emotionally.
       </p>
 
-      {/* Briefing cards — numbered, lightly cardified, premium hierarchy */}
-      <ol className="space-y-4 sm:space-y-5">
+      {/* Briefing cards — keepsake surfaces with serif numerals */}
+      <ol className="space-y-5 sm:space-y-6">
         {content.matters.map((p, i) => (
           <li
             key={i}
-            className="group relative rounded-2xl border bg-card/70 backdrop-blur-sm px-5 sm:px-7 py-5 sm:py-6 transition-all"
-            style={{
-              borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)",
-            }}
+            className="group relative rounded-[24px] keepsake-surface px-6 sm:px-8 py-6 sm:py-7 transition-all duration-500 hover:shadow-[0_24px_60px_-24px_hsl(var(--stage-pregnancy-accent)/0.22),0_4px_16px_-8px_hsl(222_14%_12%/0.06)]"
           >
             {/* Stage-coded left rule */}
             <span
               aria-hidden="true"
-              className="absolute left-0 top-5 bottom-5 w-[2px] rounded-full"
+              className="absolute left-0 top-6 bottom-6 w-[2px] rounded-full"
               style={{
                 background:
-                  "linear-gradient(to bottom, hsl(var(--stage-pregnancy-accent) / 0.55), hsl(var(--stage-pregnancy-accent) / 0.05))",
+                  "linear-gradient(to bottom, hsl(var(--stage-pregnancy-accent) / 0.6), hsl(var(--stage-pregnancy-accent) / 0.04))",
               }}
             />
 
-            <div className="flex items-baseline gap-4 sm:gap-5">
-              {/* Numbered marker — editorial, not tracker */}
+            <div className="flex items-baseline gap-5 sm:gap-6">
+              {/* Serif italic numeral — editorial chapter mark */}
               <span
-                className="font-serif italic text-[1.4rem] sm:text-[1.55rem] shrink-0 leading-none pt-0.5"
+                className="serif-numeral italic font-normal text-[1.6rem] sm:text-[1.8rem] shrink-0 leading-none pt-1"
                 style={{ color: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
               >
                 {String(i + 1).padStart(2, "0")}
@@ -80,12 +77,12 @@ const SlotWhatMatters = ({ content, trimesterLabel, week }: Props) => {
 
               <div className="flex-1 min-w-0">
                 <p
-                  className="font-sans text-[10.5px] sm:text-[11px] font-medium tracking-[0.22em] uppercase mb-2.5"
+                  className="font-sans text-[10.5px] sm:text-[11px] font-medium tracking-[0.24em] uppercase mb-3"
                   style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
                 >
                   {p.title}
                 </p>
-                <p className="font-sans text-[15px] sm:text-[16px] font-light text-foreground/75 leading-[1.7]">
+                <p className="font-sans text-[15px] sm:text-[16px] font-light text-foreground/76 leading-[1.75]">
                   {p.body}
                 </p>
               </div>

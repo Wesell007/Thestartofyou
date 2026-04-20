@@ -1,10 +1,8 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ProductHero from "@/components/product/ProductHero";
-import ProductFamiliar from "@/components/product/ProductFamiliar";
-import ProductWhatItIs from "@/components/product/ProductWhatItIs";
-import ProductStages from "@/components/product/ProductStages";
 import ProductGallery from "@/components/product/ProductGallery";
+import ProductInlineCTA from "@/components/product/ProductInlineCTA";
 import ProductInside from "@/components/product/ProductInside";
 import ProductMoment from "@/components/product/ProductMoment";
 import ProductEcosystem from "@/components/product/ProductEcosystem";
@@ -15,15 +13,26 @@ const Product = () => {
     <div className="min-h-screen font-sans">
       <Navbar />
       <main className="flex flex-col">
-        <div className="order-1"><ProductHero /></div>
-        <div className="order-3 md:order-2"><ProductFamiliar /></div>
-        <div className="order-2 md:order-6"><ProductGallery /></div>
-        <div className="order-4 md:order-3"><ProductWhatItIs /></div>
-        <div className="order-5 md:order-4"><ProductStages /></div>
-        <div className="order-6 md:order-5"><ProductInside /></div>
-        <div className="order-7"><ProductMoment /></div>
-        <div className="order-8"><ProductEcosystem /></div>
-        <div className="order-9"><ProductFinalCTA /></div>
+        {/* 1. Hero video — the opening moment */}
+        <ProductHero />
+
+        {/* 2. Strong image-led product proof — early */}
+        <ProductGallery />
+
+        {/* 3. CTA after first major visual proof */}
+        <ProductInlineCTA />
+
+        {/* 4. What is inside / why it matters — tighter */}
+        <ProductInside />
+
+        {/* 5. Emotional value moment */}
+        <ProductMoment />
+
+        {/* 6. How it fits the wider Start of You journey */}
+        <ProductEcosystem />
+
+        {/* 7. Final CTA */}
+        <ProductFinalCTA />
       </main>
       <Footer />
     </div>

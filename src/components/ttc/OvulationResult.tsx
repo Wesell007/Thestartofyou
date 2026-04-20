@@ -231,7 +231,9 @@ const OvulationResult = ({
       {/* ── What this means ─────────────────────────────────────────── */}
       <section className="relative bg-parchment py-16 md:py-20 overflow-hidden">
         <div className="absolute -top-px left-0 right-0 flex justify-center pointer-events-none">
-          <Sprig className="w-5 h-5 -translate-y-1/2 bg-parchment px-1" />
+          <div className="-translate-y-1/2 bg-parchment px-3 py-1 rounded-full">
+            <Sprig className="w-7 h-7" />
+          </div>
         </div>
         <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
           <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">

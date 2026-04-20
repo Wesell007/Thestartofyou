@@ -4,6 +4,7 @@ import { ArrowRight, MessageCircle, Shield, Check, Star, Heart, Clock, Activity,
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import journalFlatlay from "@/assets/journal-flatlay.jpg";
+import { BotanicalAccent, Sprig, SprigDivider, StageGlow } from "@/components/shared/StageBotanical";
 
 // ─── Types & data ─────────────────────────────────────────────────────────────
 
@@ -294,8 +295,22 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
       ══════════════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(var(--stage-ivf)) 0%, hsl(var(--stage-ivf) / 0.25) 75%, hsl(var(--parchment)) 100%)" }}>
         {/* Ambient layers */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 20% 35%, hsl(var(--stage-ivf-accent)), transparent 50%), radial-gradient(circle at 80% 65%, hsl(var(--lavender)), transparent 50%)" }} />
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at 20% 35%, hsl(var(--stage-ivf-accent)), transparent 50%), radial-gradient(circle at 80% 65%, hsl(var(--stage-ivf-accent)), transparent 50%)" }} />
+        <StageGlow tone="ivf" className="inset-x-0 top-0 h-[460px]" opacity={0.9} />
         <div className="absolute bottom-0 left-0 right-0 h-40" style={{ background: "linear-gradient(to top, hsl(var(--parchment)), transparent)" }} />
+
+        {/* Botanical corner accents — IVF colour family via blend */}
+        <BotanicalAccent
+          className="top-4 -left-8 md:top-10 md:-left-4"
+          opacity="opacity-[0.5]"
+          size="w-[240px] md:w-[360px]"
+        />
+        <BotanicalAccent
+          flip
+          className="top-2 -right-8 md:top-8 md:-right-4"
+          opacity="opacity-[0.42]"
+          size="w-[220px] md:w-[320px]"
+        />
 
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pt-32 md:pt-44 pb-28 md:pb-36 relative z-10">
 
@@ -457,6 +472,16 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
       ══════════════════════════════════════════════════════════════════ */}
       <section className="relative py-28 md:py-36 overflow-hidden" style={{ background: "hsl(var(--parchment-dark))" }}>
         <div className="absolute top-0 left-0 w-full h-px" style={{ background: "linear-gradient(90deg, transparent 5%, hsl(var(--stage-ivf-accent) / 0.12), transparent 95%)" }} />
+        <StageGlow tone="ivf" className="-top-20 right-[-120px] w-[520px] h-[520px]" opacity={0.55} />
+        <BotanicalAccent
+          flip
+          className="bottom-0 -right-10 md:bottom-4 md:-right-2"
+          opacity="opacity-[0.32]"
+          size="w-[200px] md:w-[300px]"
+        />
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10 mb-12">
+          <SprigDivider tone="ivf" />
+        </div>
 
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -1191,6 +1216,21 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
       ══════════════════════════════════════════════════════════════════ */}
       <section className="relative py-32 md:py-40 overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(var(--stage-ivf) / 0.15) 0%, hsl(var(--parchment)) 100%)" }}>
         <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "radial-gradient(circle at 50% 40%, hsl(var(--stage-ivf-accent)), transparent 55%)" }} />
+        <StageGlow tone="ivf" className="inset-x-0 top-0 h-[420px]" opacity={0.7} />
+        <BotanicalAccent
+          className="top-6 -left-10 md:top-12 md:-left-4"
+          opacity="opacity-[0.4]"
+          size="w-[220px] md:w-[320px]"
+        />
+        <BotanicalAccent
+          flip
+          className="bottom-6 -right-10 md:bottom-12 md:-right-4"
+          opacity="opacity-[0.4]"
+          size="w-[220px] md:w-[320px]"
+        />
+        <div className="container mx-auto max-w-3xl px-5 relative z-10 mb-10">
+          <SprigDivider tone="ivf" />
+        </div>
 
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl text-center relative z-10">
           <Fade delay={0}>

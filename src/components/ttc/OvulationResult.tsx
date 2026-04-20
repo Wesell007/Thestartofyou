@@ -3,6 +3,49 @@ import { ArrowRight, Bell, BellRing, Bookmark, Check, MessageCircle, Sparkles, X
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
+import botanicalSrc from "@/assets/botanical-corner.png";
+
+/* ── Restrained botanical accent ───────────────────────────────────── */
+const BotanicalAccent = ({
+  className,
+  flip = false,
+  opacity = "opacity-[0.18]",
+}: {
+  className?: string;
+  flip?: boolean;
+  opacity?: string;
+}) => (
+  <img
+    src={botanicalSrc}
+    alt=""
+    aria-hidden="true"
+    className={cn(
+      "pointer-events-none absolute select-none w-[180px] md:w-[260px] h-auto",
+      opacity,
+      flip && "-scale-x-100",
+      className
+    )}
+  />
+);
+
+/* ── Soft sprig (small, single leaf-like mark) ─────────────────────── */
+const Sprig = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 64 64"
+    aria-hidden="true"
+    className={cn("pointer-events-none select-none text-sage/40", className)}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1"
+    strokeLinecap="round"
+  >
+    <path d="M32 60 C 32 40, 32 24, 32 6" />
+    <path d="M32 46 C 24 44, 18 40, 16 32" />
+    <path d="M32 36 C 40 34, 46 30, 48 22" />
+    <path d="M32 26 C 26 24, 22 20, 21 14" />
+    <path d="M32 18 C 38 16, 42 12, 43 8" />
+  </svg>
+);
 
 interface OvulationResultProps {
   lmp: Date;

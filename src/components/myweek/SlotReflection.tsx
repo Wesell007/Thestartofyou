@@ -154,7 +154,7 @@ const SlotReflection = ({ content, userId, week }: Props) => {
             rows={7}
             placeholder="Begin where you are."
             aria-label={`Your reflection for week ${week}`}
-            className="w-full bg-transparent border-0 px-0 py-2 font-serif text-[17px] sm:text-[18.5px] italic font-normal text-foreground placeholder:text-foreground/25 placeholder:italic resize-none focus:outline-none leading-[1.85] min-h-[200px] caret-[hsl(var(--stage-pregnancy-accent))]"
+            className="w-full bg-transparent border-0 px-0 py-2 font-serif text-[17px] sm:text-[18.5px] italic font-normal text-foreground placeholder:text-foreground/40 placeholder:italic resize-none focus:outline-none leading-[1.85] min-h-[200px] caret-[hsl(var(--stage-pregnancy-accent))]"
           />
         </div>
 

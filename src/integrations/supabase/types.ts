@@ -95,6 +95,36 @@ export type Database = {
         }
         Relationships: []
       }
+      week_photos: {
+        Row: {
+          caption: string | null
+          created_at: string
+          id: string
+          storage_path: string
+          updated_at: string
+          user_id: string
+          week: number
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          storage_path: string
+          updated_at?: string
+          user_id: string
+          week: number
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          storage_path?: string
+          updated_at?: string
+          user_id?: string
+          week?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

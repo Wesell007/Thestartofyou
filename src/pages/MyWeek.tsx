@@ -8,7 +8,9 @@ import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekHero from "@/components/myweek/MyWeekHero";
 import SlotWhatMatters from "@/components/myweek/SlotWhatMatters";
 import SlotOneFocus from "@/components/myweek/SlotOneFocus";
+import SlotPhotoMemory from "@/components/myweek/SlotPhotoMemory";
 import SlotReflection from "@/components/myweek/SlotReflection";
+import SlotCompanionRecall from "@/components/myweek/SlotCompanionRecall";
 import SlotWhatsNext from "@/components/myweek/SlotWhatsNext";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 
@@ -96,7 +98,7 @@ const MyWeek = () => {
 
   const { userId, firstName, currentWeek, dueDate } = state;
   const nextWeek = currentWeek < MAX_PREGNANCY_WEEK ? currentWeek + 1 : null;
-  const nextTheme = nextWeek ? getWeekIdentity(nextWeek).theme : undefined;
+  const nextIdentity = nextWeek ? getWeekIdentity(nextWeek) : null;
 
   const trimesterLabel =
     currentWeek <= 12
@@ -124,14 +126,22 @@ const MyWeek = () => {
           week={currentWeek}
           dueDateLabel={formatDueDate(dueDate)}
           trimesterLabel={trimesterLabel}
+          chapterTitle={identity.chapterTitle}
           theme={identity.theme}
           developmentCue={identity.developmentCue}
           babyNote={identity.babyNote}
         />
         <SlotWhatMatters content={content} trimesterLabel={trimesterLabel} week={currentWeek} />
         <SlotOneFocus content={content} />
+        <SlotPhotoMemory userId={userId} week={currentWeek} chapterTitle={identity.chapterTitle} />
         <SlotReflection content={content} userId={userId} week={currentWeek} />
-        <SlotWhatsNext content={content} nextWeek={nextWeek} nextTheme={nextTheme} />
+        <SlotCompanionRecall userId={userId} currentWeek={currentWeek} />
+        <SlotWhatsNext
+          content={content}
+          nextWeek={nextWeek}
+          nextChapterTitle={nextIdentity?.chapterTitle}
+          nextTheme={nextIdentity?.theme}
+        />
       </main>
       <MyWeekFooter contextual={contextual} />
     </div>

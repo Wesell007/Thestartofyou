@@ -339,8 +339,8 @@ const OvulationResult = ({
             </p>
           </div>
 
-          {/* Reminder list — soft branded surface */}
-          <div className="bg-card/85 backdrop-blur-sm border border-sage-light/40 rounded-2xl shadow-elevated divide-y divide-sage-light/30 mb-8">
+          {/* Reminder list — lavender-toned branded surface */}
+          <div className="bg-card/95 backdrop-blur-sm border border-lavender/40 rounded-2xl shadow-elevated divide-y divide-lavender/25 mb-8">
             {([
               { key: "fertile" as const, label: "When my fertile window opens", date: format(fertileStart, "d MMMM") },
               { key: "ovulation" as const, label: "Around my likely ovulation day", date: format(ovulationDay, "d MMMM") },
@@ -352,13 +352,13 @@ const OvulationResult = ({
                 <button
                   key={key}
                   onClick={() => toggleReminder(key)}
-                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-sage-bg/20 transition-colors first:rounded-t-2xl last:rounded-b-2xl"
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-lavender-bg/40 transition-colors first:rounded-t-2xl last:rounded-b-2xl"
                 >
                   <div className="flex items-center gap-4 min-w-0">
                     <div
                       className={cn(
                         "w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-colors",
-                        on ? "bg-sage text-sage-foreground" : "bg-parchment-deeper text-muted-foreground"
+                        on ? "bg-lavender text-lavender-fg" : "bg-parchment-deeper text-muted-foreground"
                       )}
                     >
                       {on ? <Check size={14} /> : <Bell size={13} />}

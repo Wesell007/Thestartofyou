@@ -166,7 +166,7 @@ const OvulationResult = ({
       <section className="relative bg-gradient-to-b from-sage-bg/50 via-parchment to-parchment-dark pt-28 pb-20 md:pt-40 md:pb-28 overflow-hidden">
         {/* ambient layered glows */}
         <div className="absolute inset-x-0 top-0 h-[460px] glow-sage opacity-70 pointer-events-none" aria-hidden="true" />
-        <div className="absolute -bottom-32 right-[-10%] w-[520px] h-[520px] glow-lavender opacity-40 rounded-full pointer-events-none" aria-hidden="true" />
+        <div className="absolute -bottom-32 right-[-10%] w-[520px] h-[520px] glow-sage opacity-50 rounded-full pointer-events-none" aria-hidden="true" />
 
         {/* Botanical accents — confident framing */}
         <BotanicalAccent className="top-4 -left-12 md:top-8 md:-left-4" opacity="opacity-[0.55]" size="w-[240px] md:w-[360px]" />

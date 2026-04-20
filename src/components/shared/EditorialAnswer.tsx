@@ -194,7 +194,7 @@ const EditorialAnswer = ({ markdown }: Props) => {
                 className={`relative ${style.cardBg} border ${style.cardBorder} rounded-[1.5rem] px-6 py-7 md:px-9 md:py-9 shadow-soft overflow-hidden`}
               >
                 <Sprig
-                  tone={m.tone === "seek" ? "ttc" : m.tone === "help" ? "lavender" : "sage"}
+                  tone={m.tone === "seek" ? "ttc" : "sage"}
                   className="absolute top-5 right-5 w-7 h-7 opacity-25"
                 />
                 <article className={proseClasses}>

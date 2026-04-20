@@ -222,9 +222,12 @@ const OvulationResult = ({
       </section>
 
       {/* ── What this means ─────────────────────────────────────────── */}
-      <section className="bg-parchment py-16 md:py-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+      <section className="relative bg-parchment py-16 md:py-20 overflow-hidden">
+        <div className="absolute -top-px left-0 right-0 flex justify-center pointer-events-none">
+          <Sprig className="w-5 h-5 -translate-y-1/2 bg-parchment px-1" />
+        </div>
+        <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
+          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
             Understanding your results
           </p>
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-8">
@@ -232,7 +235,7 @@ const OvulationResult = ({
           </h2>
           <div className="space-y-0">
             {[
-              "These are the days you're most likely to conceive — sperm can survive up to five days inside the body.",
+              "These are the days you're most likely to conceive. Sperm can survive up to five days inside the body.",
               "The two days before ovulation tend to matter more than ovulation day itself.",
               "These are estimates, not guarantees. Cycles vary, and that doesn't mean anything is wrong.",
             ].map((item, i) => (
@@ -240,11 +243,11 @@ const OvulationResult = ({
                 key={i}
                 className={cn(
                   "flex items-start gap-5 py-6",
-                  i < 2 && "border-b border-border/30"
+                  i < 2 && "border-b border-sage-light/30"
                 )}
               >
-                <div className="w-8 h-8 rounded-full bg-sage-bg/40 border border-sage-light/30 flex items-center justify-center shrink-0 mt-0.5">
-                  <span className="font-serif text-xs text-sage">{i + 1}</span>
+                <div className="w-9 h-9 rounded-full bg-sage-bg border border-sage-light/50 flex items-center justify-center shrink-0 mt-0.5 shadow-soft">
+                  <span className="font-serif text-sm text-sage">{i + 1}</span>
                 </div>
                 <p className="font-sans text-[15px] font-light text-foreground/75 leading-relaxed">
                   {item}

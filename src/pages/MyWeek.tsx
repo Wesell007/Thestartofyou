@@ -128,7 +128,7 @@ const MyWeek = () => {
           developmentCue={identity.developmentCue}
           babyNote={identity.babyNote}
         />
-        <SlotWhatMatters content={content} />
+        <SlotWhatMatters content={content} trimesterLabel={trimesterLabel} week={currentWeek} />
         <SlotOneFocus content={content} />
         <SlotReflection content={content} userId={userId} week={currentWeek} />
         <SlotWhatsNext content={content} nextWeek={nextWeek} nextTheme={nextTheme} />

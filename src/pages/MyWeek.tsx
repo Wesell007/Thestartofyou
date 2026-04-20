@@ -117,7 +117,7 @@ const MyWeek = () => {
       : null;
 
   return (
-    <div className="min-h-screen bg-parchment">
+    <div className="min-h-screen bg-parchment-grain page-vignette relative">
       <MyWeekHeader />
       <main className="mx-auto w-full max-w-[640px] md:max-w-[680px] px-5 sm:px-8 md:px-12">
         <MyWeekHero

@@ -15,6 +15,7 @@ import journalFlatlay from "@/assets/journal-flatlay.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { BotanicalAccent, Sprig, SprigDivider, StageGlow } from "@/components/shared/StageBotanical";
+import { stashPendingJourney } from "@/lib/savedJourney";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

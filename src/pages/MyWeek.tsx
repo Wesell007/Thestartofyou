@@ -6,6 +6,7 @@ import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import { getMyWeekContent } from "@/data/myWeekContent";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekHero from "@/components/myweek/MyWeekHero";
+import MyWeekOrientation from "@/components/myweek/MyWeekOrientation";
 import SlotWhatMatters from "@/components/myweek/SlotWhatMatters";
 import SlotOneFocus from "@/components/myweek/SlotOneFocus";
 import SlotReflection from "@/components/myweek/SlotReflection";
@@ -90,6 +91,30 @@ const MyWeek = () => {
 
   const { firstName, currentWeek, dueDate } = state;
   const nextWeek = currentWeek < MAX_PREGNANCY_WEEK ? currentWeek + 1 : null;
+  const daysToDue = differenceInDays(dueDate, new Date());
+
+  const trimesterLabel =
+    currentWeek <= 12
+      ? "First trimester"
+      : currentWeek <= 27
+      ? "Second trimester"
+      : currentWeek <= 40
+      ? "Third trimester"
+      : "Past your due date";
+
+  const arcPhrase =
+    currentWeek <= 12
+      ? "The earliest stretch — much is happening that no one can see yet."
+      : currentWeek <= 20
+      ? "Settling into the middle — pregnancy often starts to feel more real here."
+      : currentWeek <= 27
+      ? "The steadier middle stretch — a quieter chapter before things shift again."
+      : currentWeek <= 36
+      ? "The longer arc into the third trimester — preparation begins to gather."
+      : currentWeek <= 40
+      ? "The final weeks — the body and mind both begin to gather toward birth."
+      : "Past the date you were given — most pregnancies arrive in their own time.";
+
   const contextual =
     currentWeek <= 12
       ? "If something doesn't feel right, our Support hub is here."
@@ -106,13 +131,14 @@ const MyWeek = () => {
           firstName={firstName}
           week={currentWeek}
           dueDateLabel={formatDueDate(dueDate)}
+          trimesterLabel={trimesterLabel}
+          daysToDue={daysToDue}
         />
-        <div aria-hidden="true" className="hidden md:flex justify-center -mt-6 mb-10">
-          <span
-            className="block w-1 h-1 rounded-full"
-            style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
-          />
-        </div>
+        <MyWeekOrientation
+          trimesterLabel={trimesterLabel}
+          week={currentWeek}
+          arcPhrase={arcPhrase}
+        />
         <SlotWhatMatters content={content} />
         <SlotOneFocus content={content} />
         <SlotReflection content={content} />

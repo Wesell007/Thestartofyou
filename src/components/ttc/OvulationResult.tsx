@@ -156,20 +156,30 @@ const OvulationResult = ({
   return (
     <div>
       {/* ── Primary result ──────────────────────────────────────────── */}
-      <section className="relative bg-parchment-dark pt-28 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        {/* ambient glow */}
-        <div className="absolute inset-x-0 top-0 h-[420px] glow-sage opacity-60 pointer-events-none" aria-hidden="true" />
+      <section className="relative bg-gradient-to-b from-sage-bg/50 via-parchment to-parchment-dark pt-28 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        {/* ambient layered glows */}
+        <div className="absolute inset-x-0 top-0 h-[460px] glow-sage opacity-70 pointer-events-none" aria-hidden="true" />
+        <div className="absolute -bottom-32 right-[-10%] w-[520px] h-[520px] glow-lavender opacity-40 rounded-full pointer-events-none" aria-hidden="true" />
+
+        {/* Botanical accents — restrained, framing only */}
+        <BotanicalAccent className="top-6 -left-10 md:top-10 md:-left-6" opacity="opacity-[0.16]" />
+        <BotanicalAccent className="top-2 -right-10 md:top-6 md:-right-6" flip opacity="opacity-[0.13]" />
+
         <div className="relative container mx-auto px-6 md:px-10 max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 mb-7">
-            {reveal && (
-              <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
-            )}
-            <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage">
-              Here's where you are this cycle
-            </p>
-            {reveal && (
-              <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
-            )}
+          <div className="flex items-center justify-center gap-3 mb-7">
+            <Sprig className="w-4 h-4 -rotate-[35deg]" />
+            <div className="inline-flex items-center gap-2">
+              {reveal && (
+                <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
+              )}
+              <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage">
+                Here's where you are this cycle
+              </p>
+              {reveal && (
+                <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
+              )}
+            </div>
+            <Sprig className="w-4 h-4 rotate-[35deg] -scale-x-100" />
           </div>
 
           <p className="font-serif text-lg sm:text-xl text-foreground/60 italic leading-snug mb-5">
@@ -189,14 +199,14 @@ const OvulationResult = ({
             </p>
           </div>
           <p className="font-sans text-base sm:text-[17px] font-light text-foreground/65 leading-relaxed max-w-lg mx-auto mb-14">
-            A quiet map of the days ahead. Hold it gently — bodies don't always follow the calendar, and that's part of this.
+            A quiet map of the days ahead. Hold it gently. Bodies don't always follow the calendar, and that's part of this.
           </p>
 
-          {/* Supporting dates — elegant inline rhythm, not a card grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border/40 rounded-2xl overflow-hidden border border-border/40 shadow-card-brand">
+          {/* Supporting dates — soft sage-tinted seam */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-sage-light/30 rounded-2xl overflow-hidden border border-sage-light/40 shadow-elevated">
             {supportingDates.map((d) => (
-              <div key={d.label} className="bg-card/80 backdrop-blur-sm px-6 py-7 text-left">
-                <p className="font-sans text-[10px] font-light tracking-[0.22em] uppercase text-sage-muted mb-2.5">
+              <div key={d.label} className="bg-card/90 backdrop-blur-sm px-6 py-7 text-left">
+                <p className="font-sans text-[10px] font-light tracking-[0.22em] uppercase text-sage mb-2.5">
                   {d.label}
                 </p>
                 <p className="font-serif text-lg text-foreground leading-snug mb-1.5">{d.value}</p>

@@ -310,12 +310,14 @@ const OvulationResult = ({
         <div className="relative container mx-auto px-6 md:px-10 max-w-2xl">
           {/* Editorial intro, no card frame */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-card border border-sage-light/50 shadow-card-brand mb-6">
-              <Bookmark size={16} className="text-sage" />
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-card border border-sage-light/60 shadow-elevated mb-6">
+              <Bookmark size={18} className="text-sage" />
             </div>
-            <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage mb-4">
-              The start of a calmer monthly rhythm
-            </p>
+            <div className="flanking-lines mb-4">
+              <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage whitespace-nowrap">
+                The start of a calmer monthly rhythm
+              </p>
+            </div>
             <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
               Save this cycle
             </h2>
@@ -324,8 +326,8 @@ const OvulationResult = ({
             </p>
           </div>
 
-          {/* Reminder list — light dividers, no boxes */}
-          <div className="bg-card/70 backdrop-blur-sm border border-border/40 rounded-2xl shadow-card-brand divide-y divide-border/40 mb-8">
+          {/* Reminder list — soft branded surface */}
+          <div className="bg-card/85 backdrop-blur-sm border border-sage-light/40 rounded-2xl shadow-elevated divide-y divide-sage-light/30 mb-8">
             {([
               { key: "fertile" as const, label: "When my fertile window opens", date: format(fertileStart, "d MMMM") },
               { key: "ovulation" as const, label: "Around my likely ovulation day", date: format(ovulationDay, "d MMMM") },

@@ -459,16 +459,17 @@ const OvulationResult = ({
       </section>
 
       {/* ── AI support ──────────────────────────────────────────────── */}
-      <section className="bg-parchment py-16 md:py-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+      <section className="relative bg-parchment py-16 md:py-20 overflow-hidden">
+        <div className="absolute -left-24 top-0 w-[380px] h-[380px] glow-lavender opacity-35 rounded-full pointer-events-none" aria-hidden="true" />
+        <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
+          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
             AI support
           </p>
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-4">
             Ask about this cycle
           </h2>
           <p className="font-sans text-[15px] font-light text-foreground/70 leading-relaxed mb-7">
-            Anything that feels unclear — timing, signs, the wait — ask here.
+            Anything that feels unclear about timing, signs or the wait, ask here.
           </p>
 
           <div className="space-y-3 mb-6">
@@ -476,7 +477,7 @@ const OvulationResult = ({
               <Link
                 key={prompt}
                 to={askLink(prompt)}
-                className="group flex items-center gap-3 w-full text-left py-4 px-5 rounded-xl border border-border/40 bg-card/60 hover:border-sage/40 hover:bg-card shadow-card-brand transition-all"
+                className="group flex items-center gap-3 w-full text-left py-4 px-5 rounded-xl border border-sage-light/30 bg-card/80 hover:border-sage/50 hover:bg-card shadow-card-brand transition-all"
               >
                 <MessageCircle size={13} className="text-sage shrink-0" />
                 <span className="font-sans text-sm font-light text-foreground/85 group-hover:text-foreground transition-colors leading-relaxed">
@@ -497,9 +498,10 @@ const OvulationResult = ({
       </section>
 
       {/* ── Continue your journey ───────────────────────────────────── */}
-      <section className="bg-parchment-dark py-16 md:py-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+      <section className="relative bg-parchment-dark py-16 md:py-24 overflow-hidden">
+        <BotanicalAccent className="bottom-0 -right-16 md:-right-8" flip opacity="opacity-[0.10]" />
+        <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
+          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
             Continue your journey
           </p>
           <div className="space-y-3">
@@ -511,7 +513,7 @@ const OvulationResult = ({
               <Link
                 key={p.to}
                 to={p.to}
-                className="group flex items-center justify-between py-5 px-6 rounded-xl border border-border/40 bg-card/60 hover:border-sage/40 hover:bg-card shadow-card-brand transition-all"
+                className="group flex items-center justify-between py-5 px-6 rounded-xl border border-sage-light/30 bg-card/80 hover:border-sage/50 hover:bg-card shadow-card-brand transition-all"
               >
                 <span className="font-sans text-[15px] font-light text-foreground/85 group-hover:text-foreground transition-colors">
                   {p.label}

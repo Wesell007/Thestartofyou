@@ -371,7 +371,7 @@ const OvulationResult = ({
                   <span
                     className={cn(
                       "font-sans text-[10px] font-light tracking-[0.18em] uppercase shrink-0",
-                      on ? "text-sage" : "text-foreground/35"
+                      on ? "text-lavender-fg" : "text-foreground/35"
                     )}
                   >
                     {on ? "On" : "Off"}

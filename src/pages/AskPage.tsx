@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { ArrowLeft, Loader2, Search, ChevronRight, Heart, BookOpen, Compass, Sparkles, Shield } from "lucide-react";
+import { ArrowLeft, Loader2, Search, ChevronRight, Heart, BookOpen, Compass, Sparkles, Shield, ArrowUpRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useAISearch } from "@/hooks/useAISearch";
+import { BotanicalAccent, StageGlow, SprigDivider, Sprig } from "@/components/shared/StageBotanical";
 
 const followUpPrompts = [
   "Can you explain that more?",
@@ -88,8 +89,13 @@ const AskPage = () => {
     return (
       <div className="min-h-screen bg-parchment">
         <Navbar />
-        <main className="pt-24 pb-24 md:pt-32 md:pb-32">
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl">
+        <main className="relative pt-24 pb-24 md:pt-32 md:pb-32 overflow-hidden">
+          {/* Ambient art-direction layer */}
+          <StageGlow tone="sage" className="top-[-120px] left-1/2 -translate-x-1/2 w-[900px] h-[500px]" opacity={0.9} />
+          <BotanicalAccent className="top-24 -left-20 md:top-16 md:-left-10 rotate-[-8deg]" opacity="opacity-[0.18]" size="w-[200px] md:w-[280px]" />
+          <BotanicalAccent flip className="bottom-32 -right-16 md:-right-6 rotate-[12deg]" opacity="opacity-[0.16]" size="w-[200px] md:w-[260px]" />
+
+          <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
             <nav className="flex items-center gap-2 font-sans text-[11px] font-light tracking-wide text-muted-foreground mb-10 uppercase">
               <Link to="/explore" className="hover:text-foreground transition-colors">Explore</Link>
               <ChevronRight size={10} className="text-border" />
@@ -97,7 +103,7 @@ const AskPage = () => {
             </nav>
 
             <div className="text-center mb-10">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sage-bg/60 mb-5">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sage-bg/60 mb-5 ring-4 ring-sage-bg/30">
                 <Sparkles size={18} className="text-sage" />
               </div>
               <h1 className="font-serif text-[2rem] sm:text-[2.4rem] md:text-[2.75rem] text-foreground leading-[1.12] tracking-[-0.01em] mb-4">
@@ -159,13 +165,34 @@ const AskPage = () => {
     <div className="min-h-screen bg-parchment">
       <Navbar />
 
-      <main className="pt-20 pb-24 md:pt-28 md:pb-32">
+      <main className="relative pt-20 pb-24 md:pt-28 md:pb-32 overflow-hidden">
+
+        {/* ─────────────────────────────────────────────
+            ART-DIRECTED HERO BAND
+            Soft tonal wash + botanical accents framing
+            the question and quick answer.
+            ───────────────────────────────────────────── */}
+        <div className="absolute inset-x-0 top-0 h-[680px] md:h-[760px] pointer-events-none overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-sage-bg/35 via-parchment/60 to-parchment" />
+          <StageGlow tone="sage" className="top-[-200px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px]" opacity={1} />
+          <BotanicalAccent
+            className="top-24 -left-16 md:top-20 md:-left-6 rotate-[-10deg]"
+            opacity="opacity-[0.22]"
+            size="w-[200px] md:w-[300px]"
+          />
+          <BotanicalAccent
+            flip
+            className="top-40 -right-16 md:top-32 md:-right-4 rotate-[14deg]"
+            opacity="opacity-[0.18]"
+            size="w-[180px] md:w-[260px]"
+          />
+        </div>
 
         {/* ── Top frame: question context ── */}
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
+        <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
 
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 font-sans text-[11px] font-light tracking-wide text-muted-foreground mb-12 uppercase">
+          <nav className="flex items-center gap-2 font-sans text-[11px] font-light tracking-wide text-muted-foreground mb-10 uppercase">
             <Link to="/explore" className="hover:text-foreground transition-colors">
               Explore
             </Link>
@@ -175,8 +202,8 @@ const AskPage = () => {
 
           {/* Stage context chip */}
           {context && (
-            <div className="mb-4">
-              <span className="inline-flex items-center gap-1.5 bg-sage-bg/60 text-sage font-sans text-[10px] font-medium tracking-widest uppercase px-3 py-1 rounded-full">
+            <div className="mb-5">
+              <span className="inline-flex items-center gap-1.5 bg-sage-bg/70 text-sage font-sans text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full ring-1 ring-sage/15">
                 <span className="w-1 h-1 rounded-full bg-sage" />
                 {context}
               </span>
@@ -184,14 +211,17 @@ const AskPage = () => {
           )}
 
           {/* Question title, editorial */}
-          <div className="mb-6">
-            <h1 className="font-serif text-[1.75rem] sm:text-[2.1rem] md:text-[2.5rem] text-foreground leading-[1.12] tracking-[-0.01em]">
+          <div className="mb-7">
+            <p className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-sage/80 mb-3">
+              You asked
+            </p>
+            <h1 className="font-serif text-[1.75rem] sm:text-[2.1rem] md:text-[2.65rem] text-foreground leading-[1.1] tracking-[-0.012em]">
               {query}
             </h1>
           </div>
 
           {/* Trust bar */}
-          <div className="flex items-center gap-4 mb-14 pb-8 border-b border-border/30">
+          <div className="flex items-center gap-4 mb-12">
             <div className="flex items-center gap-1.5 text-sage-muted">
               <Shield size={13} />
               <span className="font-sans text-[11px] font-light">Medically reviewed</span>
@@ -205,17 +235,16 @@ const AskPage = () => {
 
         {/* ── Loading state ── */}
         {isLoading && !answer && (
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl">
+          <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
             <div className="relative rounded-3xl overflow-hidden">
-              {/* Ambient glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-sage-bg/40 via-transparent to-lavender-bg/20 pointer-events-none" />
-              <div className="relative bg-card/80 backdrop-blur-sm border border-border/30 rounded-3xl px-10 py-16 md:px-14 md:py-20">
+              <div className="absolute inset-0 bg-gradient-to-br from-sage-bg/40 via-card to-lavender-bg/15 pointer-events-none" />
+              <div className="relative bg-card/85 backdrop-blur-sm border border-sage/15 rounded-3xl px-10 py-16 md:px-14 md:py-20 shadow-elevated">
                 <div className="flex flex-col items-center text-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-sage-bg/60 flex items-center justify-center">
+                  <div className="w-11 h-11 rounded-full bg-sage-bg/70 flex items-center justify-center ring-4 ring-sage-bg/40">
                     <Loader2 size={18} className="animate-spin text-sage" />
                   </div>
                   <div>
-                    <p className="font-serif text-lg text-foreground mb-1">Finding your answer</p>
+                    <p className="font-serif text-lg text-foreground mb-1.5">Finding your answer</p>
                     <p className="font-sans text-xs font-light text-muted-foreground">
                       We're putting together guidance tailored to your question…
                     </p>
@@ -228,7 +257,7 @@ const AskPage = () => {
 
         {/* ── Error ── */}
         {error && (
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl">
+          <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
             <div className="bg-card border border-destructive/20 rounded-2xl p-8">
               <p className="font-sans text-sm font-light text-destructive">{error}</p>
             </div>
@@ -236,35 +265,49 @@ const AskPage = () => {
         )}
 
         {/* ══════════════════════════════════════════════════
-            QUICK ANSWER, the hero moment
+            QUICK ANSWER, the hero moment — premium card
             ══════════════════════════════════════════════════ */}
         {parsed?.quickAnswer && (
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-16">
-            <div className="relative rounded-3xl overflow-hidden">
-              {/* Layered background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-sage-bg/50 via-card to-lavender-bg/15 pointer-events-none" />
-              <div className="absolute top-0 right-0 w-40 h-40 bg-sage/[0.04] rounded-bl-[6rem] pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-lavender/[0.04] rounded-tr-[5rem] pointer-events-none" />
+          <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-16 relative z-10">
+            <div className="relative rounded-[2rem] overflow-hidden shadow-elevated">
+              {/* Layered backgrounds */}
+              <div className="absolute inset-0 bg-gradient-to-br from-sage-bg/55 via-card to-lavender-bg/12 pointer-events-none" />
+              <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-sage/[0.08] blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-lavender/[0.06] blur-3xl pointer-events-none" />
 
-              <div className="relative border border-sage/15 rounded-3xl px-8 py-10 md:px-12 md:py-14">
+              {/* Botanical mark in corner */}
+              <Sprig tone="sage" className="absolute top-6 right-6 w-10 h-10 opacity-30" />
+
+              <div className="relative border border-sage/20 rounded-[2rem] px-7 py-10 md:px-14 md:py-14">
                 {/* Label */}
                 <div className="flex items-center gap-3 mb-7">
-                  <div className="w-8 h-8 rounded-full bg-sage/10 flex items-center justify-center">
+                  <div className="w-9 h-9 rounded-full bg-sage/12 flex items-center justify-center ring-2 ring-sage/10">
                     <Sparkles size={14} className="text-sage" />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-sans text-[11px] font-medium tracking-widest uppercase text-sage">
-                      Quick Answer
+                  <div className="flex items-center gap-2.5">
+                    <span className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-sage">
+                      The short answer
                     </span>
-                    <span className="h-px w-12 bg-sage/25" />
+                    <span className="h-px w-12 bg-sage/30" />
                   </div>
                 </div>
 
-                {/* Answer text, larger, more dominant */}
-                <p className="font-serif text-lg md:text-xl text-foreground leading-[1.6] max-w-2xl">
+                {/* Editorial pull-quote treatment */}
+                <p className="font-serif text-[1.25rem] md:text-[1.55rem] text-foreground leading-[1.55] max-w-2xl tracking-[-0.005em]">
                   <span className="font-medium">{parsed.quickAnswer.split(" ").slice(0, 8).join(" ")}</span>
-                  {" "}{parsed.quickAnswer.split(" ").slice(8).join(" ")}
+                  {" "}
+                  <span className="text-foreground/85">{parsed.quickAnswer.split(" ").slice(8).join(" ")}</span>
                 </p>
+
+                {/* Hairline detail */}
+                <div className="mt-9 pt-5 border-t border-sage/15 flex items-center justify-between gap-4">
+                  <span className="font-sans text-[11px] font-light text-sage-muted">
+                    Continue reading for the full picture
+                  </span>
+                  <span className="font-sans text-[10px] font-light tracking-widest uppercase text-sage/60">
+                    01 / 03
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -274,19 +317,34 @@ const AskPage = () => {
             STRUCTURED ANSWER BODY
             ══════════════════════════════════════════════════ */}
         {parsed?.rest && (
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-8">
+          <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-8 relative z-10">
+            {/* Label above body */}
+            <div className="flex items-center gap-3 mb-8">
+              <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-muted-foreground/70">
+                The full picture
+              </span>
+              <span className="h-px flex-1 bg-border/30" />
+              <span className="font-sans text-[10px] font-light tracking-widest uppercase text-muted-foreground/50">
+                02 / 03
+              </span>
+            </div>
+
             <div className="prose prose-sm max-w-none font-sans font-light text-foreground leading-relaxed
-              prose-headings:font-serif prose-headings:text-foreground prose-headings:leading-tight
-              prose-h2:text-[1.35rem] prose-h2:mb-5 prose-h2:mt-14 prose-h2:pt-10 prose-h2:border-t prose-h2:border-border/25
-              prose-h3:text-base prose-h3:mt-10 prose-h3:mb-3 prose-h3:font-medium
-              prose-p:text-[14.5px] prose-p:font-light prose-p:leading-[1.85] prose-p:text-muted-foreground prose-p:mb-5
+              prose-headings:font-serif prose-headings:text-foreground prose-headings:leading-tight prose-headings:tracking-[-0.005em]
+              prose-h2:text-[1.5rem] md:prose-h2:text-[1.65rem] prose-h2:mb-5 prose-h2:mt-14 prose-h2:pt-10 prose-h2:border-t prose-h2:border-border/25
+              prose-h3:text-[1.05rem] prose-h3:mt-10 prose-h3:mb-3 prose-h3:font-medium prose-h3:text-foreground/95
+              prose-p:text-[15px] prose-p:font-light prose-p:leading-[1.85] prose-p:text-muted-foreground prose-p:mb-5
               prose-strong:text-foreground prose-strong:font-medium
-              prose-li:text-[14.5px] prose-li:text-muted-foreground prose-li:leading-[1.85] prose-li:mb-1
+              prose-li:text-[15px] prose-li:text-muted-foreground prose-li:leading-[1.85] prose-li:mb-1.5
               prose-ul:my-5 prose-ol:my-5
-              [&_blockquote]:relative [&_blockquote]:bg-sage-bg/20 [&_blockquote]:border-l-2 [&_blockquote]:border-sage/30
+              prose-ul:pl-1 prose-ol:pl-1
+              [&_ul>li]:relative [&_ul>li]:pl-1
+              [&_blockquote]:relative [&_blockquote]:bg-gradient-to-br [&_blockquote]:from-sage-bg/30 [&_blockquote]:to-sage-bg/10
+              [&_blockquote]:border-l-[3px] [&_blockquote]:border-sage/40
               [&_blockquote]:rounded-r-2xl [&_blockquote]:px-7 [&_blockquote]:py-6 [&_blockquote]:my-10
-              [&_blockquote]:not-italic
-              [&_blockquote_p]:text-foreground [&_blockquote_p]:font-serif [&_blockquote_p]:text-[15px] [&_blockquote_p]:leading-relaxed [&_blockquote_p]:mb-0
+              [&_blockquote]:not-italic [&_blockquote]:shadow-soft
+              [&_blockquote_p]:text-foreground [&_blockquote_p]:font-serif [&_blockquote_p]:text-[16px] [&_blockquote_p]:leading-[1.65] [&_blockquote_p]:mb-0
+              [&_h2]:relative
             ">
               <ReactMarkdown>{parsed.rest}</ReactMarkdown>
             </div>
@@ -295,7 +353,7 @@ const AskPage = () => {
 
         {/* Streaming indicator */}
         {isLoading && answer && (
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl">
+          <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
             <div className="flex items-center gap-2.5 mt-2 mb-8">
               <Loader2 size={13} className="animate-spin text-sage" />
               <span className="font-sans text-[11px] font-light text-sage-muted tracking-wide">Still writing…</span>
@@ -308,34 +366,44 @@ const AskPage = () => {
             ══════════════════════════════════════════════════ */}
         {isDone && (
           <>
-            {/* ── Medical trust ── */}
-            <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-              <div className="flex items-center gap-3 pt-8 pb-4 border-t border-border/20">
-                <Shield size={13} className="text-sage/60" />
-                <p className="font-sans text-[11px] font-light text-sage-muted tracking-wide">
-                  ✔ Medically reviewed by Jenny Joines
-                </p>
+            {/* ── Medical trust signature ── */}
+            <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
+              <div className="flex items-center gap-3 pt-10 pb-2">
+                <div className="flex items-center gap-2 bg-sage-bg/40 rounded-full px-4 py-2 ring-1 ring-sage/15">
+                  <Shield size={12} className="text-sage" />
+                  <p className="font-sans text-[11px] font-light text-sage tracking-wide">
+                    ✔ Medically reviewed by Jenny Joines
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* ── Reassurance, emotionally designed ── */}
-            <div className="mt-12 mb-16">
-              <div className="relative bg-gradient-to-b from-sage-bg/15 via-parchment to-parchment">
-                <div className="container mx-auto px-6 md:px-10 max-w-3xl py-14 md:py-20">
-                  <div className="max-w-lg mx-auto text-center">
-                    {/* Decorative flanking lines */}
-                    <div className="flex items-center justify-center gap-4 mb-6">
-                      <span className="h-px w-10 bg-terracotta/20" />
-                      <span className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-terracotta/70">
-                        A small reminder
-                      </span>
-                      <span className="h-px w-10 bg-terracotta/20" />
-                    </div>
+            {/* ── Reassurance, editorial reminder block ── */}
+            <div className="mt-16 mb-20 relative">
+              <div className="relative bg-gradient-to-b from-sage-bg/20 via-parchment to-parchment overflow-hidden">
+                {/* Soft botanical flanks */}
+                <BotanicalAccent
+                  className="top-1/2 -translate-y-1/2 -left-20 md:-left-6 rotate-[-15deg]"
+                  opacity="opacity-[0.16]"
+                  size="w-[180px] md:w-[240px]"
+                />
+                <BotanicalAccent
+                  flip
+                  className="top-1/2 -translate-y-1/2 -right-20 md:-right-6 rotate-[15deg]"
+                  opacity="opacity-[0.16]"
+                  size="w-[180px] md:w-[240px]"
+                />
 
-                    <p className="font-serif text-xl md:text-[1.4rem] text-foreground leading-[1.5] mb-4">
+                <div className="container mx-auto px-6 md:px-10 max-w-3xl py-16 md:py-24 relative z-10">
+                  <div className="max-w-lg mx-auto text-center">
+                    <SprigDivider tone="sage" className="mb-6" />
+                    <p className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-terracotta/80 mb-5">
+                      A small reminder
+                    </p>
+                    <p className="font-serif text-[1.4rem] md:text-[1.6rem] text-foreground leading-[1.4] mb-4 tracking-[-0.005em]">
                       Whatever you're going through, it's okay to ask.
                     </p>
-                    <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-md mx-auto">
+                    <p className="font-sans text-[14px] font-light text-muted-foreground leading-[1.75] max-w-md mx-auto">
                       You're doing the right thing by looking for answers, and you don't need to have it all figured out. Trust yourself.
                     </p>
                   </div>
@@ -344,34 +412,37 @@ const AskPage = () => {
             </div>
 
             {/* ── Follow-up prompts ── */}
-            <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-16">
+            <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-14 relative z-10">
               <div className="flex items-center gap-3 mb-6">
-                <span className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-muted-foreground/60">
+                <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-muted-foreground/70">
                   Keep exploring
                 </span>
                 <span className="h-px flex-1 bg-border/25" />
+                <span className="font-sans text-[10px] font-light tracking-widest uppercase text-muted-foreground/50">
+                  03 / 03
+                </span>
               </div>
               <div className="flex flex-wrap gap-2.5">
                 {followUpPrompts.map((p) => (
                   <button
                     key={p}
                     onClick={() => handleSuggestion(p)}
-                    className="group inline-flex items-center gap-2.5 font-sans text-[13px] font-light text-muted-foreground 
-                      bg-card/60 border border-border/40 rounded-full px-5 py-3 
-                      hover:border-sage/30 hover:text-foreground hover:bg-card hover:shadow-soft 
+                    className="group inline-flex items-center gap-2.5 font-sans text-[13px] font-light text-foreground/75
+                      bg-card border border-border/40 rounded-full px-5 py-3
+                      hover:border-sage/40 hover:text-foreground hover:bg-card hover:shadow-soft
                       transition-all duration-300"
                   >
                     {p}
-                    <ChevronRight size={11} className="text-border group-hover:text-sage transition-colors" />
+                    <ChevronRight size={11} className="text-border group-hover:text-sage group-hover:translate-x-0.5 transition-all" />
                   </button>
                 ))}
               </div>
             </div>
 
             {/* ── Continue your journey ── */}
-            <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-20">
+            <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-20 relative z-10">
               <div className="flex items-center gap-3 mb-6">
-                <span className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-muted-foreground/60">
+                <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-muted-foreground/70">
                   Continue your journey
                 </span>
                 <span className="h-px flex-1 bg-border/25" />
@@ -381,84 +452,104 @@ const AskPage = () => {
                   <Link
                     key={l.href}
                     to={l.href}
-                    className="group relative bg-card/70 backdrop-blur-sm border border-border/30 rounded-2xl px-6 py-6 
-                      hover:border-sage/25 hover:shadow-soft hover:bg-card transition-all duration-300 overflow-hidden"
+                    className="group relative bg-card border border-border/40 rounded-2xl px-6 py-7
+                      hover:border-sage/35 hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
                   >
-                    <div className="absolute top-0 right-0 w-16 h-16 bg-sage-bg/20 rounded-bl-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                    <l.icon size={16} className="text-sage/70 mb-3.5" />
-                    <p className="font-sans text-[13px] font-medium text-foreground mb-1">{l.label}</p>
-                    <p className="font-sans text-[11px] font-light text-muted-foreground">{l.desc}</p>
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-sage-bg/40 to-transparent rounded-bl-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    <div className="flex items-start justify-between mb-3.5">
+                      <div className="w-9 h-9 rounded-full bg-sage-bg/50 flex items-center justify-center ring-1 ring-sage/10 group-hover:bg-sage-bg/80 transition-colors">
+                        <l.icon size={15} className="text-sage" />
+                      </div>
+                      <ArrowUpRight size={14} className="text-border group-hover:text-sage group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
+                    </div>
+                    <p className="font-serif text-[15px] text-foreground mb-1">{l.label}</p>
+                    <p className="font-sans text-[11.5px] font-light text-muted-foreground leading-relaxed">{l.desc}</p>
                   </Link>
                 ))}
               </div>
             </div>
 
             {/* ══════════════════════════════════════════════════
-                ASK AGAIN, premium continuation module
+                ASK SOMETHING ELSE — premium continuation moment
                 ══════════════════════════════════════════════════ */}
-            <div className="relative">
-              {/* Full-width background wash */}
-              <div className="absolute inset-0 bg-gradient-to-b from-parchment via-sage-bg/10 to-parchment pointer-events-none" />
+            <div className="relative mt-8">
+              {/* Full-width premium wash */}
+              <div className="absolute inset-0 bg-gradient-to-b from-parchment via-sage-bg/15 to-parchment pointer-events-none" />
+              <StageGlow tone="sage" className="top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px]" opacity={0.7} />
 
-              <div className="relative container mx-auto px-6 md:px-10 max-w-3xl py-16 md:py-20">
-                {/* Frame corner decoration */}
-                <div className="relative bg-card border border-border/30 rounded-3xl px-8 py-12 md:px-12 md:py-14 shadow-elevated overflow-hidden">
-                  {/* Subtle corner accents */}
-                  <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-sage/10 rounded-tl-3xl pointer-events-none" />
-                  <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-sage/10 rounded-br-3xl pointer-events-none" />
+              <div className="relative container mx-auto px-6 md:px-10 max-w-3xl py-20 md:py-28">
+                <div className="relative bg-card border border-sage/15 rounded-[2rem] px-7 py-12 md:px-14 md:py-16 shadow-elevated overflow-hidden">
+                  {/* Botanical art-direction */}
+                  <BotanicalAccent
+                    className="-top-10 -left-10 rotate-[-18deg]"
+                    opacity="opacity-[0.14]"
+                    size="w-[180px] md:w-[230px]"
+                  />
+                  <BotanicalAccent
+                    flip
+                    className="-bottom-10 -right-10 rotate-[18deg]"
+                    opacity="opacity-[0.14]"
+                    size="w-[180px] md:w-[230px]"
+                  />
+                  <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full bg-sage/[0.06] blur-3xl pointer-events-none" />
 
-                  <div className="text-center mb-8">
-                    <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sage-bg/50 mb-5">
-                      <Search size={16} className="text-sage" />
-                    </div>
-                    <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Ask Something Else</h2>
-                    <p className="font-sans text-xs font-light text-muted-foreground max-w-sm mx-auto">
-                      Still have questions? Keep going, we're here for every part of the journey.
+                  <div className="relative text-center mb-9">
+                    <SprigDivider tone="sage" className="mb-6" />
+                    <p className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-sage mb-4">
+                      Your next question
+                    </p>
+                    <h2 className="font-serif text-[1.75rem] md:text-[2.1rem] text-foreground mb-3 leading-[1.2] tracking-[-0.01em]">
+                      What else is on your mind?
+                    </h2>
+                    <p className="font-sans text-[14px] font-light text-muted-foreground max-w-md mx-auto leading-relaxed">
+                      Keep going — we're here for every part of the journey, no question too small.
                     </p>
                   </div>
 
                   {/* Input */}
-                  <div
-                    className={`relative bg-parchment border rounded-2xl px-5 py-4 md:px-6 md:py-5 flex items-center gap-4 transition-all duration-300 ${
-                      inputFocused 
-                        ? "border-sage/40 shadow-soft ring-1 ring-sage/10" 
-                        : "border-border/40"
-                    }`}
-                  >
-                    <Search size={16} className="text-sage-muted/60 shrink-0" />
-                    <input
-                      type="text"
-                      value={newQuery}
-                      onChange={(e) => setNewQuery(e.target.value)}
-                      onKeyDown={handleKeyDown}
-                      onFocus={() => setInputFocused(true)}
-                      onBlur={() => setInputFocused(false)}
-                      placeholder="Type your next question…"
-                      className="flex-1 bg-transparent font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 focus:outline-none"
-                    />
-                    <button
-                      onClick={handleAskAgain}
-                      disabled={!newQuery.trim()}
-                      className="bg-terracotta text-terracotta-foreground rounded-full px-6 py-2.5 font-sans text-[13px] font-medium shadow-cta 
-                        hover:bg-terracotta-hover transition-all duration-300 shrink-0
-                        disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
+                  <div className="relative max-w-xl mx-auto">
+                    <div
+                      className={`relative bg-parchment border rounded-2xl px-5 py-4 md:px-6 md:py-5 flex items-center gap-4 transition-all duration-300 ${
+                        inputFocused
+                          ? "border-sage/50 shadow-soft ring-2 ring-sage/10"
+                          : "border-border/50"
+                      }`}
                     >
-                      Ask now
-                    </button>
-                  </div>
-
-                  {/* Suggestion chips */}
-                  <div className="flex flex-wrap gap-2 mt-5 justify-center">
-                    {["Is it normal?", "What should I expect?", "I'm not sure what I'm feeling"].map((s) => (
+                      <Search size={16} className="text-sage-muted/60 shrink-0" />
+                      <input
+                        type="text"
+                        value={newQuery}
+                        onChange={(e) => setNewQuery(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        onFocus={() => setInputFocused(true)}
+                        onBlur={() => setInputFocused(false)}
+                        placeholder="Type your next question…"
+                        className="flex-1 bg-transparent font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 focus:outline-none"
+                      />
                       <button
-                        key={s}
-                        onClick={() => handleSuggestion(s)}
-                        className="font-sans text-[11px] font-light text-muted-foreground/70 border border-border/30 rounded-full px-4 py-2 
-                          hover:border-sage/30 hover:text-foreground hover:bg-parchment transition-all duration-200"
+                        onClick={handleAskAgain}
+                        disabled={!newQuery.trim()}
+                        className="bg-terracotta text-terracotta-foreground rounded-full px-6 py-2.5 font-sans text-[13px] font-medium shadow-cta
+                          hover:bg-terracotta-hover transition-all duration-300 shrink-0
+                          disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
                       >
-                        {s}
+                        Ask now
                       </button>
-                    ))}
+                    </div>
+
+                    {/* Suggestion chips */}
+                    <div className="flex flex-wrap gap-2 mt-6 justify-center">
+                      {["Is it normal?", "What should I expect?", "I'm not sure what I'm feeling"].map((s) => (
+                        <button
+                          key={s}
+                          onClick={() => handleSuggestion(s)}
+                          className="font-sans text-[12px] font-light text-muted-foreground bg-card/60 border border-border/40 rounded-full px-4 py-2
+                            hover:border-sage/40 hover:text-foreground hover:bg-card hover:shadow-soft transition-all duration-200"
+                        >
+                          {s}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

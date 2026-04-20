@@ -168,13 +168,13 @@ const OvulationResult = ({
         <div className="absolute inset-x-0 top-0 h-[460px] glow-sage opacity-70 pointer-events-none" aria-hidden="true" />
         <div className="absolute -bottom-32 right-[-10%] w-[520px] h-[520px] glow-lavender opacity-40 rounded-full pointer-events-none" aria-hidden="true" />
 
-        {/* Botanical accents — restrained, framing only */}
-        <BotanicalAccent className="top-6 -left-10 md:top-10 md:-left-6" opacity="opacity-[0.16]" />
-        <BotanicalAccent className="top-2 -right-10 md:top-6 md:-right-6" flip opacity="opacity-[0.13]" />
+        {/* Botanical accents — confident framing */}
+        <BotanicalAccent className="top-4 -left-12 md:top-8 md:-left-4" opacity="opacity-[0.55]" size="w-[240px] md:w-[360px]" />
+        <BotanicalAccent className="top-2 -right-12 md:top-4 md:-right-4" flip opacity="opacity-[0.48]" size="w-[240px] md:w-[360px]" />
 
         <div className="relative container mx-auto px-6 md:px-10 max-w-2xl text-center">
           <div className="flex items-center justify-center gap-3 mb-7">
-            <Sprig className="w-4 h-4 -rotate-[35deg]" />
+            <Sprig className="w-5 h-5 -rotate-[35deg]" />
             <div className="inline-flex items-center gap-2">
               {reveal && (
                 <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />

@@ -186,7 +186,7 @@ const OvulationResult = ({
                 <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
               )}
             </div>
-            <Sprig className="w-4 h-4 rotate-[35deg] -scale-x-100" />
+            <Sprig className="w-5 h-5 rotate-[35deg] -scale-x-100" />
           </div>
 
           <p className="font-serif text-lg sm:text-xl text-foreground/60 italic leading-snug mb-5">

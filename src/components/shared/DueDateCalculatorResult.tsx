@@ -14,6 +14,7 @@ import {
 import journalFlatlay from "@/assets/journal-flatlay.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { BotanicalAccent, Sprig, SprigDivider, StageGlow } from "@/components/shared/StageBotanical";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -244,11 +245,25 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
         {/* Layered ambient glow */}
         <div
           className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/3 w-[700px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, hsl(var(--stage-pregnancy) / 0.12) 0%, transparent 60%)' }}
+          style={{ background: 'radial-gradient(ellipse, hsl(var(--stage-pregnancy) / 0.18) 0%, transparent 60%)' }}
         />
+        <StageGlow tone="pregnancy" className="inset-x-0 top-0 h-[500px]" opacity={0.85} />
         <div
           className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
           style={{ background: 'linear-gradient(to top, hsl(var(--parchment)), transparent)' }}
+        />
+
+        {/* Botanical corner accents — pregnancy colour family */}
+        <BotanicalAccent
+          className="top-4 -left-10 md:top-8 md:-left-2"
+          opacity="opacity-[0.48]"
+          size="w-[240px] md:w-[360px]"
+        />
+        <BotanicalAccent
+          flip
+          className="top-2 -right-10 md:top-6 md:-right-2"
+          opacity="opacity-[0.4]"
+          size="w-[220px] md:w-[320px]"
         />
 
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10">
@@ -438,8 +453,17 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       {/* ═══════════════════════════════════════════════════════════════════
           S2: THE CONVERSION BRIDGE — why starting matters
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="bg-parchment py-16 md:py-20">
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
+      <section className="relative bg-parchment py-16 md:py-20 overflow-hidden">
+        <StageGlow tone="pregnancy" className="-top-10 left-[-100px] w-[420px] h-[420px]" opacity={0.6} />
+        <BotanicalAccent
+          className="bottom-2 -right-12 md:bottom-6 md:-right-4"
+          opacity="opacity-[0.3]"
+          size="w-[200px] md:w-[280px]"
+        />
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10 mb-10">
+          <SprigDivider tone="pregnancy" />
+        </div>
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10">
           <Fade delay={0}>
             <div
               className="rounded-2xl border overflow-hidden"
@@ -1099,8 +1123,23 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
       <section className="bg-parchment-dark py-20 md:py-28 relative overflow-hidden">
         <div
           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, hsl(var(--stage-pregnancy) / 0.06) 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(ellipse, hsl(var(--stage-pregnancy) / 0.14) 0%, transparent 70%)' }}
         />
+        <StageGlow tone="pregnancy" className="inset-x-0 top-0 h-[360px]" opacity={0.6} />
+        <BotanicalAccent
+          className="top-6 -left-10 md:top-10 md:-left-4"
+          opacity="opacity-[0.36]"
+          size="w-[200px] md:w-[300px]"
+        />
+        <BotanicalAccent
+          flip
+          className="bottom-6 -right-10 md:bottom-10 md:-right-4"
+          opacity="opacity-[0.36]"
+          size="w-[200px] md:w-[300px]"
+        />
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl relative z-10 mb-10">
+          <SprigDivider tone="pregnancy" />
+        </div>
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl relative z-10">
           <Fade delay={0}>
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">

@@ -302,8 +302,11 @@ const OvulationResult = ({
       </section>
 
       {/* ── Save this cycle (primary CTA) ───────────────────────────── */}
-      <section className="relative bg-parchment py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[520px] glow-sage opacity-50 pointer-events-none" aria-hidden="true" />
+      <section className="relative bg-gradient-to-br from-sage-bg/70 via-parchment to-lavender-bg/50 py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[560px] glow-sage opacity-60 pointer-events-none" aria-hidden="true" />
+        <div className="absolute -top-20 left-[-8%] w-[420px] h-[420px] glow-lavender opacity-40 rounded-full pointer-events-none" aria-hidden="true" />
+        <BotanicalAccent className="bottom-0 -right-12 md:-right-6" flip opacity="opacity-[0.14]" />
+        <BotanicalAccent className="top-4 -left-12 md:-left-6" opacity="opacity-[0.10]" />
         <div className="relative container mx-auto px-6 md:px-10 max-w-2xl">
           {/* Editorial intro, no card frame */}
           <div className="text-center mb-12">

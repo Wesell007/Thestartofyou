@@ -1,7 +1,13 @@
 // ─── /my-week curated content ──────────────────────────────────────────────
 // Real, emotionally intelligent copy for the canonical saved pregnancy
 // experience. Distinct from weekData.ts (which powers the public guidance
-// hub). Every week 1–42 has a hand-written entry — no fallbacks leak through.
+// hub).
+//
+// Coverage (this pass):
+//   - Every week 1–42 has a hand-written WeekIdentity
+//     (chapterTitle, theme, developmentCue, babyNote).
+//   - Slot 1 (matters) and Slot 2 (focus) still use stage-based defaults
+//     for the weeks not yet hand-curated. Tracked openly.
 
 export interface MyWeekEntry {
   /** Editorial italic lead at the top of Slot 1. One sentence. */
@@ -18,45 +24,63 @@ export interface MyWeekEntry {
 
 const E = (entry: MyWeekEntry): MyWeekEntry => entry;
 
-// ─── Week identity (theme) ─────────────────────────────────────────────────
-// A short, premium editorial framing for each week — used as the hero anchor.
-// Never gimmicky. A weekly *moment*, not a milestone badge.
+// ─── Week identity (chapter title + theme) ─────────────────────────────────
+// Each week has its own chapter title — a collectible, editorial framing
+// that gives the week a sense of distinct identity. Never gimmicky.
 export interface WeekIdentity {
-  /** Two or three words. The week's emotional shape. */
+  /** A short editorial chapter title — 2–5 words, premium. */
+  chapterTitle: string;
+  /** The week's emotional shape — one short phrase. */
   theme: string;
-  /** A premium reinterpreted "about this size" line. Soft, never fruit-app. */
+  /** A premium "about this size" line. Soft, never fruit-app. */
   developmentCue: string;
   /** One quiet sentence about the baby at this stage. Awe, not clinical. */
   babyNote: string;
 }
 
 const identityByWeek: Record<number, WeekIdentity> = {
-  // Curated highlights — defaults fill the rest by stage, gracefully.
-  6: { theme: "The earliest forming.", developmentCue: "About the size of a lentil — but already a heartbeat.", babyNote: "The first flutters of a heart, beating before you can hear it." },
-  8: { theme: "Becoming, quietly.", developmentCue: "About the curve of a small raspberry, all softness and beginning.", babyNote: "Tiny limbs are taking shape, fingers and toes still webbed in the making." },
-  10: { theme: "A held secret.", developmentCue: "Around the size of a strawberry, folded gently within you.", babyNote: "All major organs are present in form, even if not yet in function." },
-  12: { theme: "A turning point.", developmentCue: "About the length of a small plum, settling into shape.", babyNote: "Reflexes are forming — a hand may open and close without knowing why." },
-  14: { theme: "Settling in.", developmentCue: "Roughly the length of your hand, from wrist to fingertip.", babyNote: "Facial expressions are beginning to practise themselves, soundlessly." },
-  16: { theme: "Quiet arrival of feeling.", developmentCue: "About the length of an avocado, weight just beginning to register.", babyNote: "Your baby may be hearing muffled sound now — your voice, your heart." },
-  18: { theme: "The first felt movements.", developmentCue: "About the curve of a sweet pepper, turning often inside you.", babyNote: "Small kicks and stretches are happening, more than you can yet feel." },
-  20: { theme: "Halfway, gently.", developmentCue: "About the length of a banana, growing longer than wide.", babyNote: "Fingerprints are now uniquely theirs — a quiet kind of permanence." },
-  22: { theme: "The middle middle.", developmentCue: "Roughly the length of a spaghetti squash — long, lean, real.", babyNote: "Eyebrows and lashes are forming, faint but present." },
-  24: { theme: "A steady presence.", developmentCue: "About the length of an ear of corn, settling into proportion.", babyNote: "Inner ear is fully developed — your baby may startle at sudden sound." },
-  26: { theme: "Knowing your rhythms.", developmentCue: "About the length of a courgette, longer now than heavy.", babyNote: "Eyes are beginning to open, even in the dark you carry." },
-  28: { theme: "Crossing into the third.", developmentCue: "About the length of an aubergine, gathering weight.", babyNote: "Brain folds are deepening — the architecture of who they'll be." },
-  30: { theme: "Heavier days.", developmentCue: "About the size of a large cabbage, taking up more room.", babyNote: "Your baby can now distinguish light and dark through your skin." },
-  32: { theme: "The body slowing.", developmentCue: "About the length of a butternut squash, real weight now.", babyNote: "Practice breaths are happening, drawing in amniotic fluid, getting ready." },
-  34: { theme: "The held final stretch.", developmentCue: "About the size of a small honeydew melon, settled and growing.", babyNote: "Most babies have moved head-down now, though not all in a hurry." },
-  36: { theme: "Almost full.", developmentCue: "About the length of a romaine lettuce — long, present, almost ready.", babyNote: "Lungs are nearly mature; immunity is being passed gently to them." },
-  38: { theme: "Waiting, with intent.", developmentCue: "About the size of a small pumpkin, softly complete.", babyNote: "Vernix and lanugo are slowly disappearing — the body finishing itself." },
-  40: { theme: "A held threshold.", developmentCue: "About the size of a small watermelon, fully here, waiting.", babyNote: "Your baby is ready when they're ready — most arrive in their own hour." },
-};
-
-const stageIdentityDefaults: Record<"early" | "mid" | "late" | "post-term", WeekIdentity> = {
-  early: { theme: "Quietly forming.", developmentCue: "Smaller than you'd imagine, but already specific.", babyNote: "So much is happening that no eye, even with help, can yet see clearly." },
-  mid: { theme: "The held middle.", developmentCue: "Growing in proportion — more them, week by week.", babyNote: "Movements are becoming theirs, not just reflex but rhythm." },
-  late: { theme: "Gathering toward birth.", developmentCue: "Real weight now — substantial, settled, almost ready.", babyNote: "The work of these last weeks is mostly invisible, but it is enormous." },
-  "post-term": { theme: "Past the date, still becoming.", developmentCue: "Fully here, waiting for their own hour.", babyNote: "Most pregnancies arrive when they arrive. Your body knows." },
+  1: { chapterTitle: "Before the beginning", theme: "Almost not yet.", developmentCue: "Smaller than a single grain of sand — still a possibility.", babyNote: "This week is counted from your last period; the becoming has not yet begun." },
+  2: { chapterTitle: "The quiet possibility", theme: "Almost not yet.", developmentCue: "A handful of cells, smaller than a poppy seed.", babyNote: "Conception is happening or about to — invisible, ordinary, extraordinary." },
+  3: { chapterTitle: "The first crossing", theme: "A held secret.", developmentCue: "About the size of a poppy seed, finding a place to settle.", babyNote: "A tiny cluster of cells is journeying inward, looking for somewhere to belong." },
+  4: { chapterTitle: "The threshold", theme: "Quietly arriving.", developmentCue: "About the size of a sesame seed — but already specific.", babyNote: "Implantation is taking place; your body is beginning to know." },
+  5: { chapterTitle: "The first knowing", theme: "Two pink lines.", developmentCue: "About the size of an apple seed, already in motion.", babyNote: "The earliest neural groove is forming — the very first line of who they will be." },
+  6: { chapterTitle: "The first heartbeat", theme: "The earliest forming.", developmentCue: "About the size of a lentil — but already a heartbeat.", babyNote: "The first flutters of a heart, beating before you can hear it." },
+  7: { chapterTitle: "Becoming, in private", theme: "All inside.", developmentCue: "About the size of a blueberry, doubling almost daily.", babyNote: "The brain is forming in waves; tiny limb buds are reaching outward." },
+  8: { chapterTitle: "Soft beginnings", theme: "Becoming, quietly.", developmentCue: "About the curve of a small raspberry, all softness and beginning.", babyNote: "Tiny limbs are taking shape, fingers and toes still webbed in the making." },
+  9: { chapterTitle: "Held in tenderness", theme: "Tender weeks.", developmentCue: "About the size of a green olive, all face and curl.", babyNote: "Earliest features are surfacing; the tail is gone, the human form emerging." },
+  10: { chapterTitle: "A held secret", theme: "Yours alone, still.", developmentCue: "Around the size of a strawberry, folded gently within you.", babyNote: "All major organs are present in form, even if not yet in function." },
+  11: { chapterTitle: "Almost a person", theme: "Recognisable now.", developmentCue: "About the length of a small lime, stretching often.", babyNote: "Tooth buds are forming under the gums, and tiny nails are beginning to appear." },
+  12: { chapterTitle: "The first turning", theme: "A turning point.", developmentCue: "About the length of a small plum, settling into shape.", babyNote: "Reflexes are forming — a hand may open and close without knowing why." },
+  13: { chapterTitle: "Crossing the line", theme: "Easing forward.", developmentCue: "About the length of a pea pod, slim and active.", babyNote: "Vocal cords are forming, in a silence that won't last forever." },
+  14: { chapterTitle: "Settling in", theme: "Steadier weeks.", developmentCue: "Roughly the length of your hand, from wrist to fingertip.", babyNote: "Facial expressions are beginning to practise themselves, soundlessly." },
+  15: { chapterTitle: "Quietly thriving", theme: "Held and growing.", developmentCue: "About the size of an apple, weight beginning to register.", babyNote: "Their bones are hardening; light filters faintly through closed eyelids." },
+  16: { chapterTitle: "First stirrings", theme: "Quiet arrival of feeling.", developmentCue: "About the length of an avocado, weight just beginning to register.", babyNote: "Your baby may be hearing muffled sound now — your voice, your heart." },
+  17: { chapterTitle: "Listening in", theme: "A two-way thread.", developmentCue: "About the size of a small pear, gaining roundness.", babyNote: "Hearing is sharpening; the world outside arrives in muffled tones." },
+  18: { chapterTitle: "First felt movements", theme: "The first felt movements.", developmentCue: "About the curve of a sweet pepper, turning often inside you.", babyNote: "Small kicks and stretches are happening, more than you can yet feel." },
+  19: { chapterTitle: "A second person", theme: "Recognisably them.", developmentCue: "About the length of a heirloom tomato, finding rhythm.", babyNote: "Vernix is forming on their skin — a soft, protective coating for the months to come." },
+  20: { chapterTitle: "Halfway, gently", theme: "Halfway, gently.", developmentCue: "About the length of a banana, growing longer than wide.", babyNote: "Fingerprints are now uniquely theirs — a quiet kind of permanence." },
+  21: { chapterTitle: "A growing rhythm", theme: "Theirs and yours.", developmentCue: "About the length of a carrot, busy and present.", babyNote: "They can taste what you taste — flavours travel through amniotic fluid." },
+  22: { chapterTitle: "The middle middle", theme: "The middle middle.", developmentCue: "Roughly the length of a spaghetti squash — long, lean, real.", babyNote: "Eyebrows and lashes are forming, faint but present." },
+  23: { chapterTitle: "Held weight", theme: "Real now.", developmentCue: "About the length of a large mango, gaining substance.", babyNote: "Their skin is becoming less translucent; small layers of fat are beginning." },
+  24: { chapterTitle: "Knowing your voice", theme: "A steady presence.", developmentCue: "About the length of an ear of corn, settling into proportion.", babyNote: "Inner ear is fully developed — your baby may startle at sudden sound." },
+  25: { chapterTitle: "Closer to you", theme: "Tuning in.", developmentCue: "About the length of a swede, settling and stretching.", babyNote: "Their hands are now sensitive — they may grasp the cord, or their own foot." },
+  26: { chapterTitle: "Eyes opening", theme: "Knowing your rhythms.", developmentCue: "About the length of a courgette, longer now than heavy.", babyNote: "Eyes are beginning to open, even in the dark you carry." },
+  27: { chapterTitle: "The turning toward", theme: "Approaching the third.", developmentCue: "About the length of a head of cauliflower, deeply present.", babyNote: "Brain activity now resembles that of a newborn — first dreaming may be beginning." },
+  28: { chapterTitle: "Into the third", theme: "Crossing into the third.", developmentCue: "About the length of an aubergine, gathering weight.", babyNote: "Brain folds are deepening — the architecture of who they'll be." },
+  29: { chapterTitle: "Heavier days begin", theme: "More room for less.", developmentCue: "About the size of a butternut squash, taking room.", babyNote: "Their bones are fully formed but still soft — drawing calcium from you." },
+  30: { chapterTitle: "Heavier days", theme: "Heavier days.", developmentCue: "About the size of a large cabbage, taking up more room.", babyNote: "Your baby can now distinguish light and dark through your skin." },
+  31: { chapterTitle: "The slowing weeks", theme: "Quieter pacing.", developmentCue: "About the length of a coconut, fully present.", babyNote: "All five senses are now functioning, in their own held way." },
+  32: { chapterTitle: "The body slowing", theme: "The body slowing.", developmentCue: "About the length of a butternut squash, real weight now.", babyNote: "Practice breaths are happening, drawing in amniotic fluid, getting ready." },
+  33: { chapterTitle: "Inward turning", theme: "Settling within.", developmentCue: "About the size of a pineapple, head growing rapidly.", babyNote: "They may now recognise the same lullaby played twice, even before birth." },
+  34: { chapterTitle: "The held final stretch", theme: "The held final stretch.", developmentCue: "About the size of a small honeydew melon, settled and growing.", babyNote: "Most babies have moved head-down now, though not all in a hurry." },
+  35: { chapterTitle: "Almost ready", theme: "Quiet readiness.", developmentCue: "About the size of a pineapple, taking the room.", babyNote: "Most major systems are mature; the last weeks are about weight and finishing." },
+  36: { chapterTitle: "Almost full", theme: "Almost full.", developmentCue: "About the length of a romaine lettuce — long, present, almost ready.", babyNote: "Lungs are nearly mature; immunity is being passed gently to them." },
+  37: { chapterTitle: "Considered full term", theme: "Officially full.", developmentCue: "About the length of Swiss chard, quiet and complete.", babyNote: "Your baby is considered early-term now — could safely arrive any week." },
+  38: { chapterTitle: "Waiting, with intent", theme: "Waiting, with intent.", developmentCue: "About the size of a small pumpkin, softly complete.", babyNote: "Vernix and lanugo are slowly disappearing — the body finishing itself." },
+  39: { chapterTitle: "Days, not weeks", theme: "Closer than ever.", developmentCue: "About the size of a small watermelon, the room nearly full.", babyNote: "Most of the work is done; you are both waiting, in your own ways." },
+  40: { chapterTitle: "A held threshold", theme: "A held threshold.", developmentCue: "About the size of a small watermelon, fully here, waiting.", babyNote: "Your baby is ready when they're ready — most arrive in their own hour." },
+  41: { chapterTitle: "Past the date", theme: "Still in waiting.", developmentCue: "Fully here, fully formed — taking their own time.", babyNote: "Going past 40 weeks is common; your care team will check in more closely now." },
+  42: { chapterTitle: "Their own hour", theme: "On their own clock.", developmentCue: "Fully here, waiting for the door to open.", babyNote: "Most pregnancies arrive when they arrive. Your body knows the way." },
 };
 
 const stageOf = (week: number): "early" | "mid" | "late" | "post-term" => {
@@ -67,26 +91,18 @@ const stageOf = (week: number): "early" | "mid" | "late" | "post-term" => {
 };
 
 export const getWeekIdentity = (week: number): WeekIdentity => {
-  return identityByWeek[week] ?? stageIdentityDefaults[stageOf(week)];
+  const w = Math.min(Math.max(week, 1), 42);
+  return identityByWeek[w];
 };
 
-// ─── Hand-written weeks ────────────────────────────────────────────────────
+// ─── Hand-written full entries (Slot 1 + 2 + 4) ────────────────────────────
 const entries: Record<number, MyWeekEntry> = {
   18: E({
     lead: "Your baby is moving more than you can feel.",
     matters: [
-      {
-        title: "Your baby",
-        body: "About the length of a sweet pepper. Their hearing is sharpening, and they're stretching, kicking, and turning often.",
-      },
-      {
-        title: "Your body",
-        body: "Your bump is becoming more visible. You may feel the first quickening — small flutters that come and go.",
-      },
-      {
-        title: "Emotionally",
-        body: "This middle stretch can feel calmer, or quietly strange. Both are common, and neither needs to be fixed.",
-      },
+      { title: "Your baby", body: "About the length of a sweet pepper. Their hearing is sharpening, and they're stretching, kicking, and turning often." },
+      { title: "Your body", body: "Your bump is becoming more visible. You may feel the first quickening — small flutters that come and go." },
+      { title: "Emotionally", body: "This middle stretch can feel calmer, or quietly strange. Both are common, and neither needs to be fixed." },
     ],
     focus: {
       headline: "Notice how your energy shifts through the day.",
@@ -181,9 +197,10 @@ const defaultNextPreviewByStage: Record<ReturnType<typeof stageOf>, string> = {
 
 // ─── Public API ────────────────────────────────────────────────────────────
 export const getMyWeekContent = (week: number): MyWeekEntry => {
-  const hand = entries[week];
+  const w = Math.min(Math.max(week, 1), 42);
+  const hand = entries[w];
   if (hand) return hand;
-  const stage = stageOf(week);
+  const stage = stageOf(w);
   return {
     ...defaultsByStage[stage],
     matters: defaultMattersByStage[stage],

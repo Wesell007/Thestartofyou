@@ -1,60 +1,42 @@
-import type { WeekData } from "@/data/weekData";
+import type { MyWeekEntry } from "@/data/myWeekContent";
 
 interface Props {
-  data: WeekData;
+  content: MyWeekEntry;
 }
 
-// Three editorial points pulled from existing weekData
-const SlotWhatMatters = ({ data }: Props) => {
-  const points = [
-    {
-      title: "Your baby",
-      body: data.what.baby.what,
-    },
-    {
-      title: "Your body",
-      body: data.what.body.what,
-    },
-    {
-      title: "Emotionally",
-      body: data.what.emotional.what,
-    },
-  ];
-
+const SlotWhatMatters = ({ content }: Props) => {
   return (
-    <section className="py-12 sm:py-16 md:py-20">
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
-        <p
-          className="font-sans text-[11px] font-light tracking-[0.22em] uppercase mb-5 sm:mb-6"
-          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-        >
-          What matters this week
-        </p>
+    <section className="pt-6 pb-14 sm:pt-8 sm:pb-18 md:pt-10 md:pb-24">
+      <p
+        className="font-sans text-[11px] font-light tracking-[0.22em] uppercase mb-6 sm:mb-7"
+        style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+      >
+        What matters this week
+      </p>
 
-        <p className="font-serif italic text-[1.35rem] sm:text-[1.55rem] md:text-[1.75rem] text-foreground leading-snug mb-9 sm:mb-11 max-w-xl">
-          {data.atAGlance.split(".")[0]}.
-        </p>
+      <p className="font-serif italic text-[1.4rem] sm:text-[1.65rem] md:text-[1.85rem] text-foreground leading-snug mb-10 sm:mb-12 max-w-[34ch]">
+        {content.lead}
+      </p>
 
-        <ul className="space-y-7 sm:space-y-8">
-          {points.map((p, i) => (
-            <li key={i} className="flex gap-4 sm:gap-5">
-              <span
-                aria-hidden="true"
-                className="mt-2 shrink-0 w-[3px] h-5 rounded-full"
-                style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
-              />
-              <div>
-                <p className="font-sans text-[13px] sm:text-sm font-medium text-foreground mb-1.5 tracking-wide">
-                  {p.title}
-                </p>
-                <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed">
-                  {p.body}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className="space-y-8 sm:space-y-9">
+        {content.matters.map((p, i) => (
+          <li key={i} className="flex gap-5 sm:gap-6">
+            <span
+              aria-hidden="true"
+              className="mt-[10px] shrink-0 w-[2px] h-5 rounded-full"
+              style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.6)" }}
+            />
+            <div>
+              <p className="font-sans text-[12px] sm:text-[13px] font-medium text-foreground/80 mb-2 tracking-[0.06em] uppercase">
+                {p.title}
+              </p>
+              <p className="font-sans text-[15.5px] sm:text-[16px] font-light text-foreground/75 leading-[1.65]">
+                {p.body}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 };

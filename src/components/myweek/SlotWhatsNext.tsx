@@ -1,39 +1,29 @@
-import { ArrowRight } from "lucide-react";
-import type { WeekData } from "@/data/weekData";
+import type { MyWeekEntry } from "@/data/myWeekContent";
 
 interface Props {
-  data: WeekData;
+  content: MyWeekEntry;
   nextWeek: number | null;
-  weeksToGo?: number;
 }
 
-const SlotWhatsNext = ({ data, nextWeek, weeksToGo }: Props) => {
+const SlotWhatsNext = ({ content, nextWeek }: Props) => {
   if (!nextWeek) return null;
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 border-t border-border/40">
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
-        <p
-          className="font-sans text-[11px] font-light tracking-[0.22em] uppercase mb-6 sm:mb-7"
-          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-        >
-          What's next
-        </p>
+    <section className="py-14 sm:py-18 md:py-24 border-t border-border/30">
+      <p
+        className="font-sans text-[11px] font-light tracking-[0.22em] uppercase mb-6 sm:mb-7"
+        style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+      >
+        What's next
+      </p>
 
-        <h2 className="font-serif text-[1.3rem] sm:text-[1.5rem] md:text-[1.7rem] text-foreground leading-snug mb-4 max-w-lg">
-          Looking toward week {nextWeek}
-        </h2>
+      <h2 className="font-serif text-[1.4rem] sm:text-[1.6rem] md:text-[1.8rem] text-foreground leading-snug mb-5 max-w-[28ch]">
+        Looking toward week {nextWeek}
+      </h2>
 
-        <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed mb-6 sm:mb-7 max-w-lg">
-          {data.nextWeekPreview ?? "A little more growth, a little more change. We'll be here."}
-        </p>
-
-        {typeof weeksToGo === "number" && weeksToGo > 0 && (
-          <p className="font-sans text-[13px] font-light text-muted-foreground/60 italic">
-            About {weeksToGo} weeks to go.
-          </p>
-        )}
-      </div>
+      <p className="font-sans text-[15.5px] sm:text-[16px] font-light text-foreground/70 leading-[1.7] max-w-[52ch]">
+        {content.nextPreview}
+      </p>
     </section>
   );
 };

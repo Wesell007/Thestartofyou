@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { getWeekData, MAX_PREGNANCY_WEEK } from "@/data/weekData";
+import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
+import { getMyWeekContent } from "@/data/myWeekContent";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekHero from "@/components/myweek/MyWeekHero";
 import SlotWhatMatters from "@/components/myweek/SlotWhatMatters";
@@ -27,9 +28,8 @@ const formatDueDate = (d: Date) =>
 
 const MyWeek = () => {
   const { firstName, currentWeek, dueDate } = MOCK_USER;
-  const data = useMemo(() => getWeekData(currentWeek), [currentWeek]);
+  const content = useMemo(() => getMyWeekContent(currentWeek), [currentWeek]);
   const nextWeek = currentWeek < MAX_PREGNANCY_WEEK ? currentWeek + 1 : null;
-  const weeksToGo = Math.max(0, 40 - currentWeek);
 
   // Contextual support surfacing per spec
   const contextual =
@@ -42,17 +42,18 @@ const MyWeek = () => {
   return (
     <div className="min-h-screen bg-parchment">
       <MyWeekHeader />
-      <main>
+      {/* Centred, narrow product column. Whitespace is the frame. */}
+      <main className="mx-auto w-full max-w-[640px] px-5 sm:px-8 md:px-10">
         <MyWeekHero
           greeting={getGreeting()}
           firstName={firstName}
           week={currentWeek}
           dueDateLabel={formatDueDate(dueDate)}
         />
-        <SlotWhatMatters data={data} />
-        <SlotOneFocus data={data} />
-        <SlotReflection data={data} />
-        <SlotWhatsNext data={data} nextWeek={nextWeek} weeksToGo={weeksToGo} />
+        <SlotWhatMatters content={content} />
+        <SlotOneFocus content={content} />
+        <SlotReflection content={content} />
+        <SlotWhatsNext content={content} nextWeek={nextWeek} />
       </main>
       <MyWeekFooter contextual={contextual} />
     </div>

@@ -7,7 +7,7 @@ interface Props {
 const MyWeekFooter = ({ contextual }: Props) => {
   return (
     <footer className="border-t border-border/30 py-10 sm:py-12">
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl text-center space-y-3">
+      <div className="mx-auto w-full max-w-[640px] px-5 sm:px-8 md:px-10 text-center space-y-3">
         {contextual && (
           <p className="font-sans text-[13px] font-light text-muted-foreground/80 italic max-w-md mx-auto">
             {contextual}

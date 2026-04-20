@@ -11,6 +11,16 @@ interface Props {
 
 type SaveState = "idle" | "saving" | "saved" | "error";
 
+/**
+ * Slot — A moment for you (the reflection ritual).
+ *
+ * Designed as a heirloom writing surface, not a textarea:
+ *   - Embossed seal at the top
+ *   - Generous serif italic typography on a parchment field
+ *   - A single ruled left margin like a notebook
+ *   - Quiet "held" status that breathes in slowly
+ *   - Continuity colophon below — the words live on the journey
+ */
 const SlotReflection = ({ content, userId, week }: Props) => {
   const [value, setValue] = useState("");
   const [loaded, setLoaded] = useState(false);
@@ -19,7 +29,6 @@ const SlotReflection = ({ content, userId, week }: Props) => {
   const initialRef = useRef<string>("");
   const debounceRef = useRef<number | null>(null);
 
-  // Load existing reflection for this week
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -41,7 +50,6 @@ const SlotReflection = ({ content, userId, week }: Props) => {
     };
   }, [userId, week]);
 
-  // Debounced autosave (upsert)
   useEffect(() => {
     if (!loaded) return;
     if (value === initialRef.current) return;
@@ -60,7 +68,7 @@ const SlotReflection = ({ content, userId, week }: Props) => {
         initialRef.current = value;
         setSavedAt(new Date());
         setSaveState("saved");
-        window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2200);
+        window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2400);
       }
     }, 900);
     return () => {
@@ -77,109 +85,120 @@ const SlotReflection = ({ content, userId, week }: Props) => {
       ? "Couldn't save"
       : savedAt
       ? "Held privately"
-      : "Autosaves as you write · only you";
+      : "Autosaves as you write";
 
   return (
-    <section className="relative py-18 sm:py-22 md:py-28 border-t border-border/30">
-      {/* Soft botanical envelope — the section itself feels held */}
+    <section className="relative py-20 sm:py-24 md:py-32 border-t border-border/30">
+      {/* Atmospheric envelope — the section itself feels held */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-[-40px] sm:inset-x-[-80px] inset-y-2 -z-10 rounded-[44px]"
+        className="pointer-events-none absolute inset-x-[-80px] sm:inset-x-[-140px] inset-y-4 -z-10 rounded-[64px]"
         style={{
           background:
-            "radial-gradient(120% 80% at 50% 30%, hsl(var(--stage-pregnancy) / 0.32), transparent 72%)",
+            "radial-gradient(120% 80% at 50% 30%, hsl(var(--stage-pregnancy) / 0.42), transparent 72%)",
         }}
       />
 
-      <div className="flex items-center gap-3 mb-7 sm:mb-8">
+      {/* Section label */}
+      <div className="flex items-center gap-3 mb-8 sm:mb-9">
         <span
           aria-hidden="true"
           className="block w-6 h-px"
           style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
         />
         <p
-          className="font-sans text-[10.5px] sm:text-[11px] font-light tracking-[0.24em] uppercase"
+          className="font-sans text-[10.5px] sm:text-[11px] font-medium tracking-[0.26em] uppercase"
           style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
         >
           A moment for you
         </p>
       </div>
 
-      <h2 className="font-serif text-[1.55rem] sm:text-[1.85rem] md:text-[2.1rem] text-foreground leading-[1.18] mb-4 sm:mb-5 max-w-[26ch]">
+      <h2 className="font-serif text-[1.7rem] sm:text-[2rem] md:text-[2.3rem] text-foreground leading-[1.16] mb-4 sm:mb-5 max-w-[26ch]">
         {content.reflection.prompt}
       </h2>
 
-      <p className="font-sans text-[14px] sm:text-[14.5px] font-light italic text-foreground/55 leading-relaxed mb-9 sm:mb-10 max-w-[40ch]">
+      <p className="font-serif italic text-[15px] sm:text-[16px] text-foreground/55 leading-relaxed mb-10 sm:mb-12 max-w-[40ch]">
         {content.reflection.context}
       </p>
 
-      {/* Premium writing surface — parchment card, not an app textarea */}
+      {/* Heirloom writing surface — keepsake card */}
       <div
-        className="relative rounded-[28px] border bg-card/80 backdrop-blur-sm shadow-[0_2px_24px_-12px_hsl(var(--stage-pregnancy-accent)/0.18)] transition-shadow focus-within:shadow-[0_8px_40px_-16px_hsl(var(--stage-pregnancy-accent)/0.28)]"
-        style={{
-          borderColor: "hsl(var(--stage-pregnancy-accent) / 0.18)",
-          background:
-            "linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--stage-pregnancy) / 0.18) 100%)",
-        }}
+        className="relative rounded-[32px] keepsake-surface transition-shadow duration-500 focus-within:shadow-[0_32px_80px_-32px_hsl(var(--stage-pregnancy-accent)/0.32),0_8px_24px_-12px_hsl(222_14%_12%/0.1)]"
       >
-        {/* Privacy seal */}
-        <div className="flex items-center gap-2 px-6 sm:px-8 pt-5 sm:pt-6">
-          <Lock
-            size={11}
-            strokeWidth={1.6}
-            style={{ color: "hsl(var(--stage-pregnancy-accent) / 0.7)" }}
-          />
-          <span
-            className="font-sans text-[10.5px] font-light tracking-[0.18em] uppercase"
-            style={{ color: "hsl(var(--stage-pregnancy-accent) / 0.85)" }}
+        {/* Embossed seal — top centre */}
+        <div className="flex flex-col items-center pt-7 sm:pt-8 pb-2">
+          <div
+            className="flex items-center gap-2 px-4 py-1.5 rounded-full"
+            style={{
+              background: "hsl(var(--stage-pregnancy) / 0.5)",
+              border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.18)",
+            }}
           >
-            Private to you
-          </span>
+            <Lock
+              size={10}
+              strokeWidth={1.8}
+              style={{ color: "hsl(var(--stage-pregnancy-accent) / 0.85)" }}
+            />
+            <span
+              className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase"
+              style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+            >
+              Private to you
+            </span>
+          </div>
         </div>
 
-        {/* Left rule + textarea */}
-        <div className="relative pl-7 sm:pl-9 pr-6 sm:pr-8 pt-4 pb-4">
+        {/* Writing field with ruled margin */}
+        <div className="relative px-8 sm:px-12 pt-4 pb-2">
           <span
             aria-hidden="true"
-            className="absolute left-6 sm:left-8 top-4 bottom-16 w-[2px] rounded-full"
+            className="absolute left-7 sm:left-10 top-2 bottom-14 w-[1.5px] rounded-full"
             style={{
               background:
-                "linear-gradient(to bottom, hsl(var(--stage-pregnancy-accent) / 0.55), hsl(var(--stage-pregnancy-accent) / 0.05))",
+                "linear-gradient(to bottom, hsl(var(--stage-pregnancy-accent) / 0.6), hsl(var(--stage-pregnancy-accent) / 0.04))",
             }}
           />
           <textarea
             value={value}
             onChange={(e) => setValue(e.target.value)}
             disabled={!loaded}
-            rows={7}
+            rows={8}
             placeholder="Begin where you are."
             aria-label={`Your reflection for week ${week}`}
-            className="w-full bg-transparent border-0 px-0 py-2 font-serif text-[17px] sm:text-[18.5px] italic font-normal text-foreground placeholder:text-foreground/40 placeholder:italic resize-none focus:outline-none leading-[1.85] min-h-[200px] caret-[hsl(var(--stage-pregnancy-accent))]"
+            className="w-full bg-transparent border-0 pl-5 sm:pl-7 pr-0 py-3 font-serif text-[18px] sm:text-[19.5px] italic font-normal text-foreground placeholder:text-foreground/35 placeholder:italic resize-none focus:outline-none leading-[1.85] min-h-[220px] caret-[hsl(var(--stage-pregnancy-accent))]"
           />
         </div>
 
-        {/* Footer — status */}
+        {/* Footer — held status */}
         <div
-          className="flex items-center justify-between px-6 sm:px-8 py-4 border-t"
+          className="flex items-center justify-between px-7 sm:px-10 py-5 border-t"
           style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)" }}
         >
-          <span
-            className={`font-sans text-[10.5px] font-light tracking-[0.18em] uppercase transition-opacity duration-500 ${
-              saveState === "saving" || saveState === "saved" ? "opacity-100" : "opacity-0"
-            }`}
-            style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-          >
-            {saveState === "saving" ? "Holding…" : "Held"}
-          </span>
-          <span className="font-sans text-[11px] font-light text-foreground/45 tracking-wide italic">
+          <div className="flex items-center gap-2">
+            <span
+              aria-hidden="true"
+              className={`block w-1.5 h-1.5 rounded-full transition-opacity duration-700 ${
+                saveState === "saving" ? "animate-pulse opacity-100" : saveState === "saved" || savedAt ? "opacity-100" : "opacity-30"
+              }`}
+              style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent))" }}
+            />
+            <span
+              className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase"
+              style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+            >
+              {saveState === "saving" ? "Holding…" : "Held"}
+            </span>
+          </div>
+          <span className="font-serif italic text-[12.5px] text-foreground/45 tracking-wide">
             {statusLabel}
           </span>
         </div>
       </div>
 
-      {/* Continuity hint */}
-      <p className="font-sans text-[12.5px] font-light text-foreground/40 italic mt-5 sm:mt-6 max-w-[40ch]">
-        Each week's reflection is kept on your journey, week by week.
+      {/* Continuity colophon */}
+      <p className="font-serif italic text-[13px] sm:text-[13.5px] text-foreground/45 mt-6 sm:mt-7 max-w-[42ch]">
+        Each week's reflection is kept on your journey — a record of becoming, week by week.
       </p>
     </section>
   );

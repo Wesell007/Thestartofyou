@@ -111,39 +111,64 @@ const MyJourney = () => {
   const photoCount = Object.keys(photos).length;
 
   return (
-    <div className="min-h-screen bg-parchment">
+    <div className="min-h-screen bg-parchment-grain page-vignette relative">
       <MyWeekHeader />
-      <main className="mx-auto w-full max-w-[640px] md:max-w-[700px] px-5 sm:px-8 md:px-12">
-        {/* Hero — quiet, no metricisation */}
-        <section className="relative pt-20 sm:pt-24 md:pt-32 pb-10 sm:pb-12 md:pb-16">
+      <main className="relative mx-auto w-full max-w-[640px] md:max-w-[720px] px-5 sm:px-8 md:px-12">
+        {/* Frontispiece — composed like the opening of a kept volume */}
+        <section className="relative pt-24 sm:pt-28 md:pt-36 pb-14 sm:pb-16 md:pb-20">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute top-2 left-1/2 -translate-x-1/2 w-[520px] sm:w-[640px] md:w-[760px] h-[300px] sm:h-[360px] md:h-[420px] rounded-full blur-3xl opacity-70"
+            className="pointer-events-none absolute top-2 left-1/2 -translate-x-1/2 w-[560px] sm:w-[700px] md:w-[840px] h-[340px] sm:h-[400px] md:h-[480px] rounded-full blur-3xl"
             style={{
               background:
-                "radial-gradient(closest-side, hsl(var(--stage-pregnancy) / 0.55), hsl(var(--stage-pregnancy) / 0) 70%)",
+                "radial-gradient(closest-side, hsl(var(--stage-pregnancy) / 0.85), hsl(var(--stage-pregnancy) / 0.2) 50%, transparent 78%)",
             }}
           />
           <div className="relative md:text-center md:flex md:flex-col md:items-center">
+            {/* Top hairline + chapter mark */}
+            <div className="flex items-center gap-3 mb-7 md:justify-center">
+              <span
+                aria-hidden="true"
+                className="block h-px w-10 sm:w-14"
+                style={{
+                  background:
+                    "linear-gradient(to right, transparent, hsl(var(--stage-pregnancy-accent) / 0.5), transparent)",
+                }}
+              />
+              <span
+                aria-hidden="true"
+                className="block w-1.5 h-1.5 rounded-full"
+                style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.7)" }}
+              />
+              <span
+                aria-hidden="true"
+                className="block h-px w-10 sm:w-14"
+                style={{
+                  background:
+                    "linear-gradient(to left, transparent, hsl(var(--stage-pregnancy-accent) / 0.5), transparent)",
+                }}
+              />
+            </div>
+
             <p
-              className="font-sans text-[10.5px] sm:text-[11px] font-light tracking-[0.26em] uppercase mb-5 sm:mb-6"
+              className="font-sans text-[10.5px] sm:text-[11px] font-medium tracking-[0.3em] uppercase mb-6 sm:mb-7"
               style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
             >
-              {firstName}'s journey
+              {firstName}'s record
             </p>
-            <h1 className="font-serif text-foreground leading-[0.95] tracking-tight mb-5 sm:mb-6">
+            <h1 className="font-serif text-foreground leading-[0.96] tracking-tight mb-5 sm:mb-6">
               <span
                 className="block font-medium"
-                style={{ fontSize: "clamp(2.25rem, 7vw, 4rem)" }}
+                style={{ fontSize: "clamp(2.5rem, 7.6vw, 4.4rem)" }}
               >
                 Week by week
               </span>
             </h1>
-            <p className="font-serif italic text-[1.05rem] sm:text-[1.15rem] text-foreground/65 leading-snug max-w-[34ch] md:mx-auto">
-              The quiet record of your pregnancy — held week by week, in your own words and images.
+            <p className="font-serif italic text-[1.1rem] sm:text-[1.2rem] text-foreground/68 leading-[1.4] max-w-[34ch] md:mx-auto">
+              A kept record of your pregnancy — your words, your images, your becoming.
             </p>
             {(heldCount > 0 || photoCount > 0) && (
-              <p className="font-sans text-[11.5px] font-light italic text-foreground/45 mt-5 max-w-[40ch] md:mx-auto">
+              <p className="font-serif italic text-[12.5px] sm:text-[13px] text-foreground/48 mt-7 max-w-[40ch] md:mx-auto tracking-wide">
                 {heldCount > 0 && `${heldCount} reflection${heldCount === 1 ? "" : "s"} held`}
                 {heldCount > 0 && photoCount > 0 && " · "}
                 {photoCount > 0 && `${photoCount} photo${photoCount === 1 ? "" : "s"} kept`}
@@ -199,105 +224,117 @@ const MyJourney = () => {
                   {isCurrent ? (
                     <a
                       href="/my-week"
-                      className="block ml-10 sm:ml-12 md:ml-14 my-3 rounded-2xl border overflow-hidden transition-all hover:shadow-[0_10px_36px_-14px_hsl(var(--stage-pregnancy-accent)/0.3)]"
+                      className="block ml-12 sm:ml-14 md:ml-16 my-4 rounded-[28px] overflow-hidden keepsake-surface transition-all duration-500 hover:shadow-[0_36px_80px_-32px_hsl(var(--stage-pregnancy-accent)/0.32),0_8px_24px_-12px_hsl(222_14%_12%/0.1)]"
                       style={{
-                        borderColor: "hsl(var(--stage-pregnancy-accent) / 0.32)",
-                        background:
-                          "linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--stage-pregnancy) / 0.24) 100%)",
-                        boxShadow:
-                          "0 6px 30px -14px hsl(var(--stage-pregnancy-accent) / 0.22)",
+                        border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.22)",
                       }}
                     >
                       {photo && (
-                        <img
-                          src={photo.signedUrl}
-                          alt={`Week ${w} — ${identity.chapterTitle}`}
-                          className="w-full max-h-[280px] object-cover"
-                        />
+                        <div className="relative">
+                          <img
+                            src={photo.signedUrl}
+                            alt={`Week ${w} — ${identity.chapterTitle}`}
+                            className="w-full max-h-[320px] object-cover"
+                          />
+                          <div
+                            aria-hidden="true"
+                            className="absolute inset-0 pointer-events-none"
+                            style={{
+                              background:
+                                "linear-gradient(to bottom, transparent 60%, hsl(var(--card) / 0.5) 100%)",
+                            }}
+                          />
+                        </div>
                       )}
-                      <div className="px-5 sm:px-6 py-5 sm:py-6">
-                        <div className="flex items-baseline justify-between gap-4 mb-2">
+                      <div className="px-6 sm:px-8 py-6 sm:py-7">
+                        <div className="flex items-baseline justify-between gap-4 mb-3">
                           <p
-                            className="font-sans text-[10.5px] font-medium tracking-[0.24em] uppercase"
+                            className="font-sans text-[10.5px] font-medium tracking-[0.28em] uppercase"
                             style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
                           >
                             This week · Chapter {w}
                           </p>
-                          <span className="font-serif text-[1.1rem] text-foreground/85">
-                            Week {w}
+                          <span className="serif-numeral text-[1.6rem] text-foreground/55 italic font-normal leading-none">
+                            {String(w).padStart(2, "0")}
                           </span>
                         </div>
-                        <h3 className="font-serif font-medium text-[1.4rem] sm:text-[1.55rem] text-foreground leading-tight mb-2">
+                        <h3 className="font-serif font-medium text-[1.55rem] sm:text-[1.75rem] text-foreground leading-[1.1] mb-3">
                           {identity.chapterTitle}
                         </h3>
-                        <p className="font-serif italic text-[1rem] sm:text-[1.05rem] text-foreground/68 leading-snug mb-4">
+                        <p className="font-serif italic text-[1.05rem] sm:text-[1.12rem] text-foreground/68 leading-[1.4] mb-5">
                           {identity.theme}
                         </p>
                         {reflection && (
                           <p
-                            className="font-serif italic text-[14.5px] text-foreground/72 leading-relaxed border-l-2 pl-4 mb-4"
-                            style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.42)" }}
+                            className="font-serif italic text-[15px] text-foreground/72 leading-[1.75] border-l-2 pl-5 mb-5"
+                            style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
                           >
                             "{reflection.content.length > 140
                               ? reflection.content.slice(0, 140).trimEnd() + "…"
                               : reflection.content}"
                           </p>
                         )}
-                        <span className="inline-flex items-center font-sans text-[12px] font-light tracking-[0.16em] uppercase text-foreground/65">
-                          Open this week →
+                        <span className="inline-flex items-center font-sans text-[11.5px] font-medium tracking-[0.22em] uppercase text-foreground/65">
+                          Open this chapter →
                         </span>
                       </div>
                     </a>
                   ) : isPast ? (
                     <a
                       href="/my-week"
-                      className={`block ml-10 sm:ml-12 md:ml-14 py-4 sm:py-5 pr-2 group transition-opacity hover:opacity-100 ${
-                        reflection || photo ? "opacity-100" : "opacity-90"
+                      className={`block ml-12 sm:ml-14 md:ml-16 py-5 sm:py-6 pr-2 group transition-opacity ${
+                        reflection || photo ? "opacity-100" : "opacity-92"
                       }`}
                     >
-                      <div className="flex gap-4">
-                        {/* Photo thumbnail or chapter mark */}
+                      <div className="flex gap-5">
                         {photo ? (
-                          <img
-                            src={photo.signedUrl}
-                            alt={`Week ${w}`}
-                            className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover shrink-0 border"
-                            style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.22)" }}
-                          />
+                          <div className="held-image rounded-[14px] overflow-hidden shrink-0">
+                            <img
+                              src={photo.signedUrl}
+                              alt={`Week ${w}`}
+                              className="w-[72px] h-[72px] sm:w-[88px] sm:h-[88px] object-cover"
+                            />
+                          </div>
                         ) : (
                           <div
-                            className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl shrink-0 flex items-center justify-center border border-dashed"
+                            className="w-[72px] h-[72px] sm:w-[88px] sm:h-[88px] rounded-[14px] shrink-0 flex items-center justify-center"
                             style={{
-                              borderColor: "hsl(var(--stage-pregnancy-accent) / 0.22)",
-                              background: "hsl(var(--stage-pregnancy) / 0.18)",
+                              border: "1px dashed hsl(var(--stage-pregnancy-accent) / 0.24)",
+                              background:
+                                "linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--stage-pregnancy) / 0.22) 100%)",
                             }}
                           >
                             <Camera
                               size={14}
                               strokeWidth={1.4}
-                              className="text-foreground/25"
+                              className="text-foreground/30"
                             />
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-baseline justify-between gap-4 mb-1">
-                            <span className="font-serif text-[1rem] sm:text-[1.1rem] text-foreground/85 group-hover:text-foreground transition-colors">
-                              Week {w} · {identity.chapterTitle}
-                            </span>
-                            <span className="font-sans text-[10.5px] font-light tracking-[0.18em] uppercase text-foreground/35 shrink-0">
+                          <div className="flex items-baseline justify-between gap-4 mb-1.5">
+                            <div className="flex items-baseline gap-3 min-w-0">
+                              <span className="serif-numeral text-[15px] italic font-normal text-foreground/45 shrink-0">
+                                {String(w).padStart(2, "0")}
+                              </span>
+                              <span className="font-serif text-[1.02rem] sm:text-[1.1rem] text-foreground/85 group-hover:text-foreground transition-colors truncate">
+                                {identity.chapterTitle}
+                              </span>
+                            </div>
+                            <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/35 shrink-0">
                               {reflection ? "Held" : photo ? "Kept" : "Past"}
                             </span>
                           </div>
-                          <p className="font-serif italic text-[13.5px] sm:text-[14px] text-foreground/55 leading-snug">
+                          <p className="font-serif italic text-[13.5px] sm:text-[14px] text-foreground/55 leading-[1.5]">
                             {identity.theme}
                           </p>
                           {reflection && (
                             <p
-                              className="font-serif italic text-[13px] sm:text-[13.5px] text-foreground/62 leading-relaxed mt-2 border-l-[1.5px] pl-3"
-                              style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.38)" }}
+                              className="font-serif italic text-[13.5px] sm:text-[14px] text-foreground/62 leading-[1.75] mt-2.5 border-l-[1.5px] pl-4"
+                              style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.42)" }}
                             >
-                              "{reflection.content.length > 100
-                                ? reflection.content.slice(0, 100).trimEnd() + "…"
+                              "{reflection.content.length > 110
+                                ? reflection.content.slice(0, 110).trimEnd() + "…"
                                 : reflection.content}"
                             </p>
                           )}
@@ -305,16 +342,21 @@ const MyJourney = () => {
                       </div>
                     </a>
                   ) : (
-                    <div className="ml-10 sm:ml-12 md:ml-14 py-4 sm:py-5 opacity-45">
+                    <div className="ml-12 sm:ml-14 md:ml-16 py-5 sm:py-6 opacity-50">
                       <div className="flex items-baseline justify-between gap-4 mb-1">
-                        <span className="font-serif text-[1rem] sm:text-[1.05rem] text-foreground/75">
-                          Week {w} · {identity.chapterTitle}
-                        </span>
-                        <span className="font-sans text-[10.5px] font-light tracking-[0.18em] uppercase text-foreground/30">
+                        <div className="flex items-baseline gap-3 min-w-0">
+                          <span className="serif-numeral text-[15px] italic font-normal text-foreground/35 shrink-0">
+                            {String(w).padStart(2, "0")}
+                          </span>
+                          <span className="font-serif text-[1rem] sm:text-[1.05rem] text-foreground/72 truncate">
+                            {identity.chapterTitle}
+                          </span>
+                        </div>
+                        <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/28">
                           Ahead
                         </span>
                       </div>
-                      <p className="font-serif italic text-[13.5px] sm:text-[14px] text-foreground/45 leading-snug">
+                      <p className="font-serif italic text-[13.5px] sm:text-[14px] text-foreground/42 leading-[1.5] pl-7">
                         {identity.theme}
                       </p>
                     </div>

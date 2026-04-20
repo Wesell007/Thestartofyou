@@ -1,140 +1,208 @@
 interface Props {
   week: number;
-  /** Visual size in px (square). Defaults to 240. */
   size?: number;
   className?: string;
 }
 
 /**
- * Stage-aware editorial illustration for /my-week — the relational form.
+ * Mum + baby relational form — the signature illustration for /my-week.
  *
- * Two abstract shapes, mum and baby, in quiet relation:
- *  - The outer holding form (mum) — a soft, generous arc that opens at the top.
- *  - The inner luminous form (baby) — nestled within, growing and settling
- *    deeper through pregnancy.
- *  - A quiet halo binds them together visually, stage-tinted.
+ * Composition principles:
+ *   - A vessel form (mum) — generous, asymmetric, hand-drawn quality.
+ *   - An inner luminous form (baby) — settles deeper, grows through pregnancy.
+ *   - Concentric breathing rings — quiet rhythm, the relationship over time.
+ *   - A subtle paper grain on the inner form — material, not flat.
+ *   - A single botanical chapter-mark above — the seal of the chapter.
  *
- * No faces, no fruit, no nursery aesthetic. The two-form composition reads
- * as "mum + baby" without ever being literal.
+ * The result reads as relational, premium, and stage-aware without ever
+ * being literal or cliché.
  */
-const WeekIllustration = ({ week, size = 240, className }: Props) => {
+const WeekIllustration = ({ week, size = 260, className }: Props) => {
   const w = Math.min(Math.max(week, 1), 42);
-  // 0..1 progress across the journey
   const t = Math.min(Math.max((w - 4) / 36, 0), 1);
 
-  // Inner (baby) form grows and settles deeper
-  const innerR = 16 + t * 36; // 16 → 52
-  const innerCy = 116 + t * 10; // settles a touch lower late
-  const innerRy = innerR * (0.94 + t * 0.16);
+  // Inner (baby) form — grows + settles
+  const innerR = 22 + t * 38;
+  const innerCy = 122 + t * 12;
+  const innerRy = innerR * (0.96 + t * 0.18);
 
-  // Outer (mum) form swells gently — a fuller curve later
-  const outerSwell = 4 + t * 6; // subtle widening through pregnancy
+  // Outer (mum) form — gentle asymmetric swell
+  const swell = 6 + t * 8;
 
   return (
     <svg
-      viewBox="0 0 240 240"
+      viewBox="0 0 280 280"
       width={size}
       height={size}
       role="img"
-      aria-label={`A quiet illustration for week ${w} of pregnancy — mother and baby in relation`}
+      aria-label={`Week ${w} — a quiet illustration of mother and baby in relation`}
       className={className}
     >
       <defs>
-        <radialGradient id="myw-halo" cx="50%" cy="48%" r="58%">
-          <stop offset="0%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.32)" />
-          <stop offset="55%" stopColor="hsl(var(--stage-pregnancy) / 0.7)" />
+        {/* Atmosphere — the warm air around them */}
+        <radialGradient id="atm" cx="50%" cy="48%" r="62%">
+          <stop offset="0%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.34)" />
+          <stop offset="48%" stopColor="hsl(var(--stage-pregnancy) / 0.85)" />
           <stop offset="100%" stopColor="hsl(var(--stage-pregnancy) / 0)" />
         </radialGradient>
 
-        <linearGradient id="myw-mum" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.85)" />
-          <stop offset="100%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.45)" />
+        {/* Mum stroke — duotone, warmer at top */}
+        <linearGradient id="mumStroke" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.95)" />
+          <stop offset="100%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.55)" />
         </linearGradient>
 
-        <radialGradient id="myw-baby" cx="42%" cy="40%" r="62%">
+        {/* Baby form — luminous, hand-poured */}
+        <radialGradient id="babyFill" cx="42%" cy="38%" r="68%">
           <stop offset="0%" stopColor="hsl(var(--stage-pregnancy-accent) / 1)" />
-          <stop offset="60%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.78)" />
-          <stop offset="100%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.55)" />
+          <stop offset="55%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.85)" />
+          <stop offset="100%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.62)" />
         </radialGradient>
 
-        <radialGradient id="myw-baby-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.35)" />
+        {/* Soft halo around baby */}
+        <radialGradient id="babyGlow" cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.42)" />
           <stop offset="100%" stopColor="hsl(var(--stage-pregnancy-accent) / 0)" />
+        </radialGradient>
+
+        {/* Paper grain — subtle texture overlay on baby form */}
+        <filter id="grain">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
+          <feColorMatrix
+            values="0 0 0 0 0.55
+                    0 0 0 0 0.32
+                    0 0 0 0 0.22
+                    0 0 0 0.18 0"
+          />
+          <feComposite in2="SourceGraphic" operator="in" />
+        </filter>
+
+        {/* Highlight crescent on baby form */}
+        <radialGradient id="babyHighlight" cx="35%" cy="30%" r="35%">
+          <stop offset="0%" stopColor="hsl(0 0% 100% / 0.42)" />
+          <stop offset="100%" stopColor="hsl(0 0% 100% / 0)" />
         </radialGradient>
       </defs>
 
-      {/* Soft halo — the atmosphere holding both */}
-      <circle cx="120" cy="120" r="110" fill="url(#myw-halo)" />
+      {/* Atmosphere wash */}
+      <circle cx="140" cy="140" r="130" fill="url(#atm)" />
 
-      {/* Mum — the outer holding form. An open vessel that cradles. */}
-      {/* Drawn as an arc that opens slightly at the top, like a gentle bowl. */}
-      <path
-        d={`M ${40 - outerSwell / 2} 110
-            C ${40 - outerSwell / 2} 78, 80 50, 120 50
-            C 160 50, ${200 + outerSwell / 2} 78, ${200 + outerSwell / 2} 110
-            C ${200 + outerSwell / 2} 168, 168 208, 120 208
-            C 72 208, ${40 - outerSwell / 2} 168, ${40 - outerSwell / 2} 110 Z`}
+      {/* Outer breathing ring — the wider relational space */}
+      <ellipse
+        cx="140"
+        cy={140 + t * 5}
+        rx={106}
+        ry={112}
         fill="none"
-        stroke="url(#myw-mum)"
-        strokeWidth="1.6"
+        stroke="hsl(var(--stage-pregnancy-accent) / 0.14)"
+        strokeWidth="0.8"
+      />
+
+      {/* Mum — vessel form. Asymmetric, hand-drawn quality. */}
+      <path
+        d={`M ${48 - swell / 2} 128
+            C ${48 - swell / 2} 90, 88 60, 140 60
+            C 192 60, ${232 + swell / 2} 90, ${232 + swell / 2} 128
+            C ${232 + swell / 2} 196, 196 240, 140 240
+            C 84 240, ${48 - swell / 2} 196, ${48 - swell / 2} 128 Z`}
+        fill="none"
+        stroke="url(#mumStroke)"
+        strokeWidth="1.8"
         strokeLinejoin="round"
       />
 
-      {/* A second, softer concentric breath — quiet rhythm */}
+      {/* Inner concentric breath — softer, dashed */}
       <ellipse
-        cx="120"
-        cy={120 + t * 4}
-        rx={76 - t * 2}
-        ry={82 - t * 2}
+        cx="140"
+        cy={140 + t * 4}
+        rx={86 - t * 3}
+        ry={92 - t * 3}
         fill="none"
-        stroke="hsl(var(--stage-pregnancy-accent) / 0.2)"
-        strokeWidth="0.8"
-        strokeDasharray="1 5"
+        stroke="hsl(var(--stage-pregnancy-accent) / 0.22)"
+        strokeWidth="0.7"
+        strokeDasharray="1 6"
       />
 
-      {/* Baby's quiet glow — a soft inner light */}
-      <circle cx="120" cy={innerCy} r={innerR + 14} fill="url(#myw-baby-glow)" />
+      {/* Baby's halo — atmospheric warmth */}
+      <circle cx="140" cy={innerCy} r={innerR + 18} fill="url(#babyGlow)" />
 
-      {/* Baby — the developing form, nested inside the mother's curve */}
+      {/* Baby — the developing form */}
       <ellipse
-        cx="120"
+        cx="140"
         cy={innerCy}
         rx={innerR}
         ry={innerRy}
-        fill="url(#myw-baby)"
+        fill="url(#babyFill)"
       />
 
-      {/* The small thread between them — a single vertical line at the top of
-          the inner form, suggesting connection without literalism. */}
-      <path
-        d={`M 120 ${innerCy - innerRy} L 120 ${50 + 6}`}
-        stroke="hsl(var(--stage-pregnancy-accent) / 0.42)"
-        strokeWidth="1"
-        strokeLinecap="round"
-        strokeDasharray="2 4"
+      {/* Grain texture on baby — material quality */}
+      <ellipse
+        cx="140"
+        cy={innerCy}
+        rx={innerR}
+        ry={innerRy}
+        fill="hsl(var(--stage-pregnancy-accent))"
+        filter="url(#grain)"
+        opacity="0.4"
       />
 
-      {/* A quiet botanical mark above — chapter-mark style */}
-      <circle
-        cx="120"
-        cy="40"
-        r="3"
-        fill="hsl(var(--stage-pregnancy-accent) / 0.7)"
+      {/* Highlight crescent — the inner light */}
+      <ellipse
+        cx={140 - innerR * 0.18}
+        cy={innerCy - innerRy * 0.22}
+        rx={innerR * 0.65}
+        ry={innerRy * 0.55}
+        fill="url(#babyHighlight)"
       />
+
+      {/* The quiet thread between mum and baby */}
       <path
-        d="M 120 36 C 124 32, 128 28, 130 22"
-        fill="none"
+        d={`M 140 ${innerCy - innerRy} L 140 ${60 + 8}`}
         stroke="hsl(var(--stage-pregnancy-accent) / 0.5)"
-        strokeWidth="1"
+        strokeWidth="0.9"
         strokeLinecap="round"
+        strokeDasharray="1.5 5"
       />
-      <path
-        d="M 120 36 C 116 32, 112 28, 110 22"
-        fill="none"
-        stroke="hsl(var(--stage-pregnancy-accent) / 0.5)"
-        strokeWidth="1"
-        strokeLinecap="round"
-      />
+
+      {/* Botanical chapter-mark above — the seal */}
+      <g transform="translate(140, 50)">
+        <circle
+          cx="0"
+          cy="0"
+          r="3.2"
+          fill="hsl(var(--stage-pregnancy-accent) / 0.78)"
+        />
+        <path
+          d="M 0 -4 C 5 -8, 10 -13, 12 -19"
+          fill="none"
+          stroke="hsl(var(--stage-pregnancy-accent) / 0.55)"
+          strokeWidth="0.9"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 0 -4 C -5 -8, -10 -13, -12 -19"
+          fill="none"
+          stroke="hsl(var(--stage-pregnancy-accent) / 0.55)"
+          strokeWidth="0.9"
+          strokeLinecap="round"
+        />
+        <ellipse
+          cx="9"
+          cy="-15"
+          rx="2.4"
+          ry="1"
+          fill="hsl(var(--stage-pregnancy-accent) / 0.42)"
+          transform="rotate(-32 9 -15)"
+        />
+        <ellipse
+          cx="-9"
+          cy="-15"
+          rx="2.4"
+          ry="1"
+          fill="hsl(var(--stage-pregnancy-accent) / 0.42)"
+          transform="rotate(32 -9 -15)"
+        />
+      </g>
     </svg>
   );
 };

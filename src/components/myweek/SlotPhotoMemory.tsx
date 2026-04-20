@@ -176,31 +176,31 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
           type="button"
           onClick={() => fileRef.current?.click()}
           disabled={state === "uploading"}
-          className="group relative w-full rounded-[28px] border-2 border-dashed flex flex-col items-center justify-center gap-4 px-6 py-16 sm:py-20 transition-all hover:shadow-[0_8px_40px_-16px_hsl(var(--stage-pregnancy-accent)/0.28)]"
+          className="group relative w-full rounded-[32px] keepsake-surface flex flex-col items-center justify-center gap-5 px-6 py-20 sm:py-24 transition-all duration-500 hover:shadow-[0_36px_80px_-32px_hsl(var(--stage-pregnancy-accent)/0.3),0_8px_24px_-12px_hsl(222_14%_12%/0.1)]"
           style={{
-            borderColor: "hsl(var(--stage-pregnancy-accent) / 0.3)",
-            background:
-              "linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--stage-pregnancy) / 0.18) 100%)",
+            border: "1px dashed hsl(var(--stage-pregnancy-accent) / 0.3)",
           }}
         >
           <span
-            className="w-14 h-14 rounded-full flex items-center justify-center"
+            className="w-16 h-16 rounded-full flex items-center justify-center"
             style={{
-              backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.1)",
+              background:
+                "radial-gradient(circle, hsl(var(--stage-pregnancy-accent) / 0.16), hsl(var(--stage-pregnancy-accent) / 0.04))",
               color: "hsl(var(--stage-pregnancy-accent))",
+              boxShadow: "0 0 0 1px hsl(var(--stage-pregnancy-accent) / 0.18)",
             }}
           >
             <Camera size={22} strokeWidth={1.4} />
           </span>
-          <p className="font-serif italic text-[1.05rem] text-foreground/70 text-center max-w-[28ch]">
+          <p className="font-serif italic text-[1.15rem] sm:text-[1.22rem] text-foreground/72 text-center max-w-[28ch] leading-snug">
             {state === "uploading" ? "Holding your photo…" : "Capture this week."}
           </p>
-          <span className="font-sans text-[12px] font-light tracking-[0.18em] uppercase text-foreground/45">
+          <span className="font-sans text-[11.5px] font-medium tracking-[0.24em] uppercase text-foreground/50">
             {state === "uploading" ? "Saving" : "Choose a photo"}
           </span>
-          <div className="flex items-center gap-2 mt-2 text-foreground/40">
+          <div className="flex items-center gap-2 mt-1 text-foreground/42">
             <Lock size={11} strokeWidth={1.6} />
-            <span className="font-sans text-[10.5px] font-light tracking-[0.18em] uppercase">
+            <span className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase">
               Private to you
             </span>
           </div>
@@ -209,18 +209,25 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
 
       {state === "loaded" && signedUrl && (
         <figure
-          className="relative rounded-[28px] overflow-hidden border bg-card shadow-[0_8px_40px_-16px_hsl(var(--stage-pregnancy-accent)/0.22)]"
-          style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.18)" }}
+          className="relative rounded-[28px] overflow-hidden held-image bg-card"
         >
           <img
             src={signedUrl}
             alt={`Week ${week} — ${chapterTitle}`}
-            className="w-full max-h-[560px] object-cover"
+            className="w-full max-h-[600px] object-cover"
+          />
+          {/* Soft inner light at edges — material warmth */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              boxShadow: "inset 0 0 80px hsl(222 14% 12% / 0.08)",
+            }}
           />
           {/* Top privacy seal */}
-          <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/35 backdrop-blur-sm text-white/95">
+          <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-foreground/40 backdrop-blur-md text-background/95">
             <Lock size={11} strokeWidth={1.8} />
-            <span className="font-sans text-[10.5px] font-light tracking-[0.18em] uppercase">
+            <span className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase">
               Private
             </span>
           </div>
@@ -229,28 +236,34 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
             <button
               type="button"
               onClick={() => fileRef.current?.click()}
-              className="px-3 py-1.5 rounded-full bg-black/35 backdrop-blur-sm text-white/95 hover:bg-black/50 transition-colors flex items-center gap-1.5"
+              className="px-3 py-1.5 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center gap-1.5"
               aria-label="Replace photo"
             >
               <ImagePlus size={12} strokeWidth={1.8} />
-              <span className="font-sans text-[10.5px] font-light tracking-[0.18em] uppercase">
+              <span className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase">
                 Replace
               </span>
             </button>
             <button
               type="button"
               onClick={handleRemove}
-              className="w-8 h-8 rounded-full bg-black/35 backdrop-blur-sm text-white/95 hover:bg-black/50 transition-colors flex items-center justify-center"
+              className="w-8 h-8 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center justify-center"
               aria-label="Remove photo"
             >
               <X size={14} strokeWidth={1.8} />
             </button>
           </div>
           <figcaption
-            className="px-5 py-4 border-t font-sans text-[12px] font-light tracking-[0.16em] uppercase text-foreground/55"
-            style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)" }}
+            className="px-6 py-4 border-t font-serif italic text-[13px] text-foreground/60 tracking-wide flex items-center justify-between"
+            style={{
+              borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)",
+              background: "hsl(var(--stage-pregnancy) / 0.18)",
+            }}
           >
-            Week {week} · {chapterTitle} · Held privately
+            <span>Week {week} · {chapterTitle}</span>
+            <span className="font-sans not-italic text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/45">
+              Held privately
+            </span>
           </figcaption>
         </figure>
       )}

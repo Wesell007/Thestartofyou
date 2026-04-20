@@ -320,6 +320,59 @@
     );
   }
 
+  /* ─── Premium parchment material ─── */
+  /* Subtle paper grain — barely perceptible, adds material warmth */
+  .bg-parchment-grain {
+    background-color: hsl(var(--parchment));
+    background-image:
+      radial-gradient(circle at 20% 10%, hsl(var(--stage-pregnancy) / 0.35) 0%, transparent 42%),
+      radial-gradient(circle at 80% 75%, hsl(var(--stage-pregnancy) / 0.28) 0%, transparent 48%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.42 0 0 0 0 0.32 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: auto, auto, 220px 220px;
+    background-attachment: fixed, fixed, fixed;
+  }
+
+  /* Soft page vignette — frames the column like an editorial spread */
+  .page-vignette::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(120% 80% at 50% 0%, transparent 50%, hsl(var(--stage-pregnancy) / 0.18) 100%);
+  }
+
+  /* Heirloom card — deckle-edge keepsake surface */
+  .keepsake-surface {
+    background:
+      linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--stage-pregnancy) / 0.16) 100%);
+    box-shadow:
+      0 1px 0 hsl(var(--stage-pregnancy-accent) / 0.04) inset,
+      0 24px 60px -32px hsl(var(--stage-pregnancy-accent) / 0.22),
+      0 4px 16px -8px hsl(222 14% 12% / 0.06);
+  }
+
+  /* Held image — premium frame for kept photographs */
+  .held-image {
+    box-shadow:
+      0 0 0 1px hsl(var(--stage-pregnancy-accent) / 0.1),
+      0 1px 0 hsl(0 0% 100% / 0.6) inset,
+      0 24px 64px -28px hsl(222 14% 12% / 0.28),
+      0 8px 24px -12px hsl(222 14% 12% / 0.12);
+  }
+
+  /* Editorial serif numeral — for week numbers on /my-journey */
+  .serif-numeral {
+    font-family: var(--font-serif);
+    font-feature-settings: "lnum" 1, "kern" 1;
+    font-variant-numeric: lining-nums;
+  }
+
+  /* Soft inner light — for hero composition */
+  .inner-light {
+    background: radial-gradient(60% 50% at 50% 45%, hsl(var(--stage-pregnancy-accent) / 0.18) 0%, transparent 70%);
+  }
+
   /* Premium one-shot shimmer for celebratory result reveal */
   .animate-result-shimmer {
     background-image: linear-gradient(

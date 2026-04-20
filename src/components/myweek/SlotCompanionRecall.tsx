@@ -79,34 +79,36 @@ const SlotCompanionRecall = ({ userId, currentWeek }: Props) => {
 
       <Link
         to="/my-journey"
-        className="group block rounded-[24px] border bg-card/70 backdrop-blur-sm px-5 sm:px-7 py-6 sm:py-7 transition-all hover:shadow-[0_10px_36px_-14px_hsl(var(--stage-pregnancy-accent)/0.24)]"
-        style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.18)" }}
+        className="group block rounded-[28px] keepsake-surface px-6 sm:px-8 py-7 sm:py-8 transition-all duration-500 hover:shadow-[0_28px_64px_-28px_hsl(var(--stage-pregnancy-accent)/0.3),0_4px_16px_-8px_hsl(222_14%_12%/0.06)]"
       >
-        <div className="flex items-baseline justify-between gap-4 mb-3">
+        <div className="flex items-baseline justify-between gap-4 mb-3.5">
           <p
-            className="font-sans text-[10.5px] font-medium tracking-[0.24em] uppercase"
+            className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase"
             style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
           >
+            <span className="serif-numeral italic font-normal text-foreground/55 normal-case tracking-normal text-[14px] mr-2">
+              {String(recall.week).padStart(2, "0")}
+            </span>
             Week {recall.week} · {identity.chapterTitle}
           </p>
-          <span className="font-sans text-[10.5px] font-light tracking-[0.18em] uppercase text-foreground/40 group-hover:text-foreground/70 transition-colors">
+          <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/40 group-hover:text-foreground/70 transition-colors">
             Held
           </span>
         </div>
 
-        <p className="font-serif italic text-[1.05rem] sm:text-[1.1rem] text-foreground/82 leading-snug mb-3">
+        <p className="font-serif italic text-[1.1rem] sm:text-[1.18rem] text-foreground/82 leading-[1.4] mb-4">
           {identity.theme}
         </p>
 
         <p
-          className="font-serif italic text-[14.5px] sm:text-[15px] text-foreground/68 leading-[1.75] border-l-2 pl-4"
-          style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.42)" }}
+          className="font-serif italic text-[15px] sm:text-[15.5px] text-foreground/68 leading-[1.8] border-l-2 pl-5"
+          style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
         >
           "{excerpt}"
         </p>
 
-        <div className="flex items-center gap-1.5 mt-5 font-sans text-[12px] font-light tracking-[0.16em] uppercase text-foreground/55 group-hover:text-foreground/80 transition-colors">
-          See your journey
+        <div className="flex items-center gap-1.5 mt-6 font-sans text-[11.5px] font-medium tracking-[0.22em] uppercase text-foreground/55 group-hover:text-foreground/80 transition-colors">
+          See your record
           <ArrowUpRight
             size={13}
             strokeWidth={1.5}

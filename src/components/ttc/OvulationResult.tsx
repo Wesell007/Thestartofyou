@@ -3,6 +3,49 @@ import { ArrowRight, Bell, BellRing, Bookmark, Check, MessageCircle, Sparkles, X
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
+import botanicalSrc from "@/assets/botanical-corner.png";
+
+/* ── Restrained botanical accent ───────────────────────────────────── */
+const BotanicalAccent = ({
+  className,
+  flip = false,
+  opacity = "opacity-[0.18]",
+}: {
+  className?: string;
+  flip?: boolean;
+  opacity?: string;
+}) => (
+  <img
+    src={botanicalSrc}
+    alt=""
+    aria-hidden="true"
+    className={cn(
+      "pointer-events-none absolute select-none w-[180px] md:w-[260px] h-auto",
+      opacity,
+      flip && "-scale-x-100",
+      className
+    )}
+  />
+);
+
+/* ── Soft sprig (small, single leaf-like mark) ─────────────────────── */
+const Sprig = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 64 64"
+    aria-hidden="true"
+    className={cn("pointer-events-none select-none text-sage/40", className)}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1"
+    strokeLinecap="round"
+  >
+    <path d="M32 60 C 32 40, 32 24, 32 6" />
+    <path d="M32 46 C 24 44, 18 40, 16 32" />
+    <path d="M32 36 C 40 34, 46 30, 48 22" />
+    <path d="M32 26 C 26 24, 22 20, 21 14" />
+    <path d="M32 18 C 38 16, 42 12, 43 8" />
+  </svg>
+);
 
 interface OvulationResultProps {
   lmp: Date;
@@ -113,20 +156,30 @@ const OvulationResult = ({
   return (
     <div>
       {/* ── Primary result ──────────────────────────────────────────── */}
-      <section className="relative bg-parchment-dark pt-28 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        {/* ambient glow */}
-        <div className="absolute inset-x-0 top-0 h-[420px] glow-sage opacity-60 pointer-events-none" aria-hidden="true" />
+      <section className="relative bg-gradient-to-b from-sage-bg/50 via-parchment to-parchment-dark pt-28 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        {/* ambient layered glows */}
+        <div className="absolute inset-x-0 top-0 h-[460px] glow-sage opacity-70 pointer-events-none" aria-hidden="true" />
+        <div className="absolute -bottom-32 right-[-10%] w-[520px] h-[520px] glow-lavender opacity-40 rounded-full pointer-events-none" aria-hidden="true" />
+
+        {/* Botanical accents — restrained, framing only */}
+        <BotanicalAccent className="top-6 -left-10 md:top-10 md:-left-6" opacity="opacity-[0.16]" />
+        <BotanicalAccent className="top-2 -right-10 md:top-6 md:-right-6" flip opacity="opacity-[0.13]" />
+
         <div className="relative container mx-auto px-6 md:px-10 max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 mb-7">
-            {reveal && (
-              <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
-            )}
-            <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage">
-              Here's where you are this cycle
-            </p>
-            {reveal && (
-              <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
-            )}
+          <div className="flex items-center justify-center gap-3 mb-7">
+            <Sprig className="w-4 h-4 -rotate-[35deg]" />
+            <div className="inline-flex items-center gap-2">
+              {reveal && (
+                <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
+              )}
+              <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage">
+                Here's where you are this cycle
+              </p>
+              {reveal && (
+                <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
+              )}
+            </div>
+            <Sprig className="w-4 h-4 rotate-[35deg] -scale-x-100" />
           </div>
 
           <p className="font-serif text-lg sm:text-xl text-foreground/60 italic leading-snug mb-5">
@@ -146,14 +199,14 @@ const OvulationResult = ({
             </p>
           </div>
           <p className="font-sans text-base sm:text-[17px] font-light text-foreground/65 leading-relaxed max-w-lg mx-auto mb-14">
-            A quiet map of the days ahead. Hold it gently — bodies don't always follow the calendar, and that's part of this.
+            A quiet map of the days ahead. Hold it gently. Bodies don't always follow the calendar, and that's part of this.
           </p>
 
-          {/* Supporting dates — elegant inline rhythm, not a card grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border/40 rounded-2xl overflow-hidden border border-border/40 shadow-card-brand">
+          {/* Supporting dates — soft sage-tinted seam */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-sage-light/30 rounded-2xl overflow-hidden border border-sage-light/40 shadow-elevated">
             {supportingDates.map((d) => (
-              <div key={d.label} className="bg-card/80 backdrop-blur-sm px-6 py-7 text-left">
-                <p className="font-sans text-[10px] font-light tracking-[0.22em] uppercase text-sage-muted mb-2.5">
+              <div key={d.label} className="bg-card/90 backdrop-blur-sm px-6 py-7 text-left">
+                <p className="font-sans text-[10px] font-light tracking-[0.22em] uppercase text-sage mb-2.5">
                   {d.label}
                 </p>
                 <p className="font-serif text-lg text-foreground leading-snug mb-1.5">{d.value}</p>
@@ -169,9 +222,12 @@ const OvulationResult = ({
       </section>
 
       {/* ── What this means ─────────────────────────────────────────── */}
-      <section className="bg-parchment py-16 md:py-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+      <section className="relative bg-parchment py-16 md:py-20 overflow-hidden">
+        <div className="absolute -top-px left-0 right-0 flex justify-center pointer-events-none">
+          <Sprig className="w-5 h-5 -translate-y-1/2 bg-parchment px-1" />
+        </div>
+        <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
+          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
             Understanding your results
           </p>
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-8">
@@ -179,7 +235,7 @@ const OvulationResult = ({
           </h2>
           <div className="space-y-0">
             {[
-              "These are the days you're most likely to conceive — sperm can survive up to five days inside the body.",
+              "These are the days you're most likely to conceive. Sperm can survive up to five days inside the body.",
               "The two days before ovulation tend to matter more than ovulation day itself.",
               "These are estimates, not guarantees. Cycles vary, and that doesn't mean anything is wrong.",
             ].map((item, i) => (
@@ -187,11 +243,11 @@ const OvulationResult = ({
                 key={i}
                 className={cn(
                   "flex items-start gap-5 py-6",
-                  i < 2 && "border-b border-border/30"
+                  i < 2 && "border-b border-sage-light/30"
                 )}
               >
-                <div className="w-8 h-8 rounded-full bg-sage-bg/40 border border-sage-light/30 flex items-center justify-center shrink-0 mt-0.5">
-                  <span className="font-serif text-xs text-sage">{i + 1}</span>
+                <div className="w-9 h-9 rounded-full bg-sage-bg border border-sage-light/50 flex items-center justify-center shrink-0 mt-0.5 shadow-soft">
+                  <span className="font-serif text-sm text-sage">{i + 1}</span>
                 </div>
                 <p className="font-sans text-[15px] font-light text-foreground/75 leading-relaxed">
                   {item}
@@ -246,17 +302,22 @@ const OvulationResult = ({
       </section>
 
       {/* ── Save this cycle (primary CTA) ───────────────────────────── */}
-      <section className="relative bg-parchment py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[520px] glow-sage opacity-50 pointer-events-none" aria-hidden="true" />
+      <section className="relative bg-gradient-to-br from-sage-bg/70 via-parchment to-lavender-bg/50 py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[560px] glow-sage opacity-60 pointer-events-none" aria-hidden="true" />
+        <div className="absolute -top-20 left-[-8%] w-[420px] h-[420px] glow-lavender opacity-40 rounded-full pointer-events-none" aria-hidden="true" />
+        <BotanicalAccent className="bottom-0 -right-12 md:-right-6" flip opacity="opacity-[0.14]" />
+        <BotanicalAccent className="top-4 -left-12 md:-left-6" opacity="opacity-[0.10]" />
         <div className="relative container mx-auto px-6 md:px-10 max-w-2xl">
           {/* Editorial intro, no card frame */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-card border border-sage-light/50 shadow-card-brand mb-6">
-              <Bookmark size={16} className="text-sage" />
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-card border border-sage-light/60 shadow-elevated mb-6">
+              <Bookmark size={18} className="text-sage" />
             </div>
-            <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage mb-4">
-              The start of a calmer monthly rhythm
-            </p>
+            <div className="flanking-lines mb-4">
+              <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage whitespace-nowrap">
+                The start of a calmer monthly rhythm
+              </p>
+            </div>
             <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
               Save this cycle
             </h2>
@@ -265,8 +326,8 @@ const OvulationResult = ({
             </p>
           </div>
 
-          {/* Reminder list — light dividers, no boxes */}
-          <div className="bg-card/70 backdrop-blur-sm border border-border/40 rounded-2xl shadow-card-brand divide-y divide-border/40 mb-8">
+          {/* Reminder list — soft branded surface */}
+          <div className="bg-card/85 backdrop-blur-sm border border-sage-light/40 rounded-2xl shadow-elevated divide-y divide-sage-light/30 mb-8">
             {([
               { key: "fertile" as const, label: "When my fertile window opens", date: format(fertileStart, "d MMMM") },
               { key: "ovulation" as const, label: "Around my likely ovulation day", date: format(ovulationDay, "d MMMM") },
@@ -351,22 +412,24 @@ const OvulationResult = ({
       </section>
 
       {/* ── End-of-cycle transition ─────────────────────────────────── */}
-      <section className="bg-parchment-dark py-16 md:py-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+      <section className="relative bg-parchment-dark py-16 md:py-20 overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sage-light/40 to-transparent" aria-hidden="true" />
+        <div className="absolute -right-20 top-10 w-[360px] h-[360px] glow-sage opacity-30 rounded-full pointer-events-none" aria-hidden="true" />
+        <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
+          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
             When your period is due
           </p>
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-4">
             What's happening for you?
           </h2>
           <p className="font-sans text-[15px] font-light text-foreground/70 leading-relaxed mb-7 max-w-xl">
-            Around {format(nextPeriod, "d MMMM")}, come back and tell us where you are. We'll point you to the right next step — gently, with no assumptions.
+            Around {format(nextPeriod, "d MMMM")}, come back and tell us where you are. We'll point you to the right next step, gently and with no assumptions.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <button
               onClick={() => setShowTransition(true)}
-              className="group text-left bg-card border border-border/50 rounded-2xl p-6 shadow-card-brand hover:border-sage-light/50 transition-all"
+              className="group text-left bg-card/90 backdrop-blur-sm border border-sage-light/30 rounded-2xl p-6 shadow-card-brand hover:border-sage-light/70 hover:shadow-elevated transition-all"
             >
               <p className="font-serif text-lg text-foreground leading-snug mb-2">My period arrived</p>
               <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed">
@@ -375,7 +438,7 @@ const OvulationResult = ({
             </button>
             <button
               onClick={() => setShowTransition(true)}
-              className="group text-left bg-card border border-border/50 rounded-2xl p-6 shadow-card-brand hover:border-sage-light/50 transition-all"
+              className="group text-left bg-card/90 backdrop-blur-sm border border-sage-light/30 rounded-2xl p-6 shadow-card-brand hover:border-sage-light/70 hover:shadow-elevated transition-all"
             >
               <p className="font-serif text-lg text-foreground leading-snug mb-2">My period is late</p>
               <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed">
@@ -384,10 +447,10 @@ const OvulationResult = ({
             </button>
             <button
               onClick={() => setShowTransition(true)}
-              className="group text-left bg-card border border-lavender/40 rounded-2xl p-6 shadow-card-brand hover:border-lavender transition-all"
+              className="group text-left bg-lavender-bg/60 backdrop-blur-sm border border-lavender/40 rounded-2xl p-6 shadow-card-brand hover:border-lavender hover:shadow-elevated transition-all"
             >
               <p className="font-serif text-lg text-foreground leading-snug mb-2">I got a positive test</p>
-              <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed">
+              <p className="font-sans text-sm font-light text-foreground/70 leading-relaxed">
                 Move into pregnancy tracking when you're ready.
               </p>
             </button>
@@ -396,16 +459,17 @@ const OvulationResult = ({
       </section>
 
       {/* ── AI support ──────────────────────────────────────────────── */}
-      <section className="bg-parchment py-16 md:py-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+      <section className="relative bg-parchment py-16 md:py-20 overflow-hidden">
+        <div className="absolute -left-24 top-0 w-[380px] h-[380px] glow-lavender opacity-35 rounded-full pointer-events-none" aria-hidden="true" />
+        <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
+          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
             AI support
           </p>
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-4">
             Ask about this cycle
           </h2>
           <p className="font-sans text-[15px] font-light text-foreground/70 leading-relaxed mb-7">
-            Anything that feels unclear — timing, signs, the wait — ask here.
+            Anything that feels unclear about timing, signs or the wait, ask here.
           </p>
 
           <div className="space-y-3 mb-6">
@@ -413,7 +477,7 @@ const OvulationResult = ({
               <Link
                 key={prompt}
                 to={askLink(prompt)}
-                className="group flex items-center gap-3 w-full text-left py-4 px-5 rounded-xl border border-border/40 bg-card/60 hover:border-sage/40 hover:bg-card shadow-card-brand transition-all"
+                className="group flex items-center gap-3 w-full text-left py-4 px-5 rounded-xl border border-sage-light/30 bg-card/80 hover:border-sage/50 hover:bg-card shadow-card-brand transition-all"
               >
                 <MessageCircle size={13} className="text-sage shrink-0" />
                 <span className="font-sans text-sm font-light text-foreground/85 group-hover:text-foreground transition-colors leading-relaxed">
@@ -434,9 +498,10 @@ const OvulationResult = ({
       </section>
 
       {/* ── Continue your journey ───────────────────────────────────── */}
-      <section className="bg-parchment-dark py-16 md:py-20">
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
+      <section className="relative bg-parchment-dark py-16 md:py-24 overflow-hidden">
+        <BotanicalAccent className="bottom-0 -right-16 md:-right-8" flip opacity="opacity-[0.10]" />
+        <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
+          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
             Continue your journey
           </p>
           <div className="space-y-3">
@@ -448,7 +513,7 @@ const OvulationResult = ({
               <Link
                 key={p.to}
                 to={p.to}
-                className="group flex items-center justify-between py-5 px-6 rounded-xl border border-border/40 bg-card/60 hover:border-sage/40 hover:bg-card shadow-card-brand transition-all"
+                className="group flex items-center justify-between py-5 px-6 rounded-xl border border-sage-light/30 bg-card/80 hover:border-sage/50 hover:bg-card shadow-card-brand transition-all"
               >
                 <span className="font-sans text-[15px] font-light text-foreground/85 group-hover:text-foreground transition-colors">
                   {p.label}

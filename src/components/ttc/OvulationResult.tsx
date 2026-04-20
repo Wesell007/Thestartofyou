@@ -5,22 +5,25 @@ import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import botanicalSrc from "@/assets/botanical-corner.png";
 
-/* ── Restrained botanical accent ───────────────────────────────────── */
+/* ── Botanical accent (more present, still elegant) ────────────────── */
 const BotanicalAccent = ({
   className,
   flip = false,
-  opacity = "opacity-[0.18]",
+  opacity = "opacity-[0.42]",
+  size = "w-[220px] md:w-[320px]",
 }: {
   className?: string;
   flip?: boolean;
   opacity?: string;
+  size?: string;
 }) => (
   <img
     src={botanicalSrc}
     alt=""
     aria-hidden="true"
     className={cn(
-      "pointer-events-none absolute select-none w-[180px] md:w-[260px] h-auto",
+      "pointer-events-none absolute select-none h-auto",
+      size,
       opacity,
       flip && "-scale-x-100",
       className
@@ -28,15 +31,19 @@ const BotanicalAccent = ({
   />
 );
 
-/* ── Soft sprig (small, single leaf-like mark) ─────────────────────── */
-const Sprig = ({ className }: { className?: string }) => (
+/* ── Sprig (visible decorative mark) ───────────────────────────────── */
+const Sprig = ({ className, tone = "sage" }: { className?: string; tone?: "sage" | "lavender" }) => (
   <svg
     viewBox="0 0 64 64"
     aria-hidden="true"
-    className={cn("pointer-events-none select-none text-sage/40", className)}
+    className={cn(
+      "pointer-events-none select-none",
+      tone === "sage" ? "text-sage/85" : "text-lavender",
+      className
+    )}
     fill="none"
     stroke="currentColor"
-    strokeWidth="1"
+    strokeWidth="1.25"
     strokeLinecap="round"
   >
     <path d="M32 60 C 32 40, 32 24, 32 6" />
@@ -161,13 +168,13 @@ const OvulationResult = ({
         <div className="absolute inset-x-0 top-0 h-[460px] glow-sage opacity-70 pointer-events-none" aria-hidden="true" />
         <div className="absolute -bottom-32 right-[-10%] w-[520px] h-[520px] glow-lavender opacity-40 rounded-full pointer-events-none" aria-hidden="true" />
 
-        {/* Botanical accents — restrained, framing only */}
-        <BotanicalAccent className="top-6 -left-10 md:top-10 md:-left-6" opacity="opacity-[0.16]" />
-        <BotanicalAccent className="top-2 -right-10 md:top-6 md:-right-6" flip opacity="opacity-[0.13]" />
+        {/* Botanical accents — confident framing */}
+        <BotanicalAccent className="top-4 -left-12 md:top-8 md:-left-4" opacity="opacity-[0.55]" size="w-[240px] md:w-[360px]" />
+        <BotanicalAccent className="top-2 -right-12 md:top-4 md:-right-4" flip opacity="opacity-[0.48]" size="w-[240px] md:w-[360px]" />
 
         <div className="relative container mx-auto px-6 md:px-10 max-w-2xl text-center">
           <div className="flex items-center justify-center gap-3 mb-7">
-            <Sprig className="w-4 h-4 -rotate-[35deg]" />
+            <Sprig className="w-5 h-5 -rotate-[35deg]" />
             <div className="inline-flex items-center gap-2">
               {reveal && (
                 <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
@@ -179,7 +186,7 @@ const OvulationResult = ({
                 <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
               )}
             </div>
-            <Sprig className="w-4 h-4 rotate-[35deg] -scale-x-100" />
+            <Sprig className="w-5 h-5 rotate-[35deg] -scale-x-100" />
           </div>
 
           <p className="font-serif text-lg sm:text-xl text-foreground/60 italic leading-snug mb-5">
@@ -224,7 +231,9 @@ const OvulationResult = ({
       {/* ── What this means ─────────────────────────────────────────── */}
       <section className="relative bg-parchment py-16 md:py-20 overflow-hidden">
         <div className="absolute -top-px left-0 right-0 flex justify-center pointer-events-none">
-          <Sprig className="w-5 h-5 -translate-y-1/2 bg-parchment px-1" />
+          <div className="-translate-y-1/2 bg-parchment px-3 py-1 rounded-full">
+            <Sprig className="w-7 h-7" />
+          </div>
         </div>
         <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
           <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
@@ -301,22 +310,26 @@ const OvulationResult = ({
         </div>
       </section>
 
-      {/* ── Save this cycle (primary CTA) ───────────────────────────── */}
-      <section className="relative bg-gradient-to-br from-sage-bg/70 via-parchment to-lavender-bg/50 py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[560px] glow-sage opacity-60 pointer-events-none" aria-hidden="true" />
-        <div className="absolute -top-20 left-[-8%] w-[420px] h-[420px] glow-lavender opacity-40 rounded-full pointer-events-none" aria-hidden="true" />
-        <BotanicalAccent className="bottom-0 -right-12 md:-right-6" flip opacity="opacity-[0.14]" />
-        <BotanicalAccent className="top-4 -left-12 md:-left-6" opacity="opacity-[0.10]" />
+      {/* ── Save this cycle (lavender brand moment) ─────────────────── */}
+      <section className="relative bg-gradient-to-br from-lavender-bg via-lavender-bg/80 to-sage-bg/40 py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-lavender/50 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-lavender/50 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[620px] glow-lavender opacity-90 pointer-events-none" aria-hidden="true" />
+        <div className="absolute -top-32 right-[-10%] w-[520px] h-[520px] glow-lavender opacity-60 rounded-full pointer-events-none" aria-hidden="true" />
+        <BotanicalAccent className="-bottom-6 -right-10 md:-right-2" flip opacity="opacity-[0.55]" size="w-[260px] md:w-[400px]" />
+        <BotanicalAccent className="-top-4 -left-10 md:-left-2" opacity="opacity-[0.48]" size="w-[260px] md:w-[400px]" />
         <div className="relative container mx-auto px-6 md:px-10 max-w-2xl">
-          {/* Editorial intro, no card frame */}
+          {/* Editorial intro */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-card border border-sage-light/60 shadow-elevated mb-6">
-              <Bookmark size={18} className="text-sage" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-card border border-lavender/50 shadow-elevated mb-6">
+              <Bookmark size={20} className="text-lavender-fg" />
             </div>
-            <div className="flanking-lines mb-4">
-              <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage whitespace-nowrap">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Sprig tone="lavender" className="w-5 h-5 -rotate-[35deg]" />
+              <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-lavender-fg whitespace-nowrap">
                 The start of a calmer monthly rhythm
               </p>
+              <Sprig tone="lavender" className="w-5 h-5 rotate-[35deg] -scale-x-100" />
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
               Save this cycle
@@ -326,8 +339,8 @@ const OvulationResult = ({
             </p>
           </div>
 
-          {/* Reminder list — soft branded surface */}
-          <div className="bg-card/85 backdrop-blur-sm border border-sage-light/40 rounded-2xl shadow-elevated divide-y divide-sage-light/30 mb-8">
+          {/* Reminder list — lavender-toned branded surface */}
+          <div className="bg-card/95 backdrop-blur-sm border border-lavender/40 rounded-2xl shadow-elevated divide-y divide-lavender/25 mb-8">
             {([
               { key: "fertile" as const, label: "When my fertile window opens", date: format(fertileStart, "d MMMM") },
               { key: "ovulation" as const, label: "Around my likely ovulation day", date: format(ovulationDay, "d MMMM") },
@@ -339,13 +352,13 @@ const OvulationResult = ({
                 <button
                   key={key}
                   onClick={() => toggleReminder(key)}
-                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-sage-bg/20 transition-colors first:rounded-t-2xl last:rounded-b-2xl"
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-lavender-bg/40 transition-colors first:rounded-t-2xl last:rounded-b-2xl"
                 >
                   <div className="flex items-center gap-4 min-w-0">
                     <div
                       className={cn(
                         "w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-colors",
-                        on ? "bg-sage text-sage-foreground" : "bg-parchment-deeper text-muted-foreground"
+                        on ? "bg-lavender text-lavender-fg" : "bg-parchment-deeper text-muted-foreground"
                       )}
                     >
                       {on ? <Check size={14} /> : <Bell size={13} />}
@@ -358,7 +371,7 @@ const OvulationResult = ({
                   <span
                     className={cn(
                       "font-sans text-[10px] font-light tracking-[0.18em] uppercase shrink-0",
-                      on ? "text-sage" : "text-foreground/35"
+                      on ? "text-lavender-fg" : "text-foreground/35"
                     )}
                   >
                     {on ? "On" : "Off"}
@@ -499,7 +512,8 @@ const OvulationResult = ({
 
       {/* ── Continue your journey ───────────────────────────────────── */}
       <section className="relative bg-parchment-dark py-16 md:py-24 overflow-hidden">
-        <BotanicalAccent className="bottom-0 -right-16 md:-right-8" flip opacity="opacity-[0.10]" />
+        <BotanicalAccent className="-bottom-4 -right-12 md:-right-2" flip opacity="opacity-[0.42]" size="w-[240px] md:w-[340px]" />
+        <BotanicalAccent className="top-2 -left-16 md:-left-4" opacity="opacity-[0.30]" size="w-[200px] md:w-[280px]" />
         <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
           <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
             Continue your journey

@@ -512,7 +512,8 @@ const OvulationResult = ({
 
       {/* ── Continue your journey ───────────────────────────────────── */}
       <section className="relative bg-parchment-dark py-16 md:py-24 overflow-hidden">
-        <BotanicalAccent className="bottom-0 -right-16 md:-right-8" flip opacity="opacity-[0.10]" />
+        <BotanicalAccent className="-bottom-4 -right-12 md:-right-2" flip opacity="opacity-[0.42]" size="w-[240px] md:w-[340px]" />
+        <BotanicalAccent className="top-2 -left-16 md:-left-4" opacity="opacity-[0.30]" size="w-[200px] md:w-[280px]" />
         <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
           <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
             Continue your journey

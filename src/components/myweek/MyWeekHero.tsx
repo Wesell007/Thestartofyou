@@ -7,21 +7,16 @@ interface Props {
 
 const MyWeekHero = ({ greeting, firstName, week, dueDateLabel }: Props) => {
   return (
-    <section className="relative pt-20 sm:pt-24 md:pt-28 pb-10 sm:pb-12 md:pb-16">
-      {/* Soft botanical accent — pregnancy-coded */}
+    <section className="relative pt-20 sm:pt-24 md:pt-28 pb-10 sm:pb-12">
+      {/* Soft pregnancy-coded botanical wash, centred behind the column */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-16 right-0 w-[180px] h-[180px] sm:w-[260px] sm:h-[260px] rounded-full blur-3xl opacity-50"
-        style={{ backgroundColor: "hsl(var(--stage-pregnancy) / 0.7)" }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-24 right-8 w-2 h-2 rounded-full"
-        style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.4)" }}
+        className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 w-[480px] h-[280px] rounded-full blur-3xl opacity-60"
+        style={{ backgroundColor: "hsl(var(--stage-pregnancy) / 0.55)" }}
       />
 
-      <div className="relative container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
-        <p className="font-sans text-[13px] sm:text-sm font-light text-sage-muted mb-5 sm:mb-7">
+      <div className="relative">
+        <p className="font-sans text-[13px] sm:text-sm font-light text-foreground/55 mb-6 sm:mb-8">
           {greeting}, {firstName}.
         </p>
 
@@ -37,7 +32,7 @@ const MyWeekHero = ({ greeting, firstName, week, dueDateLabel }: Props) => {
           </span>
         </h1>
 
-        <p className="font-sans text-[13px] sm:text-sm font-light text-muted-foreground/80">
+        <p className="font-sans text-[13px] sm:text-sm font-light text-foreground/45">
           Due {dueDateLabel}
         </p>
       </div>

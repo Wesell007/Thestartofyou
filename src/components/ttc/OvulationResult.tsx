@@ -5,22 +5,25 @@ import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import botanicalSrc from "@/assets/botanical-corner.png";
 
-/* ── Restrained botanical accent ───────────────────────────────────── */
+/* ── Botanical accent (more present, still elegant) ────────────────── */
 const BotanicalAccent = ({
   className,
   flip = false,
-  opacity = "opacity-[0.18]",
+  opacity = "opacity-[0.42]",
+  size = "w-[220px] md:w-[320px]",
 }: {
   className?: string;
   flip?: boolean;
   opacity?: string;
+  size?: string;
 }) => (
   <img
     src={botanicalSrc}
     alt=""
     aria-hidden="true"
     className={cn(
-      "pointer-events-none absolute select-none w-[180px] md:w-[260px] h-auto",
+      "pointer-events-none absolute select-none h-auto",
+      size,
       opacity,
       flip && "-scale-x-100",
       className
@@ -28,15 +31,19 @@ const BotanicalAccent = ({
   />
 );
 
-/* ── Soft sprig (small, single leaf-like mark) ─────────────────────── */
-const Sprig = ({ className }: { className?: string }) => (
+/* ── Sprig (visible decorative mark) ───────────────────────────────── */
+const Sprig = ({ className, tone = "sage" }: { className?: string; tone?: "sage" | "lavender" }) => (
   <svg
     viewBox="0 0 64 64"
     aria-hidden="true"
-    className={cn("pointer-events-none select-none text-sage/40", className)}
+    className={cn(
+      "pointer-events-none select-none",
+      tone === "sage" ? "text-sage/85" : "text-lavender",
+      className
+    )}
     fill="none"
     stroke="currentColor"
-    strokeWidth="1"
+    strokeWidth="1.25"
     strokeLinecap="round"
   >
     <path d="M32 60 C 32 40, 32 24, 32 6" />

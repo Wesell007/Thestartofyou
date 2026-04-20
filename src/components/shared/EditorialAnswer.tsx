@@ -1,5 +1,5 @@
 import ReactMarkdown from "react-markdown";
-import { Heart, LifeBuoy } from "lucide-react";
+import { Heart, LifeBuoy, Sparkles } from "lucide-react";
 import { Sprig } from "@/components/shared/StageBotanical";
 
 interface Props {
@@ -92,33 +92,50 @@ const groupIntoBlocks = (modules: AnswerModule[]): Block[] => {
   return blocks;
 };
 
+type CalloutTone = "help" | "seek" | "reassurance";
+
 const calloutMeta: Record<
-  "help" | "seek" | "reassurance",
-  { label: string; Icon: typeof Heart; accent: string; surface: string; border: string; sprigTone: "sage" | "ttc" }
+  CalloutTone,
+  {
+    label: string;
+    Icon: typeof Heart;
+    accent: string;
+    surface: string;
+    border: string;
+    sprigTone: "sage" | "ttc";
+    bulletClass: string;
+    iconRing: string;
+  }
 > = {
   help: {
     label: "What may help",
-    Icon: Heart,
+    Icon: Sparkles,
     accent: "text-lavender",
-    surface: "bg-gradient-to-br from-lavender-bg/35 via-card to-card",
-    border: "border-lavender/20",
+    surface: "bg-gradient-to-br from-lavender-bg/40 via-card to-card",
+    border: "border-lavender/25",
     sprigTone: "sage",
+    bulletClass: "[&_ul>li]:before:bg-lavender/60",
+    iconRing: "bg-lavender/10 ring-1 ring-lavender/20",
   },
   seek: {
     label: "When to seek support",
     Icon: LifeBuoy,
     accent: "text-terracotta",
-    surface: "bg-gradient-to-br from-terracotta/[0.06] via-card to-card",
-    border: "border-terracotta/25",
+    surface: "bg-gradient-to-br from-terracotta/[0.07] via-card to-card",
+    border: "border-terracotta/30",
     sprigTone: "ttc",
+    bulletClass: "[&_ul>li]:before:bg-terracotta/65",
+    iconRing: "bg-terracotta/10 ring-1 ring-terracotta/25",
   },
   reassurance: {
     label: "A gentle reminder",
     Icon: Heart,
     accent: "text-sage",
-    surface: "bg-gradient-to-br from-sage-bg/45 via-card to-card",
-    border: "border-sage/20",
+    surface: "bg-gradient-to-br from-sage-bg/50 via-card to-card",
+    border: "border-sage/25",
     sprigTone: "sage",
+    bulletClass: "[&_ul>li]:before:bg-sage/65",
+    iconRing: "bg-sage/10 ring-1 ring-sage/25",
   },
 };
 
@@ -127,18 +144,28 @@ const calloutMeta: Record<
  * markers, restrained heading hierarchy. No internal chips or dividers; the
  * body is meant to flow as one continuous reading experience.
  */
+/**
+ * Premium editorial prose with refined custom bullets:
+ *  - <ul> uses a small soft circle marker (outer ring + inner dot) in sage tone
+ *  - <ol> uses elegant serif numerals in sage
+ * Callouts override the bullet colour via `bulletClass` for tonal cohesion.
+ */
 const proseClasses = `
   prose prose-base max-w-none font-sans font-light text-foreground/85
   prose-p:text-[16px] md:prose-p:text-[17px] prose-p:font-light prose-p:leading-[1.85] prose-p:text-foreground/85 prose-p:mb-6 last:prose-p:mb-0
   prose-strong:text-foreground prose-strong:font-medium
   prose-em:text-foreground/80
-  prose-li:text-[16px] md:prose-li:text-[17px] prose-li:text-foreground/85 prose-li:leading-[1.8] prose-li:mb-2.5
+  prose-li:text-[16px] md:prose-li:text-[17px] prose-li:text-foreground/85 prose-li:leading-[1.8] prose-li:mb-3
   prose-ul:my-6 prose-ol:my-6 prose-ul:pl-1 prose-ol:pl-1
-  [&_ul>li]:relative [&_ul>li]:pl-7
-  [&_ul>li]:before:content-[''] [&_ul>li]:before:absolute [&_ul>li]:before:left-0 [&_ul>li]:before:top-[0.78em]
-  [&_ul>li]:before:w-3.5 [&_ul>li]:before:h-px [&_ul>li]:before:bg-current [&_ul>li]:before:opacity-35
-  [&_ul]:list-none
-  prose-h3:font-serif prose-h3:text-[1.2rem] md:prose-h3:text-[1.35rem] prose-h3:text-foreground prose-h3:mt-10 prose-h3:mb-3 prose-h3:font-normal prose-h3:tracking-[-0.01em] prose-h3:leading-[1.3]
+  [&_ul]:list-none [&_ul>li]:relative [&_ul>li]:pl-8
+  [&_ul>li]:before:content-[''] [&_ul>li]:before:absolute [&_ul>li]:before:left-[6px] [&_ul>li]:before:top-[0.72em]
+  [&_ul>li]:before:w-[7px] [&_ul>li]:before:h-[7px] [&_ul>li]:before:rounded-full [&_ul>li]:before:bg-sage/55
+  [&_ul>li]:after:content-[''] [&_ul>li]:after:absolute [&_ul>li]:after:left-[2px] [&_ul>li]:after:top-[0.58em]
+  [&_ul>li]:after:w-[15px] [&_ul>li]:after:h-[15px] [&_ul>li]:after:rounded-full [&_ul>li]:after:border [&_ul>li]:after:border-sage/25
+  [&_ol]:list-none [&_ol]:[counter-reset:step] [&_ol>li]:relative [&_ol>li]:pl-10 [&_ol>li]:[counter-increment:step]
+  [&_ol>li]:before:content-[counter(step,decimal-leading-zero)] [&_ol>li]:before:absolute [&_ol>li]:before:left-0 [&_ol>li]:before:top-[0.15em]
+  [&_ol>li]:before:font-serif [&_ol>li]:before:text-[0.78rem] [&_ol>li]:before:tracking-[0.12em] [&_ol>li]:before:text-sage [&_ol>li]:before:opacity-80
+  prose-h3:font-serif prose-h3:text-[1.22rem] md:prose-h3:text-[1.4rem] prose-h3:text-foreground prose-h3:mt-10 prose-h3:mb-3 prose-h3:font-normal prose-h3:tracking-[-0.01em] prose-h3:leading-[1.28]
   prose-h4:font-serif prose-h4:text-[1.05rem] prose-h4:text-foreground prose-h4:mt-8 prose-h4:mb-2.5 prose-h4:font-medium
   prose-blockquote:border-l-2 prose-blockquote:border-sage/40 prose-blockquote:pl-5 prose-blockquote:italic prose-blockquote:text-foreground/75 prose-blockquote:font-light prose-blockquote:my-7
 `;
@@ -185,21 +212,29 @@ const EditorialAnswer = ({ markdown }: Props) => {
         return (
           <aside
             key={`callout-${blockIdx}`}
-            className={`relative ${meta.surface} border ${meta.border} rounded-[1.75rem] px-7 py-9 md:px-11 md:py-11 shadow-soft overflow-hidden`}
+            className={`group relative ${meta.surface} border ${meta.border} rounded-[1.75rem] px-7 py-10 md:px-12 md:py-12 shadow-[0_2px_24px_-12px_hsl(var(--foreground)/0.08)] overflow-hidden`}
           >
-            <Sprig tone={meta.sprigTone} className="absolute top-6 right-6 w-8 h-8 opacity-20" />
-            <div className={`flex items-center gap-2.5 mb-5 ${meta.accent}`}>
-              <Icon size={14} strokeWidth={1.75} />
-              <span className="font-sans text-[10px] font-medium tracking-[0.24em] uppercase">
+            {/* Soft top accent line */}
+            <div className={`absolute top-0 left-10 right-10 h-px ${meta.accent} opacity-20 bg-current`} />
+            <Sprig tone={meta.sprigTone} className="absolute -top-2 -right-2 w-20 h-20 opacity-[0.09] rotate-12" />
+
+            {/* Label row with icon medallion */}
+            <div className="flex items-center gap-3 mb-6">
+              <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full ${meta.iconRing} ${meta.accent}`}>
+                <Icon size={14} strokeWidth={1.75} />
+              </span>
+              <span className={`font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase ${meta.accent}`}>
                 {meta.label}
               </span>
+              <span className={`flex-1 h-px bg-current opacity-15 ${meta.accent}`} />
             </div>
+
             {m.heading && (
-              <h3 className="font-serif text-[1.35rem] md:text-[1.55rem] text-foreground leading-[1.25] tracking-[-0.012em] mb-4">
+              <h3 className="font-serif text-[1.4rem] md:text-[1.65rem] text-foreground leading-[1.22] tracking-[-0.014em] mb-5 max-w-[32ch]">
                 {m.heading}
               </h3>
             )}
-            <article className={proseClasses}>
+            <article className={`${proseClasses} ${meta.bulletClass} [&_ul>li]:after:border-current [&_ul>li]:after:opacity-25 ${meta.accent.replace('text-', '[&_ul>li]:after:text-')}`}>
               <ReactMarkdown>{m.body}</ReactMarkdown>
             </article>
           </aside>

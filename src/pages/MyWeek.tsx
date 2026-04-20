@@ -91,7 +91,6 @@ const MyWeek = () => {
 
   const { firstName, currentWeek, dueDate } = state;
   const nextWeek = currentWeek < MAX_PREGNANCY_WEEK ? currentWeek + 1 : null;
-  const daysToDue = differenceInDays(dueDate, new Date());
 
   const trimesterLabel =
     currentWeek <= 12
@@ -132,7 +131,6 @@ const MyWeek = () => {
           week={currentWeek}
           dueDateLabel={formatDueDate(dueDate)}
           trimesterLabel={trimesterLabel}
-          daysToDue={daysToDue}
         />
         <MyWeekOrientation
           trimesterLabel={trimesterLabel}

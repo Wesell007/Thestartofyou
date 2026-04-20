@@ -310,22 +310,26 @@ const OvulationResult = ({
         </div>
       </section>
 
-      {/* ── Save this cycle (primary CTA) ───────────────────────────── */}
-      <section className="relative bg-gradient-to-br from-sage-bg/70 via-parchment to-lavender-bg/50 py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[560px] glow-sage opacity-60 pointer-events-none" aria-hidden="true" />
-        <div className="absolute -top-20 left-[-8%] w-[420px] h-[420px] glow-lavender opacity-40 rounded-full pointer-events-none" aria-hidden="true" />
-        <BotanicalAccent className="bottom-0 -right-12 md:-right-6" flip opacity="opacity-[0.14]" />
-        <BotanicalAccent className="top-4 -left-12 md:-left-6" opacity="opacity-[0.10]" />
+      {/* ── Save this cycle (lavender brand moment) ─────────────────── */}
+      <section className="relative bg-gradient-to-br from-lavender-bg via-lavender-bg/80 to-sage-bg/40 py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-lavender/50 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-lavender/50 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[620px] glow-lavender opacity-90 pointer-events-none" aria-hidden="true" />
+        <div className="absolute -top-32 right-[-10%] w-[520px] h-[520px] glow-lavender opacity-60 rounded-full pointer-events-none" aria-hidden="true" />
+        <BotanicalAccent className="-bottom-6 -right-10 md:-right-2" flip opacity="opacity-[0.55]" size="w-[260px] md:w-[400px]" />
+        <BotanicalAccent className="-top-4 -left-10 md:-left-2" opacity="opacity-[0.48]" size="w-[260px] md:w-[400px]" />
         <div className="relative container mx-auto px-6 md:px-10 max-w-2xl">
-          {/* Editorial intro, no card frame */}
+          {/* Editorial intro */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-card border border-sage-light/60 shadow-elevated mb-6">
-              <Bookmark size={18} className="text-sage" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-card border border-lavender/50 shadow-elevated mb-6">
+              <Bookmark size={20} className="text-lavender-fg" />
             </div>
-            <div className="flanking-lines mb-4">
-              <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage whitespace-nowrap">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Sprig tone="lavender" className="w-5 h-5 -rotate-[35deg]" />
+              <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-lavender-fg whitespace-nowrap">
                 The start of a calmer monthly rhythm
               </p>
+              <Sprig tone="lavender" className="w-5 h-5 rotate-[35deg] -scale-x-100" />
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
               Save this cycle

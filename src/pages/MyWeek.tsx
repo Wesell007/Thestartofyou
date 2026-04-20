@@ -42,14 +42,26 @@ const MyWeek = () => {
   return (
     <div className="min-h-screen bg-parchment">
       <MyWeekHeader />
-      {/* Centred, narrow product column. Whitespace is the frame. */}
-      <main className="mx-auto w-full max-w-[640px] px-5 sm:px-8 md:px-10">
+      {/* Centred product column. Hero is centred on desktop; slots stay editorial-left. */}
+      <main className="mx-auto w-full max-w-[640px] md:max-w-[680px] px-5 sm:px-8 md:px-12">
         <MyWeekHero
           greeting={getGreeting()}
           firstName={firstName}
           week={currentWeek}
           dueDateLabel={formatDueDate(dueDate)}
         />
+
+        {/* Quiet centred ornament — bridges the centred hero into the editorial slot column */}
+        <div
+          aria-hidden="true"
+          className="hidden md:flex justify-center -mt-6 mb-10"
+        >
+          <span
+            className="block w-1 h-1 rounded-full"
+            style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
+          />
+        </div>
+
         <SlotWhatMatters content={content} />
         <SlotOneFocus content={content} />
         <SlotReflection content={content} />

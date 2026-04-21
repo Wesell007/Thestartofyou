@@ -823,7 +823,7 @@ const KeptChapter = () => {
 
             {/* What you were holding + return to live — closing band */}
             <section
-              className="rounded-[28px] px-7 sm:px-10 py-9 sm:py-10 grid md:grid-cols-12 gap-6 items-end"
+              className="rounded-[28px] px-6 sm:px-10 py-8 sm:py-10 grid md:grid-cols-12 gap-6 items-end"
               style={{
                 background: `linear-gradient(135deg, ${tint(0.32)}, ${tint(0.14)})`,
                 border: `1px solid ${accentSoft(0.18)}`,
@@ -838,7 +838,7 @@ const KeptChapter = () => {
                 </p>
                 <p
                   className="font-serif text-foreground leading-[1.1] tracking-tight"
-                  style={{ fontSize: "clamp(1.6rem, 2.6vw, 2.1rem)" }}
+                  style={{ fontSize: "clamp(1.5rem, 2.6vw, 2.1rem)" }}
                 >
                   {content.focus.headline}
                 </p>
@@ -869,6 +869,52 @@ const KeptChapter = () => {
                 </Link>
               </div>
             </section>
+
+            {/* Adjacent kept chapters — tablet & mobile only.
+                On lg+ this lives inside the left rail as chapter objects. */}
+            {(prevWeek || nextWeek) && (
+              <nav
+                aria-label="Adjacent kept chapters"
+                className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
+              >
+                {prevWeek && (
+                  <Link
+                    to={`/my-week/${prevWeek}`}
+                    className="group block rounded-[20px] keepsake-surface px-5 py-4 sm:py-5 transition-all hover:-translate-y-0.5"
+                    style={{ borderColor: accentSoft(0.16) }}
+                  >
+                    <span className="font-sans text-[9.5px] font-medium tracking-[0.26em] uppercase mb-1.5 flex items-center gap-1.5 text-foreground/50">
+                      <ArrowLeft size={10} strokeWidth={1.6} className="transition-transform group-hover:-translate-x-0.5" />
+                      Previous kept chapter
+                    </span>
+                    <p className="font-serif font-medium text-[15.5px] text-foreground/85 leading-tight">
+                      Week {prevWeek}
+                    </p>
+                    <p className="font-serif italic text-[12.5px] text-foreground/55 mt-0.5">
+                      {getWeekIdentity(prevWeek).theme}
+                    </p>
+                  </Link>
+                )}
+                {nextWeek && (
+                  <Link
+                    to={`/my-week/${nextWeek}`}
+                    className="group block rounded-[20px] keepsake-surface px-5 py-4 sm:py-5 transition-all hover:-translate-y-0.5 sm:text-right"
+                    style={{ borderColor: accentSoft(0.16) }}
+                  >
+                    <span className="font-sans text-[9.5px] font-medium tracking-[0.26em] uppercase mb-1.5 flex items-center sm:justify-end gap-1.5 text-foreground/50">
+                      Next kept chapter
+                      <ArrowRight size={10} strokeWidth={1.6} className="transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                    <p className="font-serif font-medium text-[15.5px] text-foreground/85 leading-tight">
+                      Week {nextWeek}
+                    </p>
+                    <p className="font-serif italic text-[12.5px] text-foreground/55 mt-0.5">
+                      {getWeekIdentity(nextWeek).theme}
+                    </p>
+                  </Link>
+                )}
+              </nav>
+            )}
           </article>
         </div>
       </main>

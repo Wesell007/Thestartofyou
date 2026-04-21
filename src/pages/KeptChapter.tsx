@@ -48,6 +48,82 @@ const KeptChapter = () => {
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved">("idle");
   const initialRef = useRef("");
   const debounceRef = useRef<number | null>(null);
+  const recognitionRef = useRef<any>(null);
+  const interimRef = useRef("");
+  const [isListening, setIsListening] = useState(false);
+  const [voiceSupported, setVoiceSupported] = useState(false);
+  const [voiceError, setVoiceError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const SR =
+      typeof window !== "undefined" &&
+      ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
+    setVoiceSupported(Boolean(SR));
+  }, []);
+
+  const startListening = () => {
+    setVoiceError(null);
+    const SR =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SR) {
+      setVoiceError("Voice isn't available in this browser.");
+      return;
+    }
+    try {
+      const rec = new SR();
+      rec.continuous = true;
+      rec.interimResults = true;
+      rec.lang = "en-GB";
+      interimRef.current = "";
+      rec.onresult = (event: any) => {
+        let finalChunk = "";
+        let interim = "";
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const r = event.results[i];
+          if (r.isFinal) finalChunk += r[0].transcript;
+          else interim += r[0].transcript;
+        }
+        if (finalChunk) {
+          setReflection((prev) => {
+            const sep = prev && !prev.endsWith(" ") && !prev.endsWith("\n") ? " " : "";
+            return prev + sep + finalChunk.trim();
+          });
+        }
+        interimRef.current = interim;
+      };
+      rec.onerror = (e: any) => {
+        if (e?.error === "not-allowed") setVoiceError("Microphone permission was declined.");
+        else if (e?.error === "no-speech") setVoiceError("No speech was heard. Try again when ready.");
+        else setVoiceError("Voice paused. You can try again.");
+        setIsListening(false);
+      };
+      rec.onend = () => setIsListening(false);
+      rec.start();
+      recognitionRef.current = rec;
+      setIsListening(true);
+    } catch {
+      setVoiceError("Voice couldn't start. You can keep typing.");
+    }
+  };
+
+  const stopListening = () => {
+    try {
+      recognitionRef.current?.stop();
+    } catch {
+      /* noop */
+    }
+    setIsListening(false);
+  };
+
+  useEffect(() => {
+    return () => {
+      try {
+        recognitionRef.current?.abort?.();
+      } catch {
+        /* noop */
+      }
+    };
+  }, []);
 
   const validWeek = Number.isFinite(week) && week >= 1 && week <= MAX_PREGNANCY_WEEK;
 

@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
-import { Mail, ArrowRight, Loader2 } from "lucide-react";
+import { Mail, ArrowRight, Loader2, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { commitPendingJourneyToDB, readPendingJourney } from "@/lib/savedJourney";
 import { toast } from "sonner";
+
+type Step = "choose" | "code-sent";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -12,9 +14,13 @@ const Auth = () => {
   const next = params.get("next") || "/setup";
 
   const [email, setEmail] = useState("");
-  const [emailSubmitting, setEmailSubmitting] = useState(false);
-  const [linkSent, setLinkSent] = useState(false);
+  const [code, setCode] = useState("");
+  const [step, setStep] = useState<Step>("choose");
+  const [submitting, setSubmitting] = useState(false);
+  const [verifying, setVerifying] = useState(false);
+  const [resendCooldown, setResendCooldown] = useState(0);
   const [googleSubmitting, setGoogleSubmitting] = useState(false);
+  const cooldownRef = useRef<number | null>(null);
 
   // If already signed in, route forward (commit pending journey if needed)
   useEffect(() => {
@@ -23,10 +29,8 @@ const Auth = () => {
       try {
         await commitPendingJourneyToDB(userId);
       } catch (e) {
-        // non-fatal; user can re-save later
         console.error(e);
       }
-      // If they have a profile already, skip setup
       const { data: profile } = await supabase
         .from("profiles")
         .select("first_name")
@@ -51,6 +55,15 @@ const Auth = () => {
     };
   }, [navigate, next]);
 
+  // Resend cooldown ticker
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+    cooldownRef.current = window.setTimeout(() => setResendCooldown((c) => c - 1), 1000);
+    return () => {
+      if (cooldownRef.current) window.clearTimeout(cooldownRef.current);
+    };
+  }, [resendCooldown]);
+
   const handleGoogle = async () => {
     setGoogleSubmitting(true);
     const result = await lovable.auth.signInWithOAuth("google", {
@@ -60,23 +73,50 @@ const Auth = () => {
       setGoogleSubmitting(false);
       toast.error("Could not sign in with Google. Please try again.");
     }
-    // If redirected, browser leaves the page. If tokens returned, onAuthStateChange routes.
   };
 
-  const handleMagicLink = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const sendCode = async (isResend = false) => {
     if (!email.trim()) return;
-    setEmailSubmitting(true);
+    setSubmitting(true);
+    // signInWithOtp without emailRedirectTo sends a 6-digit OTP code (no link).
     const { error } = await supabase.auth.signInWithOtp({
       email: email.trim(),
-      options: { emailRedirectTo: window.location.origin + "/auth" },
+      options: {
+        // Allow new users — they'll create an account via the code.
+        shouldCreateUser: true,
+        // Also include the magic link as a fallback in the same email.
+        emailRedirectTo: window.location.origin + "/auth",
+      },
     });
-    setEmailSubmitting(false);
+    setSubmitting(false);
     if (error) {
-      toast.error("Could not send link. Please check the email and try again.");
+      toast.error(error.message || "Could not send code. Please check the email and try again.");
       return;
     }
-    setLinkSent(true);
+    setStep("code-sent");
+    setResendCooldown(45);
+    if (isResend) toast.success("New code sent.");
+  };
+
+  const verifyCode = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const cleaned = code.replace(/\D/g, "");
+    if (cleaned.length !== 6) {
+      toast.error("Please enter the 6-digit code from your email.");
+      return;
+    }
+    setVerifying(true);
+    const { error } = await supabase.auth.verifyOtp({
+      email: email.trim(),
+      token: cleaned,
+      type: "email",
+    });
+    setVerifying(false);
+    if (error) {
+      toast.error("That code didn't match. Please check your email and try again.");
+      return;
+    }
+    // onAuthStateChange will route forward.
   };
 
   const pending = readPendingJourney();
@@ -84,7 +124,10 @@ const Auth = () => {
   return (
     <div className="min-h-screen bg-parchment flex flex-col">
       <header className="container mx-auto px-5 sm:px-6 md:px-10 pt-8">
-        <Link to="/" className="font-serif text-lg text-foreground/80 hover:text-foreground transition-colors">
+        <Link
+          to="/"
+          className="font-serif text-lg text-foreground/80 hover:text-foreground transition-colors"
+        >
           The Start of You
         </Link>
       </header>
@@ -96,13 +139,19 @@ const Auth = () => {
               className="font-sans text-[10px] font-light tracking-[0.3em] uppercase mb-4"
               style={{ color: "hsl(var(--stage-pregnancy-accent) / 0.7)" }}
             >
-              Save your journey
+              {step === "code-sent" ? "Check your email" : "Save your journey"}
             </p>
             <h1 className="font-serif text-3xl md:text-[2.25rem] text-foreground leading-tight mb-3">
-              {pending ? "One step to keep your place" : "Welcome back"}
+              {step === "code-sent"
+                ? "Enter your sign-in code"
+                : pending
+                ? "One step to keep your place"
+                : "Welcome back"}
             </h1>
             <p className="font-sans text-sm font-light text-muted-foreground/80 leading-relaxed max-w-sm mx-auto">
-              {pending
+              {step === "code-sent"
+                ? `We've sent a 6-digit code to ${email}. It works on any device.`
+                : pending
                 ? "Sign in to save your stage and unlock your weekly space."
                 : "Sign in to return to your weekly space."}
             </p>
@@ -112,19 +161,84 @@ const Auth = () => {
             className="bg-card border rounded-2xl p-7 md:p-8 shadow-soft"
             style={{ borderColor: "hsl(var(--border) / 0.4)" }}
           >
-            {linkSent ? (
-              <div className="text-center py-6">
-                <div
-                  className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center"
-                  style={{ backgroundColor: "hsl(var(--stage-pregnancy) / 0.2)" }}
-                >
-                  <Mail size={18} style={{ color: "hsl(var(--stage-pregnancy-accent))" }} />
+            {step === "code-sent" ? (
+              <>
+                <div className="flex items-center justify-center mb-5">
+                  <div
+                    className="w-11 h-11 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: "hsl(var(--stage-pregnancy) / 0.25)" }}
+                  >
+                    <Mail size={16} style={{ color: "hsl(var(--stage-pregnancy-accent))" }} />
+                  </div>
                 </div>
-                <p className="font-serif text-lg text-foreground mb-2">Check your inbox</p>
-                <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-                  We've sent a sign-in link to <span className="text-foreground">{email}</span>. Open it on this device to continue.
-                </p>
-              </div>
+
+                <form onSubmit={verifyCode} className="space-y-4">
+                  <label className="block">
+                    <span className="font-sans text-xs font-light text-muted-foreground/80 mb-1.5 block text-center">
+                      6-digit code
+                    </span>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      autoComplete="one-time-code"
+                      pattern="\d{6}"
+                      maxLength={6}
+                      required
+                      value={code}
+                      onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                      placeholder="••••••"
+                      autoFocus
+                      className="w-full bg-parchment border rounded-md px-4 py-3.5 font-mono text-2xl tracking-[0.5em] text-center text-foreground placeholder:text-muted-foreground/30 focus:outline-none focus:ring-2 focus:ring-foreground/10"
+                      style={{ borderColor: "hsl(var(--border) / 0.5)" }}
+                    />
+                  </label>
+
+                  <button
+                    type="submit"
+                    disabled={verifying || code.length !== 6}
+                    className="w-full inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all disabled:opacity-50"
+                  >
+                    {verifying ? (
+                      <Loader2 size={16} className="animate-spin" />
+                    ) : (
+                      <>
+                        Sign in <ArrowRight size={14} />
+                      </>
+                    )}
+                  </button>
+                </form>
+
+                <div className="mt-5 space-y-2 text-center">
+                  <p className="font-sans text-[12px] font-light text-muted-foreground/70 leading-relaxed">
+                    The same email also contains a one-tap sign-in link.
+                  </p>
+                  <p className="font-sans text-[12px] font-light text-muted-foreground/55 leading-relaxed">
+                    Can't find it? Check your spam or promotions folder.
+                  </p>
+
+                  <div className="flex items-center justify-center gap-4 pt-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setStep("choose");
+                        setCode("");
+                      }}
+                      className="inline-flex items-center gap-1.5 font-sans text-[12px] font-light text-muted-foreground/70 hover:text-foreground transition-colors"
+                    >
+                      <ArrowLeft size={12} /> Use a different email
+                    </button>
+                    <span className="text-muted-foreground/30">·</span>
+                    <button
+                      type="button"
+                      onClick={() => sendCode(true)}
+                      disabled={resendCooldown > 0 || submitting}
+                      className="font-sans text-[12px] font-light text-muted-foreground/70 hover:text-foreground transition-colors disabled:opacity-50"
+                    >
+                      {resendCooldown > 0 ? `Resend in ${resendCooldown}s` : submitting ? "Sending…" : "Resend code"}
+                    </button>
+                  </div>
+                </div>
+              </>
             ) : (
               <>
                 <button
@@ -137,7 +251,10 @@ const Auth = () => {
                     <Loader2 size={16} className="animate-spin" />
                   ) : (
                     <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden>
-                      <path fill="#fff" d="M21.35 11.1H12v2.84h5.36c-.23 1.5-1.66 4.4-5.36 4.4-3.23 0-5.86-2.67-5.86-5.96s2.63-5.96 5.86-5.96c1.84 0 3.07.78 3.78 1.45l2.58-2.49C16.7 3.93 14.55 3 12 3 7.03 3 3 7.03 3 12s4.03 9 9 9c5.2 0 8.64-3.66 8.64-8.8 0-.59-.06-1.04-.13-1.5z"/>
+                      <path
+                        fill="#fff"
+                        d="M21.35 11.1H12v2.84h5.36c-.23 1.5-1.66 4.4-5.36 4.4-3.23 0-5.86-2.67-5.86-5.96s2.63-5.96 5.86-5.96c1.84 0 3.07.78 3.78 1.45l2.58-2.49C16.7 3.93 14.55 3 12 3 7.03 3 3 7.03 3 12s4.03 9 9 9c5.2 0 8.64-3.66 8.64-8.8 0-.59-.06-1.04-.13-1.5z"
+                      />
                     </svg>
                   )}
                   Continue with Google
@@ -145,13 +262,23 @@ const Auth = () => {
 
                 <div className="flex items-center gap-3 my-6">
                   <div className="flex-1 h-px bg-border/50" />
-                  <span className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-muted-foreground/60">or</span>
+                  <span className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-muted-foreground/60">
+                    or
+                  </span>
                   <div className="flex-1 h-px bg-border/50" />
                 </div>
 
-                <form onSubmit={handleMagicLink} className="space-y-3">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    sendCode();
+                  }}
+                  className="space-y-3"
+                >
                   <label className="block">
-                    <span className="font-sans text-xs font-light text-muted-foreground/80 mb-1.5 block">Email address</span>
+                    <span className="font-sans text-xs font-light text-muted-foreground/80 mb-1.5 block">
+                      Email address
+                    </span>
                     <input
                       type="email"
                       required
@@ -164,12 +291,22 @@ const Auth = () => {
                   </label>
                   <button
                     type="submit"
-                    disabled={emailSubmitting}
+                    disabled={submitting}
                     className="w-full inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all disabled:opacity-60"
                   >
-                    {emailSubmitting ? <Loader2 size={16} className="animate-spin" /> : <>Send sign-in link <ArrowRight size={14} /></>}
+                    {submitting ? (
+                      <Loader2 size={16} className="animate-spin" />
+                    ) : (
+                      <>
+                        Email me a sign-in code <ArrowRight size={14} />
+                      </>
+                    )}
                   </button>
                 </form>
+
+                <p className="font-sans text-[11px] font-light text-muted-foreground/55 text-center mt-4 leading-relaxed">
+                  We'll send a 6-digit code (and a one-tap link as a backup).
+                </p>
               </>
             )}
           </div>

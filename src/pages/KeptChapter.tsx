@@ -231,16 +231,16 @@ const KeptChapter = () => {
                 </span>
               </div>
               <figcaption
-                className="px-6 py-4 border-t font-serif italic text-[13px] text-foreground/60 flex items-center justify-between"
+                className="px-6 py-4 border-t font-serif italic text-[13px] text-foreground/62 flex items-center justify-between gap-4"
                 style={{
                   borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)",
                   background: "hsl(var(--stage-pregnancy) / 0.18)",
                 }}
               >
-                <span>Week {week} · {identity.chapterTitle}</span>
+                <span>A frame from week {week} — {identity.chapterTitle.toLowerCase()}.</span>
                 {savedAt && (
-                  <span className="font-sans not-italic text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/45">
-                    Held since {formatDate(savedAt)}
+                  <span className="font-sans not-italic text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/48 shrink-0">
+                    Kept · {formatDate(savedAt)}
                   </span>
                 )}
               </figcaption>

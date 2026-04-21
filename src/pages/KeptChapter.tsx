@@ -387,30 +387,54 @@ const KeptChapter = () => {
 
           {/* ============== RIGHT — the kept chapter itself ============== */}
           <article className="lg:col-span-8 mt-0 space-y-10 sm:space-y-12 lg:space-y-14">
-            {/* Tablet & mobile frontispiece — preserves the "kept chapter" framing
-                where the left rail used to sit. Hidden on lg+ (rail does this). */}
-            <div className="lg:hidden -mt-2 mb-2 sm:mb-4">
+            {/* ---------- Title block ----------
+                Tablet & mobile: this is the single composed frontispiece.
+                One eyebrow, one paired title, one held theme, one quiet
+                descriptor, then a slim "this chapter holds" ribbon. The
+                duplicated "Week X, still held" h1 + early card has been
+                removed so the opening reads as one unfolding object.
+                Lg+: the left rail owns the kept-chapter framing. */}
+            <header>
+              {/* Desktop-only kept-chapter eyebrow */}
               <p
-                className="font-sans text-[10px] font-medium tracking-[0.32em] uppercase mb-3"
+                className="font-sans text-[10.5px] font-medium tracking-[0.30em] uppercase mb-4 hidden lg:block"
                 style={{ color: accent }}
               >
                 A kept chapter · {weeksAgo} {weeksAgo === 1 ? "week" : "weeks"} ago
               </p>
-              <h1
-                className="font-serif font-medium text-foreground leading-[0.98] tracking-tight mb-3"
-                style={{ fontSize: "clamp(1.75rem, 4.6vw, 2.4rem)" }}
+              {/* Tablet/mobile-only unified eyebrow */}
+              <p
+                className="lg:hidden font-sans text-[10px] font-medium tracking-[0.32em] uppercase mb-3"
+                style={{ color: accent }}
               >
-                Week {week}, still held.
-              </h1>
-              <p className="font-serif text-[14px] sm:text-[14.5px] text-foreground/60 leading-[1.6] max-w-[44ch]">
-                A preserved chapter you can revisit, revise, and place back inside the wider shape of your pregnancy.
+                A kept chapter · {weeksAgo} {weeksAgo === 1 ? "week" : "weeks"} ago
               </p>
-              {/* Distilled chapter index — horizontal on tablet, stacked on mobile */}
-              <div
-                className="mt-5 sm:mt-6 rounded-[20px] keepsake-surface px-5 sm:px-6 py-4 sm:py-5"
-                style={{ borderColor: accentSoft(0.16) }}
+              <p className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase text-foreground/45 mb-4 sm:mb-5">
+                {trimesterLabel} · Week {week}
+              </p>
+              <h1
+                className="font-serif font-medium text-foreground leading-[0.96] tracking-tight mb-4 sm:mb-5"
+                style={{ fontSize: "clamp(2.1rem, 5.4vw, 4.2rem)" }}
               >
-                <div className="flex items-center gap-2 mb-3">
+                {identity.chapterTitle}
+              </h1>
+              <p className="font-serif italic text-[1.1rem] sm:text-[1.25rem] lg:text-[1.3rem] text-foreground/65 leading-[1.4] max-w-[36ch] mb-5 sm:mb-7">
+                {identity.theme}
+              </p>
+              <p className="font-serif text-[14.5px] sm:text-[15px] text-foreground/72 leading-[1.7] max-w-[52ch]">
+                A preserved chapter — still revisable. The week was lived; what follows is what was kept of it.
+              </p>
+
+              {/* Slim "this chapter holds" ribbon — tablet & mobile only.
+                  Hairline + italic list, sitting *after* the title block as
+                  marginalia rather than a card that interrupts the opening. */}
+              <div className="lg:hidden mt-7 sm:mt-8 relative pl-5 sm:pl-6">
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 top-1.5 bottom-1.5 w-px"
+                  style={{ background: `linear-gradient(to bottom, ${accentSoft(0.5)}, ${accentSoft(0.05)})` }}
+                />
+                <div className="flex items-center gap-2 mb-2.5">
                   <BookOpen size={11} strokeWidth={1.6} style={{ color: accent }} />
                   <p
                     className="font-sans text-[9.5px] font-medium tracking-[0.28em] uppercase"
@@ -419,43 +443,17 @@ const KeptChapter = () => {
                     This chapter holds
                   </p>
                 </div>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-7 gap-y-1.5">
                   {chapterHolds.map((h, i) => (
                     <li
                       key={i}
-                      className="font-serif text-[13px] text-foreground/68 leading-[1.45] pl-3 border-l"
-                      style={{ borderColor: accentSoft(0.32) }}
+                      className="font-serif italic text-[13px] sm:text-[13.5px] text-foreground/62 leading-[1.5]"
                     >
                       {h.label}
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
-
-            {/* Title block */}
-            <header>
-              <p
-                className="font-sans text-[10.5px] font-medium tracking-[0.30em] uppercase mb-4 hidden lg:block"
-                style={{ color: accent }}
-              >
-                A kept chapter · {weeksAgo} {weeksAgo === 1 ? "week" : "weeks"} ago
-              </p>
-              <p className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase text-foreground/45 mb-4 sm:mb-5">
-                {trimesterLabel} · Week {week}
-              </p>
-              <h2
-                className="font-serif font-medium text-foreground leading-[0.96] tracking-tight mb-4 sm:mb-5"
-                style={{ fontSize: "clamp(2.1rem, 5.4vw, 4.2rem)" }}
-              >
-                {identity.chapterTitle}
-              </h2>
-              <p className="font-serif italic text-[1.1rem] sm:text-[1.25rem] lg:text-[1.3rem] text-foreground/65 leading-[1.4] max-w-[36ch] mb-5 sm:mb-7">
-                {identity.theme}
-              </p>
-              <p className="font-serif text-[14.5px] sm:text-[15px] text-foreground/72 leading-[1.7] max-w-[52ch]">
-                This was one of those weeks that often leaves a quiet imprint — not because it was dramatic, but because pregnancy began to feel more lived-in than imagined.
-              </p>
             </header>
 
             {/* Memory band — photo + relational caption side-by-side on md+ */}

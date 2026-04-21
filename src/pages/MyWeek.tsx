@@ -119,11 +119,11 @@ const MyWeek = () => {
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
       <MyWeekHeader />
-      <main className="relative mx-auto w-full max-w-[680px] lg:max-w-[1200px] xl:max-w-[1320px] px-5 sm:px-8 md:px-12 lg:px-14">
-        {/* Two-zone desktop composition. Below lg, single column flow. */}
-        <div className="lg:grid lg:grid-cols-12 lg:gap-14 xl:gap-20">
+      <main className="relative mx-auto w-full max-w-[680px] md:max-w-[920px] lg:max-w-[1200px] xl:max-w-[1320px] px-5 sm:px-8 md:px-10 lg:px-14">
+        {/* Two-zone composition from md upward. Mobile = single column flow. */}
+        <div className="md:grid md:grid-cols-12 md:gap-10 lg:gap-14 xl:gap-20 md:items-start">
           {/* LEFT — Chapter + guidance */}
-          <div className="lg:col-span-7">
+          <div className="md:col-span-7">
             <MyWeekChapter
               greeting={getGreeting()}
               firstName={firstName}
@@ -138,10 +138,12 @@ const MyWeek = () => {
             />
           </div>
 
-          {/* RIGHT — One contained ritual rail */}
-          <aside className="lg:col-span-5 lg:pt-24">
+          {/* RIGHT — One contained ritual rail. Sticky on lg so it stays in
+              view as the left guidance scrolls, eliminating the empty
+              lower-right quadrant. */}
+          <aside className="md:col-span-5 mt-10 md:mt-0 md:pt-20 lg:pt-24 lg:sticky lg:top-28 lg:self-start">
             <div
-              className="relative rounded-[32px] px-7 sm:px-9 py-9 sm:py-10 keepsake-surface divide-y"
+              className="relative rounded-[28px] md:rounded-[32px] px-6 sm:px-8 md:px-7 lg:px-9 py-8 sm:py-9 lg:py-10 keepsake-surface divide-y"
               style={{
                 borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)",
                 ['--tw-divide-opacity' as string]: 1,

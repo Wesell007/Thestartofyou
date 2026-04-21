@@ -57,6 +57,8 @@ const KeptChapter = () => {
   const [isListening, setIsListening] = useState(false);
   const [voiceSupported, setVoiceSupported] = useState(false);
   const [voiceError, setVoiceError] = useState<string | null>(null);
+  const [lastInputWasVoice, setLastInputWasVoice] = useState(false);
+  const [showFirstWritten, setShowFirstWritten] = useState(false);
 
   useEffect(() => {
     const SR =
@@ -92,13 +94,14 @@ const KeptChapter = () => {
             const sep = prev && !prev.endsWith(" ") && !prev.endsWith("\n") ? " " : "";
             return prev + sep + finalChunk.trim();
           });
+          setLastInputWasVoice(true);
         }
         interimRef.current = interim;
       };
       rec.onerror = (e: any) => {
-        if (e?.error === "not-allowed") setVoiceError("Microphone permission was declined.");
-        else if (e?.error === "no-speech") setVoiceError("No speech was heard. Try again when ready.");
-        else setVoiceError("Voice paused. You can try again.");
+        if (e?.error === "not-allowed") setVoiceError("We couldn't hear you just now. You can try again, or type instead.");
+        else if (e?.error === "no-speech") setVoiceError("Some of that didn't come through. Your words are still here — you can speak again, or type the rest.");
+        else setVoiceError("Some of that didn't come through. Your words are still here.");
         setIsListening(false);
       };
       rec.onend = () => setIsListening(false);
@@ -106,7 +109,7 @@ const KeptChapter = () => {
       recognitionRef.current = rec;
       setIsListening(true);
     } catch {
-      setVoiceError("Voice couldn't start. You can keep typing.");
+      setVoiceError("We couldn't hear you just now. You can try again, or type instead.");
     }
   };
 
@@ -147,7 +150,12 @@ const KeptChapter = () => {
       const [{ data: profile }, { data: journey }, { data: refl }, { data: photo }] = await Promise.all([
         supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
         supabase.from("saved_journeys").select("lmp_date").eq("user_id", user.id).maybeSingle(),
-        supabase.from("reflections").select("content, updated_at").eq("user_id", user.id).eq("week", week).maybeSingle(),
+        supabase
+          .from("reflections")
+          .select("content, updated_at, first_written_content, first_written_at")
+          .eq("user_id", user.id)
+          .eq("week", week)
+          .maybeSingle(),
         supabase.from("week_photos").select("storage_path").eq("user_id", user.id).eq("week", week).maybeSingle(),
       ]);
       if (cancelled) return;
@@ -186,12 +194,71 @@ const KeptChapter = () => {
         reflection: reflContent,
         reflectionUpdatedAt: refl?.updated_at ?? null,
         photoUrl,
+        firstWrittenContent: refl?.first_written_content ?? null,
+        firstWrittenAt: refl?.first_written_at ?? null,
       });
     })();
     return () => {
       cancelled = true;
     };
   }, [week, validWeek, navigate]);
+
+  // Threshold for shaping availability on the kept note.
+  const keptThreshold = useShapingThreshold(reflection);
+
+  const acceptShapedDraft = async (shaped: string) => {
+    if (!state) return;
+    const captureFirstWritten =
+      !state.firstWrittenContent && initialRef.current.trim().length > 0;
+    const updates: Record<string, string | null> = { content: shaped };
+    if (captureFirstWritten) {
+      updates.first_written_content = initialRef.current;
+      updates.first_written_at = new Date().toISOString();
+    }
+    const { error } = await supabase
+      .from("reflections")
+      .upsert(
+        { user_id: state.userId, week, ...updates },
+        { onConflict: "user_id,week" }
+      );
+    if (!error) {
+      setReflection(shaped);
+      initialRef.current = shaped;
+      setSavedAt(new Date());
+      setSaveState("saved");
+      if (captureFirstWritten) {
+        setState((s) =>
+          s
+            ? {
+                ...s,
+                firstWrittenContent: initialRef.current,
+                firstWrittenAt: new Date().toISOString(),
+              }
+            : s
+        );
+      }
+      setLastInputWasVoice(false);
+      window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2000);
+    }
+  };
+
+  const restoreFirstWritten = async () => {
+    if (!state?.firstWrittenContent) return;
+    const { error } = await supabase
+      .from("reflections")
+      .upsert(
+        { user_id: state.userId, week, content: state.firstWrittenContent },
+        { onConflict: "user_id,week" }
+      );
+    if (!error) {
+      setReflection(state.firstWrittenContent);
+      initialRef.current = state.firstWrittenContent;
+      setSavedAt(new Date());
+      setSaveState("saved");
+      setShowFirstWritten(false);
+      window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2000);
+    }
+  };
 
   // Editable reflection — debounced autosave.
   useEffect(() => {

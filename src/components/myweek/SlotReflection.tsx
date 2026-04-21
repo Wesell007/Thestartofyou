@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Lock } from "lucide-react";
+import { Lock, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { MyWeekEntry } from "@/data/myWeekContent";
+import SlotReflectionAssistant from "./SlotReflectionAssistant";
 
 interface Props {
   content: MyWeekEntry;
@@ -26,6 +27,7 @@ const SlotReflection = ({ content, userId, week }: Props) => {
   const [loaded, setLoaded] = useState(false);
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [savedAt, setSavedAt] = useState<Date | null>(null);
+  const [assistantOpen, setAssistantOpen] = useState(false);
   const initialRef = useRef<string>("");
   const debounceRef = useRef<number | null>(null);
 

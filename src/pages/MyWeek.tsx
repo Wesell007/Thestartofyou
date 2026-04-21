@@ -5,8 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
-import MyWeekHero from "@/components/myweek/MyWeekHero";
-import SlotWhatMatters from "@/components/myweek/SlotWhatMatters";
+import MyWeekChapter from "@/components/myweek/MyWeekChapter";
 import SlotOneFocus from "@/components/myweek/SlotOneFocus";
 import SlotPhotoMemory from "@/components/myweek/SlotPhotoMemory";
 import SlotReflection from "@/components/myweek/SlotReflection";
@@ -119,29 +118,39 @@ const MyWeek = () => {
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
       <MyWeekHeader />
-      <main className="mx-auto w-full max-w-[640px] md:max-w-[680px] px-5 sm:px-8 md:px-12">
-        <MyWeekHero
-          greeting={getGreeting()}
-          firstName={firstName}
-          week={currentWeek}
-          dueDateLabel={formatDueDate(dueDate)}
-          trimesterLabel={trimesterLabel}
-          chapterTitle={identity.chapterTitle}
-          theme={identity.theme}
-          developmentCue={identity.developmentCue}
-          babyNote={identity.babyNote}
-        />
-        <SlotWhatMatters content={content} trimesterLabel={trimesterLabel} week={currentWeek} />
-        <SlotOneFocus content={content} />
-        <SlotPhotoMemory userId={userId} week={currentWeek} chapterTitle={identity.chapterTitle} />
-        <SlotReflection content={content} userId={userId} week={currentWeek} />
-        <SlotCompanionRecall userId={userId} currentWeek={currentWeek} />
-        <SlotWhatsNext
-          content={content}
-          nextWeek={nextWeek}
-          nextChapterTitle={nextIdentity?.chapterTitle}
-          nextTheme={nextIdentity?.theme}
-        />
+      <main className="relative mx-auto w-full max-w-[680px] lg:max-w-[1200px] xl:max-w-[1320px] px-5 sm:px-8 md:px-12 lg:px-14">
+        {/* Two-zone desktop composition. Below lg, single column flow. */}
+        <div className="lg:grid lg:grid-cols-12 lg:gap-14 xl:gap-20">
+          {/* LEFT — Chapter + guidance */}
+          <div className="lg:col-span-7">
+            <MyWeekChapter
+              greeting={getGreeting()}
+              firstName={firstName}
+              week={currentWeek}
+              dueDateLabel={formatDueDate(dueDate)}
+              trimesterLabel={trimesterLabel}
+              chapterTitle={identity.chapterTitle}
+              theme={identity.theme}
+              developmentCue={identity.developmentCue}
+              babyNote={identity.babyNote}
+              content={content}
+            />
+          </div>
+
+          {/* RIGHT — Focus · Photo · Reflection · Companion · Next chapter */}
+          <aside className="lg:col-span-5 lg:pt-24 space-y-0 lg:space-y-2">
+            <SlotOneFocus content={content} />
+            <SlotPhotoMemory userId={userId} week={currentWeek} chapterTitle={identity.chapterTitle} />
+            <SlotReflection content={content} userId={userId} week={currentWeek} />
+            <SlotCompanionRecall userId={userId} currentWeek={currentWeek} />
+            <SlotWhatsNext
+              content={content}
+              nextWeek={nextWeek}
+              nextChapterTitle={nextIdentity?.chapterTitle}
+              nextTheme={nextIdentity?.theme}
+            />
+          </aside>
+        </div>
       </main>
       <MyWeekFooter contextual={contextual} />
     </div>

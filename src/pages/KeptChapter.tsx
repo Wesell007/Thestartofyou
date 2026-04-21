@@ -467,16 +467,33 @@ const KeptChapter = () => {
                   style={{ borderColor: accentSoft(0.16) }}
                 >
                   <div
-                    className="sm:col-span-7 relative px-8 py-12 sm:py-14 flex flex-col items-center justify-center text-center"
+                    className="sm:col-span-7 relative px-8 py-14 sm:py-16 flex flex-col items-center justify-center text-center"
                     style={{
                       background:
                         "radial-gradient(120% 80% at 50% 40%, hsl(var(--stage-pregnancy) / 0.55), transparent 75%)",
                     }}
                   >
-                    <WeekIllustration week={week} size={170} className="mx-auto opacity-90" />
-                    <p className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase text-foreground/45 mt-5">
-                      Week {week} · Held without an image
-                    </p>
+                    {/* Pressed botanical / preserved frame — emotionally held, not absent */}
+                    <div className="relative">
+                      <div
+                        aria-hidden="true"
+                        className="absolute -inset-6 rounded-full"
+                        style={{
+                          background:
+                            "radial-gradient(circle, hsl(var(--stage-pregnancy) / 0.45), transparent 70%)",
+                        }}
+                      />
+                      <WeekIllustration week={week} size={170} className="relative mx-auto opacity-90" />
+                    </div>
+                    <div className="flex items-center gap-2 mt-6">
+                      <Lock size={10} strokeWidth={1.8} style={{ color: accent }} />
+                      <p
+                        className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase"
+                        style={{ color: accent }}
+                      >
+                        Held in words · Week {week}
+                      </p>
+                    </div>
                   </div>
                   <figcaption
                     className="sm:col-span-5 px-7 py-9 flex flex-col justify-between gap-4"
@@ -490,12 +507,15 @@ const KeptChapter = () => {
                         What this week held
                       </p>
                       <p className="font-serif text-[1.5rem] sm:text-[1.6rem] text-foreground/85 leading-[1.15] tracking-tight">
-                        A week that sat quietly, then stayed.
+                        Some weeks are remembered in words, not pictures.
                       </p>
                       <p className="font-serif italic text-[13px] text-foreground/58 mt-3 leading-relaxed">
-                        You did not keep an image from this week, but the chapter remains. The feeling of it is still here, and the note from that time is part of the record.
+                        No image was kept from week {week}, and the chapter is no thinner for it. The shape of it is still here, in what you wrote and what you were holding.
                       </p>
                     </div>
+                    <p className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/45">
+                      A chapter, kept regardless
+                    </p>
                   </figcaption>
                 </figure>
               )}

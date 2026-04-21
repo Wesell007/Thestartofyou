@@ -780,7 +780,7 @@ const KeptChapter = () => {
 
             {/* What mattered then — substantial chapter-like section */}
             <section
-              className="rounded-[28px] keepsake-surface px-7 sm:px-10 py-10 sm:py-12"
+              className="rounded-[28px] keepsake-surface px-6 sm:px-10 py-9 sm:py-12"
               style={{ borderColor: accentSoft(0.16) }}
             >
               <div className="flex items-center gap-3 mb-6">

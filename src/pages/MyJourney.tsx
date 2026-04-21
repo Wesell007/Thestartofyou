@@ -113,10 +113,11 @@ const MyJourney = () => {
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
       <MyWeekHeader />
-      <main className="relative mx-auto w-full max-w-[680px] lg:max-w-[1200px] xl:max-w-[1320px] px-5 sm:px-8 md:px-12 lg:px-14 pt-20 sm:pt-24 lg:pt-28 pb-20 sm:pb-24 lg:pb-32">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-14 xl:gap-20">
-          {/* LEFT — meaning / summary / companion framing */}
-          <div className="lg:col-span-5 mb-12 lg:mb-0">
+      <main className="relative mx-auto w-full max-w-[680px] md:max-w-[920px] lg:max-w-[1200px] xl:max-w-[1320px] px-5 sm:px-8 md:px-10 lg:px-14 pt-20 sm:pt-24 lg:pt-28 pb-20 sm:pb-24 lg:pb-32">
+        <div className="md:grid md:grid-cols-12 md:gap-10 lg:gap-14 xl:gap-20 md:items-start">
+          {/* LEFT — meaning / summary / companion framing. Sticky on lg so
+              it accompanies the spine without leaving an empty quadrant. */}
+          <div className="md:col-span-5 mb-12 md:mb-0 lg:sticky lg:top-28 lg:self-start">
             <JourneyMeaning
               firstName={firstName}
               currentWeek={currentWeek}
@@ -126,7 +127,7 @@ const MyJourney = () => {
           </div>
 
           {/* RIGHT — vertical week spine */}
-          <section className="relative lg:col-span-7">
+          <section className="relative md:col-span-7">
             {/* Spine line */}
             <div
               aria-hidden="true"

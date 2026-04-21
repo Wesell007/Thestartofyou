@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { differenceInDays } from "date-fns";
-import { ArrowLeft, ArrowRight, Lock, BookOpen } from "lucide-react";
+import { ArrowLeft, ArrowRight, Lock, BookOpen, Mic, MicOff, Feather } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
@@ -48,6 +48,82 @@ const KeptChapter = () => {
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved">("idle");
   const initialRef = useRef("");
   const debounceRef = useRef<number | null>(null);
+  const recognitionRef = useRef<any>(null);
+  const interimRef = useRef("");
+  const [isListening, setIsListening] = useState(false);
+  const [voiceSupported, setVoiceSupported] = useState(false);
+  const [voiceError, setVoiceError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const SR =
+      typeof window !== "undefined" &&
+      ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
+    setVoiceSupported(Boolean(SR));
+  }, []);
+
+  const startListening = () => {
+    setVoiceError(null);
+    const SR =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SR) {
+      setVoiceError("Voice isn't available in this browser.");
+      return;
+    }
+    try {
+      const rec = new SR();
+      rec.continuous = true;
+      rec.interimResults = true;
+      rec.lang = "en-GB";
+      interimRef.current = "";
+      rec.onresult = (event: any) => {
+        let finalChunk = "";
+        let interim = "";
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const r = event.results[i];
+          if (r.isFinal) finalChunk += r[0].transcript;
+          else interim += r[0].transcript;
+        }
+        if (finalChunk) {
+          setReflection((prev) => {
+            const sep = prev && !prev.endsWith(" ") && !prev.endsWith("\n") ? " " : "";
+            return prev + sep + finalChunk.trim();
+          });
+        }
+        interimRef.current = interim;
+      };
+      rec.onerror = (e: any) => {
+        if (e?.error === "not-allowed") setVoiceError("Microphone permission was declined.");
+        else if (e?.error === "no-speech") setVoiceError("No speech was heard. Try again when ready.");
+        else setVoiceError("Voice paused. You can try again.");
+        setIsListening(false);
+      };
+      rec.onend = () => setIsListening(false);
+      rec.start();
+      recognitionRef.current = rec;
+      setIsListening(true);
+    } catch {
+      setVoiceError("Voice couldn't start. You can keep typing.");
+    }
+  };
+
+  const stopListening = () => {
+    try {
+      recognitionRef.current?.stop();
+    } catch {
+      /* noop */
+    }
+    setIsListening(false);
+  };
+
+  useEffect(() => {
+    return () => {
+      try {
+        recognitionRef.current?.abort?.();
+      } catch {
+        /* noop */
+      }
+    };
+  }, []);
 
   const validWeek = Number.isFinite(week) && week >= 1 && week <= MAX_PREGNANCY_WEEK;
 
@@ -391,16 +467,33 @@ const KeptChapter = () => {
                   style={{ borderColor: accentSoft(0.16) }}
                 >
                   <div
-                    className="sm:col-span-7 relative px-8 py-12 sm:py-14 flex flex-col items-center justify-center text-center"
+                    className="sm:col-span-7 relative px-8 py-14 sm:py-16 flex flex-col items-center justify-center text-center"
                     style={{
                       background:
                         "radial-gradient(120% 80% at 50% 40%, hsl(var(--stage-pregnancy) / 0.55), transparent 75%)",
                     }}
                   >
-                    <WeekIllustration week={week} size={170} className="mx-auto opacity-90" />
-                    <p className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase text-foreground/45 mt-5">
-                      Week {week} · Held without an image
-                    </p>
+                    {/* Pressed botanical / preserved frame — emotionally held, not absent */}
+                    <div className="relative">
+                      <div
+                        aria-hidden="true"
+                        className="absolute -inset-6 rounded-full"
+                        style={{
+                          background:
+                            "radial-gradient(circle, hsl(var(--stage-pregnancy) / 0.45), transparent 70%)",
+                        }}
+                      />
+                      <WeekIllustration week={week} size={170} className="relative mx-auto opacity-90" />
+                    </div>
+                    <div className="flex items-center gap-2 mt-6">
+                      <Lock size={10} strokeWidth={1.8} style={{ color: accent }} />
+                      <p
+                        className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase"
+                        style={{ color: accent }}
+                      >
+                        Held in words · Week {week}
+                      </p>
+                    </div>
                   </div>
                   <figcaption
                     className="sm:col-span-5 px-7 py-9 flex flex-col justify-between gap-4"
@@ -414,12 +507,15 @@ const KeptChapter = () => {
                         What this week held
                       </p>
                       <p className="font-serif text-[1.5rem] sm:text-[1.6rem] text-foreground/85 leading-[1.15] tracking-tight">
-                        A week that sat quietly, then stayed.
+                        Some weeks are remembered in words, not pictures.
                       </p>
                       <p className="font-serif italic text-[13px] text-foreground/58 mt-3 leading-relaxed">
-                        You did not keep an image from this week, but the chapter remains. The feeling of it is still here, and the note from that time is part of the record.
+                        No image was kept from week {week}, and the chapter is no thinner for it. The shape of it is still here, in what you wrote and what you were holding.
                       </p>
                     </div>
+                    <p className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/45">
+                      A chapter, kept regardless
+                    </p>
                   </figcaption>
                 </figure>
               )}
@@ -454,13 +550,36 @@ const KeptChapter = () => {
                 </h3>
 
                 <div
-                  className="relative rounded-[24px] keepsake-surface"
-                  style={{ borderColor: accentSoft(0.16) }}
+                  className="relative rounded-[24px] keepsake-surface overflow-hidden"
+                  style={{ borderColor: accentSoft(0.18) }}
                 >
-                  <div className="relative px-6 sm:px-8 pt-7 pb-2">
+                  {/* Quiet preserved-note header — wax-seal cue, not a chrome bar */}
+                  <div
+                    className="flex items-center justify-between gap-3 px-6 sm:px-8 pt-5 pb-3"
+                    style={{
+                      background: `linear-gradient(180deg, ${tint(0.18)}, transparent)`,
+                    }}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Feather size={12} strokeWidth={1.6} style={{ color: accent }} />
+                      <span
+                        className="font-sans text-[9.5px] font-medium tracking-[0.26em] uppercase"
+                        style={{ color: accent }}
+                      >
+                        Note from week {week}
+                      </span>
+                    </div>
+                    <span
+                      className="font-serif italic text-[11.5px] text-foreground/50"
+                    >
+                      Preserved · still revisable
+                    </span>
+                  </div>
+
+                  <div className="relative px-6 sm:px-8 pt-3 pb-2">
                     <span
                       aria-hidden="true"
-                      className="absolute left-5 sm:left-7 top-7 bottom-12 w-[1.5px] rounded-full"
+                      className="absolute left-5 sm:left-7 top-3 bottom-12 w-[1.5px] rounded-full"
                       style={{
                         background:
                           "linear-gradient(to bottom, hsl(var(--stage-pregnancy-accent) / 0.55), hsl(var(--stage-pregnancy-accent) / 0.04))",
@@ -478,10 +597,72 @@ const KeptChapter = () => {
                       aria-label={`Your reflection for week ${week}`}
                       className="w-full bg-transparent border-0 pl-5 sm:pl-6 pr-0 py-2 font-serif text-[16.5px] sm:text-[17.5px] italic font-normal text-foreground placeholder:text-foreground/35 placeholder:italic resize-none focus:outline-none leading-[1.85] min-h-[170px] caret-[hsl(var(--stage-pregnancy-accent))]"
                     />
+                    {isListening && interimRef.current && (
+                      <p className="pl-5 sm:pl-6 -mt-1 mb-2 font-serif italic text-[14.5px] text-foreground/40 leading-[1.65]">
+                        {interimRef.current}
+                      </p>
+                    )}
                   </div>
+
+                  {/* Voice path — restrained, inside the note */}
                   <div
-                    className="flex items-center justify-between px-6 sm:px-8 py-3.5 border-t gap-4"
-                    style={{ borderColor: accentSoft(0.16) }}
+                    className="px-6 sm:px-8 py-3 border-t flex items-center justify-between gap-4 flex-wrap"
+                    style={{
+                      borderColor: accentSoft(0.14),
+                      background: tint(0.08),
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={isListening ? stopListening : startListening}
+                      disabled={!voiceSupported}
+                      aria-pressed={isListening}
+                      className="group inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                      style={{
+                        background: isListening ? accentSoft(0.14) : "hsl(var(--card))",
+                        border: `1px solid ${accentSoft(isListening ? 0.45 : 0.22)}`,
+                        color: accent,
+                      }}
+                      title={
+                        voiceSupported
+                          ? isListening
+                            ? "Tap to stop"
+                            : "Speak this week out loud"
+                          : "Voice isn't available in this browser"
+                      }
+                    >
+                      <span className="relative flex items-center justify-center w-4 h-4">
+                        {isListening ? (
+                          <>
+                            <span
+                              aria-hidden="true"
+                              className="absolute inset-0 rounded-full animate-ping"
+                              style={{ background: accentSoft(0.4) }}
+                            />
+                            <MicOff size={12} strokeWidth={1.8} className="relative" />
+                          </>
+                        ) : (
+                          <Mic size={12} strokeWidth={1.8} />
+                        )}
+                      </span>
+                      <span className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase">
+                        {isListening ? "Listening · tap to stop" : "Speak instead"}
+                      </span>
+                    </button>
+                    <span className="font-serif italic text-[11.5px] text-foreground/45">
+                      {voiceError
+                        ? voiceError
+                        : isListening
+                          ? "Speak gently. Words appear as you go."
+                          : voiceSupported
+                            ? "If typing isn't easy, say what you remember."
+                            : "Typing only in this browser."}
+                    </span>
+                  </div>
+
+                  <div
+                    className="flex items-center justify-between px-6 sm:px-8 py-3 border-t gap-4"
+                    style={{ borderColor: accentSoft(0.14) }}
                   >
                     <span
                       className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase"
@@ -496,7 +677,7 @@ const KeptChapter = () => {
                 </div>
 
                 <p className="font-serif italic text-[12.5px] text-foreground/48 mt-3 pl-1">
-                  You can still refine this note if the words come more clearly now.
+                  Type or speak — both are kept the same way. You can still refine this note if the words come more clearly now.
                 </p>
               </div>
 

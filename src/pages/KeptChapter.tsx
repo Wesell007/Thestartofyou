@@ -862,7 +862,7 @@ const KeptChapter = () => {
                     color: accent,
                   }}
                 >
-                  <span className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase">
+                  <span className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase whitespace-nowrap">
                     Return to the live week
                   </span>
                   <ArrowRight size={12} strokeWidth={1.8} className="transition-transform group-hover:translate-x-0.5" />

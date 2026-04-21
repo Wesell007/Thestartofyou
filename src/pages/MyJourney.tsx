@@ -328,23 +328,20 @@ const MyJourney = () => {
                         );
                       })()
                     ) : (
-                      <div className="ml-12 sm:ml-14 lg:ml-16 py-5 sm:py-6 opacity-50">
-                        <div className="flex items-baseline justify-between gap-4 mb-1">
+                      <div className="ml-12 sm:ml-14 lg:ml-16 py-2.5 pr-2 opacity-42">
+                        <div className="flex items-baseline justify-between gap-4">
                           <div className="flex items-baseline gap-3 min-w-0">
-                            <span className="font-serif font-medium text-[1rem] sm:text-[1.05rem] text-foreground/72 shrink-0">
+                            <span className="font-serif font-medium text-[0.95rem] sm:text-[1rem] text-foreground/68 shrink-0">
                               Week {w}
                             </span>
-                            <span className="font-serif italic text-[14px] text-foreground/52 truncate">
+                            <span className="font-serif italic text-[13.5px] sm:text-[14px] text-foreground/45 truncate">
                               {identity.chapterTitle}
                             </span>
                           </div>
-                          <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/28">
+                          <span className="font-sans text-[9.5px] font-medium tracking-[0.24em] uppercase text-foreground/28 shrink-0">
                             Ahead
                           </span>
                         </div>
-                        <p className="font-serif italic text-[13.5px] sm:text-[14px] text-foreground/42 leading-[1.5] pl-0 sm:pl-0">
-                          {identity.theme}
-                        </p>
                       </div>
                     )}
                   </li>

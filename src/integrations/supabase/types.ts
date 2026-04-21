@@ -129,6 +129,8 @@ export type Database = {
         Row: {
           content: string
           created_at: string
+          first_written_at: string | null
+          first_written_content: string | null
           id: string
           updated_at: string
           user_id: string
@@ -137,6 +139,8 @@ export type Database = {
         Insert: {
           content?: string
           created_at?: string
+          first_written_at?: string | null
+          first_written_content?: string | null
           id?: string
           updated_at?: string
           user_id: string
@@ -145,6 +149,8 @@ export type Database = {
         Update: {
           content?: string
           created_at?: string
+          first_written_at?: string | null
+          first_written_content?: string | null
           id?: string
           updated_at?: string
           user_id?: string

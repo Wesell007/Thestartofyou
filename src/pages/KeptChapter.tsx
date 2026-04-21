@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { differenceInDays } from "date-fns";
-import { ArrowLeft, ArrowRight, Lock, BookOpen } from "lucide-react";
+import { ArrowLeft, ArrowRight, Lock, BookOpen, Mic, MicOff, Feather } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";

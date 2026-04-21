@@ -62,7 +62,7 @@ const SlotCompanionRecall = ({ userId, currentWeek }: Props) => {
 
   return (
     <section className="relative pt-10 pb-2">
-      <div className="flex items-center gap-3 mb-5">
+      <div className="flex items-center gap-3 mb-4">
         <span
           aria-hidden="true"
           className="block w-5 h-px"
@@ -76,40 +76,35 @@ const SlotCompanionRecall = ({ userId, currentWeek }: Props) => {
         </p>
       </div>
 
-      <p className="font-serif italic text-[14.5px] text-foreground/55 mb-5 max-w-[40ch]">
+      <p className="font-serif italic text-[14px] text-foreground/55 mb-5 max-w-[40ch]">
         You wrote this {weeksAgo} {weeksAgo === 1 ? "week" : "weeks"} ago — held since.
       </p>
 
-      <Link
-        to="/my-journey"
-        className="group block rounded-[20px] keepsake-surface px-6 py-6 transition-all duration-500 hover:shadow-[0_22px_56px_-26px_hsl(var(--stage-pregnancy-accent)/0.28),0_3px_12px_-6px_hsl(222_14%_12%/0.06)]"
-      >
-        <div className="flex items-baseline justify-between gap-4 mb-3">
-          <p
-            className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase"
-            style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-          >
-            Week {recall.week} · {identity.chapterTitle}
-          </p>
-          <span className="font-sans text-[9.5px] font-medium tracking-[0.22em] uppercase text-foreground/40">
-            Held
-          </span>
-        </div>
-
+      {/* Flat treatment — no inner card; the rail itself is the surface.
+          The recall reads as a quote, not another nested object. */}
+      <Link to={`/my-week/${recall.week}`} className="group block">
         <p
-          className="font-serif italic text-[14.5px] text-foreground/72 leading-[1.75] border-l-2 pl-4"
+          className="font-serif italic text-[15px] sm:text-[15.5px] text-foreground/72 leading-[1.8] border-l-2 pl-5"
           style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
         >
           "{excerpt}"
         </p>
 
-        <div className="flex items-center gap-1.5 mt-5 font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-foreground/55 group-hover:text-foreground/80 transition-colors">
-          See your record
-          <ArrowUpRight
-            size={12}
-            strokeWidth={1.5}
-            className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          />
+        <div className="flex items-center justify-between gap-3 mt-4 pl-5">
+          <span
+            className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase"
+            style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+          >
+            Week {recall.week} · {identity.chapterTitle}
+          </span>
+          <span className="inline-flex items-center gap-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/55 group-hover:text-foreground/80 transition-colors">
+            Open
+            <ArrowUpRight
+              size={11}
+              strokeWidth={1.6}
+              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </span>
         </div>
       </Link>
     </section>

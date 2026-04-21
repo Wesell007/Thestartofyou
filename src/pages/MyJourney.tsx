@@ -239,7 +239,7 @@ const MyJourney = () => {
                           // the spine, never competes with held weeks.
                           return (
                             <a
-                              href="/my-week"
+                              href={`/my-week/${w}`}
                               className="block ml-12 sm:ml-14 lg:ml-16 py-2.5 pr-2 group transition-opacity duration-300 opacity-55 hover:opacity-90"
                             >
                               <div className="flex items-baseline justify-between gap-4">
@@ -260,7 +260,7 @@ const MyJourney = () => {
                         }
                         return (
                           <a
-                            href="/my-week"
+                            href={`/my-week/${w}`}
                             className="block ml-12 sm:ml-14 lg:ml-16 my-2 group transition-all duration-500 rounded-[20px] keepsake-surface px-5 sm:px-6 py-5 sm:py-6 hover:shadow-[0_22px_56px_-26px_hsl(var(--stage-pregnancy-accent)/0.28),0_3px_12px_-6px_hsl(222_14%_12%/0.06)]"
                           >
                             <div className="flex gap-5">

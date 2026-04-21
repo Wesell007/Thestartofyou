@@ -703,7 +703,10 @@ const KeptChapter = () => {
                     />
                     <textarea
                       value={reflection}
-                      onChange={(e) => setReflection(e.target.value)}
+                      onChange={(e) => {
+                        setReflection(e.target.value);
+                        setLastInputWasVoice(false);
+                      }}
                       rows={6}
                       placeholder={
                         hasReflection
@@ -771,8 +774,8 @@ const KeptChapter = () => {
                         : isListening
                           ? "Speak gently. Words appear as you go."
                           : voiceSupported
-                            ? "If typing isn't easy, say what you remember."
-                            : "Typing only in this browser."}
+                            ? "When you speak, we turn it into words so you can keep the note."
+                            : "Voice isn't available in this browser."}
                     </span>
                   </div>
 
@@ -784,15 +787,88 @@ const KeptChapter = () => {
                       className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase"
                       style={{ color: accent }}
                     >
-                      {saveState === "saving" ? "Holding…" : "Held"}
+                      {saveState === "saving" ? "Holding" : "Held"}
                     </span>
                     <span className="font-serif italic text-[12px] text-foreground/45 hidden sm:inline">
-                      {savedAt ? `Last tended ${formatDate(savedAt)}` : "Autosaves as you write"}
+                      {saveState === "saving"
+                        ? "Still saving. Your words are still here."
+                        : savedAt
+                          ? `Last tended ${formatDate(savedAt)}`
+                          : "Autosaves as you write"}
                     </span>
                   </div>
                 </div>
 
-                <p className="font-serif italic text-[12.5px] text-foreground/48 mt-3 pl-1">
+                {/* Inline shaping — quieter register for kept chapters.
+                    Only appears when the note has enough material to shape. */}
+                <div className="mt-4 pl-1">
+                  <NoteShapingSuggestion
+                    original={reflection}
+                    week={week}
+                    available={keptThreshold.available}
+                    lastInputWasVoice={lastInputWasVoice}
+                    register="kept"
+                    onAccept={acceptShapedDraft}
+                  />
+                </div>
+
+                {/* First-written recovery — only when a shape was accepted */}
+                {state.firstWrittenContent && (
+                  <div className="mt-4 pl-1">
+                    {!showFirstWritten ? (
+                      <button
+                        type="button"
+                        onClick={() => setShowFirstWritten(true)}
+                        className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase transition-opacity hover:opacity-80"
+                        style={{ color: accent }}
+                      >
+                        View as first written
+                      </button>
+                    ) : (
+                      <div
+                        className="rounded-[18px] keepsake-surface px-5 py-4"
+                        style={{ borderColor: accentSoft(0.16) }}
+                      >
+                        <div className="flex items-center justify-between gap-3 mb-3">
+                          <p
+                            className="font-sans text-[9.5px] font-medium tracking-[0.26em] uppercase"
+                            style={{ color: accent }}
+                          >
+                            First written
+                            {state.firstWrittenAt
+                              ? ` · ${formatDate(new Date(state.firstWrittenAt))}`
+                              : ""}
+                          </p>
+                          <button
+                            type="button"
+                            onClick={() => setShowFirstWritten(false)}
+                            className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/55 hover:text-foreground/85 transition-colors"
+                          >
+                            Close
+                          </button>
+                        </div>
+                        <p className="font-serif italic text-[15px] text-foreground/75 leading-[1.75] whitespace-pre-wrap">
+                          {state.firstWrittenContent}
+                        </p>
+                        <div className="mt-4 flex items-center gap-4">
+                          <button
+                            type="button"
+                            onClick={restoreFirstWritten}
+                            className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase transition-opacity hover:opacity-80"
+                            style={{ color: accent }}
+                          >
+                            Restore this
+                          </button>
+                          <span className="font-serif italic text-[11.5px] text-foreground/45">
+                            Your original, still here.
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                <p className="font-serif italic text-[12.5px] text-foreground/48 mt-4 pl-1">
                   Type or speak — both are kept the same way. You can still refine this note if the words come more clearly now.
                 </p>
               </div>

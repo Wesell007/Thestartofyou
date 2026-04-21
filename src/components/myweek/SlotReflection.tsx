@@ -174,7 +174,7 @@ const SlotReflection = ({ content, userId, week }: Props) => {
 
         {/* Footer — held status */}
         <div
-          className="flex items-center justify-between px-7 sm:px-10 py-5 border-t"
+          className="flex items-center justify-between px-7 sm:px-10 py-5 border-t gap-4"
           style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)" }}
         >
           <div className="flex items-center gap-2">
@@ -192,11 +192,35 @@ const SlotReflection = ({ content, userId, week }: Props) => {
               {saveState === "saving" ? "Holding…" : "Held"}
             </span>
           </div>
-          <span className="font-serif italic text-[12.5px] text-foreground/45 tracking-wide">
+          <span className="font-serif italic text-[12.5px] text-foreground/45 tracking-wide hidden sm:inline">
             {statusLabel}
           </span>
+          {!assistantOpen && (
+            <button
+              type="button"
+              onClick={() => setAssistantOpen(true)}
+              className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium tracking-[0.18em] uppercase transition-opacity hover:opacity-80"
+              style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+              aria-label="Open reflection assistant"
+            >
+              <Sparkles size={11} strokeWidth={1.8} />
+              Speak it instead
+            </button>
+          )}
         </div>
       </div>
+
+      {assistantOpen && (
+        <SlotReflectionAssistant
+          week={week}
+          onAccept={(text) => {
+            const next = value.trim().length > 0 ? `${value.trim()}\n\n${text}` : text;
+            setValue(next);
+            setAssistantOpen(false);
+          }}
+          onClose={() => setAssistantOpen(false)}
+        />
+      )}
 
       {/* Continuity colophon */}
       <p className="font-serif italic text-[13px] sm:text-[13.5px] text-foreground/45 mt-6 sm:mt-7 max-w-[42ch]">

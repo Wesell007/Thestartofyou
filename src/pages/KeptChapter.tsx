@@ -266,10 +266,11 @@ const KeptChapter = () => {
           </Link>
         </div>
 
-        {/* Two-zone preserved chapter object */}
-        <div className="md:grid md:grid-cols-12 md:gap-10 lg:gap-16 xl:gap-20 md:items-start">
-          {/* ============== LEFT — chapter context rail ============== */}
-          <aside className="md:col-span-4 lg:col-span-4 md:sticky md:top-24 md:self-start space-y-5">
+        {/* Two-zone preserved chapter object — desktop only.
+            Tablet & mobile unfold as a single composed chapter. */}
+        <div className="lg:grid lg:grid-cols-12 lg:gap-16 xl:gap-20 lg:items-start">
+          {/* ============== LEFT — chapter context rail (lg+ only) ============== */}
+          <aside className="hidden lg:block lg:col-span-4 lg:sticky lg:top-24 lg:self-start space-y-5">
             {/* Frontispiece */}
             <div>
               <p

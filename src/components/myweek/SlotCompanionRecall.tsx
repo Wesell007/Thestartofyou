@@ -86,9 +86,6 @@ const SlotCompanionRecall = ({ userId, currentWeek }: Props) => {
             className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase"
             style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
           >
-            <span className="serif-numeral italic font-normal text-foreground/55 normal-case tracking-normal text-[14px] mr-2">
-              {String(recall.week).padStart(2, "0")}
-            </span>
             Week {recall.week} · {identity.chapterTitle}
           </p>
           <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/40 group-hover:text-foreground/70 transition-colors">

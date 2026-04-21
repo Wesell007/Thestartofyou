@@ -67,13 +67,15 @@ const SlotWhatMatters = ({ content, trimesterLabel, week }: Props) => {
             />
 
             <div className="flex items-baseline gap-5 sm:gap-6">
-              {/* Serif italic numeral — editorial chapter mark */}
+              {/* Quiet vertical mark — replaces robotic numeral */}
               <span
-                className="serif-numeral italic font-normal text-[1.6rem] sm:text-[1.8rem] shrink-0 leading-none pt-1"
-                style={{ color: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
+                aria-hidden="true"
+                className="block w-[3px] h-10 rounded-full shrink-0 mt-1"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, hsl(var(--stage-pregnancy-accent) / 0.7), hsl(var(--stage-pregnancy-accent) / 0.18))",
+                }}
+              />
 
               <div className="flex-1 min-w-0">
                 <p

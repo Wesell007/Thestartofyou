@@ -232,14 +232,35 @@ const MyJourney = () => {
                     ) : isPast ? (
                       (() => {
                         const isHeld = !!(reflection || photo);
+                        if (!isHeld) {
+                          // Untouched past week — a single quiet inline row.
+                          // No frame, no placeholder block. Reads as part of
+                          // the spine, never competes with held weeks.
+                          return (
+                            <a
+                              href="/my-week"
+                              className="block ml-12 sm:ml-14 lg:ml-16 py-2.5 pr-2 group transition-opacity duration-300 opacity-55 hover:opacity-90"
+                            >
+                              <div className="flex items-baseline justify-between gap-4">
+                                <div className="flex items-baseline gap-3 min-w-0">
+                                  <span className="font-serif font-medium text-[0.95rem] sm:text-[1rem] text-foreground/68 shrink-0">
+                                    Week {w}
+                                  </span>
+                                  <span className="font-serif italic text-[13.5px] sm:text-[14px] text-foreground/45 truncate">
+                                    {identity.chapterTitle}
+                                  </span>
+                                </div>
+                                <span className="font-sans text-[9.5px] font-medium tracking-[0.24em] uppercase text-foreground/28 shrink-0">
+                                  Earlier
+                                </span>
+                              </div>
+                            </a>
+                          );
+                        }
                         return (
                           <a
                             href="/my-week"
-                            className={`block ml-12 sm:ml-14 lg:ml-16 my-2 group transition-all duration-500 ${
-                              isHeld
-                                ? "rounded-[20px] keepsake-surface px-5 sm:px-6 py-5 sm:py-6 hover:shadow-[0_22px_56px_-26px_hsl(var(--stage-pregnancy-accent)/0.28),0_3px_12px_-6px_hsl(222_14%_12%/0.06)]"
-                                : "py-4 pr-2 pl-1 opacity-78 hover:opacity-100"
-                            }`}
+                            className="block ml-12 sm:ml-14 lg:ml-16 my-2 group transition-all duration-500 rounded-[20px] keepsake-surface px-5 sm:px-6 py-5 sm:py-6 hover:shadow-[0_22px_56px_-26px_hsl(var(--stage-pregnancy-accent)/0.28),0_3px_12px_-6px_hsl(222_14%_12%/0.06)]"
                           >
                             <div className="flex gap-5">
                               {photo ? (
@@ -250,8 +271,8 @@ const MyJourney = () => {
                                     className="w-[80px] h-[80px] sm:w-[96px] sm:h-[96px] object-cover"
                                   />
                                 </div>
-                              ) : isHeld ? (
-                                // Held by a reflection — show a quiet chapter-mark glyph instead of frame
+                              ) : (
+                                // Held by reflection — quiet chapter-mark glyph
                                 <div
                                   className="w-[80px] h-[80px] sm:w-[96px] sm:h-[96px] rounded-[14px] shrink-0 flex items-center justify-center"
                                   style={{
@@ -266,52 +287,29 @@ const MyJourney = () => {
                                     <path d="M 14 12 C 10 9, 7 5, 6 1" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.55)" strokeWidth="0.8" strokeLinecap="round" />
                                   </svg>
                                 </div>
-                              ) : (
-                                // Untouched past week — a faint dotted node, not a heavy frame
-                                <div
-                                  className="w-[80px] h-[80px] sm:w-[96px] sm:h-[96px] rounded-[14px] shrink-0 flex items-center justify-center"
-                                  style={{
-                                    border: "1px dashed hsl(var(--stage-pregnancy-accent) / 0.18)",
-                                  }}
-                                >
-                                  <span
-                                    className="block w-1.5 h-1.5 rounded-full"
-                                    style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.4)" }}
-                                  />
-                                </div>
                               )}
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-baseline justify-between gap-4 mb-1.5">
                                   <div className="flex items-baseline gap-3 min-w-0">
-                                    <span
-                                      className={`font-serif font-medium text-[1.05rem] sm:text-[1.15rem] transition-colors shrink-0 ${
-                                        isHeld ? "text-foreground/92" : "text-foreground/72"
-                                      } group-hover:text-foreground`}
-                                    >
+                                    <span className="font-serif font-medium text-[1.05rem] sm:text-[1.15rem] text-foreground/92 group-hover:text-foreground transition-colors shrink-0">
                                       Week {w}
                                     </span>
-                                    <span className={`font-serif italic text-[14.5px] sm:text-[15px] truncate ${isHeld ? "text-foreground/68" : "text-foreground/52"}`}>
+                                    <span className="font-serif italic text-[14.5px] sm:text-[15px] text-foreground/68 truncate">
                                       {identity.chapterTitle}
                                     </span>
                                   </div>
                                   <span
                                     className="font-sans text-[10px] font-medium tracking-[0.24em] uppercase shrink-0"
-                                    style={{
-                                      color: isHeld
-                                        ? "hsl(var(--stage-pregnancy-accent))"
-                                        : "hsl(var(--foreground) / 0.32)",
-                                    }}
+                                    style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
                                   >
                                     {reflection && photo
                                       ? "Held · Kept"
                                       : reflection
                                       ? "Held"
-                                      : photo
-                                      ? "Kept"
-                                      : "Earlier"}
+                                      : "Kept"}
                                   </span>
                                 </div>
-                                <p className={`font-serif italic text-[13.5px] sm:text-[14px] leading-[1.5] ${isHeld ? "text-foreground/58" : "text-foreground/45"}`}>
+                                <p className="font-serif italic text-[13.5px] sm:text-[14px] text-foreground/58 leading-[1.5]">
                                   {identity.theme}
                                 </p>
                                 {reflection && (

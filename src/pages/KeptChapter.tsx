@@ -484,7 +484,7 @@ const KeptChapter = () => {
                     </div>
                   </div>
                   <figcaption
-                    className="sm:col-span-5 px-7 py-7 sm:py-9 flex flex-col justify-between gap-4"
+                    className="sm:col-span-5 px-6 sm:px-7 py-6 sm:py-9 flex flex-col justify-between gap-4"
                     style={{ background: tint(0.20), borderLeft: `1px solid ${accentSoft(0.16)}` }}
                   >
                     <div>

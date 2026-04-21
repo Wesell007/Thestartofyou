@@ -36,7 +36,7 @@ const MyWeekHeader = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/95 backdrop-blur-lg border-b border-border/30">
-      <div className="mx-auto w-full max-w-[680px] px-5 sm:px-8 md:px-10 h-14 sm:h-16 flex items-center justify-between">
+      <div className="mx-auto w-full max-w-[680px] lg:max-w-[1200px] xl:max-w-[1320px] px-5 sm:px-8 md:px-10 lg:px-12 h-14 sm:h-16 flex items-center justify-between">
         <Link to="/my-week" className="flex items-center shrink-0">
           <img
             src={logoSrc}

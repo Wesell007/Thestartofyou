@@ -90,37 +90,27 @@ const SlotReflection = ({ content, userId, week }: Props) => {
       : "Autosaves as you write";
 
   return (
-    <section className="relative py-20 sm:py-24 md:py-32 border-t border-border/30">
-      {/* Atmospheric envelope — the section itself feels held */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-[-80px] sm:inset-x-[-140px] inset-y-4 -z-10 rounded-[64px]"
-        style={{
-          background:
-            "radial-gradient(120% 80% at 50% 30%, hsl(var(--stage-pregnancy) / 0.42), transparent 72%)",
-        }}
-      />
-
+    <section className="relative pt-10 pb-2">
       {/* Section label */}
-      <div className="flex items-center gap-3 mb-8 sm:mb-9">
+      <div className="flex items-center gap-3 mb-5">
         <span
           aria-hidden="true"
-          className="block w-6 h-px"
+          className="block w-5 h-px"
           style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
         />
         <p
-          className="font-sans text-[10.5px] sm:text-[11px] font-medium tracking-[0.26em] uppercase"
+          className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase"
           style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
         >
           A moment for you
         </p>
       </div>
 
-      <h2 className="font-serif text-[1.7rem] sm:text-[2rem] md:text-[2.3rem] text-foreground leading-[1.16] mb-4 sm:mb-5 max-w-[26ch]">
+      <h2 className="font-serif text-[1.45rem] sm:text-[1.65rem] text-foreground leading-[1.18] mb-2.5 max-w-[26ch]">
         {content.reflection.prompt}
       </h2>
 
-      <p className="font-serif italic text-[15px] sm:text-[16px] text-foreground/55 leading-relaxed mb-10 sm:mb-12 max-w-[40ch]">
+      <p className="font-serif italic text-[14px] sm:text-[14.5px] text-foreground/55 leading-relaxed mb-7 max-w-[40ch]">
         {content.reflection.context}
       </p>
 
@@ -223,7 +213,7 @@ const SlotReflection = ({ content, userId, week }: Props) => {
       )}
 
       {/* Continuity colophon */}
-      <p className="font-serif italic text-[13px] sm:text-[13.5px] text-foreground/45 mt-6 sm:mt-7 max-w-[42ch]">
+      <p className="font-serif italic text-[12.5px] text-foreground/45 mt-5 max-w-[42ch]">
         Each week's reflection is kept on your journey — a record of becoming, week by week.
       </p>
     </section>

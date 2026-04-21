@@ -11,6 +11,7 @@ import SlotPhotoMemory from "@/components/myweek/SlotPhotoMemory";
 import SlotReflection from "@/components/myweek/SlotReflection";
 import SlotCompanionRecall from "@/components/myweek/SlotCompanionRecall";
 import SlotWhatsNext from "@/components/myweek/SlotWhatsNext";
+import MyWeekClosing from "@/components/myweek/MyWeekClosing";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 
 const getGreeting = (d = new Date()) => {
@@ -137,20 +138,56 @@ const MyWeek = () => {
             />
           </div>
 
-          {/* RIGHT — Focus · Photo · Reflection · Companion · Next chapter */}
-          <aside className="lg:col-span-5 lg:pt-24 space-y-0 lg:space-y-2">
-            <SlotOneFocus content={content} />
-            <SlotPhotoMemory userId={userId} week={currentWeek} chapterTitle={identity.chapterTitle} />
-            <SlotReflection content={content} userId={userId} week={currentWeek} />
-            <SlotCompanionRecall userId={userId} currentWeek={currentWeek} />
-            <SlotWhatsNext
-              content={content}
-              nextWeek={nextWeek}
-              nextChapterTitle={nextIdentity?.chapterTitle}
-              nextTheme={nextIdentity?.theme}
-            />
+          {/* RIGHT — One contained ritual rail */}
+          <aside className="lg:col-span-5 lg:pt-24">
+            <div
+              className="relative rounded-[32px] px-7 sm:px-9 py-9 sm:py-10 keepsake-surface divide-y"
+              style={{
+                borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)",
+                ['--tw-divide-opacity' as string]: 1,
+              }}
+            >
+              {/* Quiet rail label */}
+              <div className="-mt-3 mb-3 flex items-center gap-3 pb-0 border-b-0">
+                <span
+                  aria-hidden="true"
+                  className="block w-5 h-px"
+                  style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
+                />
+                <p
+                  className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase"
+                  style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+                >
+                  This week, held
+                </p>
+              </div>
+
+              <div
+                className="space-y-0 [&>*+*]:border-t [&>*+*]:border-[hsl(var(--stage-pregnancy-accent)/0.12)]"
+              >
+                <SlotOneFocus content={content} />
+                <SlotPhotoMemory userId={userId} week={currentWeek} chapterTitle={identity.chapterTitle} />
+                <SlotReflection content={content} userId={userId} week={currentWeek} />
+                <SlotCompanionRecall userId={userId} currentWeek={currentWeek} />
+                <SlotWhatsNext
+                  content={content}
+                  nextWeek={nextWeek}
+                  nextChapterTitle={nextIdentity?.chapterTitle}
+                  nextTheme={nextIdentity?.theme}
+                />
+              </div>
+            </div>
           </aside>
         </div>
+
+        {/* Chapter-closing surface — solves the lower empty space */}
+        <MyWeekClosing
+          firstName={firstName}
+          currentWeek={currentWeek}
+          chapterTitle={identity.chapterTitle}
+          nextChapterTitle={nextIdentity?.chapterTitle ?? null}
+          nextWeek={nextWeek}
+        />
       </main>
       <MyWeekFooter contextual={contextual} />
     </div>

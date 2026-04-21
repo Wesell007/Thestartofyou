@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Camera, Lock, X, ImagePlus } from "lucide-react";
+import { Lock, X, ImagePlus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Props {
@@ -13,14 +13,11 @@ type LoadState = "loading" | "empty" | "uploading" | "loaded" | "error";
 /**
  * Slot — Weekly photo memory.
  *
- * One primary photo per (user, week). Designed as a chapter memory, not a
- * gallery dump. Stored in the private `weekly-photos` bucket, with a row in
- * `week_photos` linking storage_path → user/week. Surfaces as a thumbnail on
- * /my-journey to form the keepsake spine.
- *
- * Premium quiet treatment:
- *  - Empty: a soft parchment frame inviting capture, with privacy seal.
- *  - Uploaded: the photo as the chapter's image, replace/remove options.
+ * Empty state is now a held frame, not an upload prompt:
+ *   - Four corner ticks suggest a kept space
+ *   - Centred chapter title and "Awaiting" seal sit inside the frame
+ *   - The tiny "add a photo" affordance lives in the lower margin —
+ *     present but never the protagonist
  */
 const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
   const [state, setState] = useState<LoadState>("loading");
@@ -29,7 +26,6 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
   const [error, setError] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  // Load any existing photo for this week
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -49,7 +45,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
         setStoragePath(data.storage_path);
         const { data: urlData } = await supabase.storage
           .from("weekly-photos")
-          .createSignedUrl(data.storage_path, 60 * 60); // 1h
+          .createSignedUrl(data.storage_path, 60 * 60);
         if (cancelled) return;
         if (urlData?.signedUrl) {
           setSignedUrl(urlData.signedUrl);
@@ -83,7 +79,6 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
     const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
     const path = `${userId}/${week}.${ext}`;
 
-    // If a previous photo exists at a different path, remove it first
     if (storagePath && storagePath !== path) {
       await supabase.storage.from("weekly-photos").remove([storagePath]);
     }
@@ -133,27 +128,27 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
   };
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-24 border-t border-border/30">
+    <section className="relative pt-10 pb-2">
       {/* Section label */}
-      <div className="flex items-center gap-3 mb-7 sm:mb-8">
+      <div className="flex items-center gap-3 mb-5">
         <span
           aria-hidden="true"
-          className="block w-6 h-px"
+          className="block w-5 h-px"
           style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
         />
         <p
-          className="font-sans text-[10.5px] sm:text-[11px] font-light tracking-[0.24em] uppercase"
+          className="font-sans text-[10.5px] font-light tracking-[0.24em] uppercase"
           style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
         >
           A photo for this chapter
         </p>
       </div>
 
-      <h2 className="font-serif text-[1.55rem] sm:text-[1.85rem] md:text-[2.05rem] text-foreground leading-[1.18] mb-3 sm:mb-4 max-w-[26ch]">
+      <h2 className="font-serif text-[1.4rem] sm:text-[1.55rem] text-foreground leading-[1.18] mb-2 max-w-[26ch]">
         One image to keep this week.
       </h2>
-      <p className="font-sans text-[13.5px] sm:text-[14px] font-light italic text-foreground/55 mb-8 sm:mb-10 max-w-[42ch]">
-        A bump photo, a quiet moment, your hand on your belly — anything that holds the feel of this week.
+      <p className="font-sans text-[13px] font-light italic text-foreground/55 mb-7 max-w-[42ch]">
+        A bump photo, your hand on your belly — anything that holds the feel of this week.
       </p>
 
       <input
@@ -166,57 +161,95 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
 
       {state === "loading" && (
         <div
-          className="rounded-[28px] border bg-card/60 h-[260px] sm:h-[320px] animate-pulse"
-          style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.18)" }}
+          className="rounded-[24px] bg-card/60 h-[260px] animate-pulse"
+          style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.14)" }}
         />
       )}
 
       {(state === "empty" || state === "uploading") && !signedUrl && (
-        <button
-          type="button"
-          onClick={() => fileRef.current?.click()}
-          disabled={state === "uploading"}
-          className="group relative w-full rounded-[32px] keepsake-surface flex flex-col items-center justify-center gap-5 px-6 py-20 sm:py-24 transition-all duration-500 hover:shadow-[0_36px_80px_-32px_hsl(var(--stage-pregnancy-accent)/0.3),0_8px_24px_-12px_hsl(222_14%_12%/0.1)]"
-          style={{
-            border: "1px dashed hsl(var(--stage-pregnancy-accent) / 0.3)",
-          }}
-        >
-          <span
-            className="w-16 h-16 rounded-full flex items-center justify-center"
+        <div className="space-y-4">
+          {/* Held frame — corner ticks suggest a kept space */}
+          <button
+            type="button"
+            onClick={() => fileRef.current?.click()}
+            disabled={state === "uploading"}
+            className="group relative w-full aspect-[4/5] sm:aspect-[5/6] rounded-[24px] overflow-hidden flex items-center justify-center transition-all duration-700 hover:bg-[hsl(var(--stage-pregnancy)/0.18)]"
             style={{
               background:
-                "radial-gradient(circle, hsl(var(--stage-pregnancy-accent) / 0.16), hsl(var(--stage-pregnancy-accent) / 0.04))",
-              color: "hsl(var(--stage-pregnancy-accent))",
-              boxShadow: "0 0 0 1px hsl(var(--stage-pregnancy-accent) / 0.18)",
+                "linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--stage-pregnancy) / 0.14) 100%)",
+              boxShadow:
+                "inset 0 1px 0 hsl(0 0% 100% / 0.5), 0 1px 0 hsl(var(--stage-pregnancy-accent) / 0.08)",
             }}
+            aria-label={`Add a photo for week ${week}`}
           >
-            <Camera size={22} strokeWidth={1.4} />
-          </span>
-          <p className="font-serif italic text-[1.15rem] sm:text-[1.22rem] text-foreground/72 text-center max-w-[28ch] leading-snug">
-            {state === "uploading" ? "Holding your photo…" : "Capture this week."}
-          </p>
-          <span className="font-sans text-[11.5px] font-medium tracking-[0.24em] uppercase text-foreground/50">
-            {state === "uploading" ? "Saving" : "Choose a photo"}
-          </span>
-          <div className="flex items-center gap-2 mt-1 text-foreground/42">
-            <Lock size={11} strokeWidth={1.6} />
-            <span className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase">
-              Private to you
+            {/* Corner ticks */}
+            {[
+              { top: 18, left: 18, rot: 0 },
+              { top: 18, right: 18, rot: 90 },
+              { bottom: 18, right: 18, rot: 180 },
+              { bottom: 18, left: 18, rot: 270 },
+            ].map((c, i) => (
+              <span
+                key={i}
+                aria-hidden="true"
+                className="absolute pointer-events-none"
+                style={{
+                  ...c,
+                  width: 18,
+                  height: 18,
+                  borderTop: "1px solid hsl(var(--stage-pregnancy-accent) / 0.5)",
+                  borderLeft: "1px solid hsl(var(--stage-pregnancy-accent) / 0.5)",
+                  transform: `rotate(${c.rot}deg)`,
+                }}
+              />
+            ))}
+
+            {/* Held centre — chapter title in waiting */}
+            <div className="relative flex flex-col items-center text-center px-6">
+              <span
+                className="font-sans text-[10px] font-medium tracking-[0.28em] uppercase mb-3"
+                style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+              >
+                Week {week}
+              </span>
+              <p className="font-serif italic text-[1.3rem] sm:text-[1.45rem] text-foreground/68 leading-snug max-w-[18ch]">
+                {chapterTitle}
+              </p>
+              <span className="font-sans text-[10px] font-light tracking-[0.3em] uppercase text-foreground/40 mt-5">
+                {state === "uploading" ? "Holding…" : "A frame held for this week"}
+              </span>
+            </div>
+          </button>
+
+          {/* Quiet affordance — sits below, never the protagonist */}
+          <div className="flex items-center justify-between gap-3 px-1">
+            <button
+              type="button"
+              onClick={() => fileRef.current?.click()}
+              disabled={state === "uploading"}
+              className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-foreground/55 hover:text-foreground/85 transition-colors"
+            >
+              {state === "uploading" ? "Saving" : "Add a photo"}
+            </button>
+            <span className="flex items-center gap-1.5 text-foreground/40">
+              <Lock size={10} strokeWidth={1.6} />
+              <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
+                Private to you
+              </span>
             </span>
           </div>
-        </button>
+        </div>
       )}
 
       {state === "loaded" && signedUrl && (
         <figure
-          className="relative rounded-[28px] overflow-hidden held-image bg-card"
+          className="relative rounded-[24px] overflow-hidden held-image bg-card"
         >
           <img
             src={signedUrl}
             alt={`Week ${week} — ${chapterTitle}`}
-            className="w-full max-h-[600px] object-cover"
+            className="w-full max-h-[520px] object-cover"
           />
-          {/* Soft inner light at edges — material warmth */}
           <div
             aria-hidden="true"
             className="absolute inset-0 pointer-events-none"
@@ -224,44 +257,42 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
               boxShadow: "inset 0 0 80px hsl(222 14% 12% / 0.08)",
             }}
           />
-          {/* Top privacy seal */}
-          <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-foreground/40 backdrop-blur-md text-background/95">
-            <Lock size={11} strokeWidth={1.8} />
-            <span className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase">
+          <div className="absolute top-3 left-3 flex items-center gap-2 px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95">
+            <Lock size={10} strokeWidth={1.8} />
+            <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
               Private
             </span>
           </div>
-          {/* Action row */}
-          <div className="absolute top-4 right-4 flex items-center gap-2">
+          <div className="absolute top-3 right-3 flex items-center gap-2">
             <button
               type="button"
               onClick={() => fileRef.current?.click()}
-              className="px-3 py-1.5 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center gap-1.5"
+              className="px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center gap-1.5"
               aria-label="Replace photo"
             >
-              <ImagePlus size={12} strokeWidth={1.8} />
-              <span className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase">
+              <ImagePlus size={11} strokeWidth={1.8} />
+              <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
                 Replace
               </span>
             </button>
             <button
               type="button"
               onClick={handleRemove}
-              className="w-8 h-8 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center justify-center"
+              className="w-7 h-7 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center justify-center"
               aria-label="Remove photo"
             >
-              <X size={14} strokeWidth={1.8} />
+              <X size={12} strokeWidth={1.8} />
             </button>
           </div>
           <figcaption
-            className="px-6 py-4 border-t font-serif italic text-[13px] text-foreground/60 tracking-wide flex items-center justify-between"
+            className="px-5 py-3 border-t font-serif italic text-[12.5px] text-foreground/60 tracking-wide flex items-center justify-between"
             style={{
               borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)",
               background: "hsl(var(--stage-pregnancy) / 0.18)",
             }}
           >
             <span>Week {week} · {chapterTitle}</span>
-            <span className="font-sans not-italic text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/45">
+            <span className="font-sans not-italic text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/45">
               Held privately
             </span>
           </figcaption>

@@ -154,7 +154,7 @@ const MyJourney = () => {
               className="font-sans text-[10.5px] sm:text-[11px] font-medium tracking-[0.3em] uppercase mb-6 sm:mb-7"
               style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
             >
-              {firstName}'s record
+              {firstName}'s pregnancy, week by week
             </p>
             <h1 className="font-serif text-foreground leading-[0.96] tracking-tight mb-5 sm:mb-6">
               <span
@@ -247,21 +247,23 @@ const MyJourney = () => {
                         </div>
                       )}
                       <div className="px-6 sm:px-8 py-6 sm:py-7">
-                        <div className="flex items-baseline justify-between gap-4 mb-3">
-                          <p
+                        <div className="flex items-baseline justify-between gap-4 mb-2">
+                          <h3 className="font-serif font-medium text-foreground leading-[1] flex items-baseline gap-3">
+                            <span className="text-[1.7rem] sm:text-[1.95rem]">Week {w}</span>
+                          </h3>
+                          <span
                             className="font-sans text-[10.5px] font-medium tracking-[0.28em] uppercase"
                             style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
                           >
-                            This week · Chapter {w}
-                          </p>
-                          <span className="serif-numeral text-[1.6rem] text-foreground/55 italic font-normal leading-none">
-                            {String(w).padStart(2, "0")}
+                            This week
                           </span>
                         </div>
-                        <h3 className="font-serif font-medium text-[1.55rem] sm:text-[1.75rem] text-foreground leading-[1.1] mb-3">
+                        <p
+                          className="font-serif italic text-[1.05rem] sm:text-[1.15rem] text-foreground/72 leading-[1.4] mb-2"
+                        >
                           {identity.chapterTitle}
-                        </h3>
-                        <p className="font-serif italic text-[1.05rem] sm:text-[1.12rem] text-foreground/68 leading-[1.4] mb-5">
+                        </p>
+                        <p className="font-serif italic text-[15px] sm:text-[15.5px] text-foreground/55 leading-[1.5] mb-5">
                           {identity.theme}
                         </p>
                         {reflection && (
@@ -275,7 +277,7 @@ const MyJourney = () => {
                           </p>
                         )}
                         <span className="inline-flex items-center font-sans text-[11.5px] font-medium tracking-[0.22em] uppercase text-foreground/65">
-                          Open this chapter →
+                          Open this week →
                         </span>
                       </div>
                     </a>
@@ -314,15 +316,15 @@ const MyJourney = () => {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-baseline justify-between gap-4 mb-1.5">
                             <div className="flex items-baseline gap-3 min-w-0">
-                              <span className="serif-numeral text-[15px] italic font-normal text-foreground/45 shrink-0">
-                                {String(w).padStart(2, "0")}
+                              <span className="font-serif font-medium text-[1.05rem] sm:text-[1.12rem] text-foreground/85 group-hover:text-foreground transition-colors shrink-0">
+                                Week {w}
                               </span>
-                              <span className="font-serif text-[1.02rem] sm:text-[1.1rem] text-foreground/85 group-hover:text-foreground transition-colors truncate">
+                              <span className="font-serif italic text-[14.5px] sm:text-[15px] text-foreground/60 truncate">
                                 {identity.chapterTitle}
                               </span>
                             </div>
                             <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/35 shrink-0">
-                              {reflection ? "Held" : photo ? "Kept" : "Past"}
+                              {reflection ? "Held" : photo ? "Kept" : "Earlier"}
                             </span>
                           </div>
                           <p className="font-serif italic text-[13.5px] sm:text-[14px] text-foreground/55 leading-[1.5]">
@@ -345,10 +347,10 @@ const MyJourney = () => {
                     <div className="ml-12 sm:ml-14 md:ml-16 py-5 sm:py-6 opacity-50">
                       <div className="flex items-baseline justify-between gap-4 mb-1">
                         <div className="flex items-baseline gap-3 min-w-0">
-                          <span className="serif-numeral text-[15px] italic font-normal text-foreground/35 shrink-0">
-                            {String(w).padStart(2, "0")}
+                          <span className="font-serif font-medium text-[1rem] sm:text-[1.05rem] text-foreground/72 shrink-0">
+                            Week {w}
                           </span>
-                          <span className="font-serif text-[1rem] sm:text-[1.05rem] text-foreground/72 truncate">
+                          <span className="font-serif italic text-[14px] text-foreground/52 truncate">
                             {identity.chapterTitle}
                           </span>
                         </div>
@@ -356,7 +358,7 @@ const MyJourney = () => {
                           Ahead
                         </span>
                       </div>
-                      <p className="font-serif italic text-[13.5px] sm:text-[14px] text-foreground/42 leading-[1.5] pl-7">
+                      <p className="font-serif italic text-[13.5px] sm:text-[14px] text-foreground/42 leading-[1.5] pl-0 sm:pl-0">
                         {identity.theme}
                       </p>
                     </div>

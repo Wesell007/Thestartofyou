@@ -75,9 +75,9 @@ const MyWeekChapter = ({
           {trimesterLabel} · Week {week}
         </p>
 
-        {/* Chapter mark + title */}
-        <p className="font-sans text-[10.5px] font-medium tracking-[0.32em] uppercase text-foreground/45 mb-4 sm:mb-5">
-          Chapter · Week {week}
+        {/* Chapter mark — quiet editorial frontispiece line */}
+        <p className="font-sans text-[10.5px] font-medium tracking-[0.32em] uppercase text-foreground/42 mb-4 sm:mb-5">
+          The chapter
         </p>
         <h1
           className="font-serif font-medium text-foreground leading-[0.95] tracking-tight mb-5 sm:mb-6"

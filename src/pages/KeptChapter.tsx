@@ -514,7 +514,7 @@ const KeptChapter = () => {
                   style={{ borderColor: accentSoft(0.16) }}
                 >
                   <div
-                    className="sm:col-span-7 relative px-8 py-14 sm:py-16 flex flex-col items-center justify-center text-center"
+                    className="sm:col-span-7 relative px-6 sm:px-8 py-11 sm:py-16 flex flex-col items-center justify-center text-center"
                     style={{
                       background:
                         "radial-gradient(120% 80% at 50% 40%, hsl(var(--stage-pregnancy) / 0.55), transparent 75%)",

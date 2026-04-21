@@ -388,9 +388,12 @@ const KeptChapter = () => {
           style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.18)" }}
         >
           <p
-            className="font-sans text-[10px] font-medium tracking-[0.32em] uppercase text-center text-foreground/45 mb-6"
+            className="font-sans text-[10px] font-medium tracking-[0.32em] uppercase text-center text-foreground/48 mb-2"
           >
-            Where this sits
+            Where this sits in your journey
+          </p>
+          <p className="font-serif italic text-[12.5px] text-foreground/48 text-center mb-7 max-w-[40ch] mx-auto">
+            Move between kept chapters, or step back into the week you're living now.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 items-stretch">
             <div className="sm:text-left text-center">

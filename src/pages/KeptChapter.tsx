@@ -530,7 +530,7 @@ const KeptChapter = () => {
                             "radial-gradient(circle, hsl(var(--stage-pregnancy) / 0.45), transparent 70%)",
                         }}
                       />
-                      <WeekIllustration week={week} size={170} className="relative mx-auto opacity-90" />
+                      <WeekIllustration week={week} size={140} className="relative mx-auto opacity-90 sm:scale-[1.2]" />
                     </div>
                     <div className="flex items-center gap-2 mt-6">
                       <Lock size={10} strokeWidth={1.8} style={{ color: accent }} />

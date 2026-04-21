@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Lock, Sparkles } from "lucide-react";
+import { Lock, Mic, MicOff } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { MyWeekEntry } from "@/data/myWeekContent";
-import SlotReflectionAssistant from "./SlotReflectionAssistant";
+import NoteShapingSuggestion from "./NoteShapingSuggestion";
+import { useShapingThreshold } from "@/hooks/useShapingThreshold";
 
 interface Props {
   content: MyWeekEntry;
@@ -12,31 +13,67 @@ interface Props {
 
 type SaveState = "idle" | "saving" | "saved" | "error";
 
+// Minimal Web Speech API typing
+type SpeechRecognitionLike = {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  onresult: ((e: unknown) => void) | null;
+  onerror: ((e: unknown) => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+};
+
+const getRecognition = (): SpeechRecognitionLike | null => {
+  const w = window as unknown as {
+    SpeechRecognition?: new () => SpeechRecognitionLike;
+    webkitSpeechRecognition?: new () => SpeechRecognitionLike;
+  };
+  const Ctor = w.SpeechRecognition || w.webkitSpeechRecognition;
+  if (!Ctor) return null;
+  const r = new Ctor();
+  r.continuous = true;
+  r.interimResults = true;
+  r.lang = "en-GB";
+  return r;
+};
+
 /**
- * Slot — A moment for you (the reflection ritual).
+ * Slot — A moment for you.
  *
- * Designed as a heirloom writing surface, not a textarea:
- *   - Embossed seal at the top
- *   - Generous serif italic typography on a parchment field
- *   - A single ruled left margin like a notebook
- *   - Quiet "held" status that breathes in slowly
- *   - Continuity colophon below — the words live on the journey
+ * Heirloom writing surface with restrained in-note voice and inline shaping.
+ * Shaping only offers itself when the threshold is met (see useShapingThreshold).
+ * First-written snapshot is captured on first shaping acceptance.
  */
 const SlotReflection = ({ content, userId, week }: Props) => {
   const [value, setValue] = useState("");
   const [loaded, setLoaded] = useState(false);
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [savedAt, setSavedAt] = useState<Date | null>(null);
-  const [assistantOpen, setAssistantOpen] = useState(false);
+  const [hasFirstWritten, setHasFirstWritten] = useState(false);
   const initialRef = useRef<string>("");
   const debounceRef = useRef<number | null>(null);
+
+  // Voice
+  const [listening, setListening] = useState(false);
+  const [voiceMessage, setVoiceMessage] = useState<string | null>(null);
+  const [lastInputWasVoice, setLastInputWasVoice] = useState(false);
+  const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
+  const baseTextRef = useRef<string>("");
+  const speechSupported =
+    typeof window !== "undefined" &&
+    ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
+
+  // Shaping availability — 40 chars, 8 words, 2s idle
+  const threshold = useShapingThreshold(value);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       const { data } = await supabase
         .from("reflections")
-        .select("content, updated_at")
+        .select("content, updated_at, first_written_content")
         .eq("user_id", userId)
         .eq("week", week)
         .maybeSingle();
@@ -45,6 +82,7 @@ const SlotReflection = ({ content, userId, week }: Props) => {
       setValue(existing);
       initialRef.current = existing;
       if (data?.updated_at) setSavedAt(new Date(data.updated_at));
+      setHasFirstWritten(Boolean(data?.first_written_content));
       setLoaded(true);
     })();
     return () => {
@@ -78,16 +116,100 @@ const SlotReflection = ({ content, userId, week }: Props) => {
     };
   }, [value, loaded, userId, week]);
 
-  const statusLabel =
+  useEffect(() => {
+    return () => {
+      try {
+        recognitionRef.current?.stop();
+      } catch {
+        // ignore
+      }
+    };
+  }, []);
+
+  const startListening = () => {
+    setVoiceMessage(null);
+    if (!speechSupported) {
+      setVoiceMessage("Voice isn't available in this browser. Typing works just as well.");
+      return;
+    }
+    const rec = getRecognition();
+    if (!rec) {
+      setVoiceMessage("We couldn't hear you just now. You can try again, or type instead.");
+      return;
+    }
+    recognitionRef.current = rec;
+    baseTextRef.current = value ? value.trimEnd() + " " : "";
+    rec.onresult = (e: unknown) => {
+      const evt = e as { resultIndex: number; results: Array<Array<{ transcript: string }> & { isFinal: boolean }> };
+      let interim = "";
+      let final = "";
+      for (let i = evt.resultIndex; i < evt.results.length; i++) {
+        const r = evt.results[i];
+        if (r.isFinal) final += r[0].transcript;
+        else interim += r[0].transcript;
+      }
+      const next = (baseTextRef.current + final + interim).replace(/\s+/g, " ").trimStart();
+      setValue(next);
+      if (final) {
+        baseTextRef.current = (baseTextRef.current + final + " ").replace(/\s+/g, " ");
+        setLastInputWasVoice(true);
+      }
+    };
+    rec.onerror = () => {
+      setVoiceMessage("Some of that didn't come through. Your words are still here — you can speak again, or type the rest.");
+      setListening(false);
+    };
+    rec.onend = () => setListening(false);
+    try {
+      rec.start();
+      setListening(true);
+    } catch {
+      setVoiceMessage("We couldn't hear you just now. You can try again, or type instead.");
+      setListening(false);
+    }
+  };
+
+  const stopListening = () => {
+    try {
+      recognitionRef.current?.stop();
+    } catch {
+      // ignore
+    }
+    setListening(false);
+  };
+
+  const acceptShapedDraft = async (shaped: string) => {
+    // Capture first-written snapshot if this is the first time a shape is accepted.
+    const updates: Record<string, string | null> = { content: shaped };
+    if (!hasFirstWritten && initialRef.current.trim().length > 0) {
+      updates.first_written_content = initialRef.current;
+      updates.first_written_at = new Date().toISOString();
+    }
+    const { error } = await supabase
+      .from("reflections")
+      .upsert(
+        { user_id: userId, week, ...updates },
+        { onConflict: "user_id,week" }
+      );
+    if (!error) {
+      setValue(shaped);
+      initialRef.current = shaped;
+      setSavedAt(new Date());
+      setSaveState("saved");
+      if (!hasFirstWritten && updates.first_written_content) setHasFirstWritten(true);
+      setLastInputWasVoice(false);
+      window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2400);
+    }
+  };
+
+  const autosaveStatus =
     saveState === "saving"
-      ? "Holding…"
-      : saveState === "saved"
-      ? "Held"
+      ? "Still saving. Your words are still here."
       : saveState === "error"
-      ? "Couldn't save"
+      ? "Still saving. Your words are still here."
       : savedAt
-      ? "Held privately"
-      : "Autosaves as you write";
+      ? "Held privately."
+      : "Autosaves as you write.";
 
   return (
     <section className="relative pt-10 pb-2">
@@ -114,11 +236,11 @@ const SlotReflection = ({ content, userId, week }: Props) => {
         {content.reflection.context}
       </p>
 
-      {/* Heirloom writing surface — keepsake card */}
+      {/* Heirloom writing surface */}
       <div
         className="relative rounded-[32px] keepsake-surface transition-shadow duration-500 focus-within:shadow-[0_32px_80px_-32px_hsl(var(--stage-pregnancy-accent)/0.32),0_8px_24px_-12px_hsl(222_14%_12%/0.1)]"
       >
-        {/* Embossed seal — top centre */}
+        {/* Embossed seal */}
         <div className="flex flex-col items-center pt-7 sm:pt-8 pb-2">
           <div
             className="flex items-center gap-2 px-4 py-1.5 rounded-full"
@@ -153,13 +275,49 @@ const SlotReflection = ({ content, userId, week }: Props) => {
           />
           <textarea
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => {
+              setValue(e.target.value);
+              setLastInputWasVoice(false);
+            }}
             disabled={!loaded}
             rows={8}
             placeholder="Begin where you are."
             aria-label={`Your reflection for week ${week}`}
             className="w-full bg-transparent border-0 pl-5 sm:pl-7 pr-0 py-3 font-serif text-[18px] sm:text-[19.5px] italic font-normal text-foreground placeholder:text-foreground/35 placeholder:italic resize-none focus:outline-none leading-[1.85] min-h-[220px] caret-[hsl(var(--stage-pregnancy-accent))]"
           />
+        </div>
+
+        {/* Voice row — restrained, inside the note */}
+        <div
+          className="px-7 sm:px-10 py-3 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 sm:gap-4"
+          style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.12)" }}
+        >
+          <button
+            type="button"
+            onClick={listening ? stopListening : startListening}
+            disabled={!speechSupported}
+            aria-pressed={listening}
+            className="self-start inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 transition-opacity disabled:opacity-40"
+            style={{
+              color: "hsl(var(--stage-pregnancy-accent))",
+              border: `1px solid hsl(var(--stage-pregnancy-accent) / ${listening ? 0.45 : 0.28})`,
+              background: listening ? "hsl(var(--stage-pregnancy-accent) / 0.1)" : "transparent",
+            }}
+          >
+            {listening ? <MicOff size={11} strokeWidth={1.8} /> : <Mic size={11} strokeWidth={1.8} />}
+            <span className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase">
+              {listening ? "Listening · tap to stop" : "Speak instead"}
+            </span>
+          </button>
+          <span className="font-serif italic text-[11.5px] text-foreground/50 leading-snug sm:text-right">
+            {voiceMessage
+              ? voiceMessage
+              : listening
+              ? "Speak gently. Words appear as you go."
+              : speechSupported
+              ? "When you speak, we turn it into words so you can keep the note."
+              : "Voice isn't available in this browser."}
+          </span>
         </div>
 
         {/* Footer — held status */}
@@ -179,38 +337,26 @@ const SlotReflection = ({ content, userId, week }: Props) => {
               className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase"
               style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
             >
-              {saveState === "saving" ? "Holding…" : "Held"}
+              {saveState === "saving" ? "Holding" : "Held"}
             </span>
           </div>
           <span className="font-serif italic text-[12.5px] text-foreground/45 tracking-wide hidden sm:inline">
-            {statusLabel}
+            {autosaveStatus}
           </span>
-          {!assistantOpen && (
-            <button
-              type="button"
-              onClick={() => setAssistantOpen(true)}
-              className="inline-flex items-center gap-1.5 font-sans text-[11px] font-medium tracking-[0.18em] uppercase transition-opacity hover:opacity-80"
-              style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-              aria-label="Open reflection assistant"
-            >
-              <Sparkles size={11} strokeWidth={1.8} />
-              Speak it instead
-            </button>
-          )}
         </div>
       </div>
 
-      {assistantOpen && (
-        <SlotReflectionAssistant
+      {/* Inline shaping — appears only once threshold met */}
+      <div className="mt-5 px-2 sm:px-4">
+        <NoteShapingSuggestion
+          original={value}
           week={week}
-          onAccept={(text) => {
-            const next = value.trim().length > 0 ? `${value.trim()}\n\n${text}` : text;
-            setValue(next);
-            setAssistantOpen(false);
-          }}
-          onClose={() => setAssistantOpen(false)}
+          available={threshold.available}
+          lastInputWasVoice={lastInputWasVoice}
+          register="live"
+          onAccept={acceptShapedDraft}
         />
-      )}
+      </div>
 
       {/* Continuity colophon */}
       <p className="font-serif italic text-[12.5px] text-foreground/45 mt-5 max-w-[42ch]">

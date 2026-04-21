@@ -8,6 +8,8 @@ import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import WeekIllustration from "@/components/myweek/WeekIllustration";
+import NoteShapingSuggestion from "@/components/myweek/NoteShapingSuggestion";
+import { useShapingThreshold } from "@/hooks/useShapingThreshold";
 
 /**
  * /my-week/:week — A KEPT CHAPTER.
@@ -28,6 +30,8 @@ type Loaded = {
   reflection: string;
   reflectionUpdatedAt: string | null;
   photoUrl: string | null;
+  firstWrittenContent: string | null;
+  firstWrittenAt: string | null;
 };
 
 const computeWeek = (lmp: Date) => {
@@ -53,6 +57,8 @@ const KeptChapter = () => {
   const [isListening, setIsListening] = useState(false);
   const [voiceSupported, setVoiceSupported] = useState(false);
   const [voiceError, setVoiceError] = useState<string | null>(null);
+  const [lastInputWasVoice, setLastInputWasVoice] = useState(false);
+  const [showFirstWritten, setShowFirstWritten] = useState(false);
 
   useEffect(() => {
     const SR =
@@ -88,13 +94,14 @@ const KeptChapter = () => {
             const sep = prev && !prev.endsWith(" ") && !prev.endsWith("\n") ? " " : "";
             return prev + sep + finalChunk.trim();
           });
+          setLastInputWasVoice(true);
         }
         interimRef.current = interim;
       };
       rec.onerror = (e: any) => {
-        if (e?.error === "not-allowed") setVoiceError("Microphone permission was declined.");
-        else if (e?.error === "no-speech") setVoiceError("No speech was heard. Try again when ready.");
-        else setVoiceError("Voice paused. You can try again.");
+        if (e?.error === "not-allowed") setVoiceError("We couldn't hear you just now. You can try again, or type instead.");
+        else if (e?.error === "no-speech") setVoiceError("Some of that didn't come through. Your words are still here — you can speak again, or type the rest.");
+        else setVoiceError("Some of that didn't come through. Your words are still here.");
         setIsListening(false);
       };
       rec.onend = () => setIsListening(false);
@@ -102,7 +109,7 @@ const KeptChapter = () => {
       recognitionRef.current = rec;
       setIsListening(true);
     } catch {
-      setVoiceError("Voice couldn't start. You can keep typing.");
+      setVoiceError("We couldn't hear you just now. You can try again, or type instead.");
     }
   };
 
@@ -143,7 +150,12 @@ const KeptChapter = () => {
       const [{ data: profile }, { data: journey }, { data: refl }, { data: photo }] = await Promise.all([
         supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
         supabase.from("saved_journeys").select("lmp_date").eq("user_id", user.id).maybeSingle(),
-        supabase.from("reflections").select("content, updated_at").eq("user_id", user.id).eq("week", week).maybeSingle(),
+        supabase
+          .from("reflections")
+          .select("content, updated_at, first_written_content, first_written_at")
+          .eq("user_id", user.id)
+          .eq("week", week)
+          .maybeSingle(),
         supabase.from("week_photos").select("storage_path").eq("user_id", user.id).eq("week", week).maybeSingle(),
       ]);
       if (cancelled) return;
@@ -182,12 +194,71 @@ const KeptChapter = () => {
         reflection: reflContent,
         reflectionUpdatedAt: refl?.updated_at ?? null,
         photoUrl,
+        firstWrittenContent: refl?.first_written_content ?? null,
+        firstWrittenAt: refl?.first_written_at ?? null,
       });
     })();
     return () => {
       cancelled = true;
     };
   }, [week, validWeek, navigate]);
+
+  // Threshold for shaping availability on the kept note.
+  const keptThreshold = useShapingThreshold(reflection);
+
+  const acceptShapedDraft = async (shaped: string) => {
+    if (!state) return;
+    const captureFirstWritten =
+      !state.firstWrittenContent && initialRef.current.trim().length > 0;
+    const updates: Record<string, string | null> = { content: shaped };
+    if (captureFirstWritten) {
+      updates.first_written_content = initialRef.current;
+      updates.first_written_at = new Date().toISOString();
+    }
+    const { error } = await supabase
+      .from("reflections")
+      .upsert(
+        { user_id: state.userId, week, ...updates },
+        { onConflict: "user_id,week" }
+      );
+    if (!error) {
+      setReflection(shaped);
+      initialRef.current = shaped;
+      setSavedAt(new Date());
+      setSaveState("saved");
+      if (captureFirstWritten) {
+        setState((s) =>
+          s
+            ? {
+                ...s,
+                firstWrittenContent: initialRef.current,
+                firstWrittenAt: new Date().toISOString(),
+              }
+            : s
+        );
+      }
+      setLastInputWasVoice(false);
+      window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2000);
+    }
+  };
+
+  const restoreFirstWritten = async () => {
+    if (!state?.firstWrittenContent) return;
+    const { error } = await supabase
+      .from("reflections")
+      .upsert(
+        { user_id: state.userId, week, content: state.firstWrittenContent },
+        { onConflict: "user_id,week" }
+      );
+    if (!error) {
+      setReflection(state.firstWrittenContent);
+      initialRef.current = state.firstWrittenContent;
+      setSavedAt(new Date());
+      setSaveState("saved");
+      setShowFirstWritten(false);
+      window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2000);
+    }
+  };
 
   // Editable reflection — debounced autosave.
   useEffect(() => {
@@ -632,7 +703,10 @@ const KeptChapter = () => {
                     />
                     <textarea
                       value={reflection}
-                      onChange={(e) => setReflection(e.target.value)}
+                      onChange={(e) => {
+                        setReflection(e.target.value);
+                        setLastInputWasVoice(false);
+                      }}
                       rows={6}
                       placeholder={
                         hasReflection
@@ -700,8 +774,8 @@ const KeptChapter = () => {
                         : isListening
                           ? "Speak gently. Words appear as you go."
                           : voiceSupported
-                            ? "If typing isn't easy, say what you remember."
-                            : "Typing only in this browser."}
+                            ? "When you speak, we turn it into words so you can keep the note."
+                            : "Voice isn't available in this browser."}
                     </span>
                   </div>
 
@@ -713,15 +787,88 @@ const KeptChapter = () => {
                       className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase"
                       style={{ color: accent }}
                     >
-                      {saveState === "saving" ? "Holding…" : "Held"}
+                      {saveState === "saving" ? "Holding" : "Held"}
                     </span>
                     <span className="font-serif italic text-[12px] text-foreground/45 hidden sm:inline">
-                      {savedAt ? `Last tended ${formatDate(savedAt)}` : "Autosaves as you write"}
+                      {saveState === "saving"
+                        ? "Still saving. Your words are still here."
+                        : savedAt
+                          ? `Last tended ${formatDate(savedAt)}`
+                          : "Autosaves as you write"}
                     </span>
                   </div>
                 </div>
 
-                <p className="font-serif italic text-[12.5px] text-foreground/48 mt-3 pl-1">
+                {/* Inline shaping — quieter register for kept chapters.
+                    Only appears when the note has enough material to shape. */}
+                <div className="mt-4 pl-1">
+                  <NoteShapingSuggestion
+                    original={reflection}
+                    week={week}
+                    available={keptThreshold.available}
+                    lastInputWasVoice={lastInputWasVoice}
+                    register="kept"
+                    onAccept={acceptShapedDraft}
+                  />
+                </div>
+
+                {/* First-written recovery — only when a shape was accepted */}
+                {state.firstWrittenContent && (
+                  <div className="mt-4 pl-1">
+                    {!showFirstWritten ? (
+                      <button
+                        type="button"
+                        onClick={() => setShowFirstWritten(true)}
+                        className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase transition-opacity hover:opacity-80"
+                        style={{ color: accent }}
+                      >
+                        View as first written
+                      </button>
+                    ) : (
+                      <div
+                        className="rounded-[18px] keepsake-surface px-5 py-4"
+                        style={{ borderColor: accentSoft(0.16) }}
+                      >
+                        <div className="flex items-center justify-between gap-3 mb-3">
+                          <p
+                            className="font-sans text-[9.5px] font-medium tracking-[0.26em] uppercase"
+                            style={{ color: accent }}
+                          >
+                            First written
+                            {state.firstWrittenAt
+                              ? ` · ${formatDate(new Date(state.firstWrittenAt))}`
+                              : ""}
+                          </p>
+                          <button
+                            type="button"
+                            onClick={() => setShowFirstWritten(false)}
+                            className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/55 hover:text-foreground/85 transition-colors"
+                          >
+                            Close
+                          </button>
+                        </div>
+                        <p className="font-serif italic text-[15px] text-foreground/75 leading-[1.75] whitespace-pre-wrap">
+                          {state.firstWrittenContent}
+                        </p>
+                        <div className="mt-4 flex items-center gap-4">
+                          <button
+                            type="button"
+                            onClick={restoreFirstWritten}
+                            className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase transition-opacity hover:opacity-80"
+                            style={{ color: accent }}
+                          >
+                            Restore this
+                          </button>
+                          <span className="font-serif italic text-[11.5px] text-foreground/45">
+                            Your original, still here.
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                <p className="font-serif italic text-[12.5px] text-foreground/48 mt-4 pl-1">
                   Type or speak — both are kept the same way. You can still refine this note if the words come more clearly now.
                 </p>
               </div>

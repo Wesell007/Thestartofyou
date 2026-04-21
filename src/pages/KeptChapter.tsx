@@ -653,7 +653,7 @@ const KeptChapter = () => {
 
                   {/* Voice path — restrained, inside the note */}
                   <div
-                    className="px-6 sm:px-8 py-3 border-t flex items-center justify-between gap-4 flex-wrap"
+                    className="px-5 sm:px-8 py-3 sm:py-3 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 sm:gap-4"
                     style={{
                       borderColor: accentSoft(0.14),
                       background: tint(0.08),
@@ -664,7 +664,7 @@ const KeptChapter = () => {
                       onClick={isListening ? stopListening : startListening}
                       disabled={!voiceSupported}
                       aria-pressed={isListening}
-                      className="group inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                      className="group inline-flex items-center justify-center gap-2.5 rounded-full px-3.5 py-2 sm:py-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed self-start"
                       style={{
                         background: isListening ? accentSoft(0.14) : "hsl(var(--card))",
                         border: `1px solid ${accentSoft(isListening ? 0.45 : 0.22)}`,
@@ -692,11 +692,11 @@ const KeptChapter = () => {
                           <Mic size={12} strokeWidth={1.8} />
                         )}
                       </span>
-                      <span className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase">
+                      <span className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase whitespace-nowrap">
                         {isListening ? "Listening · tap to stop" : "Speak instead"}
                       </span>
                     </button>
-                    <span className="font-serif italic text-[11.5px] text-foreground/45">
+                    <span className="font-serif italic text-[12px] sm:text-[11.5px] text-foreground/50 sm:text-foreground/45 leading-snug sm:text-right">
                       {voiceError
                         ? voiceError
                         : isListening

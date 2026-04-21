@@ -31,7 +31,7 @@ const MyWeekClosing = ({
   nextWeek,
 }: Props) => {
   return (
-    <section className="relative mt-24 sm:mt-28 lg:mt-36">
+    <section className="relative mt-16 sm:mt-20 lg:mt-24">
       {/* Atmospheric envelope — chapter quietly closes */}
       <div
         aria-hidden="true"

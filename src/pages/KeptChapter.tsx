@@ -266,10 +266,11 @@ const KeptChapter = () => {
           </Link>
         </div>
 
-        {/* Two-zone preserved chapter object */}
-        <div className="md:grid md:grid-cols-12 md:gap-10 lg:gap-16 xl:gap-20 md:items-start">
-          {/* ============== LEFT — chapter context rail ============== */}
-          <aside className="md:col-span-4 lg:col-span-4 md:sticky md:top-24 md:self-start space-y-5">
+        {/* Two-zone preserved chapter object — desktop only.
+            Tablet & mobile unfold as a single composed chapter. */}
+        <div className="lg:grid lg:grid-cols-12 lg:gap-16 xl:gap-20 lg:items-start">
+          {/* ============== LEFT — chapter context rail (lg+ only) ============== */}
+          <aside className="hidden lg:block lg:col-span-4 lg:sticky lg:top-24 lg:self-start space-y-5">
             {/* Frontispiece */}
             <div>
               <p
@@ -385,28 +386,74 @@ const KeptChapter = () => {
           </aside>
 
           {/* ============== RIGHT — the kept chapter itself ============== */}
-          <article className="md:col-span-8 lg:col-span-8 mt-10 md:mt-0 space-y-12 sm:space-y-14">
-            {/* Title block */}
-            <header>
+          <article className="lg:col-span-8 mt-0 space-y-10 sm:space-y-12 lg:space-y-14">
+            {/* Tablet & mobile frontispiece — preserves the "kept chapter" framing
+                where the left rail used to sit. Hidden on lg+ (rail does this). */}
+            <div className="lg:hidden -mt-2 mb-2 sm:mb-4">
               <p
-                className="font-sans text-[10.5px] font-medium tracking-[0.30em] uppercase mb-4"
+                className="font-sans text-[10px] font-medium tracking-[0.32em] uppercase mb-3"
                 style={{ color: accent }}
               >
                 A kept chapter · {weeksAgo} {weeksAgo === 1 ? "week" : "weeks"} ago
               </p>
-              <p className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase text-foreground/45 mb-5">
+              <h1
+                className="font-serif font-medium text-foreground leading-[0.98] tracking-tight mb-3"
+                style={{ fontSize: "clamp(1.75rem, 4.6vw, 2.4rem)" }}
+              >
+                Week {week}, still held.
+              </h1>
+              <p className="font-serif text-[14px] sm:text-[14.5px] text-foreground/60 leading-[1.6] max-w-[44ch]">
+                A preserved chapter you can revisit, revise, and place back inside the wider shape of your pregnancy.
+              </p>
+              {/* Distilled chapter index — horizontal on tablet, stacked on mobile */}
+              <div
+                className="mt-5 sm:mt-6 rounded-[20px] keepsake-surface px-5 sm:px-6 py-4 sm:py-5"
+                style={{ borderColor: accentSoft(0.16) }}
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <BookOpen size={11} strokeWidth={1.6} style={{ color: accent }} />
+                  <p
+                    className="font-sans text-[9.5px] font-medium tracking-[0.28em] uppercase"
+                    style={{ color: accent }}
+                  >
+                    This chapter holds
+                  </p>
+                </div>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+                  {chapterHolds.map((h, i) => (
+                    <li
+                      key={i}
+                      className="font-serif text-[13px] text-foreground/68 leading-[1.45] pl-3 border-l"
+                      style={{ borderColor: accentSoft(0.32) }}
+                    >
+                      {h.label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Title block */}
+            <header>
+              <p
+                className="font-sans text-[10.5px] font-medium tracking-[0.30em] uppercase mb-4 hidden lg:block"
+                style={{ color: accent }}
+              >
+                A kept chapter · {weeksAgo} {weeksAgo === 1 ? "week" : "weeks"} ago
+              </p>
+              <p className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase text-foreground/45 mb-4 sm:mb-5">
                 {trimesterLabel} · Week {week}
               </p>
               <h2
-                className="font-serif font-medium text-foreground leading-[0.96] tracking-tight mb-5"
-                style={{ fontSize: "clamp(2.6rem, 5.4vw, 4.2rem)" }}
+                className="font-serif font-medium text-foreground leading-[0.96] tracking-tight mb-4 sm:mb-5"
+                style={{ fontSize: "clamp(2.1rem, 5.4vw, 4.2rem)" }}
               >
                 {identity.chapterTitle}
               </h2>
-              <p className="font-serif italic text-[1.2rem] sm:text-[1.3rem] text-foreground/65 leading-[1.4] max-w-[36ch] mb-7">
+              <p className="font-serif italic text-[1.1rem] sm:text-[1.25rem] lg:text-[1.3rem] text-foreground/65 leading-[1.4] max-w-[36ch] mb-5 sm:mb-7">
                 {identity.theme}
               </p>
-              <p className="font-serif text-[15px] text-foreground/72 leading-[1.7] max-w-[52ch]">
+              <p className="font-serif text-[14.5px] sm:text-[15px] text-foreground/72 leading-[1.7] max-w-[52ch]">
                 This was one of those weeks that often leaves a quiet imprint — not because it was dramatic, but because pregnancy began to feel more lived-in than imagined.
               </p>
             </header>
@@ -437,7 +484,7 @@ const KeptChapter = () => {
                     </div>
                   </div>
                   <figcaption
-                    className="sm:col-span-5 px-7 py-7 sm:py-9 flex flex-col justify-between gap-4"
+                    className="sm:col-span-5 px-6 sm:px-7 py-6 sm:py-9 flex flex-col justify-between gap-4"
                     style={{ background: tint(0.20), borderLeft: `1px solid ${accentSoft(0.16)}` }}
                   >
                     <div>
@@ -467,7 +514,7 @@ const KeptChapter = () => {
                   style={{ borderColor: accentSoft(0.16) }}
                 >
                   <div
-                    className="sm:col-span-7 relative px-8 py-14 sm:py-16 flex flex-col items-center justify-center text-center"
+                    className="sm:col-span-7 relative px-6 sm:px-8 py-11 sm:py-16 flex flex-col items-center justify-center text-center"
                     style={{
                       background:
                         "radial-gradient(120% 80% at 50% 40%, hsl(var(--stage-pregnancy) / 0.55), transparent 75%)",
@@ -483,7 +530,7 @@ const KeptChapter = () => {
                             "radial-gradient(circle, hsl(var(--stage-pregnancy) / 0.45), transparent 70%)",
                         }}
                       />
-                      <WeekIllustration week={week} size={170} className="relative mx-auto opacity-90" />
+                      <WeekIllustration week={week} size={140} className="relative mx-auto opacity-90 sm:scale-[1.2]" />
                     </div>
                     <div className="flex items-center gap-2 mt-6">
                       <Lock size={10} strokeWidth={1.8} style={{ color: accent }} />
@@ -496,7 +543,7 @@ const KeptChapter = () => {
                     </div>
                   </div>
                   <figcaption
-                    className="sm:col-span-5 px-7 py-9 flex flex-col justify-between gap-4"
+                    className="sm:col-span-5 px-6 sm:px-7 py-7 sm:py-9 flex flex-col justify-between gap-4"
                     style={{ background: tint(0.18), borderLeft: `1px solid ${accentSoft(0.16)}` }}
                   >
                     <div>
@@ -606,7 +653,7 @@ const KeptChapter = () => {
 
                   {/* Voice path — restrained, inside the note */}
                   <div
-                    className="px-6 sm:px-8 py-3 border-t flex items-center justify-between gap-4 flex-wrap"
+                    className="px-5 sm:px-8 py-3 sm:py-3 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 sm:gap-4"
                     style={{
                       borderColor: accentSoft(0.14),
                       background: tint(0.08),
@@ -617,7 +664,7 @@ const KeptChapter = () => {
                       onClick={isListening ? stopListening : startListening}
                       disabled={!voiceSupported}
                       aria-pressed={isListening}
-                      className="group inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                      className="group inline-flex items-center justify-center gap-2.5 rounded-full px-3.5 py-2 sm:py-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed self-start"
                       style={{
                         background: isListening ? accentSoft(0.14) : "hsl(var(--card))",
                         border: `1px solid ${accentSoft(isListening ? 0.45 : 0.22)}`,
@@ -645,11 +692,11 @@ const KeptChapter = () => {
                           <Mic size={12} strokeWidth={1.8} />
                         )}
                       </span>
-                      <span className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase">
+                      <span className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase whitespace-nowrap">
                         {isListening ? "Listening · tap to stop" : "Speak instead"}
                       </span>
                     </button>
-                    <span className="font-serif italic text-[11.5px] text-foreground/45">
+                    <span className="font-serif italic text-[12px] sm:text-[11.5px] text-foreground/50 sm:text-foreground/45 leading-snug sm:text-right">
                       {voiceError
                         ? voiceError
                         : isListening
@@ -733,7 +780,7 @@ const KeptChapter = () => {
 
             {/* What mattered then — substantial chapter-like section */}
             <section
-              className="rounded-[28px] keepsake-surface px-7 sm:px-10 py-10 sm:py-12"
+              className="rounded-[28px] keepsake-surface px-6 sm:px-10 py-9 sm:py-12"
               style={{ borderColor: accentSoft(0.16) }}
             >
               <div className="flex items-center gap-3 mb-6">
@@ -776,7 +823,7 @@ const KeptChapter = () => {
 
             {/* What you were holding + return to live — closing band */}
             <section
-              className="rounded-[28px] px-7 sm:px-10 py-9 sm:py-10 grid md:grid-cols-12 gap-6 items-end"
+              className="rounded-[28px] px-6 sm:px-10 py-8 sm:py-10 grid md:grid-cols-12 gap-6 items-end"
               style={{
                 background: `linear-gradient(135deg, ${tint(0.32)}, ${tint(0.14)})`,
                 border: `1px solid ${accentSoft(0.18)}`,
@@ -791,7 +838,7 @@ const KeptChapter = () => {
                 </p>
                 <p
                   className="font-serif text-foreground leading-[1.1] tracking-tight"
-                  style={{ fontSize: "clamp(1.6rem, 2.6vw, 2.1rem)" }}
+                  style={{ fontSize: "clamp(1.5rem, 2.6vw, 2.1rem)" }}
                 >
                   {content.focus.headline}
                 </p>
@@ -815,13 +862,59 @@ const KeptChapter = () => {
                     color: accent,
                   }}
                 >
-                  <span className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase">
+                  <span className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase whitespace-nowrap">
                     Return to the live week
                   </span>
                   <ArrowRight size={12} strokeWidth={1.8} className="transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </div>
             </section>
+
+            {/* Adjacent kept chapters — tablet & mobile only.
+                On lg+ this lives inside the left rail as chapter objects. */}
+            {(prevWeek || nextWeek) && (
+              <nav
+                aria-label="Adjacent kept chapters"
+                className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
+              >
+                {prevWeek && (
+                  <Link
+                    to={`/my-week/${prevWeek}`}
+                    className="group block rounded-[20px] keepsake-surface px-5 py-4 sm:py-5 transition-all hover:-translate-y-0.5"
+                    style={{ borderColor: accentSoft(0.16) }}
+                  >
+                    <span className="font-sans text-[9.5px] font-medium tracking-[0.26em] uppercase mb-1.5 flex items-center gap-1.5 text-foreground/50">
+                      <ArrowLeft size={10} strokeWidth={1.6} className="transition-transform group-hover:-translate-x-0.5" />
+                      Previous kept chapter
+                    </span>
+                    <p className="font-serif font-medium text-[15.5px] text-foreground/85 leading-tight">
+                      Week {prevWeek}
+                    </p>
+                    <p className="font-serif italic text-[12.5px] text-foreground/55 mt-0.5">
+                      {getWeekIdentity(prevWeek).theme}
+                    </p>
+                  </Link>
+                )}
+                {nextWeek && (
+                  <Link
+                    to={`/my-week/${nextWeek}`}
+                    className="group block rounded-[20px] keepsake-surface px-5 py-4 sm:py-5 transition-all hover:-translate-y-0.5 sm:text-right"
+                    style={{ borderColor: accentSoft(0.16) }}
+                  >
+                    <span className="font-sans text-[9.5px] font-medium tracking-[0.26em] uppercase mb-1.5 flex items-center sm:justify-end gap-1.5 text-foreground/50">
+                      Next kept chapter
+                      <ArrowRight size={10} strokeWidth={1.6} className="transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                    <p className="font-serif font-medium text-[15.5px] text-foreground/85 leading-tight">
+                      Week {nextWeek}
+                    </p>
+                    <p className="font-serif italic text-[12.5px] text-foreground/55 mt-0.5">
+                      {getWeekIdentity(nextWeek).theme}
+                    </p>
+                  </Link>
+                )}
+              </nav>
+            )}
           </article>
         </div>
       </main>

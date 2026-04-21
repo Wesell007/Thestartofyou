@@ -231,16 +231,16 @@ const KeptChapter = () => {
                 </span>
               </div>
               <figcaption
-                className="px-6 py-4 border-t font-serif italic text-[13px] text-foreground/60 flex items-center justify-between"
+                className="px-6 py-4 border-t font-serif italic text-[13px] text-foreground/62 flex items-center justify-between gap-4"
                 style={{
                   borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)",
                   background: "hsl(var(--stage-pregnancy) / 0.18)",
                 }}
               >
-                <span>Week {week} · {identity.chapterTitle}</span>
+                <span>A frame from week {week} — {identity.chapterTitle.toLowerCase()}.</span>
                 {savedAt && (
-                  <span className="font-sans not-italic text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/45">
-                    Held since {formatDate(savedAt)}
+                  <span className="font-sans not-italic text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/48 shrink-0">
+                    Kept · {formatDate(savedAt)}
                   </span>
                 )}
               </figcaption>
@@ -257,8 +257,11 @@ const KeptChapter = () => {
               }}
             >
               <WeekIllustration week={week} size={200} className="mx-auto" />
-              <p className="font-serif italic text-[14px] text-foreground/52 mt-6 max-w-[28ch] leading-snug">
-                No photo was kept this week — only the words and the chapter remain.
+              <p className="font-serif italic text-[14px] text-foreground/55 mt-6 max-w-[30ch] leading-snug">
+                No frame was kept this week — only the words and the chapter remain.
+              </p>
+              <p className="font-sans text-[10px] font-medium tracking-[0.24em] uppercase text-foreground/38 mt-4">
+                Week {week} · Held without an image
               </p>
             </div>
           )}
@@ -325,7 +328,7 @@ const KeptChapter = () => {
           </div>
         </section>
 
-        {/* Fixed chapter content — what mattered + focus, condensed and quiet */}
+        {/* Fixed chapter content — what mattered then. Past-tense, retrospective. */}
         <section className="mb-14 sm:mb-16">
           <div className="flex items-center gap-3 mb-7">
             <span
@@ -341,6 +344,10 @@ const KeptChapter = () => {
             </p>
           </div>
 
+          <p className="font-serif italic text-[13.5px] text-foreground/55 mb-7 max-w-[44ch] leading-relaxed">
+            This was the shape of week {week} — what was quietly true of your body, your baby, and the feeling underneath.
+          </p>
+
           <p className="font-serif text-[1.4rem] sm:text-[1.55rem] text-foreground/85 leading-[1.25] mb-9 max-w-[28ch]">
             {content.lead}
           </p>
@@ -352,7 +359,7 @@ const KeptChapter = () => {
                   className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase mb-2"
                   style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
                 >
-                  {p.title}
+                  {p.title} · then
                 </p>
                 <p className="font-sans text-[14.5px] font-light text-foreground/68 leading-[1.7] max-w-[52ch]">
                   {p.body}
@@ -366,7 +373,7 @@ const KeptChapter = () => {
               className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase mb-3"
               style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
             >
-              The focus that week
+              What you were holding
             </p>
             <p className="font-serif italic text-[1.1rem] text-foreground/70 leading-[1.45] max-w-[36ch]">
               {content.focus.headline}
@@ -381,9 +388,12 @@ const KeptChapter = () => {
           style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.18)" }}
         >
           <p
-            className="font-sans text-[10px] font-medium tracking-[0.32em] uppercase text-center text-foreground/45 mb-6"
+            className="font-sans text-[10px] font-medium tracking-[0.32em] uppercase text-center text-foreground/48 mb-2"
           >
-            Where this sits
+            Where this sits in your journey
+          </p>
+          <p className="font-serif italic text-[12.5px] text-foreground/48 text-center mb-7 max-w-[40ch] mx-auto">
+            Move between kept chapters, or step back into the week you're living now.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 items-stretch">
             <div className="sm:text-left text-center">

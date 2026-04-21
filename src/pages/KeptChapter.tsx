@@ -325,7 +325,7 @@ const KeptChapter = () => {
           </div>
         </section>
 
-        {/* Fixed chapter content — what mattered + focus, condensed and quiet */}
+        {/* Fixed chapter content — what mattered then. Past-tense, retrospective. */}
         <section className="mb-14 sm:mb-16">
           <div className="flex items-center gap-3 mb-7">
             <span
@@ -341,6 +341,10 @@ const KeptChapter = () => {
             </p>
           </div>
 
+          <p className="font-serif italic text-[13.5px] text-foreground/55 mb-7 max-w-[44ch] leading-relaxed">
+            This was the shape of week {week} — what was quietly true of your body, your baby, and the feeling underneath.
+          </p>
+
           <p className="font-serif text-[1.4rem] sm:text-[1.55rem] text-foreground/85 leading-[1.25] mb-9 max-w-[28ch]">
             {content.lead}
           </p>
@@ -352,7 +356,7 @@ const KeptChapter = () => {
                   className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase mb-2"
                   style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
                 >
-                  {p.title}
+                  {p.title} · then
                 </p>
                 <p className="font-sans text-[14.5px] font-light text-foreground/68 leading-[1.7] max-w-[52ch]">
                   {p.body}
@@ -366,7 +370,7 @@ const KeptChapter = () => {
               className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase mb-3"
               style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
             >
-              The focus that week
+              What you were holding
             </p>
             <p className="font-serif italic text-[1.1rem] text-foreground/70 leading-[1.45] max-w-[36ch]">
               {content.focus.headline}

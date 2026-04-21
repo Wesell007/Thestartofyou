@@ -257,8 +257,11 @@ const KeptChapter = () => {
               }}
             >
               <WeekIllustration week={week} size={200} className="mx-auto" />
-              <p className="font-serif italic text-[14px] text-foreground/52 mt-6 max-w-[28ch] leading-snug">
-                No photo was kept this week — only the words and the chapter remain.
+              <p className="font-serif italic text-[14px] text-foreground/55 mt-6 max-w-[30ch] leading-snug">
+                No frame was kept this week — only the words and the chapter remain.
+              </p>
+              <p className="font-sans text-[10px] font-medium tracking-[0.24em] uppercase text-foreground/38 mt-4">
+                Week {week} · Held without an image
               </p>
             </div>
           )}

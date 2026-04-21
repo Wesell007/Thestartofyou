@@ -28,6 +28,7 @@ import AskPage from "./pages/AskPage.tsx";
 import GuidanceLibrary from "./pages/GuidanceLibrary.tsx";
 import MyWeek from "./pages/MyWeek.tsx";
 import MyJourney from "./pages/MyJourney.tsx";
+import KeptChapter from "./pages/KeptChapter.tsx";
 import Auth from "./pages/Auth.tsx";
 import Setup from "./pages/Setup.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -68,6 +69,7 @@ const App = () => (
           <Route path="/ask" element={<AskPage />} />
           <Route path="/guidance" element={<GuidanceLibrary />} />
           <Route path="/my-week" element={<MyWeek />} />
+          <Route path="/my-week/:week" element={<KeptChapter />} />
           <Route path="/my-journey" element={<MyJourney />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/setup" element={<Setup />} />

@@ -30,6 +30,8 @@ type Loaded = {
   reflection: string;
   reflectionUpdatedAt: string | null;
   photoUrl: string | null;
+  firstWrittenContent: string | null;
+  firstWrittenAt: string | null;
 };
 
 const computeWeek = (lmp: Date) => {

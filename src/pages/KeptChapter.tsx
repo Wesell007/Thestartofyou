@@ -8,6 +8,8 @@ import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import WeekIllustration from "@/components/myweek/WeekIllustration";
+import NoteShapingSuggestion from "@/components/myweek/NoteShapingSuggestion";
+import { useShapingThreshold } from "@/hooks/useShapingThreshold";
 
 /**
  * /my-week/:week — A KEPT CHAPTER.

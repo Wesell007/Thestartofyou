@@ -550,13 +550,36 @@ const KeptChapter = () => {
                 </h3>
 
                 <div
-                  className="relative rounded-[24px] keepsake-surface"
-                  style={{ borderColor: accentSoft(0.16) }}
+                  className="relative rounded-[24px] keepsake-surface overflow-hidden"
+                  style={{ borderColor: accentSoft(0.18) }}
                 >
-                  <div className="relative px-6 sm:px-8 pt-7 pb-2">
+                  {/* Quiet preserved-note header — wax-seal cue, not a chrome bar */}
+                  <div
+                    className="flex items-center justify-between gap-3 px-6 sm:px-8 pt-5 pb-3"
+                    style={{
+                      background: `linear-gradient(180deg, ${tint(0.18)}, transparent)`,
+                    }}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Feather size={12} strokeWidth={1.6} style={{ color: accent }} />
+                      <span
+                        className="font-sans text-[9.5px] font-medium tracking-[0.26em] uppercase"
+                        style={{ color: accent }}
+                      >
+                        Note from week {week}
+                      </span>
+                    </div>
+                    <span
+                      className="font-serif italic text-[11.5px] text-foreground/50"
+                    >
+                      Preserved · still revisable
+                    </span>
+                  </div>
+
+                  <div className="relative px-6 sm:px-8 pt-3 pb-2">
                     <span
                       aria-hidden="true"
-                      className="absolute left-5 sm:left-7 top-7 bottom-12 w-[1.5px] rounded-full"
+                      className="absolute left-5 sm:left-7 top-3 bottom-12 w-[1.5px] rounded-full"
                       style={{
                         background:
                           "linear-gradient(to bottom, hsl(var(--stage-pregnancy-accent) / 0.55), hsl(var(--stage-pregnancy-accent) / 0.04))",
@@ -574,10 +597,72 @@ const KeptChapter = () => {
                       aria-label={`Your reflection for week ${week}`}
                       className="w-full bg-transparent border-0 pl-5 sm:pl-6 pr-0 py-2 font-serif text-[16.5px] sm:text-[17.5px] italic font-normal text-foreground placeholder:text-foreground/35 placeholder:italic resize-none focus:outline-none leading-[1.85] min-h-[170px] caret-[hsl(var(--stage-pregnancy-accent))]"
                     />
+                    {isListening && interimRef.current && (
+                      <p className="pl-5 sm:pl-6 -mt-1 mb-2 font-serif italic text-[14.5px] text-foreground/40 leading-[1.65]">
+                        {interimRef.current}
+                      </p>
+                    )}
                   </div>
+
+                  {/* Voice path — restrained, inside the note */}
                   <div
-                    className="flex items-center justify-between px-6 sm:px-8 py-3.5 border-t gap-4"
-                    style={{ borderColor: accentSoft(0.16) }}
+                    className="px-6 sm:px-8 py-3 border-t flex items-center justify-between gap-4 flex-wrap"
+                    style={{
+                      borderColor: accentSoft(0.14),
+                      background: tint(0.08),
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={isListening ? stopListening : startListening}
+                      disabled={!voiceSupported}
+                      aria-pressed={isListening}
+                      className="group inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                      style={{
+                        background: isListening ? accentSoft(0.14) : "hsl(var(--card))",
+                        border: `1px solid ${accentSoft(isListening ? 0.45 : 0.22)}`,
+                        color: accent,
+                      }}
+                      title={
+                        voiceSupported
+                          ? isListening
+                            ? "Tap to stop"
+                            : "Speak this week out loud"
+                          : "Voice isn't available in this browser"
+                      }
+                    >
+                      <span className="relative flex items-center justify-center w-4 h-4">
+                        {isListening ? (
+                          <>
+                            <span
+                              aria-hidden="true"
+                              className="absolute inset-0 rounded-full animate-ping"
+                              style={{ background: accentSoft(0.4) }}
+                            />
+                            <MicOff size={12} strokeWidth={1.8} className="relative" />
+                          </>
+                        ) : (
+                          <Mic size={12} strokeWidth={1.8} />
+                        )}
+                      </span>
+                      <span className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase">
+                        {isListening ? "Listening · tap to stop" : "Speak instead"}
+                      </span>
+                    </button>
+                    <span className="font-serif italic text-[11.5px] text-foreground/45">
+                      {voiceError
+                        ? voiceError
+                        : isListening
+                          ? "Speak gently. Words appear as you go."
+                          : voiceSupported
+                            ? "If typing isn't easy, say what you remember."
+                            : "Typing only in this browser."}
+                    </span>
+                  </div>
+
+                  <div
+                    className="flex items-center justify-between px-6 sm:px-8 py-3 border-t gap-4"
+                    style={{ borderColor: accentSoft(0.14) }}
                   >
                     <span
                       className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase"
@@ -592,7 +677,7 @@ const KeptChapter = () => {
                 </div>
 
                 <p className="font-serif italic text-[12.5px] text-foreground/48 mt-3 pl-1">
-                  You can still refine this note if the words come more clearly now.
+                  Type or speak — both are kept the same way. You can still refine this note if the words come more clearly now.
                 </p>
               </div>
 

@@ -27,7 +27,7 @@ const formatDueDate = (d: Date) =>
 const formatRemainingTime = (dueDate: Date, currentWeek: number) => {
   const daysLeft = Math.max(differenceInDays(dueDate, new Date()), 0);
   const weeksLeft = Math.max(Math.ceil(daysLeft / 7), 0);
-  return `${weeksLeft} ${weeksLeft === 1 ? "week" : "weeks"} to go · Week ${currentWeek} of 40`;
+  return `${weeksLeft} ${weeksLeft === 1 ? "week" : "weeks"} to go`;
 };
 
 const computeWeek = (lmp: Date) => {
@@ -127,9 +127,9 @@ const MyWeek = () => {
       <MyWeekHeader />
       <main className="relative mx-auto w-full max-w-[680px] md:max-w-[920px] lg:max-w-[1200px] xl:max-w-[1320px] px-5 sm:px-8 md:px-10 lg:px-14">
         {/* Two-zone composition from md upward. Mobile = single column flow. */}
-        <div className="md:grid md:grid-cols-12 md:gap-10 lg:gap-14 xl:gap-20 md:items-start">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-14 xl:gap-20 lg:items-start">
           {/* LEFT — Chapter + guidance */}
-          <div className="md:col-span-7">
+          <div className="lg:col-span-7">
             <MyWeekChapter
               greeting={getGreeting()}
               firstName={firstName}
@@ -148,7 +148,7 @@ const MyWeek = () => {
           {/* RIGHT — One contained ritual rail. Sticky on lg so it stays in
               view as the left guidance scrolls, eliminating the empty
               lower-right quadrant. */}
-          <aside className="md:col-span-5 mt-10 md:mt-0 md:pt-20 lg:pt-24 lg:sticky lg:top-28 lg:self-start">
+          <aside className="lg:col-span-5 mt-10 lg:mt-0 lg:pt-24 lg:sticky lg:top-28 lg:self-start">
             <div
               className="relative rounded-[28px] md:rounded-[32px] px-6 sm:px-8 md:px-7 lg:px-9 py-8 sm:py-9 lg:py-10 keepsake-surface divide-y"
               style={{

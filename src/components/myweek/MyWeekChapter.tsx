@@ -41,10 +41,18 @@ const MyWeekChapter = ({
   trimesterLabel,
   chapterTitle,
   theme,
+  developmentCue,
   babyNote,
   content,
 }: Props) => {
   const weeksLeft = dueDateMeta.split(" · ")[0] ?? dueDateMeta;
+  const cueShape = developmentCue.toLowerCase().includes("mango")
+    ? "mango"
+    : developmentCue.toLowerCase().includes("raspberry") || developmentCue.toLowerCase().includes("berry")
+    ? "berry"
+    : developmentCue.toLowerCase().includes("watermelon") || developmentCue.toLowerCase().includes("pumpkin") || developmentCue.toLowerCase().includes("melon")
+    ? "large"
+    : "seed";
 
   return (
     <div className="relative">
@@ -140,6 +148,23 @@ const MyWeekChapter = ({
               className="block w-10 h-px mb-6"
               style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
             />
+            <div className="flex items-center gap-3.5 max-w-[30rem]">
+              <span
+                aria-hidden="true"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full"
+                style={{ background: "hsl(var(--stage-pregnancy) / 0.42)" }}
+              >
+                <svg viewBox="0 0 44 44" className="h-7 w-7 text-[hsl(var(--stage-pregnancy-accent))]" aria-hidden="true">
+                  {cueShape === "mango" && <path d="M14 28c-5-7 1-18 10-18 8 0 13 7 10 14-3 8-14 13-20 4Z" fill="currentColor" opacity="0.18" stroke="currentColor" strokeWidth="1.5" />}
+                  {cueShape === "berry" && <><circle cx="22" cy="23" r="10" fill="currentColor" opacity="0.16" stroke="currentColor" strokeWidth="1.4" /><path d="M18 12c2 2 6 2 8 0M18 18h.1M25 20h.1M20 26h.1M27 28h.1" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /></>}
+                  {cueShape === "large" && <path d="M9 24c0-8 6-14 14-14s13 6 13 13c0 8-7 13-14 13S9 31 9 24Z" fill="currentColor" opacity="0.16" stroke="currentColor" strokeWidth="1.5" />}
+                  {cueShape === "seed" && <path d="M23 9c7 7 7 18 0 25-7-7-7-18 0-25Z" fill="currentColor" opacity="0.18" stroke="currentColor" strokeWidth="1.5" />}
+                </svg>
+              </span>
+              <p className="font-sans text-[14px] sm:text-[14.5px] font-light leading-relaxed text-foreground/66">
+                {developmentCue}
+              </p>
+            </div>
           </div>
         </figure>
       </section>

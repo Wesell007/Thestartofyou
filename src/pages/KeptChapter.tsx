@@ -313,7 +313,7 @@ const KeptChapter = () => {
   const tint = (a: number) => `hsl(var(--stage-pregnancy) / ${a})`;
 
   return (
-    <div className="min-h-screen bg-parchment-grain page-vignette relative">
+    <div className="min-h-screen bg-parchment-grain page-vignette relative overflow-x-hidden">
       {/* Atmospheric — kept chapters live in a deeper, settled wash */}
       <div
         aria-hidden="true"

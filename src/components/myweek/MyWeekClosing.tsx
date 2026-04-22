@@ -14,7 +14,7 @@ interface Props {
  *
  * Sits at the bottom of /my-week, above the footer. Solves the empty
  * lower-page problem by providing a quiet, emotionally-grounded
- * completion to the chapter — not a dashboard module.
+ * completion to the chapter, not a dashboard module.
  *
  * Composition:
  *   - A faint horizon rule — the chapter closes
@@ -32,7 +32,7 @@ const MyWeekClosing = ({
 }: Props) => {
   return (
     <section className="relative mt-16 sm:mt-20 lg:mt-24">
-      {/* Atmospheric envelope — chapter quietly closes */}
+      {/* Atmospheric envelope as the chapter quietly closes */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-[-80px] sm:inset-x-[-160px] inset-y-0 -z-10"
@@ -42,7 +42,7 @@ const MyWeekClosing = ({
         }}
       />
 
-      {/* Horizon rule — the chapter ends */}
+      {/* Horizon rule as the chapter ends */}
       <div className="relative flex items-center justify-center mb-12">
         <span
           aria-hidden="true"
@@ -52,7 +52,7 @@ const MyWeekClosing = ({
               "linear-gradient(to right, transparent, hsl(var(--stage-pregnancy-accent) / 0.4))",
           }}
         />
-        {/* Seal — botanical chapter mark */}
+        {/* Botanical chapter mark */}
         <svg
           width="42"
           height="42"

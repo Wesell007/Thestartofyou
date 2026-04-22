@@ -375,7 +375,7 @@ const KeptChapter = () => {
             </p>
             <div className="pt-4 border-t" style={{ borderColor: accentSoft(0.14) }}>
               <p className="font-sans text-[13.5px] text-foreground/65 leading-relaxed">
-                Kept {weeksAgo} {weeksAgo === 1 ? "week" : "weeks"} ago · Now in week {currentWeek}
+                Kept {weeksAgo} {weeksAgo === 1 ? "week" : "weeks"} ago. Now in week {currentWeek}
               </p>
               <p className="font-serif italic text-[12.5px] text-foreground/48 leading-relaxed mt-1">
                 Original words and accepted refinements stay recoverable here.
@@ -539,7 +539,7 @@ const KeptChapter = () => {
                 {identity.theme}
               </p>
               <p className="font-serif text-[14.5px] sm:text-[15px] text-foreground/72 leading-[1.7] max-w-[52ch]">
-                A preserved chapter — still revisable. The week was lived; what follows is what was kept of it.
+                A preserved chapter, still revisable. The week was lived; what follows is what was kept of it.
               </p>
 
               {/* Slim "this chapter holds" ribbon — tablet & mobile only.
@@ -906,7 +906,7 @@ const KeptChapter = () => {
                             Restore this
                           </button>
                           <span className="font-serif italic text-[11.5px] text-foreground/45">
-                            Your original, still here.
+                            Your original is still here.
                           </span>
                         </div>
                       </div>
@@ -915,7 +915,7 @@ const KeptChapter = () => {
                 )}
 
                 <p className="font-serif italic text-[12.5px] text-foreground/48 mt-4 pl-1">
-                  Type or speak — both are kept the same way. You can still refine this note if the words come more clearly now.
+                  Type or speak. Both are kept the same way. You can still refine this note if the words come more clearly now.
                 </p>
               </div>
 

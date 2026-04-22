@@ -169,7 +169,7 @@ const SlotReflectionAssistant = ({ week, onAccept, onClose }: Props) => {
         {phase === "capture" && (
           <>
             <p className="font-serif italic text-[14px] sm:text-[14.5px] text-foreground/60 leading-relaxed mb-5 max-w-[44ch]">
-              On the days you are too tired to write, just say it out loud or type a few rough words. We'll gently shape them into a reflection in your own voice — for you to edit and keep.
+              On the days you are too tired to write, just say it out loud or type a few rough words. We'll gently shape them into a reflection in your own voice, ready for you to edit and keep.
             </p>
 
             <div
@@ -235,7 +235,7 @@ const SlotReflectionAssistant = ({ week, onAccept, onClose }: Props) => {
               </button>
               {!speechSupported && (
                 <span className="font-serif italic text-[12px] text-foreground/45">
-                  Voice isn't supported in this browser — typing works just as well.
+                  Voice isn't supported in this browser. Typing works just as well.
                 </span>
               )}
             </div>

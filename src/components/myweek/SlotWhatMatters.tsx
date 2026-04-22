@@ -1,5 +1,5 @@
-import { Baby, Heart, Sparkles } from "lucide-react";
 import type { MyWeekEntry } from "@/data/myWeekContent";
+import MatterIcon from "./MatterIcon";
 
 interface Props {
   content: MyWeekEntry;
@@ -20,7 +20,7 @@ interface Props {
  * weekly guide, not three bullet points.
  */
 const SlotWhatMatters = ({ content, trimesterLabel, week }: Props) => {
-  const icons = [Baby, Heart, Sparkles];
+  const icons = ["baby", "body", "heart"] as const;
 
   return (
     <section className="relative pt-4 sm:pt-6 md:pt-8 pb-16 sm:pb-20 md:pb-24">
@@ -54,7 +54,7 @@ const SlotWhatMatters = ({ content, trimesterLabel, week }: Props) => {
       {/* Briefing cards — stronger repeated scan rhythm */}
       <ol className="space-y-5 sm:space-y-6">
         {content.matters.map((p, i) => {
-          const Icon = icons[i] ?? Sparkles;
+          const icon = icons[i] ?? "heart";
           return (
           <li
             key={i}
@@ -70,13 +70,13 @@ const SlotWhatMatters = ({ content, trimesterLabel, week }: Props) => {
               }}
             />
 
-            <div className="grid sm:grid-cols-[160px_1fr] gap-4 sm:gap-7 items-center">
+            <div className="grid sm:grid-cols-[172px_1fr] gap-4 sm:gap-7 items-center">
               <div className="flex items-center gap-4">
                 <span
                   className="flex w-12 h-12 rounded-full shrink-0 items-center justify-center"
                   style={{ background: "hsl(var(--stage-pregnancy) / 0.45)" }}
                 >
-                  <Icon size={21} strokeWidth={1.45} style={{ color: "hsl(var(--stage-pregnancy-accent))" }} />
+                  <MatterIcon type={icon} size={24} />
                 </span>
                 <p
                   className="font-sans text-[10.5px] sm:text-[11px] font-medium tracking-[0.24em] uppercase"

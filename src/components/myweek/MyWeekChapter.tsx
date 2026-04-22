@@ -127,7 +127,7 @@ const MyWeekChapter = ({
 
         {/* Dominant weekly card */}
         <figure
-          className="relative grid sm:grid-cols-12 gap-0 rounded-[24px] sm:rounded-[28px] overflow-hidden keepsake-surface"
+          className="relative grid sm:grid-cols-12 gap-0 rounded-[24px] sm:rounded-[28px] overflow-hidden keepsake-surface shadow-elevated"
           style={{
             borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)",
             background:
@@ -135,13 +135,13 @@ const MyWeekChapter = ({
           }}
         >
           <div
-            className="sm:col-span-5 px-6 sm:px-8 py-7 sm:py-12 flex flex-col items-center justify-center"
+            className="sm:col-span-5 px-6 sm:px-8 py-8 sm:py-11 lg:py-12 flex flex-col items-center justify-center"
             style={{
               background:
                 "radial-gradient(120% 85% at 50% 45%, hsl(var(--stage-pregnancy) / 0.58), transparent 76%)",
             }}
           >
-            <div className="relative mx-auto aspect-[13/16] w-full max-w-[232px] sm:max-w-[276px]">
+            <div className="relative mx-auto aspect-[13/16] w-full max-w-[238px] sm:max-w-[286px] lg:max-w-[296px]">
               <span
                 aria-hidden="true"
                 className="absolute inset-[11%] rounded-full blur-3xl"
@@ -159,22 +159,24 @@ const MyWeekChapter = ({
               />
             </div>
           </div>
-          <div className="sm:col-span-7 px-6 sm:px-9 py-8 sm:py-12 flex flex-col justify-center">
+          <div className="sm:col-span-7 px-6 sm:px-9 lg:px-11 py-8 sm:py-11 lg:py-12 flex flex-col justify-center">
             <p
-              className="font-sans text-[10px] font-medium tracking-[0.28em] uppercase mb-5"
+              className="font-sans text-[10px] font-medium tracking-[0.28em] uppercase mb-4 sm:mb-5"
               style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
             >
               Your baby this week
             </p>
-            <p className="font-serif text-[1.55rem] sm:text-[2.08rem] text-foreground/88 leading-[1.18] tracking-tight max-w-[19ch] mb-6">
+            <p className="font-serif text-[1.58rem] sm:text-[2.08rem] lg:text-[2.18rem] text-foreground/88 leading-[1.16] tracking-tight max-w-[20ch] mb-5 sm:mb-6">
               {babyNote}
             </p>
             <span
               aria-hidden="true"
-              className="block w-10 h-px mb-6"
+              className="block w-12 h-px mb-5 sm:mb-6"
               style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
             />
-            <div className="flex items-center gap-3.5 max-w-[30rem]">
+            <div className="flex items-center gap-3.5 max-w-[31rem] rounded-[18px] border px-3.5 py-3"
+              style={{ background: "hsl(var(--card) / 0.42)", borderColor: "hsl(var(--stage-pregnancy-accent) / 0.12)" }}
+            >
               <span
                 aria-hidden="true"
                 className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full border"

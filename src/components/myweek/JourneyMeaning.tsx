@@ -62,7 +62,7 @@ const JourneyMeaning = ({ firstName, currentWeek, heldCount, photoCount }: Props
       </p>
 
       {/* Summary of what's been kept */}
-      <div className="grid grid-cols-2 gap-3 mb-10 max-w-[390px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10 max-w-[390px]">
         <div className="rounded-[18px] keepsake-surface px-5 py-5 min-h-[118px] flex flex-col justify-between">
           <p className="font-sans text-[9.5px] font-medium tracking-[0.22em] uppercase text-foreground/45 leading-relaxed">
             Kept so far
@@ -75,7 +75,7 @@ const JourneyMeaning = ({ firstName, currentWeek, heldCount, photoCount }: Props
           <p className="font-sans text-[9.5px] font-medium tracking-[0.22em] uppercase text-foreground/45 leading-relaxed">
             Memory objects
           </p>
-          <p className="font-serif font-medium text-foreground text-[1.08rem] sm:text-[1.2rem] leading-none whitespace-nowrap tabular-nums">
+          <p className="font-serif font-medium text-foreground text-[1.08rem] sm:text-[1.16rem] leading-none whitespace-nowrap tabular-nums">
             {heldCount === 0 && photoCount === 0
               ? "None yet"
               : `${heldCount} note${heldCount === 1 ? "" : "s"} · ${photoCount} photo${photoCount === 1 ? "" : "s"}`}

@@ -327,7 +327,7 @@ const KeptChapter = () => {
       />
       <MyWeekHeader />
 
-      <main className="relative mx-auto w-full max-w-[680px] md:max-w-[1040px] lg:max-w-[1240px] xl:max-w-[1320px] px-5 sm:px-8 md:px-10 lg:px-14 pt-12 sm:pt-16 lg:pt-20 pb-20">
+      <main className="relative mx-auto w-full max-w-[680px] md:max-w-[1040px] lg:max-w-[1240px] xl:max-w-[1320px] px-5 sm:px-8 md:px-10 lg:px-14 pt-10 sm:pt-16 lg:pt-20 pb-20">
         {/* Quiet return cue */}
         <div className="mb-8 sm:mb-10">
           <Link
@@ -339,7 +339,7 @@ const KeptChapter = () => {
           </Link>
         </div>
 
-        <section className="grid md:grid-cols-12 gap-7 md:gap-10 items-end mb-10 sm:mb-12 lg:mb-14">
+        <section className="grid md:grid-cols-12 gap-6 md:gap-10 items-end mb-9 sm:mb-12 lg:mb-14">
           <div className="md:col-span-8">
             <p
               className="font-sans text-[10px] font-medium tracking-[0.32em] uppercase mb-5"
@@ -358,7 +358,7 @@ const KeptChapter = () => {
             </p>
           </div>
           <aside
-            className="md:col-span-4 rounded-[24px] keepsake-surface px-6 py-6 md:py-7"
+            className="md:col-span-4 rounded-[24px] keepsake-surface px-5 sm:px-6 py-5 sm:py-6 md:py-7"
             style={{ borderColor: accentSoft(0.16) }}
           >
             <div className="flex items-center gap-2 mb-4">
@@ -503,7 +503,7 @@ const KeptChapter = () => {
           </aside>
 
           {/* ============== RIGHT — the kept chapter itself ============== */}
-          <article className="mt-0 space-y-10 sm:space-y-12 lg:space-y-14">
+          <article className="mt-0 space-y-8 sm:space-y-12 lg:space-y-14">
             {/* ---------- Title block ----------
                 Tablet & mobile: this is the single composed frontispiece.
                 One eyebrow, one paired title, one held theme, one quiet

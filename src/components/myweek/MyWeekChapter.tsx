@@ -47,6 +47,56 @@ const MyWeekChapter = ({
 }: Props) => {
   const weeksLeft = dueDateMeta.split(" · ")[0] ?? dueDateMeta;
   const sizeCue = developmentCue.replace(/[—–].*$/, "").trim();
+  const comparison = sizeCue.toLowerCase();
+  const objectLabel = comparison.includes("mango")
+    ? "mango"
+    : comparison.includes("poppy")
+    ? "poppy seed"
+    : comparison.includes("sesame")
+    ? "sesame seed"
+    : comparison.includes("apple")
+    ? "apple seed"
+    : comparison.includes("lentil")
+    ? "lentil"
+    : comparison.includes("blueberry")
+    ? "blueberry"
+    : comparison.includes("raspberry")
+    ? "raspberry"
+    : comparison.includes("olive")
+    ? "olive"
+    : comparison.includes("strawberry")
+    ? "strawberry"
+    : comparison.includes("lime")
+    ? "lime"
+    : comparison.includes("plum")
+    ? "plum"
+    : comparison.includes("pepper")
+    ? "pepper"
+    : comparison.includes("banana")
+    ? "banana"
+    : comparison.includes("carrot")
+    ? "carrot"
+    : comparison.includes("squash")
+    ? "squash"
+    : comparison.includes("corn")
+    ? "corn"
+    : comparison.includes("courgette")
+    ? "courgette"
+    : comparison.includes("cauliflower")
+    ? "cauliflower"
+    : comparison.includes("aubergine")
+    ? "aubergine"
+    : comparison.includes("cabbage")
+    ? "cabbage"
+    : comparison.includes("coconut")
+    ? "coconut"
+    : comparison.includes("pineapple")
+    ? "pineapple"
+    : comparison.includes("pumpkin")
+    ? "pumpkin"
+    : comparison.includes("watermelon")
+    ? "watermelon"
+    : "comparison";
 
   return (
     <div className="relative">
@@ -97,7 +147,7 @@ const MyWeekChapter = ({
                 Due date
               </p>
             </div>
-            <p className="font-serif font-medium text-[2.05rem] md:text-[2.35rem] text-foreground/90 leading-none mb-3 whitespace-nowrap">
+            <p className="font-serif font-medium text-[2.05rem] md:text-[2.2rem] lg:text-[2.35rem] text-foreground/90 leading-none mb-3 whitespace-nowrap">
               {dueDateLabel}
             </p>
             <div className="flex items-start gap-2 pt-4 border-t" style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)" }}>
@@ -142,12 +192,18 @@ const MyWeekChapter = ({
               className="block w-10 h-px mb-5"
               style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
             />
-            <div className="mt-1 flex items-center gap-3 rounded-full px-4 py-3 max-w-[34ch]" style={{ background: "hsl(var(--stage-pregnancy) / 0.38)" }}>
-              <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full" style={{ background: "hsl(var(--card))" }}>
-                <span className="block h-4 w-6 rounded-[55%_45%_50%_50%] rotate-[-14deg]" style={{ background: "hsl(var(--stage-pregnancy-accent) / 0.72)" }} />
-                <span className="absolute right-1.5 top-2 h-2 w-2 rounded-full rotate-45" style={{ borderTop: "1px solid hsl(var(--stage-pregnancy-accent) / 0.7)", borderRight: "1px solid hsl(var(--stage-pregnancy-accent) / 0.7)" }} />
+            <div className="mt-1 flex items-center gap-3 rounded-[18px] px-4 py-3 max-w-[36ch]" style={{ background: "hsl(var(--stage-pregnancy) / 0.38)", border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.12)" }}>
+              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full" style={{ background: "hsl(var(--card))" }}>
+                <svg viewBox="0 0 32 32" width="25" height="25" aria-hidden="true" className="text-[hsl(var(--stage-pregnancy-accent))]">
+                  <ellipse cx="16" cy="17" rx={objectLabel.includes("seed") || objectLabel === "lentil" ? 7 : objectLabel === "banana" || objectLabel === "carrot" || objectLabel === "courgette" ? 10 : 8} ry={objectLabel.includes("seed") || objectLabel === "lentil" ? 5 : objectLabel === "banana" || objectLabel === "carrot" || objectLabel === "courgette" ? 4 : 7} fill="currentColor" opacity="0.66" transform={objectLabel === "banana" || objectLabel === "carrot" || objectLabel === "courgette" ? "rotate(-18 16 17)" : undefined} />
+                  <path d="M19 10c3-1 5-3 6-5" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.62" />
+                  <path d="M21 8c2 0 3.4.7 4.2 2" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.42" />
+                </svg>
               </span>
               <figcaption className="font-sans text-[12.5px] text-foreground/66 leading-snug">
+                <span className="block text-[9.5px] font-medium tracking-[0.24em] uppercase mb-1" style={{ color: "hsl(var(--stage-pregnancy-accent))" }}>
+                  Size comparison
+                </span>
                 {sizeCue}
               </figcaption>
             </div>

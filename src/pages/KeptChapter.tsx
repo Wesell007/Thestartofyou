@@ -990,24 +990,35 @@ const KeptChapter = () => {
                 {content.lead}
               </p>
 
-              <ol className="space-y-6">
-                {content.matters.map((p, i) => (
-                  <li
-                    key={i}
-                    className="relative pl-6 border-l-[1.5px]"
-                    style={{ borderColor: accentSoft(0.32) }}
-                  >
-                    <p
-                      className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase mb-2"
-                      style={{ color: accent }}
+              <ol className="space-y-4 sm:space-y-5">
+                {content.matters.map((p, i) => {
+                  const Icon = matterIcons[i] ?? Sparkles;
+                  return (
+                    <li
+                      key={i}
+                      className="relative rounded-[22px] px-5 sm:px-6 py-5 grid sm:grid-cols-[150px_1fr] gap-4 sm:gap-7 items-center"
+                      style={{ background: tint(0.14), border: `1px solid ${accentSoft(0.12)}` }}
                     >
-                      {p.title} · then
-                    </p>
-                    <p className="font-sans text-[14.5px] font-light text-foreground/70 leading-[1.7] max-w-[58ch]">
-                      {p.body}
-                    </p>
-                  </li>
-                ))}
+                      <div className="flex items-center gap-4">
+                        <span
+                          className="flex w-12 h-12 rounded-full shrink-0 items-center justify-center"
+                          style={{ background: tint(0.45) }}
+                        >
+                          <Icon size={21} strokeWidth={1.45} style={{ color: accent }} />
+                        </span>
+                        <p
+                          className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase"
+                          style={{ color: accent }}
+                        >
+                          {p.title}
+                        </p>
+                      </div>
+                      <p className="font-sans text-[14.5px] font-light text-foreground/72 leading-[1.7] max-w-[62ch]">
+                        {p.body}
+                      </p>
+                    </li>
+                  );
+                })}
               </ol>
             </section>
 

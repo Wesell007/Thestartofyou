@@ -62,20 +62,20 @@ const JourneyMeaning = ({ firstName, currentWeek, heldCount, photoCount }: Props
       </p>
 
       {/* Summary of what's been kept */}
-      <div className="grid grid-cols-2 gap-3 mb-10 max-w-[360px]">
-        <div className="rounded-[18px] keepsake-surface px-5 py-5">
-          <p className="font-sans text-[9.5px] font-medium tracking-[0.24em] uppercase text-foreground/45 mb-2">
+      <div className="grid grid-cols-2 gap-3 mb-10 max-w-[390px]">
+        <div className="rounded-[18px] keepsake-surface px-5 py-5 min-h-[118px] flex flex-col justify-between">
+          <p className="font-sans text-[9.5px] font-medium tracking-[0.22em] uppercase text-foreground/45 leading-relaxed">
             Kept so far
           </p>
-          <p className="font-serif font-medium text-foreground text-[1.35rem] leading-tight">
+          <p className="font-serif font-medium text-foreground text-[1.35rem] sm:text-[1.48rem] leading-none whitespace-nowrap">
             {currentWeek === 1 ? "1 week" : `${currentWeek} weeks`}
           </p>
         </div>
-        <div className="rounded-[18px] keepsake-surface px-5 py-5">
-          <p className="font-sans text-[9.5px] font-medium tracking-[0.24em] uppercase text-foreground/45 mb-2">
+        <div className="rounded-[18px] keepsake-surface px-5 py-5 min-h-[118px] flex flex-col justify-between">
+          <p className="font-sans text-[9.5px] font-medium tracking-[0.22em] uppercase text-foreground/45 leading-relaxed">
             Memory objects
           </p>
-          <p className="font-serif font-medium text-foreground text-[1.35rem] leading-tight">
+          <p className="font-serif font-medium text-foreground text-[1.08rem] sm:text-[1.2rem] leading-none whitespace-nowrap tabular-nums">
             {heldCount === 0 && photoCount === 0
               ? "—"
               : `${heldCount} note${heldCount === 1 ? "" : "s"} · ${photoCount} photo${photoCount === 1 ? "" : "s"}`}

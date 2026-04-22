@@ -57,7 +57,7 @@ const JourneyMeaning = ({ firstName, currentWeek, heldCount, photoCount }: Props
       </h1>
 
       <p className="font-serif italic text-[1.05rem] lg:text-[1.12rem] text-foreground/68 leading-[1.5] max-w-[34ch] mb-10">
-        Not a timeline. A pregnancy record — the weeks you've lived,
+        Not a timeline. A pregnancy record of the weeks you've lived,
         the thoughts you've held, and the images you chose to keep.
       </p>
 
@@ -77,7 +77,7 @@ const JourneyMeaning = ({ firstName, currentWeek, heldCount, photoCount }: Props
           </p>
           <p className="font-serif font-medium text-foreground text-[1.08rem] sm:text-[1.2rem] leading-none whitespace-nowrap tabular-nums">
             {heldCount === 0 && photoCount === 0
-              ? "—"
+              ? "None yet"
               : `${heldCount} note${heldCount === 1 ? "" : "s"} · ${photoCount} photo${photoCount === 1 ? "" : "s"}`}
           </p>
         </div>

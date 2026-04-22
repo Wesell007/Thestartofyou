@@ -7,7 +7,7 @@ import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
-import WeekIllustration from "@/components/myweek/WeekIllustration";
+import MyWeekBabyImage from "@/components/myweek/MyWeekBabyImage";
 import NoteShapingSuggestion from "@/components/myweek/NoteShapingSuggestion";
 import MatterIcon from "@/components/myweek/MatterIcon";
 import { useShapingThreshold } from "@/hooks/useShapingThreshold";
@@ -645,7 +645,11 @@ const KeptChapter = () => {
                             "radial-gradient(circle, hsl(var(--stage-pregnancy) / 0.45), transparent 70%)",
                         }}
                       />
-                      <WeekIllustration week={week} size={140} className="relative mx-auto opacity-90 sm:scale-[1.2]" />
+                      <MyWeekBabyImage
+                        week={week}
+                        className="relative mx-auto aspect-square w-[168px] sm:w-[196px] opacity-95"
+                        imgClassName="h-full w-full object-contain select-none"
+                      />
                     </div>
                     <div className="flex items-center gap-2 mt-6">
                       <Lock size={10} strokeWidth={1.8} style={{ color: accent }} />

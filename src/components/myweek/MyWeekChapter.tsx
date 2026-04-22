@@ -41,7 +41,6 @@ const MyWeekChapter = ({
   trimesterLabel,
   chapterTitle,
   theme,
-  developmentCue,
   babyNote,
   content,
 }: Props) => {
@@ -141,9 +140,6 @@ const MyWeekChapter = ({
               className="block w-10 h-px mb-6"
               style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
             />
-            <figcaption className="font-sans text-[15px] sm:text-[15.5px] font-light text-foreground/66 leading-[1.7] max-w-[31ch]">
-              {developmentCue.replace(/[—–]/g, ".")}
-            </figcaption>
           </div>
         </figure>
       </section>

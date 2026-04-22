@@ -647,7 +647,7 @@ const KeptChapter = () => {
                       />
                       <MyWeekBabyImage
                         week={week}
-                        className="relative mx-auto aspect-square w-[168px] sm:w-[196px] opacity-95"
+                        className="relative mx-auto aspect-[13/16] w-[148px] sm:w-[176px] opacity-95"
                         imgClassName="h-full w-full object-contain select-none"
                       />
                     </div>

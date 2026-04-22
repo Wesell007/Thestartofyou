@@ -27,7 +27,7 @@ const formatDueDate = (d: Date) =>
 const formatRemainingTime = (dueDate: Date, currentWeek: number) => {
   const daysLeft = Math.max(differenceInDays(dueDate, new Date()), 0);
   const weeksLeft = Math.max(Math.ceil(daysLeft / 7), 0);
-  return `${weeksLeft} ${weeksLeft === 1 ? "week" : "weeks"} to go · Week ${currentWeek} of 40`;
+  return `${weeksLeft} ${weeksLeft === 1 ? "week" : "weeks"} to go`;
 };
 
 const computeWeek = (lmp: Date) => {

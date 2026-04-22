@@ -1,3 +1,4 @@
+import { CalendarDays, Clock3 } from "lucide-react";
 import WeekIllustration from "./WeekIllustration";
 import SlotWhatMatters from "./SlotWhatMatters";
 import type { MyWeekEntry } from "@/data/myWeekContent";
@@ -7,6 +8,7 @@ interface Props {
   firstName: string;
   week: number;
   dueDateLabel: string;
+  dueDateMeta: string;
   trimesterLabel: string;
   chapterTitle: string;
   theme: string;
@@ -35,6 +37,7 @@ const MyWeekChapter = ({
   firstName,
   week,
   dueDateLabel,
+  dueDateMeta,
   trimesterLabel,
   chapterTitle,
   theme,
@@ -56,10 +59,10 @@ const MyWeekChapter = ({
       />
 
       {/* Chapter frontispiece */}
-      <section className="relative pt-16 sm:pt-20 lg:pt-24 pb-10 sm:pb-12 lg:pb-14">
-        <div className="grid md:grid-cols-12 gap-7 md:gap-8 items-end mb-9 sm:mb-10">
+      <section className="relative pt-12 sm:pt-16 lg:pt-20 pb-10 sm:pb-12 lg:pb-14">
+        <div className="grid md:grid-cols-12 gap-7 md:gap-10 items-end mb-9 sm:mb-11">
           <div className="md:col-span-8">
-            <p className="font-serif italic text-[13px] sm:text-[14px] text-foreground/55 tracking-wide mb-8">
+            <p className="font-serif italic text-[13px] sm:text-[14px] text-foreground/55 tracking-wide mb-7">
               {greeting}, {firstName}.
             </p>
             <p
@@ -82,18 +85,24 @@ const MyWeekChapter = ({
             className="md:col-span-4 rounded-[24px] keepsake-surface px-6 py-6 md:py-7"
             style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)" }}
           >
-            <p
-              className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-4"
-              style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-            >
-              Due date
-            </p>
+            <div className="flex items-center gap-2 mb-4">
+              <CalendarDays size={13} strokeWidth={1.7} style={{ color: "hsl(var(--stage-pregnancy-accent))" }} />
+              <p
+                className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase"
+                style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+              >
+                Due date
+              </p>
+            </div>
             <p className="font-serif font-medium text-[2.15rem] md:text-[2.5rem] text-foreground/90 leading-none mb-3">
               {dueDateLabel}
             </p>
-            <p className="font-serif italic text-[13px] text-foreground/55 leading-relaxed">
-              One anchor for where this chapter sits now.
-            </p>
+            <div className="flex items-start gap-2 pt-4 border-t" style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)" }}>
+              <Clock3 size={13} strokeWidth={1.6} className="mt-0.5 shrink-0" style={{ color: "hsl(var(--stage-pregnancy-accent))" }} />
+              <p className="font-sans text-[13.5px] text-foreground/65 leading-relaxed">
+                {dueDateMeta}
+              </p>
+            </div>
           </aside>
         </div>
 
@@ -114,8 +123,8 @@ const MyWeekChapter = ({
             }}
           >
             <WeekIllustration week={week} size={220} className="mx-auto" />
-            <figcaption className="mt-5 font-serif italic text-[13.5px] text-foreground/55 tracking-wide text-center max-w-[28ch] leading-snug">
-              {babyNote}
+            <figcaption className="mt-5 rounded-full px-5 py-2 font-sans text-[12.5px] text-foreground/66 text-center max-w-[34ch] leading-snug" style={{ background: "hsl(var(--stage-pregnancy) / 0.42)" }}>
+              {developmentCue}
             </figcaption>
           </div>
           <div className="sm:col-span-7 px-7 sm:px-9 py-8 sm:py-11 flex flex-col justify-center">
@@ -123,10 +132,10 @@ const MyWeekChapter = ({
               className="font-sans text-[10px] font-medium tracking-[0.28em] uppercase mb-5"
               style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
             >
-              Development this week
+              Your baby this week
             </p>
             <p className="font-serif text-[1.65rem] sm:text-[2rem] text-foreground/88 leading-[1.18] tracking-tight max-w-[18ch] mb-5">
-              {developmentCue}
+              {babyNote}
             </p>
             <span
               aria-hidden="true"

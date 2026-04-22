@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { differenceInDays } from "date-fns";
-import { ArrowLeft, ArrowRight, Lock, BookOpen, Mic, MicOff, Feather, Baby, Heart, Sparkles, Clock3 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Lock, BookOpen, Mic, MicOff, Feather, Clock3 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
@@ -9,6 +9,7 @@ import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import WeekIllustration from "@/components/myweek/WeekIllustration";
 import NoteShapingSuggestion from "@/components/myweek/NoteShapingSuggestion";
+import MatterIcon from "@/components/myweek/MatterIcon";
 import { useShapingThreshold } from "@/hooks/useShapingThreshold";
 
 /**
@@ -311,7 +312,7 @@ const KeptChapter = () => {
   const accent = "hsl(var(--stage-pregnancy-accent))";
   const accentSoft = (a: number) => `hsl(var(--stage-pregnancy-accent) / ${a})`;
   const tint = (a: number) => `hsl(var(--stage-pregnancy) / ${a})`;
-  const matterIcons = [Baby, Heart, Sparkles];
+  const matterIcons = ["baby", "body", "heart"] as const;
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative overflow-x-hidden">
@@ -992,7 +993,7 @@ const KeptChapter = () => {
 
               <ol className="space-y-4 sm:space-y-5">
                 {content.matters.map((p, i) => {
-                  const Icon = matterIcons[i] ?? Sparkles;
+                  const icon = matterIcons[i] ?? "heart";
                   return (
                     <li
                       key={i}
@@ -1004,7 +1005,7 @@ const KeptChapter = () => {
                           className="flex w-12 h-12 rounded-full shrink-0 items-center justify-center"
                           style={{ background: tint(0.45) }}
                         >
-                          <Icon size={21} strokeWidth={1.45} style={{ color: accent }} />
+                          <MatterIcon type={icon} size={24} />
                         </span>
                         <p
                           className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase"

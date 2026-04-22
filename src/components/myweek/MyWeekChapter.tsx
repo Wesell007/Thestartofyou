@@ -1,9 +1,7 @@
 import { CalendarDays, Clock3 } from "lucide-react";
 import SlotWhatMatters from "./SlotWhatMatters";
+import MyWeekBabyImage from "./MyWeekBabyImage";
 import type { MyWeekEntry } from "@/data/myWeekContent";
-import babyEarly from "@/assets/myweek-baby-early.png";
-import babyMid from "@/assets/myweek-baby-mid.png";
-import babyLate from "@/assets/myweek-baby-late.png";
 
 type CueShape = "mango" | "berry" | "strawberry" | "orchard" | "pod" | "large" | "olive" | "seed";
 
@@ -65,7 +63,6 @@ const MyWeekChapter = ({
 }: Props) => {
   const weeksLeft = dueDateMeta.split(" · ")[0] ?? dueDateMeta;
   const cueShape = getCueShape(developmentCue);
-  const babyArtwork = week <= 12 ? babyEarly : week <= 27 ? babyMid : babyLate;
 
   return (
     <div className="relative">
@@ -155,12 +152,10 @@ const MyWeekChapter = ({
                 className="absolute inset-[6%] rounded-full border"
                 style={{ borderColor: "hsl(var(--card) / 0.5)" }}
               />
-              <img
-                src={babyArtwork}
-                alt={`Softly rendered baby illustration for week ${week}`}
-                loading="eager"
-                decoding="async"
-                className="relative z-10 h-full w-full object-contain select-none"
+              <MyWeekBabyImage
+                week={week}
+                className="relative z-10 h-full w-full"
+                imgClassName="h-full w-full object-contain select-none"
               />
             </div>
           </div>

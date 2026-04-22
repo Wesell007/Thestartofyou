@@ -1,4 +1,4 @@
-const babyImages = import.meta.glob("@/assets/myweek-weekly-babies/myweek-baby-week-*.png", {
+const babyImages = import.meta.glob("../../assets/myweek-weekly-babies/myweek-baby-week-*.png", {
   eager: true,
   import: "default",
 }) as Record<string, string>;
@@ -12,7 +12,7 @@ interface Props {
 const getBabyImage = (week: number) => {
   const w = Math.min(Math.max(Math.round(week), 1), 42);
   const suffix = String(w).padStart(2, "0");
-  return babyImages[`/src/assets/myweek-weekly-babies/myweek-baby-week-${suffix}.png`];
+  return babyImages[`../../assets/myweek-weekly-babies/myweek-baby-week-${suffix}.png`];
 };
 
 const MyWeekBabyImage = ({ week, className, imgClassName }: Props) => {

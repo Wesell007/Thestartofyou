@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { differenceInDays } from "date-fns";
-import { ArrowLeft, ArrowRight, Lock, BookOpen, Mic, MicOff, Feather } from "lucide-react";
+import { ArrowLeft, ArrowRight, Lock, BookOpen, Mic, MicOff, Feather, Baby, Heart, Sparkles, Clock3 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
@@ -311,6 +311,7 @@ const KeptChapter = () => {
   const accent = "hsl(var(--stage-pregnancy-accent))";
   const accentSoft = (a: number) => `hsl(var(--stage-pregnancy-accent) / ${a})`;
   const tint = (a: number) => `hsl(var(--stage-pregnancy) / ${a})`;
+  const matterIcons = [Baby, Heart, Sparkles];
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative overflow-x-hidden">
@@ -337,7 +338,7 @@ const KeptChapter = () => {
           </Link>
         </div>
 
-        <section className="grid md:grid-cols-12 gap-7 md:gap-8 items-end mb-10 sm:mb-12 lg:mb-14">
+        <section className="grid md:grid-cols-12 gap-7 md:gap-10 items-end mb-10 sm:mb-12 lg:mb-14">
           <div className="md:col-span-8">
             <p
               className="font-sans text-[10px] font-medium tracking-[0.32em] uppercase mb-5"
@@ -359,18 +360,26 @@ const KeptChapter = () => {
             className="md:col-span-4 rounded-[24px] keepsake-surface px-6 py-6 md:py-7"
             style={{ borderColor: accentSoft(0.16) }}
           >
-            <p
-              className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-4"
-              style={{ color: accent }}
-            >
-              Still held
-            </p>
+            <div className="flex items-center gap-2 mb-4">
+              <Clock3 size={13} strokeWidth={1.7} style={{ color: accent }} />
+              <p
+                className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase"
+                style={{ color: accent }}
+              >
+                Still held
+              </p>
+            </div>
             <p className="font-serif font-medium text-[2rem] md:text-[2.35rem] text-foreground/90 leading-none mb-3">
               Week {week}
             </p>
-            <p className="font-serif italic text-[13px] text-foreground/55 leading-relaxed">
-              Kept {weeksAgo} {weeksAgo === 1 ? "week" : "weeks"} ago, and still revisable.
-            </p>
+            <div className="pt-4 border-t" style={{ borderColor: accentSoft(0.14) }}>
+              <p className="font-sans text-[13.5px] text-foreground/65 leading-relaxed">
+                Kept {weeksAgo} {weeksAgo === 1 ? "week" : "weeks"} ago · Now in week {currentWeek}
+              </p>
+              <p className="font-serif italic text-[12.5px] text-foreground/48 leading-relaxed mt-1">
+                Original words and accepted refinements stay recoverable here.
+              </p>
+            </div>
           </aside>
         </section>
 

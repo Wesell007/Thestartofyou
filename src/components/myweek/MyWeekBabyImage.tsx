@@ -18,12 +18,18 @@ const getBabyImage = (week: number) => {
 const MyWeekBabyImage = ({ week, className, imgClassName }: Props) => {
   const w = Math.min(Math.max(Math.round(week), 1), 42);
   const src = getBabyImage(w);
+  const alt =
+    w >= 41
+      ? `Soft rendered birth-transition illustration for week ${w}`
+      : w <= 4
+      ? `Soft rendered earliest pregnancy development illustration for week ${w}`
+      : `Soft rendered week-specific pregnancy development illustration for week ${w}`;
 
   return (
     <div className={className} data-baby-week={w}>
       <img
         src={src}
-        alt={`Soft rendered fetal development illustration for week ${w}`}
+        alt={alt}
         loading="eager"
         decoding="async"
         className={imgClassName}

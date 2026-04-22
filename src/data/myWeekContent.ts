@@ -60,7 +60,7 @@ const identityByWeek: Record<number, WeekIdentity> = {
   19: { chapterTitle: "A second person", theme: "Recognisably them.", developmentCue: "About the length of a heirloom tomato, finding rhythm.", babyNote: "Vernix is forming on their skin, a soft protective coating for the months to come." },
   20: { chapterTitle: "Halfway, gently", theme: "Halfway, gently.", developmentCue: "About the length of a banana, growing longer than wide.", babyNote: "Fingerprints are now uniquely theirs, a quiet kind of permanence." },
   21: { chapterTitle: "A growing rhythm", theme: "Theirs and yours.", developmentCue: "About the length of a carrot, busy and present.", babyNote: "They can taste what you taste. Flavours travel through amniotic fluid." },
-  22: { chapterTitle: "The middle middle", theme: "The middle middle.", developmentCue: "Roughly the length of a spaghetti squash — long, lean, real.", babyNote: "Eyebrows and lashes are forming, faint but present." },
+  22: { chapterTitle: "The middle middle", theme: "The middle middle.", developmentCue: "Roughly the length of a spaghetti squash, long, lean, real.", babyNote: "Eyebrows and lashes are forming, faint but present." },
   23: { chapterTitle: "Held weight", theme: "Real now.", developmentCue: "About the length of a large mango, gaining substance.", babyNote: "Their skin is becoming less translucent; small layers of fat are beginning." },
   24: { chapterTitle: "Knowing your voice", theme: "A steady presence.", developmentCue: "About the length of an ear of corn, settling into proportion.", babyNote: "Inner ear is fully developed. Your baby may startle at sudden sound." },
   25: { chapterTitle: "Closer to you", theme: "Tuning in.", developmentCue: "About the length of a swede, settling and stretching.", babyNote: "Their hands are now sensitive. They may grasp the cord, or their own foot." },
@@ -101,7 +101,7 @@ const entries: Record<number, MyWeekEntry> = {
     lead: "Your baby is moving more than you can feel.",
     matters: [
       { title: "Your baby", body: "About the length of a sweet pepper. Their hearing is sharpening, and they're stretching, kicking, and turning often." },
-      { title: "Your body", body: "Your bump is becoming more visible. You may feel the first quickening — small flutters that come and go." },
+      { title: "Your body", body: "Your bump is becoming more visible. You may feel the first quickening, small flutters that come and go." },
       { title: "Emotionally", body: "This middle stretch can feel calmer, or quietly strange. Both are common, and neither needs to be fixed." },
     ],
     focus: {

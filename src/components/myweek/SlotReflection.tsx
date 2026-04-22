@@ -156,7 +156,7 @@ const SlotReflection = ({ content, userId, week }: Props) => {
       }
     };
     rec.onerror = () => {
-      setVoiceMessage("Some of that didn't come through. Your words are still here — you can speak again, or type the rest.");
+      setVoiceMessage("Some of that didn't come through. Your words are still here. You can speak again, or type the rest.");
       setListening(false);
     };
     rec.onend = () => setListening(false);

@@ -101,7 +101,7 @@ const KeptChapter = () => {
       };
       rec.onerror = (e: any) => {
         if (e?.error === "not-allowed") setVoiceError("We couldn't hear you just now. You can try again, or type instead.");
-        else if (e?.error === "no-speech") setVoiceError("Some of that didn't come through. Your words are still here — you can speak again, or type the rest.");
+        else if (e?.error === "no-speech") setVoiceError("Some of that didn't come through. Your words are still here. You can speak again, or type the rest.");
         else setVoiceError("Some of that didn't come through. Your words are still here.");
         setIsListening(false);
       };

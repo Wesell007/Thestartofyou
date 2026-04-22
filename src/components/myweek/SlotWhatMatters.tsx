@@ -58,7 +58,7 @@ const SlotWhatMatters = ({ content, trimesterLabel, week }: Props) => {
           return (
           <li
             key={i}
-            className="group relative rounded-[20px] sm:rounded-[22px] keepsake-surface px-4.5 sm:px-6 py-4.5 sm:py-6 transition-all duration-500 hover:shadow-[0_24px_60px_-24px_hsl(var(--stage-pregnancy-accent)/0.18),0_4px_16px_-8px_hsl(222_14%_12%/0.05)]"
+            className="group relative rounded-[20px] sm:rounded-[22px] keepsake-surface px-5 sm:px-6 py-5 sm:py-6 transition-all duration-500 hover:shadow-[0_24px_60px_-24px_hsl(var(--stage-pregnancy-accent)/0.18),0_4px_16px_-8px_hsl(222_14%_12%/0.05)]"
           >
             {/* Stage-coded left rule */}
             <span

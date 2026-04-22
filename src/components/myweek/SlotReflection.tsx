@@ -360,7 +360,7 @@ const SlotReflection = ({ content, userId, week }: Props) => {
 
       {/* Continuity colophon */}
       <p className="font-serif italic text-[12.5px] text-foreground/45 mt-5 max-w-[42ch]">
-        Each week's reflection is kept on your journey — a record of becoming, week by week.
+        Each week's reflection is kept on your journey. A record of becoming, week by week.
       </p>
     </section>
   );

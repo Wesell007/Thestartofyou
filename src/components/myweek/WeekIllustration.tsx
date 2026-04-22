@@ -31,18 +31,33 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
       className={className}
     >
       <defs>
-        <radialGradient id="wombGlow" cx="48%" cy="48%" r="66%">
-          <stop offset="0%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.42)" />
-          <stop offset="52%" stopColor="hsl(var(--stage-pregnancy) / 0.78)" />
+        <filter id="paintedSoftness" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="1.2" result="softShadow" />
+          <feOffset dx="0" dy="3" result="offsetShadow" />
+          <feColorMatrix in="offsetShadow" type="matrix" values="0 0 0 0 0.58 0 0 0 0 0.18 0 0 0 0 0.12 0 0 0 0.18 0" />
+          <feMerge>
+            <feMergeNode />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        <radialGradient id="wombGlow" cx="48%" cy="45%" r="68%">
+          <stop offset="0%" stopColor="hsl(var(--card) / 0.42)" />
+          <stop offset="38%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.38)" />
+          <stop offset="68%" stopColor="hsl(var(--stage-pregnancy) / 0.72)" />
           <stop offset="100%" stopColor="hsl(var(--stage-pregnancy) / 0)" />
         </radialGradient>
-        <radialGradient id="babyFill" cx="34%" cy="24%" r="82%">
-          <stop offset="0%" stopColor="hsl(var(--card) / 0.62)" />
-          <stop offset="36%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.88)" />
-          <stop offset="100%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.6)" />
+        <radialGradient id="babyFill" cx="36%" cy="22%" r="86%">
+          <stop offset="0%" stopColor="hsl(var(--card) / 0.82)" />
+          <stop offset="30%" stopColor="hsl(var(--stage-pregnancy) / 0.74)" />
+          <stop offset="58%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.78)" />
+          <stop offset="100%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.48)" />
         </radialGradient>
-        <radialGradient id="softHighlight" cx="32%" cy="24%" r="40%">
-          <stop offset="0%" stopColor="hsl(var(--card) / 0.54)" />
+        <radialGradient id="skinWarmth" cx="62%" cy="72%" r="72%">
+          <stop offset="0%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.42)" />
+          <stop offset="100%" stopColor="hsl(var(--stage-pregnancy-accent) / 0)" />
+        </radialGradient>
+        <radialGradient id="softHighlight" cx="30%" cy="20%" r="48%">
+          <stop offset="0%" stopColor="hsl(var(--card) / 0.72)" />
           <stop offset="100%" stopColor="hsl(var(--card) / 0)" />
         </radialGradient>
         <linearGradient id="vesselLine" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -52,8 +67,10 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
       </defs>
 
       <circle cx="140" cy="140" r="130" fill="url(#wombGlow)" />
-      <ellipse cx="140" cy="142" rx="114" ry="118" fill="hsl(var(--card) / 0.1)" stroke="hsl(var(--stage-pregnancy-accent) / 0.18)" strokeWidth="0.8" />
-      <ellipse cx="140" cy="144" rx="91" ry="99" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.2)" strokeWidth="0.7" strokeDasharray="1 7" />
+      <ellipse cx="140" cy="142" rx="112" ry="118" fill="hsl(var(--card) / 0.12)" stroke="hsl(var(--card) / 0.36)" strokeWidth="1.2" />
+      <ellipse cx="140" cy="143" rx="91" ry="99" fill="hsl(var(--stage-pregnancy-accent) / 0.05)" stroke="hsl(var(--stage-pregnancy-accent) / 0.14)" strokeWidth="0.8" />
+      <path d="M 56 119 C 79 55, 155 31, 210 70 C 258 104, 252 186, 203 224" fill="none" stroke="hsl(var(--card) / 0.38)" strokeWidth="7" strokeLinecap="round" opacity="0.52" />
+      <path d="M 72 84 C 109 48, 171 48, 210 86" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.2)" strokeWidth="1.2" strokeLinecap="round" />
 
       {phase === "early" && (
         <g transform={`translate(140 ${148 + phaseT * 3}) scale(${0.8 + phaseT * 0.36}) rotate(${-25 + phaseT * 7})`}>

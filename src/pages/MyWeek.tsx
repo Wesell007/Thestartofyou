@@ -24,6 +24,12 @@ const getGreeting = (d = new Date()) => {
 const formatDueDate = (d: Date) =>
   d.toLocaleDateString("en-GB", { day: "numeric", month: "long" });
 
+const formatRemainingTime = (dueDate: Date, currentWeek: number) => {
+  const daysLeft = Math.max(differenceInDays(dueDate, new Date()), 0);
+  const weeksLeft = Math.max(Math.ceil(daysLeft / 7), 0);
+  return `${weeksLeft} ${weeksLeft === 1 ? "week" : "weeks"} to go · Week ${currentWeek} of 40`;
+};
+
 const computeWeek = (lmp: Date) => {
   const days = differenceInDays(new Date(), lmp);
   return Math.min(Math.max(Math.floor(days / 7) + 1, 1), MAX_PREGNANCY_WEEK);
@@ -129,6 +135,7 @@ const MyWeek = () => {
               firstName={firstName}
               week={currentWeek}
               dueDateLabel={formatDueDate(dueDate)}
+              dueDateMeta={formatRemainingTime(dueDate, currentWeek)}
               trimesterLabel={trimesterLabel}
               chapterTitle={identity.chapterTitle}
               theme={identity.theme}

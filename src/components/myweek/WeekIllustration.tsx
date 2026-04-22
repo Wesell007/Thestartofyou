@@ -4,25 +4,7 @@ interface Props {
   className?: string;
 }
 
-/**
- * Mum + baby relational form — the signature illustration for /my-week.
- *
- * Trimester-aware composition system. Rather than a single morphing form,
- * the illustration now shifts its underlying composition across four
- * phases of pregnancy:
- *
- *   Early   (1–13)   — A single luminous seed inside a wide vessel.
- *                      Mostly atmosphere; the baby is held in possibility.
- *   Middle  (14–27)  — Two forms in relation. A clearer inner being,
- *                      orbited by a soft outer thread.
- *   Late    (28–40)  — A nested, weighted form. The vessel narrows around
- *                      the inner being; gravity gathers downward.
- *   Overdue (41–42)  — Stillness. The forms settle, the rings hold steady,
- *                      a single waiting line sits below.
- *
- * Each phase shares the same atmospheric vocabulary — radial wash,
- * concentric breath, paper grain — so the journey reads as one piece.
- */
+/** Stage-aware fetal development illustration for the weekly hero card. */
 const WeekIllustration = ({ week, size = 260, className }: Props) => {
   const w = Math.min(Math.max(week, 1), 42);
   const phase: "early" | "middle" | "late" | "overdue" =
@@ -44,7 +26,7 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
       width={size}
       height={size}
       role="img"
-      aria-label={`Week ${w} — a quiet illustration of mother and baby in relation`}
+      aria-label={`Week ${w} — a softly stylised fetal development illustration`}
       className={className}
     >
       <defs>
@@ -59,7 +41,7 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
           <stop offset="100%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.55)" />
         </linearGradient>
 
-        <radialGradient id="babyFill" cx="42%" cy="38%" r="68%">
+        <radialGradient id="babyFill" cx="42%" cy="34%" r="72%">
           <stop offset="0%" stopColor="hsl(var(--stage-pregnancy-accent) / 1)" />
           <stop offset="55%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.85)" />
           <stop offset="100%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.62)" />
@@ -81,7 +63,7 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
           <feComposite in2="SourceGraphic" operator="in" />
         </filter>
 
-        <radialGradient id="babyHighlight" cx="35%" cy="30%" r="35%">
+        <radialGradient id="babyHighlight" cx="34%" cy="28%" r="38%">
           <stop offset="0%" stopColor="hsl(0 0% 100% / 0.42)" />
           <stop offset="100%" stopColor="hsl(0 0% 100% / 0)" />
         </radialGradient>
@@ -113,20 +95,25 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
             strokeWidth="0.7"
             strokeDasharray="1 6"
           />
-          {/* The seed — small, central, glowing */}
-          <circle cx="140" cy={144} r={18 + phaseT * 14} fill="url(#babyGlow)" />
-          <circle cx="140" cy={144} r={6 + phaseT * 10} fill="url(#babyFill)" />
-          <circle
-            cx="140"
-            cy={144}
-            r={6 + phaseT * 10}
-            fill="hsl(var(--stage-pregnancy-accent))"
-            filter="url(#grain)"
-            opacity="0.32"
-          />
-          {/* A single thread up — possibility ascending */}
+          {/* Tiny embryonic presence, deliberately small and held. */}
+          <circle cx="140" cy={144} r={22 + phaseT * 14} fill="url(#babyGlow)" />
           <path
-            d={`M 140 ${144 - (6 + phaseT * 10)} L 140 64`}
+            d={`M ${137 - phaseT * 4} ${144 - phaseT * 3}
+                C ${126 - phaseT * 4} ${135 - phaseT * 8}, ${129 - phaseT * 22} ${156 + phaseT * 2}, ${143 + phaseT * 5} ${157 + phaseT * 9}
+                C ${157 + phaseT * 9} ${158 + phaseT * 4}, ${163 + phaseT * 1} ${142 - phaseT * 8}, ${150 + phaseT * 2} ${136 - phaseT * 6}
+                C ${145 + phaseT * 1} ${133 - phaseT * 4}, ${141 - phaseT * 1} ${136 - phaseT * 1}, ${137 - phaseT * 4} ${144 - phaseT * 3} Z`}
+            fill="url(#babyFill)"
+          />
+          <path
+            d={`M ${146 + phaseT * 4} ${155 + phaseT * 4} C ${154 + phaseT * 6} ${162 + phaseT * 7}, ${154 + phaseT * 2} ${170 + phaseT * 5}, ${145 + phaseT * 1} ${173 + phaseT * 4}`}
+            fill="none"
+            stroke="hsl(var(--stage-pregnancy-accent) / 0.58)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          <circle cx={146 + phaseT * 3} cy={143 - phaseT * 4} r={1.4 + phaseT * 0.6} fill="hsl(var(--card) / 0.78)" />
+          <path
+            d={`M 140 ${130 - phaseT * 8} L 140 64`}
             stroke="hsl(var(--stage-pregnancy-accent) / 0.42)"
             strokeWidth="0.8"
             strokeLinecap="round"
@@ -171,40 +158,20 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
             strokeWidth="0.7"
             strokeDasharray="1 6"
           />
-          {/* Baby — settling into form */}
+          {/* Recognisable baby form, curled and tender, not clinical. */}
           {(() => {
-            const r = 32 + phaseT * 18;
-            const cy = 132 + phaseT * 10;
-            const ry = r * (1.02 + phaseT * 0.12);
+            const scale = 0.88 + phaseT * 0.18;
             return (
-              <>
-                <circle cx="140" cy={cy} r={r + 18} fill="url(#babyGlow)" />
-                <ellipse cx="140" cy={cy} rx={r} ry={ry} fill="url(#babyFill)" />
-                <ellipse
-                  cx="140"
-                  cy={cy}
-                  rx={r}
-                  ry={ry}
-                  fill="hsl(var(--stage-pregnancy-accent))"
-                  filter="url(#grain)"
-                  opacity="0.4"
-                />
-                <ellipse
-                  cx={140 - r * 0.18}
-                  cy={cy - ry * 0.22}
-                  rx={r * 0.65}
-                  ry={ry * 0.55}
-                  fill="url(#babyHighlight)"
-                />
-                {/* Quiet thread — mum to baby */}
-                <path
-                  d={`M 140 ${cy - ry} L 140 70`}
-                  stroke="hsl(var(--stage-pregnancy-accent) / 0.5)"
-                  strokeWidth="0.9"
-                  strokeLinecap="round"
-                  strokeDasharray="1.5 5"
-                />
-              </>
+              <g transform={`translate(140 150) scale(${scale}) rotate(-10)`}>
+                <circle cx="0" cy="0" r="70" fill="url(#babyGlow)" />
+                <ellipse cx="-18" cy="-26" rx="24" ry="28" fill="url(#babyFill)" />
+                <path d="M -2 -10 C 30 -8, 42 20, 20 44 C -4 70, -48 48, -40 12 C -36 -4, -20 -12, -2 -10 Z" fill="url(#babyFill)" />
+                <path d="M -2 2 C 12 16, 4 33, -12 39" fill="none" stroke="hsl(var(--card) / 0.42)" strokeWidth="2" strokeLinecap="round" />
+                <path d="M 10 14 C 28 10, 36 18, 34 30" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3" strokeLinecap="round" />
+                <path d="M 3 36 C 17 48, 30 48, 39 38" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3" strokeLinecap="round" />
+                <circle cx="-26" cy="-29" r="1.8" fill="hsl(var(--card) / 0.86)" />
+                <path d="M -35 -15 C -25 -10, -13 -11, -6 -18" fill="none" stroke="hsl(var(--card) / 0.38)" strokeWidth="1.6" strokeLinecap="round" />
+              </g>
             );
           })()}
         </>
@@ -241,39 +208,20 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
             strokeWidth="0.7"
             strokeDasharray="1 6"
           />
-          {/* Baby — large, settled deep */}
+          {/* Larger late-stage baby, curled into the narrowing womb. */}
           {(() => {
-            const r = 56 + phaseT * 8;
-            const cy = 154 + phaseT * 12;
-            const ry = r * (1.08 + phaseT * 0.06);
+            const scale = 1.06 + phaseT * 0.16;
             return (
-              <>
-                <circle cx="140" cy={cy} r={r + 16} fill="url(#babyGlow)" />
-                <ellipse cx="140" cy={cy} rx={r} ry={ry} fill="url(#babyFill)" />
-                <ellipse
-                  cx="140"
-                  cy={cy}
-                  rx={r}
-                  ry={ry}
-                  fill="hsl(var(--stage-pregnancy-accent))"
-                  filter="url(#grain)"
-                  opacity="0.42"
-                />
-                <ellipse
-                  cx={140 - r * 0.2}
-                  cy={cy - ry * 0.24}
-                  rx={r * 0.62}
-                  ry={ry * 0.52}
-                  fill="url(#babyHighlight)"
-                />
-                <path
-                  d={`M 140 ${cy - ry} L 140 70`}
-                  stroke="hsl(var(--stage-pregnancy-accent) / 0.5)"
-                  strokeWidth="0.9"
-                  strokeLinecap="round"
-                  strokeDasharray="1.5 5"
-                />
-              </>
+              <g transform={`translate(142 ${160 + phaseT * 8}) scale(${scale}) rotate(-18)`}>
+                <circle cx="0" cy="0" r="82" fill="url(#babyGlow)" />
+                <ellipse cx="-25" cy="-38" rx="29" ry="33" fill="url(#babyFill)" />
+                <path d="M -1 -19 C 39 -16, 58 20, 31 54 C 5 86, -47 68, -50 22 C -52 0, -30 -18, -1 -19 Z" fill="url(#babyFill)" />
+                <path d="M -4 -2 C 14 14, 7 40, -16 51" fill="none" stroke="hsl(var(--card) / 0.38)" strokeWidth="2.2" strokeLinecap="round" />
+                <path d="M 7 10 C 28 4, 43 13, 43 30" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3.4" strokeLinecap="round" />
+                <path d="M 1 44 C 19 62, 40 63, 53 49" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3.4" strokeLinecap="round" />
+                <circle cx="-35" cy="-42" r="1.9" fill="hsl(var(--card) / 0.86)" />
+                <path d="M -45 -26 C -34 -20, -18 -22, -10 -31" fill="none" stroke="hsl(var(--card) / 0.38)" strokeWidth="1.8" strokeLinecap="round" />
+              </g>
             );
           })()}
         </>

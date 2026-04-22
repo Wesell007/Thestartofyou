@@ -91,6 +91,9 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
             strokeLinecap="round"
           />
           <path d="M 8 22 C -2 23, -12 18, -17 9" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.52)" strokeWidth="2" strokeLinecap="round" />
+          <path d="M 10 15 C 22 18, 31 27, 30 39" fill="none" stroke="hsl(var(--card) / 0.44)" strokeWidth="1.9" strokeLinecap="round" />
+          <path d="M -9 -10 C -2 -9, 4 -12, 8 -18" fill="none" stroke="hsl(var(--card) / 0.38)" strokeWidth="1.4" strokeLinecap="round" />
+          <circle cx="-3" cy="-6" r="2.4" fill="hsl(var(--stage-pregnancy-accent) / 0.18)" />
           <circle cx="9" cy="-18" r="1.35" fill="hsl(var(--card) / 0.86)" />
           <ellipse cx="12" cy="22" rx="22" ry="18" fill="url(#skinWarmth)" />
         </g>
@@ -109,8 +112,11 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
           <path d="M -13 -1 C 9 18, 1 47, -25 58" fill="none" stroke="hsl(var(--card) / 0.52)" strokeWidth="2.7" strokeLinecap="round" />
           <path d="M 7 8 C 31 -1, 51 12, 48 34" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.62)" strokeWidth="3.4" strokeLinecap="round" />
           <path d="M -2 50 C 22 71, 49 66, 63 47" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.62)" strokeWidth="3.6" strokeLinecap="round" />
+          <path d="M 24 18 C 32 24, 33 34, 26 41" fill="none" stroke="hsl(var(--card) / 0.42)" strokeWidth="2" strokeLinecap="round" />
+          <path d="M 16 58 C 28 61, 41 57, 49 48" fill="none" stroke="hsl(var(--card) / 0.36)" strokeWidth="1.9" strokeLinecap="round" />
           <path d="M -39 -17 C -25 -8, -10 -15, -2 -31" fill="none" stroke="hsl(var(--card) / 0.42)" strokeWidth="1.8" strokeLinecap="round" />
           <circle cx="-39" cy="-40" r="1.55" fill="hsl(var(--card) / 0.88)" />
+          <path d="M -42 -34 C -36 -33, -32 -36, -29 -41" fill="none" stroke="hsl(var(--card) / 0.38)" strokeWidth="1.35" strokeLinecap="round" />
           <path d="M -52 -23 C -37 -13, -18 -18, -7 -32" fill="none" stroke="hsl(var(--card) / 0.46)" strokeWidth="2" strokeLinecap="round" />
           <ellipse cx="-38" cy="-45" rx="29" ry="22" fill="url(#softHighlight)" />
           <ellipse cx="22" cy="48" rx="43" ry="34" fill="url(#skinWarmth)" />
@@ -131,7 +137,10 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
           <path d="M 7 10 C 37 -1, 61 14, 58 37" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.58)" strokeWidth="3.8" strokeLinecap="round" />
           <path d="M -2 57 C 27 80, 58 73, 72 51" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.58)" strokeWidth="3.8" strokeLinecap="round" />
           <path d="M 30 35 C 39 45, 54 44, 64 36" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.48)" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M 26 20 C 37 29, 38 42, 28 50" fill="none" stroke="hsl(var(--card) / 0.4)" strokeWidth="2.1" strokeLinecap="round" />
+          <path d="M 18 66 C 34 70, 54 64, 66 51" fill="none" stroke="hsl(var(--card) / 0.34)" strokeWidth="2" strokeLinecap="round" />
           <circle cx="-45" cy="-49" r="1.55" fill="hsl(var(--card) / 0.86)" />
+          <path d="M -48 -41 C -41 -40, -36 -43, -33 -50" fill="none" stroke="hsl(var(--card) / 0.36)" strokeWidth="1.35" strokeLinecap="round" />
           <path d="M -58 -31 C -42 -21, -22 -27, -10 -42" fill="none" stroke="hsl(var(--card) / 0.42)" strokeWidth="2" strokeLinecap="round" />
           <ellipse cx="-43" cy="-51" rx="30" ry="23" fill="url(#softHighlight)" />
           <ellipse cx="25" cy="51" rx="48" ry="38" fill="url(#skinWarmth)" />

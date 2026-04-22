@@ -45,6 +45,9 @@ const MyWeekChapter = ({
   babyNote,
   content,
 }: Props) => {
+  const weeksLeft = dueDateMeta.split(" · ")[0] ?? dueDateMeta;
+  const sizeCue = developmentCue.replace(/[—–].*$/, "").trim();
+
   return (
     <div className="relative">
       {/* Atmospheric wash — anchored behind the chapter opening */}
@@ -94,13 +97,13 @@ const MyWeekChapter = ({
                 Due date
               </p>
             </div>
-            <p className="font-serif font-medium text-[2.15rem] md:text-[2.5rem] text-foreground/90 leading-none mb-3">
+            <p className="font-serif font-medium text-[2.05rem] md:text-[2.35rem] text-foreground/90 leading-none mb-3 whitespace-nowrap">
               {dueDateLabel}
             </p>
             <div className="flex items-start gap-2 pt-4 border-t" style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)" }}>
               <Clock3 size={13} strokeWidth={1.6} className="mt-0.5 shrink-0" style={{ color: "hsl(var(--stage-pregnancy-accent))" }} />
               <p className="font-sans text-[13.5px] text-foreground/65 leading-relaxed">
-                {dueDateMeta}
+                {weeksLeft}
               </p>
             </div>
           </aside>
@@ -123,9 +126,6 @@ const MyWeekChapter = ({
             }}
           >
             <WeekIllustration week={week} size={220} className="mx-auto" />
-            <figcaption className="mt-5 rounded-full px-5 py-2 font-sans text-[12.5px] text-foreground/66 text-center max-w-[34ch] leading-snug" style={{ background: "hsl(var(--stage-pregnancy) / 0.42)" }}>
-              {developmentCue}
-            </figcaption>
           </div>
           <div className="sm:col-span-7 px-7 sm:px-9 py-8 sm:py-11 flex flex-col justify-center">
             <p
@@ -142,9 +142,15 @@ const MyWeekChapter = ({
               className="block w-10 h-px mb-5"
               style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
             />
-            <p className="font-sans text-[14.5px] text-foreground/62 leading-[1.7] max-w-[34ch]">
-              {content.lead}
-            </p>
+            <div className="mt-1 flex items-center gap-3 rounded-full px-4 py-3 max-w-[34ch]" style={{ background: "hsl(var(--stage-pregnancy) / 0.38)" }}>
+              <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full" style={{ background: "hsl(var(--card))" }}>
+                <span className="block h-4 w-6 rounded-[55%_45%_50%_50%] rotate-[-14deg]" style={{ background: "hsl(var(--stage-pregnancy-accent) / 0.72)" }} />
+                <span className="absolute right-1.5 top-2 h-2 w-2 rounded-full rotate-45" style={{ borderTop: "1px solid hsl(var(--stage-pregnancy-accent) / 0.7)", borderRight: "1px solid hsl(var(--stage-pregnancy-accent) / 0.7)" }} />
+              </span>
+              <figcaption className="font-sans text-[12.5px] text-foreground/66 leading-snug">
+                {sizeCue}
+              </figcaption>
+            </div>
           </div>
         </figure>
       </section>

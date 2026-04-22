@@ -118,27 +118,28 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
       )}
 
       {phase === "late" && (
-        <g transform={`translate(142 ${160 + phaseT * 8}) scale(${1.12 + phaseT * 0.15}) rotate(${-20 + phaseT * 2})`}>
-          <circle cx="0" cy="0" r="86" fill="hsl(var(--stage-pregnancy-accent) / 0.08)" />
-          <path d="M -59 -42 C -51 -68, -15 -70, 2 -49 C 18 -29, 2 -3, -25 -1 C -52 1, -68 -18, -59 -42 Z" fill="url(#babyFill)" stroke="hsl(var(--stage-pregnancy-accent) / 0.32)" strokeWidth="1" />
+        <g transform={`translate(142 ${160 + phaseT * 7}) scale(${1.12 + phaseT * 0.14}) rotate(${-18 + phaseT * 2})`} filter="url(#paintedSoftness)">
+          <circle cx="0" cy="0" r="88" fill="hsl(var(--stage-pregnancy-accent) / 0.08)" />
+          <path d="M -60 -43 C -52 -72, -12 -73, 5 -50 C 22 -28, 3 0, -26 1 C -54 2, -70 -19, -60 -43 Z" fill="url(#babyFill)" stroke="hsl(var(--stage-pregnancy-accent) / 0.22)" strokeWidth="0.9" />
           <path
-            d="M -10 -18 C 38 -27, 69 9, 55 48 C 42 86, -9 96, -43 68 C -72 44, -67 5, -41 -10 C -31 -16, -20 -18, -10 -18 Z"
+            d="M -10 -18 C 41 -31, 75 8, 62 51 C 50 91, -6 103, -45 72 C -78 46, -73 5, -43 -11 C -33 -17, -21 -19, -10 -18 Z"
             fill="url(#babyFill)"
-            stroke="hsl(var(--stage-pregnancy-accent) / 0.32)"
-            strokeWidth="1"
+            stroke="hsl(var(--stage-pregnancy-accent) / 0.22)"
+            strokeWidth="0.9"
           />
-          <path d="M -13 -1 C 10 18, 2 48, -24 61" fill="none" stroke="hsl(var(--card) / 0.42)" strokeWidth="2.5" strokeLinecap="round" />
-          <path d="M 6 9 C 33 0, 54 13, 51 34" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3.4" strokeLinecap="round" />
-          <path d="M -4 52 C 22 72, 50 67, 64 48" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3.5" strokeLinecap="round" />
-          <path d="M 28 33 C 37 41, 50 41, 59 34" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.54)" strokeWidth="2.3" strokeLinecap="round" />
-          <circle cx="-45" cy="-48" r="1.9" fill="hsl(var(--card) / 0.88)" />
-          <path d="M -57 -30 C -42 -21, -23 -26, -12 -40" fill="none" stroke="hsl(var(--card) / 0.38)" strokeWidth="1.8" strokeLinecap="round" />
-          <ellipse cx="-43" cy="-50" rx="26" ry="20" fill="url(#softHighlight)" />
+          <path d="M -14 -1 C 12 20, 2 52, -27 65" fill="none" stroke="hsl(var(--card) / 0.46)" strokeWidth="2.8" strokeLinecap="round" />
+          <path d="M 7 10 C 37 -1, 61 14, 58 37" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.58)" strokeWidth="3.8" strokeLinecap="round" />
+          <path d="M -2 57 C 27 80, 58 73, 72 51" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.58)" strokeWidth="3.8" strokeLinecap="round" />
+          <path d="M 30 35 C 39 45, 54 44, 64 36" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.48)" strokeWidth="2.5" strokeLinecap="round" />
+          <circle cx="-45" cy="-49" r="1.55" fill="hsl(var(--card) / 0.86)" />
+          <path d="M -58 -31 C -42 -21, -22 -27, -10 -42" fill="none" stroke="hsl(var(--card) / 0.42)" strokeWidth="2" strokeLinecap="round" />
+          <ellipse cx="-43" cy="-51" rx="30" ry="23" fill="url(#softHighlight)" />
+          <ellipse cx="25" cy="51" rx="48" ry="38" fill="url(#skinWarmth)" />
         </g>
       )}
 
       {phase === "overdue" && (
-        <g transform="translate(140 160) scale(1.18) rotate(-14)">
+        <g transform="translate(140 160) scale(1.18) rotate(-14)" filter="url(#paintedSoftness)">
           <circle cx="0" cy="0" r="86" fill="hsl(var(--stage-pregnancy-accent) / 0.08)" />
           <ellipse cx="-29" cy="-42" rx="32" ry="36" fill="url(#babyFill)" stroke="hsl(var(--stage-pregnancy-accent) / 0.32)" strokeWidth="1" />
           <path d="M -2 -18 C 45 -17, 67 19, 43 57 C 19 94, -39 82, -56 45 C -67 20, -53 -8, -27 -18 C -18 -21, -9 -21, -2 -18 Z" fill="url(#babyFill)" stroke="hsl(var(--stage-pregnancy-accent) / 0.32)" strokeWidth="1" />

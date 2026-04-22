@@ -164,13 +164,14 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
             return (
               <g transform={`translate(140 150) scale(${scale}) rotate(-10)`}>
                 <circle cx="0" cy="0" r="70" fill="url(#babyGlow)" />
-                <ellipse cx="-18" cy="-26" rx="24" ry="28" fill="url(#babyFill)" />
-                <path d="M -2 -10 C 30 -8, 42 20, 20 44 C -4 70, -48 48, -40 12 C -36 -4, -20 -12, -2 -10 Z" fill="url(#babyFill)" />
-                <path d="M -2 2 C 12 16, 4 33, -12 39" fill="none" stroke="hsl(var(--card) / 0.42)" strokeWidth="2" strokeLinecap="round" />
-                <path d="M 10 14 C 28 10, 36 18, 34 30" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3" strokeLinecap="round" />
-                <path d="M 3 36 C 17 48, 30 48, 39 38" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3" strokeLinecap="round" />
-                <circle cx="-26" cy="-29" r="1.8" fill="hsl(var(--card) / 0.86)" />
-                <path d="M -35 -15 C -25 -10, -13 -11, -6 -18" fill="none" stroke="hsl(var(--card) / 0.38)" strokeWidth="1.6" strokeLinecap="round" />
+                <ellipse cx="-21" cy="-30" rx="25" ry="29" fill="url(#babyFill)" stroke="hsl(var(--stage-pregnancy-accent) / 0.35)" strokeWidth="1" />
+                <path d="M -1 -14 C 31 -11, 48 17, 25 45 C 1 74, -45 55, -43 17 C -42 -5, -24 -17, -1 -14 Z" fill="url(#babyFill)" stroke="hsl(var(--stage-pregnancy-accent) / 0.35)" strokeWidth="1" />
+                <path d="M -5 -1 C 11 13, 5 34, -14 43" fill="none" stroke="hsl(var(--card) / 0.46)" strokeWidth="2.2" strokeLinecap="round" />
+                <path d="M 6 10 C 25 5, 37 14, 35 29" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.78)" strokeWidth="3.2" strokeLinecap="round" />
+                <path d="M -3 36 C 13 52, 30 53, 42 40" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.78)" strokeWidth="3.2" strokeLinecap="round" />
+                <path d="M 23 42 C 31 48, 39 49, 46 44" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.62)" strokeWidth="2.4" strokeLinecap="round" />
+                <circle cx="-30" cy="-34" r="1.9" fill="hsl(var(--card) / 0.9)" />
+                <path d="M -39 -18 C -28 -12, -14 -14, -6 -23" fill="none" stroke="hsl(var(--card) / 0.42)" strokeWidth="1.7" strokeLinecap="round" />
               </g>
             );
           })()}
@@ -214,8 +215,8 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
             return (
               <g transform={`translate(142 ${160 + phaseT * 8}) scale(${scale}) rotate(-18)`}>
                 <circle cx="0" cy="0" r="82" fill="url(#babyGlow)" />
-                <ellipse cx="-25" cy="-38" rx="29" ry="33" fill="url(#babyFill)" />
-                <path d="M -1 -19 C 39 -16, 58 20, 31 54 C 5 86, -47 68, -50 22 C -52 0, -30 -18, -1 -19 Z" fill="url(#babyFill)" />
+                <ellipse cx="-25" cy="-38" rx="29" ry="33" fill="url(#babyFill)" stroke="hsl(var(--stage-pregnancy-accent) / 0.34)" strokeWidth="1" />
+                <path d="M -1 -19 C 39 -16, 58 20, 31 54 C 5 86, -47 68, -50 22 C -52 0, -30 -18, -1 -19 Z" fill="url(#babyFill)" stroke="hsl(var(--stage-pregnancy-accent) / 0.34)" strokeWidth="1" />
                 <path d="M -4 -2 C 14 14, 7 40, -16 51" fill="none" stroke="hsl(var(--card) / 0.38)" strokeWidth="2.2" strokeLinecap="round" />
                 <path d="M 7 10 C 28 4, 43 13, 43 30" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3.4" strokeLinecap="round" />
                 <path d="M 1 44 C 19 62, 40 63, 53 49" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3.4" strokeLinecap="round" />

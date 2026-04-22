@@ -109,7 +109,7 @@ const NoteShapingSuggestion = ({
     setSoftMessage("");
   };
 
-  // Phase: idle — show the quiet action (only if threshold met)
+  // Phase: idle. Show the quiet action only if threshold met.
   if (phase === "idle") {
     if (!available) return null;
     return (
@@ -146,7 +146,7 @@ const NoteShapingSuggestion = ({
     );
   }
 
-  // Phase: shaping — quiet status, no spinner overlay
+  // Phase: shaping. Quiet status, no spinner overlay.
   if (phase === "shaping") {
     return (
       <div className="mt-4 flex items-center gap-3">
@@ -165,7 +165,7 @@ const NoteShapingSuggestion = ({
     );
   }
 
-  // Phase: soft-error — calm, non-technical fallback
+  // Phase: soft-error. Calm fallback.
   if (phase === "soft-error") {
     return (
       <div className="mt-4 flex flex-col gap-2.5">
@@ -184,7 +184,7 @@ const NoteShapingSuggestion = ({
     );
   }
 
-  // Phase: review — suggestion returned beneath original
+  // Phase: review. Suggestion returned beneath original.
   return (
     <div className="mt-5">
       {/* Hairline rule with "a suggestion" label */}
@@ -211,7 +211,7 @@ const NoteShapingSuggestion = ({
         A suggestion. Your original is still here.
       </p>
 
-      {/* Shaped draft — same typeface, slightly indented, softer ink */}
+      {/* Shaped draft with the same typeface, slightly indented, softer ink */}
       <div className="pl-4">
         {editing ? (
           <textarea

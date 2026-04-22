@@ -148,7 +148,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
         One image to keep this week.
       </h2>
       <p className="font-sans text-[13px] font-light italic text-foreground/55 mb-7 max-w-[42ch]">
-        A bump photo, your hand on your belly — anything that holds the feel of this week.
+        A bump photo, your hand on your belly, anything that holds the feel of this week.
       </p>
 
       <input
@@ -204,7 +204,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
               />
             ))}
 
-            {/* Held centre — chapter title in waiting */}
+            {/* Held centre with chapter title in waiting */}
             <div className="relative flex flex-col items-center text-center px-6">
               <span
                 className="font-sans text-[10px] font-medium tracking-[0.28em] uppercase mb-3"

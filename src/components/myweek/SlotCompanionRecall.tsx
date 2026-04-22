@@ -51,7 +51,7 @@ const SlotCompanionRecall = ({ userId, currentWeek }: Props) => {
   if (!loaded) return null;
   if (past.length < 2) return null;
 
-  // The oldest reflection — strongest sense of "kept over time".
+  // The oldest reflection gives the strongest sense of "kept over time".
   const recall = past[past.length - 1];
   const identity = getWeekIdentity(recall.week);
   const weeksAgo = currentWeek - recall.week;
@@ -77,10 +77,10 @@ const SlotCompanionRecall = ({ userId, currentWeek }: Props) => {
       </div>
 
       <p className="font-serif italic text-[14px] text-foreground/55 mb-5 max-w-[40ch]">
-        You wrote this {weeksAgo} {weeksAgo === 1 ? "week" : "weeks"} ago — held since.
+        You wrote this {weeksAgo} {weeksAgo === 1 ? "week" : "weeks"} ago. Held since.
       </p>
 
-      {/* Flat treatment — no inner card; the rail itself is the surface.
+      {/* Flat treatment. No inner card; the rail itself is the surface.
           The recall reads as a quote, not another nested object. */}
       <Link to={`/my-week/${recall.week}`} className="group block">
         <p

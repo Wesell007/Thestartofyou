@@ -98,9 +98,24 @@ const MyWeekChapter = ({
     ? "watermelon"
     : "comparison";
 
+  const comparisonIcon =
+    objectLabel === "mango" ? (
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true" className="text-[hsl(var(--stage-pregnancy-accent))]">
+        <path d="M10 18.5C8.8 13.7 11.6 9.8 16.2 9.3c4.9-.5 8.2 2.6 7.5 7.2-.7 4.8-5.1 8-9.2 7.2-2.4-.5-3.9-2.2-4.5-5.2Z" fill="currentColor" opacity="0.68" />
+        <path d="M18.4 9.4c1.8-2.2 3.7-3.1 5.9-2.9" fill="none" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" opacity="0.58" />
+        <path d="M21 7.6c1.7.1 3 .8 3.7 2" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.42" />
+      </svg>
+    ) : (
+      <svg viewBox="0 0 32 32" width="25" height="25" aria-hidden="true" className="text-[hsl(var(--stage-pregnancy-accent))]">
+        <ellipse cx="16" cy="17" rx={objectLabel.includes("seed") || objectLabel === "lentil" ? 6 : objectLabel === "banana" || objectLabel === "carrot" || objectLabel === "courgette" ? 10 : 8} ry={objectLabel.includes("seed") || objectLabel === "lentil" ? 4.5 : objectLabel === "banana" || objectLabel === "carrot" || objectLabel === "courgette" ? 4 : 7} fill="currentColor" opacity="0.66" transform={objectLabel === "banana" || objectLabel === "carrot" || objectLabel === "courgette" ? "rotate(-18 16 17)" : undefined} />
+        <path d="M19 10c3-1 5-3 6-5" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.62" />
+        <path d="M21 8c2 0 3.4.7 4.2 2" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.42" />
+      </svg>
+    );
+
   return (
     <div className="relative">
-      {/* Atmospheric wash — anchored behind the chapter opening */}
+        {/* Atmospheric wash behind the chapter opening */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-12 -left-16 w-[680px] h-[520px] rounded-full blur-3xl -z-10"
@@ -112,10 +127,10 @@ const MyWeekChapter = ({
       />
 
       {/* Chapter frontispiece */}
-      <section className="relative pt-12 sm:pt-16 lg:pt-20 pb-10 sm:pb-12 lg:pb-14">
-        <div className="grid md:grid-cols-12 gap-7 md:gap-10 items-end mb-9 sm:mb-11">
+      <section className="relative pt-20 sm:pt-16 lg:pt-20 pb-10 sm:pb-12 lg:pb-14">
+        <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-end mb-8 sm:mb-11">
           <div className="md:col-span-8">
-            <p className="font-serif italic text-[13px] sm:text-[14px] text-foreground/55 tracking-wide mb-7">
+            <p className="font-serif italic text-[13px] sm:text-[14px] text-foreground/55 tracking-wide mb-6 sm:mb-7">
               {greeting}, {firstName}.
             </p>
             <p
@@ -161,7 +176,7 @@ const MyWeekChapter = ({
 
         {/* Dominant weekly card */}
         <figure
-          className="relative grid sm:grid-cols-12 gap-0 rounded-[28px] overflow-hidden keepsake-surface"
+          className="relative grid sm:grid-cols-12 gap-0 rounded-[24px] sm:rounded-[28px] overflow-hidden keepsake-surface"
           style={{
             borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)",
             background:
@@ -169,22 +184,22 @@ const MyWeekChapter = ({
           }}
         >
           <div
-            className="sm:col-span-5 px-7 sm:px-8 py-9 sm:py-12 flex flex-col items-center justify-center"
+            className="sm:col-span-5 px-6 sm:px-8 py-7 sm:py-12 flex flex-col items-center justify-center"
             style={{
               background:
                 "radial-gradient(120% 85% at 50% 45%, hsl(var(--stage-pregnancy) / 0.58), transparent 76%)",
             }}
           >
-            <WeekIllustration week={week} size={220} className="mx-auto" />
+            <WeekIllustration week={week} size={210} className="mx-auto max-w-full" />
           </div>
-          <div className="sm:col-span-7 px-7 sm:px-9 py-8 sm:py-11 flex flex-col justify-center">
+          <div className="sm:col-span-7 px-6 sm:px-9 py-7 sm:py-11 flex flex-col justify-center">
             <p
               className="font-sans text-[10px] font-medium tracking-[0.28em] uppercase mb-5"
               style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
             >
               Your baby this week
             </p>
-            <p className="font-serif text-[1.65rem] sm:text-[2rem] text-foreground/88 leading-[1.18] tracking-tight max-w-[18ch] mb-5">
+            <p className="font-serif text-[1.5rem] sm:text-[2rem] text-foreground/88 leading-[1.2] sm:leading-[1.18] tracking-tight max-w-[18ch] mb-5">
               {babyNote}
             </p>
             <span
@@ -192,13 +207,9 @@ const MyWeekChapter = ({
               className="block w-10 h-px mb-5"
               style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
             />
-            <div className="mt-1 flex items-center gap-3 rounded-[18px] px-4 py-3 max-w-[36ch]" style={{ background: "hsl(var(--stage-pregnancy) / 0.38)", border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.12)" }}>
+            <div className="mt-1 flex items-center gap-3 rounded-[18px] px-4 py-3.5 max-w-[36ch]" style={{ background: "hsl(var(--stage-pregnancy) / 0.38)", border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.12)" }}>
               <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full" style={{ background: "hsl(var(--card))" }}>
-                <svg viewBox="0 0 32 32" width="25" height="25" aria-hidden="true" className="text-[hsl(var(--stage-pregnancy-accent))]">
-                  <ellipse cx="16" cy="17" rx={objectLabel.includes("seed") || objectLabel === "lentil" ? 7 : objectLabel === "banana" || objectLabel === "carrot" || objectLabel === "courgette" ? 10 : 8} ry={objectLabel.includes("seed") || objectLabel === "lentil" ? 5 : objectLabel === "banana" || objectLabel === "carrot" || objectLabel === "courgette" ? 4 : 7} fill="currentColor" opacity="0.66" transform={objectLabel === "banana" || objectLabel === "carrot" || objectLabel === "courgette" ? "rotate(-18 16 17)" : undefined} />
-                  <path d="M19 10c3-1 5-3 6-5" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.62" />
-                  <path d="M21 8c2 0 3.4.7 4.2 2" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.42" />
-                </svg>
+                {comparisonIcon}
               </span>
               <figcaption className="font-sans text-[12.5px] text-foreground/66 leading-snug">
                 <span className="block text-[9.5px] font-medium tracking-[0.24em] uppercase mb-1" style={{ color: "hsl(var(--stage-pregnancy-accent))" }}>

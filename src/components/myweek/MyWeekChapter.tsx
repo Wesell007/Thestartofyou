@@ -141,7 +141,7 @@ const MyWeekChapter = ({
                 "radial-gradient(120% 85% at 50% 45%, hsl(var(--stage-pregnancy) / 0.58), transparent 76%)",
             }}
           >
-            <div className="relative mx-auto aspect-square w-full max-w-[270px] sm:max-w-[318px]">
+            <div className="relative mx-auto aspect-[13/16] w-full max-w-[232px] sm:max-w-[276px]">
               <span
                 aria-hidden="true"
                 className="absolute inset-[11%] rounded-full blur-3xl"

@@ -127,10 +127,10 @@ const MyWeekChapter = ({
       />
 
       {/* Chapter frontispiece */}
-      <section className="relative pt-12 sm:pt-16 lg:pt-20 pb-10 sm:pb-12 lg:pb-14">
+      <section className="relative pt-20 sm:pt-16 lg:pt-20 pb-10 sm:pb-12 lg:pb-14">
         <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-end mb-8 sm:mb-11">
           <div className="md:col-span-8">
-            <p className="font-serif italic text-[13px] sm:text-[14px] text-foreground/55 tracking-wide mb-7">
+            <p className="font-serif italic text-[13px] sm:text-[14px] text-foreground/55 tracking-wide mb-6 sm:mb-7">
               {greeting}, {firstName}.
             </p>
             <p

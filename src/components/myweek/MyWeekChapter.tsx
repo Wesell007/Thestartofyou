@@ -56,77 +56,88 @@ const MyWeekChapter = ({
       />
 
       {/* Chapter frontispiece */}
-      <section className="relative pt-20 sm:pt-24 lg:pt-28 pb-10 sm:pb-12 lg:pb-14">
-        {/* Marginalia — greeting + due date */}
-        <div className="flex items-baseline justify-between gap-4 mb-9 sm:mb-10">
-          <p className="font-serif italic text-[13px] sm:text-[14px] text-foreground/55 tracking-wide">
-            {greeting}, {firstName}.
-          </p>
-          <p className="font-sans text-[10.5px] font-light tracking-[0.2em] uppercase text-foreground/38">
-            Due {dueDateLabel}
-          </p>
+      <section className="relative pt-16 sm:pt-20 lg:pt-24 pb-10 sm:pb-12 lg:pb-14">
+        <div className="grid md:grid-cols-12 gap-7 md:gap-8 items-end mb-9 sm:mb-10">
+          <div className="md:col-span-8">
+            <p className="font-serif italic text-[13px] sm:text-[14px] text-foreground/55 tracking-wide mb-8">
+              {greeting}, {firstName}.
+            </p>
+            <p
+              className="font-sans text-[10.5px] sm:text-[11px] font-medium tracking-[0.3em] uppercase mb-5"
+              style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+            >
+              {trimesterLabel} · Week {week}
+            </p>
+            <h1
+              className="font-serif font-medium text-foreground leading-[0.95] tracking-tight mb-5 sm:mb-6"
+              style={{ fontSize: "clamp(2.65rem, 6vw, 4.8rem)" }}
+            >
+              {chapterTitle}
+            </h1>
+            <p className="font-serif italic text-[1.15rem] sm:text-[1.25rem] lg:text-[1.32rem] text-foreground/72 leading-[1.4] max-w-[28ch]">
+              {theme}
+            </p>
+          </div>
+          <aside
+            className="md:col-span-4 rounded-[24px] keepsake-surface px-6 py-6 md:py-7"
+            style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)" }}
+          >
+            <p
+              className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-4"
+              style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+            >
+              Due date
+            </p>
+            <p className="font-serif font-medium text-[2.15rem] md:text-[2.5rem] text-foreground/90 leading-none mb-3">
+              {dueDateLabel}
+            </p>
+            <p className="font-serif italic text-[13px] text-foreground/55 leading-relaxed">
+              One anchor for where this chapter sits now.
+            </p>
+          </aside>
         </div>
 
-        {/* Trimester · Week locator — human, never robotic */}
-        <p
-          className="font-sans text-[10.5px] sm:text-[11px] font-medium tracking-[0.3em] uppercase mb-6"
-          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+        {/* Dominant weekly card */}
+        <figure
+          className="relative grid sm:grid-cols-12 gap-0 rounded-[28px] overflow-hidden keepsake-surface"
+          style={{
+            borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)",
+            background:
+              "linear-gradient(135deg, hsl(var(--card)), hsl(var(--stage-pregnancy) / 0.18))",
+          }}
         >
-          {trimesterLabel} · Week {week}
-        </p>
-
-        {/* Chapter mark — quiet editorial frontispiece line */}
-        <p className="font-sans text-[10.5px] font-medium tracking-[0.32em] uppercase text-foreground/42 mb-4 sm:mb-5">
-          The chapter
-        </p>
-        <h1
-          className="font-serif font-medium text-foreground leading-[0.95] tracking-tight mb-5 sm:mb-6"
-          style={{ fontSize: "clamp(2.6rem, 6vw, 4.6rem)" }}
-        >
-          {chapterTitle}
-        </h1>
-
-        {/* Held theme */}
-        <p className="font-serif italic text-[1.15rem] sm:text-[1.25rem] lg:text-[1.32rem] text-foreground/72 leading-[1.4] mb-10 sm:mb-12 max-w-[28ch]">
-          {theme}
-        </p>
-
-        {/* Relational illustration — kept tight to the column */}
-        <div className="relative mb-9 sm:mb-10">
-          <figure
-            className="relative rounded-[28px] overflow-hidden keepsake-surface px-8 sm:px-10 py-10 sm:py-12 flex flex-col items-center"
+          <div
+            className="sm:col-span-5 px-7 sm:px-8 py-9 sm:py-12 flex flex-col items-center justify-center"
             style={{
               background:
-                "radial-gradient(120% 80% at 50% 35%, hsl(var(--stage-pregnancy) / 0.55), hsl(var(--card)) 78%)",
+                "radial-gradient(120% 85% at 50% 45%, hsl(var(--stage-pregnancy) / 0.58), transparent 76%)",
             }}
           >
-            <WeekIllustration week={week} size={240} className="mx-auto" />
-            <figcaption className="mt-6 font-serif italic text-[13.5px] text-foreground/55 tracking-wide text-center max-w-[28ch] leading-snug">
+            <WeekIllustration week={week} size={220} className="mx-auto" />
+            <figcaption className="mt-5 font-serif italic text-[13.5px] text-foreground/55 tracking-wide text-center max-w-[28ch] leading-snug">
               {babyNote}
             </figcaption>
-          </figure>
-        </div>
-
-        {/* Development cue — quiet, paired with hairline */}
-        <div className="relative pl-5 sm:pl-6">
-          <span
-            aria-hidden="true"
-            className="absolute left-0 top-1 bottom-1 w-[2px] rounded-full"
-            style={{
-              background:
-                "linear-gradient(to bottom, hsl(var(--stage-pregnancy-accent) / 0.55), hsl(var(--stage-pregnancy-accent) / 0.04))",
-            }}
-          />
-          <p
-            className="font-sans text-[10px] font-medium tracking-[0.26em] uppercase mb-2"
-            style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-          >
-            Development this week
-          </p>
-          <p className="font-serif italic text-[14.5px] sm:text-[15px] text-foreground/62 leading-[1.6] max-w-[36ch]">
-            {developmentCue}
-          </p>
-        </div>
+          </div>
+          <div className="sm:col-span-7 px-7 sm:px-9 py-8 sm:py-11 flex flex-col justify-center">
+            <p
+              className="font-sans text-[10px] font-medium tracking-[0.28em] uppercase mb-5"
+              style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+            >
+              Development this week
+            </p>
+            <p className="font-serif text-[1.65rem] sm:text-[2rem] text-foreground/88 leading-[1.18] tracking-tight max-w-[18ch] mb-5">
+              {developmentCue}
+            </p>
+            <span
+              aria-hidden="true"
+              className="block w-10 h-px mb-5"
+              style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
+            />
+            <p className="font-sans text-[14.5px] text-foreground/62 leading-[1.7] max-w-[34ch]">
+              {content.lead}
+            </p>
+          </div>
+        </figure>
       </section>
 
       {/* What matters this week — guidance briefing */}

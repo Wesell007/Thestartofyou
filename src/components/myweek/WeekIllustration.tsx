@@ -31,15 +31,15 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
       className={className}
     >
       <defs>
-        <radialGradient id="wombGlow" cx="50%" cy="48%" r="64%">
-          <stop offset="0%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.34)" />
-          <stop offset="58%" stopColor="hsl(var(--stage-pregnancy) / 0.74)" />
+        <radialGradient id="wombGlow" cx="48%" cy="48%" r="66%">
+          <stop offset="0%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.42)" />
+          <stop offset="52%" stopColor="hsl(var(--stage-pregnancy) / 0.78)" />
           <stop offset="100%" stopColor="hsl(var(--stage-pregnancy) / 0)" />
         </radialGradient>
-        <radialGradient id="babyFill" cx="38%" cy="28%" r="78%">
-          <stop offset="0%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.95)" />
-          <stop offset="54%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.78)" />
-          <stop offset="100%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.58)" />
+        <radialGradient id="babyFill" cx="34%" cy="24%" r="82%">
+          <stop offset="0%" stopColor="hsl(var(--card) / 0.62)" />
+          <stop offset="36%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.88)" />
+          <stop offset="100%" stopColor="hsl(var(--stage-pregnancy-accent) / 0.6)" />
         </radialGradient>
         <radialGradient id="softHighlight" cx="32%" cy="24%" r="40%">
           <stop offset="0%" stopColor="hsl(var(--card) / 0.54)" />
@@ -52,73 +52,75 @@ const WeekIllustration = ({ week, size = 260, className }: Props) => {
       </defs>
 
       <circle cx="140" cy="140" r="130" fill="url(#wombGlow)" />
-      <ellipse cx="140" cy="142" rx="112" ry="116" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.16)" strokeWidth="0.8" />
-      <ellipse cx="140" cy="143" rx="92" ry="98" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.18)" strokeWidth="0.7" strokeDasharray="1 7" />
+      <ellipse cx="140" cy="142" rx="114" ry="118" fill="hsl(var(--card) / 0.1)" stroke="hsl(var(--stage-pregnancy-accent) / 0.18)" strokeWidth="0.8" />
+      <ellipse cx="140" cy="144" rx="91" ry="99" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.2)" strokeWidth="0.7" strokeDasharray="1 7" />
 
       {phase === "early" && (
-        <g transform={`translate(140 ${148 + phaseT * 3}) scale(${0.78 + phaseT * 0.36}) rotate(${-24 + phaseT * 8})`}>
-          <circle cx="0" cy="0" r="62" fill="hsl(var(--stage-pregnancy-accent) / 0.08)" />
+        <g transform={`translate(140 ${148 + phaseT * 3}) scale(${0.8 + phaseT * 0.36}) rotate(${-25 + phaseT * 7})`}>
+          <circle cx="0" cy="0" r="64" fill="hsl(var(--stage-pregnancy-accent) / 0.09)" />
           <path
-            d="M -8 -24 C 15 -31, 36 -15, 34 10 C 33 32, 12 47, -11 39 C -34 31, -43 6, -30 -12 C -24 -20, -17 -23, -8 -24 Z"
+            d="M -7 -28 C 16 -34, 39 -17, 36 10 C 34 34, 11 50, -13 42 C -37 34, -46 6, -31 -14 C -24 -23, -16 -27, -7 -28 Z"
             fill="url(#babyFill)"
             stroke="hsl(var(--stage-pregnancy-accent) / 0.34)"
             strokeWidth="1"
           />
           <path
-            d="M -6 -15 C 7 -10, 15 3, 11 16 C 8 27, -3 33, -15 30"
+            d="M -8 -17 C 8 -12, 17 3, 12 17 C 8 30, -5 36, -18 31"
             fill="none"
             stroke="hsl(var(--card) / 0.48)"
             strokeWidth="2"
             strokeLinecap="round"
           />
+          <path d="M 7 20 C -3 20, -10 16, -14 9" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.54)" strokeWidth="1.7" strokeLinecap="round" />
           <path
-            d="M 20 18 C 33 26, 38 38, 31 49"
+            d="M 21 17 C 37 26, 42 40, 32 52"
             fill="none"
             stroke="hsl(var(--stage-pregnancy-accent) / 0.62)"
             strokeWidth="2.4"
             strokeLinecap="round"
           />
-          <circle cx="7" cy="-15" r="1.6" fill="hsl(var(--card) / 0.85)" />
-          <ellipse cx="-11" cy="-18" rx="26" ry="20" fill="url(#softHighlight)" />
+          <circle cx="8" cy="-17" r="1.5" fill="hsl(var(--card) / 0.86)" />
+          <ellipse cx="-12" cy="-21" rx="27" ry="20" fill="url(#softHighlight)" />
         </g>
       )}
 
       {phase === "middle" && (
-        <g transform={`translate(140 ${151 + phaseT * 4}) scale(${0.96 + phaseT * 0.16}) rotate(${-16 + phaseT * 3})`}>
+        <g transform={`translate(140 ${151 + phaseT * 4}) scale(${0.97 + phaseT * 0.16}) rotate(${-16 + phaseT * 3})`}>
           <circle cx="0" cy="0" r="78" fill="hsl(var(--stage-pregnancy-accent) / 0.08)" />
-          <ellipse cx="-24" cy="-34" rx="27" ry="32" fill="url(#babyFill)" stroke="hsl(var(--stage-pregnancy-accent) / 0.34)" strokeWidth="1" />
+          <path d="M -52 -38 C -45 -60, -15 -64, -1 -45 C 13 -26, 0 -4, -23 -1 C -45 2, -60 -16, -52 -38 Z" fill="url(#babyFill)" stroke="hsl(var(--stage-pregnancy-accent) / 0.34)" strokeWidth="1" />
           <path
-            d="M -2 -16 C 33 -15, 55 14, 38 45 C 22 74, -21 75, -43 49 C -58 31, -53 6, -35 -7 C -27 -13, -16 -17, -2 -16 Z"
+            d="M -7 -14 C 29 -23, 58 6, 49 39 C 42 68, 9 83, -20 68 C -49 53, -58 20, -38 -2 C -29 -11, -19 -14, -7 -14 Z"
             fill="url(#babyFill)"
             stroke="hsl(var(--stage-pregnancy-accent) / 0.34)"
             strokeWidth="1"
           />
-          <path d="M -5 -2 C 12 13, 6 34, -14 44" fill="none" stroke="hsl(var(--card) / 0.46)" strokeWidth="2.4" strokeLinecap="round" />
-          <path d="M 8 8 C 28 4, 41 13, 39 29" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.74)" strokeWidth="3" strokeLinecap="round" />
-          <path d="M 0 38 C 15 56, 36 58, 50 45" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.72)" strokeWidth="3.2" strokeLinecap="round" />
-          <path d="M 27 44 C 35 50, 43 50, 49 45" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.58)" strokeWidth="2.2" strokeLinecap="round" />
-          <circle cx="-33" cy="-39" r="1.9" fill="hsl(var(--card) / 0.9)" />
-          <path d="M -43 -22 C -31 -15, -16 -17, -7 -27" fill="none" stroke="hsl(var(--card) / 0.42)" strokeWidth="1.8" strokeLinecap="round" />
-          <ellipse cx="-29" cy="-41" rx="22" ry="18" fill="url(#softHighlight)" />
+          <path d="M -11 -1 C 8 17, 2 42, -22 52" fill="none" stroke="hsl(var(--card) / 0.5)" strokeWidth="2.4" strokeLinecap="round" />
+          <path d="M 7 8 C 30 1, 46 12, 43 31" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.72)" strokeWidth="3" strokeLinecap="round" />
+          <path d="M -4 43 C 15 61, 40 59, 53 43" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.72)" strokeWidth="3.2" strokeLinecap="round" />
+          <path d="M -36 -15 C -23 -8, -10 -14, -2 -29" fill="none" stroke="hsl(var(--card) / 0.36)" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="-39" cy="-39" r="1.8" fill="hsl(var(--card) / 0.9)" />
+          <path d="M -51 -22 C -37 -13, -19 -17, -8 -31" fill="none" stroke="hsl(var(--card) / 0.42)" strokeWidth="1.8" strokeLinecap="round" />
+          <ellipse cx="-38" cy="-43" rx="24" ry="18" fill="url(#softHighlight)" />
         </g>
       )}
 
       {phase === "late" && (
         <g transform={`translate(142 ${160 + phaseT * 8}) scale(${1.12 + phaseT * 0.15}) rotate(${-20 + phaseT * 2})`}>
           <circle cx="0" cy="0" r="86" fill="hsl(var(--stage-pregnancy-accent) / 0.08)" />
-          <ellipse cx="-28" cy="-42" rx="31" ry="36" fill="url(#babyFill)" stroke="hsl(var(--stage-pregnancy-accent) / 0.32)" strokeWidth="1" />
+          <path d="M -59 -42 C -51 -68, -15 -70, 2 -49 C 18 -29, 2 -3, -25 -1 C -52 1, -68 -18, -59 -42 Z" fill="url(#babyFill)" stroke="hsl(var(--stage-pregnancy-accent) / 0.32)" strokeWidth="1" />
           <path
-            d="M -2 -20 C 43 -18, 65 18, 42 55 C 19 91, -35 83, -54 48 C -68 22, -55 -7, -28 -17 C -20 -20, -11 -21, -2 -20 Z"
+            d="M -10 -18 C 38 -27, 69 9, 55 48 C 42 86, -9 96, -43 68 C -72 44, -67 5, -41 -10 C -31 -16, -20 -18, -10 -18 Z"
             fill="url(#babyFill)"
             stroke="hsl(var(--stage-pregnancy-accent) / 0.32)"
             strokeWidth="1"
           />
-          <path d="M -5 -3 C 15 15, 8 43, -17 55" fill="none" stroke="hsl(var(--card) / 0.4)" strokeWidth="2.5" strokeLinecap="round" />
-          <path d="M 8 10 C 31 3, 49 15, 48 33" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3.4" strokeLinecap="round" />
-          <path d="M 2 48 C 23 68, 48 67, 61 51" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3.5" strokeLinecap="round" />
-          <circle cx="-38" cy="-47" r="1.9" fill="hsl(var(--card) / 0.88)" />
-          <path d="M -49 -30 C -37 -23, -20 -25, -11 -35" fill="none" stroke="hsl(var(--card) / 0.38)" strokeWidth="1.8" strokeLinecap="round" />
-          <ellipse cx="-33" cy="-46" rx="24" ry="20" fill="url(#softHighlight)" />
+          <path d="M -13 -1 C 10 18, 2 48, -24 61" fill="none" stroke="hsl(var(--card) / 0.42)" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M 6 9 C 33 0, 54 13, 51 34" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3.4" strokeLinecap="round" />
+          <path d="M -4 52 C 22 72, 50 67, 64 48" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.68)" strokeWidth="3.5" strokeLinecap="round" />
+          <path d="M 28 33 C 37 41, 50 41, 59 34" fill="none" stroke="hsl(var(--stage-pregnancy-accent) / 0.54)" strokeWidth="2.3" strokeLinecap="round" />
+          <circle cx="-45" cy="-48" r="1.9" fill="hsl(var(--card) / 0.88)" />
+          <path d="M -57 -30 C -42 -21, -23 -26, -12 -40" fill="none" stroke="hsl(var(--card) / 0.38)" strokeWidth="1.8" strokeLinecap="round" />
+          <ellipse cx="-43" cy="-50" rx="26" ry="20" fill="url(#softHighlight)" />
         </g>
       )}
 

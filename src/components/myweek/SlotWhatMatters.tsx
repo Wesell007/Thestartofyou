@@ -52,13 +52,13 @@ const SlotWhatMatters = ({ content, trimesterLabel, week }: Props) => {
       </p>
 
       {/* Briefing cards — stronger repeated scan rhythm */}
-      <ol className="space-y-3.5 sm:space-y-5">
+      <ol className="space-y-3 sm:space-y-4">
         {content.matters.map((p, i) => {
           const icon = icons[i] ?? "heart";
           return (
           <li
             key={i}
-            className="group relative rounded-[20px] sm:rounded-[22px] keepsake-surface px-5 sm:px-6 py-5 sm:py-6 transition-all duration-500 hover:shadow-[0_24px_60px_-24px_hsl(var(--stage-pregnancy-accent)/0.18),0_4px_16px_-8px_hsl(222_14%_12%/0.05)]"
+            className="group relative rounded-[18px] sm:rounded-[20px] keepsake-surface px-5 sm:px-6 py-5 transition-all duration-500 hover:shadow-[0_24px_60px_-24px_hsl(var(--stage-pregnancy-accent)/0.18),0_4px_16px_-8px_hsl(222_14%_12%/0.05)]"
           >
             {/* Stage-coded left rule */}
             <span
@@ -70,23 +70,23 @@ const SlotWhatMatters = ({ content, trimesterLabel, week }: Props) => {
               }}
             />
 
-            <div className="grid sm:grid-cols-[164px_1fr] gap-3.5 sm:gap-7 items-center">
-              <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
+            <div className="grid sm:grid-cols-[152px_1fr] gap-4 sm:gap-7 items-center">
+              <div className="flex items-center gap-4 min-w-0">
                 <span
-                  className="flex w-12 h-12 sm:w-12 sm:h-12 rounded-full shrink-0 items-center justify-center"
+                  className="flex w-14 h-14 sm:w-14 sm:h-14 rounded-full shrink-0 items-center justify-center"
                   style={{ background: "hsl(var(--stage-pregnancy) / 0.45)" }}
                 >
-                  <MatterIcon type={icon} size={24} />
+                  <MatterIcon type={icon} size={29} />
                 </span>
                 <p
-                  className="font-sans text-[10px] sm:text-[10.5px] font-medium tracking-[0.22em] uppercase leading-relaxed"
+                  className="font-sans text-[10px] sm:text-[10.5px] font-medium tracking-[0.2em] uppercase leading-relaxed"
                   style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
                 >
                   {p.title}
                 </p>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-sans text-[15px] sm:text-[16px] font-light text-foreground/76 leading-[1.75]">
+                <p className="font-sans text-[15px] sm:text-[16px] font-light text-foreground/76 leading-[1.68]">
                   {p.body}
                 </p>
               </div>

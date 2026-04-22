@@ -41,77 +41,10 @@ const MyWeekChapter = ({
   trimesterLabel,
   chapterTitle,
   theme,
-  developmentCue,
   babyNote,
   content,
 }: Props) => {
   const weeksLeft = dueDateMeta.split(" · ")[0] ?? dueDateMeta;
-  const sizeCue = developmentCue.replace(/[—–].*$/, "").trim();
-  const comparison = sizeCue.toLowerCase();
-  const objectLabel = comparison.includes("mango")
-    ? "mango"
-    : comparison.includes("poppy")
-    ? "poppy seed"
-    : comparison.includes("sesame")
-    ? "sesame seed"
-    : comparison.includes("apple")
-    ? "apple seed"
-    : comparison.includes("lentil")
-    ? "lentil"
-    : comparison.includes("blueberry")
-    ? "blueberry"
-    : comparison.includes("raspberry")
-    ? "raspberry"
-    : comparison.includes("olive")
-    ? "olive"
-    : comparison.includes("strawberry")
-    ? "strawberry"
-    : comparison.includes("lime")
-    ? "lime"
-    : comparison.includes("plum")
-    ? "plum"
-    : comparison.includes("pepper")
-    ? "pepper"
-    : comparison.includes("banana")
-    ? "banana"
-    : comparison.includes("carrot")
-    ? "carrot"
-    : comparison.includes("squash")
-    ? "squash"
-    : comparison.includes("corn")
-    ? "corn"
-    : comparison.includes("courgette")
-    ? "courgette"
-    : comparison.includes("cauliflower")
-    ? "cauliflower"
-    : comparison.includes("aubergine")
-    ? "aubergine"
-    : comparison.includes("cabbage")
-    ? "cabbage"
-    : comparison.includes("coconut")
-    ? "coconut"
-    : comparison.includes("pineapple")
-    ? "pineapple"
-    : comparison.includes("pumpkin")
-    ? "pumpkin"
-    : comparison.includes("watermelon")
-    ? "watermelon"
-    : "comparison";
-
-  const comparisonIcon =
-    objectLabel === "mango" ? (
-      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true" className="text-[hsl(var(--stage-pregnancy-accent))]">
-        <path d="M10 18.5C8.8 13.7 11.6 9.8 16.2 9.3c4.9-.5 8.2 2.6 7.5 7.2-.7 4.8-5.1 8-9.2 7.2-2.4-.5-3.9-2.2-4.5-5.2Z" fill="currentColor" opacity="0.68" />
-        <path d="M18.4 9.4c1.8-2.2 3.7-3.1 5.9-2.9" fill="none" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" opacity="0.58" />
-        <path d="M21 7.6c1.7.1 3 .8 3.7 2" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.42" />
-      </svg>
-    ) : (
-      <svg viewBox="0 0 32 32" width="25" height="25" aria-hidden="true" className="text-[hsl(var(--stage-pregnancy-accent))]">
-        <ellipse cx="16" cy="17" rx={objectLabel.includes("seed") || objectLabel === "lentil" ? 6 : objectLabel === "banana" || objectLabel === "carrot" || objectLabel === "courgette" ? 10 : 8} ry={objectLabel.includes("seed") || objectLabel === "lentil" ? 4.5 : objectLabel === "banana" || objectLabel === "carrot" || objectLabel === "courgette" ? 4 : 7} fill="currentColor" opacity="0.66" transform={objectLabel === "banana" || objectLabel === "carrot" || objectLabel === "courgette" ? "rotate(-18 16 17)" : undefined} />
-        <path d="M19 10c3-1 5-3 6-5" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.62" />
-        <path d="M21 8c2 0 3.4.7 4.2 2" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.42" />
-      </svg>
-    );
 
   return (
     <div className="relative">
@@ -190,34 +123,23 @@ const MyWeekChapter = ({
                 "radial-gradient(120% 85% at 50% 45%, hsl(var(--stage-pregnancy) / 0.58), transparent 76%)",
             }}
           >
-            <WeekIllustration week={week} size={210} className="mx-auto max-w-full" />
+            <WeekIllustration week={week} size={226} className="mx-auto max-w-full" />
           </div>
-          <div className="sm:col-span-7 px-6 sm:px-9 py-7 sm:py-11 flex flex-col justify-center">
+          <div className="sm:col-span-7 px-6 sm:px-9 py-8 sm:py-12 flex flex-col justify-center">
             <p
               className="font-sans text-[10px] font-medium tracking-[0.28em] uppercase mb-5"
               style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
             >
               Your baby this week
             </p>
-            <p className="font-serif text-[1.5rem] sm:text-[2rem] text-foreground/88 leading-[1.2] sm:leading-[1.18] tracking-tight max-w-[18ch] mb-5">
+            <p className="font-serif text-[1.55rem] sm:text-[2.08rem] text-foreground/88 leading-[1.18] tracking-tight max-w-[19ch] mb-6">
               {babyNote}
             </p>
             <span
               aria-hidden="true"
-              className="block w-10 h-px mb-5"
+              className="block w-10 h-px mb-6"
               style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
             />
-            <div className="mt-1 flex items-center gap-3 rounded-[18px] px-4 py-3.5 max-w-[36ch]" style={{ background: "hsl(var(--stage-pregnancy) / 0.38)", border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.12)" }}>
-              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full" style={{ background: "hsl(var(--card))" }}>
-                {comparisonIcon}
-              </span>
-              <figcaption className="font-sans text-[12.5px] text-foreground/66 leading-snug">
-                <span className="block text-[9.5px] font-medium tracking-[0.24em] uppercase mb-1" style={{ color: "hsl(var(--stage-pregnancy-accent))" }}>
-                  Size comparison
-                </span>
-                {sizeCue}
-              </figcaption>
-            </div>
           </div>
         </figure>
       </section>

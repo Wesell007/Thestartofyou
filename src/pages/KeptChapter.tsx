@@ -313,7 +313,7 @@ const KeptChapter = () => {
   const tint = (a: number) => `hsl(var(--stage-pregnancy) / ${a})`;
 
   return (
-    <div className="min-h-screen bg-parchment-grain page-vignette relative">
+    <div className="min-h-screen bg-parchment-grain page-vignette relative overflow-x-hidden">
       {/* Atmospheric — kept chapters live in a deeper, settled wash */}
       <div
         aria-hidden="true"
@@ -337,11 +337,47 @@ const KeptChapter = () => {
           </Link>
         </div>
 
-        {/* Two-zone preserved chapter object — desktop only.
-            Tablet & mobile unfold as a single composed chapter. */}
-        <div className="lg:grid lg:grid-cols-12 lg:gap-16 xl:gap-20 lg:items-start">
+        <section className="grid md:grid-cols-12 gap-7 md:gap-8 items-end mb-10 sm:mb-12 lg:mb-14">
+          <div className="md:col-span-8">
+            <p
+              className="font-sans text-[10px] font-medium tracking-[0.32em] uppercase mb-5"
+              style={{ color: accent }}
+            >
+              A kept chapter · {trimesterLabel} · Week {week}
+            </p>
+            <h1
+              className="font-serif font-medium text-foreground leading-[0.96] tracking-tight mb-4 sm:mb-5"
+              style={{ fontSize: "clamp(2.35rem, 5.6vw, 4.7rem)" }}
+            >
+              {identity.chapterTitle}
+            </h1>
+            <p className="font-serif italic text-[1.12rem] sm:text-[1.28rem] lg:text-[1.34rem] text-foreground/66 leading-[1.4] max-w-[36ch]">
+              {identity.theme}
+            </p>
+          </div>
+          <aside
+            className="md:col-span-4 rounded-[24px] keepsake-surface px-6 py-6 md:py-7"
+            style={{ borderColor: accentSoft(0.16) }}
+          >
+            <p
+              className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-4"
+              style={{ color: accent }}
+            >
+              Still held
+            </p>
+            <p className="font-serif font-medium text-[2rem] md:text-[2.35rem] text-foreground/90 leading-none mb-3">
+              Week {week}
+            </p>
+            <p className="font-serif italic text-[13px] text-foreground/55 leading-relaxed">
+              Kept {weeksAgo} {weeksAgo === 1 ? "week" : "weeks"} ago, and still revisable.
+            </p>
+          </aside>
+        </section>
+
+        {/* Preserved chapter object. Stronger top hierarchy now owns orientation. */}
+        <div>
           {/* ============== LEFT — chapter context rail (lg+ only) ============== */}
-          <aside className="hidden lg:block lg:col-span-4 lg:sticky lg:top-24 lg:self-start space-y-5">
+          <aside className="hidden">
             {/* Frontispiece */}
             <div>
               <p
@@ -457,7 +493,7 @@ const KeptChapter = () => {
           </aside>
 
           {/* ============== RIGHT — the kept chapter itself ============== */}
-          <article className="lg:col-span-8 mt-0 space-y-10 sm:space-y-12 lg:space-y-14">
+          <article className="mt-0 space-y-10 sm:space-y-12 lg:space-y-14">
             {/* ---------- Title block ----------
                 Tablet & mobile: this is the single composed frontispiece.
                 One eyebrow, one paired title, one held theme, one quiet
@@ -465,7 +501,7 @@ const KeptChapter = () => {
                 duplicated "Week X, still held" h1 + early card has been
                 removed so the opening reads as one unfolding object.
                 Lg+: the left rail owns the kept-chapter framing. */}
-            <header>
+            <header className="hidden">
               {/* Desktop-only kept-chapter eyebrow */}
               <p
                 className="font-sans text-[10.5px] font-medium tracking-[0.30em] uppercase mb-4 hidden lg:block"

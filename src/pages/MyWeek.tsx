@@ -117,7 +117,7 @@ const MyWeek = () => {
       : null;
 
   return (
-    <div className="min-h-screen bg-parchment-grain page-vignette relative">
+    <div className="min-h-screen bg-parchment-grain page-vignette relative overflow-x-hidden">
       <MyWeekHeader />
       <main className="relative mx-auto w-full max-w-[680px] md:max-w-[920px] lg:max-w-[1200px] xl:max-w-[1320px] px-5 sm:px-8 md:px-10 lg:px-14">
         {/* Two-zone composition from md upward. Mobile = single column flow. */}

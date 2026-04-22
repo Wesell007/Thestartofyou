@@ -156,21 +156,6 @@ const MyWeek = () => {
                 ['--tw-divide-opacity' as string]: 1,
               }}
             >
-              {/* Quiet rail label */}
-              <div className="-mt-3 mb-3 flex items-center gap-3 pb-0 border-b-0">
-                <span
-                  aria-hidden="true"
-                  className="block w-5 h-px"
-                  style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
-                />
-                <p
-                  className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase"
-                  style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-                >
-                  This week, held
-                </p>
-              </div>
-
               <div
                 className="space-y-0 [&>*+*]:border-t [&>*+*]:border-[hsl(var(--stage-pregnancy-accent)/0.12)]"
               >

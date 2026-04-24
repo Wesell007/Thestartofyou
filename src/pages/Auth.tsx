@@ -147,21 +147,29 @@ const Auth = () => {
               className="font-sans text-[10px] font-light tracking-[0.3em] uppercase mb-4"
               style={{ color: "hsl(var(--stage-pregnancy-accent) / 0.7)" }}
             >
-              {step === "code-sent" ? "Check your email" : "Save your journey"}
+              {step === "code-sent"
+                ? "Check your email"
+                : isReturning
+                ? "Sign in"
+                : "Save your journey"}
             </p>
             <h1 className="font-serif text-3xl md:text-[2.25rem] text-foreground leading-tight mb-3">
               {step === "code-sent"
                 ? "Enter your sign-in code"
+                : isReturning
+                ? "Welcome back"
                 : pending
                 ? "One step to keep your place"
-                : "Welcome back"}
+                : "Save your journey"}
             </h1>
             <p className="font-sans text-sm font-light text-muted-foreground/80 leading-relaxed max-w-sm mx-auto">
               {step === "code-sent"
                 ? `We've sent a 6-digit code to ${email}. It works on any device.`
+                : isReturning
+                ? "Sign in to return to your journey."
                 : pending
                 ? "Sign in to save your stage and unlock your weekly space."
-                : "Sign in to return to your weekly space."}
+                : "Sign in to continue setting up your journey."}
             </p>
           </div>
 

@@ -35,9 +35,32 @@ import NotFound from "./pages/NotFound.tsx";
 import ScrollToTop from "./components/layout/ScrollToTop.tsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";
 import ConsentBanner from "./components/consent/ConsentBanner.tsx";
+import RouteTracker from "./components/analytics/RouteTracker.tsx";
+import { useEffect } from "react";
+import { supabase } from "./integrations/supabase/client.ts";
+import { identify } from "./lib/analytics.ts";
 
 
 const queryClient = new QueryClient();
+
+const AnalyticsIdentityBridge = () => {
+  useEffect(() => {
+    let cancelled = false;
+    supabase.auth.getSession().then(({ data }) => {
+      if (cancelled) return;
+      identify(data.session?.user?.id ?? null);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      if (cancelled) return;
+      identify(session?.user?.id ?? null);
+    });
+    return () => {
+      cancelled = true;
+      sub.subscription.unsubscribe();
+    };
+  }, []);
+  return null;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -47,6 +70,8 @@ const App = () => (
       
       <BrowserRouter>
         <ScrollToTop />
+        <RouteTracker />
+        <AnalyticsIdentityBridge />
         <ConsentBanner />
         <Routes>
           <Route path="/" element={<Index />} />

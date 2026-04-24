@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Play } from "lucide-react";
 import heroImage from "@/assets/home-hero-premium.jpg";
 import heroVideoAsset from "@/assets/home-hero-video-new.mp4.asset.json";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 
 const NewHeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -129,6 +131,7 @@ const NewHeroSection = () => {
             <div className="flex flex-col sm:flex-row items-start gap-4">
               <Link
                 to="/due-date-calculator"
+                onClick={() => trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "home_hero" })}
                 className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-9 py-4 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
               >
                 Start your journey
@@ -146,6 +149,7 @@ const NewHeroSection = () => {
               Already saving your journey?{" "}
               <Link
                 to="/auth?intent=sign_in"
+                onClick={() => trackEvent(EVENTS.SIGN_IN_CLICKED, { location: "home_hero" })}
                 className="text-foreground/80 underline-offset-4 hover:underline hover:text-foreground transition-colors"
               >
                 Sign in

@@ -1,115 +1,67 @@
-# Strict opt-in consent + analytics gate
+## Wave 1 — analytics scaffolding (only)
 
-A calm, minimal banner asks the user once. Until they explicitly accept, no analytics fires. Product state, auth, and saved journeys keep working untouched.
+A small, contained pass that proves the architecture end-to-end with three events, a single route tracker, identify on auth changes, and strict consent gating. No broad instrumentation.
 
-## What gets built
-
-### 1. Consent state (`src/lib/consent.ts`)
-A single source of truth for analytics consent, decoupled from everything else.
-
-- States: `"unknown" | "accepted" | "rejected"`
-- Stored in `localStorage` under key `tsoy_consent_analytics_v1` (versioned so future schema changes don't silently inherit old answers).
-- Helpers:
-  - `getAnalyticsConsent(): ConsentState`
-  - `setAnalyticsConsent(state: "accepted" | "rejected"): void` — writes storage and dispatches a `consentchange` window event
-  - `subscribeAnalyticsConsent(cb): unsubscribe` — listens to the event for live UI updates
-- Treats `unknown` as **not consented**. Dismissal is never consent.
-
-This file knows nothing about analytics implementations or product state.
-
-### 2. Analytics gate (`src/lib/analytics.ts`)
-The single entry point all future instrumentation must go through. Day-one implementation is a no-op gate, ready for a real sink later.
-
-- Public API:
-  - `trackEvent(name: string, props?: Record<string, unknown>): void`
-  - `trackPageView(path: string): void`
-  - `identify(userId: string | null): void`
-- Behaviour:
-  - On every call, checks `getAnalyticsConsent()`.
-  - If not `"accepted"`: silently no-ops (and in dev, `console.debug` the dropped event so engineers can verify gating).
-  - If `"accepted"`: forwards to an internal adapter. Day-one adapter is a console adapter behind a `__DEV__` check; production adapter slot is left as a clearly marked TODO so wiring PostHog/Plausible later is a single-file change.
-- Never imports product state, journey data, or AI helpers. No event payload includes profile data unless an explicit caller passes it.
-
-### 3. Consent banner (`src/components/consent/ConsentBanner.tsx`)
-A small, calm banner anchored bottom of viewport.
-
-- Visible only when consent state is `"unknown"`.
-- Copy (UK English):
-  > **A small note on analytics**
-  > We use anonymous analytics to understand which parts of The Start of You are genuinely helping. It's optional and you can change your mind later.
-  - Two equally weighted buttons: **Reject analytics** (quiet outline) and **Accept analytics** (terracotta CTA). Neither is hidden, neither is dimmed. Same size, same prominence — reject is on the left so it's not the harder choice.
-  - Small link: **Privacy** → `/privacy` (existing or future page; banner doesn't depend on it existing today).
-- No "X" dismiss. No "by continuing you agree". Closing the tab leaves state as `"unknown"` and the banner returns next visit.
-- Responsive: full-width strip on mobile, centred max-w-2xl card with subtle shadow on desktop. Uses existing `bg-card`, `border`, `rounded-2xl`, `shadow-soft` tokens — no new design system pieces.
-- Mounted once at the root (in `App.tsx`) so it follows the user across routes until they choose.
-
-### 4. Preference re-entry (lightweight)
-Not a full preference centre. Just one tiny affordance so users who said yes/no can change their mind:
-
-- A `<ConsentLink />` component (text-only "Manage analytics") rendered in `Footer.tsx`. Clicking it opens a small inline confirm using the existing `Sonner` toast with two action buttons (Accept / Reject), or — if simpler — resets state to `"unknown"` so the banner reappears. We'll use the latter (resets to `unknown`) for minimal new surface.
-
-## What is **strictly necessary** (stays on without consent)
-
-These keep working untouched. They're required to deliver the product the user asked for.
-
-- Supabase auth session (`auth-token` localStorage entry managed by Supabase client)
-- Saved journey state (`pregnancy_journeys`, `journeys`, `reflections`, `week_photos`)
-- `pendingJourney` localStorage (mid-flow setup state the user explicitly initiated)
-- `return_to` / `auth_intent` URL params used by protected-route flow
-- React Query cache, Sonner toasts, route state
-
-These touch no analytics layer and no consent check is added to them.
-
-## What is **optional** (gated behind opt-in)
-
-- Any call to `trackEvent`, `trackPageView`, `identify`
-- Any future PostHog / Plausible / GA adapter
-- Any future behavioural personalisation built on top of analytics
-
-## Strict separation guarantees
-
-```text
-┌─────────────────────────┐   ┌─────────────────────────┐   ┌───────────────────────┐
-│  Product state          │   │  Analytics (gated)      │   │  AI context (future)  │
-│  savedJourney.ts        │   │  analytics.ts           │   │  curated from product │
-│  authIntent.ts          │   │  consent.ts             │   │  state only           │
-│  Supabase tables        │   │  ConsentBanner.tsx      │   │                       │
-└─────────────────────────┘   └─────────────────────────┘   └───────────────────────┘
-        ▲                              ▲                              ▲
-        │                              │                              │
-   always on                  off until accepted              never auto-fed by
-                                                              the analytics layer
-```
-
-`analytics.ts` has zero imports from `savedJourney.ts`, `authIntent.ts`, or any AI helper. AI helpers (when built) will read from product state directly, never from the event stream.
-
-## Files
+### Files
 
 **New**
-- `src/lib/consent.ts`
-- `src/lib/analytics.ts`
-- `src/components/consent/ConsentBanner.tsx`
-- `src/components/consent/ConsentLink.tsx`
+- `src/lib/analyticsEvents.ts` — central event name constants + typed prop shapes for the 3 proof events. Single source of truth for event names; prevents string drift.
+- `src/lib/analyticsContext.ts` — anonymous_id + user_id management. `anonymous_id` is **only generated after consent is accepted** (lazy on first authorised call), persisted in `localStorage` (`tsoy_anon_id_v1`). `user_id` is held in-memory only; never written to product tables.
+- `src/components/analytics/RouteTracker.tsx` — listens to `useLocation`, calls `trackPageView(path)` on every route change **except `/`** (see duplication note). No-op until consent is accepted.
 
 **Edited**
-- `src/App.tsx` — mount `<ConsentBanner />` once at root
-- `src/components/layout/Footer.tsx` — add quiet `<ConsentLink />` in the legal/meta row
+- `src/lib/analytics.ts` — extend with: lazy context attachment (anon_id once consent granted, user_id if set), `identify(userId)` that stores user_id and forwards, plus a `resetAnalyticsContext()` called on consent reset / sign-out. Keep all calls gated by `hasAnalyticsConsent()`. Console adapter unchanged.
+- `src/App.tsx` — mount `<RouteTracker />` once inside `<BrowserRouter>`; subscribe to `supabase.auth.onAuthStateChange` once at app root to call `identify(user?.id ?? null)`. No product logic touched.
+- `src/pages/Index.tsx` — fire `home_viewed` on mount (single, deliberate event; route tracker skips `/`).
+- `src/components/home/NewHeroSection.tsx` — `start_journey_clicked` on the primary "Start your journey" CTA; `sign_in_clicked` on the inline "Sign in" link.
+- `src/components/layout/Navbar.tsx` — `start_journey_clicked` on the desktop+mobile "Start your journey" buttons; `sign_in_clicked` on the desktop+mobile "Sign in" links. (Same event names, different `location` property — see taxonomy.)
 
-No changes to: auth, protected routes, saved journey logic, AI surfaces, routing, design tokens.
+### Event taxonomy (Wave 1 only)
 
-## Manual review points
+```text
+home_viewed              { }            — fired once from Index mount
+start_journey_clicked    { location }   — location: "home_hero" | "navbar"
+sign_in_clicked          { location }   — location: "home_hero" | "navbar"
+```
 
-- **Privacy page copy**: banner links to `/privacy`. If that page doesn't exist yet, link will 404 — flag for content team to draft a short privacy note before launch.
-- **Jurisdictional posture**: strict opt-in is conservative globally; safe for UK/EU. If targeting US-only later, posture could be relaxed.
-- **Versioning policy**: storage key includes `_v1`. Decide your policy for bumping the version (e.g. when adding a new tracking category, force re-consent).
-- **Future AI personalisation consent**: intentionally out of scope. When AI context expands beyond "explicitly saved journey data", a separate consent question will likely be needed. The `consent.ts` module is structured to easily add a second key (e.g. `tsoy_consent_ai_v1`) without refactoring.
-- **Sink selection**: real analytics adapter is a single TODO in `analytics.ts`. Choose PostHog / Plausible / Lovable Cloud table in a follow-up.
+Common properties auto-attached by `analytics.ts` (not by callers):
+`anonymous_id`, `user_id` (nullable), `path`, `timestamp`.
 
-## Output you'll get after build
+Forbidden in props (enforced by convention + types): journey content, reflections, due dates, names, emails, free-text — anything from product memory or AI context.
 
-1. Consent UX implemented (banner + footer link)
-2. Consent state stored in versioned localStorage key
-3. Analytics gated through `analytics.ts` — no-ops until `"accepted"`
-4. Strictly necessary vs optional list (above) reflected in code boundaries
-5. Changed/created files list
-6. Manual review notes
+### Exact flow for the 3 proof events
+
+1. **`home_viewed`** — `Index.tsx` `useEffect(() => trackEvent("home_viewed"), [])`. Route tracker explicitly skips `/` to avoid duplicating this. Net result: exactly one event per homepage visit.
+2. **`start_journey_clicked`** — `onClick` on each Start CTA (hero + navbar desktop + navbar mobile) calls `trackEvent("start_journey_clicked", { location })` synchronously before `<Link>` navigation. Console adapter is sync, so no race.
+3. **`sign_in_clicked`** — same pattern on the three Sign in entry points (`location: "home_hero" | "navbar"`).
+
+### Consent gating behaviour
+
+- **Before acceptance** (`unknown` or `rejected`): every `trackEvent`/`trackPageView`/`identify` call short-circuits in `analytics.ts`. No `anonymous_id` is generated. No `user_id` is forwarded. Dev-only `console.debug("[analytics:dropped:…]")` still logs so we can verify call sites are wired without leaking data.
+- **At acceptance**: `anonymous_id` is lazily created on the next authorised call and persisted. The auth subscription's most recent `userId` is forwarded via `identify()` immediately so subsequent events carry it.
+- **After rejection or reset**: `resetAnalyticsContext()` clears in-memory user_id and removes `tsoy_anon_id_v1` from storage, so a future opt-in starts fresh.
+
+### Identity model
+
+- `anonymous_id`: UUID v4, generated **only after consent accepted**, stored in `localStorage` under `tsoy_anon_id_v1`. Stable across sessions for the same browser. Cleared on consent reset.
+- `user_id`: Supabase auth user id, held **in memory only** in `analyticsContext.ts`. Set by `identify()` from the App-root auth subscription. Never written to any product table; never persisted to localStorage. On sign-out → `identify(null)`.
+- Strict separation: `analytics.ts` and `analyticsContext.ts` do not import `savedJourney.ts`, `authIntent.ts`, profile data, or any AI helper. Identify only receives the bare `userId` string.
+
+### Pageview / home-view duplication
+
+Resolved: `RouteTracker` skips `path === "/"`. The homepage is measured by the deliberate `home_viewed` event only. All other routes get a single `page_viewed` (auto from RouteTracker). No double counting.
+
+### Layer separation reminders
+
+- Analytics layer: this pass only.
+- Product memory: `savedJourney.ts` + Supabase tables — untouched.
+- AI context: built separately from explicit product state — not consuming the event stream.
+- No analytics-only flags added to product tables in this pass.
+
+### Manual review points before Wave 2
+
+1. Choose the real analytics sink (PostHog / Plausible / Lovable Cloud table) before Wave 2 instrumentation lands.
+2. Confirm the privacy page copy lists `anonymous_id` and the `tsoy_anon_id_v1` key once a sink is wired.
+3. Decide whether the `location` property convention (`home_hero`, `navbar`, …) needs a typed enum before Wave 2 expands click-tracking.
+4. Confirm that `identify()` should fire on every auth state change vs only `SIGNED_IN`/`SIGNED_OUT` — current plan: every change, since the gate makes it cheap.
+5. Decide retention/rotation policy for `anonymous_id` (current: indefinite until consent reset).

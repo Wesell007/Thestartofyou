@@ -33,6 +33,7 @@ import Auth from "./pages/Auth.tsx";
 import Setup from "./pages/Setup.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ScrollToTop from "./components/layout/ScrollToTop.tsx";
+import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";
 
 
 const queryClient = new QueryClient();
@@ -68,9 +69,9 @@ const App = () => (
           <Route path="/product" element={<Product />} />
           <Route path="/ask" element={<AskPage />} />
           <Route path="/guidance" element={<GuidanceLibrary />} />
-          <Route path="/my-week" element={<MyWeek />} />
-          <Route path="/my-week/:week" element={<KeptChapter />} />
-          <Route path="/my-journey" element={<MyJourney />} />
+          <Route path="/my-week" element={<ProtectedRoute><MyWeek /></ProtectedRoute>} />
+          <Route path="/my-week/:week" element={<ProtectedRoute><KeptChapter /></ProtectedRoute>} />
+          <Route path="/my-journey" element={<ProtectedRoute><MyJourney /></ProtectedRoute>} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/setup" element={<Setup />} />
           <Route path="/:journey/:stage" element={<StagePage />} />

@@ -1,0 +1,58 @@
+/**
+ * Analytics gate.
+ *
+ * The single entry point for all non-essential tracking. Every call is
+ * checked against `hasAnalyticsConsent()` first; without explicit
+ * "accepted" consent, every helper here is a no-op.
+ *
+ * Strict separation rules (do not break):
+ *  - This file MUST NOT import from `savedJourney.ts`, `authIntent.ts`,
+ *    or any AI helper. Product state is not implicitly observable here.
+ *  - Callers may pass curated properties explicitly. Nothing about the
+ *    user's journey, reflections, or behaviour leaks unless the call
+ *    site decides to include it.
+ *  - AI context is built separately from product state — it must not
+ *    consume this event stream.
+ *
+ * Day-one adapter is a console adapter (dev only). Wiring a real sink
+ * (PostHog, Plausible, Lovable Cloud table, etc.) is a single-file
+ * change — replace the body of `forward()`.
+ */
+
+import { hasAnalyticsConsent } from "./consent";
+
+type EventProps = Record<string, unknown>;
+
+const isDev =
+  typeof import.meta !== "undefined" && Boolean((import.meta as { env?: { DEV?: boolean } }).env?.DEV);
+
+const forward = (kind: "event" | "pageview" | "identify", payload: unknown): void => {
+  // TODO: wire a real analytics sink here. Until then we log in dev only
+  // so the architecture is verifiable end-to-end without shipping data.
+  if (isDev) {
+    // eslint-disable-next-line no-console
+    console.debug(`[analytics:${kind}]`, payload);
+  }
+};
+
+const dropped = (kind: string, payload: unknown): void => {
+  if (isDev) {
+    // eslint-disable-next-line no-console
+    console.debug(`[analytics:dropped:${kind}] consent not granted`, payload);
+  }
+};
+
+export const trackEvent = (name: string, props?: EventProps): void => {
+  if (!hasAnalyticsConsent()) return dropped("event", { name, props });
+  forward("event", { name, props });
+};
+
+export const trackPageView = (path: string): void => {
+  if (!hasAnalyticsConsent()) return dropped("pageview", { path });
+  forward("pageview", { path });
+};
+
+export const identify = (userId: string | null): void => {
+  if (!hasAnalyticsConsent()) return dropped("identify", { userId });
+  forward("identify", { userId });
+};

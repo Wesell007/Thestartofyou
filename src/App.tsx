@@ -34,6 +34,7 @@ import Setup from "./pages/Setup.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ScrollToTop from "./components/layout/ScrollToTop.tsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";
+import ConsentBanner from "./components/consent/ConsentBanner.tsx";
 
 
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const App = () => (
       
       <BrowserRouter>
         <ScrollToTop />
+        <ConsentBanner />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/explore" element={<Explore />} />

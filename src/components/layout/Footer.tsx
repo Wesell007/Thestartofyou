@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import logoSrc from "@/assets/logo-dark.png";
 import botanicalBl from "@/assets/botanical-branch-bl.png";
+import ConsentLink from "@/components/consent/ConsentLink";
 
 const Footer = () => {
   return (
@@ -93,9 +94,12 @@ const Footer = () => {
             <span className="font-sans text-[11px] sm:text-xs font-light text-foreground/40">
               © 2026 The Start of You. All rights reserved.
             </span>
-            <span className="font-sans text-[11px] sm:text-xs font-light text-foreground/35 flex items-center gap-1.5">
-              <span className="text-sage">♡</span> Made with care for expecting parents
-            </span>
+            <div className="flex items-center gap-4">
+              <ConsentLink />
+              <span className="font-sans text-[11px] sm:text-xs font-light text-foreground/35 flex items-center gap-1.5">
+                <span className="text-sage">♡</span> Made with care for expecting parents
+              </span>
+            </div>
           </div>
         </div>
       </div>

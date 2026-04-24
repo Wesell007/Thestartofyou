@@ -127,7 +127,7 @@ const Auth = () => {
     // onAuthStateChange will route forward.
   };
 
-  const pending = readPendingJourney();
+  const isReturning = effectiveIntent === "sign_in" || effectiveIntent === "return_to_route";
 
   return (
     <div className="min-h-screen bg-parchment flex flex-col">

@@ -125,21 +125,32 @@ const NewHeroSection = () => {
           </p>
 
           {/* Primary CTA */}
-          <div className="flex flex-col sm:flex-row items-start gap-4">
-            <Link
-              to="/due-date-calculator"
-              className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-9 py-4 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
-            >
-              Start your journey
-              <ArrowRight size={15} />
-            </Link>
-            <Link
-              to="/explore"
-              className="inline-flex items-center gap-2 font-sans text-[13.5px] font-light text-muted-foreground hover:text-foreground transition-colors py-4"
-            >
-              Explore guidance
-              <ArrowRight size={13} className="opacity-60" />
-            </Link>
+          <div className="flex flex-col items-start gap-4">
+            <div className="flex flex-col sm:flex-row items-start gap-4">
+              <Link
+                to="/due-date-calculator"
+                className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-9 py-4 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
+              >
+                Start your journey
+                <ArrowRight size={15} />
+              </Link>
+              <Link
+                to="/explore"
+                className="inline-flex items-center gap-2 font-sans text-[13.5px] font-light text-muted-foreground hover:text-foreground transition-colors py-4"
+              >
+                Explore guidance
+                <ArrowRight size={13} className="opacity-60" />
+              </Link>
+            </div>
+            <p className="font-sans text-[12.5px] font-light text-muted-foreground/80 mt-1">
+              Already saving your journey?{" "}
+              <Link
+                to="/auth?intent=sign_in"
+                className="text-foreground/80 underline-offset-4 hover:underline hover:text-foreground transition-colors"
+              >
+                Sign in
+              </Link>
+            </p>
           </div>
         </div>
       </div>

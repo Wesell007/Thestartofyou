@@ -58,9 +58,9 @@ const MyWeek = () => {
         return;
       }
 
-      const [{ data: profile }, { data: journey }] = await Promise.all([
+      const [{ data: profile }, journey] = await Promise.all([
         supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
-        supabase.from("saved_journeys").select("lmp_date, due_date").eq("user_id", user.id).maybeSingle(),
+        getActivePregnancyJourney(user.id),
       ]);
 
       if (cancelled) return;
@@ -74,13 +74,11 @@ const MyWeek = () => {
         return;
       }
 
-      const lmp = new Date(journey.lmp_date);
-      const due = new Date(journey.due_date);
       setState({
         userId: user.id,
         firstName: profile.first_name,
-        currentWeek: computeWeek(lmp),
-        dueDate: due,
+        currentWeek: computeWeek(journey.lmp),
+        dueDate: journey.due,
       });
       setLoading(false);
     };

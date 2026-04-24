@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { differenceInDays } from "date-fns";
 import { Camera } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { getActivePregnancyJourney } from "@/lib/savedJourney";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import { getWeekIdentity } from "@/data/myWeekContent";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";

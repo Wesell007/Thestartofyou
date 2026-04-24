@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { buildAuthUrl } from "@/lib/authIntent";
 import logoSrc from "@/assets/logo-dark.png";
 
 
@@ -14,9 +16,26 @@ const navLinks = [
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [authed, setAuthed] = useState<boolean | null>(null);
   const location = useLocation();
 
+  useEffect(() => {
+    let cancelled = false;
+    supabase.auth.getSession().then(({ data }) => {
+      if (!cancelled) setAuthed(!!data.session?.user);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      if (!cancelled) setAuthed(!!session?.user);
+    });
+    return () => {
+      cancelled = true;
+      sub.subscription.unsubscribe();
+    };
+  }, []);
+
   const isActive = (href: string) => location.pathname === href;
+
+  const signInHref = buildAuthUrl("sign_in");
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/97 backdrop-blur-lg border-b border-border/40">
@@ -47,14 +66,31 @@ const Navbar = () => {
           ))}
         </nav>
 
-        {/* CTA */}
-        <div className="hidden lg:flex items-center">
-          <Link
-            to="/explore"
-            className="font-sans text-[13px] lg:text-[14px] font-medium bg-terracotta text-terracotta-foreground px-5 lg:px-7 py-2 lg:py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
-          >
-            Start your journey
-          </Link>
+        {/* CTA cluster */}
+        <div className="hidden lg:flex items-center gap-5">
+          {authed ? (
+            <Link
+              to="/my-week"
+              className="font-sans text-[13px] lg:text-[14px] font-medium bg-terracotta text-terracotta-foreground px-5 lg:px-7 py-2 lg:py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
+            >
+              My Week
+            </Link>
+          ) : (
+            <>
+              <Link
+                to={signInHref}
+                className="font-sans text-[13.5px] font-light text-foreground/70 hover:text-foreground transition-colors"
+              >
+                Sign in
+              </Link>
+              <Link
+                to="/explore"
+                className="font-sans text-[13px] lg:text-[14px] font-medium bg-terracotta text-terracotta-foreground px-5 lg:px-7 py-2 lg:py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
+              >
+                Start your journey
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile toggle */}
@@ -82,13 +118,33 @@ const Navbar = () => {
               {label}
             </Link>
           ))}
-          <Link
-            to="/explore"
-            className="mt-4 text-center font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-6 py-3.5 rounded-pill hover:bg-terracotta-hover transition-all shadow-cta"
-            onClick={() => setMobileOpen(false)}
-          >
-            Start your journey
-          </Link>
+
+          {authed ? (
+            <Link
+              to="/my-week"
+              onClick={() => setMobileOpen(false)}
+              className="mt-4 text-center font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-6 py-3.5 rounded-pill hover:bg-terracotta-hover transition-all shadow-cta"
+            >
+              My Week
+            </Link>
+          ) : (
+            <>
+              <Link
+                to="/explore"
+                className="mt-4 text-center font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-6 py-3.5 rounded-pill hover:bg-terracotta-hover transition-all shadow-cta"
+                onClick={() => setMobileOpen(false)}
+              >
+                Start your journey
+              </Link>
+              <Link
+                to={signInHref}
+                onClick={() => setMobileOpen(false)}
+                className="mt-2 text-center font-sans text-sm font-light text-foreground/75 hover:text-foreground py-3 transition-colors"
+              >
+                Already saving your journey? Sign in
+              </Link>
+            </>
+          )}
         </div>
       )}
     </header>

@@ -4,6 +4,11 @@ import { Mail, ArrowRight, Loader2, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { commitPendingJourneyToDB, readPendingJourney } from "@/lib/savedJourney";
+import {
+  parseIntent,
+  parseSafeReturnTo,
+  resolvePostLoginDestination,
+} from "@/lib/authIntent";
 import { toast } from "sonner";
 
 type Step = "choose" | "code-sent";
@@ -11,7 +16,12 @@ type Step = "choose" | "code-sent";
 const Auth = () => {
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const next = params.get("next") || "/setup";
+  const intent = parseIntent(params.get("intent"));
+  const returnTo = parseSafeReturnTo(params.get("return_to"));
+  // Default intent: if there's a pending journey treat as start_journey,
+  // otherwise treat as a returning sign_in.
+  const pending = readPendingJourney();
+  const effectiveIntent = intent ?? (pending ? "start_journey" : "sign_in");
 
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
@@ -31,13 +41,11 @@ const Auth = () => {
       } catch (e) {
         console.error(e);
       }
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("first_name")
-        .eq("user_id", userId)
-        .maybeSingle();
-
-      const target = profile?.first_name ? "/my-week" : next;
+      const target = await resolvePostLoginDestination(
+        userId,
+        effectiveIntent,
+        returnTo
+      );
       if (!cancelled) navigate(target, { replace: true });
     };
 
@@ -53,7 +61,7 @@ const Auth = () => {
       cancelled = true;
       sub.subscription.unsubscribe();
     };
-  }, [navigate, next]);
+  }, [navigate, effectiveIntent, returnTo]);
 
   // Resend cooldown ticker
   useEffect(() => {
@@ -64,10 +72,20 @@ const Auth = () => {
     };
   }, [resendCooldown]);
 
+  const buildAuthReturnUrl = () => {
+    // Re-encode intent + return_to so OAuth/magic-link round trips preserve them.
+    const url = new URL(window.location.origin + "/auth");
+    url.searchParams.set("intent", effectiveIntent);
+    if (effectiveIntent === "return_to_route" && returnTo) {
+      url.searchParams.set("return_to", returnTo);
+    }
+    return url.toString();
+  };
+
   const handleGoogle = async () => {
     setGoogleSubmitting(true);
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin + "/auth",
+      redirect_uri: buildAuthReturnUrl(),
     });
     if (result.error) {
       setGoogleSubmitting(false);
@@ -85,7 +103,7 @@ const Auth = () => {
         // Allow new users — they'll create an account via the code.
         shouldCreateUser: true,
         // Also include the magic link as a fallback in the same email.
-        emailRedirectTo: window.location.origin + "/auth",
+        emailRedirectTo: buildAuthReturnUrl(),
       },
     });
     setSubmitting(false);
@@ -119,7 +137,7 @@ const Auth = () => {
     // onAuthStateChange will route forward.
   };
 
-  const pending = readPendingJourney();
+  const isReturning = effectiveIntent === "sign_in" || effectiveIntent === "return_to_route";
 
   return (
     <div className="min-h-screen bg-parchment flex flex-col">
@@ -139,21 +157,29 @@ const Auth = () => {
               className="font-sans text-[10px] font-light tracking-[0.3em] uppercase mb-4"
               style={{ color: "hsl(var(--stage-pregnancy-accent) / 0.7)" }}
             >
-              {step === "code-sent" ? "Check your email" : "Save your journey"}
+              {step === "code-sent"
+                ? "Check your email"
+                : isReturning
+                ? "Sign in"
+                : "Save your journey"}
             </p>
             <h1 className="font-serif text-3xl md:text-[2.25rem] text-foreground leading-tight mb-3">
               {step === "code-sent"
                 ? "Enter your sign-in code"
+                : isReturning
+                ? "Welcome back"
                 : pending
                 ? "One step to keep your place"
-                : "Welcome back"}
+                : "Save your journey"}
             </h1>
             <p className="font-sans text-sm font-light text-muted-foreground/80 leading-relaxed max-w-sm mx-auto">
               {step === "code-sent"
                 ? `We've sent a 6-digit code to ${email}. It works on any device.`
+                : isReturning
+                ? "Sign in to return to your journey."
                 : pending
                 ? "Sign in to save your stage and unlock your weekly space."
-                : "Sign in to return to your weekly space."}
+                : "Sign in to continue setting up your journey."}
             </p>
           </div>
 

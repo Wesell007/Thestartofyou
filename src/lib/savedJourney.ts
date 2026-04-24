@@ -18,6 +18,10 @@ export type ActivePregnancyJourney = {
   due_date: string; // yyyy-MM-dd
   lmp: Date;
   due: Date;
+  /** ISO timestamp string of when the journey was first saved. */
+  started_at: string | null;
+  /** Date object form of started_at, or null if unknown. */
+  startedAt: Date | null;
 };
 
 export const stashPendingJourney = (lmp: Date) => {
@@ -146,7 +150,7 @@ export const getActivePregnancyJourney = async (
     }
     const { data: preg } = await supabase
       .from("pregnancy_journeys")
-      .select("lmp_date, due_date")
+      .select("lmp_date, due_date, started_at")
       .eq("user_id", userId)
       .maybeSingle();
     if (preg) {
@@ -155,6 +159,8 @@ export const getActivePregnancyJourney = async (
         due_date: preg.due_date,
         lmp: new Date(preg.lmp_date),
         due: new Date(preg.due_date),
+        started_at: preg.started_at ?? null,
+        startedAt: preg.started_at ? new Date(preg.started_at) : null,
       };
     }
     // Pointer exists but payload missing — fall through to legacy fallback.
@@ -163,7 +169,7 @@ export const getActivePregnancyJourney = async (
   // Step 2: legacy fallback + opportunistic backfill
   const { data: legacy } = await supabase
     .from("saved_journeys")
-    .select("lmp_date, due_date, journey_type")
+    .select("lmp_date, due_date, journey_type, created_at")
     .eq("user_id", userId)
     .maybeSingle();
 
@@ -189,5 +195,7 @@ export const getActivePregnancyJourney = async (
     due_date: legacy.due_date,
     lmp: new Date(legacy.lmp_date),
     due: new Date(legacy.due_date),
+    started_at: legacy.created_at ?? null,
+    startedAt: legacy.created_at ? new Date(legacy.created_at) : null,
   };
 };

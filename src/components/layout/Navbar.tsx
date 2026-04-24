@@ -3,6 +3,8 @@ import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { buildAuthUrl } from "@/lib/authIntent";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 import logoSrc from "@/assets/logo-dark.png";
 
 
@@ -79,12 +81,14 @@ const Navbar = () => {
             <>
               <Link
                 to={signInHref}
+                onClick={() => trackEvent(EVENTS.SIGN_IN_CLICKED, { location: "navbar" })}
                 className="font-sans text-[13.5px] font-light text-foreground/70 hover:text-foreground transition-colors"
               >
                 Sign in
               </Link>
               <Link
                 to="/explore"
+                onClick={() => trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "navbar" })}
                 className="font-sans text-[13px] lg:text-[14px] font-medium bg-terracotta text-terracotta-foreground px-5 lg:px-7 py-2 lg:py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
               >
                 Start your journey
@@ -132,13 +136,19 @@ const Navbar = () => {
               <Link
                 to="/explore"
                 className="mt-4 text-center font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-6 py-3.5 rounded-pill hover:bg-terracotta-hover transition-all shadow-cta"
-                onClick={() => setMobileOpen(false)}
+                onClick={() => {
+                  trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "navbar" });
+                  setMobileOpen(false);
+                }}
               >
                 Start your journey
               </Link>
               <Link
                 to={signInHref}
-                onClick={() => setMobileOpen(false)}
+                onClick={() => {
+                  trackEvent(EVENTS.SIGN_IN_CLICKED, { location: "navbar" });
+                  setMobileOpen(false);
+                }}
                 className="mt-2 text-center font-sans text-sm font-light text-foreground/75 hover:text-foreground py-3 transition-colors"
               >
                 Already saving your journey? Sign in

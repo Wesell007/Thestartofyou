@@ -4,6 +4,11 @@ import { Mail, ArrowRight, Loader2, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { commitPendingJourneyToDB, readPendingJourney } from "@/lib/savedJourney";
+import {
+  parseIntent,
+  parseSafeReturnTo,
+  resolvePostLoginDestination,
+} from "@/lib/authIntent";
 import { toast } from "sonner";
 
 type Step = "choose" | "code-sent";
@@ -11,7 +16,12 @@ type Step = "choose" | "code-sent";
 const Auth = () => {
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const next = params.get("next") || "/setup";
+  const intent = parseIntent(params.get("intent"));
+  const returnTo = parseSafeReturnTo(params.get("return_to"));
+  // Default intent: if there's a pending journey treat as start_journey,
+  // otherwise treat as a returning sign_in.
+  const pending = readPendingJourney();
+  const effectiveIntent = intent ?? (pending ? "start_journey" : "sign_in");
 
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
@@ -31,13 +41,11 @@ const Auth = () => {
       } catch (e) {
         console.error(e);
       }
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("first_name")
-        .eq("user_id", userId)
-        .maybeSingle();
-
-      const target = profile?.first_name ? "/my-week" : next;
+      const target = await resolvePostLoginDestination(
+        userId,
+        effectiveIntent,
+        returnTo
+      );
       if (!cancelled) navigate(target, { replace: true });
     };
 
@@ -53,7 +61,7 @@ const Auth = () => {
       cancelled = true;
       sub.subscription.unsubscribe();
     };
-  }, [navigate, next]);
+  }, [navigate, effectiveIntent, returnTo]);
 
   // Resend cooldown ticker
   useEffect(() => {

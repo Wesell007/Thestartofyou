@@ -103,7 +103,7 @@ const Auth = () => {
         // Allow new users — they'll create an account via the code.
         shouldCreateUser: true,
         // Also include the magic link as a fallback in the same email.
-        emailRedirectTo: window.location.origin + "/auth",
+        emailRedirectTo: buildAuthReturnUrl(),
       },
     });
     setSubmitting(false);

@@ -36,9 +36,9 @@ const MyJourney = () => {
         navigate("/auth", { replace: true });
         return;
       }
-      const [{ data: profile }, { data: journey }, { data: refls }, { data: photos }] = await Promise.all([
+      const [{ data: profile }, journey, { data: refls }, { data: photos }] = await Promise.all([
         supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
-        supabase.from("saved_journeys").select("lmp_date").eq("user_id", user.id).maybeSingle(),
+        getActivePregnancyJourney(user.id),
         supabase.from("reflections").select("week, content, updated_at").eq("user_id", user.id),
         supabase.from("week_photos").select("week, storage_path").eq("user_id", user.id),
       ]);
@@ -76,7 +76,7 @@ const MyJourney = () => {
 
       setState({
         firstName: profile.first_name,
-        currentWeek: computeWeek(new Date(journey.lmp_date)),
+        currentWeek: computeWeek(journey.lmp),
         reflections,
         photos: photosByWeek,
       });

@@ -246,7 +246,7 @@ const MyJourney = () => {
           </div>
         )}
 
-        <LookingAheadCard currentWeek={currentWeek} />
+        <LookingAheadCard currentWeek={currentWeek} keptCount={keptWeeks.length} />
       </main>
       <MyWeekFooter contextual={null} />
     </div>

@@ -5,16 +5,19 @@ import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 
 interface Props {
   currentWeek: number;
+  /** Number of kept rows in the spine; used to tighten spacing in sparse states. */
+  keptCount?: number;
 }
 
-const LookingAheadCard = ({ currentWeek }: Props) => {
+const LookingAheadCard = ({ currentWeek, keptCount }: Props) => {
   const accent = "hsl(var(--stage-pregnancy-accent))";
   const nextWeek = currentWeek < MAX_PREGNANCY_WEEK ? currentWeek + 1 : null;
   const nextIdentity = nextWeek ? getWeekIdentity(nextWeek) : null;
+  const sparse = (keptCount ?? 0) <= 1;
 
   return (
     <section
-      className="rounded-[24px] px-6 sm:px-8 py-7 sm:py-8 mt-10"
+      className={`rounded-[24px] px-6 sm:px-8 py-7 sm:py-8 ${sparse ? "mt-3 sm:mt-4" : "mt-10"}`}
       style={{
         background:
           "linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--stage-pregnancy) / 0.28) 100%)",

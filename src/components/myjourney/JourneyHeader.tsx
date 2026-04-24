@@ -33,8 +33,12 @@ const JourneyHeader = ({ currentWeek, due, startedAt }: Props) => {
       <div className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-7">
         <Link
           to="/my-week"
-          className="inline-flex items-center justify-center rounded-full px-7 py-3 font-sans text-[12.5px] font-medium tracking-[0.18em] uppercase text-background transition-all hover:opacity-90 w-full sm:w-auto"
-          style={{ backgroundColor: accent }}
+          className="inline-flex items-center justify-center rounded-full px-6 py-2.5 font-sans text-[12px] font-medium tracking-[0.18em] uppercase transition-all hover:bg-[hsl(var(--stage-pregnancy-accent)/0.08)] w-full sm:w-auto"
+          style={{
+            color: accent,
+            border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.4)",
+            backgroundColor: "transparent",
+          }}
         >
           Go to My Week
         </Link>

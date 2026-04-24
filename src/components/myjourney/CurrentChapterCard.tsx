@@ -48,7 +48,7 @@ const CurrentChapterCard = ({ currentWeek }: Props) => {
             {identity.chapterTitle}
           </h2>
           <p className="font-serif italic text-foreground/60 text-[15.5px] sm:text-[16px] leading-[1.5] mb-6 max-w-[40ch]">
-            {identity.theme}
+            Where you are right now.
           </p>
           <span className="inline-flex items-center gap-2 font-sans text-[11.5px] font-medium tracking-[0.22em] uppercase text-foreground/75 group-hover:text-foreground transition-colors">
             Continue this week

@@ -72,10 +72,20 @@ const Auth = () => {
     };
   }, [resendCooldown]);
 
+  const buildAuthReturnUrl = () => {
+    // Re-encode intent + return_to so OAuth/magic-link round trips preserve them.
+    const url = new URL(window.location.origin + "/auth");
+    url.searchParams.set("intent", effectiveIntent);
+    if (effectiveIntent === "return_to_route" && returnTo) {
+      url.searchParams.set("return_to", returnTo);
+    }
+    return url.toString();
+  };
+
   const handleGoogle = async () => {
     setGoogleSubmitting(true);
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin + "/auth",
+      redirect_uri: buildAuthReturnUrl(),
     });
     if (result.error) {
       setGoogleSubmitting(false);

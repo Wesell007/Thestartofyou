@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { differenceInDays } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
+import { getActivePregnancyJourney } from "@/lib/savedJourney";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
@@ -57,9 +58,9 @@ const MyWeek = () => {
         return;
       }
 
-      const [{ data: profile }, { data: journey }] = await Promise.all([
+      const [{ data: profile }, journey] = await Promise.all([
         supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
-        supabase.from("saved_journeys").select("lmp_date, due_date").eq("user_id", user.id).maybeSingle(),
+        getActivePregnancyJourney(user.id),
       ]);
 
       if (cancelled) return;
@@ -73,13 +74,11 @@ const MyWeek = () => {
         return;
       }
 
-      const lmp = new Date(journey.lmp_date);
-      const due = new Date(journey.due_date);
       setState({
         userId: user.id,
         firstName: profile.first_name,
-        currentWeek: computeWeek(lmp),
-        dueDate: due,
+        currentWeek: computeWeek(journey.lmp),
+        dueDate: journey.due,
       });
       setLoading(false);
     };

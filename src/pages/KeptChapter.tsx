@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { differenceInDays } from "date-fns";
 import { ArrowLeft, ArrowRight, Lock, BookOpen, Mic, MicOff, Feather, Clock3 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { getActivePregnancyJourney } from "@/lib/savedJourney";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
@@ -148,9 +149,9 @@ const KeptChapter = () => {
         navigate("/auth", { replace: true });
         return;
       }
-      const [{ data: profile }, { data: journey }, { data: refl }, { data: photo }] = await Promise.all([
+      const [{ data: profile }, journey, { data: refl }, { data: photo }] = await Promise.all([
         supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
-        supabase.from("saved_journeys").select("lmp_date").eq("user_id", user.id).maybeSingle(),
+        getActivePregnancyJourney(user.id),
         supabase
           .from("reflections")
           .select("content, updated_at, first_written_content, first_written_at")
@@ -168,7 +169,7 @@ const KeptChapter = () => {
         navigate("/setup", { replace: true });
         return;
       }
-      const currentWeek = computeWeek(new Date(journey.lmp_date));
+      const currentWeek = computeWeek(journey.lmp);
 
       if (week >= currentWeek) {
         navigate(week === currentWeek ? "/my-week" : "/my-journey", { replace: true });

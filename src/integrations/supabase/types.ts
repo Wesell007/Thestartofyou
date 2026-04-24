@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      archived_journeys: {
+        Row: {
+          ended_at: string
+          ended_reason: string
+          id: string
+          lifecycle: string
+          snapshot: Json
+          started_at: string
+          user_id: string
+        }
+        Insert: {
+          ended_at?: string
+          ended_reason: string
+          id?: string
+          lifecycle: string
+          snapshot: Json
+          started_at: string
+          user_id: string
+        }
+        Update: {
+          ended_at?: string
+          ended_reason?: string
+          id?: string
+          lifecycle?: string
+          snapshot?: Json
+          started_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string
@@ -98,6 +128,51 @@ export type Database = {
           id?: string
           token?: string
           used_at?: string | null
+        }
+        Relationships: []
+      }
+      journeys: {
+        Row: {
+          lifecycle: string
+          started_at: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          lifecycle: string
+          started_at?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          lifecycle?: string
+          started_at?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      pregnancy_journeys: {
+        Row: {
+          due_date: string
+          lmp_date: string
+          started_at: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          due_date: string
+          lmp_date: string
+          started_at?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          due_date?: string
+          lmp_date?: string
+          started_at?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }

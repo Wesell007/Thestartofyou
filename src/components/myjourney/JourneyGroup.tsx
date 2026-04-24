@@ -10,9 +10,9 @@ const JourneyGroup = ({ title, framing, children }: Props) => {
   const accent = "hsl(var(--stage-pregnancy-accent))";
   return (
     <section className="mb-12 sm:mb-14">
-      <div className="mb-5 sm:mb-6">
+      <div className="mb-3 sm:mb-3.5">
         <h3
-          className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-2"
+          className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-1.5"
           style={{ color: accent }}
         >
           {title}

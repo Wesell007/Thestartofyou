@@ -91,7 +91,7 @@ const Navbar = () => {
                 Sign in
               </Link>
               <Link
-                to="/explore"
+                to="/due-date-calculator"
                 onClick={() => trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "navbar" })}
                 className="font-sans text-[13px] lg:text-[14px] font-medium bg-terracotta text-terracotta-foreground px-5 lg:px-7 py-2 lg:py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
               >
@@ -138,7 +138,7 @@ const Navbar = () => {
           ) : (
             <>
               <Link
-                to="/explore"
+                to="/due-date-calculator"
                 className="mt-4 text-center font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-6 py-3.5 rounded-pill hover:bg-terracotta-hover transition-all shadow-cta"
                 onClick={() => {
                   trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "navbar" });

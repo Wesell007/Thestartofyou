@@ -175,6 +175,20 @@ if (typeof window !== "undefined") {
   subscribeAnalyticsConsent((state) => {
     if (state !== "accepted") {
       resetAnalyticsContext();
+      if (posthogReady) {
+        try {
+          posthog.reset();
+          posthog.opt_out_capturing();
+        } catch {
+          // ignore — PostHog may not be fully initialised
+        }
+      }
+    } else if (posthogReady) {
+      try {
+        posthog.opt_in_capturing();
+      } catch {
+        // ignore
+      }
     }
   });
 }

@@ -1,76 +1,111 @@
-## Cleanup pass: skip signed-in product routes from generic pageviews
+## Restore Wave 2 / Pass 2 — signed-in core product events
 
-Stop double-measuring the signed-in core product surfaces. The semantic view-events from Pass 2 (`my_week_viewed`, `my_journey_viewed`, `kept_chapter_viewed`) become the sole truth for these pages. No content or AI instrumentation in this pass.
+Verified: the seven Pass 2 events (`my_week_viewed`, `my_journey_viewed`, `kept_chapter_viewed`, `reflection_saved`, `photo_saved`, `protected_route_redirect`, `post_login_redirect`) are **not** in `analyticsEvents.ts` and have **no fire points** anywhere in the codebase, while `RouteTracker` already skips `/my-week`, `/my-journey`, and `/my-week/:week`. Result: those routes are currently uninstrumented.
+
+Apply the **preferred fix** — restore the seven semantic events. Keep the existing skip rules intact. No content / AI tracking changes in this pass.
+
+---
 
 ### Files
 
 **Edited**
-- `src/components/analytics/RouteTracker.tsx` — extend the skip set so `/my-week`, `/my-journey`, and any `/my-week/:week` path are not emitted as generic `page_viewed`.
+- `src/lib/analyticsEvents.ts` — add seven `EVENTS` constants and matching `EventMap` entries, all with `Record<string, never>` (common envelope only).
+- `src/pages/MyWeek.tsx` — fire `my_week_viewed` once after data load (ref-guarded).
+- `src/pages/MyJourney.tsx` — fire `my_journey_viewed` once after data load (ref-guarded).
+- `src/pages/KeptChapter.tsx` — fire `kept_chapter_viewed` once per `:week` after chapter load (ref keyed on week; re-fires on week change).
+- `src/components/myweek/SlotReflection.tsx` — fire `reflection_saved` on each successful debounced upsert and on each successful `acceptShapedDraft`, deduped against `lastTrackedRef` so identical re-saves do not double-fire and so initial hydration of an existing reflection does not fire.
+- `src/components/myweek/SlotPhotoMemory.tsx` — fire `photo_saved` after both the storage upload and `week_photos` upsert succeed in `handleFiles`. Removal does not fire.
+- `src/components/auth/ProtectedRoute.tsx` — fire `protected_route_redirect` once when `status === "anon"`, from a `useEffect` (not during render). Ref guard prevents StrictMode double-fire.
+- `src/pages/Auth.tsx` — fire `post_login_redirect` inside the `route()` helper, immediately before `navigate(target, { replace: true })`. Closure-level `routedRef` ensures the parallel `getSession()` and `onAuthStateChange` paths cannot double-fire.
 
 **Unchanged**
-- `src/lib/analyticsEvents.ts`, `src/lib/analytics.ts`, `src/lib/analyticsContext.ts`, `src/lib/consent.ts`
-- `src/pages/MyWeek.tsx`, `src/pages/MyJourney.tsx`, `src/pages/KeptChapter.tsx`
-- `src/components/myweek/SlotReflection.tsx` — `reflection_saved` fire logic untouched (see note below).
-- All article, content, and AI surfaces — explicitly out of scope.
+- `src/components/analytics/RouteTracker.tsx` — skip rules stay as they are. No fallback removal needed.
+- `src/lib/analytics.ts`, `src/lib/analyticsContext.ts`, `src/lib/consent.ts` — no changes.
+- All article / hub / AI surfaces — out of scope.
 
-### Implementation detail
+---
 
-`RouteTracker` currently uses an exact-match `Set<string>`. We extend it to also handle the kept-chapter pattern `/my-week/:week` (a path segment after `/my-week/`).
+### Taxonomy additions (`src/lib/analyticsEvents.ts`)
 
 ```ts
-const PAGEVIEW_SKIP_EXACT = new Set<string>([
-  "/",
-  "/auth",
-  "/my-week",
-  "/my-journey",
-]);
-
-// /my-week/:week — kept chapters are measured by `kept_chapter_viewed`.
-const KEPT_CHAPTER_RE = /^\/my-week\/[^/]+\/?$/;
-
-const shouldSkip = (pathname: string) =>
-  PAGEVIEW_SKIP_EXACT.has(pathname) || KEPT_CHAPTER_RE.test(pathname);
+// Wave 2 / Pass 2 — signed-in core product
+MY_WEEK_VIEWED:           "my_week_viewed",
+MY_JOURNEY_VIEWED:        "my_journey_viewed",
+KEPT_CHAPTER_VIEWED:      "kept_chapter_viewed",
+REFLECTION_SAVED:         "reflection_saved",
+PHOTO_SAVED:              "photo_saved",
+PROTECTED_ROUTE_REDIRECT: "protected_route_redirect",
+POST_LOGIN_REDIRECT:      "post_login_redirect",
 ```
 
-The effect then checks `shouldSkip(location.pathname)` before calling `trackPageView`. The skip rules live in one place; no other call site changes.
+All seven map to `Record<string, never>` in `EventMap`. Page identity for `kept_chapter_viewed` is carried by the envelope's `path` (e.g. `"/my-week/14"`), not a `week` property — keeps the common model intact.
 
-### Final skip-list behaviour
+---
 
-| Path | Generic `page_viewed`? | Sole semantic event |
-|---|---|---|
-| `/` | skipped | `home_viewed` |
-| `/auth` | skipped | `auth_viewed` |
-| `/my-week` | skipped | `my_week_viewed` |
-| `/my-journey` | skipped | `my_journey_viewed` |
-| `/my-week/14` (any `:week`) | skipped | `kept_chapter_viewed` |
-| Everything else (articles, hubs, calculators, setup, etc.) | emitted | — |
+### Exact fire points
 
-### Double-measurement check
+| Event | File | Trigger | Dedupe |
+|---|---|---|---|
+| `my_week_viewed` | `src/pages/MyWeek.tsx` | `useEffect` watching `state` and `loading`; fires when `loading === false && state !== null`. | `useRef` flag, one-shot per mount. |
+| `my_journey_viewed` | `src/pages/MyJourney.tsx` | `useEffect` watching `state`; fires on first non-null `state`. | `useRef` flag. |
+| `kept_chapter_viewed` | `src/pages/KeptChapter.tsx` | `useEffect` watching `data` and `week`; fires when `data !== null` and re-fires when `week` changes. | Ref carrying the last fired week. |
+| `reflection_saved` | `src/components/myweek/SlotReflection.tsx` | Inside the debounced upsert callback on success and inside `acceptShapedDraft` on success. | `lastTrackedRef` seeded from initial hydration; fires only when saved content is non-empty and differs from the last tracked value. |
+| `photo_saved` | `src/components/myweek/SlotPhotoMemory.tsx` | At the end of `handleFiles` after both storage upload and `week_photos` upsert succeed. | One fire per successful save action; removal does not fire (replacement does — it is a real new save). |
+| `protected_route_redirect` | `src/components/auth/ProtectedRoute.tsx` | `useEffect` watching `status`; fires when `status === "anon"` (before the `<Navigate>` returns on the next render). | Ref guard, one fire per mount per anon resolution. |
+| `post_login_redirect` | `src/pages/Auth.tsx` | First line inside `route()` after `commitPendingJourneyToDB(...)` resolves and `target` is computed, immediately before `navigate(target, { replace: true })`. | Closure-level `routedRef` shared by the two callers (`getSession` resolution and `onAuthStateChange`). |
 
-After this change, the signed-in core product surfaces emit exactly one view-class event per visit:
+For a signed-out user opening `/my-week`, the resulting sequence is:
+`protected_route_redirect` → `auth_viewed` → user authenticates → `auth_completed` → `post_login_redirect` → `my_week_viewed`. No duplication; each event marks a distinct moment.
 
-- `/my-week` → `my_week_viewed` (after data load)
-- `/my-journey` → `my_journey_viewed` (after data load)
-- `/my-week/:week` → `kept_chapter_viewed` (after chapter load, re-fires per `:week` change)
+---
 
-No `page_viewed` is emitted for these paths. Other route changes (articles, hubs, calculators) still emit `page_viewed` as before.
+### `reflection_saved` definition (carried over verbatim)
 
-### `reflection_saved` — explicit definition (no logic change)
-
-`reflection_saved` is a **save-action metric**, not a reflection-adoption metric.
+A **save-action metric**, not a reflection-adoption metric.
 
 - Fires once per successful upsert of non-empty content that differs from the last tracked value (debounced typing-saves and shaping-accept saves both count).
-- A long writing session can produce multiple `reflection_saved` events in a single sitting — each represents a real persisted save, not a unique reflection.
-- It does **not** measure: how many users ever wrote a reflection, how many distinct weeks have a reflection, or first-time vs. returning save behaviour.
-- For a true adoption metric (e.g. "users who kept ≥ 1 reflection", "weeks with a reflection per user"), introduce a distinct event in a later pass — do not reinterpret `reflection_saved` after the fact.
+- A long writing session legitimately produces several events.
+- It does **not** measure: how many users ever wrote a reflection, distinct weeks with a reflection, or first-vs-returning save behaviour. A separate adoption event must be designed before any dashboard treats `reflection_saved` as adoption.
 
-This definition should be mirrored in the analytics dictionary / privacy copy when those land.
+---
 
-### Remaining issues before content tracking
+### Final source of truth for signed-in routes (after this pass)
 
-1. **Reflection-adoption metric** — design and name a separate event (e.g. `reflection_first_kept_for_week`) before content tracking lands, so dashboards do not silently lean on `reflection_saved` as a proxy.
-2. **Common-model extension policy** — content tracking will want minimal context (article slug, hub stage, position in feed). Agree the typed-enum allowlist (and the rule against free-text values) before instrumenting any article surface.
-3. **Pageview policy for hubs and articles** — decide whether hub roots (`/pregnancy`, `/postpartum`, etc.) should retain generic `page_viewed` or move to semantic `hub_viewed` events when content tracking starts. Current default is to keep generic pageviews until content tracking explicitly replaces them.
-4. **Real analytics sink** — still pending; required before content/AI tracking adds volume.
-5. **Privacy copy** — list the now-stable view, save, and routing event categories before adding content/AI categories.
-6. **Strict layer separation** — reaffirm: analytics never reads from product memory or AI context, and AI context never reads from the analytics stream. Content tracking must follow the same rule.
+| Path | Generic `page_viewed`? | Sole semantic event(s) |
+|---|---|---|
+| `/my-week` | skipped | `my_week_viewed` |
+| `/my-journey` | skipped | `my_journey_viewed` |
+| `/my-week/:week` | skipped | `kept_chapter_viewed` |
+
+Plus, occurring on the signed-in product but not view-class:
+- `reflection_saved` — emitted by the reflection slot inside `/my-week`.
+- `photo_saved` — emitted by the photo slot inside `/my-week`.
+- `protected_route_redirect` — emitted by `ProtectedRoute` for any signed-out hit on `/my-week`, `/my-week/:week`, `/my-journey`.
+- `post_login_redirect` — emitted by `Auth` immediately before forwarding the user post-login.
+
+After this pass, no signed-in core product surface is left uninstrumented, and the existing skip rules continue to prevent any duplication with generic `page_viewed`.
+
+---
+
+### Issue #5 status
+
+**Fully resolved** by the preferred fix. The seven semantic events are added to the taxonomy and have explicit, deduped fire points. The `RouteTracker` skip rules remain in place and are now backed by real semantic events on every signed-in product surface. No fallback (skip-rule removal) is required.
+
+---
+
+### Layer separation reaffirmed
+
+- All seven events use `Record<string, never>` — no per-event properties, no product-memory or AI-context fields.
+- `analyticsEvents.ts` continues to import nothing from product or AI layers.
+- `analytics.ts` continues to gate every fire through the existing consent check.
+- AI context never reads from the analytics stream; analytics never reads from product memory.
+
+---
+
+### Out of scope (do not touch in this pass)
+
+- Content tracking events (`stage_hub_viewed`, `article_viewed`, `article_deep_read`).
+- Embedded calculator coverage.
+- AI surfaces.
+- Reflection-adoption metric design (still a carry-over).
+- Real analytics sink wiring (still a carry-over).

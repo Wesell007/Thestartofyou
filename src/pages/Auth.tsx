@@ -37,6 +37,10 @@ const Auth = () => {
   // If already signed in, route forward (commit pending journey if needed)
   useEffect(() => {
     let cancelled = false;
+    // Closure-level guard so the parallel `getSession()` resolution and
+    // the `onAuthStateChange` SIGNED_IN echo cannot both fire
+    // `post_login_redirect`.
+    let routed = false;
     const route = async (userId: string) => {
       try {
         await commitPendingJourneyToDB(userId);
@@ -48,7 +52,11 @@ const Auth = () => {
         effectiveIntent,
         returnTo
       );
-      if (!cancelled) navigate(target, { replace: true });
+      if (cancelled) return;
+      if (routed) return;
+      routed = true;
+      trackEvent(EVENTS.POST_LOGIN_REDIRECT);
+      navigate(target, { replace: true });
     };
 
     supabase.auth.getSession().then(({ data }) => {

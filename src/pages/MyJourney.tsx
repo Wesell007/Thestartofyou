@@ -1,6 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { differenceInDays } from "date-fns";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 import { supabase } from "@/integrations/supabase/client";
 import { getActivePregnancyJourney } from "@/lib/savedJourney";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
@@ -45,6 +47,13 @@ const GROUPS: GroupDef[] = [
 const MyJourney = () => {
   const navigate = useNavigate();
   const [state, setState] = useState<State | null>(null);
+  const viewedRef = useRef(false);
+
+  useEffect(() => {
+    if (viewedRef.current || !state) return;
+    viewedRef.current = true;
+    trackEvent(EVENTS.MY_JOURNEY_VIEWED);
+  }, [state]);
 
   useEffect(() => {
     let cancelled = false;

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Lock, Mic, MicOff } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 import type { MyWeekEntry } from "@/data/myWeekContent";
 import NoteShapingSuggestion from "./NoteShapingSuggestion";
 import { useShapingThreshold } from "@/hooks/useShapingThreshold";
@@ -54,6 +56,9 @@ const SlotReflection = ({ content, userId, week }: Props) => {
   const [hasFirstWritten, setHasFirstWritten] = useState(false);
   const initialRef = useRef<string>("");
   const debounceRef = useRef<number | null>(null);
+  // Last successfully tracked saved content. Seeded on initial hydration so
+  // opening an existing reflection does not fire `reflection_saved`.
+  const lastTrackedRef = useRef<string>("");
 
   // Voice
   const [listening, setListening] = useState(false);
@@ -81,6 +86,9 @@ const SlotReflection = ({ content, userId, week }: Props) => {
       const existing = data?.content ?? "";
       setValue(existing);
       initialRef.current = existing;
+      // Seed the analytics dedupe ref so initial hydration of an existing
+      // reflection does not fire `reflection_saved`.
+      lastTrackedRef.current = existing;
       if (data?.updated_at) setSavedAt(new Date(data.updated_at));
       setHasFirstWritten(Boolean(data?.first_written_content));
       setLoaded(true);
@@ -108,6 +116,13 @@ const SlotReflection = ({ content, userId, week }: Props) => {
         initialRef.current = value;
         setSavedAt(new Date());
         setSaveState("saved");
+        // Save-action metric: fire only when the saved content is non-empty
+        // and differs from the last tracked value. Identical re-saves of
+        // the same string are deduped here.
+        if (value.trim().length > 0 && value !== lastTrackedRef.current) {
+          lastTrackedRef.current = value;
+          trackEvent(EVENTS.REFLECTION_SAVED);
+        }
         window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2400);
       }
     }, 900);
@@ -198,6 +213,12 @@ const SlotReflection = ({ content, userId, week }: Props) => {
       setSaveState("saved");
       if (!hasFirstWritten && updates.first_written_content) setHasFirstWritten(true);
       setLastInputWasVoice(false);
+      // Save-action metric: a shaped accept is a real save. Same dedupe
+      // rule as the debounced typing-save path.
+      if (shaped.trim().length > 0 && shaped !== lastTrackedRef.current) {
+        lastTrackedRef.current = shaped;
+        trackEvent(EVENTS.REFLECTION_SAVED);
+      }
       window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2400);
     }
   };

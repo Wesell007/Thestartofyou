@@ -27,6 +27,15 @@ export const EVENTS = {
   AUTH_VIEWED: "auth_viewed",
   AUTH_COMPLETED: "auth_completed",
   SETUP_COMPLETED: "setup_completed",
+
+  // Wave 2 / Pass 2 — signed-in core product
+  MY_WEEK_VIEWED: "my_week_viewed",
+  MY_JOURNEY_VIEWED: "my_journey_viewed",
+  KEPT_CHAPTER_VIEWED: "kept_chapter_viewed",
+  REFLECTION_SAVED: "reflection_saved",
+  PHOTO_SAVED: "photo_saved",
+  PROTECTED_ROUTE_REDIRECT: "protected_route_redirect",
+  POST_LOGIN_REDIRECT: "post_login_redirect",
 } as const;
 
 export type ClickLocation = "home_hero" | "navbar";
@@ -45,6 +54,18 @@ export type EventMap = {
   auth_viewed: Record<string, never>;
   auth_completed: Record<string, never>;
   setup_completed: Record<string, never>;
+
+  // Wave 2 / Pass 2 — signed-in core product. Common envelope only.
+  // Page identity for `kept_chapter_viewed` is carried by the envelope's
+  // `path` (e.g. "/my-week/14"); deliberately no `week` property here so
+  // the common model stays intact.
+  my_week_viewed: Record<string, never>;
+  my_journey_viewed: Record<string, never>;
+  kept_chapter_viewed: Record<string, never>;
+  reflection_saved: Record<string, never>;
+  photo_saved: Record<string, never>;
+  protected_route_redirect: Record<string, never>;
+  post_login_redirect: Record<string, never>;
 };
 
 export type EventName = keyof EventMap;

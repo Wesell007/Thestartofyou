@@ -44,27 +44,27 @@ const Navbar = () => {
   const signInHref = buildAuthUrl("sign_in");
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/97 backdrop-blur-lg border-b border-border/40">
-      <div className="container mx-auto px-4 sm:px-6 md:px-10 h-16 lg:h-24 flex items-center justify-between max-w-6xl relative">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/95 backdrop-blur-xl border-b border-border/30">
+      <div className="container mx-auto px-4 sm:px-6 md:px-10 h-16 lg:h-[88px] flex items-center justify-between max-w-6xl relative gap-8">
         {/* Logo */}
-        <Link to="/" className="flex items-center shrink-0">
+        <Link to="/" className="flex items-center shrink-0 mr-2">
           <img
             src={logoSrc}
             alt="The Start of You"
-            className="w-[120px] md:w-[185px] h-auto object-contain contrast-[1.1]"
+            className="w-[120px] md:w-[170px] h-auto object-contain contrast-[1.1]"
           />
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
+        {/* Desktop Nav — centered, even rhythm */}
+        <nav className="hidden lg:flex items-center gap-7 xl:gap-8 flex-1 justify-center" aria-label="Main navigation">
           {navLinks.map(({ label, href }) => (
             <Link
               key={label}
               to={href}
-              className={`font-sans text-[13.5px] tracking-wide transition-colors duration-200 whitespace-nowrap ${
+              className={`font-sans text-[13px] tracking-[0.01em] transition-colors duration-200 whitespace-nowrap ${
                 isActive(href)
                   ? "text-foreground font-medium"
-                  : "text-foreground/70 font-normal hover:text-foreground"
+                  : "text-foreground/65 font-normal hover:text-foreground"
               }`}
             >
               {label}
@@ -72,12 +72,12 @@ const Navbar = () => {
           ))}
         </nav>
 
-        {/* CTA cluster */}
-        <div className="hidden lg:flex items-center gap-5">
+        {/* CTA cluster — quiet sign in, anchored CTA */}
+        <div className="hidden lg:flex items-center gap-6 shrink-0">
           {authed ? (
             <Link
               to="/my-week"
-              className="font-sans text-[13px] lg:text-[14px] font-medium bg-terracotta text-terracotta-foreground px-5 lg:px-7 py-2 lg:py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
+              className="font-sans text-[13.5px] font-medium bg-terracotta text-terracotta-foreground px-6 py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
             >
               My Week
             </Link>
@@ -86,14 +86,14 @@ const Navbar = () => {
               <Link
                 to={signInHref}
                 onClick={() => trackEvent(EVENTS.SIGN_IN_CLICKED, { location: "navbar" })}
-                className="font-sans text-[13.5px] font-light text-foreground/70 hover:text-foreground transition-colors"
+                className="font-sans text-[13px] font-light text-foreground/60 hover:text-foreground transition-colors"
               >
                 Sign in
               </Link>
               <Link
                 to="/due-date-calculator"
                 onClick={() => trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "navbar" })}
-                className="font-sans text-[13px] lg:text-[14px] font-medium bg-terracotta text-terracotta-foreground px-5 lg:px-7 py-2 lg:py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
+                className="font-sans text-[13px] font-medium bg-terracotta text-terracotta-foreground px-6 py-2.5 rounded-pill hover:bg-terracotta-hover hover:shadow-lg transition-all duration-300 shadow-cta"
               >
                 Start your journey
               </Link>

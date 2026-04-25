@@ -9,7 +9,7 @@ const stages = [
 
 const LifecycleEcosystemSection = () => {
   return (
-    <section className="bg-parchment py-16 md:py-24">
+    <section className="bg-parchment py-20 md:py-32 border-t border-border/20">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl text-center">
         <div className="h-px w-10 bg-sage/40 mx-auto mb-6" />
         <p className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-sage mb-4">

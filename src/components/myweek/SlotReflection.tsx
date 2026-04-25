@@ -86,6 +86,9 @@ const SlotReflection = ({ content, userId, week }: Props) => {
       const existing = data?.content ?? "";
       setValue(existing);
       initialRef.current = existing;
+      // Seed the analytics dedupe ref so initial hydration of an existing
+      // reflection does not fire `reflection_saved`.
+      lastTrackedRef.current = existing;
       if (data?.updated_at) setSavedAt(new Date(data.updated_at));
       setHasFirstWritten(Boolean(data?.first_written_content));
       setLoaded(true);
@@ -113,6 +116,13 @@ const SlotReflection = ({ content, userId, week }: Props) => {
         initialRef.current = value;
         setSavedAt(new Date());
         setSaveState("saved");
+        // Save-action metric: fire only when the saved content is non-empty
+        // and differs from the last tracked value. Identical re-saves of
+        // the same string are deduped here.
+        if (value.trim().length > 0 && value !== lastTrackedRef.current) {
+          lastTrackedRef.current = value;
+          trackEvent(EVENTS.REFLECTION_SAVED);
+        }
         window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2400);
       }
     }, 900);

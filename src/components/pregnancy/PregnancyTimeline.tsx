@@ -130,14 +130,6 @@ const PregnancyTimeline = () => {
             ))}
           </div>
 
-          {/* Sub labels */}
-          <div className="grid grid-cols-3 gap-1 mt-4 text-center">
-            {trimesters.map((t) => (
-              <p key={t.sub} className="font-serif italic text-sm text-muted-foreground/70">
-                {t.sub}
-              </p>
-            ))}
-          </div>
         </div>
 
         {/* Trimester cards */}

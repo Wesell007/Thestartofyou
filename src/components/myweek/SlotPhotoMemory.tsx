@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Lock, X, ImagePlus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 
 interface Props {
   userId: string;
@@ -111,6 +113,9 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
     setStoragePath(path);
     setSignedUrl(urlData?.signedUrl ?? null);
     setState("loaded");
+    // Save-action metric: fires after both upload + DB row succeed. A
+    // replacement is a real new save and counts; removal does not fire.
+    trackEvent(EVENTS.PHOTO_SAVED);
   };
 
   const handleRemove = async () => {

@@ -213,6 +213,12 @@ const SlotReflection = ({ content, userId, week }: Props) => {
       setSaveState("saved");
       if (!hasFirstWritten && updates.first_written_content) setHasFirstWritten(true);
       setLastInputWasVoice(false);
+      // Save-action metric: a shaped accept is a real save. Same dedupe
+      // rule as the debounced typing-save path.
+      if (shaped.trim().length > 0 && shaped !== lastTrackedRef.current) {
+        lastTrackedRef.current = shaped;
+        trackEvent(EVENTS.REFLECTION_SAVED);
+      }
       window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2400);
     }
   };

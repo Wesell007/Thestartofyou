@@ -1,7 +1,9 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { buildAuthUrl } from "@/lib/authIntent";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 
 type Status = "checking" | "authed" | "anon";
 
@@ -14,6 +16,7 @@ type Status = "checking" | "authed" | "anon";
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
   const [status, setStatus] = useState<Status>("checking");
+  const redirectFiredRef = useRef(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -30,6 +33,12 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
       sub.subscription.unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    if (status !== "anon" || redirectFiredRef.current) return;
+    redirectFiredRef.current = true;
+    trackEvent(EVENTS.PROTECTED_ROUTE_REDIRECT);
+  }, [status]);
 
   if (status === "checking") {
     return <div className="min-h-screen bg-parchment" />;

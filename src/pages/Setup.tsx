@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { commitPendingJourneyToDB } from "@/lib/savedJourney";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 import { toast } from "sonner";
 
 const Setup = () => {
@@ -52,6 +54,7 @@ const Setup = () => {
       toast.error("Could not save. Please try again.");
       return;
     }
+    trackEvent(EVENTS.SETUP_COMPLETED);
     navigate("/my-week", { replace: true });
   };
 

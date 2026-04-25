@@ -52,7 +52,13 @@ const Auth = () => {
     };
 
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session?.user) route(data.session.user.id);
+      if (data.session?.user) {
+        route(data.session.user.id);
+      } else {
+        // Only count as auth_viewed when the user actually sees the form
+        // (signed-in arrivals are auto-routed onward and shouldn't count).
+        trackEvent(EVENTS.AUTH_VIEWED);
+      }
     });
 
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {

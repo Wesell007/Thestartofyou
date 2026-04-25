@@ -1,89 +1,54 @@
-# Lifecycle-led public nav + homepage tightening (revised)
+# Final Homepage/Navigation Refinement Pass
 
-Scope: public navigation (desktop + mobile), homepage IA, and the primary acquisition CTA path. No new routes, no dashboard work, no article tracking, no brand redesign.
+## Summary
+Remove About from top navigation and update hero copy to the final agreed language.
 
-## 1. Navigation — `src/components/layout/Navbar.tsx`
+## Changes
 
-Replace `navLinks` with the approved lifecycle-led list, identical on desktop and mobile, in this order:
+### 1. Navbar.tsx — Remove About from navigation
+- Remove `{ label: "About", href: "/about" }` from the `navLinks` array
+- Affects both desktop nav (line 60-72) and mobile drawer (line 117-128)
+- About remains accessible via footer
 
-- Pregnancy → `/pregnancy`
-- Trying to conceive → `/trying-to-conceive`
-- IVF → `/ivf`
-- Postpartum → `/postpartum`
-- First year → `/first-year`
-- Journal → `/product` *(temporary route mapping — see §5)*
-- About → `/about`
+### 2. NewHeroSection.tsx — Update hero copy
 
-Removed from primary nav: `Explore`, `Guidance`. (Routes remain reachable; just demoted from nav.)
+**Headline change (lines 121-124):**
+- From: "A calmer way through pregnancy"
+- To: "Week by week. Stage by stage. Yours to keep."
+- Layout: Add `<br />` after first sentence for rhythmic pacing:
+  ```
+  Week by week. Stage by stage.<br />Yours to keep.
+  ```
 
-Right-side actions:
-- Signed out: `Sign in` (text) + **`Start your journey` → `/due-date-calculator`** (terracotta pill)
-- Signed in: `My Week` → `/my-week` (unchanged)
+**Supporting line change (lines 127-128):**
+- From: "Week-by-week guidance, made for how this really feels."
+- To: "Start with your due date. Weekly guidance that changes with your pregnancy and stays with you as you go."
+- Layout: Expand `max-w-[25rem]` to `max-w-[28rem]` to accommodate longer text without excessive wrapping
 
-`Start your journey` is repointed from `/explore` to `/due-date-calculator` everywhere it appears in the navbar (desktop CTA + mobile drawer CTA). This corrects the IA mismatch where Explore was demoted from nav while still serving as the acquisition doorway.
+## Unchanged
+- Hero video (remains `home-hero-video-new.mp4`)
+- Nav structure otherwise (6 items remain: Pregnancy, Trying to conceive, IVF, Postpartum, First year, Journal)
+- CTA destination (`/due-date-calculator`)
+- Sign-in line text and destination
+- All visual composition, gradients, spacing
 
-Density tweak so 7 items fit cleanly at `lg`: reduce desktop nav `gap-8` → `gap-6` and primary link size `text-[14.5px]` → `text-[13.5px]`. Mobile drawer unaffected.
+## Final Navigation State
 
-Analytics: keep existing `SIGN_IN_CLICKED` and `START_JOURNEY_CLICKED` calls — only the link target changes, not the event.
+**Desktop nav (6 items):**
+```
+[Pregnancy] [Trying to conceive] [IVF] [Postpartum] [First year] [Journal]
+```
 
-## 2. Hero — `src/components/home/NewHeroSection.tsx`
+**Mobile drawer (6 items):**
+Same labels, stacked vertically.
 
-Simplify to one dominant CTA:
+**Footer:** About remains (not part of this change).
 
-- Remove the secondary `Explore guidance` → `/explore` link entirely.
-- Keep primary CTA `Start your journey` → `/due-date-calculator` (already correct here).
-- Keep the quiet returning-user line: `Already saving your journey? Sign in`.
+## Files Changed
+- `src/components/layout/Navbar.tsx` — 1 line removed from navLinks array
+- `src/components/home/NewHeroSection.tsx` — headline text, supporting line text, one `<br />` added, `max-w` adjusted
 
-No other hero changes.
-
-## 3. New section — `src/components/home/LifecycleEcosystemSection.tsx`
-
-One calm acknowledgement of the wider lifecycle system. Deliberately understated so it cannot read as a secondary nav, mini directory, or Explore-by-another-name.
-
-Composition:
-- Sage hairline rule
-- Eyebrow label: `The wider journey`
-- Single serif line: `Support across every stage`
-- One-sentence supporting paragraph in light sans, max ~28rem
-- A single line of inline text reading roughly: `Trying to conceive · IVF · Postpartum · First year`, where each stage name is a small underline-on-hover text link to its hub. No pills, no cards, no icons, no images, no per-stage descriptions, no counts.
-
-Pregnancy is intentionally omitted — it is the flagship wedge and is already carried by the hero and the date-led section above.
-
-Background: parchment, generous vertical padding to match neighbouring sections, no decorative frames.
-
-## 4. Homepage section order — `src/pages/Index.tsx`
-
-1. `NewHeroSection` (simplified)
-2. `ValueProofSection` (unchanged)
-3. `JourneyBrandedSection` (unchanged — date-led entry)
-4. `DashboardGlimpse` (unchanged)
-5. `LifecycleEcosystemSection` (new, restrained)
-6. `JournalMoment` (unchanged)
-
-`HOME_VIEWED` analytics stays.
-
-## 5. Temporary route mapping — `Journal` → `/product`
-
-For this pass only, the `Journal` nav label points to the existing `/product` route. This is an explicit short-term implementation compromise so we do not silently introduce new routes in a nav-only pass. The final public route language should be `/journal`; that rename (and any redirect from `/product`) is a follow-up.
-
-## 6. Out of scope (explicitly not touched)
-
-- `RouteTracker` skip rules and analytics taxonomy
-- Signed-in surfaces (`/my-week`, `/my-journey`, etc.)
-- `/explore`, `/guidance`, `/support`, `/ask` page contents
-- Article instrumentation
-- Footer
-
-## 7. Manual review points (post-implementation)
-
-1. Rename `/product` → `/journal` and add a redirect (follow-up pass).
-2. Footer still references old IA — out of scope here, flag for follow-up.
-3. Confirm `LifecycleEcosystemSection` correctly omits Pregnancy from the inline list.
-4. Decide whether `/explore` should later be retired or repurposed now that it is no longer the acquisition doorway.
-
-## Files changed
-
-- `src/components/layout/Navbar.tsx` — nav list, CTA target → `/due-date-calculator`, density tweak
-- `src/components/home/NewHeroSection.tsx` — remove secondary `Explore guidance` link
-- `src/components/home/LifecycleEcosystemSection.tsx` — new file
-- `src/pages/Index.tsx` — insert new section
+## Manual Review Notes
+- Verify 6-item nav spacing on 1024–1200px range (was previously 7 items)
+- Check hero readability: new headline breaks cleanly across mobile sizes
+- Confirm supporting line doesn't feel cramped at `max-w-[28rem]`

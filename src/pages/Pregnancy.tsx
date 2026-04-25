@@ -4,7 +4,7 @@ import PregnancyHero from "@/components/pregnancy/PregnancyHero";
 import WhatThisJourneyIs from "@/components/pregnancy/WhatThisJourneyIs";
 import PregnancyTimeline from "@/components/pregnancy/PregnancyTimeline";
 import WeekByWeek from "@/components/pregnancy/WeekByWeek";
-import WhatToExpect from "@/components/pregnancy/WhatToExpect";
+import PregnancyTopicMap from "@/components/pregnancy/PregnancyTopicMap";
 import GuidanceAndQuestions from "@/components/pregnancy/GuidanceAndQuestions";
 import KeepYourJourney from "@/components/pregnancy/KeepYourJourney";
 import PregnancyFinalCTA from "@/components/pregnancy/PregnancyFinalCTA";
@@ -28,8 +28,8 @@ const Pregnancy = () => {
         {/* 4. Week-by-week — secondary deep navigation */}
         <WeekByWeek />
 
-        {/* 5. What to expect */}
-        <WhatToExpect />
+        {/* 5. Pregnancy topic map — structured topic architecture */}
+        <PregnancyTopicMap />
 
         {/* 6. Guidance & questions — merged questions + AI */}
         <GuidanceAndQuestions />

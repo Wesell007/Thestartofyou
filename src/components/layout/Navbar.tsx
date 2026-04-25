@@ -17,7 +17,6 @@ const navLinks = [
   // NOTE: temporary route mapping — Journal label points to /product
   // until the route is renamed to /journal in a follow-up pass.
   { label: "Journal", href: "/product" },
-  { label: "About", href: "/about" },
 ];
 
 const Navbar = () => {

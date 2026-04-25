@@ -119,13 +119,14 @@ const NewHeroSection = () => {
 
           {/* Headline — tighter tracking, stronger weight presence */}
           <h1 className="font-serif text-[2.625rem] sm:text-[3rem] md:text-[3.5rem] lg:text-[4rem] text-foreground leading-[1.04] tracking-[-0.012em] mb-6 md:mb-7">
-            A calmer way{" "}
-            <span className="italic text-foreground/85">through pregnancy</span>
+            Week by week. Stage by stage.
+            <br />
+            <span className="italic text-foreground/85">Yours to keep.</span>
           </h1>
 
           {/* Supporting line — slightly darker for confidence */}
-          <p className="font-sans text-[15.5px] md:text-[17px] font-light text-foreground/65 leading-[1.7] mb-10 md:mb-12 max-w-[25rem]">
-            Week-by-week guidance, made for how this really feels.
+          <p className="font-sans text-[15.5px] md:text-[17px] font-light text-foreground/65 leading-[1.7] mb-10 md:mb-12 max-w-[28rem]">
+            Start with your due date. Weekly guidance that changes with your pregnancy and stays with you as you go.
           </p>
 
           {/* Primary CTA — grounded with stronger spacing */}

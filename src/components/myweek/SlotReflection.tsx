@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Lock, Mic, MicOff } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 import type { MyWeekEntry } from "@/data/myWeekContent";
 import NoteShapingSuggestion from "./NoteShapingSuggestion";
 import { useShapingThreshold } from "@/hooks/useShapingThreshold";
@@ -54,6 +56,9 @@ const SlotReflection = ({ content, userId, week }: Props) => {
   const [hasFirstWritten, setHasFirstWritten] = useState(false);
   const initialRef = useRef<string>("");
   const debounceRef = useRef<number | null>(null);
+  // Last successfully tracked saved content. Seeded on initial hydration so
+  // opening an existing reflection does not fire `reflection_saved`.
+  const lastTrackedRef = useRef<string>("");
 
   // Voice
   const [listening, setListening] = useState(false);

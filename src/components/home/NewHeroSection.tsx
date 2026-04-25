@@ -97,48 +97,48 @@ const NewHeroSection = () => {
           </button>
         )}
 
-        {/* Cinematic gradient — stronger left anchor for text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-parchment via-parchment/85 via-50% to-parchment/20 md:via-parchment/80 md:via-40% md:to-transparent" />
-        {/* Bottom vignette — stronger on mobile for text area */}
-        <div className="absolute inset-0 bg-gradient-to-t from-parchment via-parchment/50 via-40% to-transparent md:via-parchment/30 md:via-30%" />
+        {/* Cinematic gradient — stronger, more confident left anchor for text */}
+        <div className="absolute inset-0 bg-gradient-to-r from-parchment via-parchment/92 via-45% to-parchment/30 md:from-parchment md:via-parchment/88 md:via-38% md:to-parchment/10" />
+        {/* Bottom vignette — grounds the CTA */}
+        <div className="absolute inset-0 bg-gradient-to-t from-parchment via-parchment/65 via-35% to-transparent md:via-parchment/45 md:via-28%" />
         {/* Top vignette for navbar blending */}
-        <div className="absolute inset-0 bg-gradient-to-b from-parchment/60 via-transparent via-20% to-transparent md:from-parchment/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-parchment/75 via-transparent via-18% to-transparent md:from-parchment/60" />
+        {/* Subtle warm tonal lift over video for premium depth */}
+        <div className="absolute inset-0 bg-foreground/[0.04] mix-blend-multiply pointer-events-none" />
       </div>
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">
-        <div className="max-w-lg md:max-w-xl pb-20 md:pb-0">
+        <div className="max-w-lg md:max-w-xl pb-24 md:pb-0">
           {/* Quiet label */}
-          <div className="flex items-center gap-2.5 mb-7 md:mb-9">
-            <div className="h-px w-12 bg-sage/60" />
-            <p className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-sage">
+          <div className="flex items-center gap-3 mb-8 md:mb-10">
+            <div className="h-px w-14 bg-sage/70" />
+            <p className="font-sans text-[10.5px] font-medium tracking-[0.24em] uppercase text-sage">
               The Start of You
             </p>
           </div>
 
-          {/* Headline */}
-          <h1 className="font-serif text-[2.5rem] sm:text-[2.875rem] md:text-[3.25rem] lg:text-[3.75rem] text-foreground leading-[1.06] mb-5 md:mb-6">
+          {/* Headline — tighter tracking, stronger weight presence */}
+          <h1 className="font-serif text-[2.625rem] sm:text-[3rem] md:text-[3.5rem] lg:text-[4rem] text-foreground leading-[1.04] tracking-[-0.012em] mb-6 md:mb-7">
             A calmer way{" "}
-            <span className="italic text-foreground/80">through pregnancy</span>
+            <span className="italic text-foreground/85">through pregnancy</span>
           </h1>
 
-          {/* Supporting line */}
-          <p className="font-sans text-[15px] md:text-[16.5px] font-light text-muted-foreground leading-[1.7] mb-9 md:mb-11 max-w-[24rem]">
+          {/* Supporting line — slightly darker for confidence */}
+          <p className="font-sans text-[15.5px] md:text-[17px] font-light text-foreground/65 leading-[1.7] mb-10 md:mb-12 max-w-[25rem]">
             Week-by-week guidance, made for how this really feels.
           </p>
 
-          {/* Primary CTA */}
-          <div className="flex flex-col items-start gap-4">
-            <div className="flex flex-col sm:flex-row items-start gap-4">
-              <Link
-                to="/due-date-calculator"
-                onClick={() => trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "home_hero" })}
-                className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-9 py-4 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
-              >
-                Start your journey
-                <ArrowRight size={15} />
-              </Link>
-            </div>
-            <p className="font-sans text-[12.5px] font-light text-muted-foreground/80 mt-1">
+          {/* Primary CTA — grounded with stronger spacing */}
+          <div className="flex flex-col items-start gap-5">
+            <Link
+              to="/due-date-calculator"
+              onClick={() => trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "home_hero" })}
+              className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-[18px] font-sans text-[14px] font-medium tracking-wide shadow-cta hover:bg-terracotta-hover hover:shadow-lg hover:-translate-y-[1px] transition-all duration-300"
+            >
+              Start your journey
+              <ArrowRight size={15} />
+            </Link>
+            <p className="font-sans text-[12.5px] font-light text-foreground/55">
               Already saving your journey?{" "}
               <Link
                 to="/auth?intent=sign_in"

@@ -38,22 +38,22 @@ const trimesterGroups = [
 
 const WeekByWeek = () => {
   return (
-    <section id="week-by-week" className="bg-parchment-dark py-20 md:py-28">
+    <section id="week-by-week" className="bg-parchment py-16 md:py-20">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-        {/* Header */}
-        <div className="text-center mb-12 md:mb-14">
+        {/* Header — demoted */}
+        <div className="text-center mb-10 md:mb-12">
           <p
-            className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
+            className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-3"
             style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
           >
-            Week by Week
+            Or jump to a week
           </p>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-3 leading-tight">
-            Follow your journey week by week
+          <h2 className="font-serif text-xl sm:text-2xl md:text-[1.75rem] text-foreground mb-2 leading-tight">
+            Every week, mapped.
           </h2>
-          <p className="font-sans text-[15px] font-light text-muted-foreground max-w-lg mx-auto leading-relaxed">
-            Every week brings something new. Select any week to explore what's
-            happening, what's normal, and what to focus on.
+          <p className="font-sans text-sm font-light text-muted-foreground max-w-md mx-auto leading-relaxed">
+            Select any week to explore what's happening, what's normal, and
+            what to focus on.
           </p>
         </div>
 

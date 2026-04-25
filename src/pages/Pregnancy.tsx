@@ -2,16 +2,11 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PregnancyHero from "@/components/pregnancy/PregnancyHero";
 import WhatThisJourneyIs from "@/components/pregnancy/WhatThisJourneyIs";
-import FocusRightNow from "@/components/pregnancy/FocusRightNow";
-import WhatToExpect from "@/components/pregnancy/WhatToExpect";
-import WhatMakesDifferent from "@/components/pregnancy/WhatMakesDifferent";
 import PregnancyTimeline from "@/components/pregnancy/PregnancyTimeline";
 import WeekByWeek from "@/components/pregnancy/WeekByWeek";
-import CommonQuestions from "@/components/pregnancy/CommonQuestions";
-import PregnancyAISupport from "@/components/pregnancy/PregnancyAISupport";
-import EmotionalReminder from "@/components/pregnancy/EmotionalReminder";
-import ReflectionSection from "@/components/pregnancy/ReflectionSection";
-import JournalPromotion from "@/components/shared/JournalPromotion";
+import WhatToExpect from "@/components/pregnancy/WhatToExpect";
+import GuidanceAndQuestions from "@/components/pregnancy/GuidanceAndQuestions";
+import KeepYourJourney from "@/components/pregnancy/KeepYourJourney";
 import PregnancyFinalCTA from "@/components/pregnancy/PregnancyFinalCTA";
 
 const Pregnancy = () => {
@@ -19,43 +14,30 @@ const Pregnancy = () => {
     <div className="min-h-screen font-sans">
       <Navbar />
       <main>
-        {/* 1. Hero, orientation */}
+        {/* 1. Hero — orientation + due-date entry */}
         <PregnancyHero />
 
-        {/* 2. What this journey is */}
+        {/* 2. What this journey is — single tightened orientation block */}
         <WhatThisJourneyIs />
 
-        {/* 3. What to focus on right now */}
-        <FocusRightNow />
+        {/* 3. Pregnancy timeline — primary (trimesters) */}
+        <div data-section="trimesters">
+          <PregnancyTimeline />
+        </div>
 
-        {/* 4. What to expect, body, baby, emotions, uncertainty */}
-        <WhatToExpect />
-
-        {/* 5. What makes this journey different */}
-        <WhatMakesDifferent />
-
-        {/* 6. Pregnancy timeline, visual system */}
-        <PregnancyTimeline />
-
-        {/* 7. Week-by-week navigation */}
+        {/* 4. Week-by-week — secondary deep navigation */}
         <WeekByWeek />
 
-        {/* 8. Common questions */}
-        <CommonQuestions />
+        {/* 5. What to expect */}
+        <WhatToExpect />
 
-        {/* 9. AI support */}
-        <PregnancyAISupport />
+        {/* 6. Guidance & questions — merged questions + AI */}
+        <GuidanceAndQuestions />
 
-        {/* 10. Emotional reminder */}
-        <EmotionalReminder />
+        {/* 7. Keep your journey — merged reflection + journal */}
+        <KeepYourJourney />
 
-        {/* 11. Reflection prompt */}
-        <ReflectionSection />
-
-        {/* 12. Journal companion */}
-        <JournalPromotion />
-
-        {/* 13. Final CTA */}
+        {/* 8. Final CTA — restate due-date primary */}
         <PregnancyFinalCTA />
       </main>
       <Footer />

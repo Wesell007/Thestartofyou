@@ -58,10 +58,7 @@ const cards = [
 
 const WhatToExpect = () => {
   return (
-    <section
-      className="py-20 md:py-28"
-      style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.2)' }}
-    >
+    <section className="py-20 md:py-28 bg-parchment-dark">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         {/* Header */}
         <div className="text-center mb-12 md:mb-14">

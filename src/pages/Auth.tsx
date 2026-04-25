@@ -9,6 +9,8 @@ import {
   parseSafeReturnTo,
   resolvePostLoginDestination,
 } from "@/lib/authIntent";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 import { toast } from "sonner";
 
 type Step = "choose" | "code-sent";

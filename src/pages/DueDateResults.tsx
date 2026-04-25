@@ -3,6 +3,8 @@ import { useSearchParams, Navigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import DueDateCalculatorResult from "@/components/shared/DueDateCalculatorResult";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 
 const DueDateResults = () => {
   const [searchParams] = useSearchParams();
@@ -17,6 +19,10 @@ const DueDateResults = () => {
     }
     setReady(true);
   }, [searchParams]);
+
+  useEffect(() => {
+    if (lmp) trackEvent(EVENTS.DUE_DATE_RESULTS_VIEWED);
+  }, [lmp]);
 
   if (!ready) return null;
 

@@ -1,16 +1,25 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 
 const DueDateCalculator = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    trackEvent(EVENTS.DUE_DATE_CALCULATOR_STARTED);
+  }, []);
+
   const handleResult = (lmpDate: Date) => {
+    trackEvent(EVENTS.DUE_DATE_CALCULATOR_COMPLETED);
     navigate(`/due-date-results?lmp=${lmpDate.getTime()}`);
   };
 
   const handleIVFResult = (transferDate: Date, transferType: string) => {
+    trackEvent(EVENTS.DUE_DATE_CALCULATOR_COMPLETED);
     navigate(`/ivf-timeline?date=${transferDate.getTime()}&type=${transferType}`);
   };
 

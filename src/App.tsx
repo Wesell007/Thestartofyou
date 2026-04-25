@@ -47,20 +47,35 @@ const queryClient = new QueryClient();
 const AnalyticsIdentityBridge = () => {
   useEffect(() => {
     let cancelled = false;
+    // Dedupe `auth_completed`: Supabase fires SIGNED_IN on real sign-in,
+    // token refresh, tab focus / visibility, and session restore. We only
+    // want to count a real sign-in. Keying on user.id means token
+    // rotations for the same user are suppressed, while a genuine
+    // sign-out → sign-in (which changes or clears the id) re-fires.
+    let lastSignedInUserId: string | null = null;
+
     supabase.auth.getSession().then(({ data }) => {
       if (cancelled) return;
-      identify(data.session?.user?.id ?? null);
+      const uid = data.session?.user?.id ?? null;
+      identify(uid);
+      // Existing session at app load is not a sign-in — seed the memo so
+      // the imminent SIGNED_IN echo from Supabase does not re-fire.
+      if (uid) lastSignedInUserId = uid;
     });
-    // Fires `auth_completed` exactly once per successful sign-in
-    // (covers email OTP, OAuth, and magic-link round-trips). Identify
-    // runs on every event so the cached user_id stays in sync.
+
     const { data: sub } = supabase.auth.onAuthStateChange((event, session) => {
       if (cancelled) return;
-      identify(session?.user?.id ?? null);
-      if (event === "SIGNED_IN") {
+      const uid = session?.user?.id ?? null;
+      identify(uid);
+      if (event === "SIGNED_IN" && uid && uid !== lastSignedInUserId) {
+        lastSignedInUserId = uid;
         trackEvent(EVENTS.AUTH_COMPLETED);
       }
+      if (event === "SIGNED_OUT") {
+        lastSignedInUserId = null;
+      }
     });
+
     return () => {
       cancelled = true;
       sub.subscription.unsubscribe();

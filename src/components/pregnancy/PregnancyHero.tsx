@@ -48,17 +48,17 @@ const PregnancyHero = () => {
                 className="font-sans text-[11px] font-light tracking-[0.2em] uppercase ml-2"
                 style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
               >
-                The Pregnancy Journey
+                Pregnancy
               </p>
             </div>
 
             <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] text-foreground leading-[1.08] mb-4 md:mb-6 animate-fade-up">
-              Your week-by-week guide{" "}
-              <span className="italic">through pregnancy</span>
+              Pregnancy support,{" "}
+              <span className="italic">week by week.</span>
             </h1>
-            <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground leading-relaxed mb-5 md:mb-6 max-w-[22rem] animate-fade-up [animation-delay:0.1s]">
-              Understand what's happening, what's normal, and what to focus on
-              from the very first week through to birth.
+            <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground leading-relaxed mb-5 md:mb-6 max-w-[24rem] animate-fade-up [animation-delay:0.1s]">
+              Calm, structured guidance from the first uncertain weeks through
+              to birth — shaped to where you are.
             </p>
 
             {/* Trust markers */}
@@ -95,14 +95,11 @@ const PregnancyHero = () => {
                   className="font-sans text-[11px] font-light tracking-[0.2em] uppercase"
                   style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
                 >
-                  Due date calculator
+                  Start with your due date
                 </p>
               </div>
-              <h2 className="font-serif text-xl sm:text-2xl text-foreground mb-1 leading-snug">
-                Find your due date
-              </h2>
-              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-5 sm:mb-6">
-                See what stage you're in and get guidance tailored to your week.
+              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-5 sm:mb-6 mt-1">
+                We'll place you in the right week and trimester.
               </p>
               <DueDateCalculatorForm onResult={handleResult} onIVFResult={handleIVFResult} compact />
             </div>

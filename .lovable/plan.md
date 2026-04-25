@@ -1,67 +1,76 @@
-## Wave 1 — analytics scaffolding (only)
+## Cleanup pass: skip signed-in product routes from generic pageviews
 
-A small, contained pass that proves the architecture end-to-end with three events, a single route tracker, identify on auth changes, and strict consent gating. No broad instrumentation.
+Stop double-measuring the signed-in core product surfaces. The semantic view-events from Pass 2 (`my_week_viewed`, `my_journey_viewed`, `kept_chapter_viewed`) become the sole truth for these pages. No content or AI instrumentation in this pass.
 
 ### Files
 
-**New**
-- `src/lib/analyticsEvents.ts` — central event name constants + typed prop shapes for the 3 proof events. Single source of truth for event names; prevents string drift.
-- `src/lib/analyticsContext.ts` — anonymous_id + user_id management. `anonymous_id` is **only generated after consent is accepted** (lazy on first authorised call), persisted in `localStorage` (`tsoy_anon_id_v1`). `user_id` is held in-memory only; never written to product tables.
-- `src/components/analytics/RouteTracker.tsx` — listens to `useLocation`, calls `trackPageView(path)` on every route change **except `/`** (see duplication note). No-op until consent is accepted.
-
 **Edited**
-- `src/lib/analytics.ts` — extend with: lazy context attachment (anon_id once consent granted, user_id if set), `identify(userId)` that stores user_id and forwards, plus a `resetAnalyticsContext()` called on consent reset / sign-out. Keep all calls gated by `hasAnalyticsConsent()`. Console adapter unchanged.
-- `src/App.tsx` — mount `<RouteTracker />` once inside `<BrowserRouter>`; subscribe to `supabase.auth.onAuthStateChange` once at app root to call `identify(user?.id ?? null)`. No product logic touched.
-- `src/pages/Index.tsx` — fire `home_viewed` on mount (single, deliberate event; route tracker skips `/`).
-- `src/components/home/NewHeroSection.tsx` — `start_journey_clicked` on the primary "Start your journey" CTA; `sign_in_clicked` on the inline "Sign in" link.
-- `src/components/layout/Navbar.tsx` — `start_journey_clicked` on the desktop+mobile "Start your journey" buttons; `sign_in_clicked` on the desktop+mobile "Sign in" links. (Same event names, different `location` property — see taxonomy.)
+- `src/components/analytics/RouteTracker.tsx` — extend the skip set so `/my-week`, `/my-journey`, and any `/my-week/:week` path are not emitted as generic `page_viewed`.
 
-### Event taxonomy (Wave 1 only)
+**Unchanged**
+- `src/lib/analyticsEvents.ts`, `src/lib/analytics.ts`, `src/lib/analyticsContext.ts`, `src/lib/consent.ts`
+- `src/pages/MyWeek.tsx`, `src/pages/MyJourney.tsx`, `src/pages/KeptChapter.tsx`
+- `src/components/myweek/SlotReflection.tsx` — `reflection_saved` fire logic untouched (see note below).
+- All article, content, and AI surfaces — explicitly out of scope.
 
-```text
-home_viewed              { }            — fired once from Index mount
-start_journey_clicked    { location }   — location: "home_hero" | "navbar"
-sign_in_clicked          { location }   — location: "home_hero" | "navbar"
+### Implementation detail
+
+`RouteTracker` currently uses an exact-match `Set<string>`. We extend it to also handle the kept-chapter pattern `/my-week/:week` (a path segment after `/my-week/`).
+
+```ts
+const PAGEVIEW_SKIP_EXACT = new Set<string>([
+  "/",
+  "/auth",
+  "/my-week",
+  "/my-journey",
+]);
+
+// /my-week/:week — kept chapters are measured by `kept_chapter_viewed`.
+const KEPT_CHAPTER_RE = /^\/my-week\/[^/]+\/?$/;
+
+const shouldSkip = (pathname: string) =>
+  PAGEVIEW_SKIP_EXACT.has(pathname) || KEPT_CHAPTER_RE.test(pathname);
 ```
 
-Common properties auto-attached by `analytics.ts` (not by callers):
-`anonymous_id`, `user_id` (nullable), `path`, `timestamp`.
+The effect then checks `shouldSkip(location.pathname)` before calling `trackPageView`. The skip rules live in one place; no other call site changes.
 
-Forbidden in props (enforced by convention + types): journey content, reflections, due dates, names, emails, free-text — anything from product memory or AI context.
+### Final skip-list behaviour
 
-### Exact flow for the 3 proof events
+| Path | Generic `page_viewed`? | Sole semantic event |
+|---|---|---|
+| `/` | skipped | `home_viewed` |
+| `/auth` | skipped | `auth_viewed` |
+| `/my-week` | skipped | `my_week_viewed` |
+| `/my-journey` | skipped | `my_journey_viewed` |
+| `/my-week/14` (any `:week`) | skipped | `kept_chapter_viewed` |
+| Everything else (articles, hubs, calculators, setup, etc.) | emitted | — |
 
-1. **`home_viewed`** — `Index.tsx` `useEffect(() => trackEvent("home_viewed"), [])`. Route tracker explicitly skips `/` to avoid duplicating this. Net result: exactly one event per homepage visit.
-2. **`start_journey_clicked`** — `onClick` on each Start CTA (hero + navbar desktop + navbar mobile) calls `trackEvent("start_journey_clicked", { location })` synchronously before `<Link>` navigation. Console adapter is sync, so no race.
-3. **`sign_in_clicked`** — same pattern on the three Sign in entry points (`location: "home_hero" | "navbar"`).
+### Double-measurement check
 
-### Consent gating behaviour
+After this change, the signed-in core product surfaces emit exactly one view-class event per visit:
 
-- **Before acceptance** (`unknown` or `rejected`): every `trackEvent`/`trackPageView`/`identify` call short-circuits in `analytics.ts`. No `anonymous_id` is generated. No `user_id` is forwarded. Dev-only `console.debug("[analytics:dropped:…]")` still logs so we can verify call sites are wired without leaking data.
-- **At acceptance**: `anonymous_id` is lazily created on the next authorised call and persisted. The auth subscription's most recent `userId` is forwarded via `identify()` immediately so subsequent events carry it.
-- **After rejection or reset**: `resetAnalyticsContext()` clears in-memory user_id and removes `tsoy_anon_id_v1` from storage, so a future opt-in starts fresh.
+- `/my-week` → `my_week_viewed` (after data load)
+- `/my-journey` → `my_journey_viewed` (after data load)
+- `/my-week/:week` → `kept_chapter_viewed` (after chapter load, re-fires per `:week` change)
 
-### Identity model
+No `page_viewed` is emitted for these paths. Other route changes (articles, hubs, calculators) still emit `page_viewed` as before.
 
-- `anonymous_id`: UUID v4, generated **only after consent accepted**, stored in `localStorage` under `tsoy_anon_id_v1`. Stable across sessions for the same browser. Cleared on consent reset.
-- `user_id`: Supabase auth user id, held **in memory only** in `analyticsContext.ts`. Set by `identify()` from the App-root auth subscription. Never written to any product table; never persisted to localStorage. On sign-out → `identify(null)`.
-- Strict separation: `analytics.ts` and `analyticsContext.ts` do not import `savedJourney.ts`, `authIntent.ts`, profile data, or any AI helper. Identify only receives the bare `userId` string.
+### `reflection_saved` — explicit definition (no logic change)
 
-### Pageview / home-view duplication
+`reflection_saved` is a **save-action metric**, not a reflection-adoption metric.
 
-Resolved: `RouteTracker` skips `path === "/"`. The homepage is measured by the deliberate `home_viewed` event only. All other routes get a single `page_viewed` (auto from RouteTracker). No double counting.
+- Fires once per successful upsert of non-empty content that differs from the last tracked value (debounced typing-saves and shaping-accept saves both count).
+- A long writing session can produce multiple `reflection_saved` events in a single sitting — each represents a real persisted save, not a unique reflection.
+- It does **not** measure: how many users ever wrote a reflection, how many distinct weeks have a reflection, or first-time vs. returning save behaviour.
+- For a true adoption metric (e.g. "users who kept ≥ 1 reflection", "weeks with a reflection per user"), introduce a distinct event in a later pass — do not reinterpret `reflection_saved` after the fact.
 
-### Layer separation reminders
+This definition should be mirrored in the analytics dictionary / privacy copy when those land.
 
-- Analytics layer: this pass only.
-- Product memory: `savedJourney.ts` + Supabase tables — untouched.
-- AI context: built separately from explicit product state — not consuming the event stream.
-- No analytics-only flags added to product tables in this pass.
+### Remaining issues before content tracking
 
-### Manual review points before Wave 2
-
-1. Choose the real analytics sink (PostHog / Plausible / Lovable Cloud table) before Wave 2 instrumentation lands.
-2. Confirm the privacy page copy lists `anonymous_id` and the `tsoy_anon_id_v1` key once a sink is wired.
-3. Decide whether the `location` property convention (`home_hero`, `navbar`, …) needs a typed enum before Wave 2 expands click-tracking.
-4. Confirm that `identify()` should fire on every auth state change vs only `SIGNED_IN`/`SIGNED_OUT` — current plan: every change, since the gate makes it cheap.
-5. Decide retention/rotation policy for `anonymous_id` (current: indefinite until consent reset).
+1. **Reflection-adoption metric** — design and name a separate event (e.g. `reflection_first_kept_for_week`) before content tracking lands, so dashboards do not silently lean on `reflection_saved` as a proxy.
+2. **Common-model extension policy** — content tracking will want minimal context (article slug, hub stage, position in feed). Agree the typed-enum allowlist (and the rule against free-text values) before instrumenting any article surface.
+3. **Pageview policy for hubs and articles** — decide whether hub roots (`/pregnancy`, `/postpartum`, etc.) should retain generic `page_viewed` or move to semantic `hub_viewed` events when content tracking starts. Current default is to keep generic pageviews until content tracking explicitly replaces them.
+4. **Real analytics sink** — still pending; required before content/AI tracking adds volume.
+5. **Privacy copy** — list the now-stable view, save, and routing event categories before adding content/AI categories.
+6. **Strict layer separation** — reaffirm: analytics never reads from product memory or AI context, and AI context never reads from the analytics stream. Content tracking must follow the same rule.

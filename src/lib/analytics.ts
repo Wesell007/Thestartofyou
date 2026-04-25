@@ -19,6 +19,7 @@
  * change — replace the body of `forward()`.
  */
 
+import posthog from "posthog-js";
 import {
   hasAnalyticsConsent,
   subscribeAnalyticsConsent,
@@ -30,15 +31,95 @@ import {
 } from "./analyticsContext";
 import type { EventMap, EventName } from "./analyticsEvents";
 
-const isDev =
-  typeof import.meta !== "undefined" && Boolean((import.meta as { env?: { DEV?: boolean } }).env?.DEV);
+type ImportMetaEnv = {
+  DEV?: boolean;
+  VITE_POSTHOG_KEY?: string;
+  VITE_POSTHOG_HOST?: string;
+};
+const env: ImportMetaEnv =
+  typeof import.meta !== "undefined"
+    ? ((import.meta as { env?: ImportMetaEnv }).env ?? {})
+    : {};
+const isDev = Boolean(env.DEV);
+const POSTHOG_KEY = env.VITE_POSTHOG_KEY;
+const POSTHOG_HOST = env.VITE_POSTHOG_HOST ?? "https://us.i.posthog.com";
+
+let posthogReady = false;
+
+/**
+ * Lazily initialise PostHog. Called only after consent is accepted, so no
+ * cookies or network requests are created before opt-in. Autocapture and
+ * session replay are explicitly disabled — this sink only receives the
+ * curated events defined in analyticsEvents.ts.
+ */
+const ensurePosthog = (): typeof posthog | null => {
+  if (typeof window === "undefined") return null;
+  if (!POSTHOG_KEY) {
+    if (isDev) {
+      // eslint-disable-next-line no-console
+      console.debug("[analytics] VITE_POSTHOG_KEY missing — sink disabled");
+    }
+    return null;
+  }
+  if (!posthogReady) {
+    posthog.init(POSTHOG_KEY, {
+      api_host: POSTHOG_HOST,
+      autocapture: false,
+      capture_pageview: false,
+      capture_pageleave: false,
+      disable_session_recording: true,
+      disable_surveys: true,
+      persistence: "localStorage",
+      person_profiles: "identified_only",
+      loaded: (ph) => {
+        if (isDev) ph.debug(false);
+      },
+    });
+    posthogReady = true;
+  }
+  return posthog;
+};
 
 const forward = (kind: "event" | "pageview" | "identify", payload: unknown): void => {
-  // TODO: wire a real analytics sink here. Until then we log in dev only
-  // so the architecture is verifiable end-to-end without shipping data.
   if (isDev) {
     // eslint-disable-next-line no-console
     console.debug(`[analytics:${kind}]`, payload);
+  }
+  const ph = ensurePosthog();
+  if (!ph) return;
+
+  const p = payload as {
+    name?: string;
+    path?: string | null;
+    user_id?: string | null;
+    anonymous_id?: string | null;
+    properties?: Record<string, unknown>;
+    timestamp?: string;
+  };
+
+  if (kind === "event" && p.name) {
+    ph.capture(p.name, {
+      ...(p.properties ?? {}),
+      path: p.path ?? undefined,
+      anonymous_id: p.anonymous_id ?? undefined,
+    });
+    return;
+  }
+  if (kind === "pageview") {
+    ph.capture("$pageview", {
+      path: p.path ?? undefined,
+      anonymous_id: p.anonymous_id ?? undefined,
+    });
+    return;
+  }
+  if (kind === "identify") {
+    if (p.user_id) {
+      ph.identify(p.user_id, {
+        anonymous_id: p.anonymous_id ?? undefined,
+      });
+    } else {
+      ph.reset();
+    }
   }
 };
 

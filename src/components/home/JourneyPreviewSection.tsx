@@ -340,20 +340,24 @@ const JourneyPreviewSection = () => {
           setApi={setApi}
           className="relative"
         >
-          <CarouselContent className="-ml-4 md:-ml-6 items-start">
+          <CarouselContent className="-ml-4 md:-ml-6 items-stretch">
             {slides.map(({ label, copy, Preview }, i) => (
               <CarouselItem
                 key={label}
                 className="pl-4 md:pl-6 basis-[88%] md:basis-[82%] lg:basis-[70%]"
               >
-                <div className="max-w-[560px] mx-auto">
-                  <div className="text-center mb-5 md:mb-6">
+                <div className="max-w-[560px] mx-auto h-full flex flex-col">
+                  <div className="text-center mb-5 md:mb-6 min-h-[68px] md:min-h-[72px]">
                     <Eyebrow>{label}</Eyebrow>
                     <p className="font-serif italic text-foreground/65 text-[14px] sm:text-[14.5px] leading-[1.5] mt-2">
                       {copy}
                     </p>
                   </div>
-                  <Preview />
+                  <div className="flex-1 flex">
+                    <div className="w-full self-start">
+                      <Preview />
+                    </div>
+                  </div>
                 </div>
               </CarouselItem>
             ))}

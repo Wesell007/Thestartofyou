@@ -5,6 +5,7 @@ import NewHeroSection from "@/components/home/NewHeroSection";
 import ValueProofSection from "@/components/home/ValueProofSection";
 import JourneyBrandedSection from "@/components/home/JourneyBrandedSection";
 import DashboardGlimpse from "@/components/home/DashboardGlimpse";
+import LifecycleEcosystemSection from "@/components/home/LifecycleEcosystemSection";
 import JournalMoment from "@/components/home/JournalMoment";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
@@ -21,6 +22,7 @@ const Index = () => {
         <ValueProofSection />
         <JourneyBrandedSection />
         <DashboardGlimpse />
+        <LifecycleEcosystemSection />
         <JournalMoment />
       </main>
       <Footer />

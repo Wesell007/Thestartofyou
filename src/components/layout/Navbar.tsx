@@ -9,9 +9,13 @@ import logoSrc from "@/assets/logo-dark.png";
 
 
 const navLinks = [
-  { label: "Explore", href: "/explore" },
   { label: "Pregnancy", href: "/pregnancy" },
-  { label: "Guidance", href: "/guidance" },
+  { label: "Trying to conceive", href: "/trying-to-conceive" },
+  { label: "IVF", href: "/ivf" },
+  { label: "Postpartum", href: "/postpartum" },
+  { label: "First year", href: "/first-year" },
+  // NOTE: temporary route mapping — Journal label points to /product
+  // until the route is renamed to /journal in a follow-up pass.
   { label: "Journal", href: "/product" },
   { label: "About", href: "/about" },
 ];
@@ -52,12 +56,12 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+        <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
           {navLinks.map(({ label, href }) => (
             <Link
               key={label}
               to={href}
-              className={`font-sans text-[14.5px] tracking-wide transition-colors duration-200 ${
+              className={`font-sans text-[13.5px] tracking-wide transition-colors duration-200 whitespace-nowrap ${
                 isActive(href)
                   ? "text-foreground font-medium"
                   : "text-foreground/70 font-normal hover:text-foreground"

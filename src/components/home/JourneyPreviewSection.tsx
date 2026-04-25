@@ -365,20 +365,20 @@ const JourneyPreviewSection = () => {
         </Carousel>
 
         {/* Quiet controls + step indicator */}
-        <div className="mt-8 md:mt-10 flex flex-col items-center gap-4">
-          <div className="flex items-center gap-5">
+        <div className="mt-10 md:mt-12 flex justify-center">
+          <div className="flex items-center gap-5 md:gap-6">
             <button
               type="button"
               onClick={() => api?.scrollPrev()}
               disabled={!api?.canScrollPrev()}
               aria-label="Previous slide"
-              className="hidden md:inline-flex items-center justify-center h-8 w-8 rounded-full border border-foreground/15 text-foreground/60 hover:text-foreground hover:border-foreground/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="hidden md:inline-flex items-center justify-center h-9 w-9 rounded-full border border-foreground/20 text-foreground/65 hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
             >
-              <span aria-hidden className="text-[14px] leading-none">‹</span>
+              <span aria-hidden className="text-[15px] leading-none">‹</span>
             </button>
 
             <div className="flex items-center gap-4">
-              <span className="font-sans text-[10px] font-medium tracking-[0.28em] uppercase text-foreground/55 tabular-nums">
+              <span className="font-sans text-[10px] font-medium tracking-[0.28em] uppercase text-foreground/65 tabular-nums">
                 {String(current + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
               </span>
               <div className="flex items-center gap-2" role="tablist" aria-label="Slide position">
@@ -391,8 +391,10 @@ const JourneyPreviewSection = () => {
                     aria-label={`Go to slide ${i + 1}: ${s.label}`}
                     onClick={() => api?.scrollTo(i)}
                     className={cn(
-                      "h-px w-4 transition-colors",
-                      current === i ? "bg-foreground/55" : "bg-foreground/15 hover:bg-foreground/30",
+                      "h-[2px] rounded-full transition-all",
+                      current === i
+                        ? "w-6 bg-foreground/75"
+                        : "w-4 bg-foreground/25 hover:bg-foreground/45",
                     )}
                   />
                 ))}
@@ -404,15 +406,11 @@ const JourneyPreviewSection = () => {
               onClick={() => api?.scrollNext()}
               disabled={!api?.canScrollNext()}
               aria-label="Next slide"
-              className="hidden md:inline-flex items-center justify-center h-8 w-8 rounded-full border border-foreground/15 text-foreground/60 hover:text-foreground hover:border-foreground/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="hidden md:inline-flex items-center justify-center h-9 w-9 rounded-full border border-foreground/20 text-foreground/65 hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
             >
-              <span aria-hidden className="text-[14px] leading-none">›</span>
+              <span aria-hidden className="text-[15px] leading-none">›</span>
             </button>
           </div>
-
-          <p className="md:hidden font-sans text-[10px] font-medium tracking-[0.28em] uppercase text-foreground/40">
-            Swipe to continue
-          </p>
         </div>
       </div>
     </section>

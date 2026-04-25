@@ -38,7 +38,8 @@ import ConsentBanner from "./components/consent/ConsentBanner.tsx";
 import RouteTracker from "./components/analytics/RouteTracker.tsx";
 import { useEffect } from "react";
 import { supabase } from "./integrations/supabase/client.ts";
-import { identify } from "./lib/analytics.ts";
+import { identify, trackEvent } from "./lib/analytics.ts";
+import { EVENTS } from "./lib/analyticsEvents.ts";
 
 
 const queryClient = new QueryClient();
@@ -50,9 +51,15 @@ const AnalyticsIdentityBridge = () => {
       if (cancelled) return;
       identify(data.session?.user?.id ?? null);
     });
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+    // Fires `auth_completed` exactly once per successful sign-in
+    // (covers email OTP, OAuth, and magic-link round-trips). Identify
+    // runs on every event so the cached user_id stays in sync.
+    const { data: sub } = supabase.auth.onAuthStateChange((event, session) => {
       if (cancelled) return;
       identify(session?.user?.id ?? null);
+      if (event === "SIGNED_IN") {
+        trackEvent(EVENTS.AUTH_COMPLETED);
+      }
     });
     return () => {
       cancelled = true;

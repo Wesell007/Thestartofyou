@@ -1,21 +1,26 @@
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import MyWeekBabyImage from "@/components/myweek/MyWeekBabyImage";
 import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
+import {
+  Carousel,
+  CarouselApi,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { cn } from "@/lib/utils";
 
 /**
- * Truthful homepage product preview.
+ * Truthful homepage product preview, presented as a calm 3-slide walkthrough:
+ *   1. My Week        — live weekly anchor
+ *   2. My Journey     — saved memory spine
+ *   3. Kept Chapter   — preserved week page
  *
- * Replaces the earlier generic "Your Dashboard" glimpse with a calm,
- * editorial composition of three real product surfaces:
- *   - My Week (live weekly anchor) — primary
- *   - My Journey (saved memory spine) — secondary
- *   - Kept Chapter (preserved week page) — tertiary
- *
- * No invented widgets. No progress bars. No SaaS chrome. Each card
- * faithfully mirrors the visual language of its real surface using the
- * same tokens (keepsake-surface, pregnancy stage accent, MyWeekBabyImage,
- * serif type, parchment background).
+ * Manual interaction only. No autoplay. No loop. No loud chrome.
+ * Each slide pairs a small surface label + one-line micro-copy with the
+ * existing truthful preview card. Cards are unchanged from the prior
+ * static composition — only the section composition is now a carousel.
  */
 
 const PRIMARY_WEEK = 18;
@@ -53,7 +58,6 @@ const MyWeekPreview = () => {
           </span>
         </div>
 
-        {/* Greeting + due meta */}
         <p className="font-serif text-foreground text-[1.15rem] sm:text-[1.25rem] leading-tight mb-1.5">
           Good afternoon, Anna
         </p>
@@ -61,7 +65,6 @@ const MyWeekPreview = () => {
           Due 14 October · 22 weeks to go
         </p>
 
-        {/* Chapter heading + baby image */}
         <div className="flex items-start gap-5 sm:gap-6 mb-6">
           <div
             className="shrink-0 w-[96px] h-[96px] sm:w-[112px] sm:h-[112px] rounded-full overflow-hidden flex items-center justify-center"
@@ -87,13 +90,11 @@ const MyWeekPreview = () => {
           </div>
         </div>
 
-        {/* Lead paragraph — mirrors Slot 1 lead */}
         <p className="font-serif text-foreground/75 text-[15px] sm:text-[15.5px] leading-[1.7] mb-6">
           {content.lead}
         </p>
       </div>
 
-      {/* Ritual rail strip — labels only, no inputs */}
       <div
         className="border-t px-7 sm:px-9 py-4 sm:py-5"
         style={{ borderColor: accentSoft(0.14), background: tint(0.08) }}
@@ -141,7 +142,6 @@ const MyJourneyPreview = () => {
         </span>
       </div>
 
-      {/* Mini current chapter card */}
       <div
         className="flex items-center gap-3.5 rounded-[16px] p-3 mb-5"
         style={{ background: tint(0.12), border: `1px solid ${accentSoft(0.18)}` }}
@@ -173,7 +173,6 @@ const MyJourneyPreview = () => {
         </div>
       </div>
 
-      {/* Group label */}
       <p className="font-sans text-[9.5px] font-medium tracking-[0.28em] uppercase text-foreground/50 mb-1">
         Second trimester
       </p>
@@ -181,7 +180,6 @@ const MyJourneyPreview = () => {
         Steadier weeks, finding rhythm.
       </p>
 
-      {/* Kept week rows */}
       <ul className="space-y-2">
         {keptRows.map((row) => {
           const id = getWeekIdentity(row.week);
@@ -282,7 +280,40 @@ const KeptChapterPreview = () => {
   );
 };
 
+// ─── Slides definition ────────────────────────────────────────────────────
+const slides = [
+  {
+    label: "Current week",
+    copy: "See what matters now, week by week.",
+    Preview: MyWeekPreview,
+  },
+  {
+    label: "Your journey",
+    copy: "Look back at the weeks and moments you've kept.",
+    Preview: MyJourneyPreview,
+  },
+  {
+    label: "Kept chapter",
+    copy: "Return to a past week as a preserved chapter.",
+    Preview: KeptChapterPreview,
+  },
+];
+
 const JourneyPreviewSection = () => {
+  const [api, setApi] = useState<CarouselApi | null>(null);
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+    setCurrent(api.selectedScrollSnap());
+    const onSelect = () => setCurrent(api.selectedScrollSnap());
+    api.on("select", onSelect);
+    api.on("reInit", onSelect);
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
   return (
     <section className="bg-background py-20 md:py-28">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
@@ -298,39 +329,86 @@ const JourneyPreviewSection = () => {
           </p>
         </div>
 
-        {/* Composition */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6 lg:gap-7 items-start">
-          <div className="lg:col-span-7">
-            <MyWeekPreview />
-            <p className="font-sans text-[11px] font-light tracking-[0.18em] uppercase text-foreground/40 text-center mt-4">
-              Where you are right now
-            </p>
-          </div>
-          <div className="lg:col-span-5 flex flex-col gap-5 md:gap-6">
-            <div>
-              <MyJourneyPreview />
-              <p className="font-sans text-[11px] font-light tracking-[0.18em] uppercase text-foreground/40 text-center mt-4">
-                The weeks you keep, gathered over time
-              </p>
-            </div>
-            <div>
-              <KeptChapterPreview />
-              <p className="font-sans text-[11px] font-light tracking-[0.18em] uppercase text-foreground/40 text-center mt-4">
-                A week you can return to later
-              </p>
-            </div>
-          </div>
-        </div>
+        {/* Carousel */}
+        <Carousel
+          opts={{
+            align: "center",
+            loop: false,
+            dragFree: false,
+            containScroll: "trimSnaps",
+          }}
+          setApi={setApi}
+          className="relative"
+        >
+          <CarouselContent className="-ml-4 md:-ml-6 items-start">
+            {slides.map(({ label, copy, Preview }, i) => (
+              <CarouselItem
+                key={label}
+                className="pl-4 md:pl-6 basis-[88%] md:basis-[82%] lg:basis-[70%]"
+              >
+                <div className="max-w-[560px] mx-auto">
+                  <div className="text-center mb-5 md:mb-6">
+                    <Eyebrow>{label}</Eyebrow>
+                    <p className="font-serif italic text-foreground/65 text-[14px] sm:text-[14.5px] leading-[1.5] mt-2">
+                      {copy}
+                    </p>
+                  </div>
+                  <Preview />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
 
-        {/* Quiet section-level link */}
-        <div className="text-center mt-12 md:mt-14">
-          <Link
-            to="/product"
-            className="inline-flex items-center gap-2 font-sans text-[13px] font-medium text-foreground/70 hover:text-foreground transition-colors"
-          >
-            See how the journey works
-            <ArrowRight size={13} strokeWidth={1.7} />
-          </Link>
+        {/* Quiet controls + step indicator */}
+        <div className="mt-8 md:mt-10 flex flex-col items-center gap-4">
+          <div className="flex items-center gap-5">
+            <button
+              type="button"
+              onClick={() => api?.scrollPrev()}
+              disabled={!api?.canScrollPrev()}
+              aria-label="Previous slide"
+              className="hidden md:inline-flex items-center justify-center h-8 w-8 rounded-full border border-foreground/15 text-foreground/60 hover:text-foreground hover:border-foreground/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <span aria-hidden className="text-[14px] leading-none">‹</span>
+            </button>
+
+            <div className="flex items-center gap-4">
+              <span className="font-sans text-[10px] font-medium tracking-[0.28em] uppercase text-foreground/55 tabular-nums">
+                {String(current + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
+              </span>
+              <div className="flex items-center gap-2" role="tablist" aria-label="Slide position">
+                {slides.map((s, i) => (
+                  <button
+                    key={s.label}
+                    type="button"
+                    role="tab"
+                    aria-selected={current === i}
+                    aria-label={`Go to slide ${i + 1}: ${s.label}`}
+                    onClick={() => api?.scrollTo(i)}
+                    className={cn(
+                      "h-px w-4 transition-colors",
+                      current === i ? "bg-foreground/55" : "bg-foreground/15 hover:bg-foreground/30",
+                    )}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => api?.scrollNext()}
+              disabled={!api?.canScrollNext()}
+              aria-label="Next slide"
+              className="hidden md:inline-flex items-center justify-center h-8 w-8 rounded-full border border-foreground/15 text-foreground/60 hover:text-foreground hover:border-foreground/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <span aria-hidden className="text-[14px] leading-none">›</span>
+            </button>
+          </div>
+
+          <p className="md:hidden font-sans text-[10px] font-medium tracking-[0.28em] uppercase text-foreground/40">
+            Swipe to continue
+          </p>
         </div>
       </div>
     </section>

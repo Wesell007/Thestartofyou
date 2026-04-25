@@ -1,102 +1,121 @@
-# Truthful product-preview homepage section
+## Goal
 
-Replace the current `DashboardGlimpse` (which depicts a generic "Your Dashboard" with invented progress bars and metrics) with a calm, editorial, **static product-preview section** that visually mirrors the actual product surfaces: `/my-week`, `/my-journey`, and `/my-week/:week` (Kept Chapter).
+Refactor `src/components/home/JourneyPreviewSection.tsx` so the three product surface previews (My Week → My Journey → Kept Chapter) are presented one at a time in a quiet, manual carousel, instead of stacked side-by-side.
 
-## Files
+No autoplay, no loop, no tabs, no loud chrome. Header, supporting copy, preview cards, and design tokens all stay as-is.
 
-**Rewrite (rename for honesty):**
-- `src/components/home/DashboardGlimpse.tsx` → **delete**
-- New: `src/components/home/JourneyPreviewSection.tsx`
+## Files changed
 
-**Update import:**
-- `src/pages/Index.tsx` — replace `DashboardGlimpse` with `JourneyPreviewSection`. Keep section order unchanged (sits between `JourneyBrandedSection` and `LifecycleEcosystemSection`).
+- `src/components/home/JourneyPreviewSection.tsx` — only this file. The three preview components (`MyWeekPreview`, `MyJourneyPreview`, `KeptChapterPreview`) and the section header remain unchanged. Only the composition grid is replaced with a carousel.
 
-No nav, hero, CTA, route, or analytics changes.
+No other files touched. No new components. No route, nav, analytics, or data changes.
 
-## Section copy (final)
+## Carousel structure
 
-- **Eyebrow:** `Inside your journey`
-- **Heading:** `Your week, your journey, and the moments you return to`
-- **Body:** `Follow your pregnancy week by week, keep reflections and photos, and return to the chapters that matter as your journey grows.`
-- **Optional quiet section-level link** beneath the composition: `See how the journey works` → `/product` (single, restrained link, matches existing tertiary link style). Final call: include it because the homepage rhythm already accepts a quiet trailing link in adjacent sections (`DashboardPreviewSection` precedent).
-
-## Visual composition
-
-Static, editorial — no fake widgets, no progress bars, no SaaS chrome.
-
-### Desktop (md+)
-
-12-col grid, max-w ~5xl, centred:
-- **Left col-span-7 (dominant):** My Week preview
-- **Right col-span-5 (stacked):** My Journey preview, then Kept Chapter preview
+Use the existing shadcn `Carousel` primitive (`src/components/ui/carousel.tsx`, Embla under the hood) — already in the project, no new dependency.
 
 ```text
-┌─────────────────────────────┬──────────────────┐
-│                             │  My Journey      │
-│        My Week              │  (secondary)     │
-│        (primary)            ├──────────────────┤
-│                             │  Kept chapter    │
-│                             │  (tertiary)      │
-└─────────────────────────────┴──────────────────┘
+<Carousel opts={{ align: "center", loop: false, dragFree: false, containScroll: "trimSnaps" }}>
+  <CarouselContent>
+    <CarouselItem> Slide: My Week        </CarouselItem>
+    <CarouselItem> Slide: My Journey     </CarouselItem>
+    <CarouselItem> Slide: Kept Chapter   </CarouselItem>
+  </CarouselContent>
+
+  {/* Quiet desktop-only arrow controls */}
+  <CarouselPrevious /> <CarouselNext />
+</Carousel>
+
+{/* Quiet step indicator below: 01 / 03 with 3 small ticks */}
 ```
 
-### Mobile
+Each `CarouselItem` is a small slide wrapper containing:
 
-Stacked, in order: My Week → My Journey → Kept Chapter. Generous spacing, no overflow.
+1. Surface label (uppercase tracked eyebrow, accent colour — reuses existing `Eyebrow`)
+2. One-line micro-copy (serif italic, foreground/65)
+3. The truthful preview card (existing `MyWeekPreview` / `MyJourneyPreview` / `KeptChapterPreview` — used unchanged)
 
-## What each preview shows (truthful crops)
+Slide widths (fuller than the first proposal so the section reads composed, not sparse):
+- Mobile: `basis-[88%]` — small peek of next slide on the right.
+- `md` and up: `basis-[82%]` — light peek of the neighbouring card on either side.
+- `lg` and up: `basis-[70%]` — one dominant slide, with a quieter peek that still invites interaction.
 
-All three use the existing system tokens: `bg-card`, `keepsake-surface`, `hsl(var(--stage-pregnancy-accent))` accents, `MyWeekBabyImage`, parchment background, soft borders, restrained type. Each card has a small uppercase eyebrow label inside, mirroring the real surfaces.
+Inner card content keeps its current max width via `max-w-[560px] mx-auto` on the slide body so My Week's larger preview doesn't get stretched.
 
-### 1. My Week — primary
-Mirrors `MyWeekChapter` + a hint of the ritual rail.
-- Eyebrow inside card: `Current week` · `Week 18`
-- `Good afternoon, Anna` greeting (serif), trimester label (`Second trimester`), due-date meta (`14 October · 22 weeks to go`)
-- Chapter title: pulled from `getWeekIdentity(18).chapterTitle`
-- Oval baby image (`MyWeekBabyImage week={18}`) in the existing radial-gradient halo
-- One faithful guidance block: short `lead` paragraph from `getMyWeekContent(18)`
-- A single muted ritual-rail strip beneath showing two slot labels only — `One focus` · `Reflection` — as small uppercase rows with hairline dividers (no inputs, no fake content)
-- Tiny caption underneath card: `Where you are right now`
+## Interaction
 
-### 2. My Journey — secondary
-Mirrors `JourneyHeader` + `CurrentChapterCard` + 2 `KeptWeekRow` items.
-- Eyebrow inside card: `Your journey`
-- Compact journey header line (Week 18 · Started 12 June)
-- Miniature current-chapter row: small oval baby image + `Current chapter · Week 18` + chapter title
-- Group label `Second trimester · Steadier weeks, finding rhythm`
-- Two kept-week rows (Week 14, Week 16): tiny baby-image circle + `Week N` + chapter title + truncated reflection italic line
-- Tiny caption underneath card: `The weeks you keep, gathered over time`
+Desktop (≥ md):
+- Drag with mouse (Embla default).
+- Two minimal arrow buttons (`CarouselPrevious` / `CarouselNext`) positioned just below the carousel. Restyled to be quiet: 32px circles, `border-foreground/15`, `text-foreground/60`, hover `text-foreground`. No drop shadow. No bright fill.
+- Keyboard: left/right arrows (built into the shadcn primitive via `onKeyDownCapture`).
 
-### 3. Kept Chapter — tertiary
-Mirrors the `KeptChapter` page header + reflection block.
-- Eyebrow inside card: `Kept chapter`
-- `Week 12` heading (serif, large within the small card)
-- Chapter title + `First trimester · [theme]` italic meta
-- Small oval baby image
-- A short italic reflection excerpt in the tinted reflection surface (`tint(0.16)` background, accent border) — using a faithful sample sentence in keeping with brand voice (e.g. *"The week the news became real. Quieter than I expected, and steadier."*) followed by `Kept · 24 March` meta
-- Tiny caption underneath card: `A week you can return to later`
+Mobile (< md):
+- Native swipe via Embla touch.
+- Arrows hidden (`hidden md:inline-flex`).
+- A single-line hint under the carousel: "Swipe to continue" in tracked uppercase 10px text-foreground/40, shown only on mobile.
 
-> Sample reflection text is illustrative editorial copy — clearly framed as a preview, not user data. This avoids needing live screenshot assets while remaining visually grounded in the real Kept Chapter surface.
+Both:
+- `loop: false` — feels like a finite walkthrough, not an endless slider.
+- No autoplay plugin.
+- No transition flair beyond Embla's default smooth scroll.
 
-## Visual rules followed
+## Step indicator (quiet, not dots)
 
-- Parchment section background (`bg-parchment` or `bg-background` to match adjacent sections — match the section it replaces: `bg-background`)
-- Editorial rule + uppercase eyebrow header, matching pattern of `DashboardGlimpse`/`ValueProofSection`
-- All three cards use `rounded-[20px]`/`rounded-[24px]`, `keepsake-surface`, hairline pregnancy-accent borders
-- Pregnancy stage accent only (no other stage colours — homepage is stage-neutral, but these previews depict the pregnancy product surface specifically, which is consistent with the rest of the homepage hero/journey framing)
-- No progress bars, no metric grids, no browser chrome, no app-nav row, no avatar bubble
-- Type scale restrained — previews are smaller-scale crops, not full reproductions
+Below the carousel, centred:
 
-## Acceptance check
+```text
+01 / 03      — — —
+```
 
-1. First-time visitor reads: weekly product · saved/cumulative · returnable
-2. Visuals match real `/my-week`, `/my-journey`, `/my-week/:week` patterns (same baby image system, same accent, same keepsake surface, same eyebrow conventions)
-3. Reads as one calm editorial composition, not a dashboard
-4. Section copy makes no "dashboard" claim
-5. No new routes, IA, analytics, or signed-in work
+- `01` is the current index, updates via `api.on("select")`. Uses `font-sans text-[10px] tracking-[0.28em] uppercase text-foreground/55`.
+- Three 16px hairline ticks (`h-px w-4 bg-foreground/15`); the active one becomes `bg-foreground/55`. Clickable to jump (`api.scrollTo(i)`), but visually the same — no dots, no pills, no numbers inside circles.
 
-## Notes for visual review after build
+This avoids the "loud dots" pattern while still giving position feedback.
 
-- Confirm right-column stack heights balance the dominant My Week card on `lg` (may need `min-h` tuning)
-- Confirm mobile stacking spacing matches `JourneyBrandedSection` rhythm
-- Confirm baby image halo isn't overpowering at small sizes inside Journey/Kept cards
+## Final micro-copy used
+
+Header (unchanged):
+- Eyebrow: `Inside your journey`
+- Heading: `Your week, your journey, and the moments you return to`
+- Body: `Follow your pregnancy week by week, keep reflections and photos, and return to the chapters that matter as your journey grows.`
+
+Per slide:
+
+| # | Label (eyebrow) | Micro-copy (one line, serif italic) |
+|---|---|---|
+| 1 | `Current week` | `See what matters now, week by week.` |
+| 2 | `Your journey` | `Look back at the weeks and moments you've kept.` |
+| 3 | `Kept chapter` | `Return to a past week as a preserved chapter.` |
+
+Mobile-only hint: `Swipe to continue`
+
+## Footer link decision (review at implementation)
+
+The existing `See how the journey works → /product` link is treated as optional. After the carousel is in place, judge whether the three-slide walkthrough already explains the system clearly. Default position:
+
+- If the carousel reads as a complete explanation on its own → **remove the link**, end the section on the step indicator. Cleaner, fewer competing CTAs, more confident.
+- Only keep it if the section feels like it ends abruptly without further direction.
+
+Lean toward removal.
+
+## Visual rules honoured
+
+- One dominant slide visible at any time; subtle peek of neighbours invites interaction without competing.
+- Existing `keepsake-surface`, pregnancy stage accent, serif type, parchment background — all preserved by reusing the three preview components untouched.
+- Controls (arrows, ticks) are deliberately desaturated and small.
+- No SaaS chrome: no drop shadow, no progress bar, no gradient buttons, no bright accent fills on controls.
+- The three small "Where you are right now" / "The weeks you keep…" / "A week you can return to later" caption strings under the old grid are removed — the new slide micro-copy replaces them.
+
+## Things still likely to need a visual review pass after build
+
+1. Final verdict on the footer link (keep vs remove) once the carousel is in place.
+2. Vertical alignment between slides of different heights — Embla doesn't equalise heights; each slide sizes to its own content with `items-start` on `CarouselContent` and centred horizontally. Worth eyeballing on mobile where the My Week card is significantly taller.
+3. Arrow button placement — proposing bottom-right, but bottom-centre next to the step indicator could feel quieter; quick judgement after first build.
+4. Whether the mobile "Swipe to continue" hint is still needed once the peek of the next slide is visible.
+
+## Out of scope
+
+- No autoplay, no loop, no infinite carousel.
+- No new analytics events.
+- No changes to underlying preview cards' content, copy, or visuals.
+- No nav, route, IA, or hero changes.

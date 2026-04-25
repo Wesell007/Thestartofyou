@@ -1,6 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { differenceInDays } from "date-fns";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 import { supabase } from "@/integrations/supabase/client";
 import { getActivePregnancyJourney } from "@/lib/savedJourney";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
@@ -47,6 +49,14 @@ const MyWeek = () => {
   const navigate = useNavigate();
   const [state, setState] = useState<Loaded | null>(null);
   const [loading, setLoading] = useState(true);
+  const viewedRef = useRef(false);
+
+  useEffect(() => {
+    if (viewedRef.current) return;
+    if (loading || !state) return;
+    viewedRef.current = true;
+    trackEvent(EVENTS.MY_WEEK_VIEWED);
+  }, [loading, state]);
 
   useEffect(() => {
     let cancelled = false;

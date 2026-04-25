@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { differenceInDays } from "date-fns";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -6,6 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { getActivePregnancyJourney } from "@/lib/savedJourney";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import MyWeekBabyImage from "@/components/myweek/MyWeekBabyImage";
@@ -52,8 +54,16 @@ const KeptChapter = () => {
   const navigate = useNavigate();
   const week = Number(weekParam);
   const [data, setData] = useState<Loaded | null>(null);
+  const lastFiredWeekRef = useRef<number | null>(null);
 
   const validWeek = Number.isFinite(week) && week >= 1 && week <= MAX_PREGNANCY_WEEK;
+
+  useEffect(() => {
+    if (!data || !validWeek) return;
+    if (lastFiredWeekRef.current === week) return;
+    lastFiredWeekRef.current = week;
+    trackEvent(EVENTS.KEPT_CHAPTER_VIEWED);
+  }, [data, week, validWeek]);
 
   useEffect(() => {
     if (!validWeek) {

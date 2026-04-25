@@ -137,13 +137,6 @@ const NewHeroSection = () => {
                 Start your journey
                 <ArrowRight size={15} />
               </Link>
-              <Link
-                to="/explore"
-                className="inline-flex items-center gap-2 font-sans text-[13.5px] font-light text-muted-foreground hover:text-foreground transition-colors py-4"
-              >
-                Explore guidance
-                <ArrowRight size={13} className="opacity-60" />
-              </Link>
             </div>
             <p className="font-sans text-[12.5px] font-light text-muted-foreground/80 mt-1">
               Already saving your journey?{" "}

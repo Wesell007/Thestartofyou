@@ -19,6 +19,10 @@ const NEW_TEMPLATE_SLUGS = new Set<string>([
   "moving-your-body-in-pregnancy",
   "key-nutrients-in-pregnancy",
   "when-you-cant-face-food-in-pregnancy",
+  "how-your-baby-develops-in-pregnancy",
+  "twins-and-multiples-in-pregnancy",
+  "the-space-your-baby-will-come-home-to",
+  "sleep-in-pregnancy",
 ]);
 
 const ArticlePage = () => {

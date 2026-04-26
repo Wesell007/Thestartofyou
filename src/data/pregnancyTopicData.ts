@@ -64,7 +64,7 @@ export const PREGNANCY_TOPICS: { slug: PregnancyTopicSlug; eyebrow: string }[] =
 ];
 
 // Slugs that already have a built landing page. Keeps siblings honest.
-export const LIVE_TOPIC_SLUGS: PregnancyTopicSlug[] = ["body", "baby", "health-and-safety", "diet-and-exercise"];
+export const LIVE_TOPIC_SLUGS: PregnancyTopicSlug[] = ["body", "baby", "health-and-safety", "diet-and-exercise", "preparing-for-baby"];
 
 export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPageConfig | null> = {
   body: {
@@ -162,6 +162,11 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     startHere: [
       {
+        title: "How your baby develops in pregnancy",
+        href: "/articles/how-your-baby-develops-in-pregnancy",
+        why: "The cornerstone view — how growth unfolds across the whole pregnancy, without turning into a weekly chase.",
+      },
+      {
         title: "First trimester: complete guide",
         href: "/articles/first-trimester-complete-guide",
         why: "Where the foundations are laid, often before you can feel anything at all.",
@@ -171,26 +176,24 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         href: "/articles/second-trimester-complete-guide",
         why: "The window where movement, growth, and the sense of a real person tend to arrive.",
       },
-      {
-        title: "Third trimester: complete guide",
-        href: "/articles/third-trimester-complete-guide",
-        why: "How your baby finishes growing, settles, and prepares for birth.",
-      },
     ],
 
     groups: [
       {
-        label: "Early development",
+        label: "Development and growth",
+        description: "How your baby unfolds across the whole of pregnancy.",
         links: [
+          { label: "How your baby develops in pregnancy", href: "/articles/how-your-baby-develops-in-pregnancy" },
           { label: "First trimester: complete guide", href: "/articles/first-trimester-complete-guide" },
+          { label: "Second trimester: complete guide", href: "/articles/second-trimester-complete-guide" },
+          { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide" },
         ],
       },
       {
-        label: "Growing and moving",
-        description: "How your baby unfolds across the middle and later weeks.",
+        label: "Twins and multiples",
+        description: "What's a little different when you're carrying more than one.",
         links: [
-          { label: "Second trimester: complete guide", href: "/articles/second-trimester-complete-guide" },
-          { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide" },
+          { label: "Twins and multiples in pregnancy", href: "/articles/twins-and-multiples-in-pregnancy" },
         ],
       },
     ],
@@ -337,7 +340,70 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
     showSiblings: true,
     showAI: false,
   },
-  "preparing-for-baby": null,
+  "preparing-for-baby": {
+    slug: "preparing-for-baby",
+    eyebrow: "Preparing for baby",
+    title: "Preparing for baby",
+    intro:
+      "Getting ready for a baby doesn't need to become another long list. This is a calm place to think about birth, the home you'll bring your baby into, and the early days ahead — practical where it helps, gentle where it matters more, and clear about what can wait.",
+
+    whatThisCovers: {
+      lead: "What this topic covers:",
+      bullets: [
+        "Getting ready in practical ways, without turning preparation into pressure.",
+        "Birth planning as a conversation, not a contract.",
+        "What your baby actually needs in the first weeks — and what they really don't.",
+        "The space your baby will come home to, kept simple.",
+        "The early days after birth as something you can prepare for gently.",
+      ],
+    },
+
+    startHere: [
+      {
+        title: "Preparing for baby: complete guide",
+        href: "/preparing-for-baby",
+        why: "The wider orientation hub — what to think about, when, and what can wait.",
+      },
+      {
+        title: "Writing a birth plan",
+        href: "/articles/writing-a-birth-plan",
+        why: "How to think through preferences for birth without locking yourself in.",
+      },
+      {
+        title: "The space your baby will come home to",
+        href: "/articles/the-space-your-baby-will-come-home-to",
+        why: "What actually matters about your home setup — and what doesn't.",
+      },
+    ],
+
+    groups: [
+      {
+        label: "Getting ready",
+        description: "The wider, calmer orientation to preparing for a baby.",
+        links: [
+          { label: "Preparing for baby: complete guide", href: "/preparing-for-baby" },
+        ],
+      },
+      {
+        label: "Birth planning",
+        description: "Thinking through preferences without overplanning.",
+        links: [
+          { label: "Writing a birth plan", href: "/articles/writing-a-birth-plan" },
+        ],
+      },
+      {
+        label: "Home and early days",
+        description: "What your baby needs at home, kept simple.",
+        links: [
+          { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to" },
+          { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide" },
+        ],
+      },
+    ],
+
+    showSiblings: true,
+    showAI: false,
+  },
 };
 
 // ─── Topic Map Cards ──────────────────────────────────────────────────────
@@ -385,9 +451,10 @@ export const topicMapEntries: TopicMapEntry[] = [
     mainLabel: "Explore your baby in pregnancy",
     hasLanding: true,
     articles: [
-      { label: "Early development", href: "/articles/first-trimester-complete-guide" },
-      { label: "Growing and moving", href: "/articles/second-trimester-complete-guide" },
-      { label: "Later development", href: "/articles/third-trimester-complete-guide" },
+      { label: "How your baby develops in pregnancy", href: "/articles/how-your-baby-develops-in-pregnancy" },
+      { label: "Twins and multiples in pregnancy", href: "/articles/twins-and-multiples-in-pregnancy" },
+      { label: "First trimester", href: "/articles/first-trimester-complete-guide" },
+      { label: "Second trimester", href: "/articles/second-trimester-complete-guide" },
     ],
   },
   {

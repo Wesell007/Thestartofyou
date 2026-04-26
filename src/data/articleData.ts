@@ -1270,7 +1270,7 @@ const articleDatabase: ArticleData[] = [
     standfirst:
       "What's actually happening in the first weeks — and how to tell the strong signals from the noise.",
     hero: {
-      src: "/src/assets/article-hero-implantation.jpg",
+      src: new URL("../assets/article-hero-implantation.jpg", import.meta.url).href,
       alt: "A person sitting quietly at home in soft natural light, hands resting on their lap.",
     },
     editorialSections: [

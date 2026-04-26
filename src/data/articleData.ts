@@ -2,6 +2,8 @@
 // Structured content for answer-first article pages.
 // Route: /articles/:slug
 
+import type { PregnancyTopicSlug } from "@/data/pregnancyTopicData";
+
 export interface ArticleRelatedLink {
   label: string;
   href: string;
@@ -134,6 +136,14 @@ export interface ArticleData {
 
   // Product promotion level
   productPromotion?: ProductPromotionLevel;
+
+  // ── New unified deep article template fields (additive) ──
+  // Parent topic page (drives breadcrumb + topic return on the new template)
+  topic?: PregnancyTopicSlug;
+  // One-line italic dek under the H1
+  standfirst?: string;
+  // Contained hero image — alt is REQUIRED for real photographs.
+  hero?: { src: string; alt: string; credit?: string };
 }
 
 // ─── Article database ──────────────────────────────────────────────────────
@@ -2407,8 +2417,40 @@ export const getArticle = (slug: string): ArticleData | null =>
 
 export const getAllArticles = (): ArticleData[] => articleDatabase;
 
-export const getRelatedArticles = (slug: string, limit = 3): ArticleData[] =>
-  articleDatabase.filter((a) => a.slug !== slug).slice(0, limit);
+// Curated → same topic → shared cornerstone. Stops rather than padding with weak matches.
+export const getRelatedArticles = (slug: string, limit = 3): ArticleData[] => {
+  const source = articleDatabase.find((a) => a.slug === slug);
+  if (!source) return [];
+
+  const seen = new Set<string>([slug]);
+  const out: ArticleData[] = [];
+
+  const push = (a: ArticleData | undefined) => {
+    if (!a || seen.has(a.slug) || out.length >= limit) return;
+    seen.add(a.slug);
+    out.push(a);
+  };
+
+  // 1. Curated relatedSlugs in order
+  source.relatedSlugs?.forEach((s) => push(articleDatabase.find((a) => a.slug === s)));
+
+  // 2. Same topic
+  if (source.topic && out.length < limit) {
+    articleDatabase
+      .filter((a) => a.topic === source.topic)
+      .forEach(push);
+  }
+
+  // 3. Shared cornerstone
+  if (source.cornerstoneSlug && out.length < limit) {
+    articleDatabase
+      .filter((a) => a.cornerstoneSlug === source.cornerstoneSlug || a.slug === source.cornerstoneSlug)
+      .forEach(push);
+  }
+
+  // No padding beyond honest matches.
+  return out;
+};
 
 export const getCornerstoneArticles = (): ArticleData[] =>
   articleDatabase.filter((a) => a.isCornerstone);

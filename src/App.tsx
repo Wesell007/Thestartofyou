@@ -11,6 +11,7 @@ import BabyTopic from "./pages/pregnancy/BabyTopic.tsx";
 import HealthAndSafetyTopic from "./pages/pregnancy/HealthAndSafetyTopic.tsx";
 import DietAndExerciseTopic from "./pages/pregnancy/DietAndExerciseTopic.tsx";
 import PreparingForBabyTopic from "./pages/pregnancy/PreparingForBabyTopic.tsx";
+import FeelingsTopic from "./pages/pregnancy/FeelingsTopic.tsx";
 import FirstTrimester from "./pages/trimester/FirstTrimester.tsx";
 import SecondTrimester from "./pages/trimester/SecondTrimester.tsx";
 import ThirdTrimester from "./pages/trimester/ThirdTrimester.tsx";

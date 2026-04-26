@@ -105,7 +105,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     groups: [
       {
-        label: "Early signs",
+        label: "The first signs",
         links: [
           { label: "Early pregnancy symptoms explained", href: "/articles/early-pregnancy-symptoms-explained" },
           { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
@@ -113,15 +113,11 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         ],
       },
       {
-        label: "Nausea & morning sickness",
+        label: "Nausea, fatigue & the early weeks",
+        description: "The symptoms that tend to define the first trimester.",
         links: [
           { label: "Complete guide to morning sickness", href: "/articles/complete-guide-morning-sickness" },
           { label: "Nausea in early pregnancy", href: "/articles/nausea-in-early-pregnancy" },
-        ],
-      },
-      {
-        label: "Energy & sleep",
-        links: [
           { label: "Fatigue in early pregnancy", href: "/articles/fatigue-in-early-pregnancy" },
         ],
       },

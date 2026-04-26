@@ -26,6 +26,10 @@ const NEW_TEMPLATE_SLUGS = new Set<string>([
   "signs-of-labour",
   "stages-of-labour",
   "when-to-go-in-for-labour",
+  "anxiety-in-pregnancy",
+  "pregnancy-after-loss",
+  "the-first-trimester-emotionally",
+  "when-the-joy-doesnt-arrive-yet",
 ]);
 
 const ArticlePage = () => {

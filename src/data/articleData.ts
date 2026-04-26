@@ -5965,6 +5965,690 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── WEIGHT CHANGES IN PREGNANCY (Phase F) ────────────────────────────────
+  {
+    slug: "weight-changes-in-pregnancy",
+    title: "Weight changes in pregnancy: a calm look at how bodies shift",
+    metaDescription: "Why weight changes differently in pregnancy, what variation is normal, and when changes are worth raising — without diet-culture pressure or numbers-on-a-chart anxiety.",
+    quickAnswer:
+      "Bodies change in pregnancy in ways that are far less uniform than charts suggest. Weight may shift quickly, slowly, in spurts, or barely at all — and most of that variation is normal. Genuine concern usually isn't about a number, but about a pattern: weight loss that doesn't ease, very rapid gain alongside swelling, or other symptoms your midwife will want to know about. The healthier focus throughout pregnancy is steady eating, gentle movement, and honest check-ins — not weighing or comparison.",
+    howThisFeels: [
+      "Wondering whether you're 'gaining the right amount'",
+      "Feeling caught between old body habits and a body that's changing on its own",
+      "Reading conflicting advice and not knowing what's actually relevant",
+      "Wanting honest information without the diet-culture pressure",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Your body is doing new physical work", body: "Blood volume rises, fluid increases, the placenta develops, breasts change, and your baby grows. Weight shifts are a side-effect of that work, not a project to manage." },
+        { heading: "Hormones change appetite and storage", body: "Pregnancy hormones change hunger, fullness cues, and how the body stores energy. None of this is a sign of doing something wrong." },
+        { heading: "Variation between bodies is enormous", body: "Two people in the same week of pregnancy can look and weigh very differently and both be entirely well." },
+      ],
+      lessCauses: [
+        { heading: "Conditions that need monitoring", body: "Sudden, rapid weight gain alongside swelling, headaches, or visual changes can sometimes signal pre-eclampsia. Significant ongoing weight loss can sometimes signal hyperemesis or other concerns. These are reasons to call, not to weigh." },
+      ],
+      whyItVaries: "Genetics, starting body, pregnancy symptoms, multiples, hydration, and how much fluid you're carrying all change the picture week to week.",
+    },
+    timing: {
+      whenStarts: "Some people notice changes in the first weeks; others not until the second trimester.",
+      whenPeaks: "Most visible body change tends to happen in the second and third trimesters.",
+      whenEases: "Body change after birth is its own slow, non-linear process — not a return to a previous version.",
+    },
+    whatItFeelsLike: [
+      "A body that feels less predictable than usual",
+      "Clothes fitting differently in unexpected places",
+      "Days where the change feels welcome and days where it doesn't",
+    ],
+    whatThisMeans:
+      "Weight in pregnancy isn't a performance metric. It's one piece of information your midwife may glance at, in the context of everything else.",
+    normal: [
+      "Slow, fast, or uneven weight change across pregnancy",
+      "Some weeks of no visible change",
+      "Body shape changing in places you didn't expect",
+      "Carrying differently from someone else at the same stage",
+    ],
+    seekSupport: [
+      "Sudden, rapid weight gain with swelling, headaches, or visual changes",
+      "Significant ongoing weight loss, especially with persistent vomiting",
+      "Any changes that come with new symptoms you're worried about",
+    ],
+    disclaimer: "This is general guidance, not a substitute for professional care. If something about how your body is changing is worrying you, please speak to your midwife or GP.",
+    whatYouCanDo: [
+      { action: "Step away from the scales unless your care team has asked you to weigh", reason: "Routine self-weighing in pregnancy rarely helps and often increases anxiety." },
+      { action: "Eat regularly and well, without rules", reason: "Steady eating supports both you and your baby far more reliably than tracking numbers." },
+      { action: "Move in ways your body can manage", reason: "Gentle movement helps energy, sleep, and mood — not weight control." },
+      { action: "Talk to your midwife about anything that worries you", reason: "They can put any change into the context of your wider pregnancy." },
+    ],
+    whatHappensNext: "Bodies continue to change after birth, slowly and not always in the directions people expect. The healthiest approach is the same one as in pregnancy: steady eating, gentle care, and not measuring yourself against a chart.",
+    relatedStage: {
+      intro: "Weight changes sit inside the wider Health & safety topic:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Eating well in pregnancy", href: "/articles/eating-well-in-pregnancy", context: "The food side, calmly." },
+        { label: "Moving your body in pregnancy", href: "/articles/moving-your-body-in-pregnancy", context: "Realistic movement guidance." },
+      ],
+    },
+    aiPrompts: [
+      "How much weight should I gain in pregnancy?",
+      "Is it normal to lose weight in early pregnancy?",
+      "When should I worry about weight gain in pregnancy?",
+    ],
+    captureIntro: "How your body is actually feeling in this season — without judgement, charts, or comparison.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["eating-well-in-pregnancy", "moving-your-body-in-pregnancy", "when-you-cant-face-food-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Bodies change in pregnancy at very different paces — variation is normal",
+      "A number on the scales is rarely the most useful piece of information",
+      "Steady eating and gentle movement matter more than tracking weight",
+      "Sudden gain with swelling, or significant loss with vomiting, is worth raising",
+      "Comparison to other pregnancies usually creates worry, not insight",
+    ],
+    sources: [
+      "NHS — Have a healthy diet in pregnancy",
+      "NHS — Weight gain in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists — Healthy eating and exercise",
+      "Tommy's — Weight management in pregnancy",
+      "NICE — Antenatal care",
+    ],
+    faq: [
+      { question: "How much weight should I gain in pregnancy?", answer: "There isn't a single right answer for everyone. UK midwifery care doesn't routinely weigh people throughout pregnancy because a number on the scales tells you very little on its own. Your midwife will look at the wider picture — how you're feeling, how your baby is growing, and any other signs — rather than focusing on weight." },
+      { question: "Is it normal to lose weight in early pregnancy?", answer: "Yes — particularly if you're experiencing nausea, vomiting, or food aversions. Mild weight loss in the first trimester is common and not usually a concern. If you're losing weight rapidly, can't keep food or fluid down, or are feeling very unwell, please speak to your midwife or GP." },
+      { question: "Should I be weighing myself at home?", answer: "Most pregnancies don't need this, and for many people it adds anxiety without adding useful information. Unless your care team has specifically asked you to track weight, it's usually kinder to step away from the scales." },
+      { question: "What if I'm worried about gaining too much weight?", answer: "It's worth talking to your midwife rather than restricting food. Restriction in pregnancy carries its own risks for you and your baby. Your midwife can support you with steady, sustainable approaches to eating and movement that aren't about diet culture." },
+      { question: "When is weight gain in pregnancy worth raising?", answer: "Sudden, rapid weight gain — especially alongside swelling in the face or hands, headaches, or visual changes — should be raised promptly, as it can sometimes be a sign of pre-eclampsia. Otherwise, the pattern of change tends to matter more than the amount." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "health-and-safety",
+    standfirst:
+      "A calm look at how bodies change in pregnancy — without diet-culture pressure, charts, or comparison. What's normal, what isn't, and where to put your attention instead.",
+    editorialSections: [
+      {
+        id: "weight-changes-in-pregnancy",
+        heading: "Weight changes in pregnancy",
+        lead: "Bodies in pregnancy change in ways that don't fit neatly onto a chart.",
+        paragraphs: [
+          "Weight in pregnancy is one of the areas where people are most likely to be handed conflicting messages, often soaked in the language of diet culture. The honest picture is calmer than that — and more useful.",
+          "This is a steady look at why bodies change in pregnancy, what kinds of change tend to be normal, and the small number of moments where weight is genuinely worth raising with your midwife.",
+        ],
+      },
+      {
+        id: "why-bodies-change-differently",
+        heading: "Why bodies change differently",
+        lead: "Pregnancy adds physical work to your body in a lot of directions at once.",
+        paragraphs: [
+          "Blood volume increases substantially. Fluid rises. The placenta develops. Your breasts change. Your baby grows. None of these happen at the same rate in every body, and none of them happen on a fixed timetable.",
+          "On top of that, hormones change appetite, fullness cues, and how energy is stored. Two people the same height in the same week of pregnancy can look and weigh very differently, and both be entirely well.",
+        ],
+      },
+      {
+        id: "what-kinds-of-change-are-normal",
+        heading: "What kinds of change are normal",
+        lead: "Almost any pattern, within reason, sits inside normal.",
+        paragraphs: [
+          "Some people gain steadily from early on. Some don't notice much until the second trimester. Some lose a little in the first weeks because of nausea and aversions. Some carry their weight low, others high, others mostly out, others mostly around. All of this can be normal.",
+          "Body shape can also change in places you weren't expecting — face, arms, hips, breasts. None of that is a sign of doing pregnancy 'right' or 'wrong'.",
+        ],
+      },
+      {
+        id: "why-comparison-doesnt-help",
+        heading: "Why comparison usually doesn't help",
+        lead: "The body next to you isn't a reference point.",
+        paragraphs: [
+          "Comparing yourself to other pregnant people — in real life or online — almost always tells you less than it makes you feel. Pregnancies look different because bodies are different, not because anyone's doing it correctly or incorrectly.",
+          "The same is true of comparison to your own past pregnancies. Each one tends to look and feel a little different.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Carrying differently from someone else at the same week is one of the most common, least concerning things in pregnancy.",
+        },
+      },
+      {
+        id: "when-weight-changes-are-worth-raising",
+        heading: "When weight changes are worth raising",
+        lead: "There are a small number of patterns that midwives genuinely want to hear about.",
+        paragraphs: [
+          "Sudden, rapid weight gain — especially when it comes alongside swelling in the face or hands, headaches, or changes in your vision — should be raised promptly. It can sometimes be a sign of pre-eclampsia.",
+          "Significant, ongoing weight loss — especially with persistent vomiting, dehydration, or feeling very unwell — is also worth raising. It can sometimes signal hyperemesis or another concern that needs more support.",
+        ],
+      },
+      {
+        id: "how-midwives-and-doctors-think-about-it",
+        heading: "How midwives and doctors think about it",
+        lead: "The picture they care about is wider than the scales.",
+        paragraphs: [
+          "UK antenatal care doesn't routinely weigh people throughout pregnancy. Weight on its own tells your care team very little. What they're paying attention to is the wider picture: how you're feeling, how your baby is growing, your blood pressure, and any specific symptoms.",
+          "If weight does come up at an appointment, it's usually because something else has prompted the conversation. It's a piece of information, not a verdict.",
+        ],
+      },
+      {
+        id: "keeping-the-focus-on-health",
+        heading: "Keeping the focus on health, not numbers",
+        lead: "There's a quieter, more sustainable place to put your attention.",
+        paragraphs: [
+          "Eating regularly and reasonably well — without rules or restriction — supports you and your baby far more reliably than tracking numbers. So does moving in ways your body can actually manage on the day, sleeping when you can, and asking for support when something feels off.",
+          "Pregnancy is a hard season to undertake a project on your body. The kinder, more useful approach is usually to let the body do its work and to focus your attention elsewhere.",
+        ],
+      },
+    ],
+  },
+
+  // ─── HOSPITAL BAG AND WHAT TO PACK (Phase F) ──────────────────────────────
+  {
+    slug: "hospital-bag-and-what-to-pack",
+    title: "Hospital bag and what to pack: a calm, anti-overpacking guide",
+    metaDescription: "What you actually need in a hospital bag, what's nice but optional, and what often gets overpacked. A calm, practical guide for labour, after birth, and your baby.",
+    quickAnswer:
+      "A hospital bag for birth doesn't need to be huge. The genuine essentials are documents, comfortable clothing for labour and after, basic toiletries, snacks and drink, phone charger, going-home outfits for you and your baby, nappies, and a car seat for the journey home. Most other things are nice but optional. Pack by around 36 weeks, keep it accessible, and resist the urge to bring your whole bathroom — hospitals generally aren't short of the things you'd assume to bring.",
+    howThisFeels: [
+      "Looking at long checklists and feeling instantly overwhelmed",
+      "Wondering whether you're under-packing or over-packing",
+      "Wanting a calm, real list rather than a commercial one",
+      "Trying to make your bag feel like a small, manageable project",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Lists online lean towards over-packing", body: "A lot of hospital bag content is checklist-heavy, often shaped by product sales rather than what people actually use." },
+        { heading: "Hospitals provide more than people expect", body: "Most UK maternity units provide pads, basic pain relief, food and drink, and nappies during your stay. You don't need to replicate that." },
+        { heading: "Stays vary in length", body: "Some people are home within hours of birth; some stay several days. Packing for the middle of that range is usually about right." },
+      ],
+      lessCauses: [],
+      whyItVaries: "Different hospitals, different birth plans, and different personal preferences all change what's worth bringing.",
+    },
+    timing: {
+      whenStarts: "Most people pack their bag from around 34–36 weeks.",
+      whenEases: "Once it's by the door, you can usually stop thinking about it.",
+    },
+    whatItFeelsLike: [
+      "A small, satisfying job among many bigger ones",
+      "An occasional tug to add 'just one more thing'",
+      "Quiet reassurance once it's sitting ready",
+    ],
+    whatThisMeans:
+      "Packing a hospital bag is best done as a calm, practical task — not a comprehensive emergency kit.",
+    normal: [
+      "Packing in stages, adding things as you think of them",
+      "Forgetting something and not really minding",
+      "Realising you've barely opened most of it after the birth",
+    ],
+    seekSupport: [
+      "Anxiety around birth that the packing isn't easing — your midwife can help here, not the bag",
+    ],
+    disclaimer: "Always check what your specific maternity unit asks you to bring or not bring. Lists vary slightly between hospitals.",
+    whatYouCanDo: [
+      { action: "Pack by around 36 weeks", reason: "Late enough to feel real, early enough not to be a panic." },
+      { action: "Keep it accessible", reason: "By the door, in the car, or somewhere a partner or friend can grab quickly." },
+      { action: "Pack a smaller 'labour bag' inside the main one", reason: "So the things you need most aren't buried." },
+      { action: "Remember nappies and a car seat", reason: "These are the two things you genuinely cannot leave without." },
+    ],
+    whatHappensNext: "After birth, most people use far less of their bag than they expected — and remember almost nothing about most of what they packed.",
+    relatedStage: {
+      intro: "Hospital bag sits inside the wider Preparing for baby topic:",
+      links: [
+        { label: "Preparing for baby", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "Writing a birth plan", href: "/articles/writing-a-birth-plan", context: "Birth preferences, kept flexible." },
+        { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to", context: "What home actually needs." },
+      ],
+    },
+    aiPrompts: [
+      "What do I really need in a hospital bag?",
+      "When should I pack my hospital bag?",
+      "What gets overpacked for hospital?",
+    ],
+    captureIntro: "What you're packing, what you've decided to leave, and how you're feeling about going in.",
+    trimester: [3],
+    relatedSlugs: ["writing-a-birth-plan", "the-space-your-baby-will-come-home-to", "signs-of-labour"],
+    journey: ["pregnancy"],
+    topics: ["preparing-for-baby"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Hospitals provide more than people assume — you don't need to bring everything",
+      "Pack by around 36 weeks and keep the bag accessible",
+      "Documents, basic clothing, snacks, charger, nappies, and car seat are the real essentials",
+      "Nice-but-optional things are exactly that — nice, optional",
+      "Most people barely open most of their bag during the stay",
+    ],
+    sources: [
+      "NHS — What to pack for your hospital bag",
+      "Tommy's — Hospital bag for labour",
+      "Royal College of Midwives",
+      "NCT — Preparing for birth",
+    ],
+    faq: [
+      { question: "When should I pack my hospital bag?", answer: "Most people pack between 34 and 36 weeks. That's late enough that it feels real, and early enough that it isn't a last-minute scramble. Keep it somewhere accessible once it's packed." },
+      { question: "What's the most overpacked thing?", answer: "Clothes — for both labour and after. Most people use one or two outfits for labour, one for after, and one to go home in. Bringing a small wardrobe rarely helps. Toiletries are a close second." },
+      { question: "Do I need to bring nappies and baby clothes?", answer: "Most UK hospitals provide nappies during your stay, but you'll want a few for the journey home and a couple of going-home outfits in different sizes — newborns vary. Always check your specific hospital's guidance." },
+      { question: "What about food and drink?", answer: "A bottle of water, a few snacks, and something for a partner if they're staying. Hospitals provide meals but they don't always line up with when labour leaves you hungry. Snacks you actually like are a small comfort." },
+      { question: "What can I leave at home?", answer: "Most heavy electronics, big toiletry hauls, candles or oils unless you've checked they're allowed, and anything you'd be upset to lose. Keep it simple." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "preparing-for-baby",
+    standfirst:
+      "A calm, anti-overpacking guide to your hospital bag — what you'll actually use, what your baby actually needs, and what almost always gets brought home untouched.",
+    editorialSections: [
+      {
+        id: "hospital-bag-and-what-to-pack",
+        heading: "Hospital bag and what to pack",
+        lead: "A small, sensible bag is almost always better than a large, exhaustive one.",
+        paragraphs: [
+          "There is a long tradition of hospital bag lists that read more like packing for a fortnight away than a short hospital stay around the birth of a baby. The honest version is calmer.",
+          "What follows is a grounded guide to what you'll genuinely want for labour, after birth, and for your baby — and a clear word on what tends to be overpacked.",
+        ],
+      },
+      {
+        id: "what-youll-want-for-labour",
+        heading: "What you'll want for labour",
+        lead: "A short list of things that actually help.",
+        paragraphs: [
+          "A loose, comfortable outfit you don't mind getting messy — an old nightshirt or oversized T-shirt works well. A hair tie if you have long hair. A water bottle, ideally one you can drink from while lying down. Lip balm, because hospital air dries you out.",
+          "Snacks for energy — nothing too heavy. Phone and a long charger cable. Slippers or grippy socks. Anything small that brings comfort: a familiar pillow, a soft blanket, music or an audiobook downloaded ready to use.",
+        ],
+      },
+      {
+        id: "what-youll-want-after-birth",
+        heading: "What you'll want after birth",
+        lead: "Practical, comfortable, and not too much.",
+        paragraphs: [
+          "Big, comfortable knickers — several pairs. Maternity pads. A loose, button-front nightshirt or T-shirts if you're planning to breastfeed. A nursing bra or two. Dark, soft loungewear for the day or two after.",
+          "Basic toiletries: toothbrush, toothpaste, a flannel, a small towel if you'd prefer your own. Anything you find genuinely soothing — your own shampoo, hand cream, a familiar face wash. You don't need a full bathroom shelf.",
+        ],
+      },
+      {
+        id: "what-your-baby-actually-needs",
+        heading: "What your baby actually needs",
+        lead: "Less than the lists suggest.",
+        paragraphs: [
+          "A few vests and babygros in different sizes — newborns vary in size more than people expect. A hat. A blanket or two. A coat or snowsuit if it's cold (not in the car seat — over the top of the straps).",
+          "A small pack of newborn nappies for the journey home, even if your hospital provides some during the stay. Cotton wool and water, or fragrance-free wipes — check what your hospital prefers. A car seat, properly fitted, for the journey home. That last one is the only baby item you genuinely cannot leave the hospital without.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Most UK maternity units provide nappies during your stay. You don't need to bring a full pack — just enough for the journey home and the first few hours.",
+        },
+      },
+      {
+        id: "what-is-nice-but-not-essential",
+        heading: "What is nice but not essential",
+        lead: "Bring some of these if they bring you comfort. Don't feel obliged.",
+        paragraphs: [
+          "A pillow from home. A speaker or earbuds. A reusable water bottle for a partner. A small notebook. Eye mask and earplugs for sleeping in a busy ward. A few coins for vending machines or hospital car parks.",
+          "Anything that signals 'home' to you in a small way — a familiar scent, a particular tea, a cardigan you love — is often worth more than another change of clothes.",
+        ],
+      },
+      {
+        id: "what-often-gets-overpacked",
+        heading: "What often gets overpacked",
+        lead: "The honest list of what comes home untouched.",
+        paragraphs: [
+          "Multiple outfits for labour. Several pairs of pyjamas. Heavy makeup or full skincare routines. Big toiletry hauls. A wardrobe of baby outfits. Extra books and magazines. Heavy electronics. Anything fragile or expensive.",
+          "If a hospital bag is heavy enough to be hard to carry, it's almost certainly too much. A small, neat bag plus a separate baby bag is a perfectly reasonable shape.",
+        ],
+      },
+      {
+        id: "when-to-pack-your-bag",
+        heading: "When to pack your bag",
+        lead: "Late enough to feel real, early enough not to be a panic.",
+        paragraphs: [
+          "Around 34–36 weeks is the usual timing. By 37 weeks it's worth having it accessible — by the door, in the car, or somewhere a partner or friend can grab without searching.",
+          "Pack a smaller 'labour bag' inside the main one — the things you'll want during labour itself, kept easy to find. The rest can stay in the larger bag for the after-birth part of the stay.",
+        ],
+      },
+    ],
+  },
+
+  // ─── PREPARING EMOTIONALLY FOR BIRTH (Phase F) ────────────────────────────
+  {
+    slug: "preparing-emotionally-for-birth",
+    title: "Preparing emotionally for birth: a steady, honest look at how to feel readier",
+    metaDescription: "What it really means to prepare emotionally for birth — how fear, curiosity, and readiness can coexist, what helps you feel steadier, and when fear may need more support.",
+    quickAnswer:
+      "Emotional preparation for birth isn't about feeling no fear. It's about being able to hold fear, uncertainty, hope, and readiness in the same hands. The most useful preparation tends to combine the practical (knowing what's likely to happen) with the emotional (naming what you're afraid of, who you want around you, what you want to feel held by). Where fear becomes dread that doesn't ease, or where birth feels too frightening to think about at all, that's a clear reason to talk to your midwife or GP.",
+    howThisFeels: [
+      "Wanting to feel calmer about birth without pretending you're not scared",
+      "Reading birth stories and not knowing which to trust",
+      "Hope and dread arriving in the same hour",
+      "Wondering whether 'preparation' is even the right word for an unknown",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Birth is a big unknown", body: "Even with all the information in the world, no one can tell you exactly how your birth will unfold. The brain doesn't love that, and that's a normal response, not a failure." },
+        { heading: "Cultural messages about birth are loud and mixed", body: "From hypnobirthing optimism to dramatic TV portrayals, the stories around birth pull people in different directions. Most are partly true and partly not." },
+        { heading: "The body remembers", body: "Past medical experiences, previous births, or earlier loss can shape how birth feels emotionally now." },
+      ],
+      lessCauses: [
+        { heading: "Tokophobia or severe birth fear", body: "Some people experience an intense fear of birth that goes beyond ordinary worry. This is recognised, real, and worth talking to your midwife or GP about — there are specific routes of support." },
+      ],
+      whyItVaries: "Personal history, current support, and how birth is being talked about around you all change how it lands emotionally.",
+    },
+    timing: {
+      whenStarts: "Some people start thinking about birth from early pregnancy; for others it only becomes real in the third trimester.",
+      whenPeaks: "Often in the last few weeks, as birth feels closer.",
+      whenEases: "For many, the days of active labour itself feel surprisingly focused. The anticipation is often heavier than the moment.",
+    },
+    whatItFeelsLike: [
+      "A pull between wanting to know everything and not wanting to think about it",
+      "Days of curiosity, days of dread",
+      "Wanting reassurance without being patronised",
+    ],
+    whatThisMeans:
+      "Emotional preparation for birth is something you build slowly — not a single workshop or technique, but a quiet collection of conversations, decisions, and small reassurances.",
+    normal: [
+      "Feeling scared, uncertain, hopeful, and ready in the same week",
+      "Avoiding birth content for stretches",
+      "Wanting more information sometimes and less other times",
+      "Crying about birth without knowing exactly why",
+    ],
+    seekSupport: [
+      "Persistent dread or panic that doesn't ease",
+      "Avoidance of all birth conversations because they're too overwhelming",
+      "A history of birth trauma or medical trauma that's resurfacing",
+      "Severe fear of birth (tokophobia) — your midwife or GP can refer you for specific support",
+    ],
+    disclaimer: "This is general guidance, not a substitute for professional care. If birth is feeling unmanageably frightening, please speak to your midwife or GP — there are specific perinatal services for this.",
+    whatYouCanDo: [
+      { action: "Name what you're actually afraid of", reason: "Vague fear is heavier than specific fear. Naming it usually makes it more workable." },
+      { action: "Choose carefully who you talk to about birth", reason: "Some birth stories help, some don't. You can step away from the ones that don't." },
+      { action: "Think about who you want with you, and how", reason: "Knowing who is in the room — and what role you want them to play — is one of the most settling forms of preparation." },
+      { action: "Talk to your midwife about your fears", reason: "They've heard them all. They're the right place to bring this." },
+      { action: "Consider an antenatal class if it suits you", reason: "Knowing what's likely to happen during labour reduces the unknown for many people." },
+    ],
+    whatHappensNext: "Birth itself, for most people, ends up being its own experience — sometimes harder than they hoped, sometimes easier, almost always not exactly what they planned. Preparing emotionally is about meeting it as steadily as you can, not predicting it.",
+    relatedStage: {
+      intro: "Preparing emotionally for birth sits between Feelings and Labour & birth:",
+      links: [
+        { label: "Your feelings in pregnancy", href: "/pregnancy/feelings", context: "The wider topic this article belongs to." },
+        { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy", context: "On worry, more broadly." },
+        { label: "Signs of labour", href: "/articles/signs-of-labour", context: "What labour can look like as it begins." },
+      ],
+    },
+    aiPrompts: [
+      "How do I prepare emotionally for birth?",
+      "Is it normal to be scared of giving birth?",
+      "What helps with fear of birth?",
+    ],
+    captureIntro: "What you're hoping for, what you're scared of, and what you want to feel held by when birth comes.",
+    trimester: [2, 3],
+    relatedSlugs: ["anxiety-in-pregnancy", "signs-of-labour", "writing-a-birth-plan"],
+    journey: ["pregnancy"],
+    topics: ["feelings"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Emotional preparation isn't about feeling no fear — it's about being able to hold it",
+      "Fear, hope, curiosity, and dread can all coexist and still be normal",
+      "Naming specific fears tends to make them more workable than vague worry",
+      "Choosing who's with you and how is one of the most grounding forms of preparation",
+      "Persistent dread or severe fear of birth deserves specific support — talk to your midwife",
+    ],
+    sources: [
+      "NHS — Preparing for birth",
+      "Tommy's — Tokophobia",
+      "Birth Trauma Association",
+      "Maternal Mental Health Alliance",
+      "NICE — Antenatal and postnatal mental health",
+    ],
+    faq: [
+      { question: "Is it normal to be scared of giving birth?", answer: "Yes — extremely. Birth is a big, unknown event, and almost everyone approaches it with some fear. Naming the fear, choosing who you talk to about it, and bringing it to your midwife are all healthier than trying to suppress it." },
+      { question: "What's the difference between normal birth fear and tokophobia?", answer: "Normal fear comes and goes, tends to be specific, and doesn't stop you engaging with pregnancy. Tokophobia is a more intense, persistent fear of birth that can include avoidance, panic, or difficulty thinking about birth at all. It's recognised, real, and worth raising with your midwife or GP — there are specific perinatal mental health services that can help." },
+      { question: "Will hypnobirthing or antenatal classes help?", answer: "They help some people a lot and aren't right for everyone. The honest answer is that no single method guarantees a particular birth experience. What classes can usefully offer is information, language for what's happening, and a sense of preparedness — which often eases anxiety even if birth itself doesn't go as planned." },
+      { question: "How do I deal with scary birth stories?", answer: "You're allowed to step away from them. You can ask people not to share their birth story, change the subject in conversations, or unfollow content that's leaving you more anxious. Curating what you take in isn't avoidance — it's care." },
+      { question: "What if I've had birth trauma before?", answer: "Please tell your midwife early. Many areas have a Birth Afterthoughts service or specialist midwives who support people through subsequent births after trauma. Specific trauma-focused therapy can also be very effective. You don't have to carry this into another birth alone." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "feelings",
+    standfirst:
+      "Emotional preparation for birth isn't about feeling no fear. It's about being able to hold fear, hope, and readiness in the same hands — and knowing where to put your attention when fear feels too big.",
+    editorialSections: [
+      {
+        id: "preparing-emotionally-for-birth",
+        heading: "Preparing emotionally for birth",
+        lead: "A different kind of preparation from packing a bag or writing a plan.",
+        paragraphs: [
+          "Practical preparation for birth — bag packed, plan written, route to hospital known — only goes so far. Most of what makes birth feel manageable is emotional, and that takes a quieter, slower kind of work.",
+          "This is a steady look at what emotional preparation for birth can actually mean, what tends to help, and where fear is worth bringing to someone else.",
+        ],
+      },
+      {
+        id: "what-people-often-feel",
+        heading: "What people often feel as birth gets closer",
+        lead: "The feelings rarely sort themselves into one shape.",
+        paragraphs: [
+          "As birth approaches, most people feel some combination of fear, curiosity, hope, dread, readiness, impatience, and disbelief — sometimes all in the same day. None of this is unusual, and none of it is a sign of doing pregnancy badly.",
+          "Some people feel calmer the closer birth gets. Some feel more frightened. Some swing between the two. There isn't a correct emotional progression.",
+        ],
+      },
+      {
+        id: "fear-uncertainty-not-knowing",
+        heading: "Fear, uncertainty, and not knowing",
+        lead: "Birth is genuinely an unknown, and the brain notices.",
+        paragraphs: [
+          "Even with every piece of information available, no one can tell you exactly how your birth will unfold. That's the honest part. The brain doesn't love uncertainty, and so it tries to fill in the gap — sometimes with reasonable preparation, sometimes with worst-case thinking.",
+          "Naming a specific fear — 'I'm afraid I won't be listened to', 'I'm afraid of losing control', 'I'm afraid of pain I can't manage' — almost always makes it more workable than carrying a vague, heavy sense of dread.",
+        ],
+      },
+      {
+        id: "what-can-help-feel-steadier",
+        heading: "What can help you feel steadier",
+        lead: "Small things, done consistently, more than big single interventions.",
+        paragraphs: [
+          "Knowing who's going to be with you, and what role you want them to play, is one of the most settling forms of preparation. So is knowing what's likely to happen in labour — not in detail, but in shape — so the experience itself isn't entirely unfamiliar.",
+          "Talking to your midwife about your fears, choosing what kinds of birth content you take in (and stepping away from the rest), and rehearsing one or two phrases you'd want to use during labour ('I need a break', 'I want more information') can all help.",
+        ],
+      },
+      {
+        id: "preparation-that-is-emotional",
+        heading: "Preparation that is emotional, not just practical",
+        lead: "There's a quieter side to readiness.",
+        paragraphs: [
+          "Emotional preparation can include processing previous birth experiences, talking through any medical history that might come up, writing down what you'd want someone to remind you of in labour, or simply spending time imagining yourself in the hours and days after birth — not just during it.",
+          "Some people find antenatal classes, hypnobirthing, or therapy useful. Some find quieter, more private preparation works better. There's no single right way, and no preparation method guarantees a particular birth.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Feeling 'ready' for birth doesn't mean feeling fearless. It usually means knowing where you stand, who's with you, and that you can ask for what you need.",
+        },
+      },
+      {
+        id: "when-fear-takes-over",
+        heading: "When fear starts to take over",
+        lead: "There's a clearer line where extra support is worth seeking.",
+        paragraphs: [
+          "If fear of birth is constant and not easing, if you find yourself unable to think about birth at all without panic, or if dread is interfering with sleep, daily life, or your wider feelings about pregnancy, that's worth bringing to your midwife or GP.",
+          "Severe fear of birth — sometimes called tokophobia — is recognised, common, and supported. So is the resurfacing of past birth trauma or medical trauma. There are specific perinatal mental health services for this, and asking earlier is almost always easier than asking later.",
+        ],
+      },
+      {
+        id: "what-support-may-help",
+        heading: "What support may help",
+        lead: "More options than people often realise.",
+        paragraphs: [
+          "Your midwife can talk through your fears, refer you to perinatal mental health services where they're available, or — in many areas — to a Birth Afterthoughts or birth reflections service if a previous birth is part of what's coming up.",
+          "Specialist midwives, talking therapies, and trauma-focused therapy are all real options. Charities like the Birth Trauma Association, Tommy's, and the Maternal Mental Health Alliance also offer information and support. You don't have to do this part of the preparation alone.",
+        ],
+      },
+    ],
+  },
+
+  // ─── BABY MOVEMENT IN PREGNANCY (Phase F) ─────────────────────────────────
+  {
+    slug: "baby-movement-in-pregnancy",
+    title: "Baby movement in pregnancy: when it starts, how it changes, and when to call",
+    metaDescription: "When baby movement is usually first felt, how it changes through pregnancy, what variation is normal, and when reduced or changed movement is worth raising urgently.",
+    quickAnswer:
+      "Most people first feel their baby move between around 16 and 24 weeks, with later first pregnancies tending to feel it later. Movement gradually becomes more distinct and patterned through the second and third trimesters. There is no set number of movements you should feel a day — what matters is your baby's own pattern. If movements feel reduced, slower, or different from what's usual for you, contact your maternity unit straight away, day or night. This is one of the few moments in pregnancy where waiting isn't the right approach.",
+    howThisFeels: [
+      "Wondering whether what you felt was movement or wind",
+      "Loving the feeling and finding it strange in the same moment",
+      "Counting kicks anxiously and not knowing if you're doing it right",
+      "Worrying when a quiet day arrives",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Movement starts earlier than you can feel it", body: "Your baby is moving from very early in pregnancy. You only start to feel it once they're large enough — and once your placenta and your own body let those movements through." },
+        { heading: "Patterns become more individual over time", body: "By the third trimester, most babies have their own rhythm — busier or quieter at certain times, more active in particular positions." },
+        { heading: "Movements change as space changes", body: "Late in pregnancy, kicks tend to give way to rolls, stretches, and pressure rather than disappearing." },
+      ],
+      lessCauses: [
+        { heading: "Reduced movement", body: "A real change in your baby's usual pattern of movement is one of the few signs that warrants immediate contact with your maternity unit." },
+      ],
+      whyItVaries: "Where the placenta sits, your body shape, your baby's position, and your own activity all change how much movement you feel.",
+    },
+    timing: {
+      whenStarts: "First-time pregnancies usually feel movement around 18–24 weeks. Later pregnancies often feel it earlier — sometimes from 16 weeks.",
+      whenPeaks: "Movement is usually strongest and most regular between around 28 and 36 weeks.",
+      whenEases: "Movements don't ease before birth — they may feel different (less room) but should not become fewer.",
+    },
+    whatItFeelsLike: [
+      "Bubbles, flutters, or popcorn at first",
+      "Clearer kicks and nudges by mid-pregnancy",
+      "Rolls, stretches, and pressure in the third trimester",
+    ],
+    whatThisMeans:
+      "Your baby's movement pattern is a quiet, ongoing form of communication. Your job isn't to count perfectly — it's to know what's normal for them and to act if that changes.",
+    normal: [
+      "Feeling first movements anywhere from around 16 to 24 weeks",
+      "Quiet stretches followed by busy ones",
+      "Movements that feel different at different times of day",
+      "More active when you're resting; quieter when you're moving",
+    ],
+    seekSupport: [
+      "Reduced movements compared with what's normal for your baby",
+      "Movements that feel weaker, slower, or different in pattern",
+      "No movements felt for a stretch you'd usually expect to feel some",
+      "Any sense that 'something feels off' about how your baby is moving",
+    ],
+    disclaimer: "If you're worried about your baby's movements, contact your maternity unit straight away — day or night. Do not wait until the next day, and do not wait to see if it changes. This is one of the clearest 'call now' moments in pregnancy.",
+    whatYouCanDo: [
+      { action: "Get to know your baby's pattern", reason: "There's no universal number — your baby's own rhythm is the reference point." },
+      { action: "Don't rely on apps or counting alone", reason: "UK guidance has moved away from kick counts towards knowing your baby's pattern." },
+      { action: "Call your maternity unit if anything feels different", reason: "Reduced or changed movement is taken seriously and assessed quickly." },
+      { action: "Don't try to provoke movement and then go to bed reassured", reason: "If something felt off, ring even if movements then resume — your unit would rather hear from you." },
+    ],
+    whatHappensNext: "Most reduced-movement calls turn out to be reassuring. The reason midwives ask you to call is precisely because it's one of the few signs that, when acted on quickly, can make a real difference.",
+    relatedStage: {
+      intro: "Baby movement sits inside the wider Baby topic:",
+      links: [
+        { label: "Your baby in pregnancy", href: "/pregnancy/baby", context: "The wider topic this article belongs to." },
+        { label: "How your baby develops in pregnancy", href: "/articles/how-your-baby-develops-in-pregnancy", context: "The wider arc of growth." },
+        { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide", context: "The window where movement is most established." },
+      ],
+    },
+    aiPrompts: [
+      "When will I first feel my baby move?",
+      "What does reduced movement mean?",
+      "Should I count my baby's kicks?",
+    ],
+    captureIntro: "What movements are starting to feel like, and the small patterns you're noticing.",
+    trimester: [2, 3],
+    relatedSlugs: ["how-your-baby-develops-in-pregnancy", "third-trimester-complete-guide", "signs-of-labour"],
+    journey: ["pregnancy"],
+    topics: ["baby"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Most people first feel movement between 16 and 24 weeks",
+      "Movements should not reduce or stop at the end of pregnancy",
+      "There's no set number — knowing your baby's own pattern is what matters",
+      "Reduced or changed movement is one of the few 'call straight away' moments",
+      "Maternity units would always rather you ring than wait",
+    ],
+    sources: [
+      "NHS — Your baby's movements",
+      "Tommy's — Baby's movements in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists — Your baby's movements",
+      "Kicks Count",
+      "NICE — Antenatal care",
+    ],
+    faq: [
+      { question: "When will I first feel my baby move?", answer: "Most first-time pregnancies feel movement between around 18 and 24 weeks. If you've been pregnant before, you'll often recognise it earlier — sometimes from around 16 weeks. Where your placenta sits and your body shape can both delay or muffle the first feelings." },
+      { question: "How many movements should I feel a day?", answer: "There isn't a set number. UK guidance has deliberately moved away from kick counts because babies are individual, and chasing a number can be misleading. What matters is knowing what's usual for your baby — when they tend to be busy, when they tend to be quiet — and acting if that changes." },
+      { question: "Do babies move less towards the end of pregnancy?", answer: "No. This is a very common myth, and an important one to put down. Movements may feel different in late pregnancy because there's less room — more rolls and stretches, fewer big kicks — but they should not become fewer. Reduced movement at any stage of late pregnancy needs to be checked." },
+      { question: "What should I do if I think movements have reduced?", answer: "Contact your maternity unit straight away — day or night. Don't wait, and don't try to wake the baby up first and then go to bed reassured. If you noticed a change, ring. Your unit would much rather assess you and find everything well than have you wait." },
+      { question: "Will my unit mind me ringing?", answer: "No. Maternity units are very clear that they want to hear from you about reduced or changed movement, every time. Ringing repeatedly during pregnancy if something feels off is exactly what the system is set up for." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "baby",
+    standfirst:
+      "When movement is usually first felt, how it changes as pregnancy goes on, and the one moment where waiting isn't the right approach. A grounded, trustworthy guide.",
+    editorialSections: [
+      {
+        id: "baby-movement-in-pregnancy",
+        heading: "Baby movement in pregnancy",
+        lead: "One of the most important, and most misunderstood, parts of pregnancy.",
+        paragraphs: [
+          "Feeling your baby move is one of the quiet milestones of pregnancy — and also one of the only ongoing signs you have of how they're doing between appointments.",
+          "What follows is a calm, careful guide to when movement usually starts, how it changes through pregnancy, what variation is normal, and the one moment where waiting genuinely isn't the right approach.",
+        ],
+      },
+      {
+        id: "when-movement-is-first-felt",
+        heading: "When movement is usually first felt",
+        lead: "Earlier than people expect for some, later for others.",
+        paragraphs: [
+          "Most first-time pregnancies feel movement somewhere between 18 and 24 weeks. If you've been pregnant before, you'll often recognise the feeling earlier — sometimes from around 16 weeks — because you know what you're looking for.",
+          "Where your placenta sits matters too. An anterior placenta (one at the front of your uterus) can muffle early movements and delay the first feeling. This isn't a sign of anything being wrong, just of the cushion sitting between you and your baby.",
+        ],
+      },
+      {
+        id: "how-movement-changes-over-time",
+        heading: "How movement changes over time",
+        lead: "From flutters to a recognisable rhythm.",
+        paragraphs: [
+          "Early movements are often described as bubbles, flutters, or popcorn. Through the second trimester these become clearer — kicks, nudges, the shift of a small body. By the third trimester, most babies have their own pattern: busier at certain times of day, quieter at others.",
+          "As space gets tighter in late pregnancy, the type of movement changes. There are usually fewer large kicks and more rolls, stretches, and steady pressure. The frequency, however, should not reduce.",
+        ],
+      },
+      {
+        id: "what-variation-is-normal",
+        heading: "What variation is normal",
+        lead: "Babies are individual. Patterns are individual.",
+        paragraphs: [
+          "Some babies are most active in the evening; some early in the morning. Most are quieter when you're moving (you're rocking them) and busier when you're sitting or lying still. Some have long sleep stretches; some don't.",
+          "What matters is your baby's own usual pattern — not anyone else's, not a number on an app. Get to know what's normal for them, and the moments that fall outside that become the ones to act on.",
+        ],
+      },
+      {
+        id: "why-movements-may-feel-different",
+        heading: "Why movements may feel different on different days",
+        lead: "Lots of small factors change what you feel — without changing what's happening.",
+        paragraphs: [
+          "Your baby's position can muffle movements. Your own activity, posture, hydration, and how much you're paying attention all change what you notice. A busy day at work may genuinely mean you've felt less because you've been distracted, not because there was less to feel.",
+          "That said, the test isn't 'have I been busy enough to miss movements?' It's 'does this feel different from what's usual for my baby?' If the honest answer is yes, that's enough reason to ring.",
+        ],
+      },
+      {
+        id: "when-reduced-or-changed-movement",
+        heading: "When reduced or changed movement is worth raising",
+        lead: "This is one of the clearest 'call now' moments in pregnancy.",
+        paragraphs: [
+          "If your baby's movements feel reduced, slower, or different in pattern from what you'd usually expect — at any point in pregnancy from around 24 weeks onward — contact your maternity unit straight away, day or night.",
+          "Do not wait to see if it changes. Do not try to wake the baby up and then go to bed reassured. The rule of thumb most UK maternity services share is simple: if you're not sure, ring. Even if movements resume after you noticed the change, ring.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Reduced or changed baby movement at any point in late pregnancy needs urgent assessment. Contact your maternity unit straight away, day or night. They would always rather hear from you.",
+        },
+      },
+      {
+        id: "what-to-do-if-youre-worried",
+        heading: "What to do if you are worried",
+        lead: "A clear, simple sequence — not a wait-and-see.",
+        paragraphs: [
+          "Ring your maternity assessment unit on the number in your maternity notes. They will usually ask you to come in to be checked, often with monitoring. Most of the time, this assessment is reassuring — and the reason midwives ask you to ring is precisely because acting quickly when something is off can make a real difference.",
+          "Try not to use apps, kick counts, cold drinks, or sugary snacks as the test. None of these are reliable substitutes for assessment. The instinct that something feels off is itself enough.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

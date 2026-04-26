@@ -341,13 +341,15 @@ export const topicMapEntries: TopicMapEntry[] = [
   {
     slug: "health-and-safety",
     label: "Health & safety",
-    supportLine: "Steady answers to the questions worth checking.",
-    mainHref: "/articles/implantation-bleeding",
-    mainLabel: "Start with health and safety",
-    hasLanding: false,
+    supportLine: "Tests, scans, medicines, and the questions worth raising.",
+    mainHref: "/pregnancy/health-and-safety",
+    mainLabel: "Explore health and safety in pregnancy",
+    hasLanding: true,
     articles: [
-      { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
-      { label: "When pregnancy symptoms stop", href: "/articles/symptoms-stopping-early-pregnancy" },
+      { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy" },
+      { label: "Vaccinations in pregnancy", href: "/articles/vaccinations-in-pregnancy" },
+      { label: "Medicines in pregnancy", href: "/articles/medicines-in-pregnancy" },
+      { label: "Foods to avoid in pregnancy", href: "/articles/foods-to-avoid-in-pregnancy" },
     ],
   },
   {

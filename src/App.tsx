@@ -102,6 +102,7 @@ const App = () => (
           <Route path="/explore" element={<Explore />} />
           <Route path="/pregnancy" element={<Pregnancy />} />
           <Route path="/pregnancy/body" element={<BodyTopic />} />
+          <Route path="/pregnancy/baby" element={<BabyTopic />} />
           <Route path="/pregnancy/first-trimester" element={<FirstTrimester />} />
           <Route path="/pregnancy/second-trimester" element={<SecondTrimester />} />
           <Route path="/pregnancy/third-trimester" element={<ThirdTrimester />} />

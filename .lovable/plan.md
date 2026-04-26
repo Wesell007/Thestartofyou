@@ -1,148 +1,199 @@
-# /pregnancy topic map — revised
+## Goal
 
-The new topic layer **replaces `WhatToExpect`**. No section is added. Page stays at 8 sections.
+Define a reusable **Pregnancy Topic Landing** template that sits between `/pregnancy` and individual articles. Calm, editorial, premium — not a blog category page, not a publisher portal. One template, six future routes:
 
-## Final section order (still 8)
+- `/pregnancy/body`
+- `/pregnancy/baby`
+- `/pregnancy/feelings`
+- `/pregnancy/health-and-safety`
+- `/pregnancy/diet-and-exercise`
+- `/pregnancy/preparing-for-baby`
 
-```text
-1. Hero
-2. WhatThisJourneyIs
-3. PregnancyTimeline (trimesters)
-4. WeekByWeek
-5. PregnancyTopicMap            ← replaces WhatToExpect
-6. GuidanceAndQuestions
-7. KeepYourJourney
-8. PregnancyFinalCTA
-```
+This plan covers structure only. Implementation comes in a later pass once approved.
 
-`WhatToExpect` is removed from the page. The "body / baby / emotional / uncertainty" framing is dropped here — its emotional reassurance work is already carried by `WhatThisJourneyIs` (orientation) and `KeepYourJourney` (reflection). Slot 5 becomes the structured topic architecture instead of a second emotional band.
+## Design principles
 
-## How WhatToExpect is replaced
+- **One topic, one quiet page.** No carousels, no "trending", no read-times, no thumbnails on tiles, no chips, no dates, no author bylines, no tag clouds.
+- **Editorial over portal.** Long vertical rhythm, generous whitespace, serif headings, sans support copy — same language as `/pregnancy` and existing hubs.
+- **Honest density.** Sections only appear if they have real content. Thin topics show fewer sections rather than padding with filler.
+- **Stage-coloured accents only.** Reuse `--stage-pregnancy-accent` for the same hairline / label / arrow treatment used in `PregnancyTopicMap`. No new palette.
+- **Always a way back.** Every page connects up to `/pregnancy`, across to sibling topics, and down to articles + week-by-week.
 
-- **Remove** `<WhatToExpect />` from `src/pages/Pregnancy.tsx`.
-- **Delete** `src/components/pregnancy/WhatToExpect.tsx`.
-- **Create** `src/components/pregnancy/PregnancyTopicMap.tsx` and place it in slot 5.
-
-No conceptual overlap: `WhatToExpect` was experiential ("how it can feel"); `PregnancyTopicMap` is navigational ("where to read more, by topic"). The new section is the page's clear topic architecture layer.
-
-## The 6 topic groups
-
-Each card: topic title · support line · 3–5 article links · one main "Explore" link.
-
-### 1. Your body
-- Support: How pregnancy can feel, week to week.
-- Main: Explore body & symptoms → `/guidance?topic=body-changes` *(bridge)*
-- Articles:
-  - `/articles/nausea-in-early-pregnancy`
-  - `/articles/fatigue-in-early-pregnancy`
-  - `/articles/early-pregnancy-symptoms-explained`
-  - `/articles/complete-guide-morning-sickness`
-
-### 2. Your baby
-- Support: What's developing, week by week.
-- Main: Explore baby development → `/guidance?topic=development` *(bridge)*
-- Articles:
-  - `/articles/first-trimester-complete-guide`
-  - `/articles/second-trimester-complete-guide`
-  - `/articles/third-trimester-complete-guide`
-
-### 3. Your feelings
-- Support: The emotional side of pregnancy, held with care.
-- Main: Explore emotional wellbeing → `/guidance?topic=emotional-wellbeing` *(bridge)*
-- Articles:
-  - `/articles/emotional-wellbeing-pregnancy`
-  - `/articles/perinatal-anxiety`
-  - `/articles/symptoms-stopping-early-pregnancy`
-
-### 4. Health and safety
-- Support: Reassurance for the moments that ask a lot of questions.
-- Main: Explore health & safety → `/guidance?topic=safety-and-support` *(bridge)*
-- Articles:
-  - `/articles/implantation-bleeding`
-  - `/articles/symptoms-stopping-early-pregnancy`
-  - `/articles/perinatal-anxiety`
-
-### 5. Food and movement
-- Support: Gentle ways to care for yourself day to day.
-- Main: Explore everyday care → `/guidance?topic=practical-preparation` *(bridge)*
-- Articles:
-  - `/articles/complete-guide-morning-sickness`
-  - `/articles/fatigue-in-early-pregnancy`
-  - `/articles/first-trimester-complete-guide`
-
-### 6. Preparing for birth
-- Support: Steady ways to get ready, when you feel ready.
-- Main: Explore preparing for birth → `/guidance?topic=practical-preparation` *(bridge)*
-- Articles:
-  - `/articles/third-trimester-complete-guide`
-  - `/articles/writing-a-birth-plan`
-  - `/articles/preparing-for-baby-complete-guide`
-
-## Card format
+## Page structure (top → bottom)
 
 ```text
-┌──────────────────────────────────┐
-│  ▏ Topic label (uppercase, sage) │
-│  Title (serif)                   │
-│  Support line (sans, muted)      │
-│                                  │
-│  · Article link 1            ›   │
-│  · Article link 2            ›   │
-│  · Article link 3            ›   │
-│  · Article link 4            ›   │
-│  ─────────────────────────────   │
-│  Explore [topic] →               │
-└──────────────────────────────────┘
+1. Topic Hero                  (required)
+2. What this topic covers      (required)
+3. Start here                  (required)
+4. Subtopic groups             (required)
+5. Week-by-week bridge         (optional)
+6. Sibling topics              (include when sibling routes exist or can be safely stubbed)
+7. AI reassurance / Ask        (optional)
+8. Quiet footer link           (required)
 ```
 
-Editorial restraint: no thumbnails, no chips, no read-times. Article rows are typographic links separated by hairline dividers. Sage accent bar at top. Footer explore link is a quiet text link, not a button.
+### 1. Topic Hero
 
-## Section layout
+- Small uppercase eyebrow: `The Pregnancy Map · Your body` (stage accent, same treatment as existing eyebrows).
+- Serif H1, single line where possible: e.g. *Your body in pregnancy*.
+- One short editorial intro paragraph (≤ 2 sentences, sans-serif, muted).
+- No primary CTA buttons.
+- No image, illustration, or video. Hero is typographic and restrained.
+- Optional `BotanicalCorner` if the rhythm allows.
+
+### 2. What this topic covers
+
+- One short paragraph plus a quiet bullet list of 3–5 plain-language statements.
+- Orientation only — no links inside this block.
+- Purpose: reassures the user they're in the right place before any decision point.
+
+### 3. Start here (1–3 anchor articles)
+
+- Maximum three. Often one or two.
+- Editorial list, not cards. Each row:
+  - serif title link (article title, exact)
+  - one-line italic support sentence explaining why it is the entry point
+  - hairline divider above each row (same `accent / 0.1` border as topic map)
+- Reads like a confident editorial shortlist, not a featured-content promo row.
+
+### 4. Subtopic groups
+
+Core of the page. Vertical stack of grouped link clusters.
+
+Each group:
 
 ```text
-        The Pregnancy Map (small caps, sage)
-   What you might want to explore   (serif H2)
-   Six gentle ways into pregnancy guidance.
-
-   ┌─────────┐ ┌─────────┐ ┌─────────┐
-   │ body    │ │ baby    │ │ feelings│
-   └─────────┘ └─────────┘ └─────────┘
-   ┌─────────┐ ┌─────────┐ ┌─────────┐
-   │ health  │ │ food &  │ │ prep    │
-   │ & safety│ │ movement│ │ for birth│
-   └─────────┘ └─────────┘ └─────────┘
-
-       Browse all guidance →
+GROUP LABEL              (eyebrow, stage accent, uppercase, tracked)
+Optional one-line note   (serif, muted — only when truly needed)
+  → Subtopic link 1
+  → Subtopic link 2
+  → Subtopic link 3
 ```
 
-Grid `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`, gap-5, `max-w-6xl`. Background `bg-parchment-dark` (inheriting WhatToExpect's slot keeps page rhythm intact).
+Rules:
 
-## Bridge links — explicitly temporary
+- 2–5 groups per page.
+- 3–7 links per group. Below 3 → fold into a sibling group. Above 7 → split.
+- Visible labels stay **verbatim** from the locked pregnancy topic-map set.
+- Destinations follow the `PregnancyTopicMap` policy: exact article > closest article substitute > `/guidance?topic=...` bridge.
+- Same chevron + hairline treatment as the topic map. No thumbnails, excerpts, or metadata.
 
-Every `/guidance?topic=...` link in the cards above is a **temporary bridge**, not the final destination. Long-term, each of the 6 topics should resolve to a dedicated pregnancy topic page:
+Layout:
 
-```text
-/pregnancy/body
-/pregnancy/baby
-/pregnancy/feelings
-/pregnancy/health-and-safety
-/pregnancy/food-and-movement
-/pregnancy/preparing-for-birth
+- Two columns on `lg`, single column below.
+- Asymmetry is allowed; do not force a rigid balanced grid. Groups flow based on link counts.
+
+### 5. Week-by-week bridge (optional)
+
+Only where week context genuinely helps (e.g. Your body, Your baby, possibly Health & safety).
+
+- One short serif line (e.g. *"This often shifts week by week."*).
+- One quiet accent link → `/pregnancy#week-by-week` or relevant trimester page.
+- No duplicated timeline component, no mini week-picker.
+
+### 6. Sibling topics
+
+Quiet lateral navigation to the other pregnancy topic pages. Text links only — no cards, no descriptions, no chevrons stacked into tile shapes. A simple wrapping row of 5 labels with the standard accent chevron treatment.
+
+### 7. AI reassurance / Ask (optional)
+
+Reuse the existing hub AI pattern only where topic depth is strong enough to support a useful answer. Design space for it here; no implementation assumptions in this pass.
+
+### 8. Quiet footer link
+
+Single underlined sage link, centred, mirroring `/pregnancy`'s footer:
+
+> ← Back to the Pregnancy Map
+
+No second CTA. No newsletter. No related-topics block (siblings already covered in section 6).
+
+## How it connects to the rest of the site
+
+- **Up:** eyebrow + footer link → `/pregnancy`. Navbar handles global up-traversal.
+- **Across:** sibling topics row → other `/pregnancy/*` pages.
+- **Down:** start-here rows and subtopic links → individual `/articles/*` pages, with `/guidance?topic=...` bridges where articles do not yet exist.
+- **Week context:** optional bridge → `/pregnancy#week-by-week` and trimester pages.
+- **AI:** optional topic-aware ask flow, scoped to the topic slug.
+
+When articles are later built, their footer "Related" block should link back up to the topic page — closing the Up/Down/Across loop already used in guidance articles.
+
+## Reusable component shape
+
+A single template component, e.g. `PregnancyTopicPage`, driven by typed config:
+
+```ts
+interface PregnancyTopicPageConfig {
+  slug:
+    | "body"
+    | "baby"
+    | "feelings"
+    | "health-and-safety"
+    | "diet-and-exercise"
+    | "preparing-for-baby";
+  eyebrow: string;            // "Your body"
+  title: string;              // "Your body in pregnancy"
+  intro: string;              // 1–2 sentence editorial line
+
+  whatThisCovers: {
+    lead: string;
+    bullets: string[];        // 3–5
+  };
+
+  startHere: {                // 1–3
+    title: string;
+    href: string;
+    why: string;
+  }[];
+
+  groups: {                   // 2–5
+    label: string;
+    description?: string;
+    links: { label: string; href: string }[];   // 3–7
+  }[];
+
+  weekBridge?: {
+    line: string;
+    href: string;
+    label: string;
+  };
+
+  showSiblings?: boolean;     // defaults true
+  showAI?: boolean;
+  aiPrompts?: string[];       // 3 suggestion chips when AI shown
+}
 ```
 
-Out of scope for this pass. The card data structure keeps the main link in one field so swapping routes later is a one-line change per topic.
+Per-topic config lives alongside `stageData.ts` (e.g. `src/data/pregnancyTopicData.ts`). The template renders any optional section only when its config is present and non-empty — enforcing the honest-density principle.
 
-## Technical changes
+This shape also means the bridge URLs currently used in `PregnancyTopicMap` (`/guidance?topic=...`) can later be swapped to the real `/pregnancy/<topic>` routes in one place, without redesigning anything.
 
-- **Create:** `src/components/pregnancy/PregnancyTopicMap.tsx`
-- **Delete:** `src/components/pregnancy/WhatToExpect.tsx`
-- **Edit:** `src/pages/Pregnancy.tsx` — remove `WhatToExpect` import and usage, add `PregnancyTopicMap` in slot 5.
-- No new routes. No data changes (all slugs already exist in `articleData.ts`; all topic values exist in `GuidanceLibrary` filter).
+## What to borrow from What to Expect
 
-## Risks before build
+- Clear topic taxonomy (already locked in our label set).
+- Grouped link clusters as the primary navigation pattern.
+- "Start here" anchor articles per topic.
+- Lateral sibling-topic navigation.
 
-1. **Loss of "what to expect" reassurance.** Removing WhatToExpect deletes a calm experiential band. `WhatThisJourneyIs` and `KeepYourJourney` should hold this work — confirm visually after build that the page does not feel colder.
-2. **Food & movement is thin** in current article inventory; the card will read close to "Your body". Acceptable for v1, flag for content team.
-3. **Article duplication** across cards is intentional editorial routing (e.g. third-trimester guide appears under Baby and Preparing for birth). Worth eyeballing once live.
-4. **Bridge links on `/guidance?topic=`** depend on `GuidanceLibrary` reading `topic` from `useSearchParams` and scrolling/filtering correctly. Confirm at QA; if broken, treat as small follow-up — do not block this section.
-5. **Editorial restraint** must hold in future: no thumbnails, dates, or tag chips creeping into these cards later.
+## What to leave behind
+
+- Thumbnails, dates, read-times, bylines.
+- Trending / most popular / editor's picks blocks.
+- Ad-like density and inline newsletter inserts.
+- Tag clouds and faceted filters.
+- Quiz, poll, and community widgets.
+- Heavy SEO preamble paragraphs above the fold.
+- Dense breadcrumb trails (eyebrow + footer link replace these).
+
+## Design cautions
+
+- Default to no group description; add only when the label genuinely needs disambiguation.
+- Two-column groups on `lg` must not collapse into a forced 2×N grid — let groups flow asymmetrically based on link counts.
+- Resist a "Featured article" hero card. The Start Here list does this job without visual weight.
+- The AI section is opt-in per topic; on a thin topic, omit it rather than show a half-empty answer surface.
+
+## Out of scope
+
+- Implementation.
+- Final per-topic copy (intro lines, "what this covers" bullets, start-here picks).
+- Routing wiring in `App.tsx`.
+- Updating `PregnancyTopicMap` bridge URLs to point at the new routes.

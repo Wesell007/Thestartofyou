@@ -64,7 +64,7 @@ export const PREGNANCY_TOPICS: { slug: PregnancyTopicSlug; eyebrow: string }[] =
 ];
 
 // Slugs that already have a built landing page. Keeps siblings honest.
-export const LIVE_TOPIC_SLUGS: PregnancyTopicSlug[] = ["body"];
+export const LIVE_TOPIC_SLUGS: PregnancyTopicSlug[] = ["body", "baby"];
 
 export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPageConfig | null> = {
   body: {
@@ -143,7 +143,67 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
   },
 
   // Other topics not yet built.
-  baby: null,
+  baby: {
+    slug: "baby",
+    eyebrow: "Your baby",
+    title: "Your baby in pregnancy",
+    intro:
+      "From a cluster of cells to a small person who turns toward your voice — your baby's growth across pregnancy is quieter and more astonishing than most week-by-week summaries let on. This is a steady place to follow what's developing, when the big shifts happen, and what you might start to feel along the way.",
+
+    whatThisCovers: {
+      lead: "What this topic covers:",
+      bullets: [
+        "How your baby develops from the earliest weeks onward.",
+        "The major shifts that tend to define each trimester.",
+        "When movement begins, and how it changes as pregnancy goes on.",
+        "The broader picture of growth, rather than a chase of weekly milestones.",
+      ],
+    },
+
+    startHere: [
+      {
+        title: "First trimester: complete guide",
+        href: "/articles/first-trimester-complete-guide",
+        why: "Where the foundations are laid, often before you can feel anything at all.",
+      },
+      {
+        title: "Second trimester: complete guide",
+        href: "/articles/second-trimester-complete-guide",
+        why: "The window where movement, growth, and the sense of a real person tend to arrive.",
+      },
+      {
+        title: "Third trimester: complete guide",
+        href: "/articles/third-trimester-complete-guide",
+        why: "How your baby finishes growing, settles, and prepares for birth.",
+      },
+    ],
+
+    groups: [
+      {
+        label: "Early development",
+        links: [
+          { label: "First trimester: complete guide", href: "/articles/first-trimester-complete-guide" },
+        ],
+      },
+      {
+        label: "Growing and moving",
+        description: "How your baby unfolds across the middle and later weeks.",
+        links: [
+          { label: "Second trimester: complete guide", href: "/articles/second-trimester-complete-guide" },
+          { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide" },
+        ],
+      },
+    ],
+
+    weekBridge: {
+      line: "Your baby grows in steady, sometimes startling jumps.",
+      href: "/pregnancy#week-by-week",
+      label: "See the week-by-week view",
+    },
+
+    showSiblings: true,
+    showAI: false,
+  },
   feelings: null,
   "health-and-safety": null,
   "diet-and-exercise": null,

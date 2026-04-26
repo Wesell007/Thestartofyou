@@ -33,7 +33,7 @@ const topics: Topic[] = [
     id: "baby",
     label: "Your baby",
     supportLine: "How your baby grows, trimester by trimester.",
-    mainHref: "/guidance?topic=development",
+    mainHref: "/pregnancy/baby",
     mainLabel: "Explore baby development",
     articles: [
       { label: "Week by week", href: "#week-by-week" },

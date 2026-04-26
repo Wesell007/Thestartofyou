@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import Explore from "./pages/Explore.tsx";
 import Pregnancy from "./pages/Pregnancy.tsx";
 import BodyTopic from "./pages/pregnancy/BodyTopic.tsx";
+import BabyTopic from "./pages/pregnancy/BabyTopic.tsx";
 import FirstTrimester from "./pages/trimester/FirstTrimester.tsx";
 import SecondTrimester from "./pages/trimester/SecondTrimester.tsx";
 import ThirdTrimester from "./pages/trimester/ThirdTrimester.tsx";
@@ -101,6 +102,7 @@ const App = () => (
           <Route path="/explore" element={<Explore />} />
           <Route path="/pregnancy" element={<Pregnancy />} />
           <Route path="/pregnancy/body" element={<BodyTopic />} />
+          <Route path="/pregnancy/baby" element={<BabyTopic />} />
           <Route path="/pregnancy/first-trimester" element={<FirstTrimester />} />
           <Route path="/pregnancy/second-trimester" element={<SecondTrimester />} />
           <Route path="/pregnancy/third-trimester" element={<ThirdTrimester />} />

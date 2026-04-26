@@ -542,8 +542,8 @@ export const topicMapEntries: TopicMapEntry[] = [
     hasLanding: true,
     articles: [
       { label: "How your baby develops in pregnancy", href: "/articles/how-your-baby-develops-in-pregnancy" },
+      { label: "Baby movement in pregnancy", href: "/articles/baby-movement-in-pregnancy" },
       { label: "Twins and multiples in pregnancy", href: "/articles/twins-and-multiples-in-pregnancy" },
-      { label: "First trimester", href: "/articles/first-trimester-complete-guide" },
       { label: "Second trimester", href: "/articles/second-trimester-complete-guide" },
     ],
   },
@@ -572,7 +572,7 @@ export const topicMapEntries: TopicMapEntry[] = [
       { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy" },
       { label: "Vaccinations in pregnancy", href: "/articles/vaccinations-in-pregnancy" },
       { label: "Medicines in pregnancy", href: "/articles/medicines-in-pregnancy" },
-      { label: "Foods to avoid in pregnancy", href: "/articles/foods-to-avoid-in-pregnancy" },
+      { label: "Weight changes in pregnancy", href: "/articles/weight-changes-in-pregnancy" },
     ],
   },
   {
@@ -597,8 +597,8 @@ export const topicMapEntries: TopicMapEntry[] = [
     mainLabel: "Explore preparing for baby",
     hasLanding: true,
     articles: [
-      { label: "Preparing for baby: complete guide", href: "/preparing-for-baby" },
       { label: "Writing a birth plan", href: "/articles/writing-a-birth-plan" },
+      { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack" },
       { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to" },
     ],
   },

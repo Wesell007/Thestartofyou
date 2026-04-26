@@ -11,6 +11,10 @@ const NEW_TEMPLATE_SLUGS = new Set<string>([
   "early-pregnancy-symptoms-explained",
   "implantation-bleeding",
   "complete-guide-morning-sickness",
+  "foods-to-avoid-in-pregnancy",
+  "tests-and-scans-in-pregnancy",
+  "vaccinations-in-pregnancy",
+  "medicines-in-pregnancy",
 ]);
 
 const ArticlePage = () => {

@@ -72,16 +72,16 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
     eyebrow: "Your body",
     title: "Your body in pregnancy",
     intro:
-      "Pregnancy moves through your body in waves — some weeks loud, some weeks quiet. This is a calm place to understand what's shifting, what tends to be normal, and when something might be worth checking.",
+      "Pregnancy reshapes your body in stages — sometimes loudly, sometimes so quietly you almost miss it. This is a steady place to understand what's changing, what's usually normal, and what's worth a closer look.",
 
     whatThisCovers: {
-      lead: "What you'll find in this topic:",
+      lead: "What this topic covers:",
       bullets: [
-        "The early signs that often appear before, around, or just after a missed period.",
-        "Common symptoms and the body changes that show up across the trimesters.",
-        "What tends to feel normal — and the everyday discomforts most people meet at some point.",
-        "Energy, sleep, and the way pregnancy quietly resets your stamina.",
-        "Signs that may need checking, without overstating the alarm.",
+        "The earliest signs, from the days before a missed period through the first weeks.",
+        "Morning sickness, nausea, and the symptoms most people meet at some point.",
+        "How energy, sleep, and stamina shift as pregnancy settles in.",
+        "The way your body changes across the first, second, and third trimesters.",
+        "Signs that are common — and signs worth checking — without overstating either.",
       ],
     },
 

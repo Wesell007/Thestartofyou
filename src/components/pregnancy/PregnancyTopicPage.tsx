@@ -178,9 +178,12 @@ const PregnancyTopicPage = ({ config }: Props) => {
                   return (
                     <li
                       key={s.slug}
-                      className="font-sans text-[13px] font-light text-muted-foreground/60"
+                      className="font-sans text-[13px] font-light text-muted-foreground/55 inline-flex items-baseline gap-1.5"
                     >
                       {s.eyebrow}
+                      <span className="text-[10px] tracking-[0.18em] uppercase text-muted-foreground/45">
+                        soon
+                      </span>
                     </li>
                   );
                 })}

@@ -2708,7 +2708,7 @@ const articleDatabase: ArticleData[] = [
     ],
 
     // ── Deep template fields ──
-    topic: undefined, // diet-and-exercise topic page not yet built; topic-return falls back gracefully to The Pregnancy Map
+    topic: "diet-and-exercise",
     standfirst:
       "The real 'avoid' list in pregnancy is shorter than it can feel online. A calm look at what genuinely matters, what doesn't, and what to do if you've already eaten something you're worried about.",
     editorialSections: [

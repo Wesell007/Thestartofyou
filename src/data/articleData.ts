@@ -2617,6 +2617,681 @@ const articleDatabase: ArticleData[] = [
       { question: "What if my birth doesn't go to plan?", answer: "This is very common. A good birth plan includes flexibility. Your care team's priority is always your safety and your baby's." },
     ],
   },
+
+  // ─── FOODS TO AVOID IN PREGNANCY ──────────────────────────────────────────
+  {
+    slug: "foods-to-avoid-in-pregnancy",
+    title: "Foods to avoid in pregnancy: a calm, practical guide",
+    metaDescription: "Which foods are best avoided in pregnancy, which need extra care, and what's still safe to eat. A grounded guide to eating well, without fear.",
+    quickAnswer:
+      "A small number of foods are best avoided in pregnancy because of a higher risk of food poisoning, listeria, or harmful substances — including unpasteurised dairy, certain soft and mould-ripened cheeses, raw or partially cooked eggs that aren't Lion-stamped, raw or undercooked meat and fish, liver and pâté, high-mercury fish, and alcohol. Most everyday foods are still completely fine. If you've already eaten something on the avoid list, the realistic risk is usually low — speak to your midwife or GP if you have symptoms or specific concerns.",
+    howThisFeels: [
+      "Realising mid-meal that you're not sure if something is safe",
+      "Spending longer than you'd like reading labels in a supermarket",
+      "Worrying about something you ate before you knew you were pregnant",
+      "Feeling overwhelmed by lists that contradict each other online",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Higher infection risk", body: "Pregnancy slightly changes how the immune system works, so infections like listeria, toxoplasmosis, and salmonella can hit harder and, in some cases, affect the baby." },
+        { heading: "Substances that cross the placenta", body: "A few foods (and alcohol) contain substances — like high levels of vitamin A, mercury, or alcohol itself — that can affect a baby's development." },
+      ],
+      lessCauses: [
+        { heading: "General food hygiene", body: "Most pregnancy food advice is essentially good food hygiene applied a little more carefully — washing, cooking thoroughly, and being mindful of how things are stored." },
+      ],
+      whyItVaries: "Guidance shifts over time as evidence updates, and small differences exist between countries. UK guidance (NHS) is what most of these recommendations reflect.",
+    },
+    timing: {
+      whenStarts: "These food guidelines apply throughout pregnancy.",
+      whenEases: "Most can be relaxed once your baby is born, though a few (like alcohol) remain relevant if you're breastfeeding.",
+    },
+    whatItFeelsLike: ["A constant low-level mental checklist around food", "Eating out feeling more loaded than usual"],
+    whatThisMeans:
+      "The list of true 'avoid' foods is shorter than it can feel online. Most of pregnancy eating is just normal eating done with a bit more care.",
+    normal: [
+      "Avoiding a small list of higher-risk foods",
+      "Choosing pasteurised dairy and well-cooked meat, fish, and eggs",
+      "Limiting caffeine to around 200mg a day",
+      "Eating most everyday foods exactly as you usually would",
+    ],
+    seekSupport: [
+      "Symptoms of food poisoning — vomiting, diarrhoea, fever, or feeling very unwell after eating",
+      "Reduced or unusual baby movements after a worrying meal in later pregnancy",
+      "Any specific worry about something you've eaten",
+    ],
+    disclaimer: "This is general information, not medical advice. If you're worried about something you've eaten or feel unwell, contact your midwife, GP, or NHS 111.",
+    whatYouCanDo: [
+      { action: "Keep a short mental 'avoid' list rather than a long one", reason: "Most foods are fine; a focused list is easier to actually follow." },
+      { action: "Cook eggs, meat, and fish thoroughly", reason: "Heat kills most of the bacteria that cause concern in pregnancy." },
+      { action: "Choose pasteurised dairy", reason: "Pasteurisation removes the listeria risk that drives most cheese guidance." },
+      { action: "Wash fruit, veg, and salads well", reason: "This reduces toxoplasmosis and listeria risk from soil and packaging." },
+      { action: "Speak to your midwife if you're unsure", reason: "They've heard every food question before — there's no wrong one to ask." },
+    ],
+    whatHappensNext: "Most people quickly settle into a rhythm where the avoid list becomes second nature.",
+    relatedStage: {
+      intro: "Eating well sits alongside the rest of pregnancy care:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "Tests, scans, and the questions worth raising." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "What's offered through pregnancy and why." },
+      ],
+    },
+    aiPrompts: [
+      "Is this specific food okay in pregnancy?",
+      "I ate something on the avoid list — should I worry?",
+      "How much caffeine is okay in pregnancy?",
+    ],
+    captureIntro: "Food in pregnancy is one of those small, daily things that can quietly take up a lot of headspace. Worth noting how it really felt.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["tests-and-scans-in-pregnancy", "medicines-in-pregnancy", "vaccinations-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["safety-and-support", "diet"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "The true 'avoid' list in pregnancy is shorter than it can feel online — most everyday foods are still fine",
+      "The biggest categories are unpasteurised dairy, certain soft and mould-ripened cheeses, raw or undercooked meat, fish, and eggs, liver and pâté, high-mercury fish, and alcohol",
+      "Caffeine doesn't need to be cut out — UK guidance is up to about 200mg a day",
+      "If you've already eaten something on the list, the real-world risk is usually low; talk to your midwife or GP if you have symptoms or worries",
+    ],
+    sources: [
+      "NHS — Foods to avoid in pregnancy",
+      "NHS — Have a healthy diet in pregnancy",
+      "Food Standards Agency — Pregnancy advice",
+      "BNF — Eating well in pregnancy",
+    ],
+    faq: [
+      { question: "Can I eat soft cheese in pregnancy?", answer: "Pasteurised soft cheeses like mozzarella, halloumi, feta, paneer, ricotta, and cream cheese are fine. The main ones to avoid are mould-ripened soft cheeses (brie, camembert, chèvre) and soft blue cheeses (gorgonzola, roquefort) — unless cooked until steaming hot." },
+      { question: "Can I have caffeine in pregnancy?", answer: "Yes, up to around 200mg a day. That's roughly two mugs of instant coffee, or one small mug of brewed coffee plus a couple of cups of tea. Remember chocolate and some soft drinks contain caffeine too." },
+      { question: "Are runny eggs safe in pregnancy?", answer: "Eggs with the British Lion stamp can be eaten with runny or even raw yolks. Eggs without the Lion stamp, duck, goose, and quail eggs should be cooked until both white and yolk are solid." },
+      { question: "I ate something on the avoid list — what should I do?", answer: "The realistic risk from a single exposure is usually low. Watch out for symptoms of food poisoning — fever, vomiting, diarrhoea, or feeling very unwell — and contact your midwife or GP if you have any of those, or if you're worried." },
+      { question: "Can I eat sushi?", answer: "Sushi made with raw fish is okay if the fish has been frozen first to destroy parasites — most UK restaurants do this routinely. Sushi made with cooked fish, vegetables, or fully smoked fish is fine. Avoid raw shellfish." },
+    ],
+
+    // ── Deep template fields ──
+    topic: undefined, // diet-and-exercise topic page not yet built; topic-return falls back gracefully to The Pregnancy Map
+    standfirst:
+      "The real 'avoid' list in pregnancy is shorter than it can feel online. A calm look at what genuinely matters, what doesn't, and what to do if you've already eaten something you're worried about.",
+    editorialSections: [
+      {
+        id: "foods-to-avoid",
+        heading: "Foods to avoid in pregnancy",
+        lead: "A small, focused list of foods carry enough risk in pregnancy that current UK guidance is to skip them. Knowing what's actually on it makes everything else easier.",
+        paragraphs: [
+          "The clearest 'avoid' foods are: unpasteurised milk and dairy products; mould-ripened soft cheeses like brie, camembert, and chèvre, and soft blue cheeses like gorgonzola and roquefort, unless thoroughly cooked; raw or undercooked meat, including rare steak, raw cured meats like Parma ham and chorizo unless cooked, and game that may contain lead shot; liver, pâté (including vegetable pâté), and supplements containing cod liver oil or high-dose vitamin A; raw or undercooked eggs that aren't British Lion stamped; raw shellfish; high-mercury fish (shark, swordfish, marlin); and alcohol in any amount.",
+          "Some fish should be limited rather than avoided. Tuna is fine in moderation — up to four medium cans or two fresh steaks a week. Oily fish like salmon, mackerel, sardines, and trout is recommended at no more than two portions a week.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If a food is hot, thoroughly cooked, and steaming throughout, the listeria risk that drives most of the cheese and cured-meat advice largely disappears.",
+        },
+      },
+      {
+        id: "foods-that-need-extra-care",
+        heading: "Foods that need extra care, not avoidance",
+        lead: "These are foods you can still eat — but with a bit of attention to how they're prepared, stored, or sourced.",
+        paragraphs: [
+          "Salads, fruit, and vegetables should be washed well to reduce the small risk of toxoplasmosis from soil. Pre-packaged salads and pre-cut fruit are fine, but eat them by their use-by date.",
+          "Cured meats like salami and Parma ham carry a small toxoplasmosis risk from the curing process; freezing them for at least four days before eating, or cooking them until steaming, removes most of the concern.",
+          "Caffeine is fine in moderation. UK guidance is up to about 200mg a day — roughly two mugs of instant coffee. That includes tea, energy drinks, chocolate, and some cold remedies, so it's worth a rough mental tally rather than an exact count.",
+        ],
+      },
+      {
+        id: "why-some-foods-matter-more",
+        heading: "Why some foods matter more in pregnancy",
+        lead: "Most of the avoid list comes down to two things: a higher risk of certain infections, and a few substances that can cross the placenta.",
+        paragraphs: [
+          "Pregnancy slightly dampens parts of the immune system, which means infections like listeria, salmonella, and toxoplasmosis can be harder to fight off and can, rarely, affect the baby. That's why unpasteurised dairy, undercooked meat, and unwashed produce are treated more cautiously than they might be otherwise.",
+          "A second group of foods are limited because of what's in them rather than what might grow on them. Liver and high-dose vitamin A supplements can deliver levels of vitamin A that are too high for early development. High-mercury fish can affect the developing nervous system. Alcohol crosses the placenta freely and there's no level that's been shown to be reliably safe, which is why current UK advice is to avoid it altogether.",
+        ],
+      },
+      {
+        id: "what-is-still-safe",
+        heading: "What is still safe to eat",
+        lead: "Most of normal eating is still completely fine. It can help to anchor the avoid list against everything that isn't on it.",
+        paragraphs: [
+          "Pasteurised milk, yoghurt, and cheeses (including hard cheeses like cheddar and parmesan, and soft pasteurised cheeses like mozzarella, halloumi, ricotta, paneer, and cream cheese) are fine. So are well-cooked meat and poultry, fully cooked fish, British Lion-stamped eggs (including with runny yolks), and most takeaways and restaurant food prepared properly.",
+          "Spices, herbs, and most cuisines are fine in normal amounts. There's no need to avoid everyday foods on the basis that they 'might' be risky — the actual list is the list.",
+        ],
+      },
+      {
+        id: "if-youre-worried",
+        heading: "What to do if you're worried about something you've eaten",
+        lead: "Most one-off exposures don't cause harm. The realistic question is whether you're feeling unwell, not whether you ate something that wasn't ideal.",
+        paragraphs: [
+          "If you've eaten something on the avoid list and feel completely fine, the practical advice is usually to stop worrying and not repeat it. Most listeria, salmonella, and toxoplasmosis exposures don't lead to infection, and most infections don't affect the baby.",
+          "What does warrant a call is symptoms: a fever, sustained vomiting or diarrhoea, severe abdominal pain, or feeling significantly unwell after eating. In later pregnancy, reduced or unusual baby movements after a worrying meal is also a reason to get checked, even if you feel okay.",
+        ],
+      },
+      {
+        id: "when-to-ask",
+        heading: "When to ask a midwife or doctor",
+        lead: "The answer to almost any specific food question is: ask. Midwives, GPs, and pharmacists hear food questions constantly and would rather you asked than worried.",
+        paragraphs: [
+          "Speak to your midwife or GP if you have ongoing food poisoning symptoms, if you've been advised to follow a specific diet for a condition like gestational diabetes, or if you're managing pregnancy alongside something else (vegan, vegetarian, coeliac, food allergies) and want to make sure you're getting what you need.",
+          "Pharmacists are also a strong first stop for questions about supplements, herbal teas, and over-the-counter remedies that often blur into food.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "There is no such thing as a silly food question in pregnancy. The list of people who've asked yours before you is long.",
+        },
+      },
+    ],
+  },
+
+  // ─── TESTS AND SCANS IN PREGNANCY ─────────────────────────────────────────
+  {
+    slug: "tests-and-scans-in-pregnancy",
+    title: "Tests and scans in pregnancy: a complete, calm guide",
+    metaDescription: "What tests and scans happen in pregnancy, when they happen, and what they're for. A clear, reassuring overview of UK pregnancy care.",
+    quickAnswer:
+      "Through a typical UK pregnancy you're offered a booking appointment around 8–12 weeks, a dating scan around 11–14 weeks (often with combined screening), routine blood and urine tests, an anomaly scan around 18–21 weeks, and ongoing midwife checks of blood pressure, urine, and growth. Some people are offered additional tests — like glucose testing for gestational diabetes, or extra growth scans — based on individual circumstances.",
+    howThisFeels: [
+      "Trying to remember which appointment is which",
+      "Quietly anxious in the days before a scan",
+      "Feeling unsure whether to accept every screening offered",
+      "Wanting more information without being overwhelmed",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Routine antenatal care", body: "Most tests and scans are part of standard NHS antenatal care, designed to monitor you and your baby and offer information at key points." },
+        { heading: "Personalised additions", body: "Some tests are offered specifically based on your history, BMI, age, ethnicity, or how this pregnancy is unfolding." },
+      ],
+      lessCauses: [
+        { heading: "Reactive checks", body: "Occasionally an extra scan or test is arranged in response to something specific — bleeding, reduced movements, raised blood pressure, or a measurement that needs another look." },
+      ],
+      whyItVaries: "Care plans differ slightly between trusts and between pregnancies. The broad shape is the same; the exact appointments may not be.",
+    },
+    timing: {
+      whenStarts: "Booking appointment is usually between 8–12 weeks.",
+      whenEases: "Appointments space out earlier in pregnancy and become more frequent again from around 28 weeks onwards.",
+    },
+    whatItFeelsLike: ["A mix of admin, waiting rooms, and intensely meaningful moments", "Long gaps between appointments, then several close together"],
+    whatThisMeans:
+      "Tests and scans aren't a verdict on your pregnancy; they're tools that give you and your care team useful information at the right moments.",
+    normal: [
+      "Booking appointment around 8–12 weeks",
+      "Dating scan around 11–14 weeks",
+      "Routine blood and urine tests early in pregnancy",
+      "Anomaly scan around 18–21 weeks",
+      "Regular midwife appointments through pregnancy",
+    ],
+    seekSupport: [
+      "Bleeding, severe pain, or reduced baby movements between appointments",
+      "Anything you weren't able to ask in the appointment itself",
+      "Worry about a result you've been given",
+    ],
+    disclaimer: "This article describes typical UK NHS antenatal care. Your individual care plan may differ. For advice on your own pregnancy, speak to your midwife or maternity team.",
+    whatYouCanDo: [
+      { action: "Write your questions down before each appointment", reason: "It's easy to forget them in the room; a phone note works well." },
+      { action: "Take someone with you when you can", reason: "A second pair of ears helps, especially at scans and screening appointments." },
+      { action: "Ask for things to be repeated or written down", reason: "Midwives expect this — there's a lot of information in each visit." },
+      { action: "Know that screening is offered, not required", reason: "You can decline any test or scan, and ask for time to think before deciding." },
+    ],
+    whatHappensNext: "After your booking appointment, your midwife will give you a personalised plan for the rest of pregnancy.",
+    relatedStage: {
+      intro: "Tests and scans sit alongside the rest of pregnancy care:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Vaccinations in pregnancy", href: "/articles/vaccinations-in-pregnancy", context: "Often discussed at the same appointments." },
+      ],
+    },
+    aiPrompts: [
+      "What does the 12-week scan actually check?",
+      "Is the gestational diabetes test routine?",
+      "Can I decline screening tests?",
+    ],
+    captureIntro: "Each scan and appointment carries its own quiet weight. Worth noting how they actually felt.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["vaccinations-in-pregnancy", "medicines-in-pregnancy", "foods-to-avoid-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["safety-and-support", "tests-and-scans"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    isCornerstone: true,
+    keyTakeaways: [
+      "UK pregnancy care typically includes a booking appointment, dating scan, anomaly scan, and regular midwife checks",
+      "Combined screening for Down's, Edwards', and Patau's syndromes is offered around 11–14 weeks alongside the dating scan",
+      "The anomaly scan around 18–21 weeks looks at your baby's physical development in detail",
+      "Some people are offered extra tests — like glucose testing or growth scans — based on individual circumstances",
+      "All screening is offered, not required — you can ask questions, take time, or decline",
+    ],
+    sources: [
+      "NHS — Your antenatal appointments",
+      "NHS — Screening tests in pregnancy",
+      "NICE NG201 — Antenatal care",
+      "RCOG — Information for pregnant women",
+      "Public Health England — NHS Fetal Anomaly Screening Programme",
+    ],
+    faq: [
+      { question: "How many scans will I have in pregnancy?", answer: "In an uncomplicated UK pregnancy, two scans are routinely offered: the dating scan (around 11–14 weeks) and the anomaly scan (around 18–21 weeks). Additional scans may be offered based on individual circumstances." },
+      { question: "What happens at the booking appointment?", answer: "Your booking appointment is usually 1–2 hours long. The midwife takes a detailed history, gives you information about pregnancy care and screening choices, organises blood tests, and starts your maternity record." },
+      { question: "Do I have to have all the screening tests?", answer: "No. All antenatal screening is offered, not required. You can accept some tests and decline others, and you can ask for time to think before deciding." },
+      { question: "What is combined screening?", answer: "Combined screening uses a blood test and a measurement from the dating scan (nuchal translucency) to estimate your individual chance of the baby having Down's, Edwards', or Patau's syndromes. It's offered between 11–14 weeks." },
+      { question: "When is the gestational diabetes test?", answer: "If you're offered the glucose tolerance test, it's usually between 24–28 weeks. Whether it's offered depends on factors like BMI, family history, ethnicity, and previous pregnancies." },
+      { question: "Can I bring someone to my scans?", answer: "Yes, in almost all UK trusts. Specific rules can vary — check with your maternity unit ahead of the appointment." },
+    ],
+
+    topic: "health-and-safety",
+    standfirst:
+      "From the booking appointment to the 20-week scan and beyond — a calm, organised look at the tests and scans you're likely to be offered through a UK pregnancy.",
+    editorialSections: [
+      {
+        id: "what-tests-and-scans-are-for",
+        heading: "What tests and scans in pregnancy are for",
+        lead: "Antenatal tests and scans are designed to do two things: keep an eye on you and your baby through pregnancy, and offer information at key moments so you can make decisions that feel right for you.",
+        paragraphs: [
+          "Some appointments are about routine care — blood pressure, urine checks, listening to the baby's heartbeat, measuring growth. Others are screening tests, which estimate the chance of certain conditions. None of them are a verdict on your pregnancy. They're tools.",
+          "All screening tests are offered, not required. You can take time to read the information, ask questions, accept some and decline others, and change your mind later.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Most pregnancies move through routine care without anything unexpected. The appointments are scaffolding, not warning lights.",
+        },
+      },
+      {
+        id: "first-trimester",
+        heading: "What happens in the first trimester",
+        lead: "The first major appointment is your booking appointment, usually between 8 and 12 weeks. It sets up the rest of your antenatal care.",
+        paragraphs: [
+          "Your midwife will take a detailed history — your health, your family history, any previous pregnancies, your mental health, your home situation. They'll talk you through screening choices, organise blood tests (blood group, full blood count, infections like HIV, syphilis, hepatitis B, and immunity to rubella), check your blood pressure, and test a urine sample.",
+          "You'll also be given information about the screening tests offered later, your maternity notes (paper or digital), and time to ask anything you want to ask.",
+        ],
+      },
+      {
+        id: "twelve-week-scan",
+        heading: "The 12-week scan and combined screening",
+        lead: "The dating scan happens between 11 weeks and 13 weeks 6 days. It confirms your due date, checks how many babies you're carrying, and — if you choose — forms part of combined screening.",
+        paragraphs: [
+          "The scan itself usually takes around 20–30 minutes. The sonographer measures the baby from crown to rump to date the pregnancy accurately, and checks that visible early development is on track.",
+          "Combined screening uses a blood test alongside a specific measurement from the scan called nuchal translucency. Together, these give you an individual estimated chance of Down's syndrome (T21), Edwards' syndrome (T18), and Patau's syndrome (T13). The result isn't a diagnosis — it's a probability that helps you decide whether you want further testing.",
+          "If combined screening isn't possible — for example if it's offered after 14 weeks — the quadruple test (a blood test alone) is offered between 14 and 20 weeks for Down's syndrome.",
+        ],
+      },
+      {
+        id: "twenty-week-scan",
+        heading: "The 20-week scan",
+        lead: "The anomaly scan is usually between 18 and 21 weeks. It's a detailed look at your baby's physical development.",
+        paragraphs: [
+          "The sonographer checks the baby's brain, face, spine, heart, abdomen, kidneys, and limbs, and looks at the position of the placenta and the amount of amniotic fluid. Most scans don't find anything unexpected. When they do, you'll be offered a referral for further checks and information.",
+          "The scan is also when many people choose to find out the baby's sex, if it's clear and your trust offers this. It's not the main purpose of the scan, but it's often the part people remember most.",
+        ],
+      },
+      {
+        id: "blood-tests-and-routine-checks",
+        heading: "Blood tests and other routine checks",
+        lead: "Through pregnancy, your midwife will keep an eye on a small set of measurements at almost every appointment — your blood pressure, a urine sample, and from around 24 weeks, your bump.",
+        paragraphs: [
+          "Blood pressure and urine are checked because rising blood pressure or protein in urine can be early signs of pre-eclampsia. From around 24–28 weeks, your midwife will start measuring your bump (symphysis-fundal height) to track your baby's growth, and listening to the baby's heartbeat.",
+          "Some blood tests are repeated later in pregnancy — usually around 28 weeks — to check for anaemia, blood antibodies (especially if you have a Rhesus negative blood group), and to repeat the full blood count.",
+        ],
+      },
+      {
+        id: "glucose-testing",
+        heading: "Glucose testing and gestational diabetes screening",
+        lead: "Gestational diabetes screening isn't offered to everyone. It's offered when there are risk factors that make it more likely.",
+        paragraphs: [
+          "The most common test is the oral glucose tolerance test (OGTT), usually between 24–28 weeks. You arrive having fasted, have a blood test, drink a sugary drink, and have a second blood test two hours later.",
+          "You may be offered the OGTT if your BMI is 30 or above, you've had a large baby (4.5kg or more) before, you've had gestational diabetes before, you have a parent or sibling with diabetes, or you're from a family background with higher risk (South Asian, Black African, African-Caribbean, or Middle Eastern).",
+        ],
+      },
+      {
+        id: "personalised-additions",
+        heading: "What your midwife or doctor may recommend based on your pregnancy",
+        lead: "Some appointments and tests are added in based on what's specific to you, rather than offered to everyone.",
+        paragraphs: [
+          "Examples include extra growth scans if your bump is measuring smaller or larger than expected, additional appointments if your blood pressure rises, consultant-led care if you have a pre-existing condition like type 1 diabetes or a heart condition, and specialist mental health support if needed.",
+          "If something is added in, your midwife should explain why, what the test or appointment involves, and what the possible outcomes are. It's reasonable to ask for that explanation again if it didn't quite land the first time.",
+        ],
+      },
+      {
+        id: "asking-questions",
+        heading: "When to ask questions or raise worries",
+        lead: "Between appointments, things still come up. The right time to call is whenever something feels worth checking — not only when you can prove it is.",
+        paragraphs: [
+          "Contact your midwife or maternity triage line for: bleeding, severe or persistent abdominal pain, headaches that don't go with paracetamol or come with visual changes, sudden swelling of hands or face, and from around 24 weeks, any change in your baby's pattern of movements.",
+          "For non-urgent questions, your midwife is the first contact. For results you've been given, you can always ask for a follow-up conversation — including a longer appointment if a result is significant.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Reduced or changed baby movements in the third trimester is always a reason to call your maternity unit — at any time of day or night. They'd rather hear from you.",
+        },
+      },
+    ],
+  },
+
+  // ─── VACCINATIONS IN PREGNANCY ────────────────────────────────────────────
+  {
+    slug: "vaccinations-in-pregnancy",
+    title: "Vaccinations in pregnancy: what's offered and why",
+    metaDescription: "Which vaccinations are recommended in pregnancy in the UK, when they're given, and why. A clear, calm look at whooping cough, flu, and COVID-19 vaccines.",
+    quickAnswer:
+      "In the UK, three vaccinations are routinely recommended in pregnancy: the whooping cough (pertussis) vaccine, usually from 16 weeks; the flu vaccine each autumn or winter at any stage of pregnancy; and the COVID-19 vaccine, where current guidance applies. They're offered because they protect you and your baby — passing on antibodies before birth, when babies are most vulnerable. Live vaccines (like MMR and yellow fever) are usually avoided in pregnancy.",
+    howThisFeels: [
+      "Wanting to do the right thing without being talked into it",
+      "Reading conflicting things online and feeling less sure",
+      "Hoping someone will just explain it calmly",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Antibody transfer to your baby", body: "Vaccines given in pregnancy prompt your body to make antibodies, which cross the placenta and protect your baby in their early weeks before they can be vaccinated themselves." },
+        { heading: "Higher risk in pregnancy", body: "Some infections, like flu, can be more serious in pregnancy. Vaccinating reduces that risk for you as well." },
+      ],
+      lessCauses: [
+        { heading: "Outbreak response", body: "Occasionally, additional vaccines are recommended in response to a specific outbreak or travel context — a midwife or GP can advise." },
+      ],
+      whyItVaries: "The recommended list updates over time. UK NHS guidance is the steady reference point.",
+    },
+    timing: {
+      whenStarts: "Whooping cough is offered from around 16 weeks; flu and COVID-19 vaccines are offered at any stage in season.",
+      whenEases: "Most pregnancy-specific vaccinations are given in the second or third trimester.",
+    },
+    whatItFeelsLike: ["A short appointment, often a sore arm for a day or two"],
+    whatThisMeans:
+      "Pregnancy vaccinations are offered because the evidence supporting them is strong. Choosing whether to have them is still yours.",
+    normal: [
+      "A sore arm for a day or two after the injection",
+      "Mild fever or feeling a bit off for 24–48 hours",
+      "No reaction at all",
+    ],
+    seekSupport: [
+      "A high fever that doesn't settle",
+      "Significant swelling or rash",
+      "Any reaction that worries you",
+    ],
+    disclaimer: "This article describes general UK guidance. For advice on your individual situation, speak to your midwife or GP.",
+    whatYouCanDo: [
+      { action: "Bring questions to your midwife appointment", reason: "It's the most direct way to get advice tailored to you." },
+      { action: "Use NHS sources for the latest guidance", reason: "Recommendations update from time to time." },
+      { action: "Take paracetamol if you feel unwell after the jab", reason: "It's safe in pregnancy and helps with mild fever or aches." },
+    ],
+    whatHappensNext: "Once given, antibodies build up over the following weeks and pass to your baby across the placenta.",
+    relatedStage: {
+      intro: "Vaccinations are part of the wider Health and Safety topic:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The full topic this sits within." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "Often discussed at the same appointments." },
+      ],
+    },
+    aiPrompts: [
+      "Why is the whooping cough jab offered in pregnancy?",
+      "Is the flu vaccine safe for the baby?",
+      "Can I have other vaccines while pregnant?",
+    ],
+    captureIntro: "Vaccination decisions in pregnancy can carry more weight than they first seem. Worth noting where you landed.",
+    trimester: [2, 3],
+    relatedSlugs: ["tests-and-scans-in-pregnancy", "medicines-in-pregnancy", "foods-to-avoid-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["safety-and-support", "vaccinations"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Three vaccines are routinely recommended in UK pregnancy: whooping cough, flu, and COVID-19",
+      "Whooping cough is usually offered from 16 weeks; flu and COVID at any stage of pregnancy in season",
+      "Pregnancy vaccines work by passing antibodies to your baby before birth, when they're most vulnerable",
+      "Live vaccines (like MMR, yellow fever) are usually avoided in pregnancy — but most vaccines aren't live",
+      "All vaccines in pregnancy are a choice — your midwife or GP can talk you through the evidence",
+    ],
+    sources: [
+      "NHS — Vaccinations in pregnancy",
+      "UK Health Security Agency — Green Book chapters on pertussis, influenza, and COVID-19",
+      "RCOG — Coronavirus and pregnancy",
+      "NICE NG201 — Antenatal care",
+    ],
+    faq: [
+      { question: "When should I have the whooping cough vaccine?", answer: "Usually from 16 weeks of pregnancy, ideally before 32 weeks. Having it earlier in this window gives more time for antibodies to pass to your baby." },
+      { question: "Is the flu vaccine safe in pregnancy?", answer: "Yes. The flu vaccine offered in pregnancy is not a live vaccine and has been used safely in millions of pregnancies. Flu itself is more likely to be serious in pregnancy." },
+      { question: "What about the COVID-19 vaccine?", answer: "Current UK guidance recommends the COVID-19 vaccine for pregnant women, including boosters in season. Your midwife or GP can advise on the latest position." },
+      { question: "Are there vaccines I shouldn't have in pregnancy?", answer: "Live vaccines — including MMR, BCG, and yellow fever — are usually avoided in pregnancy. If you need one for travel or work, speak to your GP first." },
+      { question: "Can I have my flu and whooping cough vaccines at the same time?", answer: "Yes. They're often offered together in one appointment from 16 weeks onwards in flu season." },
+    ],
+
+    topic: "health-and-safety",
+    standfirst:
+      "Three vaccinations are routinely offered in UK pregnancy. Here's a calm, plain-English look at why they're recommended, when they're given, and how to think about the choice.",
+    editorialSections: [
+      {
+        id: "why-vaccines-in-pregnancy",
+        heading: "Why vaccinations are offered in pregnancy",
+        lead: "Pregnancy vaccinations do two things: they protect you against infections that can be more serious during pregnancy, and they pass antibodies to your baby that protect them in the early weeks of life.",
+        paragraphs: [
+          "Newborns can't be vaccinated against most things straight away, and some infections — like whooping cough — can be very serious in the first weeks of life. Vaccinating in pregnancy bridges that gap.",
+          "The vaccines used in pregnancy aren't 'live' vaccines, which means they can't cause the infection they protect against. They prompt your body to make antibodies, which cross the placenta to your baby.",
+        ],
+      },
+      {
+        id: "whooping-cough",
+        heading: "The whooping cough vaccine",
+        lead: "Whooping cough (pertussis) can be life-threatening in young babies. The vaccine in pregnancy is the most effective protection there is for them in their first weeks.",
+        paragraphs: [
+          "It's usually offered from 16 weeks, ideally before 32 weeks, but can be given later if needed. The vaccine used in the UK also covers diphtheria, tetanus, and polio — but the whooping cough protection is the reason it's offered.",
+          "Antibodies pass across the placenta in the weeks after the jab, giving your baby strong protection from birth until they receive their own first vaccinations at 8 weeks old.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If you've had the whooping cough vaccine before — even in a previous pregnancy — it's still recommended each pregnancy, because antibody levels drop over time.",
+        },
+      },
+      {
+        id: "flu",
+        heading: "The flu vaccine",
+        lead: "Flu can be more serious in pregnancy. The flu vaccine is offered free on the NHS to pregnant women each autumn and winter, at any stage of pregnancy.",
+        paragraphs: [
+          "Pregnancy changes how your immune system, heart, and lungs work, which makes flu more likely to lead to complications like pneumonia. The vaccine reduces that risk for you and also passes some protection to your baby for their first few months.",
+          "It's a non-live vaccine and has been given in pregnancy for many years. Side effects are usually mild — a sore arm, sometimes a low-grade fever for a day or two.",
+        ],
+      },
+      {
+        id: "covid",
+        heading: "COVID-19 vaccination",
+        lead: "Current UK guidance recommends COVID-19 vaccination for pregnant women, including seasonal boosters. The picture has been studied in millions of pregnancies worldwide.",
+        paragraphs: [
+          "COVID-19 in pregnancy carries a higher risk of complications, particularly later in pregnancy. Vaccination reduces that risk and passes antibodies to your baby.",
+          "Specific recommendations on which vaccine and when are updated from time to time. Your midwife, GP, or the NHS website will have the current position for your stage of pregnancy.",
+        ],
+      },
+      {
+        id: "what-to-expect",
+        heading: "What to expect from the appointment",
+        lead: "Pregnancy vaccinations are usually given by your GP practice, midwife, or sometimes a community pharmacy.",
+        paragraphs: [
+          "The appointment itself is short. The vaccine is usually given in your upper arm. Most people feel fine afterwards or have a mildly sore arm for a day or two; some feel a bit run-down or feverish for 24–48 hours, which usually settles with rest and paracetamol.",
+          "If you can, plan the appointment when you'll have a quieter day or two afterwards. It's not necessary, but a few people find they feel a bit flat the next day.",
+        ],
+      },
+      {
+        id: "common-concerns",
+        heading: "Common concerns and questions",
+        lead: "Most worries about pregnancy vaccinations come back to safety, timing, and what's actually in them. Asking is the right move.",
+        paragraphs: [
+          "If you have a specific concern — a previous reaction, a medical condition, a question about a particular ingredient, or about combining vaccines — your GP or midwife can talk it through with you. They've answered every question on this list before.",
+          "Choosing whether to have a vaccine is yours. The clearest way to make a decision you feel settled on is usually to bring your questions to a real conversation rather than to scroll through opinions online.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Saying 'I'm not sure, can we talk about it?' is a completely valid response to any vaccination offer.",
+        },
+      },
+      {
+        id: "vaccines-to-avoid",
+        heading: "Vaccines that are usually avoided in pregnancy",
+        lead: "Most vaccines aren't live, but a few are — and live vaccines are usually avoided in pregnancy as a precaution.",
+        paragraphs: [
+          "These include MMR (measles, mumps, rubella), BCG (tuberculosis), yellow fever, and the live nasal flu spray (which is why pregnant women are offered the injected flu vaccine instead).",
+          "If you'd usually need one of these for work or travel, speak to your GP. There may be safer alternatives, or a vaccine may be considered if the risk of the infection is significant.",
+        ],
+      },
+    ],
+  },
+
+  // ─── MEDICINES IN PREGNANCY ───────────────────────────────────────────────
+  {
+    slug: "medicines-in-pregnancy",
+    title: "Medicines in pregnancy: how to think about what's safe",
+    metaDescription: "How to think about medicines in pregnancy — paracetamol, antibiotics, mental health medication, and more. A calm guide to asking the right questions.",
+    quickAnswer:
+      "Most everyday medicines either have a known safety profile in pregnancy or have a safer alternative. Paracetamol is generally first-line for pain. Many prescription medicines, including some antidepressants and asthma inhalers, can be continued — often with adjustments — because the risks of stopping can outweigh the risks of continuing. Don't stop any prescribed medicine without talking to your prescriber first. For over-the-counter medicines and herbal remedies, ask your pharmacist before taking anything new.",
+    howThisFeels: [
+      "Wanting a yes or no when the answer is more nuanced",
+      "Worrying about a medicine you took before you knew you were pregnant",
+      "Feeling unsure who to ask first",
+      "Quietly going without something you actually need",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Different evidence base for different medicines", body: "Some medicines have decades of pregnancy data; some have less. The right answer is medicine-specific, not pregnancy-wide." },
+        { heading: "Risks of not treating", body: "For some conditions (like asthma, epilepsy, or significant depression), the risks of leaving them untreated can be greater than the risks of carefully chosen medicine." },
+      ],
+      lessCauses: [
+        { heading: "Personal sensitivities", body: "Tolerance and side effects can shift in pregnancy, so even familiar medicines may feel different." },
+      ],
+      whyItVaries: "The right answer depends on the specific medicine, the dose, the condition being treated, and where you are in pregnancy. That's why personalised advice matters.",
+    },
+    timing: {
+      whenStarts: "Medicine questions can come up at any point in pregnancy.",
+      whenEases: "Conversations often shift again after birth, especially if you're breastfeeding.",
+    },
+    whatItFeelsLike: ["A small admin task you keep putting off", "Relief when someone gives you a clear answer"],
+    whatThisMeans:
+      "There's almost always a way through. The aim is not to avoid medicine on principle, but to make informed choices with someone who can help you weigh them.",
+    normal: [
+      "Continuing a long-term prescribed medicine after a pregnancy review",
+      "Switching to a different version of the same medicine for pregnancy",
+      "Using paracetamol for ordinary pain",
+      "Asking the pharmacist before buying anything over the counter",
+    ],
+    seekSupport: [
+      "Considering stopping a prescribed medicine on your own",
+      "Symptoms that aren't being controlled",
+      "A new medical issue that needs treating",
+    ],
+    disclaimer: "This is general information, not medical advice for your specific situation. Always talk to your GP, midwife, prescriber, or pharmacist about your own medicines.",
+    whatYouCanDo: [
+      { action: "Don't stop a prescribed medicine without speaking to your prescriber", reason: "Sudden stops can be more harmful than the medicine itself, especially for conditions like asthma, epilepsy, and depression." },
+      { action: "Ask your pharmacist before buying anything over the counter", reason: "They are a quick, free, expert first stop for medicines, supplements, and herbal remedies." },
+      { action: "Tell anyone prescribing for you that you're pregnant", reason: "It changes which medicine and dose they'll consider." },
+      { action: "Use bumps (UK Best Use of Medicines in Pregnancy) leaflets", reason: "These are written for the public and cover most common medicines." },
+    ],
+    whatHappensNext: "Most medicine conversations in pregnancy end with a clear plan — continue, switch, adjust, or use something else.",
+    relatedStage: {
+      intro: "Medicines sit alongside the rest of pregnancy care:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Vaccinations in pregnancy", href: "/articles/vaccinations-in-pregnancy", context: "Another part of pregnancy health decisions." },
+      ],
+    },
+    aiPrompts: [
+      "Is paracetamol safe in pregnancy?",
+      "Can I continue my antidepressant while pregnant?",
+      "I took ibuprofen before I knew I was pregnant — should I worry?",
+    ],
+    captureIntro: "Medicine decisions in pregnancy carry weight that doesn't always match how routine the medicine itself is.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["tests-and-scans-in-pregnancy", "vaccinations-in-pregnancy", "foods-to-avoid-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["safety-and-support", "medicines"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Most everyday medicines either have a clear safety profile in pregnancy or have a safer alternative",
+      "Paracetamol is generally first-line for pain in pregnancy; ibuprofen is usually avoided, especially in the third trimester",
+      "Don't stop a prescribed medicine on your own — for many conditions, the risks of stopping outweigh the risks of continuing",
+      "Pharmacists are a quick first stop for over-the-counter medicines and herbal remedies",
+      "UK 'bumps' leaflets cover most common medicines in plain English",
+    ],
+    sources: [
+      "NHS — Medicines in pregnancy",
+      "UK Teratology Information Service (UKTIS) — bumps leaflets",
+      "BNF — Prescribing in pregnancy",
+      "NICE — Antenatal and postnatal mental health (CG192)",
+    ],
+    faq: [
+      { question: "Is paracetamol safe in pregnancy?", answer: "Paracetamol is generally considered the first-choice painkiller in pregnancy. It should be taken at the lowest effective dose, for the shortest time needed. If you're using it often, speak to your midwife or GP." },
+      { question: "Can I take ibuprofen in pregnancy?", answer: "Ibuprofen and other NSAIDs are usually avoided in pregnancy, especially after 20 weeks and particularly in the third trimester, when they can affect the baby. Speak to your pharmacist or GP for an alternative." },
+      { question: "I took medicine before I knew I was pregnant — should I worry?", answer: "Most medicines taken in very early pregnancy don't cause harm. Tell your midwife or GP what you took and when, and they can check it against current guidance — usually for reassurance rather than action." },
+      { question: "Can I keep taking my antidepressant?", answer: "Often yes, sometimes with a switch to a different one. Stopping antidepressants suddenly can be harmful in itself. Have this conversation with your GP, prescriber, or perinatal mental health team — don't stop on your own." },
+      { question: "Are herbal remedies safe in pregnancy?", answer: "Not all of them. 'Natural' doesn't mean safe in pregnancy — some herbal remedies and supplements have effects that aren't well studied. Always check with a pharmacist before taking anything new, including teas marketed for pregnancy." },
+      { question: "Can I take antibiotics in pregnancy?", answer: "Yes, when needed. Some antibiotics are preferred over others in pregnancy, and your prescriber will choose accordingly. Untreated infections can cause more harm than carefully chosen antibiotics." },
+    ],
+
+    topic: "health-and-safety",
+    standfirst:
+      "Most medicine questions in pregnancy aren't about a flat yes or no — they're about asking the right person and weighing the actual risks. A calm guide to thinking it through.",
+    editorialSections: [
+      {
+        id: "what-safe-means",
+        heading: "What people mean by \"safe\" medicines in pregnancy",
+        lead: "\"Safe in pregnancy\" rarely means risk-free in an absolute sense. It usually means the medicine has been used widely, studied, and is considered reasonable when the benefit outweighs the small or theoretical risks.",
+        paragraphs: [
+          "Some medicines have decades of evidence behind them and very clear pregnancy guidance. Others are used less often in pregnancy, so the data is thinner — that doesn't always mean they're risky, just that the conversation needs to be more individual.",
+          "The other side of safety is the risk of not treating. Untreated asthma, epilepsy, depression, infections, and many other conditions can cause more harm in pregnancy than the medicines that treat them. That's why most prescribers will help you find a way to keep treating, rather than stop.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If a medicine is being changed in pregnancy, it's usually a switch to a more-studied option — not an instruction to go without.",
+        },
+      },
+      {
+        id: "why-medicines-need-checking",
+        heading: "Why some medicines need checking",
+        lead: "A few categories of medicine reliably need extra thought in pregnancy. Knowing which they are makes everything else easier.",
+        paragraphs: [
+          "These include: NSAIDs like ibuprofen, naproxen, and aspirin (usually avoided especially after 20 weeks); some acne medicines, particularly anything containing isotretinoin or high-dose vitamin A; certain epilepsy medicines (where the conversation is about choosing the right one rather than stopping); some blood pressure medicines (often switched to pregnancy-friendly versions); warfarin (usually changed to an alternative); and a few antibiotics like tetracyclines.",
+          "Most other everyday medicines either have a clear safe option, an equivalent safer alternative, or a specific dose adjustment for pregnancy. The right person to ask depends on the medicine — pharmacist for over-the-counter, GP or specialist for prescribed.",
+        ],
+      },
+      {
+        id: "paracetamol-and-everyday",
+        heading: "Paracetamol and everyday painkillers",
+        lead: "Paracetamol is generally the first-choice painkiller in pregnancy. The standard advice is the lowest effective dose, for the shortest time you need.",
+        paragraphs: [
+          "If you're using paracetamol regularly — for migraines, back pain, pelvic girdle pain — it's worth a conversation with your midwife or GP, both to check the dose and to look at what else might help.",
+          "Ibuprofen, naproxen, and other NSAIDs are usually avoided, particularly in the third trimester, where they can affect the baby's heart and kidney function and reduce amniotic fluid. Aspirin is usually avoided too, with one exception: low-dose aspirin is sometimes specifically prescribed in pregnancy for women at higher risk of pre-eclampsia.",
+        ],
+      },
+      {
+        id: "long-term-medication",
+        heading: "Long-term and prescribed medicines",
+        lead: "If you take medicine for a long-term condition, the right move is almost always to keep taking it until you've had a pregnancy review — not to stop on your own.",
+        paragraphs: [
+          "This applies to mental health medicines (antidepressants, anti-anxiety medicines, mood stabilisers), asthma inhalers, epilepsy medicines, blood pressure medicines, thyroid medicines, and most others. For many of these, sudden stopping causes more harm than the medicine itself.",
+          "Ideally, the conversation about medicines in pregnancy starts before pregnancy, but it's just as valid after. If you've found out you're pregnant and are on long-term medicine, contact your prescriber — your GP, specialist, or perinatal mental health team — for a review rather than guessing.",
+        ],
+      },
+      {
+        id: "common-medicine-questions",
+        heading: "Common medicine questions",
+        lead: "A few questions come up over and over again. Here are the short, calm versions.",
+        paragraphs: [
+          "Antibiotics: yes when needed, with the prescriber choosing one suited to pregnancy. Hayfever: some antihistamines (like loratadine and cetirizine) are generally considered okay in pregnancy; nasal sprays may be preferred. Heartburn: many antacids and a few prescription options are safe; ask your pharmacist first. Cough and cold remedies: most combination products are not recommended; paracetamol plus warm fluids and rest is usually the answer. Sleep aids: most over-the-counter sleep medicines aren't recommended in pregnancy; a GP review is better.",
+          "Herbal remedies and supplements: 'natural' isn't the same as safe in pregnancy. Some herbal teas, essential oils, and supplements aren't well studied or are known to be unsuitable. Always check with a pharmacist before adding anything new.",
+        ],
+      },
+      {
+        id: "if-you-already-took",
+        heading: "If you've already taken something you're worried about",
+        lead: "Most medicines taken before you knew you were pregnant don't cause harm. The right step is information, not panic.",
+        paragraphs: [
+          "Make a note of what you took, the dose, and when. Tell your midwife or GP at your next appointment, or sooner if it's something you're particularly worried about. They can check it against current guidance — most often the answer is reassurance.",
+          "The UK Teratology Information Service (UKTIS) publishes plain-English 'bumps' leaflets covering most common medicines, written for the public. These are a good first read while you're waiting to speak to someone.",
+        ],
+      },
+      {
+        id: "who-to-ask",
+        heading: "Who to ask, and when",
+        lead: "Different questions belong with different people. Knowing the order saves time and worry.",
+        paragraphs: [
+          "Pharmacist — first stop for any over-the-counter medicine, supplement, herbal remedy, or 'is this brand okay' question. Free, walk-in, and quick.",
+          "GP — for prescribed medicines, new symptoms that might need treating, and any medicine review. Tell the receptionist you're pregnant when you book.",
+          "Midwife — for pregnancy-specific questions, particularly things that are coming up at antenatal appointments.",
+          "Specialist team or perinatal mental health team — for long-term conditions or mental health medicines, especially if you already see them.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "There is no medicine question too small to ask. Pharmacists, midwives, and GPs would much rather you asked.",
+        },
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

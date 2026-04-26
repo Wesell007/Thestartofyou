@@ -131,6 +131,15 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
           { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide" },
         ],
       },
+      {
+        label: "Labour and birth",
+        description: "What labour can look like, how it tends to unfold, and when to call.",
+        links: [
+          { label: "Signs of labour", href: "/articles/signs-of-labour" },
+          { label: "Stages of labour", href: "/articles/stages-of-labour" },
+          { label: "When to go in for labour", href: "/articles/when-to-go-in-for-labour" },
+        ],
+      },
     ],
 
     weekBridge: {

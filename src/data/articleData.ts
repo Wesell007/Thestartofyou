@@ -4694,6 +4694,555 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── SIGNS OF LABOUR ──────────────────────────────────────────────────────
+  {
+    slug: "signs-of-labour",
+    title: "Signs of labour: what to look for, and what they really mean",
+    metaDescription: "The common signs labour may be starting — contractions, waters breaking, a show — how labour can begin differently for different people, and when it's time to call.",
+    quickAnswer:
+      "Labour usually announces itself in one of a few ways: regular contractions that build in strength, waters breaking, or a show (a small mucus discharge). Many people notice subtler shifts first — backache, period-like cramps, or a sense that something is different. Labour can begin differently for different people, and early signs can come and go for hours or even days. As a general rule, call your midwife or maternity unit when contractions are strong, regular, and lasting around a minute, if your waters break, if you have any bleeding beyond a light show, or any time something feels wrong.",
+    howThisFeels: [
+      "Wondering whether this is it, or another false alarm",
+      "Trying to time twinges that don't quite settle into a pattern",
+      "Excited and nervous in the same breath",
+      "Not wanting to call too early — or too late",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Contractions building", body: "Tightenings that grow longer, stronger, and closer together over time are the clearest sign labour is establishing." },
+        { heading: "Waters breaking", body: "A gush or a slow trickle of clear fluid. Sometimes obvious, sometimes easy to mistake for a small leak of urine." },
+        { heading: "A show", body: "The plug of mucus that has sealed the cervix coming away — often pinkish or lightly streaked with blood. It can happen days before labour, or right alongside it." },
+      ],
+      lessCauses: [
+        { heading: "Backache and cramping", body: "Period-like cramps or a deep, dull backache can be early labour, especially if they come in waves." },
+        { heading: "An upset stomach", body: "Loose stools or feeling unsettled in the gut can precede labour by a day or two for some people." },
+      ],
+      whyItVaries: "Labour doesn't follow one script. Some people start with waters breaking, others with hours of mild backache, others with contractions that arrive already strong. None of these is more 'right' than the others.",
+    },
+    timing: {
+      whenStarts: "Most people go into labour between 37 and 42 weeks. Early signs can begin hours or days before active labour.",
+      whenPeaks: "Active labour — when contractions are strong, regular, and progressing — is when most people go in.",
+      whenEases: "Once labour establishes, the early-sign uncertainty usually settles into a clearer pattern.",
+    },
+    whatItFeelsLike: [
+      "Tightenings that feel like strong period cramps",
+      "A backache that wraps around to the front",
+      "A sudden gush, or a slow ongoing trickle",
+      "A heavy, downward pressure that wasn't there yesterday",
+    ],
+    whatThisMeans:
+      "Early signs of labour are your body beginning a process that has its own pace. Most early labour is safe to be at home for — but trusting your instincts to call is part of the process too.",
+    normal: [
+      "Hours, sometimes days, of on-and-off tightenings before labour establishes",
+      "A show that appears in the days before labour, or right alongside it",
+      "A slow, intermittent trickle of waters rather than a single dramatic gush",
+      "Wondering more than once whether this is really it",
+    ],
+    seekSupport: [
+      "Waters breaking — call your midwife or maternity unit even if contractions haven't started",
+      "Any bleeding beyond a light, mucus-streaked show",
+      "A noticeable change or reduction in your baby's movements",
+      "Contractions strong, regular, and lasting around a minute (often described as 3 in 10 minutes)",
+      "Anything that feels wrong, even if you can't name what",
+    ],
+    disclaimer: "This is general guidance about the signs of labour. Your maternity unit is the right first call whenever you're unsure — they would always rather hear from you.",
+    whatYouCanDo: [
+      { action: "Time contractions when they feel regular", reason: "Note when each starts and how long it lasts. A pattern that holds for an hour gives a much clearer picture than a single ten-minute window." },
+      { action: "Eat, drink, and rest in early labour", reason: "Early labour can be long. Staying nourished and resting between waves makes the rest of labour easier to meet." },
+      { action: "Stay home until contractions establish, unless told otherwise", reason: "Most people are advised to stay home in early labour. Familiar surroundings often help labour move forward." },
+      { action: "Call your maternity unit if you're unsure", reason: "Midwives expect calls from people who aren't sure. Talking it through is part of the care, not an interruption to it." },
+    ],
+    whatHappensNext: "Once labour establishes, you'll usually be advised to come in. From there, the stages of labour begin to unfold.",
+    relatedStage: {
+      intro: "Signs of labour sit alongside the wider labour and birth picture:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Stages of labour", href: "/articles/stages-of-labour", context: "What tends to happen once labour establishes." },
+        { label: "When to go in for labour", href: "/articles/when-to-go-in-for-labour", context: "How to think about the moment to call or set off." },
+      ],
+    },
+    aiPrompts: [
+      "How do I know if I'm really in labour?",
+      "What does a show actually look like?",
+      "Should I go in if my waters break but I'm not contracting?",
+    ],
+    captureIntro: "The early signs of labour are easy to miss in the moment and easy to remember in detail later. Worth keeping a quiet note of how it actually felt.",
+    trimester: [3],
+    relatedSlugs: ["stages-of-labour", "when-to-go-in-for-labour", "third-trimester-complete-guide"],
+    journey: ["pregnancy"],
+    topics: ["body", "labour"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Labour usually begins with contractions, waters breaking, or a show — sometimes all three, often not at once",
+      "Early signs can come and go for hours or days before labour establishes",
+      "Backache, cramping, and an unsettled stomach can all be early labour for some people",
+      "Call your maternity unit if waters break, contractions are strong and regular, you have any bleeding beyond a light show, or movements change",
+      "Trust your instinct to call — midwives expect it, and would rather hear from you twice than not at all",
+    ],
+    sources: [
+      "NHS — Signs that labour has begun",
+      "NICE — Intrapartum care for healthy women and babies",
+      "Royal College of Midwives — Latent phase of labour",
+      "Tommy's — Signs of labour",
+    ],
+    faq: [
+      { question: "How do I know I'm really in labour and not having Braxton Hicks?", answer: "Braxton Hicks tightenings tend to be irregular, ease when you change position or rest, and don't get longer or stronger over time. True labour contractions usually become more regular, build in intensity, and continue regardless of what you do. If you're unsure, that itself is reason enough to ring your maternity unit." },
+      { question: "What does a show look like?", answer: "A show is a small amount of thick, jelly-like mucus, often tinted pink, brown, or lightly streaked with blood. It can come away as one piece or in smaller amounts over a few days. A show on its own isn't a sign labour is imminent — it can happen days or even a week or so before active labour." },
+      { question: "Should I go in if my waters have broken but contractions haven't started?", answer: "Always call your midwife or maternity unit when your waters break, even if contractions haven't started. They'll talk you through what to do — usually it involves staying at home for a period of time and going in if labour hasn't started within a window they'll specify, or sooner if anything changes." },
+      { question: "Can labour stop and start again?", answer: "Yes. The early phase of labour, sometimes called latent or prodromal labour, can stretch over hours or days, with contractions that come and go. As long as your baby is moving normally and you have no warning signs, this is usually a normal — if frustrating — part of the process." },
+      { question: "Is it normal to have backache rather than belly pain?", answer: "Yes. Some labours are felt mostly in the lower back rather than the front of the bump, often when the baby is in a particular position. Back labour is common enough that it's not by itself a sign anything is wrong." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "body",
+    standfirst:
+      "Labour rarely begins the way films suggest. A calm look at the common signs, the subtler ones, and how to know when it's time to call.",
+    editorialSections: [
+      {
+        id: "signs-of-labour",
+        heading: "Signs of labour",
+        lead: "Labour can announce itself loudly or arrive quietly. Knowing the common signals — and the ones that are easier to miss — makes the lead-up feel less like a guessing game.",
+        paragraphs: [
+          "Most labours begin with one or more of three things: contractions that build over time, waters breaking, or a small mucus discharge known as a show. Beneath those, a lot of people notice quieter shifts first — backache, period-like cramps, an unsettled stomach, or simply a sense that something is different.",
+          "None of these signs is a failure if it doesn't appear, and none is a guarantee on its own. Labour follows its own arc, and the early signs are an opening, not a starter pistol.",
+        ],
+      },
+      {
+        id: "what-often-happens-first",
+        heading: "What often happens first",
+        lead: "For many people, the earliest sign is something low-grade and ordinary — easy to dismiss until it keeps coming back.",
+        paragraphs: [
+          "Period-like cramps or a dull backache that arrives in waves is one of the most common openings. Some people feel a sudden burst of energy and an urge to organise — sometimes called nesting — in the day or two before. Others notice loose stools, an unsettled gut, or a heavier downward pressure than they've had before.",
+          "These signs don't always lead straight into labour. They can come and go for a day or longer, then settle, then return. That stop-and-start pattern is part of how early labour often works.",
+        ],
+      },
+      {
+        id: "waters-contractions-and-show",
+        heading: "Waters breaking, contractions, and a show",
+        lead: "These are the three signs most people are watching for — and each can look different from what's expected.",
+        paragraphs: [
+          "Waters breaking can be a single noticeable gush of clear fluid, or a slow trickle that keeps coming when you stand or move. It's sometimes mistaken for a small bladder leak. Whether dramatic or subtle, it's always worth a call to your maternity unit.",
+          "Contractions are tightenings of the uterus that, in true labour, become longer, stronger, and closer together. A pattern that holds steady or grows over an hour is more telling than one ten-minute stretch.",
+          "A show is the plug of mucus that has sealed the cervix coming away. It tends to be jelly-like and may be pink, brown, or streaked with a little blood. A show on its own doesn't mean labour is imminent — it can appear days before active labour begins.",
+        ],
+      },
+      {
+        id: "how-early-labour-can-feel",
+        heading: "How early labour can feel",
+        lead: "Early labour — sometimes called the latent phase — is often longer and more uncertain than the textbook version suggests.",
+        paragraphs: [
+          "Early labour can feel like an extended evening of strong period pain, an aching back, and tightenings that don't quite establish. It can stretch across a single afternoon or across two or three nights. Many people sleep through parts of it, or only realise in hindsight that it had begun.",
+          "Eating, resting, taking a bath, walking gently, watching something distracting — all are reasonable. Early labour doesn't usually need anything dramatic. What it needs most is permission to take its time.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "An early labour that takes its time isn't a labour going wrong. It's one of the most common patterns there is.",
+        },
+      },
+      {
+        id: "how-labour-can-begin-differently",
+        heading: "How labour can begin differently",
+        lead: "There's no single right opening. Some labours start with waters breaking and quiet — others with strong contractions and no warning at all.",
+        paragraphs: [
+          "Some people have hours of mild backache before anything else. Some have a show days in advance and a slow build-up. Some go to bed feeling normal and wake up at 3am in established labour. All of these are within normal.",
+          "If you've had a baby before, labour can sometimes begin and progress more quickly. If this is your first, the early phase is more likely to be long. Neither pattern is a guarantee.",
+        ],
+      },
+      {
+        id: "what-can-still-be-normal",
+        heading: "What can still be normal before active labour",
+        lead: "Not every twinge is the start of something. A lot of late-pregnancy sensations sit in the in-between.",
+        paragraphs: [
+          "Braxton Hicks tightenings that come and go, a heavy feeling low in the pelvis, mild cramps that ease with rest, and an upset stomach without any other signs are all common in the last weeks. They can show up alongside genuine early labour, or on their own with no labour following for days.",
+          "The clearest distinction is direction of travel. Sensations that grow longer, stronger, and closer together over time are more likely to be labour than ones that ease when you change position, eat, or rest.",
+        ],
+      },
+      {
+        id: "when-to-call",
+        heading: "When to call your midwife or maternity unit",
+        lead: "There's no prize for waiting. Calling early is part of the care, not an interruption to it.",
+        paragraphs: [
+          "Call when contractions are strong, regular, and lasting around a minute (often described as 3 in 10 minutes), or sooner if your maternity unit has given you specific guidance. Always call when your waters break, even if contractions haven't started. Always call for any bleeding that's more than a light, mucus-streaked show, or for any change in your baby's movements.",
+          "And always call if something feels wrong — even if you can't name what. Trusting that instinct is one of the most important parts of late pregnancy.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Midwives would always rather hear from you twice than not at all. Calling is the right thing to do whenever you're unsure.",
+        },
+      },
+    ],
+  },
+
+  // ─── STAGES OF LABOUR ─────────────────────────────────────────────────────
+  {
+    slug: "stages-of-labour",
+    title: "Stages of labour: what each one is, and what tends to happen",
+    metaDescription: "A calm guide to the stages of labour — early labour, established labour, transition, the birth of your baby, and the birth of the placenta — with realistic timing and what support may look like.",
+    quickAnswer:
+      "Labour is usually described in three stages. The first stage is the longest: it begins with early labour, moves into established labour, and ends with transition — when your cervix has opened fully. The second stage is the birth of your baby. The third stage is the birth of the placenta. Each stage can vary widely in length and intensity, and labour rarely follows a textbook timeline. Knowing the shape of each stage tends to make labour feel less unpredictable, even when it's intense.",
+    howThisFeels: [
+      "Wanting to know what's coming, but not in a clinical way",
+      "Trying to picture how labour might unfold",
+      "Worried about transition without quite knowing why",
+      "Wondering how long it might take, and whether that matters",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Early labour", body: "The cervix begins to soften, thin, and open. Contractions are usually mild to moderate and irregular. This phase can be long." },
+        { heading: "Established labour", body: "Contractions become regular, stronger, and longer. The cervix opens from around 4cm to fully dilated (10cm)." },
+        { heading: "Transition", body: "The final part of the first stage. Often the most intense, often the shortest. Many people feel they can't go on right before they do." },
+      ],
+      lessCauses: [
+        { heading: "Second stage — the birth", body: "Once the cervix is fully open, contractions help move your baby down and out. May involve active pushing or breathing the baby down." },
+        { heading: "Third stage — the placenta", body: "After your baby is born, the placenta is delivered. This is usually quick and gentle, with or without a small injection to help." },
+      ],
+      whyItVaries: "Stage lengths vary enormously between people, and between pregnancies. A first labour is usually longer than a second. Some labours move steadily; others stop and start. None of these patterns is a sign of failure.",
+    },
+    timing: {
+      whenStarts: "Labour begins when contractions become regular, or when waters break.",
+      whenPeaks: "Established labour and transition are usually the most intense parts.",
+      whenEases: "After your baby is born, contractions ease quickly. The placenta usually follows within an hour.",
+    },
+    whatItFeelsLike: [
+      "Long stretches of waiting between waves of intensity",
+      "A loss of sense of time once established labour takes over",
+      "A moment in transition where it feels too much, just before it isn't",
+      "A different, deeper kind of focus during the second stage",
+    ],
+    whatThisMeans:
+      "The stages of labour are a map, not a schedule. Knowing the shape helps — but your labour will move at its own pace, and that's still labour working.",
+    normal: [
+      "An early phase that lasts much longer than the other stages combined",
+      "Contractions that pause for a while and then return",
+      "A short, intense transition before the urge to push arrives",
+      "Pushing that takes anywhere from a few minutes to a couple of hours",
+    ],
+    seekSupport: [
+      "Anything that feels wrong, at any stage of labour",
+      "A change in your baby's movements before active labour",
+      "Heavy bleeding at any point",
+      "Severe pain between contractions, rather than during them",
+    ],
+    disclaimer: "This is general guidance about how labour stages tend to unfold. Your midwife is the right person to talk to about how your labour is progressing on the day.",
+    whatYouCanDo: [
+      { action: "Stay home and rest in early labour if advised", reason: "Familiar surroundings, food, and rest help your body do the long, quiet work of opening." },
+      { action: "Lean into rhythm during established labour", reason: "Movement, breathing, sound, and water can all help you stay with the intensity rather than fight it." },
+      { action: "Trust the moment of 'I can't' in transition", reason: "Many people feel they can't carry on right before they do. Recognising it as a sign of progress can help." },
+      { action: "Listen to your body in the second stage", reason: "The urge to push is one of the strongest sensations there is. Following it — guided by your midwife — usually works better than counting." },
+      { action: "Keep your birth partner in the loop", reason: "Telling them what helps and what doesn't, even briefly, makes their support easier to accept in the moment." },
+    ],
+    whatHappensNext: "After the placenta is delivered, the immediate postnatal period begins — skin-to-skin, the first feed, and the slow, settling shock of meeting your baby.",
+    relatedStage: {
+      intro: "Stages of labour sit alongside the wider labour and birth picture:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Signs of labour", href: "/articles/signs-of-labour", context: "How labour usually begins." },
+        { label: "When to go in for labour", href: "/articles/when-to-go-in-for-labour", context: "Knowing when to call or set off." },
+      ],
+    },
+    aiPrompts: [
+      "What actually happens in transition?",
+      "How long does the second stage of labour usually take?",
+      "What is the third stage of labour?",
+    ],
+    captureIntro: "The stages of labour can blur in the moment and sharpen in memory afterwards. A quiet space to note what each part felt like, in your own words.",
+    trimester: [3],
+    relatedSlugs: ["signs-of-labour", "when-to-go-in-for-labour", "third-trimester-complete-guide"],
+    journey: ["pregnancy"],
+    topics: ["body", "labour"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Labour has three stages: opening (the first stage), birth of your baby (the second stage), and birth of the placenta (the third stage)",
+      "The first stage is usually by far the longest, and includes early labour, established labour, and transition",
+      "Transition is often the most intense part, and often the shortest",
+      "Stage lengths vary widely — a first labour is usually longer than a second",
+      "Knowing the shape helps, but your labour will move at its own pace, and that's still labour working",
+    ],
+    sources: [
+      "NHS — The stages of labour and birth",
+      "NICE — Intrapartum care for healthy women and babies",
+      "Royal College of Midwives — Care in labour",
+      "Tommy's — The stages of labour",
+    ],
+    faq: [
+      { question: "How long does each stage of labour usually take?", answer: "There's a wide range. Early labour can last hours or even a couple of days. Established labour and transition together commonly last around 6 to 12 hours in a first labour, and often less in subsequent labours. The second stage (pushing) can be anything from a few minutes to a couple of hours. The third stage is usually 5 to 30 minutes. Your midwife will guide you through your specific labour." },
+      { question: "What is transition?", answer: "Transition is the final part of the first stage of labour, when the cervix opens from around 8cm to fully dilated (10cm). It's often the most intense and most disorientating part, and frequently the shortest. Many people feel a strong sense of 'I can't do this' right at the moment they're closest to meeting their baby. Recognising it as a sign of progress can help in the moment." },
+      { question: "What if my labour doesn't progress in the expected way?", answer: "Labours that pause, slow down, or move in less linear ways are common and not by themselves a sign anything is wrong. Your midwife will monitor progress and discuss options if things aren't moving as expected — including rest, position changes, water, or, if needed, support to help labour along. Decisions are made with you, not just told to you." },
+      { question: "Is the third stage of labour something I have to do?", answer: "The third stage — the birth of the placenta — usually happens with very little active effort once your baby is born. You'll be offered a choice between an actively managed third stage (with a small injection to help the placenta come more quickly) and a physiological third stage (without). Your midwife will talk you through both options." },
+      { question: "What support is available during labour?", answer: "Your midwife is with you throughout. You can also have a birth partner (or two, depending on your unit). Pain relief options range from breathing, movement, water, and TENS at one end to gas and air, opioids, and an epidural at the other. None is more 'right' than another — what works depends on you, the labour, and the moment." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "body",
+    standfirst:
+      "Labour follows a recognisable shape, even when it doesn't follow a schedule. A calm guide to each stage — what it is, what tends to happen, and what support may look like.",
+    editorialSections: [
+      {
+        id: "the-stages-of-labour",
+        heading: "The stages of labour",
+        lead: "Labour is usually described in three stages. Understanding the shape of each one tends to make labour feel less unpredictable, even when the timing isn't.",
+        paragraphs: [
+          "The first stage is the opening — the cervix softens, thins, and dilates from closed to fully open. It contains early labour, established labour, and transition. It's usually by far the longest stage.",
+          "The second stage is the birth of your baby. The third stage is the birth of the placenta. Each stage has its own rhythm, and each can vary widely in how long it takes and how it feels.",
+        ],
+      },
+      {
+        id: "early-labour",
+        heading: "Early labour",
+        lead: "The opening phase. Usually long, often manageable, sometimes barely noticeable.",
+        paragraphs: [
+          "In early labour, the cervix begins to soften, thin, and open in the early centimetres. Contractions are usually mild to moderate and irregular — coming and going, sometimes for hours, sometimes across more than one day.",
+          "Most people are advised to stay home in early labour, eating, resting, taking baths, and moving when it helps. Familiar surroundings tend to support labour better than a hospital corridor at this stage.",
+        ],
+      },
+      {
+        id: "established-labour",
+        heading: "Established labour",
+        lead: "Labour finds its rhythm. Contractions become regular, longer, and stronger.",
+        paragraphs: [
+          "Established labour is usually defined as regular, painful contractions paired with the cervix opening from around 4cm onward. By this point, most people are no longer wondering whether this is labour.",
+          "It's the stage most people associate with the word 'labour'. Movement, breathing, water, sound, and steady support from a midwife and birth partner all become important. Time often loses its usual shape.",
+        ],
+      },
+      {
+        id: "transition",
+        heading: "Transition and the final part of labour",
+        lead: "Often the most intense part of labour, and often the shortest.",
+        paragraphs: [
+          "Transition is the final stretch of the first stage, as the cervix opens from around 8cm to fully dilated. Contractions tend to be very strong and close together. Many people feel shaky, hot or cold, suddenly tearful, or convinced they can't carry on.",
+          "That sense of 'I can't' is often a sign of how close you are. Transition rarely lasts long, and the second stage usually follows soon after.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Feeling like you can't go on, just before you do, is one of the most common moments of labour. It is often the sign that meeting your baby is close.",
+        },
+      },
+      {
+        id: "birth-of-the-baby",
+        heading: "Birth of the baby",
+        lead: "The second stage. The cervix is fully open, and contractions help bring your baby down and out.",
+        paragraphs: [
+          "Many people feel a strong, involuntary urge to push. Some labours involve active pushing; others involve breathing the baby down with the contractions. Your midwife will guide you with what's happening in your body.",
+          "The second stage can be anywhere from a few minutes to a couple of hours. It often feels different from the first stage — more focused, more physical, sometimes more grounded.",
+        ],
+      },
+      {
+        id: "birth-of-the-placenta",
+        heading: "Birth of the placenta",
+        lead: "The third stage — usually quick, usually quiet.",
+        paragraphs: [
+          "After your baby is born, the placenta separates from the wall of the uterus and is delivered. This usually happens within 5 to 30 minutes and involves very little active effort on your part.",
+          "You'll be offered a choice between an actively managed third stage (with a small injection to help the placenta come more quickly) and a physiological third stage (without). Both are reasonable; your midwife will talk you through them.",
+        ],
+      },
+      {
+        id: "how-long-labour-may-take",
+        heading: "How long labour may take",
+        lead: "There's no single answer. The honest one is: longer than you'd like, often, and shorter than you'd think, sometimes.",
+        paragraphs: [
+          "First labours are usually longer than subsequent ones. Established labour and transition together commonly last around 6 to 12 hours in a first labour, often less in a second or third. Early labour can stretch across far longer than that and is harder to pin down.",
+          "Stage lengths are averages, not promises. A labour that takes its time isn't a labour going wrong — it's a labour finding its own pace.",
+        ],
+      },
+      {
+        id: "when-progress-isnt-textbook",
+        heading: "When progress doesn't look textbook",
+        lead: "Labours pause, slow down, or move in less linear ways. Most are not signs anything is wrong.",
+        paragraphs: [
+          "If your labour slows, your midwife may suggest changes of position, water, rest, or — if needed — gentle ways to support labour along. None of this means your body has failed. Sometimes it means your baby's position needs to shift; sometimes it means your body needs a quieter moment.",
+          "If support or intervention is discussed, your midwife will explain what's being suggested and why. Decisions are made with you, not just told to you. Asking questions is part of the process, not an interruption to it.",
+        ],
+      },
+    ],
+  },
+
+  // ─── WHEN TO GO IN FOR LABOUR ─────────────────────────────────────────────
+  {
+    slug: "when-to-go-in-for-labour",
+    title: "When to go in for labour: how to know it's time",
+    metaDescription: "When to call your midwife or maternity unit in labour, how the advice can differ for second babies, what your unit may ask, and the signs not to wait with.",
+    quickAnswer:
+      "As a general rule, call your midwife or maternity unit when contractions are strong, regular, and lasting around a minute (often three in ten minutes), if your waters break, if you have any bleeding beyond a light show, or if your baby's movements change. Call sooner if this is not your first baby, as labour can move more quickly. Always call if something feels wrong, even if you can't name what — your maternity unit would always rather hear from you twice than not at all.",
+    howThisFeels: [
+      "Wanting to call but worried about being sent home",
+      "Trying to time contractions while they're happening to you",
+      "Wondering whether something is enough to ring about",
+      "Trusting your instinct, then second-guessing it",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Established contractions", body: "Strong, regular contractions lasting around a minute and coming roughly every 3 to 4 minutes are usually the moment most maternity units want to know." },
+        { heading: "Waters breaking", body: "Always worth a call, even before contractions start. Your unit will guide you on what happens next." },
+        { heading: "Bleeding", body: "More than a small show — even a moderate bleed — is a reason to call straight away rather than wait." },
+      ],
+      lessCauses: [
+        { heading: "Changes in movement", body: "Any noticeable change or reduction in your baby's movements should be called in, day or night, in or out of labour." },
+        { heading: "Something that feels wrong", body: "An instinct that something isn't right — even without a clear sign — is reason enough to ring." },
+      ],
+      whyItVaries: "Maternity units often have slightly different guidance, and your midwife may have given you specific advice based on your pregnancy. When their advice differs from general rules, follow theirs.",
+    },
+    timing: {
+      whenStarts: "Most labours establish gradually — calling early in the latent phase isn't usually advised unless something specific is happening.",
+      whenPeaks: "The most common time to be advised in is once contractions are regular, strong, and lasting around a minute.",
+      whenEases: "Once you're in the right place — at home, on the way, or in your unit — the uncertainty about timing usually eases.",
+    },
+    whatItFeelsLike: [
+      "A clear shift from 'maybe' to 'this is it'",
+      "Difficulty talking through contractions",
+      "An inward turn, when you stop being interested in anything else",
+      "A pull to be where you've planned to give birth",
+    ],
+    whatThisMeans:
+      "Knowing when to go in is part instinct, part guidance from your maternity unit. The right answer is usually the one that lets you feel safe.",
+    normal: [
+      "Calling more than once during the lead-up to labour",
+      "Being advised to stay home a little longer in early labour",
+      "Being told to come in straight away once labour establishes",
+      "Trusting an instinct that turned out to be right",
+    ],
+    seekSupport: [
+      "Waters breaking — always call",
+      "Any bleeding that's more than a light, mucus-streaked show",
+      "Reduced or changed baby movements at any time",
+      "Severe constant pain, rather than pain that comes and goes with contractions",
+      "A strong sense that something is wrong, even without a clear reason",
+    ],
+    disclaimer: "This is general guidance about when to call or go in. Your maternity unit's advice for you, and on the day, takes priority over any general rule.",
+    whatYouCanDo: [
+      { action: "Save your maternity unit's number where it's easy to find", reason: "Knowing exactly who to call removes one decision in a moment when decisions are harder." },
+      { action: "Time a contraction pattern over an hour", reason: "A pattern that holds for an hour is much more telling than one ten-minute window." },
+      { action: "Call earlier if this isn't your first baby", reason: "Second and later labours often move more quickly. Most units would prefer a slightly early call than a roadside birth." },
+      { action: "Have your bag ready by the door", reason: "Practical readiness reduces the mental load when you'd rather be focused on labour itself." },
+      { action: "Follow your instinct as well as the rules", reason: "An instinct that something is wrong, or that it's time, is information your maternity unit takes seriously." },
+    ],
+    whatHappensNext: "Once you call, your unit will either advise staying home for a bit longer, ask you to come in for a check, or invite you in to stay. From there, the stages of labour begin to unfold.",
+    relatedStage: {
+      intro: "Knowing when to go in sits alongside the wider labour and birth picture:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Signs of labour", href: "/articles/signs-of-labour", context: "How labour usually begins." },
+        { label: "Stages of labour", href: "/articles/stages-of-labour", context: "What tends to happen once labour establishes." },
+      ],
+    },
+    aiPrompts: [
+      "When should I call the hospital in labour?",
+      "Should I go in earlier with a second baby?",
+      "What will the maternity unit ask me on the phone?",
+    ],
+    captureIntro: "The moment you knew it was time tends to stay with you. A quiet space to note what made it feel like time, in your own words.",
+    trimester: [3],
+    relatedSlugs: ["signs-of-labour", "stages-of-labour", "third-trimester-complete-guide"],
+    journey: ["pregnancy"],
+    topics: ["body", "labour"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Call when contractions are strong, regular, and lasting around a minute — or sooner if your unit has given different advice",
+      "Always call when your waters break, even if contractions haven't started",
+      "Always call for bleeding beyond a light show, or for any change in your baby's movements",
+      "Call earlier if this is not your first baby — labour often moves more quickly",
+      "Trust your instinct that something is wrong, or that it's time — your maternity unit takes that seriously",
+    ],
+    sources: [
+      "NHS — Signs that labour has begun",
+      "NICE — Intrapartum care for healthy women and babies",
+      "Royal College of Midwives — Care in labour",
+      "Tommy's — When to go to hospital in labour",
+    ],
+    faq: [
+      { question: "What will my maternity unit ask me when I ring?", answer: "Usually how often contractions are coming, how long they're lasting, how strong they feel (often gauged by whether you can talk through them), whether your waters have broken, whether you have any bleeding, and whether your baby's movements feel normal. They may also ask about your previous births and your pregnancy. Their questions are how they decide what to advise — they're not a test." },
+      { question: "Should I go in earlier if this isn't my first baby?", answer: "Often, yes. Second and later labours can move more quickly, sometimes much more quickly. Many maternity units advise calling earlier and setting off sooner if you've given birth before. Your midwife will usually have talked this through with you in late pregnancy — if not, it's worth asking." },
+      { question: "What if I think I'm in labour but I'm not sure?", answer: "Ring anyway. Maternity units expect calls from people who aren't sure. They'll ask a few questions and either reassure you and advise you to stay home, ask you to come in for a check, or invite you to come in to stay. None of those outcomes is a failure — they're all part of the care." },
+      { question: "When are bleeding or reduced movements an emergency?", answer: "Any bleeding that's more than a small, mucus-streaked show should be called in straight away. Any change or reduction in your baby's movements should be called in straight away — day or night, in or out of labour. Your unit will tell you what to do; usually it means coming in promptly for a check." },
+      { question: "What if I've been told I should be sent home but I don't feel safe leaving?", answer: "Tell your midwife. Decisions about going home in early labour are made with you, not at you. If something doesn't feel right, or you're worried about how quickly things might progress, say so. Your instinct is part of what they'll factor in." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "body",
+    standfirst:
+      "Knowing when to call or set off can feel like one of the harder calls of late pregnancy. A calm, practical guide to the moment it's time.",
+    editorialSections: [
+      {
+        id: "when-to-go-in-for-labour",
+        heading: "When to go in for labour",
+        lead: "There's no single right moment to ring or to set off. The clearer rules sit alongside instinct — and both matter.",
+        paragraphs: [
+          "Maternity units have general guidance for when they want to hear from you, and your midwife may have given you specific advice based on your pregnancy. Together, they form a starting point. Your own sense of what's happening matters as much as the rules.",
+          "Calling early isn't a failure. It's part of how labour care works. Most units would much rather hear from you twice than not at all.",
+        ],
+      },
+      {
+        id: "when-to-call-first",
+        heading: "When to call first",
+        lead: "A phone call is usually the first step before going in.",
+        paragraphs: [
+          "Save your maternity unit's number where it's easy to find. Most units have a 24-hour line specifically for people in late pregnancy and labour. They'll ask a series of questions to help work out where you are in labour and what to do next.",
+          "They may advise you to stay home a little longer, to come in for a check, or to come in to stay. Any of those is a normal outcome, and the right one for the moment.",
+        ],
+      },
+      {
+        id: "contractions-and-timing",
+        heading: "Contractions and timing",
+        lead: "A pattern is more telling than a single contraction.",
+        paragraphs: [
+          "The most common signal that it's time to call is contractions that are strong, regular, lasting around a minute, and coming roughly every three to four minutes (often described as 3 in 10). Many people find they can no longer talk through them.",
+          "Time them across an hour, not a single ten-minute window. A pattern that holds — or grows — over an hour gives a much clearer picture than one short stretch.",
+        ],
+      },
+      {
+        id: "waters-bleeding-and-movements",
+        heading: "Waters, bleeding, and movements",
+        lead: "Three signs that warrant a call straight away, regardless of contractions.",
+        paragraphs: [
+          "Always call when your waters break, even if contractions haven't started. Your unit will guide you on what happens next — usually a window at home before coming in, or a check sooner depending on the colour of the fluid and other factors.",
+          "Always call for any bleeding that's more than a light, mucus-streaked show. And always call for any change or reduction in your baby's movements, day or night, in or out of labour.",
+        ],
+      },
+      {
+        id: "if-not-your-first-baby",
+        heading: "If this is not your first baby",
+        lead: "Second and later labours can move more quickly. The advice usually shifts a little earlier.",
+        paragraphs: [
+          "If you've given birth before, your maternity unit may advise you to call sooner and set off earlier than you would have first time. Some second labours are dramatically quicker; others aren't. Most units would prefer a slightly early arrival to a roadside birth.",
+          "If your midwife hasn't already talked through what to do this time around, it's worth asking. The plan often looks a little different.",
+        ],
+      },
+      {
+        id: "what-your-unit-may-ask",
+        heading: "What your maternity unit may ask you",
+        lead: "Their questions are how they decide what to advise — not a test you can fail.",
+        paragraphs: [
+          "Expect to be asked how often contractions are coming, how long they're lasting, how strong they feel, whether your waters have broken (and if so, the colour of the fluid), whether you have any bleeding, and how your baby's movements have been. They may also ask about your previous births and how your pregnancy has been.",
+          "If your birth partner is with you, it can help to have them on the phone or beside you while you talk — sometimes another set of ears, or someone to time a contraction live, makes it easier to give a clear picture.",
+        ],
+      },
+      {
+        id: "signs-not-to-wait-with",
+        heading: "Signs not to wait with",
+        lead: "A short list of things that mean call now — not in an hour, not after another contraction.",
+        paragraphs: [
+          "Heavy bleeding, severe pain that doesn't ease between contractions, a sudden change in your baby's movements, waters that look green or brown rather than clear, or anything that feels seriously wrong are all reasons to call straight away rather than wait.",
+          "If you can't reach your maternity unit, call the next number they've given you — or, if it feels urgent, 999. Trusting that judgement is part of the care.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "If something feels seriously wrong, call straight away — even if it doesn't fit any of the rules. Your instinct is information your unit takes seriously.",
+        },
+      },
+      {
+        id: "trusting-your-instincts",
+        heading: "Trusting your instincts when something feels different",
+        lead: "Instinct doesn't replace the guidance, but it sits next to it.",
+        paragraphs: [
+          "A lot of people, looking back, knew the moment it was time before any of the textbook signs were clearly there. An inward turn, a pull to be where you've planned to give birth, an inability to focus on anything else — all of these are signals worth listening to.",
+          "If your instinct says it's time, ring. The right answer is usually the one that lets you feel safe.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

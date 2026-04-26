@@ -3999,6 +3999,701 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── HOW YOUR BABY DEVELOPS IN PREGNANCY ──────────────────────────────────
+  {
+    slug: "how-your-baby-develops-in-pregnancy",
+    title: "How your baby develops in pregnancy: a calm, complete guide",
+    metaDescription: "How your baby develops across pregnancy — from the first weeks through to birth. A grounded, wonder-filled guide to the bigger picture of growth.",
+    quickAnswer:
+      "Your baby develops in three broad arcs: the first trimester lays down every major system from a few cells of tissue; the second trimester is mostly about growth, movement, and the senses coming online; the third trimester is finishing — putting on weight, maturing the lungs and brain, and getting ready for life outside. Most pregnancies follow this shape, with small variations that are completely normal.",
+    howThisFeels: [
+      "Wanting to picture what's actually happening, without the weekly anxiety",
+      "Reading milestone after milestone and losing the bigger thread",
+      "Looking for wonder, not just a checklist",
+      "Quietly worrying when you don't feel a 'milestone' at the expected week",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "A staged unfolding", body: "Pregnancy isn't a straight line of growth. The first trimester builds; the second grows and refines; the third matures and prepares. Each phase has its own job." },
+        { heading: "Hormonal choreography", body: "The same hormones that change how you feel are quietly directing your baby's growth — building the placenta, supporting the uterus, and signalling the next stage of development." },
+      ],
+      lessCauses: [
+        { heading: "Individual variation", body: "Babies develop within ranges, not on exact dates. Movement, growth, and timing all vary, and most variations are within healthy norms." },
+      ],
+      whyItVaries:
+        "Two healthy pregnancies can look quite different week by week. Genetics, the placenta, and your own body all shape the pace. The bigger arc is more reliable than any single weekly milestone.",
+    },
+    timing: {
+      whenStarts: "Development begins from implantation, well before most people know they're pregnant.",
+      whenEases: "The major structural building is largely complete by the end of the first trimester; the rest of pregnancy is growth, refinement, and maturation.",
+    },
+    whatItFeelsLike: [
+      "Quiet, invisible change in the first trimester",
+      "First flutters and clearer movement in the middle months",
+      "Bigger, more rhythmic movement and visible shape later on",
+    ],
+    whatThisMeans:
+      "Your baby's development is one of the most extraordinary things a body does, and it doesn't need a milestone tracker to be unfolding properly. Knowing the broad arc is usually more useful — and more grounding — than chasing the week-by-week.",
+    normal: [
+      "Different paces of growth between pregnancies",
+      "Movement starting anywhere from around 16–24 weeks",
+      "Quiet weeks followed by noticeably more movement",
+      "Scans showing measurements within a wide healthy range",
+    ],
+    seekSupport: [
+      "A clear change in pattern of movement in the third trimester",
+      "Bleeding or severe pain at any point",
+      "Anything from a scan or test you'd like more clarity on",
+    ],
+    disclaimer: "This is general information about the broad arc of pregnancy development, not a substitute for individual care. Your midwife and maternity team are your best source for anything specific.",
+    whatYouCanDo: [
+      { action: "Read in arcs, not weeks", reason: "The bigger picture is more reliable than weekly snapshots and far less anxious." },
+      { action: "Keep your appointments", reason: "Routine antenatal care is how anything that needs attention is most likely to be picked up." },
+      { action: "Trust your sense of movement later on", reason: "From around 24–28 weeks, your felt sense of your baby's pattern is genuinely useful information." },
+    ],
+    whatHappensNext: "Each trimester hands over to the next — building, growing, and finishing — until birth.",
+    relatedStage: {
+      intro: "Development sits inside the wider Baby topic:",
+      links: [
+        { label: "Your baby in pregnancy", href: "/pregnancy/baby", context: "The wider topic this article belongs to." },
+        { label: "First trimester: complete guide", href: "/articles/first-trimester-complete-guide", context: "Where the foundations are laid." },
+        { label: "Second trimester: complete guide", href: "/articles/second-trimester-complete-guide", context: "Movement, growth, and the senses." },
+      ],
+    },
+    aiPrompts: [
+      "What develops in the first trimester?",
+      "When will I start feeling movement?",
+      "What's happening in the third trimester?",
+    ],
+    captureIntro: "How your baby is developing is one of the quieter wonders of pregnancy. Worth pausing to notice.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["first-trimester-complete-guide", "second-trimester-complete-guide", "third-trimester-complete-guide"],
+    journey: ["pregnancy"],
+    topics: ["baby", "development"],
+    isCornerstone: true,
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Pregnancy unfolds in three broad arcs: building, growing, and finishing",
+      "Most major systems are formed in the first trimester from a small cluster of cells",
+      "The second trimester is largely about growth, movement, and the senses coming online",
+      "The third trimester matures the lungs and brain and gets your baby ready for life outside",
+      "Variation between pregnancies is normal — the bigger arc is more reliable than any single week",
+    ],
+    sources: [
+      "NHS — You and your baby at 1 to 3 weeks of pregnancy (and through-pregnancy series)",
+      "NICE — Antenatal care guidance",
+      "Tommy's — How your baby develops",
+      "RCOG — Pregnancy and birth information",
+    ],
+    faq: [
+      { question: "When does my baby start to look like a baby?", answer: "Recognisably human features — head, limbs, fingers, toes — are forming through weeks 8–12, even though your baby is still very small. By the second trimester scan around 20 weeks, the proportions and features are clearly baby-like." },
+      { question: "When will I feel my baby move?", answer: "Most people feel first movement between 16 and 24 weeks. It can come earlier in second pregnancies, and later if your placenta is at the front. By around 28 weeks, you'll usually have a sense of your baby's own pattern." },
+      { question: "Are weekly milestones reliable?", answer: "They're useful as a rough guide but not as an exact schedule. Your baby is on their own timeline within healthy ranges. Routine scans and appointments are how anything outside those ranges is checked." },
+      { question: "What develops last?", answer: "The lungs and brain do significant maturing in the final weeks, which is one of the reasons full-term pregnancies (37+ weeks) are encouraged where possible." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "baby",
+    standfirst:
+      "From a cluster of cells to a small person who turns toward your voice, your baby's growth across pregnancy is more astonishing — and less weekly — than most milestone trackers let on.",
+    editorialSections: [
+      {
+        id: "how-your-baby-develops-in-pregnancy",
+        heading: "How your baby develops in pregnancy",
+        lead: "Pregnancy unfolds in three broad arcs: a building phase, a growing phase, and a finishing phase. Almost everything else is detail.",
+        paragraphs: [
+          "In the first trimester, every major organ system is laid down from a small amount of tissue. By the end of week 12, your baby has a beating heart, the beginnings of every organ, recognisable limbs, fingers, and a face — at a length of around six to seven centimetres.",
+          "The second trimester is when growth, movement, and the senses come into focus. By the third trimester, the work shifts to maturing — putting on weight, finishing the lungs and brain, and getting ready for life outside.",
+        ],
+      },
+      {
+        id: "first-trimester",
+        heading: "What happens in the first trimester",
+        lead: "The first 12 weeks are the most structurally significant of the entire pregnancy. They're also the quietest from your side.",
+        paragraphs: [
+          "From implantation onward, a small mass of cells organises itself into the early embryo and the placenta. Within weeks, the neural tube — which becomes the brain and spine — has formed. The heart begins beating around six weeks. Limb buds appear, then fingers and toes. By week 10, your baby is officially a fetus rather than an embryo, and the major organs are in place.",
+          "All of this is happening before there's much to feel. Most early-pregnancy symptoms are about your body adjusting to pregnancy, not about anything missing if symptoms feel mild.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "It's normal to feel disconnected from a pregnancy you can't yet feel. Development is happening regardless of how aware of it you are.",
+        },
+      },
+      {
+        id: "second-trimester",
+        heading: "What changes in the second trimester",
+        lead: "The middle months are often the easiest physically and the most noticeable in terms of your baby.",
+        paragraphs: [
+          "Your baby grows rapidly through the second trimester, from around the size of a lemon at 14 weeks to a substantial baby of around 35cm by 28 weeks. The senses come online: hearing develops, the eyes open and close, taste buds form, and reflexes like sucking and grasping appear.",
+          "Movement, which has been happening for weeks, becomes something you can actually feel — first as flutters, then as clearer kicks. The 20-week scan offers the most detailed look at how your baby is growing and how the major systems are forming.",
+        ],
+      },
+      {
+        id: "third-trimester",
+        heading: "What develops in the third trimester",
+        lead: "The last 12 weeks are about maturing rather than building. Your baby is largely formed — the work now is finishing.",
+        paragraphs: [
+          "Weight gain accelerates. Fat is laid down, which helps with temperature regulation after birth. The lungs go through their final stages of maturation, producing the surfactant needed to breathe air. The brain develops rapidly, with significant growth in the final weeks of pregnancy.",
+          "Your baby's pattern of movement, sleep, and wakefulness becomes more established. Most babies settle into a head-down position by around 36 weeks, ready for birth.",
+        ],
+      },
+      {
+        id: "movement-and-growth",
+        heading: "How movement and growth change over time",
+        lead: "Both movement and growth follow rhythms rather than straight lines. Knowing the rhythms makes them less anxious.",
+        paragraphs: [
+          "Early in pregnancy, growth is mostly invisible. From around 16–24 weeks, you'll feel first movement — a fluttering that quickly becomes more distinct. By the third trimester, your baby has their own pattern of active and quiet times, and getting to know it matters more than counting individual kicks.",
+          "Growth is checked at routine appointments through measurement of your bump and, where indicated, additional scans. Wide variation is normal; consistent patterns matter more than single readings.",
+        ],
+      },
+      {
+        id: "every-pregnancy-different",
+        heading: "Why every pregnancy develops a little differently",
+        lead: "Two healthy pregnancies can look quite different week by week. Variation is built in.",
+        paragraphs: [
+          "Genetics, the placenta, your own height and build, and hormonal patterns all shape pace. A baby who measures slightly larger or smaller at one scan, or who moves more than a friend's, isn't doing anything wrong — they're following their own pattern within healthy ranges.",
+          "The job of antenatal care is to spot the patterns that genuinely fall outside those ranges. That's why the routine scans, blood pressure checks, and growth measurements exist.",
+        ],
+      },
+      {
+        id: "when-to-raise-concerns",
+        heading: "When to raise concerns or questions",
+        lead: "There's no such thing as a wasted phone call to a midwife about your baby's movements or growth.",
+        paragraphs: [
+          "Specific things to call about: a clear change in your baby's usual pattern of movement from the third trimester onward; bleeding or severe pain at any stage; signs of waters breaking before term; or anything from a scan or appointment that you'd like more clarity on.",
+          "Trust your instinct as well. If something feels different and you can't quite name why, that's still worth a call.",
+        ],
+      },
+      {
+        id: "week-by-week-without-overwhelm",
+        heading: "How to use week-by-week guidance without getting overwhelmed",
+        lead: "The week-by-week format is useful as a window, not a verdict. Most weeks don't need a milestone moment.",
+        paragraphs: [
+          "Week-by-week reading works well when it adds to a sense of the bigger arc and stops working when it becomes a list to measure yourself against. If a particular week feels heavy, it's completely fine to read less, not more.",
+          "The Start of You's week-by-week view is designed to sit alongside this article rather than replace it — a window into the current week, not a chase.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Your baby is developing whether you're following the weeks closely or hardly at all. The development isn't dependent on your attention to it.",
+        },
+      },
+    ],
+  },
+
+  // ─── TWINS AND MULTIPLES IN PREGNANCY ─────────────────────────────────────
+  {
+    slug: "twins-and-multiples-in-pregnancy",
+    title: "Twins and multiples in pregnancy: a calm, grounded guide",
+    metaDescription: "Twins and multiples in pregnancy — what's different, how care often changes, and what to expect. A calm orientation guide, not a specialist text.",
+    quickAnswer:
+      "A twin or multiple pregnancy is broadly the same as any other pregnancy — but with extra monitoring and slightly different care. You'll usually have more scans, closer growth checks, and earlier conversations about birth. Most twin and triplet pregnancies are well, and the main thing that changes is the amount of professional support around you.",
+    howThisFeels: [
+      "Reading scary headlines and trying to find a calmer source",
+      "Wondering whether normal pregnancy advice still applies",
+      "Quietly working out how on earth you'll manage two (or three)",
+      "Wanting clear information without being made to feel high-risk by default",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Two placentas, or one shared", body: "Twins can have one placenta (monochorionic) or two (dichorionic). This — more than the type of twin — shapes how care is offered." },
+        { heading: "Identical or non-identical", body: "Identical twins come from one egg; non-identical from two. Non-identical twins are more common, and they each have their own placenta." },
+      ],
+      lessCauses: [
+        { heading: "Triplets and more", body: "Higher-order multiples are less common and almost always involve specialist care from early pregnancy." },
+      ],
+      whyItVaries:
+        "Multiple pregnancies vary a lot depending on whether the babies share a placenta, how growth is unfolding, and individual circumstances. The care plan is built around your specific situation.",
+    },
+    timing: {
+      whenStarts: "Multiples are usually identified at the dating scan around 11–14 weeks.",
+      whenEases: "Care continues throughout pregnancy, with more frequent scans than singleton pregnancies.",
+    },
+    whatItFeelsLike: ["Symptoms can be more pronounced earlier on", "More appointments than friends with singleton pregnancies", "A bigger bump earlier, often with more discomfort later"],
+    whatThisMeans:
+      "A twin or multiple pregnancy isn't a single condition — it's a pregnancy with extra moving parts. The increased monitoring is a feature of good care, not a sign that something is wrong.",
+    normal: [
+      "More frequent scans through pregnancy",
+      "Earlier conversations about birth and timing",
+      "Slightly more pronounced early symptoms for some",
+      "A bigger bump earlier, with more visible growth later",
+    ],
+    seekSupport: [
+      "Bleeding, severe pain, or reduced movement of either baby",
+      "Sudden swelling, headaches, or vision changes",
+      "Anything that feels different from your usual pattern",
+    ],
+    disclaimer: "This article is general orientation, not a substitute for the specialist team caring for your multiple pregnancy. Your maternity unit will have specific advice for your situation.",
+    whatYouCanDo: [
+      { action: "Lean into your specialist team", reason: "Multiple pregnancies usually have a dedicated team — they're your best source of tailored advice." },
+      { action: "Pace yourself earlier than you'd think", reason: "Tiredness and discomfort tend to arrive earlier; rest is part of the work." },
+      { action: "Ask specifically about birth options early", reason: "Conversations about timing and mode of birth typically start earlier with multiples — bring your questions." },
+    ],
+    whatHappensNext: "Your specialist team will set out a plan for monitoring, scans, and birth that suits your specific pregnancy.",
+    relatedStage: {
+      intro: "Twins and multiples sit inside the wider Baby topic:",
+      links: [
+        { label: "Your baby in pregnancy", href: "/pregnancy/baby", context: "The wider topic this article belongs to." },
+        { label: "How your baby develops in pregnancy", href: "/articles/how-your-baby-develops-in-pregnancy", context: "The broader arc, which still applies to multiples." },
+      ],
+    },
+    aiPrompts: [
+      "What's different about a twin pregnancy?",
+      "How often will I have scans with twins?",
+      "Can I have a vaginal birth with twins?",
+    ],
+    captureIntro: "A multiple pregnancy carries its own quiet weight. Worth noting how it's actually feeling, not just how it's going.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["how-your-baby-develops-in-pregnancy", "third-trimester-complete-guide", "tests-and-scans-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["baby", "multiples"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "A twin or multiple pregnancy is broadly the same — with extra monitoring built in",
+      "Whether babies share a placenta matters more than identical vs non-identical for care",
+      "More scans, earlier birth conversations, and a specialist team are normal features of multiple care",
+      "Most twin and triplet pregnancies are well; the extra attention is part of how that's protected",
+    ],
+    sources: [
+      "NHS — Pregnant with twins",
+      "NICE — Multiple pregnancy guidance (NG137)",
+      "Twins Trust — Pregnancy information",
+      "RCOG — Multiple pregnancy",
+    ],
+    faq: [
+      { question: "When will I find out if I'm having twins?", answer: "Usually at the dating scan, around 11–14 weeks. Occasionally it's picked up earlier if a scan is done for another reason." },
+      { question: "Is a twin pregnancy automatically high-risk?", answer: "It's higher-monitored, which isn't quite the same. Most twin pregnancies go well; the additional monitoring is what helps keep them that way." },
+      { question: "How often will I have scans?", answer: "Typically every two to four weeks from around 16 weeks, depending on whether the babies share a placenta. Your team will set out the exact schedule." },
+      { question: "Will I need a caesarean?", answer: "Not necessarily. Many people have vaginal births with twins, especially when the first baby is head-down. Your team will discuss options based on your specific pregnancy." },
+      { question: "When are twins usually born?", answer: "Twins are often born earlier than singletons — typically around 36–37 weeks for non-identical twins, and earlier for identical twins sharing a placenta." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "baby",
+    standfirst:
+      "A twin or multiple pregnancy is broadly the same as any other — with a little more monitoring, a little more support, and a few more scans. A calm orientation, not a specialist text.",
+    editorialSections: [
+      {
+        id: "twins-and-multiples-in-pregnancy",
+        heading: "Twins and multiples in pregnancy",
+        lead: "Carrying more than one baby changes some details of pregnancy and care, but the bigger picture is reassuringly familiar.",
+        paragraphs: [
+          "Most multiple pregnancies are well. The main practical difference is that you'll have a specialist team around you and more frequent monitoring built in. That extra attention is part of how good outcomes are protected, not a sign that something is wrong.",
+          "Twins can be identical (one egg splitting) or non-identical (two eggs fertilised at the same time). Non-identical is more common. Triplets and higher-order multiples are rarer and almost always involve specialist care from early on.",
+        ],
+      },
+      {
+        id: "what-is-different",
+        heading: "What's different about twins and multiples",
+        lead: "Some early-pregnancy symptoms can feel more pronounced, and the practical shape of pregnancy shifts.",
+        paragraphs: [
+          "Higher hormone levels can mean nausea or fatigue arrive earlier or feel stronger. Your bump usually shows earlier and grows more, and you may feel discomfort sooner — back ache, breathlessness, or trouble sleeping in later pregnancy.",
+          "What also changes is the rhythm of care. You'll have more appointments, more scans, and earlier conversations about birth than someone with a singleton pregnancy.",
+        ],
+      },
+      {
+        id: "how-care-may-differ",
+        heading: "How care and monitoring may differ",
+        lead: "Multiple pregnancies usually have a dedicated team — and a clearer schedule of scans through pregnancy.",
+        paragraphs: [
+          "The biggest factor in your care plan is whether the babies share a placenta. Babies with their own placentas (dichorionic) are typically scanned every four weeks from around 20 weeks. Babies sharing a placenta (monochorionic) need closer monitoring — usually every two weeks from 16 weeks — to watch for complications that are specific to a shared placenta.",
+          "You'll also usually meet your team earlier and more often, and have earlier conversations about timing and mode of birth.",
+        ],
+      },
+      {
+        id: "symptoms-and-growth",
+        heading: "How symptoms and growth may differ",
+        lead: "Pregnancy with twins is more pronounced rather than fundamentally different.",
+        paragraphs: [
+          "More common: stronger nausea early on, earlier bump growth, more fatigue, and more discomfort later — particularly in the last trimester. Sleep often becomes harder earlier.",
+          "Movement is felt in much the same way, though it can be harder to tell which baby is which until later in pregnancy. Routine measurements and scans are how growth is followed.",
+        ],
+      },
+      {
+        id: "when-extra-support-is-common",
+        heading: "When extra support is common",
+        lead: "Multiple pregnancies are more likely to involve some form of additional support — and that's planned for, not a surprise.",
+        paragraphs: [
+          "Twins are more likely to be born early, often around 36–37 weeks for non-identical twins and earlier for identical twins sharing a placenta. Some babies spend time on a neonatal unit after birth, particularly if born early.",
+          "Practical support — financial, emotional, and logistical — is also more often needed. Charities like Twins Trust offer information and community that can be quietly invaluable.",
+        ],
+      },
+      {
+        id: "birth",
+        heading: "Birth with twins or multiples",
+        lead: "Birth options depend on your specific pregnancy — but vaginal birth is genuinely possible for many people.",
+        paragraphs: [
+          "If the first baby is head-down at term, vaginal birth is often offered. If the first baby is breech, or if there are concerns about the placenta or growth, a planned caesarean may be recommended.",
+          "Your team will talk through options well in advance. Bring questions, including the ones you feel slightly silly asking — they're the most useful kind.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "A twin pregnancy isn't a more anxious version of a normal pregnancy. It's a pregnancy with more support around it — which is how good outcomes are looked after.",
+        },
+      },
+      {
+        id: "looking-after-yourself",
+        heading: "Looking after yourself with twins or more",
+        lead: "Pacing matters earlier than it would in a singleton pregnancy.",
+        paragraphs: [
+          "Eating well, drinking plenty, resting where you can, and accepting help are more important rather than less. The work your body is doing is significant; treating tiredness as information rather than a failing makes a real difference.",
+          "If you can find a community of others doing the same thing — in person or online — many people with multiples find it some of the most useful support of all.",
+        ],
+      },
+    ],
+  },
+
+  // ─── THE SPACE YOUR BABY WILL COME HOME TO ────────────────────────────────
+  {
+    slug: "the-space-your-baby-will-come-home-to",
+    title: "The space your baby will come home to: a calm, simple guide",
+    metaDescription: "What your baby actually needs at home in the early days — kept simple. A calm alternative to nursery checklists, focused on what matters and what doesn't.",
+    quickAnswer:
+      "Newborns need very little space and very few things. A safe place to sleep, somewhere to feed, somewhere to change them, warm clothes, and you. The rest is comfort, taste, or convenience, and it can almost all wait. Preparing well usually means buying less, not more.",
+    howThisFeels: [
+      "Scrolling lists of nursery essentials and feeling slightly overwhelmed",
+      "Wondering if you're underprepared because your house doesn't look ready",
+      "Trying to separate genuine needs from social-media wants",
+      "Wanting calm, not aesthetic pressure",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "A small list of real needs", body: "Newborns need warmth, safe sleep, regular feeding, clean nappies, and attentive adults. Almost everything else is optional." },
+        { heading: "A big industry of suggested wants", body: "Most baby products solve mild convenience problems rather than essential ones. They aren't bad — they're just not necessary." },
+      ],
+      lessCauses: [
+        { heading: "Personal preferences", body: "Some things matter more depending on your home, your baby, or how you'll feed. There isn't one universal kit." },
+      ],
+      whyItVaries: "What you need depends a lot on your space, your support network, and your baby. Buying everything before they arrive often means buying things you'd have skipped after a week.",
+    },
+    timing: {
+      whenStarts: "Most people start thinking about home setup in the second trimester.",
+      whenEases: "By around 36 weeks, the genuine basics are usually enough. The rest can be ordered after birth or borrowed.",
+    },
+    whatItFeelsLike: ["Quiet pressure to make a 'nursery'", "A steady stream of recommendations from everyone", "Wanting to nest and not knowing where to start"],
+    whatThisMeans:
+      "Preparing your home for a newborn is more about clearing space than filling it. Almost any home can be made ready with very little.",
+    normal: [
+      "Co-sleeping in your room for the first six months (recommended in the UK)",
+      "A small set of basics rather than a fully fitted nursery",
+      "Buying less than the lists suggest",
+      "Adding things after birth, once you know what you actually need",
+    ],
+    seekSupport: [
+      "Worry about safe sleep guidance — your midwife or health visitor can talk it through",
+      "Significant financial pressure around baby items — local groups, Sure Start, and councils often have schemes",
+      "Anything around your home that feels unsafe and you're not sure how to address",
+    ],
+    disclaimer: "This is general guidance, not safety-critical advice. For sleep safety specifically, follow current Lullaby Trust and NHS guidance.",
+    whatYouCanDo: [
+      { action: "Start with safe sleep, then build outward", reason: "A safe sleep space is the only non-negotiable; everything else is optional." },
+      { action: "Borrow before you buy", reason: "Most baby items are used briefly. Friends, family, and local buy-nothing groups usually have what you need." },
+      { action: "Wait on big nursery purchases", reason: "Your baby won't sleep in a separate room for months. There's time to decide." },
+      { action: "Resist the urge to perfect it", reason: "Calm, soft, and good enough is everything a newborn needs." },
+    ],
+    whatHappensNext: "After birth, you'll quickly learn what you actually use — and most homes adapt naturally around the baby.",
+    relatedStage: {
+      intro: "Setting up at home sits inside the wider Preparing for baby topic:",
+      links: [
+        { label: "Preparing for baby", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "Preparing for baby: complete guide", href: "/preparing-for-baby", context: "A calmer orientation to getting ready." },
+      ],
+    },
+    aiPrompts: [
+      "What does my baby actually need in the first weeks?",
+      "Do I need a nursery before the baby arrives?",
+      "What's the safe sleep guidance in the UK?",
+    ],
+    captureIntro: "Setting up the space your baby will come home to is one of the quieter rituals of late pregnancy. Worth noting how it actually feels.",
+    trimester: [3],
+    relatedSlugs: ["third-trimester-complete-guide"],
+    journey: ["pregnancy"],
+    topics: ["preparing", "home"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Newborns need very little space and very few things",
+      "Safe sleep is the one genuine non-negotiable; the rest is optional or can wait",
+      "UK guidance is for babies to sleep in your room for the first six months",
+      "Buying less, borrowing more, and adding after birth usually works better than a full pre-baby kit",
+    ],
+    sources: [
+      "Lullaby Trust — Safer sleep advice",
+      "NHS — Reduce the risk of sudden infant death syndrome (SIDS)",
+      "NHS — How to prepare for a new baby",
+      "Unicef Baby Friendly — Caring for your baby at night",
+    ],
+    faq: [
+      { question: "Do I need a nursery ready before birth?", answer: "No. UK guidance is for babies to sleep in your room — in their own safe sleep space — for the first six months. A separate nursery isn't needed early on, and many people set theirs up gradually." },
+      { question: "What's actually essential?", answer: "A safe sleep space (a flat, firm, clear surface — Moses basket, crib, or cot), nappies and a way to change them, warm clothes and blankets, a way to feed (bottles or a comfortable feeding setup), and a car seat if you'll drive home from hospital." },
+      { question: "What can wait?", answer: "Most things — a fully fitted nursery, a baby bath, a changing table, a baby monitor in a small home, lots of toys, and most clothes beyond the basics." },
+      { question: "Is co-sleeping safe?", answer: "There's specific UK guidance on safer co-sleeping from the Lullaby Trust. The recommendation is for your baby to sleep in your room in their own sleep space for the first six months; if you choose to bed-share, follow the safer co-sleeping advice." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "preparing-for-baby",
+    standfirst:
+      "Newborns need very little space and very few things. A calm alternative to the nursery-checklist version of getting ready — focused on what genuinely matters and what really doesn't.",
+    editorialSections: [
+      {
+        id: "the-space-your-baby-will-come-home-to",
+        heading: "The space your baby will come home to",
+        lead: "The first weeks at home are quieter than the build-up suggests. Most of what your baby needs is you, warmth, and a safe place to sleep.",
+        paragraphs: [
+          "If you stripped most baby checklists back to what's actually used in the first six weeks, you'd be left with a small list — and a lot of room to breathe. Knowing the difference between need and noise is most of the work of getting ready at home.",
+          "This article is a calm alternative to the nursery-blog version of preparation. It assumes you'd rather have less, well-chosen, than more, half-used.",
+        ],
+      },
+      {
+        id: "what-newborns-actually-need",
+        heading: "What your baby actually needs in the early days",
+        lead: "Five categories cover almost everything. The rest is preference.",
+        paragraphs: [
+          "A safe place to sleep — a flat, firm, clear sleep surface like a Moses basket, crib, or cot, with no pillows, bumpers, or loose bedding. UK guidance is for your baby to sleep in your room for the first six months.",
+          "Somewhere to feed — a comfortable seat for breastfeeding or bottle-feeding, the bottles and steriliser if you're using them, and water and snacks within reach. Feeding takes much longer than people expect.",
+          "Somewhere to change them — a changing mat on a bed or floor is plenty. A dedicated changing table is convenient but optional. Nappies, wipes, and a few muslin cloths cover the rest.",
+          "Warmth — a small set of vests, sleepsuits, a couple of cardigans, and a few cellular blankets. Most other clothing can wait or be borrowed.",
+          "A car seat — if you're being driven home from hospital, this is the one thing you genuinely need before birth.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If you have a safe sleep space, a way to feed, a way to change, warm clothes, and a car seat, you have everything you need on day one.",
+        },
+      },
+      {
+        id: "thinking-about-space-simply",
+        heading: "How to think about space simply",
+        lead: "Newborns take up less physical space than the equipment suggests. Clearing room is often more useful than filling it.",
+        paragraphs: [
+          "A corner of your bedroom for the sleep space, a comfortable chair for feeding, a bag of nappies and a changing mat, and a drawer of clothes is genuinely enough for the first weeks. A separate nursery is for later, when your baby moves out of your room.",
+          "If you're tight on space, the priority is the sleep space and somewhere comfortable to feed. Almost everything else can be improvised.",
+        ],
+      },
+      {
+        id: "what-matters-more-than-buying",
+        heading: "What matters more than buying everything",
+        lead: "Most of what helps in the first weeks isn't a product.",
+        paragraphs: [
+          "Help — practical, hands-on help with food, washing, and rest — matters more than gear. So does soft lighting at night, a bedside water bottle, snacks within reach, a phone charger by the bed, and clean enough laundry. Small comforts repeat themselves over and over.",
+          "If you're choosing where to spend, a comfortable feeding chair, a good carrier or sling, and a decent buggy you'll use every day are usually better investments than expensive nursery furniture.",
+        ],
+      },
+      {
+        id: "sleep-safety",
+        heading: "Sleep safety, kept simple",
+        lead: "This is the one area where the guidance is precise — and the precision is worth following.",
+        paragraphs: [
+          "UK guidance is: baby on their back, on a flat, firm, clear surface, in their own sleep space, in your room for the first six months. No pillows, duvets, bumpers, or sleep positioners under six months. Keep the room around 16–20°C.",
+          "If you choose to bed-share, follow the Lullaby Trust's safer co-sleeping guidance — it's specific and practical. Avoid bed-sharing if either parent has been drinking, smoking, or taking medication that causes drowsiness, or if your baby was premature or low birth weight.",
+        ],
+      },
+      {
+        id: "preparing-gently",
+        heading: "How to prepare gently without pressure",
+        lead: "Preparation works best when it's spread across pregnancy rather than crammed into the last weeks.",
+        paragraphs: [
+          "A loose plan: in the second trimester, decide where the baby will sleep and start gathering basics; in early third trimester, sort the car seat, hospital bag, and any big items; in the final weeks, focus on rest, food in the freezer, and a clean enough home rather than a perfect one.",
+          "Whatever you don't have on the day, you can buy or borrow within a week of birth. Almost nothing about home setup is one-shot.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "A calm, lived-in home is what most newborns experience and most thrive in. It doesn't have to look like a nursery photo to be ready.",
+        },
+      },
+      {
+        id: "buying-less-borrowing-more",
+        heading: "Buying less, borrowing more",
+        lead: "Most baby items are used briefly. Borrowed and second-hand often makes more sense.",
+        paragraphs: [
+          "Friends and family, local buy-nothing groups, and second-hand shops are full of nearly-new baby items. Cots, baby baths, slings, and clothes are all good candidates. The two things to buy new are the mattress and the car seat — for safety reasons.",
+          "If you're under financial pressure, your midwife or health visitor can point you toward local schemes; many areas have grants, free starter packs, or charity-led support that isn't widely advertised.",
+        ],
+      },
+    ],
+  },
+
+  // ─── SLEEP IN PREGNANCY ───────────────────────────────────────────────────
+  {
+    slug: "sleep-in-pregnancy",
+    title: "Sleep in pregnancy: why it changes and what helps",
+    metaDescription: "Why sleep changes in pregnancy, why it can become harder even when you're more tired, what may help, and when sleep problems are worth raising.",
+    quickAnswer:
+      "Sleep changes in pregnancy because hormones, body shape, and breathing patterns all shift. Many people feel more tired but find it harder to sleep deeply — particularly in the first and third trimesters. Most sleep changes are normal, and there are things that genuinely help: side-sleeping (especially the left side from the second trimester), pillows for support, a steady wind-down, and managing the things that wake you. If sleep problems are persistent or paired with anxiety, low mood, or breathing issues, it's worth raising with your midwife or GP.",
+    howThisFeels: [
+      "Exhausted by 8pm but wide awake at 3am",
+      "Waking constantly to wee, then unable to fall back to sleep",
+      "Aching, restless, and unable to find a comfortable position",
+      "Worrying that bad sleep now means worse sleep later",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Hormonal shifts", body: "Progesterone makes you feel sleepy in the day but disrupts deep sleep at night, particularly in the first trimester." },
+        { heading: "Physical changes", body: "A growing bump, a heavier uterus, and shifts in your centre of gravity make it harder to find a comfortable position, especially later on." },
+        { heading: "More frequent waking", body: "Needing the loo, heartburn, leg cramps, vivid dreams, and a more sensitive sleep system all break up the night." },
+      ],
+      lessCauses: [
+        { heading: "Breathing changes", body: "Pregnancy can cause snoring or mild sleep-disordered breathing, particularly later on. Most cases are harmless but some warrant a check." },
+        { heading: "Restless legs", body: "Uncomfortable sensations in the legs at night affect a meaningful minority of pregnant people, often eased by addressing iron and hydration." },
+      ],
+      whyItVaries: "Sleep changes vary hugely. Some people sleep more than usual; others sleep far less. Both are within normal — neither predicts how birth or the early weeks will go.",
+    },
+    timing: {
+      whenStarts: "Sleep changes can begin in the first weeks of pregnancy as progesterone climbs.",
+      whenPeaks: "Often most disrupted in the first trimester (deep sleep changes) and again in the third trimester (physical comfort and waking).",
+      whenEases: "The middle months are often the easiest. Sleep typically settles after birth — though the early weeks of newborn life are a separate story.",
+    },
+    whatItFeelsLike: [
+      "Falling asleep easily but waking unrefreshed",
+      "Waking three or four times a night and accepting it as normal",
+      "Vivid, sometimes strange dreams",
+      "A daytime tiredness that no amount of sleep seems to fully fix",
+    ],
+    whatThisMeans:
+      "Disrupted sleep in pregnancy isn't a sign of doing anything wrong. It's one of the most common parts of pregnancy — and most of it is well within normal.",
+    normal: [
+      "Feeling much more tired in the daytime, especially in the first trimester",
+      "Waking multiple times during the night",
+      "Vivid or strange dreams",
+      "Needing pillows or a different position to feel comfortable",
+    ],
+    seekSupport: [
+      "Persistent insomnia paired with anxiety or low mood",
+      "Loud snoring with daytime exhaustion or pauses in breathing (worth checking for sleep apnoea)",
+      "Restless legs that are severe or affecting your day",
+      "Sleep that's so disrupted it's affecting your ability to function",
+    ],
+    disclaimer: "This is general information about sleep in pregnancy. If sleep problems are severe or affecting your wellbeing, talk to your midwife or GP — sleep is part of antenatal care, not a side issue.",
+    whatYouCanDo: [
+      { action: "Sleep on your side from the second trimester onward", reason: "Side-sleeping (especially the left side) supports blood flow to the placenta. It's the position most strongly recommended later in pregnancy." },
+      { action: "Use pillows for support", reason: "A pillow between the knees, under the bump, and behind the back can transform comfort. A long pregnancy pillow works well for some." },
+      { action: "Have a steady wind-down", reason: "A predictable hour before bed — dim light, no scrolling, something calming — helps the body recognise sleep cues." },
+      { action: "Manage the wakers", reason: "Reduce fluids in the last hour before bed, eat earlier to ease heartburn, and stretch calves before sleep to reduce cramps." },
+      { action: "Treat daytime tiredness as information", reason: "If you can rest in the day — even briefly — it makes the night easier rather than harder." },
+    ],
+    whatHappensNext: "Sleep tends to settle in the middle months and become harder again later on. Things ease after birth, though newborn nights are their own thing.",
+    relatedStage: {
+      intro: "Sleep sits alongside the rest of how your body changes:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Fatigue in early pregnancy", href: "/articles/fatigue-in-early-pregnancy", context: "The deep tiredness that often arrives first." },
+        { label: "Complete guide to morning sickness", href: "/articles/complete-guide-morning-sickness", context: "Often disrupting nights as well as days." },
+      ],
+    },
+    aiPrompts: [
+      "Why am I so exhausted but can't sleep?",
+      "Is it true I have to sleep on my left side?",
+      "What helps with restless legs in pregnancy?",
+    ],
+    captureIntro: "Sleep is one of the parts of pregnancy that quietly shapes everything else. Worth noting how it really is, not just how it should be.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["fatigue-in-early-pregnancy", "complete-guide-morning-sickness", "early-pregnancy-symptoms-explained"],
+    journey: ["pregnancy"],
+    topics: ["body", "sleep"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Sleep changes in pregnancy are common and almost always normal",
+      "The first trimester (hormones) and the third trimester (comfort) are usually the hardest",
+      "Side-sleeping — especially the left side from the second trimester — is the position most recommended",
+      "Pillows, a steady wind-down, and managing the wakers (fluids, heartburn, cramps) genuinely help",
+      "Persistent insomnia, severe restless legs, or loud snoring with daytime exhaustion are worth raising with a midwife or GP",
+    ],
+    sources: [
+      "NHS — Tiredness and sleep problems in pregnancy",
+      "Tommy's — Sleeping position in pregnancy",
+      "Royal College of Midwives — Sleep in pregnancy",
+      "NICE — Antenatal care",
+    ],
+    faq: [
+      { question: "Why am I so tired but can't sleep?", answer: "Progesterone makes you feel sleepy in the day but disrupts the deeper stages of night-time sleep, particularly in the first trimester. The mismatch between exhaustion and broken sleep is one of the most common — and disorientating — features of early pregnancy." },
+      { question: "Do I really have to sleep on my left side?", answer: "From the second trimester onward, side-sleeping is recommended over sleeping flat on your back, because the weight of the uterus can press on a major blood vessel. The left side is preferred for blood flow, but the right side is also fine. If you wake up on your back, just turn back onto your side — there's no harm done." },
+      { question: "What can I do about waking up to wee constantly?", answer: "Reduce fluids in the last hour or two before bed (while keeping well-hydrated through the day). Empty your bladder fully before sleep. Some people find leaning forward when emptying helps. The frequency usually eases in the middle months and returns later as the baby presses on the bladder." },
+      { question: "Are vivid pregnancy dreams normal?", answer: "Yes — vivid, strange, or emotionally intense dreams are very common in pregnancy. They're thought to be linked to hormonal changes and more frequent waking, which means you remember dreams more often. They aren't predictive of anything." },
+      { question: "When should I worry about sleep problems?", answer: "Talk to your midwife or GP if sleep problems are persistent and paired with anxiety or low mood, if you have loud snoring with daytime exhaustion (worth ruling out sleep apnoea), or if restless legs are severe. Sleep is part of antenatal care, not a side issue." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "body",
+    standfirst:
+      "Pregnancy changes sleep — sometimes long before the bump does. A calm look at why it gets harder, what genuinely helps, and when broken nights are worth raising.",
+    editorialSections: [
+      {
+        id: "sleep-in-pregnancy",
+        heading: "Sleep in pregnancy",
+        lead: "Sleep is one of the first parts of pregnancy to shift, and one of the last to settle. Most of what happens is normal — and a lot of it is workable.",
+        paragraphs: [
+          "Sleep changes in pregnancy don't usually mean anything is wrong. Hormonal shifts, a body that's literally changing shape, and a more sensitive sleep system all play a part. Most people sleep differently in pregnancy — sometimes more, often less, almost always more lightly.",
+          "Knowing the patterns makes them less anxious. A bad night is rarely the start of a downward spiral; it's usually one of the rhythms that pregnancy moves through.",
+        ],
+      },
+      {
+        id: "why-sleep-changes",
+        heading: "Why sleep changes in pregnancy",
+        lead: "Three things shift at once: hormones, body shape, and breathing.",
+        paragraphs: [
+          "Progesterone — high through pregnancy — makes you sleepy in the day but disrupts the deeper stages of night-time sleep. That's why the first trimester so often pairs daytime exhaustion with broken nights.",
+          "Body changes affect comfort, particularly later on. A heavier uterus, a shifting centre of gravity, and pressure on the bladder all wake you. Breathing changes — including more snoring — can also fragment sleep, even if you don't notice them yourself.",
+        ],
+      },
+      {
+        id: "why-its-harder-when-tired",
+        heading: "Why it can be harder even when you're more tired",
+        lead: "The mismatch between exhaustion and broken sleep is one of the most disorientating parts of early pregnancy.",
+        paragraphs: [
+          "Daytime tiredness in pregnancy is often hormonal rather than sleep-debt-driven. You may feel as tired after eight hours of sleep as after five — because the deep, restorative stages are reduced, even when you're horizontal for plenty of hours.",
+          "It tends to ease in the middle months as hormones stabilise, then return in a different form in the third trimester — when physical comfort, not hormones, is the main driver.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Feeling exhausted but unable to sleep deeply isn't a sign of bad sleep habits — it's one of the most common rhythms of early pregnancy.",
+        },
+      },
+      {
+        id: "what-may-help",
+        heading: "What may help",
+        lead: "A handful of small things consistently make pregnancy sleep more workable. None are magic, but together they make a real difference.",
+        paragraphs: [
+          "Sleep on your side from the second trimester onward — preferably the left, but either side is fine. Use pillows: between the knees, under the bump, behind the back. A long pregnancy pillow works for some; a couple of regular pillows works for others.",
+          "Reduce fluids in the last hour before bed (while staying hydrated through the day). Eat earlier to ease heartburn. Stretch your calves before bed if cramps are an issue. Keep the bedroom cool and dark.",
+          "A steady wind-down — dim light, no scrolling, something calming — helps the body recognise sleep cues. If you wake at 3am and can't fall back, a low-light, low-stimulation activity (a podcast, a boring book) is usually better than lying frustrated in the dark.",
+        ],
+      },
+      {
+        id: "how-sleep-changes-across-pregnancy",
+        heading: "How sleep changes across pregnancy",
+        lead: "Sleep tends to follow a recognisable arc — and knowing the arc helps.",
+        paragraphs: [
+          "The first trimester is often the hardest in terms of unrefreshing sleep, even when you sleep long hours. Daytime tiredness can be profound.",
+          "The second trimester is, for many people, the easiest. Energy returns, comfort holds, and sleep is often deeper.",
+          "The third trimester is hard in a different way — comfort, frequent waking, vivid dreams, and an increasingly busy mind. Sleep tends to fragment more, often without long stretches.",
+        ],
+      },
+      {
+        id: "side-sleeping-explained",
+        heading: "What 'sleep on your side' actually means",
+        lead: "The advice is real, but the worry around it is often heavier than the evidence requires.",
+        paragraphs: [
+          "From around 28 weeks, going to sleep flat on your back is associated with a slightly higher risk of stillbirth. The recommendation is to settle to sleep on your side — left or right — using pillows to stay comfortable.",
+          "If you wake up on your back, just roll back onto your side. There's no harm in having shifted position; the recommendation is about how you go to sleep, not policing your every movement at night.",
+        ],
+      },
+      {
+        id: "when-to-raise-it",
+        heading: "When sleep problems may need raising",
+        lead: "Most pregnancy sleep changes are normal. A few are worth bringing up with your midwife or GP.",
+        paragraphs: [
+          "Persistent insomnia paired with anxiety or low mood is worth a conversation — sleep and mental health are tightly linked, and treating one usually helps the other. Loud snoring with daytime exhaustion or pauses in breathing should be checked for sleep apnoea, which is more common in pregnancy. Severe restless legs are also worth raising — sometimes iron levels are involved.",
+          "Sleep is part of antenatal care, not a side issue. If broken nights are quietly affecting how you're coping, that's enough reason to mention it.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Saying 'I'm not sleeping well' to a midwife is a complete sentence. They'll know what to ask next.",
+        },
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

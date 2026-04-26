@@ -10,6 +10,7 @@ import ArticleLegacyPage from "@/pages/ArticleLegacyPage";
 const NEW_TEMPLATE_SLUGS = new Set<string>([
   "early-pregnancy-symptoms-explained",
   "implantation-bleeding",
+  "complete-guide-morning-sickness",
 ]);
 
 const ArticlePage = () => {

@@ -55,7 +55,7 @@ const ArticleHeroImage = ({ data }: Props) => {
   if (!hero) {
     return (
       <div className="bg-parchment">
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl my-10 sm:my-12 md:my-14">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl mt-10 sm:mt-12 md:mt-14 mb-4 sm:mb-5 md:mb-6">
           <div className="aspect-[4/3] md:aspect-[16/9] rounded-xl bg-parchment-dark/40" />
         </div>
       </div>
@@ -66,7 +66,7 @@ const ArticleHeroImage = ({ data }: Props) => {
 
   return (
     <div className="bg-parchment">
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl my-10 sm:my-12 md:my-14">
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl mt-10 sm:mt-12 md:mt-14 mb-4 sm:mb-5 md:mb-6">
         <figure className="m-0">
           <div
             className={`overflow-hidden rounded-xl ${

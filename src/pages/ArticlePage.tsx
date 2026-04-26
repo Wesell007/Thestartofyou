@@ -30,6 +30,10 @@ const NEW_TEMPLATE_SLUGS = new Set<string>([
   "pregnancy-after-loss",
   "the-first-trimester-emotionally",
   "when-the-joy-doesnt-arrive-yet",
+  "weight-changes-in-pregnancy",
+  "hospital-bag-and-what-to-pack",
+  "preparing-emotionally-for-birth",
+  "baby-movement-in-pregnancy",
 ]);
 
 const ArticlePage = () => {

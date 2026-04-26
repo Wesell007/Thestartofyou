@@ -508,7 +508,7 @@ const articleDatabase: ArticleData[] = [
     captureIntro: "Early pregnancy is full of uncertainty, questions and moments that feel significant even when small. Writing them down creates a record of how this beginning actually felt.",
     trimester: [1],
     relatedWeeks: [1, 4, 5],
-    relatedSlugs: ["nausea-in-early-pregnancy", "first-trimester-symptoms"],
+    relatedSlugs: ["early-pregnancy-symptoms-explained", "nausea-in-early-pregnancy", "fatigue-in-early-pregnancy"],
     journey: ["pregnancy", "trying-to-conceive"],
     topics: ["symptoms", "safety-and-support"],
     faq: [

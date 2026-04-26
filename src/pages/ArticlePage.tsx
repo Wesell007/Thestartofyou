@@ -23,6 +23,9 @@ const NEW_TEMPLATE_SLUGS = new Set<string>([
   "twins-and-multiples-in-pregnancy",
   "the-space-your-baby-will-come-home-to",
   "sleep-in-pregnancy",
+  "signs-of-labour",
+  "stages-of-labour",
+  "when-to-go-in-for-labour",
 ]);
 
 const ArticlePage = () => {

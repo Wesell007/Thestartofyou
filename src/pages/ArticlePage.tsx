@@ -9,6 +9,7 @@ import ArticleLegacyPage from "@/pages/ArticleLegacyPage";
 // legacy render path until individually migrated.
 const NEW_TEMPLATE_SLUGS = new Set<string>([
   "early-pregnancy-symptoms-explained",
+  "implantation-bleeding",
 ]);
 
 const ArticlePage = () => {

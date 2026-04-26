@@ -209,3 +209,103 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
   "diet-and-exercise": null,
   "preparing-for-baby": null,
 };
+
+// ─── Topic Map Cards ──────────────────────────────────────────────────────
+// Single source of truth for the PregnancyTopicMap on /pregnancy.
+// Labels match the approved benchmark coverage map. Destinations are honest:
+// either a live topic landing page, or — for not-yet-built landings — the
+// strongest live cornerstone article. No legacy /guidance?... bridges.
+
+export interface TopicMapArticleLink {
+  label: string;
+  href: string;
+}
+
+export interface TopicMapEntry {
+  slug: PregnancyTopicSlug;
+  label: string;
+  supportLine: string;
+  mainHref: string;
+  mainLabel: string;
+  /** True if mainHref points to a live topic landing page. */
+  hasLanding: boolean;
+  articles: TopicMapArticleLink[];
+}
+
+export const topicMapEntries: TopicMapEntry[] = [
+  {
+    slug: "body",
+    label: "Your body",
+    supportLine: "Symptoms and changes, week by week.",
+    mainHref: "/pregnancy/body",
+    mainLabel: "Explore your body in pregnancy",
+    hasLanding: true,
+    articles: [
+      { label: "Early pregnancy symptoms explained", href: "/articles/early-pregnancy-symptoms-explained" },
+      { label: "Complete guide to morning sickness", href: "/articles/complete-guide-morning-sickness" },
+      { label: "Fatigue in early pregnancy", href: "/articles/fatigue-in-early-pregnancy" },
+      { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
+    ],
+  },
+  {
+    slug: "baby",
+    label: "Your baby",
+    supportLine: "How your baby grows, trimester by trimester.",
+    mainHref: "/pregnancy/baby",
+    mainLabel: "Explore your baby in pregnancy",
+    hasLanding: true,
+    articles: [
+      { label: "First trimester: complete guide", href: "/articles/first-trimester-complete-guide" },
+      { label: "Second trimester: complete guide", href: "/articles/second-trimester-complete-guide" },
+      { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide" },
+    ],
+  },
+  {
+    slug: "feelings",
+    label: "Your feelings",
+    supportLine: "The emotional side of pregnancy, held with care.",
+    mainHref: "/articles/emotional-wellbeing-pregnancy",
+    mainLabel: "Start with emotional wellbeing",
+    hasLanding: false,
+    articles: [
+      { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy" },
+      { label: "Perinatal anxiety", href: "/articles/perinatal-anxiety" },
+      { label: "When pregnancy symptoms stop", href: "/articles/symptoms-stopping-early-pregnancy" },
+    ],
+  },
+  {
+    slug: "health-and-safety",
+    label: "Health & safety",
+    supportLine: "Steady answers to the questions worth checking.",
+    mainHref: "/articles/implantation-bleeding",
+    mainLabel: "Start with implantation bleeding",
+    hasLanding: false,
+    articles: [
+      { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
+      { label: "When pregnancy symptoms stop", href: "/articles/symptoms-stopping-early-pregnancy" },
+    ],
+  },
+  {
+    slug: "diet-and-exercise",
+    label: "Diet & exercise",
+    supportLine: "Gentle, everyday ways to look after yourself.",
+    mainHref: "/pregnancy",
+    mainLabel: "Coming soon",
+    hasLanding: false,
+    articles: [],
+  },
+  {
+    slug: "preparing-for-baby",
+    label: "Preparing for baby",
+    supportLine: "Steady ways to get ready, when you feel ready.",
+    mainHref: "/articles/preparing-for-baby-complete-guide",
+    mainLabel: "Start with the preparing guide",
+    hasLanding: false,
+    articles: [
+      { label: "Preparing for baby: complete guide", href: "/articles/preparing-for-baby-complete-guide" },
+      { label: "Writing a birth plan", href: "/articles/writing-a-birth-plan" },
+      { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide" },
+    ],
+  },
+];
+

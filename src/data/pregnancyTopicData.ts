@@ -64,7 +64,7 @@ export const PREGNANCY_TOPICS: { slug: PregnancyTopicSlug; eyebrow: string }[] =
 ];
 
 // Slugs that already have a built landing page. Keeps siblings honest.
-export const LIVE_TOPIC_SLUGS: PregnancyTopicSlug[] = ["body", "baby"];
+export const LIVE_TOPIC_SLUGS: PregnancyTopicSlug[] = ["body", "baby", "health-and-safety"];
 
 export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPageConfig | null> = {
   body: {
@@ -205,7 +205,72 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
     showAI: false,
   },
   feelings: null,
-  "health-and-safety": null,
+  "health-and-safety": {
+    slug: "health-and-safety",
+    eyebrow: "Health and safety",
+    title: "Health and safety in pregnancy",
+    intro:
+      "Pregnancy brings a steady stream of small questions — about scans, vaccinations, medicines, and the moments that feel worth checking. This is a calm place to find clear, honest answers, the kind that help you feel steadier rather than more wary, and that support the conversations you'll have with your midwife or doctor.",
+
+    whatThisCovers: {
+      lead: "What this topic covers:",
+      bullets: [
+        "The tests and scans usually offered through pregnancy, and what they're for.",
+        "Vaccinations recommended in pregnancy and the thinking behind them.",
+        "Medicines in pregnancy, and how to make safer decisions about them.",
+        "Staying well day to day — body changes, energy, and small habits that help.",
+        "When something is worth raising with your midwife, GP, or maternity unit.",
+      ],
+    },
+
+    startHere: [
+      {
+        title: "Tests and scans in pregnancy",
+        href: "/articles/tests-and-scans-in-pregnancy",
+        why: "A grounded overview of the appointments, screenings, and scans you're likely to be offered.",
+      },
+      {
+        title: "Vaccinations in pregnancy",
+        href: "/articles/vaccinations-in-pregnancy",
+        why: "Why certain vaccinations are recommended, when they're given, and what to expect.",
+      },
+      {
+        title: "Medicines in pregnancy",
+        href: "/articles/medicines-in-pregnancy",
+        why: "How to think about everyday medicines, and who to ask when you're not sure.",
+      },
+    ],
+
+    groups: [
+      {
+        label: "Tests and scans",
+        description: "What's usually offered, and what each one is looking for.",
+        links: [
+          { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy" },
+        ],
+      },
+      {
+        label: "Medicines and vaccinations",
+        description: "Two of the most-asked questions, answered calmly.",
+        links: [
+          { label: "Medicines in pregnancy", href: "/articles/medicines-in-pregnancy" },
+          { label: "Vaccinations in pregnancy", href: "/articles/vaccinations-in-pregnancy" },
+        ],
+      },
+      {
+        label: "Staying well and when to raise something",
+        description: "Practical, trust-led guidance for the in-between days.",
+        links: [
+          { label: "Foods to avoid in pregnancy", href: "/articles/foods-to-avoid-in-pregnancy" },
+          { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
+          { label: "When pregnancy symptoms stop", href: "/articles/symptoms-stopping-early-pregnancy" },
+        ],
+      },
+    ],
+
+    showSiblings: true,
+    showAI: false,
+  },
   "diet-and-exercise": null,
   "preparing-for-baby": null,
 };
@@ -276,13 +341,15 @@ export const topicMapEntries: TopicMapEntry[] = [
   {
     slug: "health-and-safety",
     label: "Health & safety",
-    supportLine: "Steady answers to the questions worth checking.",
-    mainHref: "/articles/implantation-bleeding",
-    mainLabel: "Start with health and safety",
-    hasLanding: false,
+    supportLine: "Tests, scans, medicines, and the questions worth raising.",
+    mainHref: "/pregnancy/health-and-safety",
+    mainLabel: "Explore health and safety in pregnancy",
+    hasLanding: true,
     articles: [
-      { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
-      { label: "When pregnancy symptoms stop", href: "/articles/symptoms-stopping-early-pregnancy" },
+      { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy" },
+      { label: "Vaccinations in pregnancy", href: "/articles/vaccinations-in-pregnancy" },
+      { label: "Medicines in pregnancy", href: "/articles/medicines-in-pregnancy" },
+      { label: "Foods to avoid in pregnancy", href: "/articles/foods-to-avoid-in-pregnancy" },
     ],
   },
   {

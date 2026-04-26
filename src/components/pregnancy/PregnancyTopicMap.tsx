@@ -20,7 +20,7 @@ const topics: Topic[] = [
     id: "body",
     label: "Your body",
     supportLine: "Symptoms and changes, week by week.",
-    mainHref: "/guidance?topic=body-changes",
+    mainHref: "/pregnancy/body",
     mainLabel: "Explore body & symptoms",
     articles: [
       { label: "Early pregnancy symptoms explained", href: "/articles/early-pregnancy-symptoms-explained" },

@@ -508,7 +508,7 @@ const articleDatabase: ArticleData[] = [
     captureIntro: "Early pregnancy is full of uncertainty, questions and moments that feel significant even when small. Writing them down creates a record of how this beginning actually felt.",
     trimester: [1],
     relatedWeeks: [1, 4, 5],
-    relatedSlugs: ["nausea-in-early-pregnancy", "first-trimester-symptoms"],
+    relatedSlugs: ["early-pregnancy-symptoms-explained", "nausea-in-early-pregnancy", "fatigue-in-early-pregnancy"],
     journey: ["pregnancy", "trying-to-conceive"],
     topics: ["symptoms", "safety-and-support"],
     faq: [
@@ -555,6 +555,93 @@ const articleDatabase: ArticleData[] = [
     },
     productPromotion: "light",
     reviewedBy: "Jenny Joines",
+    lastUpdated: "March 2026",
+    keyTakeaways: [
+      "Implantation bleeding is light spotting that can happen when an embryo embeds into the uterine lining, usually 6–12 days after ovulation",
+      "It is lighter, shorter, and usually pinker or browner than a period, and does not build in flow",
+      "Only around 25–30% of pregnancies involve any visible implantation bleeding — its absence is completely normal",
+      "Heavier bleeding, bright red flow, or one-sided pain is a different picture and is worth a same-day call to your midwife or doctor",
+    ],
+    sources: [
+      "NHS — Vaginal bleeding in pregnancy",
+      "Tommy's — Bleeding in early pregnancy",
+      "NICE — Ectopic pregnancy and miscarriage (NG126)",
+      "RCOG — Information for women in early pregnancy",
+    ],
+
+    // ── New unified deep article template fields ──
+    topic: "body",
+    standfirst:
+      "Light spotting in early pregnancy is one of the most-searched, most-worried-about signs. Here's what implantation bleeding actually looks like — and when it's worth a call.",
+    hero: {
+      src: new URL("../assets/article-hero-implantation-bleeding.jpg", import.meta.url).href,
+      alt: "A quiet bedside table in soft morning light, with a folded knit blanket, a mug of herbal tea, a closed notebook, and a small sprig of eucalyptus.",
+    },
+    editorialSections: [
+      {
+        id: "what-implantation-bleeding-is",
+        heading: "What implantation bleeding is",
+        lead: "Implantation bleeding is a small amount of light spotting that can happen when a fertilised egg embeds into the lining of the uterus. It is not a period and it is not a sign that something is wrong.",
+        paragraphs: [
+          "When the embryo attaches to the uterine wall, it can disrupt some of the tiny blood vessels in the lining. That disruption can release a small amount of blood, which may show up days later as a brief, light bleed or a tinted discharge.",
+          "It does not happen for everyone. Most estimates put it at roughly one in four to one in three pregnancies, and many people who do experience it only notice it in hindsight.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Not seeing any spotting around implantation is completely normal and does not mean implantation hasn't happened.",
+        },
+      },
+      {
+        id: "when-implantation-bleeding-happens",
+        heading: "When implantation bleeding usually happens",
+        lead: "Implantation typically occurs 6 to 12 days after ovulation, which often falls in the week before an expected period. Any bleeding usually shows up in that same window.",
+        paragraphs: [
+          "Because the timing overlaps with when a period is due, implantation bleeding is often mistaken for an early or unusually light period. The biggest clue is what happens next: a period builds, an implantation bleed doesn't.",
+          "If you've been tracking ovulation, the spotting most commonly appears 9–12 days after ovulation. If you haven't been tracking, just before — or instead of — your expected period is the typical timing.",
+        ],
+      },
+      {
+        id: "what-it-looks-like",
+        heading: "What implantation bleeding looks like",
+        lead: "It is usually light pink or brown rather than bright red, often only visible when wiping, and rarely enough to fill a pad or tampon.",
+        paragraphs: [
+          "Most people describe it as a tint rather than a flow — a streak on tissue, a small amount on underwear, or a brownish discharge that lasts a few hours to a couple of days. It can come and go in that window rather than running continuously.",
+          "Bright red bleeding, clots, or anything that fills a pad is not the implantation pattern. That's worth a call to your midwife or doctor, even if it turns out to be nothing serious.",
+        ],
+      },
+      {
+        id: "vs-period",
+        heading: "How to tell implantation bleeding from a period",
+        lead: "The clearest differences are flow, colour, and duration. A period builds and lasts several days. Implantation bleeding stays light, often looks pink or brown, and is usually over within one to three days.",
+        paragraphs: [
+          "Periods typically start light, become heavier over the first day or two, and then taper. Implantation bleeding doesn't follow that arc — it stays light throughout and either stops or fades into ordinary discharge.",
+          "Cramping can happen with both, but implantation cramping tends to be milder and shorter than period cramping. A consistently raised basal body temperature beyond your usual luteal phase, alongside light spotting, can be another supporting clue if you've been tracking.",
+          "Only a positive pregnancy test can confirm. If your period is late or noticeably different from usual, testing with first-morning urine a few days after the spotting is the most reliable next step.",
+        ],
+      },
+      {
+        id: "cramping-and-other-spotting",
+        heading: "Cramping, spotting, and what can still be normal",
+        lead: "Light cramping and occasional spotting can both happen in early pregnancy without anything being wrong. The pattern matters more than the presence of either on its own.",
+        paragraphs: [
+          "Mild, low, period-like cramping is common as the uterus begins to grow and the surrounding ligaments stretch. Light spotting after sex, after a vaginal exam, or for no clear reason can also happen in the first trimester because the cervix becomes more sensitive in early pregnancy.",
+          "What matters is whether the picture is light and short-lived, or whether it is escalating. Bleeding that stays light and stops within a couple of days, with at most mild cramping, fits the reassuring pattern. Anything heavier or more painful is a different conversation.",
+        ],
+      },
+      {
+        id: "when-to-call",
+        heading: "When to speak with a midwife or doctor",
+        lead: "Most light spotting in very early pregnancy doesn't need clinical input. A small number of patterns do, and recognising them quickly matters.",
+        paragraphs: [
+          "Contact your healthcare provider promptly if bleeding becomes as heavy as — or heavier than — a normal period, if it is bright red and increasing, if you pass clots, or if it is paired with one-sided abdominal pain, shoulder-tip pain, dizziness, or fainting. These can be signs of an ectopic pregnancy or early miscarriage and warrant urgent assessment.",
+          "Also worth a call: any bleeding that simply doesn't feel right to you, or that is making it hard to function. Early pregnancy units exist precisely for this kind of reassurance — you don't need to wait until something is clearly wrong.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "If bleeding is heavy, paired with severe or one-sided pain, or you feel faint, contact your midwife, GP, or out-of-hours service the same day.",
+        },
+      },
+    ],
   },
 
   // ─── SYMPTOMS STOPPING IN EARLY PREGNANCY ────────────────────────────────

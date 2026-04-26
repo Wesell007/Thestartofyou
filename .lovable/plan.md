@@ -1,162 +1,108 @@
 
-# Implement first article on the unified deep template (revised)
+# Pregnancy Rollout Plan — Locked Benchmark Coverage
 
-Build the new unified deep article render path and migrate **only** `early-pregnancy-symptoms-explained` onto it. All other articles continue to use the current render path until individually migrated. The old path is not retired in this pass.
+Uses the locked What to Expect benchmark subtopics (this pass) as the coverage reference. Each item maps to its previously agreed Start of You label, current state, target destination, and rollout phase. Items already excluded in the prior coverage map (Cord Blood Banking, Birth Stories, Baby Registry, Baby Shower, Gender Reveal, Chinese Gender Predictor, Rib Pain, Twins extras) are intentionally out of scope here.
 
-## 1. Routing strategy — per-article opt-in
+Naming follows brand rules: "Guidance" not "Articles" in user copy, British English, no em/en dashes. All medical articles get the Jenny Joines trust signal + sources block. Each new article is opted in via `NEW_TEMPLATE_SLUGS` in `ArticlePage.tsx` and authored against the unified deep template.
 
-`ArticlePage.tsx` becomes a thin **switcher**:
+---
 
-```tsx
-const NEW_TEMPLATE_SLUGS = new Set<string>([
-  "early-pregnancy-symptoms-explained",
-]);
+## Coverage matrix (locked benchmark only)
 
-const ArticlePage = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const data = getArticle(slug ?? "");
-  if (!data) return <Navigate to="/explore" replace />;
+### Your Body
+| Benchmark | TSOY label | Current | Target destination | Type | Phase |
+|---|---|---|---|---|---|
+| Early Signs of Pregnancy | Early pregnancy symptoms explained | Live (deep) | Same | Deep article | Done |
+| Pregnancy Symptoms | Symptoms across pregnancy | Covered by `body` topic groups | Same (no mega-article) | Topic-page groups | Done |
+| Pregnancy Sleep | Sleep in pregnancy | Missing | `/articles/sleep-in-pregnancy` | Deep article | C |
+| Labour & Delivery | Labour and birth | Missing | New group in `body`: signs of labour, stages of labour, when to go in | Topic-page group + 3 deep articles | D |
 
-  if (NEW_TEMPLATE_SLUGS.has(data.slug)) {
-    return <ArticleDeepTemplate data={data} />;
-  }
-  return <ArticleLegacyPage data={data} />;
-};
-```
+### Your Baby
+| Benchmark | TSOY label | Current | Target destination | Type | Phase |
+|---|---|---|---|---|---|
+| Fetal Development | How your baby develops | Missing | `/articles/how-your-baby-develops-in-pregnancy` | Deep article | C |
+| Your Pregnancy Week by Week | Week by week | Live as bridge | `/pregnancy#week-by-week` via `weekBridge` | Bridge | Done |
+| Twins & More | Twins and multiples | Missing | `/articles/twins-and-multiples-in-pregnancy` | Deep article | C |
 
-- The current `ArticlePage` body (both `isDeep` and short-article branches, all 18 blocks) is moved verbatim into a new file `ArticleLegacyPage.tsx`. No behavioural change for any non-migrated article.
-- The new template lives in `ArticleDeepTemplate.tsx`.
-- Migration is done by adding a slug to `NEW_TEMPLATE_SLUGS`. Once the catalogue is fully migrated in later passes, the switcher and the legacy page are deleted.
+### Health & Safety
+| Benchmark | TSOY label | Current | Target destination | Type | Phase |
+|---|---|---|---|---|---|
+| Pregnancy Health | Staying well in pregnancy | Topic page not built | `/pregnancy/health-and-safety` landing intro + group lead | Topic-page lead | A |
+| Tests & Screenings | Tests and scans | Missing | `/articles/tests-and-scans-in-pregnancy` (cornerstone) + later per-test deeps | Deep article | A |
+| How Much Weight to Gain | Weight changes in pregnancy | Missing | `/articles/weight-changes-in-pregnancy` | Deep article | A (tail) |
+| Vaccines You Need | Vaccinations in pregnancy | Missing | `/articles/vaccinations-in-pregnancy` | Deep article | A |
+| Medications That Are Safe | Medicines in pregnancy | Missing | `/articles/medicines-in-pregnancy` | Deep article | A |
 
-## 2. Data shape additions (`src/data/articleData.ts`)
+### Diet & Fitness
+| Benchmark | TSOY label | Current | Target destination | Type | Phase |
+|---|---|---|---|---|---|
+| Pregnancy Diet: Best & Worst Foods | Eating well in pregnancy | Missing | `/articles/eating-well-in-pregnancy` (cornerstone) | Deep article | B |
+| Pregnancy Fitness | Moving your body in pregnancy | Missing | `/articles/moving-your-body-in-pregnancy` (cornerstone) | Deep article | B |
+| Pregnancy Nutrients | Key nutrients in pregnancy | Missing | `/articles/key-nutrients-in-pregnancy` | Deep article | B |
+| Healthy Eating During Pregnancy | (merged) | n/a | Folded into "Eating well" | Merge | Done by design |
+| Appetite Loss During Pregnancy | When you can't face food | Missing | `/articles/when-you-cant-face-food-in-pregnancy` | Deep article | B |
+| Foods to Avoid During Pregnancy | Foods to avoid | Missing | `/articles/foods-to-avoid-in-pregnancy` | Deep article | A (highest intent, pulled forward) |
+| Best Exercises for Pregnant Women | (merged) | n/a | Section inside "Moving your body" | Merge | Done by design |
+| Exercises to Avoid During Pregnancy | Exercises to avoid | Missing | Anchor section inside "Moving your body" | Section, not standalone | B |
 
-Additive only — every field optional, no impact on legacy-rendered articles:
+### Preparing for Baby
+| Benchmark | TSOY label | Current | Target destination | Type | Phase |
+|---|---|---|---|---|---|
+| Baby Prep | Getting ready for baby | Topic page not built | `/pregnancy/preparing-for-baby` landing intro | Topic-page lead | C |
+| Baby Names | Choosing a name | Missing | `/articles/choosing-a-baby-name` (reflective, not a database) | Deep article (light) | F |
+| Setting Up the Nursery | The space your baby will come home to | Missing | `/articles/the-space-your-baby-will-come-home-to` | Deep article | C |
 
-```ts
-topic?: PregnancyTopicSlug;     // drives breadcrumb + topic return
-standfirst?: string;            // one-line dek under H1
-hero?: { src: string; alt: string; credit?: string }; // alt REQUIRED when hero set
-```
+---
 
-Import `PregnancyTopicSlug` from `pregnancyTopicData`.
+## Rollout order (this pass)
 
-## 3. Article migration — `early-pregnancy-symptoms-explained`
+**Phase A — Health & Safety topic + highest-intent food article**
+1. Build `/pregnancy/health-and-safety` topic landing (mirror `BodyTopic.tsx`); add to `LIVE_TOPIC_SLUGS`.
+2. Ship `/articles/foods-to-avoid-in-pregnancy` (pulled into A: highest search intent).
+3. Ship `/articles/tests-and-scans-in-pregnancy`.
+4. Ship `/articles/vaccinations-in-pregnancy`.
+5. Ship `/articles/medicines-in-pregnancy`.
+6. Tail: `/articles/weight-changes-in-pregnancy`.
 
-- `topic: "body"`
-- `standfirst: "What's actually happening in the first weeks — and how to tell the strong signals from the noise."`
-- `hero: { src: <imported asset>, alt: "A person sitting quietly at home, hands resting on their lap, in soft natural light." }` — reuse `article-hero-implantation.jpg`.
-- Add `editorialSections[]` with **8 H2 sections**, each with an explicit `id` (already required by the existing `EditorialSection` type):
+**Phase B — Diet & Exercise topic**
+1. Build `/pregnancy/diet-and-exercise` landing; add to `LIVE_TOPIC_SLUGS`.
+2. Ship `/articles/eating-well-in-pregnancy`.
+3. Ship `/articles/moving-your-body-in-pregnancy` (includes "Exercises to avoid" as a section).
+4. Ship `/articles/key-nutrients-in-pregnancy`.
+5. Ship `/articles/when-you-cant-face-food-in-pregnancy`.
 
-```
-01  when-symptoms-start                  → When early pregnancy symptoms usually start
-02  earliest-signs-before-missed-period  → The earliest signs before a missed period
-03  most-common-early-symptoms           → The most common early symptoms, and what causes them
-        ↳ subsections: hCG and progesterone, smell sensitivity,
-                       breast and areola changes, fatigue
-04  implantation-bleeding                → Implantation bleeding, spotting, and what's normal
-05  cramping-and-bloating                → Cramping and bloating in the first weeks
-06  vs-pms                               → How early symptoms differ from PMS
-07  when-to-test                         → When you can take a home pregnancy test
-08  when-to-speak-to-a-doctor            → When to speak with a midwife or doctor
-```
+**Phase C — Baby topic gaps + Sleep + Preparing landing**
+1. Ship `/articles/how-your-baby-develops-in-pregnancy` (linked from `baby` topic).
+2. Ship `/articles/twins-and-multiples-in-pregnancy`.
+3. Ship `/articles/sleep-in-pregnancy` (linked from `body` topic).
+4. Build `/pregnancy/preparing-for-baby` landing.
+5. Ship `/articles/the-space-your-baby-will-come-home-to`.
 
-Each section: short `lead` (mini quick-answer), 2–4 `paragraphs`, optional H3 `subsections` for §03, max 2 `callout`s across the article.
+**Phase D — Labour & Birth cluster (Body topic)**
+1. Add new group "Labour and birth" to `body` topic config.
+2. Ship `/articles/signs-of-labour`.
+3. Ship `/articles/stages-of-labour`.
+4. Ship `/articles/when-to-go-in-for-labour`.
 
-- Refine `keyTakeaways` to 4 calm statements.
-- Keep existing `faq` (4 search-shaped Qs, mild rewording).
-- Extend `sources` to 3–4 entries (NHS, Tommy's, NICE).
-- Keep `relatedSlugs`; template renders up to 3.
+**Phase F — Long tail**
+1. Ship `/articles/choosing-a-baby-name`.
 
-## 4. New components
+---
 
-### `src/components/article/ArticleDeepTemplate.tsx` *(new — the unified render path)*
+## Coverage check vs locked benchmark
+- Your Body: 4/4 covered (1 live, 1 via groups, 2 planned).
+- Your Baby: 3/3 covered (1 live bridge, 2 planned).
+- Health & Safety: 5/5 covered (all planned in Phase A).
+- Diet & Fitness: 8/8 reconciled (4 deep articles, 1 section, 2 explicit merges, 1 tail).
+- Preparing for Baby: 3/3 covered (1 topic landing, 2 articles).
 
-```tsx
-const ArticleDeepTemplate = ({ data }: { data: ArticleData }) => {
-  const related = getRelatedArticles(data.slug, 3); // up to 3, never padded
-  return (
-    <div className="min-h-screen bg-parchment">
-      <Navbar />
-      <ArticleHeader data={data} />
-      <ArticleQuickAnswer data={data} variant="calm" />
-      <ArticleHeroImage data={data} />
-      <ArticleContents data={data} />
-      <ArticleTakeaways data={data} />
-      {data.editorialSections?.length ? (
-        <ArticleEditorialContent sections={data.editorialSections} />
-      ) : null}
-      <ArticleNormalSignals data={data} />
-      <ArticleFAQ data={data} variant="calm" />
-      <ArticleSources data={data} />
-      {related.length > 0 && (
-        <ArticleRelatedReads articles={related} variant="calm" />
-      )}
-      <ArticleTopicReturn data={data} />
-      <Footer />
-    </div>
-  );
-};
-```
+After Phase D the locked benchmark is fully matched on coverage; remaining work is depth (per-test deep articles under Tests and scans) and the Feelings topic, both out of scope for this benchmark pass.
 
-### `ArticleHeader.tsx` *(new)*
-Breadcrumb (`The Pregnancy Map · Your body` when `topic` set), serif H1, italic serif standfirst. Parchment background. No date/byline/read-time/tags/CTA.
+---
 
-### `ArticleHeroImage.tsx` *(new)*
-Contained image, `max-w-3xl`, `rounded-xl`, no shadow, no caption strip. 4:3 mobile, 16:9 desktop. Margin rhythm `my-10 sm:my-12 md:my-14`.
-
-**Hero source resolution order:**
-1. `data.hero?.src` — explicit per-article hero (alt = `data.hero.alt`, **meaningful, required**)
-2. `heroImageMap[data.slug]` — legacy lookup (alt = `data.title`, meaningful)
-3. `article-botanical-accent.png` — decorative botanical fallback (`alt=""`, `aria-hidden="true"`)
-4. No `<img>` rendered if even (3) fails
-
-Optional muted credit line, 11px sans, right-aligned, only when `data.hero?.credit` set.
-
-### `ArticleContents.tsx` *(new)*
-Eyebrow `In this article`. Anchors derived from `editorialSections[].id` — already a required field on `EditorialSection`, no slugification, no `heading.id` assumption. Falls back to a non-anchored list of `data.inThisArticle` strings only when no editorial sections exist (renders as plain labels, no jump behaviour). Two-column on desktop, single on mobile. Each row: `01` numeral + serif label. Quiet container, hairline border, no card shadow, **no sticky bar**. Renders only when 3+ entries exist. Smooth scroll, ~80px offset.
-
-### `ArticleTakeaways.tsx` *(new — calmer restyle of `ArticleKeyTakeaways`)*
-Eyebrow `Key takeaways`. 3–5 bullets with left accent rule per item. No boxed sage card, no checkmark icons, no read-time caption.
-
-### `ArticleNormalSignals.tsx` *(new — calmer restyle of `ArticleNormal`)*
-Two quiet text columns: `Usually normal` / `Worth a check`. No coloured boxes, no traffic-light icons. Single muted serif-italic disclaimer at the foot.
-
-### `ArticleTopicReturn.tsx` *(new)*
-Two centred muted links separated by `·`: `← Your body in pregnancy` (when `topic` set) and `← The Pregnancy Map`. Underline on hover. No buttons, no icons.
-
-## 5. Restyled-for-new-path components (variant prop, not in-place rewrite)
-
-To avoid changing how legacy articles look, three existing components gain a `variant?: "legacy" | "calm"` prop (default `"legacy"`):
-
-- `ArticleQuickAnswer.tsx` — calm: drop the `-mt-*` pull-up. Same content otherwise.
-- `ArticleFAQ.tsx` — calm: hairline-bordered rows, no rounded card chrome. Schema injection unchanged.
-- `ArticleRelatedReads.tsx` — calm: vertical list, **up to 3, target 3, never padded**, no thumbnails, no card grid, no "Browse all guidance" link, no journey/Guide pills. Each entry: serif title (link) + muted italic one-liner from `metaDescription` (truncated). Renders nothing if 0 matches; renders 1 or 2 if curation honestly yields fewer.
-
-`ArticleSources.tsx` and `ArticleEditorialContent.tsx`: used as-is by both paths.
-
-## 6. Related-reads selection logic
-
-The new path uses `getRelatedArticles(slug, 3)` and treats its result as **up to 3**. If the helper currently pads with weak matches, harden it: prefer `relatedSlugs` (curated) → same `topic` → shared `cornerstoneSlug`, and **stop** rather than pad. Public signature unchanged.
-
-For `early-pregnancy-symptoms-explained`, the curated `relatedSlugs` provide four candidates — three are returned. Result is exactly 3 honest matches.
-
-## 7. What is NOT changed in this pass
-
-- No edits to the 19 legacy article components (`ArticleHero`, `ArticleHowThisFeels`, `ArticleWhatHappening`, `ArticleTiming`, `ArticleRealExperience`, `ArticleInterpretation`, `ArticleNormal`, `ArticleAction`, `ArticleCompare`, `ArticleWhatNext`, `ArticleRelatedStage`, `ArticleAISupport`, `ArticleJourneyCTA`, `ArticleKeyTakeaways`, `ArticleJumpNav`, `ArticleInThisGuide`, `ArticleFullGuide`, `ArticleDeepIntro`, `JournalPromotion`).
-- No changes to topic pages, `/pregnancy`, nav, or homepage.
-- No deletion of any existing article component or render path.
-
-## 8. Routing
-
-`/articles/:slug` unchanged. The switcher inside `ArticlePage` decides which template renders.
-
-## Returns deliverable (after implementation)
-
-1. **Changed files:** `src/pages/ArticlePage.tsx` (switcher), `src/pages/ArticleLegacyPage.tsx` (extracted), `src/components/article/ArticleDeepTemplate.tsx` + 6 new sibling components, `variant` props added to `ArticleQuickAnswer` / `ArticleFAQ` / `ArticleRelatedReads`, `src/data/articleData.ts` (additive fields + migrated entry).
-2. Final article structure used.
-3. Final H2 structure (the 8 sections above).
-4. Hero added: yes, contained, `article-hero-implantation.jpg`, between Quick Answer and Contents.
-5. In this article: derived from `editorialSections[].id` (no manual config).
-6. Components retired from this article's render path: the 19 legacy blocks listed above. They continue to render for every other article via the legacy path.
-7. Visual review notes.
-8. Migration risks: every non-migrated article is unchanged; risk is limited to the one migrated article. Future migrations are slug-add operations into `NEW_TEMPLATE_SLUGS`.
+## Technical notes
+- New articles: extend `ArticleData` entries in `src/data/articleData.ts` with `topic`, `standfirst`, `hero`, `editorialSections`; opt in via `NEW_TEMPLATE_SLUGS` in `src/pages/ArticlePage.tsx`. Legacy articles untouched.
+- New topic landings: add a wrapper in `src/pages/pregnancy/<Topic>.tsx` mirroring `BodyTopic.tsx`, populate the config in `pregnancyTopicData.ts`, and add the slug to `LIVE_TOPIC_SLUGS` only after at least one real article exists in its groups.
+- Topic-page group links must point to live articles only — never to unbuilt slugs.
+- Each medical deep article: include sources, FAQ, Normal Signals where relevant, and the Jenny Joines trust signal.
+- Related Reads stays capped at 3, curated, after the Topic Return block.

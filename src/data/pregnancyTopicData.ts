@@ -64,7 +64,7 @@ export const PREGNANCY_TOPICS: { slug: PregnancyTopicSlug; eyebrow: string }[] =
 ];
 
 // Slugs that already have a built landing page. Keeps siblings honest.
-export const LIVE_TOPIC_SLUGS: PregnancyTopicSlug[] = ["body", "baby", "health-and-safety", "diet-and-exercise", "preparing-for-baby"];
+export const LIVE_TOPIC_SLUGS: PregnancyTopicSlug[] = ["body", "baby", "feelings", "health-and-safety", "diet-and-exercise", "preparing-for-baby"];
 
 export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPageConfig | null> = {
   body: {
@@ -217,7 +217,71 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
     showSiblings: true,
     showAI: false,
   },
-  feelings: null,
+  feelings: {
+    slug: "feelings",
+    eyebrow: "Your feelings",
+    title: "Your feelings in pregnancy",
+    intro:
+      "Pregnancy is an emotional season as much as a physical one — and the feelings rarely arrive in the order, or the shape, you expect. This is a steady place to make sense of what's moving inside you: the hope and the unease, the days that feel ordinary, the days that don't. Not therapy, not performance. Just honest, humane company for the inner side of pregnancy.",
+
+    whatThisCovers: {
+      lead: "What this topic covers:",
+      bullets: [
+        "How pregnancy can feel emotionally — the texture, not just the headlines.",
+        "Anxiety and uncertainty, and where the line between worry and overwhelm tends to sit.",
+        "The first trimester emotionally — the strange, in-between weeks before much shows.",
+        "When joy is delayed, mixed, or absent — and what that often does, and doesn't, mean.",
+        "Pregnancy after loss as a distinct emotional experience that needs its own care.",
+      ],
+    },
+
+    startHere: [
+      {
+        title: "Emotional wellbeing in pregnancy",
+        href: "/articles/emotional-wellbeing-pregnancy",
+        why: "The wider orientation — what's normal, what's worth raising, and how to think about your inner life across pregnancy.",
+      },
+      {
+        title: "Anxiety in pregnancy",
+        href: "/articles/anxiety-in-pregnancy",
+        why: "A grounded look at worry in pregnancy, where it sits within normal, and when extra support tends to help.",
+      },
+      {
+        title: "The first trimester emotionally",
+        href: "/articles/the-first-trimester-emotionally",
+        why: "The emotional texture of the earliest weeks — quieter than people warn you about, stranger than they tell you.",
+      },
+    ],
+
+    groups: [
+      {
+        label: "Emotional wellbeing",
+        description: "The wider picture, and the emotionally specific weeks of the first trimester.",
+        links: [
+          { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy" },
+          { label: "The first trimester emotionally", href: "/articles/the-first-trimester-emotionally" },
+        ],
+      },
+      {
+        label: "Anxiety and uncertainty",
+        description: "Worry, unease, and the days when the joy doesn't quite arrive.",
+        links: [
+          { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy" },
+          { label: "When the joy doesn't arrive yet", href: "/articles/when-the-joy-doesnt-arrive-yet" },
+        ],
+      },
+      {
+        label: "Harder experiences",
+        description: "Pregnancy after loss, held with the care it deserves.",
+        links: [
+          { label: "Pregnancy after loss", href: "/articles/pregnancy-after-loss" },
+        ],
+      },
+    ],
+
+    showSiblings: true,
+    showAI: false,
+  },
   "health-and-safety": {
     slug: "health-and-safety",
     eyebrow: "Health and safety",
@@ -471,13 +535,14 @@ export const topicMapEntries: TopicMapEntry[] = [
     slug: "feelings",
     label: "Your feelings",
     supportLine: "The emotional side of pregnancy, held with care.",
-    mainHref: "/articles/emotional-wellbeing-pregnancy",
-    mainLabel: "Start with emotional wellbeing",
-    hasLanding: false,
+    mainHref: "/pregnancy/feelings",
+    mainLabel: "Explore your feelings in pregnancy",
+    hasLanding: true,
     articles: [
       { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy" },
-      { label: "Pregnancy anxiety", href: "/articles/perinatal-anxiety" },
-      { label: "When pregnancy symptoms stop", href: "/articles/symptoms-stopping-early-pregnancy" },
+      { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy" },
+      { label: "The first trimester emotionally", href: "/articles/the-first-trimester-emotionally" },
+      { label: "When the joy doesn't arrive yet", href: "/articles/when-the-joy-doesnt-arrive-yet" },
     ],
   },
   {

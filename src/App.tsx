@@ -11,6 +11,7 @@ import BabyTopic from "./pages/pregnancy/BabyTopic.tsx";
 import HealthAndSafetyTopic from "./pages/pregnancy/HealthAndSafetyTopic.tsx";
 import DietAndExerciseTopic from "./pages/pregnancy/DietAndExerciseTopic.tsx";
 import PreparingForBabyTopic from "./pages/pregnancy/PreparingForBabyTopic.tsx";
+import FeelingsTopic from "./pages/pregnancy/FeelingsTopic.tsx";
 import FirstTrimester from "./pages/trimester/FirstTrimester.tsx";
 import SecondTrimester from "./pages/trimester/SecondTrimester.tsx";
 import ThirdTrimester from "./pages/trimester/ThirdTrimester.tsx";
@@ -109,6 +110,7 @@ const App = () => (
           <Route path="/pregnancy/health-and-safety" element={<HealthAndSafetyTopic />} />
           <Route path="/pregnancy/diet-and-exercise" element={<DietAndExerciseTopic />} />
           <Route path="/pregnancy/preparing-for-baby" element={<PreparingForBabyTopic />} />
+          <Route path="/pregnancy/feelings" element={<FeelingsTopic />} />
           <Route path="/pregnancy/first-trimester" element={<FirstTrimester />} />
           <Route path="/pregnancy/second-trimester" element={<SecondTrimester />} />
           <Route path="/pregnancy/third-trimester" element={<ThirdTrimester />} />

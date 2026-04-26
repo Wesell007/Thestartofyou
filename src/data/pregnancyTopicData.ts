@@ -64,7 +64,7 @@ export const PREGNANCY_TOPICS: { slug: PregnancyTopicSlug; eyebrow: string }[] =
 ];
 
 // Slugs that already have a built landing page. Keeps siblings honest.
-export const LIVE_TOPIC_SLUGS: PregnancyTopicSlug[] = ["body", "baby", "health-and-safety", "diet-and-exercise", "preparing-for-baby"];
+export const LIVE_TOPIC_SLUGS: PregnancyTopicSlug[] = ["body", "baby", "feelings", "health-and-safety", "diet-and-exercise", "preparing-for-baby"];
 
 export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPageConfig | null> = {
   body: {

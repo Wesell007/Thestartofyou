@@ -236,28 +236,28 @@ export const topicMapEntries: TopicMapEntry[] = [
   {
     slug: "body",
     label: "Your body",
-    supportLine: "Symptoms and changes, week by week.",
+    supportLine: "Symptoms, changes, and what may feel different week by week.",
     mainHref: "/pregnancy/body",
     mainLabel: "Explore your body in pregnancy",
     hasLanding: true,
     articles: [
-      { label: "Early pregnancy symptoms explained", href: "/articles/early-pregnancy-symptoms-explained" },
-      { label: "Complete guide to morning sickness", href: "/articles/complete-guide-morning-sickness" },
-      { label: "Fatigue in early pregnancy", href: "/articles/fatigue-in-early-pregnancy" },
+      { label: "Early signs of pregnancy", href: "/articles/early-pregnancy-symptoms-explained" },
+      { label: "Morning sickness", href: "/articles/complete-guide-morning-sickness" },
+      { label: "Fatigue in pregnancy", href: "/articles/fatigue-in-early-pregnancy" },
       { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
     ],
   },
   {
     slug: "baby",
     label: "Your baby",
-    supportLine: "How your baby grows, trimester by trimester.",
+    supportLine: "How your baby grows and changes across pregnancy.",
     mainHref: "/pregnancy/baby",
     mainLabel: "Explore your baby in pregnancy",
     hasLanding: true,
     articles: [
-      { label: "First trimester: complete guide", href: "/articles/first-trimester-complete-guide" },
-      { label: "Second trimester: complete guide", href: "/articles/second-trimester-complete-guide" },
-      { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide" },
+      { label: "Early development", href: "/articles/first-trimester-complete-guide" },
+      { label: "Growing and moving", href: "/articles/second-trimester-complete-guide" },
+      { label: "Later development", href: "/articles/third-trimester-complete-guide" },
     ],
   },
   {
@@ -269,7 +269,7 @@ export const topicMapEntries: TopicMapEntry[] = [
     hasLanding: false,
     articles: [
       { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy" },
-      { label: "Perinatal anxiety", href: "/articles/perinatal-anxiety" },
+      { label: "Pregnancy anxiety", href: "/articles/perinatal-anxiety" },
       { label: "When pregnancy symptoms stop", href: "/articles/symptoms-stopping-early-pregnancy" },
     ],
   },
@@ -278,7 +278,7 @@ export const topicMapEntries: TopicMapEntry[] = [
     label: "Health & safety",
     supportLine: "Steady answers to the questions worth checking.",
     mainHref: "/articles/implantation-bleeding",
-    mainLabel: "Start with implantation bleeding",
+    mainLabel: "Start with health and safety",
     hasLanding: false,
     articles: [
       { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
@@ -288,7 +288,7 @@ export const topicMapEntries: TopicMapEntry[] = [
   {
     slug: "diet-and-exercise",
     label: "Diet & exercise",
-    supportLine: "Gentle, everyday ways to look after yourself.",
+    supportLine: "Eating well, moving safely, and caring for yourself day to day.",
     mainHref: "/pregnancy",
     mainLabel: "Coming soon",
     hasLanding: false,
@@ -297,14 +297,14 @@ export const topicMapEntries: TopicMapEntry[] = [
   {
     slug: "preparing-for-baby",
     label: "Preparing for baby",
-    supportLine: "Steady ways to get ready, when you feel ready.",
+    supportLine: "Birth, baby essentials, and getting ready for what comes next.",
     mainHref: "/articles/preparing-for-baby-complete-guide",
-    mainLabel: "Start with the preparing guide",
+    mainLabel: "Start with preparing for baby",
     hasLanding: false,
     articles: [
-      { label: "Preparing for baby: complete guide", href: "/articles/preparing-for-baby-complete-guide" },
-      { label: "Writing a birth plan", href: "/articles/writing-a-birth-plan" },
-      { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide" },
+      { label: "Getting ready for baby", href: "/articles/preparing-for-baby-complete-guide" },
+      { label: "Birth plan", href: "/articles/writing-a-birth-plan" },
+      { label: "Later pregnancy", href: "/articles/third-trimester-complete-guide" },
     ],
   },
 ];

@@ -2708,7 +2708,7 @@ const articleDatabase: ArticleData[] = [
     ],
 
     // ── Deep template fields ──
-    topic: undefined, // diet-and-exercise topic page not yet built; topic-return falls back gracefully to The Pregnancy Map
+    topic: "diet-and-exercise",
     standfirst:
       "The real 'avoid' list in pregnancy is shorter than it can feel online. A calm look at what genuinely matters, what doesn't, and what to do if you've already eaten something you're worried about.",
     editorialSections: [
@@ -3288,6 +3288,713 @@ const articleDatabase: ArticleData[] = [
         callout: {
           tone: "reassurance",
           text: "There is no medicine question too small to ask. Pharmacists, midwives, and GPs would much rather you asked.",
+        },
+      },
+    ],
+  },
+
+  // ─── EATING WELL IN PREGNANCY ─────────────────────────────────────────────
+  {
+    slug: "eating-well-in-pregnancy",
+    title: "Eating well in pregnancy: a calm, practical guide",
+    metaDescription: "What eating well in pregnancy actually means — without rules, plans, or guilt. A grounded guide to meals, snacks, and key nutrients.",
+    quickAnswer:
+      "Eating well in pregnancy is mostly about eating in a way that's varied, fairly regular, and built around real food — protein, vegetables and fruit, wholegrains, dairy or alternatives, and healthy fats. There's no single perfect diet, and small lapses don't matter. What matters most is steady energy, a few key nutrients (folate, iron, vitamin D, calcium, iodine, and omega-3), and being kind to yourself on the days food feels harder.",
+    howThisFeels: [
+      "Wondering if you're 'doing it right' at every meal",
+      "Feeling pulled between guidance, opinions, and what you actually want",
+      "Eating noticeably less or more than usual and not sure if that's okay",
+      "Quietly worrying you're not getting enough of something",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Higher needs for some nutrients", body: "Pregnancy increases what your body needs of certain things — iron, folate, calcium, iodine, and energy from around the second trimester onwards." },
+        { heading: "Shifting appetite and tastes", body: "Hormones change appetite, smell, and taste. What used to be easy can suddenly feel impossible, and vice versa." },
+      ],
+      lessCauses: [
+        { heading: "Cultural noise around 'pregnancy diets'", body: "Most online pregnancy food content is either over-restrictive or sales-led. Real-world eating sits somewhere far calmer." },
+      ],
+      whyItVaries: "Appetite, energy, nausea, and access to food vary hugely. The same advice doesn't fit every pregnancy or every week.",
+    },
+    timing: {
+      whenStarts: "Eating-well guidance applies throughout pregnancy.",
+      whenEases: "After birth, the focus often shifts — to recovery, energy, and (if breastfeeding) slightly different needs again.",
+    },
+    whatItFeelsLike: ["A constant low-level mental load around food", "Relief when something simple is enough"],
+    whatThisMeans:
+      "Eating well in pregnancy is less about perfection and more about a steady pattern, with kindness on the harder days. The shape of it matters more than any single meal.",
+    normal: [
+      "Eating roughly three meals and a couple of snacks on most days",
+      "Including some protein, some vegetables or fruit, and some carbohydrate at most meals",
+      "Taking a daily folic acid supplement (until 12 weeks) and a vitamin D supplement",
+      "Some days where appetite is low or food feels difficult",
+    ],
+    seekSupport: [
+      "Significant unintentional weight loss",
+      "Persistent inability to keep food or fluids down",
+      "Pre-existing eating concerns getting harder in pregnancy",
+      "Worry that you're not getting enough of a specific nutrient",
+    ],
+    disclaimer: "This is general information. For personal nutrition advice — particularly with conditions like gestational diabetes, anaemia, or a restrictive diet — speak to your midwife, GP, or a registered dietitian.",
+    whatYouCanDo: [
+      { action: "Aim for a steady rhythm of meals and snacks", reason: "Steady eating supports steady energy, especially in the first and third trimesters." },
+      { action: "Build plates around protein, veg, and a wholegrain or starch", reason: "This shape covers most nutritional bases without needing rules." },
+      { action: "Take pregnancy-recommended supplements", reason: "Folic acid and vitamin D are the two most consistent UK recommendations." },
+      { action: "Be flexible on the harder days", reason: "Plain food, small amounts, or whatever you can keep down all count." },
+    ],
+    whatHappensNext: "Most people settle into an eating pattern that adjusts gently as pregnancy moves through its trimesters.",
+    relatedStage: {
+      intro: "Eating well sits alongside the rest of pregnancy care:",
+      links: [
+        { label: "Diet and exercise in pregnancy", href: "/pregnancy/diet-and-exercise", context: "The wider topic this article belongs to." },
+        { label: "Foods to avoid in pregnancy", href: "/articles/foods-to-avoid-in-pregnancy", context: "The shorter-than-it-feels avoid list." },
+      ],
+    },
+    aiPrompts: [
+      "What should I eat for breakfast in pregnancy?",
+      "I'm not eating well this week — does it matter?",
+      "How much extra do I need to eat in pregnancy?",
+    ],
+    captureIntro: "Food in pregnancy can quietly take up a lot of headspace. Worth noting how it really feels for you.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["key-nutrients-in-pregnancy", "foods-to-avoid-in-pregnancy", "when-you-cant-face-food-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["diet"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    isCornerstone: true,
+    keyTakeaways: [
+      "There's no single perfect pregnancy diet — variety and steadiness matter more than rules",
+      "Build most plates around protein, vegetables or fruit, and a wholegrain or starch",
+      "Folic acid (until 12 weeks) and vitamin D are the two consistent UK supplement recommendations",
+      "Energy needs only rise slightly — and mostly in the second and third trimesters",
+      "Bad days are normal; the overall pattern matters more than any single meal",
+    ],
+    sources: [
+      "NHS — Have a healthy diet in pregnancy",
+      "NHS — Vitamins, supplements and nutrition in pregnancy",
+      "British Nutrition Foundation — Nutrition during pregnancy",
+      "RCOG — Healthy eating and vitamin supplements in pregnancy",
+    ],
+    faq: [
+      { question: "Do I need to 'eat for two' in pregnancy?", answer: "No. Energy needs only rise modestly, mostly in the second and third trimesters — roughly an extra 200 kcal a day in the third trimester. The aim is better quality rather than larger quantity." },
+      { question: "What supplements should I take in pregnancy?", answer: "UK guidance is folic acid (400mcg daily) until 12 weeks, and vitamin D (10mcg daily) throughout pregnancy. A pregnancy-specific multivitamin can be useful but isn't essential — avoid anything containing vitamin A (retinol)." },
+      { question: "I'm not eating much because of nausea — is my baby okay?", answer: "Yes, almost always. In early pregnancy your baby's needs are very small and your body draws on its reserves. Focus on fluids and small amounts of whatever you can manage." },
+      { question: "Is a vegetarian or vegan diet okay in pregnancy?", answer: "Yes, with attention to a few nutrients — particularly iron, B12, omega-3, calcium, and iodine. A registered dietitian or your midwife can help if you want a personalised steer." },
+    ],
+
+    topic: "diet-and-exercise",
+    standfirst:
+      "Eating well in pregnancy isn't about rules or plans. A calm, practical look at what really matters — and what you can let go of.",
+    editorialSections: [
+      {
+        id: "what-eating-well-means",
+        heading: "What eating well in pregnancy really means",
+        lead: "Eating well in pregnancy is mostly the same shape as eating well at any other time — varied, fairly regular, built around real food — with a small number of pregnancy-specific additions.",
+        paragraphs: [
+          "Most pregnancy nutrition advice can be summarised in a sentence: eat a varied diet across the food groups, take folic acid (until 12 weeks) and vitamin D, and avoid the short list of foods that genuinely matter. Everything beyond that is detail.",
+          "There's no perfect pregnancy diet. The 'right' way to eat in pregnancy is the one you can actually keep up — given your energy, your appetite, your budget, and the realities of nausea, work, and the rest of life.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "If your eating pattern looks broadly steady across a week, it's almost certainly enough. Single meals don't make or break a pregnancy.",
+        },
+      },
+      {
+        id: "what-matters-most",
+        heading: "What matters most nutritionally",
+        lead: "A few nutrients do extra work in pregnancy. Knowing what they are makes everything else feel less loaded.",
+        paragraphs: [
+          "Folate (and folic acid as a supplement) supports your baby's neural development, especially in the first 12 weeks. Iron supports the extra blood you're making. Calcium and vitamin D support bone development. Iodine matters for your baby's brain. Omega-3 (especially DHA) supports brain and eye development.",
+          "Most of these come from ordinary food: leafy greens, beans, eggs, dairy, oily fish (within the safe limits), nuts and seeds, and a varied mix of fruit and veg. Folic acid and vitamin D are the two that UK guidance recommends as supplements.",
+        ],
+      },
+      {
+        id: "meals-and-snacks",
+        heading: "How to think about meals and snacks",
+        lead: "A simple plate shape covers most of what you need without any planning at all.",
+        paragraphs: [
+          "Aim for: some protein (eggs, fish, meat, beans, tofu, dairy), some vegetables or fruit, and some carbohydrate (preferably wholegrain — bread, rice, pasta, oats, potatoes). Add a fat source — olive oil, butter, avocado, nuts — and you have a balanced meal without thinking about it.",
+          "Snacks can do real work in pregnancy, especially if you're nauseous, low on energy, or starting to feel reflux. A piece of fruit with cheese, a yoghurt, a handful of nuts, hummus and oatcakes, toast and peanut butter — anything that pairs a bit of protein or fat with a carbohydrate tends to land well.",
+        ],
+      },
+      {
+        id: "protein-fibre-energy",
+        heading: "Protein, fibre, and steady energy",
+        lead: "Three things tend to make pregnancy eating feel better: enough protein, enough fibre, and steady blood sugar.",
+        paragraphs: [
+          "Protein at each meal supports tissue growth and helps you feel full for longer. Fibre — from wholegrains, fruit, veg, and pulses — keeps digestion moving, which matters because pregnancy slows the gut and constipation is common.",
+          "Steady eating, rather than long gaps, makes nausea, fatigue, and dizziness less likely. Some people find five or six smaller meals work better than three larger ones, particularly in the first and third trimesters.",
+        ],
+      },
+      {
+        id: "key-nutrients-in-detail",
+        heading: "Calcium, iron, folate, and other key nutrients",
+        lead: "If you want to know where things actually come from, this is the everyday-food version.",
+        paragraphs: [
+          "Folate: leafy greens, beans, lentils, fortified cereals, oranges. Plus 400mcg folic acid daily until 12 weeks.",
+          "Iron: lean red meat, eggs, beans and lentils, fortified cereals, dark green veg. Vitamin C (a glass of orange juice, peppers, tomatoes) helps absorption from plant sources.",
+          "Calcium: dairy or fortified plant alternatives, tinned fish with bones, leafy greens, tofu set with calcium.",
+          "Vitamin D: oily fish, eggs, fortified spreads — plus 10mcg daily as a supplement throughout pregnancy.",
+          "Iodine: dairy, eggs, white fish, seaweed in moderation. Some plant-based diets need a closer look here.",
+          "Omega-3 (DHA): oily fish (salmon, mackerel, sardines, trout) up to twice a week, or a vegan algae-based supplement.",
+        ],
+        callout: {
+          tone: "info",
+          text: "A pregnancy-specific multivitamin can take the mental load off these — but always check it doesn't contain retinol (vitamin A), which should be avoided in pregnancy.",
+        },
+      },
+      {
+        id: "appetite-changes",
+        heading: "What if your appetite changes",
+        lead: "Appetite in pregnancy is rarely steady. Bigger, smaller, fussier, hungrier, all over the place — all normal.",
+        paragraphs: [
+          "In the first trimester, nausea, aversions, and exhaustion can shrink eating right down. In the second, appetite often returns and food feels easier. In the third, a smaller stomach (literally — the baby is taking up the room) often pushes people back to smaller, more frequent meals.",
+          "If your appetite is genuinely difficult — for days, not just one bad evening — the goal is fluids and whatever you can keep down. Plain carbs, cold food, smoothies, and small frequent bites tend to work better than full meals.",
+        ],
+      },
+      {
+        id: "when-it-feels-hard",
+        heading: "How to keep eating simple when pregnancy feels hard",
+        lead: "Some weeks, eating well looks like \"any food at all\". That's still eating well in pregnancy.",
+        paragraphs: [
+          "On hard days, lower the bar. Toast and butter is a meal. A smoothie is a meal. A bowl of cereal is a meal. Pregnancy isn't the right time to be strict with yourself about food.",
+          "Batch-cooking earlier, having a small list of go-to meals, keeping snacks in your bag and by the bed, and accepting help with food shopping or cooking are all completely reasonable strategies.",
+        ],
+      },
+      {
+        id: "extra-support",
+        heading: "When to ask for extra support",
+        lead: "There's a point at which food in pregnancy stops being a daily-life question and becomes a medical one. Knowing where that line is matters.",
+        paragraphs: [
+          "Speak to your midwife or GP if: you can't keep food or fluids down for more than a day, you're losing weight unintentionally, you have an existing eating disorder or disordered eating becoming harder in pregnancy, you've been told you have low iron or another deficiency, or you're managing pregnancy alongside coeliac, diabetes, or another condition that affects what you eat.",
+          "A referral to a registered dietitian or perinatal mental health team is straightforward and often very useful — far better than trying to manage alone.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Asking for help with eating in pregnancy is not an overreaction. It's exactly the right move.",
+        },
+      },
+    ],
+  },
+
+  // ─── MOVING YOUR BODY IN PREGNANCY ────────────────────────────────────────
+  {
+    slug: "moving-your-body-in-pregnancy",
+    title: "Moving your body in pregnancy: a calm guide to exercise and movement",
+    metaDescription: "What exercise and movement in pregnancy can look like — what's usually safe, what may need adapting, and what to avoid. Encouraging, realistic, and grounded.",
+    quickAnswer:
+      "Most people can keep moving safely throughout pregnancy. Walking, swimming, low-impact strength work, prenatal yoga and Pilates, and gentle versions of activities you already do are usually fine. As pregnancy progresses, some movements need adapting — particularly anything lying flat on your back from the second trimester, contact sports, high-fall-risk activities, and very high-intensity work without medical guidance. If you're unsure, your midwife or GP can advise.",
+    howThisFeels: [
+      "Wanting to keep moving but not sure what's still okay",
+      "Feeling pulled between 'keep going as normal' and 'be careful'",
+      "Body feeling unfamiliar mid-workout",
+      "Quiet guilt about doing less than usual",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Real benefits of movement in pregnancy", body: "Regular movement supports energy, mood, sleep, blood pressure, and often labour and recovery too." },
+        { heading: "Real reasons to adapt", body: "Joints loosen, balance shifts, breath gets shorter, and the bump physically changes what's comfortable." },
+      ],
+      lessCauses: [
+        { heading: "Outdated 'rest more' messaging", body: "Older advice often discouraged movement; current UK guidance is the opposite for most pregnancies." },
+      ],
+      whyItVaries: "Starting fitness, pregnancy specifics, and how each trimester actually feels all shape what movement looks like for you.",
+    },
+    timing: {
+      whenStarts: "Most people can keep moving from the start of pregnancy.",
+      whenEases: "Movement often eases naturally in the third trimester, then shifts again into postnatal recovery.",
+    },
+    whatItFeelsLike: ["A run that suddenly feels twice as hard", "A yoga class that lands more emotionally than usual"],
+    whatThisMeans:
+      "Movement in pregnancy is supportive, not performative. The aim is to keep your body feeling well-used and looked after — not to hit the same numbers as before.",
+    normal: [
+      "Doing less than your pre-pregnancy routine",
+      "Switching from running to walking or swimming as pregnancy goes on",
+      "Needing more rest between sets, sessions, or days",
+      "Some new aches, especially in the pelvis, lower back, or hips",
+    ],
+    seekSupport: [
+      "Bleeding, cramping, or fluid loss during or after movement",
+      "Chest pain, severe breathlessness, or dizziness",
+      "Calf swelling or pain that's new",
+      "Reduced baby movements after activity in later pregnancy",
+    ],
+    disclaimer: "This is general guidance. If you have a medical condition, a high-risk pregnancy, or specific concerns, speak to your midwife or GP before starting or continuing any exercise programme.",
+    whatYouCanDo: [
+      { action: "Keep moving in some form most days", reason: "Even short walks support energy, mood, and circulation in pregnancy." },
+      { action: "Match intensity to how you actually feel", reason: "The 'talk test' — being able to hold a conversation — is a simple, reliable guide." },
+      { action: "Adapt as the bump grows", reason: "What worked at 12 weeks often needs adjusting by 28." },
+      { action: "Include some pelvic floor work", reason: "It supports bladder control now and recovery later." },
+    ],
+    whatHappensNext: "Movement in pregnancy usually shifts gradually — less intense, more supportive — as the weeks go on.",
+    relatedStage: {
+      intro: "Movement sits alongside the rest of daily care:",
+      links: [
+        { label: "Diet and exercise in pregnancy", href: "/pregnancy/diet-and-exercise", context: "The wider topic this article belongs to." },
+        { label: "Eating well in pregnancy", href: "/articles/eating-well-in-pregnancy", context: "Movement and food work together." },
+      ],
+    },
+    aiPrompts: [
+      "Can I keep running while pregnant?",
+      "What exercises should I avoid in pregnancy?",
+      "Is it too late to start exercising in pregnancy?",
+    ],
+    captureIntro: "How your body feels with movement is its own kind of week-by-week story. Worth noting.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["eating-well-in-pregnancy", "key-nutrients-in-pregnancy", "when-you-cant-face-food-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["exercise"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Most people can safely keep moving throughout pregnancy — current UK guidance encourages it",
+      "Walking, swimming, prenatal yoga and Pilates, and adapted strength work are usually fine throughout",
+      "From the second trimester, avoid lying flat on your back for long periods; from any point, avoid contact sports and high-fall-risk activities",
+      "Match intensity to how you feel, not to old numbers — the 'talk test' is a reliable guide",
+      "Stop and seek advice for bleeding, severe breathlessness, chest pain, or reduced baby movements after activity",
+    ],
+    sources: [
+      "NHS — Exercise in pregnancy",
+      "RCOG — Physical activity and pregnancy",
+      "UK Chief Medical Officers' physical activity guidelines (pregnancy)",
+      "ACOG — Physical activity and exercise during pregnancy",
+    ],
+    faq: [
+      { question: "Can I keep running in pregnancy?", answer: "If you were running before pregnancy and feel well, you can usually continue, easing intensity as you go. Many people switch to walking or swimming in the second or third trimester as the bump and pelvic pressure increase." },
+      { question: "Is it too late to start exercising in pregnancy?", answer: "No. Starting gentle movement at any point in pregnancy is beneficial. Walking, swimming, and prenatal yoga or Pilates are good places to start." },
+      { question: "What exercises should I avoid?", answer: "Contact sports, scuba diving, anything with a real fall risk (skiing, horse riding, climbing), exercises lying flat on your back for long periods after about 16 weeks, and very deep abdominal work after the first trimester." },
+      { question: "Is it safe to lift weights in pregnancy?", answer: "Yes, with adjustments. Lower weights, more reps, and avoiding very heavy single lifts or breath-holding (the Valsalva manoeuvre) is the usual guidance. A pregnancy-aware coach can help." },
+      { question: "How will I know if I'm overdoing it?", answer: "Use the talk test — if you can't hold a conversation, ease off. Stop for any bleeding, dizziness, chest pain, severe breathlessness, calf pain or swelling, or reduced baby movements after exercise." },
+    ],
+
+    topic: "diet-and-exercise",
+    standfirst:
+      "Movement in pregnancy isn't about staying the same. A calm, encouraging look at what's still safe, what to adapt, and what to leave for now.",
+    editorialSections: [
+      {
+        id: "what-it-can-look-like",
+        heading: "What moving your body in pregnancy can look like",
+        lead: "Movement in pregnancy doesn't have to mean structured exercise. Walking, swimming, gentle yoga, dancing in the kitchen, gardening — all of it counts.",
+        paragraphs: [
+          "Current UK guidance encourages around 150 minutes of moderate movement a week in pregnancy, plus some strength work twice a week. That can look like 20–30 minutes of walking most days, or two or three swims a week, or a couple of prenatal classes plus everyday activity.",
+          "The aim isn't a workout schedule. It's a body that gets used, in some form, on most days.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Doing some movement, even briefly, almost always feels better than doing none.",
+        },
+      },
+      {
+        id: "why-movement-helps",
+        heading: "Why movement can still help in pregnancy",
+        lead: "Movement supports almost everything pregnancy puts pressure on — energy, mood, sleep, circulation, blood pressure, and digestion.",
+        paragraphs: [
+          "Active pregnancies are associated with lower rates of gestational diabetes and high blood pressure, better sleep, and often shorter labours and quicker recovery. The mood lift is real too — even short walks can help with low mood and pregnancy anxiety.",
+          "None of this means you have to push hard. Gentle, regular movement does most of the work.",
+        ],
+      },
+      {
+        id: "what-is-usually-safe",
+        heading: "What kinds of movement are usually safe",
+        lead: "Most low-to-moderate-impact movement is safe in pregnancy, especially if you were doing it before.",
+        paragraphs: [
+          "Walking, swimming, stationary cycling, low-impact aerobics, prenatal yoga and Pilates, and adapted strength work are all generally fine throughout pregnancy. Running, weight training, and many sports are usually safe to continue if you were already doing them — with adjustments as pregnancy progresses.",
+          "Pelvic floor exercises are worth doing throughout — they support bladder control now and recovery later.",
+        ],
+      },
+      {
+        id: "what-may-need-adapting",
+        heading: "What may need adapting as pregnancy changes",
+        lead: "As the bump grows and joints loosen, some things start to need adjustment rather than removal.",
+        paragraphs: [
+          "From around the second trimester, lying flat on your back for long periods (more than a few minutes) can reduce blood flow — so abdominal exercises, some yoga poses, and bench-based gym work usually need adapting or replacing.",
+          "Balance work gets harder as the bump shifts your centre of gravity, so single-leg work and high-balance activities benefit from a wall or support. High-intensity intervals usually need to ease off as breath becomes more limited.",
+          "Pelvic girdle pain (PGP) is common and may rule out some movements — wide-leg squats, deep lunges, breaststroke kick — for a while. A women's health physiotherapist is the right person to ask.",
+        ],
+      },
+      {
+        id: "exercises-to-avoid",
+        heading: "Exercises to avoid in pregnancy",
+        lead: "A small set of activities are best left for after pregnancy, mainly because of fall risk, contact, or significant physiological strain.",
+        paragraphs: [
+          "Contact sports (rugby, football, martial arts) — risk of impact to the bump.",
+          "Activities with a real fall risk — skiing, horse riding, climbing, mountain biking on technical terrain.",
+          "Scuba diving — pressure changes can affect the baby.",
+          "Hot yoga, hot Pilates, or exercising in very hot conditions — overheating is a real concern in pregnancy.",
+          "Very deep abdominal work (sit-ups, full crunches, intense core compressions) after the first trimester.",
+          "Lying flat on your back for prolonged exercises after about 16 weeks.",
+          "Holding your breath during heavy lifting (the Valsalva manoeuvre).",
+        ],
+        callout: {
+          tone: "info",
+          text: "Most of these are about specific scenarios rather than a blanket 'no'. A pregnancy-aware instructor or physio can help you adapt nearly any activity.",
+        },
+      },
+      {
+        id: "when-to-check",
+        heading: "When movement may need checking",
+        lead: "Some pregnancy situations make a quick conversation with your midwife or GP worthwhile before starting or continuing exercise.",
+        paragraphs: [
+          "These include: a low-lying placenta or placenta praevia, a history of preterm labour, significant bleeding in this pregnancy, severe anaemia, uncontrolled high blood pressure, or a multiple pregnancy. None of these mean no movement at all — they mean a personalised plan.",
+          "Stop exercising and seek advice for: any bleeding, chest pain, severe breathlessness, dizziness, calf pain or swelling, fluid loss, or reduced baby movements after activity in later pregnancy.",
+        ],
+      },
+      {
+        id: "gentle-and-realistic",
+        heading: "How to keep it gentle and realistic",
+        lead: "The most useful pregnancy movement plan is the one that actually fits your real week.",
+        paragraphs: [
+          "Match intensity to how you feel today, not to last month's plan. Walks count. Stretching counts. A short swim counts. A yoga class you do half of counts.",
+          "Build in rest. Pregnancy is genuinely tiring, particularly in the first and third trimesters, and pushing through tiredness rarely pays off.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Doing less than you used to is not the same as letting yourself go. It's pregnancy meeting your body where it actually is.",
+        },
+      },
+    ],
+  },
+
+  // ─── KEY NUTRIENTS IN PREGNANCY ───────────────────────────────────────────
+  {
+    slug: "key-nutrients-in-pregnancy",
+    title: "Key nutrients in pregnancy: what really matters and where to get it",
+    metaDescription: "Folate, iron, vitamin D, calcium, iodine and omega-3 in pregnancy — what each one does, where it comes from, and when supplements help.",
+    quickAnswer:
+      "The nutrients that matter most in pregnancy are folate (and folic acid), iron, vitamin D, calcium, iodine, and omega-3 (especially DHA). UK guidance is to take 400mcg folic acid daily until 12 weeks and 10mcg vitamin D daily throughout pregnancy. The rest can usually come from a varied diet. Pregnancy-specific multivitamins can simplify things — but always avoid those containing vitamin A (retinol).",
+    howThisFeels: [
+      "Standing in the supplements aisle feeling overwhelmed",
+      "Worrying you're not getting enough of something specific",
+      "Feeling tired or run-down and wondering if it's nutritional",
+      "Wanting a clear answer in a sea of contradictory advice",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Higher needs in pregnancy", body: "Some nutrients are needed in larger amounts to support your body and your baby's development." },
+        { heading: "Limited storage", body: "A few key nutrients (like folate) aren't stored long-term, so a steady daily supply matters." },
+      ],
+      lessCauses: [
+        { heading: "Marketing noise", body: "Pregnancy supplements are a big industry — much of the messaging exaggerates what's needed." },
+      ],
+      whyItVaries: "Nutritional needs depend on diet, health, geography, and individual circumstances. Vegan, vegetarian, and restricted diets need a closer look at a few specific nutrients.",
+    },
+    timing: {
+      whenStarts: "Folic acid is most important in the first 12 weeks. Vitamin D matters throughout pregnancy.",
+      whenEases: "After birth, needs shift again — particularly if you're breastfeeding.",
+    },
+    whatItFeelsLike: ["The mental load of remembering supplements", "Quiet relief when something is genuinely simple"],
+    whatThisMeans:
+      "Most pregnancy nutrition is covered by a varied diet plus two specific supplements. The list of essentials is shorter than the supplement aisle suggests.",
+    normal: [
+      "Taking folic acid (until 12 weeks) and vitamin D throughout",
+      "Eating a varied diet with iron, calcium, and omega-3 sources",
+      "Asking the midwife about specific nutrients at appointments",
+    ],
+    seekSupport: [
+      "Symptoms of anaemia — significant fatigue, breathlessness, pale skin",
+      "Vegan or restrictive diets where B12 or iodine intake may be low",
+      "Concerns about your specific supplement choices",
+    ],
+    disclaimer: "This is general nutritional guidance. For individual advice, speak to your midwife, GP, or a registered dietitian.",
+    whatYouCanDo: [
+      { action: "Take folic acid daily until 12 weeks", reason: "It significantly reduces the risk of neural tube defects in early development." },
+      { action: "Take vitamin D throughout pregnancy", reason: "Most UK adults are mildly deficient; 10mcg daily covers it." },
+      { action: "Build meals around iron and calcium sources", reason: "These two nutrients tend to need the most food-based attention." },
+      { action: "Check your multivitamin doesn't contain retinol", reason: "Vitamin A as retinol should be avoided in pregnancy; beta-carotene is fine." },
+    ],
+    whatHappensNext: "Most people settle into a steady routine of two or three supplements alongside everyday food.",
+    relatedStage: {
+      intro: "Nutrients sit alongside the wider eating-well picture:",
+      links: [
+        { label: "Eating well in pregnancy", href: "/articles/eating-well-in-pregnancy", context: "The fuller everyday-eating context." },
+        { label: "Diet and exercise in pregnancy", href: "/pregnancy/diet-and-exercise", context: "The wider topic." },
+      ],
+    },
+    aiPrompts: [
+      "Which pregnancy multivitamin should I take?",
+      "Am I getting enough iron in pregnancy?",
+      "Do I need omega-3 supplements in pregnancy?",
+    ],
+    captureIntro: "Nutrition in pregnancy is rarely loud — but it's a quiet kind of self-care worth noticing.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["eating-well-in-pregnancy", "foods-to-avoid-in-pregnancy", "when-you-cant-face-food-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["diet", "nutrients"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "The two consistently recommended UK supplements are folic acid (400mcg daily until 12 weeks) and vitamin D (10mcg daily throughout)",
+      "Iron, calcium, iodine, and omega-3 mostly come from a varied diet — but vegan and restricted diets may need supplements",
+      "Avoid any supplement containing vitamin A as retinol — beta-carotene is fine",
+      "A pregnancy-specific multivitamin is convenient but not essential",
+      "If you're worried about a specific nutrient, your midwife or GP can check and advise",
+    ],
+    sources: [
+      "NHS — Vitamins, supplements and nutrition in pregnancy",
+      "NICE — Maternal and child nutrition (PH11)",
+      "British Nutrition Foundation — Nutrition during pregnancy",
+      "RCOG — Healthy eating and vitamin supplements in pregnancy",
+    ],
+    faq: [
+      { question: "Do I need a pregnancy multivitamin?", answer: "Not necessarily. UK guidance specifically recommends folic acid (until 12 weeks) and vitamin D throughout. A pregnancy multivitamin can be a convenient way to cover these plus a few extras, but it's not essential if your diet is varied." },
+      { question: "How much iron do I need in pregnancy?", answer: "Iron needs roughly double in pregnancy. Most people meet this through diet (lean red meat, eggs, beans, lentils, fortified cereals, leafy greens). If a blood test shows low iron, your midwife or GP may recommend an iron supplement." },
+      { question: "Do I need to take omega-3 in pregnancy?", answer: "Omega-3 (DHA) supports brain and eye development. Two portions of oily fish a week (within the safe limits) usually covers it. If you don't eat fish, an algae-based DHA supplement is a good option." },
+      { question: "Why should I avoid vitamin A in pregnancy?", answer: "High doses of vitamin A as retinol can affect a baby's development. That's why you should avoid liver, pâté, cod liver oil, and any supplement containing retinol. Beta-carotene (the form in fruit and veg) is completely fine." },
+      { question: "Should I take vitamin D if I get sun?", answer: "Yes — UK guidance is 10mcg vitamin D daily throughout pregnancy regardless of season, as most adults don't get enough from sunlight alone, especially between October and March." },
+    ],
+
+    topic: "diet-and-exercise",
+    standfirst:
+      "A short list of nutrients does most of the work in pregnancy. A calm, plain look at what they are, where they come from, and when supplements actually help.",
+    editorialSections: [
+      {
+        id: "which-nutrients-matter",
+        heading: "Which nutrients matter most in pregnancy",
+        lead: "Pregnancy doesn't dramatically change everything you need — it raises the bar on a small group of specific nutrients.",
+        paragraphs: [
+          "The main ones are folate (and folic acid), iron, vitamin D, calcium, iodine, and omega-3 fatty acids — particularly DHA. Each does a specific job: supporting your baby's development, your extra blood volume, your bones and theirs, and your energy.",
+          "Most other vitamins and minerals are needed at roughly the same levels as before pregnancy, and a varied diet covers them.",
+        ],
+      },
+      {
+        id: "folate-folic-acid",
+        heading: "Folate and folic acid",
+        lead: "Folate supports the formation of your baby's neural tube — the structure that becomes the brain and spinal cord — in the very early weeks of pregnancy.",
+        paragraphs: [
+          "UK guidance is to take 400mcg of folic acid daily from before conception (where possible) until 12 weeks. Some people are advised to take a higher dose (5mg) — including those with diabetes, on certain medicines, or with a previous neural tube defect.",
+          "Food sources include leafy greens, beans and lentils, fortified breakfast cereals, oranges, and asparagus. Folate from food alone is rarely enough in early pregnancy, which is why the supplement is recommended.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If you're trying to conceive or could become pregnant, current UK advice is to take folic acid daily even before a positive test.",
+        },
+      },
+      {
+        id: "iron",
+        heading: "Iron",
+        lead: "Iron supports the extra blood your body makes in pregnancy and helps prevent anaemia, which is common.",
+        paragraphs: [
+          "Iron needs roughly double in pregnancy. Most people get enough from a varied diet — lean red meat, eggs, beans and lentils, tofu, dark green leafy veg, and fortified cereals. Pairing iron-rich plant foods with vitamin C (peppers, tomatoes, citrus, berries) helps absorption.",
+          "Mild anaemia is common in pregnancy. If a blood test shows low iron or haemoglobin, your midwife will usually recommend an iron supplement. Some people need a higher dose; some find a gentler form sits better with a sensitive stomach.",
+        ],
+      },
+      {
+        id: "vitamin-d",
+        heading: "Vitamin D",
+        lead: "Vitamin D supports calcium absorption and bone development for both you and your baby.",
+        paragraphs: [
+          "UK guidance is 10mcg daily throughout pregnancy, regardless of season. Most people in the UK don't make enough vitamin D from sunlight alone, especially between October and March, and food sources are limited.",
+          "If you've had a vitamin D deficiency picked up on a blood test, your GP may prescribe a higher dose for a period of time.",
+        ],
+      },
+      {
+        id: "calcium-iodine-omega3",
+        heading: "Calcium, iodine, and omega-3",
+        lead: "Three more nutrients do important specific work — and most of it is covered by ordinary food.",
+        paragraphs: [
+          "Calcium supports bone development. Dairy, fortified plant alternatives, tinned fish with bones, leafy greens, and tofu set with calcium are all good sources.",
+          "Iodine matters for your baby's brain development. Dairy, eggs, white fish, and seaweed (in moderation) are the main food sources. Vegan diets can fall short — a pregnancy multivitamin with iodine, or a small kelp supplement, can help.",
+          "Omega-3 (especially DHA) supports brain and eye development. Two portions of oily fish a week covers it; if you don't eat fish, an algae-based DHA supplement is a good option.",
+        ],
+      },
+      {
+        id: "food-vs-supplements",
+        heading: "When food is enough, and when supplements help",
+        lead: "Most pregnancy nutrition can come from food, with two consistent supplement exceptions.",
+        paragraphs: [
+          "Folic acid (until 12 weeks) and vitamin D (throughout) are the two UK-recommended supplements for everyone. Beyond that, a pregnancy-specific multivitamin can be a convenient way to cover the rest — particularly iodine, omega-3 (in some), and a top-up of iron and B vitamins.",
+          "Always check that any supplement you take is pregnancy-specific. The key thing to avoid is vitamin A as retinol — it should not appear in your supplement. Beta-carotene (the plant form) is fine.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Don't take cod liver oil or any high-dose vitamin A supplement in pregnancy.",
+        },
+      },
+      {
+        id: "vegan-vegetarian",
+        heading: "Vegan, vegetarian, and restricted diets",
+        lead: "Plant-based and restricted diets can be very healthy in pregnancy — they just need a slightly closer look at a few specific nutrients.",
+        paragraphs: [
+          "The nutrients that need most attention on a plant-based diet are: B12 (always supplement on a vegan diet), iron, omega-3 (DHA from algae), iodine, calcium, and zinc. A pregnancy-specific vegan multivitamin can simplify this.",
+          "If you're managing pregnancy alongside coeliac, food allergies, or a restricted diet for any reason, a referral to a registered dietitian is straightforward and often very useful.",
+        ],
+      },
+      {
+        id: "when-to-ask",
+        heading: "When to ask for professional advice",
+        lead: "Most pregnancies don't need specialist nutrition input — but a few situations do, and asking is the right move.",
+        paragraphs: [
+          "Speak to your midwife or GP if: a blood test has shown low iron or vitamin D, you have a condition affecting nutrition (coeliac, IBD, diabetes), you have a history of an eating disorder, your diet is very restricted, or you're pregnant with twins or more.",
+          "Pharmacists are also a good first stop for supplement questions — they can check ingredients and tell you quickly whether something's pregnancy-safe.",
+        ],
+      },
+    ],
+  },
+
+  // ─── WHEN YOU CAN'T FACE FOOD IN PREGNANCY ────────────────────────────────
+  {
+    slug: "when-you-cant-face-food-in-pregnancy",
+    title: "When you can't face food in pregnancy: a kind, practical guide",
+    metaDescription: "When food feels difficult in pregnancy — nausea, aversions, low appetite. What helps, what's normal, and when to ask for support.",
+    quickAnswer:
+      "It's very common for food to feel difficult at points in pregnancy, especially in the first trimester. Nausea, smell sensitivity, food aversions, and low appetite are all normal. Small frequent bites, plain or cold foods, fluids in any form (water, ice lollies, broths), and being kind to yourself usually help. Speak to your midwife or GP if you can't keep food or fluids down for more than a day, you're losing weight, or it's affecting your daily life.",
+    howThisFeels: [
+      "Looking at a plate and feeling nothing but resistance",
+      "Foods you used to love suddenly feeling impossible",
+      "Worrying you're letting your baby down",
+      "Pretending to your family you've eaten when you haven't",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Pregnancy hormones", body: "Rising hCG and oestrogen affect appetite, taste, and smell — sometimes dramatically." },
+        { heading: "Nausea and reflux", body: "Feeling sick or having reflux makes food feel like the last thing you want, even when you're hungry." },
+      ],
+      lessCauses: [
+        { heading: "Stress and exhaustion", body: "Both reduce appetite, and pregnancy is full of both." },
+        { heading: "Hyperemesis gravidarum", body: "A more severe form of pregnancy sickness — needs medical support, not soldiering through." },
+      ],
+      whyItVaries: "Hormone sensitivity, prior history with food, and the realities of each pregnancy all affect how this lands.",
+    },
+    timing: {
+      whenStarts: "Most often in the first trimester, sometimes earlier than you'd expect.",
+      whenPeaks: "Around 8–10 weeks for many people.",
+      whenEases: "Usually eases through the second trimester for most people, though some carry it longer.",
+    },
+    whatItFeelsLike: ["A constant low-level revulsion at smells", "Surprising relief at the simplest foods"],
+    whatThisMeans:
+      "Not being able to face food in pregnancy is a real, common, hormonal experience — not a failure of effort. The goal is fluids, small amounts, and kindness, not full meals.",
+    normal: [
+      "Strong food aversions, sometimes to foods you used to love",
+      "Heightened smell sensitivity making cooking unbearable",
+      "Eating only a small range of foods for a while",
+      "Some weight loss in the first trimester (usually mild)",
+    ],
+    seekSupport: [
+      "Inability to keep fluids down for 24 hours or more",
+      "Vomiting many times a day, every day",
+      "Significant weight loss",
+      "Dark urine, dizziness, or feeling very unwell",
+      "Mental health impact that's getting harder to manage",
+    ],
+    disclaimer: "If pregnancy sickness is severe — or even close — you do not need to manage it alone. Hyperemesis gravidarum is treatable, and asking for help is exactly the right move.",
+    whatYouCanDo: [
+      { action: "Lower the bar to small frequent bites", reason: "Tiny amounts often stay down when full meals don't." },
+      { action: "Lean on plain, cold, or smell-free foods", reason: "Cold foods give off less smell, which often helps with nausea." },
+      { action: "Get fluids in any way you can", reason: "Ice lollies, broths, smoothies, sips through a straw — it all counts." },
+      { action: "Ask for help with cooking and shopping", reason: "Kitchen smells are often the hardest part; not being in the kitchen helps." },
+      { action: "Ring your midwife or GP if it's getting worse", reason: "There are safe medicines and support — you don't have to soldier through." },
+    ],
+    whatHappensNext: "For most people, eating gradually feels easier through the second trimester. For some, support and medication make a real difference.",
+    relatedStage: {
+      intro: "When food is hard, related guidance can help:",
+      links: [
+        { label: "Complete guide to morning sickness", href: "/articles/complete-guide-morning-sickness", context: "The fuller picture of nausea in pregnancy." },
+        { label: "Eating well in pregnancy", href: "/articles/eating-well-in-pregnancy", context: "For when eating is feeling more possible again." },
+      ],
+    },
+    aiPrompts: [
+      "What can I eat when I feel sick all day?",
+      "Is it bad if I'm not eating much in the first trimester?",
+      "How do I know if I have hyperemesis?",
+    ],
+    captureIntro: "These weeks deserve to be remembered honestly. Food, smells, the strange shape of your appetite — all of it.",
+    trimester: [1, 2],
+    relatedSlugs: ["complete-guide-morning-sickness", "eating-well-in-pregnancy", "key-nutrients-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["diet", "symptoms"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "It's very common for food to feel hard in pregnancy, especially the first trimester",
+      "Small frequent bites, plain or cold foods, and fluids in any form usually help most",
+      "Some weight loss in early pregnancy is common and usually fine — your baby's needs are very small at this stage",
+      "Severe sickness (hyperemesis gravidarum) is treatable and absolutely worth asking about",
+      "Reach out to your midwife or GP if you can't keep fluids down, are losing significant weight, or it's affecting your wellbeing",
+    ],
+    sources: [
+      "NHS — Vomiting and morning sickness in pregnancy",
+      "RCOG — The management of nausea and vomiting of pregnancy and hyperemesis gravidarum",
+      "Pregnancy Sickness Support — Patient information",
+      "NICE CKS — Nausea/vomiting in pregnancy",
+    ],
+    faq: [
+      { question: "Will my baby be okay if I'm not eating much?", answer: "Almost always, yes. In the first trimester your baby's needs are very small and your body draws on its reserves. Focus on fluids and whatever small amounts you can manage." },
+      { question: "What foods are easiest when I feel sick?", answer: "Plain, cold, or carb-based foods often work best — toast, crackers, plain rice, cold pasta, fruit, yoghurt, ice lollies, smoothies. Strong smells and warm, cooked foods are usually hardest." },
+      { question: "Should I take my pregnancy multivitamin if I can't eat much?", answer: "If it's making nausea worse, it's okay to pause it temporarily — folic acid is the most important one to keep going, and a smaller folic acid tablet is often easier to tolerate. Talk to your pharmacist or midwife." },
+      { question: "How do I know if it's hyperemesis gravidarum?", answer: "Hyperemesis is more than ordinary morning sickness — it usually means vomiting many times a day, being unable to keep fluids down, weight loss, and feeling very unwell. It needs medical care, including safe anti-sickness medication. Don't wait it out." },
+      { question: "I cried over a meal I couldn't eat. Is that normal?", answer: "Yes. Pregnancy nausea and food aversions can be genuinely distressing, on top of being physically draining. You're not overreacting." },
+    ],
+
+    topic: "diet-and-exercise",
+    standfirst:
+      "Some days in pregnancy, food just won't happen — and that doesn't mean anything is going wrong. A kind, practical guide for when eating gets hard.",
+    editorialSections: [
+      {
+        id: "why-food-feels-hard",
+        heading: "Why food can suddenly feel difficult in pregnancy",
+        lead: "Pregnancy changes hormones, smell, taste, digestion, and energy — often all at once. It's not surprising that food gets caught in the middle.",
+        paragraphs: [
+          "Rising hCG and oestrogen heighten the sense of smell and shift taste, sometimes dramatically. Slowed digestion makes food sit heavier. Nausea — daily, sometimes constant — turns even thinking about food into a hurdle.",
+          "On top of all that, the foods you used to find comforting can suddenly feel impossible, while strange new things (cold fruit, salty crackers, ice lollies) become unexpected lifesavers. None of this means something is wrong.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Aversions, sudden disgust at familiar smells, and a much smaller appetite are some of the most common experiences in early pregnancy.",
+        },
+      },
+      {
+        id: "what-to-try",
+        heading: "What to try when your usual way of eating stops working",
+        lead: "When food feels hard, the goal isn't a balanced plate — it's anything in, kindly.",
+        paragraphs: [
+          "Smaller, more frequent bites. Cold or room-temperature foods (less smell). Plain carbs — toast, crackers, plain pasta, rice, oatcakes. Ginger in any form. Cold fruit. Yoghurt. A spoonful of peanut butter. A few crisps. Whatever lands.",
+          "Eating something — anything — before getting out of bed often helps with morning nausea. So does keeping snacks within reach and not letting yourself get to fully empty.",
+        ],
+      },
+      {
+        id: "small-things-that-help",
+        heading: "Small things that may still help",
+        lead: "When meals feel impossible, the rest of the day around food matters more than the food itself.",
+        paragraphs: [
+          "Get fluids in any form: ice lollies, broth, smoothies, sips through a straw, ice chips, weak squash, oral rehydration sachets if you're really struggling.",
+          "Reduce kitchen exposure if you can — ask your partner or a friend to cook, order in, or batch-cook in calmer windows. Ventilate where possible. Keep windows open.",
+          "Mints, lemon, ginger, acupressure bands, vitamin B6, and prescribed anti-sickness medication all help different people. Don't be a hero — try things.",
+        ],
+      },
+      {
+        id: "about-weight",
+        heading: "About weight, calories, and what your baby needs",
+        lead: "It's worth saying clearly: a baby's needs in early pregnancy are very small, and your body has reserves it can draw on.",
+        paragraphs: [
+          "Some weight loss in the first trimester is very common and usually fine. Babies grow well even when their parents are barely eating, especially in the early weeks. The thing your body most needs is fluids, not calories.",
+          "Weight gain catches up later in pregnancy when appetite usually returns. The first trimester is rarely the right time to worry about how much or what you're eating — it's the time to focus on fluids, rest, and small kindnesses.",
+        ],
+      },
+      {
+        id: "when-to-ask",
+        heading: "When poor intake or dehydration is worth raising",
+        lead: "There is a point at which not eating well in pregnancy stops being ordinary morning sickness and becomes something to ask about.",
+        paragraphs: [
+          "Contact your midwife, GP, or NHS 111 if you: can't keep fluids down for more than 24 hours, are vomiting many times a day, are losing significant weight, have very dark urine or aren't passing much urine, feel dizzy or faint, or feel really unwell in general.",
+          "Hyperemesis gravidarum is more than ordinary pregnancy sickness — it needs treatment, often including safe anti-sickness medication and sometimes a hospital visit for IV fluids. It is treatable. You do not have to ride it out.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "If you're vomiting persistently, can't keep fluids down, or feel very unwell, please ring your midwife, GP, or NHS 111 today.",
+        },
+      },
+      {
+        id: "the-emotional-side",
+        heading: "The emotional side of food in early pregnancy",
+        lead: "It's easy to underestimate how draining and isolating it can be when food becomes hard.",
+        paragraphs: [
+          "There can be guilt — about not eating 'properly' for the baby. Frustration — at not being able to enjoy meals you'd looked forward to. Grief — for the easy relationship with food you had before. None of these are an overreaction.",
+          "It can also be lonely. Pregnancy sickness is rarely visible to anyone else, and 'have you tried ginger?' wears thin quickly. Talking to your midwife, partner, or a support service like Pregnancy Sickness Support can help.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "You are not failing your baby by struggling to eat. You're navigating one of the hardest physical parts of early pregnancy — and asking for help is part of looking after both of you.",
         },
       },
     ],

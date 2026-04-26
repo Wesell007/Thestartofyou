@@ -119,6 +119,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
           { label: "Complete guide to morning sickness", href: "/articles/complete-guide-morning-sickness" },
           { label: "Nausea in early pregnancy", href: "/articles/nausea-in-early-pregnancy" },
           { label: "Fatigue in early pregnancy", href: "/articles/fatigue-in-early-pregnancy" },
+          { label: "Sleep in pregnancy", href: "/articles/sleep-in-pregnancy" },
         ],
       },
       {

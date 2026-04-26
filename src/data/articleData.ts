@@ -2,6 +2,8 @@
 // Structured content for answer-first article pages.
 // Route: /articles/:slug
 
+import type { PregnancyTopicSlug } from "@/data/pregnancyTopicData";
+
 export interface ArticleRelatedLink {
   label: string;
   href: string;
@@ -134,6 +136,14 @@ export interface ArticleData {
 
   // Product promotion level
   productPromotion?: ProductPromotionLevel;
+
+  // ── New unified deep article template fields (additive) ──
+  // Parent topic page (drives breadcrumb + topic return on the new template)
+  topic?: PregnancyTopicSlug;
+  // One-line italic dek under the H1
+  standfirst?: string;
+  // Contained hero image — alt is REQUIRED for real photographs.
+  hero?: { src: string; alt: string; credit?: string };
 }
 
 // ─── Article database ──────────────────────────────────────────────────────
@@ -1241,15 +1251,137 @@ const articleDatabase: ArticleData[] = [
     ],
     productPromotion: "strong",
     keyTakeaways: [
-      "Symptoms are caused by hormonal changes, primarily hCG and progesterone",
-      "Every pregnancy is different, and fewer symptoms does not indicate a problem",
-      "Most symptoms peak between weeks 6-10 and ease by weeks 12-14",
-      "Having no symptoms can be completely normal",
+      "Most early symptoms are driven by rising hCG and progesterone, not by anything going wrong",
+      "Symptoms can begin before a missed period, but the timing varies widely from person to person",
+      "Having very few symptoms — or none at all — does not mean a pregnancy is less healthy",
+      "A small number of signs do warrant a call to your midwife or doctor, and they're worth knowing",
     ],
-    inThisArticle: ["What causes early symptoms", "Common symptoms list", "When symptoms start", "When to seek support", "Common questions"],
-    sources: ["NHS: Signs and symptoms of pregnancy", "Tommy's: Early pregnancy symptoms"],
+    sources: [
+      "NHS — Signs and symptoms of pregnancy",
+      "Tommy's — Early pregnancy symptoms and what to expect",
+      "NICE — Antenatal care (NG201)",
+      "RCOG — Information for women in early pregnancy",
+    ],
     lastUpdated: "March 2026",
     reviewedBy: "Jenny Joines",
+
+    // ── New unified deep article template fields ──
+    topic: "body",
+    standfirst:
+      "What's actually happening in the first weeks — and how to tell the strong signals from the noise.",
+    hero: {
+      src: new URL("../assets/article-hero-implantation.jpg", import.meta.url).href,
+      alt: "A person sitting quietly at home in soft natural light, hands resting on their lap.",
+    },
+    editorialSections: [
+      {
+        id: "when-symptoms-start",
+        heading: "When early pregnancy symptoms usually start",
+        lead: "Most people first notice symptoms between weeks five and six, though some feel changes a little earlier and some not for several weeks more. The timing depends on how quickly hCG rises in your body, not on whether the pregnancy is healthy.",
+        paragraphs: [
+          "After implantation — usually six to twelve days after ovulation — your body begins producing human chorionic gonadotropin (hCG). This is the hormone home pregnancy tests look for, and it is also the hormone responsible for many of the earliest physical changes you might feel.",
+          "Some symptoms, like a heightened sense of smell or sudden tiredness, can appear before a missed period. Others, like nausea or breast tenderness, often arrive a week or two later as hormone levels climb. There is no single 'right' moment when symptoms should begin.",
+          "If you don't notice anything in the first few weeks, that's also common. Symptom timing varies enormously between people and between pregnancies for the same person.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Symptom strength is not a measure of pregnancy health. Strong, mild, and absent symptoms are all within the range of normal in the first weeks.",
+        },
+      },
+      {
+        id: "earliest-signs-before-missed-period",
+        heading: "The earliest signs before a missed period",
+        lead: "The signs that show up earliest are usually subtle: a shift in how things smell, a deeper-than-usual tiredness, slight breast changes, or a small amount of spotting around the time you'd expect implantation.",
+        paragraphs: [
+          "These early changes are easy to miss or attribute to something else. Many people only recognise them in hindsight, after a positive test.",
+          "A raised basal body temperature that stays high beyond the usual luteal phase length is one of the more reliable early signals if you've been tracking. Brief, light spotting one to two weeks after ovulation can also point to implantation, though most people don't have any spotting at all.",
+        ],
+      },
+      {
+        id: "most-common-early-symptoms",
+        heading: "The most common early symptoms, and what causes them",
+        lead: "Nausea, breast tenderness, fatigue, smell sensitivity, frequent urination, mood changes, and food aversions make up most of the early-symptom picture. Each one has a clear hormonal explanation.",
+        subsections: [
+          {
+            subheading: "hCG, progesterone, and why nausea shows up",
+            paragraphs: [
+              "Rapidly rising hCG is the main trigger for early-pregnancy nausea. Levels roughly double every two to three days in the first weeks, and the speed of that rise is what most people feel.",
+              "Progesterone slows digestion across the body. That slowing helps maintain the pregnancy but also contributes to bloating, fullness, constipation, and the queasy feeling that comes with an empty stomach.",
+            ],
+          },
+          {
+            subheading: "Heightened sense of smell",
+            paragraphs: [
+              "Oestrogen amplifies the olfactory system in early pregnancy. Smells you'd normally pass without noticing — coffee, certain foods, perfume, the inside of the fridge — can become overwhelming or trigger nausea on their own.",
+              "This is often one of the first symptoms people notice, sometimes before they've even taken a test.",
+            ],
+          },
+          {
+            subheading: "Breast and areola changes",
+            paragraphs: [
+              "Tender, swollen, or unusually heavy breasts are common from very early on, driven by oestrogen and progesterone preparing the milk-producing tissue. The areolas may darken and the small bumps on them (Montgomery's tubercles) can become more visible.",
+              "These changes can feel similar to premenstrual breast tenderness but tend to be more pronounced and last longer.",
+            ],
+          },
+          {
+            subheading: "Fatigue that feels different",
+            paragraphs: [
+              "Early pregnancy fatigue is often described as heavier or more sudden than ordinary tiredness. Your body is rapidly building the placenta — an entirely new organ — and that work alone uses significant energy.",
+              "Rising progesterone also has a sedating effect. Many people find they need a nap during the day or a much earlier bedtime than usual through the first trimester.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "implantation-bleeding",
+        heading: "Implantation bleeding, spotting, and what's normal",
+        lead: "Around 15–25% of people notice some light bleeding or spotting in early pregnancy. When it happens around the time you'd expect implantation, it is usually pink or light brown, light, and short.",
+        paragraphs: [
+          "Implantation bleeding is typically much lighter than a period, doesn't fill a pad, and lasts a few hours to a couple of days. It often appears six to twelve days after ovulation, which can be close to or just before an expected period.",
+          "Light spotting later in the first trimester can also happen — sometimes after sex, a vaginal exam, or for no clear reason — and is usually not a sign of a problem. Heavier bleeding, particularly with cramping, is worth a same-day call to your midwife or doctor.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If bleeding becomes heavier than a normal period, includes clots, or is accompanied by one-sided pain, contact your healthcare provider promptly.",
+        },
+      },
+      {
+        id: "cramping-and-bloating",
+        heading: "Cramping and bloating in the first weeks",
+        lead: "Mild, period-like cramping is very common in early pregnancy. The uterus is growing and the surrounding ligaments are stretching, both of which can produce a low, dull ache.",
+        paragraphs: [
+          "Bloating in early pregnancy is usually progesterone-driven. Slower digestion means food spends more time in the gut, which can leave you feeling fuller, more swollen, and more aware of your stomach than usual.",
+          "Cramping that is sharp, one-sided, or steadily worsening is different. That kind of pain is worth checking with a clinician, particularly in the first trimester.",
+        ],
+      },
+      {
+        id: "vs-pms",
+        heading: "How early symptoms differ from PMS",
+        lead: "Many early-pregnancy symptoms overlap with PMS — sore breasts, mood changes, bloating, mild cramping. The clearest difference is usually duration and what happens around your expected period.",
+        paragraphs: [
+          "PMS symptoms typically peak in the days before a period and ease once bleeding starts. Early-pregnancy symptoms tend to continue and often intensify across the days when a period would otherwise be expected.",
+          "A consistently raised basal body temperature beyond the usual luteal phase, areolas that look noticeably darker or larger, and a thicker creamy discharge can be more pregnancy-specific signals. None of these are definitive on their own — only a positive test can confirm.",
+        ],
+      },
+      {
+        id: "when-to-test",
+        heading: "When you can take a home pregnancy test",
+        lead: "Most home pregnancy tests are accurate from the day of an expected period. A few sensitive tests can detect hCG four to five days earlier, but a negative early test is not reliable.",
+        paragraphs: [
+          "hCG roughly doubles every two to three days in early pregnancy. Testing too early — particularly with later-in-the-day urine — is a common cause of false negatives.",
+          "If your period is late and an early test was negative, repeating it after two or three days with first-morning urine is the most reliable approach. A blood test ordered by a clinician can detect hCG slightly earlier and more precisely if you need an answer sooner.",
+        ],
+      },
+      {
+        id: "when-to-speak-to-a-doctor",
+        heading: "When to speak with a midwife or doctor",
+        lead: "Most early-pregnancy symptoms don't need clinical input. A small number of signs do, and recognising them early matters more than tracking the rest.",
+        paragraphs: [
+          "Contact your healthcare provider if you can't keep fluids down for 24 hours or longer, are losing weight quickly, have heavy bleeding or persistent one-sided pain, develop a high fever, or feel something is genuinely wrong even if you can't name it.",
+          "Severe nausea and vomiting (hyperemesis gravidarum) is a recognised condition with effective treatment — you don't have to push through it alone. The same is true of early-pregnancy anxiety, which is more common than it's usually talked about.",
+        ],
+      },
+    ],
   },
 
   // ─── CORNERSTONE: POSTPARTUM RECOVERY TIMELINE ───────────────────────────
@@ -2407,8 +2539,40 @@ export const getArticle = (slug: string): ArticleData | null =>
 
 export const getAllArticles = (): ArticleData[] => articleDatabase;
 
-export const getRelatedArticles = (slug: string, limit = 3): ArticleData[] =>
-  articleDatabase.filter((a) => a.slug !== slug).slice(0, limit);
+// Curated → same topic → shared cornerstone. Stops rather than padding with weak matches.
+export const getRelatedArticles = (slug: string, limit = 3): ArticleData[] => {
+  const source = articleDatabase.find((a) => a.slug === slug);
+  if (!source) return [];
+
+  const seen = new Set<string>([slug]);
+  const out: ArticleData[] = [];
+
+  const push = (a: ArticleData | undefined) => {
+    if (!a || seen.has(a.slug) || out.length >= limit) return;
+    seen.add(a.slug);
+    out.push(a);
+  };
+
+  // 1. Curated relatedSlugs in order
+  source.relatedSlugs?.forEach((s) => push(articleDatabase.find((a) => a.slug === s)));
+
+  // 2. Same topic
+  if (source.topic && out.length < limit) {
+    articleDatabase
+      .filter((a) => a.topic === source.topic)
+      .forEach(push);
+  }
+
+  // 3. Shared cornerstone
+  if (source.cornerstoneSlug && out.length < limit) {
+    articleDatabase
+      .filter((a) => a.cornerstoneSlug === source.cornerstoneSlug || a.slug === source.cornerstoneSlug)
+      .forEach(push);
+  }
+
+  // No padding beyond honest matches.
+  return out;
+};
 
 export const getCornerstoneArticles = (): ArticleData[] =>
   articleDatabase.filter((a) => a.isCornerstone);

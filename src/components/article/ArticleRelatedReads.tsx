@@ -14,11 +14,50 @@ const journeyLabels: Record<string, string> = {
 interface Props {
   articles: ArticleData[];
   isDeep?: boolean;
+  variant?: "legacy" | "calm";
 }
 
-const ArticleRelatedReads = ({ articles, isDeep }: Props) => {
+const truncate = (s: string, n: number) =>
+  s.length <= n ? s : s.slice(0, n - 1).trimEnd() + "…";
+
+const ArticleRelatedReads = ({ articles, isDeep, variant = "legacy" }: Props) => {
   if (articles.length === 0) return null;
 
+  // ── calm variant: vertical editorial list, up to 3, no padding, no chrome ──
+  if (variant === "calm") {
+    return (
+      <section className="bg-parchment py-12 sm:py-16 md:py-20">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
+          <div className="flex items-center gap-3 mb-6 sm:mb-8">
+            <div className="h-px w-8 bg-sage-light" />
+            <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage-muted">
+              Continue reading
+            </p>
+          </div>
+
+          <ul className="divide-y divide-border/30">
+            {articles.slice(0, 3).map((article) => (
+              <li key={article.slug} className="py-5 sm:py-6 first:pt-0 last:pb-0">
+                <Link
+                  to={`/articles/${article.slug}`}
+                  className="group block"
+                >
+                  <h3 className="font-serif text-[17px] sm:text-[19px] md:text-[20px] text-foreground leading-snug group-hover:text-sage transition-colors">
+                    {article.title}
+                  </h3>
+                  <p className="mt-2 font-serif italic text-[13px] sm:text-[14px] text-foreground/60 leading-relaxed max-w-2xl">
+                    {truncate(article.metaDescription, 130)}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    );
+  }
+
+  // ── legacy variant (unchanged) ──
   return (
     <section className="bg-parchment py-10 sm:py-14 md:py-18">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">

@@ -9,10 +9,12 @@ import {
 
 interface Props {
   data: ArticleData;
+  variant?: "legacy" | "calm";
 }
 
-const ArticleFAQ = ({ data }: Props) => {
+const ArticleFAQ = ({ data, variant = "legacy" }: Props) => {
   const hasFaq = data.faq && data.faq.length > 0;
+  const isCalm = variant === "calm";
 
   useEffect(() => {
     if (!hasFaq) return;
@@ -56,17 +58,27 @@ const ArticleFAQ = ({ data }: Props) => {
           What people often ask
         </h2>
 
-        <Accordion type="single" collapsible className="w-full space-y-2">
+        <Accordion type="single" collapsible className={isCalm ? "w-full" : "w-full space-y-2"}>
           {data.faq!.map((item, i) => (
             <AccordionItem
               key={i}
               value={`faq-${i}`}
-              className="bg-card/50 border border-border/25 rounded-lg sm:rounded-xl overflow-hidden data-[state=open]:border-sage/15 transition-colors"
+              className={
+                isCalm
+                  ? "border-0 border-b border-border/30 last:border-b-0 data-[state=open]:border-sage/20 transition-colors"
+                  : "bg-card/50 border border-border/25 rounded-lg sm:rounded-xl overflow-hidden data-[state=open]:border-sage/15 transition-colors"
+              }
             >
-              <AccordionTrigger className="px-5 sm:px-6 py-4 text-left font-serif text-[15px] sm:text-base text-foreground leading-snug hover:no-underline hover:text-sage transition-colors [&[data-state=open]]:text-sage gap-3">
+              <AccordionTrigger
+                className={
+                  isCalm
+                    ? "py-4 sm:py-5 text-left font-serif text-[15px] sm:text-base text-foreground leading-snug hover:no-underline hover:text-sage transition-colors [&[data-state=open]]:text-sage gap-3"
+                    : "px-5 sm:px-6 py-4 text-left font-serif text-[15px] sm:text-base text-foreground leading-snug hover:no-underline hover:text-sage transition-colors [&[data-state=open]]:text-sage gap-3"
+                }
+              >
                 {item.question}
               </AccordionTrigger>
-              <AccordionContent className="px-5 sm:px-6 pb-4 pt-0">
+              <AccordionContent className={isCalm ? "pb-5 pt-0" : "px-5 sm:px-6 pb-4 pt-0"}>
                 <p className="font-sans text-[14px] sm:text-[15px] font-light leading-[1.85] text-foreground/75 max-w-2xl">
                   {item.answer}
                 </p>

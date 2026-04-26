@@ -28,7 +28,7 @@ const PregnancyTopicMap = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {topics.map((topic) => (
             <article
-              key={topic.id}
+              key={topic.slug}
               className="bg-card rounded-2xl border border-border/40 shadow-card-brand flex flex-col transition-colors duration-300 hover:border-border/70"
             >
               {/* Top accent bar */}

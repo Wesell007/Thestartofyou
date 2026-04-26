@@ -64,7 +64,7 @@ export const PREGNANCY_TOPICS: { slug: PregnancyTopicSlug; eyebrow: string }[] =
 ];
 
 // Slugs that already have a built landing page. Keeps siblings honest.
-export const LIVE_TOPIC_SLUGS: PregnancyTopicSlug[] = ["body", "baby", "health-and-safety"];
+export const LIVE_TOPIC_SLUGS: PregnancyTopicSlug[] = ["body", "baby", "health-and-safety", "diet-and-exercise"];
 
 export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPageConfig | null> = {
   body: {
@@ -271,7 +271,72 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
     showSiblings: true,
     showAI: false,
   },
-  "diet-and-exercise": null,
+  "diet-and-exercise": {
+    slug: "diet-and-exercise",
+    eyebrow: "Diet and exercise",
+    title: "Diet and exercise in pregnancy",
+    intro:
+      "Eating, moving, and looking after your energy in pregnancy doesn't need to become another set of rules. This is a calm place to think about food and movement as part of daily care — useful, grounded, and shaped around the realities of how pregnancy actually feels rather than how it's often presented.",
+
+    whatThisCovers: {
+      lead: "What this topic covers:",
+      bullets: [
+        "Eating well in pregnancy without overcomplicating it.",
+        "The nutrients that genuinely matter most, and where they come from.",
+        "Moving your body in ways that feel realistic and supportive.",
+        "Foods that are best avoided, and the much longer list that's still fine.",
+        "The days when nausea, aversions, or low appetite make eating harder.",
+      ],
+    },
+
+    startHere: [
+      {
+        title: "Foods to avoid in pregnancy",
+        href: "/articles/foods-to-avoid-in-pregnancy",
+        why: "The shorter-than-it-feels list, and what's still completely fine to eat.",
+      },
+      {
+        title: "Eating well in pregnancy",
+        href: "/articles/eating-well-in-pregnancy",
+        why: "What good eating in pregnancy actually looks like — without rules, plans, or guilt.",
+      },
+      {
+        title: "Moving your body in pregnancy",
+        href: "/articles/moving-your-body-in-pregnancy",
+        why: "Realistic, encouraging guidance on movement, with a clear word on what to adapt.",
+      },
+    ],
+
+    groups: [
+      {
+        label: "Eating well",
+        description: "Steady, practical food guidance for ordinary days.",
+        links: [
+          { label: "Eating well in pregnancy", href: "/articles/eating-well-in-pregnancy" },
+          { label: "Foods to avoid in pregnancy", href: "/articles/foods-to-avoid-in-pregnancy" },
+          { label: "Key nutrients in pregnancy", href: "/articles/key-nutrients-in-pregnancy" },
+        ],
+      },
+      {
+        label: "Movement and exercise",
+        description: "What's usually safe, what to adapt, and what to leave for now.",
+        links: [
+          { label: "Moving your body in pregnancy", href: "/articles/moving-your-body-in-pregnancy" },
+        ],
+      },
+      {
+        label: "When food feels hard",
+        description: "For the days nausea, aversions, or low appetite get in the way.",
+        links: [
+          { label: "When you can't face food in pregnancy", href: "/articles/when-you-cant-face-food-in-pregnancy" },
+          { label: "Complete guide to morning sickness", href: "/articles/complete-guide-morning-sickness" },
+        ],
+      },
+    ],
+
+    showSiblings: true,
+    showAI: false,
+  },
   "preparing-for-baby": null,
 };
 
@@ -356,10 +421,15 @@ export const topicMapEntries: TopicMapEntry[] = [
     slug: "diet-and-exercise",
     label: "Diet & exercise",
     supportLine: "Eating well, moving safely, and caring for yourself day to day.",
-    mainHref: "/pregnancy",
-    mainLabel: "Coming soon",
-    hasLanding: false,
-    articles: [],
+    mainHref: "/pregnancy/diet-and-exercise",
+    mainLabel: "Explore diet and exercise in pregnancy",
+    hasLanding: true,
+    articles: [
+      { label: "Eating well in pregnancy", href: "/articles/eating-well-in-pregnancy" },
+      { label: "Moving your body in pregnancy", href: "/articles/moving-your-body-in-pregnancy" },
+      { label: "Key nutrients in pregnancy", href: "/articles/key-nutrients-in-pregnancy" },
+      { label: "When you can't face food in pregnancy", href: "/articles/when-you-cant-face-food-in-pregnancy" },
+    ],
   },
   {
     slug: "preparing-for-baby",

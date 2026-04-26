@@ -5243,6 +5243,728 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── ANXIETY IN PREGNANCY ─────────────────────────────────────────────────
+  {
+    slug: "anxiety-in-pregnancy",
+    title: "Anxiety in pregnancy: what's normal, what's not, and what helps",
+    metaDescription: "What anxiety in pregnancy can feel like, the worries that come up most, where the line between worry and overwhelm tends to sit, and the kinds of support that genuinely help.",
+    quickAnswer:
+      "Anxiety is one of the most common emotional experiences in pregnancy. Worry about the baby, the birth, your body, or the future is normal — and often comes in waves. It usually becomes a reason to ask for more support when it stops easing between waves, when it gets in the way of sleep or daily life, or when it brings physical symptoms like a racing heart, breathlessness, or constant tension. Help can come from your midwife, your GP, perinatal mental health services, or talking therapies — and asking earlier is almost always easier than asking later.",
+    howThisFeels: [
+      "A worry that keeps circling, even after you've talked it through",
+      "Lying awake reading symptoms instead of sleeping",
+      "Feeling tense in your body without quite knowing why",
+      "Wondering whether what you're feeling is normal or a sign something's wrong",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Hormonal shifts", body: "Pregnancy hormones affect mood, sleep, and emotional sensitivity. Anxiety often rides alongside these changes, especially in the first and third trimesters." },
+        { heading: "Uncertainty", body: "Pregnancy holds a lot of unknowns — about the baby, your body, the birth, your life afterwards. The mind tends to fill uncertainty with worry." },
+        { heading: "Tiredness and physical strain", body: "Poor sleep, nausea, and discomfort all reduce emotional resilience. Worry often feels louder when the body is depleted." },
+      ],
+      lessCauses: [
+        { heading: "Antenatal anxiety as a clinical experience", body: "When worry is persistent, hard to settle, and starts interfering with daily life, it may have crossed from ordinary anxiety into antenatal anxiety — which is treatable and worth naming." },
+        { heading: "Previous loss or trauma", body: "If you've had a previous loss, a difficult birth, or a history of anxiety or trauma, pregnancy can reactivate those experiences. This deserves specific support, not general reassurance." },
+      ],
+      whyItVaries: "How anxiety lands in pregnancy depends on your history, your support, your physical health, and the season of pregnancy you're in. Two pregnancies in the same person can feel very different.",
+    },
+    timing: {
+      whenStarts: "Anxiety often surfaces in the first trimester, when so much is invisible and uncertain.",
+      whenPeaks: "It can peak in the early weeks and again in late pregnancy as birth approaches.",
+      whenEases: "Many people find the second trimester quieter, though anxiety can return at any point.",
+    },
+    whatItFeelsLike: [
+      "A loop of what-ifs that's hard to step out of",
+      "Catastrophic thoughts that feel real even when you know they're unlikely",
+      "Physical tension — tight chest, jaw, shoulders, shallow breathing",
+      "Reassurance that helps for an hour, then wears off",
+    ],
+    whatThisMeans:
+      "Anxiety in pregnancy is common, treatable, and not a sign that something is wrong with you. The point at which it's worth more support is usually the point at which it stops easing — not the point at which it first appears.",
+    normal: [
+      "Worrying about the baby, especially after a scan or appointment",
+      "Anxious phases in early pregnancy and again near birth",
+      "Feeling more sensitive to news, stories, or other people's experiences",
+      "Needing more reassurance than usual from people around you",
+    ],
+    seekSupport: [
+      "Worry that doesn't ease between waves, day after day",
+      "Anxiety that's getting in the way of sleep, eating, work, or relationships",
+      "Physical anxiety symptoms — racing heart, breathlessness, panic — that are happening regularly",
+      "Intrusive thoughts you can't put down",
+      "A sense that you're not coping",
+    ],
+    disclaimer: "This article is general guidance and not a substitute for medical or mental health care. If you're struggling, please speak to your midwife, GP, or a perinatal mental health service.",
+    whatYouCanDo: [
+      { action: "Tell your midwife or GP early", reason: "Naming anxiety opens the door to support — including talking therapies and, where helpful, medication that's safe in pregnancy." },
+      { action: "Notice the loop without trying to win the argument", reason: "Worry rarely loses by being argued with. Acknowledging the loop is often more useful than trying to disprove it." },
+      { action: "Slow your breath when you notice tension", reason: "Lengthening your out-breath quiets the body's stress response. It doesn't fix anxiety, but it gives you a foothold." },
+      { action: "Limit reading symptoms or stories late at night", reason: "Anxiety feeds on tiredness and search results. A boundary around when you read is often more helpful than what you read." },
+      { action: "Tell one safe person what's actually going on", reason: "Saying it out loud — to a partner, friend, or midwife — almost always shrinks it a little." },
+    ],
+    whatHappensNext: "Most people who ask for support in pregnancy find that things ease — not always quickly, but reliably. Perinatal mental health teams exist precisely for this season, and your midwife can refer you in.",
+    relatedStage: {
+      intro: "Anxiety sits inside the wider emotional picture of pregnancy:",
+      links: [
+        { label: "Your feelings in pregnancy", href: "/pregnancy/feelings", context: "The wider topic this article belongs to." },
+        { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy", context: "The broader orientation, including depression as well as anxiety." },
+        { label: "When the joy doesn't arrive yet", href: "/articles/when-the-joy-doesnt-arrive-yet", context: "When the feelings you expected aren't quite there." },
+      ],
+    },
+    aiPrompts: [
+      "Is it normal to feel anxious all the time in pregnancy?",
+      "How do I know if my pregnancy anxiety needs support?",
+      "What therapies are safe for anxiety in pregnancy?",
+    ],
+    captureIntro: "Anxiety often sits in places you don't quite say aloud. A quiet space to name what's been circling, in your own words.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["emotional-wellbeing-pregnancy", "when-the-joy-doesnt-arrive-yet", "the-first-trimester-emotionally"],
+    journey: ["pregnancy", "support"],
+    topics: ["feelings", "emotional-wellbeing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Worry in pregnancy is extremely common and not a sign something is wrong with you",
+      "Anxiety usually warrants more support when it stops easing, not when it first appears",
+      "Sleep, body, and relationships are often the clearest signals that worry has tipped into overwhelm",
+      "Treatment in pregnancy — talking therapies and, where helpful, medication — is safe and effective",
+      "Asking your midwife or GP earlier is almost always easier than asking later",
+    ],
+    sources: [
+      "NHS — Mental health in pregnancy",
+      "NICE — Antenatal and postnatal mental health",
+      "Mind — Perinatal anxiety",
+      "Tommy's — Anxiety in pregnancy",
+      "Maternal Mental Health Alliance",
+    ],
+    faq: [
+      { question: "Is anxiety in pregnancy harmful to my baby?", answer: "Ordinary worry is part of pregnancy and isn't harmful. Persistent, untreated anxiety is worth supporting — not because of guilt, but because you deserve the support, and because looking after your mental health in pregnancy is one of the best things you can do for both of you." },
+      { question: "Can I take anxiety medication in pregnancy?", answer: "Some medications are considered safe in pregnancy, and a perinatal mental health team or your GP can help you weigh the options. The right answer depends on your history, your symptoms, and what's likely to help most. Stopping medication suddenly without advice isn't usually recommended." },
+      { question: "When is worry no longer normal?", answer: "It's less about a single threshold and more about whether worry is easing between waves. If it doesn't, if it's affecting sleep, eating, or daily life, or if you're having physical anxiety symptoms regularly, it's worth a conversation — sooner rather than later." },
+      { question: "Will I get anxiety again in another pregnancy?", answer: "Possibly, but not inevitably. People who've experienced antenatal anxiety often have a clearer sense of what helps and a faster path to support second time around. Telling your midwife at booking helps them put that support in place earlier." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "feelings",
+    standfirst:
+      "A grounded look at worry in pregnancy — what tends to be normal, where the line into overwhelm sits, and the kinds of support that genuinely help.",
+    editorialSections: [
+      {
+        id: "anxiety-in-pregnancy",
+        heading: "Anxiety in pregnancy",
+        lead: "Worry in pregnancy is one of the most common emotional experiences there is — and one of the least talked about honestly.",
+        paragraphs: [
+          "Pregnancy holds a lot of unknowns. The body is changing, the future is reshaping, and almost everything that matters is, for a long time, invisible. The mind tends to fill that uncertainty with worry — and for most people, some level of anxiety is part of the season.",
+          "What follows is a calm picture of what anxiety in pregnancy can look like, where it tends to sit within normal, and the points at which more support is usually worth asking for.",
+        ],
+      },
+      {
+        id: "what-anxiety-can-feel-like",
+        heading: "What anxiety can feel like",
+        lead: "Pregnancy anxiety has a recognisable texture, even when the worries themselves vary.",
+        paragraphs: [
+          "It often shows up as a loop — a thought that keeps circling, even after you've talked it through. It can sit in the body as tension in the chest, jaw, or shoulders, a held breath, or a sleep that won't quite come.",
+          "Some people experience anxiety as a steady hum in the background. Others have it in waves — quiet days, then a few harder days, often without an obvious trigger. Both are common.",
+        ],
+      },
+      {
+        id: "what-people-often-worry-about",
+        heading: "What people often worry about",
+        lead: "Some worries are almost universal in pregnancy. Naming them often takes some of their weight.",
+        paragraphs: [
+          "The most common worries tend to gather around the baby (movements, growth, scans), the body (whether something feels right), the birth (how it will go, what it will be like), and the future (becoming a parent, finances, relationships, work).",
+          "If you've had a previous loss, fertility difficulties, a traumatic birth, or anxiety before pregnancy, those experiences usually shape what your worries look like now. That isn't a failing — it's information about what kind of support might help.",
+        ],
+      },
+      {
+        id: "when-worry-starts-to-take-over",
+        heading: "When worry starts to take over",
+        lead: "The line between ordinary worry and something heavier is rarely about content — it's about pattern.",
+        paragraphs: [
+          "It's often less about which thoughts you're having and more about whether they ease. Ordinary worry rises, peaks, and settles. Anxiety that's worth more support tends to stop settling — the loop doesn't close, the reassurance wears off in an hour, the thoughts come back.",
+          "Other signals: sleep getting harder over time, eating becoming difficult, withdrawing from people, regular physical anxiety symptoms (racing heart, breathlessness, panic), or a sense that you're spending more time managing the worry than living the day.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If you're not sure whether what you're feeling is enough to mention, it's almost always enough to mention. A conversation rarely makes things worse and often shifts them.",
+        },
+      },
+      {
+        id: "what-can-help-in-the-moment",
+        heading: "What can help in the moment",
+        lead: "Small, repeatable practices won't fix anxiety, but they give you a foothold when a wave arrives.",
+        paragraphs: [
+          "Lengthening your out-breath quiets the body's stress response — even a slow count of four in, six out, repeated for a minute, can take the edge off. Putting your feet on the floor and naming five things you can see can pull you out of the loop.",
+          "Saying the worry out loud to one safe person — a partner, a friend, your midwife — almost always shrinks it a little. So does writing it down somewhere it doesn't have to live in your head all night.",
+        ],
+      },
+      {
+        id: "when-extra-support-is-worth-seeking",
+        heading: "When extra support is worth seeking",
+        lead: "Asking earlier is almost always easier than asking later.",
+        paragraphs: [
+          "If anxiety is persistent, getting in the way of sleep or daily life, bringing physical symptoms regularly, or making you feel like you're not coping, that's a clear reason to talk to your midwife or GP.",
+          "Naming it doesn't commit you to anything — it just opens the door. The earlier the door is open, the wider the range of support available.",
+        ],
+      },
+      {
+        id: "what-support-may-look-like",
+        heading: "What support may look like",
+        lead: "Support in pregnancy is more than 'see how you go.' There's a real system behind it.",
+        paragraphs: [
+          "Your midwife or GP can refer you to perinatal mental health services where they're available, or to talking therapies through services like NHS Talking Therapies. These services exist specifically for the perinatal season and understand it.",
+          "Where helpful, some medications are considered safe in pregnancy and can be discussed with a specialist team. Treatment is decided with you, not at you, and you don't have to weigh it on your own.",
+        ],
+      },
+    ],
+  },
+
+  // ─── PREGNANCY AFTER LOSS ─────────────────────────────────────────────────
+  {
+    slug: "pregnancy-after-loss",
+    title: "Pregnancy after loss: what it can feel like, and what can help",
+    metaDescription: "Being pregnant after a previous loss is its own emotional experience. What it can feel like, why ordinary reassurance often doesn't land, and the kinds of support that actually help.",
+    quickAnswer:
+      "Pregnancy after loss is its own experience — not the same as a first pregnancy, and not something to be hurried through. It often holds grief and hope at the same time, and ordinary reassurance can land oddly, because the worst has already happened once. What helps tends to be specific, not general: care that knows your history, people who don't try to fix it, milestones taken one at a time, and permission to feel whatever this pregnancy actually feels like — including the days that don't feel like joy.",
+    howThisFeels: [
+      "Holding your breath at every scan, every appointment, every quiet day",
+      "Not wanting to bond yet, and feeling guilty about that",
+      "Hearing 'this one will be fine' and not knowing what to do with it",
+      "Living from milestone to milestone instead of week to week",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "A different emotional landscape", body: "After loss, hope and fear often live in the same breath. The body remembers, even when the mind tries to move on." },
+        { heading: "Reassurance that doesn't land", body: "General reassurance assumes the worst hasn't happened. When it has, the maths feels different — and people around you may struggle to know what to say." },
+        { heading: "Vigilance about symptoms and movements", body: "Watching closely for signs is usually a form of self-protection, not anxiety run wild. It's how some people stay in the pregnancy at all." },
+      ],
+      lessCauses: [
+        { heading: "Layered grief", body: "Grief from a previous loss can resurface around milestones, anniversaries, scans, or the dates the previous pregnancy ended. This isn't going backwards — it's grief moving with you." },
+        { heading: "Birth trauma in the background", body: "If a previous loss involved a traumatic experience of care, this pregnancy may carry that weight too. Naming it changes what kind of support is offered." },
+      ],
+      whyItVaries: "Every loss is different, and so is every pregnancy after loss. How it feels depends on the kind of loss, how recent it was, the support around you, and how this pregnancy is unfolding.",
+    },
+    timing: {
+      whenStarts: "Many people describe the hardest weeks as the ones leading up to — and just past — the point at which the previous loss happened.",
+      whenPeaks: "Scans, appointments, anniversaries, and the gestation of the previous loss often bring the strongest waves.",
+      whenEases: "Some people find easing comes in stages — after a particular scan, after passing the previous loss point, after movements become reliable. For others, it doesn't fully ease until the baby is here.",
+    },
+    whatItFeelsLike: [
+      "Numbness as protection, not absence of love",
+      "Reluctance to plan, buy, or announce",
+      "Tearfulness around dates and reminders",
+      "A guarded kind of hope",
+    ],
+    whatThisMeans:
+      "Pregnancy after loss isn't a failure of joy or a problem to be talked out of. It's a different kind of pregnancy that needs a different kind of care.",
+    normal: [
+      "Not bonding in the way you expected to",
+      "Holding your breath until each scan or milestone",
+      "Not wanting to plan, announce, or prepare yet",
+      "Tearfulness or grief around anniversaries and dates",
+      "A long stretch before this pregnancy feels real or safe",
+    ],
+    seekSupport: [
+      "Persistent low mood that doesn't lift between milestones",
+      "Anxiety that's making it hard to sleep, eat, or function",
+      "Flashbacks, intrusive memories, or nightmares about the previous loss",
+      "A sense of detachment from yourself or the pregnancy that's distressing",
+      "Any thoughts of harming yourself",
+    ],
+    disclaimer: "This is general guidance and not a substitute for specialist support. Pregnancy after loss often needs care that's tailored to you — please speak to your midwife, GP, or a perinatal mental health service.",
+    whatYouCanDo: [
+      { action: "Tell your midwife about your previous loss at booking", reason: "It changes the kind of care you're offered — including, in many places, more frequent scans and continuity of midwife." },
+      { action: "Ask for a named midwife or continuity team where it exists", reason: "Telling your story repeatedly can be exhausting. Continuity reduces that and tends to make support feel safer." },
+      { action: "Take the pregnancy a milestone at a time", reason: "Trying to feel safe about the whole pregnancy at once can be impossible. Smaller stretches are often more bearable." },
+      { action: "Find one or two people who don't try to fix it", reason: "Not everyone needs to know. The right support is often a small circle of people who can hold the weight without minimising it." },
+      { action: "Consider specialist support — counselling, peer groups, charities", reason: "Organisations like Tommy's, Sands, and the Miscarriage Association exist for exactly this. Specialist help reaches places general support can't." },
+    ],
+    whatHappensNext: "Many people find that pregnancy after loss continues to be its own experience all the way through — and often into early parenthood. Support that knows your history can carry forward.",
+    relatedStage: {
+      intro: "Pregnancy after loss sits inside the wider emotional picture of pregnancy:",
+      links: [
+        { label: "Your feelings in pregnancy", href: "/pregnancy/feelings", context: "The wider topic this article belongs to." },
+        { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy", context: "The broader orientation around mental health in pregnancy." },
+        { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy", context: "On worry and when to ask for more support." },
+      ],
+    },
+    aiPrompts: [
+      "How do I cope with pregnancy after a miscarriage?",
+      "What support exists for pregnancy after loss?",
+      "Why don't I feel excited in this pregnancy?",
+    ],
+    captureIntro: "Pregnancy after loss often holds things you can't quite say to anyone else. A quiet space for the truth of where you are, in your own words.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["emotional-wellbeing-pregnancy", "anxiety-in-pregnancy", "when-the-joy-doesnt-arrive-yet"],
+    journey: ["pregnancy", "support"],
+    topics: ["feelings", "emotional-wellbeing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Pregnancy after loss is its own experience — not the same as a first pregnancy",
+      "Hope and fear often coexist, and reassurance that doesn't acknowledge that can land oddly",
+      "Telling your midwife at booking changes the kind of care you're offered",
+      "Living milestone by milestone is often more bearable than trying to feel safe about the whole pregnancy",
+      "Specialist support exists — through perinatal mental health services and charities like Tommy's, Sands, and the Miscarriage Association",
+    ],
+    sources: [
+      "NHS — Pregnancy after loss",
+      "Tommy's — Pregnancy after loss",
+      "Sands — Pregnancy after the death of a baby",
+      "Miscarriage Association — Pregnancy after loss",
+      "NICE — Antenatal and postnatal mental health",
+    ],
+    faq: [
+      { question: "Why don't I feel excited about this pregnancy?", answer: "After loss, many people describe a guarded, careful kind of feeling rather than excitement. That's almost always self-protection, not absence of love. Excitement may come — sometimes only after the baby is here — and that timing isn't a measure of how much you'll love them." },
+      { question: "Should I tell my midwife about my previous loss?", answer: "Yes, ideally at the booking appointment. It usually changes the kind of care you're offered — including, in many places, additional scans, more frequent contact, and continuity of carer. It's information that helps them support you, not something to manage alone." },
+      { question: "Will extra scans help me feel safer?", answer: "For some people they help significantly; for others, they bring relief that fades quickly. Both are common. Many specialist clinics for pregnancy after loss offer reassurance scans alongside other support, recognising that the relief alone isn't usually enough on its own." },
+      { question: "Is it normal not to want to plan or announce?", answer: "Yes. Many people delay buying things, decorating, or telling others — sometimes until very late, sometimes until after the baby arrives. There's no right time. Doing what feels bearable, on your timescale, isn't superstition — it's care for yourself." },
+      { question: "Where can I find specialist support?", answer: "Tommy's, Sands, and the Miscarriage Association all run support specifically for pregnancy after loss, including helplines, online communities, and peer support. Your midwife or GP can also refer you to perinatal mental health services where they're available in your area." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "feelings",
+    standfirst:
+      "Pregnancy after loss is its own experience. A careful, humane look at what it can feel like, why ordinary reassurance often doesn't land, and where real support tends to come from.",
+    editorialSections: [
+      {
+        id: "pregnancy-after-loss",
+        heading: "Pregnancy after loss",
+        lead: "This pregnancy is happening alongside a loss that hasn't gone anywhere — even if the calendar has moved on.",
+        paragraphs: [
+          "Being pregnant after a miscarriage, stillbirth, neonatal death, or termination for medical reasons is a particular kind of pregnancy. It carries hope and grief in the same breath, and most of the things people are usually told about pregnancy don't quite fit it.",
+          "What follows isn't a guide for fixing how this feels. It's a calm acknowledgement of what it tends to be like, and a steady look at the kinds of support that actually help.",
+        ],
+      },
+      {
+        id: "what-it-can-feel-like",
+        heading: "What pregnancy after loss can feel like",
+        lead: "Recognisable patterns come up across many people's experiences. Naming them is often a relief.",
+        paragraphs: [
+          "It often feels like holding your breath — at every scan, every appointment, every quiet day. Many people describe a kind of guarded, careful relationship with the pregnancy: not wanting to bond yet, not wanting to plan, not wanting to announce.",
+          "There can be numbness, tearfulness, vigilance about symptoms or movements, and grief that resurfaces around the dates and milestones of the previous loss. None of these are failures of love. Most are forms of self-protection.",
+        ],
+      },
+      {
+        id: "why-reassurance-often-doesnt-land",
+        heading: "Why reassurance often doesn't land",
+        lead: "When the worst has happened once, the maths around 'most pregnancies are fine' feels different.",
+        paragraphs: [
+          "Phrases like 'try not to worry' or 'this one will be fine' usually come from love, but they assume a starting point that no longer applies. Reassurance can land flat — or even sting — because it often skips past the fact that something real has already happened.",
+          "What tends to help more is acknowledgement: people who can sit with where you are, who don't try to talk you out of how you feel, and who can hold both the loss and this pregnancy at the same time without flattening either.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Whatever you're feeling about this pregnancy is allowed — including the parts you don't quite say out loud. None of it is a sign you'll love this baby less.",
+        },
+      },
+      {
+        id: "what-can-help",
+        heading: "What can help",
+        lead: "Help tends to be specific and small rather than sweeping.",
+        paragraphs: [
+          "Taking the pregnancy a milestone at a time — the next scan, the next appointment, the next week — is often more bearable than trying to feel safe about the whole of it. Permission to do that, rather than push through, matters.",
+          "A small circle of people who can hold the weight without minimising it tends to do more than a wider one that doesn't quite know how. So does honesty with your midwife about how you're feeling, even if the words come slowly.",
+        ],
+      },
+      {
+        id: "how-support-may-need-to-be-different",
+        heading: "How support may need to be different",
+        lead: "Pregnancy after loss often needs care that knows your history.",
+        paragraphs: [
+          "Telling your midwife about a previous loss at booking changes what's available. In many places it means continuity of carer, additional scans, and a more attentive plan. If continuity isn't offered automatically, it's worth asking.",
+          "Specialist services and charities — Tommy's, Sands, the Miscarriage Association — exist precisely for this experience. They offer counselling, peer support, and helplines, and they understand that pregnancy after loss isn't simply 'pregnancy with extra worry.'",
+        ],
+      },
+      {
+        id: "milestones-anniversaries-and-the-dates-that-matter",
+        heading: "Milestones, anniversaries, and the dates that matter",
+        lead: "Some weeks will be harder than others, and the harder ones often have a pattern.",
+        paragraphs: [
+          "Approaching — and passing — the gestation of the previous loss is often a particularly heavy stretch. Anniversaries, due dates from the previous pregnancy, and certain scans can all bring strong waves.",
+          "Some people find it helps to mark these dates gently — a walk, a candle, a quiet hour — rather than try to ignore them. Others would rather move through them quietly. There isn't a right way; there's only what helps you.",
+        ],
+      },
+      {
+        id: "when-to-ask-for-more-care",
+        heading: "When to ask for more care",
+        lead: "Some signs are clearer reasons to reach out, and earlier is almost always easier.",
+        paragraphs: [
+          "Persistent low mood that doesn't lift between milestones, anxiety that's making it hard to sleep or eat, flashbacks or intrusive memories of the previous loss, or a sense of detachment that's distressing are all reasons to talk to your midwife or GP.",
+          "Any thoughts of harming yourself need to be talked about straight away. Specialist perinatal mental health teams exist for exactly these kinds of conversations, and your midwife or GP can refer you in.",
+        ],
+      },
+    ],
+  },
+
+  // ─── THE FIRST TRIMESTER EMOTIONALLY ──────────────────────────────────────
+  {
+    slug: "the-first-trimester-emotionally",
+    title: "The first trimester emotionally: the strange, in-between weeks",
+    metaDescription: "What the first trimester can feel like emotionally — the mix of hope, fear, unreality, and waiting — and why so many people feel ambivalent rather than excited.",
+    quickAnswer:
+      "The first trimester is often emotionally stranger than people warn you about. It's a season of hope, fear, unreality, waiting, and physical symptoms that can flatten everything else. Many people don't feel joyful, bonded, or even quite real about the pregnancy yet — and that doesn't mean anything is wrong. The first trimester is a long, mostly invisible stretch where almost nothing shows on the outside and everything is shifting on the inside.",
+    howThisFeels: [
+      "Knowing you're pregnant but it not feeling real",
+      "Holding the news and not knowing who to tell",
+      "Feeling sick and exhausted and emotional all at once",
+      "Counting down to a scan that feels very far away",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Hormonal change", body: "Pregnancy hormones rise sharply in the first trimester, directly affecting mood, sleep, and emotional sensitivity." },
+        { heading: "Physical symptoms", body: "Nausea, exhaustion, and disrupted sleep all reduce emotional resilience. It's hard to feel anything calmly when the body is this loud." },
+        { heading: "Living in private", body: "Most people don't tell others widely in the first trimester. Holding something this big without much external company is its own emotional weight." },
+      ],
+      lessCauses: [
+        { heading: "Anxiety from a previous loss", body: "If you've had a previous loss, the first trimester often carries grief and vigilance alongside the new pregnancy." },
+        { heading: "Ambivalence about pregnancy", body: "Mixed feelings — including not feeling ready, or wondering if you really wanted this — are common and don't predict how you'll feel later." },
+      ],
+      whyItVaries: "How the first trimester feels emotionally depends on hormones, history, support, physical symptoms, and how planned or expected the pregnancy was. Two pregnancies in the same person can feel very different.",
+    },
+    timing: {
+      whenStarts: "Emotional shifts often begin within the first few weeks, sometimes before symptoms.",
+      whenPeaks: "Many people describe weeks 6 to 10 as the heaviest — the height of nausea, fatigue, and the longest stretch before the first scan.",
+      whenEases: "For many, the second trimester brings a noticeable lift — though not for everyone, and not always on schedule.",
+    },
+    whatItFeelsLike: [
+      "Unreality, like nothing has changed and everything has",
+      "Tearfulness without an obvious trigger",
+      "Wanting it and being scared of it in the same hour",
+      "Feeling distant from the pregnancy until something makes it feel real",
+    ],
+    whatThisMeans:
+      "The first trimester is an unusual emotional season. Feeling strange, ambivalent, or quietly overwhelmed is part of the experience for most people — not a sign that anything is wrong with you or your bond with this baby.",
+    normal: [
+      "Not feeling joyful or excited yet",
+      "Feeling like the pregnancy isn't real until the first scan",
+      "Crying at small things",
+      "Wanting to hide and wanting to tell everyone in the same day",
+      "Feeling distant or numb at times",
+    ],
+    seekSupport: [
+      "Persistent low mood that lasts more than two weeks",
+      "Anxiety that's getting in the way of sleep, eating, or daily life",
+      "Severe nausea or vomiting affecting your ability to keep food and fluids down (this may be hyperemesis gravidarum)",
+      "A sense of dread or hopelessness that doesn't lift",
+      "Any thoughts of harming yourself",
+    ],
+    disclaimer: "This article is general guidance about the emotional experience of the first trimester. If you're struggling, please speak to your midwife or GP — emotional support in pregnancy is real and accessible.",
+    whatYouCanDo: [
+      { action: "Lower the bar for what counts as a good day", reason: "First-trimester capacity is usually smaller than usual. Survival isn't underachievement." },
+      { action: "Tell at least one person who can hold it gently", reason: "Carrying this in private is heavy. One safe person changes what you can bear." },
+      { action: "Don't expect bonding yet", reason: "Bonding often arrives much later — sometimes not until movements, sometimes not until birth. That isn't a failure of love." },
+      { action: "Notice what helps and protect it", reason: "Sleep, food you can keep down, low-stakes evenings, fresh air — small things matter more than usual right now." },
+      { action: "Tell your midwife how you're actually feeling at booking", reason: "Mental health support in pregnancy starts at booking. Honesty there opens the door earlier." },
+    ],
+    whatHappensNext: "Many people find that something shifts in the second trimester — symptoms ease, scans come, the pregnancy starts to feel more real. For some it shifts later. Either way, the first trimester isn't the whole picture.",
+    relatedStage: {
+      intro: "The first trimester emotionally sits alongside the wider feelings topic:",
+      links: [
+        { label: "Your feelings in pregnancy", href: "/pregnancy/feelings", context: "The wider topic this article belongs to." },
+        { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy", context: "The broader orientation around mental health in pregnancy." },
+        { label: "When the joy doesn't arrive yet", href: "/articles/when-the-joy-doesnt-arrive-yet", context: "When the feelings you expected aren't quite there." },
+      ],
+    },
+    aiPrompts: [
+      "Why doesn't the first trimester feel real?",
+      "Is it normal not to feel excited in early pregnancy?",
+      "When does the first trimester start to ease emotionally?",
+    ],
+    captureIntro: "The first trimester often holds more than it shows. A quiet space for what these strange, in-between weeks have actually felt like — in your own words.",
+    trimester: [1],
+    relatedSlugs: ["emotional-wellbeing-pregnancy", "when-the-joy-doesnt-arrive-yet", "anxiety-in-pregnancy"],
+    journey: ["pregnancy", "support"],
+    topics: ["feelings", "emotional-wellbeing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "The first trimester is emotionally unusual for most people, not just you",
+      "Not feeling joyful, bonded, or even real about the pregnancy yet is common",
+      "Hormones, symptoms, and living in private all add to the weight",
+      "Lowering the bar and telling one safe person are usually the most useful first steps",
+      "Persistent low mood, severe anxiety, or any thoughts of harm are reasons to talk to your midwife or GP",
+    ],
+    sources: [
+      "NHS — Mental health in pregnancy",
+      "NHS — Your first antenatal appointment",
+      "Tommy's — Mental wellbeing in pregnancy",
+      "Mind — Perinatal mental health",
+      "NICE — Antenatal and postnatal mental health",
+    ],
+    faq: [
+      { question: "Why doesn't the first trimester feel real?", answer: "For most of the first trimester, almost nothing shows on the outside. There's no bump, often no movements, and most people aren't telling anyone widely. The mind doesn't have much external evidence to anchor onto, so it's very common for the pregnancy to feel abstract — sometimes right up until the first scan or beyond." },
+      { question: "Is it normal not to feel excited in the first trimester?", answer: "Extremely. Many people don't feel excited, bonded, or even particularly happy in the first trimester — and that doesn't predict how you'll feel later. Hormones, exhaustion, nausea, and the long wait before things feel real all play a part." },
+      { question: "When does it start to ease?", answer: "For many people, the second trimester brings a noticeable lift — energy returns, nausea eases for most, and the first scan often makes things feel more real. That's an average, not a rule. For some it shifts later, and for some the lift isn't dramatic. Both are common." },
+      { question: "What if I'm really struggling?", answer: "Speak to your midwife or GP — even if you're not sure whether what you're feeling is 'enough' to mention. Mental health support in pregnancy starts as soon as you ask for it, and the earlier the door is open, the more options you have." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "feelings",
+    standfirst:
+      "The emotional texture of the earliest weeks — quieter than people warn you about, and stranger than most week-by-week summaries let on.",
+    editorialSections: [
+      {
+        id: "the-first-trimester-emotionally",
+        heading: "The first trimester emotionally",
+        lead: "The first trimester is an unusual emotional season — and one most pregnancy advice skips past in a sentence.",
+        paragraphs: [
+          "On the outside, very little is happening. On the inside, almost everything is shifting. Hormones rise sharply, the body is loud, the future is reshaping, and most people are holding all of it without telling many others yet.",
+          "What follows is a calm look at what these weeks tend to feel like emotionally — and a reassurance that the strangeness, ambivalence, and unreality so many people describe is part of the experience, not a sign something is wrong.",
+        ],
+      },
+      {
+        id: "why-it-can-feel-strange",
+        heading: "Why the first trimester can feel emotionally strange",
+        lead: "There's a particular shape to these weeks that's worth naming.",
+        paragraphs: [
+          "It's a long stretch of mostly invisible change. There's no bump, often no movements, and usually no one outside a small circle who knows. The mind doesn't have much external evidence to anchor onto, so the pregnancy can feel abstract — even unreal — for weeks.",
+          "Hormones rise faster in the first trimester than at almost any other point in pregnancy. They affect mood, sleep, and emotional sensitivity directly. Combine that with nausea, exhaustion, and the wait before the first scan, and a strange emotional weather is almost guaranteed.",
+        ],
+      },
+      {
+        id: "the-mix-of-feelings",
+        heading: "The mix of hope, fear, unreality, and waiting",
+        lead: "Most people experience all of these at different points — sometimes within the same hour.",
+        paragraphs: [
+          "Hope and fear often co-exist, especially around scans, milestones, and any change in symptoms. Unreality — the feeling that none of it is quite happening — is one of the most commonly described first-trimester experiences. So is the slow, strange weight of waiting for things to feel more solid.",
+          "If you've had a previous loss, fertility difficulties, or anxiety before pregnancy, those experiences usually shape how this season lands. That isn't a failing — it's information about what kind of support might help.",
+        ],
+      },
+      {
+        id: "why-people-may-not-feel-joyful-yet",
+        heading: "Why people may not feel joyful yet",
+        lead: "Joy is one possible feeling. It isn't the required one.",
+        paragraphs: [
+          "Many people don't feel joyful in the first trimester — and almost no one tells them that's normal. Ambivalence, dread, numbness, exhaustion, even regret are all feelings that come up in this season for some people, including people who very much wanted this pregnancy.",
+          "Bonding tends to arrive much later for most people — often with movements, sometimes not until birth, sometimes not for some weeks after. The absence of strong feelings now doesn't predict the strength of love later.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Not feeling excited or bonded in the first trimester is one of the most common — and least talked about — experiences in pregnancy. It isn't a sign that something is wrong with you or with this baby.",
+        },
+      },
+      {
+        id: "what-can-still-be-normal",
+        heading: "What can still be normal emotionally",
+        lead: "A lot of what feels concerning in the first trimester is, for most people, part of the season.",
+        paragraphs: [
+          "Tearfulness without an obvious trigger, mood swings, anxious phases, vivid or unsettling dreams, wanting to hide and wanting to tell everyone in the same day, distance from the pregnancy until something makes it feel real — all of these are familiar first-trimester territory.",
+          "What tends to be worth more attention is when feelings stop moving — persistent low mood that doesn't lift for more than two weeks, anxiety that's getting in the way of sleep or eating, a sense of dread or hopelessness that settles in. Those are reasons to talk to your midwife or GP.",
+        ],
+      },
+      {
+        id: "what-can-help-now",
+        heading: "What can help now",
+        lead: "Small, achievable things tend to matter more than big plans.",
+        paragraphs: [
+          "Lowering the bar for what counts as a good day is often the single most useful shift. First-trimester capacity is smaller than usual — survival isn't underachievement.",
+          "Telling at least one person who can hold the news gently makes a real difference. So does protecting whatever helps — sleep, food you can keep down, low-stakes evenings, fresh air — even when it feels like you should be doing more.",
+        ],
+      },
+      {
+        id: "when-to-talk-to-your-midwife",
+        heading: "When to talk to your midwife or GP",
+        lead: "Mental health support in pregnancy starts as soon as you ask for it.",
+        paragraphs: [
+          "If low mood is lasting more than two weeks, if anxiety is interfering with daily life, if you're not coping, or if you're having any thoughts of harming yourself, please talk to someone — your midwife, your GP, or NHS 111 if you need help sooner.",
+          "Telling your midwife how you're actually feeling at booking — not just how you think you should be — opens the door to more support, earlier. Mental health is part of antenatal care.",
+        ],
+      },
+    ],
+  },
+
+  // ─── WHEN THE JOY DOESN'T ARRIVE YET ──────────────────────────────────────
+  {
+    slug: "when-the-joy-doesnt-arrive-yet",
+    title: "When the joy doesn't arrive yet: on absent, delayed, or mixed feelings in pregnancy",
+    metaDescription: "When the joy you expected to feel about pregnancy isn't there — or is mixed, delayed, or replaced by numbness or dread. What this often means, and when extra support is worth seeking.",
+    quickAnswer:
+      "When the joy you expected to feel about pregnancy doesn't arrive — or arrives in a quieter, more complicated form — it doesn't usually mean anything is wrong with you, your love for this baby, or this pregnancy. Joy in pregnancy is often delayed, mixed with other feelings, or absent for stretches at a time. Numbness, ambivalence, dread, and grief can all sit alongside love. Where it tips into needing more support is usually when low mood is persistent, when nothing eases it, or when daily life is becoming hard — not when the feelings simply aren't what you expected.",
+    howThisFeels: [
+      "Wondering why everyone else seems happier about your pregnancy than you are",
+      "Smiling on the outside and feeling flat on the inside",
+      "Loving your baby and dreading parts of pregnancy in the same breath",
+      "Carrying a quiet, unspoken sense that something is missing",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Hormonal and physical load", body: "First-trimester nausea, exhaustion, third-trimester discomfort, and broken sleep all flatten emotion. Joy struggles to land in a depleted body." },
+        { heading: "Mismatch with the story you were told", body: "Cultural expectations of pregnancy as joyful create a real loneliness when your experience doesn't match. The mismatch is often the hardest part." },
+        { heading: "Bonding takes its own time", body: "Many people don't feel deeply bonded with their baby until much later — sometimes not until movements, sometimes not until birth. The pace of bonding doesn't predict the depth of love." },
+      ],
+      lessCauses: [
+        { heading: "Antenatal depression", body: "Persistent low mood, hopelessness, loss of interest, or numbness that lasts more than two weeks may be antenatal depression — which is real, common, and treatable." },
+        { heading: "Unprocessed loss, fertility difficulty, or trauma", body: "If you've reached this pregnancy through loss, fertility treatment, or difficult experiences, the absence of straightforward joy often makes complete sense." },
+      ],
+      whyItVaries: "How joy lands in pregnancy depends on hormones, physical health, how the pregnancy came about, your history, and the support around you. Mixed and delayed feelings are common across all of these.",
+    },
+    timing: {
+      whenStarts: "Many people describe the absence of expected joy from very early in pregnancy.",
+      whenPeaks: "It often feels heaviest in the first trimester and again in late pregnancy when the reality of birth and parenthood becomes closer.",
+      whenEases: "Joy often arrives in pieces — a scan, a movement, a moment after birth — rather than all at once. For some, the strongest feelings only arrive in the early weeks of parenthood.",
+    },
+    whatItFeelsLike: [
+      "Numbness rather than excitement",
+      "Performing happiness for other people",
+      "Guilt that you don't feel grateful enough",
+      "Hope and dread at the same time",
+    ],
+    whatThisMeans:
+      "The absence of joy isn't an absence of love. Pregnancy holds a wider emotional range than most people are told to expect — and your feelings being quieter, mixed, or delayed is part of that range, not a problem to fix.",
+    normal: [
+      "Numbness, ambivalence, or feeling flat for stretches",
+      "Joy arriving in flashes rather than a steady state",
+      "Loving your baby and not loving pregnancy",
+      "Grief or sadness alongside hope",
+      "Bonding that comes slowly, or arrives mostly after birth",
+    ],
+    seekSupport: [
+      "Low mood that's persistent and not lifting between days",
+      "A sense of dread or hopelessness that doesn't ease",
+      "Loss of interest in things you usually care about",
+      "Feeling unable to function or cope with daily life",
+      "Any thoughts of harming yourself",
+    ],
+    disclaimer: "This is general guidance, not a substitute for professional care. If something in your feelings is worrying you, please speak to your midwife, your GP, or — if you need help sooner — call 111 or, in a crisis, 999.",
+    whatYouCanDo: [
+      { action: "Stop measuring your pregnancy against the joy you expected", reason: "The expectation is often the heaviest part. Letting it go opens space for whatever is actually here." },
+      { action: "Tell one safe person what's really going on", reason: "Saying 'I don't feel how I thought I would' to someone who can hold it almost always brings relief." },
+      { action: "Notice the small moments that do land", reason: "Joy in pregnancy is often a flicker, not a flood. Naming the small moments — without forcing them — can help them grow." },
+      { action: "Look at sleep, food, and rest first", reason: "Depleted bodies don't feel much joy. Practical care often shifts more emotionally than people expect." },
+      { action: "Be honest with your midwife", reason: "Mental health is part of antenatal care. The earlier the door is open, the more support is available." },
+    ],
+    whatHappensNext: "For many people, joy arrives more clearly in the early weeks of parenthood — sometimes even after a hard pregnancy. For some, it stays quieter, and that's also a real way to love a baby. Either way, support continues to be available.",
+    relatedStage: {
+      intro: "When the joy doesn't arrive yet sits inside the wider feelings topic:",
+      links: [
+        { label: "Your feelings in pregnancy", href: "/pregnancy/feelings", context: "The wider topic this article belongs to." },
+        { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy", context: "The broader orientation around mental health in pregnancy." },
+        { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy", context: "On worry, and where the line into overwhelm tends to sit." },
+      ],
+    },
+    aiPrompts: [
+      "Why don't I feel happy about my pregnancy?",
+      "Is it normal to feel numb in pregnancy?",
+      "How do I know if I'm depressed in pregnancy?",
+    ],
+    captureIntro: "The feelings you didn't expect are often the ones you can't quite say out loud. A quiet space for what this pregnancy has actually felt like — in your own words.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["emotional-wellbeing-pregnancy", "anxiety-in-pregnancy", "the-first-trimester-emotionally"],
+    journey: ["pregnancy", "support"],
+    topics: ["feelings", "emotional-wellbeing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "The absence of joy in pregnancy doesn't usually mean anything is wrong",
+      "Joy is often delayed, mixed, or arrives in flashes rather than a steady state",
+      "Numbness, ambivalence, and dread can all sit alongside real love",
+      "What's worth more attention is persistent low mood, hopelessness, or struggling to function",
+      "Mental health support in pregnancy is real, accessible, and starts as soon as you ask",
+    ],
+    sources: [
+      "NHS — Mental health in pregnancy",
+      "Mind — Perinatal depression",
+      "Tommy's — Mental wellbeing in pregnancy",
+      "Maternal Mental Health Alliance",
+      "NICE — Antenatal and postnatal mental health",
+    ],
+    faq: [
+      { question: "Why don't I feel happy about being pregnant?", answer: "There are lots of possible reasons — hormones, exhaustion, physical symptoms, the gap between expectation and experience, previous losses, life circumstances. For most people, the absence of joy doesn't mean anything is wrong with the pregnancy or with their love for the baby. It's worth noticing, and worth being gentle with." },
+      { question: "Is feeling numb in pregnancy normal?", answer: "Yes, particularly in the first trimester and at points of overwhelm. Numbness is often a form of self-protection — a way the mind manages too much at once. If numbness is constant, lasting weeks, and accompanied by other low-mood signs, it's worth a conversation with your midwife or GP." },
+      { question: "How do I know if this is antenatal depression?", answer: "If low mood, hopelessness, or loss of interest in things you usually care about lasts more than two weeks and is affecting daily life — sleep, eating, work, relationships — please speak to your midwife or GP. There are screening tools that can help, and treatment is real and effective. Asking earlier is almost always easier than asking later." },
+      { question: "Will I bond with my baby if I don't feel joyful now?", answer: "Almost certainly. Bonding for many people doesn't really begin in pregnancy at all, or only arrives slowly through movements, scans, or meeting the baby. The lack of strong feelings now doesn't predict the depth of love later." },
+      { question: "Where can I get help if I'm struggling?", answer: "Start with your midwife or GP — they can refer you to perinatal mental health services where they're available, or to talking therapies. Charities like Mind, the Maternal Mental Health Alliance, and Tommy's also offer information and support. If you need help sooner, call NHS 111. If you're in crisis or thinking of harming yourself, call 999 or go to A&E." },
+    ],
+
+    // ── Deep template fields ──
+    topic: "feelings",
+    standfirst:
+      "When the joy you expected to feel doesn't arrive — or arrives in a quieter, more complicated form. A gentle, shame-reducing look at one of the most common, least talked about parts of pregnancy.",
+    editorialSections: [
+      {
+        id: "when-the-joy-doesnt-arrive-yet",
+        heading: "When the joy doesn't arrive yet",
+        lead: "The cultural script of pregnancy says joy. Real pregnancy holds a much wider emotional range.",
+        paragraphs: [
+          "A lot of people quietly carry the experience of not feeling how they thought they would about being pregnant — and quietly carry the worry that this means something. For most, it doesn't.",
+          "What follows is a calm, careful look at the absence, delay, or mixedness of joy in pregnancy: what it can feel like, what it usually means, and where it tips into something worth more support.",
+        ],
+      },
+      {
+        id: "what-it-can-feel-like",
+        heading: "What it can feel like when joy is absent, delayed, or mixed",
+        lead: "There's a particular texture to this experience that's worth naming.",
+        paragraphs: [
+          "It can feel like numbness rather than excitement. Like performing happiness for the people around you. Like loving your baby and dreading parts of pregnancy in the same breath. Like joy arriving in flashes — at a scan, at a movement, at a passing moment — rather than as a steady state.",
+          "For some people it feels like a flat background hum; for others, like a more uncomfortable sense of dread, guilt, or grief. Mixed is the most common shape — feelings that don't sort into one neat emotion.",
+        ],
+      },
+      {
+        id: "why-it-doesnt-mean-something-is-wrong",
+        heading: "Why this doesn't mean something is wrong",
+        lead: "The absence of joy isn't the absence of love.",
+        paragraphs: [
+          "Pregnancy is a major physical, hormonal, and identity shift. Joy, like any complex feeling, doesn't reliably arrive on demand in seasons of upheaval. Many people don't feel deeply bonded with their baby until much later — sometimes not until movements, sometimes not until birth, sometimes only in the early weeks of parenthood.",
+          "How you feel in pregnancy is not a measure of how much you'll love your baby, how good a parent you'll be, or how much you wanted this. It's a reflection of where you are right now — physically, hormonally, emotionally — and that picture changes.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Quiet, mixed, or delayed feelings about pregnancy are extremely common. They aren't a sign that something is wrong with you or with this baby.",
+        },
+      },
+      {
+        id: "the-emotional-reality-is-complicated",
+        heading: "How emotional reality in pregnancy can be complicated",
+        lead: "Real pregnancy holds room for things the brochures don't mention.",
+        paragraphs: [
+          "Hope and grief can sit together — especially after loss, fertility difficulty, or a complicated road to this pregnancy. Love and ambivalence can coexist. Wanting this baby and not enjoying pregnancy are not contradictions.",
+          "Cultural expectations of pregnancy as a glow-and-gratitude experience add a particular kind of loneliness when reality doesn't match. The mismatch — between how you're 'supposed' to feel and how you actually feel — is often the heaviest part of this experience, not the feelings themselves.",
+        ],
+      },
+      {
+        id: "what-can-help",
+        heading: "What can quietly help",
+        lead: "Small, gentle shifts — not big emotional projects.",
+        paragraphs: [
+          "Letting go of the measuring stick — comparing your feelings to the joy you expected — usually lifts more weight than anything else. So does telling at least one safe person what's really going on, in plain words, without softening it.",
+          "Looking at sleep, food, and rest first is more useful than people expect. Depleted bodies don't feel much joy. Noticing the small moments that do land — without forcing them — can help them grow.",
+        ],
+      },
+      {
+        id: "when-extra-support-is-worth-seeking",
+        heading: "When numbness, dread, or low mood may need more support",
+        lead: "There's a clearer line where it's worth bringing someone else in.",
+        paragraphs: [
+          "If low mood is persistent and isn't lifting between days, if there's a sense of dread or hopelessness that doesn't ease, if you've lost interest in things you usually care about, or if daily life is becoming hard, that's a clear reason to talk to your midwife or GP.",
+          "Antenatal depression is real, common, and treatable. So is antenatal anxiety. Naming what you're feeling doesn't lock you into anything — it opens the door to more support.",
+        ],
+      },
+      {
+        id: "what-support-may-look-like",
+        heading: "What support may look like",
+        lead: "There's more than 'wait and see' available — and it starts with one conversation.",
+        paragraphs: [
+          "Your midwife or GP can refer you to perinatal mental health services where they're available, or to talking therapies through services like NHS Talking Therapies. These services exist specifically for the perinatal season and understand it.",
+          "Where helpful, some medications are considered safe in pregnancy and can be discussed with a specialist team. Charities like Mind, Tommy's, and the Maternal Mental Health Alliance also offer information and peer support. You don't have to weigh any of this on your own.",
+        ],
+      },
+      {
+        id: "if-youre-in-crisis",
+        heading: "If you're in crisis",
+        lead: "Some feelings need help sooner than a routine appointment.",
+        paragraphs: [
+          "If you're having thoughts of harming yourself, or you don't feel safe, please reach out now — call NHS 111, your GP, or your maternity unit. In an emergency, call 999 or go to A&E. The Samaritans (116 123) are available day and night.",
+          "Asking for help in a crisis isn't a failure of pregnancy. It's the most important kind of care for you and your baby.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "If you're thinking of harming yourself, please tell someone now — your midwife, GP, NHS 111, or 999 in an emergency. The Samaritans are also available day and night on 116 123.",
+        },
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

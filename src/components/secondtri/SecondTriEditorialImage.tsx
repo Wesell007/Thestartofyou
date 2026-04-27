@@ -1,4 +1,4 @@
-import trimesterSecondImg from "@/assets/trimester-second.jpg";
+import trimesterSecondImg from "@/assets/trimester-second-editorial.jpg";
 
 const SecondTriEditorialImage = () => {
   return (
@@ -12,7 +12,7 @@ const SecondTriEditorialImage = () => {
               loading="lazy"
               width={1600}
               height={620}
-              className="w-full h-[300px] sm:h-[420px] md:h-[520px] lg:h-[580px] object-cover object-[50%_18%] sm:object-[48%_22%] md:object-[45%_26%] lg:object-[42%_28%]"
+              className="w-full h-[360px] sm:h-[460px] md:h-[540px] lg:h-[600px] object-cover object-[72%_30%] sm:object-[68%_32%] md:object-[62%_35%] lg:object-[58%_38%]"
             />
             <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-foreground/40 via-foreground/15 to-transparent pointer-events-none" />
 

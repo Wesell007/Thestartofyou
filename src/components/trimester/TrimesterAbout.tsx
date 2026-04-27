@@ -4,11 +4,9 @@ import botanicalSprig from "@/assets/botanical-branch-bl.png";
 interface Props {
   data: TrimesterData;
   bg?: string;
-  /** When true, hides the inline feature image (use when a hero-image block already sits above). */
-  hideImage?: boolean;
 }
 
-const TrimesterAbout = ({ data, bg = "bg-parchment", hideImage = false }: Props) => {
+const TrimesterAbout = ({ data, bg = "bg-parchment" }: Props) => {
   return (
     <section className={`${bg} section-spacing`}>
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">

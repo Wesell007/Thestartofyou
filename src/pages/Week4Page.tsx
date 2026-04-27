@@ -46,13 +46,13 @@ import fatigueImg from "@/assets/article-hero-fatigue.jpg";
    ───────────────────────────────────────────────────────────────────── */
 const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; tone?: "sage" | "terracotta" | "lavender" }) => {
   const toneCls =
-    tone === "terracotta" ? "text-terracotta/80"
-    : tone === "lavender" ? "text-lavender-foreground/80"
-    : "text-sage-muted";
+    tone === "terracotta" ? "text-terracotta"
+    : tone === "lavender" ? "text-lavender-foreground"
+    : "text-sage";
   return (
-    <div className="flex items-center gap-3 mb-3">
-      <span className={`h-px w-7 bg-current opacity-40 ${toneCls}`} />
-      <p className={`font-sans text-[10.5px] font-medium tracking-[0.28em] uppercase ${toneCls}`}>{children}</p>
+    <div className="flex items-center gap-3 mb-3.5">
+      <span className={`h-px w-7 bg-current opacity-50 ${toneCls}`} />
+      <p className={`font-sans text-[11px] font-semibold tracking-[0.26em] uppercase ${toneCls}`}>{children}</p>
     </div>
   );
 };
@@ -62,7 +62,7 @@ const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; 
    ───────────────────────────────────────────────────────────────────── */
 const Week4Hero = () => (
   <section className="relative overflow-hidden">
-    <div className="relative bg-gradient-to-br from-sage-bg/70 via-parchment to-sage-bg/40 pt-24 pb-44 md:pt-32 md:pb-52">
+    <div className="relative bg-gradient-to-br from-sage-bg/70 via-parchment to-sage-bg/40 pt-20 pb-36 sm:pt-24 sm:pb-44 md:pt-32 md:pb-52">
       {/* ambient glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[820px] h-[420px] rounded-full bg-sage-light/25 blur-3xl" />
@@ -74,72 +74,72 @@ const Week4Hero = () => (
         className="pointer-events-none absolute top-20 right-0 w-[150px] lg:w-[210px] opacity-25 select-none hidden md:block" />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10 text-center">
-        <nav aria-label="breadcrumb" className="flex items-center justify-center gap-2 mb-7 font-sans text-xs font-light text-muted-foreground">
+        <nav aria-label="breadcrumb" className="flex items-center justify-center gap-2 mb-6 sm:mb-7 font-sans text-[12px] font-normal text-foreground/65">
           <Link to="/pregnancy" className="hover:text-foreground transition-colors">Pregnancy</Link>
-          <span className="text-muted-foreground/40">›</span>
+          <span className="text-foreground/30">›</span>
           <Link to="/pregnancy/first-trimester" className="hover:text-foreground transition-colors">Week by week</Link>
-          <span className="text-muted-foreground/40">›</span>
-          <span className="text-foreground/70">Week 4</span>
+          <span className="text-foreground/30">›</span>
+          <span className="text-foreground">Week 4</span>
         </nav>
 
-        <p className="font-sans text-[10.5px] font-medium tracking-[0.32em] uppercase text-sage-muted mb-5">
+        <p className="font-sans text-[11px] font-semibold tracking-[0.3em] uppercase text-sage mb-5">
           First Trimester · The very beginning
         </p>
-        <h1 className="font-serif text-[2.4rem] sm:text-5xl md:text-[3.75rem] lg:text-[4.25rem] text-foreground leading-[1.04] tracking-tight mb-4 md:mb-5">
+        <h1 className="font-serif text-[2.5rem] sm:text-5xl md:text-[3.75rem] lg:text-[4.25rem] text-foreground leading-[1.04] tracking-tight mb-4 md:mb-5">
           4 Weeks Pregnant
         </h1>
-        <p className="font-serif italic text-base sm:text-lg md:text-xl text-muted-foreground/85 max-w-xl mx-auto leading-relaxed">
+        <p className="font-serif italic text-[1.05rem] sm:text-lg md:text-xl text-foreground/75 max-w-xl mx-auto leading-relaxed">
           A pregnancy test may now be positive — even though almost everything important is still happening too quietly to feel.
         </p>
       </div>
 
       <Link to="/pregnancy/week/3" aria-label="Go to week 3"
-        className="absolute left-3 sm:left-6 md:left-12 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/85 backdrop-blur border border-border/40 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-card transition-all shadow-card-brand z-20">
+        className="absolute left-3 sm:left-6 md:left-12 top-[42%] sm:top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/85 backdrop-blur border border-border/40 flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-card transition-all shadow-card-brand z-20">
         <ChevronLeft size={18} />
       </Link>
       <Link to="/pregnancy/week/5" aria-label="Go to week 5"
-        className="absolute right-3 sm:right-6 md:right-12 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/85 backdrop-blur border border-border/40 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-card transition-all shadow-card-brand z-20">
+        className="absolute right-3 sm:right-6 md:right-12 top-[42%] sm:top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/85 backdrop-blur border border-border/40 flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-card transition-all shadow-card-brand z-20">
         <ChevronRight size={18} />
       </Link>
     </div>
 
     {/* Premium floating cluster */}
-    <div className="relative -mt-36 md:-mt-40 mb-6">
+    <div className="relative -mt-28 sm:-mt-36 md:-mt-40 mb-6">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-        <div className="flex items-end justify-center gap-4 sm:gap-10 md:gap-14">
+        <div className="flex items-end justify-center gap-5 sm:gap-10 md:gap-14">
           {/* Poppy seed — size reference */}
-          <div className="flex flex-col items-center gap-3 pb-4">
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-card border-[3px] border-sage/15 flex items-center justify-center shadow-elevated overflow-hidden">
+          <div className="flex flex-col items-center gap-3 pb-3 sm:pb-4">
+            <div className="relative w-[72px] h-[72px] sm:w-24 sm:h-24 rounded-full bg-card border-[3px] border-sage/15 flex items-center justify-center shadow-elevated overflow-hidden">
               <img src={poppyImg} alt="Poppy seed" loading="lazy" width={512} height={512}
                 className="w-full h-full object-cover" />
               <span className="absolute inset-0 rounded-full ring-1 ring-inset ring-foreground/[0.04]" />
             </div>
             <div className="text-center">
-              <p className="font-serif italic text-[12px] text-foreground/75 leading-tight">poppy seed</p>
-              <p className="font-sans text-[9.5px] tracking-[0.18em] uppercase text-muted-foreground mt-1">~2&nbsp;mm</p>
+              <p className="font-serif italic text-[12.5px] text-foreground/80 leading-tight">poppy seed</p>
+              <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-foreground/55 mt-1">~2&nbsp;mm</p>
             </div>
           </div>
 
           {/* Embryo medallion */}
           <div className="flex flex-col items-center gap-3">
-            <div className="relative w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 rounded-full bg-card border-[4px] border-sage/20 flex items-center justify-center shadow-elevated overflow-hidden">
+            <div className="relative w-40 h-40 sm:w-52 sm:h-52 md:w-60 md:h-60 rounded-full bg-card border-[4px] border-sage/20 flex items-center justify-center shadow-elevated overflow-hidden">
               <img src={embryoImg} alt="Editorial illustration of a 4-week embryo"
                 width={1024} height={1024}
                 className="w-full h-full object-cover" />
               <span className="absolute inset-0 rounded-full ring-1 ring-inset ring-foreground/[0.05]" />
             </div>
-            <p className="font-sans text-[10px] tracking-[0.22em] uppercase text-muted-foreground">Your baby this week</p>
+            <p className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-foreground/65">Your baby this week</p>
           </div>
 
           {/* Weeks to go */}
-          <div className="flex flex-col items-center gap-3 pb-4">
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-stage-pregnancy/85 to-stage-pregnancy/40 border-[3px] border-terracotta/20 flex items-center justify-center shadow-elevated">
+          <div className="flex flex-col items-center gap-3 pb-3 sm:pb-4">
+            <div className="relative w-[72px] h-[72px] sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-stage-pregnancy/85 to-stage-pregnancy/40 border-[3px] border-terracotta/25 flex items-center justify-center shadow-elevated">
               <span className="font-serif text-[1.7rem] sm:text-[1.95rem] text-foreground tracking-tight leading-none">36</span>
               <span className="absolute inset-0 rounded-full ring-1 ring-inset ring-terracotta/10" />
             </div>
             <div className="text-center">
-              <p className="font-serif italic text-[12px] text-foreground/75 leading-tight">weeks to go</p>
-              <p className="font-sans text-[9.5px] tracking-[0.18em] uppercase text-muted-foreground mt-1">approx.</p>
+              <p className="font-serif italic text-[12.5px] text-foreground/80 leading-tight">weeks to go</p>
+              <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-foreground/55 mt-1">approx.</p>
             </div>
           </div>
         </div>
@@ -172,10 +172,10 @@ const Week4MetaBar = () => (
             <Leaf size={16} className="text-sage" />
           </div>
           <div className="min-w-0">
-            <p className="font-sans text-[12.5px] text-foreground/85 leading-snug">
+            <p className="font-sans text-[13px] font-medium text-foreground leading-snug">
               ✔ Medically reviewed by Jenny Joines
             </p>
-            <p className="font-sans text-[11px] font-light text-muted-foreground/80 mt-0.5">
+            <p className="font-sans text-[11.5px] font-normal text-foreground/60 mt-0.5">
               Updated for 2026 · 8 min read · Early pregnancy
             </p>
           </div>
@@ -186,9 +186,9 @@ const Week4MetaBar = () => (
               <a key={id} href={`#${id}`}
                 className="group shrink-0 flex items-center gap-2 px-3 py-2 rounded-full hover:bg-sage-bg/60 transition-colors">
                 <span className="w-7 h-7 rounded-full bg-parchment-dark/80 border border-border/30 flex items-center justify-center group-hover:border-sage/30 transition-colors">
-                  <Icon size={12} className="text-sage-muted" />
+                  <Icon size={12} className="text-sage" />
                 </span>
-                <span className="font-sans text-[11.5px] font-medium text-foreground/70 group-hover:text-foreground whitespace-nowrap">
+                <span className="font-sans text-[12px] font-medium text-foreground/80 group-hover:text-foreground whitespace-nowrap">
                   {label}
                 </span>
               </a>
@@ -213,19 +213,19 @@ const glanceFacts = [
 const Week4AtAGlance = () => (
   <section id="at-a-glance" className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl mb-14 md:mb-20">
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-      <div className="lg:col-span-3 relative bg-gradient-to-br from-stage-pregnancy/45 via-parchment to-parchment-dark/50 rounded-3xl border border-border/40 p-8 md:p-10 overflow-hidden shadow-card-brand">
+      <div className="lg:col-span-3 relative bg-gradient-to-br from-stage-pregnancy/45 via-parchment to-parchment-dark/50 rounded-3xl border border-border/40 p-7 sm:p-8 md:p-10 overflow-hidden shadow-card-brand">
         <img src={botanicalAccent} alt="" aria-hidden="true"
           className="absolute -left-3 bottom-0 w-28 opacity-35 pointer-events-none select-none" />
         <SectionLabel tone="terracotta">At a glance</SectionLabel>
-        <h2 className="font-serif text-[1.85rem] md:text-[2.1rem] text-foreground leading-snug mb-5">
+        <h2 className="font-serif text-[1.7rem] sm:text-[1.85rem] md:text-[2.1rem] text-foreground leading-snug mb-5">
           Week 4 is small, quiet — and quietly enormous.
         </h2>
-        <p className="font-sans text-[14.5px] font-light text-foreground/80 leading-[1.85] mb-4">
+        <p className="font-sans text-[15px] text-foreground/85 leading-[1.8] mb-4">
           Implantation has likely just happened, or is happening this week. The embryo is no bigger than a poppy seed,
           but the biological scaffolding for a whole pregnancy — placenta, yolk sac, the earliest layers that become organs —
           is already being laid down.
         </p>
-        <p className="font-sans text-[14.5px] font-light text-foreground/80 leading-[1.85]">
+        <p className="font-sans text-[15px] text-foreground/85 leading-[1.8]">
           You may have just had a positive test, or be about to. Some people feel early signs. Many feel almost nothing.
           Both are entirely normal at week 4.
         </p>
@@ -236,8 +236,8 @@ const Week4AtAGlance = () => (
         <ul className="divide-y divide-border/40 -mx-1">
           {glanceFacts.map((f) => (
             <li key={f.label} className="flex items-baseline justify-between gap-4 px-1 py-3.5 first:pt-1 last:pb-1">
-              <span className="font-sans text-[11px] tracking-[0.18em] uppercase text-muted-foreground/80">{f.label}</span>
-              <span className="font-serif text-[14.5px] text-foreground text-right">{f.value}</span>
+              <span className="font-sans text-[11px] font-semibold tracking-[0.18em] uppercase text-foreground/60">{f.label}</span>
+              <span className="font-serif text-[15px] text-foreground text-right">{f.value}</span>
             </li>
           ))}
         </ul>
@@ -277,22 +277,22 @@ const Week4Biology = () => (
 
         <div className="lg:col-span-7">
           <SectionLabel>What's underway biologically</SectionLabel>
-          <h2 className="font-serif text-[2rem] md:text-[2.4rem] text-foreground leading-tight mb-5">
+          <h2 className="font-serif text-[1.85rem] sm:text-[2rem] md:text-[2.4rem] text-foreground leading-tight mb-5">
             A lot is happening — even though there is almost nothing to feel.
           </h2>
-          <p className="font-sans text-[14px] font-light text-muted-foreground leading-[1.85] mb-8 max-w-2xl">
+          <p className="font-sans text-[14.5px] text-foreground/75 leading-[1.8] mb-8 max-w-2xl">
             Week 4 is one of the most quietly important weeks of pregnancy. The embryo is microscopic, but the
             architecture for everything that follows is being put in place. This is why week 4 can feel uneventful
             and momentous at the same time.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
             {biologyPoints.map((p, i) => (
               <div key={p.title}
-                className="relative bg-card rounded-2xl border border-border/40 p-6 shadow-card-brand">
-                <span className="absolute top-5 right-5 font-serif italic text-[12px] text-sage-muted/70">0{i + 1}</span>
-                <h3 className="font-serif text-[1.1rem] text-foreground mb-2 pr-7">{p.title}</h3>
-                <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-[1.7]">{p.body}</p>
+                className="relative bg-card rounded-2xl border border-border/40 p-6 md:p-7 shadow-card-brand">
+                <span className="absolute top-5 right-5 font-serif italic text-[12px] text-sage/70">0{i + 1}</span>
+                <h3 className="font-serif text-[1.15rem] text-foreground mb-2 pr-7">{p.title}</h3>
+                <p className="font-sans text-[13.5px] text-foreground/70 leading-[1.7]">{p.body}</p>
               </div>
             ))}
           </div>
@@ -315,19 +315,19 @@ const Week4Body = () => (
   <section id="body" className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl py-16 md:py-24">
     <div className="max-w-2xl mb-10">
       <SectionLabel tone="terracotta">Your body this week</SectionLabel>
-      <h2 className="font-serif text-[2rem] md:text-[2.4rem] text-foreground leading-tight mb-4">
+      <h2 className="font-serif text-[1.85rem] sm:text-[2rem] md:text-[2.4rem] text-foreground leading-tight mb-4">
         Hormones are starting their long, steady climb.
       </h2>
-      <p className="font-sans text-[14px] font-light text-muted-foreground leading-[1.85]">
+      <p className="font-sans text-[14.5px] text-foreground/75 leading-[1.8]">
         At week 4 you may not look or feel different — but biochemically, your body has already started shifting.
         Some people feel almost nothing. Others feel a wave of new sensations within days. Both fit inside normal.
       </p>
     </div>
 
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {hormoneNotes.map(({ Icon, title, body }) => (
         <div key={title}
-          className="relative bg-card rounded-2xl border border-border/40 p-7 shadow-card-brand overflow-hidden">
+          className="relative bg-card rounded-2xl border border-border/40 p-6 md:p-7 shadow-card-brand overflow-hidden">
           <span className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-sage/30 to-transparent" />
           <div className="flex items-center gap-3 mb-4">
             <span className="w-10 h-10 rounded-full bg-sage-bg border border-sage/15 flex items-center justify-center">
@@ -335,16 +335,16 @@ const Week4Body = () => (
             </span>
             <h3 className="font-serif text-[1.2rem] text-foreground">{title}</h3>
           </div>
-          <p className="font-sans text-[13px] font-light text-muted-foreground leading-[1.75]">{body}</p>
+          <p className="font-sans text-[13.5px] text-foreground/70 leading-[1.75]">{body}</p>
         </div>
       ))}
     </div>
 
-    <div className="mt-6 bg-stage-pregnancy/35 border border-border/30 rounded-2xl p-6 md:p-7 flex flex-col md:flex-row md:items-center gap-4">
+    <div className="mt-6 bg-stage-pregnancy/35 border border-border/30 rounded-2xl p-6 md:p-7 flex flex-col sm:flex-row sm:items-center gap-4">
       <span className="w-10 h-10 rounded-full bg-card border border-border/40 flex items-center justify-center shrink-0">
         <HeartPulse size={15} className="text-terracotta" />
       </span>
-      <p className="font-sans text-[13.5px] font-light text-foreground/80 leading-[1.7]">
+      <p className="font-sans text-[14px] text-foreground/80 leading-[1.7]">
         Many week-4 symptoms overlap with PMS — sore breasts, cramping, bloating, fatigue, mood shifts. That overlap
         is one reason early pregnancy can be hard to read by feel alone.
       </p>
@@ -419,10 +419,10 @@ const Week4Symptoms = () => (
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
       <div className="max-w-2xl mb-10">
         <SectionLabel>Common symptoms</SectionLabel>
-        <h2 className="font-serif text-[2rem] md:text-[2.4rem] text-foreground leading-tight mb-4">
+        <h2 className="font-serif text-[1.85rem] sm:text-[2rem] md:text-[2.4rem] text-foreground leading-tight mb-4">
           What may show up this week — and what each one really means.
         </h2>
-        <p className="font-sans text-[14px] font-light text-muted-foreground leading-[1.85]">
+        <p className="font-sans text-[14.5px] text-foreground/75 leading-[1.8]">
           Symptoms at week 4 vary enormously. Some people feel a clear shift; others feel almost nothing. The
           intensity of your symptoms is not a measure of how the pregnancy is going.
         </p>
@@ -434,22 +434,22 @@ const Week4Symptoms = () => (
             className="group relative bg-card rounded-2xl border border-border/40 p-6 md:p-7 shadow-card-brand hover:shadow-soft transition-all duration-500">
             <div className="flex items-center gap-3 mb-4 pb-4 border-b border-border/40">
               <span className="w-10 h-10 rounded-full bg-stage-pregnancy/60 flex items-center justify-center">
-                <Icon size={15} className="text-terracotta/80" />
+                <Icon size={15} className="text-terracotta" />
               </span>
-              <h3 className="font-serif text-[1.15rem] text-foreground leading-snug">{name}</h3>
+              <h3 className="font-serif text-[1.2rem] text-foreground leading-snug">{name}</h3>
             </div>
-            <dl className="space-y-3">
+            <dl className="space-y-3.5">
               <div>
-                <dt className="font-sans text-[10px] tracking-[0.22em] uppercase text-sage-muted mb-1">What it feels like</dt>
-                <dd className="font-sans text-[13px] font-light text-foreground/80 leading-[1.7]">{feels}</dd>
+                <dt className="font-sans text-[10.5px] font-semibold tracking-[0.2em] uppercase text-sage mb-1">What it feels like</dt>
+                <dd className="font-sans text-[13.5px] text-foreground/80 leading-[1.7]">{feels}</dd>
               </div>
               <div>
-                <dt className="font-sans text-[10px] tracking-[0.22em] uppercase text-sage-muted mb-1">Why it happens</dt>
-                <dd className="font-sans text-[13px] font-light text-muted-foreground leading-[1.7]">{why}</dd>
+                <dt className="font-sans text-[10.5px] font-semibold tracking-[0.2em] uppercase text-sage mb-1">Why it happens</dt>
+                <dd className="font-sans text-[13.5px] text-foreground/75 leading-[1.7]">{why}</dd>
               </div>
               <div>
-                <dt className="font-sans text-[10px] tracking-[0.22em] uppercase text-sage-muted mb-1">Is it normal?</dt>
-                <dd className="font-sans text-[13px] font-light text-muted-foreground leading-[1.7]">{normal}</dd>
+                <dt className="font-sans text-[10.5px] font-semibold tracking-[0.2em] uppercase text-sage mb-1">Is it normal?</dt>
+                <dd className="font-sans text-[13.5px] text-foreground/75 leading-[1.7]">{normal}</dd>
               </div>
             </dl>
           </article>
@@ -458,7 +458,7 @@ const Week4Symptoms = () => (
 
       <div className="mt-8 text-center">
         <Link to="/articles/early-pregnancy-symptoms"
-          className="inline-flex items-center gap-2 font-sans text-[13px] text-sage hover:gap-3 transition-all">
+          className="inline-flex items-center gap-2 font-sans text-[13.5px] font-medium text-sage hover:gap-3 transition-all">
           Read the full guide to early pregnancy symptoms <ArrowRight size={13} />
         </Link>
       </div>
@@ -482,31 +482,31 @@ const emotionalTruths = [
 const Week4Emotional = () => (
   <section id="emotional" className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl py-16 md:py-24">
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-      <div className="lg:col-span-2 relative bg-gradient-to-br from-lavender-bg via-parchment to-lavender-bg/40 rounded-3xl border border-border/40 p-8 md:p-9 shadow-card-brand overflow-hidden">
+      <div className="lg:col-span-2 relative bg-gradient-to-br from-lavender-bg via-parchment to-lavender-bg/40 rounded-3xl border border-border/40 p-7 sm:p-8 md:p-9 shadow-card-brand overflow-hidden">
         <img src={botanicalAccent} alt="" aria-hidden="true"
           className="absolute right-0 top-0 w-24 opacity-35 pointer-events-none select-none" />
         <SectionLabel tone="lavender">Emotionally this week</SectionLabel>
-        <h2 className="font-serif text-[1.85rem] md:text-[2.1rem] text-foreground leading-snug mb-4">
+        <h2 className="font-serif text-[1.7rem] sm:text-[1.85rem] md:text-[2.1rem] text-foreground leading-snug mb-4">
           A lot, very quietly, all at once.
         </h2>
-        <p className="font-sans text-[14px] font-light text-foreground/80 leading-[1.85] mb-4">
+        <p className="font-sans text-[14.5px] text-foreground/80 leading-[1.8] mb-4">
           Week 4 is emotionally specific. The pregnancy is real on paper, but doesn't feel real in your body yet.
           That gap between knowing and feeling can be confusing, joyful, anxious or numb — sometimes all on the same day.
         </p>
-        <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-[1.75]">
+        <p className="font-sans text-[14px] text-foreground/70 leading-[1.75]">
           Whatever you're feeling, you don't need to perform any particular emotion right now.
         </p>
       </div>
 
-      <div className="lg:col-span-3 bg-card rounded-3xl border border-border/40 p-8 md:p-9 shadow-card-brand">
-        <p className="font-sans text-[10.5px] font-medium tracking-[0.25em] uppercase text-sage-muted mb-4">
+      <div className="lg:col-span-3 bg-card rounded-3xl border border-border/40 p-7 sm:p-8 md:p-9 shadow-card-brand">
+        <p className="font-sans text-[11px] font-semibold tracking-[0.24em] uppercase text-sage mb-4">
           What this week often looks like
         </p>
         <ul className="space-y-3.5">
           {emotionalTruths.map((t) => (
             <li key={t} className="flex items-start gap-3">
               <span className="mt-2 w-1.5 h-1.5 rounded-full bg-lavender shrink-0" />
-              <span className="font-serif italic text-[14.5px] text-foreground/85 leading-[1.65]">{t}</span>
+              <span className="font-serif italic text-[15px] text-foreground/85 leading-[1.65]">{t}</span>
             </li>
           ))}
         </ul>
@@ -530,17 +530,17 @@ const Week4WhatThisMeans = () => (
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
       <div className="text-center mb-10 max-w-2xl mx-auto">
         <SectionLabel>What this means</SectionLabel>
-        <h2 className="font-serif text-[2rem] md:text-[2.4rem] text-foreground leading-tight">
+        <h2 className="font-serif text-[1.85rem] sm:text-[2rem] md:text-[2.4rem] text-foreground leading-tight">
           How to read week 4 honestly.
         </h2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {meaningPoints.map((m, i) => (
           <div key={m.title}
-            className="relative bg-card rounded-2xl border border-border/40 p-7 shadow-card-brand">
-            <span className="font-serif italic text-[12px] text-sage-muted/80">0{i + 1}</span>
+            className="relative bg-card rounded-2xl border border-border/40 p-6 md:p-7 shadow-card-brand">
+            <span className="font-serif italic text-[12px] text-sage/80">0{i + 1}</span>
             <h3 className="font-serif text-[1.2rem] text-foreground leading-snug mt-1 mb-3">{m.title}</h3>
-            <p className="font-sans text-[13px] font-light text-muted-foreground leading-[1.75]">{m.body}</p>
+            <p className="font-sans text-[13.5px] text-foreground/70 leading-[1.75]">{m.body}</p>
           </div>
         ))}
       </div>
@@ -565,10 +565,10 @@ const Week4Focus = () => (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
       <div className="lg:col-span-4">
         <SectionLabel tone="terracotta">Focus this week</SectionLabel>
-        <h2 className="font-serif text-[1.95rem] md:text-[2.2rem] text-foreground leading-tight mb-4">
+        <h2 className="font-serif text-[1.8rem] sm:text-[1.95rem] md:text-[2.2rem] text-foreground leading-tight mb-4">
           The handful of things that genuinely matter at 4 weeks.
         </h2>
-        <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-[1.85]">
+        <p className="font-sans text-[14px] text-foreground/75 leading-[1.8]">
           You don't need to do much. A few small, gentle decisions now make the biggest difference.
         </p>
       </div>
@@ -576,16 +576,16 @@ const Week4Focus = () => (
         <ol className="bg-card rounded-3xl border border-border/40 shadow-card-brand divide-y divide-border/40 overflow-hidden">
           {focusList.map(({ Icon, title, note }, i) => (
             <li key={title}
-              className="group flex items-start gap-5 p-6 md:p-7 hover:bg-sage-bg/25 transition-colors">
+              className="group flex items-start gap-5 p-5 sm:p-6 md:p-7 hover:bg-sage-bg/25 transition-colors">
               <span className="w-10 h-10 rounded-full bg-stage-pregnancy/60 border border-border/40 flex items-center justify-center shrink-0">
-                <Icon size={15} className="text-terracotta/85" />
+                <Icon size={15} className="text-terracotta" />
               </span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline gap-3 mb-1.5">
-                  <span className="font-serif italic text-[12px] text-sage-muted/70">0{i + 1}</span>
-                  <h3 className="font-sans text-[14px] font-medium text-foreground leading-snug">{title}</h3>
+                  <span className="font-serif italic text-[12px] text-sage/70">0{i + 1}</span>
+                  <h3 className="font-sans text-[14.5px] font-semibold text-foreground leading-snug">{title}</h3>
                 </div>
-                <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-[1.7]">{note}</p>
+                <p className="font-sans text-[13px] text-foreground/70 leading-[1.7]">{note}</p>
               </div>
             </li>
           ))}
@@ -617,18 +617,18 @@ const Week4SeekSupport = () => (
             <AlertTriangle size={18} className="text-terracotta" />
           </span>
           <SectionLabel tone="terracotta">When to seek care</SectionLabel>
-          <h3 className="font-serif text-[1.5rem] md:text-[1.7rem] text-foreground leading-snug">
+          <h3 className="font-serif text-[1.4rem] sm:text-[1.5rem] md:text-[1.7rem] text-foreground leading-snug">
             Most early symptoms are normal. A few are worth checking quickly.
           </h3>
-          <p className="font-sans text-[13px] font-light text-muted-foreground leading-[1.75] mt-3">
+          <p className="font-sans text-[13.5px] text-foreground/70 leading-[1.75] mt-3">
             Always trust your instincts. Contact your GP, midwife or NHS 111 — and 999 in an emergency.
           </p>
         </div>
         <ul className="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3.5 self-center">
           {seekSupport.map((item) => (
             <li key={item} className="flex items-start gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-terracotta/70 mt-2 shrink-0" />
-              <span className="font-sans text-[13px] font-light text-foreground/85 leading-[1.7]">{item}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-terracotta mt-2 shrink-0" />
+              <span className="font-sans text-[13.5px] text-foreground/85 leading-[1.7]">{item}</span>
             </li>
           ))}
         </ul>
@@ -642,13 +642,13 @@ const Week4SeekSupport = () => (
    ───────────────────────────────────────────────────────────────────── */
 const Week4Quote = () => (
   <section className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pb-16 md:pb-24">
-    <div className="relative bg-stage-pregnancy/35 rounded-3xl border border-border/30 p-10 md:p-14 text-center overflow-hidden">
-      <span className="absolute left-7 top-6 font-serif text-4xl text-terracotta/35 leading-none">“</span>
-      <span className="absolute right-7 bottom-4 font-serif text-4xl text-terracotta/35 leading-none">”</span>
-      <p className="font-serif italic text-[1.3rem] md:text-[1.6rem] text-foreground/85 leading-snug max-w-3xl mx-auto">
+    <div className="relative bg-stage-pregnancy/35 rounded-3xl border border-border/30 p-8 sm:p-10 md:p-14 text-center overflow-hidden">
+      <span className="absolute left-7 top-6 font-serif text-4xl text-terracotta/40 leading-none">“</span>
+      <span className="absolute right-7 bottom-4 font-serif text-4xl text-terracotta/40 leading-none">”</span>
+      <p className="font-serif italic text-[1.2rem] sm:text-[1.35rem] md:text-[1.6rem] text-foreground/90 leading-snug max-w-3xl mx-auto">
         It's okay if it doesn't feel real yet. Small steps, deep breaths, and grace are enough for week 4.
       </p>
-      <Heart size={14} className="text-terracotta/50 mx-auto mt-5" />
+      <Heart size={14} className="text-terracotta/60 mx-auto mt-5" />
     </div>
   </section>
 );
@@ -662,53 +662,53 @@ const askChips = ["Implantation bleeding", "Spotting vs. period", "Cramping at 4
 const Week4ReflectionAsk = () => (
   <section className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pb-16 md:pb-24">
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-sage/30 p-8 md:p-9 shadow-card-brand">
+      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-sage/40 p-7 sm:p-8 md:p-9 shadow-card-brand">
         <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-sage-bg flex items-center justify-center">
+          <span className="w-9 h-9 rounded-full bg-sage-bg flex items-center justify-center shrink-0">
             <Leaf size={14} className="text-sage" />
           </span>
-          <div>
-            <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-sage-muted">A moment for reflection</p>
-            <h3 className="font-serif text-[1.35rem] text-foreground mt-0.5">What does this week feel like for you?</h3>
+          <div className="min-w-0">
+            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">A moment for reflection</p>
+            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">What does this week feel like for you?</h3>
           </div>
         </div>
         <div className="flex flex-wrap gap-2 mb-4">
           {reflectionPrompts.map((p) => (
-            <span key={p} className="font-sans text-[10.5px] font-light bg-sage-bg/70 text-foreground/75 rounded-full px-3 py-1.5 border border-sage/15">
+            <span key={p} className="font-sans text-[11.5px] font-medium bg-sage-bg/70 text-foreground/80 rounded-full px-3 py-1.5 border border-sage/20">
               {p}
             </span>
           ))}
         </div>
         <textarea rows={4} placeholder="Write your thoughts here… this is just for you."
-          className="w-full bg-parchment/80 border border-border/40 rounded-xl px-4 py-3.5 font-sans text-[13px] text-foreground placeholder:text-muted-foreground/55 resize-none focus:outline-none focus:border-sage/50 focus:ring-1 focus:ring-sage/20 transition-all leading-relaxed" />
+          className="w-full bg-parchment/80 border border-border/40 rounded-xl px-4 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 resize-none focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all leading-relaxed" />
         <Link to="/auth"
-          className="inline-flex items-center gap-2 mt-4 bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2.5 font-sans text-[12.5px] font-medium hover:bg-terracotta-hover transition-colors">
+          className="inline-flex items-center gap-2 mt-4 bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-medium hover:bg-terracotta-hover transition-colors">
           Save reflection to your journal <ArrowRight size={12} />
         </Link>
       </div>
 
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-lavender/40 p-8 md:p-9 shadow-card-brand">
+      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-lavender/50 p-7 sm:p-8 md:p-9 shadow-card-brand">
         <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-lavender-bg flex items-center justify-center">
+          <span className="w-9 h-9 rounded-full bg-lavender-bg flex items-center justify-center shrink-0">
             <MessageCircle size={14} className="text-lavender-foreground" />
           </span>
-          <div>
-            <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-sage-muted">Ask about week 4</p>
-            <h3 className="font-serif text-[1.35rem] text-foreground mt-0.5">A question on your mind?</h3>
+          <div className="min-w-0">
+            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">Ask about week 4</p>
+            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">A question on your mind?</h3>
           </div>
         </div>
-        <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-relaxed mb-4">
+        <p className="font-sans text-[13px] text-foreground/70 leading-relaxed mb-4">
           Get a calm, evidence-led answer tailored to where you are right now.
         </p>
         <input type="text" placeholder="e.g. Is light pink spotting normal at 4 weeks?"
-          className="w-full bg-parchment/80 border border-border/40 rounded-full px-5 py-3.5 font-sans text-[13px] text-foreground placeholder:text-muted-foreground/55 focus:outline-none focus:border-sage/50 focus:ring-1 focus:ring-sage/20 transition-all" />
-        <p className="font-sans text-[10px] tracking-[0.22em] uppercase text-muted-foreground/75 mt-5 mb-2.5">
+          className="w-full bg-parchment/80 border border-border/40 rounded-full px-5 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all" />
+        <p className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-foreground/55 mt-5 mb-2.5">
           Popular at this stage
         </p>
         <div className="flex flex-wrap gap-2">
           {askChips.map((c) => (
             <Link key={c} to="/ask"
-              className="font-sans text-[11.5px] text-foreground/75 bg-parchment-dark/50 border border-border/40 hover:border-sage/40 hover:text-foreground px-3.5 py-1.5 rounded-full transition-colors">
+              className="font-sans text-[12px] font-medium text-foreground/80 bg-parchment-dark/60 border border-border/40 hover:border-sage/50 hover:text-foreground px-3.5 py-1.5 rounded-full transition-colors">
               {c}
             </Link>
           ))}
@@ -730,12 +730,12 @@ const Week4Journal = () => (
             loading="lazy" width={1200} height={900}
             className="w-full h-full object-cover object-[50%_45%]" />
         </div>
-        <div className="p-9 md:p-12 flex flex-col justify-center">
+        <div className="p-7 sm:p-9 md:p-12 flex flex-col justify-center">
           <SectionLabel>The Start of You journal</SectionLabel>
-          <h3 className="font-serif text-[1.8rem] md:text-[2.1rem] text-foreground leading-tight mb-4">
+          <h3 className="font-serif text-[1.65rem] sm:text-[1.8rem] md:text-[2.1rem] text-foreground leading-tight mb-4">
             Hold on to how week 4 actually felt.
           </h3>
-          <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-[1.85] mb-6">
+          <p className="font-sans text-[14px] text-foreground/75 leading-[1.8] mb-6">
             Week 4 is the kind of week most pregnancy advice rushes past. The Start of You journal gives it space —
             with prompts, room for the test, and the quiet first thoughts you may want to keep.
           </p>
@@ -747,12 +747,12 @@ const Week4Journal = () => (
             ].map((line) => (
               <li key={line} className="flex items-start gap-2.5">
                 <Check size={13} className="text-sage mt-1 shrink-0" />
-                <span className="font-sans text-[13px] font-light text-foreground/80">{line}</span>
+                <span className="font-sans text-[13.5px] text-foreground/80">{line}</span>
               </li>
             ))}
           </ul>
           <Link to="/product"
-            className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
+            className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
             Discover the journal <ArrowRight size={13} />
           </Link>
         </div>
@@ -786,17 +786,17 @@ const related = [
 ];
 
 const Week4Related = () => (
-  <section id="guidance" className="bg-parchment py-20 md:py-24">
+  <section id="guidance" className="bg-parchment py-16 md:py-24">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
         <div className="max-w-xl">
           <SectionLabel>Read next, because of week 4</SectionLabel>
-          <h2 className="font-serif text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">
+          <h2 className="font-serif text-[1.8rem] sm:text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">
             Curated guidance for what's likely on your mind right now.
           </h2>
         </div>
         <Link to="/guidance"
-          className="inline-flex items-center gap-1.5 font-sans text-[13px] text-sage hover:gap-2.5 transition-all whitespace-nowrap">
+          className="inline-flex items-center gap-1.5 font-sans text-[13.5px] font-medium text-sage hover:gap-2.5 transition-all whitespace-nowrap">
           Browse all guidance <ArrowRight size={12} />
         </Link>
       </div>
@@ -810,16 +810,16 @@ const Week4Related = () => (
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
             </div>
             <div className="p-6 flex flex-col flex-1">
-              <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-terracotta/85 mb-3">
+              <span className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-terracotta mb-3">
                 {a.tag}
               </span>
-              <h3 className="font-serif text-[1.1rem] text-foreground leading-snug mb-3 group-hover:text-sage transition-colors">
+              <h3 className="font-serif text-[1.15rem] text-foreground leading-snug mb-3 group-hover:text-sage transition-colors">
                 {a.title}
               </h3>
-              <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-[1.7] flex-1 mb-4">
+              <p className="font-sans text-[13px] text-foreground/70 leading-[1.7] flex-1 mb-4">
                 {a.desc}
               </p>
-              <span className="inline-flex items-center gap-1.5 font-sans text-[12px] text-sage group-hover:gap-2.5 transition-all">
+              <span className="inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium text-sage group-hover:gap-2.5 transition-all">
                 Read guide <ArrowRight size={11} />
               </span>
             </div>
@@ -855,10 +855,10 @@ const faqs = [
 const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; defaultOpen?: boolean }) => {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border-b border-border/40">
+    <div className="border-b border-border/40 last:border-b-0">
       <button onClick={() => setOpen(!open)}
         className="w-full flex items-start gap-4 py-5 text-left group">
-        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-sage transition-colors">
+        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-sage transition-colors leading-snug">
           {faq.q}
         </span>
         <span className="w-7 h-7 rounded-full bg-sage-bg flex items-center justify-center text-sage shrink-0 mt-1">
@@ -866,7 +866,7 @@ const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; d
         </span>
       </button>
       {open && (
-        <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-[1.85] pb-6 pr-12">
+        <p className="font-sans text-[14px] text-foreground/75 leading-[1.85] pb-6 pr-12">
           {faq.a}
         </p>
       )}
@@ -879,7 +879,7 @@ const Week4FAQ = () => (
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
       <div className="mb-10 text-center">
         <SectionLabel>Common questions</SectionLabel>
-        <h2 className="font-serif text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">
+        <h2 className="font-serif text-[1.85rem] sm:text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">
           Common questions at 4 weeks
         </h2>
       </div>
@@ -900,22 +900,22 @@ const Week4FAQ = () => (
 const Week4Next = () => (
   <section className="bg-parchment py-16 md:py-24">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
-      <div className="bg-gradient-to-br from-sage-bg via-parchment to-stage-pregnancy/30 rounded-3xl border border-border/30 p-10 md:p-14 text-center shadow-card-brand">
+      <div className="bg-gradient-to-br from-sage-bg via-parchment to-stage-pregnancy/30 rounded-3xl border border-border/30 p-8 sm:p-10 md:p-14 text-center shadow-card-brand">
         <SectionLabel>Up next</SectionLabel>
-        <h2 className="font-serif text-[1.95rem] md:text-[2.5rem] text-foreground leading-tight mb-3">
+        <h2 className="font-serif text-[1.85rem] sm:text-[1.95rem] md:text-[2.5rem] text-foreground leading-tight mb-3">
           Ready for week 5?
         </h2>
-        <p className="font-sans text-[14px] font-light text-muted-foreground max-w-lg mx-auto mb-8 leading-[1.85]">
+        <p className="font-sans text-[14.5px] text-foreground/75 max-w-lg mx-auto mb-8 leading-[1.8]">
           Hormones rise more sharply from week 5. The first signs of nausea, stronger fatigue and breast tenderness
           often begin to appear — and the pregnancy starts to feel a little more present.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 max-w-sm sm:max-w-none mx-auto">
           <Link to="/pregnancy/week/5"
-            className="inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors">
+            className="inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[14px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors">
             Continue to week 5 <ArrowRight size={14} />
           </Link>
           <Link to="/pregnancy/first-trimester"
-            className="inline-flex items-center justify-center gap-2 border border-foreground/20 text-foreground rounded-pill px-7 py-3.5 font-sans text-[13.5px] font-light hover:bg-parchment-dark transition-colors">
+            className="inline-flex items-center justify-center gap-2 border border-foreground/25 text-foreground rounded-pill px-7 py-3.5 font-sans text-[14px] font-medium hover:bg-parchment-dark transition-colors">
             Back to First Trimester
           </Link>
         </div>

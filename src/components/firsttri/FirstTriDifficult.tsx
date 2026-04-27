@@ -28,7 +28,7 @@ const FirstTriDifficult = ({ title, intro, items, closing }: Props) => {
           <h2 className="font-serif text-[2rem] sm:text-[2.25rem] md:text-[2.6rem] text-foreground leading-[1.1] mb-4">
             {title}
           </h2>
-          <p className="font-sans text-[15px] sm:text-[16px] font-light text-muted-foreground leading-relaxed">
+          <p className="font-sans text-[15px] sm:text-[16px] text-foreground/72 leading-relaxed">
             {intro}
           </p>
         </div>
@@ -48,7 +48,7 @@ const FirstTriDifficult = ({ title, intro, items, closing }: Props) => {
                 <h3 className="font-serif text-[1.15rem] text-foreground leading-snug">
                   {item.label}
                 </h3>
-                <p className="font-sans text-[14.5px] font-light text-muted-foreground leading-relaxed">
+                <p className="font-sans text-[14.5px] text-foreground/72 leading-relaxed">
                   {item.body}
                 </p>
               </div>

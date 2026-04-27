@@ -70,7 +70,7 @@ const FirstTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: P
         </h1>
 
         {/* Intro */}
-        <p className="font-sans text-[15.5px] sm:text-[17px] md:text-[18px] font-light text-muted-foreground leading-[1.7] mb-9 sm:mb-12 max-w-[34ch] sm:max-w-2xl mx-auto animate-fade-up [animation-delay:0.1s]">
+        <p className="font-sans text-[15.5px] sm:text-[17px] md:text-[18px] text-foreground/70 leading-[1.7] mb-9 sm:mb-12 max-w-[34ch] sm:max-w-2xl mx-auto animate-fade-up [animation-delay:0.1s]">
           {subtitle}
         </p>
 
@@ -89,7 +89,7 @@ const FirstTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: P
                 style={{ left: `${pct}%` }}
               >
                 <div className="w-3 h-3 rounded-full border border-sage/60 bg-card" />
-                <span className="font-sans text-[10px] font-light tracking-[0.15em] uppercase text-muted-foreground/70 whitespace-nowrap mt-2">
+                <span className="font-sans text-[10px] font-medium tracking-[0.18em] uppercase text-foreground/55 whitespace-nowrap mt-2">
                   Wk {week}
                 </span>
               </div>

@@ -34,7 +34,7 @@ const FirstTriSupportStrip = () => {
                 loading="lazy"
                 width={800}
                 height={600}
-                className="w-full h-[280px] sm:h-[340px] md:h-[400px] object-cover"
+                className="w-full h-[280px] sm:h-[340px] md:h-[400px] object-cover object-[35%_30%]"
               />
             </div>
           </div>
@@ -45,7 +45,7 @@ const FirstTriSupportStrip = () => {
             <h2 className="font-serif text-[1.85rem] sm:text-[2.1rem] md:text-[2.4rem] text-foreground leading-[1.1] mb-4">
               Still have questions? We&rsquo;re here for you.
             </h2>
-            <p className="font-sans text-[15px] sm:text-[16px] font-light text-muted-foreground leading-relaxed mb-7 max-w-lg">
+            <p className="font-sans text-[15px] sm:text-[16px] text-foreground/72 leading-relaxed mb-7 max-w-lg">
               Ask anything about early pregnancy and get gentle, grounded
               guidance shaped around the stage you&rsquo;re actually in.
             </p>
@@ -76,7 +76,7 @@ const FirstTriSupportStrip = () => {
                   <p className="font-sans text-[13px] font-medium text-foreground">
                     {title}
                   </p>
-                  <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed">
+                  <p className="font-sans text-[13px] text-foreground/70 leading-relaxed">
                     {body}
                   </p>
                 </div>

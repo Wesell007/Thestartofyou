@@ -32,7 +32,7 @@ const FirstTriSupport = ({ normalItems, seekSupport, disclaimer }: Props) => {
           <h2 className="font-serif text-[2rem] sm:text-[2.25rem] md:text-[2.6rem] text-foreground leading-[1.1] mb-4">
             What&rsquo;s normal, and when to seek support
           </h2>
-          <p className="font-sans text-[15px] sm:text-[16px] font-light text-muted-foreground leading-relaxed">
+          <p className="font-sans text-[15px] sm:text-[16px] text-foreground/72 leading-relaxed">
             One of the most common questions in pregnancy. Here&rsquo;s what tends
             to be part of this stage, and what&rsquo;s worth checking on.
           </p>
@@ -53,7 +53,7 @@ const FirstTriSupport = ({ normalItems, seekSupport, disclaimer }: Props) => {
               {normalItems.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <span className="mt-2 w-1.5 h-1.5 rounded-full bg-sage shrink-0" />
-                  <span className="font-sans text-[15px] font-light text-foreground leading-relaxed">
+                  <span className="font-sans text-[15px] text-foreground/85 leading-relaxed">
                     {item}
                   </span>
                 </li>
@@ -79,7 +79,7 @@ const FirstTriSupport = ({ normalItems, seekSupport, disclaimer }: Props) => {
               {seekSupport.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <span className="mt-2 w-1.5 h-1.5 rounded-full bg-terracotta shrink-0" />
-                  <span className="font-sans text-[15px] font-light text-foreground leading-relaxed">
+                  <span className="font-sans text-[15px] text-foreground/85 leading-relaxed">
                     {item}
                   </span>
                 </li>
@@ -92,7 +92,7 @@ const FirstTriSupport = ({ normalItems, seekSupport, disclaimer }: Props) => {
           </article>
         </div>
 
-        <p className="mt-8 font-sans text-[12px] font-light text-muted-foreground/70 text-center max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-8 font-sans text-[12.5px] text-foreground/60 text-center max-w-2xl mx-auto leading-relaxed">
           {disclaimer}
         </p>
       </div>

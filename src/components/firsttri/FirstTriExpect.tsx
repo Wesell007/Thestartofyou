@@ -9,7 +9,7 @@ interface Props {
 const iconByLabel: Record<string, { Icon: LucideIcon; tint: string; ring: string }> = {
   body: { Icon: Heart, tint: "bg-terracotta/10 text-terracotta", ring: "ring-terracotta/20" },
   baby: { Icon: Sparkles, tint: "bg-sage-bg text-sage", ring: "ring-sage/20" },
-  emotional: { Icon: Brain, tint: "bg-lavender-section text-foreground/70", ring: "ring-foreground/10" },
+  emotional: { Icon: Brain, tint: "bg-lavender/20 text-lavender-foreground", ring: "ring-lavender/30" },
   uncertainty: { Icon: Hourglass, tint: "bg-parchment-dark text-foreground/70", ring: "ring-foreground/10" },
 };
 
@@ -23,7 +23,7 @@ const FirstTriExpect = ({ cards }: Props) => {
           <h2 className="font-serif text-[2rem] sm:text-[2.25rem] md:text-[2.6rem] text-foreground leading-[1.1] mb-4">
             What to expect during the first trimester
           </h2>
-          <p className="font-sans text-[15px] sm:text-[16px] font-light text-muted-foreground leading-relaxed">
+          <p className="font-sans text-[15px] sm:text-[16px] text-foreground/70 leading-relaxed">
             Across your body, your emotions, and the space between.
           </p>
         </div>
@@ -50,7 +50,7 @@ const FirstTriExpect = ({ cards }: Props) => {
                   {card.points.slice(0, 4).map((pt, i) => (
                     <li key={i} className="flex items-start gap-2.5">
                       <span className="mt-2 w-1 h-1 rounded-full bg-foreground/30 shrink-0" />
-                      <span className="font-sans text-[14px] font-light text-foreground/85 leading-relaxed">
+                      <span className="font-sans text-[14px] text-foreground/85 leading-relaxed">
                         {pt}
                       </span>
                     </li>

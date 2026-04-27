@@ -45,7 +45,7 @@ const FirstTriFocus = ({ closing }: Props) => {
             <h2 className="font-serif text-[2rem] sm:text-[2.25rem] md:text-[2.5rem] text-foreground leading-[1.1] mb-4">
               What to focus on during this stage
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed">
+            <p className="font-sans text-[15px] text-foreground/72 leading-relaxed">
               A short list of priorities. Nothing to optimise. Just the things
               worth gently centring this trimester.
             </p>
@@ -64,7 +64,7 @@ const FirstTriFocus = ({ closing }: Props) => {
                 <h3 className="font-serif text-[1.05rem] text-foreground leading-snug">
                   {title}
                 </h3>
-                <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">
+                <p className="font-sans text-[14px] text-foreground/72 leading-relaxed">
                   {body}
                 </p>
               </div>

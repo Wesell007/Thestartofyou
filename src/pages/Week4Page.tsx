@@ -530,17 +530,17 @@ const Week4WhatThisMeans = () => (
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
       <div className="text-center mb-10 max-w-2xl mx-auto">
         <SectionLabel>What this means</SectionLabel>
-        <h2 className="font-serif text-[2rem] md:text-[2.4rem] text-foreground leading-tight">
+        <h2 className="font-serif text-[1.85rem] sm:text-[2rem] md:text-[2.4rem] text-foreground leading-tight">
           How to read week 4 honestly.
         </h2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {meaningPoints.map((m, i) => (
           <div key={m.title}
-            className="relative bg-card rounded-2xl border border-border/40 p-7 shadow-card-brand">
-            <span className="font-serif italic text-[12px] text-sage-muted/80">0{i + 1}</span>
+            className="relative bg-card rounded-2xl border border-border/40 p-6 md:p-7 shadow-card-brand">
+            <span className="font-serif italic text-[12px] text-sage/80">0{i + 1}</span>
             <h3 className="font-serif text-[1.2rem] text-foreground leading-snug mt-1 mb-3">{m.title}</h3>
-            <p className="font-sans text-[13px] font-light text-muted-foreground leading-[1.75]">{m.body}</p>
+            <p className="font-sans text-[13.5px] text-foreground/70 leading-[1.75]">{m.body}</p>
           </div>
         ))}
       </div>
@@ -565,10 +565,10 @@ const Week4Focus = () => (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
       <div className="lg:col-span-4">
         <SectionLabel tone="terracotta">Focus this week</SectionLabel>
-        <h2 className="font-serif text-[1.95rem] md:text-[2.2rem] text-foreground leading-tight mb-4">
+        <h2 className="font-serif text-[1.8rem] sm:text-[1.95rem] md:text-[2.2rem] text-foreground leading-tight mb-4">
           The handful of things that genuinely matter at 4 weeks.
         </h2>
-        <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-[1.85]">
+        <p className="font-sans text-[14px] text-foreground/75 leading-[1.8]">
           You don't need to do much. A few small, gentle decisions now make the biggest difference.
         </p>
       </div>
@@ -576,16 +576,16 @@ const Week4Focus = () => (
         <ol className="bg-card rounded-3xl border border-border/40 shadow-card-brand divide-y divide-border/40 overflow-hidden">
           {focusList.map(({ Icon, title, note }, i) => (
             <li key={title}
-              className="group flex items-start gap-5 p-6 md:p-7 hover:bg-sage-bg/25 transition-colors">
+              className="group flex items-start gap-5 p-5 sm:p-6 md:p-7 hover:bg-sage-bg/25 transition-colors">
               <span className="w-10 h-10 rounded-full bg-stage-pregnancy/60 border border-border/40 flex items-center justify-center shrink-0">
-                <Icon size={15} className="text-terracotta/85" />
+                <Icon size={15} className="text-terracotta" />
               </span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline gap-3 mb-1.5">
-                  <span className="font-serif italic text-[12px] text-sage-muted/70">0{i + 1}</span>
-                  <h3 className="font-sans text-[14px] font-medium text-foreground leading-snug">{title}</h3>
+                  <span className="font-serif italic text-[12px] text-sage/70">0{i + 1}</span>
+                  <h3 className="font-sans text-[14.5px] font-semibold text-foreground leading-snug">{title}</h3>
                 </div>
-                <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-[1.7]">{note}</p>
+                <p className="font-sans text-[13px] text-foreground/70 leading-[1.7]">{note}</p>
               </div>
             </li>
           ))}

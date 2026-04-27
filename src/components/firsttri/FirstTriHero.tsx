@@ -1,0 +1,122 @@
+import { Link } from "react-router-dom";
+import { Calendar, ArrowDown, ChevronRight } from "lucide-react";
+import botanicalTr from "@/assets/botanical-branch-tr.png";
+import botanicalBl from "@/assets/botanical-branch-bl.png";
+
+interface Props {
+  label: string;
+  range: string;
+  tagline: string;
+  subtitle: string;
+  weekStart: number;
+  weekEnd: number;
+}
+
+const FirstTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: Props) => {
+  const milestones = [
+    weekStart,
+    Math.round(weekStart + (weekEnd - weekStart) * 0.27),
+    Math.round(weekStart + (weekEnd - weekStart) * 0.6),
+    weekEnd,
+  ];
+
+  return (
+    <section className="relative bg-parchment overflow-hidden pt-28 pb-20 md:pt-36 md:pb-24">
+      {/* Soft radial glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[720px] h-[460px] rounded-full bg-sage-bg/30 blur-3xl" />
+      </div>
+
+      {/* Botanical accents — left and right of hero */}
+      <img
+        src={botanicalBl}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute top-16 left-0 w-[140px] md:w-[200px] opacity-25 select-none hidden md:block"
+      />
+      <img
+        src={botanicalTr}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute top-16 right-0 w-[140px] md:w-[200px] opacity-25 select-none hidden md:block"
+      />
+
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10 text-center">
+        {/* Breadcrumb */}
+        <nav
+          className="flex items-center justify-center gap-2 mb-7"
+          aria-label="breadcrumb"
+        >
+          <Link
+            to="/pregnancy"
+            className="font-sans text-xs font-light text-muted-foreground hover:text-foreground transition-colors tracking-wide"
+          >
+            Pregnancy
+          </Link>
+          <ChevronRight size={12} className="text-muted-foreground/40" />
+          <span className="font-sans text-xs font-light text-sage tracking-wide">
+            {label}
+          </span>
+        </nav>
+
+        {/* Eyebrow */}
+        <p className="font-sans text-[11px] font-medium tracking-[0.28em] uppercase text-sage-muted mb-5">
+          {range} · {tagline}
+        </p>
+
+        {/* Title */}
+        <h1 className="font-serif text-[2.5rem] sm:text-[3.5rem] md:text-[4.25rem] text-foreground leading-[1.04] mb-6 animate-fade-up">
+          {label}
+        </h1>
+
+        {/* Intro */}
+        <p className="font-sans text-[16px] sm:text-[17px] md:text-[18px] font-light text-muted-foreground leading-[1.7] mb-12 max-w-2xl mx-auto animate-fade-up [animation-delay:0.1s]">
+          {subtitle}
+        </p>
+
+        {/* Trimester timeline */}
+        <div
+          className="relative h-12 max-w-xl mx-auto mb-12 animate-fade-up [animation-delay:0.15s]"
+          aria-hidden="true"
+        >
+          <div className="absolute top-1/2 left-0 right-0 h-px bg-sage/30 -translate-y-1/2" />
+          {milestones.map((week) => {
+            const pct = ((week - weekStart) / (weekEnd - weekStart)) * 100;
+            return (
+              <div
+                key={week}
+                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
+                style={{ left: `${pct}%` }}
+              >
+                <div className="w-3 h-3 rounded-full border border-sage/60 bg-card" />
+                <span className="font-sans text-[10px] font-light tracking-[0.15em] uppercase text-muted-foreground/70 whitespace-nowrap mt-2">
+                  Wk {week}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 animate-fade-up [animation-delay:0.2s]">
+          <Link
+            to="/calculators/due-date"
+            className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
+          >
+            <Calendar size={15} />
+            Calculate your due date
+          </Link>
+          <a
+            href="#week-by-week"
+            className="flex items-center gap-2 border border-foreground/20 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all"
+          >
+            <ArrowDown size={15} />
+            Jump to week-by-week
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default FirstTriHero;

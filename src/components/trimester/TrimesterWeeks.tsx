@@ -26,8 +26,8 @@ const TrimesterWeeks = ({ data, bg = "bg-parchment-dark" }: Props) => {
           <p className="stage-label mb-3">
             Continue · Week by week
           </p>
-          <h2 className="font-serif text-[1.75rem] sm:text-3xl md:text-[2.75rem] text-foreground mb-3 leading-tight">
-            From the stage to the week you're in
+          <h2 className="font-serif text-[1.75rem] sm:text-3xl md:text-[2.5rem] text-foreground mb-3 leading-tight">
+            From this stage to the week you're in
           </h2>
           <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             {data.weekBridgeIntro ?? `${data.range}, each week builds on the last.`}
@@ -66,12 +66,19 @@ const TrimesterWeeks = ({ data, bg = "bg-parchment-dark" }: Props) => {
         </div>
 
         {/* Back to full grid */}
-        <div className="mt-8 text-center">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
           <Link
             to="/pregnancy#week-by-week"
             className="font-sans text-sm font-light text-sage hover:text-sage-muted transition-colors underline underline-offset-4"
           >
             View all weeks →
+          </Link>
+          <span className="hidden sm:inline text-muted-foreground/30">·</span>
+          <Link
+            to="/ask"
+            className="font-sans text-sm font-light text-muted-foreground hover:text-sage transition-colors"
+          >
+            Or ask a question about weeks {data.weekStart}–{data.weekEnd}
           </Link>
         </div>
       </div>

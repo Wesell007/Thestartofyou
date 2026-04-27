@@ -9,14 +9,14 @@ interface Props {
 }
 
 const defaultItems: OnThisPageItem[] = [
-  { id: "about", label: "What this stage is" },
+  { id: "about", label: "What it is" },
   { id: "expect", label: "What to expect" },
-  { id: "big-changes", label: "The big changes" },
-  { id: "difficulties", label: "What can feel hard" },
-  { id: "normal", label: "What's normal" },
-  { id: "focus", label: "What to focus on" },
-  { id: "week-by-week", label: "Week by week" },
-  { id: "questions", label: "Common questions" },
+  { id: "big-changes", label: "Big changes" },
+  { id: "difficulties", label: "Difficult feelings" },
+  { id: "normal", label: "Support" },
+  { id: "focus", label: "Focus areas" },
+  { id: "week-by-week", label: "Week guide" },
+  { id: "questions", label: "FAQs" },
 ];
 
 const TrimesterOnThisPage = ({ items = defaultItems, bg = "bg-parchment" }: Props) => {

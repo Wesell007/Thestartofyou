@@ -24,10 +24,10 @@ const TrimesterWeeks = ({ data, bg = "bg-parchment-dark" }: Props) => {
         {/* Header */}
         <div className="text-center mb-10 md:mb-14">
           <p className="stage-label mb-3">
-            Week by Week
+            Continue · Week by week
           </p>
           <h2 className="font-serif text-[1.75rem] sm:text-3xl md:text-[2.75rem] text-foreground mb-3 leading-tight">
-            Follow your journey week by week
+            From the stage to the week you're in
           </h2>
           <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             {data.weekBridgeIntro ?? `${data.range}, each week builds on the last.`}

@@ -62,7 +62,7 @@ const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; 
    ───────────────────────────────────────────────────────────────────── */
 const Week4Hero = () => (
   <section className="relative overflow-hidden">
-    <div className="relative bg-gradient-to-br from-sage-bg/70 via-parchment to-sage-bg/40 pt-24 pb-44 md:pt-32 md:pb-52">
+    <div className="relative bg-gradient-to-br from-sage-bg/70 via-parchment to-sage-bg/40 pt-20 pb-36 sm:pt-24 sm:pb-44 md:pt-32 md:pb-52">
       {/* ambient glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[820px] h-[420px] rounded-full bg-sage-light/25 blur-3xl" />
@@ -74,72 +74,72 @@ const Week4Hero = () => (
         className="pointer-events-none absolute top-20 right-0 w-[150px] lg:w-[210px] opacity-25 select-none hidden md:block" />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10 text-center">
-        <nav aria-label="breadcrumb" className="flex items-center justify-center gap-2 mb-7 font-sans text-xs font-light text-muted-foreground">
+        <nav aria-label="breadcrumb" className="flex items-center justify-center gap-2 mb-6 sm:mb-7 font-sans text-[12px] font-normal text-foreground/65">
           <Link to="/pregnancy" className="hover:text-foreground transition-colors">Pregnancy</Link>
-          <span className="text-muted-foreground/40">›</span>
+          <span className="text-foreground/30">›</span>
           <Link to="/pregnancy/first-trimester" className="hover:text-foreground transition-colors">Week by week</Link>
-          <span className="text-muted-foreground/40">›</span>
-          <span className="text-foreground/70">Week 4</span>
+          <span className="text-foreground/30">›</span>
+          <span className="text-foreground">Week 4</span>
         </nav>
 
-        <p className="font-sans text-[10.5px] font-medium tracking-[0.32em] uppercase text-sage-muted mb-5">
+        <p className="font-sans text-[11px] font-semibold tracking-[0.3em] uppercase text-sage mb-5">
           First Trimester · The very beginning
         </p>
-        <h1 className="font-serif text-[2.4rem] sm:text-5xl md:text-[3.75rem] lg:text-[4.25rem] text-foreground leading-[1.04] tracking-tight mb-4 md:mb-5">
+        <h1 className="font-serif text-[2.5rem] sm:text-5xl md:text-[3.75rem] lg:text-[4.25rem] text-foreground leading-[1.04] tracking-tight mb-4 md:mb-5">
           4 Weeks Pregnant
         </h1>
-        <p className="font-serif italic text-base sm:text-lg md:text-xl text-muted-foreground/85 max-w-xl mx-auto leading-relaxed">
+        <p className="font-serif italic text-[1.05rem] sm:text-lg md:text-xl text-foreground/75 max-w-xl mx-auto leading-relaxed">
           A pregnancy test may now be positive — even though almost everything important is still happening too quietly to feel.
         </p>
       </div>
 
       <Link to="/pregnancy/week/3" aria-label="Go to week 3"
-        className="absolute left-3 sm:left-6 md:left-12 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/85 backdrop-blur border border-border/40 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-card transition-all shadow-card-brand z-20">
+        className="absolute left-3 sm:left-6 md:left-12 top-[42%] sm:top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/85 backdrop-blur border border-border/40 flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-card transition-all shadow-card-brand z-20">
         <ChevronLeft size={18} />
       </Link>
       <Link to="/pregnancy/week/5" aria-label="Go to week 5"
-        className="absolute right-3 sm:right-6 md:right-12 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/85 backdrop-blur border border-border/40 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-card transition-all shadow-card-brand z-20">
+        className="absolute right-3 sm:right-6 md:right-12 top-[42%] sm:top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/85 backdrop-blur border border-border/40 flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-card transition-all shadow-card-brand z-20">
         <ChevronRight size={18} />
       </Link>
     </div>
 
     {/* Premium floating cluster */}
-    <div className="relative -mt-36 md:-mt-40 mb-6">
+    <div className="relative -mt-28 sm:-mt-36 md:-mt-40 mb-6">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-        <div className="flex items-end justify-center gap-4 sm:gap-10 md:gap-14">
+        <div className="flex items-end justify-center gap-5 sm:gap-10 md:gap-14">
           {/* Poppy seed — size reference */}
-          <div className="flex flex-col items-center gap-3 pb-4">
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-card border-[3px] border-sage/15 flex items-center justify-center shadow-elevated overflow-hidden">
+          <div className="flex flex-col items-center gap-3 pb-3 sm:pb-4">
+            <div className="relative w-[72px] h-[72px] sm:w-24 sm:h-24 rounded-full bg-card border-[3px] border-sage/15 flex items-center justify-center shadow-elevated overflow-hidden">
               <img src={poppyImg} alt="Poppy seed" loading="lazy" width={512} height={512}
                 className="w-full h-full object-cover" />
               <span className="absolute inset-0 rounded-full ring-1 ring-inset ring-foreground/[0.04]" />
             </div>
             <div className="text-center">
-              <p className="font-serif italic text-[12px] text-foreground/75 leading-tight">poppy seed</p>
-              <p className="font-sans text-[9.5px] tracking-[0.18em] uppercase text-muted-foreground mt-1">~2&nbsp;mm</p>
+              <p className="font-serif italic text-[12.5px] text-foreground/80 leading-tight">poppy seed</p>
+              <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-foreground/55 mt-1">~2&nbsp;mm</p>
             </div>
           </div>
 
           {/* Embryo medallion */}
           <div className="flex flex-col items-center gap-3">
-            <div className="relative w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 rounded-full bg-card border-[4px] border-sage/20 flex items-center justify-center shadow-elevated overflow-hidden">
+            <div className="relative w-40 h-40 sm:w-52 sm:h-52 md:w-60 md:h-60 rounded-full bg-card border-[4px] border-sage/20 flex items-center justify-center shadow-elevated overflow-hidden">
               <img src={embryoImg} alt="Editorial illustration of a 4-week embryo"
                 width={1024} height={1024}
                 className="w-full h-full object-cover" />
               <span className="absolute inset-0 rounded-full ring-1 ring-inset ring-foreground/[0.05]" />
             </div>
-            <p className="font-sans text-[10px] tracking-[0.22em] uppercase text-muted-foreground">Your baby this week</p>
+            <p className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-foreground/65">Your baby this week</p>
           </div>
 
           {/* Weeks to go */}
-          <div className="flex flex-col items-center gap-3 pb-4">
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-stage-pregnancy/85 to-stage-pregnancy/40 border-[3px] border-terracotta/20 flex items-center justify-center shadow-elevated">
+          <div className="flex flex-col items-center gap-3 pb-3 sm:pb-4">
+            <div className="relative w-[72px] h-[72px] sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-stage-pregnancy/85 to-stage-pregnancy/40 border-[3px] border-terracotta/25 flex items-center justify-center shadow-elevated">
               <span className="font-serif text-[1.7rem] sm:text-[1.95rem] text-foreground tracking-tight leading-none">36</span>
               <span className="absolute inset-0 rounded-full ring-1 ring-inset ring-terracotta/10" />
             </div>
             <div className="text-center">
-              <p className="font-serif italic text-[12px] text-foreground/75 leading-tight">weeks to go</p>
-              <p className="font-sans text-[9.5px] tracking-[0.18em] uppercase text-muted-foreground mt-1">approx.</p>
+              <p className="font-serif italic text-[12.5px] text-foreground/80 leading-tight">weeks to go</p>
+              <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-foreground/55 mt-1">approx.</p>
             </div>
           </div>
         </div>

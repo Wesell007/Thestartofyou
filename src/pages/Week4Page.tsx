@@ -617,18 +617,18 @@ const Week4SeekSupport = () => (
             <AlertTriangle size={18} className="text-terracotta" />
           </span>
           <SectionLabel tone="terracotta">When to seek care</SectionLabel>
-          <h3 className="font-serif text-[1.5rem] md:text-[1.7rem] text-foreground leading-snug">
+          <h3 className="font-serif text-[1.4rem] sm:text-[1.5rem] md:text-[1.7rem] text-foreground leading-snug">
             Most early symptoms are normal. A few are worth checking quickly.
           </h3>
-          <p className="font-sans text-[13px] font-light text-muted-foreground leading-[1.75] mt-3">
+          <p className="font-sans text-[13.5px] text-foreground/70 leading-[1.75] mt-3">
             Always trust your instincts. Contact your GP, midwife or NHS 111 — and 999 in an emergency.
           </p>
         </div>
         <ul className="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3.5 self-center">
           {seekSupport.map((item) => (
             <li key={item} className="flex items-start gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-terracotta/70 mt-2 shrink-0" />
-              <span className="font-sans text-[13px] font-light text-foreground/85 leading-[1.7]">{item}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-terracotta mt-2 shrink-0" />
+              <span className="font-sans text-[13.5px] text-foreground/85 leading-[1.7]">{item}</span>
             </li>
           ))}
         </ul>

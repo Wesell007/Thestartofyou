@@ -605,6 +605,7 @@ export const topicMapEntries: TopicMapEntry[] = [
     articles: [
       { label: "Writing a birth plan", href: "/articles/writing-a-birth-plan" },
       { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack" },
+      { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth" },
       { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to" },
     ],
   },

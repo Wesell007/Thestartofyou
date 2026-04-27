@@ -100,7 +100,7 @@ const FirstTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: P
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 animate-fade-up [animation-delay:0.2s]">
           <Link
-            to="/calculators/due-date"
+            to="/due-date-calculator"
             className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
           >
             <Calendar size={15} />

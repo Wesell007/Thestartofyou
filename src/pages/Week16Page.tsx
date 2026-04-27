@@ -583,12 +583,12 @@ const Emotional = () => (
 
 /* 10. FOCUS */
 const focusList = [
-  { Icon: Hand, title: "Notice without measuring", body: "If you feel something flutter, just notice it. There's no need to count yet — that comes later. Most people don't have a clear pattern until 24–28 weeks." },
-  { Icon: Calendar, title: "Confirm your anatomy scan date", body: "If you don't have a date for your 20-week scan yet, your midwife can chase it. You may need a plus-one and ID on the day." },
-  { Icon: Hand, title: "Whooping cough vaccine — from now", body: "The whooping cough (pertussis) vaccine is offered any time from 16 weeks. Earlier means more protection passed to your baby for the first weeks of life." },
-  { Icon: Activity, title: "Move in the way that feels good", body: "Walking, swimming, pregnancy yoga, gentle strength work. The mid second trimester is often the most physically generous window — use it kindly." },
-  { Icon: Smile, title: "Book a dentist check-up", body: "NHS dental care is free during pregnancy and for a year after birth. Pregnancy hormones can make gums more reactive, and dental work is safer now than later." },
-  { Icon: Baby, title: "Soft-start the practical thinking", body: "No need to buy yet. But quietly noticing what the next few months might need — clothes, leave, support — gently spreads the load." },
+  { Icon: Hand, title: "Notice without measuring", note: "If you feel something flutter, just notice it. There's no need to count yet — that comes later. Most people don't have a clear pattern until 24–28 weeks." },
+  { Icon: Calendar, title: "Confirm your anatomy scan date", note: "If you don't have a date for your 20-week scan yet, your midwife can chase it. You may need a plus-one and ID on the day." },
+  { Icon: Hand, title: "Whooping cough vaccine — from now", note: "The whooping cough (pertussis) vaccine is offered any time from 16 weeks. Earlier means more protection passed to your baby for the first weeks of life." },
+  { Icon: Activity, title: "Move in the way that feels good", note: "Walking, swimming, pregnancy yoga, gentle strength work. The mid second trimester is often the most physically generous window — use it kindly." },
+  { Icon: Smile, title: "Book a dentist check-up", note: "NHS dental care is free during pregnancy and for a year after birth. Pregnancy hormones can make gums more reactive, and dental work is safer now than later." },
+  { Icon: Baby, title: "Soft-start the practical thinking", note: "No need to buy yet. But quietly noticing what the next few months might need — clothes, leave, support — gently spreads the load." },
 ];
 
 const Focus = () => (

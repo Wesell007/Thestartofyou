@@ -855,10 +855,10 @@ const faqs = [
 const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; defaultOpen?: boolean }) => {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border-b border-border/40">
+    <div className="border-b border-border/40 last:border-b-0">
       <button onClick={() => setOpen(!open)}
         className="w-full flex items-start gap-4 py-5 text-left group">
-        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-sage transition-colors">
+        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-sage transition-colors leading-snug">
           {faq.q}
         </span>
         <span className="w-7 h-7 rounded-full bg-sage-bg flex items-center justify-center text-sage shrink-0 mt-1">
@@ -866,7 +866,7 @@ const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; d
         </span>
       </button>
       {open && (
-        <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-[1.85] pb-6 pr-12">
+        <p className="font-sans text-[14px] text-foreground/75 leading-[1.85] pb-6 pr-12">
           {faq.a}
         </p>
       )}
@@ -879,7 +879,7 @@ const Week4FAQ = () => (
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
       <div className="mb-10 text-center">
         <SectionLabel>Common questions</SectionLabel>
-        <h2 className="font-serif text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">
+        <h2 className="font-serif text-[1.85rem] sm:text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">
           Common questions at 4 weeks
         </h2>
       </div>

@@ -27,7 +27,7 @@ const TrimesterAbout = ({ data, bg = "bg-parchment", hideImage = false }: Props)
               aria-hidden="true"
               className="hidden md:block absolute -right-4 top-2 w-16 opacity-25 pointer-events-none select-none"
             />
-          </div>{!hideImage && false && null}
+          </div>
 
           {/* Right, paragraphs */}
           <div className="space-y-4">

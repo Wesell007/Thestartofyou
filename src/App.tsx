@@ -16,6 +16,7 @@ import FirstTrimester from "./pages/trimester/FirstTrimester.tsx";
 import SecondTrimester from "./pages/trimester/SecondTrimester.tsx";
 import ThirdTrimester from "./pages/trimester/ThirdTrimester.tsx";
 import WeekPage from "./pages/WeekPage.tsx";
+import Week4Page from "./pages/Week4Page.tsx";
 import ArticlePage from "./pages/ArticlePage.tsx";
 import DueDateCalculator from "./pages/DueDateCalculator.tsx";
 import DueDateResults from "./pages/DueDateResults.tsx";
@@ -114,6 +115,7 @@ const App = () => (
           <Route path="/pregnancy/first-trimester" element={<FirstTrimester />} />
           <Route path="/pregnancy/second-trimester" element={<SecondTrimester />} />
           <Route path="/pregnancy/third-trimester" element={<ThirdTrimester />} />
+          <Route path="/pregnancy/week/4" element={<Week4Page />} />
           <Route path="/pregnancy/week/:week" element={<WeekPage />} />
           <Route path="/articles/:slug" element={<ArticlePage />} />
           <Route path="/due-date-calculator" element={<DueDateCalculator />} />

@@ -28,8 +28,8 @@ const FirstTriExpect = ({ cards }: Props) => {
           </p>
         </div>
 
-        {/* 4-up cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+        {/* 4-up cards — 1 col mobile, 2x2 tablet, 4-up desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-6">
           {cards.map((card) => {
             const config = iconByLabel[card.id] ?? iconByLabel.body;
             const { Icon, tint } = config;

@@ -21,24 +21,24 @@ const FirstTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: P
   ];
 
   return (
-    <section className="relative bg-parchment overflow-hidden pt-28 pb-20 md:pt-36 md:pb-24">
+    <section className="relative bg-parchment overflow-hidden pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24">
       {/* Soft radial glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[720px] h-[460px] rounded-full bg-sage-bg/30 blur-3xl" />
       </div>
 
-      {/* Botanical accents — left and right of hero */}
+      {/* Botanical accents — desktop only, framing not crowding */}
       <img
         src={botanicalBl}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute top-16 left-0 w-[140px] md:w-[200px] opacity-25 select-none hidden md:block"
+        className="pointer-events-none absolute top-16 left-0 w-[160px] lg:w-[200px] opacity-20 select-none hidden lg:block"
       />
       <img
         src={botanicalTr}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute top-16 right-0 w-[140px] md:w-[200px] opacity-25 select-none hidden md:block"
+        className="pointer-events-none absolute top-16 right-0 w-[160px] lg:w-[200px] opacity-20 select-none hidden lg:block"
       />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10 text-center">
@@ -65,18 +65,18 @@ const FirstTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: P
         </p>
 
         {/* Title */}
-        <h1 className="font-serif text-[2.5rem] sm:text-[3.5rem] md:text-[4.25rem] text-foreground leading-[1.04] mb-6 animate-fade-up">
+        <h1 className="font-serif text-[2.25rem] sm:text-[3rem] md:text-[3.75rem] lg:text-[4.25rem] text-foreground leading-[1.04] mb-5 sm:mb-6 animate-fade-up">
           {label}
         </h1>
 
         {/* Intro */}
-        <p className="font-sans text-[16px] sm:text-[17px] md:text-[18px] font-light text-muted-foreground leading-[1.7] mb-12 max-w-2xl mx-auto animate-fade-up [animation-delay:0.1s]">
+        <p className="font-sans text-[15.5px] sm:text-[17px] md:text-[18px] font-light text-muted-foreground leading-[1.7] mb-9 sm:mb-12 max-w-[34ch] sm:max-w-2xl mx-auto animate-fade-up [animation-delay:0.1s]">
           {subtitle}
         </p>
 
         {/* Trimester timeline */}
         <div
-          className="relative h-12 max-w-xl mx-auto mb-12 animate-fade-up [animation-delay:0.15s]"
+          className="relative h-12 max-w-[18rem] sm:max-w-md md:max-w-xl mx-auto mb-9 sm:mb-12 animate-fade-up [animation-delay:0.15s]"
           aria-hidden="true"
         >
           <div className="absolute top-1/2 left-0 right-0 h-px bg-sage/30 -translate-y-1/2" />
@@ -98,17 +98,17 @@ const FirstTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: P
         </div>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 animate-fade-up [animation-delay:0.2s]">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-3.5 animate-fade-up [animation-delay:0.2s] max-w-sm sm:max-w-none mx-auto">
           <Link
             to="/due-date-calculator"
-            className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
+            className="flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
           >
             <Calendar size={15} />
             Calculate your due date
           </Link>
           <a
             href="#week-by-week"
-            className="flex items-center gap-2 border border-foreground/20 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all"
+            className="flex items-center justify-center gap-2 border border-foreground/20 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all"
           >
             <ArrowDown size={15} />
             Jump to week-by-week

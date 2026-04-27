@@ -41,7 +41,7 @@ const FirstTriDeeper = () => {
           </h2>
         </div>
 
-        <ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-x-4 gap-y-7">
+        <ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-x-4 gap-y-6 sm:gap-y-7">
           {links.map(({ label, href, Icon }) => (
             <li key={href}>
               <Link

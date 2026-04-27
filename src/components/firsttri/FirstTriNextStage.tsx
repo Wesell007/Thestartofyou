@@ -13,17 +13,17 @@ const FirstTriNextStage = () => {
           When you&rsquo;re ready, the second trimester is waiting, week by week,
           at your own pace.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-3.5 max-w-sm sm:max-w-none mx-auto">
           <Link
             to="/pregnancy/second-trimester"
-            className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
+            className="flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
           >
             Second Trimester
             <ArrowUpRight size={16} />
           </Link>
           <Link
             to="/pregnancy"
-            className="flex items-center gap-2 border border-foreground/20 text-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all"
+            className="flex items-center justify-center gap-2 border border-foreground/20 text-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all"
           >
             Back to Pregnancy Hub
           </Link>

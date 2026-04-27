@@ -69,7 +69,7 @@ const FirstTriBigChanges = ({
         </div>
 
         {/* 6 mini-blocks in a row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 sm:gap-y-10">
           {items.map(({ Icon, title, body }) => (
             <div key={title} className="flex flex-col items-start gap-3">
               <span className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-sage/30 bg-card text-sage">

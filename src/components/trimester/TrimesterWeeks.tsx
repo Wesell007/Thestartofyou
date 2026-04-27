@@ -29,8 +29,8 @@ const TrimesterWeeks = ({ data, bg = "bg-parchment-dark" }: Props) => {
           <h2 className="font-serif text-[1.75rem] sm:text-3xl md:text-[2.75rem] text-foreground mb-3 leading-tight">
             Follow your journey week by week
           </h2>
-          <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            {data.range}, each week builds on the last.
+          <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            {data.weekBridgeIntro ?? `${data.range}, each week builds on the last.`}
           </p>
         </div>
 

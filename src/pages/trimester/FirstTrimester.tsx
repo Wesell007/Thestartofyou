@@ -3,6 +3,7 @@ import Footer from "@/components/layout/Footer";
 import TrimesterHero from "@/components/trimester/TrimesterHero";
 import TrimesterAbout from "@/components/trimester/TrimesterAbout";
 import TrimesterExpect from "@/components/trimester/TrimesterExpect";
+import TrimesterBigChanges from "@/components/trimester/TrimesterBigChanges";
 import TrimesterDifficulties from "@/components/trimester/TrimesterDifficulties";
 import TrimesterNormal from "@/components/trimester/TrimesterNormal";
 import TrimesterFocus from "@/components/trimester/TrimesterFocus";
@@ -29,8 +30,11 @@ const FirstTrimester = () => {
         {/* 3. What to expect */}
         <TrimesterExpect data={data} bg="bg-lavender-section" />
 
+        {/* 3b. The big changes in this trimester (synthesis) */}
+        <TrimesterBigChanges data={data} bg="bg-parchment" />
+
         {/* 4. What can feel difficult */}
-        <TrimesterDifficulties data={data} bg="bg-parchment" />
+        <TrimesterDifficulties data={data} bg="bg-parchment-dark" />
 
         {/* 5. What's normal */}
         <TrimesterNormal data={data} bg="bg-parchment-dark" />

@@ -642,13 +642,13 @@ const Week4SeekSupport = () => (
    ───────────────────────────────────────────────────────────────────── */
 const Week4Quote = () => (
   <section className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pb-16 md:pb-24">
-    <div className="relative bg-stage-pregnancy/35 rounded-3xl border border-border/30 p-10 md:p-14 text-center overflow-hidden">
-      <span className="absolute left-7 top-6 font-serif text-4xl text-terracotta/35 leading-none">“</span>
-      <span className="absolute right-7 bottom-4 font-serif text-4xl text-terracotta/35 leading-none">”</span>
-      <p className="font-serif italic text-[1.3rem] md:text-[1.6rem] text-foreground/85 leading-snug max-w-3xl mx-auto">
+    <div className="relative bg-stage-pregnancy/35 rounded-3xl border border-border/30 p-8 sm:p-10 md:p-14 text-center overflow-hidden">
+      <span className="absolute left-7 top-6 font-serif text-4xl text-terracotta/40 leading-none">“</span>
+      <span className="absolute right-7 bottom-4 font-serif text-4xl text-terracotta/40 leading-none">”</span>
+      <p className="font-serif italic text-[1.2rem] sm:text-[1.35rem] md:text-[1.6rem] text-foreground/90 leading-snug max-w-3xl mx-auto">
         It's okay if it doesn't feel real yet. Small steps, deep breaths, and grace are enough for week 4.
       </p>
-      <Heart size={14} className="text-terracotta/50 mx-auto mt-5" />
+      <Heart size={14} className="text-terracotta/60 mx-auto mt-5" />
     </div>
   </section>
 );

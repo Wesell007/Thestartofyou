@@ -730,12 +730,12 @@ const Week4Journal = () => (
             loading="lazy" width={1200} height={900}
             className="w-full h-full object-cover object-[50%_45%]" />
         </div>
-        <div className="p-9 md:p-12 flex flex-col justify-center">
+        <div className="p-7 sm:p-9 md:p-12 flex flex-col justify-center">
           <SectionLabel>The Start of You journal</SectionLabel>
-          <h3 className="font-serif text-[1.8rem] md:text-[2.1rem] text-foreground leading-tight mb-4">
+          <h3 className="font-serif text-[1.65rem] sm:text-[1.8rem] md:text-[2.1rem] text-foreground leading-tight mb-4">
             Hold on to how week 4 actually felt.
           </h3>
-          <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-[1.85] mb-6">
+          <p className="font-sans text-[14px] text-foreground/75 leading-[1.8] mb-6">
             Week 4 is the kind of week most pregnancy advice rushes past. The Start of You journal gives it space —
             with prompts, room for the test, and the quiet first thoughts you may want to keep.
           </p>
@@ -747,12 +747,12 @@ const Week4Journal = () => (
             ].map((line) => (
               <li key={line} className="flex items-start gap-2.5">
                 <Check size={13} className="text-sage mt-1 shrink-0" />
-                <span className="font-sans text-[13px] font-light text-foreground/80">{line}</span>
+                <span className="font-sans text-[13.5px] text-foreground/80">{line}</span>
               </li>
             ))}
           </ul>
           <Link to="/product"
-            className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
+            className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
             Discover the journal <ArrowRight size={13} />
           </Link>
         </div>

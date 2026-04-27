@@ -315,19 +315,19 @@ const Week4Body = () => (
   <section id="body" className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl py-16 md:py-24">
     <div className="max-w-2xl mb-10">
       <SectionLabel tone="terracotta">Your body this week</SectionLabel>
-      <h2 className="font-serif text-[2rem] md:text-[2.4rem] text-foreground leading-tight mb-4">
+      <h2 className="font-serif text-[1.85rem] sm:text-[2rem] md:text-[2.4rem] text-foreground leading-tight mb-4">
         Hormones are starting their long, steady climb.
       </h2>
-      <p className="font-sans text-[14px] font-light text-muted-foreground leading-[1.85]">
+      <p className="font-sans text-[14.5px] text-foreground/75 leading-[1.8]">
         At week 4 you may not look or feel different — but biochemically, your body has already started shifting.
         Some people feel almost nothing. Others feel a wave of new sensations within days. Both fit inside normal.
       </p>
     </div>
 
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {hormoneNotes.map(({ Icon, title, body }) => (
         <div key={title}
-          className="relative bg-card rounded-2xl border border-border/40 p-7 shadow-card-brand overflow-hidden">
+          className="relative bg-card rounded-2xl border border-border/40 p-6 md:p-7 shadow-card-brand overflow-hidden">
           <span className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-sage/30 to-transparent" />
           <div className="flex items-center gap-3 mb-4">
             <span className="w-10 h-10 rounded-full bg-sage-bg border border-sage/15 flex items-center justify-center">
@@ -335,16 +335,16 @@ const Week4Body = () => (
             </span>
             <h3 className="font-serif text-[1.2rem] text-foreground">{title}</h3>
           </div>
-          <p className="font-sans text-[13px] font-light text-muted-foreground leading-[1.75]">{body}</p>
+          <p className="font-sans text-[13.5px] text-foreground/70 leading-[1.75]">{body}</p>
         </div>
       ))}
     </div>
 
-    <div className="mt-6 bg-stage-pregnancy/35 border border-border/30 rounded-2xl p-6 md:p-7 flex flex-col md:flex-row md:items-center gap-4">
+    <div className="mt-6 bg-stage-pregnancy/35 border border-border/30 rounded-2xl p-6 md:p-7 flex flex-col sm:flex-row sm:items-center gap-4">
       <span className="w-10 h-10 rounded-full bg-card border border-border/40 flex items-center justify-center shrink-0">
         <HeartPulse size={15} className="text-terracotta" />
       </span>
-      <p className="font-sans text-[13.5px] font-light text-foreground/80 leading-[1.7]">
+      <p className="font-sans text-[14px] text-foreground/80 leading-[1.7]">
         Many week-4 symptoms overlap with PMS — sore breasts, cramping, bloating, fatigue, mood shifts. That overlap
         is one reason early pregnancy can be hard to read by feel alone.
       </p>

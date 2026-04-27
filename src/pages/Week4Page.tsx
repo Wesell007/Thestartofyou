@@ -419,10 +419,10 @@ const Week4Symptoms = () => (
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
       <div className="max-w-2xl mb-10">
         <SectionLabel>Common symptoms</SectionLabel>
-        <h2 className="font-serif text-[2rem] md:text-[2.4rem] text-foreground leading-tight mb-4">
+        <h2 className="font-serif text-[1.85rem] sm:text-[2rem] md:text-[2.4rem] text-foreground leading-tight mb-4">
           What may show up this week — and what each one really means.
         </h2>
-        <p className="font-sans text-[14px] font-light text-muted-foreground leading-[1.85]">
+        <p className="font-sans text-[14.5px] text-foreground/75 leading-[1.8]">
           Symptoms at week 4 vary enormously. Some people feel a clear shift; others feel almost nothing. The
           intensity of your symptoms is not a measure of how the pregnancy is going.
         </p>
@@ -434,22 +434,22 @@ const Week4Symptoms = () => (
             className="group relative bg-card rounded-2xl border border-border/40 p-6 md:p-7 shadow-card-brand hover:shadow-soft transition-all duration-500">
             <div className="flex items-center gap-3 mb-4 pb-4 border-b border-border/40">
               <span className="w-10 h-10 rounded-full bg-stage-pregnancy/60 flex items-center justify-center">
-                <Icon size={15} className="text-terracotta/80" />
+                <Icon size={15} className="text-terracotta" />
               </span>
-              <h3 className="font-serif text-[1.15rem] text-foreground leading-snug">{name}</h3>
+              <h3 className="font-serif text-[1.2rem] text-foreground leading-snug">{name}</h3>
             </div>
-            <dl className="space-y-3">
+            <dl className="space-y-3.5">
               <div>
-                <dt className="font-sans text-[10px] tracking-[0.22em] uppercase text-sage-muted mb-1">What it feels like</dt>
-                <dd className="font-sans text-[13px] font-light text-foreground/80 leading-[1.7]">{feels}</dd>
+                <dt className="font-sans text-[10.5px] font-semibold tracking-[0.2em] uppercase text-sage mb-1">What it feels like</dt>
+                <dd className="font-sans text-[13.5px] text-foreground/80 leading-[1.7]">{feels}</dd>
               </div>
               <div>
-                <dt className="font-sans text-[10px] tracking-[0.22em] uppercase text-sage-muted mb-1">Why it happens</dt>
-                <dd className="font-sans text-[13px] font-light text-muted-foreground leading-[1.7]">{why}</dd>
+                <dt className="font-sans text-[10.5px] font-semibold tracking-[0.2em] uppercase text-sage mb-1">Why it happens</dt>
+                <dd className="font-sans text-[13.5px] text-foreground/75 leading-[1.7]">{why}</dd>
               </div>
               <div>
-                <dt className="font-sans text-[10px] tracking-[0.22em] uppercase text-sage-muted mb-1">Is it normal?</dt>
-                <dd className="font-sans text-[13px] font-light text-muted-foreground leading-[1.7]">{normal}</dd>
+                <dt className="font-sans text-[10.5px] font-semibold tracking-[0.2em] uppercase text-sage mb-1">Is it normal?</dt>
+                <dd className="font-sans text-[13.5px] text-foreground/75 leading-[1.7]">{normal}</dd>
               </div>
             </dl>
           </article>
@@ -458,7 +458,7 @@ const Week4Symptoms = () => (
 
       <div className="mt-8 text-center">
         <Link to="/articles/early-pregnancy-symptoms"
-          className="inline-flex items-center gap-2 font-sans text-[13px] text-sage hover:gap-3 transition-all">
+          className="inline-flex items-center gap-2 font-sans text-[13.5px] font-medium text-sage hover:gap-3 transition-all">
           Read the full guide to early pregnancy symptoms <ArrowRight size={13} />
         </Link>
       </div>

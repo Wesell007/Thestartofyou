@@ -20,6 +20,19 @@ export interface TrimesterDifficulty {
   body: string;
 }
 
+export interface TrimesterBigChange {
+  label: string;
+  body: string;
+}
+
+export interface TrimesterBigChanges {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  items: TrimesterBigChange[];
+  closing?: string;
+}
+
 export interface TrimesterData {
   number: 1 | 2 | 3;
   label: string;
@@ -37,6 +50,7 @@ export interface TrimesterData {
     paragraphs: string[];
   };
   expect: ExpectSubsection[];
+  bigChanges?: TrimesterBigChanges;
   difficulties: {
     title: string;
     intro: string;
@@ -50,6 +64,7 @@ export interface TrimesterData {
   };
   focus: string[];
   focusClosing: string;
+  weekBridgeIntro?: string;
   weekGroups?: {
     label: string;
     weeks: number[];

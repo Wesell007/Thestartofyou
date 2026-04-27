@@ -541,14 +541,14 @@ export const thirdTrimester: TrimesterData = {
   number: 3,
   label: "Third Trimester",
   shortLabel: "Third",
-  range: "Weeks 28-42",
+  range: "Weeks 28-40",
   weekStart: 28,
-  weekEnd: 42,
-  tagline: "Preparation & Arrival",
-    heroSubtitle:
-    "The final stretch of pregnancy, physically demanding, emotionally complex, and full of preparation for what comes next. Weeks 28 through to birth.",
-  sectionBg: "bg-lavender-section",
-  weekBg: "bg-lavender-section",
+  weekEnd: 40,
+  tagline: "Preparation, Heaviness & Moving Toward Birth",
+  heroSubtitle:
+    "The third trimester is the final stage of pregnancy. From weeks 28 to 40, the baby continues to grow and prepare for life outside the womb, the body often feels heavier and more demanding, sleep and comfort can become harder, and labour begins to shift from something abstract into something close. It is a stage of carrying more, preparing more, and slowly moving toward birth.",
+  sectionBg: "bg-parchment-dark",
+  weekBg: "bg-parchment-dark",
   accentColor: "text-sage",
 
   about: {

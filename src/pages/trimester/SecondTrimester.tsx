@@ -1,60 +1,98 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import TrimesterHero from "@/components/trimester/TrimesterHero";
-import TrimesterAbout from "@/components/trimester/TrimesterAbout";
-import TrimesterExpect from "@/components/trimester/TrimesterExpect";
-import TrimesterDifficulties from "@/components/trimester/TrimesterDifficulties";
-import TrimesterNormal from "@/components/trimester/TrimesterNormal";
-import TrimesterFocus from "@/components/trimester/TrimesterFocus";
-import TrimesterWeeks from "@/components/trimester/TrimesterWeeks";
-import TrimesterQuestions from "@/components/trimester/TrimesterQuestions";
-import TrimesterEmotional from "@/components/trimester/TrimesterEmotional";
-import TrimesterAISupport from "@/components/trimester/TrimesterAISupport";
 import JournalPromotion from "@/components/shared/JournalPromotion";
-import TrimesterFinalCTA from "@/components/trimester/TrimesterFinalCTA";
+
+import SecondTriHero from "@/components/secondtri/SecondTriHero";
+import SecondTriOnThisPage from "@/components/secondtri/SecondTriOnThisPage";
+import SecondTriEditorialImage from "@/components/secondtri/SecondTriEditorialImage";
+import SecondTriWhatItIs from "@/components/secondtri/SecondTriWhatItIs";
+import SecondTriExpect from "@/components/secondtri/SecondTriExpect";
+import SecondTriBigChanges from "@/components/secondtri/SecondTriBigChanges";
+import SecondTriDifficult from "@/components/secondtri/SecondTriDifficult";
+import SecondTriSupport from "@/components/secondtri/SecondTriSupport";
+import SecondTriFocus from "@/components/secondtri/SecondTriFocus";
+import SecondTriWeekBridge from "@/components/secondtri/SecondTriWeekBridge";
+import SecondTriRelatedReads from "@/components/secondtri/SecondTriRelatedReads";
+import SecondTriDeeper from "@/components/secondtri/SecondTriDeeper";
+import SecondTriFAQ from "@/components/secondtri/SecondTriFAQ";
+import SecondTriSupportStrip from "@/components/secondtri/SecondTriSupportStrip";
+import SecondTriQuoteBanner from "@/components/secondtri/SecondTriQuoteBanner";
+import SecondTriNextStage from "@/components/secondtri/SecondTriNextStage";
+
 import { secondTrimester } from "@/data/trimesterData";
 
 const SecondTrimester = () => {
   const data = secondTrimester;
+
   return (
-    <div className="min-h-screen font-sans">
+    <div className="min-h-screen font-sans bg-parchment">
       <Navbar />
       <main>
         {/* 1. Hero */}
-        <TrimesterHero data={data} />
+        <SecondTriHero
+          label={data.label}
+          range={data.range}
+          tagline={data.tagline}
+          subtitle={data.heroSubtitle}
+          weekStart={data.weekStart}
+          weekEnd={data.weekEnd}
+        />
 
-        {/* 2. What this stage is */}
-        <TrimesterAbout data={data} bg="bg-parchment-dark" />
+        {/* 2. On this page strip */}
+        <SecondTriOnThisPage />
 
-        {/* 3. What to expect */}
-        <TrimesterExpect data={data} bg="bg-parchment" />
+        {/* 3. Editorial hero image */}
+        <SecondTriEditorialImage />
 
-        {/* 4. What can feel difficult */}
-        <TrimesterDifficulties data={data} bg="bg-parchment-dark" />
+        {/* 4. What the second trimester is */}
+        <SecondTriWhatItIs paragraphs={data.about.paragraphs} />
 
-        {/* 5. What's normal */}
-        <TrimesterNormal data={data} bg="bg-lavender-section" />
+        {/* 5. What to expect (4 cards) */}
+        <SecondTriExpect cards={data.expect} />
 
-        {/* 6. What to focus on */}
-        <TrimesterFocus data={data} bg="bg-parchment-dark" />
+        {/* 6. The big changes */}
+        <SecondTriBigChanges />
 
-        {/* 7. Week-by-week navigation */}
-        <TrimesterWeeks data={data} bg="bg-parchment" />
+        {/* 7. What can feel difficult */}
+        <SecondTriDifficult />
 
-        {/* 8. Common questions */}
-        <TrimesterQuestions data={data} bg="bg-parchment-dark" />
+        {/* 8. What's normal / when to seek support */}
+        <SecondTriSupport
+          normalItems={data.normal.normalItems}
+          seekSupport={data.normal.seekSupport}
+          disclaimer={data.normal.disclaimer}
+        />
 
-        {/* 9. AI support */}
-        <TrimesterAISupport data={data} bg="bg-parchment" />
+        {/* 9. What to focus on */}
+        <SecondTriFocus closing={data.focusClosing} />
 
-        {/* 10. Emotional moment */}
-        <TrimesterEmotional data={data} bg="bg-parchment-dark" />
+        {/* 10. Green week-by-week bridge */}
+        <SecondTriWeekBridge
+          weekStart={data.weekStart}
+          weekEnd={data.weekEnd}
+          highlightWeek={20}
+        />
 
-        {/* 11. Journal companion */}
-        <JournalPromotion />
+        {/* 11. Helpful guidance — related articles */}
+        <SecondTriRelatedReads />
 
-        {/* 12. Final CTA */}
-        <TrimesterFinalCTA data={data} />
+        {/* 12. Where to go deeper */}
+        <SecondTriDeeper />
+
+        {/* 13. Common questions FAQ */}
+        <SecondTriFAQ />
+
+        {/* 14. Support strip */}
+        <SecondTriSupportStrip />
+
+        {/* 15. Quote banner */}
+        <SecondTriQuoteBanner />
+
+        {/* 16. Journal promotion */}
+        <JournalPromotion contextCopy="A gentle, beautifully designed companion for your pregnancy journey, weekly reflections, scan and appointment tracking, and a keepsake to look back on long after." />
+
+        {/* 17. Next stage CTA */}
+        <SecondTriNextStage />
       </main>
       <Footer />
     </div>

@@ -31,10 +31,10 @@ const FirstTrimester = () => {
         <TrimesterExpect data={data} bg="bg-lavender-section" />
 
         {/* 3b. The big changes in this trimester (synthesis) */}
-        <TrimesterBigChanges data={data} bg="bg-parchment" />
+        <TrimesterBigChanges data={data} bg="bg-parchment-dark" />
 
         {/* 4. What can feel difficult */}
-        <TrimesterDifficulties data={data} bg="bg-parchment-dark" />
+        <TrimesterDifficulties data={data} bg="bg-parchment" />
 
         {/* 5. What's normal */}
         <TrimesterNormal data={data} bg="bg-parchment-dark" />

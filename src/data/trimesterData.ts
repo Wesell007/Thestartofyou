@@ -20,6 +20,19 @@ export interface TrimesterDifficulty {
   body: string;
 }
 
+export interface TrimesterBigChange {
+  label: string;
+  body: string;
+}
+
+export interface TrimesterBigChanges {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  items: TrimesterBigChange[];
+  closing?: string;
+}
+
 export interface TrimesterData {
   number: 1 | 2 | 3;
   label: string;
@@ -37,6 +50,7 @@ export interface TrimesterData {
     paragraphs: string[];
   };
   expect: ExpectSubsection[];
+  bigChanges?: TrimesterBigChanges;
   difficulties: {
     title: string;
     intro: string;
@@ -50,6 +64,7 @@ export interface TrimesterData {
   };
   focus: string[];
   focusClosing: string;
+  weekBridgeIntro?: string;
   weekGroups?: {
     label: string;
     weeks: number[];
@@ -77,7 +92,7 @@ export const firstTrimester: TrimesterData = {
   weekEnd: 12,
   tagline: "Foundation & Early Development",
   heroSubtitle:
-    "The beginning of pregnancy is often invisible, to others, and sometimes even to you. This stage covers weeks 1 through 12, a period of quiet but significant change.",
+    "The first trimester is the quietest, busiest stage of pregnancy. From weeks 1 to 12, almost everything that defines the pregnancy begins, the foundations of your baby, the hormonal shifts that drive early symptoms, and a new kind of awareness in you. Very little of it shows on the outside, which is part of why this stage can feel so significant and so strange at the same time.",
   sectionBg: "bg-parchment",
   weekBg: "bg-sage-bg/40",
   accentColor: "text-sage",
@@ -85,9 +100,10 @@ export const firstTrimester: TrimesterData = {
   about: {
     title: "What the first trimester is",
     paragraphs: [
-      "The first trimester begins before many people even know they're pregnant. Weeks 1 and 2 technically precede conception, your body is preparing, hormones are shifting, and implantation is just beginning.",
-      "By week 4 or 5, the pregnancy becomes real in many senses, a positive test, early symptoms, and the start of a new kind of awareness. But the experience isn't always dramatic. For many people, the first trimester feels more like an internal shift than a visible one.",
-      "This is a period of enormous biological work happening quietly beneath the surface. Your body is building the foundational structures that will support the entire pregnancy, and that can be exhausting, disorienting, and sometimes nothing like what you expected.",
+      "The first trimester runs from week 1 to the end of week 12. By convention, it is counted from the first day of your last period, which means weeks 1 and 2 happen before conception itself, your body is preparing, and the pregnancy as it will be known later hasn't quite begun.",
+      "From around week 3, after fertilisation and implantation, hormones rise sharply. hCG, progesterone, and oestrogen all climb fast, and it is largely these hormonal shifts, not the size of the embryo, that drive the early symptoms many people feel: nausea, exhaustion, sore breasts, food aversions, and a wave of emotional change that can be hard to place.",
+      "Beneath all of that, an enormous amount of development is happening in a very small space. The neural tube forms, the heart begins to beat, and the foundations of every major organ are laid down before week 12. By the end of the trimester, the embryo has become a foetus with most of the basic structures of a body in place.",
+      "It is one of the most intense stages of pregnancy biologically, and one of the most invisible socially. That gap, between how much is changing inside you and how little anyone else can see, is what gives the first trimester so much of its particular character.",
     ],
   },
 
@@ -96,116 +112,172 @@ export const firstTrimester: TrimesterData = {
       id: "body",
       label: "Your body",
       intro:
-        "Symptoms in the first trimester often begin earlier than expected, and can feel inconsistent. You might notice:",
+        "Symptoms in the first trimester are largely driven by rising pregnancy hormones, and they often arrive earlier and more unevenly than expected:",
       points: [
-        "Nausea, which can happen at any time of day, not just mornings",
-        "Fatigue that feels deeper than tiredness",
-        "Sore or tender breasts",
-        "Bloating and digestive changes",
-        "Symptoms that come and go, sometimes disappearing for days",
+        "Nausea or queasiness, which can happen at any time of day, not only mornings",
+        "Fatigue that feels deeper than ordinary tiredness, especially in weeks 6 to 10",
+        "Sore, heavy, or unusually sensitive breasts",
+        "Bloating, food aversions, and heightened sense of smell",
+        "Mild cramping or pulling sensations as the uterus begins to grow",
+        "Symptoms that come and go, sometimes disappearing for a day or two",
       ],
       meaning:
-        "The absence of symptoms doesn't mean something is wrong. Many people have very few symptoms throughout the first trimester. Variation is normal, even when it feels confusing.",
+        "The intensity, and absence, of symptoms varies enormously. Strong symptoms aren't a sign something is wrong, and quieter symptoms aren't a sign something is missing. Both can sit inside a healthy first trimester.",
     },
     {
       id: "baby",
       label: "Your baby",
       intro:
-        "Development in the first trimester is rapid and largely invisible. You likely won't feel it yet, but a great deal is happening:",
+        "Development in the first trimester is rapid and almost entirely invisible from the outside, but the timeline is remarkable:",
       points: [
-        "The neural tube, heart, and early organ structures form in the first few weeks",
-        "By week 10, the embryo becomes a foetus",
-        "By week 12, most major body structures are in place",
-        "Movement is happening but far too early to feel",
+        "By week 5, the heart begins to form and a tiny heartbeat is often visible on early scans by week 6 or 7",
+        "By week 8, the neural tube has closed and limb buds, eyes, and early facial features are forming",
+        "By week 10, the embryo is officially a foetus and most major organs are in place, though still maturing",
+        "By week 12, the baby is roughly the size of a lime, can move its limbs, and has fingers, toes, and recognisable features",
       ],
       meaning:
-        "A lot is being built in silence. The quiet nature of this stage doesn't reflect the scale of what's happening, it's one of the most developmentally significant periods of the entire pregnancy.",
+        "Almost every major structure your baby will rely on is being built in this trimester. The quietness of the stage doesn't reflect the scale of what's happening inside it.",
     },
     {
       id: "emotional",
       label: "Emotionally",
       intro:
-        "The emotional experience of the first trimester is often complex and rarely simple. You might feel:",
+        "The emotional experience of the first trimester is rarely tidy. Hormones, uncertainty, and a new sense of responsibility often overlap:",
       points: [
-        "Excitement mixed with anxiety, sometimes at the same time",
-        "Unreal, as though it hasn't fully landed yet",
-        "Protective about sharing news, especially before 12 weeks",
-        "Guilt about not feeling more positive, if symptoms feel hard",
-        "Unsure what 'normal' is supposed to feel like",
+        "Excitement and anxiety in the same hour, sometimes the same minute",
+        "A feeling of unreality, especially before the first scan",
+        "Protectiveness about who knows, and when they know",
+        "Guilt about not feeling more positive when symptoms are heavy",
+        "Vivid dreams, mood shifts, or tearfulness that catches you off guard",
+        "A quiet uncertainty about what you're \"supposed\" to feel",
       ],
       meaning:
-        "There is no single correct emotional response to pregnancy. Some people feel profound joy immediately; others feel numb, anxious, or somewhere in between. All of these are valid.",
+        "There is no single correct emotional response to early pregnancy. Joy, numbness, anxiety, ambivalence, and relief can all sit alongside each other and still belong to a healthy beginning.",
     },
     {
       id: "uncertainty",
-      label: "Uncertainty",
+      label: "Uncertainty & waiting",
       intro:
-        "Many people describe the first trimester as the most uncertain phase. Common experiences include:",
+        "More than any other trimester, the first stage is shaped by waiting, for symptoms, for appointments, for the first scan that confirms what you already know:",
       points: [
-        "Worrying about miscarriage before the 12-week mark",
-        "Waiting for scans that confirm the pregnancy is progressing",
-        "Searching for reassurance after every symptom change",
-        "Feeling like you can't fully relax or celebrate yet",
+        "Awareness of miscarriage risk, especially in the first 12 weeks",
+        "Long gaps between appointments, with limited information in between",
+        "Watching every twinge for meaning, then trying not to",
+        "Feeling unable to fully relax into the pregnancy yet",
+        "Holding the news privately while life continues as normal around you",
       ],
       meaning:
-        "This uncertainty is not a sign of something being wrong, it's a natural response to a situation where you have limited information and limited control. It tends to ease as the pregnancy progresses.",
+        "This uncertainty isn't a sign something is wrong. It is a natural response to a stage where so much is happening internally and so little can be confirmed externally. It tends to ease as the pregnancy moves on.",
     },
   ],
+
+  bigChanges: {
+    eyebrow: "Defining the stage",
+    title: "The big changes in this trimester",
+    intro:
+      "Across all the symptoms, scans, and emotions, a few defining shifts shape the first trimester more than any others. These are the realities most people are quietly contending with, even when nothing is visible from the outside.",
+    items: [
+      {
+        label: "A hormonal surge that drives almost everything",
+        body: "hCG roughly doubles every couple of days in early pregnancy, while progesterone and oestrogen climb steadily. This single shift is responsible for most early symptoms, the nausea, the exhaustion, the tender breasts, the emotional intensity. It usually peaks somewhere between weeks 8 and 11, which is why the worst symptoms often soften as you approach the end of the trimester.",
+      },
+      {
+        label: "Tiredness and nausea that aren't proportional to anything",
+        body: "First trimester fatigue can feel disproportionate to what's visible, you may be running a full day on what feels like half a battery. Nausea can arrive in waves, attach to specific smells or foods, and shift from week to week. Neither is a sign you're not coping. They are the body's response to enormous internal work.",
+      },
+      {
+        label: "Rapid, hidden development",
+        body: "By the time many people see their first scan, the embryo has already grown a heartbeat, started forming a brain, and laid down the early structures of every major organ. This stage carries an unusual weight, very little is visible, but very little is more developmentally important.",
+      },
+      {
+        label: "Living with uncertainty",
+        body: "The first trimester is the part of pregnancy where awareness of miscarriage is highest and reassurance is rarest. Most people hold the news privately, manage symptoms quietly, and wait for the first scan before letting themselves fully arrive in the pregnancy. That holding pattern is exhausting in its own way.",
+      },
+      {
+        label: "First appointments and the first scan",
+        body: "Booking your midwife appointment (usually between weeks 8 and 10) and attending the dating scan around week 12 are the two big anchors of this trimester. They mark the shift from a private, internal experience to one with structure, dates, and confirmation.",
+      },
+      {
+        label: "An identity shift that hasn't quite landed",
+        body: "Pregnancy starts to change how you think about your body, your future, and yourself, but most of that shift happens internally and slowly. It is normal for the idea of becoming a parent to feel abstract, distant, or unsteady in these early weeks. The connection often deepens later.",
+      },
+    ],
+    closing:
+      "Holding all of this at once, especially before anyone else knows, is part of why the first trimester can feel so much heavier than it looks.",
+  },
 
   difficulties: {
     title: "What can feel difficult in this stage",
     intro:
-      "The first trimester has its own particular challenges, many of which are rarely talked about.",
+      "The first trimester has its own particular challenges, many of which sit just beneath the surface of everyday life and rarely get talked about openly.",
     items: [
       {
-        label: "Keeping a secret when you feel ill",
-        body: "Most people wait until after the 12-week scan to share the news, but nausea, exhaustion, and early symptoms can be hard to explain without disclosing the reason.",
+        label: "Holding the news while feeling unwell",
+        body: "Most people wait until after the 12-week scan to share. Doing that while managing nausea, exhaustion, and missed meals, often around colleagues, friends, or family who don't yet know, can be quietly exhausting in a way that's hard to explain.",
       },
       {
-        label: "Not knowing if things are progressing normally",
-        body: "Between a positive test and the first scan, there may be several weeks of uncertainty. Without visible change or scans, many people find this waiting period hard.",
+        label: "Not knowing if everything is progressing",
+        body: "Between a positive test and the first scan, there are usually several weeks with very few signposts. Symptoms ease and return, days feel uneventful, and it can be hard not to read into every change. That waiting is one of the most universal experiences of early pregnancy.",
       },
       {
-        label: "Exhaustion that goes unexplained",
-        body: "First trimester fatigue can be extreme. Because you may not be sharing your news yet, it can feel isolating to be this tired without a reason you can share.",
+        label: "Exhaustion that has no public explanation",
+        body: "First trimester tiredness can be unlike anything you've felt before, full days flattened by a fatigue you can't justify out loud. Pretending to be fine while running on so little can take a real toll, especially in workplaces or social settings where you can't share why.",
       },
       {
         label: "The gap between expectation and experience",
-        body: "Pregnancy can feel very different from what you imagined. This is normal, but the mismatch can be disorienting.",
+        body: "Pregnancy can feel very different from the version you imagined, more physical, more uncertain, less euphoric, or simply quieter. Many people are surprised by how unsentimental the early weeks can feel, and worry that something is wrong with their reaction. Usually, nothing is.",
+      },
+      {
+        label: "Worry that won't fully settle",
+        body: "Awareness of miscarriage can sit in the background of every symptom change. This isn't a personal failing, it is a reasonable response to a stage with high uncertainty and limited reassurance. Naming it often helps more than trying to push it away.",
+      },
+      {
+        label: "Feeling alone in something huge",
+        body: "Even with a partner, family, or close friends around, the first trimester can feel lonely, because so much of it is happening inside you, before the world catches up. That loneliness is one of the most common, and least talked about, parts of this stage.",
       },
     ],
     closing:
-      "These experiences are part of the first trimester for many people. You don't need to minimise them.",
+      "These experiences are part of the first trimester for many people. You don't need to minimise them to be doing this well.",
   },
 
   normal: {
     normalItems: [
       "Nausea at any time of day, or no nausea at all",
-      "Extreme tiredness, especially in weeks 6-10",
-      "Symptoms that come and go unpredictably",
-      "Mild cramping as the uterus begins to grow",
-      "Feeling emotional without a clear reason",
-      "Bloating, food aversions, or heightened smell sensitivity",
+      "Extreme tiredness, especially in weeks 6 to 10",
+      "Symptoms that come and go from one day to the next",
+      "Mild cramping or pulling sensations as the uterus grows",
+      "Light spotting around the time of an expected period, particularly in the early weeks",
+      "Feeling emotional, tearful, or unusually sensitive without a clear reason",
+      "Bloating, food aversions, vivid dreams, or heightened sense of smell",
+      "A reduction in symptoms as you approach the end of the first trimester",
     ],
     seekSupport: [
-      "Severe vomiting that prevents you from keeping fluids down",
-      "Heavy bleeding or severe cramping",
-      "Sharp or intense one-sided pain",
-      "Any significant concern that isn't settled by your midwife or GP",
+      "Severe vomiting that prevents you from keeping fluids down (possible hyperemesis)",
+      "Heavy bleeding, especially with cramping or clots",
+      "Sharp, persistent, or one-sided pain in your lower abdomen or shoulder tip",
+      "Sudden disappearance of strong symptoms accompanied by bleeding or pain",
+      "Pain or burning when you wee, or signs of a possible infection",
+      "Feelings of low mood, hopelessness, or anxiety that don't ease, your midwife or GP can help",
+      "Any concern that doesn't settle, even if you can't quite name it",
     ],
     disclaimer:
-      "This is not medical advice. If you have any concerns about your pregnancy, always consult your midwife, doctor, or healthcare provider.",
+      "This is not medical advice. If you have any concerns about your pregnancy, always contact your midwife, GP, or maternity unit. In the UK, NHS 111 is available out of hours.",
   },
 
   focus: [
-    "Booking your first midwife appointment if you haven't already",
-    "Taking folic acid, ideally 400mcg daily until week 12",
-    "Giving yourself permission to rest",
-    "Not trying to read too far ahead",
-    "Attending your 12-week scan when the time comes",
-    "Being kind to yourself if symptoms are hard",
+    "Booking your first midwife appointment, usually between weeks 8 and 10",
+    "Taking 400mcg folic acid daily until the end of week 12, and 10mcg vitamin D throughout pregnancy",
+    "Eating little and often if nausea is hard, and keeping fluids up where you can",
+    "Resting without negotiating with yourself about whether you've earned it",
+    "Letting go of any pressure to plan, decide, or prepare beyond this stage",
+    "Attending your dating scan around week 12, and writing down anything you want to ask",
+    "Noticing what feels different, and being honest with someone you trust about it",
   ],
-  focusClosing: "You don't need to optimise pregnancy. One week at a time is enough.",
+  focusClosing:
+    "You don't need to optimise pregnancy. Looking after yourself this week is enough.",
+
+  weekBridgeIntro:
+    "The trimester overview gives you the shape of this stage. The week-by-week view is where it becomes specific, what tends to happen when, what your baby is doing, and what's worth noticing in your own body. Use it as a gentle companion, not a checklist.",
 
   weekGroups: [
     {
@@ -224,20 +296,36 @@ export const firstTrimester: TrimesterData = {
 
   questions: [
     {
-      q: "When do symptoms start in pregnancy?",
-      sub: "Understanding early pregnancy signals",
+      q: "When do pregnancy symptoms usually start?",
+      sub: "What's typical, and why timing varies",
     },
     {
-      q: "Is it normal to feel no symptoms at all?",
+      q: "Is it normal to feel almost no symptoms?",
       sub: "On the absence of early signs",
     },
     {
-      q: "What happens at the 12-week scan?",
+      q: "What happens at the 12-week dating scan?",
       sub: "What to expect at your first scan",
     },
     {
-      q: "Why do symptoms appear and disappear?",
-      sub: "Variation in early pregnancy",
+      q: "Why do my symptoms come and go?",
+      sub: "Variation in the first trimester",
+    },
+    {
+      q: "When should I tell people I'm pregnant?",
+      sub: "There is no single right answer",
+    },
+    {
+      q: "What appointments happen in the first trimester?",
+      sub: "Booking, screening, and the dating scan",
+    },
+    {
+      q: "What can I do about first trimester nausea?",
+      sub: "Practical, gentle ways to manage it",
+    },
+    {
+      q: "Is some bleeding in early pregnancy normal?",
+      sub: "When to reassure, when to call your midwife",
     },
   ],
 

@@ -172,10 +172,10 @@ const Week4MetaBar = () => (
             <Leaf size={16} className="text-sage" />
           </div>
           <div className="min-w-0">
-            <p className="font-sans text-[12.5px] text-foreground/85 leading-snug">
+            <p className="font-sans text-[13px] font-medium text-foreground leading-snug">
               ✔ Medically reviewed by Jenny Joines
             </p>
-            <p className="font-sans text-[11px] font-light text-muted-foreground/80 mt-0.5">
+            <p className="font-sans text-[11.5px] font-normal text-foreground/60 mt-0.5">
               Updated for 2026 · 8 min read · Early pregnancy
             </p>
           </div>
@@ -186,9 +186,9 @@ const Week4MetaBar = () => (
               <a key={id} href={`#${id}`}
                 className="group shrink-0 flex items-center gap-2 px-3 py-2 rounded-full hover:bg-sage-bg/60 transition-colors">
                 <span className="w-7 h-7 rounded-full bg-parchment-dark/80 border border-border/30 flex items-center justify-center group-hover:border-sage/30 transition-colors">
-                  <Icon size={12} className="text-sage-muted" />
+                  <Icon size={12} className="text-sage" />
                 </span>
-                <span className="font-sans text-[11.5px] font-medium text-foreground/70 group-hover:text-foreground whitespace-nowrap">
+                <span className="font-sans text-[12px] font-medium text-foreground/80 group-hover:text-foreground whitespace-nowrap">
                   {label}
                 </span>
               </a>

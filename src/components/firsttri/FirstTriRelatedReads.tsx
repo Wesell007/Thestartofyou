@@ -72,7 +72,7 @@ const FirstTriRelatedReads = () => {
             <h2 className="font-serif text-[1.85rem] sm:text-[2.1rem] md:text-[2.4rem] text-foreground leading-[1.1] mb-3">
               Helpful guidance for the first trimester
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed">
+            <p className="font-sans text-[15px] text-foreground/70 leading-relaxed">
               Expert-backed articles to support you now.
             </p>
           </div>
@@ -115,7 +115,7 @@ const FirstTriRelatedReads = () => {
                   dangerouslySetInnerHTML={{ __html: a.title }}
                 />
                 <p
-                  className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed flex-1"
+                  className="font-sans text-[14px] text-foreground/72 leading-relaxed flex-1"
                   // eslint-disable-next-line react/no-danger
                   dangerouslySetInnerHTML={{ __html: a.blurb }}
                 />

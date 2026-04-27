@@ -52,7 +52,7 @@ const FAQRow = ({ faq, defaultOpen = false }: { faq: FAQ; defaultOpen?: boolean 
         </span>
       </button>
       {open && (
-        <p className="pb-6 pr-10 font-sans text-[14.5px] font-light text-muted-foreground leading-relaxed">
+        <p className="pb-6 pr-10 font-sans text-[14.5px] text-foreground/75 leading-relaxed">
           {faq.a}
         </p>
       )}
@@ -74,7 +74,7 @@ const FirstTriFAQ = () => {
             <h2 className="font-serif text-[1.85rem] sm:text-[2.1rem] md:text-[2.4rem] text-foreground leading-[1.1] mb-3">
               Common questions in the first trimester
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed">
+            <p className="font-sans text-[15px] text-foreground/70 leading-relaxed">
               Quick answers to the things you&rsquo;re asking now.
             </p>
           </div>

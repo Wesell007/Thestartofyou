@@ -63,7 +63,7 @@ const FirstTriBigChanges = ({
           <h2 className="font-serif text-[2rem] sm:text-[2.25rem] md:text-[2.6rem] text-foreground leading-[1.1] mb-4">
             The big changes in this trimester
           </h2>
-          <p className="font-sans text-[15px] sm:text-[16px] font-light text-muted-foreground leading-relaxed">
+          <p className="font-sans text-[15px] sm:text-[16px] text-foreground/70 leading-relaxed">
             A calmer look at what&rsquo;s happening inside and out.
           </p>
         </div>
@@ -78,7 +78,7 @@ const FirstTriBigChanges = ({
               <h3 className="font-serif text-[1.1rem] text-foreground leading-snug">
                 {title}
               </h3>
-              <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">
+              <p className="font-sans text-[14px] text-foreground/72 leading-relaxed">
                 {body}
               </p>
             </div>

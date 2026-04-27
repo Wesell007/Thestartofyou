@@ -51,7 +51,7 @@ const FirstTriDeeper = () => {
                 <span className="flex items-center justify-center w-12 h-12 rounded-full border border-border/40 bg-card text-sage-muted group-hover:border-sage/50 group-hover:text-sage group-hover:bg-sage-bg/40 transition-all">
                   <Icon size={17} strokeWidth={1.5} />
                 </span>
-                <span className="font-sans text-[12.5px] font-light text-muted-foreground group-hover:text-foreground transition-colors leading-tight">
+                <span className="font-sans text-[12.5px] text-foreground/70 group-hover:text-foreground transition-colors leading-tight">
                   {label}
                 </span>
               </Link>

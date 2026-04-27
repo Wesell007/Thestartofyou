@@ -31,7 +31,7 @@ const FirstTriWhatItIs = ({ paragraphs }: Props) => {
             {paragraphs.map((para, i) => (
               <p
                 key={i}
-                className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8]"
+                className="font-sans text-[15px] text-foreground/75 leading-[1.8]"
               >
                 {para}
               </p>

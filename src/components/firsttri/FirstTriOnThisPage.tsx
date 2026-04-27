@@ -32,7 +32,7 @@ const FirstTriOnThisPage = () => {
               <li key={item.id} className="shrink-0">
                 <a
                   href={`#${item.id}`}
-                  className="font-sans text-[12px] lg:text-[12.5px] font-light text-muted-foreground hover:text-sage transition-colors whitespace-nowrap py-1 inline-block"
+                  className="font-sans text-[12px] lg:text-[12.5px] font-medium text-foreground/65 hover:text-sage transition-colors whitespace-nowrap py-1 inline-block"
                 >
                   {item.label}
                 </a>

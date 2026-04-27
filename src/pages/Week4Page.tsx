@@ -786,17 +786,17 @@ const related = [
 ];
 
 const Week4Related = () => (
-  <section id="guidance" className="bg-parchment py-20 md:py-24">
+  <section id="guidance" className="bg-parchment py-16 md:py-24">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
         <div className="max-w-xl">
           <SectionLabel>Read next, because of week 4</SectionLabel>
-          <h2 className="font-serif text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">
+          <h2 className="font-serif text-[1.8rem] sm:text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">
             Curated guidance for what's likely on your mind right now.
           </h2>
         </div>
         <Link to="/guidance"
-          className="inline-flex items-center gap-1.5 font-sans text-[13px] text-sage hover:gap-2.5 transition-all whitespace-nowrap">
+          className="inline-flex items-center gap-1.5 font-sans text-[13.5px] font-medium text-sage hover:gap-2.5 transition-all whitespace-nowrap">
           Browse all guidance <ArrowRight size={12} />
         </Link>
       </div>
@@ -810,16 +810,16 @@ const Week4Related = () => (
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
             </div>
             <div className="p-6 flex flex-col flex-1">
-              <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-terracotta/85 mb-3">
+              <span className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-terracotta mb-3">
                 {a.tag}
               </span>
-              <h3 className="font-serif text-[1.1rem] text-foreground leading-snug mb-3 group-hover:text-sage transition-colors">
+              <h3 className="font-serif text-[1.15rem] text-foreground leading-snug mb-3 group-hover:text-sage transition-colors">
                 {a.title}
               </h3>
-              <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-[1.7] flex-1 mb-4">
+              <p className="font-sans text-[13px] text-foreground/70 leading-[1.7] flex-1 mb-4">
                 {a.desc}
               </p>
-              <span className="inline-flex items-center gap-1.5 font-sans text-[12px] text-sage group-hover:gap-2.5 transition-all">
+              <span className="inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium text-sage group-hover:gap-2.5 transition-all">
                 Read guide <ArrowRight size={11} />
               </span>
             </div>

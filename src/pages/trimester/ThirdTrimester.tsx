@@ -1,60 +1,98 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import TrimesterHero from "@/components/trimester/TrimesterHero";
-import TrimesterAbout from "@/components/trimester/TrimesterAbout";
-import TrimesterExpect from "@/components/trimester/TrimesterExpect";
-import TrimesterDifficulties from "@/components/trimester/TrimesterDifficulties";
-import TrimesterNormal from "@/components/trimester/TrimesterNormal";
-import TrimesterFocus from "@/components/trimester/TrimesterFocus";
-import TrimesterWeeks from "@/components/trimester/TrimesterWeeks";
-import TrimesterQuestions from "@/components/trimester/TrimesterQuestions";
-import TrimesterEmotional from "@/components/trimester/TrimesterEmotional";
-import TrimesterAISupport from "@/components/trimester/TrimesterAISupport";
 import JournalPromotion from "@/components/shared/JournalPromotion";
-import TrimesterFinalCTA from "@/components/trimester/TrimesterFinalCTA";
+
+import ThirdTriHero from "@/components/thirdtri/ThirdTriHero";
+import ThirdTriOnThisPage from "@/components/thirdtri/ThirdTriOnThisPage";
+import ThirdTriEditorialImage from "@/components/thirdtri/ThirdTriEditorialImage";
+import ThirdTriWhatItIs from "@/components/thirdtri/ThirdTriWhatItIs";
+import ThirdTriExpect from "@/components/thirdtri/ThirdTriExpect";
+import ThirdTriBigChanges from "@/components/thirdtri/ThirdTriBigChanges";
+import ThirdTriDifficult from "@/components/thirdtri/ThirdTriDifficult";
+import ThirdTriSupport from "@/components/thirdtri/ThirdTriSupport";
+import ThirdTriFocus from "@/components/thirdtri/ThirdTriFocus";
+import ThirdTriWeekBridge from "@/components/thirdtri/ThirdTriWeekBridge";
+import ThirdTriRelatedReads from "@/components/thirdtri/ThirdTriRelatedReads";
+import ThirdTriDeeper from "@/components/thirdtri/ThirdTriDeeper";
+import ThirdTriFAQ from "@/components/thirdtri/ThirdTriFAQ";
+import ThirdTriSupportStrip from "@/components/thirdtri/ThirdTriSupportStrip";
+import ThirdTriQuoteBanner from "@/components/thirdtri/ThirdTriQuoteBanner";
+import ThirdTriNextStage from "@/components/thirdtri/ThirdTriNextStage";
+
 import { thirdTrimester } from "@/data/trimesterData";
 
 const ThirdTrimester = () => {
   const data = thirdTrimester;
+
   return (
-    <div className="min-h-screen font-sans">
+    <div className="min-h-screen font-sans bg-parchment">
       <Navbar />
       <main>
         {/* 1. Hero */}
-        <TrimesterHero data={data} />
+        <ThirdTriHero
+          label={data.label}
+          range={data.range}
+          tagline={data.tagline}
+          subtitle={data.heroSubtitle}
+          weekStart={data.weekStart}
+          weekEnd={data.weekEnd}
+        />
 
-        {/* 2. What this stage is */}
-        <TrimesterAbout data={data} bg="bg-lavender-section" />
+        {/* 2. On this page strip */}
+        <ThirdTriOnThisPage />
 
-        {/* 3. What to expect */}
-        <TrimesterExpect data={data} bg="bg-parchment" />
+        {/* 3. Editorial hero image */}
+        <ThirdTriEditorialImage />
 
-        {/* 4. What can feel difficult */}
-        <TrimesterDifficulties data={data} bg="bg-lavender-section" />
+        {/* 4. What the third trimester is */}
+        <ThirdTriWhatItIs paragraphs={data.about.paragraphs} />
 
-        {/* 5. What's normal */}
-        <TrimesterNormal data={data} bg="bg-parchment" />
+        {/* 5. What to expect (4 cards) */}
+        <ThirdTriExpect cards={data.expect} />
 
-        {/* 6. What to focus on */}
-        <TrimesterFocus data={data} bg="bg-lavender-section" />
+        {/* 6. The big changes */}
+        <ThirdTriBigChanges />
 
-        {/* 7. Week-by-week navigation */}
-        <TrimesterWeeks data={data} bg="bg-parchment-dark" />
+        {/* 7. What can feel difficult */}
+        <ThirdTriDifficult />
 
-        {/* 8. Common questions */}
-        <TrimesterQuestions data={data} bg="bg-lavender-section" />
+        {/* 8. What's normal / when to seek support */}
+        <ThirdTriSupport
+          normalItems={data.normal.normalItems}
+          seekSupport={data.normal.seekSupport}
+          disclaimer={data.normal.disclaimer}
+        />
 
-        {/* 9. AI support */}
-        <TrimesterAISupport data={data} bg="bg-parchment" />
+        {/* 9. What to focus on */}
+        <ThirdTriFocus closing={data.focusClosing} />
 
-        {/* 10. Emotional moment */}
-        <TrimesterEmotional data={data} bg="bg-lavender-section" />
+        {/* 10. Green week-by-week bridge */}
+        <ThirdTriWeekBridge
+          weekStart={data.weekStart}
+          weekEnd={data.weekEnd}
+          highlightWeek={36}
+        />
 
-        {/* 11. Journal companion */}
-        <JournalPromotion />
+        {/* 11. Helpful guidance — related articles */}
+        <ThirdTriRelatedReads />
 
-        {/* 12. Final CTA */}
-        <TrimesterFinalCTA data={data} />
+        {/* 12. Where to go deeper */}
+        <ThirdTriDeeper />
+
+        {/* 13. Common questions FAQ */}
+        <ThirdTriFAQ />
+
+        {/* 14. Support strip */}
+        <ThirdTriSupportStrip />
+
+        {/* 15. Quote banner */}
+        <ThirdTriQuoteBanner />
+
+        {/* 16. Journal promotion */}
+        <JournalPromotion contextCopy="A gentle, beautifully designed companion for the final stage of pregnancy, weekly reflections, appointment notes, and a keepsake to look back on long after." />
+
+        {/* 17. Next stage CTA */}
+        <ThirdTriNextStage />
       </main>
       <Footer />
     </div>

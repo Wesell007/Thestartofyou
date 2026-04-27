@@ -554,9 +554,9 @@ export const thirdTrimester: TrimesterData = {
   about: {
     title: "What the third trimester is",
     paragraphs: [
-      "The third trimester is the most physically noticeable stage, your body is preparing for birth, and that preparation is demanding. Growth accelerates, space becomes limited, and sleep is often disrupted.",
-      "This is also a time of increasing anticipation. The end of pregnancy is in sight, even when it still feels distant. Birth plans, hospital bags, and names that were abstract in earlier weeks begin to feel real and urgent.",
-      "Emotionally, the third trimester can bring a sense of intensity, a mix of readiness and not-readiness that doesn't fully resolve until after the birth. Many people describe feeling both enormous and invisible in this stage.",
+      "The third trimester usually spans weeks 28 to 40. It is the final stage of pregnancy, the part where the baby continues to grow steadily, gain weight, and prepare for life outside the womb. Lungs mature, fat stores build, and most babies move into a head-down position as the weeks pass.",
+      "Physically, this is often the fullest stage. The body feels heavier, slower, and more demanding. Sleep can become broken, comfort harder to find, and movement may take more effort than before. Appointments and monitoring become more regular, and the focus quietly shifts from pregnancy to preparation.",
+      "Emotionally, labour begins to feel real. Anticipation, fear, curiosity, and impatience can all sit in the same week. Not everyone feels ready, not everyone wants to prepare in the same way, and mixed feelings about birth and finishing pregnancy are a normal part of arriving at the end.",
     ],
   },
 
@@ -565,121 +565,165 @@ export const thirdTrimester: TrimesterData = {
       id: "body",
       label: "Your body",
       intro:
-        "Physical demands increase significantly in the third trimester. You may experience:",
+        "The physical experience of the third trimester tends to feel fuller, slower, and more demanding than earlier stages:",
       points: [
-        "Stronger, more frequent baby movements, and occasional discomfort from them",
-        "Difficulty sleeping due to size, discomfort, and frequent toilet trips",
-        "Heartburn, shortness of breath, and pelvic pressure",
-        "Braxton Hicks contractions, practice tightening of the uterus",
-        "Swelling in feet, ankles, and hands",
-        "Increasing fatigue, similar to the first trimester",
+        "More heaviness and physical effort, especially later in the day",
+        "Interrupted sleep from size, discomfort, and frequent toilet trips",
+        "Pelvic pressure, back discomfort, swelling, or breathlessness",
+        "A changing centre of gravity that makes movement slower",
+        "Needing more rest, and recovering from exertion more slowly",
       ],
       meaning:
-        "The third trimester is genuinely demanding. Discomfort is common and real, being exhausted, sore, and uncomfortable does not mean you're doing anything wrong.",
+        "The third trimester is genuinely demanding. Being tired, sore, and physically uncomfortable is not a sign you are doing anything wrong. Slowing down is part of what this stage asks for.",
     },
     {
       id: "baby",
       label: "Your baby",
       intro:
-        "Your baby is growing rapidly and preparing for birth. Key developments include:",
+        "Your baby is finishing the developmental work of pregnancy and preparing for birth:",
       points: [
-        "Significant weight gain, your baby roughly doubles in weight in this trimester",
-        "Lungs maturing, in preparation for breathing after birth",
-        "The baby moving into a head-down position (usually by 36 weeks)",
-        "Sleep cycles becoming established",
-        "A daily pattern of movement you may begin to recognise",
+        "Continued growth and significant weight gain across these weeks",
+        "Stronger, more recognisable patterns of movement most days",
+        "Shifting position, with most babies turning head-down by 36 weeks",
+        "Lungs, brain, fat stores, and major body systems maturing for birth",
       ],
       meaning:
-        "Movement remains one of the most important things to monitor in the third trimester. You'll be asked to notice patterns, not count every kick, but stay aware of what feels normal for your baby.",
+        "Movement is one of the most important things to stay aware of in this trimester. You are looking for what feels normal for your baby, not a fixed number, and any clear change is always worth raising.",
     },
     {
       id: "emotional",
       label: "Emotionally",
       intro:
-        "The emotional experience of the third trimester is rarely simple. You might feel:",
+        "The emotional landscape of the third trimester is rarely one thing at once:",
       points: [
-        "A mixture of readiness and fear about the birth",
-        "Nesting, a strong drive to prepare your home and environment",
-        "Anxiety about labour, parenting, or the unknown",
-        "Moments of feeling deeply connected to the pregnancy",
-        "Moments of being desperate for it to be over",
-        "Complex feelings that are hard to name",
+        "Anticipation rising as birth becomes closer",
+        "Fear and curiosity coexisting, sometimes in the same hour",
+        "Wanting birth to begin and wanting more time, both at once",
+        "Mixed feelings about the end of pregnancy itself",
+        "Practical preparation quietly shaping how you feel day to day",
       ],
       meaning:
-        "Wanting the pregnancy to end and feeling connected to it can coexist. The third trimester often holds contradictory emotions at once, and that's part of what makes it one of the most intense stages.",
+        "Holding contradictory feelings at the end of pregnancy is normal. You don't have to feel only ready, or only excited, or only afraid. All of it can sit alongside each other.",
     },
     {
       id: "preparation",
-      label: "Preparing for what's next",
+      label: "Preparation & nearing birth",
       intro:
-        "The mental load of the third trimester often involves preparing for birth and early parenthood simultaneously:",
+        "The mental load of this stage often involves preparing for birth and life beyond it at the same time:",
       points: [
-        "Building a birth plan or set of preferences",
-        "Preparing your home, hospital bag, and practical logistics",
-        "Thinking about the transition from pregnancy to parenthood",
-        "Navigating other people's birth stories and unsolicited advice",
+        "Hospital bag, baby essentials, and practical logistics taking shape",
+        "Labour beginning to feel real rather than abstract",
+        "More regular appointments and conversations about birth preferences",
+        "More attention paid to movement, symptoms, and what feels normal",
+        "Support needs becoming clearer as the date approaches",
       ],
       meaning:
-        "Preparation is useful, but it can also become a way of managing anxiety. Some things can't be planned, and arriving at birth with flexibility rather than a fixed expectation is often more helpful.",
+        "Preparation can soothe some people and overwhelm others. Both are valid. You don't need a complete plan, you need flexibility and people you trust around you.",
     },
   ],
+
+  bigChanges: {
+    eyebrow: "Defining the stage",
+    title: "The big changes in this trimester",
+    intro:
+      "A closer look at what defines the final stage of pregnancy, the shifts that quietly shape almost every week from 28 onwards.",
+    items: [
+      {
+        label: "Heaviness increases",
+        body: "As the baby grows and gains weight, the body begins to carry more in every sense. Even simple things, walking, getting up from a chair, getting dressed, can take more effort than before. This isn't weakness, it is the work of the stage.",
+      },
+      {
+        label: "Sleep becomes harder",
+        body: "Comfort is harder to find, the bladder fills more often, and the mind sometimes runs ahead to birth. Broken sleep is one of the most universal experiences of the third trimester, even when you are exhausted.",
+      },
+      {
+        label: "Movement matters more",
+        body: "Patterns of movement become clearer, and you'll be asked to stay aware of what feels normal for your baby. Any clear change in those patterns is something to raise, no matter how small it feels.",
+      },
+      {
+        label: "Appointments become more regular",
+        body: "Midwife appointments tend to space closer together as you move through 28, 34, 36 and beyond. Conversations shift toward growth, position, birth preferences, and what to do if labour begins.",
+      },
+      {
+        label: "Practical preparation begins to matter",
+        body: "Hospital bags, car seats, baby clothes, and the corner of a room are quietly getting ready. The shift from idea to logistics often happens in this stage, sometimes quickly, sometimes in waves.",
+      },
+      {
+        label: "Birth feels closer and more real",
+        body: "Labour stops being something abstract you read about and starts being something with a probable timeframe. That shift is significant, and it is allowed to feel both grounding and unsettling at once.",
+      },
+    ],
+    closing:
+      "This stage asks more of your body and your attention. Slowing down is not failure, it is part of the work.",
+  },
 
   difficulties: {
     title: "What can feel difficult in this stage",
     intro:
-      "The third trimester carries a specific kind of weight, the combination of physical demands and anticipatory pressure.",
+      "The third trimester can be physically and emotionally demanding. The body can feel less comfortable, labour can feel close but still uncertain, and preparation can soothe some people while overwhelming others.",
     items: [
       {
-        label: "Physical discomfort that doesn't ease",
-        body: "Unlike earlier trimesters, the physical experience of the third trimester often intensifies rather than resolves. There is rarely a comfortable position.",
+        label: "Feeling physically heavier than expected",
+        body: "The cumulative weight of late pregnancy can be more tiring than you anticipated. Tasks that felt simple a few weeks ago can take real effort now, and that contrast can be hard to sit with.",
       },
       {
-        label: "Anticipatory anxiety about birth",
-        body: "The closer birth becomes, the more present birth anxiety often is. This is a natural response, not something that needs to be solved before going into labour.",
+        label: "Sleep becoming broken or shallow",
+        body: "Even with the best set-up of pillows and routines, sleep often refuses to be deep. Waking through the night to turn over, to use the loo, or just because, is part of this stage for many people.",
       },
       {
-        label: "The pressure to 'enjoy the last weeks'",
-        body: "Well-meaning people often tell you to enjoy the final weeks. When you're exhausted and uncomfortable, this can feel tone-deaf rather than reassuring.",
+        label: "Wondering if every change means labour is near",
+        body: "Tightenings, pressure, an off feeling, a sudden burst of energy, all of it can feel like a possible signal. Reading every change becomes its own quiet job, and it can be exhausting.",
       },
       {
-        label: "Not knowing when it will start",
-        body: "The unknowability of the birth date is something many people find hard. Due dates are estimates, but the uncertainty they create is real.",
+        label: "Feeling both ready and not ready",
+        body: "Wanting birth to begin and wanting more time can sit together in the same week. Neither feeling is wrong, and both can stay until labour itself.",
+      },
+      {
+        label: "Wanting comfort while needing to prepare",
+        body: "There is real tension between resting your tired body and ticking off the practical list. Most people swing between the two, and neither side wins cleanly.",
+      },
+      {
+        label: "Needing more support than before",
+        body: "This stage can quietly raise the bar on how much help you actually need, around the house, at work, with appointments. Asking for it is not a failure of independence, it is a reasonable response.",
       },
     ],
     closing:
-      "The third trimester asks a lot. You don't have to perform readiness, just keep showing up.",
+      "The final stretch can feel physically heavy and emotionally mixed. That does not mean you are approaching it the wrong way.",
   },
 
   normal: {
     normalItems: [
-      "Difficulty sleeping, almost universal in the third trimester",
-      "Braxton Hicks contractions, particularly in the evenings",
-      "Shortness of breath and heartburn as the uterus presses upward",
-      "Pelvic discomfort, especially when walking",
-      "Swelling in hands, feet, and ankles, particularly in warmer weather",
-      "Emotional complexity, including fear and readiness at the same time",
+      "Stronger or more noticeable movement patterns",
+      "Interrupted sleep, even with a good routine",
+      "Pelvic pressure or feeling heavier as the weeks go on",
+      "Needing to slow down more than before",
+      "Mild swelling in feet, ankles, or hands, especially in warmer weather",
+      "Braxton Hicks tightenings, particularly in the evenings",
+      "Mixed emotions about labour or the end of pregnancy",
     ],
     seekSupport: [
-      "Reduced baby movement, or a change in your baby's usual pattern",
-      "Sudden severe swelling, especially in the face or hands",
-      "A severe headache with visual disturbances (possible preeclampsia signs)",
-      "Fever or signs of infection",
-      "Bleeding or unusual discharge",
-      "Contractions before 37 weeks",
+      "Reduced or changed baby movement, at any time",
+      "Severe headache, vision changes, or sudden swelling in the face or hands",
+      "Heavy bleeding, or any bleeding that worries you",
+      "Severe or persistent pain",
+      "Contractions or symptoms before 37 weeks that you're unsure how to interpret",
+      "Anything that feels significantly different or worrying, even if you can't name it",
     ],
     disclaimer:
-      "This is not medical advice. If you have any concerns about your pregnancy, always consult your midwife, doctor, or healthcare provider.",
+      "This is not medical advice. If something feels different, it is always worth raising. Contact your midwife, GP, or maternity unit. In the UK, NHS 111 is available out of hours.",
   },
 
   focus: [
-    "Attending your regular midwife appointments",
-    "Monitoring baby's movement pattern daily",
-    "Preparing your birth preferences, with flexibility built in",
-    "Getting your hospital bag ready by around 36 weeks",
-    "Resting when you can, fatigue in the third trimester is real",
-    "Staying connected to your support network",
+    "Rest more than you think you should, even when the list is long",
+    "Notice your baby's movements and what feels normal for you each day",
+    "Prepare practically without overloading yourself in any single week",
+    "Make space for labour to feel real without forcing certainty about it",
   ],
-  focusClosing: "You don't need to be ready. You need to keep going. The birth will happen, with or without a perfect plan.",
+  focusClosing:
+    "You don't need to be fully ready. You need to keep showing up, gently, as the weeks bring you closer.",
+
+  weekBridgeIntro:
+    "The trimester overview gives you the shape of this stage. The week-by-week view is where it becomes specific, what tends to happen when, what your baby is doing, and what's worth gently noticing.",
 
   weekGroups: [
     {
@@ -694,40 +738,45 @@ export const thirdTrimester: TrimesterData = {
       label: "The final approach (Weeks 37-40)",
       weeks: [37, 38, 39, 40],
     },
-    {
-      label: "Beyond due date (Weeks 41-42)",
-      weeks: [41, 42],
-    },
   ],
 
   questions: [
     {
-      q: "What do Braxton Hicks feel like?",
-      sub: "Practice contractions explained",
+      q: "How much should my baby be moving?",
+      sub: "Movement patterns in late pregnancy",
     },
     {
-      q: "How do I monitor my baby's movement?",
-      sub: "Understanding kick patterns",
+      q: "Is it normal to feel so uncomfortable?",
+      sub: "On the physical weight of this stage",
     },
     {
-      q: "What does a birth plan actually include?",
-      sub: "Preparing for birth with flexibility",
+      q: "When should I pack my hospital bag?",
+      sub: "Practical preparation timelines",
     },
     {
-      q: "What happens if I go past my due date?",
-      sub: "Overdue, what comes next",
+      q: "How do I know if labour is starting?",
+      sub: "Early signs, and what to look for",
+    },
+    {
+      q: "Is it normal to feel emotional or unsettled now?",
+      sub: "The emotional weight of nearing birth",
+    },
+    {
+      q: "When should I call my midwife or maternity unit?",
+      sub: "What is and isn't worth picking up the phone for",
     },
   ],
 
   emotional: {
     title: "A moment in the third trimester",
-    body: "There's a particular feeling in the last weeks of pregnancy that is hard to describe, a strange combination of enormous and invisible, of 'I can't wait' and 'I'm not ready.'",
+    body: "There is a particular feeling in the last weeks of pregnancy that is hard to describe, a strange combination of enormous and invisible, of 'I can't wait' and 'I'm not ready.'",
     quote:
-      "You are closer than you think. And you are ready in more ways than you currently believe.",
+      "You are allowed to feel close to birth and still not feel fully ready.",
   },
 
   capture: {
-    intro: "This stage can feel like holding a lot at once, physical demands, anticipation, and the quiet intensity of waiting for something you can't fully prepare for.",
+    intro:
+      "This stage can feel like holding a lot at once, physical demands, anticipation, and the quiet intensity of waiting for something you can't fully prepare for.",
     prompt:
       "What do you want to remember from this final stage, the waiting, the preparing, the feeling of nearly?",
   },

@@ -1,11 +1,37 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import {
+  HeartHandshake,
+  Flower2,
+  Footprints,
+  Brain,
+  Users,
+  Briefcase,
+  Sparkles,
+  Baby,
+  Stethoscope,
+  ScanLine,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 export interface TrimesterTopicLink {
   label: string;
   href: string;
-  hint: string;
+  hint?: string;
+  icon?: keyof typeof iconMap;
 }
+
+const iconMap = {
+  trying: HeartHandshake,
+  fertility: Flower2,
+  movement: Footprints,
+  mental: Brain,
+  partner: Users,
+  back: Briefcase,
+  postpartum: Sparkles,
+  baby: Baby,
+  health: Stethoscope,
+  scans: ScanLine,
+} as const;
 
 interface Props {
   eyebrow?: string;
@@ -16,56 +42,53 @@ interface Props {
 }
 
 const TrimesterTopicConnection = ({
-  eyebrow = "Explore by topic",
+  eyebrow,
   title = "Where to go deeper",
-  intro = "If something here resonated, these topic areas hold more on each thread.",
+  intro,
   topics,
-  bg = "bg-parchment-dark",
+  bg = "bg-parchment",
 }: Props) => {
   if (!topics?.length) return null;
 
   return (
-    <section className={`${bg} section-spacing-sm`}>
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
+    <section className={`${bg} pt-10 pb-14 sm:pt-12 sm:pb-16`}>
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         <div className="mb-7 sm:mb-9">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="h-px w-8 bg-sage-light" />
-            <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage-muted">
+          {eyebrow && (
+            <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage-muted mb-2">
               {eyebrow}
             </p>
-          </div>
-          <h2 className="font-serif text-[1.4rem] sm:text-[1.6rem] md:text-[1.85rem] text-foreground leading-tight">
+          )}
+          <h2 className="font-serif text-[1.3rem] sm:text-[1.5rem] text-foreground leading-tight">
             {title}
           </h2>
           {intro && (
-            <p className="mt-2.5 font-sans text-[14px] sm:text-[15px] font-light text-muted-foreground leading-relaxed max-w-2xl">
+            <p className="mt-2 font-sans text-[13.5px] font-light text-muted-foreground leading-relaxed max-w-2xl">
               {intro}
             </p>
           )}
         </div>
 
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 sm:gap-y-4">
-          {topics.slice(0, 4).map((topic) => (
-            <li key={topic.href}>
-              <Link
-                to={topic.href}
-                className="group flex items-start justify-between gap-4 py-3 border-b border-border/30 hover:border-sage/40 transition-colors"
-              >
-                <div>
-                  <p className="font-serif text-[16px] sm:text-[17px] text-foreground group-hover:text-sage transition-colors leading-snug">
+        {/* Quiet horizontal icon row — scrolls on mobile, wraps on tablet+ */}
+        <ul className="flex gap-x-6 sm:gap-x-8 gap-y-5 overflow-x-auto sm:flex-wrap scrollbar-none -mx-1 px-1">
+          {topics.map((topic) => {
+            const Icon: LucideIcon = topic.icon ? iconMap[topic.icon] : Sparkles;
+            return (
+              <li key={topic.href} className="shrink-0">
+                <Link
+                  to={topic.href}
+                  className="group flex flex-col items-center gap-2 text-center min-w-[92px] sm:min-w-[110px]"
+                >
+                  <span className="flex items-center justify-center w-10 h-10 rounded-full border border-border/40 bg-card text-sage-muted group-hover:border-sage/50 group-hover:text-sage group-hover:bg-sage-bg/30 transition-all">
+                    <Icon size={16} strokeWidth={1.5} />
+                  </span>
+                  <span className="font-sans text-[12px] font-light text-muted-foreground group-hover:text-foreground transition-colors leading-tight whitespace-nowrap">
                     {topic.label}
-                  </p>
-                  <p className="mt-1 font-sans text-[12.5px] font-light text-muted-foreground leading-relaxed">
-                    {topic.hint}
-                  </p>
-                </div>
-                <ArrowUpRight
-                  size={15}
-                  className="mt-1 shrink-0 text-sage-muted group-hover:text-sage group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all"
-                />
-              </Link>
-            </li>
-          ))}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>

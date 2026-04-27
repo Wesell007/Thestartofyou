@@ -1,0 +1,46 @@
+import botanicalSprig from "@/assets/botanical-branch-bl.png";
+
+interface Props {
+  paragraphs: string[];
+}
+
+const FirstTriWhatItIs = ({ paragraphs }: Props) => {
+  return (
+    <section id="what-it-is" className="bg-parchment section-spacing">
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
+        {/* Top divider */}
+        <div className="h-px bg-border/40 mb-12 md:mb-16" />
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
+          {/* Heading column */}
+          <div className="md:col-span-5 relative">
+            <p className="stage-label mb-4">This Stage</p>
+            <h2 className="font-serif text-[2rem] sm:text-[2.25rem] md:text-[2.6rem] text-foreground leading-[1.1]">
+              What the first trimester is
+            </h2>
+            <img
+              src={botanicalSprig}
+              alt=""
+              aria-hidden="true"
+              className="hidden md:block absolute -left-6 -top-8 w-20 opacity-25 pointer-events-none select-none"
+            />
+          </div>
+
+          {/* Body column — split into two on desktop for editorial feel */}
+          <div className="md:col-span-7 grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-5">
+            {paragraphs.map((para, i) => (
+              <p
+                key={i}
+                className="font-sans text-[15px] font-light text-muted-foreground leading-[1.8]"
+              >
+                {para}
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default FirstTriWhatItIs;

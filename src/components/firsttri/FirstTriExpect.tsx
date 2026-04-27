@@ -9,7 +9,7 @@ interface Props {
 const iconByLabel: Record<string, { Icon: LucideIcon; tint: string; ring: string }> = {
   body: { Icon: Heart, tint: "bg-terracotta/10 text-terracotta", ring: "ring-terracotta/20" },
   baby: { Icon: Sparkles, tint: "bg-sage-bg text-sage", ring: "ring-sage/20" },
-  emotional: { Icon: Brain, tint: "bg-lavender-section text-foreground/70", ring: "ring-foreground/10" },
+  emotional: { Icon: Brain, tint: "bg-lavender/20 text-lavender-foreground", ring: "ring-lavender/30" },
   uncertainty: { Icon: Hourglass, tint: "bg-parchment-dark text-foreground/70", ring: "ring-foreground/10" },
 };
 

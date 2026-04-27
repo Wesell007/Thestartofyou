@@ -12,7 +12,7 @@ const SecondTriEditorialImage = () => {
               loading="lazy"
               width={1600}
               height={620}
-              className="w-full h-[260px] sm:h-[380px] md:h-[500px] lg:h-[560px] object-cover object-[60%_25%] sm:object-[58%_28%] md:object-[55%_30%]"
+              className="w-full h-[300px] sm:h-[420px] md:h-[520px] lg:h-[580px] object-cover object-[50%_18%] sm:object-[48%_22%] md:object-[45%_26%] lg:object-[42%_28%]"
             />
             <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-foreground/40 via-foreground/15 to-transparent pointer-events-none" />
 

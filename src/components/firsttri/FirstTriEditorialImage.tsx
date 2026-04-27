@@ -12,7 +12,7 @@ const FirstTriEditorialImage = () => {
               loading="lazy"
               width={1600}
               height={620}
-              className="w-full h-[240px] sm:h-[380px] md:h-[500px] lg:h-[560px] object-cover"
+              className="w-full h-[260px] sm:h-[380px] md:h-[500px] lg:h-[560px] object-cover object-[68%_22%] sm:object-[65%_25%] md:object-[62%_28%]"
             />
             {/* Soft overlay for legibility — stronger on mobile for card legibility */}
             <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-foreground/40 via-foreground/15 to-transparent pointer-events-none" />

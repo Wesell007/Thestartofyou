@@ -34,7 +34,7 @@ const FirstTriSupportStrip = () => {
                 loading="lazy"
                 width={800}
                 height={600}
-                className="w-full h-[280px] sm:h-[340px] md:h-[400px] object-cover"
+                className="w-full h-[280px] sm:h-[340px] md:h-[400px] object-cover object-[35%_30%]"
               />
             </div>
           </div>

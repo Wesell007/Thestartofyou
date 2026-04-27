@@ -213,19 +213,19 @@ const glanceFacts = [
 const Week4AtAGlance = () => (
   <section id="at-a-glance" className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl mb-14 md:mb-20">
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-      <div className="lg:col-span-3 relative bg-gradient-to-br from-stage-pregnancy/45 via-parchment to-parchment-dark/50 rounded-3xl border border-border/40 p-8 md:p-10 overflow-hidden shadow-card-brand">
+      <div className="lg:col-span-3 relative bg-gradient-to-br from-stage-pregnancy/45 via-parchment to-parchment-dark/50 rounded-3xl border border-border/40 p-7 sm:p-8 md:p-10 overflow-hidden shadow-card-brand">
         <img src={botanicalAccent} alt="" aria-hidden="true"
           className="absolute -left-3 bottom-0 w-28 opacity-35 pointer-events-none select-none" />
         <SectionLabel tone="terracotta">At a glance</SectionLabel>
-        <h2 className="font-serif text-[1.85rem] md:text-[2.1rem] text-foreground leading-snug mb-5">
+        <h2 className="font-serif text-[1.7rem] sm:text-[1.85rem] md:text-[2.1rem] text-foreground leading-snug mb-5">
           Week 4 is small, quiet — and quietly enormous.
         </h2>
-        <p className="font-sans text-[14.5px] font-light text-foreground/80 leading-[1.85] mb-4">
+        <p className="font-sans text-[15px] text-foreground/85 leading-[1.8] mb-4">
           Implantation has likely just happened, or is happening this week. The embryo is no bigger than a poppy seed,
           but the biological scaffolding for a whole pregnancy — placenta, yolk sac, the earliest layers that become organs —
           is already being laid down.
         </p>
-        <p className="font-sans text-[14.5px] font-light text-foreground/80 leading-[1.85]">
+        <p className="font-sans text-[15px] text-foreground/85 leading-[1.8]">
           You may have just had a positive test, or be about to. Some people feel early signs. Many feel almost nothing.
           Both are entirely normal at week 4.
         </p>
@@ -236,8 +236,8 @@ const Week4AtAGlance = () => (
         <ul className="divide-y divide-border/40 -mx-1">
           {glanceFacts.map((f) => (
             <li key={f.label} className="flex items-baseline justify-between gap-4 px-1 py-3.5 first:pt-1 last:pb-1">
-              <span className="font-sans text-[11px] tracking-[0.18em] uppercase text-muted-foreground/80">{f.label}</span>
-              <span className="font-serif text-[14.5px] text-foreground text-right">{f.value}</span>
+              <span className="font-sans text-[11px] font-semibold tracking-[0.18em] uppercase text-foreground/60">{f.label}</span>
+              <span className="font-serif text-[15px] text-foreground text-right">{f.value}</span>
             </li>
           ))}
         </ul>

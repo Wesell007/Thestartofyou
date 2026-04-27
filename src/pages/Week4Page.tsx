@@ -482,31 +482,31 @@ const emotionalTruths = [
 const Week4Emotional = () => (
   <section id="emotional" className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl py-16 md:py-24">
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-      <div className="lg:col-span-2 relative bg-gradient-to-br from-lavender-bg via-parchment to-lavender-bg/40 rounded-3xl border border-border/40 p-8 md:p-9 shadow-card-brand overflow-hidden">
+      <div className="lg:col-span-2 relative bg-gradient-to-br from-lavender-bg via-parchment to-lavender-bg/40 rounded-3xl border border-border/40 p-7 sm:p-8 md:p-9 shadow-card-brand overflow-hidden">
         <img src={botanicalAccent} alt="" aria-hidden="true"
           className="absolute right-0 top-0 w-24 opacity-35 pointer-events-none select-none" />
         <SectionLabel tone="lavender">Emotionally this week</SectionLabel>
-        <h2 className="font-serif text-[1.85rem] md:text-[2.1rem] text-foreground leading-snug mb-4">
+        <h2 className="font-serif text-[1.7rem] sm:text-[1.85rem] md:text-[2.1rem] text-foreground leading-snug mb-4">
           A lot, very quietly, all at once.
         </h2>
-        <p className="font-sans text-[14px] font-light text-foreground/80 leading-[1.85] mb-4">
+        <p className="font-sans text-[14.5px] text-foreground/80 leading-[1.8] mb-4">
           Week 4 is emotionally specific. The pregnancy is real on paper, but doesn't feel real in your body yet.
           That gap between knowing and feeling can be confusing, joyful, anxious or numb — sometimes all on the same day.
         </p>
-        <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-[1.75]">
+        <p className="font-sans text-[14px] text-foreground/70 leading-[1.75]">
           Whatever you're feeling, you don't need to perform any particular emotion right now.
         </p>
       </div>
 
-      <div className="lg:col-span-3 bg-card rounded-3xl border border-border/40 p-8 md:p-9 shadow-card-brand">
-        <p className="font-sans text-[10.5px] font-medium tracking-[0.25em] uppercase text-sage-muted mb-4">
+      <div className="lg:col-span-3 bg-card rounded-3xl border border-border/40 p-7 sm:p-8 md:p-9 shadow-card-brand">
+        <p className="font-sans text-[11px] font-semibold tracking-[0.24em] uppercase text-sage mb-4">
           What this week often looks like
         </p>
         <ul className="space-y-3.5">
           {emotionalTruths.map((t) => (
             <li key={t} className="flex items-start gap-3">
               <span className="mt-2 w-1.5 h-1.5 rounded-full bg-lavender shrink-0" />
-              <span className="font-serif italic text-[14.5px] text-foreground/85 leading-[1.65]">{t}</span>
+              <span className="font-serif italic text-[15px] text-foreground/85 leading-[1.65]">{t}</span>
             </li>
           ))}
         </ul>

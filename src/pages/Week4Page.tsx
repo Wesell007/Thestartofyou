@@ -46,13 +46,13 @@ import fatigueImg from "@/assets/article-hero-fatigue.jpg";
    ───────────────────────────────────────────────────────────────────── */
 const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; tone?: "sage" | "terracotta" | "lavender" }) => {
   const toneCls =
-    tone === "terracotta" ? "text-terracotta/80"
-    : tone === "lavender" ? "text-lavender-foreground/80"
-    : "text-sage-muted";
+    tone === "terracotta" ? "text-terracotta"
+    : tone === "lavender" ? "text-lavender-foreground"
+    : "text-sage";
   return (
-    <div className="flex items-center gap-3 mb-3">
-      <span className={`h-px w-7 bg-current opacity-40 ${toneCls}`} />
-      <p className={`font-sans text-[10.5px] font-medium tracking-[0.28em] uppercase ${toneCls}`}>{children}</p>
+    <div className="flex items-center gap-3 mb-3.5">
+      <span className={`h-px w-7 bg-current opacity-50 ${toneCls}`} />
+      <p className={`font-sans text-[11px] font-semibold tracking-[0.26em] uppercase ${toneCls}`}>{children}</p>
     </div>
   );
 };

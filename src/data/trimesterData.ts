@@ -352,9 +352,9 @@ export const secondTrimester: TrimesterData = {
   range: "Weeks 13-27",
   weekStart: 13,
   weekEnd: 27,
-  tagline: "Growth & Increasing Awareness",
+  tagline: "Growth, Movement & Emerging Visibility",
   heroSubtitle:
-    "Often described as the 'easier' trimester, the second stage brings a shift, physically, emotionally, and in how real the pregnancy begins to feel. Weeks 13 through 27.",
+    "The second trimester is the middle stage of pregnancy. From weeks 13 to 27, many people begin to feel more physically themselves again, the bump becomes more visible, the baby grows rapidly, first movements may begin, and the anatomy scan becomes a major emotional and practical milestone. The pregnancy starts to feel more real, both inside you and to the world around you.",
   sectionBg: "bg-parchment-dark",
   weekBg: "bg-parchment-dark",
   accentColor: "text-sage",

@@ -27,12 +27,12 @@ const FirstTriOnThisPage = () => {
             On this page
           </span>
           <span className="hidden md:block h-px w-6 bg-sage-light shrink-0" />
-          <ul className="flex gap-x-5 lg:gap-x-7 overflow-x-auto md:flex-wrap scrollbar-none -mx-1 px-1">
+          <ul className="flex gap-x-5 lg:gap-x-7 overflow-x-auto lg:flex-wrap scrollbar-none -mx-1 px-1 py-1">
             {items.map((item) => (
               <li key={item.id} className="shrink-0">
                 <a
                   href={`#${item.id}`}
-                  className="font-sans text-[12px] lg:text-[12.5px] font-light text-muted-foreground hover:text-sage transition-colors whitespace-nowrap"
+                  className="font-sans text-[12px] lg:text-[12.5px] font-light text-muted-foreground hover:text-sage transition-colors whitespace-nowrap py-1 inline-block"
                 >
                   {item.label}
                 </a>

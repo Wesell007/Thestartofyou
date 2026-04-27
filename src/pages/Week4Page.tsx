@@ -123,9 +123,11 @@ const Week4Hero = () => (
           {/* Embryo medallion */}
           <div className="flex flex-col items-center gap-3">
             <div className="relative w-40 h-40 sm:w-52 sm:h-52 md:w-60 md:h-60 rounded-full bg-card border-[4px] border-sage/20 flex items-center justify-center shadow-elevated overflow-hidden">
-              <img src={embryoImg} alt="Editorial illustration of a 4-week embryo"
+              <img src={embryoImg}
+                alt="Soft editorial illustration of a 4-week pregnancy: a primitive embryonic disc and yolk sac inside the gestational sac, nestled in the uterine lining"
                 width={1024} height={1024}
-                className="w-full h-full object-cover" />
+                loading="eager" decoding="async"
+                className="w-full h-full object-cover scale-[1.02]" />
               <span className="absolute inset-0 rounded-full ring-1 ring-inset ring-foreground/[0.05]" />
             </div>
             <p className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-foreground/65">Your baby this week</p>

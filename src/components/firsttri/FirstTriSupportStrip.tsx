@@ -49,13 +49,22 @@ const FirstTriSupportStrip = () => {
               Ask anything about early pregnancy and get gentle, grounded
               guidance shaped around the stage you&rsquo;re actually in.
             </p>
-            <Link
-              to="/ask"
-              className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all mb-10"
-            >
-              Ask a question
-              <ArrowRight size={15} />
-            </Link>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-10">
+              <Link
+                to="/ask"
+                className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all"
+              >
+                Ask a question
+                <ArrowRight size={15} />
+              </Link>
+              <Link
+                to="/pregnancy"
+                className="inline-flex items-center gap-2 border border-terracotta/40 text-terracotta rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium hover:bg-terracotta/5 transition-all"
+              >
+                Start your journey
+                <ArrowRight size={15} />
+              </Link>
+            </div>
 
             {/* Three reassurance mini-blocks */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-6 border-t border-border/40">

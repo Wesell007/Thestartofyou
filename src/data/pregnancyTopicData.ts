@@ -486,7 +486,13 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         description: "What your baby needs at home, kept simple.",
         links: [
           { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to" },
-          { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide" },
+        ],
+      },
+      {
+        label: "Getting ready emotionally",
+        description: "Holding the inner side of the run-up to birth.",
+        links: [
+          { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth" },
         ],
       },
     ],

@@ -49,7 +49,7 @@ const FirstTriSupportStrip = () => {
               Ask anything about early pregnancy and get gentle, grounded
               guidance shaped around the stage you&rsquo;re actually in.
             </p>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-10">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3.5 mb-10">
               <Link
                 to="/ask"
                 className="inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all"
@@ -58,8 +58,8 @@ const FirstTriSupportStrip = () => {
                 <ArrowRight size={15} />
               </Link>
               <Link
-                to="/pregnancy"
-                className="inline-flex items-center justify-center gap-2 border border-terracotta/40 text-terracotta rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium hover:bg-terracotta/5 transition-all"
+                to="/due-date-calculator"
+                className="inline-flex items-center justify-center gap-2 border border-terracotta/40 text-terracotta rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium hover:bg-terracotta/5 hover:border-terracotta/60 transition-all"
               >
                 Start your journey
                 <ArrowRight size={15} />

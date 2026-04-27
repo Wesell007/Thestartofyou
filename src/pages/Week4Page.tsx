@@ -277,22 +277,22 @@ const Week4Biology = () => (
 
         <div className="lg:col-span-7">
           <SectionLabel>What's underway biologically</SectionLabel>
-          <h2 className="font-serif text-[2rem] md:text-[2.4rem] text-foreground leading-tight mb-5">
+          <h2 className="font-serif text-[1.85rem] sm:text-[2rem] md:text-[2.4rem] text-foreground leading-tight mb-5">
             A lot is happening — even though there is almost nothing to feel.
           </h2>
-          <p className="font-sans text-[14px] font-light text-muted-foreground leading-[1.85] mb-8 max-w-2xl">
+          <p className="font-sans text-[14.5px] text-foreground/75 leading-[1.8] mb-8 max-w-2xl">
             Week 4 is one of the most quietly important weeks of pregnancy. The embryo is microscopic, but the
             architecture for everything that follows is being put in place. This is why week 4 can feel uneventful
             and momentous at the same time.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
             {biologyPoints.map((p, i) => (
               <div key={p.title}
-                className="relative bg-card rounded-2xl border border-border/40 p-6 shadow-card-brand">
-                <span className="absolute top-5 right-5 font-serif italic text-[12px] text-sage-muted/70">0{i + 1}</span>
-                <h3 className="font-serif text-[1.1rem] text-foreground mb-2 pr-7">{p.title}</h3>
-                <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-[1.7]">{p.body}</p>
+                className="relative bg-card rounded-2xl border border-border/40 p-6 md:p-7 shadow-card-brand">
+                <span className="absolute top-5 right-5 font-serif italic text-[12px] text-sage/70">0{i + 1}</span>
+                <h3 className="font-serif text-[1.15rem] text-foreground mb-2 pr-7">{p.title}</h3>
+                <p className="font-sans text-[13.5px] text-foreground/70 leading-[1.7]">{p.body}</p>
               </div>
             ))}
           </div>

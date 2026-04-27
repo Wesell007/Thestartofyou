@@ -142,7 +142,7 @@ const FirstTrimester = () => {
 
         {/* 2. What this stage is */}
         <div id="about">
-          <TrimesterAbout data={data} bg="bg-parchment" />
+          <TrimesterAbout data={data} bg="bg-parchment" hideImage />
         </div>
 
         {/* 3. What to expect */}

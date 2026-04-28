@@ -133,7 +133,17 @@ const focusIcon = (action: string) => {
 type Related = { slug: string; img: string; tag: string; title: string; desc: string };
 
 const relatedFor = (week: number, t: 1 | 2 | 3): Related[] => {
-  // Early first trimester (1–4)
+  // Pre-positive window (1–3): trying-to-conceive shape, no implantation yet
+  if (week <= 3) return [
+    { slug: "early-pregnancy-symptoms-explained", img: earlySymptomsImg, tag: "Symptoms", title: "Early pregnancy symptoms explained", desc: "What's actually possible in the very first weeks, and what's almost certainly cycle-related." },
+    { slug: "the-first-trimester-emotionally", img: emotionalImg, tag: "Emotions", title: "The two-week wait, emotionally", desc: "How the wait between ovulation and a possible test can feel — and ways to soften it." },
+    { slug: "tests-and-scans-in-pregnancy", img: testsScansImg, tag: "Care path", title: "When to test and what happens next", desc: "Why testing too early misleads, and what falls into place after a positive." },
+    { slug: "fatigue-in-early-pregnancy", img: fatigueImg, tag: "Body", title: "Tiredness before a positive test", desc: "Why progesterone makes the second half of every cycle heavier, even without pregnancy." },
+    { slug: "eating-well-in-pregnancy", img: lifestyleImg, tag: "Lifestyle", title: "Folic acid and pre-pregnancy basics", desc: "The handful of things genuinely worth doing before a positive test." },
+    { slug: "implantation-bleeding", img: implantationImg, tag: "Reassurance", title: "What implantation actually is", desc: "What happens at the end of week 3 if conception has occurred — and how to read it." },
+  ];
+
+  // Early first trimester (4)
   if (week <= 4) return [
     { slug: "early-pregnancy-symptoms-explained", img: earlySymptomsImg, tag: "Symptoms", title: "Early pregnancy symptoms explained", desc: "What's common, what's normal and what to keep an eye on across the first few weeks." },
     { slug: "implantation-bleeding", img: implantationImg, tag: "Reassurance", title: "Implantation bleeding: what's normal", desc: "How to tell it apart from a period, and when light spotting is worth a call." },

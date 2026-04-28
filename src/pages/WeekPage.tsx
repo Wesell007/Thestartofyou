@@ -223,6 +223,7 @@ const reflectionChipsFor = (t: 1 | 2 | 3): string[] =>
       : ["How I'm feeling about birth", "What's heavy this week", "What's softening", "What I want to remember"];
 
 const askChipsFor = (week: number, t: 1 | 2 | 3): string[] => {
+  if (t === 1 && week <= 3) return ["When can I test", "Two-week wait survival", "Folic acid before a positive", "Tracking ovulation", "Cycle vs early pregnancy"];
   if (t === 1 && week <= 6) return ["Implantation bleeding", "Spotting vs period", "Cramping early on", "When to test again", "Telling a partner"];
   if (t === 1) return ["Nausea that won't ease", "Symptoms coming and going", "When morning sickness peaks", "Booking appointment", "Telling work"];
   if (t === 2 && week < 20) return ["First baby movements", "Bump showing late", "Anatomy scan worries", "Energy returning", "Eating well now"];

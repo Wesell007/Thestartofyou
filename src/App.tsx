@@ -47,6 +47,8 @@ import Week28Page from "./pages/Week28Page.tsx";
 import Week29Page from "./pages/Week29Page.tsx";
 import Week30Page from "./pages/Week30Page.tsx";
 import Week31Page from "./pages/Week31Page.tsx";
+import Week32Page from "./pages/Week32Page.tsx";
+import Week33Page from "./pages/Week33Page.tsx";
 import Week36Page from "./pages/Week36Page.tsx";
 import Week40Page from "./pages/Week40Page.tsx";
 import ArticlePage from "./pages/ArticlePage.tsx";
@@ -178,6 +180,8 @@ const App = () => (
           <Route path="/pregnancy/week/29" element={<Week29Page />} />
           <Route path="/pregnancy/week/30" element={<Week30Page />} />
           <Route path="/pregnancy/week/31" element={<Week31Page />} />
+          <Route path="/pregnancy/week/32" element={<Week32Page />} />
+          <Route path="/pregnancy/week/33" element={<Week33Page />} />
           <Route path="/pregnancy/week/36" element={<Week36Page />} />
           <Route path="/pregnancy/week/40" element={<Week40Page />} />
           <Route path="/pregnancy/week/:week" element={<WeekPage />} />

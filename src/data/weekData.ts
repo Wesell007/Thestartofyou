@@ -381,6 +381,12 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
         when: "Often begins in early pregnancy and continues",
         feelLike: "A fullness or pressure in the abdomen, sometimes making waistbands uncomfortable before any visible bump appears.",
       },
+      {
+        name: "Vivid dreams and broken sleep",
+        why: "Rising progesterone affects REM sleep, and frequent night-time bathroom trips fragment sleep further.",
+        when: "Common from week 6 onward",
+        feelLike: "Unusually vivid, strange or emotionally charged dreams, alongside waking more often than usual.",
+      },
     ],
     humanTruth: [
       "Feeling like you can't get through the day without lying down",
@@ -391,7 +397,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     ],
     whatThisMeans: "Week 6 is often the hardest week of early pregnancy for many people. The intensity of symptoms here is largely hormonal, which means it's temporary and not a measure of anything going wrong. Both very strong symptoms and very mild symptoms fall within the range of normal.",
     normal: ["Very strong nausea, or very little nausea", "Feeling emotionally unstable without a clear trigger", "Extreme fatigue, needing significantly more sleep", "Food aversions to previously liked foods"],
-    seekSupport: ["Inability to keep any fluids down for 24+ hours", "Fever", "Heavy bleeding or significant pain", "Any concern that feels serious"],
+    seekSupport: ["Inability to keep any fluids down for 24+ hours", "Fever above 38°C", "Heavy bleeding or significant pain", "Severe one-sided abdominal pain (possible ectopic)", "Any concern that feels serious"],
     disclaimer: "This is not medical advice. Always consult your midwife, doctor, or healthcare provider with any concerns.",
     focusPoints: [
       { action: "Eat whatever you can manage", reason: "Nutrition perfection is not the goal right now, getting something in is enough" },

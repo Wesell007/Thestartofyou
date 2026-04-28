@@ -36,6 +36,8 @@ import Week17Page from "./pages/Week17Page.tsx";
 import Week18Page from "./pages/Week18Page.tsx";
 import Week19Page from "./pages/Week19Page.tsx";
 import Week20Page from "./pages/Week20Page.tsx";
+import Week21Page from "./pages/Week21Page.tsx";
+import Week22Page from "./pages/Week22Page.tsx";
 import Week28Page from "./pages/Week28Page.tsx";
 import Week36Page from "./pages/Week36Page.tsx";
 import Week40Page from "./pages/Week40Page.tsx";

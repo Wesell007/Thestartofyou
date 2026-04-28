@@ -1434,7 +1434,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Growth and rhythm",
     atAGlance: "At 15 weeks, the baby can sense light through closed eyelids, hear the muffled sounds of your body, and is forming taste buds. You may notice the bump becoming more obvious, or feel quietly different in your body even before others see it.",
     what: {
-      baby: { what: "Senses are developing", why: "The retinas detect light through closed eyelids; the inner ear lets the baby hear blood flow, your voice, your heartbeat. Taste buds are forming.", means: "The baby is beginning to experience the inside of the womb. From now on, sensory development continues steadily until birth." },
+      baby: { what: "Senses are developing", why: "The retinas detect light through closed eyelids; the inner ear lets the baby hear blood flow, your voice, your heartbeat. Taste buds are forming.", means: "The baby is beginning to experience the inside of the womb. From now on, sensory development continues steadily until birth.", size: "Orange (~10cm)" },
       body: { what: "Bump may begin showing more clearly", why: "The uterus is now noticeably above the pubic bone. Increased blood volume and softer ligaments contribute to a fuller silhouette.", means: "When and how the bump shows varies hugely. Body shape and whether it's a first pregnancy strongly affect it." },
       emotional: { what: "Pregnancy starting to feel more real", why: "Sensing your body change — and other people noticing — can shift the emotional weight of pregnancy.", means: "It's common to feel a complicated mix of pride, exposure, and tenderness as your body becomes visibly pregnant." },
     },
@@ -1474,7 +1474,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Growth and movement",
     atAGlance: "At 17 weeks, your baby is laying down fat under the skin and the umbilical cord is growing thicker. You may be starting to feel the first flutters of movement, especially if you've been pregnant before. The anatomy scan is now close.",
     what: {
-      baby: { what: "Building the first layer of fat", why: "Brown fat begins to develop under the skin, helping with temperature regulation after birth. The skeleton continues to harden.", means: "Development is shifting toward growth and protection. The baby is becoming more recognisably itself." },
+      baby: { what: "Building the first layer of fat", why: "Brown fat begins to develop under the skin, helping with temperature regulation after birth. The skeleton continues to harden.", means: "Development is shifting toward growth and protection. The baby is becoming more recognisably itself.", size: "Pomegranate (~12cm)" },
       body: { what: "Uterus is now level with your belly button", why: "The uterus is rising about a centimetre per week now. You may notice more pressure low and fuller breathing.", means: "Posture and balance start to shift. Aches in the lower back and hips often begin around now." },
       emotional: { what: "A growing sense of presence", why: "Whether or not you can feel movement yet, the bump is real, the scan is approaching, and the pregnancy increasingly fills space in daily life.", means: "It's common to feel both more attached and more aware of risk. Both can be true." },
     },
@@ -1514,7 +1514,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Anatomy scan window",
     atAGlance: "Week 18 is when the anatomy scan window opens. Your baby is yawning, hiccupping, and twisting in the womb. You may be feeling the first definite flutters, especially in a second or later pregnancy.",
     what: {
-      baby: { what: "Yawning, hiccups, and active movement", why: "The nervous system is connecting muscles to the brain, and reflexes are becoming organised.", means: "There is a real little person in there with rhythms and habits, even if you can't feel most of them yet." },
+      baby: { what: "Yawning, hiccups, and active movement", why: "The nervous system is connecting muscles to the brain, and reflexes are becoming organised.", means: "There is a real little person in there with rhythms and habits, even if you can't feel most of them yet.", size: "Sweet potato (~14cm)" },
       body: { what: "Uterus reaches just below your belly button", why: "Steady weekly growth as the baby and amniotic fluid increase.", means: "Bump is now usually clearly visible. Centre of gravity shifts can affect balance." },
       emotional: { what: "The anatomy scan brings hope and tension together", why: "It's the most thorough anatomical check of pregnancy, which makes it both reassuring and weighty to anticipate.", means: "Many people feel quietly braced in scan week. Whatever shape your feelings take is normal." },
     },
@@ -1554,7 +1554,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Sensory development",
     atAGlance: "At 19 weeks, your baby's senses are developing rapidly. The brain is laying down the regions for taste, smell, touch, sight, and hearing. The anatomy scan often falls this week, and many people are now feeling regular movement.",
     what: {
-      baby: { what: "Sensory regions of the brain are forming", why: "Specialised brain areas for each sense are now developing in earnest, alongside vernix forming on the skin to protect it from amniotic fluid.", means: "The baby is developing the foundations of how it will experience the world after birth." },
+      baby: { what: "Sensory regions of the brain are forming", why: "Specialised brain areas for each sense are now developing in earnest, alongside vernix forming on the skin to protect it from amniotic fluid.", means: "The baby is developing the foundations of how it will experience the world after birth.", size: "Mango (~15cm)" },
       body: { what: "Uterus is roughly at your belly button", why: "Steady weekly growth.", means: "Heartburn, hip discomfort, and changes in centre of gravity often arrive together now." },
       emotional: { what: "Holding the relief or worry from the scan", why: "Anatomy scan week often resets the emotional landscape — sometimes with reassurance, sometimes with new questions.", means: "Whichever way it lands, it's a meaningful week. Allow yourself time to absorb it." },
     },
@@ -1594,7 +1594,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Halfway and beyond",
     atAGlance: "At 21 weeks, you're past the halfway point. Your baby is swallowing amniotic fluid and producing meconium. Movements are becoming clearer, and the bump is now obvious to others.",
     what: {
-      baby: { what: "Swallowing fluid, taste developing", why: "Amniotic fluid passes through the baby's digestive system, helping it mature. Meconium — first stool — begins to form.", means: "The digestive system is rehearsing for life outside. Flavours from your diet pass through the fluid." },
+      baby: { what: "Swallowing fluid, taste developing", why: "Amniotic fluid passes through the baby's digestive system, helping it mature. Meconium — first stool — begins to form.", means: "The digestive system is rehearsing for life outside. Flavours from your diet pass through the fluid.", size: "Carrot (~26cm)" },
       body: { what: "Uterus is well above the belly button", why: "Steady weekly growth.", means: "Bump-related aches and breathlessness can begin to appear; sleep position matters more." },
       emotional: { what: "Halfway brings reflection and looking forward", why: "Reaching halfway is a natural pause point. People often start to think more concretely about birth, leave, and arrival.", means: "It's okay to feel that the second half might pass more quickly than the first." },
     },
@@ -1634,7 +1634,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Routines emerging",
     atAGlance: "At 22 weeks, your baby has eyebrows, fine lanugo hair across the body, and is starting to develop sleep-and-wake patterns. You may be noticing your own version of those patterns from the outside.",
     what: {
-      baby: { what: "Distinct features and emerging patterns", why: "Hair across the body (lanugo) helps hold vernix in place. Sleep cycles begin to emerge, though not yet aligned with day and night.", means: "The baby is becoming more itself. Movement patterns may start to feel familiar." },
+      baby: { what: "Distinct features and emerging patterns", why: "Hair across the body (lanugo) helps hold vernix in place. Sleep cycles begin to emerge, though not yet aligned with day and night.", means: "The baby is becoming more itself. Movement patterns may start to feel familiar.", size: "Spaghetti squash (~28cm)" },
       body: { what: "Uterus continues steady upward growth", why: "Increased blood volume, weight gain, and ligament softening all continue.", means: "Hip, back, and pelvic discomfort become more common. Centre of gravity is increasingly forward." },
       emotional: { what: "Sense of the baby as a person growing stronger", why: "Feeling consistent movement makes the baby feel real in a new way.", means: "Bonding can deepen, and so can the awareness of responsibility. Both are normal." },
     },
@@ -1674,7 +1674,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Hearing and growth",
     atAGlance: "At 23 weeks, your baby's hearing is becoming sharp enough to recognise familiar voices. Lungs are practising tiny breathing motions. The bump is now firmly established, and you may notice strangers responding to it.",
     what: {
-      baby: { what: "Hearing sharpens, lungs practise", why: "The inner ear is fully formed; the lungs rehearse breathing motions even though there's nothing to breathe yet.", means: "Talking, singing, and reading can all be heard, though muffled. The baby may startle to loud sounds." },
+      baby: { what: "Hearing sharpens, lungs practise", why: "The inner ear is fully formed; the lungs rehearse breathing motions even though there's nothing to breathe yet.", means: "Talking, singing, and reading can all be heard, though muffled. The baby may startle to loud sounds.", size: "Large mango (~29cm)" },
       body: { what: "Bump grows weekly, posture shifts", why: "Steady growth in baby and amniotic fluid.", means: "Lower back, hip and round ligament discomfort become more common. Foot swelling can start." },
       emotional: { what: "Visibility brings a different kind of attention", why: "People often start commenting on the bump, asking questions, even touching without asking.", means: "It's okay to set boundaries about the bump. You don't owe explanations or access." },
     },
@@ -1714,7 +1714,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Viability milestone",
     atAGlance: "Week 24 is a quiet but significant milestone — often referred to as the point of viability. Your baby's lungs are forming the structures they need to one day breathe. Movements are now strong and recognisable.",
     what: {
-      baby: { what: "Lung structures developing in earnest", why: "Tiny air sacs (alveoli) are beginning to form, and surfactant production starts soon, which would help lungs inflate after birth.", means: "Week 24 marks an important developmental threshold. Babies born from now on have rapidly improving outcomes with specialist care." },
+      baby: { what: "Lung structures developing in earnest", why: "Tiny air sacs (alveoli) are beginning to form, and surfactant production starts soon, which would help lungs inflate after birth.", means: "Week 24 marks an important developmental threshold. Babies born from now on have rapidly improving outcomes with specialist care.", size: "Corn cob (~30cm)" },
       body: { what: "Bump is high and forward", why: "Uterus is now several inches above the belly button.", means: "Breath, balance and digestion are all increasingly affected by the bump's size and position." },
       emotional: { what: "A quiet sense of relief at viability", why: "Reaching this stage often brings a particular kind of emotional softening.", means: "It's normal to mark this week privately, even silently, as a turning point." },
     },
@@ -1754,7 +1754,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Approaching the third trimester",
     atAGlance: "At 25 weeks, your baby is the size of a swede, and putting on weight steadily. Hair colour and texture are determined now. The third trimester is just two weeks away.",
     what: {
-      baby: { what: "Steady fat gain, hair developing", why: "Brown fat is laying down under the skin; hair on the head is gaining colour and structure.", means: "The baby is becoming more recognisably newborn-like in shape and proportion." },
+      baby: { what: "Steady fat gain, hair developing", why: "Brown fat is laying down under the skin; hair on the head is gaining colour and structure.", means: "The baby is becoming more recognisably newborn-like in shape and proportion.", size: "Swede (~34cm)" },
       body: { what: "Continued steady growth and adaptation", why: "Increased blood volume, weight, and pressure on internal organs.", means: "Heartburn, breathlessness, and fatigue often build through these weeks." },
       emotional: { what: "A growing awareness of what's coming", why: "With the third trimester close, planning, classes, and choices about birth start to feel more pressing.", means: "It's normal to feel a low-level acceleration in mental load now." },
     },
@@ -1794,7 +1794,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Eyes open, lungs mature",
     atAGlance: "At 26 weeks, your baby's eyes begin to open and respond to light. Lungs are producing surfactant, the substance that lets them inflate after birth. You're nearly at the third trimester.",
     what: {
-      baby: { what: "Eyes opening, lungs maturing", why: "Eyelids unfuse and the baby begins to sense bright light through the abdominal wall. Surfactant production begins in earnest.", means: "Each week now significantly improves outcomes if early birth occurred." },
+      baby: { what: "Eyes opening, lungs maturing", why: "Eyelids unfuse and the baby begins to sense bright light through the abdominal wall. Surfactant production begins in earnest.", means: "Each week now significantly improves outcomes if early birth occurred.", size: "Lettuce head (~35cm)" },
       body: { what: "Antenatal appointment around now", why: "Many people have a 25- or 28-week midwife check, including blood tests for iron, antibodies, and gestational diabetes for some.", means: "These checks help shape care for the third trimester." },
       emotional: { what: "Beginning to plan more concretely", why: "Birth plans, hospital tours, and antenatal classes all start to feel close.", means: "Allowing yourself to plan can feel both grounding and emotionally loud. Both are okay." },
     },
@@ -1834,7 +1834,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Edge of the third trimester",
     atAGlance: "Week 27 is the very end of the second trimester. Your baby's brain is developing rapidly, and rhythmic breathing motions are now constant. You're on the threshold of the final stretch.",
     what: {
-      baby: { what: "Rapid brain growth and rhythmic breathing motions", why: "Brain tissue is folding and forming connections at high speed. Breathing rehearsals are now constant, even though the lungs are still maturing.", means: "These are huge weeks for neurological and respiratory development." },
+      baby: { what: "Rapid brain growth and rhythmic breathing motions", why: "Brain tissue is folding and forming connections at high speed. Breathing rehearsals are now constant, even though the lungs are still maturing.", means: "These are huge weeks for neurological and respiratory development.", size: "Cauliflower (~36cm)" },
       body: { what: "Bump high and forward; sleep increasingly disrupted", why: "Uterus is now well above the belly button.", means: "Breathlessness, heartburn and broken sleep often arrive together." },
       emotional: { what: "Standing at the edge of the third trimester", why: "Reaching this point often brings a mixture of relief, anticipation, and a deeper awareness of how close birth is becoming.", means: "Whatever you feel about the next stage is real and worth naming." },
     },
@@ -1874,7 +1874,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Movement awareness",
     atAGlance: "At 29 weeks, your baby has clear sleep-wake cycles and is responsive to sounds, light and your movement. Counting on a familiar pattern of activity becomes one of the most important things you can do now.",
     what: {
-      baby: { what: "Clear cycles and responsive behaviour", why: "Brain development supports awake periods, sleep periods, and responses to outside stimuli.", means: "You'll often notice times of day your baby is more or less active." },
+      baby: { what: "Clear cycles and responsive behaviour", why: "Brain development supports awake periods, sleep periods, and responses to outside stimuli.", means: "You'll often notice times of day your baby is more or less active.", size: "Butternut squash (~38cm)" },
       body: { what: "Heavier bump, more aches", why: "Uterus continues growing weekly; pelvic floor and back take more strain.", means: "Hip ache, pelvic pressure and tiredness all often increase." },
       emotional: { what: "Becoming more attuned to the baby's patterns", why: "Knowing when your baby is usually active makes you more sensitive to changes.", means: "This sensitivity is genuinely valuable. Trust it." },
     },
@@ -1914,7 +1914,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Three quarters of the way",
     atAGlance: "At 30 weeks, you're three quarters of the way through pregnancy. Your baby's brain is folding into the recognisable wrinkled shape, and bone marrow is now producing red blood cells. The home stretch begins to feel real.",
     what: {
-      baby: { what: "Brain folding, bone marrow active", why: "The brain develops its characteristic folds (sulci), giving it more surface area. Bone marrow takes over red blood cell production from the liver and spleen.", means: "Big developmental shifts, even if the baby is mostly growing now." },
+      baby: { what: "Brain folding, bone marrow active", why: "The brain develops its characteristic folds (sulci), giving it more surface area. Bone marrow takes over red blood cell production from the liver and spleen.", means: "Big developmental shifts, even if the baby is mostly growing now.", size: "Cabbage (~39cm)" },
       body: { what: "Three-quarters mark", why: "Steady weight gain, increasing fluid retention.", means: "Bump-related discomfort intensifies; energy dips more often." },
       emotional: { what: "A new sense of how close birth is", why: "Reaching 30 weeks often makes the timeline feel concrete.", means: "Practical lists, fears, hopes and questions all often surface together." },
     },
@@ -1954,7 +1954,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Steady growth",
     atAGlance: "At 31 weeks, your baby is mostly putting on weight, and the central nervous system is maturing rapidly. Practical preparation often becomes a stronger theme of daily life now.",
     what: {
-      baby: { what: "Weight gain and nervous system maturation", why: "The myelin sheath around nerves is forming, which helps nerve signals travel faster.", means: "Reflexes and responses become more coordinated." },
+      baby: { what: "Weight gain and nervous system maturation", why: "The myelin sheath around nerves is forming, which helps nerve signals travel faster.", means: "Reflexes and responses become more coordinated.", size: "Coconut (~41cm)" },
       body: { what: "Heavier days, more frequent appointments", why: "Antenatal check-ups often become every 3-4 weeks now.", means: "Iron levels, blood pressure and the baby's growth are monitored more closely." },
       emotional: { what: "A shift toward 'when' instead of 'if'", why: "The arrival of the baby starts to feel concrete.", means: "Both excitement and overwhelm are normal at this stage." },
     },
@@ -1994,7 +1994,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Position and preparation",
     atAGlance: "At 32 weeks, your baby is starting to settle into a position for birth, often head down, though many are still moving around freely. Practical preparation accelerates from here.",
     what: {
-      baby: { what: "Beginning to settle into position", why: "Around two-thirds of babies are head down by now, but plenty are still in different positions and have time to turn.", means: "Position now is not necessarily position at birth. Trying to predict is rarely useful." },
+      baby: { what: "Beginning to settle into position", why: "Around two-thirds of babies are head down by now, but plenty are still in different positions and have time to turn.", means: "Position now is not necessarily position at birth. Trying to predict is rarely useful.", size: "Jicama (~42cm)" },
       body: { what: "Bump high and heavy", why: "Steady growth.", means: "Heartburn, breathlessness, fatigue and pelvic pressure are common." },
       emotional: { what: "Mental load is real", why: "Lists, classes, plans, and decisions all stack up.", means: "It's okay to ask for help with the mental as well as physical load." },
     },
@@ -2034,7 +2034,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Brain and immunity",
     atAGlance: "At 33 weeks, your baby's brain is developing rapidly, and antibodies are passing across the placenta to give early immunity. The bump is now firm and full, and small everyday things can feel harder.",
     what: {
-      baby: { what: "Brain growth and antibody transfer", why: "Significant brain development continues; antibodies cross from your blood to the baby's, giving early protection after birth.", means: "Both biology and protection are accelerating now." },
+      baby: { what: "Brain growth and antibody transfer", why: "Significant brain development continues; antibodies cross from your blood to the baby's, giving early protection after birth.", means: "Both biology and protection are accelerating now.", size: "Pineapple (~43cm)" },
       body: { what: "Less room, more pressure", why: "Bump is large; baby has less room to move.", means: "Movements feel different but should still be regular and recognisable." },
       emotional: { what: "Final stretch awareness sharpens", why: "Maternity leave often becomes immediate; lists narrow.", means: "Both anticipation and tiredness can be intense in the same hour." },
     },
@@ -2074,7 +2074,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Lung maturity",
     atAGlance: "At 34 weeks, your baby's lungs are maturing rapidly. By around now, most babies could breathe with very little or no support if born. Practical preparation often hits its peak.",
     what: {
-      baby: { what: "Lungs nearly ready", why: "Surfactant production is well-established; alveoli continue to multiply.", means: "Each week now further improves outcomes if early birth occurred." },
+      baby: { what: "Lungs nearly ready", why: "Surfactant production is well-established; alveoli continue to multiply.", means: "Each week now further improves outcomes if early birth occurred.", size: "Cantaloupe melon (~45cm)" },
       body: { what: "Bigger, slower, heavier", why: "Bump near peak size for most.", means: "Sleep, breath, balance and digestion are all increasingly affected." },
       emotional: { what: "Pre-baby identity often surfaces", why: "Late pregnancy can stir reflection on who you've been and who you're becoming.", means: "Quiet, sometimes melancholy, sometimes excited reflection is normal here." },
     },
@@ -2114,7 +2114,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Final preparations",
     atAGlance: "At 35 weeks, your baby is nearing full size and putting on weight steadily. Vernix and lanugo are beginning to shed. Bag, plans and appointments come into clearer focus this week.",
     what: {
-      baby: { what: "Steady weight gain, vernix shedding", why: "Most major development is complete; baby is gaining around 200-250g per week now.", means: "Outcomes for babies born now are very good, although staying in is still better." },
+      baby: { what: "Steady weight gain, vernix shedding", why: "Most major development is complete; baby is gaining around 200-250g per week now.", means: "Outcomes for babies born now are very good, although staying in is still better.", size: "Honeydew melon (~46cm)" },
       body: { what: "Increased Group B Strep awareness; more appointments", why: "Late-pregnancy checks become more frequent.", means: "Blood pressure, urine, and growth are monitored regularly." },
       emotional: { what: "Heightened readiness and tiredness together", why: "Late pregnancy often feels both urgent and exhausted.", means: "Both can be true. Allowing the mix is healthier than trying to feel one way." },
     },
@@ -2154,7 +2154,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Early term",
     atAGlance: "Week 37 is the start of 'early term'. Your baby is fully formed and continuing to gain weight, mostly fat. Engagement and early signs of labour become more relevant from here.",
     what: {
-      baby: { what: "Full structural development; weight gain", why: "All organs are mature; baby gains around 200-250g per week.", means: "From now on, the work is mostly about size and final maturation." },
+      baby: { what: "Full structural development; weight gain", why: "All organs are mature; baby gains around 200-250g per week.", means: "From now on, the work is mostly about size and final maturation.", size: "Romaine lettuce (~48cm)" },
       body: { what: "Engagement may begin", why: "Baby drops lower into the pelvis in preparation for birth, especially in first pregnancies.", means: "Breathing may ease as the bump drops; pelvic pressure increases." },
       emotional: { what: "Active waiting begins", why: "Birth could happen any time from now; the anticipation is constant.", means: "Restlessness, hyper-alertness, and intense tiredness in the same day are normal." },
     },
@@ -2194,7 +2194,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Watching and waiting",
     atAGlance: "At 38 weeks, your baby is fully grown and ready. Vernix and lanugo are mostly gone. Each day now matters but is also unpredictable. The body and the mind are both in high alert.",
     what: {
-      baby: { what: "Ready", why: "Fully developed; the baby could now arrive at any time.", means: "Most of what happens from here is timing and final readiness." },
+      baby: { what: "Ready", why: "Fully developed; the baby could now arrive at any time.", means: "Most of what happens from here is timing and final readiness.", size: "Leek (~49cm)" },
       body: { what: "Cervix may begin softening (ripening)", why: "Hormonal changes prepare the cervix for labour.", means: "You may notice more discharge, some Braxton Hicks intensifying, occasional cramping." },
       emotional: { what: "Watching every signal", why: "Each twinge, every Braxton Hicks, every change in discharge becomes loaded with meaning.", means: "It's exhausting. Trying to read each signal is normal but rarely useful." },
     },
@@ -2234,7 +2234,7 @@ const weekDatabase: Record<number, Omit<WeekData, "week" | "trimester" | "trimes
     keyFocus: "Full term",
     atAGlance: "Week 39 is full term. Your baby is fully ready for life outside. Birth could happen any day now. The waiting can feel both endless and unbelievably close.",
     what: {
-      baby: { what: "Fully ready for birth", why: "All systems are mature.", means: "From now, every day is a possible birth day." },
+      baby: { what: "Fully ready for birth", why: "All systems are mature.", means: "From now, every day is a possible birth day.", size: "Mini watermelon (~50cm)" },
       body: { what: "Cervix continues to soften and open slightly", why: "Hormonal preparation.", means: "Mucus plug changes, mild cramping, and more frequent Braxton Hicks are common." },
       emotional: { what: "Time stretches strangely", why: "Days feel both long and short, alert and exhausted.", means: "This is normal. The mind cannot fully relax with this much anticipation." },
     },

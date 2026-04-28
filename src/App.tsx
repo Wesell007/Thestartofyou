@@ -159,6 +159,8 @@ const App = () => (
           <Route path="/pregnancy/week/18" element={<Week18Page />} />
           <Route path="/pregnancy/week/19" element={<Week19Page />} />
           <Route path="/pregnancy/week/20" element={<Week20Page />} />
+          <Route path="/pregnancy/week/21" element={<Week21Page />} />
+          <Route path="/pregnancy/week/22" element={<Week22Page />} />
           <Route path="/pregnancy/week/28" element={<Week28Page />} />
           <Route path="/pregnancy/week/36" element={<Week36Page />} />
           <Route path="/pregnancy/week/40" element={<Week40Page />} />

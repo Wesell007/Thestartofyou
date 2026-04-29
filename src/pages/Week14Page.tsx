@@ -776,14 +776,14 @@ const Next = () => (
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
       <div className="bg-gradient-to-br from-sage-bg via-parchment to-stage-pregnancy/30 rounded-3xl border border-border/30 p-8 sm:p-10 md:p-14 text-center shadow-card-brand">
         <SectionLabel>Up next</SectionLabel>
-        <h2 className="font-serif text-[1.85rem] sm:text-[2rem] md:text-[2.5rem] text-foreground leading-tight mb-3">Ready for week 16?</h2>
+        <h2 className="font-serif text-[1.85rem] sm:text-[2rem] md:text-[2.5rem] text-foreground leading-tight mb-3">Ready for week 15?</h2>
         <p className="font-sans text-[14.5px] text-foreground/75 max-w-lg mx-auto mb-8 leading-[1.8]">
-          Week 16 is the next milestone — the bump often becomes properly visible, the first flutters of
-          movement may begin, and the second-trimester rhythm starts to feel like home.
+          Week 15 brings steadier energy, sharper appetite and the bump quietly making itself known. The
+          second-trimester rhythm continues to settle.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 max-w-sm sm:max-w-none mx-auto">
-          <Link to="/pregnancy/week/16" className="inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[14px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors">
-            Continue to week 16 <ArrowRight size={14} />
+          <Link to="/pregnancy/week/15" className="inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[14px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors">
+            Continue to week 15 <ArrowRight size={14} />
           </Link>
           <Link to="/pregnancy/second-trimester" className="inline-flex items-center justify-center gap-2 border border-foreground/25 text-foreground rounded-pill px-7 py-3.5 font-sans text-[14px] font-medium hover:bg-parchment-dark transition-colors">
             Explore the second trimester

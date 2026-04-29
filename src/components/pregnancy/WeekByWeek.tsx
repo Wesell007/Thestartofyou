@@ -66,20 +66,22 @@ const WeekByWeek = () => {
         </div>
 
         {/* Trimester groups */}
-        <div className="space-y-5 sm:space-y-6">
+        <div className="space-y-6 sm:space-y-7">
           {trimesterGroups.map((group) => (
             <div
               key={group.label}
-              className="relative rounded-3xl overflow-hidden border"
+              className="relative rounded-[1.5rem] overflow-hidden border"
               style={{
-                background: `linear-gradient(180deg, hsl(var(${group.stageVar}) / 0.42) 0%, hsl(var(${group.stageVar}) / 0.22) 100%)`,
+                background: `linear-gradient(180deg, hsl(var(${group.stageVar}) / 0.45) 0%, hsl(var(${group.stageVar}) / 0.18) 70%, hsl(var(--parchment) / 0.6) 100%)`,
                 borderColor: `hsl(var(${group.accentVar}) / 0.18)`,
+                boxShadow:
+                  '0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 18px 50px -32px hsl(var(--stage-pregnancy-accent) / 0.28)',
               }}
             >
               {/* Accent top edge */}
               <div
                 className="h-[3px]"
-                style={{ background: `linear-gradient(90deg, hsl(var(${group.accentVar}) / 0.55), hsl(var(${group.accentVar}) / 0.15))` }}
+                style={{ background: `linear-gradient(90deg, hsl(var(${group.accentVar}) / 0.6), hsl(var(${group.accentVar}) / 0.1))` }}
               />
 
               <div className="p-5 sm:p-7 md:p-8">

@@ -105,31 +105,59 @@ const WeekByWeek = () => {
                   </div>
                 </div>
 
-                {/* Week grid */}
-                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-1.5 sm:gap-2">
+                {/* Week grid — premium fruit cards */}
+                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 sm:gap-2.5">
                   {group.weeks.map((week) => (
                     <Link
                       key={week}
                       to={`/pregnancy/week/${week}`}
-                      className="relative flex flex-col items-center justify-center aspect-square rounded-xl
-                        border bg-card/85 transition-all text-center gap-0.5 p-1
-                        hover:bg-card hover:shadow-card-brand hover:border-transparent hover:scale-[1.04]"
+                      aria-label={`Week ${week}`}
+                      className="group relative flex flex-col items-center justify-between aspect-square rounded-2xl
+                        border bg-card transition-all duration-300 text-center px-1 py-2 sm:py-2.5
+                        hover:-translate-y-0.5 hover:shadow-card-brand"
                       style={{
                         borderColor: earlyWeeks.includes(week)
-                          ? `hsl(var(${group.accentVar}) / 0.3)`
-                          : 'hsl(var(--border) / 0.35)',
+                          ? `hsl(var(${group.accentVar}) / 0.35)`
+                          : `hsl(var(${group.accentVar}) / 0.14)`,
+                        boxShadow: '0 1px 0 hsl(var(--parchment-deeper) / 0.6)',
                       }}
                     >
-                      <WeekIllustration week={week} className="w-6 h-6 sm:w-7 sm:h-7" />
-                      <span className="font-sans text-[9px] sm:text-[10px] font-light text-muted-foreground leading-none">
+                      {/* Soft circular wash behind fruit */}
+                      <div
+                        className="relative flex items-center justify-center w-9 h-9 sm:w-11 sm:h-11 rounded-full transition-transform duration-300 group-hover:scale-105"
+                        style={{
+                          background: `radial-gradient(circle at 50% 45%, hsl(var(${group.stageVar}) / 0.85) 0%, hsl(var(${group.stageVar}) / 0.35) 70%, transparent 100%)`,
+                        }}
+                      >
+                        <WeekIllustration
+                          week={week}
+                          className="w-7 h-7 sm:w-9 sm:h-9 drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)]"
+                        />
+                      </div>
+
+                      <span
+                        className="mt-1 font-serif text-[10px] sm:text-[11px] leading-none tracking-wide"
+                        style={{ color: `hsl(var(${group.accentVar}) / 0.85)` }}
+                      >
                         Wk {week}
                       </span>
+
+                      {/* Early-weeks dot */}
                       {earlyWeeks.includes(week) && (
                         <span
-                          className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full"
-                          style={{ backgroundColor: `hsl(var(${group.accentVar}) / 0.5)` }}
+                          className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full"
+                          style={{ backgroundColor: `hsl(var(${group.accentVar}) / 0.6)` }}
                         />
                       )}
+
+                      {/* Subtle botanical leaf accent on hover */}
+                      <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute -bottom-0.5 -left-0.5 w-3 h-3 opacity-0 group-hover:opacity-60 transition-opacity duration-300"
+                        style={{
+                          background: `radial-gradient(circle at 30% 70%, hsl(var(${group.accentVar}) / 0.35), transparent 70%)`,
+                        }}
+                      />
                     </Link>
                   ))}
                 </div>

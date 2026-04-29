@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Calendar } from "lucide-react";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
 import bootiesImg from "@/assets/pregnancy-hero-booties.jpg";
+import sprigImg from "@/assets/topic-mini-sprig.png";
 
 const PregnancyHero = () => {
   const navigate = useNavigate();

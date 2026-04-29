@@ -97,7 +97,7 @@ const Hero = () => (
         className="absolute left-3 sm:left-6 md:left-12 top-[42%] sm:top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/85 backdrop-blur border border-border/40 flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-card transition-all shadow-card-brand z-20">
         <ChevronLeft size={18} />
       </Link>
-      <Link to="/pregnancy/third-trimester" aria-label="Back to third trimester"
+      <Link to="/pregnancy/week/42" aria-label="Go to week 42"
         className="absolute right-3 sm:right-6 md:right-12 top-[42%] sm:top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/85 backdrop-blur border border-border/40 flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-card transition-all shadow-card-brand z-20">
         <ChevronRight size={18} />
       </Link>

@@ -160,6 +160,15 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/how-your-baby-develops-in-pregnancy": imgPregnancyJourney,
   "/articles/baby-movement-in-pregnancy": imgSecondMovement,
   "/articles/twins-and-multiples-in-pregnancy": imgPregnancyBump,
+  // Baby — Phase G deepening
+  "/articles/anterior-placenta": imgAnatomyScan,
+  "/articles/low-lying-placenta-in-pregnancy": imgAnatomyScan,
+  "/articles/breech-baby": imgThirdMovement,
+  "/articles/reduced-movements-in-pregnancy": imgThirdMovement,
+  "/articles/baby-hiccups-in-the-womb": imgSecondMovement,
+  "/articles/measuring-big-or-small-in-pregnancy": imgPregnancyBump,
+  "/articles/growth-scans-in-pregnancy": imgTestsScans,
+  "/articles/cord-around-the-neck-in-pregnancy": imgPregnancyJourney,
   // Feelings
   "/articles/emotional-wellbeing-pregnancy": imgEmotionalFirstTri,
   "/articles/anxiety-in-pregnancy": imgSecondAnxiety,

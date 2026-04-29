@@ -135,6 +135,26 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         ],
       },
       {
+        label: "Aches, pains & physical symptoms",
+        description: "The everyday physical symptoms of pregnancy — what tends to be normal, what helps, and when to ask for support.",
+        links: [
+          { label: "Back pain in pregnancy", href: "/articles/back-pain-in-pregnancy" },
+          { label: "Pelvic pain in pregnancy", href: "/articles/pelvic-pain-in-pregnancy" },
+          { label: "Round ligament pain", href: "/articles/round-ligament-pain" },
+          { label: "Braxton Hicks contractions", href: "/articles/braxton-hicks-contractions" },
+          { label: "Shortness of breath in pregnancy", href: "/articles/shortness-of-breath-in-pregnancy" },
+          { label: "Swelling in pregnancy", href: "/articles/swelling-in-pregnancy" },
+        ],
+      },
+      {
+        label: "Digestion & comfort",
+        description: "How digestion shifts in pregnancy, and what gently helps.",
+        links: [
+          { label: "Heartburn in pregnancy", href: "/articles/heartburn-in-pregnancy" },
+          { label: "Constipation in pregnancy", href: "/articles/constipation-in-pregnancy" },
+        ],
+      },
+      {
         label: "Labour and birth",
         description: "What labour can look like, how it tends to unfold, and when to call.",
         links: [

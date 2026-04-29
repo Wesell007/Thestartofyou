@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ChevronRight, ArrowRight, Check, Heart, Apple, ShieldCheck, Baby, ShoppingBag } from "lucide-react";
+import { ChevronRight, ArrowRight, Check, Heart, Apple, ShieldCheck, Baby, ShoppingBag, type LucideIcon } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import {
@@ -67,7 +67,7 @@ const resolveImage = (href: string, explicit?: string) =>
   explicit || HREF_IMAGE_MAP[href] || imgPregnancyJourney;
 
 // Sibling icons (for the "Other pregnancy topics" row)
-const SIBLING_ICONS: Record<PregnancyTopicSlug, React.ComponentType<{ size?: number; className?: string; style?: React.CSSProperties }>> = {
+const SIBLING_ICONS: Record<PregnancyTopicSlug, LucideIcon> = {
   body: Heart,
   baby: Baby,
   feelings: Heart,

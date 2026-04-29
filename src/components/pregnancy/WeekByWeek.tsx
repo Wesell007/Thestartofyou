@@ -43,13 +43,13 @@ const WeekByWeek = () => {
         {/* Header — demoted */}
         <div className="text-center mb-10 md:mb-12">
           <p
-            className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-3"
+            className="font-sans text-[11px] font-light tracking-[0.22em] uppercase mb-3"
             style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
           >
-            Or jump to a week
+            Your Trimester Pathway
           </p>
-          <h2 className="font-serif text-xl sm:text-2xl md:text-[1.75rem] text-foreground mb-2 leading-tight">
-            Every week, mapped.
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground mb-2 leading-tight">
+            Your week-by-week pregnancy map
           </h2>
           <p className="font-sans text-sm font-light text-muted-foreground max-w-md mx-auto leading-relaxed">
             Select any week to explore what's happening, what's normal, and

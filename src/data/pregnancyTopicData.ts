@@ -227,6 +227,27 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         description: "When movement begins, how it changes, and the moments worth raising.",
         links: [
           { label: "Baby movement in pregnancy", href: "/articles/baby-movement-in-pregnancy" },
+          { label: "Reduced movements in pregnancy", href: "/articles/reduced-movements-in-pregnancy" },
+          { label: "Baby hiccups in the womb", href: "/articles/baby-hiccups-in-the-womb" },
+        ],
+      },
+      {
+        label: "Position and the placenta",
+        description: "Common scan findings about how baby is lying and where the placenta sits.",
+        links: [
+          { label: "Anterior placenta", href: "/articles/anterior-placenta" },
+          { label: "Low-lying placenta in pregnancy", href: "/articles/low-lying-placenta-in-pregnancy" },
+          { label: "Breech baby", href: "/articles/breech-baby" },
+          { label: "Cord around the neck in pregnancy", href: "/articles/cord-around-the-neck-in-pregnancy" },
+        ],
+      },
+      {
+        label: "Growth and scans",
+        description: "How your baby's growth is monitored, and what scan findings really mean.",
+        links: [
+          { label: "Measuring big or small in pregnancy", href: "/articles/measuring-big-or-small-in-pregnancy" },
+          { label: "Growth scans in pregnancy", href: "/articles/growth-scans-in-pregnancy" },
+          { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy" },
         ],
       },
       {

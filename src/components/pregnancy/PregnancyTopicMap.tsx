@@ -161,10 +161,10 @@ const PregnancyTopicMap = () => {
                   src={sprigSrc}
                   alt=""
                   aria-hidden="true"
-                  className="pointer-events-none select-none absolute -top-2 -right-2 w-20 sm:w-24 opacity-[0.28] group-hover:opacity-40 transition-opacity duration-700"
+                  className="pointer-events-none select-none absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-16 sm:w-20 md:w-24 opacity-[0.18] sm:opacity-[0.24] md:opacity-[0.28] group-hover:opacity-40 transition-opacity duration-700"
                   style={{
                     transform: `rotate(${theme.sprigRotate}deg)`,
-                    filter: "saturate(0.8)",
+                    filter: "saturate(0.7)",
                   }}
                 />
 

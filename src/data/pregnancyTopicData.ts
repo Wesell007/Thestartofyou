@@ -13,6 +13,7 @@ export type PregnancyTopicSlug =
 export interface TopicLink {
   label: string;
   href: string;
+  image?: string;
 }
 
 export interface TopicGroup {
@@ -25,6 +26,7 @@ export interface TopicStartHere {
   title: string;
   href: string;
   why: string;
+  image?: string;
 }
 
 export interface PregnancyTopicPageConfig {
@@ -32,6 +34,7 @@ export interface PregnancyTopicPageConfig {
   eyebrow: string;
   title: string;
   intro: string;
+  heroImage?: string;
 
   whatThisCovers: {
     lead: string;

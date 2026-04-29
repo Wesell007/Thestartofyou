@@ -35,43 +35,74 @@ const trimesters = [
 
 const PregnancyTrimesterCards = () => {
   return (
-    <section className="bg-parchment py-12 md:py-16">
+    <section className="bg-parchment py-14 md:py-20">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+        {/* Soft section header */}
+        <div className="text-center mb-10 md:mb-12">
+          <p
+            className="font-sans text-[11px] font-light tracking-[0.24em] uppercase mb-3"
+            style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
+          >
+            Three chapters of pregnancy
+          </p>
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground leading-tight">
+            Choose your <span className="italic font-normal">trimester</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-7">
           {trimesters.map((t) => (
             <Link
               key={t.label}
               to={t.href}
-              className="group bg-card border border-border/40 rounded-2xl overflow-hidden shadow-card-brand flex flex-col hover:shadow-soft hover:border-border/70 transition-all duration-300"
+              className="group relative bg-card rounded-[1.25rem] overflow-hidden border flex flex-col transition-all duration-500 hover:-translate-y-0.5"
+              style={{
+                borderColor: `hsl(var(${t.accentVar}) / 0.18)`,
+                boxShadow:
+                  '0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 16px 44px -28px hsl(var(--stage-pregnancy-accent) / 0.32)',
+              }}
             >
-              <div className="h-44 sm:h-48 md:h-52 overflow-hidden relative">
+              <div className="h-48 sm:h-52 md:h-56 overflow-hidden relative">
                 <img
                   src={t.image}
                   alt={t.label}
                   loading="lazy"
                   width={640}
                   height={400}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700"
                 />
-              </div>
-              <div className="p-5 sm:p-6 flex flex-col gap-2 flex-1">
+                {/* Soft top vignette + bottom warm fade */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      'linear-gradient(180deg, hsl(var(--parchment) / 0.15) 0%, transparent 35%, hsl(var(--parchment) / 0.55) 100%)',
+                  }}
+                />
+                {/* Floating range chip */}
                 <span
-                  className="font-sans text-[11px] font-light tracking-[0.18em] uppercase"
-                  style={{ color: `hsl(var(${t.accentVar}))` }}
+                  className="absolute left-4 top-4 inline-flex items-center rounded-full px-3 py-1 font-sans text-[10.5px] font-light tracking-[0.18em] uppercase backdrop-blur-sm"
+                  style={{
+                    backgroundColor: 'hsl(var(--parchment) / 0.85)',
+                    color: `hsl(var(${t.accentVar}))`,
+                  }}
                 >
                   {t.range}
                 </span>
-                <h3 className="font-serif text-xl text-foreground">
+              </div>
+              <div className="p-6 sm:p-7 flex flex-col gap-2.5 flex-1">
+                <h3 className="font-serif text-xl text-foreground leading-tight">
                   {t.label}
                 </h3>
                 <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed">
                   {t.desc}
                 </p>
                 <span
-                  className="mt-2 inline-flex items-center gap-1.5 font-sans text-[13px] font-medium"
+                  className="mt-3 inline-flex items-center gap-1.5 font-sans text-[13px] font-medium group-hover:gap-2 transition-all"
                   style={{ color: 'hsl(var(--terracotta))' }}
                 >
-                  {t.cta} →
+                  {t.cta} <span aria-hidden="true">→</span>
                 </span>
               </div>
             </Link>

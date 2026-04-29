@@ -131,7 +131,7 @@ const PregnancyTopicMap = () => {
             return (
               <article
                 key={topic.slug}
-                className="group relative bg-card flex flex-col p-7 sm:p-8 transition-all duration-500 hover:-translate-y-1 overflow-hidden"
+                className="group relative bg-card flex flex-col p-6 sm:p-7 md:p-8 transition-all duration-500 hover:-translate-y-1 overflow-hidden"
                 style={{
                   // Bespoke sculpted silhouette — asymmetric corners
                   borderRadius: "1.75rem 1.25rem 1.75rem 1.25rem",

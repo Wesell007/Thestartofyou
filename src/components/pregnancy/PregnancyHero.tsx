@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Calendar } from "lucide-react";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
 import bootiesImg from "@/assets/pregnancy-hero-booties.jpg";
+import sprigImg from "@/assets/topic-mini-sprig.png";
 
 const PregnancyHero = () => {
   const navigate = useNavigate();
@@ -121,20 +122,40 @@ const PregnancyHero = () => {
             </div>
 
             {/* Right card */}
-            <div>
+            <div className="relative">
+              {/* Decorative botanical above card, desktop only */}
+              <img
+                src={sprigImg}
+                alt=""
+                aria-hidden="true"
+                className="hidden md:block absolute -top-8 -right-4 lg:-right-8 w-16 lg:w-20 opacity-50 pointer-events-none select-none rotate-12"
+              />
               <div
-                className="bg-card border rounded-2xl p-5 sm:p-7 shadow-card-brand"
-                style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.18)' }}
+                className="bg-card border rounded-[1.25rem] p-6 sm:p-7 relative"
+                style={{
+                  borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.2)',
+                  boxShadow:
+                    '0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 22px 50px -28px hsl(var(--stage-pregnancy-accent) / 0.35)',
+                }}
               >
+                {/* Subtle top accent bar */}
+                <div
+                  aria-hidden="true"
+                  className="absolute top-0 left-7 right-7 h-px"
+                  style={{
+                    background:
+                      'linear-gradient(90deg, transparent, hsl(var(--stage-pregnancy-accent) / 0.4), transparent)',
+                  }}
+                />
                 <div className="flex items-center gap-2.5 mb-2.5">
                   <div
                     className="w-7 h-7 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.12)' }}
+                    style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.14)' }}
                   >
                     <Calendar size={13} style={{ color: 'hsl(var(--stage-pregnancy-accent))' }} />
                   </div>
                   <p
-                    className="font-sans text-[11px] font-light tracking-[0.2em] uppercase"
+                    className="font-sans text-[11px] font-light tracking-[0.22em] uppercase"
                     style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
                   >
                     Start with your due date

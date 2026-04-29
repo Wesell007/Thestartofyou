@@ -38,40 +38,50 @@ const trimesterGroups = [
 
 const WeekByWeek = () => {
   return (
-    <section id="week-by-week" className="bg-parchment py-16 md:py-20">
+    <section id="week-by-week" className="bg-parchment py-16 md:py-24">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-        {/* Header — demoted */}
-        <div className="text-center mb-10 md:mb-12">
+        {/* Header */}
+        <div className="text-center mb-12 md:mb-14">
           <p
-            className="font-sans text-[11px] font-light tracking-[0.22em] uppercase mb-3"
+            className="font-sans text-[11px] font-light tracking-[0.24em] uppercase mb-3"
             style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
           >
             Your Trimester Pathway
           </p>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground mb-2 leading-tight">
-            Your week-by-week pregnancy map
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground mb-3 leading-tight">
+            Your week-by-week <span className="italic font-normal">pregnancy map</span>
           </h2>
           <p className="font-sans text-sm font-light text-muted-foreground max-w-md mx-auto leading-relaxed">
             Select any week to explore what's happening, what's normal, and
             what to focus on.
           </p>
+          <div
+            aria-hidden="true"
+            className="mx-auto mt-6 h-px w-16"
+            style={{
+              background:
+                'linear-gradient(90deg, transparent, hsl(var(--stage-pregnancy-accent) / 0.5), transparent)',
+            }}
+          />
         </div>
 
         {/* Trimester groups */}
-        <div className="space-y-5 sm:space-y-6">
+        <div className="space-y-6 sm:space-y-7">
           {trimesterGroups.map((group) => (
             <div
               key={group.label}
-              className="relative rounded-3xl overflow-hidden border"
+              className="relative rounded-[1.5rem] overflow-hidden border"
               style={{
-                background: `linear-gradient(180deg, hsl(var(${group.stageVar}) / 0.42) 0%, hsl(var(${group.stageVar}) / 0.22) 100%)`,
+                background: `linear-gradient(180deg, hsl(var(${group.stageVar}) / 0.45) 0%, hsl(var(${group.stageVar}) / 0.18) 70%, hsl(var(--parchment) / 0.6) 100%)`,
                 borderColor: `hsl(var(${group.accentVar}) / 0.18)`,
+                boxShadow:
+                  '0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 18px 50px -32px hsl(var(--stage-pregnancy-accent) / 0.28)',
               }}
             >
               {/* Accent top edge */}
               <div
                 className="h-[3px]"
-                style={{ background: `linear-gradient(90deg, hsl(var(${group.accentVar}) / 0.55), hsl(var(${group.accentVar}) / 0.15))` }}
+                style={{ background: `linear-gradient(90deg, hsl(var(${group.accentVar}) / 0.6), hsl(var(${group.accentVar}) / 0.1))` }}
               />
 
               <div className="p-5 sm:p-7 md:p-8">
@@ -116,13 +126,16 @@ const WeekByWeek = () => {
                       to={`/pregnancy/week/${week}`}
                       aria-label={`Week ${week}`}
                       className="group relative flex flex-col items-center justify-between aspect-square rounded-2xl
-                        border bg-card transition-all duration-300 text-center px-1 py-2 sm:py-2.5
-                        hover:-translate-y-0.5 hover:shadow-card-brand"
+                        border transition-all duration-500 text-center px-1 py-2 sm:py-2.5
+                        hover:-translate-y-0.5"
                       style={{
+                        background:
+                          'linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--parchment) / 0.7) 100%)',
                         borderColor: earlyWeeks.includes(week)
-                          ? `hsl(var(${group.accentVar}) / 0.35)`
+                          ? `hsl(var(${group.accentVar}) / 0.4)`
                           : `hsl(var(${group.accentVar}) / 0.14)`,
-                        boxShadow: '0 1px 0 hsl(var(--parchment-deeper) / 0.6)',
+                        boxShadow:
+                          '0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 6px 16px -10px hsl(var(--stage-pregnancy-accent) / 0.22)',
                       }}
                     >
                       {/* Soft circular wash behind fruit */}

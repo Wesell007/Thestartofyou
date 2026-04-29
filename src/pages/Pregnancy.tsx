@@ -1,44 +1,36 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PregnancyHero from "@/components/pregnancy/PregnancyHero";
-import WhatThisJourneyIs from "@/components/pregnancy/WhatThisJourneyIs";
-import PregnancyTimeline from "@/components/pregnancy/PregnancyTimeline";
-import WeekByWeek from "@/components/pregnancy/WeekByWeek";
 import PregnancyTopicMap from "@/components/pregnancy/PregnancyTopicMap";
-import GuidanceAndQuestions from "@/components/pregnancy/GuidanceAndQuestions";
+import PregnancyAIPanel from "@/components/pregnancy/PregnancyAIPanel";
+import PregnancyTrimesterCards from "@/components/pregnancy/PregnancyTrimesterCards";
+import WeekByWeek from "@/components/pregnancy/WeekByWeek";
 import KeepYourJourney from "@/components/pregnancy/KeepYourJourney";
-import PregnancyFinalCTA from "@/components/pregnancy/PregnancyFinalCTA";
 
 const Pregnancy = () => {
   return (
-    <div className="min-h-screen font-sans">
+    <div className="min-h-screen font-sans bg-parchment">
       <Navbar />
       <main>
-        {/* 1. Hero — orientation + due-date entry */}
+        {/* 1. Hero — editorial + due date card */}
         <PregnancyHero />
 
-        {/* 2. What this journey is — single tightened orientation block */}
-        <WhatThisJourneyIs />
-
-        {/* 3. Pregnancy timeline — primary (trimesters) */}
-        <div data-section="trimesters">
-          <PregnancyTimeline />
-        </div>
-
-        {/* 4. Week-by-week — secondary deep navigation */}
-        <WeekByWeek />
-
-        {/* 5. Pregnancy topic map — structured topic architecture */}
+        {/* 2. The Pregnancy Guide — six topic cards */}
         <PregnancyTopicMap />
 
-        {/* 6. Guidance & questions — merged questions + AI */}
-        <GuidanceAndQuestions />
+        {/* 3. AI support panel */}
+        <PregnancyAIPanel />
 
-        {/* 7. Keep your journey — merged reflection + journal */}
+        {/* 4. Trimester pathway cards */}
+        <div data-section="trimesters">
+          <PregnancyTrimesterCards />
+        </div>
+
+        {/* 5. Week-by-week pregnancy map (uses existing fruit illustrations) */}
+        <WeekByWeek />
+
+        {/* 6. Journal CTA */}
         <KeepYourJourney />
-
-        {/* 8. Final CTA — restate due-date primary */}
-        <PregnancyFinalCTA />
       </main>
       <Footer />
     </div>

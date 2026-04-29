@@ -74,7 +74,7 @@ const Hero = () => (
       <img src={botanicalTr} alt="" aria-hidden="true"
         className="pointer-events-none absolute top-20 right-0 w-[150px] lg:w-[210px] opacity-25 select-none hidden md:block" />
 
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10 text-center">
+      <div className="container mx-auto px-14 sm:px-16 md:px-10 max-w-5xl relative z-10 text-center">
         <nav aria-label="breadcrumb" className="flex items-center justify-center gap-2 mb-6 sm:mb-7 font-sans text-[12px] font-normal text-foreground/65">
           <Link to="/pregnancy" className="hover:text-foreground transition-colors">Pregnancy</Link>
           <span className="text-foreground/30">›</span>
@@ -179,7 +179,7 @@ const MetaBar = () => (
           </div>
         </div>
         <nav aria-label="On this page" className="flex-1 pt-4 lg:pt-0">
-          <div className="flex gap-x-1 gap-y-2 overflow-x-auto lg:flex-wrap scrollbar-none -mx-1 px-1">
+          <div className="flex gap-x-1 gap-y-2 overflow-x-auto lg:flex-wrap scrollbar-hide -mx-1 px-1">
             {anchors.map(({ id, label, Icon }) => (
               <a key={id} href={`#${id}`}
                 className="group shrink-0 flex items-center gap-2 px-3 py-2 rounded-full hover:bg-sage-bg/60 transition-colors">

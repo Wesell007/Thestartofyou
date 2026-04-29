@@ -58,7 +58,7 @@ const PregnancyAIPanel = () => {
 
             {/* Soft framed input */}
             <div
-              className="max-w-2xl mx-auto rounded-2xl p-1.5"
+              className="max-w-2xl mx-auto rounded-2xl p-1 sm:p-1.5"
               style={{
                 background:
                   'linear-gradient(180deg, hsl(var(--parchment) / 0.6), hsl(var(--parchment) / 0.2))',

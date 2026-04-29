@@ -147,6 +147,15 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/signs-of-labour": imgSignsLabour,
   "/articles/stages-of-labour": imgSignsLabour,
   "/articles/when-to-go-in-for-labour": imgSignsLabour,
+  // Body — Phase F symptom deepening
+  "/articles/back-pain-in-pregnancy": imgBodyShifts,
+  "/articles/pelvic-pain-in-pregnancy": imgBodyShifts,
+  "/articles/round-ligament-pain": imgBodyShifts,
+  "/articles/braxton-hicks-contractions": imgSignsLabour,
+  "/articles/shortness-of-breath-in-pregnancy": imgThirdMovement,
+  "/articles/swelling-in-pregnancy": imgThirdMovement,
+  "/articles/heartburn-in-pregnancy": imgSecondEating,
+  "/articles/constipation-in-pregnancy": imgSecondEating,
   // Baby
   "/articles/how-your-baby-develops-in-pregnancy": imgPregnancyJourney,
   "/articles/baby-movement-in-pregnancy": imgSecondMovement,

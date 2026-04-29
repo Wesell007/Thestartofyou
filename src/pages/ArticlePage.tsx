@@ -34,6 +34,15 @@ const NEW_TEMPLATE_SLUGS = new Set<string>([
   "hospital-bag-and-what-to-pack",
   "preparing-emotionally-for-birth",
   "baby-movement-in-pregnancy",
+  // Phase F — Body deepening
+  "pelvic-pain-in-pregnancy",
+  "round-ligament-pain",
+  "braxton-hicks-contractions",
+  "shortness-of-breath-in-pregnancy",
+  "swelling-in-pregnancy",
+  "heartburn-in-pregnancy",
+  "constipation-in-pregnancy",
+  "back-pain-in-pregnancy",
 ]);
 
 const ArticlePage = () => {

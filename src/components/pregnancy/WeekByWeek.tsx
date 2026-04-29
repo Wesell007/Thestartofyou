@@ -126,13 +126,16 @@ const WeekByWeek = () => {
                       to={`/pregnancy/week/${week}`}
                       aria-label={`Week ${week}`}
                       className="group relative flex flex-col items-center justify-between aspect-square rounded-2xl
-                        border bg-card transition-all duration-300 text-center px-1 py-2 sm:py-2.5
-                        hover:-translate-y-0.5 hover:shadow-card-brand"
+                        border transition-all duration-500 text-center px-1 py-2 sm:py-2.5
+                        hover:-translate-y-0.5"
                       style={{
+                        background:
+                          'linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--parchment) / 0.7) 100%)',
                         borderColor: earlyWeeks.includes(week)
-                          ? `hsl(var(${group.accentVar}) / 0.35)`
+                          ? `hsl(var(${group.accentVar}) / 0.4)`
                           : `hsl(var(${group.accentVar}) / 0.14)`,
-                        boxShadow: '0 1px 0 hsl(var(--parchment-deeper) / 0.6)',
+                        boxShadow:
+                          '0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 6px 16px -10px hsl(var(--stage-pregnancy-accent) / 0.22)',
                       }}
                     >
                       {/* Soft circular wash behind fruit */}

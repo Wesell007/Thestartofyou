@@ -43,6 +43,15 @@ const NEW_TEMPLATE_SLUGS = new Set<string>([
   "heartburn-in-pregnancy",
   "constipation-in-pregnancy",
   "back-pain-in-pregnancy",
+  // Phase G — Baby development, position, and scan deepening
+  "anterior-placenta",
+  "low-lying-placenta-in-pregnancy",
+  "breech-baby",
+  "reduced-movements-in-pregnancy",
+  "baby-hiccups-in-the-womb",
+  "measuring-big-or-small-in-pregnancy",
+  "growth-scans-in-pregnancy",
+  "cord-around-the-neck-in-pregnancy",
 ]);
 
 const ArticlePage = () => {

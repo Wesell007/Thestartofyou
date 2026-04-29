@@ -7717,6 +7717,1064 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── ANTERIOR PLACENTA ────────────────────────────────────────────────────
+  {
+    slug: "anterior-placenta",
+    title: "Anterior placenta in pregnancy: what it means and how it changes movement",
+    metaDescription: "Anterior placenta explained — what it is, how it affects feeling baby's movements, when it matters, and when it doesn't. Calm, clear UK guidance.",
+    quickAnswer:
+      "An anterior placenta sits at the front of the uterus, between your tummy wall and the baby. It's a normal position — not a complication — and doesn't usually affect the pregnancy itself. The main thing it changes is how movements feel: kicks may take longer to notice, feel softer, or be muffled in the early weeks of feeling them. It does not change the rule for reduced movements: if your baby's pattern of movement changes, ring your maternity unit the same day.",
+    howThisFeels: [
+      "Being told 'anterior placenta' at the scan and not knowing what to ask",
+      "Wondering why everyone else feels kicks earlier than you",
+      "Worrying that quiet movements mean something is wrong",
+      "Feeling reassured one minute and uncertain the next",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Where the placenta implanted", body: "The placenta forms wherever the embryo embeds in the uterus. Front, back, top, or sides — all are normal positions. An anterior placenta simply means it implanted on the front wall." },
+        { heading: "A cushion between you and baby", body: "An anterior placenta sits between the front of the uterus and the baby. Movements have to travel through it before reaching your tummy wall, which is why they can feel softer or take longer to be obvious." },
+      ],
+      lessCauses: [
+        { heading: "Other placenta positions", body: "Posterior (back), fundal (top), or lateral (side) placentas tend to mean movements are felt a little earlier and more sharply — but the difference is small, and many people feel movement around the same time regardless." },
+      ],
+      whyItVaries: "Some people with an anterior placenta still feel movement clearly from around 20 weeks. Others find the first few weeks of feeling movement quieter and harder to read. Both are within normal — placental position is one factor among many.",
+    },
+    timing: {
+      whenStarts: "Anterior placentas are usually identified at the 20-week anomaly scan, though they may be mentioned earlier.",
+      whenEases: "By the third trimester, most people with an anterior placenta feel movement clearly. As the baby grows, kicks reach further and become harder to miss.",
+    },
+    whatItFeelsLike: [
+      "Faint, muffled flutters before clearer kicks arrive",
+      "Movements low down or to the sides more than across the front",
+      "A quieter early phase of feeling movement, then catching up",
+    ],
+    whatThisMeans:
+      "An anterior placenta is a positional fact, not a problem. It doesn't usually affect how the pregnancy progresses. What it can do is delay the early reassurance of feeling movement clearly — which is worth knowing, so the quiet weeks don't feel frightening.",
+    normal: [
+      "Movements feeling softer or harder to pinpoint in the early weeks",
+      "Feeling kicks lower, to the sides, or in the ribs more than the front",
+      "A pattern that becomes clearer as pregnancy goes on",
+    ],
+    seekSupport: [
+      "Any change in your baby's usual pattern of movement — call the same day, do not wait",
+      "Reduced movements at any stage of the third trimester",
+      "Heavy bleeding or severe abdominal pain (call straight away)",
+    ],
+    disclaimer: "Anterior placenta does not change the advice on reduced movements. If your baby's movement pattern changes, ring your maternity assessment unit the same day — never wait until the next morning.",
+    whatYouCanDo: [
+      { action: "Get to know your baby's pattern", reason: "Even with an anterior placenta, by the third trimester you'll have a sense of when and how your baby moves. Pattern matters more than counting." },
+      { action: "Don't wait if movements change", reason: "An anterior placenta is not a reason to delay calling. Maternity units would always rather check than miss something." },
+      { action: "Ask at your scans", reason: "If you're unsure where your placenta sits or what it means, ask the sonographer or midwife. They expect the question." },
+    ],
+    whatHappensNext: "An anterior placenta on its own doesn't change your antenatal care. By the third trimester, most people feel their baby clearly and the early quiet weeks are well behind them.",
+    relatedStage: {
+      intro: "Anterior placenta sits inside the wider story of how movement and scans unfold:",
+      links: [
+        { label: "Your baby in pregnancy", href: "/pregnancy/baby", context: "The wider topic this article belongs to." },
+        { label: "Baby movement in pregnancy", href: "/articles/baby-movement-in-pregnancy", context: "The cornerstone read on what to feel for and when." },
+        { label: "Reduced movements in pregnancy", href: "/articles/reduced-movements-in-pregnancy", context: "Why anterior placenta doesn't change the rule for calling in." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "Where placental position is identified." },
+      ],
+    },
+    aiPrompts: [
+      "Will I still feel my baby move with an anterior placenta?",
+      "Does an anterior placenta change anything about my care?",
+      "When should I call about reduced movements if I have an anterior placenta?",
+    ],
+    captureIntro: "Anterior placenta can quietly shape how the early weeks of feeling movement go. Worth noting how it really feels — patterns become clearer with time.",
+    trimester: [2, 3],
+    relatedSlugs: ["baby-movement-in-pregnancy", "reduced-movements-in-pregnancy", "tests-and-scans-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["baby", "scans"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Anterior placenta means the placenta sits at the front of the uterus — a normal position",
+      "It does not affect the pregnancy itself, but can muffle early movements",
+      "Most people feel their baby clearly by the third trimester",
+      "It does not change the advice on reduced movements — call the same day",
+      "It's identified at the 20-week scan and rarely needs follow-up",
+    ],
+    sources: [
+      "NHS — Your antenatal scans",
+      "Royal College of Obstetricians and Gynaecologists — Placenta praevia and accreta",
+      "Tommy's — Anterior placenta",
+      "NICE — Antenatal care",
+    ],
+    faq: [
+      { question: "Is anterior placenta a problem?", answer: "No. It's a normal position. It doesn't affect the baby or the pregnancy itself — it can just make movements feel softer in the early weeks of feeling them." },
+      { question: "Will I feel my baby move later?", answer: "You may notice movements a little later or feel them as fainter flutters at first. By the third trimester, most people feel their baby clearly." },
+      { question: "Do I still need to call about reduced movements?", answer: "Yes — always. Anterior placenta does not change this. If your baby's pattern changes, ring your maternity assessment unit the same day." },
+      { question: "Will anterior placenta affect my birth?", answer: "Usually not. The placenta moves up as the uterus grows. Position is only a concern if it ends up low (placenta praevia), which is checked at later scans if relevant." },
+      { question: "Can anterior placenta cause a c-section?", answer: "On its own, no. It only affects birth planning if it sits low (low-lying placenta), which is a separate finding." },
+    ],
+    topic: "baby",
+    standfirst: "Being told you have an anterior placenta can sound technical and worrying. In reality it's a normal position — the main thing it changes is how movements feel.",
+    editorialSections: [
+      {
+        id: "what-it-is",
+        heading: "What anterior placenta actually means",
+        lead: "It's about where the placenta sits, not what it's doing.",
+        paragraphs: [
+          "The placenta forms wherever the embryo embeds in the wall of the uterus. Front, back, top, sides — all are normal. An anterior placenta simply means yours is at the front, between your tummy wall and the baby.",
+          "It's identified routinely at the 20-week anomaly scan. There's nothing to do about it, because there's nothing wrong. It's a positional fact, like having a long-bodied uterus or a tilted one — useful to know, not a complication.",
+        ],
+      },
+      {
+        id: "movement",
+        heading: "Why movements can feel different",
+        lead: "The placenta acts like a soft cushion between you and your baby.",
+        paragraphs: [
+          "When your baby kicks, the movement has to travel through the placenta before reaching your tummy wall. With an anterior placenta, those early kicks can feel muffled — like a tap through a duvet rather than a thud against a window.",
+          "Many people with an anterior placenta feel kicks lower down, to the sides, or in the ribs first, before they feel them across the front. That's normal. As the baby grows, movements reach further and become unmistakable.",
+        ],
+        callout: { tone: "reassurance", text: "If you've reached week 22 or 24 and still feel less than you expected, an anterior placenta is often the reason. Mention it at your next appointment for reassurance, and trust that your sense of pattern will build." },
+      },
+      {
+        id: "reduced-movements",
+        heading: "What it doesn't change",
+        lead: "The advice on reduced movements is the same.",
+        paragraphs: [
+          "This is the part to hold on to. An anterior placenta is not a reason to wait, second-guess, or excuse a quieter day. Once you have a sense of your baby's pattern — usually from around 24 to 28 weeks — any change matters.",
+          "If movements feel different from what's normal for your baby, ring your maternity assessment unit the same day. Not the next morning. They will always rather see you and reassure you.",
+        ],
+        callout: { tone: "gentle-warning", text: "Anterior placenta is never the reason to delay calling about reduced movements. The rule is the same for everyone." },
+      },
+    ],
+  },
+
+  // ─── LOW-LYING PLACENTA ───────────────────────────────────────────────────
+  {
+    slug: "low-lying-placenta-in-pregnancy",
+    title: "Low-lying placenta in pregnancy: what it means and what happens next",
+    metaDescription: "Low-lying placenta and placenta praevia explained — why it's often picked up at 20 weeks, why it usually moves up, and what extra checks may follow.",
+    quickAnswer:
+      "A low-lying placenta means the placenta is sitting near or over the cervix at the time of a scan. It's commonly picked up at the 20-week scan. In most cases, the placenta moves upward as the uterus grows, and by the third trimester it's no longer in the way. If it stays low (placenta praevia), a planned caesarean is usually recommended. Any vaginal bleeding with a low-lying placenta needs same-day assessment.",
+    howThisFeels: [
+      "Being told 'low-lying placenta' and feeling the room shift",
+      "Googling placenta praevia and spiralling fast",
+      "Waiting weeks for the next scan",
+      "Wondering if you've done something wrong",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Where the placenta first implanted", body: "The placenta forms where the embryo embedded. If that spot was low in the uterus, the placenta starts close to or over the cervix. This is common in early pregnancy and not a sign anything is wrong." },
+        { heading: "The uterus growing upward", body: "As the uterus grows, the lower section stretches and the placenta is pulled upward with it. This is why most low-lying placentas are no longer low by the third trimester." },
+      ],
+      lessCauses: [
+        { heading: "Persistent placenta praevia", body: "In a small number of pregnancies the placenta stays over or very close to the cervix — this is placenta praevia, and it changes how birth is planned." },
+      ],
+      whyItVaries: "Around 1 in 200 pregnancies ends up with placenta praevia at term. Far more pregnancies have a low-lying placenta at 20 weeks that quietly resolves. The earlier it's spotted, the more likely it is to move.",
+    },
+    timing: {
+      whenStarts: "Low-lying placenta is most commonly identified at the 20-week anomaly scan.",
+      whenEases: "Most low-lying placentas have moved up by 32-36 weeks. A follow-up scan is usually offered around then to check.",
+    },
+    whatItFeelsLike: [
+      "Often nothing physically — it's a scan finding rather than a symptom",
+      "Painless vaginal bleeding (bright red) is the main symptom if praevia persists",
+    ],
+    whatThisMeans:
+      "A low-lying placenta found at 20 weeks usually means: book a follow-up scan, watch for bleeding, and otherwise carry on. Most stories end with a routine third-trimester scan saying 'all clear'.",
+    normal: [
+      "Being told the placenta is low at 20 weeks and being booked for a follow-up scan",
+      "Having no symptoms at all",
+      "The placenta moving up by the third trimester",
+    ],
+    seekSupport: [
+      "Any vaginal bleeding — even a small amount — needs same-day maternity assessment",
+      "Cramping or contractions with a known low-lying placenta",
+      "Feeling unwell, faint, or seeing larger amounts of blood (call 999 or go straight to A&E or the maternity unit)",
+    ],
+    disclaimer: "Painless bright red bleeding in pregnancy with a low-lying placenta is a recognised emergency and must be assessed urgently. Do not wait. Avoid intercourse until your team has confirmed the placenta is no longer low.",
+    whatYouCanDo: [
+      { action: "Attend the follow-up scan", reason: "It's the single most useful piece of information. Most low-lying placentas have moved by then." },
+      { action: "Avoid intercourse until you're cleared", reason: "Standard advice while the placenta is low — it reduces the risk of bleeding." },
+      { action: "Know the bleeding rule", reason: "Any bleeding means same-day assessment. Don't try to judge how much is too much." },
+      { action: "Carry your maternity notes", reason: "If you do need urgent care, the team can see your scan history immediately." },
+    ],
+    whatHappensNext: "Most people with a 20-week low-lying placenta are reassured at their follow-up scan and go on to plan a normal birth. If it stays low, your team will discuss a planned caesarean — usually around 36-37 weeks for placenta praevia.",
+    relatedStage: {
+      intro: "Low-lying placenta connects with the wider story of scans and birth planning:",
+      links: [
+        { label: "Your baby in pregnancy", href: "/pregnancy/baby", context: "The wider topic this article belongs to." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "Where placental position is checked." },
+        { label: "Growth scans in pregnancy", href: "/articles/growth-scans-in-pregnancy", context: "Other scans you may be offered later." },
+        { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy", context: "When a scan finding sets off the spiral." },
+      ],
+    },
+    aiPrompts: [
+      "Will my low-lying placenta move up?",
+      "What does placenta praevia mean for birth?",
+      "Should I worry about a low-lying placenta at 20 weeks?",
+    ],
+    captureIntro: "A scan finding can quietly change how the next few weeks feel. Worth noting what you were told — it helps when you're talking to your midwife or going back for the follow-up.",
+    trimester: [2, 3],
+    relatedSlugs: ["tests-and-scans-in-pregnancy", "growth-scans-in-pregnancy", "anxiety-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["baby", "scans"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Low-lying placenta means the placenta is near or over the cervix at scan",
+      "Most resolve as the uterus grows — a follow-up scan around 32-36 weeks confirms",
+      "Persistent placenta praevia (around 1 in 200 at term) usually means a planned c-section",
+      "Any vaginal bleeding needs same-day assessment — do not wait",
+      "Avoid intercourse until you're told the placenta is no longer low",
+    ],
+    sources: [
+      "Royal College of Obstetricians and Gynaecologists — Placenta praevia and placenta accreta",
+      "NHS — What is placenta praevia?",
+      "NICE — Antenatal care",
+      "Tommy's — Low-lying placenta",
+    ],
+    faq: [
+      { question: "Will my low-lying placenta move up?", answer: "Most do. As the uterus grows in the second and third trimesters, the placenta is carried upward with the uterine wall. A follow-up scan around 32-36 weeks confirms whether it has." },
+      { question: "What's the difference between low-lying and placenta praevia?", answer: "Low-lying is the early finding. Placenta praevia is the diagnosis if the placenta is still over or very close to the cervix in the third trimester." },
+      { question: "Will I need a c-section?", answer: "Only if the placenta stays in the way of the cervix at term. If it has moved up by your follow-up scan, you can plan a normal birth." },
+      { question: "Is a low-lying placenta dangerous?", answer: "It needs to be taken seriously because of the risk of bleeding, but it's well-managed. The main rule is: any bleeding, ring straight away." },
+      { question: "Can I have sex with a low-lying placenta?", answer: "Standard advice is to avoid intercourse until you've been told the placenta is no longer low. Your team will guide you." },
+    ],
+    topic: "baby",
+    standfirst: "A low-lying placenta is one of those scan findings that sounds bigger than it usually turns out to be. Most resolve quietly. Here's what to expect, and what genuinely needs attention.",
+    editorialSections: [
+      {
+        id: "what-it-means",
+        heading: "What 'low-lying placenta' means",
+        lead: "It's about position, not function.",
+        paragraphs: [
+          "The placenta is the organ that nourishes your baby and exchanges oxygen and waste. It can implant anywhere in the uterus. If it sits low — near or over the cervix at the time of a scan — it's described as low-lying.",
+          "At the 20-week anomaly scan, this is a relatively common finding. The team makes a note, books you a follow-up scan later in pregnancy, and otherwise carries on with normal care.",
+        ],
+      },
+      {
+        id: "why-it-moves",
+        heading: "Why most low-lying placentas move up",
+        lead: "Your uterus does the work.",
+        paragraphs: [
+          "As pregnancy progresses, the lower part of the uterus stretches and lifts. The placenta doesn't migrate, exactly — it stays attached to the same patch of uterus, but that patch ends up higher because the uterus has grown around it.",
+          "By the time of a follow-up scan at 32-36 weeks, the great majority of low-lying placentas are no longer low. For most people, that's the end of the story.",
+        ],
+        callout: { tone: "reassurance", text: "A low-lying placenta at 20 weeks is far more often resolved than not. The follow-up scan exists precisely because most of them move." },
+      },
+      {
+        id: "if-it-stays-low",
+        heading: "If it stays low: placenta praevia",
+        lead: "Less common, but well managed.",
+        paragraphs: [
+          "If the placenta is still over or very close to the cervix in the third trimester, that's placenta praevia. It happens in about 1 in 200 pregnancies at term.",
+          "Birth planning then changes: a planned caesarean is usually recommended, often around 36-37 weeks, before contractions can start and cause bleeding. Your team will talk you through the timing and what to watch for.",
+        ],
+      },
+      {
+        id: "bleeding",
+        heading: "The bleeding rule",
+        paragraphs: [
+          "Any vaginal bleeding when you've been told the placenta is low — even a small amount, even painless — needs same-day maternity assessment. Do not try to judge it. Ring your maternity unit and go in.",
+          "Heavier bleeding, feeling faint, or severe pain is an emergency: call 999 or go straight to A&E. This is the part of low-lying placenta that genuinely matters, and it's why the rule is so clear.",
+        ],
+        callout: { tone: "gentle-warning", text: "Painless, bright red bleeding with a low-lying placenta is the symptom that always needs urgent assessment." },
+      },
+    ],
+  },
+
+  // ─── BREECH BABY ──────────────────────────────────────────────────────────
+  {
+    slug: "breech-baby",
+    title: "Breech baby in pregnancy: what it means and what happens next",
+    metaDescription: "Breech baby explained — what breech means, how common it is, when it matters, what ECV is, and the calm options for birth if your baby stays breech.",
+    quickAnswer:
+      "A breech baby is positioned bottom-down or feet-down, rather than head-down. It's very common earlier in pregnancy — many babies turn naturally by around 32-36 weeks. From around 36 weeks, if your baby is still breech, your team will talk you through your options: ECV (a procedure to try to turn the baby), a planned caesarean, or — in some cases — a planned vaginal breech birth with experienced support. Breech is a position, not a problem with your baby.",
+    howThisFeels: [
+      "Being told 'breech' and not knowing whether to worry yet",
+      "Trying everything you read online to encourage baby to turn",
+      "Wondering if a c-section is now the only option",
+      "Feeling pulled between hope and planning",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Babies move freely earlier on", body: "Until around 32-34 weeks there's plenty of room. Babies regularly somersault between head-down and breech. Position at this stage doesn't predict the final one." },
+        { heading: "Most babies settle head-down", body: "By around 36-37 weeks, around 96% of babies are head-down. Most who were breech will have turned naturally — often without you noticing." },
+      ],
+      lessCauses: [
+        { heading: "Persistent breech (around 3-4% at term)", body: "A small number of babies stay breech. This can be linked to where the placenta is, the shape of the uterus, the amount of fluid, or simply how the baby is comfortable. Often there's no clear reason." },
+      ],
+      whyItVaries: "Position at 28 weeks tells you very little. Position at 36 weeks is what matters. Most worry triggered before then resolves on its own.",
+    },
+    timing: {
+      whenStarts: "Breech can be felt or noted at any point in pregnancy. It only becomes clinically relevant from around 36 weeks.",
+      whenEases: "Around 36 weeks is the decision point. Before then, babies often turn on their own.",
+    },
+    whatItFeelsLike: [
+      "Kicks high up under the ribs (bottom-down baby)",
+      "A hard round shape (head) up high near the ribs",
+      "Hiccups felt low down rather than high up",
+    ],
+    whatThisMeans:
+      "Breech is a position, not a complication of your baby. It changes the conversation about birth, but it doesn't change anything about who your baby is or how they're growing.",
+    normal: [
+      "Being breech at 28-32 weeks (very common)",
+      "Position changing week to week earlier in pregnancy",
+      "Feeling kicks high up if baby is bottom-down",
+    ],
+    seekSupport: [
+      "Reduced movements at any time — same-day call (separate from breech)",
+      "Bleeding or sudden severe pain (urgent)",
+      "Going into labour at home with a known breech baby — call your maternity unit and travel in promptly",
+    ],
+    disclaimer: "Breech itself is not an emergency. The rules for reduced movements, bleeding, and labour signs apply as normal. If you're in labour with a known breech baby, ring your maternity unit straight away and travel in.",
+    whatYouCanDo: [
+      { action: "Wait to worry until 36 weeks", reason: "Position before then is rarely the final position. Many babies turn quietly between scans." },
+      { action: "Ask about ECV at your 36-week appointment", reason: "ECV (external cephalic version) is a recognised procedure — done by an experienced obstetrician, with monitoring — to try to turn the baby. Around half are successful." },
+      { action: "Talk through your birth options", reason: "If your baby stays breech, your team will discuss planned caesarean and, in some units, planned vaginal breech birth. Both can be safe with the right support." },
+      { action: "Notice your baby's pattern", reason: "Whatever the position, the rules for movement still apply. Call the same day if your baby's pattern changes." },
+    ],
+    whatHappensNext: "If your baby is breech at 36 weeks, your team will offer a structured conversation: ECV, planned caesarean, or — where available — planned vaginal breech birth. None of these is the wrong choice; the right one depends on you, your baby, and your unit.",
+    relatedStage: {
+      intro: "Breech sits inside the wider story of how birth comes together:",
+      links: [
+        { label: "Your baby in pregnancy", href: "/pregnancy/baby", context: "The wider topic this article belongs to." },
+        { label: "Signs of labour", href: "/articles/signs-of-labour", context: "What to recognise, and when to ring." },
+        { label: "When to go in for labour", href: "/articles/when-to-go-in-for-labour", context: "Especially relevant with a known breech." },
+        { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth", context: "When the plan you imagined is shifting." },
+      ],
+    },
+    aiPrompts: [
+      "When does breech actually matter?",
+      "What is ECV and how does it work?",
+      "Can I still have a vaginal birth with a breech baby?",
+    ],
+    captureIntro: "Hearing 'breech' can quietly reshape the run-up to birth. Worth noting where your head is and what you've been told — it helps the conversation with your midwife.",
+    trimester: [3],
+    relatedSlugs: ["signs-of-labour", "when-to-go-in-for-labour", "preparing-emotionally-for-birth"],
+    journey: ["pregnancy"],
+    topics: ["baby", "birth"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Breech means baby is bottom-down or feet-down, rather than head-down",
+      "Very common earlier in pregnancy — most babies turn by 36-37 weeks",
+      "Around 3-4% of babies are still breech at term",
+      "From 36 weeks, your team will discuss ECV, planned caesarean, or — in some units — vaginal breech birth",
+      "Breech is a position, not a problem with your baby",
+    ],
+    sources: [
+      "Royal College of Obstetricians and Gynaecologists — Breech baby at the end of pregnancy",
+      "RCOG — External cephalic version (ECV)",
+      "NICE — Intrapartum care",
+      "NHS — What if my baby is breech?",
+    ],
+    faq: [
+      { question: "When does breech actually matter?", answer: "From around 36 weeks. Before that, babies move around a lot and most who are breech will turn." },
+      { question: "What is ECV?", answer: "External cephalic version is a procedure where an obstetrician uses gentle pressure on your tummy to try to turn the baby head-down. It's offered around 36-37 weeks, with monitoring, in around half of cases successfully." },
+      { question: "Is a c-section the only option for breech?", answer: "No. Planned caesarean is the most common recommendation, but planned vaginal breech birth is supported in some units with experienced teams. Your options will be discussed honestly." },
+      { question: "Can I do anything to turn my baby?", answer: "Some people try positions like spinning babies — there's limited evidence these work, but they're generally low risk. The clearest evidence-based offer is ECV." },
+      { question: "Will my baby be okay if breech?", answer: "Yes. Breech is a position. It doesn't say anything about your baby's health. The plan around birth changes; the baby is the same baby." },
+    ],
+    topic: "baby",
+    standfirst: "Being told your baby is breech can pull the focus straight to birth. The honest answer is that most babies turn — and even if yours doesn't, there are good options.",
+    editorialSections: [
+      {
+        id: "what-breech-means",
+        heading: "What breech actually means",
+        lead: "A position — that's it.",
+        paragraphs: [
+          "Breech means your baby is positioned bottom-down or feet-down inside the uterus, rather than head-down. There are different types — frank breech (legs straight up), complete breech (legs crossed), footling breech (one or both feet down) — but in everyday language it just means 'not head-down'.",
+          "Earlier in pregnancy, breech is very common. Babies have plenty of room to move and they use it. Position at 28 weeks tells you almost nothing about the final position at 38.",
+        ],
+      },
+      {
+        id: "when-it-matters",
+        heading: "When it starts to matter",
+        lead: "Around 36 weeks is the decision point.",
+        paragraphs: [
+          "By around 36-37 weeks, around 96% of babies are head-down. The remaining 3-4% are persistent breech, and that's when conversations about birth planning begin in earnest.",
+          "If your baby is breech at a routine appointment before 36 weeks, the calmest answer is usually 'let's see at the next one'. Many midwives will say exactly this. Worry triggered earlier than 36 weeks often resolves on its own.",
+        ],
+        callout: { tone: "reassurance", text: "If you've just been told baby is breech at 32 or 34 weeks, there is genuine time. Most babies turn." },
+      },
+      {
+        id: "ecv",
+        heading: "ECV — external cephalic version",
+        lead: "A recognised procedure to try to turn the baby.",
+        paragraphs: [
+          "ECV is offered from around 36-37 weeks. An experienced obstetrician uses gentle, firm pressure on your tummy to try to encourage the baby to turn head-down. It's done in hospital with monitoring of the baby's heartbeat before and after.",
+          "It's not always comfortable, and it doesn't always work — around half of attempts are successful. It's not the right option for everyone (your team will check things like placenta position and fluid levels), but for many it's worth trying.",
+        ],
+      },
+      {
+        id: "birth-options",
+        heading: "If your baby stays breech",
+        lead: "There are honest options — none of them is the wrong one.",
+        paragraphs: [
+          "The most common recommendation in the UK is a planned caesarean, typically around 39 weeks, before labour starts. It's a well-rehearsed pathway and many people feel calm with it once they've talked it through.",
+          "Some units also offer planned vaginal breech birth with experienced midwives and obstetricians. It's not available everywhere and it requires a careful conversation about safety, but for the right baby and the right team it can be a safe choice.",
+          "What matters most is that the conversation is yours. Ask what the recommendation is, why, and what the alternative looks like. There's no single right answer — just the right answer for you, this baby, and this unit.",
+        ],
+      },
+    ],
+  },
+
+  // ─── REDUCED MOVEMENTS ────────────────────────────────────────────────────
+  {
+    slug: "reduced-movements-in-pregnancy",
+    title: "Reduced movements in pregnancy: when to call and what happens next",
+    metaDescription: "Reduced movements in pregnancy explained — why pattern matters more than counting, what to do, and why you should never wait until tomorrow to call.",
+    quickAnswer:
+      "If your baby's pattern of movement changes — whether that's less, weaker, or different from what's normal for your baby — ring your maternity assessment unit the same day. Do not wait until tomorrow. Do not wait to see if it picks up. There is no number of kicks you should count to; what matters is your baby's own pattern. Reduced movements are usually fine, but they're one of the most important things to flag because some causes need quick action. Maternity teams expect these calls and would always rather see you.",
+    howThisFeels: [
+      "A quiet day that wasn't quiet yesterday",
+      "Drinking cold water and trying to feel something",
+      "Wondering if you're being dramatic for ringing",
+      "Knowing in your gut that something has changed",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Normal variation in pattern", body: "Babies have quiet times and active times. Most reduced-movement episodes turn out to be normal variation — but the only way to know is to be checked." },
+        { heading: "Position of the baby or placenta", body: "Position can quietly muffle movements you'd usually feel. An anterior placenta is one example, but it does not change the rule." },
+        { heading: "Low fluid or how the baby is lying", body: "Sometimes a check shows low amniotic fluid or a position that's making movements harder to feel — both manageable when found." },
+      ],
+      lessCauses: [
+        { heading: "The baby being unwell", body: "Reduced movements can sometimes be the only sign that the baby needs help. This is precisely why the rule is to ring the same day, not wait." },
+      ],
+      whyItVaries: "What's normal for one baby isn't normal for another. Some babies are quiet in the morning, some at night. The pattern is yours to know — and any change in that pattern is what matters.",
+    },
+    timing: {
+      whenStarts: "Most people feel a reliable pattern of movement from around 24-28 weeks. Reduced movements should be reported from this point onward, at any stage of pregnancy.",
+      whenEases: "There is no point in pregnancy at which reduced movements stop mattering. Babies do not slow down at the end. They run out of space, but their pattern stays.",
+    },
+    whatItFeelsLike: [
+      "Less movement than usual for your baby",
+      "Weaker or softer movements than the day before",
+      "A change in the rhythm or timing of movement",
+      "An unmistakable sense that something is different",
+    ],
+    whatThisMeans:
+      "Reduced movements is the one thing in late pregnancy that you never wait on. Most checks end with reassurance. Some find a reason to act, and finding it early changes the outcome. That's the whole reason for the rule.",
+    normal: [
+      "Quiet hours that match your baby's usual pattern",
+      "Less movement immediately after a meal or activity in some babies",
+      "Patterns that shift week by week as your baby grows",
+    ],
+    seekSupport: [
+      "Any reduction or change in your baby's usual pattern of movement — call the same day",
+      "Less movement than yesterday, or weaker movements",
+      "More than one quiet episode in close succession",
+      "Any feeling that something has changed — trust this",
+    ],
+    disclaimer: "Do not wait. Do not delay. Do not try to wake the baby with cold drinks or sugary food and 'see what happens'. Ring your maternity assessment unit the same day, every time. Maternity teams expect and welcome these calls. There is no penalty for ringing.",
+    whatYouCanDo: [
+      { action: "Ring your maternity assessment unit", reason: "Same day, every time. The number is in your maternity notes — programme it into your phone now if it's not already." },
+      { action: "Trust your sense of pattern over any count", reason: "Counting to 10 kicks is no longer recommended UK guidance. Pattern matters more." },
+      { action: "Don't be put off by an anterior placenta", reason: "It does not change the rule. Call anyway." },
+      { action: "Go in if asked, even if movements pick up on the way", reason: "If they ask you to come in, go. Movement returning is not enough — they will check baby properly." },
+    ],
+    whatHappensNext: "When you ring, the team will usually ask you to come in. They'll listen to the baby's heartbeat with a CTG monitor and may scan you. Most checks end with reassurance — and that reassurance is exactly what the system is there for.",
+    relatedStage: {
+      intro: "Reduced movements is the most important pattern to know in late pregnancy:",
+      links: [
+        { label: "Your baby in pregnancy", href: "/pregnancy/baby", context: "The wider topic this article belongs to." },
+        { label: "Baby movement in pregnancy", href: "/articles/baby-movement-in-pregnancy", context: "The cornerstone read on what to feel for and when." },
+        { label: "Anterior placenta", href: "/articles/anterior-placenta", context: "Why an anterior placenta does not change this rule." },
+        { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy", context: "When the calls feel hard but stay essential." },
+      ],
+    },
+    aiPrompts: [
+      "Should I ring about reduced movements?",
+      "What counts as reduced movements?",
+      "Will they think I'm overreacting if I call?",
+    ],
+    captureIntro: "Reduced movements is one of the few things in pregnancy worth never second-guessing. Worth noting your sense of your baby's usual pattern — it's the most useful thing to share when you ring.",
+    trimester: [2, 3],
+    relatedSlugs: ["baby-movement-in-pregnancy", "anterior-placenta", "anxiety-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["baby", "movement"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Pattern matters more than counting — there is no kick count target in UK guidance",
+      "Any change from your baby's usual pattern means ring the same day",
+      "Do not wait until tomorrow, do not try to wake the baby first",
+      "Anterior placenta does not change this rule",
+      "Maternity teams expect these calls — there is no penalty for ringing",
+    ],
+    sources: [
+      "Royal College of Obstetricians and Gynaecologists — Your baby's movements in pregnancy",
+      "Tommy's — Baby movements information",
+      "NHS — Your baby's movements",
+      "NICE — Antenatal care",
+    ],
+    faq: [
+      { question: "What counts as reduced movements?", answer: "Any change from your baby's usual pattern — less than usual, weaker than usual, or different from yesterday. Trust your own sense of pattern." },
+      { question: "Should I count kicks?", answer: "Not to a target number. Counting to 10 is no longer recommended UK guidance. Pattern is what matters." },
+      { question: "Should I try cold water or sugary food first?", answer: "No. Don't delay. Ring straight away. Trying to wake the baby first is not the recommended approach." },
+      { question: "Will they think I'm overreacting?", answer: "No. Maternity assessment teams expect these calls and welcome them. The whole system is built around 'better safe than sorry'." },
+      { question: "What if movements pick up on the way in?", answer: "Still go. Movement returning is not enough on its own. The team will check baby properly with a CTG and reassure you." },
+    ],
+    topic: "baby",
+    standfirst: "If there is one rule to carry through the second half of pregnancy, this is it. Pattern matters, time matters, and the call is always worth making.",
+    editorialSections: [
+      {
+        id: "the-rule",
+        heading: "The rule, in one line",
+        lead: "Any change in your baby's usual pattern of movement — ring your maternity assessment unit the same day.",
+        paragraphs: [
+          "Not tomorrow. Not after a glass of cold water. Not 'I'll see how the next hour goes'. Same day, every time.",
+          "There is no other moment in pregnancy where this kind of clear, urgent rule applies. It exists because reduced movements can sometimes be the only sign that a baby needs help — and because finding that early changes outcomes.",
+        ],
+        callout: { tone: "gentle-warning", text: "If your baby's pattern of movement has changed, call your maternity assessment unit now. Do not wait until morning." },
+      },
+      {
+        id: "pattern-not-count",
+        heading: "Pattern, not number",
+        lead: "Counting to a target is out of date.",
+        paragraphs: [
+          "The old advice to count to 10 kicks is no longer current UK guidance. Babies don't move on a schedule, and a target number gives a false sense of safety.",
+          "What matters is your sense of your baby's pattern: when they're usually active, what their kicks usually feel like, what a quiet stretch usually looks like for them. You build that pattern simply by paying attention through the day. Any clear change in that pattern is what you ring about.",
+        ],
+      },
+      {
+        id: "anterior-placenta",
+        heading: "An anterior placenta does not change this",
+        lead: "Same rule. Same call. Every time.",
+        paragraphs: [
+          "If you've been told you have an anterior placenta — where the placenta sits at the front of the uterus, between you and the baby — you may have heard that movements can feel softer. That's true in the early weeks of feeling movement. It is not a reason to wait when something changes.",
+          "The single most important thing to take from this article: anterior placenta is never the reason to delay. Ring anyway.",
+        ],
+      },
+      {
+        id: "what-happens",
+        heading: "What happens when you ring",
+        lead: "Usually reassurance — and that's exactly the point.",
+        paragraphs: [
+          "When you call, the team will most often ask you to come in. They'll put a CTG monitor on for around half an hour to listen to baby's heartbeat. They may scan you to check fluid levels, growth, or how baby is lying. Most checks end with everything being reassuringly normal.",
+          "That reassurance is the whole reason the system exists. The minority of times when something needs action are why the rule is so clear. The majority of times when everything is fine are why it doesn't feel like a fuss to ring.",
+        ],
+      },
+    ],
+  },
+
+  // ─── BABY HICCUPS ─────────────────────────────────────────────────────────
+  {
+    slug: "baby-hiccups-in-the-womb",
+    title: "Baby hiccups in the womb: what they feel like and when to expect them",
+    metaDescription: "Baby hiccups in the womb explained — what they feel like, why they happen, how they differ from kicks, and when they're nothing to worry about.",
+    quickAnswer:
+      "Baby hiccups in the womb feel like small, rhythmic taps or twitches — usually in one fixed spot — that go on for a few minutes at a time. They start sometime in the second or third trimester and are completely normal. They're caused by your baby's developing diaphragm reflexively contracting, often as they practise breathing. Hiccups themselves are reassuring, not worrying. Reduced movements are still always worth ringing about — that's separate from hiccups.",
+    howThisFeels: [
+      "Tiny rhythmic taps you can almost set a timer to",
+      "Wondering if those flutters are kicks or something else",
+      "Feeling reassured by hiccups one day, anxious about them the next",
+      "Trying to read every flutter for meaning",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "The diaphragm developing", body: "Your baby's diaphragm — the muscle that drives breathing — is developing through pregnancy. As it does, it can contract reflexively, producing hiccups." },
+        { heading: "Practice breathing movements", body: "From the second trimester onward, babies make practice breathing movements, drawing fluid in and out of their lungs. Hiccups often happen alongside this." },
+      ],
+      lessCauses: [
+        { heading: "Position", body: "Where baby is lying can make hiccups feel more or less obvious. They may be felt low, high, or to one side depending on baby's position." },
+      ],
+      whyItVaries: "Some babies hiccup several times a day. Others rarely seem to. Both are normal. Frequency of hiccups is not a measure of how the pregnancy is going.",
+    },
+    timing: {
+      whenStarts: "Hiccups can be felt any time from around the second trimester. Some people notice them earlier, some later.",
+      whenEases: "They tend to continue throughout pregnancy and may become more obvious as baby grows.",
+    },
+    whatItFeelsLike: [
+      "Small rhythmic taps in one fixed spot",
+      "A regular twitch or jolt every few seconds",
+      "Episodes lasting a few minutes at a time",
+      "Often felt low down or to one side",
+    ],
+    whatThisMeans:
+      "Hiccups are a sign of normal development. They're not movements in the pattern sense — they're reflexes — but they sit happily inside the picture of a baby who's growing well.",
+    normal: [
+      "Daily or several-times-a-day hiccup episodes",
+      "No hiccups for a while, then plenty",
+      "Hiccups felt in different places as baby moves",
+    ],
+    seekSupport: [
+      "Reduced overall movements — call the same day (this is separate from hiccups)",
+      "Any other change in your baby's usual pattern of movement",
+    ],
+    disclaimer: "Hiccups themselves are not a reason to call. Reduced or changed movement patterns always are — and that rule is separate from how often baby hiccups.",
+    whatYouCanDo: [
+      { action: "Enjoy them when they come", reason: "They're one of the small, strange, lovely parts of pregnancy. There's nothing to do about them." },
+      { action: "Don't try to read meaning into the frequency", reason: "More hiccups isn't better; fewer isn't worse. They're a developmental quirk, not a metric." },
+      { action: "Keep noticing your baby's overall pattern", reason: "That's what matters for safety. Hiccups are a bonus on top." },
+    ],
+    whatHappensNext: "Hiccups continue quietly through pregnancy and often through the early newborn weeks too. There's nothing to do about them.",
+    relatedStage: {
+      intro: "Hiccups belong in the wider story of feeling your baby:",
+      links: [
+        { label: "Your baby in pregnancy", href: "/pregnancy/baby", context: "The wider topic this article belongs to." },
+        { label: "Baby movement in pregnancy", href: "/articles/baby-movement-in-pregnancy", context: "The cornerstone read on what to feel and when." },
+        { label: "How your baby develops in pregnancy", href: "/articles/how-your-baby-develops-in-pregnancy", context: "Where practice breathing and diaphragm development fit in." },
+      ],
+    },
+    aiPrompts: [
+      "Are baby hiccups in the womb normal?",
+      "How can I tell hiccups from kicks?",
+      "Should I worry if my baby hiccups a lot?",
+    ],
+    captureIntro: "Hiccups are small and easily missed in a noisy day. Worth noting them when you spot them — they're part of the story of meeting your baby slowly.",
+    trimester: [2, 3],
+    relatedSlugs: ["baby-movement-in-pregnancy", "how-your-baby-develops-in-pregnancy", "reduced-movements-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["baby", "movement"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Hiccups feel like rhythmic taps in one fixed spot",
+      "They start sometime in the second or third trimester",
+      "They reflect normal diaphragm development and practice breathing",
+      "Frequency varies hugely between babies and isn't a sign of anything",
+      "They're separate from movement patterns — reduced movements still always need a same-day call",
+    ],
+    sources: [
+      "NHS — Your baby's movements",
+      "Tommy's — Baby's movements in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists — Your baby's movements in pregnancy",
+    ],
+    faq: [
+      { question: "What do baby hiccups feel like?", answer: "Small, rhythmic taps or twitches in one fixed spot, usually for a few minutes at a time. They have a regularity that kicks don't." },
+      { question: "How often is normal?", answer: "Anything from several times a day to barely noticed. Both are normal — frequency isn't a useful metric." },
+      { question: "Should I worry if my baby hiccups a lot?", answer: "No. Frequent hiccups are normal and reflect a developing diaphragm. They're not linked to anything to be concerned about." },
+      { question: "Are hiccups movements?", answer: "Not in the pattern sense. They're reflexes. They don't replace the kicks and rolls that make up your baby's movement pattern." },
+      { question: "Should I call if hiccups stop?", answer: "Hiccups stopping isn't the call. A change in your baby's overall pattern of movement is. If that changes, ring the same day." },
+    ],
+    topic: "baby",
+    standfirst: "Hiccups in the womb are one of the small, lovely surprises of late pregnancy. Here's what they are, what they aren't, and why they're a sign things are going quietly well.",
+    editorialSections: [
+      {
+        id: "what-they-feel-like",
+        heading: "What they feel like",
+        lead: "Rhythmic, small, in one place.",
+        paragraphs: [
+          "Baby hiccups in the womb feel like small, regular taps or twitches in one fixed spot — usually low down or to one side. They have a tempo. You can almost count the gap between them.",
+          "Episodes typically last a few minutes. Some babies hiccup several times a day; others barely seem to. Either way is normal.",
+        ],
+      },
+      {
+        id: "why-they-happen",
+        heading: "Why they happen",
+        lead: "A developing diaphragm doing its work.",
+        paragraphs: [
+          "The diaphragm is the muscle that drives breathing. As it develops through pregnancy, it can contract reflexively — and those contractions are what we feel as hiccups.",
+          "From the second trimester onward, babies also make practice breathing movements, drawing fluid in and out of their lungs. Hiccups often happen alongside this. It's all part of the body learning what it will need to do at birth.",
+        ],
+      },
+      {
+        id: "kicks-vs-hiccups",
+        heading: "Hiccups versus kicks",
+        lead: "Two different things, both lovely.",
+        paragraphs: [
+          "Kicks are irregular, vary in strength, and move around as baby moves. Hiccups are rhythmic, in one spot, and have a steady tempo.",
+          "Hiccups don't replace kicks in your sense of your baby's pattern. The pattern is the kicks and rolls and quiet stretches that make up your baby's day. Hiccups sit on top — a bonus rather than a measure.",
+        ],
+        callout: { tone: "info", text: "Reduced overall movements still always needs a same-day call. That rule is separate from how often baby hiccups." },
+      },
+    ],
+  },
+
+  // ─── MEASURING BIG OR SMALL ───────────────────────────────────────────────
+  {
+    slug: "measuring-big-or-small-in-pregnancy",
+    title: "Measuring big or small in pregnancy: what bump measurements really mean",
+    metaDescription: "Measuring ahead or behind in pregnancy explained — what fundal height is, why bump size varies, and when a growth scan may be offered.",
+    quickAnswer:
+      "Bump measurement (fundal height) is a quick screening tool used at your antenatal appointments to check that your baby is growing as expected. It's measured in centimetres from the top of your pubic bone to the top of your uterus and roughly matches the number of weeks you are. Measuring a bit ahead or behind is common and usually doesn't mean anything is wrong. If a measurement is significantly off — or two in a row are off — your team will offer a growth scan to check more accurately.",
+    howThisFeels: [
+      "Hearing 'measuring small' and instantly worrying",
+      "Wondering if 'measuring big' means a huge baby or something is wrong",
+      "Comparing your bump to other people's at antenatal class",
+      "Feeling reassured one week and uncertain the next",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Normal variation in body shape", body: "Your height, your build, your muscle tone, where your baby is lying — all change how a bump measures from the outside." },
+        { heading: "Position of the baby", body: "A baby lying transverse (sideways) or curled up tightly can give a different measurement from one lying along the length of the uterus." },
+        { heading: "Amount of fluid", body: "Slightly more or less amniotic fluid changes bump size. Significant changes are checked with a scan." },
+      ],
+      lessCauses: [
+        { heading: "Slowed or accelerated growth", body: "Sometimes the measurement points to a baby that's growing more slowly or quickly than expected. A growth scan gives a clearer picture." },
+        { heading: "Gestational diabetes", body: "Measuring consistently ahead can sometimes prompt extra checks for gestational diabetes." },
+      ],
+      whyItVaries: "Fundal height is a screening measure, not a precise one. It's there to flag when more checks might be useful — not to tell you exactly how big your baby is.",
+    },
+    timing: {
+      whenStarts: "Fundal height measurement usually starts from around 24-28 weeks at antenatal appointments.",
+      whenEases: "It continues at most appointments through the third trimester.",
+    },
+    whatItFeelsLike: [
+      "Watching the tape measure and trying to read the midwife's face",
+      "A number that feels like a verdict, when it's really a screen",
+    ],
+    whatThisMeans:
+      "Measuring ahead or behind by a centimetre or two is normal and rarely meaningful. Bigger differences — or repeated differences — are what trigger a closer look.",
+    normal: [
+      "Measuring within 2-3 cm of your weeks",
+      "A measurement that varies a bit between appointments",
+      "Being told 'all on track' even if your bump looks different from others",
+    ],
+    seekSupport: [
+      "Reduced movements at any time — call the same day",
+      "Significant new symptoms (severe headache, vision changes, swelling, upper-tummy pain) — these need urgent assessment regardless of bump measurement",
+    ],
+    disclaimer: "Bump measurement is only one piece of information. It does not replace your sense of your baby's movements, scans, or other clinical checks. Reduced movements always need a same-day call regardless of how the bump is measuring.",
+    whatYouCanDo: [
+      { action: "Take 'measuring ahead' or 'behind' as a screen, not a verdict", reason: "It's there to prompt further checks if needed, not to diagnose anything." },
+      { action: "Attend any growth scan offered", reason: "Scans give a far more accurate picture of growth, fluid, placenta, and Doppler if relevant." },
+      { action: "Keep noticing your baby's pattern", reason: "Pattern of movement is one of the most important things you can track yourself." },
+    ],
+    whatHappensNext: "If a measurement is significantly off, you'll usually be offered a growth scan. Most growth scans give reassuring news. If they don't, your team will talk you through what extra monitoring is sensible.",
+    relatedStage: {
+      intro: "Bump measurement is one of several ways your baby's growth is checked:",
+      links: [
+        { label: "Your baby in pregnancy", href: "/pregnancy/baby", context: "The wider topic this article belongs to." },
+        { label: "Growth scans in pregnancy", href: "/articles/growth-scans-in-pregnancy", context: "What happens if a fundal height triggers further checks." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "The wider scan picture across pregnancy." },
+        { label: "How your baby develops in pregnancy", href: "/articles/how-your-baby-develops-in-pregnancy", context: "How growth unfolds across pregnancy." },
+      ],
+    },
+    aiPrompts: [
+      "What does measuring ahead in pregnancy mean?",
+      "Should I worry about measuring small?",
+      "Will I need a growth scan?",
+    ],
+    captureIntro: "A measurement that doesn't match expectations can quietly take up a lot of headspace. Worth noting what you were told — it helps when you're going back for the next check.",
+    trimester: [2, 3],
+    relatedSlugs: ["growth-scans-in-pregnancy", "tests-and-scans-in-pregnancy", "how-your-baby-develops-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["baby", "scans"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Fundal height (bump measurement) is a screening tool, not a precise measure",
+      "Measuring 2-3 cm off your weeks is common and usually fine",
+      "Bigger or repeated differences trigger a growth scan for a clearer picture",
+      "Most growth scans give reassuring news",
+      "Reduced movements still always need a same-day call regardless of bump size",
+    ],
+    sources: [
+      "NICE — Antenatal care",
+      "Royal College of Obstetricians and Gynaecologists — Small-for-gestational-age fetus",
+      "NHS — Antenatal checks and tests",
+      "Tommy's — Fundal height measurement",
+    ],
+    faq: [
+      { question: "What does fundal height measure?", answer: "It's the distance in centimetres from the top of your pubic bone to the top of your uterus. It roughly matches your weeks of pregnancy." },
+      { question: "What does measuring small mean?", answer: "Often nothing. It can reflect baby's position, your build, or the amount of fluid. If it's significantly off, a growth scan is offered to check more precisely." },
+      { question: "What does measuring big mean?", answer: "Sometimes a bigger baby, sometimes more fluid, sometimes position. It can prompt a check for gestational diabetes if not already done. A scan gives a clearer picture." },
+      { question: "Will I need a growth scan?", answer: "Only if a measurement is significantly off, two are off in a row, or there are other reasons for one. Many people don't need any." },
+      { question: "Should I worry about my bump looking small or big to other people?", answer: "No. How a bump looks from the outside isn't a reliable measure of anything. Trust your team's checks, not the people in your group chat." },
+    ],
+    topic: "baby",
+    standfirst: "Bump measurement is one of those numbers that can feel like a verdict. In reality it's a screening tool — useful, imprecise, and rarely the final word.",
+    editorialSections: [
+      {
+        id: "what-it-is",
+        heading: "What fundal height actually is",
+        lead: "A quick check, not a precise one.",
+        paragraphs: [
+          "From around 24-28 weeks, your midwife will start measuring your bump at antenatal appointments. They use a tape measure from the top of your pubic bone to the top of your uterus, in centimetres.",
+          "Roughly speaking, the number matches your weeks of pregnancy. So at 28 weeks you'd expect around 28 cm. Within a couple of centimetres either way is normal.",
+        ],
+      },
+      {
+        id: "why-it-varies",
+        heading: "Why it varies",
+        lead: "Many things change the number.",
+        paragraphs: [
+          "How tall you are, your build, your muscle tone, how your baby is lying, the amount of fluid around them — all of these change how a bump measures from the outside. Fundal height isn't the same as the size of the baby.",
+          "It's a screening tool. Its job is to flag when something might need a closer look — not to give a definitive answer about how big your baby is.",
+        ],
+        callout: { tone: "reassurance", text: "Hearing 'measuring small' or 'measuring ahead' is not a diagnosis. It's a prompt to look more carefully if needed." },
+      },
+      {
+        id: "growth-scans",
+        heading: "When a growth scan is offered",
+        lead: "If the screen suggests a closer look.",
+        paragraphs: [
+          "If a measurement is significantly off, or two in a row are off, your team will usually offer a growth scan. The scan measures the baby directly — head, abdomen, femur — and estimates a weight.",
+          "Most growth scans give reassuring news. If they don't, your team will talk you through what extra monitoring is sensible — sometimes more scans, sometimes a slightly different birth plan.",
+        ],
+      },
+    ],
+  },
+
+  // ─── GROWTH SCANS ─────────────────────────────────────────────────────────
+  {
+    slug: "growth-scans-in-pregnancy",
+    title: "Growth scans in pregnancy: what they check and what the results mean",
+    metaDescription: "Growth scans in pregnancy explained — when they're offered, what they measure, what 'estimated fetal weight' really means, and what extra monitoring means.",
+    quickAnswer:
+      "A growth scan is a third-trimester ultrasound that measures your baby — head, tummy, thigh bone — and estimates their weight. They also check fluid levels, the placenta, baby's position, and (sometimes) blood flow through the cord. They're offered when fundal height is off, in twin pregnancies, after IVF, with certain medical conditions, or after a previous small or large baby. Most growth scans give reassuring news. Estimated fetal weight is an estimate — usually within 10-15% — and one scan is a snapshot, not a verdict.",
+    howThisFeels: [
+      "Sitting in the waiting room rehearsing what you'll do if it's bad news",
+      "Trying to read the sonographer's face",
+      "Hearing 'we'll get you back for another one' and wondering what that means",
+      "Being asked to go again, and again, and feeling watched",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Fundal height suggests a closer look", body: "If the bump measurement is off, a growth scan gives a more accurate picture of how baby is growing." },
+        { heading: "Twin or higher-multiple pregnancy", body: "Twins are scanned more often through pregnancy as standard." },
+        { heading: "After IVF", body: "Some units offer growth scans routinely after IVF or other assisted conception." },
+        { heading: "Medical conditions or risk factors", body: "Conditions like gestational diabetes, high blood pressure, certain BMIs, or a previous small or large baby usually mean growth scans are offered." },
+      ],
+      lessCauses: [
+        { heading: "Reduced movements check", body: "After an episode of reduced movements, a growth scan may be added to the assessment to check fluid and growth." },
+      ],
+      whyItVaries: "Different units have different protocols. What's standard in one trust may not be in another, and what was scanned in your last pregnancy may be different this time. Ask your team if you're unsure why a scan is being offered.",
+    },
+    timing: {
+      whenStarts: "Most growth scans happen from 28 weeks onward, often around 32, 34, or 36 weeks depending on the reason.",
+      whenEases: "They typically continue until birth where they've been started.",
+    },
+    whatItFeelsLike: [
+      "A familiar ultrasound — gel, tummy, screen",
+      "Measurements being taken on screen one after another",
+      "A short summary at the end, often handed to you in writing",
+    ],
+    whatThisMeans:
+      "More scans does not mean more wrong. It means more information. Growth scans are how the system stays honest about how your baby is doing in the third trimester.",
+    normal: [
+      "Being offered a growth scan because of a single off fundal height measurement",
+      "Estimated fetal weight that's within the expected range",
+      "Being booked for a follow-up scan to track growth",
+    ],
+    seekSupport: [
+      "Reduced movements at any time — same-day call (separate from any scan plan)",
+      "Severe headache, vision changes, sudden swelling, upper-tummy pain — urgent assessment regardless of scan plans",
+    ],
+    disclaimer: "Estimated fetal weight has a margin of error of around 10-15%. One scan is a snapshot, not a definitive answer. Growth is more about the trend across scans than any single number. Reduced movements still always need a same-day call.",
+    whatYouCanDo: [
+      { action: "Ask why this scan is being offered", reason: "Knowing the reason makes the result easier to read. Don't be afraid to ask." },
+      { action: "Take any written report away", reason: "Helpful if you ever need to ring out-of-hours or attend a different unit." },
+      { action: "Hold loosely to the estimated weight", reason: "It's an estimate. The trend across scans matters more than any single number." },
+      { action: "Keep ringing about reduced movements", reason: "Scans don't replace this. Pattern is what you track yourself, every day." },
+    ],
+    whatHappensNext: "If the scan is reassuring, you usually carry on with normal antenatal care — sometimes with a follow-up scan booked. If it's not, your team will talk through extra monitoring and, if needed, a discussion about the timing or mode of birth.",
+    relatedStage: {
+      intro: "Growth scans sit inside the wider picture of how late pregnancy is monitored:",
+      links: [
+        { label: "Your baby in pregnancy", href: "/pregnancy/baby", context: "The wider topic this article belongs to." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "The wider scan picture across pregnancy." },
+        { label: "Measuring big or small in pregnancy", href: "/articles/measuring-big-or-small-in-pregnancy", context: "Often the trigger for a first growth scan." },
+        { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy", context: "When repeat scans bring repeat worry." },
+      ],
+    },
+    aiPrompts: [
+      "What is a growth scan checking for?",
+      "How accurate is estimated fetal weight?",
+      "What does it mean if I need more growth scans?",
+    ],
+    captureIntro: "Growth scans can come with a quiet weight, even when the news is good. Worth noting what was said and how you felt — both matter.",
+    trimester: [3],
+    relatedSlugs: ["tests-and-scans-in-pregnancy", "measuring-big-or-small-in-pregnancy", "anxiety-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["baby", "scans"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Growth scans measure baby's head, tummy and thigh bone, plus fluid, placenta and position",
+      "Estimated fetal weight is an estimate — usually within 10-15%",
+      "Most growth scans give reassuring news",
+      "More scans means more information, not more risk",
+      "The trend across scans matters more than any single number",
+    ],
+    sources: [
+      "Royal College of Obstetricians and Gynaecologists — The investigation and management of the small-for-gestational-age fetus",
+      "NICE — Antenatal care",
+      "NHS — Ultrasound scans in pregnancy",
+      "Tommy's — Growth scans",
+    ],
+    faq: [
+      { question: "What does a growth scan check?", answer: "Baby's measurements (head, abdominal circumference, femur length), estimated fetal weight, fluid levels, placenta, baby's position, and sometimes blood flow through the cord (Dopplers)." },
+      { question: "How accurate is estimated fetal weight?", answer: "It has a margin of error of around 10-15%. It's an estimate, not a precise weight. The trend across scans is more useful than any single number." },
+      { question: "Why am I being offered more growth scans?", answer: "Common reasons include twins, IVF, gestational diabetes, high blood pressure, an off fundal height, a previous small or large baby, or a recent reduced-movements check. Ask your team for the specific reason." },
+      { question: "Does extra monitoring mean something is wrong?", answer: "Not by itself. Extra monitoring exists to find issues earlier if they arise. Most extra-monitored pregnancies end with reassuring scans throughout." },
+      { question: "Will the scan affect my birth plan?", answer: "Sometimes. If a scan suggests baby is small, large, or struggling, your team may discuss timing or mode of birth with you. The conversation is always yours to be part of." },
+    ],
+    topic: "baby",
+    standfirst: "Growth scans can feel loaded — every measurement weighed for meaning. The honest picture is calmer than that. They're a way of staying close to how your baby is doing, not a verdict.",
+    editorialSections: [
+      {
+        id: "what-they-are",
+        heading: "What growth scans actually are",
+        lead: "An ultrasound, focused on growth.",
+        paragraphs: [
+          "A growth scan is a third-trimester ultrasound that measures your baby — head circumference, abdominal circumference, femur length — and uses these to estimate weight. The sonographer also looks at fluid levels, the placenta, baby's position, and sometimes the blood flow through the cord.",
+          "It uses the same equipment and feels the same as your earlier scans. The focus is just different — less about anatomy, more about how baby is growing in the time you have left.",
+        ],
+      },
+      {
+        id: "when-they-are-offered",
+        heading: "When they're offered",
+        lead: "There's almost always a specific reason.",
+        paragraphs: [
+          "Common reasons include: a fundal height measurement that's off, a twin or higher-multiple pregnancy, IVF or assisted conception, gestational diabetes, high blood pressure, certain BMIs, a previous small or large baby, or a recent episode of reduced movements that warranted extra monitoring.",
+          "If you've been booked for one and aren't sure why, ask. Knowing the reason makes the result much easier to read.",
+        ],
+      },
+      {
+        id: "estimated-weight",
+        heading: "Estimated fetal weight, in context",
+        lead: "An estimate, not a precise number.",
+        paragraphs: [
+          "Estimated fetal weight has a margin of error of around 10-15% in either direction. So if a scan estimates 2.5 kg at 34 weeks, the real weight could be a few hundred grams either side. That's normal and expected.",
+          "What matters more than any single number is the trend. Is your baby continuing to grow along their own line? That's what repeat scans tell you, and it's what your team is really watching for.",
+        ],
+        callout: { tone: "info", text: "Hold the estimated weight loosely. Trends are far more meaningful than single numbers." },
+      },
+      {
+        id: "more-monitoring",
+        heading: "What 'more monitoring' really means",
+        lead: "Information, not risk.",
+        paragraphs: [
+          "Being offered more scans, more midwife appointments, or extra checks can feel like a sign things are going wrong. Almost always, the opposite is true: it means your team has decided to stay close to how your baby is doing, so anything that does need attention can be picked up early.",
+          "Most extra-monitored pregnancies end with reassuring scans throughout, and that's exactly the point. The system is there to keep you and your baby safer, not to imply something is wrong.",
+        ],
+      },
+    ],
+  },
+
+  // ─── CORD AROUND THE NECK ─────────────────────────────────────────────────
+  {
+    slug: "cord-around-the-neck-in-pregnancy",
+    title: "Cord around the neck in pregnancy: what it actually means",
+    metaDescription: "Cord around the neck (nuchal cord) explained — how common it is, why it usually isn't something to worry about in advance, and what it means at birth.",
+    quickAnswer:
+      "Having the umbilical cord loosely around the baby's neck — called a nuchal cord — is very common. It's found in around 1 in 3 births and almost always causes no problem at all. Babies move around a lot in the womb and the cord moves with them. Most of the time you'll never know it happened. It is not usually something that needs to be looked for in advance, and it does not normally change birth planning. Reduced movements are still always worth ringing about — that rule is separate.",
+    howThisFeels: [
+      "Reading something online and feeling cold all over",
+      "Asking the sonographer if they can see the cord",
+      "Wondering if you should ask for a c-section just in case",
+      "Trying to put a frightening phrase back in proportion",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Babies move, the cord moves", body: "Babies move freely throughout pregnancy — somersaulting, turning, stretching. The cord moves with them, and can sit around the neck, the body, or limbs at any point." },
+        { heading: "Loose loops are the usual story", body: "When the cord is around the neck, it's almost always a loose loop. The baby's blood supply runs through the cord itself, not around the neck — so loose loops don't cut off oxygen." },
+      ],
+      lessCauses: [
+        { heading: "Tight loops", body: "Very rarely, a cord can be tight enough to affect blood flow. This is unusual and is detected and managed by the team during labour and birth." },
+      ],
+      whyItVaries: "It's so common that 'cord around the neck' is more or less a normal finding at birth. It's only the rare tight cord that needs intervention, and the team is trained for it.",
+    },
+    timing: {
+      whenStarts: "A nuchal cord can appear at any point in pregnancy and may come and go as baby moves.",
+      whenEases: "It often resolves on its own with movement. Even when present at birth, it usually causes no problem.",
+    },
+    whatItFeelsLike: [
+      "Often nothing — most people never know",
+      "A phrase that sounds frightening but doesn't usually mean what it sounds like",
+    ],
+    whatThisMeans:
+      "Cord around the neck is a phrase that does most of its damage in the imagination. The reality is far more boring than the words suggest.",
+    normal: [
+      "A nuchal cord being mentioned in passing after birth — 'oh, the cord was around the neck'",
+      "Not knowing about it at all",
+      "Sonographers not routinely looking for it because it changes so little",
+    ],
+    seekSupport: [
+      "Reduced movements at any time — same-day call (separate from cord position)",
+      "Bleeding or sudden severe pain — urgent",
+    ],
+    disclaimer: "Cord around the neck is generally not searched for in advance because the finding doesn't change care. Reduced movements always need a same-day call regardless of any cord-related conversation.",
+    whatYouCanDo: [
+      { action: "Don't go looking for trouble", reason: "Asking for extra scans to check for nuchal cord isn't recommended. The finding wouldn't change anything." },
+      { action: "Trust the labour team", reason: "They're trained to spot and manage the rare tight cord during birth." },
+      { action: "Keep noticing your baby's pattern", reason: "Pattern of movement is the part you can track yourself, every day." },
+      { action: "Be careful with what you read online", reason: "Cord-around-the-neck stories online are often dramatic outliers and not representative of the everyday reality." },
+    ],
+    whatHappensNext: "Most pregnancies with a nuchal cord — known or unknown — end without anyone needing to do anything about it. If a tight cord is found at birth, the team manages it then and there.",
+    relatedStage: {
+      intro: "Cord-around-the-neck sits in a wider story about scan and birth reassurance:",
+      links: [
+        { label: "Your baby in pregnancy", href: "/pregnancy/baby", context: "The wider topic this article belongs to." },
+        { label: "Baby movement in pregnancy", href: "/articles/baby-movement-in-pregnancy", context: "What you can track yourself." },
+        { label: "Reduced movements in pregnancy", href: "/articles/reduced-movements-in-pregnancy", context: "The rule that always applies." },
+        { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy", context: "When a frightening phrase takes hold." },
+      ],
+    },
+    aiPrompts: [
+      "Is cord around the neck dangerous?",
+      "Should I ask for a scan to check for a nuchal cord?",
+      "Will I need a c-section if the cord is around the neck?",
+    ],
+    captureIntro: "A frightening phrase can quietly take up too much room. Worth noting what you've been told — and what hasn't been said, which is usually the more honest answer.",
+    trimester: [3],
+    relatedSlugs: ["baby-movement-in-pregnancy", "reduced-movements-in-pregnancy", "anxiety-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["baby", "birth"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Cord around the neck (nuchal cord) is very common — around 1 in 3 births",
+      "Almost always a loose loop that causes no problem",
+      "It is not usually searched for in advance because the finding doesn't change care",
+      "Tight cords are rare and managed by the labour team at birth",
+      "Reduced movements still always need a same-day call regardless of cord position",
+    ],
+    sources: [
+      "Royal College of Obstetricians and Gynaecologists — Patient information",
+      "NHS — Pregnancy, birth and care",
+      "Tommy's — Umbilical cord facts",
+      "NICE — Intrapartum care",
+    ],
+    faq: [
+      { question: "How common is cord around the neck?", answer: "Very common — around 1 in 3 births. It's almost always a loose loop and almost always causes no problem at all." },
+      { question: "Should I ask for a scan to check?", answer: "Generally not recommended. The finding doesn't change care. Looking for it would only add anxiety without changing outcome." },
+      { question: "Will I need a c-section?", answer: "Almost never because of a nuchal cord. The labour team can usually manage it as part of normal birth." },
+      { question: "Can the cord cut off oxygen?", answer: "Very rarely with a tight cord. Loose loops — which is what almost all nuchal cords are — don't cut off oxygen because the baby's blood runs through the cord, not around the neck." },
+      { question: "Should I worry about cord around the neck?", answer: "Almost certainly not. It's one of those phrases that sounds frightening but, in practice, is part of normal birth for many people." },
+    ],
+    topic: "baby",
+    standfirst: "Cord around the neck is one of those phrases that sounds far worse than it is. The truth is reassuring — and worth knowing before fear has the loudest voice.",
+    editorialSections: [
+      {
+        id: "how-common",
+        heading: "How common it really is",
+        lead: "Around 1 in 3 births.",
+        paragraphs: [
+          "A nuchal cord — the umbilical cord around the baby's neck at birth — is found in around 1 in 3 births. It is, in practical terms, a normal finding. Most of the time the team mentions it in passing, the cord is unlooped, and birth carries on.",
+          "Babies move freely in the womb, and the cord moves with them. It can be around the neck, the body, or a limb at different points. Most loops are loose, and most resolve themselves long before birth without anyone knowing.",
+        ],
+      },
+      {
+        id: "why-its-usually-fine",
+        heading: "Why it's usually fine",
+        lead: "Blood runs through the cord, not around the neck.",
+        paragraphs: [
+          "The umbilical cord carries blood between baby and placenta along its inside. A loose loop around the neck doesn't compress that flow — and almost all nuchal cords are loose loops.",
+          "Tight cords are rare. When they happen, they're recognised and managed by the labour team during birth. It's the kind of thing maternity teams are trained for and see regularly.",
+        ],
+        callout: { tone: "reassurance", text: "Cord around the neck is so common at birth that it's effectively part of normal. The frightening reputation isn't matched by the everyday reality." },
+      },
+      {
+        id: "should-i-look",
+        heading: "Should I ask for a scan to check?",
+        lead: "Generally not.",
+        paragraphs: [
+          "Scanning for nuchal cord isn't routinely offered, because the finding doesn't change anything. Even if a loop is seen on a scan, it might not be there an hour later, and it wouldn't change care plans.",
+          "Looking for it tends to add anxiety without adding safety. The honest answer is to put your attention where it matters — your baby's pattern of movement — and to trust the team for the bits that happen at birth.",
+        ],
+      },
+      {
+        id: "what-does-matter",
+        heading: "What does matter",
+        paragraphs: [
+          "Reduced movements. Always. That rule is completely separate from any conversation about the cord, and it's the one to carry through the third trimester. If your baby's pattern of movement changes, ring your maternity assessment unit the same day.",
+          "If you've been spiralling on cord-around-the-neck stories online, it's worth gently stepping back. Online stories tend to amplify the rare and dramatic. The everyday reality of nuchal cord is much, much quieter than that.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

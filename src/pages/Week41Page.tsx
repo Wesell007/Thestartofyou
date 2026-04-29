@@ -957,14 +957,14 @@ const Next = () => (
           Whether labour starts on its own this week, with a sweep, or through induction, the
           waiting is almost over. Read forward to the early days of life with your baby.
         </p>
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 max-w-sm sm:max-w-none mx-auto">
-          <Link to="/postpartum"
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 max-w-md sm:max-w-none mx-auto">
+          <Link to="/pregnancy/week/42"
             className="inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[14px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors">
-            Explore the early days <ArrowRight size={14} />
+            Continue to week 42 <ArrowRight size={14} />
           </Link>
-          <Link to="/pregnancy/third-trimester"
+          <Link to="/postpartum"
             className="inline-flex items-center justify-center gap-2 border border-foreground/25 text-foreground rounded-pill px-7 py-3.5 font-sans text-[14px] font-medium hover:bg-parchment-dark transition-colors">
-            Back to the third trimester
+            Explore the early days
           </Link>
         </div>
       </div>

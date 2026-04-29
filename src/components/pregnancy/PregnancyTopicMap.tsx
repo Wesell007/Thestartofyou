@@ -13,6 +13,7 @@ import {
 import { topicMapEntries } from "@/data/pregnancyTopicData";
 import type { PregnancyTopicSlug } from "@/data/pregnancyTopicData";
 import sprigImg from "@/assets/topic-mini-sprig.png";
+import wildflowerImg from "@/assets/topic-wildflower-sprig.png";
 
 const topicIcons: Record<PregnancyTopicSlug, LucideIcon> = {
   body: Sparkles,
@@ -21,6 +22,66 @@ const topicIcons: Record<PregnancyTopicSlug, LucideIcon> = {
   "health-and-safety": ShieldCheck,
   "diet-and-exercise": Apple,
   "preparing-for-baby": Package,
+};
+
+// Per-topic accent palette — restrained variation, one family.
+// All values are HSL strings, used inline against shared design tokens.
+type AccentTheme = {
+  /** Soft tint for icon medallion + faint corner wash */
+  tintHsl: string;
+  /** Deeper accent for icon glyph + hairline */
+  inkHsl: string;
+  /** Border tint */
+  borderHsl: string;
+  /** Decorative sprig opacity treatment */
+  sprig: "leaf" | "wildflower";
+  /** Slight rotation of the corner sprig (deg) */
+  sprigRotate: number;
+};
+
+const topicTheme: Record<PregnancyTopicSlug, AccentTheme> = {
+  body: {
+    tintHsl: "14 50% 88%", // soft blush
+    inkHsl: "14 50% 46%",
+    borderHsl: "14 50% 50%",
+    sprig: "wildflower",
+    sprigRotate: 18,
+  },
+  baby: {
+    tintHsl: "100 22% 86%", // gentle sage
+    inkHsl: "100 22% 38%",
+    borderHsl: "100 22% 44%",
+    sprig: "leaf",
+    sprigRotate: -10,
+  },
+  feelings: {
+    tintHsl: "340 38% 88%", // soft rose
+    inkHsl: "340 32% 50%",
+    borderHsl: "340 32% 56%",
+    sprig: "wildflower",
+    sprigRotate: 24,
+  },
+  "health-and-safety": {
+    tintHsl: "210 24% 90%", // calm slate-blue
+    inkHsl: "210 28% 40%",
+    borderHsl: "210 24% 48%",
+    sprig: "leaf",
+    sprigRotate: 12,
+  },
+  "diet-and-exercise": {
+    tintHsl: "80 28% 84%", // fresh green
+    inkHsl: "90 28% 36%",
+    borderHsl: "90 28% 42%",
+    sprig: "leaf",
+    sprigRotate: -18,
+  },
+  "preparing-for-baby": {
+    tintHsl: "32 44% 86%", // warm nesting amber
+    inkHsl: "28 42% 42%",
+    borderHsl: "28 42% 48%",
+    sprig: "wildflower",
+    sprigRotate: -8,
+  },
 };
 
 const PregnancyTopicMap = () => {
@@ -61,53 +122,113 @@ const PregnancyTopicMap = () => {
         </div>
 
         {/* 3 x 2 grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
           {topicMapEntries.map((topic) => {
             const Icon = topicIcons[topic.slug];
+            const theme = topicTheme[topic.slug];
+            const sprigSrc = theme.sprig === "leaf" ? sprigImg : wildflowerImg;
+
             return (
               <article
                 key={topic.slug}
-                className="group relative bg-card rounded-[1.25rem] border flex flex-col p-7 sm:p-8 transition-all duration-500 hover:-translate-y-0.5"
+                className="group relative bg-card flex flex-col p-7 sm:p-8 transition-all duration-500 hover:-translate-y-1 overflow-hidden"
                 style={{
-                  borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.14)',
-                  boxShadow:
-                    '0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 14px 40px -28px hsl(var(--stage-pregnancy-accent) / 0.32)',
+                  // Bespoke sculpted silhouette — asymmetric corners
+                  borderRadius: "1.75rem 1.25rem 1.75rem 1.25rem",
+                  border: `1px solid hsl(${theme.borderHsl} / 0.16)`,
+                  background: `
+                    radial-gradient(120% 80% at 100% 0%, hsl(${theme.tintHsl} / 0.35) 0%, transparent 55%),
+                    linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--parchment) / 0.65) 100%)
+                  `,
+                  boxShadow: `
+                    0 1px 0 hsl(0 0% 100% / 0.9) inset,
+                    0 0 0 1px hsl(${theme.borderHsl} / 0.04) inset,
+                    0 18px 44px -28px hsl(${theme.inkHsl} / 0.32)
+                  `,
                 }}
               >
-                {/* Top hairline accent */}
+                {/* Layered inner panel highlight (top edge) */}
                 <div
                   aria-hidden="true"
-                  className="absolute top-0 left-7 right-7 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  className="absolute top-0 left-8 right-8 h-px"
                   style={{
-                    background:
-                      'linear-gradient(90deg, transparent, hsl(var(--stage-pregnancy-accent) / 0.5), transparent)',
+                    background: `linear-gradient(90deg, transparent, hsl(${theme.borderHsl} / 0.35), transparent)`,
                   }}
                 />
 
-                {/* Icon + title row */}
-                <div className="flex items-start gap-3.5 mb-3.5">
-                  <div
-                    className="w-11 h-11 rounded-full flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      background:
-                        'radial-gradient(circle at 35% 30%, hsl(var(--stage-pregnancy) / 0.9), hsl(var(--stage-pregnancy-accent) / 0.18))',
-                      boxShadow:
-                        '0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 4px 12px -6px hsl(var(--stage-pregnancy-accent) / 0.35)',
-                    }}
-                  >
-                    <Icon size={17} style={{ color: 'hsl(var(--stage-pregnancy-accent))' }} />
+                {/* Decorative botanical sprig — quiet, top-right corner */}
+                <img
+                  src={sprigSrc}
+                  alt=""
+                  aria-hidden="true"
+                  className="pointer-events-none select-none absolute -top-2 -right-2 w-20 sm:w-24 opacity-[0.28] group-hover:opacity-40 transition-opacity duration-700"
+                  style={{
+                    transform: `rotate(${theme.sprigRotate}deg)`,
+                    filter: "saturate(0.8)",
+                  }}
+                />
+
+                {/* Faint corner wash, bottom-left, for layered paper feel */}
+                <div
+                  aria-hidden="true"
+                  className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full pointer-events-none opacity-60"
+                  style={{
+                    background: `radial-gradient(circle, hsl(${theme.tintHsl} / 0.18) 0%, transparent 70%)`,
+                  }}
+                />
+
+                {/* Icon medallion + title */}
+                <div className="relative flex items-start gap-4 mb-4">
+                  <div className="relative shrink-0">
+                    {/* Outer botanical ring */}
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 rounded-full transition-transform duration-700 group-hover:scale-110"
+                      style={{
+                        background: `conic-gradient(from 210deg, hsl(${theme.tintHsl} / 0.5), transparent 35%, hsl(${theme.tintHsl} / 0.35) 70%, transparent)`,
+                        padding: 1.5,
+                      }}
+                    />
+                    {/* Inner medallion */}
+                    <div
+                      className="relative w-12 h-12 rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-rotate-3"
+                      style={{
+                        background: `radial-gradient(circle at 30% 28%, hsl(${theme.tintHsl} / 0.95), hsl(${theme.tintHsl} / 0.45))`,
+                        boxShadow: `
+                          0 1px 0 hsl(0 0% 100% / 0.95) inset,
+                          0 -1px 1px hsl(${theme.inkHsl} / 0.08) inset,
+                          0 4px 14px -6px hsl(${theme.inkHsl} / 0.4)
+                        `,
+                      }}
+                    >
+                      <Icon
+                        size={18}
+                        strokeWidth={1.6}
+                        style={{ color: `hsl(${theme.inkHsl})` }}
+                      />
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0 pt-1">
-                    <h3 className="font-serif text-[1.15rem] text-foreground leading-tight">
+
+                  <div className="flex-1 min-w-0 pt-1.5">
+                    <h3 className="font-serif text-[1.2rem] sm:text-[1.25rem] text-foreground leading-tight tracking-tight">
                       {topic.label}
                     </h3>
                   </div>
                 </div>
 
                 {/* Support description */}
-                <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mb-5">
+                <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mb-5 max-w-[28ch]">
                   {topic.supportLine}
                 </p>
+
+                {/* Ornamental divider before sublinks */}
+                <div
+                  aria-hidden="true"
+                  className="h-px w-10 mb-1"
+                  style={{
+                    background: `linear-gradient(90deg, hsl(${theme.borderHsl} / 0.55), transparent)`,
+                  }}
+                />
 
                 {/* Article links */}
                 <ul className="flex flex-col">
@@ -115,11 +236,11 @@ const PregnancyTopicMap = () => {
                     <li
                       key={article.href + i}
                       className="border-t"
-                      style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.1)" }}
+                      style={{ borderColor: `hsl(${theme.borderHsl} / 0.1)` }}
                     >
                       <Link
                         to={article.href}
-                        className="group/link flex items-center justify-between gap-3 py-3"
+                        className="group/link flex items-center justify-between gap-3 py-2.5"
                       >
                         <span className="font-sans text-[13px] font-light text-foreground/75 leading-snug group-hover/link:text-foreground transition-colors">
                           {article.label}
@@ -127,7 +248,7 @@ const PregnancyTopicMap = () => {
                         <ChevronRight
                           size={13}
                           className="shrink-0 opacity-50 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 transition-all"
-                          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+                          style={{ color: `hsl(${theme.inkHsl})` }}
                         />
                       </Link>
                     </li>
@@ -135,14 +256,24 @@ const PregnancyTopicMap = () => {
                 </ul>
 
                 {/* Bottom CTA */}
-                <div className="pt-5 mt-auto">
+                <div className="pt-6 mt-auto">
                   <Link
                     to={topic.mainHref}
-                    className="group/cta inline-flex items-center gap-1.5 font-sans text-[13px] font-medium tracking-wide"
-                    style={{ color: 'hsl(var(--terracotta))' }}
+                    className="group/cta inline-flex items-center gap-1.5 font-sans text-[13px] font-medium tracking-wide transition-colors"
+                    style={{ color: "hsl(var(--terracotta))" }}
                   >
-                    Explore {topic.label.toLowerCase()}
-                    <ArrowRight size={13} className="group-hover/cta:translate-x-0.5 transition-transform" />
+                    <span className="relative">
+                      Explore {topic.label.toLowerCase()}
+                      <span
+                        aria-hidden="true"
+                        className="absolute left-0 right-0 -bottom-0.5 h-px scale-x-0 group-hover/cta:scale-x-100 origin-left transition-transform duration-500"
+                        style={{ background: "hsl(var(--terracotta) / 0.5)" }}
+                      />
+                    </span>
+                    <ArrowRight
+                      size={13}
+                      className="group-hover/cta:translate-x-1 transition-transform duration-500"
+                    />
                   </Link>
                 </div>
               </article>

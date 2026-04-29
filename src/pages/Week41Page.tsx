@@ -97,7 +97,7 @@ const Hero = () => (
         className="absolute left-3 sm:left-6 md:left-12 top-[42%] sm:top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/85 backdrop-blur border border-border/40 flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-card transition-all shadow-card-brand z-20">
         <ChevronLeft size={18} />
       </Link>
-      <Link to="/pregnancy/third-trimester" aria-label="Back to third trimester"
+      <Link to="/pregnancy/week/42" aria-label="Go to week 42"
         className="absolute right-3 sm:right-6 md:right-12 top-[42%] sm:top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-card/85 backdrop-blur border border-border/40 flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-card transition-all shadow-card-brand z-20">
         <ChevronRight size={18} />
       </Link>
@@ -957,14 +957,14 @@ const Next = () => (
           Whether labour starts on its own this week, with a sweep, or through induction, the
           waiting is almost over. Read forward to the early days of life with your baby.
         </p>
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 max-w-sm sm:max-w-none mx-auto">
-          <Link to="/postpartum"
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 max-w-md sm:max-w-none mx-auto">
+          <Link to="/pregnancy/week/42"
             className="inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[14px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors">
-            Explore the early days <ArrowRight size={14} />
+            Continue to week 42 <ArrowRight size={14} />
           </Link>
-          <Link to="/pregnancy/third-trimester"
+          <Link to="/postpartum"
             className="inline-flex items-center justify-center gap-2 border border-foreground/25 text-foreground rounded-pill px-7 py-3.5 font-sans text-[14px] font-medium hover:bg-parchment-dark transition-colors">
-            Back to the third trimester
+            Explore the early days
           </Link>
         </div>
       </div>

@@ -40,7 +40,7 @@ const PregnancyAIPanel = () => {
             }}
           />
 
-          <div className="relative z-10 px-6 sm:px-10 md:px-16 lg:px-24 py-12 md:py-16 text-center">
+          <div className="relative z-10 px-5 sm:px-10 md:px-16 lg:px-24 py-12 md:py-16 text-center">
             <p
               className="font-sans text-[11px] font-light tracking-[0.24em] uppercase mb-4"
               style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}

@@ -43,13 +43,10 @@ const KeepYourJourney = () => {
                 <span>Explore the journal</span>
                 <ArrowRight size={15} />
               </Link>
-              <Link
-                to="/my-journey"
-                className="inline-flex items-center gap-2 self-center font-sans text-xs font-light text-muted-foreground hover:text-foreground transition-colors"
-              >
+              <span className="inline-flex items-center gap-2 self-center font-sans text-xs font-light text-muted-foreground">
                 <PenLine size={12} />
-                Or begin your saved journey
-              </Link>
+                Created by parents, for parents
+              </span>
             </div>
           </div>
         </div>

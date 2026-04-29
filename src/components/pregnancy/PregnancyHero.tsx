@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Calendar } from "lucide-react";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
+import bootiesImg from "@/assets/pregnancy-hero-booties.jpg";
 
 const PregnancyHero = () => {
   const navigate = useNavigate();
@@ -8,107 +9,105 @@ const PregnancyHero = () => {
   const handleResult = (lmpDate: Date) => {
     navigate(`/due-date-results?lmp=${lmpDate.getTime()}`);
   };
-
   const handleIVFResult = (transferDate: Date, transferType: string) => {
     navigate(`/ivf-timeline?date=${transferDate.getTime()}&type=${transferType}`);
   };
 
   return (
-    <section className="relative bg-parchment overflow-hidden pt-20 pb-14 sm:pt-24 sm:pb-20 md:pt-36 md:pb-28">
-      {/* Multi-layer ambient glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[500px] md:w-[700px] h-[400px] md:h-[600px] rounded-full blur-3xl"
-          style={{ backgroundColor: 'hsl(var(--stage-pregnancy) / 0.5)' }}
+    <section className="relative bg-parchment overflow-hidden pt-10 pb-14 sm:pt-14 sm:pb-20 md:pt-16 md:pb-24">
+      {/* Decorative lifestyle image — far left edge, desktop only */}
+      <div className="hidden md:block absolute top-0 left-0 h-full w-[26%] lg:w-[24%] z-0">
+        <img
+          src={bootiesImg}
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover"
         />
-        <div
-          className="absolute bottom-0 right-1/4 w-[300px] h-[350px] rounded-full blur-3xl"
-          style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.08)' }}
-        />
+        {/* soft fade into parchment on the right edge */}
+        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-r from-transparent to-parchment" />
       </div>
 
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start">
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">
+        {/* Push content right of the lifestyle image on desktop */}
+        <div className="md:pl-[20%] lg:pl-[18%]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start">
 
-          <div className="text-left">
-            {/* Trimester colour trail */}
-            <div className="flex items-center gap-1.5 mb-5 md:mb-7 animate-fade-up">
-              {[
-                { var: '--stage-ttc-accent', w: 'w-5' },
-                { var: '--stage-pregnancy-accent', w: 'w-8' },
-                { var: '--stage-ivf-accent', w: 'w-5' },
-              ].map((t, i) => (
-                <div
-                  key={i}
-                  className={`h-0.5 rounded-full ${t.w}`}
-                  style={{ backgroundColor: `hsl(var(${t.var}) / ${i === 1 ? '0.6' : '0.25'})` }}
-                />
-              ))}
+            {/* Left editorial */}
+            <div className="text-left pt-2 md:pt-6">
               <p
-                className="font-sans text-[11px] font-light tracking-[0.2em] uppercase ml-2"
+                className="font-sans text-[11px] font-light tracking-[0.22em] uppercase mb-5"
                 style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
               >
-                Pregnancy
+                Your Pregnancy Hub
               </p>
+
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-[2.75rem] lg:text-[3rem] text-foreground leading-[1.08] mb-5">
+                Pregnancy support,{" "}
+                <span className="italic font-normal">week by week.</span>
+              </h1>
+
+              <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground leading-relaxed mb-7 max-w-md">
+                Calm, trusted guidance from the first questions to the final
+                countdown — so you can feel informed, supported, and confident
+                every step of the way.
+              </p>
+
+              {/* Stat markers row */}
+              <div className="flex items-stretch gap-6 sm:gap-8">
+                {[
+                  { label: "40+ weeks", sub: "of guidance" },
+                  { label: "3 trimesters", sub: "of care" },
+                  { label: "Free", sub: "to access" },
+                ].map((item, i) => (
+                  <div
+                    key={item.label}
+                    className={`flex flex-col ${i > 0 ? 'pl-6 sm:pl-8 border-l' : ''}`}
+                    style={i > 0 ? { borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.18)' } : undefined}
+                  >
+                    <span className="font-serif text-lg sm:text-xl text-foreground leading-tight">
+                      {item.label}
+                    </span>
+                    <span className="font-sans text-[11px] font-light text-muted-foreground/70 mt-0.5">
+                      {item.sub}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] text-foreground leading-[1.08] mb-4 md:mb-6 animate-fade-up">
-              Pregnancy support,{" "}
-              <span className="italic">week by week.</span>
-            </h1>
-            <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground leading-relaxed mb-5 md:mb-6 max-w-[24rem] animate-fade-up [animation-delay:0.1s]">
-              Calm, structured guidance from the first uncertain weeks through
-              to birth — shaped to where you are.
-            </p>
-
-            {/* Trust markers */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-6 md:mb-0 animate-fade-up [animation-delay:0.15s]">
-              {[
-                { label: "40+ weeks", sub: "covered" },
-                { label: "3 trimesters", sub: "mapped" },
-                { label: "Free", sub: "to start" },
-              ].map((item) => (
-                <div key={item.label} className="flex flex-col">
-                  <span className="font-serif text-lg text-foreground leading-none">{item.label}</span>
-                  <span className="font-sans text-[10px] font-light text-muted-foreground/60 tracking-wide uppercase">{item.sub}</span>
+            {/* Right card */}
+            <div>
+              <div
+                className="bg-card border rounded-2xl p-6 sm:p-7 shadow-card-brand"
+                style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.18)' }}
+              >
+                <div className="flex items-center gap-2.5 mb-2.5">
+                  <div
+                    className="w-7 h-7 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.12)' }}
+                  >
+                    <Calendar size={13} style={{ color: 'hsl(var(--stage-pregnancy-accent))' }} />
+                  </div>
+                  <p
+                    className="font-sans text-[11px] font-light tracking-[0.2em] uppercase"
+                    style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
+                  >
+                    Start with your due date
+                  </p>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="animate-fade-up [animation-delay:0.15s]">
-            <div
-              className="border rounded-2xl p-6 sm:p-8 shadow-card-brand backdrop-blur-sm"
-              style={{
-                backgroundColor: 'hsl(var(--stage-pregnancy) / 0.35)',
-                borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.15)',
-              }}
-            >
-              <div className="flex items-center gap-2.5 mb-3">
-                <div
-                  className="w-7 h-7 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: 'hsl(var(--stage-pregnancy-accent) / 0.12)' }}
-                >
-                  <Calendar size={13} style={{ color: 'hsl(var(--stage-pregnancy-accent))' }} />
-                </div>
-                <p
-                  className="font-sans text-[11px] font-light tracking-[0.2em] uppercase"
-                  style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
-                >
-                  Start with your due date
+                <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-5">
+                  We'll personalise your journey and content.
+                </p>
+                <DueDateCalculatorForm onResult={handleResult} onIVFResult={handleIVFResult} compact />
+                <p className="mt-4 font-sans text-[11px] font-light text-muted-foreground/70 leading-relaxed">
+                  This tool is a guide only and doesn't replace medical advice.
                 </p>
               </div>
-              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-5 sm:mb-6 mt-1">
-                We'll place you in the right week and trimester.
-              </p>
-              <DueDateCalculatorForm onResult={handleResult} onIVFResult={handleIVFResult} compact />
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-parchment-dark to-transparent pointer-events-none" />
     </section>
   );
 };

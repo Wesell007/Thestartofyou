@@ -6649,6 +6649,1074 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── PELVIC PAIN IN PREGNANCY ─────────────────────────────────────────────
+  {
+    slug: "pelvic-pain-in-pregnancy",
+    title: "Pelvic pain in pregnancy: what's normal, what helps, and when to ask for support",
+    metaDescription: "Pelvic pain in pregnancy explained — why it happens, what tends to be normal, what may help, and when to ask your midwife about pelvic girdle pain (PGP).",
+    quickAnswer:
+      "Some pelvic discomfort is very common in pregnancy as ligaments soften and the pelvis adjusts to the growing baby. Sharper, persistent or one-sided pain — especially around the pubic bone, lower back or hips, or pain that makes walking, turning in bed or climbing stairs difficult — may be pelvic girdle pain (PGP). PGP is common, treatable, and worth raising with your midwife or GP early. They can refer you to a women's health physiotherapist.",
+    howThisFeels: [
+      "Wincing turning over in bed",
+      "A sharp twinge in the pubic bone climbing stairs",
+      "Worrying that something is wrong because nobody warned you",
+      "Pushing through pain because it feels small to mention",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Relaxin and softening ligaments", body: "The hormone relaxin loosens the ligaments around the pelvis to prepare for birth. This can leave the pelvis less stable and the joints more sensitive to movement." },
+        { heading: "A growing, heavier uterus", body: "As the baby grows, the centre of gravity shifts and the pelvis carries more load. Posture, gait and pressure on the pelvic joints all change." },
+        { heading: "Pelvic girdle pain (PGP)", body: "PGP — sometimes called SPD — affects up to 1 in 5 pregnant people. It's pain in the pelvic joints (front, back, or both) that can range from mild to genuinely limiting." },
+      ],
+      lessCauses: [
+        { heading: "Round ligament pain", body: "Sharp, brief twinges low down or to the side, especially with sudden movement, are usually round ligament pain rather than true pelvic pain." },
+        { heading: "Urinary tract infection", body: "Lower pelvic ache with stinging on weeing, needing to wee often, or cloudy urine can point to a UTI, which is more common in pregnancy and worth a quick check." },
+      ],
+      whyItVaries: "Some people sail through with only mild twinges. Others develop significant pelvic girdle pain. Severity isn't a measure of how well your pregnancy is going — it reflects how your particular body responds to the hormonal and mechanical changes.",
+    },
+    timing: {
+      whenStarts: "Mild pelvic discomfort can begin in the second trimester. PGP often shows up from around 14–20 weeks, though it can start earlier or later.",
+      whenPeaks: "Symptoms tend to feel most intense in the third trimester as the baby grows and the pelvis carries more weight.",
+      whenEases: "Most pelvic pain eases significantly in the days and weeks after birth as hormones settle and load reduces. A small number of people need physio support for longer — that's normal and treatable.",
+    },
+    whatItFeelsLike: [
+      "A grinding or clicking feeling in the pubic bone",
+      "Pain in the lower back, hips, or perineum",
+      "Difficulty turning in bed, getting in and out of the car, or climbing stairs",
+      "Pain that's worse on one side than the other",
+    ],
+    whatThisMeans:
+      "Pelvic pain doesn't mean you're doing pregnancy wrong, and it doesn't mean anything is wrong with the baby. It's a sign your pelvis is adapting — and if it crosses into PGP, it's a sign you'd benefit from physio input.",
+    normal: [
+      "Mild aching around the pelvis as pregnancy progresses",
+      "Occasional twinges with sudden movement",
+      "Discomfort that improves with rest and position changes",
+    ],
+    seekSupport: [
+      "Pain that limits walking, climbing stairs, or turning in bed",
+      "Pain that's getting steadily worse rather than easing with rest",
+      "Pain with fever, unusual discharge, or stinging on weeing",
+      "Severe one-sided pain, especially in early pregnancy (to rule out other causes)",
+    ],
+    disclaimer: "This is general guidance. Pelvic pain is well-recognised in pregnancy and your midwife will take it seriously — please raise it rather than wait. Severe or worsening pain, bleeding, or pain with fever needs same-day medical assessment.",
+    whatYouCanDo: [
+      { action: "Ask your midwife for a women's health physio referral", reason: "PGP responds well to physio — exercises, advice, and sometimes a support belt can make a real difference." },
+      { action: "Move little and often", reason: "Avoid long periods of standing and avoid pushing through pain. Sit to put on trousers, keep knees together when turning in bed." },
+      { action: "Use pillows for support at night", reason: "A pillow between the knees keeps the pelvis aligned and reduces pain on turning." },
+      { action: "Pace activity", reason: "Identify what makes pain worse (often stairs, asymmetric movements, lifting toddlers) and reduce it where you can." },
+    ],
+    whatHappensNext: "With physio input, many people manage pelvic pain well through pregnancy and recover fully after birth. Raising it early gives you the best chance of staying mobile and comfortable.",
+    relatedStage: {
+      intro: "Pelvic pain sits alongside the broader story of how your body changes:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Back pain in pregnancy", href: "/articles/back-pain-in-pregnancy", context: "Often travels with pelvic pain — same advice applies." },
+        { label: "Round ligament pain", href: "/articles/round-ligament-pain", context: "Sharper, briefer twinges that aren't the same as PGP." },
+        { label: "Sleep in pregnancy", href: "/articles/sleep-in-pregnancy", context: "Position and pillows make a real difference." },
+      ],
+    },
+    aiPrompts: [
+      "Could this pelvic pain be PGP?",
+      "What can a physio actually do for pelvic pain in pregnancy?",
+      "When is pelvic pain something to ring the midwife about?",
+    ],
+    captureIntro: "Pelvic pain is one of the parts of pregnancy that can quietly limit a lot. Worth noting how it really is — it helps when you're talking to your midwife.",
+    trimester: [2, 3],
+    relatedSlugs: ["back-pain-in-pregnancy", "round-ligament-pain", "sleep-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["body", "symptoms"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Some pelvic discomfort is very common as ligaments soften and the pelvis adjusts",
+      "Pelvic girdle pain (PGP) affects up to 1 in 5 pregnant people and is treatable",
+      "A women's health physio is the most useful referral — ask early",
+      "Side-sleeping with a pillow between the knees and avoiding asymmetric movement helps",
+      "Severe, worsening, or one-sided pain — or pain with fever or bleeding — needs medical assessment",
+    ],
+    sources: [
+      "NHS — Pelvic pain in pregnancy",
+      "Pelvic Obstetric & Gynaecological Physiotherapy (POGP) — Pregnancy-related PGP",
+      "Royal College of Obstetricians and Gynaecologists — Pelvic girdle pain",
+      "NICE — Antenatal care",
+    ],
+    faq: [
+      { question: "Is pelvic pain in pregnancy normal?", answer: "Mild discomfort is very common. Pain that limits walking, turning in bed, or climbing stairs isn't something to push through — it's usually pelvic girdle pain (PGP) and responds well to physiotherapy." },
+      { question: "What is PGP or SPD?", answer: "Pelvic girdle pain (sometimes called symphysis pubis dysfunction) is pain in the joints of the pelvis caused by hormonal softening and changing load. It affects up to 1 in 5 pregnancies and is well-recognised, with established treatment." },
+      { question: "Can I still exercise with pelvic pain?", answer: "Often yes, but with adjustments. A women's health physio can guide you toward movement that supports the pelvis (gentle, symmetrical) and away from movement that aggravates it (deep squats, asymmetric loading)." },
+      { question: "Will pelvic pain affect my birth?", answer: "PGP doesn't usually prevent a vaginal birth, but it's worth discussing comfortable positions for labour with your midwife. A note in your maternity notes can help the team support you." },
+      { question: "Will it go after birth?", answer: "For most people, yes — significantly within days to weeks. A small number need ongoing physio. Recovery is the rule, not the exception." },
+    ],
+    topic: "body",
+    standfirst: "Pelvic pain in pregnancy is common, often misunderstood, and almost always worth mentioning. A calm look at what's normal, what may be PGP, and what genuinely helps.",
+    editorialSections: [
+      {
+        id: "what-pelvic-pain-is",
+        heading: "What pelvic pain in pregnancy actually is",
+        lead: "From a mild ache to something that makes turning in bed difficult — pelvic pain has a wide range, and most of it is well understood.",
+        paragraphs: [
+          "The pelvis is built to carry weight and absorb movement. In pregnancy, the hormone relaxin softens the ligaments that hold the pelvic joints together, so the pelvis can open during birth. That softening is doing exactly what it's meant to — but it can leave the joints more sensitive and less stable in the meantime.",
+          "Add to that a baby growing, a uterus getting heavier, and a centre of gravity that's quietly shifting, and it's no surprise that the pelvis sometimes complains. Most of what people describe as 'pelvic pain' in pregnancy belongs to one of two stories: general pregnancy aches, or pelvic girdle pain (PGP).",
+        ],
+      },
+      {
+        id: "pgp",
+        heading: "Pelvic girdle pain (PGP), explained",
+        lead: "PGP is common, recognised, and treatable. It's not a sign anything is wrong with the pregnancy.",
+        paragraphs: [
+          "PGP affects up to 1 in 5 pregnant people. It's pain in one or more of the pelvic joints — the pubic bone at the front, the sacroiliac joints at the back, or both. It can be mild and intermittent, or significant enough to affect walking, sleeping, and getting through the day.",
+          "Tell-tale signs: pain on climbing stairs, turning in bed, getting in and out of a car, or standing on one leg (putting on trousers). A grinding or clicking in the pubic bone. Pain that's worse on one side. None of these mean anything is wrong with your baby — they mean your pelvis would benefit from physio support.",
+        ],
+        callout: { tone: "info", text: "If walking, stairs, or turning in bed is difficult, ask your midwife to refer you to a women's health physiotherapist. The earlier, the better." },
+      },
+      {
+        id: "what-helps",
+        heading: "What genuinely helps",
+        lead: "Small changes in how you move can make a real difference.",
+        paragraphs: [
+          "Move little and often. Avoid long periods of standing or sitting. When turning in bed, keep your knees together. When getting out of the car, swing both legs round together rather than one at a time. Sit to put on trousers and shoes.",
+          "At night, a pillow between the knees keeps the pelvis aligned and reduces pain on turning. A pregnancy support belt can help some people; a physio is the right person to recommend whether it's worth trying.",
+          "Avoid pushing through pain. PGP responds badly to 'just getting on with it' and well to pacing.",
+        ],
+      },
+      {
+        id: "when-to-raise-it",
+        heading: "When to raise it",
+        paragraphs: [
+          "Tell your midwife if pelvic pain is limiting walking, turning in bed, or climbing stairs — or if it's getting steadily worse. They can refer you to physiotherapy and add a note to your maternity record so the team supporting you in labour know.",
+          "Pain with fever, unusual discharge, stinging on weeing, or bleeding is different and needs same-day assessment — it usually points to something other than PGP.",
+        ],
+      },
+    ],
+  },
+
+  // ─── ROUND LIGAMENT PAIN ──────────────────────────────────────────────────
+  {
+    slug: "round-ligament-pain",
+    title: "Round ligament pain in pregnancy: sharp twinges explained",
+    metaDescription: "Round ligament pain explained — why those sharp, brief twinges happen in pregnancy, when they tend to start, and when to mention them to your midwife.",
+    quickAnswer:
+      "Round ligament pain is a sharp, brief twinge — usually low down on one side of the bump — caused by the ligaments that support the uterus stretching as the baby grows. It's most common in the second trimester, often triggered by sudden movements like coughing, sneezing or standing up quickly. It's harmless, though it can feel alarming the first few times. Persistent, severe, or one-sided pain that doesn't ease — especially with bleeding or fever — should always be checked.",
+    howThisFeels: [
+      "A sudden sharp pull when you sneeze",
+      "Worrying for a moment, then realising it's gone",
+      "Wondering whether to ring the midwife about something so brief",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Stretching ligaments", body: "Two thick bands of tissue (the round ligaments) hold the uterus in place. As the uterus grows, they stretch — and a sudden movement can pull them sharply." },
+        { heading: "Sudden movement", body: "Coughing, sneezing, laughing, standing up quickly, or rolling over in bed are common triggers." },
+      ],
+      lessCauses: [
+        { heading: "Pelvic girdle pain", body: "Persistent or load-related pain in the pubic bone, lower back, or hips is more likely PGP than round ligament pain." },
+        { heading: "Other causes of one-sided pain", body: "In early pregnancy, severe one-sided pain — especially with bleeding or shoulder-tip pain — can occasionally point to other causes and needs assessment." },
+      ],
+      whyItVaries: "Some people barely notice round ligament pain. Others find it striking. Both are normal — the experience isn't a measure of how the pregnancy is going.",
+    },
+    timing: {
+      whenStarts: "Most often noticed from around 14–20 weeks, as the uterus rises out of the pelvis.",
+      whenPeaks: "Tends to be most noticeable in the second trimester.",
+      whenEases: "Often becomes less common in the third trimester as the uterus settles into a more stable position.",
+    },
+    whatItFeelsLike: [
+      "A sharp pull or stab low down on one side",
+      "A pain that lasts seconds rather than minutes",
+      "Triggered by movement, then quickly gone",
+    ],
+    whatThisMeans: "Round ligament pain is a sign of growth, not of anything going wrong. The sharpness can be alarming, but the briefness is reassuring — it's the muscle equivalent of a quick stretch.",
+    normal: [
+      "A brief sharp twinge with sudden movement",
+      "Pain that eases within seconds and doesn't return immediately",
+      "Pain that responds to changing position or moving slowly",
+    ],
+    seekSupport: [
+      "Pain that's persistent, severe, or doesn't ease",
+      "Pain with bleeding, fever, or unusual discharge",
+      "Pain that builds and tightens (could be contractions)",
+      "Pain with shoulder-tip pain, dizziness, or fainting (early pregnancy)",
+    ],
+    disclaimer: "This is general guidance. Any pain that worries you is worth raising with your midwife — they'd far rather hear about it than not.",
+    whatYouCanDo: [
+      { action: "Move slowly", reason: "Standing up gradually, rolling rather than jerking out of bed, and bracing for sneezes can reduce twinges." },
+      { action: "Change position", reason: "If a twinge happens, gently shift position — often the pain settles within seconds." },
+      { action: "Support the bump when needed", reason: "A hand under the bump when sneezing or coughing can reduce the pull." },
+    ],
+    whatHappensNext: "Round ligament pain usually fades into the background as pregnancy progresses. If pain is changing in character — becoming persistent, tightening, or paired with other symptoms — that's worth a check.",
+    relatedStage: {
+      intro: "Round ligament pain sits within the wider picture of how your body adapts:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Pelvic pain in pregnancy", href: "/articles/pelvic-pain-in-pregnancy", context: "When pain is more sustained or load-related." },
+        { label: "Braxton Hicks contractions", href: "/articles/braxton-hicks-contractions", context: "How tightening compares to a sharp twinge." },
+      ],
+    },
+    aiPrompts: [
+      "Is this twinge round ligament pain?",
+      "Why does it hurt sharply when I sneeze?",
+      "When is one-sided pain something to ring about?",
+    ],
+    captureIntro: "The first time round ligament pain happens, it can feel like something's wrong. Worth noting how it actually goes — it's reassuring to look back on.",
+    trimester: [2],
+    relatedSlugs: ["pelvic-pain-in-pregnancy", "braxton-hicks-contractions", "back-pain-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["body", "symptoms"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Round ligament pain is a sharp, brief twinge from stretching ligaments — usually harmless",
+      "It's most common in the second trimester and often triggered by sudden movement",
+      "Moving slowly and supporting the bump when sneezing or coughing can help",
+      "Persistent, severe, or one-sided pain — especially with bleeding or fever — needs checking",
+    ],
+    sources: [
+      "NHS — Common health problems in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists — Pregnancy-related pain",
+      "NICE — Antenatal care",
+    ],
+    faq: [
+      { question: "What does round ligament pain feel like?", answer: "A sharp, brief twinge — usually low down on one side of the bump. It's typically triggered by sudden movement and eases within seconds." },
+      { question: "Is round ligament pain dangerous?", answer: "No — it's a normal part of growth. The sharpness can be alarming, but the briefness is reassuring. If pain is persistent, severe, or paired with bleeding or fever, that's different and needs checking." },
+      { question: "Can I do anything to prevent it?", answer: "Move slowly, brace gently for sneezes and coughs, and shift position when you feel it coming. It tends to ease as the uterus stabilises in the third trimester." },
+      { question: "How is it different from contractions?", answer: "Round ligament pain is sharp and brief, triggered by movement. Contractions tighten the whole bump, last longer, and come in a rhythm. If you're unsure, ring your maternity unit." },
+    ],
+    topic: "body",
+    standfirst: "Round ligament pain is one of those pregnancy symptoms that can be alarming the first time — and ordinary the moment you understand what it is.",
+    editorialSections: [
+      {
+        id: "what-it-is",
+        heading: "What round ligament pain is",
+        paragraphs: [
+          "Two thick bands of tissue called the round ligaments hold the uterus in place. As the uterus grows, those ligaments stretch. A sudden movement — a sneeze, a cough, getting out of a chair too fast — can pull them sharply, and that's what you feel.",
+          "It's most often described as a brief, sharp pull low down on one side of the bump. It lasts seconds, not minutes, and usually eases the moment you change position.",
+        ],
+      },
+      {
+        id: "when-it-happens",
+        heading: "When it tends to happen",
+        paragraphs: [
+          "Round ligament pain is most often noticed from around 14–20 weeks, as the uterus rises out of the pelvis and the ligaments are doing more work. It tends to fade into the background later in pregnancy.",
+          "Some people get it often, others almost never. Both are normal.",
+        ],
+      },
+      {
+        id: "what-helps",
+        heading: "What helps",
+        paragraphs: [
+          "Move more slowly. Stand up gradually rather than jumping. Roll onto your side and use your arms to push up out of bed, rather than sitting straight up. When a sneeze or cough is coming, brace your bump gently with a hand.",
+          "If a twinge happens, change position — bend forward slightly, or shift your weight to the opposite side. The pain almost always eases within seconds.",
+        ],
+      },
+      {
+        id: "when-to-mention-it",
+        heading: "When to mention it",
+        paragraphs: [
+          "Round ligament pain itself doesn't usually need raising. But pain that's persistent, severe, or one-sided — especially with bleeding, fever, dizziness, or shoulder-tip pain — is different and needs same-day assessment.",
+          "If you're ever unsure whether what you're feeling is round ligament pain or something else, ring your midwife or maternity assessment unit. That's exactly what they're there for.",
+        ],
+      },
+    ],
+  },
+
+  // ─── BRAXTON HICKS CONTRACTIONS ───────────────────────────────────────────
+  {
+    slug: "braxton-hicks-contractions",
+    title: "Braxton Hicks contractions: what they feel like and how to tell them apart from labour",
+    metaDescription: "Braxton Hicks contractions explained — what they feel like, when they start, how to tell them apart from real labour, and when to ring your maternity unit.",
+    quickAnswer:
+      "Braxton Hicks contractions are 'practice' tightenings of the uterus. They're irregular, usually painless or mildly uncomfortable, don't get stronger or closer together, and tend to ease with rest, hydration, or changing position. Real labour contractions, by contrast, become more regular, longer, stronger, and don't ease with rest. If you're unsure — especially before 37 weeks, or with any bleeding, reduced movements, or waters breaking — ring your maternity unit.",
+    howThisFeels: [
+      "The bump going hard for a moment, then softening",
+      "Wondering 'was that one?'",
+      "Counting and timing, just in case",
+      "The constant background question of whether labour is starting",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Uterine practice", body: "The uterus is a muscle. Throughout pregnancy, it tightens and releases — sometimes you feel it, sometimes you don't. These are Braxton Hicks." },
+        { heading: "Activity, dehydration, or a full bladder", body: "Braxton Hicks often follow a busy day, not enough fluids, or a stretched bladder. The body is asking for a pause." },
+        { heading: "Movement of baby or you", body: "Position changes — yours or the baby's — can trigger a tightening." },
+      ],
+      lessCauses: [
+        { heading: "Early labour", body: "Some 'practice' contractions later in pregnancy quietly turn into early labour. The change is usually gradual and recognisable: more regular, longer, stronger." },
+        { heading: "Premature labour", body: "Before 37 weeks, regular tightenings — especially with pressure, backache, or any bleeding — should be checked promptly." },
+      ],
+      whyItVaries: "Some people feel Braxton Hicks from around 20 weeks. Others barely notice them until the very end. Both are normal — and how often you feel them isn't a sign of how labour will go.",
+    },
+    timing: {
+      whenStarts: "Often felt from around the second trimester onward, sometimes earlier in second pregnancies.",
+      whenPeaks: "Usually most noticeable in the third trimester, especially the final weeks.",
+      whenEases: "Braxton Hicks themselves don't 'end' — they merge into the lead-up to labour or quietly continue until birth.",
+    },
+    whatItFeelsLike: [
+      "A tightening across the whole bump that lasts 30–60 seconds",
+      "Irregular and unpredictable",
+      "Uncomfortable rather than painful for most people",
+      "Easing with rest, water, or a position change",
+    ],
+    whatThisMeans: "Braxton Hicks aren't a warning. They're the uterus doing what it does — tightening and releasing. They don't cause harm and they don't predict when labour will start.",
+    normal: [
+      "Irregular tightenings that don't follow a pattern",
+      "Tightenings that ease with rest or hydration",
+      "More frequent tightenings after activity or in the evening",
+    ],
+    seekSupport: [
+      "Regular tightenings before 37 weeks",
+      "Tightenings with any bleeding, fluid leaking, or reduced movements",
+      "Pain that doesn't ease and is becoming stronger or more frequent",
+      "Any contractions that worry you — ring your maternity unit",
+    ],
+    disclaimer: "This is general guidance. If you're ever unsure whether what you're feeling is Braxton Hicks or labour, ring your maternity assessment unit. That's what they're there for.",
+    whatYouCanDo: [
+      { action: "Drink water", reason: "Mild dehydration is one of the most common triggers — a glass of water often calms things down." },
+      { action: "Change position or rest", reason: "If you've been on your feet, sit or lie down. If you've been still, gentle movement can help." },
+      { action: "Empty your bladder", reason: "A full bladder can trigger tightenings — emptying it sometimes settles them." },
+      { action: "Time them if you're unsure", reason: "Note when each one starts, how long it lasts, and how strong it feels. Real labour gets longer, stronger, and closer together. Braxton Hicks don't." },
+    ],
+    whatHappensNext: "Braxton Hicks themselves don't lead anywhere — but in the final weeks, they often merge into the body's lead-up to labour. Knowing the difference helps you trust what you're feeling.",
+    relatedStage: {
+      intro: "Tightenings sit within the wider picture of late pregnancy:",
+      links: [
+        { label: "Signs of labour", href: "/articles/signs-of-labour", context: "How real labour starts and what it feels like." },
+        { label: "When to go in for labour", href: "/articles/when-to-go-in-for-labour", context: "When tightenings mean it's time to ring." },
+        { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide", context: "The wider arc of the final weeks." },
+      ],
+    },
+    aiPrompts: [
+      "How do I tell Braxton Hicks from labour?",
+      "Are Braxton Hicks supposed to hurt?",
+      "When should I ring about tightenings?",
+    ],
+    captureIntro: "The 'is this it?' moments of late pregnancy are worth noting, even if they turn out to be nothing. They're part of how the body prepares.",
+    trimester: [2, 3],
+    relatedSlugs: ["signs-of-labour", "when-to-go-in-for-labour", "stages-of-labour"],
+    journey: ["pregnancy"],
+    topics: ["body", "symptoms", "labour"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Braxton Hicks are irregular practice tightenings — usually painless and harmless",
+      "They don't get longer, stronger, or closer together; real labour does",
+      "Hydration, rest, and emptying your bladder often settle them",
+      "Regular tightenings before 37 weeks, or with bleeding, fluid, or reduced movements, need urgent assessment",
+      "If you're ever unsure, ring your maternity unit — it's exactly what they're there for",
+    ],
+    sources: [
+      "NHS — Signs that labour has begun",
+      "Royal College of Midwives — Care in labour",
+      "NICE — Intrapartum care for healthy women",
+      "Tommy's — Braxton Hicks contractions",
+    ],
+    faq: [
+      { question: "What do Braxton Hicks feel like?", answer: "Most people describe a tightening across the whole bump that lasts 30–60 seconds. It's usually uncomfortable rather than painful, and it eases with rest, water, or a change in position." },
+      { question: "When do Braxton Hicks start?", answer: "Many people start noticing them in the second trimester, though they can be present from earlier. They tend to become more obvious in the third trimester." },
+      { question: "How are Braxton Hicks different from labour?", answer: "Braxton Hicks are irregular and don't get stronger over time. Real labour contractions become more regular, longer, stronger, and don't ease with rest, hydration, or a position change." },
+      { question: "Should I worry if I never feel Braxton Hicks?", answer: "No. Some people barely notice them. Others feel them often. Neither is a sign of how labour will go." },
+      { question: "When should I ring about tightenings?", answer: "Before 37 weeks, any regular tightenings should be checked. At any stage, ring if you have bleeding, fluid leaking, reduced baby movements, or pain that's getting steadily worse." },
+    ],
+    topic: "body",
+    standfirst: "Practice contractions confuse a lot of people in the third trimester — and the difference between them and real labour is genuinely useful to know.",
+    editorialSections: [
+      {
+        id: "what-they-are",
+        heading: "What Braxton Hicks are",
+        paragraphs: [
+          "The uterus is a muscle, and like any muscle, it contracts and relaxes throughout pregnancy. Most of these contractions you'll never feel. Some you will — and those are what we call Braxton Hicks.",
+          "They're often described as a tightening across the whole bump that lasts 30–60 seconds. The bump goes firm, then softens. Most people find them uncomfortable rather than painful.",
+        ],
+      },
+      {
+        id: "telling-them-apart",
+        heading: "How to tell them apart from labour",
+        lead: "There's a recognisable difference, and once you know it, the 'is this it?' moments get easier.",
+        paragraphs: [
+          "Braxton Hicks are irregular. They don't follow a pattern, and they don't get longer, stronger, or closer together. They often ease with rest, water, or a change in position.",
+          "Real labour contractions do the opposite. They become more regular, longer (often building from 30 seconds toward a minute or more), stronger, and closer together. They don't stop when you change position or hydrate.",
+          "If you're timing them and they're staying irregular and not intensifying, they're almost certainly Braxton Hicks. If they're settling into a rhythm and getting more intense, that's labour finding its feet.",
+        ],
+        callout: { tone: "info", text: "If you're ever unsure — especially before 37 weeks or with any bleeding, fluid, or reduced movements — ring your maternity unit. That's exactly what they're for." },
+      },
+      {
+        id: "what-helps",
+        heading: "What helps when they're frequent",
+        paragraphs: [
+          "Drink water. Mild dehydration is one of the most common triggers, and a glass of water often calms things. Empty your bladder. Sit or lie down if you've been on your feet, or move gently if you've been still. Most Braxton Hicks settle within minutes once you've changed something.",
+        ],
+      },
+      {
+        id: "when-to-ring",
+        heading: "When to ring",
+        paragraphs: [
+          "Before 37 weeks, regular tightenings should always be checked — they can be a sign of premature labour. At any stage, contractions paired with bleeding, fluid leaking, reduced baby movements, or pain that won't ease need urgent assessment.",
+          "Trust your instincts. If something feels off, ring. The maternity team would much rather hear from you about something that turns out to be nothing than the other way around.",
+        ],
+      },
+    ],
+  },
+
+  // ─── SHORTNESS OF BREATH IN PREGNANCY ─────────────────────────────────────
+  {
+    slug: "shortness-of-breath-in-pregnancy",
+    title: "Shortness of breath in pregnancy: why it happens and when to mention it",
+    metaDescription: "Why pregnancy makes you breathless, when it tends to start, what helps, and the signs that mean breathlessness needs urgent medical attention.",
+    quickAnswer:
+      "Mild breathlessness is very common in pregnancy. Hormones (especially progesterone) change how you breathe, and later on the growing uterus reduces space for the lungs to expand. Most pregnancy breathlessness is gentle and worse with effort or lying flat. Sudden severe breathlessness, breathlessness with chest pain, fast heartbeat, coughing up blood, or one-sided leg swelling and pain is different — and needs urgent medical assessment.",
+    howThisFeels: [
+      "Out of breath walking up familiar stairs",
+      "Sighing more than usual without realising",
+      "Worrying that something's wrong with your heart",
+      "Trying to talk on the phone and running out of air",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Progesterone", body: "Progesterone increases your breathing rate and the depth of each breath, even from very early pregnancy. The result can be a feeling of breathlessness even when oxygen levels are fine." },
+        { heading: "A growing uterus", body: "From the second half of pregnancy, the uterus pushes upward against the diaphragm, reducing the space the lungs have to expand." },
+        { heading: "Higher demand", body: "Your blood volume increases by around 50% in pregnancy. Your heart and lungs are doing more work — breathlessness on stairs or hills is normal." },
+      ],
+      lessCauses: [
+        { heading: "Anaemia", body: "Low iron is common in pregnancy and can make breathlessness more pronounced. A simple blood test checks for it." },
+        { heading: "Asthma flare", body: "Pregnancy can change how asthma behaves — for some better, for some worse. Worth raising if symptoms are changing." },
+        { heading: "Less common but serious causes", body: "Pulmonary embolism (a blood clot in the lung) is rare but more likely in pregnancy. Sudden severe breathlessness, chest pain, or leg swelling needs immediate assessment." },
+      ],
+      whyItVaries: "Breathlessness varies with fitness, body shape, baby position, iron levels, and how much progesterone you're particularly sensitive to. Some people barely notice it; others find it striking.",
+    },
+    timing: {
+      whenStarts: "Some breathlessness can begin early in the first trimester due to progesterone, before the bump shows.",
+      whenPeaks: "Often most noticeable in the third trimester, when the uterus presses on the diaphragm.",
+      whenEases: "Many people notice an easing in the final weeks as the baby drops into the pelvis. It usually settles quickly after birth.",
+    },
+    whatItFeelsLike: [
+      "Needing to take a bigger breath partway through a sentence",
+      "Getting puffed on familiar stairs",
+      "Feeling slightly short of breath even at rest",
+      "Difficulty lying flat — needing pillows to prop up",
+    ],
+    whatThisMeans: "Mild, gradual breathlessness is part of how the body adapts. It isn't a sign your heart or lungs aren't coping — it's a sign hormones and physical changes are doing their job.",
+    normal: [
+      "Mild breathlessness that comes on with effort and eases with rest",
+      "Needing to sit up rather than lie flat",
+      "Slight breathlessness while talking, especially later on",
+    ],
+    seekSupport: [
+      "Sudden, severe breathlessness — call 999 or go to A&E",
+      "Breathlessness with chest pain, palpitations, or fainting",
+      "Breathlessness with one-sided leg swelling, redness, or pain",
+      "Coughing up blood",
+      "Worsening breathlessness at rest, or that wakes you at night",
+      "Breathlessness with a known asthma flare or chest infection",
+    ],
+    disclaimer: "Pregnancy increases the risk of blood clots, including in the lungs. Sudden or severe breathlessness must always be treated as urgent. Don't wait — call 999 or go straight to A&E.",
+    whatYouCanDo: [
+      { action: "Slow down", reason: "Take stairs more slowly, pause partway, and don't rush. Your body is doing more work than usual." },
+      { action: "Sit upright", reason: "Sitting tall — and using pillows to prop up at night — gives the lungs more room to expand." },
+      { action: "Sleep on your side with extra pillows", reason: "Side-sleeping with the upper body slightly raised can ease night-time breathlessness." },
+      { action: "Mention it at your antenatal appointments", reason: "Your midwife may check your iron levels — anaemia is common and treatable." },
+    ],
+    whatHappensNext: "Breathlessness usually eases significantly within the first days after birth. If it persists, or returns suddenly after birth, that's worth raising urgently — postnatal blood clots are also more likely than at other times.",
+    relatedStage: {
+      intro: "Breathlessness sits within the wider picture of how the body adapts:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Sleep in pregnancy", href: "/articles/sleep-in-pregnancy", context: "Position and propping up can ease night breathlessness." },
+        { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy", context: "Breathlessness can trigger anxiety, and anxiety can heighten it." },
+      ],
+    },
+    aiPrompts: [
+      "Why am I so breathless going up stairs?",
+      "Is breathlessness in pregnancy a sign of something serious?",
+      "What can I do to ease breathlessness at night?",
+    ],
+    captureIntro: "The way the body works harder in pregnancy — including just to breathe — is worth noticing. Quietly extraordinary.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["sleep-in-pregnancy", "fatigue-in-early-pregnancy", "anxiety-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["body", "symptoms"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Mild breathlessness is very common in pregnancy and usually starts in the first trimester",
+      "Progesterone changes how you breathe; the growing uterus later reduces lung space",
+      "Slowing down, sitting upright, and propping up at night all help",
+      "Sudden severe breathlessness, chest pain, or one-sided leg swelling is an emergency — call 999",
+      "Anaemia is common and treatable; mention persistent breathlessness at antenatal appointments",
+    ],
+    sources: [
+      "NHS — Common health problems in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists — Reducing the risk of venous thromboembolism in pregnancy",
+      "NICE — Antenatal care",
+      "Tommy's — Breathlessness in pregnancy",
+    ],
+    faq: [
+      { question: "Is it normal to be breathless in early pregnancy?", answer: "Yes. Progesterone changes your breathing pattern from very early on, before there's any bump. Mild breathlessness in the first trimester is common." },
+      { question: "When should breathlessness be a worry?", answer: "Sudden severe breathlessness, breathlessness with chest pain or palpitations, coughing up blood, or breathlessness with one-sided leg swelling needs immediate medical attention — call 999 or go to A&E." },
+      { question: "Can anaemia cause breathlessness?", answer: "Yes. Iron levels often dip in pregnancy and can intensify breathlessness. A simple blood test at your antenatal appointment checks for it." },
+      { question: "Why is it worse at night?", answer: "Lying flat reduces the space your lungs have to expand. Side-sleeping with extra pillows under your upper body usually helps." },
+      { question: "Will it ease at the end?", answer: "Often yes — when the baby drops into the pelvis in the final weeks, there can be more room to breathe. It usually settles quickly after birth." },
+    ],
+    topic: "body",
+    standfirst: "Breathlessness in pregnancy is one of those symptoms that can quietly worry people. A clear look at why it happens — and the few signs that mean it needs more than reassurance.",
+    editorialSections: [
+      {
+        id: "why",
+        heading: "Why pregnancy makes you breathless",
+        paragraphs: [
+          "Progesterone, the hormone that climbs through pregnancy, changes the way you breathe. It increases both the rate and depth of each breath, almost without you noticing. The result is that even early on — before there's any bump — many people feel a little breathless.",
+          "Later, the growing uterus pushes upward against the diaphragm, the muscle the lungs sit on. There's less room for the lungs to expand fully, and breathlessness becomes more obvious, especially on stairs, hills, or lying flat.",
+          "Add to that a 50% increase in blood volume and a heart that's working harder, and breathlessness in pregnancy makes physical sense. It usually isn't a sign anything is wrong.",
+        ],
+      },
+      {
+        id: "what-helps",
+        heading: "What helps",
+        paragraphs: [
+          "Slow down. Take stairs in stages and pause partway if you need. Sit upright when you can — slumping presses on the diaphragm. At night, prop yourself up with extra pillows and sleep on your side; lying flat is often the worst position.",
+          "Mention breathlessness at antenatal appointments. Your midwife may check your iron — anaemia is common in pregnancy and can intensify symptoms, and it's easy to treat.",
+        ],
+      },
+      {
+        id: "when-it-needs-urgent-care",
+        heading: "When breathlessness needs urgent care",
+        lead: "Most pregnancy breathlessness is harmless. A small set of signs are not — and knowing them matters.",
+        paragraphs: [
+          "Pregnancy raises the risk of blood clots, including pulmonary embolism (a clot in the lung). Sudden severe breathlessness, breathlessness with chest pain or palpitations, coughing up blood, or breathlessness with one-sided leg swelling, redness, or pain needs immediate medical attention. Call 999 or go straight to A&E.",
+          "Worsening breathlessness at rest, breathlessness that wakes you at night, or breathlessness with an asthma flare or chest infection is also worth contacting your midwife or GP about same-day.",
+        ],
+        callout: { tone: "gentle-warning", text: "Sudden severe breathlessness in pregnancy is a 999 call — not a 'wait and see'. The risk of blood clots is small but real, and acting quickly matters." },
+      },
+    ],
+  },
+
+  // ─── SWELLING IN PREGNANCY ────────────────────────────────────────────────
+  {
+    slug: "swelling-in-pregnancy",
+    title: "Swelling in pregnancy: ankles, feet, hands, and when to ring your midwife",
+    metaDescription: "Why swelling happens in pregnancy, what's usually normal, what helps, and the signs of swelling that mean urgent assessment for pre-eclampsia.",
+    quickAnswer:
+      "Some swelling — especially in the ankles, feet and hands — is very common from the second half of pregnancy. It's caused by extra fluid, increased blood volume, and the weight of the uterus slowing return flow from the legs. Mild swelling that's worse at the end of the day and eases overnight is usually normal. Sudden swelling of the face, around the eyes, or rapid swelling of the hands — especially with headache, vision changes, or upper-tummy pain — can be a sign of pre-eclampsia and needs urgent assessment.",
+    howThisFeels: [
+      "Rings that suddenly won't come off",
+      "Shoes that don't fit by the evening",
+      "Worrying every time you check your ankles",
+      "Wondering whether to mention something so 'normal'",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Increased fluid", body: "Pregnancy increases the amount of fluid in the body by about 50%. Some of that fluid sits in the tissues, particularly in the lower body where gravity pulls it." },
+        { heading: "Pressure from the uterus", body: "The growing uterus presses on the large veins that return blood from the legs, slowing the flow back up. Fluid pools more easily in the ankles and feet." },
+        { heading: "Hormones and tissue softening", body: "Pregnancy hormones soften tissues, which makes it easier for fluid to move into them and harder to move back out." },
+      ],
+      lessCauses: [
+        { heading: "Pre-eclampsia", body: "Sudden swelling of the face, around the eyes, or rapid swelling of the hands — especially with headache, vision changes, or upper-tummy pain — can be a sign of pre-eclampsia. It needs urgent assessment." },
+        { heading: "Blood clot (DVT)", body: "One-sided leg swelling, redness, warmth, or calf pain — different from the gentle even swelling of both legs — needs same-day medical attention." },
+      ],
+      whyItVaries: "Swelling depends on the weather, how much you've been on your feet, how much salt you've had, your particular circulation, and how late in pregnancy you are. Hot weather and long days standing make it worse for nearly everyone.",
+    },
+    timing: {
+      whenStarts: "Often noticed from around 22–28 weeks, sometimes earlier in second pregnancies.",
+      whenPeaks: "Usually most pronounced in the final weeks of pregnancy.",
+      whenEases: "Most swelling settles within days to a couple of weeks after birth as the body sheds the extra fluid.",
+    },
+    whatItFeelsLike: [
+      "Tight rings or shoes",
+      "Puffy ankles by the end of the day",
+      "Indentations from socks that take a while to fade",
+      "Feet that feel heavy and ache after standing",
+    ],
+    whatThisMeans: "Most pregnancy swelling is the body managing extra fluid in a body that's also under more physical pressure. It's not a sign of damage.",
+    normal: [
+      "Mild swelling of feet, ankles, and lower legs",
+      "Swelling that's worse by the evening and eases overnight",
+      "Swelling that responds to elevation and rest",
+    ],
+    seekSupport: [
+      "Sudden swelling of the face, around the eyes, or hands",
+      "Swelling with severe headache, vision changes, or upper-tummy pain",
+      "One-sided leg swelling — especially with redness, warmth, or pain",
+      "Swelling that's getting rapidly worse",
+    ],
+    disclaimer: "Pre-eclampsia and DVT are uncommon but serious. The patterns above are not subtle, and ringing the maternity assessment unit or calling 999 is exactly right. Trust changes that feel sudden or severe.",
+    whatYouCanDo: [
+      { action: "Elevate your feet whenever you can", reason: "Putting your feet up — even on a footstool while sitting — helps fluid drain back from the legs." },
+      { action: "Move regularly", reason: "Standing still or sitting still for long periods makes swelling worse. Short, frequent walks help the calves pump fluid back up." },
+      { action: "Stay well hydrated", reason: "Counterintuitively, dehydration makes the body hold on to more fluid. Drinking enough actually reduces swelling." },
+      { action: "Wear comfortable shoes and avoid tight bands", reason: "Tight straps or socks restrict return flow. Soft, supportive shoes make a real difference late in pregnancy." },
+      { action: "Sleep on your left side", reason: "Side-sleeping reduces pressure on the large vein that returns blood from the legs." },
+    ],
+    whatHappensNext: "Swelling usually settles quickly after birth — often dramatically so in the first days, as the body releases the extra fluid. Don't be surprised by extra trips to the loo and lots of sweating in the early postnatal week.",
+    relatedStage: {
+      intro: "Swelling sits within the picture of late-pregnancy physical changes:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide", context: "The wider arc of the final weeks." },
+        { label: "Sleep in pregnancy", href: "/articles/sleep-in-pregnancy", context: "Side-sleeping helps swelling as well as comfort." },
+      ],
+    },
+    aiPrompts: [
+      "Is this much ankle swelling normal?",
+      "What are the warning signs of pre-eclampsia?",
+      "What can I do to reduce swelling in my feet?",
+    ],
+    captureIntro: "The body in late pregnancy carries a remarkable amount. Worth noting how it really feels — not just the milestones.",
+    trimester: [2, 3],
+    relatedSlugs: ["third-trimester-complete-guide", "sleep-in-pregnancy", "back-pain-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["body", "symptoms"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Mild swelling of feet, ankles and hands is very common from the second half of pregnancy",
+      "Elevating feet, moving regularly, hydrating, and side-sleeping all help",
+      "Swelling that's worse by the evening and eases overnight is usually normal",
+      "Sudden facial or hand swelling — especially with headache, vision changes, or upper-tummy pain — needs urgent assessment for pre-eclampsia",
+      "One-sided leg swelling with redness, warmth or calf pain needs same-day medical attention",
+    ],
+    sources: [
+      "NHS — Swollen ankles, feet and fingers in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists — Pre-eclampsia",
+      "NICE — Hypertension in pregnancy",
+      "Tommy's — Pre-eclampsia: signs and symptoms",
+    ],
+    faq: [
+      { question: "How much swelling is normal in pregnancy?", answer: "Mild swelling of feet, ankles, and sometimes hands is very common, especially later in the day and in hot weather. It usually eases overnight." },
+      { question: "What are the signs of pre-eclampsia?", answer: "Sudden swelling of the face, around the eyes, or hands — especially with severe headache, vision changes (flashing lights, blurring), or upper-tummy pain. It usually comes with raised blood pressure, picked up at antenatal checks." },
+      { question: "Can swelling mean a blood clot?", answer: "Even, gentle swelling of both legs is usually not a clot. One-sided leg swelling — with redness, warmth, or calf pain — needs same-day assessment." },
+      { question: "Does drinking less water help?", answer: "No — the opposite. Dehydration makes the body hold on to more fluid. Drinking enough actually reduces swelling." },
+      { question: "Will it go away after birth?", answer: "Yes — usually within days to a couple of weeks. The body releases the extra fluid quickly through frequent weeing and sweating in the first postnatal week." },
+    ],
+    topic: "body",
+    standfirst: "Most pregnancy swelling is ordinary. A few patterns aren't — and knowing the difference is one of the most useful things to carry into the third trimester.",
+    editorialSections: [
+      {
+        id: "why",
+        heading: "Why swelling happens",
+        paragraphs: [
+          "Pregnancy increases the amount of fluid in your body by around 50%, and some of that fluid sits in the tissues. Gravity pulls it downward, which is why feet and ankles tend to puff up by the evening. The growing uterus also presses on the large veins that carry blood back up from the legs, slowing return flow.",
+          "Add hormones that soften tissues, hot weather, long days on your feet, and salt — and gentle swelling becomes very common in the second half of pregnancy. It's not a sign of damage.",
+        ],
+      },
+      {
+        id: "what-helps",
+        heading: "What helps",
+        paragraphs: [
+          "Elevate your feet when you can — even on a footstool. Move regularly: standing still or sitting still for long stretches makes swelling worse. Stay well hydrated; dehydration makes the body hold on to more fluid, not less.",
+          "Avoid tight bands — socks, watches, rings — that can restrict flow. Side-sleeping (especially the left side) reduces pressure on the large vein returning blood from the legs and often helps overnight.",
+        ],
+      },
+      {
+        id: "warning-signs",
+        heading: "The patterns that need urgent attention",
+        lead: "Most swelling is harmless. Two patterns aren't.",
+        paragraphs: [
+          "Pre-eclampsia: sudden swelling of the face, around the eyes, or rapid swelling of the hands — especially with severe headache, vision changes (flashing lights, blurring), or pain just below the ribs on the right side. It usually comes with raised blood pressure picked up at antenatal checks. Ring your maternity assessment unit straight away.",
+          "Blood clot (DVT): one-sided leg swelling, with redness, warmth, or calf pain. Different from the gentle even swelling of both ankles. Same-day medical attention is needed.",
+        ],
+        callout: { tone: "gentle-warning", text: "If swelling is sudden, one-sided, or paired with headache, vision changes, or upper-tummy pain — ring your maternity assessment unit, don't wait until your next appointment." },
+      },
+    ],
+  },
+
+  // ─── HEARTBURN IN PREGNANCY ───────────────────────────────────────────────
+  {
+    slug: "heartburn-in-pregnancy",
+    title: "Heartburn in pregnancy: why it happens and what really helps",
+    metaDescription: "Why heartburn is so common in pregnancy, when it tends to peak, what genuinely helps, and which treatments are safe to use during pregnancy.",
+    quickAnswer:
+      "Heartburn in pregnancy is caused by hormones relaxing the valve at the top of the stomach, and later by the growing uterus pressing upward. It's very common — affecting around half of pregnant people, often more in the third trimester. Eating smaller meals, avoiding late eating, propping up at night, and using pregnancy-safe antacids (your pharmacist can advise) all help. If heartburn is severe, persistent, or paired with vomiting, weight loss, or upper-tummy pain, talk to your midwife or GP.",
+    howThisFeels: [
+      "Lying down and immediately regretting that last meal",
+      "Burning that wakes you in the night",
+      "Avoiding favourite foods because of what they do later",
+      "Sleeping propped up on a pile of pillows",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Progesterone relaxes the stomach valve", body: "Progesterone softens smooth muscle throughout the body, including the valve (the lower oesophageal sphincter) that normally keeps stomach acid where it belongs. When that valve relaxes, acid rises." },
+        { heading: "Slower digestion", body: "Pregnancy slows the whole digestive system, so the stomach empties more slowly and there's more chance for acid to back up." },
+        { heading: "A growing uterus", body: "From the second half of pregnancy, the uterus pushes upward against the stomach, increasing the pressure that pushes acid up." },
+      ],
+      lessCauses: [
+        { heading: "Trigger foods", body: "Spicy, fatty, very acidic, or very large meals tend to trigger heartburn for many people. So do caffeine, fizzy drinks, and chocolate." },
+        { heading: "Lying flat soon after eating", body: "Gravity is one of the few things keeping acid down. Lying flat — especially soon after a meal — removes that help." },
+      ],
+      whyItVaries: "Some people barely notice heartburn in pregnancy. Others find it one of the hardest symptoms. Severity isn't a sign of how the pregnancy is going — it reflects how your body responds to those hormonal and mechanical changes.",
+    },
+    timing: {
+      whenStarts: "Often appears or worsens from around the second trimester onward.",
+      whenPeaks: "Usually most pronounced in the third trimester, especially the final weeks.",
+      whenEases: "Heartburn typically eases significantly within hours to days after birth, as the uterus shrinks and hormones shift.",
+    },
+    whatItFeelsLike: [
+      "A burning sensation behind the breastbone, especially after eating or lying down",
+      "An acidic or bitter taste at the back of the throat",
+      "Bloating and a feeling of fullness",
+      "Disturbed sleep from acid rising at night",
+    ],
+    whatThisMeans: "Heartburn isn't a sign of damage. It's a sign of a digestive system temporarily reorganised by hormones and a growing baby — and there's a lot you can do to make it more bearable.",
+    normal: [
+      "Burning after meals, especially larger or richer ones",
+      "Worse symptoms when lying flat",
+      "Worse symptoms in the third trimester",
+    ],
+    seekSupport: [
+      "Severe pain, especially in the upper right tummy",
+      "Vomiting blood, or what looks like coffee grounds",
+      "Difficulty swallowing",
+      "Weight loss or persistent vomiting",
+      "Heartburn that isn't responding to anything you try",
+    ],
+    disclaimer: "Several common heartburn medicines are safe in pregnancy, but always check with your pharmacist, midwife, or GP before taking anything. Severe upper-tummy pain in pregnancy is sometimes a sign of pre-eclampsia and needs prompt assessment.",
+    whatYouCanDo: [
+      { action: "Eat smaller, more frequent meals", reason: "A less full stomach is less likely to push acid upward — and the digestion has less work to do at any one time." },
+      { action: "Avoid eating late at night", reason: "Try to leave 2–3 hours between your last meal and lying down. Gravity is one of the most useful tools you have." },
+      { action: "Prop up at night", reason: "Sleeping with your upper body slightly raised — extra pillows, or a wedge — keeps acid down." },
+      { action: "Identify your triggers", reason: "Common ones are spicy, fatty, or very acidic foods, fizzy drinks, caffeine, and chocolate. You'll quickly learn yours." },
+      { action: "Use pregnancy-safe antacids when you need them", reason: "Many antacids are safe in pregnancy. Your pharmacist or midwife can recommend specific ones." },
+    ],
+    whatHappensNext: "Heartburn almost always settles within days of birth. The valve at the top of the stomach tightens up again, the uterus shrinks back, and you can usually go back to eating whatever you fancy.",
+    relatedStage: {
+      intro: "Heartburn sits within the wider picture of how digestion changes in pregnancy:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Constipation in pregnancy", href: "/articles/constipation-in-pregnancy", context: "Slower digestion shows up here too." },
+        { label: "Sleep in pregnancy", href: "/articles/sleep-in-pregnancy", context: "Heartburn at night often disrupts sleep — managing one helps the other." },
+      ],
+    },
+    aiPrompts: [
+      "What antacids are safe in pregnancy?",
+      "Why is heartburn so much worse at night?",
+      "When is heartburn something to mention to my midwife?",
+    ],
+    captureIntro: "The strange ordinary discomforts of pregnancy are part of the story too — worth noting alongside the bigger moments.",
+    trimester: [2, 3],
+    relatedSlugs: ["constipation-in-pregnancy", "sleep-in-pregnancy", "eating-well-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["body", "symptoms", "diet"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Heartburn affects around half of pregnant people, often peaking in the third trimester",
+      "It's caused by hormones relaxing the stomach valve and the growing uterus pressing up",
+      "Smaller meals, no late eating, and propping up at night make a real difference",
+      "Many antacids are safe in pregnancy — your pharmacist can advise",
+      "Severe pain, vomiting blood, or upper-right-tummy pain needs prompt medical assessment",
+    ],
+    sources: [
+      "NHS — Indigestion and heartburn in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists — Heartburn",
+      "NICE — Antenatal care",
+      "BNF — Antacids in pregnancy",
+    ],
+    faq: [
+      { question: "Why is heartburn so much worse in pregnancy?", answer: "Progesterone relaxes the valve at the top of the stomach, slowing digestion and letting acid rise more easily. Later, the growing uterus adds physical pressure. Both add up." },
+      { question: "What antacids are safe in pregnancy?", answer: "Several common antacids are safe — calcium-based ones in particular. Your pharmacist or midwife can recommend specific brands. Check before taking any new medicine, including over-the-counter ones." },
+      { question: "What if antacids aren't enough?", answer: "Talk to your GP. There are stronger medicines (such as ranitidine alternatives or PPIs) that can be prescribed safely if heartburn is severely affecting sleep or eating." },
+      { question: "Does spicy food really make it worse?", answer: "For many people, yes — though the triggers are personal. Common ones are spicy, fatty, or very acidic foods, fizzy drinks, caffeine, and chocolate. A short food diary often makes the pattern clear." },
+      { question: "Will heartburn affect the baby?", answer: "No. Heartburn is uncomfortable but doesn't harm the baby. There's also no truth to the old belief that heartburn means the baby will have lots of hair." },
+    ],
+    topic: "body",
+    standfirst: "Heartburn is one of the most universal — and most treatable — discomforts of pregnancy. A clear look at why it happens and what genuinely helps.",
+    editorialSections: [
+      {
+        id: "why",
+        heading: "Why pregnancy makes heartburn so common",
+        paragraphs: [
+          "Pregnancy hormones — particularly progesterone — soften the smooth muscle throughout the body. That includes the valve at the top of the stomach (the lower oesophageal sphincter), which normally keeps stomach acid where it belongs. When that valve relaxes, acid rises more easily.",
+          "Digestion also slows in pregnancy, so the stomach empties more slowly and acid has more time to back up. Later on, the growing uterus pushes upward against the stomach itself, adding physical pressure. By the third trimester, all three forces are at work.",
+        ],
+      },
+      {
+        id: "what-helps",
+        heading: "What genuinely helps",
+        paragraphs: [
+          "Eat smaller, more frequent meals — a fuller stomach is more likely to push acid upward. Try to leave 2–3 hours between your last meal and lying down: gravity is one of the most useful tools you have. Prop up with extra pillows or a wedge at night.",
+          "Identify your triggers. The usual suspects are spicy, fatty, very acidic, or very large meals — plus caffeine, fizzy drinks, and chocolate. A short food diary usually makes the pattern clear within days.",
+          "Use pregnancy-safe antacids when you need them. Several over-the-counter options are safe; your pharmacist or midwife can point you to the right ones. If antacids aren't enough, your GP can prescribe stronger medicines that are also safe in pregnancy.",
+        ],
+        callout: { tone: "info", text: "Always check with a pharmacist, midwife, or GP before taking any new medicine in pregnancy — even over-the-counter ones." },
+      },
+      {
+        id: "when-to-raise-it",
+        heading: "When heartburn is more than heartburn",
+        paragraphs: [
+          "Severe pain in the upper tummy — especially on the right side, just below the ribs — can be a sign of pre-eclampsia and needs prompt assessment, particularly if paired with headache or vision changes. Vomiting blood, difficulty swallowing, weight loss, or persistent vomiting also need a doctor's input.",
+          "And if heartburn isn't responding to anything you try, that's worth raising. There are options — there's no need to white-knuckle it through the third trimester.",
+        ],
+      },
+    ],
+  },
+
+  // ─── CONSTIPATION IN PREGNANCY ────────────────────────────────────────────
+  {
+    slug: "constipation-in-pregnancy",
+    title: "Constipation in pregnancy: why it happens and what gently helps",
+    metaDescription: "Why constipation is so common in pregnancy, what genuinely helps, which laxatives are safe, and when to mention it to your midwife or GP.",
+    quickAnswer:
+      "Constipation is one of the most common pregnancy symptoms, affecting up to two thirds of pregnant people. Hormones slow digestion, iron supplements often make it worse, and the growing uterus presses on the bowel later on. Drinking enough fluid, eating fibre, gentle movement, and pregnancy-safe laxatives (your pharmacist can advise) all help. Talk to your midwife or GP if constipation is severe, painful, or paired with bleeding.",
+    howThisFeels: [
+      "Days going by without anything happening",
+      "Feeling bloated and uncomfortable on top of everything else",
+      "Worrying that pushing might cause damage",
+      "Quietly hoping iron supplements aren't to blame",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Progesterone slows digestion", body: "Pregnancy hormones relax smooth muscle, including the muscle of the bowel. Things move through more slowly, and more water is absorbed along the way — so stools become harder." },
+        { heading: "Iron supplements", body: "Iron tablets, often prescribed if iron levels are low, are a well-known cause of constipation. Sometimes a different formulation helps." },
+        { heading: "A growing uterus", body: "Later in pregnancy, the uterus presses on the bowel, slowing things down further." },
+        { heading: "Less movement", body: "Many people are less physically active in pregnancy — and movement is one of the things that keeps the bowel working." },
+      ],
+      lessCauses: [
+        { heading: "Dehydration", body: "If fluid intake drops, stools harden quickly. Pregnancy needs more water than usual." },
+        { heading: "Pelvic floor changes", body: "Pelvic floor changes in pregnancy can occasionally make emptying the bowel more difficult, even when the stool itself is soft." },
+      ],
+      whyItVaries: "Some people sail through. Others find constipation one of the most uncomfortable parts of pregnancy. It often gets worse with iron tablets and in the third trimester.",
+    },
+    timing: {
+      whenStarts: "Often noticed from the first trimester as hormones start to affect digestion.",
+      whenPeaks: "Tends to be worse in the first and third trimesters, and around iron supplementation.",
+      whenEases: "Many people see things improve within the first weeks after birth — though this can take longer if iron is still being supplemented or if there's a perineal tear.",
+    },
+    whatItFeelsLike: [
+      "Hard, infrequent stools",
+      "Bloating and abdominal discomfort",
+      "Straining or feeling unable to fully empty",
+      "Discomfort or small streaks of blood from the strain (often piles)",
+    ],
+    whatThisMeans: "Constipation isn't a sign anything is wrong. It's a sign of a slower digestive system in a more crowded body — and there's a lot that helps.",
+    normal: [
+      "Less frequent bowel movements than before pregnancy",
+      "Stools that are firmer, especially when iron is being taken",
+      "Mild bloating and discomfort",
+      "Occasional small bright-red spots from straining (often piles)",
+    ],
+    seekSupport: [
+      "Severe abdominal pain",
+      "Significant bleeding from the bottom",
+      "No bowel movement for a week or more, despite trying everything",
+      "Constipation severe enough to affect eating or sleep",
+    ],
+    disclaimer: "Some laxatives are safe in pregnancy and others aren't. Always check with your pharmacist, midwife, or GP before taking anything. Severe abdominal pain in pregnancy needs prompt assessment.",
+    whatYouCanDo: [
+      { action: "Drink plenty of water", reason: "Hydration is one of the most reliable ways to soften stools." },
+      { action: "Increase fibre — gradually", reason: "Wholegrains, fruit, vegetables, and pulses help. Adding too much too fast can cause bloating, so build up over a few days." },
+      { action: "Move every day", reason: "Even a short walk helps the bowel work. Gentle movement is one of the most underrated treatments." },
+      { action: "Talk to your GP if iron is the trigger", reason: "Different iron formulations affect people differently. Sometimes a switch makes a real difference." },
+      { action: "Use pregnancy-safe laxatives if needed", reason: "Bulk-forming laxatives (like ispaghula) and stool softeners are usually first-line in pregnancy. Stimulant laxatives are sometimes used short-term — your pharmacist or GP can guide you." },
+    ],
+    whatHappensNext: "Constipation usually eases gradually in the weeks after birth, especially once any iron supplementation has finished. The same gentle measures help in the postnatal period too — when straining is something to actively avoid.",
+    relatedStage: {
+      intro: "Constipation sits within the wider picture of how digestion changes:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Heartburn in pregnancy", href: "/articles/heartburn-in-pregnancy", context: "Both are part of the same slowed-digestion story." },
+        { label: "Eating well in pregnancy", href: "/articles/eating-well-in-pregnancy", context: "Fibre, fluid, and steady eating all help." },
+      ],
+    },
+    aiPrompts: [
+      "Why is iron making me so constipated?",
+      "What laxatives are safe in pregnancy?",
+      "When should I worry about constipation?",
+    ],
+    captureIntro: "The unglamorous parts of pregnancy are part of it too — and the practical things that help are worth remembering.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["heartburn-in-pregnancy", "eating-well-in-pregnancy", "key-nutrients-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["body", "symptoms", "diet"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Constipation affects up to two thirds of pregnant people — usually due to hormones, iron, and pressure from the uterus",
+      "Water, fibre, and daily movement are the foundations of relief",
+      "Iron supplements are a common trigger — different formulations may help",
+      "Pregnancy-safe laxatives exist; ask a pharmacist or GP before starting",
+      "Severe pain, significant bleeding, or no bowel movement for a week needs medical input",
+    ],
+    sources: [
+      "NHS — Constipation in pregnancy",
+      "NICE — Constipation in pregnancy",
+      "BNF — Laxatives in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists — Common pregnancy concerns",
+    ],
+    faq: [
+      { question: "Why does iron cause constipation?", answer: "Iron supplements slow the bowel and harden stools — it's one of the most common side effects. If iron is making things significantly worse, talk to your GP about alternative formulations." },
+      { question: "Is straining harmful?", answer: "Straining can worsen piles (haemorrhoids), which are common in pregnancy. Softening the stool — with water, fibre, and pregnancy-safe laxatives if needed — is more useful than pushing harder." },
+      { question: "What laxatives are safe in pregnancy?", answer: "Bulk-forming laxatives (such as ispaghula) and stool softeners are usually first-line. Stimulant laxatives may be used short-term under guidance. Always check with a pharmacist, midwife, or GP." },
+      { question: "Are piles in pregnancy normal?", answer: "Yes — they're very common, both from constipation and from the pressure of pregnancy on the veins around the bottom. Most settle after birth. Soothing creams and softer stools help." },
+      { question: "When should I see a GP about constipation?", answer: "If constipation is severe, painful, or paired with significant bleeding — or if nothing has worked after a week of trying — talk to your GP. There are safe and effective options." },
+    ],
+    topic: "body",
+    standfirst: "Constipation is one of the most common — and most quietly miserable — parts of pregnancy. A grounded look at why it happens and what genuinely helps.",
+    editorialSections: [
+      {
+        id: "why",
+        heading: "Why pregnancy makes constipation so common",
+        paragraphs: [
+          "Pregnancy hormones, particularly progesterone, relax the smooth muscle of the bowel. Things move through more slowly, and more water is absorbed along the way, so stools become harder and less frequent. Iron supplements — often prescribed if iron levels are low — slow the bowel further. And later in pregnancy, the growing uterus presses on the bowel, adding physical pressure.",
+          "All of this together explains why constipation affects up to two thirds of pregnant people at some point.",
+        ],
+      },
+      {
+        id: "what-helps",
+        heading: "What genuinely helps",
+        paragraphs: [
+          "Drink plenty of water. Increase fibre gradually — wholegrains, fruit, vegetables, and pulses — over a few days rather than all at once, because too much fibre too fast can cause bloating. Move every day, even briefly: walking is one of the most underrated treatments.",
+          "If iron supplements are the main trigger, talk to your GP about switching to a different formulation — some are gentler on the bowel.",
+          "If diet, fluid, and movement aren't enough, pregnancy-safe laxatives are an option. Bulk-forming laxatives (such as ispaghula) and stool softeners are usually first-line. A pharmacist or GP can advise.",
+        ],
+        callout: { tone: "info", text: "Always check with a pharmacist, midwife, or GP before taking any new medicine in pregnancy — including over-the-counter laxatives." },
+      },
+      {
+        id: "piles",
+        heading: "A note on piles",
+        paragraphs: [
+          "Piles (haemorrhoids) are very common in pregnancy — partly from constipation and straining, and partly from the pressure of pregnancy on the veins around the bottom. Streaks of bright red blood after straining are usually piles rather than anything more serious. Softening the stool, soothing creams, and avoiding sitting on the toilet for long periods all help. They usually settle after birth.",
+        ],
+      },
+      {
+        id: "when-to-raise-it",
+        heading: "When to ask for more help",
+        paragraphs: [
+          "Severe abdominal pain, significant bleeding from the bottom, or no bowel movement for a week despite trying — all need medical input. Constipation severe enough to affect eating, sleep, or daily life is also worth raising rather than tolerating.",
+        ],
+      },
+    ],
+  },
+
+  // ─── BACK PAIN IN PREGNANCY ───────────────────────────────────────────────
+  {
+    slug: "back-pain-in-pregnancy",
+    title: "Back pain in pregnancy: why it happens and what genuinely helps",
+    metaDescription: "Back pain in pregnancy explained — why it's so common, what helps, when to mention it to your midwife, and the warning signs that need urgent assessment.",
+    quickAnswer:
+      "Back pain affects up to two thirds of pregnant people. Softer ligaments, a shifting centre of gravity, a heavier uterus, and changes in posture all play a part. Most back pain is mechanical, eases with rest, position changes, and gentle movement, and responds well to a women's health physio. Severe pain, pain with fever, pain with stinging on weeing, or sudden lower-back pain in a regular pattern (especially before 37 weeks) needs prompt assessment.",
+    howThisFeels: [
+      "Aching by mid-afternoon every day",
+      "Stiffening up after sitting still",
+      "Wondering whether to push through it or rest",
+      "Carrying a toddler when your own back is already complaining",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Softer ligaments", body: "The hormone relaxin softens the ligaments around the pelvis and lower back to prepare for birth. Joints become more mobile and less stable." },
+        { heading: "A shifting centre of gravity", body: "As the bump grows, your centre of gravity moves forward. Most people compensate by leaning back slightly, which puts extra strain on the lower back." },
+        { heading: "Weaker abdominal support", body: "The abdominal muscles stretch as the uterus grows and lose some of their ability to support the spine." },
+        { heading: "Posture and load", body: "Sitting for long periods, standing for long periods, lifting toddlers, and uneven loading all add up." },
+      ],
+      lessCauses: [
+        { heading: "Pelvic girdle pain (PGP)", body: "Pain in the lower back that's also in the pelvic joints — front, side, or sacroiliac — may be PGP and benefits from women's health physiotherapy." },
+        { heading: "Urinary tract infection", body: "Lower back ache with stinging on weeing, needing to wee often, fever, or feeling unwell can point to a UTI, which is more common in pregnancy." },
+        { heading: "Premature labour", body: "Sudden, regular lower-back pain — especially before 37 weeks, with tightening, pressure, or any bleeding — needs urgent assessment." },
+      ],
+      whyItVaries: "Pre-pregnancy back history, posture, fitness, the size and position of the baby, and how your body responds to relaxin all affect how back pain shows up. Some people barely notice it; others find it one of the hardest physical parts of pregnancy.",
+    },
+    timing: {
+      whenStarts: "Mild back ache can begin in the first trimester. Significant back pain often shows up from around 14–20 weeks as the bump grows.",
+      whenPeaks: "Usually most pronounced in the third trimester.",
+      whenEases: "Most pregnancy back pain eases significantly within weeks of birth. A small number of people benefit from postnatal physio support.",
+    },
+    whatItFeelsLike: [
+      "A dull ache across the lower back",
+      "Stiffness after sitting, standing, or sleeping in one position",
+      "Pain that's worse by the end of the day",
+      "Sometimes a shooting pain down a leg (sciatica)",
+    ],
+    whatThisMeans: "Back pain in pregnancy is mostly a mechanical story — softer joints, more weight, and a body adapting fast. It's manageable, and there's a lot you can do.",
+    normal: [
+      "Aching across the lower back, especially by the end of the day",
+      "Stiffness after sitting or standing for long periods",
+      "Pain that eases with rest and gentle movement",
+    ],
+    seekSupport: [
+      "Severe pain that limits daily life",
+      "Pain with fever, stinging on weeing, or feeling unwell",
+      "Sudden, regular lower-back pain (especially before 37 weeks)",
+      "Pain with any bleeding or fluid leaking",
+      "Sciatica that's severe or causing weakness in the leg",
+    ],
+    disclaimer: "This is general guidance. Severe or unusual pain in pregnancy is always worth raising. Sudden regular back pain — especially before 37 weeks — should be treated as possible premature labour and assessed urgently.",
+    whatYouCanDo: [
+      { action: "Ask your midwife about a women's health physio", reason: "Physio is the most effective treatment for pregnancy back pain — and the earlier the better." },
+      { action: "Move regularly and gently", reason: "Sitting still and standing still both make things worse. Short, frequent walks and gentle stretches help." },
+      { action: "Watch your posture", reason: "Avoid leaning back. Sit with feet flat and lower back supported. Stand tall — imagine the crown of your head lifting upward." },
+      { action: "Sleep on your side with a pillow between your knees", reason: "Side-sleeping with pillow support keeps the spine and pelvis aligned and is often the most comfortable position." },
+      { action: "Lift carefully — or not at all", reason: "Bend at the knees, keep loads close to your body, and ask for help with heavy lifting. This is also true for older children: get them to climb up to you rather than lifting them." },
+      { action: "Try a warm bath or warm pack", reason: "Warmth often eases muscular back pain. (Avoid very hot baths.)" },
+    ],
+    whatHappensNext: "Most pregnancy back pain eases significantly within the first weeks after birth as hormones settle and the load reduces. Postnatal recovery is gradual — taking time to rebuild core and pelvic floor strength helps long-term recovery.",
+    relatedStage: {
+      intro: "Back pain sits within the wider story of how your body changes:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Pelvic pain in pregnancy", href: "/articles/pelvic-pain-in-pregnancy", context: "Often travels with back pain — same physio referral helps." },
+        { label: "Sleep in pregnancy", href: "/articles/sleep-in-pregnancy", context: "Side-sleeping with pillow support helps both back pain and sleep." },
+        { label: "Moving your body in pregnancy", href: "/articles/moving-your-body-in-pregnancy", context: "Gentle, regular movement is one of the most effective things." },
+      ],
+    },
+    aiPrompts: [
+      "What can I do about lower back pain in pregnancy?",
+      "When is back pain in pregnancy something to worry about?",
+      "Is sciatica in pregnancy normal?",
+    ],
+    captureIntro: "The body's daily work in pregnancy goes mostly unseen. Worth noting how it really feels — including the aches.",
+    trimester: [2, 3],
+    relatedSlugs: ["pelvic-pain-in-pregnancy", "sleep-in-pregnancy", "moving-your-body-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["body", "symptoms"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "April 2026",
+    keyTakeaways: [
+      "Back pain affects up to two thirds of pregnant people — mostly mechanical, almost always manageable",
+      "A women's health physio is the most effective treatment — ask your midwife to refer early",
+      "Posture, side-sleeping, gentle movement, and careful lifting all genuinely help",
+      "Sudden regular lower-back pain — especially before 37 weeks — needs urgent assessment for possible premature labour",
+      "Back pain with fever or stinging on weeing may be a UTI and needs same-day GP review",
+    ],
+    sources: [
+      "NHS — Back pain in pregnancy",
+      "Pelvic Obstetric & Gynaecological Physiotherapy (POGP) — Back pain in pregnancy",
+      "NICE — Antenatal care",
+      "Royal College of Obstetricians and Gynaecologists — Common pregnancy concerns",
+    ],
+    faq: [
+      { question: "Is back pain in pregnancy normal?", answer: "Yes — it affects up to two thirds of pregnant people. Most of it is mechanical, caused by softer ligaments, a shifting centre of gravity, and a growing uterus. It's almost always manageable." },
+      { question: "Can I see a physio for back pain in pregnancy?", answer: "Yes — a women's health physiotherapist is the most effective treatment. Ask your midwife for a referral. The earlier, the better." },
+      { question: "Is sciatica in pregnancy serious?", answer: "Mild sciatica — shooting pain down the back of one leg — is fairly common and usually eases with physio input. Severe sciatica, weakness in the leg, or loss of bladder/bowel control needs urgent assessment." },
+      { question: "Are painkillers safe for back pain in pregnancy?", answer: "Paracetamol is generally safe at the lowest effective dose for the shortest time. Ibuprofen and other NSAIDs are usually avoided, especially after 30 weeks. Always check with your pharmacist or GP." },
+      { question: "When should I worry about back pain?", answer: "Sudden regular lower-back pain — especially before 37 weeks, or with tightening or pressure — needs urgent assessment. Back pain with fever, stinging on weeing, or feeling unwell may be a UTI and needs same-day review." },
+    ],
+    topic: "body",
+    standfirst: "Pregnancy back pain is common, mostly mechanical, and almost always manageable. A grounded look at what helps — and the few signs that need more than reassurance.",
+    editorialSections: [
+      {
+        id: "why",
+        heading: "Why back pain is so common in pregnancy",
+        paragraphs: [
+          "Pregnancy puts the back through a lot. The hormone relaxin softens ligaments throughout the body, including those around the pelvis and lower back. The bump shifts your centre of gravity forward, and most people compensate by leaning back slightly — which loads the lower spine. The abdominal muscles stretch and lose some of their ability to support you. Add in long days on your feet, sitting at desks, and lifting toddlers, and back pain is no surprise.",
+          "Up to two thirds of pregnant people get it. The good news is that most of it is mechanical, manageable, and treatable.",
+        ],
+      },
+      {
+        id: "what-helps",
+        heading: "What genuinely helps",
+        paragraphs: [
+          "Move regularly and gently. Sitting still and standing still both stiffen things up. Short, frequent walks and gentle stretches keep things moving. Watch your posture — sit with your feet flat and your lower back supported, and stand tall.",
+          "At night, sleep on your side with a pillow between your knees. This keeps the spine and pelvis aligned and is often the most comfortable position. A pregnancy pillow works for some; a couple of regular pillows works for others.",
+          "Lift carefully — or not at all. Bend at the knees rather than the waist, keep loads close to your body, and ask for help with anything heavy. Get older children to climb up to you rather than lifting them.",
+          "Warmth eases muscular back pain — a warm bath or warm pack often helps. (Avoid very hot baths in pregnancy.)",
+        ],
+        callout: { tone: "info", text: "Ask your midwife to refer you to a women's health physiotherapist. It's the single most effective treatment for pregnancy back pain — and the earlier the better." },
+      },
+      {
+        id: "warning-signs",
+        heading: "When back pain needs more than physio",
+        paragraphs: [
+          "Sudden, regular lower-back pain — especially before 37 weeks, or paired with tightening, pressure, or bleeding — needs urgent assessment for possible premature labour. Ring your maternity assessment unit straight away.",
+          "Back pain with fever, stinging on weeing, needing to wee often, or feeling unwell may be a urinary tract or kidney infection. Both are more common in pregnancy and need same-day GP or maternity review.",
+          "Severe sciatica — shooting pain down the leg with weakness, numbness, or loss of bladder or bowel control — needs urgent assessment. It's rare, but it matters.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

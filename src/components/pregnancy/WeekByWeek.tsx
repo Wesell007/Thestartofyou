@@ -38,23 +38,31 @@ const trimesterGroups = [
 
 const WeekByWeek = () => {
   return (
-    <section id="week-by-week" className="bg-parchment py-16 md:py-20">
+    <section id="week-by-week" className="bg-parchment py-16 md:py-24">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-        {/* Header — demoted */}
-        <div className="text-center mb-10 md:mb-12">
+        {/* Header */}
+        <div className="text-center mb-12 md:mb-14">
           <p
-            className="font-sans text-[11px] font-light tracking-[0.22em] uppercase mb-3"
+            className="font-sans text-[11px] font-light tracking-[0.24em] uppercase mb-3"
             style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
           >
             Your Trimester Pathway
           </p>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground mb-2 leading-tight">
-            Your week-by-week pregnancy map
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground mb-3 leading-tight">
+            Your week-by-week <span className="italic font-normal">pregnancy map</span>
           </h2>
           <p className="font-sans text-sm font-light text-muted-foreground max-w-md mx-auto leading-relaxed">
             Select any week to explore what's happening, what's normal, and
             what to focus on.
           </p>
+          <div
+            aria-hidden="true"
+            className="mx-auto mt-6 h-px w-16"
+            style={{
+              background:
+                'linear-gradient(90deg, transparent, hsl(var(--stage-pregnancy-accent) / 0.5), transparent)',
+            }}
+          />
         </div>
 
         {/* Trimester groups */}

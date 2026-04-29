@@ -14,7 +14,7 @@ const PregnancyHero = () => {
   };
 
   return (
-    <section className="relative bg-parchment overflow-hidden pt-6 pb-12 sm:pt-10 sm:pb-16 md:pt-16 md:pb-24">
+    <section className="relative bg-parchment overflow-hidden pt-[88px] pb-12 sm:pt-[104px] sm:pb-16 md:pt-[120px] md:pb-24 lg:pt-[140px]">
       {/* Soft top wash */}
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-40 md:h-64 -z-0"

@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { topicMapEntries } from "@/data/pregnancyTopicData";
 import type { PregnancyTopicSlug } from "@/data/pregnancyTopicData";
+import sprigImg from "@/assets/topic-mini-sprig.png";
 
 const topicIcons: Record<PregnancyTopicSlug, LucideIcon> = {
   body: Sparkles,

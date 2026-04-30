@@ -45,6 +45,8 @@ export interface EditorialSection {
   paragraphs?: string[];
   subsections?: EditorialSubsection[];
   callout?: { tone: "reassurance" | "info" | "gentle-warning"; text: string };
+  // Optional section image — used by the flagship template only.
+  image?: { src: string; alt: string };
 }
 
 export type ProductPromotionLevel = "strong" | "light" | "minimal" | "none";

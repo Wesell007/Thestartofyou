@@ -90,29 +90,29 @@ export const flagshipSectionImageMap: Record<string, { src: string; alt: string 
 
   // Heartburn
   "heartburn-in-pregnancy::why": {
-    src: cardBody,
-    alt: "A pregnant person resting a hand on the upper abdomen, where reflux tends to be felt.",
+    src: heartburnAnatomy,
+    alt: "A soft editorial anatomy illustration of the oesophagus, stomach valve, and growing uterus pressing upward — showing why reflux is so common in pregnancy.",
   },
   "heartburn-in-pregnancy::what-helps": {
-    src: cardComfort,
-    alt: "A bed propped with extra pillows — one of the most reliable everyday helps for heartburn.",
+    src: heartburnPillows,
+    alt: "A bed with pillows propped against the headboard and a glass of water on the bedside table — the upright resting setup that genuinely helps with reflux.",
   },
   "heartburn-in-pregnancy::when-to-raise-it": {
-    src: cardSafety,
-    alt: "A phone and notes by a bed at night — the moment a symptom tips from ordinary to worth raising.",
+    src: heartburnCall,
+    alt: "A pregnant person sitting upright on a sofa, on the phone to a midwife with one hand on the bump — the moment a symptom tips from ordinary to worth raising.",
   },
 
   // Anterior placenta
   "anterior-placenta::what-it-is": {
-    src: journalUltrasound,
-    alt: "An anomaly scan image where placental position is identified.",
+    src: anteriorPositions,
+    alt: "A soft editorial diagram showing four placenta positions — anterior, posterior, fundal and lateral — making clear that anterior simply means the placenta sits at the front of the uterus.",
   },
   "anterior-placenta::movement": {
-    src: secondMovement,
-    alt: "A pregnant person resting hands on their bump, paying attention to movement.",
+    src: anteriorMovement,
+    alt: "Both hands resting attentively on a pregnant bump in soft knitwear — quietly waiting to notice movement through an anterior placenta.",
   },
   "anterior-placenta::reduced-movements": {
-    src: cardSafety,
-    alt: "A maternity unit phone number on a fridge — the reminder to ring the same day if movements change.",
+    src: anteriorCall,
+    alt: "A hand holding a phone near the bump with pregnancy notes alongside — the rule about calling if movements change does not change with an anterior placenta.",
   },
 };

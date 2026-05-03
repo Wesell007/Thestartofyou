@@ -5,7 +5,6 @@
 // related to the article or section subject.
 
 import heroTestsScans from "@/assets/article-hero-tests-scans.jpg";
-import heroEating from "@/assets/article-hero-second-eating.jpg";
 import journalCoupleUltrasound from "@/assets/journal-couple-ultrasound.jpg";
 import journalUltrasound from "@/assets/journal-ultrasound.jpg";
 import cardTimelines from "@/assets/guidance-card-timelines.jpg";
@@ -14,10 +13,16 @@ import cardSymptoms from "@/assets/guidance-card-symptoms.jpg";
 import cardNourish from "@/assets/guidance-card-nourish.jpg";
 import cardMilestones from "@/assets/guidance-card-milestones.jpg";
 import cardQuiet from "@/assets/guidance-card-quiet.jpg";
-import cardBody from "@/assets/guidance-card-body.jpg";
-import cardComfort from "@/assets/guidance-card-comfort.jpg";
-import cardSafety from "@/assets/guidance-card-safety.jpg";
-import secondMovement from "@/assets/article-hero-second-movement.jpg";
+
+// Topic-specific flagship imagery (refined pass)
+import heartburnHero from "@/assets/flagship-heartburn-hero.jpg";
+import heartburnAnatomy from "@/assets/flagship-heartburn-anatomy.jpg";
+import heartburnPillows from "@/assets/flagship-heartburn-pillows.jpg";
+import heartburnCall from "@/assets/flagship-heartburn-call.jpg";
+import anteriorHero from "@/assets/flagship-anterior-hero.jpg";
+import anteriorPositions from "@/assets/flagship-anterior-positions.jpg";
+import anteriorMovement from "@/assets/flagship-anterior-movement.jpg";
+import anteriorCall from "@/assets/flagship-anterior-call.jpg";
 
 export const FLAGSHIP_SLUGS = [
   "tests-and-scans-in-pregnancy",

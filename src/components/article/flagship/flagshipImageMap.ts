@@ -44,12 +44,12 @@ export const flagshipHeroMap: Record<
     alt: "A pregnant person at an antenatal scan, the screen and gel just visible at the edge of the frame.",
   },
   "heartburn-in-pregnancy": {
-    src: heroEating,
-    alt: "A small, calm meal laid out on a kitchen counter — the kind of smaller, gentler eating that helps with reflux in pregnancy.",
+    src: heartburnHero,
+    alt: "A pregnant person at home in soft daylight, one hand resting on the upper chest near the sternum, the other supporting the bump — the felt experience of pregnancy reflux.",
   },
   "anterior-placenta": {
-    src: journalCoupleUltrasound,
-    alt: "A couple looking at an ultrasound image together, where placental position is first noted.",
+    src: anteriorHero,
+    alt: "A pregnant person in soft daylight, hands resting on the bump with an ultrasound printout lightly held — quiet attention to placental position.",
   },
 };
 

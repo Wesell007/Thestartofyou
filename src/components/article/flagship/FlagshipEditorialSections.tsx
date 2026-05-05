@@ -1,6 +1,6 @@
 import { Info, Heart, AlertTriangle } from "lucide-react";
 import type { EditorialSection } from "@/data/articleData";
-import { flagshipSectionImageMap } from "./flagshipImageMap";
+import { resolveSectionImage } from "./flagshipImageMap";
 
 interface Props {
   slug: string;
@@ -32,7 +32,7 @@ const FlagshipEditorialSections = ({ slug, sections }: Props) => {
   return (
     <div>
       {sections.map((section, idx) => {
-        const image = flagshipSectionImageMap[`${slug}::${section.id}`];
+        const image = resolveSectionImage(slug, section.id, section.heading);
         const isAlt = idx % 2 === 1;
         const bg = isAlt ? "bg-parchment-dark" : "bg-parchment";
 

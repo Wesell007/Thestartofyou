@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Shield, Clock } from "lucide-react";
 import type { ArticleData } from "@/data/articleData";
-import { flagshipHeroMap, type FlagshipSlug } from "./flagshipImageMap";
+import { flagshipHeroMap } from "./flagshipImageMap";
 
 const TOPIC_LABELS: Record<string, string> = {
   body: "Your body",
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const FlagshipHero = ({ data }: Props) => {
-  const hero = flagshipHeroMap[data.slug as FlagshipSlug];
+  const hero = flagshipHeroMap[data.slug];
   const topicLabel = data.topic ? TOPIC_LABELS[data.topic] : null;
   const topicHref = data.topic ? `/pregnancy/${data.topic}` : null;
 

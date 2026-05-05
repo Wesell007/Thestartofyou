@@ -3,9 +3,8 @@ import { getArticle } from "@/data/articleData";
 import ArticleDeepTemplate from "@/components/article/ArticleDeepTemplate";
 import ArticleLegacyPage from "@/pages/ArticleLegacyPage";
 import ArticleFlagshipTemplate from "@/components/article/flagship/ArticleFlagshipTemplate";
-import { isFlagshipSlug } from "@/components/article/flagship/flagshipImageMap";
 
-// Articles that have NOT yet been authored against the unified deep template.
+// Articles forced to legacy render path (none currently).
 const LEGACY_FORCED_SLUGS = new Set<string>([]);
 
 const ArticlePage = () => {
@@ -16,8 +15,17 @@ const ArticlePage = () => {
     return <Navigate to="/explore" replace />;
   }
 
-  // 1. Locked flagship reference set — only these 3 slugs use the new template.
-  if (isFlagshipSlug(data.slug)) {
+  // Flagship template is now the default for any article with the minimum
+  // shape it expects. The 3 anchor articles render byte-identically; the rest
+  // of the eligible library inherits the same layout, image rules and rhythm.
+  const hasFlagshipShape =
+    !!data.quickAnswer &&
+    !!data.editorialSections &&
+    data.editorialSections.length > 0 &&
+    !!data.keyTakeaways &&
+    data.keyTakeaways.length > 0;
+
+  if (hasFlagshipShape && !LEGACY_FORCED_SLUGS.has(data.slug)) {
     return <ArticleFlagshipTemplate data={data} />;
   }
 

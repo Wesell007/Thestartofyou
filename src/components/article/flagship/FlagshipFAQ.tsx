@@ -42,10 +42,10 @@ const FlagshipFAQ = ({ data }: Props) => {
   return (
     <section id="faq" className="bg-parchment-dark py-16 sm:py-20 md:py-24">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
           {/* HEADING */}
-          <div className="md:col-span-4">
-            <div className="md:sticky md:top-28">
+          <div className="lg:col-span-4">
+            <div className="lg:sticky lg:top-28">
               <div className="flex items-center gap-3 mb-3">
                 <div className="h-px w-8 bg-sage-light" />
                 <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage-muted">
@@ -62,7 +62,7 @@ const FlagshipFAQ = ({ data }: Props) => {
           </div>
 
           {/* ACCORDION */}
-          <div className="md:col-span-8">
+          <div className="lg:col-span-8">
             <Accordion type="single" collapsible className="w-full">
               {data.faq!.map((item, i) => (
                 <AccordionItem

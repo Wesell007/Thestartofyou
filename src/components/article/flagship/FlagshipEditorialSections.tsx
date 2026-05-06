@@ -29,10 +29,15 @@ const calloutStyles = {
 };
 
 const FlagshipEditorialSections = ({ slug, sections }: Props) => {
+  // Seed with the hero src so no section can duplicate the hero image.
+  const usedSrcs = new Set<string>();
+  const hero = flagshipHeroMap[slug];
+  if (hero) usedSrcs.add(hero.src);
+
   return (
     <div>
       {sections.map((section, idx) => {
-        const image = resolveSectionImage(slug, section.id, section.heading);
+        const image = resolveSectionImage(slug, section.id, section.heading, usedSrcs);
         const isAlt = idx % 2 === 1;
         const bg = isAlt ? "bg-parchment-dark" : "bg-parchment";
 

@@ -47,10 +47,10 @@ const FlagshipEditorialSections = ({ slug, sections }: Props) => {
             id={section.id}
             className={`${bg} py-16 sm:py-20 md:py-28 relative overflow-hidden`}
           >
-            {/* Large faded numeral */}
+            {/* Large faded numeral — desktop only, won't overlap content on tablet/mobile */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute top-6 right-4 sm:top-8 sm:right-8 md:top-10 md:right-12 font-serif text-sage/[0.07] leading-none select-none text-[6rem] sm:text-[9rem] md:text-[12rem]"
+              className="hidden lg:block pointer-events-none absolute top-10 right-12 font-serif text-sage/[0.07] leading-none select-none text-[12rem]"
             >
               {String(idx + 1).padStart(2, "0")}
             </div>
@@ -58,17 +58,17 @@ const FlagshipEditorialSections = ({ slug, sections }: Props) => {
             <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative">
               <div
                 className={`grid grid-cols-1 ${
-                  image ? "md:grid-cols-12" : ""
-                } gap-8 md:gap-12 lg:gap-16 items-start`}
+                  image ? "lg:grid-cols-12" : ""
+                } gap-8 md:gap-10 lg:gap-16 items-start`}
               >
-                {/* Image (alternating side on desktop) */}
+                {/* Image (alternating side on desktop only — stacked on mobile + tablet) */}
                 {image && (
                   <div
-                    className={`md:col-span-5 ${
-                      isAlt ? "md:order-2" : "md:order-1"
+                    className={`lg:col-span-5 ${
+                      isAlt ? "lg:order-2" : "lg:order-1"
                     }`}
                   >
-                    <div className="relative rounded-2xl overflow-hidden shadow-card-brand aspect-[4/5] md:sticky md:top-28">
+                    <div className="relative rounded-2xl overflow-hidden shadow-card-brand aspect-[4/3] lg:aspect-[4/5] lg:sticky lg:top-28">
                       <img
                         src={image.src}
                         alt={image.alt}
@@ -82,7 +82,7 @@ const FlagshipEditorialSections = ({ slug, sections }: Props) => {
                 {/* Text */}
                 <div
                   className={`${
-                    image ? `md:col-span-7 ${isAlt ? "md:order-1" : "md:order-2"}` : ""
+                    image ? `lg:col-span-7 ${isAlt ? "lg:order-1" : "lg:order-2"}` : ""
                   } max-w-2xl`}
                 >
                   <div className="flex items-center gap-3 mb-4">

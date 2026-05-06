@@ -1,6 +1,6 @@
 import { Info, Heart, AlertTriangle } from "lucide-react";
 import type { EditorialSection } from "@/data/articleData";
-import { resolveSectionImage } from "./flagshipImageMap";
+import { resolveSectionImage, flagshipHeroMap } from "./flagshipImageMap";
 
 interface Props {
   slug: string;

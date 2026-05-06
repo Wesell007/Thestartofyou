@@ -151,6 +151,16 @@ export const flagshipHeroMap: Record<string, Img> = {
   "braxton-hicks-contractions": { src: heroThirdSignsOfLabour, alt: "A pregnant person resting a hand on the bump as it tightens — practice contractions." },
   "preparing-emotionally-for-birth": { src: heroThirdEmotional, alt: "A quiet, reflective moment in late pregnancy — the emotional run-up to birth." },
 
+  // Phase H — late-pregnancy practical decisions
+  "membrane-sweep": { src: heroThirdSignsOfLabour, alt: "A pregnant person at a late-pregnancy appointment, the moment a sweep is being discussed." },
+  "induction-of-labour": { src: cardPractical, alt: "A maternity ward bay set up for induction — drip stand, monitor, and a packed bag." },
+  "external-cephalic-version": { src: heroSecondAnatomyScan, alt: "A late-pregnancy scan showing a baby in breech position, the context for an ECV conversation." },
+  "group-b-strep-in-pregnancy": { src: cardSafety, alt: "A maternity notes folder open at a late-pregnancy appointment, the context for a GBS conversation." },
+  "hand-expressing-colostrum": { src: cardNourish, alt: "A small syringe and a warm flannel on a kitchen surface — the simple set-up for antenatal hand expressing." },
+  "the-36-week-appointment": { src: cardPractical, alt: "A midwife taking blood pressure at a 36-week antenatal appointment." },
+  "birth-preferences": { src: cardPlanning, alt: "A short, written birth preferences document on a kitchen table alongside maternity notes." },
+  "what-happens-if-labour-doesnt-start": { src: heroThirdEmotional, alt: "A pregnant person resting at home past their due date — the quiet emotional weight of waiting." },
+
   // Emotional wellbeing
   "anxiety-in-pregnancy": { src: heroSecondAnxiety, alt: "A pregnant person sitting quietly by a window — the inward weight of pregnancy anxiety." },
   "the-first-trimester-emotionally": { src: heroEmotionalFirstTri, alt: "A pregnant person in soft early-pregnancy light, processing the first weeks." },

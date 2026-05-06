@@ -8777,6 +8777,1271 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── MEMBRANE SWEEP ───────────────────────────────────────────────────────
+  {
+    slug: "membrane-sweep",
+    title: "Membrane sweep: what it is, what it feels like, and how to think about it",
+    metaDescription: "What a membrane sweep actually is, when it's offered, what it feels like, what may happen afterwards, and how to think about accepting or declining one.",
+    quickAnswer:
+      "A membrane sweep is a vaginal examination in which the midwife or doctor runs a finger around the inside of the cervix to gently separate the membranes from the lower uterus. It's usually offered from around 40 weeks to encourage labour to start naturally and reduce the chance of a formal induction. It can be uncomfortable. It may bring on contractions within a day or two — or do nothing at all. It's an offer, not a requirement, and it's reasonable to accept, decline, or ask to wait.",
+    howThisFeels: [
+      "Being offered one and not having time to think it through",
+      "Wondering whether it really 'works'",
+      "Anxious about the examination itself",
+      "Caught between wanting to avoid induction and wanting to be left alone",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Why it's offered", body: "From around 40 weeks, sweeps are offered to nudge the body toward spontaneous labour and lower the chance of needing a formal induction." },
+        { heading: "What's actually done", body: "The midwife or doctor inserts a finger through the cervix and gently sweeps it around the inner edge to loosen the membranes from the lower uterus. It only works if the cervix is open enough to reach." },
+      ],
+      lessCauses: [
+        { heading: "Repeat sweeps", body: "If a first sweep doesn't bring on labour, you may be offered another a few days later. Some people have two or three before induction is discussed." },
+      ],
+      whyItVaries: "How effective a sweep is depends partly on how 'ready' the cervix already is. A sweep at 41 weeks with a soft, slightly open cervix is more likely to do something than one at 39 weeks with a closed one.",
+    },
+    timing: {
+      whenStarts: "Usually offered from 40 weeks onward in a first pregnancy, sometimes from 41 weeks in a second or later pregnancy. Local practice varies.",
+      whenEases: "If a sweep is going to bring on labour, it usually does so within 48 hours.",
+    },
+    whatItFeelsLike: [
+      "Pressure and a stretching sensation during the examination",
+      "Period-like cramping for a few hours afterwards",
+      "Light spotting that settles within a day",
+      "Sometimes nothing at all in the days that follow",
+    ],
+    whatThisMeans:
+      "A sweep is a small, time-limited intervention. It can help labour begin if the body is already close — and it can pass without effect if it isn't. Either way it doesn't change anything about the safety of the pregnancy.",
+    normal: [
+      "Cramping, mild backache, or a few mild contractions afterwards",
+      "Light pink or brown spotting for a day",
+      "No change at all in the days that follow",
+      "A second sweep being offered if the first didn't lead to labour",
+    ],
+    seekSupport: [
+      "Heavy bright-red bleeding — call your maternity unit straight away",
+      "Waters breaking after a sweep — call even if contractions haven't started",
+      "Contractions that become strong and regular — follow your unit's guidance on when to come in",
+      "Any change or reduction in your baby's movements at any point",
+    ],
+    disclaimer: "A membrane sweep is an offer. You can accept, decline, or ask to wait — none of those choices is wrong. Your maternity team will guide you through what's recommended in your specific circumstances.",
+    whatYouCanDo: [
+      { action: "Ask what to expect afterwards", reason: "Knowing that cramping and spotting are normal — and what isn't — makes the next 24 hours less worrying." },
+      { action: "Take the offer at your own pace", reason: "It's reasonable to say 'not today' and revisit at the next appointment. A sweep doesn't have to happen the moment it's offered." },
+      { action: "Plan a quiet rest of day", reason: "Most people feel a bit tender afterwards. A calm evening is kinder than a busy one." },
+      { action: "Trust your bleeding rule", reason: "A little spotting is expected. Anything more than that — or any change in movement — is a reason to call." },
+    ],
+    whatHappensNext: "If labour starts within a couple of days, that may have been the nudge that helped. If not, you'll usually be offered another sweep, or a conversation about formal induction as you move toward 41 to 42 weeks.",
+    relatedStage: {
+      intro: "Membrane sweeps sit inside the wider conversation about labour starting and induction:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Induction of labour", href: "/articles/induction-of-labour", context: "What's offered if labour still hasn't started." },
+        { label: "What happens if labour doesn't start", href: "/articles/what-happens-if-labour-doesnt-start", context: "The decisions that come up around 40 to 42 weeks." },
+        { label: "Signs of labour", href: "/articles/signs-of-labour", context: "What to watch for in the hours after a sweep." },
+      ],
+    },
+    aiPrompts: [
+      "Should I have a membrane sweep?",
+      "Do membrane sweeps actually work?",
+      "Is it normal to bleed after a sweep?",
+    ],
+    captureIntro: "A sweep is a small moment that can quietly tip the next 48 hours one way or another. Worth noting how it felt and what followed.",
+    trimester: [3],
+    relatedSlugs: ["induction-of-labour", "what-happens-if-labour-doesnt-start", "signs-of-labour", "writing-a-birth-plan"],
+    journey: ["pregnancy"],
+    topics: ["body", "labour"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "A membrane sweep is a vaginal examination intended to nudge labour into starting",
+      "Usually offered from around 40 weeks to reduce the chance of formal induction",
+      "It can be uncomfortable, and mild cramping or light spotting afterwards is normal",
+      "It only works if the cervix is already starting to soften and open",
+      "It's an offer, not a requirement — accepting, declining, or waiting are all reasonable",
+    ],
+    sources: [
+      "NICE — Inducing labour",
+      "NHS — Inducing labour",
+      "Royal College of Obstetricians and Gynaecologists — Induction of labour at term",
+      "Tommy's — Membrane sweep",
+    ],
+    faq: [
+      { question: "Does a membrane sweep actually work?", answer: "Sometimes. It's most effective when the cervix is already starting to soften and open. For some people it brings on labour within 48 hours; for others it does nothing. Both are normal outcomes." },
+      { question: "Does a membrane sweep hurt?", answer: "Most people find it uncomfortable rather than painful — pressure, a stretching feeling, and sometimes a sharper sensation as the membranes are loosened. Cramping for a few hours afterwards is common." },
+      { question: "Is bleeding after a sweep normal?", answer: "Light pink or brown spotting for a day is normal. Heavier bright-red bleeding is not — call your maternity unit straight away if that happens." },
+      { question: "Can I say no to a sweep?", answer: "Yes. A sweep is an offer, not a requirement. You can decline, ask to wait, or accept at a later appointment. Your team will respect that choice." },
+      { question: "How many sweeps can I have?", answer: "There isn't a fixed number, but in practice many people are offered two or three before a formal induction is discussed. Your midwife will guide you through what's offered locally." },
+    ],
+    topic: "body",
+    standfirst: "A small, time-limited intervention that's often offered before induction. Worth understanding before you're in the room being asked.",
+    editorialSections: [
+      {
+        id: "what-it-is",
+        heading: "What a membrane sweep actually is",
+        lead: "A simple examination, not a procedure with equipment.",
+        paragraphs: [
+          "A membrane sweep is done during an ordinary vaginal examination. The midwife or doctor inserts a gloved finger through the cervix and gently sweeps it around the inner edge to loosen the membranes — the bag of fluid your baby is in — from the lower part of the uterus.",
+          "That separation releases hormones that can encourage the cervix to soften and labour to begin. It only works if the cervix is open enough to reach a finger through. If it isn't, the offer may become 'I tried, but the cervix wasn't quite ready' — which isn't a failure, just information.",
+        ],
+      },
+      {
+        id: "why-its-offered",
+        heading: "Why it's offered",
+        lead: "It's part of the broader plan to avoid going significantly past your due date.",
+        paragraphs: [
+          "Most maternity units offer sweeps from around 40 weeks in a first pregnancy, and sometimes from 41 weeks in a second or later one. The aim is to encourage spontaneous labour and lower the chance of needing a formal induction with hormones or a drip.",
+          "It's a low-tech, low-cost nudge. It doesn't always work — but for some people it makes a real difference in the timeline.",
+        ],
+      },
+      {
+        id: "what-it-feels-like",
+        heading: "What it tends to feel like",
+        lead: "Most people describe pressure and a stretching sensation rather than sharp pain.",
+        paragraphs: [
+          "There's a strong feeling of pressure during the sweep itself, sometimes a sharper sensation as the membranes are loosened, and often mild period-like cramping for a few hours afterwards. Light pink or brown spotting is common for a day or so.",
+          "A few people find the examination quite uncomfortable. It's reasonable to ask the midwife to pause, slow down, or stop if you need to. Telling them where you are on a sensation scale is part of the exchange.",
+        ],
+        callout: { tone: "info", text: "If you find vaginal examinations difficult — for any reason — say so before the sweep begins. Your team can adjust their approach." },
+      },
+      {
+        id: "what-happens-after",
+        heading: "What may happen in the next 48 hours",
+        lead: "If a sweep is going to bring on labour, it usually does so within two days.",
+        paragraphs: [
+          "Some people notice cramping that builds into mild contractions over the rest of the day. Others have a quiet evening and go into labour 24 to 36 hours later. Many people have nothing at all and continue waiting.",
+          "Light spotting and a few hours of period-like cramps are expected. Heavy bright-red bleeding, waters breaking, contractions becoming strong and regular, or any change in your baby's movements all mean a call to your maternity unit.",
+        ],
+      },
+      {
+        id: "what-it-cant-do",
+        heading: "What a sweep can't do",
+        lead: "It's a nudge, not a guarantee.",
+        paragraphs: [
+          "A sweep can't bring on labour if the cervix isn't already softening. It can't replace formal induction if your team has decided that's what's medically needed. And it doesn't change the safety of waiting — for most people, going a few days past their due date with normal monitoring is well within the bounds of normal pregnancy.",
+          "If a first sweep doesn't lead to labour, that doesn't mean something is wrong. Many sweeps simply pass without effect.",
+        ],
+      },
+      {
+        id: "thinking-about-it",
+        heading: "How to think about accepting or declining one",
+        lead: "It's an offer. You're allowed to think about it.",
+        paragraphs: [
+          "Some people are keen to try anything that might shorten the wait or reduce the chance of induction. Others would rather wait and see what their body does on its own. Both positions are reasonable, and the right answer is the one that matches what feels manageable to you.",
+          "If you're unsure, it's perfectly fine to say 'not today, let's revisit at the next appointment'. A sweep doesn't have to happen the moment it's offered, and saying no once doesn't mean you can't say yes later.",
+        ],
+        callout: { tone: "reassurance", text: "There is no wrong answer here. Accepting, declining, or waiting are all reasonable choices, and your team will continue to look after you whichever you make." },
+      },
+    ],
+  },
+
+  // ─── INDUCTION OF LABOUR ──────────────────────────────────────────────────
+  {
+    slug: "induction-of-labour",
+    title: "Induction of labour: what it is, when it's offered, and how to think about it",
+    metaDescription: "Induction of labour explained — why it may be offered, the main methods, how long it can take, what the trade-offs are, and how to make the decision feel calmer.",
+    quickAnswer:
+      "Induction of labour means starting labour with medical help rather than waiting for it to begin on its own. It's most often offered if pregnancy goes past 41 to 42 weeks, if waters have broken without labour starting, or if there's a medical reason to bring birth forward. Methods include a pessary or gel to soften the cervix, a small balloon, breaking the waters, and a hormone drip. Induction can take a long time and often feels more clinical than spontaneous labour. It's usually a recommendation, not a directive, and it's reasonable to ask questions, weigh trade-offs, and take time to decide.",
+    howThisFeels: [
+      "Worried that being induced means losing the labour you'd hoped for",
+      "Pressed for time when the offer comes up",
+      "Caught between wanting to wait and wanting things to happen",
+      "Trying to make a calm decision while exhausted at 40-plus weeks",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Going past your due date", body: "Most units offer induction between 41 and 42 weeks, when the chance of complications begins to rise gently with each additional day." },
+        { heading: "Waters broken without labour", body: "If waters have broken but contractions haven't started within a window your team will specify, induction is usually offered to reduce infection risk." },
+        { heading: "A medical reason", body: "Conditions such as gestational diabetes, raised blood pressure, growth concerns, or specific obstetric findings can mean an earlier induction is recommended." },
+      ],
+      lessCauses: [
+        { heading: "Maternal request", body: "In some places, induction may be offered or considered for non-medical reasons — for example, after a previous difficult late pregnancy. This will be a careful conversation with your team." },
+      ],
+      whyItVaries: "How long induction takes — and how it feels — depends on how ready the cervix already is. A 'favourable' cervix may need only a small nudge. An unfavourable one may need several rounds of softening before labour establishes.",
+    },
+    timing: {
+      whenStarts: "Usually offered between 41 and 42 weeks in an otherwise straightforward pregnancy, or earlier if there's a specific medical reason.",
+      whenEases: "Once the body responds to induction, labour follows the same broad shape as spontaneous labour, though often more closely monitored.",
+    },
+    whatItFeelsLike: [
+      "A long, slow start that can take a day or more before contractions establish",
+      "Stronger, more closely-spaced contractions once a hormone drip is started",
+      "More monitoring, examinations, and clinical interruption than a spontaneous labour",
+      "Long stretches of waiting, then quick changes in pace",
+    ],
+    whatThisMeans:
+      "Induction is a tool. It's not a failure of pregnancy or of your body, and it doesn't mean labour itself will be more difficult — though it often feels different from spontaneous labour. Knowing the shape of it tends to make the decision and the experience less overwhelming.",
+    normal: [
+      "Induction taking 24 hours or longer from first pessary to active labour",
+      "Several methods being used in sequence — pessary, balloon, breaking the waters, drip",
+      "Strong, closely-spaced contractions once the hormone drip starts",
+      "More frequent monitoring than in a spontaneous labour",
+    ],
+    seekSupport: [
+      "Any concerns about your baby's movements during induction — say so straight away",
+      "Pain that feels unmanageable — pain relief is available at every stage",
+      "A feeling of being rushed into a decision — it's reasonable to ask for more time",
+      "Heavy bleeding or anything that feels suddenly different",
+    ],
+    disclaimer: "Induction is usually a recommendation rather than a directive. It's appropriate to ask why it's being offered, what the alternatives are, and what would happen if you waited. Your team will support you to make an informed choice.",
+    whatYouCanDo: [
+      { action: "Ask what stage of induction you're at", reason: "Knowing whether you're being softened, broken, or drip-induced helps you understand what the next few hours look like." },
+      { action: "Bring more than you think you'll need", reason: "Inductions often take longer than expected. Snacks, phone chargers, books, and comfortable clothes make the wait kinder." },
+      { action: "Use pain relief sooner rather than later", reason: "Drip-induced contractions can be more intense than spontaneous ones. There's no prize for waiting to ask for help." },
+      { action: "Have a birth partner who knows your preferences", reason: "Induction days can be slow then sudden. A second voice in the room helps when decisions come up." },
+    ],
+    whatHappensNext: "Once active labour establishes during induction, the rest of labour follows the same broad shape as a spontaneous one — established labour, transition, and the birth of your baby and the placenta.",
+    relatedStage: {
+      intro: "Induction sits inside the wider conversation about late pregnancy and labour:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Membrane sweep", href: "/articles/membrane-sweep", context: "The lower-key option often offered first." },
+        { label: "What happens if labour doesn't start", href: "/articles/what-happens-if-labour-doesnt-start", context: "The full picture of late-pregnancy decisions." },
+        { label: "Stages of labour", href: "/articles/stages-of-labour", context: "What happens once contractions establish." },
+      ],
+    },
+    aiPrompts: [
+      "Why is induction being offered?",
+      "How long does induction usually take?",
+      "Can I say no to induction?",
+    ],
+    captureIntro: "Induction days are long and often blur together afterwards. Worth keeping a quiet note of how the decision felt and how the day actually went.",
+    trimester: [3],
+    relatedSlugs: ["membrane-sweep", "what-happens-if-labour-doesnt-start", "stages-of-labour", "writing-a-birth-plan"],
+    journey: ["pregnancy"],
+    topics: ["body", "labour"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Induction means starting labour with medical help rather than waiting for it to begin",
+      "It's most often offered between 41 and 42 weeks, or for a specific medical reason",
+      "Methods include cervical softening, breaking the waters, and a hormone drip",
+      "It can take 24 hours or longer to establish — bring more than you think you'll need",
+      "Induction is a recommendation, not a directive — questions and time to decide are reasonable",
+    ],
+    sources: [
+      "NICE — Inducing labour",
+      "NHS — Inducing labour",
+      "Royal College of Obstetricians and Gynaecologists — Induction of labour at term",
+      "Tommy's — Induction of labour",
+    ],
+    faq: [
+      { question: "Why is induction usually offered after 41 weeks?", answer: "Beyond 41 to 42 weeks, the chance of complications begins to rise gently — including stillbirth, though it stays low in absolute terms. Induction is offered to reduce that risk while still respecting your choice." },
+      { question: "How long does induction take?", answer: "It varies. Some people respond to a single pessary within hours. Others need 24 hours or more, sometimes spread across more than one day, before active labour establishes. Bring patience and supplies." },
+      { question: "Is induced labour more painful?", answer: "Drip-induced contractions can feel stronger and more closely spaced than spontaneous ones, partly because they ramp up faster. All the same pain relief options are available, and many people use them earlier in an induced labour." },
+      { question: "Can I say no to induction?", answer: "Yes. Induction is a recommendation, not a directive. Your team will explain why it's being offered, what the alternatives are — usually closer monitoring — and what the trade-offs look like, and support you in your decision." },
+      { question: "Does induction always lead to a c-section?", answer: "No. Most induced labours end in a vaginal birth. The chance of needing assistance — forceps, ventouse, or a c-section — is slightly higher than in spontaneous labour, but most inductions still don't need it." },
+    ],
+    topic: "body",
+    standfirst: "Induction is one of the most weighed-up decisions of late pregnancy. A calm look at why it's offered, what it involves, and how to think it through.",
+    editorialSections: [
+      {
+        id: "what-it-is",
+        heading: "What induction actually means",
+        lead: "Starting labour with medical help instead of waiting for it to begin.",
+        paragraphs: [
+          "Induction of labour is a series of steps — usually used in order — to encourage the cervix to open and contractions to start. It can range from a small softening pessary that does most of the work on its own, to a hormone drip that drives contractions when the body hasn't started.",
+          "It's not a single intervention so much as a sequence. Some inductions are over within hours; others stretch across more than a day, with periods of quiet between active steps.",
+        ],
+      },
+      {
+        id: "when-its-offered",
+        heading: "When it tends to be offered",
+        lead: "Most often around 41 to 42 weeks, or for a specific reason earlier.",
+        paragraphs: [
+          "The most common reason is going past 41 weeks. After that point, the chance of complications begins to rise gently with each additional day, and induction is offered to reduce that risk.",
+          "Other reasons include waters breaking without labour starting, gestational diabetes, raised blood pressure, growth concerns, or specific obstetric findings. In each case, your team will explain why induction is being recommended in your particular situation.",
+        ],
+      },
+      {
+        id: "the-main-methods",
+        heading: "The main methods",
+        lead: "Usually used in sequence, starting with the gentlest.",
+        subsections: [
+          { subheading: "Pessary or gel", paragraphs: ["A pessary or gel containing prostaglandin is placed near the cervix to encourage it to soften and open. This is often the first step. It can take several hours to work and is sometimes enough on its own."] },
+          { subheading: "Cervical balloon", paragraphs: ["A small balloon is inserted into the cervix and gently inflated. Its presence encourages the cervix to open. This is offered in some units as an alternative or addition to a pessary."] },
+          { subheading: "Breaking the waters", paragraphs: ["Once the cervix has opened a little, the midwife or doctor can break the waters with a small instrument. This is usually quick, and often brings on stronger contractions."] },
+          { subheading: "Hormone drip", paragraphs: ["A drip of synthetic oxytocin is started in the arm to drive contractions. The dose is increased slowly until contractions are strong and regular. This is usually the most intense part of induction."] },
+        ],
+      },
+      {
+        id: "how-long-it-takes",
+        heading: "How long it can take",
+        lead: "Often longer than people expect.",
+        paragraphs: [
+          "From the first pessary to a baby being born, induction frequently takes 24 hours or more. Some inductions span two or three days when the cervix needs more time to soften. There are usually long periods of waiting, then sudden changes in pace once labour establishes.",
+          "Knowing this in advance changes how the day feels. Bring snacks, chargers, comfortable clothes, things to read or watch, and someone to keep you company.",
+        ],
+        callout: { tone: "info", text: "Most inductions involve more waiting than people expect. Pack for a longer stay than you'd plan for a spontaneous labour." },
+      },
+      {
+        id: "what-people-dont-realise",
+        heading: "What people often don't realise in advance",
+        lead: "The shape of an induction is different from a spontaneous labour, even when the outcome is the same.",
+        paragraphs: [
+          "Induction tends to involve more monitoring, more examinations, and more time on a hospital ward before active labour begins. Drip-induced contractions can feel stronger and more closely spaced than spontaneous ones because the dose ramps up faster than the body would alone.",
+          "Knowing this isn't a reason to avoid induction — it's a reason to plan for it. Many people use pain relief earlier in an induced labour, and that's a sensible response to the shape of the experience, not a sign of struggling.",
+        ],
+      },
+      {
+        id: "trade-offs",
+        heading: "The trade-offs",
+        lead: "Induction reduces some risks and changes the shape of others.",
+        paragraphs: [
+          "On one side: induction reduces the small but real rise in stillbirth risk that comes with going significantly past 42 weeks, and shortens the wait when there's a medical reason to bring birth forward.",
+          "On the other: it usually means a longer time in hospital before active labour, more monitoring, more intense contractions if a drip is needed, and a slightly higher chance of needing assistance with the birth. Most induced labours still end in a vaginal birth, and most are safe and well-supported.",
+        ],
+      },
+      {
+        id: "deciding-calmly",
+        heading: "How to think about the decision calmly",
+        lead: "An informed choice usually feels better than a rushed one.",
+        paragraphs: [
+          "If you're being offered induction, it's reasonable to ask why it's being recommended now, what the alternative would look like (usually closer monitoring), and what would happen if you wanted a few more days. Your team will expect those questions.",
+          "If the recommendation feels strong — for example because of a clear medical reason — it's still a recommendation. Saying 'I'd like to think about it overnight' is a valid response in most situations.",
+        ],
+        callout: { tone: "reassurance", text: "Whether you accept induction immediately, ask for more time, or decline and choose monitoring instead, your team will continue to look after you. There isn't a wrong door." },
+      },
+    ],
+  },
+
+  // ─── EXTERNAL CEPHALIC VERSION (ECV) ──────────────────────────────────────
+  {
+    slug: "external-cephalic-version",
+    title: "External cephalic version (ECV): what it is, what happens, and how it feels",
+    metaDescription: "ECV explained — what it is, when it's offered for a breech baby, what happens during the procedure, success rates in plain English, how it feels, and what happens next.",
+    quickAnswer:
+      "An external cephalic version, or ECV, is a procedure in which a doctor places their hands on your bump and gently encourages a breech baby to turn head-down. It's usually offered around 36 to 37 weeks if your baby is still bottom-down. ECV works for around half of attempts, though success varies. It can be uncomfortable but isn't usually painful, and it's done in a unit with full monitoring and the option of a quick caesarean if needed. It's a choice — declining is reasonable, and your team will support you in either decision.",
+    howThisFeels: [
+      "Anxious about the procedure itself",
+      "Worried about whether it will hurt the baby",
+      "Trying to weigh ECV against a planned c-section",
+      "Wanting more information than the appointment had time for",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Why it's offered", body: "If a baby is still breech at 36 to 37 weeks, an ECV gives a chance of turning them head-down so that a vaginal birth becomes possible." },
+        { heading: "How it's done", body: "A doctor places firm but careful hands on your bump and uses pressure to guide the baby through a forward roll into a head-down position. Monitoring runs throughout." },
+      ],
+      lessCauses: [
+        { heading: "Repeat ECV", body: "If a first attempt is unsuccessful, a second is sometimes offered. Whether it's right depends on your individual situation." },
+      ],
+      whyItVaries: "Success depends on factors including amniotic fluid volume, the position of the placenta, the size of the baby, and how relaxed your abdominal muscles are. There's no way to know for certain in advance whether it will work.",
+    },
+    timing: {
+      whenStarts: "Usually offered from around 36 weeks in a first pregnancy, sometimes 37 weeks in a second or later pregnancy. The timing balances giving the baby a chance to turn on their own with leaving enough time for ECV to work.",
+      whenEases: "If ECV is successful, most babies stay head-down. The procedure itself takes only a few minutes, with monitoring before and after.",
+    },
+    whatItFeelsLike: [
+      "Strong pressure on the bump during the procedure",
+      "Discomfort that some people describe as intense, briefly",
+      "A sense of the baby moving, then settling",
+      "Tenderness on the bump for a day afterwards",
+    ],
+    whatThisMeans:
+      "ECV is a careful, well-monitored attempt to give you the option of a vaginal birth. It's done in a setting where any complication can be responded to quickly. Choosing it, declining it, or trying it once and stopping are all reasonable paths.",
+    normal: [
+      "Strong pressure during the procedure",
+      "A baby that turns easily, or one that doesn't",
+      "Tenderness on the bump for 24 hours afterwards",
+      "Light spotting that settles",
+    ],
+    seekSupport: [
+      "Any change in your baby's movements after the procedure — call the same day",
+      "Heavier bleeding, contractions, or waters breaking after the procedure",
+      "Any feeling that something isn't right",
+    ],
+    disclaimer: "ECV is offered as a choice. It's done in a hospital setting with monitoring and the option of a quick caesarean if needed, but it's not without small risks. Your team will explain those clearly so you can decide.",
+    whatYouCanDo: [
+      { action: "Ask why ECV is being offered now", reason: "Understanding the timing and the team's reasoning helps the decision feel less like a default and more like an informed choice." },
+      { action: "Bring a birth partner", reason: "Having someone with you for the appointment helps with information and support." },
+      { action: "Use slow breathing during the procedure", reason: "Relaxed abdominal muscles make the procedure easier and less uncomfortable. Slow, low breathing helps." },
+      { action: "Plan a quiet rest of day", reason: "Most people feel tender and tired for a few hours afterwards." },
+    ],
+    whatHappensNext: "If ECV is successful, you continue toward a vaginal birth as normal. If it isn't, the conversation moves to options — usually a planned caesarean, sometimes a vaginal breech birth where local services support it.",
+    relatedStage: {
+      intro: "ECV sits inside the wider conversation about breech presentation and birth planning:",
+      links: [
+        { label: "Your baby in pregnancy", href: "/pregnancy/baby", context: "The wider topic this article belongs to." },
+        { label: "Breech baby", href: "/articles/breech-baby", context: "What it means for a baby to be breech and what choices come up." },
+        { label: "Birth preferences", href: "/articles/birth-preferences", context: "How to think about preferences when the picture is changing." },
+        { label: "The 36-week appointment", href: "/articles/the-36-week-appointment", context: "Where breech is most often discussed." },
+      ],
+    },
+    aiPrompts: [
+      "Should I have an ECV?",
+      "How successful is ECV?",
+      "Does an ECV hurt?",
+    ],
+    captureIntro: "ECV is one of the more emotionally loaded appointments of late pregnancy. Worth noting how the decision felt and what happened — for now and for any future pregnancy.",
+    trimester: [3],
+    relatedSlugs: ["breech-baby", "birth-preferences", "the-36-week-appointment", "writing-a-birth-plan"],
+    journey: ["pregnancy"],
+    topics: ["baby", "labour"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "ECV is a careful, well-monitored attempt to turn a breech baby head-down",
+      "Usually offered around 36 to 37 weeks if the baby is still breech",
+      "It's successful in around half of attempts, though success varies",
+      "It can be uncomfortable, but is done with monitoring and the option of a quick caesarean",
+      "Declining ECV is reasonable — your team will support you either way",
+    ],
+    sources: [
+      "Royal College of Obstetricians and Gynaecologists — External cephalic version and reducing the incidence of term breech presentation",
+      "NHS — If your baby is breech",
+      "NICE — Antenatal care",
+      "Tommy's — External cephalic version",
+    ],
+    faq: [
+      { question: "How often does ECV work?", answer: "Around half of ECV attempts are successful at turning the baby head-down, though success rates vary by individual factors. Most babies who are turned successfully stay head-down for the birth." },
+      { question: "Does ECV hurt the baby?", answer: "ECV is done with monitoring throughout, and serious complications are rare. The baby's heart rate is checked before, during, and after. If anything changes, the procedure stops immediately." },
+      { question: "Does ECV hurt me?", answer: "It can be uncomfortable, sometimes briefly intense. Most people describe strong pressure rather than pain. Tenderness on the bump for a day afterwards is normal." },
+      { question: "What happens if ECV doesn't work?", answer: "The conversation usually moves to a planned caesarean, sometimes a vaginal breech birth where local services support it. Your team will explain the options that apply where you are." },
+      { question: "Can I say no to ECV?", answer: "Yes. ECV is a choice. Some people decline because they prefer to plan a c-section, others because they want to wait and see, others because the procedure isn't right for them. Your team will support whichever decision you make." },
+    ],
+    topic: "baby",
+    standfirst: "ECV is one of the most pivotal late-pregnancy decisions — and one that's often discussed with little time. A calm look at what it actually involves.",
+    editorialSections: [
+      {
+        id: "what-it-is",
+        heading: "What ECV is",
+        lead: "A careful attempt to turn a breech baby head-down using pressure on the bump.",
+        paragraphs: [
+          "An external cephalic version is exactly what its name describes: external (done from the outside, not internally), cephalic (encouraging the baby into a head-down position), version (a turn). A doctor places firm but careful hands on your bump and uses pressure to guide the baby through a forward roll.",
+          "The procedure itself takes only a few minutes. Around it sits a longer appointment with monitoring before and after, and sometimes medication to relax the uterus before the attempt.",
+        ],
+      },
+      {
+        id: "when-its-offered",
+        heading: "When it's offered",
+        lead: "Usually around 36 to 37 weeks, when there's still room for the baby to turn but not much time left for it to happen on its own.",
+        paragraphs: [
+          "Before 36 weeks, many breech babies still turn spontaneously. After 37 weeks, the chance of spontaneous turning drops significantly. ECV sits in that window where there's still room for the baby to move and time to make a plan if it works.",
+          "It's usually offered if the baby is confirmed breech on a scan. If you've been told the baby might be breech but the position isn't certain, a scan to confirm usually comes first.",
+        ],
+      },
+      {
+        id: "what-happens",
+        heading: "What happens during the procedure",
+        lead: "Monitoring, careful pressure, and the option to stop at any point.",
+        paragraphs: [
+          "You'll usually have a scan first to confirm the position and check the amount of fluid around the baby. The baby's heart rate is monitored. You may be offered medication to relax the uterus, which makes the procedure more likely to succeed and more comfortable.",
+          "The doctor places hands on your bump — one near the head, one near the bottom — and applies pressure to guide the baby into a forward roll. After the attempt, monitoring continues for a period to check the baby is settled. If anything raises concern at any point, the procedure stops and other options are discussed.",
+        ],
+        callout: { tone: "info", text: "An ECV is done in a unit with the ability to do an immediate caesarean if needed. That backup is part of why the procedure is considered safe." },
+      },
+      {
+        id: "success-rates",
+        heading: "Success rates in plain English",
+        lead: "Around half of attempts work — but the number that matters is yours.",
+        paragraphs: [
+          "Roughly half of ECV attempts successfully turn the baby head-down. Success is more likely if you've had a baby before, if there's a generous amount of fluid, and if the baby isn't deeply settled into the pelvis.",
+          "Of the babies who do turn, the majority stay head-down for the birth. A small number turn back, but it's not the most common outcome.",
+        ],
+      },
+      {
+        id: "how-it-feels",
+        heading: "How it feels",
+        lead: "Most people describe strong pressure, sometimes briefly intense.",
+        paragraphs: [
+          "The pressure during ECV is significant. Some people find it uncomfortable; others describe a brief, sharp sensation as the baby moves. Slow, low breathing through the procedure helps a lot — relaxed abdominal muscles make the procedure both easier and less uncomfortable.",
+          "Afterwards, the bump is often tender for a day or so. Light spotting can occur. Anything more than that — heavier bleeding, contractions, waters breaking, or any change in your baby's movements — is a reason to call your maternity unit.",
+        ],
+      },
+      {
+        id: "if-it-works-or-doesnt",
+        heading: "What happens if it works — or doesn't",
+        lead: "Either outcome is workable, and you'll have time to make the next plan.",
+        paragraphs: [
+          "If the ECV is successful, you continue toward a vaginal birth as normal. The baby is monitored briefly, and you go home the same day.",
+          "If the ECV isn't successful, the conversation usually moves to a planned caesarean, sometimes around 39 weeks. In some places, a vaginal breech birth is supported with the right team and conditions. Either way, the options are real and the time to think them through is built in.",
+        ],
+        callout: { tone: "reassurance", text: "Whether you accept ECV, decline it, or try it once and stop, you have not done anything wrong. There is more than one safe path here, and your team will help you find yours." },
+      },
+    ],
+  },
+
+  // ─── GROUP B STREP IN PREGNANCY ───────────────────────────────────────────
+  {
+    slug: "group-b-strep-in-pregnancy",
+    title: "Group B Strep in pregnancy: what it is and how it's managed",
+    metaDescription: "Group B Strep (GBS) in pregnancy explained — how common it is, how it's identified, what treatment in labour involves, and how to think about it without panic.",
+    quickAnswer:
+      "Group B Strep (GBS) is a common bacterium that lives in the body of around 1 in 5 pregnant people without causing any harm. It's not a sexually transmitted infection. It only matters in pregnancy because, in a small number of cases, it can pass to the baby during labour and cause illness. If GBS is found — usually by chance on a swab or urine test — antibiotics during labour reduce the risk of the baby being affected to a very low level. The UK doesn't routinely screen all pregnancies for GBS, though private testing is available.",
+    howThisFeels: [
+      "Being told 'you have GBS' and worrying immediately about the baby",
+      "Confused by the difference between routine and private testing",
+      "Anxious about needing antibiotics in labour",
+      "Wondering whether you've done something wrong",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "GBS is a normal bacterium", body: "It lives in the gut and genital tract of around 1 in 5 pregnant people. It's not a sign of an infection or anything you've done. Most people who carry it never know." },
+        { heading: "Why it matters in pregnancy", body: "If GBS is present in the genital tract during labour, it can pass to the baby. In a small number of cases, this causes a serious infection in the first week after birth." },
+      ],
+      lessCauses: [
+        { heading: "Late-onset GBS infection", body: "A smaller number of babies develop a GBS infection between one week and three months of age. This isn't usually linked to GBS in labour." },
+      ],
+      whyItVaries: "Carrying GBS doesn't mean a baby will be affected — most aren't, even without antibiotics. Antibiotics in labour reduce the small risk further. The picture is one of a manageable, well-understood situation, not an emergency.",
+    },
+    timing: {
+      whenStarts: "GBS may be identified at any point in pregnancy — sometimes on a urine test for another reason, sometimes on a vaginal swab, sometimes via a private test.",
+      whenEases: "If you're known to carry GBS, antibiotics are given during labour. After birth, the baby is observed for a period — usually around 12 to 24 hours — to make sure they're well.",
+    },
+    whatItFeelsLike: [
+      "Often nothing at all — most people who carry GBS have no symptoms",
+      "Sometimes a urine test result that surprises you",
+      "Sometimes a sense of being told a lot at once with little time",
+    ],
+    whatThisMeans:
+      "GBS is common, well-understood, and well-managed. Knowing you carry it changes one thing in the labour plan — antibiotics through a drip — and otherwise leaves the rest of the picture intact.",
+    normal: [
+      "Carrying GBS without any symptoms",
+      "Being offered antibiotics in labour if GBS is known",
+      "The baby being observed for a period after birth",
+    ],
+    seekSupport: [
+      "A baby who seems unwell in the first week — feeding poorly, very sleepy, hard to rouse, breathing fast, hot or cold to touch — needs urgent assessment",
+      "Any worries about the baby in the early weeks — trust them and call",
+      "Questions about your specific labour plan — your team will go through it with you",
+    ],
+    disclaimer: "GBS in pregnancy is well-managed when known. The key practical step is letting your maternity unit know if you have a history of GBS or have tested positive, so antibiotics in labour can be planned. Always seek urgent care for an unwell newborn.",
+    whatYouCanDo: [
+      { action: "Tell your maternity unit", reason: "If GBS has been found at any point in this pregnancy or a previous one, your team needs to know so antibiotics in labour can be planned." },
+      { action: "Ask what your local approach is", reason: "Some units swab routinely if certain risk factors are present; others test only if there's a specific reason. Knowing local practice helps." },
+      { action: "Watch your baby in the first week", reason: "GBS infection in newborns usually shows in the first 12 to 72 hours, but signs can appear up to 7 days. Trust your instinct to seek care." },
+      { action: "Don't carry guilt around it", reason: "Carrying GBS isn't something you've caused or could have prevented. It's a normal bacterium found by chance." },
+    ],
+    whatHappensNext: "If GBS is known, antibiotics are given through a drip during labour, starting as early in labour as possible. After birth, the baby is observed for a period to make sure they're well. Most babies are absolutely fine.",
+    relatedStage: {
+      intro: "GBS sits inside the wider story of pregnancy tests and birth planning:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "The fuller picture of antenatal testing." },
+        { label: "The 36-week appointment", href: "/articles/the-36-week-appointment", context: "Where labour planning conversations often happen." },
+        { label: "Birth preferences", href: "/articles/birth-preferences", context: "How GBS fits into the wider birth plan." },
+      ],
+    },
+    aiPrompts: [
+      "Is Group B Strep dangerous for my baby?",
+      "Does Group B Strep mean I need a c-section?",
+      "Will antibiotics in labour affect my baby?",
+    ],
+    captureIntro: "Being told you carry GBS can hit harder than the science suggests it should. Worth noting how it landed and what you wanted to ask — the conversation usually continues across more than one appointment.",
+    trimester: [3],
+    relatedSlugs: ["tests-and-scans-in-pregnancy", "the-36-week-appointment", "birth-preferences", "writing-a-birth-plan"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "labour"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "GBS is a common bacterium carried by around 1 in 5 pregnant people without symptoms",
+      "It's not a sexually transmitted infection and not a sign of anything you've done",
+      "It's only relevant in pregnancy because it can occasionally pass to the baby during labour",
+      "Antibiotics in labour reduce that small risk to a very low level",
+      "Most babies born to people who carry GBS are completely well",
+    ],
+    sources: [
+      "Royal College of Obstetricians and Gynaecologists — Group B Streptococcus in pregnancy",
+      "NHS — Group B strep",
+      "Group B Strep Support — UK information",
+      "NICE — Neonatal infection",
+    ],
+    faq: [
+      { question: "Does GBS mean I'll need a c-section?", answer: "No. GBS doesn't change the recommended mode of birth. The standard plan is a vaginal birth with antibiotics in labour." },
+      { question: "Will the antibiotics affect my baby?", answer: "The antibiotics most commonly used are well-studied in pregnancy and labour. They're given to protect the baby from GBS infection. Side effects in the baby are uncommon and your team will discuss them with you." },
+      { question: "Why doesn't the UK screen everyone for GBS?", answer: "The UK approach uses a 'risk factor' strategy rather than universal screening — recent UK reviews have considered both approaches. Private GBS swab tests are available if you'd like one." },
+      { question: "Can GBS go away on its own?", answer: "GBS comes and goes. Carrying it earlier in pregnancy doesn't always mean carrying it in labour, and vice versa. That's part of why testing and management focus on the labour itself." },
+      { question: "What signs in the baby should I look out for?", answer: "Poor feeding, unusual sleepiness, being hard to rouse, fast breathing, grunting, being unusually hot or cold, or a high-pitched cry. Trust your instinct and seek urgent assessment if anything worries you." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "GBS sounds frightening, and it's almost always less so than it sounds. A calm explanation of what it is, why it matters, and how it's managed.",
+    editorialSections: [
+      {
+        id: "what-it-is",
+        heading: "What Group B Strep actually is",
+        lead: "A normal bacterium that lives in many bodies without causing harm.",
+        paragraphs: [
+          "Group B Strep — Streptococcus agalactiae — is a bacterium that lives in the gut and genital tract of around 1 in 5 pregnant people. Most people who carry it have no symptoms and never know they do. It's not a sexually transmitted infection.",
+          "Outside pregnancy, GBS is rarely a problem. In pregnancy, it matters only because it can occasionally pass to the baby during labour — and even then, most babies are unaffected.",
+        ],
+      },
+      {
+        id: "how-its-found",
+        heading: "How it's identified",
+        lead: "Often by chance on a swab or a urine test taken for another reason.",
+        paragraphs: [
+          "GBS may be picked up on a vaginal or rectal swab taken for another concern, or on a urine test. The UK doesn't routinely screen every pregnancy for GBS. Instead, a 'risk factor' approach is used: antibiotics in labour are offered when GBS is known to be present, when the previous baby had GBS infection, when waters break early, or when there's a fever in labour.",
+          "Private GBS swab tests are available if you'd prefer to test directly. They're usually done between 35 and 37 weeks for the most accurate result.",
+        ],
+      },
+      {
+        id: "what-treatment-involves",
+        heading: "What treatment in labour involves",
+        lead: "Antibiotics through a drip, starting as early in labour as possible.",
+        paragraphs: [
+          "If GBS is known, you'll be given intravenous antibiotics during labour, usually starting as early as possible and repeated at intervals until the baby is born. The most commonly used antibiotic is penicillin; alternatives are used if you're allergic.",
+          "The drip doesn't tie you to the bed in most units — there's flexibility to move, sit, and labour in different positions. Your team will plan it to fit the rest of your labour as much as possible.",
+        ],
+        callout: { tone: "info", text: "Antibiotics work best when started at least 4 hours before birth. Calling early in labour matters more if GBS is known." },
+      },
+      {
+        id: "thinking-about-it-calmly",
+        heading: "How to think about it without panic",
+        lead: "GBS is common, well-understood, and well-managed.",
+        paragraphs: [
+          "The headline numbers are reassuring. Around 1 in 5 people carry GBS. Without antibiotics, around 1 in 2,000 babies develop a GBS infection in the first week. With antibiotics in labour, that number drops further.",
+          "Carrying GBS isn't an emergency, isn't a sign of poor hygiene, and isn't your fault. It's a normal bacterium found by chance. The plan is straightforward, and the outcome for the vast majority of babies is no infection at all.",
+        ],
+      },
+      {
+        id: "questions-to-ask",
+        heading: "Questions worth asking if it comes up",
+        lead: "A short list of useful questions for the conversation.",
+        paragraphs: [
+          "What's the local plan if I go into labour at home? When do I need to come in? Which antibiotic will I be given, and what if I'm allergic? What signs in the baby should I watch for in the first week? What does follow-up look like after birth?",
+          "These questions aren't pushy — they're the questions your team expects. Knowing the answers in advance makes the moment of calling in much easier.",
+        ],
+        callout: { tone: "reassurance", text: "GBS rarely changes the wider shape of birth or recovery. It changes one specific element of the plan, and the rest of the picture continues as it would have done." },
+      },
+    ],
+  },
+
+  // ─── HAND EXPRESSING COLOSTRUM ────────────────────────────────────────────
+  {
+    slug: "hand-expressing-colostrum",
+    title: "Hand expressing colostrum in late pregnancy: what it is and how to do it",
+    metaDescription: "Antenatal hand expressing of colostrum — what it is, when (and when not) to start, how to do it, what amount is normal, how to store it, and calm expectations.",
+    quickAnswer:
+      "Hand expressing colostrum is a gentle technique for collecting small amounts of the first milk in late pregnancy, usually from around 36 to 37 weeks. It's commonly suggested if there's a chance the baby may need extra feeding support after birth — for example with gestational diabetes, a baby thought to be small or large, or a planned caesarean. Drops, not millilitres, are normal. It shouldn't be done before 36 weeks unless your team has specifically advised it, and never if you've been told you're at risk of early labour.",
+    howThisFeels: [
+      "Worried you're 'not making any'",
+      "Confused about whether it's safe to start",
+      "Pressured to produce a particular amount",
+      "Quietly comforted by something tangible to do",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "What colostrum is", body: "Colostrum is the first milk — thick, golden, and very small in volume but rich in nutrients and protective factors. It's already being produced by the time hand expressing is suggested." },
+        { heading: "Why it might be suggested", body: "Some situations make it more likely a baby will need a little extra feeding support in the first day or two. Having a small reserve of colostrum on hand can be reassuring and useful." },
+      ],
+      lessCauses: [
+        { heading: "Personal preference", body: "Some people choose to hand express in late pregnancy as a way to feel prepared, even without a specific medical reason." },
+      ],
+      whyItVaries: "How easily colostrum comes — and how much — varies hugely. It's measured in drops, not millilitres. A few drops a session is a normal, useful amount.",
+    },
+    timing: {
+      whenStarts: "From around 36 to 37 weeks in most situations, on the advice of your midwife. Earlier only if specifically recommended.",
+      whenEases: "Hand expressing in pregnancy is short-term, usually for the few weeks before birth. After the baby arrives, it changes shape into early breastfeeding or postnatal expressing.",
+    },
+    whatItFeelsLike: [
+      "A bit awkward at first — like learning a new skill",
+      "Sometimes a little tightening in the bump (mild Braxton Hicks)",
+      "A few drops of golden colostrum on a small syringe or spoon",
+    ],
+    whatThisMeans:
+      "Hand expressing in late pregnancy is a small, optional, time-limited skill. It can give you a useful reserve and a quiet sense of preparation. It's not a test of anything — and it isn't right for every pregnancy.",
+    normal: [
+      "A few drops a session, building over time",
+      "Some sessions producing nothing at all",
+      "Mild tightenings during or after a session that ease quickly",
+    ],
+    seekSupport: [
+      "Tightenings that don't settle, become regular, or feel like contractions — stop and call your maternity unit",
+      "Any bleeding, waters breaking, or change in your baby's movements — stop and call",
+      "Pain rather than mild discomfort — that's a sign to stop and check the technique with a midwife",
+    ],
+    disclaimer: "Hand expressing in late pregnancy is generally only recommended from around 36 to 37 weeks, and only when specifically advised. Don't start earlier without guidance, and stop if you experience contractions or any of the warning signs above.",
+    whatYouCanDo: [
+      { action: "Wait for the right time", reason: "Starting too early can theoretically encourage early contractions. From around 36 to 37 weeks, with your team's go-ahead, is the standard window." },
+      { action: "Ask for a demonstration", reason: "A midwife or breastfeeding supporter can show you the technique in person. It's much easier learnt with someone watching than from a leaflet." },
+      { action: "Use a small syringe", reason: "Drops are easy to lose. A 1ml syringe makes collection and storage straightforward." },
+      { action: "Lower the bar", reason: "A few drops is a useful amount. There is no target. Comparing to anyone else's collection misses the point." },
+    ],
+    whatHappensNext: "Frozen colostrum can be brought to the birth in a small cool bag and used if needed in the first day or two. If it isn't needed, that's a good outcome — it just means the baby has fed straight from the breast or with formula as planned.",
+    relatedStage: {
+      intro: "Hand expressing sits inside the wider conversation about preparing for feeding and birth:",
+      links: [
+        { label: "Preparing for baby", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "The 36-week appointment", href: "/articles/the-36-week-appointment", context: "Where this is most often discussed." },
+        { label: "Feeding your baby", href: "/articles/feeding-your-baby-complete-guide", context: "The wider picture of feeding from the start." },
+        { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack", context: "Where antenatal colostrum fits in the bag." },
+      ],
+    },
+    aiPrompts: [
+      "How do I hand express colostrum?",
+      "How much colostrum should I be getting?",
+      "Is it safe to hand express in pregnancy?",
+    ],
+    captureIntro: "Antenatal hand expressing is small, quiet work that's easy to undervalue afterwards. Worth a note of how it went — both for now and for any future pregnancy.",
+    trimester: [3],
+    relatedSlugs: ["the-36-week-appointment", "feeding-your-baby-complete-guide", "hospital-bag-and-what-to-pack", "writing-a-birth-plan"],
+    journey: ["pregnancy"],
+    topics: ["preparing-for-baby", "labour"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Antenatal hand expressing is a gentle technique for collecting small amounts of colostrum",
+      "Usually started from around 36 to 37 weeks, on the advice of your midwife",
+      "Drops — not millilitres — are normal and useful",
+      "Don't start earlier than advised, and stop if you have contractions or any warning signs",
+      "It's an option, not a requirement, and right for some pregnancies more than others",
+    ],
+    sources: [
+      "UNICEF UK Baby Friendly Initiative — Off to the Best Start",
+      "Royal College of Midwives — Antenatal expression of colostrum",
+      "NICE — Diabetes in pregnancy",
+      "NHS — Breastfeeding: the first few days",
+    ],
+    faq: [
+      { question: "When should I start hand expressing?", answer: "Most guidance says from around 36 to 37 weeks, and only after your midwife has confirmed it's appropriate for your pregnancy. Don't start earlier without specific advice." },
+      { question: "How much colostrum should I be collecting?", answer: "Drops, not millilitres. A few drops a session is a normal, useful amount. Some sessions produce nothing at all — that's also normal." },
+      { question: "Is it safe to hand express in pregnancy?", answer: "From around 36 to 37 weeks, in an otherwise straightforward pregnancy, it's considered safe. It isn't recommended if you're at risk of early labour, have certain placenta concerns, or have been advised against it." },
+      { question: "How do I store the colostrum?", answer: "Collect it into a small sterile syringe, label it with the date, and freeze it. It can be brought to the birth in a small cool bag and used if needed in the first day or two." },
+      { question: "What if I can't get any out?", answer: "That's normal too. Hand expressing in pregnancy isn't a test of how breastfeeding will go, and getting no colostrum out doesn't predict anything about your supply later." },
+    ],
+    topic: "preparing-for-baby",
+    standfirst: "A small, quiet skill that some people find genuinely useful in late pregnancy. A calm look at when to start, how to do it, and what to expect.",
+    editorialSections: [
+      {
+        id: "what-it-is",
+        heading: "What antenatal hand expressing is",
+        lead: "A gentle technique for collecting small amounts of the first milk before the baby arrives.",
+        paragraphs: [
+          "Colostrum — the first milk — is being made well before birth. Hand expressing in late pregnancy is a way to collect it in tiny amounts, usually into a small syringe, so it can be stored and brought to the birth in case it's useful in the first day or two.",
+          "It's a manual skill rather than a pump-based one. There's nothing technical about the equipment — a clean pair of hands and a small sterile syringe are most of what's needed.",
+        ],
+      },
+      {
+        id: "when-to-start",
+        heading: "When to start (and when not to)",
+        lead: "Usually from 36 to 37 weeks, only when your team has agreed it's appropriate.",
+        paragraphs: [
+          "The standard window is from around 36 to 37 weeks, after a conversation with your midwife or doctor. Starting earlier than this isn't routinely recommended because of theoretical concerns about encouraging early contractions.",
+          "It isn't recommended at all if you're at risk of early labour, have certain placenta findings, or have been specifically advised against it. If you're unsure whether it's right for you, ask your midwife directly. There's no badge for hand expressing — and there's no penalty for not doing it.",
+        ],
+        callout: { tone: "gentle-warning", text: "Don't start before 36 weeks unless your team has specifically advised it. If hand expressing brings on tightenings that don't settle, stop and call your maternity unit." },
+      },
+      {
+        id: "how-to-do-it",
+        heading: "How to do it",
+        lead: "Warmth, patience, and a soft pinching motion — not a hard squeeze.",
+        paragraphs: [
+          "Wash your hands. Sit somewhere warm and comfortable. A warm flannel on the breast for a couple of minutes can help. Cup the breast with one hand and use the thumb and forefinger of the other to make a 'C' shape about 2 to 3 cm back from the nipple.",
+          "Press gently back toward the chest wall, then bring thumb and finger together in a soft, rhythmic squeeze — not a slide along the skin. Drops of colostrum may appear at the nipple after a few attempts. Catch them in a small sterile syringe.",
+          "Move your hand to a slightly different position around the breast every minute or two, working through different angles. A few minutes per breast per session is plenty.",
+        ],
+      },
+      {
+        id: "what-amount-is-normal",
+        heading: "What amount is normal",
+        lead: "Drops, not millilitres — and varying widely between sessions.",
+        paragraphs: [
+          "A few drops is a useful amount. Some people collect noticeably more after a few weeks of practice; others stay at a few drops. Both are normal, and neither predicts anything about how breastfeeding will go.",
+          "Some sessions produce nothing at all. That's also normal. The volume in pregnancy isn't a test of supply — supply changes dramatically once the baby is born.",
+        ],
+      },
+      {
+        id: "storing-and-using",
+        heading: "Storing and using it",
+        lead: "Small syringes, the freezer, and a cool bag for the birth.",
+        paragraphs: [
+          "Each session's collection can be drawn into a small sterile syringe (1ml is most common), labelled with the date, and frozen. Most units accept a small cool bag of frozen syringes brought in for the birth.",
+          "If colostrum is needed in the first day or two — for example, to top up a baby with low blood sugar — having it on hand can make that easier and more straightforward. If it isn't needed, that's a good outcome too.",
+        ],
+      },
+      {
+        id: "calm-expectations",
+        heading: "Calm expectations and safety framing",
+        lead: "It's optional, useful for some, not a measure of anything for anyone.",
+        paragraphs: [
+          "Antenatal hand expressing is a quiet, optional skill. It can be genuinely useful in some pregnancies, especially those with gestational diabetes, planned caesareans, or babies thought to need extra support after birth. For other pregnancies, it's an option people pick up because it feels good to be ready, or skip because it doesn't.",
+          "If you do try it: a few drops counts. Some sessions producing nothing counts. Stopping if it doesn't feel right counts. It isn't a measure of you, your body, or how breastfeeding will go.",
+        ],
+        callout: { tone: "reassurance", text: "Whether you collect a freezer full of syringes or never quite get round to trying — neither tells you anything about how feeding will go after birth. The body has a different gear once the baby arrives." },
+      },
+    ],
+  },
+
+  // ─── THE 36-WEEK APPOINTMENT ──────────────────────────────────────────────
+  {
+    slug: "the-36-week-appointment",
+    title: "The 36-week appointment: what to expect and what's worth bringing",
+    metaDescription: "What usually happens at the 36-week pregnancy appointment — position check, blood pressure, urine, measurements, labour and birth planning, and questions worth bringing.",
+    quickAnswer:
+      "The 36-week appointment is one of the most important antenatal appointments in late pregnancy. It usually involves a position check, blood pressure, urine, measuring the bump, and a longer conversation about labour, movements, and birth planning. It's a good moment to bring questions about birth preferences, what to do if labour starts, hand expressing colostrum, and anything you've been quietly worrying about. The exact shape varies depending on the pregnancy.",
+    howThisFeels: [
+      "Wanting it to feel substantial — not five minutes and a wave",
+      "Forgetting half your questions when you sit down",
+      "Quietly hoping for reassurance about the baby",
+      "Aware that birth is suddenly close",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Position check", body: "Your midwife will feel the bump to check whether the baby is head-down, breech, or in another position. By 36 weeks, position is starting to matter for birth planning." },
+        { heading: "Blood pressure and urine", body: "Routine checks for signs of pre-eclampsia or other concerns. Quick to do, important to keep doing." },
+        { heading: "Bump measurement", body: "The bump is measured from the top of the pubic bone to the top of the uterus. It's plotted on a chart to look for trends rather than absolute numbers." },
+        { heading: "Conversation about labour and birth", body: "What to do if labour starts, what to look for, what your preferences are, when to come in. This conversation often lengthens at 36 weeks." },
+      ],
+      lessCauses: [
+        { heading: "Bloods or extra checks", body: "Depending on your pregnancy, blood tests, growth scans, or extra checks may be added at 36 weeks." },
+      ],
+      whyItVaries: "Some 36-week appointments are short and focused on physical checks. Others are longer and become a wider birth-planning conversation. What you get often depends on what you bring — questions matter.",
+    },
+    timing: {
+      whenStarts: "Usually scheduled at exactly 36 weeks, sometimes 36 to 37. It's the first of several closely-spaced late-pregnancy appointments.",
+      whenEases: "After 36 weeks, appointments become more frequent — often every two weeks, then weekly toward the end.",
+    },
+    whatItFeelsLike: [
+      "More attention than earlier appointments",
+      "A real conversation about the birth",
+      "Sometimes a long appointment, sometimes a short one",
+      "A sense that things are getting close",
+    ],
+    whatThisMeans:
+      "The 36-week appointment is the moment when antenatal care moves from monitoring the pregnancy to actively preparing for birth. It deserves space and attention — and so do your questions.",
+    normal: [
+      "A position check that's straightforward, or one that prompts a scan",
+      "Blood pressure and urine checks",
+      "A longer conversation than earlier appointments",
+      "Decisions or follow-ups for any specific concerns",
+    ],
+    seekSupport: [
+      "Anything that's been worrying you between appointments — bring it",
+      "A baby who's moving differently than usual — call the same day, don't wait for the appointment",
+      "Symptoms of pre-eclampsia (severe headache, visual changes, sudden swelling, pain in the upper right of the abdomen) — call the same day",
+    ],
+    disclaimer: "This article describes a typical UK 36-week appointment. The exact shape varies between units and individual pregnancies. Your midwife is the right person to ask about what your specific appointment will involve.",
+    whatYouCanDo: [
+      { action: "Write your questions down beforehand", reason: "It's surprisingly easy to forget the most important question once you sit down. A short list helps." },
+      { action: "Bring your birth partner", reason: "A second person often hears different things and helps remember what was said." },
+      { action: "Ask about labour", reason: "What to do, when to call, what to look for — this is the appointment to walk through it in practical detail." },
+      { action: "Ask about anything not yet discussed", reason: "Hand expressing colostrum, birth preferences, GBS, induction policy, perineal massage — this is a useful moment to bring it all up." },
+    ],
+    whatHappensNext: "After 36 weeks, antenatal appointments come closer together. The 38- or 40-week appointment is often where membrane sweeps and induction conversations begin.",
+    relatedStage: {
+      intro: "The 36-week appointment is a hinge into the wider late-pregnancy plan:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Birth preferences", href: "/articles/birth-preferences", context: "What's worth thinking through before the appointment." },
+        { label: "Hand expressing colostrum", href: "/articles/hand-expressing-colostrum", context: "Often introduced at this appointment." },
+        { label: "Group B Strep in pregnancy", href: "/articles/group-b-strep-in-pregnancy", context: "Sometimes raised here for the first time." },
+      ],
+    },
+    aiPrompts: [
+      "What happens at the 36-week appointment?",
+      "What questions should I ask at 36 weeks?",
+      "When should I write my birth plan?",
+    ],
+    captureIntro: "The 36-week appointment is the one that often makes things feel real. Worth noting what was said and what you wanted to ask — both for now and for the appointments that come next.",
+    trimester: [3],
+    relatedSlugs: ["birth-preferences", "hand-expressing-colostrum", "group-b-strep-in-pregnancy", "third-trimester-complete-guide"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "preparing-for-baby"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "The 36-week appointment is the hinge between monitoring pregnancy and preparing for birth",
+      "It usually includes position check, blood pressure, urine, bump measurement, and a longer conversation",
+      "Bring questions: labour, movements, birth preferences, hand expressing, GBS, induction",
+      "If your baby is breech at 36 weeks, ECV may be discussed",
+      "After 36 weeks, appointments come more often as you head toward birth",
+    ],
+    sources: [
+      "NICE — Antenatal care",
+      "NHS — Your antenatal appointments",
+      "Royal College of Midwives — Late pregnancy care",
+      "Tommy's — Antenatal appointments",
+    ],
+    faq: [
+      { question: "How long does the 36-week appointment take?", answer: "Most are scheduled for 20 to 30 minutes, longer than earlier appointments. If you have a lot to ask, it's worth saying so when you book — some units will give a longer slot." },
+      { question: "Will I have a scan at 36 weeks?", answer: "Not routinely. A scan may be added if there's a specific reason — for example, if the position isn't clear on examination, or if there's a concern about growth." },
+      { question: "What if my baby is breech at 36 weeks?", answer: "If a breech position is confirmed, ECV is usually offered around this point — a careful attempt to turn the baby head-down. The conversation about birth options begins here." },
+      { question: "Should I bring a written birth plan?", answer: "If you have one, yes. If not, this appointment is a good chance to talk through preferences and find out what your unit can offer. A formal plan can come later." },
+      { question: "Is this the appointment where they start sweeps?", answer: "No — sweeps are usually offered from 40 weeks onward in a first pregnancy. The 36-week appointment is more about position, planning, and preparation." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "The 36-week appointment is the one where things often start to feel real. A calm guide to what happens, what's worth bringing, and how to get the most from it.",
+    editorialSections: [
+      {
+        id: "what-usually-happens",
+        heading: "What usually happens",
+        lead: "Physical checks plus a longer conversation than you've had so far.",
+        paragraphs: [
+          "Most 36-week appointments are scheduled for a longer slot than earlier ones, often 20 to 30 minutes. Your midwife will check your blood pressure, take a urine sample, measure the bump, and feel the position of the baby.",
+          "Beyond the physical checks, this is the appointment that opens the wider conversation about labour and birth — what to look for, what to do, and what to bring.",
+        ],
+      },
+      {
+        id: "position-check",
+        heading: "The position check",
+        lead: "By 36 weeks, where the baby is starting to matter.",
+        paragraphs: [
+          "Your midwife will feel your bump to identify the baby's head, back, and bottom. Most babies are head-down by 36 weeks, but a meaningful minority are still breech, oblique (sideways), or unsettled.",
+          "If the position isn't clear on examination, or if a breech position is suspected, a scan is usually arranged. If a breech position is confirmed, the conversation about ECV — a careful attempt to turn the baby head-down — usually begins around this point.",
+        ],
+      },
+      {
+        id: "physical-checks",
+        heading: "Blood pressure, urine, and measurements",
+        lead: "Quick, routine, important to keep doing.",
+        paragraphs: [
+          "Blood pressure is checked for signs of pre-eclampsia. Urine is tested for protein and other markers. The bump is measured from the top of the pubic bone to the top of the uterus, and plotted on a personalised growth chart.",
+          "These checks are quick but not perfunctory — they're how a quiet shift in the picture is most often picked up.",
+        ],
+      },
+      {
+        id: "the-conversation",
+        heading: "The labour and birth conversation",
+        lead: "This is the appointment where the practical questions get answered.",
+        paragraphs: [
+          "What to do if you think you might be in labour. When to ring. When to come in. What signs matter. What the unit's policy is on inductions, GBS, water births, and any preferences you've been thinking about.",
+          "If you've started a birth plan, this is the appointment to bring it. If you haven't, this is the appointment to start the thinking.",
+        ],
+        callout: { tone: "info", text: "If you don't get the time you need at this appointment, it's reasonable to ask for a follow-up specifically for birth planning — it's a recognised need, not a special request." },
+      },
+      {
+        id: "questions-worth-bringing",
+        heading: "Questions worth bringing",
+        lead: "A short list often gets more out of the appointment than a long one without notes.",
+        paragraphs: [
+          "Useful questions for many people: What's the plan if I go into labour at home? When should I ring versus when should I come in? What pain relief is available? What's your unit's induction policy after 41 weeks? Should I be hand expressing colostrum? Are there any specific things to watch for between now and birth?",
+          "If you've been quietly worrying about something — anything — this is the appointment to raise it.",
+        ],
+      },
+      {
+        id: "how-it-may-differ",
+        heading: "How the appointment may differ",
+        lead: "Pregnancies don't all look the same at 36 weeks.",
+        paragraphs: [
+          "If you have gestational diabetes, raised blood pressure, growth concerns, twins, or any other specific finding, your 36-week appointment will include the additional checks or conversations relevant to that picture. You may also be seen in a consultant clinic rather than midwife-led care.",
+          "If this is your second or later pregnancy, the conversation is often quicker and more practical — but the same underlying checks happen, and the same questions are worth asking.",
+        ],
+        callout: { tone: "reassurance", text: "Every 36-week appointment is allowed to be the one where you ask the questions you've been carrying. It's part of what the appointment is for." },
+      },
+    ],
+  },
+
+  // ─── BIRTH PREFERENCES ────────────────────────────────────────────────────
+  {
+    slug: "birth-preferences",
+    title: "Birth preferences: how to make a plan that helps rather than disappoints",
+    metaDescription: "Birth preferences explained — what they are, why they're not contracts, what's worth thinking about, what often changes in labour, and how to make them genuinely useful.",
+    quickAnswer:
+      "Birth preferences (sometimes called a birth plan) are a short, written or spoken summary of how you'd like labour and birth to go, and what matters most to you. They're a communication tool, not a contract — birth often changes shape in real time. The most useful birth preferences are short, flexible, written with a 'plan A and a plan B' mindset, and shared in advance with your birth partner and midwife. Preferences can cover environment, pain relief, support, who's there, and what happens immediately after birth.",
+    howThisFeels: [
+      "Wanting to feel prepared without being precious",
+      "Worried that having preferences means feeling like a failure if they don't happen",
+      "Unsure where to start",
+      "Quietly hoping a plan will give you back some control",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "What birth preferences are for", body: "They help your team and your birth partner know what matters to you, especially if you can't speak as easily during labour. They're a way of being heard before the moment makes it harder." },
+        { heading: "What they're not", body: "Not contracts. Not promises. Not predictions of how birth will go. Birth has its own pace, and good preferences are written knowing that." },
+      ],
+      lessCauses: [
+        { heading: "Cultural and personal preferences", body: "Birth preferences are also a place to record cultural, religious, or personal wishes that matter to you and might otherwise be missed." },
+      ],
+      whyItVaries: "Some people write a paragraph. Others use a single page with bullet points. Others have a longer document with sections. All can work — what matters most is clarity and flexibility.",
+    },
+    timing: {
+      whenStarts: "Most people start thinking about preferences in the early third trimester. The 36-week appointment is often when they're discussed in detail.",
+      whenEases: "Birth preferences are usually finalised in the last few weeks of pregnancy, but they can change at any point — including in labour itself.",
+    },
+    whatItFeelsLike: [
+      "Empowering when written calmly",
+      "Anxious if approached as a contract",
+      "Reassuring once shared with your birth partner",
+      "Sometimes hard to start, often easier once you're in",
+    ],
+    whatThisMeans:
+      "Birth preferences are most useful when they're held lightly. They give shape to the conversation — and they leave room for the conversation to change.",
+    normal: [
+      "Preferences changing as you learn more about your options",
+      "A short, focused document being more useful than a long, detailed one",
+      "Some preferences happening, others not, in a single birth",
+    ],
+    seekSupport: [
+      "If you're feeling overwhelmed by birth planning, talk to your midwife — they can help you work through what matters most",
+      "If you've had a previous traumatic birth, your team can offer extra support including a dedicated birth reflections appointment",
+      "Persistent anxiety about birth is worth raising — perinatal mental health support is available",
+    ],
+    disclaimer: "Birth preferences are a communication tool, not a guarantee. The team caring for you in labour will always prioritise your safety and your baby's safety, and may need to suggest changes to the plan if the picture changes. That isn't a failure — it's part of how good care works.",
+    whatYouCanDo: [
+      { action: "Keep it short", reason: "One page of clearly-stated preferences is more useful in a real labour than a long document no one has time to read." },
+      { action: "Plan for more than one scenario", reason: "Include preferences for if things change — assisted birth, caesarean, NICU. It reduces panic if any of those happen." },
+      { action: "Share it in advance", reason: "Your birth partner needs to know your preferences before labour. The midwife meeting you in labour will read it but may not have time to discuss it." },
+      { action: "Let go of the words 'birth plan'", reason: "If 'plan' makes you feel pressured, 'preferences' is just as valid. It's the same document, with kinder framing." },
+    ],
+    whatHappensNext: "On the day, your birth preferences are read by the team caring for you. Some will be straightforward to follow. Others may need conversation as the picture changes. A good team will work with you in real time.",
+    relatedStage: {
+      intro: "Birth preferences sit inside the wider conversation about preparing for birth:",
+      links: [
+        { label: "Preparing for baby", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "Signs of labour", href: "/articles/signs-of-labour", context: "When the preferences become relevant." },
+        { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth", context: "The inner work alongside the practical plan." },
+        { label: "Writing a birth plan", href: "/articles/writing-a-birth-plan", context: "The shorter, practical companion piece." },
+      ],
+    },
+    aiPrompts: [
+      "What should I include in my birth preferences?",
+      "Do I need a birth plan?",
+      "What happens if my birth doesn't go to plan?",
+    ],
+    captureIntro: "Birth preferences are quietly emotional work. Worth a note of what you've decided and why — it makes the document feel like yours, not a template.",
+    trimester: [3],
+    relatedSlugs: ["writing-a-birth-plan", "signs-of-labour", "preparing-emotionally-for-birth", "the-36-week-appointment"],
+    journey: ["pregnancy", "preparing-for-baby"],
+    topics: ["preparing-for-baby", "labour"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Birth preferences are a short summary of how you'd like labour and birth to go",
+      "They're a communication tool, not a contract — birth often changes shape",
+      "The most useful preferences are short, flexible, and shared with your birth partner",
+      "Cover environment, pain relief, support, who's there, and immediate post-birth",
+      "Plans changing in labour isn't a failure — it's part of how birth often goes",
+    ],
+    sources: [
+      "NHS — Making a birth plan",
+      "NICE — Intrapartum care",
+      "Royal College of Midwives — Birth plans",
+      "Birthrights — Your rights in childbirth",
+    ],
+    faq: [
+      { question: "Do I need a birth plan?", answer: "No — but most people find it useful. Even a few sentences about what matters most to you helps your team and birth partner advocate for you in labour." },
+      { question: "What if my birth doesn't go to plan?", answer: "It often won't, in some respect. That's part of why preferences are written with flexibility. Your team will explain any changes at the time, and your safety and your baby's are always the first priority." },
+      { question: "What's worth including?", answer: "Pain relief preferences, who you'd like with you, the environment you'd like (lighting, music, mobility), preferences around assisted birth or caesarean, and immediate post-birth wishes (skin to skin, delayed cord clamping, feeding)." },
+      { question: "Should I include preferences for a c-section?", answer: "Yes, where possible. Even an unplanned c-section can include preferences — for example, lowered screen, music, immediate skin to skin where possible, who comes through with you." },
+      { question: "When should I write it?", answer: "Most people write or finalise their preferences in the last few weeks of pregnancy. The 36-week appointment is often a good prompt." },
+    ],
+    topic: "preparing-for-baby",
+    standfirst: "Birth preferences work best when they help rather than burden. A calm look at how to write them in a way that gives you a real voice without setting you up to feel let down.",
+    editorialSections: [
+      {
+        id: "what-they-are",
+        heading: "What birth preferences actually are",
+        lead: "A way of being heard before the moment makes being heard harder.",
+        paragraphs: [
+          "Birth preferences are a short, clear statement of what matters to you in labour and birth. They cover the things that the team caring for you might otherwise have to guess — your environment, your pain relief preferences, who you want with you, what happens immediately after the baby arrives.",
+          "They are most useful as a communication tool, not a control mechanism. They tell your team what you'd like, and they tell your birth partner what to advocate for if you're focused on what your body is doing.",
+        ],
+      },
+      {
+        id: "not-a-contract",
+        heading: "Why they're not a contract",
+        lead: "Birth has its own pace, and a good plan is written knowing that.",
+        paragraphs: [
+          "Labour is responsive. Things change — sometimes slowly, sometimes quickly. A birth plan written as a contract sets up disappointment when reality moves; a birth plan written as preferences leaves room for that movement.",
+          "If something changes in labour, that doesn't mean your preferences didn't matter. They still shaped the conversation, still got you a different version of what you wanted, and still kept your voice in the room.",
+        ],
+      },
+      {
+        id: "worth-thinking-about",
+        heading: "What's worth thinking about",
+        lead: "A short list of common areas that get a real return on a few minutes of thought.",
+        subsections: [
+          { subheading: "Environment", paragraphs: ["Lighting — dimmed or bright? Music? Movement and positions? A specific room layout if you can have it?"] },
+          { subheading: "Pain relief", paragraphs: ["What do you want to try first? What would you like offered, even if you haven't asked? What would you prefer not to be offered repeatedly?"] },
+          { subheading: "Support", paragraphs: ["Who's with you? What role do you want them to play? Who's allowed in the room?"] },
+          { subheading: "Immediately after", paragraphs: ["Skin to skin? Delayed cord clamping? Who cuts the cord? What about feeding in the first hour?"] },
+          { subheading: "If things change", paragraphs: ["Preferences for assisted birth, caesarean, or NICU. Even a few lines reduces panic in the moment."] },
+        ],
+      },
+      {
+        id: "what-may-matter-most",
+        heading: "What may matter most",
+        lead: "Most preferences live in 'nice to have'. A few live somewhere else.",
+        paragraphs: [
+          "Often, when people sit with their preferences, one or two stand out as deeply important — sometimes for cultural, religious, or personal reasons, sometimes because of a previous experience. It's worth flagging those clearly. 'Most important to me' on a written plan helps the team focus on what really matters to you.",
+          "If something has special weight — being held a particular way after birth, a specific person being present, a particular language used or avoided — say so. Teams welcome that clarity.",
+        ],
+      },
+      {
+        id: "what-changes",
+        heading: "What often changes in labour",
+        lead: "Common changes are common — they don't mean anything has gone wrong.",
+        paragraphs: [
+          "People who hadn't planned an epidural sometimes have one and find it helps. People who'd hoped for a water birth sometimes labour faster than expected and don't get in. Babies sometimes need monitoring that limits movement, or a position change that wasn't planned.",
+          "These shifts aren't failures of the plan or of you. They're how labour often works, and a flexible plan handles them quietly.",
+        ],
+        callout: { tone: "info", text: "A birth plan that adapts in real time is doing exactly what it should. The aim is being heard, not predicting the future." },
+      },
+      {
+        id: "useful-not-performative",
+        heading: "How to make preferences useful rather than performative",
+        lead: "Short, clear, shared in advance.",
+        paragraphs: [
+          "One page is plenty. Bullet points are easier to read in real time than paragraphs. Your most important preferences should be near the top. Preferences for changes — caesarean, NICU — should be there even if you hope you'll never need them.",
+          "Share the document with your birth partner well in advance. Talk through what each line means and what they should advocate for. Bring a copy to your 36-week appointment. Bring it to the birth.",
+        ],
+        callout: { tone: "reassurance", text: "If your birth doesn't go to plan, that doesn't mean your plan didn't matter. It means birth happened — and your voice was still in the room." },
+      },
+    ],
+  },
+
+  // ─── WHAT HAPPENS IF LABOUR DOESN'T START ─────────────────────────────────
+  {
+    slug: "what-happens-if-labour-doesnt-start",
+    title: "What happens if labour doesn't start: the days around and after your due date",
+    metaDescription: "What usually happens if labour doesn't start by your due date — monitoring, sweeps, induction conversations, what waiting can feel like, and how to think about the next step.",
+    quickAnswer:
+      "Going past your due date is normal. Around half of first pregnancies last longer than 40 weeks, and most of those have completely well babies. Beyond 40 weeks, your team will usually offer extra checks, membrane sweeps, and — by 41 to 42 weeks — a conversation about induction. The waiting can feel long. The decisions are real but not usually urgent. There's almost always time to ask questions and decide at your own pace.",
+    howThisFeels: [
+      "Tired of being asked 'any sign yet?'",
+      "Counting days that don't seem to count",
+      "Worried that something must be wrong",
+      "Caught between wanting it to start and dreading the decision about induction",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Going past 40 weeks is normal", body: "The due date is an estimate, not a deadline. Around half of first pregnancies go past 40 weeks, and most go on to deliver healthy babies." },
+        { heading: "Extra monitoring after 40 weeks", body: "Most units offer extra checks — blood pressure, urine, baby's heart rate, sometimes a scan — once you're past your due date." },
+        { heading: "Membrane sweeps", body: "Usually offered from around 40 weeks to nudge labour into starting and reduce the chance of needing formal induction." },
+        { heading: "Induction conversation", body: "Most UK units offer induction between 41 and 42 weeks if labour hasn't started. This is a conversation, not a directive." },
+      ],
+      lessCauses: [
+        { heading: "Specific medical reasons", body: "If there's a specific reason — gestational diabetes, raised blood pressure, growth concerns — the timeline may be different." },
+      ],
+      whyItVaries: "Pregnancies vary. A first pregnancy is more likely to go past 40 weeks than a second. Some people have inductions that are quick; others go into labour the night before they were due to be induced. The exact path is hard to predict in advance.",
+    },
+    timing: {
+      whenStarts: "The 'after the due date' phase begins from 40 weeks. Extra checks usually start straight away. Sweeps are typically offered from 40 weeks onward; induction conversations from 41 weeks.",
+      whenEases: "Most people give birth before 42 weeks, either spontaneously or through induction. Very few pregnancies go beyond.",
+    },
+    whatItFeelsLike: [
+      "Time stretching out unhelpfully",
+      "A loop of being asked when you're due",
+      "Heaviness, restlessness, and a sense of being suspended",
+      "Quiet dread mixed with wanting to know",
+    ],
+    whatThisMeans:
+      "Going past your due date is one of the most uncomfortable parts of pregnancy emotionally — and one of the most ordinary parts medically. The waiting is real, the decisions are real, and there's almost always time to make them carefully.",
+    normal: [
+      "Going past 40 weeks, especially in a first pregnancy",
+      "Being offered extra checks and one or more sweeps",
+      "An induction conversation around 41 weeks",
+      "A baby that arrives spontaneously a day or two before the planned induction",
+    ],
+    seekSupport: [
+      "Any change in your baby's movements — call the same day, do not wait",
+      "Severe headache, visual changes, sudden swelling, or pain in the upper right of the abdomen — call the same day",
+      "Anything that feels suddenly different — trust it",
+      "Persistent low mood, sleeplessness, or anxiety in late pregnancy is worth raising",
+    ],
+    disclaimer: "Going past your due date is normal. Calls to your maternity unit about reduced movements or anything that feels different are always appropriate, no matter how many days past your due date you are.",
+    whatYouCanDo: [
+      { action: "Lower the bar on busy", reason: "Late-pregnancy waiting is exhausting. Cancelling things, sleeping in, taking the lift — all reasonable." },
+      { action: "Ask about local induction policy", reason: "Knowing whether your unit induces at 41 or closer to 42 weeks helps you understand the shape of the next two weeks." },
+      { action: "Take sweeps as offered, or not", reason: "Sweeps can help. They're also not for everyone. Either decision is reasonable, and saying yes once doesn't commit you to saying yes again." },
+      { action: "Plan something quiet for each day past your due date", reason: "A small, manageable plan — a walk, a film, a meal you like — is kinder than waiting empty-handed." },
+    ],
+    whatHappensNext: "Most labours start by 41 to 42 weeks, either spontaneously or through induction. By the time you're holding the baby, the day-by-day waiting will feel much smaller than it does now.",
+    relatedStage: {
+      intro: "What happens if labour doesn't start sits at the heart of late pregnancy:",
+      links: [
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider topic this article belongs to." },
+        { label: "Membrane sweep", href: "/articles/membrane-sweep", context: "The smaller intervention often offered first." },
+        { label: "Induction of labour", href: "/articles/induction-of-labour", context: "The fuller conversation about starting labour with help." },
+        { label: "Signs of labour", href: "/articles/signs-of-labour", context: "What you're watching for in the meantime." },
+      ],
+    },
+    aiPrompts: [
+      "Is it normal to go past my due date?",
+      "What happens at 41 weeks if labour hasn't started?",
+      "How long can I wait before induction?",
+    ],
+    captureIntro: "The days around your due date are emotionally bigger than they look from the outside. Worth a quiet note of how the waiting felt — it tends to compress in memory once the baby arrives.",
+    trimester: [3],
+    relatedSlugs: ["membrane-sweep", "induction-of-labour", "signs-of-labour", "third-trimester-complete-guide"],
+    journey: ["pregnancy"],
+    topics: ["body", "labour"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Going past your due date is normal — around half of first pregnancies do",
+      "Extra monitoring usually starts from 40 weeks",
+      "Membrane sweeps are typically offered from 40 weeks onward",
+      "Induction is usually offered between 41 and 42 weeks if labour hasn't started",
+      "Most decisions in this window are conversations, not directives — there's time to think",
+    ],
+    sources: [
+      "NICE — Inducing labour",
+      "NHS — What happens if you're overdue",
+      "Royal College of Obstetricians and Gynaecologists — Induction of labour at term",
+      "Tommy's — Going overdue",
+    ],
+    faq: [
+      { question: "Is it normal to go past my due date?", answer: "Yes. Around half of first pregnancies last longer than 40 weeks. The due date is an estimate, not a deadline." },
+      { question: "How long will I be allowed to go past?", answer: "Most UK units offer induction between 41 and 42 weeks. After 42 weeks, the chance of complications begins to rise more meaningfully, which is why induction is usually recommended by then." },
+      { question: "What if I don't want to be induced?", answer: "Induction is a recommendation, not a directive. Your team will explain why it's offered, what the alternative would look like (closer monitoring), and what the trade-offs are. You can ask for time to decide." },
+      { question: "How will my baby be checked while I wait?", answer: "Extra checks usually include blood pressure, urine, listening to the baby's heart rate, and sometimes a scan or fluid check. Anything that raises concern would prompt a different conversation." },
+      { question: "What can I do to bring on labour?", answer: "Most non-medical methods — walking, curries, sex, raspberry leaf tea, nipple stimulation — have weak or no evidence behind them. They're unlikely to do harm if you feel up to them, but they're not reliable. Sweeps are the main intervention with reasonable evidence; induction is the next step beyond that." },
+    ],
+    topic: "body",
+    standfirst: "Going past your due date is one of the most ordinary — and most emotionally heavy — parts of late pregnancy. A calm look at what usually happens and how to think about it.",
+    editorialSections: [
+      {
+        id: "the-due-date",
+        heading: "What the due date actually is",
+        lead: "An estimate, not a deadline.",
+        paragraphs: [
+          "Your due date is calculated as 40 weeks from the first day of your last period, then adjusted by your dating scan. It's an estimate of when birth is most likely — not a date the baby is committed to.",
+          "Around half of first pregnancies last longer than 40 weeks. Going past it is one of the most common things that happens, and it almost never means anything is wrong.",
+        ],
+      },
+      {
+        id: "monitoring",
+        heading: "Monitoring after 40 weeks",
+        lead: "Extra checks to make sure the picture is still well.",
+        paragraphs: [
+          "Most units offer additional appointments once you're past your due date — sometimes every few days. They typically include blood pressure, urine, listening to the baby's heart rate, and a check on movements. Some units add a scan to look at fluid and growth.",
+          "These aren't a sign anything's wrong. They're a sign the team are paying attention while you wait.",
+        ],
+      },
+      {
+        id: "sweeps-and-conversations",
+        heading: "Sweeps and induction conversations",
+        lead: "Two ways the system gently encourages labour to start.",
+        paragraphs: [
+          "Membrane sweeps are usually offered from 40 weeks onward. They're a small intervention that can sometimes nudge labour into starting and lower the chance of needing formal induction.",
+          "By 41 weeks, most UK units start the conversation about induction. This is a real conversation, not a directive — your team will explain why it's recommended in your situation, what the alternatives look like, and what would happen if you wanted more time to decide.",
+        ],
+        callout: { tone: "info", text: "Induction is almost always a conversation. Asking for an extra day or two to think isn't unreasonable, and your team will continue to look after you whichever way you decide." },
+      },
+      {
+        id: "what-waiting-feels-like",
+        heading: "What waiting can feel like",
+        lead: "More tiring, more emotional, and more boring than people expect.",
+        paragraphs: [
+          "Each day past your due date can stretch in a way none of the earlier weeks did. Sleep is patchy. The phone is full of well-meaning messages asking 'any sign?'. The baby feels close and far at the same time.",
+          "There's no prize for being upbeat through this. Cancelling plans, sleeping in, watching films, eating things that feel comforting — all reasonable and often necessary. Late-pregnancy waiting is a real form of exhaustion.",
+        ],
+        callout: { tone: "reassurance", text: "If you're finding the waiting hard, that doesn't mean you're failing at the end of your pregnancy. It means the end of pregnancy is genuinely hard. You're allowed to find it that way." },
+      },
+      {
+        id: "choices-that-may-come-up",
+        heading: "What choices may come up",
+        lead: "A short map of the decisions in this window.",
+        paragraphs: [
+          "Whether to accept a sweep — and whether to accept a second or third. Whether to accept induction at the time it's first offered, or ask for a few more days. What method of induction to accept if it's offered. What you'd like the start of induction to look like.",
+          "These are real decisions and they deserve time. They are also almost never urgent. Asking 'what would you recommend?' and 'what would happen if I waited?' is a fair pair of questions to bring to any of them.",
+        ],
+      },
+      {
+        id: "next-step",
+        heading: "How to think about the next step",
+        lead: "A small, calm framework for what's almost always a hard week.",
+        paragraphs: [
+          "If your baby's movements are normal, your monitoring is reassuring, and your team are happy to wait a little longer, you have time. If anything changes — movements, blood pressure, anything that feels suddenly different — the rules also stay simple: call your maternity unit the same day.",
+          "Most labours start before 42 weeks, either spontaneously or with induction. The waiting is real, but it doesn't last. By the time you're holding the baby, this week will feel much smaller than it does now.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

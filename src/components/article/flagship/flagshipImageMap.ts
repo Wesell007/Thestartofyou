@@ -253,17 +253,34 @@ const KEYWORD_RULES: Rule[] = [
   { match: /why|what-is|overview|matters|context|the-real|what-people-mean|^[a-z-]+::what-/, img: { src: cardJourney, alt: "A reflective overview moment in pregnancy." } },
 ];
 
+// Resolve a section image with per-article deduplication.
+// `usedSrcs` is mutated: any returned image's src is added to the set so the
+// same asset cannot be reused later in the same article. If every candidate is
+// already used, returns undefined and the section renders text-only.
 export const resolveSectionImage = (
   slug: string,
   sectionId: string,
   heading?: string,
+  usedSrcs?: Set<string>,
 ): Img | undefined => {
+  const candidates: Img[] = [];
+
   const explicit = flagshipSectionImageMap[`${slug}::${sectionId}`];
-  if (explicit) return explicit;
+  if (explicit) candidates.push(explicit);
 
   const haystack = `${slug}::${sectionId} ${heading ?? ""}`.toLowerCase();
   for (const rule of KEYWORD_RULES) {
-    if (rule.match.test(haystack)) return rule.img;
+    if (rule.match.test(haystack)) candidates.push(rule.img);
   }
+
+  if (!usedSrcs) return candidates[0];
+
+  for (const c of candidates) {
+    if (!usedSrcs.has(c.src)) {
+      usedSrcs.add(c.src);
+      return c;
+    }
+  }
+  // No unique candidate available — render section text-only rather than duplicate.
   return undefined;
 };

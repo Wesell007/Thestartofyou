@@ -42,10 +42,10 @@ const FlagshipHero = ({ data }: Props) => {
           )}
         </nav>
 
-        {/* Split: text left, image right (desktop) — stacked on mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 lg:gap-14 items-center">
+        {/* Split: text left, image right (desktop only) — stacked on mobile + tablet */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-14 items-center">
           {/* TEXT */}
-          <div className="md:col-span-7 lg:col-span-7 order-2 md:order-1">
+          <div className="lg:col-span-7 order-2 lg:order-1">
             {topicLabel && (
               <div className="flex items-center gap-3 mb-4 sm:mb-5">
                 <div className="h-px w-8 bg-sage-light" />
@@ -85,8 +85,8 @@ const FlagshipHero = ({ data }: Props) => {
 
           {/* IMAGE */}
           {hero && (
-            <div className="md:col-span-5 lg:col-span-5 order-1 md:order-2">
-              <div className="relative rounded-2xl overflow-hidden shadow-elevated aspect-[4/5] md:aspect-[4/5]">
+            <div className="lg:col-span-5 order-1 lg:order-2">
+              <div className="relative rounded-2xl overflow-hidden shadow-elevated aspect-[4/3] md:aspect-[16/10] lg:aspect-[4/5]">
                 <img
                   src={hero.src}
                   alt={hero.alt}

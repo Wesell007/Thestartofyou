@@ -111,6 +111,16 @@ const LIVE = {
   emotionalIVF: "/articles/emotional-impact-of-ivf",
   emotionalWellbeing: "/articles/emotional-wellbeing-pregnancy",
   perinatalAnxiety: "/articles/perinatal-anxiety",
+
+  // Phase M
+  ovulationSigns: "/articles/ovulation-signs",
+  fertileWindow: "/articles/fertile-window",
+  implantationTiming: "/articles/how-long-implantation-takes",
+  whenToTest: "/articles/when-to-take-a-pregnancy-test",
+  faintPositive: "/articles/faint-positive-pregnancy-test",
+  chemicalPregnancy: "/articles/chemical-pregnancy",
+  tryingAgain: "/articles/trying-again-after-miscarriage",
+  pregnantOnPeriod: "/articles/can-you-get-pregnant-on-your-period",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────

@@ -11340,6 +11340,1190 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── BLEEDING IN EARLY PREGNANCY ──────────────────────────────────────────
+  {
+    slug: "bleeding-in-early-pregnancy",
+    title: "Bleeding in early pregnancy: what it can mean, when it's common, and when to call",
+    metaDescription: "Bleeding in early pregnancy explained — what's often light and self-resolving, what may need a same-day check, and how to think about timing, amount, pain, and next steps.",
+    quickAnswer:
+      "Light bleeding in early pregnancy is common and doesn't always mean something is wrong — many people who bleed go on to have an entirely healthy pregnancy. Heavier bleeding, bleeding with strong cramping, one-sided pain, shoulder-tip pain, dizziness, or passing tissue is a reason to be seen the same day. The honest rule of thumb in the first 12 weeks is: any bleeding is worth a phone call to your GP, midwife, or the early pregnancy unit — they'd rather check than guess.",
+    howThisFeels: [
+      "Frightened the moment you see anything",
+      "Trying to read meaning into colour, amount, or timing",
+      "Holding back from telling anyone in case 'it's nothing'",
+      "Bracing for bad news while hoping for reassurance",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Implantation and very early changes", body: "In the first weeks, light spotting can come from the embryo settling into the uterine lining, or from cervical changes. It's often pink or brown, lasts a day or two, and stops on its own." },
+        { heading: "Cervical sensitivity", body: "The cervix becomes more vascular in pregnancy, so sex, an internal exam, or a swab can cause a small amount of bleeding that isn't a sign of anything wrong." },
+      ],
+      lessCauses: [
+        { heading: "Things that need to be ruled out", body: "Heavier bleeding, persistent bleeding, or bleeding with pain can be a sign of miscarriage or ectopic pregnancy. Neither is something to diagnose at home — both are reasons to be seen." },
+      ],
+      whyItVaries: "Two people can have similar-looking spotting and very different stories behind it. That's exactly why an early pregnancy unit exists — to look properly rather than guess from the colour of a pad.",
+    },
+    timing: {
+      whenStarts: "Most often in the first 12 weeks, though it can happen at any point.",
+      whenEases: "Implantation-type spotting usually settles within 1–2 days. Bleeding that continues, gets heavier, or comes with pain is a reason to be seen.",
+    },
+    whatItFeelsLike: [
+      "Pink, brown, or red on wiping",
+      "A small amount on underwear or a liner",
+      "Heavier flow with clots — different in feel from spotting",
+      "Cramping that's stronger than ordinary period twinges",
+    ],
+    whatThisMeans:
+      "Bleeding in early pregnancy is one of the most frightening things you can see, and one of the most common reasons people contact their early pregnancy unit. Being seen is a reasonable response — not an overreaction.",
+    normal: [
+      "A small amount of pink or brown spotting that stops within a day or two",
+      "Light bleeding after sex or an internal exam",
+      "Mild cramping with no heavy bleeding",
+    ],
+    seekSupport: [
+      "Any bleeding in the first 12 weeks — call your GP, midwife, or early pregnancy unit for advice the same day",
+      "Heavy bleeding (soaking pads), passing clots or tissue — call your early pregnancy unit or 111",
+      "One-sided lower-tummy pain, shoulder-tip pain, dizziness or feeling faint — possible ectopic; call 999 or go to A&E",
+      "Bleeding with fever or feeling unwell — same-day GP or 111",
+      "Bleeding after 24 weeks — call your maternity unit straight away, not the early pregnancy unit",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. Bleeding in pregnancy is always reasonable to phone about — your team would rather check than have you wait it out at home.",
+    whatYouCanDo: [
+      { action: "Call your early pregnancy unit (or GP if you don't know yours yet)", reason: "They can advise whether you need to be seen, and how soon. Most areas accept self-referral in early pregnancy." },
+      { action: "Note the colour, amount, and timing", reason: "It helps the clinician you speak to. A photo of the pad isn't necessary, but a brief description is." },
+      { action: "Avoid trying to interpret it from internet pictures", reason: "Bleeding looks different on different surfaces and at different stages. The same image can mean very different things." },
+      { action: "Tell someone with you", reason: "Whether it turns out to be nothing or something, you don't have to hold it on your own." },
+    ],
+    whatHappensNext: "If you're seen, the early pregnancy unit will usually offer a scan and sometimes blood tests. Many scans show a healthy pregnancy and the bleeding settles. Some show that something has changed. Either way, you'll be talked through what comes next — you don't need to know what to do until then.",
+    relatedStage: {
+      intro: "Bleeding sits alongside the other 'is this normal?' early pregnancy questions:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Spotting in pregnancy", href: "/articles/spotting-in-pregnancy", context: "When it's lighter than bleeding and you're not sure which it is." },
+        { label: "When to worry about cramps in pregnancy", href: "/articles/when-to-worry-about-cramps-in-pregnancy", context: "How to think about pain alongside bleeding." },
+        { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy", context: "For the spiralling that often comes with bleeding scares." },
+      ],
+    },
+    aiPrompts: [
+      "Is bleeding in early pregnancy always a miscarriage?",
+      "How much bleeding is too much in early pregnancy?",
+      "What does an early pregnancy unit do?",
+    ],
+    captureIntro: "Worth noting timing, colour, and what happened around it — useful for the clinician you speak to, and for your own sense of pattern.",
+    trimester: [1],
+    relatedSlugs: ["spotting-in-pregnancy", "when-to-worry-about-cramps-in-pregnancy", "implantation-bleeding", "anxiety-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Light bleeding in early pregnancy is common and often self-resolving",
+      "Any first-trimester bleeding is reasonable to phone about",
+      "Heavy bleeding, severe pain, or feeling faint needs same-day or urgent care",
+      "One-sided pain or shoulder-tip pain can suggest ectopic — treat as urgent",
+      "Bleeding after 24 weeks goes to the maternity unit, not the early pregnancy unit",
+    ],
+    sources: [
+      "NHS — Vaginal bleeding in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists — Early pregnancy loss",
+      "NICE — Ectopic pregnancy and miscarriage",
+      "Tommy's — Bleeding in pregnancy",
+    ],
+    faq: [
+      { question: "Does bleeding always mean miscarriage?", answer: "No. Many people who bleed in early pregnancy go on to have a healthy pregnancy. Bleeding is a reason to be seen so the cause can be checked, not a diagnosis on its own." },
+      { question: "What does ectopic pregnancy bleeding look like?", answer: "It varies, but classic features are bleeding with one-sided lower-tummy pain, shoulder-tip pain, dizziness, or feeling faint. These together are an urgent reason to call 999 or go to A&E." },
+      { question: "Is brown bleeding less worrying than red?", answer: "Brown blood is older, so it can feel less alarming, but the colour alone doesn't decide what's happening. Any bleeding in the first 12 weeks is reasonable to phone about." },
+      { question: "When should I go to A&E?", answer: "Heavy bleeding you can't slow, severe one-sided pain, shoulder-tip pain, dizziness, fainting, or feeling very unwell are all reasons to call 999 or go to A&E rather than wait." },
+      { question: "Can I bleed and still be pregnant?", answer: "Yes — many people do. A scan is usually the way to confirm what's happening, which is why early pregnancy units exist." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "One of the most frightening things to see, and one of the most common reasons to call. Calmly, what it can mean and what to do.",
+    editorialSections: [
+      {
+        id: "what-it-can-mean",
+        heading: "What bleeding in early pregnancy can mean",
+        lead: "More than one story fits the same colour on a pad.",
+        paragraphs: [
+          "Bleeding in the first 12 weeks is one of the most common reasons people contact their GP or early pregnancy unit, and it doesn't always mean the pregnancy is ending. Light spotting from implantation, cervical sensitivity, or unknown causes is well documented in pregnancies that go on perfectly normally.",
+          "It can also be the first sign of a miscarriage or, less commonly, an ectopic pregnancy. Those are not things to diagnose at home — they're reasons to be seen, which is exactly what early pregnancy services are designed for.",
+        ],
+      },
+      {
+        id: "timing",
+        heading: "How timing changes the meaning",
+        lead: "The same symptom in week 6 and week 26 is not the same conversation.",
+        paragraphs: [
+          "Bleeding in the first trimester usually goes through the early pregnancy unit. Bleeding from around 16–24 weeks tends to be reviewed by the maternity team, and bleeding from 24 weeks onward is always a maternity unit call — same day, regardless of how light it looks.",
+          "If you're not sure which week you're in, the safest default is to call your maternity unit and let them route you.",
+        ],
+        callout: { tone: "info", text: "Any bleeding from 24 weeks onward goes straight to the maternity unit, not the early pregnancy unit and not a GP appointment in three days' time." },
+      },
+      {
+        id: "amount-and-pain",
+        heading: "What the amount and the pain are telling you",
+        lead: "Two clues that change urgency.",
+        paragraphs: [
+          "Light spotting on a liner is a different conversation from soaking a pad. Mild cramping is different from one-sided severe pain. Bleeding with shoulder-tip pain, dizziness, or feeling faint is an A&E or 999 call — those together can suggest an ectopic pregnancy.",
+          "You don't have to be certain about any of this. The clinician on the phone will ask the questions that matter; your job is just to call.",
+        ],
+        callout: { tone: "gentle-warning", text: "Bleeding with one-sided lower-tummy pain, shoulder-tip pain, dizziness, or fainting is an urgent reason to call 999 or go to A&E." },
+      },
+      {
+        id: "what-happens-when-seen",
+        heading: "What being seen usually involves",
+        lead: "Mostly: a scan, sometimes bloods, and someone explaining as they go.",
+        paragraphs: [
+          "Early pregnancy units typically offer an ultrasound — abdominal or, more often in early weeks, a small internal scan that gives a clearer view. Sometimes blood tests are done to track pregnancy hormone levels over a couple of days. The point is to find out what's actually happening, not to confirm a fear.",
+          "Some scans show a healthy pregnancy and the bleeding settles. Others show that something has changed. Either way, you'll be talked through what comes next.",
+        ],
+      },
+      {
+        id: "after-the-scan",
+        heading: "Living with uncertainty between calls and scans",
+        lead: "The bit no leaflet ever covers.",
+        paragraphs: [
+          "Waiting for an early pregnancy appointment, or for the answer to settle, is one of the hardest stretches in early pregnancy. Telling one person who can sit with you, eating something, and trying not to scroll image searches all genuinely help.",
+          "Bleeding doesn't always mean the worst. It does mean a phone call. Beyond that, you don't have to know what's happening yet — that's what the service is there to find out.",
+        ],
+      },
+    ],
+  },
+
+  // ─── SPOTTING IN PREGNANCY ────────────────────────────────────────────────
+  {
+    slug: "spotting-in-pregnancy",
+    title: "Spotting in pregnancy: what it usually means, when it's common, and when to be seen",
+    metaDescription: "Spotting in pregnancy explained — how it differs from bleeding, why it can happen after sex or exams, what's usually nothing, and when it's worth checking.",
+    quickAnswer:
+      "Spotting is a small amount of pink, brown, or red blood — usually only seen when you wipe or as a few spots on underwear or a liner. It's common in early pregnancy, and is also seen after sex, internal exams, or as the cervix changes. It often settles on its own. Spotting is still worth a phone call to your GP, midwife, or early pregnancy unit so the cause can be checked, particularly the first time it happens.",
+    howThisFeels: [
+      "Surprised and a bit panicked at the sight of anything",
+      "Unsure if it 'counts' as bleeding",
+      "Wondering whether to call or wait it out",
+      "Replaying yesterday — sex, exam, lifting — to look for a cause",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Cervical changes", body: "The cervix is more vascular in pregnancy. Sex, a smear test, an internal exam, or a swab can cause a small amount of bleeding that looks alarming but isn't usually a sign of anything wrong." },
+        { heading: "Early pregnancy spotting", body: "Light pink or brown spotting around the time of implantation, or in the first few weeks, is common and often resolves on its own." },
+      ],
+      lessCauses: [
+        { heading: "Things to rule out", body: "Spotting can occasionally be the first sign of miscarriage, ectopic pregnancy, infection, or a cervical issue. None of those are things to diagnose from a description — they're reasons the early pregnancy unit exists." },
+      ],
+      whyItVaries: "Two people can have identical-looking spotting and entirely different reasons behind it. The honest answer is usually 'phone, and let someone look properly'.",
+    },
+    timing: {
+      whenStarts: "Can happen at any point in pregnancy; most common in the first trimester.",
+      whenEases: "Spotting from cervical sensitivity or implantation usually settles within hours to a day or two.",
+    },
+    whatItFeelsLike: [
+      "A small amount when wiping",
+      "A few pink or brown spots on a liner",
+      "No flow, no clots, no soaking through",
+      "Often no cramping, or only mild twinges",
+    ],
+    whatThisMeans:
+      "Spotting is one of the most common reasons people contact their early pregnancy unit, and most of the time the cause is benign. That doesn't make it less frightening to see — it just makes the phone call a sensible step rather than an overreaction.",
+    normal: [
+      "A small amount of pink or brown spotting that stops within a day or two",
+      "Light spotting after sex, a swab, or an internal exam",
+      "Spotting with no pain and no flow",
+    ],
+    seekSupport: [
+      "Any spotting the first time it happens in pregnancy — call your GP, midwife, or early pregnancy unit for advice",
+      "Spotting that becomes a heavier flow — same-day call to your early pregnancy unit (or maternity unit after 24 weeks)",
+      "Spotting with one-sided pain, shoulder-tip pain, dizziness — possible ectopic; call 999 or go to A&E",
+      "Spotting with strong-smelling discharge, itching, or pain on weeing — possible infection; speak to a GP",
+      "Spotting after 24 weeks — call your maternity unit, not the early pregnancy unit",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. The first time you see spotting in pregnancy, calling someone is the right next step rather than guessing.",
+    whatYouCanDo: [
+      { action: "Call your early pregnancy unit or maternity team", reason: "They will tell you whether you need to be seen, and how soon." },
+      { action: "Note the colour, amount, and what was happening before", reason: "Recent sex, an exam, or a long day on your feet are all useful context for the clinician." },
+      { action: "Wear a liner so you can see if it stays light or builds", reason: "Helps you describe what's actually happening if you call back." },
+      { action: "Don't try to decide from images online", reason: "The same colour can mean different things at different stages — and the spiral isn't kind." },
+    ],
+    whatHappensNext: "If your team thinks it's worth seeing you, you'll usually be offered a scan or an examination. Most spotting turns out to be nothing serious — but the calm, confirmed answer comes from being seen, not from waiting at home.",
+    relatedStage: {
+      intro: "Spotting sits alongside the other early-pregnancy 'is this normal?' questions:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Bleeding in early pregnancy", href: "/articles/bleeding-in-early-pregnancy", context: "When it's clearly more than spotting." },
+        { label: "When to worry about cramps in pregnancy", href: "/articles/when-to-worry-about-cramps-in-pregnancy", context: "Pain alongside spotting deserves its own thought." },
+        { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy", context: "For the spiralling that often comes with these moments." },
+      ],
+    },
+    aiPrompts: [
+      "Is spotting in pregnancy normal?",
+      "Is spotting different from bleeding?",
+      "Should I call about spotting after sex?",
+    ],
+    captureIntro: "Worth noting timing, colour, and what was happening around it — useful for the clinician and for noticing pattern.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["bleeding-in-early-pregnancy", "implantation-bleeding", "when-to-worry-about-cramps-in-pregnancy", "anxiety-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Spotting is small amounts of pink, brown, or red — not a flow",
+      "Common in early pregnancy and after sex, exams, or swabs",
+      "Often settles on its own, but worth a call the first time",
+      "Spotting with pain, dizziness, or shoulder-tip pain is urgent",
+      "From 24 weeks, all bleeding goes to the maternity unit",
+    ],
+    sources: [
+      "NHS — Vaginal bleeding in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists",
+      "Tommy's — Bleeding and spotting in pregnancy",
+      "NICE — Antenatal care",
+    ],
+    faq: [
+      { question: "Is spotting in pregnancy normal?", answer: "Light spotting is common, particularly in the first trimester and after things like sex or internal exams. It's still worth a call so the cause can be checked, especially the first time." },
+      { question: "How is spotting different from bleeding?", answer: "Spotting is a few drops or marks on wiping or a liner, with no real flow. Bleeding is heavier — soaking a pad, or producing clots. Heavier flow is a same-day call rather than a 'wait and see'." },
+      { question: "Why am I spotting after sex?", answer: "The cervix is more sensitive and vascular in pregnancy, so light spotting after sex or an internal exam is common and usually nothing serious. It's still worth mentioning to your team, particularly the first time." },
+      { question: "Should I rest after spotting?", answer: "Rest doesn't change whether spotting becomes more — but it can help you feel calmer. The most useful step is to call your GP, midwife, or early pregnancy unit." },
+      { question: "Is brown spotting better than red?", answer: "Brown blood is older, so it often feels less alarming, but colour alone doesn't decide the cause. Any spotting the first time it happens is a reasonable phone call." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "Small marks, big anxiety. What spotting usually means, and the calm next step.",
+    editorialSections: [
+      {
+        id: "what-counts-as-spotting",
+        heading: "What counts as spotting (and what doesn't)",
+        lead: "A small amount, not a flow.",
+        paragraphs: [
+          "Spotting usually means a few pink, brown, or red marks on wiping, or a few spots on underwear or a panty liner. It doesn't soak a pad, and it doesn't produce clots. If what you're seeing fills a pad or comes with clots, that's bleeding and a different conversation — call your maternity unit or early pregnancy unit the same day.",
+          "Spotting can come and go over a few hours, then stop. That doesn't mean it didn't happen, and it doesn't mean a call is no longer reasonable.",
+        ],
+      },
+      {
+        id: "common-causes",
+        heading: "Why it can happen — even in healthy pregnancies",
+        lead: "The cervix is more sensitive than usual.",
+        paragraphs: [
+          "In pregnancy the cervix is more vascular, so contact — sex, a smear, a swab, an internal examination — can cause a small amount of bleeding that looks alarming and isn't usually a sign of anything wrong. Early pregnancy itself can cause some spotting, often in the first few weeks.",
+          "None of this means you shouldn't ring. It means that when you do, the answer is often reassuring once you've been talked through it or seen.",
+        ],
+      },
+      {
+        id: "when-to-call",
+        heading: "When spotting tips into 'call now'",
+        lead: "A few clues that change the urgency.",
+        paragraphs: [
+          "Spotting that builds into a flow, spotting with one-sided lower-tummy pain, shoulder-tip pain, dizziness or feeling faint, or spotting with fever, strong-smelling discharge, or pain when weeing all push the situation up the urgency ladder. So does any spotting from 24 weeks onward.",
+          "If you're unsure which category you're in, your maternity unit is the right place to phone. They will not be cross with you.",
+        ],
+        callout: { tone: "gentle-warning", text: "Spotting with one-sided pain, shoulder-tip pain, dizziness, or fainting can suggest ectopic pregnancy. Treat that as a 999 or A&E call." },
+      },
+      {
+        id: "after-sex",
+        heading: "Spotting after sex or an internal exam",
+        lead: "Common, and usually not a sign of anything wrong.",
+        paragraphs: [
+          "A small amount of spotting after sex, a smear test, or an internal examination is one of the most common patterns in pregnancy. The cervix bleeds more easily, and the bleeding is from the surface — not from the pregnancy itself.",
+          "Mention it at your next appointment, and call sooner if it's the first time, if it doesn't settle within a day, or if anything else (pain, fever, heavier flow) joins it.",
+        ],
+      },
+      {
+        id: "what-being-seen-looks-like",
+        heading: "What being seen actually involves",
+        lead: "Less frightening than the worst-case version in your head.",
+        paragraphs: [
+          "If your team wants to see you, that usually means an examination, often a scan, and sometimes a swab. The point is to find out what's happening — not to confirm a fear. Most spotting turns out to be benign.",
+          "Going in is not 'making a fuss'. It's the system working the way it's designed to.",
+        ],
+      },
+    ],
+  },
+
+  // ─── DISCHARGE IN PREGNANCY ───────────────────────────────────────────────
+  {
+    slug: "discharge-in-pregnancy",
+    title: "Discharge in pregnancy: what's normal, what's not, and how to read your own body",
+    metaDescription: "Discharge in pregnancy explained — how amount, colour, and texture usually change, what's typical, and when discharge suggests infection or something worth checking.",
+    quickAnswer:
+      "More discharge is one of the earliest and most consistent changes in pregnancy. Normal pregnancy discharge (sometimes called leukorrhoea) is usually thin, milky white or clear, and has only a mild smell. Discharge that's strong-smelling, grey, green, yellow, frothy, or itchy isn't normal pregnancy discharge — it's worth being checked, usually for thrush, bacterial vaginosis, or another infection. Watery discharge that soaks underwear in the third trimester needs a call to your maternity unit to rule out leaking waters.",
+    howThisFeels: [
+      "Surprised by how much there is now",
+      "Unsure what's a normal change and what's a problem",
+      "Embarrassed to mention it to anyone",
+      "Constantly checking when out of the house",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Hormonal changes increase discharge", body: "Higher oestrogen and increased blood flow to the pelvis lead to more discharge in pregnancy. It's the body keeping the vaginal environment healthy and protected." },
+        { heading: "It changes through pregnancy", body: "Discharge often increases gradually, becomes thicker in late pregnancy, and may shift in the days before labour as the cervix changes." },
+      ],
+      lessCauses: [
+        { heading: "When discharge isn't routine", body: "Strong smell, unusual colour, itching, soreness, or pain alongside discharge can suggest thrush, bacterial vaginosis, an STI, or other infection. Pregnancy doesn't make these go away — they need treating." },
+      ],
+      whyItVaries: "Some pregnancies have noticeably more discharge than others, and amount varies day to day. The pattern that matters is changes from your normal-for-pregnancy: smell, colour, texture, or new symptoms.",
+    },
+    timing: {
+      whenStarts: "Often noticeable from the first trimester, sometimes among the earliest signs.",
+      whenEases: "Continues throughout pregnancy; tends to be heaviest in the third trimester.",
+    },
+    whatItFeelsLike: [
+      "Thin, milky white or clear, mild smell — typical pregnancy discharge",
+      "Wet feeling that needs a liner some days",
+      "Thicker, mucus-like discharge in late pregnancy",
+      "Itching, burning, strong smell — not normal pregnancy discharge",
+    ],
+    whatThisMeans:
+      "More discharge in pregnancy is normal and usually a sign your body is doing its job. Anything that breaks the normal-for-pregnancy pattern — smell, colour, itching, soreness — is worth checking, not ignoring.",
+    normal: [
+      "Thin, milky white or clear discharge with a mild smell",
+      "Increasing amount as pregnancy progresses",
+      "Thicker, sometimes jelly-like discharge in late pregnancy",
+    ],
+    seekSupport: [
+      "Strong-smelling discharge, or grey, green, yellow, or frothy discharge — speak to a GP",
+      "Itching, soreness, or burning alongside discharge — possible thrush; pharmacist or GP",
+      "Pain on weeing or low-tummy pain alongside discharge — possible UTI; same-day GP or 111",
+      "Watery discharge that soaks underwear in the third trimester — call maternity unit to rule out leaking waters",
+      "Blood-tinged discharge ('show') in late pregnancy — usually normal labour-adjacent, but call if heavier than expected",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. Discharge that breaks the normal-for-pregnancy pattern is worth being seen rather than self-treated, particularly the first time it happens.",
+    whatYouCanDo: [
+      { action: "Wear breathable cotton underwear and unscented liners if needed", reason: "Reduces irritation and helps you notice real changes rather than fabric reactions." },
+      { action: "Avoid scented washes and bubble baths around the vulva", reason: "These disrupt natural pH and can trigger infection or irritation that's then mistaken for a discharge issue." },
+      { action: "Notice the smell, colour, and texture", reason: "If you do call, this is the description that matters — not the amount alone." },
+      { action: "Ask if you're not sure", reason: "Pharmacists handle these questions all the time. A midwife or GP is the right call for anything that doesn't fit thrush." },
+    ],
+    whatHappensNext: "Most pregnancy discharge needs no treatment beyond comfort measures. If something looks like infection, your team will swab or examine to find out what it is and treat it appropriately. In late pregnancy, watery discharge that might be waters is checked by the maternity unit, usually with a quick examination.",
+    relatedStage: {
+      intro: "Discharge questions sit alongside other intimate-symptom topics:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Watery discharge in pregnancy", href: "/articles/watery-discharge-in-pregnancy", context: "When the question becomes 'is this fluid?'" },
+        { label: "Thrush in pregnancy", href: "/articles/thrush-in-pregnancy", context: "The most common cause of itching with discharge." },
+        { label: "UTI in pregnancy", href: "/articles/uti-in-pregnancy", context: "When pain on weeing joins the picture." },
+      ],
+    },
+    aiPrompts: [
+      "What's normal discharge in pregnancy?",
+      "When should I worry about pregnancy discharge?",
+      "Is discharge a sign of labour?",
+    ],
+    captureIntro: "Worth noting changes — smell, colour, texture, or new symptoms — rather than the amount alone.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["watery-discharge-in-pregnancy", "thrush-in-pregnancy", "uti-in-pregnancy", "leaking-fluid-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "More discharge is one of the most consistent pregnancy changes",
+      "Normal: thin, milky white or clear, mild smell",
+      "Strong smell, unusual colour, or itching needs checking",
+      "Watery discharge in late pregnancy may be waters — call maternity unit",
+      "Comfort measures: cotton, breathable, unscented",
+    ],
+    sources: [
+      "NHS — Vaginal discharge in pregnancy",
+      "NICE — Antenatal care",
+      "Royal College of Obstetricians and Gynaecologists",
+      "Tommy's — Pregnancy discharge",
+    ],
+    faq: [
+      { question: "What's normal discharge in pregnancy?", answer: "Thin, milky white or clear discharge with a mild smell that increases as pregnancy progresses. It's the body keeping the vaginal environment healthy." },
+      { question: "What does abnormal discharge look like?", answer: "Strong-smelling, grey, green, yellow, or frothy discharge isn't normal pregnancy discharge. Itching, soreness, or pain alongside it is also a sign to be checked." },
+      { question: "Is discharge a sign of labour?", answer: "It can be. Thicker, jelly-like discharge — sometimes blood-tinged ('show') — can come in the days or hours before labour. It's not the same as waters going, which is usually wetter and more sudden or persistent." },
+      { question: "Can I treat discharge with thrush cream?", answer: "Only if a pharmacist or GP has confirmed it's thrush. The first time you suspect thrush in pregnancy, get it checked rather than self-treating." },
+      { question: "Should I douche to feel cleaner?", answer: "No — douching disrupts the natural balance and increases the risk of infection. Plain water on the outside is enough." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "More than you remember from before pregnancy — and usually a sign things are working. The clear lines between normal and worth-a-check.",
+    editorialSections: [
+      {
+        id: "why-more",
+        heading: "Why there's so much more of it now",
+        lead: "Hormones, blood flow, and a vaginal environment doing its job.",
+        paragraphs: [
+          "Higher oestrogen levels and increased blood flow to the pelvis mean more discharge in pregnancy. It's the body protecting the vaginal environment and keeping it healthy. Some pregnancies have noticeably more than others — both are normal.",
+          "The amount tends to increase gradually through pregnancy and is often heaviest in the third trimester. Wearing a liner on the days you need one is a reasonable comfort step, not a sign anything is wrong.",
+        ],
+      },
+      {
+        id: "what-normal-looks-like",
+        heading: "What normal pregnancy discharge looks like",
+        lead: "Thin, milky white or clear, mild smell.",
+        paragraphs: [
+          "Normal pregnancy discharge (sometimes called leukorrhoea) is thin to slightly thicker, milky white or clear, and has only a mild smell. It might leave a small amount on a liner or in underwear over the day.",
+          "What it isn't, normally: strong-smelling, grey, green, yellow, or frothy. None of those fit the typical pregnancy pattern, and any of them is a reason to see a GP.",
+        ],
+      },
+      {
+        id: "when-its-not-normal",
+        heading: "When discharge points to infection or something else",
+        lead: "A few patterns to take seriously.",
+        paragraphs: [
+          "Itching with thick white discharge that doesn't smell strong is the classic picture of thrush. A strong-smelling, grey, green, yellow, or frothy discharge suggests bacterial vaginosis, an STI, or a different infection. Pain on weeing alongside discharge can suggest a UTI.",
+          "None of these are diagnoses to make at home. A GP or midwife will swab if needed and treat whatever's actually there.",
+        ],
+        callout: { tone: "gentle-warning", text: "Strong-smelling, grey, green, yellow, or frothy discharge isn't normal pregnancy discharge — see a GP rather than self-treating." },
+      },
+      {
+        id: "in-late-pregnancy",
+        heading: "How discharge changes near labour",
+        lead: "Thicker, sometimes blood-tinged, often a quiet labour cue.",
+        paragraphs: [
+          "In the days or hours before labour, discharge often becomes thicker and more mucus-like. It can be tinged pink or brown — sometimes called a 'show' — as the cervix changes. That's usually normal labour-adjacent territory and not on its own a reason to go in, unless your team has told you otherwise.",
+          "Watery discharge that soaks underwear, or a sudden gush, is a different question. That's a maternity unit call, because it can mean waters have gone or are leaking.",
+        ],
+      },
+      {
+        id: "comfort-and-care",
+        heading: "Comfort, kindness, and not over-correcting",
+        lead: "Less is more.",
+        paragraphs: [
+          "Cotton, breathable underwear, unscented liners on the days you need them, plain water for washing, and avoiding scented soaps, bubble baths, and shower gels around the vulva all help. Douching makes things worse, not better — the area is self-cleaning.",
+          "If you're often uncomfortable, talking to your midwife or GP is reasonable. Discharge isn't an embarrassing topic in their week — it's an everyday one.",
+        ],
+      },
+    ],
+  },
+
+  // ─── WATERY DISCHARGE IN PREGNANCY ────────────────────────────────────────
+  {
+    slug: "watery-discharge-in-pregnancy",
+    title: "Watery discharge in pregnancy: how to tell what it is, and when to call",
+    metaDescription: "Watery discharge in pregnancy explained — how to tell discharge, urine, sweat, and amniotic fluid apart, when to call maternity triage, and why uncertainty is enough to ask.",
+    quickAnswer:
+      "Watery discharge in pregnancy is often just an increase in normal pregnancy discharge — thin, clear or pale, and usually nothing to worry about. In late pregnancy, watery discharge that keeps coming, soaks underwear or a pad, or comes as a sudden gush can be amniotic fluid (your waters going). The honest rule is: if you're not sure whether what you're feeling is discharge, urine, sweat, or fluid, call your maternity unit and let them check. Uncertainty is a good enough reason to ring.",
+    howThisFeels: [
+      "Constantly damp and unsure why",
+      "Replaying the day for what you ate, drank, or did",
+      "Worried about waters but feeling silly to ring",
+      "Not sure if you wet yourself or if something else is happening",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Increased pregnancy discharge", body: "Higher oestrogen and blood flow lead to more, often thinner, discharge throughout pregnancy. Some days it can feel quite watery." },
+        { heading: "Stress incontinence", body: "Pressure from a growing bump can cause small leaks of urine when laughing, coughing, sneezing, or running — common, especially in late pregnancy." },
+      ],
+      lessCauses: [
+        { heading: "Leaking waters", body: "In late pregnancy, watery discharge that keeps coming, soaks pads, or comes as a gush can be amniotic fluid. This always needs a maternity unit call." },
+      ],
+      whyItVaries: "On any given day, watery discharge can be one of several things. The clinician on the phone is used to teasing them apart — that's exactly the conversation triage is built for.",
+    },
+    timing: {
+      whenStarts: "Can happen at any point in pregnancy.",
+      whenEases: "Discharge continues; small urine leaks often improve after birth and pelvic floor recovery.",
+    },
+    whatItFeelsLike: [
+      "Wet feeling between the legs that comes and goes",
+      "A small leak when sneezing or laughing",
+      "A trickle that keeps coming back even after you've changed underwear",
+      "A sudden gush of fluid (in late pregnancy — call maternity unit)",
+    ],
+    whatThisMeans:
+      "Watery discharge is rarely an emergency on its own, but in late pregnancy it can be a sign waters have gone or are leaking. The honest test isn't certainty — it's whether you're unsure. If you are, your maternity unit is the right call.",
+    normal: [
+      "An increase in thin, clear or pale discharge",
+      "Small leaks of urine when sneezing, coughing, laughing — especially late pregnancy",
+      "A wet feeling that you can pat dry and that doesn't keep coming back",
+    ],
+    seekSupport: [
+      "Watery discharge that keeps coming, soaks underwear or a pad, or comes as a gush — call maternity unit (any week, but especially after 24)",
+      "Watery discharge that smells unusual, looks green or brown — call maternity unit straight away",
+      "Watery discharge before 37 weeks — call maternity unit, even if amount seems small",
+      "Reduced or different baby movements alongside watery discharge — call maternity unit straight away",
+      "Watery discharge with itching, burning, or pain on weeing — possible infection; speak to a GP or midwife",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. If you're unsure whether what you're seeing is discharge, urine, sweat, or fluid, calling your maternity unit is the right step.",
+    whatYouCanDo: [
+      { action: "Empty your bladder, then put on a clean pad and lie down for 30 minutes", reason: "If when you stand up there's a fresh trickle, that points more towards waters than urine. Either way, the result helps the clinician on the phone." },
+      { action: "Notice the colour and smell", reason: "Amniotic fluid is usually clear or pale yellow with little smell. Green or brown fluid is a reason to call straight away." },
+      { action: "Don't ignore it because you 'aren't sure'", reason: "Uncertainty is a good enough reason to phone — your maternity team would rather check." },
+      { action: "Pay attention to baby movements", reason: "Reduced or changed movements alongside watery discharge needs an immediate call." },
+    ],
+    whatHappensNext: "When you call, your maternity team will usually ask you to come in for a quick check — sometimes including a sterile speculum exam to confirm whether waters have gone. If they have, you'll be advised on the next steps for your stage of pregnancy. If they haven't, you'll go home reassured. Both outcomes are good outcomes.",
+    relatedStage: {
+      intro: "Watery discharge sits alongside the other 'is this fluid?' questions:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Leaking fluid in pregnancy", href: "/articles/leaking-fluid-in-pregnancy", context: "When the question is more clearly about fluid loss." },
+        { label: "Discharge in pregnancy", href: "/articles/discharge-in-pregnancy", context: "The wider context of normal vs not." },
+        { label: "Signs of labour", href: "/articles/signs-of-labour", context: "Where waters going fits into the bigger picture." },
+      ],
+    },
+    aiPrompts: [
+      "Is watery discharge in pregnancy normal?",
+      "How do I tell if my waters have gone?",
+      "Should I call about a wet feeling in pregnancy?",
+    ],
+    captureIntro: "Worth noting timing, amount, colour, and movement alongside — useful for the maternity unit if you call.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["leaking-fluid-in-pregnancy", "discharge-in-pregnancy", "signs-of-labour", "reduced-movements-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Watery discharge is often just normal pregnancy discharge or stress incontinence",
+      "In late pregnancy, persistent watery loss can be amniotic fluid",
+      "Empty bladder, lie down, then check after 30 minutes for fresh trickle",
+      "Uncertainty is a good enough reason to call maternity triage",
+      "Green or brown fluid, or before 37 weeks, is a same-day call",
+    ],
+    sources: [
+      "NHS — Signs that labour has begun",
+      "Royal College of Obstetricians and Gynaecologists — Premature rupture of membranes",
+      "NICE — Intrapartum care",
+      "Tommy's — Waters breaking",
+    ],
+    faq: [
+      { question: "Is watery discharge in pregnancy normal?", answer: "It often is — pregnancy discharge can be quite thin, and small leaks of urine are common. In late pregnancy, watery discharge that keeps coming or soaks pads needs a call to maternity triage." },
+      { question: "How do I tell if my waters have gone?", answer: "Empty your bladder, put on a clean pad, lie down for 30 minutes, then stand up. If there's a fresh gush or trickle, that points towards waters. Either way, call your maternity unit if you're not sure." },
+      { question: "Should I call about a wet feeling?", answer: "Yes, especially in late pregnancy or if it's persistent. Maternity triage is the right number, and uncertainty is a good enough reason to ring." },
+      { question: "What colour is amniotic fluid?", answer: "Usually clear or pale yellow with very little smell. Green or brown fluid can suggest the baby has passed meconium and is a reason to call straight away." },
+      { question: "Can waters leak slowly?", answer: "Yes — it isn't always a dramatic gush. A slow leak that keeps coming back is one of the patterns that needs checking, even before 37 weeks." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "Discharge, urine, sweat, or fluid? How to tell, and why uncertainty is enough to ask.",
+    editorialSections: [
+      {
+        id: "what-it-can-be",
+        heading: "What watery discharge can actually be",
+        lead: "Several things can feel the same.",
+        paragraphs: [
+          "A wet feeling between the legs in pregnancy is usually one of three things: an increase in normal pregnancy discharge (which can be quite thin and clear), small leaks of urine due to bump pressure on the bladder, or — in late pregnancy — amniotic fluid leaking or waters going.",
+          "All three can feel similar, especially in the moment. That's why the right next step usually isn't to decide on your own — it's to use the simple checks below, and to call if anything is unclear.",
+        ],
+      },
+      {
+        id: "the-pad-test",
+        heading: "A simple home check before you call",
+        lead: "Not a diagnosis, but a useful clue.",
+        paragraphs: [
+          "Empty your bladder, put on a clean pad (or a folded clean cloth), and lie down for 30 minutes. When you stand up, see what happens. A small fresh trickle or gush points more towards waters than urine. A pad that's only slightly damp from earlier is more likely to be discharge or a small leak.",
+          "Whatever you find, this isn't a substitute for calling — it's information to share when you do.",
+        ],
+      },
+      {
+        id: "what-amniotic-fluid-looks-like",
+        heading: "What amniotic fluid looks and smells like",
+        lead: "Often subtler than people expect.",
+        paragraphs: [
+          "Amniotic fluid is usually clear or pale yellow, with little smell or a faintly sweet smell. It can come as a single gush, or as small persistent trickles that don't really stop even when you've changed underwear and emptied your bladder.",
+          "Green, brown, or strong-smelling fluid is a different conversation and a same-day call to maternity unit — it can suggest the baby has passed meconium or that there's an infection.",
+        ],
+        callout: { tone: "gentle-warning", text: "Green or brown fluid, fluid before 37 weeks, fluid with reduced movements, or fluid with a strong smell is a reason to call maternity unit straight away." },
+      },
+      {
+        id: "calling-triage",
+        heading: "Calling maternity triage",
+        lead: "Uncertainty is a perfectly good reason.",
+        paragraphs: [
+          "If you're not sure, that's the call to make. Maternity triage handles dozens of these conversations a day, and 'I'm not sure if my waters have gone' is one of the most common opening lines. They will not be cross with you, and they will not think you're wasting their time.",
+          "If they want to see you, you'll usually be checked with a quick examination. If they don't, you'll go home with clear advice on what would change the answer.",
+        ],
+      },
+      {
+        id: "before-37-weeks",
+        heading: "If you're under 37 weeks",
+        lead: "Lower threshold to call.",
+        paragraphs: [
+          "Before 37 weeks, any persistent watery discharge or possible fluid leak is a maternity unit call rather than a wait-and-see. Premature rupture of membranes needs to be checked properly, and the team will guide you through what comes next based on how many weeks you are.",
+          "Don't talk yourself out of calling because the amount seems small. The amount isn't always the clue — the persistence is.",
+        ],
+      },
+    ],
+  },
+
+  // ─── WHEN TO WORRY ABOUT CRAMPS IN PREGNANCY ──────────────────────────────
+  {
+    slug: "when-to-worry-about-cramps-in-pregnancy",
+    title: "When to worry about cramps in pregnancy: how to read pain at different stages",
+    metaDescription: "Cramps in pregnancy explained — what's usually normal stretching or round ligament pain, when cramps need a call, and how timing, location, and other symptoms change the meaning.",
+    quickAnswer:
+      "Mild, short-lived cramps are common in pregnancy and usually come from the uterus growing, ligaments stretching, or normal Braxton Hicks tightenings later on. Cramps that are severe, one-sided, persistent, or that come with bleeding, fever, dizziness, reduced movements, or fluid loss are not 'just stretching' — they're a reason to call your GP, midwife, or maternity unit. The honest rule of thumb: if pain is stopping you in your tracks or you're not sure, phone someone.",
+    howThisFeels: [
+      "Wondering if every twinge is the start of something",
+      "Trying to remember if this is what your last period felt like",
+      "Worried, but not sure if you're allowed to call",
+      "Not wanting to overreact, but also not wanting to ignore something real",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Uterus growing and ligaments stretching", body: "The uterus expands rapidly, especially in the first and second trimesters. Stretching of the round ligaments often causes sharp, short pains low in the bump or to one side, particularly when changing position." },
+        { heading: "Braxton Hicks contractions", body: "Practice contractions tighten the bump and ease off — usually painless or mildly uncomfortable, irregular, and not progressive." },
+        { heading: "Constipation and trapped wind", body: "Hormones slow the gut in pregnancy, which can cause crampy lower-tummy pain that eases after a bowel movement." },
+      ],
+      lessCauses: [
+        { heading: "Things that need ruling out", body: "Cramps with bleeding, severe one-sided pain, shoulder-tip pain, fever, pain on weeing, reduced movements, or regular tightening before 37 weeks all need clinical input — for reasons including miscarriage, ectopic, UTI, infection, or preterm labour." },
+      ],
+      whyItVaries: "What's normal at 8 weeks (cramping like a period) is not what's normal at 28 weeks (regular tightenings might be preterm labour). Stage matters as much as the pain itself.",
+    },
+    timing: {
+      whenStarts: "Can happen at any point — first-trimester growth, mid-trimester ligament stretching, late-trimester practice contractions.",
+      whenEases: "Most ordinary cramps ease within minutes when you change position, rest, eat, or empty your bladder/bowels.",
+    },
+    whatItFeelsLike: [
+      "Short, sharp pain low in the bump when moving — often round ligament",
+      "A dull, period-like ache in early pregnancy",
+      "Whole-bump tightening that comes and goes — Braxton Hicks",
+      "Severe, persistent, one-sided, or pain-with-bleeding — different conversation",
+    ],
+    whatThisMeans:
+      "Most cramps in pregnancy are ordinary and not a sign of anything wrong. The bits worth calling about are usually obvious in hindsight: severity, persistence, pattern, or the company the pain keeps. When in doubt, phone — that's literally what triage is for.",
+    normal: [
+      "Mild, short-lived twinges low in the bump or to one side",
+      "Ache after a long day of being on your feet",
+      "Tightening that comes and goes irregularly in late pregnancy",
+      "Cramping that eases with rest, position change, or after a bowel movement",
+    ],
+    seekSupport: [
+      "Cramps with bleeding — call early pregnancy unit (before 24 weeks) or maternity unit (after 24 weeks)",
+      "Severe one-sided lower-tummy pain, shoulder-tip pain, dizziness — possible ectopic; 999 or A&E",
+      "Cramps that don't ease, or that build into regular tightenings before 37 weeks — possible preterm labour; maternity unit",
+      "Pain on weeing, fever, or feeling unwell with cramps — possible UTI or infection; same-day GP or 111",
+      "Severe upper-right tummy pain with headache or visual changes — possible pre-eclampsia; call maternity unit straight away",
+      "Reduced or changed baby movements alongside cramping — call maternity unit straight away",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. Pain that's stopping you in your tracks, or that you're not sure about, is always a reasonable phone call.",
+    whatYouCanDo: [
+      { action: "Change position, rest, drink water, empty bladder", reason: "Ordinary stretching and ligament pain often eases with these simple steps. If it doesn't, that itself is information." },
+      { action: "Time anything that feels like tightening in late pregnancy", reason: "Regular, increasing tightenings before 37 weeks need a maternity unit call. Irregular ones are usually Braxton Hicks." },
+      { action: "Pay attention to the company the pain keeps", reason: "Bleeding, fever, dizziness, fluid loss, or reduced movements all change the urgency." },
+      { action: "Phone if you're not sure", reason: "Triage is built for this question. They'd rather check than have you wait it out." },
+    ],
+    whatHappensNext: "If you call, the team will usually ask about the location, severity, pattern, and whether anything else is happening (bleeding, fever, fluid, movements). From there they'll either reassure you, ask you to come in, or arrange a different route — GP, early pregnancy unit, A&E. You don't need to know in advance which one applies.",
+    relatedStage: {
+      intro: "Cramps sit alongside the other 'is this normal?' pregnancy body questions:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Round ligament pain", href: "/articles/round-ligament-pain", context: "The most common cause of sharp short pains in early-mid pregnancy." },
+        { label: "Pelvic pain in pregnancy", href: "/articles/pelvic-pain-in-pregnancy", context: "When the pain is more in the pelvic ring than the bump." },
+        { label: "Braxton Hicks contractions", href: "/articles/braxton-hicks-contractions", context: "Late-pregnancy tightenings explained." },
+      ],
+    },
+    aiPrompts: [
+      "Are cramps in early pregnancy normal?",
+      "When should I worry about cramps in pregnancy?",
+      "How do I tell Braxton Hicks from real labour?",
+    ],
+    captureIntro: "Worth noting where, when, how long, and what (if anything) was alongside it.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["round-ligament-pain", "pelvic-pain-in-pregnancy", "braxton-hicks-contractions", "bleeding-in-early-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Mild, short-lived cramps are common at every stage",
+      "Pain with bleeding, fever, or one-sided severity changes the urgency",
+      "Regular tightenings before 37 weeks need a maternity unit call",
+      "Severe upper-right pain with headache/visual changes is urgent",
+      "When in doubt, ring — triage is built for the question",
+    ],
+    sources: [
+      "NHS — Common health problems in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists",
+      "NICE — Antenatal care",
+      "Tommy's — Pregnancy pain",
+    ],
+    faq: [
+      { question: "Are cramps in early pregnancy normal?", answer: "Mild, period-like cramping is common in early pregnancy as the uterus grows. Cramps with bleeding, severe one-sided pain, or shoulder-tip pain are reasons to call the early pregnancy unit." },
+      { question: "How do I tell Braxton Hicks from real labour?", answer: "Braxton Hicks are irregular, don't get longer or stronger, and usually ease with rest or position change. Real labour contractions get more regular, longer, stronger, and don't ease off." },
+      { question: "Can constipation cause cramping in pregnancy?", answer: "Yes — slowed digestion in pregnancy is a common cause of crampy lower-tummy pain that eases after a bowel movement. Drinking more, fibre, and gentle movement help." },
+      { question: "When are cramps urgent?", answer: "Cramps with bleeding, severe one-sided pain, shoulder-tip pain, dizziness, fever, fluid loss, regular tightenings before 37 weeks, severe upper-right pain with headache, or reduced movements are all reasons to call straight away." },
+      { question: "Is one-sided pain always ectopic?", answer: "No — round ligament pain and ovarian cysts can both cause one-sided pain in early pregnancy. But severe one-sided pain, especially with shoulder-tip pain or feeling faint, needs to be checked urgently to rule out ectopic." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "Most pregnancy cramps are ordinary. The lines that matter, calmly drawn.",
+    editorialSections: [
+      {
+        id: "ordinary-cramps",
+        heading: "Why most pregnancy cramps are ordinary",
+        lead: "A growing uterus and stretching ligaments do this.",
+        paragraphs: [
+          "The uterus expands quickly in pregnancy, and the ligaments that support it stretch as it does. That's the source of most short, sharp twinges, dull aches, and 'why does this hurt suddenly when I stand up' moments. They tend to ease within minutes, often when you change position or rest.",
+          "Other ordinary causes include trapped wind, constipation (slowed digestion is a feature of pregnancy hormones), and Braxton Hicks practice contractions in the second half. Most of these don't need anything beyond water, rest, and patience.",
+        ],
+      },
+      {
+        id: "stage-matters",
+        heading: "Why stage of pregnancy changes the meaning",
+        lead: "What's normal at 8 weeks isn't always what's normal at 28.",
+        paragraphs: [
+          "In early pregnancy, mild period-like cramping is common and often nothing to worry about. After 24 weeks, regular tightening that builds in length and strength can be a sign of preterm labour and needs a maternity unit call. After 37 weeks, the same pattern is more often the start of labour itself.",
+          "Knowing roughly which week you're in helps the clinician you speak to. It's also why 'phone the right number for your stage' (early pregnancy unit before 24 weeks, maternity unit after) matters more than the exact words you use.",
+        ],
+      },
+      {
+        id: "company-the-pain-keeps",
+        heading: "The company the pain keeps",
+        lead: "Pain plus other symptoms changes the conversation.",
+        paragraphs: [
+          "Cramps with bleeding, fever, fluid loss, dizziness, or reduced baby movements aren't ordinary cramps — they're a reason to call. So is severe one-sided pain (especially with shoulder-tip pain or faintness, which can suggest ectopic), and severe upper-right tummy pain with headache or visual changes (which can suggest pre-eclampsia).",
+          "These aren't subtle 'maybe' signs. If they're there, they're loud — and the right response is the phone, not internet checking.",
+        ],
+        callout: { tone: "gentle-warning", text: "Severe one-sided pain with shoulder-tip pain, dizziness, or faintness is an A&E or 999 call. Don't wait it out." },
+      },
+      {
+        id: "tightening-vs-pain",
+        heading: "Tightening vs pain in late pregnancy",
+        lead: "Two different signals, often confused.",
+        paragraphs: [
+          "Braxton Hicks tightenings make the bump go hard and then soft again. They're usually irregular, not progressive, and ease with rest or movement. Real labour contractions are regular, get longer and stronger, and don't ease off.",
+          "Tightenings before 37 weeks that are regular and don't settle are a reason to call your maternity unit, not to ride out. Better a wasted phone call than a missed early labour.",
+        ],
+      },
+      {
+        id: "when-in-doubt",
+        heading: "When in doubt, phone",
+        lead: "It's literally the right answer.",
+        paragraphs: [
+          "Triage is set up to take this call. 'I'm cramping and I don't know if it's normal' is a perfectly reasonable opening line and one they hear constantly. They'd rather you ring and be reassured than wait at home with something that needed checking.",
+          "You don't need a polished story. You just need the phone.",
+        ],
+      },
+    ],
+  },
+
+  // ─── MUCUS PLUG ───────────────────────────────────────────────────────────
+  {
+    slug: "mucus-plug",
+    title: "Mucus plug in pregnancy: what it is, when you might lose it, and what it means",
+    metaDescription: "The mucus plug explained — what it is, what it can look like, when in pregnancy people notice it, why losing it doesn't always mean labour is starting now, and when to call.",
+    quickAnswer:
+      "The mucus plug is a thick collection of mucus that sits in the cervix during pregnancy, forming a protective barrier. As the cervix starts to soften and change in the late weeks, the plug can come away — sometimes in one piece, sometimes gradually over days, and sometimes without you ever noticing. Losing the mucus plug can be a sign your body is getting ready for labour, but it doesn't mean labour is necessarily starting now. Heavier bleeding (more than streaking), or losing the plug before 37 weeks, is a reason to call your maternity unit.",
+    howThisFeels: [
+      "Suddenly very alert to anything in your underwear",
+      "Wondering if labour is about to start",
+      "Unsure if what you saw counts as 'a plug' at all",
+      "Excited and a bit nervous in the same breath",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Cervical changes near the end of pregnancy", body: "As the cervix begins to soften, shorten, and open very slightly in the days or weeks before labour, the mucus plug that's been sealing it can dislodge." },
+        { heading: "Movement, sex, or an exam", body: "Sex, an internal examination, or a sweep can also dislodge the plug — that doesn't necessarily mean anything is wrong, but it's worth mentioning if you're calling about something else." },
+      ],
+      lessCauses: [
+        { heading: "When it isn't just the plug", body: "Heavier bleeding (more than streaking on the mucus), bright red blood, or losing the plug well before 37 weeks needs to be checked rather than assumed." },
+      ],
+      whyItVaries: "Some people see a single, distinct lump of mucus. Others lose it gradually as a series of streaks. Others never notice it at all. None of those is more or less normal.",
+    },
+    timing: {
+      whenStarts: "Most often noticed in the last few weeks of pregnancy.",
+      whenEases: "Once it's gone, it's gone — but the cervix continues to produce mucus until labour.",
+    },
+    whatItFeelsLike: [
+      "A blob or streak of thick, jelly-like mucus on a liner or wiping",
+      "Clear, white, pink-tinged, or brown-tinged",
+      "Sometimes a single piece, sometimes spread over days",
+      "Often no sensation at all when it happens",
+    ],
+    whatThisMeans:
+      "Losing the mucus plug is one of the body's quieter cues that things are starting to get ready. It's not a labour timer. People can lose their plug days or even weeks before labour, and labour can also start without anyone ever spotting one.",
+    normal: [
+      "A jelly-like blob or streaks of mucus, possibly tinged pink or brown",
+      "Losing it gradually over a day or two",
+      "No real sensation, just noticing it on a liner or wiping",
+      "Mild cramping or backache around the same time",
+    ],
+    seekSupport: [
+      "Heavier bleeding than light streaking — call your maternity unit",
+      "Bright red blood with the plug — call your maternity unit straight away",
+      "Losing the plug before 37 weeks — call your maternity unit",
+      "Reduced or changed baby movements — call your maternity unit straight away",
+      "Regular contractions, waters going, or feeling unwell alongside — follow your usual labour-starting plan",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. Anything more than light blood-tinged mucus, or anything before 37 weeks, is worth a phone call.",
+    whatYouCanDo: [
+      { action: "Note when it happened, and what it looked like", reason: "Useful if you call your maternity unit, or for your own sense of how things are unfolding." },
+      { action: "Carry on as normal — there's no need to head in", reason: "On its own, losing the mucus plug isn't a reason to go to the maternity unit." },
+      { action: "Pay attention to baby movements", reason: "Movements should continue as normal. Reduced or changed movements is a separate, important call." },
+      { action: "Watch for fresh red blood or fluid loss", reason: "Either of those is a reason to call straight away — not 'just' the plug." },
+    ],
+    whatHappensNext: "Most often, life carries on for a few more days or weeks. Some people then notice early labour signs — irregular tightenings, backache, a 'show', waters going. Others go into labour without much warning. There's no reliable timeline from plug to labour, which is part of why it isn't on its own a reason to do anything except notice it.",
+    relatedStage: {
+      intro: "The mucus plug sits inside the wider 'getting closer to labour' picture:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Show in pregnancy", href: "/articles/show-in-pregnancy", context: "When the mucus is more clearly blood-tinged." },
+        { label: "Signs of labour", href: "/articles/signs-of-labour", context: "What to look for as labour gets closer." },
+        { label: "When to go in for labour", href: "/articles/when-to-go-in-for-labour", context: "How to think about timing the trip in." },
+      ],
+    },
+    aiPrompts: [
+      "What does the mucus plug look like?",
+      "Does losing the mucus plug mean labour is starting?",
+      "When should I call about the mucus plug?",
+    ],
+    captureIntro: "Worth noting when, what it looked like, and what (if anything) is happening alongside.",
+    trimester: [3],
+    relatedSlugs: ["show-in-pregnancy", "signs-of-labour", "when-to-go-in-for-labour", "braxton-hicks-contractions"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "The mucus plug is a thick mucus barrier in the cervix during pregnancy",
+      "It can come away in one piece or gradually, sometimes unnoticed",
+      "Losing it is a sign the cervix is changing — not a labour timer",
+      "Light blood streaking is normal; bright red blood is a call",
+      "Before 37 weeks, losing the plug is a reason to phone",
+    ],
+    sources: [
+      "NHS — Signs that labour has begun",
+      "Royal College of Obstetricians and Gynaecologists",
+      "NICE — Intrapartum care",
+      "Tommy's — Mucus plug and show",
+    ],
+    faq: [
+      { question: "What does the mucus plug look like?", answer: "Thick, jelly-like mucus, sometimes clear, white, pink-tinged or brown-tinged. It can be a single distinct blob, or come away gradually as streaks over a day or two." },
+      { question: "Does losing the mucus plug mean labour is starting?", answer: "Not necessarily. Some people lose it days or weeks before labour, others without ever noticing. It can be a sign the body is getting ready, but it isn't a timer." },
+      { question: "Is bleeding with the mucus plug normal?", answer: "Light blood streaking is normal — that's part of what makes a 'show'. Bright red blood, or more than streaking, is a reason to call your maternity unit." },
+      { question: "Should I go to hospital after losing the plug?", answer: "No, not on its own. Carry on as normal and follow your usual plan for going in if labour symptoms start, or if anything changes alongside." },
+      { question: "What if I lose it before 37 weeks?", answer: "Call your maternity unit. Losing the mucus plug well before 37 weeks isn't an emergency by itself, but it's worth checking what's happening with the cervix." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "A signal the cervix is changing, not a stopwatch. What to expect, what to ignore, and when to call.",
+    editorialSections: [
+      {
+        id: "what-it-is",
+        heading: "What the mucus plug actually is",
+        lead: "A protective seal at the cervix.",
+        paragraphs: [
+          "Throughout pregnancy, the cervix produces mucus that thickens into a plug — sealing the cervical canal and helping protect the pregnancy from anything ascending from the vagina.",
+          "As the cervix begins to soften and change in late pregnancy, the plug can dislodge. That's it: a normal piece of late-pregnancy housekeeping, not a dramatic event.",
+        ],
+      },
+      {
+        id: "what-it-looks-like",
+        heading: "What it can look like",
+        lead: "More variable than people expect.",
+        paragraphs: [
+          "Some people notice a single jelly-like blob — clear, white, pink-tinged, or brown-tinged. Others lose it gradually as streaks over a day or two. Others lose it without ever spotting it, which is also normal.",
+          "Light streaks of blood mixed in is part of what makes a 'show'. Bright red blood, or anything more than streaking, is a reason to call.",
+        ],
+      },
+      {
+        id: "what-it-means",
+        heading: "What losing it actually means",
+        lead: "Often: not very much, on its own.",
+        paragraphs: [
+          "Losing the mucus plug is a sign the cervix is changing, but it isn't a labour timer. Some people lose theirs hours before labour, others a week or two before, and others don't notice it until they're already in labour.",
+          "On its own, it isn't a reason to go to the maternity unit or change what you're doing. It's a quiet 'getting closer' rather than 'now'.",
+        ],
+        callout: { tone: "info", text: "Losing the mucus plug is not on its own a reason to go to the maternity unit. Carry on as normal and follow your usual plan if labour signs start." },
+      },
+      {
+        id: "when-to-call",
+        heading: "When losing the plug is a phone call",
+        lead: "A few patterns that change the answer.",
+        paragraphs: [
+          "Bright red bleeding (more than light streaking), losing the plug before 37 weeks, reduced or changed baby movements, regular contractions, waters going, or feeling unwell alongside are all reasons to phone your maternity unit.",
+          "These aren't subtle — if they're there, they'll feel like 'something more than the plug', and that's the cue.",
+        ],
+        callout: { tone: "gentle-warning", text: "Bright red blood, fluid loss, regular contractions, or losing the plug before 37 weeks is a maternity unit call." },
+      },
+      {
+        id: "what-to-do-otherwise",
+        heading: "What to do otherwise",
+        lead: "Mostly: notice it, and carry on.",
+        paragraphs: [
+          "Make a note of when it happened. Pay attention to baby movements as usual. Carry on with food, rest, gentle movement — there isn't any 'doing' that helps it along or holds it back.",
+          "If labour does start in the days or weeks that follow, the plug will be one of those small details you remember in hindsight. If it doesn't, that's also fine.",
+        ],
+      },
+    ],
+  },
+
+  // ─── SHOW IN PREGNANCY ────────────────────────────────────────────────────
+  {
+    slug: "show-in-pregnancy",
+    title: "Show in pregnancy: what it is, when it usually happens, and what to do",
+    metaDescription: "A show in pregnancy explained — what it is, how it differs from the mucus plug alone, when in pregnancy people see one, and when to call your maternity unit.",
+    quickAnswer:
+      "A 'show' is a small amount of blood-tinged mucus that comes away from the cervix as it begins to change in late pregnancy. It's usually pink or brown, jelly-like, and can come in one piece or as streaks over a day or two. A show is often a sign labour is getting closer, but doesn't mean labour is starting right now — labour can begin hours, days, or even a week or more later. Bright red bleeding (more than light streaking) or anything before 37 weeks is a reason to call your maternity unit.",
+    howThisFeels: [
+      "Excited that something is finally happening",
+      "Worried that it's blood, not just mucus",
+      "Unsure whether to ring the maternity unit",
+      "Trying to remember if anyone told you what to do",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Cervix beginning to change", body: "As the cervix softens and starts to open very slightly in late pregnancy, small blood vessels can break, mixing a little blood into the mucus that comes away — that's the 'show'." },
+      ],
+      lessCauses: [
+        { heading: "Things that need ruling out", body: "Bright red bleeding (more than light streaking), heavier flow, or any bleeding before 37 weeks isn't 'just a show' — it needs maternity unit input." },
+      ],
+      whyItVaries: "Some people have a clear, dramatic show. Others have a few small streaks they only notice in hindsight. Others go into labour without ever having one.",
+    },
+    timing: {
+      whenStarts: "Usually in the last weeks of pregnancy, often within days of labour but sometimes a week or more before.",
+      whenEases: "Stops once it's passed; ongoing fresh red bleeding isn't a show.",
+    },
+    whatItFeelsLike: [
+      "A small blob or streaks of pink, brown, or red-tinged mucus",
+      "Jelly-like in texture",
+      "Often no sensation at all",
+      "Sometimes mild cramping or backache around the same time",
+    ],
+    whatThisMeans:
+      "A show is one of the body's gentler cues that labour is getting closer. It's not a labour timer, and it isn't on its own a reason to head in. Like the mucus plug it usually comes from, it sits in the 'getting ready' rather than 'now' category.",
+    normal: [
+      "A small amount of pink, brown, or red-streaked jelly-like mucus",
+      "In one piece or spread over a day or two",
+      "Mild cramping or backache around the same time",
+      "Baby movements continuing as normal",
+    ],
+    seekSupport: [
+      "Bright red bleeding heavier than light streaking — call your maternity unit",
+      "A show before 37 weeks — call your maternity unit",
+      "Reduced or changed baby movements — call your maternity unit straight away",
+      "Severe pain alongside — call your maternity unit",
+      "Fluid loss alongside — call your maternity unit",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. Bright red bleeding or anything before 37 weeks is worth a phone call rather than a wait-and-see.",
+    whatYouCanDo: [
+      { action: "Note when it happened and what it looked like", reason: "Useful if you call, and useful for your own sense of how things are unfolding." },
+      { action: "Carry on as normal — there's no need to head in for a show alone", reason: "On its own, a show isn't a reason to go to the maternity unit." },
+      { action: "Pay attention to baby movements", reason: "Movements should continue as normal — reduced or changed movements is a separate, important call." },
+      { action: "Watch for fresh red bleeding, regular contractions, or waters going", reason: "Those are the cues that change the plan." },
+    ],
+    whatHappensNext: "Often, things stay quiet for a few hours or days and then early labour signs start — irregular tightenings, backache, a 'period-like' ache, eventually regular contractions. Sometimes it's longer. Either way, a show isn't on its own a 'go in now' moment.",
+    relatedStage: {
+      intro: "A show sits inside the wider 'getting closer to labour' picture:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Mucus plug", href: "/articles/mucus-plug", context: "What the show is usually made of." },
+        { label: "Signs of labour", href: "/articles/signs-of-labour", context: "What to look for as labour starts." },
+        { label: "When to go in for labour", href: "/articles/when-to-go-in-for-labour", context: "How to think about timing the trip in." },
+      ],
+    },
+    aiPrompts: [
+      "What does a show look like?",
+      "Does a show mean labour is starting?",
+      "When should I call about a show?",
+    ],
+    captureIntro: "Worth noting when, what it looked like, and what (if anything) is happening alongside.",
+    trimester: [3],
+    relatedSlugs: ["mucus-plug", "signs-of-labour", "when-to-go-in-for-labour", "braxton-hicks-contractions"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "A show is blood-tinged mucus from the cervix in late pregnancy",
+      "Often a sign labour is getting closer, not starting now",
+      "Pink, brown, or red-streaked jelly is normal",
+      "Bright red bleeding heavier than streaking is a call",
+      "Before 37 weeks, any show is a maternity unit call",
+    ],
+    sources: [
+      "NHS — Signs that labour has begun",
+      "Royal College of Obstetricians and Gynaecologists",
+      "NICE — Intrapartum care",
+      "Tommy's — Show",
+    ],
+    faq: [
+      { question: "What does a show look like?", answer: "A small amount of jelly-like mucus tinged pink, brown, or red. It can come in one piece or as streaks over a day or two." },
+      { question: "Does a show mean labour is starting?", answer: "It's often a sign labour is getting closer, but not necessarily starting now. Labour can begin hours, days, or even a week or more after a show." },
+      { question: "How is a show different from the mucus plug?", answer: "The mucus plug can come away with no blood at all. A 'show' is when there's some blood mixed in — usually pink or brown streaking. The two often overlap." },
+      { question: "Should I go to hospital after a show?", answer: "Not on its own. Carry on as normal and follow your usual plan for labour starting, or if anything changes alongside (heavier bleeding, contractions, waters, reduced movements)." },
+      { question: "What if I have a show before 37 weeks?", answer: "Call your maternity unit. A show before 37 weeks isn't an emergency by itself, but it's worth checking what's happening with the cervix." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "Pink-tinged, jelly-like, often the first quiet word that labour is on its way. What it is and what to do.",
+    editorialSections: [
+      {
+        id: "what-it-is",
+        heading: "What a show actually is",
+        lead: "Mucus plug, with a little blood mixed in.",
+        paragraphs: [
+          "A 'show' is the mucus plug — or part of it — coming away with a small amount of blood mixed in. The blood comes from tiny vessels in the cervix breaking as the cervix begins to soften and open slightly. It's a normal piece of late-pregnancy preparation.",
+          "It can be pink, brown, or red-streaked, and it's almost always jelly-like rather than fluid. If what you're seeing is more like fresh red blood than mucus, that isn't a show — it's a maternity unit call.",
+        ],
+      },
+      {
+        id: "when-it-happens",
+        heading: "When it usually happens",
+        lead: "Late, but not always 'now'.",
+        paragraphs: [
+          "Most shows happen in the last few weeks of pregnancy. For some people, labour starts within hours; for others, it's days or even a week or more later. There's no reliable timeline.",
+          "Some people don't have a noticeable show at all, and go into labour with no warning. That's also normal.",
+        ],
+      },
+      {
+        id: "what-to-do",
+        heading: "What to do when you see one",
+        lead: "Notice, note, carry on.",
+        paragraphs: [
+          "On its own, a show isn't a reason to head to the maternity unit. Make a note of when and what it looked like, pay attention to baby movements as you usually would, and carry on with food, rest, and gentle movement.",
+          "If labour signs start over the following hours or days — irregular tightenings, backache, a period-like ache, eventually regular contractions — follow your usual plan for when to go in.",
+        ],
+        callout: { tone: "info", text: "A show on its own is not a reason to head to the maternity unit. Carry on, and follow your normal labour-starting plan if other signs follow." },
+      },
+      {
+        id: "when-to-call",
+        heading: "When a show is a call",
+        lead: "A few patterns that change the answer.",
+        paragraphs: [
+          "Bright red bleeding heavier than light streaking, a show before 37 weeks, reduced or changed baby movements, severe pain, or fluid loss alongside are all reasons to phone your maternity unit.",
+          "These usually feel different from a 'just a show' moment, and the right response is the phone — not the internet.",
+        ],
+        callout: { tone: "gentle-warning", text: "Bright red blood, severe pain, fluid loss, reduced movements, or a show before 37 weeks is a maternity unit call." },
+      },
+    ],
+  },
+
+  // ─── LEAKING FLUID IN PREGNANCY ───────────────────────────────────────────
+  {
+    slug: "leaking-fluid-in-pregnancy",
+    title: "Leaking fluid in pregnancy: how to tell what it is, and when to call",
+    metaDescription: "Leaking fluid in pregnancy explained — how to tell amniotic fluid from discharge, urine, or sweat, what colour and amount matter, and why uncertainty is enough to call your maternity unit.",
+    quickAnswer:
+      "Leaking fluid in pregnancy can be amniotic fluid (your waters), an increase in normal pregnancy discharge, small leaks of urine, or sweat. Amniotic fluid is usually clear or pale yellow with little smell, and tends to keep coming once it's started. The honest rule is: if you think your waters might have gone — or you're not sure — call your maternity unit. They handle this question constantly. Green, brown, or strong-smelling fluid, fluid before 37 weeks, or fluid with reduced baby movements is a reason to call straight away.",
+    howThisFeels: [
+      "A sudden wet feeling that doesn't fit anything you've felt before",
+      "Wondering if you wet yourself",
+      "Worried it might be too soon for waters",
+      "Unsure whether it's enough to ring about",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Increased pregnancy discharge", body: "Pregnancy discharge can be quite thin and clear. On busy days it can feel like more than usual." },
+        { heading: "Stress incontinence", body: "Bump pressure on the bladder can cause small leaks of urine when laughing, coughing, sneezing, or running, especially in late pregnancy." },
+        { heading: "Amniotic fluid leaking or waters going", body: "Sometimes a single gush, sometimes a slow trickle that keeps coming back even after you've changed underwear and emptied your bladder." },
+      ],
+      lessCauses: [
+        { heading: "Less common but important", body: "Premature rupture of membranes (waters going before 37 weeks), or fluid that's green, brown, or smells unusual, all need urgent maternity unit input." },
+      ],
+      whyItVaries: "Three different things can feel almost identical in the moment. The clinician on the phone is used to teasing them apart, with a few simple questions and sometimes a quick examination.",
+    },
+    timing: {
+      whenStarts: "Discharge and small urine leaks can happen at any point. Amniotic fluid loss is a late-pregnancy / labour conversation, but can sometimes happen earlier (premature rupture of membranes).",
+      whenEases: "Discharge and small leaks continue; suspected fluid loss is checked rather than waited out.",
+    },
+    whatItFeelsLike: [
+      "A sudden gush followed by a continuing trickle",
+      "A slow leak that keeps coming back after you change",
+      "A wet feeling that you can pat dry and that doesn't return",
+      "A small leak when sneezing, laughing, or moving suddenly",
+    ],
+    whatThisMeans:
+      "Most wet feelings in pregnancy aren't an emergency. The reason to call isn't certainty — it's uncertainty. Maternity triage exists for exactly this question, and the answer might just be 'come in for a 20-minute check'.",
+    normal: [
+      "An increase in thin, clear or pale pregnancy discharge",
+      "A small urine leak when sneezing, laughing, or coughing",
+      "A wet feeling you can dry that doesn't keep coming",
+    ],
+    seekSupport: [
+      "Fluid that keeps coming, soaks underwear or a pad, or comes as a sudden gush — call maternity unit",
+      "Green, brown, or strong-smelling fluid — call maternity unit straight away",
+      "Fluid before 37 weeks — call maternity unit, even if amount seems small",
+      "Reduced or changed baby movements alongside fluid loss — call maternity unit straight away",
+      "Bleeding alongside fluid loss — call maternity unit straight away",
+      "Pain or fever alongside fluid loss — call maternity unit",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. If you think your waters might have gone — or you're not sure — calling maternity triage is the right step.",
+    whatYouCanDo: [
+      { action: "Empty your bladder, put on a clean pad, lie down for 30 minutes", reason: "If when you stand up there's a fresh trickle or gush, that points more towards waters than urine. Either way, the result is useful for the call." },
+      { action: "Note the colour, smell, and amount", reason: "Amniotic fluid is usually clear or pale yellow with little smell. Green, brown, or strong-smelling fluid is a different urgency." },
+      { action: "Call maternity triage if you're not sure", reason: "Uncertainty is a perfectly good reason to ring. They will not be cross with you." },
+      { action: "Pay attention to baby movements", reason: "Reduced or changed movements alongside fluid loss is a same-day call by itself." },
+    ],
+    whatHappensNext: "When you call, your maternity team will usually ask you to come in for a quick check, often including a sterile speculum exam to confirm whether waters have gone. If they have, you'll be given a plan based on how many weeks you are and your individual situation. If they haven't, you'll go home reassured. Either way, it's the right call to have made.",
+    relatedStage: {
+      intro: "Leaking fluid sits inside a few related conversations:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Watery discharge in pregnancy", href: "/articles/watery-discharge-in-pregnancy", context: "When the question is more about discharge than fluid." },
+        { label: "Signs of labour", href: "/articles/signs-of-labour", context: "Where waters going fits into the bigger picture." },
+        { label: "When to go in for labour", href: "/articles/when-to-go-in-for-labour", context: "How to think about timing the trip in once labour signs start." },
+      ],
+    },
+    aiPrompts: [
+      "How do I know if my waters have gone?",
+      "Is this discharge or fluid?",
+      "When should I call maternity unit about leaking fluid?",
+    ],
+    captureIntro: "Worth noting time, amount, colour, smell, and movements — useful for the call.",
+    trimester: [2, 3],
+    relatedSlugs: ["watery-discharge-in-pregnancy", "signs-of-labour", "when-to-go-in-for-labour", "reduced-movements-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Leaking fluid can be amniotic fluid, discharge, urine, or sweat",
+      "Amniotic fluid is usually clear or pale yellow with little smell",
+      "Empty bladder, lie down 30 minutes, then check for fresh trickle",
+      "Uncertainty is a good enough reason to call maternity triage",
+      "Green/brown fluid, before 37 weeks, or with reduced movements is urgent",
+    ],
+    sources: [
+      "NHS — Signs that labour has begun",
+      "Royal College of Obstetricians and Gynaecologists — Premature rupture of membranes",
+      "NICE — Intrapartum care",
+      "Tommy's — Waters breaking",
+    ],
+    faq: [
+      { question: "How do I know if my waters have gone?", answer: "Amniotic fluid is usually clear or pale yellow, with little smell. It often keeps coming once it's started, even after you've emptied your bladder and changed underwear. If you're not sure, call maternity unit." },
+      { question: "Can waters leak slowly?", answer: "Yes — a slow trickle that keeps coming back is one of the patterns of waters leaking, especially before labour starts. It still needs a call." },
+      { question: "What colour is amniotic fluid?", answer: "Usually clear or pale yellow. Green or brown fluid can suggest the baby has passed meconium and is a reason to call straight away." },
+      { question: "What if I'm not sure?", answer: "Call. Uncertainty is the most common reason people ring maternity triage about fluid, and it's a perfectly good reason to do it." },
+      { question: "What if I'm under 37 weeks?", answer: "Any persistent watery loss before 37 weeks is a maternity unit call rather than a wait-and-see — even if the amount seems small. Premature rupture of membranes needs to be checked properly." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "If you're not sure whether your waters have gone, call. Here's how to think about it on the way.",
+    editorialSections: [
+      {
+        id: "what-it-can-be",
+        heading: "What leaking fluid can actually be",
+        lead: "Several different things in similar disguise.",
+        paragraphs: [
+          "A wet feeling in pregnancy can be an increase in normal pregnancy discharge, a small leak of urine from bump pressure on the bladder, sweat, or amniotic fluid leaking. All four can feel surprisingly similar in the moment.",
+          "The point of this article isn't to help you decide on your own which one it is — it's to give you the simple checks that make the phone call easier, and to make clear that uncertainty alone is a good enough reason to ring.",
+        ],
+      },
+      {
+        id: "amniotic-fluid",
+        heading: "What amniotic fluid usually looks and feels like",
+        lead: "Often subtler than people expect.",
+        paragraphs: [
+          "Amniotic fluid is usually clear or pale yellow, with little smell or a faintly sweet smell. It can come as a single gush, or as a slow trickle that keeps coming back even after you've changed underwear and emptied your bladder. That 'keeps coming back' pattern is one of the most useful clues.",
+          "Green, brown, or strong-smelling fluid is a different conversation — it can suggest the baby has passed meconium, or that there's an infection. Either is a same-day call.",
+        ],
+        callout: { tone: "gentle-warning", text: "Green or brown fluid, fluid with a strong smell, fluid before 37 weeks, or fluid with reduced movements is a maternity unit call straight away." },
+      },
+      {
+        id: "the-pad-test",
+        heading: "A simple home check before you ring",
+        lead: "Useful, but not a substitute for the call.",
+        paragraphs: [
+          "Empty your bladder, put on a clean pad (or a folded clean cloth), and lie down for 30 minutes. When you stand up, see what happens. A fresh trickle or gush points more towards waters than urine. A pad that's only slightly damp from earlier is more likely to be discharge or a small leak.",
+          "Whatever the result, share it when you call — it's information, not a verdict.",
+        ],
+      },
+      {
+        id: "calling-triage",
+        heading: "Calling maternity triage",
+        lead: "Built for this exact question.",
+        paragraphs: [
+          "Maternity triage handles this conversation many times a day. 'I'm not sure if my waters have gone' is one of the most common opening lines, and the team will not think you're wasting their time.",
+          "If they want to see you, you'll usually be checked with a quick examination. If they don't, you'll go home with clear advice on what would change the answer.",
+        ],
+      },
+      {
+        id: "before-37-weeks",
+        heading: "If you're under 37 weeks",
+        lead: "Lower threshold to call.",
+        paragraphs: [
+          "Before 37 weeks, any persistent watery loss is a maternity unit call — even a slow trickle, even a small amount. Premature rupture of membranes needs to be checked properly, and the team will guide you through what comes next based on how many weeks you are.",
+          "Don't talk yourself out of calling because the amount seems small. The amount isn't always the clue — the persistence is.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

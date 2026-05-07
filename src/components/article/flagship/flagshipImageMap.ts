@@ -171,6 +171,16 @@ export const flagshipHeroMap: Record<string, Img> = {
   "uti-in-pregnancy": { src: cardSafety, alt: "A urine sample pot and a glass of water on a clinic table — the simple test that confirms a UTI in pregnancy." },
   "thrush-in-pregnancy": { src: cardBody, alt: "Soft cotton underwear and an unscented wash on a bathroom shelf — the practical layer alongside thrush treatment in pregnancy." },
 
+  // Phase J — Bleeding, discharge, leaking, reassurance
+  "bleeding-in-early-pregnancy": { src: heroImplantation, alt: "A quiet bedside scene in soft daylight — the calm context of an early-pregnancy bleeding worry." },
+  "spotting-in-pregnancy": { src: cardQuiet, alt: "A soft, still moment at home — the quiet anxiety of noticing spotting in pregnancy." },
+  "discharge-in-pregnancy": { src: cardBody, alt: "Folded cotton underwear on a bathroom shelf in soft daylight — the everyday context of pregnancy discharge." },
+  "watery-discharge-in-pregnancy": { src: cardComfort, alt: "A pregnant person resting at home with a hand on the bump — the wet-feeling moment of wondering whether to call." },
+  "when-to-worry-about-cramps-in-pregnancy": { src: heroSecondBody, alt: "A pregnant person resting one hand low on the bump — the felt experience of pregnancy cramps." },
+  "mucus-plug": { src: heroThirdSignsOfLabour, alt: "A late-pregnancy moment at home — the quiet body cues that labour is getting closer." },
+  "show-in-pregnancy": { src: heroThirdSignsOfLabour, alt: "A calm late-pregnancy scene — the body's small signals that labour is approaching." },
+  "leaking-fluid-in-pregnancy": { src: heroThirdSignsOfLabour, alt: "A packed hospital bag by the door — the moment of wondering whether waters have gone." },
+
   // Emotional wellbeing
   "anxiety-in-pregnancy": { src: heroSecondAnxiety, alt: "A pregnant person sitting quietly by a window — the inward weight of pregnancy anxiety." },
   "the-first-trimester-emotionally": { src: heroEmotionalFirstTri, alt: "A pregnant person in soft early-pregnancy light, processing the first weeks." },

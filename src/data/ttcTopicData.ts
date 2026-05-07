@@ -284,7 +284,8 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Understanding fertility",
         links: [
           { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
-          { label: "Signs of ovulation", href: LIVE.signsOfOvulation },
+          { label: "The fertile window", href: LIVE.fertileWindow },
+          { label: "Ovulation signs", href: LIVE.ovulationSigns },
         ],
       },
       {
@@ -292,8 +293,20 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         description: "The two-week wait, testing, and what early signs mean.",
         links: [
           { label: "The two-week wait", href: LIVE.twoWeekWaitArticle },
+          { label: "How long implantation takes", href: LIVE.implantationTiming },
+          { label: "When to take a pregnancy test", href: LIVE.whenToTest },
+          { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
           { label: "Pregnancy testing in TTC", href: LIVE.pregnancyTests },
           { label: "Implantation bleeding", href: LIVE.implantationBleeding },
+        ],
+      },
+      {
+        label: "After a difficult cycle",
+        description: "Early loss, trying again, and the emotional weight of TTC.",
+        links: [
+          { label: "Chemical pregnancy", href: LIVE.chemicalPregnancy },
+          { label: "Trying again after miscarriage", href: LIVE.tryingAgain },
+          { label: "Pregnancy after loss", href: LIVE.pregnancyAfterLoss },
         ],
       },
       {

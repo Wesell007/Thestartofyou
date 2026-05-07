@@ -109,10 +109,11 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
     groups: [
       {
         label: "The first signs",
+        description: "Early symptoms covered in depth in the TTC guide — kept here for reference.",
         links: [
           { label: "Early pregnancy symptoms explained", href: "/articles/early-pregnancy-symptoms-explained" },
-          { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
-          { label: "When pregnancy symptoms stop", href: "/articles/symptoms-stopping-early-pregnancy" },
+          { label: "Implantation bleeding (TTC guide)", href: "/trying-to-conceive/pregnancy-tests" },
+          { label: "When pregnancy symptoms stop (TTC guide)", href: "/trying-to-conceive/two-week-wait" },
         ],
       },
       {

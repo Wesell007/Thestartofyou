@@ -72,6 +72,16 @@ import About from "./pages/About.tsx";
 import Product from "./pages/Product.tsx";
 import StagePage from "./pages/StagePage.tsx";
 import OvulationCalculator from "./pages/OvulationCalculator.tsx";
+import TTCOvulation from "./pages/ttc/Ovulation.tsx";
+import TTCPreconceptionHealth from "./pages/ttc/PreconceptionHealth.tsx";
+import TTCFertility from "./pages/ttc/Fertility.tsx";
+import TTCIVFAndTreatment from "./pages/ttc/IVFAndTreatment.tsx";
+import TTCMaleFertility from "./pages/ttc/MaleFertility.tsx";
+import TTCAgeAndFertility from "./pages/ttc/AgeAndFertility.tsx";
+import TTCCycleTracking from "./pages/ttc/CycleTracking.tsx";
+import TTCPregnancyTests from "./pages/ttc/PregnancyTests.tsx";
+import TTCTwoWeekWait from "./pages/ttc/TwoWeekWait.tsx";
+import TTCConditions from "./pages/ttc/Conditions.tsx";
 import IVFTimeline from "./pages/IVFTimeline.tsx";
 import AskPage from "./pages/AskPage.tsx";
 import GuidanceLibrary from "./pages/GuidanceLibrary.tsx";
@@ -207,6 +217,16 @@ const App = () => (
           <Route path="/trying-to-conceive/legacy" element={<TTC />} />
           <Route path="/ovulation-calculator" element={<OvulationCalculator />} />
           <Route path="/trying-to-conceive/ovulation-calculator" element={<OvulationCalculator />} />
+          <Route path="/trying-to-conceive/ovulation" element={<TTCOvulation />} />
+          <Route path="/trying-to-conceive/preconception-health" element={<TTCPreconceptionHealth />} />
+          <Route path="/trying-to-conceive/fertility" element={<TTCFertility />} />
+          <Route path="/trying-to-conceive/ivf-and-treatment" element={<TTCIVFAndTreatment />} />
+          <Route path="/trying-to-conceive/male-fertility" element={<TTCMaleFertility />} />
+          <Route path="/trying-to-conceive/age-and-fertility" element={<TTCAgeAndFertility />} />
+          <Route path="/trying-to-conceive/cycle-tracking" element={<TTCCycleTracking />} />
+          <Route path="/trying-to-conceive/pregnancy-tests" element={<TTCPregnancyTests />} />
+          <Route path="/trying-to-conceive/two-week-wait" element={<TTCTwoWeekWait />} />
+          <Route path="/trying-to-conceive/conditions" element={<TTCConditions />} />
           <Route path="/ivf" element={<IVF />} />
           <Route path="/ivf-timeline" element={<IVFTimeline />} />
           <Route path="/postpartum" element={<Postpartum />} />

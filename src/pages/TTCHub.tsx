@@ -192,22 +192,24 @@ const topicIcons: Record<TTCTopicSlug, LucideIcon> = {
   conditions: Stethoscope,
 };
 
-const TopicLibrary = () => (
+const TopicLibrary = () => {
+  const pillars = ttcTopics.filter((t) => t.kind === "pillar");
+  const subs = ttcTopics.filter((t) => t.kind === "subtopic");
+  return (
   <section id="ttc-topics" className="relative py-14 md:py-20 bg-parchment overflow-hidden">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative">
       <div className="mb-8 md:mb-10">
         <Eyebrow>The TTC library</Eyebrow>
         <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground mb-3 leading-tight">
-          Explore trying to <span className="italic font-normal">conceive topics</span>
+          Core <span className="italic font-normal">TTC topics</span>
         </h2>
         <p className="font-sans text-sm font-light text-muted-foreground max-w-md">
-          Start with the area that feels most relevant today, or browse the
-          full TTC library below.
+          Six pillar topics that hold the heart of the TTC guide.
         </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
-        {ttcTopics.map((topic) => {
+        {pillars.map((topic) => {
           const Icon = topicIcons[topic.slug];
           return (
             <Link
@@ -225,7 +227,6 @@ const TopicLibrary = () => (
                 e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.16)`;
               }}
             >
-              {/* soft top-corner halo */}
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute -top-16 -right-16 w-44 h-44 rounded-full opacity-60 group-hover:opacity-90 transition-opacity duration-500"
@@ -276,6 +277,56 @@ const TopicLibrary = () => (
         })}
       </div>
 
+      {/* Supporting guides band */}
+      <div className="mt-16 mb-6">
+        <Eyebrow>Supporting guides</Eyebrow>
+        <h3 className="font-serif text-xl sm:text-2xl md:text-[1.7rem] text-foreground mb-2 leading-tight">
+          Narrower routes that <span className="italic font-normal">complement the core topics</span>
+        </h3>
+        <p className="font-sans text-sm font-light text-muted-foreground max-w-md">
+          Lighter, focused guides that sit underneath the main pillars.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+        {subs.map((topic) => {
+          const Icon = topicIcons[topic.slug];
+          return (
+            <Link
+              key={topic.slug}
+              to={topic.mainHref}
+              className="group relative rounded-2xl border p-5 flex flex-col transition-all hover:-translate-y-0.5 hover:shadow-md min-h-[160px]"
+              style={{
+                background: `hsl(var(${STAGE_BG}) / 0.35)`,
+                borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)`,
+              }}
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <span
+                  className="inline-flex w-9 h-9 rounded-full items-center justify-center"
+                  style={{ background: `hsl(var(${STAGE_BG}) / 0.9)` }}
+                >
+                  <Icon size={16} strokeWidth={1.5} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
+                </span>
+                <h4 className="font-serif text-[1.05rem] text-foreground leading-snug">
+                  {topic.label}
+                </h4>
+              </div>
+              <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed flex-1">
+                {topic.description}
+              </p>
+              <span
+                className="mt-3 inline-flex items-center gap-1 font-sans text-[12px] font-medium"
+                style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+              >
+                Open guide
+                <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </Link>
+          );
+        })}
+      </div>
+
       <div className="text-center mt-12">
         <Link
           to="/trying-to-conceive#ttc-topics"
@@ -292,7 +343,8 @@ const TopicLibrary = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 /* ----------------------------------------------------------- */
 /* 4. JOURNEY TIMELINE                                         */

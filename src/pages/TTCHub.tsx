@@ -10,7 +10,7 @@ import {
   TestTube2,
   Hourglass,
   FlaskConical,
-  Mars,
+  User,
   CalendarHeart,
   Stethoscope,
   Calendar as CalendarIcon,

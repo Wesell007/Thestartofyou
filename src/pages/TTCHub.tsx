@@ -379,7 +379,7 @@ const ToolCTA = () => (
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
               <Link
-                to="/ovulation-calculator"
+                to="/trying-to-conceive/ovulation-calculator"
                 className="inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover hover:-translate-y-0.5 transition-all duration-300"
               >
                 <CalendarIcon size={15} />

@@ -12524,6 +12524,1277 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── PHASE K — APPOINTMENTS, SCREENING, RESULTS ──────────────────────────
+
+  // ─── NIPT IN PREGNANCY ───────────────────────────────────────────────────
+  {
+    slug: "nipt-in-pregnancy",
+    title: "NIPT in pregnancy: what it is, what it screens for, and how to think about results",
+    metaDescription: "NIPT (non-invasive prenatal testing) explained — what it screens for, how it differs from combined screening, what a high-chance result means, and what may follow.",
+    quickAnswer:
+      "NIPT (non-invasive prenatal testing) is a blood test from around 10 weeks that screens for the chance of certain chromosomal conditions — most commonly Down's syndrome, Edwards' syndrome, and Patau's syndrome — by analysing small amounts of the baby's DNA in your blood. It is a screening test, not a diagnosis. A 'low chance' result is reassuring; a 'high chance' result means further testing (like CVS or amniocentesis) is offered to give a definite answer. NIPT can be offered on the NHS after a higher-chance combined screening result, or chosen privately. Whether to have it is a personal choice with no wrong answer.",
+    howThisFeels: [
+      "Wondering whether to have any screening at all",
+      "Anxious about what a 'high chance' result would mean",
+      "Confused by the difference between screening and diagnosis",
+      "Worried about making the 'wrong' decision",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "What NIPT looks at", body: "Tiny pieces of placental DNA circulate in your blood during pregnancy. NIPT analyses those pieces to estimate the chance of certain chromosomal conditions." },
+        { heading: "Screening, not diagnosis", body: "NIPT gives a probability — 'high chance' or 'low chance' — not a yes or no. A definite answer needs a diagnostic test." },
+      ],
+      lessCauses: [
+        { heading: "Inconclusive results", body: "Occasionally a sample doesn't have enough placental DNA to give a result, and the test is repeated. This is more common earlier in pregnancy or at higher BMI." },
+      ],
+      whyItVaries: "NHS access depends on your combined screening result and local pathway. Privately, NIPT is widely available from around 10 weeks regardless of other results.",
+    },
+    timing: {
+      whenStarts: "Usually offered or available from 10 weeks onwards.",
+      whenEases: "Results typically come back within 1–2 weeks. Further testing, if chosen, follows from there.",
+    },
+    whatItFeelsLike: [
+      "A simple blood draw from your arm",
+      "A short wait — usually 1–2 weeks — for results",
+      "Quiet relief with a low-chance result",
+      "An unsettled few days while the result is processed",
+    ],
+    whatThisMeans:
+      "NIPT is one of several screening choices in pregnancy. It is more accurate than combined screening for the conditions it covers, but it is still a screen — meaning it tells you about chance, not certainty.",
+    normal: [
+      "Feeling unsure whether to have NIPT at all",
+      "Wanting time to think before booking it",
+      "A 'low chance' result that feels quietly reassuring rather than dramatic",
+    ],
+    seekSupport: [
+      "A 'high chance' result — your midwife or fetal medicine team will arrange a follow-up appointment to talk through next steps",
+      "An inconclusive result that needs repeating — your team will explain whether to re-test or move to a different test",
+      "Feeling overwhelmed by the decision itself — your midwife can talk it through, and antenatal counselling is available",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. Decisions about screening are yours, and your midwife can talk through any of it without pressure.",
+    whatYouCanDo: [
+      { action: "Take time before deciding", reason: "Screening is optional. There is no rush, and no judgement either way." },
+      { action: "Ask what your local NHS pathway offers", reason: "Eligibility for NHS NIPT can depend on combined screening results. Knowing what's on offer makes the decision clearer." },
+      { action: "If choosing privately, check what's included", reason: "Private providers vary in what they screen for and what support comes with a result. Worth asking before booking." },
+      { action: "Plan a quiet day for the result", reason: "Most results are reassuring, but the result day itself can feel charged. Soft scaffolding helps." },
+    ],
+    whatHappensNext: "A low-chance result usually means no further testing is recommended for the conditions screened. A high-chance result means a fetal medicine appointment is offered to talk through diagnostic testing (CVS or amniocentesis), which can give a definite answer. Either way, the decisions are yours, and a specialist team will support you through them.",
+    relatedStage: {
+      intro: "NIPT sits inside the wider screening conversation:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "The full picture of what's offered and when." },
+        { label: "Combined screening test", href: "/articles/combined-screening-test", context: "The other main first-trimester screen." },
+        { label: "What if a scan shows something unexpected", href: "/articles/what-if-a-scan-shows-something-unexpected", context: "How to think about the days after a difficult result." },
+      ],
+    },
+    aiPrompts: [
+      "What does NIPT actually screen for?",
+      "What does a high-chance NIPT result mean?",
+      "Should I have NIPT?",
+    ],
+    captureIntro: "Worth noting how the decision and the wait felt. Useful in this pregnancy and possibly the next.",
+    trimester: [1],
+    relatedSlugs: ["combined-screening-test", "dating-scan", "what-if-a-scan-shows-something-unexpected", "tests-and-scans-in-pregnancy", "anxiety-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "baby"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "NIPT is a blood test from around 10 weeks that screens, not diagnoses",
+      "It estimates chance of Down's, Edwards', and Patau's syndromes",
+      "It is more accurate than combined screening but still a screen",
+      "A high-chance result means diagnostic testing is offered, not certainty",
+      "Whether to have it is a personal choice with no wrong answer",
+    ],
+    sources: [
+      "NHS — Screening for Down's, Edwards' and Patau's syndromes",
+      "Public Health England / UK NSC — NIPT evaluation",
+      "Royal College of Obstetricians and Gynaecologists",
+      "ARC (Antenatal Results and Choices)",
+    ],
+    faq: [
+      { question: "How accurate is NIPT?", answer: "Very high for Down's syndrome (above 99% detection), with somewhat lower but still high accuracy for Edwards' and Patau's. Even so, it remains a screening test — a high-chance result needs a diagnostic test to confirm." },
+      { question: "Is NIPT free on the NHS?", answer: "In England, NIPT is offered on the NHS to people whose combined screening result shows a higher chance. Outside that pathway, it can be paid for privately. Eligibility varies across the UK." },
+      { question: "What does a 'high chance' result mean?", answer: "It means the chance of one of the screened conditions is higher than the cut-off. It does not mean the baby definitely has that condition — many high-chance results are not confirmed on diagnostic testing." },
+      { question: "Can NIPT tell the baby's sex?", answer: "Most NIPT panels can include sex chromosome information. Whether that is shared depends on the provider and your choice — you can ask not to be told." },
+      { question: "Can I say no to NIPT?", answer: "Yes. All antenatal screening is optional. Saying no is a perfectly valid choice and should be supported without pressure." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "A blood test that talks in chances, not certainties — and a decision that's yours to take in your own time.",
+    editorialSections: [
+      {
+        id: "what-nipt-is",
+        heading: "What NIPT actually is",
+        lead: "A blood test, a probability, and a decision.",
+        paragraphs: [
+          "NIPT — non-invasive prenatal testing — is a blood test from around 10 weeks of pregnancy. Tiny fragments of placental DNA circulate in your blood, and NIPT analyses those fragments to estimate the chance of certain chromosomal conditions, most commonly Down's syndrome (T21), Edwards' syndrome (T18), and Patau's syndrome (T13).",
+          "The crucial word is screening. NIPT does not diagnose anything. It tells you whether the chance is higher or lower than a cut-off. A definite answer — yes or no — needs a diagnostic test like CVS or amniocentesis.",
+        ],
+      },
+      {
+        id: "vs-combined-screening",
+        heading: "How NIPT differs from combined screening",
+        lead: "Same purpose, different tools, different accuracy.",
+        paragraphs: [
+          "Combined screening uses a blood test plus the nuchal translucency measurement at the dating scan, combined with your age, to estimate chance. NIPT uses a single blood test analysing placental DNA. For Down's syndrome, NIPT is significantly more accurate than combined screening, with detection rates above 99%.",
+          "Both are screens, not diagnoses. The main difference is precision and timing — NIPT can be done from 10 weeks and gives a clearer signal, but the underlying logic of probability is the same.",
+        ],
+      },
+      {
+        id: "results",
+        heading: "What the results actually tell you",
+        lead: "Chance, not certainty.",
+        paragraphs: [
+          "A 'low chance' result means the screened conditions are unlikely. It is reassuring, though not a guarantee — no screening test is 100%.",
+          "A 'high chance' result means the chance is higher than the cut-off. It does not mean the baby definitely has the condition. A high-chance NIPT result is followed by an offer of diagnostic testing (CVS or amniocentesis), which gives a definite answer.",
+        ],
+        callout: { tone: "info", text: "A high-chance NIPT result is the start of a conversation, not the end of one." },
+      },
+      {
+        id: "nhs-or-private",
+        heading: "NHS access and private testing",
+        lead: "The route depends on where you live and your earlier screening result.",
+        paragraphs: [
+          "On the NHS in England, NIPT is offered after a higher-chance combined screening result, as a second-tier screen before diagnostic testing. Eligibility differs across the UK, so it's worth asking your midwife how it works locally.",
+          "Privately, NIPT is widely available from around 10 weeks regardless of other results. If choosing privately, it's worth checking what's included, what the laboratory's track record is, and what support is offered if a result needs follow-up.",
+        ],
+      },
+      {
+        id: "deciding",
+        heading: "Whether to have it",
+        lead: "A personal decision with no wrong answer.",
+        paragraphs: [
+          "Some people want as much information as possible early on. Others don't want to take a screen that might lead to decisions they're not sure they want to face. Both are valid. Screening is offered, not required.",
+          "Talking it through with your midwife — or with a partner, friend, or counsellor — can help. ARC (Antenatal Results and Choices) is a UK charity that supports people through these decisions and is well worth knowing about.",
+        ],
+      },
+      {
+        id: "after-a-result",
+        heading: "If the result is high chance",
+        lead: "What usually happens next.",
+        paragraphs: [
+          "You'll be offered a fetal medicine appointment to talk through what the result means and what diagnostic options are available. CVS (chorionic villus sampling) and amniocentesis can give definite answers. Both involve a small risk of miscarriage and are personal decisions to weigh.",
+          "Whatever you decide, you don't have to decide alone or quickly. The team you'll meet does this work every week and is there to walk through it carefully with you.",
+        ],
+        callout: { tone: "reassurance", text: "A high-chance result is hard to receive. It is also not the same as a diagnosis, and there is time to think." },
+      },
+    ],
+  },
+
+  // ─── COMBINED SCREENING TEST ─────────────────────────────────────────────
+  {
+    slug: "combined-screening-test",
+    title: "Combined screening test in pregnancy: what it includes, what the result means, and what comes next",
+    metaDescription: "Combined screening test explained — what it includes, what it screens for, what high-chance and low-chance results mean, and what may follow.",
+    quickAnswer:
+      "The combined screening test is offered between roughly 11 and 14 weeks of pregnancy. It combines a blood test (looking at two pregnancy hormones) with the nuchal translucency measurement at the dating scan, and your age, to estimate the chance of Down's syndrome, Edwards' syndrome, and Patau's syndrome. It is a screening test, not a diagnosis. A 'lower chance' result is reassuring; a 'higher chance' result means NIPT or diagnostic testing (CVS or amniocentesis) is offered. Most higher-chance results are not confirmed as one of the conditions screened. Whether to have it is a personal choice.",
+    howThisFeels: [
+      "Wondering whether to take any screening at all",
+      "Anxious about what a higher-chance result would mean",
+      "Confused about probabilities and cut-offs",
+      "Wanting time to think before deciding",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "What it combines", body: "A blood test (hCG and PAPP-A), the nuchal translucency measurement at the 12-week scan, and your age. The combination gives a single number — the chance, expressed as 1 in something." },
+        { heading: "Why timing matters", body: "It needs to happen in a specific window — roughly 11 to 14 weeks — because the nuchal translucency measurement is only meaningful then." },
+      ],
+      lessCauses: [
+        { heading: "If timing is missed", body: "After 14 weeks, the quadruple test (a blood-only screen) is offered instead. It screens for Down's syndrome only and is slightly less accurate." },
+      ],
+      whyItVaries: "Background chance is higher with age, which is built into the calculation. So the same scan and blood result gives different numbers for different people.",
+    },
+    timing: {
+      whenStarts: "Offered from around 11 weeks, alongside or just after the dating scan.",
+      whenEases: "Results usually come back within two weeks — sometimes faster.",
+    },
+    whatItFeelsLike: [
+      "A blood draw, then waiting through the dating scan",
+      "A short wait — usually one to two weeks — for results",
+      "Quiet relief with a lower-chance result",
+      "An unsettled few days while the result is processed",
+    ],
+    whatThisMeans:
+      "Combined screening gives you a number. That number is more useful than no information, but less useful than people sometimes assume — it is a chance, not a verdict.",
+    normal: [
+      "Feeling uncertain about whether to have screening at all",
+      "Asking the midwife to explain what the cut-off means",
+      "A lower-chance result that quietly settles things",
+    ],
+    seekSupport: [
+      "A higher-chance result — your midwife or fetal medicine team will arrange a follow-up appointment to talk through NIPT or diagnostic testing",
+      "Inconclusive results that need a different test — your team will explain what's available",
+      "Feeling overwhelmed by the decision — your midwife can talk it through, and ARC offers specialist support",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. All antenatal screening is optional, and your midwife will support whichever decision you make.",
+    whatYouCanDo: [
+      { action: "Decide before the scan if possible", reason: "Combined screening uses the dating scan measurement, so a decision early helps the team plan." },
+      { action: "Ask what the cut-off is", reason: "Knowing what counts as 'higher chance' makes the result easier to interpret when it lands." },
+      { action: "Plan a quiet day for results", reason: "Most are reassuring, but the result day can feel charged." },
+      { action: "Don't compare numbers", reason: "Two people with the same scan and blood result can get different chance numbers because of age. Comparison rarely helps." },
+    ],
+    whatHappensNext: "A lower-chance result usually means no further testing is recommended for the conditions screened. A higher-chance result means NIPT is offered next (in many areas), or diagnostic testing (CVS or amniocentesis) is offered directly. Most higher-chance results are not confirmed as one of the conditions screened — the screen is intentionally cautious.",
+    relatedStage: {
+      intro: "Combined screening is part of the wider first-trimester picture:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "The full picture of what's offered and when." },
+        { label: "Dating scan", href: "/articles/dating-scan", context: "The scan that combined screening relies on." },
+        { label: "NIPT in pregnancy", href: "/articles/nipt-in-pregnancy", context: "What's often offered after a higher-chance result." },
+      ],
+    },
+    aiPrompts: [
+      "What does the combined screening test include?",
+      "What does a higher-chance combined screening result mean?",
+      "Should I have combined screening?",
+    ],
+    captureIntro: "Worth noting how the decision and the wait felt. Useful for this pregnancy and the next.",
+    trimester: [1],
+    relatedSlugs: ["nipt-in-pregnancy", "dating-scan", "tests-and-scans-in-pregnancy", "what-if-a-scan-shows-something-unexpected", "anxiety-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "baby"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Combined screening uses a blood test, the nuchal translucency, and your age",
+      "It is offered between roughly 11 and 14 weeks",
+      "It screens for Down's, Edwards', and Patau's syndromes",
+      "Most higher-chance results are not confirmed on further testing",
+      "All antenatal screening is optional",
+    ],
+    sources: [
+      "NHS — Screening for Down's, Edwards' and Patau's syndromes",
+      "UK National Screening Committee",
+      "Royal College of Obstetricians and Gynaecologists",
+      "ARC (Antenatal Results and Choices)",
+    ],
+    faq: [
+      { question: "What does the combined test screen for?", answer: "Down's syndrome (T21), Edwards' syndrome (T18), and Patau's syndrome (T13). It does not screen for every condition, and it does not screen for physical anomalies — that's the role of the 20-week scan." },
+      { question: "What is the cut-off for a 'higher chance' result?", answer: "In the UK, a chance of 1 in 150 or higher is generally classed as 'higher chance' for Down's syndrome. The threshold for Edwards' and Patau's is the same. The cut-off can vary slightly across the UK." },
+      { question: "Does a higher-chance result mean my baby has the condition?", answer: "No. Most higher-chance results are not confirmed on diagnostic testing. Higher chance means further testing is offered — it does not mean a diagnosis." },
+      { question: "What if I'm too far along for combined screening?", answer: "After 14 weeks, the quadruple test is offered. It uses blood markers only, screens for Down's syndrome alone, and is slightly less accurate." },
+      { question: "Can I decline combined screening?", answer: "Yes. All antenatal screening is optional. Declining is a valid choice and your midwife will respect it without pressure." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "A blood test, a scan measurement, and a number — three small pieces of information stitched into a single chance estimate.",
+    editorialSections: [
+      {
+        id: "what-it-includes",
+        heading: "What the combined test actually combines",
+        lead: "Three pieces of information.",
+        paragraphs: [
+          "Combined screening combines two things measured at the dating scan window: a blood test looking at two pregnancy hormones (hCG and PAPP-A), and the nuchal translucency — the thickness of fluid at the back of the baby's neck, measured during the dating scan. Your age is added in, and the combination produces a single chance estimate.",
+          "The reason it has to happen between roughly 11 and 14 weeks is the nuchal translucency measurement — that's the window where it's meaningful.",
+        ],
+      },
+      {
+        id: "what-it-screens-for",
+        heading: "What it screens for",
+        lead: "Three specific conditions.",
+        paragraphs: [
+          "Combined screening screens for Down's syndrome (T21), Edwards' syndrome (T18), and Patau's syndrome (T13). It does not screen for every condition, and it does not check anatomy — that's a different scan, later in pregnancy.",
+          "It is also a screen, not a diagnosis. The result is a chance, expressed as 1 in something — for example, 1 in 800 or 1 in 60.",
+        ],
+      },
+      {
+        id: "results",
+        heading: "What the result means",
+        lead: "Lower chance, higher chance, and the line between them.",
+        paragraphs: [
+          "In the UK, a chance of 1 in 150 or higher is generally classed as 'higher chance'. Below that, the result is described as 'lower chance'. The cut-off is intentionally cautious — most people in the higher-chance group don't go on to have a confirmed diagnosis on further testing.",
+          "A lower-chance result is reassuring, but not a guarantee. A higher-chance result means further testing is offered, not that the condition is confirmed.",
+        ],
+        callout: { tone: "info", text: "Higher chance is not a diagnosis. It's the door opening to a more accurate test." },
+      },
+      {
+        id: "if-higher-chance",
+        heading: "If the result comes back as higher chance",
+        lead: "What usually happens next.",
+        paragraphs: [
+          "You'll be offered a follow-up appointment to talk through next steps. In many parts of the UK, NIPT is offered as the next step — a more accurate blood-based screen. Diagnostic testing (CVS or amniocentesis) can also be offered, and gives a definite answer.",
+          "It's a lot to receive in a phone call or a letter. Take time. Ask for the appointment, and bring someone with you if you can.",
+        ],
+      },
+      {
+        id: "deciding",
+        heading: "Whether to have screening at all",
+        lead: "A personal decision, freely made.",
+        paragraphs: [
+          "Some people want the information; some don't. Both are valid choices, and the team will not push you in either direction. If you're unsure, your midwife can talk it through, and there is no rush to decide on the spot.",
+          "ARC (Antenatal Results and Choices) is a UK charity that specialises in this exact decision and is worth knowing about, whether you're undecided or processing a result.",
+        ],
+      },
+      {
+        id: "uncertainty",
+        heading: "Holding the uncertainty",
+        lead: "Probability is hard to feel in the body.",
+        paragraphs: [
+          "A number like '1 in 200' is mathematically reassuring and emotionally hard. The brain hears the '1' more loudly than the '200'. That's a normal reaction, not a sign that something is wrong.",
+          "If a result has unsettled you — even a reassuring one — that's worth saying. Midwives are used to this, and a longer conversation is often quietly available.",
+        ],
+        callout: { tone: "reassurance", text: "Feeling shaken by a result, even a low-chance one, doesn't mean you decided wrong. It means you cared." },
+      },
+    ],
+  },
+
+  // ─── DATING SCAN ─────────────────────────────────────────────────────────
+  {
+    slug: "dating-scan",
+    title: "Dating scan in pregnancy: when it happens, what it checks, and what to expect",
+    metaDescription: "Dating scan explained — when it happens, what it checks, how due date is estimated, what people are surprised by, and what happens if dates don't match.",
+    quickAnswer:
+      "The dating scan usually happens between 11 and 14 weeks of pregnancy. It confirms the pregnancy, checks how many babies are present, measures the baby to estimate a due date, and — if you've chosen combined screening — measures the nuchal translucency at the back of the baby's neck. The scan can sometimes change your due date if the measurement differs from what was expected from your last period. Most dating scans are reassuring; if anything unexpected is seen, the team will talk you through what happens next.",
+    howThisFeels: [
+      "Excited and quietly nervous on the way to the appointment",
+      "Worried it might be 'too early' for what you'd hoped to see",
+      "Anxious about what the scan might or might not show",
+      "Unsure whether to bring a partner or come alone",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Confirming the pregnancy", body: "The scan checks that the pregnancy is in the uterus, that there is a heartbeat, and how many babies are present." },
+        { heading: "Estimating dates", body: "The baby is measured (crown to rump), and that measurement is used to estimate a due date — sometimes more accurately than the date based on your last period." },
+      ],
+      lessCauses: [
+        { heading: "If dates don't match", body: "If the measurement suggests a different gestation, your due date may be adjusted. This can feel unsettling, but it's a routine part of the scan." },
+      ],
+      whyItVaries: "The scan is usually done abdominally, but a transvaginal scan may be offered if the view isn't clear — particularly earlier in the window or with certain body shapes.",
+    },
+    timing: {
+      whenStarts: "Usually scheduled between 11 weeks and 14 weeks.",
+      whenEases: "Results from the scan are immediate; combined screening blood test results follow in a week or two.",
+    },
+    whatItFeelsLike: [
+      "Cool gel on the bump and slight pressure from the probe",
+      "A short, focused appointment — usually 20–30 minutes",
+      "A mix of tears, relief, and disbelief at seeing the baby",
+      "A quick conversation about combined screening if it's been chosen",
+    ],
+    whatThisMeans:
+      "The dating scan is the first proper look at the pregnancy, and the foundation for the rest of antenatal care. It can be emotional — even when nothing unexpected happens.",
+    normal: [
+      "A clear heartbeat and measurements that fit the expected gestation",
+      "A small adjustment to the due date based on the scan measurement",
+      "Not always being able to see everything in one go — sometimes a short wait or a transvaginal scan is needed",
+    ],
+    seekSupport: [
+      "If the scan doesn't show what was expected — the sonographer or midwife will talk you through what happens next, often a follow-up scan in 1–2 weeks",
+      "If a higher-chance combined screening result follows — your team will arrange a follow-up appointment",
+      "If you're struggling emotionally afterwards — perinatal mental health support is available through your midwife",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. The sonographer at your scan will explain what they're looking at and answer your questions on the day.",
+    whatYouCanDo: [
+      { action: "Drink a glass of water beforehand", reason: "A slightly full bladder can give a clearer view, especially earlier in the window." },
+      { action: "Bring someone if you can", reason: "Whether the news is exciting, mixed, or unexpected, having someone with you helps." },
+      { action: "Wear easy-access clothing", reason: "A top that lifts up easily makes the gel-and-bump moment less faff." },
+      { action: "Plan the rest of the day gently", reason: "It's an emotional appointment, even when everything is fine. Soft scaffolding for the day helps." },
+    ],
+    whatHappensNext: "After the scan, you'll usually be given printouts and the estimated due date. If you've chosen combined screening, the blood test results follow in 1–2 weeks. The next routine scan is the 20-week anomaly scan. If anything from this scan needs a closer look, you'll be given a follow-up appointment.",
+    relatedStage: {
+      intro: "The dating scan opens the door to the rest of antenatal care:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "The full picture of what's offered and when." },
+        { label: "Combined screening test", href: "/articles/combined-screening-test", context: "The first-trimester screen often paired with this scan." },
+        { label: "20-week anomaly scan", href: "/articles/20-week-anomaly-scan", context: "The next routine scan." },
+      ],
+    },
+    aiPrompts: [
+      "When does the dating scan happen?",
+      "What does the dating scan check?",
+      "What if my due date changes after the dating scan?",
+    ],
+    captureIntro: "Worth keeping the printouts and a quiet note about how the day felt — first scans tend to stay with you.",
+    trimester: [1],
+    relatedSlugs: ["combined-screening-test", "nipt-in-pregnancy", "tests-and-scans-in-pregnancy", "20-week-anomaly-scan", "what-if-a-scan-shows-something-unexpected"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "baby"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "The dating scan happens between 11 and 14 weeks",
+      "It confirms pregnancy, counts babies, and estimates due date",
+      "It can be paired with combined screening if chosen",
+      "Due dates are sometimes adjusted based on the scan",
+      "Most dating scans are straightforward; follow-up exists if not",
+    ],
+    sources: [
+      "NHS — Your antenatal care",
+      "Royal College of Obstetricians and Gynaecologists",
+      "Society and College of Radiographers",
+      "NICE — Antenatal care",
+    ],
+    faq: [
+      { question: "When does the dating scan happen?", answer: "Usually between 11 weeks and 14 weeks of pregnancy. The window matters because the nuchal translucency measurement (used in combined screening) is only meaningful in that range." },
+      { question: "Can the dating scan change my due date?", answer: "Yes. If the baby's measurement suggests a different gestation, the due date can be adjusted. This is routine and your team will explain why." },
+      { question: "Will I see the heartbeat?", answer: "Yes — a clear heartbeat is usually visible at this scan. Sometimes the sonographer needs a moment to find a good view." },
+      { question: "What if they can't get a clear picture?", answer: "Sometimes the position of the baby, or the time within the window, makes a full view tricky. A short wait, a different angle, or occasionally a transvaginal scan can help." },
+      { question: "What if something looks unexpected?", answer: "The sonographer or midwife will talk through what they've seen, what it might mean, and what comes next — usually a follow-up scan or referral. 'Unexpected' rarely means severe, but it's always worth asking questions." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "The first proper look — and often the first time it all feels real.",
+    editorialSections: [
+      {
+        id: "when-and-why",
+        heading: "When the dating scan happens, and why",
+        lead: "Between 11 and 14 weeks for a reason.",
+        paragraphs: [
+          "The dating scan is offered between 11 weeks and 14 weeks of pregnancy. The window is specific because the nuchal translucency — the small pocket of fluid behind the baby's neck — can only be measured meaningfully in that range, and that measurement is part of combined screening if you've chosen it.",
+          "It's also the first scan most people have. For a lot of people, it's where the pregnancy starts to feel real — even after weeks of symptoms.",
+        ],
+      },
+      {
+        id: "what-it-checks",
+        heading: "What it actually checks",
+        lead: "Four main things.",
+        paragraphs: [
+          "First, that the pregnancy is in the uterus and there is a heartbeat. Second, how many babies are present. Third, a measurement of the baby (crown to rump) to estimate gestation and due date. Fourth, if you've chosen combined screening, the nuchal translucency measurement.",
+          "It's a focused scan, not a full anatomy check — that comes at 20 weeks.",
+        ],
+      },
+      {
+        id: "due-dates",
+        heading: "Due dates and what surprises people",
+        lead: "Sometimes the scan adjusts the date.",
+        paragraphs: [
+          "The due date based on your last period is an estimate. The dating scan measurement is often more accurate, especially if your cycle is irregular or you weren't sure of your dates. So it's quite common for the scan to nudge the due date a few days in either direction.",
+          "If your dates change, that's not a sign that anything has gone wrong — it's the system updating with better information.",
+        ],
+        callout: { tone: "info", text: "Due dates are estimates, not promises. The scan is allowed to adjust them." },
+      },
+      {
+        id: "what-happens-on-the-day",
+        heading: "What the appointment is like",
+        lead: "Short, focused, and quietly emotional.",
+        paragraphs: [
+          "You'll be asked to lie back, gel will be applied to the bump, and the sonographer will move the probe to find a clear view. The room is usually a little dim, and there's often a screen you can see. A typical scan takes 20–30 minutes.",
+          "A partner, friend or family member is usually welcome — though it's worth checking your local trust's policy in advance.",
+        ],
+      },
+      {
+        id: "if-something-isnt-clear",
+        heading: "If the view isn't clear, or something looks unexpected",
+        lead: "It rarely means what people fear it means.",
+        paragraphs: [
+          "Sometimes the baby is in an awkward position, or it's early in the window, and the sonographer can't get the measurements they need. A short wait, a walk around, or a transvaginal scan can often resolve it. Occasionally, a follow-up scan is booked for a week or two later.",
+          "If something genuinely unexpected is seen, the team will talk you through what they think it might be and what happens next. 'Unexpected' covers a wide range — most of it is not severe.",
+        ],
+      },
+      {
+        id: "after-the-scan",
+        heading: "What happens after",
+        lead: "Printouts, paperwork, and a deep breath.",
+        paragraphs: [
+          "You'll usually leave with printouts, the estimated due date written into your notes, and — if combined screening was done — an explanation of when results will arrive. The next routine scan is the 20-week anomaly scan.",
+          "It's a long-anticipated appointment. Be kind to yourself afterwards — even a textbook scan can feel like a lot.",
+        ],
+      },
+    ],
+  },
+
+  // ─── 20-WEEK ANOMALY SCAN ────────────────────────────────────────────────
+  {
+    slug: "20-week-anomaly-scan",
+    title: "20-week anomaly scan: what it checks, what it doesn't, and what happens if something unexpected is seen",
+    metaDescription: "20-week anomaly scan explained — what it checks, what it does not guarantee, what happens if they cannot see everything, and what follows an unexpected finding.",
+    quickAnswer:
+      "The 20-week anomaly scan (also called the mid-pregnancy scan) usually happens between 18 and 21 weeks. It is a detailed look at the baby's anatomy — the brain, face, spine, heart, abdomen, kidneys, limbs, and the position of the placenta. It checks for a defined list of physical conditions but does not pick up everything and is not a guarantee of overall health. Most scans are reassuring. If the sonographer can't see everything (often because of the baby's position), you may be asked to walk around and come back, or a follow-up scan is booked. If something unexpected is seen, the team will explain what they've found and arrange the next step.",
+    howThisFeels: [
+      "Quietly excited but anxious in the days before",
+      "Hoping for reassurance and hoping not to find out the sex (or hoping you do)",
+      "Worried about what 'might' be seen",
+      "Aware this scan can change everything either way",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "What it looks at", body: "A defined list of anatomical structures — brain, face, spine, heart, abdomen, kidneys, limbs — plus the placenta and amniotic fluid." },
+        { heading: "Why it's longer", body: "It usually takes 30–45 minutes because the sonographer has many specific views to obtain. It can take longer if the baby is in an awkward position." },
+      ],
+      lessCauses: [
+        { heading: "Soft markers", body: "Sometimes the scan picks up small variations that don't necessarily mean anything — these are called 'soft markers'. The team will explain what (if anything) follows." },
+      ],
+      whyItVaries: "How much can be seen depends on the baby's position, your body, and how much amniotic fluid there is. None of these is in your control, and none reflects on you.",
+    },
+    timing: {
+      whenStarts: "Usually scheduled between 18 weeks and 21 weeks.",
+      whenEases: "Most results are immediate. If anything needs a closer look, a follow-up scan or fetal medicine appointment is arranged.",
+    },
+    whatItFeelsLike: [
+      "A longer scan than the dating scan",
+      "Periods of quiet concentration from the sonographer",
+      "Being asked to roll, walk, or wait if the baby is in an awkward position",
+      "Sometimes a brief 'I just need to look at this again' that doesn't mean anything is wrong",
+    ],
+    whatThisMeans:
+      "The 20-week scan is the most detailed routine look at the baby in pregnancy. It is reassuring when things are seen clearly, but it isn't designed to find every possible condition.",
+    normal: [
+      "Periods of quiet during the scan as the sonographer concentrates",
+      "Being asked to walk around or roll over to help the baby move",
+      "A scan that takes longer than expected because of the baby's position",
+    ],
+    seekSupport: [
+      "If something unexpected is seen, the sonographer or midwife will talk you through what they've found and arrange the next step (often a fetal medicine appointment)",
+      "If you're feeling overwhelmed afterwards, perinatal support is available through your midwife and through ARC",
+      "If a follow-up scan is needed, ask what the timing is and what they'll be looking at",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. The sonographer and midwife at your appointment will explain what they're looking at and answer questions on the day.",
+    whatYouCanDo: [
+      { action: "Eat and drink normally beforehand", reason: "Unlike the dating scan, you don't usually need a full bladder." },
+      { action: "Bring someone if you can", reason: "It's a longer, more detailed appointment, and having someone with you helps either way." },
+      { action: "Decide in advance about finding out the sex", reason: "Some scans include sex if you ask; many don't routinely. Worth knowing your local policy." },
+      { action: "Plan the rest of the day gently", reason: "Even a fully reassuring scan can be tiring and emotional." },
+    ],
+    whatHappensNext: "If everything is seen clearly, you'll usually go home with printouts and a note that the scan is complete. If the sonographer couldn't see everything, a follow-up scan is booked — often 1–2 weeks later. If something unexpected is found, you'll be referred to fetal medicine for a more detailed scan and a conversation about what it means.",
+    relatedStage: {
+      intro: "The anomaly scan sits inside the wider second-trimester picture:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "The full picture of what's offered and when." },
+        { label: "Anterior placenta", href: "/articles/anterior-placenta", context: "One of the placental positions noted at this scan." },
+        { label: "What if a scan shows something unexpected", href: "/articles/what-if-a-scan-shows-something-unexpected", context: "How to think about the days after a difficult scan." },
+      ],
+    },
+    aiPrompts: [
+      "What does the 20-week scan check for?",
+      "What if they can't see everything at the 20-week scan?",
+      "What happens if something is found at the 20-week scan?",
+    ],
+    captureIntro: "Worth keeping the printouts and a brief note of how the day felt — the second-trimester scan is a milestone in its own right.",
+    trimester: [2],
+    relatedSlugs: ["tests-and-scans-in-pregnancy", "anterior-placenta", "low-lying-placenta-in-pregnancy", "growth-scans-in-pregnancy", "what-if-a-scan-shows-something-unexpected"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "baby"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "The 20-week scan is a detailed anatomy scan, usually 18–21 weeks",
+      "It checks a defined list of structures — not everything is detectable",
+      "Position and view affect what can be seen; follow-up scans are common",
+      "It also notes placental position and amniotic fluid",
+      "If something unexpected is seen, the team will arrange next steps",
+    ],
+    sources: [
+      "NHS — 20-week screening scan",
+      "Public Health England — Fetal anomaly screening programme",
+      "Royal College of Obstetricians and Gynaecologists",
+      "ARC (Antenatal Results and Choices)",
+    ],
+    faq: [
+      { question: "What does the 20-week scan check for?", answer: "A defined list of structural conditions across the brain, face, spine, heart, abdomen, kidneys, and limbs, plus the position of the placenta and amount of amniotic fluid. It does not check for every condition." },
+      { question: "Why does the scan sometimes take so long?", answer: "Because there are many specific views to obtain. If the baby is in an awkward position, the sonographer may ask you to walk around, roll over, or wait — all to help the baby move." },
+      { question: "What if they can't see everything?", answer: "It's common to need a second look. You may be asked to walk around and come back, or a follow-up scan is booked for a week or two later. This isn't a sign that anything is wrong." },
+      { question: "What if something is found?", answer: "The sonographer or midwife will talk through what they've seen and refer you to fetal medicine for a more detailed scan and a fuller conversation. 'Unexpected' covers a wide range, and many findings are minor or self-resolving." },
+      { question: "Will I find out the sex?", answer: "Some trusts will tell you on request, others don't as routine policy. It's not the purpose of the scan, and the sonographer's main focus is anatomy. Worth checking the local approach in advance." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "A long, detailed look at the baby — reassuring when it goes smoothly, and held carefully when it doesn't.",
+    editorialSections: [
+      {
+        id: "what-it-is",
+        heading: "What the 20-week scan actually is",
+        lead: "A detailed anatomy scan with a specific job.",
+        paragraphs: [
+          "The 20-week anomaly scan (sometimes called the mid-pregnancy scan) is a detailed look at the baby's anatomy. It checks a defined list of structures — brain, face, spine, heart, abdomen, kidneys, limbs — and notes the position of the placenta and the amount of amniotic fluid.",
+          "It is the most detailed routine scan in pregnancy. It is also not a full health check — there are conditions that can't be seen on a scan, and there are conditions that develop later.",
+        ],
+      },
+      {
+        id: "what-it-doesnt-do",
+        heading: "What it doesn't guarantee",
+        lead: "Worth being clear-eyed about.",
+        paragraphs: [
+          "A reassuring 20-week scan is genuinely reassuring — but it isn't a guarantee that everything is or will be fine. Some conditions develop after 20 weeks, some can't be seen on scan, and some are picked up after birth.",
+          "That isn't a reason to dread the scan. It's just useful context for how to receive the result.",
+        ],
+        callout: { tone: "info", text: "A clear 20-week scan is reassuring, but it isn't designed to find everything." },
+      },
+      {
+        id: "how-long-it-takes",
+        heading: "Why it can take longer than expected",
+        lead: "Position is everything.",
+        paragraphs: [
+          "There are many specific views the sonographer needs to obtain. If the baby is in an awkward position — facing the wrong way, hands in front of the face — the views can be hard to get. You may be asked to walk around for a few minutes, drink some water, or roll onto your side.",
+          "A long scan, or a 'come back in 20 minutes', usually just means the baby is being uncooperative. It is not, on its own, a worrying sign.",
+        ],
+      },
+      {
+        id: "if-they-cant-see-everything",
+        heading: "If they can't see everything",
+        lead: "Common, and not a red flag.",
+        paragraphs: [
+          "Sometimes everything reasonable has been tried and the views still aren't there. In that case, a follow-up scan is booked — often a week or two later. The baby is usually in a different position by then.",
+          "It can be unsettling to leave without 'a complete answer', but it's a common, normal part of how the system handles a baby that won't budge.",
+        ],
+      },
+      {
+        id: "if-something-is-seen",
+        heading: "If something unexpected is seen",
+        lead: "What the next step usually looks like.",
+        paragraphs: [
+          "The sonographer will tell you what they've seen and bring in a senior colleague or midwife to talk through it. You'll usually be referred to fetal medicine for a more detailed scan and a fuller conversation.",
+          "'Unexpected' covers a very wide range — from minor variations that resolve on their own, to more significant findings that change pregnancy care. The next scan is usually within a few days. Take someone with you if you can, and write down questions in advance.",
+        ],
+        callout: { tone: "reassurance", text: "An unexpected finding is the start of a longer conversation, not the end of one. There is almost always a next step." },
+      },
+      {
+        id: "after-the-scan",
+        heading: "Afterwards",
+        lead: "However it goes, it's a lot.",
+        paragraphs: [
+          "Even a fully reassuring scan can leave people feeling tearful or wrung out. It's a long appointment, with a lot at stake emotionally. Plan a quiet afternoon if you can.",
+          "If the scan was harder, ARC (Antenatal Results and Choices) is a UK charity that supports people through difficult or unclear scan news. They are gentle, expert, and very used to this exact kind of phone call.",
+        ],
+      },
+    ],
+  },
+
+  // ─── GLUCOSE TOLERANCE TEST ──────────────────────────────────────────────
+  {
+    slug: "glucose-tolerance-test",
+    title: "Glucose tolerance test in pregnancy: what it is, what to expect, and what the result may mean",
+    metaDescription: "Glucose tolerance test in pregnancy explained — what it screens for, what to expect on the day, what the result means, and what happens if gestational diabetes is diagnosed.",
+    quickAnswer:
+      "The oral glucose tolerance test (OGTT) is offered to people in pregnancy who have risk factors for gestational diabetes. It usually happens between 24 and 28 weeks (or earlier if there are particular risk factors). You fast overnight, have a blood test, drink a sugary glucose drink, and have another blood test two hours later. The result tells the team whether your body is processing sugar normally or whether gestational diabetes is present. If gestational diabetes is diagnosed, a clear management plan is put in place — most pregnancies with gestational diabetes go well with the right support.",
+    howThisFeels: [
+      "Anxious about the fasting and the drink",
+      "Worried about what a positive result would mean",
+      "Wondering whether to push for the test even without obvious risk factors",
+      "Tired by the morning of fasting and waiting",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Why it's offered", body: "Pregnancy hormones change how your body handles sugar. Some people develop gestational diabetes, which is more common in certain situations (BMI, family history, ethnicity, previous pregnancies)." },
+        { heading: "Why it matters", body: "Untreated gestational diabetes can affect baby's growth and increase the chance of complications at birth. Catching it early means it can be managed well." },
+      ],
+      lessCauses: [
+        { heading: "Earlier testing", body: "If you've had gestational diabetes before, or there are strong risk factors, the test may be offered earlier in pregnancy and repeated." },
+      ],
+      whyItVaries: "Risk factors and local pathways vary. The test is targeted, not universal — your midwife will talk through whether it applies to you.",
+    },
+    timing: {
+      whenStarts: "Most often between 24 and 28 weeks.",
+      whenEases: "Results are usually back within a few days. If positive, a diabetes-in-pregnancy team appointment follows.",
+    },
+    whatItFeelsLike: [
+      "An overnight fast (usually from around 10pm)",
+      "An early-morning blood test, then the glucose drink (very sweet)",
+      "Two hours of waiting — usually still in the clinic",
+      "A second blood test, then food at last",
+    ],
+    whatThisMeans:
+      "The OGTT is a routine, evidence-based test for one of the more common pregnancy conditions. The morning is uncomfortable; the test itself is well-tolerated.",
+    normal: [
+      "Feeling tired, hungry, and a bit lightheaded by the second blood test",
+      "Finding the glucose drink very sweet — most people do",
+      "Mild nausea after the drink that settles",
+    ],
+    seekSupport: [
+      "Vomiting after the glucose drink — tell the team straight away (the test may need to be rescheduled)",
+      "Feeling faint, very unwell, or shaky — let staff know",
+      "A positive result — your team will arrange a diabetes-in-pregnancy appointment, usually within a week",
+      "Anxiety about a result you've been told over the phone — ask for an appointment to talk it through properly",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. The team running your test will explain the process on the day and answer any questions.",
+    whatYouCanDo: [
+      { action: "Confirm the fasting rules with your team", reason: "Most fasts are from 10pm the night before. Water is usually allowed. Clarifying avoids morning-of confusion." },
+      { action: "Bring food for after the second blood test", reason: "Once the second sample is taken, you can eat. Having something ready is a small kindness to a long morning." },
+      { action: "Plan a quiet afternoon", reason: "The test isn't physically hard, but it leaves most people tired." },
+      { action: "Bring something to read or watch", reason: "The two-hour wait is the main feature of the morning." },
+    ],
+    whatHappensNext: "If the result is normal, no further action is usually needed. If gestational diabetes is diagnosed, you'll be referred to a diabetes-in-pregnancy team — usually a midwife and a dietitian, sometimes a diabetes nurse and a consultant. You'll be given a blood-sugar monitor, dietary advice, and a clear plan. Some people manage with diet and lifestyle alone; others need medication. Either way, the support is comprehensive.",
+    relatedStage: {
+      intro: "The glucose test sits alongside other late-pregnancy checks:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "The full picture of what's offered and when." },
+        { label: "Eating well in pregnancy", href: "/articles/eating-well-in-pregnancy", context: "The dietary context for blood-sugar conversations." },
+        { label: "Growth scans in pregnancy", href: "/articles/growth-scans-in-pregnancy", context: "Sometimes recommended alongside a gestational diabetes diagnosis." },
+      ],
+    },
+    aiPrompts: [
+      "What is the glucose tolerance test in pregnancy?",
+      "What happens if I have gestational diabetes?",
+      "Do I have to have the OGTT?",
+    ],
+    captureIntro: "Worth noting how the morning felt and any next steps from the team. A useful reference for future pregnancies too.",
+    trimester: [2, 3],
+    relatedSlugs: ["tests-and-scans-in-pregnancy", "eating-well-in-pregnancy", "growth-scans-in-pregnancy", "measuring-big-or-small-in-pregnancy", "swelling-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "The OGTT screens for gestational diabetes",
+      "It usually happens between 24 and 28 weeks",
+      "It involves fasting, a sugary drink, and two blood tests two hours apart",
+      "A positive result means a clear management plan, not bad news on its own",
+      "Most pregnancies with gestational diabetes go well with the right support",
+    ],
+    sources: [
+      "NHS — Gestational diabetes",
+      "NICE — Diabetes in pregnancy",
+      "Diabetes UK",
+      "Royal College of Obstetricians and Gynaecologists",
+    ],
+    faq: [
+      { question: "Do I have to fast before the test?", answer: "Yes — usually from around 10pm the night before. Plain water is normally allowed. Confirm the exact rules with your team beforehand." },
+      { question: "What does the glucose drink taste like?", answer: "Very sweet — like a flat, very sugary lemonade or cola. Most people find it just bearable. A few feel briefly nauseous; vomiting after the drink should be reported." },
+      { question: "How long does the test take?", answer: "Usually around two and a half hours from arrival to leaving — fasting blood test, drink, two-hour wait, second blood test." },
+      { question: "What happens if I have gestational diabetes?", answer: "You'll be referred to a diabetes-in-pregnancy team. Most people start with diet and lifestyle changes and home blood-sugar monitoring. Some need medication. The support is comprehensive and most pregnancies go well." },
+      { question: "Can I refuse the test?", answer: "Yes — all antenatal screening is optional. If you decline, your team will talk through what symptoms to look out for and what the trade-offs are. It's a real conversation, not a tick-box." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "An uncomfortable morning that does a useful job — and a result that comes with a clear plan either way.",
+    editorialSections: [
+      {
+        id: "why-its-offered",
+        heading: "Why the OGTT is offered",
+        lead: "Pregnancy changes how the body handles sugar.",
+        paragraphs: [
+          "Pregnancy hormones make some bodies less responsive to insulin, which can lead to gestational diabetes — raised blood sugar that develops in pregnancy and usually resolves after birth. It's relatively common, and more likely with certain risk factors (BMI, family history, ethnicity, previous gestational diabetes, previous large baby).",
+          "The OGTT is the standard test for it. It's targeted at people with risk factors rather than offered to everyone — your midwife will talk through whether it applies to you.",
+        ],
+      },
+      {
+        id: "what-to-expect",
+        heading: "What to expect on the day",
+        lead: "Three blood tests, one drink, a long wait.",
+        paragraphs: [
+          "You'll be asked to fast overnight (usually from around 10pm). In the morning, you'll have a blood test, drink the glucose solution, and wait two hours — usually still in the clinic. A second blood test is taken at the two-hour mark, and you can finally eat.",
+          "Bring water (if allowed), something to read, food for afterwards, and any patience you can spare. The waiting room is the main event.",
+        ],
+      },
+      {
+        id: "the-drink",
+        heading: "About the drink",
+        lead: "Sweeter than expected and a bit clinical.",
+        paragraphs: [
+          "The glucose drink is very sweet — most people find it just-about-tolerable. A small number feel briefly nauseous; some vomit. If you vomit after the drink, tell the team straight away — the test may need to be rescheduled.",
+          "Drinking it slowly, sipping water afterwards (if allowed), and keeping still help. It is, frankly, not anyone's favourite morning.",
+        ],
+        callout: { tone: "info", text: "If you vomit after the glucose drink, the test usually needs to be rescheduled. Tell staff straight away." },
+      },
+      {
+        id: "what-result-means",
+        heading: "What the result means",
+        lead: "Two outcomes, both manageable.",
+        paragraphs: [
+          "A normal result usually means no further action. A positive result means gestational diabetes — your blood sugar is higher than the threshold after the glucose load.",
+          "A positive result can be a shock, but it isn't bad news on its own. It means a plan can now be put in place — and most pregnancies with gestational diabetes, well-managed, go well.",
+        ],
+      },
+      {
+        id: "if-positive",
+        heading: "If gestational diabetes is diagnosed",
+        lead: "What care looks like from there.",
+        paragraphs: [
+          "You'll be referred to a diabetes-in-pregnancy team — usually a midwife and a dietitian, often a diabetes specialist nurse and sometimes a consultant. You'll be given a blood-glucose monitor and shown how to record your readings, and you'll be given dietary guidance — usually simple, evidence-based, and not as restrictive as people fear.",
+          "Many people manage with diet and lifestyle changes alone. Some need tablets (most often metformin); some need insulin. Whatever the path, the support is structured and the team are very used to walking it with you.",
+        ],
+        callout: { tone: "reassurance", text: "A diagnosis of gestational diabetes is a plan, not a punishment. Most pregnancies do well with it." },
+      },
+      {
+        id: "after-birth",
+        heading: "After birth",
+        lead: "Usually resolves, but worth knowing what comes next.",
+        paragraphs: [
+          "Gestational diabetes usually resolves shortly after birth. You'll be offered a follow-up blood test (usually around 6–13 weeks postnatally) to confirm.",
+          "Having had gestational diabetes does increase the chance of type 2 diabetes later in life, so an annual blood test is recommended afterwards. Knowing this is part of looking after yourself well, not a reason to worry now.",
+        ],
+      },
+    ],
+  },
+
+  // ─── ANTI-D INJECTION ────────────────────────────────────────────────────
+  {
+    slug: "anti-d-injection-in-pregnancy",
+    title: "Anti-D injection in pregnancy: who it's for, why it's offered, and what it does",
+    metaDescription: "Anti-D injection in pregnancy explained — who it's for, why it's offered, when it happens, what it does, and when extra doses may be needed.",
+    quickAnswer:
+      "Anti-D is an injection offered to people who are RhD negative during pregnancy. It prevents your immune system from making antibodies against your baby's blood cells if your baby is RhD positive. Without anti-D, antibodies built up in one pregnancy could cause serious problems in a future pregnancy. In the UK, anti-D is routinely offered around 28 weeks (sometimes as one dose, sometimes as two), and again after birth if your baby is RhD positive. Extra doses may be needed after bleeding, certain procedures, or trauma to the bump.",
+    howThisFeels: [
+      "Confused by the words 'rhesus' and 'antibodies'",
+      "Worried about a 'blood product' being given",
+      "Wondering if it's really necessary",
+      "Anxious about the injection itself",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Blood groups in pregnancy", body: "Everyone is either RhD positive or RhD negative. About 15% of people in the UK are RhD negative. If a RhD-negative parent carries a RhD-positive baby, the bodies' two blood groups can encounter each other during pregnancy or birth." },
+        { heading: "Why it matters", body: "If even a small amount of baby's RhD-positive blood enters your circulation, your immune system can start making antibodies. Those antibodies can cross the placenta and attack a future RhD-positive baby's blood cells." },
+      ],
+      lessCauses: [
+        { heading: "Sensitising events", body: "Bleeding in pregnancy, abdominal trauma, certain procedures (CVS, amniocentesis, ECV), or an early pregnancy loss can all be 'sensitising events' that trigger an extra anti-D dose." },
+      ],
+      whyItVaries: "Some hospitals offer routine antenatal anti-D at 28 weeks as a single dose; others give two doses (28 and 34 weeks). Both are acceptable.",
+    },
+    timing: {
+      whenStarts: "Routine antenatal anti-D is given at around 28 weeks; also after birth if the baby is RhD positive.",
+      whenEases: "Anti-D is needed in any pregnancy where you are RhD negative and the baby is potentially RhD positive — once given, the protection covers that pregnancy until the next milestone.",
+    },
+    whatItFeelsLike: [
+      "A small injection in the upper arm or thigh",
+      "Mild tenderness afterwards",
+      "Briefly feeling like 'a lot of new information'",
+    ],
+    whatThisMeans:
+      "Anti-D is one of the quiet, routine, well-evidenced parts of antenatal care. It works by preventing a problem that, before anti-D, used to cause significant harm.",
+    normal: [
+      "Mild soreness at the injection site",
+      "Hearing about anti-D for the first time at your booking appointment",
+      "Being asked about your blood group repeatedly throughout pregnancy",
+    ],
+    seekSupport: [
+      "Bleeding, abdominal trauma, or a fall onto the bump if you're RhD negative — call your maternity unit, as you may need an extra anti-D dose within 72 hours",
+      "After CVS, amniocentesis, or ECV — anti-D is usually given as a matter of routine if you're RhD negative",
+      "Concerns about the injection itself or about the blood product — your midwife is happy to talk it through; declining is also a real choice",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. Your midwife will check your blood group and explain what's offered for you specifically.",
+    whatYouCanDo: [
+      { action: "Know your blood group", reason: "It's worth knowing whether you're RhD positive or negative — your booking blood test will confirm." },
+      { action: "Mention bleeding or trauma quickly", reason: "Extra anti-D after a sensitising event needs to be given within 72 hours to be most effective." },
+      { action: "Ask about the dose schedule", reason: "Some areas give one dose at 28 weeks, others two (28 and 34 weeks). Either is fine — clarifying helps you know what's coming." },
+      { action: "Ask if you're unsure", reason: "It's a quietly important injection, and questions are welcome." },
+    ],
+    whatHappensNext: "After the routine antenatal dose at around 28 weeks, no further action is usually needed unless there's a sensitising event. After birth, your baby's blood group is checked from the cord blood. If they're RhD positive, you'll be offered another dose of anti-D within 72 hours of birth.",
+    relatedStage: {
+      intro: "Anti-D fits into the wider picture of routine pregnancy care:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "The full picture of what's offered and when." },
+        { label: "Bleeding in early pregnancy", href: "/articles/bleeding-in-early-pregnancy", context: "One of the situations where extra anti-D may be needed." },
+        { label: "What happens at booking appointment", href: "/articles/what-happens-at-booking-appointment", context: "Where your blood group is confirmed." },
+      ],
+    },
+    aiPrompts: [
+      "Why am I being offered anti-D?",
+      "Is anti-D safe in pregnancy?",
+      "Do I need extra anti-D after bleeding?",
+    ],
+    captureIntro: "Worth noting your blood group and which dose schedule your trust uses. Useful information across pregnancies.",
+    trimester: [2, 3],
+    relatedSlugs: ["tests-and-scans-in-pregnancy", "bleeding-in-early-pregnancy", "what-happens-at-booking-appointment", "low-lying-placenta-in-pregnancy", "external-cephalic-version"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Anti-D is offered to people who are RhD negative",
+      "It prevents your body making antibodies against a RhD-positive baby's blood",
+      "Routine antenatal dose(s) given around 28 weeks (sometimes also 34)",
+      "Another dose after birth if the baby is RhD positive",
+      "Extra doses needed after bleeding, trauma, or certain procedures",
+    ],
+    sources: [
+      "NHS — Rhesus disease",
+      "NICE — Routine antenatal anti-D prophylaxis for RhD-negative women",
+      "British Society for Haematology",
+      "Royal College of Obstetricians and Gynaecologists",
+    ],
+    faq: [
+      { question: "Why is anti-D needed?", answer: "If you're RhD negative and your baby is RhD positive, even a small amount of baby's blood entering your circulation can make your body produce antibodies. Anti-D stops that happening, protecting future pregnancies." },
+      { question: "Is anti-D safe?", answer: "Anti-D has been used for decades and has an excellent safety record. It is a blood product, which some people prefer to know. Your midwife can talk through any concerns." },
+      { question: "What is a sensitising event?", answer: "Anything that might allow baby's blood to mix with yours — vaginal bleeding, abdominal trauma, falls onto the bump, ECV, CVS, or amniocentesis. After any of these, an extra dose of anti-D may be needed within 72 hours." },
+      { question: "What if I'm RhD positive?", answer: "Anti-D isn't needed. The whole conversation only applies if you're RhD negative — about 15% of people in the UK." },
+      { question: "Can I decline anti-D?", answer: "Yes. Like all medical care it can be declined. Your midwife will talk through the trade-offs (mainly to do with future pregnancies) so the decision is fully informed." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "A small, quietly important injection — protecting this pregnancy and the next.",
+    editorialSections: [
+      {
+        id: "blood-groups",
+        heading: "Blood groups, briefly",
+        lead: "Why this comes up at all.",
+        paragraphs: [
+          "Everyone is either RhD positive or RhD negative — a feature of the red blood cells. About 85% of people in the UK are RhD positive; about 15% are RhD negative. If a RhD-negative parent carries a RhD-positive baby (which can happen depending on the other biological parent's blood group), the body recognises the baby's blood cells as different.",
+          "If even a small amount of the baby's blood gets into your circulation — usually at birth, but sometimes during pregnancy — your immune system can start producing antibodies against it.",
+        ],
+      },
+      {
+        id: "why-it-matters",
+        heading: "Why those antibodies matter",
+        lead: "Mainly for future pregnancies.",
+        paragraphs: [
+          "Once you've made antibodies, they don't go away. In a future RhD-positive pregnancy, those antibodies can cross the placenta and attack the baby's red blood cells — historically a cause of serious illness and even loss.",
+          "Anti-D is what stops the antibodies forming in the first place. It is a quiet, routine, hugely effective piece of preventive care.",
+        ],
+      },
+      {
+        id: "when-its-given",
+        heading: "When anti-D is given",
+        lead: "Routine doses, plus extras if needed.",
+        paragraphs: [
+          "Routine antenatal anti-D is offered at around 28 weeks. Some areas give a single, larger dose; others give two smaller doses (one at 28 weeks, one at around 34 weeks). Both schedules are evidence-based.",
+          "After birth, your baby's blood group is checked from the cord. If they're RhD positive, you'll be offered another dose of anti-D within 72 hours.",
+        ],
+      },
+      {
+        id: "extra-doses",
+        heading: "When extra doses may be needed",
+        lead: "After 'sensitising events'.",
+        paragraphs: [
+          "Bleeding in pregnancy, abdominal trauma, falls onto the bump, ECV, CVS, and amniocentesis can all let baby's blood mix with yours. Each of these is a reason for an extra dose of anti-D — ideally within 72 hours of the event.",
+          "If any of these happen after about 12 weeks, mention them to your maternity unit so they can decide whether an extra dose is needed.",
+        ],
+        callout: { tone: "gentle-warning", text: "Bleeding or trauma in pregnancy if you're RhD negative is worth a phone call — extra anti-D works best within 72 hours." },
+      },
+      {
+        id: "the-injection-itself",
+        heading: "What the injection is like",
+        lead: "Small, quick, and quickly over.",
+        paragraphs: [
+          "Anti-D is a small intramuscular injection, usually into the upper arm or thigh. Most people feel a sting and a little tenderness for a day or two afterwards. It doesn't usually cause significant side effects.",
+          "If you feel unwell after — high temperature, rash, breathlessness — let the team know, but those are uncommon.",
+        ],
+      },
+      {
+        id: "deciding",
+        heading: "If you'd like to talk it through first",
+        lead: "Worth doing.",
+        paragraphs: [
+          "Anti-D is a blood product, and some people prefer to know that and have a conversation about it before deciding. Midwives are very used to this conversation and won't push you. The trade-offs — mainly to do with protecting future pregnancies — can be talked through carefully.",
+          "Choosing to have anti-D is the standard, well-evidenced path. Choosing not to is also a real choice. The point is that you understand what's on offer.",
+        ],
+        callout: { tone: "info", text: "Anti-D is a quiet piece of preventive care that mostly affects future pregnancies. Worth asking about, worth understanding." },
+      },
+    ],
+  },
+
+  // ─── BOOKING APPOINTMENT ─────────────────────────────────────────────────
+  {
+    slug: "what-happens-at-booking-appointment",
+    title: "What happens at the booking appointment in pregnancy",
+    metaDescription: "Booking appointment explained — when it happens, what gets asked, the blood tests, your notes, due date, and how to prepare.",
+    quickAnswer:
+      "The booking appointment is your first proper antenatal appointment with a midwife, usually between 8 and 12 weeks. It is the longest appointment of pregnancy — often around an hour. You'll go through your medical and family history, current health, partner's health, lifestyle, and any pregnancy concerns. Blood tests are taken (blood group, infection screening, full blood count). Your due date is confirmed or estimated. You'll be given your maternity notes, information about screening choices, and a plan for the rest of pregnancy. It's information-heavy — bring a partner or friend if you can, and write down questions in advance.",
+    howThisFeels: [
+      "Quietly excited to finally meet a midwife",
+      "Anxious about all the questions, especially personal ones",
+      "Worried about getting it wrong if you don't know dates",
+      "Tired by the end — it's a long appointment",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "What it covers", body: "Medical history, family history, current health, mental health history, partner's health, lifestyle, any concerns, blood tests, due date, screening conversations, and the start of your maternity notes." },
+        { heading: "Why it's long", body: "It's the foundation of the whole pregnancy care plan — once it's done, the rest of antenatal care is built on it." },
+      ],
+      lessCauses: [
+        { heading: "If risk factors are identified", body: "Anything raised at booking that needs extra care (consultant-led care, additional scans, mental health input) is flagged early so the right pathway can be set up." },
+      ],
+      whyItVaries: "Some areas do booking in a clinic, some at home, some virtually for parts of it. The structure is the same; the setting may not be.",
+    },
+    timing: {
+      whenStarts: "Usually between 8 and 12 weeks of pregnancy.",
+      whenEases: "It's a one-time appointment, but the conversations it starts run through the rest of pregnancy.",
+    },
+    whatItFeelsLike: [
+      "A long sit-down with someone who is paying close attention",
+      "Lots of questions about you, your family, and your partner",
+      "A blood test and a urine sample",
+      "Leaving with a thick set of maternity notes",
+    ],
+    whatThisMeans:
+      "The booking appointment is where pregnancy care becomes real and structured. It's the appointment that sets up everything that follows.",
+    normal: [
+      "Feeling unsure of family history dates and approximate answers being fine",
+      "Being asked about mental health (it's a routine question, not a judgement)",
+      "Being given a lot of information at once",
+    ],
+    seekSupport: [
+      "If anything in your history needs follow-up, your midwife will arrange consultant-led care or additional appointments",
+      "If mental health questions surface things you'd like more support with, ask — perinatal mental health services are real and available",
+      "If you didn't take in everything on the day, ring your midwife — that's exactly what the contact details in your notes are for",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. Your midwife will tailor the appointment to your situation and answer questions on the day.",
+    whatYouCanDo: [
+      { action: "Bring approximate dates of your last period and any previous pregnancies", reason: "Approximate is fine — exact dates are rarely available." },
+      { action: "Have a list of medications and any health conditions", reason: "Including over-the-counter and supplements. Saves time and avoids gaps." },
+      { action: "Bring partner or supporter if you can", reason: "It's a long appointment with a lot of information. A second pair of ears helps." },
+      { action: "Write down your questions in advance", reason: "It's easy to forget when you're sitting in the room. A note in your phone is enough." },
+      { action: "Allow time afterwards", reason: "Most people leave a bit shell-shocked. Don't book anything tight after it." },
+    ],
+    whatHappensNext: "After booking, you'll have the dating scan (around 11–14 weeks), then a clear schedule of antenatal appointments. Blood test results come back over a week or two. If anything in your history or bloods needs further care, you'll be contacted and a follow-up appointment arranged.",
+    relatedStage: {
+      intro: "Booking opens the door to the rest of antenatal care:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "The full picture of what's offered and when." },
+        { label: "Dating scan", href: "/articles/dating-scan", context: "The next routine appointment." },
+        { label: "Combined screening test", href: "/articles/combined-screening-test", context: "One of the screens discussed at booking." },
+      ],
+    },
+    aiPrompts: [
+      "What happens at the booking appointment?",
+      "What questions do they ask at booking?",
+      "What blood tests are done at booking?",
+    ],
+    captureIntro: "Worth keeping a quick note of what was discussed and any follow-ups. Useful for later appointments and for future pregnancies.",
+    trimester: [1],
+    relatedSlugs: ["tests-and-scans-in-pregnancy", "dating-scan", "combined-screening-test", "anti-d-injection-in-pregnancy", "anxiety-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "preparing-for-baby"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Booking is your first proper midwife appointment, usually 8–12 weeks",
+      "It's long — often around an hour — and information-heavy",
+      "History, blood tests, due date, screening conversations, and your notes",
+      "Partner welcome; questions welcome; approximate dates are fine",
+      "Sets up the whole rest of antenatal care",
+    ],
+    sources: [
+      "NHS — Your antenatal care",
+      "NICE — Antenatal care",
+      "Royal College of Midwives",
+      "Tommy's — Booking appointment",
+    ],
+    faq: [
+      { question: "When does booking usually happen?", answer: "Most often between 8 and 12 weeks of pregnancy. Some areas book a little earlier or later. If you haven't been contacted by 10 weeks, it's worth ringing your GP or midwife team." },
+      { question: "What blood tests are done?", answer: "Blood group (including RhD), full blood count, and infection screening (HIV, hepatitis B, syphilis). All are confidential and routine. You'll be told what's tested and why." },
+      { question: "Do they really ask about mental health?", answer: "Yes — it's a routine question for everyone, not a judgement. Mentioning past or current mental health is one of the most useful things you can do; it helps the team support you well." },
+      { question: "What if I don't know my dates?", answer: "Approximate is fine. The dating scan will refine the due date. Don't worry if you can't be precise." },
+      { question: "Can my partner come?", answer: "Usually yes — booking is one of the appointments where partners are most welcome. Worth checking your local trust's policy if you're unsure." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "A long, careful appointment that quietly sets up the whole rest of pregnancy care.",
+    editorialSections: [
+      {
+        id: "what-it-is",
+        heading: "What the booking appointment is",
+        lead: "The foundation of antenatal care.",
+        paragraphs: [
+          "The booking appointment is your first proper antenatal appointment with a midwife. It usually happens between 8 and 12 weeks of pregnancy and is the longest appointment of pregnancy — often around an hour.",
+          "It is also the appointment that sets up everything else: your due date, your maternity notes, the schedule of future appointments, and any extra care you might need.",
+        ],
+      },
+      {
+        id: "what-gets-asked",
+        heading: "What gets asked",
+        lead: "A lot, carefully.",
+        paragraphs: [
+          "You'll be asked about your medical history, your family's medical history, any previous pregnancies, your mental health (now and in the past), your partner's health, your lifestyle (smoking, alcohol, exercise), any medications, and any concerns you have. None of it is a judgement — all of it shapes your care.",
+          "If anything is sensitive or hard to say, the midwife is the safest person to tell. They have heard everything before, and they are bound by confidentiality.",
+        ],
+      },
+      {
+        id: "blood-tests",
+        heading: "Blood tests and your blood group",
+        lead: "Routine and important.",
+        paragraphs: [
+          "A few vials of blood are taken — usually for blood group (including RhD), full blood count, and infection screening (HIV, hepatitis B, syphilis). The infection screen is routine for everyone in pregnancy and is part of standard care.",
+          "If you're RhD negative, that's flagged so anti-D can be planned. If your bloods show anything that needs follow-up, you'll be contacted and a plan made.",
+        ],
+      },
+      {
+        id: "due-date-and-notes",
+        heading: "Your due date and your notes",
+        lead: "The first concrete picture of the pregnancy plan.",
+        paragraphs: [
+          "Your due date is estimated from your last period (the dating scan will refine it later). Your maternity notes are started — sometimes paper, sometimes an app, sometimes both — and these notes go with you to every appointment from now on.",
+          "Worth keeping the notes in a known place. If you go in unwell or in early labour, having them with you is genuinely useful.",
+        ],
+      },
+      {
+        id: "screening-conversations",
+        heading: "Screening conversations",
+        lead: "Choices, not requirements.",
+        paragraphs: [
+          "You'll be told about the screening tests offered in pregnancy — combined screening, NIPT (where eligible), the 20-week scan — and given information leaflets to take home. You don't have to decide everything on the day. Most people read the information later and bring questions to the dating scan.",
+          "All antenatal screening is optional. The midwife's job is to make sure you understand the choices, not to push you in any direction.",
+        ],
+        callout: { tone: "info", text: "You don't have to make every screening decision at booking. There's time, and questions are welcome." },
+      },
+      {
+        id: "how-to-prepare",
+        heading: "How to prepare",
+        lead: "A few small things make it easier.",
+        paragraphs: [
+          "If you can, bring approximate dates of your last period and any previous pregnancies, a list of medications (including over-the-counter and supplements), any health conditions, and any family medical history that comes to mind. Approximate is fine — no one expects perfect.",
+          "Write down your questions in advance — even one or two. It's easy to forget once the appointment starts. And if you can, bring a partner or friend. It's a lot to take in alone.",
+        ],
+      },
+      {
+        id: "first-pregnancy",
+        heading: "If this is your first pregnancy",
+        lead: "It can feel like a lot.",
+        paragraphs: [
+          "Booking is often the first time pregnancy stops feeling private and starts feeling structured. That can be lovely — a long, careful conversation with someone whose job is to look after you. It can also feel exposing or overwhelming.",
+          "If it does, that's normal. Take your notes home, make a cup of tea, and read through them later. The appointment is the start of a relationship, not a one-off exam.",
+        ],
+        callout: { tone: "reassurance", text: "If you leave booking feeling shell-shocked, that's normal. It's a lot of new information in one sitting." },
+      },
+    ],
+  },
+
+  // ─── WHAT IF A SCAN SHOWS SOMETHING UNEXPECTED ───────────────────────────
+  {
+    slug: "what-if-a-scan-shows-something-unexpected",
+    title: "What if a scan shows something unexpected: how to think about it, what usually happens next, and where support is",
+    metaDescription: "Unexpected scan findings in pregnancy explained — what 'unexpected' usually means, what happens next, how to ask questions, and where to find emotional and specialist support.",
+    quickAnswer:
+      "An 'unexpected' scan finding can mean many different things — from a small variation that resolves on its own, to something that changes pregnancy care, to (much less often) something more serious. Most unexpected findings are not the worst-case interpretation. The next step is usually a more detailed scan, often at fetal medicine, and a fuller conversation with a specialist. Take notes, take a partner or friend, write down questions, and ask for time. ARC (Antenatal Results and Choices) is a UK charity that supports people through difficult or unclear scan news, and is well worth knowing about.",
+    howThisFeels: [
+      "Stunned by something said in a scan room",
+      "Unable to remember what was said by the time you reach the car",
+      "Spiralling between Google and the worst-case interpretation",
+      "Caught between trying to be calm and being terrified",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "What 'unexpected' covers", body: "A wide spectrum — from small variations that don't change anything, to soft markers that may or may not mean something, to findings that need closer specialist review, to (much less often) more significant conditions." },
+        { heading: "Why a follow-up scan is usually next", body: "Routine scans are detailed but not specialist. A follow-up at fetal medicine often gives a clearer picture, and the specialist sonographers can spend longer." },
+      ],
+      lessCauses: [
+        { heading: "Findings that change care", body: "Some findings change the pregnancy care plan — extra scans, consultant-led care, planned delivery in a specific hospital. None of those changes is a verdict; all of them mean the team is taking it seriously." },
+      ],
+      whyItVaries: "How urgent the next step is depends entirely on what's been seen. Sometimes the follow-up is the next day; sometimes it's a week or two later, which is itself a quiet sign that they're not panicking.",
+    },
+    timing: {
+      whenStarts: "Whenever a scan flags something — most often the 20-week anomaly scan, but it can happen at any scan.",
+      whenEases: "Specialist follow-up usually within days to a couple of weeks.",
+    },
+    whatItFeelsLike: [
+      "A change in the sonographer's tone",
+      "Being asked to wait while they call in a senior colleague",
+      "A short conversation, then a longer appointment in the calendar",
+      "An impossibly long wait between the news and the next appointment",
+    ],
+    whatThisMeans:
+      "Unexpected scan findings rarely mean what people first fear. They almost always mean a more detailed look, with a more specialist team, and time to talk it through.",
+    normal: [
+      "Feeling foggy and tearful in the hours after a difficult scan",
+      "Forgetting most of what was said and needing to call back",
+      "Having moments of feeling fine, then moments of panic",
+    ],
+    seekSupport: [
+      "ARC (Antenatal Results and Choices) — a UK charity offering specialist support for difficult or unclear scan news",
+      "Your midwife — the first person to call if you have questions in the days afterwards",
+      "Your GP — for emotional support, especially if anxiety is becoming overwhelming",
+      "Perinatal mental health services — available through your midwife or GP",
+      "If you're in crisis or having thoughts of harming yourself, call 111 or the Samaritans on 116 123",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. Your team will explain what's been seen and what comes next based on your specific situation.",
+    whatYouCanDo: [
+      { action: "Ask the sonographer or midwife to write down what they said", reason: "It's almost impossible to remember details after difficult news. Written notes help." },
+      { action: "Bring someone to the follow-up appointment", reason: "Two pairs of ears, written questions, and someone to drive home." },
+      { action: "Write down questions in advance", reason: "What does it mean? How sure are you? What's the next step? What are the options?" },
+      { action: "Limit Google in the first 24 hours", reason: "It rarely helps, and it almost always finds the worst-case scenario. ARC is a more reliable source." },
+      { action: "Tell the people who'll support you", reason: "You don't have to tell everyone. But the people who can hold this with you are worth telling." },
+    ],
+    whatHappensNext: "Usually a more detailed scan with a specialist team within days to a couple of weeks. After that, depending on what's seen, options may include further monitoring, additional scans, diagnostic testing, consultant-led care, or planned delivery arrangements. There is almost always a next step, and almost always time to think.",
+    relatedStage: {
+      intro: "Where to look next:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "The full picture of what's offered and when." },
+        { label: "20-week anomaly scan", href: "/articles/20-week-anomaly-scan", context: "Where unexpected findings most often come up." },
+        { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy", context: "For the days and weeks of waiting." },
+      ],
+    },
+    aiPrompts: [
+      "What happens after an unexpected scan finding?",
+      "How do I cope with waiting for a follow-up scan?",
+      "Where can I get support after difficult scan news?",
+    ],
+    captureIntro: "Worth keeping a careful note of what was said and what was planned. The first 48 hours are foggy — written notes help.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["20-week-anomaly-scan", "tests-and-scans-in-pregnancy", "nipt-in-pregnancy", "combined-screening-test", "anxiety-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "feelings"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "'Unexpected' covers a wide range — most isn't the worst-case",
+      "A more detailed specialist scan is usually the next step",
+      "Bring someone, take notes, write questions in advance",
+      "ARC is a UK charity that specialises in this exact support",
+      "There is almost always a next step, and almost always time to think",
+    ],
+    sources: [
+      "NHS — Antenatal screening",
+      "ARC (Antenatal Results and Choices)",
+      "Royal College of Obstetricians and Gynaecologists",
+      "Tommy's",
+    ],
+    faq: [
+      { question: "Does 'unexpected' mean something is wrong?", answer: "Not always. 'Unexpected' covers a very wide range — from small variations that resolve on their own, to soft markers that may not mean anything, to findings that change pregnancy care. The follow-up scan and conversation will clarify which it is." },
+      { question: "Why do they need another scan?", answer: "Specialist sonographers at fetal medicine can take longer, use more detailed equipment, and look more closely at specific findings. The follow-up scan is almost always the next step." },
+      { question: "How long will I wait for the follow-up?", answer: "It varies. Sometimes within days; sometimes a week or two. A longer wait often means the team isn't worried about urgency — though that doesn't make the wait easy." },
+      { question: "What questions should I ask at the follow-up?", answer: "What did you see? What might it mean? How sure are you? What are the next steps? What are my options? Is there time to think? Where can I get more support?" },
+      { question: "Where can I get emotional support?", answer: "ARC (Antenatal Results and Choices) is a UK charity dedicated to this exact situation. They offer phone and email support and are gentle, expert, and used to talking with people in the middle of difficult or unclear scan news." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "If a scan has just left you reeling, you're not alone, and there is almost always a next step.",
+    editorialSections: [
+      {
+        id: "what-unexpected-means",
+        heading: "What 'unexpected' actually means",
+        lead: "A wide spectrum, often misunderstood.",
+        paragraphs: [
+          "'Unexpected' is a soft word that covers a very wide range. It can mean a small variation that resolves on its own. It can mean a soft marker that may or may not mean anything. It can mean a finding that changes how pregnancy is monitored. Less often, it can mean something more significant.",
+          "What it doesn't usually mean is the worst-case interpretation. The mind's first move is often to the most frightening reading. The follow-up scan and conversation are what move the picture into focus.",
+        ],
+      },
+      {
+        id: "what-happens-next",
+        heading: "What usually happens next",
+        lead: "A more detailed look, by a more specialist team.",
+        paragraphs: [
+          "The most common next step is a more detailed scan at fetal medicine. Specialist sonographers can take longer, use more detailed equipment, and focus closely on what's been flagged. A consultant or specialist midwife will usually be part of the conversation.",
+          "Depending on what's seen, the conversation may include further scans, diagnostic testing, monitoring, consultant-led care, or planned delivery in a specific hospital. None of those is a verdict — all of them are the system taking the finding seriously and giving you good information.",
+        ],
+        callout: { tone: "info", text: "A more detailed follow-up scan is the most common next step. It almost always gives a clearer picture." },
+      },
+      {
+        id: "the-wait",
+        heading: "Holding the wait",
+        lead: "The hardest part for most people.",
+        paragraphs: [
+          "The gap between the first scan and the follow-up is often the hardest part. Time stretches. The mind goes to the worst-case scenarios. Sleep gets thin. All of this is normal.",
+          "Three things tend to help: limit Google (it almost always finds the worst-case version), write down what you remember of the conversation while it's fresh, and tell at least one person you trust. The right person doesn't need to fix anything — just to hold it with you.",
+        ],
+      },
+      {
+        id: "questions-to-ask",
+        heading: "Questions worth asking",
+        lead: "Bring them written down.",
+        paragraphs: [
+          "What did you see? What might it mean? How sure are you? What's the next step? What are my options? How urgent is this? What does this change about my pregnancy care? Is there time to think? Where can I get more support?",
+          "It's not about asking all of them — it's about not relying on memory in a high-stress moment. Write the ones that matter to you. Bring someone if you can. Ask the team to write down their answers.",
+        ],
+      },
+      {
+        id: "support",
+        heading: "Where to get specialist support",
+        lead: "You don't have to do this alone.",
+        paragraphs: [
+          "ARC (Antenatal Results and Choices) is a UK charity dedicated to supporting people through difficult or unclear scan news. They offer phone and email support, and they are gentle, expert, and very used to talking with people in the middle of exactly this. Their website has clear information by condition and by stage.",
+          "Your midwife is also a real point of contact in the days afterwards — for questions, for follow-ups, and for emotional support. Perinatal mental health services exist for the times when this becomes overwhelming. You can ask for any of this without 'qualifying'.",
+        ],
+        callout: { tone: "reassurance", text: "ARC exists for this exact situation. You don't need a diagnosis to ring them — uncertainty is enough." },
+      },
+      {
+        id: "emotionally",
+        heading: "How to be with yourself in this",
+        lead: "There is no 'right' way to feel.",
+        paragraphs: [
+          "Some people are calm in the moment and crash later. Some cry immediately and feel steady afterwards. Some swing between fine and frightened many times a day. All of this is normal. There is no 'right' way to receive difficult or unclear scan news.",
+          "Be kind to yourself. Cancel non-essentials. Eat. Sleep where you can. Lean on the people who can hold this with you. The next appointment is the next step, and you don't have to carry the whole of it alone in between.",
+        ],
+      },
+      {
+        id: "if-its-confirmed",
+        heading: "If a finding is confirmed",
+        lead: "There is still a path through.",
+        paragraphs: [
+          "If a finding is confirmed at the follow-up, the conversation moves into options — what it means, what care looks like, what choices you have. Specialist teams are very used to walking this road with people, carefully and without rushing.",
+          "ARC remains useful here, especially for the conversations that don't fit neatly into a clinical appointment. So can your midwife, your GP, and the people who love you. You are not alone in this, even on the days when it feels like you are.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

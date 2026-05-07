@@ -77,6 +77,10 @@ const Hero = () => (
             </Link>
             <a
               href="#ttc-topics"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("ttc-topics")?.scrollIntoView({ behavior: "smooth" });
+              }}
               className="inline-flex items-center justify-center gap-1.5 font-sans text-[13px] font-medium tracking-wide px-3 py-3.5"
               style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
             >

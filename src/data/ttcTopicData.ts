@@ -147,19 +147,19 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "Signs of ovulation",
-        href: LIVE.signsOfOvulation,
-        why: "A grounded look at the body signs that often appear around the fertile window.",
+        title: "Ovulation signs",
+        href: LIVE.ovulationSigns,
+        why: "How to read the signs your body gives — without spiralling.",
+      },
+      {
+        title: "The fertile window",
+        href: LIVE.fertileWindow,
+        why: "When conception is most likely, and how to time things calmly.",
       },
       {
         title: "Calculate your fertile window",
         href: LIVE.calculator,
         why: "A simple tool that uses your cycle dates to estimate your most fertile days.",
-      },
-      {
-        title: "Trying to conceive, explained",
-        href: LIVE.ttcExplained,
-        why: "The wider picture — how cycles, ovulation, and timing fit together.",
       },
     ],
     groups: [

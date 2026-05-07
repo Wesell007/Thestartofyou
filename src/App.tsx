@@ -206,6 +206,7 @@ const App = () => (
           <Route path="/trying-to-conceive" element={<TTCHub />} />
           <Route path="/trying-to-conceive/legacy" element={<TTC />} />
           <Route path="/ovulation-calculator" element={<OvulationCalculator />} />
+          <Route path="/trying-to-conceive/ovulation-calculator" element={<OvulationCalculator />} />
           <Route path="/ivf" element={<IVF />} />
           <Route path="/ivf-timeline" element={<IVFTimeline />} />
           <Route path="/postpartum" element={<Postpartum />} />

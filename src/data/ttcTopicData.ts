@@ -660,13 +660,23 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Worries during the wait",
         description: "The questions that tend to surface in these days.",
         links: [
-          { label: "When pregnancy symptoms stop", href: LIVE.symptomsStopping },
+          { label: "How long implantation takes", href: LIVE.implantationTiming },
           { label: "Implantation bleeding", href: LIVE.implantationBleeding },
+          { label: "When pregnancy symptoms stop", href: LIVE.symptomsStopping },
+        ],
+      },
+      {
+        label: "Testing and reading the result",
+        links: [
+          { label: "When to take a pregnancy test", href: LIVE.whenToTest },
+          { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
         ],
       },
       {
         label: "After a difficult cycle",
         links: [
+          { label: "Chemical pregnancy", href: LIVE.chemicalPregnancy },
+          { label: "Trying again after miscarriage", href: LIVE.tryingAgain },
           { label: "Pregnancy after loss", href: LIVE.pregnancyAfterLoss },
           { label: "The emotional impact of IVF", href: LIVE.emotionalIVF },
         ],

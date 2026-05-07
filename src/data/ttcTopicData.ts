@@ -531,13 +531,16 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       {
         label: "Practical basics",
         links: [
-          { label: "Signs of ovulation", href: LIVE.signsOfOvulation },
+          { label: "Ovulation signs", href: LIVE.ovulationSigns },
+          { label: "The fertile window", href: LIVE.fertileWindow },
           { label: "Ovulation calculator", href: LIVE.calculator },
         ],
       },
       {
         label: "Going a little deeper",
         links: [
+          { label: "Signs of ovulation", href: LIVE.signsOfOvulation },
+          { label: "Can you get pregnant on your period?", href: LIVE.pregnantOnPeriod },
           { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
         ],
       },

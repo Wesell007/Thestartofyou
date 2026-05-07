@@ -202,47 +202,64 @@ const TopicLibrary = () => (
         </p>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
         {ttcTopics.map((topic) => {
           const Icon = topicIcons[topic.slug];
           return (
             <Link
               key={topic.slug}
               to={topic.mainHref}
-              className="group relative bg-card rounded-[1.25rem] border p-5 sm:p-6 flex flex-col transition-all duration-500 hover:-translate-y-0.5 min-h-[160px]"
+              className="group relative bg-card rounded-[1.5rem] border p-6 sm:p-7 flex flex-col transition-all duration-500 hover:-translate-y-1 hover:shadow-lg cursor-pointer min-h-[200px]"
               style={{
                 borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)`,
                 boxShadow: `0 1px 0 hsl(0 0% 100% / 0.9) inset, 0 14px 36px -24px hsl(var(${STAGE_ACCENT}) / 0.22)`,
               }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.35)`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.14)`;
+              }}
             >
               <div
-                className="w-10 h-10 rounded-full flex items-center justify-center mb-4"
+                className="w-14 h-14 rounded-full flex items-center justify-center mb-5 transition-transform duration-500 group-hover:scale-105"
                 style={{
                   background: `hsl(var(${STAGE_BG}) / 0.85)`,
                 }}
               >
-                <Icon size={16} strokeWidth={1.6} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
+                <Icon size={22} strokeWidth={1.5} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
               </div>
-              <h3 className="font-serif text-[1.05rem] sm:text-[1.1rem] text-foreground leading-tight mb-1.5">
+              <h3 className="font-serif text-[1.2rem] text-foreground leading-tight mb-2">
                 {topic.label}
               </h3>
-              <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-relaxed">
+              <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mb-5 flex-1">
                 {topic.description}
               </p>
+              <span
+                className="inline-flex items-center gap-1.5 font-sans text-[12px] font-medium tracking-wide transition-transform duration-300 group-hover:translate-x-0.5"
+                style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+              >
+                Explore topic
+                <ArrowUpRight size={14} />
+              </span>
             </Link>
           );
         })}
       </div>
 
-      <div className="text-center mt-10">
-        <a
-          href="#ttc-topics"
+      <div className="text-center mt-12">
+        <Link
+          to="/trying-to-conceive#ttc-topics"
           className="inline-flex items-center gap-1.5 font-sans text-[13px] font-medium tracking-wide"
           style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById("ttc-topics")?.scrollIntoView({ behavior: "smooth" });
+          }}
         >
           View all topics
           <ArrowRight size={14} />
-        </a>
+        </Link>
       </div>
     </div>
   </section>

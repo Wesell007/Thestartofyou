@@ -176,16 +176,16 @@ const WhatThisCovers = () => (
 /* ----------------------------------------------------------- */
 
 const topicIcons: Record<TTCTopicSlug, LucideIcon> = {
-  ovulation: Sparkles,
-  "preconception-health": HeartPulse,
-  fertility: Activity,
-  "cycle-tracking": CalendarDays,
-  "pregnancy-tests": TestTube,
+  ovulation: Egg,
+  "preconception-health": Heart,
+  fertility: Sprout,
+  "cycle-tracking": RefreshCw,
+  "pregnancy-tests": TestTube2,
   "two-week-wait": Hourglass,
-  "ivf-and-treatment": Stethoscope,
-  "male-fertility": Users,
-  "age-and-fertility": Clock,
-  conditions: ShieldAlert,
+  "ivf-and-treatment": FlaskConical,
+  "male-fertility": User,
+  "age-and-fertility": CalendarHeart,
+  conditions: Stethoscope,
 };
 
 const TopicLibrary = () => (

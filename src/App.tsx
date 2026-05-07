@@ -62,6 +62,7 @@ import ArticlePage from "./pages/ArticlePage.tsx";
 import DueDateCalculator from "./pages/DueDateCalculator.tsx";
 import DueDateResults from "./pages/DueDateResults.tsx";
 import TTC from "./pages/TTC.tsx";
+import TTCHub from "./pages/TTCHub.tsx";
 import IVF from "./pages/IVF.tsx";
 import Postpartum from "./pages/Postpartum.tsx";
 import FirstYear from "./pages/FirstYear.tsx";
@@ -202,7 +203,8 @@ const App = () => (
           <Route path="/articles/:slug" element={<ArticlePage />} />
           <Route path="/due-date-calculator" element={<DueDateCalculator />} />
           <Route path="/due-date-results" element={<DueDateResults />} />
-          <Route path="/trying-to-conceive" element={<TTC />} />
+          <Route path="/trying-to-conceive" element={<TTCHub />} />
+          <Route path="/trying-to-conceive/legacy" element={<TTC />} />
           <Route path="/ovulation-calculator" element={<OvulationCalculator />} />
           <Route path="/ivf" element={<IVF />} />
           <Route path="/ivf-timeline" element={<IVFTimeline />} />

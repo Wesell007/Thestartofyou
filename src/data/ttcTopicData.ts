@@ -167,6 +167,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Understanding ovulation",
         description: "What it is, when it happens, and why it matters.",
         links: [
+          { label: "Ovulation signs", href: LIVE.ovulationSigns },
           { label: "Signs of ovulation", href: LIVE.signsOfOvulation },
           { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
         ],
@@ -175,8 +176,10 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Tracking and timing",
         description: "Practical ways to find your fertile days.",
         links: [
+          { label: "The fertile window", href: LIVE.fertileWindow },
           { label: "Ovulation calculator", href: LIVE.calculator },
           { label: "Cycle tracking", href: LIVE.cycleTracking },
+          { label: "Can you get pregnant on your period?", href: LIVE.pregnantOnPeriod },
         ],
       },
     ],

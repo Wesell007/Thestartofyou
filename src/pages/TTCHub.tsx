@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
-  ChevronRight,
+  Check,
   Sparkles,
   HeartPulse,
   Activity,
@@ -12,7 +12,6 @@ import {
   Users,
   Clock,
   ShieldAlert,
-  PenLine,
   Calendar as CalendarIcon,
   Leaf,
   type LucideIcon,

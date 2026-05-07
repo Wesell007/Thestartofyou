@@ -206,46 +206,71 @@ const TopicLibrary = () => (
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
         {ttcTopics.map((topic) => {
           const Icon = topicIcons[topic.slug];
           return (
             <Link
               key={topic.slug}
               to={topic.mainHref}
-              className="group relative bg-card rounded-[1.5rem] border p-6 sm:p-7 flex flex-col transition-all duration-500 hover:-translate-y-1 hover:shadow-lg cursor-pointer min-h-[200px]"
+              className="group relative bg-card rounded-[1.75rem] border p-7 sm:p-8 flex flex-col transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl cursor-pointer min-h-[260px] overflow-hidden"
               style={{
-                borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)`,
-                boxShadow: `0 1px 0 hsl(0 0% 100% / 0.9) inset, 0 14px 36px -24px hsl(var(${STAGE_ACCENT}) / 0.22)`,
+                borderColor: `hsl(var(${STAGE_ACCENT}) / 0.16)`,
+                boxShadow: `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 18px 44px -28px hsl(var(${STAGE_ACCENT}) / 0.28)`,
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.35)`;
+                e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.42)`;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.14)`;
+                e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.16)`;
               }}
             >
+              {/* soft top-corner halo */}
               <div
-                className="w-14 h-14 rounded-full flex items-center justify-center mb-5 transition-transform duration-500 group-hover:scale-105"
+                aria-hidden="true"
+                className="pointer-events-none absolute -top-16 -right-16 w-44 h-44 rounded-full opacity-60 group-hover:opacity-90 transition-opacity duration-500"
                 style={{
-                  background: `hsl(var(${STAGE_BG}) / 0.85)`,
+                  background: `radial-gradient(circle, hsl(var(${STAGE_BG}) / 0.85) 0%, transparent 70%)`,
+                }}
+              />
+
+              <div
+                className="relative w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-105 group-hover:rotate-[-2deg]"
+                style={{
+                  background: `linear-gradient(135deg, hsl(var(${STAGE_BG})) 0%, hsl(var(${STAGE_BG}) / 0.55) 100%)`,
+                  boxShadow: `0 1px 0 hsl(0 0% 100% / 0.9) inset, 0 10px 24px -14px hsl(var(${STAGE_ACCENT}) / 0.45)`,
                 }}
               >
-                <Icon size={22} strokeWidth={1.5} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
+                <Icon size={26} strokeWidth={1.4} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
               </div>
-              <h3 className="font-serif text-[1.2rem] text-foreground leading-tight mb-2">
+
+              <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground leading-[1.2] mb-2.5">
                 {topic.label}
               </h3>
-              <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mb-5 flex-1">
+              <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-relaxed mb-6 flex-1">
                 {topic.description}
               </p>
-              <span
-                className="inline-flex items-center gap-1.5 font-sans text-[12px] font-medium tracking-wide transition-transform duration-300 group-hover:translate-x-0.5"
-                style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+
+              <div
+                className="pt-4 border-t flex items-center justify-between gap-3"
+                style={{ borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)` }}
               >
-                Explore topic
-                <ArrowUpRight size={14} />
-              </span>
+                <span
+                  className="font-sans text-[12px] font-medium tracking-[0.06em] uppercase"
+                  style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                >
+                  Explore topic
+                </span>
+                <span
+                  className="inline-flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 group-hover:translate-x-1 group-hover:bg-[hsl(var(--stage-ttc-accent))] group-hover:text-white"
+                  style={{
+                    background: `hsl(var(${STAGE_BG}) / 0.7)`,
+                    color: `hsl(var(${STAGE_ACCENT}))`,
+                  }}
+                >
+                  <ArrowUpRight size={15} strokeWidth={1.8} />
+                </span>
+              </div>
             </Link>
           );
         })}

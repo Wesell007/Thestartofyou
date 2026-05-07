@@ -589,8 +589,16 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     ],
     groups: [
       {
-        label: "Reading the signs",
+        label: "Timing your test",
         links: [
+          { label: "When to take a pregnancy test", href: LIVE.whenToTest },
+          { label: "How long implantation takes", href: LIVE.implantationTiming },
+        ],
+      },
+      {
+        label: "Reading what you see",
+        links: [
+          { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
           { label: "Implantation bleeding", href: LIVE.implantationBleeding },
           { label: "Early pregnancy symptoms explained", href: LIVE.earlySymptoms },
         ],
@@ -598,7 +606,8 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       {
         label: "When the result feels heavy",
         links: [
-          { label: "The two-week wait", href: LIVE.twoWeekWaitArticle },
+          { label: "Chemical pregnancy", href: LIVE.chemicalPregnancy },
+          { label: "Trying again after miscarriage", href: LIVE.tryingAgain },
           { label: "When pregnancy symptoms stop", href: LIVE.symptomsStopping },
           { label: "Pregnancy after loss", href: LIVE.pregnancyAfterLoss },
         ],

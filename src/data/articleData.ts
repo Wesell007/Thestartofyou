@@ -10042,6 +10042,1304 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // PHASE I — Medicines, treatments, and what's safe in pregnancy
+  // ═══════════════════════════════════════════════════════════════════════
+
+  // ─── PARACETAMOL IN PREGNANCY ─────────────────────────────────────────────
+  {
+    slug: "paracetamol-in-pregnancy",
+    title: "Paracetamol in pregnancy: when it's used, how to think about dose, and what to do if you've already taken it",
+    metaDescription: "Paracetamol in pregnancy explained — when it's commonly used, the lowest-dose-shortest-time principle, when fever or pain needs more than self-treatment, and what to do if you're worrying after a dose.",
+    quickAnswer:
+      "Paracetamol is the painkiller most commonly used in pregnancy, and is generally considered the first choice for everyday pain or fever when something is needed. The principle is the lowest dose for the shortest time that genuinely helps. A short course at standard adult dose for headache, back pain, or to bring a fever down is widely used. Persistent pain, repeated need over many days, fever that won't settle, or pain in specific places (severe headache, upper-tummy pain, painful urination) needs a conversation with a midwife, GP, or pharmacist rather than more self-treatment.",
+    howThisFeels: [
+      "Wanting relief but worrying about taking anything at all",
+      "Already taken some and now anxiously googling",
+      "Unsure whether a fever or a headache is 'a thing' or just a thing",
+      "Trying to balance being careful with actually coping",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Why it's the usual first choice", body: "Paracetamol has the longest track record of safe use in pregnancy of any over-the-counter painkiller, which is why midwives, GPs, and pharmacists routinely suggest it before anything else." },
+        { heading: "Why fever matters", body: "A high temperature in pregnancy is itself something to bring down, especially in the first trimester. Paracetamol is one of the standard tools for doing that." },
+      ],
+      lessCauses: [
+        { heading: "When pain is the message, not the problem", body: "Pain that keeps returning, or that's localised somewhere specific, is usually telling you something. Reaching for the same packet again and again can mask a symptom that should be checked." },
+      ],
+      whyItVaries: "How often it's needed, and for what, varies hugely. A one-off dose for a tension headache is a different conversation from taking it most days for ongoing back pain — both are common, but the second one is a reason to talk to your team.",
+    },
+    timing: {
+      whenStarts: "Can be used at any point in pregnancy when needed.",
+      whenEases: "Acts within around 30 to 60 minutes; standard dosing is every 4 to 6 hours, no more than 4 doses in 24 hours.",
+    },
+    whatItFeelsLike: [
+      "Mild relief from a headache or backache within an hour",
+      "A fever starting to come down within a couple of hours",
+      "Pain returning as the dose wears off — a sign to think about why, not just to keep dosing",
+    ],
+    whatThisMeans:
+      "Paracetamol is a tool, not a treatment plan. Used in short, sensible bursts for everyday pain or fever, it sits comfortably inside normal pregnancy care. Used continuously for unexplained or worsening symptoms, it can quietly delay the conversation that actually matters.",
+    normal: [
+      "Taking a standard adult dose for an occasional headache or backache",
+      "A short course (a day or two) for a cold, flu-like illness, or to bring a fever down",
+      "Using it before or after a vaccination if you're achy or feverish",
+    ],
+    seekSupport: [
+      "Severe or persistent headache, especially with visual changes, swelling, or upper-tummy pain — call your maternity unit the same day",
+      "A fever that won't come down, or that's above 38°C and lasting — speak to a GP or 111",
+      "Pain when passing urine, or one-sided lower-back pain — possible UTI; needs checking, not more painkillers",
+      "Needing paracetamol most days for ongoing pain — speak to your midwife or GP about what's actually going on",
+      "Accidentally taking more than the maximum dose in 24 hours — call 111 or your maternity unit for advice",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. If you're unsure whether to take something — or you've already taken something and you're worried — your pharmacist, midwife, GP, or 111 can talk it through with you.",
+    whatYouCanDo: [
+      { action: "Use the lowest dose that genuinely helps", reason: "If a single tablet eases a headache enough to function, that's the right amount. The principle is shortest-time-lowest-dose, not 'always take the maximum'." },
+      { action: "Treat fever as a reason to act", reason: "Bringing a temperature down with paracetamol — and drinking fluids — is part of looking after the pregnancy, not just yourself." },
+      { action: "Notice when you keep needing it", reason: "Repeated use over many days for the same pain is a signal to ask why, not to keep buying more." },
+      { action: "Ask a pharmacist if you're unsure", reason: "Pharmacists are trained for exactly this question, and you don't need an appointment." },
+    ],
+    whatHappensNext: "If a single short course settles things, that's usually the end of it. If pain or fever comes back, becomes more intense, or shifts location, that's the moment for a phone call — to a pharmacist for everyday questions, your GP or midwife for anything pregnancy-specific, or your maternity unit for anything that feels urgent.",
+    relatedStage: {
+      intro: "Paracetamol questions usually sit alongside other 'is this safe?' conversations:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Cold and flu in pregnancy", href: "/articles/cold-and-flu-in-pregnancy", context: "When paracetamol most often comes up." },
+        { label: "Antibiotics in pregnancy", href: "/articles/antibiotics-in-pregnancy", context: "When pain isn't the right thing to treat at all." },
+        { label: "UTI in pregnancy", href: "/articles/uti-in-pregnancy", context: "Why pain on weeing isn't a paracetamol problem." },
+      ],
+    },
+    aiPrompts: [
+      "Is paracetamol safe in pregnancy?",
+      "I've already taken paracetamol — should I worry?",
+      "How much paracetamol can I take in pregnancy?",
+    ],
+    captureIntro: "Worth noting what kind of pain you're dosing for, and how often. Patterns are easier to read on paper than in your head.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["cold-and-flu-in-pregnancy", "antibiotics-in-pregnancy", "uti-in-pregnancy", "headaches-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Paracetamol is the usual first-choice painkiller in pregnancy",
+      "Lowest dose for the shortest time that genuinely helps",
+      "Bringing a fever down matters — paracetamol is a standard tool for that",
+      "Repeated need over many days is a reason to ask why, not to keep dosing",
+      "If you've already taken some at standard dose, that's almost always fine",
+    ],
+    sources: [
+      "NHS — Paracetamol in pregnancy",
+      "UK Teratology Information Service (UKTIS) — Paracetamol",
+      "NICE — Antenatal care",
+      "Royal College of Obstetricians and Gynaecologists — Medicines in pregnancy",
+    ],
+    faq: [
+      { question: "Is paracetamol safe in pregnancy?", answer: "It's the painkiller most commonly recommended in pregnancy and has the longest record of safe use. The standard advice is to take the lowest dose that helps, for the shortest time you need it." },
+      { question: "I've already taken paracetamol — have I harmed my baby?", answer: "A standard adult dose, used as directed, is not known to cause harm. If you've taken more than the maximum in 24 hours, call 111 or your maternity unit for advice — but a normal dose is not a reason to worry." },
+      { question: "Can I take paracetamol for a headache in pregnancy?", answer: "Yes, occasionally. A severe, persistent headache — especially with visual changes, swelling, or upper-tummy pain — needs a same-day call to your maternity unit rather than more tablets." },
+      { question: "What's the maximum paracetamol dose in pregnancy?", answer: "The same as the standard adult dose: up to 1g (two 500mg tablets) every 4 to 6 hours, with no more than 4g (8 tablets) in 24 hours. Stick to the packet instructions unless a clinician tells you otherwise." },
+      { question: "Can I take ibuprofen instead?", answer: "Ibuprofen and other anti-inflammatory painkillers are generally avoided in pregnancy, especially in the first and third trimesters. Paracetamol is the usual alternative — and a pharmacist can advise if it isn't enough." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "The most-asked medicine question in pregnancy. Calmly answered, with the honest 'when to ask someone' edges.",
+    editorialSections: [
+      {
+        id: "why-paracetamol",
+        heading: "Why paracetamol is the usual first choice",
+        lead: "Decades of use in pregnancy, and a clear rationale.",
+        paragraphs: [
+          "Of all the over-the-counter painkillers, paracetamol has the longest and most reassuring record of use in pregnancy. That's why midwives, GPs, and pharmacists routinely suggest it first when something is needed for everyday pain or fever.",
+          "It's not that paracetamol is 'risk-free' in some absolute sense — no medicine is. It's that it's the option clinicians reach for because it's well-studied, well-understood, and works for the kinds of things that come up most.",
+        ],
+      },
+      {
+        id: "lowest-shortest",
+        heading: "Lowest dose, shortest time",
+        lead: "The single principle that runs through every official recommendation.",
+        paragraphs: [
+          "If a single tablet settles a tension headache enough to get on with the day, that's the right dose. If a short course over a couple of days sees off a feverish cold, that's the right course. Pregnancy doesn't require special heroics with paracetamol — it requires using it the way it's actually designed to be used.",
+          "The standard adult dose still applies: up to 1g every 4 to 6 hours, no more than 4g in 24 hours. The pregnancy-specific layer on top is the gentle reminder not to drift into using it daily for weeks without anyone knowing.",
+        ],
+        callout: { tone: "info", text: "If you find you're reaching for paracetamol most days, that's the cue to talk to your midwife or GP — not because you've done something wrong, but because the underlying pain deserves a proper look." },
+      },
+      {
+        id: "fever",
+        heading: "When fever matters more than avoiding treatment",
+        lead: "A high temperature in pregnancy is itself worth bringing down.",
+        paragraphs: [
+          "It's tempting to ride out a fever rather than take anything. In pregnancy — especially in the first trimester — a sustained high temperature is one of the things worth treating, both for comfort and for the pregnancy itself. Paracetamol is one of the standard ways to do that.",
+          "Drinking fluids, resting, and taking paracetamol to bring a temperature down sits comfortably inside ordinary pregnancy care. A fever above 38°C that won't settle, or that comes with other worrying symptoms, is a reason to call 111 or your GP.",
+        ],
+      },
+      {
+        id: "when-pain-is-the-message",
+        heading: "When pain is the message, not the problem",
+        lead: "Some pains in pregnancy are not paracetamol pains.",
+        paragraphs: [
+          "A severe or unusual headache — particularly with visual disturbance, sudden swelling, or pain in the upper right tummy — can be a sign of something that needs urgent assessment, not more painkillers. The same is true of pain on passing urine, one-sided lower-back pain (possible UTI), or any new abdominal pain that doesn't settle.",
+          "Reaching for paracetamol is reasonable while you're getting through to your midwife or maternity unit. It's not a substitute for that call.",
+        ],
+        callout: { tone: "gentle-warning", text: "Severe headache, visual changes, sudden swelling, or upper-tummy pain in pregnancy are reasons to call your maternity unit the same day, not to take another dose." },
+      },
+      {
+        id: "already-taken",
+        heading: "If you've already taken some and you're worrying",
+        lead: "The reassurance most people need to hear out loud.",
+        paragraphs: [
+          "A standard adult dose of paracetamol — one or two tablets, taken as directed — is not known to cause harm in pregnancy. If you took it before you knew you were pregnant, or you took it last week for a headache and only later wondered if you should have, you almost certainly don't need to do anything.",
+          "If you've taken more than the maximum 24-hour dose, or you're unsure how much you've taken, call 111 or your maternity unit for tailored advice. They will not be cross with you. They will help.",
+        ],
+      },
+      {
+        id: "asking",
+        heading: "Who to ask, and when",
+        lead: "Most paracetamol questions don't need an appointment.",
+        paragraphs: [
+          "Pharmacists are trained for exactly this kind of question and don't need a booking. Your midwife or GP is the right call for anything pregnancy-specific, anything that keeps coming back, or any pain that feels new or unusual. Your maternity unit handles anything that feels urgent.",
+          "Asking is always reasonable. The right answer is usually shorter and calmer than the question feels in your head.",
+        ],
+      },
+    ],
+  },
+
+  // ─── ANTIBIOTICS IN PREGNANCY ─────────────────────────────────────────────
+  {
+    slug: "antibiotics-in-pregnancy",
+    title: "Antibiotics in pregnancy: how to think about them, what to ask, and why untreated infection is usually the bigger risk",
+    metaDescription: "Antibiotics in pregnancy explained — why some are commonly used, why the type and reason matter, why untreated infection is usually the bigger problem, and what to ask when one is prescribed.",
+    quickAnswer:
+      "Some antibiotics are used routinely and safely in pregnancy; others are avoided. The right choice depends on the antibiotic, the infection, and how far along you are — which is why a clinician chooses for you rather than the question being a flat 'yes' or 'no'. The most important thing to know is that an untreated infection in pregnancy (a UTI, a chest infection, group B strep) is usually a bigger problem than the antibiotic used to treat it. If you've been prescribed one, ask why this one, how long for, and what to expect — but the safest path is almost always to take the course as directed.",
+    howThisFeels: [
+      "Worried that taking 'a drug' in pregnancy must be wrong",
+      "Unsure whether to actually start the course you've been given",
+      "Caught between trusting the prescriber and second-guessing on the internet",
+      "Anxious about side effects on top of the infection itself",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Why antibiotics come up in pregnancy", body: "UTIs, chest infections, group B strep cover in labour, and skin or dental infections are the most common reasons antibiotics are prescribed in pregnancy." },
+        { heading: "Why the choice matters", body: "Some antibiotics — like penicillins and many cephalosporins — are widely used in pregnancy. Others are avoided in certain trimesters or altogether. Prescribers know which is which, which is why they ask about pregnancy before choosing." },
+      ],
+      lessCauses: [
+        { heading: "Why untreated infection is usually the bigger risk", body: "An infection that's left untreated can spread, cause fever, trigger early labour, or harm the pregnancy in ways that are well known and avoidable. The right antibiotic is almost always the safer option." },
+      ],
+      whyItVaries: "Whether someone needs antibiotics — and which one — depends on the infection, the trimester, allergy history, and what's worked before. Two people with similar symptoms can end up with different prescriptions, and that's normal.",
+    },
+    timing: {
+      whenStarts: "Can be prescribed at any point in pregnancy when needed.",
+      whenEases: "Most people start to feel better within 24 to 72 hours, but the full course should still be finished.",
+    },
+    whatItFeelsLike: [
+      "Symptoms easing within a couple of days of starting",
+      "A bit of nausea or a mildly upset stomach, especially in the first few days",
+      "Mild thrush appearing toward the end of a course (common, treatable)",
+    ],
+    whatThisMeans:
+      "An antibiotic in pregnancy isn't a sign that something has gone wrong — it's usually a sign that something has been spotted early and dealt with. The medicine is the answer to the problem, not an extra problem on top.",
+    normal: [
+      "Some nausea, mild diarrhoea, or thrush during or just after a course",
+      "Symptoms improving within a few days but the course continuing as prescribed",
+      "Being asked to give a urine sample after treatment to check it has worked",
+    ],
+    seekSupport: [
+      "A rash, swelling of the face or throat, or breathing difficulty after a dose — call 999 (possible allergic reaction)",
+      "Severe diarrhoea, especially watery or with blood, during or after a course — call your GP or 111",
+      "No improvement after 48 hours of starting the course — go back to the prescriber",
+      "Symptoms returning soon after finishing — speak to your GP",
+      "Any change or reduction in your baby's movements alongside being unwell — call your maternity unit straight away",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. The right antibiotic for you depends on you and your situation — your GP, midwife, or pharmacist is the right person to confirm anything specific.",
+    whatYouCanDo: [
+      { action: "Finish the full course as prescribed", reason: "Stopping early can let the infection come back, sometimes harder to treat. Symptoms easing isn't the same as the infection being gone." },
+      { action: "Ask three small questions", reason: "Why this one, how long for, and what to expect. Most prescribers will answer these in under a minute and you'll feel much steadier." },
+      { action: "Take it with food if it upsets your stomach (unless told otherwise)", reason: "Most antibiotics commonly used in pregnancy are gentler on the stomach with food. Check the leaflet first." },
+      { action: "Mention any allergies — even minor ones", reason: "A previous mild rash from penicillin is worth mentioning, even if it was years ago. There are alternatives." },
+    ],
+    whatHappensNext: "Most courses are 5 to 7 days. Symptoms usually start easing within a couple of days. If they don't, or if anything new comes up, the prescriber wants to know — that's part of the plan, not a failure of it.",
+    relatedStage: {
+      intro: "Antibiotics often sit alongside the wider infection and 'is this safe' conversations:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "UTI in pregnancy", href: "/articles/uti-in-pregnancy", context: "The most common reason antibiotics are needed in pregnancy." },
+        { label: "Group B Strep in pregnancy", href: "/articles/group-b-strep-in-pregnancy", context: "Why antibiotics in labour are sometimes recommended." },
+        { label: "Cold and flu in pregnancy", href: "/articles/cold-and-flu-in-pregnancy", context: "When antibiotics are — and aren't — the right answer." },
+      ],
+    },
+    aiPrompts: [
+      "Are antibiotics safe in pregnancy?",
+      "Should I take the antibiotic I've been prescribed?",
+      "Will antibiotics harm my baby?",
+    ],
+    captureIntro: "Worth noting which antibiotic, what it was for, and how you felt across the course. Useful information if anything similar comes up later.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["uti-in-pregnancy", "group-b-strep-in-pregnancy", "cold-and-flu-in-pregnancy", "thrush-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Some antibiotics are used routinely and safely in pregnancy; others are avoided",
+      "The prescriber chooses the right one — it's not a flat yes/no question for you to answer",
+      "Untreated infection in pregnancy is usually a bigger risk than the antibiotic used to treat it",
+      "Finish the full course even if you feel better partway through",
+      "Mention allergies, including minor previous reactions, before starting anything",
+    ],
+    sources: [
+      "NHS — Antibiotics in pregnancy",
+      "UK Teratology Information Service (UKTIS)",
+      "NICE — Urinary tract infection (lower) in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists — Medicines in pregnancy",
+    ],
+    faq: [
+      { question: "Are antibiotics safe in pregnancy?", answer: "Many are. Some — particularly penicillins and many cephalosporins — are used routinely in pregnancy. Others are avoided in certain trimesters or altogether. Your prescriber chooses one that's appropriate for you." },
+      { question: "Should I take the antibiotic I've been prescribed?", answer: "Almost always, yes. An untreated infection is usually a bigger risk to the pregnancy than the antibiotic. If you're unsure, call back the prescriber rather than not starting — they can talk it through." },
+      { question: "Will antibiotics harm my baby?", answer: "The antibiotics commonly chosen for pregnancy aren't known to cause harm. The bigger risk in almost every case is leaving the infection untreated." },
+      { question: "Can I stop early if I feel better?", answer: "No — finishing the course matters. Symptoms can improve before the infection has fully cleared. Stopping early can let it come back, sometimes harder to treat." },
+      { question: "What if I get thrush from the antibiotics?", answer: "Mild thrush during or just after a course is common and treatable. Mention it to your GP or pharmacist — pregnancy-safe options exist." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "Not the medicine itself, the framing around it. Why some are routine, why the prescriber chooses, and why untreated infection is usually the bigger story.",
+    editorialSections: [
+      {
+        id: "why-they-come-up",
+        heading: "Why antibiotics come up in pregnancy",
+        lead: "More often than people expect — and not because anything has gone wrong.",
+        paragraphs: [
+          "UTIs, chest infections, dental infections, and group B strep cover in labour are the most common reasons antibiotics are prescribed during pregnancy. Pregnancy itself makes some infections — UTIs in particular — more likely and more important to treat.",
+          "Being prescribed antibiotics in pregnancy isn't a sign that something is going badly. It's usually a sign that something common has been spotted and is being handled.",
+        ],
+      },
+      {
+        id: "not-a-flat-yes-no",
+        heading: "Why this isn't a flat yes-or-no question",
+        lead: "It depends on the antibiotic, the infection, and the trimester.",
+        paragraphs: [
+          "Some antibiotics — penicillins, many cephalosporins, erythromycin — have a long, reassuring record of use in pregnancy. Others are avoided in certain trimesters, or altogether. The choice is made by the prescriber based on what they're treating, what tends to work, and what's appropriate for pregnancy.",
+          "That's why the question 'are antibiotics safe in pregnancy?' doesn't have a single answer — and why the answer that matters is the one your prescriber gives for the specific medicine in front of you.",
+        ],
+      },
+      {
+        id: "untreated-is-the-bigger-risk",
+        heading: "Why untreated infection is usually the bigger risk",
+        lead: "The most important framing to hold onto.",
+        paragraphs: [
+          "An untreated UTI in pregnancy can spread to the kidneys, cause fever, and trigger early labour. An untreated chest infection can knock you flat for weeks and increase the risk of complications. Group B strep without antibiotic cover in labour can cause serious infection in newborns.",
+          "Compared with these, the antibiotics chosen for pregnancy are reassuringly well-studied. The right antibiotic, at the right time, is almost always the safer path.",
+        ],
+        callout: { tone: "info", text: "If your gut is to refuse the prescription 'just in case' — call back. Talking it through with the prescriber will almost always change how it feels." },
+      },
+      {
+        id: "what-to-ask",
+        heading: "What to ask when one is prescribed",
+        lead: "Three small questions that take a minute and steady the whole thing.",
+        paragraphs: [
+          "Why this one. How long for. What to expect — including which side effects are normal and which are reasons to call back. Most prescribers will answer all three in under a minute, and most patients leave the conversation feeling much calmer than they started it.",
+          "It's also worth mentioning any allergies, including mild previous reactions. There are usually alternatives, and it's better to flag it now than to find out mid-course.",
+        ],
+      },
+      {
+        id: "side-effects",
+        heading: "Side effects that are normal — and ones that aren't",
+        lead: "Most are mild. A few need a call.",
+        paragraphs: [
+          "Mild nausea, a slightly upset stomach, or thrush appearing toward the end of a course are common and not a reason to stop. Taking the tablet with food (unless the leaflet says otherwise) usually helps.",
+          "A rash, swelling of the face or throat, breathing difficulty, or severe watery or bloody diarrhoea are not normal — they need an urgent call (999 for any breathing or swelling reaction). Symptoms not improving at all within 48 hours is a reason to go back to the prescriber rather than to push on.",
+        ],
+        callout: { tone: "gentle-warning", text: "Any swelling of the face or throat, difficulty breathing, or a spreading rash after a dose is a 999 call. Don't take the next dose." },
+      },
+      {
+        id: "finishing-the-course",
+        heading: "Why finishing the course still matters",
+        lead: "Feeling better isn't the same as the infection being gone.",
+        paragraphs: [
+          "Symptoms often ease within a couple of days, well before the infection has fully cleared. Stopping early can let it come back — sometimes harder to treat the second time. Finishing the course is one of the simplest things you can do to make sure it's done with.",
+          "If side effects are getting in the way of finishing, call back rather than abandoning the course. There are usually adjustments that work.",
+        ],
+      },
+    ],
+  },
+
+  // ─── ANTACIDS IN PREGNANCY ───────────────────────────────────────────────
+  {
+    slug: "antacids-in-pregnancy",
+    title: "Can you take antacids in pregnancy? What's commonly used, what helps alongside, and when heartburn needs more than self-treatment",
+    metaDescription: "Antacids in pregnancy explained — which over-the-counter options are commonly used, what posture and food changes help alongside, and when heartburn becomes something to raise with your midwife rather than self-treat.",
+    quickAnswer:
+      "Yes — antacids are one of the most commonly used over-the-counter medicines in pregnancy and are widely considered appropriate for the everyday reflux that pregnancy brings. Calcium- or magnesium-based antacids (the typical chewable tablets and liquids in any pharmacy) are the usual first step. Stronger options exist if those aren't enough. Posture, smaller meals, and propping up at night quietly do a lot of the work alongside. Heartburn that's severe, that wakes you regularly, or that comes with upper-tummy pain or visual changes is a reason to call your midwife rather than reach for another packet.",
+    howThisFeels: [
+      "Burning in the chest after almost everything you eat",
+      "Waking at night with reflux and not knowing what's safe",
+      "Quietly going through packets of antacids and wondering if that's okay",
+      "Worried that needing them so often means something is wrong",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Why pregnancy brings reflux", body: "Hormones soften the valve at the top of the stomach, and the growing uterus presses upward — both of which let stomach acid travel where it isn't meant to." },
+        { heading: "Why antacids help", body: "They neutralise stomach acid quickly. The relief is fast, which is why they're the usual first step." },
+      ],
+      lessCauses: [
+        { heading: "When stronger options come in", body: "If antacids aren't enough, midwives, GPs, or pharmacists may suggest a different class of medicine (such as ranitidine alternatives or proton-pump inhibitors) which are also used in pregnancy when needed." },
+      ],
+      whyItVaries: "Some people get reflux from week 6, others not until the third trimester. Severity varies hugely. Both ends are normal.",
+    },
+    timing: {
+      whenStarts: "Can begin in early pregnancy but most often appears or worsens in the second and third trimester.",
+      whenPeaks: "Usually most intense in the third trimester, when there's the least room for the stomach.",
+      whenEases: "Reflux usually settles within days of giving birth.",
+    },
+    whatItFeelsLike: [
+      "A burning sensation behind the breastbone, often worse after meals",
+      "An acidic or bitter taste at the back of the throat",
+      "Discomfort lying flat — eased by propping up",
+      "Quick relief from chewable or liquid antacids within minutes",
+    ],
+    whatThisMeans:
+      "Reflux in pregnancy isn't a sign that something is wrong with you or the pregnancy — it's a structural and hormonal effect that almost everyone gets to some degree. Antacids are a normal, sensible response to it.",
+    normal: [
+      "Daily heartburn in the second or third trimester",
+      "Using antacids after meals or at bedtime",
+      "Needing to prop up several pillows to sleep",
+      "Reflux easing within a few days of birth",
+    ],
+    seekSupport: [
+      "Severe upper-tummy pain or pain in the right side under the ribs — call your maternity unit the same day (different from heartburn)",
+      "Heartburn alongside a severe headache, visual changes, or sudden swelling — call your maternity unit straight away",
+      "Vomiting blood, or stools that look black and tarry — call 111 or A&E",
+      "Heartburn so severe it stops you eating or sleeping for days — speak to your midwife or GP, stronger options exist",
+      "Antacids not helping at all after a few days of consistent use — go back to a pharmacist or GP",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. A pharmacist is a great first stop for over-the-counter heartburn questions; your midwife or GP can step in if those options aren't enough.",
+    whatYouCanDo: [
+      { action: "Try a calcium- or magnesium-based antacid", reason: "These are the usual first-line options and a pharmacist can point to the right one. Chewable tablets and liquids both work." },
+      { action: "Eat smaller meals, more often", reason: "A less full stomach has less to push back. Big late meals are the most common reflux trigger in pregnancy." },
+      { action: "Prop up to sleep", reason: "Propping the upper body on extra pillows or a wedge keeps acid where it belongs and helps a lot of people sleep through." },
+      { action: "Notice the worst triggers", reason: "Spicy, fatty, fried foods, fizzy drinks, and very large evening meals are common offenders. Cutting just the worst one or two often helps more than dosing more antacids." },
+      { action: "Ask the pharmacist if antacids aren't enough", reason: "There are stronger options that are also used in pregnancy. Living with severe reflux for weeks is not the only choice." },
+    ],
+    whatHappensNext: "For most people, a combination of antacids and a few small habit changes is enough to make reflux liveable. If it isn't, that's a reason to ask for more — not to push through. Stronger medicines exist and are commonly used in pregnancy.",
+    relatedStage: {
+      intro: "Antacids sit inside the wider conversation about reflux in pregnancy:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Heartburn in pregnancy", href: "/articles/heartburn-in-pregnancy", context: "The full picture of why reflux happens and what helps." },
+        { label: "Diet and exercise in pregnancy", href: "/pregnancy/diet-and-exercise", context: "Small changes that quietly reduce reflux without medicine." },
+        { label: "Paracetamol in pregnancy", href: "/articles/paracetamol-in-pregnancy", context: "The other most-asked over-the-counter question." },
+      ],
+    },
+    aiPrompts: [
+      "Are antacids safe in pregnancy?",
+      "Which heartburn medicine is okay in pregnancy?",
+      "What helps heartburn in pregnancy without medicine?",
+    ],
+    captureIntro: "Worth noting which foods or times of day make reflux worse. Patterns are useful — they make decisions about food and timing easier.",
+    trimester: [2, 3],
+    relatedSlugs: ["heartburn-in-pregnancy", "paracetamol-in-pregnancy", "constipation-in-pregnancy", "laxatives-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Calcium- or magnesium-based antacids are widely used in pregnancy",
+      "Posture, smaller meals and propping up at night do a lot of work alongside",
+      "Stronger options exist if antacids aren't enough — ask, don't push through",
+      "Severe upper-tummy pain or reflux with headache or visual changes is not heartburn",
+      "Reflux almost always settles within days of birth",
+    ],
+    sources: [
+      "NHS — Indigestion and heartburn in pregnancy",
+      "NICE — Dyspepsia and gastro-oesophageal reflux disease",
+      "UK Teratology Information Service (UKTIS)",
+      "Royal College of Obstetricians and Gynaecologists",
+    ],
+    faq: [
+      { question: "Are antacids safe in pregnancy?", answer: "Calcium- or magnesium-based antacids (the standard chewable tablets and liquids in any pharmacy) are widely used in pregnancy and considered appropriate for everyday reflux. A pharmacist can point to the right one." },
+      { question: "Can I take antacids every day?", answer: "Daily use during the second and third trimester is common and usually fine. If you're needing them more than a few times a day, or they're not really helping, that's a reason to speak to a pharmacist or GP about a stronger option." },
+      { question: "What about Gaviscon-style alginates?", answer: "Alginates form a raft on top of the stomach contents and are commonly used in pregnancy. A pharmacist can advise — they're often suggested when plain antacids aren't enough." },
+      { question: "Is heartburn ever a sign of something serious?", answer: "Reflux on its own is just reflux. Severe upper-tummy pain, pain under the ribs on the right, heartburn with a severe headache or visual changes, or vomiting blood are reasons to call your maternity unit or 111 — these aren't heartburn." },
+      { question: "What helps without taking medicine?", answer: "Smaller meals, eating earlier in the evening, propping up to sleep, and noticing your worst trigger foods often help as much as the antacids do." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "The everyday burn that almost no one mentions and almost everyone has. What's commonly used, what helps alongside, and when it isn't heartburn at all.",
+    editorialSections: [
+      {
+        id: "why-reflux",
+        heading: "Why reflux is so common in pregnancy",
+        lead: "It's structural and hormonal — not something you've caused.",
+        paragraphs: [
+          "Pregnancy hormones soften the valve at the top of the stomach, and the growing uterus presses everything upward. Together they let stomach acid travel into the oesophagus, where it isn't meant to be — which is what heartburn is.",
+          "Almost everyone gets some reflux in pregnancy, and the fact that you've got it more than your friend or sister doesn't mean anything is wrong. It just means your particular combination of anatomy, baby position, and timing is producing more of it.",
+        ],
+      },
+      {
+        id: "antacids-first-step",
+        heading: "Antacids: the usual first step",
+        lead: "Fast, well-tolerated, and routinely used in pregnancy.",
+        paragraphs: [
+          "Calcium- or magnesium-based antacids — the chewable tablets and liquids in any pharmacy — neutralise stomach acid within minutes. They're the standard first thing to try, both because they work quickly and because they have a long, reassuring record of use in pregnancy.",
+          "If a pharmacist asks whether you're pregnant, that's normal — it helps them recommend the right product. You don't need a prescription for any of these.",
+        ],
+      },
+      {
+        id: "alginates-and-stronger",
+        heading: "When antacids aren't enough",
+        lead: "Stronger options exist and are also used in pregnancy.",
+        paragraphs: [
+          "Alginates (Gaviscon-style products) form a protective raft on top of the stomach contents and often help when plain antacids aren't quite touching it. Beyond that, there are prescription options — including some proton-pump inhibitors — that are commonly used in pregnancy when reflux is severe.",
+          "If you're spending all day chewing tablets and still not coping, that's the cue to speak to a pharmacist or GP rather than to keep buying more of the same thing.",
+        ],
+        callout: { tone: "info", text: "Living with severe reflux for weeks isn't the only option. Pregnancy-appropriate stronger medicines exist — ask." },
+      },
+      {
+        id: "alongside",
+        heading: "What helps alongside the medicine",
+        lead: "Small changes that quietly do a lot of the work.",
+        paragraphs: [
+          "Smaller, more frequent meals give the stomach less to push back. Eating earlier in the evening, especially avoiding a heavy meal in the last two hours before bed, reduces the worst nighttime flare-ups. Propping the upper body up on extra pillows or a wedge keeps acid where it belongs.",
+          "Most people don't need to change everything they eat — usually one or two trigger foods are doing most of the damage. Spicy, fatty, fried, fizzy, and very acidic foods are common offenders. Noticing your own pattern matters more than following a list.",
+        ],
+      },
+      {
+        id: "when-its-not-heartburn",
+        heading: "When it isn't heartburn",
+        lead: "A few important things that can mimic reflux.",
+        paragraphs: [
+          "Pain in the upper tummy or under the ribs on the right — particularly if it's severe, comes in waves, or is associated with a severe headache, visual changes, or sudden swelling — is not heartburn. It can be a sign of something that needs urgent assessment, including pre-eclampsia, and it's a reason to call your maternity unit straight away.",
+          "Vomiting blood or passing black, tarry stools is also not heartburn. That's a 111 or A&E call.",
+        ],
+        callout: { tone: "gentle-warning", text: "Severe upper-tummy or right-side pain under the ribs, especially with headache, visual changes, or swelling, needs a same-day call to your maternity unit — not another antacid." },
+      },
+      {
+        id: "after-birth",
+        heading: "What happens after birth",
+        lead: "The reassurance most people don't hear often enough.",
+        paragraphs: [
+          "Reflux that started in pregnancy almost always settles within days of giving birth, as the hormonal and physical pressure ease. The packets of antacids by the bed — and the wedge of pillows — usually become irrelevant remarkably quickly.",
+          "Until then, antacids and a few small habit shifts make most pregnancies' reflux liveable. If they don't, ask for more.",
+        ],
+      },
+    ],
+  },
+
+  // ─── LAXATIVES IN PREGNANCY ──────────────────────────────────────────────
+  {
+    slug: "laxatives-in-pregnancy",
+    title: "Laxatives in pregnancy: when lifestyle changes are enough, which types are commonly used, and when constipation needs checking",
+    metaDescription: "Laxatives in pregnancy explained — when food, fluids and movement are enough, which types of laxative are commonly used in pregnancy, what about piles, and when constipation needs more than self-treatment.",
+    quickAnswer:
+      "Constipation is one of the most common things in pregnancy and it's usually managed first with food, fluids, and gentle movement. If those aren't enough, bulk-forming laxatives (like fybogel) are typically the first medicine tried, with osmotic options (like lactulose or macrogols) often used next — both are commonly used in pregnancy. Stimulant laxatives are usually a shorter-term option used when others aren't doing enough. Severe abdominal pain, bleeding that isn't a small streak from straining, or constipation that doesn't respond to a few days of treatment is a reason to speak to a midwife, GP, or pharmacist.",
+    howThisFeels: [
+      "Going days without going and feeling increasingly uncomfortable",
+      "Worried about straining and what it might do",
+      "Embarrassed to mention it",
+      "Not sure if piles are normal or a sign of something wrong",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Why pregnancy slows things down", body: "Pregnancy hormones (especially progesterone) slow the gut, and iron supplements often add to it. That combination is why constipation is so common." },
+        { heading: "Why food and fluid come first", body: "Fibre, water, and movement are the most effective things for most people most of the time — and have no downsides. They're usually the first step." },
+      ],
+      lessCauses: [
+        { heading: "When laxatives are added", body: "If lifestyle alone isn't enough, bulk-forming laxatives are typically tried first, with osmotic options (lactulose, macrogols) often used next. Both classes are commonly used in pregnancy." },
+        { heading: "Piles (haemorrhoids)", body: "Pressure from the uterus, straining, and constipation make piles very common in pregnancy. They're usually uncomfortable rather than serious, and there are pregnancy-safe creams and practical things that help." },
+      ],
+      whyItVaries: "Some people only get constipated in early pregnancy when nausea changes their eating; others struggle right through. Iron supplements, bedrest, and reduced movement all make it more likely.",
+    },
+    timing: {
+      whenStarts: "Can start in the first trimester but often becomes more noticeable as pregnancy progresses.",
+      whenEases: "Often eases for a while after birth, though hormonal and pelvic-floor changes mean some people stay constipated in the early postnatal weeks too.",
+    },
+    whatItFeelsLike: [
+      "Bloating, fullness, and discomfort in the lower tummy",
+      "Hard, infrequent stools that take effort to pass",
+      "Stretching or stinging from piles after passing a stool",
+      "Relief from gentle movement and warm drinks",
+    ],
+    whatThisMeans:
+      "Constipation in pregnancy is incredibly common and almost always treatable. It's not a sign that something is going wrong — it's a sign that the gut is doing what hormones are telling it to do.",
+    normal: [
+      "Going less often than usual, with harder stools",
+      "Some bloating and lower-tummy discomfort that eases after going",
+      "Small amounts of bright red blood on the paper from a hard stool or piles",
+      "Needing a bulk-forming or osmotic laxative for a few days to get things moving",
+    ],
+    seekSupport: [
+      "Severe abdominal pain, especially with vomiting — call your maternity unit or 111",
+      "Bleeding that's more than a small streak, dark or mixed in with the stool — speak to your GP",
+      "Constipation that hasn't shifted after several days of treatment and lifestyle changes — speak to a pharmacist or GP",
+      "Painful piles that don't settle, or any lump that becomes hard, swollen, and very painful — speak to a GP",
+      "Pain on passing urine alongside constipation — could be a UTI; needs checking",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. A pharmacist is a good first stop for laxative questions in pregnancy; your midwife or GP can step in if things aren't shifting.",
+    whatYouCanDo: [
+      { action: "Increase fibre slowly", reason: "Fruit, vegetables, wholegrains, and pulses help — but adding lots all at once can cause bloating and wind. Build up over a few days." },
+      { action: "Drink more water", reason: "Fibre needs fluid to work. A bigger glass of water with each meal often does as much as any tablet." },
+      { action: "Move every day", reason: "Walking — even gently — is one of the most reliable ways to get the gut moving." },
+      { action: "Try a bulk-forming or osmotic laxative if needed", reason: "These classes (fybogel, lactulose, macrogols) are commonly used in pregnancy. A pharmacist can point you to the right one." },
+      { action: "Treat piles practically", reason: "Cool compresses, careful wiping, pregnancy-safe creams, and not straining all help. A pharmacist can advise on creams." },
+    ],
+    whatHappensNext: "Most constipation in pregnancy responds within a few days to a combination of more fibre, more water, more movement, and (if needed) a gentle laxative. If it doesn't, that's a reason to ask for more — there are stronger options and a GP can talk through what's right.",
+    relatedStage: {
+      intro: "Laxatives sit inside the wider digestion conversation in pregnancy:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Constipation in pregnancy", href: "/articles/constipation-in-pregnancy", context: "The full picture of why it happens and what helps." },
+        { label: "Antacids in pregnancy", href: "/articles/antacids-in-pregnancy", context: "The other most-asked digestive question." },
+        { label: "Diet and exercise in pregnancy", href: "/pregnancy/diet-and-exercise", context: "Where most of the everyday work for digestion happens." },
+      ],
+    },
+    aiPrompts: [
+      "Are laxatives safe in pregnancy?",
+      "What can I take for constipation in pregnancy?",
+      "Are piles normal in pregnancy?",
+    ],
+    captureIntro: "Worth noting how often you're going, what's helping, and how piles are settling. It's a quietly useful pattern to track.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["constipation-in-pregnancy", "antacids-in-pregnancy", "heartburn-in-pregnancy", "paracetamol-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body", "diet-and-exercise"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Constipation is one of the most common things in pregnancy",
+      "Food, fluids and movement come before medicine for most people",
+      "Bulk-forming and osmotic laxatives are commonly used in pregnancy",
+      "Piles are common, uncomfortable, and treatable — pregnancy-safe creams exist",
+      "Severe pain, more than a small streak of blood, or no improvement is a reason to ask for help",
+    ],
+    sources: [
+      "NHS — Constipation in pregnancy",
+      "NICE — Constipation in pregnancy",
+      "UK Teratology Information Service (UKTIS)",
+      "Royal College of Obstetricians and Gynaecologists",
+    ],
+    faq: [
+      { question: "Are laxatives safe in pregnancy?", answer: "Bulk-forming laxatives (like fybogel) and osmotic laxatives (like lactulose and macrogols) are commonly used in pregnancy. Stimulant laxatives are usually a shorter-term option. A pharmacist can point you to the right one." },
+      { question: "What's the best laxative in pregnancy?", answer: "There isn't a single 'best' one — it depends on what's already been tried. Most people start with food, fluids, and movement; bulk-forming next; then osmotic. A pharmacist or GP will tailor it to you." },
+      { question: "Are piles normal in pregnancy?", answer: "Yes — they're very common, partly from pressure and partly from constipation and straining. Pregnancy-safe creams exist and a pharmacist can advise. Piles that become hard, swollen, and very painful are worth a GP appointment." },
+      { question: "Is a small amount of blood on the paper okay?", answer: "A small bright-red streak from passing a hard stool or from piles is common and usually not a worry. Anything more than that, dark blood, or blood mixed in with the stool is a reason to speak to your GP." },
+      { question: "Can iron tablets make it worse?", answer: "Yes — iron commonly worsens constipation. If you're struggling, mention it at your next appointment; sometimes the dose, timing, or formulation can be adjusted." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "Common, uncomfortable, rarely talked about. What helps without medicine, what's commonly used when it isn't enough, and when to mention it.",
+    editorialSections: [
+      {
+        id: "why-it-happens",
+        heading: "Why pregnancy makes constipation so common",
+        lead: "Hormones, iron, and a slower gut all add up.",
+        paragraphs: [
+          "Progesterone — one of the main pregnancy hormones — relaxes smooth muscle throughout the body, including in the gut. Things move more slowly, water is reabsorbed for longer, and stools become harder. Iron supplements, often started in pregnancy, add to it.",
+          "It's not a sign of doing something wrong, and it's not unusual. It's a side-effect of pregnancy biology that almost everyone feels to some degree.",
+        ],
+      },
+      {
+        id: "lifestyle-first",
+        heading: "What to try first",
+        lead: "Food, fluids, and movement do most of the work for most people.",
+        paragraphs: [
+          "Building up fibre over a few days — fruit, vegetables, wholegrains, pulses — and drinking more water alongside is the foundation. Fibre without fluid can actually make constipation worse, so the two go together.",
+          "Daily movement, even gentle walking, helps the gut do its own thing. None of this is dramatic, but layered together it shifts most everyday constipation in pregnancy.",
+        ],
+      },
+      {
+        id: "which-laxative",
+        heading: "Which laxatives are commonly used",
+        lead: "When lifestyle alone isn't enough.",
+        paragraphs: [
+          "Bulk-forming laxatives (fybogel and similar) are typically the first medicine tried — they work by adding fibre and helping retain water in the stool. Osmotic laxatives (lactulose, macrogols) are often the next step — they pull water into the bowel to soften things and ease passage.",
+          "Stimulant laxatives, which actively stimulate the bowel, are usually used as a shorter-term option when other things aren't shifting it. A pharmacist can recommend what's appropriate for pregnancy and where you are in it.",
+        ],
+        callout: { tone: "info", text: "If you're already taking a laxative and it isn't helping after a few days, go back rather than buying more. A pharmacist or GP can change the approach." },
+      },
+      {
+        id: "piles",
+        heading: "Piles (haemorrhoids) — the often-unspoken half of this",
+        lead: "Common, uncomfortable, and treatable.",
+        paragraphs: [
+          "Pressure from the growing uterus, plus straining when constipated, makes piles very common in pregnancy. They can sting, itch, or feel like a swelling. There may be a small streak of bright red blood on the paper after a hard stool.",
+          "Pregnancy-safe creams exist, and a pharmacist can advise. Cool compresses, gentle wiping (or rinsing with water), and avoiding straining all help. Piles that become hard, swollen, and very painful — or that don't settle with the usual measures — are worth a GP appointment.",
+        ],
+      },
+      {
+        id: "iron",
+        heading: "If iron is making it worse",
+        lead: "A common, easily missed culprit.",
+        paragraphs: [
+          "Iron supplements often worsen constipation. If you've started one and things have got harder, mention it at your next appointment. The dose, timing, or formulation can sometimes be adjusted, or a different preparation tried.",
+          "Stopping iron on your own isn't usually the answer — but flagging the side-effect is reasonable, and changes are often possible.",
+        ],
+      },
+      {
+        id: "when-to-raise",
+        heading: "When constipation needs more than self-treatment",
+        lead: "A short list of reasons to call.",
+        paragraphs: [
+          "Severe abdominal pain, especially with vomiting, is a reason to call your maternity unit or 111 — that's not just constipation. More than a small streak of blood, dark blood, or blood mixed in with the stool is a reason to see a GP rather than to assume it's piles.",
+          "Constipation that hasn't shifted after several days of consistent food, fluids, movement, and a pharmacist-recommended laxative is a reason to ask for more. There are stronger options and a GP can talk it through.",
+        ],
+        callout: { tone: "gentle-warning", text: "Severe abdominal pain, vomiting, or anything more than a small bright streak of blood is a reason to call rather than to keep self-treating." },
+      },
+    ],
+  },
+
+  // ─── HAY FEVER IN PREGNANCY ──────────────────────────────────────────────
+  {
+    slug: "hay-fever-in-pregnancy",
+    title: "Hay fever in pregnancy: how it can feel different, what's commonly used, and pregnancy rhinitis vs hay fever",
+    metaDescription: "Hay fever in pregnancy explained — why it can feel different (and pregnancy rhinitis can mimic it), which sprays and tablets are commonly considered, and how to think about treatment calmly with a pharmacist.",
+    quickAnswer:
+      "Hay fever can feel worse — or just different — in pregnancy because hormonal changes already make the lining of the nose more swollen and reactive. Some people also develop pregnancy rhinitis, which can look very like hay fever but isn't allergic. For treatment, pregnancy-friendly options exist: saline sprays first, then steroid nasal sprays (often the preferred option in pregnancy as little is absorbed), with certain antihistamines considered when needed. A pharmacist or GP is the right person to choose for you. Self-care — staying indoors at peak pollen times, showering after being outside, keeping windows shut — also helps a lot.",
+    howThisFeels: [
+      "Streaming and miserable in a season that usually doesn't bother you",
+      "Worried about taking your usual hay fever tablet now you're pregnant",
+      "Confused about whether this is hay fever, a cold, or 'just pregnancy'",
+      "Tired of feeling blocked up and not sleeping well",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Why it can feel worse in pregnancy", body: "Pregnancy hormones increase blood flow to the lining of the nose, making it more swollen and reactive. Allergens like pollen can hit harder than usual." },
+        { heading: "Pregnancy rhinitis", body: "Around 1 in 5 people develop pregnancy rhinitis — persistent nasal congestion that isn't allergic, can start any time after the first trimester, and usually clears within two weeks of birth." },
+      ],
+      lessCauses: [
+        { heading: "Why this matters for treatment", body: "Pregnancy rhinitis doesn't respond to antihistamines because it isn't allergic. If your usual hay fever treatment isn't helping, that's a clue worth mentioning." },
+      ],
+      whyItVaries: "Some people who never had hay fever get nasal congestion for the first time in pregnancy; some long-term hay fever sufferers find it lighter than usual. Both happen.",
+    },
+    timing: {
+      whenStarts: "Can appear at any point but pregnancy rhinitis often starts in the second trimester.",
+      whenEases: "Pregnancy rhinitis usually settles within around two weeks of birth. Seasonal hay fever follows the pollen calendar.",
+    },
+    whatItFeelsLike: [
+      "Itchy, streaming eyes",
+      "A blocked or runny nose, especially in the morning",
+      "Sneezing in bursts",
+      "An itchy throat or roof of the mouth",
+      "Disrupted sleep from nasal congestion",
+    ],
+    whatThisMeans:
+      "Hay fever in pregnancy is uncomfortable but treatable, and it isn't a danger to the pregnancy. Doing nothing isn't your only option — pregnancy-friendly choices exist, and a pharmacist is well placed to recommend them.",
+    normal: [
+      "Sneezing, itchy eyes and a blocked nose during pollen season",
+      "Symptoms worse in the morning and after time outside",
+      "Persistent nasal congestion in the second or third trimester (likely pregnancy rhinitis)",
+    ],
+    seekSupport: [
+      "Wheezing, breathlessness that's new or worse than usual, or chest tightness — speak to a GP same day",
+      "A high temperature, facial pain over the cheeks or forehead, or thick coloured discharge — could be a sinus infection; speak to a GP",
+      "A sudden severe reaction (swelling of the lips/tongue, difficulty breathing) — call 999",
+      "Symptoms that aren't responding at all to over-the-counter measures — speak to a pharmacist or GP",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. A pharmacist or GP is the right person to confirm which sprays and tablets are appropriate for you in pregnancy.",
+    whatYouCanDo: [
+      { action: "Try a saline nasal spray or rinse first", reason: "It rinses pollen and mucus out and is fine to use freely in pregnancy. Often more effective than people expect." },
+      { action: "Ask the pharmacist about a steroid nasal spray", reason: "Steroid nasal sprays are often the first treatment of choice in pregnancy as very little is absorbed. They take a few days to build up but help most people." },
+      { action: "Ask before taking your usual hay fever tablet", reason: "Some antihistamines are considered in pregnancy, others not. A pharmacist will steer you to one that's appropriate." },
+      { action: "Reduce exposure", reason: "Showering and changing clothes after being outside, keeping windows shut at peak pollen times, and using wraparound sunglasses all help." },
+      { action: "Sleep slightly propped up", reason: "Helps with congestion overnight, especially if pregnancy rhinitis is part of the picture." },
+    ],
+    whatHappensNext: "Most people get a noticeable improvement within a week or two of starting treatment. If symptoms aren't shifting — especially if a steroid spray hasn't helped after a fortnight — it's worth going back to the pharmacist or GP rather than soldiering on.",
+    relatedStage: {
+      intro: "Hay fever sits alongside other respiratory and 'is this safe' conversations:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Cold and flu in pregnancy", href: "/articles/cold-and-flu-in-pregnancy", context: "When the symptoms might not be hay fever after all." },
+        { label: "Shortness of breath in pregnancy", href: "/articles/shortness-of-breath-in-pregnancy", context: "When breathing changes need different attention." },
+        { label: "Paracetamol in pregnancy", href: "/articles/paracetamol-in-pregnancy", context: "If a fever or sinus pain comes into the picture." },
+      ],
+    },
+    aiPrompts: [
+      "What can I take for hay fever in pregnancy?",
+      "Is my hay fever worse because I'm pregnant?",
+      "Is this hay fever or pregnancy rhinitis?",
+    ],
+    captureIntro: "Worth noting which treatments help and which days are worst. Useful information if it comes back the next season.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["cold-and-flu-in-pregnancy", "shortness-of-breath-in-pregnancy", "paracetamol-in-pregnancy", "antibiotics-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Hay fever can feel worse in pregnancy because the nose is already more reactive",
+      "Pregnancy rhinitis can mimic hay fever but isn't allergic and won't respond to antihistamines",
+      "Saline sprays first; steroid nasal sprays are often the preferred treatment in pregnancy",
+      "Some antihistamines are considered in pregnancy — ask a pharmacist rather than guessing",
+      "Wheezing, breathlessness, or facial pain with fever needs a GP — that's not just hay fever",
+    ],
+    sources: [
+      "NHS — Hay fever",
+      "NICE — Allergic rhinitis",
+      "UK Teratology Information Service (UKTIS)",
+      "Royal College of Obstetricians and Gynaecologists",
+    ],
+    faq: [
+      { question: "What can I take for hay fever in pregnancy?", answer: "Saline sprays first; steroid nasal sprays are often the preferred treatment in pregnancy as very little is absorbed; certain antihistamines are considered when needed. A pharmacist will pick what's right for you." },
+      { question: "Is my usual hay fever tablet safe?", answer: "Some are considered in pregnancy and some aren't. Don't guess — a pharmacist can confirm in under a minute and suggest a swap if needed." },
+      { question: "What's pregnancy rhinitis?", answer: "Persistent nasal congestion in pregnancy that isn't allergic. It can start in the second trimester, can mimic hay fever, and usually settles within around two weeks of birth. It doesn't respond to antihistamines." },
+      { question: "Why does my hay fever feel worse this year?", answer: "Pregnancy hormones increase blood flow and swelling in the lining of the nose, so the same allergens can hit harder. It's not in your head." },
+      { question: "When should I see a GP rather than a pharmacist?", answer: "If you have wheezing, breathlessness, chest tightness, fever with facial pain, or symptoms that aren't responding to pharmacist-recommended treatment after a couple of weeks." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "Why pregnancy can sharpen everything about hay fever — and what's actually pregnancy rhinitis instead. Calm answers, no soldiering on.",
+    editorialSections: [
+      {
+        id: "why-different",
+        heading: "Why hay fever can feel different in pregnancy",
+        lead: "The nose is already on a slightly higher setting.",
+        paragraphs: [
+          "Pregnancy hormones increase blood flow to the mucous membranes — the lining of the nose included. That means more swelling, more congestion, and a stronger reaction to the same allergens. People who normally get mild hay fever can suddenly find it much more disruptive.",
+          "It also works the other way: a few people find their usual hay fever lighter in pregnancy. Both are normal, and neither is a sign of anything going wrong with the pregnancy.",
+        ],
+      },
+      {
+        id: "rhinitis",
+        heading: "Pregnancy rhinitis — the allergic-looking thing that isn't allergic",
+        lead: "Worth knowing about because it changes the treatment.",
+        paragraphs: [
+          "Around one in five people develop pregnancy rhinitis — persistent nasal congestion that isn't caused by allergy or infection. It often starts in the second trimester, can last for weeks, and usually settles within a couple of weeks of birth.",
+          "Because it isn't allergic, it doesn't respond to antihistamines. If you've tried your usual hay fever tablet and it's done nothing, pregnancy rhinitis is a real possibility — and the right approach is different.",
+        ],
+        callout: { tone: "info", text: "If antihistamines aren't helping at all, that's a clue. Mention it to a pharmacist or GP — pregnancy rhinitis is treated differently from allergy." },
+      },
+      {
+        id: "saline-first",
+        heading: "Start with saline",
+        lead: "Boring, free, and surprisingly effective.",
+        paragraphs: [
+          "Saline nasal sprays and rinses physically wash pollen, mucus, and irritants out of the nose. They have no medicine in them, can be used freely in pregnancy, and often help more than people expect — particularly if used a few times a day.",
+          "It's a sensible first step on its own and a useful adjunct to anything else.",
+        ],
+      },
+      {
+        id: "steroid-sprays",
+        heading: "Steroid nasal sprays",
+        lead: "Often the preferred treatment in pregnancy.",
+        paragraphs: [
+          "Steroid nasal sprays act locally on the lining of the nose, with very little absorbed into the rest of the body — which is why they're often the first medicated option suggested in pregnancy. They take a few days to build up to full effect and work best when used consistently for a couple of weeks rather than dipped in and out of.",
+          "A pharmacist can recommend the right one and explain how to use it properly (which is half the battle).",
+        ],
+      },
+      {
+        id: "antihistamines",
+        heading: "Antihistamines: ask, don't guess",
+        lead: "Some are considered in pregnancy, others not.",
+        paragraphs: [
+          "There isn't one blanket answer — it depends on the specific antihistamine. Some are commonly used in pregnancy when needed; others are avoided. Reaching for whichever one you happened to have in the cupboard isn't the safest approach.",
+          "A pharmacist can confirm what's appropriate in under a minute. It's a small piece of admin that turns 'I don't know if I can take this' into a clear answer.",
+        ],
+      },
+      {
+        id: "self-care",
+        heading: "What helps alongside",
+        lead: "Small things that take the edge off.",
+        paragraphs: [
+          "Showering and changing clothes after being outside, keeping windows shut at peak pollen times, drying laundry indoors during high-pollen days, wearing wraparound sunglasses, and putting a barrier balm just inside the nostrils can all genuinely help.",
+          "Sleeping slightly propped up helps with congestion overnight, especially if pregnancy rhinitis is part of the picture.",
+        ],
+      },
+      {
+        id: "when-to-see-gp",
+        heading: "When it isn't (just) hay fever",
+        lead: "A few things to flag rather than self-treat.",
+        paragraphs: [
+          "Wheezing, breathlessness that's new or worse than usual, or chest tightness need a same-day GP call — particularly if you have asthma. Facial pain over the cheeks or forehead with thick coloured discharge or fever can be a sinus infection. Symptoms that aren't responding at all to a steroid spray after a couple of weeks are also a reason to go back to the pharmacist or GP.",
+          "Sudden swelling of the lips or tongue, or any difficulty breathing, is a 999 call.",
+        ],
+        callout: { tone: "gentle-warning", text: "New wheezing or breathlessness in pregnancy isn't 'just hay fever' and needs a same-day GP call — sooner if it's getting worse quickly." },
+      },
+    ],
+  },
+
+  // ─── COLD AND FLU IN PREGNANCY ───────────────────────────────────────────
+  {
+    slug: "cold-and-flu-in-pregnancy",
+    title: "Cold and flu in pregnancy: what's normal self-care, what's commonly used, and when to call someone",
+    metaDescription: "Cold and flu in pregnancy explained — what self-care is usually reasonable, which medicines people often ask about, when fever or breathing matters, and when to call 111, GP, or maternity triage.",
+    quickAnswer:
+      "Most colds in pregnancy are uncomfortable but not dangerous. Rest, fluids, paracetamol if needed for fever or aches, saline sprays, and time are the usual approach. Flu in pregnancy is taken more seriously — it can be more severe than at other times, and antiviral treatment is sometimes offered. A high temperature that won't settle, breathlessness, dehydration, or any change in your baby's movements (especially later in pregnancy) is a reason to call 111, your GP, or your maternity unit. The annual flu vaccine is recommended in pregnancy and is one of the simplest preventive things you can do.",
+    howThisFeels: [
+      "Run-down and miserable, with everything taking longer than usual",
+      "Worried that being unwell is harming the baby",
+      "Unsure which medicines you can actually take",
+      "Anxious about whether this is a cold, flu, or something more",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Why colds feel harder in pregnancy", body: "The immune system shifts in pregnancy and the nose is more congested anyway. The same cold can simply feel more disruptive." },
+        { heading: "Why flu is treated more seriously", body: "Influenza in pregnancy carries a higher risk of complications than in non-pregnant adults, which is why the flu jab is recommended every year and why antivirals may be offered if flu is confirmed." },
+      ],
+      lessCauses: [
+        { heading: "What about COVID-19?", body: "Pregnancy is treated as a higher-risk situation for some respiratory infections, including COVID-19. Vaccination guidance is updated regularly — your midwife or GP can confirm what's current." },
+      ],
+      whyItVaries: "Some pregnancies pass through cold season untouched; others seem to catch everything. Both are normal. A particular illness can be worse in pregnancy and still be straightforward to recover from with rest.",
+    },
+    timing: {
+      whenStarts: "Any time, with peaks in winter and around the start of the school year.",
+      whenEases: "Most colds settle within 7 to 10 days. Flu typically takes longer — often a week or two of significant symptoms followed by a slower recovery.",
+    },
+    whatItFeelsLike: [
+      "Sore throat, runny or blocked nose, sneezing",
+      "Tiredness that goes well beyond the usual pregnancy tiredness",
+      "Aches and chills with flu, often with a sudden onset",
+      "Cough that lingers for a couple of weeks after the worst of it",
+    ],
+    whatThisMeans:
+      "Being unwell with a cold in pregnancy isn't a sign that anything is going wrong with the baby. The body is built to handle these — what matters is supporting yourself well and knowing when to ask for more help.",
+    normal: [
+      "A cold lasting up to about 10 days, with a tail-end cough",
+      "A low-grade temperature for a day or two",
+      "Feeling more tired and run-down than the cold seems to warrant",
+      "Wanting to rest more than usual — and doing so",
+    ],
+    seekSupport: [
+      "A temperature above 38°C that won't come down with paracetamol — call 111 or your GP",
+      "Breathlessness, chest pain, or coughing up blood — call 111 or 999 depending on severity",
+      "Symptoms that suddenly get much worse after a few days of improving — call your GP",
+      "Any change or reduction in your baby's movements (after 24 weeks) — call your maternity unit straight away",
+      "Suspected flu, especially with high fever and severe aches — speak to a GP or 111 about whether antiviral treatment is appropriate",
+      "Signs of dehydration (dizziness, very dark urine, not passing much urine) — call your GP or 111",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. If you're unsure how unwell is too unwell, 111 can help you decide whether you need to be seen and where.",
+    whatYouCanDo: [
+      { action: "Rest more than feels reasonable", reason: "Pregnancy + cold + 'getting on with it' is a recipe for a longer illness. Permission to rest is part of the treatment." },
+      { action: "Drink more than usual", reason: "Fluids help with fever, headache, and dehydration. Water, squash, hot drinks — whatever you'll actually drink." },
+      { action: "Use paracetamol for fever or aches if needed", reason: "Bringing a fever down matters in pregnancy. Lowest dose, shortest time that helps." },
+      { action: "Use saline spray and steam", reason: "Help with congestion without medicine. A bowl of hot water with a towel over the head, or a steamy shower, both work." },
+      { action: "Avoid decongestants without checking", reason: "Some decongestant tablets and sprays aren't recommended in pregnancy. A pharmacist can confirm what's appropriate." },
+      { action: "Have the flu jab if offered", reason: "It's recommended in pregnancy in every trimester and reduces the chance of severe flu — for you and your baby." },
+    ],
+    whatHappensNext: "Most colds run their course within a week to ten days. Flu takes longer. If symptoms aren't easing, are getting worse, or new symptoms appear (especially breathing or movement changes), the next step is a phone call rather than another night of waiting.",
+    relatedStage: {
+      intro: "Cold and flu sit alongside other 'is this safe' and infection conversations:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Paracetamol in pregnancy", href: "/articles/paracetamol-in-pregnancy", context: "The most commonly asked medicine alongside this." },
+        { label: "Antibiotics in pregnancy", href: "/articles/antibiotics-in-pregnancy", context: "When a chest or sinus infection takes over." },
+        { label: "Shortness of breath in pregnancy", href: "/articles/shortness-of-breath-in-pregnancy", context: "The breathing question that often comes alongside." },
+      ],
+    },
+    aiPrompts: [
+      "What can I take for a cold in pregnancy?",
+      "Is flu more dangerous in pregnancy?",
+      "Should I have the flu jab in pregnancy?",
+    ],
+    captureIntro: "Worth noting how the illness moved — when it started, when fever appeared, and what helped. Useful for any follow-up call.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["paracetamol-in-pregnancy", "antibiotics-in-pregnancy", "shortness-of-breath-in-pregnancy", "uti-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Most colds in pregnancy are uncomfortable but not dangerous",
+      "Flu is taken more seriously — antivirals may be offered, and the flu jab is recommended in pregnancy",
+      "Paracetamol, fluids, rest, and saline sprays are the usual self-care toolkit",
+      "Some decongestants aren't recommended — ask a pharmacist before taking anything new",
+      "High fever, breathlessness, dehydration, or reduced movements are reasons to call",
+    ],
+    sources: [
+      "NHS — Colds, coughs and ear infections in children (and adults)",
+      "NHS — Flu jab in pregnancy",
+      "UK Health Security Agency (UKHSA) — Flu in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists",
+    ],
+    faq: [
+      { question: "What can I take for a cold in pregnancy?", answer: "Paracetamol for fever or aches, saline sprays for congestion, plenty of fluids, and rest. Avoid combination cold-and-flu remedies and decongestant tablets without checking with a pharmacist first." },
+      { question: "Is flu dangerous in pregnancy?", answer: "Flu can be more severe in pregnancy than in non-pregnant adults, which is why the flu jab is recommended every pregnancy and why antiviral treatment is sometimes offered if flu is confirmed. Speak to a GP or 111 if you suspect flu." },
+      { question: "Should I have the flu jab in pregnancy?", answer: "Yes — it's recommended in any trimester and is one of the simplest preventive things you can do for both you and your baby." },
+      { question: "When should I call about a cold in pregnancy?", answer: "If your temperature is above 38°C and won't come down, you're breathless, you can't keep fluids down, you notice any change in your baby's movements, or you suddenly get much worse after starting to improve." },
+      { question: "Can I take cold and flu remedies in pregnancy?", answer: "Most combination remedies contain ingredients (like decongestants) that aren't recommended in pregnancy. Stick to single-ingredient paracetamol unless a pharmacist advises otherwise." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "When to ride it out, what's commonly used, and the small list of things that turn 'just a cold' into a phone call.",
+    editorialSections: [
+      {
+        id: "cold-vs-flu",
+        heading: "Cold, flu, or 'call someone'",
+        lead: "A simple framing for an unwell day.",
+        paragraphs: [
+          "Colds tend to come on gradually — sore throat, runny nose, mild aches — and rarely cause a high fever. Flu usually arrives suddenly with a high temperature, severe aches, and exhaustion that makes everyday tasks feel impossible. The two can blur, but the pattern usually steers you.",
+          "What pushes either into a 'call someone' situation is breathlessness, a fever that won't settle, dehydration, sudden worsening after improving, or any change in your baby's movements later in pregnancy.",
+        ],
+      },
+      {
+        id: "what-self-care-looks-like",
+        heading: "What self-care looks like",
+        lead: "More rest than feels reasonable, more fluid than feels reasonable.",
+        paragraphs: [
+          "Pregnancy + cold + ploughing on is a recipe for a longer, harder illness. Permission to lie down for a couple of days is part of the treatment, not an indulgence. Fluids — water, squash, hot drinks — help with fever, dehydration, and the headache that often comes with both.",
+          "Saline nasal sprays, steamy showers, hot drinks with honey and lemon, and propping up at night to sleep all help with congestion without any medication.",
+        ],
+      },
+      {
+        id: "what-medicines-are-okay",
+        heading: "What medicines are commonly used",
+        lead: "Less than people think — and that's fine.",
+        paragraphs: [
+          "Paracetamol is the painkiller and fever-reducer of choice in pregnancy and is the main medicine most people use through a cold. The lowest dose for the shortest time that helps still applies. Saline nasal sprays and rinses are unrestricted.",
+          "Combination cold-and-flu remedies often contain decongestants and other ingredients that aren't recommended in pregnancy. The safer route is to stick with single-ingredient paracetamol and ask a pharmacist before adding anything else.",
+        ],
+        callout: { tone: "info", text: "If you've already taken a combination cold remedy and you're worrying — call 111 or your maternity unit. They can talk it through specifically rather than you guessing." },
+      },
+      {
+        id: "fever-matters",
+        heading: "Why fever matters in pregnancy",
+        lead: "Worth bringing down rather than riding out.",
+        paragraphs: [
+          "A sustained high temperature in pregnancy — particularly in the first trimester — is something worth treating, both for your comfort and for the pregnancy itself. Paracetamol and fluids are the usual approach.",
+          "A temperature above 38°C that won't come down with paracetamol, or that lasts more than a day or two, is a reason to speak to a GP or 111.",
+        ],
+      },
+      {
+        id: "flu-specifically",
+        heading: "Flu specifically",
+        lead: "Treated as a higher-risk illness in pregnancy.",
+        paragraphs: [
+          "Flu in pregnancy can be more severe than in non-pregnant adults. If you suspect you have flu — sudden onset, high fever, severe aches, exhaustion — speak to a GP or call 111. Antiviral treatment is sometimes offered, and it works best started early.",
+          "The annual flu vaccine is recommended in any trimester of pregnancy. It's one of the simplest preventive steps available, and it protects your baby in the early weeks after birth too.",
+        ],
+      },
+      {
+        id: "later-pregnancy",
+        heading: "Later in pregnancy: extra things to notice",
+        lead: "Breathing, movement, dehydration.",
+        paragraphs: [
+          "From around 24 weeks, any change or reduction in your baby's movements is a reason to call your maternity unit — that includes when you're unwell. Don't assume it's because you're focused on yourself.",
+          "Breathlessness that's new or worse than usual, chest pain, or signs of dehydration (dizziness, very dark urine, not passing much urine) all need a phone call rather than another night of waiting.",
+        ],
+        callout: { tone: "gentle-warning", text: "After 24 weeks, any change in your baby's movements while you're unwell is a reason to call your maternity unit straight away — not the morning, not after you feel a bit better." },
+      },
+    ],
+  },
+
+  // ─── UTI IN PREGNANCY ────────────────────────────────────────────────────
+  {
+    slug: "uti-in-pregnancy",
+    title: "UTI in pregnancy: why it matters, how to spot it, and why testing and antibiotics are usually important",
+    metaDescription: "UTI in pregnancy explained — why it matters more in pregnancy, what symptoms to notice, why testing and antibiotics are often important, and when symptoms suggest something more serious.",
+    quickAnswer:
+      "Urinary tract infections are common in pregnancy and matter more than at other times. An untreated UTI can travel up to the kidneys, cause fever, and trigger early labour — which is why testing (a urine sample) and a course of antibiotics are taken seriously when a UTI is suspected. Symptoms can include burning when you wee, going more often, lower-tummy or pelvic pain, cloudy or smelly urine, and feeling unwell. Some pregnancies have UTIs without symptoms, which is why routine urine checks at antenatal appointments matter. Lower-back pain on one side, fever, shivering, vomiting, or feeling really unwell is a reason to call your maternity unit or 111 straight away.",
+    howThisFeels: [
+      "Stinging when you wee and not sure if it's a UTI or just pregnancy",
+      "Worried that 'taking antibiotics' is the wrong thing to do",
+      "Anxious about the impact on the baby of either the infection or the treatment",
+      "Caught between waiting it out and asking",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Why UTIs are more common in pregnancy", body: "Hormonal changes relax the urinary tract, and the growing uterus presses on the bladder, making it harder to empty fully. Both make infection more likely." },
+        { heading: "Why testing matters", body: "Some UTIs in pregnancy don't cause obvious symptoms but still need treatment. That's why a urine sample is checked at booking and at later antenatal appointments." },
+      ],
+      lessCauses: [
+        { heading: "Kidney infection", body: "An untreated lower UTI can spread upward to the kidneys, causing fever, shivers, vomiting, and one-sided lower-back or flank pain. This needs urgent treatment." },
+      ],
+      whyItVaries: "Some people get a UTI early in pregnancy and never again; others have repeated infections through pregnancy. Both happen, and neither is a sign of doing something wrong.",
+    },
+    timing: {
+      whenStarts: "Can occur at any point in pregnancy.",
+      whenEases: "Symptoms usually start to ease within 48 hours of starting antibiotics. The full course should still be finished, and a follow-up urine sample is sometimes taken to check it has cleared.",
+    },
+    whatItFeelsLike: [
+      "Stinging or burning when passing urine",
+      "Going more often, including at night",
+      "Lower-tummy or pelvic discomfort",
+      "Cloudy, dark, or strong-smelling urine",
+      "Sometimes a low-grade temperature or feeling generally off",
+    ],
+    whatThisMeans:
+      "A UTI in pregnancy is a common, well-understood infection with a clear treatment path. Catching and treating it early is the whole point — that's why pregnancy care includes routine urine checks. Asking is not over-reacting.",
+    normal: [
+      "Going to wee more often in pregnancy without any other symptoms",
+      "Mild discomfort that settles within 24 hours and doesn't return",
+      "A urine sample being requested at appointments even when you feel fine",
+    ],
+    seekSupport: [
+      "Burning when you wee, going more often, or lower-tummy pain — speak to your GP or midwife the same day; a urine sample can confirm",
+      "Lower-back or flank pain on one side, fever, shivering, vomiting, or feeling really unwell — call your maternity unit or 111 straight away (possible kidney infection)",
+      "Blood in your urine — speak to a GP",
+      "Symptoms not improving 48 hours after starting antibiotics — go back to the prescriber",
+      "Any change or reduction in your baby's movements alongside being unwell (after 24 weeks) — call your maternity unit straight away",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. If you suspect a UTI in pregnancy, contact your GP or midwife the same day rather than waiting it out.",
+    whatYouCanDo: [
+      { action: "Get a urine sample checked the same day", reason: "A UTI in pregnancy is one of the things worth acting on quickly. Your GP or midwife can arrange a sample." },
+      { action: "Drink plenty of water", reason: "More fluid means more flushing of the urinary tract. It won't cure a UTI but it supports the treatment." },
+      { action: "Take the full course of antibiotics", reason: "Symptoms can ease within 48 hours but the infection isn't fully gone yet. Stopping early can let it come back." },
+      { action: "Wee after sex, and wipe front to back", reason: "Two of the simplest preventive habits, useful both during and after pregnancy." },
+      { action: "Don't wait if it comes back", reason: "Repeat UTIs in pregnancy are taken seriously and there's a clear pathway. Mention it sooner rather than later." },
+    ],
+    whatHappensNext: "A confirmed UTI is treated with a course of antibiotics chosen as appropriate for pregnancy. Symptoms usually start to ease within 48 hours. A follow-up urine sample is sometimes taken to confirm it's gone. If symptoms get worse rather than better, the next step is a same-day call back to the GP or maternity unit.",
+    relatedStage: {
+      intro: "UTIs sit alongside other infection and 'is this safe' conversations:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Antibiotics in pregnancy", href: "/articles/antibiotics-in-pregnancy", context: "The treatment side of this conversation." },
+        { label: "Group B Strep in pregnancy", href: "/articles/group-b-strep-in-pregnancy", context: "Another reason urine samples are checked late in pregnancy." },
+        { label: "Thrush in pregnancy", href: "/articles/thrush-in-pregnancy", context: "When the symptoms aren't actually a UTI." },
+      ],
+    },
+    aiPrompts: [
+      "Do I have a UTI in pregnancy?",
+      "Is it safe to take antibiotics for a UTI in pregnancy?",
+      "What happens if a UTI is left untreated in pregnancy?",
+    ],
+    captureIntro: "Worth noting symptoms, when they started, and how quickly treatment helped. Useful if anything similar comes up later.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["antibiotics-in-pregnancy", "group-b-strep-in-pregnancy", "thrush-in-pregnancy", "paracetamol-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "UTIs are common in pregnancy and matter more than at other times",
+      "Untreated, they can travel to the kidneys and trigger early labour",
+      "Testing (a urine sample) is the way to confirm — including silent UTIs found at routine checks",
+      "Antibiotics for UTI in pregnancy are appropriate; the course should be finished",
+      "One-sided back pain, fever, shivering, or vomiting is urgent — call straight away",
+    ],
+    sources: [
+      "NHS — Urinary tract infections (UTIs)",
+      "NICE — Urinary tract infection (lower) in pregnancy",
+      "Royal College of Obstetricians and Gynaecologists",
+      "UK Health Security Agency (UKHSA)",
+    ],
+    faq: [
+      { question: "Do I have a UTI?", answer: "Burning when you wee, going more often, lower-tummy pain, or cloudy or smelly urine all suggest a UTI. A urine sample at the GP or midwife confirms it. In pregnancy, it's worth checking the same day rather than waiting." },
+      { question: "Are antibiotics for a UTI safe in pregnancy?", answer: "Yes — UTIs in pregnancy are treated with antibiotics chosen for use in pregnancy. The bigger risk is leaving the infection untreated, which can travel to the kidneys and cause more serious complications." },
+      { question: "What happens if a UTI is left untreated in pregnancy?", answer: "An untreated UTI can spread to the kidneys, cause fever, shivering, and one-sided back pain, and increase the risk of early labour. Catching it early is the whole point of routine urine checks." },
+      { question: "Can a UTI cause early labour?", answer: "An untreated UTI can increase the risk of early labour, which is why prompt treatment matters. Treated UTIs in pregnancy usually clear without further problems." },
+      { question: "Why was a UTI found at my appointment when I felt fine?", answer: "Some UTIs in pregnancy don't cause symptoms but still need treatment. That's exactly why urine is checked at routine appointments — to catch them early before they cause problems." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "Common, treatable, and one of the few things in pregnancy where 'wait and see' is genuinely the wrong answer.",
+    editorialSections: [
+      {
+        id: "why-it-matters-more",
+        heading: "Why UTIs matter more in pregnancy",
+        lead: "Two simple reasons.",
+        paragraphs: [
+          "First, UTIs are more common in pregnancy because hormonal changes relax the urinary tract and the growing uterus presses on the bladder, making it harder to empty fully. Second, an untreated UTI can travel upward into the kidneys, cause fever, and increase the risk of early labour.",
+          "That combination — more likely to happen, and more important to treat — is why routine urine samples are part of antenatal care, even when you feel completely well.",
+        ],
+      },
+      {
+        id: "symptoms",
+        heading: "What it tends to feel like",
+        lead: "Some symptoms are obvious; some are subtle; some pregnancies have none.",
+        paragraphs: [
+          "Burning or stinging when you wee, going more often than usual (including at night), lower-tummy or pelvic discomfort, and cloudy, dark, or strong-smelling urine are the classic signs. A low-grade temperature, feeling vaguely unwell, or new lower-back ache can also be part of it.",
+          "Frequent weeing on its own is a normal part of pregnancy and doesn't necessarily mean a UTI. But pain, burning, smell, or feeling off all together is worth getting checked the same day.",
+        ],
+      },
+      {
+        id: "silent-utis",
+        heading: "Silent UTIs and routine urine checks",
+        lead: "Why the sample at your appointment matters.",
+        paragraphs: [
+          "Some UTIs in pregnancy don't cause obvious symptoms but still need treatment because of the risk of complications. That's why a urine sample is checked at booking and at later antenatal appointments — to catch them early.",
+          "If you've ever been called back about a urine result when you felt fine, that's why. It's the system working, not the system over-reacting.",
+        ],
+      },
+      {
+        id: "treatment",
+        heading: "How a UTI is treated in pregnancy",
+        lead: "A short, appropriate course of antibiotics.",
+        paragraphs: [
+          "A confirmed UTI in pregnancy is treated with antibiotics chosen as appropriate for pregnancy. Symptoms usually start to ease within 48 hours, and the full course should be finished even if you feel better partway through. A follow-up urine sample is sometimes taken to confirm the infection has cleared.",
+          "If symptoms get worse rather than better, or if new symptoms appear (especially fever, shivering, vomiting, or one-sided back pain), the next step is a same-day call back rather than persisting with the same treatment.",
+        ],
+        callout: { tone: "info", text: "Symptoms easing within 48 hours doesn't mean the infection is gone. Finish the course." },
+      },
+      {
+        id: "kidney-infection",
+        heading: "When a UTI becomes a kidney infection",
+        lead: "Different symptoms — and different urgency.",
+        paragraphs: [
+          "If a UTI travels up to the kidneys, the picture changes. Fever, shivering, vomiting, feeling really unwell, and one-sided pain in the lower back or flank are the classic signs. This needs urgent treatment — sometimes in hospital — and shouldn't wait for a GP appointment slot.",
+          "If those symptoms appear, call your maternity unit or 111 straight away. Don't soldier on for hours hoping it will settle.",
+        ],
+        callout: { tone: "gentle-warning", text: "One-sided back pain, fever, shivering, or vomiting after a UTI is a reason to call your maternity unit or 111 immediately, not the next day." },
+      },
+      {
+        id: "prevention",
+        heading: "Small things that help prevent UTIs",
+        lead: "Useful both in pregnancy and after.",
+        paragraphs: [
+          "Drinking plenty of water, weeing after sex, wiping front to back, and not holding on for too long when you need to go are the basics. They won't prevent every UTI, but they reduce the risk.",
+          "Repeat UTIs in pregnancy are taken seriously and have a clear pathway. If you've had more than one, mention it — there are options.",
+        ],
+      },
+    ],
+  },
+
+  // ─── THRUSH IN PREGNANCY ─────────────────────────────────────────────────
+  {
+    slug: "thrush-in-pregnancy",
+    title: "Thrush in pregnancy: why it can be more common, what helps, and when to get checked rather than self-treat",
+    metaDescription: "Thrush in pregnancy explained — why it's more common, what it tends to feel like, which treatment routes are usually used, and when to get checked rather than assume it's thrush.",
+    quickAnswer:
+      "Thrush is a common yeast infection that often appears more easily in pregnancy because hormonal changes shift the balance of vaginal flora. Typical symptoms are itching, soreness, and a thick white discharge that doesn't smell strong. Pregnancy-safe treatment is usually a vaginal cream or pessary (the oral tablet used outside pregnancy is generally avoided), and a pharmacist or GP can advise. Itching with a strong-smelling, coloured, or different-textured discharge isn't always thrush — it's worth being checked rather than self-treating, particularly the first time it happens in pregnancy.",
+    howThisFeels: [
+      "Itchy and uncomfortable in a way that's hard to ignore",
+      "Embarrassed to mention it",
+      "Worried about whether it can affect the baby",
+      "Unsure whether to self-treat or be checked",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Why pregnancy makes it more likely", body: "Higher oestrogen and changes to vaginal pH shift the balance of normal flora, making it easier for yeast to overgrow. That's why thrush can appear more easily — even if you've never had it before." },
+        { heading: "Other triggers", body: "Antibiotics, hot weather, tight synthetic clothing, and some bath products can also tip the balance toward thrush." },
+      ],
+      lessCauses: [
+        { heading: "Things that mimic thrush", body: "Bacterial vaginosis, sexually transmitted infections, and skin conditions can all cause discharge or irritation that gets blamed on thrush. Treating yourself for the wrong thing wastes time and delays the right treatment." },
+      ],
+      whyItVaries: "Some pregnancies pass through without thrush at all; others have it more than once. Both are normal. Recurrent thrush in pregnancy can usually be managed with a longer or repeated course of treatment.",
+    },
+    timing: {
+      whenStarts: "Can appear at any point in pregnancy.",
+      whenEases: "With pregnancy-safe treatment, symptoms usually ease within a few days, though some treatments are used for up to a week.",
+    },
+    whatItFeelsLike: [
+      "Itching and soreness around the vulva and vagina",
+      "Thick white discharge, often described as cottage-cheese-like",
+      "Discomfort when peeing or during sex",
+      "Discharge that doesn't have a strong smell (which is part of how thrush is distinguished from some other things)",
+    ],
+    whatThisMeans:
+      "Thrush in pregnancy is common, treatable, and not a sign that anything is wrong with the pregnancy. It is also not always 'just thrush' — and that's the bit worth taking seriously, especially the first time.",
+    normal: [
+      "Itching and a thick white discharge that doesn't smell strong",
+      "Symptoms easing within a few days of starting pregnancy-safe treatment",
+      "More normal pregnancy discharge generally — clear or milky, mild smell — without other symptoms",
+    ],
+    seekSupport: [
+      "First episode of suspected thrush in pregnancy — see a GP or midwife rather than self-treating, to confirm what it is",
+      "Strong-smelling, grey, green, yellow, or frothy discharge — speak to a GP, that isn't thrush",
+      "Pain in the lower tummy, fever, or feeling unwell alongside discharge — call your GP or 111",
+      "Symptoms that don't improve within a week of starting treatment — go back to the GP",
+      "Any new bleeding (not just spotting) — speak to your maternity unit",
+      "Repeated episodes in pregnancy — speak to your GP about a longer or repeated treatment plan",
+    ],
+    disclaimer: "This article is general guidance, not personal medical advice. The first time you have suspected thrush in pregnancy, it's worth being seen rather than self-treating — to make sure that's what it is.",
+    whatYouCanDo: [
+      { action: "See a pharmacist, GP, or midwife to confirm it's thrush", reason: "Particularly the first time in pregnancy. Treating the wrong thing delays the right treatment." },
+      { action: "Use pregnancy-safe treatment as recommended", reason: "Vaginal creams and pessaries are usually used; the oral tablet typically used outside pregnancy is generally avoided. A pharmacist or GP will pick the right one." },
+      { action: "Wear loose, breathable underwear", reason: "Cotton, looser fit, and avoiding tight synthetic clothing all help to reduce recurrence." },
+      { action: "Avoid scented soaps, bubble baths and shower gels around the vulva", reason: "These can disrupt natural pH and irritate the area. Plain water or unscented washes are kinder." },
+      { action: "Don't 'just keep treating' if symptoms aren't going", reason: "If the same treatment isn't working after a week, that's a clue to be re-checked rather than buying another packet." },
+    ],
+    whatHappensNext: "Most thrush in pregnancy responds within a few days to a pregnancy-appropriate cream or pessary. If it doesn't, or if it keeps coming back, the next step is a GP appointment to confirm the diagnosis and consider a longer or repeated treatment course.",
+    relatedStage: {
+      intro: "Thrush sits alongside other intimate-symptom and infection conversations:",
+      links: [
+        { label: "Health and safety in pregnancy", href: "/pregnancy/health-and-safety", context: "The wider topic this article belongs to." },
+        { label: "Your body in pregnancy", href: "/pregnancy/body", context: "The wider conversation about everyday pregnancy symptoms." },
+        { label: "UTI in pregnancy", href: "/articles/uti-in-pregnancy", context: "When the discomfort is actually a urinary infection." },
+        { label: "Antibiotics in pregnancy", href: "/articles/antibiotics-in-pregnancy", context: "Why antibiotics often kick off a thrush episode." },
+      ],
+    },
+    aiPrompts: [
+      "Is thrush more common in pregnancy?",
+      "What can I take for thrush in pregnancy?",
+      "Is this thrush or something else?",
+    ],
+    captureIntro: "Worth noting symptoms and what helped — useful if it comes back later in pregnancy or after birth.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["antibiotics-in-pregnancy", "uti-in-pregnancy", "antacids-in-pregnancy", "paracetamol-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    keyTakeaways: [
+      "Thrush is more common in pregnancy because hormonal changes shift vaginal balance",
+      "Typical symptoms: itching, soreness, thick white discharge that doesn't smell strong",
+      "Pregnancy-safe treatment is usually a cream or pessary, not the oral tablet",
+      "Strong-smelling, coloured, or different-textured discharge isn't thrush — get checked",
+      "First episode in pregnancy is worth being seen rather than self-treated",
+    ],
+    sources: [
+      "NHS — Thrush in men and women",
+      "NICE — Candida – female genital",
+      "Royal College of Obstetricians and Gynaecologists",
+      "UK Teratology Information Service (UKTIS)",
+    ],
+    faq: [
+      { question: "Is thrush more common in pregnancy?", answer: "Yes — hormonal changes shift the balance of vaginal flora, which makes it easier for yeast to overgrow. Some people get thrush for the first time in pregnancy." },
+      { question: "What can I take for thrush in pregnancy?", answer: "Pregnancy-safe treatment is usually a vaginal cream or pessary. The oral antifungal tablet used outside pregnancy is generally avoided. A pharmacist or GP will recommend the right one." },
+      { question: "Is this thrush or something else?", answer: "Thrush usually causes itching, soreness, and a thick white discharge that doesn't smell strong. A strong-smelling, grey, green, yellow, or frothy discharge isn't thrush and needs to be seen — particularly the first time in pregnancy." },
+      { question: "Can thrush harm my baby?", answer: "Thrush itself doesn't harm the pregnancy. Treating it during pregnancy and around the time of birth helps reduce the chance of passing it to the baby (where it can cause oral thrush). Your team can advise close to the due date." },
+      { question: "Why do I keep getting thrush in pregnancy?", answer: "Hormonal changes, antibiotics, heat, and tight clothing can all tip the balance. Recurrent thrush in pregnancy can usually be managed with a longer or repeated treatment course — speak to your GP about a plan rather than buying packet after packet." },
+    ],
+    topic: "health-and-safety",
+    standfirst: "Common, treatable, and easily mistaken. What helps, what's used, and the bits worth checking instead of guessing.",
+    editorialSections: [
+      {
+        id: "why-more-common",
+        heading: "Why thrush can appear more easily in pregnancy",
+        lead: "A shift in the local environment.",
+        paragraphs: [
+          "Higher oestrogen and changes to vaginal pH in pregnancy shift the balance of normal flora, making it easier for yeast (the fungus that causes thrush) to overgrow. That's why thrush can appear more readily in pregnancy — sometimes for the first time, even if you've never had it before.",
+          "Antibiotics for unrelated infections, hot weather, tight synthetic clothing, and scented bath products can all add to it.",
+        ],
+      },
+      {
+        id: "what-it-feels-like",
+        heading: "What thrush tends to feel like",
+        lead: "A pattern that's recognisable but often overlaps with other things.",
+        paragraphs: [
+          "The classic picture is itching and soreness around the vulva and vagina, with a thick white discharge that's sometimes described as 'cottage-cheese-like'. There may be discomfort when passing urine or during sex. The discharge usually doesn't have a strong smell — and that's one of the cues that helps distinguish thrush from other things.",
+          "What it isn't, typically: a strong-smelling, grey, green, yellow, or frothy discharge. That picture suggests something else — usually bacterial vaginosis or a different infection — and needs a proper diagnosis.",
+        ],
+      },
+      {
+        id: "first-time-get-checked",
+        heading: "Why the first episode in pregnancy is worth getting checked",
+        lead: "To make sure that's what it is.",
+        paragraphs: [
+          "Itching and discharge in pregnancy can be thrush — but they can also be a few other things, some of which need different treatment and matter to address. Self-treating for thrush when it isn't thrush wastes time and lets the actual problem persist.",
+          "A quick GP or midwife visit (or sometimes a pharmacist consultation, depending on local services) can confirm it. After that, recurrences are often easier to recognise and treat.",
+        ],
+        callout: { tone: "info", text: "If you've never had thrush before and you think you have it now, get it confirmed before treating yourself. It's a small step that protects you from treating the wrong thing." },
+      },
+      {
+        id: "treatment",
+        heading: "What treatment looks like in pregnancy",
+        lead: "Cream and pessary, not tablet.",
+        paragraphs: [
+          "In pregnancy, thrush is usually treated with a vaginal cream or pessary — both are inserted locally and act on the area where the infection is. The single oral antifungal tablet typically used outside pregnancy is generally avoided.",
+          "A pharmacist or GP will recommend the right product and explain how long to use it for — usually up to a week. Symptoms often start easing within a few days.",
+        ],
+      },
+      {
+        id: "what-helps-alongside",
+        heading: "What helps alongside",
+        lead: "Small habits that reduce recurrence.",
+        paragraphs: [
+          "Cotton, looser-fitting underwear, avoiding tight synthetic clothing, and avoiding scented soaps, bubble baths, and shower gels around the vulva all help. Plain water or unscented washes are kinder to the natural pH of the area.",
+          "Drying carefully after a bath or shower, and avoiding sitting in damp gym clothes, are also small things that genuinely make a difference.",
+        ],
+      },
+      {
+        id: "when-its-not-thrush",
+        heading: "When it isn't thrush",
+        lead: "A few things that need a GP rather than a packet from the pharmacy.",
+        paragraphs: [
+          "Strong-smelling discharge, grey, green, yellow, or frothy discharge, lower-tummy pain, fever, or feeling unwell alongside discharge are all reasons to see a GP rather than self-treat. New bleeding (not just light spotting) is a reason to call your maternity unit.",
+          "If you've used a pregnancy-safe treatment for the full course and the symptoms aren't going, that's also a reason to be re-checked rather than to buy another packet.",
+        ],
+        callout: { tone: "gentle-warning", text: "Strong-smelling, coloured, or frothy discharge isn't thrush and needs to be seen. So does itching with lower-tummy pain or fever." },
+      },
+      {
+        id: "near-due-date",
+        heading: "Near the due date",
+        lead: "A small extra consideration.",
+        paragraphs: [
+          "Treating thrush in late pregnancy and around the time of birth helps reduce the chance of passing it to the baby (where it can cause oral thrush — easily treatable, but worth avoiding). If you have symptoms close to your due date, mention it at your next antenatal appointment so it can be managed in good time.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

@@ -23,10 +23,6 @@ import { ttcTopics, type TTCTopicSlug } from "@/data/ttcTopicData";
 import sprigImg from "@/assets/topic-mini-sprig.png";
 import wildflowerImg from "@/assets/topic-wildflower-sprig.png";
 import heroImg from "@/assets/ttc-journey.jpg";
-import featCycleImg from "@/assets/ttc-stage-cycle.jpg";
-import featPreconceptionImg from "@/assets/ttc-stage-timing.jpg";
-import featTrackImg from "@/assets/ttc-stage-waiting.jpg";
-import journalFlatlay from "@/assets/journal-flatlay.jpg";
 
 /* ----------------------------------------------------------- */
 /* SHARED                                                      */

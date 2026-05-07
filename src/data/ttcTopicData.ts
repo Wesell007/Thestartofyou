@@ -572,19 +572,19 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
+        title: "When to take a pregnancy test",
+        href: LIVE.whenToTest,
+        why: "How to time it for the most reliable result.",
+      },
+      {
+        title: "Faint positive pregnancy test",
+        href: LIVE.faintPositive,
+        why: "What a faint line really means and how to think about retesting.",
+      },
+      {
         title: "Implantation bleeding",
         href: LIVE.implantationBleeding,
         why: "What it is, what it isn't, and why it gets confused with a period.",
-      },
-      {
-        title: "Early pregnancy symptoms explained",
-        href: LIVE.earlySymptoms,
-        why: "Grounded reading on the symptoms that often appear before a missed period.",
-      },
-      {
-        title: "The two-week wait",
-        href: LIVE.twoWeekWaitArticle,
-        why: "Holds testing inside the wider waiting experience.",
       },
     ],
     groups: [

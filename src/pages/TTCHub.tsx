@@ -522,10 +522,10 @@ const TTCHub = () => {
       <main>
         <Hero />
         <WhatThisCovers />
+        <AISupport />
         <TopicLibrary />
         <JourneyTimeline />
         <ToolCTA />
-        <AISupport />
         <Reassurance />
       </main>
       <Footer />

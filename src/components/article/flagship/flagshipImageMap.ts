@@ -161,6 +161,16 @@ export const flagshipHeroMap: Record<string, Img> = {
   "birth-preferences": { src: cardPlanning, alt: "A short, written birth preferences document on a kitchen table alongside maternity notes." },
   "what-happens-if-labour-doesnt-start": { src: heroThirdEmotional, alt: "A pregnant person resting at home past their due date — the quiet emotional weight of waiting." },
 
+  // Phase I — Medicines, treatments, and what's safe in pregnancy
+  "paracetamol-in-pregnancy": { src: cardSafety, alt: "A blister pack of paracetamol on a kitchen surface alongside a glass of water — the everyday painkiller question in pregnancy." },
+  "antibiotics-in-pregnancy": { src: cardPractical, alt: "A box of antibiotics and a glass of water on a kitchen table — the moment of starting a prescribed course in pregnancy." },
+  "antacids-in-pregnancy": { src: heartburnPillows, alt: "A glass of water and antacid tablets on a bedside table — relief for pregnancy reflux." },
+  "laxatives-in-pregnancy": { src: cardNourish, alt: "A bowl of fibre-rich foods on a kitchen surface alongside a glass of water — the lifestyle layer of treating constipation in pregnancy." },
+  "hay-fever-in-pregnancy": { src: cardWellness, alt: "A pregnant person with a tissue and a saline nasal spray near a sunlit window — managing hay fever symptoms calmly." },
+  "cold-and-flu-in-pregnancy": { src: cardComfort, alt: "A mug of hot lemon, a box of tissues, and a thermometer on a bedside table — the everyday cold-and-flu set-up in pregnancy." },
+  "uti-in-pregnancy": { src: cardSafety, alt: "A urine sample pot and a glass of water on a clinic table — the simple test that confirms a UTI in pregnancy." },
+  "thrush-in-pregnancy": { src: cardBody, alt: "Soft cotton underwear and an unscented wash on a bathroom shelf — the practical layer alongside thrush treatment in pregnancy." },
+
   // Emotional wellbeing
   "anxiety-in-pregnancy": { src: heroSecondAnxiety, alt: "A pregnant person sitting quietly by a window — the inward weight of pregnancy anxiety." },
   "the-first-trimester-emotionally": { src: heroEmotionalFirstTri, alt: "A pregnant person in soft early-pregnancy light, processing the first weeks." },

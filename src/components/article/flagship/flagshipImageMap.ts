@@ -181,6 +181,16 @@ export const flagshipHeroMap: Record<string, Img> = {
   "show-in-pregnancy": { src: heroThirdSignsOfLabour, alt: "A calm late-pregnancy scene — the body's small signals that labour is approaching." },
   "leaking-fluid-in-pregnancy": { src: heroThirdSignsOfLabour, alt: "A packed hospital bag by the door — the moment of wondering whether waters have gone." },
 
+  // Phase K — Appointments, screening, results
+  "nipt-in-pregnancy": { src: cardSafety, alt: "A blood-test vial and pregnancy notes on a clinic table — the simple set-up of NIPT in pregnancy." },
+  "combined-screening-test": { src: heroTestsScans, alt: "An early-pregnancy ultrasound view alongside a blood-test vial — the two parts of combined screening." },
+  "dating-scan": { src: journalCoupleUltrasound, alt: "Expectant parents looking at the screen during their dating scan." },
+  "20-week-anomaly-scan": { src: heroSecondAnatomyScan, alt: "A 20-week anomaly scan image of the baby in profile." },
+  "glucose-tolerance-test": { src: cardNourish, alt: "A glass of the glucose drink and a blood-test vial on a clinic table — the set-up of the OGTT." },
+  "anti-d-injection-in-pregnancy": { src: cardSafety, alt: "A pregnant person at a routine appointment, sleeve rolled up for an anti-D injection." },
+  "what-happens-at-booking-appointment": { src: cardPractical, alt: "A midwife taking notes at a long, careful booking appointment." },
+  "what-if-a-scan-shows-something-unexpected": { src: cardQuiet, alt: "A quiet, reflective moment after a scan — holding the wait between appointments." },
+
   // Emotional wellbeing
   "anxiety-in-pregnancy": { src: heroSecondAnxiety, alt: "A pregnant person sitting quietly by a window — the inward weight of pregnancy anxiety." },
   "the-first-trimester-emotionally": { src: heroEmotionalFirstTri, alt: "A pregnant person in soft early-pregnancy light, processing the first weeks." },

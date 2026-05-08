@@ -70,6 +70,12 @@ import cardSafety from "@/assets/guidance-card-safety.jpg";
 import cardTextiles from "@/assets/guidance-card-textiles.jpg";
 import cardWellness from "@/assets/guidance-card-wellness.jpg";
 
+// TTC-specific imagery
+import ttcStageCycle from "@/assets/ttc-stage-cycle.jpg";
+import ttcStageTiming from "@/assets/ttc-stage-timing.jpg";
+import ttcStageWaiting from "@/assets/ttc-stage-waiting.jpg";
+import ttcJourney from "@/assets/ttc-journey.jpg";
+
 type Img = { src: string; alt: string };
 
 // ─── Anchor reference set (locked) ─────────────────────────────────────────
@@ -196,6 +202,19 @@ export const flagshipHeroMap: Record<string, Img> = {
   "the-first-trimester-emotionally": { src: heroEmotionalFirstTri, alt: "A pregnant person in soft early-pregnancy light, processing the first weeks." },
   "when-the-joy-doesnt-arrive-yet": { src: cardQuiet, alt: "A still, quiet pregnancy scene — the absence of expected joy." },
   "pregnancy-after-loss": { src: cardQuiet, alt: "A reflective scene in soft daylight — the careful weight of pregnancy after loss." },
+
+  // TTC-primary slugs (flagship-eligible)
+  "ovulation-signs": { src: ttcStageCycle, alt: "A calm TTC journal scene reflecting careful ovulation tracking." },
+  "signs-of-ovulation": { src: ttcStageCycle, alt: "A close editorial scene of cycle notes and a calendar — recognising ovulation." },
+  "fertile-window": { src: ttcStageTiming, alt: "A planning scene with a calendar and TTC notes — the fertile-window timing." },
+  "can-you-get-pregnant-on-your-period": { src: ttcStageCycle, alt: "A quiet cycle-tracking scene representing period-week fertility questions." },
+  "how-long-implantation-takes": { src: ttcStageWaiting, alt: "A still, daylit interior reflecting the wait around implantation." },
+  "two-week-wait": { src: ttcStageWaiting, alt: "A calm TTC scene representing the long fortnight of waiting." },
+  "when-to-take-a-pregnancy-test": { src: ttcStageWaiting, alt: "A pregnancy test and a softly lit calendar — choosing when to test." },
+  "faint-positive-pregnancy-test": { src: heroImplantation, alt: "An early home pregnancy test in soft daylight — reading a faint line." },
+  "chemical-pregnancy": { src: cardQuiet, alt: "A quiet, reflective scene representing very early pregnancy loss." },
+  "trying-again-after-miscarriage": { src: cardQuiet, alt: "A reflective TTC scene — the careful return to trying after loss." },
+  "trying-to-conceive-explained": { src: ttcJourney, alt: "An editorial TTC journey scene — the start of trying to conceive." },
 };
 
 // ─── Section image overrides (anchors + curated extras) ────────────────────

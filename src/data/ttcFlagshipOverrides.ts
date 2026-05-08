@@ -49,6 +49,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "How to read your body's most useful ovulation cues calmly, without turning every cycle into a full-time investigation.",
     hero: {
       src: week2Ovulation,
       alt: "A calm close view of hands resting low over the abdomen, reflecting attention to the ovulation window.",
@@ -150,6 +152,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "Your fertile days are shorter than the internet suggests, and steadier than most apps imply. Here's what actually matters for TTC timing.",
     hero: {
       src: ttcStageTiming,
       alt: "A premium editorial scene of a calendar and gentle TTC planning notes, representing fertile-window timing.",
@@ -239,6 +243,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "Implantation usually happens 6–12 days after ovulation. What that means for testing, symptoms, and how long the real wait truly is.",
     hero: {
       src: heroImplantation,
       alt: "A calm bedside scene in soft morning light, representing the quiet uncertainty of implantation timing.",
@@ -327,6 +333,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "Testing too early is the most common reason TTC feels unbearable. Here's the honest, evidence-led guide to when results actually become reliable.",
     hero: {
       src: guidanceTTC,
       alt: "A premium TTC guidance image representing the decision of when to take a pregnancy test.",
@@ -415,6 +423,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "A faint line is almost always a real positive. What it means, what to do next, and how to think clearly through the next 48 hours.",
     hero: {
       src: cardQuiet,
       alt: "A soft editorial scene representing the uncertainty of seeing a faint positive pregnancy test.",
@@ -503,6 +513,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive", "support"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "A chemical pregnancy is a very early miscarriage that often goes unnoticed. What it is, what it means, and why it does not predict your future TTC outcomes.",
     hero: {
       src: heroThirdEmotional,
       alt: "A soft, reflective emotional image representing the grief and tenderness around a chemical pregnancy.",
@@ -591,6 +603,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive", "support"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "There is no single right time to try again. Honest guidance on the medical, emotional, and practical questions that come after loss.",
     hero: {
       src: heroSecondAnxiety,
       alt: "A calm reflective portrait-style image representing the mixed hope and fear of trying again after miscarriage.",
@@ -679,6 +693,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "Period-sex pregnancies are uncommon but not impossible. Here's the cycle science and what it really means for TTC and contraception.",
     hero: {
       src: ttcStageCycle,
       alt: "A TTC cycle visual representing questions about bleeding, cycle length, and fertility timing.",
@@ -767,6 +783,24 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive", "pregnancy"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "What implantation bleeding actually looks like, when it happens, and how to tell it apart from the start of a period.",
+    hero: {
+      src: heroImplantationBleeding,
+      alt: "A quiet bedside scene in soft daylight — the calm context of very early pregnancy spotting.",
+    },
+    keyTakeaways: [
+      "Implantation bleeding is usually light, short-lived, and happens around 6–12 days after ovulation.",
+      "It tends to be pink or brown rather than bright red, and rarely fills a pad or tampon.",
+      "Many people who go on to have healthy pregnancies never experience implantation bleeding at all.",
+      "Heavy, bright-red, or clot-filled bleeding is not implantation bleeding and should be reviewed.",
+    ],
+    sources: [
+      "NHS — Vaginal bleeding in pregnancy",
+      "NICE — Ectopic pregnancy and miscarriage (NG126)",
+      "Tommy's — Bleeding in early pregnancy",
+      "RCOG — Early pregnancy loss patient information",
+    ],
     relatedSlugs: ["how-long-implantation-takes", "when-to-take-a-pregnancy-test", "faint-positive-pregnancy-test"],
     relatedStage: {
       intro: "Related TTC guidance:",
@@ -776,16 +810,79 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
         { label: "Two-week wait", href: "/articles/two-week-wait" },
       ],
     },
+    faq: [
+      {
+        question: "How can I tell implantation bleeding from a period?",
+        answer: "Implantation bleeding is usually much lighter than a period, often pink or brown, and lasts hours to a couple of days rather than building into a full flow. A period typically starts light, then gets heavier and redder.",
+      },
+      {
+        question: "Does no implantation bleeding mean I'm not pregnant?",
+        answer: "No. Most people do not experience implantation bleeding even in healthy pregnancies. Its absence is not a sign that conception did not happen.",
+      },
+      {
+        question: "Should I take a pregnancy test if I think I had implantation bleeding?",
+        answer: "It is usually most reliable to wait until the day your period was due before testing. Testing earlier can give a false negative even if implantation has happened.",
+      },
+    ],
+    editorialSections: [
+      {
+        id: "what-implantation-bleeding-is",
+        heading: "What implantation bleeding actually is",
+        lead: "A small amount of spotting can happen as a fertilised egg embeds into the uterine lining. It is usually subtle, not dramatic.",
+        paragraphs: [
+          "Implantation bleeding tends to happen 6 to 12 days after ovulation, roughly a few days before a period would be due. It is often only enough to notice on wiping, or as light spotting on underwear, rather than anything that fills a pad.",
+          "Colour is usually pink or brown rather than bright red, because the small amount of blood has had time to oxidise on its way out. It is also typically short — often just a few hours, sometimes up to a day or two.",
+        ],
+        image: { src: heroImplantation, alt: "A calm early-pregnancy bedside scene in soft daylight." },
+      },
+      {
+        id: "how-to-tell-it-apart-from-a-period",
+        heading: "How to tell it apart from a period",
+        lead: "The most useful clues are flow, colour, and how it changes over time.",
+        paragraphs: [
+          "A period usually starts light and then gets heavier across the first day or two, with brighter red blood and small clots. Implantation bleeding stays light, does not build, and tends to be more pink or brown than vivid red.",
+          "Cramping can happen with both, but implantation cramps tend to be milder and shorter than the kind of cramps that come with a full period.",
+        ],
+        image: { src: cardComfort, alt: "A soft home setting reflecting quiet self-attention during early pregnancy." },
+      },
+      {
+        id: "when-bleeding-is-not-implantation",
+        heading: "When bleeding is not implantation, and what to do",
+        lead: "Some bleeding in early pregnancy needs to be reviewed, even if it turns out to be nothing serious.",
+        paragraphs: [
+          "Heavy bleeding, bright-red bleeding, bleeding with significant pain, or bleeding that fills pads should not be assumed to be implantation. It needs to be checked, usually by your GP or an early pregnancy unit.",
+          "Most early bleeding turns out to have a benign explanation, but it is appropriate to ask for review rather than wait it out at home, especially if you have had a positive pregnancy test or a previous loss.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Heavy or painful bleeding in early pregnancy should be reviewed. Contact your GP, midwife, or local early pregnancy unit.",
+        },
+      },
+    ],
   },
 
   "early-pregnancy-symptoms-explained": {
     journey: ["trying-to-conceive", "pregnancy"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "What to expect in the first weeks, why symptoms vary so much between people, and what is genuinely worth a call to your midwife or GP.",
     hero: {
       src: heroEarlySymptoms,
       alt: "An early home pregnancy test and a softly lit calendar, representing the first signs after TTC.",
     },
+    keyTakeaways: [
+      "Early pregnancy symptoms are driven by rising hCG and progesterone and can begin within days of a positive test.",
+      "Common signs include nausea, fatigue, sore breasts, food aversions, and mood shifts — but no two pregnancies feel the same.",
+      "Having very few symptoms is common and not a reliable sign that something is wrong.",
+      "Severe vomiting, bleeding with pain, or one-sided pain should always be checked.",
+    ],
+    sources: [
+      "NHS — Signs and symptoms of pregnancy",
+      "NICE — Antenatal care (NG201)",
+      "Tommy's — Early pregnancy",
+      "RCOG — Hyperemesis gravidarum patient information",
+    ],
     relatedSlugs: ["implantation-bleeding", "when-to-take-a-pregnancy-test", "symptoms-stopping-early-pregnancy"],
     relatedStage: {
       intro: "Related TTC guidance:",
@@ -795,12 +892,63 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
         { label: "TTC Hub", href: "/trying-to-conceive" },
       ],
     },
+    faq: [
+      {
+        question: "When do early pregnancy symptoms usually start?",
+        answer: "Many people start to notice changes around 4 to 6 weeks of pregnancy, though some notice nothing until later. Symptoms often increase as hCG rises in the first trimester.",
+      },
+      {
+        question: "Is it normal to feel almost nothing in early pregnancy?",
+        answer: "Yes. Some people have very few symptoms, especially in the first few weeks, and go on to have completely healthy pregnancies. A quiet body is not the same as a problem.",
+      },
+      {
+        question: "Which symptoms should prompt a call?",
+        answer: "Heavy bleeding, persistent one-sided pain, fainting, or vomiting that prevents you keeping fluids down should all be reviewed promptly by your GP, midwife, or local early pregnancy unit.",
+      },
+    ],
+    editorialSections: [
+      {
+        id: "what-causes-early-symptoms",
+        heading: "What is actually driving early pregnancy symptoms",
+        lead: "Most of what you feel in early pregnancy is hormonal. hCG and progesterone change quickly, and your body responds.",
+        paragraphs: [
+          "After implantation, hCG rises rapidly. It is the hormone home pregnancy tests detect, and it is also responsible for a lot of early nausea, breast tenderness, and food aversions.",
+          "Progesterone rises too, which slows digestion, increases body temperature slightly, and contributes to fatigue. The combination is part of why early pregnancy can feel surprisingly heavy even before there is much to see.",
+        ],
+        image: { src: heroEarlySymptoms, alt: "An early pregnancy test and a calendar in soft daylight." },
+      },
+      {
+        id: "common-early-symptoms",
+        heading: "The most common early symptoms",
+        lead: "Symptoms vary, but a recognisable cluster shows up across most early pregnancies.",
+        paragraphs: [
+          "Tiredness, breast tenderness, nausea, food aversions, increased sense of smell, and mood swings are some of the most commonly reported early signs. They can come and go across the day rather than being constant.",
+          "Mild cramping, light spotting, and a feeling of fullness in the lower abdomen are also common in the first weeks. Most of this is normal and reflects the uterus and hormones adjusting.",
+        ],
+        image: { src: cardBody, alt: "A soft, daylit interior reflecting the quiet, inward feel of the first weeks of pregnancy." },
+      },
+      {
+        id: "when-to-call",
+        heading: "When to call about early pregnancy symptoms",
+        lead: "Most early symptoms are normal, but a few warrant a real conversation with a clinician rather than another internet search.",
+        paragraphs: [
+          "Heavy or persistent bleeding, severe one-sided pain, shoulder-tip pain, fainting, or being unable to keep any fluids down all need review. They do not always mean something is wrong, but they need to be checked.",
+          "If your symptoms suddenly disappear and you feel worried, it is reasonable to be in touch — particularly if you have a history of loss or any specific risk factors. Reassurance is part of what early pregnancy care is for.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Severe pain, heavy bleeding, or being unable to keep fluids down should always be reviewed. Contact your GP, midwife, or NHS 111.",
+        },
+      },
+    ],
   },
 
   "symptoms-stopping-early-pregnancy": {
     journey: ["trying-to-conceive", "pregnancy"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "Symptoms can come and go in early pregnancy and that fluctuation is usually normal. When the change is reassuring, and when to check in.",
     hero: {
       src: heroSymptomsStopping,
       alt: "A calm early-pregnancy scene representing the anxiety that follows symptom changes after TTC.",
@@ -890,6 +1038,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "The everyday body cues that tell you ovulation is approaching, and how to use them without making every cycle feel like an exam.",
     hero: {
       src: ttcStageCycle,
       alt: "A premium TTC cycle image representing the practical side of reading ovulation signs.",
@@ -977,6 +1127,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "Why the two-week wait feels so long, what is actually happening inside, and how to look after yourself across the hardest fortnight of TTC.",
     hero: {
       src: ttcStageWaiting,
       alt: "A calm waiting-focused TTC hero image representing the emotional weight of the two-week wait.",

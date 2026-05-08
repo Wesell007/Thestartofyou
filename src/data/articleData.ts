@@ -14180,8 +14180,17 @@ const articleDatabase: ArticleData[] = [
 
 // ─── Public API ────────────────────────────────────────────────────────────
 
-export const getArticle = (slug: string): ArticleData | null =>
-  articleDatabase.find((a) => a.slug === slug) ?? null;
+import { ttcFlagshipOverrides } from "@/data/ttcFlagshipOverrides";
+
+export const getArticle = (slug: string): ArticleData | null => {
+  const base = articleDatabase.find((a) => a.slug === slug) ?? null;
+  if (!base) return null;
+  const override = ttcFlagshipOverrides[slug];
+  if (!override) return base;
+  // Merge override on top of base so TTC-primary articles render through the
+  // flagship template with the upgraded structure.
+  return { ...base, ...override } as ArticleData;
+};
 
 export const getAllArticles = (): ArticleData[] => articleDatabase;
 

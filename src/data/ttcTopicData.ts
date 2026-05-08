@@ -121,6 +121,11 @@ const LIVE = {
   chemicalPregnancy: "/articles/chemical-pregnancy",
   tryingAgain: "/articles/trying-again-after-miscarriage",
   pregnantOnPeriod: "/articles/can-you-get-pregnant-on-your-period",
+
+  // Phase N (TTC de-dup gap fillers)
+  howLongToTry: "/articles/how-long-to-try-before-getting-help",
+  pcosTTC: "/articles/pcos-and-trying-to-conceive",
+  endoTTC: "/articles/endometriosis-and-trying-to-conceive",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────
@@ -168,7 +173,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         description: "What it is, when it happens, and why it matters.",
         links: [
           { label: "Ovulation signs", href: LIVE.ovulationSigns },
-          { label: "Signs of ovulation", href: LIVE.signsOfOvulation },
           { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
         ],
       },
@@ -269,14 +273,14 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         why: "The wider orientation — what fertility actually means month to month.",
       },
       {
+        title: "How long to try before getting help",
+        href: LIVE.howLongToTry,
+        why: "Honest UK guidance on when fertility help becomes a sensible next step.",
+      },
+      {
         title: "The two-week wait",
         href: LIVE.twoWeekWaitArticle,
         why: "A grounded guide to the in-between time, where most TTC anxiety lives.",
-      },
-      {
-        title: "Pregnancy testing in TTC",
-        href: LIVE.pregnancyTests,
-        why: "When to test, what early signs can mean, and how to read a result.",
       },
     ],
     groups: [
@@ -284,20 +288,16 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Understanding fertility",
         links: [
           { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
+          { label: "How long to try before getting help", href: LIVE.howLongToTry },
           { label: "The fertile window", href: LIVE.fertileWindow },
-          { label: "Ovulation signs", href: LIVE.ovulationSigns },
         ],
       },
       {
         label: "When you're waiting and wondering",
-        description: "The two-week wait, testing, and what early signs mean.",
+        description: "Goes deeper inside the dedicated subtopics.",
         links: [
-          { label: "The two-week wait", href: LIVE.twoWeekWaitArticle },
-          { label: "How long implantation takes", href: LIVE.implantationTiming },
-          { label: "When to take a pregnancy test", href: LIVE.whenToTest },
-          { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
+          { label: "The two-week wait", href: LIVE.twoWeekWait },
           { label: "Pregnancy testing in TTC", href: LIVE.pregnancyTests },
-          { label: "Implantation bleeding", href: LIVE.implantationBleeding },
         ],
       },
       {
@@ -313,6 +313,8 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "When to think about extra support",
         links: [
           { label: "Conditions that can affect TTC", href: LIVE.conditions },
+          { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
+          { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
           { label: "What is IVF?", href: LIVE.ivfPage },
         ],
       },
@@ -512,9 +514,9 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "Signs of ovulation",
-        href: LIVE.signsOfOvulation,
-        why: "The body signs you can quietly notice without obsessing.",
+        title: "Ovulation signs",
+        href: LIVE.ovulationSigns,
+        why: "How to read your body's most useful ovulation cues without spiralling.",
       },
       {
         title: "Calculate your fertile window",
@@ -539,9 +541,8 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       {
         label: "Going a little deeper",
         links: [
-          { label: "Signs of ovulation", href: LIVE.signsOfOvulation },
           { label: "Can you get pregnant on your period?", href: LIVE.pregnantOnPeriod },
-          { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
+          { label: "Signs of ovulation (quick reference)", href: LIVE.signsOfOvulation },
         ],
       },
     ],
@@ -597,10 +598,10 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       },
       {
         label: "Reading what you see",
+        description: "Interpreting unclear results and ambiguous symptoms.",
         links: [
           { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
           { label: "Implantation bleeding", href: LIVE.implantationBleeding },
-          { label: "Early pregnancy symptoms explained", href: LIVE.earlySymptoms },
         ],
       },
       {
@@ -658,18 +659,18 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     groups: [
       {
         label: "Worries during the wait",
-        description: "The questions that tend to surface in these days.",
+        description: "The emotional and physical questions that surface in these days.",
         links: [
           { label: "How long implantation takes", href: LIVE.implantationTiming },
-          { label: "Implantation bleeding", href: LIVE.implantationBleeding },
           { label: "When pregnancy symptoms stop", href: LIVE.symptomsStopping },
+          { label: "Early pregnancy symptoms explained", href: LIVE.earlySymptoms },
         ],
       },
       {
-        label: "Testing and reading the result",
+        label: "When you're ready to test",
+        description: "Continue into the testing subtopic for timing and result reading.",
         links: [
-          { label: "When to take a pregnancy test", href: LIVE.whenToTest },
-          { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
+          { label: "Pregnancy testing in TTC", href: LIVE.pregnancyTests },
         ],
       },
       {
@@ -709,32 +710,40 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "Trying to conceive, explained",
-        href: LIVE.ttcExplained,
-        why: "Background reading before going deeper into specific factors.",
+        title: "PCOS and trying to conceive",
+        href: LIVE.pcosTTC,
+        why: "What PCOS means for ovulation and conception, and where to start.",
       },
       {
-        title: "What is IVF?",
-        href: LIVE.ivfPage,
-        why: "Useful context if conditions are part of why treatment is being discussed.",
+        title: "Endometriosis and trying to conceive",
+        href: LIVE.endoTTC,
+        why: "How endometriosis can shape fertility, and what tends to help.",
       },
       {
-        title: "Ask a question",
-        href: LIVE.ask,
-        why: "For anything specific to your health that doesn't have a tidy article.",
+        title: "How long to try before getting help",
+        href: LIVE.howLongToTry,
+        why: "Honest UK guidance on when to bring fertility into a GP conversation.",
       },
     ],
     groups: [
       {
-        label: "Where to start",
+        label: "Specific conditions",
         links: [
-          { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
+          { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
+          { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
+        ],
+      },
+      {
+        label: "Knowing when to seek support",
+        links: [
+          { label: "How long to try before getting help", href: LIVE.howLongToTry },
           { label: "What is IVF?", href: LIVE.ivfPage },
+          { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
         ],
       },
     ],
     curationNote:
-      "Condition-specific guidance (PCOS, endometriosis, thyroid, fibroids) is on the way. For now, ask anything specific below or speak to your GP.",
+      "Thyroid, fibroids, and male-factor condition guidance is on the way. For anything specific, ask below or speak to your GP.",
     aiPrompts: [
       "Could PCOS be affecting my chances?",
       "Does endometriosis affect fertility?",

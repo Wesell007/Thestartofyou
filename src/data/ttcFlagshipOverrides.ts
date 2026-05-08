@@ -49,6 +49,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "How to read your body's most useful ovulation cues calmly, without turning every cycle into a full-time investigation.",
     hero: {
       src: week2Ovulation,
       alt: "A calm close view of hands resting low over the abdomen, reflecting attention to the ovulation window.",
@@ -150,6 +152,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "Your fertile days are shorter than the internet suggests, and steadier than most apps imply. Here's what actually matters for TTC timing.",
     hero: {
       src: ttcStageTiming,
       alt: "A premium editorial scene of a calendar and gentle TTC planning notes, representing fertile-window timing.",
@@ -239,6 +243,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "Implantation usually happens 6–12 days after ovulation. What that means for testing, symptoms, and how long the real wait truly is.",
     hero: {
       src: heroImplantation,
       alt: "A calm bedside scene in soft morning light, representing the quiet uncertainty of implantation timing.",
@@ -327,6 +333,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "Testing too early is the most common reason TTC feels unbearable. Here's the honest, evidence-led guide to when results actually become reliable.",
     hero: {
       src: guidanceTTC,
       alt: "A premium TTC guidance image representing the decision of when to take a pregnancy test.",
@@ -415,6 +423,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "A faint line is almost always a real positive. What it means, what to do next, and how to think clearly through the next 48 hours.",
     hero: {
       src: cardQuiet,
       alt: "A soft editorial scene representing the uncertainty of seeing a faint positive pregnancy test.",
@@ -503,6 +513,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive", "support"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "A chemical pregnancy is a very early miscarriage that often goes unnoticed. What it is, what it means, and why it does not predict your future TTC outcomes.",
     hero: {
       src: heroThirdEmotional,
       alt: "A soft, reflective emotional image representing the grief and tenderness around a chemical pregnancy.",
@@ -591,6 +603,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive", "support"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "There is no single right time to try again. Honest guidance on the medical, emotional, and practical questions that come after loss.",
     hero: {
       src: heroSecondAnxiety,
       alt: "A calm reflective portrait-style image representing the mixed hope and fear of trying again after miscarriage.",
@@ -679,6 +693,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "Period-sex pregnancies are uncommon but not impossible. Here's the cycle science and what it really means for TTC and contraception.",
     hero: {
       src: ttcStageCycle,
       alt: "A TTC cycle visual representing questions about bleeding, cycle length, and fertility timing.",
@@ -767,6 +783,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive", "pregnancy"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "What implantation bleeding actually looks like, when it happens, and how to tell it apart from the start of a period.",
     relatedSlugs: ["how-long-implantation-takes", "when-to-take-a-pregnancy-test", "faint-positive-pregnancy-test"],
     relatedStage: {
       intro: "Related TTC guidance:",
@@ -782,6 +800,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive", "pregnancy"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "What to expect in the first weeks, why symptoms vary so much between people, and what is genuinely worth a call to your midwife or GP.",
     hero: {
       src: heroEarlySymptoms,
       alt: "An early home pregnancy test and a softly lit calendar, representing the first signs after TTC.",
@@ -801,6 +821,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive", "pregnancy"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "Symptoms can come and go in early pregnancy and that fluctuation is usually normal. When the change is reassuring, and when to check in.",
     hero: {
       src: heroSymptomsStopping,
       alt: "A calm early-pregnancy scene representing the anxiety that follows symptom changes after TTC.",
@@ -890,6 +912,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "The everyday body cues that tell you ovulation is approaching, and how to use them without making every cycle feel like an exam.",
     hero: {
       src: ttcStageCycle,
       alt: "A premium TTC cycle image representing the practical side of reading ovulation signs.",
@@ -977,6 +1001,8 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     journey: ["trying-to-conceive"],
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
+    standfirst:
+      "Why the two-week wait feels so long, what is actually happening inside, and how to look after yourself across the hardest fortnight of TTC.",
     hero: {
       src: ttcStageWaiting,
       alt: "A calm waiting-focused TTC hero image representing the emotional weight of the two-week wait.",

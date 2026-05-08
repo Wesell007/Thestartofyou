@@ -659,18 +659,18 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     groups: [
       {
         label: "Worries during the wait",
-        description: "The questions that tend to surface in these days.",
+        description: "The emotional and physical questions that surface in these days.",
         links: [
           { label: "How long implantation takes", href: LIVE.implantationTiming },
-          { label: "Implantation bleeding", href: LIVE.implantationBleeding },
           { label: "When pregnancy symptoms stop", href: LIVE.symptomsStopping },
+          { label: "Early pregnancy symptoms explained", href: LIVE.earlySymptoms },
         ],
       },
       {
-        label: "Testing and reading the result",
+        label: "When you're ready to test",
+        description: "Continue into the testing subtopic for timing and result reading.",
         links: [
-          { label: "When to take a pregnancy test", href: LIVE.whenToTest },
-          { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
+          { label: "Pregnancy testing in TTC", href: LIVE.pregnancyTests },
         ],
       },
       {

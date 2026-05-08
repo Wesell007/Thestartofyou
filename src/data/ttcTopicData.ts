@@ -710,32 +710,40 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "Trying to conceive, explained",
-        href: LIVE.ttcExplained,
-        why: "Background reading before going deeper into specific factors.",
+        title: "PCOS and trying to conceive",
+        href: LIVE.pcosTTC,
+        why: "What PCOS means for ovulation and conception, and where to start.",
       },
       {
-        title: "What is IVF?",
-        href: LIVE.ivfPage,
-        why: "Useful context if conditions are part of why treatment is being discussed.",
+        title: "Endometriosis and trying to conceive",
+        href: LIVE.endoTTC,
+        why: "How endometriosis can shape fertility, and what tends to help.",
       },
       {
-        title: "Ask a question",
-        href: LIVE.ask,
-        why: "For anything specific to your health that doesn't have a tidy article.",
+        title: "How long to try before getting help",
+        href: LIVE.howLongToTry,
+        why: "Honest UK guidance on when to bring fertility into a GP conversation.",
       },
     ],
     groups: [
       {
-        label: "Where to start",
+        label: "Specific conditions",
         links: [
-          { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
+          { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
+          { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
+        ],
+      },
+      {
+        label: "Knowing when to seek support",
+        links: [
+          { label: "How long to try before getting help", href: LIVE.howLongToTry },
           { label: "What is IVF?", href: LIVE.ivfPage },
+          { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
         ],
       },
     ],
     curationNote:
-      "Condition-specific guidance (PCOS, endometriosis, thyroid, fibroids) is on the way. For now, ask anything specific below or speak to your GP.",
+      "Thyroid, fibroids, and male-factor condition guidance is on the way. For anything specific, ask below or speak to your GP.",
     aiPrompts: [
       "Could PCOS be affecting my chances?",
       "Does endometriosis affect fertility?",

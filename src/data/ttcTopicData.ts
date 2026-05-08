@@ -273,14 +273,14 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         why: "The wider orientation — what fertility actually means month to month.",
       },
       {
+        title: "How long to try before getting help",
+        href: LIVE.howLongToTry,
+        why: "Honest UK guidance on when fertility help becomes a sensible next step.",
+      },
+      {
         title: "The two-week wait",
         href: LIVE.twoWeekWaitArticle,
         why: "A grounded guide to the in-between time, where most TTC anxiety lives.",
-      },
-      {
-        title: "Pregnancy testing in TTC",
-        href: LIVE.pregnancyTests,
-        why: "When to test, what early signs can mean, and how to read a result.",
       },
     ],
     groups: [
@@ -288,20 +288,16 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Understanding fertility",
         links: [
           { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
+          { label: "How long to try before getting help", href: LIVE.howLongToTry },
           { label: "The fertile window", href: LIVE.fertileWindow },
-          { label: "Ovulation signs", href: LIVE.ovulationSigns },
         ],
       },
       {
         label: "When you're waiting and wondering",
-        description: "The two-week wait, testing, and what early signs mean.",
+        description: "Goes deeper inside the dedicated subtopics.",
         links: [
-          { label: "The two-week wait", href: LIVE.twoWeekWaitArticle },
-          { label: "How long implantation takes", href: LIVE.implantationTiming },
-          { label: "When to take a pregnancy test", href: LIVE.whenToTest },
-          { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
+          { label: "The two-week wait", href: LIVE.twoWeekWait },
           { label: "Pregnancy testing in TTC", href: LIVE.pregnancyTests },
-          { label: "Implantation bleeding", href: LIVE.implantationBleeding },
         ],
       },
       {
@@ -317,6 +313,8 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "When to think about extra support",
         links: [
           { label: "Conditions that can affect TTC", href: LIVE.conditions },
+          { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
+          { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
           { label: "What is IVF?", href: LIVE.ivfPage },
         ],
       },

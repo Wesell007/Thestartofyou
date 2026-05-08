@@ -70,6 +70,12 @@ import cardSafety from "@/assets/guidance-card-safety.jpg";
 import cardTextiles from "@/assets/guidance-card-textiles.jpg";
 import cardWellness from "@/assets/guidance-card-wellness.jpg";
 
+// TTC-specific imagery
+import ttcStageCycle from "@/assets/ttc-stage-cycle.jpg";
+import ttcStageTiming from "@/assets/ttc-stage-timing.jpg";
+import ttcStageWaiting from "@/assets/ttc-stage-waiting.jpg";
+import ttcJourney from "@/assets/ttc-journey.jpg";
+
 type Img = { src: string; alt: string };
 
 // ─── Anchor reference set (locked) ─────────────────────────────────────────

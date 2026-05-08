@@ -598,10 +598,10 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       },
       {
         label: "Reading what you see",
+        description: "Interpreting unclear results and ambiguous symptoms.",
         links: [
           { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
           { label: "Implantation bleeding", href: LIVE.implantationBleeding },
-          { label: "Early pregnancy symptoms explained", href: LIVE.earlySymptoms },
         ],
       },
       {

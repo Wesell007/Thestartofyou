@@ -35,7 +35,11 @@ const ArticleFlagshipTemplate = ({ data }: Props) => {
 
       {/* Substance — alternating image/text editorial modules */}
       {sections.length > 0 && (
-        <FlagshipEditorialSections slug={data.slug} sections={sections} />
+        <FlagshipEditorialSections
+          slug={data.slug}
+          sections={sections}
+          heroSrc={data.hero?.src}
+        />
       )}
 
       {/* Single bordered card with two columns */}

@@ -15,6 +15,7 @@ interface Props {
 }
 
 const ArticleTopicReturn = ({ data }: Props) => {
+  const isTTC = data.journey?.includes("trying-to-conceive");
   const topicLabel = data.topic ? TOPIC_LABELS[data.topic] : null;
   const topicHref = data.topic ? `/pregnancy/${data.topic}` : null;
 
@@ -22,7 +23,7 @@ const ArticleTopicReturn = ({ data }: Props) => {
     <section className="bg-parchment py-14 sm:py-16 md:py-20">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3 sm:gap-6 text-center">
-          {topicLabel && topicHref && (
+          {!isTTC && topicLabel && topicHref && (
             <Link
               to={topicHref}
               className="font-sans text-[14px] sm:text-[15px] font-light text-foreground/70 hover:text-sage hover:underline underline-offset-4 transition-colors"
@@ -30,16 +31,16 @@ const ArticleTopicReturn = ({ data }: Props) => {
               ← {topicLabel}
             </Link>
           )}
-          {topicLabel && (
+          {!isTTC && topicLabel && (
             <span className="hidden sm:inline text-foreground/30" aria-hidden="true">
               ·
             </span>
           )}
           <Link
-            to="/pregnancy"
+            to={isTTC ? "/trying-to-conceive" : "/pregnancy"}
             className="font-sans text-[14px] sm:text-[15px] font-light text-foreground/70 hover:text-sage hover:underline underline-offset-4 transition-colors"
           >
-            ← The Pregnancy Map
+            ← {isTTC ? "The TTC Guide" : "The Pregnancy Map"}
           </Link>
         </div>
       </div>

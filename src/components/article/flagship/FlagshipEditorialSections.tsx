@@ -5,6 +5,7 @@ import { resolveSectionImage, flagshipHeroMap } from "./flagshipImageMap";
 interface Props {
   slug: string;
   sections: EditorialSection[];
+  heroSrc?: string;
 }
 
 const calloutStyles = {
@@ -28,16 +29,19 @@ const calloutStyles = {
   },
 };
 
-const FlagshipEditorialSections = ({ slug, sections }: Props) => {
+const FlagshipEditorialSections = ({ slug, sections, heroSrc }: Props) => {
   // Seed with the hero src so no section can duplicate the hero image.
   const usedSrcs = new Set<string>();
-  const hero = flagshipHeroMap[slug];
-  if (hero) usedSrcs.add(hero.src);
+  const hero = heroSrc ?? flagshipHeroMap[slug]?.src;
+  if (hero) usedSrcs.add(hero);
 
   return (
     <div>
       {sections.map((section, idx) => {
-        const image = resolveSectionImage(slug, section.id, section.heading, usedSrcs);
+        const explicitImage = section.image && !usedSrcs.has(section.image.src)
+          ? (usedSrcs.add(section.image.src), section.image)
+          : undefined;
+        const image = explicitImage ?? resolveSectionImage(slug, section.id, section.heading, usedSrcs);
         const isAlt = idx % 2 === 1;
         const bg = isAlt ? "bg-parchment-dark" : "bg-parchment";
 

@@ -121,6 +121,11 @@ const LIVE = {
   chemicalPregnancy: "/articles/chemical-pregnancy",
   tryingAgain: "/articles/trying-again-after-miscarriage",
   pregnantOnPeriod: "/articles/can-you-get-pregnant-on-your-period",
+
+  // Phase N (TTC de-dup gap fillers)
+  howLongToTry: "/articles/how-long-to-try-before-getting-help",
+  pcosTTC: "/articles/pcos-and-trying-to-conceive",
+  endoTTC: "/articles/endometriosis-and-trying-to-conceive",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────

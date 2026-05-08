@@ -17,9 +17,12 @@ interface Props {
 }
 
 const FlagshipHero = ({ data }: Props) => {
-  const hero = flagshipHeroMap[data.slug];
+  const isTTC = data.journey?.includes("trying-to-conceive");
+  const hero = data.hero ?? flagshipHeroMap[data.slug];
   const topicLabel = data.topic ? TOPIC_LABELS[data.topic] : null;
   const topicHref = data.topic ? `/pregnancy/${data.topic}` : null;
+  const primaryLabel = isTTC ? "The TTC Guide" : topicLabel;
+  const primaryHref = isTTC ? "/trying-to-conceive" : topicHref;
 
   return (
     <header className="bg-parchment pt-24 sm:pt-28 md:pt-32 pb-10 sm:pb-14 md:pb-20">
@@ -29,10 +32,10 @@ const FlagshipHero = ({ data }: Props) => {
           aria-label="Breadcrumb"
           className="flex items-center gap-2 mb-6 sm:mb-8 font-sans text-[11px] font-light tracking-[0.12em] uppercase text-muted-foreground/70 flex-wrap"
         >
-          <Link to="/pregnancy" className="hover:text-sage transition-colors">
-            The Pregnancy Map
+          <Link to={isTTC ? "/trying-to-conceive" : "/pregnancy"} className="hover:text-sage transition-colors">
+            {isTTC ? "The TTC Guide" : "The Pregnancy Map"}
           </Link>
-          {topicLabel && topicHref && (
+          {!isTTC && topicLabel && topicHref && (
             <>
               <span className="opacity-50" aria-hidden="true">·</span>
               <Link to={topicHref} className="hover:text-sage transition-colors">
@@ -46,11 +49,13 @@ const FlagshipHero = ({ data }: Props) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-14 items-center">
           {/* TEXT */}
           <div className="lg:col-span-7 order-2 lg:order-1">
-            {topicLabel && (
+            {primaryLabel && primaryHref && (
               <div className="flex items-center gap-3 mb-4 sm:mb-5">
                 <div className="h-px w-8 bg-sage-light" />
                 <p className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-sage-muted">
-                  {topicLabel}
+                  <Link to={primaryHref} className="hover:text-sage transition-colors">
+                    {primaryLabel}
+                  </Link>
                 </p>
               </div>
             )}

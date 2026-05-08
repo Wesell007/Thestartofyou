@@ -514,9 +514,9 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "Signs of ovulation",
-        href: LIVE.signsOfOvulation,
-        why: "The body signs you can quietly notice without obsessing.",
+        title: "Ovulation signs",
+        href: LIVE.ovulationSigns,
+        why: "How to read your body's most useful ovulation cues without spiralling.",
       },
       {
         title: "Calculate your fertile window",
@@ -541,9 +541,8 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       {
         label: "Going a little deeper",
         links: [
-          { label: "Signs of ovulation", href: LIVE.signsOfOvulation },
           { label: "Can you get pregnant on your period?", href: LIVE.pregnantOnPeriod },
-          { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
+          { label: "Signs of ovulation (quick reference)", href: LIVE.signsOfOvulation },
         ],
       },
     ],

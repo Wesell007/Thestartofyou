@@ -854,7 +854,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
           "Most early bleeding turns out to have a benign explanation, but it is appropriate to ask for review rather than wait it out at home, especially if you have had a positive pregnancy test or a previous loss.",
         ],
         callout: {
-          tone: "caution",
+          tone: "gentle-warning",
           text: "Heavy or painful bleeding in early pregnancy should be reviewed. Contact your GP, midwife, or local early pregnancy unit.",
         },
       },
@@ -936,7 +936,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
           "If your symptoms suddenly disappear and you feel worried, it is reasonable to be in touch — particularly if you have a history of loss or any specific risk factors. Reassurance is part of what early pregnancy care is for.",
         ],
         callout: {
-          tone: "caution",
+          tone: "gentle-warning",
           text: "Severe pain, heavy bleeding, or being unable to keep fluids down should always be reviewed. Contact your GP, midwife, or NHS 111.",
         },
       },

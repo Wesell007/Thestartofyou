@@ -14176,6 +14176,294 @@ const articleDatabase: ArticleData[] = [
       { question: "Why does this depend on cycle length?", answer: "Shorter cycles mean ovulation arrives sooner. If sperm are still alive when ovulation happens, conception is possible." },
     ],
   },
+
+  // ─── PHASE N: TTC GAP CLUSTER ───────────────────────────────────────────
+  // Three high-value TTC gap articles addressing condition-specific fertility
+  // questions and the "when do I seek help" question. All flagship-shaped.
+
+  // ─── HOW LONG TO TRY BEFORE GETTING HELP ────────────────────────────────
+  {
+    slug: "how-long-to-try-before-getting-help",
+    title: "How long to try before getting fertility help",
+    metaDescription: "UK guidance on when to see your GP about fertility, what counts as 'trying long enough', and what tends to happen at a first appointment.",
+    quickAnswer: "In the UK, NICE guidance suggests speaking to your GP after 12 months of regular unprotected intercourse without conception, or after 6 months if you're 36 or older or have a known reason that may affect fertility. Earlier conversations are reasonable if you're worried.",
+    standfirst: "There is no exact deadline for when to ask for fertility help, but there are honest, calm benchmarks worth knowing.",
+    howThisFeels: ["Wondering if you're being impatient", "Quietly worried it's taking longer than it should", "Unsure whether your situation 'counts' yet"],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Most pregnancies happen within a year", body: "Around 80–85% of couples conceive within 12 months of regular, well-timed intercourse. The remaining group includes plenty of people who go on to conceive in year two without intervention." },
+        { heading: "Age changes the timeline", body: "Fertility gradually declines from the mid-30s, which is why guidance suggests talking to a GP after 6 months once you're 36 or over." },
+        { heading: "Some situations warrant earlier help", body: "Irregular or absent periods, known conditions like PCOS or endometriosis, previous fertility issues, or a history of cancer treatment all justify an earlier conversation." },
+      ],
+      lessCauses: [
+        { heading: "Anxiety alone is reason enough to ask", body: "GPs would much rather see someone early than have them wait, struggle, and arrive exhausted. A first conversation is not a commitment to treatment." },
+      ],
+      whyItVaries: "Conception likelihood depends on age, cycle regularity, timing, sperm health, and luck. The 12-month rule is a population-level benchmark, not a personal verdict.",
+    },
+    timing: { whenStarts: "The clock typically starts when you stop using contraception with the intention of conceiving.", whenEases: "A GP conversation can happen any time before the formal benchmark if you're concerned." },
+    whatItFeelsLike: ["A growing, quiet sense that you'd like to know more", "Hesitation about 'wasting the GP's time'", "Relief when someone takes you seriously"],
+    whatThisMeans: "The 12 and 6 month figures are not pass/fail tests. They are the points at which the NHS expects you to be offered initial fertility checks if you ask.",
+    normal: ["Conceiving in months 4–12 with no intervention", "Cycles that take a few months to settle after stopping contraception", "Wanting reassurance before the official benchmark"],
+    seekSupport: ["Periods that are absent, very irregular, or very heavy", "Known fertility-affecting conditions in either partner", "A previous miscarriage or fertility concern that is weighing on you"],
+    disclaimer: "This is general UK guidance, not a clinical assessment. Your GP can tailor advice to your situation.",
+    whatYouCanDo: [
+      { action: "Track a few cycles before the appointment", reason: "Honest dates and cycle length are the most useful thing to bring." },
+      { action: "Both partners should be involved", reason: "Around a third of cases involve a male-factor element, so semen analysis is part of standard checks." },
+      { action: "Ask for the standard initial fertility tests", reason: "Bloods, hormone checks, and semen analysis are usually the first step." },
+      { action: "Don't wait if something feels wrong", reason: "An early appointment is rarely the wrong call." },
+    ],
+    whatHappensNext: "After the standard checks, your GP may refer you to a fertility clinic for further investigation or treatment, depending on results.",
+    relatedStage: { intro: "Related:", links: [{ label: "Trying to conceive, explained", href: "/articles/trying-to-conceive-explained" }, { label: "Conditions that can affect TTC", href: "/trying-to-conceive/conditions" }, { label: "TTC Hub", href: "/trying-to-conceive" }] },
+    aiPrompts: ["When should I see my GP about fertility?", "What happens at a first fertility appointment?", "Is 6 months long enough to ask for help?"],
+    captureIntro: "Choosing when to ask for help is part of the TTC story too.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines"],
+    relatedSlugs: ["trying-to-conceive-explained", "pcos-and-trying-to-conceive", "endometriosis-and-trying-to-conceive"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    sources: ["NHS — Infertility", "NICE — Fertility problems: assessment and treatment (CG156)", "HFEA — When to seek help", "Tommy's — Trying for a baby"],
+    keyTakeaways: [
+      "NICE recommends a GP conversation after 12 months of trying — or 6 months if you're 36 or over.",
+      "Conditions like PCOS, endometriosis, or absent periods justify an earlier conversation.",
+      "An early GP appointment doesn't commit you to treatment; it simply opens the door to checks.",
+      "Both partners are usually included in the first round of investigations.",
+    ],
+    faq: [
+      { question: "How long should we try before seeing a doctor?", answer: "Most UK guidance suggests 12 months under 36, or 6 months at 36 and over. Earlier is reasonable if you have known fertility-affecting conditions or worries." },
+      { question: "Will the GP take us seriously before the benchmark?", answer: "A good GP will. You can always raise the conversation; you don't have to wait for a precise date to be allowed to ask." },
+      { question: "What tests are usually done first?", answer: "Bloods to check ovulation hormones, sometimes a thyroid check, and a semen analysis for the male partner. Further imaging may follow if needed." },
+    ],
+    editorialSections: [
+      {
+        id: "the-uk-benchmarks",
+        heading: "The UK benchmarks, in plain English",
+        lead: "The 12-month and 6-month figures are not arbitrary — they reflect when most pregnancies have already happened in well-timed cycles.",
+        paragraphs: [
+          "About 80–85% of couples conceive within a year of trying. By 18 months that figure rises further. The 12-month benchmark exists because, statistically, that's the point at which it becomes more useful to look for a reason than to keep waiting.",
+          "Once you're 36 or older, the timeline shortens to 6 months. This is partly because age-related fertility changes accumulate gradually, and partly because earlier investigation gives you more options.",
+        ],
+      },
+      {
+        id: "when-to-go-earlier",
+        heading: "When earlier is reasonable",
+        lead: "There are clear scenarios where waiting the full benchmark doesn't serve you.",
+        paragraphs: [
+          "Irregular or absent periods, very painful periods, known PCOS or endometriosis, or any history that may have affected reproductive health (such as cancer treatment, pelvic surgery, or chlamydia) are all reasons to start the conversation earlier.",
+          "On the male side, any history of testicular surgery, varicocele, mumps after puberty, or known sperm-quality concerns also justifies earlier checks.",
+        ],
+      },
+      {
+        id: "what-the-first-appointment-looks-like",
+        heading: "What a first appointment usually looks like",
+        lead: "GP fertility appointments are calmer and more straightforward than people expect.",
+        paragraphs: [
+          "A first appointment usually involves a conversation about cycle history, lifestyle, and how long you've been trying, followed by a request for basic tests. For the female partner that often means day-21 progesterone bloods and sometimes a thyroid check. For the male partner it usually means semen analysis.",
+          "Results don't always come quickly, and they don't always change the plan. A normal first round is reassuring, but doesn't rule out everything — which is why follow-up referral exists.",
+        ],
+        callout: { tone: "reassurance", text: "Asking for help is not a verdict on your fertility. It's just the next sensible step in a process that wasn't designed to be carried alone." },
+      },
+      {
+        id: "what-help-can-look-like",
+        heading: "What 'help' can look like beyond the GP",
+        lead: "Beyond the GP, fertility support sits on a spectrum.",
+        paragraphs: [
+          "Depending on results and age, your GP may refer you to a fertility clinic for further investigation — including pelvic imaging, ovarian reserve testing (such as AMH), or tubal patency tests. From there, options range from monitoring and lifestyle support to ovulation induction, IUI, or IVF.",
+          "Not everyone who asks for help ends up needing treatment. For some people, the appointment is mostly an information exercise that ends in being told to keep trying with reassurance.",
+        ],
+      },
+    ],
+  },
+
+  // ─── PCOS AND TRYING TO CONCEIVE ────────────────────────────────────────
+  {
+    slug: "pcos-and-trying-to-conceive",
+    title: "PCOS and trying to conceive: what to know",
+    metaDescription: "How PCOS affects ovulation and fertility, what tends to help, and when to ask for fertility support. Calm, evidence-aware UK guidance.",
+    quickAnswer: "PCOS (polycystic ovary syndrome) can affect fertility mainly by disrupting ovulation. Many people with PCOS conceive naturally, often with longer or less predictable cycles. When ovulation is absent or rare, lifestyle support and medication like letrozole can help, and fertility treatment is well established as a next step.",
+    standfirst: "PCOS doesn't mean you can't conceive. It usually means you may need a slightly different map for what TTC looks like.",
+    howThisFeels: ["Worried PCOS has decided things for you", "Confused by mixed messages from different sources", "Tired of vague 'lose weight' advice"],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Irregular or absent ovulation", body: "PCOS often disrupts the hormonal signal that triggers ovulation, which is the main reason it can make conception take longer." },
+        { heading: "Insulin resistance", body: "Many people with PCOS have a degree of insulin resistance, which can amplify hormonal disruption — even at lower body weights." },
+        { heading: "Higher androgen levels", body: "Elevated androgens can affect cycle regularity and contribute to symptoms like acne or excess hair." },
+      ],
+      lessCauses: [
+        { heading: "Cycle length variation", body: "Cycles in PCOS can range from short to very long, which makes timing fertile windows harder without tracking." },
+        { heading: "Egg quality concerns", body: "Egg quality is generally preserved in PCOS, even when ovulation is irregular — which is part of why outcomes are often good once ovulation happens." },
+      ],
+      whyItVaries: "PCOS is a spectrum. Some people have mild, manageable symptoms with broadly regular cycles; others have very irregular cycles and need more support to conceive.",
+    },
+    timing: { whenStarts: "PCOS effects on fertility are usually noticed when cycles are very long, irregular, or absent for several months.", whenEases: "Ovulation often improves with steady lifestyle changes or medical support like letrozole." },
+    whatItFeelsLike: ["Cycles that vary widely month to month", "Long stretches without a period", "Frustration that 'just relax' doesn't apply"],
+    whatThisMeans: "PCOS often makes conception take longer rather than impossible. Early conversations with a GP usually unlock useful, well-evidenced options.",
+    normal: ["Cycles longer than 35 days", "Needing to track ovulation more carefully than friends do", "Conceiving with letrozole-supported cycles"],
+    seekSupport: ["No periods for several months", "Trying for 6–12 months without conceiving", "Significant distress about cycle unpredictability"],
+    disclaimer: "This is general guidance, not a personal treatment plan. Speak to your GP or a fertility specialist about your situation.",
+    whatYouCanDo: [
+      { action: "Get a confirmed PCOS diagnosis if you suspect it", reason: "Diagnosis unlocks specific support and tests." },
+      { action: "Track ovulation rather than the calendar", reason: "Calendar predictions usually don't work in PCOS — mucus, OPKs, or temperature are more honest." },
+      { action: "Ask about letrozole if ovulation is absent or rare", reason: "Letrozole is now first-line for ovulation induction in PCOS in most UK clinics." },
+      { action: "Treat lifestyle as supportive, not a verdict", reason: "Sleep, movement, and steady eating help, but PCOS is not caused by lifestyle." },
+    ],
+    whatHappensNext: "If lifestyle adjustments don't restore ovulation, your GP can refer you for ovulation induction or further fertility investigation.",
+    relatedStage: { intro: "Related:", links: [{ label: "Conditions that can affect TTC", href: "/trying-to-conceive/conditions" }, { label: "How long to try before getting help", href: "/articles/how-long-to-try-before-getting-help" }, { label: "TTC Hub", href: "/trying-to-conceive" }] },
+    aiPrompts: ["Can you get pregnant with PCOS?", "What is letrozole for PCOS?", "How does PCOS affect ovulation?"],
+    captureIntro: "TTC with PCOS deserves its own steady record.",
+    journey: ["trying-to-conceive"],
+    topics: ["body-changes", "timelines"],
+    relatedSlugs: ["how-long-to-try-before-getting-help", "endometriosis-and-trying-to-conceive", "ovulation-signs"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    sources: ["NHS — PCOS", "NICE — Fertility problems: assessment and treatment (CG156)", "RCOG — Long-term consequences of PCOS", "Tommy's — PCOS and pregnancy"],
+    keyTakeaways: [
+      "PCOS most commonly affects fertility through irregular or absent ovulation.",
+      "Many people with PCOS conceive naturally; cycles may just take longer to read.",
+      "Letrozole is now first-line for ovulation induction in PCOS in the UK.",
+      "Lifestyle support helps, but PCOS is not caused by lifestyle and doesn't disappear with it.",
+    ],
+    faq: [
+      { question: "Can you get pregnant naturally with PCOS?", answer: "Yes. Many people with PCOS conceive without medication, especially when ovulation still happens regularly enough to be tracked." },
+      { question: "Does PCOS cause infertility?", answer: "PCOS is a common cause of difficulty conceiving but is highly treatable. Most people with PCOS who want to conceive ultimately do." },
+      { question: "How long should I try before asking for help with PCOS?", answer: "If your cycles are irregular or absent, an earlier GP conversation — often before the standard 12-month benchmark — is reasonable." },
+    ],
+    editorialSections: [
+      {
+        id: "what-pcos-actually-is",
+        heading: "What PCOS actually is, and what it isn't",
+        lead: "PCOS is a hormonal condition, not a structural one — and the name can mislead.",
+        paragraphs: [
+          "Despite the name, you don't need cysts on your ovaries to be diagnosed with PCOS. Diagnosis usually rests on two of three criteria: irregular or absent ovulation, signs of higher androgens (clinically or on bloods), and polycystic-appearing ovaries on scan.",
+          "PCOS sits on a spectrum. Many people with mild PCOS have broadly regular cycles and conceive without difficulty. Others have very irregular cycles and need more support. Both are common.",
+        ],
+      },
+      {
+        id: "how-pcos-affects-conception",
+        heading: "How PCOS affects conception",
+        lead: "The main TTC issue in PCOS is ovulation, not egg quality.",
+        paragraphs: [
+          "When ovulation happens less often or unpredictably, the chance of conceiving in any given month drops simply because the fertile window is harder to find. That's why PCOS is more often a 'longer journey' than a 'no journey'.",
+          "Egg quality in PCOS is generally preserved into the typical fertile years, which is part of why outcomes after treatment tend to be good.",
+        ],
+      },
+      {
+        id: "what-tends-to-help",
+        heading: "What tends to help",
+        lead: "Real PCOS support is more specific — and more effective — than the usual generic advice.",
+        paragraphs: [
+          "Steady habits that support insulin sensitivity often help: regular movement, balanced meals, enough sleep, and reducing prolonged stress. These are supportive, not magical, and shouldn't be framed as a fix.",
+          "Medically, letrozole is now the first-line option for ovulation induction in PCOS, with clomifene as an alternative. These are usually managed by a GP-referred clinic with monitoring to reduce the risk of multiples.",
+        ],
+        callout: { tone: "reassurance", text: "PCOS is one of the most studied and most treatable causes of conception difficulty. A diagnosis opens a door rather than closing one." },
+      },
+      {
+        id: "when-to-ask-for-help",
+        heading: "When to bring it up with a GP",
+        lead: "PCOS is one of the clearest cases for not waiting the full 12 months.",
+        paragraphs: [
+          "If your periods are absent, very irregular, or you suspect ovulation isn't happening, a GP conversation is reasonable from the start of trying — not after a year. Diagnosis can also unlock related health checks (blood sugar, thyroid, lipids) that are useful regardless of TTC.",
+          "If you've been trying for 6 months with PCOS and it isn't working, that's typically the point clinics start to investigate more actively.",
+        ],
+      },
+    ],
+  },
+
+  // ─── ENDOMETRIOSIS AND TRYING TO CONCEIVE ───────────────────────────────
+  {
+    slug: "endometriosis-and-trying-to-conceive",
+    title: "Endometriosis and trying to conceive: what to know",
+    metaDescription: "How endometriosis can affect fertility, what tends to help, and when to ask for fertility support. Calm, evidence-aware UK guidance.",
+    quickAnswer: "Endometriosis can affect fertility, but many people with endometriosis still conceive naturally. The impact depends on severity, location, and other factors. Earlier GP conversations are reasonable, especially if periods are very painful or if you've been trying without success for several months.",
+    standfirst: "An endometriosis diagnosis doesn't write the ending of your TTC story. It usually means a different starting point and a more specific kind of support.",
+    howThisFeels: ["Quietly braced for bad news", "Worried that pain has been dismissed for years", "Unsure whether endo has 'definitely' affected fertility"],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Pelvic anatomy changes", body: "Endometrial-like tissue outside the uterus can cause inflammation, scar tissue, and adhesions, which may affect how eggs travel." },
+        { heading: "Ovarian involvement", body: "Endometriomas (cysts) on the ovaries can affect egg reserve or quality in some cases." },
+        { heading: "Inflammatory environment", body: "Endometriosis creates a more inflammatory pelvic environment, which is thought to affect implantation in some people." },
+      ],
+      lessCauses: [
+        { heading: "Severity matters more than presence", body: "Mild endometriosis often has limited fertility impact, while severe disease (stages III–IV) is more strongly associated with reduced fertility." },
+        { heading: "Co-existing conditions", body: "Other factors — such as adenomyosis or cycle irregularity — can compound the effect of endometriosis." },
+      ],
+      whyItVaries: "Endometriosis is highly variable. Two people with the same stage can have very different fertility experiences, which is why personal assessment matters more than population statistics.",
+    },
+    timing: { whenStarts: "Endometriosis effects on fertility may become apparent when conception takes longer than expected.", whenEases: "Surgery, hormonal management, or fertility treatment can support conception depending on the situation." },
+    whatItFeelsLike: ["Painful periods that have been minimised", "Painful intercourse you've stopped mentioning", "Hope mixed with frustration"],
+    whatThisMeans: "Endometriosis is a known fertility-affecting condition that nonetheless allows many people to conceive — sometimes naturally, sometimes with support.",
+    normal: ["Conceiving with mild or moderate endometriosis", "Needing more than 12 months to conceive", "Wanting to be assessed earlier than the standard benchmark"],
+    seekSupport: ["Severe period pain not controlled by usual painkillers", "Painful intercourse", "Trying for 6 months with known or suspected endometriosis"],
+    disclaimer: "This is general guidance, not a personal treatment plan. Speak to your GP or a specialist about your situation.",
+    whatYouCanDo: [
+      { action: "Get suspected endometriosis investigated rather than dismissed", reason: "Diagnosis is often delayed; a clear picture helps planning." },
+      { action: "Ask for early referral if you're trying", reason: "Endometriosis is a recognised reason to investigate fertility before the 12-month mark." },
+      { action: "Track cycles, pain, and any symptoms", reason: "A clear log makes specialist conversations more productive." },
+      { action: "Consider whether laparoscopy or IVF fits your situation", reason: "Both have evidence in different scenarios; a specialist can guide choice." },
+    ],
+    whatHappensNext: "Depending on findings, options range from continued natural trying with monitoring to laparoscopic surgery, hormonal support, or fertility treatment such as IVF.",
+    relatedStage: { intro: "Related:", links: [{ label: "Conditions that can affect TTC", href: "/trying-to-conceive/conditions" }, { label: "How long to try before getting help", href: "/articles/how-long-to-try-before-getting-help" }, { label: "TTC Hub", href: "/trying-to-conceive" }] },
+    aiPrompts: ["Can you get pregnant with endometriosis?", "Does endometriosis cause infertility?", "Should I have laparoscopy before trying?"],
+    captureIntro: "TTC with endometriosis is its own kind of journey — worth holding onto.",
+    journey: ["trying-to-conceive"],
+    topics: ["body-changes", "timelines"],
+    relatedSlugs: ["how-long-to-try-before-getting-help", "pcos-and-trying-to-conceive", "trying-to-conceive-explained"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    sources: ["NHS — Endometriosis", "NICE — Endometriosis: diagnosis and management (NG73)", "RCOG — Endometriosis", "Endometriosis UK"],
+    keyTakeaways: [
+      "Endometriosis is a recognised fertility-affecting condition, but many people still conceive — often naturally.",
+      "Severity and location matter more than the diagnosis label alone.",
+      "Endometriosis is a clear reason to talk to a GP earlier than the standard 12-month benchmark.",
+      "Treatment options range from continued trying to surgery, hormonal support, or IVF.",
+    ],
+    faq: [
+      { question: "Can you get pregnant with endometriosis?", answer: "Yes. Many people with endometriosis conceive naturally, especially with milder disease. More severe disease may need fertility support, but does not usually mean conception is impossible." },
+      { question: "Should I have surgery before trying for a baby?", answer: "Sometimes. Laparoscopy can help in specific situations, but it's a decision to make with a specialist who knows your case." },
+      { question: "Does endometriosis always mean IVF?", answer: "No. IVF is one option in some situations, particularly with severe disease or after time without conception, but it is not automatic for every person with endometriosis." },
+    ],
+    editorialSections: [
+      {
+        id: "what-endometriosis-is",
+        heading: "What endometriosis actually is",
+        lead: "Endometriosis is a long-term condition where tissue similar to the uterine lining grows outside the uterus.",
+        paragraphs: [
+          "This tissue still responds to hormonal changes across the cycle, which can cause inflammation, pain, and over time scarring or adhesions in the pelvis. The most common symptoms are painful periods, painful intercourse, and pelvic pain that doesn't fit a 'normal cycle' picture.",
+          "Diagnosis is often delayed by years, because symptoms get normalised by both patients and clinicians. Getting taken seriously is sometimes the hardest part of the process.",
+        ],
+      },
+      {
+        id: "how-it-can-affect-fertility",
+        heading: "How endometriosis can affect fertility",
+        lead: "The link between endometriosis and fertility is real but not absolute.",
+        paragraphs: [
+          "Endometriosis can affect fertility through several routes: pelvic anatomy changes, inflammation, and in some cases ovarian involvement. The degree of impact varies widely between people.",
+          "It's important to know that many people with mild or moderate endometriosis conceive without difficulty. Severity, location, and other co-existing factors matter more than the diagnosis itself.",
+        ],
+      },
+      {
+        id: "what-can-help",
+        heading: "What can help",
+        lead: "Support depends on the situation, age, and how long you've been trying.",
+        paragraphs: [
+          "For some people with endometriosis, continued natural trying with monitoring is reasonable. For others, surgical treatment of endometriosis (often via laparoscopy) can improve fertility outcomes, particularly with deeper or more extensive disease.",
+          "Where conception isn't happening despite time and timing, IVF is well-established and effective for many people with endometriosis. Decisions are usually made together with a fertility specialist who can weigh the trade-offs.",
+        ],
+        callout: { tone: "reassurance", text: "Endometriosis can shape your TTC story. It rarely writes the ending. Most people who want to become parents do find a route that works for them." },
+      },
+      {
+        id: "when-to-ask-for-help",
+        heading: "When to ask for help",
+        lead: "Endometriosis is one of the strongest reasons to not wait the full 12 months.",
+        paragraphs: [
+          "If you have known or suspected endometriosis and you're trying to conceive, a GP conversation is reasonable from the beginning. If you've been trying for 6 months without success, that's the point most clinics start to investigate more actively.",
+          "Severe period pain, painful intercourse, or symptoms that have been dismissed in the past are all worth raising again — TTC is a valid reason to revisit them.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

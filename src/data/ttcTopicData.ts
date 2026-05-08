@@ -173,7 +173,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         description: "What it is, when it happens, and why it matters.",
         links: [
           { label: "Ovulation signs", href: LIVE.ovulationSigns },
-          { label: "Signs of ovulation", href: LIVE.signsOfOvulation },
           { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
         ],
       },

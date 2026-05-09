@@ -278,53 +278,81 @@ const TopicLibrary = () => {
       </div>
 
       {/* Supporting guides band */}
-      <div className="mt-16 mb-6">
-        <Eyebrow>Supporting guides</Eyebrow>
-        <h3 className="font-serif text-xl sm:text-2xl md:text-[1.7rem] text-foreground mb-2 leading-tight">
-          Narrower routes that <span className="italic font-normal">complement the core topics</span>
-        </h3>
-        <p className="font-sans text-sm font-light text-muted-foreground max-w-md">
-          Lighter, focused guides that sit underneath the main pillars.
+      <div className="mt-20 mb-8 flex items-end justify-between gap-6 flex-wrap">
+        <div>
+          <Eyebrow>Supporting guides</Eyebrow>
+          <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-tight">
+            Supporting <span className="italic font-normal">guides</span>
+          </h3>
+        </div>
+        <p className="font-sans text-[13.5px] font-light text-muted-foreground max-w-sm leading-relaxed">
+          More specific TTC routes for timing, testing, and fertility questions.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-        {subs.map((topic) => {
-          const Icon = topicIcons[topic.slug];
-          return (
-            <Link
-              key={topic.slug}
-              to={topic.mainHref}
-              className="group relative rounded-2xl border p-5 flex flex-col transition-all hover:-translate-y-0.5 hover:shadow-md min-h-[160px]"
-              style={{
-                background: `hsl(var(${STAGE_BG}) / 0.35)`,
-                borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)`,
-              }}
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <span
-                  className="inline-flex w-9 h-9 rounded-full items-center justify-center"
-                  style={{ background: `hsl(var(${STAGE_BG}) / 0.9)` }}
-                >
-                  <Icon size={16} strokeWidth={1.5} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
-                </span>
-                <h4 className="font-serif text-[1.05rem] text-foreground leading-snug">
-                  {topic.label}
-                </h4>
-              </div>
-              <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed flex-1">
-                {topic.description}
-              </p>
-              <span
-                className="mt-3 inline-flex items-center gap-1 font-sans text-[12px] font-medium"
-                style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+      <div
+        className="rounded-[1.5rem] border divide-y sm:divide-y-0 overflow-hidden bg-card/60"
+        style={{
+          borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)`,
+        }}
+      >
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          {subs.map((topic, i) => {
+            const Icon = topicIcons[topic.slug];
+            const colCount = 4;
+            return (
+              <li
+                key={topic.slug}
+                className="relative"
+                style={{
+                  borderRight:
+                    (i + 1) % colCount !== 0
+                      ? `1px solid hsl(var(${STAGE_ACCENT}) / 0.10)`
+                      : undefined,
+                  borderTop:
+                    i >= colCount
+                      ? `1px solid hsl(var(${STAGE_ACCENT}) / 0.10)`
+                      : undefined,
+                }}
               >
-                Open guide
-                <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </Link>
-          );
-        })}
+                <Link
+                  to={topic.mainHref}
+                  className="group block h-full p-5 sm:p-6 transition-colors hover:bg-[hsl(var(--stage-ttc)/0.4)]"
+                >
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <Icon
+                      size={14}
+                      strokeWidth={1.6}
+                      style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                    />
+                    <span
+                      className="font-sans text-[10.5px] font-medium tracking-[0.18em] uppercase"
+                      style={{ color: `hsl(var(${STAGE_ACCENT}) / 0.9)` }}
+                    >
+                      Guide
+                    </span>
+                  </div>
+                  <h4 className="font-serif text-[1.05rem] text-foreground leading-snug mb-1.5">
+                    {topic.label}
+                  </h4>
+                  <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-relaxed line-clamp-2 mb-3">
+                    {topic.description}
+                  </p>
+                  <span
+                    className="inline-flex items-center gap-1 font-sans text-[11.5px] font-medium opacity-70 group-hover:opacity-100 transition-opacity"
+                    style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                  >
+                    Read
+                    <ArrowRight
+                      size={11}
+                      className="transition-transform group-hover:translate-x-0.5"
+                    />
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </div>
 
       <div className="text-center mt-12">
@@ -362,65 +390,81 @@ const stages = [
 ];
 
 const JourneyTimeline = () => (
-  <section className="py-14 md:py-20 bg-parchment">
+  <section className="py-16 md:py-24 bg-parchment">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
-      <div className="text-center mb-12 md:mb-14">
+      <div className="text-center mb-14 md:mb-16 max-w-2xl mx-auto">
         <Eyebrow>Your TTC journey</Eyebrow>
         <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground leading-tight mb-3">
-          A gentle <span className="italic font-normal">cycle of steps</span>
+          How TTC <span className="italic font-normal">often unfolds</span>
         </h2>
-        <p className="font-sans text-sm font-light text-muted-foreground max-w-md mx-auto">
-          Trying to conceive often moves through small repeating stages.
-          Wherever you are today, you can start with the next gentle step.
+        <p className="font-sans text-[14.5px] font-light text-muted-foreground leading-relaxed">
+          A quiet, repeating rhythm. Wherever you are in the cycle today,
+          there is a gentle next step.
         </p>
       </div>
 
-      <div className="relative">
+      <div
+        className="relative rounded-[2rem] border px-6 sm:px-10 md:px-14 py-12 md:py-16 overflow-hidden"
+        style={{
+          borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)`,
+          background: `linear-gradient(180deg, hsl(var(${STAGE_BG}) / 0.4) 0%, hsl(var(--card)) 100%)`,
+          boxShadow: `0 1px 0 hsl(0 0% 100% / 0.9) inset, 0 22px 60px -34px hsl(var(${STAGE_ACCENT}) / 0.3)`,
+        }}
+      >
         <div
           aria-hidden="true"
-          className="hidden md:block absolute left-[8%] right-[8%] top-7 h-px"
+          className="hidden md:block absolute left-[12%] right-[12%] top-[6.25rem] h-px"
           style={{
-            background: `linear-gradient(90deg, transparent, hsl(var(${STAGE_ACCENT}) / 0.4), transparent)`,
+            background: `linear-gradient(90deg, transparent 0%, hsl(var(${STAGE_ACCENT}) / 0.35) 18%, hsl(var(${STAGE_ACCENT}) / 0.35) 82%, transparent 100%)`,
           }}
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 md:gap-6">
+        <ol className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-6">
           {stages.map((s, i) => (
-            <div
-              key={s.label}
-              className="relative bg-card border rounded-[1.25rem] p-6 text-center"
-              style={{
-                borderColor: `hsl(var(${STAGE_ACCENT}) / 0.16)`,
-                boxShadow: `0 1px 0 hsl(0 0% 100% / 0.9) inset, 0 14px 36px -24px hsl(var(${STAGE_ACCENT}) / 0.22)`,
-              }}
-            >
-              {s.here && (
+            <li key={s.label} className="relative text-center md:px-3">
+              <div className="relative inline-flex items-center justify-center mb-5">
+                {s.here && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      background: `hsl(var(${STAGE_ACCENT}) / 0.12)`,
+                      transform: "scale(1.7)",
+                    }}
+                  />
+                )}
                 <span
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 inline-block rounded-full px-3 py-1 font-sans text-[10px] font-medium tracking-[0.18em] uppercase"
+                  className="relative inline-flex w-12 h-12 rounded-full items-center justify-center font-serif text-[15px]"
                   style={{
-                    background: `hsl(var(--terracotta))`,
-                    color: `hsl(var(--terracotta-foreground))`,
+                    background: s.here ? `hsl(var(--terracotta))` : `hsl(var(--card))`,
+                    color: s.here ? `hsl(var(--terracotta-foreground))` : `hsl(var(${STAGE_ACCENT}))`,
+                    border: s.here ? "none" : `1px solid hsl(var(${STAGE_ACCENT}) / 0.3)`,
+                    boxShadow: s.here
+                      ? `0 10px 24px -10px hsl(var(--terracotta) / 0.5)`
+                      : `0 1px 0 hsl(0 0% 100% / 0.9) inset`,
                   }}
                 >
-                  You are here
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-              )}
-              <div
-                className="mx-auto w-10 h-10 rounded-full flex items-center justify-center mb-4 font-serif text-base"
-                style={{
-                  background: `hsl(var(${STAGE_BG}) / 0.85)`,
-                  color: `hsl(var(${STAGE_ACCENT}))`,
-                }}
-              >
-                {i + 1}
               </div>
-              <h3 className="font-serif text-[1.15rem] text-foreground leading-tight mb-2">{s.label}</h3>
-              <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed">
+
+              {s.here && (
+                <p
+                  className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase mb-1.5"
+                  style={{ color: `hsl(var(--terracotta))` }}
+                >
+                  You are here
+                </p>
+              )}
+              <h3 className="font-serif text-[1.2rem] text-foreground leading-tight mb-2">
+                {s.label}
+              </h3>
+              <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed max-w-[16rem] mx-auto">
                 {s.desc}
               </p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </div>
   </section>

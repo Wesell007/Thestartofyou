@@ -390,65 +390,81 @@ const stages = [
 ];
 
 const JourneyTimeline = () => (
-  <section className="py-14 md:py-20 bg-parchment">
+  <section className="py-16 md:py-24 bg-parchment">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
-      <div className="text-center mb-12 md:mb-14">
+      <div className="text-center mb-14 md:mb-16 max-w-2xl mx-auto">
         <Eyebrow>Your TTC journey</Eyebrow>
         <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground leading-tight mb-3">
-          A gentle <span className="italic font-normal">cycle of steps</span>
+          How TTC <span className="italic font-normal">often unfolds</span>
         </h2>
-        <p className="font-sans text-sm font-light text-muted-foreground max-w-md mx-auto">
-          Trying to conceive often moves through small repeating stages.
-          Wherever you are today, you can start with the next gentle step.
+        <p className="font-sans text-[14.5px] font-light text-muted-foreground leading-relaxed">
+          A quiet, repeating rhythm. Wherever you are in the cycle today,
+          there is a gentle next step.
         </p>
       </div>
 
-      <div className="relative">
+      <div
+        className="relative rounded-[2rem] border px-6 sm:px-10 md:px-14 py-12 md:py-16 overflow-hidden"
+        style={{
+          borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)`,
+          background: `linear-gradient(180deg, hsl(var(${STAGE_BG}) / 0.4) 0%, hsl(var(--card)) 100%)`,
+          boxShadow: `0 1px 0 hsl(0 0% 100% / 0.9) inset, 0 22px 60px -34px hsl(var(${STAGE_ACCENT}) / 0.3)`,
+        }}
+      >
         <div
           aria-hidden="true"
-          className="hidden md:block absolute left-[8%] right-[8%] top-7 h-px"
+          className="hidden md:block absolute left-[12%] right-[12%] top-[6.25rem] h-px"
           style={{
-            background: `linear-gradient(90deg, transparent, hsl(var(${STAGE_ACCENT}) / 0.4), transparent)`,
+            background: `linear-gradient(90deg, transparent 0%, hsl(var(${STAGE_ACCENT}) / 0.35) 18%, hsl(var(${STAGE_ACCENT}) / 0.35) 82%, transparent 100%)`,
           }}
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 md:gap-6">
+        <ol className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-6">
           {stages.map((s, i) => (
-            <div
-              key={s.label}
-              className="relative bg-card border rounded-[1.25rem] p-6 text-center"
-              style={{
-                borderColor: `hsl(var(${STAGE_ACCENT}) / 0.16)`,
-                boxShadow: `0 1px 0 hsl(0 0% 100% / 0.9) inset, 0 14px 36px -24px hsl(var(${STAGE_ACCENT}) / 0.22)`,
-              }}
-            >
-              {s.here && (
+            <li key={s.label} className="relative text-center md:px-3">
+              <div className="relative inline-flex items-center justify-center mb-5">
+                {s.here && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      background: `hsl(var(${STAGE_ACCENT}) / 0.12)`,
+                      transform: "scale(1.7)",
+                    }}
+                  />
+                )}
                 <span
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 inline-block rounded-full px-3 py-1 font-sans text-[10px] font-medium tracking-[0.18em] uppercase"
+                  className="relative inline-flex w-12 h-12 rounded-full items-center justify-center font-serif text-[15px]"
                   style={{
-                    background: `hsl(var(--terracotta))`,
-                    color: `hsl(var(--terracotta-foreground))`,
+                    background: s.here ? `hsl(var(--terracotta))` : `hsl(var(--card))`,
+                    color: s.here ? `hsl(var(--terracotta-foreground))` : `hsl(var(${STAGE_ACCENT}))`,
+                    border: s.here ? "none" : `1px solid hsl(var(${STAGE_ACCENT}) / 0.3)`,
+                    boxShadow: s.here
+                      ? `0 10px 24px -10px hsl(var(--terracotta) / 0.5)`
+                      : `0 1px 0 hsl(0 0% 100% / 0.9) inset`,
                   }}
                 >
-                  You are here
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-              )}
-              <div
-                className="mx-auto w-10 h-10 rounded-full flex items-center justify-center mb-4 font-serif text-base"
-                style={{
-                  background: `hsl(var(${STAGE_BG}) / 0.85)`,
-                  color: `hsl(var(${STAGE_ACCENT}))`,
-                }}
-              >
-                {i + 1}
               </div>
-              <h3 className="font-serif text-[1.15rem] text-foreground leading-tight mb-2">{s.label}</h3>
-              <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed">
+
+              {s.here && (
+                <p
+                  className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase mb-1.5"
+                  style={{ color: `hsl(var(--terracotta))` }}
+                >
+                  You are here
+                </p>
+              )}
+              <h3 className="font-serif text-[1.2rem] text-foreground leading-tight mb-2">
+                {s.label}
+              </h3>
+              <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed max-w-[16rem] mx-auto">
                 {s.desc}
               </p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </div>
   </section>

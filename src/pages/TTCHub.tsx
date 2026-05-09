@@ -278,53 +278,81 @@ const TopicLibrary = () => {
       </div>
 
       {/* Supporting guides band */}
-      <div className="mt-16 mb-6">
-        <Eyebrow>Supporting guides</Eyebrow>
-        <h3 className="font-serif text-xl sm:text-2xl md:text-[1.7rem] text-foreground mb-2 leading-tight">
-          Narrower routes that <span className="italic font-normal">complement the core topics</span>
-        </h3>
-        <p className="font-sans text-sm font-light text-muted-foreground max-w-md">
-          Lighter, focused guides that sit underneath the main pillars.
+      <div className="mt-20 mb-8 flex items-end justify-between gap-6 flex-wrap">
+        <div>
+          <Eyebrow>Supporting guides</Eyebrow>
+          <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-tight">
+            Supporting <span className="italic font-normal">guides</span>
+          </h3>
+        </div>
+        <p className="font-sans text-[13.5px] font-light text-muted-foreground max-w-sm leading-relaxed">
+          More specific TTC routes for timing, testing, and fertility questions.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-        {subs.map((topic) => {
-          const Icon = topicIcons[topic.slug];
-          return (
-            <Link
-              key={topic.slug}
-              to={topic.mainHref}
-              className="group relative rounded-2xl border p-5 flex flex-col transition-all hover:-translate-y-0.5 hover:shadow-md min-h-[160px]"
-              style={{
-                background: `hsl(var(${STAGE_BG}) / 0.35)`,
-                borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)`,
-              }}
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <span
-                  className="inline-flex w-9 h-9 rounded-full items-center justify-center"
-                  style={{ background: `hsl(var(${STAGE_BG}) / 0.9)` }}
-                >
-                  <Icon size={16} strokeWidth={1.5} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
-                </span>
-                <h4 className="font-serif text-[1.05rem] text-foreground leading-snug">
-                  {topic.label}
-                </h4>
-              </div>
-              <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed flex-1">
-                {topic.description}
-              </p>
-              <span
-                className="mt-3 inline-flex items-center gap-1 font-sans text-[12px] font-medium"
-                style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+      <div
+        className="rounded-[1.5rem] border divide-y sm:divide-y-0 overflow-hidden bg-card/60"
+        style={{
+          borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)`,
+        }}
+      >
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          {subs.map((topic, i) => {
+            const Icon = topicIcons[topic.slug];
+            const colCount = 4;
+            return (
+              <li
+                key={topic.slug}
+                className="relative"
+                style={{
+                  borderRight:
+                    (i + 1) % colCount !== 0
+                      ? `1px solid hsl(var(${STAGE_ACCENT}) / 0.10)`
+                      : undefined,
+                  borderTop:
+                    i >= colCount
+                      ? `1px solid hsl(var(${STAGE_ACCENT}) / 0.10)`
+                      : undefined,
+                }}
               >
-                Open guide
-                <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </Link>
-          );
-        })}
+                <Link
+                  to={topic.mainHref}
+                  className="group block h-full p-5 sm:p-6 transition-colors hover:bg-[hsl(var(--stage-ttc)/0.4)]"
+                >
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <Icon
+                      size={14}
+                      strokeWidth={1.6}
+                      style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                    />
+                    <span
+                      className="font-sans text-[10.5px] font-medium tracking-[0.18em] uppercase"
+                      style={{ color: `hsl(var(${STAGE_ACCENT}) / 0.9)` }}
+                    >
+                      Guide
+                    </span>
+                  </div>
+                  <h4 className="font-serif text-[1.05rem] text-foreground leading-snug mb-1.5">
+                    {topic.label}
+                  </h4>
+                  <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-relaxed line-clamp-2 mb-3">
+                    {topic.description}
+                  </p>
+                  <span
+                    className="inline-flex items-center gap-1 font-sans text-[11.5px] font-medium opacity-70 group-hover:opacity-100 transition-opacity"
+                    style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                  >
+                    Read
+                    <ArrowRight
+                      size={11}
+                      className="transition-transform group-hover:translate-x-0.5"
+                    />
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </div>
 
       <div className="text-center mt-12">

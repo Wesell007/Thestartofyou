@@ -312,10 +312,12 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       {
         label: "When to think about extra support",
         links: [
+          { label: "Age & fertility", href: LIVE.age },
+          { label: "Male fertility", href: LIVE.male },
+          { label: "IVF & fertility treatment", href: LIVE.ivfTopic },
           { label: "Conditions that can affect TTC", href: LIVE.conditions },
           { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
           { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
-          { label: "What is IVF?", href: LIVE.ivfPage },
         ],
       },
     ],

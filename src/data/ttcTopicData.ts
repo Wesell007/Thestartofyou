@@ -6,16 +6,16 @@
 export type TTCPillarSlug =
   | "ovulation"
   | "preconception-health"
-  | "fertility"
-  | "ivf-and-treatment"
-  | "male-fertility"
-  | "age-and-fertility";
+  | "fertility";
 
 export type TTCSubtopicSlug =
   | "cycle-tracking"
   | "pregnancy-tests"
   | "two-week-wait"
-  | "conditions";
+  | "conditions"
+  | "ivf-and-treatment"
+  | "male-fertility"
+  | "age-and-fertility";
 
 export type TTCTopicSlug = TTCPillarSlug | TTCSubtopicSlug;
 
@@ -69,15 +69,15 @@ export const TTC_PILLAR_ORDER: TTCPillarSlug[] = [
   "ovulation",
   "preconception-health",
   "fertility",
-  "ivf-and-treatment",
-  "male-fertility",
-  "age-and-fertility",
 ];
 
 export const TTC_SUBTOPIC_ORDER: TTCSubtopicSlug[] = [
   "cycle-tracking",
-  "pregnancy-tests",
   "two-week-wait",
+  "pregnancy-tests",
+  "age-and-fertility",
+  "male-fertility",
+  "ivf-and-treatment",
   "conditions",
 ];
 
@@ -328,7 +328,8 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
 
   "ivf-and-treatment": {
     slug: "ivf-and-treatment",
-    kind: "pillar",
+    kind: "subtopic",
+    parent: "fertility",
     eyebrow: "IVF & fertility treatment",
     title: "IVF and fertility treatment",
     accentHsl: "200 22% 44%",
@@ -387,7 +388,8 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
 
   "male-fertility": {
     slug: "male-fertility",
-    kind: "pillar",
+    kind: "subtopic",
+    parent: "fertility",
     eyebrow: "Male fertility",
     title: "Male fertility",
     accentHsl: "150 18% 38%",
@@ -440,7 +442,8 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
 
   "age-and-fertility": {
     slug: "age-and-fertility",
-    kind: "pillar",
+    kind: "subtopic",
+    parent: "fertility",
     eyebrow: "Age & fertility",
     title: "Age and fertility",
     accentHsl: "342 28% 52%",

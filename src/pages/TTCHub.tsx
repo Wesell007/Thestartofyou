@@ -204,7 +204,7 @@ const TopicLibrary = () => {
           Core <span className="italic font-normal">TTC topics</span>
         </h2>
         <p className="font-sans text-sm font-light text-muted-foreground max-w-md">
-          Six pillar topics that hold the heart of the TTC guide.
+          Three pillar topics that hold the heart of the TTC guide.
         </p>
       </div>
 

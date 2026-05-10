@@ -567,6 +567,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Going a little deeper",
         links: [
           { label: "Can you get pregnant on your period?", href: LIVE.pregnantOnPeriod },
+          { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
           { label: "Signs of ovulation (quick reference)", href: LIVE.signsOfOvulation },
         ],
       },

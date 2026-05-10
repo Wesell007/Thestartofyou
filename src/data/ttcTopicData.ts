@@ -296,7 +296,17 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         links: [
           { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
           { label: "How long to try before getting help", href: LIVE.howLongToTry },
-          { label: "The fertile window", href: LIVE.fertileWindow },
+          { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
+        ],
+      },
+      {
+        label: "Getting checked",
+        description: "What investigations look like for both partners.",
+        links: [
+          { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
+          { label: "Fertility tests for women", href: LIVE.fertilityTestsWomen },
+          { label: "Fertility tests for men", href: LIVE.fertilityTestsMen },
+          { label: "AMH test explained", href: LIVE.amhTest },
         ],
       },
       {
@@ -317,14 +327,13 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         ],
       },
       {
-        label: "When to think about extra support",
+        label: "Conditions and extra support",
         links: [
+          { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
+          { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
           { label: "Age & fertility", href: LIVE.age },
           { label: "Male fertility", href: LIVE.male },
           { label: "IVF & fertility treatment", href: LIVE.ivfTopic },
-          { label: "Conditions that can affect TTC", href: LIVE.conditions },
-          { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
-          { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
         ],
       },
     ],

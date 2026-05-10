@@ -445,12 +445,14 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Where to begin",
         links: [
           { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
+          { label: "Fertility tests for men", href: LIVE.fertilityTestsMen },
+          { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
           { label: "Conditions that can affect TTC", href: LIVE.conditions },
         ],
       },
     ],
     curationNote:
-      "Dedicated male-fertility guidance is on the way. For now, ask anything specific below — including about semen analysis or lifestyle.",
+      "More male-fertility lifestyle guidance is on the way. For anything specific, ask below.",
     aiPrompts: [
       "What affects sperm health?",
       "How does lifestyle affect male fertility?",

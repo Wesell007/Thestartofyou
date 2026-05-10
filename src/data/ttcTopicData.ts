@@ -126,6 +126,13 @@ const LIVE = {
   howLongToTry: "/articles/how-long-to-try-before-getting-help",
   pcosTTC: "/articles/pcos-and-trying-to-conceive",
   endoTTC: "/articles/endometriosis-and-trying-to-conceive",
+
+  // Phase O (TTC fertility deepening cluster)
+  irregularPeriodsTTC: "/articles/irregular-periods-and-trying-to-conceive",
+  fertilityTestsWomen: "/articles/fertility-tests-for-women",
+  fertilityTestsMen: "/articles/fertility-tests-for-men",
+  fertilityAppointment: "/articles/what-happens-at-a-fertility-appointment",
+  amhTest: "/articles/amh-test-explained",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────

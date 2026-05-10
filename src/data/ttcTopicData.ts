@@ -756,19 +756,21 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         links: [
           { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
           { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
+          { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
         ],
       },
       {
         label: "Knowing when to seek support",
         links: [
           { label: "How long to try before getting help", href: LIVE.howLongToTry },
-          { label: "What is IVF?", href: LIVE.ivfPage },
-          { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
+          { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
+          { label: "Fertility tests for women", href: LIVE.fertilityTestsWomen },
+          { label: "Fertility tests for men", href: LIVE.fertilityTestsMen },
         ],
       },
     ],
     curationNote:
-      "Thyroid, fibroids, and male-factor condition guidance is on the way. For anything specific, ask below or speak to your GP.",
+      "Thyroid and fibroid-specific guidance is on the way. For anything specific, ask below or speak to your GP.",
     aiPrompts: [
       "Could PCOS be affecting my chances?",
       "Does endometriosis affect fertility?",

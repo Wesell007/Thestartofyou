@@ -501,13 +501,15 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Reading to start with",
         links: [
           { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
+          { label: "How long to try before getting help", href: LIVE.howLongToTry },
+          { label: "AMH test explained", href: LIVE.amhTest },
+          { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
           { label: "What is IVF?", href: LIVE.ivfPage },
-          { label: "Conditions that can affect TTC", href: LIVE.conditions },
         ],
       },
     ],
     curationNote:
-      "More age-specific guidance is on the way. For now, ask anything specific below — your situation matters more than the average.",
+      "Your situation matters more than the average — ask anything specific below.",
     aiPrompts: [
       "How does age affect fertility?",
       "When should I think about getting tested?",

@@ -14464,6 +14464,486 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── PHASE O: TTC FERTILITY DEEPENING CLUSTER ───────────────────────────
+  // Five flagship-standard fertility-support articles strengthening the
+  // Fertility pillar: irregular periods, fertility tests (women & men),
+  // first fertility appointment, and AMH testing.
+
+  // ─── IRREGULAR PERIODS AND TRYING TO CONCEIVE ───────────────────────────
+  {
+    slug: "irregular-periods-and-trying-to-conceive",
+    title: "Irregular periods and trying to conceive",
+    metaDescription: "How irregular cycles affect TTC, what 'irregular' really means, and when to ask for help. Calm, evidence-aware UK guidance.",
+    quickAnswer: "Irregular periods can make trying to conceive feel less predictable but rarely mean conception is impossible. The bigger question is whether ovulation is happening at all and how often. Tracking ovulation directly — not just the calendar — is usually more useful, and persistent irregularity is a reasonable reason to talk to your GP earlier.",
+    standfirst: "Irregular cycles don't automatically mean a fertility problem. They mean the usual cycle-tracking shortcuts won't work, and you may need a slightly different map.",
+    howThisFeels: ["Frustrated that 'just track your cycle' doesn't apply to you", "Worried something is wrong because your periods don't behave", "Unsure whether to wait or ask for help"],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Hormonal variation", body: "Cycle length is set by ovulation timing. When ovulation shifts month to month — or doesn't happen — period dates shift with it." },
+        { heading: "PCOS", body: "Polycystic ovary syndrome is one of the most common reasons for persistently long or absent cycles." },
+        { heading: "Thyroid imbalance", body: "An under- or overactive thyroid can disrupt ovulation and cycle regularity." },
+      ],
+      lessCauses: [
+        { heading: "Stress, weight change, or illness", body: "Significant life events can pause or delay ovulation for a cycle or two without indicating a long-term issue." },
+        { heading: "Coming off contraception", body: "It's normal for cycles to take a few months to settle after stopping hormonal contraception." },
+      ],
+      whyItVaries: "There's a difference between cycles that vary by a few days and cycles that vary by weeks or skip months. The pattern matters more than any single 'late' month.",
+    },
+    timing: { whenStarts: "Irregularity often becomes obvious once you start tracking with TTC in mind.", whenEases: "Some causes resolve naturally; others respond well to medical support like ovulation induction." },
+    whatItFeelsLike: ["Periods that arrive on a different week each month", "Skipped months", "Spotting between expected periods"],
+    whatThisMeans: "Irregular cycles usually mean ovulation is irregular too — which makes timing harder, not impossible. Direct ovulation tracking matters more than calendar predictions.",
+    normal: ["Cycles between 21 and 35 days", "Variation of a few days month to month", "Settling cycles after stopping contraception"],
+    seekSupport: ["No periods for 3+ months when not pregnant", "Cycles consistently shorter than 21 or longer than 35 days", "Trying for 6 months with irregular cycles"],
+    disclaimer: "This is general guidance. Your GP can investigate your specific pattern and rule out underlying causes.",
+    whatYouCanDo: [
+      { action: "Track ovulation directly", reason: "Mucus changes, OPKs, or basal body temperature are more honest than calendar apps when cycles vary." },
+      { action: "Log every cycle, even the messy ones", reason: "A few months of real data is the most useful thing to bring to a GP." },
+      { action: "Get a thyroid and hormone check if cycles are very irregular", reason: "Simple bloods can reveal common, treatable causes." },
+      { action: "Don't wait the full 12 months if cycles are absent or chaotic", reason: "Persistent irregularity is a reasonable reason to ask for help earlier." },
+    ],
+    whatHappensNext: "If irregularity persists or ovulation isn't happening, your GP can run hormone bloods and refer you for further fertility support if needed.",
+    relatedStage: { intro: "Related:", links: [{ label: "Ovulation signs", href: "/articles/ovulation-signs" }, { label: "PCOS and trying to conceive", href: "/articles/pcos-and-trying-to-conceive" }, { label: "TTC Hub", href: "/trying-to-conceive" }] },
+    aiPrompts: ["Are irregular periods a sign of infertility?", "How do I track ovulation with irregular cycles?", "When should I see a doctor about irregular periods?"],
+    captureIntro: "Cycle data is worth keeping when the pattern doesn't fit a tidy app.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines", "body-changes"],
+    relatedSlugs: ["ovulation-signs", "pcos-and-trying-to-conceive", "how-long-to-try-before-getting-help"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    sources: ["NHS — Irregular periods", "NICE — Fertility problems: assessment and treatment (CG156)", "RCOG — Long-term consequences of PCOS", "Tommy's — Trying for a baby"],
+    keyTakeaways: [
+      "Irregular cycles usually reflect irregular ovulation, not necessarily infertility.",
+      "Direct ovulation tracking is more useful than calendar predictions when cycles vary.",
+      "PCOS and thyroid imbalance are common, treatable causes worth ruling out.",
+      "Persistently irregular cycles are a reasonable reason to talk to a GP early.",
+    ],
+    faq: [
+      { question: "Can you get pregnant with irregular periods?", answer: "Yes. Irregular cycles make timing harder, not impossible. Many people with irregular cycles conceive — sometimes after tracking ovulation more directly, sometimes with medical support." },
+      { question: "How long should I wait before seeing a doctor?", answer: "If your cycles are very irregular or absent, an earlier GP conversation — before the standard 12-month benchmark — is reasonable." },
+      { question: "What counts as 'irregular'?", answer: "Cycles consistently shorter than 21 days, longer than 35 days, or that vary by more than 7–9 days month to month are usually considered irregular." },
+    ],
+    editorialSections: [
+      {
+        id: "what-irregular-means",
+        heading: "What 'irregular' actually means",
+        lead: "Cycle length isn't fixed, and a normal cycle has more flexibility than people often realise.",
+        paragraphs: [
+          "A typical cycle sits anywhere between 21 and 35 days, and a few days of variation month to month is completely normal. 'Irregular' usually refers to cycles that fall outside that range, vary by more than a week, or skip months altogether.",
+          "Cycle length is determined by when ovulation happens. The phase after ovulation (the luteal phase) is fairly fixed at around 12–14 days; the phase before ovulation is what varies. So an irregular cycle is really an ovulation-timing issue.",
+        ],
+      },
+      {
+        id: "why-it-affects-ttc",
+        heading: "Why irregular cycles change the TTC picture",
+        lead: "The challenge isn't usually fertility. It's finding the fertile window.",
+        paragraphs: [
+          "Calendar apps assume ovulation happens roughly mid-cycle. If your cycles vary, those predictions become unreliable, and the fertile window can land in a different week each month.",
+          "Tracking ovulation directly — through cervical mucus, ovulation predictor kits (OPKs), or basal body temperature — gives you real-time signals rather than guesses based on average cycles.",
+        ],
+        callout: { tone: "reassurance", text: "An irregular cycle isn't a verdict. It's information — usually the kind that points toward useful next steps rather than away from them." },
+      },
+      {
+        id: "common-causes",
+        heading: "Common reasons cycles are irregular",
+        lead: "Most causes are recognisable, treatable, and worth investigating early if they persist.",
+        paragraphs: [
+          "PCOS is one of the most common causes of long or absent cycles. Thyroid imbalance — under- or overactive — also commonly disrupts cycles. Both are picked up easily with bloods.",
+          "Significant stress, weight change, intense exercise, illness, or coming off hormonal contraception can all cause temporary irregularity. These usually settle within a few months without intervention.",
+        ],
+      },
+      {
+        id: "when-to-ask-for-help",
+        heading: "When to bring this up with a GP",
+        lead: "Irregular cycles are one of the clearer reasons not to wait the full 12 months.",
+        paragraphs: [
+          "If your periods are absent for 3 months or more (and you're not pregnant), consistently outside the 21–35 day range, or if you've been trying for 6 months without success, an earlier GP conversation is reasonable.",
+          "A first appointment is usually about a conversation and basic hormone bloods. It opens doors rather than closing them — and a 'wait and see' answer with normal results is itself reassuring.",
+        ],
+      },
+    ],
+  },
+
+  // ─── FERTILITY TESTS FOR WOMEN ──────────────────────────────────────────
+  {
+    slug: "fertility-tests-for-women",
+    title: "Fertility tests for women: what to expect",
+    metaDescription: "What fertility tests for women involve — bloods, scans, ovulation checks, and tubal patency. Calm, evidence-aware UK guidance.",
+    quickAnswer: "Initial fertility tests for women usually start with hormone bloods (often a day-21 progesterone to confirm ovulation, plus thyroid and prolactin), and a discussion of cycle history. If conception still hasn't happened, further tests can include an ultrasound, ovarian reserve testing (AMH), and tubal patency checks. None of them are pass/fail.",
+    standfirst: "Fertility tests are a way of gathering useful information — not a verdict. Knowing what each one does, and what it can't tell you, makes the process feel a lot less intimidating.",
+    howThisFeels: ["Anxious about what the results might say", "Confused by the alphabet soup of tests", "Worried about what 'low' or 'high' actually means"],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Confirming ovulation", body: "A day-21 progesterone blood test (timed for around a week before your expected period) confirms whether ovulation happened that cycle." },
+        { heading: "Hormone overview", body: "Thyroid function, prolactin, and sometimes FSH/LH and oestradiol give a picture of the wider hormonal environment." },
+        { heading: "Pelvic ultrasound", body: "A scan can show ovary appearance, antral follicle count, fibroids, or other anatomical findings." },
+      ],
+      lessCauses: [
+        { heading: "AMH (ovarian reserve)", body: "Measures the rough quantity of eggs remaining. Useful in some contexts; often misunderstood in others." },
+        { heading: "Tubal patency", body: "HyCoSy or HSG tests check that the fallopian tubes aren't blocked." },
+      ],
+      whyItVaries: "Which tests you're offered depends on age, cycle history, and how long you've been trying. Not everyone needs every test.",
+    },
+    timing: { whenStarts: "Initial GP-level tests are usually offered after 12 months of trying (or 6 if you're 36+).", whenEases: "Many results are reassuring; further tests are guided by what's already been found." },
+    whatItFeelsLike: ["A sense of finally being taken seriously", "Mild anxiety waiting for results", "Relief when something normal is confirmed"],
+    whatThisMeans: "Fertility tests are a sequence, not a single answer. Each one rules things in or out, and the picture builds over time.",
+    normal: ["Day-21 progesterone confirming ovulation", "Normal thyroid and prolactin", "A scan showing a typical ovarian appearance"],
+    seekSupport: ["Persistent abnormal hormone results", "Suspected blocked tubes", "Unclear results that need specialist input"],
+    disclaimer: "This is general UK guidance. Your specific tests will be guided by your history and your clinician.",
+    whatYouCanDo: [
+      { action: "Track a few full cycles before testing", reason: "Knowing your cycle length is essential for timing day-21 bloods correctly." },
+      { action: "Have any results explained to you in context", reason: "A 'low' or 'high' number can mean different things in different situations." },
+      { action: "Ask which tests are missing", reason: "If something hasn't been checked and you're worried, it's reasonable to ask why not." },
+      { action: "Bring your partner into the testing", reason: "Around a third of cases have a male-factor element; testing both partners is standard." },
+    ],
+    whatHappensNext: "Depending on findings, your GP may continue monitoring, suggest lifestyle support, or refer you to a fertility clinic for further assessment.",
+    relatedStage: { intro: "Related:", links: [{ label: "What happens at a fertility appointment", href: "/articles/what-happens-at-a-fertility-appointment" }, { label: "AMH test explained", href: "/articles/amh-test-explained" }, { label: "TTC Hub", href: "/trying-to-conceive" }] },
+    aiPrompts: ["What fertility tests are done first?", "What is a day-21 progesterone test?", "How do they check if my tubes are blocked?"],
+    captureIntro: "Test dates and results are easy to lose track of — worth keeping in one place.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines", "body-changes"],
+    relatedSlugs: ["what-happens-at-a-fertility-appointment", "amh-test-explained", "fertility-tests-for-men"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    sources: ["NHS — Infertility tests", "NICE — Fertility problems: assessment and treatment (CG156)", "HFEA — Fertility tests", "Tommy's — Fertility investigations"],
+    keyTakeaways: [
+      "Initial tests confirm ovulation and check the wider hormonal picture.",
+      "Pelvic ultrasound, AMH, and tubal patency tests come in if more information is needed.",
+      "Results are usually a sequence — no single test is a verdict.",
+      "Both partners are normally tested as part of the standard workup.",
+    ],
+    faq: [
+      { question: "What's the first fertility test?", answer: "Usually a day-21 progesterone blood test to confirm ovulation, alongside thyroid and prolactin checks. Your partner will typically be offered semen analysis at the same time." },
+      { question: "What is AMH?", answer: "Anti-Müllerian Hormone gives a rough estimate of remaining egg quantity. It's useful in some contexts but doesn't predict whether you can conceive naturally." },
+      { question: "How are blocked tubes checked?", answer: "Through a HyCoSy or HSG — a scan that uses a contrast solution to show whether the fallopian tubes are open." },
+    ],
+    editorialSections: [
+      {
+        id: "the-starting-tests",
+        heading: "The starting tests",
+        lead: "First-line fertility tests focus on whether ovulation is happening and whether the wider hormonal environment is in range.",
+        paragraphs: [
+          "A day-21 progesterone blood test is timed for roughly a week before your expected period. A normal result confirms that ovulation happened in that cycle. If your cycles are irregular, the timing of this test may need to be adjusted.",
+          "Alongside this, GPs typically check thyroid function and prolactin. Both can disrupt ovulation if abnormal, and both are easily treatable if found.",
+        ],
+      },
+      {
+        id: "the-next-layer",
+        heading: "The next layer of investigation",
+        lead: "If initial bloods are normal but conception isn't happening, further tests fill in the picture.",
+        paragraphs: [
+          "A pelvic ultrasound can show the appearance of your ovaries and uterus, including features that suggest PCOS, fibroids, or polyps. Antral follicle count from this scan is one measure of ovarian reserve.",
+          "An AMH blood test measures Anti-Müllerian Hormone, which gives an estimate of remaining egg quantity. It doesn't measure egg quality or predict whether you can conceive naturally — and is often misinterpreted, which is worth keeping in mind.",
+        ],
+        callout: { tone: "reassurance", text: "Tests gather information. They don't decide your fertility. Many people with surprising results still go on to conceive — and many with 'normal' results still need help." },
+      },
+      {
+        id: "tubal-patency",
+        heading: "Checking the fallopian tubes",
+        lead: "If conception still hasn't happened after initial workup, tubal patency tests come in.",
+        paragraphs: [
+          "A HyCoSy (HyFoSy is its newer cousin) or HSG is a short outpatient scan that uses contrast to check whether your fallopian tubes are open. Blockage on one or both sides is a common, identifiable cause of difficulty conceiving.",
+          "These tests can feel intimidating but are generally well tolerated with simple pain relief. Some people even notice improved chances of conception in the months immediately after.",
+        ],
+      },
+      {
+        id: "what-results-mean",
+        heading: "How to think about results",
+        lead: "No single test makes or breaks the picture.",
+        paragraphs: [
+          "A 'low' AMH does not mean conception is impossible — it means ovarian reserve is on the lower end. A 'normal' progesterone in one cycle doesn't rule out occasional anovulatory cycles. Each result is one piece of a wider story.",
+          "Always ask for results to be explained in context. A good clinician will frame what each finding means for next steps, not just whether it's 'in range'.",
+        ],
+      },
+    ],
+  },
+
+  // ─── FERTILITY TESTS FOR MEN ────────────────────────────────────────────
+  {
+    slug: "fertility-tests-for-men",
+    title: "Fertility tests for men: what to expect",
+    metaDescription: "What semen analysis involves, what other male fertility tests can check, and how to think about results. Calm, evidence-aware UK guidance.",
+    quickAnswer: "The standard first fertility test for men is a semen analysis, which looks at sperm count, movement (motility), and shape (morphology). It's a simple test that can usually be arranged through your GP. Around a third of fertility cases involve a male-factor element, which is why this test is part of the standard workup from the beginning.",
+    standfirst: "Male fertility testing is straightforward, well-evidenced, and routine — and it's a key part of the picture from the start, not an afterthought.",
+    howThisFeels: ["Quietly braced", "Embarrassed about the practicalities", "Aware that this side of fertility often goes unspoken"],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Sperm count", body: "How many sperm are present per millilitre of semen. Low counts have a recognised range and don't necessarily mean conception is impossible." },
+        { heading: "Motility", body: "How well sperm move. Strong forward motility is what matters most for natural conception." },
+        { heading: "Morphology", body: "The shape of sperm. Even healthy samples have many abnormally shaped sperm; the question is the proportion." },
+      ],
+      lessCauses: [
+        { heading: "Hormone bloods", body: "If semen analysis is abnormal, follow-up bloods (testosterone, FSH, LH) can clarify what's behind it." },
+        { heading: "Imaging or specialist exam", body: "Used in some cases — for example, to check for varicocele or other structural causes." },
+      ],
+      whyItVaries: "Semen quality varies cycle to cycle and can be affected by recent illness, fever, stress, or lifestyle. One result is rarely the whole story.",
+    },
+    timing: { whenStarts: "Semen analysis is usually offered alongside female partner tests at the start of a fertility workup.", whenEases: "Many lifestyle-related issues can improve over 3 months of focused changes." },
+    whatItFeelsLike: ["The awkwardness of sample logistics", "Relief once it's actually done", "Worry while waiting for results"],
+    whatThisMeans: "A single semen analysis is a snapshot. If results are abnormal, the test is normally repeated 6–12 weeks later before drawing conclusions.",
+    normal: ["Counts above 15 million/ml with good motility", "Morphology above the WHO threshold", "Results that vary slightly between samples"],
+    seekSupport: ["Two abnormal samples 6–12 weeks apart", "Very low counts or absent sperm", "Concerns about lumps, pain, or previous testicular issues"],
+    disclaimer: "This is general guidance, not a personal assessment. A fertility clinician can interpret your specific results.",
+    whatYouCanDo: [
+      { action: "Follow the abstinence guidance precisely", reason: "Usually 2–7 days; outside this range can affect the result." },
+      { action: "Repeat the test if the first is abnormal", reason: "Sperm production cycles take ~10–12 weeks, so retesting after 6–12 weeks is standard." },
+      { action: "Look at lifestyle factors honestly", reason: "Sleep, stress, weight, smoking, alcohol, heat, and certain medications can all affect sperm." },
+      { action: "Don't carry the result alone", reason: "An abnormal sample is not a personal verdict — it's a test result, and there are usually clear next steps." },
+    ],
+    whatHappensNext: "If semen analysis is abnormal, you'll usually be referred to a urologist or fertility clinic for further investigation and tailored support.",
+    relatedStage: { intro: "Related:", links: [{ label: "Male fertility", href: "/trying-to-conceive/male-fertility" }, { label: "What happens at a fertility appointment", href: "/articles/what-happens-at-a-fertility-appointment" }, { label: "TTC Hub", href: "/trying-to-conceive" }] },
+    aiPrompts: ["What does semen analysis check?", "Are abnormal sperm results fixable?", "How is a semen sample collected?"],
+    captureIntro: "Male testing is part of the shared TTC story — worth keeping a record of.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines", "body-changes"],
+    relatedSlugs: ["fertility-tests-for-women", "what-happens-at-a-fertility-appointment", "how-long-to-try-before-getting-help"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    sources: ["NHS — Infertility tests", "NICE — Fertility problems: assessment and treatment (CG156)", "WHO — Laboratory manual for the examination of human semen", "HFEA — Fertility tests"],
+    keyTakeaways: [
+      "Semen analysis is the first and most important male fertility test.",
+      "Results are usually repeated 6–12 weeks apart before being interpreted as final.",
+      "Around a third of fertility cases involve a male-factor element.",
+      "Lifestyle changes and treatment can improve results in many cases.",
+    ],
+    faq: [
+      { question: "How is a semen sample collected?", answer: "Usually at home or in a private clinic room. The sample needs to reach the lab within about an hour, kept close to body temperature. Your clinic will give specific instructions." },
+      { question: "What does an abnormal result mean?", answer: "It usually means a single sample fell below WHO reference values. A repeat sample 6–12 weeks later is standard before drawing conclusions, because sperm production takes that long." },
+      { question: "Can male fertility be improved?", answer: "Often, yes. Sleep, weight, alcohol, smoking, heat exposure, and certain medications all affect sperm. Three months of focused lifestyle changes can produce noticeable improvements." },
+    ],
+    editorialSections: [
+      {
+        id: "what-semen-analysis-checks",
+        heading: "What semen analysis actually checks",
+        lead: "The test looks at three main things: count, movement, and shape.",
+        paragraphs: [
+          "Sperm count is measured in millions per millilitre. The current WHO reference value is 15 million/ml or above, though counts below this don't automatically mean conception is impossible.",
+          "Motility — how well the sperm move — matters more than count alone. Strong forward motility is the key factor for natural conception. Morphology (shape) is also reported, though even healthy samples contain many abnormally shaped sperm.",
+        ],
+      },
+      {
+        id: "how-it-is-done",
+        heading: "How the test is done in practice",
+        lead: "The logistics are usually the most awkward part. The actual test is straightforward.",
+        paragraphs: [
+          "Most clinics ask for 2–7 days of abstinence beforehand, because both shorter and longer windows can skew results. Samples can usually be produced at home and delivered to the lab within about an hour, kept warm.",
+          "If a sample is abnormal, the standard practice is to repeat the test 6–12 weeks later. Sperm take roughly 10–12 weeks to develop, so a single result is a snapshot rather than a final answer.",
+        ],
+        callout: { tone: "reassurance", text: "An abnormal first sample is not a verdict. It's a starting point — and many people see meaningful improvement on the second test, especially after lifestyle changes." },
+      },
+      {
+        id: "what-affects-results",
+        heading: "What can affect results",
+        lead: "Sperm production is sensitive to several lifestyle and health factors.",
+        paragraphs: [
+          "Recent illness or fever in the last 3 months is one of the most common reasons for a temporarily poor result. Stress, alcohol, smoking, certain medications, heat exposure, and significant weight changes can also affect sperm quality.",
+          "Some structural causes — like a varicocele — are common, treatable, and worth checking if results are persistently abnormal. A urologist referral is the usual route.",
+        ],
+      },
+      {
+        id: "shared-not-blamed",
+        heading: "Fertility is shared, not blamed",
+        lead: "Around a third of fertility cases involve a male-factor element, a third involve a female-factor element, and the rest are mixed or unexplained.",
+        paragraphs: [
+          "Male testing being part of the standard workup isn't about blame. It's about not missing useful information — and many male-factor issues respond well to treatment, lifestyle, or fertility support.",
+          "If you're the partner being tested, knowing this isn't a solo verdict can change the experience. A poor result is a piece of information that opens doors, not closes them.",
+        ],
+      },
+    ],
+  },
+
+  // ─── WHAT HAPPENS AT A FERTILITY APPOINTMENT ────────────────────────────
+  {
+    slug: "what-happens-at-a-fertility-appointment",
+    title: "What happens at a fertility appointment",
+    metaDescription: "What to expect at a first GP fertility appointment and a fertility clinic referral. Calm, evidence-aware UK guidance on history, tests, and next steps.",
+    quickAnswer: "A first fertility appointment is mostly a conversation about your cycle history, how long you've been trying, lifestyle, and any relevant medical history — followed by initial tests for both partners. It's usually less intimidating than expected, and you don't have to commit to anything to ask.",
+    standfirst: "The first fertility appointment is a starting point, not a milestone you have to earn. Knowing what to expect tends to make the whole experience feel manageable.",
+    howThisFeels: ["Nervous about being judged for asking", "Worried about wasting the GP's time", "Quietly relieved to be doing something"],
+    whatHappening: {
+      commonCauses: [
+        { heading: "History taking", body: "The clinician will ask about your cycle, how long you've been trying, previous pregnancies, contraception history, and relevant medical or surgical history." },
+        { heading: "Lifestyle questions", body: "Weight, smoking, alcohol, exercise, and stress are all part of the picture for both partners." },
+        { heading: "Initial tests requested", body: "Day-21 progesterone for the female partner, semen analysis for the male partner, and basic hormone or thyroid checks." },
+      ],
+      lessCauses: [
+        { heading: "Examination", body: "A physical examination is sometimes done but is rarely the focus of a first GP appointment." },
+        { heading: "Onward referral", body: "If results suggest further investigation is needed, your GP can refer you to an NHS or private fertility clinic." },
+      ],
+      whyItVaries: "First appointments differ between GP surgeries and fertility clinics. GP appointments are usually 10–15 minutes; clinic appointments are longer and more in-depth.",
+    },
+    timing: { whenStarts: "An appointment can usually be booked within a few weeks of asking.", whenEases: "Once tests are done and explained, the picture often feels much clearer." },
+    whatItFeelsLike: ["A surprisingly normal conversation", "A weight lifting at being taken seriously", "Some frustration at NHS waiting times"],
+    whatThisMeans: "Going to a first appointment doesn't commit you to treatment. It opens the door to information and gives you options.",
+    normal: ["A 10–15 minute first GP appointment", "Both partners being asked to attend or contribute history", "Bloods and semen analysis as standard"],
+    seekSupport: ["Symptoms ignored or dismissed", "Long delays for follow-up", "A sense that questions aren't being answered"],
+    disclaimer: "Pathways vary between regions and providers. Your GP can guide you to the right next step.",
+    whatYouCanDo: [
+      { action: "Bring cycle data with you", reason: "Honest dates and cycle length make the conversation more productive than memory alone." },
+      { action: "Both partners attend if possible", reason: "Fertility is shared and clinicians want history from both sides." },
+      { action: "Write your questions down beforehand", reason: "Appointments can feel short — a written list keeps you on track." },
+      { action: "Ask what the next step would be either way", reason: "Knowing the path forward — whether results are normal or not — calms the wait." },
+    ],
+    whatHappensNext: "Depending on results, your GP may continue monitoring, suggest lifestyle support, or refer you to a fertility clinic for further investigation or treatment.",
+    relatedStage: { intro: "Related:", links: [{ label: "How long to try before getting help", href: "/articles/how-long-to-try-before-getting-help" }, { label: "Fertility tests for women", href: "/articles/fertility-tests-for-women" }, { label: "TTC Hub", href: "/trying-to-conceive" }] },
+    aiPrompts: ["What happens at a first fertility appointment?", "What should I bring to a fertility appointment?", "How long does an NHS fertility referral take?"],
+    captureIntro: "Appointment notes are easy to forget — keep them somewhere kind.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines"],
+    relatedSlugs: ["how-long-to-try-before-getting-help", "fertility-tests-for-women", "fertility-tests-for-men"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    sources: ["NHS — Infertility", "NICE — Fertility problems: assessment and treatment (CG156)", "HFEA — Going to a fertility clinic", "Tommy's — Trying for a baby"],
+    keyTakeaways: [
+      "A first fertility appointment is mostly a conversation, not an exam.",
+      "Both partners are usually expected to contribute history and tests.",
+      "Initial tests typically include day-21 progesterone, semen analysis, and basic bloods.",
+      "Asking for an appointment doesn't commit you to treatment — it opens options.",
+    ],
+    faq: [
+      { question: "What should I bring?", answer: "A few months of cycle dates, any relevant medical history, your current medications, and a written list of questions. If your partner can attend, even better." },
+      { question: "How long is the appointment?", answer: "A first GP appointment is usually 10–15 minutes. Clinic appointments are longer and more thorough." },
+      { question: "Will the GP take me seriously before 12 months?", answer: "A good GP will. You can ask for a conversation any time — especially if you have known fertility-affecting conditions or specific worries." },
+    ],
+    editorialSections: [
+      {
+        id: "before-the-appointment",
+        heading: "Before the appointment",
+        lead: "A small amount of preparation makes a short appointment much more useful.",
+        paragraphs: [
+          "Tracking a few cycles before you go is the single most useful thing you can do. Your cycle length, the regularity of bleeding, and any patterns in symptoms or pain all help shape the conversation.",
+          "Write down any questions you want to ask. Appointments are short, and it's easy to forget what you intended to raise once you're in the room. A written list keeps you on track.",
+        ],
+      },
+      {
+        id: "what-the-appointment-covers",
+        heading: "What the appointment usually covers",
+        lead: "Most of a first fertility appointment is a structured conversation.",
+        paragraphs: [
+          "Expect questions about your menstrual cycle, contraception history, previous pregnancies, sexual history, lifestyle (smoking, alcohol, weight, exercise), and any relevant medical or surgical history. The same questions are usually asked of your partner.",
+          "Initial tests are typically requested at the same appointment: a day-21 progesterone blood test for the female partner and a semen analysis for the male partner, alongside basic hormone or thyroid checks.",
+        ],
+        callout: { tone: "reassurance", text: "You don't have to perform calm or have everything figured out. Showing up — with messy cycle data and a list of questions — is enough." },
+      },
+      {
+        id: "what-comes-next",
+        heading: "What tends to come next",
+        lead: "Once tests are back, the path branches in a few directions.",
+        paragraphs: [
+          "If results are normal, the GP may suggest continuing to try with monitoring for a defined period before further investigation. If anything is abnormal, the next step is usually a referral to a fertility clinic for more in-depth assessment — including pelvic imaging, AMH, and tubal patency tests.",
+          "NHS waiting times for clinic referrals vary regionally. If waits are long and you can stretch to it, some people choose to access initial private investigations to move faster, then return to NHS care for treatment.",
+        ],
+      },
+      {
+        id: "what-this-isnt",
+        heading: "What this appointment isn't",
+        lead: "It isn't a verdict, an exam, or a commitment to anything.",
+        paragraphs: [
+          "Asking for a fertility appointment doesn't mean you're starting treatment. It means you're starting a conversation. Many people leave a first appointment with reassurance and no further intervention needed.",
+          "And if more is needed, you have time to make decisions. A first appointment opens options — it doesn't close any.",
+        ],
+      },
+    ],
+  },
+
+  // ─── AMH TEST EXPLAINED ─────────────────────────────────────────────────
+  {
+    slug: "amh-test-explained",
+    title: "AMH test explained: what ovarian reserve really means",
+    metaDescription: "What an AMH test measures, what it can and can't tell you about fertility, and how to interpret a 'low' or 'high' result. Calm, evidence-aware UK guidance.",
+    quickAnswer: "AMH (Anti-Müllerian Hormone) gives a rough estimate of how many eggs you have left, not how good they are or whether you'll conceive naturally. It's useful in specific contexts — like planning IVF or assessing very irregular cycles — but is often misinterpreted as a fertility verdict, which it isn't.",
+    standfirst: "AMH is one of the most misunderstood numbers in fertility care. Knowing what it means — and what it doesn't — changes how the result lands.",
+    howThisFeels: ["Anxious about a single number deciding things", "Confused by conflicting interpretations online", "Worried that 'low' means impossible"],
+    whatHappening: {
+      commonCauses: [
+        { heading: "What AMH measures", body: "Anti-Müllerian Hormone is produced by small developing follicles in the ovaries. The level gives an estimate of remaining egg quantity (ovarian reserve)." },
+        { heading: "What it doesn't measure", body: "AMH says nothing about egg quality, cycle health, or whether you can conceive naturally in any given month." },
+        { heading: "Where it's most useful", body: "Planning IVF (predicting response to stimulation), assessing PCOS (where it's often high), or investigating very low ovarian reserve." },
+      ],
+      lessCauses: [
+        { heading: "Where it's often misused", body: "As a general 'fertility score'. AMH does not predict natural conception in someone with regular cycles." },
+        { heading: "Variation between labs", body: "Different labs use different assays and reference ranges, so values can look different across providers." },
+      ],
+      whyItVaries: "AMH naturally declines with age, but the rate of decline varies between individuals. Two people of the same age can have very different AMH values and similar fertility outcomes.",
+    },
+    timing: { whenStarts: "Usually offered as part of a fertility clinic workup, not as a routine GP test.", whenEases: "Knowing what the result actually means tends to reduce the anxiety it caused." },
+    whatItFeelsLike: ["A single number that suddenly feels enormous", "Reassurance when it's explained properly", "Frustration with online tools that misinterpret results"],
+    whatThisMeans: "AMH is a useful clinical tool in the right context. It is not a verdict on your fertility, and it should always be interpreted alongside age, cycle history, and the wider picture.",
+    normal: ["A wide range of AMH values that vary by age", "Higher AMH in PCOS", "A gentle decline over time"],
+    seekSupport: ["Very low AMH at a younger age", "AMH being used as a sole basis for major decisions", "Confusion or distress about a result that hasn't been explained"],
+    disclaimer: "AMH should always be interpreted by a clinician who knows your full picture. This article is general guidance.",
+    whatYouCanDo: [
+      { action: "Know what AMH actually measures before testing", reason: "It changes how the result lands and what decisions feel reasonable." },
+      { action: "Ask for the result in context", reason: "Your AMH alongside your age, cycle, and circumstances tells a much richer story than the number alone." },
+      { action: "Don't rely on online 'fertility age' tools", reason: "Many of them oversimplify and cause unnecessary distress." },
+      { action: "Use AMH for the right decisions", reason: "It's most useful for IVF planning and PCOS assessment, less so for general fertility prediction." },
+    ],
+    whatHappensNext: "If your AMH suggests low ovarian reserve and you're trying to conceive, an earlier conversation about fertility timelines or treatment may be reasonable. A fertility specialist can help you weigh next steps.",
+    relatedStage: { intro: "Related:", links: [{ label: "Fertility tests for women", href: "/articles/fertility-tests-for-women" }, { label: "What happens at a fertility appointment", href: "/articles/what-happens-at-a-fertility-appointment" }, { label: "TTC Hub", href: "/trying-to-conceive" }] },
+    aiPrompts: ["What does an AMH test measure?", "Is low AMH a fertility verdict?", "What's a normal AMH for my age?"],
+    captureIntro: "Test numbers are easier to think about when they're written down rather than scrolling in a tab.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines", "body-changes"],
+    relatedSlugs: ["fertility-tests-for-women", "what-happens-at-a-fertility-appointment", "how-long-to-try-before-getting-help"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "May 2026",
+    sources: ["HFEA — Fertility tests", "NICE — Fertility problems: assessment and treatment (CG156)", "ESHRE — Ovarian reserve testing", "Tommy's — Fertility investigations"],
+    keyTakeaways: [
+      "AMH estimates egg quantity, not egg quality or natural conception chance.",
+      "It's most useful for IVF planning and PCOS assessment.",
+      "AMH naturally declines with age, but the picture varies between individuals.",
+      "A single AMH result should never be the sole basis for major fertility decisions.",
+    ],
+    faq: [
+      { question: "Does low AMH mean I can't get pregnant?", answer: "No. AMH measures egg quantity, not egg quality or whether you can conceive. Many people with low AMH conceive naturally; others may need fertility support. Age and cycle health matter more for predicting natural conception." },
+      { question: "Should I test my AMH 'just in case'?", answer: "Routine AMH testing for general reassurance often causes more anxiety than clarity. It's most useful when there's a specific question — IVF planning, suspected very low reserve, or investigating PCOS." },
+      { question: "Why is my AMH different from another lab?", answer: "Different labs use different assays. Always interpret AMH against the reference range of the lab that ran it, and ideally with the same lab if you're tracking over time." },
+    ],
+    editorialSections: [
+      {
+        id: "what-amh-actually-is",
+        heading: "What AMH actually is",
+        lead: "Anti-Müllerian Hormone is produced by the small developing follicles in your ovaries.",
+        paragraphs: [
+          "The level of AMH in your blood gives a rough estimate of how many follicles — and therefore eggs — you have left. It's a measure of ovarian reserve, which is part of fertility but not all of it.",
+          "AMH naturally declines across your reproductive years. The rate of decline varies between individuals, which is why two people of the same age can have very different AMH levels.",
+        ],
+      },
+      {
+        id: "what-it-can-and-cant-tell-you",
+        heading: "What it can and can't tell you",
+        lead: "AMH is a useful tool in the right context, and a misleading one in the wrong context.",
+        paragraphs: [
+          "AMH can help predict how the ovaries are likely to respond to IVF stimulation. It can also support a PCOS diagnosis (where AMH tends to be high) or flag very low ovarian reserve in someone considering future treatment.",
+          "What it doesn't do: tell you whether you can conceive naturally, predict pregnancy in any given month, or measure egg quality. Online 'fertility age' tools that present AMH as a verdict often cause unnecessary distress and aren't supported by good evidence.",
+        ],
+        callout: { tone: "reassurance", text: "A 'low' AMH does not mean conception is impossible. Many people with low AMH conceive naturally — and many with 'normal' AMH need fertility support. The number is one piece of information, not a sentence." },
+      },
+      {
+        id: "interpreting-results",
+        heading: "How to interpret a result",
+        lead: "AMH should always be read alongside age, cycle history, and clinical context.",
+        paragraphs: [
+          "Reference ranges vary between labs. A useful interpretation always includes your age — AMH that would be 'low' at 25 is unremarkable at 40. Trends over time, taken from the same lab, are usually more informative than a single value.",
+          "If your AMH comes back unexpectedly low, ask your clinician what it means specifically for your situation and what — if anything — would change your plan. Often, the answer is less dramatic than the number suggests.",
+        ],
+      },
+      {
+        id: "when-to-test",
+        heading: "When AMH is and isn't worth testing",
+        lead: "AMH testing is most useful when there's a specific question to answer.",
+        paragraphs: [
+          "If you're considering IVF or egg freezing, AMH helps predict how your ovaries will respond. If you have very irregular cycles or suspected early ovarian insufficiency, it can clarify what's happening. In these contexts, AMH is genuinely useful.",
+          "If you have regular cycles, no specific concerns, and no specific decision to make, routine AMH testing often raises more anxiety than it resolves. A conversation with your GP or a fertility clinician can help you decide whether testing will actually change anything for you.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

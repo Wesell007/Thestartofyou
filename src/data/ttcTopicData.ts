@@ -126,6 +126,13 @@ const LIVE = {
   howLongToTry: "/articles/how-long-to-try-before-getting-help",
   pcosTTC: "/articles/pcos-and-trying-to-conceive",
   endoTTC: "/articles/endometriosis-and-trying-to-conceive",
+
+  // Phase O (TTC fertility deepening cluster)
+  irregularPeriodsTTC: "/articles/irregular-periods-and-trying-to-conceive",
+  fertilityTestsWomen: "/articles/fertility-tests-for-women",
+  fertilityTestsMen: "/articles/fertility-tests-for-men",
+  fertilityAppointment: "/articles/what-happens-at-a-fertility-appointment",
+  amhTest: "/articles/amh-test-explained",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────
@@ -289,7 +296,17 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         links: [
           { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
           { label: "How long to try before getting help", href: LIVE.howLongToTry },
-          { label: "The fertile window", href: LIVE.fertileWindow },
+          { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
+        ],
+      },
+      {
+        label: "Getting checked",
+        description: "What investigations look like for both partners.",
+        links: [
+          { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
+          { label: "Fertility tests for women", href: LIVE.fertilityTestsWomen },
+          { label: "Fertility tests for men", href: LIVE.fertilityTestsMen },
+          { label: "AMH test explained", href: LIVE.amhTest },
         ],
       },
       {
@@ -310,14 +327,13 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         ],
       },
       {
-        label: "When to think about extra support",
+        label: "Conditions and extra support",
         links: [
+          { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
+          { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
           { label: "Age & fertility", href: LIVE.age },
           { label: "Male fertility", href: LIVE.male },
           { label: "IVF & fertility treatment", href: LIVE.ivfTopic },
-          { label: "Conditions that can affect TTC", href: LIVE.conditions },
-          { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
-          { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
         ],
       },
     ],
@@ -429,12 +445,14 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Where to begin",
         links: [
           { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
+          { label: "Fertility tests for men", href: LIVE.fertilityTestsMen },
+          { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
           { label: "Conditions that can affect TTC", href: LIVE.conditions },
         ],
       },
     ],
     curationNote:
-      "Dedicated male-fertility guidance is on the way. For now, ask anything specific below — including about semen analysis or lifestyle.",
+      "More male-fertility lifestyle guidance is on the way. For anything specific, ask below.",
     aiPrompts: [
       "What affects sperm health?",
       "How does lifestyle affect male fertility?",
@@ -483,13 +501,15 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Reading to start with",
         links: [
           { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
+          { label: "How long to try before getting help", href: LIVE.howLongToTry },
+          { label: "AMH test explained", href: LIVE.amhTest },
+          { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
           { label: "What is IVF?", href: LIVE.ivfPage },
-          { label: "Conditions that can affect TTC", href: LIVE.conditions },
         ],
       },
     ],
     curationNote:
-      "More age-specific guidance is on the way. For now, ask anything specific below — your situation matters more than the average.",
+      "Your situation matters more than the average — ask anything specific below.",
     aiPrompts: [
       "How does age affect fertility?",
       "When should I think about getting tested?",
@@ -547,6 +567,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Going a little deeper",
         links: [
           { label: "Can you get pregnant on your period?", href: LIVE.pregnantOnPeriod },
+          { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
           { label: "Signs of ovulation (quick reference)", href: LIVE.signsOfOvulation },
         ],
       },
@@ -736,19 +757,21 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         links: [
           { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
           { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
+          { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
         ],
       },
       {
         label: "Knowing when to seek support",
         links: [
           { label: "How long to try before getting help", href: LIVE.howLongToTry },
-          { label: "What is IVF?", href: LIVE.ivfPage },
-          { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
+          { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
+          { label: "Fertility tests for women", href: LIVE.fertilityTestsWomen },
+          { label: "Fertility tests for men", href: LIVE.fertilityTestsMen },
         ],
       },
     ],
     curationNote:
-      "Thyroid, fibroids, and male-factor condition guidance is on the way. For anything specific, ask below or speak to your GP.",
+      "Thyroid and fibroid-specific guidance is on the way. For anything specific, ask below or speak to your GP.",
     aiPrompts: [
       "Could PCOS be affecting my chances?",
       "Does endometriosis affect fertility?",

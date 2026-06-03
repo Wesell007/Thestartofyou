@@ -75,6 +75,16 @@ import ttcStageCycle from "@/assets/ttc-stage-cycle.jpg";
 import ttcStageTiming from "@/assets/ttc-stage-timing.jpg";
 import ttcStageWaiting from "@/assets/ttc-stage-waiting.jpg";
 import ttcJourney from "@/assets/ttc-journey.jpg";
+import ttcChemicalPregnancy from "@/assets/ttc-chemical-pregnancy.jpg";
+import ttcTryingAgain from "@/assets/ttc-trying-again.jpg";
+import ttcFaintPositive from "@/assets/ttc-faint-positive.jpg";
+import ttcFertilityTestsWomen from "@/assets/ttc-fertility-tests-women.jpg";
+import ttcFertilityTestsMen from "@/assets/ttc-fertility-tests-men.jpg";
+import ttcFertilityAppointment from "@/assets/ttc-fertility-appointment.jpg";
+import ttcConditions from "@/assets/ttc-conditions.jpg";
+import ttcPregnancyTests from "@/assets/ttc-pregnancy-tests.jpg";
+
+
 
 type Img = { src: string; alt: string };
 
@@ -210,11 +220,21 @@ export const flagshipHeroMap: Record<string, Img> = {
   "can-you-get-pregnant-on-your-period": { src: ttcStageCycle, alt: "A quiet cycle-tracking scene representing period-week fertility questions." },
   "how-long-implantation-takes": { src: ttcStageWaiting, alt: "A still, daylit interior reflecting the wait around implantation." },
   "two-week-wait": { src: ttcStageWaiting, alt: "A calm TTC scene representing the long fortnight of waiting." },
-  "when-to-take-a-pregnancy-test": { src: ttcStageWaiting, alt: "A pregnancy test and a softly lit calendar — choosing when to test." },
-  "faint-positive-pregnancy-test": { src: heroImplantation, alt: "An early home pregnancy test in soft daylight — reading a faint line." },
-  "chemical-pregnancy": { src: cardQuiet, alt: "A quiet, reflective scene representing very early pregnancy loss." },
-  "trying-again-after-miscarriage": { src: cardQuiet, alt: "A reflective TTC scene — the careful return to trying after loss." },
+  "when-to-take-a-pregnancy-test": { src: ttcPregnancyTests, alt: "A home pregnancy test resting on a calm bathroom counter in soft daylight — choosing when to test." },
+  "faint-positive-pregnancy-test": { src: ttcFaintPositive, alt: "A home pregnancy test held in soft daylight — reading the ambiguity of a very faint line." },
+  "chemical-pregnancy": { src: ttcChemicalPregnancy, alt: "A quiet bedside scene with a folded pregnancy test, a journal and a glass of water — gently processing very early loss." },
+  "trying-again-after-miscarriage": { src: ttcTryingAgain, alt: "Two hands cupped gently around a small green leaf in soft daylight — the careful, hopeful return to trying after loss." },
   "trying-to-conceive-explained": { src: ttcJourney, alt: "An editorial TTC journey scene — the start of trying to conceive." },
+  "symptoms-stopping-early-pregnancy": { src: heroSymptomsStopping, alt: "A quiet reflective home scene — the felt experience of early symptoms easing." },
+
+  // TTC investigations & fertility workup
+  "fertility-tests-for-women": { src: ttcFertilityTestsWomen, alt: "A blood-test vial and a folded request slip on a sunlit wooden desk — the calm context of a female fertility workup." },
+  "fertility-tests-for-men": { src: ttcFertilityTestsMen, alt: "A specimen container and a folded clinic form in soft daylight — male fertility testing handled with dignity." },
+  "what-happens-at-a-fertility-appointment": { src: ttcFertilityAppointment, alt: "An open notebook of prepared questions, a pen and an appointment letter on a sunlit desk — preparing calmly for a first fertility appointment." },
+  "amh-test-explained": { src: ttcFertilityTestsWomen, alt: "A blood-test vial and a hormone-test request slip in soft daylight — the simple set-up of an AMH test." },
+  "pcos-and-trying-to-conceive": { src: ttcConditions, alt: "A reflective scene of soft knitwear, a hand resting on the lower abdomen and an open journal — living with PCOS while trying to conceive." },
+  "endometriosis-and-trying-to-conceive": { src: ttcConditions, alt: "A reflective scene of soft knitwear, a hand resting on the lower abdomen and an open journal — living with endometriosis while trying to conceive." },
+  "irregular-periods-and-trying-to-conceive": { src: ttcStageCycle, alt: "A cycle journal and calendar in soft daylight — tracking ovulation when periods are irregular." },
 };
 
 // ─── Section image overrides (anchors + curated extras) ────────────────────

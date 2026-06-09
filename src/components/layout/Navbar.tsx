@@ -9,9 +9,9 @@ import logoSrc from "@/assets/logo-dark.png";
 
 
 const navLinks = [
-  { label: "Pregnancy", href: "/pregnancy" },
   { label: "Trying to conceive", href: "/trying-to-conceive" },
   { label: "IVF", href: "/ivf" },
+  { label: "Pregnancy", href: "/pregnancy" },
   { label: "Postpartum", href: "/postpartum" },
   { label: "First year", href: "/first-year" },
   // NOTE: temporary route mapping — Journal label points to /product

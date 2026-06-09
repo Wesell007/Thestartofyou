@@ -393,28 +393,60 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     groups: [
       {
-        label: "Tests and scans",
-        description: "What's usually offered, and what each one is looking for.",
+        label: "Appointments, scans & screening",
+        description: "What's offered through pregnancy — the appointments, the scans, the screening tests, and what each one is looking for.",
         links: [
           { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy" },
+          { label: "What happens at the booking appointment", href: "/articles/what-happens-at-booking-appointment" },
+          { label: "Dating scan", href: "/articles/dating-scan" },
+          { label: "Combined screening test", href: "/articles/combined-screening-test" },
+          { label: "NIPT in pregnancy", href: "/articles/nipt-in-pregnancy" },
+          { label: "20-week anomaly scan", href: "/articles/20-week-anomaly-scan" },
+          { label: "Glucose tolerance test", href: "/articles/glucose-tolerance-test" },
+          { label: "Anti-D injection in pregnancy", href: "/articles/anti-d-injection-in-pregnancy" },
+          { label: "What if a scan shows something unexpected", href: "/articles/what-if-a-scan-shows-something-unexpected" },
         ],
       },
       {
-        label: "Medicines and vaccinations",
-        description: "Two of the most-asked questions, answered calmly.",
+        label: "Medicines & common illnesses",
+        description: "The everyday questions — what's safe, what to avoid, and what helps when you're unwell.",
         links: [
           { label: "Medicines in pregnancy", href: "/articles/medicines-in-pregnancy" },
+          { label: "Paracetamol in pregnancy", href: "/articles/paracetamol-in-pregnancy" },
+          { label: "Antibiotics in pregnancy", href: "/articles/antibiotics-in-pregnancy" },
+          { label: "Antacids in pregnancy", href: "/articles/antacids-in-pregnancy" },
+          { label: "Laxatives in pregnancy", href: "/articles/laxatives-in-pregnancy" },
+          { label: "Hay fever in pregnancy", href: "/articles/hay-fever-in-pregnancy" },
+          { label: "Cold and flu in pregnancy", href: "/articles/cold-and-flu-in-pregnancy" },
+          { label: "UTI in pregnancy", href: "/articles/uti-in-pregnancy" },
+          { label: "Thrush in pregnancy", href: "/articles/thrush-in-pregnancy" },
+        ],
+      },
+      {
+        label: "Vaccinations",
+        description: "Why certain vaccinations are recommended and when they're given.",
+        links: [
           { label: "Vaccinations in pregnancy", href: "/articles/vaccinations-in-pregnancy" },
         ],
       },
       {
-        label: "Staying well and when to raise something",
-        description: "Practical, trust-led guidance for the in-between days.",
+        label: "Bleeding, discharge & reassurance",
+        description: "The symptoms that prompt the most worry — held calmly, with clear guidance on when to call.",
+        links: [
+          { label: "Bleeding in early pregnancy", href: "/articles/bleeding-in-early-pregnancy" },
+          { label: "Spotting in pregnancy", href: "/articles/spotting-in-pregnancy" },
+          { label: "When to worry about cramps in pregnancy", href: "/articles/when-to-worry-about-cramps-in-pregnancy" },
+          { label: "Discharge in pregnancy", href: "/articles/discharge-in-pregnancy" },
+          { label: "Watery discharge in pregnancy", href: "/articles/watery-discharge-in-pregnancy" },
+          { label: "Leaking fluid in pregnancy", href: "/articles/leaking-fluid-in-pregnancy" },
+        ],
+      },
+      {
+        label: "Staying well day to day",
+        description: "The wider, in-between guidance for ordinary pregnancy days.",
         links: [
           { label: "Foods to avoid in pregnancy", href: "/articles/foods-to-avoid-in-pregnancy" },
           { label: "Weight changes in pregnancy", href: "/articles/weight-changes-in-pregnancy" },
-          { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
-          { label: "When pregnancy symptoms stop", href: "/articles/symptoms-stopping-early-pregnancy" },
         ],
       },
     ],

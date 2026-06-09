@@ -156,9 +156,23 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         ],
       },
       {
-        label: "Labour and birth",
-        description: "What labour can look like, how it tends to unfold, and when to call.",
+        label: "Bleeding, cramps & discharge",
+        description: "The reassurance cluster — what's usually normal, what's worth a call, held calmly.",
         links: [
+          { label: "Bleeding in early pregnancy", href: "/articles/bleeding-in-early-pregnancy" },
+          { label: "Spotting in pregnancy", href: "/articles/spotting-in-pregnancy" },
+          { label: "When to worry about cramps in pregnancy", href: "/articles/when-to-worry-about-cramps-in-pregnancy" },
+          { label: "Discharge in pregnancy", href: "/articles/discharge-in-pregnancy" },
+          { label: "Watery discharge in pregnancy", href: "/articles/watery-discharge-in-pregnancy" },
+          { label: "Leaking fluid in pregnancy", href: "/articles/leaking-fluid-in-pregnancy" },
+        ],
+      },
+      {
+        label: "Late pregnancy & early labour signs",
+        description: "The body shifts that tend to arrive as labour gets closer.",
+        links: [
+          { label: "Mucus plug", href: "/articles/mucus-plug" },
+          { label: "The show in pregnancy", href: "/articles/show-in-pregnancy" },
           { label: "Signs of labour", href: "/articles/signs-of-labour" },
           { label: "Stages of labour", href: "/articles/stages-of-labour" },
           { label: "When to go in for labour", href: "/articles/when-to-go-in-for-labour" },

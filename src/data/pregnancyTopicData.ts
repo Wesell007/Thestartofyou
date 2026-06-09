@@ -156,9 +156,23 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         ],
       },
       {
-        label: "Labour and birth",
-        description: "What labour can look like, how it tends to unfold, and when to call.",
+        label: "Bleeding, cramps & discharge",
+        description: "The reassurance cluster — what's usually normal, what's worth a call, held calmly.",
         links: [
+          { label: "Bleeding in early pregnancy", href: "/articles/bleeding-in-early-pregnancy" },
+          { label: "Spotting in pregnancy", href: "/articles/spotting-in-pregnancy" },
+          { label: "When to worry about cramps in pregnancy", href: "/articles/when-to-worry-about-cramps-in-pregnancy" },
+          { label: "Discharge in pregnancy", href: "/articles/discharge-in-pregnancy" },
+          { label: "Watery discharge in pregnancy", href: "/articles/watery-discharge-in-pregnancy" },
+          { label: "Leaking fluid in pregnancy", href: "/articles/leaking-fluid-in-pregnancy" },
+        ],
+      },
+      {
+        label: "Late pregnancy & early labour signs",
+        description: "The body shifts that tend to arrive as labour gets closer.",
+        links: [
+          { label: "Mucus plug", href: "/articles/mucus-plug" },
+          { label: "The show in pregnancy", href: "/articles/show-in-pregnancy" },
           { label: "Signs of labour", href: "/articles/signs-of-labour" },
           { label: "Stages of labour", href: "/articles/stages-of-labour" },
           { label: "When to go in for labour", href: "/articles/when-to-go-in-for-labour" },
@@ -379,28 +393,60 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     groups: [
       {
-        label: "Tests and scans",
-        description: "What's usually offered, and what each one is looking for.",
+        label: "Appointments, scans & screening",
+        description: "What's offered through pregnancy — the appointments, the scans, the screening tests, and what each one is looking for.",
         links: [
           { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy" },
+          { label: "What happens at the booking appointment", href: "/articles/what-happens-at-booking-appointment" },
+          { label: "Dating scan", href: "/articles/dating-scan" },
+          { label: "Combined screening test", href: "/articles/combined-screening-test" },
+          { label: "NIPT in pregnancy", href: "/articles/nipt-in-pregnancy" },
+          { label: "20-week anomaly scan", href: "/articles/20-week-anomaly-scan" },
+          { label: "Glucose tolerance test", href: "/articles/glucose-tolerance-test" },
+          { label: "Anti-D injection in pregnancy", href: "/articles/anti-d-injection-in-pregnancy" },
+          { label: "What if a scan shows something unexpected", href: "/articles/what-if-a-scan-shows-something-unexpected" },
         ],
       },
       {
-        label: "Medicines and vaccinations",
-        description: "Two of the most-asked questions, answered calmly.",
+        label: "Medicines & common illnesses",
+        description: "The everyday questions — what's safe, what to avoid, and what helps when you're unwell.",
         links: [
           { label: "Medicines in pregnancy", href: "/articles/medicines-in-pregnancy" },
+          { label: "Paracetamol in pregnancy", href: "/articles/paracetamol-in-pregnancy" },
+          { label: "Antibiotics in pregnancy", href: "/articles/antibiotics-in-pregnancy" },
+          { label: "Antacids in pregnancy", href: "/articles/antacids-in-pregnancy" },
+          { label: "Laxatives in pregnancy", href: "/articles/laxatives-in-pregnancy" },
+          { label: "Hay fever in pregnancy", href: "/articles/hay-fever-in-pregnancy" },
+          { label: "Cold and flu in pregnancy", href: "/articles/cold-and-flu-in-pregnancy" },
+          { label: "UTI in pregnancy", href: "/articles/uti-in-pregnancy" },
+          { label: "Thrush in pregnancy", href: "/articles/thrush-in-pregnancy" },
+        ],
+      },
+      {
+        label: "Vaccinations",
+        description: "Why certain vaccinations are recommended and when they're given.",
+        links: [
           { label: "Vaccinations in pregnancy", href: "/articles/vaccinations-in-pregnancy" },
         ],
       },
       {
-        label: "Staying well and when to raise something",
-        description: "Practical, trust-led guidance for the in-between days.",
+        label: "Bleeding, discharge & reassurance",
+        description: "The symptoms that prompt the most worry — held calmly, with clear guidance on when to call.",
+        links: [
+          { label: "Bleeding in early pregnancy", href: "/articles/bleeding-in-early-pregnancy" },
+          { label: "Spotting in pregnancy", href: "/articles/spotting-in-pregnancy" },
+          { label: "When to worry about cramps in pregnancy", href: "/articles/when-to-worry-about-cramps-in-pregnancy" },
+          { label: "Discharge in pregnancy", href: "/articles/discharge-in-pregnancy" },
+          { label: "Watery discharge in pregnancy", href: "/articles/watery-discharge-in-pregnancy" },
+          { label: "Leaking fluid in pregnancy", href: "/articles/leaking-fluid-in-pregnancy" },
+        ],
+      },
+      {
+        label: "Staying well day to day",
+        description: "The wider, in-between guidance for ordinary pregnancy days.",
         links: [
           { label: "Foods to avoid in pregnancy", href: "/articles/foods-to-avoid-in-pregnancy" },
           { label: "Weight changes in pregnancy", href: "/articles/weight-changes-in-pregnancy" },
-          { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
-          { label: "When pregnancy symptoms stop", href: "/articles/symptoms-stopping-early-pregnancy" },
         ],
       },
     ],
@@ -523,7 +569,21 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         description: "Thinking through preferences without overplanning.",
         links: [
           { label: "Writing a birth plan", href: "/articles/writing-a-birth-plan" },
+          { label: "Birth preferences", href: "/articles/birth-preferences" },
           { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack" },
+        ],
+      },
+      {
+        label: "Late-pregnancy decisions",
+        description: "The practical choices and conversations that tend to arrive in the final weeks.",
+        links: [
+          { label: "The 36-week appointment", href: "/articles/the-36-week-appointment" },
+          { label: "Group B Strep in pregnancy", href: "/articles/group-b-strep-in-pregnancy" },
+          { label: "External cephalic version (ECV)", href: "/articles/external-cephalic-version" },
+          { label: "Membrane sweep", href: "/articles/membrane-sweep" },
+          { label: "Induction of labour", href: "/articles/induction-of-labour" },
+          { label: "What happens if labour doesn't start", href: "/articles/what-happens-if-labour-doesnt-start" },
+          { label: "Hand expressing colostrum", href: "/articles/hand-expressing-colostrum" },
         ],
       },
       {
@@ -531,6 +591,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         description: "What your baby needs at home, kept simple.",
         links: [
           { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to" },
+          { label: "What to buy for a new baby", href: "/articles/what-to-buy-for-a-new-baby" },
         ],
       },
       {
@@ -573,29 +634,29 @@ export const topicMapEntries: TopicMapEntry[] = [
   {
     slug: "body",
     label: "Your body",
-    supportLine: "Symptoms, changes, and what may feel different week by week.",
+    supportLine: "Symptoms, aches, and the reassurance moments — held calmly.",
     mainHref: "/pregnancy/body",
     mainLabel: "Explore your body in pregnancy",
     hasLanding: true,
     articles: [
-      { label: "Early signs of pregnancy", href: "/articles/early-pregnancy-symptoms-explained" },
       { label: "Morning sickness", href: "/articles/complete-guide-morning-sickness" },
-      { label: "Fatigue in pregnancy", href: "/articles/fatigue-in-early-pregnancy" },
-      { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
+      { label: "Pelvic pain in pregnancy", href: "/articles/pelvic-pain-in-pregnancy" },
+      { label: "Bleeding in early pregnancy", href: "/articles/bleeding-in-early-pregnancy" },
+      { label: "Signs of labour", href: "/articles/signs-of-labour" },
     ],
   },
   {
     slug: "baby",
     label: "Your baby",
-    supportLine: "How your baby grows and changes across pregnancy.",
+    supportLine: "Growth, movement, placenta, and the things scans pick up.",
     mainHref: "/pregnancy/baby",
     mainLabel: "Explore your baby in pregnancy",
     hasLanding: true,
     articles: [
       { label: "How your baby develops in pregnancy", href: "/articles/how-your-baby-develops-in-pregnancy" },
       { label: "Baby movement in pregnancy", href: "/articles/baby-movement-in-pregnancy" },
-      { label: "Twins and multiples in pregnancy", href: "/articles/twins-and-multiples-in-pregnancy" },
-      { label: "Second trimester", href: "/articles/second-trimester-complete-guide" },
+      { label: "Reduced movements in pregnancy", href: "/articles/reduced-movements-in-pregnancy" },
+      { label: "Anterior placenta", href: "/articles/anterior-placenta" },
     ],
   },
   {
@@ -615,15 +676,15 @@ export const topicMapEntries: TopicMapEntry[] = [
   {
     slug: "health-and-safety",
     label: "Health & safety",
-    supportLine: "Tests, scans, medicines, and the questions worth raising.",
+    supportLine: "Appointments, scans, medicines, and the questions worth raising.",
     mainHref: "/pregnancy/health-and-safety",
     mainLabel: "Explore health and safety in pregnancy",
     hasLanding: true,
     articles: [
-      { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy" },
-      { label: "Vaccinations in pregnancy", href: "/articles/vaccinations-in-pregnancy" },
+      { label: "What happens at the booking appointment", href: "/articles/what-happens-at-booking-appointment" },
+      { label: "20-week anomaly scan", href: "/articles/20-week-anomaly-scan" },
       { label: "Medicines in pregnancy", href: "/articles/medicines-in-pregnancy" },
-      { label: "Weight changes in pregnancy", href: "/articles/weight-changes-in-pregnancy" },
+      { label: "Bleeding in early pregnancy", href: "/articles/bleeding-in-early-pregnancy" },
     ],
   },
   {
@@ -643,15 +704,15 @@ export const topicMapEntries: TopicMapEntry[] = [
   {
     slug: "preparing-for-baby",
     label: "Preparing for baby",
-    supportLine: "Birth, baby essentials, and getting ready for what comes next.",
+    supportLine: "Birth, late-pregnancy decisions, and getting ready for what comes next.",
     mainHref: "/pregnancy/preparing-for-baby",
     mainLabel: "Explore preparing for baby",
     hasLanding: true,
     articles: [
       { label: "Writing a birth plan", href: "/articles/writing-a-birth-plan" },
+      { label: "The 36-week appointment", href: "/articles/the-36-week-appointment" },
+      { label: "Induction of labour", href: "/articles/induction-of-labour" },
       { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack" },
-      { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth" },
-      { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to" },
     ],
   },
 ];

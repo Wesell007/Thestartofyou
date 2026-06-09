@@ -108,15 +108,6 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     groups: [
       {
-        label: "The first signs",
-        description: "Early symptoms covered in depth in the TTC guide — kept here for reference.",
-        links: [
-          { label: "Early pregnancy symptoms explained", href: "/articles/early-pregnancy-symptoms-explained" },
-          { label: "Implantation bleeding (TTC guide)", href: "/trying-to-conceive/pregnancy-tests" },
-          { label: "When pregnancy symptoms stop (TTC guide)", href: "/trying-to-conceive/two-week-wait" },
-        ],
-      },
-      {
         label: "Nausea, fatigue & the early weeks",
         description: "The symptoms that tend to define the first trimester.",
         links: [

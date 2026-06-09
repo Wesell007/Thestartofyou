@@ -1,8 +1,9 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PregnancyHero from "@/components/pregnancy/PregnancyHero";
-import PregnancyTopicMap from "@/components/pregnancy/PregnancyTopicMap";
+import PregnancyWhatThisCovers from "@/components/pregnancy/PregnancyWhatThisCovers";
 import PregnancyAIPanel from "@/components/pregnancy/PregnancyAIPanel";
+import PregnancyTopicMap from "@/components/pregnancy/PregnancyTopicMap";
 import PregnancyTrimesterCards from "@/components/pregnancy/PregnancyTrimesterCards";
 import WeekByWeek from "@/components/pregnancy/WeekByWeek";
 import KeepYourJourney from "@/components/pregnancy/KeepYourJourney";
@@ -27,25 +28,26 @@ const Pregnancy = () => {
         {/* 1. Hero */}
         <PregnancyHero />
 
-        {/* 2. Topic Map */}
-        <PregnancyTopicMap />
-
-        <SoftDivider />
+        {/* 2. What this hub covers */}
+        <PregnancyWhatThisCovers />
 
         {/* 3. AI support */}
         <PregnancyAIPanel />
 
         <SoftDivider />
 
-        {/* 4. Trimester cards */}
+        {/* 4. Topic Map */}
+        <PregnancyTopicMap />
+
+        {/* 5. Trimester cards */}
         <div data-section="trimesters">
           <PregnancyTrimesterCards />
         </div>
 
-        {/* 5. Week-by-week map */}
+        {/* 6. Week-by-week map */}
         <WeekByWeek />
 
-        {/* 6. Journal CTA */}
+        {/* 7. Journal CTA */}
         <KeepYourJourney />
       </main>
       <Footer />

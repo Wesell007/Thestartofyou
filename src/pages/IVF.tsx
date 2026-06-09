@@ -1,6 +1,8 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import IVFHero from "@/components/ivf/IVFHero";
+import IVFWhatThisCovers from "@/components/ivf/IVFWhatThisCovers";
+import IVFAISupport from "@/components/ivf/IVFAISupport";
 import IVFWhatThisIs from "@/components/ivf/IVFWhatThisIs";
 import IVFStages from "@/components/ivf/IVFStages";
 import IVFFocus from "@/components/ivf/IVFFocus";
@@ -20,8 +22,10 @@ const IVF = () => {
       <Navbar />
       <main>
         <IVFHero />
-        <IVFWhatThisIs />
+        <IVFWhatThisCovers />
+        <IVFAISupport />
         <IVFStages />
+        <IVFWhatThisIs />
         <IVFFocus />
         <IVFWhatToExpect />
         <IVFWhatMakesDifferent />

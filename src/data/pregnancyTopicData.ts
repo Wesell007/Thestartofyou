@@ -569,7 +569,21 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         description: "Thinking through preferences without overplanning.",
         links: [
           { label: "Writing a birth plan", href: "/articles/writing-a-birth-plan" },
+          { label: "Birth preferences", href: "/articles/birth-preferences" },
           { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack" },
+        ],
+      },
+      {
+        label: "Late-pregnancy decisions",
+        description: "The practical choices and conversations that tend to arrive in the final weeks.",
+        links: [
+          { label: "The 36-week appointment", href: "/articles/the-36-week-appointment" },
+          { label: "Group B Strep in pregnancy", href: "/articles/group-b-strep-in-pregnancy" },
+          { label: "External cephalic version (ECV)", href: "/articles/external-cephalic-version" },
+          { label: "Membrane sweep", href: "/articles/membrane-sweep" },
+          { label: "Induction of labour", href: "/articles/induction-of-labour" },
+          { label: "What happens if labour doesn't start", href: "/articles/what-happens-if-labour-doesnt-start" },
+          { label: "Hand expressing colostrum", href: "/articles/hand-expressing-colostrum" },
         ],
       },
       {
@@ -577,6 +591,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         description: "What your baby needs at home, kept simple.",
         links: [
           { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to" },
+          { label: "What to buy for a new baby", href: "/articles/what-to-buy-for-a-new-baby" },
         ],
       },
       {

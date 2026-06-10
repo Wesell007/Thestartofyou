@@ -83,6 +83,9 @@ import TTCPregnancyTests from "./pages/ttc/PregnancyTests.tsx";
 import TTCTwoWeekWait from "./pages/ttc/TwoWeekWait.tsx";
 import TTCConditions from "./pages/ttc/Conditions.tsx";
 import IVFTimeline from "./pages/IVFTimeline.tsx";
+import IVFBeforeTransfer from "./pages/ivf/BeforeTransfer.tsx";
+import IVFAfterTransfer from "./pages/ivf/AfterTransfer.tsx";
+import IVFEarlyPregnancy from "./pages/ivf/EarlyPregnancy.tsx";
 import AskPage from "./pages/AskPage.tsx";
 import GuidanceLibrary from "./pages/GuidanceLibrary.tsx";
 import MyWeek from "./pages/MyWeek.tsx";
@@ -228,6 +231,9 @@ const App = () => (
           <Route path="/trying-to-conceive/two-week-wait" element={<TTCTwoWeekWait />} />
           <Route path="/trying-to-conceive/conditions" element={<TTCConditions />} />
           <Route path="/ivf" element={<IVF />} />
+          <Route path="/ivf/before-transfer" element={<IVFBeforeTransfer />} />
+          <Route path="/ivf/after-transfer" element={<IVFAfterTransfer />} />
+          <Route path="/ivf/early-pregnancy" element={<IVFEarlyPregnancy />} />
           <Route path="/ivf-timeline" element={<IVFTimeline />} />
           <Route path="/postpartum" element={<Postpartum />} />
           <Route path="/first-year" element={<FirstYear />} />

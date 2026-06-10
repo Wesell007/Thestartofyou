@@ -4,12 +4,10 @@ const STAGE_BG = "--stage-ivf";
 const STAGE_ACCENT = "--stage-ivf-accent";
 
 const hubBullets = [
-  "Understanding IVF: what it is, when it's used, and how the process is structured",
-  "Medication, injections, scans, and how to follow your protocol with less overwhelm",
-  "Egg collection, embryo transfer, and what each clinical stage actually feels like",
-  "The two-week wait: what's normal, what isn't, and how to cope with the uncertainty",
-  "Emotional support through waiting, hope, setbacks, and decision-making",
-  "What happens after results: early pregnancy, next steps, or trying again",
+  "Understanding IVF: what it is and how the process is structured",
+  "Medication, scans, and following your protocol with less overwhelm",
+  "Egg collection, embryo transfer, and the two-week wait",
+  "Emotional support across waiting, hope, and difficult moments",
 ];
 
 const IVFWhatThisCovers = () => {

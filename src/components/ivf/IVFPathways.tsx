@@ -35,7 +35,7 @@ const pathways = [
 const IVFPathways = () => {
   return (
     <section
-      className="py-20 md:py-28"
+      className="py-14 md:py-20"
       style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.2)' }}
     >
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">

@@ -5,13 +5,9 @@ import IVFWhatThisCovers from "@/components/ivf/IVFWhatThisCovers";
 import IVFAISupport from "@/components/ivf/IVFAISupport";
 import IVFWhatThisIs from "@/components/ivf/IVFWhatThisIs";
 import IVFStages from "@/components/ivf/IVFStages";
-import IVFFocus from "@/components/ivf/IVFFocus";
 import IVFWhatToExpect from "@/components/ivf/IVFWhatToExpect";
-import IVFWhatMakesDifferent from "@/components/ivf/IVFWhatMakesDifferent";
 import IVFNormal from "@/components/ivf/IVFNormal";
 import IVFCommonQuestions from "@/components/ivf/IVFCommonQuestions";
-import IVFEmotionalReminder from "@/components/ivf/IVFEmotionalReminder";
-import IVFReflection from "@/components/ivf/IVFReflection";
 import IVFCapture from "@/components/ivf/IVFCapture";
 import IVFPathways from "@/components/ivf/IVFPathways";
 import IVFFinalCTA from "@/components/ivf/IVFFinalCTA";
@@ -21,20 +17,25 @@ const IVF = () => {
     <div className="min-h-screen font-sans">
       <Navbar />
       <main>
+        {/* 1. Hero */}
         <IVFHero />
+        {/* 2. What this hub covers — high up */}
         <IVFWhatThisCovers />
+        {/* 3. AI support — immediate help */}
         <IVFAISupport />
+        {/* 4. Stages — the core routes, surfaced early */}
         <IVFStages />
+        {/* 5. About this journey (merged: editorial + 4 expectation cards) */}
         <IVFWhatThisIs />
-        <IVFFocus />
         <IVFWhatToExpect />
-        <IVFWhatMakesDifferent />
+        {/* 6. Reassurance: what's normal / when to seek support */}
         <IVFNormal />
+        {/* 7. Common questions */}
         <IVFCommonQuestions />
-        <IVFEmotionalReminder />
-        <IVFReflection />
+        {/* 8. Capture + where to next (compact end-cap) */}
         <IVFCapture />
         <IVFPathways />
+        {/* 9. Final CTA */}
         <IVFFinalCTA />
       </main>
       <Footer />

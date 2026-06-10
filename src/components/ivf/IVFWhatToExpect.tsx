@@ -53,7 +53,7 @@ const sections = [
 
 const IVFWhatToExpect = () => {
   return (
-    <section className="bg-parchment py-16 md:py-24">
+    <section className="bg-parchment-dark pt-2 pb-12 md:pb-16">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         {/* Header */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-14 mb-12">

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronRight, Check, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronRight, Check, Sparkles, ShieldCheck, AlertCircle, NotebookPen, HelpCircle } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AISearchBar from "@/components/shared/AISearchBar";

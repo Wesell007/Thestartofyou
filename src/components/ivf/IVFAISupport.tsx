@@ -21,7 +21,7 @@ const IVFAISupport = () => {
   };
 
   return (
-    <section className="bg-parchment py-20 md:py-28">
+    <section className="bg-parchment pt-2 pb-14 md:pb-20">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-start">
           {/* Left — editorial */}

@@ -32,7 +32,7 @@ const IVFCommonQuestions = () => {
 
   return (
     <section
-      className="py-16 md:py-24"
+      className="py-12 md:py-16"
       style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.08)' }}
     >
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">

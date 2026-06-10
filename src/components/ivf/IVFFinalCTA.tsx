@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight, NotebookPen } from "lucide-react";
 
 const IVFFinalCTA = () => {
   return (

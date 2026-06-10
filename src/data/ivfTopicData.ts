@@ -320,10 +320,32 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         href: LINKS.earlySymptoms,
       },
     ],
+    featured: {
+      eyebrow: "Anchor read",
+      title: "The two-week wait",
+      body: "The most defining read for this stage — what's actually happening in your body, what symptoms can and can't tell you, and how to stay steady inside the not-knowing.",
+      href: LINKS.twoWeekWait,
+      hrefLabel: "Read the two-week wait guide",
+    },
+    normalVsSupport: {
+      normal: [
+        "Symptoms that come and go, including some that mimic your period",
+        "Mild cramping, light spotting, or breast tenderness",
+        "Feeling more anxious or tearful than usual",
+        "A faint line on an early test before your test date",
+      ],
+      seek: [
+        "Heavy bleeding with clots, especially with strong pain",
+        "Severe one-sided abdominal pain or shoulder-tip pain",
+        "Signs of OHSS — rapid bloating, breathlessness, reduced urination",
+        "Mental health that feels unsafe to sit with alone — please reach out",
+      ],
+    },
     groups: [
       {
         label: "The two-week wait",
         description: "Holding yourself through the longest short stretch.",
+        intro: "Why this fortnight feels disproportionately heavy after IVF, what's actually happening day by day, and how to keep yourself anchored when the days slow down.",
         links: [
           { label: "The two-week wait", href: LINKS.twoWeekWait },
           { label: "How long implantation takes", href: LINKS.howLongImplantation },
@@ -333,6 +355,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Symptoms, signals & testing",
         description: "Interpreting your body without spiralling.",
+        intro: "Honest framing on what symptoms can and cannot tell you, when to test, and how to read a faint line without letting it run your day.",
         links: [
           { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
           { label: "When to take a pregnancy test", href: LINKS.whenToTest },
@@ -344,6 +367,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Coping with uncertainty",
         description: "Steadiness when nothing is confirmed yet.",
+        intro: "Tools and reads for the days where there is nothing to do but wait — including how to tell normal anxiety apart from something that needs more support.",
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
           { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
@@ -354,6 +378,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "If results bring difficult news",
         description: "Held honestly. Stays within IVF and support.",
+        intro: "If the result is not what you hoped for, these are the reads we'd hand you first. They stay inside IVF and our support library — never bouncing you back to start again.",
         links: [
           { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },
@@ -366,6 +391,17 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       quote: "Not knowing yet is part of the work, not a failure of nerve.",
       body: "Symptoms after transfer are rarely a verdict. Most of this stage is waiting with care, not control — and finding it hard reflects the stage, not your strength.",
     },
+    journalNote: {
+      line: "If the waiting is loud in your head, putting it somewhere private can quiet it a little. A few honest lines a day, no performance.",
+      cta: "Hold the wait somewhere gentle",
+      href: "/journal",
+    },
+    commonQuestions: [
+      "Is this symptom meaningful?",
+      "When should I test?",
+      "What does a faint line mean?",
+      "How do I cope if the result is hard?",
+    ],
     aiPrompts: [
       "Is this symptom meaningful?",
       "When should I test?",

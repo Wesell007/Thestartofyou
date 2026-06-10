@@ -25,6 +25,7 @@ export interface IVFLink {
 export interface IVFGroup {
   label: string;
   description?: string;
+  intro?: string;
   links: IVFLink[];
 }
 
@@ -40,6 +41,40 @@ export interface IVFEmotionalNote {
   body: string;
 }
 
+export interface IVFFeatured {
+  eyebrow: string;
+  title: string;
+  body: string;
+  href: string;
+  hrefLabel: string;
+}
+
+export interface IVFNormalVsSupport {
+  normal: string[];
+  seek: string[];
+}
+
+export interface IVFJournalNote {
+  line: string;
+  cta: string;
+  href: string;
+}
+
+export interface IVFProtocolWeek {
+  title: string;
+  intro?: string;
+  items: { day: string; body: string }[];
+}
+
+export interface IVFHandoverNote {
+  title: string;
+  when: string;
+  signals: string[];
+  who: string;
+  href: string;
+  hrefLabel: string;
+}
+
 export interface IVFTopicConfig {
   slug: IVFTopicSlug;
   eyebrow: string;
@@ -50,9 +85,15 @@ export interface IVFTopicConfig {
 
   whatThisCovers: { lead: string; bullets: string[] };
   startHere: IVFStartHere[];
+  featured: IVFFeatured;
+  normalVsSupport: IVFNormalVsSupport;
+  protocolWeek?: IVFProtocolWeek;
+  handoverNote?: IVFHandoverNote;
   groups: IVFGroup[];
   curationNote?: string;
   emotionalNote: IVFEmotionalNote;
+  journalNote: IVFJournalNote;
+  commonQuestions: string[];
   aiPrompts: string[];
 
   prevTopic?: { label: string; href: string };

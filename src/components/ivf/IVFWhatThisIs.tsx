@@ -2,13 +2,13 @@ import ivfJourneyImg from "@/assets/ivf-journey.jpg";
 
 const IVFWhatThisIs = () => {
   return (
-    <section className="bg-parchment-dark py-12 md:py-16">
+    <section className="bg-parchment-dark pt-10 md:pt-16 pb-8 md:pb-12">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center">
           {/* Image */}
-          <div className="relative">
+          <div>
             <div
-              className="rounded-2xl overflow-hidden border shadow-card-brand"
+              className="relative rounded-2xl overflow-hidden border shadow-card-brand"
               style={{ borderColor: 'hsl(var(--stage-ivf) / 0.25)' }}
             >
               <img
@@ -17,11 +17,11 @@ const IVFWhatThisIs = () => {
                 loading="lazy"
                 width={1024}
                 height={640}
-                className="w-full h-56 sm:h-68 md:h-80 object-cover"
+                className="block w-full h-56 sm:h-68 md:h-80 object-cover"
               />
               {/* Gradient overlay at bottom */}
               <div
-                className="absolute bottom-0 left-0 right-0 h-20 rounded-b-2xl"
+                className="pointer-events-none absolute bottom-0 left-0 right-0 h-20"
                 style={{ background: 'linear-gradient(to top, hsl(var(--stage-ivf) / 0.3), transparent)' }}
               />
             </div>

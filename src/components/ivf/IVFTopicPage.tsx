@@ -81,9 +81,28 @@ const IVFTopicPage = ({ config }: Props) => {
         {/* HERO */}
         <section className="relative pt-6 sm:pt-10 md:pt-14 pb-20 md:pb-28">
           <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-48 md:h-72 -z-0"
+            className="pointer-events-none absolute inset-x-0 top-0 h-56 md:h-80 -z-0"
             style={{ background: `linear-gradient(180deg, ${tintWash} 0%, transparent 100%)` }}
           />
+          <svg
+            aria-hidden
+            className="hidden md:block absolute top-24 left-6 lg:left-10 w-24 opacity-60 pointer-events-none"
+            viewBox="0 0 80 120" fill="none"
+          >
+            <path d="M40 5 Q 40 60 40 115" stroke={accent} strokeWidth="0.7" opacity="0.55" />
+            <path d="M40 28 Q 22 30 14 22" stroke={accent} strokeWidth="0.7" opacity="0.45" />
+            <path d="M40 28 Q 58 30 66 22" stroke={accent} strokeWidth="0.7" opacity="0.45" />
+            <path d="M40 55 Q 22 58 12 50" stroke={accent} strokeWidth="0.7" opacity="0.45" />
+            <path d="M40 55 Q 58 58 68 50" stroke={accent} strokeWidth="0.7" opacity="0.45" />
+            <path d="M40 82 Q 24 84 16 76" stroke={accent} strokeWidth="0.7" opacity="0.45" />
+            <path d="M40 82 Q 56 84 64 76" stroke={accent} strokeWidth="0.7" opacity="0.45" />
+            <circle cx="14" cy="22" r="2" fill={accent} opacity="0.5" />
+            <circle cx="66" cy="22" r="2" fill={accent} opacity="0.5" />
+            <circle cx="12" cy="50" r="2.4" fill={accent} opacity="0.5" />
+            <circle cx="68" cy="50" r="2.4" fill={accent} opacity="0.5" />
+            <circle cx="16" cy="76" r="2" fill={accent} opacity="0.5" />
+            <circle cx="64" cy="76" r="2" fill={accent} opacity="0.5" />
+          </svg>
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
               <div className="md:col-span-6 order-2 md:order-1">
@@ -94,13 +113,26 @@ const IVFTopicPage = ({ config }: Props) => {
                 <p className="mt-6 font-sans text-[15px] md:text-base font-light text-muted-foreground leading-relaxed max-w-md">
                   {config.intro}
                 </p>
+                <div className="mt-7 flex items-center gap-3">
+                  <span className="h-px w-8" style={{ background: accentMid }} />
+                  <span className="font-serif italic text-[13.5px] text-foreground/55">
+                    {config.emotionalNote.quote}
+                  </span>
+                </div>
               </div>
               <div className="md:col-span-6 order-1 md:order-2 relative">
                 <div className="relative mx-auto max-w-[460px] md:max-w-none">
                   <div
-                    className="absolute inset-0 -m-4 rounded-full opacity-60 blur-2xl"
+                    className="absolute inset-0 -m-6 rounded-full opacity-70 blur-3xl"
                     style={{
-                      background: `radial-gradient(circle at 50% 45%, hsl(${IVF_TINT_HSL} / 0.85) 0%, transparent 65%)`,
+                      background: `radial-gradient(circle at 50% 45%, hsl(${IVF_TINT_HSL} / 0.95) 0%, transparent 65%)`,
+                    }}
+                    aria-hidden
+                  />
+                  <div
+                    className="absolute -inset-2 rounded-[2.2rem] opacity-40 pointer-events-none"
+                    style={{
+                      background: `linear-gradient(135deg, hsl(${IVF_ACCENT_HSL} / 0.18), transparent 60%)`,
                     }}
                     aria-hidden
                   />
@@ -109,7 +141,7 @@ const IVFTopicPage = ({ config }: Props) => {
                     alt=""
                     aria-hidden="true"
                     loading="eager"
-                    className="relative w-full h-auto rounded-[2rem] object-cover block"
+                    className="relative w-full h-auto rounded-[2rem] object-cover block shadow-[0_40px_80px_-50px_rgba(0,0,0,0.4)]"
                     style={{ aspectRatio: "1 / 1" }}
                   />
                 </div>
@@ -174,21 +206,32 @@ const IVFTopicPage = ({ config }: Props) => {
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
             <SectionLabel>Start here</SectionLabel>
             <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
-              {config.startHere.map((item) => (
+              {config.startHere.map((item, idx) => (
                 <Link
                   key={item.href + item.title}
                   to={item.href}
-                  className="group flex flex-col bg-card rounded-2xl border p-6 transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)]"
+                  className="group flex flex-col bg-card rounded-2xl border p-6 transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)] relative overflow-hidden"
                   style={{ borderColor: accentBorder }}
                 >
-                  <h3 className="font-serif text-xl md:text-[1.4rem] text-foreground leading-snug">
+                  <span
+                    className="absolute -top-12 -right-12 w-32 h-32 rounded-full opacity-0 group-hover:opacity-100 transition-opacity blur-2xl"
+                    style={{ background: `hsl(${IVF_ACCENT_HSL} / 0.18)` }}
+                    aria-hidden
+                  />
+                  <span
+                    className="font-serif text-[11px] tracking-[0.22em] uppercase mb-3 relative"
+                    style={{ color: accent }}
+                  >
+                    0{idx + 1}
+                  </span>
+                  <h3 className="font-serif text-xl md:text-[1.4rem] text-foreground leading-snug relative">
                     {item.title}
                   </h3>
-                  <p className="mt-2.5 font-sans text-[14px] font-light text-muted-foreground leading-relaxed flex-1">
+                  <p className="mt-2.5 font-sans text-[14px] font-light text-muted-foreground leading-relaxed flex-1 relative">
                     {item.why}
                   </p>
                   <span
-                    className="mt-4 inline-flex items-center gap-1.5 font-sans text-[13px] font-medium"
+                    className="mt-4 inline-flex items-center gap-1.5 font-sans text-[13px] font-medium relative"
                     style={{ color: accent }}
                   >
                     Open
@@ -196,6 +239,33 @@ const IVFTopicPage = ({ config }: Props) => {
                   </span>
                 </Link>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* EMOTIONAL BAND — stage-specific emotional intelligence */}
+        <section className="pb-14 md:pb-20">
+          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
+            <div
+              className="relative rounded-[2rem] overflow-hidden p-8 sm:p-10 md:p-14 text-center"
+              style={{
+                background: `linear-gradient(135deg, hsl(${IVF_TINT_HSL} / 0.7) 0%, hsl(${IVF_ACCENT_HSL} / 0.08) 100%)`,
+                border: `1px solid ${accentBorder}`,
+              }}
+            >
+              <span
+                className="font-sans text-[11px] font-light tracking-[0.28em] uppercase block mb-5"
+                style={{ color: accent }}
+              >
+                {config.emotionalNote.eyebrow}
+              </span>
+              <p className="font-serif italic text-xl md:text-2xl text-foreground/85 leading-snug max-w-2xl mx-auto">
+                "{config.emotionalNote.quote}"
+              </p>
+              <div className="h-px w-12 mx-auto my-6" style={{ background: accentMid }} />
+              <p className="font-sans text-[14.5px] font-light text-muted-foreground leading-relaxed max-w-xl mx-auto">
+                {config.emotionalNote.body}
+              </p>
             </div>
           </div>
         </section>

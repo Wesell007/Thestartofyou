@@ -1,7 +1,15 @@
 // ─── IVF Topic Data ───────────────────────────────────────────────────
-// Three IVF stage topics that mirror the structure of TTC/Pregnancy
-// topic pages: orientation → start here → grouped supporting routes →
-// AI bridge → siblings. Visual identity stays lilac/white.
+// Three IVF stage topics that mirror TTC/Pregnancy topic-page depth.
+//
+// Ownership rules (this file enforces them):
+//   • Before transfer  → IVF + light fertility prep (no TTC bounce)
+//   • After transfer   → IVF-owned waiting, symptoms, testing, results
+//   • Early pregnancy  → IVF-owned cautious progress, then gentle handover
+//                        to Pregnancy. Never bounce back to TTC.
+//
+// Anything explicitly TTC-coded (e.g. "trying again after miscarriage") is
+// intentionally NOT surfaced inside IVF stage groups. If a user needs that
+// content they reach it through Support, not through an IVF stage.
 
 import ivfBeforeImg from "@/assets/ivf-stage-before.jpg";
 import ivfAfterImg from "@/assets/ivf-stage-after.jpg";
@@ -26,6 +34,12 @@ export interface IVFStartHere {
   href: string;
 }
 
+export interface IVFEmotionalNote {
+  eyebrow: string;
+  quote: string;
+  body: string;
+}
+
 export interface IVFTopicConfig {
   slug: IVFTopicSlug;
   eyebrow: string;
@@ -38,6 +52,7 @@ export interface IVFTopicConfig {
   startHere: IVFStartHere[];
   groups: IVFGroup[];
   curationNote?: string;
+  emotionalNote: IVFEmotionalNote;
   aiPrompts: string[];
 
   prevTopic?: { label: string; href: string };
@@ -72,11 +87,19 @@ const LINKS = {
   earlySymptoms: "/articles/early-pregnancy-symptoms-explained",
   symptomsStopping: "/articles/symptoms-stopping-early-pregnancy",
   implantation: "/articles/implantation-bleeding",
+  howLongImplantation: "/articles/how-long-implantation-takes",
   chemical: "/articles/chemical-pregnancy",
   afterLoss: "/articles/pregnancy-after-loss",
-  tryingAgain: "/articles/trying-again-after-miscarriage",
   perinatalAnxiety: "/articles/perinatal-anxiety",
   emotionalWellbeing: "/articles/emotional-wellbeing-pregnancy",
+  anxietyInPregnancy: "/articles/anxiety-in-pregnancy",
+  bleedingEarly: "/articles/bleeding-in-early-pregnancy",
+  fatigueEarly: "/articles/fatigue-in-early-pregnancy",
+  nauseaEarly: "/articles/nausea-in-early-pregnancy",
+  fertilityTestsWomen: "/articles/fertility-tests-for-women",
+  fertilityTestsMen: "/articles/fertility-tests-for-men",
+  fertilityAppt: "/articles/what-happens-at-a-fertility-appointment",
+  testsScans: "/articles/tests-and-scans-in-pregnancy",
 };
 
 export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
@@ -89,46 +112,50 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       "Preparation, medication, monitoring, and getting ready physically and mentally for transfer day.",
     heroImage: ivfBeforeImg,
     whatThisCovers: {
-      lead: "Everything that helps you feel oriented and steady through the lead-up to transfer.",
+      lead:
+        "Everything that helps you feel oriented and steady through the weeks of preparation, scans, injections, and decisions before transfer.",
       bullets: [
         "What IVF actually involves, step by step",
-        "Medication, injections, and monitoring",
-        "Scans, appointments, and what to ask",
-        "Egg collection and embryo transfer preparation",
-        "Practical preparation for transfer day",
-        "Holding emotional steadiness through prep",
+        "Medication, injections, and how to follow your protocol",
+        "Scans, blood tests, and how to read your monitoring",
+        "Egg collection, fertilisation, and embryo grading basics",
+        "Practical and physical preparation for transfer day",
+        "Holding emotional steadiness through the prep weeks",
       ],
     },
     startHere: [
       {
         title: "IVF timeline, what to expect",
-        why: "A clear overview of the stages, so the process feels less unknown.",
+        why: "A clear overview of the full process so the unknown feels less heavy.",
         href: LINKS.ivfTimeline,
       },
       {
-        title: "Track your IVF timeline",
-        why: "Enter your transfer date and follow your personal milestones day by day.",
-        href: LINKS.timeline,
+        title: "The emotional impact of IVF",
+        why: "Why this stage often feels heavier than it looks, and what helps.",
+        href: LINKS.emotionalIVF,
       },
       {
-        title: "The emotional impact of IVF",
-        why: "What this stage often feels like, and why it can be heavier than it looks.",
-        href: LINKS.emotionalIVF,
+        title: "Track your IVF timeline",
+        why: "Add your transfer date and follow your personal milestones day by day.",
+        href: LINKS.timeline,
       },
     ],
     groups: [
       {
         label: "Understanding IVF",
-        description: "Orient yourself before going deeper.",
+        description: "Orient yourself before going deeper into your protocol.",
         links: [
           { label: "IVF timeline, what to expect", href: LINKS.ivfTimeline },
-          { label: "Back to the IVF hub", href: LINKS.hub },
+          { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
+          { label: "Fertility tests for women", href: LINKS.fertilityTestsWomen },
+          { label: "Fertility tests for men", href: LINKS.fertilityTestsMen },
         ],
       },
       {
         label: "Medication, monitoring & appointments",
         description: "Following your protocol with less mental load.",
         links: [
+          { label: "What happens at a fertility appointment", href: LINKS.fertilityAppt },
           { label: "Track your IVF timeline", href: LINKS.timeline },
           { label: "Ask about a medication or scan", href: LINKS.ask },
         ],
@@ -139,19 +166,26 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         links: [
           { label: "IVF timeline, what to expect", href: LINKS.ivfTimeline },
           { label: "Track your transfer day", href: LINKS.timeline },
+          { label: "Ask anything about transfer prep", href: LINKS.ask },
         ],
       },
       {
-        label: "Preparing emotionally & practically",
+        label: "Preparing emotionally",
         description: "Looking after yourself through the lead-up.",
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
+          { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
           { label: "Find support for hard moments", href: LINKS.support },
         ],
       },
     ],
     curationNote:
-      "We keep IVF guidance tightly curated — fewer routes, written for the stage you are in.",
+      "We keep IVF guidance tightly curated — fewer routes, written for the stage you are in right now.",
+    emotionalNote: {
+      eyebrow: "Holding the lead-up",
+      quote: "Preparation is not a performance. Showing up is already the work.",
+      body: "Before transfer asks a lot quietly. Consistency, patience, and small daily acts of care are doing more than they look like they are.",
+    },
     aiPrompts: [
       "What matters most before transfer?",
       "How strict does medication timing need to be?",
@@ -170,20 +204,21 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       "The waiting period — often the most uncertain stage, where questions and emotions can feel heightened.",
     heroImage: ivfAfterImg,
     whatThisCovers: {
-      lead: "Guidance for the two-week wait, symptom-checking, testing, and the emotional weight of not yet knowing.",
+      lead:
+        "Guidance for the two-week wait, symptom-checking, testing, and the emotional weight of not yet knowing.",
       bullets: [
-        "What the two-week wait actually feels like",
-        "What symptoms might mean — and not mean",
-        "When and how to test",
-        "What's normal, and when to seek support",
-        "Waiting emotionally without losing yourself",
-        "What may happen after results, either way",
+        "What the two-week wait actually feels like after IVF",
+        "What early symptoms might mean — and not mean",
+        "When and how to test, and how to read the result",
+        "Implantation, faint lines, and bleeding interpretation",
+        "Waiting emotionally without losing yourself in it",
+        "Holding both outcomes gently before you know",
       ],
     },
     startHere: [
       {
         title: "The two-week wait",
-        why: "Why this stage feels so loud, and how to move through it.",
+        why: "Why this stage feels so loud after IVF, and how to move through it.",
         href: LINKS.twoWeekWait,
       },
       {
@@ -203,6 +238,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Holding yourself through the longest short stretch.",
         links: [
           { label: "The two-week wait", href: LINKS.twoWeekWait },
+          { label: "How long implantation takes", href: LINKS.howLongImplantation },
           { label: "Ask anything during the wait", href: LINKS.ask },
         ],
       },
@@ -214,6 +250,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
           { label: "When to take a pregnancy test", href: LINKS.whenToTest },
           { label: "Faint positive pregnancy test", href: LINKS.faintPositive },
           { label: "Implantation bleeding", href: LINKS.implantation },
+          { label: "Symptoms stopping suddenly", href: LINKS.symptomsStopping },
         ],
       },
       {
@@ -222,19 +259,25 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
           { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
+          { label: "Anxiety in pregnancy", href: LINKS.anxietyInPregnancy },
           { label: "Find support for hard moments", href: LINKS.support },
         ],
       },
       {
-        label: "What happens after results",
-        description: "Both outcomes, held honestly.",
+        label: "If results bring difficult news",
+        description: "Held honestly. Stays within IVF and support.",
         links: [
           { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },
-          { label: "Trying again after miscarriage", href: LINKS.tryingAgain },
+          { label: "Find support for hard moments", href: LINKS.support },
         ],
       },
     ],
+    emotionalNote: {
+      eyebrow: "Holding the wait",
+      quote: "Not knowing yet is part of the work, not a failure of nerve.",
+      body: "Symptoms after transfer are rarely a verdict. Most of this stage is waiting with care, not control — and finding it hard reflects the stage, not your strength.",
+    },
     aiPrompts: [
       "Is this symptom meaningful?",
       "When should I test?",
@@ -251,17 +294,18 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
     stageIndicator: "Stage 3 of 3",
     title: "Early pregnancy",
     intro:
-      "Monitoring, early scans, and cautious progress as things begin to develop after a positive result.",
+      "Cautious progress, monitoring, early scans, and the slow handover from IVF care into pregnancy.",
     heroImage: ivfEarlyImg,
     whatThisCovers: {
-      lead: "Holding hope and caution together as you move from IVF care into early pregnancy.",
+      lead:
+        "Holding hope and caution together as you move from IVF care into early pregnancy.",
       bullets: [
-        "Early IVF pregnancy monitoring",
-        "Scans, milestones, and what each one means",
-        "What cautious progress can feel like",
-        "Emotional support in early IVF pregnancy",
-        "Transitioning into mainstream pregnancy care",
-        "What happens if things do not progress as hoped",
+        "Beta hCG tracking and what rising numbers mean",
+        "Early IVF scans, milestones, and what each one signals",
+        "Common early symptoms — and ones to flag",
+        "Holding cautious progress without forcing certainty",
+        "Bleeding, spotting and what is and isn't worrying",
+        "When and how IVF care hands over to pregnancy care",
       ],
     },
     startHere: [
@@ -276,48 +320,66 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         href: LINKS.emotionalWellbeing,
       },
       {
-        title: "Continue into the pregnancy hub",
-        why: "When you're ready, your pregnancy guidance is here, stage by stage.",
-        href: LINKS.pregnancy,
+        title: "Bleeding in early pregnancy",
+        why: "Clear, calm guidance on what spotting after IVF may mean.",
+        href: LINKS.bleedingEarly,
       },
     ],
     groups: [
       {
-        label: "Monitoring & scans",
+        label: "Monitoring & early scans",
         description: "Small checkpoints, one at a time.",
         links: [
+          { label: "Tests and scans in pregnancy", href: LINKS.testsScans },
           { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
           { label: "Symptoms stopping in early pregnancy", href: LINKS.symptomsStopping },
           { label: "Ask about a scan or result", href: LINKS.ask },
         ],
       },
       {
-        label: "What cautious progress feels like",
+        label: "Symptoms in early IVF pregnancy",
+        description: "What's common, what's reassuring, what to flag.",
+        links: [
+          { label: "Nausea in early pregnancy", href: LINKS.nauseaEarly },
+          { label: "Fatigue in early pregnancy", href: LINKS.fatigueEarly },
+          { label: "Bleeding in early pregnancy", href: LINKS.bleedingEarly },
+          { label: "Implantation bleeding", href: LINKS.implantation },
+        ],
+      },
+      {
+        label: "Holding cautious progress",
         description: "Hope and caution can coexist here.",
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
           { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
+          { label: "Anxiety in pregnancy", href: LINKS.anxietyInPregnancy },
           { label: "Emotional wellbeing in pregnancy", href: LINKS.emotionalWellbeing },
         ],
       },
       {
-        label: "Moving into pregnancy care",
-        description: "When IVF care gently hands over.",
+        label: "Handover into pregnancy care",
+        description: "When IVF care gently steps back.",
         links: [
           { label: "Pregnancy hub", href: LINKS.pregnancy },
-          { label: "Find support for hard moments", href: LINKS.support },
+          { label: "Tests and scans in pregnancy", href: LINKS.testsScans },
+          { label: "Ask about handover timing", href: LINKS.ask },
         ],
       },
       {
         label: "If things do not progress",
-        description: "Honest guidance, held with care.",
+        description: "Held honestly, kept inside IVF and support.",
         links: [
           { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },
-          { label: "Trying again after miscarriage", href: LINKS.tryingAgain },
+          { label: "Find support for hard moments", href: LINKS.support },
         ],
       },
     ],
+    emotionalNote: {
+      eyebrow: "Cautious progress",
+      quote: "You don't have to feel certain to be moving forward.",
+      body: "Early pregnancy after IVF rarely lands as one big shift. It arrives in small checkpoints — and needing reassurance between them is part of the stage, not a sign anything is wrong.",
+    },
     aiPrompts: [
       "Is it normal to still feel anxious?",
       "What should I expect between scans?",
@@ -325,5 +387,6 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       "When does IVF care hand over to pregnancy care?",
     ],
     prevTopic: { label: "After transfer", href: LINKS.after },
+    nextTopic: { label: "Pregnancy hub", href: LINKS.pregnancy },
   },
 };

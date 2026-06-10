@@ -181,10 +181,43 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         href: LINKS.timeline,
       },
     ],
+    featured: {
+      eyebrow: "Anchor read",
+      title: "IVF timeline, what to expect",
+      body: "A clear, calm overview of every stage — protocol, scans, egg collection, transfer — so the unknown shrinks before you reach it.",
+      href: LINKS.ivfTimeline,
+      hrefLabel: "Read the timeline",
+    },
+    normalVsSupport: {
+      normal: [
+        "Bloating, mood shifts, and tiredness as stimulation builds",
+        "Sore injection sites and feeling emotionally raw on heavier days",
+        "Light cramping or spotting around egg collection",
+        "Mental fatigue from holding so much logistical detail",
+      ],
+      seek: [
+        "Severe abdominal pain, rapid bloating, or breathlessness (possible OHSS)",
+        "Heavy bleeding before or after egg collection",
+        "A fever, or signs of infection at an injection site",
+        "Distress that feels unmanageable — your clinic and our support team are there",
+      ],
+    },
+    protocolWeek: {
+      title: "What your protocol week might look like",
+      intro: "A simplified example. Your real protocol will be set by your clinic — use this only to picture the shape.",
+      items: [
+        { day: "Day 1", body: "Period arrives. Baseline scan and bloods booked. Stimulation injections begin." },
+        { day: "Day 3", body: "Settling into daily injections. Mild bloating and tiredness are common." },
+        { day: "Day 6", body: "First monitoring scan. Bloods check oestrogen. Doses may be adjusted." },
+        { day: "Trigger", body: "Trigger injection at a precise time. Egg collection is usually 36 hours later." },
+        { day: "Transfer day", body: "Embryo transfer in clinic. A short procedure, then the wait begins." },
+      ],
+    },
     groups: [
       {
         label: "Understanding IVF",
         description: "Orient yourself before going deeper into your protocol.",
+        intro: "Start here if IVF still feels like a wall of acronyms. These reads give you the shape of the process, what the early tests measure, and why each step exists.",
         links: [
           { label: "IVF timeline, what to expect", href: LINKS.ivfTimeline },
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
@@ -195,6 +228,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Medication, monitoring & appointments",
         description: "Following your protocol with less mental load.",
+        intro: "Injections, scans, and bloods can become their own full-time job. These help you hold the logistics and know what each appointment is actually checking.",
         links: [
           { label: "What happens at a fertility appointment", href: LINKS.fertilityAppt },
           { label: "Track your IVF timeline", href: LINKS.timeline },
@@ -204,6 +238,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Procedures & preparation",
         description: "Egg collection, embryo transfer, and the days around them.",
+        intro: "What to expect on the two clinic days that matter most — and how to look after yourself in the hours either side.",
         links: [
           { label: "IVF timeline, what to expect", href: LINKS.ivfTimeline },
           { label: "Track your transfer day", href: LINKS.timeline },
@@ -213,6 +248,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Preparing emotionally",
         description: "Looking after yourself through the lead-up.",
+        intro: "The prep weeks are quietly heavy. These reads are about steadiness — not optimism — and what to do when the load tips over.",
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
           { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
@@ -227,6 +263,17 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       quote: "Preparation is not a performance. Showing up is already the work.",
       body: "Before transfer asks a lot quietly. Consistency, patience, and small daily acts of care are doing more than they look like they are.",
     },
+    journalNote: {
+      line: "Appointments, doses, side effects, the questions that arrive at 2am — keeping them somewhere quiet takes the weight off your head.",
+      cta: "Hold your prep notes",
+      href: "/journal",
+    },
+    commonQuestions: [
+      "How strict does medication timing need to be?",
+      "What does a normal monitoring scan show?",
+      "How should I prepare for egg collection?",
+      "What helps in the days before transfer?",
+    ],
     aiPrompts: [
       "What matters most before transfer?",
       "How strict does medication timing need to be?",

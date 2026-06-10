@@ -25,6 +25,7 @@ export interface IVFLink {
 export interface IVFGroup {
   label: string;
   description?: string;
+  intro?: string;
   links: IVFLink[];
 }
 
@@ -40,6 +41,40 @@ export interface IVFEmotionalNote {
   body: string;
 }
 
+export interface IVFFeatured {
+  eyebrow: string;
+  title: string;
+  body: string;
+  href: string;
+  hrefLabel: string;
+}
+
+export interface IVFNormalVsSupport {
+  normal: string[];
+  seek: string[];
+}
+
+export interface IVFJournalNote {
+  line: string;
+  cta: string;
+  href: string;
+}
+
+export interface IVFProtocolWeek {
+  title: string;
+  intro?: string;
+  items: { day: string; body: string }[];
+}
+
+export interface IVFHandoverNote {
+  title: string;
+  when: string;
+  signals: string[];
+  who: string;
+  href: string;
+  hrefLabel: string;
+}
+
 export interface IVFTopicConfig {
   slug: IVFTopicSlug;
   eyebrow: string;
@@ -50,9 +85,15 @@ export interface IVFTopicConfig {
 
   whatThisCovers: { lead: string; bullets: string[] };
   startHere: IVFStartHere[];
+  featured: IVFFeatured;
+  normalVsSupport: IVFNormalVsSupport;
+  protocolWeek?: IVFProtocolWeek;
+  handoverNote?: IVFHandoverNote;
   groups: IVFGroup[];
   curationNote?: string;
   emotionalNote: IVFEmotionalNote;
+  journalNote: IVFJournalNote;
+  commonQuestions: string[];
   aiPrompts: string[];
 
   prevTopic?: { label: string; href: string };
@@ -140,10 +181,43 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         href: LINKS.timeline,
       },
     ],
+    featured: {
+      eyebrow: "Anchor read",
+      title: "IVF timeline, what to expect",
+      body: "A clear, calm overview of every stage — protocol, scans, egg collection, transfer — so the unknown shrinks before you reach it.",
+      href: LINKS.ivfTimeline,
+      hrefLabel: "Read the timeline",
+    },
+    normalVsSupport: {
+      normal: [
+        "Bloating, mood shifts, and tiredness as stimulation builds",
+        "Sore injection sites and feeling emotionally raw on heavier days",
+        "Light cramping or spotting around egg collection",
+        "Mental fatigue from holding so much logistical detail",
+      ],
+      seek: [
+        "Severe abdominal pain, rapid bloating, or breathlessness (possible OHSS)",
+        "Heavy bleeding before or after egg collection",
+        "A fever, or signs of infection at an injection site",
+        "Distress that feels unmanageable — your clinic and our support team are there",
+      ],
+    },
+    protocolWeek: {
+      title: "What your protocol week might look like",
+      intro: "A simplified example. Your real protocol will be set by your clinic — use this only to picture the shape.",
+      items: [
+        { day: "Day 1", body: "Period arrives. Baseline scan and bloods booked. Stimulation injections begin." },
+        { day: "Day 3", body: "Settling into daily injections. Mild bloating and tiredness are common." },
+        { day: "Day 6", body: "First monitoring scan. Bloods check oestrogen. Doses may be adjusted." },
+        { day: "Trigger", body: "Trigger injection at a precise time. Egg collection is usually 36 hours later." },
+        { day: "Transfer day", body: "Embryo transfer in clinic. A short procedure, then the wait begins." },
+      ],
+    },
     groups: [
       {
         label: "Understanding IVF",
         description: "Orient yourself before going deeper into your protocol.",
+        intro: "Start here if IVF still feels like a wall of acronyms. These reads give you the shape of the process, what the early tests measure, and why each step exists.",
         links: [
           { label: "IVF timeline, what to expect", href: LINKS.ivfTimeline },
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
@@ -154,6 +228,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Medication, monitoring & appointments",
         description: "Following your protocol with less mental load.",
+        intro: "Injections, scans, and bloods can become their own full-time job. These help you hold the logistics and know what each appointment is actually checking.",
         links: [
           { label: "What happens at a fertility appointment", href: LINKS.fertilityAppt },
           { label: "Track your IVF timeline", href: LINKS.timeline },
@@ -163,6 +238,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Procedures & preparation",
         description: "Egg collection, embryo transfer, and the days around them.",
+        intro: "What to expect on the two clinic days that matter most — and how to look after yourself in the hours either side.",
         links: [
           { label: "IVF timeline, what to expect", href: LINKS.ivfTimeline },
           { label: "Track your transfer day", href: LINKS.timeline },
@@ -172,6 +248,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Preparing emotionally",
         description: "Looking after yourself through the lead-up.",
+        intro: "The prep weeks are quietly heavy. These reads are about steadiness — not optimism — and what to do when the load tips over.",
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
           { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
@@ -186,6 +263,17 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       quote: "Preparation is not a performance. Showing up is already the work.",
       body: "Before transfer asks a lot quietly. Consistency, patience, and small daily acts of care are doing more than they look like they are.",
     },
+    journalNote: {
+      line: "Appointments, doses, side effects, the questions that arrive at 2am — keeping them somewhere quiet takes the weight off your head.",
+      cta: "Hold your prep notes",
+      href: "/journal",
+    },
+    commonQuestions: [
+      "How strict does medication timing need to be?",
+      "What does a normal monitoring scan show?",
+      "How should I prepare for egg collection?",
+      "What helps in the days before transfer?",
+    ],
     aiPrompts: [
       "What matters most before transfer?",
       "How strict does medication timing need to be?",
@@ -232,10 +320,32 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         href: LINKS.earlySymptoms,
       },
     ],
+    featured: {
+      eyebrow: "Anchor read",
+      title: "The two-week wait",
+      body: "The most defining read for this stage — what's actually happening in your body, what symptoms can and can't tell you, and how to stay steady inside the not-knowing.",
+      href: LINKS.twoWeekWait,
+      hrefLabel: "Read the two-week wait guide",
+    },
+    normalVsSupport: {
+      normal: [
+        "Symptoms that come and go, including some that mimic your period",
+        "Mild cramping, light spotting, or breast tenderness",
+        "Feeling more anxious or tearful than usual",
+        "A faint line on an early test before your test date",
+      ],
+      seek: [
+        "Heavy bleeding with clots, especially with strong pain",
+        "Severe one-sided abdominal pain or shoulder-tip pain",
+        "Signs of OHSS — rapid bloating, breathlessness, reduced urination",
+        "Mental health that feels unsafe to sit with alone — please reach out",
+      ],
+    },
     groups: [
       {
         label: "The two-week wait",
         description: "Holding yourself through the longest short stretch.",
+        intro: "Why this fortnight feels disproportionately heavy after IVF, what's actually happening day by day, and how to keep yourself anchored when the days slow down.",
         links: [
           { label: "The two-week wait", href: LINKS.twoWeekWait },
           { label: "How long implantation takes", href: LINKS.howLongImplantation },
@@ -245,6 +355,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Symptoms, signals & testing",
         description: "Interpreting your body without spiralling.",
+        intro: "Honest framing on what symptoms can and cannot tell you, when to test, and how to read a faint line without letting it run your day.",
         links: [
           { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
           { label: "When to take a pregnancy test", href: LINKS.whenToTest },
@@ -256,6 +367,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Coping with uncertainty",
         description: "Steadiness when nothing is confirmed yet.",
+        intro: "Tools and reads for the days where there is nothing to do but wait — including how to tell normal anxiety apart from something that needs more support.",
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
           { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
@@ -266,6 +378,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "If results bring difficult news",
         description: "Held honestly. Stays within IVF and support.",
+        intro: "If the result is not what you hoped for, these are the reads we'd hand you first. They stay inside IVF and our support library — never bouncing you back to start again.",
         links: [
           { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },
@@ -278,6 +391,17 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       quote: "Not knowing yet is part of the work, not a failure of nerve.",
       body: "Symptoms after transfer are rarely a verdict. Most of this stage is waiting with care, not control — and finding it hard reflects the stage, not your strength.",
     },
+    journalNote: {
+      line: "If the waiting is loud in your head, putting it somewhere private can quiet it a little. A few honest lines a day, no performance.",
+      cta: "Hold the wait somewhere gentle",
+      href: "/journal",
+    },
+    commonQuestions: [
+      "Is this symptom meaningful?",
+      "When should I test?",
+      "What does a faint line mean?",
+      "How do I cope if the result is hard?",
+    ],
     aiPrompts: [
       "Is this symptom meaningful?",
       "When should I test?",
@@ -325,10 +449,45 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         href: LINKS.bleedingEarly,
       },
     ],
+    featured: {
+      eyebrow: "Anchor read",
+      title: "Early pregnancy symptoms explained",
+      body: "An honest, calm read on what early symptoms can — and can't — tell you after IVF, and how to hold the days between scans without spiralling.",
+      href: LINKS.earlySymptoms,
+      hrefLabel: "Read the early symptoms guide",
+    },
+    normalVsSupport: {
+      normal: [
+        "Symptoms that come and go in the early weeks",
+        "Mild cramping or pulling as things grow",
+        "Light spotting, especially around when a period would have been due",
+        "Relief and worry showing up in the same hour",
+      ],
+      seek: [
+        "Heavy bleeding, especially with strong cramping",
+        "Severe one-sided pain, or shoulder-tip pain",
+        "A sudden, complete loss of symptoms that worries you",
+        "Mental health that feels unsafe — your clinic and our support team are there",
+      ],
+    },
+    handoverNote: {
+      title: "When does handover happen?",
+      when: "Most IVF clinics hand care over to your maternity team between around 8 and 12 weeks — usually after a reassurance scan confirms a heartbeat and steady growth.",
+      signals: [
+        "A discharge scan or appointment with your IVF clinic",
+        "A referral letter, or a prompt to self-refer to your midwife or maternity service",
+        "Your booking appointment with a midwife, usually before 10 weeks",
+        "Routine pregnancy care taking over from IVF-specific monitoring",
+      ],
+      who: "Your maternity team — midwives and obstetricians — pick up regular care. Our pregnancy hub is set up to meet you there.",
+      href: LINKS.pregnancy,
+      hrefLabel: "Open the pregnancy hub",
+    },
     groups: [
       {
         label: "Monitoring & early scans",
         description: "Small checkpoints, one at a time.",
+        intro: "Beta hCG, viability scans, dating scans — what each one is actually checking, and how to hold yourself in the days between.",
         links: [
           { label: "Tests and scans in pregnancy", href: LINKS.testsScans },
           { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
@@ -339,6 +498,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Symptoms in early IVF pregnancy",
         description: "What's common, what's reassuring, what to flag.",
+        intro: "Honest framing for the symptoms most people meet in the first weeks after a positive — and a clear line on when something deserves a call.",
         links: [
           { label: "Nausea in early pregnancy", href: LINKS.nauseaEarly },
           { label: "Fatigue in early pregnancy", href: LINKS.fatigueEarly },
@@ -349,6 +509,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Holding cautious progress",
         description: "Hope and caution can coexist here.",
+        intro: "Early pregnancy after IVF rarely feels like the relief you expected. These reads are for the days where hope and worry refuse to take turns.",
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
           { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
@@ -359,6 +520,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Handover into pregnancy care",
         description: "When IVF care gently steps back.",
+        intro: "The point where your IVF clinic discharges you and your maternity team takes over. The handover card above explains the timing — these reads help you land in pregnancy care.",
         links: [
           { label: "Pregnancy hub", href: LINKS.pregnancy },
           { label: "Tests and scans in pregnancy", href: LINKS.testsScans },
@@ -368,6 +530,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "If things do not progress",
         description: "Held honestly, kept inside IVF and support.",
+        intro: "If something stops, these are the reads we'd hand you first — kept inside IVF and our support library, never bouncing you backwards.",
         links: [
           { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },
@@ -380,6 +543,17 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       quote: "You don't have to feel certain to be moving forward.",
       body: "Early pregnancy after IVF rarely lands as one big shift. It arrives in small checkpoints — and needing reassurance between them is part of the stage, not a sign anything is wrong.",
     },
+    journalNote: {
+      line: "Marking cautious milestones somewhere private — a scan, a number, a quiet good morning — lets you notice progress without forcing certainty.",
+      cta: "Mark a quiet milestone",
+      href: "/journal",
+    },
+    commonQuestions: [
+      "What should rising beta hCG look like?",
+      "What does spotting in early pregnancy usually mean?",
+      "When does my IVF clinic hand care over?",
+      "How do I stay grounded between scans?",
+    ],
     aiPrompts: [
       "Is it normal to still feel anxious?",
       "What should I expect between scans?",

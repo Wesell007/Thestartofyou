@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight, NotebookPen } from "lucide-react";
 
 const IVFFinalCTA = () => {
   return (
@@ -70,48 +70,60 @@ const IVFFinalCTA = () => {
             </p>
           </div>
 
-          {/* Right — stage summary */}
-          <div className="space-y-3">
-            {[
-              { num: "01", title: "Before transfer", desc: "Preparation, medication, your protocol", emotional: "Focus" },
-              { num: "02", title: "After transfer", desc: "The two-week wait and what to expect", emotional: "Patience" },
-              { num: "03", title: "Early pregnancy", desc: "Monitoring, scans, cautious progress", emotional: "Hope" },
-            ].map((stage) => (
-              <Link
-                key={stage.num}
-                to={`/ivf/${stage.title.toLowerCase().replace(/ /g, '-')}`}
-                className="group rounded-xl px-5 py-4 border flex items-start gap-4 transition-all hover:shadow-card-brand"
-                style={{
-                  backgroundColor: 'hsl(var(--stage-ivf) / 0.08)',
-                  borderColor: 'hsl(var(--stage-ivf-accent) / 0.1)',
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.borderColor = 'hsl(var(--stage-ivf-accent) / 0.3)'}
-                onMouseLeave={(e) => e.currentTarget.style.borderColor = 'hsl(var(--stage-ivf-accent) / 0.1)'}
-              >
+          {/* Right — quiet editorial closing panel */}
+          <div
+            className="relative rounded-[1.75rem] border p-7 sm:p-9 overflow-hidden"
+            style={{
+              backgroundColor: 'hsl(var(--stage-ivf) / 0.08)',
+              borderColor: 'hsl(var(--stage-ivf-accent) / 0.16)',
+            }}
+          >
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -top-16 -right-16 w-56 h-56 rounded-full blur-3xl opacity-70"
+              style={{ background: 'hsl(var(--stage-ivf) / 0.45)' }}
+            />
+
+            {/* Colour trail repeated */}
+            <div className="relative flex items-center gap-1.5 mb-6">
+              {[
+                { var: '--stage-ttc-accent', w: 'w-4' },
+                { var: '--stage-ivf-accent', w: 'w-12' },
+                { var: '--stage-pregnancy-accent', w: 'w-4' },
+              ].map((t, i) => (
                 <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
-                  style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.2)' }}
-                >
-                  <span className="font-serif text-sm" style={{ color: 'hsl(var(--stage-ivf-accent) / 0.6)' }}>{stage.num}</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <p className="font-serif text-base text-foreground group-hover:text-foreground/80 transition-colors">{stage.title}</p>
-                    <ArrowUpRight size={13} className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0" style={{ color: 'hsl(var(--stage-ivf-accent))' }} />
-                  </div>
-                  <p className="font-sans text-xs font-light text-muted-foreground/55">{stage.desc}</p>
-                </div>
-                <span
-                  className="font-sans text-[9px] font-light tracking-[0.1em] uppercase rounded-full px-2.5 py-1 shrink-0 self-center hidden sm:block"
-                  style={{
-                    backgroundColor: 'hsl(var(--stage-ivf) / 0.15)',
-                    color: 'hsl(var(--stage-ivf-accent) / 0.7)',
-                  }}
-                >
-                  {stage.emotional}
-                </span>
-              </Link>
-            ))}
+                  key={i}
+                  className={`h-0.5 rounded-full ${t.w}`}
+                  style={{ backgroundColor: `hsl(var(${t.var}) / ${i === 1 ? '0.7' : '0.2'})` }}
+                />
+              ))}
+            </div>
+
+            <p
+              className="relative font-sans text-[11px] font-light tracking-[0.24em] uppercase mb-4"
+              style={{ color: 'hsl(var(--stage-ivf-accent))' }}
+            >
+              A quiet note
+            </p>
+            <p className="relative font-serif italic text-lg sm:text-xl text-foreground/80 leading-snug mb-5">
+              "IVF asks you to hold a lot at once. You don't have to carry it all in your head."
+            </p>
+            <div
+              className="relative h-px w-10 mb-5"
+              style={{ background: 'hsl(var(--stage-ivf-accent) / 0.35)' }}
+            />
+            <p className="relative font-sans text-[13.5px] font-light text-muted-foreground leading-relaxed mb-5">
+              Some people find it helps to keep their appointments, questions, and the things this stage stirs up somewhere gentle and private.
+            </p>
+            <Link
+              to="/journal"
+              className="relative inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium transition-colors"
+              style={{ color: 'hsl(var(--stage-ivf-accent))' }}
+            >
+              <NotebookPen size={12} />
+              Hold your IVF journey
+              <ArrowUpRight size={12} />
+            </Link>
           </div>
         </div>
       </div>

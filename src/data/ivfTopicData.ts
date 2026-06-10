@@ -449,10 +449,45 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         href: LINKS.bleedingEarly,
       },
     ],
+    featured: {
+      eyebrow: "Anchor read",
+      title: "Early pregnancy symptoms explained",
+      body: "An honest, calm read on what early symptoms can — and can't — tell you after IVF, and how to hold the days between scans without spiralling.",
+      href: LINKS.earlySymptoms,
+      hrefLabel: "Read the early symptoms guide",
+    },
+    normalVsSupport: {
+      normal: [
+        "Symptoms that come and go in the early weeks",
+        "Mild cramping or pulling as things grow",
+        "Light spotting, especially around when a period would have been due",
+        "Relief and worry showing up in the same hour",
+      ],
+      seek: [
+        "Heavy bleeding, especially with strong cramping",
+        "Severe one-sided pain, or shoulder-tip pain",
+        "A sudden, complete loss of symptoms that worries you",
+        "Mental health that feels unsafe — your clinic and our support team are there",
+      ],
+    },
+    handoverNote: {
+      title: "When does handover happen?",
+      when: "Most IVF clinics hand care over to your maternity team between around 8 and 12 weeks — usually after a reassurance scan confirms a heartbeat and steady growth.",
+      signals: [
+        "A discharge scan or appointment with your IVF clinic",
+        "A referral letter, or a prompt to self-refer to your midwife or maternity service",
+        "Your booking appointment with a midwife, usually before 10 weeks",
+        "Routine pregnancy care taking over from IVF-specific monitoring",
+      ],
+      who: "Your maternity team — midwives and obstetricians — pick up regular care. Our pregnancy hub is set up to meet you there.",
+      href: LINKS.pregnancy,
+      hrefLabel: "Open the pregnancy hub",
+    },
     groups: [
       {
         label: "Monitoring & early scans",
         description: "Small checkpoints, one at a time.",
+        intro: "Beta hCG, viability scans, dating scans — what each one is actually checking, and how to hold yourself in the days between.",
         links: [
           { label: "Tests and scans in pregnancy", href: LINKS.testsScans },
           { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
@@ -463,6 +498,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Symptoms in early IVF pregnancy",
         description: "What's common, what's reassuring, what to flag.",
+        intro: "Honest framing for the symptoms most people meet in the first weeks after a positive — and a clear line on when something deserves a call.",
         links: [
           { label: "Nausea in early pregnancy", href: LINKS.nauseaEarly },
           { label: "Fatigue in early pregnancy", href: LINKS.fatigueEarly },
@@ -473,6 +509,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Holding cautious progress",
         description: "Hope and caution can coexist here.",
+        intro: "Early pregnancy after IVF rarely feels like the relief you expected. These reads are for the days where hope and worry refuse to take turns.",
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
           { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
@@ -483,6 +520,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Handover into pregnancy care",
         description: "When IVF care gently steps back.",
+        intro: "The point where your IVF clinic discharges you and your maternity team takes over. The handover card above explains the timing — these reads help you land in pregnancy care.",
         links: [
           { label: "Pregnancy hub", href: LINKS.pregnancy },
           { label: "Tests and scans in pregnancy", href: LINKS.testsScans },
@@ -492,6 +530,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "If things do not progress",
         description: "Held honestly, kept inside IVF and support.",
+        intro: "If something stops, these are the reads we'd hand you first — kept inside IVF and our support library, never bouncing you backwards.",
         links: [
           { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },
@@ -504,6 +543,17 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       quote: "You don't have to feel certain to be moving forward.",
       body: "Early pregnancy after IVF rarely lands as one big shift. It arrives in small checkpoints — and needing reassurance between them is part of the stage, not a sign anything is wrong.",
     },
+    journalNote: {
+      line: "Marking cautious milestones somewhere private — a scan, a number, a quiet good morning — lets you notice progress without forcing certainty.",
+      cta: "Mark a quiet milestone",
+      href: "/journal",
+    },
+    commonQuestions: [
+      "What should rising beta hCG look like?",
+      "What does spotting in early pregnancy usually mean?",
+      "When does my IVF clinic hand care over?",
+      "How do I stay grounded between scans?",
+    ],
     aiPrompts: [
       "Is it normal to still feel anxious?",
       "What should I expect between scans?",

@@ -3,7 +3,7 @@ import { BookOpen, ArrowUpRight } from "lucide-react";
 const IVFCapture = () => {
   return (
     <section
-      className="py-14 md:py-20"
+      className="pt-14 md:pt-20 pb-10 md:pb-12"
       style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.1)' }}
     >
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">

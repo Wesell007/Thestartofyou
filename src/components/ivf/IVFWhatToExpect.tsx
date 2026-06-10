@@ -53,27 +53,13 @@ const sections = [
 
 const IVFWhatToExpect = () => {
   return (
-    <section className="bg-parchment-dark pt-2 pb-12 md:pb-16">
+    <section className="bg-parchment-dark pt-2 pb-14 md:pb-20">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-        {/* Header */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-14 mb-12">
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="h-px w-6" style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.3)' }} />
-              <span className="font-sans text-[11px] font-light tracking-[0.2em] uppercase" style={{ color: 'hsl(var(--stage-ivf-accent))' }}>
-                What to Expect
-              </span>
-            </div>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground leading-tight">
-              What to expect during this journey
-            </h2>
-          </div>
-          <div className="md:col-span-3 flex items-end">
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-md">
-              IVF brings a unique combination of medical structure and emotional unpredictability. Here is what many people experience.
-            </p>
-          </div>
-        </div>
+        {/* Lead-in only — heading lives in IVFWhatThisIs above */}
+        <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-2xl mb-10">
+          IVF brings a unique combination of medical structure and emotional unpredictability. Here is what many people experience across the body, care, emotions, and the wait.
+        </p>
+
 
         {/* Featured first card */}
         <div

@@ -143,6 +143,12 @@ const LINKS = {
   testsScans: "/articles/tests-and-scans-in-pregnancy",
 };
 
+// IVF-framed `/ask?q=…` deep-link helper.
+// Used where no IVF-native article exists yet — these read as IVF-owned
+// guidance routes (the same /ask pattern used by IVFAISupport and
+// IVFCommonQuestions), never as TTC.
+const askIVF = (q: string) => `/ask?q=${encodeURIComponent(q)}`;
+
 export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
   "before-transfer": {
     slug: "before-transfer",

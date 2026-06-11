@@ -501,10 +501,9 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Small checkpoints, one at a time.",
         intro: "Beta hCG, viability scans, dating scans — what each one is actually checking, and how to hold yourself in the days between.",
         links: [
+          { label: "Beta hCG after IVF, what the numbers mean", href: askIVF("Beta hCG after IVF — what the numbers mean") },
+          { label: "Early IVF scans, what each scan is checking", href: askIVF("Early IVF scans — what each scan is checking") },
           { label: "Tests and scans in pregnancy", href: LINKS.testsScans },
-          { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
-          { label: "Symptoms stopping in early pregnancy", href: LINKS.symptomsStopping },
-          { label: "Ask about a scan or result", href: LINKS.ask },
         ],
       },
       {
@@ -512,10 +511,13 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "What's common, what's reassuring, what to flag.",
         intro: "Honest framing for the symptoms most people meet in the first weeks after a positive — and a clear line on when something deserves a call.",
         links: [
+          { label: "Spotting and bleeding in early IVF pregnancy, what's reassuring, what to flag", href: askIVF("Spotting and bleeding in early IVF pregnancy — what's reassuring, what to flag") },
+          { label: "Symptoms in early IVF pregnancy, what's common", href: askIVF("Symptoms in early IVF pregnancy — what's common") },
+          { label: "Bleeding in early pregnancy", href: LINKS.bleedingEarly },
           { label: "Nausea in early pregnancy", href: LINKS.nauseaEarly },
           { label: "Fatigue in early pregnancy", href: LINKS.fatigueEarly },
-          { label: "Bleeding in early pregnancy", href: LINKS.bleedingEarly },
-          { label: "Implantation bleeding", href: LINKS.implantation },
+          { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
+          { label: "Symptoms stopping in early pregnancy", href: LINKS.symptomsStopping },
         ],
       },
       {
@@ -524,6 +526,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         intro: "Early pregnancy after IVF rarely feels like the relief you expected. These reads are for the days where hope and worry refuse to take turns.",
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
+          { label: "How do I hold cautious progress without forcing certainty?", href: askIVF("How do I hold cautious progress without forcing certainty?") },
           { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
           { label: "Anxiety in pregnancy", href: LINKS.anxietyInPregnancy },
           { label: "Emotional wellbeing in pregnancy", href: LINKS.emotionalWellbeing },
@@ -534,9 +537,9 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "When IVF care gently steps back.",
         intro: "The point where your IVF clinic discharges you and your maternity team takes over. The handover card above explains the timing — these reads help you land in pregnancy care.",
         links: [
+          { label: "When does my IVF clinic hand care over to the midwife?", href: askIVF("When does my IVF clinic hand care over to the midwife?") },
           { label: "Pregnancy hub", href: LINKS.pregnancy },
           { label: "Tests and scans in pregnancy", href: LINKS.testsScans },
-          { label: "Ask about handover timing", href: LINKS.ask },
         ],
       },
       {
@@ -544,6 +547,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Held honestly, kept inside IVF and support.",
         intro: "If something stops, these are the reads we'd hand you first — kept inside IVF and our support library, never bouncing you backwards.",
         links: [
+          { label: "If things do not progress in early IVF pregnancy, what now?", href: askIVF("If things do not progress in early IVF pregnancy — what now?") },
           { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },
           { label: "Find support for hard moments", href: LINKS.support },

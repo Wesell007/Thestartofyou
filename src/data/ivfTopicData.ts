@@ -223,12 +223,11 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Understanding IVF",
         description: "Orient yourself before going deeper into your protocol.",
-        intro: "Start here if IVF still feels like a wall of acronyms. These reads give you the shape of the process, what the early tests measure, and why each step exists.",
+        intro: "Start here if IVF still feels like a wall of acronyms. These reads give you the shape of the process, why each step exists, and how the emotional load tends to land.",
         links: [
           { label: "IVF timeline, what to expect", href: LINKS.ivfTimeline },
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
-          { label: "Fertility tests for women", href: LINKS.fertilityTestsWomen },
-          { label: "Fertility tests for men", href: LINKS.fertilityTestsMen },
+          { label: "What does my IVF protocol actually involve?", href: askIVF("What does my IVF protocol actually involve?") },
         ],
       },
       {
@@ -236,9 +235,11 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Following your protocol with less mental load.",
         intro: "Injections, scans, and bloods can become their own full-time job. These help you hold the logistics and know what each appointment is actually checking.",
         links: [
-          { label: "What happens at a fertility appointment", href: LINKS.fertilityAppt },
+          { label: "IVF injections explained, what to expect day by day", href: askIVF("IVF injections explained — what to expect day by day") },
+          { label: "What does a baseline scan check before IVF?", href: askIVF("What does a baseline scan check before IVF?") },
+          { label: "What does each monitoring scan look for during stimulation?", href: askIVF("What does each monitoring scan look for during stimulation?") },
+          { label: "If you're new to clinic appointments", href: LINKS.fertilityAppt },
           { label: "Track your IVF timeline", href: LINKS.timeline },
-          { label: "Ask about a medication or scan", href: LINKS.ask },
         ],
       },
       {
@@ -246,9 +247,10 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Egg collection, embryo transfer, and the days around them.",
         intro: "What to expect on the two clinic days that matter most — and how to look after yourself in the hours either side.",
         links: [
-          { label: "IVF timeline, what to expect", href: LINKS.ivfTimeline },
+          { label: "Egg collection, what actually happens on the day", href: askIVF("Egg collection — what actually happens on the day") },
+          { label: "Embryo transfer, what to expect on transfer day", href: askIVF("Embryo transfer — what to expect on transfer day") },
+          { label: "How should I prepare for transfer day, practically?", href: askIVF("How should I prepare for transfer day, practically?") },
           { label: "Track your transfer day", href: LINKS.timeline },
-          { label: "Ask anything about transfer prep", href: LINKS.ask },
         ],
       },
       {

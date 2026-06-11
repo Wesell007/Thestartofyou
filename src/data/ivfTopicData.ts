@@ -143,6 +143,12 @@ const LINKS = {
   testsScans: "/articles/tests-and-scans-in-pregnancy",
 };
 
+// IVF-framed `/ask?q=…` deep-link helper.
+// Used where no IVF-native article exists yet — these read as IVF-owned
+// guidance routes (the same /ask pattern used by IVFAISupport and
+// IVFCommonQuestions), never as TTC.
+const askIVF = (q: string) => `/ask?q=${encodeURIComponent(q)}`;
+
 export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
   "before-transfer": {
     slug: "before-transfer",
@@ -217,12 +223,11 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       {
         label: "Understanding IVF",
         description: "Orient yourself before going deeper into your protocol.",
-        intro: "Start here if IVF still feels like a wall of acronyms. These reads give you the shape of the process, what the early tests measure, and why each step exists.",
+        intro: "Start here if IVF still feels like a wall of acronyms. These reads give you the shape of the process, why each step exists, and how the emotional load tends to land.",
         links: [
           { label: "IVF timeline, what to expect", href: LINKS.ivfTimeline },
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
-          { label: "Fertility tests for women", href: LINKS.fertilityTestsWomen },
-          { label: "Fertility tests for men", href: LINKS.fertilityTestsMen },
+          { label: "What does my IVF protocol actually involve?", href: askIVF("What does my IVF protocol actually involve?") },
         ],
       },
       {
@@ -230,9 +235,11 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Following your protocol with less mental load.",
         intro: "Injections, scans, and bloods can become their own full-time job. These help you hold the logistics and know what each appointment is actually checking.",
         links: [
-          { label: "What happens at a fertility appointment", href: LINKS.fertilityAppt },
+          { label: "IVF injections explained, what to expect day by day", href: askIVF("IVF injections explained — what to expect day by day") },
+          { label: "What does a baseline scan check before IVF?", href: askIVF("What does a baseline scan check before IVF?") },
+          { label: "What does each monitoring scan look for during stimulation?", href: askIVF("What does each monitoring scan look for during stimulation?") },
+          { label: "If you're new to clinic appointments", href: LINKS.fertilityAppt },
           { label: "Track your IVF timeline", href: LINKS.timeline },
-          { label: "Ask about a medication or scan", href: LINKS.ask },
         ],
       },
       {
@@ -240,9 +247,10 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Egg collection, embryo transfer, and the days around them.",
         intro: "What to expect on the two clinic days that matter most — and how to look after yourself in the hours either side.",
         links: [
-          { label: "IVF timeline, what to expect", href: LINKS.ivfTimeline },
+          { label: "Egg collection, what actually happens on the day", href: askIVF("Egg collection — what actually happens on the day") },
+          { label: "Embryo transfer, what to expect on transfer day", href: askIVF("Embryo transfer — what to expect on transfer day") },
+          { label: "How should I prepare for transfer day, practically?", href: askIVF("How should I prepare for transfer day, practically?") },
           { label: "Track your transfer day", href: LINKS.timeline },
-          { label: "Ask anything about transfer prep", href: LINKS.ask },
         ],
       },
       {
@@ -321,9 +329,9 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       },
     ],
     featured: {
-      eyebrow: "Anchor read",
-      title: "The two-week wait",
-      body: "The most defining read for this stage — what's actually happening in your body, what symptoms can and can't tell you, and how to stay steady inside the not-knowing.",
+      eyebrow: "Anchor read · the IVF two-week wait",
+      title: "The IVF two-week wait",
+      body: "The most defining read for this stage, framed for life after embryo transfer — what's actually happening, what symptoms can and can't tell you, and how to stay steady inside the not-knowing.",
       href: LINKS.twoWeekWait,
       hrefLabel: "Read the two-week wait guide",
     },
@@ -347,21 +355,23 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Holding yourself through the longest short stretch.",
         intro: "Why this fortnight feels disproportionately heavy after IVF, what's actually happening day by day, and how to keep yourself anchored when the days slow down.",
         links: [
+          { label: "The IVF two-week wait, what's actually happening", href: askIVF("The IVF two-week wait — what's actually happening") },
           { label: "The two-week wait", href: LINKS.twoWeekWait },
+          { label: "When can I test after embryo transfer?", href: askIVF("When can I test after embryo transfer?") },
           { label: "How long implantation takes", href: LINKS.howLongImplantation },
-          { label: "Ask anything during the wait", href: LINKS.ask },
         ],
       },
       {
         label: "Symptoms, signals & testing",
         description: "Interpreting your body without spiralling.",
-        intro: "Honest framing on what symptoms can and cannot tell you, when to test, and how to read a faint line without letting it run your day.",
+        intro: "Honest framing on what symptoms after embryo transfer can and cannot tell you, when to test, and how to read a faint line without letting it run your day.",
         links: [
-          { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
-          { label: "When to take a pregnancy test", href: LINKS.whenToTest },
+          { label: "Symptoms after embryo transfer, what they can and can't tell you", href: askIVF("Symptoms after embryo transfer — what they can and can't tell you") },
+          { label: "Faint positive after IVF, what it means", href: askIVF("Faint positive after IVF — what it means") },
+          { label: "When should I call the clinic after transfer?", href: askIVF("When should I call the clinic after transfer?") },
           { label: "Faint positive pregnancy test", href: LINKS.faintPositive },
-          { label: "Implantation bleeding", href: LINKS.implantation },
-          { label: "Symptoms stopping suddenly", href: LINKS.symptomsStopping },
+          { label: "When to take a pregnancy test", href: LINKS.whenToTest },
+          { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
         ],
       },
       {
@@ -370,6 +380,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         intro: "Tools and reads for the days where there is nothing to do but wait — including how to tell normal anxiety apart from something that needs more support.",
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
+          { label: "How do I cope with the IVF wait without spiralling?", href: askIVF("How do I cope with the IVF wait without spiralling?") },
           { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
           { label: "Anxiety in pregnancy", href: LINKS.anxietyInPregnancy },
           { label: "Find support for hard moments", href: LINKS.support },
@@ -380,6 +391,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Held honestly. Stays within IVF and support.",
         intro: "If the result is not what you hoped for, these are the reads we'd hand you first. They stay inside IVF and our support library — never bouncing you back to start again.",
         links: [
+          { label: "Chemical pregnancy after IVF, what now?", href: askIVF("Chemical pregnancy after IVF — what now?") },
           { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },
           { label: "Find support for hard moments", href: LINKS.support },
@@ -450,11 +462,11 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       },
     ],
     featured: {
-      eyebrow: "Anchor read",
-      title: "Early pregnancy symptoms explained",
-      body: "An honest, calm read on what early symptoms can — and can't — tell you after IVF, and how to hold the days between scans without spiralling.",
-      href: LINKS.earlySymptoms,
-      hrefLabel: "Read the early symptoms guide",
+      eyebrow: "Anchor read · early pregnancy after IVF",
+      title: "Early pregnancy after IVF, cautious progress one checkpoint at a time",
+      body: "The most defining read for this stage — what the days between beta hCG, early scans and handover actually feel like, and how to hold hope and caution together without forcing certainty.",
+      href: askIVF("Early pregnancy after IVF — what to expect between scans"),
+      hrefLabel: "Open the IVF early pregnancy guide",
     },
     normalVsSupport: {
       normal: [
@@ -489,10 +501,9 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Small checkpoints, one at a time.",
         intro: "Beta hCG, viability scans, dating scans — what each one is actually checking, and how to hold yourself in the days between.",
         links: [
+          { label: "Beta hCG after IVF, what the numbers mean", href: askIVF("Beta hCG after IVF — what the numbers mean") },
+          { label: "Early IVF scans, what each scan is checking", href: askIVF("Early IVF scans — what each scan is checking") },
           { label: "Tests and scans in pregnancy", href: LINKS.testsScans },
-          { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
-          { label: "Symptoms stopping in early pregnancy", href: LINKS.symptomsStopping },
-          { label: "Ask about a scan or result", href: LINKS.ask },
         ],
       },
       {
@@ -500,10 +511,13 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "What's common, what's reassuring, what to flag.",
         intro: "Honest framing for the symptoms most people meet in the first weeks after a positive — and a clear line on when something deserves a call.",
         links: [
+          { label: "Spotting and bleeding in early IVF pregnancy, what's reassuring, what to flag", href: askIVF("Spotting and bleeding in early IVF pregnancy — what's reassuring, what to flag") },
+          { label: "Symptoms in early IVF pregnancy, what's common", href: askIVF("Symptoms in early IVF pregnancy — what's common") },
+          { label: "Bleeding in early pregnancy", href: LINKS.bleedingEarly },
           { label: "Nausea in early pregnancy", href: LINKS.nauseaEarly },
           { label: "Fatigue in early pregnancy", href: LINKS.fatigueEarly },
-          { label: "Bleeding in early pregnancy", href: LINKS.bleedingEarly },
-          { label: "Implantation bleeding", href: LINKS.implantation },
+          { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
+          { label: "Symptoms stopping in early pregnancy", href: LINKS.symptomsStopping },
         ],
       },
       {
@@ -512,6 +526,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         intro: "Early pregnancy after IVF rarely feels like the relief you expected. These reads are for the days where hope and worry refuse to take turns.",
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
+          { label: "How do I hold cautious progress without forcing certainty?", href: askIVF("How do I hold cautious progress without forcing certainty?") },
           { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
           { label: "Anxiety in pregnancy", href: LINKS.anxietyInPregnancy },
           { label: "Emotional wellbeing in pregnancy", href: LINKS.emotionalWellbeing },
@@ -522,9 +537,9 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "When IVF care gently steps back.",
         intro: "The point where your IVF clinic discharges you and your maternity team takes over. The handover card above explains the timing — these reads help you land in pregnancy care.",
         links: [
+          { label: "When does my IVF clinic hand care over to the midwife?", href: askIVF("When does my IVF clinic hand care over to the midwife?") },
           { label: "Pregnancy hub", href: LINKS.pregnancy },
           { label: "Tests and scans in pregnancy", href: LINKS.testsScans },
-          { label: "Ask about handover timing", href: LINKS.ask },
         ],
       },
       {
@@ -532,6 +547,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Held honestly, kept inside IVF and support.",
         intro: "If something stops, these are the reads we'd hand you first — kept inside IVF and our support library, never bouncing you backwards.",
         links: [
+          { label: "If things do not progress in early IVF pregnancy, what now?", href: askIVF("If things do not progress in early IVF pregnancy — what now?") },
           { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },
           { label: "Find support for hard moments", href: LINKS.support },

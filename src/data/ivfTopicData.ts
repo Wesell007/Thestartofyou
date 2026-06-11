@@ -355,21 +355,23 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Holding yourself through the longest short stretch.",
         intro: "Why this fortnight feels disproportionately heavy after IVF, what's actually happening day by day, and how to keep yourself anchored when the days slow down.",
         links: [
+          { label: "The IVF two-week wait, what's actually happening", href: askIVF("The IVF two-week wait — what's actually happening") },
           { label: "The two-week wait", href: LINKS.twoWeekWait },
+          { label: "When can I test after embryo transfer?", href: askIVF("When can I test after embryo transfer?") },
           { label: "How long implantation takes", href: LINKS.howLongImplantation },
-          { label: "Ask anything during the wait", href: LINKS.ask },
         ],
       },
       {
         label: "Symptoms, signals & testing",
         description: "Interpreting your body without spiralling.",
-        intro: "Honest framing on what symptoms can and cannot tell you, when to test, and how to read a faint line without letting it run your day.",
+        intro: "Honest framing on what symptoms after embryo transfer can and cannot tell you, when to test, and how to read a faint line without letting it run your day.",
         links: [
-          { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
-          { label: "When to take a pregnancy test", href: LINKS.whenToTest },
+          { label: "Symptoms after embryo transfer, what they can and can't tell you", href: askIVF("Symptoms after embryo transfer — what they can and can't tell you") },
+          { label: "Faint positive after IVF, what it means", href: askIVF("Faint positive after IVF — what it means") },
+          { label: "When should I call the clinic after transfer?", href: askIVF("When should I call the clinic after transfer?") },
           { label: "Faint positive pregnancy test", href: LINKS.faintPositive },
-          { label: "Implantation bleeding", href: LINKS.implantation },
-          { label: "Symptoms stopping suddenly", href: LINKS.symptomsStopping },
+          { label: "When to take a pregnancy test", href: LINKS.whenToTest },
+          { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
         ],
       },
       {
@@ -378,6 +380,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         intro: "Tools and reads for the days where there is nothing to do but wait — including how to tell normal anxiety apart from something that needs more support.",
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
+          { label: "How do I cope with the IVF wait without spiralling?", href: askIVF("How do I cope with the IVF wait without spiralling?") },
           { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
           { label: "Anxiety in pregnancy", href: LINKS.anxietyInPregnancy },
           { label: "Find support for hard moments", href: LINKS.support },
@@ -388,6 +391,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Held honestly. Stays within IVF and support.",
         intro: "If the result is not what you hoped for, these are the reads we'd hand you first. They stay inside IVF and our support library — never bouncing you back to start again.",
         links: [
+          { label: "Chemical pregnancy after IVF, what now?", href: askIVF("Chemical pregnancy after IVF — what now?") },
           { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },
           { label: "Find support for hard moments", href: LINKS.support },

@@ -329,9 +329,9 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       },
     ],
     featured: {
-      eyebrow: "Anchor read",
-      title: "The two-week wait",
-      body: "The most defining read for this stage — what's actually happening in your body, what symptoms can and can't tell you, and how to stay steady inside the not-knowing.",
+      eyebrow: "Anchor read · the IVF two-week wait",
+      title: "The IVF two-week wait",
+      body: "The most defining read for this stage, framed for life after embryo transfer — what's actually happening, what symptoms can and can't tell you, and how to stay steady inside the not-knowing.",
       href: LINKS.twoWeekWait,
       hrefLabel: "Read the two-week wait guide",
     },

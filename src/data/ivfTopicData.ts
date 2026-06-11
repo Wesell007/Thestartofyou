@@ -462,11 +462,11 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       },
     ],
     featured: {
-      eyebrow: "Anchor read",
-      title: "Early pregnancy symptoms explained",
-      body: "An honest, calm read on what early symptoms can — and can't — tell you after IVF, and how to hold the days between scans without spiralling.",
-      href: LINKS.earlySymptoms,
-      hrefLabel: "Read the early symptoms guide",
+      eyebrow: "Anchor read · early pregnancy after IVF",
+      title: "Early pregnancy after IVF, cautious progress one checkpoint at a time",
+      body: "The most defining read for this stage — what the days between beta hCG, early scans and handover actually feel like, and how to hold hope and caution together without forcing certainty.",
+      href: askIVF("Early pregnancy after IVF — what to expect between scans"),
+      hrefLabel: "Open the IVF early pregnancy guide",
     },
     normalVsSupport: {
       normal: [

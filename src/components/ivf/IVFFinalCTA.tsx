@@ -68,6 +68,17 @@ const IVFFinalCTA = () => {
             <p className="font-serif italic text-sm text-foreground/35">
               One stage at a time, with clarity and care.
             </p>
+            <p className="mt-3 font-sans text-[12px] font-light text-muted-foreground/75">
+              Already in early pregnancy after IVF?{" "}
+              <Link
+                to="/pregnancy"
+                className="underline-offset-2 hover:underline"
+                style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
+              >
+                Step forward into pregnancy care
+              </Link>
+              .
+            </p>
           </div>
 
           {/* Right — quiet editorial closing panel */}

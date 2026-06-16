@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import ttcCycleImg from "@/assets/ttc-stage-cycle.jpg";
 import ttcTimingImg from "@/assets/ttc-stage-timing.jpg";
 import ttcWaitingImg from "@/assets/ttc-stage-waiting.jpg";

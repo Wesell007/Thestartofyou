@@ -56,6 +56,24 @@ const IVFStages = () => {
           </div>
         </div>
 
+        {/* Bridge rail above stages: TTC arrivals */}
+        <div className="mb-6 -mt-4 flex justify-center md:justify-start">
+          <Link
+            to="/trying-to-conceive"
+            className="inline-flex items-center gap-2 font-sans text-[11.5px] font-light text-foreground/55 hover:text-foreground transition-colors"
+          >
+            <span
+              className="font-sans text-[10px] font-light tracking-[0.18em] uppercase"
+              style={{ color: 'hsl(var(--stage-ttc-accent))' }}
+            >
+              Coming from TTC?
+            </span>
+            <span className="text-foreground/30">·</span>
+            Your TTC reading still lives here
+          </Link>
+        </div>
+
+
         {/* Stage cards — vertical with connecting line */}
         <div className="relative">
           {/* Connecting line */}
@@ -125,6 +143,25 @@ const IVFStages = () => {
               </Link>
             ))}
           </div>
+        </div>
+
+        {/* Bridge rail below stages: forward handover from Early pregnancy → /pregnancy */}
+        <div className="mt-10 flex justify-center">
+          <Link
+            to="/pregnancy"
+            className="group inline-flex items-center gap-2 rounded-pill border bg-card px-5 py-2.5 font-sans text-[12.5px] font-light text-foreground/75 hover:text-foreground transition-colors"
+            style={{ borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.25)' }}
+          >
+            <span
+              className="font-sans text-[10px] font-light tracking-[0.18em] uppercase"
+              style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
+            >
+              After early pregnancy
+            </span>
+            <span className="hidden sm:inline text-foreground/40">·</span>
+            Handover into pregnancy care
+            <ArrowUpRight size={12} className="opacity-60 group-hover:opacity-100 transition-opacity" />
+          </Link>
         </div>
       </div>
     </section>

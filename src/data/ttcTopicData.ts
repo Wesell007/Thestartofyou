@@ -333,7 +333,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
           { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
           { label: "Age & fertility", href: LIVE.age },
           { label: "Male fertility", href: LIVE.male },
-          { label: "IVF & fertility treatment", href: LIVE.ivfTopic },
+          { label: "Moving into IVF (treatment pathway)", href: LIVE.ivfPage },
         ],
       },
     ],
@@ -349,54 +349,45 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     kind: "subtopic",
     parent: "fertility",
     eyebrow: "IVF & fertility treatment",
-    title: "IVF and fertility treatment",
+    title: "Moving into IVF",
     accentHsl: "200 22% 44%",
     tintHsl: "200 30% 90%",
     intro:
-      "Fertility treatment can feel like a different language. This is a calm starting point if you're exploring IVF or thinking about what assisted conception might involve.",
+      "If your next step is fertility treatment, IVF becomes its own pathway with its own stages and rhythm. This page is intentionally a bridge — the depth lives inside the IVF pathway, not here.",
     whatThisCovers: {
-      lead: "What this topic covers:",
+      lead: "What this page is:",
       bullets: [
-        "What IVF is and how a typical cycle is structured.",
-        "What to expect emotionally as well as practically.",
-        "When fertility treatment tends to be considered.",
-        "Where to read more if you're at the start of this path.",
+        "A short bridge from TTC into the IVF treatment pathway.",
+        "Where to step across once IVF becomes the next move.",
+        "How TTC, IVF, and pregnancy fit together as one journey.",
       ],
     },
     startHere: [
       {
-        title: "What is IVF?",
+        title: "Open the IVF pathway",
         href: LIVE.ivfPage,
-        why: "The grounded overview — what IVF involves and who it's usually for.",
+        why: "The active treatment pathway lives here — protocol, transfer, the wait, and early pregnancy.",
       },
       {
-        title: "IVF timeline: what to expect",
+        title: "IVF timeline, what to expect",
         href: LIVE.ivfTimelineArticle,
-        why: "A clear walk-through of the stages of an IVF cycle.",
-      },
-      {
-        title: "The emotional impact of IVF",
-        href: LIVE.emotionalIVF,
-        why: "Honest reading on the emotional side, which often gets sidelined.",
+        why: "A clear walk-through of the stages of a typical IVF cycle.",
       },
     ],
     groups: [
       {
-        label: "Starting points",
+        label: "Step into the IVF pathway",
+        description: "IVF is treated as its own pathway. These are the doorways in.",
         links: [
-          { label: "What is IVF?", href: LIVE.ivfPage },
-          { label: "IVF timeline: what to expect", href: LIVE.ivfTimelineArticle },
+          { label: "Open the IVF pathway", href: LIVE.ivfPage },
+          { label: "IVF timeline, what to expect", href: LIVE.ivfTimelineArticle },
           { label: "IVF timeline (interactive)", href: LIVE.ivfTimelinePage },
-        ],
-      },
-      {
-        label: "The emotional side",
-        links: [
           { label: "The emotional impact of IVF", href: LIVE.emotionalIVF },
-          { label: "Pregnancy after loss", href: LIVE.pregnancyAfterLoss },
         ],
       },
     ],
+    curationNote:
+      "IVF intentionally lives in its own pathway, not inside TTC. Use the link above to step across — you won't be sent back here once you're inside it.",
     aiPrompts: [
       "When is IVF usually considered?",
       "What does an IVF cycle involve?",

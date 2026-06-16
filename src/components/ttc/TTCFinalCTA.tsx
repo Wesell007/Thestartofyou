@@ -110,6 +110,17 @@ const TTCFinalCTA = () => {
             <p className="font-serif italic text-sm text-muted-foreground/45 mt-2 text-center">
               One cycle at a time, from the very beginning.
             </p>
+            <p className="font-sans text-[12px] font-light text-muted-foreground/70 text-center">
+              If treatment is your next step,{" "}
+              <Link
+                to="/ivf"
+                className="underline-offset-2 hover:underline"
+                style={{ color: 'hsl(var(--stage-ivf-accent))' }}
+              >
+                step into the IVF pathway
+              </Link>
+              .
+            </p>
           </div>
         </div>
       </div>

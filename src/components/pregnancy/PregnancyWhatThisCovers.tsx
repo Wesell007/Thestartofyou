@@ -32,10 +32,15 @@ const PregnancyWhatThisCovers = () => {
           <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground leading-tight mb-4">
             What this hub <span className="italic font-normal">covers</span>
           </h2>
-          <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed max-w-2xl mb-8">
+          <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed max-w-2xl mb-3">
             Pregnancy brings physical changes, emotional shifts, and plenty of
             questions. This hub gathers trusted guidance across every stage so
             you can feel informed, reassured, and prepared.
+          </p>
+          <p className="font-sans text-[13.5px] font-light text-muted-foreground/80 leading-relaxed max-w-2xl mb-8">
+            If you arrived here after IVF, the cautious early weeks and clinic
+            handover are held inside the IVF pathway — pregnancy picks up the
+            forward journey from there.
           </p>
 
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">

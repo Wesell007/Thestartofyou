@@ -52,13 +52,14 @@ const IVFWhatThisCovers = () => {
                 Our starting point
               </p>
               <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground leading-tight mb-4">
-                What this hub <span className="italic font-normal">covers</span>
+                The active <span className="italic font-normal">treatment pathway</span>
               </h2>
               <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed mb-6">
-                IVF is a medically structured process with an emotional pace of
-                its own. This hub brings the practical, the clinical, and the
-                emotional together so you can move through each stage with more
-                clarity.
+                IVF sits between trying to conceive and pregnancy as its own
+                pathway — medically structured, emotionally distinct, and held
+                here in one place. The stages below own the treatment depth, and
+                early pregnancy hands forward into pregnancy care when the time
+                comes.
               </p>
               <div
                 className="pl-4 border-l-2"

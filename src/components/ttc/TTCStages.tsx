@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import ttcCycleImg from "@/assets/ttc-stage-cycle.jpg";
 import ttcTimingImg from "@/assets/ttc-stage-timing.jpg";
 import ttcWaitingImg from "@/assets/ttc-stage-waiting.jpg";
@@ -113,6 +113,25 @@ const TTCStages = () => {
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* Bridge rail: TTC → IVF treatment pathway. Quiet, single line. */}
+        <div className="mt-10 flex justify-center">
+          <Link
+            to="/ivf"
+            className="group inline-flex items-center gap-2 rounded-pill border bg-card px-5 py-2.5 font-sans text-[12.5px] font-light text-foreground/75 hover:text-foreground transition-colors"
+            style={{ borderColor: 'hsl(var(--stage-ivf-accent) / 0.25)' }}
+          >
+            <span
+              className="font-sans text-[10px] font-light tracking-[0.18em] uppercase"
+              style={{ color: 'hsl(var(--stage-ivf-accent))' }}
+            >
+              Treatment next?
+            </span>
+            <span className="hidden sm:inline text-foreground/40">·</span>
+            Step into the IVF pathway
+            <ArrowUpRight size={12} className="opacity-60 group-hover:opacity-100 transition-opacity" />
+          </Link>
         </div>
       </div>
     </section>

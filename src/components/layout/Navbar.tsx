@@ -8,9 +8,11 @@ import { EVENTS } from "@/lib/analyticsEvents";
 import logoSrc from "@/assets/logo-dark.png";
 
 
+// NOTE: IVF is intentionally NOT in the top nav. IVF is a treatment
+// pathway that bridges TTC → Pregnancy. The /ivf route still works
+// and is surfaced from inside TTC and from the IVF-aware pregnancy copy.
 const navLinks = [
   { label: "Trying to conceive", href: "/trying-to-conceive" },
-  { label: "IVF", href: "/ivf" },
   { label: "Pregnancy", href: "/pregnancy" },
   { label: "Postpartum", href: "/postpartum" },
   { label: "First year", href: "/first-year" },

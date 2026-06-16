@@ -56,6 +56,24 @@ const IVFStages = () => {
           </div>
         </div>
 
+        {/* Bridge rail above stages: TTC arrivals */}
+        <div className="mb-6 -mt-4 flex justify-center md:justify-start">
+          <Link
+            to="/trying-to-conceive"
+            className="inline-flex items-center gap-2 font-sans text-[11.5px] font-light text-foreground/55 hover:text-foreground transition-colors"
+          >
+            <span
+              className="font-sans text-[10px] font-light tracking-[0.18em] uppercase"
+              style={{ color: 'hsl(var(--stage-ttc-accent))' }}
+            >
+              Coming from TTC?
+            </span>
+            <span className="text-foreground/30">·</span>
+            Your TTC reading still lives here
+          </Link>
+        </div>
+
+
         {/* Stage cards — vertical with connecting line */}
         <div className="relative">
           {/* Connecting line */}

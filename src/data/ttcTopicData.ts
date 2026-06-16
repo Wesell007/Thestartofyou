@@ -333,7 +333,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
           { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
           { label: "Age & fertility", href: LIVE.age },
           { label: "Male fertility", href: LIVE.male },
-          { label: "IVF & fertility treatment", href: LIVE.ivfTopic },
+          { label: "Moving into IVF (treatment pathway)", href: LIVE.ivfPage },
         ],
       },
     ],

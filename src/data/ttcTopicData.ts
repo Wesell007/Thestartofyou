@@ -349,45 +349,46 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     kind: "subtopic",
     parent: "fertility",
     eyebrow: "IVF & fertility treatment",
-    title: "Moving into IVF",
+    title: "When IVF becomes the next step",
     accentHsl: "200 22% 44%",
     tintHsl: "200 30% 90%",
     intro:
-      "If your next step is fertility treatment, IVF becomes its own pathway with its own stages and rhythm. This page is intentionally a bridge — the depth lives inside the IVF pathway, not here.",
+      "If treatment is now part of your path, IVF can feel like a big shift in language, pace, and emotion. This page gives you a calm starting point, so you can understand what happens next without having to absorb everything at once.",
     whatThisCovers: {
-      lead: "What this page is:",
+      lead: "What this topic covers:",
       bullets: [
-        "A short bridge from TTC into the IVF treatment pathway.",
-        "Where to step across once IVF becomes the next move.",
-        "How TTC, IVF, and pregnancy fit together as one journey.",
+        "What IVF is and how treatment is usually structured",
+        "Where to begin if this is your first cycle",
+        "How the stages fit together without overwhelm",
+        "Where to go for practical and emotional support",
       ],
     },
     startHere: [
       {
-        title: "Open the IVF pathway",
+        title: "What IVF is",
         href: LIVE.ivfPage,
-        why: "The active treatment pathway lives here — protocol, transfer, the wait, and early pregnancy.",
+        why: "A clear overview of how treatment is structured, from protocol through to early pregnancy.",
       },
       {
-        title: "IVF timeline, what to expect",
+        title: "IVF timeline: what to expect",
         href: LIVE.ivfTimelineArticle,
-        why: "A clear walk-through of the stages of a typical IVF cycle.",
+        why: "A walk-through of the stages of a typical cycle, so you know what to expect and when.",
       },
     ],
     groups: [
       {
-        label: "Step into the IVF pathway",
-        description: "IVF is treated as its own pathway. These are the doorways in.",
+        label: "If treatment is the next step",
+        description: "A calm place to begin understanding IVF and what comes next.",
         links: [
-          { label: "Open the IVF pathway", href: LIVE.ivfPage },
-          { label: "IVF timeline, what to expect", href: LIVE.ivfTimelineArticle },
+          { label: "What IVF involves", href: LIVE.ivfPage },
+          { label: "IVF timeline: what to expect", href: LIVE.ivfTimelineArticle },
           { label: "IVF timeline (interactive)", href: LIVE.ivfTimelinePage },
           { label: "The emotional impact of IVF", href: LIVE.emotionalIVF },
         ],
       },
     ],
     curationNote:
-      "IVF intentionally lives in its own pathway, not inside TTC. Use the link above to step across — you won't be sent back here once you're inside it.",
+      "Take your time. When you are ready, the next step is just ahead.",
     aiPrompts: [
       "When is IVF usually considered?",
       "What does an IVF cycle involve?",

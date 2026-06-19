@@ -1804,6 +1804,97 @@ const articleDatabase: ArticleData[] = [
       commonConfusion: "The symptoms are nearly identical because many are caused by progesterone, which IVF medication provides.",
       whenToSeekHelp: "Contact your clinic if you experience severe pain, heavy bleeding, or difficulty breathing.",
     },
+    standfirst:
+      "A full IVF cycle is more than its medical steps — it has a rhythm, a weight, and a set of moments where the waiting gets loud. Here's what each stage actually involves, and where the emotional load tends to sit.",
+    hero: {
+      src: new URL("../assets/article-hero-ivf-timeline.jpg", import.meta.url).href,
+      alt: "A handwritten notebook open on soft linen beside a glass of water and a sprig of dried lavender, in warm morning light.",
+    },
+    editorialSections: [
+      {
+        id: "shape-of-a-cycle",
+        heading: "The shape of an IVF cycle",
+        lead: "A typical IVF cycle runs four to six weeks from the first stimulation injection to the pregnancy test. Inside that window are five distinct stages, each with its own pace, its own kind of waiting, and its own emotional texture.",
+        paragraphs: [
+          "Most cycles move through ovarian stimulation, egg collection, fertilisation, embryo development, and embryo transfer — followed by the two-week wait until a beta hCG blood test. Frozen transfers add a separate preparation window before transfer day.",
+          "Knowing the shape in advance does not make it easier, but it does make it less surprising. The hardest moments are rarely the medical procedures themselves — they tend to sit in the gaps between them, where there is nothing to do but wait for a call, a scan, or a number.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Your clinic sets the exact timing of every step. Use this as the shape of the journey, not as a personal protocol.",
+        },
+      },
+      {
+        id: "stimulation",
+        heading: "Stage one — ovarian stimulation",
+        lead: "Daily injections encourage your ovaries to mature multiple follicles at once. This phase usually runs 10 to 14 days, with scans and blood tests every few days to track how you are responding.",
+        paragraphs: [
+          "The early days often feel manageable. As stimulation builds, bloating, tenderness, mood shifts, and tiredness are common. By the second week, many people describe feeling physically full, emotionally raw, and ready for it to be over.",
+          "Monitoring is constant. Doses can be adjusted mid-cycle based on how your follicles are growing and what your oestrogen levels show. This is normal — it is the protocol working, not a sign that something is wrong.",
+        ],
+        subsections: [
+          {
+            subheading: "What the rhythm often feels like",
+            paragraphs: [
+              "Early mornings at clinic. Coordinating injections around work, travel, and meals. A growing sense of being on a schedule that is not yours. Many people describe the second week as the point where the cycle starts to feel heavy.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "trigger-and-collection",
+        heading: "Stage two — trigger and egg collection",
+        lead: "When your follicles are ready, a precisely timed trigger injection prepares the eggs for collection roughly 36 hours later. Egg collection itself is a short procedure under sedation.",
+        paragraphs: [
+          "The trigger shot is one of the most time-sensitive moments of the cycle. Most clinics give a specific minute, not just an hour. Setting two alarms is not over-cautious — it is standard.",
+          "Egg collection usually takes 20 to 30 minutes. You will be drowsy afterwards, with cramping and light spotting common over the next day or two. The number of eggs collected is rarely the final story — what matters more is how many are mature and fertilise.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Not every egg will be mature, and not every mature egg will fertilise. This is biology, not failure, and your clinic will have prepared for this.",
+        },
+      },
+      {
+        id: "fertilisation-and-development",
+        heading: "Stage three — fertilisation and embryo development",
+        lead: "The waiting starts here. Eggs and sperm meet in the lab and embryos are monitored for three to five days before transfer or freezing.",
+        paragraphs: [
+          "Daily embryo updates can feel like exam results delivered by phone. The numbers can shrink at each stage — eggs collected, mature, fertilised, dividing, reaching blastocyst — and that drop is expected, not a sign anything has gone wrong.",
+          "Many clinics now transfer at day five, when embryos have reached the blastocyst stage and selection is more reliable. Others transfer earlier. Both approaches can work; what matters most is what your embryos are actually doing.",
+        ],
+      },
+      {
+        id: "transfer-day",
+        heading: "Stage four — embryo transfer",
+        lead: "Transfer itself is one of the quietest medical moments of the cycle: a short, usually painless procedure with a full bladder, an ultrasound, and a thin catheter.",
+        paragraphs: [
+          "There is no sedation. You are awake, often holding your partner's hand or looking at the screen. The whole thing typically takes ten minutes. Many people leave feeling that something so significant should have felt more significant in the moment.",
+          "After transfer, you are technically considered 'pregnant until proven otherwise' (PUPO) — a stage with its own particular emotional weight. Progesterone support continues, and ordinary life resumes, even though nothing about the next two weeks feels ordinary.",
+        ],
+      },
+      {
+        id: "two-week-wait",
+        heading: "Stage five — the two-week wait",
+        lead: "The fortnight between transfer and beta hCG is often the heaviest part of the whole cycle. The active medical work is done, and there is nothing left to do but wait.",
+        paragraphs: [
+          "Symptoms during this window are unreliable. Progesterone — whether produced naturally or given as support — causes bloating, breast tenderness, fatigue, and mood changes that look identical to early pregnancy. Testing early can produce false reassurance or false worry, neither of which helps.",
+          "The blood test (beta hCG) at the end of the wait gives a number, not just a yes or no. A second beta 48 hours later checks the rise. Clinics use both readings to gauge what is happening, which is why a single number rarely tells the full story.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Severe pain, heavy bleeding, breathlessness, or rapid bloating is not the normal pattern — contact your clinic the same day.",
+        },
+      },
+      {
+        id: "what-comes-next",
+        heading: "After the result",
+        lead: "Whatever the outcome, the days after a beta result deserve room. Both possible directions carry their own weight.",
+        paragraphs: [
+          "If the result is positive, the next step is usually an early scan around six to seven weeks. The cautious early-pregnancy stage that follows is held inside the IVF pathway until handover into mainstream pregnancy care.",
+          "If the result is not what you hoped for, your clinic will arrange a follow-up to talk through what the cycle showed and what next steps might look like. Taking a break between cycles is valid and sometimes recommended — emotional recovery is part of treatment, not separate from it.",
+        ],
+      },
+    ],
   },
 
   // ─── CORNERSTONE: BABY SLEEP IN THE FIRST YEAR ──────────────────────────

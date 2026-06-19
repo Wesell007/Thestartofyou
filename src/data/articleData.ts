@@ -2502,8 +2502,116 @@ const articleDatabase: ArticleData[] = [
     topics: ["emotional-wellbeing"],
     productPromotion: "minimal",
     reviewedBy: "Jenny Joines",
+    lastUpdated: "March 2026",
+    keyTakeaways: [
+      "IVF carries an emotional weight that often surprises even people who expected it to be hard",
+      "Hormonal medication directly affects mood — what you feel is partly chemistry, not character",
+      "The cycle of hope and disappointment is cumulative, and each cycle can land differently",
+      "Relationships, friendships, and identity all quietly shift during treatment",
+      "Asking for support — clinical, professional, or peer — is part of treatment, not separate from it",
+    ],
+    inThisArticle: [
+      "Why IVF feels heavier than it looks",
+      "The emotional shape of a cycle",
+      "Hope, guardedness, and the cost of both",
+      "Relationships and identity in treatment",
+      "What actually helps",
+      "When to ask for more support",
+    ],
+    sources: [
+      "HFEA — Patient support and counselling",
+      "British Infertility Counselling Association (BICA)",
+      "Fertility Network UK — Emotional support",
+      "Royal College of Obstetricians and Gynaecologists — Information for women",
+    ],
     faq: [
-      { question: "Is it normal to feel depressed during IVF?", answer: "Yes. The combination of hormones, uncertainty, and emotional intensity can trigger depression. Seek support if you're struggling." },
+      { question: "Is it normal to feel depressed during IVF?", answer: "Yes. The combination of hormones, uncertainty, and emotional intensity can trigger depression. Seek support if you're struggling — most clinics offer counselling, and BICA-registered fertility counsellors specialise in this." },
+      { question: "Why does IVF affect my relationship?", answer: "Treatment compresses huge decisions, financial pressure, hormonal changes, and grief into a short window. Partners often process differently and at different speeds. This is common, and honest conversation — even hard conversation — usually helps more than protecting each other from how you feel." },
+      { question: "How do I cope with friends getting pregnant during treatment?", answer: "Pregnancy announcements during IVF can land like physical news. It is normal to feel grief, distance, or even relief at stepping back. Boundaries — including muting accounts or skipping events — are self-protection, not failure." },
+    ],
+    standfirst:
+      "IVF is medically structured. The emotional experience rarely is. Here's why treatment so often feels heavier than it looks from the outside — and what can quietly help.",
+    hero: {
+      src: new URL("../assets/article-hero-ivf-emotional.jpg", import.meta.url).href,
+      alt: "A folded knit blanket and a steaming cup of tea on a quiet windowsill at dusk, with a single eucalyptus stem in soft focus.",
+    },
+    editorialSections: [
+      {
+        id: "why-it-feels-heavy",
+        heading: "Why IVF feels heavier than it looks",
+        lead: "From the outside, IVF can look procedural — appointments, injections, scans, a result. From the inside, it rarely feels like a sequence of medical steps. It feels like your whole life has narrowed around one outcome.",
+        paragraphs: [
+          "Treatment compresses things that would normally take months — major decisions, financial commitments, body changes, grief, hope — into a few weeks. The brain does not always cope well with that compression, and it is rarely visible to the people around you.",
+          "There is also the quieter weight of explanation: not telling friends, telling some friends, deciding what to share at work, navigating questions you have not been asked. The mental load of treatment runs in the background of every ordinary day.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "If this feels heavier than you expected — even heavier than other people seem to find it — that is not a personal failing. It is what treatment costs.",
+        },
+      },
+      {
+        id: "shape-of-a-cycle",
+        heading: "The emotional shape of a cycle",
+        lead: "Most cycles follow a recognisable emotional arc, even when the medical details are different. Knowing the shape can make the heavier moments feel less like something is wrong with you.",
+        paragraphs: [
+          "The beginning often carries a kind of forward momentum — a plan, a start date, something to do. Stimulation usually brings a slow build of physical heaviness alongside the hormonal weather. The days around egg collection can feel suddenly fragile.",
+          "Transfer day is quieter than expected for many people. And then comes the two-week wait, which tends to be the emotional peak of the whole cycle — long, slow, and full of meaning attached to every twinge. The result, whatever it is, rarely arrives gently.",
+        ],
+        subsections: [
+          {
+            subheading: "If this is not your first cycle",
+            paragraphs: [
+              "Repeat cycles often feel different — not necessarily easier. Hope can become guarded. Bodies remember. Grief from previous attempts sits underneath the new one. None of this means you are doing it wrong.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "hope-and-guardedness",
+        heading: "Hope, guardedness, and the cost of both",
+        lead: "Many people describe a constant internal negotiation during treatment: how much to hope, how much to brace, how much to let themselves picture an outcome that might not come.",
+        paragraphs: [
+          "Full hope feels reckless. Full guardedness feels disloyal — as if not believing in the cycle could affect it. Most people land somewhere uncomfortable in between, often shifting day to day.",
+          "There is no correct mental posture for IVF. Cycles do not succeed because people thought positively, and they do not fail because someone allowed themselves to imagine a difficult outcome. Letting the feelings change without judging them is usually more sustainable than trying to hold one steady tone.",
+        ],
+      },
+      {
+        id: "relationships-and-identity",
+        heading: "Relationships, friendships, and identity",
+        lead: "IVF rarely stays inside the clinic. It moves through partnerships, friendships, family relationships, and your sense of yourself in ways that are easy to underestimate at the start.",
+        paragraphs: [
+          "Partners often process treatment differently and at different speeds. One person may want to talk it through; the other may want to put it down. Both can be true at once, and both are valid. The risk is silence dressed up as protection — many couples find that honest, sometimes uncomfortable conversation actually steadies things more than carefully avoided ones.",
+          "Friendships can quietly change. Pregnancy announcements land differently. Group chats can become unsafe ground. Some people find themselves stepping back from social circles in a way that surprises them. This is grief and self-protection, not coldness.",
+          "Identity is the slower shift. Many people describe feeling like treatment has become the centre of their life — and missing the version of themselves who had other things to think about. Holding even small spaces that have nothing to do with IVF — work that absorbs you, a walk, a film, a friend who does not ask — is a quiet form of care.",
+        ],
+      },
+      {
+        id: "what-helps",
+        heading: "What actually helps",
+        lead: "There is no single answer to coping with IVF, but a few things consistently come up from people who have moved through treatment.",
+        paragraphs: [
+          "Specialist support matters. Fertility counsellors — particularly those registered with BICA — understand the specific texture of treatment in a way general therapists sometimes do not. Most clinics offer a number of free sessions; using them is not a sign of crisis.",
+          "Peer support can be steadying in a different way. Hearing from people in the same stage can ease the isolation, though it can also intensify it if comparison takes over. Choose the spaces carefully and step back from any that consistently leave you worse.",
+          "Practical scaffolding helps more than it sounds like it should. Knowing where injections are kept. Having food in the freezer for the days after egg collection. Booking the day after transfer off if you can. Small acts of preparation lower the daily friction at a time when your reserves are already being spent elsewhere.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Most fertility clinics in the UK include counselling as part of the cost of treatment. You do not need to be struggling to use it.",
+        },
+      },
+      {
+        id: "when-to-ask-for-more",
+        heading: "When to ask for more support",
+        lead: "Some of what treatment brings is hard but expected. Some of it crosses into territory that deserves more than self-management.",
+        paragraphs: [
+          "Persistent low mood or hopelessness lasting more than two weeks, difficulty functioning at work or at home, withdrawal from people who normally feel safe, intrusive thoughts, or any thoughts of self-harm are all signs to reach out to a GP, a fertility counsellor, or a mental health crisis line.",
+          "This is not weakness, and it does not mean treatment was a mistake. It means treatment is asking more of you than is reasonable to carry alone — and that is a thing humans need help with, not a thing humans solve quietly.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "If you are having thoughts of self-harm or suicide, contact your GP, NHS 111, or the Samaritans on 116 123 — any time, day or night.",
+        },
+      },
     ],
   },
 

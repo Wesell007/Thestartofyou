@@ -1804,6 +1804,97 @@ const articleDatabase: ArticleData[] = [
       commonConfusion: "The symptoms are nearly identical because many are caused by progesterone, which IVF medication provides.",
       whenToSeekHelp: "Contact your clinic if you experience severe pain, heavy bleeding, or difficulty breathing.",
     },
+    standfirst:
+      "A full IVF cycle is more than its medical steps — it has a rhythm, a weight, and a set of moments where the waiting gets loud. Here's what each stage actually involves, and where the emotional load tends to sit.",
+    hero: {
+      src: new URL("../assets/article-hero-ivf-timeline.jpg", import.meta.url).href,
+      alt: "A handwritten notebook open on soft linen beside a glass of water and a sprig of dried lavender, in warm morning light.",
+    },
+    editorialSections: [
+      {
+        id: "shape-of-a-cycle",
+        heading: "The shape of an IVF cycle",
+        lead: "A typical IVF cycle runs four to six weeks from the first stimulation injection to the pregnancy test. Inside that window are five distinct stages, each with its own pace, its own kind of waiting, and its own emotional texture.",
+        paragraphs: [
+          "Most cycles move through ovarian stimulation, egg collection, fertilisation, embryo development, and embryo transfer — followed by the two-week wait until a beta hCG blood test. Frozen transfers add a separate preparation window before transfer day.",
+          "Knowing the shape in advance does not make it easier, but it does make it less surprising. The hardest moments are rarely the medical procedures themselves — they tend to sit in the gaps between them, where there is nothing to do but wait for a call, a scan, or a number.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Your clinic sets the exact timing of every step. Use this as the shape of the journey, not as a personal protocol.",
+        },
+      },
+      {
+        id: "stimulation",
+        heading: "Stage one — ovarian stimulation",
+        lead: "Daily injections encourage your ovaries to mature multiple follicles at once. This phase usually runs 10 to 14 days, with scans and blood tests every few days to track how you are responding.",
+        paragraphs: [
+          "The early days often feel manageable. As stimulation builds, bloating, tenderness, mood shifts, and tiredness are common. By the second week, many people describe feeling physically full, emotionally raw, and ready for it to be over.",
+          "Monitoring is constant. Doses can be adjusted mid-cycle based on how your follicles are growing and what your oestrogen levels show. This is normal — it is the protocol working, not a sign that something is wrong.",
+        ],
+        subsections: [
+          {
+            subheading: "What the rhythm often feels like",
+            paragraphs: [
+              "Early mornings at clinic. Coordinating injections around work, travel, and meals. A growing sense of being on a schedule that is not yours. Many people describe the second week as the point where the cycle starts to feel heavy.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "trigger-and-collection",
+        heading: "Stage two — trigger and egg collection",
+        lead: "When your follicles are ready, a precisely timed trigger injection prepares the eggs for collection roughly 36 hours later. Egg collection itself is a short procedure under sedation.",
+        paragraphs: [
+          "The trigger shot is one of the most time-sensitive moments of the cycle. Most clinics give a specific minute, not just an hour. Setting two alarms is not over-cautious — it is standard.",
+          "Egg collection usually takes 20 to 30 minutes. You will be drowsy afterwards, with cramping and light spotting common over the next day or two. The number of eggs collected is rarely the final story — what matters more is how many are mature and fertilise.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Not every egg will be mature, and not every mature egg will fertilise. This is biology, not failure, and your clinic will have prepared for this.",
+        },
+      },
+      {
+        id: "fertilisation-and-development",
+        heading: "Stage three — fertilisation and embryo development",
+        lead: "The waiting starts here. Eggs and sperm meet in the lab and embryos are monitored for three to five days before transfer or freezing.",
+        paragraphs: [
+          "Daily embryo updates can feel like exam results delivered by phone. The numbers can shrink at each stage — eggs collected, mature, fertilised, dividing, reaching blastocyst — and that drop is expected, not a sign anything has gone wrong.",
+          "Many clinics now transfer at day five, when embryos have reached the blastocyst stage and selection is more reliable. Others transfer earlier. Both approaches can work; what matters most is what your embryos are actually doing.",
+        ],
+      },
+      {
+        id: "transfer-day",
+        heading: "Stage four — embryo transfer",
+        lead: "Transfer itself is one of the quietest medical moments of the cycle: a short, usually painless procedure with a full bladder, an ultrasound, and a thin catheter.",
+        paragraphs: [
+          "There is no sedation. You are awake, often holding your partner's hand or looking at the screen. The whole thing typically takes ten minutes. Many people leave feeling that something so significant should have felt more significant in the moment.",
+          "After transfer, you are technically considered 'pregnant until proven otherwise' (PUPO) — a stage with its own particular emotional weight. Progesterone support continues, and ordinary life resumes, even though nothing about the next two weeks feels ordinary.",
+        ],
+      },
+      {
+        id: "two-week-wait",
+        heading: "Stage five — the two-week wait",
+        lead: "The fortnight between transfer and beta hCG is often the heaviest part of the whole cycle. The active medical work is done, and there is nothing left to do but wait.",
+        paragraphs: [
+          "Symptoms during this window are unreliable. Progesterone — whether produced naturally or given as support — causes bloating, breast tenderness, fatigue, and mood changes that look identical to early pregnancy. Testing early can produce false reassurance or false worry, neither of which helps.",
+          "The blood test (beta hCG) at the end of the wait gives a number, not just a yes or no. A second beta 48 hours later checks the rise. Clinics use both readings to gauge what is happening, which is why a single number rarely tells the full story.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Severe pain, heavy bleeding, breathlessness, or rapid bloating is not the normal pattern — contact your clinic the same day.",
+        },
+      },
+      {
+        id: "what-comes-next",
+        heading: "After the result",
+        lead: "Whatever the outcome, the days after a beta result deserve room. Both possible directions carry their own weight.",
+        paragraphs: [
+          "If the result is positive, the next step is usually an early scan around six to seven weeks. The cautious early-pregnancy stage that follows is held inside the IVF pathway until handover into mainstream pregnancy care.",
+          "If the result is not what you hoped for, your clinic will arrange a follow-up to talk through what the cycle showed and what next steps might look like. Taking a break between cycles is valid and sometimes recommended — emotional recovery is part of treatment, not separate from it.",
+        ],
+      },
+    ],
   },
 
   // ─── CORNERSTONE: BABY SLEEP IN THE FIRST YEAR ──────────────────────────
@@ -2411,8 +2502,116 @@ const articleDatabase: ArticleData[] = [
     topics: ["emotional-wellbeing"],
     productPromotion: "minimal",
     reviewedBy: "Jenny Joines",
+    lastUpdated: "March 2026",
+    keyTakeaways: [
+      "IVF carries an emotional weight that often surprises even people who expected it to be hard",
+      "Hormonal medication directly affects mood — what you feel is partly chemistry, not character",
+      "The cycle of hope and disappointment is cumulative, and each cycle can land differently",
+      "Relationships, friendships, and identity all quietly shift during treatment",
+      "Asking for support — clinical, professional, or peer — is part of treatment, not separate from it",
+    ],
+    inThisArticle: [
+      "Why IVF feels heavier than it looks",
+      "The emotional shape of a cycle",
+      "Hope, guardedness, and the cost of both",
+      "Relationships and identity in treatment",
+      "What actually helps",
+      "When to ask for more support",
+    ],
+    sources: [
+      "HFEA — Patient support and counselling",
+      "British Infertility Counselling Association (BICA)",
+      "Fertility Network UK — Emotional support",
+      "Royal College of Obstetricians and Gynaecologists — Information for women",
+    ],
     faq: [
-      { question: "Is it normal to feel depressed during IVF?", answer: "Yes. The combination of hormones, uncertainty, and emotional intensity can trigger depression. Seek support if you're struggling." },
+      { question: "Is it normal to feel depressed during IVF?", answer: "Yes. The combination of hormones, uncertainty, and emotional intensity can trigger depression. Seek support if you're struggling — most clinics offer counselling, and BICA-registered fertility counsellors specialise in this." },
+      { question: "Why does IVF affect my relationship?", answer: "Treatment compresses huge decisions, financial pressure, hormonal changes, and grief into a short window. Partners often process differently and at different speeds. This is common, and honest conversation — even hard conversation — usually helps more than protecting each other from how you feel." },
+      { question: "How do I cope with friends getting pregnant during treatment?", answer: "Pregnancy announcements during IVF can land like physical news. It is normal to feel grief, distance, or even relief at stepping back. Boundaries — including muting accounts or skipping events — are self-protection, not failure." },
+    ],
+    standfirst:
+      "IVF is medically structured. The emotional experience rarely is. Here's why treatment so often feels heavier than it looks from the outside — and what can quietly help.",
+    hero: {
+      src: new URL("../assets/article-hero-ivf-emotional.jpg", import.meta.url).href,
+      alt: "A folded knit blanket and a steaming cup of tea on a quiet windowsill at dusk, with a single eucalyptus stem in soft focus.",
+    },
+    editorialSections: [
+      {
+        id: "why-it-feels-heavy",
+        heading: "Why IVF feels heavier than it looks",
+        lead: "From the outside, IVF can look procedural — appointments, injections, scans, a result. From the inside, it rarely feels like a sequence of medical steps. It feels like your whole life has narrowed around one outcome.",
+        paragraphs: [
+          "Treatment compresses things that would normally take months — major decisions, financial commitments, body changes, grief, hope — into a few weeks. The brain does not always cope well with that compression, and it is rarely visible to the people around you.",
+          "There is also the quieter weight of explanation: not telling friends, telling some friends, deciding what to share at work, navigating questions you have not been asked. The mental load of treatment runs in the background of every ordinary day.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "If this feels heavier than you expected — even heavier than other people seem to find it — that is not a personal failing. It is what treatment costs.",
+        },
+      },
+      {
+        id: "shape-of-a-cycle",
+        heading: "The emotional shape of a cycle",
+        lead: "Most cycles follow a recognisable emotional arc, even when the medical details are different. Knowing the shape can make the heavier moments feel less like something is wrong with you.",
+        paragraphs: [
+          "The beginning often carries a kind of forward momentum — a plan, a start date, something to do. Stimulation usually brings a slow build of physical heaviness alongside the hormonal weather. The days around egg collection can feel suddenly fragile.",
+          "Transfer day is quieter than expected for many people. And then comes the two-week wait, which tends to be the emotional peak of the whole cycle — long, slow, and full of meaning attached to every twinge. The result, whatever it is, rarely arrives gently.",
+        ],
+        subsections: [
+          {
+            subheading: "If this is not your first cycle",
+            paragraphs: [
+              "Repeat cycles often feel different — not necessarily easier. Hope can become guarded. Bodies remember. Grief from previous attempts sits underneath the new one. None of this means you are doing it wrong.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "hope-and-guardedness",
+        heading: "Hope, guardedness, and the cost of both",
+        lead: "Many people describe a constant internal negotiation during treatment: how much to hope, how much to brace, how much to let themselves picture an outcome that might not come.",
+        paragraphs: [
+          "Full hope feels reckless. Full guardedness feels disloyal — as if not believing in the cycle could affect it. Most people land somewhere uncomfortable in between, often shifting day to day.",
+          "There is no correct mental posture for IVF. Cycles do not succeed because people thought positively, and they do not fail because someone allowed themselves to imagine a difficult outcome. Letting the feelings change without judging them is usually more sustainable than trying to hold one steady tone.",
+        ],
+      },
+      {
+        id: "relationships-and-identity",
+        heading: "Relationships, friendships, and identity",
+        lead: "IVF rarely stays inside the clinic. It moves through partnerships, friendships, family relationships, and your sense of yourself in ways that are easy to underestimate at the start.",
+        paragraphs: [
+          "Partners often process treatment differently and at different speeds. One person may want to talk it through; the other may want to put it down. Both can be true at once, and both are valid. The risk is silence dressed up as protection — many couples find that honest, sometimes uncomfortable conversation actually steadies things more than carefully avoided ones.",
+          "Friendships can quietly change. Pregnancy announcements land differently. Group chats can become unsafe ground. Some people find themselves stepping back from social circles in a way that surprises them. This is grief and self-protection, not coldness.",
+          "Identity is the slower shift. Many people describe feeling like treatment has become the centre of their life — and missing the version of themselves who had other things to think about. Holding even small spaces that have nothing to do with IVF — work that absorbs you, a walk, a film, a friend who does not ask — is a quiet form of care.",
+        ],
+      },
+      {
+        id: "what-helps",
+        heading: "What actually helps",
+        lead: "There is no single answer to coping with IVF, but a few things consistently come up from people who have moved through treatment.",
+        paragraphs: [
+          "Specialist support matters. Fertility counsellors — particularly those registered with BICA — understand the specific texture of treatment in a way general therapists sometimes do not. Most clinics offer a number of free sessions; using them is not a sign of crisis.",
+          "Peer support can be steadying in a different way. Hearing from people in the same stage can ease the isolation, though it can also intensify it if comparison takes over. Choose the spaces carefully and step back from any that consistently leave you worse.",
+          "Practical scaffolding helps more than it sounds like it should. Knowing where injections are kept. Having food in the freezer for the days after egg collection. Booking the day after transfer off if you can. Small acts of preparation lower the daily friction at a time when your reserves are already being spent elsewhere.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Most fertility clinics in the UK include counselling as part of the cost of treatment. You do not need to be struggling to use it.",
+        },
+      },
+      {
+        id: "when-to-ask-for-more",
+        heading: "When to ask for more support",
+        lead: "Some of what treatment brings is hard but expected. Some of it crosses into territory that deserves more than self-management.",
+        paragraphs: [
+          "Persistent low mood or hopelessness lasting more than two weeks, difficulty functioning at work or at home, withdrawal from people who normally feel safe, intrusive thoughts, or any thoughts of self-harm are all signs to reach out to a GP, a fertility counsellor, or a mental health crisis line.",
+          "This is not weakness, and it does not mean treatment was a mistake. It means treatment is asking more of you than is reasonable to carry alone — and that is a thing humans need help with, not a thing humans solve quietly.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "If you are having thoughts of self-harm or suicide, contact your GP, NHS 111, or the Samaritans on 116 123 — any time, day or night.",
+        },
+      },
     ],
   },
 

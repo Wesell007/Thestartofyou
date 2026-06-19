@@ -115,7 +115,10 @@ const LINKS = {
   before: "/ivf/before-transfer",
   after: "/ivf/after-transfer",
   early: "/ivf/early-pregnancy",
-  timeline: "/ivf-timeline",
+  // Track-your-timeline CTAs land on the IVF hub, where the calculator
+  // accepts a transfer date. The bare /ivf-timeline route only renders a
+  // result and is otherwise a dead end.
+  timeline: "/ivf",
   pregnancy: "/pregnancy",
   support: "/support",
   ask: "/ask",

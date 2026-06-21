@@ -13,6 +13,7 @@ import ArticleFAQ from "@/components/article/ArticleFAQ";
 import ArticleSources from "@/components/article/ArticleSources";
 import ArticleRelatedReads from "@/components/article/ArticleRelatedReads";
 import ArticleTopicReturn from "@/components/article/ArticleTopicReturn";
+import ArticleIVFContext from "@/components/article/ArticleIVFContext";
 
 interface Props {
   data: ArticleData;

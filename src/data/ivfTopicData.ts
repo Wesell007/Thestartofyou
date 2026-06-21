@@ -375,8 +375,6 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
           { label: "Faint positive after IVF, what it means", href: askIVF("Faint positive after IVF — what it means") },
           { label: "When should I call the clinic after transfer?", href: askIVF("When should I call the clinic after transfer?") },
           { label: "Faint positive pregnancy test", href: LINKS.faintPositive },
-          { label: "When to take a pregnancy test", href: LINKS.whenToTest },
-          { label: "Early pregnancy symptoms explained", href: LINKS.earlySymptoms },
         ],
       },
       {
@@ -386,8 +384,8 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         links: [
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
           { label: "How do I cope with the IVF wait without spiralling?", href: askIVF("How do I cope with the IVF wait without spiralling?") },
+          { label: "How do I stop over-reading every twinge after transfer?", href: askIVF("How do I stop over-reading every twinge after transfer?") },
           { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
-          { label: "Anxiety in pregnancy", href: LINKS.anxietyInPregnancy },
           { label: "Find support for hard moments", href: LINKS.support },
         ],
       },
@@ -396,8 +394,8 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Held honestly. Stays within IVF and support.",
         intro: "If the result is not what you hoped for, these are the reads we'd hand you first. They stay inside IVF and our support library — never bouncing you back to start again.",
         links: [
+          { label: "If my IVF cycle didn't work, what now?", href: askIVF("If my IVF cycle didn't work — what now?") },
           { label: "Chemical pregnancy after IVF, what now?", href: askIVF("Chemical pregnancy after IVF — what now?") },
-          { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },
           { label: "Find support for hard moments", href: LINKS.support },
         ],

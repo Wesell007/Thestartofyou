@@ -1,90 +1,37 @@
-const points = [
-  {
-    title: "Outcomes are not immediate",
-    desc: "Each cycle involves waiting, and results are never guaranteed. The process requires patience most people don't expect.",
-  },
-  {
-    title: "Timing matters, but isn't controllable",
-    desc: "You can track and prepare, but you cannot force the outcome. Understanding this can reduce unnecessary pressure.",
-  },
-  {
-    title: "Each cycle can feel like a reset",
-    desc: "Starting again can be emotionally demanding, even when expected. The emotional cost of repetition is real.",
-  },
-  {
-    title: "Emotional experiences shift quickly",
-    desc: "Hope and disappointment can cycle within the same week. This is not a sign that something is wrong.",
-  },
-];
-
+/**
+ * Compressed to a quiet italic-serif interlude band between TTCFocus and TTCAISupport.
+ * No card chrome — soft tinted full-width band; editorial single-line statement.
+ */
 const TTCWhatMakesDifferent = () => {
   return (
-    <section className="bg-parchment-dark py-20 md:py-28">
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-start">
-          {/* Left — editorial statement */}
-          <div className="md:col-span-2">
-            <p
-              className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
-              style={{ color: 'hsl(var(--stage-ttc-accent))' }}
-            >
-              A Different Kind of Guide
-            </p>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground leading-tight mb-5">
-              What makes this journey different
-            </h2>
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
-              This isn't a fixed checklist. It's a space that acknowledges the
-              real experience of trying to conceive, including the parts that
-              feel uncertain or slow.
-            </p>
-            {/* Editorial quote */}
-            <div
-              className="pl-5 border-l-2"
-              style={{ borderColor: 'hsl(var(--stage-ttc-accent) / 0.25)' }}
-            >
-              <p className="font-serif italic text-base text-foreground/65 leading-relaxed">
-                "Trying to conceive doesn't follow a script. The guide shouldn't either."
-              </p>
-            </div>
-
-            {/* Stat reinforcement */}
-            <div className="mt-6 flex items-center gap-5">
-              {[
-                { n: "~6", label: "months avg" },
-                { n: "85%", label: "within a year" },
-              ].map((s) => (
-                <div key={s.label} className="flex items-baseline gap-1.5">
-                  <span className="font-serif text-xl text-foreground">{s.n}</span>
-                  <span className="font-sans text-[10px] font-light text-muted-foreground/60 uppercase tracking-wide">{s.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right — numbered points */}
-          <div className="md:col-span-3 space-y-4">
-            {points.map((point, i) => (
-              <div
-                key={i}
-                className="rounded-xl p-5 sm:p-6 bg-card border border-border/40 flex items-start gap-5 hover:shadow-card-brand transition-shadow"
-              >
-                <span
-                  className="font-serif text-3xl leading-none select-none shrink-0"
-                  style={{ color: 'hsl(var(--stage-ttc-accent) / 0.3)' }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div className="pt-1">
-                  <p className="font-serif text-base text-foreground mb-1">{point.title}</p>
-                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-                    {point.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+    <section
+      className="py-14 md:py-20"
+      style={{ backgroundColor: 'hsl(var(--stage-ttc) / 0.22)' }}
+    >
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl text-center">
+        <p
+          className="font-sans text-[11px] font-light tracking-[0.24em] uppercase mb-4"
+          style={{ color: 'hsl(var(--stage-ttc-accent))' }}
+        >
+          A different kind of guide
+        </p>
+        <p className="font-serif italic text-lg sm:text-xl md:text-[1.45rem] text-foreground/75 leading-snug">
+          Trying to conceive doesn't follow a script.{" "}
+          <span className="block sm:inline">The guide shouldn't either.</span>
+        </p>
+        <div
+          aria-hidden="true"
+          className="mx-auto mt-6 h-px w-16"
+          style={{
+            background:
+              'linear-gradient(90deg, transparent, hsl(var(--stage-ttc-accent) / 0.5), transparent)',
+          }}
+        />
+        <p className="mt-5 font-sans text-[13.5px] font-light text-muted-foreground/80 leading-relaxed max-w-xl mx-auto">
+          Hope and disappointment can cycle within the same week. Timing matters
+          but can't be forced. This is a space that acknowledges the real shape
+          of trying, not a checklist that pretends otherwise.
+        </p>
       </div>
     </section>
   );

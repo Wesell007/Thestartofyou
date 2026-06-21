@@ -277,8 +277,8 @@ const AskPage = () => {
           {/* Stage context chip */}
           {context && (
             <div className="mb-5">
-              <span className="inline-flex items-center gap-1.5 bg-sage-bg/70 text-sage font-sans text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full ring-1 ring-sage/15">
-                <span className="w-1 h-1 rounded-full bg-sage" />
+              <span className={`inline-flex items-center gap-1.5 ${tone.chipBg} ${tone.chipText} font-sans text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full ring-1 ${tone.chipRing}`}>
+                <span className={`w-1 h-1 rounded-full ${tone.chipDot}`} />
                 {context}
               </span>
             </div>
@@ -286,7 +286,7 @@ const AskPage = () => {
 
           {/* Question title, editorial */}
           <div className="mb-7">
-            <p className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-sage/80 mb-3">
+            <p className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrowSoft} mb-3`}>
               You asked
             </p>
             <h1 className="font-serif text-[1.75rem] sm:text-[2.1rem] md:text-[2.65rem] text-foreground leading-[1.1] tracking-[-0.012em]">

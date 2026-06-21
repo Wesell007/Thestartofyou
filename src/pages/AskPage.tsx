@@ -452,7 +452,7 @@ const AskPage = () => {
 
                 <div className="container mx-auto px-6 md:px-10 max-w-3xl py-16 md:py-24 relative z-10">
                   <div className="max-w-lg mx-auto text-center">
-                    <SprigDivider tone="sage" className="mb-6" />
+                    <SprigDivider tone={tone.sprigTone} className="mb-6" />
                     <p className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-terracotta/80 mb-5">
                       A small reminder
                     </p>

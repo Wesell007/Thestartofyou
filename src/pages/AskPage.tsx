@@ -20,6 +20,12 @@ const relatedLinks = [
   { label: "Explore guidance", href: "/explore", icon: Compass, desc: "Find what you need" },
 ];
 
+interface IVFLastStage {
+  slug: string;
+  title: string;
+  href: string;
+}
+
 const AskPage = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";

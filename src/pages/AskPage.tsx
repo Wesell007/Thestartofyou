@@ -225,8 +225,8 @@ const AskPage = () => {
             the question and quick answer.
             ───────────────────────────────────────────── */}
         <div className="absolute inset-x-0 top-0 h-[680px] md:h-[760px] pointer-events-none overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-sage-bg/35 via-parchment/60 to-parchment" />
-          <StageGlow tone="sage" className="top-[-200px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px]" opacity={1} />
+          <div className={`absolute inset-0 bg-gradient-to-b ${isIVF ? "from-lavender-bg/35" : "from-sage-bg/35"} via-parchment/60 to-parchment`} />
+          <StageGlow tone={tone.glow} className="top-[-200px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px]" opacity={1} />
           <BotanicalAccent
             className="top-24 -left-16 md:top-20 md:-left-6 rotate-[-10deg]"
             opacity="opacity-[0.22]"

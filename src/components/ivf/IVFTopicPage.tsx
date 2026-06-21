@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, ChevronRight, Check, Sparkles, ShieldCheck, AlertCircle, NotebookPen, HelpCircle } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
@@ -25,6 +26,23 @@ const IVFTopicPage = ({ config }: Props) => {
   const siblings = IVF_TOPIC_ORDER.filter((s) => s !== config.slug).map(
     (s) => ivfTopicConfigs[s]
   );
+
+  // Remember the IVF stage the reader is on so that any article they open
+  // next can offer a clear "Back to <stage>" link. Cleared with the tab.
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(
+        "ivf:lastStage",
+        JSON.stringify({
+          slug: config.slug,
+          title: config.title,
+          href: `/ivf/${config.slug}`,
+        })
+      );
+    } catch {
+      // sessionStorage may be unavailable; ignore
+    }
+  }, [config.slug, config.title]);
 
   if (typeof document !== "undefined") {
     document.title = `${config.title} | IVF | The Start of You`;

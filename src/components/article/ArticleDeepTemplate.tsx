@@ -13,6 +13,7 @@ import ArticleFAQ from "@/components/article/ArticleFAQ";
 import ArticleSources from "@/components/article/ArticleSources";
 import ArticleRelatedReads from "@/components/article/ArticleRelatedReads";
 import ArticleTopicReturn from "@/components/article/ArticleTopicReturn";
+import ArticleIVFContext from "@/components/article/ArticleIVFContext";
 
 interface Props {
   data: ArticleData;
@@ -24,6 +25,9 @@ const ArticleDeepTemplate = ({ data }: Props) => {
   return (
     <div className="min-h-screen bg-parchment">
       <Navbar />
+
+      {/* Light IVF orientation strip — only renders for IVF-journey articles */}
+      <ArticleIVFContext data={data} />
 
       {/* Opening sequence */}
       <ArticleHeader data={data} />

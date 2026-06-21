@@ -16,30 +16,40 @@ interface Props {
 }
 
 const ArticleHeader = ({ data }: Props) => {
+  const isIVF = data.journey?.includes("ivf");
   const topicLabel = data.topic ? TOPIC_LABELS[data.topic] : null;
   const topicHref = data.topic ? `/pregnancy/${data.topic}` : null;
   const hasMeta = data.reviewedBy || data.lastUpdated;
 
+  // For IVF articles the orientation is handled by ArticleIVFContext above
+  // the header — suppress the default Pregnancy breadcrumb so we don't show
+  // a misleading "The Pregnancy Map" root.
+  const headerTopPad = isIVF
+    ? "pt-2 sm:pt-3 md:pt-4"
+    : "pt-24 sm:pt-28 md:pt-32";
+
   return (
-    <header className="bg-parchment pt-24 sm:pt-28 md:pt-32 pb-2 sm:pb-3 md:pb-4">
+    <header className={`bg-parchment ${headerTopPad} pb-2 sm:pb-3 md:pb-4`}>
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-        {/* Breadcrumb */}
-        <nav
-          aria-label="Breadcrumb"
-          className="flex items-center gap-2 mb-5 sm:mb-6 font-sans text-[11px] font-light tracking-[0.12em] uppercase text-muted-foreground/70 flex-wrap"
-        >
-          <Link to="/pregnancy" className="hover:text-sage transition-colors">
-            The Pregnancy Map
-          </Link>
-          {topicLabel && topicHref && (
-            <>
-              <span className="opacity-50" aria-hidden="true">·</span>
-              <Link to={topicHref} className="hover:text-sage transition-colors">
-                {topicLabel}
-              </Link>
-            </>
-          )}
-        </nav>
+        {/* Breadcrumb — hidden for IVF (handled by ArticleIVFContext above) */}
+        {!isIVF && (
+          <nav
+            aria-label="Breadcrumb"
+            className="flex items-center gap-2 mb-5 sm:mb-6 font-sans text-[11px] font-light tracking-[0.12em] uppercase text-muted-foreground/70 flex-wrap"
+          >
+            <Link to="/pregnancy" className="hover:text-sage transition-colors">
+              The Pregnancy Map
+            </Link>
+            {topicLabel && topicHref && (
+              <>
+                <span className="opacity-50" aria-hidden="true">·</span>
+                <Link to={topicHref} className="hover:text-sage transition-colors">
+                  {topicLabel}
+                </Link>
+              </>
+            )}
+          </nav>
+        )}
 
         {/* Topic eyebrow — small editorial label tying the page to its topic */}
         {topicLabel && (

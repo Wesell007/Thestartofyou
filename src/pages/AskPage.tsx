@@ -531,7 +531,7 @@ const AskPage = () => {
             <div className="relative mt-8">
               {/* Full-width premium wash */}
               <div className="absolute inset-0 bg-gradient-to-b from-parchment via-sage-bg/15 to-parchment pointer-events-none" />
-              <StageGlow tone="sage" className="top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px]" opacity={0.7} />
+              <StageGlow tone={tone.glow} className="top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px]" opacity={0.7} />
 
               <div className="relative container mx-auto px-6 md:px-10 max-w-3xl py-20 md:py-28">
                 <div className="relative bg-card border border-sage/15 rounded-[2rem] px-7 py-12 md:px-14 md:py-16 shadow-elevated overflow-hidden">

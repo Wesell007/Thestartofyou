@@ -2741,41 +2741,229 @@ const articleDatabase: ArticleData[] = [
   {
     slug: "perinatal-anxiety",
     title: "Perinatal anxiety: when worry becomes more than worry",
-    metaDescription: "Understanding perinatal anxiety — what it is, how it differs from normal worry, and where to find support.",
-    quickAnswer: "Perinatal anxiety affects around 1 in 5 pregnant or postnatal people. It goes beyond normal worry, causing persistent, excessive anxiety that interferes with daily life, sleep, and enjoyment. It is treatable and support is available.",
-    howThisFeels: ["Constant worry that something bad will happen", "Inability to relax or enjoy pregnancy/parenthood", "Physical symptoms like racing heart and tight chest", "Feeling like you're going crazy"],
+    metaDescription: "A calm, in-depth guide to perinatal anxiety — what it is, how it differs from ordinary worry, what it feels like day to day, and where to find support that works.",
+    quickAnswer:
+      "Perinatal anxiety affects roughly one in five people during pregnancy or the first year after birth. It is more than ordinary worry — it is persistent, excessive, and starts to interfere with sleep, daily life, or your sense of self. It is common, recognised, and very treatable.",
+    howThisFeels: [
+      "Worry that keeps looping even when nothing has changed",
+      "A body that feels braced — tight chest, racing heart, restless sleep",
+      "Difficulty enjoying parts of pregnancy or parenthood you expected to enjoy",
+      "A quiet fear of saying it out loud in case it sounds dramatic",
+    ],
     whatHappening: {
       commonCauses: [
-        { heading: "Hormonal changes", body: "Pregnancy and postnatal hormonal shifts directly affect the brain's anxiety pathways." },
-        { heading: "Life transition", body: "The enormity of becoming a parent naturally triggers protective worry, which can become disproportionate." },
-        { heading: "Previous mental health history", body: "A history of anxiety or depression increases risk, though perinatal anxiety can affect anyone." },
+        { heading: "Hormonal change", body: "Pregnancy and the postnatal period reshape the brain chemistry that regulates anxiety, sleep, and mood." },
+        { heading: "A genuinely large transition", body: "Becoming a parent — or trying to — triggers a protective vigilance that can tip from useful into overwhelming." },
+        { heading: "Personal mental health history", body: "Past anxiety or depression raises risk, but perinatal anxiety can affect anyone with no prior history at all." },
       ],
-      lessCauses: [{ heading: "Birth trauma or pregnancy complications", body: "Difficult experiences can trigger or worsen anxiety." }],
-      whyItVaries: "Anxiety severity depends on personal history, support systems, hormones, and circumstances.",
+      lessCauses: [
+        { heading: "Difficult past experiences", body: "Previous loss, birth trauma, fertility treatment, or pregnancy complications can leave the nervous system more easily activated." },
+      ],
+      whyItVaries: "How much, how loud, and how long anxiety lasts depends on hormones, history, support, sleep, and circumstance — not on how strong or grateful you are.",
     },
-    timing: { whenStarts: "Can begin at any point during pregnancy or the first year after birth.", whenEases: "With support, most people see significant improvement within weeks to months." },
-    whatItFeelsLike: ["An inability to stop worst-case thinking", "Checking on the baby constantly", "Physical tension and exhaustion", "Feeling like you're failing"],
-    whatThisMeans: "Perinatal anxiety is a medical condition, not a character flaw. It is one of the most common complications of pregnancy and the postnatal period.",
-    normal: ["Some worry and anxiety during pregnancy/early parenthood", "Occasional intrusive thoughts", "Heightened vigilance about safety"],
-    seekSupport: ["Anxiety that interferes with daily functioning", "Inability to sleep even when the baby is sleeping", "Panic attacks", "Intrusive thoughts that cause significant distress", "Avoiding situations due to fear"],
-    disclaimer: "If you think you may have perinatal anxiety, please speak with your midwife, health visitor, or GP. Effective treatment is available.",
-    whatYouCanDo: [
-      { action: "Name it", reason: "Recognising anxiety as a condition, not a personal failing, is the first step." },
-      { action: "Speak to a professional", reason: "Your midwife, health visitor, or GP can assess and refer you." },
-      { action: "Consider therapy", reason: "CBT is particularly effective for perinatal anxiety." },
+    timing: {
+      whenStarts: "Can begin at any point in pregnancy or in the first year after birth, and sometimes earlier during fertility treatment.",
+      whenEases: "With the right support — therapy, sometimes medication, often both — most people see meaningful improvement within weeks to months.",
+    },
+    whatItFeelsLike: [
+      "Worst-case thinking that is hard to switch off",
+      "Checking and rechecking — symptoms, the baby, kick counts, monitors",
+      "Physical tension and exhaustion that rest does not fix",
+      "A persistent sense that you are failing, even when you are doing well",
     ],
-    whatHappensNext: "With appropriate support, perinatal anxiety is very treatable. Most people see significant improvement.",
-    relatedStage: { intro: "Related:", links: [{ label: "Support Hub", href: "/support" }, { label: "Emotional Wellbeing Guide", href: "/articles/emotional-wellbeing-pregnancy" }] },
-    aiPrompts: ["Is my anxiety normal?", "How do I know if I have perinatal anxiety?"],
+    whatThisMeans:
+      "Perinatal anxiety is a recognised condition, not a personal failing. It is one of the most common health complications of pregnancy and the year after birth, and it responds well to support.",
+    normal: [
+      "Waves of worry through pregnancy or early parenthood",
+      "Occasional intrusive thoughts that pass on their own",
+      "Heightened vigilance about safety and health",
+    ],
+    seekSupport: [
+      "Anxiety that is starting to shape your daily decisions",
+      "Difficulty sleeping even when the baby is sleeping or you are exhausted",
+      "Panic attacks, or symptoms that feel physical and frightening",
+      "Intrusive thoughts that distress you or feel hard to shake",
+      "Any thoughts of harming yourself — please reach out today",
+    ],
+    disclaimer:
+      "This article is general guidance and not a substitute for medical or mental health care. If you recognise yourself here, please speak with your midwife, health visitor, GP, or a perinatal mental health service — support is real and available.",
+    whatYouCanDo: [
+      { action: "Name what is happening", reason: "Recognising this as anxiety — not weakness — is often the first step that loosens its grip." },
+      { action: "Tell one professional", reason: "Your midwife, health visitor, or GP can listen, assess, and refer you to specialist perinatal support." },
+      { action: "Ask about talking therapy", reason: "CBT and other evidence-based therapies are particularly effective in the perinatal period." },
+      { action: "Protect the basics", reason: "Sleep, food, movement, and one trusted person to talk to do more than they sound like they do." },
+    ],
+    whatHappensNext:
+      "With the right support, perinatal anxiety almost always eases. Most people improve significantly within weeks to months — and you do not have to wait until you are in crisis to ask for help.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Support hub", href: "/support" },
+        { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy" },
+      ],
+    },
+    aiPrompts: [
+      "How do I know if my worry has become anxiety?",
+      "What does perinatal anxiety treatment actually look like?",
+      "How do I talk to my GP about how I am feeling?",
+    ],
     captureIntro: "Your mental health matters as much as your physical health.",
     journey: ["support", "pregnancy", "postpartum"],
     topics: ["emotional-wellbeing", "safety-and-support"],
     productPromotion: "minimal",
     reviewedBy: "Jenny Joines",
-    faq: [
-      { question: "How do I know if my worry is normal or perinatal anxiety?", answer: "Normal worry comes and goes and doesn't significantly affect your daily life. Perinatal anxiety is persistent, excessive, and interferes with functioning, sleep, or enjoyment." },
-      { question: "Can perinatal anxiety affect my baby?", answer: "Getting support for your mental health is one of the best things you can do for yourself and your baby. Treatment is safe and effective." },
+    lastUpdated: "March 2026",
+    standfirst:
+      "Some worry is part of pregnancy and early parenthood. Some worry quietly takes over. This is a calm guide to telling the difference — and to the support that genuinely helps when it does.",
+    hero: {
+      src: new URL("../assets/article-hero-perinatal-anxiety.jpg", import.meta.url).href,
+      alt: "A softly lit bedside scene at dawn — a steaming ceramic mug, a folded knit throw, and a small vase of dried lavender beside a half-drawn linen curtain.",
+    },
+    keyTakeaways: [
+      "Perinatal anxiety affects roughly one in five people in pregnancy or the first postnatal year",
+      "It is different from ordinary worry — it is persistent, intrusive, and starts to shape daily life",
+      "It is not a character flaw, a failure of gratitude, or a sign you will not cope as a parent",
+      "Hormones, sleep, history, and circumstance all play a part — none of them are your fault",
+      "Treatment works: therapy, sometimes medication, and specialist perinatal mental health support",
+      "Asking for help earlier is almost always easier than asking for help later",
     ],
+    inThisArticle: [
+      "What perinatal anxiety actually is",
+      "How it differs from ordinary worry",
+      "What it can feel like day to day",
+      "When it becomes harder to manage alone",
+      "What support and treatment look like",
+      "How to recognise yourself without judging yourself",
+    ],
+    sources: [
+      "NICE — Antenatal and postnatal mental health (CG192)",
+      "Royal College of Psychiatrists — Mental health in pregnancy",
+      "Maternal Mental Health Alliance — Specialist perinatal mental health services",
+      "MIND — Perinatal anxiety and OCD",
+      "PANDAS Foundation — Pre and postnatal depression and anxiety support",
+    ],
+    faq: [
+      {
+        question: "How do I know if my worry is normal or perinatal anxiety?",
+        answer:
+          "Ordinary worry rises and settles, responds to reassurance, and does not take over your day. Perinatal anxiety tends to be persistent, intrusive, and resistant to reassurance — it shows up in your sleep, your body, and how much space you have for anything else. A good rough test: is the worry shaping your decisions and your daily life? If yes, it is worth raising with your midwife or GP.",
+      },
+      {
+        question: "Will telling a midwife or GP put my baby at risk of being taken away?",
+        answer:
+          "No. Honest conversations about anxiety lead to support, not removal. Perinatal mental health teams exist specifically to help parents stay well and stay together. Safeguarding only becomes a question in very different circumstances — not because someone said they were struggling with anxiety.",
+      },
+      {
+        question: "Can I take anxiety medication during pregnancy or breastfeeding?",
+        answer:
+          "Often, yes — many medications are well studied and considered compatible with pregnancy and breastfeeding. The right answer depends on your history, your symptoms, and what is likely to help you most. A GP or perinatal mental health team can weigh this with you. Stopping medication suddenly without advice is rarely the right move.",
+      },
+      {
+        question: "What if my anxiety is mostly about the baby's safety?",
+        answer:
+          "Worry about the baby is one of the most common shapes perinatal anxiety takes. Checking, scanning for risk, and intrusive 'what if' thoughts are very common and do not mean you are a danger to your baby. Specialist services understand this exact pattern and can help you ease it.",
+      },
+      {
+        question: "Where can I find specialist support?",
+        answer:
+          "Start with your midwife, health visitor, or GP — they can refer you into NHS perinatal mental health services or NHS Talking Therapies. Charities like PANDAS, MIND, the Maternal Mental Health Alliance, and Tommy's all offer information and peer support. If you need help urgently, call NHS 111. If you are in crisis or thinking of harming yourself, call 999, go to A&E, or call the Samaritans on 116 123.",
+      },
+    ],
+    editorialSections: [
+      {
+        id: "what-it-is",
+        heading: "What perinatal anxiety actually is",
+        lead:
+          "Perinatal anxiety is anxiety that arises during pregnancy or in the first year after birth. It is recognised, common, and one of the most studied parts of perinatal mental health — even though it is rarely talked about in the way physical symptoms are.",
+        paragraphs: [
+          "It can appear on its own, or alongside low mood, intrusive thoughts, or OCD-style patterns. It can begin in the very first weeks of pregnancy, sit quietly through the middle, and surface again around birth or in the early months at home. It can also follow fertility treatment, loss, or a difficult birth — sometimes long after everyone else has moved on.",
+          "It is not a single experience. For some people it feels like a running internal commentary that will not switch off. For others it lives mostly in the body — racing heart, breathlessness, a permanent low-level brace. For others it shows up as avoidance: not booking the appointment, not reading the article, not asking the question, because asking might confirm the fear.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "If any of this is starting to sound familiar, you are not alone, you are not broken, and you are not the only person reading this paragraph carefully.",
+        },
+      },
+      {
+        id: "more-than-worry",
+        heading: "How it differs from ordinary worry",
+        lead:
+          "Most pregnant and postnatal people worry. Worry is part of how the brain protects something precious. The line between ordinary worry and anxiety is not always obvious from the inside — but a few patterns make it clearer.",
+        paragraphs: [
+          "Ordinary worry tends to rise and settle. It responds to information, to reassurance, to a good night's sleep. Perinatal anxiety tends to resist all of those — it returns after reassurance, often within minutes, and can intensify the more you try to think your way out of it.",
+          "Ordinary worry tends to be specific and time-limited. Anxiety tends to spread — from one fear to another, from the day into the night, from the mind into the body. And ordinary worry leaves room for the rest of your life. Anxiety, over time, starts to crowd it out.",
+        ],
+        subsections: [
+          {
+            subheading: "A quiet test",
+            paragraphs: [
+              "If you are not sure whether what you are carrying is worry or something more, a useful question is: is this shaping my decisions, my sleep, or how much space I have for anything else? If the honest answer is yes, it is worth taking seriously — not because something is wrong with you, but because support exists for exactly this.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "what-it-feels-like",
+        heading: "What it can feel like day to day",
+        lead:
+          "Perinatal anxiety rarely arrives as a single dramatic moment. It is more often a slow accumulation — a fortnight of poor sleep, a Sunday evening that feels heavier than it should, a thought you cannot quite put down.",
+        paragraphs: [
+          "It might look like reading the same line in a leaflet four times because your mind keeps jumping forward. Like counting kicks long after you have your answer. Like rehearsing conversations with the midwife before you have them. Like a tight chest in the supermarket queue, with no obvious trigger.",
+          "Postnatally it often looks like waking before the baby wakes, scanning the monitor, checking breathing, replaying the day. It can look like avoiding being alone with the baby, or being unable to leave the baby with anyone else. It can also look like being competent and capable on the outside while feeling fragile and frightened underneath.",
+        ],
+        callout: {
+          tone: "info",
+          text: "None of these patterns mean you are doing something wrong. They mean your nervous system is working overtime — and that is a thing that can be helped.",
+        },
+      },
+      {
+        id: "when-to-ask-for-more",
+        heading: "When it becomes harder to manage alone",
+        lead:
+          "Some of what perinatal anxiety brings will ease with sleep, support, and time. Some of it will not — and the kindest thing you can do is notice the difference earlier rather than later.",
+        paragraphs: [
+          "Worth reaching out about: anxiety that is interfering with sleep when the baby is asleep, panic attacks or strong physical symptoms, intrusive thoughts that distress you, avoidance that is starting to limit your life, or a sense that you have been quietly bracing for weeks.",
+          "Worth reaching out about today: thoughts of harming yourself, thoughts that frighten you about the baby, or feeling unsafe alone. These are not signs you are dangerous — they are signs that this has become too heavy to carry alone, and specialist help exists for exactly these moments.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "If you are having thoughts of self-harm or suicide, please contact your GP, NHS 111, or the Samaritans on 116 123 — any time, day or night. In an emergency, call 999 or go to A&E.",
+        },
+      },
+      {
+        id: "what-support-looks-like",
+        heading: "What support and treatment actually look like",
+        lead:
+          "Asking for help does not mean medication you do not want, or losing control of your own care. Perinatal mental health support is collaborative, evidence-based, and designed for exactly this season of life.",
+        paragraphs: [
+          "Most people start with their midwife, health visitor, or GP — often in a routine appointment, sometimes by booking one specifically. From there, the most common routes are talking therapy (CBT, in particular, is well evidenced in the perinatal period), specialist perinatal mental health teams, or — when it is the right fit — medication that is considered compatible with pregnancy and breastfeeding.",
+          "Peer support helps a different layer. PANDAS, the Maternal Mental Health Alliance, Tommy's, and MIND all run information lines, online groups, and signposting that many people find as steadying as clinical care. None of these are last resorts — they are part of the toolkit.",
+        ],
+        subsections: [
+          {
+            subheading: "If you have asked before and not been heard",
+            paragraphs: [
+              "Sometimes the first conversation does not land. Tiredness, short appointments, and the cultural habit of minimising perinatal anxiety can all get in the way. It is reasonable — and often important — to go back, to bring someone with you, to write down what is happening, or to ask specifically for a referral to perinatal mental health services.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "recognising-yourself",
+        heading: "Recognising yourself without judging yourself",
+        lead:
+          "Many people read articles like this and quietly recognise themselves — and then talk themselves out of it. 'Other people have it worse.' 'I should be grateful.' 'I have been like this for years, this is just me.'",
+        paragraphs: [
+          "Recognition is not diagnosis, and it is not catastrophe. It is information. It is also one of the most reliable predictors of getting better — because people who can name what is happening are more likely to ask for the support that helps.",
+          "You do not have to be in crisis to deserve care. You do not have to be sure to start the conversation. And you do not have to choose between being grateful for your pregnancy or your baby and admitting that some of this is genuinely hard.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "If something in this article has felt close to home, that is worth listening to. The next step does not have to be big — a sentence to your midwife, a call to your GP, a message to one person who already knows you.",
+        },
+      },
+    ],
+    relatedSlugs: ["emotional-impact-of-ivf", "anxiety-in-pregnancy", "emotional-wellbeing-pregnancy"],
   },
 
   // ─── PREPARING: BIRTH PLAN ───────────────────────────────────────────────

@@ -1,123 +1,218 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import ttcCycleImg from "@/assets/ttc-stage-cycle.jpg";
 import ttcTimingImg from "@/assets/ttc-stage-timing.jpg";
 import ttcWaitingImg from "@/assets/ttc-stage-waiting.jpg";
+import sprigImg from "@/assets/topic-mini-sprig.png";
+import wildflowerImg from "@/assets/topic-wildflower-sprig.png";
 
-const stages = [
+interface ChildLink {
+  label: string;
+  href: string;
+}
+
+interface Stage {
+  num: string;
+  title: string;
+  sub: string;
+  emotion: string;
+  slug: string;
+  image: string;
+  accentHsl: string;
+  sprig: "leaf" | "wildflower";
+  sprigRotate: number;
+  children: ChildLink[];
+}
+
+const stages: Stage[] = [
   {
     num: "01",
     title: "Understanding your cycle",
-    sub: "How your cycle works, what ovulation means, and why it matters",
+    sub: "How your cycle works, what ovulation means, and why it matters.",
     emotion: "Curiosity and learning",
     slug: "understanding-your-cycle",
     image: ttcCycleImg,
+    accentHsl: "150 24% 40%",
+    sprig: "leaf",
+    sprigRotate: -10,
+    children: [
+      { label: "Cycle tracking", href: "/trying-to-conceive/cycle-tracking" },
+      { label: "Age and fertility", href: "/trying-to-conceive/age-and-fertility" },
+    ],
   },
   {
     num: "02",
     title: "Timing and tracking",
-    sub: "Identifying your fertile window and recognising the signs",
+    sub: "Finding your fertile window and recognising the signs that matter.",
     emotion: "Focus and intention",
     slug: "timing-and-tracking",
     image: ttcTimingImg,
+    accentHsl: "140 22% 36%",
+    sprig: "wildflower",
+    sprigRotate: 14,
+    children: [
+      { label: "Ovulation", href: "/trying-to-conceive/ovulation" },
+      { label: "Preconception health", href: "/trying-to-conceive/preconception-health" },
+    ],
   },
   {
     num: "03",
     title: "Waiting and testing",
-    sub: "The period after ovulation, where patience is tested most",
+    sub: "The period after ovulation, when patience is tested most.",
     emotion: "Hope and uncertainty",
     slug: "waiting-and-testing",
     image: ttcWaitingImg,
+    accentHsl: "175 20% 34%",
+    sprig: "leaf",
+    sprigRotate: 18,
+    children: [
+      { label: "Two-week wait", href: "/trying-to-conceive/two-week-wait" },
+      { label: "Pregnancy tests", href: "/trying-to-conceive/pregnancy-tests" },
+    ],
   },
 ];
 
 const TTCStages = () => {
   return (
-    <section className="bg-parchment py-20 md:py-28">
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-14 mb-10">
-          <div className="md:col-span-2">
-            <p
-              className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
-              style={{ color: 'hsl(var(--stage-ttc-accent))' }}
-            >
-              The Process
-            </p>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground leading-tight">
-              Three stages of trying
-            </h2>
-          </div>
-          <div className="md:col-span-3 flex items-end">
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-              Each stage has its own emotional landscape. Understanding where you are makes the process feel less overwhelming.
-            </p>
-          </div>
+    <section className="bg-parchment py-16 md:py-24">
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
+        <div className="text-center mb-10 md:mb-12">
+          <p
+            className="font-sans text-[11px] font-light tracking-[0.24em] uppercase mb-3"
+            style={{ color: 'hsl(var(--stage-ttc-accent))' }}
+          >
+            The TTC Guide
+          </p>
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground mb-3 leading-tight">
+            Three stages of <span className="italic font-normal">trying</span>
+          </h2>
+          <p className="font-sans text-sm font-light text-muted-foreground max-w-md mx-auto">
+            Each stage has its own rhythm. Choose where you are — there's no
+            wrong place to begin.
+          </p>
+          <div
+            aria-hidden="true"
+            className="mx-auto mt-6 h-px w-16"
+            style={{
+              background:
+                'linear-gradient(90deg, transparent, hsl(var(--stage-ttc-accent) / 0.5), transparent)',
+            }}
+          />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {stages.map((stage) => (
-            <Link
-              key={stage.num}
-              to={`/trying-to-conceive/${stage.slug}`}
-              className="group bg-card border border-border/40 rounded-2xl overflow-hidden flex flex-col transition-all hover:shadow-card-brand"
-              onMouseEnter={(e) => e.currentTarget.style.borderColor = 'hsl(var(--stage-ttc-accent) / 0.4)'}
-              onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
-            >
-              <div className="h-44 sm:h-48 overflow-hidden relative">
-                <img
-                  src={stage.image}
-                  alt={stage.title}
-                  loading="lazy"
-                  width={640}
-                  height={512}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                {/* Number + gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent" />
-                <div className="absolute bottom-4 left-5">
-                  <span className="font-serif text-2xl text-white/90 leading-none">{stage.num}</span>
-                </div>
-                <div
-                  className="absolute bottom-0 left-0 right-0 h-0.5"
-                  style={{ backgroundColor: 'hsl(var(--stage-ttc-accent) / 0.6)' }}
-                />
-              </div>
-              <div className="p-6 flex flex-col gap-2.5 flex-1">
-                <h3 className="font-serif text-lg text-foreground leading-snug group-hover:text-foreground/80 transition-colors">
-                  {stage.title}
-                </h3>
-                <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
-                  {stage.sub}
-                </p>
-                {/* Emotional marker */}
-                <div
-                  className="mt-auto pt-3 flex items-center gap-2"
-                >
-                  <div
-                    className="w-1.5 h-1.5 rounded-full"
-                    style={{ backgroundColor: 'hsl(var(--stage-ttc-accent) / 0.5)' }}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+          {stages.map((stage) => {
+            const accent = `hsl(${stage.accentHsl})`;
+            const accentSoft = `hsl(${stage.accentHsl} / 0.10)`;
+            const accentBorder = `hsl(${stage.accentHsl} / 0.20)`;
+            const SprigSrc = stage.sprig === "leaf" ? sprigImg : wildflowerImg;
+            return (
+              <Link
+                key={stage.num}
+                to={`/trying-to-conceive/${stage.slug}`}
+                className="group relative bg-card rounded-2xl overflow-hidden flex flex-col border transition-all hover:-translate-y-1"
+                style={{
+                  borderColor: accentBorder,
+                  boxShadow: `0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 16px 38px -28px hsl(${stage.accentHsl} / 0.35)`,
+                }}
+              >
+                <div className="relative h-44 sm:h-48 overflow-hidden">
+                  <img
+                    src={stage.image}
+                    alt={stage.title}
+                    loading="lazy"
+                    width={640}
+                    height={512}
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                   />
-                  <span
-                    className="font-sans text-[10px] font-light tracking-[0.1em] uppercase"
-                    style={{ color: 'hsl(var(--stage-ttc-accent) / 0.7)' }}
-                  >
-                    {stage.emotion}
-                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/35 via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4">
+                    <span
+                      className="inline-block rounded-full px-3 py-1 font-sans text-[10px] font-light tracking-[0.22em] uppercase backdrop-blur-sm"
+                      style={{
+                        backgroundColor: 'hsl(var(--parchment) / 0.88)',
+                        color: accent,
+                      }}
+                    >
+                      Stage {stage.num}
+                    </span>
+                  </div>
+                  <div
+                    className="absolute bottom-0 left-0 right-0 h-0.5"
+                    style={{ backgroundColor: `hsl(${stage.accentHsl} / 0.55)` }}
+                  />
                 </div>
-                <span
-                  className="flex items-center gap-1.5 font-sans text-xs font-light mt-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                  style={{ color: 'hsl(var(--stage-ttc-accent))' }}
-                >
-                  Begin this stage <ArrowRight size={12} />
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
 
-        {/* IVF bridge surfacing intentionally lives only in the final CTA
-            below and in the fertility/ivf-and-treatment topic tile, to avoid
-            stacking two rails on the same hub. */}
+                <div className="relative p-6 flex flex-col gap-3 flex-1">
+                  <img
+                    src={SprigSrc}
+                    alt=""
+                    aria-hidden="true"
+                    className="pointer-events-none select-none absolute -top-2 right-3 w-12 opacity-35"
+                    style={{ transform: `rotate(${stage.sprigRotate}deg)` }}
+                  />
+
+                  <h3 className="font-serif text-[1.2rem] text-foreground leading-snug">
+                    {stage.title}
+                  </h3>
+                  <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-relaxed">
+                    {stage.sub}
+                  </p>
+
+                  <ul className="mt-1 flex flex-col">
+                    {stage.children.map((c) => (
+                      <li
+                        key={c.href}
+                        className="border-t first:border-t-0"
+                        style={{ borderColor: accentSoft }}
+                      >
+                        <Link
+                          to={c.href}
+                          onClick={(e) => e.stopPropagation()}
+                          className="group/link flex items-center gap-2 py-2.5"
+                        >
+                          <span className="flex-1 font-sans text-[12.5px] font-light text-foreground/80 group-hover/link:text-foreground transition-colors">
+                            {c.label}
+                          </span>
+                          <ChevronRight
+                            size={12}
+                            className="shrink-0 opacity-55 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 transition-all"
+                            style={{ color: accent }}
+                          />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-auto pt-4 flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <div
+                        className="w-1.5 h-1.5 rounded-full shrink-0"
+                        style={{ backgroundColor: `hsl(${stage.accentHsl} / 0.6)` }}
+                      />
+                      <span
+                        className="font-sans text-[10px] font-light tracking-[0.1em] uppercase truncate"
+                        style={{ color: `hsl(${stage.accentHsl} / 0.85)` }}
+                      >
+                        {stage.emotion}
+                      </span>
+                    </div>
+                    <span
+                      className="inline-flex items-center gap-1 font-sans text-[12px] font-medium shrink-0"
+                      style={{ color: accent }}
+                    >
+                      Explore stage
+                      <ArrowRight
+                        size={12}
+                        className="transition-transform group-hover:translate-x-0.5"
+                      />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

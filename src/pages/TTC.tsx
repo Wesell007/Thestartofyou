@@ -1,10 +1,9 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import TTCHero from "@/components/ttc/TTCHero";
-import TTCWhatThisIs from "@/components/ttc/TTCWhatThisIs";
+import TTCWhatThisCovers from "@/components/ttc/TTCWhatThisCovers";
 import TTCStages from "@/components/ttc/TTCStages";
 import TTCFocus from "@/components/ttc/TTCFocus";
-import TTCWhatToExpect from "@/components/ttc/TTCWhatToExpect";
 import TTCWhatMakesDifferent from "@/components/ttc/TTCWhatMakesDifferent";
 import TTCCommonQuestions from "@/components/ttc/TTCCommonQuestions";
 import TTCAISupport from "@/components/ttc/TTCAISupport";
@@ -19,43 +18,40 @@ const TTC = () => {
     <div className="min-h-screen font-sans">
       <Navbar />
       <main>
-        {/* 1. Hero — tool-first with calculator + questions */}
+        {/* 1. Hero — tool-first with calculator + common questions */}
         <TTCHero />
 
-        {/* 2. What this journey is — editorial intro */}
-        <TTCWhatThisIs />
+        {/* 2. What this hub covers — premium single-card overview */}
+        <TTCWhatThisCovers />
 
-        {/* 3. Stages of trying to conceive */}
+        {/* 3. Three stages — premium stage map with inline child links */}
         <TTCStages />
 
         {/* 4. What to focus on right now */}
         <TTCFocus />
 
-        {/* 5. What to expect — body, timing, emotionally, waiting */}
-        <TTCWhatToExpect />
-
-        {/* 6. What makes this journey different */}
+        {/* 5. A different kind of guide — quiet italic interlude */}
         <TTCWhatMakesDifferent />
+
+        {/* 6. AI support — calm, useful, centred */}
+        <TTCAISupport />
 
         {/* 7. Common questions */}
         <TTCCommonQuestions />
 
-        {/* 8. AI support */}
-        <TTCAISupport />
-
-        {/* 9. Emotional reminder */}
+        {/* 8. Emotional reminder */}
         <TTCEmotionalReminder />
 
-        {/* 10. Reflection prompt */}
+        {/* 9. Reflection prompt */}
         <TTCReflection />
 
-        {/* 11. Capture / journal companion */}
+        {/* 10. Capture / journal companion */}
         <TTCCapture />
 
-        {/* 12. Pathways */}
+        {/* 11. Pathways */}
         <TTCPathways />
 
-        {/* 13. Final CTA */}
+        {/* 12. Final CTA */}
         <TTCFinalCTA />
       </main>
       <Footer />

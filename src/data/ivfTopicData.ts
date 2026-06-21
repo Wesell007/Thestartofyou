@@ -225,12 +225,12 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
     groups: [
       {
         label: "Understanding IVF",
-        description: "Orient yourself before going deeper into your protocol.",
-        intro: "Start here if IVF still feels like a wall of acronyms. These reads give you the shape of the process, why each step exists, and how the emotional load tends to land.",
+        description: "Start here.",
+        intro: "If IVF still feels like a wall of acronyms, these reads give you the shape of the process and what to expect before you go deeper into your protocol.",
         links: [
           { label: "IVF timeline, what to expect", href: LINKS.ivfTimeline },
-          { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
           { label: "What does my IVF protocol actually involve?", href: askIVF("What does my IVF protocol actually involve?") },
+          { label: "What happens at a fertility appointment?", href: LINKS.fertilityAppt },
         ],
       },
       {
@@ -241,8 +241,6 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
           { label: "IVF injections explained, what to expect day by day", href: askIVF("IVF injections explained — what to expect day by day") },
           { label: "What does a baseline scan check before IVF?", href: askIVF("What does a baseline scan check before IVF?") },
           { label: "What does each monitoring scan look for during stimulation?", href: askIVF("What does each monitoring scan look for during stimulation?") },
-          { label: "If you're new to clinic appointments", href: LINKS.fertilityAppt },
-          { label: "Track your IVF timeline", href: LINKS.timeline },
         ],
       },
       {
@@ -258,13 +256,12 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       },
       {
         label: "Preparing emotionally",
-        description: "Looking after yourself through the lead-up.",
-        intro: "The prep weeks are quietly heavy. These reads are about steadiness — not optimism — and what to do when the load tips over.",
+        description: "Steadiness before active treatment begins.",
+        intro: "The weeks before treatment are quietly heavy. These reads are about steadiness — not optimism — and what to do as the emotional load builds before the cycle begins.",
         links: [
-          { label: "Perinatal anxiety, when worry becomes more than worry", href: LINKS.perinatalAnxiety },
+          { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
           { label: "How do I steady myself through the lead-up to transfer?", href: askIVF("How do I steady myself through the lead-up to transfer?") },
           { label: "Protecting your relationship through IVF", href: askIVF("How do I protect my relationship through IVF?") },
-          { label: "Find support for hard moments", href: LINKS.support },
         ],
       },
     ],

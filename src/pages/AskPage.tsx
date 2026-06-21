@@ -550,8 +550,8 @@ const AskPage = () => {
                   <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full bg-sage/[0.06] blur-3xl pointer-events-none" />
 
                   <div className="relative text-center mb-9">
-                    <SprigDivider tone="sage" className="mb-6" />
-                    <p className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-sage mb-4">
+                    <SprigDivider tone={tone.sprigTone} className="mb-6" />
+                    <p className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow} mb-4`}>
                       Your next question
                     </p>
                     <h2 className="font-serif text-[1.75rem] md:text-[2.1rem] text-foreground mb-3 leading-[1.2] tracking-[-0.01em]">

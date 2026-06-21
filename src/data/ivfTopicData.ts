@@ -150,7 +150,9 @@ const LINKS = {
 // Used where no IVF-native article exists yet — these read as IVF-owned
 // guidance routes (the same /ask pattern used by IVFAISupport and
 // IVFCommonQuestions), never as TTC.
-const askIVF = (q: string) => `/ask?q=${encodeURIComponent(q)}`;
+// IVF-origin AI routes carry `journey=ivf` so AskPage can render with the
+// IVF lilac identity and IVF-aware return links instead of the default sage.
+const askIVF = (q: string) => `/ask?q=${encodeURIComponent(q)}&journey=ivf`;
 
 export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
   "before-transfer": {

@@ -243,10 +243,32 @@ const AskPage = () => {
         {/* ── Top frame: question context ── */}
         <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
 
+          {/* IVF orientation strip — only when arriving from an IVF stage */}
+          {isIVF && (
+            <nav
+              aria-label="IVF journey context"
+              className="flex items-center gap-2 font-sans text-[11px] font-light tracking-[0.18em] uppercase text-muted-foreground/70 flex-wrap mb-6"
+            >
+              <span className="text-foreground/55">IVF</span>
+              {ivfStage && (
+                <>
+                  <span className="opacity-40" aria-hidden="true">·</span>
+                  <Link to={ivfStage.href} className="hover:text-foreground transition-colors">
+                    ← {ivfStage.title}
+                  </Link>
+                </>
+              )}
+              <span className="opacity-40" aria-hidden="true">·</span>
+              <Link to="/ivf" className="hover:text-foreground transition-colors">
+                ← IVF hub
+              </Link>
+            </nav>
+          )}
+
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 font-sans text-[11px] font-light tracking-wide text-muted-foreground mb-10 uppercase">
-            <Link to="/explore" className="hover:text-foreground transition-colors">
-              Explore
+            <Link to={isIVF ? "/ivf" : "/explore"} className="hover:text-foreground transition-colors">
+              {isIVF ? "IVF" : "Explore"}
             </Link>
             <ChevronRight size={10} className="text-border" />
             <span className="text-foreground/60">Your question</span>

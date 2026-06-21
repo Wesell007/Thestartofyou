@@ -504,7 +504,7 @@ const AskPage = () => {
                 <span className="h-px flex-1 bg-border/25" />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {relatedLinks.map((l) => (
+                {tailLinks.map((l) => (
                   <Link
                     key={l.href}
                     to={l.href}

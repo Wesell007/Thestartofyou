@@ -33,9 +33,54 @@ const AskPage = () => {
   const { answer, isLoading, error, ask, reset } = useAISearch();
   const lastQueryRef = useRef("");
   const navigate = useNavigate();
+  const isIVF = searchParams.get("journey") === "ivf";
 
   const [newQuery, setNewQuery] = useState("");
   const [inputFocused, setInputFocused] = useState(false);
+  const [ivfStage, setIvfStage] = useState<IVFLastStage | null>(null);
+
+  useEffect(() => {
+    if (!isIVF) return;
+    try {
+      const raw = sessionStorage.getItem("ivf:lastStage");
+      if (raw) {
+        const parsed = JSON.parse(raw) as IVFLastStage;
+        if (parsed && parsed.slug && parsed.title && parsed.href) setIvfStage(parsed);
+      }
+    } catch { /* ignore */ }
+  }, [isIVF]);
+
+  const tone = isIVF
+    ? {
+        glow: "ivf" as const,
+        eyebrow: "text-lavender",
+        eyebrowSoft: "text-lavender/80",
+        chipBg: "bg-lavender-bg/70",
+        chipText: "text-lavender-fg",
+        chipRing: "ring-lavender/20",
+        chipDot: "bg-lavender",
+        sprigTone: "ivf" as const,
+      }
+    : {
+        glow: "sage" as const,
+        eyebrow: "text-sage",
+        eyebrowSoft: "text-sage/80",
+        chipBg: "bg-sage-bg/70",
+        chipText: "text-sage",
+        chipRing: "ring-sage/15",
+        chipDot: "bg-sage",
+        sprigTone: "sage" as const,
+      };
+
+  const tailLinks = isIVF
+    ? [
+        ivfStage
+          ? { label: `Back to ${ivfStage.title}`, href: ivfStage.href, icon: Compass, desc: "Return to your IVF stage" }
+          : null,
+        { label: "The IVF Journey", href: "/ivf", icon: Heart, desc: "Stage-by-stage guidance" },
+        { label: "Support hub", href: "/support", icon: BookOpen, desc: "Emotional & practical help" },
+      ].filter(Boolean) as typeof relatedLinks
+    : relatedLinks;
 
   useEffect(() => {
     if (query && query !== lastQueryRef.current) {

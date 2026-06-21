@@ -350,16 +350,16 @@ const AskPage = () => {
               <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-lavender/[0.06] blur-3xl pointer-events-none" />
 
               {/* Botanical mark in corner */}
-              <Sprig tone="sage" className="absolute top-6 right-6 w-10 h-10 opacity-30" />
+              <Sprig tone={tone.sprigTone} className="absolute top-6 right-6 w-10 h-10 opacity-30" />
 
               <div className="relative border border-sage/20 rounded-[2rem] px-7 py-10 md:px-14 md:py-14">
                 {/* Label */}
                 <div className="flex items-center gap-3 mb-7">
                   <div className="w-9 h-9 rounded-full bg-sage/12 flex items-center justify-center ring-2 ring-sage/10">
-                    <Sparkles size={14} className="text-sage" />
+                    <Sparkles size={14} className={tone.eyebrow} />
                   </div>
                   <div className="flex items-center gap-2.5">
-                    <span className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-sage">
+                    <span className={`font-sans text-[11px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow}`}>
                       The short answer
                     </span>
                     <span className="h-px w-12 bg-sage/30" />

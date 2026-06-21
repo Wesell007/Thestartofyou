@@ -261,8 +261,9 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Looking after yourself through the lead-up.",
         intro: "The prep weeks are quietly heavy. These reads are about steadiness — not optimism — and what to do when the load tips over.",
         links: [
-          { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
-          { label: "Perinatal anxiety", href: LINKS.perinatalAnxiety },
+          { label: "Perinatal anxiety, when worry becomes more than worry", href: LINKS.perinatalAnxiety },
+          { label: "How do I steady myself through the lead-up to transfer?", href: askIVF("How do I steady myself through the lead-up to transfer?") },
+          { label: "Protecting your relationship through IVF", href: askIVF("How do I protect my relationship through IVF?") },
           { label: "Find support for hard moments", href: LINKS.support },
         ],
       },

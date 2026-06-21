@@ -20,6 +20,12 @@ const relatedLinks = [
   { label: "Explore guidance", href: "/explore", icon: Compass, desc: "Find what you need" },
 ];
 
+interface IVFLastStage {
+  slug: string;
+  title: string;
+  href: string;
+}
+
 const AskPage = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
@@ -27,9 +33,54 @@ const AskPage = () => {
   const { answer, isLoading, error, ask, reset } = useAISearch();
   const lastQueryRef = useRef("");
   const navigate = useNavigate();
+  const isIVF = searchParams.get("journey") === "ivf";
 
   const [newQuery, setNewQuery] = useState("");
   const [inputFocused, setInputFocused] = useState(false);
+  const [ivfStage, setIvfStage] = useState<IVFLastStage | null>(null);
+
+  useEffect(() => {
+    if (!isIVF) return;
+    try {
+      const raw = sessionStorage.getItem("ivf:lastStage");
+      if (raw) {
+        const parsed = JSON.parse(raw) as IVFLastStage;
+        if (parsed && parsed.slug && parsed.title && parsed.href) setIvfStage(parsed);
+      }
+    } catch { /* ignore */ }
+  }, [isIVF]);
+
+  const tone = isIVF
+    ? {
+        glow: "ivf" as const,
+        eyebrow: "text-lavender",
+        eyebrowSoft: "text-lavender/80",
+        chipBg: "bg-lavender-bg/70",
+        chipText: "text-lavender-fg",
+        chipRing: "ring-lavender/20",
+        chipDot: "bg-lavender",
+        sprigTone: "ivf" as const,
+      }
+    : {
+        glow: "sage" as const,
+        eyebrow: "text-sage",
+        eyebrowSoft: "text-sage/80",
+        chipBg: "bg-sage-bg/70",
+        chipText: "text-sage",
+        chipRing: "ring-sage/15",
+        chipDot: "bg-sage",
+        sprigTone: "sage" as const,
+      };
+
+  const tailLinks = isIVF
+    ? [
+        ivfStage
+          ? { label: `Back to ${ivfStage.title}`, href: ivfStage.href, icon: Compass, desc: "Return to your IVF stage" }
+          : null,
+        { label: "The IVF Journey", href: "/ivf", icon: Heart, desc: "Stage-by-stage guidance" },
+        { label: "Support hub", href: "/support", icon: BookOpen, desc: "Emotional & practical help" },
+      ].filter(Boolean) as typeof relatedLinks
+    : relatedLinks;
 
   useEffect(() => {
     if (query && query !== lastQueryRef.current) {
@@ -174,8 +225,8 @@ const AskPage = () => {
             the question and quick answer.
             ───────────────────────────────────────────── */}
         <div className="absolute inset-x-0 top-0 h-[680px] md:h-[760px] pointer-events-none overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-sage-bg/35 via-parchment/60 to-parchment" />
-          <StageGlow tone="sage" className="top-[-200px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px]" opacity={1} />
+          <div className={`absolute inset-0 bg-gradient-to-b ${isIVF ? "from-lavender-bg/35" : "from-sage-bg/35"} via-parchment/60 to-parchment`} />
+          <StageGlow tone={tone.glow} className="top-[-200px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px]" opacity={1} />
           <BotanicalAccent
             className="top-24 -left-16 md:top-20 md:-left-6 rotate-[-10deg]"
             opacity="opacity-[0.22]"
@@ -192,10 +243,32 @@ const AskPage = () => {
         {/* ── Top frame: question context ── */}
         <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
 
+          {/* IVF orientation strip — only when arriving from an IVF stage */}
+          {isIVF && (
+            <nav
+              aria-label="IVF journey context"
+              className="flex items-center gap-2 font-sans text-[11px] font-light tracking-[0.18em] uppercase text-muted-foreground/70 flex-wrap mb-6"
+            >
+              <span className="text-foreground/55">IVF</span>
+              {ivfStage && (
+                <>
+                  <span className="opacity-40" aria-hidden="true">·</span>
+                  <Link to={ivfStage.href} className="hover:text-foreground transition-colors">
+                    ← {ivfStage.title}
+                  </Link>
+                </>
+              )}
+              <span className="opacity-40" aria-hidden="true">·</span>
+              <Link to="/ivf" className="hover:text-foreground transition-colors">
+                ← IVF hub
+              </Link>
+            </nav>
+          )}
+
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 font-sans text-[11px] font-light tracking-wide text-muted-foreground mb-10 uppercase">
-            <Link to="/explore" className="hover:text-foreground transition-colors">
-              Explore
+            <Link to={isIVF ? "/ivf" : "/explore"} className="hover:text-foreground transition-colors">
+              {isIVF ? "IVF" : "Explore"}
             </Link>
             <ChevronRight size={10} className="text-border" />
             <span className="text-foreground/60">Your question</span>
@@ -204,8 +277,8 @@ const AskPage = () => {
           {/* Stage context chip */}
           {context && (
             <div className="mb-5">
-              <span className="inline-flex items-center gap-1.5 bg-sage-bg/70 text-sage font-sans text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full ring-1 ring-sage/15">
-                <span className="w-1 h-1 rounded-full bg-sage" />
+              <span className={`inline-flex items-center gap-1.5 ${tone.chipBg} ${tone.chipText} font-sans text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full ring-1 ${tone.chipRing}`}>
+                <span className={`w-1 h-1 rounded-full ${tone.chipDot}`} />
                 {context}
               </span>
             </div>
@@ -213,7 +286,7 @@ const AskPage = () => {
 
           {/* Question title, editorial */}
           <div className="mb-7">
-            <p className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-sage/80 mb-3">
+            <p className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrowSoft} mb-3`}>
               You asked
             </p>
             <h1 className="font-serif text-[1.75rem] sm:text-[2.1rem] md:text-[2.65rem] text-foreground leading-[1.1] tracking-[-0.012em]">
@@ -277,16 +350,16 @@ const AskPage = () => {
               <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-lavender/[0.06] blur-3xl pointer-events-none" />
 
               {/* Botanical mark in corner */}
-              <Sprig tone="sage" className="absolute top-6 right-6 w-10 h-10 opacity-30" />
+              <Sprig tone={tone.sprigTone} className="absolute top-6 right-6 w-10 h-10 opacity-30" />
 
               <div className="relative border border-sage/20 rounded-[2rem] px-7 py-10 md:px-14 md:py-14">
                 {/* Label */}
                 <div className="flex items-center gap-3 mb-7">
                   <div className="w-9 h-9 rounded-full bg-sage/12 flex items-center justify-center ring-2 ring-sage/10">
-                    <Sparkles size={14} className="text-sage" />
+                    <Sparkles size={14} className={tone.eyebrow} />
                   </div>
                   <div className="flex items-center gap-2.5">
-                    <span className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-sage">
+                    <span className={`font-sans text-[11px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow}`}>
                       The short answer
                     </span>
                     <span className="h-px w-12 bg-sage/30" />
@@ -379,7 +452,7 @@ const AskPage = () => {
 
                 <div className="container mx-auto px-6 md:px-10 max-w-3xl py-16 md:py-24 relative z-10">
                   <div className="max-w-lg mx-auto text-center">
-                    <SprigDivider tone="sage" className="mb-6" />
+                    <SprigDivider tone={tone.sprigTone} className="mb-6" />
                     <p className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-terracotta/80 mb-5">
                       A small reminder
                     </p>
@@ -431,7 +504,7 @@ const AskPage = () => {
                 <span className="h-px flex-1 bg-border/25" />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {relatedLinks.map((l) => (
+                {tailLinks.map((l) => (
                   <Link
                     key={l.href}
                     to={l.href}
@@ -458,7 +531,7 @@ const AskPage = () => {
             <div className="relative mt-8">
               {/* Full-width premium wash */}
               <div className="absolute inset-0 bg-gradient-to-b from-parchment via-sage-bg/15 to-parchment pointer-events-none" />
-              <StageGlow tone="sage" className="top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px]" opacity={0.7} />
+              <StageGlow tone={tone.glow} className="top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px]" opacity={0.7} />
 
               <div className="relative container mx-auto px-6 md:px-10 max-w-3xl py-20 md:py-28">
                 <div className="relative bg-card border border-sage/15 rounded-[2rem] px-7 py-12 md:px-14 md:py-16 shadow-elevated overflow-hidden">
@@ -477,8 +550,8 @@ const AskPage = () => {
                   <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full bg-sage/[0.06] blur-3xl pointer-events-none" />
 
                   <div className="relative text-center mb-9">
-                    <SprigDivider tone="sage" className="mb-6" />
-                    <p className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-sage mb-4">
+                    <SprigDivider tone={tone.sprigTone} className="mb-6" />
+                    <p className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow} mb-4`}>
                       Your next question
                     </p>
                     <h2 className="font-serif text-[1.75rem] md:text-[2.1rem] text-foreground mb-3 leading-[1.2] tracking-[-0.01em]">

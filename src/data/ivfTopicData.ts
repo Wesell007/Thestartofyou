@@ -241,6 +241,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
           { label: "IVF injections explained, what to expect day by day", href: askIVF("IVF injections explained — what to expect day by day") },
           { label: "What does a baseline scan check before IVF?", href: askIVF("What does a baseline scan check before IVF?") },
           { label: "What does each monitoring scan look for during stimulation?", href: askIVF("What does each monitoring scan look for during stimulation?") },
+          { label: "What are the blood tests during IVF actually checking?", href: askIVF("What are the blood tests during IVF actually checking?") },
         ],
       },
       {
@@ -262,6 +263,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
           { label: "The emotional impact of IVF", href: LINKS.emotionalIVF },
           { label: "How do I steady myself through the lead-up to transfer?", href: askIVF("How do I steady myself through the lead-up to transfer?") },
           { label: "Protecting your relationship through IVF", href: askIVF("How do I protect my relationship through IVF?") },
+          { label: "What helps when a hard IVF moment hits?", href: askIVF("What helps when a hard IVF moment hits?") },
         ],
       },
     ],

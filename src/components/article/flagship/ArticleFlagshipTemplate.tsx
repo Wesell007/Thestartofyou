@@ -25,6 +25,9 @@ const ArticleFlagshipTemplate = ({ data }: Props) => {
     <div className="min-h-screen bg-parchment">
       <Navbar />
 
+      {/* Light IVF orientation strip — only renders for IVF-journey articles */}
+      <ArticleIVFContext data={data} />
+
       {/* Opening — text left, image right */}
       <FlagshipHero data={data} />
 

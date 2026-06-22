@@ -417,7 +417,62 @@ const WhatThisCovers = () => (
 );
 
 /* ----------------------------------------------------------- */
-/* 3. JOURNEY TIMELINE                                         */
+/* 3. AI SUPPORT                                               */
+/* ----------------------------------------------------------- */
+
+const AISupport = () => (
+  <section className="py-14 md:py-20 bg-parchment">
+    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
+      <div
+        className="relative rounded-[2rem] overflow-hidden border"
+        style={{
+          background: `radial-gradient(120% 90% at 100% 0%, hsl(var(${STAGE_BG}) / 0.55) 0%, hsl(var(${STAGE_BG}) / 0.25) 55%, hsl(var(--parchment) / 0.95) 100%)`,
+          borderColor: `hsl(var(${STAGE_ACCENT}) / 0.18)`,
+          boxShadow: `0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 24px 60px -32px hsl(var(${STAGE_ACCENT}) / 0.28)`,
+        }}
+      >
+        <div className="relative z-10 px-5 sm:px-10 md:px-14 py-12 md:py-16 text-center">
+          <Eyebrow>AI Support</Eyebrow>
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.125rem] text-foreground leading-[1.15] mb-3.5">
+            What's on your mind <span className="italic font-normal">right now?</span>
+          </h2>
+          <p className="font-sans text-[14.5px] sm:text-[15px] font-light text-muted-foreground max-w-xl mx-auto leading-relaxed mb-8">
+            Ask a question about ovulation, cycle tracking, testing, fertility,
+            or what to do next.
+          </p>
+
+          <div
+            className="max-w-2xl mx-auto rounded-2xl p-1 sm:p-1.5"
+            style={{
+              background: `linear-gradient(180deg, hsl(var(--parchment) / 0.6), hsl(var(--parchment) / 0.2))`,
+              border: `1px solid hsl(var(${STAGE_ACCENT}) / 0.12)`,
+            }}
+          >
+            <AISearchBar
+              placeholder="Ask anything about trying to conceive…"
+              suggestions={[
+                "When am I most fertile?",
+                "Is late ovulation normal?",
+                "When should I take a pregnancy test?",
+                "What should I do before trying?",
+                "When should I ask for help?",
+              ]}
+              context="Trying to conceive"
+            />
+          </div>
+
+          <p className="mt-5 font-sans text-[11.5px] font-light text-muted-foreground/70 max-w-md mx-auto">
+            For health concerns or urgent symptoms, speak to a qualified
+            healthcare professional.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+/* ----------------------------------------------------------- */
+/* 4. JOURNEY TIMELINE                                         */
 /* ----------------------------------------------------------- */
 
 const stages = [

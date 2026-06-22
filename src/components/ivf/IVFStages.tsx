@@ -107,35 +107,41 @@ const IVFStages = () => {
                       <Icon size={16} strokeWidth={1.6} />
                     </div>
                     <span
-                      className="font-serif text-sm px-2.5 py-1 rounded-full backdrop-blur-sm"
+                      className="font-serif text-[13px] px-2.5 py-1 rounded-full backdrop-blur-sm tracking-wide"
                       style={{
-                        backgroundColor: `hsl(${stage.theme.tint} / 0.85)`,
+                        backgroundColor: `hsl(${stage.theme.tint} / 0.9)`,
                         color: `hsl(${stage.theme.accent})`,
                       }}
                     >
-                      Stage {stage.num}
+                      {stage.theme.icon === Hourglass ? "The wait" : stage.theme.icon === Heart ? "Early growth" : "Preparation"}
                     </span>
                   </div>
                 </div>
 
-                <div className="p-6 sm:p-8 flex flex-col justify-center gap-3 min-h-[200px]">
-                  <div className="flex items-center gap-3">
-                    <h3 className="font-serif text-2xl md:text-[1.65rem] text-foreground leading-snug group-hover:text-foreground/85 transition-colors">
+                <div className="p-7 sm:p-9 flex flex-col justify-center gap-4 min-h-[220px]">
+                  <span
+                    className="font-sans text-[10px] font-light tracking-[0.22em] uppercase"
+                    style={{ color: `hsl(${stage.theme.accent})` }}
+                  >
+                    Stage {stage.num}
+                  </span>
+                  <div className="flex items-start justify-between gap-3 -mt-1">
+                    <h3 className="font-serif text-[1.6rem] md:text-[1.8rem] text-foreground leading-[1.15] group-hover:text-foreground/85 transition-colors">
                       {stage.title}
                     </h3>
                     <ArrowUpRight
-                      size={16}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+                      size={18}
+                      className="opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1.5"
                       style={{ color: `hsl(${stage.theme.accent})` }}
                     />
                   </div>
-                  <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-lg">
+                  <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed max-w-lg">
                     {stage.sub}
                   </p>
                   <span
-                    className="inline-flex items-center gap-2 font-sans text-[11px] font-light tracking-[0.12em] uppercase rounded-full px-3 py-1 self-start mt-1"
+                    className="inline-flex items-center gap-2 font-sans text-[11px] font-light tracking-[0.14em] uppercase rounded-full px-3 py-1 self-start mt-1"
                     style={{
-                      backgroundColor: `hsl(${stage.theme.accent} / 0.10)`,
+                      backgroundColor: `hsl(${stage.theme.accent} / 0.12)`,
                       color: `hsl(${stage.theme.accent})`,
                     }}
                   >

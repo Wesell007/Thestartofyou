@@ -800,9 +800,9 @@ const TTCHub = () => {
       <main>
         <Hero />
         <WhatThisCovers />
+        <AISupport />
         <JourneyTimeline />
         <TopicLibrary />
-        <AISupport />
         <Reassurance />
       </main>
       <Footer />

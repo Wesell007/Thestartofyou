@@ -1,73 +1,71 @@
-# IVF Pass 1 — Stage pages premium uplift
 
-Scope: `src/components/ivf/IVFTopicPage.tsx` only. No data file changes, no hub changes, no new image assets.
+# IVF Pass 2 — Hub Premium Rebuild
 
-Guardrails respected: keep IVF contained, photographic (not illustrative), one main decorative gesture per section, lilac-family identity preserved, thumbnails restrained, AI bridge stays secondary, tablet/iPad checked.
+Hub-only. No stage page, TTC, Pregnancy, nav, routing, or article changes.
 
-## A. Per-stage theme variation (lilac family)
+## Files
 
-Add `IVF_THEME[slug]` map inside the component file. Three shifts of the same lilac family with one Lucide icon each:
+- `src/pages/IVF.tsx` — new section order + reuse existing components
+- `src/components/ivf/IVFHero.tsx` — right column rebuilt: single photo + truth band; calculator stays the anchor
+- `src/components/ivf/IVFStages.tsx` — premium per-stage themed cards, larger imagery
+- `src/components/ivf/IVFWhatMakesDifferent.tsx` — recomposed to 3 compact points on parchment, lilac hairlines
+- `src/components/ivf/IVFCommonQuestions.tsx` — slimmed to a compact 4-question pill grid (hub-wide)
+- `src/components/ivf/IVFReflection.tsx` — retuned to a quiet text-only endcap (no textarea, no CTA)
+- `src/assets/ivf-hero-moment.jpg` — already generated (lavender + tea, calm window light)
 
-| Stage | accent HSL | tint HSL | icon |
-|---|---|---|---|
-| `before-transfer` | `265 32% 56%` (cool lilac, prep/focus) | `265 24% 94%` | `ShieldCheck` |
-| `after-transfer` | `280 32% 56%` (mid lilac, waiting) | `280 22% 94%` | `Hourglass` |
-| `early-pregnancy` | `300 30% 58%` (warm lilac, handover warmth) | `300 22% 94%` | `Heart` |
+## Section order in `IVF.tsx`
 
-Inside `IVFTopicPage` derive `IVF_ACCENT_HSL` / `IVF_TINT_HSL` from `IVF_THEME[config.slug]`. The data file's exported constants stay as-is for any other consumer; they are simply no longer this component's source of truth.
+```text
+IVFHero
+IVFPathwayPosition
+IVFWhatThisCovers
+IVFWhatMakesDifferent   ← new on hub
+IVFAISupport
+IVFStages               ← rebuilt cards
+IVFCommonQuestions      ← new on hub (slimmed)
+IVFReflection           ← new on hub (retuned)
+IVFFinalCTA
+```
 
-## B. Cluster row thumbnails (restrained, consistent)
+## Hero
+- Left: keep eyebrow, headline, paragraph, calculator (remove the tiny inline "3 stages / 14 day wait" stat row to declutter)
+- Right: replace prompt-button stack and small emotional card with one photographic moment (ivf-hero-moment.jpg) + a quieter truth band (italic line + thin lavender hairline + two restrained stats moved from calculator)
+- Soften ambient glow opacity by ~10%
 
-- Add `IVF_THUMBS: Record<string, string>` map at the top of the file using only existing assets. Covers live `/articles/*`, `/ivf/*`, `/support`, `/pregnancy`. `askIVF(...)` deep-links and anything unmatched fall back to the page's `heroImage` — so every row has a thumb and the look stays consistent.
-- `thumbFor(href, fallback)` strips query strings before lookup.
-- Cluster row becomes: 44px square thumb (`object-cover`, `rounded-lg`, ring-1 with `accentBorder`) · label · chevron. Row padding `py-3`, gap `gap-3`. Hover: row bg `accentSoft`, thumb `scale-[1.04]` 600ms. Existing border-top hairline retained.
-- Cap stays at 5 links per cluster (already in place).
-- No "View all" added in this pass.
+## Editorial beat (`IVFWhatMakesDifferent`)
+- 3 statements: procedure-based timing, frequent monitoring, waiting periods feel different
+- Parchment background, lilac hairlines top/bottom, pull-quote kept, stat row dropped
 
-## C. Start here cards uplift
+## Stage cards
+- Per-stage theme via inline HSL (matches Pass 1 IVF_THEME)
+- Image column grows to 280px on md; mobile image full-bleed h-56
+- 44px icon disc + "Stage 0X" chip overlaid on image bottom-left
+- Card surface gets a faint stage-tinted background; emotional chip themed per stage with lilac dot
+- Hover: -translate-y-0.5, image scale-[1.04] 600ms, border intensifies
+- Removed the single "featured" override; all 3 cards equally premium
+- Section sits on `bg-parchment-dark` to create tonal layering
 
-- Add a small thumbnail strip at the top of each Start here card: full-bleed `h-28 sm:h-32` image, `rounded-xl`, ring-1 `accentBorder`, `group-hover:scale-[1.03]` 600ms.
-- Card content padding nudged to `p-6 sm:p-7`.
-- Keep the existing 01/02/03 serif marker, corner halo, "Open →" footer. No additional decoration.
+## Common questions
+- 4 IVF-wide questions in a 2×2 pill grid, deep-linking to `/ask?q=`
+- Centered eyebrow + serif H2; no decoration beyond lilac hairline above
 
-## D. AI bridge uplift (stays secondary)
+## Reflection
+- Centered, text-only: italic serif line + supporting sans line
+- Lilac hairlines above and below; no textarea, no journal CTA
 
-- Replace the full-width tinted band with a lifted card inside the section:
-  - Outer section keeps soft background `hsl(tintHsl / 0.4)`.
-  - Inner: `max-w-3xl mx-auto bg-card/75 backdrop-blur-sm rounded-[2rem] border` with `accentBorder`, `p-8 sm:p-12`.
-  - One centred sprig (existing `topic-mini-sprig.png`) above the eyebrow, ~28px, low opacity.
-  - Italic serif lead under the heading.
-- Shadow capped at `0_30px_80px_-40px_rgba(0,0,0,0.12)` — stays clearly below hero, What this covers, Start here, and grouped clusters.
+## Lilac strengthening (no token changes)
+- Tonal layering: hub alternates parchment / parchment-dark
+- Recurring `h-px max-w-32` lilac dividers between major beats
+- Eyebrow rails standardised across sections
+- Stage tints sourced from Pass 1 themes for hub ↔ stage continuity
 
-## E. Sibling chip refinement
+## Responsive
+- Desktop: 2-col hero balanced; right never louder than calculator
+- iPad: hero stays 2-col at md; stage cards keep image-left layout; common questions 2-col
+- Mobile: single-column; hero image max-h 360px; stage cards image-top; quiet reflection centred
 
-- Two-line label: small uppercase "IVF stage" (10px, `tracking-[0.22em]`) + serif name (14px) for that sibling.
-- Icon disc uses the **sibling's own** per-stage icon and accent via `IVF_THEME[sibling.slug]`, at `w-8 h-8`, icon size 14 — each chip carries the colour cue of the stage it links to.
-- Chip padding `px-5 py-3`, row gap `gap-4 md:gap-5`. Default shadow `0 2px 10px -6px rgba(0,0,0,0.12)`; hover `0 10px 28px -18px rgba(0,0,0,0.25)` + `-translate-y-0.5`.
+## Out of scope
+IVF stage page template, TTC, Pregnancy, articles, navbar, routing, design tokens, IVFAISupport internals, IVFFinalCTA internals.
 
-## F. Hairline finish above Back link
-
-- Faint hairline `h-px max-w-32 mx-auto` using `accentSoft`, ~10px above the "← Back to the IVF hub" link.
-
-## G. Out of scope
-
-- IVF hub (`/ivf`), `IVFHero`, `IVFStages`, `IVFAISupport`, `IVFFinalCTA`, `IVFWhatThisCovers`, `IVFPathwayPosition`.
-- TTC, Pregnancy, articles, navbar, weeks.
-- `src/data/ivfTopicData.ts` — no edits.
-- No new image assets, no new sprigs in this pass.
-- No new sections, no changes to protocol-week / handover / common-questions / featured / normal-vs-seek blocks.
-
-## H. Files
-
-- `src/components/ivf/IVFTopicPage.tsx` (only).
-
-## I. Verification
-
-Playwright screenshots on `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy` at desktop (1280), iPad (834), and mobile (390). Confirm:
-- Each stage shows a visibly distinct lilac accent.
-- Cluster rows show thumbnails + hover tint without breaking vertical rhythm at iPad width.
-- AI bridge reads as a lifted card, not a band.
-- Sibling chips show per-stage icon and colour cue and wrap cleanly on tablet.
-- Back link sits under a hairline.
-
-Pause for review before IVF Pass 2 (hub uplift).
+## Pause
+Pause after build for review before any Pass 3.

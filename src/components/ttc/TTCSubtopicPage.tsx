@@ -371,17 +371,39 @@ const TTCSubtopicPage = ({ config, heroImage }: Props) => {
         {/* 4. GROUPED LINKS (with thumbs) */}
         <section className="pb-14 md:pb-20">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
+            <div className="text-center mb-8 md:mb-10">
+              <SectionLabel>Explore further</SectionLabel>
+              <p className="mt-5 font-serif italic text-[14.5px] md:text-[15px] text-muted-foreground/85 max-w-lg mx-auto leading-relaxed">
+                Related guides, grouped by what tends to come up next.
+              </p>
+            </div>
             <div
-              className="bg-card rounded-[1.75rem] border p-5 sm:p-7 md:p-10 shadow-[0_18px_50px_-40px_rgba(0,0,0,0.14)]"
+              className="relative bg-card rounded-[2rem] border p-6 sm:p-9 md:p-12 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.18)] overflow-hidden"
               style={{ borderColor: accentBorder }}
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
+              <div
+                className="pointer-events-none absolute inset-x-0 top-0 h-24"
+                style={{ background: `linear-gradient(180deg, hsl(${theme.tintHsl} / 0.22) 0%, transparent 100%)` }}
+                aria-hidden
+              />
+              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10">
                 {config.groups.map((group, gi) => {
                   const sprig = gi % 2 === 0 ? theme.sprigA : theme.sprigB;
                   const links = group.links
                     .filter((l) => !startHereHrefs.has(l.href))
-                    .slice(0, 4);
+                    .slice(0, 5);
                   if (links.length === 0) return null;
+
+                  const askMatch = links.some((l) => l.href === "/ask");
+                  const topicMatch = links
+                    .map((l) => l.href.match(/^\/trying-to-conceive\/([^/]+)$/))
+                    .find((m) => m && (!parent || m[1] !== parent.slug));
+                  const viewAllHref = askMatch
+                    ? "/ask"
+                    : topicMatch
+                    ? `/trying-to-conceive/${topicMatch[1]}`
+                    : null;
+
                   return (
                     <div key={group.label} className="flex flex-col">
                       <div className="flex items-start gap-3 mb-2">
@@ -392,12 +414,12 @@ const TTCSubtopicPage = ({ config, heroImage }: Props) => {
                           loading="lazy"
                           className="w-6 h-6 object-contain shrink-0 -mt-0.5 opacity-75"
                         />
-                        <h3 className="font-serif text-[1.05rem] text-foreground leading-snug">
+                        <h3 className="font-serif text-[1.1rem] md:text-[1.2rem] text-foreground leading-snug">
                           {group.label}
                         </h3>
                       </div>
                       {group.description && (
-                        <p className="font-sans text-[12.5px] font-light text-muted-foreground/80 mb-3 leading-relaxed pl-9">
+                        <p className="font-sans text-[12.5px] font-light text-muted-foreground/80 mb-4 leading-relaxed pl-9">
                           {group.description}
                         </p>
                       )}
@@ -410,17 +432,22 @@ const TTCSubtopicPage = ({ config, heroImage }: Props) => {
                               className="border-t first:border-t-0"
                               style={{ borderColor: accentSoft }}
                             >
-                              <Link to={link.href} className="group flex items-center gap-3 py-2.5">
+                              <Link
+                                to={link.href}
+                                className="group flex items-center gap-3 py-3 px-2 -mx-2 rounded-lg transition-colors"
+                                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = accentSoft)}
+                                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+                              >
                                 <div
-                                  className="shrink-0 w-10 h-10 rounded-lg overflow-hidden border"
-                                  style={{ borderColor: accentSoft }}
+                                  className="shrink-0 w-11 h-11 rounded-lg overflow-hidden"
+                                  style={{ boxShadow: `inset 0 0 0 1px ${accentBorder}` }}
                                 >
                                   <img
                                     src={thumb}
                                     alt=""
                                     aria-hidden="true"
                                     loading="lazy"
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                                   />
                                 </div>
                                 <span className="flex-1 font-sans text-[13px] font-light text-foreground/85 leading-snug group-hover:text-foreground transition-colors">
@@ -436,14 +463,28 @@ const TTCSubtopicPage = ({ config, heroImage }: Props) => {
                           );
                         })}
                       </ul>
+
+                      {viewAllHref && (
+                        <Link
+                          to={viewAllHref}
+                          className="group mt-4 inline-flex items-center gap-1.5 font-sans text-[12px] font-medium tracking-wide self-start"
+                          style={{ color: accent }}
+                        >
+                          View all
+                          <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                        </Link>
+                      )}
                     </div>
                   );
                 })}
               </div>
               {config.curationNote && (
-                <p className="mt-8 font-serif italic text-[13.5px] text-muted-foreground/80 leading-relaxed text-center max-w-xl mx-auto">
-                  {config.curationNote}
-                </p>
+                <div className="relative mt-12 max-w-xl mx-auto text-center">
+                  <LeafDivider />
+                  <p className="font-serif italic text-[13.5px] text-muted-foreground/85 leading-relaxed">
+                    {config.curationNote}
+                  </p>
+                </div>
               )}
             </div>
           </div>
@@ -452,20 +493,35 @@ const TTCSubtopicPage = ({ config, heroImage }: Props) => {
         {/* 5. AI BRIDGE */}
         {config.aiPrompts && config.aiPrompts.length > 0 && (
           <section
-            className="py-14 md:py-20"
+            className="py-16 md:py-24"
             style={{ background: `hsl(${theme.tintHsl} / 0.45)` }}
           >
-            <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl text-center">
-              <Eyebrow>AI Support</Eyebrow>
-              <h2 className="mt-3 font-serif text-2xl md:text-[1.85rem] text-foreground leading-tight mb-4">
-                Ask anything specific
-              </h2>
-              <div className="mt-6">
-                <AISearchBar
-                  placeholder={`Ask anything about ${config.eyebrow.toLowerCase()}…`}
-                  suggestions={config.aiPrompts}
-                  context={`TTC · ${config.eyebrow}`}
+            <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
+              <div
+                className="relative bg-card/75 backdrop-blur-sm rounded-[2rem] border p-8 sm:p-10 md:p-12 text-center shadow-[0_24px_60px_-40px_rgba(0,0,0,0.16)]"
+                style={{ borderColor: accentBorder }}
+              >
+                <img
+                  src={theme.sprigA}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  className="mx-auto w-10 md:w-12 opacity-60 mb-4"
                 />
+                <Eyebrow>AI Support</Eyebrow>
+                <h2 className="mt-3 font-serif text-2xl md:text-[1.85rem] text-foreground leading-tight">
+                  Ask anything specific
+                </h2>
+                <p className="mt-3 font-serif italic text-[14px] text-muted-foreground/85 max-w-md mx-auto leading-relaxed">
+                  Personal answers, grounded in this guide.
+                </p>
+                <div className="mt-7">
+                  <AISearchBar
+                    placeholder={`Ask anything about ${config.eyebrow.toLowerCase()}…`}
+                    suggestions={config.aiPrompts}
+                    context={`TTC · ${config.eyebrow}`}
+                  />
+                </div>
               </div>
             </div>
           </section>
@@ -475,8 +531,18 @@ const TTCSubtopicPage = ({ config, heroImage }: Props) => {
         <section className="py-14 md:py-20">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
             {parent && (
-              <div className="mb-12 text-center">
-                <p className="font-serif italic text-lg md:text-xl text-foreground/85 mb-4">
+              <div
+                className="mx-auto max-w-2xl bg-card rounded-[1.75rem] border p-8 md:p-10 text-center shadow-[0_18px_50px_-40px_rgba(0,0,0,0.14)]"
+                style={{ borderColor: accentBorder }}
+              >
+                <img
+                  src={theme.sprigB}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  className="mx-auto w-8 opacity-60 mb-3"
+                />
+                <p className="font-serif italic text-lg md:text-xl text-foreground/85 mb-5">
                   Continue in the wider {parent.eyebrow.toLowerCase()} topic.
                 </p>
                 <Link
@@ -490,33 +556,51 @@ const TTCSubtopicPage = ({ config, heroImage }: Props) => {
               </div>
             )}
 
-            <div className="text-center mb-6">
+            <div className={`text-center ${parent ? "mt-16" : ""} mb-8`}>
               <SectionLabel>Other supporting guides</SectionLabel>
             </div>
-            <ul className="flex flex-wrap justify-center gap-3 sm:gap-4">
+            <ul className="flex flex-wrap justify-center gap-4 md:gap-5">
               {otherSubtopics.map((s) => {
                 const sTheme = TTC_THEME[s.slug];
                 const sAccent = `hsl(${sTheme.accentHsl})`;
                 const sSoft = `hsl(${sTheme.accentHsl} / 0.12)`;
+                const sBorder = `hsl(${sTheme.accentHsl} / 0.18)`;
                 const Icon = sTheme.icon;
                 return (
                   <li key={s.slug}>
                     <Link to={`/trying-to-conceive/${s.slug}`}>
                       <span
-                        className="group flex items-center gap-2.5 rounded-full bg-card border px-4 py-2.5 transition-all hover:-translate-y-0.5 hover:shadow-card-brand"
-                        style={{ borderColor: sSoft }}
+                        className="group flex items-center gap-3 rounded-full bg-card border px-5 py-3 transition-all hover:-translate-y-0.5"
+                        style={{
+                          borderColor: sBorder,
+                          boxShadow: "0 2px 10px -6px rgba(0,0,0,0.12)",
+                        }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.boxShadow = "0 10px 28px -18px rgba(0,0,0,0.25)")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.boxShadow = "0 2px 10px -6px rgba(0,0,0,0.12)")
+                        }
                       >
                         <span
-                          className="w-6 h-6 rounded-full flex items-center justify-center"
+                          className="w-8 h-8 rounded-full flex items-center justify-center"
                           style={{ backgroundColor: sSoft }}
                         >
-                          <Icon size={12} style={{ color: sAccent }} />
+                          <Icon size={14} style={{ color: sAccent }} />
                         </span>
-                        <span className="font-serif italic text-[13.5px] text-foreground/85">
-                          {s.eyebrow}
+                        <span className="flex flex-col items-start leading-tight">
+                          <span
+                            className="font-sans not-italic text-[10px] tracking-[0.18em] uppercase opacity-60"
+                            style={{ color: sAccent }}
+                          >
+                            Subtopic
+                          </span>
+                          <span className="font-serif italic text-[14px] text-foreground/85">
+                            {s.eyebrow}
+                          </span>
                         </span>
                         <ChevronRight
-                          size={13}
+                          size={14}
                           className="opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all"
                           style={{ color: sAccent }}
                         />
@@ -531,6 +615,7 @@ const TTCSubtopicPage = ({ config, heroImage }: Props) => {
 
         {/* 7. BACK LINK */}
         <section className="pb-16 md:pb-20 text-center">
+          <div className="h-px max-w-32 mx-auto mb-8" style={{ background: accentSoft }} />
           <Link
             to="/trying-to-conceive"
             className="font-sans text-[13.5px] font-light text-muted-foreground hover:text-foreground transition-colors"

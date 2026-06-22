@@ -1,57 +1,93 @@
-# TTC Hub — Final Refinement (pre-Pass 3)
 
-Scope: `src/pages/TTCHub.tsx` only. No other files. No image treatment. No changes to topic/subtopic pages, IVF, Pregnancy, articles, navbar, weeks, or shared components.
+# TTC Pass 3 — Topic + Subtopic Page Premium Uplift (approved)
+
+Scope strictly limited to:
+- `src/components/ttc/TTCTopicPage.tsx`
+- `src/components/ttc/TTCSubtopicPage.tsx`
+
+No edits to TTC hub, IVF, Pregnancy, articles, navbar, weeks, shared components, or `ttcTopicData.ts` (schema + copy untouched). No new image assets — existing `src/assets/ttc-*.jpg`, `week*.jpg`, and the two sprig PNGs only.
+
+Benchmark: Pregnancy topic-page system. Identity: cooler, greener, lighter, earlier-stage, more exploratory.
 
 ---
 
-## 1. TTC AI card — premium uplift (`AISupport`, ~lines 423–472)
+## 1. Shared TTC theme + image system (local to each template)
 
-- Outer band: parchment `py-16 md:py-24` with a soft radial sage wash at top so the card feels seated.
-- Inner editorial card (`max-w-3xl`, centred): layered gradient surface (card → stage-ttc/0.22), sage hairline border, multi-layer shadow (inset top highlight + soft outer sage drop). TTC sprig top-right at ~45% opacity, hidden on mobile.
-- Inner hierarchy:
-  - Eyebrow stays **"AI support"**.
-  - Serif h2 unchanged. Sub-copy tightened: *"Calm, practical guidance on ovulation, cycle tracking, testing, fertility — and what to do next."*
-  - Thin centred hairline divider beneath sub-copy.
-  - Small uppercase tracked label **"Ask the guide"** above the input — frames the action zone.
-- Search input: shared `AISearchBar` reused as-is. Wrapped in a soft framed parchment well. Pass `suggestions={[]}` and render TTC chips below ourselves.
-- Premium TTC chip row — **all 5 prompts kept** (per guardrail): two-tone gradient pills (card → sage tint), hairline sage border, inset highlight + soft shadow, 6px sage dot, min-height 36px, hover deepens gradient/border + 1px lift. Each chip navigates to `/ask?q=…&ctx=Trying%20to%20conceive`.
-- Footer disclaimer kept quiet, unchanged copy.
+Inside both templates:
+- `TTC_THEME` map keyed by all 10 TTC slugs. Each entry: cool `accentHsl` (greens / sages / slate-sages — overrides any warm terracotta/rose values currently in `ttcTopicData.ts`), softer `tintHsl`, two sprigs (`topic-mini-sprig.png`, `topic-wildflower-sprig.png`), and a lucide sibling icon (Sun, Leaf, Heart, ShieldCheck, Users, Clock, Calendar, TestTube, Hourglass, Activity).
+- `HREF_IMAGE_MAP`: hrefs → existing TTC photography (cycle, timing, waiting, pregnancy-tests, faint-positive, chemical, trying-again, preconception, fertility-hero, ivf-treatment, male, age, conditions, lifestyle, journey, tests-women, tests-men, fertility-appointment, week2-ovulation, week1-cycle, week3-fertilisation).
+- `TOPIC_FALLBACK` per slug.
+- `resolveImage(href, explicit?)` helper.
 
-## 2. Supporting guides — premium text-led refinement (~lines 839–930)
+## 2. Topic-page hero
+- Eyebrow `The TTC Guide · {eyebrow}`, serif headline `text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.4rem]`.
+- Square hero image `aspect-1/1 rounded-[2rem]`, cooler radial halo at `tintHsl/0.65`, top wash `tintHsl/0.40`.
+- Two restrained per-theme sprigs (sprigA bottom-left visible from sm+, sprigB top-right md+ only).
+- Vertical rhythm `pt-8 sm:pt-12 md:pt-16 pb-20 md:pb-32`.
 
-Still secondary to pillars but warm and curated, never flat. No images.
+## 3. Subtopic-page hero (clearly nested, lighter)
+- Eyebrow `TTC · {parent.eyebrow}`, serif `text-[1.85rem] sm:text-[2.25rem] md:text-[2.6rem]`.
+- Right column narrower (`md:col-span-5`), `rounded-[1.75rem]` with hairline border, single small sprigB only.
+- Lower halo opacity and top wash (`tintHsl/0.35`).
 
-- Section header: stacks on tablet to avoid cramped header. Eyebrow + serif h3 + lead description.
-- **Two clusters** with small italic serif sub-labels:
-  - **Timing & testing** → `cycle-tracking`, `two-week-wait`, `pregnancy-tests`
-  - **Fertility & health** → `age-and-fertility`, `male-fertility`, `ivf-and-treatment`, `conditions`
-- Card chrome (demoted but warm):
-  - Replace medallion + generic "GUIDE" eyebrow with a small uppercase **topical tag** per cluster (TIMING / TESTING / HEALTH / SUPPORT) in sage accent, plus a tiny 12–14px inline icon next to the title.
-  - Remove corner radial tint (currently echoes pillar cards).
-  - Surface: `bg-card/70`, hairline sage border, soft single-layer shadow. Hover: border deepens, 1px lift, subtle title underline reveal.
-  - Replace bottom-divider "Read guide →" row with an inline hover arrow next to the title.
-- Typography uplift: title serif `text-[1.05rem]` leading-snug; description bumped to `text-[13px]` `leading-[1.7]`, no `line-clamp`.
-- Spacing: section `mt-24 md:mt-28`, card padding `p-6 sm:p-7`, grid gap `gap-5 md:gap-6`.
-- **Understated bridge line** between Core topics and Supporting guides: small centred italic serif: *"and a wider library to go deeper"*.
-- **Understated closing line** below the grid: italic serif *"More routes will be added as the guide grows."*.
+## 4. "What this topic covers" card
+- Topic: overlapping pull-up `-mt-12 md:-mt-20`, `rounded-[2rem]`, padded `p-6 sm:p-10 md:p-14`, single sprig top-left, `LeafDivider`, optional italic lead, 2-col check bullets.
+- Subtopic: same composition at `rounded-[1.75rem]`, `p-6 sm:p-8 md:p-10`, single subtle top-right sprig.
 
-## 3. Small TTC hub refinements (audit)
+## 5. Start here cards — editorial w/ photo
+- `Link` card: `rounded-2xl overflow-hidden border`, photo top at `aspect-[4/3]`, accent mix-blend tint `opacity-[0.05]` (cooler than Pregnancy's 0.06), hover image `scale-105` + 1px lift on card.
+- Title serif, sub-copy, "Read the guide →" in accent.
+- Grid: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`.
 
-- Standardise non-hero sections to `py-16 md:py-24` (currently mixed).
-- Tiny spacing/seam adjustment between Hero and WhatThisCovers — done from TTCHub side only.
-- Reassurance: light typographic polish only (leading, italic weight) — no layout change.
-- Mobile JourneyTimeline: small sage gradient stripe on the left of stacked nodes so the "you are here" pulse doesn't feel orphaned without the desktop dotted line.
+## 6. Grouped clusters — curated, not busy
+- Outer cluster surface card. Each cluster header: small sprig icon (24–28px, alternating per-theme) + serif label; optional italic description indented under the icon.
+- Each row: 40–44px rounded thumb (border in `accentSoft`) + label + chevron in accent.
+- **Caps & dedupe**: max 4 links per cluster; any link present in Start here is filtered out of clusters on that page; if a cluster empties after filtering, it's omitted.
+- Topic clusters in 3-col on `lg`, 2-col on `sm`; subtopic in 2-col on `md`, 1-col below.
+- Curation note (italic serif) preserved when present.
 
-## 4. Desktop / iPad / mobile
+## 7. Sibling / supporting navigation
+- Topic: chip row of pillar siblings — per-sibling icon disc + italic serif label + chevron, hover lift + brand shadow.
+- Subtopic: keeps the existing "Continue in the wider {parent}" CTA on top, followed by a chip row of other subtopics using the same chip system (icon disc + label + chevron). Smaller chip sizing than topic page.
 
-- Desktop ≥1024px: Supporting guides 3-col with cluster sub-labels above each row. AI card centred `max-w-3xl` with full layered treatment + sprig.
-- Tablet 768–1023px: Supporting guides 2-col, cluster sub-labels stack above each pair, header stacks vertically. AI card padding `px-10 py-12`, sprig at lower opacity, chips wrap to 2 rows.
-- Mobile <768px: single-col supporting guides at `p-5`, cluster labels left-aligned. AI card: sprig hidden, edge-padded, chips full-wrap with 8px gaps and ≥36px tap targets. No images = no clarity risk.
+## 8. AI bridge & back link
+- AI bridge kept; rhythm standardised to `py-14 md:py-20`, tint `tintHsl/0.45`.
+- Back link unchanged.
 
-## 5. Files touched
+## 9. TTC identity guardrails (throughout)
+- All accents constrained to greens / sages / slate-sages / soft teal. No terracotta, rose, amber.
+- Tints cooler and lighter than Pregnancy (lower saturation, mid-90s lightness).
+- One main decorative gesture per section (single sprig per card; halo + sprigs only on hero).
+- Topic/subtopic pages stay quieter than the TTC hub overall — same family, no extra ornament.
 
-- `src/pages/TTCHub.tsx` only. Shared `AISearchBar` untouched.
+## 10. Responsive
 
-## 6. Out of scope
+- **Desktop ≥1024px**: 12-col hero, Start here 3-col, clusters 3-col (topic) / 2-col (subtopic), sprigs visible.
+- **Tablet 768–1023px**: Start here drops to 2-col, clusters to 2-col (topic) / 2-col (subtopic), thumbs 40px, hero still side-by-side via existing `md:` grid, sprigs softened/hidden where they'd crowd (sprigB hidden until `md`, halo opacity reduced).
+- **Mobile <768px**: image-first stacking via `order-` pattern, Start here 1-col, clusters 1-col, thumbs 40px, sibling chips wrap, sprigs hidden below `sm`, hero halo dialled down to avoid heaviness.
 
-No Pass 3. No TTC topic/subtopic page edits. No IVF, Pregnancy, articles, navbar, weeks, shared component changes. Pause for review after implementation.
+## 11. Duplication guardrail
+- Start here = 3 cards (already the shape in data).
+- Clusters capped at 4 links each.
+- Any href in Start here is filtered out of all clusters on the same page.
+- Sibling chip rows never include the current page.
+
+## 12. Files touched
+- `src/components/ttc/TTCTopicPage.tsx`
+- `src/components/ttc/TTCSubtopicPage.tsx`
+
+Nothing else. No data changes. No new assets.
+
+## 13. Return after build
+A. Changed files
+B. Topic-page hero changes
+C. Subtopic-page hero changes
+D. "What this topic covers" changes
+E. Start here card changes
+F. Grouped cluster changes
+G. Sibling navigation changes
+H. New TTC image/thumbnail/illustration system
+I. Desktop handling
+J. iPad/tablet handling
+K. Mobile handling
+L. Confirmation TTC matches Pregnancy-level premium quality while staying clearly TTC

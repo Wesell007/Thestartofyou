@@ -4,34 +4,25 @@ import { ArrowUpRight, ArrowRight, NotebookPen } from "lucide-react";
 const IVFFinalCTA = () => {
   return (
     <section
-      className="relative overflow-hidden py-16 sm:py-20 md:py-24"
-      style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.15)' }}
+      className="relative overflow-hidden pt-10 md:pt-14 pb-16 sm:pb-20 md:pb-24"
+      style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.05)' }}
     >
       {/* Ambient glows */}
       <div
         className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[500px] h-[400px] rounded-full blur-3xl"
-        style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.15)' }}
+        style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.18)' }}
       />
       <div
         className="absolute bottom-0 right-1/4 w-[300px] h-[300px] rounded-full blur-3xl"
-        style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.05)' }}
+        style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.06)' }}
       />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
-        {/* Colour trail */}
-        <div className="flex items-center gap-1.5 mb-8">
-          {[
-            { var: '--stage-ttc-accent', w: 'w-5' },
-            { var: '--stage-ivf-accent', w: 'w-14' },
-            { var: '--stage-pregnancy-accent', w: 'w-5' },
-          ].map((t, i) => (
-            <div
-              key={i}
-              className={`h-0.5 rounded-full ${t.w}`}
-              style={{ backgroundColor: `hsl(var(${t.var}) / ${i === 1 ? '0.7' : '0.2'})` }}
-            />
-          ))}
-        </div>
+        {/* Hairline bridge from reflection — single thin divider, no colour trail */}
+        <div
+          className="h-px max-w-32 mx-auto mb-12"
+          style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.22)' }}
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center">
           {/* Left — CTA */}

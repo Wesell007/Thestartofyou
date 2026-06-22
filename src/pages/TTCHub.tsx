@@ -489,7 +489,7 @@ const stages = [
 const JourneyTimeline = () => (
   <section className="py-16 md:py-24 bg-parchment">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
-      <div className="text-center mb-14 md:mb-16 max-w-2xl mx-auto">
+      <div className="text-center mb-12 md:mb-14 max-w-2xl mx-auto">
         <Eyebrow>Your TTC journey</Eyebrow>
         <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground leading-tight mb-3">
           How TTC <span className="italic font-normal">often unfolds</span>
@@ -501,44 +501,75 @@ const JourneyTimeline = () => (
       </div>
 
       <div
-        className="relative rounded-[2rem] border px-6 sm:px-10 md:px-14 py-12 md:py-16 overflow-hidden"
+        className="relative rounded-[2rem] border px-6 sm:px-10 md:px-16 py-12 md:py-20 overflow-hidden"
         style={{
-          borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)`,
-          background: `linear-gradient(180deg, hsl(var(${STAGE_BG}) / 0.4) 0%, hsl(var(--card)) 100%)`,
-          boxShadow: `0 1px 0 hsl(0 0% 100% / 0.9) inset, 0 22px 60px -34px hsl(var(${STAGE_ACCENT}) / 0.3)`,
+          borderColor: `hsl(var(${STAGE_ACCENT}) / 0.16)`,
+          background: `
+            radial-gradient(140% 90% at 50% 0%, hsl(var(${STAGE_BG}) / 0.45) 0%, transparent 60%),
+            linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--parchment) / 0.85) 100%)
+          `,
+          boxShadow: `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 26px 70px -38px hsl(var(${STAGE_ACCENT}) / 0.32)`,
         }}
       >
+        {/* hairline top accent */}
         <div
           aria-hidden="true"
-          className="hidden md:block absolute left-[12%] right-[12%] top-[6.25rem] h-px"
+          className="absolute top-0 left-16 right-16 h-px"
           style={{
-            background: `linear-gradient(90deg, transparent 0%, hsl(var(${STAGE_ACCENT}) / 0.35) 18%, hsl(var(${STAGE_ACCENT}) / 0.35) 82%, transparent 100%)`,
+            background: `linear-gradient(90deg, transparent, hsl(var(${STAGE_ACCENT}) / 0.35), transparent)`,
           }}
         />
 
-        <ol className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-6">
+        {/* desktop dotted connecting line */}
+        <div
+          aria-hidden="true"
+          className="hidden md:block absolute left-[14%] right-[14%] top-[8.5rem] h-px"
+          style={{
+            backgroundImage: `linear-gradient(90deg, hsl(var(${STAGE_ACCENT}) / 0.45) 50%, transparent 0)`,
+            backgroundSize: "8px 1px",
+            backgroundRepeat: "repeat-x",
+          }}
+        />
+
+        <ol className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-12 md:gap-y-0 md:gap-x-6">
           {stages.map((s, i) => (
             <li key={s.label} className="relative text-center md:px-3">
               <div className="relative inline-flex items-center justify-center mb-5">
                 {s.here && (
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 rounded-full"
-                    style={{
-                      background: `hsl(var(${STAGE_ACCENT}) / 0.12)`,
-                      transform: "scale(1.7)",
-                    }}
-                  />
+                  <>
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 rounded-full animate-pulse"
+                      style={{
+                        background: `hsl(var(${STAGE_ACCENT}) / 0.12)`,
+                        transform: "scale(2)",
+                      }}
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 rounded-full"
+                      style={{
+                        background: `hsl(var(${STAGE_ACCENT}) / 0.16)`,
+                        transform: "scale(1.55)",
+                      }}
+                    />
+                  </>
                 )}
                 <span
-                  className="relative inline-flex w-12 h-12 rounded-full items-center justify-center font-serif text-[15px]"
+                  className="relative inline-flex w-14 h-14 rounded-full items-center justify-center font-serif text-[15px] tracking-wide"
                   style={{
-                    background: s.here ? `hsl(var(--terracotta))` : `hsl(var(--card))`,
-                    color: s.here ? `hsl(var(--terracotta-foreground))` : `hsl(var(${STAGE_ACCENT}))`,
-                    border: s.here ? "none" : `1px solid hsl(var(${STAGE_ACCENT}) / 0.3)`,
+                    background: s.here
+                      ? `hsl(var(--terracotta))`
+                      : `radial-gradient(circle at 30% 28%, hsl(var(--card)), hsl(var(${STAGE_BG}) / 0.55))`,
+                    color: s.here
+                      ? `hsl(var(--terracotta-foreground))`
+                      : `hsl(var(${STAGE_ACCENT}))`,
+                    border: s.here
+                      ? "none"
+                      : `1px solid hsl(var(${STAGE_ACCENT}) / 0.32)`,
                     boxShadow: s.here
-                      ? `0 10px 24px -10px hsl(var(--terracotta) / 0.5)`
-                      : `0 1px 0 hsl(0 0% 100% / 0.9) inset`,
+                      ? `0 12px 28px -12px hsl(var(--terracotta) / 0.55)`
+                      : `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 8px 22px -14px hsl(var(${STAGE_ACCENT}) / 0.35)`,
                   }}
                 >
                   {String(i + 1).padStart(2, "0")}
@@ -556,7 +587,7 @@ const JourneyTimeline = () => (
               <h3 className="font-serif text-[1.2rem] text-foreground leading-tight mb-2">
                 {s.label}
               </h3>
-              <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed max-w-[16rem] mx-auto">
+              <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed max-w-[17rem] mx-auto">
                 {s.desc}
               </p>
             </li>
@@ -568,7 +599,7 @@ const JourneyTimeline = () => (
 );
 
 /* ----------------------------------------------------------- */
-/* 4. TOPIC LIBRARY                                            */
+/* 5. TOPIC LIBRARY — premium core topics + curated guides     */
 /* ----------------------------------------------------------- */
 
 const topicIcons: Record<TTCTopicSlug, LucideIcon> = {
@@ -584,13 +615,59 @@ const topicIcons: Record<TTCTopicSlug, LucideIcon> = {
   conditions: Stethoscope,
 };
 
+// Per-pillar accent palette — gentle variation across the TTC green family.
+type PillarTheme = {
+  tintHsl: string;
+  inkHsl: string;
+  borderHsl: string;
+  sprigRotate: number;
+};
+
+const pillarTheme: Record<string, PillarTheme> = {
+  ovulation: {
+    tintHsl: "120 24% 86%", // fresh light sage
+    inkHsl: "130 28% 36%",
+    borderHsl: "130 24% 44%",
+    sprigRotate: -12,
+  },
+  "preconception-health": {
+    tintHsl: "90 26% 84%", // warmer olive sage
+    inkHsl: "95 30% 32%",
+    borderHsl: "95 26% 40%",
+    sprigRotate: 16,
+  },
+  fertility: {
+    tintHsl: "150 22% 82%", // deeper moss
+    inkHsl: "155 28% 30%",
+    borderHsl: "155 24% 38%",
+    sprigRotate: -8,
+  },
+};
+
+// Child links shown inline on each pillar card.
+const pillarChildren: Record<string, { label: string; href: string }[]> = {
+  ovulation: [
+    { label: "Cycle tracking", href: "/trying-to-conceive/cycle-tracking" },
+    { label: "Age & fertility", href: "/trying-to-conceive/age-and-fertility" },
+  ],
+  "preconception-health": [
+    { label: "Preparing for a baby", href: "/preparing-for-baby" },
+    { label: "Trying to conceive, explained", href: "/articles/trying-to-conceive-explained" },
+  ],
+  fertility: [
+    { label: "IVF & fertility treatment", href: "/trying-to-conceive/ivf-and-treatment" },
+    { label: "Conditions that can affect TTC", href: "/trying-to-conceive/conditions" },
+  ],
+};
+
 const TopicLibrary = () => {
   const pillars = ttcTopics.filter((t) => t.kind === "pillar");
   const subs = ttcTopics.filter((t) => t.kind === "subtopic");
   return (
-    <section id="ttc-topics" className="relative py-14 md:py-20 bg-parchment overflow-hidden">
+    <section id="ttc-topics" className="relative py-16 md:py-24 bg-parchment overflow-hidden">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative">
-        <div className="mb-8 md:mb-10">
+        {/* Header */}
+        <div className="mb-10 md:mb-12">
           <Eyebrow>The TTC library</Eyebrow>
           <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground mb-3 leading-tight">
             Core <span className="italic font-normal">TTC topics</span>
@@ -598,151 +675,258 @@ const TopicLibrary = () => {
           <p className="font-sans text-sm font-light text-muted-foreground max-w-md">
             Three pillar topics that hold the heart of the TTC guide.
           </p>
+          <div
+            aria-hidden="true"
+            className="mt-6 h-px w-16"
+            style={{
+              background: `linear-gradient(90deg, hsl(var(${STAGE_ACCENT}) / 0.5), transparent)`,
+            }}
+          />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
+        {/* PILLAR CARDS */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
           {pillars.map((topic) => {
             const Icon = topicIcons[topic.slug];
+            const theme = pillarTheme[topic.slug];
+            const children = pillarChildren[topic.slug] ?? [];
             return (
-              <Link
+              <article
                 key={topic.slug}
-                to={topic.mainHref}
-                className="group relative bg-card rounded-[1.75rem] border p-7 sm:p-8 flex flex-col transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl cursor-pointer min-h-[260px] overflow-hidden"
+                className="group relative bg-card flex flex-col p-6 sm:p-7 md:p-8 transition-all duration-500 hover:-translate-y-1 overflow-hidden"
                 style={{
-                  borderColor: `hsl(var(${STAGE_ACCENT}) / 0.16)`,
-                  boxShadow: `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 18px 44px -28px hsl(var(${STAGE_ACCENT}) / 0.28)`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.42)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.16)`;
+                  borderRadius: "1.75rem 1.25rem 1.75rem 1.25rem",
+                  border: `1px solid hsl(${theme.borderHsl} / 0.18)`,
+                  background: `
+                    radial-gradient(120% 80% at 100% 0%, hsl(${theme.tintHsl} / 0.4) 0%, transparent 55%),
+                    linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--parchment) / 0.65) 100%)
+                  `,
+                  boxShadow: `
+                    0 1px 0 hsl(0 0% 100% / 0.95) inset,
+                    0 0 0 1px hsl(${theme.borderHsl} / 0.04) inset,
+                    0 20px 48px -28px hsl(${theme.inkHsl} / 0.32)
+                  `,
                 }}
               >
+                {/* top hairline */}
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute -top-16 -right-16 w-44 h-44 rounded-full opacity-60 group-hover:opacity-90 transition-opacity duration-500"
+                  className="absolute top-0 left-8 right-8 h-px"
                   style={{
-                    background: `radial-gradient(circle, hsl(var(${STAGE_BG}) / 0.85) 0%, transparent 70%)`,
+                    background: `linear-gradient(90deg, transparent, hsl(${theme.borderHsl} / 0.38), transparent)`,
                   }}
                 />
 
-                <div
-                  className="relative w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-105 group-hover:rotate-[-2deg]"
+                {/* single restrained sprig */}
+                <img
+                  src={sprigImg}
+                  alt=""
+                  aria-hidden="true"
+                  className="pointer-events-none select-none absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-16 sm:w-20 md:w-24 opacity-[0.22] group-hover:opacity-[0.38] transition-opacity duration-700"
                   style={{
-                    background: `linear-gradient(135deg, hsl(var(${STAGE_BG})) 0%, hsl(var(${STAGE_BG}) / 0.55) 100%)`,
-                    boxShadow: `0 1px 0 hsl(0 0% 100% / 0.9) inset, 0 10px 24px -14px hsl(var(${STAGE_ACCENT}) / 0.45)`,
+                    transform: `rotate(${theme.sprigRotate}deg)`,
+                    filter: "saturate(0.7)",
                   }}
-                >
-                  <Icon size={26} strokeWidth={1.4} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
+                />
+
+                {/* corner wash */}
+                <div
+                  aria-hidden="true"
+                  className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full pointer-events-none opacity-60"
+                  style={{
+                    background: `radial-gradient(circle, hsl(${theme.tintHsl} / 0.2) 0%, transparent 70%)`,
+                  }}
+                />
+
+                {/* Medallion + title */}
+                <div className="relative flex items-start gap-4 mb-3.5">
+                  <div className="relative shrink-0">
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 rounded-full transition-transform duration-700 group-hover:scale-110"
+                      style={{
+                        background: `conic-gradient(from 210deg, hsl(${theme.tintHsl} / 0.55), transparent 35%, hsl(${theme.tintHsl} / 0.4) 70%, transparent)`,
+                        padding: 1.5,
+                      }}
+                    />
+                    <div
+                      className="relative w-12 h-12 rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-rotate-3"
+                      style={{
+                        background: `radial-gradient(circle at 30% 28%, hsl(${theme.tintHsl} / 0.95), hsl(${theme.tintHsl} / 0.5))`,
+                        boxShadow: `
+                          0 1px 0 hsl(0 0% 100% / 0.95) inset,
+                          0 -1px 1px hsl(${theme.inkHsl} / 0.08) inset,
+                          0 4px 14px -6px hsl(${theme.inkHsl} / 0.42)
+                        `,
+                      }}
+                    >
+                      <Icon size={18} strokeWidth={1.6} style={{ color: `hsl(${theme.inkHsl})` }} />
+                    </div>
+                  </div>
+
+                  <div className="flex-1 min-w-0 pt-1.5">
+                    <h3 className="font-serif text-[1.2rem] sm:text-[1.25rem] text-foreground leading-tight tracking-tight">
+                      {topic.label}
+                    </h3>
+                  </div>
                 </div>
 
-                <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground leading-[1.2] mb-2.5">
-                  {topic.label}
-                </h3>
-                <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-relaxed mb-6 flex-1">
+                {/* Support description */}
+                <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mb-5 max-w-[30ch]">
                   {topic.description}
                 </p>
 
+                {/* Ornamental divider */}
                 <div
-                  className="pt-4 border-t flex items-center justify-between gap-3"
-                  style={{ borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)` }}
-                >
-                  <span
-                    className="font-sans text-[12px] font-medium tracking-[0.06em] uppercase"
-                    style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                  aria-hidden="true"
+                  className="h-px w-10 mb-1"
+                  style={{
+                    background: `linear-gradient(90deg, hsl(${theme.borderHsl} / 0.55), transparent)`,
+                  }}
+                />
+
+                {/* Inline child links */}
+                <ul className="flex flex-col mb-5">
+                  {children.map((c, i) => (
+                    <li
+                      key={c.href + i}
+                      className="border-t"
+                      style={{ borderColor: `hsl(${theme.borderHsl} / 0.12)` }}
+                    >
+                      <Link
+                        to={c.href}
+                        className="group/link flex items-center justify-between gap-3 py-2.5"
+                      >
+                        <span className="font-sans text-[13px] font-light text-foreground/75 leading-snug group-hover/link:text-foreground transition-colors">
+                          {c.label}
+                        </span>
+                        <ArrowUpRight
+                          size={13}
+                          className="shrink-0 opacity-50 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-all"
+                          style={{ color: `hsl(${theme.inkHsl})` }}
+                        />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Premium CTA */}
+                <div className="pt-2 mt-auto">
+                  <Link
+                    to={topic.mainHref}
+                    className="group/cta inline-flex items-center gap-1.5 font-sans text-[13px] font-medium tracking-wide transition-colors"
+                    style={{ color: "hsl(var(--terracotta))" }}
                   >
-                    Explore topic
-                  </span>
-                  <span
-                    className="inline-flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 group-hover:translate-x-1 group-hover:bg-[hsl(var(--stage-ttc-accent))] group-hover:text-white"
-                    style={{
-                      background: `hsl(var(${STAGE_BG}) / 0.7)`,
-                      color: `hsl(var(${STAGE_ACCENT}))`,
-                    }}
-                  >
-                    <ArrowUpRight size={15} strokeWidth={1.8} />
-                  </span>
+                    <span className="relative">
+                      Explore {topic.label.toLowerCase()}
+                      <span
+                        aria-hidden="true"
+                        className="absolute left-0 right-0 -bottom-0.5 h-px scale-x-0 group-hover/cta:scale-x-100 origin-left transition-transform duration-500"
+                        style={{ background: "hsl(var(--terracotta) / 0.5)" }}
+                      />
+                    </span>
+                    <ArrowRight
+                      size={13}
+                      className="group-hover/cta:translate-x-1 transition-transform duration-500"
+                    />
+                  </Link>
                 </div>
-              </Link>
+              </article>
             );
           })}
         </div>
 
-        {/* Supporting guides band */}
-        <div className="mt-20 mb-8 flex items-end justify-between gap-6 flex-wrap">
-          <div>
-            <Eyebrow>Supporting guides</Eyebrow>
-            <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-tight">
-              Supporting <span className="italic font-normal">guides</span>
-            </h3>
+        {/* SUPPORTING GUIDES — curated support library */}
+        <div className="mt-20 md:mt-24">
+          <div className="mb-8 md:mb-10 flex items-end justify-between gap-6 flex-wrap">
+            <div>
+              <Eyebrow>Supporting guides</Eyebrow>
+              <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-tight">
+                A curated <span className="italic font-normal">support library</span>
+              </h3>
+            </div>
+            <p className="font-sans text-[13.5px] font-light text-muted-foreground max-w-sm leading-relaxed">
+              More specific TTC routes for timing, testing, and fertility
+              questions — secondary reading when you want to go deeper.
+            </p>
           </div>
-          <p className="font-sans text-[13.5px] font-light text-muted-foreground max-w-sm leading-relaxed">
-            More specific TTC routes for timing, testing, and fertility questions.
-          </p>
-        </div>
 
-        <div
-          className="rounded-[1.5rem] border overflow-hidden bg-card/60"
-          style={{ borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)` }}
-        >
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {subs.map((topic, i) => {
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            {subs.map((topic) => {
               const Icon = topicIcons[topic.slug];
-              const colCount = 4;
               return (
-                <li
+                <Link
                   key={topic.slug}
-                  className="relative"
+                  to={topic.mainHref}
+                  className="group relative flex flex-col bg-card/70 rounded-2xl border p-5 sm:p-6 transition-all duration-300 hover:bg-card hover:-translate-y-0.5 overflow-hidden"
                   style={{
-                    borderRight:
-                      (i + 1) % colCount !== 0
-                        ? `1px solid hsl(var(${STAGE_ACCENT}) / 0.10)`
-                        : undefined,
-                    borderTop:
-                      i >= colCount
-                        ? `1px solid hsl(var(${STAGE_ACCENT}) / 0.10)`
-                        : undefined,
+                    borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)`,
+                    boxShadow: `0 1px 0 hsl(0 0% 100% / 0.7) inset, 0 10px 26px -22px hsl(var(${STAGE_ACCENT}) / 0.3)`,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.32)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.14)`;
                   }}
                 >
-                  <Link
-                    to={topic.mainHref}
-                    className="group block h-full p-5 sm:p-6 transition-colors hover:bg-[hsl(var(--stage-ttc)/0.4)]"
-                  >
-                    <div className="flex items-center gap-2.5 mb-2">
+                  {/* faint corner tint */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute -top-12 -right-12 w-32 h-32 rounded-full pointer-events-none opacity-50 group-hover:opacity-80 transition-opacity"
+                    style={{
+                      background: `radial-gradient(circle, hsl(var(${STAGE_BG}) / 0.55) 0%, transparent 70%)`,
+                    }}
+                  />
+
+                  <div className="relative flex items-center gap-2.5 mb-3">
+                    <span
+                      className="inline-flex w-7 h-7 rounded-full items-center justify-center"
+                      style={{
+                        background: `hsl(var(${STAGE_BG}) / 0.55)`,
+                      }}
+                    >
                       <Icon
-                        size={14}
-                        strokeWidth={1.6}
+                        size={13}
+                        strokeWidth={1.7}
                         style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
                       />
-                      <span
-                        className="font-sans text-[10.5px] font-medium tracking-[0.18em] uppercase"
-                        style={{ color: `hsl(var(${STAGE_ACCENT}) / 0.9)` }}
-                      >
-                        Guide
-                      </span>
-                    </div>
-                    <h4 className="font-serif text-[1.05rem] text-foreground leading-snug mb-1.5">
-                      {topic.label}
-                    </h4>
-                    <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-relaxed line-clamp-2 mb-3">
-                      {topic.description}
-                    </p>
+                    </span>
                     <span
-                      className="inline-flex items-center gap-1 font-sans text-[11.5px] font-medium opacity-70 group-hover:opacity-100 transition-opacity"
+                      className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase"
+                      style={{ color: `hsl(var(${STAGE_ACCENT}) / 0.95)` }}
+                    >
+                      Guide
+                    </span>
+                  </div>
+
+                  <h4 className="relative font-serif text-[1.05rem] sm:text-[1.1rem] text-foreground leading-snug mb-2">
+                    {topic.label}
+                  </h4>
+                  <p className="relative font-sans text-[12.5px] font-light text-muted-foreground leading-relaxed mb-5 line-clamp-3 flex-1">
+                    {topic.description}
+                  </p>
+
+                  <div
+                    className="relative pt-3 border-t flex items-center justify-between"
+                    style={{ borderColor: `hsl(var(${STAGE_ACCENT}) / 0.12)` }}
+                  >
+                    <span
+                      className="font-sans text-[11.5px] font-medium tracking-[0.05em]"
                       style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
                     >
-                      Read
-                      <ArrowRight
-                        size={11}
-                        className="transition-transform group-hover:translate-x-0.5"
-                      />
+                      Read guide
                     </span>
-                  </Link>
-                </li>
+                    <ArrowRight
+                      size={12}
+                      className="transition-transform group-hover:translate-x-0.5"
+                      style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                    />
+                  </div>
+                </Link>
               );
             })}
-          </ul>
+          </div>
         </div>
       </div>
     </section>

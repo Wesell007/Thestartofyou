@@ -420,56 +420,136 @@ const WhatThisCovers = () => (
 /* 3. AI SUPPORT                                               */
 /* ----------------------------------------------------------- */
 
-const AISupport = () => (
-  <section className="py-14 md:py-20 bg-parchment">
-    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
+const ttcAIChips = [
+  "When am I most fertile?",
+  "Is late ovulation normal?",
+  "When should I take a pregnancy test?",
+  "What should I do before trying?",
+  "When should I ask for help?",
+];
+
+const AISupport = () => {
+  const navigate = useNavigate();
+  const askPrompt = (q: string) => {
+    const params = new URLSearchParams({ q, ctx: "Trying to conceive" });
+    navigate(`/ask?${params.toString()}`);
+  };
+
+  return (
+    <section className="py-16 md:py-24 bg-parchment relative overflow-hidden">
+      {/* Outer ambient sage wash — seats the inner card */}
       <div
-        className="relative rounded-[2rem] overflow-hidden border"
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-1/2 pointer-events-none"
         style={{
-          background: `radial-gradient(120% 90% at 100% 0%, hsl(var(${STAGE_BG}) / 0.55) 0%, hsl(var(${STAGE_BG}) / 0.25) 55%, hsl(var(--parchment) / 0.95) 100%)`,
-          borderColor: `hsl(var(${STAGE_ACCENT}) / 0.18)`,
-          boxShadow: `0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 24px 60px -32px hsl(var(${STAGE_ACCENT}) / 0.28)`,
+          background: `radial-gradient(60% 80% at 50% 0%, hsl(var(${STAGE_BG}) / 0.5) 0%, transparent 70%)`,
         }}
-      >
-        <div className="relative z-10 px-5 sm:px-10 md:px-14 py-12 md:py-16 text-center">
-          <Eyebrow>AI Support</Eyebrow>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.125rem] text-foreground leading-[1.15] mb-3.5">
-            What's on your mind <span className="italic font-normal">right now?</span>
-          </h2>
-          <p className="font-sans text-[14.5px] sm:text-[15px] font-light text-muted-foreground max-w-xl mx-auto leading-relaxed mb-8">
-            Ask a question about ovulation, cycle tracking, testing, fertility,
-            or what to do next.
-          </p>
+      />
 
-          <div
-            className="max-w-2xl mx-auto rounded-2xl p-1 sm:p-1.5"
-            style={{
-              background: `linear-gradient(180deg, hsl(var(--parchment) / 0.6), hsl(var(--parchment) / 0.2))`,
-              border: `1px solid hsl(var(${STAGE_ACCENT}) / 0.12)`,
-            }}
-          >
-            <AISearchBar
-              placeholder="Ask anything about trying to conceive…"
-              suggestions={[
-                "When am I most fertile?",
-                "Is late ovulation normal?",
-                "When should I take a pregnancy test?",
-                "What should I do before trying?",
-                "When should I ask for help?",
-              ]}
-              context="Trying to conceive"
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl relative z-10">
+        <div
+          className="relative rounded-[2rem] overflow-hidden border"
+          style={{
+            background: `linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(${STAGE_BG}) / 0.22) 100%)`,
+            borderColor: `hsl(var(${STAGE_ACCENT}) / 0.22)`,
+            boxShadow: `
+              0 1px 0 hsl(0 0% 100% / 0.85) inset,
+              0 0 0 1px hsl(var(${STAGE_ACCENT}) / 0.04),
+              0 30px 80px -40px hsl(var(${STAGE_ACCENT}) / 0.4),
+              0 8px 24px -16px hsl(var(${STAGE_ACCENT}) / 0.18)
+            `,
+          }}
+        >
+          {/* TTC identity sprig */}
+          <img
+            src={sprigImg}
+            alt=""
+            aria-hidden="true"
+            className="hidden sm:block absolute top-5 right-5 md:top-6 md:right-7 w-12 md:w-14 opacity-45 pointer-events-none select-none rotate-[14deg]"
+          />
+
+          <div className="relative z-10 px-6 sm:px-10 md:px-14 py-12 md:py-14 text-center">
+            <Eyebrow>AI support</Eyebrow>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.125rem] text-foreground leading-[1.15] mb-3.5">
+              What's on your mind <span className="italic font-normal">right now?</span>
+            </h2>
+            <p className="font-sans text-[14.5px] sm:text-[15px] font-light text-muted-foreground max-w-xl mx-auto leading-relaxed mb-8">
+              Calm, practical guidance on ovulation, cycle tracking, testing,
+              fertility — and what to do next.
+            </p>
+
+            {/* Hairline divider — frames input as a distinct action area */}
+            <div
+              aria-hidden="true"
+              className="mx-auto mb-6 h-px w-24"
+              style={{
+                background: `linear-gradient(90deg, transparent, hsl(var(${STAGE_ACCENT}) / 0.35), transparent)`,
+              }}
             />
-          </div>
 
-          <p className="mt-5 font-sans text-[11.5px] font-light text-muted-foreground/70 max-w-md mx-auto">
-            For health concerns or urgent symptoms, speak to a qualified
-            healthcare professional.
-          </p>
+            <p
+              className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase mb-4"
+              style={{ color: `hsl(var(${STAGE_ACCENT}) / 0.85)` }}
+            >
+              Ask the guide
+            </p>
+
+            <div
+              className="max-w-2xl mx-auto rounded-2xl p-1 sm:p-1.5"
+              style={{
+                background: `linear-gradient(180deg, hsl(var(--parchment) / 0.7), hsl(var(--parchment) / 0.25))`,
+                border: `1px solid hsl(var(${STAGE_ACCENT}) / 0.14)`,
+                boxShadow: `0 1px 0 hsl(0 0% 100% / 0.6) inset`,
+              }}
+            >
+              <AISearchBar
+                placeholder="Ask anything about trying to conceive…"
+                suggestions={[]}
+                context="Trying to conceive"
+              />
+            </div>
+
+            {/* Premium TTC chip row — all 5 prompts, tactile two-tone */}
+            <div className="mt-7 flex flex-wrap justify-center gap-2 sm:gap-2.5">
+              {ttcAIChips.map((q) => (
+                <button
+                  key={q}
+                  onClick={() => askPrompt(q)}
+                  className="group/chip relative inline-flex items-center gap-2 rounded-pill pl-3 pr-4 py-2 sm:py-2.5 font-sans text-[12.5px] sm:text-[13px] font-light text-foreground/85 transition-all duration-300 hover:-translate-y-0.5 min-h-[36px]"
+                  style={{
+                    background: `linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(${STAGE_BG}) / 0.3) 100%)`,
+                    border: `1px solid hsl(var(${STAGE_ACCENT}) / 0.18)`,
+                    boxShadow: `0 1px 0 hsl(0 0% 100% / 0.7) inset, 0 4px 10px -6px hsl(var(${STAGE_ACCENT}) / 0.25)`,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.4)`;
+                    e.currentTarget.style.background = `linear-gradient(180deg, hsl(var(${STAGE_BG}) / 0.4) 0%, hsl(var(${STAGE_BG}) / 0.6) 100%)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.18)`;
+                    e.currentTarget.style.background = `linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(${STAGE_BG}) / 0.3) 100%)`;
+                  }}
+                >
+                  <span
+                    aria-hidden="true"
+                    className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
+                    style={{ background: `hsl(var(${STAGE_ACCENT}) / 0.75)` }}
+                  />
+                  <span>{q}</span>
+                </button>
+              ))}
+            </div>
+
+            <p className="mt-7 font-sans text-[11.5px] font-light text-muted-foreground/70 max-w-md mx-auto">
+              For health concerns or urgent symptoms, speak to a qualified
+              healthcare professional.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 /* ----------------------------------------------------------- */
 /* 4. JOURNEY TIMELINE                                         */

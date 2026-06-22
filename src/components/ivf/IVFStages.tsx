@@ -107,13 +107,13 @@ const IVFStages = () => {
                       <Icon size={16} strokeWidth={1.6} />
                     </div>
                     <span
-                      className="font-serif text-sm px-2.5 py-1 rounded-full backdrop-blur-sm"
+                      className="font-serif text-[13px] px-2.5 py-1 rounded-full backdrop-blur-sm tracking-wide"
                       style={{
-                        backgroundColor: `hsl(${stage.theme.tint} / 0.85)`,
+                        backgroundColor: `hsl(${stage.theme.tint} / 0.9)`,
                         color: `hsl(${stage.theme.accent})`,
                       }}
                     >
-                      Stage {stage.num}
+                      {stage.theme.icon === Hourglass ? "The wait" : stage.theme.icon === Heart ? "Early growth" : "Preparation"}
                     </span>
                   </div>
                 </div>

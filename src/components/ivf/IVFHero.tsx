@@ -134,50 +134,50 @@ const IVFHero = () => {
 
           {/* Right column — single photographic moment + quiet truth band */}
           <div className="flex justify-center md:justify-end animate-fade-up [animation-delay:0.15s]">
-            <div className="w-full max-w-sm md:max-w-md space-y-4">
+            <div className="w-full max-w-sm md:max-w-[460px] space-y-5">
               <div
-                className="relative rounded-2xl overflow-hidden ring-1 shadow-[0_30px_80px_-40px_rgba(60,40,90,0.25)]"
-                style={{ ['--tw-ring-color' as never]: 'hsl(var(--stage-ivf-accent) / 0.18)' }}
+                className="relative rounded-[1.25rem] overflow-hidden ring-1 shadow-[0_40px_100px_-45px_rgba(60,40,90,0.32)]"
+                style={{ ['--tw-ring-color' as never]: 'hsl(var(--stage-ivf-accent) / 0.22)' }}
               >
                 <img
                   src={heroMoment}
                   alt="A quiet morning moment with lavender and tea, evoking the reflective spaces inside an IVF journey"
                   width={1024}
                   height={1280}
-                  className="w-full h-auto max-h-[360px] md:max-h-none object-cover"
+                  className="w-full h-auto max-h-[380px] md:max-h-[520px] object-cover"
                 />
                 <div
                   className="pointer-events-none absolute inset-0"
-                  style={{ background: 'linear-gradient(180deg, transparent 60%, hsl(var(--stage-ivf) / 0.18) 100%)' }}
+                  style={{ background: 'linear-gradient(180deg, transparent 55%, hsl(var(--stage-ivf) / 0.22) 100%)' }}
                 />
               </div>
 
               {/* Emotional truth band */}
               <div
-                className="rounded-xl p-5 border"
+                className="rounded-2xl px-6 py-5 border backdrop-blur-sm"
                 style={{
-                  backgroundColor: 'hsl(var(--stage-ivf) / 0.12)',
-                  borderColor: 'hsl(var(--stage-ivf-accent) / 0.14)',
+                  backgroundColor: 'hsl(var(--stage-ivf) / 0.14)',
+                  borderColor: 'hsl(var(--stage-ivf-accent) / 0.16)',
                 }}
               >
-                <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase mb-2.5" style={{ color: 'hsl(var(--stage-ivf-accent) / 0.85)' }}>
+                <p className="font-sans text-[10px] font-light tracking-[0.22em] uppercase mb-3" style={{ color: 'hsl(var(--stage-ivf-accent) / 0.9)' }}>
                   What many people feel
                 </p>
-                <p className="font-serif italic text-[15px] text-foreground/65 leading-relaxed mb-3">
+                <p className="font-serif italic text-[16px] sm:text-[17px] text-foreground/75 leading-relaxed mb-4">
                   "The process has structure. The emotions often don't."
                 </p>
                 <div
-                  className="h-px w-full mb-3"
-                  style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.12)' }}
+                  className="h-px w-full mb-4"
+                  style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.14)' }}
                 />
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-7">
                   {[
                     { n: "1 in 6", label: "couples" },
                     { n: "Guided", label: "at every step" },
                   ].map((s) => (
                     <div key={s.label} className="flex items-baseline gap-1.5">
-                      <span className="font-serif text-sm text-foreground/75">{s.n}</span>
-                      <span className="font-sans text-[9px] font-light text-muted-foreground/55 uppercase tracking-wide">{s.label}</span>
+                      <span className="font-serif text-[15px] text-foreground/80">{s.n}</span>
+                      <span className="font-sans text-[9.5px] font-light text-muted-foreground/60 uppercase tracking-[0.1em]">{s.label}</span>
                     </div>
                   ))}
                 </div>

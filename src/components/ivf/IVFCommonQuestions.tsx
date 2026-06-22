@@ -31,32 +31,45 @@ const IVFCommonQuestions = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {questions.map((item) => (
+          {questions.map((item, i) => (
             <Link
               key={item.q}
               to={`/ask?q=${encodeURIComponent(item.q)}`}
-              className="group flex items-center justify-between gap-4 rounded-xl border bg-card/70 px-5 py-4 transition-all"
+              className="group relative flex items-center justify-between gap-4 rounded-2xl border bg-card/80 px-5 py-4 transition-all overflow-hidden"
               style={{ borderColor: 'hsl(var(--stage-ivf-accent) / 0.16)' }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'hsl(var(--stage-ivf) / 0.10)';
-                e.currentTarget.style.borderColor = 'hsl(var(--stage-ivf-accent) / 0.32)';
+                e.currentTarget.style.backgroundColor = 'hsl(var(--stage-ivf) / 0.12)';
+                e.currentTarget.style.borderColor = 'hsl(var(--stage-ivf-accent) / 0.36)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = '';
                 e.currentTarget.style.borderColor = 'hsl(var(--stage-ivf-accent) / 0.16)';
               }}
             >
-              <div className="min-w-0">
-                <p className="font-serif text-[15px] text-foreground leading-snug">
-                  {item.q}
-                </p>
-                <p className="font-sans text-[11px] font-light text-muted-foreground/60 mt-0.5">
-                  {item.sub}
-                </p>
+              <span
+                aria-hidden
+                className="absolute left-0 top-0 bottom-0 w-[2px]"
+                style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.45)' }}
+              />
+              <div className="min-w-0 flex items-baseline gap-3">
+                <span
+                  className="font-sans text-[10px] font-light tracking-[0.18em] tabular-nums"
+                  style={{ color: 'hsl(var(--stage-ivf-accent) / 0.7)' }}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className="min-w-0">
+                  <p className="font-serif text-[15.5px] text-foreground leading-snug">
+                    {item.q}
+                  </p>
+                  <p className="font-sans text-[11px] font-light text-muted-foreground/65 mt-1">
+                    {item.sub}
+                  </p>
+                </div>
               </div>
               <ArrowUpRight
-                size={14}
-                className="shrink-0 opacity-50 group-hover:opacity-100 transition-opacity"
+                size={15}
+                className="shrink-0 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
                 style={{ color: 'hsl(var(--stage-ivf-accent))' }}
               />
             </Link>

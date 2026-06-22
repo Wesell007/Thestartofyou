@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, Hourglass, Heart } from "lucide-react";
 import ivfBeforeImg from "@/assets/ivf-stage-before.jpg";
 import ivfAfterImg from "@/assets/ivf-stage-after.jpg";
 import ivfEarlyImg from "@/assets/ivf-stage-early.jpg";
 
-const stages = [
+type StageTheme = { accent: string; tint: string; icon: typeof ShieldCheck };
+
+const stages: Array<{
+  num: string;
+  title: string;
+  sub: string;
+  emotional: string;
+  href: string;
+  image: string;
+  theme: StageTheme;
+}> = [
   {
     num: "01",
     title: "Before transfer",
@@ -12,15 +22,16 @@ const stages = [
     emotional: "Focus and anticipation",
     href: "/ivf/before-transfer",
     image: ivfBeforeImg,
+    theme: { accent: "265 32% 56%", tint: "265 32% 92%", icon: ShieldCheck },
   },
   {
     num: "02",
     title: "After transfer",
-    sub: "The waiting period. Often the most uncertain stage, where questions and emotions can feel heightened.",
+    sub: "The waiting period. Often the most uncertain stage, where questions and emotions feel heightened.",
     emotional: "Hope and uncertainty",
     href: "/ivf/after-transfer",
     image: ivfAfterImg,
-    featured: true,
+    theme: { accent: "280 32% 56%", tint: "280 32% 92%", icon: Hourglass },
   },
   {
     num: "03",
@@ -29,23 +40,23 @@ const stages = [
     emotional: "Cautious optimism",
     href: "/ivf/early-pregnancy",
     image: ivfEarlyImg,
+    theme: { accent: "300 30% 58%", tint: "300 30% 93%", icon: Heart },
   },
 ];
 
 const IVFStages = () => {
   return (
-    <section className="bg-parchment py-12 md:py-16">
+    <section className="bg-parchment-dark py-14 md:py-20">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-        {/* Header */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-14 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <div className="h-px w-6" style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.3)' }} />
               <span className="font-sans text-[11px] font-light tracking-[0.2em] uppercase" style={{ color: 'hsl(var(--stage-ivf-accent))' }}>
-                The Process
+                The process
               </span>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground leading-tight">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground leading-tight">
               Stages of your IVF journey
             </h2>
           </div>
@@ -56,83 +67,90 @@ const IVFStages = () => {
           </div>
         </div>
 
-        {/* TTC arrival cue is carried by IVFPathwayPosition strip at the
-            top of the hub; no extra backward rail here, to keep IVF
-            owning the active treatment frame. */}
-
-
-        {/* Stage cards — vertical with connecting line */}
-        <div className="relative">
-          {/* Connecting line */}
-          <div
-            className="absolute left-[28px] md:left-[100px] top-0 bottom-0 w-px hidden md:block"
-            style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.12)' }}
-          />
-
-          <div className="space-y-4">
-            {stages.map((stage) => (
+        <div className="space-y-5">
+          {stages.map((stage) => {
+            const Icon = stage.theme.icon;
+            return (
               <Link
                 key={stage.num}
                 to={stage.href}
-                className={`group grid grid-cols-1 md:grid-cols-[200px_1fr] border rounded-2xl overflow-hidden shadow-card-brand transition-all hover:shadow-soft relative ${stage.featured ? '' : 'bg-card border-border/50'}`}
-                style={stage.featured ? {
-                  backgroundColor: 'hsl(var(--stage-ivf) / 0.1)',
-                  borderColor: 'hsl(var(--stage-ivf-accent) / 0.2)',
-                } : undefined}
-                onMouseEnter={(e) => e.currentTarget.style.borderColor = 'hsl(var(--stage-ivf-accent) / 0.4)'}
-                onMouseLeave={(e) => e.currentTarget.style.borderColor = stage.featured ? 'hsl(var(--stage-ivf-accent) / 0.2)' : ''}
+                className="group grid grid-cols-1 md:grid-cols-[280px_1fr] border rounded-2xl overflow-hidden shadow-card-brand transition-all hover:shadow-soft hover:-translate-y-0.5 relative bg-card"
+                style={{
+                  borderColor: `hsl(${stage.theme.accent} / 0.22)`,
+                  backgroundColor: `hsl(${stage.theme.accent} / 0.04)`,
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.borderColor = `hsl(${stage.theme.accent} / 0.42)`)}
+                onMouseLeave={(e) => (e.currentTarget.style.borderColor = `hsl(${stage.theme.accent} / 0.22)`)}
               >
-                {/* Image */}
-                <div className="h-40 md:h-auto overflow-hidden relative">
+                <div className="h-56 md:h-auto overflow-hidden relative">
                   <img
                     src={stage.image}
                     alt={stage.title}
                     loading="lazy"
                     width={640}
                     height={512}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-[600ms] ease-out"
                   />
-                  <div className="absolute top-4 left-4">
+                  <div
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-24"
+                    style={{ background: `linear-gradient(180deg, transparent 0%, hsl(${stage.theme.accent} / 0.35) 100%)` }}
+                  />
+                  <div className="absolute bottom-4 left-4 flex items-center gap-2.5">
                     <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm"
-                      style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.6)' }}
+                      className="w-11 h-11 rounded-full flex items-center justify-center backdrop-blur-sm ring-1"
+                      style={{
+                        backgroundColor: `hsl(${stage.theme.tint} / 0.85)`,
+                        color: `hsl(${stage.theme.accent})`,
+                        ['--tw-ring-color' as never]: `hsl(${stage.theme.accent} / 0.45)`,
+                      }}
                     >
-                      <span className="font-serif text-sm text-foreground select-none">{stage.num}</span>
+                      <Icon size={16} strokeWidth={1.6} />
                     </div>
+                    <span
+                      className="font-serif text-sm px-2.5 py-1 rounded-full backdrop-blur-sm"
+                      style={{
+                        backgroundColor: `hsl(${stage.theme.tint} / 0.85)`,
+                        color: `hsl(${stage.theme.accent})`,
+                      }}
+                    >
+                      Stage {stage.num}
+                    </span>
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-6 sm:p-7 flex flex-col justify-center gap-2.5">
+                <div className="p-6 sm:p-8 flex flex-col justify-center gap-3 min-h-[200px]">
                   <div className="flex items-center gap-3">
-                    <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-snug group-hover:text-foreground/80 transition-colors">
+                    <h3 className="font-serif text-2xl md:text-[1.65rem] text-foreground leading-snug group-hover:text-foreground/85 transition-colors">
                       {stage.title}
                     </h3>
                     <ArrowUpRight
                       size={16}
                       className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-                      style={{ color: 'hsl(var(--stage-ivf-accent))' }}
+                      style={{ color: `hsl(${stage.theme.accent})` }}
                     />
                   </div>
                   <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-lg">
                     {stage.sub}
                   </p>
                   <span
-                    className="inline-flex items-center gap-2 font-sans text-[11px] font-light tracking-[0.1em] uppercase rounded-full px-3 py-1 self-start mt-1"
+                    className="inline-flex items-center gap-2 font-sans text-[11px] font-light tracking-[0.12em] uppercase rounded-full px-3 py-1 self-start mt-1"
                     style={{
-                      backgroundColor: 'hsl(var(--stage-ivf) / 0.2)',
-                      color: 'hsl(var(--stage-ivf-accent))',
+                      backgroundColor: `hsl(${stage.theme.accent} / 0.10)`,
+                      color: `hsl(${stage.theme.accent})`,
                     }}
                   >
+                    <span
+                      className="w-1.5 h-1.5 rounded-full"
+                      style={{ backgroundColor: `hsl(${stage.theme.accent})` }}
+                    />
                     {stage.emotional}
                   </span>
                 </div>
               </Link>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
-        {/* Bridge rail below stages: forward handover from Early pregnancy → /pregnancy */}
         <div className="mt-10 flex justify-center">
           <Link
             to="/pregnancy"

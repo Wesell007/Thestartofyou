@@ -1,16 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-import { CalendarIcon, ArrowRight, Clock, Activity, Heart } from "lucide-react";
+import { CalendarIcon, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-
-const suggestedPrompts = [
-  { text: "When should I test after transfer?", icon: Clock, sub: "Timing and accuracy" },
-  { text: "What happens during the two-week wait?", icon: Activity, sub: "The hardest stage" },
-  { text: "Is this symptom normal at this stage?", icon: Heart, sub: "Understanding signals" },
-];
+import heroMoment from "@/assets/ivf-hero-moment.jpg";
 
 const IVFHero = () => {
   const navigate = useNavigate();
@@ -26,22 +21,22 @@ const IVFHero = () => {
 
   return (
     <section className="relative min-h-screen bg-parchment overflow-hidden flex flex-col justify-center pt-20 md:pt-24 pb-12">
-      {/* Ambient glows */}
+      {/* Ambient glows, softened to let the photographic moment breathe */}
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute top-[15%] left-[20%] w-[700px] h-[700px] rounded-full blur-3xl"
-          style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.35)' }}
+          style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.28)' }}
         />
         <div
           className="absolute bottom-[10%] right-[15%] w-[500px] h-[500px] rounded-full blur-3xl"
-          style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.2)' }}
+          style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.14)' }}
         />
       </div>
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
 
-          {/* Left column */}
+          {/* Left column — utility anchor */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-xl mx-auto md:mx-0">
             <div className="flex items-center gap-3 mb-5">
               <div className="h-px w-10" style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.4)' }} />
@@ -63,7 +58,7 @@ const IVFHero = () => {
               Track your timeline, find answers to the questions that come between appointments, and move through each stage with clarity.
             </p>
 
-            {/* Calculator card */}
+            {/* Calculator card — the primary utility object */}
             <div
               className="w-full rounded-2xl p-5 sm:p-6 animate-fade-up [animation-delay:0.2s] space-y-3.5 border backdrop-blur-sm"
               style={{
@@ -71,22 +66,9 @@ const IVFHero = () => {
                 borderColor: 'hsl(var(--stage-ivf-accent) / 0.18)',
               }}
             >
-              <div className="flex items-center justify-between">
-                <p className="font-sans text-xs font-light tracking-[0.15em] uppercase" style={{ color: 'hsl(var(--stage-ivf-accent))' }}>
-                  Track your IVF timeline
-                </p>
-                <div className="flex items-center gap-4">
-                  {[
-                    { n: "3", label: "stages" },
-                    { n: "14", label: "day wait" },
-                  ].map((s) => (
-                    <div key={s.label} className="flex items-baseline gap-1.5">
-                      <span className="font-serif text-base text-foreground">{s.n}</span>
-                      <span className="font-sans text-[9px] font-light text-muted-foreground/50 uppercase tracking-wide">{s.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <p className="font-sans text-xs font-light tracking-[0.15em] uppercase" style={{ color: 'hsl(var(--stage-ivf-accent))' }}>
+                Track your IVF timeline
+              </p>
 
               <div>
                 <p className="font-sans text-[11px] font-light text-muted-foreground/70 mb-1.5 text-left">Embryo transfer date</p>
@@ -150,61 +132,52 @@ const IVFHero = () => {
             </div>
           </div>
 
-          {/* Right column */}
+          {/* Right column — single photographic moment + quiet truth band */}
           <div className="flex justify-center md:justify-end animate-fade-up [animation-delay:0.15s]">
-            <div className="w-full max-w-sm md:max-w-md space-y-3">
-              <p className="font-sans text-xs font-light tracking-[0.15em] uppercase mb-3 text-left" style={{ color: 'hsl(var(--stage-ivf-accent))' }}>
-                Questions during IVF
-              </p>
-              {suggestedPrompts.map((prompt, i) => (
-                <button
-                  key={i}
-                  className="group flex items-center gap-4 w-full text-left py-3.5 px-5 rounded-xl border bg-card/60 hover:bg-card shadow-card-brand transition-all"
-                  style={{ borderColor: 'hsl(var(--stage-ivf) / 0.3)' }}
-                  onMouseEnter={(e) => e.currentTarget.style.borderColor = 'hsl(var(--stage-ivf-accent) / 0.5)'}
-                  onMouseLeave={(e) => e.currentTarget.style.borderColor = 'hsl(var(--stage-ivf) / 0.3)'}
-                >
-                  <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.25)' }}
-                  >
-                    <prompt.icon size={15} style={{ color: 'hsl(var(--stage-ivf-accent))' }} />
-                  </div>
-                  <div className="min-w-0">
-                    <span className="font-sans text-sm font-light text-foreground/80 group-hover:text-foreground transition-colors leading-snug block">
-                      {prompt.text}
-                    </span>
-                    <span className="font-sans text-[11px] font-light text-muted-foreground/50">{prompt.sub}</span>
-                  </div>
-                </button>
-              ))}
-
-              {/* Emotional truth */}
+            <div className="w-full max-w-sm md:max-w-md space-y-4">
               <div
-                className="rounded-xl p-5 border mt-2"
+                className="relative rounded-2xl overflow-hidden ring-1 shadow-[0_30px_80px_-40px_rgba(60,40,90,0.25)]"
+                style={{ ['--tw-ring-color' as never]: 'hsl(var(--stage-ivf-accent) / 0.18)' }}
+              >
+                <img
+                  src={heroMoment}
+                  alt="A quiet morning moment with lavender and tea, evoking the reflective spaces inside an IVF journey"
+                  width={1024}
+                  height={1280}
+                  className="w-full h-auto max-h-[360px] md:max-h-none object-cover"
+                />
+                <div
+                  className="pointer-events-none absolute inset-0"
+                  style={{ background: 'linear-gradient(180deg, transparent 60%, hsl(var(--stage-ivf) / 0.18) 100%)' }}
+                />
+              </div>
+
+              {/* Emotional truth band */}
+              <div
+                className="rounded-xl p-5 border"
                 style={{
                   backgroundColor: 'hsl(var(--stage-ivf) / 0.12)',
-                  borderColor: 'hsl(var(--stage-ivf-accent) / 0.1)',
+                  borderColor: 'hsl(var(--stage-ivf-accent) / 0.14)',
                 }}
               >
-                <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase mb-2.5" style={{ color: 'hsl(var(--stage-ivf-accent) / 0.7)' }}>
+                <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase mb-2.5" style={{ color: 'hsl(var(--stage-ivf-accent) / 0.85)' }}>
                   What many people feel
                 </p>
-                <p className="font-serif italic text-[15px] text-foreground/55 leading-relaxed mb-3">
+                <p className="font-serif italic text-[15px] text-foreground/65 leading-relaxed mb-3">
                   "The process has structure. The emotions often don't."
                 </p>
                 <div
                   className="h-px w-full mb-3"
-                  style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.08)' }}
+                  style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.12)' }}
                 />
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-6">
                   {[
                     { n: "1 in 6", label: "couples" },
                     { n: "Guided", label: "at every step" },
                   ].map((s) => (
                     <div key={s.label} className="flex items-baseline gap-1.5">
-                      <span className="font-serif text-sm text-foreground/70">{s.n}</span>
-                      <span className="font-sans text-[9px] font-light text-muted-foreground/50 uppercase tracking-wide">{s.label}</span>
+                      <span className="font-serif text-sm text-foreground/75">{s.n}</span>
+                      <span className="font-sans text-[9px] font-light text-muted-foreground/55 uppercase tracking-wide">{s.label}</span>
                     </div>
                   ))}
                 </div>

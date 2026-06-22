@@ -373,7 +373,7 @@ const hubBullets = [
 ];
 
 const WhatThisCovers = () => (
-  <section className="pt-10 md:pt-14 pb-14 md:pb-20 bg-parchment">
+  <section className="pt-12 md:pt-16 pb-16 md:pb-24 bg-parchment">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
       <div
         className="relative rounded-[2rem] bg-card border p-8 sm:p-10 md:p-14 overflow-hidden"
@@ -420,56 +420,136 @@ const WhatThisCovers = () => (
 /* 3. AI SUPPORT                                               */
 /* ----------------------------------------------------------- */
 
-const AISupport = () => (
-  <section className="py-14 md:py-20 bg-parchment">
-    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
+const ttcAIChips = [
+  "When am I most fertile?",
+  "Is late ovulation normal?",
+  "When should I take a pregnancy test?",
+  "What should I do before trying?",
+  "When should I ask for help?",
+];
+
+const AISupport = () => {
+  const navigate = useNavigate();
+  const askPrompt = (q: string) => {
+    const params = new URLSearchParams({ q, ctx: "Trying to conceive" });
+    navigate(`/ask?${params.toString()}`);
+  };
+
+  return (
+    <section className="py-16 md:py-24 bg-parchment relative overflow-hidden">
+      {/* Outer ambient sage wash — seats the inner card */}
       <div
-        className="relative rounded-[2rem] overflow-hidden border"
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-1/2 pointer-events-none"
         style={{
-          background: `radial-gradient(120% 90% at 100% 0%, hsl(var(${STAGE_BG}) / 0.55) 0%, hsl(var(${STAGE_BG}) / 0.25) 55%, hsl(var(--parchment) / 0.95) 100%)`,
-          borderColor: `hsl(var(${STAGE_ACCENT}) / 0.18)`,
-          boxShadow: `0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 24px 60px -32px hsl(var(${STAGE_ACCENT}) / 0.28)`,
+          background: `radial-gradient(60% 80% at 50% 0%, hsl(var(${STAGE_BG}) / 0.5) 0%, transparent 70%)`,
         }}
-      >
-        <div className="relative z-10 px-5 sm:px-10 md:px-14 py-12 md:py-16 text-center">
-          <Eyebrow>AI Support</Eyebrow>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.125rem] text-foreground leading-[1.15] mb-3.5">
-            What's on your mind <span className="italic font-normal">right now?</span>
-          </h2>
-          <p className="font-sans text-[14.5px] sm:text-[15px] font-light text-muted-foreground max-w-xl mx-auto leading-relaxed mb-8">
-            Ask a question about ovulation, cycle tracking, testing, fertility,
-            or what to do next.
-          </p>
+      />
 
-          <div
-            className="max-w-2xl mx-auto rounded-2xl p-1 sm:p-1.5"
-            style={{
-              background: `linear-gradient(180deg, hsl(var(--parchment) / 0.6), hsl(var(--parchment) / 0.2))`,
-              border: `1px solid hsl(var(${STAGE_ACCENT}) / 0.12)`,
-            }}
-          >
-            <AISearchBar
-              placeholder="Ask anything about trying to conceive…"
-              suggestions={[
-                "When am I most fertile?",
-                "Is late ovulation normal?",
-                "When should I take a pregnancy test?",
-                "What should I do before trying?",
-                "When should I ask for help?",
-              ]}
-              context="Trying to conceive"
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl relative z-10">
+        <div
+          className="relative rounded-[2rem] overflow-hidden border"
+          style={{
+            background: `linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(${STAGE_BG}) / 0.22) 100%)`,
+            borderColor: `hsl(var(${STAGE_ACCENT}) / 0.22)`,
+            boxShadow: `
+              0 1px 0 hsl(0 0% 100% / 0.85) inset,
+              0 0 0 1px hsl(var(${STAGE_ACCENT}) / 0.04),
+              0 30px 80px -40px hsl(var(${STAGE_ACCENT}) / 0.4),
+              0 8px 24px -16px hsl(var(${STAGE_ACCENT}) / 0.18)
+            `,
+          }}
+        >
+          {/* TTC identity sprig */}
+          <img
+            src={sprigImg}
+            alt=""
+            aria-hidden="true"
+            className="hidden sm:block absolute top-5 right-5 md:top-6 md:right-7 w-12 md:w-14 opacity-45 pointer-events-none select-none rotate-[14deg]"
+          />
+
+          <div className="relative z-10 px-6 sm:px-10 md:px-14 py-12 md:py-14 text-center">
+            <Eyebrow>AI support</Eyebrow>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.125rem] text-foreground leading-[1.15] mb-3.5">
+              What's on your mind <span className="italic font-normal">right now?</span>
+            </h2>
+            <p className="font-sans text-[14.5px] sm:text-[15px] font-light text-muted-foreground max-w-xl mx-auto leading-relaxed mb-8">
+              Calm, practical guidance on ovulation, cycle tracking, testing,
+              fertility — and what to do next.
+            </p>
+
+            {/* Hairline divider — frames input as a distinct action area */}
+            <div
+              aria-hidden="true"
+              className="mx-auto mb-6 h-px w-24"
+              style={{
+                background: `linear-gradient(90deg, transparent, hsl(var(${STAGE_ACCENT}) / 0.35), transparent)`,
+              }}
             />
-          </div>
 
-          <p className="mt-5 font-sans text-[11.5px] font-light text-muted-foreground/70 max-w-md mx-auto">
-            For health concerns or urgent symptoms, speak to a qualified
-            healthcare professional.
-          </p>
+            <p
+              className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase mb-4"
+              style={{ color: `hsl(var(${STAGE_ACCENT}) / 0.85)` }}
+            >
+              Ask the guide
+            </p>
+
+            <div
+              className="max-w-2xl mx-auto rounded-2xl p-1 sm:p-1.5"
+              style={{
+                background: `linear-gradient(180deg, hsl(var(--parchment) / 0.7), hsl(var(--parchment) / 0.25))`,
+                border: `1px solid hsl(var(${STAGE_ACCENT}) / 0.14)`,
+                boxShadow: `0 1px 0 hsl(0 0% 100% / 0.6) inset`,
+              }}
+            >
+              <AISearchBar
+                placeholder="Ask anything about trying to conceive…"
+                suggestions={[]}
+                context="Trying to conceive"
+              />
+            </div>
+
+            {/* Premium TTC chip row — all 5 prompts, tactile two-tone */}
+            <div className="mt-7 flex flex-wrap justify-center gap-2 sm:gap-2.5">
+              {ttcAIChips.map((q) => (
+                <button
+                  key={q}
+                  onClick={() => askPrompt(q)}
+                  className="group/chip relative inline-flex items-center gap-2 rounded-pill pl-3 pr-4 py-2 sm:py-2.5 font-sans text-[12.5px] sm:text-[13px] font-light text-foreground/85 transition-all duration-300 hover:-translate-y-0.5 min-h-[36px]"
+                  style={{
+                    background: `linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(${STAGE_BG}) / 0.3) 100%)`,
+                    border: `1px solid hsl(var(${STAGE_ACCENT}) / 0.18)`,
+                    boxShadow: `0 1px 0 hsl(0 0% 100% / 0.7) inset, 0 4px 10px -6px hsl(var(${STAGE_ACCENT}) / 0.25)`,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.4)`;
+                    e.currentTarget.style.background = `linear-gradient(180deg, hsl(var(${STAGE_BG}) / 0.4) 0%, hsl(var(${STAGE_BG}) / 0.6) 100%)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.18)`;
+                    e.currentTarget.style.background = `linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(${STAGE_BG}) / 0.3) 100%)`;
+                  }}
+                >
+                  <span
+                    aria-hidden="true"
+                    className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
+                    style={{ background: `hsl(var(${STAGE_ACCENT}) / 0.75)` }}
+                  />
+                  <span>{q}</span>
+                </button>
+              ))}
+            </div>
+
+            <p className="mt-7 font-sans text-[11.5px] font-light text-muted-foreground/70 max-w-md mx-auto">
+              For health concerns or urgent symptoms, speak to a qualified
+              healthcare professional.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 /* ----------------------------------------------------------- */
 /* 4. JOURNEY TIMELINE                                         */
@@ -836,97 +916,125 @@ const TopicLibrary = () => {
           })}
         </div>
 
-        {/* SUPPORTING GUIDES — curated support library */}
-        <div className="mt-20 md:mt-24">
-          <div className="mb-8 md:mb-10 flex items-end justify-between gap-6 flex-wrap">
-            <div>
-              <Eyebrow>Supporting guides</Eyebrow>
-              <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-tight">
-                A curated <span className="italic font-normal">support library</span>
-              </h3>
-            </div>
-            <p className="font-sans text-[13.5px] font-light text-muted-foreground max-w-sm leading-relaxed">
-              More specific TTC routes for timing, testing, and fertility
-              questions — secondary reading when you want to go deeper.
+        {/* BRIDGE — understated link between Core topics and Supporting guides */}
+        <div className="mt-16 md:mt-20 text-center">
+          <p className="font-serif italic text-[14px] sm:text-[15px] text-foreground/55 leading-relaxed">
+            and a wider library to go deeper
+          </p>
+        </div>
+
+        {/* SUPPORTING GUIDES — text-led, two clusters, warm but secondary */}
+        <div className="mt-8 md:mt-10">
+          <div className="mb-10 md:mb-12 max-w-2xl">
+            <Eyebrow>Supporting guides</Eyebrow>
+            <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-tight mb-3">
+              A curated <span className="italic font-normal">support library</span>
+            </h3>
+            <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">
+              More specific TTC routes — for timing, testing, fertility, and
+              health. Secondary reading when you want to go deeper.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-            {subs.map((topic) => {
-              const Icon = topicIcons[topic.slug];
-              return (
-                <Link
-                  key={topic.slug}
-                  to={topic.mainHref}
-                  className="group relative flex flex-col bg-card/70 rounded-2xl border p-5 sm:p-6 transition-all duration-300 hover:bg-card hover:-translate-y-0.5 overflow-hidden"
-                  style={{
-                    borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)`,
-                    boxShadow: `0 1px 0 hsl(0 0% 100% / 0.7) inset, 0 10px 26px -22px hsl(var(${STAGE_ACCENT}) / 0.3)`,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.32)`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.14)`;
-                  }}
-                >
-                  {/* faint corner tint */}
-                  <div
-                    aria-hidden="true"
-                    className="absolute -top-12 -right-12 w-32 h-32 rounded-full pointer-events-none opacity-50 group-hover:opacity-80 transition-opacity"
-                    style={{
-                      background: `radial-gradient(circle, hsl(var(${STAGE_BG}) / 0.55) 0%, transparent 70%)`,
-                    }}
-                  />
+          {(() => {
+            const clusterTags: Record<string, string> = {
+              "cycle-tracking": "TIMING",
+              "two-week-wait": "TIMING",
+              "pregnancy-tests": "TESTING",
+              "age-and-fertility": "HEALTH",
+              "male-fertility": "HEALTH",
+              "ivf-and-treatment": "SUPPORT",
+              conditions: "HEALTH",
+            };
+            const clusters: { label: string; slugs: TTCTopicSlug[] }[] = [
+              { label: "Timing & testing", slugs: ["cycle-tracking", "two-week-wait", "pregnancy-tests"] },
+              { label: "Fertility & health", slugs: ["age-and-fertility", "male-fertility", "ivf-and-treatment", "conditions"] },
+            ];
+            const subsBySlug = new Map(subs.map((s) => [s.slug, s]));
 
-                  <div className="relative flex items-center gap-2.5 mb-3">
-                    <span
-                      className="inline-flex w-7 h-7 rounded-full items-center justify-center"
-                      style={{
-                        background: `hsl(var(${STAGE_BG}) / 0.55)`,
-                      }}
-                    >
-                      <Icon
-                        size={13}
-                        strokeWidth={1.7}
-                        style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
-                      />
-                    </span>
-                    <span
-                      className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase"
-                      style={{ color: `hsl(var(${STAGE_ACCENT}) / 0.95)` }}
-                    >
-                      Guide
-                    </span>
-                  </div>
+            return clusters.map((cluster, ci) => (
+              <div key={cluster.label} className={ci === 0 ? "" : "mt-12 md:mt-14"}>
+                <p className="font-serif italic text-[14px] text-foreground/65 mb-5 md:mb-6">
+                  {cluster.label}
+                </p>
 
-                  <h4 className="relative font-serif text-[1.05rem] sm:text-[1.1rem] text-foreground leading-snug mb-2">
-                    {topic.label}
-                  </h4>
-                  <p className="relative font-sans text-[12.5px] font-light text-muted-foreground leading-relaxed mb-5 line-clamp-3 flex-1">
-                    {topic.description}
-                  </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+                  {cluster.slugs.map((slug) => {
+                    const topic = subsBySlug.get(slug);
+                    if (!topic) return null;
+                    const Icon = topicIcons[topic.slug];
+                    const tag = clusterTags[topic.slug] ?? "GUIDE";
+                    return (
+                      <Link
+                        key={topic.slug}
+                        to={topic.mainHref}
+                        className="group relative flex flex-col bg-card/70 rounded-2xl border p-6 sm:p-7 transition-all duration-300 hover:bg-card hover:-translate-y-0.5"
+                        style={{
+                          borderColor: `hsl(var(${STAGE_ACCENT}) / 0.16)`,
+                          boxShadow: `0 1px 0 hsl(0 0% 100% / 0.7) inset, 0 8px 22px -18px hsl(var(${STAGE_ACCENT}) / 0.28)`,
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.36)`;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.16)`;
+                        }}
+                      >
+                        <p
+                          className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase mb-3"
+                          style={{ color: `hsl(var(${STAGE_ACCENT}) / 0.9)` }}
+                        >
+                          {tag}
+                        </p>
 
-                  <div
-                    className="relative pt-3 border-t flex items-center justify-between"
-                    style={{ borderColor: `hsl(var(${STAGE_ACCENT}) / 0.12)` }}
-                  >
-                    <span
-                      className="font-sans text-[11.5px] font-medium tracking-[0.05em]"
-                      style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
-                    >
-                      Read guide
-                    </span>
-                    <ArrowRight
-                      size={12}
-                      className="transition-transform group-hover:translate-x-0.5"
-                      style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
-                    />
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+                        <div className="flex items-start gap-2.5 mb-3">
+                          <Icon
+                            size={14}
+                            strokeWidth={1.7}
+                            className="mt-1 shrink-0"
+                            style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                          />
+                          <h4 className="font-serif text-[1.05rem] sm:text-[1.1rem] text-foreground leading-snug">
+                            <span className="relative inline">
+                              {topic.label}
+                              <span
+                                aria-hidden="true"
+                                className="absolute left-0 right-0 -bottom-0.5 h-px scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"
+                                style={{ background: `hsl(var(${STAGE_ACCENT}) / 0.45)` }}
+                              />
+                            </span>
+                          </h4>
+                        </div>
+
+                        <p className="font-sans text-[13px] font-light text-muted-foreground leading-[1.7] flex-1">
+                          {topic.description}
+                        </p>
+
+                        <div className="mt-5 inline-flex items-center gap-1.5">
+                          <span
+                            className="font-sans text-[11.5px] font-medium tracking-[0.05em]"
+                            style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                          >
+                            Read guide
+                          </span>
+                          <ArrowRight
+                            size={12}
+                            className="transition-transform group-hover:translate-x-1"
+                            style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                          />
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ));
+          })()}
+
+          {/* Understated closing line */}
+          <p className="mt-12 md:mt-14 text-center font-serif italic text-[13.5px] text-foreground/50 leading-relaxed">
+            More routes will be added as the guide grows.
+          </p>
         </div>
       </div>
     </section>

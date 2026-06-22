@@ -1,22 +1,97 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, ChevronRight, Check, Sparkles, ShieldCheck, AlertCircle, NotebookPen, HelpCircle } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  ChevronRight,
+  Check,
+  ShieldCheck,
+  AlertCircle,
+  NotebookPen,
+  HelpCircle,
+  Hourglass,
+  Heart,
+  type LucideIcon,
+} from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AISearchBar from "@/components/shared/AISearchBar";
 import {
   IVFTopicConfig,
+  IVFTopicSlug,
   IVF_TOPIC_ORDER,
   ivfTopicConfigs,
-  IVF_ACCENT_HSL,
-  IVF_TINT_HSL,
 } from "@/data/ivfTopicData";
+import sprigImg from "@/assets/topic-mini-sprig.png";
+
+// Reusable cluster-row thumbnails (existing assets only)
+import imgIvfTimeline from "@/assets/article-hero-ivf-timeline.jpg";
+import imgIvfEmotional from "@/assets/article-hero-ivf-emotional.jpg";
+import imgIvfBefore from "@/assets/ivf-stage-before.jpg";
+import imgIvfAfter from "@/assets/ivf-stage-after.jpg";
+import imgIvfEarly from "@/assets/ivf-stage-early.jpg";
+import imgFertilityAppt from "@/assets/ttc-fertility-appointment.jpg";
+import imgWaiting from "@/assets/ttc-stage-waiting.jpg";
+import imgPregTests from "@/assets/ttc-pregnancy-tests.jpg";
+import imgImplantation from "@/assets/article-hero-implantation.jpg";
+import imgImplantationBleeding from "@/assets/article-hero-implantation-bleeding.jpg";
+import imgEarlySymptoms from "@/assets/article-hero-early-symptoms.jpg";
+import imgSymptomsStopping from "@/assets/article-hero-symptoms-stopping.jpg";
+import imgTestsScans from "@/assets/article-hero-tests-scans.jpg";
+import imgChemical from "@/assets/ttc-chemical-pregnancy.jpg";
+import imgEmotionalCard from "@/assets/guidance-card-emotional.jpg";
+import imgSupport from "@/assets/guidance-support.jpg";
+import imgPregnancy from "@/assets/pregnancy-journey.jpg";
+
+// Per-stage theme — all lilac family, shifted by stage
+type IVFTheme = { accentHsl: string; tintHsl: string; icon: LucideIcon };
+const IVF_THEME: Record<IVFTopicSlug, IVFTheme> = {
+  "before-transfer": { accentHsl: "265 32% 56%", tintHsl: "265 24% 94%", icon: ShieldCheck },
+  "after-transfer":  { accentHsl: "280 32% 56%", tintHsl: "280 22% 94%", icon: Hourglass },
+  "early-pregnancy": { accentHsl: "300 30% 58%", tintHsl: "300 22% 94%", icon: Heart },
+};
+
+// href → thumbnail map (existing assets only); fallback = page hero
+const IVF_THUMBS: Record<string, string> = {
+  "/articles/ivf-timeline-what-to-expect": imgIvfTimeline,
+  "/articles/emotional-impact-of-ivf": imgIvfEmotional,
+  "/ivf": imgIvfBefore,
+  "/ivf/before-transfer": imgIvfBefore,
+  "/ivf/after-transfer": imgIvfAfter,
+  "/ivf/early-pregnancy": imgIvfEarly,
+  "/articles/two-week-wait": imgWaiting,
+  "/articles/when-to-take-a-pregnancy-test": imgPregTests,
+  "/articles/faint-positive-pregnancy-test": imgPregTests,
+  "/articles/early-pregnancy-symptoms-explained": imgEarlySymptoms,
+  "/articles/symptoms-stopping-early-pregnancy": imgSymptomsStopping,
+  "/articles/implantation-bleeding": imgImplantationBleeding,
+  "/articles/how-long-implantation-takes": imgImplantation,
+  "/articles/chemical-pregnancy": imgChemical,
+  "/articles/pregnancy-after-loss": imgChemical,
+  "/articles/perinatal-anxiety": imgEmotionalCard,
+  "/articles/emotional-wellbeing-pregnancy": imgEmotionalCard,
+  "/articles/anxiety-in-pregnancy": imgEmotionalCard,
+  "/articles/bleeding-in-early-pregnancy": imgImplantationBleeding,
+  "/articles/fatigue-in-early-pregnancy": imgEarlySymptoms,
+  "/articles/nausea-in-early-pregnancy": imgEarlySymptoms,
+  "/articles/tests-and-scans-in-pregnancy": imgTestsScans,
+  "/articles/what-happens-at-a-fertility-appointment": imgFertilityAppt,
+  "/support": imgSupport,
+  "/pregnancy": imgPregnancy,
+};
+const thumbFor = (href: string, fallback: string) => {
+  const path = href.split("?")[0];
+  return IVF_THUMBS[path] ?? fallback;
+};
 
 interface Props {
   config: IVFTopicConfig;
 }
 
 const IVFTopicPage = ({ config }: Props) => {
+  const theme = IVF_THEME[config.slug];
+  const IVF_ACCENT_HSL = theme.accentHsl;
+  const IVF_TINT_HSL = theme.tintHsl;
   const accent = `hsl(${IVF_ACCENT_HSL})`;
   const accentSoft = `hsl(${IVF_ACCENT_HSL} / 0.10)`;
   const accentMid = `hsl(${IVF_ACCENT_HSL} / 0.20)`;

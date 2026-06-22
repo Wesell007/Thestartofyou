@@ -277,22 +277,37 @@ const IVFTopicPage = ({ config }: Props) => {
           </div>
         </section>
 
-        {/* AI BRIDGE — surfaced high, like TTC topic pages */}
-        <section className="py-12 md:py-16" style={{ background: `hsl(${IVF_TINT_HSL} / 0.5)` }}>
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl text-center">
-            <Eyebrow>AI Support</Eyebrow>
-            <h2 className="mt-3 font-serif text-2xl md:text-3xl text-foreground leading-tight mb-4">
-              Ask anything about <span className="italic font-normal">{config.eyebrow.toLowerCase()}</span>
-            </h2>
-            <div className="mt-6">
-              <AISearchBar
-                placeholder={`Ask anything about ${config.eyebrow.toLowerCase()}…`}
-                suggestions={config.aiPrompts}
-                context={`IVF · ${config.eyebrow}`}
+        {/* AI BRIDGE — lifted card, secondary to hero / What this covers / Start here */}
+        <section className="py-14 md:py-20" style={{ background: `hsl(${IVF_TINT_HSL} / 0.4)` }}>
+          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
+            <div
+              className="relative mx-auto max-w-3xl rounded-[2rem] border bg-card/75 backdrop-blur-sm p-8 sm:p-12 text-center shadow-[0_30px_80px_-40px_rgba(0,0,0,0.12)]"
+              style={{ borderColor: accentBorder }}
+            >
+              <img
+                src={sprigImg}
+                alt=""
+                aria-hidden="true"
+                className="mx-auto mb-4 h-7 w-auto opacity-60"
               />
+              <Eyebrow>AI Support</Eyebrow>
+              <h2 className="mt-3 font-serif text-2xl md:text-3xl text-foreground leading-tight">
+                Ask anything about <span className="italic font-normal">{config.eyebrow.toLowerCase()}</span>
+              </h2>
+              <p className="mt-3 font-serif italic text-[14.5px] text-muted-foreground/85 max-w-lg mx-auto">
+                Stage-aware, kept inside IVF — never bouncing you back to start.
+              </p>
+              <div className="mt-7">
+                <AISearchBar
+                  placeholder={`Ask anything about ${config.eyebrow.toLowerCase()}…`}
+                  suggestions={config.aiPrompts}
+                  context={`IVF · ${config.eyebrow}`}
+                />
+              </div>
             </div>
           </div>
         </section>
+
 
         {/* START HERE */}
         <section className="py-14 md:py-20">
@@ -303,7 +318,7 @@ const IVFTopicPage = ({ config }: Props) => {
                 <Link
                   key={item.href + item.title}
                   to={item.href}
-                  className="group flex flex-col bg-card rounded-2xl border p-6 transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)] relative overflow-hidden"
+                  className="group flex flex-col bg-card rounded-2xl border p-6 sm:p-7 transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)] relative overflow-hidden"
                   style={{ borderColor: accentBorder }}
                 >
                   <span
@@ -311,6 +326,18 @@ const IVFTopicPage = ({ config }: Props) => {
                     style={{ background: `hsl(${IVF_ACCENT_HSL} / 0.18)` }}
                     aria-hidden
                   />
+                  <div
+                    className="relative -mx-1 mb-5 h-28 sm:h-32 overflow-hidden rounded-xl ring-1"
+                    style={{ borderColor: accentBorder, boxShadow: `inset 0 0 0 1px ${accentBorder}` }}
+                  >
+                    <img
+                      src={thumbFor(item.href, config.heroImage)}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.03]"
+                    />
+                  </div>
                   <span
                     className="font-serif text-[11px] tracking-[0.22em] uppercase mb-3 relative"
                     style={{ color: accent }}
@@ -332,6 +359,7 @@ const IVFTopicPage = ({ config }: Props) => {
                   </span>
                 </Link>
               ))}
+
             </div>
           </div>
         </section>
@@ -625,18 +653,35 @@ const IVFTopicPage = ({ config }: Props) => {
                           className="border-t first:border-t-0"
                           style={{ borderColor: accentSoft }}
                         >
-                          <Link to={link.href} className="group flex items-center gap-3 py-2.5">
-                            <span className="flex-1 font-sans text-[13px] font-light text-foreground/85 leading-snug group-hover:text-foreground transition-colors">
+                          <Link
+                            to={link.href}
+                            className="group/row flex items-center gap-3 py-3 px-2 -mx-2 rounded-lg transition-colors hover:[background:var(--row-hover)]"
+                            style={{ ['--row-hover' as any]: accentSoft }}
+                          >
+                            <span
+                              className="shrink-0 h-11 w-11 overflow-hidden rounded-lg ring-1"
+                              style={{ boxShadow: `inset 0 0 0 1px ${accentBorder}` }}
+                            >
+                              <img
+                                src={thumbFor(link.href, config.heroImage)}
+                                alt=""
+                                aria-hidden="true"
+                                loading="lazy"
+                                className="h-full w-full object-cover transition-transform duration-[600ms] group-hover/row:scale-[1.04]"
+                              />
+                            </span>
+                            <span className="flex-1 font-sans text-[13px] font-light text-foreground/85 leading-snug group-hover/row:text-foreground transition-colors">
                               {link.label}
                             </span>
                             <ChevronRight
                               size={13}
-                              className="shrink-0 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all"
+                              className="shrink-0 opacity-50 group-hover/row:opacity-100 group-hover/row:translate-x-0.5 transition-all"
                               style={{ color: accent }}
                             />
                           </Link>
                         </li>
                       ))}
+
                     </ul>
                   </div>
                 ))}
@@ -734,38 +779,64 @@ const IVFTopicPage = ({ config }: Props) => {
             <div className="text-center mb-8">
               <SectionLabel>Other IVF stages</SectionLabel>
             </div>
-            <ul className="flex flex-wrap justify-center gap-3 sm:gap-4">
-              {siblings.map((s) => (
-                <li key={s.slug}>
-                  <Link to={`/ivf/${s.slug}`}>
-                    <span
-                      className="group flex items-center gap-2.5 rounded-full bg-card border px-4 sm:px-5 py-2.5 sm:py-3 transition-all hover:-translate-y-0.5 hover:shadow-card-brand"
-                      style={{ borderColor: accentSoft }}
-                    >
+            <ul className="flex flex-wrap justify-center gap-4 md:gap-5">
+              {siblings.map((s) => {
+                const sTheme = IVF_THEME[s.slug];
+                const sAccent = `hsl(${sTheme.accentHsl})`;
+                const sSoft = `hsl(${sTheme.accentHsl} / 0.10)`;
+                const sBorder = `hsl(${sTheme.accentHsl} / 0.16)`;
+                const SIcon = sTheme.icon;
+                return (
+                  <li key={s.slug}>
+                    <Link to={`/ivf/${s.slug}`}>
                       <span
-                        className="w-7 h-7 rounded-full flex items-center justify-center"
-                        style={{ backgroundColor: accentSoft }}
+                        className="group flex items-center gap-3 rounded-full bg-card border px-5 py-3 transition-all hover:-translate-y-0.5"
+                        style={{
+                          borderColor: sBorder,
+                          boxShadow: '0 2px 10px -6px rgba(0,0,0,0.12)',
+                        }}
+                        onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 10px 28px -18px rgba(0,0,0,0.25)')}
+                        onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 2px 10px -6px rgba(0,0,0,0.12)')}
                       >
-                        <Sparkles size={12} style={{ color: accent }} />
+                        <span
+                          className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
+                          style={{ backgroundColor: sSoft }}
+                        >
+                          <SIcon size={14} style={{ color: sAccent }} />
+                        </span>
+                        <span className="flex flex-col leading-tight text-left">
+                          <span
+                            className="font-sans text-[10px] font-light tracking-[0.22em] uppercase"
+                            style={{ color: sAccent }}
+                          >
+                            IVF stage
+                          </span>
+                          <span className="font-serif text-[14px] text-foreground/90">
+                            {s.eyebrow}
+                          </span>
+                        </span>
+                        <ChevronRight
+                          size={13}
+                          className="opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all shrink-0"
+                          style={{ color: sAccent }}
+                        />
                       </span>
-                      <span className="font-serif italic text-[14px] text-foreground/85">
-                        {s.eyebrow}
-                      </span>
-                      <ChevronRight
-                        size={13}
-                        className="opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all"
-                        style={{ color: accent }}
-                      />
-                    </span>
-                  </Link>
-                </li>
-              ))}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
+
           </div>
         </section>
 
         {/* BACK */}
         <section className="pb-16 md:pb-20 text-center">
+          <div
+            className="mx-auto mb-2.5 h-px max-w-32"
+            style={{ background: accentSoft }}
+            aria-hidden
+          />
           <Link
             to="/ivf"
             className="font-sans text-[13.5px] font-light text-muted-foreground hover:text-foreground transition-colors"
@@ -773,6 +844,7 @@ const IVFTopicPage = ({ config }: Props) => {
             ← Back to the IVF hub
           </Link>
         </section>
+
       </main>
       <Footer />
     </div>

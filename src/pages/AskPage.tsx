@@ -507,7 +507,7 @@ const AskPage = () => {
                       transition-all duration-300`}
                   >
                     {p}
-                    <ChevronRight size={11} className={`text-border group-hover:${tone.accentText} group-hover:translate-x-0.5 transition-all`} />
+                    <ChevronRight size={11} className={`text-border ${isIVF ? "group-hover:text-lavender" : "group-hover:text-sage"} group-hover:translate-x-0.5 transition-all`} />
                   </button>
                 ))}
               </div>
@@ -534,7 +534,7 @@ const AskPage = () => {
                       <div className={`w-9 h-9 rounded-full ${tone.accentBgSoft} flex items-center justify-center ring-1 ${tone.accentRing} ${isIVF ? "group-hover:bg-lavender-bg/80" : "group-hover:bg-sage-bg/80"} transition-colors`}>
                         <l.icon size={15} className={tone.accentText} />
                       </div>
-                      <ArrowUpRight size={14} className={`text-border group-hover:${tone.accentText} group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all`} />
+                      <ArrowUpRight size={14} className={`text-border ${isIVF ? "group-hover:text-lavender" : "group-hover:text-sage"} group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all`} />
                     </div>
                     <p className="font-serif text-[15px] text-foreground mb-1">{l.label}</p>
                     <p className="font-sans text-[11.5px] font-light text-muted-foreground leading-relaxed">{l.desc}</p>

@@ -1,71 +1,65 @@
+# IVF Final Cleanup + Premium Polish
 
-# IVF Pass 2 — Hub Premium Rebuild
+Three contained jobs. No architecture changes, no new sections.
 
-Hub-only. No stage page, TTC, Pregnancy, nav, routing, or article changes.
+---
 
-## Files
+## A. IVF-origin AI search stays purple
 
-- `src/pages/IVF.tsx` — new section order + reuse existing components
-- `src/components/ivf/IVFHero.tsx` — right column rebuilt: single photo + truth band; calculator stays the anchor
-- `src/components/ivf/IVFStages.tsx` — premium per-stage themed cards, larger imagery
-- `src/components/ivf/IVFWhatMakesDifferent.tsx` — recomposed to 3 compact points on parchment, lilac hairlines
-- `src/components/ivf/IVFCommonQuestions.tsx` — slimmed to a compact 4-question pill grid (hub-wide)
-- `src/components/ivf/IVFReflection.tsx` — retuned to a quiet text-only endcap (no textarea, no CTA)
-- `src/assets/ivf-hero-moment.jpg` — already generated (lavender + tea, calm window light)
+**Problem:** several IVF-origin entry points navigate to `/ask?q=…` without `journey=ivf`, so AskPage falls back to the sage tone.
 
-## Section order in `IVF.tsx`
+**Fix:** append `journey=ivf` (and an IVF `ctx` where missing) on every IVF-origin `/ask` link, and preserve `journey=ivf` on follow-up asks inside AskPage itself.
 
-```text
-IVFHero
-IVFPathwayPosition
-IVFWhatThisCovers
-IVFWhatMakesDifferent   ← new on hub
-IVFAISupport
-IVFStages               ← rebuilt cards
-IVFCommonQuestions      ← new on hub (slimmed)
-IVFReflection           ← new on hub (retuned)
-IVFFinalCTA
-```
+Files touched:
+- `src/components/ivf/IVFAISupport.tsx` — append `journey=ivf&ctx=IVF` on the typed query and suggestion chips.
+- `src/components/ivf/IVFCommonQuestions.tsx` — append `journey=ivf&ctx=IVF · Common questions`.
+- `src/components/ivf/IVFTimelineResult.tsx` — both `/ask` links: append `journey=ivf&ctx=IVF · Timeline`.
+- `src/components/ivf/IVFTopicPage.tsx` — already writes `ivf:lastStage` and passes `ctx`; add `journey=ivf` to its `/ask` link so AskPage flips to the lilac tone path.
+- `src/pages/AskPage.tsx` — `handleAskAgain` and `handleSuggestion` now preserve `journey=ivf` so follow-up asks stay lilac. Swap a small number of hardcoded sage tokens to the tone-driven palette so the input ring, loader, follow-up chip hover, and tail-link icons read as lilac for IVF-origin sessions.
 
-## Hero
-- Left: keep eyebrow, headline, paragraph, calculator (remove the tiny inline "3 stages / 14 day wait" stat row to declutter)
-- Right: replace prompt-button stack and small emotional card with one photographic moment (ivf-hero-moment.jpg) + a quieter truth band (italic line + thin lavender hairline + two restrained stats moved from calculator)
-- Soften ambient glow opacity by ~10%
+`AskPage` already has `tone.glow="ivf"` and `lavender-bg` cascade; the param threading and follow-up preservation are what make the experience consistently purple.
 
-## Editorial beat (`IVFWhatMakesDifferent`)
-- 3 statements: procedure-based timing, frequent monitoring, waiting periods feel different
-- Parchment background, lilac hairlines top/bottom, pull-quote kept, stat row dropped
+---
 
-## Stage cards
-- Per-stage theme via inline HSL (matches Pass 1 IVF_THEME)
-- Image column grows to 280px on md; mobile image full-bleed h-56
-- 44px icon disc + "Stage 0X" chip overlaid on image bottom-left
-- Card surface gets a faint stage-tinted background; emotional chip themed per stage with lilac dot
-- Hover: -translate-y-0.5, image scale-[1.04] 600ms, border intensifies
-- Removed the single "featured" override; all 3 cards equally premium
-- Section sits on `bg-parchment-dark` to create tonal layering
+## B. Remove TTC → IVF intermediate page from the live flow
 
-## Common questions
-- 4 IVF-wide questions in a 2×2 pill grid, deep-linking to `/ask?q=`
-- Centered eyebrow + serif H2; no decoration beyond lilac hairline above
+The TTC subtopic "When IVF becomes the next step" (`/trying-to-conceive/ivf-and-treatment`) is no longer a useful stop. TTC entries that pointed at it jump straight to `/ivf`.
 
-## Reflection
-- Centered, text-only: italic serif line + supporting sans line
-- Lilac hairlines above and below; no textarea, no journal CTA
+Changes:
+- `src/pages/TTCHub.tsx` — quick-link line 738 retargets to `/ivf`. The cluster card render for slug `"ivf-and-treatment"` overrides its `to` prop to `/ivf` (keeps grouping, icon, copy intact).
+- `src/data/ttcTopicData.ts` — `LIVE.ivfTopic` updated to `/ivf` so any consumer of that constant routes to the hub.
+- `src/App.tsx` — route `/trying-to-conceive/ivf-and-treatment → TTCIVFAndTreatment` stays registered as a legacy fallback so old URLs do not 404.
 
-## Lilac strengthening (no token changes)
-- Tonal layering: hub alternates parchment / parchment-dark
-- Recurring `h-px max-w-32` lilac dividers between major beats
-- Eyebrow rails standardised across sections
-- Stage tints sourced from Pass 1 themes for hub ↔ stage continuity
+Preserved for reuse: `src/pages/ttc/IVFAndTreatment.tsx`, `TTCTopicPage`, `ttcPageConfigs["ivf-and-treatment"]` and its styling tokens (`accentHsl`, `tintHsl`, sprig assets, hero image map) stay untouched.
 
-## Responsive
-- Desktop: 2-col hero balanced; right never louder than calculator
-- iPad: hero stays 2-col at md; stage cards keep image-left layout; common questions 2-col
-- Mobile: single-column; hero image max-h 360px; stage cards image-top; quiet reflection centred
+---
+
+## C. Final IVF premium polish (refinement only)
+
+Surgical tightening — no structural change.
+
+`src/components/ivf/IVFStages.tsx`
+- Tighten title leading (`1.15 → 1.12`), unify chip family to a single lilac surface, slightly stronger ring on hover, image `scale-[1.04] → scale-[1.045]` with a softer easing. Per-stage HSL theming preserved.
+
+`src/components/ivf/IVFAISupport.tsx` and `src/components/ivf/IVFCommonQuestions.tsx`
+- Align the AI search card and question grid cards to the same lilac surface family as stage cards: `bg-[hsl(var(--stage-ivf)/0.08)]`, `border-[hsl(var(--stage-ivf-accent)/0.14)]`, `rounded-2xl`, matching ring on hover.
+
+`src/components/ivf/IVFHero.tsx` / hub section wrappers
+- Bump the recurring `h-px max-w-32` lilac divider opacity from `0.20 → 0.28` for stronger authority without raising saturation.
+
+No new components, copy beats, or animation gestures.
+
+---
 
 ## Out of scope
-IVF stage page template, TTC, Pregnancy, articles, navbar, routing, design tokens, IVFAISupport internals, IVFFinalCTA internals.
 
-## Pause
-Pause after build for review before any Pass 3.
+TTC hub/topic premium work, Pregnancy, IVF architecture, new sections, article rewrites, new routes.
+
+## Return after build
+
+A. Changed files
+B. How IVF-origin AI was made consistently purple (param + AskPage tone path)
+C. TTC routes now pointing straight at `/ivf`
+D. How the bridge page was removed from the live flow while keeping its component + styling tokens intact for reuse
+E. What was polished on IVF cards/surfaces
+F. Confirmation this was a cleanup/polish pass only

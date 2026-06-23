@@ -87,7 +87,7 @@ const LIVE = {
   ovulation: "/trying-to-conceive/ovulation",
   preconception: "/trying-to-conceive/preconception-health",
   fertility: "/trying-to-conceive/fertility",
-  ivfTopic: "/trying-to-conceive/ivf-and-treatment",
+  ivfTopic: "/ivf",
   male: "/trying-to-conceive/male-fertility",
   age: "/trying-to-conceive/age-and-fertility",
   cycleTracking: "/trying-to-conceive/cycle-tracking",

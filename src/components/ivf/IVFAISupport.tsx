@@ -16,7 +16,9 @@ const IVFAISupport = () => {
   const handleAsk = (q: string) => {
     const question = q || query;
     if (question.trim()) {
-      navigate(`/ask?q=${encodeURIComponent(question.trim())}`);
+      navigate(
+        `/ask?q=${encodeURIComponent(question.trim())}&journey=ivf&ctx=${encodeURIComponent("IVF")}`
+      );
     }
   };
 
@@ -55,8 +57,8 @@ const IVFAISupport = () => {
             <div
               className="rounded-2xl p-6 sm:p-8 border"
               style={{
-                backgroundColor: 'hsl(var(--stage-ivf) / 0.1)',
-                borderColor: 'hsl(var(--stage-ivf-accent) / 0.12)',
+                backgroundColor: 'hsl(var(--stage-ivf) / 0.08)',
+                borderColor: 'hsl(var(--stage-ivf-accent) / 0.14)',
               }}
             >
               {/* Search input */}
@@ -68,7 +70,7 @@ const IVFAISupport = () => {
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleAsk(query)}
                   placeholder="Ask about your IVF journey..."
-                  className="w-full pl-11 pr-12 py-4 bg-card border border-border/60 rounded-xl font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-sage/50 transition-all"
+                  className="w-full pl-11 pr-12 py-4 bg-card border border-border/60 rounded-xl font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-[hsl(var(--stage-ivf-accent)/0.45)] transition-all"
                 />
                 <button
                   onClick={() => handleAsk(query)}

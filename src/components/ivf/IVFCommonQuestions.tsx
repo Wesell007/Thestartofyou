@@ -14,7 +14,7 @@ const IVFCommonQuestions = () => {
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         <div
           className="h-px max-w-32 mx-auto mb-12"
-          style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.20)' }}
+          style={{ backgroundColor: 'hsl(var(--stage-ivf-accent) / 0.28)' }}
         />
 
         <div className="text-center max-w-2xl mx-auto mb-10">
@@ -34,7 +34,7 @@ const IVFCommonQuestions = () => {
           {questions.map((item, i) => (
             <Link
               key={item.q}
-              to={`/ask?q=${encodeURIComponent(item.q)}`}
+              to={`/ask?q=${encodeURIComponent(item.q)}&journey=ivf&ctx=${encodeURIComponent("IVF · Common questions")}`}
               className="group relative flex items-center justify-between gap-4 rounded-2xl border bg-card/80 px-5 py-4 transition-all overflow-hidden"
               style={{ borderColor: 'hsl(var(--stage-ivf-accent) / 0.16)' }}
               onMouseEnter={(e) => {

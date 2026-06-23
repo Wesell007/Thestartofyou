@@ -1045,13 +1045,13 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                     style={{ "--tw-ring-color": "hsl(var(--stage-ivf-accent) / 0.3)" } as React.CSSProperties}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" && aiQuestion.trim()) {
-                        window.location.href = `/ask?q=${encodeURIComponent(aiQuestion)}`;
+                        window.location.href = `/ask?q=${encodeURIComponent(aiQuestion)}&journey=ivf&ctx=${encodeURIComponent("IVF · Timeline")}`;
                       }
                     }}
                   />
                 </div>
                 <Link
-                  to={`/ask?q=${encodeURIComponent(aiQuestion || "What should I know at this stage of IVF?")}`}
+                  to={`/ask?q=${encodeURIComponent(aiQuestion || "What should I know at this stage of IVF?")}&journey=ivf&ctx=${encodeURIComponent("IVF · Timeline")}`}
                   className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
                 >
                   <MessageCircle size={14} />

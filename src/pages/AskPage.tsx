@@ -95,6 +95,7 @@ const AskPage = () => {
     if (!newQuery.trim()) return;
     const params = new URLSearchParams({ q: newQuery.trim() });
     if (context) params.set("ctx", context);
+    if (isIVF) params.set("journey", "ivf");
     setNewQuery("");
     navigate(`/ask?${params.toString()}`);
   };
@@ -102,6 +103,7 @@ const AskPage = () => {
   const handleSuggestion = (s: string) => {
     const params = new URLSearchParams({ q: s });
     if (context) params.set("ctx", context);
+    if (isIVF) params.set("journey", "ivf");
     navigate(`/ask?${params.toString()}`);
   };
 

@@ -735,7 +735,7 @@ const pillarChildren: Record<string, { label: string; href: string }[]> = {
     { label: "Trying to conceive, explained", href: "/articles/trying-to-conceive-explained" },
   ],
   fertility: [
-    { label: "IVF & fertility treatment", href: "/trying-to-conceive/ivf-and-treatment" },
+    { label: "IVF & fertility treatment", href: "/ivf" },
     { label: "Conditions that can affect TTC", href: "/trying-to-conceive/conditions" },
   ],
 };
@@ -967,7 +967,7 @@ const TopicLibrary = () => {
                     return (
                       <Link
                         key={topic.slug}
-                        to={topic.mainHref}
+                        to={topic.slug === "ivf-and-treatment" ? "/ivf" : topic.mainHref}
                         className="group relative flex flex-col bg-card/70 rounded-2xl border p-6 sm:p-7 transition-all duration-300 hover:bg-card hover:-translate-y-0.5"
                         style={{
                           borderColor: `hsl(var(${STAGE_ACCENT}) / 0.16)`,

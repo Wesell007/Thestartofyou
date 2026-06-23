@@ -707,7 +707,7 @@ const IVFTopicPage = ({ config }: Props) => {
                 {config.commonQuestions.slice(0, 4).map((q) => (
                   <li key={q}>
                     <Link
-                      to={`/ask?q=${encodeURIComponent(q)}&ctx=${encodeURIComponent(`IVF · ${config.eyebrow}`)}`}
+                      to={`/ask?q=${encodeURIComponent(q)}&journey=ivf&ctx=${encodeURIComponent(`IVF · ${config.eyebrow}`)}`}
                       className="group flex items-center gap-3 rounded-full border bg-card px-5 py-3 transition-all hover:-translate-y-0.5 hover:shadow-card-brand"
                       style={{ borderColor: accentBorder }}
                     >

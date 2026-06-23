@@ -89,7 +89,7 @@ const IVFStages = () => {
                     loading="lazy"
                     width={640}
                     height={512}
-                    className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-[600ms] ease-out"
+                    className="w-full h-full object-cover group-hover:scale-[1.045] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
                   />
                   <div
                     className="pointer-events-none absolute inset-x-0 bottom-0 h-24"
@@ -126,7 +126,7 @@ const IVFStages = () => {
                     Stage {stage.num}
                   </span>
                   <div className="flex items-start justify-between gap-3 -mt-1">
-                    <h3 className="font-serif text-[1.6rem] md:text-[1.8rem] text-foreground leading-[1.15] group-hover:text-foreground/85 transition-colors">
+                    <h3 className="font-serif text-[1.6rem] md:text-[1.8rem] text-foreground leading-[1.12] tracking-[-0.005em] group-hover:text-foreground/85 transition-colors">
                       {stage.title}
                     </h3>
                     <ArrowUpRight

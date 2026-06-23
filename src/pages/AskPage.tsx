@@ -60,6 +60,14 @@ const AskPage = () => {
         chipRing: "ring-lavender/20",
         chipDot: "bg-lavender",
         sprigTone: "ivf" as const,
+        accentText: "text-lavender",
+        accentTextMuted: "text-lavender/70",
+        accentBorder: "border-lavender/30",
+        accentBorderHover: "hover:border-lavender/40",
+        accentBgSoft: "bg-lavender-bg/50",
+        accentBgSofter: "bg-lavender-bg/40",
+        accentRing: "ring-lavender/15",
+        accentFocusRing: "focus:ring-lavender/15",
       }
     : {
         glow: "sage" as const,
@@ -70,6 +78,14 @@ const AskPage = () => {
         chipRing: "ring-sage/15",
         chipDot: "bg-sage",
         sprigTone: "sage" as const,
+        accentText: "text-sage",
+        accentTextMuted: "text-sage-muted",
+        accentBorder: "border-sage/30",
+        accentBorderHover: "hover:border-sage/40",
+        accentBgSoft: "bg-sage-bg/50",
+        accentBgSofter: "bg-sage-bg/40",
+        accentRing: "ring-sage/15",
+        accentFocusRing: "focus:ring-sage/15",
       };
 
   const tailLinks = isIVF
@@ -95,6 +111,7 @@ const AskPage = () => {
     if (!newQuery.trim()) return;
     const params = new URLSearchParams({ q: newQuery.trim() });
     if (context) params.set("ctx", context);
+    if (isIVF) params.set("journey", "ivf");
     setNewQuery("");
     navigate(`/ask?${params.toString()}`);
   };
@@ -102,6 +119,7 @@ const AskPage = () => {
   const handleSuggestion = (s: string) => {
     const params = new URLSearchParams({ q: s });
     if (context) params.set("ctx", context);
+    if (isIVF) params.set("journey", "ivf");
     navigate(`/ask?${params.toString()}`);
   };
 
@@ -411,8 +429,8 @@ const AskPage = () => {
         {isLoading && answer && (
           <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
             <div className="flex items-center gap-2.5 mt-2 mb-8">
-              <Loader2 size={13} className="animate-spin text-sage" />
-              <span className="font-sans text-[11px] font-light text-sage-muted tracking-wide">Still writing…</span>
+              <Loader2 size={13} className={`animate-spin ${tone.accentText}`} />
+              <span className={`font-sans text-[11px] font-light ${tone.accentTextMuted} tracking-wide`}>Still writing…</span>
             </div>
           </div>
         )}
@@ -425,9 +443,9 @@ const AskPage = () => {
             {/* ── Medical trust signature ── */}
             <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
               <div className="flex items-center gap-3 pt-10 pb-2">
-                <div className="flex items-center gap-2 bg-sage-bg/40 rounded-full px-4 py-2 ring-1 ring-sage/15">
-                  <Shield size={12} className="text-sage" />
-                  <p className="font-sans text-[11px] font-light text-sage tracking-wide">
+                <div className={`flex items-center gap-2 ${tone.accentBgSofter} rounded-full px-4 py-2 ring-1 ${tone.accentRing}`}>
+                  <Shield size={12} className={tone.accentText} />
+                  <p className={`font-sans text-[11px] font-light ${tone.accentText} tracking-wide`}>
                     ✔ Medically reviewed by Jenny Joines
                   </p>
                 </div>
@@ -483,13 +501,13 @@ const AskPage = () => {
                   <button
                     key={p}
                     onClick={() => handleSuggestion(p)}
-                    className="group inline-flex items-center gap-2.5 font-sans text-[13px] font-light text-foreground/75
+                    className={`group inline-flex items-center gap-2.5 font-sans text-[13px] font-light text-foreground/75
                       bg-card border border-border/40 rounded-full px-5 py-3
-                      hover:border-sage/40 hover:text-foreground hover:bg-card hover:shadow-soft
-                      transition-all duration-300"
+                      ${tone.accentBorderHover} hover:text-foreground hover:bg-card hover:shadow-soft
+                      transition-all duration-300`}
                   >
                     {p}
-                    <ChevronRight size={11} className="text-border group-hover:text-sage group-hover:translate-x-0.5 transition-all" />
+                    <ChevronRight size={11} className={`text-border ${isIVF ? "group-hover:text-lavender" : "group-hover:text-sage"} group-hover:translate-x-0.5 transition-all`} />
                   </button>
                 ))}
               </div>
@@ -508,15 +526,15 @@ const AskPage = () => {
                   <Link
                     key={l.href}
                     to={l.href}
-                    className="group relative bg-card border border-border/40 rounded-2xl px-6 py-7
-                      hover:border-sage/35 hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
+                    className={`group relative bg-card border border-border/40 rounded-2xl px-6 py-7
+                      ${tone.accentBorderHover} hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300 overflow-hidden`}
                   >
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-sage-bg/40 to-transparent rounded-bl-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl ${isIVF ? "from-lavender-bg/40" : "from-sage-bg/40"} to-transparent rounded-bl-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
                     <div className="flex items-start justify-between mb-3.5">
-                      <div className="w-9 h-9 rounded-full bg-sage-bg/50 flex items-center justify-center ring-1 ring-sage/10 group-hover:bg-sage-bg/80 transition-colors">
-                        <l.icon size={15} className="text-sage" />
+                      <div className={`w-9 h-9 rounded-full ${tone.accentBgSoft} flex items-center justify-center ring-1 ${tone.accentRing} ${isIVF ? "group-hover:bg-lavender-bg/80" : "group-hover:bg-sage-bg/80"} transition-colors`}>
+                        <l.icon size={15} className={tone.accentText} />
                       </div>
-                      <ArrowUpRight size={14} className="text-border group-hover:text-sage group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
+                      <ArrowUpRight size={14} className={`text-border ${isIVF ? "group-hover:text-lavender" : "group-hover:text-sage"} group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all`} />
                     </div>
                     <p className="font-serif text-[15px] text-foreground mb-1">{l.label}</p>
                     <p className="font-sans text-[11.5px] font-light text-muted-foreground leading-relaxed">{l.desc}</p>
@@ -530,11 +548,11 @@ const AskPage = () => {
                 ══════════════════════════════════════════════════ */}
             <div className="relative mt-8">
               {/* Full-width premium wash */}
-              <div className="absolute inset-0 bg-gradient-to-b from-parchment via-sage-bg/15 to-parchment pointer-events-none" />
+              <div className={`absolute inset-0 bg-gradient-to-b from-parchment ${isIVF ? "via-lavender-bg/15" : "via-sage-bg/15"} to-parchment pointer-events-none`} />
               <StageGlow tone={tone.glow} className="top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px]" opacity={0.7} />
 
               <div className="relative container mx-auto px-6 md:px-10 max-w-3xl py-20 md:py-28">
-                <div className="relative bg-card border border-sage/15 rounded-[2rem] px-7 py-12 md:px-14 md:py-16 shadow-elevated overflow-hidden">
+                <div className={`relative bg-card border ${isIVF ? "border-lavender/15" : "border-sage/15"} rounded-[2rem] px-7 py-12 md:px-14 md:py-16 shadow-elevated overflow-hidden`}>
                   {/* Botanical art-direction */}
                   <BotanicalAccent
                     className="-top-10 -left-10 rotate-[-18deg]"
@@ -567,11 +585,11 @@ const AskPage = () => {
                     <div
                       className={`relative bg-parchment border rounded-2xl px-5 py-4 md:px-6 md:py-5 flex items-center gap-4 transition-all duration-300 ${
                         inputFocused
-                          ? "border-sage/50 shadow-soft ring-2 ring-sage/10"
+                          ? `${isIVF ? "border-lavender/50 ring-2 ring-lavender/10" : "border-sage/50 ring-2 ring-sage/10"} shadow-soft`
                           : "border-border/50"
                       }`}
                     >
-                      <Search size={16} className="text-sage-muted/60 shrink-0" />
+                      <Search size={16} className={`${isIVF ? "text-lavender/60" : "text-sage-muted/60"} shrink-0`} />
                       <input
                         type="text"
                         value={newQuery}
@@ -599,8 +617,8 @@ const AskPage = () => {
                         <button
                           key={s}
                           onClick={() => handleSuggestion(s)}
-                          className="font-sans text-[12px] font-light text-muted-foreground bg-card/60 border border-border/40 rounded-full px-4 py-2
-                            hover:border-sage/40 hover:text-foreground hover:bg-card hover:shadow-soft transition-all duration-200"
+                          className={`font-sans text-[12px] font-light text-muted-foreground bg-card/60 border border-border/40 rounded-full px-4 py-2
+                            ${tone.accentBorderHover} hover:text-foreground hover:bg-card hover:shadow-soft transition-all duration-200`}
                         >
                           {s}
                         </button>

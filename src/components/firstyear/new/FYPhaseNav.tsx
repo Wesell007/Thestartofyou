@@ -37,18 +37,14 @@ const FYPhaseNav = () => {
     <section id="phases" className="bg-parchment py-14 md:py-16">
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl">
         <div className="mb-8 md:mb-10">
-          <div className="flex items-center gap-1.5 mb-3">
-            <span className="h-px w-8" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.6)' }} />
-            <span className="h-px w-8" style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.6)' }} />
-            <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase ml-2 text-foreground/60">
-              Both of you, month by month
-            </p>
-          </div>
+          <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-3 text-foreground/55">
+            Month by month
+          </p>
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
-            Four phases. Both tracks at once.
+            Twelve months, four phases.
           </h2>
-          <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed max-w-2xl">
-            Each phase carries what's likely happening for your baby <em>and</em> for you, side by side.
+          <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed max-w-xl">
+            What's likely happening for your baby, and for you, in each phase of the year.
           </p>
         </div>
 
@@ -81,7 +77,7 @@ const FYPhaseNav = () => {
                         style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent))' }}
                       />
                       <div>
-                        <p className="font-sans text-[10px] font-light tracking-wider uppercase mb-0.5" style={{ color: 'hsl(var(--stage-firstyear-deep))' }}>Baby</p>
+                        <p className="font-sans text-[10px] font-light tracking-wider uppercase mb-0.5" style={{ color: 'hsl(var(--stage-firstyear-deep))' }}>For your baby</p>
                         <p className="font-sans text-[13px] font-light text-foreground/85 leading-snug">{p.baby}</p>
                       </div>
                     </div>

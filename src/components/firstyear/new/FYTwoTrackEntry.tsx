@@ -19,12 +19,12 @@ interface Track {
 const tracks: Track[] = [
   {
     anchor: "baby",
-    eyebrow: "Track One",
+    eyebrow: "For your baby",
     title: "Baby's first year",
-    desc: "Feeding, sleep, milestones and routine shifts, month by month.",
-    scope: "4 phases · 12 months · 4 topic clusters",
+    desc: "Feeding, sleep and the milestones of the first twelve months.",
+    scope: "",
     inside: ["Feeding", "Sleep", "Development", "Care & safety"],
-    cta: "Enter baby track",
+    cta: "Open baby's first year",
     href: "#baby",
     bg: "--stage-firstyear",
     soft: "--stage-firstyear-soft",
@@ -33,12 +33,12 @@ const tracks: Track[] = [
   },
   {
     anchor: "recovery",
-    eyebrow: "Track Two",
+    eyebrow: "For you",
     title: "Your postpartum recovery",
-    desc: "Physical healing, hormones, emotional wellbeing and check-ups.",
-    scope: "Recovery beyond the first six weeks · 4 topic clusters",
+    desc: "Healing, hormones and how you feel in the months after birth.",
+    scope: "",
     inside: ["Physical recovery", "Emotional wellbeing", "Body & hormones", "Check-ups & red flags"],
-    cta: "Enter recovery track",
+    cta: "Open your recovery",
     href: "#recovery",
     bg: "--stage-recovery",
     soft: "--stage-recovery-soft",
@@ -61,10 +61,10 @@ const FYTwoTrackEntry = () => {
                 borderColor: `hsl(var(${t.accent}) / 0.22)`,
               }}
             >
-              {/* Stronger top accent bar */}
+              {/* Top accent bar */}
               <div
                 className="absolute top-0 left-0 right-0 h-1"
-                style={{ backgroundColor: `hsl(var(${t.accent}) / 0.65)` }}
+                style={{ backgroundColor: `hsl(var(${t.accent}) / 0.55)` }}
               />
 
               <div className="flex items-center justify-between mb-5">
@@ -75,11 +75,10 @@ const FYTwoTrackEntry = () => {
                   {t.eyebrow}
                 </p>
                 <span
-                  className="font-sans text-[10px] font-light tracking-wider uppercase px-2.5 py-1 rounded-full border"
+                  className="font-sans text-[10px] font-light tracking-wider uppercase px-2 py-0.5 rounded-full border"
                   style={{
-                    color: `hsl(var(${t.deep}))`,
-                    borderColor: `hsl(var(${t.accent}) / 0.25)`,
-                    backgroundColor: `hsl(var(${t.soft}) / 0.4)`,
+                    color: `hsl(var(${t.deep}) / 0.75)`,
+                    borderColor: `hsl(var(${t.accent}) / 0.18)`,
                   }}
                 >
                   Medically reviewed
@@ -89,17 +88,11 @@ const FYTwoTrackEntry = () => {
               <h3 className="font-serif text-2xl sm:text-[1.75rem] text-foreground leading-tight mb-3">
                 {t.title}
               </h3>
-              <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed mb-5">
+              <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed mb-6">
                 {t.desc}
               </p>
 
-              <p
-                className="font-sans text-[11px] font-light tracking-wide uppercase mb-3"
-                style={{ color: `hsl(var(${t.accent}) / 0.9)` }}
-              >
-                What's inside
-              </p>
-              <ul className="space-y-2 mb-6">
+              <ul className="space-y-2 mb-7">
                 {t.inside.map((item) => (
                   <li
                     key={item}
@@ -113,13 +106,6 @@ const FYTwoTrackEntry = () => {
                   </li>
                 ))}
               </ul>
-
-              <p
-                className="font-sans text-[11px] font-light tracking-wide uppercase mb-6"
-                style={{ color: `hsl(var(${t.accent}) / 0.85)` }}
-              >
-                {t.scope}
-              </p>
 
               <Link
                 to={t.href}

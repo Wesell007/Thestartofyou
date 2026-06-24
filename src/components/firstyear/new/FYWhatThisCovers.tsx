@@ -7,7 +7,7 @@ const FYWhatThisCovers = () => {
     <section className="bg-parchment py-12 md:py-14">
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl">
         <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-5 text-foreground/60">
-          What this hub covers
+          What you'll find here
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
@@ -21,10 +21,10 @@ const FYWhatThisCovers = () => {
                 className="font-sans text-[10px] font-light tracking-[0.22em] uppercase mb-2"
                 style={{ color: 'hsl(var(--stage-firstyear-deep))' }}
               >
-                Baby's first year
+                For your baby
               </p>
               <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">
-                Feeding, sleep, development and care across twelve months — held together so you can find the bit you need without losing the bigger picture.
+                Feeding, sleep, development and care across twelve months, in one place.
               </p>
             </div>
           </div>
@@ -38,10 +38,10 @@ const FYWhatThisCovers = () => {
                 className="font-sans text-[10px] font-light tracking-[0.22em] uppercase mb-2"
                 style={{ color: 'hsl(var(--stage-recovery-deep))' }}
               >
-                Your postpartum recovery
+                For you
               </p>
               <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">
-                Physical healing, hormones, emotional wellbeing and the check-ups that matter — a real recovery, treated as a track of its own.
+                Physical healing, hormones, mood and the check-ups that matter, given equal care.
               </p>
             </div>
           </div>

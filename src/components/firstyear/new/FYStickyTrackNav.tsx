@@ -13,7 +13,7 @@ const FYStickyTrackNav = () => {
             style={{ color: 'hsl(var(--stage-firstyear-deep))' }}
           >
             <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent))' }} />
-            Baby track
+            For your baby
           </a>
           <div className="w-px bg-border/50" />
           <a
@@ -22,7 +22,7 @@ const FYStickyTrackNav = () => {
             style={{ color: 'hsl(var(--stage-recovery-deep))' }}
           >
             <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'hsl(var(--stage-recovery-accent))' }} />
-            Recovery track
+            For you
           </a>
         </div>
       </div>

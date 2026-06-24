@@ -16,32 +16,28 @@ const trackStyle = (t: Track) =>
   t === "baby"
     ? {
         color: 'hsl(var(--stage-firstyear-deep))',
-        bg: 'hsl(var(--stage-firstyear-soft) / 0.5)',
-        rowBg: 'hsl(var(--stage-firstyear-soft) / 0.18)',
-        border: 'hsl(var(--stage-firstyear-accent) / 0.25)',
+        bg: 'hsl(var(--stage-firstyear-soft) / 0.4)',
+        rowBg: 'hsl(var(--stage-firstyear-soft) / 0.13)',
+        border: 'hsl(var(--stage-firstyear-accent) / 0.18)',
         label: 'Baby',
       }
     : {
         color: 'hsl(var(--stage-recovery-deep))',
-        bg: 'hsl(var(--stage-recovery-soft) / 0.5)',
-        rowBg: 'hsl(var(--stage-recovery-soft) / 0.16)',
-        border: 'hsl(var(--stage-recovery-accent) / 0.25)',
-        label: 'Recovery',
+        bg: 'hsl(var(--stage-recovery-soft) / 0.4)',
+        rowBg: 'hsl(var(--stage-recovery-soft) / 0.12)',
+        border: 'hsl(var(--stage-recovery-accent) / 0.18)',
+        label: 'You',
       };
 
 const FYCommonQuestions = () => {
   return (
     <section className="bg-parchment py-14 md:py-16">
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
-        <div className="flex items-center gap-1.5 mb-3">
-          <span className="h-px w-8" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.6)' }} />
-          <span className="h-px w-8" style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.6)' }} />
-          <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase ml-2 text-foreground/60">
-            Common questions · both tracks
-          </p>
-        </div>
+        <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-3 text-foreground/55">
+          Common questions
+        </p>
         <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-8">
-          The ones parents ask most.
+          Questions parents actually ask.
         </h2>
 
         <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'hsl(var(--border) / 0.6)' }}>

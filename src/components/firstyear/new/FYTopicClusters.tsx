@@ -16,8 +16,8 @@ interface ColumnProps {
 
 const babyColumn: ColumnProps = {
   anchor: "baby",
-  eyebrow: "Baby's first year",
-  heading: "For your baby",
+  eyebrow: "For your baby",
+  heading: "Baby's first year",
   soft: "--stage-firstyear-soft",
   accent: "--stage-firstyear-accent",
   deep: "--stage-firstyear-deep",
@@ -31,8 +31,8 @@ const babyColumn: ColumnProps = {
 
 const recoveryColumn: ColumnProps = {
   anchor: "recovery",
-  eyebrow: "Your postpartum recovery",
-  heading: "For you",
+  eyebrow: "For you",
+  heading: "Your postpartum recovery",
   soft: "--stage-recovery-soft",
   accent: "--stage-recovery-accent",
   deep: "--stage-recovery-deep",
@@ -113,34 +113,30 @@ const FYTopicsParallel = () => {
     <section id="topics" className="bg-parchment py-14 md:py-20">
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-6xl">
         <div className="mb-8 md:mb-10 max-w-2xl">
-          <div className="flex items-center gap-1.5 mb-3">
-            <span className="h-px w-8" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.6)' }} />
-            <span className="h-px w-8" style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.6)' }} />
-            <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase ml-2 text-foreground/60">
-              Topics across both tracks
-            </p>
-          </div>
+          <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-3 text-foreground/55">
+            Topics
+          </p>
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
-            Eight clusters. Two tracks. One place.
+            Everything, side by side.
           </h2>
           <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">
-            Four clusters for your baby and four for your recovery — held side by side, with equal care. Topic pages open in the next step.
+            For your baby on one side, for you on the other.
           </p>
         </div>
 
-        {/* Parallel columns at md+, stacked on mobile with track divider */}
+        {/* Parallel columns at md+, stacked on mobile with quiet divider */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-8 lg:gap-10">
           <Column col={babyColumn} />
-          {/* Mobile-only track divider */}
+          {/* Mobile-only divider */}
           <div className="md:hidden flex items-center gap-3 -mb-2">
-            <span className="flex-1 h-px" style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.25)' }} />
+            <span className="flex-1 h-px" style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.2)' }} />
             <span
               className="font-sans text-[10px] font-light tracking-[0.22em] uppercase"
               style={{ color: 'hsl(var(--stage-recovery-deep))' }}
             >
-              Recovery track
+              For you
             </span>
-            <span className="flex-1 h-px" style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.25)' }} />
+            <span className="flex-1 h-px" style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.2)' }} />
           </div>
           <Column col={recoveryColumn} />
         </div>

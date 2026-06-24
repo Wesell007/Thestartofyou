@@ -177,42 +177,30 @@ const FirstYearTopicPage = ({ config }: Props) => {
                 )}
               </div>
 
-              {/* Photo with tinted halo + subtle botanical accent */}
+              {/* Photo with soft tinted halo — no decorative motifs.
+                  Responsive aspect: taller on mobile so face/upper body
+                  stays in frame; slightly wider on desktop/tablet for
+                  editorial breathing room. Width is capped so the photo
+                  never balloons on wide screens. */}
               <div className="md:col-span-6 lg:col-span-6 order-1 md:order-2 relative">
-                <div className="relative mx-auto max-w-[380px] sm:max-w-[440px] md:max-w-none">
+                <div className="relative mx-auto max-w-[380px] sm:max-w-[440px] md:max-w-[460px] lg:max-w-[520px]">
                   <div
-                    className="absolute inset-0 -m-6 rounded-full opacity-70 blur-3xl"
+                    className="absolute inset-0 -m-6 rounded-full opacity-60 blur-3xl"
                     style={{
-                      background: `radial-gradient(circle at 50% 45%, hsl(var(${theme.softToken}) / 0.85) 0%, transparent 65%)`,
+                      background: `radial-gradient(circle at 50% 45%, hsl(var(${theme.softToken}) / 0.7) 0%, transparent 65%)`,
                     }}
                     aria-hidden
                   />
-                  <img
-                    src={config.heroImage}
-                    alt=""
-                    aria-hidden="true"
-                    loading="eager"
-                    className="relative w-full h-auto rounded-[2rem] object-cover shadow-[0_30px_80px_-40px_rgba(0,0,0,0.28)]"
-                    style={{
-                      aspectRatio: "4 / 5",
-                      objectPosition: heroObjectPosition,
-                    }}
-                  />
-                  {/* Botanical sprig — subtle, never busy */}
-                  <img
-                    src={sprigMini}
-                    alt=""
-                    aria-hidden="true"
-                    loading="lazy"
-                    className="hidden sm:block absolute -left-5 md:-left-9 bottom-4 w-20 md:w-28 opacity-80 pointer-events-none"
-                  />
-                  <img
-                    src={sprigWild}
-                    alt=""
-                    aria-hidden="true"
-                    loading="lazy"
-                    className="hidden md:block absolute -right-4 top-6 w-14 lg:w-16 opacity-70 pointer-events-none"
-                  />
+                  <div className="relative aspect-[4/5] md:aspect-[5/6] w-full overflow-hidden rounded-[2rem] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.28)]">
+                    <img
+                      src={config.heroImage}
+                      alt=""
+                      aria-hidden="true"
+                      loading="eager"
+                      className="absolute inset-0 w-full h-full object-cover"
+                      style={{ objectPosition: heroObjectPosition }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -227,20 +215,11 @@ const FirstYearTopicPage = ({ config }: Props) => {
               className="relative bg-card rounded-[2rem] border shadow-[0_30px_80px_-40px_rgba(0,0,0,0.18)] p-6 sm:p-10 md:p-12 overflow-hidden"
               style={{ borderColor: accentBorder }}
             >
-              {/* quiet decorative sprig — desktop only */}
-              <img
-                src={sprigMini}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                className="hidden md:block absolute right-4 bottom-3 w-16 opacity-50 pointer-events-none"
-              />
-
               <div className="md:max-w-3xl">
                 <h2 className="font-serif text-2xl md:text-[1.8rem] text-foreground leading-tight">
                   What this topic covers
                 </h2>
-                <LeafDivider />
+                <QuietRule />
                 <p className="font-serif italic text-[14.5px] text-muted-foreground/85 mb-7 max-w-2xl">
                   {config.whatThisCovers.lead}
                 </p>

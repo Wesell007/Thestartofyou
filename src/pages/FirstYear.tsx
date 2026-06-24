@@ -2,7 +2,6 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FYHero from "@/components/firstyear/new/FYHero";
 import FYStickyTrackNav from "@/components/firstyear/new/FYStickyTrackNav";
-import FYTwoTrackEntry from "@/components/firstyear/new/FYTwoTrackEntry";
 import FYWhatThisCovers from "@/components/firstyear/new/FYWhatThisCovers";
 import FYAISupport from "@/components/firstyear/new/FYAISupport";
 import FYPhaseNav from "@/components/firstyear/new/FYPhaseNav";
@@ -39,7 +38,6 @@ const FirstYear = () => {
       <main>
         <FYHero />
         <FYStickyTrackNav />
-        <FYTwoTrackEntry />
         <FYWhatThisCovers />
         <FYAISupport />
         <FYPhaseNav />

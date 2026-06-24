@@ -65,8 +65,19 @@
     --stage-pregnancy-accent: 14 50% 50%;
     --stage-postpartum: 16 24% 93%;
     --stage-postpartum-accent: 14 40% 48%;
-    --stage-firstyear: 340 20% 94%;
-    --stage-firstyear-accent: 340 34% 58%;
+    /* Legacy First Year tokens (kept for backwards compatibility during rebuild) */
+    --stage-firstyear-legacy: 340 20% 94%;
+    --stage-firstyear-legacy-accent: 340 34% 58%;
+    /* New First Year ecosystem — powder blue-grey (Step 1 foundation) */
+    --stage-firstyear: 212 22% 94%;
+    --stage-firstyear-soft: 212 26% 88%;
+    --stage-firstyear-accent: 212 32% 46%;
+    --stage-firstyear-deep: 212 36% 32%;
+    /* Recovery sub-track inside First Year — muted mauve-plum */
+    --stage-recovery: 320 14% 93%;
+    --stage-recovery-soft: 320 18% 87%;
+    --stage-recovery-accent: 320 22% 44%;
+    --stage-recovery-deep: 320 28% 30%;
     --stage-preparing: 42 24% 94%;
     --stage-preparing-accent: 42 38% 44%;
     --stage-support: 260 20% 94%;

@@ -1,72 +1,49 @@
 
-# /first-year — hero media correction (video)
+# Step 3 — First Year topic-page system
 
-Surgical pass on the hero only. Nothing from `FYWhatThisCovers` downward changes.
+Build the 8-page topic layer underneath the First Year hub. Hub itself is not rebuilt. No month pages. No new `/postpartum` hub. No nav changes.
 
-## 1. Generate the hero video
+## Files
 
-Use `videogen--generate_video` to create one premium 10s loopable clip.
+**Created**
+- `src/data/firstYearTopicData.ts` — types, `FIRST_YEAR_TOPIC_INDEX`, and all 8 configs (slug, side, eyebrow, title, intro, hero image, what-this-covers bullets, 3 featured guidance items, 3 AI prompts, related links, `medicallyReviewed` flag).
+- `src/components/firstyear/topic/FirstYearTopicPage.tsx` — reusable template (Hero → What this topic covers → Featured guidance → AI support → Related topics → Gentle endcap) + `renderFirstYearTopic(slug)` helper.
+- `src/pages/firstyear/Feeding.tsx`, `Sleep.tsx`, `Development.tsx`, `CareAndSafety.tsx`, `PostpartumRecovery.tsx`, `EmotionalWellbeing.tsx`, `BodyAndHormones.tsx`, `CheckupsAndWarningSigns.tsx` — thin wrappers, one per slug.
 
-- target_path: `src/assets/firstyear-hero-video.mp4`
-- resolution: `1080p`, aspect_ratio: `16:9`, duration: `10`, camera_fixed: `true`
-- Prompt:
-  > A parent and baby in a calm home moment, soft daylight interior. Quiet closeness on a bed, chair, or soft blanket, with small nearby signs of care such as tea, a muslin cloth, a notebook, or a feeding cloth. Gentle natural light across neutral cream and sage textures. Subtle documentary stillness. Premium, calm, editorial. No faces in focus, no text, no logos, no fast cuts, no walking, no advertising energy.
+**Edited**
+- `src/App.tsx` — add 8 imports and 8 routes above the catch-all and above `/:journey/:stage`:
+  - `/first-year/feeding`, `/first-year/sleep`, `/first-year/development`, `/first-year/care-and-safety`
+  - `/first-year/postpartum-recovery`, `/first-year/emotional-wellbeing`, `/first-year/body-and-hormones`, `/first-year/checkups-and-warning-signs`
+- `src/components/firstyear/new/FYTopicClusters.tsx` — add `slug` to each `Cluster`, wrap whole `ClusterCard` in a `<Link to={/first-year/<slug>}>` with a quiet hover lift and corner arrow. Chips remain visual only. No other hub change (layout, copy, section order, divider all preserved).
 
-Then upload via the Lovable Assets CLI so the binary is CDN-hosted:
+**Not touched**: every other `FY*` hub component, Navbar, Footer, all TTC/IVF/Pregnancy/legacy Postpartum files.
 
-```bash
-lovable-assets create --file src/assets/firstyear-hero-video.mp4 \
-  --filename firstyear-hero-video.mp4 \
-  > src/assets/firstyear-hero-video.mp4.asset.json
-rm src/assets/firstyear-hero-video.mp4
-```
+## Template behaviour
 
-The committed pointer (`firstyear-hero-video.mp4.asset.json`) mirrors the shape of `home-hero-video-new.mp4.asset.json`.
+- Side-driven theming via tokens only — Baby uses `--stage-firstyear*`, Recovery uses `--stage-recovery*`. Drives top wash, card borders, eyebrow colour, chip tints, AI block tokens, same-side related row. Cross-side related row uses the other side's accent so the pairing is visually felt.
+- Hero: tinted top wash, eyebrow `First Year · {Baby's first year | Postpartum recovery}`, H1, 2–3 sentence intro, photo with soft tinted halo. No sprigs, no Pregnancy motifs. Two-column 7/5 at `md+`, stacked on mobile in eyebrow → H1 → intro → image order.
+- What this topic covers: card lifted into the hero band, short italic lead, 4–6 bullets in 2-col at `md+`.
+- Featured guidance: 3 editorial cards (image + realistic British-English title + one-line "why") linking to `/ask?q=<encoded title>`. No lorem, no placeholder thumbs — uses curated existing assets only (`firstyear-stage-*`, `postpartum-stage-*`, `guidance-firstyear`, `guidance-postpartum`, `myweek-baby-*`, `article-hero-*-sleep`). Section header "Featured guidance" (never "Articles").
+- AI support: existing `HubAISupport` with topic-specific `heading`, `description`, `suggestions`, `context`, and the side's `stageBg`/`stageAccent` tokens so it sits embedded in the page rather than feeling like a generic chatbot block.
+- Related topics: row 1 "More in {own side}" with 3 same-side siblings; row 2 "From the other side" with 2 cross-side links per the pairing map in the brief.
+- Gentle endcap: one calm closing line (side-specific, no pressure), Medically reviewed trust line repeated where required, two quiet pill links — "Back to First Year" and the cross-side hub anchor (`/first-year#recovery-topics` for baby, `/first-year#baby-topics` for recovery).
+- Medically reviewed trust line ("✔ Medically reviewed by Jenny Joines") shown near hero **and** in endcap on: `care-and-safety`, `postpartum-recovery`, `emotional-wellbeing`, `body-and-hormones`, `checkups-and-warning-signs`.
 
-## 2. `FYHero.tsx` — swap still → video
+## Responsive
 
-Mirror the proven pattern in `src/components/home/NewHeroSection.tsx`, trimmed.
+- **Desktop**: max-w 6xl, 7/5 two-column hero, 3-up featured grid at `lg+`, controlled prose width.
+- **Tablet (`md`)**: hero stays 2-col with the image column narrower so neither side cramps; featured grid is 2-up at `sm/md` and 3-up only at `lg+`; same-side related row is 2-up at `sm` / 3-up at `lg`; cross-side row stays 2-up.
+- **Mobile**: hero stacks (eyebrow → H1 → intro → image), all grids collapse to 1-col, AI prompt chips wrap, endcap buttons stack with full tap area, no horizontal scroll.
 
-- Remove `import firstyearScene from "@/assets/firstyear-scene.jpg"`.
-- Add `import firstyearHeroVideo from "@/assets/firstyear-hero-video.mp4.asset.json"`.
-- Replace the `<img>` with:
-  ```tsx
-  <video
-    ref={videoRef}
-    autoPlay muted loop playsInline preload="auto"
-    onError={() => setVideoState("paused")}
-    className="absolute inset-0 w-full h-full object-cover object-center"
-  >
-    <source src={firstyearHeroVideo.url} type="video/mp4" />
-  </video>
-  ```
-- Port the trimmed `useEffect` from `NewHeroSection` that listens for `canplay` / `playing`, attempts `video.play()`, and flips `videoState` between `"loading" | "playing" | "paused"`. No poster image.
-- If `videoState === "paused"`, render a small parchment play affordance (same button styling pattern as `NewHeroSection`, centered, `bg-parchment/60 backdrop-blur-sm rounded-full p-4`). No full still-image takeover.
+## QA before sign-off
 
-## 3. Overlay rebalance — let the footage live
-
-Inside the hero, restructure the absolute-fill veil layers:
-
-- Delete the flat `bg-parchment/15` base wash.
-- Desktop veil: `hidden md:block bg-gradient-to-r from-parchment/80 via-parchment/40 to-parchment/0`.
-- Mobile veil: `md:hidden bg-gradient-to-b from-parchment/65 via-parchment/35 to-parchment/5`.
-- New soft bottom vignette: `absolute inset-x-0 bottom-0 h-40 pointer-events-none bg-gradient-to-t from-parchment/55 via-parchment/15 to-transparent`.
-- Keep the dual-tone first-year / recovery wash at the bottom, lowered to `0.35` / `0.3` opacity (reads as temperature, not fog).
-- No darkening filter, no `mix-blend-multiply`, no heavy blur added.
-
-## 4. Copy + CTAs (unchanged)
-
-- Eyebrow: "First year"
-- Headline: *Their first year, and **your postpartum recovery**.* (italic in `--stage-recovery-deep`)
-- Support: *Your baby is changing quickly. You're healing after birth. Both belong here.*
-- CTAs unchanged, equal weight: "Baby's first year" → `#baby-topics` (`--stage-firstyear-deep`); "Your postpartum recovery" → `#recovery-topics` (`--stage-recovery-deep`); `min-w-[220px]`.
-
-## 5. Files touched
-
-- `src/components/firstyear/new/FYHero.tsx` — video swap, play-fallback handler, overlay rebalance.
-- `src/assets/firstyear-hero-video.mp4.asset.json` — new asset pointer (CLI output, not hand-written).
-
-Untouched: `FYWhatThisCovers`, `FYTopicClusters`, `FYStickyTrackNav`, `FYAISupport`, everything below. No TTC / IVF / Pregnancy / Postpartum files. No routes. Step 3 not started.
+All 8 routes load and are reachable from the hub cluster cards. Baby pages render with `--stage-firstyear*`; Recovery pages with `--stage-recovery*`. Cross-side related links present on both sides. Medical trust line present on the 5 medical pages. No lorem, no placeholder thumbs. `/postpartum` redirect and First Year hub layout otherwise unchanged.
 
 ## Return after build
-A. Changed files · B. Confirm video, not still · C. How video was sourced (`videogen--generate_video` + `lovable-assets`) · D. Overlay tuning · E. Confirm rest of hub untouched.
+
+A. Changed files
+B. All 8 routes live and reachable from the hub
+C. Baby pages use First Year tokens; Recovery pages use Recovery tokens
+D. Cross-side related links present on both sides
+E. First Year hub not rebuilt
+F. Any compromises noticed during implementation

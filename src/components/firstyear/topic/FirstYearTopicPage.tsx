@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowLeft, Check, ShieldCheck } from "lucide-react";
+import { ArrowRight, ArrowLeft, Check, ShieldCheck, ChevronRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HubAISupport from "@/components/shared/HubAISupport";
@@ -8,7 +8,13 @@ import {
   FirstYearTopicSlug,
   FIRST_YEAR_TOPIC_INDEX,
   firstYearTopicConfigs,
+  FirstYearFeaturedItem,
 } from "@/data/firstYearTopicData";
+
+// Subtle botanical motifs — shared with PregnancyTopicPage so the First Year
+// system feels part of the same editorial family without copying it.
+import sprigMini from "@/assets/topic-mini-sprig.png";
+import sprigWild from "@/assets/topic-wildflower-sprig.png";
 
 interface Props {
   config: FirstYearTopicConfig;
@@ -44,12 +50,23 @@ const THEMES: Record<"baby" | "recovery", SideTheme> = {
 };
 
 const slugToPath = (s: FirstYearTopicSlug) => `/first-year/${s}`;
-const askHref = (title: string) => `/ask?q=${encodeURIComponent(title)}`;
+// Until per-article URLs exist, every guidance card resolves to the AI search
+// pre-seeded with the article title. The data layer can swap `href` for a real
+// article URL later without any template changes.
+const guidanceHref = (item: FirstYearFeaturedItem) =>
+  item.href ?? `/ask?q=${encodeURIComponent(item.title)}`;
+
+const TAG_LABEL: Record<NonNullable<FirstYearFeaturedItem["tag"]>, string> = {
+  "start-here": "Start here",
+  "common": "Common worry",
+  "when-to-get-help": "When to get help",
+};
 
 const FirstYearTopicPage = ({ config }: Props) => {
   const theme = THEMES[config.side];
   const accent = `hsl(var(${theme.accentToken}))`;
   const accentSoft = `hsl(var(${theme.accentToken}) / 0.10)`;
+  const accentMid = `hsl(var(${theme.accentToken}) / 0.22)`;
   const accentBorder = `hsl(var(${theme.accentToken}) / 0.16)`;
   const tintWash = `hsl(var(${theme.softToken}) / 0.55)`;
   const deep = `hsl(var(${theme.deepToken}))`;
@@ -75,6 +92,37 @@ const FirstYearTopicPage = ({ config }: Props) => {
   const otherDeepToken =
     config.side === "baby" ? "--stage-recovery-deep" : "--stage-firstyear-deep";
 
+  // ─── Editorial atoms ──────────────────────────────────────────────────
+  const SectionLabel = ({ children }: { children: React.ReactNode }) => (
+    <div className="flex items-center gap-3">
+      <span className="h-px w-8" style={{ background: accentMid }} />
+      <span
+        className="font-sans text-[11px] font-light tracking-[0.28em] uppercase"
+        style={{ color: accent }}
+      >
+        {children}
+      </span>
+      <span className="h-px w-8" style={{ background: accentMid }} />
+    </div>
+  );
+
+  const LeafDivider = () => (
+    <div className="flex items-center justify-center gap-2 my-4 opacity-70">
+      <span className="h-px w-6" style={{ background: accentMid }} />
+      <svg width="22" height="8" viewBox="0 0 22 8" fill="none" aria-hidden>
+        <path
+          d="M2 4 Q 6 0 11 4 Q 16 8 20 4"
+          stroke={accent}
+          strokeWidth="0.7"
+          fill="none"
+          opacity="0.6"
+        />
+        <circle cx="11" cy="4" r="1.1" fill={accent} opacity="0.5" />
+      </svg>
+      <span className="h-px w-6" style={{ background: accentMid }} />
+    </div>
+  );
+
   const MedicallyReviewed = () => (
     <div
       className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-[11.5px] font-light"
@@ -89,34 +137,38 @@ const FirstYearTopicPage = ({ config }: Props) => {
     </div>
   );
 
+  // Hero crop tuned per topic so faces / babies stay comfortably inside the
+  // frame at every breakpoint. Falls back to a safe upper-centre default.
+  const heroObjectPosition = config.heroObjectPosition ?? "center 30%";
+
   return (
     <div className="min-h-screen font-sans bg-parchment">
       <Navbar />
       <main className="overflow-hidden">
         {/* ─── 1. HERO ───────────────────────────────────────────────── */}
-        <section className="relative pt-10 sm:pt-14 md:pt-20 pb-16 md:pb-24">
+        <section className="relative pt-10 sm:pt-14 md:pt-20 pb-16 md:pb-28">
           {/* Soft tinted top wash in the side's colour family. */}
           <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-40 md:h-64 -z-0"
+            className="pointer-events-none absolute inset-x-0 top-0 h-40 md:h-72 -z-0"
             style={{
               background: `linear-gradient(180deg, ${tintWash} 0%, transparent 100%)`,
             }}
             aria-hidden
           />
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 lg:gap-14 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-center">
               {/* Copy */}
-              <div className="md:col-span-7 lg:col-span-7 order-2 md:order-1">
+              <div className="md:col-span-6 lg:col-span-6 order-2 md:order-1">
                 <p
                   className="font-sans text-[11px] font-light tracking-[0.22em] uppercase"
                   style={{ color: accent }}
                 >
                   First Year · {config.eyebrow}
                 </p>
-                <h1 className="mt-5 font-serif text-[2rem] sm:text-[2.4rem] md:text-[2.7rem] lg:text-[3.1rem] text-foreground leading-[1.08]">
+                <h1 className="mt-5 font-serif text-[2.05rem] sm:text-[2.55rem] md:text-[2.9rem] lg:text-[3.3rem] text-foreground leading-[1.06]">
                   {config.title}
                 </h1>
-                <p className="mt-5 font-sans text-[15px] md:text-base font-light text-muted-foreground leading-relaxed max-w-xl">
+                <p className="mt-6 font-sans text-[15px] md:text-[15.5px] font-light text-muted-foreground leading-relaxed max-w-md">
                   {config.intro}
                 </p>
                 {config.medicallyReviewed && (
@@ -126,9 +178,9 @@ const FirstYearTopicPage = ({ config }: Props) => {
                 )}
               </div>
 
-              {/* Photo with tinted halo */}
-              <div className="md:col-span-5 lg:col-span-5 order-1 md:order-2 relative">
-                <div className="relative mx-auto max-w-[360px] sm:max-w-[420px] md:max-w-none">
+              {/* Photo with tinted halo + subtle botanical accent */}
+              <div className="md:col-span-6 lg:col-span-6 order-1 md:order-2 relative">
+                <div className="relative mx-auto max-w-[380px] sm:max-w-[440px] md:max-w-none">
                   <div
                     className="absolute inset-0 -m-6 rounded-full opacity-70 blur-3xl"
                     style={{
@@ -142,7 +194,25 @@ const FirstYearTopicPage = ({ config }: Props) => {
                     aria-hidden="true"
                     loading="eager"
                     className="relative w-full h-auto rounded-[2rem] object-cover shadow-[0_30px_80px_-40px_rgba(0,0,0,0.28)]"
-                    style={{ aspectRatio: "4 / 5" }}
+                    style={{
+                      aspectRatio: "4 / 5",
+                      objectPosition: heroObjectPosition,
+                    }}
+                  />
+                  {/* Botanical sprig — subtle, never busy */}
+                  <img
+                    src={sprigMini}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    className="hidden sm:block absolute -left-5 md:-left-9 bottom-4 w-20 md:w-28 opacity-80 pointer-events-none"
+                  />
+                  <img
+                    src={sprigWild}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    className="hidden md:block absolute -right-4 top-6 w-14 lg:w-16 opacity-70 pointer-events-none"
                   />
                 </div>
               </div>
@@ -152,67 +222,70 @@ const FirstYearTopicPage = ({ config }: Props) => {
 
         {/* ─── 2. WHAT THIS TOPIC COVERS ─────────────────────────────── */}
         {/* Softly lifted card sitting just under the hero, premium rhythm. */}
-        <section className="relative -mt-8 md:-mt-16 pb-16 md:pb-24">
+        <section className="relative -mt-8 md:-mt-20 pb-16 md:pb-24">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
             <div
-              className="relative bg-card rounded-[2rem] border shadow-[0_30px_80px_-40px_rgba(0,0,0,0.18)] p-6 sm:p-10 md:p-12"
+              className="relative bg-card rounded-[2rem] border shadow-[0_30px_80px_-40px_rgba(0,0,0,0.18)] p-6 sm:p-10 md:p-12 overflow-hidden"
               style={{ borderColor: accentBorder }}
             >
-              <div className="flex items-center gap-3 mb-5">
-                <span
-                  className="w-1.5 h-6 rounded-full"
-                  style={{ backgroundColor: accent }}
-                />
-                <h2 className="font-serif text-2xl md:text-[1.7rem] text-foreground leading-tight">
+              {/* quiet decorative sprig — desktop only */}
+              <img
+                src={sprigMini}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                className="hidden md:block absolute right-4 bottom-3 w-16 opacity-50 pointer-events-none"
+              />
+
+              <div className="md:max-w-3xl">
+                <h2 className="font-serif text-2xl md:text-[1.8rem] text-foreground leading-tight">
                   What this topic covers
                 </h2>
+                <LeafDivider />
+                <p className="font-serif italic text-[14.5px] text-muted-foreground/85 mb-7 max-w-2xl">
+                  {config.whatThisCovers.lead}
+                </p>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
+                  {config.whatThisCovers.bullets.map((b, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span
+                        className="mt-1 shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
+                        style={{ backgroundColor: accentSoft }}
+                      >
+                        <Check size={11} style={{ color: accent }} strokeWidth={2.5} />
+                      </span>
+                      <span className="font-sans text-[14.5px] font-light text-foreground/80 leading-relaxed">
+                        {b}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <p className="font-serif italic text-[14.5px] text-muted-foreground/85 mb-6 max-w-2xl">
-                {config.whatThisCovers.lead}
-              </p>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
-                {config.whatThisCovers.bullets.map((b, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span
-                      className="mt-1 shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
-                      style={{ backgroundColor: accentSoft }}
-                    >
-                      <Check
-                        size={11}
-                        style={{ color: accent }}
-                        strokeWidth={2.5}
-                      />
-                    </span>
-                    <span className="font-sans text-[14.5px] font-light text-foreground/80 leading-relaxed">
-                      {b}
-                    </span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </section>
 
-        {/* ─── 3. FEATURED GUIDANCE ──────────────────────────────────── */}
+        {/* ─── 3. GUIDANCE ───────────────────────────────────────────── */}
+        {/* Designed as a real editorial article cluster, even while cards
+            temporarily resolve to /ask?q=… behind the scenes. */}
         <section className="pb-16 md:pb-24">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
-            <div className="mb-8 md:mb-10">
-              <p
-                className="font-sans text-[11px] font-light tracking-[0.22em] uppercase mb-2"
-                style={{ color: accent }}
-              >
-                Featured guidance
-              </p>
-              <h2 className="font-serif text-2xl md:text-[1.7rem] text-foreground leading-tight">
+            <div className="mb-9 md:mb-12 flex flex-col items-start gap-4">
+              <SectionLabel>Guidance</SectionLabel>
+              <h2 className="font-serif text-2xl md:text-[1.85rem] text-foreground leading-tight max-w-2xl">
                 Where parents tend to start
               </h2>
+              <p className="font-serif italic text-[14.5px] text-muted-foreground/85 max-w-2xl">
+                {config.guidanceLead}
+              </p>
             </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
               {config.featured.map((item) => (
                 <Link
                   key={item.title}
-                  to={askHref(item.title)}
-                  className="group block bg-card rounded-2xl overflow-hidden border transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)]"
+                  to={guidanceHref(item)}
+                  className="group block bg-card rounded-2xl overflow-hidden border transition-all hover:-translate-y-1 hover:shadow-[0_24px_60px_-32px_rgba(0,0,0,0.28)]"
                   style={{ borderColor: accentBorder }}
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
@@ -221,24 +294,36 @@ const FirstYearTopicPage = ({ config }: Props) => {
                       alt=""
                       aria-hidden="true"
                       loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      style={{ objectPosition: "center 35%" }}
                     />
+                    {/* Subtle topic tint — harmonises mixed photography */}
                     <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                      style={{
-                        background: `linear-gradient(180deg, transparent 55%, hsl(var(${theme.deepToken}) / 0.35) 100%)`,
-                      }}
+                      className="absolute inset-0 mix-blend-multiply opacity-[0.07] pointer-events-none"
+                      style={{ backgroundColor: accent }}
+                      aria-hidden
                     />
+                    {item.tag && (
+                      <span
+                        className="absolute top-3 left-3 font-sans text-[10.5px] tracking-[0.18em] uppercase font-light px-2.5 py-1 rounded-full backdrop-blur-sm"
+                        style={{
+                          color: deep,
+                          backgroundColor: `hsl(var(${theme.softToken}) / 0.92)`,
+                        }}
+                      >
+                        {TAG_LABEL[item.tag]}
+                      </span>
+                    )}
                   </div>
                   <div className="p-5 sm:p-6">
-                    <h3 className="font-serif text-[1.05rem] sm:text-[1.1rem] text-foreground leading-snug mb-2">
+                    <h3 className="font-serif text-[1.1rem] sm:text-[1.18rem] text-foreground leading-snug mb-2.5">
                       {item.title}
                     </h3>
-                    <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mb-4">
+                    <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-relaxed mb-4">
                       {item.why}
                     </p>
                     <span
-                      className="inline-flex items-center gap-1.5 font-sans text-[12px] font-light tracking-wide"
+                      className="inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium tracking-wide"
                       style={{ color: accent }}
                     >
                       Read guidance
@@ -274,28 +359,25 @@ const FirstYearTopicPage = ({ config }: Props) => {
         />
 
         {/* ─── 5. RELATED TOPICS ─────────────────────────────────────── */}
-        <section className="py-16 md:py-20 bg-parchment">
+        <section className="py-16 md:py-24 bg-parchment">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
             {/* Same side */}
-            <div className="mb-12">
-              <p
-                className="font-sans text-[11px] font-light tracking-[0.22em] uppercase mb-5"
-                style={{ color: accent }}
-              >
-                {ownSideLabel}
-              </p>
+            <div className="mb-14">
+              <div className="mb-6">
+                <SectionLabel>{ownSideLabel}</SectionLabel>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
                 {sameSide.map((r) => (
                   <Link
                     key={r.slug}
                     to={slugToPath(r.slug)}
-                    className="group flex items-center justify-between gap-4 bg-card rounded-2xl border px-5 py-4 transition-colors hover:bg-card/80"
+                    className="group flex items-center justify-between gap-4 bg-card rounded-2xl border px-5 py-4 transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-30px_rgba(0,0,0,0.25)]"
                     style={{ borderColor: accentBorder }}
                   >
                     <span className="font-serif text-[1rem] text-foreground leading-snug">
                       {r.title}
                     </span>
-                    <ArrowRight
+                    <ChevronRight
                       size={15}
                       strokeWidth={1.8}
                       style={{ color: accent }}
@@ -308,12 +390,24 @@ const FirstYearTopicPage = ({ config }: Props) => {
 
             {/* Cross side — uses the other side's accent so pairing is visible. */}
             <div>
-              <p
-                className="font-sans text-[11px] font-light tracking-[0.22em] uppercase mb-5"
-                style={{ color: `hsl(var(${otherAccentToken}))` }}
-              >
-                From the other side
-              </p>
+              <div className="mb-6">
+                <div className="flex items-center gap-3">
+                  <span
+                    className="h-px w-8"
+                    style={{ background: `hsl(var(${otherAccentToken}) / 0.22)` }}
+                  />
+                  <span
+                    className="font-sans text-[11px] font-light tracking-[0.28em] uppercase"
+                    style={{ color: `hsl(var(${otherAccentToken}))` }}
+                  >
+                    From the other side
+                  </span>
+                  <span
+                    className="h-px w-8"
+                    style={{ background: `hsl(var(${otherAccentToken}) / 0.22)` }}
+                  />
+                </div>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
                 {crossSide.map((r) => {
                   const crossBorder = `hsl(var(${otherAccentToken}) / 0.16)`;
@@ -322,13 +416,13 @@ const FirstYearTopicPage = ({ config }: Props) => {
                     <Link
                       key={r.slug}
                       to={slugToPath(r.slug)}
-                      className="group flex items-center justify-between gap-4 bg-card rounded-2xl border px-5 py-4 transition-colors hover:bg-card/80"
+                      className="group flex items-center justify-between gap-4 bg-card rounded-2xl border px-5 py-4 transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-30px_rgba(0,0,0,0.25)]"
                       style={{ borderColor: crossBorder }}
                     >
                       <span className="font-serif text-[1rem] text-foreground leading-snug">
                         {r.title}
                       </span>
-                      <ArrowRight
+                      <ChevronRight
                         size={15}
                         strokeWidth={1.8}
                         style={{ color: crossAccent }}
@@ -344,11 +438,25 @@ const FirstYearTopicPage = ({ config }: Props) => {
 
         {/* ─── 6. GENTLE ENDCAP ──────────────────────────────────────── */}
         <section
-          className="py-14 md:py-20"
-          style={{ backgroundColor: `hsl(var(${theme.softToken}) / 0.35)` }}
+          className="py-16 md:py-24 relative overflow-hidden"
+          style={{ backgroundColor: `hsl(var(${theme.softToken}) / 0.4)` }}
         >
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl text-center">
-            <p className="font-serif italic text-[15px] md:text-base text-foreground/80 leading-relaxed mb-7 max-w-xl mx-auto">
+          <img
+            src={sprigWild}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="hidden md:block absolute -left-4 bottom-2 w-28 opacity-70 pointer-events-none"
+          />
+          <img
+            src={sprigWild}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="hidden md:block absolute -right-4 top-4 w-28 opacity-70 pointer-events-none scale-x-[-1]"
+          />
+          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl text-center relative z-10">
+            <p className="font-serif italic text-[16px] md:text-[1.15rem] text-foreground/80 leading-relaxed mb-7 max-w-xl mx-auto">
               {config.side === "baby"
                 ? "You don't have to read it all today. Take what's useful, leave the rest for when you need it."
                 : "Your recovery has its own pace. Come back to anything here when it feels right."}

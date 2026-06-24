@@ -32,6 +32,23 @@ const phases = [
   },
 ];
 
+// Secondary quick-navigation strip — supports the four phase cards, never replaces them.
+const ageItems: { label: string; href: string }[] = [
+  { label: "Newborn", href: "/first-year/0-3-months" },
+  { label: "1 month", href: "/first-year/0-3-months" },
+  { label: "2 months", href: "/first-year/0-3-months" },
+  { label: "3 months", href: "/first-year/0-3-months" },
+  { label: "4 months", href: "/first-year/3-6-months" },
+  { label: "5 months", href: "/first-year/3-6-months" },
+  { label: "6 months", href: "/first-year/3-6-months" },
+  { label: "7 months", href: "/first-year/6-9-months" },
+  { label: "8 months", href: "/first-year/6-9-months" },
+  { label: "9 months", href: "/first-year/6-9-months" },
+  { label: "10 months", href: "/first-year/9-12-months" },
+  { label: "11 months", href: "/first-year/9-12-months" },
+  { label: "12 months", href: "/first-year/9-12-months" },
+];
+
 const FYPhaseNav = () => {
   return (
     <section id="phases" className="bg-parchment py-14 md:py-16">
@@ -100,6 +117,47 @@ const FYPhaseNav = () => {
                     Open phase <ArrowUpRight size={12} />
                   </span>
                 </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Secondary quick navigation — generously spaced from the cards above */}
+        <div className="mt-16 md:mt-20">
+          <div
+            className="h-px w-full mb-10"
+            style={{ backgroundColor: "hsl(var(--border) / 0.6)" }}
+          />
+          <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-3 text-foreground/45">
+            Quick navigation
+          </p>
+          <h3 className="font-serif text-xl sm:text-[1.4rem] text-foreground leading-snug mb-2">
+            Go to your baby's age.
+          </h3>
+          <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed max-w-xl mb-6">
+            Use this as a quick way into the phase that fits where you are now.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {ageItems.map((a) => (
+              <Link
+                key={a.label}
+                to={a.href}
+                className="inline-flex items-center justify-center rounded-full px-4 min-h-[36px] font-sans text-[12px] font-light border transition-colors"
+                style={{
+                  backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.32)",
+                  color: "hsl(var(--stage-firstyear-deep))",
+                  borderColor: "hsl(var(--stage-firstyear-accent) / 0.22)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "hsl(var(--stage-firstyear-soft) / 0.55)";
+                  e.currentTarget.style.borderColor = "hsl(var(--stage-firstyear-accent) / 0.36)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "hsl(var(--stage-firstyear-soft) / 0.32)";
+                  e.currentTarget.style.borderColor = "hsl(var(--stage-firstyear-accent) / 0.22)";
+                }}
+              >
+                {a.label}
               </Link>
             ))}
           </div>

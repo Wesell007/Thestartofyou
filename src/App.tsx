@@ -238,7 +238,10 @@ const App = () => (
           <Route path="/ivf/after-transfer" element={<IVFAfterTransfer />} />
           <Route path="/ivf/early-pregnancy" element={<IVFEarlyPregnancy />} />
           <Route path="/ivf-timeline" element={<IVFTimeline />} />
-          <Route path="/postpartum" element={<Postpartum />} />
+          {/* Step 1 redirect: Postpartum now lives inside First Year as the Recovery track. */}
+          <Route path="/postpartum" element={<Navigate to="/first-year#recovery" replace />} />
+          {/* Legacy Postpartum hub preserved for reuse during the First Year rebuild. */}
+          <Route path="/postpartum/legacy" element={<Postpartum />} />
           <Route path="/first-year" element={<FirstYear />} />
           <Route path="/preparing-for-baby" element={<PreparingForBaby />} />
           <Route path="/support" element={<Support />} />

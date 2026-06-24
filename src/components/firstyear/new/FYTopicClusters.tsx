@@ -15,6 +15,8 @@ interface ColumnProps {
   anchor: string;
   eyebrow: string;
   heading: string;
+  /** Quiet editorial subtitle, sits under the column heading. */
+  subtitle: string;
   soft: string;
   accent: string;
   deep: string;
@@ -23,10 +25,10 @@ interface ColumnProps {
 
 const babyColumn: ColumnProps = {
   // anchor used for hero/sticky-nav deep links
-
   anchor: "baby-topics",
   eyebrow: "For your baby",
   heading: "Baby's first year",
+  subtitle: "Feeding, sleep, growing and the everyday questions.",
   soft: "--stage-firstyear-soft",
   accent: "--stage-firstyear-accent",
   deep: "--stage-firstyear-deep",
@@ -42,6 +44,7 @@ const recoveryColumn: ColumnProps = {
   anchor: "recovery-topics",
   eyebrow: "For you",
   heading: "Your postpartum recovery",
+  subtitle: "Healing, hormones, emotions and the slower work of return.",
   soft: "--stage-recovery-soft",
   accent: "--stage-recovery-accent",
   deep: "--stage-recovery-deep",

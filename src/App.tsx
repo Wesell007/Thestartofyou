@@ -69,6 +69,10 @@ import IVF from "./pages/IVF.tsx";
 // The legacy hub is kept at /postpartum/legacy for reference during rebuild.
 import Postpartum from "./pages/Postpartum.tsx";
 import FirstYear from "./pages/FirstYear.tsx";
+import FYPhaseZeroToThree from "./pages/firstyear/PhaseZeroToThree.tsx";
+import FYPhaseThreeToSix from "./pages/firstyear/PhaseThreeToSix.tsx";
+import FYPhaseSixToNine from "./pages/firstyear/PhaseSixToNine.tsx";
+import FYPhaseNineToTwelve from "./pages/firstyear/PhaseNineToTwelve.tsx";
 import FYFeeding from "./pages/firstyear/Feeding.tsx";
 import FYSleep from "./pages/firstyear/Sleep.tsx";
 import FYDevelopment from "./pages/firstyear/Development.tsx";
@@ -251,6 +255,11 @@ const App = () => (
           {/* Legacy Postpartum hub preserved for reuse during the First Year rebuild. */}
           <Route path="/postpartum/legacy" element={<Postpartum />} />
           <Route path="/first-year" element={<FirstYear />} />
+          {/* First Year phase bridge pages — must sit above /:journey/:stage */}
+          <Route path="/first-year/0-3-months" element={<FYPhaseZeroToThree />} />
+          <Route path="/first-year/3-6-months" element={<FYPhaseThreeToSix />} />
+          <Route path="/first-year/6-9-months" element={<FYPhaseSixToNine />} />
+          <Route path="/first-year/9-12-months" element={<FYPhaseNineToTwelve />} />
           {/* First Year topic landing pages (Step 3). One reusable template,
               eight thin wrappers, four per side. Must sit above the generic
               /:journey/:stage route and the catch-all. */}

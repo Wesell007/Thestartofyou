@@ -18,6 +18,7 @@ const navLinks = [
   // inside the First Year ecosystem as the "Recovery" track. The /postpartum
   // route is preserved but redirects to /first-year#recovery.
   { label: "First year", href: "/first-year" },
+  { label: "Toddler", href: "/toddler" },
   // NOTE: temporary route mapping — Journal label points to /product
   // until the route is renamed to /journal in a follow-up pass.
   { label: "Journal", href: "/product" },

@@ -74,7 +74,7 @@ const FYHero = () => {
         playsInline
         preload="auto"
         onError={() => setVideoState("paused")}
-        className="absolute inset-0 w-full h-full object-cover object-center"
+        className="absolute inset-0 w-full h-full object-cover object-center lg:object-[center_42%]"
       >
         <source src={firstyearHeroVideo.url} type="video/mp4" />
       </video>
@@ -133,7 +133,7 @@ const FYHero = () => {
 
           {/* Support line */}
           <p className="font-sans text-[17px] md:text-lg font-light text-muted-foreground leading-relaxed mb-10 max-w-lg">
-            Your baby is changing quickly. You're healing after birth. Both belong here.
+            Your baby will change quickly through the first year. You'll need support for postpartum recovery too.
           </p>
 
           {/* Two equal CTAs */}

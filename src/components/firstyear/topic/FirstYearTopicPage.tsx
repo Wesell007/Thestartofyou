@@ -415,24 +415,12 @@ const FirstYearTopicPage = ({ config }: Props) => {
         </section>
 
         {/* ─── 6. GENTLE ENDCAP ──────────────────────────────────────── */}
+        {/* Calm tonal wash — no sprigs, no decoration. Recovery side uses
+            a quieter opacity so the page doesn't end on a heavy block. */}
         <section
           className="py-16 md:py-24 relative overflow-hidden"
-          style={{ backgroundColor: `hsl(var(${theme.softToken}) / 0.4)` }}
+          style={{ backgroundColor: `hsl(var(${theme.softToken}) / ${endcapBgOpacity})` }}
         >
-          <img
-            src={sprigWild}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            className="hidden md:block absolute -left-4 bottom-2 w-28 opacity-70 pointer-events-none"
-          />
-          <img
-            src={sprigWild}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            className="hidden md:block absolute -right-4 top-4 w-28 opacity-70 pointer-events-none scale-x-[-1]"
-          />
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl text-center relative z-10">
             <p className="font-serif italic text-[16px] md:text-[1.15rem] text-foreground/80 leading-relaxed mb-7 max-w-xl mx-auto">
               {config.side === "baby"

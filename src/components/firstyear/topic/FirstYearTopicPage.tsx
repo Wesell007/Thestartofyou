@@ -277,8 +277,8 @@ const FirstYearTopicPage = ({ config }: Props) => {
                     />
                     {/* Subtle topic tint — harmonises mixed photography */}
                     <div
-                      className="absolute inset-0 mix-blend-multiply opacity-[0.07] pointer-events-none"
-                      style={{ backgroundColor: accent }}
+                      className="absolute inset-0 mix-blend-multiply pointer-events-none"
+                      style={{ backgroundColor: accent, opacity: photoTintOpacity }}
                       aria-hidden
                     />
                     {item.tag && (

@@ -78,6 +78,12 @@
     --stage-recovery-soft: 320 18% 87%;
     --stage-recovery-accent: 320 22% 44%;
     --stage-recovery-deep: 320 28% 30%;
+    /* Toddler ecosystem — warm oat / sand / muted honey / sun-warmed stone.
+       Deliberately not bright yellow or orange; calm and premium. */
+    --stage-toddler: 38 28% 93%;
+    --stage-toddler-soft: 36 32% 87%;
+    --stage-toddler-accent: 32 38% 42%;
+    --stage-toddler-deep: 28 36% 24%;
     --stage-preparing: 42 24% 94%;
     --stage-preparing-accent: 42 38% 44%;
     --stage-support: 260 20% 94%;

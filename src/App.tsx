@@ -81,6 +81,7 @@ import FYPostpartumRecovery from "./pages/firstyear/PostpartumRecovery.tsx";
 import FYEmotionalWellbeing from "./pages/firstyear/EmotionalWellbeing.tsx";
 import FYBodyAndHormones from "./pages/firstyear/BodyAndHormones.tsx";
 import FYCheckupsAndWarningSigns from "./pages/firstyear/CheckupsAndWarningSigns.tsx";
+import Toddler from "./pages/Toddler.tsx";
 import PreparingForBaby from "./pages/PreparingForBaby.tsx";
 import Support from "./pages/Support.tsx";
 import About from "./pages/About.tsx";
@@ -271,6 +272,8 @@ const App = () => (
           <Route path="/first-year/emotional-wellbeing" element={<FYEmotionalWellbeing />} />
           <Route path="/first-year/body-and-hormones" element={<FYBodyAndHormones />} />
           <Route path="/first-year/checkups-and-warning-signs" element={<FYCheckupsAndWarningSigns />} />
+          {/* Toddler hub foundation — sits above /:journey/:stage and catch-all. */}
+          <Route path="/toddler" element={<Toddler />} />
           <Route path="/preparing-for-baby" element={<PreparingForBaby />} />
           <Route path="/support" element={<Support />} />
           <Route path="/about" element={<About />} />

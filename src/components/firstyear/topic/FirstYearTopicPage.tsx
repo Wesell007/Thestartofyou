@@ -11,10 +11,9 @@ import {
   FirstYearFeaturedItem,
 } from "@/data/firstYearTopicData";
 
-// Subtle botanical motifs — shared with PregnancyTopicPage so the First Year
-// system feels part of the same editorial family without copying it.
-import sprigMini from "@/assets/topic-mini-sprig.png";
-import sprigWild from "@/assets/topic-wildflower-sprig.png";
+// First Year topic pages are photo-led and calm. No botanical sprigs or
+// pregnancy-style decorative motifs — quietness comes from soft tints,
+// gentle borders and restrained spacing.
 
 interface Props {
   config: FirstYearTopicConfig;

@@ -69,6 +69,14 @@ import IVF from "./pages/IVF.tsx";
 // The legacy hub is kept at /postpartum/legacy for reference during rebuild.
 import Postpartum from "./pages/Postpartum.tsx";
 import FirstYear from "./pages/FirstYear.tsx";
+import FYFeeding from "./pages/firstyear/Feeding.tsx";
+import FYSleep from "./pages/firstyear/Sleep.tsx";
+import FYDevelopment from "./pages/firstyear/Development.tsx";
+import FYCareAndSafety from "./pages/firstyear/CareAndSafety.tsx";
+import FYPostpartumRecovery from "./pages/firstyear/PostpartumRecovery.tsx";
+import FYEmotionalWellbeing from "./pages/firstyear/EmotionalWellbeing.tsx";
+import FYBodyAndHormones from "./pages/firstyear/BodyAndHormones.tsx";
+import FYCheckupsAndWarningSigns from "./pages/firstyear/CheckupsAndWarningSigns.tsx";
 import PreparingForBaby from "./pages/PreparingForBaby.tsx";
 import Support from "./pages/Support.tsx";
 import About from "./pages/About.tsx";
@@ -243,6 +251,17 @@ const App = () => (
           {/* Legacy Postpartum hub preserved for reuse during the First Year rebuild. */}
           <Route path="/postpartum/legacy" element={<Postpartum />} />
           <Route path="/first-year" element={<FirstYear />} />
+          {/* First Year topic landing pages (Step 3). One reusable template,
+              eight thin wrappers, four per side. Must sit above the generic
+              /:journey/:stage route and the catch-all. */}
+          <Route path="/first-year/feeding" element={<FYFeeding />} />
+          <Route path="/first-year/sleep" element={<FYSleep />} />
+          <Route path="/first-year/development" element={<FYDevelopment />} />
+          <Route path="/first-year/care-and-safety" element={<FYCareAndSafety />} />
+          <Route path="/first-year/postpartum-recovery" element={<FYPostpartumRecovery />} />
+          <Route path="/first-year/emotional-wellbeing" element={<FYEmotionalWellbeing />} />
+          <Route path="/first-year/body-and-hormones" element={<FYBodyAndHormones />} />
+          <Route path="/first-year/checkups-and-warning-signs" element={<FYCheckupsAndWarningSigns />} />
           <Route path="/preparing-for-baby" element={<PreparingForBaby />} />
           <Route path="/support" element={<Support />} />
           <Route path="/about" element={<About />} />

@@ -1,66 +1,72 @@
-# /first-year — hero + clarity correction
 
-Surgical top-of-page pass. Nothing from `FYAISupport` downward changes.
+# /first-year — hero media correction (video)
 
-## 1. `FYHero.tsx` — clarity + media + composition
+Surgical pass on the hero only. Nothing from `FYWhatThisCovers` downward changes.
 
-**Headline (explicit postpartum):**
-*Their first year, and **your postpartum recovery**.*
-- "your postpartum recovery" italic, coloured `--stage-recovery-deep`.
-- Same serif scale family, slight bump for anchor presence: `text-4xl sm:text-5xl md:text-[3.75rem]`, `leading-[1.04]`.
+## 1. Generate the hero video
 
-**Support line (one calm line, three soft beats):**
-*Your baby is changing quickly. You're healing after birth. Both belong here.*
-- Keep single paragraph, light weight, slightly larger: `text-[17px] md:text-lg`.
+Use `videogen--generate_video` to create one premium 10s loopable clip.
 
-**Media treatment — restore image clarity:**
-- Keep `firstyear-scene.jpg`, still image only.
-- Reduce parchment veil substantially:
-  - Desktop gradient: `from-parchment/85 via-parchment/55 to-parchment/10` (was `from-parchment via-parchment/85 to-parchment/25`).
-  - Mobile veil: `from-parchment/80 via-parchment/55 to-parchment/20` (was `from-parchment via-parchment/80 to-parchment/40`).
-  - Remove the extra solid `bg-parchment/70` base layer that's currently flattening the image — replace with a very light `bg-parchment/15` wash for cohesion only.
-- Dual-tone bottom wash: keep, lower opacity slightly (`0.45` / `0.4`) so it stays subtle against the now-visible image.
-- No darkening, no dramatic gradients.
+- target_path: `src/assets/firstyear-hero-video.mp4`
+- resolution: `1080p`, aspect_ratio: `16:9`, duration: `10`, camera_fixed: `true`
+- Prompt:
+  > A parent and baby in a calm home moment, soft daylight interior. Quiet closeness on a bed, chair, or soft blanket, with small nearby signs of care such as tea, a muslin cloth, a notebook, or a feeding cloth. Gentle natural light across neutral cream and sage textures. Subtle documentary stillness. Premium, calm, editorial. No faces in focus, no text, no logos, no fast cuts, no walking, no advertising energy.
 
-**Composition (no new elements):**
-- Eyebrow → headline gap: `mb-7` (was 6).
-- Headline → support line: `mb-6`.
-- Support line → CTAs: `mb-10`.
-- Max-width of text block: `max-w-[640px]` so headline anchors more confidently.
-- Hero height unchanged: `min-h-[70vh]` / `md:min-h-[78vh]`.
+Then upload via the Lovable Assets CLI so the binary is CDN-hosted:
 
-**CTAs (equal clarity + weight):**
-- Left: **Baby's first year** → `#baby-topics` (filled `--stage-firstyear-deep`).
-- Right: **Your postpartum recovery** → `#recovery-topics` (filled `--stage-recovery-deep`).
-- Identical size, padding, font weight; widen `min-w-[220px]` to fit the longer label without wrap.
+```bash
+lovable-assets create --file src/assets/firstyear-hero-video.mp4 \
+  --filename firstyear-hero-video.mp4 \
+  > src/assets/firstyear-hero-video.mp4.asset.json
+rm src/assets/firstyear-hero-video.mp4
+```
 
-## 2. `FYWhatThisCovers.tsx` — strengthen as intentional bridge
+The committed pointer (`firstyear-hero-video.mp4.asset.json`) mirrors the shape of `home-hero-video-new.mp4.asset.json`.
 
-Stay single column, single paragraph. Do not re-split.
+## 2. `FYHero.tsx` — swap still → video
 
-- Vertical padding up: `py-14 md:py-20` (was `py-8 md:py-10`).
-- Heading bumped from tiny eyebrow to small serif:
-  - Replace uppercase micro-eyebrow with a serif sub-heading: `font-serif text-2xl md:text-[1.75rem] text-foreground mb-5` — *What you'll find here*.
-  - Keep a thin sage rule above it (`h-px w-10 bg-foreground/25 mb-5`) for editorial anchoring.
-- Paragraph: bump to `text-base md:text-[17px]`, `leading-[1.75]`, `text-muted-foreground`, max-width `max-w-2xl`.
-- Copy unchanged:
-  *"Month-by-month guidance for your baby, from feeding and sleep to development and care. Alongside it, equal space for your postpartum recovery — healing, hormones, mood and the check-ups that matter."*
-  (One word change: "recovery" → "postpartum recovery" for consistency with hero.)
-- Centered column, parchment background retained.
+Mirror the proven pattern in `src/components/home/NewHeroSection.tsx`, trimmed.
 
-## 3. `src/pages/FirstYear.tsx`
-No structural changes. Touch only if a wrapper spacing tweak is needed between hero and bridge — currently not required; leave as-is.
+- Remove `import firstyearScene from "@/assets/firstyear-scene.jpg"`.
+- Add `import firstyearHeroVideo from "@/assets/firstyear-hero-video.mp4.asset.json"`.
+- Replace the `<img>` with:
+  ```tsx
+  <video
+    ref={videoRef}
+    autoPlay muted loop playsInline preload="auto"
+    onError={() => setVideoState("paused")}
+    className="absolute inset-0 w-full h-full object-cover object-center"
+  >
+    <source src={firstyearHeroVideo.url} type="video/mp4" />
+  </video>
+  ```
+- Port the trimmed `useEffect` from `NewHeroSection` that listens for `canplay` / `playing`, attempts `video.play()`, and flips `videoState` between `"loading" | "playing" | "paused"`. No poster image.
+- If `videoState === "paused"`, render a small parchment play affordance (same button styling pattern as `NewHeroSection`, centered, `bg-parchment/60 backdrop-blur-sm rounded-full p-4`). No full still-image takeover.
 
-## Guardrails honoured
-- Hero remains the single paired-introduction moment.
-- Recovery CTA equal in weight and clarity to baby CTA.
-- No new sections, no Step 3, no topic-page work, no route changes.
-- Nothing from `FYAISupport` downward touched.
-- No TTC / IVF / Pregnancy files touched.
+## 3. Overlay rebalance — let the footage live
 
-## Files touched
-- `src/components/firstyear/new/FYHero.tsx`
-- `src/components/firstyear/new/FYWhatThisCovers.tsx`
+Inside the hero, restructure the absolute-fill veil layers:
+
+- Delete the flat `bg-parchment/15` base wash.
+- Desktop veil: `hidden md:block bg-gradient-to-r from-parchment/80 via-parchment/40 to-parchment/0`.
+- Mobile veil: `md:hidden bg-gradient-to-b from-parchment/65 via-parchment/35 to-parchment/5`.
+- New soft bottom vignette: `absolute inset-x-0 bottom-0 h-40 pointer-events-none bg-gradient-to-t from-parchment/55 via-parchment/15 to-transparent`.
+- Keep the dual-tone first-year / recovery wash at the bottom, lowered to `0.35` / `0.3` opacity (reads as temperature, not fog).
+- No darkening filter, no `mix-blend-multiply`, no heavy blur added.
+
+## 4. Copy + CTAs (unchanged)
+
+- Eyebrow: "First year"
+- Headline: *Their first year, and **your postpartum recovery**.* (italic in `--stage-recovery-deep`)
+- Support: *Your baby is changing quickly. You're healing after birth. Both belong here.*
+- CTAs unchanged, equal weight: "Baby's first year" → `#baby-topics` (`--stage-firstyear-deep`); "Your postpartum recovery" → `#recovery-topics` (`--stage-recovery-deep`); `min-w-[220px]`.
+
+## 5. Files touched
+
+- `src/components/firstyear/new/FYHero.tsx` — video swap, play-fallback handler, overlay rebalance.
+- `src/assets/firstyear-hero-video.mp4.asset.json` — new asset pointer (CLI output, not hand-written).
+
+Untouched: `FYWhatThisCovers`, `FYTopicClusters`, `FYStickyTrackNav`, `FYAISupport`, everything below. No TTC / IVF / Pregnancy / Postpartum files. No routes. Step 3 not started.
 
 ## Return after build
-A. Changed files · B. Final hero headline · C. Postpartum clarity changes · D. Hero image treatment correction · E. Bridge section strengthening · F. Confirmation rest of hub untouched.
+A. Changed files · B. Confirm video, not still · C. How video was sourced (`videogen--generate_video` + `lovable-assets`) · D. Overlay tuning · E. Confirm rest of hub untouched.

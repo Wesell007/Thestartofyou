@@ -1,39 +1,114 @@
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import firstyearScene from "@/assets/firstyear-scene.jpg";
+import { Play } from "lucide-react";
+import firstyearHeroVideo from "@/assets/firstyear-hero-video.mp4.asset.json";
 
 /**
- * Premium still-image hero — single dual-entry moment.
- * Image is visible and emotionally useful; veil is restrained.
+ * Premium video hero — single dual-entry moment.
+ * Calm editorial footage, restrained veil.
  */
 const FYHero = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoState, setVideoState] = useState<"loading" | "playing" | "paused">("loading");
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    let cancelled = false;
+
+    const onPlaying = () => {
+      if (!cancelled) setVideoState("playing");
+    };
+    video.addEventListener("playing", onPlaying);
+
+    const attemptPlay = async () => {
+      try {
+        video.muted = true;
+        await video.play();
+        if (!cancelled) setVideoState("playing");
+      } catch {
+        if (!cancelled) setVideoState("paused");
+      }
+    };
+
+    if (video.readyState >= 3) {
+      attemptPlay();
+    } else {
+      video.addEventListener("canplay", attemptPlay, { once: true });
+    }
+
+    const timeout = setTimeout(() => {
+      if (!cancelled && video.paused) setVideoState("paused");
+    }, 5000);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timeout);
+      video.removeEventListener("canplay", attemptPlay);
+      video.removeEventListener("playing", onPlaying);
+    };
+  }, []);
+
+  const handleTapToPlay = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.currentTime = 0;
+    const p = video.play();
+    if (p !== undefined) {
+      p.then(() => setVideoState("playing")).catch(() => setVideoState("paused"));
+    }
+  }, []);
+
   return (
     <section
       id="first-year-top"
       className="relative overflow-hidden min-h-[70vh] md:min-h-[78vh] flex items-center pt-28 pb-16 md:pb-20"
     >
-      {/* Full-bleed image */}
-      <img
-        src={firstyearScene}
-        alt=""
-        aria-hidden="true"
+      {/* Video background */}
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        onError={() => setVideoState("paused")}
         className="absolute inset-0 w-full h-full object-cover object-center"
-      />
+      >
+        <source src={firstyearHeroVideo.url} type="video/mp4" />
+      </video>
 
-      {/* Very light cohesion wash + soft veil for text legibility */}
-      <div className="absolute inset-0 bg-parchment/15" />
-      <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-parchment/85 via-parchment/55 to-parchment/10" />
-      <div className="absolute inset-0 md:hidden bg-gradient-to-b from-parchment/80 via-parchment/55 to-parchment/20" />
+      {/* Tap-to-play affordance when autoplay is blocked */}
+      {videoState === "paused" && (
+        <button
+          onClick={handleTapToPlay}
+          className="absolute inset-0 z-20 flex items-center justify-center bg-transparent cursor-pointer"
+          aria-label="Play video"
+        >
+          <div className="bg-parchment/60 backdrop-blur-sm rounded-full p-4 shadow-lg hover:bg-parchment/80 transition-all duration-300">
+            <Play size={28} className="text-foreground/70 ml-0.5" />
+          </div>
+        </button>
+      )}
 
-      {/* Subtle dual-tone wash at the bottom edge */}
+      {/* Veil — desktop weighted left, mobile weighted bottom */}
+      <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-parchment/80 via-parchment/40 to-parchment/0" />
+      <div className="absolute inset-0 md:hidden bg-gradient-to-b from-parchment/65 via-parchment/35 to-parchment/5" />
+
+      {/* Soft bottom vignette to ground CTAs */}
+      <div className="absolute inset-x-0 bottom-0 h-40 pointer-events-none bg-gradient-to-t from-parchment/55 via-parchment/15 to-transparent" />
+
+      {/* Dual-tone temperature wash at the bottom edge */}
       <div className="absolute inset-x-0 bottom-0 h-40 pointer-events-none flex">
         <div
           className="w-1/3 h-full blur-3xl opacity-60"
-          style={{ backgroundColor: 'hsl(var(--stage-firstyear-soft) / 0.45)' }}
+          style={{ backgroundColor: 'hsl(var(--stage-firstyear-soft) / 0.35)' }}
         />
         <div className="w-1/3" />
         <div
           className="w-1/3 h-full blur-3xl opacity-60"
-          style={{ backgroundColor: 'hsl(var(--stage-recovery-soft) / 0.4)' }}
+          style={{ backgroundColor: 'hsl(var(--stage-recovery-soft) / 0.3)' }}
         />
       </div>
 

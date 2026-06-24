@@ -8,7 +8,7 @@ const FYStickyTrackNav = () => {
       <div className="container mx-auto px-5 max-w-5xl">
         <div className="flex items-stretch h-11">
           <a
-            href="#baby"
+            href="#baby-topics"
             className="flex-1 flex items-center justify-center gap-2 font-sans text-[12px] font-light"
             style={{ color: 'hsl(var(--stage-firstyear-deep))' }}
           >
@@ -17,7 +17,7 @@ const FYStickyTrackNav = () => {
           </a>
           <div className="w-px bg-border/50" />
           <a
-            href="#recovery"
+            href="#recovery-topics"
             className="flex-1 flex items-center justify-center gap-2 font-sans text-[12px] font-light"
             style={{ color: 'hsl(var(--stage-recovery-deep))' }}
           >

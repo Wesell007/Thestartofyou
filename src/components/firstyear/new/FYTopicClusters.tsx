@@ -15,7 +15,9 @@ interface ColumnProps {
 }
 
 const babyColumn: ColumnProps = {
-  anchor: "baby",
+  // anchor used for hero/sticky-nav deep links
+
+  anchor: "baby-topics",
   eyebrow: "For your baby",
   heading: "Baby's first year",
   soft: "--stage-firstyear-soft",
@@ -30,7 +32,7 @@ const babyColumn: ColumnProps = {
 };
 
 const recoveryColumn: ColumnProps = {
-  anchor: "recovery",
+  anchor: "recovery-topics",
   eyebrow: "For you",
   heading: "Your postpartum recovery",
   soft: "--stage-recovery-soft",

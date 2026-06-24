@@ -1,19 +1,51 @@
+/**
+ * Bridging strip — sits between the Two-Track Entry and AI Support.
+ * Two short columns side by side so the dual model is reinforced, not re-introduced.
+ */
 const FYWhatThisCovers = () => {
   return (
-    <section className="bg-parchment py-14 md:py-20">
-      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
-        <p
-          className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
-          style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
-        >
+    <section className="bg-parchment py-12 md:py-14">
+      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl">
+        <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-5 text-foreground/60">
           What this hub covers
         </p>
-        <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-5">
-          Two parallel tracks, held in one place.
-        </h2>
-        <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed max-w-2xl">
-          <span className="text-foreground font-normal">Baby's first year</span> covers feeding, sleep, development and care across twelve months of change. <span className="text-foreground font-normal">Your postpartum recovery</span> covers physical healing, emotional wellbeing, hormones, and the check-ups that matter. Both move at their own pace, and both belong here.
-        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+          <div className="flex gap-4">
+            <span
+              className="w-0.5 shrink-0 rounded-full"
+              style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.5)' }}
+            />
+            <div>
+              <p
+                className="font-sans text-[10px] font-light tracking-[0.22em] uppercase mb-2"
+                style={{ color: 'hsl(var(--stage-firstyear-deep))' }}
+              >
+                Baby's first year
+              </p>
+              <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">
+                Feeding, sleep, development and care across twelve months — held together so you can find the bit you need without losing the bigger picture.
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <span
+              className="w-0.5 shrink-0 rounded-full"
+              style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.5)' }}
+            />
+            <div>
+              <p
+                className="font-sans text-[10px] font-light tracking-[0.22em] uppercase mb-2"
+                style={{ color: 'hsl(var(--stage-recovery-deep))' }}
+              >
+                Your postpartum recovery
+              </p>
+              <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">
+                Physical healing, hormones, emotional wellbeing and the check-ups that matter — a real recovery, treated as a track of its own.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

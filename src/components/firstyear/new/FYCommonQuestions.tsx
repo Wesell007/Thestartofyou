@@ -17,39 +17,45 @@ const trackStyle = (t: Track) =>
     ? {
         color: 'hsl(var(--stage-firstyear-deep))',
         bg: 'hsl(var(--stage-firstyear-soft) / 0.5)',
+        rowBg: 'hsl(var(--stage-firstyear-soft) / 0.18)',
         border: 'hsl(var(--stage-firstyear-accent) / 0.25)',
         label: 'Baby',
       }
     : {
         color: 'hsl(var(--stage-recovery-deep))',
         bg: 'hsl(var(--stage-recovery-soft) / 0.5)',
+        rowBg: 'hsl(var(--stage-recovery-soft) / 0.16)',
         border: 'hsl(var(--stage-recovery-accent) / 0.25)',
         label: 'Recovery',
       };
 
 const FYCommonQuestions = () => {
   return (
-    <section className="bg-parchment py-14 md:py-20">
+    <section className="bg-parchment py-14 md:py-16">
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
-        <p
-          className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-3"
-          style={{ color: 'hsl(var(--stage-firstyear-accent))' }}
-        >
-          Common questions
-        </p>
+        <div className="flex items-center gap-1.5 mb-3">
+          <span className="h-px w-8" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.6)' }} />
+          <span className="h-px w-8" style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.6)' }} />
+          <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase ml-2 text-foreground/60">
+            Common questions · both tracks
+          </p>
+        </div>
         <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-8">
           The ones parents ask most.
         </h2>
 
-        <div>
+        <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'hsl(var(--border) / 0.6)' }}>
           {questions.map((item, i) => {
             const s = trackStyle(item.track);
             return (
               <Link
                 key={i}
                 to={`/ask?q=${encodeURIComponent(item.q)}&ctx=First+year+hub&journey=${item.track === 'baby' ? 'firstyear' : 'recovery'}`}
-                className="group flex items-center justify-between gap-4 py-4 sm:py-5 border-b transition-all"
-                style={{ borderColor: 'hsl(var(--border) / 0.6)' }}
+                className="group flex items-center justify-between gap-4 px-4 sm:px-5 py-4 sm:py-5 border-b last:border-b-0 transition-all hover:brightness-[0.98]"
+                style={{
+                  borderColor: 'hsl(var(--border) / 0.5)',
+                  backgroundColor: s.rowBg,
+                }}
               >
                 <div className="flex items-start gap-3 min-w-0 flex-1">
                   <span

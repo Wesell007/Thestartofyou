@@ -1,65 +1,113 @@
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
+/**
+ * Dual-band hero — calm and premium, not dramatic.
+ * Shared headline sits above two equal track bands so the dual-track model is visible
+ * before any scrolling, while keeping the editorial restraint of the rest of the site.
+ */
 const FYHero = () => {
   return (
     <section
       id="first-year-top"
-      className="relative overflow-hidden flex flex-col justify-center pt-28 pb-16 md:pb-24 min-h-[auto] md:min-h-[78vh]"
-      style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.45)' }}
+      className="relative overflow-hidden pt-28 pb-12 md:pb-16"
     >
-      {/* Dual-tone ambient — blue-grey (baby) + mauve-plum (recovery) */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-[12%] left-[8%] w-[460px] h-[460px] rounded-full blur-3xl"
-          style={{ backgroundColor: 'hsl(var(--stage-firstyear-soft) / 0.55)' }}
-        />
-        <div
-          className="absolute bottom-[10%] right-[6%] w-[420px] h-[420px] rounded-full blur-3xl"
-          style={{ backgroundColor: 'hsl(var(--stage-recovery-soft) / 0.45)' }}
-        />
-      </div>
+      {/* Soft ambient wash */}
+      <div className="absolute inset-0 pointer-events-none bg-parchment" />
+      <div
+        className="absolute -top-32 -left-24 w-[520px] h-[520px] rounded-full blur-3xl opacity-60 pointer-events-none"
+        style={{ backgroundColor: 'hsl(var(--stage-firstyear-soft) / 0.5)' }}
+      />
+      <div
+        className="absolute -bottom-32 -right-24 w-[520px] h-[520px] rounded-full blur-3xl opacity-60 pointer-events-none"
+        style={{ backgroundColor: 'hsl(var(--stage-recovery-soft) / 0.45)' }}
+      />
 
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl relative z-10">
-        {/* Dual-track colour trail */}
+        {/* Shared eyebrow */}
         <div className="flex items-center gap-1.5 mb-6">
-          <div className="h-0.5 w-14 rounded-full" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.6)' }} />
-          <div className="h-0.5 w-14 rounded-full" style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.6)' }} />
-          <span
-            className="font-sans text-[11px] font-light tracking-[0.3em] uppercase ml-2"
-            style={{ color: 'hsl(var(--stage-firstyear-deep))' }}
-          >
-            First Year
+          <div className="h-0.5 w-10 rounded-full" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.7)' }} />
+          <div className="h-0.5 w-10 rounded-full" style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.7)' }} />
+          <span className="font-sans text-[11px] font-light tracking-[0.3em] uppercase ml-2 text-foreground/70">
+            First Year · One hub, two tracks
           </span>
         </div>
 
-        <h1 className="font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-foreground mb-5 leading-[1.06] max-w-3xl">
-          Their first year. <span className="italic" style={{ color: 'hsl(var(--stage-recovery-deep))' }}>Your recovery.</span> One journey.
+        {/* Shared headline */}
+        <h1 className="font-serif text-4xl sm:text-5xl md:text-[3.25rem] text-foreground mb-4 leading-[1.06] max-w-3xl">
+          Their first year. <span className="italic" style={{ color: 'hsl(var(--stage-recovery-deep))' }}>Your recovery.</span> Held together.
         </h1>
-        <p className="font-sans text-base md:text-lg font-light text-muted-foreground leading-relaxed mb-5 max-w-2xl">
-          Twelve months of development for your baby, and a real, ongoing recovery for you. This hub holds both, with equal care, so you don't have to choose which one to learn about first.
-        </p>
-        <p
-          className="font-serif italic text-sm md:text-base text-foreground/55 mb-9 max-w-xl"
-        >
-          You are not just keeping up with them. You are still healing too.
+        <p className="font-sans text-base md:text-[17px] font-light text-muted-foreground leading-relaxed mb-10 max-w-2xl">
+          Twelve months for your baby, and a real recovery for you. Two parallel tracks inside one hub, so you never have to choose which one to learn about first.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-start gap-3.5">
-          <Link
-            to="#two-track"
-            className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
+        {/* Dual track bands */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+          {/* Baby band */}
+          <div
+            className="relative rounded-2xl border p-6 md:p-7 flex flex-col"
+            style={{
+              backgroundColor: 'hsl(var(--stage-firstyear) / 0.55)',
+              borderColor: 'hsl(var(--stage-firstyear-accent) / 0.22)',
+            }}
           >
-            <ArrowUpRight size={15} />
-            Start your first year
-          </Link>
-          <Link
-            to="#phases"
-            className="inline-flex items-center gap-2.5 border border-foreground/15 text-foreground rounded-pill px-6 py-3 font-sans text-[13px] font-light hover:bg-card transition-all duration-300"
+            <div
+              className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl"
+              style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.7)' }}
+            />
+            <p
+              className="font-sans text-[10px] font-light tracking-[0.22em] uppercase mb-2"
+              style={{ color: 'hsl(var(--stage-firstyear-deep))' }}
+            >
+              Track One · Baby
+            </p>
+            <h2 className="font-serif text-xl md:text-[1.4rem] text-foreground leading-snug mb-2">
+              Baby's first year
+            </h2>
+            <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mb-5">
+              Feeding, sleep, milestones and care across twelve months of change.
+            </p>
+            <Link
+              to="#baby"
+              className="mt-auto inline-flex items-center gap-1.5 font-sans text-[12px] font-medium self-start"
+              style={{ color: 'hsl(var(--stage-firstyear-deep))' }}
+            >
+              Enter baby track <ArrowUpRight size={13} />
+            </Link>
+          </div>
+
+          {/* Recovery band */}
+          <div
+            className="relative rounded-2xl border p-6 md:p-7 flex flex-col"
+            style={{
+              backgroundColor: 'hsl(var(--stage-recovery) / 0.55)',
+              borderColor: 'hsl(var(--stage-recovery-accent) / 0.22)',
+            }}
           >
-            <ArrowDown size={15} />
-            Jump to your phase
-          </Link>
+            <div
+              className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl"
+              style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.7)' }}
+            />
+            <p
+              className="font-sans text-[10px] font-light tracking-[0.22em] uppercase mb-2"
+              style={{ color: 'hsl(var(--stage-recovery-deep))' }}
+            >
+              Track Two · You
+            </p>
+            <h2 className="font-serif text-xl md:text-[1.4rem] text-foreground leading-snug mb-2">
+              Your postpartum recovery
+            </h2>
+            <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mb-5">
+              Physical healing, hormones, emotional wellbeing and check-ups that matter.
+            </p>
+            <Link
+              to="#recovery"
+              className="mt-auto inline-flex items-center gap-1.5 font-sans text-[12px] font-medium self-start"
+              style={{ color: 'hsl(var(--stage-recovery-deep))' }}
+            >
+              Enter recovery track <ArrowUpRight size={13} />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

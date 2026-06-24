@@ -15,6 +15,8 @@ interface ColumnProps {
   anchor: string;
   eyebrow: string;
   heading: string;
+  /** Quiet editorial subtitle, sits under the column heading. */
+  subtitle: string;
   soft: string;
   accent: string;
   deep: string;
@@ -23,10 +25,10 @@ interface ColumnProps {
 
 const babyColumn: ColumnProps = {
   // anchor used for hero/sticky-nav deep links
-
   anchor: "baby-topics",
   eyebrow: "For your baby",
   heading: "Baby's first year",
+  subtitle: "Feeding, sleep, growing and the everyday questions.",
   soft: "--stage-firstyear-soft",
   accent: "--stage-firstyear-accent",
   deep: "--stage-firstyear-deep",
@@ -42,6 +44,7 @@ const recoveryColumn: ColumnProps = {
   anchor: "recovery-topics",
   eyebrow: "For you",
   heading: "Your postpartum recovery",
+  subtitle: "Healing, hormones, emotions and the slower work of return.",
   soft: "--stage-recovery-soft",
   accent: "--stage-recovery-accent",
   deep: "--stage-recovery-deep",
@@ -97,22 +100,27 @@ const ClusterCard = ({ c, accent, soft, deep }: { c: Cluster; accent: string; so
 
 const Column = ({ col }: { col: ColumnProps }) => (
   <div id={col.anchor} className="flex flex-col scroll-mt-24">
-    <div className="mb-5 md:mb-6 flex items-center gap-3">
-      <span
-        className="w-1.5 h-6 rounded-full"
-        style={{ backgroundColor: `hsl(var(${col.accent}))` }}
-      />
-      <div>
-        <p
-          className="font-sans text-[10px] font-light tracking-[0.22em] uppercase"
-          style={{ color: `hsl(var(${col.deep}))` }}
-        >
-          {col.eyebrow}
-        </p>
-        <h3 className="font-serif text-xl sm:text-[1.4rem] text-foreground leading-snug">
-          {col.heading}
-        </h3>
+    <div className="mb-5 md:mb-6">
+      <div className="flex items-center gap-3">
+        <span
+          className="w-1.5 h-6 rounded-full"
+          style={{ backgroundColor: `hsl(var(${col.accent}))` }}
+        />
+        <div>
+          <p
+            className="font-sans text-[10px] font-light tracking-[0.22em] uppercase"
+            style={{ color: `hsl(var(${col.deep}))` }}
+          >
+            {col.eyebrow}
+          </p>
+          <h3 className="font-serif text-xl sm:text-[1.4rem] text-foreground leading-snug">
+            {col.heading}
+          </h3>
+        </div>
       </div>
+      <p className="mt-2.5 ml-[18px] font-sans text-[12.5px] font-light text-muted-foreground/85 leading-relaxed max-w-xs">
+        {col.subtitle}
+      </p>
     </div>
     <div className="grid grid-cols-1 gap-3.5">
       {col.clusters.map((c) => (

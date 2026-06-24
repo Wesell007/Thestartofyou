@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -64,6 +64,9 @@ import DueDateResults from "./pages/DueDateResults.tsx";
 import TTC from "./pages/TTC.tsx";
 import TTCHub from "./pages/TTCHub.tsx";
 import IVF from "./pages/IVF.tsx";
+// Postpartum: preserved in code for reuse, but no longer a live top-level
+// destination. /postpartum redirects into the First Year ecosystem.
+// The legacy hub is kept at /postpartum/legacy for reference during rebuild.
 import Postpartum from "./pages/Postpartum.tsx";
 import FirstYear from "./pages/FirstYear.tsx";
 import PreparingForBaby from "./pages/PreparingForBaby.tsx";
@@ -235,7 +238,10 @@ const App = () => (
           <Route path="/ivf/after-transfer" element={<IVFAfterTransfer />} />
           <Route path="/ivf/early-pregnancy" element={<IVFEarlyPregnancy />} />
           <Route path="/ivf-timeline" element={<IVFTimeline />} />
-          <Route path="/postpartum" element={<Postpartum />} />
+          {/* Step 1 redirect: Postpartum now lives inside First Year as the Recovery track. */}
+          <Route path="/postpartum" element={<Navigate to="/first-year#recovery" replace />} />
+          {/* Legacy Postpartum hub preserved for reuse during the First Year rebuild. */}
+          <Route path="/postpartum/legacy" element={<Postpartum />} />
           <Route path="/first-year" element={<FirstYear />} />
           <Route path="/preparing-for-baby" element={<PreparingForBaby />} />
           <Route path="/support" element={<Support />} />

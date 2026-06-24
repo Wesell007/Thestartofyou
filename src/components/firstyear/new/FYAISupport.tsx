@@ -5,22 +5,17 @@ const recoveryChips = ["Bleeding", "Mood shifts", "Hormones", "6-week check"];
 
 const FYAISupport = () => {
   return (
-    <section
-      className="relative overflow-hidden py-14 md:py-20"
-      style={{ backgroundColor: 'hsl(var(--stage-firstyear) / 0.35)' }}
-    >
-      <div
-        className="absolute top-0 right-1/4 w-[480px] h-[380px] rounded-full blur-3xl opacity-40"
-        style={{ backgroundColor: 'hsl(var(--stage-recovery-soft) / 0.4)' }}
-      />
-
+    <section className="relative bg-parchment py-14 md:py-16">
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl relative z-10">
-        <p
-          className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
-          style={{ color: 'hsl(var(--stage-firstyear-deep))' }}
-        >
-          AI Support
-        </p>
+        {/* Dual-band header line */}
+        <div className="flex items-center gap-1.5 mb-5">
+          <span className="h-0.5 w-10 rounded-full" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.7)' }} />
+          <span className="h-0.5 w-10 rounded-full" style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.7)' }} />
+          <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase ml-2 text-foreground/60">
+            AI Support · both tracks
+          </p>
+        </div>
+
         <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
           Ask anything from either track.
         </h2>

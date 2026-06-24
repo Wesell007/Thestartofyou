@@ -3,8 +3,7 @@ import firstyearScene from "@/assets/firstyear-scene.jpg";
 
 /**
  * Premium still-image hero — single dual-entry moment.
- * No inner bands. The dual logic lives in the headline, support line,
- * two equal CTAs and the subtle dual-tone wash at the bottom.
+ * Image is visible and emotionally useful; veil is restrained.
  */
 const FYHero = () => {
   return (
@@ -20,27 +19,28 @@ const FYHero = () => {
         className="absolute inset-0 w-full h-full object-cover object-center"
       />
 
-      {/* Soft parchment veil */}
-      <div className="absolute inset-0 bg-parchment/70 md:bg-gradient-to-r md:from-parchment md:via-parchment/85 md:to-parchment/25" />
-      <div className="absolute inset-0 md:hidden bg-gradient-to-b from-parchment via-parchment/80 to-parchment/40" />
+      {/* Very light cohesion wash + soft veil for text legibility */}
+      <div className="absolute inset-0 bg-parchment/15" />
+      <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-parchment/85 via-parchment/55 to-parchment/10" />
+      <div className="absolute inset-0 md:hidden bg-gradient-to-b from-parchment/80 via-parchment/55 to-parchment/20" />
 
       {/* Subtle dual-tone wash at the bottom edge */}
       <div className="absolute inset-x-0 bottom-0 h-40 pointer-events-none flex">
         <div
           className="w-1/3 h-full blur-3xl opacity-60"
-          style={{ backgroundColor: 'hsl(var(--stage-firstyear-soft) / 0.55)' }}
+          style={{ backgroundColor: 'hsl(var(--stage-firstyear-soft) / 0.45)' }}
         />
         <div className="w-1/3" />
         <div
           className="w-1/3 h-full blur-3xl opacity-60"
-          style={{ backgroundColor: 'hsl(var(--stage-recovery-soft) / 0.5)' }}
+          style={{ backgroundColor: 'hsl(var(--stage-recovery-soft) / 0.4)' }}
         />
       </div>
 
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl relative z-10">
-        <div className="max-w-2xl">
+        <div className="max-w-[640px]">
           {/* Eyebrow */}
-          <div className="flex items-center gap-2 mb-6">
+          <div className="flex items-center gap-2 mb-7">
             <span className="h-px w-8 bg-foreground/25" />
             <span className="font-sans text-[11px] font-light tracking-[0.3em] uppercase text-foreground/65">
               First year
@@ -48,24 +48,24 @@ const FYHero = () => {
           </div>
 
           {/* Headline */}
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-foreground mb-5 leading-[1.05]">
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-[3.75rem] text-foreground mb-6 leading-[1.04]">
             Their first year, and{" "}
             <span className="italic" style={{ color: 'hsl(var(--stage-recovery-deep))' }}>
-              your recovery
+              your postpartum recovery
             </span>
             .
           </h1>
 
           {/* Support line */}
-          <p className="font-sans text-base md:text-[17px] font-light text-muted-foreground leading-relaxed mb-9 max-w-lg">
-            Your baby will change quickly. You're healing too. Both belong here.
+          <p className="font-sans text-[17px] md:text-lg font-light text-muted-foreground leading-relaxed mb-10 max-w-lg">
+            Your baby is changing quickly. You're healing after birth. Both belong here.
           </p>
 
           {/* Two equal CTAs */}
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               to="#baby-topics"
-              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium transition-all duration-300 hover:opacity-90 min-w-[200px]"
+              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium transition-all duration-300 hover:opacity-90 min-w-[220px]"
               style={{
                 backgroundColor: 'hsl(var(--stage-firstyear-deep))',
                 color: 'hsl(var(--card))',
@@ -75,13 +75,13 @@ const FYHero = () => {
             </Link>
             <Link
               to="#recovery-topics"
-              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium transition-all duration-300 hover:opacity-90 min-w-[200px]"
+              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium transition-all duration-300 hover:opacity-90 min-w-[220px]"
               style={{
                 backgroundColor: 'hsl(var(--stage-recovery-deep))',
                 color: 'hsl(var(--card))',
               }}
             >
-              Your recovery
+              Your postpartum recovery
             </Link>
           </div>
         </div>

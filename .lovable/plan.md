@@ -1,56 +1,66 @@
-# /first-year — final top-of-page correction
+# /first-year — hero + clarity correction
 
-Surgical pass on the top of `/first-year` only. Nothing from `FYAISupport` downward changes. No new sections, no route changes, no Step 3.
+Surgical top-of-page pass. Nothing from `FYAISupport` downward changes.
 
-## Changes
+## 1. `FYHero.tsx` — clarity + media + composition
 
-### 1. `FYHero.tsx` — rebuild as the single premium opening
-- Full-bleed still image using `src/assets/firstyear-scene.jpg` (no video).
-- Soft parchment veil over the image. Desktop: left-to-right gradient (content-left, image-right). Mobile: top-to-bottom veil so the image reads as a softer top backdrop.
-- Heights: `min-h-[70vh]` mobile, `min-h-[78vh]` desktop.
-- Subtle dual-tone wash at the bottom edge: `--stage-firstyear-soft` on the left third, `--stage-recovery-soft` on the right third, very low opacity, blurred.
-- Content (minimal):
-  - Eyebrow: `First year`
-  - Serif headline: *Their first year, and **your recovery**.* (italic on "your recovery", coloured `--stage-recovery-deep`)
-  - One support line: *Your baby will change quickly. You're healing too. Both belong here.*
-  - Two equal pill CTAs, identical size/padding/weight:
-    - **Baby's first year** → `#baby-topics` (filled `--stage-firstyear-deep`)
-    - **Your recovery** → `#recovery-topics` (filled `--stage-recovery-deep`)
-- Removed from hero: the two inner bands with their own eyebrows / sub-headlines / descriptions / inner CTAs. The dual logic now lives in the headline + support line + two equal CTAs + dual-tone wash only.
+**Headline (explicit postpartum):**
+*Their first year, and **your postpartum recovery**.*
+- "your postpartum recovery" italic, coloured `--stage-recovery-deep`.
+- Same serif scale family, slight bump for anchor presence: `text-4xl sm:text-5xl md:text-[3.75rem]`, `leading-[1.04]`.
 
-### 2. `src/pages/FirstYear.tsx` — remove duplicated paired intro
-- Remove the `FYTwoTrackEntry` import and its usage from the render tree.
-- Leave `FYTwoTrackEntry.tsx` on disk (unused) — do not delete the file.
-- Section order after change:
-  1. `FYHero`
-  2. `FYStickyTrackNav`
-  3. `FYWhatThisCovers` (simplified, see #3)
-  4. `FYAISupport` → `FYPhaseNav` → `FYTopicsParallel` → `FYCommonQuestions` → `FYMedicallyReviewed` → `FYReflection` → `FYPathways` → `FYFinalCTA` (all untouched)
+**Support line (one calm line, three soft beats):**
+*Your baby is changing quickly. You're healing after birth. Both belong here.*
+- Keep single paragraph, light weight, slightly larger: `text-[17px] md:text-lg`.
 
-### 3. `FYWhatThisCovers.tsx` — light bridging strip
-- Keep the small heading: `What you'll find here`.
-- Replace the two-column dual block with **one short calm paragraph**:
-  *"Month-by-month guidance for your baby, from feeding and sleep to development and care. Alongside it, equal space for your recovery, including healing, hormones, mood and the check-ups that matter."*
-- Remove the two coloured accent rails, the `For your baby` / `For you` sub-eyebrows, and any restatement of the split in two columns.
-- Tighter vertical padding so it reads as a bridge, not a section.
+**Media treatment — restore image clarity:**
+- Keep `firstyear-scene.jpg`, still image only.
+- Reduce parchment veil substantially:
+  - Desktop gradient: `from-parchment/85 via-parchment/55 to-parchment/10` (was `from-parchment via-parchment/85 to-parchment/25`).
+  - Mobile veil: `from-parchment/80 via-parchment/55 to-parchment/20` (was `from-parchment via-parchment/80 to-parchment/40`).
+  - Remove the extra solid `bg-parchment/70` base layer that's currently flattening the image — replace with a very light `bg-parchment/15` wash for cohesion only.
+- Dual-tone bottom wash: keep, lower opacity slightly (`0.45` / `0.4`) so it stays subtle against the now-visible image.
+- No darkening, no dramatic gradients.
 
-### 4. Anchor placement
-- `FYTopicsParallel` (`FYTopicClusters.tsx`): change the baby column anchor `id="baby"` → `id="baby-topics"` and the recovery column anchor `id="recovery"` → `id="recovery-topics"`. Both already have `scroll-mt-24`.
-- `FYStickyTrackNav.tsx`: update the two `href` values from `#baby` / `#recovery` to `#baby-topics` / `#recovery-topics` so the sticky nav and hero CTAs land on the same equivalent destinations.
+**Composition (no new elements):**
+- Eyebrow → headline gap: `mb-7` (was 6).
+- Headline → support line: `mb-6`.
+- Support line → CTAs: `mb-10`.
+- Max-width of text block: `max-w-[640px]` so headline anchors more confidently.
+- Hero height unchanged: `min-h-[70vh]` / `md:min-h-[78vh]`.
 
-## Files touched
-- `src/pages/FirstYear.tsx`
-- `src/components/firstyear/new/FYHero.tsx`
-- `src/components/firstyear/new/FYWhatThisCovers.tsx`
-- `src/components/firstyear/new/FYTopicClusters.tsx` (anchor IDs only)
-- `src/components/firstyear/new/FYStickyTrackNav.tsx` (href values only)
-- `src/components/firstyear/new/FYTwoTrackEntry.tsx` left on disk, not rendered.
+**CTAs (equal clarity + weight):**
+- Left: **Baby's first year** → `#baby-topics` (filled `--stage-firstyear-deep`).
+- Right: **Your postpartum recovery** → `#recovery-topics` (filled `--stage-recovery-deep`).
+- Identical size, padding, font weight; widen `min-w-[220px]` to fit the longer label without wrap.
+
+## 2. `FYWhatThisCovers.tsx` — strengthen as intentional bridge
+
+Stay single column, single paragraph. Do not re-split.
+
+- Vertical padding up: `py-14 md:py-20` (was `py-8 md:py-10`).
+- Heading bumped from tiny eyebrow to small serif:
+  - Replace uppercase micro-eyebrow with a serif sub-heading: `font-serif text-2xl md:text-[1.75rem] text-foreground mb-5` — *What you'll find here*.
+  - Keep a thin sage rule above it (`h-px w-10 bg-foreground/25 mb-5`) for editorial anchoring.
+- Paragraph: bump to `text-base md:text-[17px]`, `leading-[1.75]`, `text-muted-foreground`, max-width `max-w-2xl`.
+- Copy unchanged:
+  *"Month-by-month guidance for your baby, from feeding and sleep to development and care. Alongside it, equal space for your postpartum recovery — healing, hormones, mood and the check-ups that matter."*
+  (One word change: "recovery" → "postpartum recovery" for consistency with hero.)
+- Centered column, parchment background retained.
+
+## 3. `src/pages/FirstYear.tsx`
+No structural changes. Touch only if a wrapper spacing tweak is needed between hero and bridge — currently not required; leave as-is.
 
 ## Guardrails honoured
-- Hero is the only place baby + recovery are introduced as a pair.
-- Recovery CTA equal in weight, size, padding and prominence to baby CTA.
+- Hero remains the single paired-introduction moment.
+- Recovery CTA equal in weight and clarity to baby CTA.
 - No new sections, no Step 3, no topic-page work, no route changes.
+- Nothing from `FYAISupport` downward touched.
 - No TTC / IVF / Pregnancy files touched.
 
+## Files touched
+- `src/components/firstyear/new/FYHero.tsx`
+- `src/components/firstyear/new/FYWhatThisCovers.tsx`
+
 ## Return after build
-A. Changed files · B. Duplication removed (FYTwoTrackEntry unmounted) · C. Hero rebuild summary · D. Hero uses **`firstyear-scene.jpg` still image only** · E. Bridging section simplification · F. Confirmation rest of hub stayed untouched.
+A. Changed files · B. Final hero headline · C. Postpartum clarity changes · D. Hero image treatment correction · E. Bridge section strengthening · F. Confirmation rest of hub untouched.

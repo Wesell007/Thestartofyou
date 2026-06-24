@@ -64,6 +64,9 @@ import DueDateResults from "./pages/DueDateResults.tsx";
 import TTC from "./pages/TTC.tsx";
 import TTCHub from "./pages/TTCHub.tsx";
 import IVF from "./pages/IVF.tsx";
+// Postpartum: preserved in code for reuse, but no longer a live top-level
+// destination. /postpartum redirects into the First Year ecosystem.
+// The legacy hub is kept at /postpartum/legacy for reference during rebuild.
 import Postpartum from "./pages/Postpartum.tsx";
 import FirstYear from "./pages/FirstYear.tsx";
 import PreparingForBaby from "./pages/PreparingForBaby.tsx";

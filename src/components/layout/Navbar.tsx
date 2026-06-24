@@ -14,7 +14,9 @@ import logoSrc from "@/assets/logo-dark.png";
 const navLinks = [
   { label: "Trying to conceive", href: "/trying-to-conceive" },
   { label: "Pregnancy", href: "/pregnancy" },
-  { label: "Postpartum", href: "/postpartum" },
+  // NOTE: Postpartum is no longer a top-level destination — it now lives
+  // inside the First Year ecosystem as the "Recovery" track. The /postpartum
+  // route is preserved but redirects to /first-year#recovery.
   { label: "First year", href: "/first-year" },
   // NOTE: temporary route mapping — Journal label points to /product
   // until the route is renamed to /journal in a follow-up pass.

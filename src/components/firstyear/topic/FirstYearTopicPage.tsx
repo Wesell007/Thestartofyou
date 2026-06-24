@@ -63,11 +63,17 @@ const TAG_LABEL: Record<NonNullable<FirstYearFeaturedItem["tag"]>, string> = {
 
 const FirstYearTopicPage = ({ config }: Props) => {
   const theme = THEMES[config.side];
+  // Recovery side reads as muted stone-mauve, never IVF purple. Quieter
+  // opacity scale so the deeper recovery accent stays a fine detail, not a
+  // dominant block.
+  const isRecovery = config.side === "recovery";
   const accent = `hsl(var(${theme.accentToken}))`;
-  const accentSoft = `hsl(var(${theme.accentToken}) / 0.10)`;
-  const accentMid = `hsl(var(${theme.accentToken}) / 0.22)`;
-  const accentBorder = `hsl(var(${theme.accentToken}) / 0.16)`;
-  const tintWash = `hsl(var(${theme.softToken}) / 0.55)`;
+  const accentSoft = `hsl(var(${theme.accentToken}) / ${isRecovery ? 0.07 : 0.10})`;
+  const accentMid = `hsl(var(${theme.accentToken}) / ${isRecovery ? 0.16 : 0.22})`;
+  const accentBorder = `hsl(var(${theme.accentToken}) / ${isRecovery ? 0.12 : 0.16})`;
+  const tintWash = `hsl(var(${theme.softToken}) / ${isRecovery ? 0.32 : 0.55})`;
+  const photoTintOpacity = isRecovery ? 0.04 : 0.07;
+  const endcapBgOpacity = isRecovery ? 0.22 : 0.4;
   const deep = `hsl(var(${theme.deepToken}))`;
 
   const sameSide = config.related.sameSide.map((s) => ({
@@ -92,6 +98,8 @@ const FirstYearTopicPage = ({ config }: Props) => {
     config.side === "baby" ? "--stage-recovery-deep" : "--stage-firstyear-deep";
 
   // ─── Editorial atoms ──────────────────────────────────────────────────
+  // Calm section label: short hairline + small uppercase text. No flanking
+  // rules, no SVG flourishes — quiet First Year rhythm.
   const SectionLabel = ({ children }: { children: React.ReactNode }) => (
     <div className="flex items-center gap-3">
       <span className="h-px w-8" style={{ background: accentMid }} />
@@ -101,25 +109,17 @@ const FirstYearTopicPage = ({ config }: Props) => {
       >
         {children}
       </span>
-      <span className="h-px w-8" style={{ background: accentMid }} />
     </div>
   );
 
-  const LeafDivider = () => (
-    <div className="flex items-center justify-center gap-2 my-4 opacity-70">
-      <span className="h-px w-6" style={{ background: accentMid }} />
-      <svg width="22" height="8" viewBox="0 0 22 8" fill="none" aria-hidden>
-        <path
-          d="M2 4 Q 6 0 11 4 Q 16 8 20 4"
-          stroke={accent}
-          strokeWidth="0.7"
-          fill="none"
-          opacity="0.6"
-        />
-        <circle cx="11" cy="4" r="1.1" fill={accent} opacity="0.5" />
-      </svg>
-      <span className="h-px w-6" style={{ background: accentMid }} />
-    </div>
+  // Quiet horizontal rule used under section titles in place of any leaf /
+  // sprig divider. Single hairline, no decoration.
+  const QuietRule = () => (
+    <span
+      className="block h-px w-10 my-5"
+      style={{ background: accentMid }}
+      aria-hidden
+    />
   );
 
   const MedicallyReviewed = () => (

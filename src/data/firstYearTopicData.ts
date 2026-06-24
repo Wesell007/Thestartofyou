@@ -535,9 +535,8 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
 
 // Silence intentionally-unused decorative imports kept for future swap-in.
 // (Some assets are imported but only used by alternate variants of the page.)
-void firstyearStage36;
-void firstyearScene;
 void firstyearJourney;
 void guidanceFirstyear;
 void babyEarly;
 void babyMid;
+void secondSleep;

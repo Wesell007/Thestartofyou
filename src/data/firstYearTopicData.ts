@@ -134,7 +134,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
     intro:
       "Feeding shifts more than almost anything else this year. From the first latch to first foods, this is calm, practical guidance for the questions parents actually ask.",
     heroImage: firstyearStage03,
-    heroObjectPosition: "center 28%",
+    heroObjectPosition: "center 38%",
     whatThisCovers: {
       lead: "What you'll find inside this topic:",
       bullets: [
@@ -183,8 +183,8 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
     title: "Baby sleep in the first year",
     intro:
       "Sleep in the first year rarely runs in a straight line. A calm place to understand naps, night waking, safer sleep and the patterns that quietly shift month by month.",
-    heroImage: secondSleep,
-    heroObjectPosition: "center 35%",
+    heroImage: firstyearStage36,
+    heroObjectPosition: "center 40%",
     whatThisCovers: {
       lead: "What you'll find inside this topic:",
       bullets: [
@@ -234,7 +234,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
     intro:
       "Your baby will change quickly this year. This topic helps you understand what's unfolding, without turning every milestone into a checklist or a worry.",
     heroImage: firstyearStage69,
-    heroObjectPosition: "center 30%",
+    heroObjectPosition: "center 42%",
     whatThisCovers: {
       lead: "What you'll find inside this topic:",
       bullets: [
@@ -283,8 +283,8 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
     title: "Baby care and safety",
     intro:
       "Everyday care covers more than you'd expect in the first year. A practical, calm place for the questions about bathing, illness, routines and keeping your baby safe as they grow.",
-    heroImage: firstyearStage912,
-    heroObjectPosition: "center 30%",
+    heroImage: firstyearScene,
+    heroObjectPosition: "center 45%",
     medicallyReviewed: true,
     whatThisCovers: {
       lead: "What you'll find inside this topic:",
@@ -336,7 +336,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
     intro:
       "Recovery after birth deserves real attention. A calm, honest place to understand healing, energy, common symptoms and the slow work of feeling like yourself again.",
     heroImage: postpartumScene,
-    heroObjectPosition: "center 30%",
+    heroObjectPosition: "center 40%",
     medicallyReviewed: true,
     whatThisCovers: {
       lead: "What you'll find inside this topic:",
@@ -387,7 +387,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
     intro:
       "Becoming a parent rearranges your inner world. A calm, honest space for mood, identity, overwhelm and the emotional weight that often goes unspoken.",
     heroImage: postpartumAdjustment,
-    heroObjectPosition: "center 25%",
+    heroObjectPosition: "center 35%",
     medicallyReviewed: true,
     whatThisCovers: {
       lead: "What you'll find inside this topic:",
@@ -438,7 +438,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
     intro:
       "Hormones keep shifting long after birth, and so does your body. This topic helps you understand the changes, the timelines and the things worth checking along the way.",
     heroImage: postpartumJourney,
-    heroObjectPosition: "center 30%",
+    heroObjectPosition: "center 38%",
     medicallyReviewed: true,
     whatThisCovers: {
       lead: "What you'll find inside this topic:",
@@ -488,8 +488,8 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
     title: "Check-ups and warning signs",
     intro:
       "Most of the postnatal period unfolds quietly, but some symptoms deserve a closer look. A clear, calm guide to what's routine, what's worth raising and what shouldn't wait.",
-    heroImage: postpartumEarlyDays,
-    heroObjectPosition: "center 28%",
+    heroImage: postpartumEarlyWeeks,
+    heroObjectPosition: "center 38%",
     medicallyReviewed: true,
     whatThisCovers: {
       lead: "What you'll find inside this topic:",

@@ -11,10 +11,9 @@ import {
   FirstYearFeaturedItem,
 } from "@/data/firstYearTopicData";
 
-// Subtle botanical motifs — shared with PregnancyTopicPage so the First Year
-// system feels part of the same editorial family without copying it.
-import sprigMini from "@/assets/topic-mini-sprig.png";
-import sprigWild from "@/assets/topic-wildflower-sprig.png";
+// First Year topic pages are photo-led and calm. No botanical sprigs or
+// pregnancy-style decorative motifs — quietness comes from soft tints,
+// gentle borders and restrained spacing.
 
 interface Props {
   config: FirstYearTopicConfig;
@@ -64,11 +63,17 @@ const TAG_LABEL: Record<NonNullable<FirstYearFeaturedItem["tag"]>, string> = {
 
 const FirstYearTopicPage = ({ config }: Props) => {
   const theme = THEMES[config.side];
+  // Recovery side reads as muted stone-mauve, never IVF purple. Quieter
+  // opacity scale so the deeper recovery accent stays a fine detail, not a
+  // dominant block.
+  const isRecovery = config.side === "recovery";
   const accent = `hsl(var(${theme.accentToken}))`;
-  const accentSoft = `hsl(var(${theme.accentToken}) / 0.10)`;
-  const accentMid = `hsl(var(${theme.accentToken}) / 0.22)`;
-  const accentBorder = `hsl(var(${theme.accentToken}) / 0.16)`;
-  const tintWash = `hsl(var(${theme.softToken}) / 0.55)`;
+  const accentSoft = `hsl(var(${theme.accentToken}) / ${isRecovery ? 0.07 : 0.10})`;
+  const accentMid = `hsl(var(${theme.accentToken}) / ${isRecovery ? 0.16 : 0.22})`;
+  const accentBorder = `hsl(var(${theme.accentToken}) / ${isRecovery ? 0.12 : 0.16})`;
+  const tintWash = `hsl(var(${theme.softToken}) / ${isRecovery ? 0.32 : 0.55})`;
+  const photoTintOpacity = isRecovery ? 0.04 : 0.07;
+  const endcapBgOpacity = isRecovery ? 0.22 : 0.4;
   const deep = `hsl(var(${theme.deepToken}))`;
 
   const sameSide = config.related.sameSide.map((s) => ({
@@ -93,6 +98,8 @@ const FirstYearTopicPage = ({ config }: Props) => {
     config.side === "baby" ? "--stage-recovery-deep" : "--stage-firstyear-deep";
 
   // ─── Editorial atoms ──────────────────────────────────────────────────
+  // Calm section label: short hairline + small uppercase text. No flanking
+  // rules, no SVG flourishes — quiet First Year rhythm.
   const SectionLabel = ({ children }: { children: React.ReactNode }) => (
     <div className="flex items-center gap-3">
       <span className="h-px w-8" style={{ background: accentMid }} />
@@ -102,25 +109,17 @@ const FirstYearTopicPage = ({ config }: Props) => {
       >
         {children}
       </span>
-      <span className="h-px w-8" style={{ background: accentMid }} />
     </div>
   );
 
-  const LeafDivider = () => (
-    <div className="flex items-center justify-center gap-2 my-4 opacity-70">
-      <span className="h-px w-6" style={{ background: accentMid }} />
-      <svg width="22" height="8" viewBox="0 0 22 8" fill="none" aria-hidden>
-        <path
-          d="M2 4 Q 6 0 11 4 Q 16 8 20 4"
-          stroke={accent}
-          strokeWidth="0.7"
-          fill="none"
-          opacity="0.6"
-        />
-        <circle cx="11" cy="4" r="1.1" fill={accent} opacity="0.5" />
-      </svg>
-      <span className="h-px w-6" style={{ background: accentMid }} />
-    </div>
+  // Quiet horizontal rule used under section titles in place of any leaf /
+  // sprig divider. Single hairline, no decoration.
+  const QuietRule = () => (
+    <span
+      className="block h-px w-10 my-5"
+      style={{ background: accentMid }}
+      aria-hidden
+    />
   );
 
   const MedicallyReviewed = () => (
@@ -178,42 +177,30 @@ const FirstYearTopicPage = ({ config }: Props) => {
                 )}
               </div>
 
-              {/* Photo with tinted halo + subtle botanical accent */}
+              {/* Photo with soft tinted halo — no decorative motifs.
+                  Responsive aspect: taller on mobile so face/upper body
+                  stays in frame; slightly wider on desktop/tablet for
+                  editorial breathing room. Width is capped so the photo
+                  never balloons on wide screens. */}
               <div className="md:col-span-6 lg:col-span-6 order-1 md:order-2 relative">
-                <div className="relative mx-auto max-w-[380px] sm:max-w-[440px] md:max-w-none">
+                <div className="relative mx-auto max-w-[380px] sm:max-w-[440px] md:max-w-[460px] lg:max-w-[520px]">
                   <div
-                    className="absolute inset-0 -m-6 rounded-full opacity-70 blur-3xl"
+                    className="absolute inset-0 -m-6 rounded-full opacity-60 blur-3xl"
                     style={{
-                      background: `radial-gradient(circle at 50% 45%, hsl(var(${theme.softToken}) / 0.85) 0%, transparent 65%)`,
+                      background: `radial-gradient(circle at 50% 45%, hsl(var(${theme.softToken}) / 0.7) 0%, transparent 65%)`,
                     }}
                     aria-hidden
                   />
-                  <img
-                    src={config.heroImage}
-                    alt=""
-                    aria-hidden="true"
-                    loading="eager"
-                    className="relative w-full h-auto rounded-[2rem] object-cover shadow-[0_30px_80px_-40px_rgba(0,0,0,0.28)]"
-                    style={{
-                      aspectRatio: "4 / 5",
-                      objectPosition: heroObjectPosition,
-                    }}
-                  />
-                  {/* Botanical sprig — subtle, never busy */}
-                  <img
-                    src={sprigMini}
-                    alt=""
-                    aria-hidden="true"
-                    loading="lazy"
-                    className="hidden sm:block absolute -left-5 md:-left-9 bottom-4 w-20 md:w-28 opacity-80 pointer-events-none"
-                  />
-                  <img
-                    src={sprigWild}
-                    alt=""
-                    aria-hidden="true"
-                    loading="lazy"
-                    className="hidden md:block absolute -right-4 top-6 w-14 lg:w-16 opacity-70 pointer-events-none"
-                  />
+                  <div className="relative aspect-[4/5] md:aspect-[5/6] w-full overflow-hidden rounded-[2rem] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.28)]">
+                    <img
+                      src={config.heroImage}
+                      alt=""
+                      aria-hidden="true"
+                      loading="eager"
+                      className="absolute inset-0 w-full h-full object-cover"
+                      style={{ objectPosition: heroObjectPosition }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -228,20 +215,11 @@ const FirstYearTopicPage = ({ config }: Props) => {
               className="relative bg-card rounded-[2rem] border shadow-[0_30px_80px_-40px_rgba(0,0,0,0.18)] p-6 sm:p-10 md:p-12 overflow-hidden"
               style={{ borderColor: accentBorder }}
             >
-              {/* quiet decorative sprig — desktop only */}
-              <img
-                src={sprigMini}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                className="hidden md:block absolute right-4 bottom-3 w-16 opacity-50 pointer-events-none"
-              />
-
               <div className="md:max-w-3xl">
                 <h2 className="font-serif text-2xl md:text-[1.8rem] text-foreground leading-tight">
                   What this topic covers
                 </h2>
-                <LeafDivider />
+                <QuietRule />
                 <p className="font-serif italic text-[14.5px] text-muted-foreground/85 mb-7 max-w-2xl">
                   {config.whatThisCovers.lead}
                 </p>
@@ -299,8 +277,8 @@ const FirstYearTopicPage = ({ config }: Props) => {
                     />
                     {/* Subtle topic tint — harmonises mixed photography */}
                     <div
-                      className="absolute inset-0 mix-blend-multiply opacity-[0.07] pointer-events-none"
-                      style={{ backgroundColor: accent }}
+                      className="absolute inset-0 mix-blend-multiply pointer-events-none"
+                      style={{ backgroundColor: accent, opacity: photoTintOpacity }}
                       aria-hidden
                     />
                     {item.tag && (
@@ -437,24 +415,12 @@ const FirstYearTopicPage = ({ config }: Props) => {
         </section>
 
         {/* ─── 6. GENTLE ENDCAP ──────────────────────────────────────── */}
+        {/* Calm tonal wash — no sprigs, no decoration. Recovery side uses
+            a quieter opacity so the page doesn't end on a heavy block. */}
         <section
           className="py-16 md:py-24 relative overflow-hidden"
-          style={{ backgroundColor: `hsl(var(${theme.softToken}) / 0.4)` }}
+          style={{ backgroundColor: `hsl(var(${theme.softToken}) / ${endcapBgOpacity})` }}
         >
-          <img
-            src={sprigWild}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            className="hidden md:block absolute -left-4 bottom-2 w-28 opacity-70 pointer-events-none"
-          />
-          <img
-            src={sprigWild}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            className="hidden md:block absolute -right-4 top-4 w-28 opacity-70 pointer-events-none scale-x-[-1]"
-          />
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl text-center relative z-10">
             <p className="font-serif italic text-[16px] md:text-[1.15rem] text-foreground/80 leading-relaxed mb-7 max-w-xl mx-auto">
               {config.side === "baby"

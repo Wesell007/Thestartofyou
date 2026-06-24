@@ -136,24 +136,42 @@ const FYHero = () => {
             Your baby will change quickly through the first year. You'll need support for postpartum recovery too.
           </p>
 
-          {/* Two equal CTAs */}
+          {/* Two equal CTAs — soft premium pills: light fill, deeper text, clear border */}
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               to="#baby-topics"
-              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium transition-all duration-300 hover:opacity-90 min-w-[220px]"
+              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] shadow-[0_10px_28px_-20px_rgba(20,30,60,0.45)] hover:-translate-y-[1px] hover:shadow-[0_14px_30px_-18px_rgba(20,30,60,0.5)]"
               style={{
-                backgroundColor: 'hsl(var(--stage-firstyear-deep))',
-                color: 'hsl(var(--card))',
+                backgroundColor: 'hsl(var(--stage-firstyear-soft) / 0.95)',
+                color: 'hsl(var(--stage-firstyear-deep))',
+                borderColor: 'hsl(var(--stage-firstyear-accent) / 0.35)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'hsl(var(--stage-firstyear-soft))';
+                e.currentTarget.style.borderColor = 'hsl(var(--stage-firstyear-accent) / 0.5)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'hsl(var(--stage-firstyear-soft) / 0.95)';
+                e.currentTarget.style.borderColor = 'hsl(var(--stage-firstyear-accent) / 0.35)';
               }}
             >
               Baby's first year
             </Link>
             <Link
               to="#recovery-topics"
-              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium transition-all duration-300 hover:opacity-90 min-w-[220px]"
+              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] shadow-[0_10px_28px_-20px_rgba(60,40,55,0.4)] hover:-translate-y-[1px] hover:shadow-[0_14px_30px_-18px_rgba(60,40,55,0.45)]"
               style={{
-                backgroundColor: 'hsl(var(--stage-recovery-deep))',
-                color: 'hsl(var(--card))',
+                backgroundColor: 'hsl(var(--stage-recovery-soft) / 0.85)',
+                color: 'hsl(var(--stage-recovery-deep))',
+                borderColor: 'hsl(var(--stage-recovery-accent) / 0.32)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'hsl(var(--stage-recovery-soft))';
+                e.currentTarget.style.borderColor = 'hsl(var(--stage-recovery-accent) / 0.48)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'hsl(var(--stage-recovery-soft) / 0.85)';
+                e.currentTarget.style.borderColor = 'hsl(var(--stage-recovery-accent) / 0.32)';
               }}
             >
               Your postpartum recovery

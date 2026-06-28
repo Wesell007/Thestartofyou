@@ -11,39 +11,27 @@ const pillars = [
 
 const ToddlerWhatThisCovers = () => {
   return (
-    <section className="py-20 md:py-24">
+    <section className="py-24 md:py-28">
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-4xl">
-        <div className="text-center mb-12 md:mb-14">
-          <p
-            className="font-sans text-[11px] font-light tracking-[0.3em] uppercase mb-3"
-            style={{ color: "hsl(var(--stage-toddler-accent))" }}
-          >
+        <div className="text-center mb-14 md:mb-16">
+          <span className="mx-auto block h-px w-10 mb-6" style={{ backgroundColor: "hsl(var(--stage-toddler-accent) / 0.5)" }} />
+          <p className="font-sans text-[11px] font-light tracking-[0.34em] uppercase mb-3" style={{ color: "hsl(var(--stage-toddler-accent))" }}>
             What this hub covers
           </p>
-          <h2
-            className="font-serif text-3xl md:text-4xl mb-4"
-            style={{ color: "hsl(var(--stage-toddler-deep))" }}
-          >
+          <h2 className="font-serif text-[2rem] md:text-[2.4rem] mb-4 leading-tight" style={{ color: "hsl(var(--stage-toddler-deep))" }}>
             The toddler years, gently mapped
           </h2>
           <p className="font-sans text-[15px] font-light text-foreground/65 max-w-xl mx-auto leading-relaxed">
-            Honest guidance across the eight areas parents ask about most, written
-            to be read in a quiet moment.
+            Honest guidance across the eight areas parents ask about most, written to be read in a quiet moment.
           </p>
         </div>
 
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-7">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
           {pillars.map(({ title, body }) => (
             <li key={title} className="flex gap-4">
-              <span
-                className="mt-2 h-px w-6 shrink-0"
-                style={{ backgroundColor: "hsl(var(--stage-toddler-accent) / 0.55)" }}
-              />
+              <span className="mt-2.5 h-px w-7 shrink-0" style={{ backgroundColor: "hsl(var(--stage-toddler-accent) / 0.6)" }} />
               <div>
-                <h3
-                  className="font-serif text-lg mb-1"
-                  style={{ color: "hsl(var(--stage-toddler-deep))" }}
-                >
+                <h3 className="font-serif text-[1.15rem] mb-1.5" style={{ color: "hsl(var(--stage-toddler-deep))" }}>
                   {title}
                 </h3>
                 <p className="font-sans text-[14.5px] font-light text-foreground/65 leading-relaxed">

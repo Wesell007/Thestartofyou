@@ -1,128 +1,110 @@
 import { Link } from "react-router-dom";
 import toddlerHeroPoster from "@/assets/firstyear-stage-9-12.jpg";
+import toddlerHeroVideo from "@/assets/toddler-hero-video.mp4.asset.json";
 
 /**
- * ToddlerHero — video-ready.
+ * ToddlerHero — video-led.
  *
- * Structurally video-led. The <video> element is the primary hero media.
+ * Primary hero media is the real toddler video (calm home-light clip of
+ * a ~24m toddler stacking wooden blocks on a soft wool rug). The poster
+ * (firstyear-stage-9-12.jpg) is retained only as a fallback while the
+ * video loads or if playback fails.
  *
- * MEDIA STATUS: pending.
- * No suitable toddler video currently exists in src/assets/. The hero
- * therefore ships with the poster image only, and no <source> child is
- * rendered yet (this avoids a 404 / fake asset wiring and lets the browser
- * fall cleanly to the poster).
- *
- * The temporary poster — firstyear-stage-9-12.jpg — is the closest existing
- * toddler-adjacent still in the project (walking child, parent's hands nearby,
- * warm home light, safe crop). It is a placeholder, NOT the final design.
- *
- * TO WIRE THE FINAL TODDLER VIDEO when the asset is uploaded:
- *   1. Upload via lovable-assets and write the manifest to
- *        src/assets/toddler-hero-video.mp4.asset.json
- *   2. Add at the top of this file:
- *        import toddlerHeroVideo from "@/assets/toddler-hero-video.mp4.asset.json";
- *   3. Inside the <video> element below, add:
- *        <source src={toddlerHeroVideo.url} type="video/mp4" />
- *
- * Required future asset: a calm 6–10s home-light clip of a true 18–30 month
- * toddler walking, playing, reading or stacking blocks; parent nearby if
- * suitable; warm daylight; safe head/face composition; no tantrums, no
- * chaotic toy mess, no bright nursery colours, no influencer-montage feel,
- * no cropped heads/faces/hands/bodies.
+ * Subject sits to the right of frame, so copy lives on the left over a
+ * warm parchment-to-transparent wash. object-position is tuned per
+ * breakpoint to keep the toddler safely framed across desktop, iPad and
+ * mobile (no head/face/hand/foot crop).
  */
 const ToddlerHero = () => {
   return (
     <section
       id="toddler-top"
-      className="relative overflow-hidden min-h-[78vh] md:min-h-[80vh] flex items-center pt-28 pb-16 md:pb-20"
+      className="relative overflow-hidden min-h-[72vh] md:min-h-[78vh] flex items-center pt-28 pb-16 md:pb-20"
     >
-      {/* Primary hero media — video element, currently rendering poster only. */}
+      {/* Primary hero media — real toddler video */}
       <video
         autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         poster={toddlerHeroPoster}
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover object-[50%_28%] md:object-[center_38%] lg:object-[center_42%]"
+        className="absolute inset-0 w-full h-full object-cover object-[72%_center] md:object-[68%_center] lg:object-[62%_center]"
       >
-        {/* FUTURE TODDLER HERO VIDEO — add <source> here when the asset exists. */}
+        <source src={toddlerHeroVideo.url} type="video/mp4" />
       </video>
 
-      {/* Warm Toddler-token wash — desktop weighted left, mobile weighted bottom */}
+      {/* Editorial wash — desktop weighted left so copy reads without darkening the toddler */}
       <div
         className="absolute inset-0 hidden md:block"
         style={{
           background:
-            "linear-gradient(to right, hsl(var(--parchment, 40 38% 96%) / 0.82), hsl(var(--parchment, 40 38% 96%) / 0.42) 45%, transparent)",
+            "linear-gradient(to right, hsl(var(--parchment) / 0.94) 0%, hsl(var(--parchment) / 0.78) 32%, hsl(var(--parchment) / 0.32) 56%, transparent 78%)",
         }}
       />
+      {/* Mobile wash — weighted top + bottom so copy stays readable around the subject */}
       <div
         className="absolute inset-0 md:hidden"
         style={{
           background:
-            "linear-gradient(to bottom, hsl(var(--parchment, 40 38% 96%) / 0.7), hsl(var(--parchment, 40 38% 96%) / 0.35) 55%, hsl(var(--parchment, 40 38% 96%) / 0.05))",
+            "linear-gradient(to bottom, hsl(var(--parchment) / 0.6) 0%, hsl(var(--parchment) / 0.18) 30%, hsl(var(--parchment) / 0.62) 62%, hsl(var(--parchment) / 0.96) 100%)",
         }}
       />
 
-      {/* Oat / sand wash so the hero reads as Toddler, not First Year reuse */}
+      {/* Warm apricot bloom under the copy column — adds depth without orange dominance */}
       <div
-        className="absolute inset-x-0 bottom-0 h-44 pointer-events-none blur-3xl opacity-70"
-        style={{ backgroundColor: "hsl(var(--stage-toddler-soft) / 0.55)" }}
-      />
-      <div
-        className="absolute top-0 right-0 w-1/2 h-1/3 pointer-events-none blur-3xl opacity-40"
-        style={{ backgroundColor: "hsl(var(--stage-toddler) / 0.6)" }}
+        className="absolute -bottom-24 left-0 w-[55%] h-72 pointer-events-none blur-3xl opacity-60 hidden md:block"
+        style={{ backgroundColor: "hsl(var(--stage-toddler-soft) / 0.45)" }}
       />
 
-      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl relative z-10">
-        <div className="max-w-[640px]">
+      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-6xl relative z-10">
+        <div className="max-w-[600px] md:max-w-[560px]">
           {/* Eyebrow */}
-          <div className="flex items-center gap-2 mb-7">
+          <div className="flex items-center gap-3 mb-7">
             <span
-              className="h-px w-8"
-              style={{ backgroundColor: "hsl(var(--stage-toddler-accent) / 0.5)" }}
+              className="h-px w-10"
+              style={{ backgroundColor: "hsl(var(--stage-toddler-accent) / 0.55)" }}
             />
             <span
-              className="font-sans text-[11px] font-light tracking-[0.3em] uppercase"
+              className="font-sans text-[11px] font-light tracking-[0.34em] uppercase"
               style={{ color: "hsl(var(--stage-toddler-accent))" }}
             >
-              Toddler
+              Toddler · 12 months to 3 years
             </span>
           </div>
 
           {/* Headline */}
           <h1
-            className="font-serif text-4xl sm:text-5xl md:text-[3.5rem] mb-6 leading-[1.06]"
+            className="font-serif text-[2.4rem] sm:text-5xl md:text-[3.55rem] mb-6 leading-[1.04] tracking-tight"
             style={{ color: "hsl(var(--stage-toddler-deep))" }}
           >
-            Guidance for the{" "}
+            Steady guidance for the{" "}
             <span className="italic">toddler years</span>.
           </h1>
 
           {/* Support line */}
-          <p className="font-sans text-[17px] md:text-lg font-light text-foreground/70 leading-relaxed mb-10 max-w-lg">
-            From first words and first steps to growing independence — calm,
-            grounded support for the years between baby and child.
+          <p className="font-sans text-[17px] md:text-[18px] font-light text-foreground/75 leading-[1.65] mb-10 max-w-[480px]">
+            First words, first steps, big feelings and growing independence —
+            calm, grounded answers for the stage between baby and child.
           </p>
 
-          {/* Two soft Toddler-token pill CTAs */}
+          {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               to="#toddler-age"
-              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] shadow-[0_10px_28px_-20px_rgba(60,40,20,0.4)] hover:-translate-y-[1px]"
+              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] shadow-[0_14px_34px_-20px_rgba(60,40,20,0.45)] hover:-translate-y-[1px] hover:shadow-[0_18px_38px_-18px_rgba(60,40,20,0.5)]"
               style={{
-                backgroundColor: "hsl(var(--stage-toddler-soft) / 0.95)",
+                backgroundColor: "hsl(var(--stage-toddler-soft) / 0.96)",
                 color: "hsl(var(--stage-toddler-deep))",
-                borderColor: "hsl(var(--stage-toddler-accent) / 0.35)",
+                borderColor: "hsl(var(--stage-toddler-accent) / 0.38)",
               }}
             >
               Go to your toddler's age
             </Link>
             <Link
               to="#toddler-topics"
-              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] hover:-translate-y-[1px]"
+              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] hover:-translate-y-[1px] hover:bg-[hsl(var(--stage-toddler)/0.5)]"
               style={{
                 backgroundColor: "transparent",
                 color: "hsl(var(--stage-toddler-deep))",
@@ -134,6 +116,12 @@ const ToddlerHero = () => {
           </div>
         </div>
       </div>
+
+      {/* Quiet hairline base seam to the next section */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-px"
+        style={{ backgroundColor: "hsl(var(--stage-toddler-accent) / 0.18)" }}
+      />
     </section>
   );
 };

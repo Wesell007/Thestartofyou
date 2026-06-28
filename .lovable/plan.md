@@ -1,76 +1,26 @@
+## Toddler Hub — Premium Uplift + Video Hero Wiring
 
-# Toddler Hub — Premium Correction Pass
+**Quality gate result: PASS.** The generated video (`src/assets/toddler-hero-video.mp4.asset.json`, 1920×1088, 5s, 24fps, 6.9MB) was reviewed via ffmpeg stills + a 4×4 motion contact sheet. Real-looking ~24m toddler on a soft wool rug in warm window light, gently handling wooden blocks. Face natural and consistent across frames, eyes calmly downcast, hands correctly formed (one on a block, one relaxed), motion subtle. No uncanny features, no distortion, no chaotic toys, no bright nursery colours, no staged smile. Subject framed right-of-centre with safe head/hand/foot clearance. → wire in; poster (`firstyear-stage-9-12.jpg`) kept as fallback only.
 
-Apply the approved muted apricot / pumpkin clay palette **and** lift the live hub closer to Pregnancy hub quality through hierarchy, rhythm, and richer section treatments. Tight scope.
+### Files to edit
+1. **`ToddlerHero.tsx`** — import the asset JSON, add `<source src={toddlerHeroVideo.url} type="video/mp4" />`, `preload="auto"`, poster fallback only. Tighten min-h, copy on the left, stronger parchment→transparent left wash (readable copy without darkening the toddler), apricot bloom under copy column, hairline base seam. `object-position` tuned per breakpoint (mobile 72%, md 68%, lg 62%) so head/hands/feet stay safe. Eyebrow upgraded to "Toddler · 12 months to 3 years". Tactile CTAs with cocoa shadow + inner highlight.
+2. **`ToddlerAgeNav.tsx`** — wrap pills in a layered parchment card on a soft apricot wash; centred hairline + eyebrow + serif heading + supporting line; pills get inner highlight + lift-on-hover shadow; ≥44px tap targets; five groupings preserved.
+3. **`ToddlerAISupport.tsx`** — frame `HubAISupport` inside an editorial parchment panel on a warm apricot→parchment band; add eyebrow ("Ask The Start of You") + serif heading + quiet supporting line beneath. Position unchanged (directly after age nav).
+4. **`ToddlerTopicClusters.tsx`** — deeper card padding, 22px radius, inner top highlight, hairline + numbered cluster eyebrow, chip border refinement, arrow CTA slides on hover, equal heights. 2-col desktop/iPad, 1-col mobile.
+5. **`ToddlerToolsResources.tsx`** — matched card system; hairline + eyebrow + arrow CTA; parchment-on-apricot gradient band; supporting line under heading.
+6. **`ToddlerWhatThisCovers.tsx`** — stronger section header rhythm (rule + eyebrow + serif heading + supporting line); increased gaps; slightly larger pillar titles.
+7. **`ToddlerCommonQuestions.tsx`** — matched section header rhythm + soft hover shadow on accordion items.
+8. **`ToddlerReflection.tsx`** — italic note wrapped in a quiet parchment card with hairline + eyebrow ("A quiet note") on a soft apricot band.
+9. **`ToddlerPathways.tsx`** — editorial cards matching topic-card depth; per-card eyebrow ("Previous stage" / "This hub" / "What's next") + arrow CTA.
+10. **`ToddlerFinalCTA.tsx`** — framed panel on layered apricot gradient; hairline + eyebrow + larger serif heading; primary CTA gains cocoa shadow + hover lift; secondary link refined.
 
-## 1. Token swap — `src/index.css`
+### Out of scope (untouched)
+- No toddler topic / month / article pages, no Family or Parent hub.
+- No edits to `index.css`, `pages/Toddler.tsx`, `App.tsx`, Navbar, Footer.
+- No edits to TTC / Pregnancy / First Year / IVF / legacy Postpartum / Journal.
 
-Replace existing Toddler tokens with the exact approved values:
+### Verify
+Build + Playwright screenshots at 1280 / 1024 / 390 — no horizontal scroll, toddler head/hands/feet safe, ≥44px pills, AI panel breathing, 2/2/1 card grids, framed bottom sections balanced.
 
-```css
-/* Toddler ecosystem — muted apricot / pumpkin clay / warm russet.
-   Dusty, warm, premium. Not bright/CTA-like, not nursery, and
-   visibly distinct from the main site terracotta CTA. */
---stage-toddler: 28 58% 94%;        /* soft apricot cream surface */
---stage-toddler-soft: 26 52% 86%;   /* muted peach-clay */
---stage-toddler-accent: 22 48% 45%; /* muted pumpkin clay accent */
---stage-toddler-deep: 20 40% 23%;   /* grounded cocoa-russet text */
-```
-
-All Toddler components already consume these tokens, so colour repaints automatically.
-
-Use the cocoa-russet `--stage-toddler-deep` for readable text and fine details. Reserve the pumpkin-clay accent for small marks, hairlines, eyebrows and quiet link colour — never as large heavy filled blocks.
-
-## 2. Section reorder — `src/pages/Toddler.tsx`
-
-Hero → Age nav → **AI support** → What this covers → Tools & resources → Topic clusters → Common questions → Reflection → Pathways → Final CTA.
-
-AI support stays calm and embedded — soft apricot panel, generous whitespace, no loud fill.
-
-## 3. Targeted polish (only where the live page still feels flat)
-
-- **Hero (`ToddlerHero.tsx`)** — keep `<video>` element with `firstyear-stage-9-12.jpg` as temporary poster fallback. Tighten hierarchy: eyebrow → balanced tracking-tight headline → standfirst → primary + secondary CTAs. Add a soft apricot halo wash behind the headline. Confirm subject framing is safe on desktop / iPad / mobile. Future-video comment block stays.
-- **Age nav (`ToddlerAgeNav.tsx`)** — raise presence: small eyebrow + one-line standfirst above the pill row, pill height ≥44px, quiet hover lift, clearer current-state ring. Horizontal scroll-safe on mobile, wraps on iPad+.
-- **AI support (`ToddlerAISupport.tsx`)** — premium calm frame: soft apricot panel, generous padding, cocoa-russet text, three example chips. Embedded, not a CTA block.
-- **Topic clusters (`ToddlerTopicClusters.tsx`)** — keep 2-col desktop+iPad, 1-col mobile. Enrich each card: small eyebrow, headline, one-sentence standfirst, 3 bullet links, quiet arrow CTA. Hairline border + low-elevation hover. No leaf motifs.
-- **Tools & resources (`ToddlerToolsResources.tsx`)** — editorial cards (label, title, one-line description, quiet arrow link). Consistent card height, 4-up desktop / 2-up iPad / 1-up mobile.
-- **What this covers / Common questions / Reflection / Pathways / Final CTA** — pass only for spacing rhythm, type scale, and restrained apricot accent use so they don't sag next to the upgraded sections.
-
-## 4. Responsive sanity
-
-Manual check at 1280 / 1024 / 390:
-- no horizontal scroll
-- hero subject never cropped at head/face
-- age pills tap-target ≥44px and wrap cleanly
-- AI support not cramped at iPad
-- topic + tools cards: 2-col desktop+iPad, 1-col mobile, equal heights
-
-## Files touched
-
-- `src/index.css` (tokens only)
-- `src/pages/Toddler.tsx` (reorder only)
-- `src/components/toddler/ToddlerHero.tsx`
-- `src/components/toddler/ToddlerAgeNav.tsx`
-- `src/components/toddler/ToddlerAISupport.tsx`
-- `src/components/toddler/ToddlerTopicClusters.tsx`
-- `src/components/toddler/ToddlerToolsResources.tsx`
-- `src/components/toddler/ToddlerWhatThisCovers.tsx`
-- `src/components/toddler/ToddlerCommonQuestions.tsx`
-- `src/components/toddler/ToddlerReflection.tsx`
-- `src/components/toddler/ToddlerPathways.tsx`
-- `src/components/toddler/ToddlerFinalCTA.tsx`
-
-## Out of scope (will not touch)
-
-Toddler topic / month / article pages. Family or Parent hub. Nav / routing / `App.tsx` / `Navbar` / `Footer`. TTC, Pregnancy, First Year, IVF, legacy Postpartum, Journal. No real toddler video asset created or faked.
-
-## Return after build (A–H)
-
-A. Files changed
-B. Tokens replaced with the exact approved muted apricot / pumpkin clay values (28/26/22/20), staying dusty, warm, premium, and visibly distinct from CTA terracotta
-C. Hero remains video-led in structure; `firstyear-stage-9-12.jpg` is a temporary poster fallback only — final toddler video still pending
-D. AI support moved directly after age navigation, kept calm and embedded (soft panel, cocoa-russet text, no heavy filled blocks)
-E. Targeted polish applied to hero, age nav, AI support, topic cards, tools/resources, and overall rhythm — hub reads closer to Pregnancy hub standard
-F. Desktop / iPad / mobile checked: no crops, no horizontal scroll, 2-col topic+tools on desktop+iPad, 1-col mobile, age pills ≥44px
-G. No out-of-scope edits (no new pages, no nav/routing, no other journeys touched, no faked video)
-H. Required asset to finish the hero = a calm 6–10s home-light clip of a true 18–30 month toddler (walking / playing / reading / stacking blocks), warm daylight, safe head/face composition; once supplied as `src/assets/toddler-hero-video.mp4` and registered via its `.asset.json`, wire it at the marked slot in `ToddlerHero.tsx` and remove the temporary poster note.
+### Return A–H
+Files changed · video wired (PASS) · poster fallback only · hero premium uplift · AI strengthened in place after age nav · hub lifted to Pregnancy quality · desktop/iPad/mobile checked · no out-of-scope work.

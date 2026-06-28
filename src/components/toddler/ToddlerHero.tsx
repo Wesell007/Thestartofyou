@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
-import toddlerHeroPoster from "@/assets/firstyear-stage-9-12.jpg";
+import toddlerHeroPoster from "@/assets/toddler-hero-poster.jpg.asset.json";
 import toddlerHeroVideo from "@/assets/toddler-hero-video.mp4.asset.json";
 
 /**
  * ToddlerHero — video-led.
  *
- * Primary hero media is the real toddler video (calm home-light clip of
- * a ~24m toddler stacking wooden blocks on a soft wool rug). The poster
- * (firstyear-stage-9-12.jpg) is retained only as a fallback while the
- * video loads or if playback fails.
+ * Primary hero media is the approved toddler video (calm home-light clip
+ * of a Black toddler, ~24m, gently stacking wooden blocks on a soft wool
+ * rug with a parent's hand softly in frame). The poster is a matching
+ * still extracted directly from the same approved hero video, so the
+ * poster-to-video handoff is seamless (same subject, framing, lighting
+ * and palette). The poster only displays while the video loads or if
+ * playback fails.
  *
  * Subject sits to the right of frame, so copy lives on the left over a
  * warm parchment-to-transparent wash. object-position is tuned per

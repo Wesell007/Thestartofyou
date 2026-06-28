@@ -31,7 +31,7 @@ const ToddlerHero = () => {
         loop
         playsInline
         preload="auto"
-        poster={toddlerHeroPoster}
+        poster={toddlerHeroPoster.url}
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover object-[72%_center] md:object-[68%_center] lg:object-[62%_center]"
       >

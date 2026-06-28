@@ -18,10 +18,10 @@ const Toddler = () => {
       <main>
         <ToddlerHero />
         <ToddlerAgeNav />
+        <ToddlerAISupport />
         <ToddlerWhatThisCovers />
         <ToddlerToolsResources />
         <ToddlerTopicClusters />
-        <ToddlerAISupport />
         <ToddlerCommonQuestions />
         <ToddlerReflection />
         <ToddlerPathways />

@@ -66,13 +66,19 @@ const ToddlerTopicClusters = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-          {clusters.map(({ title, body, chips }) => (
+          {clusters.map(({ title, body, chips }, i) => (
             <Link
               key={title}
               to={`/ask?q=${encodeURIComponent(title + " toddler")}`}
               className="group block rounded-2xl border bg-parchment p-7 md:p-8 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_18px_40px_-24px_rgba(60,40,20,0.3)]"
-              style={{ borderColor: "hsl(var(--stage-toddler-accent) / 0.2)" }}
+              style={{ borderColor: "hsl(var(--stage-toddler-accent) / 0.18)" }}
             >
+              <p
+                className="font-sans text-[10.5px] font-light tracking-[0.28em] uppercase mb-3"
+                style={{ color: "hsl(var(--stage-toddler-accent) / 0.9)" }}
+              >
+                Cluster · {String(i + 1).padStart(2, "0")}
+              </p>
               <h3
                 className="font-serif text-xl md:text-2xl mb-2"
                 style={{ color: "hsl(var(--stage-toddler-deep))" }}
@@ -82,13 +88,13 @@ const ToddlerTopicClusters = () => {
               <p className="font-sans text-[14.5px] font-light text-foreground/65 leading-relaxed mb-5">
                 {body}
               </p>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-1.5 mb-6">
                 {chips.map((c) => (
                   <span
                     key={c}
                     className="inline-flex items-center rounded-pill px-3 py-1 font-sans text-[11.5px] tracking-wide"
                     style={{
-                      backgroundColor: "hsl(var(--stage-toddler-soft) / 0.7)",
+                      backgroundColor: "hsl(var(--stage-toddler-soft) / 0.6)",
                       color: "hsl(var(--stage-toddler-deep) / 0.85)",
                     }}
                   >
@@ -96,6 +102,13 @@ const ToddlerTopicClusters = () => {
                   </span>
                 ))}
               </div>
+              <span
+                className="inline-flex items-center gap-2 font-sans text-[12.5px] font-medium tracking-wide transition-transform duration-300 group-hover:translate-x-0.5"
+                style={{ color: "hsl(var(--stage-toddler-accent))" }}
+              >
+                Explore this cluster
+                <span aria-hidden="true">→</span>
+              </span>
             </Link>
           ))}
         </div>

@@ -2,6 +2,15 @@
 // Typed configs for the 8 Toddler subtopic gateway pages. UK English.
 // Calm, grounded, practical. Short editorial answers, not long articles.
 
+import heroDevelopment from "@/assets/toddler-topic-development.jpg.asset.json";
+import heroBehaviour from "@/assets/toddler-topic-behaviour.jpg.asset.json";
+import heroSpeech from "@/assets/toddler-topic-speech.jpg.asset.json";
+import heroSleep from "@/assets/toddler-topic-sleep.jpg.asset.json";
+import heroFood from "@/assets/toddler-topic-food.jpg.asset.json";
+import heroPotty from "@/assets/toddler-topic-potty.jpg.asset.json";
+import heroHealth from "@/assets/toddler-topic-health.jpg.asset.json";
+import heroPlay from "@/assets/toddler-topic-play.jpg.asset.json";
+
 export type ToddlerTopicSlug =
   | "development-milestones"
   | "behaviour-emotions"

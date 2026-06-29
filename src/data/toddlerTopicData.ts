@@ -251,10 +251,10 @@ const food: ToddlerTopicConfig = {
 
 const potty: ToddlerTopicConfig = {
   slug: "potty-learning",
-  eyebrow: "Potty learning",
-  title: "Potty learning",
+  eyebrow: "Potty training",
+  title: "Potty training",
   standfirst:
-    "There is no perfect age and no perfect method. Potty learning tends to go more smoothly when you wait for readiness than when you start by the calendar. Here is a calm, pressure-free look at what helps.",
+    "There is no perfect age and no perfect method. Potty training tends to go more smoothly when you wait for readiness than when you start by the calendar. Here is a calm, pressure-free look at what helps.",
   whatThisCovers: {
     lead: "Honest guidance on readiness, starting out, accidents and night dryness.",
     bullets: [
@@ -273,10 +273,11 @@ const potty: ToddlerTopicConfig = {
     { q: "What do I do about accidents?", a: "Stay calm, change them matter-of-factly, and don't make it a moment. Shame slows learning. If accidents suddenly return after a settled period, think about illness, change at home, or simply a regression — usually short-lived." },
     { q: "What about night dryness?", a: "Night dryness is a separate skill and often takes months or years after daytime is reliable. Bedwetting up to age 5 is not usually anything to act on. If you are worried after that, your GP or health visitor can help." },
   ],
-  aiHeading: "Ask about potty learning",
+  aiHeading: "Ask about potty training",
   aiDescription:
     "Readiness, accidents, night dryness — ask in plain words and get a calm, considered answer.",
-  aiPlaceholder: "What's on your mind about potty learning?",
+  aiPlaceholder: "What's on your mind about potty training?",
+
   aiPrompts: [
     "When should we start potty training?",
     "What are the signs of readiness?",

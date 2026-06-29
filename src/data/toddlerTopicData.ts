@@ -90,6 +90,7 @@ const development: ToddlerTopicConfig = {
   ],
   related: ["speech-language", "play-connection", "behaviour-emotions"],
   illustration: "deer",
+  heroImage: heroDevelopment.url,
 };
 
 const behaviour: ToddlerTopicConfig = {
@@ -128,6 +129,7 @@ const behaviour: ToddlerTopicConfig = {
   ],
   related: ["speech-language", "sleep", "play-connection"],
   illustration: "rabbit",
+  heroImage: heroBehaviour.url,
 };
 
 const speech: ToddlerTopicConfig = {
@@ -166,6 +168,7 @@ const speech: ToddlerTopicConfig = {
   ],
   related: ["development-milestones", "behaviour-emotions", "play-connection"],
   illustration: "bird",
+  heroImage: heroSpeech.url,
 };
 
 const sleep: ToddlerTopicConfig = {
@@ -204,6 +207,7 @@ const sleep: ToddlerTopicConfig = {
   ],
   related: ["behaviour-emotions", "development-milestones", "health-safety"],
   illustration: "leaf",
+  heroImage: heroSleep.url,
 };
 
 const food: ToddlerTopicConfig = {
@@ -242,6 +246,7 @@ const food: ToddlerTopicConfig = {
   ],
   related: ["health-safety", "behaviour-emotions", "development-milestones"],
   illustration: "leaf",
+  heroImage: heroFood.url,
 };
 
 const potty: ToddlerTopicConfig = {
@@ -280,6 +285,7 @@ const potty: ToddlerTopicConfig = {
   ],
   related: ["development-milestones", "behaviour-emotions", "health-safety"],
   illustration: "butterfly",
+  heroImage: heroPotty.url,
 };
 
 const health: ToddlerTopicConfig = {
@@ -319,6 +325,7 @@ const health: ToddlerTopicConfig = {
   related: ["food-feeding", "sleep", "development-milestones"],
   medicallyReviewed: true,
   illustration: "leaf",
+  heroImage: heroHealth.url,
 };
 
 const play: ToddlerTopicConfig = {
@@ -357,6 +364,7 @@ const play: ToddlerTopicConfig = {
   ],
   related: ["behaviour-emotions", "speech-language", "development-milestones"],
   illustration: "butterfly",
+  heroImage: heroPlay.url,
 };
 
 export const toddlerTopicConfigs: Record<ToddlerTopicSlug, ToddlerTopicConfig> = {

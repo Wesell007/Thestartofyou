@@ -1,48 +1,62 @@
-# Toddler Subtopic Pages — Phase 2
+# Toddler Topic Pages — Premium Polish Pass
 
-Build 8 premium Toddler topic gateway pages from one reusable template and one typed data registry. Wire hub cluster cards to the new routes.
+Single-file polish of `src/components/toddler/topic/ToddlerTopicPage.tsx`. No route, data, asset, nav, or cross-journey changes.
 
-## Routes (registered above `/:journey/:stage` and the catch-all)
-- `/toddler/development-milestones`
-- `/toddler/behaviour-emotions`
-- `/toddler/speech-language`
-- `/toddler/sleep`
-- `/toddler/food-feeding`
-- `/toddler/potty-learning`
-- `/toddler/health-safety`
-- `/toddler/play-connection`
+## File touched
+- `src/components/toddler/topic/ToddlerTopicPage.tsx` (only)
 
-## Create
-- `src/data/toddlerTopicData.ts` — typed `ToddlerTopicConfig` registry keyed by slug. Fields: slug, eyebrow, title, standfirst, whatThisCovers (lead + 5–6 bullets), commonQuestions (5 short Q/A), aiHeading, aiDescription, aiPlaceholder, aiPrompts (4), related (3 slugs), medicallyReviewed flag, illustration kind (`deer | rabbit | butterfly | leaf | bird`). UK English. Calm, grounded, practical. Gentle GP / health visitor / 111 signposting on Health & safety, plus light support pointers in Sleep, Food & feeding and Speech & language.
-- `src/components/toddler/topic/ToddlerTopicPage.tsx` — shared template.
-- `src/pages/toddler/{DevelopmentMilestones,BehaviourEmotions,SpeechLanguage,Sleep,FoodFeeding,PottyLearning,HealthSafety,PlayConnection}.tsx` — thin wrappers passing the matching config.
+`Check` icon from lucide-react is already used elsewhere in the project, so no new deps. No edits to `toddlerTopicData.ts` needed.
 
-## Edit
-- `src/App.tsx` — add the 8 routes in a clearly-commented Toddler topic block above `/:journey/:stage` and the catch-all.
-- `src/components/toddler/ToddlerTopicClusters.tsx` — swap the `Link to={/ask?q=…}` for `to={/toddler/<slug>}`, mapping the 8 cards by index to the registry order. Keep the existing card visual design intact; only adjust the CTA label affordance if needed (e.g. "Explore this topic").
+## Polish moves
 
-## Template (every topic page)
-1. `Navbar`.
-2. Hero — parchment background, soft apricot tint halo at top, breadcrumb `Toddler › <title>` (home icon + chevron), eyebrow `Toddler guide · <eyebrow>`, H1 from config, standfirst from config. One subtle `ToddlerIllustrations` mark at ~0.32 opacity in the top-right of the hero, `hidden sm:block`. Optional "Medically reviewed by Jenny Joines" pill (Health & safety only).
-3. "What this covers" — parchment card, hairline apricot border, italic lead + 5–6 bullets with small apricot dot markers in a 2-column grid on desktop, 1-column on mobile.
-4. "Common questions" — shadcn `Accordion` with 5 items, matching the parchment / hairline border styling used on the Toddler hub.
-5. "Ask The Start of You" AI support — wrap `HubAISupport` in the same parchment panel + apricot wash used on the hub, passing `heading`, `description`, `placeholder`, `suggestions`, `context`, `stageBg="--stage-toddler"`, `stageAccent="--stage-toddler-accent"`. Add a single short reassurance line below.
-6. "More toddler topics" — 3 same-side chevron cards linking to the related slugs.
-7. Soft CTA strip back to `/toddler` (hairline divider, italic line, pill button).
-8. `Footer`.
+### Hero
+- Apricot-to-parchment vertical wash plus soft apricot bloom behind the H1.
+- Breadcrumb stays outside the card (mb-10/12, lighter weight, subtle hover).
+- Parchment hero card: 28px radius, 1px apricot border, warm soft shadow + inner highlight, padding `p-7 sm:p-10 md:p-14`.
+- Accent rule + eyebrow → H1 scale `2.3rem → 3.1rem` with tighter leading → standfirst constrained to `max-w-[34rem]` at 16px for readability.
+- Medically reviewed pill: stronger border, mt-9.
 
-All colour, spacing, radius and shadow values reuse existing toddler stage tokens (`--stage-toddler`, `--stage-toddler-soft`, `--stage-toddler-deep`, `--stage-toddler-accent`, `--parchment`). No new CSS tokens.
+### Illustration
+- Existing `ToddlerIllustrations` only.
+- Moved inside the hero card: `absolute -bottom-6 -right-4` (md scales up), `w-40 md:w-56 lg:w-64`, `opacity-[0.26]`, `hidden md:block`, `pointer-events-none`. Integrated, never floating.
+
+### What this covers
+- 26px radius card, warmer apricot border, layered shadow + inner highlight.
+- Serif italic lead with faint apricot left rule.
+- Apricot-ringed `Check` markers (subtle, premium, not generic checklist), two-column on md+, single on mobile, generous row gap.
+
+### Common questions
+- 18px radius accordion items, warmer apricot border.
+- Hover: -1px lift + warm shadow.
+- Open state: faint apricot tint fill + 2px apricot left accent bar.
+- Trigger typography bumped to 17–18px serif; answer at 15px with `max-w-prose` and looser leading.
+
+### AI support
+- Section wash kept; container tightened to `max-w-3xl`.
+- Centred editorial eyebrow "Ask anything" above the panel.
+- Panel: 28px radius, stronger apricot border, layered shadow, `parchment/85` with subtle backdrop blur.
+- Footnote smaller and muted.
+
+### More toddler topics
+- Eyebrow + H2 "Continue exploring".
+- Cards: 20px radius, parchment, apricot border, soft rest shadow, -2px hover lift, equal heights via `h-full flex flex-col justify-between`.
+- Chevron pinned bottom-right inside a circular apricot-soft chip; nudges 1px on hover.
+- Grid `1 / 2 / 3` at mobile / md / lg.
+
+### Final CTA
+- Centred `max-w-2xl` panel, 28px radius, apricot border.
+- Apricot-to-parchment 160° gradient, warm shadow.
+- Stronger button affordance with deeper hover shadow.
+- `pb-28 md:pb-32` for breathing room above Footer.
+
+## Technical rules
+- Only existing `--stage-toddler*` and `--parchment` tokens.
+- No new CSS tokens, no new dependencies, no route changes, no data model changes, no asset changes.
+
+## Verification
+- Playwright at 1280 / 1024 / 390 across all 8 routes (`development-milestones`, `behaviour-emotions`, `speech-language`, `sleep`, `food-feeding`, `potty-learning`, `health-safety`, `play-connection`).
+- Full-page screenshots + targeted hero card, accordion, related grid shots.
+- Confirm no horizontal scroll, illustration hidden on mobile, sections stack cleanly, CTA spaced from Footer, routes intact.
 
 ## Out of scope
-Toddler hero video/poster assets, Navbar, Footer, TTC, Pregnancy, First Year, IVF, legacy Postpartum, Journal, toddler month/age/article pages, Family/Parent hub, nav additions.
-
-## Verification (Playwright headless, viewport 1280×1800 then 1024 and 390)
-- `/toddler` and all 8 new routes render with no horizontal scroll.
-- Hero copy readable; woodland accent subtle, not childish.
-- Accordion opens/closes.
-- AI panel stacks cleanly on mobile.
-- Related-topic cards stack cleanly on mobile.
-- All 8 hub cluster cards navigate to `/toddler/<slug>`.
-
-## Return after build
-A. Files changed · B. Routes created · C. All 8 pages render · D. Hub cards link to new routes · E. Topic page design matches Toddler hub style · F. AI support present on every topic page · G. Desktop / iPad / mobile checks passed · H. No out-of-scope files touched.
+No month pages, age pages, article pages, Family/Parent hubs, nav changes, or asset changes. Navbar, Footer, TTC, Pregnancy, First Year, IVF, legacy Postpartum, Journal untouched.

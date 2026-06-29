@@ -6,7 +6,7 @@ const clusters = [
   { slug: "speech-language", title: "Speech & language", body: "Vocabulary, sentences, late talkers and bilingual homes.", chips: ["First words", "Two-word phrases", "Late talkers", "Bilingual"] },
   { slug: "sleep", title: "Sleep", body: "Nap transitions, bedtime resistance, night waking and early mornings.", chips: ["Nap drop", "Bedtime battles", "Night waking", "Cot to bed"] },
   { slug: "food-feeding", title: "Food & feeding", body: "Picky eating, refusal, snacks, mealtimes and family meals.", chips: ["Picky eating", "Refusal", "Snacks", "Family meals"] },
-  { slug: "potty-learning", title: "Potty learning", body: "Readiness, the first weeks, accidents and night dryness.", chips: ["Readiness", "Starting out", "Accidents", "Night dryness"] },
+  { slug: "potty-learning", title: "Potty training", body: "Readiness, the first weeks, accidents and night dryness.", chips: ["Readiness", "Starting out", "Accidents", "Night dryness"] },
   { slug: "health-safety", title: "Health & safety", body: "Common illnesses, fevers, accidents and the home environment.", chips: ["Fevers", "Common bugs", "Childproofing", "When to see a GP"] },
   { slug: "play-connection", title: "Play & connection", body: "Independent play, screen time, reading and quiet rituals.", chips: ["Independent play", "Screen time", "Books", "Outdoor"] },
 ];

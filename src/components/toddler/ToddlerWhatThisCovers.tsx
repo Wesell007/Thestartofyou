@@ -4,7 +4,7 @@ const pillars = [
   { title: "Speech & language", body: "Words, sentences, understanding and when to seek support." },
   { title: "Sleep", body: "Naps fading, night waking, transitions and routines that hold." },
   { title: "Food & eating", body: "Picky days, refusals, mealtimes and growing independence." },
-  { title: "Potty learning", body: "Readiness signs, gentle starts and what's normal along the way." },
+  { title: "Potty training", body: "Readiness signs, gentle starts and what's normal along the way." },
   { title: "Health & illness", body: "Common toddler bugs, fevers and when something needs a GP." },
   { title: "Play & connection", body: "Calm play ideas, screen time and emotional attunement." },
 ];

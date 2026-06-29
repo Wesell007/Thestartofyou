@@ -13,25 +13,10 @@ import {
   ToddlerTopicConfig,
   TODDLER_TOPIC_INDEX,
 } from "@/data/toddlerTopicData";
-import {
-  DeerMark,
-  RabbitMark,
-  ButterflyMark,
-  LeafSprig,
-  BirdMark,
-} from "@/components/toddler/ToddlerIllustrations";
 
 interface Props {
   config: ToddlerTopicConfig;
 }
-
-const ILLUSTRATION = {
-  deer: DeerMark,
-  rabbit: RabbitMark,
-  butterfly: ButterflyMark,
-  leaf: LeafSprig,
-  bird: BirdMark,
-} as const;
 
 const ToddlerTopicPage = ({ config }: Props) => {
   const accent = "hsl(var(--stage-toddler-accent))";
@@ -43,8 +28,6 @@ const ToddlerTopicPage = ({ config }: Props) => {
   const deep = "hsl(var(--stage-toddler-deep))";
   const deepSoft = "hsl(var(--stage-toddler-deep) / 0.72)";
   const deepMuted = "hsl(var(--stage-toddler-deep) / 0.55)";
-
-  const Illustration = ILLUSTRATION[config.illustration];
 
   const related = config.related
     .filter((s) => s !== config.slug)
@@ -65,6 +48,9 @@ const ToddlerTopicPage = ({ config }: Props) => {
 
   const heroCardShadow =
     "0 36px 80px -50px rgba(70,40,20,0.32), inset 0 1px 0 hsl(0 0% 100% / 0.65)";
+
+  const imagePanelShadow =
+    "0 28px 60px -34px rgba(70,40,20,0.42), inset 0 1px 0 hsl(0 0% 100% / 0.55)";
 
   return (
     <div className="min-h-screen font-sans bg-parchment">
@@ -87,7 +73,7 @@ const ToddlerTopicPage = ({ config }: Props) => {
             aria-hidden
           />
 
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10">
+          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
             {/* Breadcrumb outside the hero card */}
             <nav
               aria-label="Breadcrumb"
@@ -116,66 +102,113 @@ const ToddlerTopicPage = ({ config }: Props) => {
               </ol>
             </nav>
 
-            {/* Parchment hero card */}
+            {/* Parchment hero card — image-led split */}
             <div
-              className="relative bg-parchment rounded-[28px] border overflow-hidden p-7 sm:p-10 md:p-14"
+              className="relative bg-parchment rounded-[28px] border overflow-hidden p-6 sm:p-8 md:p-10 lg:p-12"
               style={{
                 borderColor: accentBorder,
                 boxShadow: heroCardShadow,
               }}
             >
-              {/* Integrated woodland illustration (desktop/tablet only) */}
-              <Illustration
-                className="pointer-events-none absolute -bottom-6 -right-4 md:-bottom-8 md:-right-6 w-40 md:w-56 lg:w-64 opacity-[0.26] hidden md:block"
-              />
-
-              <div className="relative">
-                <span
-                  className="block h-px w-8 mb-5"
-                  style={{ background: accentMid }}
-                  aria-hidden
-                />
-                <p
-                  className="font-sans text-[11px] font-light tracking-[0.3em] uppercase"
-                  style={{ color: accent }}
-                >
-                  Toddler guide · {config.eyebrow}
-                </p>
-                <h1
-                  className="mt-7 font-serif text-[2.3rem] sm:text-[2.7rem] md:text-[3.1rem] leading-[1.05] tracking-[-0.005em]"
-                  style={{ color: deep }}
-                >
-                  {config.title}
-                </h1>
-                <p
-                  className="mt-7 md:mt-8 font-sans text-[16px] font-light leading-[1.65] max-w-[34rem]"
-                  style={{ color: deepSoft }}
-                >
-                  {config.standfirst}
-                </p>
-
-                {config.medicallyReviewed && (
-                  <div className="mt-9">
-                    <span
-                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[11.5px] font-light"
+              <div className="relative grid grid-cols-1 md:grid-cols-12 md:gap-10 lg:gap-14 items-center">
+                {/* Image — stacks on mobile (top), sits right on md+ */}
+                <div className="md:col-span-5 md:order-2 mb-7 md:mb-0">
+                  {config.heroImage ? (
+                    <div
+                      className="relative w-full overflow-hidden rounded-[22px] border aspect-[5/4] md:aspect-[4/5]"
                       style={{
                         borderColor: accentBorderStrong,
-                        backgroundColor: accentSoft,
-                        color: deep,
+                        boxShadow: imagePanelShadow,
                       }}
                     >
-                      <ShieldCheck size={13} strokeWidth={1.8} />
-                      Medically reviewed by Jenny Joines
-                    </span>
-                  </div>
-                )}
+                      <img
+                        src={config.heroImage}
+                        alt={`${config.title} — Toddler`}
+                        loading="eager"
+                        className="absolute inset-0 h-full w-full object-cover"
+                        style={{ objectPosition: "center 30%" }}
+                      />
+                      {/* subtle inner highlight */}
+                      <span
+                        className="pointer-events-none absolute inset-0 rounded-[22px]"
+                        style={{
+                          boxShadow:
+                            "inset 0 1px 0 hsl(0 0% 100% / 0.35), inset 0 0 0 1px hsl(0 0% 100% / 0.08)",
+                        }}
+                        aria-hidden
+                      />
+                    </div>
+                  ) : (
+                    /* TODO: upload hero image */
+                    <div
+                      className="w-full rounded-[22px] border aspect-[5/4] md:aspect-[4/5] grid place-items-center"
+                      style={{
+                        borderColor: accentBorder,
+                        background:
+                          "linear-gradient(160deg, hsl(var(--stage-toddler) / 0.6), hsl(var(--parchment)) 80%)",
+                        boxShadow: imagePanelShadow,
+                      }}
+                      aria-hidden
+                    >
+                      <span
+                        className="font-sans text-[11px] tracking-[0.28em] uppercase"
+                        style={{ color: deepMuted }}
+                      >
+                        Image coming soon
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Copy column */}
+                <div className="md:col-span-7 md:order-1">
+                  <span
+                    className="block h-px w-8 mb-5"
+                    style={{ background: accentMid }}
+                    aria-hidden
+                  />
+                  <p
+                    className="font-sans text-[11px] font-light tracking-[0.3em] uppercase"
+                    style={{ color: accent }}
+                  >
+                    Toddler guide · {config.eyebrow}
+                  </p>
+                  <h1
+                    className="mt-6 font-serif text-[2.1rem] sm:text-[2.5rem] md:text-[2.7rem] lg:text-[3rem] leading-[1.05] tracking-[-0.005em]"
+                    style={{ color: deep }}
+                  >
+                    {config.title}
+                  </h1>
+                  <p
+                    className="mt-6 md:mt-7 font-sans text-[15.5px] md:text-[16px] font-light leading-[1.65] max-w-[34rem]"
+                    style={{ color: deepSoft }}
+                  >
+                    {config.standfirst}
+                  </p>
+
+                  {config.medicallyReviewed && (
+                    <div className="mt-7 md:mt-8">
+                      <span
+                        className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[11.5px] font-light"
+                        style={{
+                          borderColor: accentBorderStrong,
+                          backgroundColor: accentSoft,
+                          color: deep,
+                        }}
+                      >
+                        <ShieldCheck size={13} strokeWidth={1.8} />
+                        Medically reviewed by Jenny Joines
+                      </span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* ─── WHAT THIS COVERS ─────────────────────────────────────── */}
-        <section className="pb-16 md:pb-24">
+        <section className="pb-16 md:pb-20">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
             <div
               className="relative bg-parchment rounded-[26px] border p-7 sm:p-10 md:p-12"
@@ -233,8 +266,48 @@ const ToddlerTopicPage = ({ config }: Props) => {
           </div>
         </section>
 
+        {/* ─── AI SUPPORT (now directly after What this covers) ─────── */}
+        <section
+          className="relative py-20 md:py-24"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(var(--stage-toddler) / 0.6) 0%, hsl(var(--stage-toddler) / 0.28) 55%, hsl(var(--parchment)) 100%)",
+          }}
+        >
+          <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
+            <div className="mb-7 md:mb-8 flex flex-col items-center text-center gap-3">
+              <SectionLabel>Ask anything</SectionLabel>
+            </div>
+
+            <div
+              className="rounded-[28px] border bg-parchment/85 backdrop-blur-sm overflow-hidden"
+              style={{
+                borderColor: accentBorderStrong,
+                boxShadow:
+                  "0 36px 80px -46px rgba(70,40,20,0.38), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+              }}
+            >
+              <HubAISupport
+                heading={config.aiHeading}
+                description={config.aiDescription}
+                placeholder={config.aiPlaceholder}
+                suggestions={config.aiPrompts}
+                context={config.title}
+                stageBg="--stage-toddler"
+                stageAccent="--stage-toddler-accent"
+              />
+            </div>
+            <p
+              className="mt-7 text-center font-sans text-[12.5px] font-light tracking-wide max-w-lg mx-auto leading-relaxed"
+              style={{ color: deepMuted }}
+            >
+              A quiet companion for the questions you'd rather not Google at 2am.
+            </p>
+          </div>
+        </section>
+
         {/* ─── COMMON QUESTIONS ─────────────────────────────────────── */}
-        <section className="pb-20 md:pb-28">
+        <section className="py-20 md:py-24 bg-parchment">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
             <div className="mb-10 md:mb-12 flex flex-col items-start gap-4">
               <SectionLabel>Common questions</SectionLabel>
@@ -279,46 +352,6 @@ const ToddlerTopicPage = ({ config }: Props) => {
                 </AccordionItem>
               ))}
             </Accordion>
-          </div>
-        </section>
-
-        {/* ─── AI SUPPORT ───────────────────────────────────────────── */}
-        <section
-          className="relative py-20 md:py-28"
-          style={{
-            background:
-              "linear-gradient(to bottom, hsl(var(--stage-toddler) / 0.6) 0%, hsl(var(--stage-toddler) / 0.28) 55%, hsl(var(--parchment)) 100%)",
-          }}
-        >
-          <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
-            <div className="mb-7 md:mb-8 flex flex-col items-center text-center gap-3">
-              <SectionLabel>Ask anything</SectionLabel>
-            </div>
-
-            <div
-              className="rounded-[28px] border bg-parchment/85 backdrop-blur-sm overflow-hidden"
-              style={{
-                borderColor: accentBorderStrong,
-                boxShadow:
-                  "0 36px 80px -46px rgba(70,40,20,0.38), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
-              }}
-            >
-              <HubAISupport
-                heading={config.aiHeading}
-                description={config.aiDescription}
-                placeholder={config.aiPlaceholder}
-                suggestions={config.aiPrompts}
-                context={config.title}
-                stageBg="--stage-toddler"
-                stageAccent="--stage-toddler-accent"
-              />
-            </div>
-            <p
-              className="mt-7 text-center font-sans text-[12.5px] font-light tracking-wide max-w-lg mx-auto leading-relaxed"
-              style={{ color: deepMuted }}
-            >
-              A quiet companion for the questions you'd rather not Google at 2am.
-            </p>
           </div>
         </section>
 

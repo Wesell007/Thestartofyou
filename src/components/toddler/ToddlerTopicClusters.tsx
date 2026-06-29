@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 
 const clusters = [
-  { title: "Development & milestones", body: "Movement, fine motor, social skills and the wide range of normal.", chips: ["Walking & running", "Fine motor", "Social play", "Cognitive leaps"] },
-  { title: "Behaviour & emotions", body: "Tantrums, defiance, big feelings and gentle boundaries.", chips: ["Tantrums", "Boundaries", "Hitting & biting", "Sharing"] },
-  { title: "Speech & language", body: "Vocabulary, sentences, late talkers and bilingual homes.", chips: ["First words", "Two-word phrases", "Late talkers", "Bilingual"] },
-  { title: "Sleep", body: "Nap transitions, bedtime resistance, night waking and early mornings.", chips: ["Nap drop", "Bedtime battles", "Night waking", "Cot to bed"] },
-  { title: "Food & feeding", body: "Picky eating, refusal, snacks, mealtimes and family meals.", chips: ["Picky eating", "Refusal", "Snacks", "Family meals"] },
-  { title: "Potty learning", body: "Readiness, the first weeks, accidents and night dryness.", chips: ["Readiness", "Starting out", "Accidents", "Night dryness"] },
-  { title: "Health & safety", body: "Common illnesses, fevers, accidents and the home environment.", chips: ["Fevers", "Common bugs", "Childproofing", "When to see a GP"] },
-  { title: "Play & connection", body: "Independent play, screen time, reading and quiet rituals.", chips: ["Independent play", "Screen time", "Books", "Outdoor"] },
+  { slug: "development-milestones", title: "Development & milestones", body: "Movement, fine motor, social skills and the wide range of normal.", chips: ["Walking & running", "Fine motor", "Social play", "Cognitive leaps"] },
+  { slug: "behaviour-emotions", title: "Behaviour & emotions", body: "Tantrums, defiance, big feelings and gentle boundaries.", chips: ["Tantrums", "Boundaries", "Hitting & biting", "Sharing"] },
+  { slug: "speech-language", title: "Speech & language", body: "Vocabulary, sentences, late talkers and bilingual homes.", chips: ["First words", "Two-word phrases", "Late talkers", "Bilingual"] },
+  { slug: "sleep", title: "Sleep", body: "Nap transitions, bedtime resistance, night waking and early mornings.", chips: ["Nap drop", "Bedtime battles", "Night waking", "Cot to bed"] },
+  { slug: "food-feeding", title: "Food & feeding", body: "Picky eating, refusal, snacks, mealtimes and family meals.", chips: ["Picky eating", "Refusal", "Snacks", "Family meals"] },
+  { slug: "potty-learning", title: "Potty learning", body: "Readiness, the first weeks, accidents and night dryness.", chips: ["Readiness", "Starting out", "Accidents", "Night dryness"] },
+  { slug: "health-safety", title: "Health & safety", body: "Common illnesses, fevers, accidents and the home environment.", chips: ["Fevers", "Common bugs", "Childproofing", "When to see a GP"] },
+  { slug: "play-connection", title: "Play & connection", body: "Independent play, screen time, reading and quiet rituals.", chips: ["Independent play", "Screen time", "Books", "Outdoor"] },
 ];
 
 const ToddlerTopicClusters = () => {
@@ -29,10 +29,10 @@ const ToddlerTopicClusters = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7">
-          {clusters.map(({ title, body, chips }, i) => (
+          {clusters.map(({ slug, title, body, chips }, i) => (
             <Link
-              key={title}
-              to={`/ask?q=${encodeURIComponent(title + " toddler")}`}
+              key={slug}
+              to={`/toddler/${slug}`}
               className="group flex h-full flex-col rounded-[22px] border bg-parchment p-8 md:p-9 transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_24px_56px_-28px_rgba(60,40,20,0.35)]"
               style={{
                 borderColor: "hsl(var(--stage-toddler-accent) / 0.18)",
@@ -70,7 +70,7 @@ const ToddlerTopicClusters = () => {
                 className="mt-auto inline-flex items-center gap-2 font-sans text-[12.5px] font-medium tracking-wide transition-transform duration-300 group-hover:translate-x-1"
                 style={{ color: "hsl(var(--stage-toddler-accent))" }}
               >
-                Explore this cluster
+                Explore this topic
                 <span aria-hidden="true">→</span>
               </span>
             </Link>

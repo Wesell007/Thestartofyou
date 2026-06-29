@@ -82,6 +82,14 @@ import FYEmotionalWellbeing from "./pages/firstyear/EmotionalWellbeing.tsx";
 import FYBodyAndHormones from "./pages/firstyear/BodyAndHormones.tsx";
 import FYCheckupsAndWarningSigns from "./pages/firstyear/CheckupsAndWarningSigns.tsx";
 import Toddler from "./pages/Toddler.tsx";
+import ToddlerDevelopmentMilestones from "./pages/toddler/DevelopmentMilestones.tsx";
+import ToddlerBehaviourEmotions from "./pages/toddler/BehaviourEmotions.tsx";
+import ToddlerSpeechLanguage from "./pages/toddler/SpeechLanguage.tsx";
+import ToddlerSleep from "./pages/toddler/Sleep.tsx";
+import ToddlerFoodFeeding from "./pages/toddler/FoodFeeding.tsx";
+import ToddlerPottyLearning from "./pages/toddler/PottyLearning.tsx";
+import ToddlerHealthSafety from "./pages/toddler/HealthSafety.tsx";
+import ToddlerPlayConnection from "./pages/toddler/PlayConnection.tsx";
 import PreparingForBaby from "./pages/PreparingForBaby.tsx";
 import Support from "./pages/Support.tsx";
 import About from "./pages/About.tsx";
@@ -274,6 +282,16 @@ const App = () => (
           <Route path="/first-year/checkups-and-warning-signs" element={<FYCheckupsAndWarningSigns />} />
           {/* Toddler hub foundation — sits above /:journey/:stage and catch-all. */}
           <Route path="/toddler" element={<Toddler />} />
+          {/* Toddler subtopic gateway pages (Phase 2). One reusable template,
+              eight thin wrappers. Must sit above /:journey/:stage and catch-all. */}
+          <Route path="/toddler/development-milestones" element={<ToddlerDevelopmentMilestones />} />
+          <Route path="/toddler/behaviour-emotions" element={<ToddlerBehaviourEmotions />} />
+          <Route path="/toddler/speech-language" element={<ToddlerSpeechLanguage />} />
+          <Route path="/toddler/sleep" element={<ToddlerSleep />} />
+          <Route path="/toddler/food-feeding" element={<ToddlerFoodFeeding />} />
+          <Route path="/toddler/potty-learning" element={<ToddlerPottyLearning />} />
+          <Route path="/toddler/health-safety" element={<ToddlerHealthSafety />} />
+          <Route path="/toddler/play-connection" element={<ToddlerPlayConnection />} />
           <Route path="/preparing-for-baby" element={<PreparingForBaby />} />
           <Route path="/support" element={<Support />} />
           <Route path="/about" element={<About />} />

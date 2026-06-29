@@ -50,6 +50,7 @@ export interface ToddlerTopicConfig {
   related: ToddlerTopicSlug[];
   medicallyReviewed?: boolean;
   illustration: ToddlerIllustrationKind;
+  heroImage?: string;
 }
 
 const development: ToddlerTopicConfig = {

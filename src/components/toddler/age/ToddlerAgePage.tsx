@@ -197,12 +197,30 @@ const ToddlerAgePage = ({ config }: Props) => {
         </section>
 
         {/* ─── WHAT CHANGES ──────────────────────────────────────────── */}
-        <section className="pb-16 md:pb-20">
+        <section
+          className="relative pb-16 md:pb-20"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.3) 100%)",
+          }}
+        >
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
             <div
-              className="relative bg-parchment rounded-[26px] border p-7 sm:p-10 md:p-12"
-              style={{ borderColor: accentBorder, boxShadow: cardShadow }}
+              className="relative rounded-[26px] border p-7 sm:p-10 md:p-12 overflow-hidden"
+              style={{
+                borderColor: accentBorderStrong,
+                background:
+                  "linear-gradient(165deg, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.5) 100%)",
+                boxShadow:
+                  "0 28px 64px -40px rgba(70,40,20,0.32), inset 0 1px 0 hsl(0 0% 100% / 0.75)",
+              }}
             >
+              <span
+                className="pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full blur-3xl opacity-60"
+                style={{ background: "hsl(var(--stage-toddler-accent) / 0.18)" }}
+                aria-hidden
+              />
+              <div className="relative">
               <SectionLabel>What changes around this age</SectionLabel>
               <h2
                 className="mt-5 font-serif text-[1.75rem] md:text-[2rem] leading-tight"
@@ -242,6 +260,7 @@ const ToddlerAgePage = ({ config }: Props) => {
                   </li>
                 ))}
               </ul>
+              </div>
             </div>
           </div>
         </section>
@@ -264,14 +283,21 @@ const ToddlerAgePage = ({ config }: Props) => {
                 <Link
                   key={area.key}
                   to={`/toddler/${area.topic}`}
-                  className="group flex h-full flex-col justify-between gap-5 rounded-[20px] border bg-parchment px-6 py-6 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
+                  className="group relative flex h-full flex-col justify-between gap-5 rounded-[20px] border px-6 py-6 overflow-hidden transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
                   style={{
-                    borderColor: accentBorder,
+                    borderColor: accentBorderStrong,
+                    background:
+                      "linear-gradient(160deg, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.5) 100%)",
                     boxShadow:
-                      "0 14px 32px -28px rgba(70,40,20,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.6)",
+                      "0 14px 32px -28px rgba(70,40,20,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.65)",
                   }}
                 >
-                  <div>
+                  <span
+                    className="pointer-events-none absolute -top-10 -left-10 h-32 w-32 rounded-full blur-2xl opacity-60"
+                    style={{ background: "hsl(var(--stage-toddler-accent) / 0.16)" }}
+                    aria-hidden
+                  />
+                  <div className="relative">
                     <div className="flex items-center gap-2 mb-3">
                       <span
                         className="inline-block h-1.5 w-1.5 rounded-full"
@@ -292,7 +318,7 @@ const ToddlerAgePage = ({ config }: Props) => {
                       {area.body}
                     </p>
                   </div>
-                  <div className="flex items-center justify-between pt-2">
+                  <div className="relative flex items-center justify-between pt-2">
                     <span
                       className="font-sans text-[12px] tracking-wide"
                       style={{ color: accent }}
@@ -357,7 +383,13 @@ const ToddlerAgePage = ({ config }: Props) => {
         </section>
 
         {/* ─── COMMON QUESTIONS ──────────────────────────────────────── */}
-        <section className="py-20 md:py-24 bg-parchment">
+        <section
+          className="relative py-20 md:py-24"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.32) 50%, hsl(var(--parchment)) 100%)",
+          }}
+        >
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
             <div className="mb-10 md:mb-12 flex flex-col items-start gap-4">
               <SectionLabel>Common questions</SectionLabel>
@@ -374,8 +406,8 @@ const ToddlerAgePage = ({ config }: Props) => {
                 <AccordionItem
                   key={i}
                   value={`q${i}`}
-                  className="group/q relative rounded-[18px] border bg-parchment px-6 md:px-7 overflow-hidden transition-all duration-300 hover:-translate-y-[1px] hover:shadow-[0_18px_42px_-26px_rgba(70,40,20,0.3)] data-[state=open]:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
-                  style={{ borderColor: accentBorder }}
+                  className="group/q relative rounded-[18px] border bg-parchment/90 px-6 md:px-7 overflow-hidden transition-all duration-300 hover:-translate-y-[1px] hover:shadow-[0_18px_42px_-26px_rgba(70,40,20,0.3)] data-[state=open]:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)] data-[state=open]:border-[hsl(var(--stage-toddler-accent)/0.32)]"
+                  style={{ borderColor: accentBorderStrong }}
                 >
                   <span
                     className="pointer-events-none absolute left-0 top-3 bottom-3 w-[2px] rounded-r opacity-0 group-data-[state=open]/q:opacity-100 transition-opacity"
@@ -384,7 +416,7 @@ const ToddlerAgePage = ({ config }: Props) => {
                   />
                   <span
                     className="pointer-events-none absolute inset-0 opacity-0 group-data-[state=open]/q:opacity-100 transition-opacity"
-                    style={{ background: accentSoft }}
+                    style={{ background: "hsl(var(--stage-toddler-accent) / 0.12)" }}
                     aria-hidden
                   />
                   <AccordionTrigger
@@ -409,9 +441,20 @@ const ToddlerAgePage = ({ config }: Props) => {
         <section className="pb-20 md:pb-24 bg-parchment">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
             <div
-              className="rounded-[24px] border p-7 sm:p-9 md:p-10 flex gap-5"
-              style={{ borderColor: accentBorder, backgroundColor: accentSoft }}
+              className="relative rounded-[24px] border p-7 sm:p-9 md:p-10 flex gap-5 overflow-hidden"
+              style={{
+                borderColor: accentBorderStrong,
+                background:
+                  "linear-gradient(160deg, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.55) 100%)",
+                boxShadow:
+                  "0 18px 44px -32px rgba(70,40,20,0.28), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+              }}
             >
+              <span
+                className="pointer-events-none absolute -top-12 -right-12 h-40 w-40 rounded-full blur-3xl opacity-60"
+                style={{ background: "hsl(var(--stage-toddler-accent) / 0.18)" }}
+                aria-hidden
+              />
               <span
                 className="grid place-items-center h-9 w-9 rounded-full shrink-0 border"
                 style={{
@@ -422,7 +465,7 @@ const ToddlerAgePage = ({ config }: Props) => {
               >
                 <Heart size={15} strokeWidth={1.8} style={{ color: accent }} />
               </span>
-              <div>
+              <div className="relative">
                 <p
                   className="font-sans text-[11px] font-light tracking-[0.28em] uppercase mb-2"
                   style={{ color: accent }}
@@ -441,7 +484,13 @@ const ToddlerAgePage = ({ config }: Props) => {
         </section>
 
         {/* ─── RELATED TOPICS ────────────────────────────────────────── */}
-        <section className="py-20 md:py-24 bg-parchment">
+        <section
+          className="relative py-20 md:py-24"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.28) 100%)",
+          }}
+        >
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
             <div className="mb-9 md:mb-11 flex flex-col items-start gap-3">
               <SectionLabel>Related toddler topics</SectionLabel>
@@ -459,14 +508,21 @@ const ToddlerAgePage = ({ config }: Props) => {
                   <Link
                     key={slug}
                     to={`/toddler/${slug}`}
-                    className="group flex h-full flex-col justify-between gap-6 rounded-[20px] border bg-parchment px-6 py-6 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
+                    className="group relative flex h-full flex-col justify-between gap-6 rounded-[20px] border px-6 py-6 overflow-hidden transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
                     style={{
-                      borderColor: accentBorder,
+                      borderColor: accentBorderStrong,
+                      background:
+                        "linear-gradient(160deg, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.5) 100%)",
                       boxShadow:
-                        "0 14px 32px -28px rgba(70,40,20,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.6)",
+                        "0 14px 32px -28px rgba(70,40,20,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.65)",
                     }}
                   >
-                    <div>
+                    <span
+                      className="pointer-events-none absolute -top-10 -left-10 h-28 w-28 rounded-full blur-2xl opacity-60"
+                      style={{ background: "hsl(var(--stage-toddler-accent) / 0.16)" }}
+                      aria-hidden
+                    />
+                    <div className="relative">
                       <p
                         className="font-sans text-[10.5px] font-light tracking-[0.28em] uppercase mb-2"
                         style={{ color: accent }}
@@ -480,7 +536,7 @@ const ToddlerAgePage = ({ config }: Props) => {
                         {t.title}
                       </p>
                     </div>
-                    <div className="flex items-center justify-end">
+                    <div className="relative flex items-center justify-end">
                       <span
                         className="inline-flex items-center justify-center h-8 w-8 rounded-full border transition-transform group-hover:translate-x-1"
                         style={{
@@ -500,16 +556,25 @@ const ToddlerAgePage = ({ config }: Props) => {
         </section>
 
         {/* ─── PREVIOUS / NEXT AGE ───────────────────────────────────── */}
-        <section className="pb-20 md:pb-24 bg-parchment">
+        <section
+          className="relative pb-20 md:pb-24"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.24) 100%)",
+          }}
+        >
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
               {prev ? (
                 <Link
                   to={`/toddler/${config.previousAge}`}
-                  className="group flex items-center justify-between gap-4 rounded-[20px] border bg-parchment px-6 py-5 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
+                  className="group relative flex items-center justify-between gap-4 rounded-[20px] border px-6 py-5 overflow-hidden transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
                   style={{
-                    borderColor: accentBorder,
-                    boxShadow: "inset 0 1px 0 hsl(0 0% 100% / 0.6)",
+                    borderColor: accentBorderStrong,
+                    background:
+                      "linear-gradient(160deg, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.5) 100%)",
+                    boxShadow:
+                      "0 14px 32px -28px rgba(70,40,20,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.6)",
                   }}
                 >
                   <span
@@ -541,10 +606,13 @@ const ToddlerAgePage = ({ config }: Props) => {
               {next ? (
                 <Link
                   to={`/toddler/${config.nextAge}`}
-                  className="group flex items-center justify-between gap-4 rounded-[20px] border bg-parchment px-6 py-5 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
+                  className="group relative flex items-center justify-between gap-4 rounded-[20px] border px-6 py-5 overflow-hidden transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
                   style={{
-                    borderColor: accentBorder,
-                    boxShadow: "inset 0 1px 0 hsl(0 0% 100% / 0.6)",
+                    borderColor: accentBorderStrong,
+                    background:
+                      "linear-gradient(160deg, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.5) 100%)",
+                    boxShadow:
+                      "0 14px 32px -28px rgba(70,40,20,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.6)",
                   }}
                 >
                   <div className="flex-1">

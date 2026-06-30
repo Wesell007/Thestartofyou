@@ -252,8 +252,19 @@ const AskPage = () => {
             the question and quick answer.
             ───────────────────────────────────────────── */}
         <div className="absolute inset-x-0 top-0 h-[680px] md:h-[760px] pointer-events-none overflow-hidden">
-          <div className={`absolute inset-0 bg-gradient-to-b ${isIVF ? "from-lavender-bg/35" : "from-sage-bg/35"} via-parchment/60 to-parchment`} />
-          <StageGlow tone={tone.glow} className="top-[-200px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px]" opacity={1} />
+          <div
+            className={`absolute inset-0 bg-gradient-to-b ${isIVF ? "from-lavender-bg/35" : "from-sage-bg/35"} via-parchment/60 to-parchment`}
+            style={sc ? { background: `linear-gradient(to bottom, ${sc.bgWash}, hsl(var(--parchment)) 60%, hsl(var(--parchment)) 100%)` } : undefined}
+          />
+          {sc ? (
+            <div
+              className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px] rounded-full blur-3xl pointer-events-none"
+              style={{ background: sc.accentSoft }}
+              aria-hidden
+            />
+          ) : (
+            <StageGlow tone={tone.glow} className="top-[-200px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px]" opacity={1} />
+          )}
           <BotanicalAccent
             className="top-24 -left-16 md:top-20 md:-left-6 rotate-[-10deg]"
             opacity="opacity-[0.22]"
@@ -304,8 +315,14 @@ const AskPage = () => {
           {/* Stage context chip */}
           {context && (
             <div className="mb-5">
-              <span className={`inline-flex items-center gap-1.5 ${tone.chipBg} ${tone.chipText} font-sans text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full ring-1 ${tone.chipRing}`}>
-                <span className={`w-1 h-1 rounded-full ${tone.chipDot}`} />
+              <span
+                className={`inline-flex items-center gap-1.5 ${tone.chipBg} ${tone.chipText} font-sans text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full ring-1 ${tone.chipRing}`}
+                style={sc ? { backgroundColor: sc.accentSoft, color: sc.deep, boxShadow: `inset 0 0 0 1px ${sc.accentRing}` } : undefined}
+              >
+                <span
+                  className={`w-1 h-1 rounded-full ${tone.chipDot}`}
+                  style={sc ? { backgroundColor: sc.accent } : undefined}
+                />
                 {context}
               </span>
             </div>
@@ -313,7 +330,10 @@ const AskPage = () => {
 
           {/* Question title, editorial */}
           <div className="mb-7">
-            <p className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrowSoft} mb-3`}>
+            <p
+              className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrowSoft} mb-3`}
+              style={sc ? { color: sc.accent } : undefined}
+            >
               You asked
             </p>
             <h1 className="font-serif text-[1.75rem] sm:text-[2.1rem] md:text-[2.65rem] text-foreground leading-[1.1] tracking-[-0.012em]">

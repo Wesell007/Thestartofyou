@@ -4,6 +4,11 @@
 // language only. No medical overclaim.
 
 import type { ToddlerTopicSlug } from "@/data/toddlerTopicData";
+import heroAge12to17 from "@/assets/toddler-age-12-17-months.jpg.asset.json";
+import heroAge18to23 from "@/assets/toddler-age-18-23-months.jpg.asset.json";
+import heroAge2Years from "@/assets/toddler-age-2-years.jpg.asset.json";
+import heroAge30Months from "@/assets/toddler-age-30-months.jpg.asset.json";
+import heroAge3Years from "@/assets/toddler-age-3-years.jpg.asset.json";
 
 export type ToddlerAgeSlug =
   | "12-17-months"

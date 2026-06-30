@@ -7,6 +7,7 @@ const PostpartumAISupport = () => (
     context="Postpartum recovery"
     stageBg="--stage-postpartum"
     stageAccent="--stage-postpartum-accent"
+    stage="postpartum"
   />
 );
 

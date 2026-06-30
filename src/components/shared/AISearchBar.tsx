@@ -9,6 +9,8 @@ interface AISearchBarProps {
   variant?: "hero" | "section";
   /** CSS custom property name for stage accent, e.g. "--stage-toddler-accent". When set, focus/active/loading states use this colour. */
   stageAccent?: string;
+  /** Stage key (e.g. "toddler"). When set, appended as &stage=... so /ask re-tones to match. */
+  stage?: string;
 }
 
 const AISearchBar = ({
@@ -21,25 +23,29 @@ const AISearchBar = ({
   context,
   variant = "section",
   stageAccent,
+  stage,
 }: AISearchBarProps) => {
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
   const [searching, setSearching] = useState(false);
   const navigate = useNavigate();
 
+  const buildParams = (q: string) => {
+    const params = new URLSearchParams({ q });
+    if (context) params.set("ctx", context);
+    if (stage) params.set("stage", stage);
+    return params;
+  };
+
   const handleAsk = () => {
     if (!query.trim()) return;
     setSearching(true);
-    const params = new URLSearchParams({ q: query.trim() });
-    if (context) params.set("ctx", context);
-    navigate(`/ask?${params.toString()}`);
+    navigate(`/ask?${buildParams(query.trim()).toString()}`);
   };
 
   const handleSuggestion = (s: string) => {
     setSearching(true);
-    const params = new URLSearchParams({ q: s });
-    if (context) params.set("ctx", context);
-    navigate(`/ask?${params.toString()}`);
+    navigate(`/ask?${buildParams(s).toString()}`);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

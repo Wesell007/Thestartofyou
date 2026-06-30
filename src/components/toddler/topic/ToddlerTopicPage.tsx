@@ -310,6 +310,7 @@ const ToddlerTopicPage = ({ config }: Props) => {
                 context={config.title}
                 stageBg="--stage-toddler"
                 stageAccent="--stage-toddler-accent"
+                stage="toddler"
               />
             </div>
             <p

@@ -11,6 +11,8 @@ interface HubAISupportProps {
   stageBg?: string;
   /** CSS custom property name for stage accent, e.g. "--stage-ttc-accent" */
   stageAccent?: string;
+  /** Stage key for /ask re-toning, e.g. "toddler". */
+  stage?: string;
 }
 
 const HubAISupport = ({
@@ -22,6 +24,7 @@ const HubAISupport = ({
   context,
   stageBg,
   stageAccent,
+  stage,
 }: HubAISupportProps) => {
   return (
     <section
@@ -58,6 +61,7 @@ const HubAISupport = ({
               suggestions={suggestions}
               context={context}
               stageAccent={stageAccent}
+              stage={stage}
             />
           </div>
         </div>

@@ -66,7 +66,7 @@ const ToddlerAgePage = ({ config }: Props) => {
             aria-hidden
           />
 
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10">
+          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl lg:max-w-6xl relative z-10">
             <nav
               aria-label="Breadcrumb"
               className="mb-10 md:mb-12 font-sans text-[12.5px] font-light"

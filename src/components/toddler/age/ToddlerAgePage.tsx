@@ -95,64 +95,103 @@ const ToddlerAgePage = ({ config }: Props) => {
             </nav>
 
             <div
-              className="relative bg-parchment rounded-[28px] border p-7 sm:p-10 md:p-12 lg:p-14 text-center"
+              className="relative bg-parchment rounded-[28px] border p-6 sm:p-8 md:p-10 lg:p-12"
               style={{
                 borderColor: accentBorder,
                 boxShadow:
                   "0 36px 80px -50px rgba(70,40,20,0.32), inset 0 1px 0 hsl(0 0% 100% / 0.65)",
               }}
             >
-              <span
-                className="mx-auto block h-px w-10 mb-6"
-                style={{ background: accentMid }}
-                aria-hidden
-              />
-              <p
-                className="font-sans text-[11px] font-light tracking-[0.3em] uppercase"
-                style={{ color: accent }}
-              >
-                Toddler age guide · {config.eyebrow}
-              </p>
-              <h1
-                className="mt-6 font-serif text-[2.2rem] sm:text-[2.6rem] md:text-[3rem] lg:text-[3.25rem] leading-[1.05] tracking-[-0.005em]"
-                style={{ color: deep }}
-              >
-                {config.title}
-              </h1>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+                {/* Image panel — stacks above on mobile + iPad, right on desktop */}
+                <div className="order-1 lg:order-2 lg:col-span-5">
+                  {config.heroImage ? (
+                    <div
+                      className="relative w-full overflow-hidden rounded-[22px] md:rounded-[24px] border aspect-[5/4] lg:aspect-[4/5]"
+                      style={{
+                        borderColor: accentBorderStrong,
+                        boxShadow:
+                          "0 30px 60px -36px rgba(70,40,20,0.38), inset 0 1px 0 hsl(0 0% 100% / 0.6)",
+                      }}
+                    >
+                      <img
+                        src={config.heroImage}
+                        alt=""
+                        className="absolute inset-0 h-full w-full object-cover"
+                        style={{ objectPosition: "center 30%" }}
+                        loading="eager"
+                        decoding="async"
+                      />
+                    </div>
+                  ) : (
+                    /* TODO: upload age hero image */
+                    <div
+                      className="relative w-full overflow-hidden rounded-[22px] md:rounded-[24px] border aspect-[5/4] lg:aspect-[4/5]"
+                      style={{
+                        borderColor: accentBorder,
+                        backgroundColor: accentSoft,
+                        boxShadow: "inset 0 1px 0 hsl(0 0% 100% / 0.6)",
+                      }}
+                      aria-hidden
+                    />
+                  )}
+                </div>
 
-              <div className="mt-6 flex justify-center">
-                <span
-                  className="inline-flex items-center px-3.5 py-1.5 rounded-full border text-[11.5px] font-light tracking-wide"
-                  style={{
-                    borderColor: accentBorderStrong,
-                    backgroundColor: accentSoft,
-                    color: deep,
-                  }}
-                >
-                  {config.ageRangeLabel}
-                </span>
-              </div>
-
-              <p
-                className="mt-7 mx-auto font-sans text-[15.5px] md:text-[16.5px] font-light leading-[1.7] max-w-[36rem]"
-                style={{ color: deepSoft }}
-              >
-                {config.standfirst}
-              </p>
-
-              {config.stageSummary && (
-                <div
-                  className="mt-9 mx-auto max-w-[34rem] rounded-[18px] border px-5 py-4"
-                  style={{ borderColor: accentBorder, backgroundColor: accentSoft }}
-                >
+                {/* Copy column */}
+                <div className="order-2 lg:order-1 lg:col-span-7 text-center lg:text-left">
+                  <span
+                    className="mx-auto lg:mx-0 block h-px w-10 mb-5"
+                    style={{ background: accentMid }}
+                    aria-hidden
+                  />
                   <p
-                    className="font-serif italic text-[14.5px] leading-[1.7]"
+                    className="font-sans text-[11px] font-light tracking-[0.3em] uppercase"
+                    style={{ color: accent }}
+                  >
+                    Toddler age guide · {config.eyebrow}
+                  </p>
+                  <h1
+                    className="mt-5 font-serif text-[2.1rem] sm:text-[2.5rem] md:text-[2.85rem] lg:text-[3rem] leading-[1.05] tracking-[-0.005em]"
+                    style={{ color: deep }}
+                  >
+                    {config.title}
+                  </h1>
+
+                  <div className="mt-5 flex justify-center lg:justify-start">
+                    <span
+                      className="inline-flex items-center px-3.5 py-1.5 rounded-full border text-[11.5px] font-light tracking-wide"
+                      style={{
+                        borderColor: accentBorderStrong,
+                        backgroundColor: accentSoft,
+                        color: deep,
+                      }}
+                    >
+                      {config.ageRangeLabel}
+                    </span>
+                  </div>
+
+                  <p
+                    className="mt-6 mx-auto lg:mx-0 font-sans text-[15.5px] md:text-[16.5px] font-light leading-[1.7] max-w-[34rem]"
                     style={{ color: deepSoft }}
                   >
-                    {config.stageSummary}
+                    {config.standfirst}
                   </p>
+
+                  {config.stageSummary && (
+                    <div
+                      className="mt-7 mx-auto lg:mx-0 max-w-[34rem] rounded-[18px] border px-5 py-4"
+                      style={{ borderColor: accentBorder, backgroundColor: accentSoft }}
+                    >
+                      <p
+                        className="font-serif italic text-[14.5px] leading-[1.7]"
+                        style={{ color: deepSoft }}
+                      >
+                        {config.stageSummary}
+                      </p>
+                    </div>
+                  )}
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </section>

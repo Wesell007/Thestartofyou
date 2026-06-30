@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
 const ages = [
-  { label: "12–17 months", q: "12 to 17 month old toddler development sleep food speech" },
-  { label: "18–23 months", q: "18 to 23 month old toddler development sleep food speech behaviour" },
-  { label: "2 years", q: "2 year old toddler development behaviour speech sleep food" },
-  { label: "30 months", q: "30 month old toddler development behaviour speech independence" },
-  { label: "3 years", q: "3 year old child development behaviour speech independence" },
+  { label: "12–17 months", to: "/toddler/12-17-months" },
+  { label: "18–23 months", to: "/toddler/18-23-months" },
+  { label: "2 years", to: "/toddler/2-years" },
+  { label: "30 months", to: "/toddler/30-months" },
+  { label: "3 years", to: "/toddler/3-years" },
 ];
 
 const ToddlerAgeNav = () => {
@@ -46,10 +46,10 @@ const ToddlerAgeNav = () => {
           style={{ borderColor: "hsl(var(--stage-toddler-accent) / 0.18)" }}
         >
           <div className="flex flex-wrap justify-center gap-2.5 md:gap-3">
-            {ages.map(({ label, q }) => (
+            {ages.map(({ label, to }) => (
               <Link
                 key={label}
-                to={`/ask?q=${encodeURIComponent(q)}`}
+                to={to}
                 className="group inline-flex items-center justify-center rounded-pill px-5 md:px-6 py-3 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-h-[44px] hover:-translate-y-[1px] hover:shadow-[0_8px_20px_-10px_rgba(60,40,20,0.35)]"
                 style={{
                   backgroundColor: "hsl(var(--stage-toddler-soft) / 0.55)",

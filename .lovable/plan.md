@@ -1,34 +1,22 @@
-# Toddler Age Pages — Phase 3
+## Toddler Age Pages — image-led hero
 
-Build 5 Toddler age stage-guide pages (age ranges, not individual month pages) and wire the hub age strip to them.
+Scope locked to: `src/data/toddlerAgeData.ts`, `src/components/toddler/age/ToddlerAgePage.tsx`, plus 5 new `.asset.json` pointers.
 
-## Files to create
+### Steps
+1. Upload 5 prepared JPGs from `/tmp/tage/` via `lovable-assets create` (subjects already verified). Write pointers:
+   - `src/assets/toddler-age-12-17-months.jpg.asset.json`
+   - `src/assets/toddler-age-18-23-months.jpg.asset.json`
+   - `src/assets/toddler-age-2-years.jpg.asset.json`
+   - `src/assets/toddler-age-30-months.jpg.asset.json`
+   - `src/assets/toddler-age-3-years.jpg.asset.json`
+2. `toddlerAgeData.ts`: add optional `heroImage?: string` on `ToddlerAgeConfig`, import the 5 pointers, assign to each matching config. No copy / slug / route / section changes.
+3. `ToddlerAgePage.tsx`: keep breadcrumb, eyebrow, H1, standfirst, age pill, stage summary card, parchment card, apricot wash, bloom backdrop, tokens, section order. Add image panel inside the hero card.
+   - Desktop (lg+): 12-col grid, copy 7 cols (left-aligned), image 5 cols (right). `aspect-[4/5]`, `object-cover`, `object-position: center 30%`, 22–24px radius, soft apricot border, inset white highlight, warm shadow.
+   - iPad (md, <lg): stack image above copy.
+   - Mobile: stacked, full-width, `aspect-[5/4]`.
+   - Fallback: parchment placeholder, same aspect, `{/* TODO: upload age hero image */}`. No woodland marks.
+   - Only existing `--stage-toddler*` / `--parchment` tokens.
+4. Playwright check at 1280 / 1024 / 390 on all 5 age routes + `/toddler` and `/toddler/development-milestones`.
 
-- `src/data/toddlerAgeData.ts` — typed registry of the 5 age configs (slug, eyebrow, title, ageRangeLabel, standfirst, optional stageSummary, whatChanges, developmentAreas[], commonQuestions[], gentleSupport, ai*, relatedTopics, previousAge, nextAge). Adds a small `TODDLER_TOPIC_LABELS` lookup so the template can label related/topic-link cards without pulling in the topic template.
-- `src/components/toddler/age/ToddlerAgePage.tsx` — shared age-page template.
-- `src/pages/toddler/age/TwelveToSeventeenMonths.tsx`
-- `src/pages/toddler/age/EighteenToTwentyThreeMonths.tsx`
-- `src/pages/toddler/age/TwoYears.tsx`
-- `src/pages/toddler/age/ThirtyMonths.tsx`
-- `src/pages/toddler/age/ThreeYears.tsx`
-
-## Files to edit
-
-- `src/App.tsx` — import the 5 page wrappers and register `/toddler/12-17-months`, `/toddler/18-23-months`, `/toddler/2-years`, `/toddler/30-months`, `/toddler/3-years` directly after the existing toddler topic routes, above `/:journey/:stage` and the catch-all.
-- `src/components/toddler/ToddlerAgeNav.tsx` — swap the 5 hub age pills from `/ask?q=…` to the 5 real routes. Visuals unchanged.
-
-## Page structure (template)
-
-Navbar → Hero (stage-led card: breadcrumb `Toddler › <title>`, eyebrow `Toddler age guide · <eyebrow>`, H1, age-range pill, standfirst, optional stage summary card) → "What changes around this age" parchment card with 5–7 bullets → "Development areas" grid (each card links to its existing topic route; user-facing label "Potty training" routes to `/toddler/potty-learning`) → `HubAISupport` with `stageBg="--stage-toddler"`, `stageAccent="--stage-toddler-accent"` and age-specific prompts → Common questions accordion (5 Qs) → Gentle support panel → Related toddler topics (3–4 cards) → Previous / next age pager → soft "Back to the Toddler hub" link → Footer.
-
-## Design and content rules
-
-Tokens used only: `--stage-toddler`, `--stage-toddler-soft`, `--stage-toddler-accent`, `--stage-toddler-deep`, `--parchment`. No new CSS, no image generation, no woodland hero marks, no childish graphics, no medical-style layout. UK English; variability language ("many toddlers", "you might notice", "some children", "worth a calm conversation with your health visitor or GP if"). No fixed milestones, no medical overclaim, no long article copy.
-
-## Out of scope
-
-No edits to: toddler topic template, toddler topic data, topic hero images, hub hero video/poster, Navbar, Footer, TTC, Pregnancy, First Year, IVF, legacy Postpartum, Journal. No new nav items, journeys, article pages, or individual month pages.
-
-## Verification
-
-Playwright at 1280 / 1024 / 390 for `/toddler` and all 5 new routes plus one existing topic route. Confirm hub age cards link to the new pages, no horizontal scroll, hero readable, cards and AI support stack cleanly, prev/next pager works, related topic links work.
+### Out of scope
+`App.tsx`, routes, `ToddlerAgeNav.tsx`, all topic pages/data/images, hub video/poster, Navbar, Footer, every other journey.

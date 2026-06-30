@@ -4,6 +4,11 @@
 // language only. No medical overclaim.
 
 import type { ToddlerTopicSlug } from "@/data/toddlerTopicData";
+import heroAge12to17 from "@/assets/toddler-age-12-17-months.jpg.asset.json";
+import heroAge18to23 from "@/assets/toddler-age-18-23-months.jpg.asset.json";
+import heroAge2Years from "@/assets/toddler-age-2-years.jpg.asset.json";
+import heroAge30Months from "@/assets/toddler-age-30-months.jpg.asset.json";
+import heroAge3Years from "@/assets/toddler-age-3-years.jpg.asset.json";
 
 export type ToddlerAgeSlug =
   | "12-17-months"
@@ -40,6 +45,7 @@ export interface ToddlerAgeConfig {
   title: string;
   ageRangeLabel: string;
   standfirst: string;
+  heroImage?: string;
   stageSummary?: string;
   whatChanges: { lead: string; items: string[] };
   developmentAreas: DevelopmentArea[];
@@ -65,6 +71,7 @@ const twelveToSeventeen: ToddlerAgeConfig = {
   ageRangeLabel: "12–17 months",
   standfirst:
     "The first year on two feet. Walking is finding its footing, words are starting to land, and independence and closeness pull in opposite directions all day long.",
+  heroImage: heroAge12to17.url,
   stageSummary:
     "This stage is more transition than arrival. Many children are still doing baby things one minute and toddler things the next — and that is exactly as it should be.",
   whatChanges: {
@@ -119,6 +126,7 @@ const eighteenToTwentyThree: ToddlerAgeConfig = {
   ageRangeLabel: "18–23 months",
   standfirst:
     "Faster on their feet, louder in their wants, and finding the word ‘no’. This stage is full of energy, opinion and pretend play that is just starting to take shape.",
+  heroImage: heroAge18to23.url,
   stageSummary:
     "Toddlers at this age often look very capable one moment and very small the next. Both are real. Calm consistency tends to do more than clever strategies.",
   whatChanges: {
@@ -174,6 +182,7 @@ const twoYears: ToddlerAgeConfig = {
   ageRangeLabel: "Around 2 years",
   standfirst:
     "Often called the loud, lively middle of toddlerhood. Language can race ahead, feelings can spill over, and your toddler may want to do everything themselves — until they suddenly do not.",
+  heroImage: heroAge2Years.url,
   stageSummary:
     "Two is rarely as terrible as it is described. It is usually a stage of intense growth in language, emotion and independence happening all at once.",
   whatChanges: {
@@ -229,6 +238,7 @@ const thirtyMonths: ToddlerAgeConfig = {
   ageRangeLabel: "Around 30 months",
   standfirst:
     "Conversation lengthens, play deepens and your child's sense of who they are gets louder. Emotional swings are still very real, even as understanding grows.",
+  heroImage: heroAge30Months.url,
   stageSummary:
     "Around two and a half, many toddlers feel like a smaller, sharper version of who they are becoming — capable, curious and still very much in need of a calm anchor.",
   whatChanges: {
@@ -284,6 +294,7 @@ const threeYears: ToddlerAgeConfig = {
   ageRangeLabel: "Around 3 years",
   standfirst:
     "Real conversation, deeper friendships and a growing sense of independence. Three is often calmer than two, with new challenges of its own around boundaries, fairness and nursery life.",
+  heroImage: heroAge3Years.url,
   stageSummary:
     "Three is a stage of widening worlds — more time with other children, more questions about how things work, and more capacity to handle small disappointments with help.",
   whatChanges: {

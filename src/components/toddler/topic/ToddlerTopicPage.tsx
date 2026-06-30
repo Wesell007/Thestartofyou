@@ -414,30 +414,33 @@ const ToddlerTopicPage = ({ config }: Props) => {
         {/* ─── BACK TO HUB CTA ──────────────────────────────────────── */}
         <section className="pb-28 md:pb-32">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
-            <div
-              className="relative rounded-[28px] border px-7 py-10 md:px-12 md:py-12 text-center overflow-hidden"
+          <div
+              className="relative rounded-[28px] border bg-parchment px-7 py-10 md:px-12 md:py-12 text-center overflow-hidden"
               style={{
                 borderColor: accentBorder,
-                background:
-                  "linear-gradient(160deg, hsl(var(--stage-toddler) / 0.55) 0%, hsl(var(--parchment)) 70%)",
                 boxShadow:
-                  "0 32px 72px -44px rgba(70,40,20,0.3), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+                  "0 32px 76px -42px rgba(70,40,20,0.34), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
               }}
             >
               <span
-                className="mx-auto block h-px w-10 mb-6"
+                className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 h-56 w-72 rounded-full blur-3xl opacity-60"
+                style={{ background: "hsl(var(--stage-toddler) / 0.4)" }}
+                aria-hidden
+              />
+              <span
+                className="relative mx-auto block h-px w-10 mb-6"
                 style={{ backgroundColor: accentMid }}
                 aria-hidden
               />
               <p
-                className="font-serif italic text-[15.5px] mb-7 max-w-md mx-auto leading-relaxed"
+                className="relative font-serif italic text-[15.5px] mb-7 max-w-md mx-auto leading-relaxed"
                 style={{ color: deepSoft }}
               >
                 Back to the wider Toddler hub when you're ready.
               </p>
               <Link
                 to="/toddler"
-                className="inline-flex items-center gap-2 rounded-full border px-7 py-3 font-sans text-[13px] font-medium tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_46px_-26px_rgba(70,40,20,0.4)]"
+                className="relative inline-flex items-center gap-2 rounded-full border px-7 py-3 font-sans text-[13px] font-medium tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_46px_-26px_rgba(70,40,20,0.4)]"
                 style={{
                   borderColor: accentBorderStrong,
                   backgroundColor: accentSoft,

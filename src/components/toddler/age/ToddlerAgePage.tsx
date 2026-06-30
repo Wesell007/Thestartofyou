@@ -272,12 +272,19 @@ const ToddlerAgePage = ({ config }: Props) => {
                   }}
                 >
                   <div>
-                    <p
-                      className="font-sans text-[10.5px] font-light tracking-[0.28em] uppercase mb-3"
-                      style={{ color: accent }}
-                    >
-                      {area.heading}
-                    </p>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span
+                        className="inline-block h-1.5 w-1.5 rounded-full"
+                        style={{ background: accent }}
+                        aria-hidden
+                      />
+                      <p
+                        className="font-sans text-[10.5px] font-light tracking-[0.28em] uppercase"
+                        style={{ color: accent }}
+                      >
+                        {area.heading}
+                      </p>
+                    </div>
                     <p
                       className="font-sans text-[14.5px] font-light leading-[1.65]"
                       style={{ color: deepSoft }}
@@ -340,6 +347,12 @@ const ToddlerAgePage = ({ config }: Props) => {
                 stageAccent="--stage-toddler-accent"
               />
             </div>
+            <p
+              className="mt-7 text-center font-sans text-[12.5px] font-light tracking-wide max-w-lg mx-auto leading-relaxed"
+              style={{ color: "hsl(var(--stage-toddler-deep) / 0.55)" }}
+            >
+              A quiet companion for the questions you'd rather not Google at 2am.
+            </p>
           </div>
         </section>
 

@@ -36,26 +36,38 @@ const ToddlerAgeNav = () => {
           >
             Go to your toddler's age
           </h2>
-          <p className="font-sans text-[15px] font-light text-foreground/65 max-w-md mx-auto leading-relaxed">
+          <p
+            className="font-sans text-[15px] font-light max-w-md mx-auto leading-relaxed"
+            style={{ color: "hsl(var(--stage-toddler-deep) / 0.7)" }}
+          >
             Five steady waypoints, from the first birthday through the third year.
           </p>
         </div>
 
         <div
-          className="mx-auto rounded-[28px] border bg-parchment/70 backdrop-blur-sm px-5 py-5 md:px-7 md:py-6 shadow-[0_18px_50px_-30px_rgba(60,40,20,0.28)]"
-          style={{ borderColor: "hsl(var(--stage-toddler-accent) / 0.18)" }}
+          className="relative mx-auto rounded-[28px] border bg-parchment/80 backdrop-blur-sm px-5 py-5 md:px-7 md:py-6 overflow-hidden"
+          style={{
+            borderColor: "hsl(var(--stage-toddler-accent) / 0.22)",
+            boxShadow:
+              "0 22px 56px -34px rgba(70,40,20,0.28), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+          }}
         >
-          <div className="flex flex-wrap justify-center gap-2.5 md:gap-3">
+          <span
+            className="pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 h-32 w-72 rounded-full blur-3xl opacity-60"
+            style={{ background: "hsl(var(--stage-toddler) / 0.4)" }}
+            aria-hidden
+          />
+          <div className="relative flex flex-wrap justify-center gap-2.5 md:gap-3">
             {ages.map(({ label, to }) => (
               <Link
                 key={label}
                 to={to}
-                className="group inline-flex items-center justify-center rounded-pill px-5 md:px-6 py-3 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-h-[44px] hover:-translate-y-[1px] hover:shadow-[0_8px_20px_-10px_rgba(60,40,20,0.35)]"
+                className="group inline-flex items-center justify-center rounded-pill px-5 md:px-6 py-3 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-h-[44px] hover:-translate-y-[1px] hover:shadow-[0_12px_28px_-14px_rgba(70,40,20,0.42)]"
                 style={{
-                  backgroundColor: "hsl(var(--stage-toddler-soft) / 0.55)",
+                  backgroundColor: "hsl(var(--stage-toddler-soft) / 0.7)",
                   color: "hsl(var(--stage-toddler-deep))",
-                  borderColor: "hsl(var(--stage-toddler-accent) / 0.28)",
-                  boxShadow: "inset 0 1px 0 hsl(0 0% 100% / 0.6)",
+                  borderColor: "hsl(var(--stage-toddler-accent) / 0.32)",
+                  boxShadow: "inset 0 1px 0 hsl(0 0% 100% / 0.65)",
                 }}
               >
                 {label}

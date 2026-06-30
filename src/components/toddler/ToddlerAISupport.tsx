@@ -1,5 +1,11 @@
 import HubAISupport from "@/components/shared/HubAISupport";
 
+const accent = "hsl(var(--stage-toddler-accent))";
+const accentMid = "hsl(var(--stage-toddler-accent) / 0.22)";
+const accentBorderStrong = "hsl(var(--stage-toddler-accent) / 0.3)";
+const deep = "hsl(var(--stage-toddler-deep))";
+const deepSoft = "hsl(var(--stage-toddler-deep) / 0.7)";
+
 const ToddlerAISupport = () => {
   return (
     <section
@@ -13,25 +19,29 @@ const ToddlerAISupport = () => {
         <div className="text-center mb-8 md:mb-10">
           <span
             className="mx-auto block h-px w-10 mb-6"
-            style={{ backgroundColor: "hsl(var(--stage-toddler-accent) / 0.5)" }}
+            style={{ backgroundColor: accentMid }}
           />
           <p
             className="font-sans text-[11px] font-light tracking-[0.34em] uppercase mb-3"
-            style={{ color: "hsl(var(--stage-toddler-accent))" }}
+            style={{ color: accent }}
           >
             Ask The Start of You
           </p>
           <h2
             className="font-serif text-[1.9rem] md:text-[2.4rem] leading-tight"
-            style={{ color: "hsl(var(--stage-toddler-deep))" }}
+            style={{ color: deep }}
           >
             A calm answer, whenever the day asks one
           </h2>
         </div>
 
         <div
-          className="rounded-[28px] border bg-parchment/85 backdrop-blur-sm shadow-[0_28px_70px_-40px_rgba(60,40,20,0.35)] overflow-hidden"
-          style={{ borderColor: "hsl(var(--stage-toddler-accent) / 0.2)" }}
+          className="relative rounded-[28px] border bg-parchment/85 backdrop-blur-sm overflow-hidden"
+          style={{
+            borderColor: accentBorderStrong,
+            boxShadow:
+              "0 32px 72px -42px rgba(70,40,20,0.36), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+          }}
         >
           <HubAISupport
             heading="Ask anything about the toddler years"
@@ -51,11 +61,10 @@ const ToddlerAISupport = () => {
         </div>
 
         <p
-          className="mt-7 text-center font-sans text-[13px] font-light tracking-wide max-w-lg mx-auto leading-relaxed"
-          style={{ color: "hsl(var(--stage-toddler-deep) / 0.7)" }}
+          className="mt-7 text-center font-sans text-[12.5px] font-light tracking-wide max-w-lg mx-auto leading-relaxed"
+          style={{ color: deepSoft }}
         >
-          Grounded, parent-tested guidance. Not a chatbot — a quiet companion for
-          the questions you'd rather not Google at 2am.
+          A quiet companion for the questions you'd rather not Google at 2am.
         </p>
       </div>
     </section>

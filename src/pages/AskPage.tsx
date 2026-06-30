@@ -7,6 +7,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useAISearch } from "@/hooks/useAISearch";
 import { BotanicalAccent, StageGlow, SprigDivider, Sprig } from "@/components/shared/StageBotanical";
+import { getAiStageStyle, stageColors } from "@/lib/aiStageStyles";
+
 
 const followUpPrompts = [
   "Can you explain that more?",
@@ -30,6 +32,9 @@ const AskPage = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
   const context = searchParams.get("ctx") || undefined;
+  const stageKey = searchParams.get("stage");
+  const stage = getAiStageStyle(stageKey);
+  const sc = stageColors(stage);
   const { answer, isLoading, error, ask, reset } = useAISearch();
   const lastQueryRef = useRef("");
   const navigate = useNavigate();
@@ -38,6 +43,7 @@ const AskPage = () => {
   const [newQuery, setNewQuery] = useState("");
   const [inputFocused, setInputFocused] = useState(false);
   const [ivfStage, setIvfStage] = useState<IVFLastStage | null>(null);
+
 
   useEffect(() => {
     if (!isIVF) return;
@@ -112,6 +118,7 @@ const AskPage = () => {
     const params = new URLSearchParams({ q: newQuery.trim() });
     if (context) params.set("ctx", context);
     if (isIVF) params.set("journey", "ivf");
+    if (stageKey) params.set("stage", stageKey);
     setNewQuery("");
     navigate(`/ask?${params.toString()}`);
   };
@@ -120,8 +127,10 @@ const AskPage = () => {
     const params = new URLSearchParams({ q: s });
     if (context) params.set("ctx", context);
     if (isIVF) params.set("journey", "ivf");
+    if (stageKey) params.set("stage", stageKey);
     navigate(`/ask?${params.toString()}`);
   };
+
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") handleAskAgain();

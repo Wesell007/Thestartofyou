@@ -90,6 +90,11 @@ import ToddlerFoodFeeding from "./pages/toddler/FoodFeeding.tsx";
 import ToddlerPottyLearning from "./pages/toddler/PottyLearning.tsx";
 import ToddlerHealthSafety from "./pages/toddler/HealthSafety.tsx";
 import ToddlerPlayConnection from "./pages/toddler/PlayConnection.tsx";
+import ToddlerAge12to17 from "./pages/toddler/age/TwelveToSeventeenMonths.tsx";
+import ToddlerAge18to23 from "./pages/toddler/age/EighteenToTwentyThreeMonths.tsx";
+import ToddlerAge2y from "./pages/toddler/age/TwoYears.tsx";
+import ToddlerAge30m from "./pages/toddler/age/ThirtyMonths.tsx";
+import ToddlerAge3y from "./pages/toddler/age/ThreeYears.tsx";
 import PreparingForBaby from "./pages/PreparingForBaby.tsx";
 import Support from "./pages/Support.tsx";
 import About from "./pages/About.tsx";
@@ -292,6 +297,12 @@ const App = () => (
           <Route path="/toddler/potty-learning" element={<ToddlerPottyLearning />} />
           <Route path="/toddler/health-safety" element={<ToddlerHealthSafety />} />
           <Route path="/toddler/play-connection" element={<ToddlerPlayConnection />} />
+          {/* Toddler age guide pages (Phase 3). Must sit above /:journey/:stage and catch-all. */}
+          <Route path="/toddler/12-17-months" element={<ToddlerAge12to17 />} />
+          <Route path="/toddler/18-23-months" element={<ToddlerAge18to23 />} />
+          <Route path="/toddler/2-years" element={<ToddlerAge2y />} />
+          <Route path="/toddler/30-months" element={<ToddlerAge30m />} />
+          <Route path="/toddler/3-years" element={<ToddlerAge3y />} />
           <Route path="/preparing-for-baby" element={<PreparingForBaby />} />
           <Route path="/support" element={<Support />} />
           <Route path="/about" element={<About />} />

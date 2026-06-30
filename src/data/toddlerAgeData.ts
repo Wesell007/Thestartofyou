@@ -71,6 +71,7 @@ const twelveToSeventeen: ToddlerAgeConfig = {
   ageRangeLabel: "12–17 months",
   standfirst:
     "The first year on two feet. Walking is finding its footing, words are starting to land, and independence and closeness pull in opposite directions all day long.",
+  heroImage: heroAge12to17.url,
   stageSummary:
     "This stage is more transition than arrival. Many children are still doing baby things one minute and toddler things the next — and that is exactly as it should be.",
   whatChanges: {

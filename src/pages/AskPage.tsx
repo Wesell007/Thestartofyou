@@ -405,24 +405,36 @@ const AskPage = () => {
           <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-16 relative z-10">
             <div className="relative rounded-[2rem] overflow-hidden shadow-elevated">
               {/* Layered backgrounds */}
-              <div className="absolute inset-0 bg-gradient-to-br from-sage-bg/55 via-card to-lavender-bg/12 pointer-events-none" />
-              <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-sage/[0.08] blur-3xl pointer-events-none" />
+              <div
+                className="absolute inset-0 bg-gradient-to-br from-sage-bg/55 via-card to-lavender-bg/12 pointer-events-none"
+                style={sc ? { background: `linear-gradient(135deg, ${sc.bgWash}, hsl(var(--card)) 60%, ${sc.accentSofter})` } : undefined}
+              />
+              <div
+                className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-sage/[0.08] blur-3xl pointer-events-none"
+                style={sc ? { background: sc.accentSoft } : undefined}
+              />
               <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-lavender/[0.06] blur-3xl pointer-events-none" />
 
               {/* Botanical mark in corner */}
               <Sprig tone={tone.sprigTone} className="absolute top-6 right-6 w-10 h-10 opacity-30" />
 
-              <div className="relative border border-sage/20 rounded-[2rem] px-7 py-10 md:px-14 md:py-14">
+              <div
+                className="relative border border-sage/20 rounded-[2rem] px-7 py-10 md:px-14 md:py-14"
+                style={sc ? { borderColor: sc.accentBorder } : undefined}
+              >
                 {/* Label */}
                 <div className="flex items-center gap-3 mb-7">
-                  <div className="w-9 h-9 rounded-full bg-sage/12 flex items-center justify-center ring-2 ring-sage/10">
-                    <Sparkles size={14} className={tone.eyebrow} />
+                  <div
+                    className="w-9 h-9 rounded-full bg-sage/12 flex items-center justify-center ring-2 ring-sage/10"
+                    style={sc ? { backgroundColor: sc.accentSoft, boxShadow: `0 0 0 2px ${sc.accentSofter}` } : undefined}
+                  >
+                    <Sparkles size={14} className={tone.eyebrow} style={sc ? { color: sc.accent } : undefined} />
                   </div>
                   <div className="flex items-center gap-2.5">
-                    <span className={`font-sans text-[11px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow}`}>
+                    <span className={`font-sans text-[11px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow}`} style={sc ? { color: sc.accent } : undefined}>
                       The short answer
                     </span>
-                    <span className="h-px w-12 bg-sage/30" />
+                    <span className="h-px w-12 bg-sage/30" style={sc ? { backgroundColor: sc.accentRing } : undefined} />
                   </div>
                 </div>
 
@@ -471,8 +483,8 @@ const AskPage = () => {
         {isLoading && answer && (
           <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
             <div className="flex items-center gap-2.5 mt-2 mb-8">
-              <Loader2 size={13} className={`animate-spin ${tone.accentText}`} />
-              <span className={`font-sans text-[11px] font-light ${tone.accentTextMuted} tracking-wide`}>Still writing…</span>
+              <Loader2 size={13} className={`animate-spin ${tone.accentText}`} style={sc ? { color: sc.accent } : undefined} />
+              <span className={`font-sans text-[11px] font-light ${tone.accentTextMuted} tracking-wide`} style={sc ? { color: sc.deepSoft } : undefined}>Still writing…</span>
             </div>
           </div>
         )}
@@ -485,9 +497,12 @@ const AskPage = () => {
             {/* ── Medical trust signature ── */}
             <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
               <div className="flex items-center gap-3 pt-10 pb-2">
-                <div className={`flex items-center gap-2 ${tone.accentBgSofter} rounded-full px-4 py-2 ring-1 ${tone.accentRing}`}>
-                  <Shield size={12} className={tone.accentText} />
-                  <p className={`font-sans text-[11px] font-light ${tone.accentText} tracking-wide`}>
+                <div
+                  className={`flex items-center gap-2 ${tone.accentBgSofter} rounded-full px-4 py-2 ring-1 ${tone.accentRing}`}
+                  style={sc ? { backgroundColor: sc.accentSofter, boxShadow: `inset 0 0 0 1px ${sc.accentRing}` } : undefined}
+                >
+                  <Shield size={12} className={tone.accentText} style={sc ? { color: sc.accent } : undefined} />
+                  <p className={`font-sans text-[11px] font-light ${tone.accentText} tracking-wide`} style={sc ? { color: sc.accent } : undefined}>
                     ✔ Medically reviewed by Jenny Joines
                   </p>
                 </div>
@@ -496,7 +511,10 @@ const AskPage = () => {
 
             {/* ── Reassurance, editorial reminder block ── */}
             <div className="mt-16 mb-20 relative">
-              <div className="relative bg-gradient-to-b from-sage-bg/20 via-parchment to-parchment overflow-hidden">
+              <div
+                className="relative bg-gradient-to-b from-sage-bg/20 via-parchment to-parchment overflow-hidden"
+                style={sc ? { background: `linear-gradient(to bottom, ${sc.bgWashSoft}, hsl(var(--parchment)) 60%, hsl(var(--parchment)))` } : undefined}
+              >
                 {/* Soft botanical flanks */}
                 <BotanicalAccent
                   className="top-1/2 -translate-y-1/2 -left-20 md:-left-6 rotate-[-15deg]"

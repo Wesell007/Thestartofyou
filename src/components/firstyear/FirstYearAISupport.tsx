@@ -7,6 +7,7 @@ const FirstYearAISupport = () => (
     context="First year with baby"
     stageBg="--stage-firstyear"
     stageAccent="--stage-firstyear-accent"
+    stage="first-year"
   />
 );
 

@@ -67,6 +67,7 @@ const ToddlerAISupport = () => {
             context="toddler"
             stageBg="--stage-toddler"
             stageAccent="--stage-toddler-accent"
+            stage="toddler"
           />
         </div>
 

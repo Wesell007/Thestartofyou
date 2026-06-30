@@ -7,6 +7,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useAISearch } from "@/hooks/useAISearch";
 import { BotanicalAccent, StageGlow, SprigDivider, Sprig } from "@/components/shared/StageBotanical";
+import { getAiStageStyle, stageColors } from "@/lib/aiStageStyles";
+
 
 const followUpPrompts = [
   "Can you explain that more?",
@@ -30,6 +32,9 @@ const AskPage = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
   const context = searchParams.get("ctx") || undefined;
+  const stageKey = searchParams.get("stage");
+  const stage = getAiStageStyle(stageKey);
+  const sc = stageColors(stage);
   const { answer, isLoading, error, ask, reset } = useAISearch();
   const lastQueryRef = useRef("");
   const navigate = useNavigate();
@@ -38,6 +43,7 @@ const AskPage = () => {
   const [newQuery, setNewQuery] = useState("");
   const [inputFocused, setInputFocused] = useState(false);
   const [ivfStage, setIvfStage] = useState<IVFLastStage | null>(null);
+
 
   useEffect(() => {
     if (!isIVF) return;
@@ -112,6 +118,7 @@ const AskPage = () => {
     const params = new URLSearchParams({ q: newQuery.trim() });
     if (context) params.set("ctx", context);
     if (isIVF) params.set("journey", "ivf");
+    if (stageKey) params.set("stage", stageKey);
     setNewQuery("");
     navigate(`/ask?${params.toString()}`);
   };
@@ -120,8 +127,10 @@ const AskPage = () => {
     const params = new URLSearchParams({ q: s });
     if (context) params.set("ctx", context);
     if (isIVF) params.set("journey", "ivf");
+    if (stageKey) params.set("stage", stageKey);
     navigate(`/ask?${params.toString()}`);
   };
+
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") handleAskAgain();
@@ -243,8 +252,19 @@ const AskPage = () => {
             the question and quick answer.
             ───────────────────────────────────────────── */}
         <div className="absolute inset-x-0 top-0 h-[680px] md:h-[760px] pointer-events-none overflow-hidden">
-          <div className={`absolute inset-0 bg-gradient-to-b ${isIVF ? "from-lavender-bg/35" : "from-sage-bg/35"} via-parchment/60 to-parchment`} />
-          <StageGlow tone={tone.glow} className="top-[-200px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px]" opacity={1} />
+          <div
+            className={`absolute inset-0 bg-gradient-to-b ${isIVF ? "from-lavender-bg/35" : "from-sage-bg/35"} via-parchment/60 to-parchment`}
+            style={sc ? { background: `linear-gradient(to bottom, ${sc.bgWash}, hsl(var(--parchment)) 60%, hsl(var(--parchment)) 100%)` } : undefined}
+          />
+          {sc ? (
+            <div
+              className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px] rounded-full blur-3xl pointer-events-none"
+              style={{ background: sc.accentSoft }}
+              aria-hidden
+            />
+          ) : (
+            <StageGlow tone={tone.glow} className="top-[-200px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px]" opacity={1} />
+          )}
           <BotanicalAccent
             className="top-24 -left-16 md:top-20 md:-left-6 rotate-[-10deg]"
             opacity="opacity-[0.22]"
@@ -295,8 +315,14 @@ const AskPage = () => {
           {/* Stage context chip */}
           {context && (
             <div className="mb-5">
-              <span className={`inline-flex items-center gap-1.5 ${tone.chipBg} ${tone.chipText} font-sans text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full ring-1 ${tone.chipRing}`}>
-                <span className={`w-1 h-1 rounded-full ${tone.chipDot}`} />
+              <span
+                className={`inline-flex items-center gap-1.5 ${tone.chipBg} ${tone.chipText} font-sans text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full ring-1 ${tone.chipRing}`}
+                style={sc ? { backgroundColor: sc.accentSoft, color: sc.deep, boxShadow: `inset 0 0 0 1px ${sc.accentRing}` } : undefined}
+              >
+                <span
+                  className={`w-1 h-1 rounded-full ${tone.chipDot}`}
+                  style={sc ? { backgroundColor: sc.accent } : undefined}
+                />
                 {context}
               </span>
             </div>
@@ -304,7 +330,10 @@ const AskPage = () => {
 
           {/* Question title, editorial */}
           <div className="mb-7">
-            <p className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrowSoft} mb-3`}>
+            <p
+              className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrowSoft} mb-3`}
+              style={sc ? { color: sc.accent } : undefined}
+            >
               You asked
             </p>
             <h1 className="font-serif text-[1.75rem] sm:text-[2.1rem] md:text-[2.65rem] text-foreground leading-[1.1] tracking-[-0.012em]">
@@ -329,11 +358,24 @@ const AskPage = () => {
         {isLoading && !answer && (
           <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
             <div className="relative rounded-3xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-sage-bg/40 via-card to-lavender-bg/15 pointer-events-none" />
-              <div className="relative bg-card/85 backdrop-blur-sm border border-sage/15 rounded-3xl px-10 py-16 md:px-14 md:py-20 shadow-elevated">
+              <div
+                className="absolute inset-0 bg-gradient-to-br from-sage-bg/40 via-card to-lavender-bg/15 pointer-events-none"
+                style={sc ? { background: `linear-gradient(135deg, ${sc.bgWash}, hsl(var(--card)) 60%, ${sc.accentSofter})` } : undefined}
+              />
+              <div
+                className="relative bg-card/85 backdrop-blur-sm border border-sage/15 rounded-3xl px-10 py-16 md:px-14 md:py-20 shadow-elevated"
+                style={sc ? { borderColor: sc.accentBorder } : undefined}
+              >
                 <div className="flex flex-col items-center text-center gap-4">
-                  <div className="w-11 h-11 rounded-full bg-sage-bg/70 flex items-center justify-center ring-4 ring-sage-bg/40">
-                    <Loader2 size={18} className="animate-spin text-sage" />
+                  <div
+                    className="w-11 h-11 rounded-full bg-sage-bg/70 flex items-center justify-center ring-4 ring-sage-bg/40"
+                    style={sc ? { backgroundColor: sc.accentSoft, boxShadow: `0 0 0 4px ${sc.accentSofter}` } : undefined}
+                  >
+                    <Loader2
+                      size={18}
+                      className="animate-spin text-sage"
+                      style={sc ? { color: sc.accent } : undefined}
+                    />
                   </div>
                   <div>
                     <p className="font-serif text-lg text-foreground mb-1.5">Finding your answer</p>
@@ -363,24 +405,36 @@ const AskPage = () => {
           <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-16 relative z-10">
             <div className="relative rounded-[2rem] overflow-hidden shadow-elevated">
               {/* Layered backgrounds */}
-              <div className="absolute inset-0 bg-gradient-to-br from-sage-bg/55 via-card to-lavender-bg/12 pointer-events-none" />
-              <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-sage/[0.08] blur-3xl pointer-events-none" />
+              <div
+                className="absolute inset-0 bg-gradient-to-br from-sage-bg/55 via-card to-lavender-bg/12 pointer-events-none"
+                style={sc ? { background: `linear-gradient(135deg, ${sc.bgWash}, hsl(var(--card)) 60%, ${sc.accentSofter})` } : undefined}
+              />
+              <div
+                className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-sage/[0.08] blur-3xl pointer-events-none"
+                style={sc ? { background: sc.accentSoft } : undefined}
+              />
               <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-lavender/[0.06] blur-3xl pointer-events-none" />
 
               {/* Botanical mark in corner */}
               <Sprig tone={tone.sprigTone} className="absolute top-6 right-6 w-10 h-10 opacity-30" />
 
-              <div className="relative border border-sage/20 rounded-[2rem] px-7 py-10 md:px-14 md:py-14">
+              <div
+                className="relative border border-sage/20 rounded-[2rem] px-7 py-10 md:px-14 md:py-14"
+                style={sc ? { borderColor: sc.accentBorder } : undefined}
+              >
                 {/* Label */}
                 <div className="flex items-center gap-3 mb-7">
-                  <div className="w-9 h-9 rounded-full bg-sage/12 flex items-center justify-center ring-2 ring-sage/10">
-                    <Sparkles size={14} className={tone.eyebrow} />
+                  <div
+                    className="w-9 h-9 rounded-full bg-sage/12 flex items-center justify-center ring-2 ring-sage/10"
+                    style={sc ? { backgroundColor: sc.accentSoft, boxShadow: `0 0 0 2px ${sc.accentSofter}` } : undefined}
+                  >
+                    <Sparkles size={14} className={tone.eyebrow} style={sc ? { color: sc.accent } : undefined} />
                   </div>
                   <div className="flex items-center gap-2.5">
-                    <span className={`font-sans text-[11px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow}`}>
+                    <span className={`font-sans text-[11px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow}`} style={sc ? { color: sc.accent } : undefined}>
                       The short answer
                     </span>
-                    <span className="h-px w-12 bg-sage/30" />
+                    <span className="h-px w-12 bg-sage/30" style={sc ? { backgroundColor: sc.accentRing } : undefined} />
                   </div>
                 </div>
 
@@ -429,8 +483,8 @@ const AskPage = () => {
         {isLoading && answer && (
           <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
             <div className="flex items-center gap-2.5 mt-2 mb-8">
-              <Loader2 size={13} className={`animate-spin ${tone.accentText}`} />
-              <span className={`font-sans text-[11px] font-light ${tone.accentTextMuted} tracking-wide`}>Still writing…</span>
+              <Loader2 size={13} className={`animate-spin ${tone.accentText}`} style={sc ? { color: sc.accent } : undefined} />
+              <span className={`font-sans text-[11px] font-light ${tone.accentTextMuted} tracking-wide`} style={sc ? { color: sc.deepSoft } : undefined}>Still writing…</span>
             </div>
           </div>
         )}
@@ -443,9 +497,12 @@ const AskPage = () => {
             {/* ── Medical trust signature ── */}
             <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
               <div className="flex items-center gap-3 pt-10 pb-2">
-                <div className={`flex items-center gap-2 ${tone.accentBgSofter} rounded-full px-4 py-2 ring-1 ${tone.accentRing}`}>
-                  <Shield size={12} className={tone.accentText} />
-                  <p className={`font-sans text-[11px] font-light ${tone.accentText} tracking-wide`}>
+                <div
+                  className={`flex items-center gap-2 ${tone.accentBgSofter} rounded-full px-4 py-2 ring-1 ${tone.accentRing}`}
+                  style={sc ? { backgroundColor: sc.accentSofter, boxShadow: `inset 0 0 0 1px ${sc.accentRing}` } : undefined}
+                >
+                  <Shield size={12} className={tone.accentText} style={sc ? { color: sc.accent } : undefined} />
+                  <p className={`font-sans text-[11px] font-light ${tone.accentText} tracking-wide`} style={sc ? { color: sc.accent } : undefined}>
                     ✔ Medically reviewed by Jenny Joines
                   </p>
                 </div>
@@ -454,7 +511,10 @@ const AskPage = () => {
 
             {/* ── Reassurance, editorial reminder block ── */}
             <div className="mt-16 mb-20 relative">
-              <div className="relative bg-gradient-to-b from-sage-bg/20 via-parchment to-parchment overflow-hidden">
+              <div
+                className="relative bg-gradient-to-b from-sage-bg/20 via-parchment to-parchment overflow-hidden"
+                style={sc ? { background: `linear-gradient(to bottom, ${sc.bgWashSoft}, hsl(var(--parchment)) 60%, hsl(var(--parchment)))` } : undefined}
+              >
                 {/* Soft botanical flanks */}
                 <BotanicalAccent
                   className="top-1/2 -translate-y-1/2 -left-20 md:-left-6 rotate-[-15deg]"
@@ -548,11 +608,25 @@ const AskPage = () => {
                 ══════════════════════════════════════════════════ */}
             <div className="relative mt-8">
               {/* Full-width premium wash */}
-              <div className={`absolute inset-0 bg-gradient-to-b from-parchment ${isIVF ? "via-lavender-bg/15" : "via-sage-bg/15"} to-parchment pointer-events-none`} />
-              <StageGlow tone={tone.glow} className="top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px]" opacity={0.7} />
+              <div
+                className={`absolute inset-0 bg-gradient-to-b from-parchment ${isIVF ? "via-lavender-bg/15" : "via-sage-bg/15"} to-parchment pointer-events-none`}
+                style={sc ? { background: `linear-gradient(to bottom, hsl(var(--parchment)), ${sc.bgWashSoft} 50%, hsl(var(--parchment)))` } : undefined}
+              />
+              {sc ? (
+                <div
+                  className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px] rounded-full blur-3xl pointer-events-none"
+                  style={{ background: sc.accentSoft, opacity: 0.7 }}
+                  aria-hidden
+                />
+              ) : (
+                <StageGlow tone={tone.glow} className="top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px]" opacity={0.7} />
+              )}
 
               <div className="relative container mx-auto px-6 md:px-10 max-w-3xl py-20 md:py-28">
-                <div className={`relative bg-card border ${isIVF ? "border-lavender/15" : "border-sage/15"} rounded-[2rem] px-7 py-12 md:px-14 md:py-16 shadow-elevated overflow-hidden`}>
+                <div
+                  className={`relative bg-card border ${isIVF ? "border-lavender/15" : "border-sage/15"} rounded-[2rem] px-7 py-12 md:px-14 md:py-16 shadow-elevated overflow-hidden`}
+                  style={sc ? { borderColor: sc.accentBorder } : undefined}
+                >
                   {/* Botanical art-direction */}
                   <BotanicalAccent
                     className="-top-10 -left-10 rotate-[-18deg]"
@@ -569,7 +643,7 @@ const AskPage = () => {
 
                   <div className="relative text-center mb-9">
                     <SprigDivider tone={tone.sprigTone} className="mb-6" />
-                    <p className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow} mb-4`}>
+                  <p className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow} mb-4`} style={sc ? { color: sc.accent } : undefined}>
                       Your next question
                     </p>
                     <h2 className="font-serif text-[1.75rem] md:text-[2.1rem] text-foreground mb-3 leading-[1.2] tracking-[-0.01em]">
@@ -588,8 +662,9 @@ const AskPage = () => {
                           ? `${isIVF ? "border-lavender/50 ring-2 ring-lavender/10" : "border-sage/50 ring-2 ring-sage/10"} shadow-soft`
                           : "border-border/50"
                       }`}
+                      style={sc && inputFocused ? { borderColor: sc.accentBorderStrong, boxShadow: `0 0 0 4px ${sc.accentSofter}` } : undefined}
                     >
-                      <Search size={16} className={`${isIVF ? "text-lavender/60" : "text-sage-muted/60"} shrink-0`} />
+                      <Search size={16} className={`${isIVF ? "text-lavender/60" : "text-sage-muted/60"} shrink-0`} style={sc ? { color: sc.accent } : undefined} />
                       <input
                         type="text"
                         value={newQuery}

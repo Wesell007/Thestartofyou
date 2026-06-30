@@ -10,6 +10,7 @@ const PreparingAISupport = () => (
     context="Preparing for baby"
     stageBg="--stage-preparing"
     stageAccent="--stage-preparing-accent"
+    stage="preparing"
   />
 );
 

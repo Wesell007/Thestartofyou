@@ -1,67 +1,71 @@
-## Toddler Subtopic + Age Pages — Premium Body/Card System Pass
+## Universal stage-aware AI search colour system
 
-Visual polish only. Lift the 8 Toddler topic pages and 5 Toddler age pages to the upgraded Toddler hub card standard. No route, IA, copy, data, asset, nav, or hero-image changes.
+Visual + routing-state fix only. No changes to AI generation, prompts, edge functions, EditorialAnswer, routes, Navbar, Footer, assets, data files, auth, saved-journey logic, or hub layouts. No new CSS tokens.
 
-### Files to edit
-- `src/components/toddler/topic/ToddlerTopicPage.tsx`
-- `src/components/toddler/age/ToddlerAgePage.tsx`
-- Data files (`toddlerTopicData.ts`, `toddlerAgeData.ts`) — only if a visible label is clearly wrong. Expected: no edits.
+### 1. New shared helper — `src/lib/aiStageStyles.ts`
+Single source of truth for stage → existing CSS tokens.
 
-All other files (App.tsx, routes, Navbar, Footer, other journeys, all assets) are off-limits.
+```ts
+export type AiStageKey =
+  | "toddler" | "pregnancy" | "first-year" | "recovery"
+  | "ttc" | "ivf" | "postpartum" | "support" | "preparing";
 
-### Shared premium card recipe (reused from hub)
-- Parchment → `--stage-toddler-soft` warm linear gradient at ~165°
-- Border: `--stage-toddler-accent` at 0.22–0.32 alpha (`accentBorderStrong`)
-- Subtle top-right or top-left apricot bloom (blurred span, ~60% opacity, ~0.18 accent alpha)
-- Warm rest shadow `0 14px 32px -28px rgba(70,40,20,0.22)` + inner highlight `inset 0 1px 0 hsl(0 0% 100% / 0.6–0.75)`
-- Hover lift `-translate-y-[2px]` + richer shadow `0 22px 50px -30px rgba(70,40,20,0.32)`
-- Radius: 20–22px cards, 26–28px panels/CTAs
-- Headings in `--stage-toddler-deep` (cocoa-russet), eyebrows preceded by an accent rule
-- Chevron chips: 32px round, accent-soft fill, accent border, accent icon, translate-x on hover
+export interface AiStageStyle {
+  key: AiStageKey;
+  label: string;
+  bgVar: string;
+  softVar?: string;
+  accentVar: string;
+  deepVar?: string;
+}
 
-### Topic page upgrades (`ToddlerTopicPage.tsx`)
-Keep hero, image, copy, structure, section order. Upgrade visual treatment only:
-1. **Section body rhythm** — add restrained vertical apricot washes (`parchment → --stage-toddler` low-alpha) behind What this covers, More toddler topics, and CTA sections so the body is no longer flat parchment.
-2. **What this covers card** — apply premium recipe (gradient bg, accent corner bloom, stronger accent border, inner highlight, deeper shadow). Check chips already strong; keep.
-3. **AI panel wrapper** — already on premium recipe; tighten border to `accentBorderStrong` and verify subtle corner bloom present.
-4. **Common questions accordion** — 18px radius preserved; warmer open-state fill (accent-soft band visible), accent left-rule on open, stronger border, subtle hover lift, mobile-safe padding. Accent chevron preserved via accordion default.
-5. **More toddler topics cards** — gradient bg + accent corner bloom; chevron chip enlarged feel; equal heights; clean mobile stack.
-6. **Back-to-hub CTA panel** — already strong; bump border to `accentBorderStrong` and keep apricot top bloom.
+export const aiStageStyles: Record<AiStageKey, AiStageStyle> = { /* maps each key to existing --stage-* tokens in src/index.css */ };
+export const getAiStageStyle: (key?: string | null) => AiStageStyle | null;
+export const stageColors: (s: AiStageStyle | null) => {
+  accent, accentStrong, accentSoft, accentSofter, accentRing,
+  accentBorder, accentBorderStrong, bgWash, bgWashSoft, deep, deepSoft
+} | null;
+```
+Unknown / missing keys return `null` so the existing default styling stays.
 
-### Age page upgrades (`ToddlerAgePage.tsx`)
-Keep hero, image, age pill, stage summary character, section order, prev/next IA, and copy. Upgrade visual treatment:
-1. **Section body rhythm** — subtle apricot washes behind Common questions, Gentle support, Related topics, and Prev/Next bands. Keep the page calm.
-2. **What changes around this age card** — premium recipe (gradient, bloom, stronger border).
-3. **Development area cards** — gradient bg, top-left corner bloom, stronger border, richer hover.
-4. **AI panel wrapper** — matches topic page (stronger border, subtle bloom).
-5. **Common questions accordion** — same upgraded accordion as topic pages.
-6. **Gentle support note** — warmer parchment surface with a soft bloom and stronger accent border; Heart chip refined.
-7. **Related toddler topic cards** — match topic page More-topics cards.
-8. **Prev / Next age cards** — gradient bg + bloom + chevron chip styling parity with hub navigation.
-9. **Back-to-hub link** — preserved.
+### 2. `src/components/shared/AISearchBar.tsx`
+Add optional prop `stage?: string`. In `handleAsk` and `handleSuggestion`, append `&stage=<key>` to the `/ask` URL when present. Preserve `context`, IVF `journey`, existing `stageAccent` visual styling, and default behaviour for hubs that don't pass `stage`.
 
-Age pages retain visual distinction: age range pill, stage summary card, development grid, gentle support panel, and prev/next remain prominent age-specific affordances.
+### 3. `src/components/shared/HubAISupport.tsx`
+Add optional `stage?: string` prop, forward to `AISearchBar`. No layout / copy changes; existing `stageBg`, `stageAccent`, prompts, behaviour unchanged.
 
-### Q&A visual system (topic + age)
-Warm open-state fill via `--stage-toddler-accent` at low alpha, stronger accent border, accent left-rule when open, Toddler-accent chevron, subtle hover lift, calm answer spacing, mobile-safe padding, consistent 18px radius. Copy untouched.
+### 4. One-line `stage` prop additions
+- `src/components/toddler/ToddlerAISupport.tsx` → `stage="toddler"`
+- `src/components/toddler/topic/ToddlerTopicPage.tsx` (inner `HubAISupport`) → `stage="toddler"`
+- `src/components/toddler/age/ToddlerAgePage.tsx` (inner `HubAISupport`) → `stage="toddler"`
+- `src/components/firstyear/FirstYearAISupport.tsx` → `stage="first-year"`
+- `src/components/postpartum/PostpartumAISupport.tsx` → `stage="postpartum"`
+- `src/components/preparing/PreparingAISupport.tsx` → `stage="preparing"`
 
-### AI panel consistency (topic + age)
-Wrapper uses parchment card treatment with `accentBorderStrong` border and a soft corner bloom. `stageAccent="--stage-toddler-accent"` continues to drive input focus, "Ask now" button, and searching/loading state via `HubAISupport` → `AISearchBar`. No functional or prompt changes.
+TTC, IVF, Support custom panels are left as-is and can opt in later.
 
-### Constraints reaffirmed
-- Only Toddler tokens: `--stage-toddler`, `--stage-toddler-soft`, `--stage-toddler-accent`, `--stage-toddler-deep`, `--parchment`.
-- No new CSS tokens, assets, routes, or pages.
-- Not bright orange, not childish, not busy.
-- Hero images, copy, data, and structure preserved.
+### 5. `src/pages/AskPage.tsx`
+- Read `const stageKey = searchParams.get("stage")`, resolve `const stage = getAiStageStyle(stageKey)`, derive `const sc = stageColors(stage)`.
+- When `sc` is present, override colour via inline `style` props on each tinted element (inline `style` always wins over Tailwind classes for `color` / `background` / `borderColor`). Existing `tone` (sage / lavender) classes remain as fallback when `sc` is `null`.
+- Re-toned surfaces: top gradient wash, `StageGlow` halo, "You asked" eyebrow, stage context chip (bg, ring, dot, text), loading card border + spinner + icon chip + ring, streaming "Still writing…" spinner + label, short-answer hero card gradient + border + sparkles icon + eyebrow + hairline divider, medical trust pill, follow-up prompt hover border + chevron, "Continue your journey" card hover border + icon chip + arrow, "Ask something else" wash + glow + input focus ring + suggestion chip hovers.
+- Botanical / Sprig accents remain (neutral).
+- `handleAskAgain` and `handleSuggestion` re-append `stage` so follow-up questions keep the same tone.
+- If `stage` is missing or unknown → default sage tone, no errors, bookmarks safe.
+- IVF precedence: if `stage` is also set with `journey=ivf`, `stage` wins for visual tone (lets future IVF hub pass `stage="ivf"` without another patch).
 
-### Verification (Playwright headless)
-Viewports: 1280×1800, 1024×1800, 390×1800.
-Routes:
-- `/toddler` (spot-check)
-- 8 topic: `/toddler/development-milestones`, `/behaviour-emotions`, `/speech-language`, `/sleep`, `/food-feeding`, `/potty-learning`, `/health-safety`, `/play-connection`
-- 5 age: `/toddler/12-17-months`, `/18-23-months`, `/2-years`, `/30-months`, `/3-years`
+### 6. Verification
+- `tsgo` type check.
+- Playwright @ 1280:
+  - From `/toddler`, submit "Why does my toddler have tantrums?" → URL contains `stage=toddler`; loading + answer states render pumpkin-clay (`--stage-toddler-accent`), not sage. Submit a follow-up → URL still contains `stage=toddler`; tone persists.
+  - `/ask?q=test` → default sage tone, no console errors.
+  - `/ask?q=test&stage=unknown` → default sage tone, no errors.
+  - First Year AI panel submit → URL contains `stage=first-year`; tone applied.
+  - Spot-check TTC / IVF / Pregnancy hubs render unchanged.
 
-Confirm: all routes render, no horizontal scroll, hero images render, no face crops, cards stack cleanly, accordions toggle, AI panels stack on mobile, warmth visibly increased, hub unaffected.
+### Files
+- **New**: `src/lib/aiStageStyles.ts`
+- **Edit**: `src/components/shared/AISearchBar.tsx`, `src/components/shared/HubAISupport.tsx`, `src/pages/AskPage.tsx`
+- **Edit (one-line `stage` prop add)**: `src/components/toddler/ToddlerAISupport.tsx`, `src/components/toddler/topic/ToddlerTopicPage.tsx`, `src/components/toddler/age/ToddlerAgePage.tsx`, `src/components/firstyear/FirstYearAISupport.tsx`, `src/components/postpartum/PostpartumAISupport.tsx`, `src/components/preparing/PreparingAISupport.tsx`
 
-### Return summary
-A. Files changed · B. Topic improvements · C. Age improvements · D. Card-recipe parity with hub · E. Body warmth parity · F. Q&A visually improved + functional · G. AI panels accent + unchanged behaviour · H. Desktop/iPad/mobile passes · I. All routes render · J. No out-of-scope changes.
+### Out of scope
+No edits to `useAISearch`, the `ai-search` edge function, prompts, EditorialAnswer, routes, Navbar, Footer, assets, data files, other hub layouts, auth, setup, or saved-journey logic. No new pages, routes, CSS tokens, or assets.

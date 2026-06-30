@@ -62,12 +62,12 @@ const ToddlerAgeNav = () => {
               <Link
                 key={label}
                 to={to}
-                className="group inline-flex items-center justify-center rounded-pill px-5 md:px-6 py-3 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-h-[44px] hover:-translate-y-[1px] hover:shadow-[0_12px_28px_-14px_rgba(70,40,20,0.42)]"
+                className="group inline-flex items-center justify-center rounded-pill px-5 md:px-6 py-3 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-h-[44px] hover:-translate-y-[1px] hover:shadow-[0_14px_30px_-14px_rgba(70,40,20,0.5)] hover:bg-[hsl(var(--stage-toddler-deep))] hover:text-[hsl(var(--stage-toddler-soft))] hover:border-[hsl(var(--stage-toddler-deep))]"
                 style={{
-                  backgroundColor: "hsl(var(--stage-toddler-soft) / 0.7)",
+                  backgroundColor: "hsl(var(--stage-toddler-soft) / 0.85)",
                   color: "hsl(var(--stage-toddler-deep))",
-                  borderColor: "hsl(var(--stage-toddler-accent) / 0.32)",
-                  boxShadow: "inset 0 1px 0 hsl(0 0% 100% / 0.65)",
+                  borderColor: "hsl(var(--stage-toddler-accent) / 0.4)",
+                  boxShadow: "inset 0 1px 0 hsl(0 0% 100% / 0.7)",
                 }}
               >
                 {label}

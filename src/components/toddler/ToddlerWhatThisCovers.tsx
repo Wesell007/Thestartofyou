@@ -12,16 +12,22 @@ const pillars = [
 ];
 
 const accent = "hsl(var(--stage-toddler-accent))";
-const accentSoft = "hsl(var(--stage-toddler-accent) / 0.08)";
-const accentMid = "hsl(var(--stage-toddler-accent) / 0.22)";
-const accentBorder = "hsl(var(--stage-toddler-accent) / 0.22)";
-const accentBorderStrong = "hsl(var(--stage-toddler-accent) / 0.3)";
+const accentSoft = "hsl(var(--stage-toddler-accent) / 0.14)";
+const accentMid = "hsl(var(--stage-toddler-accent) / 0.24)";
+const accentBorder = "hsl(var(--stage-toddler-accent) / 0.3)";
+const accentBorderStrong = "hsl(var(--stage-toddler-accent) / 0.38)";
 const deep = "hsl(var(--stage-toddler-deep))";
 const deepSoft = "hsl(var(--stage-toddler-deep) / 0.72)";
 
 const ToddlerWhatThisCovers = () => {
   return (
-    <section className="py-24 md:py-28 bg-parchment">
+    <section
+      className="py-24 md:py-28"
+      style={{
+        background:
+          "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.2) 100%)",
+      }}
+    >
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-4xl">
         <div className="text-center mb-12 md:mb-14">
           <span className="mx-auto block h-px w-10 mb-6" style={{ backgroundColor: accentMid }} />
@@ -41,12 +47,12 @@ const ToddlerWhatThisCovers = () => {
           style={{
             borderColor: accentBorder,
             boxShadow:
-              "0 22px 56px -36px rgba(70,40,20,0.26), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+              "0 22px 56px -36px rgba(70,40,20,0.3), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
           }}
         >
           <span
-            className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 rounded-full blur-3xl opacity-70"
-            style={{ background: "hsl(var(--stage-toddler) / 0.35)" }}
+            className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 rounded-full blur-3xl opacity-80"
+            style={{ background: "hsl(var(--stage-toddler-accent) / 0.18)" }}
             aria-hidden
           />
           <ul className="relative grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">

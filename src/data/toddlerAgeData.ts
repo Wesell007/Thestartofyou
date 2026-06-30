@@ -182,6 +182,7 @@ const twoYears: ToddlerAgeConfig = {
   ageRangeLabel: "Around 2 years",
   standfirst:
     "Often called the loud, lively middle of toddlerhood. Language can race ahead, feelings can spill over, and your toddler may want to do everything themselves — until they suddenly do not.",
+  heroImage: heroAge2Years.url,
   stageSummary:
     "Two is rarely as terrible as it is described. It is usually a stage of intense growth in language, emotion and independence happening all at once.",
   whatChanges: {

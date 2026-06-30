@@ -45,6 +45,7 @@ export interface ToddlerAgeConfig {
   title: string;
   ageRangeLabel: string;
   standfirst: string;
+  heroImage?: string;
   stageSummary?: string;
   whatChanges: { lead: string; items: string[] };
   developmentAreas: DevelopmentArea[];

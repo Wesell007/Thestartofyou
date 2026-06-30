@@ -358,11 +358,24 @@ const AskPage = () => {
         {isLoading && !answer && (
           <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
             <div className="relative rounded-3xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-sage-bg/40 via-card to-lavender-bg/15 pointer-events-none" />
-              <div className="relative bg-card/85 backdrop-blur-sm border border-sage/15 rounded-3xl px-10 py-16 md:px-14 md:py-20 shadow-elevated">
+              <div
+                className="absolute inset-0 bg-gradient-to-br from-sage-bg/40 via-card to-lavender-bg/15 pointer-events-none"
+                style={sc ? { background: `linear-gradient(135deg, ${sc.bgWash}, hsl(var(--card)) 60%, ${sc.accentSofter})` } : undefined}
+              />
+              <div
+                className="relative bg-card/85 backdrop-blur-sm border border-sage/15 rounded-3xl px-10 py-16 md:px-14 md:py-20 shadow-elevated"
+                style={sc ? { borderColor: sc.accentBorder } : undefined}
+              >
                 <div className="flex flex-col items-center text-center gap-4">
-                  <div className="w-11 h-11 rounded-full bg-sage-bg/70 flex items-center justify-center ring-4 ring-sage-bg/40">
-                    <Loader2 size={18} className="animate-spin text-sage" />
+                  <div
+                    className="w-11 h-11 rounded-full bg-sage-bg/70 flex items-center justify-center ring-4 ring-sage-bg/40"
+                    style={sc ? { backgroundColor: sc.accentSoft, boxShadow: `0 0 0 4px ${sc.accentSofter}` } : undefined}
+                  >
+                    <Loader2
+                      size={18}
+                      className="animate-spin text-sage"
+                      style={sc ? { color: sc.accent } : undefined}
+                    />
                   </div>
                   <div>
                     <p className="font-serif text-lg text-foreground mb-1.5">Finding your answer</p>

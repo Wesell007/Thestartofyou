@@ -126,6 +126,7 @@ const eighteenToTwentyThree: ToddlerAgeConfig = {
   ageRangeLabel: "18–23 months",
   standfirst:
     "Faster on their feet, louder in their wants, and finding the word ‘no’. This stage is full of energy, opinion and pretend play that is just starting to take shape.",
+  heroImage: heroAge18to23.url,
   stageSummary:
     "Toddlers at this age often look very capable one moment and very small the next. Both are real. Calm consistency tends to do more than clever strategies.",
   whatChanges: {

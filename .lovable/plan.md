@@ -1,89 +1,67 @@
-## Toddler Section — Premium Visual + Q&A Pass
+## Toddler Subtopic + Age Pages — Premium Body/Card System Pass
 
-Focused polish across the Toddler hub, 8 topic pages and 5 age pages. No IA, route, asset, data-model or token changes.
+Visual polish only. Lift the 8 Toddler topic pages and 5 Toddler age pages to the upgraded Toddler hub card standard. No route, IA, copy, data, asset, nav, or hero-image changes.
 
-### A. Shared premium card recipe (applied across all Toddler cards)
+### Files to edit
+- `src/components/toddler/topic/ToddlerTopicPage.tsx`
+- `src/components/toddler/age/ToddlerAgePage.tsx`
+- Data files (`toddlerTopicData.ts`, `toddlerAgeData.ts`) — only if a visible label is clearly wrong. Expected: no edits.
 
-One consistent recipe used everywhere — hub topic clusters, hub age pills, what-this-covers, related topics, prev/next age cards, final CTAs, dev-area cards:
+All other files (App.tsx, routes, Navbar, Footer, other journeys, all assets) are off-limits.
 
-- Surface: `bg-parchment` + faint apricot top-left wash (`hsl(var(--stage-toddler) / 0.35)` blurred blob, opacity 70%).
-- Border: `hsl(var(--stage-toddler-accent) / 0.22)`.
-- Shadow rest: `0 14px 32px -28px rgba(70,40,20,0.22)` + `inset 0 1px 0 hsl(0 0% 100% / 0.6)`.
-- Shadow hover: `0 22px 50px -30px rgba(70,40,20,0.32)` + `-translate-y-[2px]`.
-- Radius: content 20–22px; hero/CTA 26–28px.
-- Eyebrow: 10.5px, uppercase, tracking `[0.28em]`, accent colour.
-- Title: serif 17–18px, cocoa-russet (`--stage-toddler-deep`).
-- Chevron affordance: 8×8 circle, accent border + `accent/0.08` fill, translates 4px on hover.
+### Shared premium card recipe (reused from hub)
+- Parchment → `--stage-toddler-soft` warm linear gradient at ~165°
+- Border: `--stage-toddler-accent` at 0.22–0.32 alpha (`accentBorderStrong`)
+- Subtle top-right or top-left apricot bloom (blurred span, ~60% opacity, ~0.18 accent alpha)
+- Warm rest shadow `0 14px 32px -28px rgba(70,40,20,0.22)` + inner highlight `inset 0 1px 0 hsl(0 0% 100% / 0.6–0.75)`
+- Hover lift `-translate-y-[2px]` + richer shadow `0 22px 50px -30px rgba(70,40,20,0.32)`
+- Radius: 20–22px cards, 26–28px panels/CTAs
+- Headings in `--stage-toddler-deep` (cocoa-russet), eyebrows preceded by an accent rule
+- Chevron chips: 32px round, accent-soft fill, accent border, accent icon, translate-x on hover
 
-### B. Toddler hub (`pages/Toddler.tsx` + components)
+### Topic page upgrades (`ToddlerTopicPage.tsx`)
+Keep hero, image, copy, structure, section order. Upgrade visual treatment only:
+1. **Section body rhythm** — add restrained vertical apricot washes (`parchment → --stage-toddler` low-alpha) behind What this covers, More toddler topics, and CTA sections so the body is no longer flat parchment.
+2. **What this covers card** — apply premium recipe (gradient bg, accent corner bloom, stronger accent border, inner highlight, deeper shadow). Check chips already strong; keep.
+3. **AI panel wrapper** — already on premium recipe; tighten border to `accentBorderStrong` and verify subtle corner bloom present.
+4. **Common questions accordion** — 18px radius preserved; warmer open-state fill (accent-soft band visible), accent left-rule on open, stronger border, subtle hover lift, mobile-safe padding. Accent chevron preserved via accordion default.
+5. **More toddler topics cards** — gradient bg + accent corner bloom; chevron chip enlarged feel; equal heights; clean mobile stack.
+6. **Back-to-hub CTA panel** — already strong; bump border to `accentBorderStrong` and keep apricot top bloom.
 
-- `ToddlerTopicClusters.tsx`: apply shared card recipe + apricot wash; replace text-arrow with circular chevron chip; tighten gap; add gentle apricot top wash above the section.
-- `ToddlerAgeNav.tsx`: pill fill warmed to `--stage-toddler-soft / 0.7`, stronger accent border (`/0.32`), apricot bloom inside container, deeper hover shadow.
-- `ToddlerWhatThisCovers.tsx`: wrap the 8 pillars inside a parchment card with the shared recipe; replace dash bullets with apricot-tinted `Check` chips (matches topic-page pattern); add top-left apricot wash.
-- `ToddlerCommonQuestions.tsx`: rebuild with the topic-page accordion treatment — left accent rule + soft apricot fill on open state, lift on hover, 18px radius, premium border colour.
-- `ToddlerAISupport.tsx`: wrap in parchment card with apricot border + inner highlight + warmer shadow; soften trailing caption.
-- `ToddlerFinalCTA.tsx`: warmer gradient band, parchment card with apricot bloom, refined primary button with chevron, softer secondary.
-- `pages/Toddler.tsx`: leave section order untouched. (Section bands are achieved via component-level top washes — no wrapper changes needed.)
+### Age page upgrades (`ToddlerAgePage.tsx`)
+Keep hero, image, age pill, stage summary character, section order, prev/next IA, and copy. Upgrade visual treatment:
+1. **Section body rhythm** — subtle apricot washes behind Common questions, Gentle support, Related topics, and Prev/Next bands. Keep the page calm.
+2. **What changes around this age card** — premium recipe (gradient, bloom, stronger border).
+3. **Development area cards** — gradient bg, top-left corner bloom, stronger border, richer hover.
+4. **AI panel wrapper** — matches topic page (stronger border, subtle bloom).
+5. **Common questions accordion** — same upgraded accordion as topic pages.
+6. **Gentle support note** — warmer parchment surface with a soft bloom and stronger accent border; Heart chip refined.
+7. **Related toddler topic cards** — match topic page More-topics cards.
+8. **Prev / Next age cards** — gradient bg + bloom + chevron chip styling parity with hub navigation.
+9. **Back-to-hub link** — preserved.
 
-### C. Topic pages (`ToddlerTopicPage.tsx`)
+Age pages retain visual distinction: age range pill, stage summary card, development grid, gentle support panel, and prev/next remain prominent age-specific affordances.
 
-Hero, image, copy structure, routes unchanged. Already strong below the hero; small polish only:
-- Tighten AI panel trailing caption to match hub.
-- Confirm Q&A accordion already uses the premium treatment (it does — keep as-is).
-- Related topics already use the shared card recipe — keep.
-- Final back-to-hub CTA: warmer gradient + accent bloom to match hub final CTA recipe.
+### Q&A visual system (topic + age)
+Warm open-state fill via `--stage-toddler-accent` at low alpha, stronger accent border, accent left-rule when open, Toddler-accent chevron, subtle hover lift, calm answer spacing, mobile-safe padding, consistent 18px radius. Copy untouched.
 
-### D. Age pages (`ToddlerAgePage.tsx`)
+### AI panel consistency (topic + age)
+Wrapper uses parchment card treatment with `accentBorderStrong` border and a soft corner bloom. `stageAccent="--stage-toddler-accent"` continues to drive input focus, "Ask now" button, and searching/loading state via `HubAISupport` → `AISearchBar`. No functional or prompt changes.
 
-Hero, age pill, stage summary, prev/next strip, stage-guide feel preserved.
-- Development area cards: add a small accent dot chip beside the eyebrow for a stronger eyebrow/title hierarchy; keep topic chevron affordance.
-- Q&A accordion: already premium — keep.
-- Gentle support panel: keep current warm chip styling; add apricot wash for depth.
-- AI panel wrapper: trailing caption added for parity with hub/topic.
-- Related topic & prev/next cards: already use the shared recipe — keep.
+### Constraints reaffirmed
+- Only Toddler tokens: `--stage-toddler`, `--stage-toddler-soft`, `--stage-toddler-accent`, `--stage-toddler-deep`, `--parchment`.
+- No new CSS tokens, assets, routes, or pages.
+- Not bright orange, not childish, not busy.
+- Hero images, copy, data, and structure preserved.
 
-### E. Q&A copy pass
+### Verification (Playwright headless)
+Viewports: 1280×1800, 1024×1800, 390×1800.
+Routes:
+- `/toddler` (spot-check)
+- 8 topic: `/toddler/development-milestones`, `/behaviour-emotions`, `/speech-language`, `/sleep`, `/food-feeding`, `/potty-learning`, `/health-safety`, `/play-connection`
+- 5 age: `/toddler/12-17-months`, `/18-23-months`, `/2-years`, `/30-months`, `/3-years`
 
-Existing Q&A across `ToddlerCommonQuestions.tsx`, `toddlerTopicData.ts` (8 sets) and `toddlerAgeData.ts` (5 sets) is already calm, UK English, 2–4 sentences, with health-visitor/GP signposting and variability language ("most", "many", "around").
+Confirm: all routes render, no horizontal scroll, hero images render, no face crops, cards stack cleanly, accordions toggle, AI panels stack on mobile, warmth visibly increased, hub unaffected.
 
-Targeted polish only:
-- Hub Q&A: light tightening for cadence (e.g. "still-developing toddler brain", "very few words", "for a long stretch") — no question count changes, no meaning changes.
-- Topic + age Q&A: leave largely intact; soften any milestone-fixed phrasing if found during edit; no rewrites.
-
-This avoids drift on copy that has already been reviewed and approved.
-
-### F. AI panels
-
-Visual integration only — same `HubAISupport` component, same props, same functionality. Apricot border, inner highlight, warmer shadow, balanced spacing, trailing caption for parity. No prop changes.
-
-### G. Responsive verification (Playwright headless)
-
-After build, capture screenshots at 1280 / 1024 / 390 for all 14 routes:
-- `/toddler`
-- 8 topic routes
-- 5 age routes
-
-Confirm: no horizontal scroll, heroes intact, images render, cards stack cleanly, accordions open, AI panels stack, no cropped faces, warmer palette visible.
-
-### Files to be edited
-
-```
-src/components/toddler/ToddlerTopicClusters.tsx
-src/components/toddler/ToddlerAgeNav.tsx
-src/components/toddler/ToddlerWhatThisCovers.tsx
-src/components/toddler/ToddlerCommonQuestions.tsx
-src/components/toddler/ToddlerAISupport.tsx
-src/components/toddler/ToddlerFinalCTA.tsx
-src/components/toddler/topic/ToddlerTopicPage.tsx   (final CTA polish + trailing caption)
-src/components/toddler/age/ToddlerAgePage.tsx       (dev-area eyebrow chip + trailing caption)
-src/data/toddlerTopicData.ts                        (only if light Q&A wording polish surfaces)
-src/data/toddlerAgeData.ts                          (only if light Q&A wording polish surfaces)
-```
-
-### Out of scope (untouched)
-
-Routes, `App.tsx`, Navbar, Footer, TTC, Pregnancy, First Year, IVF, legacy Postpartum, Journal, saved-journey logic, auth, setup, all Toddler media assets (hero video, poster, topic and age hero images). No new tokens, pages, routes, assets or journey logic.
-
-### Deliverable on completion
-
-Files-changed list plus the requested summaries (B–J).
+### Return summary
+A. Files changed · B. Topic improvements · C. Age improvements · D. Card-recipe parity with hub · E. Body warmth parity · F. Q&A visually improved + functional · G. AI panels accent + unchanged behaviour · H. Desktop/iPad/mobile passes · I. All routes render · J. No out-of-scope changes.

@@ -208,60 +208,75 @@ const ToddlerTopicPage = ({ config }: Props) => {
         </section>
 
         {/* ─── WHAT THIS COVERS ─────────────────────────────────────── */}
-        <section className="pb-16 md:pb-20">
+        <section
+          className="relative pb-16 md:pb-20"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.32) 100%)",
+          }}
+        >
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
             <div
-              className="relative bg-parchment rounded-[26px] border p-7 sm:p-10 md:p-12"
+              className="relative rounded-[26px] border p-7 sm:p-10 md:p-12 overflow-hidden"
               style={{
-                borderColor: accentBorder,
+                borderColor: accentBorderStrong,
+                background:
+                  "linear-gradient(165deg, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.5) 100%)",
                 boxShadow:
-                  "0 28px 64px -40px rgba(70,40,20,0.28), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+                  "0 28px 64px -40px rgba(70,40,20,0.32), inset 0 1px 0 hsl(0 0% 100% / 0.75)",
               }}
             >
-              <SectionLabel>What this covers</SectionLabel>
-              <h2
-                className="mt-5 font-serif text-[1.75rem] md:text-[2rem] leading-tight"
-                style={{ color: deep }}
-              >
-                A calm overview
-              </h2>
-
-              <div className="mt-5 flex gap-4 max-w-2xl">
-                <span
-                  className="mt-1.5 w-[2px] shrink-0 rounded-full"
-                  style={{ background: accentMid }}
-                  aria-hidden
-                />
-                <p
-                  className="font-serif italic text-[15px] leading-[1.7]"
-                  style={{ color: deepSoft }}
+              <span
+                className="pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full blur-3xl opacity-60"
+                style={{ background: "hsl(var(--stage-toddler-accent) / 0.18)" }}
+                aria-hidden
+              />
+              <div className="relative">
+                <SectionLabel>What this covers</SectionLabel>
+                <h2
+                  className="mt-5 font-serif text-[1.75rem] md:text-[2rem] leading-tight"
+                  style={{ color: deep }}
                 >
-                  {config.whatThisCovers.lead}
-                </p>
-              </div>
+                  A calm overview
+                </h2>
 
-              <ul className="mt-9 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5">
-                {config.whatThisCovers.bullets.map((b, i) => (
-                  <li key={i} className="flex items-start gap-3.5">
-                    <span
-                      className="mt-0.5 grid place-items-center h-5 w-5 rounded-full shrink-0 border"
-                      style={{
-                        backgroundColor: accentSoft,
-                        borderColor: accentBorderStrong,
-                      }}
-                      aria-hidden
-                    >
-                      <Check size={11} strokeWidth={2.2} style={{ color: accent }} />
-                    </span>
-                    <span
-                      className="font-sans text-[14.75px] font-light leading-[1.65]"
-                      style={{ color: deepSoft }}
-                    >
-                      {b}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+                <div className="mt-5 flex gap-4 max-w-2xl">
+                  <span
+                    className="mt-1.5 w-[2px] shrink-0 rounded-full"
+                    style={{ background: accentMid }}
+                    aria-hidden
+                  />
+                  <p
+                    className="font-serif italic text-[15px] leading-[1.7]"
+                    style={{ color: deepSoft }}
+                  >
+                    {config.whatThisCovers.lead}
+                  </p>
+                </div>
+
+                <ul className="mt-9 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5">
+                  {config.whatThisCovers.bullets.map((b, i) => (
+                    <li key={i} className="flex items-start gap-3.5">
+                      <span
+                        className="mt-0.5 grid place-items-center h-5 w-5 rounded-full shrink-0 border"
+                        style={{
+                          backgroundColor: accentSoft,
+                          borderColor: accentBorderStrong,
+                        }}
+                        aria-hidden
+                      >
+                        <Check size={11} strokeWidth={2.2} style={{ color: accent }} />
+                      </span>
+                      <span
+                        className="font-sans text-[14.75px] font-light leading-[1.65]"
+                        style={{ color: deepSoft }}
+                      >
+                        {b}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </section>

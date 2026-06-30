@@ -208,60 +208,75 @@ const ToddlerTopicPage = ({ config }: Props) => {
         </section>
 
         {/* ─── WHAT THIS COVERS ─────────────────────────────────────── */}
-        <section className="pb-16 md:pb-20">
+        <section
+          className="relative pb-16 md:pb-20"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.32) 100%)",
+          }}
+        >
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
             <div
-              className="relative bg-parchment rounded-[26px] border p-7 sm:p-10 md:p-12"
+              className="relative rounded-[26px] border p-7 sm:p-10 md:p-12 overflow-hidden"
               style={{
-                borderColor: accentBorder,
+                borderColor: accentBorderStrong,
+                background:
+                  "linear-gradient(165deg, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.5) 100%)",
                 boxShadow:
-                  "0 28px 64px -40px rgba(70,40,20,0.28), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+                  "0 28px 64px -40px rgba(70,40,20,0.32), inset 0 1px 0 hsl(0 0% 100% / 0.75)",
               }}
             >
-              <SectionLabel>What this covers</SectionLabel>
-              <h2
-                className="mt-5 font-serif text-[1.75rem] md:text-[2rem] leading-tight"
-                style={{ color: deep }}
-              >
-                A calm overview
-              </h2>
-
-              <div className="mt-5 flex gap-4 max-w-2xl">
-                <span
-                  className="mt-1.5 w-[2px] shrink-0 rounded-full"
-                  style={{ background: accentMid }}
-                  aria-hidden
-                />
-                <p
-                  className="font-serif italic text-[15px] leading-[1.7]"
-                  style={{ color: deepSoft }}
+              <span
+                className="pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full blur-3xl opacity-60"
+                style={{ background: "hsl(var(--stage-toddler-accent) / 0.18)" }}
+                aria-hidden
+              />
+              <div className="relative">
+                <SectionLabel>What this covers</SectionLabel>
+                <h2
+                  className="mt-5 font-serif text-[1.75rem] md:text-[2rem] leading-tight"
+                  style={{ color: deep }}
                 >
-                  {config.whatThisCovers.lead}
-                </p>
-              </div>
+                  A calm overview
+                </h2>
 
-              <ul className="mt-9 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5">
-                {config.whatThisCovers.bullets.map((b, i) => (
-                  <li key={i} className="flex items-start gap-3.5">
-                    <span
-                      className="mt-0.5 grid place-items-center h-5 w-5 rounded-full shrink-0 border"
-                      style={{
-                        backgroundColor: accentSoft,
-                        borderColor: accentBorderStrong,
-                      }}
-                      aria-hidden
-                    >
-                      <Check size={11} strokeWidth={2.2} style={{ color: accent }} />
-                    </span>
-                    <span
-                      className="font-sans text-[14.75px] font-light leading-[1.65]"
-                      style={{ color: deepSoft }}
-                    >
-                      {b}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+                <div className="mt-5 flex gap-4 max-w-2xl">
+                  <span
+                    className="mt-1.5 w-[2px] shrink-0 rounded-full"
+                    style={{ background: accentMid }}
+                    aria-hidden
+                  />
+                  <p
+                    className="font-serif italic text-[15px] leading-[1.7]"
+                    style={{ color: deepSoft }}
+                  >
+                    {config.whatThisCovers.lead}
+                  </p>
+                </div>
+
+                <ul className="mt-9 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5">
+                  {config.whatThisCovers.bullets.map((b, i) => (
+                    <li key={i} className="flex items-start gap-3.5">
+                      <span
+                        className="mt-0.5 grid place-items-center h-5 w-5 rounded-full shrink-0 border"
+                        style={{
+                          backgroundColor: accentSoft,
+                          borderColor: accentBorderStrong,
+                        }}
+                        aria-hidden
+                      >
+                        <Check size={11} strokeWidth={2.2} style={{ color: accent }} />
+                      </span>
+                      <span
+                        className="font-sans text-[14.75px] font-light leading-[1.65]"
+                        style={{ color: deepSoft }}
+                      >
+                        {b}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </section>
@@ -307,7 +322,13 @@ const ToddlerTopicPage = ({ config }: Props) => {
         </section>
 
         {/* ─── COMMON QUESTIONS ─────────────────────────────────────── */}
-        <section className="py-20 md:py-24 bg-parchment">
+        <section
+          className="relative py-20 md:py-24"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.32) 50%, hsl(var(--parchment)) 100%)",
+          }}
+        >
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
             <div className="mb-10 md:mb-12 flex flex-col items-start gap-4">
               <SectionLabel>Common questions</SectionLabel>
@@ -324,8 +345,8 @@ const ToddlerTopicPage = ({ config }: Props) => {
                 <AccordionItem
                   key={i}
                   value={`q${i}`}
-                  className="group/q relative rounded-[18px] border bg-parchment px-6 md:px-7 overflow-hidden transition-all duration-300 hover:-translate-y-[1px] hover:shadow-[0_18px_42px_-26px_rgba(70,40,20,0.3)] data-[state=open]:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
-                  style={{ borderColor: accentBorder }}
+                  className="group/q relative rounded-[18px] border bg-parchment/90 px-6 md:px-7 overflow-hidden transition-all duration-300 hover:-translate-y-[1px] hover:shadow-[0_18px_42px_-26px_rgba(70,40,20,0.3)] data-[state=open]:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)] data-[state=open]:border-[hsl(var(--stage-toddler-accent)/0.32)]"
+                  style={{ borderColor: accentBorderStrong }}
                 >
                   <span
                     className="pointer-events-none absolute left-0 top-3 bottom-3 w-[2px] rounded-r opacity-0 group-data-[state=open]/q:opacity-100 transition-opacity"
@@ -334,7 +355,7 @@ const ToddlerTopicPage = ({ config }: Props) => {
                   />
                   <span
                     className="pointer-events-none absolute inset-0 opacity-0 group-data-[state=open]/q:opacity-100 transition-opacity"
-                    style={{ background: accentSoft }}
+                    style={{ background: "hsl(var(--stage-toddler-accent) / 0.12)" }}
                     aria-hidden
                   />
                   <AccordionTrigger
@@ -356,7 +377,13 @@ const ToddlerTopicPage = ({ config }: Props) => {
         </section>
 
         {/* ─── MORE TODDLER TOPICS ──────────────────────────────────── */}
-        <section className="py-20 md:py-24 bg-parchment">
+        <section
+          className="relative py-20 md:py-24"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.28) 100%)",
+          }}
+        >
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
             <div className="mb-9 md:mb-11 flex flex-col items-start gap-3">
               <SectionLabel>More toddler topics</SectionLabel>
@@ -372,14 +399,21 @@ const ToddlerTopicPage = ({ config }: Props) => {
                 <Link
                   key={r.slug}
                   to={`/toddler/${r.slug}`}
-                  className="group flex h-full flex-col justify-between gap-6 rounded-[20px] border bg-parchment px-6 py-6 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
+                  className="group relative flex h-full flex-col justify-between gap-6 rounded-[20px] border px-6 py-6 overflow-hidden transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
                   style={{
-                    borderColor: accentBorder,
+                    borderColor: accentBorderStrong,
+                    background:
+                      "linear-gradient(160deg, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.5) 100%)",
                     boxShadow:
-                      "0 14px 32px -28px rgba(70,40,20,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.6)",
+                      "0 14px 32px -28px rgba(70,40,20,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.65)",
                   }}
                 >
-                  <div>
+                  <span
+                    className="pointer-events-none absolute -top-10 -left-10 h-32 w-32 rounded-full blur-2xl opacity-60"
+                    style={{ background: "hsl(var(--stage-toddler-accent) / 0.16)" }}
+                    aria-hidden
+                  />
+                  <div className="relative">
                     <p
                       className="font-sans text-[10.5px] font-light tracking-[0.28em] uppercase mb-2"
                       style={{ color: accent }}
@@ -393,7 +427,7 @@ const ToddlerTopicPage = ({ config }: Props) => {
                       {r.title}
                     </p>
                   </div>
-                  <div className="flex items-center justify-end">
+                  <div className="relative flex items-center justify-end">
                     <span
                       className="inline-flex items-center justify-center h-8 w-8 rounded-full border transition-transform group-hover:translate-x-1"
                       style={{
@@ -415,11 +449,13 @@ const ToddlerTopicPage = ({ config }: Props) => {
         <section className="pb-28 md:pb-32">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
           <div
-              className="relative rounded-[28px] border bg-parchment px-7 py-10 md:px-12 md:py-12 text-center overflow-hidden"
+              className="relative rounded-[28px] border px-7 py-10 md:px-12 md:py-12 text-center overflow-hidden"
               style={{
-                borderColor: accentBorder,
+                borderColor: accentBorderStrong,
+                background:
+                  "linear-gradient(170deg, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.55) 100%)",
                 boxShadow:
-                  "0 32px 76px -42px rgba(70,40,20,0.34), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+                  "0 32px 76px -42px rgba(70,40,20,0.34), inset 0 1px 0 hsl(0 0% 100% / 0.75)",
               }}
             >
               <span

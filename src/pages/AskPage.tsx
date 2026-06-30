@@ -608,11 +608,25 @@ const AskPage = () => {
                 ══════════════════════════════════════════════════ */}
             <div className="relative mt-8">
               {/* Full-width premium wash */}
-              <div className={`absolute inset-0 bg-gradient-to-b from-parchment ${isIVF ? "via-lavender-bg/15" : "via-sage-bg/15"} to-parchment pointer-events-none`} />
-              <StageGlow tone={tone.glow} className="top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px]" opacity={0.7} />
+              <div
+                className={`absolute inset-0 bg-gradient-to-b from-parchment ${isIVF ? "via-lavender-bg/15" : "via-sage-bg/15"} to-parchment pointer-events-none`}
+                style={sc ? { background: `linear-gradient(to bottom, hsl(var(--parchment)), ${sc.bgWashSoft} 50%, hsl(var(--parchment)))` } : undefined}
+              />
+              {sc ? (
+                <div
+                  className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px] rounded-full blur-3xl pointer-events-none"
+                  style={{ background: sc.accentSoft, opacity: 0.7 }}
+                  aria-hidden
+                />
+              ) : (
+                <StageGlow tone={tone.glow} className="top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px]" opacity={0.7} />
+              )}
 
               <div className="relative container mx-auto px-6 md:px-10 max-w-3xl py-20 md:py-28">
-                <div className={`relative bg-card border ${isIVF ? "border-lavender/15" : "border-sage/15"} rounded-[2rem] px-7 py-12 md:px-14 md:py-16 shadow-elevated overflow-hidden`}>
+                <div
+                  className={`relative bg-card border ${isIVF ? "border-lavender/15" : "border-sage/15"} rounded-[2rem] px-7 py-12 md:px-14 md:py-16 shadow-elevated overflow-hidden`}
+                  style={sc ? { borderColor: sc.accentBorder } : undefined}
+                >
                   {/* Botanical art-direction */}
                   <BotanicalAccent
                     className="-top-10 -left-10 rotate-[-18deg]"
@@ -629,7 +643,7 @@ const AskPage = () => {
 
                   <div className="relative text-center mb-9">
                     <SprigDivider tone={tone.sprigTone} className="mb-6" />
-                    <p className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow} mb-4`}>
+                  <p className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow} mb-4`} style={sc ? { color: sc.accent } : undefined}>
                       Your next question
                     </p>
                     <h2 className="font-serif text-[1.75rem] md:text-[2.1rem] text-foreground mb-3 leading-[1.2] tracking-[-0.01em]">
@@ -648,8 +662,9 @@ const AskPage = () => {
                           ? `${isIVF ? "border-lavender/50 ring-2 ring-lavender/10" : "border-sage/50 ring-2 ring-sage/10"} shadow-soft`
                           : "border-border/50"
                       }`}
+                      style={sc && inputFocused ? { borderColor: sc.accentBorderStrong, boxShadow: `0 0 0 4px ${sc.accentSofter}` } : undefined}
                     >
-                      <Search size={16} className={`${isIVF ? "text-lavender/60" : "text-sage-muted/60"} shrink-0`} />
+                      <Search size={16} className={`${isIVF ? "text-lavender/60" : "text-sage-muted/60"} shrink-0`} style={sc ? { color: sc.accent } : undefined} />
                       <input
                         type="text"
                         value={newQuery}

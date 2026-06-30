@@ -238,6 +238,7 @@ const thirtyMonths: ToddlerAgeConfig = {
   ageRangeLabel: "Around 30 months",
   standfirst:
     "Conversation lengthens, play deepens and your child's sense of who they are gets louder. Emotional swings are still very real, even as understanding grows.",
+  heroImage: heroAge30Months.url,
   stageSummary:
     "Around two and a half, many toddlers feel like a smaller, sharper version of who they are becoming — capable, curious and still very much in need of a calm anchor.",
   whatChanges: {

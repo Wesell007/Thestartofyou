@@ -440,7 +440,7 @@ const ToddlerTopicPage = ({ config }: Props) => {
               </p>
               <Link
                 to="/toddler"
-                className="inline-flex items-center gap-2 rounded-full border px-7 py-3 font-sans text-[13px] font-medium tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_46px_-26px_rgba(70,40,20,0.4)]"
+                className="relative inline-flex items-center gap-2 rounded-full border px-7 py-3 font-sans text-[13px] font-medium tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_46px_-26px_rgba(70,40,20,0.4)]"
                 style={{
                   borderColor: accentBorderStrong,
                   backgroundColor: accentSoft,

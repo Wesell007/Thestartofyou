@@ -294,6 +294,7 @@ const threeYears: ToddlerAgeConfig = {
   ageRangeLabel: "Around 3 years",
   standfirst:
     "Real conversation, deeper friendships and a growing sense of independence. Three is often calmer than two, with new challenges of its own around boundaries, fairness and nursery life.",
+  heroImage: heroAge3Years.url,
   stageSummary:
     "Three is a stage of widening worlds — more time with other children, more questions about how things work, and more capacity to handle small disappointments with help.",
   whatChanges: {

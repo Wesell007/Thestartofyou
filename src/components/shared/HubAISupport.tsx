@@ -57,6 +57,7 @@ const HubAISupport = ({
               placeholder={placeholder}
               suggestions={suggestions}
               context={context}
+              stageAccent={stageAccent}
             />
           </div>
         </div>

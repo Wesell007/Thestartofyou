@@ -2,7 +2,7 @@ import HubAISupport from "@/components/shared/HubAISupport";
 
 const accent = "hsl(var(--stage-toddler-accent))";
 const accentMid = "hsl(var(--stage-toddler-accent) / 0.22)";
-const accentBorderStrong = "hsl(var(--stage-toddler-accent) / 0.3)";
+const accentBorderStrong = "hsl(var(--stage-toddler-accent) / 0.4)";
 const deep = "hsl(var(--stage-toddler-deep))";
 const deepSoft = "hsl(var(--stage-toddler-deep) / 0.7)";
 
@@ -40,9 +40,19 @@ const ToddlerAISupport = () => {
           style={{
             borderColor: accentBorderStrong,
             boxShadow:
-              "0 32px 72px -42px rgba(70,40,20,0.36), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+              "0 36px 80px -42px rgba(70,40,20,0.4), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
           }}
         >
+          <span
+            className="pointer-events-none absolute -top-20 -left-20 h-56 w-56 rounded-full blur-3xl opacity-70"
+            style={{ background: "hsl(var(--stage-toddler-accent) / 0.18)" }}
+            aria-hidden
+          />
+          <span
+            className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full blur-3xl opacity-60"
+            style={{ background: "hsl(var(--stage-toddler) / 0.45)" }}
+            aria-hidden
+          />
           <HubAISupport
             heading="Ask anything about the toddler years"
             description="From midnight wake-ups to picky meals and the daily push-pull of independence — ask in plain words and get a calm, considered answer."

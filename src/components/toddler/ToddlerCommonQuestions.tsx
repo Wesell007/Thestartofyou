@@ -6,9 +6,9 @@ import {
 } from "@/components/ui/accordion";
 
 const accent = "hsl(var(--stage-toddler-accent))";
-const accentSoft = "hsl(var(--stage-toddler-accent) / 0.08)";
-const accentMid = "hsl(var(--stage-toddler-accent) / 0.22)";
-const accentBorder = "hsl(var(--stage-toddler-accent) / 0.22)";
+const accentSoft = "hsl(var(--stage-toddler-accent) / 0.12)";
+const accentMid = "hsl(var(--stage-toddler-accent) / 0.24)";
+const accentBorder = "hsl(var(--stage-toddler-accent) / 0.28)";
 const deep = "hsl(var(--stage-toddler-deep))";
 const deepSoft = "hsl(var(--stage-toddler-deep) / 0.72)";
 
@@ -54,7 +54,7 @@ const ToddlerCommonQuestions = () => {
                 aria-hidden
               />
               <AccordionTrigger
-                className="relative text-left font-serif text-[17px] md:text-[18px] py-5 hover:no-underline"
+                className="relative text-left font-serif text-[17px] md:text-[18px] py-5 hover:no-underline [&>svg]:text-[hsl(var(--stage-toddler-accent))]"
                 style={{ color: deep }}
               >
                 {q}

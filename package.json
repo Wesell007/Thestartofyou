@@ -95,6 +95,6 @@
   "overrides": {
     "ws": "^8.18.3",
     "protobufjs": "^7.5.4",
-    "dompurify": "^3.6.0"
+    "dompurify": "^3.4.11"
   }
 }

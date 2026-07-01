@@ -30,7 +30,7 @@ const FYAISupport = () => {
           {babyChips.map((c) => (
             <a
               key={c}
-              href={`/ask?q=${encodeURIComponent(c)}&ctx=First+year+hub&journey=firstyear`}
+              href={`/ask?q=${encodeURIComponent(c)}&ctx=First+year+hub&journey=firstyear&stage=first-year`}
               className="font-sans text-[12px] font-light px-3 py-1.5 rounded-full border transition-colors hover:bg-card"
               style={{
                 borderColor: 'hsl(var(--stage-firstyear-accent) / 0.18)',
@@ -43,7 +43,7 @@ const FYAISupport = () => {
           {recoveryChips.map((c) => (
             <a
               key={c}
-              href={`/ask?q=${encodeURIComponent(c)}&ctx=Postpartum+recovery&journey=recovery`}
+              href={`/ask?q=${encodeURIComponent(c)}&ctx=Postpartum+recovery&journey=recovery&stage=recovery`}
               className="font-sans text-[12px] font-light px-3 py-1.5 rounded-full border transition-colors hover:bg-card"
               style={{
                 borderColor: 'hsl(var(--stage-recovery-accent) / 0.18)',

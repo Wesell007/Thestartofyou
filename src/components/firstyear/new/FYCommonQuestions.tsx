@@ -46,7 +46,7 @@ const FYCommonQuestions = () => {
             return (
               <Link
                 key={i}
-                to={`/ask?q=${encodeURIComponent(item.q)}&ctx=First+year+hub&journey=${item.track === 'baby' ? 'firstyear' : 'recovery'}`}
+                to={`/ask?q=${encodeURIComponent(item.q)}&ctx=First+year+hub&journey=${item.track === 'baby' ? 'firstyear' : 'recovery'}&stage=${item.track === 'baby' ? 'first-year' : 'recovery'}`}
                 className="group flex items-center justify-between gap-4 px-4 sm:px-5 py-4 sm:py-5 border-b last:border-b-0 transition-all hover:brightness-[0.98]"
                 style={{
                   borderColor: 'hsl(var(--border) / 0.5)',

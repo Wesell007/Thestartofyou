@@ -506,6 +506,7 @@ const AISupport = () => {
                 placeholder="Ask anything about trying to conceive…"
                 suggestions={[]}
                 context="Trying to conceive"
+                stage="ttc"
               />
             </div>
 

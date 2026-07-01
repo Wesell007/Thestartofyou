@@ -17,7 +17,7 @@ const IVFAISupport = () => {
     const question = q || query;
     if (question.trim()) {
       navigate(
-        `/ask?q=${encodeURIComponent(question.trim())}&journey=ivf&ctx=${encodeURIComponent("IVF")}`
+        `/ask?q=${encodeURIComponent(question.trim())}&journey=ivf&ctx=${encodeURIComponent("IVF")}&stage=ivf`
       );
     }
   };

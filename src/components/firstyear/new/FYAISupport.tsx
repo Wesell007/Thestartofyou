@@ -22,6 +22,7 @@ const FYAISupport = () => {
           placeholder="What's on your mind today?"
           suggestions={[]}
           context="First year hub"
+          stage="first-year"
         />
 
         {/* Quiet chip row — colour carries the meaning */}

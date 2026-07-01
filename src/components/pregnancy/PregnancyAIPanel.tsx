@@ -74,6 +74,7 @@ const PregnancyAIPanel = () => {
                   "Can stress affect my baby?",
                 ]}
                 context="Pregnancy"
+                stage="pregnancy"
               />
             </div>
 

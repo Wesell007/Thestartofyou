@@ -220,7 +220,7 @@ const FeaturedGuidance = ({ items }: { items: PhaseConfig["featuredGuidance"] })
         {items.map((g) => (
           <Link
             key={g.title}
-            to={`/ask?q=${encodeURIComponent(g.title)}`}
+            to={`/ask?q=${encodeURIComponent(g.title)}&stage=first-year`}
             className="group rounded-2xl border bg-card p-6 transition-all hover:shadow-soft hover:-translate-y-[1px]"
             style={{ borderColor: "hsl(var(--border) / 0.7)" }}
           >

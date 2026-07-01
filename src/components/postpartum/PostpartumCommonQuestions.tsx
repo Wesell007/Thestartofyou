@@ -17,7 +17,7 @@ const PostpartumCommonQuestions = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (query.trim()) navigate(`/ask?q=${encodeURIComponent(query)}`);
+    if (query.trim()) navigate(`/ask?q=${encodeURIComponent(query)}&stage=postpartum`);
   };
 
   return (
@@ -70,7 +70,7 @@ const PostpartumCommonQuestions = () => {
                 {["Recovery timeline", "Sleep help", "Feeling overwhelmed"].map((chip) => (
                   <button
                     key={chip}
-                    onClick={() => navigate(`/ask?q=${encodeURIComponent(chip)}`)}
+                    onClick={() => navigate(`/ask?q=${encodeURIComponent(chip)}&stage=postpartum`)}
                     className="font-sans text-[11px] font-light px-3 py-1.5 rounded-full border transition-colors hover:bg-background/60"
                     style={{
                       borderColor: 'hsl(var(--stage-postpartum-accent) / 0.2)',
@@ -89,7 +89,7 @@ const PostpartumCommonQuestions = () => {
             {questions.map((item, i) => (
               <Link
                 key={i}
-                to={`/ask?q=${encodeURIComponent(item.q)}`}
+                to={`/ask?q=${encodeURIComponent(item.q)}&stage=postpartum`}
                 className="group flex items-center justify-between py-4 sm:py-5 border-b transition-all hover:pl-1"
                 style={{ borderColor: 'hsl(var(--stage-postpartum) / 0.3)' }}
               >

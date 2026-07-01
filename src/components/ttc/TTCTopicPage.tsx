@@ -521,6 +521,7 @@ const TTCTopicPage = ({ config, heroImage }: Props) => {
                     placeholder={`Ask anything about ${config.eyebrow.toLowerCase()}…`}
                     suggestions={config.aiPrompts}
                     context={`TTC · ${config.eyebrow}`}
+                    stage="ttc"
                   />
                 </div>
               </div>

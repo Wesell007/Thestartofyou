@@ -334,6 +334,7 @@ const FirstYearTopicPage = ({ config }: Props) => {
           context={config.title}
           stageBg={theme.aiBg}
           stageAccent={theme.aiAccent}
+          stage={config.side === "recovery" ? "recovery" : "first-year"}
         />
 
         {/* ─── 5. RELATED TOPICS ─────────────────────────────────────── */}

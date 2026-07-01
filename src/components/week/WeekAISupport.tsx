@@ -33,6 +33,7 @@ const WeekAISupport = ({ data }: Props) => {
               placeholder="What's on your mind this week?"
               suggestions={data.aiPrompts.slice(0, 3)}
               context={`Week ${data.week} of pregnancy`}
+              stage="pregnancy"
             />
           </div>
         </div>

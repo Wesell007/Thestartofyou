@@ -302,6 +302,7 @@ const IVFTopicPage = ({ config }: Props) => {
                   placeholder={`Ask anything about ${config.eyebrow.toLowerCase()}…`}
                   suggestions={config.aiPrompts}
                   context={`IVF · ${config.eyebrow}`}
+                  stage="ivf"
                 />
               </div>
             </div>

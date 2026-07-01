@@ -79,6 +79,7 @@ const GuidanceAndQuestions = () => {
                   "What should I be aware of?",
                 ]}
                 context="Pregnancy"
+                stage="pregnancy"
               />
             </div>
           </div>

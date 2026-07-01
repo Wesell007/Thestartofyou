@@ -28,6 +28,7 @@ const TrimesterAISupport = ({ data, bg = "bg-sage-bg/30" }: Props) => {
             "Something feels different",
           ]}
           context={`${data.shortLabel} trimester of pregnancy`}
+          stage="pregnancy"
         />
       </div>
     </section>

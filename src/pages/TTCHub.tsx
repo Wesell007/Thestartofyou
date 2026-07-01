@@ -431,7 +431,7 @@ const ttcAIChips = [
 const AISupport = () => {
   const navigate = useNavigate();
   const askPrompt = (q: string) => {
-    const params = new URLSearchParams({ q, ctx: "Trying to conceive" });
+    const params = new URLSearchParams({ q, ctx: "Trying to conceive", stage: "ttc" });
     navigate(`/ask?${params.toString()}`);
   };
 

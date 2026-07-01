@@ -34,6 +34,7 @@ const SupportAISupport = () => {
           <AISearchBar
             placeholder="Tell me what's been feeling off…"
             suggestions={[]}
+            stage="support"
           />
 
           <p className="font-sans text-[10px] font-light text-muted-foreground/50 text-center mt-5">

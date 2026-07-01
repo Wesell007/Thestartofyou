@@ -47,6 +47,7 @@ const TTCAISupport = () => {
               "Is this symptom normal?",
             ]}
             context="Trying to conceive"
+            stage="ttc"
           />
         </div>
 

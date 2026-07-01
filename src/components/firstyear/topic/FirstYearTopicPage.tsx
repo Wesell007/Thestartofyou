@@ -52,8 +52,8 @@ const slugToPath = (s: FirstYearTopicSlug) => `/first-year/${s}`;
 // Until per-article URLs exist, every guidance card resolves to the AI search
 // pre-seeded with the article title. The data layer can swap `href` for a real
 // article URL later without any template changes.
-const guidanceHref = (item: FirstYearFeaturedItem) =>
-  item.href ?? `/ask?q=${encodeURIComponent(item.title)}`;
+const guidanceHref = (item: FirstYearFeaturedItem, side: "baby" | "recovery") =>
+  item.href ?? `/ask?q=${encodeURIComponent(item.title)}&stage=${side === "recovery" ? "recovery" : "first-year"}`;
 
 const TAG_LABEL: Record<NonNullable<FirstYearFeaturedItem["tag"]>, string> = {
   "start-here": "Start here",
@@ -262,7 +262,7 @@ const FirstYearTopicPage = ({ config }: Props) => {
               {config.featured.map((item) => (
                 <Link
                   key={item.title}
-                  to={guidanceHref(item)}
+                  to={guidanceHref(item, config.side)}
                   className="group block bg-card rounded-2xl overflow-hidden border transition-all hover:-translate-y-1 hover:shadow-[0_24px_60px_-32px_rgba(0,0,0,0.28)]"
                   style={{ borderColor: accentBorder }}
                 >

@@ -11,11 +11,10 @@ const ProductFinalCTA = () => {
             <div className="editorial-rule md:editorial-rule-left mb-6" />
             <p className="stage-label mb-3">Worth having now</p>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-[2.5rem] text-foreground mb-4 leading-tight">
-              A place to come back to,{" "}
-              <span className="italic">long after</span>
+              Start holding the moments before they pass.
             </h2>
             <p className="font-sans text-base font-light text-muted-foreground leading-relaxed max-w-md mb-6">
-              The thoughts you write now will mean something different in a year. The moments you think you will remember are already fading. Having somewhere to hold them is the gift.
+              For yourself, or for someone you love at the beginning of their journey.
             </p>
 
             {/* Product image */}

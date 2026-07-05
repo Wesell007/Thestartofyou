@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export type FamilyHeroSlide = {
   src?: string;
   alt: string;
+  objectPosition?: string;
 };
 
 interface FamilyHeroCarouselProps {
@@ -98,7 +99,7 @@ const FamilyHeroCarousel = ({ slides, variant }: FamilyHeroCarouselProps) => {
             draggable={false}
             className="absolute inset-0 h-full w-full object-cover"
             style={{
-              objectPosition: "50% 40%",
+              objectPosition: slide.objectPosition ?? "50% 40%",
               opacity: i === active ? 1 : 0,
               transition: `opacity ${FADE_MS}ms ease-in-out`,
             }}
@@ -111,14 +112,14 @@ const FamilyHeroCarousel = ({ slides, variant }: FamilyHeroCarouselProps) => {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "linear-gradient(160deg, hsl(var(--stage-family) / 0.28) 0%, hsl(var(--stage-family-soft) / 0.18) 55%, hsl(var(--stage-family-accent) / 0.16) 100%)",
+                "linear-gradient(160deg, hsl(var(--stage-family) / 0.18) 0%, hsl(var(--stage-family-soft) / 0.12) 55%, hsl(var(--stage-family-accent) / 0.10) 100%)",
             }}
           />
           <span
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(120% 90% at 50% 45%, transparent 55%, hsl(var(--stage-family-deep) / 0.22) 100%)",
+                "radial-gradient(120% 90% at 50% 45%, transparent 55%, hsl(var(--stage-family-deep) / 0.18) 100%)",
             }}
           />
         </>

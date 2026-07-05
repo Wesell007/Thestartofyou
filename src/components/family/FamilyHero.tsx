@@ -2,30 +2,29 @@ import { Link } from "react-router-dom";
 import FamilyHeroCarousel, {
   type FamilyHeroSlide,
 } from "./FamilyHeroCarousel";
+import parents from "@/assets/family-hero-parents.jpg.asset.json";
+import familyFour from "@/assets/family-hero-family-four.jpg.asset.json";
+import everyday from "@/assets/family-hero-everyday.jpg.asset.json";
+import diverseFamily from "@/assets/family-hero-diverse-family.jpg.asset.json";
 
-/**
- * Family hero media slides (images).
- *
- * TODO — connect Family hero images once assets are uploaded. Expected pointers:
- *   src/assets/family-hero-parents.jpg.asset.json       (calm mum & dad moment)
- *   src/assets/family-hero-family-four.jpg.asset.json   (warm family of four)
- *   src/assets/family-hero-everyday.jpg.asset.json      (everyday family life)
- *
- * When the pointers exist, follow the same asset pattern used elsewhere:
- *
- *   import parents from "@/assets/family-hero-parents.jpg.asset.json";
- *   import familyFour from "@/assets/family-hero-family-four.jpg.asset.json";
- *   import everyday from "@/assets/family-hero-everyday.jpg.asset.json";
- *
- *   const familyHeroSlides: FamilyHeroSlide[] = [
- *     { src: parents.url,    alt: "" },
- *     { src: familyFour.url, alt: "" },
- *     { src: everyday.url,   alt: "" },
- *   ];
- *
- * Until then, the empty array keeps the abstract Family fallback active.
- */
-const familyHeroSlides: FamilyHeroSlide[] = [];
+const familyHeroSlides: FamilyHeroSlide[] = [
+  {
+    src: parents.url,
+    alt: "Parents sharing a calm family moment at home",
+  },
+  {
+    src: familyFour.url,
+    alt: "Family of four spending time together at home",
+  },
+  {
+    src: everyday.url,
+    alt: "Parent and children in a warm everyday family routine",
+  },
+  {
+    src: diverseFamily.url,
+    alt: "Family sharing a warm everyday moment together",
+  },
+];
 
 const accent = "hsl(var(--stage-family-accent))";
 const accentBorder = "hsl(var(--stage-family-accent) / 0.38)";

@@ -96,6 +96,12 @@ import ToddlerAge2y from "./pages/toddler/age/TwoYears.tsx";
 import ToddlerAge30m from "./pages/toddler/age/ThirtyMonths.tsx";
 import ToddlerAge3y from "./pages/toddler/age/ThreeYears.tsx";
 import Family from "./pages/Family.tsx";
+import FamilyGrowingFamilies from "./pages/family/GrowingFamilies.tsx";
+import FamilyRelationships from "./pages/family/Relationships.tsx";
+import FamilyBasics from "./pages/family/FamilyBasics.tsx";
+import FamilyHealthSafety from "./pages/family/HealthSafety.tsx";
+import FamilyTravelDaysOut from "./pages/family/TravelDaysOut.tsx";
+import FamilyPlayConnection from "./pages/family/PlayConnection.tsx";
 import PreparingForBaby from "./pages/PreparingForBaby.tsx";
 import Support from "./pages/Support.tsx";
 import About from "./pages/About.tsx";
@@ -306,6 +312,13 @@ const App = () => (
           <Route path="/toddler/3-years" element={<ToddlerAge3y />} />
           {/* Family hub — lifecycle stage after Toddler. Must sit above /:journey/:stage and catch-all. */}
           <Route path="/family" element={<Family />} />
+          {/* Family subtopic gateway pages. Must sit above /:journey/:stage and catch-all. */}
+          <Route path="/family/growing-families" element={<FamilyGrowingFamilies />} />
+          <Route path="/family/relationships" element={<FamilyRelationships />} />
+          <Route path="/family/family-basics" element={<FamilyBasics />} />
+          <Route path="/family/health-safety" element={<FamilyHealthSafety />} />
+          <Route path="/family/travel-days-out" element={<FamilyTravelDaysOut />} />
+          <Route path="/family/play-connection" element={<FamilyPlayConnection />} />
           <Route path="/preparing-for-baby" element={<PreparingForBaby />} />
           <Route path="/support" element={<Support />} />
           <Route path="/about" element={<About />} />

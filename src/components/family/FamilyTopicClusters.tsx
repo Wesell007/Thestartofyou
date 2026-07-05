@@ -1,4 +1,14 @@
 import { ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const CLUSTER_ROUTES: Record<string, string> = {
+  "family-growing": "/family/growing-families",
+  "family-relationships": "/family/relationships",
+  "family-basics": "/family/family-basics",
+  "family-health": "/family/health-safety",
+  "family-travel": "/family/travel-days-out",
+  "family-play": "/family/play-connection",
+};
 
 type Cluster = {
   id: string;
@@ -87,19 +97,6 @@ const clusters: Cluster[] = [
       "Making memories",
     ],
   },
-  {
-    id: "family-community",
-    eyebrow: "Community & support",
-    title: "Community and support",
-    body: "For finding your village, asking for help and feeling less alone in the middle of family life.",
-    chips: [
-      "Finding your village",
-      "Support groups",
-      "Asking for help",
-      "Community activities",
-      "Feeling less alone",
-    ],
-  },
 ];
 
 const accent = "hsl(var(--stage-family-accent))";
@@ -146,16 +143,20 @@ const FamilyTopicClusters = () => {
             className="font-sans text-[15px] font-light leading-relaxed max-w-xl mx-auto"
             style={{ color: deepSoft }}
           >
-            Seven curated areas across family life — every side of the day-to-day, gently mapped.
+            Six curated areas across family life — every side of the day-to-day, gently mapped.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-          {clusters.map(({ id, eyebrow, title, body, chips }) => (
-            <article
+          {clusters.map(({ id, eyebrow, title, body, chips }) => {
+            const to = CLUSTER_ROUTES[id];
+            return (
+            <Link
               key={id}
               id={id}
-              className="group relative flex h-full flex-col rounded-[22px] border p-9 md:p-10 overflow-hidden transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_28px_60px_-30px_rgba(70,50,20,0.42)] scroll-mt-24"
+              to={to}
+              aria-label={`${title} — open topic`}
+              className="group relative flex h-full flex-col rounded-[22px] border p-9 md:p-10 overflow-hidden transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_28px_60px_-30px_rgba(70,50,20,0.42)] scroll-mt-24 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment focus-visible:ring-[hsl(var(--stage-family-accent)/0.55)]"
               style={{
                 borderColor: accentBorder,
                 background:
@@ -214,10 +215,10 @@ const FamilyTopicClusters = () => {
                   className="font-sans text-[12.5px] font-medium tracking-wide"
                   style={{ color: accent }}
                 >
-                  In this area
+                  Open topic
                 </span>
                 <span
-                  className="inline-flex items-center justify-center h-10 w-10 rounded-full border"
+                  className="inline-flex items-center justify-center h-10 w-10 rounded-full border transition-transform group-hover:translate-x-1"
                   style={{
                     borderColor: accentBorderStrong,
                     backgroundColor: accentSoft,
@@ -227,8 +228,9 @@ const FamilyTopicClusters = () => {
                   <ChevronRight size={15} strokeWidth={1.8} style={{ color: accent }} />
                 </span>
               </div>
-            </article>
-          ))}
+            </Link>
+            );
+          })}
         </div>
       </div>
     </section>

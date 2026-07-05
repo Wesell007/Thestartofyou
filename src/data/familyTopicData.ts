@@ -33,8 +33,22 @@ export interface FamilyTopicConfig {
   title: string;
   standfirst: string;
   intro: string;
+  heroImage: {
+    src: string;
+    alt: string;
+  };
   whatThisCovers: {
     lead: string;
+    bullets: string[];
+  };
+  areasInside: FamilyAreaInside[];
+  commonQuestions: FamilyQA[];
+  aiHeading: string;
+  aiDescription: string;
+  aiPlaceholder: string;
+  aiPrompts: string[];
+  related: FamilyTopicSlug[];
+}
     bullets: string[];
   };
   areasInside: FamilyAreaInside[];

@@ -47,9 +47,9 @@ const ProductWhoFor = () => {
           {audiences.map((a) => (
             <div
               key={a.title}
-              className="bg-card border border-border/30 rounded-2xl p-6 shadow-soft"
+              className="bg-gradient-to-br from-white via-[#FBF8F1] to-[#F4EFE4] border border-border/30 rounded-2xl p-6 shadow-soft"
             >
-              <div className="w-9 h-9 rounded-lg bg-sage/10 flex items-center justify-center mb-4">
+              <div className="w-9 h-9 rounded-lg bg-sage/15 border border-sage/20 flex items-center justify-center mb-4">
                 <a.icon size={15} className="text-sage" />
               </div>
               <h3 className="font-serif text-base text-foreground mb-1.5">

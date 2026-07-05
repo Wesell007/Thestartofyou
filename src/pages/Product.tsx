@@ -2,9 +2,13 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ProductHero from "@/components/product/ProductHero";
 import ProductGallery from "@/components/product/ProductGallery";
+import ProductJournalAI from "@/components/product/ProductJournalAI";
 import ProductInlineCTA from "@/components/product/ProductInlineCTA";
 import ProductInside from "@/components/product/ProductInside";
+import ProductDetailStrip from "@/components/product/ProductDetailStrip";
 import ProductMoment from "@/components/product/ProductMoment";
+import ProductWhoFor from "@/components/product/ProductWhoFor";
+import ProductHowToUse from "@/components/product/ProductHowToUse";
 import ProductEcosystem from "@/components/product/ProductEcosystem";
 import ProductFinalCTA from "@/components/product/ProductFinalCTA";
 
@@ -13,25 +17,16 @@ const Product = () => {
     <div className="min-h-screen font-sans">
       <Navbar />
       <main className="flex flex-col">
-        {/* 1. Hero video — the opening moment */}
         <ProductHero />
-
-        {/* 2. Strong image-led product proof — early */}
         <ProductGallery />
-
-        {/* 3. CTA after first major visual proof */}
+        <ProductJournalAI />
         <ProductInlineCTA />
-
-        {/* 4. What is inside / why it matters — tighter */}
         <ProductInside />
-
-        {/* 5. Emotional value moment */}
+        <ProductDetailStrip />
         <ProductMoment />
-
-        {/* 6. How it fits the wider Start of You journey */}
+        <ProductWhoFor />
+        <ProductHowToUse />
         <ProductEcosystem />
-
-        {/* 7. Final CTA */}
         <ProductFinalCTA />
       </main>
       <Footer />

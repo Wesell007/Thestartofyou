@@ -1,100 +1,41 @@
-# Article Detail System — Family, First Year, Toddler
+# Journal Page — Premium Strategy Polish
 
-Add scalable article routes, shared article page templates and extended article data (placeholder-only) for Family, First Year and Toddler. Nothing goes live: every article stays `status: "draft"`; cards continue to be non-linking "Coming soon". Direct route visits render a draft preview.
+Focused polish of `/product`. Preserves visuals, images, Amazon href and all shared systems.
 
-## 1. Extend article data (placeholder only)
+## Files to create
 
-Edit `src/data/familyArticleData.ts`, `src/data/firstYearArticleData.ts`, `src/data/toddlerArticleData.ts`.
+- `src/components/product/ProductJournalAI.tsx` — parchment card with sage top border. Reuses `AISearchBar` with `stage="pregnancy"`, `context="Pregnancy journalling"`, `placeholder="Ask for a journalling prompt…"`, and the 5 provided prompt chips. Eyebrow "Journalling support", H2 "Not sure what to write? Start here." Chip clicks route to `/ask?q=…&stage=pregnancy`.
+- `src/components/product/ProductWhoFor.tsx` — eyebrow "Made for", H2 "The moments you want somewhere to hold.", supporting copy, 5 cards (First-time mums, Parents who want to remember, When pregnancy feels emotional, Baby shower gifting, Keepsakes and scan photos) using `bg-card border-border/30` with sage icon dots, grid 1 / 2 / 3 columns.
+- `src/components/product/ProductHowToUse.tsx` — eyebrow "A gentle rhythm", H2 "Use it weekly, or whenever you need somewhere to land.", 4 numbered steps on parchment cards with serif titles and sage numerals (01–04).
+- `src/components/product/ProductDetailStrip.tsx` — soft parchment band, horizontal chip row: Hardcover A5 · 144 pages · Weekly prompts · Keepsake pocket · Gift-ready · Available on Amazon, using existing `bg-sage/8 border-sage/15 rounded-pill` styling.
 
-Extend each article interface with the optional fields:
+## Files to edit
 
-```ts
-seoTitle?: string;
-seoDescription?: string;
-lastUpdated?: string;
-reviewedBy?: string;
-intro?: string;
-sections?: { heading: string; body: string[] }[];
-keyTakeaways?: string[];
-relatedSlugs?: string[];
-```
+- `src/pages/Product.tsx` — sections in this exact order:
+  1. ProductHero
+  2. ProductGallery
+  3. ProductJournalAI
+  4. ProductInlineCTA
+  5. ProductInside
+  6. ProductDetailStrip
+  7. ProductMoment
+  8. ProductWhoFor
+  9. ProductHowToUse
+  10. ProductEcosystem
+  11. ProductFinalCTA
+- `src/components/product/ProductFinalCTA.tsx` — copy-only changes:
+  - Headline → "Start holding the moments before they pass." (removes the italic split span)
+  - Support paragraph → "For yourself, or for someone you love at the beginning of their journey."
+  - Small line under button → "A guided pregnancy journal for thoughts, feelings, scan photos and first memories."
+  - Button label, `href`, star row, product image, value anchors, spec pills, gift card and layout unchanged.
 
-For each of the 12 Family + 16 First Year + 16 Toddler drafts, add light placeholder:
-- `intro`: 1 short paragraph mentioning the article is being prepared.
-- `sections`: 2–3 entries with headings and 1–2 paragraph bodies flagged as placeholders.
-- `keyTakeaways`: 3 short lines.
-- `relatedSlugs`: the sibling article in the same topic (and one adjacent topic where obvious).
-- `lastUpdated` / `reviewedBy` only where a medically-reviewed flag already exists (`reviewedBy: "Jenny Joines"`, `lastUpdated: "2026-07"`).
+## Shared systems
 
-No status changes — everything remains `"draft"`.
+- Reuses existing `AISearchBar` unchanged. `stage="pregnancy"` guarantees chip and Ask submissions land on `/ask?q=…&stage=pregnancy`.
+- No edits to `AISearchBar`, `HubAISupport`, `AskPage`, edge functions, auth, setup, saved journey, article system, sibling hubs (Pregnancy / Family / First Year / Toddler), Navbar, Footer, tokens, routes, or assets.
 
-## 2. Shared article page templates
-
-Create:
-- `src/components/family/article/FamilyArticlePage.tsx` (Family tokens)
-- `src/components/firstyear/article/FirstYearArticlePage.tsx` (accepts `tone: "baby" | "recovery"`; picks First Year vs Recovery tokens like the existing card)
-- `src/components/toddler/article/ToddlerArticlePage.tsx` (Toddler tokens)
-
-Each template shares the same structure:
-- Navbar
-- Breadcrumb: Hub → Topic title → Article title
-- Article hero: eyebrow (topic label), H1 title, standfirst (intro), meta row (read time · last updated · optional "✔ Medically reviewed by Jenny Joines")
-- Draft-status pill when `status === "draft"` (small "Draft preview" chip in the meta row)
-- Key takeaways card (if provided)
-- Article body: renders `sections[]` — `h2` heading + paragraphs; falls back to a quiet "This article is being prepared" note when `sections` empty
-- Medically reviewed note block if applicable
-- Related guidance: reuses the existing `FamilyArticleCard` / `FirstYearArticleCard` / `ToddlerArticleCard` for `relatedSlugs` (drafts still show Coming soon, so nothing goes live)
-- Back-to-topic CTA linking to `/{hub}/{topic}`
-- Footer
-
-Visual language mirrors the topic pages already shipped (rounded editorial cards, hairline section labels, warm shadows, gradient washes).
-
-## 3. Route wrapper pages
-
-Create:
-- `src/pages/family/FamilyArticle.tsx`
-- `src/pages/firstyear/FirstYearArticle.tsx`
-- `src/pages/toddler/ToddlerArticle.tsx`
-
-Each wrapper:
-1. `useParams<{ topic: string; slug: string }>()`.
-2. Look up the article via its data file, matching both `topic` and `slug`.
-3. If missing → render `<NotFound />` (existing 404).
-4. If found → render the matching article template. Draft vs ready is handled inside the template (draft simply shows the "Draft preview" pill).
-5. For First Year, look up the topic's `side` via `FIRST_YEAR_TOPIC_INDEX[topic]` and pass `tone`.
-
-## 4. Register routes in `src/App.tsx`
-
-Insert the three dynamic article routes **after the last static hub/topic route in each hub block, and before `<Route path="*" element={<NotFound />} />`** (line ~335). Because static routes are declared first, React Router matches `/family/growing-families` to its dedicated page before the `:topic/:slug` route ever sees it.
-
-```
-<Route path="/family/:topic/:slug" element={<FamilyArticle />} />
-<Route path="/first-year/:topic/:slug" element={<FirstYearArticle />} />
-<Route path="/toddler/:topic/:slug" element={<ToddlerArticle />} />
-```
-
-Add matching imports at the top.
-
-## 5. Cards — confirm draft behaviour unchanged
-
-`FamilyArticleCard`, `FirstYearArticleCard`, `ToddlerArticleCard` already: draft → non-interactive `<div>` with "Coming soon" pill; ready → `<Link to="/{hub}/{topic}/{slug}">`. Verify only — no changes.
-
-## 6. Draft visibility
-
-Nothing is promoted to live: every article stays `"draft"`, every topic-page card remains non-linking with the Coming soon pill. Direct URL visits (or a manual navigation) render the draft-preview article template safely.
-
-## 7. Out of scope
-
-No final article body copy, no images, no new tokens, no new nav items, no journey logic, no changes to Pregnancy, TTC, IVF, Postpartum, Journal, AskPage, AISearchBar, HubAISupport, aiStageStyles, Navbar, Footer, auth, setup, saved journey, prompts or edge functions.
-
-## 8. Verification
+## Verification
 
 - `tsgo` typecheck.
-- Playwright 1280 / 1024 / 390:
-  - Topic pages `/family/growing-families`, `/first-year/feeding`, `/toddler/development-milestones` — Related guidance renders, drafts still don't link, Coming soon visible, no layout break.
-  - Article previews `/family/growing-families/preparing-for-another-baby`, `/first-year/feeding/newborn-feeding-rhythms`, `/toddler/development-milestones/what-toddler-development-can-look-like` — template renders, breadcrumb works, "Draft preview" pill visible, key takeaways and placeholder body render, back-to-topic CTA works, no horizontal scroll, mobile stacks.
-- Spot-check `/family`, `/first-year`, `/toddler`, `/pregnancy` still render.
-
-## Return summary
-
-A. Files created  B. Files edited  C. Interfaces extended  D. Templates created  E. Wrappers created  F. Routes registered  G. Draft cards still don't link  H. Direct preview routes render  I. Responsive checks passed  J. Existing hub/topic routes still render  K. No final copy, images, tokens, AI logic, auth, setup, journey logic or unrelated hubs changed.
+- Playwright at 1280 / 1024 / 390 on `/product`: each new section renders, AI chip navigates to `/ask?q=…&stage=pregnancy`, Amazon button retains existing `href`, existing images still load, no horizontal scroll, mobile stacks cleanly.
+- Spot-check `/pregnancy`, `/family`, `/first-year`, `/toddler` render unchanged.

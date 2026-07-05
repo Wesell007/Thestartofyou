@@ -1,73 +1,47 @@
-# Family Topic Pages — Generate and wire hero images
+# Family Hub — Article System Preparation
 
-Add a real, warm editorial hero image to each of the 6 Family topic pages, replacing the current token-washed abstract panel. Image + wiring pass only — no structural changes.
+Prepare a scalable article system for the Family section: data layer, shared card, and a Related guidance section on the 6 topic pages. No article routes or bodies.
 
-## 1. Generate 6 images (1024x1200, premium tier)
+## 1. Create `src/data/familyArticleData.ts`
 
-Shared style: warm natural window light, buttercream/honey/beige palette, calm editorial photography, unposed, shallow DoF, no text/logos/watermarks.
+- `FamilyArticleTopic` union: the 6 topic slugs.
+- `FamilyArticle` interface: `slug, topic, title, description, readTime, medicallyReviewed?, status`.
+- `familyArticles: FamilyArticle[]` seeded with 12 draft stubs (British English titles/descriptions, 4–6 min reads). `making-your-home-safer` and `when-to-ask-for-help` marked `medicallyReviewed: true`.
+- Helper `getFamilyArticlesByTopic(topic)` returning filtered list in array order.
 
-Save each to `/tmp/`:
+## 2. Create `src/components/family/article/FamilyArticleCard.tsx`
 
-| Topic | File | Subject |
-|---|---|---|
-| Growing families | `/tmp/family-topic-growing-families.jpg` | Parents preparing for new baby, older child nearby, folded baby clothes |
-| Relationships | `/tmp/family-topic-relationships.jpg` | Parent couple at kitchen table, child playing out of focus |
-| Family basics | `/tmp/family-topic-family-basics.jpg` | Parent with family calendar, lunch boxes, keys, small backpack |
-| Health and safety | `/tmp/family-topic-health-safety.jpg` | Parent with child on sofa, blanket, water — warm, not clinical |
-| Travel and days out | `/tmp/family-topic-travel-days-out.jpg` | Family packing, children putting on shoes at front door |
-| Play, fun and connection | `/tmp/family-topic-play-connection.jpg` | Family on rug playing blocks/board game, quiet laughter |
+Shared card, Family tokens only (`--stage-family`, `-soft`, `-accent`, `-deep`).
 
-## 2. Upload as Lovable CDN assets
+- Layout: serif title, muted sans description, footer row with clock + read time, chevron chip on the right.
+- Optional "Medically reviewed" chip with shield icon when `medicallyReviewed`.
+- Visual: rounded-2xl, family accent border, family/soft gradient background, warm shadow.
+- If `status === "ready"`: `<Link to="/family/{topic}/{slug}">` with hover lift + focus ring.
+- If `status === "draft"`: non-interactive `<div>`, `aria-disabled`, small "Coming soon" pill, no hover lift, no link.
 
-For each image, run `lovable-assets create --file <tmp path> --filename <name>.jpg` and write stdout to the matching pointer:
+## 3. Edit `src/components/family/topic/FamilyTopicPage.tsx`
 
-- `src/assets/family-topic-growing-families.jpg.asset.json`
-- `src/assets/family-topic-relationships.jpg.asset.json`
-- `src/assets/family-topic-family-basics.jpg.asset.json`
-- `src/assets/family-topic-health-safety.jpg.asset.json`
-- `src/assets/family-topic-travel-days-out.jpg.asset.json`
-- `src/assets/family-topic-play-connection.jpg.asset.json`
+Insert a new "Related guidance" section **after "Areas inside this topic"** and **before "Common questions"** — no other sections touched.
 
-Then `rm` the `/tmp` originals.
+- Eyebrow: `Guidance` (via existing `SectionLabel`)
+- Heading: `Related guidance`
+- Subheading: `Helpful reads connected to this part of family life.`
+- Grid of `FamilyArticleCard` for `getFamilyArticlesByTopic(config.slug)`.
+- Empty-state fallback: `Guidance articles for this topic are being prepared.` (currently every topic shows 2 draft cards with "Coming soon" pills).
 
-## 3. Wire images into topic data
+Import `getFamilyArticlesByTopic` + `FamilyArticleTopic` and `FamilyArticleCard`; cast `config.slug` to `FamilyArticleTopic` since the two unions are identical.
 
-Edit `src/data/familyTopicData.ts`:
+## 4. Out of scope
 
-- Import the 6 asset pointers at the top.
-- Add to `FamilyTopicConfig`:
-  ```ts
-  heroImage: { src: string; alt: string };
-  ```
-- Add `heroImage` to each of the 6 configs with the specified alt text:
-  - Growing families → "Family preparing for a new baby at home"
-  - Relationships → "Parents sharing a calm conversation at home"
-  - Family basics → "Family planning everyday routines at home"
-  - Health and safety → "Parent caring for a child at home"
-  - Travel and days out → "Family getting ready for a day out"
-  - Play, fun and connection → "Family playing together at home"
-
-## 4. Update FamilyTopicPage hero
-
-Edit `src/components/family/topic/FamilyTopicPage.tsx`:
-
-- Replace the blank token-washed abstract panel with an `<img>` sourced from `config.heroImage.src` / `config.heroImage.alt`.
-- Treatment: keep existing premium frame (muted ochre border, rounded, warm shadow, buttercream wash overlay, inner highlight). `object-cover`, `object-position: 50% 40%` for safe face crop.
-- Keep the existing abstract panel rendered as fallback if `config.heroImage?.src` is missing.
-- Do NOT touch breadcrumb, eyebrow, H1, standfirst, CTAs, spacing, or section order.
+No article routes, no article bodies, no new assets, no new tokens. No changes to Family Hub, hero carousel, aiStageStyles, AskPage, AISearchBar, HubAISupport, Navbar, Footer, sibling hubs, auth, setup, saved journey, prompts, or edge functions.
 
 ## 5. Verification
 
-- `tsgo` clean typecheck.
-- Playwright at 1280 / 1024 / 390 across all 6 `/family/*` topic routes: real image visible, no blank panel, no broken image icons, no horizontal scroll, faces not cropped badly, CTAs tappable, Q&A accordion still works.
-- Spot-check `/family`, `/pregnancy`, `/first-year`, `/toddler` still render.
+- `tsgo` typecheck.
+- Playwright at 1280 / 1024 / 390 on `/family/growing-families` and `/family/relationships`: Related guidance section visible, draft cards render, "Coming soon" pill clear, no links on draft cards, no horizontal scroll, mobile stacks cleanly.
+- Render-ping all 6 `/family/*` topic routes.
+- Spot-check `/family`, `/pregnancy`, `/first-year`, `/toddler`.
 
-## Out of scope
+## Return summary
 
-No new routes, subtopic pages, articles, tokens, journey logic, or edits to Family Hub carousel/layout, nav, footer, AskPage, AISearchBar, HubAISupport, aiStageStyles, sibling hubs, auth, setup, prompts, or edge functions.
-
-## Technical details
-
-- Image model: `premium` (photorealistic families benefit from higher fidelity than `fast`).
-- Pointer imports use existing `@/assets/*.asset.json` pattern already used by `family-hero-*` files.
-- Fallback check: `config.heroImage?.src ? <img .../> : <existing abstract panel/>` so a missing pointer doesn't crash the page.
+A. Files created  B. Files edited  C. Article data structure  D. 12 stubs added  E. Related guidance section confirmation  F. Draft / Coming soon confirmation  G. No article routes/pages created  H. Desktop/iPad/mobile checks  I. All 6 topic routes render  J. No unrelated systems changed.

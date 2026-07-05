@@ -26,7 +26,7 @@ export interface ToddlerArticle {
   relatedSlugs?: string[];
 }
 
-export const toddlerArticles: ToddlerArticle[] = [
+const rawToddlerArticles: ToddlerArticle[] = [
   // Development and milestones
   {
     slug: "what-toddler-development-can-look-like",

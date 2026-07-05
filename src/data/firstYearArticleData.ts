@@ -26,7 +26,7 @@ export interface FirstYearArticle {
   relatedSlugs?: string[];
 }
 
-export const firstYearArticles: FirstYearArticle[] = [
+const rawFirstYearArticles: FirstYearArticle[] = [
   // Feeding
   {
     slug: "newborn-feeding-rhythms",

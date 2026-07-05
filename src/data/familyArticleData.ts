@@ -24,7 +24,7 @@ export interface FamilyArticle {
   relatedSlugs?: string[];
 }
 
-export const familyArticles: FamilyArticle[] = [
+const rawFamilyArticles: FamilyArticle[] = [
   // Growing families
   {
     slug: "preparing-for-another-baby",

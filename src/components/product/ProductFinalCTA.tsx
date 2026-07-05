@@ -68,7 +68,7 @@ const ProductFinalCTA = () => {
               <ExternalLink size={14} />
             </a>
             <p className="font-sans text-[11px] font-light text-muted-foreground mb-4">
-              For yourself, or for someone who deserves a place to hold onto their journey.
+              A guided pregnancy journal for thoughts, feelings, scan photos and first memories.
             </p>
 
             {/* Gift messaging */}

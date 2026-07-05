@@ -102,6 +102,9 @@ import FamilyBasics from "./pages/family/FamilyBasics.tsx";
 import FamilyHealthSafety from "./pages/family/HealthSafety.tsx";
 import FamilyTravelDaysOut from "./pages/family/TravelDaysOut.tsx";
 import FamilyPlayConnection from "./pages/family/PlayConnection.tsx";
+import FamilyArticle from "./pages/family/FamilyArticle.tsx";
+import FirstYearArticle from "./pages/firstyear/FirstYearArticle.tsx";
+import ToddlerArticle from "./pages/toddler/ToddlerArticle.tsx";
 import PreparingForBaby from "./pages/PreparingForBaby.tsx";
 import Support from "./pages/Support.tsx";
 import About from "./pages/About.tsx";
@@ -319,6 +322,9 @@ const App = () => (
           <Route path="/family/health-safety" element={<FamilyHealthSafety />} />
           <Route path="/family/travel-days-out" element={<FamilyTravelDaysOut />} />
           <Route path="/family/play-connection" element={<FamilyPlayConnection />} />
+          <Route path="/family/:topic/:slug" element={<FamilyArticle />} />
+          <Route path="/first-year/:topic/:slug" element={<FirstYearArticle />} />
+          <Route path="/toddler/:topic/:slug" element={<ToddlerArticle />} />
           <Route path="/preparing-for-baby" element={<PreparingForBaby />} />
           <Route path="/support" element={<Support />} />
           <Route path="/about" element={<About />} />

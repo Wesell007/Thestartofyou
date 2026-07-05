@@ -312,6 +312,13 @@ const App = () => (
           <Route path="/toddler/3-years" element={<ToddlerAge3y />} />
           {/* Family hub — lifecycle stage after Toddler. Must sit above /:journey/:stage and catch-all. */}
           <Route path="/family" element={<Family />} />
+          {/* Family subtopic gateway pages. Must sit above /:journey/:stage and catch-all. */}
+          <Route path="/family/growing-families" element={<FamilyGrowingFamilies />} />
+          <Route path="/family/relationships" element={<FamilyRelationships />} />
+          <Route path="/family/family-basics" element={<FamilyBasics />} />
+          <Route path="/family/health-safety" element={<FamilyHealthSafety />} />
+          <Route path="/family/travel-days-out" element={<FamilyTravelDaysOut />} />
+          <Route path="/family/play-connection" element={<FamilyPlayConnection />} />
           <Route path="/preparing-for-baby" element={<PreparingForBaby />} />
           <Route path="/support" element={<Support />} />
           <Route path="/about" element={<About />} />

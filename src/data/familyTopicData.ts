@@ -2,6 +2,13 @@
 // Typed configs for the 6 Family Hub topic pages. UK English.
 // Warm, calm, editorial. Short answers, not long articles.
 
+import growingFamiliesImage from "@/assets/family-topic-growing-families.jpg.asset.json";
+import relationshipsImage from "@/assets/family-topic-relationships.jpg.asset.json";
+import familyBasicsImage from "@/assets/family-topic-family-basics.jpg.asset.json";
+import healthSafetyImage from "@/assets/family-topic-health-safety.jpg.asset.json";
+import travelDaysOutImage from "@/assets/family-topic-travel-days-out.jpg.asset.json";
+import playConnectionImage from "@/assets/family-topic-play-connection.jpg.asset.json";
+
 export type FamilyTopicSlug =
   | "growing-families"
   | "relationships"
@@ -26,6 +33,10 @@ export interface FamilyTopicConfig {
   title: string;
   standfirst: string;
   intro: string;
+  heroImage: {
+    src: string;
+    alt: string;
+  };
   whatThisCovers: {
     lead: string;
     bullets: string[];
@@ -47,6 +58,10 @@ const growingFamilies: FamilyTopicConfig = {
     "When your family is changing, the practical questions and emotional shifts often arrive together.",
   intro:
     "Whether you are thinking about another baby, adjusting to a new sibling or finding the rhythm of a blended family, this is a calm place to think it through.",
+  heroImage: {
+    src: growingFamiliesImage.url,
+    alt: "Family preparing for a new baby at home",
+  },
   whatThisCovers: {
     lead:
       "A grounded look at what tends to shift when a family grows, and the small things that help most.",
@@ -108,6 +123,10 @@ const relationships: FamilyTopicConfig = {
     "Family life is shaped by the relationships around your child, from your partner to grandparents, friends and the people who help you carry the load.",
   intro:
     "Small, steady work on the adult relationships in your family is often the thing that helps the most, quietly, over time.",
+  heroImage: {
+    src: relationshipsImage.url,
+    alt: "Parents sharing a calm conversation at home",
+  },
   whatThisCovers: {
     lead:
       "The relationships that hold family life together, and the small conversations that keep them healthy.",
@@ -169,6 +188,10 @@ const familyBasics: FamilyTopicConfig = {
     "The everyday parts of family life can feel small on their own, but together they shape how supported the home feels.",
   intro:
     "Routines, childcare, money, moving home and the shape of working life — the practical pieces that quietly hold everything together.",
+  heroImage: {
+    src: familyBasicsImage.url,
+    alt: "Family planning everyday routines at home",
+  },
   whatThisCovers: {
     lead:
       "The steady, practical work of running a family, without the pressure to have it all optimised.",
@@ -230,6 +253,10 @@ const healthSafety: FamilyTopicConfig = {
     "Calm guidance for keeping family life safe, steady and supported without turning every worry into an emergency.",
   intro:
     "The point is not to fear-proof your home — it is to know what actually matters, and where a quiet word with your GP is worth it.",
+  heroImage: {
+    src: healthSafetyImage.url,
+    alt: "Parent caring for a child at home",
+  },
   whatThisCovers: {
     lead:
       "Practical safety, everyday illness and the steady question of when to ask for help.",
@@ -291,6 +318,10 @@ const travelDaysOut: FamilyTopicConfig = {
     "Getting out with children can take planning, patience and a little flexibility. This is a calm place to start.",
   intro:
     "From a walk to the park to a long-haul flight, small changes to how you plan can make the difference between an ordeal and a good day.",
+  heroImage: {
+    src: travelDaysOutImage.url,
+    alt: "Family getting ready for a day out",
+  },
   whatThisCovers: {
     lead:
       "Practical support for getting out with children, without the pressure to make every day out perfect.",
@@ -352,6 +383,10 @@ const playConnection: FamilyTopicConfig = {
     "Family connection often grows through ordinary moments, small rituals and the things you do together again and again.",
   intro:
     "You do not need bigger toys or busier weekends. Steady rhythms, small traditions and unhurried time together tend to do more.",
+  heroImage: {
+    src: playConnectionImage.url,
+    alt: "Family playing together at home",
+  },
   whatThisCovers: {
     lead:
       "The everyday moments that quietly build closeness, and the traditions worth keeping.",

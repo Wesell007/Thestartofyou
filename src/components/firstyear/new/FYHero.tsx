@@ -140,38 +140,50 @@ const FYHero = () => {
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               to="/first-year#baby-topics"
-              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] shadow-[0_10px_28px_-20px_rgba(20,30,60,0.45)] hover:-translate-y-[1px] hover:shadow-[0_14px_30px_-18px_rgba(20,30,60,0.5)]"
+              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] hover:-translate-y-[1px]"
               style={{
                 backgroundColor: 'hsl(var(--stage-firstyear-soft) / 0.95)',
                 color: 'hsl(var(--stage-firstyear-deep))',
                 borderColor: 'hsl(var(--stage-firstyear-accent) / 0.35)',
+                boxShadow:
+                  'inset 0 1px 0 hsl(0 0% 100% / 0.55), 0 12px 30px -20px hsl(212 36% 20% / 0.5)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'hsl(var(--stage-firstyear-soft))';
                 e.currentTarget.style.borderColor = 'hsl(var(--stage-firstyear-accent) / 0.5)';
+                e.currentTarget.style.boxShadow =
+                  'inset 0 1px 0 hsl(0 0% 100% / 0.65), 0 18px 36px -18px hsl(212 36% 20% / 0.55)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = 'hsl(var(--stage-firstyear-soft) / 0.95)';
                 e.currentTarget.style.borderColor = 'hsl(var(--stage-firstyear-accent) / 0.35)';
+                e.currentTarget.style.boxShadow =
+                  'inset 0 1px 0 hsl(0 0% 100% / 0.55), 0 12px 30px -20px hsl(212 36% 20% / 0.5)';
               }}
             >
               Baby's first year
             </Link>
             <Link
               to="/first-year#recovery-topics"
-              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] shadow-[0_10px_28px_-20px_rgba(60,40,55,0.4)] hover:-translate-y-[1px] hover:shadow-[0_14px_30px_-18px_rgba(60,40,55,0.45)]"
+              className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] hover:-translate-y-[1px]"
               style={{
-                backgroundColor: 'hsl(var(--stage-recovery-soft) / 0.85)',
+                backgroundColor: 'hsl(var(--stage-recovery-soft) / 0.9)',
                 color: 'hsl(var(--stage-recovery-deep))',
                 borderColor: 'hsl(var(--stage-recovery-accent) / 0.32)',
+                boxShadow:
+                  'inset 0 1px 0 hsl(0 0% 100% / 0.55), 0 12px 30px -20px hsl(320 28% 22% / 0.45)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'hsl(var(--stage-recovery-soft))';
                 e.currentTarget.style.borderColor = 'hsl(var(--stage-recovery-accent) / 0.48)';
+                e.currentTarget.style.boxShadow =
+                  'inset 0 1px 0 hsl(0 0% 100% / 0.65), 0 18px 36px -18px hsl(320 28% 22% / 0.5)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'hsl(var(--stage-recovery-soft) / 0.85)';
+                e.currentTarget.style.backgroundColor = 'hsl(var(--stage-recovery-soft) / 0.9)';
                 e.currentTarget.style.borderColor = 'hsl(var(--stage-recovery-accent) / 0.32)';
+                e.currentTarget.style.boxShadow =
+                  'inset 0 1px 0 hsl(0 0% 100% / 0.55), 0 12px 30px -20px hsl(320 28% 22% / 0.45)';
               }}
             >
               Your postpartum recovery

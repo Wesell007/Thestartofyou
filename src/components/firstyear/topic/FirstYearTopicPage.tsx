@@ -212,10 +212,22 @@ const FirstYearTopicPage = ({ config }: Props) => {
         <section className="relative -mt-8 md:-mt-20 pb-16 md:pb-24">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
             <div
-              className="relative bg-card rounded-[2rem] border shadow-[0_30px_80px_-40px_rgba(0,0,0,0.18)] p-6 sm:p-10 md:p-12 overflow-hidden"
+              className="relative bg-card rounded-[2rem] border shadow-[0_30px_80px_-40px_rgba(20,30,60,0.22)] p-6 sm:p-10 md:p-12 overflow-hidden"
               style={{ borderColor: accentBorder }}
             >
-              <div className="md:max-w-3xl">
+              {/* Inner highlight */}
+              <div
+                className="absolute inset-x-0 top-0 h-px pointer-events-none"
+                style={{ backgroundImage: 'linear-gradient(to right, transparent, hsl(0 0% 100% / 0.7), transparent)' }}
+                aria-hidden
+              />
+              {/* Side-tinted corner bloom */}
+              <div
+                className="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl opacity-55 pointer-events-none"
+                style={{ backgroundColor: `hsl(var(${theme.softToken}) / 0.55)` }}
+                aria-hidden
+              />
+              <div className="relative md:max-w-3xl">
                 <h2 className="font-serif text-2xl md:text-[1.8rem] text-foreground leading-tight">
                   What this topic covers
                 </h2>

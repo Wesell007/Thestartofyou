@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronRight } from "lucide-react";
 
 const phases = [
   {
@@ -51,12 +51,16 @@ const ageItems: { label: string; href: string }[] = [
 
 const FYPhaseNav = () => {
   return (
-    <section id="phases" className="bg-parchment py-14 md:py-16">
+    <section id="phases" className="bg-parchment py-14 md:py-20">
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl">
-        <div className="mb-8 md:mb-10">
-          <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-3 text-foreground/55">
-            Month by month
-          </p>
+        <div className="mb-9 md:mb-12">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="h-px w-6" style={{ backgroundColor: 'hsl(var(--stage-firstyear-accent) / 0.55)' }} />
+            <span className="h-px w-6" style={{ backgroundColor: 'hsl(var(--stage-recovery-accent) / 0.55)' }} />
+            <span className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-foreground/60 ml-1">
+              Month by month
+            </span>
+          </div>
           <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
             Twelve months, four phases.
           </h2>
@@ -67,25 +71,51 @@ const FYPhaseNav = () => {
 
         {/* Mobile: horizontal snap carousel. md+: 2x2 / 4-up grid */}
         <div className="-mx-5 sm:mx-0 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none scrollbar-none">
-          <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 px-5 sm:px-0 md:px-0">
+          <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 px-5 sm:px-0 md:px-0 items-stretch">
             {phases.map((p) => (
               <Link
                 key={p.num}
                 to={p.href}
-                className="group relative snap-start shrink-0 w-[78%] sm:w-[58%] md:w-auto rounded-2xl border bg-card overflow-hidden transition-all hover:shadow-soft"
-                style={{ borderColor: 'hsl(var(--border) / 0.7)' }}
+                className="group relative snap-start shrink-0 w-[78%] sm:w-[58%] md:w-auto rounded-[22px] border bg-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_60px_-32px_rgba(20,30,60,0.28)] flex"
+                style={{ borderColor: 'hsl(var(--stage-firstyear-accent) / 0.16)' }}
               >
-                {/* Dual-tone tinted background — baby left, recovery right */}
+                {/* Soft First Year bloom top-left */}
+                <div
+                  className="absolute -top-14 -left-14 w-40 h-40 rounded-full blur-3xl opacity-70 pointer-events-none"
+                  style={{ backgroundColor: 'hsl(var(--stage-firstyear-soft) / 0.55)' }}
+                  aria-hidden
+                />
+                {/* Dual-tone base wash — baby left, recovery right */}
                 <div className="absolute inset-0 grid grid-cols-2 pointer-events-none">
-                  <div style={{ backgroundColor: 'hsl(var(--stage-firstyear-soft) / 0.35)' }} />
-                  <div style={{ backgroundColor: 'hsl(var(--stage-recovery-soft) / 0.3)' }} />
+                  <div style={{ backgroundColor: 'hsl(var(--stage-firstyear-soft) / 0.22)' }} />
+                  <div style={{ backgroundColor: 'hsl(var(--stage-recovery-soft) / 0.18)' }} />
                 </div>
+                {/* Inner highlight */}
+                <div
+                  className="absolute inset-x-0 top-0 h-px pointer-events-none"
+                  style={{ backgroundImage: 'linear-gradient(to right, transparent, hsl(0 0% 100% / 0.7), transparent)' }}
+                  aria-hidden
+                />
 
-                <div className="relative p-6 flex flex-col">
-                  <span className="font-sans text-[10px] font-light tracking-[0.2em] uppercase mb-3 text-foreground/55">
-                    Phase {p.num}
-                  </span>
-                  <h3 className="font-serif text-xl text-foreground leading-snug mb-4">{p.title}</h3>
+                <div className="relative p-6 flex flex-col flex-1">
+                  <div className="flex items-center justify-between mb-4">
+                    <span
+                      className="font-sans text-[10px] font-light tracking-[0.24em] uppercase"
+                      style={{ color: 'hsl(var(--stage-firstyear-deep))' }}
+                    >
+                      Phase {p.num}
+                    </span>
+                    <span
+                      className="w-6 h-6 rounded-full flex items-center justify-center border transition-all group-hover:translate-x-0.5"
+                      style={{
+                        borderColor: 'hsl(var(--stage-firstyear-accent) / 0.3)',
+                        backgroundColor: 'hsl(var(--stage-firstyear-soft) / 0.65)',
+                      }}
+                    >
+                      <ChevronRight size={12} style={{ color: 'hsl(var(--stage-firstyear-deep))' }} />
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-[1.25rem] text-foreground leading-snug mb-4">{p.title}</h3>
 
                   <div className="grid grid-cols-1 gap-3 mb-4">
                     <div className="flex items-start gap-2.5">
@@ -100,7 +130,7 @@ const FYPhaseNav = () => {
                     </div>
                     <div
                       className="flex items-start gap-2.5 pt-3 border-t"
-                      style={{ borderColor: 'hsl(var(--border) / 0.5)' }}
+                      style={{ borderColor: 'hsl(var(--border) / 0.45)' }}
                     >
                       <span
                         className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
@@ -113,8 +143,8 @@ const FYPhaseNav = () => {
                     </div>
                   </div>
 
-                  <span className="mt-auto inline-flex items-center gap-1 font-sans text-[11px] font-light opacity-60 group-hover:opacity-100 transition-opacity text-foreground/70">
-                    Open phase <ArrowUpRight size={12} />
+                  <span className="mt-auto inline-flex items-center gap-1 font-sans text-[11px] font-light text-foreground/65 group-hover:text-foreground/90 transition-colors">
+                    Open phase <ArrowUpRight size={12} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>
                 </div>
               </Link>
@@ -122,11 +152,11 @@ const FYPhaseNav = () => {
           </div>
         </div>
 
-        {/* Secondary quick navigation — generously spaced from the cards above */}
+        {/* Secondary quick navigation */}
         <div className="mt-16 md:mt-20">
           <div
             className="h-px w-full mb-10"
-            style={{ backgroundColor: "hsl(var(--border) / 0.6)" }}
+            style={{ backgroundColor: "hsl(var(--border) / 0.55)" }}
           />
           <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-3 text-foreground/45">
             Quick navigation
@@ -142,19 +172,19 @@ const FYPhaseNav = () => {
               <Link
                 key={a.label}
                 to={a.href}
-                className="inline-flex items-center justify-center rounded-full px-4 min-h-[36px] font-sans text-[12px] font-light border transition-colors"
+                className="inline-flex items-center justify-center rounded-full px-4 min-h-[36px] font-sans text-[12px] font-light border transition-all hover:-translate-y-[1px]"
                 style={{
-                  backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.32)",
+                  backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.38)",
                   color: "hsl(var(--stage-firstyear-deep))",
-                  borderColor: "hsl(var(--stage-firstyear-accent) / 0.22)",
+                  borderColor: "hsl(var(--stage-firstyear-accent) / 0.24)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "hsl(var(--stage-firstyear-soft) / 0.55)";
-                  e.currentTarget.style.borderColor = "hsl(var(--stage-firstyear-accent) / 0.36)";
+                  e.currentTarget.style.backgroundColor = "hsl(var(--stage-firstyear-soft) / 0.65)";
+                  e.currentTarget.style.borderColor = "hsl(var(--stage-firstyear-accent) / 0.4)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "hsl(var(--stage-firstyear-soft) / 0.32)";
-                  e.currentTarget.style.borderColor = "hsl(var(--stage-firstyear-accent) / 0.22)";
+                  e.currentTarget.style.backgroundColor = "hsl(var(--stage-firstyear-soft) / 0.38)";
+                  e.currentTarget.style.borderColor = "hsl(var(--stage-firstyear-accent) / 0.24)";
                 }}
               >
                 {a.label}

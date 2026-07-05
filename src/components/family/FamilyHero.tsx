@@ -1,4 +1,39 @@
 import { Link } from "react-router-dom";
+import FamilyHeroCarousel, {
+  type FamilyHeroSlide,
+} from "./FamilyHeroCarousel";
+
+/**
+ * Family hero media slides.
+ *
+ * TODO — connect Family hero videos once assets are uploaded. Expected pointers:
+ *   src/assets/family-hero-parents.mp4.asset.json        (calm mum-and-dad moment)
+ *   src/assets/family-hero-family-four.mp4.asset.json    (family of four everyday moment)
+ *   src/assets/family-hero-everyday.mp4.asset.json       (everyday family life)
+ * Optional poster pointers:
+ *   src/assets/family-hero-parents-poster.jpg.asset.json
+ *   src/assets/family-hero-family-four-poster.jpg.asset.json
+ *   src/assets/family-hero-everyday-poster.jpg.asset.json
+ *
+ * When the pointers exist, follow the same shape as
+ * src/assets/toddler-hero-video.mp4.asset.json and wire them in like:
+ *
+ *   import parentsVideo from "@/assets/family-hero-parents.mp4.asset.json";
+ *   import familyFourVideo from "@/assets/family-hero-family-four.mp4.asset.json";
+ *   import everydayVideo from "@/assets/family-hero-everyday.mp4.asset.json";
+ *   import parentsPoster from "@/assets/family-hero-parents-poster.jpg.asset.json";
+ *   import familyFourPoster from "@/assets/family-hero-family-four-poster.jpg.asset.json";
+ *   import everydayPoster from "@/assets/family-hero-everyday-poster.jpg.asset.json";
+ *
+ *   const familyHeroSlides: FamilyHeroSlide[] = [
+ *     { src: parentsVideo.url,   poster: parentsPoster.url,   alt: "" },
+ *     { src: familyFourVideo.url, poster: familyFourPoster.url, alt: "" },
+ *     { src: everydayVideo.url,  poster: everydayPoster.url,  alt: "" },
+ *   ];
+ *
+ * Until then, the empty array keeps the abstract buttercream/honey fallback active.
+ */
+const familyHeroSlides: FamilyHeroSlide[] = [];
 
 const accent = "hsl(var(--stage-family-accent))";
 const accentBorder = "hsl(var(--stage-family-accent) / 0.38)";

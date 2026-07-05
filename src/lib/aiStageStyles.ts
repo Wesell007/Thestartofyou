@@ -11,6 +11,7 @@ export type AiStageKey =
   | "ttc"
   | "ivf"
   | "postpartum"
+  | "family"
   | "support"
   | "preparing";
 
@@ -71,6 +72,14 @@ export const aiStageStyles: Record<AiStageKey, AiStageStyle> = {
     label: "Postpartum",
     bgVar: "--stage-postpartum",
     accentVar: "--stage-postpartum-accent",
+  },
+  family: {
+    key: "family",
+    label: "Family",
+    bgVar: "--stage-family",
+    softVar: "--stage-family-soft",
+    accentVar: "--stage-family-accent",
+    deepVar: "--stage-family-deep",
   },
   support: {
     key: "support",

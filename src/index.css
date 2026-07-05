@@ -85,6 +85,12 @@
     --stage-toddler-soft: 26 52% 86%;   /* muted peach-clay */
     --stage-toddler-accent: 22 48% 45%; /* muted pumpkin clay accent */
     --stage-toddler-deep: 20 40% 23%;   /* grounded cocoa-russet text */
+    /* Family ecosystem — soft buttercream, warm honey, muted ochre.
+       Mature and brand-aligned. Not neon, not childish, not warning. */
+    --stage-family: 45 68% 94%;         /* soft buttercream surface */
+    --stage-family-soft: 42 58% 86%;    /* warm honey cream */
+    --stage-family-accent: 38 48% 45%;  /* muted ochre accent */
+    --stage-family-deep: 34 38% 23%;    /* grounded brown-gold text */
     --stage-preparing: 42 24% 94%;
     --stage-preparing-accent: 42 38% 44%;
     --stage-support: 260 20% 94%;

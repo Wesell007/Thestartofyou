@@ -90,6 +90,8 @@ export default {
           "postpartum-accent": "hsl(var(--stage-postpartum-accent))",
           firstyear: "hsl(var(--stage-firstyear))",
           "firstyear-accent": "hsl(var(--stage-firstyear-accent))",
+          family: "hsl(var(--stage-family))",
+          "family-accent": "hsl(var(--stage-family-accent))",
           preparing: "hsl(var(--stage-preparing))",
           "preparing-accent": "hsl(var(--stage-preparing-accent))",
           support: "hsl(var(--stage-support))",

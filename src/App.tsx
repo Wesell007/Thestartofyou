@@ -95,6 +95,7 @@ import ToddlerAge18to23 from "./pages/toddler/age/EighteenToTwentyThreeMonths.ts
 import ToddlerAge2y from "./pages/toddler/age/TwoYears.tsx";
 import ToddlerAge30m from "./pages/toddler/age/ThirtyMonths.tsx";
 import ToddlerAge3y from "./pages/toddler/age/ThreeYears.tsx";
+import Family from "./pages/Family.tsx";
 import PreparingForBaby from "./pages/PreparingForBaby.tsx";
 import Support from "./pages/Support.tsx";
 import About from "./pages/About.tsx";
@@ -303,6 +304,8 @@ const App = () => (
           <Route path="/toddler/2-years" element={<ToddlerAge2y />} />
           <Route path="/toddler/30-months" element={<ToddlerAge30m />} />
           <Route path="/toddler/3-years" element={<ToddlerAge3y />} />
+          {/* Family hub — lifecycle stage after Toddler. Must sit above /:journey/:stage and catch-all. */}
+          <Route path="/family" element={<Family />} />
           <Route path="/preparing-for-baby" element={<PreparingForBaby />} />
           <Route path="/support" element={<Support />} />
           <Route path="/about" element={<About />} />

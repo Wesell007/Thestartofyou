@@ -2,6 +2,13 @@
 // Typed configs for the 6 Family Hub topic pages. UK English.
 // Warm, calm, editorial. Short answers, not long articles.
 
+import growingFamiliesImage from "@/assets/family-topic-growing-families.jpg.asset.json";
+import relationshipsImage from "@/assets/family-topic-relationships.jpg.asset.json";
+import familyBasicsImage from "@/assets/family-topic-family-basics.jpg.asset.json";
+import healthSafetyImage from "@/assets/family-topic-health-safety.jpg.asset.json";
+import travelDaysOutImage from "@/assets/family-topic-travel-days-out.jpg.asset.json";
+import playConnectionImage from "@/assets/family-topic-play-connection.jpg.asset.json";
+
 export type FamilyTopicSlug =
   | "growing-families"
   | "relationships"

@@ -49,16 +49,6 @@ export interface FamilyTopicConfig {
   aiPrompts: string[];
   related: FamilyTopicSlug[];
 }
-    bullets: string[];
-  };
-  areasInside: FamilyAreaInside[];
-  commonQuestions: FamilyQA[];
-  aiHeading: string;
-  aiDescription: string;
-  aiPlaceholder: string;
-  aiPrompts: string[];
-  related: FamilyTopicSlug[];
-}
 
 const growingFamilies: FamilyTopicConfig = {
   slug: "growing-families",

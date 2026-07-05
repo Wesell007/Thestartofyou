@@ -109,7 +109,7 @@ const FamilyTopicPage = ({ config }: Props) => {
               }}
             >
               <div className="relative grid grid-cols-1 md:grid-cols-12 md:gap-10 lg:gap-14 items-center">
-                {/* Abstract token-washed panel */}
+                {/* Hero image (or abstract fallback if missing) */}
                 <div className="md:col-span-5 md:order-2 mb-7 md:mb-0">
                   <div
                     className="relative w-full overflow-hidden rounded-[22px] border aspect-[5/4] md:aspect-[4/5]"
@@ -119,27 +119,61 @@ const FamilyTopicPage = ({ config }: Props) => {
                         "linear-gradient(155deg, hsl(var(--stage-family) / 0.85) 0%, hsl(var(--stage-family-soft) / 0.85) 100%)",
                       boxShadow: abstractPanelShadow,
                     }}
-                    aria-hidden
                   >
-                    <span
-                      className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 rounded-full blur-3xl opacity-80"
-                      style={{ background: "hsl(var(--stage-family-accent) / 0.28)" }}
-                    />
-                    <span
-                      className="pointer-events-none absolute -bottom-20 -right-16 h-60 w-60 rounded-full blur-3xl opacity-70"
-                      style={{ background: "hsl(var(--stage-family-soft) / 0.75)" }}
-                    />
-                    <span
-                      className="pointer-events-none absolute inset-6 rounded-[18px] border"
-                      style={{ borderColor: "hsl(var(--stage-family-accent) / 0.18)" }}
-                    />
-                    <span
-                      className="pointer-events-none absolute inset-0"
-                      style={{
-                        background:
-                          "radial-gradient(120% 90% at 50% 50%, transparent 55%, hsl(var(--stage-family-deep) / 0.22) 100%)",
-                      }}
-                    />
+                    {config.heroImage?.src ? (
+                      <>
+                        <img
+                          src={config.heroImage.src}
+                          alt={config.heroImage.alt}
+                          width={1024}
+                          height={1216}
+                          loading="eager"
+                          className="absolute inset-0 h-full w-full object-cover"
+                          style={{ objectPosition: "50% 40%" }}
+                        />
+                        {/* Warm buttercream wash overlay */}
+                        <span
+                          className="pointer-events-none absolute inset-0"
+                          style={{
+                            background:
+                              "linear-gradient(160deg, hsl(var(--stage-family) / 0.18) 0%, transparent 45%, hsl(var(--stage-family-deep) / 0.18) 100%)",
+                          }}
+                          aria-hidden
+                        />
+                        {/* Inner highlight frame */}
+                        <span
+                          className="pointer-events-none absolute inset-2.5 rounded-[18px] border"
+                          style={{ borderColor: "hsl(0 0% 100% / 0.28)" }}
+                          aria-hidden
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <span
+                          className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 rounded-full blur-3xl opacity-80"
+                          style={{ background: "hsl(var(--stage-family-accent) / 0.28)" }}
+                          aria-hidden
+                        />
+                        <span
+                          className="pointer-events-none absolute -bottom-20 -right-16 h-60 w-60 rounded-full blur-3xl opacity-70"
+                          style={{ background: "hsl(var(--stage-family-soft) / 0.75)" }}
+                          aria-hidden
+                        />
+                        <span
+                          className="pointer-events-none absolute inset-6 rounded-[18px] border"
+                          style={{ borderColor: "hsl(var(--stage-family-accent) / 0.18)" }}
+                          aria-hidden
+                        />
+                        <span
+                          className="pointer-events-none absolute inset-0"
+                          style={{
+                            background:
+                              "radial-gradient(120% 90% at 50% 50%, transparent 55%, hsl(var(--stage-family-deep) / 0.22) 100%)",
+                          }}
+                          aria-hidden
+                        />
+                      </>
+                    )}
                   </div>
                 </div>
 

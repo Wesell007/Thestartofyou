@@ -1,4 +1,39 @@
 import { Link } from "react-router-dom";
+import FamilyHeroCarousel, {
+  type FamilyHeroSlide,
+} from "./FamilyHeroCarousel";
+
+/**
+ * Family hero media slides.
+ *
+ * TODO — connect Family hero videos once assets are uploaded. Expected pointers:
+ *   src/assets/family-hero-parents.mp4.asset.json        (calm mum-and-dad moment)
+ *   src/assets/family-hero-family-four.mp4.asset.json    (family of four everyday moment)
+ *   src/assets/family-hero-everyday.mp4.asset.json       (everyday family life)
+ * Optional poster pointers:
+ *   src/assets/family-hero-parents-poster.jpg.asset.json
+ *   src/assets/family-hero-family-four-poster.jpg.asset.json
+ *   src/assets/family-hero-everyday-poster.jpg.asset.json
+ *
+ * When the pointers exist, follow the same shape as
+ * src/assets/toddler-hero-video.mp4.asset.json and wire them in like:
+ *
+ *   import parentsVideo from "@/assets/family-hero-parents.mp4.asset.json";
+ *   import familyFourVideo from "@/assets/family-hero-family-four.mp4.asset.json";
+ *   import everydayVideo from "@/assets/family-hero-everyday.mp4.asset.json";
+ *   import parentsPoster from "@/assets/family-hero-parents-poster.jpg.asset.json";
+ *   import familyFourPoster from "@/assets/family-hero-family-four-poster.jpg.asset.json";
+ *   import everydayPoster from "@/assets/family-hero-everyday-poster.jpg.asset.json";
+ *
+ *   const familyHeroSlides: FamilyHeroSlide[] = [
+ *     { src: parentsVideo.url,   poster: parentsPoster.url,   alt: "" },
+ *     { src: familyFourVideo.url, poster: familyFourPoster.url, alt: "" },
+ *     { src: everydayVideo.url,  poster: everydayPoster.url,  alt: "" },
+ *   ];
+ *
+ * Until then, the empty array keeps the abstract buttercream/honey fallback active.
+ */
+const familyHeroSlides: FamilyHeroSlide[] = [];
 
 const accent = "hsl(var(--stage-family-accent))";
 const accentBorder = "hsl(var(--stage-family-accent) / 0.38)";
@@ -87,32 +122,9 @@ const FamilyHero = () => {
               </div>
             </div>
 
-            {/* Media placeholder frame — buttercream + honey bloom */}
+            {/* Media — video carousel (falls back to abstract panel when no slides) */}
             <div className="relative">
-              <div
-                className="relative aspect-[5/6] rounded-[28px] border overflow-hidden"
-                style={{
-                  borderColor: "hsl(var(--stage-family-accent) / 0.28)",
-                  background:
-                    "linear-gradient(155deg, hsl(var(--stage-family) / 0.85) 0%, hsl(var(--stage-family-soft) / 0.85) 100%)",
-                  boxShadow:
-                    "0 40px 90px -48px rgba(70,50,20,0.4), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
-                }}
-                aria-hidden
-              >
-                <span
-                  className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full blur-3xl opacity-80"
-                  style={{ background: "hsl(var(--stage-family-accent) / 0.22)" }}
-                />
-                <span
-                  className="pointer-events-none absolute -bottom-28 -right-20 h-80 w-80 rounded-full blur-3xl opacity-70"
-                  style={{ background: "hsl(var(--stage-family-soft) / 0.7)" }}
-                />
-                <span
-                  className="pointer-events-none absolute inset-6 rounded-[22px] border"
-                  style={{ borderColor: "hsl(var(--stage-family-accent) / 0.14)" }}
-                />
-              </div>
+              <FamilyHeroCarousel slides={familyHeroSlides} variant="desktop" />
             </div>
           </div>
         </div>
@@ -130,25 +142,8 @@ const FamilyHero = () => {
         />
 
         <div className="relative px-6 pt-3">
-          <div
-            className="relative h-[220px] rounded-[24px] border overflow-hidden mb-8"
-            style={{
-              borderColor: "hsl(var(--stage-family-accent) / 0.28)",
-              background:
-                "linear-gradient(155deg, hsl(var(--stage-family) / 0.85) 0%, hsl(var(--stage-family-soft) / 0.85) 100%)",
-              boxShadow:
-                "0 26px 60px -36px rgba(70,50,20,0.36), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
-            }}
-            aria-hidden
-          >
-            <span
-              className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 rounded-full blur-3xl opacity-80"
-              style={{ background: "hsl(var(--stage-family-accent) / 0.22)" }}
-            />
-            <span
-              className="pointer-events-none absolute -bottom-20 -right-16 h-60 w-60 rounded-full blur-3xl opacity-70"
-              style={{ background: "hsl(var(--stage-family-soft) / 0.7)" }}
-            />
+          <div className="mb-8">
+            <FamilyHeroCarousel slides={familyHeroSlides} variant="mobile" />
           </div>
 
           <div className="relative pb-12">

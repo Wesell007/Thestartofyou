@@ -1,4 +1,14 @@
 import { ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const CLUSTER_ROUTES: Record<string, string> = {
+  "family-growing": "/family/growing-families",
+  "family-relationships": "/family/relationships",
+  "family-basics": "/family/family-basics",
+  "family-health": "/family/health-safety",
+  "family-travel": "/family/travel-days-out",
+  "family-play": "/family/play-connection",
+};
 
 type Cluster = {
   id: string;

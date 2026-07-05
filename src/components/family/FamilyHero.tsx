@@ -142,25 +142,8 @@ const FamilyHero = () => {
         />
 
         <div className="relative px-6 pt-3">
-          <div
-            className="relative h-[220px] rounded-[24px] border overflow-hidden mb-8"
-            style={{
-              borderColor: "hsl(var(--stage-family-accent) / 0.28)",
-              background:
-                "linear-gradient(155deg, hsl(var(--stage-family) / 0.85) 0%, hsl(var(--stage-family-soft) / 0.85) 100%)",
-              boxShadow:
-                "0 26px 60px -36px rgba(70,50,20,0.36), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
-            }}
-            aria-hidden
-          >
-            <span
-              className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 rounded-full blur-3xl opacity-80"
-              style={{ background: "hsl(var(--stage-family-accent) / 0.22)" }}
-            />
-            <span
-              className="pointer-events-none absolute -bottom-20 -right-16 h-60 w-60 rounded-full blur-3xl opacity-70"
-              style={{ background: "hsl(var(--stage-family-soft) / 0.7)" }}
-            />
+          <div className="mb-8">
+            <FamilyHeroCarousel slides={familyHeroSlides} variant="mobile" />
           </div>
 
           <div className="relative pb-12">

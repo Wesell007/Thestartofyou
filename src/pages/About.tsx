@@ -4,8 +4,9 @@ import AboutHero from "@/components/about/AboutHero";
 import AboutProblem from "@/components/about/AboutProblem";
 import AboutApproach from "@/components/about/AboutApproach";
 import AboutEcosystem from "@/components/about/AboutEcosystem";
-import AboutDifferent from "@/components/about/AboutDifferent";
 import AboutAdaptive from "@/components/about/AboutAdaptive";
+import AboutJournalConnection from "@/components/about/AboutJournalConnection";
+import AboutDifferent from "@/components/about/AboutDifferent";
 import AboutMission from "@/components/about/AboutMission";
 import AboutCTA from "@/components/about/AboutCTA";
 
@@ -18,8 +19,9 @@ const About = () => {
         <AboutProblem />
         <AboutApproach />
         <AboutEcosystem />
-        <AboutDifferent />
         <AboutAdaptive />
+        <AboutJournalConnection />
+        <AboutDifferent />
         <AboutMission />
         <AboutCTA />
       </main>

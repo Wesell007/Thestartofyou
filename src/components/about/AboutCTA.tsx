@@ -1,55 +1,38 @@
-import { ArrowRight, Calculator } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+
+const pathways = [
+  { label: "Explore pregnancy", to: "/pregnancy" },
+  { label: "Calculate your due date", to: "/due-date-calculator" },
+  { label: "View the journal", to: "/product" },
+  { label: "Explore family guidance", to: "/family" },
+];
 
 const AboutCTA = () => {
   return (
     <section className="page-ending frame-corner overflow-hidden">
       <div className="container mx-auto px-6 md:px-10 max-w-4xl">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-center">
-          {/* Left: emotional close */}
-          <div className="md:col-span-3">
-            <div className="editorial-rule mb-6" />
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-4 leading-snug">
-              Start with where you are
-            </h2>
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed max-w-md mb-6">
-              You do not need to have everything figured out. Start with your stage, and let the journey guide you from there. The right support is already here.
-            </p>
-            <div className="flex flex-col sm:flex-row items-start gap-4">
-              <Link
-                to="/explore"
-                className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
-              >
-                Explore your journey
-                <ArrowRight size={15} />
-              </Link>
-              <Link
-                to="/due-date-calculator"
-                className="inline-flex items-center gap-2 font-sans text-sm font-light text-muted-foreground border-b border-border hover:text-foreground hover:border-foreground transition-all pb-0.5"
-              >
-                <Calculator size={14} className="text-sage" />
-                Calculate your due date
-              </Link>
-            </div>
-          </div>
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <div className="editorial-rule mb-6 mx-auto" />
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-4 leading-snug">
+            Start where you are
+          </h2>
+          <p className="font-sans text-sm md:text-base font-light text-muted-foreground leading-relaxed max-w-md mx-auto">
+            You do not need to have everything figured out. Choose the part of the journey you are in, and let the right support meet you there.
+          </p>
+        </div>
 
-          {/* Right: trust card */}
-          <div className="md:col-span-2">
-            <div className="card-elevated p-6 md:p-7 space-y-4">
-              <p className="font-sans text-[10px] font-light tracking-[0.2em] uppercase text-muted-foreground">What you will find</p>
-              {[
-                "Stage-specific guidance that adapts to you",
-                "Emotional support alongside practical information",
-                "Tools, calculators, and structured guidance",
-                "A journal designed for the full journey",
-              ].map((item) => (
-                <div key={item} className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-sage/50 mt-1.5 flex-shrink-0" />
-                  <p className="font-sans text-sm font-light text-foreground/80 leading-relaxed">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
+          {pathways.map((p) => (
+            <Link
+              key={p.to}
+              to={p.to}
+              className="group flex items-center justify-between gap-3 rounded-2xl border border-sage/20 bg-gradient-to-br from-white via-[#FBF8F1] to-[#F4EFE4] px-5 py-4 hover:border-sage/40 hover:shadow-card-hover transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-sage/40"
+            >
+              <span className="font-sans text-sm text-foreground">{p.label}</span>
+              <ArrowRight size={15} className="text-sage/70 group-hover:text-sage group-hover:translate-x-0.5 transition-all" />
+            </Link>
+          ))}
         </div>
       </div>
     </section>

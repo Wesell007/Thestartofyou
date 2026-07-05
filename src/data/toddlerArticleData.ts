@@ -16,6 +16,14 @@ export interface ToddlerArticle {
   readTime: string;
   medicallyReviewed?: boolean;
   status: "draft" | "ready";
+  seoTitle?: string;
+  seoDescription?: string;
+  lastUpdated?: string;
+  reviewedBy?: string;
+  intro?: string;
+  sections?: { heading: string; body: string[] }[];
+  keyTakeaways?: string[];
+  relatedSlugs?: string[];
 }
 
 export const toddlerArticles: ToddlerArticle[] = [

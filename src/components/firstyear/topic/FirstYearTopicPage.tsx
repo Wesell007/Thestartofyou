@@ -10,6 +10,11 @@ import {
   firstYearTopicConfigs,
   FirstYearFeaturedItem,
 } from "@/data/firstYearTopicData";
+import {
+  getFirstYearArticlesByTopic,
+  type FirstYearArticleTopic,
+} from "@/data/firstYearArticleData";
+import FirstYearArticleCard from "@/components/firstyear/article/FirstYearArticleCard";
 
 // First Year topic pages are photo-led and calm. No botanical sprigs or
 // pregnancy-style decorative motifs — quietness comes from soft tints,
@@ -329,6 +334,58 @@ const FirstYearTopicPage = ({ config }: Props) => {
             </div>
           </div>
         </section>
+
+        {/* ─── 3b. RELATED GUIDANCE (ARTICLES) ───────────────────────── */}
+        {(() => {
+          const articles = getFirstYearArticlesByTopic(
+            config.slug as FirstYearArticleTopic
+          );
+          return (
+            <section
+              className="py-16 md:py-20"
+              style={{
+                background: `linear-gradient(to bottom, hsl(var(--parchment)) 0%, ${tintWash} 100%)`,
+              }}
+            >
+              <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
+                <div className="mb-9 md:mb-11 flex flex-col items-start gap-3">
+                  <SectionLabel>Guidance</SectionLabel>
+                  <h2
+                    className="font-serif text-[1.75rem] md:text-[2rem] leading-tight"
+                    style={{ color: deep }}
+                  >
+                    Related guidance
+                  </h2>
+                  <p
+                    className="font-sans text-[14.5px] font-light leading-relaxed max-w-2xl"
+                    style={{ color: `hsl(var(${theme.deepToken}) / 0.72)` }}
+                  >
+                    Helpful reads connected to this part of the first year.
+                  </p>
+                </div>
+
+                {articles.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                    {articles.map((a) => (
+                      <FirstYearArticleCard
+                        key={a.slug}
+                        article={a}
+                        tone={config.side === "recovery" ? "recovery" : "baby"}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <p
+                    className="font-serif italic text-[15px] leading-[1.7] max-w-xl"
+                    style={{ color: `hsl(var(${theme.deepToken}) / 0.72)` }}
+                  >
+                    Guidance articles for this topic are being prepared.
+                  </p>
+                )}
+              </div>
+            </section>
+          );
+        })()}
 
         {/* ─── 4. AI SUPPORT ─────────────────────────────────────────── */}
         <HubAISupport

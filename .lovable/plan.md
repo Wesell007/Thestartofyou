@@ -1,47 +1,42 @@
-# Family Hub — Article System Preparation
+# First Year + Toddler — Article System Preparation
 
-Prepare a scalable article system for the Family section: data layer, shared card, and a Related guidance section on the 6 topic pages. No article routes or bodies.
+Mirror the Family article-readiness system into First Year and Toddler. Article-readiness only — no routes, no bodies, no assets, no tokens.
 
-## 1. Create `src/data/familyArticleData.ts`
+## 1. `src/data/firstYearArticleData.ts`
 
-- `FamilyArticleTopic` union: the 6 topic slugs.
-- `FamilyArticle` interface: `slug, topic, title, description, readTime, medicallyReviewed?, status`.
-- `familyArticles: FamilyArticle[]` seeded with 12 draft stubs (British English titles/descriptions, 4–6 min reads). `making-your-home-safer` and `when-to-ask-for-help` marked `medicallyReviewed: true`.
-- Helper `getFamilyArticlesByTopic(topic)` returning filtered list in array order.
+`FirstYearArticleTopic` union uses live topic slugs (`care-and-safety`, `body-and-hormones`, `checkups-and-warning-signs`). `FirstYearArticle` shape: `slug, topic, title, description, readTime, medicallyReviewed?, status`. `firstYearArticles[]` seeded with 16 draft stubs, British English, 4–6 min. Medically reviewed: `safe-sleep-and-home-safety`, `postnatal-checks-and-appointments`, `when-to-ask-for-help-after-birth`. Helper `getFirstYearArticlesByTopic(topic)`.
 
-## 2. Create `src/components/family/article/FamilyArticleCard.tsx`
+## 2. `src/components/firstyear/article/FirstYearArticleCard.tsx`
 
-Shared card, Family tokens only (`--stage-family`, `-soft`, `-accent`, `-deep`).
+Props `article, tone?` (default `"baby"`). `tone === "recovery"` uses `--stage-recovery*`, else `--stage-firstyear*`. Layout mirrors `FamilyArticleCard`: serif title, muted sans description, clock+read time on left, chevron chip on right, optional shield "Medically reviewed" chip, optional "Coming soon" pill. Ready → `<Link to="/first-year/{topic}/{slug}">` with hover lift + focus ring. Draft → non-interactive `<div>`, `aria-disabled`, no hover lift, no link.
 
-- Layout: serif title, muted sans description, footer row with clock + read time, chevron chip on the right.
-- Optional "Medically reviewed" chip with shield icon when `medicallyReviewed`.
-- Visual: rounded-2xl, family accent border, family/soft gradient background, warm shadow.
-- If `status === "ready"`: `<Link to="/family/{topic}/{slug}">` with hover lift + focus ring.
-- If `status === "draft"`: non-interactive `<div>`, `aria-disabled`, small "Coming soon" pill, no hover lift, no link.
+## 3. Edit `src/components/firstyear/topic/FirstYearTopicPage.tsx`
 
-## 3. Edit `src/components/family/topic/FamilyTopicPage.tsx`
+Insert new "Related guidance" section **after the existing Guidance section (§3) and before AI Support (§4)** — no other sections touched. Eyebrow `Guidance`, heading `Related guidance`, subheading `Helpful reads connected to this part of the first year.`, grid of `FirstYearArticleCard` for `getFirstYearArticlesByTopic(config.slug as FirstYearArticleTopic)` with `tone={config.side === "recovery" ? "recovery" : "baby"}`. Empty state: `Guidance articles for this topic are being prepared.`
 
-Insert a new "Related guidance" section **after "Areas inside this topic"** and **before "Common questions"** — no other sections touched.
+## 4. `src/data/toddlerArticleData.ts`
 
-- Eyebrow: `Guidance` (via existing `SectionLabel`)
-- Heading: `Related guidance`
-- Subheading: `Helpful reads connected to this part of family life.`
-- Grid of `FamilyArticleCard` for `getFamilyArticlesByTopic(config.slug)`.
-- Empty-state fallback: `Guidance articles for this topic are being prepared.` (currently every topic shows 2 draft cards with "Coming soon" pills).
+`ToddlerArticleTopic` union matches the 8 live toddler topic slugs. `ToddlerArticle` shape identical. `toddlerArticles[]` seeded with 16 draft stubs, British English, 4–6 min. Medically reviewed: `when-to-ask-about-speech-delay`, `toddler-home-safety`, `when-to-call-the-gp`. Helper `getToddlerArticlesByTopic(topic)`.
 
-Import `getFamilyArticlesByTopic` + `FamilyArticleTopic` and `FamilyArticleCard`; cast `config.slug` to `FamilyArticleTopic` since the two unions are identical.
+## 5. `src/components/toddler/article/ToddlerArticleCard.tsx`
 
-## 4. Out of scope
+Toddler tokens only (`--stage-toddler`, `-soft`, `-accent`, `-deep`). Same layout and behaviour rules. Ready → `<Link to="/toddler/{topic}/{slug}">`. Draft → non-interactive with "Coming soon" pill.
 
-No article routes, no article bodies, no new assets, no new tokens. No changes to Family Hub, hero carousel, aiStageStyles, AskPage, AISearchBar, HubAISupport, Navbar, Footer, sibling hubs, auth, setup, saved journey, prompts, or edge functions.
+## 6. Edit `src/components/toddler/topic/ToddlerTopicPage.tsx`
 
-## 5. Verification
+Insert new "Related guidance" section **after the AI panel and before Common questions** — no other sections touched. Same section content with subheading `Helpful reads connected to this part of toddler life.` and `getToddlerArticlesByTopic(config.slug as ToddlerArticleTopic)`.
+
+## 7. Out of scope
+
+No article routes/bodies, no new assets, no new tokens, no changes to Family article system, Family Hub, Family topic pages, Pregnancy, TTC, IVF, Postpartum, Journal, AskPage, aiStageStyles, AISearchBar, HubAISupport, Navbar, Footer, auth, setup, saved journey, prompts, or edge functions.
+
+## 8. Verification
 
 - `tsgo` typecheck.
-- Playwright at 1280 / 1024 / 390 on `/family/growing-families` and `/family/relationships`: Related guidance section visible, draft cards render, "Coming soon" pill clear, no links on draft cards, no horizontal scroll, mobile stacks cleanly.
-- Render-ping all 6 `/family/*` topic routes.
+- Playwright 1280 / 1024 / 390 on `/first-year/feeding`, `/first-year/postpartum-recovery`, `/toddler/development-milestones`, `/toddler/behaviour-emotions`: Related guidance visible, draft cards render, "Coming soon" pill clear, draft cards don't link, recovery card uses Recovery tokens, no horizontal scroll, mobile stacks.
+- Render-ping all 8 First Year and all 8 Toddler topic routes.
 - Spot-check `/family`, `/pregnancy`, `/first-year`, `/toddler`.
 
-## Return summary
+## Return
 
-A. Files created  B. Files edited  C. Article data structure  D. 12 stubs added  E. Related guidance section confirmation  F. Draft / Coming soon confirmation  G. No article routes/pages created  H. Desktop/iPad/mobile checks  I. All 6 topic routes render  J. No unrelated systems changed.
+A. Files created  B. Files edited  C. FY data structure  D. Toddler data structure  E. FY stubs  F. Toddler stubs  G. FY Related guidance confirmation  H. Toddler Related guidance confirmation  I. Draft/Coming soon confirmation  J. No article routes/pages created  K. Responsive checks  L. All FY + Toddler topic routes render  M. No unrelated systems changed.

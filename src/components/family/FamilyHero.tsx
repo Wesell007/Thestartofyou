@@ -4,34 +4,26 @@ import FamilyHeroCarousel, {
 } from "./FamilyHeroCarousel";
 
 /**
- * Family hero media slides.
+ * Family hero media slides (images).
  *
- * TODO — connect Family hero videos once assets are uploaded. Expected pointers:
- *   src/assets/family-hero-parents.mp4.asset.json        (calm mum-and-dad moment)
- *   src/assets/family-hero-family-four.mp4.asset.json    (family of four everyday moment)
- *   src/assets/family-hero-everyday.mp4.asset.json       (everyday family life)
- * Optional poster pointers:
- *   src/assets/family-hero-parents-poster.jpg.asset.json
- *   src/assets/family-hero-family-four-poster.jpg.asset.json
- *   src/assets/family-hero-everyday-poster.jpg.asset.json
+ * TODO — connect Family hero images once assets are uploaded. Expected pointers:
+ *   src/assets/family-hero-parents.jpg.asset.json       (calm mum & dad moment)
+ *   src/assets/family-hero-family-four.jpg.asset.json   (warm family of four)
+ *   src/assets/family-hero-everyday.jpg.asset.json      (everyday family life)
  *
- * When the pointers exist, follow the same shape as
- * src/assets/toddler-hero-video.mp4.asset.json and wire them in like:
+ * When the pointers exist, follow the same asset pattern used elsewhere:
  *
- *   import parentsVideo from "@/assets/family-hero-parents.mp4.asset.json";
- *   import familyFourVideo from "@/assets/family-hero-family-four.mp4.asset.json";
- *   import everydayVideo from "@/assets/family-hero-everyday.mp4.asset.json";
- *   import parentsPoster from "@/assets/family-hero-parents-poster.jpg.asset.json";
- *   import familyFourPoster from "@/assets/family-hero-family-four-poster.jpg.asset.json";
- *   import everydayPoster from "@/assets/family-hero-everyday-poster.jpg.asset.json";
+ *   import parents from "@/assets/family-hero-parents.jpg.asset.json";
+ *   import familyFour from "@/assets/family-hero-family-four.jpg.asset.json";
+ *   import everyday from "@/assets/family-hero-everyday.jpg.asset.json";
  *
  *   const familyHeroSlides: FamilyHeroSlide[] = [
- *     { src: parentsVideo.url,   poster: parentsPoster.url,   alt: "" },
- *     { src: familyFourVideo.url, poster: familyFourPoster.url, alt: "" },
- *     { src: everydayVideo.url,  poster: everydayPoster.url,  alt: "" },
+ *     { src: parents.url,    alt: "" },
+ *     { src: familyFour.url, alt: "" },
+ *     { src: everyday.url,   alt: "" },
  *   ];
  *
- * Until then, the empty array keeps the abstract buttercream/honey fallback active.
+ * Until then, the empty array keeps the abstract Family fallback active.
  */
 const familyHeroSlides: FamilyHeroSlide[] = [];
 

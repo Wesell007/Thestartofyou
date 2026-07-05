@@ -6,7 +6,7 @@ const ProductJournalAI = () => {
     <section className="bg-parchment py-14 md:py-20">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
         <div
-          className="bg-card border border-border/30 rounded-2xl px-6 py-8 sm:px-10 sm:py-11 shadow-soft"
+          className="bg-gradient-to-br from-white via-[#FBF8F1] to-[#F4EFE4] border border-border/30 rounded-2xl px-6 py-8 sm:px-10 sm:py-11 shadow-soft"
           style={{ borderTopColor: "hsl(var(--sage))", borderTopWidth: "2px" }}
         >
           <div className="text-center mb-7">
@@ -36,6 +36,11 @@ const ProductJournalAI = () => {
             context="Pregnancy journalling"
             stage="pregnancy"
           />
+
+          <p className="font-sans text-xs italic text-muted-foreground/80 text-center mt-5">
+            Use these as a starting point, then write in your own words.
+          </p>
+
         </div>
       </div>
     </section>

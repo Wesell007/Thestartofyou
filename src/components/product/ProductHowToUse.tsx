@@ -33,17 +33,15 @@ const ProductHowToUse = () => {
           {steps.map((s, i) => (
             <div
               key={s.title}
-              className="bg-parchment/60 border border-border/25 rounded-2xl p-6 sm:p-7"
+              className="bg-gradient-to-br from-white via-[#FBF8F1] to-[#F4EFE4] border border-border/25 rounded-2xl p-6 sm:p-7"
             >
-              <div className="flex items-baseline gap-3 mb-2">
-                <span className="font-serif text-sm text-sage tracking-widest">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="font-serif text-base sm:text-lg text-foreground leading-snug">
-                  {s.title}
-                </h3>
-              </div>
-              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed pl-9">
+              <span className="inline-flex items-center bg-sage/10 border border-sage/20 rounded-full px-2.5 py-0.5 font-sans text-[10px] font-medium tracking-[0.2em] text-sage mb-3">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="font-serif text-base sm:text-lg text-foreground leading-snug mb-2">
+                {s.title}
+              </h3>
+              <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed">
                 {s.desc}
               </p>
             </div>

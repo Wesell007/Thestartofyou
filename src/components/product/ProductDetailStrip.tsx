@@ -9,13 +9,13 @@ const details = [
 
 const ProductDetailStrip = () => {
   return (
-    <section className="bg-parchment/60 py-8 md:py-10 border-y border-border/20">
+    <section className="bg-gradient-to-r from-[#FBF8F1] via-[#F7F2E8] to-[#F4EFE4] py-8 md:py-10 border-y border-border/20">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
           {details.map((d) => (
             <span
               key={d}
-              className="bg-sage/8 border border-sage/15 rounded-pill px-3.5 py-1.5 font-sans text-[11px] sm:text-xs font-light text-foreground/70"
+              className="bg-sage/10 border border-sage/20 rounded-pill px-3.5 py-1.5 font-sans text-[11px] sm:text-xs font-light text-foreground/70"
             >
               {d}
             </span>

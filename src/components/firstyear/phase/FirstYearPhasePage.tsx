@@ -257,19 +257,37 @@ const FeaturedGuidance = ({ items }: { items: PhaseConfig["featuredGuidance"] })
           <Link
             key={g.title}
             to={`/ask?q=${encodeURIComponent(g.title)}&stage=first-year`}
-            className="group rounded-2xl border bg-card p-6 transition-all hover:shadow-soft hover:-translate-y-[1px]"
-            style={{ borderColor: "hsl(var(--border) / 0.7)" }}
+            className="group relative overflow-hidden rounded-[22px] border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_58px_-32px_rgba(20,30,60,0.28)]"
+            style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.18)" }}
           >
-            <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-3 text-foreground/55">
-              Guidance
-            </p>
-            <h3 className="font-serif text-[18px] text-foreground leading-snug mb-2.5">{g.title}</h3>
-            <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mb-4">
-              {g.description}
-            </p>
-            <span className="inline-flex items-center gap-1 font-sans text-[11px] font-light text-foreground/65 group-hover:text-foreground/90 transition-colors">
-              Read guidance <ArrowUpRight size={12} />
-            </span>
+            <div
+              className="absolute -top-12 -right-12 w-32 h-32 rounded-full blur-2xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none"
+              style={{ backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.65)" }}
+              aria-hidden
+            />
+            <div
+              className="absolute inset-x-0 top-0 h-px pointer-events-none"
+              style={{ backgroundImage: 'linear-gradient(to right, transparent, hsl(0 0% 100% / 0.6), transparent)' }}
+              aria-hidden
+            />
+            <div className="relative">
+              <p
+                className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-3"
+                style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+              >
+                Guidance
+              </p>
+              <h3 className="font-serif text-[18px] text-foreground leading-snug mb-2.5">{g.title}</h3>
+              <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mb-4">
+                {g.description}
+              </p>
+              <span
+                className="inline-flex items-center gap-1 font-sans text-[11px] font-light transition-colors"
+                style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+              >
+                Read guidance <ArrowUpRight size={12} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
+            </div>
           </Link>
         ))}
       </div>

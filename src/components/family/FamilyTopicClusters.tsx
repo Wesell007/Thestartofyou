@@ -87,19 +87,6 @@ const clusters: Cluster[] = [
       "Making memories",
     ],
   },
-  {
-    id: "family-community",
-    eyebrow: "Community & support",
-    title: "Community and support",
-    body: "For finding your village, asking for help and feeling less alone in the middle of family life.",
-    chips: [
-      "Finding your village",
-      "Support groups",
-      "Asking for help",
-      "Community activities",
-      "Feeling less alone",
-    ],
-  },
 ];
 
 const accent = "hsl(var(--stage-family-accent))";

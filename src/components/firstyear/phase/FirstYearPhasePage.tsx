@@ -122,67 +122,103 @@ const InPhaseAges = ({ ages }: { ages: string[] }) => (
 const PairedSection = ({ config }: Props) => (
   <section className="bg-parchment py-12 md:py-16">
     <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7 items-stretch">
         <div
-          className="rounded-2xl border p-6 md:p-7"
+          className="relative overflow-hidden rounded-[22px] border p-6 md:p-8 shadow-[0_24px_60px_-40px_rgba(20,30,60,0.28)]"
           style={{
-            backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.22)",
-            borderColor: "hsl(var(--stage-firstyear-accent) / 0.18)",
+            backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.26)",
+            borderColor: "hsl(var(--stage-firstyear-accent) / 0.2)",
           }}
         >
-          <p
-            className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-2"
-            style={{ color: "hsl(var(--stage-firstyear-deep))" }}
-          >
-            For your baby
-          </p>
-          <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-5">
-            Baby changes in this phase
-          </h2>
-          <ul className="space-y-4">
-            {config.babyChanges.map((b) => (
-              <li key={b.label}>
-                <p
-                  className="font-sans text-[11px] font-light tracking-wider uppercase mb-1"
-                  style={{ color: "hsl(var(--stage-firstyear-deep))" }}
-                >
-                  {b.label}
-                </p>
-                <p className="font-sans text-[14px] font-light text-foreground/85 leading-relaxed">{b.body}</p>
-              </li>
-            ))}
-          </ul>
+          <div
+            className="absolute -top-16 -left-16 w-52 h-52 rounded-full blur-3xl opacity-60 pointer-events-none"
+            style={{ backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.6)" }}
+            aria-hidden
+          />
+          <div
+            className="absolute inset-x-0 top-0 h-px pointer-events-none"
+            style={{ backgroundImage: 'linear-gradient(to right, transparent, hsl(0 0% 100% / 0.7), transparent)' }}
+            aria-hidden
+          />
+          <div className="relative">
+            <div className="flex items-center gap-2 mb-2">
+              <span
+                className="w-1 h-5 rounded-full"
+                style={{ backgroundColor: "hsl(var(--stage-firstyear-accent))" }}
+              />
+              <p
+                className="font-sans text-[10px] font-light tracking-[0.25em] uppercase"
+                style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+              >
+                For your baby
+              </p>
+            </div>
+            <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-5">
+              Baby changes in this phase
+            </h2>
+            <ul className="space-y-4">
+              {config.babyChanges.map((b) => (
+                <li key={b.label}>
+                  <p
+                    className="font-sans text-[11px] font-light tracking-wider uppercase mb-1"
+                    style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+                  >
+                    {b.label}
+                  </p>
+                  <p className="font-sans text-[14px] font-light text-foreground/85 leading-relaxed">{b.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div
-          className="rounded-2xl border p-6 md:p-7"
+          className="relative overflow-hidden rounded-[22px] border p-6 md:p-8 shadow-[0_24px_60px_-40px_rgba(60,40,55,0.24)]"
           style={{
-            backgroundColor: "hsl(var(--stage-recovery-soft) / 0.18)",
-            borderColor: "hsl(var(--stage-recovery-accent) / 0.16)",
+            backgroundColor: "hsl(var(--stage-recovery-soft) / 0.22)",
+            borderColor: "hsl(var(--stage-recovery-accent) / 0.18)",
           }}
         >
-          <p
-            className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-2"
-            style={{ color: "hsl(var(--stage-recovery-deep))" }}
-          >
-            For you
-          </p>
-          <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-5">
-            Recovery and adjustment in this phase
-          </h2>
-          <ul className="space-y-4">
-            {config.parentRecovery.map((b) => (
-              <li key={b.label}>
-                <p
-                  className="font-sans text-[11px] font-light tracking-wider uppercase mb-1"
-                  style={{ color: "hsl(var(--stage-recovery-deep))" }}
-                >
-                  {b.label}
-                </p>
-                <p className="font-sans text-[14px] font-light text-foreground/85 leading-relaxed">{b.body}</p>
-              </li>
-            ))}
-          </ul>
+          <div
+            className="absolute -top-16 -right-16 w-52 h-52 rounded-full blur-3xl opacity-55 pointer-events-none"
+            style={{ backgroundColor: "hsl(var(--stage-recovery-soft) / 0.55)" }}
+            aria-hidden
+          />
+          <div
+            className="absolute inset-x-0 top-0 h-px pointer-events-none"
+            style={{ backgroundImage: 'linear-gradient(to right, transparent, hsl(0 0% 100% / 0.65), transparent)' }}
+            aria-hidden
+          />
+          <div className="relative">
+            <div className="flex items-center gap-2 mb-2">
+              <span
+                className="w-1 h-5 rounded-full"
+                style={{ backgroundColor: "hsl(var(--stage-recovery-accent))" }}
+              />
+              <p
+                className="font-sans text-[10px] font-light tracking-[0.25em] uppercase"
+                style={{ color: "hsl(var(--stage-recovery-deep))" }}
+              >
+                For you
+              </p>
+            </div>
+            <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-5">
+              Recovery and adjustment in this phase
+            </h2>
+            <ul className="space-y-4">
+              {config.parentRecovery.map((b) => (
+                <li key={b.label}>
+                  <p
+                    className="font-sans text-[11px] font-light tracking-wider uppercase mb-1"
+                    style={{ color: "hsl(var(--stage-recovery-deep))" }}
+                  >
+                    {b.label}
+                  </p>
+                  <p className="font-sans text-[14px] font-light text-foreground/85 leading-relaxed">{b.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>

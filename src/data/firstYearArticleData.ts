@@ -194,3 +194,56 @@ const rawFirstYearArticles: FirstYearArticle[] = [
 export function getFirstYearArticlesByTopic(topic: FirstYearArticleTopic) {
   return firstYearArticles.filter((article) => article.topic === topic);
 }
+
+// ─── Placeholder body injection ─────────────────────────────────────────
+function withFirstYearDefaults(
+  article: FirstYearArticle,
+  all: FirstYearArticle[]
+): FirstYearArticle {
+  const sibling = all.find(
+    (a) => a.topic === article.topic && a.slug !== article.slug
+  );
+  return {
+    ...article,
+    intro:
+      article.intro ??
+      `This piece on ${article.title.toLowerCase()} is being prepared. The outline below is a placeholder while the full guidance is written and reviewed.`,
+    sections: article.sections ?? [
+      {
+        heading: "What this will cover",
+        body: [
+          `A gentle, honest look at ${article.title.toLowerCase()} in the first year, without pressure or perfect-parent scripts.`,
+          "This section is a placeholder while the full article is being written.",
+        ],
+      },
+      {
+        heading: "What often helps",
+        body: [
+          "Small, low-pressure ideas you can try in the middle of real early-parent days.",
+        ],
+      },
+      {
+        heading: "When to ask for support",
+        body: [
+          "Signs it may be worth speaking to your midwife, health visitor or GP.",
+        ],
+      },
+    ],
+    keyTakeaways: article.keyTakeaways ?? [
+      "The first year rarely moves in straight lines.",
+      "Quiet, consistent care matters more than any single technique.",
+      "Ask for support early rather than waiting for a crisis point.",
+    ],
+    relatedSlugs:
+      article.relatedSlugs ?? (sibling ? [sibling.slug] : undefined),
+    lastUpdated:
+      article.lastUpdated ?? (article.medicallyReviewed ? "2026-07" : undefined),
+    reviewedBy:
+      article.reviewedBy ??
+      (article.medicallyReviewed ? "Jenny Joines" : undefined),
+  };
+}
+
+export const firstYearArticles: FirstYearArticle[] = rawFirstYearArticles.map(
+  (a) => withFirstYearDefaults(a, rawFirstYearArticles)
+);

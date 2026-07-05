@@ -194,3 +194,56 @@ const rawToddlerArticles: ToddlerArticle[] = [
 export function getToddlerArticlesByTopic(topic: ToddlerArticleTopic) {
   return toddlerArticles.filter((article) => article.topic === topic);
 }
+
+// ─── Placeholder body injection ─────────────────────────────────────────
+function withToddlerDefaults(
+  article: ToddlerArticle,
+  all: ToddlerArticle[]
+): ToddlerArticle {
+  const sibling = all.find(
+    (a) => a.topic === article.topic && a.slug !== article.slug
+  );
+  return {
+    ...article,
+    intro:
+      article.intro ??
+      `This piece on ${article.title.toLowerCase()} is being prepared. The outline below is a placeholder while the full guidance is written and reviewed.`,
+    sections: article.sections ?? [
+      {
+        heading: "What this will cover",
+        body: [
+          `A calm, practical look at ${article.title.toLowerCase()} in the toddler years, written for real days rather than perfect ones.`,
+          "This section is a placeholder while the full article is being written.",
+        ],
+      },
+      {
+        heading: "What often helps",
+        body: [
+          "Small, everyday shifts you can try without turning toddler life into a project.",
+        ],
+      },
+      {
+        heading: "When to seek support",
+        body: [
+          "Signs it may be worth a chat with your health visitor or GP.",
+        ],
+      },
+    ],
+    keyTakeaways: article.keyTakeaways ?? [
+      "Toddlers rarely move in tidy, linear ways.",
+      "Calm repetition tends to work better than sudden change.",
+      "Ask for support early rather than second-guessing yourself.",
+    ],
+    relatedSlugs:
+      article.relatedSlugs ?? (sibling ? [sibling.slug] : undefined),
+    lastUpdated:
+      article.lastUpdated ?? (article.medicallyReviewed ? "2026-07" : undefined),
+    reviewedBy:
+      article.reviewedBy ??
+      (article.medicallyReviewed ? "Jenny Joines" : undefined),
+  };
+}
+
+export const toddlerArticles: ToddlerArticle[] = rawToddlerArticles.map((a) =>
+  withToddlerDefaults(a, rawToddlerArticles)
+);

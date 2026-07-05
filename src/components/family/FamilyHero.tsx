@@ -122,32 +122,9 @@ const FamilyHero = () => {
               </div>
             </div>
 
-            {/* Media placeholder frame — buttercream + honey bloom */}
+            {/* Media — video carousel (falls back to abstract panel when no slides) */}
             <div className="relative">
-              <div
-                className="relative aspect-[5/6] rounded-[28px] border overflow-hidden"
-                style={{
-                  borderColor: "hsl(var(--stage-family-accent) / 0.28)",
-                  background:
-                    "linear-gradient(155deg, hsl(var(--stage-family) / 0.85) 0%, hsl(var(--stage-family-soft) / 0.85) 100%)",
-                  boxShadow:
-                    "0 40px 90px -48px rgba(70,50,20,0.4), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
-                }}
-                aria-hidden
-              >
-                <span
-                  className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full blur-3xl opacity-80"
-                  style={{ background: "hsl(var(--stage-family-accent) / 0.22)" }}
-                />
-                <span
-                  className="pointer-events-none absolute -bottom-28 -right-20 h-80 w-80 rounded-full blur-3xl opacity-70"
-                  style={{ background: "hsl(var(--stage-family-soft) / 0.7)" }}
-                />
-                <span
-                  className="pointer-events-none absolute inset-6 rounded-[22px] border"
-                  style={{ borderColor: "hsl(var(--stage-family-accent) / 0.14)" }}
-                />
-              </div>
+              <FamilyHeroCarousel slides={familyHeroSlides} variant="desktop" />
             </div>
           </div>
         </div>

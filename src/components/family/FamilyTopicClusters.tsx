@@ -143,7 +143,7 @@ const FamilyTopicClusters = () => {
             className="font-sans text-[15px] font-light leading-relaxed max-w-xl mx-auto"
             style={{ color: deepSoft }}
           >
-            Seven curated areas across family life — every side of the day-to-day, gently mapped.
+            Six curated areas across family life — every side of the day-to-day, gently mapped.
           </p>
         </div>
 

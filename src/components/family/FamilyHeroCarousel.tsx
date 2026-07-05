@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export type FamilyHeroSlide = {
   src?: string;
   alt: string;
+  objectPosition?: string;
 };
 
 interface FamilyHeroCarouselProps {

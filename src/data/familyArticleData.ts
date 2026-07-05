@@ -151,3 +151,53 @@ const rawFamilyArticles: FamilyArticle[] = [
 export function getFamilyArticlesByTopic(topic: FamilyArticleTopic) {
   return familyArticles.filter((article) => article.topic === topic);
 }
+
+// ─── Placeholder body injection ─────────────────────────────────────────
+function withFamilyDefaults(article: FamilyArticle, all: FamilyArticle[]): FamilyArticle {
+  const sibling = all.find(
+    (a) => a.topic === article.topic && a.slug !== article.slug
+  );
+  return {
+    ...article,
+    intro:
+      article.intro ??
+      `This piece on ${article.title.toLowerCase()} is being prepared. The outline below is a placeholder while the full guidance is written and reviewed.`,
+    sections: article.sections ?? [
+      {
+        heading: "What this will cover",
+        body: [
+          `A calm, practical look at ${article.title.toLowerCase()}, written for real family life rather than perfect conditions.`,
+          "This section is a placeholder while the full article is being written.",
+        ],
+      },
+      {
+        heading: "What often helps",
+        body: [
+          "Small, everyday ideas you can try without turning family life into a project.",
+        ],
+      },
+      {
+        heading: "When to seek support",
+        body: [
+          "Signs it may be worth speaking to your GP, health visitor or another trusted source.",
+        ],
+      },
+    ],
+    keyTakeaways: article.keyTakeaways ?? [
+      "You don't need to have this figured out perfectly.",
+      "Small, quiet changes tend to hold better than big overhauls.",
+      "Ask for support early rather than waiting until things feel heavy.",
+    ],
+    relatedSlugs:
+      article.relatedSlugs ?? (sibling ? [sibling.slug] : undefined),
+    lastUpdated:
+      article.lastUpdated ?? (article.medicallyReviewed ? "2026-07" : undefined),
+    reviewedBy:
+      article.reviewedBy ??
+      (article.medicallyReviewed ? "Jenny Joines" : undefined),
+  };
+}
+
+export const familyArticles: FamilyArticle[] = rawFamilyArticles.map((a) =>
+  withFamilyDefaults(a, rawFamilyArticles)
+);

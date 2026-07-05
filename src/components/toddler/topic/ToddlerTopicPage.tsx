@@ -13,6 +13,11 @@ import {
   ToddlerTopicConfig,
   TODDLER_TOPIC_INDEX,
 } from "@/data/toddlerTopicData";
+import {
+  getToddlerArticlesByTopic,
+  type ToddlerArticleTopic,
+} from "@/data/toddlerArticleData";
+import ToddlerArticleCard from "@/components/toddler/article/ToddlerArticleCard";
 
 interface Props {
   config: ToddlerTopicConfig;
@@ -321,6 +326,55 @@ const ToddlerTopicPage = ({ config }: Props) => {
             </p>
           </div>
         </section>
+
+        {/* ─── RELATED GUIDANCE (ARTICLES) ──────────────────────────── */}
+        {(() => {
+          const articles = getToddlerArticlesByTopic(
+            config.slug as ToddlerArticleTopic
+          );
+          return (
+            <section
+              className="relative py-20 md:py-24"
+              style={{
+                background:
+                  "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-toddler) / 0.24) 100%)",
+              }}
+            >
+              <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
+                <div className="mb-9 md:mb-11 flex flex-col items-start gap-3">
+                  <SectionLabel>Guidance</SectionLabel>
+                  <h2
+                    className="font-serif text-[1.75rem] md:text-[2rem] leading-tight"
+                    style={{ color: deep }}
+                  >
+                    Related guidance
+                  </h2>
+                  <p
+                    className="font-sans text-[14.5px] font-light leading-relaxed max-w-2xl"
+                    style={{ color: deepSoft }}
+                  >
+                    Helpful reads connected to this part of toddler life.
+                  </p>
+                </div>
+
+                {articles.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                    {articles.map((a) => (
+                      <ToddlerArticleCard key={a.slug} article={a} />
+                    ))}
+                  </div>
+                ) : (
+                  <p
+                    className="font-serif italic text-[15px] leading-[1.7] max-w-xl"
+                    style={{ color: deepSoft }}
+                  >
+                    Guidance articles for this topic are being prepared.
+                  </p>
+                )}
+              </div>
+            </section>
+          );
+        })()}
 
         {/* ─── COMMON QUESTIONS ─────────────────────────────────────── */}
         <section

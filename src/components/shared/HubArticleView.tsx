@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ChevronRight, Clock, Home, ShieldCheck } from "lucide-react";
+import {
+  ArrowLeft,
+  ChevronRight,
+  Clock,
+  Home,
+  ShieldCheck,
+  Sparkles,
+  BookOpen,
+} from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import type { ReactNode } from "react";
@@ -39,6 +47,9 @@ interface Props {
   relatedSlot?: ReactNode;
 }
 
+const sectionAnchorId = (i: number) => `section-${i + 1}`;
+const two = (n: number) => String(n).padStart(2, "0");
+
 const HubArticleView = ({
   article,
   tokens,
@@ -51,6 +62,7 @@ const HubArticleView = ({
 }: Props) => {
   const accent = `hsl(var(${tokens.accent}))`;
   const accentSoft = `hsl(var(${tokens.accent}) / 0.10)`;
+  const accentSofter = `hsl(var(${tokens.accent}) / 0.05)`;
   const accentBorder = `hsl(var(${tokens.accent}) / 0.22)`;
   const accentBorderStrong = `hsl(var(${tokens.accent}) / 0.32)`;
   const accentMid = `hsl(var(${tokens.accent}) / 0.22)`;
@@ -61,6 +73,13 @@ const HubArticleView = ({
   const deepMuted = `hsl(var(${tokens.deep}) / 0.55)`;
 
   const isDraft = article.status === "draft";
+  const sections = article.sections ?? [];
+  const hasSections = sections.length > 0;
+  const showInThisArticle = sections.length >= 2;
+  const summaryText = article.intro ?? article.description;
+  const hasSummary = Boolean(summaryText);
+  const takeaways = article.keyTakeaways ?? [];
+  const hasTakeaways = takeaways.length > 0;
 
   const SectionLabel = ({ children }: { children: ReactNode }) => (
     <div className="flex items-center gap-3">
@@ -79,9 +98,9 @@ const HubArticleView = ({
       <Navbar />
       <main className="overflow-hidden">
         {/* ─── HERO ────────────────────────────────────────────────── */}
-        <section className="relative pt-8 sm:pt-12 md:pt-16 pb-14 md:pb-20">
+        <section className="relative pt-8 sm:pt-12 md:pt-16 pb-14 md:pb-16">
           <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-[380px] md:h-[520px] -z-0"
+            className="pointer-events-none absolute inset-x-0 top-0 h-[380px] md:h-[540px] -z-0"
             style={{
               background: `linear-gradient(180deg, ${tintWash} 0%, ${softWash} 55%, transparent 100%)`,
             }}
@@ -144,7 +163,7 @@ const HubArticleView = ({
             </div>
 
             <h1
-              className="font-serif text-[2rem] sm:text-[2.4rem] md:text-[2.7rem] leading-[1.08] tracking-[-0.005em]"
+              className="font-serif text-[2rem] sm:text-[2.4rem] md:text-[2.8rem] leading-[1.06] tracking-[-0.005em]"
               style={{ color: deep }}
             >
               {article.title}
@@ -152,7 +171,7 @@ const HubArticleView = ({
 
             {article.intro && (
               <p
-                className="mt-6 font-serif italic text-[16.5px] md:text-[17px] leading-[1.7] max-w-[36rem]"
+                className="mt-6 font-serif italic text-[16.5px] md:text-[17.5px] leading-[1.7] max-w-[36rem]"
                 style={{ color: deepSoft }}
               >
                 {article.intro}
@@ -160,7 +179,10 @@ const HubArticleView = ({
             )}
 
             {/* Meta row */}
-            <div className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 font-sans text-[12.5px] font-light" style={{ color: deepMuted }}>
+            <div
+              className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 font-sans text-[12.5px] font-light"
+              style={{ color: deepMuted }}
+            >
               <span className="inline-flex items-center gap-1.5">
                 <Clock size={12} strokeWidth={1.8} aria-hidden />
                 {article.readTime}
@@ -174,8 +196,15 @@ const HubArticleView = ({
               {article.medicallyReviewed && article.reviewedBy && (
                 <>
                   <span aria-hidden>·</span>
-                  <span className="inline-flex items-center gap-1.5" style={{ color: deep }}>
-                    <ShieldCheck size={12} strokeWidth={1.9} style={{ color: accent }} />
+                  <span
+                    className="inline-flex items-center gap-1.5"
+                    style={{ color: deep }}
+                  >
+                    <ShieldCheck
+                      size={12}
+                      strokeWidth={1.9}
+                      style={{ color: accent }}
+                    />
                     Medically reviewed by {article.reviewedBy}
                   </span>
                 </>
@@ -199,37 +228,147 @@ const HubArticleView = ({
           </div>
         </section>
 
-        {/* ─── KEY TAKEAWAYS ─────────────────────────────────────── */}
-        {article.keyTakeaways && article.keyTakeaways.length > 0 && (
-          <section className="pb-14 md:pb-16">
+        {/* ─── AT A GLANCE + IN THIS ARTICLE ─────────────────────── */}
+        {(hasSummary || showInThisArticle) && (
+          <section className="pb-12 md:pb-16">
             <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
               <div
-                className="rounded-[22px] border p-7 md:p-9"
-                style={{
-                  borderColor: accentBorderStrong,
-                  background: `linear-gradient(160deg, hsl(var(${tokens.base}) / 0.35) 0%, hsl(var(${tokens.soft}) / 0.7) 100%)`,
-                  boxShadow:
-                    "0 20px 48px -32px rgba(60,50,40,0.28), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
-                }}
+                className={`grid gap-4 md:gap-5 ${
+                  hasSummary && showInThisArticle
+                    ? "grid-cols-1 md:grid-cols-2"
+                    : "grid-cols-1"
+                }`}
               >
-                <SectionLabel>Key takeaways</SectionLabel>
-                <ul className="mt-6 space-y-3.5">
-                  {article.keyTakeaways.map((t, i) => (
-                    <li key={i} className="flex items-start gap-3.5">
-                      <span
-                        className="mt-1.5 h-1.5 w-1.5 rounded-full shrink-0"
-                        style={{ background: accent }}
+                {hasSummary && (
+                  <div
+                    className="rounded-2xl border p-6 md:p-7"
+                    style={{
+                      borderColor: accentBorder,
+                      background: `linear-gradient(160deg, hsl(0 0% 100% / 0.9) 0%, hsl(var(${tokens.soft}) / 0.55) 100%)`,
+                      boxShadow:
+                        "0 14px 40px -30px rgba(60,50,40,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.75)",
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <Sparkles
+                        size={12}
+                        strokeWidth={1.8}
+                        style={{ color: accent }}
                         aria-hidden
                       />
                       <span
-                        className="font-sans text-[14.75px] font-light leading-[1.65]"
-                        style={{ color: deepSoft }}
+                        className="font-sans text-[10.5px] font-light tracking-[0.28em] uppercase"
+                        style={{ color: accent }}
                       >
-                        {t}
+                        At a glance
                       </span>
-                    </li>
-                  ))}
-                </ul>
+                    </div>
+                    <p
+                      className="mt-4 font-sans text-[14.5px] font-light leading-[1.7]"
+                      style={{ color: deepSoft }}
+                    >
+                      {summaryText}
+                    </p>
+                  </div>
+                )}
+
+                {showInThisArticle && (
+                  <div
+                    className="rounded-2xl border p-6 md:p-7"
+                    style={{
+                      borderColor: accentBorder,
+                      background: `linear-gradient(160deg, hsl(0 0% 100% / 0.9) 0%, hsl(var(${tokens.base}) / 0.45) 100%)`,
+                      boxShadow:
+                        "0 14px 40px -30px rgba(60,50,40,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.75)",
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <BookOpen
+                        size={12}
+                        strokeWidth={1.8}
+                        style={{ color: accent }}
+                        aria-hidden
+                      />
+                      <span
+                        className="font-sans text-[10.5px] font-light tracking-[0.28em] uppercase"
+                        style={{ color: accent }}
+                      >
+                        In this article
+                      </span>
+                    </div>
+                    <ol className="mt-4 space-y-2.5">
+                      {sections.map((s, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <span
+                            className="font-sans text-[11px] font-light tracking-[0.14em] pt-1 shrink-0 w-6"
+                            style={{ color: accent }}
+                          >
+                            {two(i + 1)}
+                          </span>
+                          <a
+                            href={`#${sectionAnchorId(i)}`}
+                            className="font-sans text-[13.75px] font-light leading-[1.55] hover:underline underline-offset-4 transition-colors"
+                            style={{ color: deep }}
+                          >
+                            {s.heading}
+                          </a>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ─── KEY TAKEAWAYS ─────────────────────────────────────── */}
+        {hasTakeaways && (
+          <section className="pb-14 md:pb-16">
+            <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
+              <div className="mb-6 md:mb-8 flex flex-col gap-3">
+                <SectionLabel>Key takeaways</SectionLabel>
+                <h2
+                  className="font-serif text-[1.5rem] md:text-[1.75rem] leading-tight"
+                  style={{ color: deep }}
+                >
+                  The essentials, at a glance
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 md:gap-4">
+                {takeaways.map((t, i) => (
+                  <div
+                    key={i}
+                    className="rounded-xl border p-5 flex items-start gap-3.5"
+                    style={{
+                      borderColor: accentBorder,
+                      background: `linear-gradient(150deg, hsl(0 0% 100% / 0.9) 0%, hsl(var(${tokens.soft}) / 0.55) 100%)`,
+                      boxShadow:
+                        "0 10px 28px -22px rgba(60,50,40,0.2), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+                    }}
+                  >
+                    <span
+                      className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+                      style={{
+                        background: accentSoft,
+                        border: `1px solid ${accentBorder}`,
+                      }}
+                      aria-hidden
+                    >
+                      <Sparkles
+                        size={11}
+                        strokeWidth={1.9}
+                        style={{ color: accent }}
+                      />
+                    </span>
+                    <span
+                      className="font-sans text-[14.25px] font-light leading-[1.65]"
+                      style={{ color: deepSoft }}
+                    >
+                      {t}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
@@ -238,28 +377,41 @@ const HubArticleView = ({
         {/* ─── BODY ──────────────────────────────────────────────── */}
         <section className="pb-16 md:pb-20">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-            {article.sections && article.sections.length > 0 ? (
-              <div className="space-y-10 md:space-y-12">
-                {article.sections.map((s, i) => (
-                  <div key={i}>
+            {hasSections ? (
+              <div className="space-y-14 md:space-y-16">
+                {sections.map((s, i) => (
+                  <article key={i} id={sectionAnchorId(i)} className="scroll-mt-24">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span
+                        className="font-sans text-[11px] font-light tracking-[0.28em]"
+                        style={{ color: accent }}
+                      >
+                        {two(i + 1)}
+                      </span>
+                      <span
+                        className="h-px flex-1 max-w-[64px]"
+                        style={{ background: accentMid }}
+                        aria-hidden
+                      />
+                    </div>
                     <h2
-                      className="font-serif text-[1.55rem] md:text-[1.75rem] leading-tight"
+                      className="font-serif text-[1.6rem] md:text-[1.9rem] leading-[1.15] tracking-[-0.005em]"
                       style={{ color: deep }}
                     >
                       {s.heading}
                     </h2>
-                    <div className="mt-4 space-y-4">
+                    <div className="mt-5 space-y-5">
                       {s.body.map((p, j) => (
                         <p
                           key={j}
-                          className="font-sans text-[15.5px] font-light leading-[1.75]"
+                          className="font-sans text-[15.75px] font-light leading-[1.8]"
                           style={{ color: deepSoft }}
                         >
                           {p}
                         </p>
                       ))}
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             ) : (
@@ -273,10 +425,10 @@ const HubArticleView = ({
 
             {article.medicallyReviewed && article.reviewedBy && (
               <div
-                className="mt-12 rounded-2xl border px-6 py-5 flex items-start gap-3"
+                className="mt-14 rounded-2xl border px-6 py-5 flex items-start gap-3"
                 style={{
                   borderColor: accentBorder,
-                  backgroundColor: accentSoft,
+                  backgroundColor: accentSofter,
                 }}
               >
                 <ShieldCheck
@@ -309,9 +461,9 @@ const HubArticleView = ({
           >
             <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
               <div className="mb-9 md:mb-11 flex flex-col items-start gap-3">
-                <SectionLabel>Guidance</SectionLabel>
+                <SectionLabel>Continue reading</SectionLabel>
                 <h2
-                  className="font-serif text-[1.6rem] md:text-[1.85rem] leading-tight"
+                  className="font-serif text-[1.6rem] md:text-[1.9rem] leading-tight"
                   style={{ color: deep }}
                 >
                   Related guidance
@@ -323,10 +475,10 @@ const HubArticleView = ({
         )}
 
         {/* ─── BACK TO TOPIC CTA ─────────────────────────────────── */}
-        <section className="pb-24 md:pb-32">
+        <section className="pb-24 md:pb-32 pt-14 md:pt-16">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
             <div
-              className="relative rounded-[24px] border px-7 py-9 md:px-10 md:py-10 text-center"
+              className="relative rounded-[24px] border px-7 py-10 md:px-10 md:py-12 text-center"
               style={{
                 borderColor: accentBorderStrong,
                 background: `linear-gradient(170deg, hsl(var(--parchment)) 0%, hsl(var(${tokens.base}) / 0.5) 100%)`,
@@ -334,8 +486,9 @@ const HubArticleView = ({
                   "0 24px 56px -36px rgba(60,50,40,0.3), inset 0 1px 0 hsl(0 0% 100% / 0.72)",
               }}
             >
+              <SectionLabel>{hubLabel}</SectionLabel>
               <p
-                className="font-serif italic text-[15px] mb-6 max-w-md mx-auto leading-relaxed"
+                className="mt-4 font-serif italic text-[15.5px] mb-7 max-w-md mx-auto leading-relaxed"
                 style={{ color: deepSoft }}
               >
                 Back to {topicLabel.toLowerCase()} when you're ready.
@@ -349,7 +502,11 @@ const HubArticleView = ({
                   color: deep,
                 }}
               >
-                <ArrowLeft size={14} strokeWidth={1.8} style={{ color: accent }} />
+                <ArrowLeft
+                  size={14}
+                  strokeWidth={1.8}
+                  style={{ color: accent }}
+                />
                 Return to {topicLabel}
               </Link>
             </div>

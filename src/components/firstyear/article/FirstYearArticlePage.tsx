@@ -18,7 +18,7 @@ const FirstYearArticlePage = ({ article, tone }: Props) => {
   const topicMeta = FIRST_YEAR_TOPIC_INDEX[article.topic as FirstYearTopicSlug];
   const related = (article.relatedSlugs ?? [])
     .map((slug) => firstYearArticles.find((a) => a.slug === slug))
-    .filter((a): a is FirstYearArticle => !!a);
+    .filter((a): a is FirstYearArticle => !!a && a.status === "ready");
 
   const base = tone === "recovery" ? "--stage-recovery" : "--stage-firstyear";
 

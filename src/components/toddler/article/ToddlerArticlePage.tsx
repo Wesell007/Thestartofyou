@@ -17,7 +17,7 @@ const ToddlerArticlePage = ({ article }: Props) => {
   const topicMeta = TODDLER_TOPIC_INDEX[article.topic as ToddlerTopicSlug];
   const related = (article.relatedSlugs ?? [])
     .map((slug) => toddlerArticles.find((a) => a.slug === slug))
-    .filter((a): a is ToddlerArticle => !!a);
+    .filter((a): a is ToddlerArticle => !!a && a.status === "ready");
 
   return (
     <HubArticleView

@@ -14,7 +14,7 @@ const FamilyArticlePage = ({ article }: Props) => {
   const topicMeta = FAMILY_TOPIC_INDEX[article.topic as FamilyTopicSlug];
   const related = (article.relatedSlugs ?? [])
     .map((slug) => familyArticles.find((a) => a.slug === slug))
-    .filter((a): a is FamilyArticle => !!a);
+    .filter((a): a is FamilyArticle => !!a && a.status === "ready");
 
   return (
     <HubArticleView

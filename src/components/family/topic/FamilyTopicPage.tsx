@@ -36,6 +36,50 @@ const FamilyTopicPage = ({ config }: Props) => {
     .slice(0, 3)
     .map((s) => ({ slug: s, ...FAMILY_TOPIC_INDEX[s] }));
 
+  // ─── Article surfacing ─────────────────────────────────────────
+  const readyArticles = getFamilyArticlesByTopic(
+    config.slug as FamilyArticleTopic
+  ).filter((a) => a.status === "ready");
+  const readyBySlug = new Map(readyArticles.map((a) => [a.slug, a]));
+
+  const startHereSlugs = (config.startHere ?? [])
+    .filter((s) => readyBySlug.has(s))
+    .slice(0, 3);
+  const startHereArticles = startHereSlugs
+    .map((s) => readyBySlug.get(s)!)
+    .filter(Boolean);
+
+  const startHereSet = new Set(startHereSlugs);
+
+  // Grouped guidance: only articles not already surfaced in Start Here.
+  const articleGroups = (config.articleGroups ?? [])
+    .map((g) => ({
+      label: g.label,
+      description: g.description,
+      articles: g.slugs
+        .filter((s) => !startHereSet.has(s) && readyBySlug.has(s))
+        .map((s) => readyBySlug.get(s)!),
+    }))
+    .filter((g) => g.articles.length > 0);
+
+  // Fallback: any remaining ready articles not in Start Here and not in an
+  // explicit group. Rendered as a single unlabelled group so nothing is lost.
+  const groupedSlugSet = new Set(
+    (config.articleGroups ?? []).flatMap((g) => g.slugs)
+  );
+  const ungrouped = readyArticles.filter(
+    (a) => !startHereSet.has(a.slug) && !groupedSlugSet.has(a.slug)
+  );
+  if (ungrouped.length > 0) {
+    articleGroups.push({
+      label: "More on this topic",
+      description: undefined,
+      articles: ungrouped,
+    });
+  }
+
+  const hasGuidance = articleGroups.length > 0;
+
   const SectionLabel = ({ children }: { children: React.ReactNode }) => (
     <div className="flex items-center gap-3">
       <span className="h-px w-8" style={{ background: accentMid }} aria-hidden />

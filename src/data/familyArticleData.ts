@@ -122,8 +122,82 @@ const rawFamilyArticles: FamilyArticle[] = [
     title: "Setting boundaries with grandparents",
     description:
       "Warm, clear ways to hold your parenting choices while keeping close family relationships intact.",
-    readTime: "5 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Setting boundaries with grandparents",
+    seoDescription:
+      "A calm, respectful guide to setting family boundaries with grandparents in a way that protects your child, your rhythm and the wider relationship.",
+    lastUpdated: "July 2026",
+    intro:
+      "Grandparents are often one of the great gifts of family life. They also arrive with their own memories of parenting, their own instincts and their own ideas about how things should be done. This piece is about holding your own parenting choices with clarity and kindness, so the relationship stays warm and your family rhythm stays steady.",
+    sections: [
+      {
+        heading: "Why grandparent boundaries can feel sensitive",
+        body: [
+          "Boundaries with grandparents often touch two things at once. The practical question of how you want family life to run, and the emotional history of your own upbringing. That can make even small conversations feel weighted.",
+          "It helps to remember that most grandparents want to be involved and are trying their best from where they stand. A boundary is not a judgement of them or how they parented. It is simply information about how your family works now.",
+        ],
+      },
+      {
+        heading: "Start with what matters most",
+        body: [
+          "You do not need a long list of rules. Most families find one or two things that genuinely matter to them, and everything else can flex.",
+          "It might be nap times being protected, or sweets before dinner, or a certain way of saying goodbye. Naming what matters to you first, quietly and to yourself, makes it easier to be clear later without turning every visit into a negotiation.",
+        ],
+      },
+      {
+        heading: "Be clear without making it a battle",
+        body: [
+          "Clarity and warmth can sit in the same sentence. \"We're keeping screens off before nursery, so it's easier if the tablet stays away in the morning,\" tends to land better than a long explanation or a reluctant hint.",
+          "Short, kind and specific usually goes further than firm or apologetic. You are giving useful information, not asking permission.",
+        ],
+      },
+      {
+        heading: "Keep the focus on your child and family rhythm",
+        body: [
+          "Framing a boundary around your child, rather than around the grandparent, often takes the personal edge out of it. \"She sleeps better if bath time stays at the same time,\" is easier to hear than \"we don't like it when you keep her up.\"",
+          "This is not a trick. It is genuinely what most boundaries are about. Your family has a rhythm, and small consistencies help everyone, including visiting grandparents, know where they fit.",
+        ],
+      },
+      {
+        heading: "What to do when boundaries are ignored",
+        body: [
+          "Sometimes a boundary needs to be said more than once. That is normal, not a sign the relationship is broken. Old habits and different generations of parenting can take a little time to shift.",
+          "If something keeps happening, try naming it calmly and directly, ideally without an audience. Repeat the boundary, explain briefly why it matters, and leave space for them to adjust. Consistency from you is usually what makes the change stick.",
+        ],
+      },
+      {
+        heading: "When distance or extra support may be needed",
+        body: [
+          "In most families, boundaries settle over time and the relationship carries on. Occasionally, though, a dynamic stays hard even after honest conversations, and it starts to weigh on you or your child.",
+          "If that happens, it is fair to take a little more space, shorten visits, or reshape how contact looks for a while. Family relationships can change shape without ending.",
+          "If a relationship ever feels unsafe, coercive or harmful to you or your child, please know that support from a trusted professional, such as your GP, health visitor or a family counsellor, is available.",
+        ],
+      },
+      {
+        heading: "Practical phrases you can adapt",
+        body: [
+          "\"We're trying to keep things calm before bed, so we're going to head up now.\"",
+          "\"Thanks for offering, we're doing it this way for now and it's really helping.\"",
+          "\"He's not eating sweets before dinner at the moment. There's fruit in the bowl if he's hungry.\"",
+          "\"I know it's different to how you did it. This is what's working for us right now.\"",
+          "Small, warm phrases like these can be repeated as often as needed, without heat and without apology.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Most grandparents want to be involved, and a boundary is information, not a judgement.",
+      "Focus on one or two things that genuinely matter, and let the rest flex.",
+      "Short, warm, specific language usually lands better than long explanations.",
+      "Framing boundaries around your child and family rhythm takes the personal edge out.",
+      "Consistency from you is often what makes a boundary settle over time.",
+      "If a relationship ever feels unsafe or coercive, support from a trusted professional is available.",
+    ],
+    relatedSlugs: [
+      "sharing-the-mental-load",
+      "building-family-routines",
+      "helping-your-child-adjust-to-a-new-sibling",
+    ],
   },
   {
     slug: "sharing-the-mental-load",
@@ -325,9 +399,81 @@ const rawFamilyArticles: FamilyArticle[] = [
     topic: "travel-days-out",
     title: "Travelling with young children",
     description:
-      "Gentle preparation for flights, trains and longer trips, from packing to keeping little ones settled.",
+      "Practical, warm ways to make journeys with young children calmer, without pretending travel is always easy.",
     readTime: "6 min read",
-    status: "draft",
+    status: "ready",
+    seoTitle: "Travelling with young children",
+    seoDescription:
+      "A realistic guide to travelling with young children, covering planning, packing, expectations and what to do when a journey goes off plan.",
+    lastUpdated: "July 2026",
+    intro:
+      "Travelling with young children is rarely as relaxed as the photos suggest. Even short trips can involve more logistics than the destination itself. This piece is about making journeys feel a little steadier, without needing everything to run perfectly, and without pretending that travel with small children is ever quite the same as travel without them.",
+    sections: [
+      {
+        heading: "Why travelling with children can feel like a lot",
+        body: [
+          "Travel takes children away from the routines that usually hold their day. New places, new food, new sounds, and often less sleep than usual. It is a lot to take in, even when the trip is a happy one.",
+          "For parents, the load is different but real. You are carrying the plan, the bags, the snacks, the emotional weather and often a small human at the same time. Naming that this is genuinely hard, not something you should be finding easy, tends to help before anything practical does.",
+        ],
+      },
+      {
+        heading: "Plan around the hardest moments",
+        body: [
+          "Rather than planning around the ideal version of the trip, it can help to plan around the moments you already know will be hard. Nap times, hunger, the last hour of a long journey, arriving somewhere new.",
+          "If you can, timing departures around sleep, keeping food easy to reach, and building in a soft landing at the other end can take a lot of pressure off the middle of the journey.",
+        ],
+      },
+      {
+        heading: "Pack for needs, not every possible scenario",
+        body: [
+          "It is tempting to pack for every possible thing that could happen. In practice, an overstuffed bag is often harder to move through a station or an airport than it is helpful when you arrive.",
+          "A useful test is to think about the next few hours, not the whole trip. Nappies, snacks, water, a change of clothes, one comfort item, one quiet activity. Most other things can be sorted at the destination.",
+        ],
+      },
+      {
+        heading: "Keep expectations flexible",
+        body: [
+          "Young children rarely travel in a straight line. A journey that looked simple on paper can shift shape once you are actually in it.",
+          "Holding the plan lightly tends to help. If a train is late, if a nap happens in the wrong place, if a meltdown lands in the middle of an airport lounge, the trip is not ruined. It is just travelling with young children.",
+        ],
+      },
+      {
+        heading: "Build in pauses where you can",
+        body: [
+          "Short pauses often do more than one long break. A few minutes off the train, a walk around the terminal, a stop at a service station where everyone can move and eat properly.",
+          "Where possible, aim for a slower start and a slower end. Arriving with time to spare at one end, and time to settle at the other, softens the parts of the day that usually feel hardest.",
+        ],
+      },
+      {
+        heading: "What to do when the journey goes off plan",
+        body: [
+          "At some point, a journey will go off plan. A delay, an illness, a lost comforter, a tantrum with a big audience. In the moment, the most useful thing is often to lower the bar of what counts as a success.",
+          "Getting everyone somewhere safe, warm and fed is enough. The rest of the day does not need to be salvaged. Children usually settle faster than the adults expect, especially once they feel that you are steady.",
+        ],
+      },
+      {
+        heading: "Practical ideas before you leave",
+        body: [
+          "Do the boring admin the day before, not on the morning of travel. Passports, tickets, chargers, car seat, buggy.",
+          "Prepare a small \"first-hour\" bag with snacks, water, wipes and one quiet activity, so you are not digging through a suitcase in the first ten minutes.",
+          "Talk your child through what will happen in simple terms. Not a full itinerary, just the shape. We will get in the car, then a train, then Grandma's house.",
+          "Give yourself permission for the trip to be imperfect. That is often when the good bits show up.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Travel disrupts routines, and it is normal for both children and parents to feel it.",
+      "Planning around the hardest moments takes more pressure off than planning for the ideal ones.",
+      "Packing for the next few hours usually beats packing for every possibility.",
+      "Holding the plan lightly makes off-plan moments feel less like failure.",
+      "Small pauses often carry a journey more than one long break.",
+      "Getting everyone somewhere safe, warm and fed is a good enough day.",
+    ],
+    relatedSlugs: [
+      "making-car-journeys-calmer",
+      "building-family-routines",
+      "screen-time-as-a-family",
+    ],
   },
   {
     slug: "making-car-journeys-calmer",
@@ -335,8 +481,81 @@ const rawFamilyArticles: FamilyArticle[] = [
     title: "Making car journeys calmer",
     description:
       "Small comforts, timings and distractions that make everyday car journeys feel less fraught.",
-    readTime: "4 min read",
-    status: "draft",
+    readTime: "5 min read",
+    status: "ready",
+    seoTitle: "Making car journeys calmer",
+    seoDescription:
+      "A grounded guide to calmer car journeys with young children, covering preparation, comfort, snacks, breaks and realistic expectations.",
+    lastUpdated: "July 2026",
+    intro:
+      "Car journeys with young children can be some of the more testing parts of family life, even when the trip itself is short. Confined space, no way to reach each other easily, and a small person whose mood can shift quickly. This piece is about small, practical ways to make everyday car journeys feel a little calmer, without needing to overhaul how you travel.",
+    sections: [
+      {
+        heading: "Why car journeys can be hard for children",
+        body: [
+          "Cars ask a lot of young children. They cannot move much, they cannot see as much as we can, and they often cannot easily reach the people they most want to be near.",
+          "Add tiredness, hunger, or a change in routine and even a short journey can feel long. It is not a sign that anything is wrong with your child or your parenting. It is simply a hard environment for a small nervous system.",
+        ],
+      },
+      {
+        heading: "Prepare the car before everyone is tired",
+        body: [
+          "The calmest journeys usually start before anyone gets in the car. A quick check that snacks are within reach, water is topped up, a favourite soft toy is where it should be, and any music or story is ready to go.",
+          "Two minutes of preparation while everyone is still in the house tends to save ten minutes of stress once you are already on the road.",
+        ],
+      },
+      {
+        heading: "Think in stages, not one long journey",
+        body: [
+          "For young children, the idea of a two-hour drive is meaningless. It helps to break the journey into smaller shapes, even in your own head.",
+          "First the drive to the motorway, then the stretch to the service station, then the last bit to where we are going. Naming small milestones out loud can turn a long journey into a series of shorter, more manageable ones.",
+        ],
+      },
+      {
+        heading: "Snacks, comfort and simple activities",
+        body: [
+          "Snacks that are easy to hold, not too messy and not too sugary tend to travel best. Bits of fruit, crackers, oatcakes, small sandwiches.",
+          "A familiar comfort item, a small blanket, or a favourite soft toy can quietly settle a child more than any activity. Alongside that, one simple thing to look at or listen to, a story, a playlist, a window book, is usually enough. You do not need to entertain the whole journey.",
+        ],
+      },
+      {
+        heading: "When your child gets upset in the car",
+        body: [
+          "Sometimes a journey turns and your child becomes properly upset. It is one of the harder moments of family life, because you cannot easily reach them and you may not be able to stop straight away.",
+          "A calm, steady voice helps more than trying to fix it in the moment. Naming what you can, \"I know, this bit feels long, we're going to stop soon,\" often lands even when they cannot answer.",
+          "Where it is safe and possible, pulling in for a few minutes to reset can shift the whole rest of the journey. It is not a failure of the trip. It is a small, kind pause.",
+        ],
+      },
+      {
+        heading: "Helping yourself stay calm too",
+        body: [
+          "Driving while a child is unsettled is genuinely hard. Your own nervous system is doing a lot of work at the same time as theirs.",
+          "Where you can, keep your own basics steady. Water, a snack you like, a playlist that does not add to the noise. Small kindnesses to yourself in the driver's seat quietly carry the whole family.",
+        ],
+      },
+      {
+        heading: "Practical ideas for the next journey",
+        body: [
+          "Pack a small \"car bag\" that lives near the door, with snacks, wipes, a spare top and one quiet activity, so it is one less thing to remember.",
+          "Time journeys around naps or after meals where possible, rather than into hunger or overtired stretches.",
+          "Talk your child through the shape of the trip in simple terms before you set off.",
+          "Let the journey be quieter than you might think it needs to be. Music low, conversation gentle, plenty of window time.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Cars are a hard environment for young children, and hard journeys are not a sign of a problem.",
+      "A little preparation before anyone gets in the car saves a lot of stress on the road.",
+      "Breaking a long drive into smaller stages helps children and adults alike.",
+      "One comfort item and one simple activity usually beats a bag full of options.",
+      "A calm voice and a safe short pause can reset an unsettled journey.",
+      "Looking after yourself in the driver's seat quietly steadies everyone else.",
+    ],
+    relatedSlugs: [
+      "travelling-with-young-children",
+      "building-family-routines",
+      "screen-time-as-a-family",
+    ],
   },
 
   // Play and connection
@@ -427,7 +646,79 @@ const rawFamilyArticles: FamilyArticle[] = [
     description:
       "A calm, non-judgemental way to think about screens, boundaries and shared time together.",
     readTime: "5 min read",
-    status: "draft",
+    status: "ready",
+    seoTitle: "Screen time as a family",
+    seoDescription:
+      "A balanced, non-judgemental guide to family screen time, focused on connection, shared rhythm and simple boundaries rather than fear.",
+    lastUpdated: "July 2026",
+    intro:
+      "Screens are woven through most family lives now, and conversations about them often carry more guilt than they need to. This piece is about looking at screen time honestly, keeping some of it shared, and creating simple boundaries your family can actually stick to, without turning screens into the villain of your week.",
+    sections: [
+      {
+        heading: "Why screen time can feel so loaded",
+        body: [
+          "Few parenting topics carry as much quiet worry as screens. There is a constant hum of advice, warnings and comparison, and it can be hard to tell what is helpful and what is just noise.",
+          "Most families are doing a version of the same thing, using screens in the moments where they help, and quietly wishing there was slightly less of it. Naming that honestly, without judgement, is a good place to start.",
+        ],
+      },
+      {
+        heading: "Start with how screens are actually used",
+        body: [
+          "Before changing anything, it can help to notice how screens already fit into your week. Not in a way that makes you feel bad, just clearly. Which moments genuinely help? Which ones creep in out of habit?",
+          "That kind of gentle noticing is usually more useful than any hard rule. Once you can see the pattern, small changes become easier to choose.",
+        ],
+      },
+      {
+        heading: "Shared screen time can still be connection",
+        body: [
+          "Not all screen time is the same. Watching something together on a sofa, laughing at the same thing, or looking at family photos on a phone is a very different experience to a child scrolling alone.",
+          "Shared screens can be part of connection, not the opposite of it. Talking about what you are watching, pausing to ask a question, or choosing something together turns passive time into something more relational.",
+        ],
+      },
+      {
+        heading: "Create simple boundaries that your family can repeat",
+        body: [
+          "Boundaries around screens tend to hold better when they are simple and repeatable rather than clever or complicated. \"No screens at the table,\" or \"nothing on before nursery,\" or \"one show after tea,\" are the kinds of rules a family can actually live with.",
+          "The point is not to be strict for the sake of it. It is to remove the daily negotiation, so screens are one less thing to argue about.",
+        ],
+      },
+      {
+        heading: "Make space for screen-free moments without making screens the enemy",
+        body: [
+          "It helps most children if some parts of the day are quietly screen-free. Meals, the first part of the morning, the last part of the evening, or a particular weekend walk.",
+          "Framing these as calm family moments rather than a punishment tends to land better. \"This is our slow bit of the day,\" carries more warmth than \"put that down now.\"",
+        ],
+      },
+      {
+        heading: "What to do when screen time becomes a battle",
+        body: [
+          "Sometimes screens tip into being a flashpoint. Every ending is a fight, every request feels loaded, and the mood in the house shifts every time a device appears.",
+          "When that happens, it is worth stepping back from the specific arguments and looking at the pattern. Is the timing wrong, is your child tired or hungry, is there simply too much on offer? Small changes to the shape of the day often ease the battles more than tighter rules do.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try this week",
+        body: [
+          "Pick one screen-free anchor in the day, meals, the walk to nursery, or the first ten minutes of the morning, and keep it consistent.",
+          "Choose one shared screen moment on purpose, a show or short film together, so screens are not only a solo activity.",
+          "Warn your child before a screen ends, so the ending is less of a shock. A two-minute heads-up usually helps more than a sudden switch off.",
+          "Notice your own screen use in front of them, gently and without guilt. Small shifts in the adults often quietly change the whole family's rhythm.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Most families feel the same quiet worry about screens, and that alone is not a sign of a problem.",
+      "Noticing how screens already fit into your week is more useful than any hard rule.",
+      "Shared screen time can be genuine connection, not the opposite of it.",
+      "Simple, repeatable boundaries hold better than complicated ones.",
+      "A calm framing works better than treating screens as the enemy.",
+      "Small shifts in your own screen use often carry the family further than rules alone.",
+    ],
+    relatedSlugs: [
+      "building-family-traditions",
+      "building-family-routines",
+      "sharing-the-mental-load",
+    ],
   },
 ];
 

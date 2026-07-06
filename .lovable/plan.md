@@ -1,58 +1,59 @@
-## Phase 3.2 — Pregnancy medical sources batch 2
 
-Add ≥3 verified, structured `ArticleSource` entries to the next 10 Pregnancy medical/safety articles, using only the existing `ArticleSource` type and `ArticleSources.tsx` renderer shipped in Phase 3.1. No component changes, no body rewrites, no topic data touched.
+# Phase 3.3 — Pregnancy Medical Sources Batch 3
 
-### Only file edited
+## Scope
+Add ≥3 verified structured `ArticleSource` entries to the next 10 existing Pregnancy medical/safety articles in `src/data/articleData.ts`. No other files change unless a bug is found in `ArticleSources.tsx`.
+
+## Only file edited
 - `src/data/articleData.ts`
 
-### Field-order rule (per user)
-For each article object:
-- Replace the existing `sources: [...]` block **in place**, keeping the same position among sibling fields.
-- If `reviewedBy` is missing, insert it in a natural place (immediately after `lastUpdated` if present, otherwise directly above `sources`). Do not reorder any other field.
-- Do not touch any other field on the article object.
+## Field-order rule (unchanged from Batch 2)
+For each target article object:
+- Replace the existing `sources: [...]` block **in place**, keeping its position among sibling fields.
+- If `reviewedBy` is missing, insert it immediately after `lastUpdated` (or directly above `sources` if no `lastUpdated`). Never overwrite an existing value.
+- Do not reorder or touch any other field.
 
-### Approach per article
-For each of the 10 slugs:
-1. Locate the article's current `sources` array (each already exists as a string array).
-2. Replace it in place with a structured `ArticleSource[]` of ≥3 verified entries from the approved publisher list.
-3. Ensure `reviewedBy: "Jenny Joines"` is present; add only if missing, positioned per the field-order rule above.
+## Target articles (existing slugs only)
+1. `20-week-anomaly-scan` — NHS, GOV.UK screening, Tommy's
+2. `dating-scan` — NHS, GOV.UK screening, Tommy's
+3. `combined-screening-test` — NHS, GOV.UK screening, Tommy's / RCOG if verified
+4. `glucose-tolerance-test` — NHS, NICE (NG3 / CKS), Tommy's, Diabetes UK if verified
+5. `anti-d-injection-in-pregnancy` — NHS, RCOG, Tommy's
+6. `growth-scans-in-pregnancy` — NHS, Tommy's, RCOG (Green-top 31 if verified) / NHS Saving Babies' Lives
+7. `low-lying-placenta-in-pregnancy` — NHS, RCOG (Green-top 27a if verified), Tommy's
+8. `anterior-placenta` — NHS, Tommy's, RCOG if verified
+9. `breech-baby` — NHS, RCOG (Green-top 20a/b if verified), Tommy's
+10. `external-cephalic-version` — NHS, RCOG (Green-top 20a if verified), Tommy's
 
-Nothing else in the article object changes.
+## URL verification protocol
+- Verify each URL live on the official publisher domain before writing.
+- Capture visible "Last reviewed" / "Published" year where available (populate `year`).
+- Never invent URLs; never guess RCOG Green-top numbers. If a Green-top can't be confirmed, substitute a verified NHS/Tommy's/NICE equivalent.
+- Allowed domains: `nhs.uk`, `nice.org.uk`, `cks.nice.org.uk`, `bnf.nice.org.uk`, `rcog.org.uk`, `tommys.org`, `gov.uk`, `medicinesinpregnancy.org` (bumps), `gbss.org.uk`, plus other high-trust UK medical orgs only if clearly relevant.
+- If <3 verified sources found, write only what is verified and flag the article in the return summary.
 
-### URL verification protocol
-Before writing any URL:
-- Query via `websearch--web_search` restricted with `site:` to the official publisher domain (`nhs.uk`, `nice.org.uk`, `cks.nice.org.uk`, `bnf.nice.org.uk`, `rcog.org.uk`, `tommys.org`, `gov.uk`, `medicinesinpregnancy.org`, `gbss.org.uk`, plus `rcpsych.ac.uk` / `arc-uk.org` / `pandasfoundation.org.uk` only where the article's guidance explicitly allows).
-- Accept only URLs that resolve on the intended official domain and cover the intended topic. Capture `year` from a visible "Last reviewed" / "Published" date where present.
-- Never invent slugs. Never guess RCOG Green-top numbers.
-- If a slot cannot be verified, substitute another verified entry from the allowed list. If ≥3 verified UK-credible sources cannot be assembled for a given article, write only what is verified and flag the article in the return summary — do not fabricate.
+## Guardrails (do NOT touch)
+- `ArticleSources.tsx` (only if bug), topic data files, `.lovable/plan.md`, routes, templates, calculators, SEO files, product page, About page, AI logic, saved journey, design tokens.
+- No body rewrites, no new articles, no drafts published, no redirects, no noindex, no canonical changes.
 
-### Articles in batch 2 and target publisher mix
+## Medical review
+Ensure `reviewedBy: "Jenny Joines"` is present on each article (add only if missing).
 
-- `antibiotics-in-pregnancy` — NHS, bumps, BNF/NICE
-- `antacids-in-pregnancy` — NHS, bumps, BNF/NICE
-- `laxatives-in-pregnancy` — NHS, bumps, BNF/NICE
-- `hay-fever-in-pregnancy` — NHS, bumps, BNF/NICE
-- `cold-and-flu-in-pregnancy` — NHS, bumps, UKHSA / NHS flu-vaccine guidance
-- `vaccinations-in-pregnancy` — NHS, UKHSA (gov.uk Green Book / vaccination schedule), RCOG or Tommy's
-- `anxiety-in-pregnancy` — NHS, Tommy's, RCPsych (or another verified UK perinatal mental health source)
-- `tests-and-scans-in-pregnancy` — NHS, Tommy's, RCOG or NICE
-- `what-if-a-scan-shows-something-unexpected` — NHS, Tommy's, RCOG, ARC (only if verified)
-- `nipt-in-pregnancy` — NHS, RCOG, UK NSC / gov.uk or Tommy's
+## Verification
+- Run `tsgo`.
+- Playwright-load `/articles/20-week-anomaly-scan`, `/articles/glucose-tolerance-test`, `/articles/anti-d-injection-in-pregnancy`, `/articles/breech-baby` and confirm:
+  - Sources and references heading present
+  - ≥3 structured entries rendered as external anchors
+  - `target="_blank"` and `rel="noopener noreferrer nofollow"`
+  - Medically reviewed line present
 
-Final URL list produced during implementation, after verification.
-
-### Explicit no-touch list
-`ArticleSources.tsx` (unless a bug is found), all topic data files, all other article data files, `.lovable/plan.md`, routes, templates, calculators, SEO, product page, About page, AI logic, saved journey, design tokens. No new articles, no redirects, no noindex, no body rewrites, no changes to unrelated string `sources` arrays elsewhere in `articleData.ts`, no field reordering beyond the single insert-if-missing case for `reviewedBy`.
-
-### Verification
-- `tsgo`.
-- Playwright: load `/articles/antibiotics-in-pregnancy`, `/articles/vaccinations-in-pregnancy`, `/articles/anxiety-in-pregnancy`, `/articles/nipt-in-pregnancy`. Screenshot the Sources block, confirm heading present, ≥3 structured entries rendering as external anchors with `target="_blank"` + `rel="noopener noreferrer nofollow"`, and medically reviewed line visible.
-
-### Return summary (after implementation)
-- File edited.
-- Per article: source count, publishers used, full verified URL list.
-- Any candidate URLs that failed verification and their substitutes.
-- `reviewedBy` status per article (already present or inserted, and where inserted).
-- `tsgo` result.
-- Any article flagged for manual source review.
-- Suggested next prompt.
+## Return summary
+- File edited
+- Per-article source counts
+- Publishers used per article
+- Full verified URL list per article
+- Any URLs that failed verification and what replaced them
+- `reviewedBy` status per article
+- `tsgo` result
+- Any article that could not reach 3 verified UK sources
+- Suggested next prompt (Phase 3.4 with next 10 slugs)

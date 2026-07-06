@@ -7259,9 +7259,9 @@ const articleDatabase: ArticleData[] = [
       "Persistent, severe, or one-sided pain — especially with bleeding or fever — needs checking",
     ],
     sources: [
-      "NHS — Common health problems in pregnancy",
-      "Royal College of Obstetricians and Gynaecologists — Pregnancy-related pain",
-      "NICE — Antenatal care",
+      { label: "Stomach pain in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/related-conditions/common-symptoms/stomach-pain/" },
+      { label: "Pelvic pain in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-symptom-checker/pelvic-pain-during-pregnancy" },
+      { label: "Pelvic girdle pain and pregnancy", publisher: "Royal College of Obstetricians and Gynaecologists", url: "https://www.rcog.org.uk/for-the-public/browse-all-patient-information-leaflets/pelvic-girdle-pain-and-pregnancy-patient-information-leaflet/" },
     ],
     faq: [
       { question: "What does round ligament pain feel like?", answer: "A sharp, brief twinge — usually low down on one side of the bump. It's typically triggered by sudden movement and eases within seconds." },
@@ -7530,10 +7530,9 @@ const articleDatabase: ArticleData[] = [
       "Anaemia is common and treatable; mention persistent breathlessness at antenatal appointments",
     ],
     sources: [
-      "NHS — Common health problems in pregnancy",
-      "Royal College of Obstetricians and Gynaecologists — Reducing the risk of venous thromboembolism in pregnancy",
-      "NICE — Antenatal care",
-      "Tommy's — Breathlessness in pregnancy",
+      { label: "Breathlessness in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/related-conditions/common-symptoms/breathlessness/" },
+      { label: "Breathlessness in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-symptom-checker/breathlessness-during-pregnancy" },
+      { label: "Reducing the risk of venous thrombosis in pregnancy and after birth", publisher: "Royal College of Obstetricians and Gynaecologists", url: "https://www.rcog.org.uk/for-the-public/browse-all-patient-information-leaflets/reducing-the-risk-of-venous-thrombosis-in-pregnancy-and-after-birth/" },
     ],
     faq: [
       { question: "Is it normal to be breathless in early pregnancy?", answer: "Yes. Progesterone changes your breathing pattern from very early on, before there's any bump. Mild breathlessness in the first trimester is common." },
@@ -7660,10 +7659,9 @@ const articleDatabase: ArticleData[] = [
       "One-sided leg swelling with redness, warmth or calf pain needs same-day medical attention",
     ],
     sources: [
-      "NHS — Swollen ankles, feet and fingers in pregnancy",
-      "Royal College of Obstetricians and Gynaecologists — Pre-eclampsia",
-      "NICE — Hypertension in pregnancy",
-      "Tommy's — Pre-eclampsia: signs and symptoms",
+      { label: "Swollen ankles, feet and fingers in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/related-conditions/common-symptoms/swollen-ankles-feet-and-fingers/" },
+      { label: "Pre-eclampsia", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-complications/pre-eclampsia" },
+      { label: "Hypertension in pregnancy: diagnosis and management (NG133)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng133" },
     ],
     faq: [
       { question: "How much swelling is normal in pregnancy?", answer: "Mild swelling of feet, ankles, and sometimes hands is very common, especially later in the day and in hot weather. It usually eases overnight." },
@@ -7790,10 +7788,9 @@ const articleDatabase: ArticleData[] = [
       "Severe pain, vomiting blood, or upper-right-tummy pain needs prompt medical assessment",
     ],
     sources: [
-      "NHS — Indigestion and heartburn in pregnancy",
-      "Royal College of Obstetricians and Gynaecologists — Heartburn",
-      "NICE — Antenatal care",
-      "BNF — Antacids in pregnancy",
+      { label: "Indigestion and heartburn in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/related-conditions/common-symptoms/indigestion-and-heartburn/" },
+      { label: "Dyspepsia — pregnancy-associated", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/dyspepsia-pregnancy-associated/" },
+      { label: "Heartburn and indigestion during pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-symptom-checker/heartburn-and-indigestion-during-pregnancy" },
     ],
     faq: [
       { question: "Why is heartburn so much worse in pregnancy?", answer: "Progesterone relaxes the valve at the top of the stomach, slowing digestion and letting acid rise more easily. Later, the growing uterus adds physical pressure. Both add up." },
@@ -7921,10 +7918,9 @@ const articleDatabase: ArticleData[] = [
       "Severe pain, significant bleeding, or no bowel movement for a week needs medical input",
     ],
     sources: [
-      "NHS — Constipation in pregnancy",
-      "NICE — Constipation in pregnancy",
-      "BNF — Laxatives in pregnancy",
-      "Royal College of Obstetricians and Gynaecologists — Common pregnancy concerns",
+      { label: "Constipation in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/related-conditions/common-symptoms/constipation/" },
+      { label: "Constipation", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/constipation/" },
+      { label: "Constipation in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-symptom-checker/constipation-in-pregnancy" },
     ],
     faq: [
       { question: "Why does iron cause constipation?", answer: "Iron supplements slow the bowel and harden stools — it's one of the most common side effects. If iron is making things significantly worse, talk to your GP about alternative formulations." },
@@ -8061,10 +8057,9 @@ const articleDatabase: ArticleData[] = [
       "Back pain with fever or stinging on weeing may be a UTI and needs same-day GP review",
     ],
     sources: [
-      "NHS — Back pain in pregnancy",
-      "Pelvic Obstetric & Gynaecological Physiotherapy (POGP) — Back pain in pregnancy",
-      "NICE — Antenatal care",
-      "Royal College of Obstetricians and Gynaecologists — Common pregnancy concerns",
+      { label: "Back pain in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/related-conditions/common-symptoms/back-pain/" },
+      { label: "Back pain in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-symptom-checker/back-pain-pregnancy" },
+      { label: "Pregnancy-related pelvic girdle pain", publisher: "Pelvic, Obstetric and Gynaecological Physiotherapy (POGP)", url: "https://thepogp.co.uk/patients/pregnancy" },
     ],
     faq: [
       { question: "Is back pain in pregnancy normal?", answer: "Yes — it affects up to two thirds of pregnant people. Most of it is mechanical, caused by softer ligaments, a shifting centre of gravity, and a growing uterus. It's almost always manageable." },
@@ -12096,10 +12091,9 @@ const articleDatabase: ArticleData[] = [
       "Comfort measures: cotton, breathable, unscented",
     ],
     sources: [
-      "NHS — Vaginal discharge in pregnancy",
-      "NICE — Antenatal care",
-      "Royal College of Obstetricians and Gynaecologists",
-      "Tommy's — Pregnancy discharge",
+      { label: "Vaginal discharge in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/related-conditions/common-symptoms/vaginal-discharge/" },
+      { label: "Vaginal discharge during pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-symptom-checker/vaginal-discharge-during-pregnancy" },
+      { label: "Vaginal discharge", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/vaginal-discharge/" },
     ],
     faq: [
       { question: "What's normal discharge in pregnancy?", answer: "Thin, milky white or clear discharge with a mild smell that increases as pregnancy progresses. It's the body keeping the vaginal environment healthy." },
@@ -12244,10 +12238,9 @@ const articleDatabase: ArticleData[] = [
       "Green or brown fluid, or before 37 weeks, is a same-day call",
     ],
     sources: [
-      "NHS — Signs that labour has begun",
-      "Royal College of Obstetricians and Gynaecologists — Premature rupture of membranes",
-      "NICE — Intrapartum care",
-      "Tommy's — Waters breaking",
+      { label: "Signs that labour has begun", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/signs-of-labour/signs-that-labour-has-begun/" },
+      { label: "Waters breaking", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/giving-birth/signs-labour/waters-breaking" },
+      { label: "When your waters break prematurely", publisher: "Royal College of Obstetricians and Gynaecologists", url: "https://www.rcog.org.uk/for-the-public/browse-all-patient-information-leaflets/when-your-waters-break-prematurely-patient-information-leaflet/" },
     ],
     faq: [
       { question: "Is watery discharge in pregnancy normal?", answer: "It often is — pregnancy discharge can be quite thin, and small leaks of urine are common. In late pregnancy, watery discharge that keeps coming or soaks pads needs a call to maternity triage." },
@@ -12543,10 +12536,9 @@ const articleDatabase: ArticleData[] = [
       "Before 37 weeks, losing the plug is a reason to phone",
     ],
     sources: [
-      "NHS — Signs that labour has begun",
-      "Royal College of Obstetricians and Gynaecologists",
-      "NICE — Intrapartum care",
-      "Tommy's — Mucus plug and show",
+      { label: "Signs that labour has begun", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/signs-of-labour/signs-that-labour-has-begun/" },
+      { label: "Signs that labour has begun", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/giving-birth/signs-labour" },
+      { label: "Intrapartum care (NG235)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng235" },
     ],
     faq: [
       { question: "What does the mucus plug look like?", answer: "Thick, jelly-like mucus, sometimes clear, white, pink-tinged or brown-tinged. It can be a single distinct blob, or come away gradually as streaks over a day or two." },
@@ -12692,10 +12684,9 @@ const articleDatabase: ArticleData[] = [
       "Before 37 weeks, any show is a maternity unit call",
     ],
     sources: [
-      "NHS — Signs that labour has begun",
-      "Royal College of Obstetricians and Gynaecologists",
-      "NICE — Intrapartum care",
-      "Tommy's — Show",
+      { label: "Signs that labour has begun", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/signs-of-labour/signs-that-labour-has-begun/" },
+      { label: "Signs that labour has begun", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/giving-birth/signs-labour" },
+      { label: "Intrapartum care (NG235)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng235" },
     ],
     faq: [
       { question: "What does a show look like?", answer: "A small amount of jelly-like mucus tinged pink, brown, or red. It can come in one piece or as streaks over a day or two." },

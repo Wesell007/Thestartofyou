@@ -6391,7 +6391,7 @@ const articleDatabase: ArticleData[] = [
           "Contact your midwife, GP, maternity unit or local urgent mental health service. If there is an immediate risk of harm, use emergency services.",
         ],
         callout: {
-          tone: "warning",
+          tone: "gentle-warning",
           text: "If you feel unsafe, unable to cope, or worried you might harm yourself or your baby, seek urgent help.",
         },
       },

@@ -40,9 +40,79 @@ const rawFamilyArticles: FamilyArticle[] = [
     topic: "growing-families",
     title: "Helping your child adjust to a new sibling",
     description:
-      "Gentle ideas to ease the change, honour your first child's feelings and build early connection.",
+      "Calm, honest ways to prepare an older child for a new baby, and to support them through the mix of feelings that follow.",
     readTime: "6 min read",
-    status: "draft",
+    status: "ready",
+    seoTitle: "Helping your child adjust to a new sibling",
+    seoDescription:
+      "A calm guide to helping an older child prepare for a new baby and settle into life as a sibling, without expecting constant excitement.",
+    lastUpdated: "July 2026",
+    intro:
+      "A new baby is a big change for the whole family, and often the biggest change for your first child. They are being asked to share their people, their space and their rhythm, sometimes before they have the words for any of it. This piece is a gentle guide to preparing them, supporting them and sitting with the mixed feelings that come with becoming a sibling.",
+    sections: [
+      {
+        heading: "Why a new sibling can feel big for a child",
+        body: [
+          "For a young child, a new baby is not just an addition to the family. It is a shift in almost everything they know. Who holds them, who sleeps where, how mornings run, how much of you is available at any moment.",
+          "Even children who seem thrilled about the baby can feel wobbly once life actually changes. Regressions, clinginess, sudden anger or quiet withdrawal are all common. None of it means you have done something wrong, and none of it means they do not love their sibling.",
+        ],
+      },
+      {
+        heading: "Talk about the baby in simple, steady ways",
+        body: [
+          "Young children take in more from your tone than your words. Talking about the baby in a calm, matter-of-fact way tends to land better than big announcements or a lot of build-up.",
+          "Keep the information age-appropriate. A toddler might just need to know that a baby is growing in your tummy and will come to live with you. An older child might have questions about hospitals, feeding or where the baby will sleep. Answer what they ask, and leave the rest for another day.",
+        ],
+      },
+      {
+        heading: "Keep some familiar routines where possible",
+        body: [
+          "In the weeks around the birth, familiar routines are a kind of anchor. The same bedtime book, the same walk to nursery, the same person doing bath time when they can.",
+          "You do not need to protect every routine perfectly. What helps most is choosing one or two small ones that stay steady even when everything else is in flux.",
+        ],
+      },
+      {
+        heading: "Make space for mixed feelings",
+        body: [
+          "It is normal for an older child to love the baby and also feel jealous, sad, cross or left out. These feelings are not a problem to fix. They are part of adjusting to something big.",
+          "You can gently name what you notice without judging it. Something like, \"It's hard when I'm feeding the baby and you want me too,\" is often enough. Feeling understood tends to soften the feeling itself.",
+        ],
+      },
+      {
+        heading: "Small ways to involve your child",
+        body: [
+          "Involvement works best when it is optional and low pressure. Fetching a nappy, choosing the baby's outfit, singing during nappy changes, or being the one who tells visitors the baby's name.",
+          "Watch for signs they want a break from being the helper. Some children love the role, others need long stretches where they are simply the child again, not the big brother or big sister.",
+        ],
+      },
+      {
+        heading: "After the baby arrives",
+        body: [
+          "The first few weeks are often a period of adjustment for everyone. Try to protect small pockets of one-to-one time with your older child, even ten minutes on the sofa or a short walk. It does not need to be elaborate.",
+          "Expect ups and downs. A child who seemed fine in the first week may struggle in the third, when the newness has worn off and the reality has settled in. Meeting that with warmth rather than worry usually helps most.",
+        ],
+      },
+      {
+        heading: "When it may help to ask for support",
+        body: [
+          "If your older child seems persistently withdrawn, very distressed for weeks, or their behaviour is worrying you, it can help to speak to your health visitor, GP or their nursery or school.",
+          "Ask for support for yourself too. Looking after a new baby while holding space for an older child's feelings is genuinely hard, and you do not need to do it alone.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "A new sibling is a big adjustment, and mixed feelings are normal, not a sign of a problem.",
+      "Calm, matter-of-fact conversations tend to help more than long build-ups.",
+      "Protecting one or two familiar routines gives your older child a steady anchor.",
+      "Naming feelings gently often softens them more than trying to fix them.",
+      "Involvement should feel optional, not a new job to perform.",
+      "Ask for support from your health visitor, GP or nursery if something feels stuck.",
+    ],
+    relatedSlugs: [
+      "preparing-for-another-baby",
+      "building-family-routines",
+      "building-family-traditions",
+    ],
   },
 
   // Relationships
@@ -58,22 +128,164 @@ const rawFamilyArticles: FamilyArticle[] = [
   {
     slug: "sharing-the-mental-load",
     topic: "relationships",
-    title: "Sharing the mental load",
+    title: "Sharing the mental load in family life",
     description:
-      "How to name the invisible work of family life and share it more evenly with your partner.",
+      "A balanced look at the invisible planning behind family life and how to share ownership of it more fairly.",
     readTime: "6 min read",
-    status: "draft",
+    status: "ready",
+    seoTitle: "Sharing the mental load in family life",
+    seoDescription:
+      "A calm, non-blaming guide to making the invisible planning of family life visible, and sharing ownership of it more fairly.",
+    lastUpdated: "July 2026",
+    intro:
+      "Behind every family week there is a quiet layer of planning that rarely gets seen. Remembering the school forms, tracking who is running low on socks, noticing that a friend's birthday is next Thursday. This piece is about that invisible work, and about sharing it in a way that feels fair without turning family life into a spreadsheet.",
+    sections: [
+      {
+        heading: "What the mental load can look like",
+        body: [
+          "The mental load is the thinking, planning and remembering that keeps family life moving. It sits underneath the practical tasks and often stays invisible until something is missed.",
+          "It can include noticing when the fridge is empty, keeping a mental list of upcoming appointments, tracking which child has grown out of which shoes, or holding in mind the emotional temperature of the house.",
+        ],
+      },
+      {
+        heading: "Why it can feel so heavy",
+        body: [
+          "Practical tasks have a beginning and an end. The mental load does not. It runs quietly in the background, even on days off, and often shows up most at bedtime, when the day is meant to be finished.",
+          "It can also be hard to describe. When someone asks what you did today and the honest answer includes twenty small acts of noticing and planning, it can feel easier to say \"not much\" than to try to explain.",
+        ],
+      },
+      {
+        heading: "Talk about tasks before resentment builds",
+        body: [
+          "Conversations about the mental load tend to go better when they happen before anyone is already frustrated. A calm moment at the weekend usually lands better than a hard word at 7pm on a Wednesday.",
+          "Try starting with what you are noticing rather than what the other person is not doing. Something like, \"I've been holding a lot of the planning lately and I'd like us to look at it together,\" opens a conversation without putting anyone on the defensive.",
+        ],
+      },
+      {
+        heading: "Share ownership, not just help",
+        body: [
+          "Being asked to help is different from owning a task. If one person always holds the plan and the other steps in when asked, the mental load has not moved, only the doing.",
+          "Sharing ownership means the whole task moves, including the noticing, the deciding and the following up. Whoever owns bedtime owns the pyjamas, the bath timing, the story and the moment it all starts to unravel.",
+        ],
+      },
+      {
+        heading: "Make invisible tasks visible",
+        body: [
+          "It is easier to share what everyone can see. Some families find it helpful to sit down together and list what actually runs a normal week, from meal planning to washing to remembering birthdays.",
+          "The point is not a perfect list. It is a shared picture. Once the work is visible, it becomes possible to talk about who is best placed to hold each part, and what could be simplified, dropped or done less often.",
+        ],
+      },
+      {
+        heading: "What to do if conversations keep going in circles",
+        body: [
+          "Sometimes these conversations get stuck in the same loop. It can help to slow down and separate two things: the practical question of who does what, and the emotional question of feeling seen and appreciated.",
+          "Both matter. Practical changes without acknowledgement can feel hollow, and acknowledgement without practical change tends to wear thin. Naming which one you need in a given moment can move a conversation forward.",
+          "If conflict feels stuck, unsafe or overwhelming, speaking to a couples counsellor, family therapist or another trusted professional can help.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Choose one recurring task and hand over the whole thing, including the noticing. Packed lunches, laundry, the nursery bag, the family calendar.",
+          "Set a short weekly check-in, even ten minutes, to look at the week ahead together. It removes the need for one person to hold everything in their head.",
+          "Notice appreciation out loud. Naming the invisible work you can see the other person doing tends to be quietly powerful, in both directions.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "The mental load is the invisible planning behind family life, not just the tasks themselves.",
+      "Sharing help is not the same as sharing ownership.",
+      "Calm conversations before resentment builds tend to go further than difficult ones in the moment.",
+      "Making the work visible is often the first real step towards sharing it.",
+      "Practical change and feeling appreciated usually need to move together.",
+      "If conversations stay stuck, a counsellor or trusted professional can help.",
+    ],
+    relatedSlugs: [
+      "building-family-routines",
+      "setting-boundaries-with-grandparents",
+      "building-family-traditions",
+    ],
   },
 
   // Family basics
   {
     slug: "building-family-routines",
     topic: "family-basics",
-    title: "Building family routines that hold",
+    title: "Building family routines that actually work",
     description:
-      "Rhythms for mornings, meals and bedtime that bring calm without becoming rigid.",
-    readTime: "5 min read",
-    status: "draft",
+      "How to build flexible family routines that support real life, without turning your days into a schedule you dread.",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Building family routines that actually work",
+    seoDescription:
+      "A calm, realistic guide to family routines that hold in real life, without perfectionism or rigid schedules.",
+    lastUpdated: "July 2026",
+    intro:
+      "Family routines get a lot of attention, and most of it can feel like pressure. The best routines are not the ones that look impressive on paper. They are the ones your family can actually live with on a normal Tuesday, when someone has slept badly and the washing machine is beeping. This piece is about building routines that support your days rather than run them.",
+    sections: [
+      {
+        heading: "Why family routines help",
+        body: [
+          "Children tend to feel calmer when they have a rough sense of what happens next. Not a rigid timetable, just a familiar shape to the day. Morning, meals, some kind of wind-down, bed.",
+          "Routines can also lighten the load for parents. When the shape of the day is known, there are fewer decisions to make in the moment, and fewer negotiations over things that could simply be the way things are done here.",
+        ],
+      },
+      {
+        heading: "Start with the moments that already happen every day",
+        body: [
+          "Rather than inventing a new routine from scratch, look at what already repeats in your day. Waking, breakfast, leaving the house, coming home, dinner, bath, bed. These moments are already anchors.",
+          "Choose one or two of them to make slightly more predictable. A short song at the start of bath time, the same order to the bedtime books, a particular seat for breakfast. Small consistencies add up.",
+        ],
+      },
+      {
+        heading: "Keep routines small and realistic",
+        body: [
+          "The routines most likely to hold are the ones that fit inside your real life, not the life you would have on a perfect week.",
+          "If mornings are already tight, the routine needs to be short enough to survive a slow start. If evenings often run late, bedtime cannot depend on everything happening by six o'clock. Realistic beats ideal every time.",
+        ],
+      },
+      {
+        heading: "Make room for different ages and needs",
+        body: [
+          "A routine that works for a toddler may not work for a school-age child, and a routine that works for one child may need small tweaks for another.",
+          "Rather than one shared routine everyone has to fit into, think about a shared shape with individual pockets. Everyone eats around the same time. One child needs more wind-down before bed, another does not. The overall rhythm holds, the details flex.",
+        ],
+      },
+      {
+        heading: "What to do when routines fall apart",
+        body: [
+          "Every family routine falls apart sometimes. Illness, holidays, a hard week at work, a growth spurt, a new sibling. This is not a failure of the routine. It is what routines have to survive.",
+          "The gentlest way back is usually to pick one or two anchor moments and start there. Rebuilding a whole day at once tends to feel overwhelming. Rebuilding bedtime, or the first ten minutes of the morning, is often enough to steady the rest.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try this week",
+        body: [
+          "Choose one small anchor to make more predictable, and let the rest of the day stay as it is.",
+          "Do a short evening reset with your child, five to ten minutes of the same simple things in the same order, so bedtime does not have to carry all the calm.",
+          "Notice the routines you already have without realising. Many families are running on more rhythm than they think, and can build gently from what is already there.",
+        ],
+      },
+      {
+        heading: "When it may help to ask for support",
+        body: [
+          "If daily routines feel consistently overwhelming, or if your child's sleep, eating or behaviour is worrying you, it can help to speak to your health visitor, GP or nursery.",
+          "Asking for support is not a sign the routine has failed. It is often part of finding one that fits your family as it actually is.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Routines work best when they support your real life, not an idealised version of it.",
+      "Small anchors matter more than a full schedule.",
+      "The same rough shape can flex for different ages and needs.",
+      "Routines fall apart sometimes, and rebuilding from one moment is usually enough.",
+      "Ask for support if daily life feels consistently overwhelming.",
+    ],
+    relatedSlugs: [
+      "building-family-traditions",
+      "sharing-the-mental-load",
+      "helping-your-child-adjust-to-a-new-sibling",
+    ],
   },
   {
     slug: "managing-childcare-costs",
@@ -131,11 +343,82 @@ const rawFamilyArticles: FamilyArticle[] = [
   {
     slug: "building-family-traditions",
     topic: "play-connection",
-    title: "Building family traditions",
+    title: "Building family traditions without adding pressure",
     description:
-      "Simple rituals, weekly, seasonal, small, that give family life a shape your child will remember.",
+      "Simple, low-pressure ways to build family rituals that help children feel connected, without turning family life into a performance.",
     readTime: "5 min read",
-    status: "draft",
+    status: "ready",
+    seoTitle: "Building family traditions without adding pressure",
+    seoDescription:
+      "A warm guide to creating simple, flexible family traditions that help children feel connected, without perfectionism.",
+    lastUpdated: "July 2026",
+    intro:
+      "Family traditions do not have to be elaborate to matter. Often the ones children remember most are small, quiet and slightly ordinary. A particular breakfast on a Sunday, the way you always walk home from a certain place, the song at the end of the day. This piece is about building rituals that feel like your family, without adding another thing you feel you have to do well.",
+    sections: [
+      {
+        heading: "What family traditions can give children",
+        body: [
+          "Traditions give children a felt sense of belonging. This is something we do. These are our people. This is how our year has a shape.",
+          "They also give the calendar texture. A predictable ritual to look forward to can be a quiet source of steadiness, especially in seasons when other things feel uncertain.",
+        ],
+      },
+      {
+        heading: "Traditions do not need to be big",
+        body: [
+          "A tradition is really just something you do more than once, on purpose, together. It does not need a theme, a hashtag or a Pinterest board.",
+          "Pancakes on Saturdays, a walk after Sunday lunch, a candle at dinner on Friday nights. Small rituals that repeat tend to hold more weight than one-off grand gestures.",
+        ],
+      },
+      {
+        heading: "Start with what your family already enjoys",
+        body: [
+          "The most durable traditions usually grow out of things you already like doing. If your family loves being outside, a seasonal walk is more likely to stick than a craft afternoon nobody actually wants.",
+          "Notice what already brings you together without effort, and let those things become slightly more intentional. Naming something as \"our thing\" is often enough to turn it into a tradition.",
+        ],
+      },
+      {
+        heading: "Make traditions flexible as children grow",
+        body: [
+          "The rituals that suit a toddler will not always suit a nine-year-old. That is not a failure, it is the tradition evolving.",
+          "Try to hold the shape lightly. If a Sunday film afternoon slowly becomes a Sunday walk and hot chocolate, the thread is still there. What matters is the togetherness, not the exact activity.",
+        ],
+      },
+      {
+        heading: "Simple ideas for weekly, seasonal and everyday rituals",
+        body: [
+          "Weekly: a shared breakfast, a Friday night dinner at home, a Sunday phone call to a grandparent, a family walk after lunch.",
+          "Seasonal: the first walk after the clocks change, a picnic on the same day each summer, one shared task at the start of a school holiday.",
+          "Everyday: the same goodbye at the door, a song at bath time, a question at dinner, a bedtime phrase that never changes.",
+        ],
+      },
+      {
+        heading: "When traditions feel hard or emotional",
+        body: [
+          "Some traditions carry weight. Birthdays after a loss, holidays that used to look different, first years without someone you love. It is normal for these rituals to feel tender.",
+          "You are allowed to keep them, change them or step away from them for a year. Traditions serve the family, not the other way around.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Choose one small ritual to name out loud this month, even something as simple as \"we always read this book on Sunday nights\".",
+          "Let your child suggest a tradition. It might be something surprising, and being invited to shape family life is meaningful in itself.",
+          "Keep a light hold on what a tradition should look like. If it changes shape over the years, that is usually a sign it is alive, not that it is broken.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Small, repeating rituals often matter more to children than big set-piece traditions.",
+      "The best traditions usually grow out of things your family already enjoys.",
+      "Traditions should evolve as children grow, not stay frozen.",
+      "It is fine, and sometimes needed, to change or pause a tradition in a hard year.",
+      "Naming something as \"our thing\" is often the whole tradition.",
+    ],
+    relatedSlugs: [
+      "building-family-routines",
+      "screen-time-as-a-family",
+      "helping-your-child-adjust-to-a-new-sibling",
+    ],
   },
   {
     slug: "screen-time-as-a-family",

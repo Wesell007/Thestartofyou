@@ -18,6 +18,7 @@ import FirstTriFAQ from "@/components/firsttri/FirstTriFAQ";
 import FirstTriSupportStrip from "@/components/firsttri/FirstTriSupportStrip";
 import FirstTriQuoteBanner from "@/components/firsttri/FirstTriQuoteBanner";
 import FirstTriNextStage from "@/components/firsttri/FirstTriNextStage";
+import TrimesterCompleteGuideCard from "@/components/trimester/TrimesterCompleteGuideCard";
 
 import { firstTrimester } from "@/data/trimesterData";
 

@@ -1,70 +1,66 @@
-# Phase 4.10 — Final Pregnancy Cornerstone QA
+# Phase 4.11 — Pregnancy Cornerstone Rewrite 5
 
-QA only. No code changes proposed. `tsgo` not required.
+Upgrade the existing `anxiety-in-pregnancy` object in `src/data/articleData.ts` (lines 6219–6390) to the full Flagship shape. Single-object rewrite in place. Slug, route, position unchanged.
 
-## Static verification (already performed via `rg` in plan mode)
+## Only file edited
 
-### `src/data/pregnancyTopicData.ts` — topic `body`, "Across the trimesters"
-Contains exactly three links, in order:
-- The first trimester: a complete guide → `/articles/first-trimester-complete-guide`
-- The second trimester: a complete guide → `/articles/second-trimester-complete-guide`
-- The third trimester: a complete guide → `/articles/third-trimester-complete-guide`
+- `src/data/articleData.ts`
 
-No duplicates in the group. Group label and description unchanged.
+No other files touched. No template, route, topic-data, SEO, calculator, product, About, AI, saved-journey, design-token, `articleInventory.ts`, `ArticleSources.tsx`, or `.lovable/plan.md` changes. No new files.
 
-### `src/data/pregnancyTopicData.ts` — topic `feelings`, "Emotional wellbeing"
-Contains two links, in order:
-- Emotional wellbeing in pregnancy → `/articles/emotional-wellbeing-pregnancy`
-- The first trimester emotionally → `/articles/the-first-trimester-emotionally`
+## Current state (audit)
 
-No duplicates. Group label and description unchanged.
+Already present: `slug`, `title`, `metaDescription`, `quickAnswer`, `topic: "feelings"`, `reviewedBy: "Jenny Joines"`, `lastUpdated`, `standfirst`, 7 `editorialSections`, 5 `keyTakeaways`, 4 `faq`, 3 `sources`, `relatedSlugs`, plus all legacy fields.
 
-### Trimester landing pages
-- `src/pages/trimester/FirstTrimester.tsx` line 93 — one card → `/articles/first-trimester-complete-guide` (Phase 4.5)
-- `src/pages/trimester/SecondTrimester.tsx` line 88 — one card → `/articles/second-trimester-complete-guide`
-- `src/pages/trimester/ThirdTrimester.tsx` line 88 — one card → `/articles/third-trimester-complete-guide`
-- No source lists added on landing pages.
+Gaps to close for full Flagship parity: missing `inThisArticle`; 5 takeaways → 6; 7 sections → 8; 4 FAQs → 8; 3 sources → 5; refresh `lastUpdated`; expand `relatedSlugs`.
 
-### Four article pages
-Phase 4.8 audit already confirmed all four render via `ArticleFlagshipTemplate` with `quickAnswer`, `editorialSections`, `keyTakeaways`, `faq`, structured `sources`, `reviewedBy: "Jenny Joines"`, valid `topic`, resolving `relatedSlugs`. No re-verification needed unless the browser check surfaces a rendering bug.
+## Edits (in place on the existing object)
 
-### Legacy routes `/explore` and `/guidance`
-`rg 'to="/explore"|to="/guidance"|path="/explore"|path="/guidance"'` returns no matches. Both routes fall through to the `path="*"` `NotFound` catch-all (App.tsx, Phase 4.7).
+- **`title`** → "Anxiety in pregnancy"
+- **`metaDescription`** → "A calm guide to anxiety in pregnancy, including common signs, why it can happen, what may help, and when to ask for support."
+- **`standfirst`** → warm one-paragraph rewrite per prompt; British English; no em dashes.
+- **`quickAnswer`** → 90–130 words: anxiety in a wanted pregnancy; possible drivers (hormones, uncertainty, previous loss, fertility treatment, health worries, birth fears, money, relationships, past experiences); emotional and physical; support routes (midwife, GP, perinatal mental health team, NHS Talking Therapies, therapist, trusted person); safety line for urgent help without phone numbers.
+- **`reviewedBy`** kept as `"Jenny Joines"`.
+- **`lastUpdated`** → `"May 2026"`.
+- **`topic`** kept as `"feelings"`.
+- **`inThisArticle`** (new, 8 items): matching the 8 section headings.
+- **`keyTakeaways`** (expand to 6): common and affects thoughts + body; a wanted pregnancy can still feel frightening; previous loss/fertility treatment/health worries can intensify anxiety; daily supports help but are not a substitute for professional care; speak to midwife or GP before things feel severe; seek urgent help if unsafe / unable to cope / worried about harming self or baby.
+- **`editorialSections`** (rewrite to 8, existing shape):
+  1. `what-anxiety-can-feel-like`
+  2. `why-anxiety-can-happen`
+  3. `physical-signs` — with a careful callout that new/severe/worrying physical symptoms can have other causes in pregnancy and should be checked.
+  4. `after-loss-or-treatment`
+  5. `what-may-help-day-to-day` — callout noting these do not replace professional care.
+  6. `talking-to-midwife-or-gp`
+  7. `when-to-seek-urgent-support` — callout copy: "If you feel unsafe, unable to cope, or worried you might harm yourself or your baby, seek urgent help." No phone numbers, no protocol.
+  8. `what-happens-next` — describe likely support pathways; no advice to start/stop/change medication.
+- **`faq`** (rewrite to 8, short and medically careful): common in pregnancy; even if wanted; what it feels like; telling midwife; sleep and physical symptoms; pregnant after loss/IVF; unable to cope; treatment/therapy in pregnancy.
+- **`sources`** (5 verified UK entries, structured `{ label, publisher, url, year? }`). Verification rule: only URLs and page titles that actually resolve on the publisher's site. If a candidate page has moved, use the closest live equivalent and label it with the publisher's own current title — no invented titles.
+  Candidate set (all currently reachable):
+  - NHS — "Anxiety in pregnancy" (existing entry, verified live: `nhs.uk/pregnancy/keeping-well/mental-health/`-linked anxiety page). If the exact page title/URL cannot be re-verified at implementation time, substitute the parent NHS page "Mental health in pregnancy" using its published title and current URL.
+  - NHS — "Mental health in pregnancy" (parent hub, `nhs.uk`) as a second NHS entry, only added if it resolves live and only labelled with NHS's own current title. If it doesn't, drop the second NHS entry rather than invent one.
+  - Tommy's — "Anxiety and panic attacks in pregnancy" (existing entry, verified).
+  - Royal College of Psychiatrists — "Mental health in pregnancy" (existing entry, verified).
+  - Mind — "Perinatal mental health" using Mind's current page title. If Mind's specific perinatal page cannot be verified, use their broader "Postnatal depression and perinatal mental health" page labelled exactly as Mind titles it.
+  No invented URLs, no invented titles, no `year` unless the source publishes one.
+- **`relatedSlugs`** → `["emotional-wellbeing-pregnancy", "pregnancy-after-loss", "the-first-trimester-emotionally", "when-the-joy-doesnt-arrive-yet", "first-trimester-complete-guide"]`. All confirmed to exist in `articleData.ts`.
 
-### Weak slug visibility in Pregnancy topic data
-`rg 'writing-a-birth-plan|nausea-in-early-pregnancy|ovulation-signs' src/data/pregnancyTopicData.ts` returns no matches. None visible in Pregnancy topic groups.
+Legacy fields (`howThisFeels`, `whatHappening`, `timing`, `whatItFeelsLike`, `whatThisMeans`, `normal`, `seekSupport`, `disclaimer`, `whatYouCanDo`, `whatHappensNext`, `relatedStage`, `aiPrompts`, `captureIntro`, `trimester`, `journey`, `topics`) preserved with at most light tone touch-ups. No field removed.
 
-Legacy live surfaces still holding these slugs (out of scope, report only):
-- `writing-a-birth-plan` — `src/pages/WeekPage.tsx` line 203; article `relatedSlugs` in `articleData.ts`
-- `nausea-in-early-pregnancy` — `src/pages/WeekPage.tsx` line 158; `src/data/ivfTopicData.ts` line 142
-- `ovulation-signs` — TTC data only (`ttcTopicData.ts`, `ttcFlagshipOverrides.ts`)
+## Tone and safety
 
-None appear on Pregnancy topic pages, trimester landing pages, or Pregnancy hub cards.
+British English, no em dashes, no American spelling, calm and practical, short paragraphs. Non-diagnostic. No dramatic language, no sales copy, no medication start/stop/change advice, no hotline numbers, no crisis protocols. Never imply breathing / journalling / rest / lifestyle changes replace professional care for serious symptoms.
 
-## Browser QA (deferred to build mode)
+## Rendering trigger
 
-If you want live rendering confirmation, switch to build mode and I will:
-- Playwright-load `/pregnancy/body`, `/pregnancy/feelings`, three trimester landings, and the four article pages
-- Screenshot each and confirm the new cards, single medically-reviewed badge, no duplicate At-a-glance badge, no layout breaks on desktop viewport
-- Load `/explore` and `/guidance` to confirm NotFound render
+`quickAnswer` + non-empty `editorialSections` + non-empty `keyTakeaways` all present, so `/articles/anxiety-in-pregnancy` continues to render through `ArticleFlagshipTemplate`. Medically reviewed badge appears once (hero); duplicate At-a-glance badge was removed globally in Phase 4.1.
 
-## Findings
+## No relinking
 
-- No broken links.
-- No layout issues surfaced by static review.
-- No weak/duplicate slugs on Pregnancy surfaces.
-- No files need changing.
+`pregnancyTopicData.ts` untouched. Feelings → "Emotional wellbeing" group keeps `emotional-wellbeing-pregnancy` as its anchor.
 
-## Recommendation
+## Verification
 
-The Pregnancy cornerstone system is stable and coherent. Safe to move on. Suggested priority order:
-
-1. **Publish next Pregnancy cornerstone rewrite (Phase 4.11)** — small backlog of legacy long-reads (e.g. `anxiety-in-pregnancy`, `signs-of-labour`, `tests-and-scans-in-pregnancy`) that would benefit from the Flagship shape and already sit in strong topic slots.
-2. **Then move to Family publishing** once one or two more Pregnancy anchors are on Flagship.
-3. Optional small cleanup later: retire `nausea-in-early-pregnancy` in `WeekPage.tsx` and `ivfTopicData.ts` in favour of `complete-guide-morning-sickness` — low priority, not blocking.
-
-## Suggested next prompt
-
-> Phase 4.11 — Pregnancy Cornerstone Rewrite 5
->
-> Rewrite `anxiety-in-pregnancy` (or your chosen next anchor) into the Flagship shape in `src/data/articleData.ts` only. Same pattern as Phase 4.6: preserve legacy fields, add `standfirst`, `quickAnswer`, `editorialSections`, `keyTakeaways`, `faq`, structured `sources` (NHS, Tommy's, Royal College of Psychiatrists, Mind), `reviewedBy: "Jenny Joines"`, `lastUpdated`, valid `topic`, `relatedSlugs` that resolve. British English, no em dashes, careful urgent-help wording without phone numbers. Verify with `tsgo`.
+- `tsgo` typecheck.
+- Load `/articles/anxiety-in-pregnancy` → Flagship render; single medically reviewed badge; 8 sections; 6 takeaways; 8 FAQs; 5 verified structured sources; standfirst; quick answer.
+- Spot-check `/pregnancy/feelings` and `/articles/emotional-wellbeing-pregnancy` → unchanged, no accidental relinking or regression.

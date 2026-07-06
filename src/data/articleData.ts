@@ -6218,10 +6218,11 @@ const articleDatabase: ArticleData[] = [
   // ─── ANXIETY IN PREGNANCY ─────────────────────────────────────────────────
   {
     slug: "anxiety-in-pregnancy",
-    title: "Anxiety in pregnancy: what's normal, what's not, and what helps",
-    metaDescription: "What anxiety in pregnancy can feel like, the worries that come up most, where the line between worry and overwhelm tends to sit, and the kinds of support that genuinely help.",
-    quickAnswer:
-      "Anxiety is one of the most common emotional experiences in pregnancy. Worry about the baby, the birth, your body, or the future is normal — and often comes in waves. It usually becomes a reason to ask for more support when it stops easing between waves, when it gets in the way of sleep or daily life, or when it brings physical symptoms like a racing heart, breathlessness, or constant tension. Help can come from your midwife, your GP, perinatal mental health services, or talking therapies — and asking earlier is almost always easier than asking later.",
+    title: "Anxiety in pregnancy",
+    metaDescription: "A calm guide to anxiety in pregnancy, including common signs, why it can happen, what may help, and when to ask for support.",
+    standfirst: "Anxiety in pregnancy can be quiet, loud, sudden or constant. It may show up as worry, panic, checking, racing thoughts, physical tension or a feeling that you cannot fully settle. You are not failing if pregnancy feels emotionally hard. This guide explains what anxiety can feel like, what may help, and when to ask for support.",
+    quickAnswer: "Anxiety can happen at any point in pregnancy, even when the pregnancy is very much wanted. It can be linked to hormone shifts, tiredness, uncertainty, previous loss, fertility treatment, health worries, birth fears, money pressure, relationship stress or past experiences. It may show up as worry, panic, racing thoughts or as physical tension in the body. Support can come from your midwife, GP, a perinatal mental health team, NHS Talking Therapies, a therapist or a trusted person, and asking early is a strength. If anxiety feels unmanageable, is getting worse, is affecting daily life, or includes thoughts of harming yourself or your baby, seek urgent help.",
+    topic: "feelings",
     howThisFeels: [
       "A worry that keeps circling, even after you've talked it through",
       "Lying awake reading symptoms instead of sleeping",
@@ -6231,14 +6232,14 @@ const articleDatabase: ArticleData[] = [
     whatHappening: {
       commonCauses: [
         { heading: "Hormonal shifts", body: "Pregnancy hormones affect mood, sleep, and emotional sensitivity. Anxiety often rides alongside these changes, especially in the first and third trimesters." },
-        { heading: "Uncertainty", body: "Pregnancy holds a lot of unknowns — about the baby, your body, the birth, your life afterwards. The mind tends to fill uncertainty with worry." },
+        { heading: "Uncertainty", body: "Pregnancy holds a lot of unknowns about the baby, your body, the birth and life afterwards. The mind tends to fill uncertainty with worry." },
         { heading: "Tiredness and physical strain", body: "Poor sleep, nausea, and discomfort all reduce emotional resilience. Worry often feels louder when the body is depleted." },
       ],
       lessCauses: [
-        { heading: "Antenatal anxiety as a clinical experience", body: "When worry is persistent, hard to settle, and starts interfering with daily life, it may have crossed from ordinary anxiety into antenatal anxiety — which is treatable and worth naming." },
+        { heading: "Antenatal anxiety as a clinical experience", body: "When worry is persistent, hard to settle, and starts interfering with daily life, it may have crossed from ordinary anxiety into antenatal anxiety, which is treatable and worth naming." },
         { heading: "Previous loss or trauma", body: "If you've had a previous loss, a difficult birth, or a history of anxiety or trauma, pregnancy can reactivate those experiences. This deserves specific support, not general reassurance." },
       ],
-      whyItVaries: "How anxiety lands in pregnancy depends on your history, your support, your physical health, and the season of pregnancy you're in. Two pregnancies in the same person can feel very different.",
+      whyItVaries: "How anxiety lands in pregnancy depends on your history, your support, your physical health and the season of pregnancy you're in. Two pregnancies in the same person can feel very different.",
     },
     timing: {
       whenStarts: "Anxiety often surfaces in the first trimester, when so much is invisible and uncertain.",
@@ -6248,11 +6249,10 @@ const articleDatabase: ArticleData[] = [
     whatItFeelsLike: [
       "A loop of what-ifs that's hard to step out of",
       "Catastrophic thoughts that feel real even when you know they're unlikely",
-      "Physical tension — tight chest, jaw, shoulders, shallow breathing",
+      "Physical tension including a tight chest, jaw, shoulders or shallow breathing",
       "Reassurance that helps for an hour, then wears off",
     ],
-    whatThisMeans:
-      "Anxiety in pregnancy is common, treatable, and not a sign that something is wrong with you. The point at which it's worth more support is usually the point at which it stops easing — not the point at which it first appears.",
+    whatThisMeans: "Anxiety in pregnancy is common, treatable, and not a sign that something is wrong with you. The point at which it's worth more support is usually the point at which it stops easing, not the point at which it first appears.",
     normal: [
       "Worrying about the baby, especially after a scan or appointment",
       "Anxious phases in early pregnancy and again near birth",
@@ -6261,25 +6261,25 @@ const articleDatabase: ArticleData[] = [
     ],
     seekSupport: [
       "Worry that doesn't ease between waves, day after day",
-      "Anxiety that's getting in the way of sleep, eating, work, or relationships",
-      "Physical anxiety symptoms — racing heart, breathlessness, panic — that are happening regularly",
+      "Anxiety that's getting in the way of sleep, eating, work or relationships",
+      "Physical anxiety symptoms including a racing heart, breathlessness or panic happening regularly",
       "Intrusive thoughts you can't put down",
       "A sense that you're not coping",
     ],
     disclaimer: "This article is general guidance and not a substitute for medical or mental health care. If you're struggling, please speak to your midwife, GP, or a perinatal mental health service.",
     whatYouCanDo: [
-      { action: "Tell your midwife or GP early", reason: "Naming anxiety opens the door to support — including talking therapies and, where helpful, medication that's safe in pregnancy." },
+      { action: "Tell your midwife or GP early", reason: "Naming anxiety opens the door to support, including talking therapies and, where helpful, medication that's safe in pregnancy." },
       { action: "Notice the loop without trying to win the argument", reason: "Worry rarely loses by being argued with. Acknowledging the loop is often more useful than trying to disprove it." },
       { action: "Slow your breath when you notice tension", reason: "Lengthening your out-breath quiets the body's stress response. It doesn't fix anxiety, but it gives you a foothold." },
       { action: "Limit reading symptoms or stories late at night", reason: "Anxiety feeds on tiredness and search results. A boundary around when you read is often more helpful than what you read." },
-      { action: "Tell one safe person what's actually going on", reason: "Saying it out loud — to a partner, friend, or midwife — almost always shrinks it a little." },
+      { action: "Tell one safe person what's actually going on", reason: "Saying it out loud to a partner, friend, or midwife almost always shrinks it a little." },
     ],
-    whatHappensNext: "Most people who ask for support in pregnancy find that things ease — not always quickly, but reliably. Perinatal mental health teams exist precisely for this season, and your midwife can refer you in.",
+    whatHappensNext: "Most people who ask for support in pregnancy find that things ease, not always quickly, but reliably. Perinatal mental health teams exist precisely for this season, and your midwife can refer you in.",
     relatedStage: {
       intro: "Anxiety sits inside the wider emotional picture of pregnancy:",
       links: [
         { label: "Your feelings in pregnancy", href: "/pregnancy/feelings", context: "The wider topic this article belongs to." },
-        { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy", context: "The broader orientation, including depression as well as anxiety." },
+        { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy", context: "The broader orientation, including low mood as well as anxiety." },
         { label: "When the joy doesn't arrive yet", href: "/articles/when-the-joy-doesnt-arrive-yet", context: "When the feelings you expected aren't quite there." },
       ],
     },
@@ -6290,104 +6290,140 @@ const articleDatabase: ArticleData[] = [
     ],
     captureIntro: "Anxiety often sits in places you don't quite say aloud. A quiet space to name what's been circling, in your own words.",
     trimester: [1, 2, 3],
-    relatedSlugs: ["emotional-wellbeing-pregnancy", "when-the-joy-doesnt-arrive-yet", "the-first-trimester-emotionally"],
+    relatedSlugs: [
+      "emotional-wellbeing-pregnancy",
+      "pregnancy-after-loss",
+      "the-first-trimester-emotionally",
+      "when-the-joy-doesnt-arrive-yet",
+      "first-trimester-complete-guide",
+    ],
     journey: ["pregnancy", "support"],
     topics: ["feelings", "emotional-wellbeing"],
     reviewedBy: "Jenny Joines",
-    lastUpdated: "April 2026",
+    lastUpdated: "May 2026",
+    inThisArticle: [
+      "What anxiety in pregnancy can feel like",
+      "Why anxiety can happen",
+      "Physical signs of anxiety",
+      "Pregnancy after loss or fertility treatment",
+      "What may help day to day",
+      "Talking to your midwife or GP",
+      "When to ask for urgent support",
+      "What happens next",
+    ],
     keyTakeaways: [
-      "Worry in pregnancy is extremely common and not a sign something is wrong with you",
-      "Anxiety usually warrants more support when it stops easing, not when it first appears",
-      "Sleep, body, and relationships are often the clearest signals that worry has tipped into overwhelm",
-      "Treatment in pregnancy — talking therapies and, where helpful, medication — is safe and effective",
-      "Asking your midwife or GP earlier is almost always easier than asking later",
+      "Anxiety in pregnancy is common and can affect both thoughts and the body.",
+      "A wanted pregnancy can still feel frightening or overwhelming at times.",
+      "Previous loss, fertility treatment or health worries can make anxiety feel stronger.",
+      "Small daily supports can help, but they are not a replacement for professional care.",
+      "You can speak to your midwife or GP before things feel severe.",
+      "Seek urgent help if you feel unsafe, unable to cope, or worried about harming yourself or your baby.",
     ],
-    sources: [
-      { label: "Anxiety in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/mental-health-in-pregnancy-and-after-the-birth/anxiety-in-pregnancy/" },
-      { label: "Anxiety and panic attacks in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/mental-wellbeing/anxiety-and-panic-attacks-pregnancy" },
-      { label: "Mental health in pregnancy", publisher: "Royal College of Psychiatrists", url: "https://www.rcpsych.ac.uk/mental-health/treatments-and-wellbeing/mental-health-in-pregnancy" },
-    ],
-    faq: [
-      { question: "Is anxiety in pregnancy harmful to my baby?", answer: "Ordinary worry is part of pregnancy and isn't harmful. Persistent, untreated anxiety is worth supporting — not because of guilt, but because you deserve the support, and because looking after your mental health in pregnancy is one of the best things you can do for both of you." },
-      { question: "Can I take anxiety medication in pregnancy?", answer: "Some medications are considered safe in pregnancy, and a perinatal mental health team or your GP can help you weigh the options. The right answer depends on your history, your symptoms, and what's likely to help most. Stopping medication suddenly without advice isn't usually recommended." },
-      { question: "When is worry no longer normal?", answer: "It's less about a single threshold and more about whether worry is easing between waves. If it doesn't, if it's affecting sleep, eating, or daily life, or if you're having physical anxiety symptoms regularly, it's worth a conversation — sooner rather than later." },
-      { question: "Will I get anxiety again in another pregnancy?", answer: "Possibly, but not inevitably. People who've experienced antenatal anxiety often have a clearer sense of what helps and a faster path to support second time around. Telling your midwife at booking helps them put that support in place earlier." },
-    ],
-
-    // ── Deep template fields ──
-    topic: "feelings",
-    standfirst:
-      "A grounded look at worry in pregnancy — what tends to be normal, where the line into overwhelm sits, and the kinds of support that genuinely help.",
     editorialSections: [
       {
-        id: "anxiety-in-pregnancy",
-        heading: "Anxiety in pregnancy",
-        lead: "Worry in pregnancy is one of the most common emotional experiences there is — and one of the least talked about honestly.",
-        paragraphs: [
-          "Pregnancy holds a lot of unknowns. The body is changing, the future is reshaping, and almost everything that matters is, for a long time, invisible. The mind tends to fill that uncertainty with worry — and for most people, some level of anxiety is part of the season.",
-          "What follows is a calm picture of what anxiety in pregnancy can look like, where it tends to sit within normal, and the points at which more support is usually worth asking for.",
-        ],
-      },
-      {
         id: "what-anxiety-can-feel-like",
-        heading: "What anxiety can feel like",
-        lead: "Pregnancy anxiety has a recognisable texture, even when the worries themselves vary.",
+        heading: "What anxiety in pregnancy can feel like",
+        lead: "Anxiety has a recognisable texture, even when the specific worries vary from person to person.",
         paragraphs: [
-          "It often shows up as a loop — a thought that keeps circling, even after you've talked it through. It can sit in the body as tension in the chest, jaw, or shoulders, a held breath, or a sleep that won't quite come.",
-          "Some people experience anxiety as a steady hum in the background. Others have it in waves — quiet days, then a few harder days, often without an obvious trigger. Both are common.",
+          "It can show up as worry that keeps circling, racing thoughts, needing reassurance, checking symptoms, feeling on edge, or struggling to relax. Some people notice it most at night, when the day quietens and the mind gets loud. Others feel it strongest around scans, appointments or news from other people's pregnancies.",
+          "For some it comes in waves with quiet days in between. For others it hums in the background most of the time. Neither version means you are handling pregnancy badly. Anxiety in pregnancy is common, and naming it is usually the first useful thing you can do with it.",
         ],
       },
       {
-        id: "what-people-often-worry-about",
-        heading: "What people often worry about",
-        lead: "Some worries are almost universal in pregnancy. Naming them often takes some of their weight.",
+        id: "why-anxiety-can-happen",
+        heading: "Why anxiety can happen",
+        lead: "There is rarely a single cause. It is usually a mix of what is happening in your body and what is happening around you.",
         paragraphs: [
-          "The most common worries tend to gather around the baby (movements, growth, scans), the body (whether something feels right), the birth (how it will go, what it will be like), and the future (becoming a parent, finances, relationships, work).",
-          "If you've had a previous loss, fertility difficulties, a traumatic birth, or anxiety before pregnancy, those experiences usually shape what your worries look like now. That isn't a failing — it's information about what kind of support might help.",
+          "Hormonal changes, tiredness, physical symptoms and sleep disruption all reduce emotional resilience. Uncertainty about the baby, the birth or the future adds another layer, especially in early pregnancy when so much is invisible.",
+          "Previous mental health difficulties, previous loss, fertility treatment, family pressure, relationship stress, money worries, work, fears about labour and specific medical concerns can all shape how anxiety shows up. A wanted pregnancy can still feel frightening. The two are not opposites.",
         ],
       },
       {
-        id: "when-worry-starts-to-take-over",
-        heading: "When worry starts to take over",
-        lead: "The line between ordinary worry and something heavier is rarely about content — it's about pattern.",
+        id: "physical-signs",
+        heading: "Physical signs of anxiety",
+        lead: "Anxiety often shows up in the body as well as in the mind.",
         paragraphs: [
-          "It's often less about which thoughts you're having and more about whether they ease. Ordinary worry rises, peaks, and settles. Anxiety that's worth more support tends to stop settling — the loop doesn't close, the reassurance wears off in an hour, the thoughts come back.",
-          "Other signals: sleep getting harder over time, eating becoming difficult, withdrawing from people, regular physical anxiety symptoms (racing heart, breathlessness, panic), or a sense that you're spending more time managing the worry than living the day.",
+          "Common physical signs include muscle tension, a racing or fluttering heart, breathlessness, nausea, changes in appetite, stomach unsettledness, headaches, shakiness, restlessness and disturbed sleep. These can come in short bursts or sit low and steady for longer stretches.",
+          "It can be hard to tell anxiety symptoms apart from ordinary pregnancy symptoms, which overlap a lot. Both can be true at the same time. If a physical symptom is new, severe or worrying to you, contact your midwife, GP or maternity unit so it can be checked properly.",
         ],
         callout: {
           tone: "info",
-          text: "If you're not sure whether what you're feeling is enough to mention, it's almost always enough to mention. A conversation rarely makes things worse and often shifts them.",
+          text: "New, severe or worrying physical symptoms in pregnancy can have causes other than anxiety. If you are not sure, get them checked rather than sit with the uncertainty.",
         },
       },
       {
-        id: "what-can-help-in-the-moment",
-        heading: "What can help in the moment",
-        lead: "Small, repeatable practices won't fix anxiety, but they give you a foothold when a wave arrives.",
+        id: "after-loss-or-treatment",
+        heading: "Anxiety after loss, fertility treatment or difficult experiences",
+        lead: "Some experiences make pregnancy feel more uncertain from the start, and that is understandable.",
         paragraphs: [
-          "Lengthening your out-breath quiets the body's stress response — even a slow count of four in, six out, repeated for a minute, can take the edge off. Putting your feet on the floor and naming five things you can see can pull you out of the loop.",
-          "Saying the worry out loud to one safe person — a partner, a friend, your midwife — almost always shrinks it a little. So does writing it down somewhere it doesn't have to live in your head all night.",
+          "Miscarriage, stillbirth, ectopic pregnancy, IVF, long periods of infertility, a previous traumatic birth, complications in a past pregnancy or a difficult personal history can all make this pregnancy feel less safe. Reassurance often lands differently when the worst has already happened once.",
+          "You do not need to feel a specific way, or to be at a specific point in pregnancy, before you can ask for support. Tell your midwife your history at booking so your care can be shaped around it. Specialist charities and perinatal mental health services also exist precisely for this.",
         ],
       },
       {
-        id: "when-extra-support-is-worth-seeking",
-        heading: "When extra support is worth seeking",
-        lead: "Asking earlier is almost always easier than asking later.",
+        id: "what-may-help-day-to-day",
+        heading: "What may help day to day",
+        lead: "Small, repeatable things can take the edge off. They do not fix anxiety, but they can steady you.",
         paragraphs: [
-          "If anxiety is persistent, getting in the way of sleep or daily life, bringing physical symptoms regularly, or making you feel like you're not coping, that's a clear reason to talk to your midwife or GP.",
-          "Naming it doesn't commit you to anything — it just opens the door. The earlier the door is open, the wider the range of support available.",
+          "Reducing information overload often helps, especially late at night. Writing down questions before appointments can lower the pressure to remember everything in the moment. Gentle movement, if it is safe for you, along with eating regularly and resting when you can, supports your nervous system.",
+          "Slower breathing, feeling your feet on the floor, naming a few things you can see, or telling one safe person what is actually going on can each ease a wave. Where you can, try to limit repeated checking, since anxiety tends to grow the more you feed it.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Day-to-day supports are useful, but they are not a substitute for professional help if anxiety is affecting your sleep, eating, work, relationships or ability to enjoy your day.",
+        },
+      },
+      {
+        id: "talking-to-midwife-or-gp",
+        heading: "Talking to your midwife or GP",
+        lead: "You do not need to wait until things feel severe to ask for help.",
+        paragraphs: [
+          "Your midwife and GP are good first points of contact. They will not judge you for saying that pregnancy feels emotionally hard. If it helps, write a short note about how you have been feeling and hand it over at the start of the appointment.",
+          "Depending on where you live, they may refer you to NHS Talking Therapies, a specialist perinatal mental health team, counselling or another local support option. Naming it early usually opens the widest range of choices.",
         ],
       },
       {
-        id: "what-support-may-look-like",
-        heading: "What support may look like",
-        lead: "Support in pregnancy is more than 'see how you go.' There's a real system behind it.",
+        id: "when-to-seek-urgent-support",
+        heading: "When to ask for urgent support",
+        lead: "Some feelings need care sooner rather than later.",
         paragraphs: [
-          "Your midwife or GP can refer you to perinatal mental health services where they're available, or to talking therapies through services like NHS Talking Therapies. These services exist specifically for the perinatal season and understand it.",
-          "Where helpful, some medications are considered safe in pregnancy and can be discussed with a specialist team. Treatment is decided with you, not at you, and you don't have to weigh it on your own.",
+          "If your mental health is worsening quickly, if you are not sleeping for long stretches, if you are having frightening thoughts, or if you feel you cannot keep yourself or your baby safe, this is a reason to seek urgent help rather than wait for a scheduled appointment.",
+          "Contact your midwife, GP, maternity unit or local urgent mental health service. If there is an immediate risk of harm, use emergency services.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "If you feel unsafe, unable to cope, or worried you might harm yourself or your baby, seek urgent help.",
+        },
+      },
+      {
+        id: "what-happens-next",
+        heading: "What happens next",
+        lead: "Asking for help usually opens a conversation, not a single fixed pathway.",
+        paragraphs: [
+          "Depending on what you are experiencing and where you live, support may include a longer conversation with your midwife or GP, additional appointments, talking therapies, specialist perinatal mental health input, practical planning or, in some cases, a discussion about medication. Any medication decisions should be made with a professional who knows you and your pregnancy.",
+          "If you are already taking medication for anxiety or a mental health condition, do not start, stop or change it on your own. Speak to your GP, midwife or specialist so any changes are considered safely alongside your pregnancy.",
         ],
       },
     ],
+    faq: [
+      { question: "Is anxiety common in pregnancy?", answer: "Yes. Many people experience anxiety at some point in pregnancy. It can be mild and passing, or more persistent and difficult. Either way, it is worth naming to someone you trust or to your midwife or GP." },
+      { question: "Can anxiety happen even if I wanted the pregnancy?", answer: "Yes. A wanted pregnancy can still feel frightening, overwhelming or uncertain. Wanting a baby and feeling anxious about pregnancy are not opposites." },
+      { question: "What does anxiety in pregnancy feel like?", answer: "It can feel like worry that will not settle, racing thoughts, panic, feeling on edge, checking symptoms, or physical tension such as a racing heart, breathlessness or poor sleep. It varies from person to person." },
+      { question: "Should I tell my midwife if I feel anxious?", answer: "Yes. Midwives are used to hearing this and will not judge you. Telling them early gives you access to a wider range of support, including talking therapies and perinatal mental health services." },
+      { question: "Can anxiety affect sleep or physical symptoms?", answer: "It often can. Anxiety can disrupt sleep, appetite and digestion, and can bring a racing heart, breathlessness or muscle tension. If any physical symptom is new, severe or worrying, get it checked so other causes can be ruled out." },
+      { question: "What if I am pregnant after a loss or IVF?", answer: "Anxiety is very understandable after loss, fertility treatment or a previous traumatic experience. Tell your midwife your history at booking so your care can be shaped around it, and consider specialist charities or perinatal mental health support." },
+      { question: "What should I do if I feel unable to cope?", answer: "Contact your midwife, GP, maternity unit or local urgent mental health service. If you feel unsafe, unable to cope, or worried you might harm yourself or your baby, seek urgent help rather than wait." },
+      { question: "Can treatment or therapy help during pregnancy?", answer: "Yes. Talking therapies, specialist perinatal mental health support and, in some cases, medication can all help. Any medication decisions should be made with a professional who knows you and your pregnancy. Do not start, stop or change medication on your own." },
+    ],
+    sources: [
+      { label: "Anxiety in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/mental-health/" },
+      { label: "Mental health in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/mental-health/" },
+      { label: "Anxiety and panic attacks in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/mental-wellbeing/anxiety-and-panic-attacks-pregnancy" },
+      { label: "Mental health in pregnancy", publisher: "Royal College of Psychiatrists", url: "https://www.rcpsych.ac.uk/mental-health/treatments-and-wellbeing/mental-health-in-pregnancy" },
+      { label: "Postnatal depression and perinatal mental health", publisher: "Mind", url: "https://www.mind.org.uk/information-support/types-of-mental-health-problems/postnatal-depression-and-perinatal-mental-health/" },
+    ],
   },
+
 
   // ─── PREGNANCY AFTER LOSS ─────────────────────────────────────────────────
   {

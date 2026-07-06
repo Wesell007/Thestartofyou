@@ -128,11 +128,83 @@ const rawFamilyArticles: FamilyArticle[] = [
   {
     slug: "sharing-the-mental-load",
     topic: "relationships",
-    title: "Sharing the mental load",
+    title: "Sharing the mental load in family life",
     description:
-      "How to name the invisible work of family life and share it more evenly with your partner.",
+      "A balanced look at the invisible planning behind family life and how to share ownership of it more fairly.",
     readTime: "6 min read",
-    status: "draft",
+    status: "ready",
+    seoTitle: "Sharing the mental load in family life",
+    seoDescription:
+      "A calm, non-blaming guide to making the invisible planning of family life visible, and sharing ownership of it more fairly.",
+    lastUpdated: "July 2026",
+    intro:
+      "Behind every family week there is a quiet layer of planning that rarely gets seen. Remembering the school forms, tracking who is running low on socks, noticing that a friend's birthday is next Thursday. This piece is about that invisible work, and about sharing it in a way that feels fair without turning family life into a spreadsheet.",
+    sections: [
+      {
+        heading: "What the mental load can look like",
+        body: [
+          "The mental load is the thinking, planning and remembering that keeps family life moving. It sits underneath the practical tasks and often stays invisible until something is missed.",
+          "It can include noticing when the fridge is empty, keeping a mental list of upcoming appointments, tracking which child has grown out of which shoes, or holding in mind the emotional temperature of the house.",
+        ],
+      },
+      {
+        heading: "Why it can feel so heavy",
+        body: [
+          "Practical tasks have a beginning and an end. The mental load does not. It runs quietly in the background, even on days off, and often shows up most at bedtime, when the day is meant to be finished.",
+          "It can also be hard to describe. When someone asks what you did today and the honest answer includes twenty small acts of noticing and planning, it can feel easier to say \"not much\" than to try to explain.",
+        ],
+      },
+      {
+        heading: "Talk about tasks before resentment builds",
+        body: [
+          "Conversations about the mental load tend to go better when they happen before anyone is already frustrated. A calm moment at the weekend usually lands better than a hard word at 7pm on a Wednesday.",
+          "Try starting with what you are noticing rather than what the other person is not doing. Something like, \"I've been holding a lot of the planning lately and I'd like us to look at it together,\" opens a conversation without putting anyone on the defensive.",
+        ],
+      },
+      {
+        heading: "Share ownership, not just help",
+        body: [
+          "Being asked to help is different from owning a task. If one person always holds the plan and the other steps in when asked, the mental load has not moved, only the doing.",
+          "Sharing ownership means the whole task moves, including the noticing, the deciding and the following up. Whoever owns bedtime owns the pyjamas, the bath timing, the story and the moment it all starts to unravel.",
+        ],
+      },
+      {
+        heading: "Make invisible tasks visible",
+        body: [
+          "It is easier to share what everyone can see. Some families find it helpful to sit down together and list what actually runs a normal week, from meal planning to washing to remembering birthdays.",
+          "The point is not a perfect list. It is a shared picture. Once the work is visible, it becomes possible to talk about who is best placed to hold each part, and what could be simplified, dropped or done less often.",
+        ],
+      },
+      {
+        heading: "What to do if conversations keep going in circles",
+        body: [
+          "Sometimes these conversations get stuck in the same loop. It can help to slow down and separate two things: the practical question of who does what, and the emotional question of feeling seen and appreciated.",
+          "Both matter. Practical changes without acknowledgement can feel hollow, and acknowledgement without practical change tends to wear thin. Naming which one you need in a given moment can move a conversation forward.",
+          "If conflict feels stuck, unsafe or overwhelming, speaking to a couples counsellor, family therapist or another trusted professional can help.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Choose one recurring task and hand over the whole thing, including the noticing. Packed lunches, laundry, the nursery bag, the family calendar.",
+          "Set a short weekly check-in, even ten minutes, to look at the week ahead together. It removes the need for one person to hold everything in their head.",
+          "Notice appreciation out loud. Naming the invisible work you can see the other person doing tends to be quietly powerful, in both directions.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "The mental load is the invisible planning behind family life, not just the tasks themselves.",
+      "Sharing help is not the same as sharing ownership.",
+      "Calm conversations before resentment builds tend to go further than difficult ones in the moment.",
+      "Making the work visible is often the first real step towards sharing it.",
+      "Practical change and feeling appreciated usually need to move together.",
+      "If conversations stay stuck, a counsellor or trusted professional can help.",
+    ],
+    relatedSlugs: [
+      "building-family-routines",
+      "setting-boundaries-with-grandparents",
+      "building-family-traditions",
+    ],
   },
 
   // Family basics

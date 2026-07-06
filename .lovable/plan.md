@@ -1,13 +1,3 @@
-## Phase 2 — Duplicate Merge Lock-In (planning only)
-
-Append a `## Locked canonical map` section to `.lovable/plan.md` recording the 10 canonical decisions from the Legacy Article Cleanup Plan. No code, data, route, SEO, template, redirect or article-copy changes.
-
-### File touched
-- `.lovable/plan.md` (append only; file already exists from Phase 1)
-
-### Section to append (verbatim)
-
-```md
 ## Locked canonical map
 
 These canonical decisions are locked for the article cleanup phase. No redirects should be implemented until the canonical target article has been rewritten or confirmed to meet the full premium article standard.
@@ -71,21 +61,3 @@ These canonical decisions are locked for the article cleanup phase. No redirects
 - Canonical future target: Pregnancy Preparing for Baby topic or a rewritten pregnancy cornerstone article.
 - Decision: Do not relink this legacy article yet. Decide later whether to rewrite it as a premium pregnancy cornerstone or fold it into the preparing-for-baby topic page and related articles.
 - Current action: No redirect yet. Keep URL resolving. Do not promote from topic cards.
-```
-
-### Guardrails
-- Only `.lovable/plan.md` edited.
-- No redirects, no article deletions, no topic-data edits, no route/SEO/template/copy changes.
-- No Family article publishing.
-
-### Verification
-- `tsgo` (should be unaffected — markdown-only change).
-- `git status` shows only `.lovable/plan.md` modified.
-
-### Return summary (after implementation)
-- File edited: `.lovable/plan.md`
-- Pre-existing (created in Phase 1); appended new section.
-- Full `## Locked canonical map` section quoted back.
-- Confirmation no code files changed.
-- `tsgo` result.
-- Suggested next prompt.

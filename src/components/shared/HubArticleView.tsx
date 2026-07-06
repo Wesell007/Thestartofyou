@@ -110,7 +110,9 @@ const HubArticleView = ({
             }}
             aria-hidden
           />
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl relative z-10">
+          <div className={`container mx-auto px-5 sm:px-6 md:px-10 relative z-10 ${heroImage ? "max-w-6xl" : "max-w-3xl"}`}>
+            <div className={heroImage ? "grid gap-10 md:gap-12 lg:gap-16 md:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] md:items-center" : ""}>
+              <div className={heroImage ? "max-w-[36rem]" : ""}>
             {/* Breadcrumb */}
             <nav
               aria-label="Breadcrumb"

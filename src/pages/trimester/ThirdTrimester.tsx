@@ -80,6 +80,15 @@ const ThirdTrimester = () => {
         {/* 12. Where to go deeper */}
         <ThirdTriDeeper />
 
+        {/* 12b. Complete guide link */}
+        <TrimesterCompleteGuideCard
+          title="Third trimester: a complete guide"
+          description="A practical guide to late pregnancy, baby movements, appointments, labour signs and getting ready for birth."
+          ctaLabel="Read the complete third trimester guide"
+          href="/articles/third-trimester-complete-guide"
+        />
+
+
         {/* 13. Common questions FAQ */}
         <ThirdTriFAQ />
 

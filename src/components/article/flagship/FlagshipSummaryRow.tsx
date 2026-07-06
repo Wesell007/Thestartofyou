@@ -1,4 +1,4 @@
-import { Shield } from "lucide-react";
+
 import type { ArticleData } from "@/data/articleData";
 
 interface Props {
@@ -22,14 +22,6 @@ const FlagshipSummaryRow = ({ data }: Props) => {
             <p className="font-sans text-[15px] sm:text-base font-light text-foreground leading-[1.8]">
               {data.quickAnswer}
             </p>
-            {data.reviewedBy && (
-              <div className="mt-5 pt-3 border-t border-border/20">
-                <span className="flex items-center gap-1.5 font-sans text-[11px] font-light text-sage">
-                  <Shield className="w-3 h-3 text-sage/60" />
-                  Medically reviewed by {data.reviewedBy}
-                </span>
-              </div>
-            )}
           </article>
 
           {/* IN THIS ARTICLE */}

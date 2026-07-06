@@ -399,9 +399,81 @@ const rawFamilyArticles: FamilyArticle[] = [
     topic: "travel-days-out",
     title: "Travelling with young children",
     description:
-      "Gentle preparation for flights, trains and longer trips, from packing to keeping little ones settled.",
+      "Practical, warm ways to make journeys with young children calmer, without pretending travel is always easy.",
     readTime: "6 min read",
-    status: "draft",
+    status: "ready",
+    seoTitle: "Travelling with young children",
+    seoDescription:
+      "A realistic guide to travelling with young children, covering planning, packing, expectations and what to do when a journey goes off plan.",
+    lastUpdated: "July 2026",
+    intro:
+      "Travelling with young children is rarely as relaxed as the photos suggest. Even short trips can involve more logistics than the destination itself. This piece is about making journeys feel a little steadier, without needing everything to run perfectly, and without pretending that travel with small children is ever quite the same as travel without them.",
+    sections: [
+      {
+        heading: "Why travelling with children can feel like a lot",
+        body: [
+          "Travel takes children away from the routines that usually hold their day. New places, new food, new sounds, and often less sleep than usual. It is a lot to take in, even when the trip is a happy one.",
+          "For parents, the load is different but real. You are carrying the plan, the bags, the snacks, the emotional weather and often a small human at the same time. Naming that this is genuinely hard, not something you should be finding easy, tends to help before anything practical does.",
+        ],
+      },
+      {
+        heading: "Plan around the hardest moments",
+        body: [
+          "Rather than planning around the ideal version of the trip, it can help to plan around the moments you already know will be hard. Nap times, hunger, the last hour of a long journey, arriving somewhere new.",
+          "If you can, timing departures around sleep, keeping food easy to reach, and building in a soft landing at the other end can take a lot of pressure off the middle of the journey.",
+        ],
+      },
+      {
+        heading: "Pack for needs, not every possible scenario",
+        body: [
+          "It is tempting to pack for every possible thing that could happen. In practice, an overstuffed bag is often harder to move through a station or an airport than it is helpful when you arrive.",
+          "A useful test is to think about the next few hours, not the whole trip. Nappies, snacks, water, a change of clothes, one comfort item, one quiet activity. Most other things can be sorted at the destination.",
+        ],
+      },
+      {
+        heading: "Keep expectations flexible",
+        body: [
+          "Young children rarely travel in a straight line. A journey that looked simple on paper can shift shape once you are actually in it.",
+          "Holding the plan lightly tends to help. If a train is late, if a nap happens in the wrong place, if a meltdown lands in the middle of an airport lounge, the trip is not ruined. It is just travelling with young children.",
+        ],
+      },
+      {
+        heading: "Build in pauses where you can",
+        body: [
+          "Short pauses often do more than one long break. A few minutes off the train, a walk around the terminal, a stop at a service station where everyone can move and eat properly.",
+          "Where possible, aim for a slower start and a slower end. Arriving with time to spare at one end, and time to settle at the other, softens the parts of the day that usually feel hardest.",
+        ],
+      },
+      {
+        heading: "What to do when the journey goes off plan",
+        body: [
+          "At some point, a journey will go off plan. A delay, an illness, a lost comforter, a tantrum with a big audience. In the moment, the most useful thing is often to lower the bar of what counts as a success.",
+          "Getting everyone somewhere safe, warm and fed is enough. The rest of the day does not need to be salvaged. Children usually settle faster than the adults expect, especially once they feel that you are steady.",
+        ],
+      },
+      {
+        heading: "Practical ideas before you leave",
+        body: [
+          "Do the boring admin the day before, not on the morning of travel. Passports, tickets, chargers, car seat, buggy.",
+          "Prepare a small \"first-hour\" bag with snacks, water, wipes and one quiet activity, so you are not digging through a suitcase in the first ten minutes.",
+          "Talk your child through what will happen in simple terms. Not a full itinerary, just the shape. We will get in the car, then a train, then Grandma's house.",
+          "Give yourself permission for the trip to be imperfect. That is often when the good bits show up.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Travel disrupts routines, and it is normal for both children and parents to feel it.",
+      "Planning around the hardest moments takes more pressure off than planning for the ideal ones.",
+      "Packing for the next few hours usually beats packing for every possibility.",
+      "Holding the plan lightly makes off-plan moments feel less like failure.",
+      "Small pauses often carry a journey more than one long break.",
+      "Getting everyone somewhere safe, warm and fed is a good enough day.",
+    ],
+    relatedSlugs: [
+      "making-car-journeys-calmer",
+      "building-family-routines",
+      "screen-time-as-a-family",
+    ],
   },
   {
     slug: "making-car-journeys-calmer",
@@ -409,8 +481,81 @@ const rawFamilyArticles: FamilyArticle[] = [
     title: "Making car journeys calmer",
     description:
       "Small comforts, timings and distractions that make everyday car journeys feel less fraught.",
-    readTime: "4 min read",
-    status: "draft",
+    readTime: "5 min read",
+    status: "ready",
+    seoTitle: "Making car journeys calmer",
+    seoDescription:
+      "A grounded guide to calmer car journeys with young children, covering preparation, comfort, snacks, breaks and realistic expectations.",
+    lastUpdated: "July 2026",
+    intro:
+      "Car journeys with young children can be some of the more testing parts of family life, even when the trip itself is short. Confined space, no way to reach each other easily, and a small person whose mood can shift quickly. This piece is about small, practical ways to make everyday car journeys feel a little calmer, without needing to overhaul how you travel.",
+    sections: [
+      {
+        heading: "Why car journeys can be hard for children",
+        body: [
+          "Cars ask a lot of young children. They cannot move much, they cannot see as much as we can, and they often cannot easily reach the people they most want to be near.",
+          "Add tiredness, hunger, or a change in routine and even a short journey can feel long. It is not a sign that anything is wrong with your child or your parenting. It is simply a hard environment for a small nervous system.",
+        ],
+      },
+      {
+        heading: "Prepare the car before everyone is tired",
+        body: [
+          "The calmest journeys usually start before anyone gets in the car. A quick check that snacks are within reach, water is topped up, a favourite soft toy is where it should be, and any music or story is ready to go.",
+          "Two minutes of preparation while everyone is still in the house tends to save ten minutes of stress once you are already on the road.",
+        ],
+      },
+      {
+        heading: "Think in stages, not one long journey",
+        body: [
+          "For young children, the idea of a two-hour drive is meaningless. It helps to break the journey into smaller shapes, even in your own head.",
+          "First the drive to the motorway, then the stretch to the service station, then the last bit to where we are going. Naming small milestones out loud can turn a long journey into a series of shorter, more manageable ones.",
+        ],
+      },
+      {
+        heading: "Snacks, comfort and simple activities",
+        body: [
+          "Snacks that are easy to hold, not too messy and not too sugary tend to travel best. Bits of fruit, crackers, oatcakes, small sandwiches.",
+          "A familiar comfort item, a small blanket, or a favourite soft toy can quietly settle a child more than any activity. Alongside that, one simple thing to look at or listen to, a story, a playlist, a window book, is usually enough. You do not need to entertain the whole journey.",
+        ],
+      },
+      {
+        heading: "When your child gets upset in the car",
+        body: [
+          "Sometimes a journey turns and your child becomes properly upset. It is one of the harder moments of family life, because you cannot easily reach them and you may not be able to stop straight away.",
+          "A calm, steady voice helps more than trying to fix it in the moment. Naming what you can, \"I know, this bit feels long, we're going to stop soon,\" often lands even when they cannot answer.",
+          "Where it is safe and possible, pulling in for a few minutes to reset can shift the whole rest of the journey. It is not a failure of the trip. It is a small, kind pause.",
+        ],
+      },
+      {
+        heading: "Helping yourself stay calm too",
+        body: [
+          "Driving while a child is unsettled is genuinely hard. Your own nervous system is doing a lot of work at the same time as theirs.",
+          "Where you can, keep your own basics steady. Water, a snack you like, a playlist that does not add to the noise. Small kindnesses to yourself in the driver's seat quietly carry the whole family.",
+        ],
+      },
+      {
+        heading: "Practical ideas for the next journey",
+        body: [
+          "Pack a small \"car bag\" that lives near the door, with snacks, wipes, a spare top and one quiet activity, so it is one less thing to remember.",
+          "Time journeys around naps or after meals where possible, rather than into hunger or overtired stretches.",
+          "Talk your child through the shape of the trip in simple terms before you set off.",
+          "Let the journey be quieter than you might think it needs to be. Music low, conversation gentle, plenty of window time.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Cars are a hard environment for young children, and hard journeys are not a sign of a problem.",
+      "A little preparation before anyone gets in the car saves a lot of stress on the road.",
+      "Breaking a long drive into smaller stages helps children and adults alike.",
+      "One comfort item and one simple activity usually beats a bag full of options.",
+      "A calm voice and a safe short pause can reset an unsettled journey.",
+      "Looking after yourself in the driver's seat quietly steadies everyone else.",
+    ],
+    relatedSlugs: [
+      "travelling-with-young-children",
+      "building-family-routines",
+      "screen-time-as-a-family",
+    ],
   },
 
   // Play and connection

@@ -2353,52 +2353,58 @@ const articleDatabase: ArticleData[] = [
     ],
   },
 
-  // ─── THIRD TRIMESTER COMPLETE GUIDE (Cornerstone) ───────────────────────
+  // ─── THIRD TRIMESTER COMPLETE GUIDE (Cornerstone / Flagship) ────────────
   {
     slug: "third-trimester-complete-guide",
-    title: "Third trimester: everything you need to know about weeks 28 to birth",
-    metaDescription: "What happens in the third trimester? A complete guide to symptoms, preparation, baby position, and what to expect from week 28 to birth.",
-    quickAnswer: "The third trimester is the final stretch of pregnancy. Your baby gains weight rapidly, you may feel more tired and uncomfortable, and your body begins preparing for birth. It is a time of anticipation, physical change, and emotional intensity.",
+    title: "Third trimester: a complete guide",
+    metaDescription:
+      "A calm, practical guide to the third trimester of pregnancy, including symptoms, baby movements, appointments, labour signs, birth preparation and when to ask for help.",
+    isCornerstone: true,
+    topic: "body",
+    standfirst:
+      "The third trimester can feel close and far away at the same time. Your baby is growing, your body may feel heavier, appointments can become more frequent, and birth may start to feel more real. This guide walks you through what may happen, what can feel normal, and when it is worth asking for support.",
+    quickAnswer:
+      "The third trimester usually runs from week 28 until birth. Your baby keeps growing and their movements remain an important sign of wellbeing. Common experiences include tiredness, back or pelvic discomfort, heartburn, swelling, Braxton Hicks, sleep changes, breathlessness and stronger emotions. Antenatal appointments often become more frequent, and thoughts often turn to birth preferences, hospital bags and the practical side of preparing. Any change in your baby's movements, bleeding, severe or one-sided pain, leaking fluid, severe headache, changes in vision, chest pain, severe breathlessness or anything that feels wrong should be checked with a midwife, maternity unit, GP or urgent care.",
     howThisFeels: [
       "A growing mix of excitement and nervousness",
       "Feeling physically heavier and more tired",
       "Impatience to meet your baby",
-      "Emotional waves as the reality of birth approaches",
+      "Emotional waves as birth begins to feel closer",
     ],
     whatHappening: {
       commonCauses: [
-        { heading: "Baby's final growth", body: "Your baby gains most of their weight in the third trimester, developing fat stores, maturing lungs, and preparing for life outside the womb." },
-        { heading: "Body preparing for birth", body: "Braxton Hicks contractions become more frequent. The baby may engage (move head-down into the pelvis). Your cervix begins to soften." },
-        { heading: "Increased discomfort", body: "Pressure on the bladder, breathlessness, backache, and difficulty sleeping are common as your baby takes up more space." },
+        { heading: "Baby's continued growth", body: "Your baby continues to grow through the third trimester, laying down fat, maturing their lungs and preparing for life outside the womb." },
+        { heading: "Body preparing for birth", body: "Braxton Hicks contractions may become more noticeable. Your baby may move head-down, and your cervix gradually softens closer to labour." },
+        { heading: "Increased physical demands", body: "Pressure on the bladder, breathlessness, backache and broken sleep are common as your baby takes up more space." },
       ],
       lessCauses: [
-        { heading: "Pelvic girdle pain", body: "Hormone changes and the weight of the baby can cause pain in the pelvis, hips, or lower back." },
-        { heading: "Swelling", body: "Mild swelling in feet, ankles, and hands is common due to increased fluid retention." },
+        { heading: "Pelvic girdle pain", body: "Hormone changes and the weight of the baby can cause pain in the pelvis, hips or lower back. A midwife or physiotherapist can help." },
+        { heading: "Swelling", body: "Mild swelling in feet, ankles and hands is common. Sudden or severe swelling should always be checked." },
       ],
-      whyItVaries: "The third trimester feels different for everyone depending on baby position, fitness, previous pregnancies, and individual health.",
+      whyItVaries: "The third trimester feels different for everyone. Baby position, fitness, previous pregnancies and individual health all shape the experience.",
     },
     timing: {
       whenStarts: "The third trimester begins at week 28.",
-      whenPeaks: "Weeks 36-40 are often the most physically intense.",
+      whenPeaks: "Weeks 36 to 40 are often the most physically demanding.",
       whenEases: "It ends at birth, typically between 37 and 42 weeks.",
     },
     whatItFeelsLike: [
       "The physical weight of carrying a full-term baby",
-      "Nights of broken sleep and constant bathroom trips",
+      "Nights of broken sleep and frequent trips to the loo",
       "Nesting energy mixed with exhaustion",
       "A deep emotional pull towards meeting your baby",
     ],
-    whatThisMeans: "Your body is doing extraordinary work preparing for birth. The discomfort is temporary and purposeful.",
-    normal: ["Braxton Hicks contractions", "Difficulty sleeping", "Frequent urination", "Mild swelling", "Increased vaginal discharge"],
-    seekSupport: ["Reduced or changed baby movements", "Severe headache with visual disturbances", "Sudden severe swelling in face or hands", "Regular painful contractions before 37 weeks", "Vaginal bleeding"],
-    disclaimer: "This is general guidance, not medical advice. Always contact your maternity unit if you are concerned.",
+    whatThisMeans: "Your body is doing enormous work preparing for birth. The discomfort is real, and asking for support is always reasonable.",
+    normal: ["Braxton Hicks contractions", "Difficulty sleeping", "Frequent weeing", "Mild swelling", "Increased vaginal discharge", "Stronger baby movements"],
+    seekSupport: ["Any change in your baby's movements", "Bleeding of any kind", "Severe or one-sided abdominal pain", "Leaking fluid", "Severe headache or changes in vision", "Sudden swelling of face or hands", "Chest pain or severe breathlessness", "Severe itching, especially at night"],
+    disclaimer: "This is general guidance, not medical advice. Always contact your maternity unit or midwife if you are concerned.",
     whatYouCanDo: [
-      { action: "Monitor baby movements daily", reason: "Knowing your baby's pattern helps you notice changes early." },
-      { action: "Prepare your birth preferences", reason: "Having a flexible plan helps you feel more in control." },
-      { action: "Pack your hospital bag from around 36 weeks", reason: "Being prepared reduces last-minute stress." },
-      { action: "Rest when you can", reason: "Your body needs energy for birth and recovery." },
+      { action: "Get to know your baby's movements", reason: "If anything feels different or you are worried, contact your maternity unit or midwife straight away." },
+      { action: "Think about birth preferences", reason: "A flexible plan helps you feel more informed, without needing every detail settled." },
+      { action: "Pack your hospital bag from around 36 weeks", reason: "Having things ready eases last-minute stress." },
+      { action: "Rest when you can", reason: "Your body is working hard. Sleep, sit and slow down where possible." },
     ],
-    whatHappensNext: "Birth and the beginning of your postpartum journey. The transition from pregnancy to parenthood is one of the most profound changes you will experience.",
+    whatHappensNext: "Birth and the early days of the postpartum period. The transition from pregnancy to parenthood is one of the most significant changes you will experience.",
     relatedStage: {
       intro: "Continue exploring:",
       links: [
@@ -2407,27 +2413,188 @@ const articleDatabase: ArticleData[] = [
         { label: "Preparing for Baby", href: "/preparing-for-baby" },
       ],
     },
-    aiPrompts: ["What should I pack in my hospital bag?", "How do I know if contractions are real?", "When should I call the hospital?"],
-    captureIntro: "The final weeks of pregnancy are filled with anticipation. These moments are worth capturing before everything changes.",
+    aiPrompts: ["What should I pack in my hospital bag?", "How do I know if contractions are real?", "When should I call the maternity unit?"],
+    captureIntro: "The final weeks of pregnancy are full of anticipation. These moments are worth capturing before everything changes.",
     trimester: [3],
     journey: ["pregnancy"],
     topics: ["body-changes", "symptoms", "timelines", "practical-preparation"],
-    isCornerstone: true,
     productPromotion: "strong",
-    keyTakeaways: [
-      "The third trimester runs from week 28 to birth",
-      "Your baby gains most of their weight during this stage",
-      "Monitor baby movements daily and report any changes",
-      "Prepare for birth while resting when you can",
+    relatedSlugs: [
+      "reduced-movements-in-pregnancy",
+      "the-36-week-appointment",
+      "signs-of-labour",
+      "braxton-hicks-contractions",
+      "birth-preferences",
     ],
-    inThisArticle: ["What happens in the third trimester", "Baby development", "Common symptoms", "Preparing for birth", "When to seek help", "Common questions"],
-    sources: ["NHS: Your pregnancy week by week", "Tommy's: Third trimester", "RCOG: Reduced fetal movements"],
-    lastUpdated: "March 2026",
+    keyTakeaways: [
+      "The third trimester usually starts at week 28 and continues until birth.",
+      "Your baby's movements remain an important sign of wellbeing.",
+      "Feeling physically uncomfortable can be common, but severe or worrying symptoms should always be checked.",
+      "Appointments often become more frequent as your pregnancy progresses.",
+      "Birth preparation can be practical and emotional, and it does not need to happen all at once.",
+      "You do not need to feel ready all at once for the birth to go well.",
+    ],
+    inThisArticle: [
+      "What the third trimester covers",
+      "Symptoms and body changes",
+      "Your baby's growth and movements",
+      "Appointments and checks",
+      "Preparing for birth",
+      "Emotions and waiting",
+      "When to ask for help",
+      "What happens as labour gets closer",
+    ],
+    sources: [
+      { label: "You and your baby at 28 to 40+ weeks pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/week-by-week/28-to-40-plus/" },
+      { label: "Your antenatal appointments", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/your-antenatal-appointments/" },
+      { label: "Your baby's movements in pregnancy", publisher: "RCOG", url: "https://www.rcog.org.uk/for-the-public/browse-our-patient-information/your-babys-movements-in-pregnancy/" },
+      { label: "Signs that labour has begun", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/signs-of-labour/signs-that-labour-has-begun/" },
+      { label: "Antenatal care (NG201)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng201" },
+    ],
+    lastUpdated: "May 2026",
     reviewedBy: "Jenny Joines",
+    editorialSections: [
+      {
+        id: "what-the-third-trimester-covers",
+        heading: "What the third trimester actually covers",
+        lead: "The third trimester runs from week 28 until birth. It is the final stretch of pregnancy and often feels physically and emotionally different from the trimesters before it.",
+        paragraphs: [
+          "Weeks are still counted from the first day of your last period. The third trimester begins at 28 weeks and continues until your baby is born, usually between 37 and 42 weeks.",
+          "For some people this trimester feels slow and heavy, with sleep, comfort and mobility becoming harder. For others there is a mix of tiredness, nesting energy and anticipation.",
+          "There is no single third-trimester experience. If yours does not match what other people describe, that does not mean anything is wrong.",
+        ],
+        callout: {
+          tone: "info",
+          text: "The end date of pregnancy is not fixed. Anything from 37 to 42 weeks is considered term.",
+        },
+      },
+      {
+        id: "symptoms-and-body-changes",
+        heading: "Symptoms and body changes you may notice",
+        lead: "Your body keeps adapting as your baby grows. Many changes are physical, some are emotional, and most come and go.",
+        paragraphs: [
+          "Common experiences include tiredness, back pain, pelvic discomfort, heartburn, constipation, swelling, breathlessness, broken sleep, Braxton Hicks contractions, pressure low down and needing to wee more often.",
+          "Braxton Hicks are practice contractions. They are usually irregular, do not become stronger and often ease with a change of position. Painful, regular tightenings before 37 weeks should be discussed with your maternity unit.",
+          "Sleep can be difficult in late pregnancy. From 28 weeks it is safer to settle to sleep on your side rather than your back. Cushions between the knees or under the bump can help.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Severe headache, changes in vision, sudden swelling of face or hands, or severe itching (especially at night) should be checked without delay.",
+        },
+      },
+      {
+        id: "baby-growth-and-movements",
+        heading: "Your baby's growth and movements",
+        lead: "Your baby continues to grow through the third trimester, and their movements remain an important sign of wellbeing.",
+        paragraphs: [
+          "By this stage your baby is laying down fat, their lungs are maturing and their senses are developing. Many babies move into a head-down position in the later weeks, though not all.",
+          "Movements often become stronger and more predictable, though every baby has their own pattern. Babies do not move less at the end of pregnancy. If movements slow down, feel different, or you are worried, contact your maternity unit or midwife straight away.",
+          "You do not need to count kicks against a fixed rule. Trust your sense of what is usual for your baby, and always ask if something feels different.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Never wait until the next day to check reduced or changed movements. Contact your maternity unit at any time, day or night.",
+        },
+      },
+      {
+        id: "appointments-and-checks",
+        heading: "Appointments and checks in late pregnancy",
+        lead: "Antenatal appointments usually become more frequent through the third trimester.",
+        paragraphs: [
+          "At routine appointments your midwife will usually check your blood pressure, test your urine, measure your bump, listen to your baby and talk about how you are feeling. Baby position may be discussed from around 36 weeks.",
+          "Some people are offered extra growth scans or additional monitoring if earlier care, medical history or bump measurements suggest it would help.",
+          "The 36-week appointment is often when birth preferences, feeding intentions, support at home and who to call are talked through. It is a good time to ask questions.",
+        ],
+      },
+      {
+        id: "preparing-for-birth",
+        heading: "Preparing for birth without pressure",
+        lead: "Preparing for birth can be practical and small-scale. You do not need to have everything sorted at once.",
+        paragraphs: [
+          "Practical preparation often includes thinking about birth preferences, a hospital bag, how you will get to your place of birth, who will be with you, feeding intentions and setting up the space at home.",
+          "It also helps to know who to call and when. Your maternity notes usually include phone numbers for the maternity unit, triage and out-of-hours advice.",
+          "Emotional preparation is just as valid. Talking through fears, previous experiences and what would help you feel supported can shape how the birth feels, whatever happens on the day.",
+        ],
+      },
+      {
+        id: "emotions-and-waiting",
+        heading: "Emotions, waiting and feeling ready",
+        lead: "The final weeks of pregnancy can bring a wide mix of feelings, and not all of them are calm.",
+        paragraphs: [
+          "It is common to feel anxious, impatient, excited, nervous, weepy, protective, unprepared or all of these in a single day. Fear of birth is common and worth talking about with your midwife.",
+          "Body image, intimacy and relationships can shift. Sharing worries with your partner, a trusted friend or a midwife often helps more than trying to think your way through alone.",
+          "You do not need to feel ready to be ready. Many people meet their baby without having felt fully prepared, and things still work out.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If low mood or anxiety is affecting your daily life, please tell your midwife or GP. Support in late pregnancy is available and asking for it is a good step.",
+        },
+      },
+      {
+        id: "when-symptoms-should-be-checked",
+        heading: "When symptoms should be checked",
+        lead: "Some symptoms in the third trimester should always be checked, even if they turn out to be nothing.",
+        paragraphs: [
+          "Contact your maternity unit, midwife, GP or urgent care about any change in your baby's movements, bleeding, severe abdominal pain, one-sided pain, leaking fluid, a severe headache, changes in vision, sudden swelling of face or hands, chest pain, severe breathlessness, fainting, fever, severe itching (especially at night) or a general sense that something is not right.",
+          "If you are worried, it is always reasonable to ask for help. Maternity teams are used to these calls, and reassurance is part of your care.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "You will never be told off for calling. Please do not wait if something feels wrong.",
+        },
+      },
+      {
+        id: "what-happens-as-labour-gets-closer",
+        heading: "What happens as labour gets closer",
+        lead: "Labour rarely arrives on a neat timetable. It can start slowly, quickly, or with early signs that come and go.",
+        paragraphs: [
+          "Early signs can include Braxton Hicks becoming more frequent, a mucus plug or 'show', backache, period-like cramps, or a nesting urge. These signs can appear days before anything more happens.",
+          "Waters may break as a gush or a slow trickle. If you think your waters have broken, contact your maternity unit for advice, especially if the fluid is not clear.",
+          "Contractions of labour usually become more regular, stronger and longer over time. Your maternity unit will guide you on when to come in. If you go past your due date, your midwife will talk through options including a membrane sweep and induction.",
+        ],
+      },
+    ],
     faq: [
-      { question: "How do I know if contractions are real or Braxton Hicks?", answer: "Braxton Hicks are usually irregular, painless, and stop with movement or rest. Real contractions become regular, longer, and more intense over time." },
-      { question: "When should I go to the hospital?", answer: "Contact your maternity unit if contractions are regular (every 5 minutes), your waters break, you have reduced movements, or you are concerned about anything." },
-      { question: "What is the best sleeping position in the third trimester?", answer: "Sleeping on your side (particularly the left) is recommended from 28 weeks as it supports blood flow to your baby." },
+      {
+        question: "When does the third trimester start and end?",
+        answer:
+          "It begins at week 28 and continues until birth, usually between 37 and 42 weeks. Weeks are counted from the first day of your last period.",
+      },
+      {
+        question: "Do babies move less near the end of pregnancy?",
+        answer:
+          "No. Babies do not move less at the end of pregnancy. Movements may feel different as space becomes tighter, but the strength and pattern should not reduce. If movements slow down or feel different, contact your maternity unit or midwife straight away.",
+      },
+      {
+        question: "Are Braxton Hicks contractions normal?",
+        answer:
+          "Yes. Braxton Hicks are practice contractions and can feel like a tightening across the bump. They are usually irregular and do not become stronger. Regular painful contractions, especially before 37 weeks, should be discussed with your maternity unit.",
+      },
+      {
+        question: "When should I call the maternity unit?",
+        answer:
+          "Call about any change in your baby's movements, bleeding, severe pain, leaking fluid, severe headache, visual changes, sudden swelling, severe itching, or if something feels wrong. Also call when contractions become regular or if you are unsure whether labour has started.",
+      },
+      {
+        question: "What happens at late pregnancy appointments?",
+        answer:
+          "Your midwife usually checks blood pressure, urine, bump measurement and how you are feeling. Baby position is often discussed from around 36 weeks, and there is time to talk through birth preferences and support at home.",
+      },
+      {
+        question: "What should I pack in a hospital bag?",
+        answer:
+          "Most bags include comfortable clothes, toiletries, snacks, phone charger, maternity notes, items for baby (nappies, vests, blanket, going-home outfit), and anything that helps you feel calm. Your maternity unit usually shares a suggested list.",
+      },
+      {
+        question: "Is it normal to feel anxious before birth?",
+        answer:
+          "Yes. Anxiety, fear and impatience are common in the third trimester. Talking to your midwife, GP or a trusted person can help. If it is affecting your daily life, please ask for support.",
+      },
+      {
+        question: "What if I go past my due date?",
+        answer:
+          "Going past your due date is common. Your midwife will explain what happens next, which may include a membrane sweep and a conversation about induction. You can ask questions at any point.",
+      },
     ],
   },
 

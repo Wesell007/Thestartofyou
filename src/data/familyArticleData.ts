@@ -435,33 +435,246 @@ const rawFamilyArticles: FamilyArticle[] = [
   {
     slug: "managing-childcare-costs",
     topic: "family-basics",
-    title: "Managing childcare costs",
+    title: "Managing childcare costs without feeling overwhelmed",
     description:
-      "A practical look at nursery, childminders, family help and the funded hours in the UK.",
+      "A calm way to think through childcare costs, plan honest conversations and compare options, without adding pressure to already-busy weeks.",
     readTime: "6 min read",
-    status: "draft",
+    status: "ready",
+    seoTitle: "Managing childcare costs without feeling overwhelmed",
+    seoDescription:
+      "A practical, non-financial guide to thinking through childcare costs as a family, comparing options and reducing pressure around a very real expense.",
+    lastUpdated: "July 2026",
+    intro:
+      "Childcare is one of the biggest costs many families face, and one of the hardest to plan for. Prices, hours and support schemes change often, and every family's shape of work and care is different. This piece is not a financial guide. It is a calmer way to think through what you need, how to compare options and how to make the conversation feel less heavy.",
+    sections: [
+      {
+        heading: "Why childcare costs can feel so heavy",
+        body: [
+          "Childcare touches almost every part of daily life. It affects your income, your hours, your energy and the shape of your week. When the numbers feel large, the whole topic can start to feel like a source of guilt rather than a practical decision.",
+          "It helps to remember that the cost is real, not a sign that you have planned badly. Most families feel the weight of this at some point, and finding a workable answer usually takes more than one conversation.",
+        ],
+      },
+      {
+        heading: "Start with the shape of care your family needs",
+        body: [
+          "Before comparing prices, it usually helps to picture the week you actually want. How many days of care would work. Who will do drop-offs and pick-ups. Whether you value a nursery setting, a childminder, family help, a nanny share or a mix.",
+          "Starting from the shape of your week, rather than the shape of the market, tends to lead to steadier decisions. You can then compare options against something real, instead of trying to squeeze your family into whatever is available.",
+        ],
+      },
+      {
+        heading: "Look at the full cost, not just the headline price",
+        body: [
+          "The daily or hourly rate is only one part of the picture. Meals, nappies, extra hours, holiday closures, sibling discounts, travel time and settling-in periods can all change the real cost of a place.",
+          "Writing down the full cost for a typical month, including the small extras, often makes comparisons much easier. It can also help you see where a slightly more expensive option might actually be simpler overall.",
+        ],
+      },
+      {
+        heading: "Talk early about work, time and trade-offs",
+        body: [
+          "Childcare decisions rarely sit only with one person. They usually involve conversations about work patterns, career pace, shared responsibility and how much time each parent wants at home.",
+          "Having these conversations early, and more than once, tends to reduce resentment later. It is easier to make a shared plan when both people feel heard than to unpick a plan that quietly stopped working.",
+        ],
+      },
+      {
+        heading: "Build a simple childcare budget",
+        body: [
+          "A childcare budget does not need to be complicated. A single page that lists your expected income, your fixed household costs and your childcare cost is often enough to see what is realistic.",
+          "If the numbers do not add up, it is a signal to look at the shape of care again, not a sign that you have failed. Fewer days, a different setting, a change of hours or family help can all shift the picture.",
+        ],
+      },
+      {
+        heading: "When plans need to change",
+        body: [
+          "Very few families keep exactly the same childcare arrangement for years. Jobs change, children start school, family members move, or a setting stops feeling right.",
+          "Treating your childcare plan as something you review every so often, rather than a decision made once, tends to make changes feel less dramatic when they do come.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Write out the week of care you would actually want before you look at any prices.",
+          "Ask each setting for a full monthly cost including extras, not just an hourly rate.",
+          "Book a short conversation with your partner or support person just about childcare, separate from other planning.",
+          "Check current official guidance on any funded hours or childcare support that may apply to your family, and speak to a qualified adviser if you need financial advice.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Childcare cost is a real family pressure, not a sign of poor planning.",
+      "Start from the shape of week you want, then compare options against that.",
+      "Headline prices are only part of the picture, extras add up quickly.",
+      "Talking early and more than once tends to reduce resentment later.",
+      "Check current official guidance or a qualified adviser for financial specifics.",
+    ],
+    relatedSlugs: [
+      "building-family-routines",
+      "sharing-the-mental-load",
+      "travelling-with-young-children",
+    ],
   },
 
   // Health and safety
   {
     slug: "making-your-home-safer",
     topic: "health-safety",
-    title: "Making your home safer",
+    title: "Making your home feel safer for family life",
     description:
-      "Room-by-room ideas for reducing everyday risks as your child grows more curious and mobile.",
-    readTime: "5 min read",
+      "A calm, general guide to noticing common home risks and making small, steady improvements as your child grows.",
+    readTime: "6 min read",
     medicallyReviewed: true,
-    status: "draft",
+    status: "ready",
+    seoTitle: "Making your home feel safer for family life",
+    seoDescription:
+      "A calm guide to noticing common home risks and making small, practical safety improvements as a family, without trying to remove every possible risk.",
+    lastUpdated: "July 2026",
+    intro:
+      "Home safety often comes into focus once a child starts moving, climbing and exploring. It is easy to feel that you should have every corner covered, or to feel behind as soon as your child reaches a new stage. This piece is a calm, general overview. It is not a technical safety guide, and it is not a checklist. It is a way of thinking about the home your family actually lives in.",
+    sections: [
+      {
+        heading: "Why home safety can feel different once children are moving",
+        body: [
+          "A home that felt straightforward before children can suddenly look different once a baby starts rolling, a toddler starts climbing, or an older child starts opening things on their own.",
+          "This shift is normal. It usually helps to think in stages rather than trying to prepare for everything at once. What matters most today may not be the same as what matters in six months.",
+        ],
+      },
+      {
+        heading: "Start with the places your family uses most",
+        body: [
+          "The rooms and moments where your child spends the most time are usually a sensible place to focus first. The floor where they play, the room where they sleep, the space where you cook or eat.",
+          "Small, practical adjustments in these places often do more than trying to change the whole home at once.",
+        ],
+      },
+      {
+        heading: "Think about height, heat, water and small objects",
+        body: [
+          "As a very general guide, most everyday home risks fall into a few familiar groups. Falls from height. Heat from cooking, drinks or heaters. Water around baths and buckets. Small objects that a young child could put in their mouth.",
+          "Noticing which of these feel most present in your home is often more useful than reading a long list of every possible risk.",
+        ],
+      },
+      {
+        heading: "Make safety part of everyday routines",
+        body: [
+          "Safety tends to work best when it lives inside normal routines, rather than as a separate task. Turning pan handles inwards while cooking, keeping hot drinks out of reach, tidying small items after play.",
+          "These small habits often protect a family more than any single product or gadget.",
+        ],
+      },
+      {
+        heading: "Avoid trying to make the whole home perfect",
+        body: [
+          "No home can be made completely risk-free, and trying to reach that point can become exhausting. Children also learn about the world by exploring, and gentle supervision is part of that learning.",
+          "Focusing on the risks that would cause the most harm, and being present where you can, tends to be a steadier goal than perfection.",
+        ],
+      },
+      {
+        heading: "When it may help to ask for advice",
+        body: [
+          "Some safety questions sit outside the scope of a general article. Specific product choices, older buildings with unusual features, or a child with particular needs may benefit from more tailored guidance.",
+          "In those cases, it is reasonable to ask your health visitor, GP or another trusted professional for advice that fits your family.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try this week",
+        body: [
+          "Walk through the rooms your child uses most and notice one thing you could change.",
+          "Choose one everyday habit to build in, such as always turning pan handles inwards.",
+          "Keep small objects in one closed place, rather than trying to remember what is where.",
+          "Talk with your partner or support person about the one or two changes that feel most useful right now.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Home safety tends to shift with each stage of your child's development.",
+      "Focus first on the rooms and moments your family uses most.",
+      "Height, heat, water and small objects are useful general categories to notice.",
+      "Small everyday habits usually protect a family more than any single product.",
+      "No home can be made completely risk-free, and that is not the goal.",
+    ],
+    relatedSlugs: [
+      "building-family-routines",
+      "when-to-ask-for-help",
+      "travelling-with-young-children",
+    ],
   },
   {
     slug: "when-to-ask-for-help",
     topic: "health-safety",
-    title: "When to ask for help",
+    title: "When to ask for help as a family",
     description:
-      "Signs it's time to speak to your GP, health visitor or 111, and how to trust your instinct.",
-    readTime: "4 min read",
+      "A supportive guide to noticing when family life feels too heavy to manage alone, and how asking for help can be a normal part of caring for a family.",
+    readTime: "6 min read",
     medicallyReviewed: true,
-    status: "draft",
+    status: "ready",
+    seoTitle: "When to ask for help as a family",
+    seoDescription:
+      "A supportive, careful guide to noticing when family life feels too heavy to manage alone, and how reaching out can be a normal part of caring for a family.",
+    lastUpdated: "July 2026",
+    intro:
+      "Family life can quietly get heavier without anyone quite naming it. Sleep, work, worry, illness and change can add up over weeks and months. Asking for help is not a sign that something has gone wrong. It is often a sign that you are paying attention. This piece is a broad, supportive guide. It does not try to tell you exactly when to act, because every family is different, but it does try to make asking easier.",
+    sections: [
+      {
+        heading: "Asking for help does not mean you have failed",
+        body: [
+          "Many parents wait longer than they need to before asking for support, often because they feel they should be able to manage. It can help to remember that families have always leaned on others. It is not a modern weakness, it is a normal part of raising children.",
+          "Reaching out early, when something is bothering you, is usually gentler than waiting until things feel overwhelming.",
+        ],
+      },
+      {
+        heading: "Signs family life may need more support",
+        body: [
+          "There is no single checklist for this, but some patterns often show up. Feeling constantly drained, snapping more than usual, dreading the day ahead, losing interest in things you used to enjoy, or worrying about your child or yourself in a way that will not settle.",
+          "Noticing these patterns is not a diagnosis. It is simply a signal that it may be worth talking to someone, whether that is a friend, a family member or a professional.",
+        ],
+      },
+      {
+        heading: "Who you might speak to first",
+        body: [
+          "Sometimes the most helpful first conversation is with someone who already knows your family. A partner, a close friend, a relative, or another parent who understands the season you are in.",
+          "For questions about your health or your child's health, your GP, health visitor or another trusted health professional is usually a sensible next step. They can help you decide whether something needs further attention.",
+        ],
+      },
+      {
+        heading: "When worries feel urgent",
+        body: [
+          "Some worries feel harder to sit with, especially those about mental health, self-harm or a sudden change in how you or someone in your family feels.",
+          "If you feel someone is in immediate danger, seek urgent help through the appropriate local emergency service. Reaching out in these moments is always the right choice, even if it turns out that the situation is less serious than it felt.",
+        ],
+      },
+      {
+        heading: "If you are worried about a child's safety",
+        body: [
+          "Worries about a child's safety can feel especially difficult to name, even to yourself. It is common to hope you are wrong, or to wait for more certainty before saying anything.",
+          "If you are worried about a child's safety, it is better to ask for advice than carry the worry alone. A trusted professional can help you think it through, and asking does not commit you to any particular action.",
+        ],
+      },
+      {
+        heading: "Making it easier to ask",
+        body: [
+          "Asking for help is often harder in the moment than in principle. It can help to prepare a few short sentences in advance, so you do not have to find the words while you are already tired.",
+          "You do not need to explain everything perfectly. \"Things feel harder than they should right now,\" is often enough to start a conversation.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Notice one thing that has felt heavier than usual this week and name it, at least to yourself.",
+          "Tell one trusted person that things feel harder right now, without needing to explain it all.",
+          "Keep a short list of people or services you could contact, so you do not have to think it up in a hard moment.",
+          "Remind yourself that asking early is usually gentler than waiting until you feel overwhelmed.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Asking for help is a normal part of caring for a family, not a sign of failure.",
+      "There is no single checklist, but patterns of strain are worth paying attention to.",
+      "A first conversation can be with someone who already knows your family.",
+      "If someone feels in immediate danger, seek urgent help through your local emergency service.",
+      "If you are worried about a child's safety, asking for advice is better than carrying the worry alone.",
+    ],
+    relatedSlugs: [
+      "making-your-home-safer",
+      "sharing-the-mental-load",
+      "building-family-routines",
+    ],
   },
 
   // Travel and days out

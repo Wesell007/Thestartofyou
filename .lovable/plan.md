@@ -1,48 +1,91 @@
-## Phase 1 Fix — IVF Weak Article Regression
+## Phase 2 — Duplicate Merge Lock-In (planning only)
 
-### Finding
+Append a `## Locked canonical map` section to `.lovable/plan.md` recording the 10 canonical decisions from the Legacy Article Cleanup Plan. No code, data, route, SEO, template, redirect or article-copy changes.
 
-The build fix I applied added a `featured` anchor read to the `after-transfer` IVF topic themed on "the two-week wait". Its `href` uses `askIVF(...)` (which routes to `/ask`, not `/articles/two-week-wait`), so it does not link the weak article directly. However, per your rule this featured slot must only promote `ivf-timeline-what-to-expect` or `emotional-impact-of-ivf`, so it needs to change.
+### File touched
+- `.lovable/plan.md` (append only; file already exists from Phase 1)
 
-No other card, startHere entry, group link or anchor in `src/data/ivfTopicData.ts` points at `/articles/two-week-wait`. The `LINKS.twoWeekWait` constant on line 128 is defined but unreferenced (dead) — leaving it alone to avoid unrelated churn.
+### Section to append (verbatim)
 
-The `askIVF(...)` group links whose labels mention "two-week wait" or "test after transfer" go to the AI ask flow, not to weak article slugs, so they stay.
+```md
+## Locked canonical map
 
-### Change (only file touched: `src/data/ivfTopicData.ts`)
+These canonical decisions are locked for the article cleanup phase. No redirects should be implemented until the canonical target article has been rewritten or confirmed to meet the full premium article standard.
 
-Replace the `after-transfer.featured` block (currently themed on the two-week wait) with the approved emotional-impact anchor read:
+### 1. Ovulation signs duplicate
+- Weaker / duplicate: `/articles/ovulation-signs`
+- Canonical target: `/articles/signs-of-ovulation`
+- Decision: Rewrite `signs-of-ovulation` as the canonical full Flagship article for ovulation signs. Later redirect `ovulation-signs` to `signs-of-ovulation` only after the canonical article is upgraded.
+- Current action: No redirect yet. Keep both URLs resolving. Do not promote `ovulation-signs` in topic cards.
 
-```ts
-featured: {
-  eyebrow: "Anchor read · after transfer",
-  title: "The emotional impact of IVF",
-  body: "The waiting period after transfer can bring the emotional weight of the whole cycle to the surface. A steady read on why this stretch hits so hard, and how to hold yourself gently through it.",
-  href: LINKS.emotionalIVF,
-  hrefLabel: "Read the emotional impact of IVF",
-},
+### 2. Nausea / morning sickness duplicate
+- Weaker / duplicate: `/articles/nausea-in-early-pregnancy`
+- Canonical target: `/articles/complete-guide-morning-sickness`
+- Decision: Keep `complete-guide-morning-sickness` as canonical because it is stronger and already has more depth. Later redirect `nausea-in-early-pregnancy` to `complete-guide-morning-sickness` after the canonical article has sources, standfirst and hero polish.
+- Current action: No redirect yet. Keep both URLs resolving. Topic cards should use `complete-guide-morning-sickness`.
+
+### 3. Birth plan / birth preferences duplicate
+- Weaker / duplicate: `/articles/writing-a-birth-plan`
+- Canonical target: `/articles/birth-preferences`
+- Decision: Use `birth-preferences` as canonical because it matches the site's calmer language and existing convention. Later redirect `writing-a-birth-plan` to `birth-preferences` after the canonical article is polished.
+- Current action: No redirect yet. Keep both URLs resolving. Topic cards should use `birth-preferences`.
+
+### 4. What to buy / home space duplicate
+- Weaker / duplicate: `/articles/what-to-buy-for-a-new-baby`
+- Canonical target: `/articles/the-space-your-baby-will-come-home-to`
+- Decision: Use `the-space-your-baby-will-come-home-to` as canonical because it better matches The Start of You tone and avoids generic shopping-list content. Later redirect `what-to-buy-for-a-new-baby` to the canonical article after it has sources and hero polish if needed.
+- Current action: No redirect yet. Keep both URLs resolving. Topic cards should use `the-space-your-baby-will-come-home-to`.
+
+### 5. First Year milestones orphan
+- Legacy orphan: `/articles/baby-milestones-first-year`
+- Canonical future target: First Year Development topic and article system.
+- Decision: Do not relink this legacy article. Fold useful content into the First Year development article plan, especially `/first-year/development/baby-development-in-the-first-year`.
+- Current action: No redirect yet. Keep URL resolving. Do not promote from topic cards.
+
+### 6. First Year sleep orphan
+- Legacy orphan: `/articles/baby-sleep-first-year`
+- Canonical future target: First Year Sleep topic and article system.
+- Decision: Do not relink this legacy article. Fold useful content into the First Year sleep article plan, especially `/first-year/sleep/newborn-sleep-expectations` and `/first-year/sleep/helping-your-baby-settle`.
+- Current action: No redirect yet. Keep URL resolving. Do not promote from topic cards.
+
+### 7. First Year feeding orphan
+- Legacy orphan: `/articles/feeding-your-baby-complete-guide`
+- Canonical future target: First Year Feeding topic and article system.
+- Decision: Do not relink this legacy article. Fold useful content into the First Year feeding article plan, especially `/first-year/feeding/newborn-feeding-rhythms` and `/first-year/feeding/bottle-and-breastfeeding-questions`.
+- Current action: No redirect yet. Keep URL resolving. Do not promote from topic cards.
+
+### 8. Postpartum recovery orphan
+- Legacy orphan: `/articles/postpartum-recovery-timeline`
+- Canonical future target: First Year Postpartum Recovery topic and article system.
+- Decision: Do not relink this legacy article. Fold useful content into the First Year postpartum recovery article plan, especially `/first-year/postpartum-recovery/healing-after-birth` and `/first-year/postpartum-recovery/what-recovery-can-feel-like`.
+- Current action: No redirect yet. Keep URL resolving. Do not promote from topic cards.
+
+### 9. Your body after birth orphan
+- Legacy orphan: `/articles/your-body-after-birth`
+- Canonical future target: First Year Body and Hormones topic and article system.
+- Decision: Do not relink this legacy article. Fold useful content into the First Year body and hormones article plan, especially `/first-year/body-and-hormones/body-changes-after-birth` and `/first-year/body-and-hormones/hormones-sweat-and-hair-loss`.
+- Current action: No redirect yet. Keep URL resolving. Do not promote from topic cards.
+
+### 10. Preparing for baby orphan
+- Legacy orphan: `/articles/preparing-for-baby-complete-guide`
+- Canonical future target: Pregnancy Preparing for Baby topic or a rewritten pregnancy cornerstone article.
+- Decision: Do not relink this legacy article yet. Decide later whether to rewrite it as a premium pregnancy cornerstone or fold it into the preparing-for-baby topic page and related articles.
+- Current action: No redirect yet. Keep URL resolving. Do not promote from topic cards.
 ```
 
-`startHere: []` stays empty (component supports it).
-
-### Guardrails honoured
-
-- Only `src/data/ivfTopicData.ts` edited.
-- No article objects deleted, no redirects, no noindex.
-- No changes to `articleData.ts`, other topic data, templates, routes, SEO, calculators, product, About, AI, saved journey, or design tokens.
-- `/articles/two-week-wait` still resolves directly.
+### Guardrails
+- Only `.lovable/plan.md` edited.
+- No redirects, no article deletions, no topic-data edits, no route/SEO/template/copy changes.
+- No Family article publishing.
 
 ### Verification
+- `tsgo` (should be unaffected — markdown-only change).
+- `git status` shows only `.lovable/plan.md` modified.
 
-1. `tsgo` (typecheck).
-2. Load `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy` and confirm:
-   - No card, featured block, anchor read or startHere entry promotes any of the removed weak IVF slugs (`two-week-wait`, `when-to-take-a-pregnancy-test`, `how-long-implantation-takes`, `chemical-pregnancy`, `faint-positive-pregnancy-test`, `symptoms-stopping-early-pregnancy`, `fatigue-in-early-pregnancy`, `what-happens-at-a-fertility-appointment`, `emotional-wellbeing-pregnancy`).
-   - `after-transfer` featured now shows the emotional-impact anchor.
-   - Pages render without build errors.
-
-### Return summary (will report after implementation)
-
-- Whether `two-week-wait` was reintroduced, and where.
-- Exact change applied.
-- Replacement used (`emotional-impact-of-ivf`) and why.
+### Return summary (after implementation)
+- File edited: `.lovable/plan.md`
+- Pre-existing (created in Phase 1); appended new section.
+- Full `## Locked canonical map` section quoted back.
+- Confirmation no code files changed.
 - `tsgo` result.
-- Confirmation no weak removed IVF slugs remain promoted.
+- Suggested next prompt.

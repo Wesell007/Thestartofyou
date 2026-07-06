@@ -1,47 +1,48 @@
 
-# Phase 3.3 — Pregnancy Medical Sources Batch 3
+# Phase 3.4 — Pregnancy Medical Sources Batch 4
 
 ## Scope
-Add ≥3 verified structured `ArticleSource` entries to the next 10 existing Pregnancy medical/safety articles in `src/data/articleData.ts`. No other files change unless a bug is found in `ArticleSources.tsx`.
+Add ≥3 verified structured `ArticleSource` entries to the next 10 existing Pregnancy medical/safety articles in `src/data/articleData.ts`. Excludes all slugs already completed in Phases 3.1–3.3.
 
 ## Only file edited
-- `src/data/articleData.ts`
+- `src/data/articleData.ts` (ArticleSources.tsx only if a bug is found)
 
-## Field-order rule (unchanged from Batch 2)
-For each target article object:
-- Replace the existing `sources: [...]` block **in place**, keeping its position among sibling fields.
-- If `reviewedBy` is missing, insert it immediately after `lastUpdated` (or directly above `sources` if no `lastUpdated`). Never overwrite an existing value.
+## Field-order rule
+For each article object:
+- Replace the existing `sources: [...]` block **in place**, preserving its position among sibling fields.
+- If `reviewedBy` is missing, insert immediately after `lastUpdated` (or directly above `sources` if no `lastUpdated`). Never overwrite an existing value.
 - Do not reorder or touch any other field.
 
 ## Target articles (existing slugs only)
-1. `20-week-anomaly-scan` — NHS, GOV.UK screening, Tommy's
-2. `dating-scan` — NHS, GOV.UK screening, Tommy's
-3. `combined-screening-test` — NHS, GOV.UK screening, Tommy's / RCOG if verified
-4. `glucose-tolerance-test` — NHS, NICE (NG3 / CKS), Tommy's, Diabetes UK if verified
-5. `anti-d-injection-in-pregnancy` — NHS, RCOG, Tommy's
-6. `growth-scans-in-pregnancy` — NHS, Tommy's, RCOG (Green-top 31 if verified) / NHS Saving Babies' Lives
-7. `low-lying-placenta-in-pregnancy` — NHS, RCOG (Green-top 27a if verified), Tommy's
-8. `anterior-placenta` — NHS, Tommy's, RCOG if verified
-9. `breech-baby` — NHS, RCOG (Green-top 20a/b if verified), Tommy's
-10. `external-cephalic-version` — NHS, RCOG (Green-top 20a if verified), Tommy's
+1. `membrane-sweep` — NHS, NICE, RCOG/Tommy's
+2. `induction-of-labour` — NHS, NICE (NG207), Tommy's
+3. `signs-of-labour` — NHS, NICE, Tommy's
+4. `when-to-go-in-for-labour` — NHS, Tommy's, NICE
+5. `stages-of-labour` — NHS, Tommy's, NICE
+6. `what-happens-if-labour-doesnt-start` — NHS, NICE (induction), Tommy's
+7. `cord-around-the-neck-in-pregnancy` — NHS, RCOG, Tommy's
+8. `the-36-week-appointment` — NHS, NICE (antenatal care NG201), Tommy's
+9. `what-happens-at-booking-appointment` — NHS, NICE (NG201), Tommy's
+10. `thrush-in-pregnancy` — NHS, bumps (medicinesinpregnancy.org), NICE CKS
 
 ## URL verification protocol
 - Verify each URL live on the official publisher domain before writing.
-- Capture visible "Last reviewed" / "Published" year where available (populate `year`).
-- Never invent URLs; never guess RCOG Green-top numbers. If a Green-top can't be confirmed, substitute a verified NHS/Tommy's/NICE equivalent.
-- Allowed domains: `nhs.uk`, `nice.org.uk`, `cks.nice.org.uk`, `bnf.nice.org.uk`, `rcog.org.uk`, `tommys.org`, `gov.uk`, `medicinesinpregnancy.org` (bumps), `gbss.org.uk`, plus other high-trust UK medical orgs only if clearly relevant.
-- If <3 verified sources found, write only what is verified and flag the article in the return summary.
+- Populate `year` from visible "Last reviewed" / "Published" dates where available.
+- Never invent URLs; never guess RCOG Green-top numbers. Substitute a verified equivalent from the approved list if any planned URL fails to verify.
+- Allowed domains: nhs.uk, nice.org.uk, cks.nice.org.uk, bnf.nice.org.uk, rcog.org.uk, tommys.org, gov.uk, medicinesinpregnancy.org (bumps), gbss.org.uk. Other high-trust UK medical orgs only if clearly relevant.
+- If <3 verified sources are found for an article, write only what is verified and flag it in the return summary.
 
 ## Guardrails (do NOT touch)
-- `ArticleSources.tsx` (only if bug), topic data files, `.lovable/plan.md`, routes, templates, calculators, SEO files, product page, About page, AI logic, saved journey, design tokens.
+- ArticleSources.tsx (unless bug), topic data files, `.lovable/plan.md`, routes, templates, calculators, SEO files, product page, About page, AI logic, saved journey, design tokens.
 - No body rewrites, no new articles, no drafts published, no redirects, no noindex, no canonical changes.
+- Do not re-touch any slug completed in Phases 3.1–3.3.
 
 ## Medical review
-Ensure `reviewedBy: "Jenny Joines"` is present on each article (add only if missing).
+Ensure `reviewedBy: "Jenny Joines"` is present on each target article (add only if missing).
 
 ## Verification
 - Run `tsgo`.
-- Playwright-load `/articles/20-week-anomaly-scan`, `/articles/glucose-tolerance-test`, `/articles/anti-d-injection-in-pregnancy`, `/articles/breech-baby` and confirm:
+- Playwright-load `/articles/membrane-sweep`, `/articles/induction-of-labour`, `/articles/what-happens-at-booking-appointment`, `/articles/thrush-in-pregnancy` and confirm:
   - Sources and references heading present
   - ≥3 structured entries rendered as external anchors
   - `target="_blank"` and `rel="noopener noreferrer nofollow"`
@@ -56,4 +57,4 @@ Ensure `reviewedBy: "Jenny Joines"` is present on each article (add only if miss
 - `reviewedBy` status per article
 - `tsgo` result
 - Any article that could not reach 3 verified UK sources
-- Suggested next prompt (Phase 3.4 with next 10 slugs)
+- Suggested next prompt (Phase 3.5 with next batch of remaining pregnancy medical slugs)

@@ -29,11 +29,82 @@ const rawFamilyArticles: FamilyArticle[] = [
   {
     slug: "preparing-for-another-baby",
     topic: "growing-families",
-    title: "Preparing for another baby",
+    title: "Preparing for another baby as a family",
     description:
-      "Quiet ways to ready your home, your body and your family for a second (or third) arrival.",
-    readTime: "5 min read",
-    status: "draft",
+      "A calm, family-focused guide to preparing your home, your older child and your family rhythm for a new baby.",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Preparing for another baby as a family",
+    seoDescription:
+      "A calm guide to preparing your household, your older child and your family rhythm for another baby, without trying to plan every feeling in advance.",
+    lastUpdated: "July 2026",
+    intro:
+      "Adding another baby to the family is a slow, whole-family shift. It is not only a pregnancy story or a birth story. It is a change in how mornings run, how attention is shared, how partners lean on each other and how an older child understands their place. This piece stays with the family side of that change. It is about rhythm, communication and small preparations, rather than birth or medical care.",
+    sections: [
+      {
+        heading: "Why another baby changes the whole family rhythm",
+        body: [
+          "A second or third baby rarely lands as a simple addition. Even families who have done this before find that the shape of the day shifts. Meals stretch, bedtimes overlap, and the small pockets of quiet you used to rely on can feel harder to find.",
+          "It helps to expect a period of adjustment rather than a sudden new normal. The rhythm you settle into often takes several months to appear, and it usually looks a little different from the one you imagined.",
+        ],
+      },
+      {
+        heading: "Talk about the change in simple, steady ways",
+        body: [
+          "Older children pick up more from tone than from long explanations. Keeping the way you talk about the baby matter-of-fact tends to help more than a big build-up.",
+          "Answer the questions your child actually asks, and let the rest wait. A younger child may only want to know where the baby will sleep. An older one may want to know what will change for them. Both are useful starting points.",
+        ],
+      },
+      {
+        heading: "Prepare the practical pieces without trying to control everything",
+        body: [
+          "A few small preparations often make more difference than a long list. Sorting out sleeping arrangements, setting up a feeding spot, choosing one or two easy meals for the first weeks, deciding who might help with school runs.",
+          "You do not need every corner of the house to be ready. What tends to matter most is that the everyday flow of the home still works when you are tired and holding a newborn.",
+        ],
+      },
+      {
+        heading: "Make space for your child's mixed feelings",
+        body: [
+          "It is normal for an older child to feel excited, jealous, unsure and clingy in the same week. Feelings often shift as the reality of the baby becomes clearer, especially once the baby is home and taking up time.",
+          "You do not need to fix these feelings. Naming them gently, without judging them, is usually enough. Something like, \"It's a big change, and it's okay to feel wobbly about it,\" gives a child permission to feel what they feel.",
+        ],
+      },
+      {
+        heading: "Protect small moments of connection",
+        body: [
+          "In busy weeks, small moments of one-to-one time often matter more than long ones. Ten quiet minutes reading, a slow bath, a walk to the shop together.",
+          "These moments are not about making up for the baby's arrival. They are simply a way of reminding your child that they still have a steady place with you.",
+        ],
+      },
+      {
+        heading: "After the baby arrives",
+        body: [
+          "The first weeks with a new baby and an older child are often a blur. Some days feel warm and connected. Others feel like everyone is a bit undone. Both are part of it.",
+          "Lower the bar on tidiness, cooking and structure where you can. Let visitors help with the older child rather than only holding the baby. The family rhythm you are building does not need to look impressive to be working.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Choose one or two routines to protect for your older child, such as bedtime stories or a weekend walk.",
+          "Agree with your partner or support person who will lead which parts of the day in the first fortnight.",
+          "Keep a small, easy comfort kit for your older child near where you often feed, so they can settle nearby.",
+          "Give yourself permission to say no to visitors, plans or extras that do not help your family in this season.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Another baby is a whole-family shift, not just a pregnancy or birth story.",
+      "Simple, steady language usually helps an older child more than a big build-up.",
+      "Small practical preparations matter more than trying to be perfectly ready.",
+      "Mixed feelings in an older child are normal and do not need to be fixed.",
+      "Small moments of one-to-one time help more than trying to make everything even.",
+    ],
+    relatedSlugs: [
+      "helping-your-child-adjust-to-a-new-sibling",
+      "building-family-routines",
+      "sharing-the-mental-load",
+    ],
   },
   {
     slug: "helping-your-child-adjust-to-a-new-sibling",

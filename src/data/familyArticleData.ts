@@ -646,7 +646,79 @@ const rawFamilyArticles: FamilyArticle[] = [
     description:
       "A calm, non-judgemental way to think about screens, boundaries and shared time together.",
     readTime: "5 min read",
-    status: "draft",
+    status: "ready",
+    seoTitle: "Screen time as a family",
+    seoDescription:
+      "A balanced, non-judgemental guide to family screen time, focused on connection, shared rhythm and simple boundaries rather than fear.",
+    lastUpdated: "July 2026",
+    intro:
+      "Screens are woven through most family lives now, and conversations about them often carry more guilt than they need to. This piece is about looking at screen time honestly, keeping some of it shared, and creating simple boundaries your family can actually stick to, without turning screens into the villain of your week.",
+    sections: [
+      {
+        heading: "Why screen time can feel so loaded",
+        body: [
+          "Few parenting topics carry as much quiet worry as screens. There is a constant hum of advice, warnings and comparison, and it can be hard to tell what is helpful and what is just noise.",
+          "Most families are doing a version of the same thing, using screens in the moments where they help, and quietly wishing there was slightly less of it. Naming that honestly, without judgement, is a good place to start.",
+        ],
+      },
+      {
+        heading: "Start with how screens are actually used",
+        body: [
+          "Before changing anything, it can help to notice how screens already fit into your week. Not in a way that makes you feel bad, just clearly. Which moments genuinely help? Which ones creep in out of habit?",
+          "That kind of gentle noticing is usually more useful than any hard rule. Once you can see the pattern, small changes become easier to choose.",
+        ],
+      },
+      {
+        heading: "Shared screen time can still be connection",
+        body: [
+          "Not all screen time is the same. Watching something together on a sofa, laughing at the same thing, or looking at family photos on a phone is a very different experience to a child scrolling alone.",
+          "Shared screens can be part of connection, not the opposite of it. Talking about what you are watching, pausing to ask a question, or choosing something together turns passive time into something more relational.",
+        ],
+      },
+      {
+        heading: "Create simple boundaries that your family can repeat",
+        body: [
+          "Boundaries around screens tend to hold better when they are simple and repeatable rather than clever or complicated. \"No screens at the table,\" or \"nothing on before nursery,\" or \"one show after tea,\" are the kinds of rules a family can actually live with.",
+          "The point is not to be strict for the sake of it. It is to remove the daily negotiation, so screens are one less thing to argue about.",
+        ],
+      },
+      {
+        heading: "Make space for screen-free moments without making screens the enemy",
+        body: [
+          "It helps most children if some parts of the day are quietly screen-free. Meals, the first part of the morning, the last part of the evening, or a particular weekend walk.",
+          "Framing these as calm family moments rather than a punishment tends to land better. \"This is our slow bit of the day,\" carries more warmth than \"put that down now.\"",
+        ],
+      },
+      {
+        heading: "What to do when screen time becomes a battle",
+        body: [
+          "Sometimes screens tip into being a flashpoint. Every ending is a fight, every request feels loaded, and the mood in the house shifts every time a device appears.",
+          "When that happens, it is worth stepping back from the specific arguments and looking at the pattern. Is the timing wrong, is your child tired or hungry, is there simply too much on offer? Small changes to the shape of the day often ease the battles more than tighter rules do.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try this week",
+        body: [
+          "Pick one screen-free anchor in the day, meals, the walk to nursery, or the first ten minutes of the morning, and keep it consistent.",
+          "Choose one shared screen moment on purpose, a show or short film together, so screens are not only a solo activity.",
+          "Warn your child before a screen ends, so the ending is less of a shock. A two-minute heads-up usually helps more than a sudden switch off.",
+          "Notice your own screen use in front of them, gently and without guilt. Small shifts in the adults often quietly change the whole family's rhythm.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Most families feel the same quiet worry about screens, and that alone is not a sign of a problem.",
+      "Noticing how screens already fit into your week is more useful than any hard rule.",
+      "Shared screen time can be genuine connection, not the opposite of it.",
+      "Simple, repeatable boundaries hold better than complicated ones.",
+      "A calm framing works better than treating screens as the enemy.",
+      "Small shifts in your own screen use often carry the family further than rules alone.",
+    ],
+    relatedSlugs: [
+      "building-family-traditions",
+      "building-family-routines",
+      "sharing-the-mental-load",
+    ],
   },
 ];
 

@@ -18,6 +18,7 @@ import SecondTriFAQ from "@/components/secondtri/SecondTriFAQ";
 import SecondTriSupportStrip from "@/components/secondtri/SecondTriSupportStrip";
 import SecondTriQuoteBanner from "@/components/secondtri/SecondTriQuoteBanner";
 import SecondTriNextStage from "@/components/secondtri/SecondTriNextStage";
+import TrimesterCompleteGuideCard from "@/components/trimester/TrimesterCompleteGuideCard";
 
 import { secondTrimester } from "@/data/trimesterData";
 

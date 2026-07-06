@@ -51,6 +51,13 @@ export interface EditorialSection {
 
 export type ProductPromotionLevel = "strong" | "light" | "minimal" | "none";
 
+export interface ArticleSource {
+  label: string;
+  publisher: string;
+  url: string;
+  year?: string;
+}
+
 export interface ArticleData {
   slug: string;
   title: string;
@@ -129,7 +136,7 @@ export interface ArticleData {
   // Deep article features
   keyTakeaways?: string[];
   inThisArticle?: string[];
-  sources?: string[];
+  sources?: Array<string | ArticleSource>;
   lastUpdated?: string;
   reviewedBy?: string;
 

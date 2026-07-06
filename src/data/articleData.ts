@@ -5177,10 +5177,9 @@ const articleDatabase: ArticleData[] = [
       "Trust your instinct to call — midwives expect it, and would rather hear from you twice than not at all",
     ],
     sources: [
-      "NHS — Signs that labour has begun",
-      "NICE — Intrapartum care for healthy women and babies",
-      "Royal College of Midwives — Latent phase of labour",
-      "Tommy's — Signs of labour",
+      { label: "Signs that labour has begun", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/signs-of-labour/signs-that-labour-has-begun/" },
+      { label: "Intrapartum care (NG235)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng235" },
+      { label: "Signs that labour has begun", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/giving-birth/signs-labour" },
     ],
     faq: [
       { question: "How do I know I'm really in labour and not having Braxton Hicks?", answer: "Braxton Hicks tightenings tend to be irregular, ease when you change position or rest, and don't get longer or stronger over time. True labour contractions usually become more regular, build in intensity, and continue regardless of what you do. If you're unsure, that itself is reason enough to ring your maternity unit." },
@@ -5357,10 +5356,9 @@ const articleDatabase: ArticleData[] = [
       "Knowing the shape helps, but your labour will move at its own pace, and that's still labour working",
     ],
     sources: [
-      "NHS — The stages of labour and birth",
-      "NICE — Intrapartum care for healthy women and babies",
-      "Royal College of Midwives — Care in labour",
-      "Tommy's — The stages of labour",
+      { label: "The stages of labour and birth", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/what-happens/the-stages-of-labour-and-birth/" },
+      { label: "Intrapartum care (NG235)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng235" },
+      { label: "Stages of labour and birth", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/giving-birth/stages-labour-and-birth" },
     ],
     faq: [
       { question: "How long does each stage of labour usually take?", answer: "There's a wide range. Early labour can last hours or even a couple of days. Established labour and transition together commonly last around 6 to 12 hours in a first labour, and often less in subsequent labours. The second stage (pushing) can be anything from a few minutes to a couple of hours. The third stage is usually 5 to 30 minutes. Your midwife will guide you through your specific labour." },
@@ -5542,10 +5540,9 @@ const articleDatabase: ArticleData[] = [
       "Trust your instinct that something is wrong, or that it's time — your maternity unit takes that seriously",
     ],
     sources: [
-      "NHS — Signs that labour has begun",
-      "NICE — Intrapartum care for healthy women and babies",
-      "Royal College of Midwives — Care in labour",
-      "Tommy's — When to go to hospital in labour",
+      { label: "Signs that labour has begun", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/signs-of-labour/signs-that-labour-has-begun/" },
+      { label: "Going into hospital to have your baby", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/preparing-for-the-birth/going-into-hospital-to-have-your-baby/" },
+      { label: "Intrapartum care (NG235)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng235" },
     ],
     faq: [
       { question: "What will my maternity unit ask me when I ring?", answer: "Usually how often contractions are coming, how long they're lasting, how strong they feel (often gauged by whether you can talk through them), whether your waters have broken, whether you have any bleeding, and whether your baby's movements feel normal. They may also ask about your previous births and your pregnancy. Their questions are how they decide what to advise — they're not a test." },
@@ -9110,10 +9107,9 @@ const articleDatabase: ArticleData[] = [
       "Reduced movements still always need a same-day call regardless of cord position",
     ],
     sources: [
-      "Royal College of Obstetricians and Gynaecologists — Patient information",
-      "NHS — Pregnancy, birth and care",
-      "Tommy's — Umbilical cord facts",
-      "NICE — Intrapartum care",
+      { label: "Umbilical cord conditions", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-complications/umbilical-cord-conditions" },
+      { label: "Ultrasound scans in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/ultrasound-scans/" },
+      { label: "Your baby's movements in pregnancy", publisher: "Royal College of Obstetricians and Gynaecologists", url: "https://www.rcog.org.uk/for-the-public/browse-all-patient-information-leaflets/your-babys-movements-in-pregnancy-patient-information-leaflet/" },
     ],
     faq: [
       { question: "How common is cord around the neck?", answer: "Very common — around 1 in 3 births. It's almost always a loose loop and almost always causes no problem at all." },
@@ -9248,10 +9244,9 @@ const articleDatabase: ArticleData[] = [
       "It's an offer, not a requirement — accepting, declining, or waiting are all reasonable",
     ],
     sources: [
-      "NICE — Inducing labour",
-      "NHS — Inducing labour",
-      "Royal College of Obstetricians and Gynaecologists — Induction of labour at term",
-      "Tommy's — Membrane sweep",
+      { label: "Inducing labour", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/signs-of-labour/inducing-labour/" },
+      { label: "Inducing labour (NG207)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng207" },
+      { label: "Membrane sweep to induce labour", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/giving-birth/inducing-labour/membrane-sweep" },
     ],
     faq: [
       { question: "Does a membrane sweep actually work?", answer: "Sometimes. It's most effective when the cervix is already starting to soften and open. For some people it brings on labour within 48 hours; for others it does nothing. Both are normal outcomes." },
@@ -9407,10 +9402,9 @@ const articleDatabase: ArticleData[] = [
       "Induction is a recommendation, not a directive — questions and time to decide are reasonable",
     ],
     sources: [
-      "NICE — Inducing labour",
-      "NHS — Inducing labour",
-      "Royal College of Obstetricians and Gynaecologists — Induction of labour at term",
-      "Tommy's — Induction of labour",
+      { label: "Inducing labour", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/signs-of-labour/inducing-labour/" },
+      { label: "Inducing labour (NG207)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng207" },
+      { label: "Induction of labour", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/giving-birth/inducing-labour" },
     ],
     faq: [
       { question: "Why is induction usually offered after 41 weeks?", answer: "Beyond 41 to 42 weeks, the chance of complications begins to rise gently — including stillbirth, though it stays low in absolute terms. Induction is offered to reduce that risk while still respecting your choice." },
@@ -10036,10 +10030,9 @@ const articleDatabase: ArticleData[] = [
       "After 36 weeks, appointments come more often as you head toward birth",
     ],
     sources: [
-      "NICE — Antenatal care",
-      "NHS — Your antenatal appointments",
-      "Royal College of Midwives — Late pregnancy care",
-      "Tommy's — Antenatal appointments",
+      { label: "Your antenatal appointments", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/your-antenatal-appointments/" },
+      { label: "Antenatal care (NG201)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng201" },
+      { label: "Antenatal appointments schedule", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/antenatal-appointments-care/your-antenatal-appointments-schedule" },
     ],
     faq: [
       { question: "How long does the 36-week appointment take?", answer: "Most are scheduled for 20 to 30 minutes, longer than earlier appointments. If you have a lot to ask, it's worth saying so when you book — some units will give a longer slot." },
@@ -10355,10 +10348,9 @@ const articleDatabase: ArticleData[] = [
       "Most decisions in this window are conversations, not directives — there's time to think",
     ],
     sources: [
-      "NICE — Inducing labour",
-      "NHS — What happens if you're overdue",
-      "Royal College of Obstetricians and Gynaecologists — Induction of labour at term",
-      "Tommy's — Going overdue",
+      { label: "Inducing labour", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/signs-of-labour/inducing-labour/" },
+      { label: "Inducing labour (NG207)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng207" },
+      { label: "Induction of labour", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/giving-birth/inducing-labour" },
     ],
     faq: [
       { question: "Is it normal to go past my due date?", answer: "Yes. Around half of first pregnancies last longer than 40 weeks. The due date is an estimate, not a deadline." },
@@ -11641,10 +11633,9 @@ const articleDatabase: ArticleData[] = [
       "First episode in pregnancy is worth being seen rather than self-treated",
     ],
     sources: [
-      "NHS — Thrush in men and women",
-      "NICE — Candida – female genital",
-      "Royal College of Obstetricians and Gynaecologists",
-      "UK Teratology Information Service (UKTIS)",
+      { label: "Thrush", publisher: "NHS", url: "https://www.nhs.uk/conditions/thrush-in-men-and-women/" },
+      { label: "Candida — female genital", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/candida-female-genital/" },
+      { label: "Thrush in pregnancy", publisher: "bumps (Best Use of Medicines in Pregnancy)", url: "https://www.medicinesinpregnancy.org/Medicine--pregnancy/Thrush/" },
     ],
     faq: [
       { question: "Is thrush more common in pregnancy?", answer: "Yes — hormonal changes shift the balance of vaginal flora, which makes it easier for yeast to overgrow. Some people get thrush for the first time in pregnancy." },
@@ -13922,10 +13913,9 @@ const articleDatabase: ArticleData[] = [
       "Sets up the whole rest of antenatal care",
     ],
     sources: [
-      "NHS — Your antenatal care",
-      "NICE — Antenatal care",
-      "Royal College of Midwives",
-      "Tommy's — Booking appointment",
+      { label: "Your antenatal appointments", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/your-antenatal-appointments/" },
+      { label: "Antenatal care (NG201)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng201" },
+      { label: "Your booking appointment", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/antenatal-appointments-care/your-booking-appointment" },
     ],
     faq: [
       { question: "When does booking usually happen?", answer: "Most often between 8 and 12 weeks of pregnancy. Some areas book a little earlier or later. If you haven't been contacted by 10 weeks, it's worth ringing your GP or midwife team." },

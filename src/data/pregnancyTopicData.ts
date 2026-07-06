@@ -114,6 +114,9 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         label: "Across the trimesters",
         description: "How your body tends to shift as pregnancy moves on.",
         links: [
+          { label: "The first trimester: a complete guide", href: "/articles/first-trimester-complete-guide" },
+          { label: "The second trimester: a complete guide", href: "/articles/second-trimester-complete-guide" },
+          { label: "The third trimester: a complete guide", href: "/articles/third-trimester-complete-guide" },
         ],
       },
       {
@@ -285,6 +288,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         label: "Emotional wellbeing",
         description: "The wider picture, and the emotionally specific weeks of the first trimester.",
         links: [
+          { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy" },
           { label: "The first trimester emotionally", href: "/articles/the-first-trimester-emotionally" },
         ],
       },

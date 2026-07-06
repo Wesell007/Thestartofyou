@@ -1,54 +1,57 @@
-## Phase 4.3 — Rewrite `third-trimester-complete-guide` to Flagship standard
+# Phase 4.5 — Trimester landing → complete guide connection
 
-### Scope
-Edit only the existing `third-trimester-complete-guide` article object in `src/data/articleData.ts` (lines 2356–2432). No other files, no slug change, no move.
+Add one small editorial card to each trimester landing page, linking to its matching upgraded complete guide article. Place it between "Where to go deeper" and the FAQ.
 
-### Field changes on the object
+## Files to edit
 
-**Updated in place:**
-- `title` → `"Third trimester: a complete guide"`
-- `metaDescription` → new calm/practical wording per spec
-- `quickAnswer` → new ~110-word version covering week 28 to birth, movements, common symptoms, more frequent appointments, birth prep, and warning signs
-- `lastUpdated` → `"May 2026"`
-- `reviewedBy` → keep `"Jenny Joines"` (already present)
-- `topic` → add `"body"` (currently missing)
+Three page files only:
+- `src/pages/trimester/FirstTrimester.tsx`
+- `src/pages/trimester/SecondTrimester.tsx`
+- `src/pages/trimester/ThirdTrimester.tsx`
 
-**Legacy fields kept intact (with only light copy touch-ups where needed for consistency):** `howThisFeels`, `whatHappening`, `timing`, `whatItFeelsLike`, `whatThisMeans`, `normal`, `seekSupport`, `disclaimer`, `whatYouCanDo`, `whatHappensNext`, `relatedStage`, `aiPrompts`, `captureIntro`, `trimester`, `journey`, `topics`, `isCornerstone`, `productPromotion`.
+New shared component (kept tiny to avoid duplication):
+- `src/components/trimester/TrimesterCompleteGuideCard.tsx`
 
-**Flagship fields added/replaced:**
-- `standfirst` (new) — warm one-paragraph per spec
-- `inThisArticle` — 8 items: What the third trimester covers · Symptoms and body changes · Your baby's growth and movements · Appointments and checks · Preparing for birth · Emotions and waiting · When to ask for help · What happens as labour gets closer
-- `keyTakeaways` — 6 items per spec
-- `editorialSections` (new) — 8 sections with `id`, `heading`, `lead`, `paragraphs`, plus `callout` where useful. Ids: `what-the-third-trimester-covers`, `symptoms-and-body-changes`, `baby-growth-and-movements`, `appointments-and-checks`, `preparing-for-birth`, `emotions-and-waiting`, `when-symptoms-should-be-checked`, `what-happens-as-labour-gets-closer`
-- `faq` — 8 questions per spec (start/end, movements near end, Braxton Hicks, when to call, late-pregnancy appointments, hospital bag, anxiety, going overdue)
-- `sources` — structured `{ label, publisher, url }` array of 5 verified UK sources:
-  - NHS — You and your baby at 28 to 40+ weeks pregnant
-  - NHS — Your antenatal appointments
-  - RCOG — Your baby's movements in pregnancy (patient info)
-  - Tommy's — Signs of labour
-  - NICE — Antenatal care (NG201)
-- `relatedSlugs` — `reduced-movements-in-pregnancy`, `the-36-week-appointment`, `signs-of-labour`, `braxton-hicks-contractions`, `birth-preferences` (kept per spec; these are referenced only from this article's related list, no topic-card relinking)
+No other files touched. No article data, topic data, template, route, SEO, calculator, product, About, AI, saved-journey, or design-token changes.
 
-### Tone
-British English, no em dashes, no American spelling, short paragraphs, calm and practical, no diagnosis, no fear-based wording, careful movement wording ("if movements slow down, feel different, or you are worried, contact your maternity unit or midwife straight away" — never "babies move less at the end").
+## Component
 
-### Rendering
-Flagship template triggers on `quickAnswer` + non-empty `editorialSections` + non-empty `keyTakeaways` — all three will be set.
+`TrimesterCompleteGuideCard` accepts `{ title, description, ctaLabel, href }` and renders a single quiet editorial card:
 
-### Guardrails
-- Only `src/data/articleData.ts` edited.
-- Only the `third-trimester-complete-guide` object mutated. No other articles, no reordering.
-- No templates, routes, SEO, topic-data, calculators, product, About, AI, saved-journey, or design-token changes.
-- No topic-page relinking (`pregnancyTopicData.ts` untouched).
-- No new files, redirects or noindex.
+- Section wrapper: `bg-parchment` with the standard `container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl` and `py-12 md:py-16`.
+- Card: `max-w-3xl mx-auto rounded-2xl border border-border/40 bg-card p-6 sm:p-8 md:p-10` — matches the existing landing-page card language (soft border, parchment card surface, rounded, generous padding).
+- Content stack:
+  - Eyebrow: `stage-label` reading `Complete guide`.
+  - Title: `font-serif text-[1.35rem] sm:text-[1.5rem] md:text-[1.65rem] text-foreground leading-snug`.
+  - Description: `font-sans text-[15px] text-foreground/70 leading-relaxed max-w-xl`.
+  - CTA: `<Link>` with `inline-flex items-center gap-1.5 font-sans text-[13px] font-light text-sage hover:text-sage-muted transition-colors` and an `ArrowRight` icon that nudges on hover (same pattern as `FirstTriFAQ` / `ThirdTriFAQ` "See all FAQs" and `ThirdTriDeeper` links).
 
-### Verification
-1. `tsgo` — must be clean.
-2. Playwright load `/articles/third-trimester-complete-guide`:
-   - Renders via `ArticleFlagshipTemplate` (hero + summary row + key takeaways strip + 8 editorial sections + FAQ + sources).
-   - "Medically reviewed by Jenny Joines" appears once in hero trust bar (summary-row duplicate already removed in Phase 4.1 fix).
-   - 8 editorial H2s, 6 key takeaways, 8 FAQs, 5 sources with external links.
-3. Spot check `/pregnancy`, `/pregnancy/body`, `/pregnancy/health-and-safety` — no topic-card links reintroduced.
+Mobile: single column, natural stack, no horizontal overflow, tap-friendly CTA. Reuses existing tokens only.
 
-### Return summary will include
-File edited, single-object confirmation, section/takeaway/FAQ/source counts, publishers used, reviewedBy status, Flagship render confirmation, single-badge confirmation, `tsgo` result, and suggested next prompt.
+## Placement
+
+Insert `<TrimesterCompleteGuideCard ... />` in each page between the "Where to go deeper" component and the FAQ:
+
+- `FirstTrimester.tsx`: after `<FirstTriDeeper />`, before `<FirstTriFAQ />`.
+- `SecondTrimester.tsx`: after `<SecondTriDeeper />`, before `<SecondTriFAQ />`.
+- `ThirdTrimester.tsx`: after `<ThirdTriDeeper />`, before `<ThirdTriFAQ />`.
+
+## Card copy
+
+| Page | Title | Description | CTA | Href |
+|---|---|---|---|---|
+| First trimester | First trimester: a complete guide | A calmer, deeper walkthrough of early symptoms, appointments, emotions and when to ask for support. | Read the complete first trimester guide | `/articles/first-trimester-complete-guide` |
+| Second trimester | Second trimester: a complete guide | A fuller guide to body changes, movement, scans, emotions and the middle weeks of pregnancy. | Read the complete second trimester guide | `/articles/second-trimester-complete-guide` |
+| Third trimester | Third trimester: a complete guide | A practical guide to late pregnancy, baby movements, appointments, labour signs and getting ready for birth. | Read the complete third trimester guide | `/articles/third-trimester-complete-guide` |
+
+Eyebrow is `Complete guide` on all three.
+
+## Verification
+
+- `tsgo` (typecheck only, no other builds).
+- Load `/pregnancy/first-trimester`, `/pregnancy/second-trimester`, `/pregnancy/third-trimester`: card present, correctly placed, correct href, no layout regressions, no source lists added, mobile has no overflow.
+- Load the three `/articles/...-complete-guide` routes: still render via `ArticleFlagshipTemplate` unchanged.
+
+## Guardrails
+
+No NHS / NICE / Tommy's / RCOG / GOV.UK source lists on landing pages. No article-content duplication. One card per page. No redirects, noindex, canonical, or route changes. No redesign of the landing pages.

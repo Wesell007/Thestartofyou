@@ -18,6 +18,7 @@ import ThirdTriFAQ from "@/components/thirdtri/ThirdTriFAQ";
 import ThirdTriSupportStrip from "@/components/thirdtri/ThirdTriSupportStrip";
 import ThirdTriQuoteBanner from "@/components/thirdtri/ThirdTriQuoteBanner";
 import ThirdTriNextStage from "@/components/thirdtri/ThirdTriNextStage";
+import TrimesterCompleteGuideCard from "@/components/trimester/TrimesterCompleteGuideCard";
 
 import { thirdTrimester } from "@/data/trimesterData";
 
@@ -78,6 +79,15 @@ const ThirdTrimester = () => {
 
         {/* 12. Where to go deeper */}
         <ThirdTriDeeper />
+
+        {/* 12b. Complete guide link */}
+        <TrimesterCompleteGuideCard
+          title="Third trimester: a complete guide"
+          description="A practical guide to late pregnancy, baby movements, appointments, labour signs and getting ready for birth."
+          ctaLabel="Read the complete third trimester guide"
+          href="/articles/third-trimester-complete-guide"
+        />
+
 
         {/* 13. Common questions FAQ */}
         <ThirdTriFAQ />

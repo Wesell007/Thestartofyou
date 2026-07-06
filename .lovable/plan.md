@@ -1,71 +1,48 @@
-## Legacy Article Standard Audit — plan (v3)
+## Phase 1 Fix — IVF Weak Article Regression
 
-Inspection and reporting only. No code, data, template, route, SEO, calculator, product, About, AI, saved-journey or design-token changes.
+### Finding
 
-### Benchmark
-The screenshot set for `how-your-baby-develops-in-pregnancy`:
+The build fix I applied added a `featured` anchor read to the `after-transfer` IVF topic themed on "the two-week wait". Its `href` uses `askIVF(...)` (which routes to `/ask`, not `/articles/two-week-wait`), so it does not link the weak article directly. However, per your rule this featured slot must only promote `ivf-timeline-what-to-expect` or `emotional-impact-of-ivf`, so it needs to change.
 
-- Eyebrow + strong H1 + italic standfirst + meta line (medically reviewed / updated)
-- Contained hero image with alt
-- At a glance card + In this article TOC
-- Key takeaways strip
-- 6+ numbered editorial sections, some with images/callouts
-- Usually normal / worth a check panel
-- Common questions FAQ
-- Sources and references
-- Continue reading + bottom nav
-- Renders through `ArticleFlagshipTemplate`
+No other card, startHere entry, group link or anchor in `src/data/ivfTopicData.ts` points at `/articles/two-week-wait`. The `LINKS.twoWeekWait` constant on line 128 is defined but unreferenced (dead) — leaving it alone to avoid unrelated churn.
 
-"Full premium" = renders through Flagship AND has real editorial depth in every non-image block.
+The `askIVF(...)` group links whose labels mention "two-week wait" or "test after transfer" go to the AI ask flow, not to weak article slugs, so they stay.
 
-### Hero-image scoring rule
-Hero is a polish signal, never a depth signal.
-- Strong depth + missing hero → **good but needs polish** with note: `Hero image needed to fully match screenshot standard.`
-- **Thin** is reserved for weak body depth: too few sections, too little paragraph content, missing takeaways, weak structural content.
+### Change (only file touched: `src/data/ivfTopicData.ts`)
 
-### Method
-1. Read `src/data/articleData.ts` end-to-end and extract each of the 111 article objects into an audit row.
-2. Compute per row: presence of `quickAnswer`, `metaDescription`, `standfirst`, `hero`, `topic`, `isCornerstone`; counts for `editorialSections`, paragraphs (incl. subsections), estimated words, `keyTakeaways`, `faq`, `sources`, `relatedSlugs`, `inThisArticle`; medical/safety inferred from slug/topic/sources.
-3. Re-run the routing predicate from `src/pages/ArticlePage.tsx` to record actual template: Flagship / Deep / Legacy.
-4. Cross-check `relatedSlugs` and every topic-card link across `pregnancyTopicData`, `ttcTopicData`, `ivfTopicData`, `firstYearTopicData`, `toddlerTopicData`, `familyTopicData` to find orphans, topic-page links pointing at sub-standard articles, and broken related refs.
-5. Score with fixed thresholds (hero excluded from depth):
-   - **Full premium**: Flagship AND ≥6 sections AND ≥5 takeaways AND ≥3 FAQs AND (≥3 sources if medical) AND standfirst. Hero present → full match; hero missing → close match + polish note.
-   - **Good but needs polish**: Flagship AND ≥4 sections AND ≥3 takeaways, missing 1–2 of {standfirst, FAQs, sources}, or otherwise strong but hero missing.
-   - **Thin**: <4 sections OR avg <150 words per section OR <3 takeaways OR (medical AND 0 sources) OR (question-led AND 0 FAQs). Hero absence alone never triggers this.
-   - **Placeholder / weak**: no `editorialSections` or no `keyTakeaways` (Deep or Legacy template).
-   - **Duplicate / merge candidate**: same primary intent as another slug.
-6. Infer hub from `topic`, journey tags, slug pattern: Pregnancy / TTC / IVF / First Year / Toddler / Other.
+Replace the `after-transfer.featured` block (currently themed on the two-week wait) with the approved emotional-impact anchor read:
 
-### Delivery format — multi-response, all 111 rows guaranteed
+```ts
+featured: {
+  eyebrow: "Anchor read · after transfer",
+  title: "The emotional impact of IVF",
+  body: "The waiting period after transfer can bring the emotional weight of the whole cycle to the surface. A steady read on why this stretch hits so hard, and how to hold yourself gently through it.",
+  href: LINKS.emotionalIVF,
+  hrefLabel: "Read the emotional impact of IVF",
+},
+```
 
-The report is posted back in chat only (no files written). Because 111 rows exceed one response comfortably, delivery is split — no article is skipped.
+`startHere: []` stays empty (component supports it).
 
-- **Response 1 — Headline + Worst-first**
-  - Headline numbers: total audited, split by quality bucket, split by rendered template, sub-count of "strong depth, hero missing".
-  - Per-hub summary counts (Pregnancy / TTC / IVF / First Year / Toddler / Other).
-  - **Worst/weakest section first**: every article scored Placeholder, Thin or Duplicate — full row, regardless of hub.
-  - Hidden-issues list: orphans, topic pages linking to sub-standard articles, medical without sources, question-led without FAQs, duplicate pairs, broken `relatedSlugs`, remove-from-links list, merge/redirect list, hold-back list.
-  - Explicit "continued in next response" marker with a running row counter (`Rows shown: X / 111`).
+### Guardrails honoured
 
-- **Response 2..N — Remaining rows, grouped by hub**
-  Continues with **good but needs polish** and **full premium** rows, grouped Pregnancy → TTC → IVF → First Year → Toddler → Other. Each response opens with the running counter and closes with either "continued" or "complete".
+- Only `src/data/ivfTopicData.ts` edited.
+- No article objects deleted, no redirects, no noindex.
+- No changes to `articleData.ts`, other topic data, templates, routes, SEO, calculators, product, About, AI, saved journey, or design tokens.
+- `/articles/two-week-wait` still resolves directly.
 
-- **Final response — Verdicts**
-  - Which hubs already have enough screenshot-standard articles
-  - Which do not
-  - Articles that should not be treated as proper published articles yet
-  - Whether weak legacy articles should be cleaned up before publishing the Family batch
-  - Recommended next step: SEO metadata infrastructure · article cleanup · duplicate merge planning · Family batch publishing · other
-  - Final `Rows shown: 111 / 111 — complete` confirmation.
+### Verification
 
-Table columns used throughout:
-title · slug · route · hub · topic · template rendered · sections · takeaways · FAQs · sources · hero · standfirst · medical? · screenshot match · quality category · recommended action · notes.
+1. `tsgo` (typecheck).
+2. Load `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy` and confirm:
+   - No card, featured block, anchor read or startHere entry promotes any of the removed weak IVF slugs (`two-week-wait`, `when-to-take-a-pregnancy-test`, `how-long-implantation-takes`, `chemical-pregnancy`, `faint-positive-pregnancy-test`, `symptoms-stopping-early-pregnancy`, `fatigue-in-early-pregnancy`, `what-happens-at-a-fertility-appointment`, `emotional-wellbeing-pregnancy`).
+   - `after-transfer` featured now shows the emotional-impact anchor.
+   - Pages render without build errors.
 
-### Known starting inputs (re-verified during the pass)
-- 111 article objects in `articleData.ts`.
-- Field coverage: `quickAnswer` 111, `metaDescription` 111, `faq` 111, `editorialSections` 85, `keyTakeaways` 94, `sources` 94, `relatedSlugs` 95, `topic` 73, `standfirst` 92, `hero` 5, `isCornerstone` 15, `inThisArticle` 13.
-- Flagship-eligible ≈ 85 (bounded by editorialSections). Remaining ~26 fall to Deep or Legacy — immediate weak-page candidates.
-- Only 5 articles carry a `hero`; under the hero rule this expands the good-polish bucket, not the thin bucket.
+### Return summary (will report after implementation)
 
-### Out of scope
-No file writes. No edits to `articleData.ts`, `articleInventory.ts`, templates, topic data, routes, `ArticlePage.tsx`, SEO helpers, calculators, product page, About page, AI, saved-journey logic, or design tokens.
+- Whether `two-week-wait` was reintroduced, and where.
+- Exact change applied.
+- Replacement used (`emotional-impact-of-ivf`) and why.
+- `tsgo` result.
+- Confirmation no weak removed IVF slugs remain promoted.

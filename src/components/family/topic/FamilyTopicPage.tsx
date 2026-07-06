@@ -517,6 +517,49 @@ const FamilyTopicPage = ({ config }: Props) => {
           </div>
         </section>
 
+        {/* ─── AI SUPPORT ───────────────────────────────────────────── */}
+        <section
+          id="family-topic-ai"
+          className="relative py-20 md:py-24 scroll-mt-24"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(var(--stage-family) / 0.6) 0%, hsl(var(--stage-family) / 0.28) 55%, hsl(var(--parchment)) 100%)",
+          }}
+        >
+          <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
+            <div className="mb-7 md:mb-8 flex flex-col items-center text-center gap-3">
+              <SectionLabel>Ask anything</SectionLabel>
+            </div>
+
+            <div
+              className="rounded-[28px] border bg-parchment/85 backdrop-blur-sm overflow-hidden"
+              style={{
+                borderColor: accentBorderStrong,
+                boxShadow:
+                  "0 36px 80px -46px rgba(70,50,20,0.38), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+              }}
+            >
+              <HubAISupport
+                heading={config.aiHeading}
+                description={config.aiDescription}
+                placeholder={config.aiPlaceholder}
+                suggestions={config.aiPrompts}
+                context={config.title}
+                stageBg="--stage-family"
+                stageAccent="--stage-family-accent"
+                stage="family"
+              />
+            </div>
+            <p
+              className="mt-7 text-center font-sans text-[12.5px] font-light tracking-wide max-w-lg mx-auto leading-relaxed"
+              style={{ color: deepMuted }}
+            >
+              A quiet companion for the questions family life quietly raises.
+            </p>
+          </div>
+        </section>
+
+
         {/* ─── MORE FAMILY TOPICS ───────────────────────────────────── */}
         {related.length > 0 && (
           <section

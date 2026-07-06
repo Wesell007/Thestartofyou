@@ -232,7 +232,6 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         links: [
           { label: "IVF timeline, what to expect", href: LINKS.ivfTimeline },
           { label: "What does my IVF protocol actually involve?", href: askIVF("What does my IVF protocol actually involve?") },
-          { label: "What happens at a fertility appointment?", href: LINKS.fertilityAppt },
         ],
       },
       {
@@ -317,29 +316,6 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       ],
     },
     startHere: [
-      {
-        title: "The two-week wait",
-        why: "Why this stage feels so loud after IVF, and how to move through it.",
-        href: LINKS.twoWeekWait,
-      },
-      {
-        title: "When to take a pregnancy test",
-        why: "Timing that protects you from false reassurance and false worry.",
-        href: LINKS.whenToTest,
-      },
-      {
-        title: "Early pregnancy symptoms explained",
-        why: "Honest framing on what symptoms can and cannot tell you yet.",
-        href: LINKS.earlySymptoms,
-      },
-    ],
-    featured: {
-      eyebrow: "Anchor read · the IVF two-week wait",
-      title: "The IVF two-week wait",
-      body: "The most defining read for this stage, framed for life after embryo transfer — what's actually happening, what symptoms can and can't tell you, and how to stay steady inside the not-knowing.",
-      href: LINKS.twoWeekWait,
-      hrefLabel: "Read the two-week wait guide",
-    },
     normalVsSupport: {
       normal: [
         "Symptoms that come and go, including some that mimic your period",
@@ -361,9 +337,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         intro: "Why this fortnight feels disproportionately heavy after IVF, what's actually happening day by day, and how to keep yourself anchored when the days slow down.",
         links: [
           { label: "The IVF two-week wait, what's actually happening", href: askIVF("The IVF two-week wait — what's actually happening") },
-          { label: "The two-week wait", href: LINKS.twoWeekWait },
           { label: "When can I test after embryo transfer?", href: askIVF("When can I test after embryo transfer?") },
-          { label: "How long implantation takes", href: LINKS.howLongImplantation },
         ],
       },
       {
@@ -374,7 +348,6 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
           { label: "Symptoms after embryo transfer, what they can and can't tell you", href: askIVF("Symptoms after embryo transfer — what they can and can't tell you") },
           { label: "Faint positive after IVF, what it means", href: askIVF("Faint positive after IVF — what it means") },
           { label: "When should I call the clinic after transfer?", href: askIVF("When should I call the clinic after transfer?") },
-          { label: "Faint positive pregnancy test", href: LINKS.faintPositive },
         ],
       },
       {
@@ -521,7 +494,6 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
           { label: "Spotting and bleeding in early IVF pregnancy, what's reassuring, what to flag", href: askIVF("Spotting and bleeding in early IVF pregnancy — what's reassuring, what to flag") },
           { label: "Are my symptoms reassuring or worth a call after IVF?", href: askIVF("Are my symptoms reassuring or worth a call after IVF?") },
           { label: "Why do my symptoms feel stronger or weaker than I expected after IVF?", href: askIVF("Why do my symptoms feel stronger or weaker than I expected after IVF?") },
-          { label: "Symptoms stopping in early pregnancy", href: LINKS.symptomsStopping },
           { label: "Bleeding in early pregnancy", href: LINKS.bleedingEarly },
         ],
       },
@@ -557,7 +529,6 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         intro: "If something stops, these are the reads we'd hand you first — kept inside IVF and our support library, never bouncing you backwards.",
         links: [
           { label: "If things do not progress in early IVF pregnancy, what now?", href: askIVF("If things do not progress in early IVF pregnancy — what now?") },
-          { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },
           { label: "Find support for hard moments", href: LINKS.support },
         ],

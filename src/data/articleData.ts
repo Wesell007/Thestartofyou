@@ -2677,9 +2677,11 @@ const articleDatabase: ArticleData[] = [
   // ─── EMOTIONAL WELLBEING IN PREGNANCY (Cornerstone) ─────────────────────
   {
     slug: "emotional-wellbeing-pregnancy",
-    title: "Emotional wellbeing in pregnancy: what is normal and when to seek support",
-    metaDescription: "Mood changes, anxiety, and emotional ups and downs in pregnancy. What is normal, what is not, and where to find support when you need it.",
-    quickAnswer: "Emotional changes in pregnancy are completely normal. Hormones, physical discomfort, life changes, and uncertainty all affect how you feel. Most mood shifts are a natural part of the journey, but persistent low mood or anxiety should always be taken seriously.",
+    title: "Emotional wellbeing in pregnancy",
+    metaDescription: "A calm guide to emotional wellbeing in pregnancy, including anxiety, mood changes, identity shifts, support options and when to ask for help.",
+    standfirst: "Pregnancy can bring joy, worry, numbness, excitement, grief, pressure and everything in between. Your emotional wellbeing matters just as much as your physical care, and you do not need to wait until things feel severe to ask for support. This guide walks through what can affect your mood in pregnancy, what may help, and when to reach out.",
+    quickAnswer: "Emotional changes in pregnancy are very common. Hormones, tiredness, physical symptoms, previous loss, relationship stress, money worries, birth fears and identity shifts can all affect how you feel. Not everyone feels instantly joyful or connected, and mixed feelings do not mean anything is wrong with you. Support can come from your midwife, GP, health visitor, a mental health professional, a trusted person or a specialist service, and asking for help early is a strength. If you feel unsafe, unable to cope, or worried you might harm yourself or your baby, seek urgent help.",
+    topic: "feelings",
     howThisFeels: [
       "Crying at things that would not normally affect you",
       "Swinging between excitement and fear",
@@ -2689,11 +2691,11 @@ const articleDatabase: ArticleData[] = [
     whatHappening: {
       commonCauses: [
         { heading: "Hormonal changes", body: "Rising levels of oestrogen and progesterone directly affect mood regulation, sleep, and emotional sensitivity." },
-        { heading: "Life transition", body: "Pregnancy represents one of the biggest identity and lifestyle shifts a person can experience. Emotional responses to this are healthy." },
-        { heading: "Physical discomfort", body: "Nausea, fatigue, pain, and poor sleep all impact emotional resilience." },
+        { heading: "Life transition", body: "Pregnancy is one of the biggest identity and lifestyle shifts a person can experience. Emotional responses to this are healthy." },
+        { heading: "Physical discomfort", body: "Nausea, fatigue, pain, and poor sleep all reduce emotional resilience." },
       ],
       lessCauses: [
-        { heading: "Antenatal anxiety", body: "Persistent, excessive worry about pregnancy, birth, or the baby that interferes with daily life. This affects around 1 in 5 pregnant people." },
+        { heading: "Antenatal anxiety", body: "Persistent, excessive worry about pregnancy, birth, or the baby that interferes with daily life. This is common and treatable." },
         { heading: "Antenatal depression", body: "Low mood, loss of interest, and withdrawal that lasts more than two weeks. This is a medical condition, not a character flaw." },
       ],
       whyItVaries: "Emotional experiences depend on personal history, support systems, physical health, previous pregnancies, and individual brain chemistry.",
@@ -2716,7 +2718,7 @@ const articleDatabase: ArticleData[] = [
     whatYouCanDo: [
       { action: "Talk to someone you trust", reason: "Sharing how you feel reduces isolation and often brings relief." },
       { action: "Be honest with your midwife", reason: "They can refer you to specialist perinatal mental health support." },
-      { action: "Prioritise rest and gentle movement", reason: "Sleep and exercise both support emotional regulation." },
+      { action: "Prioritise rest and gentle movement", reason: "Sleep and movement both support emotional regulation." },
       { action: "Lower your expectations of yourself", reason: "You do not need to feel happy every day. Give yourself permission to feel what you feel." },
     ],
     whatHappensNext: "Emotional wellbeing continues to matter after birth. Postnatal mental health support is available and important.",
@@ -2734,22 +2736,137 @@ const articleDatabase: ArticleData[] = [
     topics: ["emotional-wellbeing", "safety-and-support"],
     isCornerstone: true,
     productPromotion: "light",
-    keyTakeaways: [
-      "Mood changes in pregnancy are normal and expected",
-      "Antenatal anxiety and depression affect around 1 in 5 people",
-      "Persistent low mood or anxiety should always be discussed with your midwife",
-      "Support is available and seeking help is a sign of strength",
+    inThisArticle: [
+      "Why pregnancy can feel emotional",
+      "Common feelings in pregnancy",
+      "Anxiety, low mood and overwhelm",
+      "Pregnancy after loss or fertility treatment",
+      "Relationships, identity and pressure",
+      "What can help day to day",
+      "When to ask for support",
+      "Where to get help",
     ],
-    inThisArticle: ["Why emotions change in pregnancy", "What is normal", "Antenatal anxiety", "Antenatal depression", "When to seek help", "What helps", "Common questions"],
-    sources: ["NHS: Mental health in pregnancy", "MIND: Perinatal mental health", "Tommy's: Mental health and pregnancy", "Maternal Mental Health Alliance"],
-    lastUpdated: "March 2026",
+    keyTakeaways: [
+      "Pregnancy can affect emotional wellbeing in many different ways.",
+      "Not feeling joyful all the time does not mean you are doing anything wrong.",
+      "Anxiety, low mood and overwhelm are worth discussing early.",
+      "Previous loss, fertility treatment or difficult experiences can make pregnancy feel more complex.",
+      "Small daily supports can help, but they are not a replacement for professional care when things feel heavy.",
+      "If you feel unsafe, unable to cope or worried about your thoughts, seek urgent support.",
+    ],
+    editorialSections: [
+      {
+        id: "why-emotional",
+        heading: "Why pregnancy can feel emotional",
+        lead: "There are many reasons a pregnancy can feel emotionally busy, and most of them are not a sign that anything is wrong.",
+        paragraphs: [
+          "Hormones shift quickly in early pregnancy and continue changing throughout, which affects mood, sleep and sensitivity. Physical symptoms like nausea, tiredness and disrupted sleep add another layer.",
+          "Pregnancy is also a large life change. Identity, relationships, work, finances and how you see the future can all be moving at once. Appointments, scans and decisions add a steady background hum of things to think about.",
+          "Feeling more emotional, more tired, or more reactive than usual is a very normal part of holding all of that at the same time.",
+        ],
+      },
+      {
+        id: "common-feelings",
+        heading: "Feelings that can be part of pregnancy",
+        lead: "There is no single correct way to feel pregnant.",
+        paragraphs: [
+          "Some people feel joy and excitement. Some feel worry, sadness, irritability or numbness. Many feel several of these in the same week, or the same day. Feeling protective, feeling overwhelmed, and feeling nothing much at all can all be part of it.",
+          "Not feeling instantly connected to your baby is common, especially in early pregnancy. Bonding often builds slowly, and can grow more strongly after birth. Mixed feelings do not predict how you will feel as a parent.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "There is no right emotional response to being pregnant. Whatever you are feeling, you are not the only one.",
+        },
+      },
+      {
+        id: "anxiety-low-mood",
+        heading: "Anxiety, low mood and overwhelm",
+        lead: "Anxiety and low mood can happen during pregnancy, and are worth taking seriously rather than pushing through.",
+        paragraphs: [
+          "Signs to notice include persistent worry, panic that comes on suddenly, trouble sleeping because your mind will not settle, loss of interest in things you usually enjoy, tearfulness, feeling hopeless, feeling unable to cope, or intrusive thoughts that feel frightening.",
+          "These experiences are common, they are not a personal failing, and they respond well to support. You do not need to reach a specific severity before speaking to your midwife, GP or a mental health professional. Getting support earlier tends to make things easier, not harder.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If low mood or anxiety lasts more than two weeks, or is getting in the way of daily life, please talk to your midwife or GP.",
+        },
+      },
+      {
+        id: "loss-and-treatment",
+        heading: "Pregnancy after loss, fertility treatment or difficult experiences",
+        lead: "Pregnancy can feel very different when it follows loss, fertility treatment or a difficult history.",
+        paragraphs: [
+          "Previous miscarriage, stillbirth, neonatal loss, IVF or other fertility treatment, a traumatic birth, medical complications, or difficult family history can all change how a new pregnancy feels. Anxiety around scans, appointments and milestones is very common in this context.",
+          "You may feel guarded, unable to plan, or reluctant to share news. You may also feel guilt for not feeling more joyful. None of that means you are ungrateful or doing anything wrong. Specialist support exists for pregnancy after loss and after fertility treatment, and asking for it earlier rather than later is a reasonable choice.",
+        ],
+      },
+      {
+        id: "relationships-identity",
+        heading: "Relationships, identity and pressure",
+        lead: "Pregnancy sits inside your wider life, and that life keeps happening around it.",
+        paragraphs: [
+          "Relationships with a partner, family or friends can shift during pregnancy. Some feel closer, some feel more strained. Expectations from family, culture, faith, work and social media can add pressure to feel or look a certain way.",
+          "Body changes, questions about privacy, decisions about when and how to share news, and worries about money or work are all common. So is the quiet pressure to feel grateful all the time. Naming that pressure often takes some of the weight out of it.",
+        ],
+      },
+      {
+        id: "day-to-day",
+        heading: "What can help day to day",
+        lead: "Small things do not fix everything, but they can steady the ground under you.",
+        paragraphs: [
+          "Rest when you can, eat regularly, drink water, and move gently if that feels good and is safe for you. Reduce information overload where you notice it, especially late at night or on social media. Writing down what is worrying you often takes some of its edge off.",
+          "Talk to someone safe, even if it is just to say the day was hard. Bring practical questions to your appointments rather than trying to remember them in the moment. Make a little space for uncertainty rather than trying to solve it all at once.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "These are supports, not cures. If your feelings are heavy or persistent, please also speak to a professional.",
+        },
+      },
+      {
+        id: "when-to-ask",
+        heading: "When to ask for support",
+        lead: "You do not need to wait until things feel unbearable before asking for help.",
+        paragraphs: [
+          "It is worth reaching out if your feelings are lasting, getting worse, affecting your sleep or eating, causing panic, making daily life hard to manage, making you feel disconnected from yourself or the baby, or leaving you feeling unsafe.",
+          "If you feel unsafe, unable to cope, or worried you might harm yourself or your baby, seek urgent help. That can be your midwife, GP, maternity unit, a mental health crisis service, or emergency services.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "You do not need to wait until things feel unbearable before asking for help.",
+        },
+      },
+      {
+        id: "where-to-get-help",
+        heading: "Where to get help",
+        lead: "There are several routes into support, and you can use more than one.",
+        paragraphs: [
+          "Your midwife and GP are the usual first points of contact and can refer you on. Your maternity unit can help if something feels urgent. NHS Talking Therapies is available in many areas for anxiety and low mood, and you can often self-refer.",
+          "Specialist perinatal mental health teams support more complex mental health needs in pregnancy and after birth. Trusted family, friends and specialist charities can add another layer of support alongside professional care. If you are in crisis, please contact your GP, your local mental health crisis service, or emergency services.",
+        ],
+      },
+    ],
+    lastUpdated: "May 2026",
     reviewedBy: "Jenny Joines",
     faq: [
-      { question: "Is it normal to not feel excited about pregnancy?", answer: "Yes. Many people feel ambivalent, anxious, or numb at times. This does not mean anything is wrong with you or that you will not bond with your baby." },
-      { question: "How do I know if I have antenatal depression?", answer: "If low mood, hopelessness, or loss of interest lasts more than two weeks and affects your daily life, speak to your midwife or GP. Screening tools can help identify what you are experiencing." },
-      { question: "Will my mental health affect my baby?", answer: "Getting support for your mental health is one of the best things you can do for yourself and your baby. Treatment and support are safe and effective." },
+      { question: "Is it normal to feel anxious during pregnancy?", answer: "Yes. Some worry in pregnancy is very common, especially around scans, appointments and change. If worry becomes persistent, affects sleep or daily life, or feels hard to switch off from, it is worth speaking to your midwife or GP." },
+      { question: "What if I do not feel excited about being pregnant?", answer: "That is more common than people talk about. Feeling ambivalent, numb or unsure does not mean anything is wrong with you or that you will not bond with your baby. It is worth mentioning to your midwife so you have support if you want it." },
+      { question: "Can pregnancy affect my mental health?", answer: "Yes. Pregnancy can bring up new mental health difficulties or make existing ones feel harder. Antenatal anxiety and antenatal depression are recognised and treatable, and support in pregnancy can help both you and your baby." },
+      { question: "When should I speak to my midwife or GP?", answer: "You can raise how you are feeling at any appointment. Reach out sooner if low mood or anxiety lasts more than two weeks, if daily life feels harder to manage, or if something has changed and you are not sure why." },
+      { question: "What if I am pregnant after a loss?", answer: "Pregnancy after loss often feels different, more guarded and more anxious, especially around scan dates and milestones. Tell your midwife about your history so they can offer extra support, and consider specialist services if you would find that helpful." },
+      { question: "Can I ask for help even if I am not in crisis?", answer: "Yes. You do not need to reach a certain level of distress before asking for support. Asking early often makes things easier and is a normal part of good antenatal care." },
+      { question: "What should I do if I feel unsafe or unable to cope?", answer: "If you feel unsafe, unable to cope, or worried you might harm yourself or your baby, seek urgent help. That can be your midwife, GP, maternity unit, a mental health crisis service, or emergency services." },
+      { question: "Can my partner or family help with emotional wellbeing?", answer: "Yes. Practical help, someone to talk to, and having a trusted person come to appointments can all make a real difference. Partners and close family can also access support in their own right." },
     ],
+    sources: [
+      { label: "Mental health in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/mental-health/" },
+      { label: "Feelings, relationships and pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/support/feelings-relationships-and-pregnancy/" },
+      { label: "Mental wellbeing during pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/mental-wellbeing" },
+      { label: "Mental health in pregnancy", publisher: "Royal College of Psychiatrists", url: "https://www.rcpsych.ac.uk/mental-health/mental-illnesses-and-mental-health-problems/mental-health-in-pregnancy" },
+      { label: "Perinatal mental health", publisher: "Mind", url: "https://www.mind.org.uk/information-support/types-of-mental-health-problems/perinatal-mental-health/" },
+    ],
+    relatedSlugs: ["anxiety-in-pregnancy", "pregnancy-after-loss", "the-first-trimester-emotionally", "when-the-joy-doesnt-arrive-yet", "first-trimester-complete-guide"],
   },
+
 
   // ─── BREASTFEEDING AND FEEDING GUIDE (Cornerstone) ──────────────────────
   {

@@ -1,57 +1,66 @@
-# Phase 4.5 — Trimester landing → complete guide connection
+# Phase 4.6 — Rewrite `emotional-wellbeing-pregnancy` to Flagship
 
-Add one small editorial card to each trimester landing page, linking to its matching upgraded complete guide article. Place it between "Where to go deeper" and the FAQ.
+Rewrite only the existing `emotional-wellbeing-pregnancy` object in `src/data/articleData.ts` (lines 2678–2752) to the Flagship article standard used by the three trimester cornerstones. Nothing else touched.
 
-## Files to edit
+## File edited
 
-Three page files only:
-- `src/pages/trimester/FirstTrimester.tsx`
-- `src/pages/trimester/SecondTrimester.tsx`
-- `src/pages/trimester/ThirdTrimester.tsx`
+- `src/data/articleData.ts` (single object rewrite; slug, route, position unchanged)
 
-New shared component (kept tiny to avoid duplication):
-- `src/components/trimester/TrimesterCompleteGuideCard.tsx`
+No changes to templates, routes, topic data, article inventory, SEO, calculators, product, About, AI, saved journey, design tokens, or `.lovable/plan.md`.
 
-No other files touched. No article data, topic data, template, route, SEO, calculator, product, About, AI, saved-journey, or design-token changes.
+## Object shape
 
-## Component
+Replace fields in place; add missing Flagship fields near their trimester-cornerstone positions. Preserve legacy fields the object already carries (`howThisFeels`, `whatHappening`, `timing`, `whatItFeelsLike`, `whatThisMeans`, `normal`, `seekSupport`, `disclaimer`, `whatYouCanDo`, `whatHappensNext`, `relatedStage`, `aiPrompts`, `captureIntro`, `journey`, `topics`, `isCornerstone`, `productPromotion`) with light copy touch-ups only where wording is stale.
 
-`TrimesterCompleteGuideCard` accepts `{ title, description, ctaLabel, href }` and renders a single quiet editorial card:
+### Updated / added fields
 
-- Section wrapper: `bg-parchment` with the standard `container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl` and `py-12 md:py-16`.
-- Card: `max-w-3xl mx-auto rounded-2xl border border-border/40 bg-card p-6 sm:p-8 md:p-10` — matches the existing landing-page card language (soft border, parchment card surface, rounded, generous padding).
-- Content stack:
-  - Eyebrow: `stage-label` reading `Complete guide`.
-  - Title: `font-serif text-[1.35rem] sm:text-[1.5rem] md:text-[1.65rem] text-foreground leading-snug`.
-  - Description: `font-sans text-[15px] text-foreground/70 leading-relaxed max-w-xl`.
-  - CTA: `<Link>` with `inline-flex items-center gap-1.5 font-sans text-[13px] font-light text-sage hover:text-sage-muted transition-colors` and an `ArrowRight` icon that nudges on hover (same pattern as `FirstTriFAQ` / `ThirdTriFAQ` "See all FAQs" and `ThirdTriDeeper` links).
+- `title` → `Emotional wellbeing in pregnancy`
+- `metaDescription` → `A calm guide to emotional wellbeing in pregnancy, including anxiety, mood changes, identity shifts, support options and when to ask for help.`
+- `standfirst` → new one-paragraph warm intro (no em dashes)
+- `quickAnswer` → new ~110-word supportive answer covering common causes, that not everyone feels instant joy, where support comes from, and urgent-help signposting
+- `topic` → `"feelings"` (closest existing valid topic value; `emotional-health` is not defined in the dataset)
+- `reviewedBy` → `Jenny Joines` (already present, kept)
+- `lastUpdated` → `May 2026`
+- `inThisArticle` → 8 items matching the section headings
+- `keyTakeaways` → 6 items (per brief)
+- `editorialSections` → 8 sections, each with `id`, `heading`, `lead`, `paragraphs`, and a `callout` where useful:
+  1. Why pregnancy can feel emotional
+  2. Feelings that can be part of pregnancy
+  3. Anxiety, low mood and overwhelm
+  4. Pregnancy after loss, fertility treatment or difficult experiences
+  5. Relationships, identity and pressure
+  6. What can help day to day
+  7. When to ask for support (callout: "You do not need to wait until things feel unbearable before asking for help.")
+  8. Where to get help
+- `faq` → 8 questions from the brief, short careful answers
+- `sources` → 5 structured `{ label, publisher, url }` entries:
+  - NHS — Mental health in pregnancy
+  - NHS — Feelings, relationships and pregnancy
+  - Tommy's — Mental wellbeing during pregnancy
+  - Royal College of Psychiatrists — Mental health in pregnancy
+  - Mind — Perinatal mental health
+- `relatedSlugs` → `["anxiety-in-pregnancy", "pregnancy-after-loss", "the-first-trimester-emotionally", "when-the-joy-doesnt-arrive-yet", "first-trimester-complete-guide"]`
 
-Mobile: single column, natural stack, no horizontal overflow, tap-friendly CTA. Reuses existing tokens only.
+## Tone and safety
 
-## Placement
+British English, no em dashes, no American spelling, short paragraphs, calm and practical. Non-diagnostic.
 
-Insert `<TrimesterCompleteGuideCard ... />` in each page between the "Where to go deeper" component and the FAQ:
+Urgent-help wording follows the exact careful pattern:
 
-- `FirstTrimester.tsx`: after `<FirstTriDeeper />`, before `<FirstTriFAQ />`.
-- `SecondTrimester.tsx`: after `<SecondTriDeeper />`, before `<SecondTriFAQ />`.
-- `ThirdTrimester.tsx`: after `<ThirdTriDeeper />`, before `<ThirdTriFAQ />`.
+> If you feel unsafe, unable to cope, or worried you might harm yourself or your baby, seek urgent help.
 
-## Card copy
+No phone numbers, no crisis protocols, no invented hotlines. Signposts only to midwife, GP, maternity unit, NHS Talking Therapies, perinatal mental health team, crisis and emergency support, trusted people, and specialist charities. Never implies that rest, journalling or lifestyle supports replace professional care for serious symptoms.
 
-| Page | Title | Description | CTA | Href |
-|---|---|---|---|---|
-| First trimester | First trimester: a complete guide | A calmer, deeper walkthrough of early symptoms, appointments, emotions and when to ask for support. | Read the complete first trimester guide | `/articles/first-trimester-complete-guide` |
-| Second trimester | Second trimester: a complete guide | A fuller guide to body changes, movement, scans, emotions and the middle weeks of pregnancy. | Read the complete second trimester guide | `/articles/second-trimester-complete-guide` |
-| Third trimester | Third trimester: a complete guide | A practical guide to late pregnancy, baby movements, appointments, labour signs and getting ready for birth. | Read the complete third trimester guide | `/articles/third-trimester-complete-guide` |
+## Rendering
 
-Eyebrow is `Complete guide` on all three.
-
-## Verification
-
-- `tsgo` (typecheck only, no other builds).
-- Load `/pregnancy/first-trimester`, `/pregnancy/second-trimester`, `/pregnancy/third-trimester`: card present, correctly placed, correct href, no layout regressions, no source lists added, mobile has no overflow.
-- Load the three `/articles/...-complete-guide` routes: still render via `ArticleFlagshipTemplate` unchanged.
+Object retains `quickAnswer` + non-empty `editorialSections` + non-empty `keyTakeaways`, so `/articles/emotional-wellbeing-pregnancy` renders through `ArticleFlagshipTemplate`. Medically reviewed badge appears once (hero); the duplicate At-a-glance badge was already removed in Phase 4.1.
 
 ## Guardrails
 
-No NHS / NICE / Tommy's / RCOG / GOV.UK source lists on landing pages. No article-content duplication. One card per page. No redirects, noindex, canonical, or route changes. No redesign of the landing pages.
+No new files, routes, redirects, noindex, canonical, or topic-data changes. Do not relink this article into topic-page card lists. No Family articles published.
+
+## Verification
+
+- `tsgo` typecheck.
+- Load `/articles/emotional-wellbeing-pregnancy` → flagship render, one badge, 8 sections, 6 takeaways, 8 FAQs, 5 structured sources.
+- Spot-check `/pregnancy`, `/pregnancy/body`, `/pregnancy/health-and-safety` unchanged.

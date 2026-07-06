@@ -80,8 +80,6 @@ const HubArticleView = ({
   const sections = article.sections ?? [];
   const hasSections = sections.length > 0;
   const showInThisArticle = sections.length >= 2;
-  const summaryText = article.intro ?? article.description;
-  const hasSummary = Boolean(summaryText);
   const takeaways = article.keyTakeaways ?? [];
   const hasTakeaways = takeaways.length > 0;
 

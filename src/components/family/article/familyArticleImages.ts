@@ -145,5 +145,67 @@ export const familyArticleImageMap: Record<string, FamilyArticleImages> = {
         caption: "Clarity and kindness usually travel well together.",
       },
     ],
+  // Bespoke future image: parent with older child near baby items,
+  // calm home setting.
+  "preparing-for-another-baby": {
+    hero: {
+      src: heroDiverse.url,
+      alt: "A parent with an older child in a calm home preparing for a new baby",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicGrowing.url,
+        alt: "An older child near quiet baby items in a warm home",
+        caption: "Preparing gently is usually more useful than preparing perfectly.",
+      },
+    ],
+  },
+  // Bespoke future image: parent planning childcare at a kitchen table
+  // with notebook and calendar.
+  "managing-childcare-costs": {
+    hero: {
+      src: heroParents.url,
+      alt: "Two parents talking through childcare plans at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicFamilyBasics.url,
+        alt: "A calm kitchen table with a notebook and a family calendar",
+        caption: "A shared page often steadies a heavy conversation.",
+      },
+    ],
+  },
+  // Bespoke future image: calm home detail showing everyday family safety
+  // without alarm.
+  "making-your-home-safer": {
+    hero: {
+      src: heroEveryday.url,
+      alt: "A calm, everyday family home scene",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicFamilyBasics.url,
+        alt: "A warm home detail showing gentle everyday family safety",
+        caption: "Small everyday habits often protect a family more than any single product.",
+      },
+    ],
+  },
+  // Bespoke future image: supportive adult conversation in a warm home setting.
+  "when-to-ask-for-help": {
+    hero: {
+      src: heroFour.url,
+      alt: "A family together in a warm, supportive home moment",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicRelationships.url,
+        alt: "A quiet, supportive conversation between adults at home",
+        caption: "Asking early is usually gentler than waiting until things feel overwhelming.",
+      },
+    ],
   },
 };

@@ -315,7 +315,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         "Holding both outcomes gently before you know",
       ],
     },
-    startHere: [
+    startHere: [],
     normalVsSupport: {
       normal: [
         "Symptoms that come and go, including some that mimic your period",

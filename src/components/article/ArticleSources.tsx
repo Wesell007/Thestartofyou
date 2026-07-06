@@ -1,8 +1,11 @@
-import type { ArticleData } from "@/data/articleData";
+import type { ArticleData, ArticleSource } from "@/data/articleData";
 
 interface Props {
   data: ArticleData;
 }
+
+const isStructured = (s: string | ArticleSource): s is ArticleSource =>
+  typeof s === "object" && s !== null && "url" in s;
 
 const ArticleSources = ({ data }: Props) => {
   if (!data.sources || data.sources.length === 0) return null;
@@ -25,7 +28,25 @@ const ArticleSources = ({ data }: Props) => {
                   [{i + 1}]
                 </span>
                 <span className="font-sans text-xs font-light text-muted-foreground/70 leading-relaxed">
-                  {source}
+                  {isStructured(source) ? (
+                    <>
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        className="underline decoration-border/40 underline-offset-4 hover:text-foreground/80"
+                      >
+                        {source.label}
+                      </a>
+                      <span className="text-muted-foreground/50">
+                        {" — "}
+                        {source.publisher}
+                        {source.year ? ` (${source.year})` : ""}
+                      </span>
+                    </>
+                  ) : (
+                    source
+                  )}
                 </span>
               </li>
             ))}

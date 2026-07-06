@@ -261,95 +261,52 @@ const HubArticleView = ({
         </section>
 
 
-        {/* ─── AT A GLANCE + IN THIS ARTICLE ─────────────────────── */}
-        {(hasSummary || showInThisArticle) && (
+        {/* ─── IN THIS ARTICLE ─────────────────────── */}
+        {showInThisArticle && (
           <section className="pb-12 md:pb-16">
             <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
               <div
-                className={`grid gap-4 md:gap-5 ${
-                  hasSummary && showInThisArticle
-                    ? "grid-cols-1 md:grid-cols-2"
-                    : "grid-cols-1"
-                }`}
+                className="rounded-2xl border p-6 md:p-7"
+                style={{
+                  borderColor: accentBorder,
+                  background: `linear-gradient(160deg, hsl(0 0% 100% / 0.9) 0%, hsl(var(${tokens.base}) / 0.45) 100%)`,
+                  boxShadow:
+                    "0 14px 40px -30px rgba(60,50,40,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.75)",
+                }}
               >
-                {hasSummary && (
-                  <div
-                    className="rounded-2xl border p-6 md:p-7"
-                    style={{
-                      borderColor: accentBorder,
-                      background: `linear-gradient(160deg, hsl(0 0% 100% / 0.9) 0%, hsl(var(${tokens.soft}) / 0.55) 100%)`,
-                      boxShadow:
-                        "0 14px 40px -30px rgba(60,50,40,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.75)",
-                    }}
+                <div className="flex items-center gap-2">
+                  <BookOpen
+                    size={12}
+                    strokeWidth={1.8}
+                    style={{ color: accent }}
+                    aria-hidden
+                  />
+                  <span
+                    className="font-sans text-[10.5px] font-light tracking-[0.28em] uppercase"
+                    style={{ color: accent }}
                   >
-                    <div className="flex items-center gap-2">
-                      <Sparkles
-                        size={12}
-                        strokeWidth={1.8}
-                        style={{ color: accent }}
-                        aria-hidden
-                      />
+                    In this article
+                  </span>
+                </div>
+                <ol className="mt-4 space-y-2.5">
+                  {sections.map((s, i) => (
+                    <li key={i} className="flex items-start gap-3">
                       <span
-                        className="font-sans text-[10.5px] font-light tracking-[0.28em] uppercase"
+                        className="font-sans text-[11px] font-light tracking-[0.14em] pt-1 shrink-0 w-6"
                         style={{ color: accent }}
                       >
-                        At a glance
+                        {two(i + 1)}
                       </span>
-                    </div>
-                    <p
-                      className="mt-4 font-sans text-[14.5px] font-light leading-[1.7]"
-                      style={{ color: deepSoft }}
-                    >
-                      {summaryText}
-                    </p>
-                  </div>
-                )}
-
-                {showInThisArticle && (
-                  <div
-                    className="rounded-2xl border p-6 md:p-7"
-                    style={{
-                      borderColor: accentBorder,
-                      background: `linear-gradient(160deg, hsl(0 0% 100% / 0.9) 0%, hsl(var(${tokens.base}) / 0.45) 100%)`,
-                      boxShadow:
-                        "0 14px 40px -30px rgba(60,50,40,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.75)",
-                    }}
-                  >
-                    <div className="flex items-center gap-2">
-                      <BookOpen
-                        size={12}
-                        strokeWidth={1.8}
-                        style={{ color: accent }}
-                        aria-hidden
-                      />
-                      <span
-                        className="font-sans text-[10.5px] font-light tracking-[0.28em] uppercase"
-                        style={{ color: accent }}
+                      <a
+                        href={`#${sectionAnchorId(i)}`}
+                        className="font-sans text-[13.75px] font-light leading-[1.55] hover:underline underline-offset-4 transition-colors"
+                        style={{ color: deep }}
                       >
-                        In this article
-                      </span>
-                    </div>
-                    <ol className="mt-4 space-y-2.5">
-                      {sections.map((s, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <span
-                            className="font-sans text-[11px] font-light tracking-[0.14em] pt-1 shrink-0 w-6"
-                            style={{ color: accent }}
-                          >
-                            {two(i + 1)}
-                          </span>
-                          <a
-                            href={`#${sectionAnchorId(i)}`}
-                            className="font-sans text-[13.75px] font-light leading-[1.55] hover:underline underline-offset-4 transition-colors"
-                            style={{ color: deep }}
-                          >
-                            {s.heading}
-                          </a>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
-                )}
+                        {s.heading}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
               </div>
             </div>
           </section>

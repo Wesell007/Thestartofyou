@@ -62,7 +62,7 @@ const Footer = () => {
             <h4 className="font-serif text-foreground/85 text-base mb-4 md:mb-6">Resources</h4>
             <ul className="space-y-3">
               {[
-                { to: "/explore", label: "Explore" },
+                { to: "/pregnancy", label: "Explore" },
                 { to: "/due-date-calculator", label: "Due Date Calculator" },
                 { to: "/ovulation-calculator", label: "Ovulation Calculator" },
                 { to: "/support", label: "Support" },

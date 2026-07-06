@@ -6,7 +6,7 @@ const pathways = [
     label: "Your journey",
     title: "Return to your journey",
     sub: "Pick up where you left off",
-    href: "/explore",
+    href: "/pregnancy",
     accent: "bg-[hsl(var(--stage-support)/0.4)]",
   },
   {

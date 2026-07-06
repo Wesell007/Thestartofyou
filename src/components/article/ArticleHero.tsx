@@ -54,7 +54,7 @@ const ArticleHero = ({ data }: Props) => {
           <nav className="flex items-center gap-2 mb-6 sm:mb-8 font-sans text-[11px] font-light text-white/40 tracking-wide flex-wrap">
             <Link to="/" className="hover:text-white/70 transition-colors">Home</Link>
             <span className="opacity-40">/</span>
-            <Link to="/guidance" className="hover:text-white/70 transition-colors">Guidance</Link>
+            <Link to="/pregnancy" className="hover:text-white/70 transition-colors">Guidance</Link>
             {data.journey?.slice(0, 1).map((j) => (
               <span key={j} className="contents">
                 <span className="opacity-40">/</span>

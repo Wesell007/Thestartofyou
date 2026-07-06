@@ -1111,7 +1111,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
               {
                 label: "Guidance library",
                 sub: "Explore what matters next, at your stage",
-                href: "/guidance",
+                href: "/pregnancy",
               },
             ].map((link, i) => (
               <Fade key={i} delay={i * 40}>

@@ -109,7 +109,7 @@ const ArticleRelatedReads = ({ articles, isDeep, variant = "legacy" }: Props) =>
 
         <div className="mt-6 text-center">
           <Link
-            to="/guidance"
+            to="/pregnancy"
             className="inline-flex items-center gap-2 font-sans text-[13px] text-sage hover:text-foreground transition-colors"
           >
             Browse all guidance

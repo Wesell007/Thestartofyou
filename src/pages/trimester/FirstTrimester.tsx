@@ -85,6 +85,14 @@ const FirstTrimester = () => {
         {/* 12. Where to go deeper */}
         <FirstTriDeeper />
 
+        {/* 12b. Complete guide link */}
+        <TrimesterCompleteGuideCard
+          title="First trimester: a complete guide"
+          description="A calmer, deeper walkthrough of early symptoms, appointments, emotions and when to ask for support."
+          ctaLabel="Read the complete first trimester guide"
+          href="/articles/first-trimester-complete-guide"
+        />
+
         {/* 13. Common questions FAQ */}
         <FirstTriFAQ />
 

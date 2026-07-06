@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
-import Explore from "./pages/Explore.tsx";
+
 import Pregnancy from "./pages/Pregnancy.tsx";
 import BodyTopic from "./pages/pregnancy/BodyTopic.tsx";
 import BabyTopic from "./pages/pregnancy/BabyTopic.tsx";
@@ -126,7 +126,7 @@ import IVFBeforeTransfer from "./pages/ivf/BeforeTransfer.tsx";
 import IVFAfterTransfer from "./pages/ivf/AfterTransfer.tsx";
 import IVFEarlyPregnancy from "./pages/ivf/EarlyPregnancy.tsx";
 import AskPage from "./pages/AskPage.tsx";
-import GuidanceLibrary from "./pages/GuidanceLibrary.tsx";
+
 import MyWeek from "./pages/MyWeek.tsx";
 import MyJourney from "./pages/MyJourney.tsx";
 import KeptChapter from "./pages/KeptChapter.tsx";
@@ -198,7 +198,7 @@ const App = () => (
         <ConsentBanner />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/explore" element={<Explore />} />
+          
           <Route path="/pregnancy" element={<Pregnancy />} />
           <Route path="/pregnancy/body" element={<BodyTopic />} />
           <Route path="/pregnancy/baby" element={<BabyTopic />} />
@@ -330,7 +330,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/product" element={<Product />} />
           <Route path="/ask" element={<AskPage />} />
-          <Route path="/guidance" element={<GuidanceLibrary />} />
+          
           <Route path="/my-week" element={<ProtectedRoute><MyWeek /></ProtectedRoute>} />
           <Route path="/my-week/:week" element={<ProtectedRoute><KeptChapter /></ProtectedRoute>} />
           <Route path="/my-journey" element={<ProtectedRoute><MyJourney /></ProtectedRoute>} />

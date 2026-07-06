@@ -1,67 +1,42 @@
+## Phase 4.1 Fix — Remove duplicate "Medically reviewed by" line
 
-# Phase 4.1 — Pregnancy Cornerstone Rewrite: first-trimester-complete-guide
+### Finding
+The line renders **twice visually** on `/articles/first-trimester-complete-guide` (and every flagship article):
 
-## Scope
-Upgrade the existing legacy cornerstone article `first-trimester-complete-guide` (lines 1095–1232 of `src/data/articleData.ts`) into a full Flagship article. Only that single article object is modified. Slug, route, cornerstone status and object position are preserved. No other article, file or system is touched.
+1. `src/components/article/flagship/FlagshipHero.tsx` (line 87) — inside the hero trust bar, next to "Updated May 2026".
+2. `src/components/article/flagship/FlagshipSummaryRow.tsx` (lines 25–32) — footer of the "At a glance" card, directly under the hero.
 
-## Only file edited
-- `src/data/articleData.ts` (single object only)
+Both are sage-tinted, both use the Shield icon, and they sit within ~150px of each other on the rendered page. This is a real duplicate, not a false positive.
 
-## Rendering trigger
-`ArticlePage` routes to `ArticleFlagshipTemplate` when the article has `quickAnswer`, `editorialSections.length > 0` and `keyTakeaways.length > 0`. All three will be present after this rewrite.
+(A third "reviewed by" mention exists inside `ArticleSources.tsx` at the very bottom of the article, but it's a full sentence in the sources block, not the trust badge, and belongs there. Out of scope.)
 
-## Priority: Flagship-facing fields (fully written)
-These drive the flagship template and are the focus of the rewrite:
-- `title` → "First trimester: a complete guide"
-- `metaDescription` → the recommended calm description
-- `topic: "body"` (new; safest existing PregnancyTopicSlug)
-- `standfirst` (new) → the recommended warm one-paragraph dek
-- `quickAnswer` → rewritten (~110 words) covering the weeks-1-to-12 window, symptom spread, appointments and safety-net
-- `inThisArticle` → 8 items matching the brief
-- `keyTakeaways` → 6 items matching the brief
-- `editorialSections` (new) → 8 sections with `id`, `heading`, `lead`, `paragraphs`, and callouts where appropriate:
-  1. What the first trimester actually covers
-  2. Symptoms you may notice early on
-  3. What your baby is doing in these early weeks
-  4. Appointments, tests and scans
-  5. Eating, medicines and everyday care
-  6. Emotions, anxiety and waiting
-  7. When symptoms should be checked
-  8. Moving towards the second trimester
-- `faq` → 6 new Qs (start/end of trimester, symptoms coming and going, when to contact midwife/GP, booking appointment, first scan, not feeling excited)
-- `sources` → 5 verified structured `ArticleSource` entries: NHS (weeks 1–3), NHS (antenatal appointments), NICE NG201, Tommy's (first trimester), GOV.UK (screening tests)
-- `lastUpdated` → "May 2026"
-- `reviewedBy` → already `"Jenny Joines"`, unchanged
-- `relatedSlugs` → `early-pregnancy-symptoms-explained`, `bleeding-in-early-pregnancy`, `tests-and-scans-in-pregnancy`, `dating-scan`, `the-first-trimester-emotionally`
+### Cause
+When `FlagshipSummaryRow` was built, the reviewer badge was added to the "At a glance" card as a trust signal without accounting for the identical badge already living in `FlagshipHero`.
 
-## Legacy-support fields (minimal, consistency-only touches)
-Kept in place with only light copy consistency edits (British English, no em dashes, calm tone). No structural changes, no large rewrite:
-`slug`, `isCornerstone`, `howThisFeels`, `whatHappening`, `timing`, `whatItFeelsLike`, `whatThisMeans`, `normal`, `seekSupport`, `disclaimer`, `whatYouCanDo`, `whatHappensNext`, `relatedStage`, `aiPrompts`, `captureIntro`, `trimester`, `relatedWeeks`, `journey`, `topics`, `productPromotion`.
+### Fix (smallest possible)
+Remove the reviewer block from **`FlagshipSummaryRow.tsx`** only. Keep the hero badge (it's paired with `lastUpdated` and reads as the canonical article metadata/trust area). No data changes, no template restructuring, no article-content edits.
 
-## Field order
-Existing field order is preserved. New fields inserted in the natural flagship positions used elsewhere in the file: `topic` and `standfirst` after `isCornerstone`; `editorialSections` appended after `reviewedBy` at the end of the object.
+Specifically, delete lines 25–32 of `src/components/article/flagship/FlagshipSummaryRow.tsx` (the `{data.reviewedBy && ( ... )}` block and its wrapping divider `div`). The `Shield` import becomes unused and will be removed too.
 
-## Guardrails
-- Do not edit topic data, template files, routes, calculators, SEO files, product page, About page, AI logic, saved journey logic, design tokens, `ArticleSources.tsx`, `.lovable/plan.md`, or article inventory.
-- Do not touch any other article object.
-- No new files, no redirects, no noindex, no Family articles published.
-- Do not relink this article into topic-page card lists.
+### Files edited
+- `src/components/article/flagship/FlagshipSummaryRow.tsx` (only)
 
-## Tone
-British English, calm and premium, short paragraphs, no em dashes, no fear-based wording, no diagnosis.
+### Guardrails
+- No changes to `articleData.ts`, `ArticlePage.tsx`, `ArticleFlagshipTemplate.tsx`, `FlagshipHero.tsx`, `ArticleSources.tsx`, topic data, routes, or SEO.
+- No article body rewrites. No slug change. No topic-card relinking.
+- Applies globally to flagship articles (correct — every flagship page currently has the same duplicate); no per-article branching.
 
-## Verification
-- `tsgo` clean.
-- Playwright-load `/articles/first-trimester-complete-guide` and confirm:
-  - Rendered via `ArticleFlagshipTemplate` (standfirst, quick answer, in-this-article, key takeaways, ≥8 editorial sections, FAQ, structured sources with `target="_blank" rel="noopener noreferrer nofollow"`, medically reviewed line).
-- Spot-check `/pregnancy`, `/pregnancy/body`, `/pregnancy/health-and-safety` to confirm no topic-card links were reintroduced.
+### Verification
+1. `tsgo` — must be clean.
+2. Playwright load `/articles/first-trimester-complete-guide`:
+   - Count occurrences of "Medically reviewed by" in the rendered DOM. Expect **exactly 1** in the hero region and 1 sentence inside the sources block (which reads "This article has been reviewed for accuracy by…"), i.e. one trust-badge instance.
+   - Confirm `FlagshipHero`, `FlagshipEditorialSections`, `FlagshipFAQ`, and `ArticleSources` still render (flagship template intact).
+   - Confirm the "At a glance" card still shows the `quickAnswer` copy.
+3. Spot-check one other flagship article (e.g. any existing flagship) to confirm the fix is consistent and nothing else regressed.
 
-## Return summary
-- File edited
-- Confirmation only `first-trimester-complete-guide` was changed
-- Final counts: sections, key takeaways, FAQs, sources
-- Publishers used
-- `reviewedBy` status (already present, unchanged)
-- Whether the page renders via `ArticleFlagshipTemplate`
-- `tsgo` result
-- Suggested next prompt
+### Return summary will include
+- Duplicate confirmed: yes/no + which two components.
+- Cause.
+- File edited (single file).
+- Post-fix DOM count of the trust-badge line.
+- `tsgo` result.

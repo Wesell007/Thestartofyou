@@ -231,8 +231,37 @@ const HubArticleView = ({
                 </>
               )}
             </div>
+              </div>
+              {heroImage && (
+                <div className="md:order-2">
+                  <div
+                    className="relative overflow-hidden rounded-2xl md:rounded-3xl border"
+                    style={{
+                      borderColor: accentBorder,
+                      boxShadow: `0 40px 80px -50px hsl(var(${tokens.accent}) / 0.35), 0 20px 50px -30px rgba(60,50,40,0.25), inset 0 1px 0 hsl(0 0% 100% / 0.6)`,
+                    }}
+                  >
+                    <img
+                      src={heroImage.src}
+                      alt={heroImage.alt}
+                      loading="eager"
+                      decoding="async"
+                      className="w-full h-auto aspect-[4/5] sm:aspect-[4/3] md:aspect-[5/6] lg:aspect-[4/5] object-cover"
+                    />
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0"
+                      style={{
+                        background: `linear-gradient(180deg, transparent 55%, hsl(var(${tokens.base}) / 0.18) 100%)`,
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </section>
+
 
         {/* ─── AT A GLANCE + IN THIS ARTICLE ─────────────────────── */}
         {(hasSummary || showInThisArticle) && (

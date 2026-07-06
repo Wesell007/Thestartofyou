@@ -1,66 +1,50 @@
-# Phase 4.6 — Rewrite `emotional-wellbeing-pregnancy` to Flagship
+# Phase 4.7 — Remove legacy Explore and Guidance pages
 
-Rewrite only the existing `emotional-wellbeing-pregnancy` object in `src/data/articleData.ts` (lines 2678–2752) to the Flagship article standard used by the three trimester cornerstones. Nothing else touched.
+Audit complete. Two live standalone pages need removal:
 
-## File edited
+- `/explore` → `src/pages/Explore.tsx` (registered in `src/App.tsx` line 201)
+- `/guidance` → `src/pages/GuidanceLibrary.tsx` (registered in `src/App.tsx` line 333)
 
-- `src/data/articleData.ts` (single object rewrite; slug, route, position unchanged)
+Both are separate from the current article system, trimester landings, hubs, and topic pages, which stay untouched.
 
-No changes to templates, routes, topic data, article inventory, SEO, calculators, product, About, AI, saved journey, design tokens, or `.lovable/plan.md`.
+Scope note: this phase only removes live route registrations, page files, page-exclusive components, and `<Link>` / `<Navigate>` targets that point at `/explore` or `/guidance`. Ordinary copy that uses the word "guidance" (headings, "Related guidance", "Pregnancy guidance", body text, labels) is left exactly as-is.
 
-## Object shape
+## Files to delete
 
-Replace fields in place; add missing Flagship fields near their trimester-cornerstone positions. Preserve legacy fields the object already carries (`howThisFeels`, `whatHappening`, `timing`, `whatItFeelsLike`, `whatThisMeans`, `normal`, `seekSupport`, `disclaimer`, `whatYouCanDo`, `whatHappensNext`, `relatedStage`, `aiPrompts`, `captureIntro`, `journey`, `topics`, `isCornerstone`, `productPromotion`) with light copy touch-ups only where wording is stale.
+- `src/pages/Explore.tsx`
+- `src/pages/GuidanceLibrary.tsx`
+- `src/components/explore/` — entire folder, only used by `Explore.tsx`: `ExploreHero`, `StageNavSection`, `ContinueJourneySection`, `QuickActionsSection`, `GuidanceSection`, `AIReassuranceSection`, `BrandPositioningSection`
+- Guidance components used only by `GuidanceLibrary.tsx`: `src/components/guidance/GuidanceHero.tsx`, `GuidanceAIBridge.tsx`, `GuidanceBrowseAll.tsx`, `GuidanceCompareGuides.tsx`, `GuidanceEditorialBreak.tsx`, `GuidanceFeaturedGuides.tsx`, `GuidanceJourneyPathways.tsx`, `GuidancePopularQuestions.tsx`, `GuidanceStageCarousels.tsx`, `GuidanceTopicSections.tsx` — each re-verified with `rg` before deletion; any component still imported elsewhere is kept
 
-### Updated / added fields
+Image assets under `src/assets/guidance-*` are left in place (reused by `src/data/ttcFlagshipOverrides.ts` and other hub content).
 
-- `title` → `Emotional wellbeing in pregnancy`
-- `metaDescription` → `A calm guide to emotional wellbeing in pregnancy, including anxiety, mood changes, identity shifts, support options and when to ask for help.`
-- `standfirst` → new one-paragraph warm intro (no em dashes)
-- `quickAnswer` → new ~110-word supportive answer covering common causes, that not everyone feels instant joy, where support comes from, and urgent-help signposting
-- `topic` → `"feelings"` (closest existing valid topic value; `emotional-health` is not defined in the dataset)
-- `reviewedBy` → `Jenny Joines` (already present, kept)
-- `lastUpdated` → `May 2026`
-- `inThisArticle` → 8 items matching the section headings
-- `keyTakeaways` → 6 items (per brief)
-- `editorialSections` → 8 sections, each with `id`, `heading`, `lead`, `paragraphs`, and a `callout` where useful:
-  1. Why pregnancy can feel emotional
-  2. Feelings that can be part of pregnancy
-  3. Anxiety, low mood and overwhelm
-  4. Pregnancy after loss, fertility treatment or difficult experiences
-  5. Relationships, identity and pressure
-  6. What can help day to day
-  7. When to ask for support (callout: "You do not need to wait until things feel unbearable before asking for help.")
-  8. Where to get help
-- `faq` → 8 questions from the brief, short careful answers
-- `sources` → 5 structured `{ label, publisher, url }` entries:
-  - NHS — Mental health in pregnancy
-  - NHS — Feelings, relationships and pregnancy
-  - Tommy's — Mental wellbeing during pregnancy
-  - Royal College of Psychiatrists — Mental health in pregnancy
-  - Mind — Perinatal mental health
-- `relatedSlugs` → `["anxiety-in-pregnancy", "pregnancy-after-loss", "the-first-trimester-emotionally", "when-the-joy-doesnt-arrive-yet", "first-trimester-complete-guide"]`
+## Files to edit
 
-## Tone and safety
+Route + import removal:
+- `src/App.tsx` — remove `import Explore` (line 7), `import GuidanceLibrary` (line 129), `<Route path="/explore" …>` (line 201), `<Route path="/guidance" …>` (line 333)
 
-British English, no em dashes, no American spelling, short paragraphs, calm and practical. Non-diagnostic.
+Link target replacements only (no copy, label, layout, or class changes). Replace `to="/explore"` and `to="/guidance"` with a valid current destination — default `/pregnancy`; for week pages use the matching trimester hub (weeks 1–12 → `/pregnancy/first-trimester`, 13–27 → `/pregnancy/second-trimester`, 28+ → `/pregnancy/third-trimester`):
 
-Urgent-help wording follows the exact careful pattern:
+- `src/components/layout/Footer.tsx` line 65 — Resources list `/explore` entry: swap target to `/pregnancy` and label to "Pregnancy" (label change only because "Explore" is the link target name, not body copy)
+- `src/components/home/CTASection.tsx` line 31 — `to="/explore"` → `to="/pregnancy"`
+- `src/pages/NotFound.tsx` line 39 — `to="/explore"` → `to="/"`
+- `src/pages/AskPage.tsx` lines 22, 179, 308 — `/explore` targets → `/pregnancy` (IVF branch on line 308 keeps `/ivf`). Visible labels ("Explore guidance", "Explore") stay unchanged
+- `src/pages/ArticlePage.tsx` line 15 — `<Navigate to="/explore" replace />` → `<Navigate to="/" replace />`
+- Week pages with `<Link to="/guidance" …>` (target only, visible label untouched): `Week1Page`, `Week2Page`, `Week3Page`, `Week4Page`, `Week5Page`, `Week6Page`, `Week7Page`, `Week8Page`, `Week9Page`, `Week10Page`, `Week11Page`, `Week12Page`, `Week13Page`, `Week14Page`, `Week15Page`, `Week16Page`, `Week17Page`, `Week18Page`, `Week19Page`, `Week20Page`, `Week21Page`, `Week22Page`, `Week23Page`, `Week24Page`, `Week25Page`, `Week26Page`, `Week27Page`, `Week28Page`, `Week29Page`, `Week31Page`, `Week33Page`, `Week34Page`, `Week35Page`, `Week36Page`, `Week39Page`, `Week40Page`, `Week41Page`, `Week42Page`, plus generic `WeekPage.tsx`
 
-> If you feel unsafe, unable to cope, or worried you might harm yourself or your baby, seek urgent help.
+No other files touched. Comments that reference `/guidance` historically (e.g. `pregnancyTopicData.ts` line 573) are left alone — they are not live links.
 
-No phone numbers, no crisis protocols, no invented hotlines. Signposts only to midwife, GP, maternity unit, NHS Talking Therapies, perinatal mental health team, crisis and emergency support, trusted people, and specialist charities. Never implies that rest, journalling or lifestyle supports replace professional care for serious symptoms.
+## Not touched
 
-## Rendering
+Article system, `articleData.ts`, `familyArticleData.ts`, `firstYearArticleData.ts`, `toddlerArticleData.ts`, `pregnancyTopicData.ts`, all trimester landings, TTC / IVF / First Year / Toddler / Family / Product / About / Support / Ask internals beyond the three link swaps above, calculators, saved journey, AI logic, design tokens, `.lovable/plan.md`, SEO config, redirects, canonicals. All ordinary "guidance" wording in headings and body copy stays.
 
-Object retains `quickAnswer` + non-empty `editorialSections` + non-empty `keyTakeaways`, so `/articles/emotional-wellbeing-pregnancy` renders through `ArticleFlagshipTemplate`. Medically reviewed badge appears once (hero); the duplicate At-a-glance badge was already removed in Phase 4.1.
+## Route behaviour after deletion
 
-## Guardrails
-
-No new files, routes, redirects, noindex, canonical, or topic-data changes. Do not relink this article into topic-page card lists. No Family articles published.
+- `/explore` and `/guidance` fall through to `NotFound` via the existing `path="*"` route. No redirects added, no `noindex`, no canonical changes.
 
 ## Verification
 
 - `tsgo` typecheck.
-- Load `/articles/emotional-wellbeing-pregnancy` → flagship render, one badge, 8 sections, 6 takeaways, 8 FAQs, 5 structured sources.
-- Spot-check `/pregnancy`, `/pregnancy/body`, `/pregnancy/health-and-safety` unchanged.
+- Load `/explore` and `/guidance` → both render NotFound.
+- Load `/pregnancy`, `/pregnancy/first-trimester`, `/pregnancy/second-trimester`, `/pregnancy/third-trimester`, `/articles/first-trimester-complete-guide`, `/articles/emotional-wellbeing-pregnancy` → all still render.
+- `rg 'to="/explore"|to="/guidance"|path="/explore"|path="/guidance"|Navigate to="/explore"|Navigate to="/guidance"'` returns no matches. Plain-text uses of the word "guidance" remain and are expected.

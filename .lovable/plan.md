@@ -1,63 +1,88 @@
-## Locked canonical map
+## Phase 3 — Sources infrastructure + Pregnancy medical batch 1
 
-These canonical decisions are locked for the article cleanup phase. No redirects should be implemented until the canonical target article has been rewritten or confirmed to meet the full premium article standard.
+Add a structured `ArticleSource` shape for references, teach `ArticleSources.tsx` to render both legacy strings and the new structured shape, then add 3+ UK-credible **verified** sources (and the medically reviewed line where missing) to the 10 Pregnancy medical articles in batch 1. No topic data, no route changes, no body rewrites.
 
-### 1. Ovulation signs duplicate
-- Weaker / duplicate: `/articles/ovulation-signs`
-- Canonical target: `/articles/signs-of-ovulation`
-- Decision: Rewrite `signs-of-ovulation` as the canonical full Flagship article for ovulation signs. Later redirect `ovulation-signs` to `signs-of-ovulation` only after the canonical article is upgraded.
-- Current action: No redirect yet. Keep both URLs resolving. Do not promote `ovulation-signs` in topic cards.
+### Current state (findings)
+- `src/data/articleData.ts` already types `sources?: string[]` (line 132) and `reviewedBy?: string` (line 134). Many articles already use `reviewedBy: "Jenny Joines"`.
+- `src/components/article/ArticleSources.tsx` renders sources as a numbered list under a subdued "Sources and references" section. Layout correct, but sources are plain strings with no links.
+- All 10 batch 1 slugs exist in `articleData.ts`.
+- Templates (`ArticlePage.tsx` / `ArticleDeepTemplate.tsx`) already wire in `ArticleSources`. No template changes needed.
 
-### 2. Nausea / morning sickness duplicate
-- Weaker / duplicate: `/articles/nausea-in-early-pregnancy`
-- Canonical target: `/articles/complete-guide-morning-sickness`
-- Decision: Keep `complete-guide-morning-sickness` as canonical because it is stronger and already has more depth. Later redirect `nausea-in-early-pregnancy` to `complete-guide-morning-sickness` after the canonical article has sources, standfirst and hero polish.
-- Current action: No redirect yet. Keep both URLs resolving. Topic cards should use `complete-guide-morning-sickness`.
+### Type change (minimal, backwards compatible)
+Add a structured type and widen the `sources` field so no existing string entries break:
 
-### 3. Birth plan / birth preferences duplicate
-- Weaker / duplicate: `/articles/writing-a-birth-plan`
-- Canonical target: `/articles/birth-preferences`
-- Decision: Use `birth-preferences` as canonical because it matches the site's calmer language and existing convention. Later redirect `writing-a-birth-plan` to `birth-preferences` after the canonical article is polished.
-- Current action: No redirect yet. Keep both URLs resolving. Topic cards should use `birth-preferences`.
+```ts
+export interface ArticleSource {
+  label: string;       // guidance / page title
+  publisher: string;   // NHS, NICE, RCOG, Tommy's, UKHSA, bumps, Group B Strep Support
+  url: string;         // verified official source URL
+  year?: string;       // publication or last-review year, if shown on the page
+}
 
-### 4. What to buy / home space duplicate
-- Weaker / duplicate: `/articles/what-to-buy-for-a-new-baby`
-- Canonical target: `/articles/the-space-your-baby-will-come-home-to`
-- Decision: Use `the-space-your-baby-will-come-home-to` as canonical because it better matches The Start of You tone and avoids generic shopping-list content. Later redirect `what-to-buy-for-a-new-baby` to the canonical article after it has sources and hero polish if needed.
-- Current action: No redirect yet. Keep both URLs resolving. Topic cards should use `the-space-your-baby-will-come-home-to`.
+// on ArticleData
+sources?: Array<string | ArticleSource>;
+```
 
-### 5. First Year milestones orphan
-- Legacy orphan: `/articles/baby-milestones-first-year`
-- Canonical future target: First Year Development topic and article system.
-- Decision: Do not relink this legacy article. Fold useful content into the First Year development article plan, especially `/first-year/development/baby-development-in-the-first-year`.
-- Current action: No redirect yet. Keep URL resolving. Do not promote from topic cards.
+Legacy string entries stay valid; new batch 1 entries use `ArticleSource`. No sweep of other existing source arrays.
 
-### 6. First Year sleep orphan
-- Legacy orphan: `/articles/baby-sleep-first-year`
-- Canonical future target: First Year Sleep topic and article system.
-- Decision: Do not relink this legacy article. Fold useful content into the First Year sleep article plan, especially `/first-year/sleep/newborn-sleep-expectations` and `/first-year/sleep/helping-your-baby-settle`.
-- Current action: No redirect yet. Keep URL resolving. Do not promote from topic cards.
+### Component change — `src/components/article/ArticleSources.tsx`
+Same visual container and "Sources and references" heading. Only the `<li>` renderer changes:
 
-### 7. First Year feeding orphan
-- Legacy orphan: `/articles/feeding-your-baby-complete-guide`
-- Canonical future target: First Year Feeding topic and article system.
-- Decision: Do not relink this legacy article. Fold useful content into the First Year feeding article plan, especially `/first-year/feeding/newborn-feeding-rhythms` and `/first-year/feeding/bottle-and-breastfeeding-questions`.
-- Current action: No redirect yet. Keep URL resolving. Do not promote from topic cards.
+- String entry: render as today.
+- `ArticleSource` entry:
+  - `label` becomes `<a href={url} target="_blank" rel="noopener noreferrer nofollow" className="underline decoration-border/40 underline-offset-4 hover:text-foreground/80">`
+  - append `— {publisher}` and, if `year`, ` (${year})` as muted trailing text
+  - keep `[n]` numeric prefix and existing typography tokens
 
-### 8. Postpartum recovery orphan
-- Legacy orphan: `/articles/postpartum-recovery-timeline`
-- Canonical future target: First Year Postpartum Recovery topic and article system.
-- Decision: Do not relink this legacy article. Fold useful content into the First Year postpartum recovery article plan, especially `/first-year/postpartum-recovery/healing-after-birth` and `/first-year/postpartum-recovery/what-recovery-can-feel-like`.
-- Current action: No redirect yet. Keep URL resolving. Do not promote from topic cards.
+No layout redesign. No new colour tokens. No new sections.
 
-### 9. Your body after birth orphan
-- Legacy orphan: `/articles/your-body-after-birth`
-- Canonical future target: First Year Body and Hormones topic and article system.
-- Decision: Do not relink this legacy article. Fold useful content into the First Year body and hormones article plan, especially `/first-year/body-and-hormones/body-changes-after-birth` and `/first-year/body-and-hormones/hormones-sweat-and-hair-loss`.
-- Current action: No redirect yet. Keep URL resolving. Do not promote from topic cards.
+### URL verification protocol (new — per user instruction)
+Before writing any structured source into the data file:
 
-### 10. Preparing for baby orphan
-- Legacy orphan: `/articles/preparing-for-baby-complete-guide`
-- Canonical future target: Pregnancy Preparing for Baby topic or a rewritten pregnancy cornerstone article.
-- Decision: Do not relink this legacy article yet. Decide later whether to rewrite it as a premium pregnancy cornerstone or fold it into the preparing-for-baby topic page and related articles.
-- Current action: No redirect yet. Keep URL resolving. Do not promote from topic cards.
+1. Fetch each candidate URL via `websearch--web_search` / `code--fetch_website` against the official publisher domain only:
+   - `nhs.uk`, `nice.org.uk` (incl. `cks.nice.org.uk`, `bnf.nice.org.uk`), `rcog.org.uk`, `tommys.org`, `gov.uk` (UKHSA), `medicinesinpregnancy.org` (bumps), `gbss.org.uk`.
+2. Accept only URLs that resolve to a real page on that domain and match the intended topic. Capture the page's shown `Last reviewed` / publication year where visible.
+3. If a candidate does not verify: swap for another verified page from the allowed publisher list. If no acceptable replacement is found for a slot, drop it and flag the article in the return summary as needing manual source review.
+4. Never approximate slugs, never guess query strings, never invent RCOG Green-top numbers. If a Green-top URL cannot be confirmed on `rcog.org.uk`, substitute an NHS / NICE CKS equivalent or flag.
+5. Each of the 10 articles must end with **≥ 3 verified sources**, or be flagged (still write whatever verified sources were found — do not fabricate to reach 3).
+
+### Data updates — 10 articles in `src/data/articleData.ts`
+For each slug below, add a `sources: ArticleSource[]` populated only from verified URLs per the protocol above, and add `reviewedBy: "Jenny Joines"` if missing (do not overwrite existing values). Article body copy is not touched.
+
+Publishers to draw from per slug (final URL list produced during implementation, only after verification):
+
+- **bleeding-in-early-pregnancy** — NHS, Tommy's, RCOG or NICE CKS
+- **spotting-in-pregnancy** — NHS, Tommy's, NICE CKS
+- **reduced-movements-in-pregnancy** — NHS, RCOG, Tommy's
+- **pelvic-pain-in-pregnancy** — NHS, RCOG, Tommy's
+- **when-to-worry-about-cramps-in-pregnancy** — NHS, Tommy's, NICE CKS
+- **leaking-fluid-in-pregnancy** — NHS, RCOG, Tommy's
+- **uti-in-pregnancy** — NHS, NICE CKS, RCOG or Tommy's
+- **group-b-strep-in-pregnancy** — NHS, RCOG, Group B Strep Support
+- **medicines-in-pregnancy** — NHS, bumps (medicinesinpregnancy.org), NICE BNF
+- **paracetamol-in-pregnancy** — NHS, bumps, NICE CKS
+
+### Medical review line
+`reviewedBy: "Jenny Joines"` is already supported and rendered by the existing component's trust note. Added only where missing on batch 1 slugs. No metadata-model refactor.
+
+### Files touched
+- `src/data/articleData.ts` — add `ArticleSource` interface, widen `sources`, add verified sources + `reviewedBy` on the 10 slugs.
+- `src/components/article/ArticleSources.tsx` — render structured entries as safe external links; keep string fallback.
+
+### Explicitly not touched
+Topic data (pregnancy/ttc/ivf/family/firstyear/toddler), routes, templates, calculators, product, About, AI, saved journey, design tokens, `.lovable/plan.md` structure beyond this phase, redirects, noindex, canonical decisions, article body copy.
+
+### Verification
+- `tsgo`.
+- Playwright: load `/articles/bleeding-in-early-pregnancy`, `/articles/reduced-movements-in-pregnancy`, `/articles/group-b-strep-in-pregnancy`, `/articles/paracetamol-in-pregnancy`, screenshot the Sources block, confirm ≥3 entries, external `target="_blank"` + `rel="noopener noreferrer nofollow"`, medically reviewed line present, no visual regression above.
+
+### Return summary (after implementation)
+- Files edited.
+- Confirm type standardised (added `ArticleSource`, widened `sources`) — no existing string entries touched.
+- Component changes summary.
+- Per-article: source count, publishers used, verified URLs list.
+- Any URLs that failed verification and what was substituted or flagged.
+- `reviewedBy` status per article (added / already existed).
+- `tsgo` result.
+- Articles flagged for manual source review.
+- Suggested next prompt.

@@ -2113,81 +2113,243 @@ const articleDatabase: ArticleData[] = [
     ],
   },
 
-  // ─── SECOND TRIMESTER COMPLETE GUIDE (Cornerstone) ──────────────────────
+  // ─── SECOND TRIMESTER COMPLETE GUIDE (Cornerstone / Flagship) ───────────
   {
     slug: "second-trimester-complete-guide",
-    title: "Second trimester: everything you need to know about weeks 13 to 27",
-    metaDescription: "What happens in the second trimester? A complete guide to symptoms, baby development, body changes, and what to expect from weeks 13 to 27.",
-    quickAnswer: "The second trimester often brings relief from early pregnancy symptoms and growing energy. Your baby develops rapidly, and you may start feeling movement. Most people consider this the most comfortable trimester.",
+    title: "Second trimester: a complete guide",
+    metaDescription:
+      "A calm, practical guide to the second trimester of pregnancy, including symptoms, scans, baby movement, body changes, appointments and when to ask for support.",
+    isCornerstone: true,
+    topic: "body",
+    standfirst:
+      "The second trimester can bring a shift in energy, symptoms and emotions, but it is not the same for everyone. You may start to notice your body changing more visibly, feel your baby move for the first time, and have important appointments and scans. This guide walks you through what may happen, what can feel normal, and when it is worth asking for support.",
+    quickAnswer:
+      "The second trimester usually runs from week 13 to the end of week 27. Some early symptoms such as sickness and extreme tiredness may ease, though new changes often appear. Common experiences include a growing bump, first baby movements, back or pelvic discomfort, heartburn, constipation, skin changes and shifting emotions. The 20-week anomaly scan usually happens in this trimester, alongside routine midwife appointments. First movements often begin between weeks 16 and 24, though timing varies. Bleeding, severe or one-sided pain, leaking fluid, a high fever, feeling very unwell, or any worry about your baby's movements should be checked with a midwife, GP, maternity unit or urgent care.",
     howThisFeels: [
-      "A sense of relief as nausea fades",
+      "A sense of relief as early symptoms begin to ease",
       "Excitement mixed with growing awareness of the changes ahead",
-      "Starting to feel more connected as your bump grows",
+      "Feeling more connected as your bump grows and movements begin",
       "Moments of worry between scans and appointments",
     ],
     whatHappening: {
       commonCauses: [
-        { heading: "Baby's rapid development", body: "From around 14 weeks, your baby develops facial features, begins to hear, and grows significantly in size. By 27 weeks, they weigh around 900g." },
-        { heading: "Physical changes", body: "Your bump becomes more visible. Ligament pain, skin changes, and increased blood volume are common. Many people notice reduced nausea and improved energy." },
-        { heading: "Movement begins", body: "Most people feel their first movements (quickening) between 16 and 24 weeks. These may feel like fluttering, bubbling, or gentle taps." },
+        { heading: "Baby's rapid development", body: "From around 14 weeks your baby develops facial features, begins to hear, and grows quickly in size. By 27 weeks they usually weigh around 900g." },
+        { heading: "Physical changes", body: "Your bump becomes more visible. Ligament stretching, skin changes, and increased blood volume are common. Many people notice reduced nausea and improved energy." },
+        { heading: "Movement begins", body: "Most people feel first movements, sometimes called quickening, between 16 and 24 weeks. Early movements can feel like fluttering, bubbling or gentle taps." },
       ],
       lessCauses: [
-        { heading: "Round ligament pain", body: "Sharp or aching pain in the lower abdomen caused by stretching ligaments supporting the uterus." },
+        { heading: "Round ligament pain", body: "Sharp or aching pain in the lower abdomen caused by ligaments stretching to support your growing uterus." },
         { heading: "Braxton Hicks", body: "Some people begin to notice practice contractions in the second trimester. These are usually painless and irregular." },
       ],
-      whyItVaries: "Every pregnancy is different. Some people sail through the second trimester while others experience ongoing discomfort.",
+      whyItVaries: "Every pregnancy is different. Some people feel well through much of the second trimester while others continue to feel tired, unwell or uncomfortable.",
     },
     timing: {
       whenStarts: "The second trimester begins at week 13.",
-      whenPeaks: "Weeks 18-22 often feel like the peak of energy and comfort.",
-      whenEases: "The second trimester ends at week 27, transitioning into the third trimester.",
+      whenPeaks: "Weeks 18 to 22 often feel like a settled point of energy and comfort for many people.",
+      whenEases: "The second trimester ends at week 27, moving into the third trimester.",
     },
     whatItFeelsLike: [
-      "Feeling more like yourself again after the fog of the first trimester",
-      "The thrill of the anatomy scan",
+      "Feeling more like yourself again after the intensity of the first trimester",
+      "The anticipation of the 20-week scan",
       "Adjusting to a changing body shape",
       "Starting to plan and prepare",
     ],
-    whatThisMeans: "The second trimester is a time of significant growth for your baby and often greater comfort for you. It is a natural midpoint to settle into the journey.",
-    normal: ["Occasional round ligament pain", "Skin changes like linea nigra or stretch marks", "Increased appetite and energy", "Mild swelling in hands or feet"],
-    seekSupport: ["Severe abdominal pain or cramping", "Heavy bleeding", "No movement felt by 24 weeks", "Persistent headaches with vision changes"],
-    disclaimer: "This is general guidance, not medical advice. Contact your midwife or GP with specific concerns.",
+    whatThisMeans: "The second trimester is a time of significant growth for your baby and often greater comfort for you, though not for everyone. It is a natural midpoint to settle into the journey.",
+    normal: ["Occasional round ligament pain", "Skin changes such as linea nigra or stretch marks", "Increased appetite and energy", "Mild swelling in hands or feet", "Heartburn and constipation", "First baby movements from around 16 to 24 weeks"],
+    seekSupport: ["Bleeding of any kind", "Severe or one-sided abdominal pain", "Leaking fluid", "A high fever", "Severe headache or visual changes", "Any worry about your baby's movements"],
+    disclaimer: "This is general guidance, not medical advice. Contact your midwife, GP or maternity unit with any concern.",
     whatYouCanDo: [
-      { action: "Attend your mid-pregnancy scan (around 20 weeks)", reason: "This checks your baby's development and can identify any concerns early." },
-      { action: "Stay active with gentle exercise", reason: "Walking, swimming, and yoga support energy and wellbeing." },
-      { action: "Start thinking about birth preferences", reason: "The second trimester is a calm time to begin considering your options." },
-      { action: "Continue taking folic acid and vitamin D", reason: "These support ongoing development." },
+      { action: "Attend your 20-week anomaly scan and routine appointments", reason: "These check your baby's development and pick up concerns early." },
+      { action: "Move gently and rest when you need to", reason: "Walking, swimming and pregnancy-safe movement support energy and comfort." },
+      { action: "Ask before taking any medicine", reason: "Check with a midwife, GP or pharmacist before starting any new medication in pregnancy." },
+      { action: "Contact your midwife about worrying symptoms", reason: "Bleeding, severe pain, leaking fluid or concern about movements should always be checked." },
     ],
-    whatHappensNext: "The third trimester brings the final stage of preparation, with more frequent appointments and your baby gaining weight rapidly.",
+    whatHappensNext: "The third trimester brings more noticeable movement, more frequent appointments and preparation for birth. It begins after week 27.",
     relatedStage: {
       intro: "Continue exploring pregnancy:",
       links: [
         { label: "Pregnancy Hub", href: "/pregnancy" },
-        { label: "First Trimester Guide", href: "/articles/complete-guide-first-trimester" },
-        { label: "Third Trimester Guide", href: "/articles/third-trimester-complete-guide" },
+        { label: "First Trimester Guide", href: "/articles/first-trimester-complete-guide" },
       ],
     },
-    aiPrompts: ["What should I expect in the second trimester?", "When will I feel my baby move?", "Is round ligament pain normal?"],
-    captureIntro: "The second trimester often brings moments of joy and connection worth holding onto.",
+    aiPrompts: ["What should I expect in the second trimester?", "When will I feel my baby move?", "What happens at the 20-week scan?"],
+    captureIntro: "The second trimester often brings moments of connection worth holding onto.",
     trimester: [2],
     journey: ["pregnancy"],
     topics: ["body-changes", "development", "timelines"],
-    isCornerstone: true,
     productPromotion: "strong",
-    keyTakeaways: [
-      "The second trimester runs from week 13 to week 27",
-      "Many people feel more energy and less nausea during this stage",
-      "First movements are usually felt between 16 and 24 weeks",
-      "The anatomy scan at around 20 weeks is a key milestone",
+    relatedSlugs: [
+      "20-week-anomaly-scan",
+      "baby-movement-in-pregnancy",
+      "round-ligament-pain",
+      "heartburn-in-pregnancy",
+      "tests-and-scans-in-pregnancy",
     ],
-    inThisArticle: ["What happens in the second trimester", "Baby development", "Body changes", "Common symptoms", "The anatomy scan", "What helps", "Common questions"],
-    sources: ["NHS: Your pregnancy week by week", "Tommy's: Second trimester", "RCOG: Pregnancy information"],
-    lastUpdated: "March 2026",
+    keyTakeaways: [
+      "The second trimester usually covers weeks 13 to 27.",
+      "Some people feel better in this trimester, but others still feel tired, unwell, anxious or uncomfortable.",
+      "Your bump may grow more noticeably and your body may start to feel different.",
+      "Many people have their 20-week anomaly scan during this trimester.",
+      "Baby movements often begin during this stage, but timing varies.",
+      "Bleeding, severe pain, leaking fluid or worrying symptoms should always be checked.",
+    ],
+    inThisArticle: [
+      "What the second trimester covers",
+      "Symptoms and body changes",
+      "Your baby's growth and movement",
+      "Appointments, tests and scans",
+      "Looking after your body",
+      "Emotions and relationships",
+      "When to ask for help",
+      "Getting ready for the third trimester",
+    ],
+    sources: [
+      { label: "You and your baby at 13 to 27 weeks pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/week-by-week/13-to-27/" },
+      { label: "Your antenatal appointments", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/your-antenatal-appointments/" },
+      { label: "Antenatal care (NG201)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng201" },
+      { label: "Baby's movements in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-symptom-checker/babys-movements-pregnancy" },
+      { label: "Fetal anomaly screening programme handbook", publisher: "GOV.UK", url: "https://www.gov.uk/government/publications/fetal-anomaly-screening-programme-handbook" },
+    ],
+    lastUpdated: "May 2026",
     reviewedBy: "Jenny Joines",
+    editorialSections: [
+      {
+        id: "what-the-second-trimester-covers",
+        heading: "What the second trimester actually covers",
+        lead: "The second trimester runs from week 13 to the end of week 27. It is sometimes called the middle trimester and often feels like a settling-in point in pregnancy.",
+        paragraphs: [
+          "Weeks are still counted from the first day of your last period, so the second trimester begins at 13 weeks and ends after 27 weeks. The third trimester starts at week 28.",
+          "For some people this trimester brings a real shift. Early sickness may ease, energy may return and the pregnancy can feel more real as the bump grows and movements begin.",
+          "For others the second trimester is not obviously easier. Sickness, tiredness, anxiety or physical discomfort can continue. Both experiences can be normal.",
+        ],
+        callout: {
+          tone: "info",
+          text: "There is no single second-trimester experience. If yours does not match what friends or books describe, that does not mean something is wrong.",
+        },
+      },
+      {
+        id: "symptoms-and-body-changes",
+        heading: "Symptoms and body changes you may notice",
+        lead: "Your body keeps adapting through the middle of pregnancy. Some changes are visible, some are internal, and many come and go.",
+        paragraphs: [
+          "Common changes include a growing bump, fuller or tender breasts, skin changes such as linea nigra or stretch marks, round ligament pain, back or pelvic discomfort, heartburn, constipation, headaches, sleep changes and shifts in energy.",
+          "Round ligament pain often feels like a short pulling or aching sensation low down on one or both sides as the ligaments supporting your uterus stretch. It usually settles with a change of position.",
+          "Heartburn and constipation are very common and can be helped with small changes to eating, drinking and daily routine. A midwife, GP or pharmacist can advise on pregnancy-safe options if it becomes hard to manage.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Severe pain, bleeding, leaking fluid or feeling very unwell are not things to wait out. Contact your midwife or maternity unit for advice.",
+        },
+      },
+      {
+        id: "baby-growth-and-movement",
+        heading: "Your baby's growth and movement",
+        lead: "Your baby grows quickly through the second trimester, and first movements often begin during these weeks.",
+        paragraphs: [
+          "During this trimester your baby's features become more defined, hearing develops, and they begin to move, stretch and respond to sound. By around 27 weeks they usually weigh close to 900g.",
+          "First movements are often felt between 16 and 24 weeks. If this is your first pregnancy they may come a little later. Early movements can feel like fluttering, bubbling, popping or gentle taps and are often easier to notice when you are still.",
+          "Patterns of movement become more meaningful later in pregnancy. In the second trimester, movements can be irregular and easy to miss on busy days.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If you are worried about your baby's movements at any point, contact your midwife or maternity unit for advice. It is always fine to ask.",
+        },
+      },
+      {
+        id: "appointments-tests-and-scans",
+        heading: "Appointments, tests and scans",
+        lead: "The second trimester includes routine midwife appointments and the 20-week anomaly scan.",
+        paragraphs: [
+          "Routine antenatal appointments continue through this trimester. Your midwife will usually check your blood pressure, test your urine, talk through how you are feeling and answer any questions you have.",
+          "The 20-week anomaly scan, usually offered between 18 and 21 weeks, looks in detail at your baby's development, the position of the placenta and the amount of fluid around your baby. It is a screening scan, not a diagnostic test.",
+          "You may be offered further appointments, scans or blood tests if earlier screening or your medical history suggests it would be helpful. If anything is unclear, it is always fine to ask your midwife to explain again.",
+        ],
+      },
+      {
+        id: "looking-after-your-body",
+        heading: "Looking after your body day to day",
+        lead: "Small daily habits can make the second trimester more comfortable.",
+        paragraphs: [
+          "Gentle movement such as walking, swimming or pregnancy-safe yoga can help with energy, sleep and back or pelvic discomfort. Rest is just as important, especially on days when your body feels heavy or tired.",
+          "Eat in a way that feels manageable. Regular smaller meals, plenty of fluids and fibre-rich foods can help with heartburn and constipation. A midwife or GP can advise if symptoms feel hard to cope with.",
+          "Check with a midwife, GP or pharmacist before taking any new medicine in pregnancy, including over-the-counter remedies and supplements. Think about posture, pelvic support and how you sit or lift, especially at work.",
+        ],
+      },
+      {
+        id: "emotions-and-relationships",
+        heading: "Emotions, relationships and identity",
+        lead: "The second trimester can bring a wide range of feelings, and not all of them are joyful.",
+        paragraphs: [
+          "Some people feel more connected to the pregnancy as the bump grows and movements begin. Others do not feel connected yet, and that can also be normal. Feelings often shift over time.",
+          "Anxiety can continue into the second trimester, especially before scans or after previous loss. Changes in body image, intimacy and how you feel about yourself are all common. Sharing the news, family reactions and changing relationships can add to the emotional load.",
+          "If low mood or anxiety is affecting your daily life, please tell your midwife or GP. Support in pregnancy is available and asking for it is a good step.",
+        ],
+        callout: {
+          tone: "info",
+          text: "There is no right way to feel in pregnancy. Not feeling constantly joyful does not mean the pregnancy matters less to you.",
+        },
+      },
+      {
+        id: "when-symptoms-should-be-checked",
+        heading: "When symptoms should be checked",
+        lead: "Some symptoms in the second trimester should always be checked, even if they turn out to be nothing.",
+        paragraphs: [
+          "Contact your midwife, maternity unit, GP or urgent care about bleeding of any kind, severe abdominal pain, one-sided pain, leaking fluid, a high fever, severe headache, changes in vision, sudden or worrying swelling, breathlessness, chest pain, fainting, pain when weeing, or a general sense that something is not right.",
+          "If you are worried about your baby's movements, or notice a change later in pregnancy, contact your maternity unit or midwife for advice. You do not need to wait to see if things settle on their own.",
+          "Trust yourself. If something feels wrong, it is always worth asking. Midwives and maternity units are used to these calls and would rather you got in touch.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "You will never be told off for calling your midwife or maternity unit. Reassurance is part of your care.",
+        },
+      },
+      {
+        id: "moving-towards-the-third-trimester",
+        heading: "Moving towards the third trimester",
+        lead: "The third trimester begins after week 27 and brings its own changes.",
+        paragraphs: [
+          "As you move towards the third trimester, movements often become stronger and more noticeable, appointments become more frequent, and thoughts often turn to birth preferences and preparing for the early days at home.",
+          "There is no need to have everything ready at once. Many people gently gather information, ask questions and think about support in the weeks between the 20-week scan and the third trimester.",
+          "You can keep exploring the pregnancy hub for week-by-week guidance, the third trimester guide when you are ready, and shorter articles on specific symptoms and appointments.",
+        ],
+      },
+    ],
     faq: [
-      { question: "When will I feel my baby move for the first time?", answer: "Most people feel first movements between 16 and 24 weeks. First-time parents may feel them later, closer to 20-24 weeks." },
-      { question: "Is it normal to feel pain in the second trimester?", answer: "Mild round ligament pain and growing pains are common. Severe or persistent pain should be checked by your midwife." },
-      { question: "What happens at the 20-week scan?", answer: "The anatomy scan checks your baby's development in detail, including organs, bones, and the placenta. You may also find out the sex if you wish." },
+      {
+        question: "When does the second trimester start and end?",
+        answer:
+          "The second trimester begins at week 13 and ends after week 27. Weeks are counted from the first day of your last period, so the numbers include the weeks before conception.",
+      },
+      {
+        question: "Is the second trimester always easier?",
+        answer:
+          "Not for everyone. Many people find early sickness eases and energy improves, but others continue to feel tired, unwell or anxious. Both experiences can be normal.",
+      },
+      {
+        question: "When will I feel my baby move?",
+        answer:
+          "First movements are often felt between 16 and 24 weeks. If this is your first pregnancy they may come a little later. Early movements can feel like fluttering, bubbling or gentle taps.",
+      },
+      {
+        question: "What happens at the 20-week scan?",
+        answer:
+          "The 20-week anomaly scan looks in detail at your baby's development, the position of the placenta and the fluid around your baby. It is usually offered between 18 and 21 weeks and is a screening scan, not a diagnostic test.",
+      },
+      {
+        question: "Is back pain or pelvic pain normal in the second trimester?",
+        answer:
+          "Mild back or pelvic discomfort is common as your body adapts. Severe pain, pain that stops you moving, or pain with other symptoms should be discussed with your midwife or GP, who may refer you for physiotherapy or further support.",
+      },
+      {
+        question: "When should I contact my midwife or maternity unit?",
+        answer:
+          "Contact them about bleeding, severe or one-sided pain, leaking fluid, a high fever, severe headache, visual changes, worrying swelling, or any concern about your baby's movements. If something feels wrong, it is always fine to call.",
+      },
+      {
+        question: "Is it normal to feel anxious in the second trimester?",
+        answer:
+          "Yes. Anxiety can continue between appointments and scans, especially after a previous loss or difficult experience. If it is affecting your daily life, please tell your midwife or GP so support can be offered.",
+      },
     ],
   },
 

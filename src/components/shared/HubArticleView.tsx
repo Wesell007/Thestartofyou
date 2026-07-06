@@ -414,40 +414,73 @@ const HubArticleView = ({
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
             {hasSections ? (
               <div className="space-y-14 md:space-y-16">
-                {sections.map((s, i) => (
-                  <article key={i} id={sectionAnchorId(i)} className="scroll-mt-24">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span
-                        className="font-sans text-[11px] font-light tracking-[0.28em]"
-                        style={{ color: accent }}
-                      >
-                        {two(i + 1)}
-                      </span>
-                      <span
-                        className="h-px flex-1 max-w-[64px]"
-                        style={{ background: accentMid }}
-                        aria-hidden
-                      />
-                    </div>
-                    <h2
-                      className="font-serif text-[1.6rem] md:text-[1.9rem] leading-[1.15] tracking-[-0.005em]"
-                      style={{ color: deep }}
-                    >
-                      {s.heading}
-                    </h2>
-                    <div className="mt-5 space-y-5">
-                      {s.body.map((p, j) => (
-                        <p
-                          key={j}
-                          className="font-sans text-[15.75px] font-light leading-[1.8]"
-                          style={{ color: deepSoft }}
+                {sections.map((s, i) => {
+                  const img = bodyImages?.find((b) => b.afterSectionIndex === i);
+                  return (
+                    <div key={i} className="space-y-14 md:space-y-16">
+                      <article id={sectionAnchorId(i)} className="scroll-mt-24">
+                        <div className="flex items-center gap-3 mb-3">
+                          <span
+                            className="font-sans text-[11px] font-light tracking-[0.28em]"
+                            style={{ color: accent }}
+                          >
+                            {two(i + 1)}
+                          </span>
+                          <span
+                            className="h-px flex-1 max-w-[64px]"
+                            style={{ background: accentMid }}
+                            aria-hidden
+                          />
+                        </div>
+                        <h2
+                          className="font-serif text-[1.6rem] md:text-[1.9rem] leading-[1.15] tracking-[-0.005em]"
+                          style={{ color: deep }}
                         >
-                          {p}
-                        </p>
-                      ))}
+                          {s.heading}
+                        </h2>
+                        <div className="mt-5 space-y-5">
+                          {s.body.map((p, j) => (
+                            <p
+                              key={j}
+                              className="font-sans text-[15.75px] font-light leading-[1.8]"
+                              style={{ color: deepSoft }}
+                            >
+                              {p}
+                            </p>
+                          ))}
+                        </div>
+                      </article>
+                      {img && (
+                        <figure className="md:-mx-16 lg:-mx-24 my-2">
+                          <div
+                            className="relative overflow-hidden rounded-2xl md:rounded-3xl border"
+                            style={{
+                              borderColor: accentBorder,
+                              boxShadow: `0 30px 70px -45px hsl(var(${tokens.accent}) / 0.3), 0 18px 40px -28px rgba(60,50,40,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.6)`,
+                            }}
+                          >
+                            <img
+                              src={img.src}
+                              alt={img.alt}
+                              loading="lazy"
+                              decoding="async"
+                              className="w-full h-auto aspect-[4/3] md:aspect-[16/10] object-cover"
+                            />
+                          </div>
+                          {img.caption && (
+                            <figcaption
+                              className="mt-4 text-center font-serif italic text-[14px] md:text-[14.5px] leading-[1.6]"
+                              style={{ color: deepMuted }}
+                            >
+                              {img.caption}
+                            </figcaption>
+                          )}
+                        </figure>
+                      )}
                     </div>
-                  </article>
-                ))}
+                  );
+                })}
+
               </div>
             ) : (
               <p

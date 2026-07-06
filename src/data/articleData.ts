@@ -1094,17 +1094,20 @@ const articleDatabase: ArticleData[] = [
   // ─── CORNERSTONE: FIRST TRIMESTER COMPLETE GUIDE ─────────────────────────
   {
     slug: "first-trimester-complete-guide",
-    title: "First trimester: everything you need to know about weeks 1 to 12",
-    metaDescription: "A comprehensive guide to the first trimester of pregnancy. What happens week by week, common symptoms, what to expect, and when to seek support.",
+    title: "First trimester: a complete guide",
+    metaDescription: "A calm, practical guide to the first trimester of pregnancy, including early symptoms, scans, emotions, body changes and when to ask for support.",
     isCornerstone: true,
+    topic: "body",
+    standfirst:
+      "The first trimester can feel quiet on the outside and huge on the inside. Your body is changing quickly, symptoms can come and go, and many people are still holding the news privately. This guide walks you through what may happen, what can feel normal, and when it is worth asking for support.",
     quickAnswer:
-      "The first trimester covers weeks 1-12 of pregnancy and involves the most significant developmental changes of the entire pregnancy. During this time, all major organs begin forming, symptoms like nausea and fatigue are common, and your body undergoes enormous hormonal shifts. It is also the stage where uncertainty and anxiety are most common.",
+      "The first trimester usually covers weeks 1 to 12 of pregnancy, counted from the first day of your last period. Early pregnancy can bring tiredness, nausea, sore breasts, cramps, more discharge and shifting emotions, though some people feel very pregnant and others notice very little. Your booking appointment usually happens between weeks 8 and 10, with a dating scan typically between weeks 11 and 14. Heavy bleeding, severe or one-sided pain, feeling faint, a high fever, being unable to keep fluids down or anything that feels worrying should be checked with your midwife, GP, early pregnancy unit or urgent care.",
     howThisFeels: [
       "A strange mix of excitement and fear",
-      "Feeling exhausted in ways you've never experienced",
-      "Wanting to tell people but not knowing when it's safe",
-      "The weight of a secret you're carrying alone or with a partner",
-      "Searching constantly for reassurance about what's normal",
+      "Feeling exhausted in ways you have never experienced",
+      "Wanting to tell people but not knowing when it feels right",
+      "The weight of a secret you are carrying alone or with a partner",
+      "Searching constantly for reassurance about what is normal",
     ],
     whatHappening: {
       commonCauses: [
@@ -1118,7 +1121,7 @@ const articleDatabase: ArticleData[] = [
         },
         {
           heading: "Placenta formation",
-          body: "The placenta develops throughout the first trimester, gradually taking over hormone production from the corpus luteum. This transition is why many symptoms ease around weeks 12-14.",
+          body: "The placenta develops throughout the first trimester, gradually taking over hormone production from the corpus luteum. This transition is why many symptoms ease around weeks 12 to 14.",
         },
       ],
       lessCauses: [
@@ -1136,8 +1139,8 @@ const articleDatabase: ArticleData[] = [
     },
     timing: {
       whenStarts: "The first trimester begins from the first day of your last menstrual period and runs through to the end of week 12.",
-      whenPeaks: "Symptoms are typically most intense between weeks 6-10.",
-      whenEases: "Most symptoms begin to improve from weeks 12-14 as you enter the second trimester.",
+      whenPeaks: "Symptoms are typically most intense between weeks 6 and 10.",
+      whenEases: "Most symptoms begin to improve from weeks 12 to 14 as you enter the second trimester.",
     },
     whatItFeelsLike: [
       "Overwhelming fatigue that makes normal days feel impossible",
@@ -1167,14 +1170,14 @@ const articleDatabase: ArticleData[] = [
     ],
     disclaimer: "This is not medical advice. Regular antenatal care is important from early pregnancy. Contact your midwife or doctor with any concerns.",
     whatYouCanDo: [
-      { action: "Book your first midwife appointment", reason: "Antenatal care should begin as early as possible, usually around weeks 8-10." },
+      { action: "Book your first midwife appointment", reason: "Antenatal care should begin as early as possible, usually around weeks 8 to 10." },
       { action: "Take folic acid daily", reason: "Folic acid supports neural tube development and should be taken throughout the first trimester." },
       { action: "Rest as much as you need", reason: "First trimester fatigue is biological. Your body needs more rest." },
       { action: "Eat what you can manage", reason: "Food aversions are common. Eating what feels manageable is more important than eating perfectly." },
       { action: "Be gentle with yourself emotionally", reason: "The first trimester is intense. Whatever you are feeling is valid." },
     ],
     whatHappensNext:
-      "The second trimester (weeks 13-27) is often described as the most comfortable period of pregnancy. Symptoms typically ease, energy returns, and the pregnancy becomes more visible and tangible. The first scan usually provides welcome reassurance.",
+      "The second trimester (weeks 13 to 27) is often described as the most comfortable period of pregnancy. Symptoms typically ease, energy returns, and the pregnancy becomes more visible and tangible. The first scan usually provides welcome reassurance.",
     relatedStage: {
       intro: "Explore the first trimester in more detail:",
       links: [
@@ -1192,43 +1195,173 @@ const articleDatabase: ArticleData[] = [
     captureIntro: "The first trimester is often kept secret, but it deserves to be remembered. Many parents find that writing about this stage helps them process an intense and transformative experience.",
     trimester: [1],
     relatedWeeks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    relatedSlugs: ["nausea-in-early-pregnancy", "fatigue-in-early-pregnancy", "implantation-bleeding", "symptoms-stopping-early-pregnancy"],
+    relatedSlugs: [
+      "early-pregnancy-symptoms-explained",
+      "bleeding-in-early-pregnancy",
+      "tests-and-scans-in-pregnancy",
+      "dating-scan",
+      "the-first-trimester-emotionally",
+    ],
     journey: ["pregnancy"],
     topics: ["symptoms", "body-changes", "timelines", "emotional-wellbeing", "practical-preparation"],
     faq: [
       {
-        question: "What are the most common first trimester symptoms?",
-        answer: "Fatigue, nausea, breast tenderness, frequent urination, mood changes, food aversions, and bloating. Not everyone experiences all of these.",
+        question: "When does the first trimester start and end?",
+        answer:
+          "It is counted from the first day of your last period and runs to the end of week 12. The first two counted weeks happen before ovulation and conception, which is why the maths can feel a little odd at first.",
       },
       {
-        question: "When is the first scan?",
-        answer: "In the UK, the first scan (dating scan) is usually offered between weeks 8-14. Your midwife will arrange this at your booking appointment.",
+        question: "Is it normal for symptoms to come and go?",
+        answer:
+          "Yes. Nausea, tiredness and breast tenderness can vary from day to day, especially between weeks 6 and 12. A symptom easing off is not automatically a sign that something is wrong.",
       },
       {
-        question: "Is it safe to exercise in the first trimester?",
-        answer: "For most people, gentle to moderate exercise is safe and beneficial. Avoid contact sports and activities with a high fall risk. Speak with your midwife if you have concerns.",
+        question: "When should I contact a midwife or GP in the first trimester?",
+        answer:
+          "As soon as you know you are pregnant, so your booking appointment can be arranged. Also contact them sooner if you have heavy bleeding, severe or one-sided pain, feel faint, have a high fever or feel very unwell.",
       },
       {
-        question: "When should I tell people I'm pregnant?",
-        answer: "There is no rule. Many people wait until after the first scan (around week 12), but some choose to share earlier. Do what feels right for you.",
+        question: "What happens at the booking appointment?",
+        answer:
+          "The booking appointment is usually between weeks 8 and 10. A midwife takes your medical history, talks through screening options, checks your blood pressure, arranges blood tests and gives you information about your care.",
       },
       {
-        question: "Is light spotting in the first trimester normal?",
-        answer: "Light spotting can be normal, particularly around the time implantation occurs. However, any bleeding is worth mentioning to your midwife or doctor.",
+        question: "When will I have my first scan?",
+        answer:
+          "The dating scan is usually offered between 11 weeks and 14 weeks in the UK. It confirms your due date and checks the number of babies. Combined screening can be done at the same appointment if you choose it.",
+      },
+      {
+        question: "Is it normal not to feel excited yet?",
+        answer:
+          "Very. Many people feel numb, cautious, anxious or overwhelmed in the first trimester, especially before the first scan or after a previous loss. Not feeling joyful does not mean the pregnancy matters any less.",
       },
     ],
     productPromotion: "strong",
     keyTakeaways: [
-      "All major organs begin forming in weeks 1-12",
-      "Nausea, fatigue, and emotional intensity are the most common symptoms",
-      "Symptoms typically ease from weeks 12-14",
-      "Regular antenatal care should begin early",
-      "The first scan provides the most reliable reassurance",
+      "The first trimester is counted from the first day of your last period and runs to the end of week 12.",
+      "Symptoms vary widely. Strong symptoms, mild symptoms and changing symptoms can all be normal.",
+      "Tiredness and nausea are common, but ask for help if you feel unable to cope or unable to keep fluids down.",
+      "Your booking appointment and dating scan help set up the rest of your pregnancy care.",
+      "Heavy bleeding, severe pain, feeling faint or anything that feels worrying should be checked.",
+      "You do not need to feel joyful all the time for the pregnancy to matter.",
     ],
-    inThisArticle: ["What happens in weeks 1-12", "Common symptoms", "What to expect emotionally", "When to seek support", "Common questions"],
-    sources: ["NHS: Your pregnancy week by week", "NICE antenatal care guidelines", "Tommy's: First trimester"],
-    lastUpdated: "March 2026",
+    inThisArticle: [
+      "What the first trimester covers",
+      "Early symptoms and body changes",
+      "What your baby is doing",
+      "Appointments, tests and scans",
+      "Eating, medicines and everyday care",
+      "Emotions, anxiety and waiting",
+      "When symptoms should be checked",
+      "Moving towards the second trimester",
+    ],
+    sources: [
+      { label: "You and your baby at 1 to 3 weeks pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/week-by-week/1-to-12/1-2-3-weeks/" },
+      { label: "Your antenatal appointments", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/your-antenatal-appointments/" },
+      { label: "Antenatal care (NG201)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng201" },
+      { label: "The first trimester", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/early-pregnancy/first-trimester" },
+      { label: "Screening tests for you and your baby", publisher: "GOV.UK", url: "https://www.gov.uk/government/publications/screening-tests-for-you-and-your-baby" },
+    ],
+    lastUpdated: "May 2026",
     reviewedBy: "Jenny Joines",
+    editorialSections: [
+      {
+        id: "what-the-first-trimester-covers",
+        heading: "What the first trimester actually covers",
+        lead: "The first trimester runs from the first day of your last period to the end of week 12. That includes about two weeks before ovulation, which is why the dates can feel counterintuitive.",
+        paragraphs: [
+          "Pregnancy is dated from the first day of your last menstrual period rather than from conception. That is how midwives, scans and antenatal notes count the weeks, so the first two counted weeks happen before ovulation and before an embryo exists.",
+          "Ovulation and conception usually happen around week 2 or week 3, and implantation typically follows in week 3 or 4. A positive pregnancy test often becomes possible from around the time of a missed period, which is roughly week 4.",
+          "The due date given at your dating scan is an estimate. Only a small number of babies arrive exactly on their due date. Anything from 37 to 42 weeks is considered term.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If the maths feels confusing, that is normal. The way pregnancy is dated in the UK means you are already counted as pregnant before conception has happened.",
+        },
+      },
+      {
+        id: "early-symptoms-and-body-changes",
+        heading: "Symptoms you may notice early on",
+        lead: "Early pregnancy can bring a wide mix of physical and emotional changes. Some are obvious, some are subtle, and some come and go from day to day.",
+        paragraphs: [
+          "Common first trimester symptoms include tiredness, nausea with or without vomiting, sore or heavier-feeling breasts, mild cramps, more discharge than usual, a stronger sense of smell, food aversions, needing to wee more often and shifts in mood.",
+          "Some people feel very pregnant from the start. Others feel almost nothing in the early weeks, then notice symptoms build later. Both patterns can happen in a healthy pregnancy.",
+          "Severe or unrelenting nausea and vomiting, especially if you cannot keep fluids down, is worth flagging. It can be a condition called hyperemesis gravidarum and there is treatment that can help.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Heavy bleeding, severe pain, feeling faint or being unable to function are signs to contact your midwife, GP or early pregnancy unit, not signs to wait out.",
+        },
+      },
+      {
+        id: "what-your-baby-is-doing",
+        heading: "What your baby is doing in these early weeks",
+        lead: "A huge amount happens in the first 12 weeks, even though there is little to see on the outside.",
+        paragraphs: [
+          "In the first few weeks after conception, cells rapidly divide and organise into the early embryo. The placenta and umbilical cord begin to form alongside the baby, and the very first structures of the brain, spine, heart and gut appear.",
+          "By around week 6, the heart has usually started beating. By week 8 the embryo is often referred to as a fetus and begins to look recognisably human, with tiny limb buds, developing facial features and the beginnings of major organs.",
+          "By the end of week 12, all the main organ systems are in place and much of the rest of pregnancy is about growth and refinement rather than building from scratch.",
+        ],
+      },
+      {
+        id: "appointments-tests-and-scans",
+        heading: "Appointments, tests and scans",
+        lead: "In the UK, first trimester antenatal care usually starts with contacting your GP or midwife team as soon as you know you are pregnant.",
+        paragraphs: [
+          "Your booking appointment is normally arranged between weeks 8 and 10. A midwife takes a detailed history, talks through your options, checks blood pressure, arranges blood and urine tests and gives you information about screening.",
+          "The dating scan is usually offered between 11 weeks and 14 weeks. It confirms your due date and checks the number of babies. If you choose combined screening for Down's, Edwards' and Patau's syndromes, that is often done at the same appointment.",
+          "An earlier scan may be offered if you have bleeding, pain, a history of ectopic pregnancy or previous loss, or if there is uncertainty about your dates. Early pregnancy units are set up for exactly this kind of assessment.",
+        ],
+      },
+      {
+        id: "eating-medicines-and-everyday-care",
+        heading: "Eating, medicines and everyday care",
+        lead: "You do not need to overhaul your life in the first trimester. A few small, evidence-based changes cover most of what matters.",
+        paragraphs: [
+          "In the UK, 400 micrograms of folic acid a day is recommended until the end of week 12, and 10 micrograms of vitamin D a day is recommended throughout pregnancy. Some people are advised to take a higher dose of folic acid, so check with your GP or midwife if you are unsure.",
+          "Caffeine is generally limited to 200 mg a day, which is roughly two mugs of instant coffee. Alcohol is not recommended in pregnancy. Certain foods, including unpasteurised cheeses, pate, raw or lightly cooked eggs from non-Lion mark sources and some fish, are best avoided.",
+          "Before taking any medicine, including over-the-counter remedies, check with a pharmacist, GP or midwife. Many are fine in pregnancy but some are not, and the safest choice sometimes changes by trimester.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If you are already taking a prescribed medicine, do not stop it on your own. Speak to the person who prescribed it as soon as possible.",
+        },
+      },
+      {
+        id: "emotions-anxiety-and-waiting",
+        heading: "Emotions, anxiety and waiting",
+        lead: "The first trimester is often emotionally heavier than people expect. Secrecy, waiting for scans and not yet feeling movement can all add to that.",
+        paragraphs: [
+          "Many people feel a mix of excitement, disbelief, worry, numbness or even ambivalence in the early weeks. None of that means you will not bond with your baby or that something is wrong with how you feel.",
+          "If you have had a previous loss, fertility treatment or a difficult journey to this pregnancy, this stage can feel especially hard. You may find it difficult to celebrate, or you may want to hold the news very tightly for a while.",
+          "Anxiety and low mood in pregnancy are common and there is real support available, from your midwife team, GP and specialist perinatal mental health services. You do not need to wait until things feel unbearable to ask for help.",
+        ],
+      },
+      {
+        id: "when-symptoms-should-be-checked",
+        heading: "When symptoms should be checked",
+        lead: "Most first trimester symptoms are ordinary and self-limiting. A smaller number are worth checking the same day.",
+        paragraphs: [
+          "Contact your midwife, GP, early pregnancy unit or NHS 111 if you have heavy bleeding, bleeding with clots, severe or one-sided pain, shoulder-tip pain, dizziness or fainting, a high fever, pain when weeing, unusual or offensive-smelling discharge, or if you feel very unwell.",
+          "If you have severe vomiting and cannot keep fluids down for more than 24 hours, contact your GP or maternity team. Untreated dehydration in early pregnancy is not something to push through.",
+          "You do not need to be certain something is wrong before asking. Early pregnancy units and maternity triage lines are used to answering these questions.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "If you are worried, it is always reasonable to ask for help.",
+        },
+      },
+      {
+        id: "moving-towards-the-second-trimester",
+        heading: "Moving towards the second trimester",
+        lead: "The end of the first trimester often brings a mix of relief, tenderness and a slow shift in how the pregnancy feels.",
+        paragraphs: [
+          "For many people, tiredness and nausea start to ease from around weeks 12 to 14, though not everyone experiences that shift. Some symptoms stay for longer and a few change shape as pregnancy progresses.",
+          "The dating scan is often the point at which the pregnancy feels more real, and many people choose to share the news around then. There is no rule about when to tell family, friends or your workplace. It is your decision and your timing.",
+          "The second trimester runs from week 13 to week 27. It is a good time to think gently about maternity care choices, appointments and any support you might want to line up for the months ahead.",
+        ],
+      },
+    ],
   },
 
   // ─── CORNERSTONE: EARLY PREGNANCY SYMPTOMS EXPLAINED ─────────────────────

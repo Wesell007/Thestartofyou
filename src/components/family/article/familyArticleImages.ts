@@ -145,7 +145,9 @@ export const familyArticleImageMap: Record<string, FamilyArticleImages> = {
         caption: "Clarity and kindness usually travel well together.",
       },
     ],
+  },
   // Bespoke future image: parent with older child near baby items,
+
   // calm home setting.
   "preparing-for-another-baby": {
     hero: {

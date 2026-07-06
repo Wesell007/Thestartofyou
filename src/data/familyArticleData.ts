@@ -211,11 +211,81 @@ const rawFamilyArticles: FamilyArticle[] = [
   {
     slug: "building-family-routines",
     topic: "family-basics",
-    title: "Building family routines that hold",
+    title: "Building family routines that actually work",
     description:
-      "Rhythms for mornings, meals and bedtime that bring calm without becoming rigid.",
-    readTime: "5 min read",
-    status: "draft",
+      "How to build flexible family routines that support real life, without turning your days into a schedule you dread.",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Building family routines that actually work",
+    seoDescription:
+      "A calm, realistic guide to family routines that hold in real life, without perfectionism or rigid schedules.",
+    lastUpdated: "July 2026",
+    intro:
+      "Family routines get a lot of attention, and most of it can feel like pressure. The best routines are not the ones that look impressive on paper. They are the ones your family can actually live with on a normal Tuesday, when someone has slept badly and the washing machine is beeping. This piece is about building routines that support your days rather than run them.",
+    sections: [
+      {
+        heading: "Why family routines help",
+        body: [
+          "Children tend to feel calmer when they have a rough sense of what happens next. Not a rigid timetable, just a familiar shape to the day. Morning, meals, some kind of wind-down, bed.",
+          "Routines can also lighten the load for parents. When the shape of the day is known, there are fewer decisions to make in the moment, and fewer negotiations over things that could simply be the way things are done here.",
+        ],
+      },
+      {
+        heading: "Start with the moments that already happen every day",
+        body: [
+          "Rather than inventing a new routine from scratch, look at what already repeats in your day. Waking, breakfast, leaving the house, coming home, dinner, bath, bed. These moments are already anchors.",
+          "Choose one or two of them to make slightly more predictable. A short song at the start of bath time, the same order to the bedtime books, a particular seat for breakfast. Small consistencies add up.",
+        ],
+      },
+      {
+        heading: "Keep routines small and realistic",
+        body: [
+          "The routines most likely to hold are the ones that fit inside your real life, not the life you would have on a perfect week.",
+          "If mornings are already tight, the routine needs to be short enough to survive a slow start. If evenings often run late, bedtime cannot depend on everything happening by six o'clock. Realistic beats ideal every time.",
+        ],
+      },
+      {
+        heading: "Make room for different ages and needs",
+        body: [
+          "A routine that works for a toddler may not work for a school-age child, and a routine that works for one child may need small tweaks for another.",
+          "Rather than one shared routine everyone has to fit into, think about a shared shape with individual pockets. Everyone eats around the same time. One child needs more wind-down before bed, another does not. The overall rhythm holds, the details flex.",
+        ],
+      },
+      {
+        heading: "What to do when routines fall apart",
+        body: [
+          "Every family routine falls apart sometimes. Illness, holidays, a hard week at work, a growth spurt, a new sibling. This is not a failure of the routine. It is what routines have to survive.",
+          "The gentlest way back is usually to pick one or two anchor moments and start there. Rebuilding a whole day at once tends to feel overwhelming. Rebuilding bedtime, or the first ten minutes of the morning, is often enough to steady the rest.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try this week",
+        body: [
+          "Choose one small anchor to make more predictable, and let the rest of the day stay as it is.",
+          "Do a short evening reset with your child, five to ten minutes of the same simple things in the same order, so bedtime does not have to carry all the calm.",
+          "Notice the routines you already have without realising. Many families are running on more rhythm than they think, and can build gently from what is already there.",
+        ],
+      },
+      {
+        heading: "When it may help to ask for support",
+        body: [
+          "If daily routines feel consistently overwhelming, or if your child's sleep, eating or behaviour is worrying you, it can help to speak to your health visitor, GP or nursery.",
+          "Asking for support is not a sign the routine has failed. It is often part of finding one that fits your family as it actually is.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Routines work best when they support your real life, not an idealised version of it.",
+      "Small anchors matter more than a full schedule.",
+      "The same rough shape can flex for different ages and needs.",
+      "Routines fall apart sometimes, and rebuilding from one moment is usually enough.",
+      "Ask for support if daily life feels consistently overwhelming.",
+    ],
+    relatedSlugs: [
+      "building-family-traditions",
+      "sharing-the-mental-load",
+      "helping-your-child-adjust-to-a-new-sibling",
+    ],
   },
   {
     slug: "managing-childcare-costs",

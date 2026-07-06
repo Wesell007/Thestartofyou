@@ -3252,11 +3252,10 @@ const articleDatabase: ArticleData[] = [
       "All screening is offered, not required — you can ask questions, take time, or decline",
     ],
     sources: [
-      "NHS — Your antenatal appointments",
-      "NHS — Screening tests in pregnancy",
-      "NICE NG201 — Antenatal care",
-      "RCOG — Information for pregnant women",
-      "Public Health England — NHS Fetal Anomaly Screening Programme",
+      { label: "Antenatal checks and tests", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/antenatal-checks-and-tests/" },
+      { label: "Your antenatal care and appointments", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/your-antenatal-care-and-appointments/" },
+      { label: "What tests will I have during pregnancy?", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/antenatal-care/what-tests-will-i-have-during-pregnancy" },
+      { label: "NHS Fetal Anomaly Screening Programme (FASP): programme overview", publisher: "NHS England (gov.uk)", url: "https://www.gov.uk/guidance/fetal-anomaly-screening-programme-overview", year: "2024" },
     ],
     faq: [
       { question: "How many scans will I have in pregnancy?", answer: "In an uncomplicated UK pregnancy, two scans are routinely offered: the dating scan (around 11–14 weeks) and the anomaly scan (around 18–21 weeks). Additional scans may be offered based on individual circumstances." },
@@ -3428,10 +3427,11 @@ const articleDatabase: ArticleData[] = [
       "All vaccines in pregnancy are a choice — your midwife or GP can talk you through the evidence",
     ],
     sources: [
-      "NHS — Vaccinations in pregnancy",
-      "UK Health Security Agency — Green Book chapters on pertussis, influenza, and COVID-19",
-      "RCOG — Coronavirus and pregnancy",
-      "NICE NG201 — Antenatal care",
+      { label: "Vaccinations in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/vaccinations/" },
+      { label: "Whooping cough vaccination in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/whooping-cough-vaccination/" },
+      { label: "Pertussis: the green book chapter", publisher: "UKHSA (gov.uk)", url: "https://www.gov.uk/government/publications/pertussis-the-green-book-chapter-24", year: "2025" },
+      { label: "Influenza: the green book chapter", publisher: "UKHSA (gov.uk)", url: "https://www.gov.uk/government/publications/influenza-the-green-book-chapter", year: "2026" },
+      { label: "Vaccinations in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/antenatal-care/vaccinations-pregnancy" },
     ],
     faq: [
       { question: "When should I have the whooping cough vaccine?", answer: "Usually from 16 weeks of pregnancy, ideally before 32 weeks. Having it earlier in this window gives more time for antibodies to pass to your baby." },
@@ -5727,11 +5727,9 @@ const articleDatabase: ArticleData[] = [
       "Asking your midwife or GP earlier is almost always easier than asking later",
     ],
     sources: [
-      "NHS — Mental health in pregnancy",
-      "NICE — Antenatal and postnatal mental health",
-      "Mind — Perinatal anxiety",
-      "Tommy's — Anxiety in pregnancy",
-      "Maternal Mental Health Alliance",
+      { label: "Anxiety in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/mental-health-in-pregnancy-and-after-the-birth/anxiety-in-pregnancy/" },
+      { label: "Anxiety and panic attacks in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/mental-wellbeing/anxiety-and-panic-attacks-pregnancy" },
+      { label: "Mental health in pregnancy", publisher: "Royal College of Psychiatrists", url: "https://www.rcpsych.ac.uk/mental-health/treatments-and-wellbeing/mental-health-in-pregnancy" },
     ],
     faq: [
       { question: "Is anxiety in pregnancy harmful to my baby?", answer: "Ordinary worry is part of pregnancy and isn't harmful. Persistent, untreated anxiety is worth supporting — not because of guilt, but because you deserve the support, and because looking after your mental health in pregnancy is one of the best things you can do for both of you." },
@@ -10679,10 +10677,9 @@ const articleDatabase: ArticleData[] = [
       "Mention allergies, including minor previous reactions, before starting anything",
     ],
     sources: [
-      "NHS — Antibiotics in pregnancy",
-      "UK Teratology Information Service (UKTIS)",
-      "NICE — Urinary tract infection (lower) in pregnancy",
-      "Royal College of Obstetricians and Gynaecologists — Medicines in pregnancy",
+      { label: "Antibiotics", publisher: "NHS", url: "https://www.nhs.uk/medicines/antibiotics/" },
+      { label: "Penicillin antibiotics (amoxicillin, co-amoxiclav, penicillin V)", publisher: "UKTIS / bumps", url: "https://www.medicinesinpregnancy.org/leaflets-a-z/amoxicillin/", year: "2025" },
+      { label: "Guidance on prescribing (prescribing in pregnancy)", publisher: "BNF / NICE", url: "https://bnf.nice.org.uk/medicines-guidance/guidance-on-prescribing/" },
     ],
     faq: [
       { question: "Are antibiotics safe in pregnancy?", answer: "Many are. Some — particularly penicillins and many cephalosporins — are used routinely in pregnancy. Others are avoided in certain trimesters or altogether. Your prescriber chooses one that's appropriate for you." },
@@ -10840,10 +10837,10 @@ const articleDatabase: ArticleData[] = [
       "Reflux almost always settles within days of birth",
     ],
     sources: [
-      "NHS — Indigestion and heartburn in pregnancy",
-      "NICE — Dyspepsia and gastro-oesophageal reflux disease",
-      "UK Teratology Information Service (UKTIS)",
-      "Royal College of Obstetricians and Gynaecologists",
+      { label: "Indigestion and heartburn in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/common-symptoms/indigestion-and-heartburn/" },
+      { label: "Dyspepsia — pregnancy-associated", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/dyspepsia-pregnancy-associated/", year: "2024" },
+      { label: "H2 receptor antagonists", publisher: "UKTIS / bumps", url: "https://www.medicinesinpregnancy.org/leaflets-a-z/h2-receptor-antagonists/", year: "2024" },
+      { label: "Proton pump inhibitors (PPIs)", publisher: "UKTIS / bumps", url: "https://www.medicinesinpregnancy.org/leaflets-a-z/proton-pump-inhibitors/", year: "2025" },
     ],
     faq: [
       { question: "Are antacids safe in pregnancy?", answer: "Calcium- or magnesium-based antacids (the standard chewable tablets and liquids in any pharmacy) are widely used in pregnancy and considered appropriate for everyday reflux. A pharmacist can point to the right one." },
@@ -11001,10 +10998,9 @@ const articleDatabase: ArticleData[] = [
       "Severe pain, more than a small streak of blood, or no improvement is a reason to ask for help",
     ],
     sources: [
-      "NHS — Constipation in pregnancy",
-      "NICE — Constipation in pregnancy",
-      "UK Teratology Information Service (UKTIS)",
-      "Royal College of Obstetricians and Gynaecologists",
+      { label: "Common health problems in pregnancy (including constipation)", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/common-symptoms/common-health-problems/" },
+      { label: "Treating constipation during pregnancy", publisher: "UKTIS / bumps", url: "https://www.medicinesinpregnancy.org/leaflets-a-z/constipation/", year: "2026" },
+      { label: "Constipation — management", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/constipation/management/" },
     ],
     faq: [
       { question: "Are laxatives safe in pregnancy?", answer: "Bulk-forming laxatives (like fybogel) and osmotic laxatives (like lactulose and macrogols) are commonly used in pregnancy. Stimulant laxatives are usually a shorter-term option. A pharmacist can point you to the right one." },
@@ -11160,10 +11156,9 @@ const articleDatabase: ArticleData[] = [
       "Wheezing, breathlessness, or facial pain with fever needs a GP — that's not just hay fever",
     ],
     sources: [
-      "NHS — Hay fever",
-      "NICE — Allergic rhinitis",
-      "UK Teratology Information Service (UKTIS)",
-      "Royal College of Obstetricians and Gynaecologists",
+      { label: "Hay fever", publisher: "NHS", url: "https://www.nhs.uk/conditions/hay-fever/" },
+      { label: "Treatment of allergic rhinitis (hay fever)", publisher: "UKTIS / bumps", url: "https://www.medicinesinpregnancy.org/leaflets-a-z/hay-fever/", year: "2019" },
+      { label: "Allergic rhinitis", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/allergic-rhinitis/" },
     ],
     faq: [
       { question: "What can I take for hay fever in pregnancy?", answer: "Saline sprays first; steroid nasal sprays are often the preferred treatment in pregnancy as very little is absorbed; certain antihistamines are considered when needed. A pharmacist will pick what's right for you." },
@@ -11331,10 +11326,10 @@ const articleDatabase: ArticleData[] = [
       "High fever, breathlessness, dehydration, or reduced movements are reasons to call",
     ],
     sources: [
-      "NHS — Colds, coughs and ear infections in children (and adults)",
-      "NHS — Flu jab in pregnancy",
-      "UK Health Security Agency (UKHSA) — Flu in pregnancy",
-      "Royal College of Obstetricians and Gynaecologists",
+      { label: "Treatment of colds and flu during pregnancy", publisher: "UKTIS / bumps", url: "https://www.medicinesinpregnancy.org/leaflets-a-z/colds-and-flu/", year: "2024" },
+      { label: "The flu jab in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/flu-jab/" },
+      { label: "Influenza: the green book chapter", publisher: "UKHSA (gov.uk)", url: "https://www.gov.uk/government/publications/influenza-the-green-book-chapter", year: "2026" },
+      { label: "Paracetamol", publisher: "UKTIS / bumps", url: "https://www.medicinesinpregnancy.org/leaflets-a-z/paracetamol/", year: "2025" },
     ],
     faq: [
       { question: "What can I take for a cold in pregnancy?", answer: "Paracetamol for fever or aches, saline sprays for congestion, plenty of fluids, and rest. Avoid combination cold-and-flu remedies and decongestant tablets without checking with a pharmacist first." },
@@ -12999,10 +12994,10 @@ const articleDatabase: ArticleData[] = [
       "Whether to have it is a personal choice with no wrong answer",
     ],
     sources: [
-      "NHS — Screening for Down's, Edwards' and Patau's syndromes",
-      "Public Health England / UK NSC — NIPT evaluation",
-      "Royal College of Obstetricians and Gynaecologists",
-      "ARC (Antenatal Results and Choices)",
+      { label: "Screening for Down's syndrome, Edwards' syndrome and Patau's syndrome", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/screening-for-downs-edwards-pataus-syndrome/" },
+      { label: "NIPT for Down's syndrome, Edwards' syndrome and Patau's syndrome", publisher: "NHS England (gov.uk)", url: "https://www.gov.uk/government/publications/screening-for-downs-syndrome-edwards-syndrome-and-pataus-syndrome-nipt-summary-information/nipt-for-downs-syndrome-edwards-syndrome-and-pataus-syndrome" },
+      { label: "Non-invasive Prenatal Testing for Chromosomal Abnormality using Maternal Plasma DNA (Scientific Impact Paper No. 15)", publisher: "RCOG", url: "https://www.rcog.org.uk/guidance/browse-all-guidance/scientific-impact-papers/non-invasive-prenatal-testing-for-chromosomal-abnormality-using-maternal-plasma-dna-scientific-impact-paper-no-15/" },
+      { label: "Antenatal Results and Choices (ARC) — for parents", publisher: "ARC", url: "https://www.arc-uk.org/for-parents/" },
     ],
     faq: [
       { question: "How accurate is NIPT?", answer: "Very high for Down's syndrome (above 99% detection), with somewhat lower but still high accuracy for Edwards' and Patau's. Even so, it remains a screening test — a high-chance result needs a diagnostic test to confirm." },
@@ -14103,10 +14098,10 @@ const articleDatabase: ArticleData[] = [
       "There is almost always a next step, and almost always time to think",
     ],
     sources: [
-      "NHS — Antenatal screening",
-      "ARC (Antenatal Results and Choices)",
-      "Royal College of Obstetricians and Gynaecologists",
-      "Tommy's",
+      { label: "Antenatal checks and tests", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/antenatal-checks-and-tests/" },
+      { label: "Ultrasound scans in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/antenatal-care/ultrasound-scans" },
+      { label: "Amniocentesis and Chorionic Villus Sampling (Green-top Guideline No. 8)", publisher: "RCOG", url: "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/amniocentesis-and-chorionic-villus-sampling-green-top-guideline-no-8/", year: "2021" },
+      { label: "Antenatal Results and Choices (ARC) — for parents", publisher: "ARC", url: "https://www.arc-uk.org/for-parents/" },
     ],
     faq: [
       { question: "Does 'unexpected' mean something is wrong?", answer: "Not always. 'Unexpected' covers a very wide range — from small variations that resolve on their own, to soft markers that may not mean anything, to findings that change pregnancy care. The follow-up scan and conversation will clarify which it is." },

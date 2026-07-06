@@ -122,8 +122,82 @@ const rawFamilyArticles: FamilyArticle[] = [
     title: "Setting boundaries with grandparents",
     description:
       "Warm, clear ways to hold your parenting choices while keeping close family relationships intact.",
-    readTime: "5 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Setting boundaries with grandparents",
+    seoDescription:
+      "A calm, respectful guide to setting family boundaries with grandparents in a way that protects your child, your rhythm and the wider relationship.",
+    lastUpdated: "July 2026",
+    intro:
+      "Grandparents are often one of the great gifts of family life. They also arrive with their own memories of parenting, their own instincts and their own ideas about how things should be done. This piece is about holding your own parenting choices with clarity and kindness, so the relationship stays warm and your family rhythm stays steady.",
+    sections: [
+      {
+        heading: "Why grandparent boundaries can feel sensitive",
+        body: [
+          "Boundaries with grandparents often touch two things at once. The practical question of how you want family life to run, and the emotional history of your own upbringing. That can make even small conversations feel weighted.",
+          "It helps to remember that most grandparents want to be involved and are trying their best from where they stand. A boundary is not a judgement of them or how they parented. It is simply information about how your family works now.",
+        ],
+      },
+      {
+        heading: "Start with what matters most",
+        body: [
+          "You do not need a long list of rules. Most families find one or two things that genuinely matter to them, and everything else can flex.",
+          "It might be nap times being protected, or sweets before dinner, or a certain way of saying goodbye. Naming what matters to you first, quietly and to yourself, makes it easier to be clear later without turning every visit into a negotiation.",
+        ],
+      },
+      {
+        heading: "Be clear without making it a battle",
+        body: [
+          "Clarity and warmth can sit in the same sentence. \"We're keeping screens off before nursery, so it's easier if the tablet stays away in the morning,\" tends to land better than a long explanation or a reluctant hint.",
+          "Short, kind and specific usually goes further than firm or apologetic. You are giving useful information, not asking permission.",
+        ],
+      },
+      {
+        heading: "Keep the focus on your child and family rhythm",
+        body: [
+          "Framing a boundary around your child, rather than around the grandparent, often takes the personal edge out of it. \"She sleeps better if bath time stays at the same time,\" is easier to hear than \"we don't like it when you keep her up.\"",
+          "This is not a trick. It is genuinely what most boundaries are about. Your family has a rhythm, and small consistencies help everyone, including visiting grandparents, know where they fit.",
+        ],
+      },
+      {
+        heading: "What to do when boundaries are ignored",
+        body: [
+          "Sometimes a boundary needs to be said more than once. That is normal, not a sign the relationship is broken. Old habits and different generations of parenting can take a little time to shift.",
+          "If something keeps happening, try naming it calmly and directly, ideally without an audience. Repeat the boundary, explain briefly why it matters, and leave space for them to adjust. Consistency from you is usually what makes the change stick.",
+        ],
+      },
+      {
+        heading: "When distance or extra support may be needed",
+        body: [
+          "In most families, boundaries settle over time and the relationship carries on. Occasionally, though, a dynamic stays hard even after honest conversations, and it starts to weigh on you or your child.",
+          "If that happens, it is fair to take a little more space, shorten visits, or reshape how contact looks for a while. Family relationships can change shape without ending.",
+          "If a relationship ever feels unsafe, coercive or harmful to you or your child, please know that support from a trusted professional, such as your GP, health visitor or a family counsellor, is available.",
+        ],
+      },
+      {
+        heading: "Practical phrases you can adapt",
+        body: [
+          "\"We're trying to keep things calm before bed, so we're going to head up now.\"",
+          "\"Thanks for offering, we're doing it this way for now and it's really helping.\"",
+          "\"He's not eating sweets before dinner at the moment. There's fruit in the bowl if he's hungry.\"",
+          "\"I know it's different to how you did it. This is what's working for us right now.\"",
+          "Small, warm phrases like these can be repeated as often as needed, without heat and without apology.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Most grandparents want to be involved, and a boundary is information, not a judgement.",
+      "Focus on one or two things that genuinely matter, and let the rest flex.",
+      "Short, warm, specific language usually lands better than long explanations.",
+      "Framing boundaries around your child and family rhythm takes the personal edge out.",
+      "Consistency from you is often what makes a boundary settle over time.",
+      "If a relationship ever feels unsafe or coercive, support from a trusted professional is available.",
+    ],
+    relatedSlugs: [
+      "sharing-the-mental-load",
+      "building-family-routines",
+      "helping-your-child-adjust-to-a-new-sibling",
+    ],
   },
   {
     slug: "sharing-the-mental-load",

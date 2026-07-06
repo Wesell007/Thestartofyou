@@ -3595,10 +3595,9 @@ const articleDatabase: ArticleData[] = [
       "UK 'bumps' leaflets cover most common medicines in plain English",
     ],
     sources: [
-      "NHS — Medicines in pregnancy",
-      "UK Teratology Information Service (UKTIS) — bumps leaflets",
-      "BNF — Prescribing in pregnancy",
-      "NICE — Antenatal and postnatal mental health (CG192)",
+      { label: "Medicines in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/medicines/" },
+      { label: "bumps — Best Use of Medicines in Pregnancy", publisher: "UKTIS / bumps", url: "https://www.medicinesinpregnancy.org/" },
+      { label: "Guidance on prescribing (prescribing in pregnancy)", publisher: "BNF / NICE", url: "https://bnf.nice.org.uk/medicines-guidance/guidance-on-prescribing/" },
     ],
     faq: [
       { question: "Is paracetamol safe in pregnancy?", answer: "Paracetamol is generally considered the first-choice painkiller in pregnancy. It should be taken at the lowest effective dose, for the shortest time needed. If you're using it often, speak to your midwife or GP." },
@@ -7132,10 +7131,9 @@ const articleDatabase: ArticleData[] = [
       "Severe, worsening, or one-sided pain — or pain with fever or bleeding — needs medical assessment",
     ],
     sources: [
-      "NHS — Pelvic pain in pregnancy",
-      "Pelvic Obstetric & Gynaecological Physiotherapy (POGP) — Pregnancy-related PGP",
-      "Royal College of Obstetricians and Gynaecologists — Pelvic girdle pain",
-      "NICE — Antenatal care",
+      { label: "Pelvic pain in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/common-symptoms/pelvic-pain/" },
+      { label: "Pelvic girdle pain and pregnancy", publisher: "RCOG", url: "https://www.rcog.org.uk/for-the-public/browse-our-patient-information/pelvic-girdle-pain-and-pregnancy/", year: "2015" },
+      { label: "Pelvic pain (PGP or SPD) in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-complications/pelvic-pain-pregnancy", year: "2025" },
     ],
     faq: [
       { question: "Is pelvic pain in pregnancy normal?", answer: "Mild discomfort is very common. Pain that limits walking, turning in bed, or climbing stairs isn't something to push through — it's usually pelvic girdle pain (PGP) and responds well to physiotherapy." },
@@ -8597,10 +8595,10 @@ const articleDatabase: ArticleData[] = [
       "Maternity teams expect these calls — there is no penalty for ringing",
     ],
     sources: [
-      "Royal College of Obstetricians and Gynaecologists — Your baby's movements in pregnancy",
-      "Tommy's — Baby movements information",
-      "NHS — Your baby's movements",
-      "NICE — Antenatal care",
+      { label: "Your baby's movements", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/your-babys-movements/" },
+      { label: "Reduced Fetal Movements (Green-top Guideline No. 57)", publisher: "RCOG", url: "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/reduced-fetal-movements-green-top-guideline-no-57/", year: "2011" },
+      { label: "Your baby's movements in pregnancy", publisher: "RCOG", url: "https://www.rcog.org.uk/for-the-public/browse-our-patient-information/your-babys-movements-in-pregnancy/", year: "2019" },
+      { label: "Baby movements in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-symptom-checker/baby-fetal-movements" },
     ],
     faq: [
       { question: "What counts as reduced movements?", answer: "Any change from your baby's usual pattern — less than usual, weaker than usual, or different from yesterday. Trust your own sense of pattern." },
@@ -9738,10 +9736,10 @@ const articleDatabase: ArticleData[] = [
       "Most babies born to people who carry GBS are completely well",
     ],
     sources: [
-      "Royal College of Obstetricians and Gynaecologists — Group B Streptococcus in pregnancy",
-      "NHS — Group B strep",
-      "Group B Strep Support — UK information",
-      "NICE — Neonatal infection",
+      { label: "Group B strep", publisher: "NHS", url: "https://www.nhs.uk/conditions/group-b-strep/" },
+      { label: "Prevention of Early-onset Group B Streptococcal Disease (Green-top Guideline No. 36)", publisher: "RCOG", url: "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/prevention-of-early-onset-group-b-streptococcal-disease-green-top-guideline-no-36/" },
+      { label: "Group B Streptococcus (GBS) in pregnancy and newborn babies", publisher: "RCOG", url: "https://www.rcog.org.uk/for-the-public/browse-our-patient-information/group-b-streptococcus-gbs-in-pregnancy-and-newborn-babies/" },
+      { label: "Group B Strep in pregnancy and newborn babies", publisher: "Group B Strep Support", url: "https://gbss.org.uk/info-support/about-group-b-strep/what-is-group-b-strep/group-b-strep-in-pregnancy-and-newborn-babies-html/" },
     ],
     faq: [
       { question: "Does GBS mean I'll need a c-section?", answer: "No. GBS doesn't change the recommended mode of birth. The standard plan is a vaginal birth with antibiotics in labour." },
@@ -10524,10 +10522,10 @@ const articleDatabase: ArticleData[] = [
       "If you've already taken some at standard dose, that's almost always fine",
     ],
     sources: [
-      "NHS — Paracetamol in pregnancy",
-      "UK Teratology Information Service (UKTIS) — Paracetamol",
-      "NICE — Antenatal care",
-      "Royal College of Obstetricians and Gynaecologists — Medicines in pregnancy",
+      { label: "Paracetamol for adults — pregnancy, breastfeeding and fertility", publisher: "NHS", url: "https://www.nhs.uk/medicines/paracetamol-for-adults/pregnancy-breastfeeding-and-fertility-while-taking-paracetamol-for-adults/" },
+      { label: "Paracetamol", publisher: "UKTIS / bumps", url: "https://www.medicinesinpregnancy.org/leaflets-a-z/paracetamol/", year: "2025" },
+      { label: "Pain relief in pregnancy", publisher: "UKTIS / bumps", url: "https://www.medicinesinpregnancy.org/leaflets-a-z/pain-relief/", year: "2026" },
+      { label: "Medicines in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/medicines/" },
     ],
     faq: [
       { question: "Is paracetamol safe in pregnancy?", answer: "It's the painkiller most commonly recommended in pregnancy and has the longest record of safe use. The standard advice is to take the lowest dose that helps, for the shortest time you need it." },
@@ -11493,10 +11491,9 @@ const articleDatabase: ArticleData[] = [
       "One-sided back pain, fever, shivering, or vomiting is urgent — call straight away",
     ],
     sources: [
-      "NHS — Urinary tract infections (UTIs)",
-      "NICE — Urinary tract infection (lower) in pregnancy",
-      "Royal College of Obstetricians and Gynaecologists",
-      "UK Health Security Agency (UKHSA)",
+      { label: "Urinary tract infections (UTIs)", publisher: "NHS", url: "https://www.nhs.uk/conditions/urinary-tract-infections-utis/" },
+      { label: "Urinary tract infection (lower) — women", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/", year: "2025" },
+      { label: "Painful urination (UTI) in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-symptom-checker/painful-urination-pregnancy" },
     ],
     faq: [
       { question: "Do I have a UTI?", answer: "Burning when you wee, going more often, lower-tummy pain, or cloudy or smelly urine all suggest a UTI. A urine sample at the GP or midwife confirms it. In pregnancy, it's worth checking the same day rather than waiting." },
@@ -11819,10 +11816,11 @@ const articleDatabase: ArticleData[] = [
       "Bleeding after 24 weeks goes to the maternity unit, not the early pregnancy unit",
     ],
     sources: [
-      "NHS — Vaginal bleeding in pregnancy",
-      "Royal College of Obstetricians and Gynaecologists — Early pregnancy loss",
-      "NICE — Ectopic pregnancy and miscarriage",
-      "Tommy's — Bleeding in pregnancy",
+      { label: "Vaginal bleeding in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/common-symptoms/vaginal-bleeding/" },
+      { label: "Bleeding and/or pain in early pregnancy", publisher: "RCOG", url: "https://www.rcog.org.uk/for-the-public/browse-our-patient-information/bleeding-andor-pain-in-early-pregnancy/" },
+      { label: "Early miscarriage", publisher: "RCOG", url: "https://www.rcog.org.uk/for-the-public/browse-our-patient-information/early-miscarriage/", year: "2016" },
+      { label: "Bleeding in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-symptom-checker/bleeding-pregnancy", year: "2026" },
+      { label: "Miscarriage", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/miscarriage/", year: "2023" },
     ],
     faq: [
       { question: "Does bleeding always mean miscarriage?", answer: "No. Many people who bleed in early pregnancy go on to have a healthy pregnancy. Bleeding is a reason to be seen so the cause can be checked, not a diagnosis on its own." },
@@ -11968,10 +11966,10 @@ const articleDatabase: ArticleData[] = [
       "From 24 weeks, all bleeding goes to the maternity unit",
     ],
     sources: [
-      "NHS — Vaginal bleeding in pregnancy",
-      "Royal College of Obstetricians and Gynaecologists",
-      "Tommy's — Bleeding and spotting in pregnancy",
-      "NICE — Antenatal care",
+      { label: "Vaginal bleeding in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/common-symptoms/vaginal-bleeding/" },
+      { label: "Bleeding and/or pain in early pregnancy", publisher: "RCOG", url: "https://www.rcog.org.uk/for-the-public/browse-our-patient-information/bleeding-andor-pain-in-early-pregnancy/" },
+      { label: "Bleeding in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-symptom-checker/bleeding-pregnancy", year: "2026" },
+      { label: "Miscarriage", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/miscarriage/", year: "2023" },
     ],
     faq: [
       { question: "Is spotting in pregnancy normal?", answer: "Light spotting is common, particularly in the first trimester and after things like sex or internal exams. It's still worth a call so the cause can be checked, especially the first time." },
@@ -12415,10 +12413,9 @@ const articleDatabase: ArticleData[] = [
       "When in doubt, ring — triage is built for the question",
     ],
     sources: [
-      "NHS — Common health problems in pregnancy",
-      "Royal College of Obstetricians and Gynaecologists",
-      "NICE — Antenatal care",
-      "Tommy's — Pregnancy pain",
+      { label: "Stomach pain in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/common-symptoms/stomach-pain/" },
+      { label: "Stomach (abdominal) pain or cramps in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-symptom-checker/stomach-abdominal-pain-or-cramps-pregnancy" },
+      { label: "Bleeding and/or pain in early pregnancy", publisher: "RCOG", url: "https://www.rcog.org.uk/for-the-public/browse-our-patient-information/bleeding-andor-pain-in-early-pregnancy/" },
     ],
     faq: [
       { question: "Are cramps in early pregnancy normal?", answer: "Mild, period-like cramping is common in early pregnancy as the uterus grows. Cramps with bleeding, severe one-sided pain, or shoulder-tip pain are reasons to call the early pregnancy unit." },
@@ -12855,10 +12852,9 @@ const articleDatabase: ArticleData[] = [
       "Green/brown fluid, before 37 weeks, or with reduced movements is urgent",
     ],
     sources: [
-      "NHS — Signs that labour has begun",
-      "Royal College of Obstetricians and Gynaecologists — Premature rupture of membranes",
-      "NICE — Intrapartum care",
-      "Tommy's — Waters breaking",
+      { label: "Signs that labour has begun", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/signs-that-labour-has-begun/" },
+      { label: "Care of Women Presenting with Suspected Preterm Prelabour Rupture of Membranes from 24+0 Weeks of Gestation (Green-top Guideline No. 73)", publisher: "RCOG", url: "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/care-of-women-presenting-with-suspected-preterm-prelabour-rupture-of-membranes-from-24plus0-weeks-of-gestation-green-top-guideline-no-73/" },
+      { label: "Waters breaking early (PPROM)", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-complications/waters-breaking-early-pprom", year: "2026" },
     ],
     faq: [
       { question: "How do I know if my waters have gone?", answer: "Amniotic fluid is usually clear or pale yellow, with little smell. It often keeps coming once it's started, even after you've emptied your bladder and changed underwear. If you're not sure, call maternity unit." },

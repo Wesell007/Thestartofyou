@@ -316,6 +316,13 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       ],
     },
     startHere: [],
+    featured: {
+      eyebrow: "Anchor read · after transfer",
+      title: "The IVF two-week wait, what's actually happening",
+      body: "A steady walk-through of the days between transfer and testing — what your body may be doing, what symptoms can and can't tell you, and how to hold yourself through the uncertainty.",
+      href: askIVF("The IVF two-week wait — what's actually happening"),
+      hrefLabel: "Open the two-week wait guide",
+    },
     normalVsSupport: {
       normal: [
         "Symptoms that come and go, including some that mimic your period",

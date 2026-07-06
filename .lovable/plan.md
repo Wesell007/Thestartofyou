@@ -1,66 +1,57 @@
-# Phase 4.11 — Pregnancy Cornerstone Rewrite 5
+## Phase 5.3 — Site-wide article presentation upgrade (via HubArticleView)
 
-Upgrade the existing `anxiety-in-pregnancy` object in `src/data/articleData.ts` (lines 6219–6390) to the full Flagship shape. Single-object rewrite in place. Slug, route, position unchanged.
+### Decision: Option A — upgrade the shared `HubArticleView`
 
-## Only file edited
+`HubArticleView` is the single renderer used by Family, First Year and Toddler article pages. All three pass the same shape (`title`, `intro`, `sections`, `keyTakeaways`, tokens). Upgrading it once lifts every hub in a stage-token-aware way, without touching Pregnancy Flagship (which uses `ArticleFlagshipTemplate` via `src/pages/ArticlePage.tsx` and `src/components/article/flagship/*`).
 
-- `src/data/articleData.ts`
+No new data fields are required. Every new block renders only when the underlying data already exists, so First Year and Toddler articles (all currently drafts) degrade gracefully.
 
-No other files touched. No template, route, topic-data, SEO, calculator, product, About, AI, saved-journey, design-token, `articleInventory.ts`, `ArticleSources.tsx`, or `.lovable/plan.md` changes. No new files.
+### Files to edit
 
-## Current state (audit)
+1. `src/components/shared/HubArticleView.tsx` — the presentation upgrade.
+2. `src/components/family/article/FamilyArticlePage.tsx` — filter related to `status === "ready"`.
+3. `src/components/firstyear/article/FirstYearArticlePage.tsx` — same ready-only related filter, for consistency and to future-proof once First Year articles publish.
+4. `src/components/toddler/article/ToddlerArticlePage.tsx` — same ready-only related filter.
 
-Already present: `slug`, `title`, `metaDescription`, `quickAnswer`, `topic: "feelings"`, `reviewedBy: "Jenny Joines"`, `lastUpdated`, `standfirst`, 7 `editorialSections`, 5 `keyTakeaways`, 4 `faq`, 3 `sources`, `relatedSlugs`, plus all legacy fields.
+No data, routes, SEO, tokens, Pregnancy, TTC, IVF, First Year data, Toddler data, product, About, AI, or saved-journey files are touched.
 
-Gaps to close for full Flagship parity: missing `inThisArticle`; 5 takeaways → 6; 7 sections → 8; 4 FAQs → 8; 3 sources → 5; refresh `lastUpdated`; expand `relatedSlugs`.
+### Presentation changes inside `HubArticleView`
 
-## Edits (in place on the existing object)
+Using existing stage tokens (`tokens.base/soft/accent/deep`) only. Each block renders only if the corresponding data is present.
 
-- **`title`** → "Anxiety in pregnancy"
-- **`metaDescription`** → "A calm guide to anxiety in pregnancy, including common signs, why it can happen, what may help, and when to ask for support."
-- **`standfirst`** → warm one-paragraph rewrite per prompt; British English; no em dashes.
-- **`quickAnswer`** → 90–130 words: anxiety in a wanted pregnancy; possible drivers (hormones, uncertainty, previous loss, fertility treatment, health worries, birth fears, money, relationships, past experiences); emotional and physical; support routes (midwife, GP, perinatal mental health team, NHS Talking Therapies, therapist, trusted person); safety line for urgent help without phone numbers.
-- **`reviewedBy`** kept as `"Jenny Joines"`.
-- **`lastUpdated`** → `"May 2026"`.
-- **`topic`** kept as `"feelings"`.
-- **`inThisArticle`** (new, 8 items): matching the 8 section headings.
-- **`keyTakeaways`** (expand to 6): common and affects thoughts + body; a wanted pregnancy can still feel frightening; previous loss/fertility treatment/health worries can intensify anxiety; daily supports help but are not a substitute for professional care; speak to midwife or GP before things feel severe; seek urgent help if unsafe / unable to cope / worried about harming self or baby.
-- **`editorialSections`** (rewrite to 8, existing shape):
-  1. `what-anxiety-can-feel-like`
-  2. `why-anxiety-can-happen`
-  3. `physical-signs` — with a careful callout that new/severe/worrying physical symptoms can have other causes in pregnancy and should be checked.
-  4. `after-loss-or-treatment`
-  5. `what-may-help-day-to-day` — callout noting these do not replace professional care.
-  6. `talking-to-midwife-or-gp`
-  7. `when-to-seek-urgent-support` — callout copy: "If you feel unsafe, unable to cope, or worried you might harm yourself or your baby, seek urgent help." No phone numbers, no protocol.
-  8. `what-happens-next` — describe likely support pathways; no advice to start/stop/change medication.
-- **`faq`** (rewrite to 8, short and medically careful): common in pregnancy; even if wanted; what it feels like; telling midwife; sleep and physical symptoms; pregnant after loss/IVF; unable to cope; treatment/therapy in pregnancy.
-- **`sources`** (5 verified UK entries, structured `{ label, publisher, url, year? }`). Verification rule: only URLs and page titles that actually resolve on the publisher's site. If a candidate page has moved, use the closest live equivalent and label it with the publisher's own current title — no invented titles.
-  Candidate set (all currently reachable):
-  - NHS — "Anxiety in pregnancy" (existing entry, verified live: `nhs.uk/pregnancy/keeping-well/mental-health/`-linked anxiety page). If the exact page title/URL cannot be re-verified at implementation time, substitute the parent NHS page "Mental health in pregnancy" using its published title and current URL.
-  - NHS — "Mental health in pregnancy" (parent hub, `nhs.uk`) as a second NHS entry, only added if it resolves live and only labelled with NHS's own current title. If it doesn't, drop the second NHS entry rather than invent one.
-  - Tommy's — "Anxiety and panic attacks in pregnancy" (existing entry, verified).
-  - Royal College of Psychiatrists — "Mental health in pregnancy" (existing entry, verified).
-  - Mind — "Perinatal mental health" using Mind's current page title. If Mind's specific perinatal page cannot be verified, use their broader "Postnatal depression and perinatal mental health" page labelled exactly as Mind titles it.
-  No invented URLs, no invented titles, no `year` unless the source publishes one.
-- **`relatedSlugs`** → `["emotional-wellbeing-pregnancy", "pregnancy-after-loss", "the-first-trimester-emotionally", "when-the-joy-doesnt-arrive-yet", "first-trimester-complete-guide"]`. All confirmed to exist in `articleData.ts`.
+1. **Premium hero refinement** — keep breadcrumb, eyebrow, serif H1, italic standfirst, meta row. Tighten spacing, strengthen the top wash, add a soft bottom fade so the hero flows into the summary strip like the Pregnancy screenshots. Reviewed badge continues to render only when `medicallyReviewed && reviewedBy` (Family articles don't set these, so no false medical claims).
 
-Legacy fields (`howThisFeels`, `whatHappening`, `timing`, `whatItFeelsLike`, `whatThisMeans`, `normal`, `seekSupport`, `disclaimer`, `whatYouCanDo`, `whatHappensNext`, `relatedStage`, `aiPrompts`, `captureIntro`, `trimester`, `journey`, `topics`) preserved with at most light tone touch-ups. No field removed.
+2. **"At a glance" + "In this article" two-card strip (new)** — rendered under the hero. Left card ("At a glance") shows `intro` (fallback to `description`). Right card ("In this article") is auto-generated from `sections[].heading` as a numbered anchor list to `#section-{i}`, and renders only when `sections.length >= 2`. Stacks on mobile, two columns on md+.
 
-## Tone and safety
+3. **Key takeaways upgrade** — replace the single bullet list with a premium 2-col grid of small cards (1-col on mobile), each with a subtle accent bullet/icon and calm border, matching "The essentials, at a glance" in the screenshot. Section eyebrow + serif H2 above.
 
-British English, no em dashes, no American spelling, calm and practical, short paragraphs. Non-diagnostic. No dramatic language, no sales copy, no medication start/stop/change advice, no hotline numbers, no crisis protocols. Never imply breathing / journalling / rest / lifestyle changes replace professional care for serious symptoms.
+4. **Body rhythm** — add `id={`section-${i}`}` to each `h2` so "In this article" anchors work. Increase vertical spacing, slightly larger H2 scale, calmer paragraph line-height, keep max-width readable. Small muted section number (01, 02, …) as an eyebrow above each H2. Purely presentational.
 
-## Rendering trigger
+5. **Reviewed callout** — existing "Medically reviewed by …" strip kept (opt-in only), lightly restyled to match the takeaways card treatment.
 
-`quickAnswer` + non-empty `editorialSections` + non-empty `keyTakeaways` all present, so `/articles/anxiety-in-pregnancy` continues to render through `ArticleFlagshipTemplate`. Medically reviewed badge appears once (hero); duplicate At-a-glance badge was removed globally in Phase 4.1.
+6. **Related guidance** — no renderer change beyond spacing; filtering happens in the three hub pages so only `status === "ready"` articles are passed via `relatedSlot`. If none remain, `relatedSlot={null}` hides the whole section (existing behaviour).
 
-## No relinking
+7. **Return CTA** — keep structure; refined typography, using existing `topicLabel` in the button ("Return to Family basics" / "Return to Play, fun and connection" etc.).
 
-`pregnancyTopicData.ts` untouched. Feelings → "Emotional wellbeing" group keeps `emotional-wellbeing-pregnancy` as its anchor.
+### Non-goals / guardrails
 
-## Verification
+- No Family article content rewritten; no slugs, routes, SEO, or data fields changed.
+- No Pregnancy-only fields (FAQ, Sources, Normal-signals, quickAnswer, editorial sections) added to Family/First Year/Toddler data.
+- Pregnancy Flagship template untouched.
+- First Year and Toddler benefit from the upgrade automatically because they render through the same shared view; no data changes on their side.
+- No new design tokens.
+
+### Verification
 
 - `tsgo` typecheck.
-- Load `/articles/anxiety-in-pregnancy` → Flagship render; single medically reviewed badge; 8 sections; 6 takeaways; 8 FAQs; 5 verified structured sources; standfirst; quick answer.
-- Spot-check `/pregnancy/feelings` and `/articles/emotional-wellbeing-pregnancy` → unchanged, no accidental relinking or regression.
+- Load the four published Family URLs and confirm: premium hero, At-a-glance + In-this-article strip, upgraded takeaways grid, improved body rhythm with anchor-linked H2s, no draft "Coming soon" cards in related, calm return CTA.
+- Load `/family`, `/articles/first-trimester-complete-guide`, `/articles/complete-guide-morning-sickness` to confirm no regressions on Family hub or Pregnancy Flagship.
+- Load one First Year article route (e.g. `/first-year/sleep/<first draft slug from firstYearArticleData.ts>`) and one Toddler article route (e.g. `/toddler/sleep/<first draft slug from toddlerArticleData.ts>`) that render via HubArticleView. Confirm:
+  - Upgraded layout renders correctly with First Year and Toddler stage tokens (colour treatment, wash, borders, eyebrows).
+  - Spacing and hero rhythm hold up even when article data is minimal (draft articles with no `sections`, `intro`, or `keyTakeaways` show only the hero + coming-soon body without empty ghost cards).
+  - The existing "Draft preview" chip still shows for drafts; no draft related cards appear inside a draft article (ready-only related filter is applied on those pages too).
+- Mobile viewport check: no horizontal overflow on Family, First Year and Toddler article routes.
+
+### Suggested next prompt
+
+Phase 5.4 — First Year and Toddler published-article visual QA against the new shared presentation, and identify the next Family publish batch.

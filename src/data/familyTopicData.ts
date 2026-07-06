@@ -27,6 +27,12 @@ export interface FamilyAreaInside {
   body: string;
 }
 
+export interface FamilyArticleGroup {
+  label: string;
+  description?: string;
+  slugs: string[];
+}
+
 export interface FamilyTopicConfig {
   slug: FamilyTopicSlug;
   eyebrow: string;
@@ -42,6 +48,10 @@ export interface FamilyTopicConfig {
     bullets: string[];
   };
   areasInside: FamilyAreaInside[];
+  /** Ordered ready-article slugs surfaced as the Start Here row (max 3). */
+  startHere?: string[];
+  /** Optional display-only groups for the grouped guidance container. */
+  articleGroups?: FamilyArticleGroup[];
   commonQuestions: FamilyQA[];
   aiHeading: string;
   aiDescription: string;

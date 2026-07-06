@@ -99,11 +99,6 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         href: "/articles/complete-guide-morning-sickness",
         why: "The fullest picture of nausea in pregnancy — why it happens, when it eases, and what helps.",
       },
-      {
-        title: "Fatigue in early pregnancy",
-        href: "/articles/fatigue-in-early-pregnancy",
-        why: "Why the tiredness can feel unlike anything before, and how to meet it gently.",
-      },
     ],
 
     groups: [
@@ -112,8 +107,6 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         description: "The symptoms that tend to define the first trimester.",
         links: [
           { label: "Complete guide to morning sickness", href: "/articles/complete-guide-morning-sickness" },
-          { label: "Nausea in early pregnancy", href: "/articles/nausea-in-early-pregnancy" },
-          { label: "Fatigue in early pregnancy", href: "/articles/fatigue-in-early-pregnancy" },
           { label: "Sleep in pregnancy", href: "/articles/sleep-in-pregnancy" },
         ],
       },
@@ -121,9 +114,6 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         label: "Across the trimesters",
         description: "How your body tends to shift as pregnancy moves on.",
         links: [
-          { label: "First trimester: complete guide", href: "/articles/first-trimester-complete-guide" },
-          { label: "Second trimester: complete guide", href: "/articles/second-trimester-complete-guide" },
-          { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide" },
         ],
       },
       {
@@ -134,7 +124,6 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
           { label: "Pelvic pain in pregnancy", href: "/articles/pelvic-pain-in-pregnancy" },
           { label: "Round ligament pain", href: "/articles/round-ligament-pain" },
           { label: "Braxton Hicks contractions", href: "/articles/braxton-hicks-contractions" },
-          { label: "Shortness of breath in pregnancy", href: "/articles/shortness-of-breath-in-pregnancy" },
           { label: "Swelling in pregnancy", href: "/articles/swelling-in-pregnancy" },
         ],
       },
@@ -205,16 +194,6 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         href: "/articles/how-your-baby-develops-in-pregnancy",
         why: "The cornerstone view — how growth unfolds across the whole pregnancy, without turning into a weekly chase.",
       },
-      {
-        title: "First trimester: complete guide",
-        href: "/articles/first-trimester-complete-guide",
-        why: "Where the foundations are laid, often before you can feel anything at all.",
-      },
-      {
-        title: "Second trimester: complete guide",
-        href: "/articles/second-trimester-complete-guide",
-        why: "The window where movement, growth, and the sense of a real person tend to arrive.",
-      },
     ],
 
     groups: [
@@ -223,9 +202,6 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         description: "How your baby unfolds across the whole of pregnancy.",
         links: [
           { label: "How your baby develops in pregnancy", href: "/articles/how-your-baby-develops-in-pregnancy" },
-          { label: "First trimester: complete guide", href: "/articles/first-trimester-complete-guide" },
-          { label: "Second trimester: complete guide", href: "/articles/second-trimester-complete-guide" },
-          { label: "Third trimester: complete guide", href: "/articles/third-trimester-complete-guide" },
         ],
       },
       {
@@ -242,7 +218,6 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         description: "Common scan findings about how baby is lying and where the placenta sits.",
         links: [
           { label: "Anterior placenta", href: "/articles/anterior-placenta" },
-          { label: "Low-lying placenta in pregnancy", href: "/articles/low-lying-placenta-in-pregnancy" },
           { label: "Breech baby", href: "/articles/breech-baby" },
           { label: "Cord around the neck in pregnancy", href: "/articles/cord-around-the-neck-in-pregnancy" },
         ],
@@ -294,11 +269,6 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     startHere: [
       {
-        title: "Emotional wellbeing in pregnancy",
-        href: "/articles/emotional-wellbeing-pregnancy",
-        why: "The wider orientation — what's normal, what's worth raising, and how to think about your inner life across pregnancy.",
-      },
-      {
         title: "Anxiety in pregnancy",
         href: "/articles/anxiety-in-pregnancy",
         why: "A grounded look at worry in pregnancy, where it sits within normal, and when extra support tends to help.",
@@ -315,7 +285,6 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         label: "Emotional wellbeing",
         description: "The wider picture, and the emotionally specific weeks of the first trimester.",
         links: [
-          { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy" },
           { label: "The first trimester emotionally", href: "/articles/the-first-trimester-emotionally" },
         ],
       },
@@ -536,8 +505,8 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         why: "The wider orientation hub — what to think about, when, and what can wait.",
       },
       {
-        title: "Writing a birth plan",
-        href: "/articles/writing-a-birth-plan",
+        title: "Birth preferences: how to make a plan that helps rather than disappoints",
+        href: "/articles/birth-preferences",
         why: "How to think through preferences for birth without locking yourself in.",
       },
       {
@@ -559,8 +528,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         label: "Birth planning",
         description: "Thinking through preferences without overplanning.",
         links: [
-          { label: "Writing a birth plan", href: "/articles/writing-a-birth-plan" },
-          { label: "Birth preferences", href: "/articles/birth-preferences" },
+          { label: "Birth preferences: how to make a plan that helps rather than disappoints", href: "/articles/birth-preferences" },
           { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack" },
         ],
       },
@@ -582,7 +550,6 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         description: "What your baby needs at home, kept simple.",
         links: [
           { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to" },
-          { label: "What to buy for a new baby", href: "/articles/what-to-buy-for-a-new-baby" },
         ],
       },
       {
@@ -658,7 +625,6 @@ export const topicMapEntries: TopicMapEntry[] = [
     mainLabel: "Explore your feelings in pregnancy",
     hasLanding: true,
     articles: [
-      { label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy" },
       { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy" },
       { label: "The first trimester emotionally", href: "/articles/the-first-trimester-emotionally" },
       { label: "When the joy doesn't arrive yet", href: "/articles/when-the-joy-doesnt-arrive-yet" },
@@ -700,7 +666,7 @@ export const topicMapEntries: TopicMapEntry[] = [
     mainLabel: "Explore preparing for baby",
     hasLanding: true,
     articles: [
-      { label: "Writing a birth plan", href: "/articles/writing-a-birth-plan" },
+      { label: "Birth preferences: how to make a plan that helps rather than disappoints", href: "/articles/birth-preferences" },
       { label: "The 36-week appointment", href: "/articles/the-36-week-appointment" },
       { label: "Induction of labour", href: "/articles/induction-of-labour" },
       { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack" },

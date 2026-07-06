@@ -1,50 +1,118 @@
-# Phase 4.7 — Remove legacy Explore and Guidance pages
+# Phase 4.8 — Pregnancy Cornerstone QA and Relinking Plan
 
-Audit complete. Two live standalone pages need removal:
+Audit only. No files changed. `tsgo` not required.
 
-- `/explore` → `src/pages/Explore.tsx` (registered in `src/App.tsx` line 201)
-- `/guidance` → `src/pages/GuidanceLibrary.tsx` (registered in `src/App.tsx` line 333)
+## 1. Cornerstone health check
 
-Both are separate from the current article system, trimester landings, hubs, and topic pages, which stay untouched.
+All four upgraded articles pass every Flagship criterion:
 
-Scope note: this phase only removes live route registrations, page files, page-exclusive components, and `<Link>` / `<Navigate>` targets that point at `/explore` or `/guidance`. Ordinary copy that uses the word "guidance" (headings, "Related guidance", "Pregnancy guidance", body text, labels) is left exactly as-is.
+| Slug | Renders via | quickAnswer | editorialSections | keyTakeaways | faq | sources | reviewedBy | topic | relatedSlugs resolve |
+|---|---|---|---|---|---|---|---|---|---|
+| first-trimester-complete-guide | ArticleFlagshipTemplate | Y | Y | Y | Y | Y | Jenny Joines | body | all 5 OK |
+| second-trimester-complete-guide | ArticleFlagshipTemplate | Y | Y | Y | Y | Y | Jenny Joines | body | all 5 OK |
+| third-trimester-complete-guide | ArticleFlagshipTemplate | Y | Y | Y | Y | Y | Jenny Joines | body | all 5 OK |
+| emotional-wellbeing-pregnancy | ArticleFlagshipTemplate | Y | Y | Y | Y | Y | Jenny Joines | feelings | all 5 OK |
 
-## Files to delete
+Related-slug resolution (spot-checked against `articleData.ts`): every referenced slug exists as a live article.
 
-- `src/pages/Explore.tsx`
-- `src/pages/GuidanceLibrary.tsx`
-- `src/components/explore/` — entire folder, only used by `Explore.tsx`: `ExploreHero`, `StageNavSection`, `ContinueJourneySection`, `QuickActionsSection`, `GuidanceSection`, `AIReassuranceSection`, `BrandPositioningSection`
-- Guidance components used only by `GuidanceLibrary.tsx`: `src/components/guidance/GuidanceHero.tsx`, `GuidanceAIBridge.tsx`, `GuidanceBrowseAll.tsx`, `GuidanceCompareGuides.tsx`, `GuidanceEditorialBreak.tsx`, `GuidanceFeaturedGuides.tsx`, `GuidanceJourneyPathways.tsx`, `GuidancePopularQuestions.tsx`, `GuidanceStageCarousels.tsx`, `GuidanceTopicSections.tsx` — each re-verified with `rg` before deletion; any component still imported elsewhere is kept
+## 2. Current link map
 
-Image assets under `src/assets/guidance-*` are left in place (reused by `src/data/ttcFlagshipOverrides.ts` and other hub content).
+**first-trimester-complete-guide**
+- `src/pages/trimester/FirstTrimester.tsx` line 93 (Phase 4.5 card)
+- `src/pages/WeekPage.tsx` line 169 (generic template's early-weeks reads)
+- `src/components/article/ArticleHeroImage.tsx` (hero image map)
+- Referenced in `emotional-wellbeing-pregnancy` `relatedSlugs`
 
-## Files to edit
+**second-trimester-complete-guide**
+- `src/pages/trimester/SecondTrimester.tsx` line 88 (Phase 4.5 card)
+- `src/pages/WeekPage.tsx` lines 178, 190
+- `src/components/article/ArticleHeroImage.tsx`
 
-Route + import removal:
-- `src/App.tsx` — remove `import Explore` (line 7), `import GuidanceLibrary` (line 129), `<Route path="/explore" …>` (line 201), `<Route path="/guidance" …>` (line 333)
+**third-trimester-complete-guide**
+- `src/pages/trimester/ThirdTrimester.tsx` line 88 (Phase 4.5 card)
+- `src/pages/WeekPage.tsx` lines 198, 213
+- `src/components/article/ArticleHeroImage.tsx`
 
-Link target replacements only (no copy, label, layout, or class changes). Replace `to="/explore"` and `to="/guidance"` with a valid current destination — default `/pregnancy`; for week pages use the matching trimester hub (weeks 1–12 → `/pregnancy/first-trimester`, 13–27 → `/pregnancy/second-trimester`, 28+ → `/pregnancy/third-trimester`):
+**emotional-wellbeing-pregnancy**
+- `src/pages/WeekPage.tsx` line 183 (second-trimester read)
+- `src/data/ttcTopicData.ts` line 112, `src/data/ivfTopicData.ts` line 138 (used as the emotional-wellbeing anchor for TTC/IVF flows)
+- Article-side image maps in `PregnancyTopicPage.tsx`, `TTCTopicPage.tsx`, `TTCSubtopicPage.tsx`, `IVFTopicPage.tsx`
+- Referenced by `first-trimester-complete-guide` and other feelings articles as a related slug (via image map)
 
-- `src/components/layout/Footer.tsx` line 65 — Resources list `/explore` entry: swap target to `/pregnancy` and label to "Pregnancy" (label change only because "Explore" is the link target name, not body copy)
-- `src/components/home/CTASection.tsx` line 31 — `to="/explore"` → `to="/pregnancy"`
-- `src/pages/NotFound.tsx` line 39 — `to="/explore"` → `to="/"`
-- `src/pages/AskPage.tsx` lines 22, 179, 308 — `/explore` targets → `/pregnancy` (IVF branch on line 308 keeps `/ivf`). Visible labels ("Explore guidance", "Explore") stay unchanged
-- `src/pages/ArticlePage.tsx` line 15 — `<Navigate to="/explore" replace />` → `<Navigate to="/" replace />`
-- Week pages with `<Link to="/guidance" …>` (target only, visible label untouched): `Week1Page`, `Week2Page`, `Week3Page`, `Week4Page`, `Week5Page`, `Week6Page`, `Week7Page`, `Week8Page`, `Week9Page`, `Week10Page`, `Week11Page`, `Week12Page`, `Week13Page`, `Week14Page`, `Week15Page`, `Week16Page`, `Week17Page`, `Week18Page`, `Week19Page`, `Week20Page`, `Week21Page`, `Week22Page`, `Week23Page`, `Week24Page`, `Week25Page`, `Week26Page`, `Week27Page`, `Week28Page`, `Week29Page`, `Week31Page`, `Week33Page`, `Week34Page`, `Week35Page`, `Week36Page`, `Week39Page`, `Week40Page`, `Week41Page`, `Week42Page`, plus generic `WeekPage.tsx`
+**Not linked from:** `src/data/pregnancyTopicData.ts` — none of the four cornerstones appears in any pregnancy topic group. This is the main gap.
 
-No other files touched. Comments that reference `/guidance` historically (e.g. `pregnancyTopicData.ts` line 573) are left alone — they are not live links.
+## 3. Weak / duplicate link check (live surfaces)
 
-## Not touched
+- `writing-a-birth-plan` — present only in `WeekPage.tsx` (line 203) and inside other articles' `relatedSlugs`. Not in pregnancy topic groups. Leave alone for now.
+- `nausea-in-early-pregnancy` — present in `WeekPage.tsx` (line 158) and IVF topic data (line 142). `pregnancyTopicData.ts` correctly uses the canonical `complete-guide-morning-sickness` instead.
+- `ovulation-signs` vs `signs-of-ovulation` — TTC only, not in pregnancy scope; out of phase.
+- No weak trimester duplicates found in pregnancy surfaces — the upgraded slugs are the only trimester-guide slugs.
 
-Article system, `articleData.ts`, `familyArticleData.ts`, `firstYearArticleData.ts`, `toddlerArticleData.ts`, `pregnancyTopicData.ts`, all trimester landings, TTC / IVF / First Year / Toddler / Family / Product / About / Support / Ask internals beyond the three link swaps above, calculators, saved journey, AI logic, design tokens, `.lovable/plan.md`, SEO config, redirects, canonicals. All ordinary "guidance" wording in headings and body copy stays.
+Weak links needing pregnancy-side action: none in `pregnancyTopicData.ts`.
 
-## Route behaviour after deletion
+## 4. Thin topic groups
 
-- `/explore` and `/guidance` fall through to `NotFound` via the existing `path="*"` route. No redirects added, no `noindex`, no canonical changes.
+`src/data/pregnancyTopicData.ts`:
 
-## Verification
+- **"Your body in pregnancy" → "Across the trimesters"** (lines 113–118): `links: []` — empty. Natural home for the three trimester complete guides.
+- **"Your feelings in pregnancy" → "Emotional wellbeing"** (lines 284–290): 1 link (`the-first-trimester-emotionally`). Natural home for `emotional-wellbeing-pregnancy` as the anchor guide.
 
-- `tsgo` typecheck.
-- Load `/explore` and `/guidance` → both render NotFound.
-- Load `/pregnancy`, `/pregnancy/first-trimester`, `/pregnancy/second-trimester`, `/pregnancy/third-trimester`, `/articles/first-trimester-complete-guide`, `/articles/emotional-wellbeing-pregnancy` → all still render.
-- `rg 'to="/explore"|to="/guidance"|path="/explore"|path="/guidance"|Navigate to="/explore"|Navigate to="/guidance"'` returns no matches. Plain-text uses of the word "guidance" remain and are expected.
+Other groups (aches, digestion, bleeding, movement, scans, appointments) are already well populated with matching subject-specific articles; no cornerstone insertion needed.
+
+## 5. Recommended relinking (Phase 4.9)
+
+**Principle:** one cornerstone card per relevant section, natural placement, no duplicates in the same visible group, no changes to well-populated groups.
+
+- `pregnancyTopicData.ts` — "Your body in pregnancy" → "Across the trimesters": add three links, in order:
+  - `{ label: "The first trimester: a complete guide", href: "/articles/first-trimester-complete-guide" }`
+  - `{ label: "The second trimester: a complete guide", href: "/articles/second-trimester-complete-guide" }`
+  - `{ label: "The third trimester: a complete guide", href: "/articles/third-trimester-complete-guide" }`
+
+- `pregnancyTopicData.ts` — "Your feelings in pregnancy" → "Emotional wellbeing" group: prepend one link:
+  - `{ label: "Emotional wellbeing in pregnancy", href: "/articles/emotional-wellbeing-pregnancy" }`
+
+- `pregnancyTopicData.ts` — "Your feelings in pregnancy" → `startHere`: consider replacing one entry with `emotional-wellbeing-pregnancy` as the primary anchor. **Deferred**: current `startHere` (Anxiety, First trimester emotionally) is coherent; safer to leave alone in 4.9 and revisit if analytics show it's under-served.
+
+- Trimester landing pages (`FirstTrimester.tsx`, `SecondTrimester.tsx`, `ThirdTrimester.tsx`): already carry the correct card from Phase 4.5. **No change.**
+
+- Week pages: `WeekPage.tsx` generic template already links the correct trimester guide. Individual `WeekXPage.tsx` files were audited in Phase 4.7 for `/guidance` link targets only; adding cornerstone cards inside every week page is out of scope for 4.9 and would risk overload. **Defer** to a later phase if needed.
+
+- No new links inside topic groups for `health-and-safety`, `preparing-for-baby`, `diet-and-exercise`, `baby` — these are covered by subject articles and adding trimester guides would dilute them.
+
+## 6. Slugs to avoid in Phase 4.9
+
+- `writing-a-birth-plan` (unchanged)
+- `nausea-in-early-pregnancy` (canonical is `complete-guide-morning-sickness`)
+- Any legacy emotional-wellbeing slug other than `emotional-wellbeing-pregnancy`
+
+## 7. Phase 4.9 — proposed implementation prompt
+
+> Phase 4.9 — Relink Pregnancy cornerstones into topic groups
+>
+> Edit only `src/data/pregnancyTopicData.ts`. No other files. Do not change article data, topic descriptions, intros, `startHere`, or `whatThisCovers`.
+>
+> 1. In topic `body` → group "Across the trimesters" (currently `links: []`), add exactly three links in order:
+>    - "The first trimester: a complete guide" → `/articles/first-trimester-complete-guide`
+>    - "The second trimester: a complete guide" → `/articles/second-trimester-complete-guide`
+>    - "The third trimester: a complete guide" → `/articles/third-trimester-complete-guide`
+> 2. In topic `feelings` → group "Emotional wellbeing", prepend one link:
+>    - "Emotional wellbeing in pregnancy" → `/articles/emotional-wellbeing-pregnancy`
+>    Keep the existing "The first trimester emotionally" link as the second entry.
+>
+> Do not touch `startHere`, other groups, other topics, other files, routes, templates, article content, or SEO. Do not add sources. Do not add any weak/duplicate slug (`writing-a-birth-plan`, `nausea-in-early-pregnancy`).
+>
+> Verify: `tsgo`, load `/pregnancy/body` and `/pregnancy/feelings`, confirm the new cards render inside the correct groups and that clicking each opens the matching Flagship article.
+
+## 8. Risks and ambiguity
+
+- Low risk. The two edits touch a single data file, add valid slugs already present in `articleData.ts`, and slot into groups that are either empty or under-filled.
+- Ambiguity: whether to also promote `emotional-wellbeing-pregnancy` into `startHere` for the feelings topic. Recommended deferral, not blocking.
+
+## Summary
+
+- Files changed: none
+- Cornerstones healthy and render via ArticleFlagshipTemplate
+- `relatedSlugs` all resolve
+- No weak/duplicate slugs live in `pregnancyTopicData.ts`
+- Main gap: the four cornerstones are not linked from any pregnancy topic group
+- Recommend Phase 4.9 minimal edit (single data file, two group updates) — safe to run now.

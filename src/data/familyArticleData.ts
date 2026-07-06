@@ -343,11 +343,82 @@ const rawFamilyArticles: FamilyArticle[] = [
   {
     slug: "building-family-traditions",
     topic: "play-connection",
-    title: "Building family traditions",
+    title: "Building family traditions without adding pressure",
     description:
-      "Simple rituals, weekly, seasonal, small, that give family life a shape your child will remember.",
+      "Simple, low-pressure ways to build family rituals that help children feel connected, without turning family life into a performance.",
     readTime: "5 min read",
-    status: "draft",
+    status: "ready",
+    seoTitle: "Building family traditions without adding pressure",
+    seoDescription:
+      "A warm guide to creating simple, flexible family traditions that help children feel connected, without perfectionism.",
+    lastUpdated: "July 2026",
+    intro:
+      "Family traditions do not have to be elaborate to matter. Often the ones children remember most are small, quiet and slightly ordinary. A particular breakfast on a Sunday, the way you always walk home from a certain place, the song at the end of the day. This piece is about building rituals that feel like your family, without adding another thing you feel you have to do well.",
+    sections: [
+      {
+        heading: "What family traditions can give children",
+        body: [
+          "Traditions give children a felt sense of belonging. This is something we do. These are our people. This is how our year has a shape.",
+          "They also give the calendar texture. A predictable ritual to look forward to can be a quiet source of steadiness, especially in seasons when other things feel uncertain.",
+        ],
+      },
+      {
+        heading: "Traditions do not need to be big",
+        body: [
+          "A tradition is really just something you do more than once, on purpose, together. It does not need a theme, a hashtag or a Pinterest board.",
+          "Pancakes on Saturdays, a walk after Sunday lunch, a candle at dinner on Friday nights. Small rituals that repeat tend to hold more weight than one-off grand gestures.",
+        ],
+      },
+      {
+        heading: "Start with what your family already enjoys",
+        body: [
+          "The most durable traditions usually grow out of things you already like doing. If your family loves being outside, a seasonal walk is more likely to stick than a craft afternoon nobody actually wants.",
+          "Notice what already brings you together without effort, and let those things become slightly more intentional. Naming something as \"our thing\" is often enough to turn it into a tradition.",
+        ],
+      },
+      {
+        heading: "Make traditions flexible as children grow",
+        body: [
+          "The rituals that suit a toddler will not always suit a nine-year-old. That is not a failure, it is the tradition evolving.",
+          "Try to hold the shape lightly. If a Sunday film afternoon slowly becomes a Sunday walk and hot chocolate, the thread is still there. What matters is the togetherness, not the exact activity.",
+        ],
+      },
+      {
+        heading: "Simple ideas for weekly, seasonal and everyday rituals",
+        body: [
+          "Weekly: a shared breakfast, a Friday night dinner at home, a Sunday phone call to a grandparent, a family walk after lunch.",
+          "Seasonal: the first walk after the clocks change, a picnic on the same day each summer, one shared task at the start of a school holiday.",
+          "Everyday: the same goodbye at the door, a song at bath time, a question at dinner, a bedtime phrase that never changes.",
+        ],
+      },
+      {
+        heading: "When traditions feel hard or emotional",
+        body: [
+          "Some traditions carry weight. Birthdays after a loss, holidays that used to look different, first years without someone you love. It is normal for these rituals to feel tender.",
+          "You are allowed to keep them, change them or step away from them for a year. Traditions serve the family, not the other way around.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Choose one small ritual to name out loud this month, even something as simple as \"we always read this book on Sunday nights\".",
+          "Let your child suggest a tradition. It might be something surprising, and being invited to shape family life is meaningful in itself.",
+          "Keep a light hold on what a tradition should look like. If it changes shape over the years, that is usually a sign it is alive, not that it is broken.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Small, repeating rituals often matter more to children than big set-piece traditions.",
+      "The best traditions usually grow out of things your family already enjoys.",
+      "Traditions should evolve as children grow, not stay frozen.",
+      "It is fine, and sometimes needed, to change or pause a tradition in a hard year.",
+      "Naming something as \"our thing\" is often the whole tradition.",
+    ],
+    relatedSlugs: [
+      "building-family-routines",
+      "screen-time-as-a-family",
+      "helping-your-child-adjust-to-a-new-sibling",
+    ],
   },
   {
     slug: "screen-time-as-a-family",

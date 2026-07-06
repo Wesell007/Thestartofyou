@@ -770,7 +770,7 @@ const Related = () => (
             Curated guidance for what's likely on your mind right now.
           </h2>
         </div>
-        <Link to="/guidance"
+        <Link to="/pregnancy/first-trimester"
           className="inline-flex items-center gap-1.5 font-sans text-[13.5px] font-medium text-sage hover:gap-2.5 transition-all whitespace-nowrap">
           Browse all guidance <ArrowRight size={12} />
         </Link>

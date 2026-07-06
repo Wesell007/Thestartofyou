@@ -40,7 +40,7 @@ const TrimesterFinalCTA = ({ data }: Props) => {
             </Link>
           ) : (
             <Link
-              to="/explore"
+              to="/pregnancy"
               className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
             >
               Continue your journey

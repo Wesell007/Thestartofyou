@@ -36,7 +36,7 @@ const NotFound = () => {
                 <ArrowRight size={14} />
               </Link>
               <Link
-                to="/explore"
+                to="/"
                 className="font-sans text-sm font-light text-muted-foreground hover:text-foreground transition-colors border-b border-border hover:border-foreground pb-0.5"
               >
                 Explore your journey

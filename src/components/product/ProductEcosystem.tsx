@@ -26,7 +26,7 @@ const ProductEcosystem = () => {
               The journal fits alongside your digital journey on The Start of You. Use both together, or on their own. The physical pages hold what the screen cannot.
             </p>
             <Link
-              to="/explore"
+              to="/pregnancy"
               className="inline-flex items-center gap-2 font-sans text-sm font-light text-muted-foreground border-b border-border hover:text-foreground hover:border-foreground transition-all pb-0.5"
             >
               Explore your journey

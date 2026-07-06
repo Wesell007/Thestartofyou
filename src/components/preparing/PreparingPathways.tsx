@@ -27,7 +27,7 @@ const pathways = [
     label: "Journey",
     title: "Explore your journey",
     sub: "Return to the full journey overview",
-    href: "/explore",
+    href: "/pregnancy",
     color: "--stage-preparing-accent",
   },
 ];

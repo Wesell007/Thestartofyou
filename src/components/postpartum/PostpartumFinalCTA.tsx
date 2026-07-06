@@ -56,7 +56,7 @@ const PostpartumFinalCTA = () => {
                 <ArrowUpRight size={15} />
               </Link>
               <Link
-                to="/explore"
+                to="/pregnancy"
                 className="inline-flex items-center gap-2 border border-foreground/12 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all"
               >
                 Explore all stages

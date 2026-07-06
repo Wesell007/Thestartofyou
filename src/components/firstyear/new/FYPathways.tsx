@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 const pathways = [
   { label: "Previous journey", title: "Pregnancy", sub: "Revisit the weeks that brought you here.", href: "/pregnancy" },
   { label: "Support", title: "Get support", sub: "For moments that feel uncertain or heavy.", href: "/support" },
-  { label: "Explore", title: "Explore the full journey", sub: "See how every stage fits together.", href: "/explore" },
+  { label: "Explore", title: "Explore the full journey", sub: "See how every stage fits together.", href: "/pregnancy" },
 ];
 
 const FYPathways = () => {

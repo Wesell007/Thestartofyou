@@ -78,7 +78,7 @@ const ThirdTriFAQ = () => {
             </p>
           </div>
           <Link
-            to="/guidance"
+            to="/pregnancy"
             className="group inline-flex items-center gap-1.5 font-sans text-[13px] font-light text-sage hover:text-sage-muted transition-colors whitespace-nowrap"
           >
             See all FAQs

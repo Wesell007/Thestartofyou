@@ -12,7 +12,7 @@ const ArticlePage = () => {
   const data = getArticle(slug ?? "");
 
   if (!data) {
-    return <Navigate to="/explore" replace />;
+    return <Navigate to="/" replace />;
   }
 
   // Flagship template is now the default for any article with the minimum

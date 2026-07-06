@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
 const pathways = [
-  { label: "Your journey", href: "/explore", accent: "bg-[hsl(var(--stage-support)/0.4)]" },
+  { label: "Your journey", href: "/pregnancy", accent: "bg-[hsl(var(--stage-support)/0.4)]" },
   { label: "Pregnancy", href: "/pregnancy", accent: "bg-[hsl(var(--stage-pregnancy)/0.4)]" },
   { label: "Postpartum", href: "/postpartum", accent: "bg-[hsl(var(--stage-postpartum)/0.4)]" },
 ];
@@ -31,7 +31,7 @@ const SupportFinalCTA = () => {
             <ArrowUpRight size={16} />
           </a>
           <Link
-            to="/explore"
+            to="/pregnancy"
             className="flex items-center gap-2 border border-foreground/12 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all"
           >
             Explore your journey

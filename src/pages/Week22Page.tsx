@@ -703,7 +703,7 @@ const Related = () => (
             Curated guidance for the start of the middle stretch.
           </h2>
         </div>
-        <Link to="/guidance" className="inline-flex items-center gap-1.5 font-sans text-[13.5px] font-medium text-sage hover:gap-2.5 transition-all whitespace-nowrap">
+        <Link to="/pregnancy/second-trimester" className="inline-flex items-center gap-1.5 font-sans text-[13.5px] font-medium text-sage hover:gap-2.5 transition-all whitespace-nowrap">
           Browse all guidance <ArrowRight size={12} />
         </Link>
       </div>

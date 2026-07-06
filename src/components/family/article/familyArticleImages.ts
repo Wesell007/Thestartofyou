@@ -82,4 +82,68 @@ export const familyArticleImageMap: Record<string, FamilyArticleImages> = {
       },
     ],
   },
+  // Bespoke future image: shared family screen moment, warm evening light,
+  // not children isolated on devices.
+  "screen-time-as-a-family": {
+    hero: {
+      src: heroFour.url,
+      alt: "A family of four sharing a calm evening together at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicPlay.url,
+        alt: "A parent and child sharing something on a screen together",
+        caption: "Shared screens can still be shared time.",
+      },
+    ],
+  },
+  // Bespoke future image: parent and small child at a train window,
+  // calm travel scene with warm natural light.
+  "travelling-with-young-children": {
+    hero: {
+      src: heroEveryday.url,
+      alt: "A parent and young child in a calm everyday travel moment",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicFamilyBasics.url,
+        alt: "A family bag packed and ready by the door",
+        caption: "Packing for needs, not every possible scenario.",
+      },
+    ],
+  },
+  // Bespoke future image: child in a car seat looking out of the window
+  // with warm afternoon light through glass.
+  "making-car-journeys-calmer": {
+    hero: {
+      src: heroParents.url,
+      alt: "A parent settling a young child before a car journey",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicFamilyBasics.url,
+        alt: "A calm car interior ready for a family journey",
+        caption: "Small preparations before a journey often carry the whole trip.",
+      },
+    ],
+  },
+  // Bespoke future image: multigenerational family scene at a kitchen table,
+  // calm and warm, grandparents and grandchildren together.
+  "setting-boundaries-with-grandparents": {
+    hero: {
+      src: heroDiverse.url,
+      alt: "A multigenerational family together in a warm home setting",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicRelationships.url,
+        alt: "A calm conversation between adults in a family home",
+        caption: "Clarity and kindness usually travel well together.",
+      },
+    ],
+  },
 };

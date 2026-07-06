@@ -36,6 +36,50 @@ const FamilyTopicPage = ({ config }: Props) => {
     .slice(0, 3)
     .map((s) => ({ slug: s, ...FAMILY_TOPIC_INDEX[s] }));
 
+  // ─── Article surfacing ─────────────────────────────────────────
+  const readyArticles = getFamilyArticlesByTopic(
+    config.slug as FamilyArticleTopic
+  ).filter((a) => a.status === "ready");
+  const readyBySlug = new Map(readyArticles.map((a) => [a.slug, a]));
+
+  const startHereSlugs = (config.startHere ?? [])
+    .filter((s) => readyBySlug.has(s))
+    .slice(0, 3);
+  const startHereArticles = startHereSlugs
+    .map((s) => readyBySlug.get(s)!)
+    .filter(Boolean);
+
+  const startHereSet = new Set(startHereSlugs);
+
+  // Grouped guidance: only articles not already surfaced in Start Here.
+  const articleGroups = (config.articleGroups ?? [])
+    .map((g) => ({
+      label: g.label,
+      description: g.description,
+      articles: g.slugs
+        .filter((s) => !startHereSet.has(s) && readyBySlug.has(s))
+        .map((s) => readyBySlug.get(s)!),
+    }))
+    .filter((g) => g.articles.length > 0);
+
+  // Fallback: any remaining ready articles not in Start Here and not in an
+  // explicit group. Rendered as a single unlabelled group so nothing is lost.
+  const groupedSlugSet = new Set(
+    (config.articleGroups ?? []).flatMap((g) => g.slugs)
+  );
+  const ungrouped = readyArticles.filter(
+    (a) => !startHereSet.has(a.slug) && !groupedSlugSet.has(a.slug)
+  );
+  if (ungrouped.length > 0) {
+    articleGroups.push({
+      label: "More on this topic",
+      description: undefined,
+      articles: ungrouped,
+    });
+  }
+
+  const hasGuidance = articleGroups.length > 0;
+
   const SectionLabel = ({ children }: { children: React.ReactNode }) => (
     <div className="flex items-center gap-3">
       <span className="h-px w-8" style={{ background: accentMid }} aria-hidden />
@@ -310,159 +354,113 @@ const FamilyTopicPage = ({ config }: Props) => {
           </div>
         </section>
 
-        {/* ─── AI SUPPORT ───────────────────────────────────────────── */}
-        <section
-          id="family-topic-ai"
-          className="relative py-20 md:py-24 scroll-mt-24"
-          style={{
-            background:
-              "linear-gradient(to bottom, hsl(var(--stage-family) / 0.6) 0%, hsl(var(--stage-family) / 0.28) 55%, hsl(var(--parchment)) 100%)",
-          }}
-        >
-          <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
-            <div className="mb-7 md:mb-8 flex flex-col items-center text-center gap-3">
-              <SectionLabel>Ask anything</SectionLabel>
-            </div>
-
-            <div
-              className="rounded-[28px] border bg-parchment/85 backdrop-blur-sm overflow-hidden"
-              style={{
-                borderColor: accentBorderStrong,
-                boxShadow:
-                  "0 36px 80px -46px rgba(70,50,20,0.38), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
-              }}
-            >
-              <HubAISupport
-                heading={config.aiHeading}
-                description={config.aiDescription}
-                placeholder={config.aiPlaceholder}
-                suggestions={config.aiPrompts}
-                context={config.title}
-                stageBg="--stage-family"
-                stageAccent="--stage-family-accent"
-                stage="family"
-              />
-            </div>
-            <p
-              className="mt-7 text-center font-sans text-[12.5px] font-light tracking-wide max-w-lg mx-auto leading-relaxed"
-              style={{ color: deepMuted }}
-            >
-              A quiet companion for the questions family life quietly raises.
-            </p>
-          </div>
-        </section>
-
-        {/* ─── AREAS INSIDE THIS TOPIC ──────────────────────────────── */}
-        <section
-          className="relative py-20 md:py-24"
-          style={{
-            background:
-              "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.24) 100%)",
-          }}
-        >
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-            <div className="mb-9 md:mb-11 flex flex-col items-start gap-3">
-              <SectionLabel>Areas inside this topic</SectionLabel>
-              <h2
-                className="font-serif text-[1.75rem] md:text-[2rem] leading-tight"
-                style={{ color: deep }}
-              >
-                What sits inside {config.title.toLowerCase()}
-              </h2>
-              <p
-                className="font-sans text-[14.5px] font-light leading-relaxed max-w-2xl"
-                style={{ color: deepSoft }}
-              >
-                A gentle map of what lives inside this topic. Deeper pages for each area can arrive later — for now, use the AI panel above for anything specific.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-              {config.areasInside.map((area) => (
-                <article
-                  key={area.title}
-                  className="relative flex h-full flex-col gap-3 rounded-[20px] border px-6 py-6 overflow-hidden"
-                  style={{
-                    borderColor: accentBorder,
-                    background:
-                      "linear-gradient(160deg, hsl(var(--parchment)) 0%, hsl(var(--stage-family-soft) / 0.55) 100%)",
-                    boxShadow:
-                      "0 14px 32px -28px rgba(70,50,20,0.24), inset 0 1px 0 hsl(0 0% 100% / 0.65)",
-                  }}
+        {/* ─── START HERE ───────────────────────────────────────────── */}
+        {startHereArticles.length > 0 && (
+          <section
+            className="relative py-16 md:py-20"
+            style={{
+              background:
+                "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.24) 100%)",
+            }}
+          >
+            <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
+              <div className="mb-8 md:mb-10 flex flex-col items-start gap-3">
+                <SectionLabel>Start here</SectionLabel>
+                <h2
+                  className="font-serif text-[1.75rem] md:text-[2rem] leading-tight"
+                  style={{ color: deep }}
                 >
-                  <span
-                    className="pointer-events-none absolute -top-10 -left-10 h-32 w-32 rounded-full blur-2xl opacity-60"
-                    style={{ background: "hsl(var(--stage-family-accent) / 0.16)" }}
-                    aria-hidden
-                  />
-                  <div className="relative">
-                    <p
-                      className="font-serif text-[17px] leading-snug"
-                      style={{ color: deep }}
-                    >
-                      {area.title}
-                    </p>
-                    <p
-                      className="mt-2 font-sans text-[13.5px] font-light leading-[1.6]"
-                      style={{ color: deepSoft }}
-                    >
-                      {area.body}
-                    </p>
-                  </div>
-                </article>
-              ))}
+                  Begin with these
+                </h2>
+                <p
+                  className="font-sans text-[14.5px] font-light leading-relaxed max-w-2xl"
+                  style={{ color: deepSoft }}
+                >
+                  Start with the guide that matches what you need today.
+                </p>
+              </div>
+              <div
+                className={`grid grid-cols-1 gap-4 md:gap-5 ${
+                  startHereArticles.length >= 3
+                    ? "md:grid-cols-3"
+                    : "md:grid-cols-2"
+                }`}
+              >
+                {startHereArticles.map((a) => (
+                  <FamilyArticleCard key={a.slug} article={a} />
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
-        {/* ─── RELATED GUIDANCE (ARTICLES) ──────────────────────────── */}
-        {(() => {
-          const articles = getFamilyArticlesByTopic(
-            config.slug as FamilyArticleTopic
-          );
-          return (
-            <section
-              className="relative py-20 md:py-24"
-              style={{
-                background:
-                  "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.28) 100%)",
-              }}
-            >
-              <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-                <div className="mb-9 md:mb-11 flex flex-col items-start gap-3">
+        {/* ─── GROUPED GUIDANCE ─────────────────────────────────────── */}
+        {hasGuidance && (
+          <section
+            className="relative py-20 md:py-24"
+            style={{
+              background:
+                "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.28) 100%)",
+            }}
+          >
+            <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
+              <div
+                className="relative rounded-[28px] border p-6 sm:p-10 md:p-12 overflow-hidden"
+                style={{
+                  borderColor: accentBorderStrong,
+                  background:
+                    "linear-gradient(165deg, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.5) 100%)",
+                  boxShadow:
+                    "0 28px 64px -40px rgba(70,50,20,0.32), inset 0 1px 0 hsl(0 0% 100% / 0.75)",
+                }}
+              >
+                <span
+                  className="pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full blur-3xl opacity-60"
+                  style={{ background: "hsl(var(--stage-family-accent) / 0.18)" }}
+                  aria-hidden
+                />
+                <div className="relative">
                   <SectionLabel>Guidance</SectionLabel>
                   <h2
-                    className="font-serif text-[1.75rem] md:text-[2rem] leading-tight"
+                    className="mt-5 font-serif text-[1.75rem] md:text-[2rem] leading-tight"
                     style={{ color: deep }}
                   >
-                    Related guidance
+                    Helpful reads for this part of family life
                   </h2>
-                  <p
-                    className="font-sans text-[14.5px] font-light leading-relaxed max-w-2xl"
-                    style={{ color: deepSoft }}
-                  >
-                    Helpful reads connected to this part of family life.
-                  </p>
-                </div>
 
-                {articles.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-                    {articles.map((a) => (
-                      <FamilyArticleCard key={a.slug} article={a} />
+                  <div className="mt-10 space-y-12">
+                    {articleGroups.map((group) => (
+                      <div key={group.label}>
+                        <div className="mb-5 flex flex-col gap-1.5">
+                          <p
+                            className="font-sans text-[11px] font-light tracking-[0.28em] uppercase"
+                            style={{ color: accent }}
+                          >
+                            {group.label}
+                          </p>
+                          {group.description && (
+                            <p
+                              className="font-sans text-[13.5px] font-light leading-[1.65] max-w-2xl"
+                              style={{ color: deepSoft }}
+                            >
+                              {group.description}
+                            </p>
+                          )}
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+                          {group.articles.map((a) => (
+                            <FamilyArticleCard key={a.slug} article={a} />
+                          ))}
+                        </div>
+                      </div>
                     ))}
                   </div>
-                ) : (
-                  <p
-                    className="font-serif italic text-[15px] leading-[1.7] max-w-xl"
-                    style={{ color: deepSoft }}
-                  >
-                    Guidance articles for this topic are being prepared.
-                  </p>
-                )}
+                </div>
               </div>
-            </section>
-          );
-        })()}
+            </div>
+          </section>
+        )}
+
 
         {/* ─── COMMON QUESTIONS ─────────────────────────────────────── */}
         <section
@@ -518,6 +516,49 @@ const FamilyTopicPage = ({ config }: Props) => {
             </Accordion>
           </div>
         </section>
+
+        {/* ─── AI SUPPORT ───────────────────────────────────────────── */}
+        <section
+          id="family-topic-ai"
+          className="relative py-20 md:py-24 scroll-mt-24"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(var(--stage-family) / 0.6) 0%, hsl(var(--stage-family) / 0.28) 55%, hsl(var(--parchment)) 100%)",
+          }}
+        >
+          <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
+            <div className="mb-7 md:mb-8 flex flex-col items-center text-center gap-3">
+              <SectionLabel>Ask anything</SectionLabel>
+            </div>
+
+            <div
+              className="rounded-[28px] border bg-parchment/85 backdrop-blur-sm overflow-hidden"
+              style={{
+                borderColor: accentBorderStrong,
+                boxShadow:
+                  "0 36px 80px -46px rgba(70,50,20,0.38), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+              }}
+            >
+              <HubAISupport
+                heading={config.aiHeading}
+                description={config.aiDescription}
+                placeholder={config.aiPlaceholder}
+                suggestions={config.aiPrompts}
+                context={config.title}
+                stageBg="--stage-family"
+                stageAccent="--stage-family-accent"
+                stage="family"
+              />
+            </div>
+            <p
+              className="mt-7 text-center font-sans text-[12.5px] font-light tracking-wide max-w-lg mx-auto leading-relaxed"
+              style={{ color: deepMuted }}
+            >
+              A quiet companion for the questions family life quietly raises.
+            </p>
+          </div>
+        </section>
+
 
         {/* ─── MORE FAMILY TOPICS ───────────────────────────────────── */}
         {related.length > 0 && (

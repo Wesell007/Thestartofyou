@@ -27,6 +27,12 @@ export interface FamilyAreaInside {
   body: string;
 }
 
+export interface FamilyArticleGroup {
+  label: string;
+  description?: string;
+  slugs: string[];
+}
+
 export interface FamilyTopicConfig {
   slug: FamilyTopicSlug;
   eyebrow: string;
@@ -42,6 +48,10 @@ export interface FamilyTopicConfig {
     bullets: string[];
   };
   areasInside: FamilyAreaInside[];
+  /** Ordered ready-article slugs surfaced as the Start Here row (max 3). */
+  startHere?: string[];
+  /** Optional display-only groups for the grouped guidance container. */
+  articleGroups?: FamilyArticleGroup[];
   commonQuestions: FamilyQA[];
   aiHeading: string;
   aiDescription: string;
@@ -113,6 +123,10 @@ const growingFamilies: FamilyTopicConfig = {
     "How do I manage sibling jealousy?",
   ],
   related: ["relationships", "family-basics", "play-connection"],
+  startHere: [
+    "preparing-for-another-baby",
+    "helping-your-child-adjust-to-a-new-sibling",
+  ],
 };
 
 const relationships: FamilyTopicConfig = {
@@ -178,6 +192,10 @@ const relationships: FamilyTopicConfig = {
     "How do I make parent friends?",
   ],
   related: ["growing-families", "family-basics", "play-connection"],
+  startHere: [
+    "sharing-the-mental-load",
+    "setting-boundaries-with-grandparents",
+  ],
 };
 
 const familyBasics: FamilyTopicConfig = {
@@ -243,6 +261,10 @@ const familyBasics: FamilyTopicConfig = {
     "How do I balance work and family life?",
   ],
   related: ["relationships", "growing-families", "travel-days-out"],
+  startHere: [
+    "building-family-routines",
+    "managing-childcare-costs",
+  ],
 };
 
 const healthSafety: FamilyTopicConfig = {
@@ -308,6 +330,10 @@ const healthSafety: FamilyTopicConfig = {
     "How do I support my child's mental health?",
   ],
   related: ["family-basics", "growing-families", "play-connection"],
+  startHere: [
+    "making-your-home-safer",
+    "when-to-ask-for-help",
+  ],
 };
 
 const travelDaysOut: FamilyTopicConfig = {
@@ -373,6 +399,10 @@ const travelDaysOut: FamilyTopicConfig = {
     "How do I make car journeys calmer?",
   ],
   related: ["family-basics", "play-connection", "growing-families"],
+  startHere: [
+    "travelling-with-young-children",
+    "making-car-journeys-calmer",
+  ],
 };
 
 const playConnection: FamilyTopicConfig = {
@@ -438,6 +468,10 @@ const playConnection: FamilyTopicConfig = {
     "What are simple play ideas for connection?",
   ],
   related: ["relationships", "growing-families", "travel-days-out"],
+  startHere: [
+    "building-family-traditions",
+    "screen-time-as-a-family",
+  ],
 };
 
 export const familyTopics: Record<FamilyTopicSlug, FamilyTopicConfig> = {

@@ -1,88 +1,58 @@
-## Phase 3 — Sources infrastructure + Pregnancy medical batch 1
+## Phase 3.2 — Pregnancy medical sources batch 2
 
-Add a structured `ArticleSource` shape for references, teach `ArticleSources.tsx` to render both legacy strings and the new structured shape, then add 3+ UK-credible **verified** sources (and the medically reviewed line where missing) to the 10 Pregnancy medical articles in batch 1. No topic data, no route changes, no body rewrites.
+Add ≥3 verified, structured `ArticleSource` entries to the next 10 Pregnancy medical/safety articles, using only the existing `ArticleSource` type and `ArticleSources.tsx` renderer shipped in Phase 3.1. No component changes, no body rewrites, no topic data touched.
 
-### Current state (findings)
-- `src/data/articleData.ts` already types `sources?: string[]` (line 132) and `reviewedBy?: string` (line 134). Many articles already use `reviewedBy: "Jenny Joines"`.
-- `src/components/article/ArticleSources.tsx` renders sources as a numbered list under a subdued "Sources and references" section. Layout correct, but sources are plain strings with no links.
-- All 10 batch 1 slugs exist in `articleData.ts`.
-- Templates (`ArticlePage.tsx` / `ArticleDeepTemplate.tsx`) already wire in `ArticleSources`. No template changes needed.
+### Only file edited
+- `src/data/articleData.ts`
 
-### Type change (minimal, backwards compatible)
-Add a structured type and widen the `sources` field so no existing string entries break:
+### Field-order rule (per user)
+For each article object:
+- Replace the existing `sources: [...]` block **in place**, keeping the same position among sibling fields.
+- If `reviewedBy` is missing, insert it in a natural place (immediately after `lastUpdated` if present, otherwise directly above `sources`). Do not reorder any other field.
+- Do not touch any other field on the article object.
 
-```ts
-export interface ArticleSource {
-  label: string;       // guidance / page title
-  publisher: string;   // NHS, NICE, RCOG, Tommy's, UKHSA, bumps, Group B Strep Support
-  url: string;         // verified official source URL
-  year?: string;       // publication or last-review year, if shown on the page
-}
+### Approach per article
+For each of the 10 slugs:
+1. Locate the article's current `sources` array (each already exists as a string array).
+2. Replace it in place with a structured `ArticleSource[]` of ≥3 verified entries from the approved publisher list.
+3. Ensure `reviewedBy: "Jenny Joines"` is present; add only if missing, positioned per the field-order rule above.
 
-// on ArticleData
-sources?: Array<string | ArticleSource>;
-```
+Nothing else in the article object changes.
 
-Legacy string entries stay valid; new batch 1 entries use `ArticleSource`. No sweep of other existing source arrays.
+### URL verification protocol
+Before writing any URL:
+- Query via `websearch--web_search` restricted with `site:` to the official publisher domain (`nhs.uk`, `nice.org.uk`, `cks.nice.org.uk`, `bnf.nice.org.uk`, `rcog.org.uk`, `tommys.org`, `gov.uk`, `medicinesinpregnancy.org`, `gbss.org.uk`, plus `rcpsych.ac.uk` / `arc-uk.org` / `pandasfoundation.org.uk` only where the article's guidance explicitly allows).
+- Accept only URLs that resolve on the intended official domain and cover the intended topic. Capture `year` from a visible "Last reviewed" / "Published" date where present.
+- Never invent slugs. Never guess RCOG Green-top numbers.
+- If a slot cannot be verified, substitute another verified entry from the allowed list. If ≥3 verified UK-credible sources cannot be assembled for a given article, write only what is verified and flag the article in the return summary — do not fabricate.
 
-### Component change — `src/components/article/ArticleSources.tsx`
-Same visual container and "Sources and references" heading. Only the `<li>` renderer changes:
+### Articles in batch 2 and target publisher mix
 
-- String entry: render as today.
-- `ArticleSource` entry:
-  - `label` becomes `<a href={url} target="_blank" rel="noopener noreferrer nofollow" className="underline decoration-border/40 underline-offset-4 hover:text-foreground/80">`
-  - append `— {publisher}` and, if `year`, ` (${year})` as muted trailing text
-  - keep `[n]` numeric prefix and existing typography tokens
+- `antibiotics-in-pregnancy` — NHS, bumps, BNF/NICE
+- `antacids-in-pregnancy` — NHS, bumps, BNF/NICE
+- `laxatives-in-pregnancy` — NHS, bumps, BNF/NICE
+- `hay-fever-in-pregnancy` — NHS, bumps, BNF/NICE
+- `cold-and-flu-in-pregnancy` — NHS, bumps, UKHSA / NHS flu-vaccine guidance
+- `vaccinations-in-pregnancy` — NHS, UKHSA (gov.uk Green Book / vaccination schedule), RCOG or Tommy's
+- `anxiety-in-pregnancy` — NHS, Tommy's, RCPsych (or another verified UK perinatal mental health source)
+- `tests-and-scans-in-pregnancy` — NHS, Tommy's, RCOG or NICE
+- `what-if-a-scan-shows-something-unexpected` — NHS, Tommy's, RCOG, ARC (only if verified)
+- `nipt-in-pregnancy` — NHS, RCOG, UK NSC / gov.uk or Tommy's
 
-No layout redesign. No new colour tokens. No new sections.
+Final URL list produced during implementation, after verification.
 
-### URL verification protocol (new — per user instruction)
-Before writing any structured source into the data file:
-
-1. Fetch each candidate URL via `websearch--web_search` / `code--fetch_website` against the official publisher domain only:
-   - `nhs.uk`, `nice.org.uk` (incl. `cks.nice.org.uk`, `bnf.nice.org.uk`), `rcog.org.uk`, `tommys.org`, `gov.uk` (UKHSA), `medicinesinpregnancy.org` (bumps), `gbss.org.uk`.
-2. Accept only URLs that resolve to a real page on that domain and match the intended topic. Capture the page's shown `Last reviewed` / publication year where visible.
-3. If a candidate does not verify: swap for another verified page from the allowed publisher list. If no acceptable replacement is found for a slot, drop it and flag the article in the return summary as needing manual source review.
-4. Never approximate slugs, never guess query strings, never invent RCOG Green-top numbers. If a Green-top URL cannot be confirmed on `rcog.org.uk`, substitute an NHS / NICE CKS equivalent or flag.
-5. Each of the 10 articles must end with **≥ 3 verified sources**, or be flagged (still write whatever verified sources were found — do not fabricate to reach 3).
-
-### Data updates — 10 articles in `src/data/articleData.ts`
-For each slug below, add a `sources: ArticleSource[]` populated only from verified URLs per the protocol above, and add `reviewedBy: "Jenny Joines"` if missing (do not overwrite existing values). Article body copy is not touched.
-
-Publishers to draw from per slug (final URL list produced during implementation, only after verification):
-
-- **bleeding-in-early-pregnancy** — NHS, Tommy's, RCOG or NICE CKS
-- **spotting-in-pregnancy** — NHS, Tommy's, NICE CKS
-- **reduced-movements-in-pregnancy** — NHS, RCOG, Tommy's
-- **pelvic-pain-in-pregnancy** — NHS, RCOG, Tommy's
-- **when-to-worry-about-cramps-in-pregnancy** — NHS, Tommy's, NICE CKS
-- **leaking-fluid-in-pregnancy** — NHS, RCOG, Tommy's
-- **uti-in-pregnancy** — NHS, NICE CKS, RCOG or Tommy's
-- **group-b-strep-in-pregnancy** — NHS, RCOG, Group B Strep Support
-- **medicines-in-pregnancy** — NHS, bumps (medicinesinpregnancy.org), NICE BNF
-- **paracetamol-in-pregnancy** — NHS, bumps, NICE CKS
-
-### Medical review line
-`reviewedBy: "Jenny Joines"` is already supported and rendered by the existing component's trust note. Added only where missing on batch 1 slugs. No metadata-model refactor.
-
-### Files touched
-- `src/data/articleData.ts` — add `ArticleSource` interface, widen `sources`, add verified sources + `reviewedBy` on the 10 slugs.
-- `src/components/article/ArticleSources.tsx` — render structured entries as safe external links; keep string fallback.
-
-### Explicitly not touched
-Topic data (pregnancy/ttc/ivf/family/firstyear/toddler), routes, templates, calculators, product, About, AI, saved journey, design tokens, `.lovable/plan.md` structure beyond this phase, redirects, noindex, canonical decisions, article body copy.
+### Explicit no-touch list
+`ArticleSources.tsx` (unless a bug is found), all topic data files, all other article data files, `.lovable/plan.md`, routes, templates, calculators, SEO, product page, About page, AI logic, saved journey, design tokens. No new articles, no redirects, no noindex, no body rewrites, no changes to unrelated string `sources` arrays elsewhere in `articleData.ts`, no field reordering beyond the single insert-if-missing case for `reviewedBy`.
 
 ### Verification
 - `tsgo`.
-- Playwright: load `/articles/bleeding-in-early-pregnancy`, `/articles/reduced-movements-in-pregnancy`, `/articles/group-b-strep-in-pregnancy`, `/articles/paracetamol-in-pregnancy`, screenshot the Sources block, confirm ≥3 entries, external `target="_blank"` + `rel="noopener noreferrer nofollow"`, medically reviewed line present, no visual regression above.
+- Playwright: load `/articles/antibiotics-in-pregnancy`, `/articles/vaccinations-in-pregnancy`, `/articles/anxiety-in-pregnancy`, `/articles/nipt-in-pregnancy`. Screenshot the Sources block, confirm heading present, ≥3 structured entries rendering as external anchors with `target="_blank"` + `rel="noopener noreferrer nofollow"`, and medically reviewed line visible.
 
 ### Return summary (after implementation)
-- Files edited.
-- Confirm type standardised (added `ArticleSource`, widened `sources`) — no existing string entries touched.
-- Component changes summary.
-- Per-article: source count, publishers used, verified URLs list.
-- Any URLs that failed verification and what was substituted or flagged.
-- `reviewedBy` status per article (added / already existed).
+- File edited.
+- Per article: source count, publishers used, full verified URL list.
+- Any candidate URLs that failed verification and their substitutes.
+- `reviewedBy` status per article (already present or inserted, and where inserted).
 - `tsgo` result.
-- Articles flagged for manual source review.
+- Any article flagged for manual source review.
 - Suggested next prompt.

@@ -80,6 +80,15 @@ const SecondTrimester = () => {
         {/* 12. Where to go deeper */}
         <SecondTriDeeper />
 
+        {/* 12b. Complete guide link */}
+        <TrimesterCompleteGuideCard
+          title="Second trimester: a complete guide"
+          description="A fuller guide to body changes, movement, scans, emotions and the middle weeks of pregnancy."
+          ctaLabel="Read the complete second trimester guide"
+          href="/articles/second-trimester-complete-guide"
+        />
+
+
         {/* 13. Common questions FAQ */}
         <SecondTriFAQ />
 

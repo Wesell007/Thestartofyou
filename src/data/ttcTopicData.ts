@@ -159,16 +159,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "Ovulation signs",
-        href: LIVE.ovulationSigns,
-        why: "How to read the signs your body gives — without spiralling.",
-      },
-      {
-        title: "The fertile window",
-        href: LIVE.fertileWindow,
-        why: "When conception is most likely, and how to time things calmly.",
-      },
-      {
         title: "Calculate your fertile window",
         href: LIVE.calculator,
         why: "A simple tool that uses your cycle dates to estimate your most fertile days.",
@@ -179,18 +169,14 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Understanding ovulation",
         description: "What it is, when it happens, and why it matters.",
         links: [
-          { label: "Ovulation signs", href: LIVE.ovulationSigns },
-          { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
         ],
       },
       {
         label: "Tracking and timing",
         description: "Practical ways to find your fertile days.",
         links: [
-          { label: "The fertile window", href: LIVE.fertileWindow },
           { label: "Ovulation calculator", href: LIVE.calculator },
           { label: "Cycle tracking", href: LIVE.cycleTracking },
-          { label: "Can you get pregnant on your period?", href: LIVE.pregnantOnPeriod },
         ],
       },
     ],
@@ -221,11 +207,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "Trying to conceive, explained",
-        href: LIVE.ttcExplained,
-        why: "A grounded overview of what to focus on before and as you start trying.",
-      },
-      {
         title: "Calculate your fertile window",
         href: LIVE.calculator,
         why: "Useful even before you start trying, to understand your cycle's shape.",
@@ -241,7 +222,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Where to begin",
         description: "Foundational reading for the months before trying.",
         links: [
-          { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
           { label: "Cycle tracking", href: LIVE.cycleTracking },
         ],
       },
@@ -275,26 +255,15 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "Trying to conceive, explained",
-        href: LIVE.ttcExplained,
-        why: "The wider orientation — what fertility actually means month to month.",
-      },
-      {
         title: "How long to try before getting help",
         href: LIVE.howLongToTry,
         why: "Honest UK guidance on when fertility help becomes a sensible next step.",
-      },
-      {
-        title: "The two-week wait",
-        href: LIVE.twoWeekWaitArticle,
-        why: "A grounded guide to the in-between time, where most TTC anxiety lives.",
       },
     ],
     groups: [
       {
         label: "Understanding fertility",
         links: [
-          { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
           { label: "How long to try before getting help", href: LIVE.howLongToTry },
           { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
         ],
@@ -321,8 +290,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "After a difficult cycle",
         description: "Early loss, trying again, and the emotional weight of TTC.",
         links: [
-          { label: "Chemical pregnancy", href: LIVE.chemicalPregnancy },
-          { label: "Trying again after miscarriage", href: LIVE.tryingAgain },
           { label: "Pregnancy after loss", href: LIVE.pregnancyAfterLoss },
         ],
       },
@@ -330,7 +297,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Conditions and extra support",
         links: [
           { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
-          { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
           { label: "Age & fertility", href: LIVE.age },
           { label: "Male fertility", href: LIVE.male },
           { label: "Moving into IVF (treatment pathway)", href: LIVE.ivfPage },
@@ -417,11 +383,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "Trying to conceive, explained",
-        href: LIVE.ttcExplained,
-        why: "The shared picture — how conception works and where male fertility sits.",
-      },
-      {
         title: "Ask a question",
         href: LIVE.ask,
         why: "Get a calm, evidence-aware answer to anything specific.",
@@ -436,7 +397,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       {
         label: "Where to begin",
         links: [
-          { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
           { label: "Fertility tests for men", href: LIVE.fertilityTestsMen },
           { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
           { label: "Conditions that can affect TTC", href: LIVE.conditions },
@@ -473,11 +433,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "Trying to conceive, explained",
-        href: LIVE.ttcExplained,
-        why: "The wider picture, including how age fits into conception.",
-      },
-      {
         title: "What is IVF?",
         href: LIVE.ivfPage,
         why: "Helpful background if you're thinking about timing and possible options.",
@@ -492,7 +447,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       {
         label: "Reading to start with",
         links: [
-          { label: "Trying to conceive, explained", href: LIVE.ttcExplained },
           { label: "How long to try before getting help", href: LIVE.howLongToTry },
           { label: "AMH test explained", href: LIVE.amhTest },
           { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
@@ -531,34 +485,21 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "Ovulation signs",
-        href: LIVE.ovulationSigns,
-        why: "How to read your body's most useful ovulation cues without spiralling.",
-      },
-      {
         title: "Calculate your fertile window",
         href: LIVE.calculator,
         why: "Use your cycle dates to estimate your most fertile days.",
-      },
-      {
-        title: "Trying to conceive, explained",
-        href: LIVE.ttcExplained,
-        why: "How cycles, ovulation, and timing fit together.",
       },
     ],
     groups: [
       {
         label: "Practical basics",
         links: [
-          { label: "Ovulation signs", href: LIVE.ovulationSigns },
-          { label: "The fertile window", href: LIVE.fertileWindow },
           { label: "Ovulation calculator", href: LIVE.calculator },
         ],
       },
       {
         label: "Going a little deeper",
         links: [
-          { label: "Can you get pregnant on your period?", href: LIVE.pregnantOnPeriod },
           { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
           { label: "Signs of ovulation (quick reference)", href: LIVE.signsOfOvulation },
         ],
@@ -591,16 +532,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "When to take a pregnancy test",
-        href: LIVE.whenToTest,
-        why: "How to time it for the most reliable result.",
-      },
-      {
-        title: "Faint positive pregnancy test",
-        href: LIVE.faintPositive,
-        why: "What a faint line really means and how to think about retesting.",
-      },
-      {
         title: "Implantation bleeding",
         href: LIVE.implantationBleeding,
         why: "What it is, what it isn't, and why it gets confused with a period.",
@@ -610,24 +541,18 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       {
         label: "Timing your test",
         links: [
-          { label: "When to take a pregnancy test", href: LIVE.whenToTest },
-          { label: "How long implantation takes", href: LIVE.implantationTiming },
         ],
       },
       {
         label: "Reading what you see",
         description: "Interpreting unclear results and ambiguous symptoms.",
         links: [
-          { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
           { label: "Implantation bleeding", href: LIVE.implantationBleeding },
         ],
       },
       {
         label: "When the result feels heavy",
         links: [
-          { label: "Chemical pregnancy", href: LIVE.chemicalPregnancy },
-          { label: "Trying again after miscarriage", href: LIVE.tryingAgain },
-          { label: "When pregnancy symptoms stop", href: LIVE.symptomsStopping },
           { label: "Pregnancy after loss", href: LIVE.pregnancyAfterLoss },
         ],
       },
@@ -659,11 +584,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "The two-week wait",
-        href: LIVE.twoWeekWaitArticle,
-        why: "The cornerstone read for understanding what this stretch really is.",
-      },
-      {
         title: "Implantation bleeding",
         href: LIVE.implantationBleeding,
         why: "Often the biggest source of two-week-wait confusion.",
@@ -679,8 +599,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Worries during the wait",
         description: "The emotional and physical questions that surface in these days.",
         links: [
-          { label: "How long implantation takes", href: LIVE.implantationTiming },
-          { label: "When pregnancy symptoms stop", href: LIVE.symptomsStopping },
           { label: "Early pregnancy symptoms explained", href: LIVE.earlySymptoms },
         ],
       },
@@ -694,8 +612,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       {
         label: "After a difficult cycle",
         links: [
-          { label: "Chemical pregnancy", href: LIVE.chemicalPregnancy },
-          { label: "Trying again after miscarriage", href: LIVE.tryingAgain },
           { label: "Pregnancy after loss", href: LIVE.pregnancyAfterLoss },
           { label: "The emotional impact of IVF", href: LIVE.emotionalIVF },
         ],
@@ -733,11 +649,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         why: "What PCOS means for ovulation and conception, and where to start.",
       },
       {
-        title: "Endometriosis and trying to conceive",
-        href: LIVE.endoTTC,
-        why: "How endometriosis can shape fertility, and what tends to help.",
-      },
-      {
         title: "How long to try before getting help",
         href: LIVE.howLongToTry,
         why: "Honest UK guidance on when to bring fertility into a GP conversation.",
@@ -748,7 +659,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Specific conditions",
         links: [
           { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
-          { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
           { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
         ],
       },

@@ -43,6 +43,8 @@ interface Props {
   topicLabel: string;
   topicHref: string;
   topicEyebrow?: string;
+  heroImage?: { src: string; alt: string };
+  bodyImages?: { afterSectionIndex: number; src: string; alt: string; caption?: string }[];
   /** Rendered inside "Related guidance" section, if any. */
   relatedSlot?: ReactNode;
 }
@@ -58,6 +60,8 @@ const HubArticleView = ({
   topicLabel,
   topicHref,
   topicEyebrow,
+  heroImage,
+  bodyImages,
   relatedSlot,
 }: Props) => {
   const accent = `hsl(var(${tokens.accent}))`;

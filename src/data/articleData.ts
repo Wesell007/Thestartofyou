@@ -8190,10 +8190,9 @@ const articleDatabase: ArticleData[] = [
       "It's identified at the 20-week scan and rarely needs follow-up",
     ],
     sources: [
-      "NHS — Your antenatal scans",
-      "Royal College of Obstetricians and Gynaecologists — Placenta praevia and accreta",
-      "Tommy's — Anterior placenta",
-      "NICE — Antenatal care",
+      { label: "20-week screening scan", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/20-week-scan/" },
+      { label: "Anterior placenta", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-symptom-checker/anterior-placenta" },
+      { label: "Placenta praevia, placenta accreta and vasa praevia", publisher: "Royal College of Obstetricians and Gynaecologists", url: "https://www.rcog.org.uk/for-the-public/browse-all-patient-information-leaflets/placenta-praevia-placenta-accreta-and-vasa-praevia/" },
     ],
     faq: [
       { question: "Is anterior placenta a problem?", answer: "No. It's a normal position. It doesn't affect the baby or the pregnancy itself — it can just make movements feel softer in the early weeks of feeling them." },
@@ -8317,10 +8316,9 @@ const articleDatabase: ArticleData[] = [
       "Avoid intercourse until you're told the placenta is no longer low",
     ],
     sources: [
-      "Royal College of Obstetricians and Gynaecologists — Placenta praevia and placenta accreta",
-      "NHS — What is placenta praevia?",
-      "NICE — Antenatal care",
-      "Tommy's — Low-lying placenta",
+      { label: "Low-lying placenta (placenta praevia)", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/related-conditions/complications/low-lying-placenta-placenta-praevia/" },
+      { label: "Placenta praevia, placenta accreta and vasa praevia", publisher: "Royal College of Obstetricians and Gynaecologists", url: "https://www.rcog.org.uk/for-the-public/browse-all-patient-information-leaflets/placenta-praevia-placenta-accreta-and-vasa-praevia/" },
+      { label: "Low-lying placenta (placenta praevia)", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-complications/low-lying-placenta-placenta-praevia" },
     ],
     faq: [
       { question: "Will my low-lying placenta move up?", answer: "Most do. As the uterus grows in the second and third trimesters, the placenta is carried upward with the uterine wall. A follow-up scan around 32-36 weeks confirms whether it has." },
@@ -8453,10 +8451,9 @@ const articleDatabase: ArticleData[] = [
       "Breech is a position, not a problem with your baby",
     ],
     sources: [
-      "Royal College of Obstetricians and Gynaecologists — Breech baby at the end of pregnancy",
-      "RCOG — External cephalic version (ECV)",
-      "NICE — Intrapartum care",
-      "NHS — What if my baby is breech?",
+      { label: "If your baby is breech", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/what-happens/if-your-baby-is-breech/" },
+      { label: "Breech baby at the end of pregnancy", publisher: "Royal College of Obstetricians and Gynaecologists", url: "https://www.rcog.org.uk/for-the-public/browse-all-patient-information-leaflets/breech-baby-at-the-end-of-pregnancy-patient-information-leaflet/" },
+      { label: "What if my baby is breech?", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/labour-birth/labour-and-birth-faqs/what-if-my-baby-breech" },
     ],
     faq: [
       { question: "When does breech actually matter?", answer: "From around 36 weeks. Before that, babies move around a lot and most who are breech will turn." },
@@ -8980,10 +8977,9 @@ const articleDatabase: ArticleData[] = [
       "The trend across scans matters more than any single number",
     ],
     sources: [
-      "Royal College of Obstetricians and Gynaecologists — The investigation and management of the small-for-gestational-age fetus",
-      "NICE — Antenatal care",
-      "NHS — Ultrasound scans in pregnancy",
-      "Tommy's — Growth scans",
+      { label: "Ultrasound scans in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/ultrasound-scans/" },
+      { label: "The investigation and management of the small-for-gestational-age fetus (Green-top Guideline No. 31)", publisher: "Royal College of Obstetricians and Gynaecologists", url: "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/the-investigation-and-management-of-the-small-for-gestational-age-fetus-green-top-guideline-no-31/" },
+      { label: "Growth scans", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-complications/baby-growth-problems/growth-scans" },
     ],
     faq: [
       { question: "What does a growth scan check?", answer: "Baby's measurements (head, abdominal circumference, femur length), estimated fetal weight, fluid levels, placenta, baby's position, and sometimes blood flow through the cord (Dopplers)." },
@@ -9579,10 +9575,10 @@ const articleDatabase: ArticleData[] = [
       "Declining ECV is reasonable — your team will support you either way",
     ],
     sources: [
-      "Royal College of Obstetricians and Gynaecologists — External cephalic version and reducing the incidence of term breech presentation",
-      "NHS — If your baby is breech",
-      "NICE — Antenatal care",
-      "Tommy's — External cephalic version",
+      { label: "If your baby is breech", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/what-happens/if-your-baby-is-breech/" },
+      { label: "External cephalic version and reducing the incidence of term breech presentation (Green-top Guideline No. 20a)", publisher: "Royal College of Obstetricians and Gynaecologists", url: "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/external-cephalic-version-and-reducing-the-incidence-of-term-breech-presentation-green-top-guideline-no-20a/" },
+      { label: "Turning a breech baby in the womb (ECV)", publisher: "Royal College of Obstetricians and Gynaecologists", url: "https://www.rcog.org.uk/for-the-public/browse-all-patient-information-leaflets/turning-a-breech-baby-in-the-womb-external-cephalic-version/" },
+      { label: "What if my baby is breech?", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/labour-birth/labour-and-birth-faqs/what-if-my-baby-breech" },
     ],
     faq: [
       { question: "How often does ECV work?", answer: "Around half of ECV attempts are successful at turning the baby head-down, though success rates vary by individual factors. Most babies who are turned successfully stay head-down for the birth." },
@@ -13150,10 +13146,9 @@ const articleDatabase: ArticleData[] = [
       "All antenatal screening is optional",
     ],
     sources: [
-      "NHS — Screening for Down's, Edwards' and Patau's syndromes",
-      "UK National Screening Committee",
-      "Royal College of Obstetricians and Gynaecologists",
-      "ARC (Antenatal Results and Choices)",
+      { label: "Screening for Down's syndrome, Edwards' syndrome and Patau's syndrome", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/screening-for-downs-edwards-pataus-syndrome/" },
+      { label: "Screening tests for you and your baby", publisher: "GOV.UK", url: "https://www.gov.uk/government/publications/screening-tests-for-you-and-your-baby" },
+      { label: "Screening tests in pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/antenatal-appointments-care/screening-tests-pregnancy" },
     ],
     faq: [
       { question: "What does the combined test screen for?", answer: "Down's syndrome (T21), Edwards' syndrome (T18), and Patau's syndrome (T13). It does not screen for every condition, and it does not screen for physical anomalies — that's the role of the 20-week scan." },
@@ -13306,10 +13301,9 @@ const articleDatabase: ArticleData[] = [
       "Most dating scans are straightforward; follow-up exists if not",
     ],
     sources: [
-      "NHS — Your antenatal care",
-      "Royal College of Obstetricians and Gynaecologists",
-      "Society and College of Radiographers",
-      "NICE — Antenatal care",
+      { label: "Ultrasound scans in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/ultrasound-scans/" },
+      { label: "NHS Fetal Anomaly Screening Programme handbook", publisher: "GOV.UK", url: "https://www.gov.uk/government/publications/fetal-anomaly-screening-programme-handbook" },
+      { label: "Your dating scan", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/antenatal-appointments-care/your-dating-scan" },
     ],
     faq: [
       { question: "When does the dating scan happen?", answer: "Usually between 11 weeks and 14 weeks of pregnancy. The window matters because the nuchal translucency measurement (used in combined screening) is only meaningful in that range." },
@@ -13461,10 +13455,9 @@ const articleDatabase: ArticleData[] = [
       "If something unexpected is seen, the team will arrange next steps",
     ],
     sources: [
-      "NHS — 20-week screening scan",
-      "Public Health England — Fetal anomaly screening programme",
-      "Royal College of Obstetricians and Gynaecologists",
-      "ARC (Antenatal Results and Choices)",
+      { label: "20-week screening scan", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/your-pregnancy-care/20-week-scan/" },
+      { label: "NHS Fetal Anomaly Screening Programme handbook", publisher: "GOV.UK", url: "https://www.gov.uk/government/publications/fetal-anomaly-screening-programme-handbook" },
+      { label: "Your 20-week scan", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/antenatal-appointments-care/your-20-week-scan" },
     ],
     faq: [
       { question: "What does the 20-week scan check for?", answer: "A defined list of structural conditions across the brain, face, spine, heart, abdomen, kidneys, and limbs, plus the position of the placenta and amount of amniotic fluid. It does not check for every condition." },
@@ -13618,10 +13611,10 @@ const articleDatabase: ArticleData[] = [
       "Most pregnancies with gestational diabetes go well with the right support",
     ],
     sources: [
-      "NHS — Gestational diabetes",
-      "NICE — Diabetes in pregnancy",
-      "Diabetes UK",
-      "Royal College of Obstetricians and Gynaecologists",
+      { label: "Gestational diabetes", publisher: "NHS", url: "https://www.nhs.uk/conditions/gestational-diabetes/" },
+      { label: "Diabetes in pregnancy: management from preconception to the postnatal period (NG3)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ng3" },
+      { label: "Gestational diabetes", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/pregnancy-complications/gestational-diabetes" },
+      { label: "Gestational diabetes", publisher: "Diabetes UK", url: "https://www.diabetes.org.uk/about-diabetes/type-2-diabetes/gestational-diabetes" },
     ],
     faq: [
       { question: "Do I have to fast before the test?", answer: "Yes — usually from around 10pm the night before. Plain water is normally allowed. Confirm the exact rules with your team beforehand." },
@@ -13773,10 +13766,9 @@ const articleDatabase: ArticleData[] = [
       "Extra doses needed after bleeding, trauma, or certain procedures",
     ],
     sources: [
-      "NHS — Rhesus disease",
-      "NICE — Routine antenatal anti-D prophylaxis for RhD-negative women",
-      "British Society for Haematology",
-      "Royal College of Obstetricians and Gynaecologists",
+      { label: "Rhesus disease", publisher: "NHS", url: "https://www.nhs.uk/conditions/rhesus-disease/" },
+      { label: "Routine antenatal anti-D prophylaxis for women who are rhesus D negative (TA156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/ta156" },
+      { label: "Rhesus negative blood and pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/antenatal-appointments-care/rhesus-negative-blood-and-pregnancy" },
     ],
     faq: [
       { question: "Why is anti-D needed?", answer: "If you're RhD negative and your baby is RhD positive, even a small amount of baby's blood entering your circulation can make your body produce antibodies. Anti-D stops that happening, protecting future pregnancies." },

@@ -1,57 +1,62 @@
-## Phase 5.3 — Site-wide article presentation upgrade (via HubArticleView)
+## Phase 5.4 — Family Article Imagery Upgrade
 
-### Decision: Option A — upgrade the shared `HubArticleView`
+Presentation-only upgrade. No copy, data, routes, slugs, tokens, or Pregnancy Flagship changes.
 
-`HubArticleView` is the single renderer used by Family, First Year and Toddler article pages. All three pass the same shape (`title`, `intro`, `sections`, `keyTakeaways`, tokens). Upgrading it once lifts every hub in a stage-token-aware way, without touching Pregnancy Flagship (which uses `ArticleFlagshipTemplate` via `src/pages/ArticlePage.tsx` and `src/components/article/flagship/*`).
+### Approach
 
-No new data fields are required. Every new block renders only when the underlying data already exists, so First Year and Toddler articles (all currently drafts) degrade gracefully.
+**Option A** — slug-based image map, no data-file edits. Add optional image props to the shared `HubArticleView`, and let `FamilyArticlePage` pass in a resolved hero + body images from a small stage-local map.
 
 ### Files to edit
 
-1. `src/components/shared/HubArticleView.tsx` — the presentation upgrade.
-2. `src/components/family/article/FamilyArticlePage.tsx` — filter related to `status === "ready"`.
-3. `src/components/firstyear/article/FirstYearArticlePage.tsx` — same ready-only related filter, for consistency and to future-proof once First Year articles publish.
-4. `src/components/toddler/article/ToddlerArticlePage.tsx` — same ready-only related filter.
+1. `src/components/shared/HubArticleView.tsx`
+   - Add optional props:
+     - `heroImage?: { src: string; alt: string }`
+     - `bodyImages?: { afterSectionIndex: number; src: string; alt: string; caption?: string }[]`
+   - **Hero:** when `heroImage` is present, render a two-column editorial layout on `md+` (text left, image right, `rounded-2xl`, soft shadow + stage-tinted accent glow reusing `tokens.accent`). On mobile the image stacks below the metadata row. When absent, the current single-column hero renders unchanged — no regression for First Year / Toddler or unmapped drafts.
+   - **Body images:** rendered as full-width editorial "breathing points", not small thumbnails:
+     - Full container width (matches the `max-w-3xl` reading column, then breaks out slightly on `md+` to `max-w-4xl` for a calmer editorial pause).
+     - `aspect-[16/10]` on desktop, `aspect-[4/3]` on mobile, `object-cover`, `rounded-2xl`, soft shadow, subtle accent border.
+     - Generous vertical spacing: `my-16 md:my-20` so the image genuinely separates sections, matching the Pregnancy screenshots' rhythm.
+     - Optional italic serif caption below, muted, centered.
+     - Rendered after the matching section, before the next section's number/rule — preserving scroll anchors and `01/02/…` numbering.
 
-No data, routes, SEO, tokens, Pregnancy, TTC, IVF, First Year data, Toddler data, product, About, AI, or saved-journey files are touched.
+2. `src/components/family/article/familyArticleImages.ts` *(new, tiny)*
+   - Imports existing family assets: `family-hero-diverse-family`, `family-hero-everyday`, `family-hero-family-four`, `family-hero-parents`, plus topic images (`family-topic-growing-families`, `-relationships`, `-play-connection`, `-family-basics`).
+   - Exports `familyArticleImageMap` keyed by slug returning `{ hero, body: [...] }`.
+   - Initial mapping (existing assets — see gaps):
+     - `building-family-routines` — hero: `family-hero-everyday`; body after §2: `family-topic-family-basics`
+     - `building-family-traditions` — hero: `family-hero-family-four`; body after §2: `family-topic-play-connection`
+     - `sharing-the-mental-load` — hero: `family-hero-parents`; body after §2: `family-topic-relationships`
+     - `helping-your-child-adjust-to-a-new-sibling` — hero: `family-hero-diverse-family`; body after §2: `family-topic-growing-families`; if ≥6 sections, second body image after §4: `family-hero-family-four`
+   - Draft slugs return `undefined` → text-only fallback.
 
-### Presentation changes inside `HubArticleView`
+3. `src/components/family/article/FamilyArticlePage.tsx`
+   - Look up the map and pass `heroImage` / `bodyImages` to `HubArticleView`. Existing draft-filter on related cards stays.
 
-Using existing stage tokens (`tokens.base/soft/accent/deep`) only. Each block renders only if the corresponding data is present.
+### Not changed
 
-1. **Premium hero refinement** — keep breadcrumb, eyebrow, serif H1, italic standfirst, meta row. Tighten spacing, strengthen the top wash, add a soft bottom fade so the hero flows into the summary strip like the Pregnancy screenshots. Reviewed badge continues to render only when `medicallyReviewed && reviewedBy` (Family articles don't set these, so no false medical claims).
+- `src/data/familyArticleData.ts` — no new fields, no copy edits.
+- All routes and slugs.
+- `FirstYearArticlePage.tsx` and `ToddlerArticlePage.tsx` — they don't pass the new props, so rendering is identical (architecture ready for future imagery).
+- Pregnancy Flagship (`ArticleHeroImage.tsx`, `flagship/*`, `articleData.ts`), design tokens, AI, saved-journey, SEO, product, about.
 
-2. **"At a glance" + "In this article" two-card strip (new)** — rendered under the hero. Left card ("At a glance") shows `intro` (fallback to `description`). Right card ("In this article") is auto-generated from `sections[].heading` as a numbered anchor list to `#section-{i}`, and renders only when `sections.length >= 2`. Stacks on mobile, two columns on md+.
+### Known image gaps (flagged, not blocking)
 
-3. **Key takeaways upgrade** — replace the single bullet list with a premium 2-col grid of small cards (1-col on mobile), each with a subtle accent bullet/icon and calm border, matching "The essentials, at a glance" in the screenshot. Section eyebrow + serif H2 above.
+Existing assets are best-fit family lifestyle, not exact-topic. Ideal future assets to generate:
 
-4. **Body rhythm** — add `id={`section-${i}`}` to each `h2` so "In this article" anchors work. Increase vertical spacing, slightly larger H2 scale, calmer paragraph line-height, keep max-width readable. Small muted section number (01, 02, …) as an eyebrow above each H2. Purely presentational.
-
-5. **Reviewed callout** — existing "Medically reviewed by …" strip kept (opt-in only), lightly restyled to match the takeaways card treatment.
-
-6. **Related guidance** — no renderer change beyond spacing; filtering happens in the three hub pages so only `status === "ready"` articles are passed via `relatedSlot`. If none remain, `relatedSlot={null}` hides the whole section (existing behaviour).
-
-7. **Return CTA** — keep structure; refined typography, using existing `topicLabel` in the button ("Return to Family basics" / "Return to Play, fun and connection" etc.).
-
-### Non-goals / guardrails
-
-- No Family article content rewritten; no slugs, routes, SEO, or data fields changed.
-- No Pregnancy-only fields (FAQ, Sources, Normal-signals, quickAnswer, editorial sections) added to Family/First Year/Toddler data.
-- Pregnancy Flagship template untouched.
-- First Year and Toddler benefit from the upgrade automatically because they render through the same shared view; no data changes on their side.
-- No new design tokens.
+- `family-article-morning-routine.jpg` — kitchen/breakfast rhythm, warm light
+- `family-article-tradition.jpg` — baking or reading ritual
+- `family-article-mental-load.jpg` — calm shared planning at a table
+- `family-article-new-sibling.jpg` — parent with older child and baby, gentle
+- `family-article-sibling-together.jpg` — older sibling helping softly
 
 ### Verification
 
 - `tsgo` typecheck.
-- Load the four published Family URLs and confirm: premium hero, At-a-glance + In-this-article strip, upgraded takeaways grid, improved body rhythm with anchor-linked H2s, no draft "Coming soon" cards in related, calm return CTA.
-- Load `/family`, `/articles/first-trimester-complete-guide`, `/articles/complete-guide-morning-sickness` to confirm no regressions on Family hub or Pregnancy Flagship.
-- Load one First Year article route (e.g. `/first-year/sleep/<first draft slug from firstYearArticleData.ts>`) and one Toddler article route (e.g. `/toddler/sleep/<first draft slug from toddlerArticleData.ts>`) that render via HubArticleView. Confirm:
-  - Upgraded layout renders correctly with First Year and Toddler stage tokens (colour treatment, wash, borders, eyebrows).
-  - Spacing and hero rhythm hold up even when article data is minimal (draft articles with no `sections`, `intro`, or `keyTakeaways` show only the hero + coming-soon body without empty ghost cards).
-  - The existing "Draft preview" chip still shows for drafts; no draft related cards appear inside a draft article (ready-only related filter is applied on those pages too).
-- Mobile viewport check: no horizontal overflow on Family, First Year and Toddler article routes.
+- Load the four published Family routes and confirm: two-column hero on desktop / stacked on mobile; at least one full-width editorial body image with generous spacing; At a glance, In this article, key takeaways, section numbering intact; related section still hides drafts.
+- Load `/family`, one First Year and one Toddler `HubArticleView` route (text-only fallback unchanged), and `/articles/complete-guide-morning-sickness` (Pregnancy Flagship unaffected).
+- Mobile viewport: no horizontal overflow.
 
 ### Suggested next prompt
 
-Phase 5.4 — First Year and Toddler published-article visual QA against the new shared presentation, and identify the next Family publish batch.
+Phase 5.5 — Generate the five bespoke Family editorial images listed under "Image gaps" and swap them into `familyArticleImageMap`.

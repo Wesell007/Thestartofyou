@@ -43,6 +43,8 @@ interface Props {
   topicLabel: string;
   topicHref: string;
   topicEyebrow?: string;
+  heroImage?: { src: string; alt: string };
+  bodyImages?: { afterSectionIndex: number; src: string; alt: string; caption?: string }[];
   /** Rendered inside "Related guidance" section, if any. */
   relatedSlot?: ReactNode;
 }
@@ -58,6 +60,8 @@ const HubArticleView = ({
   topicLabel,
   topicHref,
   topicEyebrow,
+  heroImage,
+  bodyImages,
   relatedSlot,
 }: Props) => {
   const accent = `hsl(var(${tokens.accent}))`;
@@ -106,7 +110,9 @@ const HubArticleView = ({
             }}
             aria-hidden
           />
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl relative z-10">
+          <div className={`container mx-auto px-5 sm:px-6 md:px-10 relative z-10 ${heroImage ? "max-w-6xl" : "max-w-3xl"}`}>
+            <div className={heroImage ? "grid gap-10 md:gap-12 lg:gap-16 md:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] md:items-center" : ""}>
+              <div className={heroImage ? "max-w-[36rem]" : ""}>
             {/* Breadcrumb */}
             <nav
               aria-label="Breadcrumb"
@@ -225,8 +231,37 @@ const HubArticleView = ({
                 </>
               )}
             </div>
+              </div>
+              {heroImage && (
+                <div className="md:order-2">
+                  <div
+                    className="relative overflow-hidden rounded-2xl md:rounded-3xl border"
+                    style={{
+                      borderColor: accentBorder,
+                      boxShadow: `0 40px 80px -50px hsl(var(${tokens.accent}) / 0.35), 0 20px 50px -30px rgba(60,50,40,0.25), inset 0 1px 0 hsl(0 0% 100% / 0.6)`,
+                    }}
+                  >
+                    <img
+                      src={heroImage.src}
+                      alt={heroImage.alt}
+                      loading="eager"
+                      decoding="async"
+                      className="w-full h-auto aspect-[4/5] sm:aspect-[4/3] md:aspect-[5/6] lg:aspect-[4/5] object-cover"
+                    />
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0"
+                      style={{
+                        background: `linear-gradient(180deg, transparent 55%, hsl(var(${tokens.base}) / 0.18) 100%)`,
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </section>
+
 
         {/* ─── AT A GLANCE + IN THIS ARTICLE ─────────────────────── */}
         {(hasSummary || showInThisArticle) && (
@@ -379,40 +414,73 @@ const HubArticleView = ({
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
             {hasSections ? (
               <div className="space-y-14 md:space-y-16">
-                {sections.map((s, i) => (
-                  <article key={i} id={sectionAnchorId(i)} className="scroll-mt-24">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span
-                        className="font-sans text-[11px] font-light tracking-[0.28em]"
-                        style={{ color: accent }}
-                      >
-                        {two(i + 1)}
-                      </span>
-                      <span
-                        className="h-px flex-1 max-w-[64px]"
-                        style={{ background: accentMid }}
-                        aria-hidden
-                      />
-                    </div>
-                    <h2
-                      className="font-serif text-[1.6rem] md:text-[1.9rem] leading-[1.15] tracking-[-0.005em]"
-                      style={{ color: deep }}
-                    >
-                      {s.heading}
-                    </h2>
-                    <div className="mt-5 space-y-5">
-                      {s.body.map((p, j) => (
-                        <p
-                          key={j}
-                          className="font-sans text-[15.75px] font-light leading-[1.8]"
-                          style={{ color: deepSoft }}
+                {sections.map((s, i) => {
+                  const img = bodyImages?.find((b) => b.afterSectionIndex === i);
+                  return (
+                    <div key={i} className="space-y-14 md:space-y-16">
+                      <article id={sectionAnchorId(i)} className="scroll-mt-24">
+                        <div className="flex items-center gap-3 mb-3">
+                          <span
+                            className="font-sans text-[11px] font-light tracking-[0.28em]"
+                            style={{ color: accent }}
+                          >
+                            {two(i + 1)}
+                          </span>
+                          <span
+                            className="h-px flex-1 max-w-[64px]"
+                            style={{ background: accentMid }}
+                            aria-hidden
+                          />
+                        </div>
+                        <h2
+                          className="font-serif text-[1.6rem] md:text-[1.9rem] leading-[1.15] tracking-[-0.005em]"
+                          style={{ color: deep }}
                         >
-                          {p}
-                        </p>
-                      ))}
+                          {s.heading}
+                        </h2>
+                        <div className="mt-5 space-y-5">
+                          {s.body.map((p, j) => (
+                            <p
+                              key={j}
+                              className="font-sans text-[15.75px] font-light leading-[1.8]"
+                              style={{ color: deepSoft }}
+                            >
+                              {p}
+                            </p>
+                          ))}
+                        </div>
+                      </article>
+                      {img && (
+                        <figure className="md:-mx-16 lg:-mx-24 my-2">
+                          <div
+                            className="relative overflow-hidden rounded-2xl md:rounded-3xl border"
+                            style={{
+                              borderColor: accentBorder,
+                              boxShadow: `0 30px 70px -45px hsl(var(${tokens.accent}) / 0.3), 0 18px 40px -28px rgba(60,50,40,0.22), inset 0 1px 0 hsl(0 0% 100% / 0.6)`,
+                            }}
+                          >
+                            <img
+                              src={img.src}
+                              alt={img.alt}
+                              loading="lazy"
+                              decoding="async"
+                              className="w-full h-auto aspect-[4/3] md:aspect-[16/10] object-cover"
+                            />
+                          </div>
+                          {img.caption && (
+                            <figcaption
+                              className="mt-4 text-center font-serif italic text-[14px] md:text-[14.5px] leading-[1.6]"
+                              style={{ color: deepMuted }}
+                            >
+                              {img.caption}
+                            </figcaption>
+                          )}
+                        </figure>
+                      )}
                     </div>
-                  </article>
-                ))}
+                  );
+                })}
+
               </div>
             ) : (
               <p

@@ -28,7 +28,7 @@ const CTASection = () => {
             <ArrowRight size={15} />
           </Link>
           <Link
-            to="/explore"
+            to="/pregnancy"
             className="w-full sm:flex-1 flex items-center justify-center gap-2 border border-foreground/20 text-foreground rounded-pill py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all duration-300"
           >
             Explore the journey

@@ -19,7 +19,7 @@ const followUpPrompts = [
 const relatedLinks = [
   { label: "Pregnancy hub", href: "/pregnancy", icon: Heart, desc: "Week-by-week guidance" },
   { label: "Support hub", href: "/support", icon: BookOpen, desc: "Emotional & practical help" },
-  { label: "Explore guidance", href: "/explore", icon: Compass, desc: "Find what you need" },
+  { label: "Explore guidance", href: "/pregnancy", icon: Compass, desc: "Find what you need" },
 ];
 
 interface IVFLastStage {
@@ -176,7 +176,7 @@ const AskPage = () => {
 
           <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
             <nav className="flex items-center gap-2 font-sans text-[11px] font-light tracking-wide text-muted-foreground mb-10 uppercase">
-              <Link to="/explore" className="hover:text-foreground transition-colors">Explore</Link>
+              <Link to="/pregnancy" className="hover:text-foreground transition-colors">Explore</Link>
               <ChevronRight size={10} className="text-border" />
               <span className="text-foreground/70">Ask</span>
             </nav>
@@ -305,7 +305,7 @@ const AskPage = () => {
 
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 font-sans text-[11px] font-light tracking-wide text-muted-foreground mb-10 uppercase">
-            <Link to={isIVF ? "/ivf" : "/explore"} className="hover:text-foreground transition-colors">
+            <Link to={isIVF ? "/ivf" : "/pregnancy"} className="hover:text-foreground transition-colors">
               {isIVF ? "IVF" : "Explore"}
             </Link>
             <ChevronRight size={10} className="text-border" />

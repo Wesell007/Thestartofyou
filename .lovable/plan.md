@@ -1,59 +1,54 @@
-## Phase 8.4 — Toddler Batch 3 Publishing (Behaviour + Potty)
+# Phase 8.4b — Toddler Batch 3 Image Mappings (Behaviour + Potty)
 
-Publish four Toddler articles by replacing their draft objects in `src/data/toddlerArticleData.ts`. No other files touched.
+## Scope
+Add image mappings for the 4 ready Batch 3 articles. Only `src/components/toddler/article/toddlerArticleImages.ts` is edited; 8 new image assets are added under `src/assets/`. No article data, components, routes, topic pages, cards, SEO, or non-Toddler files touched. No mappings added for the remaining 4 drafts.
 
-### Scope
+## Asset strategy
+Existing Toddler article assets (Batch 1 + 2) are topic-specific to play/food/sleep/development and don't fit behaviour or potty themes. The two behaviour-topic and potty-topic hero JPGs already exist as topic assets, but using each on both articles of a topic would be visible duplication on adjacent related-guidance grids. Decision: generate 8 fresh bespoke images (4 hero + 4 body), one pair per article, matching The Start of You visual style (calm, warm natural light, premium, parent-centred, non-clinical, no text/logos, no distress or shame framing).
 
-Only edit: `src/data/toddlerArticleData.ts`.
+## New assets (8)
+Saved as `.jpg` under `src/assets/`:
 
-Do not touch: image mappings, components, routes, topic pages, cards, SEO, or any non-Toddler stage files.
+1. `toddler-article-tantrums-hero.jpg` — parent sitting calmly on the floor near a toddler after a hard moment, soft home light, gentle expressions, no distress close-up.
+2. `toddler-article-tantrums-body.jpg` — parent and toddler in a quiet reconnection moment, warm living room, low key emotion.
+3. `toddler-article-big-feelings-hero.jpg` — parent gently comforting a toddler with a hand on their back, calm home setting.
+4. `toddler-article-big-feelings-body.jpg` — toddler sitting close to a parent with a soft comfort object, warm neutral tones.
+5. `toddler-article-potty-readiness-hero.jpg` — simple child potty on a bathroom floor in warm daylight, tidy calm bathroom, no child undressed.
+6. `toddler-article-potty-readiness-body.jpg` — parent preparing a gentle potty learning corner (potty, small basket, book), no child exposed.
+7. `toddler-article-potty-pressure-free-hero.jpg` — child potty set up calmly at home with a folded towel and small book nearby, warm light.
+8. `toddler-article-potty-pressure-free-body.jpg` — relaxed home bathroom potty learning moment, parent hand offering support, fully clothed toddler, no accidents.
 
-### Articles to publish (status: draft → ready)
+All prompts explicitly exclude: text, logos, distressed close-ups, shame, punishment framing, undressed child, accidents, chaotic mess, staged stock look.
 
-1. **understanding-toddler-tantrums** (topic: behaviour-emotions)
-2. **helping-your-toddler-with-big-feelings** (topic: behaviour-emotions)
-3. **signs-your-child-may-be-ready-for-potty-training** (topic: potty-learning)
-4. **potty-training-without-pressure** (topic: potty-learning)
+## File edit — `src/components/toddler/article/toddlerArticleImages.ts`
+Add 8 new imports alongside existing ones (no removals, no reordering of current mappings). Extend `toddlerArticleImageMap` with 4 new entries following the existing pattern (hero + one body at `afterSectionIndex: 1`, plus the required `// bespoke future:` comment above each).
 
-Keep existing `slug`, `topic`, `title`, `description`. Adjust `readTime` only if the final length clearly requires it. `medicallyReviewed: false` unless the current draft is already flagged true.
+Alt text and captions use the suggestions in the brief verbatim:
 
-### Shared article standard
+- `understanding-toddler-tantrums`
+  - hero alt: "A parent sitting calmly near their toddler during a difficult moment"
+  - body alt: "A gentle parent and toddler moment after big feelings"
+  - caption: "Tantrums are often about feelings toddlers cannot yet manage, not proof that anyone has failed."
+- `helping-your-toddler-with-big-feelings`
+  - hero alt: "A parent gently comforting a toddler with big feelings"
+  - body alt: "A toddler sitting close to a parent in a calm supportive moment"
+  - caption: "Big feelings are part of toddlerhood. Support often starts with staying close, using simple words and repairing after hard moments."
+- `signs-your-child-may-be-ready-for-potty-training`
+  - hero alt: "A simple potty set up in a calm toddler bathroom"
+  - body alt: "A parent preparing a gentle potty learning space for a toddler"
+  - caption: "Potty readiness is not only about age. It is about noticing a mix of physical, communication and interest signs."
+- `potty-training-without-pressure`
+  - hero alt: "A toddler potty set up calmly at home for toilet learning"
+  - body alt: "A relaxed potty learning moment in a warm home bathroom"
+  - caption: "Potty training does not need to become a battle. Accidents and pauses can be part of learning."
 
-- 7 sections, 2 short paragraphs each
-- 5–6 key takeaways
-- 3 related slugs (only pointing to Batch 1, 2 or 3 ready slugs)
-- 2–4 credible UK-first sources with URLs (NHS, NHS Start for Life, NSPCC, BBC Tiny Happy People, Family Lives, ERIC where suitable)
-- British English, no em dashes, calm and parent-first
-- No diagnosis, no medication advice, no invented stats, no invented reviewer, no fear or shame-based wording, no punishment framing
-- Careful "ask health visitor / GP / local service" wording included in the final section of: `understanding-toddler-tantrums`, `helping-your-toddler-with-big-feelings`, `potty-training-without-pressure`
+## Verification
+- `bunx tsgo --noEmit` — must be clean.
+- Playwright at 1280×1800 and 375×812 on all 4 ready Batch 3 routes: 200, one hero, one body between section 2 and 3, no mobile overflow, no medical-review pill (none flagged), sources render, related grid links only to ready slugs.
+- Draft-gating: sample 2 remaining drafts still return NotFound.
+- Topic pages `/toddler/behaviour-emotions` and `/toddler/potty-learning` still show the 2 published + 2 "Coming soon" (non-clickable) cards.
+- Regression sweep (200 each): `/toddler`, `/toddler/behaviour-emotions`, `/toddler/potty-learning`, `/toddler/sleep`, `/toddler/development-milestones`, `/toddler/play-connection`, `/toddler/food-feeding`, `/first-year`, `/articles/complete-guide-morning-sickness`, `/pregnancy`, `/trying-to-conceive`, `/ivf`.
+- Final diff scope: only `toddlerArticleImages.ts` + the 8 new `src/assets/toddler-article-*.jpg` files.
 
-### Section outlines
-
-**understanding-toddler-tantrums**: what tantrums can be about, why toddlers struggle with big feelings, triggers (tired/hungry/transitions), staying close without giving in, what helps during a tantrum, what helps after, when behaviour worries you (careful wording).
-
-**helping-your-toddler-with-big-feelings**: big feelings are part of toddlerhood, naming feelings simply, staying close and steady, helping without fixing everything, routines/sleep/hunger, repair after hard moments, when to ask for support (careful wording).
-
-**signs-your-child-may-be-ready-for-potty-training**: readiness is not just age, staying dry for longer, awareness of wees and poos, interest in the toilet/potty, following simple instructions, emotional readiness and cooperation, starting gently.
-
-**potty-training-without-pressure**: why pressure makes it harder, creating a simple routine, keeping language calm, handling accidents without shame, pausing if not ready, nursery/childcare/days out, when to ask for advice (careful wording).
-
-### Related slug map
-
-- understanding-toddler-tantrums → helping-your-toddler-with-big-feelings, building-connection-through-everyday-play, when-milestones-feel-different
-- helping-your-toddler-with-big-feelings → understanding-toddler-tantrums, building-connection-through-everyday-play, toddler-sleep-rhythms
-- signs-your-child-may-be-ready-for-potty-training → potty-training-without-pressure, what-toddler-development-can-look-like, making-mealtimes-feel-calmer
-- potty-training-without-pressure → signs-your-child-may-be-ready-for-potty-training, helping-your-toddler-with-big-feelings, making-mealtimes-feel-calmer
-
-### Verification
-
-- `bunx tsgo --noEmit` clean
-- Counts: 16 total, 12 ready, 4 draft
-- Playwright 200 on all four new ready routes with correct H1; NotFound on two sampled remaining drafts
-- Topic pages: four new cards render as clickable ready cards; remaining drafts still show "Coming soon"
-- Related grids only reference ready slugs
-- Regression sweep: `/first-year`, `/family`, `/pregnancy`, `/trying-to-conceive`, `/ivf` still 200
-- Only `src/data/toddlerArticleData.ts` changed
-
-### Deliverable summary returned
-
-Files edited, four slugs published, total/ready/draft counts, per-article section and takeaway counts, per-article sources with URLs, per-article related slugs, careful-wording check on the three support-oriented articles, draft-gating result, route verification, topic card verification, tsgo result, and go/no-go for Phase 8.4b image mappings.
+## Go/no-go
+On green verification, safe to proceed to Phase 8.5 Toddler Batch 4 publishing.

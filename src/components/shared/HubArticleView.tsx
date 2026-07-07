@@ -7,6 +7,7 @@ import {
   ShieldCheck,
   Sparkles,
   BookOpen,
+  ExternalLink,
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -25,6 +26,12 @@ export interface HubArticleViewArticle {
   intro?: string;
   sections?: { heading: string; body: string[] }[];
   keyTakeaways?: string[];
+  sources?: {
+    label: string;
+    publisher: string;
+    url: string;
+    year?: string;
+  }[];
 }
 
 export interface HubArticleTokens {

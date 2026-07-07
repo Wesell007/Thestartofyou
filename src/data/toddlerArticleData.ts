@@ -183,8 +183,92 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "Simple play ideas for toddlers",
     description:
       "Low-effort, high-connection play ideas that suit real life and short attention spans.",
-    readTime: "4 min read",
-    status: "draft",
+    readTime: "5 min read",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Toddlers do not need a cupboard of clever toys or a perfectly planned day. Most of what they need is you, a few safe things to explore and small pockets of time. This piece pulls together simple play ideas that fit into real life, with short attention spans, tired parents and busy days in mind.",
+    sections: [
+      {
+        heading: "Why simple play matters",
+        body: [
+          "Play is how toddlers learn about their body, the people around them and how the world works. It does not have to look impressive to be doing that quiet, important work.",
+          "Short, repeated moments of simple play often support learning and connection more than long, elaborate activities that leave everyone worn out.",
+        ],
+      },
+      {
+        heading: "Everyday objects and safe exploring",
+        body: [
+          "A wooden spoon and a pan, empty boxes, pegs in a bowl or a set of plastic cups can hold a toddler's attention as well as most toys. Familiar objects invite curiosity without over-stimulating.",
+          "You can keep a small basket of safe household items your toddler is allowed to explore, so play can start without you having to fetch anything or set anything up.",
+        ],
+      },
+      {
+        heading: "Movement play at home and outside",
+        body: [
+          "Toddlers need to move often. Simple movement games such as walking on cushions, crawling under a blanket tunnel or dancing to one song give them a way to use their bodies indoors on tricky days.",
+          "Outside, small walks with time to stop and look at leaves, cracks in the pavement or a passing dog often do more for a toddler than trying to reach a particular destination on time.",
+        ],
+      },
+      {
+        heading: "Imagination and pretend play",
+        body: [
+          "Pretend play often starts quietly, with a toddler stirring a pretend cup of tea or putting a teddy to bed. You do not have to lead it. Sitting nearby and joining when invited is usually enough.",
+          "You can support it gently by copying what they do, offering a simple prop or asking a slow open question about what is happening in their story.",
+        ],
+      },
+      {
+        heading: "Music, rhythm and repeated games",
+        body: [
+          "Songs, rhymes and simple rhythm games support language and connection at the same time. Toddlers often love hearing the same song many times, which is part of how they learn.",
+          "Familiar hand games and repeated songs also give you something to reach for when a moment is hard, such as a nappy change, a shoe fight or a wait at the bus stop.",
+        ],
+      },
+      {
+        heading: "Play when you have very little time",
+        body: [
+          "Play does not need a big block of time. Two or three minutes of full attention, without a phone in your hand, can matter more to a toddler than half an hour of half-there presence.",
+          "You can slot small play moments into things you are already doing, such as counting stairs, naming colours in the kitchen or making a silly voice for a soft toy while you fold laundry.",
+        ],
+      },
+      {
+        heading: "Following your toddler's lead",
+        body: [
+          "Toddlers often show you what they want to play through what they pick up, look at or return to. Following that lead, even when it feels random or repetitive, helps them feel seen.",
+          "It is fine to gently steer play for safety or timing, but starting from what your toddler is already interested in usually goes further than trying to introduce a brand new activity.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Simple, short play often supports learning better than elaborate activities.",
+      "Everyday household objects can hold a toddler's attention.",
+      "Movement play helps toddlers regulate on tricky days.",
+      "Songs and repeated games support language and calm at the same time.",
+      "Small moments of full attention matter more than long, distracted stretches.",
+      "Following your toddler's lead helps them feel taken seriously.",
+    ],
+    relatedSlugs: [
+      "building-connection-through-everyday-play",
+      "making-mealtimes-feel-calmer",
+      "picky-eating-in-toddlers",
+    ],
+    sources: [
+      {
+        label: "Play ideas and learning through play",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/learning-to-play/",
+      },
+      {
+        label: "Activity ideas for toddlers",
+        publisher: "BBC Tiny Happy People",
+        url: "https://www.bbc.co.uk/tiny-happy-people/activities",
+      },
+      {
+        label: "The value of play",
+        publisher: "Play Scotland",
+        url: "https://www.playscotland.org/play/",
+      },
+    ],
   },
   {
     slug: "building-connection-through-everyday-play",

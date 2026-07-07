@@ -22,6 +22,13 @@ import bodyDevelopment from "@/assets/guidance-card-development.jpg";
 import heroMilestones from "@/assets/firstyear-stage-9-12.jpg";
 import bodyMilestones from "@/assets/guidance-card-milestones.jpg";
 
+import heroFeelingLikeYourself from "@/assets/article-hero-emotional-feeling-like-yourself.jpg";
+import heroSupportiveMoment from "@/assets/article-hero-emotional-supportive-moment.jpg";
+import bodyEmotionalSupport from "@/assets/guidance-card-emotional.jpg";
+// bodyEmotionalAdjustment reuses the already-imported `heroBodyChanges`
+// asset (`postpartum-stage-adjustment.jpg`), used here as the body image
+// for `feeling-like-yourself-again`.
+
 
 export interface HubBodyImage {
   afterSectionIndex: number;

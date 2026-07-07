@@ -486,11 +486,17 @@ const FamilyTopicPage = ({ config }: Props) => {
                   >
                     Helpful reads for this part of family life
                   </h2>
+                  <p
+                    className="mt-4 font-sans text-[14.5px] font-light leading-[1.65] max-w-2xl"
+                    style={{ color: deepSoft }}
+                  >
+                    Choose the guide that best matches what you need today.
+                  </p>
 
-                  <div className="mt-10 space-y-12">
+                  <div className="mt-10 space-y-10">
                     {articleGroups.map((group) => (
                       <div key={group.label}>
-                        <div className="mb-5 flex flex-col gap-1.5">
+                        <div className="mb-4 flex flex-col gap-1.5">
                           <p
                             className="font-sans text-[11px] font-light tracking-[0.28em] uppercase"
                             style={{ color: accent }}
@@ -506,9 +512,13 @@ const FamilyTopicPage = ({ config }: Props) => {
                             </p>
                           )}
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+                        <div
+                          className={`grid grid-cols-1 gap-3 ${
+                            group.articles.length >= 2 ? "md:grid-cols-2" : ""
+                          }`}
+                        >
                           {group.articles.map((a) => (
-                            <FamilyArticleCard key={a.slug} article={a} />
+                            <CompactArticleRow key={a.slug} article={a} />
                           ))}
                         </div>
                       </div>

@@ -210,4 +210,96 @@ export const familyArticleImageMap: Record<string, FamilyArticleImages> = {
       },
     ],
   },
+
+  // ─── Phase 5.9: Family Article Expansion Batch 4 ──────────────────────
+  // Bespoke future image: parent with baby and older child in a calm home moment.
+  "second-time-parenting": {
+    hero: {
+      src: heroDiverse.url,
+      alt: "A family of different generations together at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: topicGrowing.url,
+        alt: "A parent holding a baby while an older child plays nearby",
+        caption: "Second-time parenting often means holding two very different needs in the same day.",
+      },
+    ],
+  },
+  // Bespoke future image: two parents sharing a quiet everyday moment at home.
+  "staying-connected-as-parents": {
+    hero: {
+      src: heroParents.url,
+      alt: "Two parents sharing a calm moment at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: topicRelationships.url,
+        alt: "A quiet, unhurried moment between two adults at home",
+        caption: "Connection often lives in small moments, not big evenings out.",
+      },
+    ],
+  },
+  // Bespoke future image: evening family routine with warm kitchen or bedtime light.
+  "calmer-evenings-after-busy-days": {
+    hero: {
+      src: heroEveryday.url,
+      alt: "A calm family evening moment at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: topicFamilyBasics.url,
+        alt: "A warm kitchen scene at the end of a family day",
+        caption: "A soft landing point at the start of the evening changes the shape of the whole night.",
+      },
+    ],
+  },
+  // Bespoke future image: calm sofa or bedroom sick-day scene, non-clinical.
+  "family-sick-days-at-home": {
+    hero: {
+      src: heroFour.url,
+      alt: "A family together in a soft, comforting home moment",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: topicFamilyBasics.url,
+        alt: "A quiet home scene during a slow family day",
+        caption: "Familiar comforts often help more than any new routine on a sick day.",
+      },
+    ],
+  },
+  // Bespoke future image: family packing for a day out or walking together outdoors.
+  "planning-family-days-out": {
+    hero: {
+      src: heroEveryday.url,
+      alt: "A family getting ready together at home for a day out",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: topicGrowing.url,
+        alt: "A family sharing a calm moment together outdoors",
+        caption: "One clear anchor tends to make a day out easier to hold than a full itinerary.",
+      },
+    ],
+  },
+  // Bespoke future image: parent and child playing simply on the floor in warm natural light.
+  "simple-family-play-ideas": {
+    hero: {
+      src: heroFour.url,
+      alt: "A parent and child playing together at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: topicPlay.url,
+        alt: "A simple moment of shared play between parent and child",
+        caption: "Small pockets of unhurried attention often become the play children remember.",
+      },
+    ],
+  },
 };

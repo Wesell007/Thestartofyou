@@ -1,59 +1,58 @@
-## Phase 8.3 — Toddler Batch 2 Publishing (Sleep + Development)
+## Phase 8.3b — Toddler Batch 2 Image Mappings (Sleep + Development)
 
-Publish four Toddler articles by replacing their draft objects in `src/data/toddlerArticleData.ts`. No other files touched.
+Only edit `src/components/toddler/article/toddlerArticleImages.ts` and add 6 new bespoke image files under `src/assets/`. No article copy, status, sources, SEO, routes, components, cards, topic pages, or non-Toddler files touched.
 
-### Scope
+### Reuse vs new (mirrors Batch 1 mix)
 
-Only edit: `src/data/toddlerArticleData.ts`.
+- Reuse `toddler-topic-sleep.jpg.asset.json` as hero for `toddler-sleep-rhythms` — already reads as calm evening toddler bedroom.
+- Reuse `toddler-topic-development.jpg.asset.json` as hero for `what-toddler-development-can-look-like` — already reads as a toddler exploring calmly.
+- Generate 6 new bespoke images (1536×1024, warm natural light, realistic parent/toddler moments, emotionally grounded, no logos, no text, no distress).
 
-Do not touch: image mappings, components, routes, topic pages, cards, SEO, or any non-Toddler stage files.
+### Per-article mapping
 
-### Articles to publish (status: draft → ready)
+| Slug | Hero | Body |
+|---|---|---|
+| toddler-sleep-rhythms | reuse `toddler-topic-sleep.jpg.asset.json` | new `toddler-article-sleep-rhythms-body.jpg` |
+| bedtime-battles-and-night-waking | new `toddler-article-bedtime-hero.jpg` | new `toddler-article-bedtime-body.jpg` |
+| what-toddler-development-can-look-like | reuse `toddler-topic-development.jpg.asset.json` | new `toddler-article-development-body.jpg` |
+| when-milestones-feel-different | new `toddler-article-milestones-hero.jpg` | new `toddler-article-milestones-body.jpg` |
 
-1. **toddler-sleep-rhythms** (topic: sleep)
-2. **bedtime-battles-and-night-waking** (topic: sleep)
-3. **what-toddler-development-can-look-like** (topic: development-milestones)
-4. **when-milestones-feel-different** (topic: development-milestones)
+All body entries use `afterSectionIndex: 1`.
 
-Keep existing `slug`, `topic`, `title`, `description`. Only adjust `readTime` if final length clearly requires it. `medicallyReviewed: false` unless the current draft is already flagged true.
+### Alt text and captions (verbatim from brief)
 
-### Shared article standard
+- **toddler-sleep-rhythms** — hero alt: "A toddler settling calmly during a gentle bedtime routine". body alt: "A quiet toddler bedroom prepared for sleep in soft evening light". caption: "Toddler sleep can change as development, naps, routines and reassurance needs shift."
+- **bedtime-battles-and-night-waking** — hero alt: "A parent gently reassuring a toddler at bedtime". body alt: "A calm bedtime moment with a toddler and parent in soft light". caption: "Bedtime can feel hard when toddlers need reassurance, boundaries and rest all at once."
+- **what-toddler-development-can-look-like** — hero alt: "A toddler exploring through play in a calm home setting". body alt: "A toddler practising everyday skills with a parent nearby". caption: "Toddler development often shows up through movement, play, communication, independence and everyday curiosity."
+- **when-milestones-feel-different** — hero alt: "A parent calmly watching their toddler play at their own pace". body alt: "A toddler playing quietly with support nearby". caption: "When milestones feel different, it can help to notice patterns over time and ask for advice if something worries you."
 
-- 7 sections, 2 short paragraphs each
-- 5–6 key takeaways
-- 3 related slugs (only pointing to Batch 1 + Batch 2 ready slugs)
-- 2–4 credible UK-first sources with URLs (NHS, NHS Start for Life, The Sleep Charity, NCT, BBC Tiny Happy People, NSPCC; CDC only if UK source insufficient)
-- British English, no em dashes, calm and parent-first
-- No diagnosis, no medication advice, no invented stats, no invented reviewer, no fear or shame-based wording
-- Sleep and "when milestones feel different" articles include the careful "ask health visitor / GP / local service" wording in the final section
+Each new map entry preceded by the exact `// bespoke future:` comment from the brief.
 
-### Section outlines
+### Image prompts (all 1536×1024, warm natural light, realistic, calm, premium, no logos, no text, no distress)
 
-**toddler-sleep-rhythms**: why sleep changes, naps and daily rhythm, bedtime cues and wind-down, separation and reassurance, early waking and unsettled nights, keeping routines gentle, when to ask for support.
+1. **toddler-article-sleep-rhythms-body.jpg** — Quiet toddler bedroom prepared for sleep in soft evening light: small bed with a soft blanket and a comfort toy, low warm lamp glow, curtains drawn with a hint of dusk, tidy but lived-in.
+2. **toddler-article-bedtime-hero.jpg** — Parent sitting on the floor beside a toddler bed reading a picture book quietly to a settled toddler in pyjamas, low warm lamp light, reassuring and calm.
+3. **toddler-article-bedtime-body.jpg** — Parent's hand resting gently on a settled toddler's back in bed, soft blanket, dim warm light, peaceful reassurance, no visible distress.
+4. **toddler-article-development-body.jpg** — Toddler at home stacking wooden blocks on a rug while a parent kneels nearby watching calmly, warm daylight through a window.
+5. **toddler-article-milestones-hero.jpg** — Parent sitting on a sofa observing their toddler playing on the rug at their own pace, warm daylight, gentle and non-anxious.
+6. **toddler-article-milestones-body.jpg** — Toddler playing quietly with a simple wooden toy on the floor, parent's legs and hands visible nearby offering quiet presence, warm home light.
 
-**bedtime-battles-and-night-waking**: why bedtime becomes difficult, separation at night, boundaries without harshness, night waking and reassurance, over/undertiredness, keeping bedtime realistic, when sleep feels unmanageable (careful wording). Avoid sleep-training prescriptions, controlled-crying instructions, rigid rules, quick-fix promises.
+### File-level changes to `toddlerArticleImages.ts`
 
-**what-toddler-development-can-look-like**: development is broad, movement, communication, play and problem-solving, independence and everyday skills, emotions and social development, watching patterns over time.
-
-**when-milestones-feel-different**: why milestones can feel different, uneven development is common, patterns not moments, comparison with other peers, trusting concern without panic, what to note before asking for advice, when to ask for support (careful wording). Avoid diagnosis, autism/ADHD speculation, fixed deadlines, "wait and see" dismissal.
-
-### Related slug map (all point to Batch 1 or Batch 2 ready slugs only)
-
-- toddler-sleep-rhythms → bedtime-battles-and-night-waking, building-connection-through-everyday-play, what-toddler-development-can-look-like
-- bedtime-battles-and-night-waking → toddler-sleep-rhythms, building-connection-through-everyday-play, simple-play-ideas-for-toddlers
-- what-toddler-development-can-look-like → when-milestones-feel-different, simple-play-ideas-for-toddlers, building-connection-through-everyday-play
-- when-milestones-feel-different → what-toddler-development-can-look-like, simple-play-ideas-for-toddlers, building-connection-through-everyday-play
+- Add 2 new asset-pointer imports (`toddler-topic-sleep.jpg.asset.json`, `toddler-topic-development.jpg.asset.json`) plus the 2 new hero JPG imports and 4 new body JPG imports.
+- Extend `toddlerArticleImageMap` with 4 new slug entries in the same shape as Batch 1.
+- Leave existing Batch 1 entries, interface, and `getToddlerArticleImages` untouched.
 
 ### Verification
 
-- `bunx tsgo --noEmit` clean
-- Counts: 16 total, 8 ready, 8 draft
-- Playwright 200 on all four new ready routes; NotFound on 2 sampled remaining drafts
-- Topic pages: 4 new cards clickable; other drafts still show "Coming soon" and non-clickable
-- Related grids only reference ready slugs
-- Regression sweep: /first-year, /family, /pregnancy, /trying-to-conceive, /ivf, /pregnancy/[known article] still 200
-- Only `src/data/toddlerArticleData.ts` changed
+- `bunx tsgo --noEmit` clean.
+- Playwright 1280×1800 and 375×812 on all 4 ready routes: 200 status, exactly one hero and one body image per article with correct alt text, body between section 2 and section 3, no mobile horizontal overflow, no broken image `naturalWidth = 0` for local bespoke JPGs (known `/__l5e/` false-positive tolerated for the 2 reused CDN pointers).
+- Medically reviewed pill absent on all four (none flagged as reviewed).
+- Sources block renders; related grid contains only ready Toddler slugs.
+- Draft-gating: sample 2 remaining Toddler drafts return NotFound.
+- Regression sweep: `/toddler`, `/toddler/sleep`, `/toddler/development-milestones`, `/toddler/play-connection`, `/toddler/food-feeding`, `/first-year`, `/articles/complete-guide-morning-sickness`, `/pregnancy`, `/trying-to-conceive`, `/ivf` all 200.
+- Only changed files: `src/components/toddler/article/toddlerArticleImages.ts` plus the 6 new `src/assets/toddler-article-*.jpg` files.
 
-### Deliverable summary returned to user
+### Deliverable summary returned
 
-Files edited, four slugs published, total/ready/draft counts, per-article section and takeaway counts, per-article sources with URLs, per-article related slugs, careful-wording check for the two support-oriented articles, draft-gating result, route verification, topic card verification, tsgo result, and go/no-go for Phase 8.3b image mappings.
+Files edited, assets reused, new assets added, per-article hero + body + alt + caption, desktop and mobile route verification, mobile overflow result, source rendering result, related guidance result, draft-gating result, tsgo result, regression result, and go/no-go for Phase 8.4 Toddler Batch 3 publishing.

@@ -1074,7 +1074,101 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     description:
       "Why identity shifts so much after birth, and the small returns to yourself that quietly gather over time.",
     readTime: "5 min read",
-    status: "draft",
+    status: "ready",
+    medicallyReviewed: true,
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    seoTitle: "Feeling like yourself again after birth | The Start of You",
+    seoDescription:
+      "A calm guide to why you may not feel like yourself after birth, how identity shifts, and small ways to feel more grounded in the first year.",
+    intro:
+      "In the weeks and months after birth, many parents quietly wonder when they will feel like themselves again. It is a soft, common question, and it does not usually have a tidy answer. Your body has been through a great deal, your sleep is different, your days are shaped around someone new, and your inner world is rearranging itself alongside all of it. This piece is a gentle look at why that shift happens, and at the small returns to yourself that gather over time.",
+    sections: [
+      {
+        heading: "Why you may not feel like yourself straight away",
+        body: [
+          "Feeling different after birth is not a sign that anything has gone wrong. It is a fair response to a real change. In a short space of time, your body, your routines, your relationships and your sense of what a day looks like have all shifted at once.",
+          "It is normal to move between feeling capable and feeling lost, sometimes in the same afternoon. That does not mean you are struggling. It usually means you are adjusting to something big while also caring for a very new person.",
+        ],
+      },
+      {
+        heading: "Body, sleep and hormones after birth",
+        body: [
+          "Recovery takes longer than many parents expect. Your body is healing at its own pace, sleep is broken into short pieces, and hormones continue to shift for a good while after birth. Any one of these can quietly affect how grounded you feel.",
+          "Try to hold this loosely rather than as a checklist. You are not meant to feel like your pre-birth self while so much is still settling. Small kindnesses to your body, like food, water, rest and gentle movement when you can, matter more than any single fix.",
+        ],
+      },
+      {
+        heading: "Identity after becoming a parent",
+        body: [
+          "Becoming a parent is a real identity shift. Old parts of you are still there, but they are being reshaped around a new relationship and a new set of responsibilities. It can feel like a quiet grief for who you were, even when you love who you are becoming.",
+          "That double feeling is not a contradiction. Many parents carry both, and it does not mean they love their baby any less. Naming the shift, even privately, can make it feel less confusing.",
+        ],
+      },
+      {
+        heading: "The emotional load of caring for a baby",
+        body: [
+          "A lot of the work of early parenthood is invisible. Holding the small details in mind, noticing feeds, sleep, temperature, moods and appointments, is real cognitive effort, even on quiet days.",
+          "It is worth remembering that carrying this load will use energy, even when the day looked calm from the outside. Feeling tired or a bit blurred is not a sign of weakness, it is a sign of a full mind.",
+        ],
+      },
+      {
+        heading: "Small ways to feel more grounded",
+        body: [
+          "Feeling more like yourself often comes back through small, ordinary things rather than a single big change. A few minutes outside, a familiar meal, a slow shower, a phone call with someone who knows you well.",
+          "You do not have to reclaim a whole day. Even a short pocket of time that feels a little like your own life can quietly help. Try to give those small returns some room, rather than saving them for when things settle down.",
+        ],
+      },
+      {
+        heading: "Talking honestly about how you feel",
+        body: [
+          "Many parents keep the harder feelings to themselves, in case they sound ungrateful or worrying. Saying out loud that you feel changed, tired or unsure of yourself is not a failure. It is often the beginning of feeling less alone in it.",
+          "Choose someone who tends to listen well, whether that is a partner, a friend, a family member or a health professional. It does not need to be a big conversation. Even a few honest sentences can shift how heavy something feels.",
+        ],
+      },
+      {
+        heading: "When it helps to ask for support",
+        body: [
+          "There is no set point at which asking for support becomes reasonable. If something has been sitting with you for a while, or is getting in the way of everyday life, that is enough of a reason to talk to someone.",
+          "If your mood, anxiety, exhaustion or ability to cope worries you, speak to your midwife, health visitor or GP. Reaching out is part of looking after yourself, not a sign that you are getting parenthood wrong.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Feeling different after birth is a fair response to a real change, not a sign something is wrong.",
+      "Body, sleep and hormones are still settling for a long time after birth.",
+      "Identity shifts are common, and can include a quiet grief for who you were.",
+      "Small, ordinary moments often help you feel more like yourself again.",
+      "Talking honestly, even briefly, can make hard feelings feel less alone.",
+      "If your mood or ability to cope worries you, it is always okay to ask a midwife, health visitor or GP.",
+    ],
+    relatedSlugs: [
+      "when-parenthood-feels-heavy",
+      "what-recovery-can-feel-like",
+      "hormones-sweat-and-hair-loss",
+    ],
+    sources: [
+      {
+        label: "Mental health in pregnancy and after birth",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/keeping-well/mental-health/",
+      },
+      {
+        label: "Baby",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/baby/",
+      },
+      {
+        label: "Services and support for parents",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/support-and-services/services-and-support-for-parents/",
+      },
+      {
+        label: "About maternal mental health",
+        publisher: "Maternal Mental Health Alliance",
+        url: "https://maternalmentalhealthalliance.org/about-maternal-mental-health/",
+      },
+    ],
   },
   {
     slug: "when-parenthood-feels-heavy",
@@ -1083,8 +1177,108 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     description:
       "The difference between baby blues, low mood and something that deserves support, without alarm.",
     readTime: "6 min read",
-    status: "draft",
+    status: "ready",
+    medicallyReviewed: true,
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    seoTitle: "When parenthood feels heavy | The Start of You",
+    seoDescription:
+      "A careful UK guide for parents who feel overwhelmed, low or anxious after birth, and gentle ways to take a first step towards support.",
+    intro:
+      "Parenthood can feel heavy, even when you love your baby. Some days there is joy and softness, and other days feel long, unclear or quietly hard. This is not a sign that you are getting anything wrong. It is a common experience, and it is one of the things this part of life asks parents to hold. This piece is a gentle guide to noticing when things feel heavier than they should, and to how you might take a first step towards support.",
+    sections: [
+      {
+        heading: "When parenthood feels heavier than expected",
+        body: [
+          "It is not unusual for early parenthood to feel harder than you imagined. Sleep is broken, days blur, and small tasks can take much longer than they used to. That heaviness does not mean you are failing.",
+          "It can help to notice how you feel over time, rather than reading too much into any single day. If more days feel weighed down than light, that is worth paying attention to, gently.",
+        ],
+      },
+      {
+        heading: "Love and struggle can exist together",
+        body: [
+          "Many parents feel deep love for their baby and also feel low, anxious or overwhelmed at times. These feelings can sit alongside each other without cancelling each other out.",
+          "You do not need to feel one way before it is fair to say the other. Love does not protect anyone from tiredness, worry or emotional weight, and needing support does not take anything away from how much you care.",
+        ],
+      },
+      {
+        heading: "Anxiety, low mood and feeling overwhelmed",
+        body: [
+          "Some parents notice a period of tearfulness in the first days after birth. Others find that low mood, anxiety or overwhelm builds more slowly over the weeks and months that follow. Both are experiences many parents share.",
+          "Signs that something is asking for more attention can include feelings that do not lift, worry that feels loud in your head, sleep that suffers even when your baby sleeps, or a sense of being disconnected. Noticing these does not mean labelling yourself, only paying yourself some care.",
+        ],
+      },
+      {
+        heading: "Exhaustion and the invisible emotional load",
+        body: [
+          "Tiredness after birth is not only physical. Holding the small details of a baby's life in mind, and being on call so much of the time, is real emotional work.",
+          "When that load builds without pause, it can quietly wear thin the sense that you are coping. Naming that as tiredness of the mind, not just the body, can make it feel a little more real and a little less confusing.",
+        ],
+      },
+      {
+        heading: "Why it can be hard to say you are struggling",
+        body: [
+          "Parents often worry about being seen as ungrateful, dramatic or not managing. Some worry about how professionals might respond, or feel there are people with harder lives who deserve support more.",
+          "None of these worries make your feelings any less real. Support is not something you have to earn by reaching a certain level of distress. It is there for parents who feel weighed down, tired, low or unsure, as much as for anyone else.",
+        ],
+      },
+      {
+        heading: "Who you can speak to",
+        body: [
+          "Your GP, midwife or health visitor is a good first point of contact. You can be honest about how you have been feeling, and they will listen without needing you to have tidy words for it.",
+          "There are also UK charities that support parents through this part of life, such as Mind, PANDAS Foundation and the Maternal Mental Health Alliance. They can be a gentle place to read, listen or reach out at your own pace.",
+        ],
+      },
+      {
+        heading: "Taking the first step towards support",
+        body: [
+          "A first step is often smaller than it feels. It might be booking a GP appointment, telling one person how you have been, or writing down a few honest sentences before you say them out loud.",
+          "If you feel unable to keep yourself or your baby safe, seek urgent local help immediately. In any other moment when things feel heavy, it is still absolutely okay to ask for support, well before things reach that point.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Feeling heavy in early parenthood is common and does not mean you are failing.",
+      "Love and struggle can exist at the same time.",
+      "Low mood, anxiety and overwhelm are real experiences worth paying attention to gently.",
+      "Exhaustion after birth is emotional as well as physical.",
+      "You do not need to reach a certain point of distress to be allowed to ask for support.",
+      "A GP, midwife or health visitor is a good place to start when you want to talk.",
+    ],
+    relatedSlugs: [
+      "feeling-like-yourself-again",
+      "when-to-ask-for-help-after-birth",
+      "postnatal-checks-and-appointments",
+    ],
+    sources: [
+      {
+        label: "Postnatal depression overview",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/mental-health/conditions/post-natal-depression/overview/",
+      },
+      {
+        label: "Mental health in pregnancy and after birth",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/keeping-well/mental-health/",
+      },
+      {
+        label: "Postnatal depression",
+        publisher: "Royal College of Psychiatrists",
+        url: "https://www.rcpsych.ac.uk/mental-health/mental-illnesses-and-mental-health-problems/postnatal-depression",
+      },
+      {
+        label: "Postnatal depression and perinatal mental health",
+        publisher: "Mind",
+        url: "https://www.mind.org.uk/information-support/types-of-mental-health-problems/postnatal-depression-and-perinatal-mental-health/postnatal-depression/",
+      },
+      {
+        label: "PANDAS Foundation",
+        publisher: "PANDAS Foundation",
+        url: "https://pandasfoundation.org.uk/",
+      },
+    ],
   },
+
 
   // Body and hormones
   {

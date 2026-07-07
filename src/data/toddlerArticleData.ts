@@ -130,8 +130,97 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "Making mealtimes feel calmer",
     description:
       "Small shifts in timing, portions and expectations that take the tension out of the table.",
-    readTime: "4 min read",
-    status: "draft",
+    readTime: "5 min read",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Toddler mealtimes can quietly become one of the most stressful parts of the day. This piece looks at small, calm shifts that can take some of the pressure out of the table, without strict rules or the sense that every meal has to be perfect. The goal is a gentler rhythm, not a perfect plate.",
+    sections: [
+      {
+        heading: "Why toddler mealtimes can feel hard",
+        body: [
+          "Toddlers are learning about food, textures, independence and their own preferences all at once. That can make mealtimes unpredictable, even when nothing has really changed at home.",
+          "It is also common for parents to feel worried, watched or judged around toddler eating. Noticing that pressure is a useful starting point, because a calmer adult often helps a calmer meal.",
+        ],
+      },
+      {
+        heading: "Lowering pressure around food",
+        body: [
+          "The most consistent thing that seems to help toddler eating over time is lowering the pressure. That includes not commenting on how much is eaten, not bargaining and not turning food into a test.",
+          "Offering food, sitting with them and then letting them decide what they eat from what is on their plate is often less exhausting for everyone and tends to lead to steadier eating over months, not days.",
+        ],
+      },
+      {
+        heading: "Simple routines that help",
+        body: [
+          "Regular meal and snack times, spaced through the day, can help toddlers arrive at the table with an appetite rather than being either ravenous or already full from grazing.",
+          "You do not need a rigid schedule. A loose rhythm of meals and small snacks, with water available between, is usually enough for most toddlers.",
+        ],
+      },
+      {
+        heading: "Sitting together when you can",
+        body: [
+          "Toddlers often eat better when they see the people around them eating similar food in a calm way. Even a short shared meal a few times a week can help.",
+          "It is fine if family meals do not always work. Sitting with your toddler for part of their meal, even with a cup of tea, still gives them the sense that eating is something you do together.",
+        ],
+      },
+      {
+        heading: "Managing mess and short attention spans",
+        body: [
+          "Toddlers often want to get down from the table long before an adult would. A shorter, calmer meal is usually more useful than a long one that ends in tears.",
+          "Some mess is part of how they learn about food. A wipeable mat under the chair and simple, easy-to-clean clothes can lower the stress around this without needing to change what is served.",
+        ],
+      },
+      {
+        heading: "What to do when food is refused",
+        body: [
+          "When your toddler refuses food, it usually helps to stay calm, keep the meal short and not offer a completely different meal in its place. You are not being harsh by keeping the offer steady.",
+          "You can quietly note what tends to be refused and what is accepted over a week or two, rather than reacting to a single meal. Patterns over time are more useful than the story of any one plate.",
+        ],
+      },
+      {
+        heading: "Keeping perspective",
+        body: [
+          "Most toddlers eat unevenly across a day and across a week. A big lunch may be followed by a tiny tea. That kind of variation is often more normal than worrying.",
+          "If mealtimes are becoming very stressful, your toddler is eating a very limited range, growth is a concern or feeding feels difficult to manage, ask your health visitor, GP or appropriate local service for advice.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Lowering pressure at the table tends to help toddler eating over time.",
+      "Loose meal and snack routines usually help more than rigid schedules.",
+      "Sitting with your toddler, even briefly, supports calmer eating.",
+      "Short meals with some mess are often more useful than long, tense ones.",
+      "Stay steady when food is refused, and look at patterns over time.",
+      "Ask your health visitor or GP if feeding or growth feels genuinely concerning.",
+    ],
+    relatedSlugs: [
+      "picky-eating-in-toddlers",
+      "building-connection-through-everyday-play",
+      "simple-play-ideas-for-toddlers",
+    ],
+    sources: [
+      {
+        label: "Help your child develop healthy eating habits",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/healthier-families/food-facts/healthier-family-meals/",
+      },
+      {
+        label: "Toddler meals and eating",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Eating well: the toddler years",
+        publisher: "First Steps Nutrition Trust",
+        url: "https://www.firststepsnutrition.org/eating-well-early-years",
+      },
+      {
+        label: "Food fact sheet: toddlers",
+        publisher: "British Dietetic Association",
+        url: "https://www.bda.uk.com/resource/toddlers.html",
+      },
+    ],
   },
 
   // Potty learning

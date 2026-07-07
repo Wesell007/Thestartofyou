@@ -8,7 +8,7 @@ const ToddlerArticle = () => {
   const article = toddlerArticles.find(
     (a) => a.topic === topic && a.slug === slug
   );
-  if (!article) return <NotFound />;
+  if (!article || article.status !== "ready") return <NotFound />;
   return <ToddlerArticlePage article={article} />;
 };
 

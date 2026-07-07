@@ -43,7 +43,7 @@ const FYPathways = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
           {pathways.map((p) => (
             <Link
-              key={p.href}
+              key={p.title}
               to={p.href}
               className="group relative bg-card border rounded-2xl p-6 flex flex-col gap-2.5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_60px_-32px_rgba(20,30,60,0.28)] overflow-hidden"
               style={{ borderColor: 'hsl(var(--border) / 0.55)' }}

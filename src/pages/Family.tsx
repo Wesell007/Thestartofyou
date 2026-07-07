@@ -9,10 +9,17 @@ import FamilyCommonQuestions from "@/components/family/FamilyCommonQuestions";
 import FamilySupportNote from "@/components/family/FamilySupportNote";
 import FamilyPathways from "@/components/family/FamilyPathways";
 import FamilyFinalCTA from "@/components/family/FamilyFinalCTA";
+import SeoHead from "@/components/seo/SeoHead";
+
 
 const Family = () => {
   return (
     <div className="min-h-screen bg-parchment">
+      <SeoHead
+        title="Family life guidance for growing families | The Start of You"
+        description="Calm, practical guidance for family routines, relationships, safety, travel, play and growing together."
+        canonical="https://thestartofyou.com/family"
+      />
       <Navbar />
       <main>
         <FamilyHero />

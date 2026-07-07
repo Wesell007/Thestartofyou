@@ -233,8 +233,97 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "Understanding toddler tantrums",
     description:
       "Why big feelings spill over so intensely at this age, and calm ways to stay steady beside them.",
-    readTime: "5 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Toddler tantrums can feel loud, sudden and hard to manage, even when nothing seems to have gone wrong. This piece is a calm look at what tantrums often are, what tends to sit behind them and the small, steady things that can help. It is not about fixing tantrums or promising an easier child. It is about understanding what your toddler is going through, so those moments feel a little less lonely.",
+    sections: [
+      {
+        heading: "What tantrums can be about",
+        body: [
+          "A tantrum is usually a sign that your toddler has run out of the tools they need in that moment. Something has felt too big, too fast or too much, and their small system cannot hold it any longer.",
+          "Tantrums are not proof that a toddler is being naughty or trying to manipulate you. They are much more often a signal that a small person is overwhelmed.",
+        ],
+      },
+      {
+        heading: "Why toddlers struggle with big feelings",
+        body: [
+          "The parts of the brain that help with pausing, planning and managing strong emotions are still growing across the toddler years. Toddlers feel a lot and can express very little of it in words.",
+          "That gap between what they feel and what they can say often shows up as tantrums, meltdowns or sudden shifts in mood. It is part of normal development, not a failure of parenting.",
+        ],
+      },
+      {
+        heading: "Triggers like tiredness, hunger and transitions",
+        body: [
+          "Tantrums are more likely when your toddler is tired, hungry, overstimulated or moving between activities. A small trigger on top of a busy day can be what tips them over.",
+          "Noticing patterns over a week can be more useful than trying to explain any one moment. Small tweaks to nap timing, snacks or how transitions are handled can quietly reduce the number of hard moments.",
+        ],
+      },
+      {
+        heading: "Staying close without giving in to every demand",
+        body: [
+          "Staying nearby, keeping your voice low and letting the feeling move through is often more helpful than trying to talk your toddler out of it. Presence tends to steady them more than words.",
+          "Being warm does not mean saying yes to everything. You can hold a kind boundary, such as the biscuit still being for after tea, while still being close and reassuring about the disappointment.",
+        ],
+      },
+      {
+        heading: "What helps during a tantrum",
+        body: [
+          "In the middle of a tantrum, keep your responses simple. A short phrase, a calm face and a steady body nearby usually helps more than long explanations or questions.",
+          "Some toddlers want to be held, some need a little space, and some cannot decide from one minute to the next. Following their lead in the moment is usually more useful than a fixed rule.",
+        ],
+      },
+      {
+        heading: "What helps after a tantrum",
+        body: [
+          "Once the peak has passed, most toddlers need reconnection more than a talking-to. A cuddle, a drink of water or a quiet moment together often helps them settle back into themselves.",
+          "You do not need to review what happened in detail. A short, gentle acknowledgement, such as saying that felt really big, is usually enough at this age.",
+        ],
+      },
+      {
+        heading: "When behaviour worries you",
+        body: [
+          "Some hard days are part of toddlerhood. It is worth taking your own instinct seriously if something about your toddler's behaviour is quietly starting to worry you over time.",
+          "If your toddler's behaviour changes suddenly, feels extreme, involves regular harm to themselves or others, or you feel unable to manage, ask your health visitor, GP or appropriate local service for advice.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Tantrums are usually a sign of overwhelm, not bad behaviour.",
+      "Toddlers are still learning how to manage strong feelings.",
+      "Tiredness, hunger and transitions are common triggers.",
+      "Calm presence tends to help more than long explanations.",
+      "You can hold a warm boundary and still be kind about the disappointment.",
+      "Ask your health visitor or GP if behaviour starts to worry you over time.",
+    ],
+    relatedSlugs: [
+      "helping-your-toddler-with-big-feelings",
+      "building-connection-through-everyday-play",
+      "when-milestones-feel-different",
+    ],
+    sources: [
+      {
+        label: "Toddler behaviour and emotions",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Managing your toddler's behaviour",
+        publisher: "NSPCC",
+        url: "https://www.nspcc.org.uk/keeping-children-safe/support-for-parents/",
+      },
+      {
+        label: "Tiny Happy People",
+        publisher: "BBC",
+        url: "https://www.bbc.co.uk/tiny-happy-people",
+      },
+      {
+        label: "Toddler tantrums and behaviour",
+        publisher: "Family Lives",
+        url: "https://www.familylives.org.uk/advice/early-years-development/behaviour/toddler-tantrums",
+      },
+    ],
   },
   {
     slug: "helping-your-toddler-with-big-feelings",
@@ -243,7 +332,96 @@ const rawToddlerArticles: ToddlerArticle[] = [
     description:
       "Simple, low-pressure ways to help your child name and move through the emotions that overwhelm them.",
     readTime: "6 min read",
-    status: "draft",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Big feelings are part of the toddler years. They can arrive quickly, feel huge and pass just as suddenly. This piece is a calm, realistic look at how to help your toddler through those moments, without expecting yourself to be endlessly patient or your child to suddenly become easy. It is about small, steady things that add up over time.",
+    sections: [
+      {
+        heading: "Big feelings are part of toddlerhood",
+        body: [
+          "Toddlers are new to emotions in a big way. Joy, frustration, disappointment and fear can all show up in the same afternoon, sometimes in the same ten minutes.",
+          "This is not something you have to fix. Helping your toddler through big feelings is a slow, everyday practice, not a task with a finish line.",
+        ],
+      },
+      {
+        heading: "Naming feelings simply",
+        body: [
+          "Simple words can help toddlers start to understand what is happening inside them. Short phrases such as you seem sad or that was disappointing are usually more useful than long explanations.",
+          "You do not need to name every feeling correctly every time. Even close-enough words help your toddler slowly learn that feelings can be shared and understood.",
+        ],
+      },
+      {
+        heading: "Staying close and steady",
+        body: [
+          "Toddlers often need a calm adult more than a clever response. Sitting nearby, keeping your voice quiet and your body relaxed can be the strongest thing you do in a hard moment.",
+          "You do not have to be perfectly calm to help. Doing your best to keep the tone low, even when you feel wobbly yourself, is usually enough.",
+        ],
+      },
+      {
+        heading: "Helping without fixing everything",
+        body: [
+          "Not every feeling needs to be solved. Sometimes a toddler simply needs to have the feeling near you and then move on when it passes.",
+          "Trying to talk them out of a feeling or distract every hard moment can quietly send the message that big feelings are not okay. Allowing them to happen safely is part of the help.",
+        ],
+      },
+      {
+        heading: "Routines, sleep and hunger",
+        body: [
+          "Big feelings are much more likely when a toddler is tired, hungry or overstimulated. Steady meals, snacks and sleep windows often do more for emotional regulation than any particular technique.",
+          "You do not need a rigid schedule. A loose, familiar rhythm across the day is usually enough to take the edge off the harder moments.",
+        ],
+      },
+      {
+        heading: "Repairing after hard moments",
+        body: [
+          "You are going to have moments where you snap, feel impatient or wish you had responded differently. That is part of being human, not a sign of a bad parent.",
+          "Coming back with a short, calm reconnection, such as a cuddle or a simple that was hard, I love you, is usually enough. Repair matters more than perfect calm.",
+        ],
+      },
+      {
+        heading: "When to ask for support",
+        body: [
+          "Most toddlers move through big feelings with time, connection and steady routines. You do not have to hold this on your own if it starts to feel too heavy.",
+          "If your toddler's emotions, behaviour, sleep, communication or daily life begin to worry you, ask your health visitor, GP or appropriate local service for advice.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Big feelings are part of normal toddler development.",
+      "Simple, close-enough words help toddlers understand emotions.",
+      "Calm presence usually helps more than the perfect sentence.",
+      "Not every feeling needs to be fixed or distracted away.",
+      "Sleep, food and rhythm quietly support emotional regulation.",
+      "Repair after hard moments matters more than staying perfectly calm.",
+    ],
+    relatedSlugs: [
+      "understanding-toddler-tantrums",
+      "building-connection-through-everyday-play",
+      "toddler-sleep-rhythms",
+    ],
+    sources: [
+      {
+        label: "Toddler behaviour and emotions",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Supporting your child's mental health",
+        publisher: "NSPCC",
+        url: "https://www.nspcc.org.uk/keeping-children-safe/support-for-parents/",
+      },
+      {
+        label: "Tiny Happy People",
+        publisher: "BBC",
+        url: "https://www.bbc.co.uk/tiny-happy-people",
+      },
+      {
+        label: "Toddler emotions and behaviour",
+        publisher: "Family Lives",
+        url: "https://www.familylives.org.uk/advice/early-years-development/behaviour/",
+      },
+    ],
   },
 
   // Speech and language
@@ -660,8 +838,97 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "Signs your child may be ready for potty training",
     description:
       "The quiet cues that suggest your toddler might be ready, and why age is only part of the picture.",
-    readTime: "5 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Potty training tends to go more smoothly when it starts from readiness rather than a date on the calendar. This piece is a calm look at the small cues that suggest your toddler might be ready, and why age alone rarely gives you the full picture. It is not a checklist to pass, and it is not about rushing. It is about noticing what your child is quietly showing you.",
+    sections: [
+      {
+        heading: "Readiness is not just age",
+        body: [
+          "Toddlers become ready for potty training at very different ages. Some children show signs earlier, others take much longer, and both can be entirely typical.",
+          "It usually helps to think about readiness as a mix of physical, communication and interest signs, rather than any single moment or age. There is no medal for starting early.",
+        ],
+      },
+      {
+        heading: "Staying dry for longer",
+        body: [
+          "One quiet sign is your toddler staying dry for longer stretches. Nappies that are dry after a nap or dry for a couple of hours can suggest the bladder is starting to hold on a bit.",
+          "This on its own does not mean it is time to start. It is one small signal to notice alongside the others.",
+        ],
+      },
+      {
+        heading: "Awareness of wees and poos",
+        body: [
+          "Many toddlers start to notice when they are weeing or pooing, or right after. They might pause, look down, tell you or go quiet in a corner.",
+          "That awareness is a helpful sign that a link is forming between the feeling in their body and what is happening. It usually comes before being able to hold on.",
+        ],
+      },
+      {
+        heading: "Interest in the toilet or potty",
+        body: [
+          "Toddlers often become curious about the toilet, wanting to watch, flush or sit on it fully clothed. Interest in a potty at home can look similar.",
+          "You can gently follow that curiosity without turning it into a training moment. Letting them explore the potty or toilet calmly is often enough at this stage.",
+        ],
+      },
+      {
+        heading: "Following simple instructions",
+        body: [
+          "Being able to follow short, simple instructions, such as come and sit down or pull your trousers up, is helpful when potty training starts. It is not a test, but it does make things easier.",
+          "If your toddler is still very much in the middle of language leaps, it can help to give them a little more time before pushing potty training forward.",
+        ],
+      },
+      {
+        heading: "Emotional readiness and cooperation",
+        body: [
+          "Potty training tends to go better when your toddler is generally cooperative around simple everyday tasks. If they are in a very no-heavy phase, or a lot has just changed at home, it can help to wait.",
+          "You do not need perfect behaviour to start. A generally settled, willing child, in a fairly steady week, is usually enough.",
+        ],
+      },
+      {
+        heading: "Starting gently",
+        body: [
+          "When you do start, keeping it low key often helps most. Introduce the potty in a normal way, offer it at natural moments and let your toddler have some say in how it goes.",
+          "You can pause at any point. Stopping and coming back to it a few weeks later is a normal part of potty learning, not a failure.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Readiness is a mix of physical, communication and interest signs.",
+      "Age on its own does not decide when potty training should start.",
+      "Longer dry stretches and body awareness are early quiet signs.",
+      "Curiosity about the potty or toilet is worth following gently.",
+      "Following simple instructions and general cooperation help a lot.",
+      "It is fine to pause and try again later if things feel too hard.",
+    ],
+    relatedSlugs: [
+      "potty-training-without-pressure",
+      "what-toddler-development-can-look-like",
+      "making-mealtimes-feel-calmer",
+    ],
+    sources: [
+      {
+        label: "Potty training tips",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/potty-training-and-bedwetting/how-to-potty-train/",
+      },
+      {
+        label: "Toddler potty training",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Potty training and toilet training advice",
+        publisher: "ERIC",
+        url: "https://eric.org.uk/potty-training/",
+      },
+      {
+        label: "Potty training your child",
+        publisher: "Family Lives",
+        url: "https://www.familylives.org.uk/advice/early-years-development/behaviour/potty-training",
+      },
+    ],
   },
   {
     slug: "potty-training-without-pressure",
@@ -670,7 +937,96 @@ const rawToddlerArticles: ToddlerArticle[] = [
     description:
       "A calm, child-led approach to potty learning that leaves room for wobbles and starts.",
     readTime: "6 min read",
-    status: "draft",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Potty training can quietly become one of the more stressful stretches of the toddler years. This piece is a calm look at how to keep it low pressure, without strict methods or a fixed timeline. It is not about promising a quick fix, and it is not about doing it perfectly. It is about supporting your child through a learning process that is often messier than any book makes it sound.",
+    sections: [
+      {
+        heading: "Why pressure can make potty training harder",
+        body: [
+          "Toddlers pick up on tension very quickly. When potty training becomes a source of stress at home, many children start to hold on, refuse to sit or get more anxious about using the toilet.",
+          "Keeping the tone low key, even when it is going slowly, is usually more helpful than trying to push things forward through pressure or promises.",
+        ],
+      },
+      {
+        heading: "Creating a simple routine",
+        body: [
+          "A loose routine of trying the potty at natural moments, such as after meals or before leaving the house, can help your toddler build a small rhythm without feeling watched.",
+          "It usually helps to offer the potty rather than insist on it. A calm come and try, without a big reaction either way, tends to work better than a firm demand.",
+        ],
+      },
+      {
+        heading: "Keeping language calm",
+        body: [
+          "The words you use around wees, poos and the potty matter. Simple, everyday language keeps it feeling normal, rather than something to be embarrassed or worried about.",
+          "Praise can help, but a very big response to every success can also make some toddlers feel watched. A warm, low-key well done is usually enough.",
+        ],
+      },
+      {
+        heading: "Handling accidents without shame",
+        body: [
+          "Accidents are part of potty learning. Even children who have been dry for weeks can suddenly have days of accidents, especially if they are tired, unwell, or in a new setting.",
+          "It usually helps to clean up calmly, without a big reaction. A short phrase such as never mind, we will try again is usually all your toddler needs to hear.",
+        ],
+      },
+      {
+        heading: "Pausing if your child is not ready",
+        body: [
+          "If potty training is going badly for more than a couple of weeks and everyone is getting upset, it is usually a sign to pause. Stopping is not failing.",
+          "Coming back to it in a few weeks or months, when things feel calmer, often leads to much smoother progress than pushing through.",
+        ],
+      },
+      {
+        heading: "Nursery, childcare and days out",
+        body: [
+          "Talking to nursery or childcare about how they support potty learning can help everything feel more consistent. A short chat about language, timing and how to handle accidents is usually enough.",
+          "For days out, taking a small bag with spare clothes, wipes and a change mat can lower the stress. Expect a step back on unfamiliar days, and try not to read too much into it.",
+        ],
+      },
+      {
+        heading: "When to ask for advice",
+        body: [
+          "Most children get there in time with steady, low-pressure support. Slow starts, wobbles and phases of regression are usually part of learning, not a sign that something is wrong.",
+          "If your child seems in pain, is constipated, has repeated accidents after being dry, avoids weeing or pooing, or you are worried about toilet training, ask your health visitor, GP or appropriate local service for advice.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Pressure tends to slow potty training down rather than speed it up.",
+      "A loose, low-key routine usually works better than strict timing.",
+      "Simple, calm language keeps wees and poos feeling normal.",
+      "Accidents are part of learning and do not need a big reaction.",
+      "Pausing and coming back later is a valid part of the process.",
+      "Ask your health visitor or GP if you are worried or things feel stuck.",
+    ],
+    relatedSlugs: [
+      "signs-your-child-may-be-ready-for-potty-training",
+      "helping-your-toddler-with-big-feelings",
+      "making-mealtimes-feel-calmer",
+    ],
+    sources: [
+      {
+        label: "How to potty train",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/potty-training-and-bedwetting/how-to-potty-train/",
+      },
+      {
+        label: "Toddler potty training",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Potty training and toilet training advice",
+        publisher: "ERIC",
+        url: "https://eric.org.uk/potty-training/",
+      },
+      {
+        label: "Potty training your child",
+        publisher: "Family Lives",
+        url: "https://www.familylives.org.uk/advice/early-years-development/behaviour/potty-training",
+      },
+    ],
   },
 
   // Health and safety

@@ -431,8 +431,97 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "Supporting toddler speech at home",
     description:
       "Everyday ways to gently grow your toddler's language, without flashcards or pressure.",
-    readTime: "5 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Supporting toddler speech at home does not need to feel like teaching. Most of what helps a toddler learn to talk lives inside the ordinary parts of your day, in the way you chat, play, sing and pause together. This piece is a calm look at how everyday moments can quietly support your toddler's communication, without turning speech into a target.",
+    sections: [
+      {
+        heading: "Speech grows through everyday connection",
+        body: [
+          "Toddlers learn to talk by being talked with, not talked at. Small back-and-forth moments across the day give your toddler the chance to hear language, notice how it works and try it out for themselves.",
+          "Face-to-face time, shared attention on something and warm responses to their sounds or words all matter. Connection is often the quiet foundation under language.",
+        ],
+      },
+      {
+        heading: "Talking during ordinary routines",
+        body: [
+          "Getting dressed, making a snack or walking to the shops are all natural chances to talk. Naming what you are doing in short, simple sentences gives your toddler steady exposure to the words that fit their world.",
+          "You do not need long explanations. Short phrases like putting on your shoes or pouring the milk, repeated across the week, can carry more useful language than a set activity.",
+        ],
+      },
+      {
+        heading: "Following your toddler's interest",
+        body: [
+          "Toddlers tend to learn words most easily for things they are already paying attention to. If they are watching a bus, talking about that bus is often more helpful than steering them to something else.",
+          "Getting down to their level, noticing what they are looking at and gently putting words to it can support language without pressure.",
+        ],
+      },
+      {
+        heading: "Repeating and expanding without pressure",
+        body: [
+          "When your toddler says a word or a sound, you can repeat it back and add a little. If they say ball, you might say yes, a red ball. That gently shows them how words can grow, without correcting them.",
+          "Try to avoid asking them to say things on demand. Feeling watched or tested can make some toddlers say less, not more.",
+        ],
+      },
+      {
+        heading: "Songs, books and simple games",
+        body: [
+          "Songs, nursery rhymes, simple picture books and everyday games such as peekaboo give toddlers repeated, playful exposure to language and sounds.",
+          "It does not matter if the same book is read again and again. Repetition helps toddlers predict, join in and slowly start to use the words themselves.",
+        ],
+      },
+      {
+        heading: "Giving time to respond",
+        body: [
+          "Toddlers often need a little longer than adults to find a word. Leaving a small pause after you speak, or after a question, gives them the space to try.",
+          "It can help to slow your own pace slightly, use shorter sentences and let quiet moments sit rather than filling every gap.",
+        ],
+      },
+      {
+        heading: "When to ask for advice",
+        body: [
+          "Every toddler follows their own path with speech, and there is a wide range of what can be typical. At the same time, parental instinct is worth taking seriously if something quietly does not feel right.",
+          "If you are worried about your toddler's speech, understanding, hearing, interaction or communication, ask your health visitor, GP or appropriate local service for advice.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Speech grows through everyday connection, not lessons.",
+      "Talking through ordinary routines is one of the most useful things you can do.",
+      "Following your toddler's interest supports language more than steering them.",
+      "Repeating and gently expanding words is more helpful than correcting.",
+      "Songs, books and simple games give playful, repeated language exposure.",
+      "Ask your health visitor or GP if you are worried about speech or communication.",
+    ],
+    relatedSlugs: [
+      "when-to-ask-about-speech-delay",
+      "what-toddler-development-can-look-like",
+      "building-connection-through-everyday-play",
+    ],
+    sources: [
+      {
+        label: "Help your baby learn to talk",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/baby/learning-to-talk/",
+      },
+      {
+        label: "Speech and language milestones",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/play-and-learning/help-your-baby-learn-to-talk/",
+      },
+      {
+        label: "Tiny Happy People",
+        publisher: "BBC",
+        url: "https://www.bbc.co.uk/tiny-happy-people",
+      },
+      {
+        label: "Talking Point: ages and stages",
+        publisher: "Speech and Language UK",
+        url: "https://speechandlanguage.org.uk/talking-point/",
+      },
+    ],
   },
   {
     slug: "when-to-ask-about-speech-delay",
@@ -440,10 +529,106 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "When to ask about speech delay",
     description:
       "Signs it's worth a conversation with your health visitor or GP about your toddler's speech.",
-    readTime: "5 min read",
+    readTime: "6 min read",
     medicallyReviewed: true,
-    status: "draft",
+    reviewedBy: "Jenny Joines",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Worries about toddler speech are common, and they are often carried quietly for weeks or months before parents mention them. This piece is a calm look at how to think about those worries, what to notice and where to go for advice. It is not a checklist and it is not a diagnosis. It is a gentle reminder that asking early is allowed.",
+    sections: [
+      {
+        heading: "Why speech can worry parents",
+        body: [
+          "Speech is one of the most visible parts of toddler development, and it is easy to compare with other children of the same age. That comparison can bring worry, even when nothing is clearly wrong.",
+          "Worry does not mean something is definitely the matter. It usually means it is worth paying attention and, if the feeling persists, asking someone for advice.",
+        ],
+      },
+      {
+        heading: "Speech, understanding and communication",
+        body: [
+          "Speech is only one part of communication. Understanding what is said, using gestures, pointing, showing you things and responding to their name all matter too.",
+          "Sometimes toddlers who are not saying many words are still communicating well in other ways, and sometimes they are not. Looking at the wider picture is more useful than focusing only on word count.",
+        ],
+      },
+      {
+        heading: "Hearing and interaction",
+        body: [
+          "Hearing plays a big role in speech and language development. Frequent ear infections, glue ear or a sense that your toddler is not hearing well are all reasons to ask for advice.",
+          "How your toddler interacts, shares attention, responds to their name or takes turns in play can also give useful information alongside speech.",
+        ],
+      },
+      {
+        heading: "Looking at patterns over time",
+        body: [
+          "A single quiet week or a phase where a toddler says less is common. A pattern over weeks or months, where speech, understanding or interaction feels stuck or is going backwards, is worth taking more seriously.",
+          "Trusting your own sense of your child over time often matters more than any one moment or comparison.",
+        ],
+      },
+      {
+        heading: "What to note before asking for advice",
+        body: [
+          "Before speaking to someone, it can help to jot down what you have noticed, how long you have noticed it and any changes over time. Include understanding, gestures, hearing and interaction, not only spoken words.",
+          "You do not need to arrive with a full report. A few honest notes can help the conversation feel less rushed and more useful.",
+        ],
+      },
+      {
+        heading: "Who you can speak to",
+        body: [
+          "Your health visitor and GP are usually good first points of contact. They can talk things through with you, offer reassurance where appropriate and refer on if needed.",
+          "In some areas, you may be able to contact a local speech and language service directly, or find self-referral routes through NHS services. Your health visitor can usually point you to what is available locally.",
+        ],
+      },
+      {
+        heading: "Asking early is allowed",
+        body: [
+          "You do not need to be sure something is wrong before asking. Early conversations often lead to reassurance, and sometimes to earlier support, both of which are useful.",
+          "If you are worried about your toddler's speech, understanding, hearing, interaction, behaviour or development, ask your health visitor, GP or appropriate local service for advice.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Worry alone does not mean something is wrong, but it is worth paying attention.",
+      "Communication includes understanding, gestures and interaction, not only words.",
+      "Hearing plays a real role in speech and language development.",
+      "Patterns over weeks matter more than any single quiet moment.",
+      "A few honest notes can make asking for advice feel easier.",
+      "Asking your health visitor or GP early is always allowed.",
+    ],
+    relatedSlugs: [
+      "supporting-toddler-speech-at-home",
+      "when-milestones-feel-different",
+      "what-toddler-development-can-look-like",
+    ],
+    sources: [
+      {
+        label: "Speech and language therapy",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/speech-and-language-therapy/",
+      },
+      {
+        label: "Help your baby learn to talk",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/baby/learning-to-talk/",
+      },
+      {
+        label: "Information for parents and carers",
+        publisher: "Royal College of Speech and Language Therapists",
+        url: "https://www.rcslt.org/speech-and-language-therapy/",
+      },
+      {
+        label: "Talking Point: progress checker",
+        publisher: "Speech and Language UK",
+        url: "https://speechandlanguage.org.uk/talking-point/progress-checker/",
+      },
+      {
+        label: "Tiny Happy People",
+        publisher: "BBC",
+        url: "https://www.bbc.co.uk/tiny-happy-people",
+      },
+    ],
   },
+
 
   // Sleep
   {

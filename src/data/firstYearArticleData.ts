@@ -483,8 +483,102 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     title: "Healing after birth",
     description:
       "What physical recovery can look like in the first weeks, whether you had a vaginal birth or a caesarean.",
-    readTime: "6 min read",
-    status: "draft",
+    readTime: "7 min read",
+    status: "ready",
+    medicallyReviewed: true,
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    seoTitle: "Healing after birth | The Start of You",
+    seoDescription:
+      "Gentle guidance on physical healing, rest, soreness, bleeding, stitches, scars and recovery after birth.",
+    intro:
+      "Healing after birth is quieter and slower than most of us are led to expect. Your body has just done something enormous, and the first weeks are less a return to normal and more a gentle rebuilding. This piece walks through what physical healing can look like, so you can meet it with a little more patience and a little less pressure.",
+    sections: [
+      {
+        heading: "Why healing can take time",
+        body: [
+          "Whether you had a vaginal birth or a caesarean, your body is repairing tissues, adjusting to a huge hormonal shift and finding a new rhythm. That work happens under the surface, even on days when nothing outward seems to be changing.",
+          "It is common for the first six weeks to feel tender and tiring, and for full recovery to take longer than that. There is no single timeline that fits every parent, and comparing yourself to anyone else rarely helps.",
+        ],
+      },
+      {
+        heading: "Rest matters, even when rest is difficult",
+        body: [
+          "Rest is one of the few things that reliably supports early healing. That does not always mean sleep. It can mean lying down while feeding, staying in your pyjamas for another morning, or letting someone else answer the door.",
+          "In the first weeks, protecting your energy is a form of care, not laziness. If you can, let visits be short and let expectations of yourself be small.",
+        ],
+      },
+      {
+        heading: "Bleeding, soreness and tenderness",
+        body: [
+          "Some bleeding after birth is expected and gradually eases over the weeks that follow. Its colour and flow can change as your body settles, and pads are usually more comfortable than tampons during this time.",
+          "Soreness around your bottom, perineum or tummy is also common. Warm baths, gentle movement and taking things slowly often help. If something feels beyond what you would expect, you do not have to wait to ask.",
+        ],
+      },
+      {
+        heading: "Stitches, wounds and scars",
+        body: [
+          "If you had stitches after a tear, an episiotomy or a caesarean, the area may feel tight, tender or unfamiliar for a while. Keeping it clean and dry, and letting it heal in its own time, is usually the quiet work of recovery.",
+          "Caesarean scars in particular can feel numb, sensitive or a little pulling in the early weeks. Most people find these sensations soften over months rather than days.",
+        ],
+      },
+      {
+        heading: "Pelvic floor and core awareness",
+        body: [
+          "Your pelvic floor has been through a lot during pregnancy and birth. Gentle pelvic floor exercises, once you feel able, can support long-term recovery, and there is no rush to start heavy activity.",
+          "Your tummy muscles also need time. Rather than pushing towards a workout, small, mindful movements and good posture during feeds tend to serve early healing better.",
+        ],
+      },
+      {
+        heading: "When to ask for advice",
+        body: [
+          "Trust your instincts. You know your body better than anyone, and you are allowed to raise concerns even when you are not sure whether something counts as a problem.",
+          "If bleeding, pain, mood, temperature, wounds or any other symptoms worry you, ask for advice from your midwife, GP or the appropriate local service. It is always reasonable to check.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Keep water, snacks, pads and anything you need within arm's reach of where you feed. Small setups like this quietly protect your energy through the day.",
+          "Say yes when someone offers a meal, a walk with the pram or a load of washing. Accepting help is part of recovery, not a shortcut around it.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Healing after birth is gradual, and six weeks is a starting point rather than a finish line.",
+      "Rest is a form of care, and small setups can protect your energy through the day.",
+      "Bleeding and soreness are common early on and usually ease over the weeks that follow.",
+      "Stitches, wounds and caesarean scars each heal in their own time and often feel odd before they feel settled.",
+      "Gentle pelvic floor and core awareness supports long-term recovery more than pushing hard early on.",
+      "You are always allowed to ask a midwife or GP if something does not feel right.",
+    ],
+    relatedSlugs: [
+      "what-recovery-can-feel-like",
+      "body-changes-after-birth",
+      "postnatal-checks-and-appointments",
+    ],
+    sources: [
+      {
+        label: "Your body after the birth",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/labour-and-birth/your-body/",
+      },
+      {
+        label: "Recovery after a caesarean section",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/tests-and-treatments/caesarean-section/recovery/",
+      },
+      {
+        label: "First- and second-degree tears",
+        publisher: "RCOG",
+        url: "https://www.rcog.org.uk/for-the-public/perineal-tears-and-episiotomies-in-childbirth/first-and-second-degree-tears/",
+      },
+      {
+        label: "Your pelvic floor",
+        publisher: "RCOG",
+        url: "https://www.rcog.org.uk/for-the-public/perineal-tears-and-episiotomies-in-childbirth/your-pelvic-floor/",
+      },
+    ],
   },
   {
     slug: "what-recovery-can-feel-like",
@@ -492,8 +586,102 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     title: "What recovery can feel like",
     description:
       "The tender, tiring, quietly emotional side of the early weeks, and why it takes longer than the world lets on.",
-    readTime: "5 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    medicallyReviewed: true,
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    seoTitle: "What recovery can feel like after birth | The Start of You",
+    seoDescription:
+      "A calm guide to what postpartum recovery can feel like, including tiredness, body changes, emotions and support.",
+    intro:
+      "Recovery after birth is not one experience. It is a slow, layered process that shifts from week to week, and it very rarely looks the way the world implies. This piece is a gentle map of what recovery can feel like, so you can hold your own experience with a little more kindness.",
+    sections: [
+      {
+        heading: "Recovery is not always a straight line",
+        body: [
+          "There are often better days followed by heavier ones, and that is a normal part of healing. A quieter week does not undo a harder one, and a hard afternoon does not mean you have gone backwards.",
+          "Try to hold the picture in weeks and months rather than in days. Recovery tends to become visible only when you look back a little.",
+        ],
+      },
+      {
+        heading: "Your body may feel unfamiliar",
+        body: [
+          "In the early weeks, your body may not feel like yours in the way it once did. Movement, posture, balance and even how clothes sit can feel different, and that can be strange to sit with.",
+          "This is a real part of recovery, not a sign that something has gone wrong. Familiarity often returns in small pieces rather than all at once.",
+        ],
+      },
+      {
+        heading: "Tiredness can shape everything",
+        body: [
+          "Broken sleep and constant care shape how everything else feels. Tasks that would once have felt small can feel bigger, and emotions can sit closer to the surface.",
+          "Naming tiredness for what it is can help. Rather than pushing through, it can be worth letting the day be smaller so that rest, when it comes, is easier to take.",
+        ],
+      },
+      {
+        heading: "Emotions and recovery often overlap",
+        body: [
+          "Physical recovery and emotional adjustment often move together. Feeling tearful, tender, protective or unsure is very common in the early weeks and does not mean anything is wrong.",
+          "It is worth giving your feelings the same patience you would give a friend. There is no correct way to feel about becoming a parent, or about becoming a parent again.",
+        ],
+      },
+      {
+        heading: "Support can make recovery easier",
+        body: [
+          "Recovery often goes better when it is shared. That might be a partner, a family member, a friend, a health visitor or a group of other parents you barely know yet.",
+          "You do not have to explain everything to be supported. Sometimes company is enough, and sometimes a small practical hand is enough.",
+        ],
+      },
+      {
+        heading: "When recovery feels harder than expected",
+        body: [
+          "There are seasons in the first year where recovery genuinely feels harder than you expected, and that is worth taking seriously rather than pushing past.",
+          "If bleeding, pain, mood, temperature, wounds or any other symptoms worry you, ask for advice from your midwife, GP or the appropriate local service. Asking early tends to make things easier, not harder.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Keep the day small when you can. Fewer plans, fewer errands and lower expectations of yourself tend to make recovery feel steadier.",
+          "When someone asks how you are, try answering more honestly than usual. It is often the beginning of the support you need.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Recovery is layered and rarely linear, and better days do not cancel out harder ones.",
+      "Your body may feel unfamiliar for a while, and that is a normal part of healing.",
+      "Tiredness shapes how everything else feels, so smaller days can be a form of care.",
+      "Emotional adjustment often moves alongside physical recovery.",
+      "Support, even in small forms, tends to make recovery easier.",
+      "If something feels harder than expected, it is always reasonable to ask for advice.",
+    ],
+    relatedSlugs: [
+      "healing-after-birth",
+      "feeling-like-yourself-again",
+      "body-changes-after-birth",
+    ],
+    sources: [
+      {
+        label: "Your body after the birth",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/labour-and-birth/your-body/",
+      },
+      {
+        label: "Your 6-week postnatal check",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/support-and-services/your-6-week-postnatal-check/",
+      },
+      {
+        label: "Sleep and tiredness after having a baby",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/support-and-services/sleep-and-tiredness-after-having-a-baby/",
+      },
+      {
+        label: "Your body after the birth (the first 6 weeks)",
+        publisher: "Tommy's",
+        url: "https://www.tommys.org/pregnancy-information/after-birth/your-body-after-birth",
+      },
+    ],
   },
 
   // Emotional wellbeing
@@ -523,8 +711,102 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     title: "Body changes after birth",
     description:
       "What's normal in the weeks and months after birth, from your bump softening to how your body carries itself.",
-    readTime: "5 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    medicallyReviewed: true,
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    seoTitle: "Body changes after birth | The Start of You",
+    seoDescription:
+      "Supportive guidance on body changes after birth, including bleeding, breasts, pelvic floor, scars, skin and body image.",
+    intro:
+      "Bodies change after birth, sometimes in ways that feel expected and sometimes in ways that are quietly surprising. This piece walks through common changes calmly, without any pressure to look or feel a certain way. Everyone's recovery is a little different, and that is genuinely okay.",
+    sections: [
+      {
+        heading: "Why body changes can feel surprising",
+        body: [
+          "Pregnancy and birth change your body in many small ways at once, and not all of them settle back to how things were before. That can feel strange, especially when the changes are not the ones you were expecting.",
+          "There is no single set of changes that happens to everyone. Reading about a friend's experience or a headline online often paints a narrower picture than real life.",
+        ],
+      },
+      {
+        heading: "Bleeding, breasts and hormones",
+        body: [
+          "Bleeding after birth is expected and eases gradually over the weeks that follow. Your breasts also change as feeding gets going or hormones shift, and they can feel fuller, softer or more sensitive at different points.",
+          "Hormonal changes are quietly behind a lot of what your body does in the first months, from mood to sweat to skin. This is a normal part of the picture rather than something to fix.",
+        ],
+      },
+      {
+        heading: "Your abdomen, posture and strength",
+        body: [
+          "Your tummy will feel softer than before, and it can take a long time for muscles and skin to settle. There is no need to rush this, and gentle movement usually helps more than pushing.",
+          "Posture often shifts too, especially when you are lifting, carrying and feeding for hours a day. Small adjustments, like sitting well supported during feeds, can quietly ease your back and shoulders.",
+        ],
+      },
+      {
+        heading: "Pelvic floor changes",
+        body: [
+          "Your pelvic floor has done a huge amount of work and often needs time to feel like itself. Some leaking or heaviness in the early weeks is common and usually improves with gentle pelvic floor exercises.",
+          "If symptoms are not easing, or you are noticing anything that feels beyond a passing shift, it is worth speaking to your GP or health visitor.",
+        ],
+      },
+      {
+        heading: "Scars, stitches and skin",
+        body: [
+          "Caesarean scars, perineal stitches and stretch marks all soften and change over time, though they rarely disappear completely. In the early weeks they can feel tender, numb or sensitive to touch.",
+          "Skin changes, from pigmentation to dryness, are also common. Most quietly settle as your hormones balance out over the months.",
+        ],
+      },
+      {
+        heading: "Body image after birth",
+        body: [
+          "It is very normal to feel unsure about your body after birth, and to have days where you feel more at home in yourself than others. This has nothing to do with your worth as a person or a parent.",
+          "Try to speak to yourself with the same gentleness you would offer a friend. Comparing your body to how it was before, or to anyone else's, rarely leads anywhere kind.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Wear things that feel comfortable rather than things that used to fit. Clothes are meant to serve you, especially in this season.",
+          "If bleeding, pain, mood, temperature, wounds or any other symptoms worry you, ask for advice from your midwife, GP or the appropriate local service.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Body changes after birth are common and vary widely from person to person.",
+      "Bleeding, breast changes and hormonal shifts are all part of the early weeks.",
+      "Your tummy, posture and pelvic floor usually settle gradually with time and gentle movement.",
+      "Scars, stitches and skin changes often soften over months rather than days.",
+      "Feelings about your body can shift day to day, and kindness towards yourself matters.",
+      "It is always reasonable to ask a midwife or GP if something does not feel right.",
+    ],
+    relatedSlugs: [
+      "healing-after-birth",
+      "hormones-sweat-and-hair-loss",
+      "what-recovery-can-feel-like",
+    ],
+    sources: [
+      {
+        label: "Your body after the birth",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/labour-and-birth/your-body/",
+      },
+      {
+        label: "Your post-pregnancy body",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/support-and-services/your-post-pregnancy-body/",
+      },
+      {
+        label: "Your pelvic floor",
+        publisher: "RCOG",
+        url: "https://www.rcog.org.uk/for-the-public/perineal-tears-and-episiotomies-in-childbirth/your-pelvic-floor/",
+      },
+      {
+        label: "Body changes when you have a new baby",
+        publisher: "Tommy's",
+        url: "https://www.tommys.org/pregnancy-information/after-birth/body-changes-when-you-have-new-baby",
+      },
+    ],
   },
   {
     slug: "hormones-sweat-and-hair-loss",
@@ -532,8 +814,102 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     title: "Hormones, sweat and hair loss",
     description:
       "The hormonal shifts that quietly steer the early months, and why hair loss and night sweats aren't a worry.",
-    readTime: "4 min read",
-    status: "draft",
+    readTime: "5 min read",
+    status: "ready",
+    medicallyReviewed: true,
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    seoTitle: "Hormones, sweat and hair loss after birth | The Start of You",
+    seoDescription:
+      "Reassuring guidance on hormones, night sweats, hair shedding and body changes after birth.",
+    intro:
+      "The weeks after birth bring one of the biggest hormonal shifts your body will ever go through. Night sweats, hair shedding and unfamiliar mood dips can all sit inside that shift. This piece gently explains what is usually going on, so you can meet these changes with more calm and less worry.",
+    sections: [
+      {
+        heading: "Why hormones can feel intense after birth",
+        body: [
+          "During pregnancy your body carried very high levels of certain hormones. After birth those levels drop quickly, and other hormones rise as feeding and recovery get going.",
+          "That shift is enormous, even when nothing looks unusual from the outside. It quietly steers a lot of what your body and mind are doing in the first months.",
+        ],
+      },
+      {
+        heading: "Sweating and temperature changes",
+        body: [
+          "Many parents notice they sweat more after birth, especially at night. This is often linked to your body letting go of extra fluid and to hormonal changes, and it usually eases over a few weeks.",
+          "Cooler bedding, breathable layers and a glass of water beside the bed can make this easier to live with while it settles.",
+        ],
+      },
+      {
+        heading: "Hair shedding after birth",
+        body: [
+          "Hair often thickens during pregnancy because less of it sheds than usual. After birth, that pause ends and the extra hair falls out over a few months, which can look and feel dramatic.",
+          "This kind of shedding is a normal part of the hormonal shift and is not the same as ongoing hair loss. Most people find their hair settles back into its usual pattern over time.",
+        ],
+      },
+      {
+        heading: "Breast changes and feeding shifts",
+        body: [
+          "Whether you are breastfeeding, bottle-feeding or doing both, your breasts change as hormones and feeding patterns settle. They can feel fuller, softer, tender or unfamiliar at different points.",
+          "Nipples can also be sensitive in the early weeks, especially while feeding is being learnt. Gentle support from a midwife, health visitor or feeding specialist can make a real difference.",
+        ],
+      },
+      {
+        heading: "Mood, tiredness and hormones",
+        body: [
+          "Mood dips, tearfulness and feeling more sensitive than usual are common in the first weeks, and hormones are one part of that picture. Tiredness and adjustment sit alongside it.",
+          "None of this means you are struggling to cope. It means your body and mind are doing a lot at once.",
+        ],
+      },
+      {
+        heading: "When to ask for advice",
+        body: [
+          "You do not have to know exactly what is wrong to bring something up. Health professionals are used to gentle, uncertain questions and take them seriously.",
+          "If bleeding, pain, mood, temperature, wounds or any other symptoms worry you, ask for advice from your midwife, GP or the appropriate local service.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Keep water nearby through the day and night. Small, steady sips help with sweat, feeding and general recovery.",
+          "Be kind about your hair. Softer styling, a gentler brush and lower expectations for a season are often the easiest way through the shedding phase.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Hormones shift dramatically after birth and quietly shape a lot of the early months.",
+      "Night sweats are common and usually ease over a few weeks.",
+      "Postpartum hair shedding is a normal hormonal pattern and different from ongoing hair loss.",
+      "Breasts can feel very different as feeding and hormones settle.",
+      "Mood dips and heightened sensitivity often sit alongside hormonal change and tiredness.",
+      "It is always reasonable to ask a midwife or GP if something does not feel right.",
+    ],
+    relatedSlugs: [
+      "body-changes-after-birth",
+      "what-recovery-can-feel-like",
+      "feeling-like-yourself-again",
+    ],
+    sources: [
+      {
+        label: "Your body after the birth",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/labour-and-birth/your-body/",
+      },
+      {
+        label: "Your post-pregnancy body",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/support-and-services/your-post-pregnancy-body/",
+      },
+      {
+        label: "Hair loss",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/symptoms/hair-loss/",
+      },
+      {
+        label: "Body changes when you have a new baby",
+        publisher: "Tommy's",
+        url: "https://www.tommys.org/pregnancy-information/after-birth/body-changes-when-you-have-new-baby",
+      },
+    ],
   },
 
   // Check-ups and warning signs

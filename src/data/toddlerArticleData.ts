@@ -193,7 +193,91 @@ const rawToddlerArticles: ToddlerArticle[] = [
     description:
       "Why the smallest moments of play do the biggest work in your child's sense of safety and belonging.",
     readTime: "5 min read",
-    status: "draft",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Connection with a toddler is rarely built through big planned activities. It grows in the small, repeated moments of play that happen while you are getting through the day. This piece is a gentle look at how ordinary play helps your toddler feel safe, seen and close to you, without turning play into another thing to get right.",
+    sections: [
+      {
+        heading: "Connection does not need perfect play",
+        body: [
+          "Toddlers do not need elaborate activities to feel loved. What they take in most is your presence, your voice and the sense that you are with them, even for a few minutes at a time.",
+          "Play that feels ordinary to you can feel very safe and meaningful to your toddler. Repeating the same simple game, or noticing what they are doing without changing it, is often enough.",
+        ],
+      },
+      {
+        heading: "Getting down to their level",
+        body: [
+          "Sitting or kneeling on the floor with your toddler shifts the feel of play. It puts you in their world, softens the pace and helps them feel that you are joining in rather than watching from above.",
+          "You do not have to stay there for long. A few minutes at their level, without a phone or a task, often lands more deeply than a longer session where you are half elsewhere.",
+        ],
+      },
+      {
+        heading: "Letting your toddler lead",
+        body: [
+          "Following your toddler's lead means letting them choose what to play and how it goes, even when their ideas are odd, repetitive or a bit chaotic. You are showing them that their thinking matters.",
+          "You can still gently shape play for safety or time, but the direction can come from them. This kind of play supports language, confidence and their sense of being taken seriously.",
+        ],
+      },
+      {
+        heading: "Repeated games and shared jokes",
+        body: [
+          "Small, repeated games become a private language between you. A silly noise you always do, a peekaboo pattern, a walk to the front door that ends in a hug — these grow into shared rituals over time.",
+          "These small in-jokes build a feeling of belonging that toddlers carry with them, even when they cannot put it into words.",
+        ],
+      },
+      {
+        heading: "Play woven into daily routines",
+        body: [
+          "You do not have to carve out separate play time to build connection. Getting dressed, walking to the shops, washing hands or tidying up can all become small moments of shared play with tiny tweaks.",
+          "A song during nappy changes, a game of naming socks or a slow race to the front door can turn a rushed moment into something warmer, without needing extra time.",
+        ],
+      },
+      {
+        heading: "Repairing after hard moments",
+        body: [
+          "There will be days when patience runs out and play feels far away. Coming back to your toddler afterwards, offering a cuddle or a familiar game, is itself a powerful form of connection.",
+          "Toddlers do not need parents who never lose their temper. They benefit from parents who come back, soften and rejoin them once the storm has passed.",
+        ],
+      },
+      {
+        heading: "When play feels difficult",
+        body: [
+          "Some days you will not enjoy play, and that is honest rather than shameful. Tiredness, low mood, or simply not being in a playful headspace are all part of parenting a toddler.",
+          "If play often feels impossible, or you find little pleasure in your child over a longer stretch, it can help to speak with your health visitor or GP so you are supported as well.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Connection grows in small, repeated moments, not perfect activities.",
+      "Getting down to your toddler's level changes the feel of play.",
+      "Following their lead helps toddlers feel taken seriously.",
+      "Ordinary routines can carry small moments of shared play.",
+      "Coming back after hard moments is itself connection.",
+      "Support is available if play or parenting feels heavy for a long stretch.",
+    ],
+    relatedSlugs: [
+      "simple-play-ideas-for-toddlers",
+      "making-mealtimes-feel-calmer",
+      "picky-eating-in-toddlers",
+    ],
+    sources: [
+      {
+        label: "Bonding with your baby and toddler",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/baby/bonding/",
+      },
+      {
+        label: "Chat, play, read guidance",
+        publisher: "BBC Tiny Happy People",
+        url: "https://www.bbc.co.uk/tiny-happy-people",
+      },
+      {
+        label: "Building a secure attachment with your child",
+        publisher: "NSPCC",
+        url: "https://www.nspcc.org.uk/keeping-children-safe/support-for-parents/",
+      },
+    ],
   },
 ];
 

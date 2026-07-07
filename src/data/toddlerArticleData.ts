@@ -24,6 +24,12 @@ export interface ToddlerArticle {
   sections?: { heading: string; body: string[] }[];
   keyTakeaways?: string[];
   relatedSlugs?: string[];
+  sources?: {
+    label: string;
+    publisher: string;
+    url: string;
+    year?: string;
+  }[];
 }
 
 const rawToddlerArticles: ToddlerArticle[] = [

@@ -1,5 +1,6 @@
 import HubArticleView from "@/components/shared/HubArticleView";
 import ToddlerArticleCard from "@/components/toddler/article/ToddlerArticleCard";
+import { getToddlerArticleImages } from "@/components/toddler/article/toddlerArticleImages";
 import {
   toddlerArticles,
   type ToddlerArticle,
@@ -19,9 +20,13 @@ const ToddlerArticlePage = ({ article }: Props) => {
     .map((slug) => toddlerArticles.find((a) => a.slug === slug))
     .filter((a): a is ToddlerArticle => !!a && a.status === "ready");
 
+  const images = getToddlerArticleImages(article.slug);
+
   return (
     <HubArticleView
       article={article}
+      heroImage={images?.hero}
+      bodyImages={images?.body}
       tokens={{
         base: "--stage-toddler",
         soft: "--stage-toddler-soft",

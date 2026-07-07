@@ -1,3 +1,4 @@
+import SeoHead from "@/components/seo/SeoHead";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FYHero from "@/components/firstyear/new/FYHero";
@@ -33,7 +34,13 @@ import FYFinalCTA from "@/components/firstyear/new/FYFinalCTA";
  */
 const FirstYear = () => {
   return (
-    <div className="min-h-screen font-sans">
+    <>
+      <SeoHead
+        title="First Year Baby Guide | Feeding, Sleep, Development & Recovery"
+        description="Calm, practical guidance for your baby's first year, from feeding and sleep to development, care, postnatal recovery and emotional wellbeing."
+        canonical="https://thestartofyou.com/first-year"
+      />
+      <div className="min-h-screen font-sans">
       <Navbar />
       <main>
         <FYHero />
@@ -50,6 +57,7 @@ const FirstYear = () => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 

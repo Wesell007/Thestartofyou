@@ -122,7 +122,96 @@ const rawToddlerArticles: ToddlerArticle[] = [
     description:
       "Why toddlers reject foods they used to love, and gentle ways to keep mealtimes low-pressure.",
     readTime: "5 min read",
-    status: "draft",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Picky eating is one of the most common worries parents carry through the toddler years. Foods that were happily eaten for months can suddenly be pushed away, and mealtimes can start to feel tense. This piece is a calm look at why picky eating happens, what tends to help and when it is worth asking for support.",
+    sections: [
+      {
+        heading: "Why picky eating can happen",
+        body: [
+          "Picky eating is a normal part of toddler development for many children. As toddlers grow more independent, food becomes one of the few things they can clearly say yes or no to.",
+          "Preferences can shift week to week and are often tied to how tired, unwell or overwhelmed your toddler is, rather than to what is actually on the plate.",
+        ],
+      },
+      {
+        heading: "Appetite changes in toddlerhood",
+        body: [
+          "Toddler appetite usually slows down compared with the first year, because growth slows. It can look like a sudden loss of interest in food when in fact their body simply needs less on some days.",
+          "It is common for toddlers to eat a lot at one meal and very little at the next. Looking at eating across a week, rather than a single day, often gives a more accurate picture.",
+        ],
+      },
+      {
+        heading: "Keeping pressure low",
+        body: [
+          "The steadiest thing that seems to help picky eating over time is keeping pressure off the table. That means not persuading, not bargaining and not using pudding as a reward for finishing.",
+          "You can offer food, sit with your toddler and let them decide how much of it they eat. That approach can feel slow, but it often supports calmer eating over months rather than days.",
+        ],
+      },
+      {
+        heading: "Repeated exposure without force",
+        body: [
+          "Toddlers often need to see a food many times before they try it, and many times more before they accept it. A refused food is not a rejected food forever.",
+          "You can keep offering small amounts of a food alongside things your toddler already likes, without commenting on whether they eat it. Curiosity often grows quietly when there is no pressure attached.",
+        ],
+      },
+      {
+        heading: "Offering safe variety",
+        body: [
+          "You do not have to serve elaborate meals to offer variety. Small changes such as a different fruit at breakfast or a new vegetable next to a familiar one can be enough.",
+          "It usually helps to include at least one thing on the plate you know your toddler will eat, so mealtimes do not become a standoff over the whole meal.",
+        ],
+      },
+      {
+        heading: "Mealtime emotions",
+        body: [
+          "Toddlers pick up on the mood at the table quickly. Sighs, tense silence or repeated comments about eating can make food feel more loaded than it needs to.",
+          "Trying to keep the tone light and conversational, even when eating is limited, is a small thing that can add up. Your calm at the table matters as much as what is served.",
+        ],
+      },
+      {
+        heading: "When to ask for support",
+        body: [
+          "For most toddlers, picky eating settles in time with steady offerings and low pressure. It can help to remember that eating well is a slow process, not a daily test.",
+          "If your toddler is losing weight, seems unwell, has feeding difficulties, has very restricted eating or you are worried about their growth, ask your health visitor, GP or appropriate local service for advice.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Picky eating is common and often part of normal toddler development.",
+      "Toddler appetite naturally slows and varies from day to day.",
+      "Low pressure at the table supports steadier eating over time.",
+      "Repeated, calm exposure to foods helps more than persuasion.",
+      "A steady mood at meals matters as much as what is on the plate.",
+      "Ask your health visitor or GP if you are worried about growth or intake.",
+    ],
+    relatedSlugs: [
+      "making-mealtimes-feel-calmer",
+      "simple-play-ideas-for-toddlers",
+      "building-connection-through-everyday-play",
+    ],
+    sources: [
+      {
+        label: "Fussy eaters",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/weaning-and-feeding/fussy-eaters/",
+      },
+      {
+        label: "Toddler eating and mealtimes",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Eating well: the toddler years",
+        publisher: "First Steps Nutrition Trust",
+        url: "https://www.firststepsnutrition.org/eating-well-early-years",
+      },
+      {
+        label: "Food fact sheet: toddlers",
+        publisher: "British Dietetic Association",
+        url: "https://www.bda.uk.com/resource/toddlers.html",
+      },
+    ],
   },
   {
     slug: "making-mealtimes-feel-calmer",

@@ -451,8 +451,102 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     title: "Baby development in the first year",
     description:
       "A gentle map of what unfolds in the first year, without turning every week into a checklist.",
-    readTime: "6 min read",
-    status: "draft",
+    readTime: "7 min read",
+    status: "ready",
+    medicallyReviewed: true,
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    seoTitle: "Baby development in the first year | The Start of You",
+    seoDescription:
+      "A calm guide to baby development in the first year, including movement, communication, play and milestones.",
+    intro:
+      "Baby development in the first year is often described in bright lists of firsts, but in real life it tends to unfold much more quietly. Small changes build over weeks and months, and no two babies move through them in quite the same order. This piece is a calm map of what tends to happen, so you can hold the bigger picture without turning every day into a checklist.",
+    sections: [
+      {
+        heading: "Development is more than milestones",
+        body: [
+          "Milestones can be useful signposts, but they are only part of the story. Development also shows up in how your baby watches your face, settles into your arms, notices a new sound or reaches for something that has caught their eye.",
+          "Holding the picture loosely tends to help. Your baby is learning all the time, even in the quiet moments that do not look like anything on a list.",
+        ],
+      },
+      {
+        heading: "Movement and strength build gradually",
+        body: [
+          "In the early months, babies slowly gain control of their head, then their upper body, then their hands, hips and legs. Rolling, sitting, reaching, crawling in some form, pulling to stand and eventually cruising or walking tend to appear over a wide range of ages.",
+          "Time on their tummy while awake and supervised, floor play and being carried in different positions all give your baby chances to practise. There is no need to rush any single stage.",
+        ],
+      },
+      {
+        heading: "Senses, play and curiosity",
+        body: [
+          "Your baby's senses sharpen quickly. In the first months, faces, contrast, gentle sounds and being held close are often the most interesting things in the world. Later on, textures, simple toys, mirrors and everyday objects become fascinating.",
+          "Play in the first year does not need to be elaborate. Talking through what you are doing, showing them small things around the house and giving them safe time on the floor are all real learning.",
+        ],
+      },
+      {
+        heading: "Communication starts before words",
+        body: [
+          "Long before first words, babies communicate through eye contact, facial expressions, small sounds, cooing and babbling. Turn-taking, where you respond to their sounds and pause for theirs, is one of the most important building blocks of language.",
+          "Reading, singing, naming what you see and simply chatting through the day all support communication. First words often arrive somewhere in the second half of the year, but the range is wide and varies a lot.",
+        ],
+      },
+      {
+        heading: "Feeding, sleep and development can overlap",
+        body: [
+          "New skills, growth spurts and changes around feeding or sleep often bump into each other. A baby learning to roll or pull up may briefly wake more at night. A baby starting solids may still want lots of milk feeds.",
+          "This overlap is normal. It rarely means you have done something wrong. It usually means several things are changing at once, which takes energy.",
+        ],
+      },
+      {
+        heading: "Connection supports learning",
+        body: [
+          "Warm, responsive care is one of the strongest supports for development. When your baby feels safe, they have more energy for exploring, playing and learning new things.",
+          "You do not need to be endlessly patient or endlessly playful. Ordinary responsive moments across the day, including comfort when they are upset, add up over time.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Attend the routine baby reviews offered by your health visiting team when you can. These check-ins are a good place to talk through anything you have noticed and to ask questions without needing a particular reason.",
+          "If you are worried about your baby's development, or something feels different from what you expected, ask your health visitor, GP or the appropriate local service for advice.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Development in the first year is gradual and rarely tidy.",
+      "Milestones are signposts, not deadlines.",
+      "Movement, senses, play and communication all develop alongside each other.",
+      "Everyday responsive moments support learning as much as structured play.",
+      "New skills often overlap with changes in feeding or sleep.",
+      "Routine reviews and health visitor contacts are useful places to ask questions.",
+    ],
+    relatedSlugs: [
+      "when-milestones-feel-uneven",
+      "baby-care-basics",
+      "newborn-sleep-expectations",
+    ],
+    sources: [
+      {
+        label: "Baby development: your baby's first year",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/baby/baby-development/",
+      },
+      {
+        label: "Baby's development",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/",
+      },
+      {
+        label: "Baby reviews: height, weight and development checks",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/babys-development/height-weight-and-reviews/baby-reviews/",
+      },
+      {
+        label: "Personal Child Health Record (PCHR)",
+        publisher: "RCPCH",
+        url: "https://www.rcpch.ac.uk/resources/personal-child-health-record-pchr",
+      },
+    ],
   },
   {
     slug: "when-milestones-feel-uneven",
@@ -460,8 +554,102 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     title: "When milestones feel uneven",
     description:
       "Why babies rarely develop in straight lines, and when a gentle chat with your health visitor can help.",
-    readTime: "4 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    medicallyReviewed: true,
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    seoTitle: "When baby milestones feel uneven | The Start of You",
+    seoDescription:
+      "Supportive guidance for parents when baby milestones feel uneven, delayed or different from what they expected.",
+    intro:
+      "When one area of your baby's development seems to race ahead while another feels slower, it can be hard not to worry. Uneven development is common, and often part of how babies learn. At the same time, if something feels off to you, that instinct is worth listening to. This piece holds both truths gently: many differences are normal, and worries are still worth talking through.",
+    sections: [
+      {
+        heading: "Why milestones can feel emotional",
+        body: [
+          "Milestone lists are useful, but they can also weigh heavy. It is easy to start scanning your baby for what they are not doing yet, rather than noticing what they are doing.",
+          "If you have felt a knot in your chest when reading a development chart, you are not alone. Many parents feel this at some point in the first year.",
+        ],
+      },
+      {
+        heading: "Development does not always move evenly",
+        body: [
+          "Babies often focus on one area at a time. Some pour their energy into movement, others into sounds, others into watching and listening carefully before doing much visible on the outside.",
+          "A pause in one area does not always mean a problem. It can simply mean their attention has moved somewhere else for a while.",
+        ],
+      },
+      {
+        heading: "One area can move faster than another",
+        body: [
+          "It is common for a baby to be ahead of expectations in one area, such as babbling or gross motor skills, while being closer to the later end of the range in another. Over time, these often even out.",
+          "The wider picture across weeks and months usually tells you more than any single snapshot on any single day.",
+        ],
+      },
+      {
+        heading: "Try not to compare babies too closely",
+        body: [
+          "Babies of similar ages can look very different in what they do. Family patterns, prematurity, temperament, health and simple individual differences all shape the picture.",
+          "If comparisons with other babies leave you feeling worse, it is okay to step back from that content or those conversations for a while.",
+        ],
+      },
+      {
+        heading: "What to notice over time",
+        body: [
+          "Rather than fixing on a single milestone, it can help to look at broader patterns. Is your baby generally responsive to you, interested in the world around them, and gradually adding new skills, even in small ways?",
+          "Keeping a loose sense of these patterns is more useful than tracking any single item on a checklist.",
+        ],
+      },
+      {
+        heading: "When to ask for advice",
+        body: [
+          "If you are worried about your baby's development, or something feels different from what you expected, ask your health visitor, GP or the appropriate local service for advice. They can talk things through with you, do gentle checks and refer on if helpful.",
+          "You do not need a long list of concerns before making contact. Wanting to talk something through is reason enough.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Note down what you have noticed in simple language, including when it started and how often you see it. This can help conversations with a health visitor or GP feel less rushed.",
+          "Keep responsive play, comfort and everyday chatting going as usual. These support your baby regardless of exactly where they are on any given chart.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Uneven development between areas is common in the first year.",
+      "A pause in one area often reflects focus on another.",
+      "The wider pattern over weeks tends to say more than a single day.",
+      "Comparisons with other babies can add pressure without adding clarity.",
+      "Worries are worth discussing with a health visitor or GP, even without a long list.",
+      "Warm, everyday care supports your baby whatever the picture looks like.",
+    ],
+    relatedSlugs: [
+      "baby-development-in-the-first-year",
+      "baby-care-basics",
+      "when-to-ask-for-help-after-birth",
+    ],
+    sources: [
+      {
+        label: "Baby's development",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/",
+      },
+      {
+        label: "Baby development: your baby's first year",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/baby/baby-development/",
+      },
+      {
+        label: "Baby reviews: height, weight and development checks",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/babys-development/height-weight-and-reviews/baby-reviews/",
+      },
+      {
+        label: "Personal Child Health Record (PCHR)",
+        publisher: "RCPCH",
+        url: "https://www.rcpch.ac.uk/resources/personal-child-health-record-pchr",
+      },
+    ],
   },
 
   // Care and safety

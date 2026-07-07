@@ -40,8 +40,92 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "What toddler development can look like",
     description:
       "A gentle map of the leaps, plateaus and quiet shifts that shape the toddler years.",
-    readTime: "5 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Toddler development is broad, uneven and rarely tidy. Some weeks bring a burst of new words or skills, and others feel like a plateau where very little seems to change. This piece is a calm look at how toddler development can show up across movement, communication, play, independence and feelings, without turning it into a strict checklist.",
+    sections: [
+      {
+        heading: "Toddler development is broad",
+        body: [
+          "Toddler development covers a wide range of skills that grow together, including movement, understanding, speech, play, independence and emotional awareness. Progress in one area can pause while another is quietly growing.",
+          "Two toddlers of the same age can look very different and both be developing well. Ranges given in guidance are usually wide on purpose, because normal development varies from child to child.",
+        ],
+      },
+      {
+        heading: "Movement and physical confidence",
+        body: [
+          "In the toddler years, walking usually becomes steadier, and running, climbing, kicking and simple jumping start to appear over time. Fine movements such as holding a spoon, turning pages or stacking blocks also develop gradually.",
+          "It helps to give toddlers space and time to practise, rather than expecting new skills on demand. Confidence in movement often grows through everyday play, not through structured activities.",
+        ],
+      },
+      {
+        heading: "Speech, understanding and communication",
+        body: [
+          "Understanding usually comes before speaking. Many toddlers can follow simple requests and point to familiar things well before they use lots of words themselves.",
+          "Vocabulary can grow in bursts, with quiet stretches in between. Gestures, sounds, pointing and short phrases are all part of how toddlers communicate as language builds.",
+        ],
+      },
+      {
+        heading: "Play, curiosity and problem solving",
+        body: [
+          "Play is one of the clearest windows into toddler development. Sorting, stacking, posting objects, pretend cooking and simple role play all show growing thinking and problem-solving skills.",
+          "Toddlers often repeat the same play over and over. That repetition is part of how they learn, even when it can feel a little slow or samey to the adult beside them.",
+        ],
+      },
+      {
+        heading: "Independence and everyday skills",
+        body: [
+          "Small everyday skills, such as attempting to feed themselves, helping with dressing or carrying a cup, are all part of toddler development. Progress is usually messy before it becomes smooth.",
+          "It often helps to allow a little more time in daily routines so your toddler can try things themselves. Independence tends to grow when there is space to have a go without being rushed.",
+        ],
+      },
+      {
+        heading: "Emotions and social development",
+        body: [
+          "Big feelings are a normal part of toddlerhood. Toddlers are still learning what emotions are and how to manage them, so meltdowns, clinginess and sudden mood shifts are common.",
+          "Social skills, such as playing near other children, taking turns and noticing others' feelings, build slowly across the toddler years. Steady, calm adults nearby matter more than any particular activity.",
+        ],
+      },
+      {
+        heading: "Watching patterns over time",
+        body: [
+          "One quiet week or one big leap does not tell you much on its own. Development is easier to see when you look at patterns across weeks and months, rather than from one day to the next.",
+          "If something about your toddler's development keeps sitting uneasily with you, it is always fine to talk it through with your health visitor or GP. Your steady sense of your child matters.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Toddler development is broad and rarely moves at the same pace in every area.",
+      "Understanding usually grows before spoken language.",
+      "Play is one of the clearest signs of thinking and problem solving.",
+      "Independence often looks messy before it looks skilful.",
+      "Big feelings and social wobbles are a normal part of this stage.",
+      "Patterns over weeks and months tell you more than any single day.",
+    ],
+    relatedSlugs: [
+      "when-milestones-feel-different",
+      "simple-play-ideas-for-toddlers",
+      "building-connection-through-everyday-play",
+    ],
+    sources: [
+      {
+        label: "Toddler development",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Learning to talk: 1 to 2 years",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/play-and-learning/learning-to-talk/",
+      },
+      {
+        label: "Tiny Happy People",
+        publisher: "BBC",
+        url: "https://www.bbc.co.uk/tiny-happy-people",
+      },
+    ],
   },
   {
     slug: "when-milestones-feel-different",
@@ -49,8 +133,97 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "When milestones feel different",
     description:
       "Why children rarely develop on the same timeline, and when a chat with your health visitor can help.",
-    readTime: "4 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "It can be unsettling when your toddler's development starts to feel different from other children the same age. This piece is written for parents who have that quiet sense that something is not quite lining up. It does not diagnose or predict anything. It offers a calm way to think about what you are seeing and when a conversation with a professional can help.",
+    sections: [
+      {
+        heading: "Why milestones can feel different",
+        body: [
+          "Toddler development happens across many areas at once. Some children move quickly through one area and slowly through another, and each child's pattern is their own.",
+          "Feeling that something is different does not automatically mean something is wrong. It is worth taking seriously without treating it as a conclusion.",
+        ],
+      },
+      {
+        heading: "Uneven development is common",
+        body: [
+          "It is normal for toddlers to be ahead in one area and behind in another. A child with lots of words may take longer with movement, and a very physical toddler may talk later.",
+          "Bursts and plateaus are part of the picture. A quiet stretch does not always mean something has stalled, and a leap forward does not always mean the pace will continue.",
+        ],
+      },
+      {
+        heading: "Looking at patterns, not one moment",
+        body: [
+          "Any single day can look uneven, especially when your toddler is tired, unwell, teething or going through a change at home. One tricky moment is rarely the whole story.",
+          "Watching for patterns across a few weeks is usually more useful than reacting to a single day. It also gives you something clearer to describe if you do speak to a professional.",
+        ],
+      },
+      {
+        heading: "Comparing with other children",
+        body: [
+          "Comparisons happen naturally at toddler groups, in the family and on social media. They can be helpful sometimes, and they can also quietly increase worry when they are not the full picture.",
+          "Other children's ages, sleep, home life and personalities all shape what you see. What you notice in a ten minute play session is only a small window into their week.",
+        ],
+      },
+      {
+        heading: "Trusting your concern without panic",
+        body: [
+          "You know your toddler in a way no chart or app can. If something is quietly worrying you, that observation is worth respecting rather than dismissing.",
+          "Trusting your concern does not mean jumping to a diagnosis or a label. It means being willing to note what you are seeing and, if it keeps sitting with you, to talk it through with someone who can help.",
+        ],
+      },
+      {
+        heading: "What to note before asking for advice",
+        body: [
+          "Before speaking to a health visitor or GP, it can help to jot down what you are noticing. Things such as what your toddler tends to do, what they seem to find hard, and any recent changes are all useful.",
+          "You do not need a detailed report. A few short notes about specific examples are usually enough to help a professional understand what is on your mind.",
+        ],
+      },
+      {
+        heading: "When to ask for support",
+        body: [
+          "If you are worried about your toddler's development, speech, movement, behaviour, hearing, vision or interaction, ask your health visitor, GP or appropriate local service for advice.",
+          "You are not being over cautious by asking. Early conversations are useful even when everything turns out to be within a normal range, because they give you clearer ground to stand on.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Uneven development between different areas is common in the toddler years.",
+      "Patterns across weeks tell you more than any single day.",
+      "Comparisons with other children rarely show the full picture.",
+      "Your quiet concern about your child is worth respecting.",
+      "Short notes on what you notice can help a health visitor or GP.",
+      "Ask for advice if something keeps sitting uneasily with you.",
+    ],
+    relatedSlugs: [
+      "what-toddler-development-can-look-like",
+      "simple-play-ideas-for-toddlers",
+      "building-connection-through-everyday-play",
+    ],
+    sources: [
+      {
+        label: "Toddler development",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Health visitor and reviews",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/height-weight-and-reviews/baby-reviews/",
+      },
+      {
+        label: "Tiny Happy People",
+        publisher: "BBC",
+        url: "https://www.bbc.co.uk/tiny-happy-people",
+      },
+      {
+        label: "Worried about your child",
+        publisher: "NSPCC",
+        url: "https://www.nspcc.org.uk/keeping-children-safe/support-for-parents/",
+      },
+    ],
   },
 
   // Behaviour and emotions

@@ -127,6 +127,15 @@ const growingFamilies: FamilyTopicConfig = {
     "preparing-for-another-baby",
     "helping-your-child-adjust-to-a-new-sibling",
   ],
+  articleGroups: [
+    {
+      label: "New siblings and family change",
+      slugs: [
+        "preparing-for-another-baby",
+        "helping-your-child-adjust-to-a-new-sibling",
+      ],
+    },
+  ],
 };
 
 const relationships: FamilyTopicConfig = {
@@ -195,6 +204,16 @@ const relationships: FamilyTopicConfig = {
   startHere: [
     "sharing-the-mental-load",
     "setting-boundaries-with-grandparents",
+  ],
+  articleGroups: [
+    {
+      label: "Sharing family life",
+      slugs: ["sharing-the-mental-load"],
+    },
+    {
+      label: "Wider family boundaries",
+      slugs: ["setting-boundaries-with-grandparents"],
+    },
   ],
 };
 
@@ -265,6 +284,12 @@ const familyBasics: FamilyTopicConfig = {
     "building-family-routines",
     "managing-childcare-costs",
   ],
+  articleGroups: [
+    {
+      label: "Routines and practical planning",
+      slugs: ["building-family-routines", "managing-childcare-costs"],
+    },
+  ],
 };
 
 const healthSafety: FamilyTopicConfig = {
@@ -333,6 +358,12 @@ const healthSafety: FamilyTopicConfig = {
   startHere: [
     "making-your-home-safer",
     "when-to-ask-for-help",
+  ],
+  articleGroups: [
+    {
+      label: "Feeling safer and knowing when to ask",
+      slugs: ["making-your-home-safer", "when-to-ask-for-help"],
+    },
   ],
 };
 
@@ -403,6 +434,12 @@ const travelDaysOut: FamilyTopicConfig = {
     "travelling-with-young-children",
     "making-car-journeys-calmer",
   ],
+  articleGroups: [
+    {
+      label: "Journeys and days out",
+      slugs: ["travelling-with-young-children", "making-car-journeys-calmer"],
+    },
+  ],
 };
 
 const playConnection: FamilyTopicConfig = {
@@ -471,6 +508,12 @@ const playConnection: FamilyTopicConfig = {
   startHere: [
     "building-family-traditions",
     "screen-time-as-a-family",
+  ],
+  articleGroups: [
+    {
+      label: "Play, connection and screens",
+      slugs: ["building-family-traditions", "screen-time-as-a-family"],
+    },
   ],
 };
 

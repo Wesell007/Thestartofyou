@@ -133,6 +133,7 @@ const growingFamilies: FamilyTopicConfig = {
       slugs: [
         "preparing-for-another-baby",
         "helping-your-child-adjust-to-a-new-sibling",
+        "second-time-parenting",
       ],
     },
   ],
@@ -214,6 +215,10 @@ const relationships: FamilyTopicConfig = {
       label: "Wider family boundaries",
       slugs: ["setting-boundaries-with-grandparents"],
     },
+    {
+      label: "Staying close",
+      slugs: ["staying-connected-as-parents"],
+    },
   ],
 };
 
@@ -287,7 +292,11 @@ const familyBasics: FamilyTopicConfig = {
   articleGroups: [
     {
       label: "Routines and practical planning",
-      slugs: ["building-family-routines", "managing-childcare-costs"],
+      slugs: [
+        "building-family-routines",
+        "managing-childcare-costs",
+        "calmer-evenings-after-busy-days",
+      ],
     },
   ],
 };
@@ -362,7 +371,11 @@ const healthSafety: FamilyTopicConfig = {
   articleGroups: [
     {
       label: "Feeling safer and knowing when to ask",
-      slugs: ["making-your-home-safer", "when-to-ask-for-help"],
+      slugs: [
+        "making-your-home-safer",
+        "when-to-ask-for-help",
+        "family-sick-days-at-home",
+      ],
     },
   ],
 };
@@ -437,7 +450,11 @@ const travelDaysOut: FamilyTopicConfig = {
   articleGroups: [
     {
       label: "Journeys and days out",
-      slugs: ["travelling-with-young-children", "making-car-journeys-calmer"],
+      slugs: [
+        "travelling-with-young-children",
+        "making-car-journeys-calmer",
+        "planning-family-days-out",
+      ],
     },
   ],
 };
@@ -512,7 +529,11 @@ const playConnection: FamilyTopicConfig = {
   articleGroups: [
     {
       label: "Play, connection and screens",
-      slugs: ["building-family-traditions", "screen-time-as-a-family"],
+      slugs: [
+        "building-family-traditions",
+        "screen-time-as-a-family",
+        "simple-family-play-ideas",
+      ],
     },
   ],
 };

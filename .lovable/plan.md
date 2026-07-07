@@ -1,113 +1,78 @@
-## Phase 8.2 — Toddler Batch 1 Publishing (Play + Food)
+## Phase 8.2b — Toddler Batch 1 Image Mappings (Play + Food)
 
-Scope: single-file edit to `src/data/toddlerArticleData.ts`. Replace the 4 draft objects for Play + Food slugs with full ready articles. No component, route, image, or SEO changes. Other 12 drafts untouched.
+Single-file edit to `src/components/toddler/article/toddlerArticleImages.ts`, plus 6 new bespoke images generated into `src/assets/`. No other files changed.
 
-### Slugs to publish (topic / slug unchanged)
+### Approach
 
-1. `play-connection` / `simple-play-ideas-for-toddlers`
-2. `play-connection` / `building-connection-through-everyday-play`
-3. `food-feeding` / `picky-eating-in-toddlers`
-4. `food-feeding` / `making-mealtimes-feel-calmer`
+Each article gets one hero + one body image (body placed at `afterSectionIndex: 1`, i.e. between section 2 and section 3). To avoid two Play articles or two Food articles sharing the same hero, I reuse the topic asset once per topic and generate fresh bespoke work for the rest. Every image is unique across the batch.
 
-### Shared shape (per article)
+### Mapping
 
-- `status: "ready"`
-- `medicallyReviewed: false` for all four (none of these four drafts were flagged for review)
-- `title`, `description`, `slug`, `topic` kept
-- `readTime` kept unless final length clearly warrants a bump (target: keep as-is)
-- `intro`: 1 short paragraph, calm and parent-first
-- `sections`: exactly 7, each with 2 short paragraphs in `body: string[]`
-- `keyTakeaways`: 5–6 items
-- `relatedSlugs`: only the other 3 slugs from this batch (all 4 become ready together, so every article can safely have 3 in-batch ready siblings)
-- `sources`: 2–4 credible UK sources per article (see per-article list)
-- `lastUpdated: "2026-07"`
-- No `reviewedBy` (not medically reviewed)
+| Article | Hero | Body |
+|---|---|---|
+| `simple-play-ideas-for-toddlers` | **reuse** `src/assets/toddler-topic-play.jpg` | **new** `src/assets/toddler-article-simple-play-body.jpg` |
+| `building-connection-through-everyday-play` | **new** `src/assets/toddler-article-connection-hero.jpg` | **new** `src/assets/toddler-article-connection-body.jpg` |
+| `picky-eating-in-toddlers` | **reuse** `src/assets/toddler-topic-food.jpg` | **new** `src/assets/toddler-article-picky-eating-body.jpg` |
+| `making-mealtimes-feel-calmer` | **new** `src/assets/toddler-article-calm-mealtime-hero.jpg` | **new** `src/assets/toddler-article-calm-mealtime-body.jpg` |
 
-### Tone and safety rules applied to all four
+### Alt text and captions
 
-British English. Calm, premium, emotionally grounded. Simple human writing. Parent-first. No em dashes anywhere. No invented stats, no diagnosis, no treatment instructions, no shame, no fear framing, no strict feeding rules, no calorie/portion targets, no reward/punishment framing. Keyword themes woven in naturally where they fit — never stuffed.
+**1. `simple-play-ideas-for-toddlers`**
+- Hero alt: "A toddler playing with simple toys in a calm home setting"
+- Body alt: "A parent and toddler sharing a simple everyday play moment"
+- Body caption: "Simple play does not need to be complicated. Toddlers often learn most through repeated, ordinary moments."
+- `// bespoke future: toddler exploring simple play at home with a parent nearby in warm natural light`
 
-### Article 1 — `simple-play-ideas-for-toddlers` (play-connection)
+**2. `building-connection-through-everyday-play`**
+- Hero alt: "A parent and toddler sharing a gentle play moment at home"
+- Body alt: "A toddler leading play while a parent joins in nearby"
+- Body caption: "Connection is often built through small repeated moments, not perfect activities."
+- `// bespoke future: parent and toddler connecting through simple everyday play in a calm home setting`
 
-Section headings (in order):
-1. Why simple play matters
-2. Everyday objects and safe exploring
-3. Movement play at home and outside
-4. Imagination and pretend play
-5. Music, rhythm and repeated games
-6. Play when you have very little time
-7. Following your toddler's lead
+**3. `picky-eating-in-toddlers`**
+- Hero alt: "A toddler sitting calmly at the table during a simple mealtime"
+- Body alt: "A small toddler meal served calmly without pressure"
+- Body caption: "Picky eating can feel stressful, but calm repetition and low pressure can help mealtimes feel more manageable."
+- `// bespoke future: calm toddler mealtime with simple food and no pressure in a warm home setting`
 
-Related: `building-connection-through-everyday-play`, `making-mealtimes-feel-calmer`, `picky-eating-in-toddlers`.
+**4. `making-mealtimes-feel-calmer`**
+- Hero alt: "A parent and toddler sharing a calm mealtime at home"
+- Body alt: "A toddler exploring food during a relaxed family meal"
+- Body caption: "A calmer mealtime is not about a perfect plate. It is about reducing pressure and finding a rhythm that works for your family."
+- `// bespoke future: relaxed parent and toddler mealtime at home, warm and realistic without pressure`
 
-Sources (2–3): NHS Start for Life (play and learning), BBC Tiny Happy People (toddler activity guidance), Play Scotland (value of play).
+### New image generation prompts (fast tier, JPG, 1536×1024)
 
-### Article 2 — `building-connection-through-everyday-play` (play-connection)
+All prompts share: **calm, premium, warm natural light, realistic photography, parent-centred, toddler-centred, emotionally grounded, not clinical, not staged, no logos, no on-image text.**
 
-Section headings:
-1. Connection does not need perfect play
-2. Getting down to their level
-3. Letting your toddler lead
-4. Repeated games and shared jokes
-5. Play woven into daily routines
-6. Repairing after hard moments
-7. When play feels difficult
+1. `toddler-article-simple-play-body.jpg` — "A parent and toddler on a soft rug at home playing with simple wooden blocks and a couple of everyday household objects, warm natural window light, calm, unposed, real family home."
+2. `toddler-article-connection-hero.jpg` — "A parent sitting cross-legged on the living room floor at eye level with their toddler, sharing a gentle play moment, warm morning light, quiet and connected, real home setting."
+3. `toddler-article-connection-body.jpg` — "A toddler leading pretend play with a soft toy while a parent joins in nearby on the floor, soft daylight, warm neutral home, unstaged."
+4. `toddler-article-calm-mealtime-hero.jpg` — "A parent and toddler sharing a calm mealtime at a wooden kitchen table with simple everyday food, natural light, warm and unposed, realistic family setting."
+5. `toddler-article-picky-eating-body.jpg` — "A small toddler-sized plate with simple everyday food on a wooden table beside a small cup of water, calm, no hands in frame, warm daylight, uncluttered."
+6. `toddler-article-calm-mealtime-body.jpg` — "A toddler in a high chair calmly exploring a piece of food with their fingers, parent's hand resting gently on the table nearby, warm natural light, quiet and unhurried."
 
-Related: `simple-play-ideas-for-toddlers`, `making-mealtimes-feel-calmer`, `picky-eating-in-toddlers`.
+### File shape
 
-Sources (2–3): NHS Start for Life (bonding and communication), BBC Tiny Happy People (chat, play, read), NSPCC (secure attachment / responsive care).
+Extend `toddlerArticleImageMap` in `src/components/toddler/article/toddlerArticleImages.ts` with 4 entries in the pattern already established (mirrors First Year). Add clean imports at the top of the file, one per used asset, no duplicates, no unused. Helper `getToddlerArticleImages` and interface types stay untouched.
 
-### Article 3 — `picky-eating-in-toddlers` (food-feeding)
+### Untouched
 
-Section headings:
-1. Why picky eating can happen
-2. Appetite changes in toddlerhood
-3. Keeping pressure low
-4. Repeated exposure without force
-5. Offering safe variety
-6. Mealtime emotions
-7. When to ask for support
-
-The final section includes the required safety line, worded exactly:
-
-> If your toddler is losing weight, seems unwell, has feeding difficulties, has very restricted eating or you are worried about their growth, ask your health visitor, GP or appropriate local service for advice.
-
-Related: `making-mealtimes-feel-calmer`, `simple-play-ideas-for-toddlers`, `building-connection-through-everyday-play`.
-
-Sources (3–4): NHS (fussy eating in toddlers), NHS Start for Life (toddler eating), First Steps Nutrition Trust (eating well: the toddler years), British Dietetic Association (food fact sheet: toddlers).
-
-### Article 4 — `making-mealtimes-feel-calmer` (food-feeding)
-
-Section headings:
-1. Why toddler mealtimes can feel hard
-2. Lowering pressure around food
-3. Simple routines that help
-4. Sitting together when you can
-5. Managing mess and short attention spans
-6. What to do when food is refused
-7. Keeping perspective
-
-Final section includes the required safety line, worded exactly:
-
-> If mealtimes are becoming very stressful, your toddler is eating a very limited range, growth is a concern or feeding feels difficult to manage, ask your health visitor, GP or appropriate local service for advice.
-
-Related: `picky-eating-in-toddlers`, `building-connection-through-everyday-play`, `simple-play-ideas-for-toddlers`.
-
-Sources (3–4): NHS (help your child develop healthy eating habits / fussy eaters), NHS Start for Life (toddler meals), First Steps Nutrition Trust, British Dietetic Association.
-
-### Implementation detail
-
-In `src/data/toddlerArticleData.ts`, locate each of the 4 raw objects and replace with the full expanded object (intro, 7 sections, 5–6 takeaways, related, sources, lastUpdated, `status: "ready"`). The `withToddlerDefaults` wrapper stays untouched — since these objects now carry `intro`, `sections`, `keyTakeaways`, `relatedSlugs`, the `??` fallbacks are skipped for them. The 12 other drafts continue to receive placeholder defaults exactly as today.
+Article copy, sources, status, related slugs, cards, topic pages, routes, SEO, all Pregnancy / TTC / IVF / Family / First Year files.
 
 ### Verification
 
 - `bunx tsgo --noEmit` clean.
-- Playwright, localhost:8080, 1280×1800:
-  - 4 ready article routes → 200 and render full body (no "placeholder while the full article is being written" text).
-  - 2+ sampled draft routes (e.g. `/toddler/health-safety/when-to-call-the-gp`, `/toddler/speech-language/when-to-ask-about-speech-delay`) → NotFound.
-  - `/toddler/play-connection` and `/toddler/food-feeding`: 2 cards each are now clickable `<a>` (no "Coming soon"), other topics still show "Coming soon" on their drafts.
-- Diff scope: only `src/data/toddlerArticleData.ts` changed.
+- Playwright desktop 1280×1800 + mobile 375×812 on all 4 ready routes:
+  - 200 status; exactly 1 hero image and 1 body image with correct alt text.
+  - No horizontal overflow on mobile (measure `scrollWidth <= clientWidth`).
+  - No broken images (`naturalWidth > 0` on all `<img>` in the article body).
+  - "Medically reviewed" pill absent.
+  - Sources block renders.
+  - Related grid shows only ready siblings.
+- 2 sampled draft routes still NotFound.
+- Regression sweep: `/toddler`, `/toddler/play-connection`, `/toddler/food-feeding`, `/first-year`, `/articles/complete-guide-morning-sickness`, `/pregnancy`, `/trying-to-conceive`, `/ivf` → all 200.
 
-### Summary deliverable
+### Deliverable summary
 
-Files edited (1), 4 slugs published, Toddler totals (16 / 4 ready / 12 draft), per-article section counts (7 each), takeaway counts (5–6), source counts (2–4), related slugs listing, safety-line presence for both food articles, draft-gating still enforced, route + topic-card verification, tsgo result, and go/no-go for Phase 8.2b image mappings.
+Files edited, assets reused (2), new assets added (6, listed with prompts), per-article hero + body paths + alt + caption, desktop + mobile verification, mobile-overflow result, sources + related + draft-gating status, tsgo result, regression result, and go/no-go for Phase 8.3 (Batch 2).

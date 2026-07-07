@@ -1,68 +1,88 @@
+# Phase 7.3b — First Year Article Image System
 
-# Phase 7.3 — First Year Batch 1 publishing
+Bring First Year article pages up to the site's premium editorial standard by adding a hero image and at least one body image, using a mapping file that mirrors the Family pattern.
 
-## Files edited
-- `src/data/firstYearArticleData.ts` (only)
+## Scope
 
-No component, route, SEO wiring, image, or cross-hub edits.
+Two files only:
 
-## Articles flipped to `status: "ready"`
-1. `newborn-sleep-expectations` (sleep)
-2. `helping-your-baby-settle` (sleep)
-3. `safe-sleep-and-home-safety` (care-and-safety)
-4. `baby-care-basics` (care-and-safety)
+1. **New:** `src/components/firstyear/article/firstYearArticleImages.ts`
+2. **Edit:** `src/components/firstyear/article/FirstYearArticlePage.tsx`
 
-All other 13 articles remain `draft`. Post-batch count: 4 ready / 13 draft.
+No changes to article copy, statuses, `HubArticleView`, Family/Pregnancy/TTC/IVF/Toddler files, tokens, routes, SEO, or new assets.
 
-## Fields added to each of the four
-- `status: "ready"`
-- `medicallyReviewed: true`
-- `reviewedBy: "Jenny Joines"`
-- `lastUpdated: "July 2026"`
-- `seoTitle`, `seoDescription` (exact strings from the spec)
-- `intro` (2 short paragraphs, calm and orienting)
-- `sections`: exactly 7, each with 2 short paragraphs, using the section headings listed in the spec verbatim per article
-- `keyTakeaways`: 5 to 6 per article
-- `relatedSlugs`: 3 per article, using existing First Year slugs from the spec (drafts allowed since `FirstYearArticlePage` filters related to `ready`)
-- `sources`: 3 to 5 per article, structured `{ label, publisher, url, year? }`
+## New file: firstYearArticleImages.ts
 
-Existing `slug`, `topic`, `title`, `description`, `readTime` preserved. `readTime` only adjusted if the finished length obviously demands it.
+Mirror `familyArticleImages.ts` shape, adapted to raw JPG imports (First Year assets live as `.jpg` files in `src/assets/`, not `.asset.json`, so `import x from "@/assets/foo.jpg"` returns the URL string directly).
 
-## Sources (verified live URLs only)
-Sources are drawn from these trusted UK domains, and each URL is opened in a Playwright check before commit to confirm HTTP 200 and topical match. If any candidate URL fails to resolve or has moved, replace with the closest current page on the same site rather than invent a link.
+```ts
+export interface HubBodyImage {
+  afterSectionIndex: number;
+  src: string;
+  alt: string;
+  caption?: string;
+}
 
-- NHS: `nhs.uk` (baby sleep, soothing, bathing, cord care, spotting illness)
-- The Lullaby Trust: `lullabytrust.org.uk` (safer sleep advice)
-- UNICEF UK Baby Friendly Initiative: `unicef.org.uk/babyfriendly` (responsive care)
-- RoSPA: `rospa.com` (home safety for under-fives)
-- Child Accident Prevention Trust: `capt.org.uk` (baby safety)
+export interface FirstYearArticleImages {
+  hero: { src: string; alt: string };
+  body: HubBodyImage[];
+}
 
-Distribution:
-- `newborn-sleep-expectations`: NHS baby sleep, Lullaby Trust safer sleep, UNICEF responsive care
-- `helping-your-baby-settle`: NHS soothing / baby sleep, Lullaby Trust, UNICEF responsive care
-- `safe-sleep-and-home-safety`: Lullaby Trust safer sleep, NHS baby safety, RoSPA, CAPT
-- `baby-care-basics`: NHS washing and bathing, NHS umbilical cord care, NHS nappy care, NHS spotting signs of serious illness
+export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = { ... };
+export const getFirstYearArticleImages = (slug: string) =>
+  firstYearArticleImageMap[slug];
+```
 
-No forums, blogs, or commercial product pages.
+### Mappings for the 4 ready articles
 
-## Tone and safety guardrails applied to copy
-- British English, no em dashes, calm and supportive, no shame language.
-- No promise that any settling method works.
-- No strict newborn schedules.
-- No unsafe sleep suggestions; sleep articles include the broad line "For sleep, follow current safer sleep guidance from trusted sources such as the NHS and The Lullaby Trust."
-- No medical diagnosis, treatment, medication, or emergency thresholds. No emergency numbers.
-- Care articles include the broad line "If you are worried about your baby, or something feels urgent, ask for medical advice from the appropriate local service."
-- No invented statistics. No exact temperature thresholds unless directly sourced and necessary (default: omit).
-- No product claims.
+Preferred existing First Year / baby-care assets in `src/assets/`:
+
+| Slug | Hero | Body (afterSectionIndex: 1) |
+| --- | --- | --- |
+| `newborn-sleep-expectations` | `firstyear-stage-0-3.jpg` | `article-hero-third-sleep.jpg` — caption: "Newborn sleep rarely follows a schedule, and that is normal." |
+| `helping-your-baby-settle` | `firstyear-scene.jpg` | `guidance-card-comfort.jpg` — caption: "Settling is a slow rhythm you build together, not a single technique." |
+| `safe-sleep-and-home-safety` | `guidance-card-nursery.jpg` | `guidance-card-safety.jpg` — caption: "Small, consistent habits protect a baby more than any single product." |
+| `baby-care-basics` | `firstyear-journey.jpg` | `guidance-card-bonding.jpg` — caption: "The basics become intuitive faster than most new parents expect." |
+
+Every image gets a descriptive alt. Inline comments mark future bespoke needs (e.g. `// bespoke future: parent settling baby in warm evening light`).
+
+**Fallback rule:** If any listed import fails because the filename differs in the repo, inspect `src/assets/` and swap to the closest existing First Year or baby-care asset (e.g. `firstyear-stage-3-6.jpg`, `guidance-firstyear.jpg`, `guidance-postpartum.jpg`, `guidance-card-rest.jpg`, `topic-baby-hero.jpg`). Do not use Family assets unless no appropriate First Year or baby-care asset exists.
+
+Body image placement uses `afterSectionIndex: 1` so the figure renders between section 2 and section 3 (renderer treats the index as the zero-based section it appears *after*). Draft slugs are intentionally not mapped — they are gated by NotFound.
+
+## Edit: FirstYearArticlePage.tsx
+
+Import the helper and pass images into `HubArticleView`, mirroring Family:
+
+```tsx
+import { getFirstYearArticleImages } from "@/components/firstyear/article/firstYearArticleImages";
+...
+const images = getFirstYearArticleImages(article.slug);
+...
+<HubArticleView
+  ...
+  heroImage={images?.hero}
+  bodyImages={images?.body}
+  relatedSlot={...}
+/>
+```
+
+Nothing else changes — related-guidance filtering, tone tokens, hub/topic labels stay identical.
 
 ## Verification
-- `tsgo`.
-- Playwright over the four ready routes: article renders through `HubArticleView`, medical review line with "Jenny Joines" visible, sources block renders, all `<a>` in sources have `target="_blank"` and `rel="noopener noreferrer nofollow"` (assert in DOM), related grid shows only ready siblings, no placeholder strings ("This section is a placeholder", "is being prepared") anywhere in the DOM.
-- Playwright HEAD/GET on every source URL: expect 200.
-- Playwright over `/first-year/sleep` and `/first-year/care-and-safety`: the four published cards are `<a>`/`<Link>`; the other 13 draft cards remain non-linked with "Coming soon".
-- Playwright over `/first-year/feeding/newborn-feeding-rhythms`: NotFound renders, no article body.
-- Regression: `/family`, `/family/health-safety/making-your-home-safer` (sources still render), `/articles/complete-guide-morning-sickness` (SEO head intact), `/toddler` (unchanged).
-- Mobile (375×) check on each ready article and both topic pages: no horizontal overflow.
 
-## Suggested next prompt
-> Phase 7.4 — First Year Batch 2 publishing (Postpartum recovery + Checkups & warning signs): author `healing-after-birth`, `what-recovery-can-feel-like`, `postnatal-checks-and-appointments`, `when-to-ask-for-help-after-birth` with the same medically reviewed + structured sources pattern; NHS / RCOG / PANDAS / Mind sources; no SEO wiring, no images.
+1. `tsgo` clean.
+2. Playwright at 1280×1800 and 375×812 for each ready route:
+   - `/first-year/sleep/newborn-sleep-expectations`
+   - `/first-year/sleep/helping-your-baby-settle`
+   - `/first-year/care-and-safety/safe-sleep-and-home-safety`
+   - `/first-year/care-and-safety/baby-care-basics`
+   Confirm: hero image visible in hero grid, one body figure between section 2 and section 3, medical review + sources + related guidance still render, no placeholder text, no horizontal overflow on mobile.
+3. Topic hubs `/first-year/sleep` and `/first-year/care-and-safety` still render.
+4. Regression: `/family/health-safety/making-your-home-safer`, `/articles/complete-guide-morning-sickness`, `/toddler` unaffected.
+
+## Out of scope
+
+New assets, article copy, statuses, SEO, routes, tokens, other hubs, draft mappings.
+
+After this ships, it is safe to proceed with Phase 7.4 (Batch 2 publishing).

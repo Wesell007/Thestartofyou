@@ -1,5 +1,7 @@
-import heroPlayTopic from "@/assets/toddler-topic-play.jpg";
-import heroFoodTopic from "@/assets/toddler-topic-food.jpg";
+import heroPlayTopicAsset from "@/assets/toddler-topic-play.jpg.asset.json";
+import heroFoodTopicAsset from "@/assets/toddler-topic-food.jpg.asset.json";
+const heroPlayTopic = heroPlayTopicAsset.url;
+const heroFoodTopic = heroFoodTopicAsset.url;
 import heroConnection from "@/assets/toddler-article-connection-hero.jpg";
 import heroCalmMealtime from "@/assets/toddler-article-calm-mealtime-hero.jpg";
 

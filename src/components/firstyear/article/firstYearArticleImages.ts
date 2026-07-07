@@ -151,7 +151,38 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
       },
     ],
   },
+  // bespoke future: parent feeding newborn calmly in soft natural light
+  "newborn-feeding-rhythms": {
+    hero: {
+      src: heroNewbornSleep,
+      alt: "A calm early-days moment between a parent and newborn",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyComfort,
+        alt: "A quiet moment of close, responsive care",
+        caption: "Newborn feeding often finds its rhythm slowly, through small cues and repeated moments.",
+      },
+    ],
+  },
+  // bespoke future: inclusive feeding scene showing calm, non-judgemental support
+  "bottle-and-breastfeeding-questions": {
+    hero: {
+      src: heroSettle,
+      alt: "A calm, non-judgemental feeding moment at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyBonding,
+        alt: "A parent and baby in a warm, unhurried feeding moment",
+        caption: "Feeding can change over time, and support matters more than choosing a perfect path.",
+      },
+    ],
+  },
 };
+
 
 
 export const getFirstYearArticleImages = (

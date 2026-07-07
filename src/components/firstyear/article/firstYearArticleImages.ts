@@ -186,6 +186,36 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
       },
     ],
   },
+  // bespoke future: baby exploring through play with a parent nearby in soft natural light
+  "baby-development-in-the-first-year": {
+    hero: {
+      src: heroDevelopment,
+      alt: "A baby exploring movement and play in a calm first-year home setting",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyDevelopment,
+        alt: "A parent and baby sharing a warm play and connection moment",
+        caption: "Development is not just milestones. It grows through movement, play, communication and connection.",
+      },
+    ],
+  },
+  // bespoke future: reassuring parent and baby development moment without clinical or comparison framing
+  "when-milestones-feel-uneven": {
+    hero: {
+      src: heroMilestones,
+      alt: "A baby in a gentle everyday development moment at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyMilestones,
+        alt: "A calm parent and baby moment during the first year",
+        caption: "Uneven development can feel worrying, but noticing patterns over time can help you know when to ask for advice.",
+      },
+    ],
+  },
 };
 
 

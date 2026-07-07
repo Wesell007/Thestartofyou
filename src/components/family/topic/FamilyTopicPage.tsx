@@ -51,25 +51,30 @@ const FamilyTopicPage = ({ config }: Props) => {
 
   const startHereSet = new Set(startHereSlugs);
 
-  // Grouped guidance: only articles not already surfaced in Start Here.
+  // Grouped guidance: include Start Here slugs too (shown as compact rows
+  // rather than large cards, so they serve a different visual purpose).
+  // De-duplicate within the grouped panel itself.
+  const seenInGroups = new Set<string>();
   const articleGroups = (config.articleGroups ?? [])
-    .map((g) => ({
-      label: g.label,
-      description: g.description,
-      articles: g.slugs
-        .filter((s) => !startHereSet.has(s) && readyBySlug.has(s))
-        .map((s) => readyBySlug.get(s)!),
-    }))
+    .map((g) => {
+      const articles = g.slugs
+        .filter((s) => {
+          if (seenInGroups.has(s)) return false;
+          if (!readyBySlug.has(s)) return false;
+          seenInGroups.add(s);
+          return true;
+        })
+        .map((s) => readyBySlug.get(s)!);
+      return {
+        label: g.label,
+        description: g.description,
+        articles,
+      };
+    })
     .filter((g) => g.articles.length > 0);
 
-  // Fallback: any remaining ready articles not in Start Here and not in an
-  // explicit group. Rendered as a single unlabelled group so nothing is lost.
-  const groupedSlugSet = new Set(
-    (config.articleGroups ?? []).flatMap((g) => g.slugs)
-  );
-  const ungrouped = readyArticles.filter(
-    (a) => !startHereSet.has(a.slug) && !groupedSlugSet.has(a.slug)
-  );
+  // Fallback: any ready article not already in a group.
+  const ungrouped = readyArticles.filter((a) => !seenInGroups.has(a.slug));
   if (ungrouped.length > 0) {
     articleGroups.push({
       label: "More on this topic",
@@ -79,6 +84,60 @@ const FamilyTopicPage = ({ config }: Props) => {
   }
 
   const hasGuidance = articleGroups.length > 0;
+
+  const CompactArticleRow = ({
+    article,
+  }: {
+    article: (typeof readyArticles)[number];
+  }) => (
+    <Link
+      to={`/family/${article.topic}/${article.slug}`}
+      className="group/row relative flex items-start gap-4 rounded-[14px] border px-4 py-3.5 transition-all hover:-translate-y-[1px] hover:shadow-[0_16px_36px_-28px_rgba(70,50,20,0.32)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment focus-visible:ring-[hsl(var(--stage-family-accent)/0.5)]"
+      style={{
+        borderColor: accentBorder,
+        background: "hsl(var(--parchment) / 0.85)",
+      }}
+    >
+      <span
+        className="grid place-items-center h-10 w-10 shrink-0 rounded-full border"
+        style={{
+          borderColor: accentBorderStrong,
+          background:
+            "linear-gradient(155deg, hsl(var(--stage-family) / 0.9) 0%, hsl(var(--stage-family-soft) / 0.9) 100%)",
+        }}
+        aria-hidden
+      >
+        <Sparkles size={13} strokeWidth={1.8} style={{ color: accent }} />
+      </span>
+      <div className="min-w-0 flex-1">
+        <p
+          className="font-serif text-[14.5px] leading-snug"
+          style={{ color: deep }}
+        >
+          {article.title}
+        </p>
+        <p
+          className="mt-1 font-sans text-[12.5px] font-light leading-[1.55] line-clamp-1"
+          style={{ color: deepSoft }}
+        >
+          {article.description}
+        </p>
+        <p
+          className="mt-1 font-sans text-[11px] font-light tracking-wide"
+          style={{ color: deepMuted }}
+        >
+          {article.readTime}
+        </p>
+      </div>
+      <ChevronRight
+        size={15}
+        strokeWidth={1.8}
+        style={{ color: accent }}
+        className="mt-3 shrink-0 transition-transform group-hover/row:translate-x-0.5"
+        aria-hidden
+      />
+    </Link>
+  );
 
   const SectionLabel = ({ children }: { children: React.ReactNode }) => (
     <div className="flex items-center gap-3">

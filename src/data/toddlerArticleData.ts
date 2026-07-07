@@ -484,7 +484,7 @@ const rawToddlerArticles: ToddlerArticle[] = [
       {
         heading: "Repeated games and shared jokes",
         body: [
-          "Small, repeated games become a private language between you. A silly noise you always do, a peekaboo pattern, a walk to the front door that ends in a hug — these grow into shared rituals over time.",
+          "Small, repeated games become a private language between you. A silly noise you always do, a peekaboo pattern, a walk to the front door that ends in a hug. These grow into shared rituals over time.",
           "These small in-jokes build a feeling of belonging that toddlers carry with them, even when they cannot put it into words.",
         ],
       },

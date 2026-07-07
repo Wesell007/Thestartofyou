@@ -8,6 +8,16 @@ import bodyComfort from "@/assets/guidance-card-comfort.jpg";
 import bodySafety from "@/assets/guidance-card-safety.jpg";
 import bodyBonding from "@/assets/guidance-card-bonding.jpg";
 
+import heroHealing from "@/assets/postpartum-stage-early-days.jpg";
+import bodyHealing from "@/assets/postpartum-scene.jpg";
+import heroRecoveryFeel from "@/assets/postpartum-stage-early-weeks.jpg";
+import bodyRecoveryFeel from "@/assets/postpartum-journey.jpg";
+import heroBodyChanges from "@/assets/postpartum-stage-adjustment.jpg";
+import bodyBodyChanges from "@/assets/guidance-postpartum.jpg";
+import heroHormones from "@/assets/guidance-postpartum.jpg";
+import bodyHormones from "@/assets/home-emotional.jpg";
+
+
 export interface HubBodyImage {
   afterSectionIndex: number;
   src: string;
@@ -81,7 +91,68 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
       },
     ],
   },
+  // bespoke future: parent resting after birth in soft natural light
+  "healing-after-birth": {
+    hero: {
+      src: heroHealing,
+      alt: "A parent resting quietly at home in the early days after birth",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyHealing,
+        alt: "A calm postpartum recovery moment at home",
+        caption: "Healing after birth is gradual, and rest counts even when it comes in small pieces.",
+      },
+    ],
+  },
+  // bespoke future: new parent being supported during everyday recovery
+  "what-recovery-can-feel-like": {
+    hero: {
+      src: heroRecoveryFeel,
+      alt: "A new parent in a reflective home moment during early recovery",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyRecoveryFeel,
+        alt: "A gentle support moment with baby nearby",
+        caption: "Recovery is rarely a straight line, and support can make it easier to move through.",
+      },
+    ],
+  },
+  // bespoke future: respectful postpartum body-care moment without bounce-back framing
+  "body-changes-after-birth": {
+    hero: {
+      src: heroBodyChanges,
+      alt: "A soft postpartum moment at home, respectful and non-clinical",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyBodyChanges,
+        alt: "A calm parent care detail after birth",
+        caption: "Your body has been through a major change, and it deserves time and care.",
+      },
+    ],
+  },
+  // bespoke future: gentle postpartum self-care scene in warm morning light
+  "hormones-sweat-and-hair-loss": {
+    hero: {
+      src: heroHormones,
+      alt: "A calm parent in a quiet home moment after birth",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyHormones,
+        alt: "A soft morning self-care moment",
+        caption: "Hormonal changes after birth can feel intense, but many shifts settle with time.",
+      },
+    ],
+  },
 };
+
 
 export const getFirstYearArticleImages = (
   slug: string,

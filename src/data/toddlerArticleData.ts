@@ -1221,9 +1221,99 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "Toddler home safety",
     description:
       "Room-by-room ideas for reducing everyday risks as your toddler grows more curious and mobile.",
-    readTime: "5 min read",
+    readTime: "6 min read",
     medicallyReviewed: true,
-    status: "draft",
+    reviewedBy: "Jenny Joines",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Toddler home safety is not about creating a perfect home. It is about noticing that toddlers are quicker, more curious and more capable than they were a few months ago, and quietly adjusting the space around them. This piece is a calm look at some of the areas that most often need a fresh look, without turning your home into a list of hazards.",
+    sections: [
+      {
+        heading: "Why toddler safety changes quickly",
+        body: [
+          "Toddlers can climb, reach and open things they could not manage even a few weeks earlier. Something that felt out of reach on Monday can be within reach by the weekend.",
+          "It helps to check the spaces your toddler uses most every so often, rather than assuming the setup from a few months ago still works.",
+        ],
+      },
+      {
+        heading: "Falls, stairs and climbing",
+        body: [
+          "Falls are one of the most common causes of everyday injury at this age. Stair gates at the top and bottom of stairs, and support while your toddler learns to use them, can quietly reduce risk.",
+          "Toddlers often try to climb furniture, so securing heavy items such as bookcases, drawers and televisions to the wall is one of the calmest ways to protect them.",
+        ],
+      },
+      {
+        heading: "Hot drinks, cooking and burns",
+        body: [
+          "Hot drinks can still burn a toddler many minutes after being made. Keeping them well away from the edges of tables and worktops, and out of reach of small hands, matters more than it might seem.",
+          "In the kitchen, turning pan handles inwards and keeping toddlers out of the cooking area while food is being prepared can help reduce the risk of burns and scalds.",
+        ],
+      },
+      {
+        heading: "Small objects, choking and batteries",
+        body: [
+          "Toddlers explore with their mouths, so small objects, coins, magnets and pieces of older siblings' toys can all be a risk. A quick daily glance at the floor and low surfaces is often enough.",
+          "Button batteries and small magnets are worth being particularly careful with, because they can cause serious harm if swallowed. Keeping them stored out of reach and checking devices are secure is worthwhile.",
+        ],
+      },
+      {
+        heading: "Medicines and cleaning products",
+        body: [
+          "Medicines, vitamins, cleaning products and laundry capsules are safest stored high up, out of sight and in their original packaging. Child-resistant does not mean child-proof.",
+          "It helps to put things away straight after use, rather than leaving them on a low surface for later, when it is easy to be distracted.",
+        ],
+      },
+      {
+        heading: "Water, doors and windows",
+        body: [
+          "Toddlers can slip quickly in the bath, so staying with them the whole time and keeping bath water at a safe warm temperature is important. Never leave a toddler alone near water, even briefly.",
+          "Window restrictors, safety catches and being mindful of blind cords can quietly reduce risks in bedrooms and living spaces, especially as toddlers start to climb.",
+        ],
+      },
+      {
+        heading: "Building simple safety habits",
+        body: [
+          "Rather than trying to remove every possible risk in one go, it often helps to build a few steady habits, such as always closing the stair gate, always putting the kettle back or always tucking cords away.",
+          "If something has worried you, or an accident has happened, it is okay to ask your health visitor, GP or appropriate local service for advice about what to look at next.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Toddler capability changes quickly, so setups need refreshing over time.",
+      "Falls and climbing are common risks worth thinking about early.",
+      "Hot drinks, cooking areas and small objects need everyday attention.",
+      "Medicines and cleaning products are safest stored high and out of sight.",
+      "Never leave a toddler alone near water, even for a moment.",
+      "Steady safety habits often protect more than one-off tidying blitzes.",
+    ],
+    relatedSlugs: [
+      "when-to-call-the-gp",
+      "what-toddler-development-can-look-like",
+      "potty-training-without-pressure",
+    ],
+    sources: [
+      {
+        label: "Safety at home",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Home safety advice for families",
+        publisher: "Child Accident Prevention Trust",
+        url: "https://capt.org.uk/preventing-accidents/",
+      },
+      {
+        label: "Home safety",
+        publisher: "RoSPA",
+        url: "https://www.rospa.com/home-safety",
+      },
+      {
+        label: "Baby and toddler safety",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/first-aid-and-safety/safety/baby-and-toddler-safety/",
+      },
+    ],
   },
   {
     slug: "when-to-call-the-gp",
@@ -1231,10 +1321,101 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "When to call the GP",
     description:
       "Everyday illness signs, when to seek advice and how to trust your instinct without second-guessing it.",
-    readTime: "5 min read",
+    readTime: "6 min read",
     medicallyReviewed: true,
-    status: "draft",
+    reviewedBy: "Jenny Joines",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Deciding whether to call for advice about a poorly toddler can feel harder than it should. Parents often carry the worry quietly, unsure if what they are noticing is enough. This piece is a calm look at how to think about those moments. It is not a symptom checker and it does not set thresholds. It is a reminder that it is always okay to ask.",
+    sections: [
+      {
+        heading: "You do not need to be sure before asking",
+        body: [
+          "You do not need to have a diagnosis in mind or be able to explain exactly what is wrong. Noticing that something feels different, or feels worse than usual, is reason enough to ask for advice.",
+          "GPs, health visitors and NHS 111 are used to parents describing what they are seeing in ordinary words. You do not need medical language to be taken seriously.",
+        ],
+      },
+      {
+        heading: "Changes in behaviour, feeding or drinking",
+        body: [
+          "Sometimes what stands out most is not a specific symptom but that your toddler is not themselves. Being unusually quiet, floppy, unsettled or hard to comfort can all be worth mentioning.",
+          "Not drinking as usual over a period of time, or a clear change in wet nappies, is often something worth asking about too.",
+        ],
+      },
+      {
+        heading: "Temperature and feeling unwell",
+        body: [
+          "A raised temperature is common in toddlers and often part of the body fighting off a simple illness. What matters alongside the number is how your toddler seems in themselves.",
+          "If a fever is making you uneasy, or your toddler seems very unwell alongside it, it is okay to ask for advice rather than trying to work it out alone.",
+        ],
+      },
+      {
+        heading: "Breathing, rashes and pain concerns",
+        body: [
+          "Anything that changes how your toddler is breathing, a rash that worries you, or pain that seems more than the usual bumps of the day, is worth checking in about.",
+          "It can help to describe what you are noticing simply, when it started and whether it is getting better, staying the same or getting worse.",
+        ],
+      },
+      {
+        heading: "Accidents, bumps and injuries",
+        body: [
+          "Bumps and small accidents are part of the toddler years. Most are minor and settle quickly with a cuddle and a calm response.",
+          "If you are not sure whether an injury needs checking, or if your toddler seems different after a knock, it is reasonable to ask for advice rather than waiting to see.",
+        ],
+      },
+      {
+        heading: "Trusting your judgement",
+        body: [
+          "You spend more time with your toddler than anyone else. If your instinct is quietly saying something is not right, that instinct is worth listening to.",
+          "Nobody is going to be cross with you for asking. Most services would rather hear from a parent early than late.",
+        ],
+      },
+      {
+        heading: "Who to contact and what to say",
+        body: [
+          "Your GP, health visitor and NHS 111 (online or by phone) are usually the right first places to go for non-emergency advice. Some areas also have local children's services you can contact.",
+          "If your toddler seems very unwell, symptoms are worsening, breathing worries you, they are not drinking as usual, a rash worries you, they have had an injury, or your instinct says something is not right, ask your GP, NHS 111, health visitor or appropriate local service for advice.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "You do not need to be sure something is wrong before asking for advice.",
+      "Changes in behaviour, drinking or nappies are worth noticing.",
+      "How your toddler seems in themselves matters as much as any number.",
+      "Anything about breathing, rashes or unusual pain is worth checking in about.",
+      "Your instinct as a parent is a signal worth listening to.",
+      "GP, health visitor and NHS 111 are all reasonable places to start.",
+    ],
+    relatedSlugs: [
+      "toddler-home-safety",
+      "when-milestones-feel-different",
+      "picky-eating-in-toddlers",
+    ],
+    sources: [
+      {
+        label: "When to worry about your child",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/nhs-services/urgent-and-emergency-care-services/when-to-go-to-ae/",
+      },
+      {
+        label: "NHS 111 online",
+        publisher: "NHS",
+        url: "https://111.nhs.uk/",
+      },
+      {
+        label: "Toddler health",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Advice for parents and carers",
+        publisher: "Healthier Together",
+        url: "https://www.what0-18.nhs.uk/",
+      },
+    ],
   },
+
 
   // Play and connection
   {

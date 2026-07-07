@@ -7,6 +7,7 @@ import {
   ShieldCheck,
   Sparkles,
   BookOpen,
+  ExternalLink,
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -25,6 +26,12 @@ export interface HubArticleViewArticle {
   intro?: string;
   sections?: { heading: string; body: string[] }[];
   keyTakeaways?: string[];
+  sources?: {
+    label: string;
+    publisher: string;
+    url: string;
+    year?: string;
+  }[];
 }
 
 export interface HubArticleTokens {
@@ -473,6 +480,75 @@ const HubArticleView = ({
             )}
           </div>
         </section>
+
+        {/* ─── SOURCES AND REFERENCES ─────────────────────────────── */}
+        {article.sources && article.sources.length > 0 && (
+          <section
+            className="relative py-14 md:py-16"
+            style={{
+              background: `linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(${tokens.base}) / 0.18) 100%)`,
+            }}
+          >
+            <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
+              <div
+                className="relative rounded-[24px] border px-6 sm:px-8 py-8 md:py-10 overflow-hidden"
+                style={{
+                  borderColor: accentBorderStrong,
+                  background: `linear-gradient(165deg, hsl(var(--parchment)) 0%, hsl(var(${tokens.base}) / 0.35) 100%)`,
+                  boxShadow:
+                    "0 22px 52px -36px rgba(70,50,20,0.28), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+                }}
+              >
+                <div className="mb-5 flex flex-col gap-3">
+                  <SectionLabel>Sources and references</SectionLabel>
+                  <h2
+                    className="font-serif text-[1.5rem] md:text-[1.7rem] leading-tight"
+                    style={{ color: deep }}
+                  >
+                    Where this guidance draws from
+                  </h2>
+                </div>
+                <ol className="space-y-3 list-decimal pl-5 marker:font-sans marker:text-[12px]" style={{ color: deepMuted }}>
+                  {article.sources.map((s) => (
+                    <li key={s.url} className="pl-1">
+                      <a
+                        href={s.url}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        className="inline-flex items-center gap-1.5 font-sans text-[14px] font-medium underline decoration-1 underline-offset-4 hover:opacity-80 transition-opacity"
+                        style={{ color: deep, textDecorationColor: accentMid }}
+                      >
+                        {s.label}
+                        <ExternalLink
+                          size={12}
+                          strokeWidth={1.8}
+                          style={{ color: accent }}
+                          aria-hidden
+                        />
+                      </a>
+                      <span
+                        className="font-sans text-[13px] font-light"
+                        style={{ color: deepSoft }}
+                      >
+                        {" — "}
+                        {s.publisher}
+                        {s.year ? ` (${s.year})` : ""}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+                <p
+                  className="mt-6 font-sans text-[12px] font-light leading-[1.6]"
+                  style={{ color: deepMuted }}
+                >
+                  External links open in a new tab. Content on external sites is
+                  not controlled by us.
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
 
         {/* ─── RELATED GUIDANCE ──────────────────────────────────── */}
         {relatedSlot && (

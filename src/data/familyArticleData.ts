@@ -22,6 +22,12 @@ export interface FamilyArticle {
   sections?: { heading: string; body: string[] }[];
   keyTakeaways?: string[];
   relatedSlugs?: string[];
+  sources?: {
+    label: string;
+    publisher: string;
+    url: string;
+    year?: string;
+  }[];
 }
 
 const rawFamilyArticles: FamilyArticle[] = [
@@ -511,6 +517,23 @@ const rawFamilyArticles: FamilyArticle[] = [
       "sharing-the-mental-load",
       "travelling-with-young-children",
     ],
+    sources: [
+      {
+        label: "Help paying for childcare",
+        publisher: "GOV.UK",
+        url: "https://www.gov.uk/help-with-childcare-costs",
+      },
+      {
+        label: "Tax-Free Childcare",
+        publisher: "GOV.UK",
+        url: "https://www.gov.uk/tax-free-childcare",
+      },
+      {
+        label: "Becoming a parent (money guidance)",
+        publisher: "MoneyHelper",
+        url: "https://www.moneyhelper.org.uk/en/family-and-care/becoming-a-parent",
+      },
+    ],
   },
 
   // Health and safety
@@ -594,6 +617,28 @@ const rawFamilyArticles: FamilyArticle[] = [
       "when-to-ask-for-help",
       "travelling-with-young-children",
     ],
+    sources: [
+      {
+        label: "Baby and toddler safety",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/first-aid-and-safety/safety/baby-and-toddler-safety/",
+      },
+      {
+        label: "Home safety",
+        publisher: "RoSPA",
+        url: "https://www.rospa.com/home-safety",
+      },
+      {
+        label: "Preventing accidents in the home",
+        publisher: "Child Accident Prevention Trust",
+        url: "https://capt.org.uk/preventing-accidents-in-the-home/",
+      },
+      {
+        label: "Make your home safe from fire",
+        publisher: "GOV.UK",
+        url: "https://www.gov.uk/government/publications/make-your-home-safe-from-fire",
+      },
+    ],
   },
   {
     slug: "when-to-ask-for-help",
@@ -674,6 +719,28 @@ const rawFamilyArticles: FamilyArticle[] = [
       "making-your-home-safer",
       "sharing-the-mental-load",
       "building-family-routines",
+    ],
+    sources: [
+      {
+        label: "Children and young people's mental health: advice for parents",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/mental-health/children-and-young-adults/advice-for-parents/",
+      },
+      {
+        label: "Support and advice for families",
+        publisher: "NSPCC",
+        url: "https://www.nspcc.org.uk/advice-for-families/",
+      },
+      {
+        label: "Advice for your family",
+        publisher: "Family Lives",
+        url: "https://www.coramfamilylives.org.uk/advice/your-family/",
+      },
+      {
+        label: "Where to find local support (report a concern to your local council)",
+        publisher: "GOV.UK",
+        url: "https://www.gov.uk/report-child-abuse-to-local-council",
+      },
     ],
   },
 
@@ -1319,6 +1386,23 @@ const rawFamilyArticles: FamilyArticle[] = [
       "when-to-ask-for-help",
       "making-your-home-safer",
       "building-family-routines",
+    ],
+    sources: [
+      {
+        label: "Looking after a sick child",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/health/looking-after-a-sick-child/",
+      },
+      {
+        label: "NHS 111 online",
+        publisher: "NHS",
+        url: "https://111.nhs.uk/",
+      },
+      {
+        label: "Fever in children",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/symptoms/fever-in-children/",
+      },
     ],
   },
 

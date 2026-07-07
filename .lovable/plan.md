@@ -1,57 +1,88 @@
-## Phase 5.9 — Family Article Expansion Batch 4
+## Phase 5.10 — Family trust and references layer
 
-Add one new ready article to each of the six Family topics, wire up interim images, and extend the grouped guidance panels. No topic-page redesign, no new topics, no schema changes.
+Add optional source rendering to the shared hub article view, then attach verified UK references to the four Family articles that warrant them. No changes to Pregnancy Flagship, TTC, IVF, First Year or Toddler data. No medical review added to lifestyle articles.
 
-### Files edited (only)
-- `src/data/familyArticleData.ts` — append six new `FamilyArticle` objects to `rawFamilyArticles` using the existing schema (no Pregnancy Flagship fields).
-- `src/components/family/article/familyArticleImages.ts` — add six interim mappings using existing assets, `afterSectionIndex: 1` (renders between sections 2 and 3), with `// bespoke future:` inline comments.
-- `src/data/familyTopicData.ts` — append each new slug to the matching topic's `articleGroups` (Start Here unchanged).
+### Files edited
+- `src/components/shared/HubArticleView.tsx` — extend `HubArticleViewArticle` with an optional `sources` field and render a "Sources and references" section between the article body/takeaways and the `relatedSlot`.
+- `src/data/familyArticleData.ts` — add optional `sources` field to the `FamilyArticle` interface (mirrors the hub type) and populate it on the four articles below **after per-URL live verification**.
 
-### New articles
-Each `status: "ready"`, British English, no em dashes, 6-7 sections, 4-6 key takeaways, 2-3 related slugs, `lastUpdated: "July 2026"`, with `intro`, `seoTitle`, `seoDescription`. No `medicallyReviewed` / `reviewedBy` fields added. Section bodies are 2 short paragraphs each, calm and practical.
+No other files touched.
 
-| # | Topic | Slug | Title |
-|---|---|---|---|
-| 1 | growing-families | `second-time-parenting` | Second-time parenting: what can feel different |
-| 2 | relationships | `staying-connected-as-parents` | Staying connected as parents |
-| 3 | family-basics | `calmer-evenings-after-busy-days` | Calmer evenings after busy days |
-| 4 | health-safety | `family-sick-days-at-home` | Getting through family sick days at home |
-| 5 | travel-days-out | `planning-family-days-out` | Planning family days out without overdoing it |
-| 6 | play-connection | `simple-family-play-ideas` | Simple family play ideas for everyday connection |
+### URL verification protocol (run in build mode before writing)
+For every candidate URL:
+1. `curl -sIL -A "Mozilla/5.0" <url>` to follow redirects and check the final status.
+2. If the final response is not 200, or the final URL is on a different host or points at unrelated content, **do not add it**. Log it as a gap in the return summary.
+3. If a candidate fails verification and a clearly equivalent official page on the same publisher can be found (e.g. NHS reorganised the page), verify and use that instead. Otherwise omit and flag.
+4. No made-up URLs, no low-trust hosts, no forums or blogs.
 
-Section headings and related slugs match the brief exactly.
+Publishers used: NHS, GOV.UK, RoSPA, Child Accident Prevention Trust, NSPCC, Family Lives, MoneyHelper. Year only added where the page shows a visible reviewed/updated/published year.
 
-Tone guardrails:
-- Article 2 uses inclusive parent/co-parent phrasing, no two-parent assumption, no therapy claims.
-- Article 4 stays non-clinical: no diagnoses, medications, doses, or emergency thresholds. Uses the brief's exact broad wording: "If you are worried about a child's symptoms, or something feels urgent, ask for medical advice from the appropriate local service." No emergency numbers.
+### Type + rendering changes in `HubArticleView.tsx`
+Add to `HubArticleViewArticle`:
 
-### Image mappings (interim, existing assets only)
-Each entry adds one hero and one body image at `afterSectionIndex: 1` (between sections 2 and 3, per your confirmation). Bespoke direction noted inline.
+```ts
+sources?: {
+  label: string;
+  publisher: string;
+  url: string;
+  year?: string;
+}[];
+```
 
-| Slug | Hero | Body image |
-|---|---|---|
-| `second-time-parenting` | `family-hero-diverse-family` | `family-topic-growing-families` |
-| `staying-connected-as-parents` | `family-hero-parents` | `family-topic-relationships` |
-| `calmer-evenings-after-busy-days` | `family-hero-everyday` | `family-topic-family-basics` |
-| `family-sick-days-at-home` | `family-hero-family-four` | `family-topic-family-basics` |
-| `planning-family-days-out` | `family-hero-everyday` | `family-topic-growing-families` |
-| `simple-family-play-ideas` | `family-hero-family-four` | `family-topic-play-connection` |
+Render logic:
+- Only render when `article.sources && article.sources.length > 0`.
+- Placement: new section inserted immediately before the existing `relatedSlot` block (line ~478) and after the article footer/medical-review area.
+- Uses existing hub tokens (`accent`, `accentBorderStrong`, `deep`, `deepSoft`, `deepMuted`) for a calm premium panel matching the rest of the article.
+- Content: `SectionLabel` "Sources and references", short heading "Where this guidance draws from", then an ordered list. Each row is `<a href={url} target="_blank" rel="noopener noreferrer nofollow">{label}</a>` followed by " — {publisher}" and " ({year})" when present. Subtle `ExternalLink` icon (lucide) after the link.
+- No changes to the existing `medicallyReviewed` / `reviewedBy` block.
 
-### Topic group additions in `familyTopicData.ts`
-Append the new slug to the existing group's `slugs` array (Start Here untouched):
-- `growing-families` → "New siblings and family change" adds `second-time-parenting`
-- `relationships` → add a third group "Staying close" with `staying-connected-as-parents` (keeps existing two groups intact)
-- `family-basics` → "Routines and practical planning" adds `calmer-evenings-after-busy-days`
-- `health-safety` → "Feeling safer and knowing when to ask" adds `family-sick-days-at-home`
-- `travel-days-out` → "Journeys and days out" adds `planning-family-days-out`
-- `play-connection` → "Play, connection and screens" adds `simple-family-play-ideas`
+### `FamilyArticle` interface change
+Add matching optional `sources` field on `FamilyArticle` in `src/data/familyArticleData.ts`. `withFamilyDefaults` already spreads `...article`, so the field passes through. `FamilyArticlePage` already forwards the whole article to `HubArticleView`, no change needed.
+
+### Candidate sources (all subject to live verification)
+
+**1. `making-your-home-safer` (health-safety) — target 3–4 sources**
+- Baby and toddler safety — NHS — `https://www.nhs.uk/baby/babys-development/safety/baby-and-toddler-safety/`
+- Home safety — RoSPA — `https://www.rospa.com/home-safety`
+- Preventing accidents to children — Child Accident Prevention Trust — `https://capt.org.uk/preventing-accidents/`
+- Fire safety in the home — GOV.UK — `https://www.gov.uk/government/publications/fire-safety-in-the-home`
+
+**2. `when-to-ask-for-help` (health-safety) — target 3–4 sources**
+- Where to get mental health help — NHS — `https://www.nhs.uk/mental-health/children-and-young-adults/help-for-parents/`
+- Support for parents and carers — NSPCC — `https://www.nspcc.org.uk/keeping-children-safe/support-for-parents/`
+- Parent support — Family Lives — `https://www.familylives.org.uk/advice/your-family`
+- Report child abuse to your local council — GOV.UK — `https://www.gov.uk/report-child-abuse-to-local-council`
+
+The GOV.UK link is listed **only as a reference** for where official local support can be found. The article body will not gain any procedural safeguarding instructions, legal thresholds, or emergency numbers. Existing broad wording ("If you are worried… ask for medical advice from the appropriate local service") stays as-is.
+
+**3. `family-sick-days-at-home` (health-safety) — target 3 sources**
+- Looking after a sick child — NHS — `https://www.nhs.uk/conditions/baby/health/looking-after-a-sick-child/`
+- NHS 111 online — NHS — `https://111.nhs.uk/`
+- Fever in children — NHS — `https://www.nhs.uk/conditions/fever-in-children/`
+
+No new treatment, dose, or threshold copy added to article body.
+
+**4. `managing-childcare-costs` (family-basics) — target 2–3 sources**
+- Help paying for childcare — GOV.UK — `https://www.gov.uk/help-with-childcare-costs`
+- Tax-Free Childcare — GOV.UK — `https://www.gov.uk/tax-free-childcare`
+- Childcare costs — MoneyHelper — `https://www.moneyhelper.org.uk/en/family-and-care/becoming-a-parent/childcare-costs`
+
+No specific amounts or eligibility claims added to article copy.
+
+Any URL failing verification is omitted and flagged; if a topic drops below its target count, that gap is reported rather than back-filled with a weak source.
+
+### Articles intentionally left unsourced
+Lifestyle guidance without a clear evidence anchor: `building-family-routines`, `building-family-traditions`, `screen-time-as-a-family`, `simple-family-play-ideas`, `planning-family-days-out`, `staying-connected-as-parents`, `setting-boundaries-with-grandparents`, `preparing-for-another-baby`, `helping-your-child-adjust-to-a-new-sibling`, `second-time-parenting`, `sharing-the-mental-load`, `calmer-evenings-after-busy-days`, `travelling-with-young-children`, `making-car-journeys-calmer`.
+
+### Medical review
+Existing `medicallyReviewed` / `reviewedBy` on Family articles preserved untouched. No new medical review badges anywhere.
 
 ### Guardrails
-No edits to HubArticleView, Pregnancy/TTC/IVF/First Year/Toddler data, `articleData.ts`, routes, SEO files, product, About, AI logic, saved-journey logic, design tokens, or asset files. No new topics, no `/family/community-support`, no new image assets, no changes to existing ready article bodies.
+No edits to Pregnancy Flagship components/data, TTC/IVF/First Year/Toddler data, `articleData.ts`, routes, SEO, product, About, AI logic, saved-journey logic, design tokens, or `.lovable/plan.md`. No new articles, topics, `/family/community-support`, emergency numbers, or legal/financial/clinical/safeguarding instructions.
 
 ### Verification
 - `tsgo`
-- Load the six new article routes and confirm hero, body image between sections 2 and 3, real sections, key takeaways, related guidance without drafts.
-- Load all six `/family/*` topic pages — Start Here unchanged, grouped panel deeper.
-- Regression: `/family`, one existing Family article, `/articles/complete-guide-morning-sickness`.
-- Mobile check at 375px.
+- Load `/family/health-safety/making-your-home-safer`, `/family/health-safety/when-to-ask-for-help`, `/family/health-safety/family-sick-days-at-home`, `/family/family-basics/managing-childcare-costs` — confirm sources render, links carry `target="_blank"` and `rel="noopener noreferrer nofollow"`.
+- Load `/family/play-connection/simple-family-play-ideas` and confirm no empty sources section.
+- Regression: `/articles/complete-guide-morning-sickness`, one First Year hub article, one Toddler hub article.
+- Mobile at 375px.

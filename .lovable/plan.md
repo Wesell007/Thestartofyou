@@ -1,83 +1,68 @@
 
-# Phase 6.1 — SEO metadata for `/articles/:slug` (revised)
+# Phase 7.3 — First Year Batch 1 publishing
 
 ## Files edited
-- `src/pages/ArticlePage.tsx` (only)
+- `src/data/firstYearArticleData.ts` (only)
 
-No edits to templates, article data, other hubs, routes, tokens, or `.lovable/plan.md`.
+No component, route, SEO wiring, image, or cross-hub edits.
 
-## Field mapping (real `ArticleData` fields)
-`ArticleData` has no `seoTitle` / `seoDescription` / `description`. I will use the fields that actually exist, no data edits:
-- Title: `` `${article.title} | The Start of You` ``
-- Description priority: `article.metaDescription` → `article.quickAnswer` → fallback `"Calm, practical guidance from The Start of You."`
+## Articles flipped to `status: "ready"`
+1. `newborn-sleep-expectations` (sleep)
+2. `helping-your-baby-settle` (sleep)
+3. `safe-sleep-and-home-safety` (care-and-safety)
+4. `baby-care-basics` (care-and-safety)
 
-## Implementation in `ArticlePage.tsx`
-1. Import `SeoHead` from `@/components/seo/SeoHead`.
-2. Keep the existing NotFound branch untouched. Do not mount `SeoHead` when `getArticle` returns nothing.
-3. After the article is resolved and before the template dispatch, compute:
-   - `canonical = \`https://thestartofyou.com/articles/${data.slug}\``
-   - `title = \`${data.title} | The Start of You\``
-   - `description = data.metaDescription || data.quickAnswer || "Calm, practical guidance from The Start of You."`
-4. Build Article JSON-LD:
-   ```ts
-   const jsonLd: Record<string, unknown> = {
-     "@context": "https://schema.org",
-     "@type": "Article",
-     headline: data.title,
-     description,
-     mainEntityOfPage: canonical,
-     url: canonical,
-     publisher: {
-       "@type": "Organization",
-       name: "The Start of You",
-       url: "https://thestartofyou.com",
-     },
-   };
-   ```
-5. **Citation — structured sources only (per user directive):**
-   ```ts
-   const citation = (data.sources ?? [])
-     .map((source) => (typeof source === "string" ? null : source.url))
-     .filter((url): url is string => Boolean(url));
-   if (citation.length > 0) jsonLd.citation = citation;
-   ```
-   Plain string source labels are never emitted as `citation`. Articles whose `sources` are all strings simply omit `citation`.
-6. ReviewedBy (only when present):
-   ```ts
-   if (data.reviewedBy) {
-     jsonLd.reviewedBy = { "@type": "Person", name: data.reviewedBy };
-   }
-   ```
-7. Date: only set `dateModified` when `data.lastUpdated` matches strict ISO `^\d{4}-\d{2}-\d{2}`. All current `lastUpdated` values are display strings ("March 2026", "May 2026"), so `dateModified` will be omitted. No dates fabricated.
-8. Mount `<SeoHead>` once, immediately before the existing template dispatch. Template selection logic is unchanged:
-   ```tsx
-   const seo = (
-     <SeoHead
-       title={title}
-       description={description}
-       canonical={canonical}
-       ogType="article"
-       jsonLd={jsonLd}
-     />
-   );
-   // og:title / og:description / og:url fall back cleanly inside SeoHead.
+All other 13 articles remain `draft`. Post-batch count: 4 ready / 13 draft.
 
-   if (hasFlagshipShape && !LEGACY_FORCED_SLUGS.has(data.slug)) {
-     return (<>{seo}<ArticleFlagshipTemplate data={data} /></>);
-   }
-   if (LEGACY_FORCED_SLUGS.has(data.slug) || !hasMinimumDeepShape) {
-     return (<>{seo}<ArticleLegacyPage data={data} /></>);
-   }
-   return (<>{seo}<ArticleDeepTemplate data={data} /></>);
-   ```
+## Fields added to each of the four
+- `status: "ready"`
+- `medicallyReviewed: true`
+- `reviewedBy: "Jenny Joines"`
+- `lastUpdated: "July 2026"`
+- `seoTitle`, `seoDescription` (exact strings from the spec)
+- `intro` (2 short paragraphs, calm and orienting)
+- `sections`: exactly 7, each with 2 short paragraphs, using the section headings listed in the spec verbatim per article
+- `keyTakeaways`: 5 to 6 per article
+- `relatedSlugs`: 3 per article, using existing First Year slugs from the spec (drafts allowed since `FirstYearArticlePage` filters related to `ready`)
+- `sources`: 3 to 5 per article, structured `{ label, publisher, url, year? }`
+
+Existing `slug`, `topic`, `title`, `description`, `readTime` preserved. `readTime` only adjusted if the finished length obviously demands it.
+
+## Sources (verified live URLs only)
+Sources are drawn from these trusted UK domains, and each URL is opened in a Playwright check before commit to confirm HTTP 200 and topical match. If any candidate URL fails to resolve or has moved, replace with the closest current page on the same site rather than invent a link.
+
+- NHS: `nhs.uk` (baby sleep, soothing, bathing, cord care, spotting illness)
+- The Lullaby Trust: `lullabytrust.org.uk` (safer sleep advice)
+- UNICEF UK Baby Friendly Initiative: `unicef.org.uk/babyfriendly` (responsive care)
+- RoSPA: `rospa.com` (home safety for under-fives)
+- Child Accident Prevention Trust: `capt.org.uk` (baby safety)
+
+Distribution:
+- `newborn-sleep-expectations`: NHS baby sleep, Lullaby Trust safer sleep, UNICEF responsive care
+- `helping-your-baby-settle`: NHS soothing / baby sleep, Lullaby Trust, UNICEF responsive care
+- `safe-sleep-and-home-safety`: Lullaby Trust safer sleep, NHS baby safety, RoSPA, CAPT
+- `baby-care-basics`: NHS washing and bathing, NHS umbilical cord care, NHS nappy care, NHS spotting signs of serious illness
+
+No forums, blogs, or commercial product pages.
+
+## Tone and safety guardrails applied to copy
+- British English, no em dashes, calm and supportive, no shame language.
+- No promise that any settling method works.
+- No strict newborn schedules.
+- No unsafe sleep suggestions; sleep articles include the broad line "For sleep, follow current safer sleep guidance from trusted sources such as the NHS and The Lullaby Trust."
+- No medical diagnosis, treatment, medication, or emergency thresholds. No emergency numbers.
+- Care articles include the broad line "If you are worried about your baby, or something feels urgent, ask for medical advice from the appropriate local service."
+- No invented statistics. No exact temperature thresholds unless directly sourced and necessary (default: omit).
+- No product claims.
 
 ## Verification
 - `tsgo`.
-- Playwright over `/articles/complete-guide-morning-sickness`, `/articles/first-trimester-complete-guide`, `/articles/anxiety-in-pregnancy`, one TTC-oriented slug, one IVF-oriented slug: dump `document.head` and assert `<title>`, meta description, canonical, `og:title|description|url|type=article`, one Article JSON-LD block. Assert `citation` is present **only** when structured `ArticleSource` objects supplied URLs, and absent when `sources` is missing or entirely strings. Assert no `dateModified` on any current article.
-- Regression: `/family`, `/family/health-safety/making-your-home-safer`, `/pregnancy`, `/trying-to-conceive`, `/ivf` heads unchanged from Phase 5.12 baseline.
-
-## Guardrails
-No edits to article data, templates, other hubs, routes, design tokens, or `.lovable/plan.md`. No new routes. No noindex. No invented reviewers or dates. No non-URL citation values.
+- Playwright over the four ready routes: article renders through `HubArticleView`, medical review line with "Jenny Joines" visible, sources block renders, all `<a>` in sources have `target="_blank"` and `rel="noopener noreferrer nofollow"` (assert in DOM), related grid shows only ready siblings, no placeholder strings ("This section is a placeholder", "is being prepared") anywhere in the DOM.
+- Playwright HEAD/GET on every source URL: expect 200.
+- Playwright over `/first-year/sleep` and `/first-year/care-and-safety`: the four published cards are `<a>`/`<Link>`; the other 13 draft cards remain non-linked with "Coming soon".
+- Playwright over `/first-year/feeding/newborn-feeding-rhythms`: NotFound renders, no article body.
+- Regression: `/family`, `/family/health-safety/making-your-home-safer` (sources still render), `/articles/complete-guide-morning-sickness` (SEO head intact), `/toddler` (unchanged).
+- Mobile (375×) check on each ready article and both topic pages: no horizontal overflow.
 
 ## Suggested next prompt
-> Phase 6.2 — Add `SeoHead` to Pregnancy hub, six Pregnancy topic pages and three trimester pages using the Family topic pattern.
+> Phase 7.4 — First Year Batch 2 publishing (Postpartum recovery + Checkups & warning signs): author `healing-after-birth`, `what-recovery-can-feel-like`, `postnatal-checks-and-appointments`, `when-to-ask-for-help-after-birth` with the same medically reviewed + structured sources pattern; NHS / RCOG / PANDAS / Mind sources; no SEO wiring, no images.

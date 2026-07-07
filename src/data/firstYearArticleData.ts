@@ -1302,8 +1302,101 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     description:
       "What to expect from your six-week check, your baby's reviews and the appointments that quietly matter.",
     readTime: "5 min read",
+    status: "ready",
     medicallyReviewed: true,
-    status: "draft",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    seoTitle: "Postnatal checks and appointments | The Start of You",
+    seoDescription:
+      "A calm UK guide to postnatal checks after birth, including midwife visits, health visitor support, the GP check and baby reviews.",
+    intro:
+      "In the weeks after birth, a quiet rhythm of appointments usually begins. Midwives, health visitors, GPs and baby review services each play a part, and it can be hard to hold it all in your head while you are also recovering and getting to know your baby. This piece is a calm map of what those early appointments are for, so you can use them without feeling like you need to have everything figured out.",
+    sections: [
+      {
+        heading: "Why postnatal checks exist",
+        body: [
+          "Postnatal checks are there to look after both you and your baby in the weeks and months after birth. They give you a regular chance to talk about how you are healing, how feeding is going, how you are feeling emotionally and how your baby is growing.",
+          "Appointment timing and support can vary by area, so it is always okay to ask your midwife, health visitor, GP or local service what applies to you. Nothing about using these appointments means you are struggling.",
+        ],
+      },
+      {
+        heading: "Early midwife contact after birth",
+        body: [
+          "In the first days after birth, a midwife usually stays in touch to check on your recovery and your baby. This might include visits at home, phone calls or clinic appointments, depending on where you live and how your birth went.",
+          "These early contacts often cover feeding, bleeding, how you are moving and sleeping, and how your baby is settling. It is a good moment to mention anything that feels off, even if it seems small.",
+        ],
+      },
+      {
+        heading: "Health visitor support",
+        body: [
+          "The health visiting service takes over from midwifery care once your baby is a little older, usually within the first couple of weeks. Health visitors are there to support your family through the early years, not only when something is wrong.",
+          "You can talk to a health visitor about feeding, sleep, your baby's development, your own wellbeing and everyday practical worries. They can also point you towards local services if you would like more support.",
+        ],
+      },
+      {
+        heading: "The GP postnatal check",
+        body: [
+          "Around six to eight weeks after birth, you are usually offered a postnatal check with your GP. This appointment is about you, not only about your baby, and covers how you are recovering physically and emotionally.",
+          "It can help to think ahead of time about anything you would like to raise, whether that is bleeding, scars, pain, mood, contraception or simply how you are coping. There is no need to have tidy answers ready.",
+        ],
+      },
+      {
+        heading: "Baby checks and routine reviews",
+        body: [
+          "Your baby will usually be offered a newborn physical examination in the first days, followed by regular reviews with the health visiting service. These reviews often look at feeding, growth, development and safe sleep, and give you a chance to ask questions.",
+          "Reviews are not tests to pass. They are gentle chances to notice how your baby is doing over time, and to raise anything you have been wondering about.",
+        ],
+      },
+      {
+        heading: "What you can ask about",
+        body: [
+          "You can bring almost anything to a postnatal appointment. Feeding worries, healing questions, sleep, crying, weight, your mood, your relationship, going back to work, other children at home, or simply feeling unsure are all fair to mention.",
+          "If something has been on your mind more than once, it is usually worth saying out loud. You do not need to have a clear question, and it is fine to say you are not sure what you are asking.",
+        ],
+      },
+      {
+        heading: "Keeping simple notes between appointments",
+        body: [
+          "A few small notes between appointments can make a real difference. You might jot down feeding patterns, questions as they come up, or moments you have felt worried, so you do not have to remember it all on the day.",
+          "Notes can live anywhere that suits you, from a page in a notebook to a few lines in your phone. The aim is not a perfect log, only enough to help you feel prepared and heard when you talk to someone.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Postnatal checks are for both you and your baby, not only for problems.",
+      "Midwife, health visitor and GP care usually overlap in the early weeks.",
+      "Appointment timing and services can vary by area, so it is always okay to ask what applies to you.",
+      "The six to eight week GP check is a chance to talk about your own recovery and wellbeing.",
+      "Baby reviews are gentle check-ins, not tests to pass.",
+      "A few notes between appointments can help you feel prepared and heard.",
+    ],
+    relatedSlugs: [
+      "when-to-ask-for-help-after-birth",
+      "healing-after-birth",
+      "what-recovery-can-feel-like",
+    ],
+    sources: [
+      {
+        label: "Your body after the birth",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/labour-and-birth/after-the-birth/your-body/",
+      },
+      {
+        label: "Baby reviews",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/height-weight-and-reviews/baby-reviews/",
+      },
+      {
+        label: "Services and support for parents",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/support-and-services/services-and-support-for-parents/",
+      },
+      {
+        label: "Baby",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/baby/",
+      },
+    ],
   },
   {
     slug: "when-to-ask-for-help-after-birth",
@@ -1312,8 +1405,106 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     description:
       "Signs it's worth calling your GP, midwife or 111, and how to trust your instinct without second-guessing it.",
     readTime: "5 min read",
+    status: "ready",
     medicallyReviewed: true,
-    status: "draft",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    seoTitle: "When to ask for help after birth | The Start of You",
+    seoDescription:
+      "A calm UK guide to asking for help after birth, including physical recovery, feeding, baby worries, emotional wellbeing and practical support.",
+    intro:
+      "Asking for help after birth is not a sign that something has gone wrong. It is part of recovery. Bodies are healing, feeding is being learned, sleep is broken and emotions can move quickly. Knowing who you can turn to, and feeling allowed to reach out, is part of being well supported. This piece is a gentle guide to noticing when it might be time to ask, and to how you might start that conversation.",
+    sections: [
+      {
+        heading: "Asking for help is part of recovery",
+        body: [
+          "Reaching out is not a test of how much you can cope with alone. It is a normal part of the early weeks, and the people you might contact are used to hearing from parents at all stages of recovery.",
+          "If something has been on your mind more than once, or if a small worry has quietly grown, it is usually worth mentioning. You do not need to wait until things feel serious.",
+        ],
+      },
+      {
+        heading: "Physical recovery worries",
+        body: [
+          "Bleeding, pain, healing wounds, headaches, and how your body is moving are all fair to ask about. Recovery is not always tidy, and something that feels off, even mildly, is worth raising.",
+          "If bleeding, pain, mood, temperature, feeding, your baby's behaviour or anything else worries you, ask your midwife, health visitor, GP or the appropriate local service for advice.",
+        ],
+      },
+      {
+        heading: "Feeding worries",
+        body: [
+          "Feeding often takes time to settle, whether you are breastfeeding, bottle feeding or doing a mix. Pain, worry about your baby's intake, or feeds that feel unmanageable are all reasons to ask for support early.",
+          "Feeding support is there for anyone who wants it, including parents who are bottle feeding. Asking sooner tends to be easier than waiting until things feel stuck.",
+        ],
+      },
+      {
+        heading: "Baby behaviour and illness worries",
+        body: [
+          "You know your baby better than anyone. If they seem unusually quiet, unusually unsettled, feed very differently from before, or simply do not feel right, that is worth mentioning, even if you cannot fully explain why.",
+          "Trust your instinct rather than trying to talk yourself out of a worry. Health visitors, GPs and NHS 111 can help you think it through, and it is always okay to check.",
+        ],
+      },
+      {
+        heading: "Emotional wellbeing worries",
+        body: [
+          "Emotions after birth can move quickly. Low mood, anxiety, intrusive thoughts, feeling numb, or simply not feeling like yourself are all worth talking about with your GP, midwife or health visitor.",
+          "You do not need to have a diagnosis in mind, and you do not need to prove that things are bad enough. Saying that you are not feeling right is more than enough to begin a conversation.",
+        ],
+      },
+      {
+        heading: "Practical support and exhaustion",
+        body: [
+          "Tiredness after birth is real and can affect how everything else feels. If you are running on very little rest, or if practical things at home feel overwhelming, that is worth mentioning too.",
+          "Support can look like a friend or family member helping for an afternoon, a health visitor pointing you towards local groups, or simply being honest with your GP about how much you are carrying.",
+        ],
+      },
+      {
+        heading: "What to say when you contact someone",
+        body: [
+          "You do not need a polished script. A simple sentence such as \"I am not sure if this is normal, but…\" or \"Something has been worrying me since…\" is enough to open the conversation.",
+          "If you ever feel unable to keep yourself or your baby safe, please seek urgent local help immediately. At any other time, it is always okay to ask a question you are unsure about.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Asking for help is a normal part of recovery, not a sign of failing.",
+      "You do not need to wait until things feel serious to reach out.",
+      "Trust your instinct about your body and your baby.",
+      "Emotional wellbeing is as valid a reason to ask for help as physical recovery.",
+      "A simple, honest sentence is enough to start a conversation with a professional.",
+      "If you ever feel unable to keep yourself or your baby safe, seek urgent local help immediately.",
+    ],
+    relatedSlugs: [
+      "postnatal-checks-and-appointments",
+      "feeling-like-yourself-again",
+      "newborn-feeding-rhythms",
+    ],
+    sources: [
+      {
+        label: "Your body after the birth",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/labour-and-birth/after-the-birth/your-body/",
+      },
+      {
+        label: "Postnatal depression",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/mental-health/conditions/post-natal-depression/",
+      },
+      {
+        label: "Baby health",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/health/",
+      },
+      {
+        label: "Baby support and services",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/support-and-services/",
+      },
+      {
+        label: "Life as a parent",
+        publisher: "NCT",
+        url: "https://www.nct.org.uk/life-parent",
+      },
+    ],
   },
 ];
 

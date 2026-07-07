@@ -1,29 +1,94 @@
-## Phase 7.6b — First Year Development Image Mappings
+## Phase 7.7 — First Year Checkups and Warning Signs Publishing
 
-Add hero + body image mappings for the two newly published Development articles in `src/components/firstyear/article/firstYearArticleImages.ts`. No other files touched.
+Publish the two remaining draft articles under `/first-year/checkups-and-warning-signs` by replacing their draft objects in `src/data/firstYearArticleData.ts` with full ready articles. No other files change.
 
-### Mappings to add
+### File edited
 
-**1. `baby-development-in-the-first-year`**
-- `// bespoke future: baby exploring through play with a parent nearby in soft natural light`
-- Hero: `@/assets/firstyear-stage-6-9.jpg` — alt: `A baby exploring movement and play in a calm first-year home setting`
-- Body (afterSectionIndex 1): `@/assets/guidance-card-development.jpg` — alt: `A parent and baby sharing a warm play and connection moment` — caption: `Development is not just milestones. It grows through movement, play, communication and connection.`
+- `src/data/firstYearArticleData.ts` (lines 1298–1317)
 
-**2. `when-milestones-feel-uneven`**
-- `// bespoke future: reassuring parent and baby development moment without clinical or comparison framing`
-- Hero: `@/assets/firstyear-stage-9-12.jpg` — alt: `A baby in a gentle everyday development moment at home`
-- Body (afterSectionIndex 1): `@/assets/guidance-card-milestones.jpg` — alt: `A calm parent and baby moment during the first year` — caption: `Uneven development can feel worrying, but noticing patterns over time can help you know when to ask for advice.`
+Kept fields (unchanged): `slug`, `topic`, `title`, `description`. `readTime` stays `5 min read` for both (final length fits comfortably; no bump needed).
 
-Note: swapped the suggested `guidance-card-bonding.jpg` / `firstyear-journey.jpg` for `guidance-card-development.jpg` / `guidance-card-milestones.jpg` — both exist in `src/assets` and are more topically aligned with development/milestones. If you'd prefer the exact suggested assets, say so and I'll switch back.
+### Standard applied to both articles
 
-### Implementation
-- Add two new imports at the top of `firstYearArticleImages.ts`.
-- Add two entries to `firstYearArticleImageMap`, each with the bespoke future comment above it.
+- `status: "ready"`
+- `medicallyReviewed: true`
+- `reviewedBy: "Jenny Joines"`
+- `lastUpdated: "July 2026"`
+- `seoTitle`, `seoDescription`
+- `intro` (calm, one paragraph)
+- 7 `sections`, each with 2 short paragraphs
+- 5–6 `keyTakeaways`
+- 3 `relatedSlugs` (all confirmed `ready` in the file)
+- 3–5 verified UK `sources` (real public URLs only)
+- British English, no em dashes, no shame wording, no invented stats/authors, no diagnosis/treatment/medication/emergency thresholds
 
-### Verification
-- `tsgo` typecheck.
-- Playwright (1280×1800 and 375×812) on both Development article routes: confirm hero, one body image between section 2 and 3, medical review line, sources, related cards, no placeholder, no horizontal overflow on mobile.
-- Regression: `/first-year/feeding/newborn-feeding-rhythms`, `/first-year/postpartum-recovery/healing-after-birth`, `/first-year/sleep/newborn-sleep-expectations`, `/family/health-safety/making-your-home-safer`, `/articles/complete-guide-morning-sickness`, `/toddler`.
+### Article 1 — `postnatal-checks-and-appointments`
 
-### Out of scope
-Article data, statuses, sources, SEO, components, routes, other hubs, new assets, `.lovable/plan.md`.
+Angle: a calm map of what early appointments are for and how to use them without needing everything figured out.
+
+Sections:
+1. Why postnatal checks exist
+2. Early midwife contact after birth
+3. Health visitor support
+4. The GP postnatal check
+5. Baby checks and routine reviews
+6. What you can ask about
+7. Keeping simple notes between appointments
+
+Careful wording included once: "Appointment timing and support can vary by area, so it is always okay to ask your midwife, health visitor, GP or local service what applies to you."
+
+Related slugs: `when-to-ask-for-help-after-birth`, `healing-after-birth`, `what-recovery-can-feel-like`.
+
+Planned sources (verified UK, real URLs):
+- NHS — Your post-pregnancy body / postnatal checks
+- NHS Start for Life — Support after birth
+- NHS — Health visitor services
+- NHS — Newborn physical examination / 6-8 week baby check
+
+### Article 2 — `when-to-ask-for-help-after-birth`
+
+Angle: asking for help is part of recovery. Notice when something feels off physically, emotionally or practically, and know who to contact.
+
+Sections:
+1. Asking for help is part of recovery
+2. Physical recovery worries
+3. Feeding worries
+4. Baby behaviour and illness worries
+5. Emotional wellbeing worries
+6. Practical support and exhaustion
+7. What to say when you contact someone
+
+Careful wording included once: "If bleeding, pain, mood, temperature, feeding, your baby's behaviour or anything else worries you, ask your midwife, health visitor, GP or the appropriate local service for advice."
+
+Also included, brief and careful: if someone feels unable to keep themselves or their baby safe, they should seek urgent local help immediately.
+
+Related slugs: `postnatal-checks-and-appointments`, `feeling-like-yourself-again`, `newborn-feeding-rhythms`.
+
+Planned sources (verified UK, real URLs):
+- NHS — Your post-pregnancy body
+- NHS Start for Life — Support after birth
+- NHS — Feeling depressed after childbirth
+- Tommy's — Postnatal wellbeing / after birth
+- NCT — Postnatal support
+
+Source URLs will be verified via `curl` before publishing; any that 404 will be dropped (staying within the 3–5 range) and flagged in the return summary rather than substituted with invented links.
+
+### Guardrails
+
+- Only `src/data/firstYearArticleData.ts` is touched.
+- No components, routes, cards, topic pages, SEO wiring, images or assets change.
+- No changes to Pregnancy, TTC, IVF, Postpartum, Family or Toddler files.
+- Image mappings deferred to Phase 7.7b.
+
+### Verification after edit
+
+- `tsgo` typecheck passes.
+- Confirm both articles now have `status: "ready"`, `medicallyReviewed`, `reviewedBy`, `lastUpdated`, 7 sections, 5–6 takeaways, 3 related slugs, 3–5 sources.
+- Confirm all `relatedSlugs` resolve to `ready` articles in the file.
+- Playwright at 1280×1800: load `/first-year/checkups-and-warning-signs/postnatal-checks-and-appointments` and `/first-year/checkups-and-warning-signs/when-to-ask-for-help-after-birth`. Verify no draft placeholder text, medical review label renders, sources render, related guidance links render.
+- Load `/first-year/checkups-and-warning-signs` topic page: both cards no longer show "Coming soon" and are clickable.
+- Regression: quick load of one existing ready First Year article (e.g. feeding) to confirm nothing broke.
+
+### Return summary will include
+
+Files edited, both slugs published, ready/draft count after publish, section and takeaway counts per article, sources per article with URLs, any source gaps flagged, medical review fields added, related slugs per article, safety-wording once check, sensitive-content guardrail result, `tsgo` result, route verification result, topic page verification result, draft-gating result, cross-hub regression result, and whether it is safe to proceed to Phase 7.7b (image mappings).

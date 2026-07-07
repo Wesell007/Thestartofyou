@@ -22,6 +22,13 @@ import bodyDevelopment from "@/assets/guidance-card-development.jpg";
 import heroMilestones from "@/assets/firstyear-stage-9-12.jpg";
 import bodyMilestones from "@/assets/guidance-card-milestones.jpg";
 
+import heroFeelingLikeYourself from "@/assets/article-hero-emotional-feeling-like-yourself.jpg";
+import heroSupportiveMoment from "@/assets/article-hero-emotional-supportive-moment.jpg";
+import bodyEmotionalSupport from "@/assets/guidance-card-emotional.jpg";
+// bodyEmotionalAdjustment reuses the already-imported `heroBodyChanges`
+// asset (`postpartum-stage-adjustment.jpg`), used here as the body image
+// for `feeling-like-yourself-again`.
+
 
 export interface HubBodyImage {
   afterSectionIndex: number;
@@ -243,6 +250,36 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
         src: bodyRecoveryFeel,
         alt: "A gentle parent and baby moment after birth",
         caption: "Asking for help after birth is part of being supported, not a sign that you have failed.",
+      },
+    ],
+  },
+  // bespoke future: quiet parent and baby moment at home, calm emotional recovery after birth
+  "feeling-like-yourself-again": {
+    hero: {
+      src: heroFeelingLikeYourself,
+      alt: "A parent holding their baby in a quiet first-year moment at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: heroBodyChanges,
+        alt: "A calm parent and baby moment during emotional recovery after birth",
+        caption: "Feeling like yourself again can happen slowly, through rest, support and small moments that help you feel grounded.",
+      },
+    ],
+  },
+  // bespoke future: calm supportive parent and baby moment after birth, emotionally honest but not crisis-led
+  "when-parenthood-feels-heavy": {
+    hero: {
+      src: heroSupportiveMoment,
+      alt: "A parent and baby in a calm supportive moment after birth",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyEmotionalSupport,
+        alt: "A gentle support moment for a parent caring for their baby",
+        caption: "Parenthood can feel heavy and still be full of love. Support is allowed before everything feels too much.",
       },
     ],
   },

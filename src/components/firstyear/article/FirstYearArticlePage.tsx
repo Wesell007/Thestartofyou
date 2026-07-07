@@ -1,5 +1,6 @@
 import HubArticleView from "@/components/shared/HubArticleView";
 import FirstYearArticleCard from "@/components/firstyear/article/FirstYearArticleCard";
+import { getFirstYearArticleImages } from "@/components/firstyear/article/firstYearArticleImages";
 import {
   firstYearArticles,
   type FirstYearArticle,
@@ -21,10 +22,13 @@ const FirstYearArticlePage = ({ article, tone }: Props) => {
     .filter((a): a is FirstYearArticle => !!a && a.status === "ready");
 
   const base = tone === "recovery" ? "--stage-recovery" : "--stage-firstyear";
+  const images = getFirstYearArticleImages(article.slug);
 
   return (
     <HubArticleView
       article={article}
+      heroImage={images?.hero}
+      bodyImages={images?.body}
       tokens={{
         base,
         soft: `${base}-soft`,

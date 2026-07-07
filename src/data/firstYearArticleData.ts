@@ -40,8 +40,102 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     title: "Newborn feeding rhythms",
     description:
       "What feeding often looks like in the early weeks, from cluster feeds to quiet stretches, and how to read your baby's cues.",
-    readTime: "5 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    medicallyReviewed: true,
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    seoTitle: "Newborn feeding rhythms | The Start of You",
+    seoDescription:
+      "A calm guide to newborn feeding patterns, frequent feeds, night feeds and responsive feeding in the early months.",
+    intro:
+      "Newborn feeding rarely follows a tidy pattern. It moves in bursts and quiet stretches, changes from day to day, and often looks different from the guides you may have read in pregnancy. That does not mean anything is going wrong. It means your baby is very new, and the two of you are learning together. This piece is a calm map of what feeding tends to look like in the early weeks, whether you are breastfeeding, bottle feeding or doing a bit of both.",
+    sections: [
+      {
+        heading: "Why newborn feeding can feel irregular",
+        body: [
+          "In the first weeks, babies have small tummies, quickly changing needs and a body clock that is still finding its rhythm. Feeds can be close together at some points in the day, and further apart at others. That is completely typical.",
+          "Try to hold the picture loosely. Rather than expecting a schedule, it can help to think of feeding as a slow conversation you are building with your baby.",
+        ],
+      },
+      {
+        heading: "Feeding often can be normal in the early weeks",
+        body: [
+          "Frequent feeding, sometimes called cluster feeding, is common in the newborn period. Some evenings a baby may want to feed again and again over a short stretch of hours. It can feel intense, but it is usually a normal part of early feeding, not a sign that anything is wrong with your milk or your baby.",
+          "Whether you are breastfeeding or bottle feeding, feeding little and often in the early weeks tends to work with, rather than against, how newborns are built.",
+        ],
+      },
+      {
+        heading: "Watching your baby, not just the clock",
+        body: [
+          "Early feeding cues include stirring, turning the head, opening the mouth, bringing hands to the face and rooting. Crying is a later cue, so responding earlier often makes feeds calmer for both of you.",
+          "Wet and dirty nappies, alert moments and steady growth over time are usually more reassuring than the exact number of minutes on the clock between feeds.",
+        ],
+      },
+      {
+        heading: "Breastfeeding, bottle feeding and mixed feeding can all have rhythms",
+        body: [
+          "Rhythms exist across all feeding routes. Breastfed babies often feed frequently as they help stimulate milk supply. Bottle-fed babies can also be fed responsively, with slow-paced feeds and pauses that let them lead.",
+          "Mixed feeding is common too, and can look many different ways. Whatever the mix, gentle, responsive feeding tends to feel more sustainable than trying to force a strict pattern.",
+        ],
+      },
+      {
+        heading: "Night feeds and tiredness",
+        body: [
+          "Night feeds are a normal part of newborn life. Babies wake often to feed for good reasons, and it usually takes weeks or months before longer stretches emerge.",
+          "It can help to lower your expectations of the nights, keep the room calm and dim, and share what you can with a partner or trusted person during the day. Rest is not always available in one block, but small pockets of it still count.",
+        ],
+      },
+      {
+        heading: "When to ask for advice",
+        body: [
+          "If feeding feels painful, your baby seems unwell, nappies change suddenly, weight gain is worrying, or you are unsure what to do next, ask your midwife, health visitor, GP or the appropriate local service for advice.",
+          "Feeding support is there for anyone who wants it, including parents who are bottle feeding. Asking early often makes things easier, and there is no need to wait until something feels serious.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Keep a simple, low-pressure kit within reach for feeds: water, a snack, something to lean against, and something to do or watch during longer sessions. Small comforts matter when feeds are frequent.",
+          "Try to notice, without judgement, what tends to help your baby settle to feed and what tends to unsettle them. Over time, gentle patterns tend to appear on their own, without needing to enforce a schedule.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Irregular feeding is typical in the newborn period.",
+      "Cluster feeding is common and usually not a sign that anything is wrong.",
+      "Watching cues tends to work better than watching the clock.",
+      "Breastfeeding, bottle feeding and mixed feeding can all be responsive.",
+      "Night feeds are normal for a good while, and rest often comes in small pockets.",
+      "Ask for support early if anything about feeding worries you.",
+    ],
+    relatedSlugs: [
+      "bottle-and-breastfeeding-questions",
+      "newborn-sleep-expectations",
+      "baby-care-basics",
+    ],
+    sources: [
+      {
+        label: "Breastfeeding: the first few days",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/breastfeeding/the-first-few-days/",
+      },
+      {
+        label: "Bottle feeding advice",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/bottle-feeding/advice/",
+      },
+      {
+        label: "How to combine breast and bottle feeding",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/bottle-feeding/combine-breast-and-bottle/",
+      },
+      {
+        label: "Responsive Feeding Infosheet",
+        publisher: "UNICEF UK Baby Friendly Initiative",
+        url: "https://www.unicef.org.uk/babyfriendly/baby-friendly-resources/relationship-building-resources/responsive-feeding-infosheet/",
+      },
+    ],
   },
   {
     slug: "bottle-and-breastfeeding-questions",
@@ -49,9 +143,109 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     title: "Bottle and breastfeeding questions",
     description:
       "Gentle answers to the everyday questions that come up whether you're breastfeeding, bottle-feeding or doing both.",
-    readTime: "6 min read",
-    status: "draft",
+    readTime: "7 min read",
+    status: "ready",
+    medicallyReviewed: true,
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    seoTitle: "Bottle and breastfeeding questions | The Start of You",
+    seoDescription:
+      "Balanced guidance for breastfeeding, bottle feeding, expressing, mixed feeding and changing feeding plans.",
+    intro:
+      "Feeding questions come up constantly in the first year, and they rarely have one clean answer. What works for one family may not work for another, and what works one week may quietly shift the next. This piece takes some of the most common questions across breastfeeding, bottle feeding, expressing and mixed feeding and offers calm, balanced information, without pushing any single route.",
+    sections: [
+      {
+        heading: "Why feeding questions can feel emotional",
+        body: [
+          "Feeding is tied up with sleep, closeness, worry about growth, and messages you may have absorbed long before your baby arrived. It is not unusual for a small practical question to feel much bigger than it looks.",
+          "How you feed your baby is a personal decision shaped by your circumstances, health and family. There is no single right route, and changing your mind at any point is allowed.",
+        ],
+      },
+      {
+        heading: "Breastfeeding questions",
+        body: [
+          "Common early questions include how often to feed, how to tell whether a feed is going well, and what to do about tenderness. In the first weeks, frequent feeding is usually helpful for supply, and steady wet and dirty nappies are generally reassuring signs.",
+          "If breastfeeding feels painful, or you are unsure whether feeds are working, feeding support is available through your midwife, health visitor and local infant feeding services. Asking early tends to make things easier.",
+        ],
+      },
+      {
+        heading: "Bottle feeding questions",
+        body: [
+          "Whether you are feeding expressed milk or infant formula, bottle feeding can still be done responsively, following your baby's cues rather than pushing to finish every bottle. Paced feeding, upright positioning and pauses can all help your baby feed calmly.",
+          "For formula feeding, following NHS guidance on preparing and storing feeds safely matters. It is worth reading the guidance directly rather than relying on memory, especially in the tired early weeks.",
+        ],
+      },
+      {
+        heading: "Expressing and mixed feeding",
+        body: [
+          "Expressing milk, by hand or with a pump, can be useful for many reasons, including sharing feeds, easing full breasts or feeding a baby who cannot latch. It is a skill that often takes a little practice before it feels comfortable.",
+          "Mixed feeding, which combines breastfeeding with bottles of expressed milk or formula, is common and can be arranged in many different ways. Introducing bottles gradually and continuing to follow your baby's cues tends to make the transition smoother.",
+        ],
+      },
+      {
+        heading: "Changing your feeding plan",
+        body: [
+          "Feeding plans often shift over the first year. You might move from exclusive breastfeeding to mixed feeding, from bottles of expressed milk to formula, or back again. None of this reflects on you as a parent.",
+          "If you are thinking about a change, it can help to make the shift slowly where possible and to ask for support from your midwife, health visitor or infant feeding team, particularly if you have questions about supply, comfort or how your baby is settling.",
+        ],
+      },
+      {
+        heading: "When to ask for advice",
+        body: [
+          "If feeding feels painful, your baby seems unwell, nappies change suddenly, weight gain is worrying, or you are unsure what to do next, ask your midwife, health visitor, GP or the appropriate local service for advice.",
+          "There is no need to work things out alone. Reaching out early is often the difference between a small wobble and a longer struggle, whichever way you are feeding.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Keep the messages you have absorbed in perspective. Try to focus on your baby in front of you and what feels workable in your family, rather than what an ideal feeding day should look like.",
+          "Save trusted sources somewhere easy to find on your phone, so that when a question comes up at three in the morning, you are reading calm, evidence-based guidance rather than scrolling through opinions.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Feeding questions often feel bigger than they look, and that is understandable.",
+      "Responsive feeding applies to bottle feeding as well as breastfeeding.",
+      "Formula feeding is safest when guidance on preparation and storage is followed directly.",
+      "Expressing and mixed feeding are common and can be arranged in many ways.",
+      "Changing your feeding plan is allowed at any point.",
+      "Support is available and asking early is usually easier than waiting.",
+    ],
+    relatedSlugs: [
+      "newborn-feeding-rhythms",
+      "baby-care-basics",
+      "helping-your-baby-settle",
+    ],
+    sources: [
+      {
+        label: "Breastfeeding: the first few days",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/breastfeeding/the-first-few-days/",
+      },
+      {
+        label: "Bottle feeding advice",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/bottle-feeding/advice/",
+      },
+      {
+        label: "How to make up baby formula",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/bottle-feeding/making-up-baby-formula/",
+      },
+      {
+        label: "Expressing and storing breast milk",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/breastfeeding/expressing-breast-milk/",
+      },
+      {
+        label: "Infant formula and responsive bottle feeding",
+        publisher: "UNICEF UK Baby Friendly Initiative",
+        url: "https://www.unicef.org.uk/babyfriendly/baby-friendly-resources/bottle-feeding-resources/infant-formula-responsive-bottle-feeding-guide-for-parents/",
+      },
+    ],
   },
+
 
   // Sleep
   {

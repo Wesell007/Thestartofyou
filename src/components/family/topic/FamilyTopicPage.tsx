@@ -49,7 +49,7 @@ const FamilyTopicPage = ({ config }: Props) => {
     .map((s) => readyBySlug.get(s)!)
     .filter(Boolean);
 
-  const startHereSet = new Set(startHereSlugs);
+
 
   // Grouped guidance: include Start Here slugs too (shown as compact rows
   // rather than large cards, so they serve a different visual purpose).

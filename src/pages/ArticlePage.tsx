@@ -3,9 +3,12 @@ import { getArticle } from "@/data/articleData";
 import ArticleDeepTemplate from "@/components/article/ArticleDeepTemplate";
 import ArticleLegacyPage from "@/pages/ArticleLegacyPage";
 import ArticleFlagshipTemplate from "@/components/article/flagship/ArticleFlagshipTemplate";
+import SeoHead from "@/components/seo/SeoHead";
 
 // Articles forced to legacy render path (none currently).
 const LEGACY_FORCED_SLUGS = new Set<string>([]);
+
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}/;
 
 const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -25,17 +28,80 @@ const ArticlePage = () => {
     !!data.keyTakeaways &&
     data.keyTakeaways.length > 0;
 
-  if (hasFlagshipShape && !LEGACY_FORCED_SLUGS.has(data.slug)) {
-    return <ArticleFlagshipTemplate data={data} />;
-  }
-
-  // 2. Everything else continues on the existing deep template (unchanged).
   const hasMinimumDeepShape = !!data.quickAnswer;
-  if (LEGACY_FORCED_SLUGS.has(data.slug) || !hasMinimumDeepShape) {
-    return <ArticleLegacyPage data={data} />;
+
+  // ── Per-route SEO metadata (mounted once, before template dispatch) ──
+  const canonical = `https://thestartofyou.com/articles/${data.slug}`;
+  const title = `${data.title} | The Start of You`;
+  const description =
+    data.metaDescription ||
+    data.quickAnswer ||
+    "Calm, practical guidance from The Start of You.";
+
+  const jsonLd: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: data.title,
+    description,
+    mainEntityOfPage: canonical,
+    url: canonical,
+    publisher: {
+      "@type": "Organization",
+      name: "The Start of You",
+      url: "https://thestartofyou.com",
+    },
+  };
+
+  // Structured sources only — never emit plain string labels as citations.
+  const citation = (data.sources ?? [])
+    .map((source) => (typeof source === "string" ? null : source.url))
+    .filter((url): url is string => Boolean(url));
+  if (citation.length > 0) {
+    jsonLd.citation = citation;
   }
 
-  return <ArticleDeepTemplate data={data} />;
+  if (data.reviewedBy) {
+    jsonLd.reviewedBy = { "@type": "Person", name: data.reviewedBy };
+  }
+
+  if (data.lastUpdated && ISO_DATE.test(data.lastUpdated)) {
+    jsonLd.dateModified = data.lastUpdated;
+  }
+
+  const seo = (
+    <SeoHead
+      title={title}
+      description={description}
+      canonical={canonical}
+      ogType="article"
+      jsonLd={jsonLd}
+    />
+  );
+
+  if (hasFlagshipShape && !LEGACY_FORCED_SLUGS.has(data.slug)) {
+    return (
+      <>
+        {seo}
+        <ArticleFlagshipTemplate data={data} />
+      </>
+    );
+  }
+
+  if (LEGACY_FORCED_SLUGS.has(data.slug) || !hasMinimumDeepShape) {
+    return (
+      <>
+        {seo}
+        <ArticleLegacyPage data={data} />
+      </>
+    );
+  }
+
+  return (
+    <>
+      {seo}
+      <ArticleDeepTemplate data={data} />
+    </>
+  );
 };
 
 export default ArticlePage;

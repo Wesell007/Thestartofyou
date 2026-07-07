@@ -17,6 +17,11 @@ import bodyBodyChanges from "@/assets/guidance-postpartum.jpg";
 import heroHormones from "@/assets/guidance-postpartum.jpg";
 import bodyHormones from "@/assets/home-emotional.jpg";
 
+import heroDevelopment from "@/assets/firstyear-stage-6-9.jpg";
+import bodyDevelopment from "@/assets/guidance-card-development.jpg";
+import heroMilestones from "@/assets/firstyear-stage-9-12.jpg";
+import bodyMilestones from "@/assets/guidance-card-milestones.jpg";
+
 
 export interface HubBodyImage {
   afterSectionIndex: number;

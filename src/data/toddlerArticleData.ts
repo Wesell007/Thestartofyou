@@ -838,8 +838,97 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "Signs your child may be ready for potty training",
     description:
       "The quiet cues that suggest your toddler might be ready, and why age is only part of the picture.",
-    readTime: "5 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Potty training tends to go more smoothly when it starts from readiness rather than a date on the calendar. This piece is a calm look at the small cues that suggest your toddler might be ready, and why age alone rarely gives you the full picture. It is not a checklist to pass, and it is not about rushing. It is about noticing what your child is quietly showing you.",
+    sections: [
+      {
+        heading: "Readiness is not just age",
+        body: [
+          "Toddlers become ready for potty training at very different ages. Some children show signs earlier, others take much longer, and both can be entirely typical.",
+          "It usually helps to think about readiness as a mix of physical, communication and interest signs, rather than any single moment or age. There is no medal for starting early.",
+        ],
+      },
+      {
+        heading: "Staying dry for longer",
+        body: [
+          "One quiet sign is your toddler staying dry for longer stretches. Nappies that are dry after a nap or dry for a couple of hours can suggest the bladder is starting to hold on a bit.",
+          "This on its own does not mean it is time to start. It is one small signal to notice alongside the others.",
+        ],
+      },
+      {
+        heading: "Awareness of wees and poos",
+        body: [
+          "Many toddlers start to notice when they are weeing or pooing, or right after. They might pause, look down, tell you or go quiet in a corner.",
+          "That awareness is a helpful sign that a link is forming between the feeling in their body and what is happening. It usually comes before being able to hold on.",
+        ],
+      },
+      {
+        heading: "Interest in the toilet or potty",
+        body: [
+          "Toddlers often become curious about the toilet, wanting to watch, flush or sit on it fully clothed. Interest in a potty at home can look similar.",
+          "You can gently follow that curiosity without turning it into a training moment. Letting them explore the potty or toilet calmly is often enough at this stage.",
+        ],
+      },
+      {
+        heading: "Following simple instructions",
+        body: [
+          "Being able to follow short, simple instructions, such as come and sit down or pull your trousers up, is helpful when potty training starts. It is not a test, but it does make things easier.",
+          "If your toddler is still very much in the middle of language leaps, it can help to give them a little more time before pushing potty training forward.",
+        ],
+      },
+      {
+        heading: "Emotional readiness and cooperation",
+        body: [
+          "Potty training tends to go better when your toddler is generally cooperative around simple everyday tasks. If they are in a very no-heavy phase, or a lot has just changed at home, it can help to wait.",
+          "You do not need perfect behaviour to start. A generally settled, willing child, in a fairly steady week, is usually enough.",
+        ],
+      },
+      {
+        heading: "Starting gently",
+        body: [
+          "When you do start, keeping it low key often helps most. Introduce the potty in a normal way, offer it at natural moments and let your toddler have some say in how it goes.",
+          "You can pause at any point. Stopping and coming back to it a few weeks later is a normal part of potty learning, not a failure.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Readiness is a mix of physical, communication and interest signs.",
+      "Age on its own does not decide when potty training should start.",
+      "Longer dry stretches and body awareness are early quiet signs.",
+      "Curiosity about the potty or toilet is worth following gently.",
+      "Following simple instructions and general cooperation help a lot.",
+      "It is fine to pause and try again later if things feel too hard.",
+    ],
+    relatedSlugs: [
+      "potty-training-without-pressure",
+      "what-toddler-development-can-look-like",
+      "making-mealtimes-feel-calmer",
+    ],
+    sources: [
+      {
+        label: "Potty training tips",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/potty-training-and-bedwetting/how-to-potty-train/",
+      },
+      {
+        label: "Toddler potty training",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Potty training and toilet training advice",
+        publisher: "ERIC",
+        url: "https://eric.org.uk/potty-training/",
+      },
+      {
+        label: "Potty training your child",
+        publisher: "Family Lives",
+        url: "https://www.familylives.org.uk/advice/early-years-development/behaviour/potty-training",
+      },
+    ],
   },
   {
     slug: "potty-training-without-pressure",
@@ -848,7 +937,96 @@ const rawToddlerArticles: ToddlerArticle[] = [
     description:
       "A calm, child-led approach to potty learning that leaves room for wobbles and starts.",
     readTime: "6 min read",
-    status: "draft",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Potty training can quietly become one of the more stressful stretches of the toddler years. This piece is a calm look at how to keep it low pressure, without strict methods or a fixed timeline. It is not about promising a quick fix, and it is not about doing it perfectly. It is about supporting your child through a learning process that is often messier than any book makes it sound.",
+    sections: [
+      {
+        heading: "Why pressure can make potty training harder",
+        body: [
+          "Toddlers pick up on tension very quickly. When potty training becomes a source of stress at home, many children start to hold on, refuse to sit or get more anxious about using the toilet.",
+          "Keeping the tone low key, even when it is going slowly, is usually more helpful than trying to push things forward through pressure or promises.",
+        ],
+      },
+      {
+        heading: "Creating a simple routine",
+        body: [
+          "A loose routine of trying the potty at natural moments, such as after meals or before leaving the house, can help your toddler build a small rhythm without feeling watched.",
+          "It usually helps to offer the potty rather than insist on it. A calm come and try, without a big reaction either way, tends to work better than a firm demand.",
+        ],
+      },
+      {
+        heading: "Keeping language calm",
+        body: [
+          "The words you use around wees, poos and the potty matter. Simple, everyday language keeps it feeling normal, rather than something to be embarrassed or worried about.",
+          "Praise can help, but a very big response to every success can also make some toddlers feel watched. A warm, low-key well done is usually enough.",
+        ],
+      },
+      {
+        heading: "Handling accidents without shame",
+        body: [
+          "Accidents are part of potty learning. Even children who have been dry for weeks can suddenly have days of accidents, especially if they are tired, unwell, or in a new setting.",
+          "It usually helps to clean up calmly, without a big reaction. A short phrase such as never mind, we will try again is usually all your toddler needs to hear.",
+        ],
+      },
+      {
+        heading: "Pausing if your child is not ready",
+        body: [
+          "If potty training is going badly for more than a couple of weeks and everyone is getting upset, it is usually a sign to pause. Stopping is not failing.",
+          "Coming back to it in a few weeks or months, when things feel calmer, often leads to much smoother progress than pushing through.",
+        ],
+      },
+      {
+        heading: "Nursery, childcare and days out",
+        body: [
+          "Talking to nursery or childcare about how they support potty learning can help everything feel more consistent. A short chat about language, timing and how to handle accidents is usually enough.",
+          "For days out, taking a small bag with spare clothes, wipes and a change mat can lower the stress. Expect a step back on unfamiliar days, and try not to read too much into it.",
+        ],
+      },
+      {
+        heading: "When to ask for advice",
+        body: [
+          "Most children get there in time with steady, low-pressure support. Slow starts, wobbles and phases of regression are usually part of learning, not a sign that something is wrong.",
+          "If your child seems in pain, is constipated, has repeated accidents after being dry, avoids weeing or pooing, or you are worried about toilet training, ask your health visitor, GP or appropriate local service for advice.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Pressure tends to slow potty training down rather than speed it up.",
+      "A loose, low-key routine usually works better than strict timing.",
+      "Simple, calm language keeps wees and poos feeling normal.",
+      "Accidents are part of learning and do not need a big reaction.",
+      "Pausing and coming back later is a valid part of the process.",
+      "Ask your health visitor or GP if you are worried or things feel stuck.",
+    ],
+    relatedSlugs: [
+      "signs-your-child-may-be-ready-for-potty-training",
+      "helping-your-toddler-with-big-feelings",
+      "making-mealtimes-feel-calmer",
+    ],
+    sources: [
+      {
+        label: "How to potty train",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/potty-training-and-bedwetting/how-to-potty-train/",
+      },
+      {
+        label: "Toddler potty training",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Potty training and toilet training advice",
+        publisher: "ERIC",
+        url: "https://eric.org.uk/potty-training/",
+      },
+      {
+        label: "Potty training your child",
+        publisher: "Family Lives",
+        url: "https://www.familylives.org.uk/advice/early-years-development/behaviour/potty-training",
+      },
+    ],
   },
 
   // Health and safety

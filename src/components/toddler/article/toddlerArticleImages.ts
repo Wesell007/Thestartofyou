@@ -10,6 +10,10 @@ import heroConnection from "@/assets/toddler-article-connection-hero.jpg";
 import heroCalmMealtime from "@/assets/toddler-article-calm-mealtime-hero.jpg";
 import heroBedtime from "@/assets/toddler-article-bedtime-hero.jpg";
 import heroMilestones from "@/assets/toddler-article-milestones-hero.jpg";
+import heroTantrums from "@/assets/toddler-article-tantrums-hero.jpg";
+import heroBigFeelings from "@/assets/toddler-article-big-feelings-hero.jpg";
+import heroPottyReadiness from "@/assets/toddler-article-potty-readiness-hero.jpg";
+import heroPottyPressureFree from "@/assets/toddler-article-potty-pressure-free-hero.jpg";
 
 import bodySimplePlay from "@/assets/toddler-article-simple-play-body.jpg";
 import bodyConnection from "@/assets/toddler-article-connection-body.jpg";
@@ -19,6 +23,11 @@ import bodySleepRhythms from "@/assets/toddler-article-sleep-rhythms-body.jpg";
 import bodyBedtime from "@/assets/toddler-article-bedtime-body.jpg";
 import bodyDevelopment from "@/assets/toddler-article-development-body.jpg";
 import bodyMilestones from "@/assets/toddler-article-milestones-body.jpg";
+import bodyTantrums from "@/assets/toddler-article-tantrums-body.jpg";
+import bodyBigFeelings from "@/assets/toddler-article-big-feelings-body.jpg";
+import bodyPottyReadiness from "@/assets/toddler-article-potty-readiness-body.jpg";
+import bodyPottyPressureFree from "@/assets/toddler-article-potty-pressure-free-body.jpg";
+
 
 export interface HubBodyImage {
   afterSectionIndex: number;
@@ -158,6 +167,70 @@ export const toddlerArticleImageMap: Record<string, ToddlerArticleImages> = {
         alt: "A toddler playing quietly with support nearby",
         caption:
           "When milestones feel different, it can help to notice patterns over time and ask for advice if something worries you.",
+      },
+    ],
+  },
+  // bespoke future: calm parent supporting toddler through big feelings at home, no shame or punishment framing
+  "understanding-toddler-tantrums": {
+    hero: {
+      src: heroTantrums,
+      alt: "A parent sitting calmly near their toddler during a difficult moment",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyTantrums,
+        alt: "A gentle parent and toddler moment after big feelings",
+        caption:
+          "Tantrums are often about feelings toddlers cannot yet manage, not proof that anyone has failed.",
+      },
+    ],
+  },
+  // bespoke future: parent gently supporting toddler emotions in a quiet everyday home moment
+  "helping-your-toddler-with-big-feelings": {
+    hero: {
+      src: heroBigFeelings,
+      alt: "A parent gently comforting a toddler with big feelings",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyBigFeelings,
+        alt: "A toddler sitting close to a parent in a calm supportive moment",
+        caption:
+          "Big feelings are part of toddlerhood. Support often starts with staying close, using simple words and repairing after hard moments.",
+      },
+    ],
+  },
+  // bespoke future: calm toddler potty learning setup at home, practical and pressure-free
+  "signs-your-child-may-be-ready-for-potty-training": {
+    hero: {
+      src: heroPottyReadiness,
+      alt: "A simple potty set up in a calm toddler bathroom",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyPottyReadiness,
+        alt: "A parent preparing a gentle potty learning space for a toddler",
+        caption:
+          "Potty readiness is not only about age. It is about noticing a mix of physical, communication and interest signs.",
+      },
+    ],
+  },
+  // bespoke future: relaxed pressure-free potty learning moment at home, no shame or urgency
+  "potty-training-without-pressure": {
+    hero: {
+      src: heroPottyPressureFree,
+      alt: "A toddler potty set up calmly at home for toilet learning",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyPottyPressureFree,
+        alt: "A relaxed potty learning moment in a warm home bathroom",
+        caption:
+          "Potty training does not need to become a battle. Accidents and pauses can be part of learning.",
       },
     ],
   },

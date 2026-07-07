@@ -216,6 +216,36 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
       },
     ],
   },
+  // bespoke future: calm parent and baby preparing for an early postnatal appointment at home
+  "postnatal-checks-and-appointments": {
+    hero: {
+      src: heroHealing,
+      alt: "A calm parent and baby moment during early postnatal care",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyBonding,
+        alt: "A parent keeping simple notes and questions during the first year",
+        caption: "Early checks are there to support you and your baby, not to test whether you have everything figured out.",
+      },
+    ],
+  },
+  // bespoke future: reassuring parent and baby support moment after birth, calm and non-clinical
+  "when-to-ask-for-help-after-birth": {
+    hero: {
+      src: heroRecoveryFeel,
+      alt: "A parent holding their baby in a calm and supportive first-year moment",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyRecoveryFeel,
+        alt: "A gentle parent and baby moment after birth",
+        caption: "Asking for help after birth is part of being supported, not a sign that you have failed.",
+      },
+    ],
+  },
 };
 
 

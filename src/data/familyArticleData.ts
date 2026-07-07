@@ -1004,6 +1004,481 @@ const rawFamilyArticles: FamilyArticle[] = [
       "sharing-the-mental-load",
     ],
   },
+
+  // ─── Phase 5.9: Family Article Expansion Batch 4 ──────────────────────
+  {
+    slug: "second-time-parenting",
+    topic: "growing-families",
+    title: "Second-time parenting: what can feel different",
+    description:
+      "A calm look at why becoming a parent again can feel different from the first time, even when so much is already familiar.",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Second-time parenting: what can feel different",
+    seoDescription:
+      "Why the second baby often feels different from the first, and small ways to make space for an older child, a new baby and yourself.",
+    lastUpdated: "July 2026",
+    intro:
+      "Becoming a parent again is not simply doing the same thing twice. Some parts are steadier because you have done this before, and other parts feel new because your family and your life are no longer the same shape they were the first time. This piece is a gentle look at what tends to feel different, and small ways to soften the shift.",
+    sections: [
+      {
+        heading: "Why second-time parenting can feel different",
+        body: [
+          "The first baby often lands into a quieter life. A second baby usually arrives into a home that is already full of routines, personalities and small demands. That is not a bad thing, but it does change how the early weeks feel.",
+          "You may notice more guilt, more juggling and less pure focus on the baby. That is a normal side effect of already loving someone else who needs you too.",
+        ],
+      },
+      {
+        heading: "You may know more, but life may be fuller",
+        body: [
+          "Second-time parents often carry a quiet confidence that helps in the early weeks. You know that most days pass, most cries settle and most phases end.",
+          "At the same time, the day itself is often busier. Nursery runs, meals, laundry and an older child's feelings can absorb the pockets of time that used to be for resting or bonding. Both things can be true at once.",
+        ],
+      },
+      {
+        heading: "Making space for the older child",
+        body: [
+          "An older child is going through a big change too, even when they seem excited. Short, predictable one-to-one moments often help more than big gestures.",
+          "Ten quiet minutes with just them, on the sofa or before bed, tends to steady them more than a long day out. It also gives you permission to keep things small.",
+        ],
+      },
+      {
+        heading: "Letting this baby be their own person",
+        body: [
+          "It is easy to expect the second baby to be like the first, or to be everything the first was not. Most babies quietly refuse both.",
+          "Try to meet this baby as their own small person, with their own rhythm. What worked before may work again. It may also need adjusting.",
+        ],
+      },
+      {
+        heading: "Sharing attention without trying to split yourself perfectly",
+        body: [
+          "You do not have to give equal time to every child in every moment. Family life tends to average out over weeks, not hours.",
+          "Some days will lean more towards the baby. Other days will lean more towards the older child. Both are part of a whole picture, not a scorecard.",
+        ],
+      },
+      {
+        heading: "What can help in the early weeks",
+        body: [
+          "Lower the bar on everything that is not the baby, the older child, or basic care for yourself. Meals can be simple. Standards can drop. Visitors can wait.",
+          "Accept help in the specific shapes that actually help you, whether that is a school run, a food drop or someone quietly folding laundry.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Keep one predictable ritual with your older child through the transition, such as bedtime stories or a Saturday morning breakfast.",
+          "Have a short honest phrase ready for the harder days, such as, \"This bit is busy, and it will get easier.\" It helps you as much as anyone else.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Second-time parenting often feels different because life around the baby is fuller.",
+      "You know more this time, and that quiet confidence is worth trusting.",
+      "Small, predictable moments with an older child help more than big gestures.",
+      "Attention averages out over weeks, not hours. You do not have to split yourself perfectly.",
+      "Lower the bar on non-essentials and accept help in specific, useful shapes.",
+    ],
+    relatedSlugs: [
+      "preparing-for-another-baby",
+      "helping-your-child-adjust-to-a-new-sibling",
+      "building-family-routines",
+    ],
+  },
+
+  {
+    slug: "staying-connected-as-parents",
+    topic: "relationships",
+    title: "Staying connected as parents",
+    description:
+      "A warm look at keeping connection alive in family life without needing big date nights, perfect communication or extra hours in the day.",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Staying connected as parents",
+    seoDescription:
+      "Small, steady ways to stay connected as parents, whether you are together, co-parenting or supported by wider family.",
+    lastUpdated: "July 2026",
+    intro:
+      "Family life has a way of quietly rearranging the adult relationships inside it. Conversations shorten, evenings get swallowed by admin, and the parts of you that were there before the children can feel harder to find. This piece is a gentle look at staying connected as parents, whatever shape your family takes. It does not assume a particular set-up. Some of it will apply to partners living together, some to co-parents living apart, and some to solo parents leaning on wider family or close friends.",
+    sections: [
+      {
+        heading: "Why connection can become quieter after children",
+        body: [
+          "Once children arrive, the shared space between adults often shrinks. Time, energy and attention all get pulled in more directions.",
+          "Feeling less connected is not usually a sign that something is wrong. It is a common side effect of a very full season of life, and most families move through it in some form.",
+        ],
+      },
+      {
+        heading: "Notice the small moments that still count",
+        body: [
+          "Connection rarely needs a big evening out. A short walk, a shared cup of tea after bedtime or a quiet check-in in the kitchen can matter more than one occasional grand gesture.",
+          "Try to notice the moments that already exist rather than waiting for a bigger window that may not arrive for a while.",
+        ],
+      },
+      {
+        heading: "Talk before everything becomes resentment",
+        body: [
+          "Small frustrations tend to grow quietly if they never get said aloud. Naming something early usually costs less than sitting with it for weeks.",
+          "You do not have to have the perfect words. A short, honest sentence about what is feeling heavy is usually enough to open the conversation.",
+        ],
+      },
+      {
+        heading: "Share the ordinary parts of family life",
+        body: [
+          "Feeling connected often grows out of shared ordinary tasks, not shared big events. Cooking, tidying up together or walking the children to the park all count.",
+          "When one person is carrying most of the invisible planning, that quiet imbalance often shows up later as tiredness or distance. Sharing the ordinary parts helps.",
+        ],
+      },
+      {
+        heading: "Make room for different needs",
+        body: [
+          "Different people rest, recharge and feel close in different ways. One person may need quiet time alone. Another may need to talk through the day.",
+          "Making space for each other's different needs, rather than expecting them to match, often does more for the relationship than any single conversation.",
+        ],
+      },
+      {
+        heading: "When connection feels hard",
+        body: [
+          "There are seasons when connection feels difficult. New baby weeks, illness, work pressure and grief all take their share.",
+          "If things feel stuck for a long time, or conversations keep ending badly, it can be worth speaking with a trusted person outside the situation, whether that is a friend, a family member or a professional support service.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Pick one small regular anchor, such as ten minutes at the end of the day to check in, or a walk together at the weekend.",
+          "Say the small nice thing out loud when you notice it. Small appreciations, said in ordinary moments, quietly build the closeness bigger conversations often miss.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Feeling less connected after children is common, not a sign something is wrong.",
+      "Small moments count more than occasional big gestures.",
+      "Naming small frustrations early tends to cost less than sitting with them.",
+      "Sharing ordinary tasks and invisible planning quietly builds closeness.",
+      "Different people rest and reconnect in different ways, and that is okay.",
+    ],
+    relatedSlugs: [
+      "sharing-the-mental-load",
+      "setting-boundaries-with-grandparents",
+      "building-family-routines",
+    ],
+  },
+
+  {
+    slug: "calmer-evenings-after-busy-days",
+    topic: "family-basics",
+    title: "Calmer evenings after busy days",
+    description:
+      "Small, practical ways to help evenings feel less stretched after nursery, school, work or busy family days.",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Calmer evenings after busy days",
+    seoDescription:
+      "Practical ideas for softer family evenings, with lower expectations, a soft landing point and realistic food, bath and bedtime.",
+    lastUpdated: "July 2026",
+    intro:
+      "Evenings are often when the whole day catches up with a family. Everyone is tired, hungry and low on patience at the same time, and even a small thing can tip the mood. This piece is a calm look at helping evenings feel a little softer, without needing a new routine or extra hours in the day.",
+    sections: [
+      {
+        heading: "Why evenings can feel so stretched",
+        body: [
+          "By the end of the day, everyone in the family has been holding something. Children have been managing nursery, school or long stretches of play. Adults have been holding work, care, tasks and often each other.",
+          "The wobble at 5pm is usually not a sign of a bad day. It is a sign of a full day meeting tired bodies.",
+        ],
+      },
+      {
+        heading: "Lower the pressure when everyone is tired",
+        body: [
+          "Evenings rarely go well when we try to fit in one more thing. Cleaning, admin and extra activities often add friction rather than helping.",
+          "It usually helps to protect the evening for a small number of things that actually matter, and to let the rest wait for a quieter moment.",
+        ],
+      },
+      {
+        heading: "Create a soft landing point",
+        body: [
+          "Children often need a few minutes to arrive properly after nursery or school before anything else is asked of them. A snack, some quiet play or a cuddle on the sofa can be enough.",
+          "Adults benefit from a soft landing too. Even five minutes with the kettle on, before the next task starts, can change the tone of the evening.",
+        ],
+      },
+      {
+        heading: "Keep food, bath and bedtime realistic",
+        body: [
+          "Evening meals do not need to be inventive. Simple, familiar food usually goes down better than a new dish on a tired night.",
+          "Bath and bedtime rarely need to be perfect. A short, predictable rhythm, done in roughly the same order each night, tends to help more than a longer, more elaborate routine.",
+        ],
+      },
+      {
+        heading: "Make space for connection before correction",
+        body: [
+          "When children are tired, small behaviours often get bigger. It can help to notice what is underneath before reaching for a consequence.",
+          "A short moment of connection first, a cuddle, a name spoken warmly, sitting nearby, often settles behaviour more than a firm word alone.",
+        ],
+      },
+      {
+        heading: "What to do when the evening falls apart",
+        body: [
+          "Some evenings unravel no matter what you do. Meals get skipped, bedtimes drift, and everyone ends the day upset.",
+          "You do not need to fix the whole evening. Getting to bed, even messily, is often enough. Tomorrow is a genuine reset.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Prep one small thing in the morning that makes the evening lighter, such as tea planned or bath things ready.",
+          "Give yourself and the children ten quiet minutes at the start of the evening before anything is asked of anyone.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "The 5pm wobble is usually a full day meeting tired bodies, not a bad day.",
+      "A soft landing point helps children and adults arrive properly into the evening.",
+      "Simple food and short, predictable bedtime rhythms hold up better on tired days.",
+      "Connection before correction often settles behaviour more than a firm word.",
+      "When an evening falls apart, getting to bed is enough. Tomorrow is a real reset.",
+    ],
+    relatedSlugs: [
+      "building-family-routines",
+      "sharing-the-mental-load",
+      "screen-time-as-a-family",
+    ],
+  },
+
+  {
+    slug: "family-sick-days-at-home",
+    topic: "health-safety",
+    title: "Getting through family sick days at home",
+    description:
+      "A gentle, non-clinical look at managing ordinary sick days as a family, keeping expectations low and knowing when to ask for advice.",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Getting through family sick days at home",
+    seoDescription:
+      "Practical, non-clinical ideas for family sick days, from lowering expectations early to managing work, siblings and knowing when to ask for advice.",
+    lastUpdated: "July 2026",
+    intro:
+      "Sick days rarely arrive at a convenient moment, and they often ripple through the whole family. This piece is a broad, practical look at getting through ordinary illness at home. It does not offer medical guidance. If you are worried about a child's symptoms, or something feels urgent, ask for medical advice from the appropriate local service.",
+    sections: [
+      {
+        heading: "Why sick days can feel hard for the whole family",
+        body: [
+          "When one person is unwell, the household usually shifts around them. Sleep gets broken, work gets rearranged, and the rest of the family carries a little extra.",
+          "It helps to expect a wobble in the wider family rhythm rather than trying to keep everything running as normal.",
+        ],
+      },
+      {
+        heading: "Lower expectations early",
+        body: [
+          "Sick days tend to go more smoothly when the day is stripped back early rather than late. Cancelling non-essentials at the start of the day often costs less than powering through and cancelling in the afternoon.",
+          "Simpler food, more screen time than usual and quiet indoor time are all reasonable choices while someone is unwell.",
+        ],
+      },
+      {
+        heading: "Keep comfort and basics simple",
+        body: [
+          "A familiar spot on the sofa or bed, a soft blanket, a favourite cup, a quiet story. Comfort during illness is often built from small, familiar things.",
+          "Try not to reinvent routines during a sick day. Children usually feel steadier when the shape of the day, even a slower one, stays broadly recognisable.",
+        ],
+      },
+      {
+        heading: "Think about rest, fluids and practical support in general terms",
+        body: [
+          "Rest and sips of drinks little and often are usually welcome during ordinary illness. This is general everyday care, not medical guidance.",
+          "For anything specific about symptoms, treatment or medication, follow the advice of a qualified health professional or your local service.",
+        ],
+      },
+      {
+        heading: "Managing work, childcare and siblings",
+        body: [
+          "Work, childcare and siblings often need to shift around a sick day. It helps to make the smallest reasonable change first, such as one person swapping their day, before rearranging everything.",
+          "Siblings often quietly need a bit of extra warmth too. They may feel left out while attention moves towards the unwell child, or worried without saying so.",
+        ],
+      },
+      {
+        heading: "When it may be worth asking for advice",
+        body: [
+          "If you feel unsure, uneasy or a worry keeps coming back, it is worth asking. Most local health services would rather hear from you early than late.",
+          "If you are worried about a child's symptoms, or something feels urgent, ask for medical advice from the appropriate local service.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Have a small sick-day kit ready in a cupboard, with simple comforts you know your family reaches for.",
+          "Keep a short list of the local services you would call for advice, so it is easy to find when you are tired.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Expect the whole family rhythm to wobble when someone is unwell.",
+      "Stripping the day back early tends to cost less than powering through.",
+      "Familiar comforts and a broadly recognisable routine help children feel steadier.",
+      "Siblings often quietly need a little extra warmth during a sick day.",
+      "Trust the worry that keeps coming back. Asking early is usually gentler than waiting.",
+    ],
+    relatedSlugs: [
+      "when-to-ask-for-help",
+      "making-your-home-safer",
+      "building-family-routines",
+    ],
+  },
+
+  {
+    slug: "planning-family-days-out",
+    topic: "travel-days-out",
+    title: "Planning family days out without overdoing it",
+    description:
+      "A practical guide to planning days out with children that leaves room for tiredness, snacks, weather and changing moods.",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Planning family days out without overdoing it",
+    seoDescription:
+      "Small planning shifts that make family days out kinder, from choosing one main thing to packing lightly and staying flexible when plans change.",
+    lastUpdated: "July 2026",
+    intro:
+      "Family days out can be lovely and knackering in equal measure. A little planning helps, but too much planning quietly turns the day into a project. This piece is a calm look at how to shape a day out around real family energy, not a perfect timetable.",
+    sections: [
+      {
+        heading: "Why family days out can feel bigger than expected",
+        body: [
+          "A day out with children involves more logistics than it looks. Food, toilets, weather, travel, moods and naps all sit under the surface of one simple plan.",
+          "It helps to expect a family day out to take more energy than an equivalent day at home, and to plan the rest of the day around that.",
+        ],
+      },
+      {
+        heading: "Choose one main thing",
+        body: [
+          "Days out tend to feel better when the plan has one clear anchor. A park, a museum, a swim, a walk. One thing you would be glad to have done.",
+          "Everything else, cafes, gift shops, extra stops, becomes an optional bonus rather than something the day needs to fit in.",
+        ],
+      },
+      {
+        heading: "Plan around energy, food and toilets",
+        body: [
+          "Try to plan the day around when children will be hungry, tired and needing a loo, not around when the plan looks tidy on paper.",
+          "A snack in your bag, an idea of a lunch spot and a quick mental note of where the toilets are will often smooth more of the day than anything else.",
+        ],
+      },
+      {
+        heading: "Keep the day flexible",
+        body: [
+          "The best family days often bend slightly in the middle. A shorter visit than planned, an unplanned stop by a pond, a longer coffee break.",
+          "Try to hold the plan loosely, so it can flex around a tired child, a cold spell, or an unexpected favourite moment.",
+        ],
+      },
+      {
+        heading: "What to pack without overpacking",
+        body: [
+          "It is easy to pack for every possible situation. Most of it will stay in the bag, and the bag itself becomes another thing to carry.",
+          "A change of clothes, snacks, water, wipes, a small first-aid pouch and one comfort item covers most ordinary days out. Everything else is optional.",
+        ],
+      },
+      {
+        heading: "When the plan changes",
+        body: [
+          "Weather, moods and traffic all have opinions on your plan. Cutting a day short, changing venue or heading home earlier than expected is not a failed day.",
+          "A shorter day that ends with everyone feeling okay is usually a better day than a longer one that ends in tears in the car.",
+        ],
+      },
+      {
+        heading: "Practical ideas before you go",
+        body: [
+          "Write down the one main thing, so the plan does not quietly grow in your head on the way out of the door.",
+          "Agree a rough end time in advance, so heading home does not feel like giving up on the day.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Family days out often take more energy than they look like they will.",
+      "One clear anchor makes the day easier to hold than a full itinerary.",
+      "Plan around real energy, food and toilets, not a tidy timetable.",
+      "A well-packed small bag beats a heavy one you have to carry all day.",
+      "Cutting a day short is not a failed day. It is often the wiser choice.",
+    ],
+    relatedSlugs: [
+      "travelling-with-young-children",
+      "making-car-journeys-calmer",
+      "building-family-routines",
+    ],
+  },
+
+  {
+    slug: "simple-family-play-ideas",
+    topic: "play-connection",
+    title: "Simple family play ideas for everyday connection",
+    description:
+      "Low-pressure play ideas that help families connect without needing expensive toys, perfect set-ups or long activities.",
+    readTime: "5 min read",
+    status: "ready",
+    seoTitle: "Simple family play ideas for everyday connection",
+    seoDescription:
+      "Small, low-effort play ideas that build everyday family connection without expensive toys, perfect set-ups or long activities.",
+    lastUpdated: "July 2026",
+    intro:
+      "Family play does not need to be big, clever or educational to matter. Most of the connection children remember later comes from small, ordinary moments repeated often. This piece is a warm look at simple play, especially for the tired days when a full activity feels like too much.",
+    sections: [
+      {
+        heading: "Why simple play can matter",
+        body: [
+          "Children rarely need an event. What they usually need is a bit of unhurried attention and the sense that they are being noticed.",
+          "Simple play, done often, tends to build more connection than an occasional big activity that leaves everyone worn out.",
+        ],
+      },
+      {
+        heading: "Start with what your child already does",
+        body: [
+          "Follow the play they are already drawn to. Cars on the floor, drawing at the table, dolls in a corner, building with cushions.",
+          "Joining in on their terms, even briefly, tells a child their play matters to you. That is usually the point.",
+        ],
+      },
+      {
+        heading: "Use small pockets of time",
+        body: [
+          "Ten minutes before dinner, five minutes before bed, a slow moment in the morning. Small pockets of connected time add up.",
+          "You do not need a clear hour in the diary. Play that fits inside everyday life tends to happen more often than play that needs to be planned.",
+        ],
+      },
+      {
+        heading: "Play does not need to look educational",
+        body: [
+          "It is easy to feel that play should be teaching something. Most of the time, the connection is the learning.",
+          "A silly game, a shared story, a made-up song. If the child is engaged and you are together, that is enough.",
+        ],
+      },
+      {
+        heading: "Ideas for tired days",
+        body: [
+          "On the days when the floor feels too far away, quieter shared play helps. A book together, a cuddle with a small toy, drawing side by side.",
+          "Being in the same warm space, doing something small, still counts. Play does not need energy to matter.",
+        ],
+      },
+      {
+        heading: "When play feels hard",
+        body: [
+          "Some days you will not have it in you to play, and that is okay. Children do not need a perfectly available adult. They need a warm, honest one.",
+          "A short, honest sentence such as, \"I'm a bit tired, but I love sitting near you,\" often lands more warmly than pretending to have more energy than you do.",
+        ],
+      },
+      {
+        heading: "Practical ideas you can try",
+        body: [
+          "Keep one small basket of open-ended toys nearby, so play can begin without a big set-up.",
+          "Try a short daily anchor, such as ten quiet minutes with just your child, no phone in the room, on their terms.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Children rarely need an event. Small, unhurried attention often means more.",
+      "Following the play they are already drawn to counts as real play.",
+      "Small pockets of time build family connection more reliably than long activities.",
+      "Play does not need to look educational to matter.",
+      "On tired days, being warmly near your child still counts as connection.",
+    ],
+    relatedSlugs: [
+      "building-family-traditions",
+      "screen-time-as-a-family",
+      "building-family-routines",
+    ],
+  },
 ];
 
 export function getFamilyArticlesByTopic(topic: FamilyArticleTopic) {

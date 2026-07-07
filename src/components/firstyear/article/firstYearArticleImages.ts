@@ -8,6 +8,16 @@ import bodyComfort from "@/assets/guidance-card-comfort.jpg";
 import bodySafety from "@/assets/guidance-card-safety.jpg";
 import bodyBonding from "@/assets/guidance-card-bonding.jpg";
 
+import heroHealing from "@/assets/postpartum-stage-early-days.jpg";
+import bodyHealing from "@/assets/postpartum-scene.jpg";
+import heroRecoveryFeel from "@/assets/postpartum-stage-early-weeks.jpg";
+import bodyRecoveryFeel from "@/assets/postpartum-journey.jpg";
+import heroBodyChanges from "@/assets/postpartum-stage-adjustment.jpg";
+import bodyBodyChanges from "@/assets/guidance-postpartum.jpg";
+import heroHormones from "@/assets/guidance-postpartum.jpg";
+import bodyHormones from "@/assets/home-emotional.jpg";
+
+
 export interface HubBodyImage {
   afterSectionIndex: number;
   src: string;

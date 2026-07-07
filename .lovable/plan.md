@@ -1,88 +1,62 @@
-# Phase 7.3b — First Year Article Image System
+## Phase 7.4 — First Year Batch 2 Publishing
 
-Bring First Year article pages up to the site's premium editorial standard by adding a hero image and at least one body image, using a mapping file that mirrors the Family pattern.
+Publish four parent-focused First Year articles across Postpartum Recovery and Body & Hormones by updating existing draft objects in `src/data/firstYearArticleData.ts` only.
 
-## Scope
+### Scope
 
-Two files only:
+Single file edit: `src/data/firstYearArticleData.ts`.
+No component, route, SEO wiring, image, or cross-hub changes.
 
-1. **New:** `src/components/firstyear/article/firstYearArticleImages.ts`
-2. **Edit:** `src/components/firstyear/article/FirstYearArticlePage.tsx`
+### Articles to publish
 
-No changes to article copy, statuses, `HubArticleView`, Family/Pregnancy/TTC/IVF/Toddler files, tokens, routes, SEO, or new assets.
+For each existing article object below, set `status: "ready"`, `medicallyReviewed: true`, `reviewedBy: "Jenny Joines"`, `lastUpdated: "July 2026"`, and add `intro`, `sections` (7), `keyTakeaways` (5–6), `relatedSlugs` (3), `sources` (3–5), `seoTitle`, `seoDescription`. Keep existing `slug`, `topic`, `title`, `description`. Adjust `readTime` only if length requires.
 
-## New file: firstYearArticleImages.ts
+1. **healing-after-birth** (Postpartum Recovery)
+   - Sections: Why healing can take time · Rest matters, even when rest is difficult · Bleeding, soreness and tenderness · Stitches, wounds and scars · Pelvic floor and core awareness · When to ask for advice · Practical ideas you can try
+   - Related: `what-recovery-can-feel-like`, `body-changes-after-birth`, `postnatal-checks-and-appointments`
 
-Mirror `familyArticleImages.ts` shape, adapted to raw JPG imports (First Year assets live as `.jpg` files in `src/assets/`, not `.asset.json`, so `import x from "@/assets/foo.jpg"` returns the URL string directly).
+2. **what-recovery-can-feel-like** (Postpartum Recovery)
+   - Sections: Recovery is not always a straight line · Your body may feel unfamiliar · Tiredness can shape everything · Emotions and recovery often overlap · Support can make recovery easier · When recovery feels harder than expected · Practical ideas you can try
+   - Related: `healing-after-birth`, `feeling-like-yourself-again`, `body-changes-after-birth`
 
-```ts
-export interface HubBodyImage {
-  afterSectionIndex: number;
-  src: string;
-  alt: string;
-  caption?: string;
-}
+3. **body-changes-after-birth** (Body & Hormones)
+   - Sections: Why body changes can feel surprising · Bleeding, breasts and hormones · Your abdomen, posture and strength · Pelvic floor changes · Scars, stitches and skin · Body image after birth · Practical ideas you can try
+   - Related: `healing-after-birth`, `hormones-sweat-and-hair-loss`, `what-recovery-can-feel-like`
 
-export interface FirstYearArticleImages {
-  hero: { src: string; alt: string };
-  body: HubBodyImage[];
-}
+4. **hormones-sweat-and-hair-loss** (Body & Hormones)
+   - Sections: Why hormones can feel intense after birth · Sweating and temperature changes · Hair shedding after birth · Breast changes and feeding shifts · Mood, tiredness and hormones · When to ask for advice · Practical ideas you can try
+   - Related: `body-changes-after-birth`, `what-recovery-can-feel-like`, `feeling-like-yourself-again`
 
-export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = { ... };
-export const getFirstYearArticleImages = (slug: string) =>
-  firstYearArticleImageMap[slug];
-```
+Related slugs may point to drafts; `FirstYearArticlePage` already filters related guidance to ready articles.
 
-### Mappings for the 4 ready articles
+### Content rules
 
-Preferred existing First Year / baby-care assets in `src/assets/`:
+- 2 short paragraphs per section. British English. No em dashes. Calm, supportive tone.
+- No diagnosis, treatment instructions, medication advice, emergency thresholds, invented stats, universal-recovery claims, weight-loss framing, or "bounce back" language.
+- **Safety wording used once only**, placed naturally in the "When to ask for advice" section (or near the end where that section is absent). Do not repeat the phrase across multiple sections. Broad form: "If bleeding, pain, mood, temperature, wounds or any other symptoms worry you, ask for advice from your midwife, GP or the appropriate local service." No emergency numbers, no red-flag thresholds.
 
-| Slug | Hero | Body (afterSectionIndex: 1) |
-| --- | --- | --- |
-| `newborn-sleep-expectations` | `firstyear-stage-0-3.jpg` | `article-hero-third-sleep.jpg` — caption: "Newborn sleep rarely follows a schedule, and that is normal." |
-| `helping-your-baby-settle` | `firstyear-scene.jpg` | `guidance-card-comfort.jpg` — caption: "Settling is a slow rhythm you build together, not a single technique." |
-| `safe-sleep-and-home-safety` | `guidance-card-nursery.jpg` | `guidance-card-safety.jpg` — caption: "Small, consistent habits protect a baby more than any single product." |
-| `baby-care-basics` | `firstyear-journey.jpg` | `guidance-card-bonding.jpg` — caption: "The basics become intuitive faster than most new parents expect." |
+### Sources
 
-Every image gets a descriptive alt. Inline comments mark future bespoke needs (e.g. `// bespoke future: parent settling baby in warm evening light`).
+3–5 per article using verified UK sources (NHS, RCOG, Tommy's).
+**Every URL live-checked before inclusion** via web fetch. If a candidate source does not resolve to the correct live page, **omit it and flag the gap in the return summary** rather than substituting a weaker source. Minimum acceptable count is 3; if fewer than 3 verified sources exist, flag and leave the article at 3 with the gap noted.
+No forums, blogs, influencer, or commercial pages. Broad NHS hair-loss page only if a specific postpartum page isn't available and copy stays general.
 
-**Fallback rule:** If any listed import fails because the filename differs in the repo, inspect `src/assets/` and swap to the closest existing First Year or baby-care asset (e.g. `firstyear-stage-3-6.jpg`, `guidance-firstyear.jpg`, `guidance-postpartum.jpg`, `guidance-card-rest.jpg`, `topic-baby-hero.jpg`). Do not use Family assets unless no appropriate First Year or baby-care asset exists.
+### SEO fields
 
-Body image placement uses `afterSectionIndex: 1` so the figure renders between section 2 and section 3 (renderer treats the index as the zero-based section it appears *after*). Draft slugs are intentionally not mapped — they are gated by NotFound.
+Use the exact `seoTitle` / `seoDescription` strings supplied in the request for each article.
 
-## Edit: FirstYearArticlePage.tsx
+### Verification
 
-Import the helper and pass images into `HubArticleView`, mirroring Family:
+- `tsgo`
+- Playwright at 1280×1800 and 375×812 on the four article routes: renders via `HubArticleView`, medical review line with Jenny Joines, sources render with `target="_blank"` + `rel="noopener noreferrer nofollow"`, related guidance ready-only, no placeholder text, no horizontal overflow, safety phrase appears at most once per article.
+- Topic hubs `/first-year/postpartum-recovery` and `/first-year/body-and-hormones`: four new cards clickable, remaining drafts show "Coming soon" and are not clickable.
+- Draft gating: `/first-year/emotional-wellbeing/feeling-like-yourself-again` → NotFound.
+- Regression: `/first-year/sleep/newborn-sleep-expectations`, `/first-year/care-and-safety/safe-sleep-and-home-safety`, `/family`, `/family/health-safety/making-your-home-safer`, `/articles/complete-guide-morning-sickness`, `/toddler`.
 
-```tsx
-import { getFirstYearArticleImages } from "@/components/firstyear/article/firstYearArticleImages";
-...
-const images = getFirstYearArticleImages(article.slug);
-...
-<HubArticleView
-  ...
-  heroImage={images?.hero}
-  bodyImages={images?.body}
-  relatedSlot={...}
-/>
-```
+### Out of scope
 
-Nothing else changes — related-guidance filtering, tone tokens, hub/topic labels stay identical.
+New articles, new topics, new slugs, route changes, component edits, SEO implementation, images, other hubs, other draft status changes, source additions to other drafts, `.lovable/plan.md`.
 
-## Verification
+### Return summary
 
-1. `tsgo` clean.
-2. Playwright at 1280×1800 and 375×812 for each ready route:
-   - `/first-year/sleep/newborn-sleep-expectations`
-   - `/first-year/sleep/helping-your-baby-settle`
-   - `/first-year/care-and-safety/safe-sleep-and-home-safety`
-   - `/first-year/care-and-safety/baby-care-basics`
-   Confirm: hero image visible in hero grid, one body figure between section 2 and section 3, medical review + sources + related guidance still render, no placeholder text, no horizontal overflow on mobile.
-3. Topic hubs `/first-year/sleep` and `/first-year/care-and-safety` still render.
-4. Regression: `/family/health-safety/making-your-home-safer`, `/articles/complete-guide-morning-sickness`, `/toddler` unaffected.
-
-## Out of scope
-
-New assets, article copy, statuses, SEO, routes, tokens, other hubs, draft mappings.
-
-After this ships, it is safe to proceed with Phase 7.4 (Batch 2 publishing).
+Files edited · four articles published · ready/draft count · section count per article · key takeaway count per article · sources per article with verified URLs · any source gaps flagged · medical review fields · related slugs · sensitive-content guardrail result · safety-phrase-once check · tsgo · route verification · topic page verification · draft route gating · cross-site regression · issues/follow-up · suggested next prompt.

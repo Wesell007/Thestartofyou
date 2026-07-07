@@ -40,8 +40,92 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "What toddler development can look like",
     description:
       "A gentle map of the leaps, plateaus and quiet shifts that shape the toddler years.",
-    readTime: "5 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Toddler development is broad, uneven and rarely tidy. Some weeks bring a burst of new words or skills, and others feel like a plateau where very little seems to change. This piece is a calm look at how toddler development can show up across movement, communication, play, independence and feelings, without turning it into a strict checklist.",
+    sections: [
+      {
+        heading: "Toddler development is broad",
+        body: [
+          "Toddler development covers a wide range of skills that grow together, including movement, understanding, speech, play, independence and emotional awareness. Progress in one area can pause while another is quietly growing.",
+          "Two toddlers of the same age can look very different and both be developing well. Ranges given in guidance are usually wide on purpose, because normal development varies from child to child.",
+        ],
+      },
+      {
+        heading: "Movement and physical confidence",
+        body: [
+          "In the toddler years, walking usually becomes steadier, and running, climbing, kicking and simple jumping start to appear over time. Fine movements such as holding a spoon, turning pages or stacking blocks also develop gradually.",
+          "It helps to give toddlers space and time to practise, rather than expecting new skills on demand. Confidence in movement often grows through everyday play, not through structured activities.",
+        ],
+      },
+      {
+        heading: "Speech, understanding and communication",
+        body: [
+          "Understanding usually comes before speaking. Many toddlers can follow simple requests and point to familiar things well before they use lots of words themselves.",
+          "Vocabulary can grow in bursts, with quiet stretches in between. Gestures, sounds, pointing and short phrases are all part of how toddlers communicate as language builds.",
+        ],
+      },
+      {
+        heading: "Play, curiosity and problem solving",
+        body: [
+          "Play is one of the clearest windows into toddler development. Sorting, stacking, posting objects, pretend cooking and simple role play all show growing thinking and problem-solving skills.",
+          "Toddlers often repeat the same play over and over. That repetition is part of how they learn, even when it can feel a little slow or samey to the adult beside them.",
+        ],
+      },
+      {
+        heading: "Independence and everyday skills",
+        body: [
+          "Small everyday skills, such as attempting to feed themselves, helping with dressing or carrying a cup, are all part of toddler development. Progress is usually messy before it becomes smooth.",
+          "It often helps to allow a little more time in daily routines so your toddler can try things themselves. Independence tends to grow when there is space to have a go without being rushed.",
+        ],
+      },
+      {
+        heading: "Emotions and social development",
+        body: [
+          "Big feelings are a normal part of toddlerhood. Toddlers are still learning what emotions are and how to manage them, so meltdowns, clinginess and sudden mood shifts are common.",
+          "Social skills, such as playing near other children, taking turns and noticing others' feelings, build slowly across the toddler years. Steady, calm adults nearby matter more than any particular activity.",
+        ],
+      },
+      {
+        heading: "Watching patterns over time",
+        body: [
+          "One quiet week or one big leap does not tell you much on its own. Development is easier to see when you look at patterns across weeks and months, rather than from one day to the next.",
+          "If something about your toddler's development keeps sitting uneasily with you, it is always fine to talk it through with your health visitor or GP. Your steady sense of your child matters.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Toddler development is broad and rarely moves at the same pace in every area.",
+      "Understanding usually grows before spoken language.",
+      "Play is one of the clearest signs of thinking and problem solving.",
+      "Independence often looks messy before it looks skilful.",
+      "Big feelings and social wobbles are a normal part of this stage.",
+      "Patterns over weeks and months tell you more than any single day.",
+    ],
+    relatedSlugs: [
+      "when-milestones-feel-different",
+      "simple-play-ideas-for-toddlers",
+      "building-connection-through-everyday-play",
+    ],
+    sources: [
+      {
+        label: "Toddler development",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Learning to talk: 1 to 2 years",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/play-and-learning/learning-to-talk/",
+      },
+      {
+        label: "Tiny Happy People",
+        publisher: "BBC",
+        url: "https://www.bbc.co.uk/tiny-happy-people",
+      },
+    ],
   },
   {
     slug: "when-milestones-feel-different",
@@ -49,8 +133,97 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "When milestones feel different",
     description:
       "Why children rarely develop on the same timeline, and when a chat with your health visitor can help.",
-    readTime: "4 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "It can be unsettling when your toddler's development starts to feel different from other children the same age. This piece is written for parents who have that quiet sense that something is not quite lining up. It does not diagnose or predict anything. It offers a calm way to think about what you are seeing and when a conversation with a professional can help.",
+    sections: [
+      {
+        heading: "Why milestones can feel different",
+        body: [
+          "Toddler development happens across many areas at once. Some children move quickly through one area and slowly through another, and each child's pattern is their own.",
+          "Feeling that something is different does not automatically mean something is wrong. It is worth taking seriously without treating it as a conclusion.",
+        ],
+      },
+      {
+        heading: "Uneven development is common",
+        body: [
+          "It is normal for toddlers to be ahead in one area and behind in another. A child with lots of words may take longer with movement, and a very physical toddler may talk later.",
+          "Bursts and plateaus are part of the picture. A quiet stretch does not always mean something has stalled, and a leap forward does not always mean the pace will continue.",
+        ],
+      },
+      {
+        heading: "Looking at patterns, not one moment",
+        body: [
+          "Any single day can look uneven, especially when your toddler is tired, unwell, teething or going through a change at home. One tricky moment is rarely the whole story.",
+          "Watching for patterns across a few weeks is usually more useful than reacting to a single day. It also gives you something clearer to describe if you do speak to a professional.",
+        ],
+      },
+      {
+        heading: "Comparing with other children",
+        body: [
+          "Comparisons happen naturally at toddler groups, in the family and on social media. They can be helpful sometimes, and they can also quietly increase worry when they are not the full picture.",
+          "Other children's ages, sleep, home life and personalities all shape what you see. What you notice in a ten minute play session is only a small window into their week.",
+        ],
+      },
+      {
+        heading: "Trusting your concern without panic",
+        body: [
+          "You know your toddler in a way no chart or app can. If something is quietly worrying you, that observation is worth respecting rather than dismissing.",
+          "Trusting your concern does not mean jumping to a diagnosis or a label. It means being willing to note what you are seeing and, if it keeps sitting with you, to talk it through with someone who can help.",
+        ],
+      },
+      {
+        heading: "What to note before asking for advice",
+        body: [
+          "Before speaking to a health visitor or GP, it can help to jot down what you are noticing. Things such as what your toddler tends to do, what they seem to find hard, and any recent changes are all useful.",
+          "You do not need a detailed report. A few short notes about specific examples are usually enough to help a professional understand what is on your mind.",
+        ],
+      },
+      {
+        heading: "When to ask for support",
+        body: [
+          "If you are worried about your toddler's development, speech, movement, behaviour, hearing, vision or interaction, ask your health visitor, GP or appropriate local service for advice.",
+          "You are not being over cautious by asking. Early conversations are useful even when everything turns out to be within a normal range, because they give you clearer ground to stand on.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Uneven development between different areas is common in the toddler years.",
+      "Patterns across weeks tell you more than any single day.",
+      "Comparisons with other children rarely show the full picture.",
+      "Your quiet concern about your child is worth respecting.",
+      "Short notes on what you notice can help a health visitor or GP.",
+      "Ask for advice if something keeps sitting uneasily with you.",
+    ],
+    relatedSlugs: [
+      "what-toddler-development-can-look-like",
+      "simple-play-ideas-for-toddlers",
+      "building-connection-through-everyday-play",
+    ],
+    sources: [
+      {
+        label: "Toddler development",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Health visitor and reviews",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/height-weight-and-reviews/baby-reviews/",
+      },
+      {
+        label: "Tiny Happy People",
+        publisher: "BBC",
+        url: "https://www.bbc.co.uk/tiny-happy-people",
+      },
+      {
+        label: "Worried about your child",
+        publisher: "NSPCC",
+        url: "https://www.nspcc.org.uk/keeping-children-safe/support-for-parents/",
+      },
+    ],
   },
 
   // Behaviour and emotions
@@ -101,8 +274,92 @@ const rawToddlerArticles: ToddlerArticle[] = [
     title: "Toddler sleep rhythms",
     description:
       "How toddler sleep quietly shifts across the second and third year, and what's usually behind wobbly weeks.",
-    readTime: "5 min read",
-    status: "draft",
+    readTime: "6 min read",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Toddler sleep is rarely linear. Nights that felt settled can suddenly feel unpredictable, and naps can shift without much warning. This piece is a calm look at how toddler sleep rhythms change, what tends to sit behind wobbly weeks and where the small, gentle steadying things usually live. It does not promise a fix and it does not lean on strict sleep methods.",
+    sections: [
+      {
+        heading: "Why toddler sleep can change",
+        body: [
+          "Toddler sleep is shaped by many things at once. Development, new skills, changes at home, illness, teething and everyday overwhelm can all show up in the night without you noticing them in the day.",
+          "A wobbly stretch does not mean you have done something wrong. It usually means something has shifted, even if it is quiet, and your toddler is working through it in the way toddlers often do, at night.",
+        ],
+      },
+      {
+        heading: "Naps and daily rhythm",
+        body: [
+          "Naps change across the toddler years. Many toddlers move from two naps to one, and later drop the daytime nap altogether. This transition rarely happens on a neat date and can be uneven for weeks.",
+          "The rhythm of the day matters more than a strict schedule. Time outside, active play, quieter windows and predictable meals can all support steadier sleep without needing rigid timings.",
+        ],
+      },
+      {
+        heading: "Bedtime cues and wind down",
+        body: [
+          "A simple, familiar bedtime routine gives toddlers useful cues that sleep is coming. This might be a bath, pyjamas, a short story and a cuddle, in roughly the same order most nights.",
+          "The routine does not need to be long or elaborate. A calm, predictable sequence, even a short one, is often more helpful than trying to add lots of steps.",
+        ],
+      },
+      {
+        heading: "Separation and needing reassurance",
+        body: [
+          "Many toddlers go through phases of feeling less sure about being apart at night. Wanting an extra cuddle, asking you to stay a little longer or waking to check you are there is a normal part of this.",
+          "Reassurance does not undo good sleep. Meeting your toddler with calm and confidence tends to help them settle again, even when the same wake up happens night after night for a while.",
+        ],
+      },
+      {
+        heading: "Early waking and unsettled nights",
+        body: [
+          "Early waking can be tied to bedtime being too late, naps landing awkwardly, room being too light, or simply a phase your toddler is moving through. It rarely has one clear cause.",
+          "Rather than reacting to a single tough night, it is often more useful to notice patterns over a couple of weeks. That view usually shows where a small adjustment might help.",
+        ],
+      },
+      {
+        heading: "Keeping routines gentle and realistic",
+        body: [
+          "Toddler sleep does not need to be perfect to be healthy. Most toddlers will have unsettled patches, especially around big changes, illness or new developmental steps.",
+          "A gentle routine, calm responses and realistic expectations often carry more weight than a specific method. What steadies your toddler over time is usually consistency, not intensity.",
+        ],
+      },
+      {
+        heading: "When to ask for support",
+        body: [
+          "If your toddler's sleep changes suddenly, they seem unwell, breathing worries you, or lack of sleep is making daily life hard to manage, ask your health visitor, GP or appropriate local service for advice.",
+          "You do not have to wait until things feel serious. It is fine to talk sleep through with someone who can help, especially if it is affecting how you feel or cope in the day.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Toddler sleep is often uneven and shaped by lots of things at once.",
+      "Naps shift across the toddler years and rarely change on a neat timeline.",
+      "A short, predictable wind down usually helps more than a long routine.",
+      "Reassurance at night does not undo good sleep.",
+      "Patterns over a couple of weeks are more useful than any single night.",
+      "Ask your health visitor or GP if sleep is worrying you or affecting daily life.",
+    ],
+    relatedSlugs: [
+      "bedtime-battles-and-night-waking",
+      "building-connection-through-everyday-play",
+      "what-toddler-development-can-look-like",
+    ],
+    sources: [
+      {
+        label: "Sleep and tiredness",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/sleep/",
+      },
+      {
+        label: "Toddler sleep",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Children's sleep hub",
+        publisher: "The Sleep Charity",
+        url: "https://thesleepcharity.org.uk/information-support/children/",
+      },
+    ],
   },
   {
     slug: "bedtime-battles-and-night-waking",
@@ -111,7 +368,91 @@ const rawToddlerArticles: ToddlerArticle[] = [
     description:
       "Calm approaches to bedtime resistance and night waking, without harsh sleep training.",
     readTime: "6 min read",
-    status: "draft",
+    status: "ready",
+    lastUpdated: "2026-07",
+    intro:
+      "Bedtime battles and night waking can quietly wear a family down. This piece is written for the exhausted end of the day, when bedtime feels like a fight and the nights feel long. It does not promise a fix, and it does not lean on harsh sleep training. It is a calm look at what tends to sit behind these moments and the small, gentle things that can help.",
+    sections: [
+      {
+        heading: "Why bedtime can become difficult",
+        body: [
+          "Bedtime is often when the day catches up with a toddler. Tiredness, overstimulation, unfinished feelings and separation can all come out in resistance, silliness or tears at the end of the day.",
+          "It rarely helps to see this as bad behaviour. Bedtime pushback is usually less about defiance and more about a small person struggling to switch gears when their body is already tired.",
+        ],
+      },
+      {
+        heading: "Toddlers and separation at night",
+        body: [
+          "Many toddlers go through waves of feeling unsure about being apart at bedtime. Wanting you to stay, asking for one more cuddle or needing you nearby to settle is a normal part of this age.",
+          "Meeting separation with calm and warmth does not create a habit that ruins sleep. Steady reassurance tends to help toddlers feel secure enough to settle over time, rather than making things harder.",
+        ],
+      },
+      {
+        heading: "Boundaries without harshness",
+        body: [
+          "Keeping bedtime steady does not mean being strict. You can hold a simple boundary, such as staying in the bedroom or lights being off, while still being warm and patient about it.",
+          "Repeating the same short, calm phrase each time you gently reset the boundary can be more useful than long explanations. Toddlers usually respond better to a steady tone than to long words.",
+        ],
+      },
+      {
+        heading: "Night waking and reassurance",
+        body: [
+          "Night waking is very common in the toddler years. It is often linked to development, dreams, small illnesses, thirst, feeling too warm or cold, or simply needing to know you are close.",
+          "Going in briefly, staying calm, keeping the light low and using few words often helps more than a big response. Reassurance in the night does not spoil sleep on its own.",
+        ],
+      },
+      {
+        heading: "Overtiredness and undertiredness",
+        body: [
+          "A toddler who is very overtired can find it harder, not easier, to fall asleep. Signs can include being wired, silly, teary or unable to settle even when clearly exhausted.",
+          "The opposite can also be true. If nap timing has drifted or the day has been very quiet, some toddlers arrive at bedtime not quite ready for sleep, which can look like resistance too.",
+        ],
+      },
+      {
+        heading: "Keeping bedtime realistic",
+        body: [
+          "There is no single perfect way to do bedtime and no method that works for every family. What tends to help is a simple, familiar routine and calm expectations, night after night.",
+          "It also helps to hold expectations lightly. A rough night, a bumpy week or a return of night waking does not undo the routine you have built.",
+        ],
+      },
+      {
+        heading: "When sleep feels unmanageable",
+        body: [
+          "If your toddler's sleep changes suddenly, they seem unwell, breathing worries you, or lack of sleep is making daily life hard to manage, ask your health visitor, GP or appropriate local service for advice.",
+          "You do not need to have tried everything before asking for help. Speaking to someone earlier rather than later can make it easier to hold the days when sleep is very hard.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Bedtime pushback is usually about tiredness and overwhelm, not defiance.",
+      "Separation wobbles at night are a normal part of toddlerhood.",
+      "You can hold a calm boundary and still be warm about it.",
+      "Reassurance in the night does not spoil sleep on its own.",
+      "Both overtiredness and undertiredness can make bedtime harder.",
+      "Ask for support if sleep is affecting your ability to cope in the day.",
+    ],
+    relatedSlugs: [
+      "toddler-sleep-rhythms",
+      "building-connection-through-everyday-play",
+      "simple-play-ideas-for-toddlers",
+    ],
+    sources: [
+      {
+        label: "Sleep and tiredness",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/sleep/",
+      },
+      {
+        label: "Toddler sleep",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Children's sleep hub",
+        publisher: "The Sleep Charity",
+        url: "https://thesleepcharity.org.uk/information-support/children/",
+      },
+    ],
   },
 
   // Food and feeding

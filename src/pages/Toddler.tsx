@@ -36,6 +36,7 @@ const Toddler = () => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 

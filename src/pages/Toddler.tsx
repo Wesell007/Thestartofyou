@@ -1,3 +1,4 @@
+import SeoHead from "@/components/seo/SeoHead";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ToddlerHero from "@/components/toddler/ToddlerHero";
@@ -13,6 +14,12 @@ import ToddlerFinalCTA from "@/components/toddler/ToddlerFinalCTA";
 
 const Toddler = () => {
   return (
+    <>
+      <SeoHead
+        title="Toddler Guide | Development, Sleep, Food, Behaviour & Safety"
+        description="Calm, practical guidance for the toddler years, from development and speech to sleep, food, behaviour, potty learning, play and safety."
+        canonical="https://thestartofyou.com/toddler"
+      />
     <div className="min-h-screen bg-parchment">
       <Navbar />
       <main>

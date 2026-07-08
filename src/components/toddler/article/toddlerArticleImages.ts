@@ -242,6 +242,70 @@ export const toddlerArticleImageMap: Record<string, ToddlerArticleImages> = {
       },
     ],
   },
+  // bespoke future: parent and toddler sharing everyday speech and play at home, warm and pressure-free
+  "supporting-toddler-speech-at-home": {
+    hero: {
+      src: heroSpeechHome,
+      alt: "A parent and toddler sharing a book and talking together at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodySpeechHome,
+        alt: "A toddler communicating through play with a parent nearby",
+        caption:
+          "Toddler speech grows through everyday connection, repetition, shared attention and time to respond.",
+      },
+    ],
+  },
+  // bespoke future: calm parent and toddler communication moment, supportive without assessment framing
+  "when-to-ask-about-speech-delay": {
+    hero: {
+      src: heroSpeechDelay,
+      alt: "A parent and toddler sharing a calm communication moment at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodySpeechDelay,
+        alt: "A toddler pointing during play while a parent listens nearby",
+        caption:
+          "If speech feels different or worrying, noticing patterns and asking early for advice can be a calm next step.",
+      },
+    ],
+  },
+  // bespoke future: calm parent making home safer for toddler, practical and non-fear-based
+  "toddler-home-safety": {
+    hero: {
+      src: heroHomeSafety,
+      alt: "A parent making a warm home space safer for a toddler",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyHomeSafety,
+        alt: "A simple toddler safety setup in a calm family home",
+        caption:
+          "Toddler safety is about reducing obvious hazards and building small habits, not creating a perfect home.",
+      },
+    ],
+  },
+  // bespoke future: calm parent checking toddler at home before asking for health advice, no emergency framing
+  "when-to-call-the-gp": {
+    hero: {
+      src: heroCallGp,
+      alt: "A parent calmly checking on their toddler at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyCallGp,
+        alt: "A parent sitting near their toddler while preparing to ask for advice",
+        caption:
+          "You do not need to know exactly what is wrong before asking for advice if something worries you.",
+      },
+    ],
+  },
 };
 
 export const getToddlerArticleImages = (

@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import PregnancyWeekSeo from "@/components/seo/PregnancyWeekSeo";
 import { getWeekData, getAdjacentWeeks, type WeekData } from "@/data/weekData";
 
 // ── Visual assets ─────────────────────────────────────────────────────
@@ -360,6 +361,7 @@ const WeekPage = () => {
 
   return (
     <div className="min-h-screen bg-parchment">
+      <PregnancyWeekSeo weekNumber={weekNum} />
       <Navbar />
 
       {/* ───────────────────────────────────────────────────────── 1. HERO */}

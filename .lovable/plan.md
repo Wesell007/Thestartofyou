@@ -1,48 +1,50 @@
-## Phase 9.1 — Pregnancy SEO Layer (Hub, Topics, Trimesters)
+## Phase 9.2 — Pregnancy Week SEO
 
-Add per-route `SeoHead` to the Pregnancy hub, 6 topic pages and 3 trimester pages. Mirror the Family / First Year / Toddler pattern. No layout, data, route or copy changes. No Article JSON-LD.
+### Routing shape (confirmed)
+- Explicit `Route path="/pregnancy/week/{1..42}"` → 42 bespoke `Week{N}Page.tsx` files under `src/pages/`.
+- Catch-all `Route path="/pregnancy/week/:week"` → shared `WeekPage.tsx`, which guards `isNaN/<1/>42` with `<Navigate to="/pregnancy" replace />` before rendering.
+- Invalid weeks (e.g. `/pregnancy/week/99`) never render a week UI — they redirect to `/pregnancy`, so no misleading SEO can leak.
 
-### Files to edit (10)
-- `src/pages/Pregnancy.tsx`
-- `src/pages/pregnancy/BabyTopic.tsx`
-- `src/pages/pregnancy/BodyTopic.tsx`
-- `src/pages/pregnancy/DietAndExerciseTopic.tsx`
-- `src/pages/pregnancy/FeelingsTopic.tsx`
-- `src/pages/pregnancy/HealthAndSafetyTopic.tsx`
-- `src/pages/pregnancy/PreparingForBabyTopic.tsx`
-- `src/pages/trimester/FirstTrimester.tsx`
-- `src/pages/trimester/SecondTrimester.tsx`
-- `src/pages/trimester/ThirdTrimester.tsx`
+There is no shared week renderer feeding the 42 explicit routes. Each Week{N}Page is bespoke content. Editing 42 files is unavoidable, but the SEO injection is mechanical and identical shape per file.
 
-### Pattern
-Each file gets `import SeoHead from "@/components/seo/SeoHead";` and wraps its return in a fragment with `<SeoHead title description canonical />` above the existing tree. `ogType` uses SeoHead's `website` default. No `jsonLd` prop, so no Article schema.
+### New helper (single source of truth)
+Create `src/components/seo/PregnancyWeekSeo.tsx`:
+- Props: `weekNumber: number`.
+- Renders `<SeoHead title description canonical />` with the templated strings (default `ogType="website"` from SeoHead).
+- No `jsonLd` prop. No dates, authors, reviewers.
+- Title: `${n} Weeks Pregnant | Symptoms, Baby Development & Support`.
+- Description: `You are ${n} weeks pregnant. Learn what may be changing with your baby, your body, symptoms, appointments and gentle support for this stage of pregnancy.` (British English, no em dashes, no keyword stuffing, calm parent-first).
+- Canonical: `https://thestartofyou.com/pregnancy/week/${n}`.
 
-### Approved SEO strings (verbatim)
+Using one helper means titles/descriptions/canonicals are generated from the week number — no hand-typed drift across 42 files.
 
-Hub `/pregnancy`:
-- `Pregnancy Guide | Weeks, Trimesters, Symptoms & Support`
-- `Calm, practical pregnancy guidance from early symptoms and week-by-week changes to trimesters, baby development, body changes and emotional support.`
+### Files to edit (43)
+- `src/pages/Week1Page.tsx` … `src/pages/Week42Page.tsx` (42 files)
+  - Add `import PregnancyWeekSeo from "@/components/seo/PregnancyWeekSeo";` after the existing Footer import.
+  - Inside the `Week{N}Page` component's returned JSX, insert `<PregnancyWeekSeo weekNumber={N} />` immediately before `<Navbar />` (still inside the outer `<div className="min-h-screen bg-parchment">` — Helmet mounts to `document.head` regardless of position).
+- `src/pages/WeekPage.tsx` (catch-all)
+  - Same import.
+  - Insert `<PregnancyWeekSeo weekNumber={weekNum} />` after the `isNaN/range` guard so it only renders for valid 1–42. Insertion goes at the top of the returned JSX, before `<Navbar />`.
 
-Topics (canonical `https://thestartofyou.com/pregnancy/<slug>`):
-- baby — `Baby Development in Pregnancy | The Start of You` / `Follow your baby's development through pregnancy with calm guidance on growth, movement, scans and what changes week by week.`
-- body — `Pregnancy Body Changes and Symptoms | The Start of You` / `Supportive guidance on pregnancy body changes, symptoms, discomforts and when to ask for advice if something worries you.`
-- diet-and-exercise — `Pregnancy Diet and Exercise | The Start of You` / `Calm, practical guidance on eating well, movement, exercise, hydration and looking after your body during pregnancy.`
-- feelings — `Pregnancy Feelings and Emotional Wellbeing | The Start of You` / `Gentle support for pregnancy emotions, anxiety, identity, relationships and the feelings that can come with becoming a parent.`
-- health-and-safety — `Pregnancy Health and Safety | The Start of You` / `Clear pregnancy guidance on health, safety, warning signs, appointments and when to ask your midwife, GP or local service for advice.`
-- preparing-for-baby — `Preparing for Baby | Birth, Home and Newborn Planning` / `Practical pregnancy guidance for preparing for birth, planning your home, packing a hospital bag and getting ready for your baby.`
+Execution will be scripted (bulk `sed`/Python) to keep changes uniform and diff-clean.
 
-Trimesters (canonical `https://thestartofyou.com/pregnancy/<slug>`):
-- first-trimester — `First Trimester Guide | Early Pregnancy Symptoms & Support` / `A calm guide to the first trimester, including early pregnancy symptoms, baby development, appointments, emotions and when to ask for advice.`
-- second-trimester — `Second Trimester Guide | Baby Growth, Movement & Body Changes` / `Supportive second trimester guidance covering baby growth, movement, scans, body changes, energy shifts and preparing for the months ahead.`
-- third-trimester — `Third Trimester Guide | Birth Preparation, Symptoms & Support` / `Calm third trimester guidance on baby movement, body changes, birth preparation, appointments and support as your due date gets closer.`
+### Files NOT edited
+Pregnancy hub, topics, trimesters, article data, `/articles/:slug`, calculators, TTC, IVF, Family, First Year, Toddler, week data, sitemap, robots, `App.tsx`, layouts.
 
-### Canonical / OG / JSON-LD
-Absolute production URLs under `https://thestartofyou.com`. `og:type` = `website` for all 10 pages. No `jsonLd` prop passed. No fabricated dates, authors, publishers or reviewers.
+### SEO strategy summary
+- Titles: consistent template per week, unique per URL.
+- Descriptions: consistent calm template per week, unique per URL via week number.
+- Canonical: self-referencing absolute `https://thestartofyou.com/pregnancy/week/{n}`.
+- OG: `og:type=website`, `og:url`/`og:title` mirror canonical/title via SeoHead defaults.
+- JSON-LD: none (week pages are not Article schema surfaces).
+- Invalid weeks: WeekPage redirects before SeoHead mounts — no misleading SEO.
+- No fabricated dates, authors, publishers, reviewers, or schema fields.
 
 ### Verification
-- `bunx tsgo --noEmit`
-- Playwright 1280×1800 + 375×812 across all 10 routes: assert 200, correct title / description / canonical / og:*, and no Article JSON-LD.
-- Regression sweep (200): `/articles/complete-guide-morning-sickness`, `/articles/anxiety-in-pregnancy`, `/first-year`, `/toddler`, `/family`, `/trying-to-conceive`, `/ivf`.
+- `bunx tsgo --noEmit`.
+- Playwright 1280×1800 + 375×812 across sample weeks: `/pregnancy/week/{4,8,12,20,28,36,40}`. Assert 200, exact title, description, canonical, og:title, og:description, og:url, og:type, no Article JSON-LD, no console errors, no horizontal overflow.
+- Invalid route: `/pregnancy/week/99` — assert final URL is `/pregnancy` (redirect).
+- Regression sweep (200 + no SEO regression): `/pregnancy`, `/pregnancy/first-trimester`, `/pregnancy/second-trimester`, `/pregnancy/third-trimester`, `/pregnancy/baby`, `/articles/complete-guide-morning-sickness`, `/first-year`, `/toddler`, `/family`, `/trying-to-conceive`, `/ivf`.
 
 ### Done criteria
-All 10 routes ship correct SEO tags, no Article JSON-LD, no visible layout change, tsgo clean, no cross-hub regressions.
+All 42 explicit week routes + the catch-all ship correct SEO tags via the shared `PregnancyWeekSeo` helper, no Article JSON-LD, no visible layout change, `tsgo` clean, invalid weeks still redirect, no cross-hub regressions.

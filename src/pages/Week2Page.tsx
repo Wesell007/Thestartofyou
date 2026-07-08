@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import PregnancyWeekSeo from "@/components/seo/PregnancyWeekSeo";
 import ovulationImg from "@/assets/week2-ovulation.jpg";
 import pearlImg from "@/assets/week2-pearl.jpg";
 import biologyImg from "@/assets/week2-biology-detail.jpg";
@@ -721,6 +722,7 @@ const Next = () => (
 
 const Week2Page = () => (
   <div className="min-h-screen bg-parchment">
+    <PregnancyWeekSeo weekNumber={2} />
     <Navbar />
     <Hero />
     <MetaBar />

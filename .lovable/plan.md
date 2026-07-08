@@ -1,54 +1,78 @@
-# Phase 8.5b — Toddler Batch 4 Image Mappings (Speech + Health and Safety)
+## Phase 8.7 — Toddler SEO Layer
 
-## Scope
-Add hero + body image mappings for the four ready Toddler Batch 4 articles. Only `src/components/toddler/article/toddlerArticleImages.ts` is edited. Eight new bespoke image assets are generated. No article data, components, routes, topic pages, cards, SEO or other stage files touched.
+Add per-route `SeoHead` to the Toddler hub, all 8 topic pages and all 16 article pages, mirroring the existing First Year / Family pattern. No content, data, image, layout, or route changes.
 
-## Files edited
-- `src/components/toddler/article/toddlerArticleImages.ts` — add 8 imports + 4 map entries.
+### Files to edit (10)
+- `src/pages/Toddler.tsx` — hub `SeoHead`
+- `src/pages/toddler/DevelopmentMilestones.tsx`
+- `src/pages/toddler/BehaviourEmotions.tsx`
+- `src/pages/toddler/SpeechLanguage.tsx`
+- `src/pages/toddler/Sleep.tsx`
+- `src/pages/toddler/FoodFeeding.tsx`
+- `src/pages/toddler/PottyLearning.tsx`
+- `src/pages/toddler/HealthSafety.tsx`
+- `src/pages/toddler/PlayConnection.tsx`
+- `src/pages/toddler/ToddlerArticle.tsx` — article `SeoHead` + Article JSON-LD
 
-## New assets (8 total, all bespoke)
-Placed under `src/assets/`, matching existing Batch 1–3 naming convention. All follow The Start of You visual style: calm, premium, warm natural light, realistic, parent/toddler-centred, emotionally grounded, no logos, no text, no clinical/emergency/fear/diagnosis framing.
+Not edited: article data, topic data, image maps, cards, layouts, routes, other hubs.
 
-1. `toddler-article-speech-home-hero.jpg` — parent and toddler sharing a book together at home, warm natural light, pressure-free.
-2. `toddler-article-speech-home-body.jpg` — toddler pointing during play while parent listens nearby, quiet shared attention.
-3. `toddler-article-speech-delay-hero.jpg` — parent and toddler in a calm shared communication moment, supportive not clinical.
-4. `toddler-article-speech-delay-body.jpg` — toddler gesturing during play with parent attentive nearby, no assessment framing.
-5. `toddler-article-home-safety-hero.jpg` — parent checking a stair gate or cupboard latch in a warm family home, calm and practical.
-6. `toddler-article-home-safety-body.jpg` — simple toddler-safe living room setup, warm and everyday, no hazards on show.
-7. `toddler-article-call-gp-hero.jpg` — parent calmly holding toddler while checking on them at home, reassuring not emergency.
-8. `toddler-article-call-gp-body.jpg` — parent sitting near resting toddler with a phone/notes nearby, quiet home care moment.
+### Hub SEO (`/toddler`)
+- Title: `Toddler Guide | Development, Sleep, Food, Behaviour & Safety`
+- Description: `Calm, practical guidance for the toddler years, from development and speech to sleep, food, behaviour, potty learning, play and safety.`
+- Canonical: `https://thestartofyou.com/toddler`
+- ogType: `website` (SeoHead default)
 
-No existing Toddler article images are reused — the Batch 1–3 pool is already tightly matched to those articles and reusing would create inappropriate duplication for Speech/Health topics.
+### Topic SEO (unique title/description/canonical per topic)
+Using titles/descriptions from the spec verbatim; canonicals are `https://thestartofyou.com/toddler/<slug>` for each of:
+`development-milestones`, `behaviour-emotions`, `speech-language`, `sleep`, `food-feeding`, `potty-learning`, `health-safety`, `play-connection`. ogType `website`. No JSON-LD on topic pages.
 
-## Map entries (all use `afterSectionIndex: 1`)
+### Article SEO (`/toddler/:topic/:slug`, all 16)
+Edit only `src/pages/toddler/ToddlerArticle.tsx`. Wrap the existing render in a fragment that adds `SeoHead` above `ToddlerArticlePage`, mirroring `FirstYearArticle.tsx`:
 
-| Slug | Hero alt | Body alt | Caption |
-|---|---|---|---|
-| `supporting-toddler-speech-at-home` | A parent and toddler sharing a book and talking together at home | A toddler communicating through play with a parent nearby | Toddler speech grows through everyday connection, repetition, shared attention and time to respond. |
-| `when-to-ask-about-speech-delay` | A parent and toddler sharing a calm communication moment at home | A toddler pointing during play while a parent listens nearby | If speech feels different or worrying, noticing patterns and asking early for advice can be a calm next step. |
-| `toddler-home-safety` | A parent making a warm home space safer for a toddler | A simple toddler safety setup in a calm family home | Toddler safety is about reducing obvious hazards and building small habits, not creating a perfect home. |
-| `when-to-call-the-gp` | A parent calmly checking on their toddler at home | A parent sitting near their toddler while preparing to ask for advice | You do not need to know exactly what is wrong before asking for advice if something worries you. |
+```tsx
+const canonical = `https://thestartofyou.com/toddler/${article.topic}/${article.slug}`;
+const title = article.seoTitle || `${article.title} | The Start of You`;
+const description = article.seoDescription || article.description;
 
-Each entry preceded by the requested `// bespoke future:` comment.
+const jsonLd: Record<string, unknown> = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: article.title,
+  description,
+  mainEntityOfPage: canonical,
+  url: canonical,
+  publisher: {
+    "@type": "Organization",
+    name: "The Start of You",
+    url: "https://thestartofyou.com",
+  },
+};
+if (article.sources && article.sources.length > 0) {
+  jsonLd.citation = article.sources.map((s) => s.url);
+}
+```
 
-## Technical details
-- Add 8 new `import` lines alongside existing hero/body imports, grouped consistently with current file structure.
-- Append 4 new keys to `toddlerArticleImageMap`, keeping Batch 1–3 entries untouched and in existing order.
-- No duplicate or unused imports. `ToddlerArticleImages` / `HubBodyImage` types unchanged.
-- Image generation via `imagegen--generate_image` (fast tier, 1024×1024, .jpg). No `lovable-assets` externalisation — matches existing Batch 3 pattern where bespoke jpgs are imported directly.
+Render: `<SeoHead title={title} description={description} canonical={canonical} ogType="article" jsonLd={jsonLd} />` then `<ToddlerArticlePage article={article} />`.
 
-## Verification
-- `bunx tsgo --noEmit` — clean.
-- Playwright desktop (1280×1800) and mobile (375×812) on all 4 new routes:
-  - `/toddler/speech-language/supporting-toddler-speech-at-home`
-  - `/toddler/speech-language/when-to-ask-about-speech-delay`
-  - `/toddler/health-safety/toddler-home-safety`
-  - `/toddler/health-safety/when-to-call-the-gp`
-- Per route: 200, exactly one hero + one body image, body placed between section 2 and 3, no mobile overflow, no broken paths.
-- Medical-review pill present on `when-to-ask-about-speech-delay`, `toddler-home-safety`, `when-to-call-the-gp`; absent on `supporting-toddler-speech-at-home`.
-- Sources render; related grids link only to ready slugs.
-- Regression sweep (200 each): `/toddler`, all 8 toddler topic pages, `/first-year`, `/articles/complete-guide-morning-sickness`, `/pregnancy`, `/trying-to-conceive`, `/ivf`. No "Coming soon" on any Toddler topic page.
-- Diff scope: only `toddlerArticleImages.ts` + 8 new asset files.
+`seoTitle` / `seoDescription` already exist as optional fields on the Toddler article type, so this needs no data changes.
 
-## Go/no-go
-On green verification: safe to proceed to Phase 8.6 Toddler final QA.
+### JSON-LD rules
+- Article schema on article pages only; none on hub or topic pages.
+- No `datePublished`, `dateModified`, `author`, or `reviewedBy` in schema (no fabrication).
+- `publisher` is the shared The Start of You Organization block.
+- `citation` populated only from `article.sources[].url`; omitted when sources are empty.
+
+### Canonical strategy
+Absolute production URLs under `https://thestartofyou.com`. `og:url` defaults to canonical via `SeoHead`. British English, no em dashes, no keyword stuffing.
+
+### Verification
+- `bunx tsgo --noEmit`
+- Playwright at 1280×1800 and 375×812 on the hub, all 8 topic routes and 6 sample article routes; assert `<title>`, `meta[name=description]`, `link[rel=canonical]`, `meta[property=og:title|og:description|og:url|og:type]`, and (on articles only) presence of a single `script[type="application/ld+json"]` whose `@type === "Article"` with correct `url`, `mainEntityOfPage`, and `citation` matching `article.sources[].url`.
+- Confirm no JSON-LD Article block on hub/topic pages.
+- Regression sweep (200 + no console errors): `/first-year`, `/first-year/emotional-wellbeing/when-parenthood-feels-heavy`, `/family`, `/articles/complete-guide-morning-sickness`, `/articles/anxiety-in-pregnancy`, `/pregnancy`, `/trying-to-conceive`, `/ivf`.
+
+### Out of scope
+No article copy, source, image, route, card, layout, or cross-hub edits. No sitemap or robots changes. No SEO scan trigger in this phase.
+
+### Done criteria
+All Toddler routes ship correct title / description / canonical / og:* tags; article routes additionally ship a clean Article JSON-LD with real citations only; tsgo clean; no regressions.

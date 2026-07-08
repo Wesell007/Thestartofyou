@@ -1,78 +1,48 @@
-## Phase 8.7 — Toddler SEO Layer
+## Phase 9.1 — Pregnancy SEO Layer (Hub, Topics, Trimesters)
 
-Add per-route `SeoHead` to the Toddler hub, all 8 topic pages and all 16 article pages, mirroring the existing First Year / Family pattern. No content, data, image, layout, or route changes.
+Add per-route `SeoHead` to the Pregnancy hub, 6 topic pages and 3 trimester pages. Mirror the Family / First Year / Toddler pattern. No layout, data, route or copy changes. No Article JSON-LD.
 
 ### Files to edit (10)
-- `src/pages/Toddler.tsx` — hub `SeoHead`
-- `src/pages/toddler/DevelopmentMilestones.tsx`
-- `src/pages/toddler/BehaviourEmotions.tsx`
-- `src/pages/toddler/SpeechLanguage.tsx`
-- `src/pages/toddler/Sleep.tsx`
-- `src/pages/toddler/FoodFeeding.tsx`
-- `src/pages/toddler/PottyLearning.tsx`
-- `src/pages/toddler/HealthSafety.tsx`
-- `src/pages/toddler/PlayConnection.tsx`
-- `src/pages/toddler/ToddlerArticle.tsx` — article `SeoHead` + Article JSON-LD
+- `src/pages/Pregnancy.tsx`
+- `src/pages/pregnancy/BabyTopic.tsx`
+- `src/pages/pregnancy/BodyTopic.tsx`
+- `src/pages/pregnancy/DietAndExerciseTopic.tsx`
+- `src/pages/pregnancy/FeelingsTopic.tsx`
+- `src/pages/pregnancy/HealthAndSafetyTopic.tsx`
+- `src/pages/pregnancy/PreparingForBabyTopic.tsx`
+- `src/pages/trimester/FirstTrimester.tsx`
+- `src/pages/trimester/SecondTrimester.tsx`
+- `src/pages/trimester/ThirdTrimester.tsx`
 
-Not edited: article data, topic data, image maps, cards, layouts, routes, other hubs.
+### Pattern
+Each file gets `import SeoHead from "@/components/seo/SeoHead";` and wraps its return in a fragment with `<SeoHead title description canonical />` above the existing tree. `ogType` uses SeoHead's `website` default. No `jsonLd` prop, so no Article schema.
 
-### Hub SEO (`/toddler`)
-- Title: `Toddler Guide | Development, Sleep, Food, Behaviour & Safety`
-- Description: `Calm, practical guidance for the toddler years, from development and speech to sleep, food, behaviour, potty learning, play and safety.`
-- Canonical: `https://thestartofyou.com/toddler`
-- ogType: `website` (SeoHead default)
+### Approved SEO strings (verbatim)
 
-### Topic SEO (unique title/description/canonical per topic)
-Using titles/descriptions from the spec verbatim; canonicals are `https://thestartofyou.com/toddler/<slug>` for each of:
-`development-milestones`, `behaviour-emotions`, `speech-language`, `sleep`, `food-feeding`, `potty-learning`, `health-safety`, `play-connection`. ogType `website`. No JSON-LD on topic pages.
+Hub `/pregnancy`:
+- `Pregnancy Guide | Weeks, Trimesters, Symptoms & Support`
+- `Calm, practical pregnancy guidance from early symptoms and week-by-week changes to trimesters, baby development, body changes and emotional support.`
 
-### Article SEO (`/toddler/:topic/:slug`, all 16)
-Edit only `src/pages/toddler/ToddlerArticle.tsx`. Wrap the existing render in a fragment that adds `SeoHead` above `ToddlerArticlePage`, mirroring `FirstYearArticle.tsx`:
+Topics (canonical `https://thestartofyou.com/pregnancy/<slug>`):
+- baby — `Baby Development in Pregnancy | The Start of You` / `Follow your baby's development through pregnancy with calm guidance on growth, movement, scans and what changes week by week.`
+- body — `Pregnancy Body Changes and Symptoms | The Start of You` / `Supportive guidance on pregnancy body changes, symptoms, discomforts and when to ask for advice if something worries you.`
+- diet-and-exercise — `Pregnancy Diet and Exercise | The Start of You` / `Calm, practical guidance on eating well, movement, exercise, hydration and looking after your body during pregnancy.`
+- feelings — `Pregnancy Feelings and Emotional Wellbeing | The Start of You` / `Gentle support for pregnancy emotions, anxiety, identity, relationships and the feelings that can come with becoming a parent.`
+- health-and-safety — `Pregnancy Health and Safety | The Start of You` / `Clear pregnancy guidance on health, safety, warning signs, appointments and when to ask your midwife, GP or local service for advice.`
+- preparing-for-baby — `Preparing for Baby | Birth, Home and Newborn Planning` / `Practical pregnancy guidance for preparing for birth, planning your home, packing a hospital bag and getting ready for your baby.`
 
-```tsx
-const canonical = `https://thestartofyou.com/toddler/${article.topic}/${article.slug}`;
-const title = article.seoTitle || `${article.title} | The Start of You`;
-const description = article.seoDescription || article.description;
+Trimesters (canonical `https://thestartofyou.com/pregnancy/<slug>`):
+- first-trimester — `First Trimester Guide | Early Pregnancy Symptoms & Support` / `A calm guide to the first trimester, including early pregnancy symptoms, baby development, appointments, emotions and when to ask for advice.`
+- second-trimester — `Second Trimester Guide | Baby Growth, Movement & Body Changes` / `Supportive second trimester guidance covering baby growth, movement, scans, body changes, energy shifts and preparing for the months ahead.`
+- third-trimester — `Third Trimester Guide | Birth Preparation, Symptoms & Support` / `Calm third trimester guidance on baby movement, body changes, birth preparation, appointments and support as your due date gets closer.`
 
-const jsonLd: Record<string, unknown> = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline: article.title,
-  description,
-  mainEntityOfPage: canonical,
-  url: canonical,
-  publisher: {
-    "@type": "Organization",
-    name: "The Start of You",
-    url: "https://thestartofyou.com",
-  },
-};
-if (article.sources && article.sources.length > 0) {
-  jsonLd.citation = article.sources.map((s) => s.url);
-}
-```
-
-Render: `<SeoHead title={title} description={description} canonical={canonical} ogType="article" jsonLd={jsonLd} />` then `<ToddlerArticlePage article={article} />`.
-
-`seoTitle` / `seoDescription` already exist as optional fields on the Toddler article type, so this needs no data changes.
-
-### JSON-LD rules
-- Article schema on article pages only; none on hub or topic pages.
-- No `datePublished`, `dateModified`, `author`, or `reviewedBy` in schema (no fabrication).
-- `publisher` is the shared The Start of You Organization block.
-- `citation` populated only from `article.sources[].url`; omitted when sources are empty.
-
-### Canonical strategy
-Absolute production URLs under `https://thestartofyou.com`. `og:url` defaults to canonical via `SeoHead`. British English, no em dashes, no keyword stuffing.
+### Canonical / OG / JSON-LD
+Absolute production URLs under `https://thestartofyou.com`. `og:type` = `website` for all 10 pages. No `jsonLd` prop passed. No fabricated dates, authors, publishers or reviewers.
 
 ### Verification
 - `bunx tsgo --noEmit`
-- Playwright at 1280×1800 and 375×812 on the hub, all 8 topic routes and 6 sample article routes; assert `<title>`, `meta[name=description]`, `link[rel=canonical]`, `meta[property=og:title|og:description|og:url|og:type]`, and (on articles only) presence of a single `script[type="application/ld+json"]` whose `@type === "Article"` with correct `url`, `mainEntityOfPage`, and `citation` matching `article.sources[].url`.
-- Confirm no JSON-LD Article block on hub/topic pages.
-- Regression sweep (200 + no console errors): `/first-year`, `/first-year/emotional-wellbeing/when-parenthood-feels-heavy`, `/family`, `/articles/complete-guide-morning-sickness`, `/articles/anxiety-in-pregnancy`, `/pregnancy`, `/trying-to-conceive`, `/ivf`.
-
-### Out of scope
-No article copy, source, image, route, card, layout, or cross-hub edits. No sitemap or robots changes. No SEO scan trigger in this phase.
+- Playwright 1280×1800 + 375×812 across all 10 routes: assert 200, correct title / description / canonical / og:*, and no Article JSON-LD.
+- Regression sweep (200): `/articles/complete-guide-morning-sickness`, `/articles/anxiety-in-pregnancy`, `/first-year`, `/toddler`, `/family`, `/trying-to-conceive`, `/ivf`.
 
 ### Done criteria
-All Toddler routes ship correct title / description / canonical / og:* tags; article routes additionally ship a clean Article JSON-LD with real citations only; tsgo clean; no regressions.
+All 10 routes ship correct SEO tags, no Article JSON-LD, no visible layout change, tsgo clean, no cross-hub regressions.

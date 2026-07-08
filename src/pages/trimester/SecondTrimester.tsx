@@ -1,3 +1,4 @@
+import SeoHead from "@/components/seo/SeoHead";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import JournalPromotion from "@/components/shared/JournalPromotion";
@@ -26,8 +27,14 @@ const SecondTrimester = () => {
   const data = secondTrimester;
 
   return (
-    <div className="min-h-screen font-sans bg-parchment">
-      <Navbar />
+    <>
+      <SeoHead
+        title="Second Trimester Guide | Baby Growth, Movement & Body Changes"
+        description="Supportive second trimester guidance covering baby growth, movement, scans, body changes, energy shifts and preparing for the months ahead."
+        canonical="https://thestartofyou.com/pregnancy/second-trimester"
+      />
+      <div className="min-h-screen font-sans bg-parchment">
+        <Navbar />
       <main>
         {/* 1. Hero */}
         <SecondTriHero
@@ -106,6 +113,7 @@ const SecondTrimester = () => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 

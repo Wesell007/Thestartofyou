@@ -1,3 +1,4 @@
+import SeoHead from "@/components/seo/SeoHead";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PregnancyHero from "@/components/pregnancy/PregnancyHero";
@@ -22,8 +23,14 @@ const SoftDivider = () => (
 
 const Pregnancy = () => {
   return (
-    <div className="min-h-screen font-sans bg-parchment">
-      <Navbar />
+    <>
+      <SeoHead
+        title="Pregnancy Guide | Weeks, Trimesters, Symptoms & Support"
+        description="Calm, practical pregnancy guidance from early symptoms and week-by-week changes to trimesters, baby development, body changes and emotional support."
+        canonical="https://thestartofyou.com/pregnancy"
+      />
+      <div className="min-h-screen font-sans bg-parchment">
+        <Navbar />
       <main>
         {/* 1. Hero */}
         <PregnancyHero />
@@ -49,9 +56,10 @@ const Pregnancy = () => {
 
         {/* 7. Journal CTA */}
         <KeepYourJourney />
-      </main>
-      <Footer />
-    </div>
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 };
 

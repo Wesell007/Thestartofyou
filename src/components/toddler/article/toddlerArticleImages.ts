@@ -14,6 +14,10 @@ import heroTantrums from "@/assets/toddler-article-tantrums-hero.jpg";
 import heroBigFeelings from "@/assets/toddler-article-big-feelings-hero.jpg";
 import heroPottyReadiness from "@/assets/toddler-article-potty-readiness-hero.jpg";
 import heroPottyPressureFree from "@/assets/toddler-article-potty-pressure-free-hero.jpg";
+import heroSpeechHome from "@/assets/toddler-article-speech-home-hero.jpg";
+import heroSpeechDelay from "@/assets/toddler-article-speech-delay-hero.jpg";
+import heroHomeSafety from "@/assets/toddler-article-home-safety-hero.jpg";
+import heroCallGp from "@/assets/toddler-article-call-gp-hero.jpg";
 
 import bodySimplePlay from "@/assets/toddler-article-simple-play-body.jpg";
 import bodyConnection from "@/assets/toddler-article-connection-body.jpg";
@@ -27,6 +31,10 @@ import bodyTantrums from "@/assets/toddler-article-tantrums-body.jpg";
 import bodyBigFeelings from "@/assets/toddler-article-big-feelings-body.jpg";
 import bodyPottyReadiness from "@/assets/toddler-article-potty-readiness-body.jpg";
 import bodyPottyPressureFree from "@/assets/toddler-article-potty-pressure-free-body.jpg";
+import bodySpeechHome from "@/assets/toddler-article-speech-home-body.jpg";
+import bodySpeechDelay from "@/assets/toddler-article-speech-delay-body.jpg";
+import bodyHomeSafety from "@/assets/toddler-article-home-safety-body.jpg";
+import bodyCallGp from "@/assets/toddler-article-call-gp-body.jpg";
 
 
 export interface HubBodyImage {
@@ -231,6 +239,70 @@ export const toddlerArticleImageMap: Record<string, ToddlerArticleImages> = {
         alt: "A relaxed potty learning moment in a warm home bathroom",
         caption:
           "Potty training does not need to become a battle. Accidents and pauses can be part of learning.",
+      },
+    ],
+  },
+  // bespoke future: parent and toddler sharing everyday speech and play at home, warm and pressure-free
+  "supporting-toddler-speech-at-home": {
+    hero: {
+      src: heroSpeechHome,
+      alt: "A parent and toddler sharing a book and talking together at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodySpeechHome,
+        alt: "A toddler communicating through play with a parent nearby",
+        caption:
+          "Toddler speech grows through everyday connection, repetition, shared attention and time to respond.",
+      },
+    ],
+  },
+  // bespoke future: calm parent and toddler communication moment, supportive without assessment framing
+  "when-to-ask-about-speech-delay": {
+    hero: {
+      src: heroSpeechDelay,
+      alt: "A parent and toddler sharing a calm communication moment at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodySpeechDelay,
+        alt: "A toddler pointing during play while a parent listens nearby",
+        caption:
+          "If speech feels different or worrying, noticing patterns and asking early for advice can be a calm next step.",
+      },
+    ],
+  },
+  // bespoke future: calm parent making home safer for toddler, practical and non-fear-based
+  "toddler-home-safety": {
+    hero: {
+      src: heroHomeSafety,
+      alt: "A parent making a warm home space safer for a toddler",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyHomeSafety,
+        alt: "A simple toddler safety setup in a calm family home",
+        caption:
+          "Toddler safety is about reducing obvious hazards and building small habits, not creating a perfect home.",
+      },
+    ],
+  },
+  // bespoke future: calm parent checking toddler at home before asking for health advice, no emergency framing
+  "when-to-call-the-gp": {
+    hero: {
+      src: heroCallGp,
+      alt: "A parent calmly checking on their toddler at home",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: bodyCallGp,
+        alt: "A parent sitting near their toddler while preparing to ask for advice",
+        caption:
+          "You do not need to know exactly what is wrong before asking for advice if something worries you.",
       },
     ],
   },

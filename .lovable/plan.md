@@ -1,54 +1,54 @@
-# Phase 8.5 — Toddler Batch 4 Publishing (Speech + Health and Safety)
+# Phase 8.5b — Toddler Batch 4 Image Mappings (Speech + Health and Safety)
 
 ## Scope
-Only `src/data/toddlerArticleData.ts`. Replace the four remaining draft article objects with full ready articles. No image mappings, components, routes, topic pages, cards, SEO, or non-Toddler files touched.
+Add hero + body image mappings for the four ready Toddler Batch 4 articles. Only `src/components/toddler/article/toddlerArticleImages.ts` is edited. Eight new bespoke image assets are generated. No article data, components, routes, topic pages, cards, SEO or other stage files touched.
 
-## Articles to publish (draft → ready)
-Each keeps its existing `slug`, `topic`, `title`, `description`. `readTime` bumped only if length requires it. `lastUpdated: "2026-07"` on all four. All follow: 7 sections × 2 short paragraphs, 5–6 takeaways, 3 related slugs (ready Toddler only), 3–5 UK-first sources, British English, no em dashes, no diagnosis, no treatment/medication advice, no emergency thresholds, no invented stats/reviewers, no autism/ADHD speculation, no shame or fear wording, no "wait and see" if a parent is worried.
+## Files edited
+- `src/components/toddler/article/toddlerArticleImages.ts` — add 8 imports + 4 map entries.
 
-### 1. `supporting-toddler-speech-at-home` (speech-language)
-- `medicallyReviewed`: **not set** (existing draft has no flag; brief says false unless already true).
-- Sections: speech grows through everyday connection; talking during ordinary routines; following your toddler's interest; repeating words without pressure; songs, books and simple games; giving time to respond; when to ask for advice.
-- Final section includes the careful wording: "If you are worried about your toddler's speech, understanding, hearing, interaction or communication, ask your health visitor, GP or appropriate local service for advice."
-- Related: `when-to-ask-about-speech-delay`, `what-toddler-development-can-look-like`, `building-connection-through-everyday-play`.
-- Sources (4): NHS Start for Life (learning to talk), NHS speech and language milestones, BBC Tiny Happy People, Speech and Language UK.
+## New assets (8 total, all bespoke)
+Placed under `src/assets/`, matching existing Batch 1–3 naming convention. All follow The Start of You visual style: calm, premium, warm natural light, realistic, parent/toddler-centred, emotionally grounded, no logos, no text, no clinical/emergency/fear/diagnosis framing.
 
-### 2. `when-to-ask-about-speech-delay` (speech-language)
-- `medicallyReviewed: true`, `reviewedBy: "Jenny Joines"`.
-- Sections: why speech can worry parents; speech, understanding and communication; hearing and interaction; looking at patterns over time; what to note before asking for advice; who you can speak to; asking early is allowed.
-- Careful wording: "If you are worried about your toddler's speech, understanding, hearing, interaction, behaviour or development, ask your health visitor, GP or appropriate local service for advice."
-- Related: `supporting-toddler-speech-at-home`, `when-milestones-feel-different`, `what-toddler-development-can-look-like`.
-- Sources (5): NHS (speech and language therapy), NHS Start for Life (learning to talk), RCSLT, Speech and Language UK, BBC Tiny Happy People.
+1. `toddler-article-speech-home-hero.jpg` — parent and toddler sharing a book together at home, warm natural light, pressure-free.
+2. `toddler-article-speech-home-body.jpg` — toddler pointing during play while parent listens nearby, quiet shared attention.
+3. `toddler-article-speech-delay-hero.jpg` — parent and toddler in a calm shared communication moment, supportive not clinical.
+4. `toddler-article-speech-delay-body.jpg` — toddler gesturing during play with parent attentive nearby, no assessment framing.
+5. `toddler-article-home-safety-hero.jpg` — parent checking a stair gate or cupboard latch in a warm family home, calm and practical.
+6. `toddler-article-home-safety-body.jpg` — simple toddler-safe living room setup, warm and everyday, no hazards on show.
+7. `toddler-article-call-gp-hero.jpg` — parent calmly holding toddler while checking on them at home, reassuring not emergency.
+8. `toddler-article-call-gp-body.jpg` — parent sitting near resting toddler with a phone/notes nearby, quiet home care moment.
 
-### 3. `toddler-home-safety` (health-safety)
-- `medicallyReviewed: true`, `reviewedBy: "Jenny Joines"`.
-- Sections: why toddler safety changes quickly; falls, stairs and climbing; hot drinks, cooking and burns; small objects, choking and batteries; medicines and cleaning products; water, doors and windows; building simple safety habits.
-- No fear lists, no graphic detail, no emergency instructions.
-- Related: `when-to-call-the-gp`, `what-toddler-development-can-look-like`, `potty-training-without-pressure`.
-- Sources (4): NHS Start for Life (safety at home), Child Accident Prevention Trust (CAPT), RoSPA (home safety), NHS (baby and toddler safety).
+No existing Toddler article images are reused — the Batch 1–3 pool is already tightly matched to those articles and reusing would create inappropriate duplication for Speech/Health topics.
 
-### 4. `when-to-call-the-gp` (health-safety)
-- `medicallyReviewed: true`, `reviewedBy: "Jenny Joines"`.
-- Sections: you do not need to be sure before asking; changes in behaviour, feeding or drinking; temperature and feeling unwell; breathing, rashes and pain concerns; accidents, bumps and injuries; trusting your judgement; who to contact and what to say.
-- No hard emergency threshold list. No 999 rules. Signposts GP, health visitor, NHS 111 and appropriate local services in general terms.
-- Careful wording: "If your toddler seems very unwell, symptoms are worsening, breathing worries you, they are not drinking as usual, a rash worries you, they have had an injury, or your instinct says something is not right, ask your GP, NHS 111, health visitor or appropriate local service for advice."
-- Related: `toddler-home-safety`, `when-milestones-feel-different`, `picky-eating-in-toddlers`.
-- Sources (4): NHS (when to worry about your child), NHS 111 (online), NHS Start for Life (toddler), Healthier Together.
+## Map entries (all use `afterSectionIndex: 1`)
+
+| Slug | Hero alt | Body alt | Caption |
+|---|---|---|---|
+| `supporting-toddler-speech-at-home` | A parent and toddler sharing a book and talking together at home | A toddler communicating through play with a parent nearby | Toddler speech grows through everyday connection, repetition, shared attention and time to respond. |
+| `when-to-ask-about-speech-delay` | A parent and toddler sharing a calm communication moment at home | A toddler pointing during play while a parent listens nearby | If speech feels different or worrying, noticing patterns and asking early for advice can be a calm next step. |
+| `toddler-home-safety` | A parent making a warm home space safer for a toddler | A simple toddler safety setup in a calm family home | Toddler safety is about reducing obvious hazards and building small habits, not creating a perfect home. |
+| `when-to-call-the-gp` | A parent calmly checking on their toddler at home | A parent sitting near their toddler while preparing to ask for advice | You do not need to know exactly what is wrong before asking for advice if something worries you. |
+
+Each entry preceded by the requested `// bespoke future:` comment.
+
+## Technical details
+- Add 8 new `import` lines alongside existing hero/body imports, grouped consistently with current file structure.
+- Append 4 new keys to `toddlerArticleImageMap`, keeping Batch 1–3 entries untouched and in existing order.
+- No duplicate or unused imports. `ToddlerArticleImages` / `HubBodyImage` types unchanged.
+- Image generation via `imagegen--generate_image` (fast tier, 1024×1024, .jpg). No `lovable-assets` externalisation — matches existing Batch 3 pattern where bespoke jpgs are imported directly.
 
 ## Verification
 - `bunx tsgo --noEmit` — clean.
-- Counts: 16 total, 16 ready, 0 draft (grep-verified).
-- Playwright 200 + H1 correct on all 4 new ready routes:
+- Playwright desktop (1280×1800) and mobile (375×812) on all 4 new routes:
   - `/toddler/speech-language/supporting-toddler-speech-at-home`
   - `/toddler/speech-language/when-to-ask-about-speech-delay`
   - `/toddler/health-safety/toddler-home-safety`
   - `/toddler/health-safety/when-to-call-the-gp`
-- Topic pages `/toddler/speech-language` and `/toddler/health-safety` show 2 clickable ready cards each; no "Coming soon" anywhere across `/toddler/*` topic pages.
-- Related grids on the four new articles reference only ready slugs.
-- Medical review pill renders on the three flagged articles; does not render on `supporting-toddler-speech-at-home`.
-- Safety grep across the four new articles for forbidden phrases: "diagnose", "diagnosis", "medication", "medicine dose", "call 999", "wait and see", "autism", "ADHD", "should not worry" — must be absent (or only in the sanctioned careful-wording line).
-- Regression sweep (200 each): `/toddler`, `/toddler/speech-language`, `/toddler/health-safety`, `/first-year`, `/articles/complete-guide-morning-sickness`, `/pregnancy`, `/trying-to-conceive`, `/ivf`.
-- Diff scope: only `src/data/toddlerArticleData.ts`.
+- Per route: 200, exactly one hero + one body image, body placed between section 2 and 3, no mobile overflow, no broken paths.
+- Medical-review pill present on `when-to-ask-about-speech-delay`, `toddler-home-safety`, `when-to-call-the-gp`; absent on `supporting-toddler-speech-at-home`.
+- Sources render; related grids link only to ready slugs.
+- Regression sweep (200 each): `/toddler`, all 8 toddler topic pages, `/first-year`, `/articles/complete-guide-morning-sickness`, `/pregnancy`, `/trying-to-conceive`, `/ivf`. No "Coming soon" on any Toddler topic page.
+- Diff scope: only `toddlerArticleImages.ts` + 8 new asset files.
 
 ## Go/no-go
-On green verification: safe to proceed to Phase 8.5b Toddler Batch 4 image mappings.
+On green verification: safe to proceed to Phase 8.6 Toddler final QA.

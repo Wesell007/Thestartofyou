@@ -1,3 +1,4 @@
+import SeoHead from "@/components/seo/SeoHead";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import JournalPromotion from "@/components/shared/JournalPromotion";
@@ -26,8 +27,14 @@ const ThirdTrimester = () => {
   const data = thirdTrimester;
 
   return (
-    <div className="min-h-screen font-sans bg-parchment">
-      <Navbar />
+    <>
+      <SeoHead
+        title="Third Trimester Guide | Birth Preparation, Symptoms & Support"
+        description="Calm third trimester guidance on baby movement, body changes, birth preparation, appointments and support as your due date gets closer."
+        canonical="https://thestartofyou.com/pregnancy/third-trimester"
+      />
+      <div className="min-h-screen font-sans bg-parchment">
+        <Navbar />
       <main>
         {/* 1. Hero */}
         <ThirdTriHero
@@ -106,6 +113,7 @@ const ThirdTrimester = () => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 

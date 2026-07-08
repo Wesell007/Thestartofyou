@@ -1,3 +1,4 @@
+import SeoHead from "@/components/seo/SeoHead";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import JournalPromotion from "@/components/shared/JournalPromotion";
@@ -26,8 +27,14 @@ const FirstTrimester = () => {
   const data = firstTrimester;
 
   return (
-    <div className="min-h-screen font-sans bg-parchment">
-      <Navbar />
+    <>
+      <SeoHead
+        title="First Trimester Guide | Early Pregnancy Symptoms & Support"
+        description="A calm guide to the first trimester, including early pregnancy symptoms, baby development, appointments, emotions and when to ask for advice."
+        canonical="https://thestartofyou.com/pregnancy/first-trimester"
+      />
+      <div className="min-h-screen font-sans bg-parchment">
+        <Navbar />
       <main>
         {/* 1. Hero */}
         <FirstTriHero
@@ -110,6 +117,7 @@ const FirstTrimester = () => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 

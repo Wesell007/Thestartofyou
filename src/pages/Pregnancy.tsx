@@ -56,9 +56,10 @@ const Pregnancy = () => {
 
         {/* 7. Journal CTA */}
         <KeepYourJourney />
-      </main>
-      <Footer />
-    </div>
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 };
 

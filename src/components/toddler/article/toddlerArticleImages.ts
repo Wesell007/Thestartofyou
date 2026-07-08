@@ -14,6 +14,10 @@ import heroTantrums from "@/assets/toddler-article-tantrums-hero.jpg";
 import heroBigFeelings from "@/assets/toddler-article-big-feelings-hero.jpg";
 import heroPottyReadiness from "@/assets/toddler-article-potty-readiness-hero.jpg";
 import heroPottyPressureFree from "@/assets/toddler-article-potty-pressure-free-hero.jpg";
+import heroSpeechHome from "@/assets/toddler-article-speech-home-hero.jpg";
+import heroSpeechDelay from "@/assets/toddler-article-speech-delay-hero.jpg";
+import heroHomeSafety from "@/assets/toddler-article-home-safety-hero.jpg";
+import heroCallGp from "@/assets/toddler-article-call-gp-hero.jpg";
 
 import bodySimplePlay from "@/assets/toddler-article-simple-play-body.jpg";
 import bodyConnection from "@/assets/toddler-article-connection-body.jpg";
@@ -27,6 +31,10 @@ import bodyTantrums from "@/assets/toddler-article-tantrums-body.jpg";
 import bodyBigFeelings from "@/assets/toddler-article-big-feelings-body.jpg";
 import bodyPottyReadiness from "@/assets/toddler-article-potty-readiness-body.jpg";
 import bodyPottyPressureFree from "@/assets/toddler-article-potty-pressure-free-body.jpg";
+import bodySpeechHome from "@/assets/toddler-article-speech-home-body.jpg";
+import bodySpeechDelay from "@/assets/toddler-article-speech-delay-body.jpg";
+import bodyHomeSafety from "@/assets/toddler-article-home-safety-body.jpg";
+import bodyCallGp from "@/assets/toddler-article-call-gp-body.jpg";
 
 
 export interface HubBodyImage {

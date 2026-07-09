@@ -42,7 +42,6 @@ const FamilyTopicPage = ({ config }: Props) => {
   ).filter((a) => a.status === "ready");
   const readyBySlug = new Map(readyArticles.map((a) => [a.slug, a]));
 
-  void readyBySlug;
 
 
 

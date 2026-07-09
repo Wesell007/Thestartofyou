@@ -2,22 +2,22 @@ import { Link } from "react-router-dom";
 
 const pathways = [
   {
-    eyebrow: "Previous stage",
+    eyebrow: "Earlier stage",
     label: "Back to Toddler",
-    sub: "For guidance through the toddler years, behaviour, sleep, speech and daily rhythms.",
+    sub: "For guidance through the toddler years — behaviour, sleep, speech and daily rhythms.",
     to: "/toddler",
   },
   {
-    eyebrow: "This hub",
-    label: "Explore Family topics",
-    sub: "For support with routines, relationships, growing families and everyday life.",
-    to: "#family-topics",
+    eyebrow: "Earlier stage",
+    label: "First Year guidance",
+    sub: "For gentle support through feeding, sleep, milestones and everyday care in the first year.",
+    to: "/first-year",
   },
   {
-    eyebrow: "Journal",
-    label: "Journal",
-    sub: "Keep track of the moments, questions and memories you want to come back to.",
-    to: "/product",
+    eyebrow: "Earlier stage",
+    label: "Pregnancy guidance",
+    sub: "For week-by-week support, symptoms, appointments and preparing calmly for a baby.",
+    to: "/pregnancy",
   },
 ];
 
@@ -79,6 +79,17 @@ const FamilyPathways = () => {
               </span>
             </Link>
           ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <Link
+            to="/product"
+            className="inline-flex items-center gap-2 font-sans text-[13px] font-medium tracking-wide hover:underline underline-offset-4"
+            style={{ color: "hsl(var(--stage-family-accent))" }}
+          >
+            Or open your Journal
+            <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </div>
     </section>

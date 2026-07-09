@@ -8,7 +8,6 @@ import FamilyTopicClusters from "@/components/family/FamilyTopicClusters";
 import FamilyCommonQuestions from "@/components/family/FamilyCommonQuestions";
 import FamilySupportNote from "@/components/family/FamilySupportNote";
 import FamilyPathways from "@/components/family/FamilyPathways";
-import FamilyFinalCTA from "@/components/family/FamilyFinalCTA";
 import SeoHead from "@/components/seo/SeoHead";
 
 
@@ -30,7 +29,6 @@ const Family = () => {
         <FamilyCommonQuestions />
         <FamilySupportNote />
         <FamilyPathways />
-        <FamilyFinalCTA />
       </main>
       <Footer />
     </div>

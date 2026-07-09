@@ -4,8 +4,11 @@ import heroFour from "@/assets/family-hero-family-four.jpg.asset.json";
 import heroParents from "@/assets/family-hero-parents.jpg.asset.json";
 import topicFamilyBasics from "@/assets/family-topic-family-basics.jpg.asset.json";
 import topicGrowing from "@/assets/family-topic-growing-families.jpg.asset.json";
+import topicHealth from "@/assets/family-topic-health-safety.jpg.asset.json";
 import topicRelationships from "@/assets/family-topic-relationships.jpg.asset.json";
 import topicPlay from "@/assets/family-topic-play-connection.jpg.asset.json";
+import topicTravel from "@/assets/family-topic-travel-days-out.jpg.asset.json";
+import type { FamilyArticle, FamilyArticleTopic } from "@/data/familyArticleData";
 
 export interface HubBodyImage {
   afterSectionIndex: number;
@@ -17,6 +20,42 @@ export interface HubBodyImage {
 export interface FamilyArticleImages {
   hero: { src: string; alt: string };
   body: HubBodyImage[];
+}
+
+export const familyTopicFallbackImage: Record<
+  FamilyArticleTopic,
+  { src: string; alt: string }
+> = {
+  "growing-families": {
+    src: topicGrowing.url,
+    alt: "A calm scene from a growing family",
+  },
+  relationships: {
+    src: topicRelationships.url,
+    alt: "A quiet moment between adults in a family home",
+  },
+  "family-basics": {
+    src: topicFamilyBasics.url,
+    alt: "A warm everyday family home moment",
+  },
+  "health-safety": {
+    src: topicHealth.url,
+    alt: "A gentle, everyday family health and safety scene",
+  },
+  "travel-days-out": {
+    src: topicTravel.url,
+    alt: "A family preparing for a day out together",
+  },
+  "play-connection": {
+    src: topicPlay.url,
+    alt: "A parent and child sharing simple play at home",
+  },
+};
+
+export function getFamilyArticleCardImage(article: FamilyArticle) {
+  const mapped = familyArticleImageMap[article.slug]?.hero;
+  if (mapped) return mapped;
+  return familyTopicFallbackImage[article.topic];
 }
 
 export const familyArticleImageMap: Record<string, FamilyArticleImages> = {

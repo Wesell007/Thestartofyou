@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
+
 const links = [
-  { label: "Growing families", href: "#family-growing" },
-  { label: "Relationships", href: "#family-relationships" },
-  { label: "Family basics", href: "#family-basics" },
-  { label: "Health & safety", href: "#family-health" },
-  { label: "Travel & days out", href: "#family-travel" },
-  { label: "Play & connection", href: "#family-play" },
-  { label: "Community & support", href: "#family-community" },
+  { label: "Growing families", to: "/family/growing-families" },
+  { label: "Relationships", to: "/family/relationships" },
+  { label: "Family basics", to: "/family/family-basics" },
+  { label: "Health & safety", to: "/family/health-safety" },
+  { label: "Travel & days out", to: "/family/travel-days-out" },
+  { label: "Play & connection", to: "/family/play-connection" },
 ];
 
 const FamilyQuickNav = () => {
@@ -52,10 +53,10 @@ const FamilyQuickNav = () => {
             aria-hidden
           />
           <div className="relative flex flex-wrap justify-center gap-2.5 md:gap-3">
-            {links.map(({ label, href }) => (
-              <a
+            {links.map(({ label, to }) => (
+              <Link
                 key={label}
-                href={href}
+                to={to}
                 className="group inline-flex items-center justify-center rounded-pill px-5 md:px-6 py-3 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-h-[44px] hover:-translate-y-[1px] hover:shadow-[0_14px_30px_-14px_rgba(70,50,20,0.45)] hover:bg-[hsl(var(--stage-family-deep))] hover:text-[hsl(var(--stage-family-soft))] hover:border-[hsl(var(--stage-family-deep))]"
                 style={{
                   backgroundColor: "hsl(var(--stage-family-soft) / 0.85)",
@@ -65,7 +66,7 @@ const FamilyQuickNav = () => {
                 }}
               >
                 {label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

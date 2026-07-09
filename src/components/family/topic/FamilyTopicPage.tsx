@@ -14,7 +14,7 @@ import {
   FAMILY_TOPIC_INDEX,
 } from "@/data/familyTopicData";
 import { getFamilyArticlesByTopic, type FamilyArticleTopic } from "@/data/familyArticleData";
-import FamilyArticleCard from "@/components/family/article/FamilyArticleCard";
+import FamilyArticleImageCard from "@/components/family/article/FamilyArticleImageCard";
 
 interface Props {
   config: FamilyTopicConfig;
@@ -42,12 +42,6 @@ const FamilyTopicPage = ({ config }: Props) => {
   ).filter((a) => a.status === "ready");
   const readyBySlug = new Map(readyArticles.map((a) => [a.slug, a]));
 
-  const startHereSlugs = (config.startHere ?? [])
-    .filter((s) => readyBySlug.has(s))
-    .slice(0, 3);
-  const startHereArticles = startHereSlugs
-    .map((s) => readyBySlug.get(s)!)
-    .filter(Boolean);
 
 
 
@@ -85,59 +79,6 @@ const FamilyTopicPage = ({ config }: Props) => {
 
   const hasGuidance = articleGroups.length > 0;
 
-  const CompactArticleRow = ({
-    article,
-  }: {
-    article: (typeof readyArticles)[number];
-  }) => (
-    <Link
-      to={`/family/${article.topic}/${article.slug}`}
-      className="group/row relative flex items-start gap-4 rounded-[14px] border px-4 py-3.5 transition-all hover:-translate-y-[1px] hover:shadow-[0_16px_36px_-28px_rgba(70,50,20,0.32)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment focus-visible:ring-[hsl(var(--stage-family-accent)/0.5)]"
-      style={{
-        borderColor: accentBorder,
-        background: "hsl(var(--parchment) / 0.85)",
-      }}
-    >
-      <span
-        className="grid place-items-center h-10 w-10 shrink-0 rounded-full border"
-        style={{
-          borderColor: accentBorderStrong,
-          background:
-            "linear-gradient(155deg, hsl(var(--stage-family) / 0.9) 0%, hsl(var(--stage-family-soft) / 0.9) 100%)",
-        }}
-        aria-hidden
-      >
-        <Sparkles size={13} strokeWidth={1.8} style={{ color: accent }} />
-      </span>
-      <div className="min-w-0 flex-1">
-        <p
-          className="font-serif text-[14.5px] leading-snug"
-          style={{ color: deep }}
-        >
-          {article.title}
-        </p>
-        <p
-          className="mt-1 font-sans text-[12.5px] font-light leading-[1.55] line-clamp-1"
-          style={{ color: deepSoft }}
-        >
-          {article.description}
-        </p>
-        <p
-          className="mt-1 font-sans text-[11px] font-light tracking-wide"
-          style={{ color: deepMuted }}
-        >
-          {article.readTime}
-        </p>
-      </div>
-      <ChevronRight
-        size={15}
-        strokeWidth={1.8}
-        style={{ color: accent }}
-        className="mt-3 shrink-0 transition-transform group-hover/row:translate-x-0.5"
-        aria-hidden
-      />
-    </Link>
-  );
 
   const SectionLabel = ({ children }: { children: React.ReactNode }) => (
     <div className="flex items-center gap-3">
@@ -413,45 +354,6 @@ const FamilyTopicPage = ({ config }: Props) => {
           </div>
         </section>
 
-        {/* ─── START HERE ───────────────────────────────────────────── */}
-        {startHereArticles.length > 0 && (
-          <section
-            className="relative py-16 md:py-20"
-            style={{
-              background:
-                "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.24) 100%)",
-            }}
-          >
-            <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-              <div className="mb-8 md:mb-10 flex flex-col items-start gap-3">
-                <SectionLabel>Start here</SectionLabel>
-                <h2
-                  className="font-serif text-[1.75rem] md:text-[2rem] leading-tight"
-                  style={{ color: deep }}
-                >
-                  Begin with these
-                </h2>
-                <p
-                  className="font-sans text-[14.5px] font-light leading-relaxed max-w-2xl"
-                  style={{ color: deepSoft }}
-                >
-                  Start with the guide that matches what you need today.
-                </p>
-              </div>
-              <div
-                className={`grid grid-cols-1 gap-4 md:gap-5 ${
-                  startHereArticles.length >= 3
-                    ? "md:grid-cols-3"
-                    : "md:grid-cols-2"
-                }`}
-              >
-                {startHereArticles.map((a) => (
-                  <FamilyArticleCard key={a.slug} article={a} />
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
 
         {/* ─── GROUPED GUIDANCE ─────────────────────────────────────── */}
         {hasGuidance && (
@@ -512,13 +414,9 @@ const FamilyTopicPage = ({ config }: Props) => {
                             </p>
                           )}
                         </div>
-                        <div
-                          className={`grid grid-cols-1 gap-3 ${
-                            group.articles.length >= 2 ? "md:grid-cols-2" : ""
-                          }`}
-                        >
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
                           {group.articles.map((a) => (
-                            <CompactArticleRow key={a.slug} article={a} />
+                            <FamilyArticleImageCard key={a.slug} article={a} />
                           ))}
                         </div>
                       </div>

@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
+
 const links = [
-  { label: "Growing families", href: "#family-growing" },
-  { label: "Relationships", href: "#family-relationships" },
-  { label: "Family basics", href: "#family-basics" },
-  { label: "Health & safety", href: "#family-health" },
-  { label: "Travel & days out", href: "#family-travel" },
-  { label: "Play & connection", href: "#family-play" },
-  { label: "Community & support", href: "#family-community" },
+  { label: "Growing families", to: "/family/growing-families" },
+  { label: "Relationships", to: "/family/relationships" },
+  { label: "Family basics", to: "/family/family-basics" },
+  { label: "Health & safety", to: "/family/health-safety" },
+  { label: "Travel & days out", to: "/family/travel-days-out" },
+  { label: "Play & connection", to: "/family/play-connection" },
 ];
 
 const FamilyQuickNav = () => {

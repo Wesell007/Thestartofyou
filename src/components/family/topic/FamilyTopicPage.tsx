@@ -14,7 +14,7 @@ import {
   FAMILY_TOPIC_INDEX,
 } from "@/data/familyTopicData";
 import { getFamilyArticlesByTopic, type FamilyArticleTopic } from "@/data/familyArticleData";
-import FamilyArticleCard from "@/components/family/article/FamilyArticleCard";
+import FamilyArticleImageCard from "@/components/family/article/FamilyArticleImageCard";
 
 interface Props {
   config: FamilyTopicConfig;

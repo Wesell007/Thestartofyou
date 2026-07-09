@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronRight, Home, Check, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronRight, Home, Check } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HubAISupport from "@/components/shared/HubAISupport";

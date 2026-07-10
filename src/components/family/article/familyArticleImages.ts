@@ -1,7 +1,4 @@
-import heroDiverse from "@/assets/family-hero-diverse-family.jpg.asset.json";
-import heroEveryday from "@/assets/family-hero-everyday.jpg.asset.json";
 import heroFour from "@/assets/family-hero-family-four.jpg.asset.json";
-import heroParents from "@/assets/family-hero-parents.jpg.asset.json";
 import topicFamilyBasics from "@/assets/family-topic-family-basics.jpg.asset.json";
 import topicGrowing from "@/assets/family-topic-growing-families.jpg.asset.json";
 import topicHealth from "@/assets/family-topic-health-safety.jpg.asset.json";

@@ -350,9 +350,3 @@ export const familyArticleImageMap: Record<string, FamilyArticleImages> = {
     ],
   },
 };
-
-// Legacy exports retained for tree-shake safety; unused hero-* images
-// still surface inside article body slots above.
-void heroDiverse;
-void heroEveryday;
-void heroParents;

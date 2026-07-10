@@ -1,13 +1,31 @@
-import heroDiverse from "@/assets/family-hero-diverse-family.jpg.asset.json";
-import heroEveryday from "@/assets/family-hero-everyday.jpg.asset.json";
 import heroFour from "@/assets/family-hero-family-four.jpg.asset.json";
-import heroParents from "@/assets/family-hero-parents.jpg.asset.json";
 import topicFamilyBasics from "@/assets/family-topic-family-basics.jpg.asset.json";
 import topicGrowing from "@/assets/family-topic-growing-families.jpg.asset.json";
 import topicHealth from "@/assets/family-topic-health-safety.jpg.asset.json";
 import topicRelationships from "@/assets/family-topic-relationships.jpg.asset.json";
 import topicPlay from "@/assets/family-topic-play-connection.jpg.asset.json";
 import topicTravel from "@/assets/family-topic-travel-days-out.jpg.asset.json";
+
+// Bespoke per-article hero images (Phase 9.2b.1 — unique image per ready article)
+import artPreparing from "@/assets/family-article-preparing-for-another-baby.jpg.asset.json";
+import artAdjust from "@/assets/family-article-helping-your-child-adjust-to-a-new-sibling.jpg.asset.json";
+import artSecondTime from "@/assets/family-article-second-time-parenting.jpg.asset.json";
+import artMentalLoad from "@/assets/family-article-sharing-the-mental-load.jpg.asset.json";
+import artGrandparents from "@/assets/family-article-setting-boundaries-with-grandparents.jpg.asset.json";
+import artStayingConnected from "@/assets/family-article-staying-connected-as-parents.jpg.asset.json";
+import artRoutines from "@/assets/family-article-building-family-routines.jpg.asset.json";
+import artChildcareCosts from "@/assets/family-article-managing-childcare-costs.jpg.asset.json";
+import artCalmerEvenings from "@/assets/family-article-calmer-evenings-after-busy-days.jpg.asset.json";
+import artHomeSafer from "@/assets/family-article-making-your-home-safer.jpg.asset.json";
+import artAskForHelp from "@/assets/family-article-when-to-ask-for-help.jpg.asset.json";
+import artSickDays from "@/assets/family-article-family-sick-days-at-home.jpg.asset.json";
+import artTravelling from "@/assets/family-article-travelling-with-young-children.jpg.asset.json";
+import artCarJourneys from "@/assets/family-article-making-car-journeys-calmer.jpg.asset.json";
+import artDaysOut from "@/assets/family-article-planning-family-days-out.jpg.asset.json";
+import artTraditions from "@/assets/family-article-building-family-traditions.jpg.asset.json";
+import artScreenTime from "@/assets/family-article-screen-time-as-a-family.jpg.asset.json";
+import artSimplePlay from "@/assets/family-article-simple-family-play-ideas.jpg.asset.json";
+
 import type { FamilyArticle, FamilyArticleTopic } from "@/data/familyArticleData";
 
 export interface HubBodyImage {
@@ -22,6 +40,9 @@ export interface FamilyArticleImages {
   body: HubBodyImage[];
 }
 
+// Safety net for future draft articles that don't yet have a bespoke hero.
+// All 18 currently-ready articles resolve via familyArticleImageMap below,
+// so this fallback is not used at runtime for any live card.
 export const familyTopicFallbackImage: Record<
   FamilyArticleTopic,
   { src: string; alt: string }
@@ -59,52 +80,25 @@ export function getFamilyArticleCardImage(article: FamilyArticle) {
 }
 
 export const familyArticleImageMap: Record<string, FamilyArticleImages> = {
-  "building-family-routines": {
+  // ─── Growing families ───────────────────────────────────────────────
+  "preparing-for-another-baby": {
     hero: {
-      src: heroEveryday.url,
-      alt: "A parent and child sharing a calm everyday moment at home",
+      src: artPreparing.url,
+      alt: "Two adults preparing a softly lit nursery corner together",
     },
     body: [
       {
-        afterSectionIndex: 1,
-        src: topicFamilyBasics.url,
-        alt: "A warm family kitchen scene during a daily routine",
-        caption: "Small daily rhythms are what steady a family.",
-      },
-    ],
-  },
-  "building-family-traditions": {
-    hero: {
-      src: heroFour.url,
-      alt: "A family of four together in a soft, warmly lit home moment",
-    },
-    body: [
-      {
-        afterSectionIndex: 1,
-        src: topicPlay.url,
-        alt: "A gentle family ritual, parents and children together",
-        caption: "The smallest rituals often become the ones children remember.",
-      },
-    ],
-  },
-  "sharing-the-mental-load": {
-    hero: {
-      src: heroParents.url,
-      alt: "Two parents in a calm, shared moment of planning at home",
-    },
-    body: [
-      {
-        afterSectionIndex: 1,
-        src: topicRelationships.url,
-        alt: "A quiet, shared conversation between partners at home",
-        caption: "Making the invisible work visible is where sharing begins.",
+        afterSectionIndex: 2,
+        src: topicGrowing.url,
+        alt: "An older child near quiet baby items in a warm home",
+        caption: "Preparing gently is usually more useful than preparing perfectly.",
       },
     ],
   },
   "helping-your-child-adjust-to-a-new-sibling": {
     hero: {
-      src: heroDiverse.url,
-      alt: "A parent with an older child and a new baby in a calm home setting",
+      src: artAdjust.url,
+      alt: "A parent sitting on the floor speaking softly with an older child while cradling a newborn",
     },
     body: [
       {
@@ -121,141 +115,10 @@ export const familyArticleImageMap: Record<string, FamilyArticleImages> = {
       },
     ],
   },
-  // Bespoke future image: shared family screen moment, warm evening light,
-  // not children isolated on devices.
-  "screen-time-as-a-family": {
-    hero: {
-      src: heroFour.url,
-      alt: "A family of four sharing a calm evening together at home",
-    },
-    body: [
-      {
-        afterSectionIndex: 2,
-        src: topicPlay.url,
-        alt: "A parent and child sharing something on a screen together",
-        caption: "Shared screens can still be shared time.",
-      },
-    ],
-  },
-  // Bespoke future image: parent and small child at a train window,
-  // calm travel scene with warm natural light.
-  "travelling-with-young-children": {
-    hero: {
-      src: heroEveryday.url,
-      alt: "A parent and young child in a calm everyday travel moment",
-    },
-    body: [
-      {
-        afterSectionIndex: 2,
-        src: topicFamilyBasics.url,
-        alt: "A family bag packed and ready by the door",
-        caption: "Packing for needs, not every possible scenario.",
-      },
-    ],
-  },
-  // Bespoke future image: child in a car seat looking out of the window
-  // with warm afternoon light through glass.
-  "making-car-journeys-calmer": {
-    hero: {
-      src: heroParents.url,
-      alt: "A parent settling a young child before a car journey",
-    },
-    body: [
-      {
-        afterSectionIndex: 2,
-        src: topicFamilyBasics.url,
-        alt: "A calm car interior ready for a family journey",
-        caption: "Small preparations before a journey often carry the whole trip.",
-      },
-    ],
-  },
-  // Bespoke future image: multigenerational family scene at a kitchen table,
-  // calm and warm, grandparents and grandchildren together.
-  "setting-boundaries-with-grandparents": {
-    hero: {
-      src: heroDiverse.url,
-      alt: "A multigenerational family together in a warm home setting",
-    },
-    body: [
-      {
-        afterSectionIndex: 2,
-        src: topicRelationships.url,
-        alt: "A calm conversation between adults in a family home",
-        caption: "Clarity and kindness usually travel well together.",
-      },
-    ],
-  },
-  // Bespoke future image: parent with older child near baby items,
-
-  // calm home setting.
-  "preparing-for-another-baby": {
-    hero: {
-      src: heroDiverse.url,
-      alt: "A parent with an older child in a calm home preparing for a new baby",
-    },
-    body: [
-      {
-        afterSectionIndex: 2,
-        src: topicGrowing.url,
-        alt: "An older child near quiet baby items in a warm home",
-        caption: "Preparing gently is usually more useful than preparing perfectly.",
-      },
-    ],
-  },
-  // Bespoke future image: parent planning childcare at a kitchen table
-  // with notebook and calendar.
-  "managing-childcare-costs": {
-    hero: {
-      src: heroParents.url,
-      alt: "Two parents talking through childcare plans at home",
-    },
-    body: [
-      {
-        afterSectionIndex: 2,
-        src: topicFamilyBasics.url,
-        alt: "A calm kitchen table with a notebook and a family calendar",
-        caption: "A shared page often steadies a heavy conversation.",
-      },
-    ],
-  },
-  // Bespoke future image: calm home detail showing everyday family safety
-  // without alarm.
-  "making-your-home-safer": {
-    hero: {
-      src: heroEveryday.url,
-      alt: "A calm, everyday family home scene",
-    },
-    body: [
-      {
-        afterSectionIndex: 2,
-        src: topicFamilyBasics.url,
-        alt: "A warm home detail showing gentle everyday family safety",
-        caption: "Small everyday habits often protect a family more than any single product.",
-      },
-    ],
-  },
-  // Bespoke future image: supportive adult conversation in a warm home setting.
-  "when-to-ask-for-help": {
-    hero: {
-      src: heroFour.url,
-      alt: "A family together in a warm, supportive home moment",
-    },
-    body: [
-      {
-        afterSectionIndex: 2,
-        src: topicRelationships.url,
-        alt: "A quiet, supportive conversation between adults at home",
-        caption: "Asking early is usually gentler than waiting until things feel overwhelming.",
-      },
-    ],
-  },
-
-  // ─── Phase 5.9: Family Article Expansion Batch 4 ──────────────────────
-  // Bespoke future image: parent with baby and older child in a calm home moment.
   "second-time-parenting": {
     hero: {
-      src: heroDiverse.url,
-      alt: "A family of different generations together at home",
+      src: artSecondTime.url,
+      alt: "A reflective parent holding a baby while an older toddler plays quietly nearby",
     },
     body: [
       {
@@ -266,11 +129,40 @@ export const familyArticleImageMap: Record<string, FamilyArticleImages> = {
       },
     ],
   },
-  // Bespoke future image: two parents sharing a quiet everyday moment at home.
+
+  // ─── Relationships ──────────────────────────────────────────────────
+  "sharing-the-mental-load": {
+    hero: {
+      src: artMentalLoad.url,
+      alt: "A couple at a kitchen table with a shared paper planner and two mugs, mid-conversation",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: topicRelationships.url,
+        alt: "A quiet, shared conversation between partners at home",
+        caption: "Making the invisible work visible is where sharing begins.",
+      },
+    ],
+  },
+  "setting-boundaries-with-grandparents": {
+    hero: {
+      src: artGrandparents.url,
+      alt: "A grandparent and adult child in respectful conversation on a warm living-room sofa",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicRelationships.url,
+        alt: "A calm conversation between adults in a family home",
+        caption: "Clarity and kindness usually travel well together.",
+      },
+    ],
+  },
   "staying-connected-as-parents": {
     hero: {
-      src: heroParents.url,
-      alt: "Two parents sharing a calm moment at home",
+      src: artStayingConnected.url,
+      alt: "A couple sharing coffee on a linen sofa in warm morning light",
     },
     body: [
       {
@@ -281,11 +173,40 @@ export const familyArticleImageMap: Record<string, FamilyArticleImages> = {
       },
     ],
   },
-  // Bespoke future image: evening family routine with warm kitchen or bedtime light.
+
+  // ─── Family basics ──────────────────────────────────────────────────
+  "building-family-routines": {
+    hero: {
+      src: artRoutines.url,
+      alt: "A parent kneeling by the front door helping two young children with coats and shoes",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: topicFamilyBasics.url,
+        alt: "A warm family kitchen scene during a daily routine",
+        caption: "Small daily rhythms are what steady a family.",
+      },
+    ],
+  },
+  "managing-childcare-costs": {
+    hero: {
+      src: artChildcareCosts.url,
+      alt: "A parent at a kitchen table with a laptop, notebook and wall calendar, reviewing family admin",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicFamilyBasics.url,
+        alt: "A calm kitchen table with a notebook and a family calendar",
+        caption: "A shared page often steadies a heavy conversation.",
+      },
+    ],
+  },
   "calmer-evenings-after-busy-days": {
     hero: {
-      src: heroEveryday.url,
-      alt: "A calm family evening moment at home",
+      src: artCalmerEvenings.url,
+      alt: "A parent switching on a soft lamp as two young children settle into quiet evening play",
     },
     body: [
       {
@@ -296,11 +217,40 @@ export const familyArticleImageMap: Record<string, FamilyArticleImages> = {
       },
     ],
   },
-  // Bespoke future image: calm sofa or bedroom sick-day scene, non-clinical.
+
+  // ─── Health & safety ────────────────────────────────────────────────
+  "making-your-home-safer": {
+    hero: {
+      src: artHomeSafer.url,
+      alt: "A parent fitting a small childproof latch on a low kitchen cupboard while a toddler watches",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicFamilyBasics.url,
+        alt: "A warm home detail showing gentle everyday family safety",
+        caption: "Small everyday habits often protect a family more than any single product.",
+      },
+    ],
+  },
+  "when-to-ask-for-help": {
+    hero: {
+      src: artAskForHelp.url,
+      alt: "Two adult friends at a wooden kitchen table with mugs of tea, in supportive conversation",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicRelationships.url,
+        alt: "A quiet, supportive conversation between adults at home",
+        caption: "Asking early is usually gentler than waiting until things feel overwhelming.",
+      },
+    ],
+  },
   "family-sick-days-at-home": {
     hero: {
-      src: heroFour.url,
-      alt: "A family together in a soft, comforting home moment",
+      src: artSickDays.url,
+      alt: "A parent tucking a knitted blanket around a young child resting on a linen sofa",
     },
     body: [
       {
@@ -311,11 +261,40 @@ export const familyArticleImageMap: Record<string, FamilyArticleImages> = {
       },
     ],
   },
-  // Bespoke future image: family packing for a day out or walking together outdoors.
+
+  // ─── Travel & days out ──────────────────────────────────────────────
+  "travelling-with-young-children": {
+    hero: {
+      src: artTravelling.url,
+      alt: "A parent and young toddler looking out of a train window in warm daylight",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicFamilyBasics.url,
+        alt: "A family bag packed and ready by the door",
+        caption: "Packing for needs, not every possible scenario.",
+      },
+    ],
+  },
+  "making-car-journeys-calmer": {
+    hero: {
+      src: artCarJourneys.url,
+      alt: "A young child in a car seat looking out of a window in warm late-afternoon light",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicFamilyBasics.url,
+        alt: "A calm car interior ready for a family journey",
+        caption: "Small preparations before a journey often carry the whole trip.",
+      },
+    ],
+  },
   "planning-family-days-out": {
     hero: {
-      src: heroEveryday.url,
-      alt: "A family getting ready together at home for a day out",
+      src: artDaysOut.url,
+      alt: "A family lacing up shoes and putting on jackets by an open front door with a small daypack ready",
     },
     body: [
       {
@@ -326,11 +305,40 @@ export const familyArticleImageMap: Record<string, FamilyArticleImages> = {
       },
     ],
   },
-  // Bespoke future image: parent and child playing simply on the floor in warm natural light.
+
+  // ─── Play & connection ──────────────────────────────────────────────
+  "building-family-traditions": {
+    hero: {
+      src: artTraditions.url,
+      alt: "A family rolling out dough together at a wooden kitchen counter in warm light",
+    },
+    body: [
+      {
+        afterSectionIndex: 1,
+        src: topicPlay.url,
+        alt: "A gentle family ritual, parents and children together",
+        caption: "The smallest rituals often become the ones children remember.",
+      },
+    ],
+  },
+  "screen-time-as-a-family": {
+    hero: {
+      src: artScreenTime.url,
+      alt: "A parent and two children on a linen sofa watching a tablet together in warm evening light",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: topicPlay.url,
+        alt: "A parent and child sharing something on a screen together",
+        caption: "Shared screens can still be shared time.",
+      },
+    ],
+  },
   "simple-family-play-ideas": {
     hero: {
-      src: heroFour.url,
-      alt: "A parent and child playing together at home",
+      src: artSimplePlay.url,
+      alt: "A parent and child on a soft rug arranging simple wooden blocks together",
     },
     body: [
       {

@@ -1,72 +1,91 @@
-## Phase 9.2b — Family Hub & Topic UX Polish
+## Phase 9.2b.1 — Family Imagery & Layout Polish
 
-Scope: Family only. No SEO, route, article-copy, or non-Family edits.
+Family-only visual cleanup. No SEO, routes, article copy, or non-Family files touched.
 
-### 1. `FamilyQuickNav.tsx` — fix "Where would you like to start?" buttons
-- Replace all hash anchors with real `<Link to="/family/{slug}">` routes.
-- Final six links: Growing families, Relationships, Family basics, Health & safety, Travel & days out, Play & connection.
-- Remove "Community & support" entirely.
-- Swap `<a href>` for `react-router-dom` `Link` while keeping current pill styling.
+### Problem
+1. `familyArticleImageMap` reuses the same 4 hero photos (`heroDiverse`, `heroFour`, `heroEveryday`, `heroParents`) across all 18 ready articles, so hub + topic cards show repeated imagery.
+2. Relationships topic page renders 3 grouped rows with 1 card each, producing thin isolated columns and empty space, unlike other topic pages which have full 3-column rows.
 
-### 2. Replace `FamilyToolsResources.tsx` — "A few useful places to start"
-- Rename section to **"Helpful places to begin"** with subheading **"Start with the family guidance parents often need first."**
-- Render **4 real ready Family article cards** (2×2 grid) via `FamilyArticleCard` (already premium and image-agnostic) OR a new small card variant with image. Chosen slugs (all confirmed `status: "ready"`):
-  - `preparing-for-another-baby` (growing-families)
-  - `helping-your-child-adjust-to-a-new-sibling` (growing-families)
-  - `staying-connected-as-parents` (relationships)
-  - `building-family-routines` (family-basics)
-- Cards link to `/family/{topic}/{slug}` using real `title`, `description`, `readTime` from `familyArticleData`.
-- Use `familyArticleImageMap[slug].hero` when present; else fall back to per-topic image (`family-topic-{topic}.jpg`). New card uses image at top, title, short description, read time, chevron; full card clickable; premium warm styling matching existing FamilyArticleCard tokens.
-- Reuse styling tokens (`--stage-family-*`); no hard-coded colours.
+### 1. Generate 18 unique Family article hero images
+Use `imagegen--generate_image` (fast tier, 1600×1000 landscape, `.jpg`) into `src/assets/`, then wrap each with `lovable-assets create` to produce `.asset.json` pointers.
 
-### 3. `FamilyPathways.tsx` — improve "Where to next"
-- Drop "Explore Family topics" (redundant on the hub itself).
-- Replace 3 cards with logical onward journeys:
-  - Back to Toddler → `/toddler`
-  - First Year guidance → `/first-year`
-  - Pregnancy guidance → `/pregnancy`
-- Keep Journal link inline in copy or as 4th card only if grid still balances; final decision: 3-card grid for cleaner layout, plus a small text link "Or open your Journal →" under the grid pointing to `/product` (existing journal entry).
-- Preserve existing card visual (eyebrow / label / sub / Continue →).
+Global style: premium editorial lifestyle, warm natural light, beige/cream/soft-brown palette, emotionally grounded, realistic, family-first, no text, no logos, no clinical or stock-posed feel. Vary composition, room, angle, family makeup across every image — no two scenes may repeat.
 
-### 4. `Family.tsx` — remove `FamilyFinalCTA`
-- Section "When family life feels full, you can ask" contains two hash-anchor buttons (`#family-ai`, `#family-topics`) that don't reliably resolve and duplicate the AI panel already at top. Remove `<FamilyFinalCTA />` import + render from `Family.tsx`. Leave the component file in place (unused) to avoid touching unrelated exports.
+Per-slug scenes (18 total, keyed by actual data slugs):
 
-### 5. `FamilyTopicPage.tsx` — remove "Begin with these" + upgrade cards
-- Delete the whole `START HERE` section block (~lines 416–454) and the `startHereSlugs` / `startHereArticles` computations.
-- Upgrade the grouped guidance rows: replace the text-only `CompactArticleRow` with an image-forward card matching the new `FamilyArticleCard` visual (image top, title, description, read time, full-card link, warm premium styling, rounded corners, mobile responsive). Image resolution order:
-  1. `familyArticleImageMap[slug].hero.src` if present
-  2. Topic image for `article.topic` (`family-topic-{topic}.jpg` via new small lookup helper in `familyArticleImages.ts`)
-- Grid becomes `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3` per group.
+Growing families
+- `preparing-for-another-baby` — parents + older child gently arranging a nursery corner
+- `helping-your-child-adjust-to-a-new-sibling` — parent softly speaking with older child, newborn in arms
+- `second-time-parenting` — reflective parent holding second baby while first child plays nearby
 
-### 6. Shared helper
-- Add `familyTopicFallbackImage: Record<FamilyArticleTopic, {src; alt}>` to `familyArticleImages.ts` mapping each topic to its existing `family-topic-*.jpg` asset (already imported). Export a `getFamilyArticleCardImage(article)` helper used by the new card component.
+Relationships
+- `sharing-the-mental-load` — couple at kitchen table with a shared planner, calm discussion
+- `setting-boundaries-with-grandparents` — multigenerational adults in warm living-room conversation
+- `staying-connected-as-parents` — couple sharing coffee on a sofa in an unhurried morning moment
 
-### 7. New component
-- `src/components/family/article/FamilyArticleImageCard.tsx` — image-forward premium card used by (2) and (5). Same token palette as existing `FamilyArticleCard`.
+Family basics
+- `building-family-routines` — parent guiding two children through a morning routine in a hallway
+- `managing-childcare-costs` — parent with laptop, notebook and calendar on kitchen table
+- `calmer-evenings-after-busy-days` — parent lighting a lamp as children settle into evening play
 
-### Files to edit
-- `src/pages/Family.tsx` (remove FinalCTA)
-- `src/components/family/FamilyQuickNav.tsx`
-- `src/components/family/FamilyToolsResources.tsx` (replace body)
-- `src/components/family/FamilyPathways.tsx`
+Health & safety
+- `making-your-home-safer` — parent installing a soft childproof latch on a low cupboard
+- `when-to-ask-for-help` — supportive friend-to-friend conversation over tea in home kitchen
+- `family-sick-days-at-home` — parent tucking blanket around a resting child on sofa
+
+Travel & days out
+- `travelling-with-young-children` — parent and toddler at a train window, small suitcase beside
+- `making-car-journeys-calmer` — child in car seat by window, warm afternoon light through glass
+- `planning-family-days-out` — family lacing shoes at front door, small daypack ready
+
+Play & connection
+- `building-family-traditions` — family baking together at kitchen counter, seasonal feel
+- `screen-time-as-a-family` — family watching a tablet together on sofa, warm evening light
+- `simple-family-play-ideas` — parent and child on rug with simple wooden toys
+
+Naming: `src/assets/family-article-{slug}.jpg` + `.jpg.asset.json`.
+
+### 2. Rewire `familyArticleImages.ts`
+- Import all 18 new `.asset.json` files.
+- Replace every entry in `familyArticleImageMap` so each of the 18 ready slugs points to its own bespoke hero (`src`, article-specific `alt`).
+- Preserve `body` image arrays (used inside article bodies) — no article-copy change.
+- Leave `familyTopicFallbackImage` map and `getFamilyArticleCardImage` helper in place as a safety net for future drafts only; every ready article now resolves via `familyArticleImageMap`, so no ready card falls back.
+
+### 3. Normalise Relationships topic layout (`FamilyTopicPage.tsx`)
+Add a collapse rule in the grouped-guidance block:
+- Compute `allSingle = articleGroups.every(g => g.articles.length === 1)`.
+- When `allSingle && articleGroups.length > 1`, render one unified `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3` of all articles (in their original group order) with no subgroup label headers.
+- Otherwise render the existing grouped layout unchanged.
+- Keeps the section shell ("Guidance" eyebrow + "Helpful reads for this part of family life" + standfirst).
+- Fixes Relationships (3 groups × 1) into a clean 3-up row while preserving the richer layouts on the other topic pages.
+
+### 4. `FamilyArticleImageCard.tsx`
+No structural rewrite — already image-forward, warm, mobile-safe. Confirm:
+- image `aspect-[16/10]` retained for consistent card heights
+- title clamp not needed given short titles
+No changes required unless verification surfaces an issue.
+
+### 5. `FamilyToolsResources.tsx`
+No component-code change — it already renders 4 real article cards. Once step 2 lands, the 4 hub cards (`preparing-for-another-baby`, `helping-your-child-adjust-to-a-new-sibling`, `staying-connected-as-parents`, `building-family-routines`) each resolve to their own bespoke image automatically.
+
+### Files
+Edit:
+- `src/components/family/article/familyArticleImages.ts`
 - `src/components/family/topic/FamilyTopicPage.tsx`
-- `src/components/family/article/familyArticleImages.ts` (add fallback map + helper)
-- `src/components/family/article/FamilyArticleImageCard.tsx` (new)
 
-### Files NOT touched
-- Any Pregnancy / TTC / IVF / First Year / Toddler file
-- `familyArticleData.ts`, article routes, SEO files, `FamilyArticlePage.tsx`, `FamilyArticleCard.tsx` (legacy, still used internally by article related-slot)
-- `FamilyFinalCTA.tsx` (kept on disk, just unimported)
+Create:
+- 18 × `src/assets/family-article-{slug}.jpg` + matching `.asset.json`
 
-### No new images
-All required imagery already exists in `src/assets/family-*.jpg` (6 topic images + 4 hero images). No image generation.
+Not touched: Pregnancy / TTC / IVF / First Year / Toddler, `familyArticleData.ts`, article routes, SEO files, `FamilyArticleImageCard.tsx` (unless verification requires it), `FamilyToolsResources.tsx`, `FamilyQuickNav.tsx`, `FamilyPathways.tsx`, `Family.tsx`.
 
 ### Verification
-1. `bunx tsgo --noEmit`
+1. `bunx tsgo --noEmit`.
 2. Playwright at 1280×1800 and 375×812:
-   - `/family` — 6 QuickNav buttons route to `/family/{slug}`, no Community & support, 4 article cards route to real article URLs, Pathways has no "Explore Family topics", FinalCTA absent, no dead hash buttons, no overflow, images load.
-   - Each of the 6 topic pages — 200, no "Begin with these", guidance cards render with images, all card links resolve.
-   - Regression: `/family/growing-families/preparing-for-another-baby`, `/family/relationships/staying-connected-as-parents`, `/family/family-basics/building-family-routines`, `/pregnancy`, `/first-year`, `/toddler`, `/trying-to-conceive`, `/ivf`, `/articles/complete-guide-morning-sickness`.
-3. Confirm `SeoHead` still mounted on Family hub + all topic pages (no SEO regressions).
+   - `/family` — 4 "Helpful places to begin" cards each show a distinct image, no overflow.
+   - All 6 topic pages — no duplicate images within page, Relationships renders as a single clean 3-up grid without one-card subgroup rows, cards clickable, images load.
+3. Slug-to-image audit script: iterate `familyArticleImageMap`, assert 18 unique `hero.src` values and zero overlap with each other or with `familyTopicFallbackImage`.
+4. Regression: `/family/growing-families/preparing-for-another-baby`, `/family/relationships/staying-connected-as-parents`, `/family/family-basics/building-family-routines`, `/pregnancy`, `/first-year`, `/toddler`, `/trying-to-conceive`, `/ivf`, `/articles/complete-guide-morning-sickness`.
+5. Confirm `SeoHead` unchanged on Family hub + topic pages.
 
-Deliverables: summary matching the requested report shape, ending with a safe-to-resume-9.3 statement.
+### Deliverable
+Summary with: files inspected, files edited, 18 new hero assets added, slug→image map (all unique), fallback-usage = zero for ready articles, hub duplicate check pass, per-topic duplicate check pass, Relationships layout normalised, desktop + mobile + image-load pass, `tsgo` clean, regression pass, SEO preserved, safe-to-proceed-to-Phase-9.3.

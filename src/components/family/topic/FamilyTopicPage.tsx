@@ -395,33 +395,51 @@ const FamilyTopicPage = ({ config }: Props) => {
                     Choose the guide that best matches what you need today.
                   </p>
 
-                  <div className="mt-10 space-y-10">
-                    {articleGroups.map((group) => (
-                      <div key={group.label}>
-                        <div className="mb-4 flex flex-col gap-1.5">
-                          <p
-                            className="font-sans text-[11px] font-light tracking-[0.28em] uppercase"
-                            style={{ color: accent }}
-                          >
-                            {group.label}
-                          </p>
-                          {group.description && (
-                            <p
-                              className="font-sans text-[13.5px] font-light leading-[1.65] max-w-2xl"
-                              style={{ color: deepSoft }}
-                            >
-                              {group.description}
-                            </p>
-                          )}
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-                          {group.articles.map((a) => (
+                  {(() => {
+                    const allSingle =
+                      articleGroups.length > 1 &&
+                      articleGroups.every((g) => g.articles.length === 1);
+                    if (allSingle) {
+                      const flat = articleGroups.flatMap((g) => g.articles);
+                      return (
+                        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                          {flat.map((a) => (
                             <FamilyArticleImageCard key={a.slug} article={a} />
                           ))}
                         </div>
+                      );
+                    }
+                    return (
+                      <div className="mt-10 space-y-10">
+                        {articleGroups.map((group) => (
+                          <div key={group.label}>
+                            <div className="mb-4 flex flex-col gap-1.5">
+                              <p
+                                className="font-sans text-[11px] font-light tracking-[0.28em] uppercase"
+                                style={{ color: accent }}
+                              >
+                                {group.label}
+                              </p>
+                              {group.description && (
+                                <p
+                                  className="font-sans text-[13.5px] font-light leading-[1.65] max-w-2xl"
+                                  style={{ color: deepSoft }}
+                                >
+                                  {group.description}
+                                </p>
+                              )}
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                              {group.articles.map((a) => (
+                                <FamilyArticleImageCard key={a.slug} article={a} />
+                              ))}
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
+                    );
+                  })()}
+
                 </div>
               </div>
             </div>

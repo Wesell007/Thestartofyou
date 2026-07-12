@@ -29,7 +29,7 @@ const questions: QItem[] = [
       "Bleeding after birth can vary from person to person. If it becomes heavy, changes suddenly or worries you, it is always okay to ask your midwife, GP or local service.",
     readMoreHref: "/first-year/postpartum-recovery/healing-after-birth",
     readMoreLabel: "Read: healing after birth",
-    askHref: "/ask?stage=first-year&topic=recovery-bleeding",
+    askHref: "/ask?stage=recovery&topic=recovery-bleeding",
     track: "recovery",
   },
   {
@@ -47,7 +47,7 @@ const questions: QItem[] = [
       "Emotions can feel very intense after birth. If your mood, anxiety or ability to cope worries you, asking for support early is a good step, not a sign that anything is wrong with you.",
     readMoreHref: "/first-year/emotional-wellbeing/when-parenthood-feels-heavy",
     readMoreLabel: "Read: when parenthood feels heavy",
-    askHref: "/ask?stage=first-year&topic=emotional-wellbeing",
+    askHref: "/ask?stage=recovery&topic=emotional-wellbeing",
     track: "recovery",
   },
   {
@@ -65,7 +65,7 @@ const questions: QItem[] = [
       "There is no fixed timeline. Recovery, sleep, hormones, identity and the support around you all shape how you feel in the months after birth.",
     readMoreHref: "/first-year/emotional-wellbeing/feeling-like-yourself-again",
     readMoreLabel: "Read: feeling like yourself again",
-    askHref: "/ask?stage=first-year&topic=identity-recovery",
+    askHref: "/ask?stage=recovery&topic=identity-recovery",
     track: "recovery",
   },
 ];

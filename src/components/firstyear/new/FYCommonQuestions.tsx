@@ -20,7 +20,7 @@ const questions: QItem[] = [
       "Baby sleep changes a lot in the first year and often does not follow one perfect pattern. Naps, wakings and night sleep shift with growth, feeding and development.",
     readMoreHref: "/first-year/sleep/newborn-sleep-expectations",
     readMoreLabel: "Read: newborn sleep expectations",
-    askHref: "/ask?stage=first-year",
+    askHref: "/ask?stage=first-year&topic=sleep",
     track: "baby",
   },
   {
@@ -29,7 +29,7 @@ const questions: QItem[] = [
       "Bleeding after birth can vary from person to person. If it becomes heavy, changes suddenly or worries you, it is always okay to ask your midwife, GP or local service.",
     readMoreHref: "/first-year/postpartum-recovery/healing-after-birth",
     readMoreLabel: "Read: healing after birth",
-    askHref: "/ask?stage=recovery",
+    askHref: "/ask?stage=first-year&topic=recovery-bleeding",
     track: "recovery",
   },
   {
@@ -38,7 +38,7 @@ const questions: QItem[] = [
       "Babies develop at different speeds and rarely in a straight line. If something feels different or worrying, it is always okay to ask your health visitor or GP.",
     readMoreHref: "/first-year/development/when-milestones-feel-uneven",
     readMoreLabel: "Read: when milestones feel uneven",
-    askHref: "/ask?stage=first-year",
+    askHref: "/ask?stage=first-year&topic=milestones",
     track: "baby",
   },
   {
@@ -47,7 +47,7 @@ const questions: QItem[] = [
       "Emotions can feel very intense after birth. If your mood, anxiety or ability to cope worries you, asking for support early is a good step, not a sign that anything is wrong with you.",
     readMoreHref: "/first-year/emotional-wellbeing/when-parenthood-feels-heavy",
     readMoreLabel: "Read: when parenthood feels heavy",
-    askHref: "/ask?stage=recovery",
+    askHref: "/ask?stage=first-year&topic=emotional-wellbeing",
     track: "recovery",
   },
   {
@@ -56,7 +56,7 @@ const questions: QItem[] = [
       "Feeding can shift with growth, sleep, illness, supply, routine and development. If nappies, weight, feeding pain or your baby's wellbeing worries you, it is okay to ask for advice.",
     readMoreHref: "/first-year/feeding/newborn-feeding-rhythms",
     readMoreLabel: "Read: newborn feeding rhythms",
-    askHref: "/ask?stage=first-year",
+    askHref: "/ask?stage=first-year&topic=feeding",
     track: "baby",
   },
   {
@@ -65,7 +65,7 @@ const questions: QItem[] = [
       "There is no fixed timeline. Recovery, sleep, hormones, identity and the support around you all shape how you feel in the months after birth.",
     readMoreHref: "/first-year/emotional-wellbeing/feeling-like-yourself-again",
     readMoreLabel: "Read: feeling like yourself again",
-    askHref: "/ask?stage=recovery",
+    askHref: "/ask?stage=first-year&topic=identity-recovery",
     track: "recovery",
   },
 ];

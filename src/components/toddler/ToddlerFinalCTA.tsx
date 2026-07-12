@@ -54,7 +54,7 @@ const ToddlerFinalCTA = () => {
           </p>
           <div className="relative flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              to="/ask?q=toddler"
+              to="/ask"
               className="group inline-flex items-center justify-center gap-2 rounded-pill px-8 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] hover:-translate-y-[1px] hover:shadow-[0_22px_46px_-22px_rgba(70,40,20,0.5)]"
               style={{
                 backgroundColor: "hsl(var(--stage-toddler-deep))",
@@ -66,8 +66,15 @@ const ToddlerFinalCTA = () => {
               Ask a toddler question
               <ArrowRight size={14} strokeWidth={1.8} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
-            <Link
-              to="#toddler-age"
+            <a
+              href="#toddler-age"
+              onClick={(e) => {
+                const el = document.getElementById("toddler-age");
+                if (el) {
+                  e.preventDefault();
+                  el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              }}
               className="inline-flex items-center justify-center rounded-pill px-8 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] hover:-translate-y-[1px] hover:bg-[hsl(var(--stage-toddler)/0.5)]"
               style={{
                 backgroundColor: "transparent",
@@ -76,7 +83,7 @@ const ToddlerFinalCTA = () => {
               }}
             >
               Go to your toddler's age
-            </Link>
+            </a>
           </div>
         </div>
       </div>

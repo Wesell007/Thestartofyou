@@ -28,11 +28,51 @@ interface IVFLastStage {
   href: string;
 }
 
+const FIRST_YEAR_TOPIC_SUGGESTIONS: Record<string, string[]> = {
+  sleep: [
+    "Why is my baby waking more than usual?",
+    "How much sleep does my baby need at this age?",
+    "When should I worry about my baby's sleep?",
+    "How can I help my baby settle at night?",
+  ],
+  "recovery-bleeding": [
+    "How do I know if bleeding after birth is normal?",
+    "What changes in bleeding should I ask about?",
+    "Can bleeding increase after doing too much?",
+    "Who should I contact if bleeding worries me?",
+  ],
+  milestones: [
+    "What if my baby reaches milestones at a different pace?",
+    "When should I ask about my baby's development?",
+    "How can I support my baby's development at home?",
+    "What should I note before speaking to a health visitor?",
+  ],
+  "emotional-wellbeing": [
+    "How do I know if I need more support after birth?",
+    "Is it normal to feel overwhelmed after having a baby?",
+    "Who can I talk to if my mood worries me?",
+    "How can I explain how I feel to my GP or health visitor?",
+  ],
+  feeding: [
+    "Why is my baby feeding more often than usual?",
+    "What feeding changes should I ask about?",
+    "How do nappies help show whether feeding is going well?",
+    "When should I ask for feeding support?",
+  ],
+  "identity-recovery": [
+    "Why do I feel different after having a baby?",
+    "How long can it take to feel like myself again?",
+    "What small things can help me feel more grounded?",
+    "When should I ask for emotional support?",
+  ],
+};
+
 const AskPage = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
   const context = searchParams.get("ctx") || undefined;
   const stageKey = searchParams.get("stage");
+  const topic = searchParams.get("topic");
   const stage = getAiStageStyle(stageKey);
   const sc = stageColors(stage);
   const { answer, isLoading, error, ask, reset } = useAISearch();

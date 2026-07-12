@@ -165,12 +165,21 @@ const AskPage = () => {
       "How do I know if I'm ovulating?",
       "What should I expect after birth?",
     ];
+    const hasStageContext = Boolean(stageKey);
     return (
       <div className="min-h-screen bg-parchment">
         <Navbar />
         <main className="relative pt-24 pb-24 md:pt-32 md:pb-32 overflow-hidden">
           {/* Ambient art-direction layer */}
-          <StageGlow tone="sage" className="top-[-120px] left-1/2 -translate-x-1/2 w-[900px] h-[500px]" opacity={0.9} />
+          {sc ? (
+            <div
+              className="absolute top-[-120px] left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full blur-3xl pointer-events-none"
+              style={{ background: sc.accentSoft }}
+              aria-hidden
+            />
+          ) : (
+            <StageGlow tone="sage" className="top-[-120px] left-1/2 -translate-x-1/2 w-[900px] h-[500px]" opacity={0.9} />
+          )}
           <BotanicalAccent className="top-24 -left-20 md:top-16 md:-left-10 rotate-[-8deg]" opacity="opacity-[0.18]" size="w-[200px] md:w-[280px]" />
           <BotanicalAccent flip className="bottom-32 -right-16 md:-right-6 rotate-[12deg]" opacity="opacity-[0.16]" size="w-[200px] md:w-[260px]" />
 
@@ -182,8 +191,11 @@ const AskPage = () => {
             </nav>
 
             <div className="text-center mb-10">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sage-bg/60 mb-5 ring-4 ring-sage-bg/30">
-                <Sparkles size={18} className="text-sage" />
+              <div
+                className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sage-bg/60 mb-5 ring-4 ring-sage-bg/30"
+                style={sc ? { backgroundColor: sc.accentSoft, boxShadow: `0 0 0 4px ${sc.accentSofter}` } : undefined}
+              >
+                <Sparkles size={18} className="text-sage" style={sc ? { color: sc.accent } : undefined} />
               </div>
               <h1 className="font-serif text-[2rem] sm:text-[2.4rem] md:text-[2.75rem] text-foreground leading-[1.12] tracking-[-0.01em] mb-4">
                 What would you like to ask?
@@ -193,10 +205,13 @@ const AskPage = () => {
               </p>
             </div>
 
-            <div className={`relative bg-card border rounded-2xl px-5 py-4 md:px-6 md:py-5 flex items-center gap-4 transition-all duration-300 shadow-soft ${
-              inputFocused ? "border-sage/40 ring-1 ring-sage/10" : "border-border/40"
-            }`}>
-              <Search size={16} className="text-sage-muted/70 shrink-0" />
+            <div
+              className={`relative bg-card border rounded-2xl px-5 py-4 md:px-6 md:py-5 flex items-center gap-4 transition-all duration-300 shadow-soft ${
+                inputFocused ? (sc ? "" : "border-sage/40 ring-1 ring-sage/10") : "border-border/40"
+              }`}
+              style={sc && inputFocused ? { borderColor: sc.accentBorder, boxShadow: `0 0 0 1px ${sc.accentRing}` } : undefined}
+            >
+              <Search size={16} className="text-sage-muted/70 shrink-0" style={sc ? { color: sc.accent } : undefined} />
               <input
                 type="text"
                 value={newQuery}
@@ -217,28 +232,31 @@ const AskPage = () => {
               </button>
             </div>
 
-            <div className="mt-8">
-              <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-muted-foreground/70 mb-4 text-center">
-                Try one of these
-              </p>
-              <div className="flex flex-wrap gap-2 justify-center">
-                {welcomeSuggestions.map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => handleSuggestion(s)}
-                    className="font-sans text-[12.5px] font-light text-foreground/75 bg-card border border-border/40 rounded-full px-4 py-2 hover:border-sage/40 hover:text-foreground hover:bg-card transition-all duration-200"
-                  >
-                    {s}
-                  </button>
-                ))}
+            {!hasStageContext && (
+              <div className="mt-8">
+                <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-muted-foreground/70 mb-4 text-center">
+                  Try one of these
+                </p>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {welcomeSuggestions.map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => handleSuggestion(s)}
+                      className="font-sans text-[12.5px] font-light text-foreground/75 bg-card border border-border/40 rounded-full px-4 py-2 hover:border-sage/40 hover:text-foreground hover:bg-card transition-all duration-200"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </main>
         <Footer />
       </div>
     );
   }
+
 
   return (
     <div className="min-h-screen bg-parchment">

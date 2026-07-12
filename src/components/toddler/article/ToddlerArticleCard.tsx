@@ -29,8 +29,8 @@ interface Props {
 const ToddlerArticleCard = ({ article }: Props) => {
   const accent = "hsl(var(--stage-toddler-accent))";
   const accentSoft = "hsl(var(--stage-toddler-accent) / 0.10)";
-  const accentBorder = "hsl(var(--stage-toddler-accent) / 0.22)";
-  const accentBorderStrong = "hsl(var(--stage-toddler-accent) / 0.32)";
+  const accentBorder = "hsl(var(--stage-toddler-accent) / 0.28)";
+  const accentBorderStrong = "hsl(var(--stage-toddler-accent) / 0.36)";
   const deep = "hsl(var(--stage-toddler-deep))";
   const deepSoft = "hsl(var(--stage-toddler-deep) / 0.72)";
   const deepMuted = "hsl(var(--stage-toddler-deep) / 0.55)";
@@ -39,87 +39,72 @@ const ToddlerArticleCard = ({ article }: Props) => {
   const hero = getToddlerArticleImages(article.slug)?.hero
     ?? TOPIC_FALLBACK[article.topic as ToddlerArticleTopic];
 
-  const cardStyle: React.CSSProperties = {
-    borderColor: accentBorderStrong,
-    background:
-      "linear-gradient(160deg, hsl(var(--stage-toddler) / 0.55) 0%, hsl(var(--stage-toddler-soft) / 0.9) 100%)",
-    boxShadow:
-      "0 16px 36px -30px rgba(60,50,40,0.26), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
-  };
-
-  const baseClass =
-    "group relative flex h-full flex-col rounded-2xl border overflow-hidden transition-all duration-300";
-  const readyClass =
-    "hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(60,50,40,0.32)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment focus-visible:ring-[hsl(var(--stage-toddler-accent)/0.5)]";
-  const draftClass = "cursor-default opacity-95";
+  const cardClass =
+    "group relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-parchment transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_28px_60px_-32px_rgba(70,50,20,0.38)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment focus-visible:ring-[hsl(var(--stage-toddler-accent)/0.5)]";
 
   const inner = (
     <>
       {hero && (
-        <div
-          className="relative aspect-[16/10] overflow-hidden"
-          style={{ borderBottom: `1px solid ${accentBorder}` }}
-        >
+        <div className="relative aspect-[16/10] w-full overflow-hidden">
           <img
             src={hero.src}
             alt={hero.alt}
             loading="lazy"
-            className={`absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ${
-              isReady ? "group-hover:scale-[1.04]" : ""
+            className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ${
+              isReady ? "group-hover:scale-[1.03]" : ""
             }`}
           />
           <span
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, hsl(var(--parchment) / 0) 55%, hsl(var(--parchment) / 0.45) 100%)",
+                "linear-gradient(160deg, hsl(var(--stage-toddler) / 0.14) 0%, transparent 50%, hsl(var(--stage-toddler-deep) / 0.22) 100%)",
             }}
             aria-hidden
           />
         </div>
       )}
-      <div className="relative flex flex-1 flex-col justify-between gap-6 px-6 py-6">
-        <span
-          className="pointer-events-none absolute -top-10 -left-10 h-32 w-32 rounded-full blur-2xl opacity-60"
-          style={{ background: "hsl(var(--stage-toddler-accent) / 0.16)" }}
-          aria-hidden
-        />
-        <div className="relative flex flex-col gap-3">
-          <div className="flex items-center gap-2 flex-wrap">
-            {!isReady && (
-              <span
-                className="inline-flex items-center rounded-full px-2.5 py-0.5 font-sans text-[10px] font-medium tracking-[0.18em] uppercase"
-                style={{
-                  backgroundColor: "hsl(var(--stage-toddler-soft) / 0.9)",
-                  color: deep,
-                  border: `1px solid ${accentBorder}`,
-                }}
-              >
-                Coming soon
-              </span>
-            )}
-            {article.medicallyReviewed && (
-              <span
-                className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 font-sans text-[10.5px] font-medium"
-                style={{
-                  backgroundColor: accentSoft,
-                  color: deep,
-                  border: `1px solid ${accentBorder}`,
-                }}
-              >
-                <ShieldCheck size={11} strokeWidth={1.9} style={{ color: accent }} />
-                Medically reviewed
-              </span>
-            )}
-          </div>
-          <h3 className="font-serif text-[17px] md:text-[18px] leading-snug" style={{ color: deep }}>
-            {article.title}
-          </h3>
-          <p className="font-sans text-[13.5px] font-light leading-[1.65]" style={{ color: deepSoft }}>
-            {article.description}
-          </p>
+      <div className="flex flex-1 flex-col gap-3 p-6">
+        <div className="flex flex-wrap items-center gap-2">
+          {!isReady && (
+            <span
+              className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-sans text-[10px] font-medium tracking-[0.18em] uppercase"
+              style={{
+                backgroundColor: "hsl(var(--stage-toddler-soft) / 0.9)",
+                color: deep,
+                borderColor: accentBorder,
+              }}
+            >
+              Coming soon
+            </span>
+          )}
+          {article.medicallyReviewed && (
+            <span
+              className="inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 font-sans text-[10.5px] font-medium"
+              style={{
+                backgroundColor: accentSoft,
+                color: deep,
+                borderColor: accentBorder,
+              }}
+            >
+              <ShieldCheck size={11} strokeWidth={1.9} style={{ color: accent }} />
+              Medically reviewed
+            </span>
+          )}
         </div>
-        <div className="relative flex items-center justify-between">
+        <h3
+          className="font-serif text-[17px] md:text-[18px] leading-snug"
+          style={{ color: deep }}
+        >
+          {article.title}
+        </h3>
+        <p
+          className="font-sans text-[13.5px] font-light leading-[1.65]"
+          style={{ color: deepSoft }}
+        >
+          {article.description}
+        </p>
+        <div className="mt-auto flex items-center justify-between pt-2">
           <span
             className="inline-flex items-center gap-1.5 font-sans text-[12px] font-light"
             style={{ color: deepMuted }}
@@ -128,10 +113,13 @@ const ToddlerArticleCard = ({ article }: Props) => {
             {article.readTime}
           </span>
           <span
-            className={`inline-flex items-center justify-center h-8 w-8 rounded-full border transition-transform ${
+            className={`inline-flex h-8 w-8 items-center justify-center rounded-full border transition-transform ${
               isReady ? "group-hover:translate-x-1" : ""
             }`}
-            style={{ borderColor: accentBorderStrong, backgroundColor: accentSoft }}
+            style={{
+              borderColor: accentBorderStrong,
+              backgroundColor: accentSoft,
+            }}
             aria-hidden
           >
             <ChevronRight size={15} strokeWidth={1.8} style={{ color: accent }} />
@@ -141,22 +129,26 @@ const ToddlerArticleCard = ({ article }: Props) => {
     </>
   );
 
-  if (isReady) {
+  if (!isReady) {
     return (
-      <Link
-        to={`/toddler/${article.topic}/${article.slug}`}
-        className={`${baseClass} ${readyClass}`}
-        style={cardStyle}
+      <div
+        className={`${cardClass} cursor-default opacity-95`}
+        style={{ borderColor: accentBorder }}
+        aria-disabled="true"
       >
         {inner}
-      </Link>
+      </div>
     );
   }
 
   return (
-    <div className={`${baseClass} ${draftClass}`} style={cardStyle} aria-disabled="true">
+    <Link
+      to={`/toddler/${article.topic}/${article.slug}`}
+      className={cardClass}
+      style={{ borderColor: accentBorder }}
+    >
       {inner}
-    </div>
+    </Link>
   );
 };
 

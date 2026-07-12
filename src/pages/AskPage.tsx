@@ -294,6 +294,41 @@ const AskPage = () => {
                 </div>
               </div>
             )}
+
+            {topicSuggestions && (
+              <div className="mt-8">
+                <p
+                  className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase mb-4 text-center"
+                  style={sc ? { color: sc.accent } : undefined}
+                >
+                  You may also want to ask
+                </p>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {topicSuggestions.map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => handleSuggestion(s)}
+                      className="font-sans text-[12.5px] font-light text-foreground/80 bg-card border rounded-full px-4 py-2 transition-all duration-200 hover:text-foreground"
+                      style={
+                        sc
+                          ? { borderColor: sc.accentBorder }
+                          : undefined
+                      }
+                      onMouseEnter={(e) => {
+                        if (!sc) return;
+                        e.currentTarget.style.backgroundColor = sc.accentSofter;
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!sc) return;
+                        e.currentTarget.style.backgroundColor = "";
+                      }}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </main>
         <Footer />

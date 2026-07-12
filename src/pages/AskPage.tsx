@@ -206,6 +206,10 @@ const AskPage = () => {
       "What should I expect after birth?",
     ];
     const hasStageContext = Boolean(stageKey);
+    const topicSuggestions =
+      stageKey === "first-year" && topic && FIRST_YEAR_TOPIC_SUGGESTIONS[topic]
+        ? FIRST_YEAR_TOPIC_SUGGESTIONS[topic]
+        : null;
     return (
       <div className="min-h-screen bg-parchment">
         <Navbar />

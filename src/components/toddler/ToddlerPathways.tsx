@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 const pathways = [
   { label: "Back to First Year", sub: "Revisit baby's first twelve months and your recovery.", to: "/first-year", eyebrow: "Previous stage" },
-  { label: "Explore Toddler topics", sub: "Eight calm clusters across the toddler years.", to: "#toddler-topics", eyebrow: "This hub" },
-  { label: "Continue to Family life", sub: "Ask about life beyond the toddler years.", to: "/ask?q=family%20life%20after%20toddler%20years", eyebrow: "What's next" },
+  { label: "Continue to Family life", sub: "Guidance for life as a family beyond the toddler years.", to: "/family", eyebrow: "What's next" },
+  { label: "Keep your journey", sub: "Save the small moments as your child grows.", to: "/my-journey", eyebrow: "Journal" },
 ];
 
 const ToddlerPathways = () => {

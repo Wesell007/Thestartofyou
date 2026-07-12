@@ -67,6 +67,85 @@ const FIRST_YEAR_TOPIC_SUGGESTIONS: Record<string, string[]> = {
   ],
 };
 
+const FAMILY_TOPIC_SUGGESTIONS: Record<string, string[]> = {
+  "another-baby": [
+    "How do we know if another baby is the right time for us?",
+    "How can we prepare our older child for a new baby?",
+    "What should we think about before growing our family?",
+    "How can we talk about another baby as a couple?",
+  ],
+  "new-sibling": [
+    "How can I help my child feel included when a new baby arrives?",
+    "What if my child seems jealous of the baby?",
+    "How do I prepare my child for becoming a sibling?",
+    "What routines help after a new baby joins the family?",
+  ],
+  routines: [
+    "How can we make mornings less stressful?",
+    "What routines help family evenings feel calmer?",
+    "How do I build a routine without making life too rigid?",
+    "What small family habits make the biggest difference?",
+  ],
+  boundaries: [
+    "How do I set boundaries without causing conflict?",
+    "What should I say if relatives ignore our parenting choices?",
+    "How do we agree boundaries as parents first?",
+    "How can I keep family relationships warm but clear?",
+  ],
+  "money-stress": [
+    "How can we talk about money without arguing?",
+    "What helps when childcare costs feel overwhelming?",
+    "How do we plan family spending more calmly?",
+    "What small money habits help family life feel less stressful?",
+  ],
+  "family-overwhelm": [
+    "How do I explain that the mental load feels too much?",
+    "What can I do when family life feels overwhelming?",
+    "How can we share the load more fairly?",
+    "How do I stop feeling like everything is on me?",
+  ],
+};
+
+const TODDLER_TOPIC_SUGGESTIONS: Record<string, string[]> = {
+  tantrums: [
+    "What should I do during a toddler tantrum?",
+    "Why does my toddler melt down over small things?",
+    "How can I stay calm when my toddler is upset?",
+    "When should I ask for advice about toddler behaviour?",
+  ],
+  sleep: [
+    "Why is my toddler suddenly waking at night?",
+    "How do I make bedtime calmer?",
+    "What if my toddler is dropping a nap?",
+    "When should I ask for help with toddler sleep?",
+  ],
+  speech: [
+    "What should I do if my toddler is not saying many words?",
+    "How can I support speech at home?",
+    "Could hearing affect my toddler's speech?",
+    "Who should I ask about toddler speech concerns?",
+  ],
+  "picky-eating": [
+    "Why is my toddler refusing food they used to eat?",
+    "How do I make mealtimes less stressful?",
+    "What if my toddler eats a very limited range?",
+    "When should I ask for feeding support?",
+  ],
+  "potty-training": [
+    "How do I know if my toddler is ready for potty training?",
+    "What if potty training becomes stressful?",
+    "Should we pause potty training if it is not working?",
+    "How do we handle accidents without shame?",
+  ],
+  "parent-patience": [
+    "How do I stay calm when my toddler pushes every boundary?",
+    "What should I do after I lose my patience?",
+    "How can I make toddler days feel less relentless?",
+    "How do I ask for support when I feel overwhelmed?",
+  ],
+};
+
+
 const AskPage = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
@@ -206,10 +285,12 @@ const AskPage = () => {
       "What should I expect after birth?",
     ];
     const hasStageContext = Boolean(stageKey);
-    const topicSuggestions =
-      (stageKey === "first-year" || stageKey === "recovery") && topic && FIRST_YEAR_TOPIC_SUGGESTIONS[topic]
-        ? FIRST_YEAR_TOPIC_SUGGESTIONS[topic]
-        : null;
+    const topicSuggestions = topic
+      ? (((stageKey === "first-year" || stageKey === "recovery") && FIRST_YEAR_TOPIC_SUGGESTIONS[topic])
+          || (stageKey === "family" && FAMILY_TOPIC_SUGGESTIONS[topic])
+          || (stageKey === "toddler" && TODDLER_TOPIC_SUGGESTIONS[topic])
+          || null)
+      : null;
     return (
       <div className="min-h-screen bg-parchment">
         <Navbar />

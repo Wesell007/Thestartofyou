@@ -36,8 +36,15 @@ const FYFinalCTA = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Link
-            to="#baby"
+          <a
+            href="#baby-topics"
+            onClick={(e) => {
+              const el = document.getElementById("baby-topics");
+              if (el) {
+                e.preventDefault();
+                el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }
+            }}
             className="inline-flex items-center gap-2 rounded-pill px-8 py-4 font-sans text-[13px] font-medium tracking-wide transition-all duration-300 hover:-translate-y-[1px] w-full sm:w-auto justify-center"
             style={{
               backgroundColor: 'hsl(var(--stage-firstyear-deep))',
@@ -47,9 +54,9 @@ const FYFinalCTA = () => {
             }}
           >
             Baby's first year <ArrowUpRight size={14} />
-          </Link>
+          </a>
           <Link
-            to="#recovery"
+            to="/first-year/postpartum-recovery"
             className="inline-flex items-center gap-2 rounded-pill px-8 py-4 font-sans text-[13px] font-medium tracking-wide transition-all duration-300 hover:-translate-y-[1px] w-full sm:w-auto justify-center"
             style={{
               backgroundColor: 'hsl(var(--stage-recovery-deep))',

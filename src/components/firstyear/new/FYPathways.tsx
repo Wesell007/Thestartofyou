@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
 const pathways = [
-  { label: "Previous journey", title: "Pregnancy", sub: "Revisit the weeks that brought you here.", href: "/pregnancy" },
-  { label: "Support", title: "Get support", sub: "For moments that feel uncertain or heavy.", href: "/support" },
-  { label: "Explore", title: "Explore the full journey", sub: "See how every stage fits together.", href: "/pregnancy" },
+  { label: "Previous stage", title: "Pregnancy guidance", sub: "Revisit pregnancy guidance, birth preparation and the weeks that brought you here.", href: "/pregnancy" },
+  { label: "Next stage", title: "Toddler guidance", sub: "Move into toddler sleep, food, behaviour, speech, play and everyday routines.", href: "/toddler" },
+  { label: "Continue", title: "Family life", sub: "Find support for routines, relationships, growing families and everyday family life.", href: "/family" },
+  { label: "Journal", title: "My journey", sub: "Keep track of the moments, questions and memories you may want to come back to.", href: "/my-journey" },
 ];
 
 const FYPathways = () => {
@@ -40,7 +41,7 @@ const FYPathways = () => {
           Where to go next.
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {pathways.map((p) => (
             <Link
               key={p.title}

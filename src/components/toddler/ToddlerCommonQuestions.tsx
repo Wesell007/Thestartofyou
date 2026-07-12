@@ -1,73 +1,177 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { ChevronDown, ArrowUpRight, BookOpen, Sparkles } from "lucide-react";
 
-const accent = "hsl(var(--stage-toddler-accent))";
-const accentSoft = "hsl(var(--stage-toddler-accent) / 0.12)";
-const accentMid = "hsl(var(--stage-toddler-accent) / 0.24)";
-const accentBorder = "hsl(var(--stage-toddler-accent) / 0.28)";
-const deep = "hsl(var(--stage-toddler-deep))";
-const deepSoft = "hsl(var(--stage-toddler-deep) / 0.72)";
+interface QItem {
+  q: string;
+  answer: string;
+  readMoreHref: string;
+  readMoreLabel: string;
+  askHref: string;
+}
 
-const qa = [
-  { q: "Why is my toddler having so many tantrums?", a: "Tantrums are how a still-developing toddler brain handles feelings it can't yet put into words. They tend to peak between roughly 18 months and 3 years and aren't a sign of poor parenting. A calm presence, fewer words and a steady boundary usually help more than reasoning in the moment." },
-  { q: "How much sleep does a toddler need?", a: "Most toddlers need around 11 to 14 hours across 24 hours, including naps. Between 12 and 18 months many drop to a single nap, and the daytime nap often fades between 3 and 4 years. If sleep is broken for weeks or your toddler seems persistently exhausted in the day, it's worth a word with your GP or health visitor." },
-  { q: "Should I be worried about my toddler's speech?", a: "Children vary widely. By 18 months many toddlers have a handful of words; by around 2 years many are putting two words together. If your toddler has very few words by 18 months, doesn't seem to understand simple instructions, or you have a quiet worry, a speech and language referral through your GP or health visitor is reasonable — early input is helpful, not alarmist." },
-  { q: "What do I do about picky eating?", a: "Picky eating is very common between 1 and 4 years and rarely affects growth. Offer the same food the family is eating, keep mealtimes short and pressure-free, and try not to become a short-order cook. If your toddler is losing weight, refusing whole food groups for a long stretch, or you're worried, mention it at a check-up." },
-  { q: "When should we start potty training?", a: "There's no perfect age. Many toddlers show signs of readiness between 2 and 3 years — dry nappies for longer stretches, interest in the toilet, the ability to follow simple instructions and tell you they need to go. Starting once readiness is there usually goes more smoothly than starting by the calendar." },
-  { q: "How do I stay patient when the toddler years feel relentless?", a: "The toddler stage is genuinely hard. Sleep is often broken, days are repetitive and feelings are loud. Lower the bar, protect small windows of rest, and let yourself feel the weight of it without judgement. If you feel low, persistently overwhelmed or detached, please speak to your GP — toddler-stage parental mental health is real and worth support." },
+const questions: QItem[] = [
+  {
+    q: "Why is my toddler having so many tantrums?",
+    answer:
+      "Tantrums can happen when toddlers have big feelings they cannot yet manage. Tiredness, hunger, transitions, frustration and wanting independence can all play a part.",
+    readMoreHref: "/toddler/behaviour-emotions/understanding-toddler-tantrums",
+    readMoreLabel: "Read: understanding toddler tantrums",
+    askHref: "/ask?stage=toddler&topic=tantrums",
+  },
+  {
+    q: "How much sleep does a toddler need?",
+    answer:
+      "Toddler sleep can vary, and needs can shift with naps, growth, routines and development. It can help to look at the whole day rather than one night in isolation.",
+    readMoreHref: "/toddler/sleep/toddler-sleep-rhythms",
+    readMoreLabel: "Read: toddler sleep rhythms",
+    askHref: "/ask?stage=toddler&topic=sleep",
+  },
+  {
+    q: "Should I be worried about my toddler's speech?",
+    answer:
+      "Speech and communication can develop at different speeds, but your concern matters. If speech, understanding, hearing or interaction worries you, it is okay to ask for advice.",
+    readMoreHref: "/toddler/speech-language/when-to-ask-about-speech-delay",
+    readMoreLabel: "Read: when to ask about speech delay",
+    askHref: "/ask?stage=toddler&topic=speech",
+  },
+  {
+    q: "What do I do about picky eating?",
+    answer:
+      "Picky eating can be frustrating, but pressure often makes meals harder. Calm repetition, small choices and a steady routine can help mealtimes feel less tense.",
+    readMoreHref: "/toddler/food-feeding/picky-eating-in-toddlers",
+    readMoreLabel: "Read: picky eating in toddlers",
+    askHref: "/ask?stage=toddler&topic=picky-eating",
+  },
+  {
+    q: "When should we start potty training?",
+    answer:
+      "Potty learning is usually easier when your child shows readiness signs, not just when they reach a certain age. Interest, awareness and cooperation all matter.",
+    readMoreHref: "/toddler/potty-learning/signs-your-child-may-be-ready-for-potty-training",
+    readMoreLabel: "Read: signs of potty readiness",
+    askHref: "/ask?stage=toddler&topic=potty-training",
+  },
+  {
+    q: "How do I stay patient when the toddler years feel relentless?",
+    answer:
+      "The toddler years can ask a lot from parents. You do not need to be perfectly calm all the time. Small pauses, repair and support can help you get through hard moments.",
+    readMoreHref: "/toddler/behaviour-emotions/helping-your-toddler-with-big-feelings",
+    readMoreLabel: "Read: helping your toddler with big feelings",
+    askHref: "/ask?stage=toddler&topic=parent-patience",
+  },
 ];
 
-const ToddlerCommonQuestions = () => {
-  return (
-    <section className="py-24 md:py-28 bg-parchment">
-      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
-        <div className="text-center mb-14 md:mb-16">
-          <span className="mx-auto block h-px w-10 mb-6" style={{ backgroundColor: accentMid }} />
-          <p className="font-sans text-[11px] font-light tracking-[0.34em] uppercase mb-3" style={{ color: accent }}>
-            Common questions
-          </p>
-          <h2 className="font-serif text-[2rem] md:text-[2.4rem] leading-tight" style={{ color: deep }}>
-            What parents quietly wonder
-          </h2>
-        </div>
+const s = {
+  color: "hsl(var(--stage-toddler-deep))",
+  accent: "hsl(var(--stage-toddler-accent))",
+  chipBg: "hsl(var(--stage-toddler-soft) / 0.55)",
+  rowBg: "hsl(var(--stage-toddler-soft) / 0.18)",
+  border: "hsl(var(--stage-toddler-accent) / 0.22)",
+  panelBg: "hsl(var(--stage-toddler-soft) / 0.32)",
+};
 
-        <Accordion type="single" collapsible className="space-y-3">
-          {qa.map(({ q, a }, i) => (
-            <AccordionItem
-              key={i}
-              value={`q${i}`}
-              className="group/q relative rounded-[18px] border bg-parchment px-6 md:px-7 overflow-hidden transition-all duration-300 hover:-translate-y-[1px] hover:shadow-[0_18px_42px_-26px_rgba(70,40,20,0.3)] data-[state=open]:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
-              style={{ borderColor: accentBorder }}
-            >
-              <span
-                className="pointer-events-none absolute left-0 top-3 bottom-3 w-[2px] rounded-r opacity-0 group-data-[state=open]/q:opacity-100 transition-opacity"
-                style={{ background: accent }}
-                aria-hidden
-              />
-              <span
-                className="pointer-events-none absolute inset-0 opacity-0 group-data-[state=open]/q:opacity-100 transition-opacity"
-                style={{ background: accentSoft }}
-                aria-hidden
-              />
-              <AccordionTrigger
-                className="relative text-left font-serif text-[17px] md:text-[18px] py-5 hover:no-underline [&>svg]:text-[hsl(var(--stage-toddler-accent))]"
-                style={{ color: deep }}
+const ToddlerCommonQuestions = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <section className="bg-parchment py-14 md:py-20">
+      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="h-px w-10" style={{ backgroundColor: "hsl(var(--stage-toddler-accent) / 0.55)" }} />
+          <span className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-foreground/60 ml-1">
+            Common questions
+          </span>
+        </div>
+        <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
+          What parents quietly wonder.
+        </h2>
+        <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-9 max-w-xl">
+          A short, honest answer to start with. Then read more, or ask your own question for personalised guidance.
+        </p>
+
+        <div className="flex flex-col gap-3">
+          {questions.map((item, i) => {
+            const isOpen = openIndex === i;
+            const panelId = `toddler-q-panel-${i}`;
+            const btnId = `toddler-q-btn-${i}`;
+            return (
+              <div
+                key={i}
+                className="rounded-[18px] border overflow-hidden transition-all duration-300"
+                style={{
+                  borderColor: s.border,
+                  backgroundColor: isOpen ? s.panelBg : s.rowBg,
+                }}
               >
-                {q}
-              </AccordionTrigger>
-              <AccordionContent
-                className="relative font-sans text-[15px] font-light leading-[1.7] pb-6 max-w-prose"
-                style={{ color: deepSoft }}
-              >
-                {a}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+                <div className="flex items-stretch gap-3 sm:gap-4">
+                  <span className="w-1 shrink-0" style={{ backgroundColor: s.accent }} aria-hidden />
+                  <button
+                    id={btnId}
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    onClick={() => setOpenIndex(isOpen ? null : i)}
+                    className="flex items-center justify-between gap-4 flex-1 pr-4 sm:pr-5 py-4 sm:py-5 text-left"
+                  >
+                    <p className="font-serif text-base sm:text-lg text-foreground leading-snug min-w-0 flex-1">
+                      {item.q}
+                    </p>
+                    <span
+                      className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center border transition-transform"
+                      style={{
+                        borderColor: s.border,
+                        backgroundColor: s.chipBg,
+                        transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                      }}
+                      aria-hidden
+                    >
+                      <ChevronDown size={14} style={{ color: s.color }} />
+                    </span>
+                  </button>
+                </div>
+
+                {isOpen && (
+                  <div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={btnId}
+                    className="pl-5 sm:pl-6 pr-4 sm:pr-5 pb-5 sm:pb-6"
+                  >
+                    <p
+                      className="font-sans text-[14px] font-light leading-[1.7] mb-4"
+                      style={{ color: "hsl(var(--foreground) / 0.85)" }}
+                    >
+                      {item.answer}
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                      <Link
+                        to={item.readMoreHref}
+                        className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium transition-all hover:-translate-y-[1px]"
+                        style={{ backgroundColor: s.accent, color: "hsl(var(--card))" }}
+                      >
+                        <BookOpen size={13} strokeWidth={1.9} />
+                        {item.readMoreLabel}
+                        <ArrowUpRight size={12} />
+                      </Link>
+                      <Link
+                        to={item.askHref}
+                        className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium border transition-all hover:-translate-y-[1px]"
+                        style={{
+                          borderColor: s.border,
+                          backgroundColor: "hsl(var(--card))",
+                          color: s.color,
+                        }}
+                      >
+                        <Sparkles size={13} strokeWidth={1.9} />
+                        Ask more
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

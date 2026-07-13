@@ -287,6 +287,78 @@ export type Database = {
         }
         Relationships: []
       }
+      ttc_journeys: {
+        Row: {
+          actively_trying: string | null
+          current_cycle_start: string | null
+          cycle_length_days: number | null
+          cycle_regularity: string | null
+          expected_period_date: string | null
+          fertile_window_end: string | null
+          fertile_window_start: string | null
+          id: string
+          ivf_consideration: string | null
+          last_period_date: string | null
+          likely_ovulation_date: string | null
+          period_length_days: number | null
+          positive_test_status: string | null
+          possible_test_date: string | null
+          stage: string | null
+          started_at: string
+          support_status: string | null
+          tracks_symptoms: string | null
+          updated_at: string
+          user_id: string
+          uses_ovulation_tests: string | null
+        }
+        Insert: {
+          actively_trying?: string | null
+          current_cycle_start?: string | null
+          cycle_length_days?: number | null
+          cycle_regularity?: string | null
+          expected_period_date?: string | null
+          fertile_window_end?: string | null
+          fertile_window_start?: string | null
+          id?: string
+          ivf_consideration?: string | null
+          last_period_date?: string | null
+          likely_ovulation_date?: string | null
+          period_length_days?: number | null
+          positive_test_status?: string | null
+          possible_test_date?: string | null
+          stage?: string | null
+          started_at?: string
+          support_status?: string | null
+          tracks_symptoms?: string | null
+          updated_at?: string
+          user_id: string
+          uses_ovulation_tests?: string | null
+        }
+        Update: {
+          actively_trying?: string | null
+          current_cycle_start?: string | null
+          cycle_length_days?: number | null
+          cycle_regularity?: string | null
+          expected_period_date?: string | null
+          fertile_window_end?: string | null
+          fertile_window_start?: string | null
+          id?: string
+          ivf_consideration?: string | null
+          last_period_date?: string | null
+          likely_ovulation_date?: string | null
+          period_length_days?: number | null
+          positive_test_status?: string | null
+          possible_test_date?: string | null
+          stage?: string | null
+          started_at?: string
+          support_status?: string | null
+          tracks_symptoms?: string | null
+          updated_at?: string
+          user_id?: string
+          uses_ovulation_tests?: string | null
+        }
+        Relationships: []
+      }
       week_photos: {
         Row: {
           caption: string | null

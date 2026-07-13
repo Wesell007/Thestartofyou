@@ -21,7 +21,12 @@ import { getActivePregnancyJourney, readPendingJourney } from "@/lib/savedJourne
 export type AuthIntent = "start_journey" | "sign_in" | "return_to_route";
 
 /** Routes that require an authenticated user to view. */
-export const PROTECTED_ROUTE_PREFIXES = ["/my-week", "/my-journey"];
+export const PROTECTED_ROUTE_PREFIXES = [
+  "/my-week",
+  "/my-journey",
+  "/my-ttc-journey",
+  "/setup/trying-to-conceive",
+];
 
 export const isProtectedPath = (pathname: string): boolean =>
   PROTECTED_ROUTE_PREFIXES.some(

@@ -36,6 +36,10 @@ export const EVENTS = {
   PHOTO_SAVED: "photo_saved",
   PROTECTED_ROUTE_REDIRECT: "protected_route_redirect",
   POST_LOGIN_REDIRECT: "post_login_redirect",
+
+  // Wave 3 — TTC journey (common envelope only; never carry cycle-sensitive props)
+  TTC_JOURNEY_SAVE_STARTED: "ttc_journey_save_started",
+  TTC_JOURNEY_SETUP_COMPLETED: "ttc_journey_setup_completed",
 } as const;
 
 export type ClickLocation = "home_hero" | "navbar";
@@ -66,6 +70,10 @@ export type EventMap = {
   photo_saved: Record<string, never>;
   protected_route_redirect: Record<string, never>;
   post_login_redirect: Record<string, never>;
+
+  // Wave 3 — TTC journey
+  ttc_journey_save_started: Record<string, never>;
+  ttc_journey_setup_completed: Record<string, never>;
 };
 
 export type EventName = keyof EventMap;

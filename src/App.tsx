@@ -132,6 +132,8 @@ import MyJourney from "./pages/MyJourney.tsx";
 import KeptChapter from "./pages/KeptChapter.tsx";
 import Auth from "./pages/Auth.tsx";
 import Setup from "./pages/Setup.tsx";
+import SetupTTC from "./pages/SetupTTC.tsx";
+import MyTTCJourney from "./pages/MyTTCJourney.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ScrollToTop from "./components/layout/ScrollToTop.tsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";
@@ -334,8 +336,10 @@ const App = () => (
           <Route path="/my-week" element={<ProtectedRoute><MyWeek /></ProtectedRoute>} />
           <Route path="/my-week/:week" element={<ProtectedRoute><KeptChapter /></ProtectedRoute>} />
           <Route path="/my-journey" element={<ProtectedRoute><MyJourney /></ProtectedRoute>} />
+          <Route path="/my-ttc-journey" element={<ProtectedRoute><MyTTCJourney /></ProtectedRoute>} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/setup" element={<Setup />} />
+          <Route path="/setup/trying-to-conceive" element={<SetupTTC />} />
           <Route path="/:journey/:stage" element={<StagePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

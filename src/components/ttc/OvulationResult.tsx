@@ -229,10 +229,10 @@ const OvulationResult = ({
   ];
 
   const reminderRows: { key: ReminderKey; label: string; date: string }[] = [
-    { key: "fertile", label: "When my fertile window opens", date: format(fertileStart, "d MMMM") },
-    { key: "ovulation", label: "Around my likely ovulation day", date: format(ovulationDay, "d MMMM") },
-    { key: "test", label: "When testing makes sense", date: format(testDay, "d MMMM") },
-    { key: "period", label: "When my next period is due", date: format(nextPeriod, "d MMMM") },
+    { key: "fertile", label: "Keep a note for my fertile window", date: format(fertileStart, "d MMMM") },
+    { key: "ovulation", label: "Keep a note for likely ovulation", date: format(ovulationDay, "d MMMM") },
+    { key: "test", label: "Keep a note for possible test day", date: format(testDay, "d MMMM") },
+    { key: "period", label: "Keep a note for expected next period", date: format(nextPeriod, "d MMMM") },
   ];
 
   return (

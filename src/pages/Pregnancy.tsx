@@ -8,6 +8,8 @@ import PregnancyTopicMap from "@/components/pregnancy/PregnancyTopicMap";
 import PregnancyTrimesterCards from "@/components/pregnancy/PregnancyTrimesterCards";
 import WeekByWeek from "@/components/pregnancy/WeekByWeek";
 import KeepYourJourney from "@/components/pregnancy/KeepYourJourney";
+import PregnancyIVFPathway from "@/components/pregnancy/PregnancyIVFPathway";
+import PregnancyCommonQuestions from "@/components/pregnancy/PregnancyCommonQuestions";
 
 const SoftDivider = () => (
   <div aria-hidden="true" className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
@@ -54,7 +56,13 @@ const Pregnancy = () => {
         {/* 6. Week-by-week map */}
         <WeekByWeek />
 
-        {/* 7. Journal CTA */}
+        {/* 7. IVF connected pathway (optional for those pregnant after IVF) */}
+        <PregnancyIVFPathway />
+
+        {/* 8. Common questions */}
+        <PregnancyCommonQuestions />
+
+        {/* 9. Journal CTA */}
         <KeepYourJourney />
         </main>
         <Footer />

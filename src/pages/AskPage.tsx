@@ -184,6 +184,47 @@ const TTC_TOPIC_SUGGESTIONS: Record<string, string[]> = {
   ],
 };
 
+const PREGNANCY_TOPIC_SUGGESTIONS: Record<string, string[]> = {
+  "early-symptoms": [
+    "Which early pregnancy symptoms are common?",
+    "Why do my symptoms come and go?",
+    "When should I ask about cramps or bleeding?",
+    "How can I describe my symptoms to a midwife or GP?",
+  ],
+  "baby-movement": [
+    "When might I start feeling baby movements?",
+    "What if my baby moves less than usual?",
+    "Can movement feel different depending on the placenta?",
+    "Who should I contact if movement worries me?",
+  ],
+  anxiety: [
+    "Is anxiety common during pregnancy?",
+    "How do I stop worrying between appointments?",
+    "How can I explain pregnancy anxiety to my midwife?",
+    "When should I ask for more emotional support?",
+  ],
+  "scans-appointments": [
+    "What should I ask at my first pregnancy appointment?",
+    "What happens at a pregnancy scan?",
+    "How do I prepare for a midwife appointment?",
+    "What if I feel nervous before a scan?",
+  ],
+  "birth-preparation": [
+    "When should I start thinking about birth preferences?",
+    "What should I include in a birth plan?",
+    "How do I prepare without feeling overwhelmed?",
+    "What questions should I ask my midwife about birth?",
+  ],
+  "when-to-ask-help": [
+    "Who should I contact if something worries me in pregnancy?",
+    "What symptoms should I ask my midwife about?",
+    "How do I explain what I am feeling clearly?",
+    "What if I feel silly asking for help?",
+  ],
+};
+
+
+
 
 const AskPage = () => {
   const [searchParams] = useSearchParams();
@@ -329,6 +370,7 @@ const AskPage = () => {
           || (stageKey === "family" && FAMILY_TOPIC_SUGGESTIONS[topic])
           || (stageKey === "toddler" && TODDLER_TOPIC_SUGGESTIONS[topic])
           || (stageKey === "ttc" && TTC_TOPIC_SUGGESTIONS[topic])
+          || (stageKey === "pregnancy" && PREGNANCY_TOPIC_SUGGESTIONS[topic])
           || null)
       : null;
     return (

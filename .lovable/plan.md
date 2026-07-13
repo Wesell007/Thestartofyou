@@ -1,63 +1,68 @@
-## Phase 9.2f.1 — TTC Placement + Common Questions Link Audit
+# Phase 9.2g — Pregnancy Hub Common Questions + IVF Pathway
 
-TTC-only correction. No SEO, sitemap, robots, article copy, calculator, or other-hub changes.
+Bring the Pregnancy hub in line with the premium pattern now used on TTC, Family, Toddler and First Year. Pregnancy-only work — no SEO, no route changes, no article rewrites.
 
-### Files inspected
-- `src/pages/TTCHub.tsx` (live TTC hub; `TTC.tsx` is `/legacy` only)
-- `src/components/ttc/TTCCommonQuestions.tsx`
-- `src/components/ttc/TTCIVFPathway.tsx`
-- `src/App.tsx` (route map — confirms `TTCHub` is `/trying-to-conceive`)
-- `src/data/articleData.ts` (TTC article slug audit)
+## Files to edit
+- `src/components/pregnancy/PregnancyCommonQuestions.tsx` (new) — premium accordion, Pregnancy palette
+- `src/components/pregnancy/PregnancyIVFPathway.tsx` (new) — calm "connected hub" card to `/ivf` (+ `/ivf-timeline`)
+- `src/pages/Pregnancy.tsx` — insert both new sections between `WeekByWeek` and `KeepYourJourney`
+- `src/pages/AskPage.tsx` — add `PREGNANCY_TOPIC_SUGGESTIONS` and extend the `topicSuggestions` selector
+- `.lovable/plan.md` — mark 9.2g complete
 
-### Issue 1 — Section order (edit `src/pages/TTCHub.tsx`)
-
-Current render (lines ~1096–1103):
+## Placement in `Pregnancy.tsx`
 ```text
-Hero → WhatThisCovers → AISupport → TTCCommonQuestions → JourneyTimeline → TTCIVFPathway → TopicLibrary → Reassurance
+Hero → WhatThisCovers → AIPanel → SoftDivider → TopicMap
+  → TrimesterCards → WeekByWeek
+  → PregnancyIVFPathway          (new)
+  → PregnancyCommonQuestions     (new)
+  → KeepYourJourney (journal promo)
 ```
+Pregnancy has no standalone "third trimester" section on the hub; trimesters live in `TrimesterCards` and week guidance ends with `WeekByWeek`. Inserting after `WeekByWeek` and before `KeepYourJourney` matches the intent "after trimester guidance, before journal promo".
 
-`TopicLibrary` already contains the "Timing & testing" and "Fertility & health" groupings, so IVF pathway and Common Questions must move **after** it.
+## Part 1 — `PregnancyCommonQuestions`
+Mirror `TTCCommonQuestions.tsx` structure exactly (accordion, chevron chip, primary "Read more" and outlined "Ask more" buttons) with Pregnancy tokens (`--stage-pregnancy`, `--stage-pregnancy-accent`).
 
-New render order:
-```text
-Hero
-WhatThisCovers
-AISupport
-JourneyTimeline          (TTC journey / stages)
-TopicLibrary             (core TTC topics incl. Timing & testing, Fertility & health)
-TTCIVFPathway            ← moved here (immediately after Fertility & health group)
-TTCCommonQuestions       ← moved here (immediately after IVF pathway)
-Reassurance
-```
+Heading: "Questions during pregnancy". Sub: "A short answer to start with. Then read more, or ask your own question for personalised guidance."
 
-Only reorder the JSX in the `TTCHub` component; no other logic touched.
+Six items with optional `readMore`, mandatory `askHref`. Copy per spec — calm British English, no diagnosis/thresholds. Article-route audit against `articleData.ts`:
 
-### Issue 2 — Common Questions link audit (edit `src/components/ttc/TTCCommonQuestions.tsx`)
-
-Article-slug audit result:
-
-| Question | Real article? | Decision |
+| Topic key | Read more (real slug) | Ask more |
 |---|---|---|
-| Fertile window | ✓ `/articles/fertile-window` | **Read more** → article |
-| Cycle tracking | ✗ (subtopic only) | **Remove Read more button.** Keep instant answer + Ask more. |
-| Pregnancy tests | ✓ `/articles/when-to-take-a-pregnancy-test` | **Read more** → article |
-| Two-week wait | ✓ `/articles/two-week-wait` | **Read more** → article |
-| When to ask for fertility help | ✓ `/articles/how-long-to-try-before-getting-help` | **Read more** → article |
-| IVF next step | Hub, not article | **Explore IVF guidance** → `/ivf` (relabelled; icon stays) |
+| `early-symptoms` | `/articles/early-pregnancy-symptoms-explained` | `/ask?stage=pregnancy&topic=early-symptoms` |
+| `baby-movement` | `/articles/baby-movement-in-pregnancy` | `/ask?stage=pregnancy&topic=baby-movement` |
+| `anxiety` | `/articles/anxiety-in-pregnancy` | `/ask?stage=pregnancy&topic=anxiety` |
+| `scans-appointments` | `/articles/tests-and-scans-in-pregnancy` | `/ask?stage=pregnancy&topic=scans-appointments` |
+| `birth-preparation` | `/articles/birth-preferences` | `/ask?stage=pregnancy&topic=birth-preparation` |
+| `when-to-ask-help` | none (no single warning-signs article exists) — omit Read more, keep Ask more only | `/ask?stage=pregnancy&topic=when-to-ask-help` |
 
-Implementation:
-- Extend `QItem` with an optional `readMore` object (`{ href, label }`). When absent, the accordion body renders only the instant answer + Ask more chip.
-- Update the six question entries with the mapping above. IVF entry uses label "Explore IVF guidance".
-- No palette, layout, animation, or Ask-flow changes. Ask more links remain `/ask?stage=ttc&topic=<key>` for all six.
+## Part 2 — IVF connected pathway (`PregnancyIVFPathway`)
+Single full-width standout panel, visually distinct from topic cards (soft lavender/IVF-tinted surface, `CONNECTED HUB` eyebrow), so it doesn't imply IVF is a standard pregnancy step.
 
-### Behaviour after change
-- `/trying-to-conceive`: IVF pathway sits after the Fertility & health group; Common Questions sits directly after IVF pathway; no misleading "Read more" labels.
-- Ask more chips + TTC Ask suggestion chips unchanged.
-- All other hubs and `/ask` variants unchanged.
+- Heading: "Pregnant after IVF?"
+- Sub: "If this pregnancy began through IVF or fertility treatment, you may want guidance that understands that part of the story too."
+- Eyebrow: "CONNECTED HUB"
+- Title: "IVF and early pregnancy support"
+- Body: "A calm IVF hub covering treatment timelines, transfer preparation, the two-week wait and early pregnancy after IVF."
+- Primary CTA: "Go to IVF hub" → `/ivf`
+- Secondary CTA: "View IVF timeline" → `/ivf-timeline` (route exists in `App.tsx`)
 
-### Verification
+Yes to including it: an IVF hub and timeline exist, and pregnancy after IVF is a real audience — but framed as optional, not a standard topic card.
+
+## Part 3 — `AskPage.tsx`
+Add `PREGNANCY_TOPIC_SUGGESTIONS` map with the six keys above and the exact chip copy from the spec. Extend the existing selector:
+
+```ts
+|| (stageKey === "pregnancy" && PREGNANCY_TOPIC_SUGGESTIONS[topic])
+```
+`pregnancy` is already a supported stage in `aiStageStyles.ts`, so styling, hidden generic chips and blank input are handled automatically. No other branches touched — First Year, Recovery, Family, Toddler, TTC and generic `/ask` behaviour preserved.
+
+## Guardrails
+No edits to TTC, IVF, Family, First Year, Toddler files, `articleData.ts` content, calculators, routes, SEO, sitemap or robots. No new images.
+
+## Verification
 - `bunx tsgo --noEmit`
-- Playwright screenshots of `/trying-to-conceive` at 1280×1800 and 375×812 to confirm order + no mobile overflow.
-- Spot-check regression routes: `/ask?stage=ttc&topic=fertile-window`, `/ask?stage=ttc&topic=ivf-next-step`, `/pregnancy`, `/first-year`, `/toddler`, `/family`, `/ivf`, `/articles/complete-guide-morning-sickness`.
+- Playwright: `/pregnancy` at 1280×1800 and 375×812 — confirm order (IVF pathway then Common Questions, both before journal card), accordion expands, Read/Ask buttons resolve, no mobile overflow
+- Ask URLs: the six `stage=pregnancy&topic=…` routes render Pregnancy styling, blank input, correct chips, no generic chips
+- Regression: `/ask` (generic chips), `/ask?stage=ttc&topic=fertile-window`, `stage=first-year&topic=sleep`, `stage=recovery&topic=recovery-bleeding`, `stage=family&topic=another-baby`, `stage=toddler&topic=tantrums`; `/trying-to-conceive`, `/ivf`, `/first-year`, `/toddler`, `/family`, `/articles/complete-guide-morning-sickness`
 
 After ship: safe to proceed to Phase 9.3 TTC SEO.

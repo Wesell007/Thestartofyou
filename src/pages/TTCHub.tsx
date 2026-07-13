@@ -33,6 +33,7 @@ import sprigImg from "@/assets/topic-mini-sprig.png";
 import heroImg from "@/assets/ttc-hero-lifestyle.jpg";
 import TTCCommonQuestions from "@/components/ttc/TTCCommonQuestions";
 import TTCIVFPathway from "@/components/ttc/TTCIVFPathway";
+import SeoHead from "@/components/seo/SeoHead";
 
 /* ----------------------------------------------------------- */
 /* SHARED                                                      */

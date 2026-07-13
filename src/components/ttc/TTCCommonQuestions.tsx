@@ -1,85 +1,176 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight, Search } from "lucide-react";
+import { ChevronDown, ArrowUpRight, BookOpen, Sparkles } from "lucide-react";
 
-const questions = [
-  { q: "When am I most fertile?", sub: "Understanding your fertile window" },
-  { q: "How do I know if I'm ovulating?", sub: "Signs and tracking methods explained" },
-  { q: "How long does it usually take?", sub: "Timelines, averages, and real expectations" },
-  { q: "When should I take a test?", sub: "Testing timing and accuracy" },
-  { q: "Does stress affect fertility?", sub: "What the evidence actually says" },
+interface QItem {
+  q: string;
+  answer: string;
+  readMoreHref: string;
+  readMoreLabel: string;
+  askHref: string;
+}
+
+const questions: QItem[] = [
+  {
+    q: "When am I most fertile?",
+    answer:
+      "Your most fertile days are usually the days leading up to ovulation and the day of ovulation itself. Cycle tracking can help you notice your own pattern over time.",
+    readMoreHref: "/trying-to-conceive/ovulation",
+    readMoreLabel: "Read: ovulation and the fertile window",
+    askHref: "/ask?stage=ttc&topic=fertile-window",
+  },
+  {
+    q: "How do I track my cycle without feeling obsessed?",
+    answer:
+      "Tracking can be helpful, but it does not need to take over your life. Choose one or two signs that feel manageable and give yourself space from constant checking.",
+    readMoreHref: "/trying-to-conceive/cycle-tracking",
+    readMoreLabel: "Read: gentle cycle tracking",
+    askHref: "/ask?stage=ttc&topic=cycle-tracking",
+  },
+  {
+    q: "When should I take a pregnancy test?",
+    answer:
+      "Testing too early can make the wait feel harder. Many people get clearer results after a missed period, but timing depends on your cycle and the type of test.",
+    readMoreHref: "/trying-to-conceive/pregnancy-tests",
+    readMoreLabel: "Read: pregnancy tests and timing",
+    askHref: "/ask?stage=ttc&topic=pregnancy-tests",
+  },
+  {
+    q: "How do I cope with the two-week wait?",
+    answer:
+      "The two-week wait can feel emotionally intense because there is so much uncertainty. Gentle routines, fewer repeated checks and support can help the days feel more manageable.",
+    readMoreHref: "/trying-to-conceive/two-week-wait",
+    readMoreLabel: "Read: the two-week wait",
+    askHref: "/ask?stage=ttc&topic=two-week-wait",
+  },
+  {
+    q: "When should I ask for fertility help?",
+    answer:
+      "It is okay to ask for advice if you are worried, have irregular cycles, known health concerns or have been trying for a while. Your GP or local service can guide you on next steps.",
+    readMoreHref: "/trying-to-conceive/fertility",
+    readMoreLabel: "Read: fertility and when to ask for help",
+    askHref: "/ask?stage=ttc&topic=when-to-ask-help",
+  },
+  {
+    q: "When should we start thinking about IVF?",
+    answer:
+      "IVF may become part of the conversation after tests, treatment advice or a longer time trying. It is okay to learn about it gently before you know whether it is your next step.",
+    readMoreHref: "/ivf",
+    readMoreLabel: "Explore the IVF hub",
+    askHref: "/ask?stage=ttc&topic=ivf-next-step",
+  },
 ];
 
+const s = {
+  color: "hsl(var(--stage-ttc-accent))",
+  accent: "hsl(var(--stage-ttc-accent))",
+  chipBg: "hsl(var(--stage-ttc) / 0.7)",
+  rowBg: "hsl(var(--stage-ttc) / 0.25)",
+  border: "hsl(var(--stage-ttc-accent) / 0.22)",
+  panelBg: "hsl(var(--stage-ttc) / 0.4)",
+};
+
 const TTCCommonQuestions = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
-    <section className="bg-parchment-dark py-20 md:py-28">
-      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-14">
-          {/* Left header */}
-          <div className="md:col-span-2">
-            <p
-              className="font-sans text-[11px] font-light tracking-[0.2em] uppercase mb-4"
-              style={{ color: 'hsl(var(--stage-ttc-accent))' }}
-            >
-              Guidance
-            </p>
-            <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
-              Common questions
-            </h2>
-            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-5">
-              The questions almost everyone asks during TTC. Answered with evidence and care.
-            </p>
+    <section className="bg-parchment py-14 md:py-20">
+      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="h-px w-10" style={{ backgroundColor: "hsl(var(--stage-ttc-accent) / 0.55)" }} />
+          <span className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-foreground/60 ml-1">
+            Common questions
+          </span>
+        </div>
+        <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
+          Questions while trying to conceive
+        </h2>
+        <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-9 max-w-xl">
+          A short answer to start with. Then read more, or ask your own question for personalised guidance.
+        </p>
 
-            {/* Editorial quote */}
-            <div
-              className="pl-5 border-l-2 mb-6"
-              style={{ borderColor: 'hsl(var(--stage-ttc-accent) / 0.25)' }}
-            >
-              <p className="font-serif italic text-[15px] text-foreground/55 leading-relaxed">
-                "The questions that keep you up at 2am deserve better answers than a generic search result."
-              </p>
-            </div>
-
-            {/* Ask anything prompt */}
-            <div
-              className="rounded-xl p-4 flex items-center gap-3"
-              style={{ backgroundColor: 'hsl(var(--stage-ttc) / 0.2)' }}
-            >
-              <Search size={14} style={{ color: 'hsl(var(--stage-ttc-accent) / 0.6)' }} />
-              <p className="font-sans text-xs font-light text-muted-foreground">
-                Can't find your question? Ask our AI guide anything about TTC.
-              </p>
-            </div>
-          </div>
-
-          {/* Right questions */}
-          <div className="md:col-span-3">
-            {questions.map((item, i) => (
-              <Link
+        <div className="flex flex-col gap-3">
+          {questions.map((item, i) => {
+            const isOpen = openIndex === i;
+            const panelId = `ttc-q-panel-${i}`;
+            const btnId = `ttc-q-btn-${i}`;
+            return (
+              <div
                 key={i}
-                to={`/ask?q=${encodeURIComponent(item.q)}`}
-                className="group flex items-center justify-between py-4 sm:py-5 border-b transition-all hover:pl-1.5"
-                style={{ borderColor: 'hsl(var(--stage-ttc) / 0.35)' }}
+                className="rounded-[18px] border overflow-hidden transition-all duration-300"
+                style={{
+                  borderColor: s.border,
+                  backgroundColor: isOpen ? s.panelBg : s.rowBg,
+                }}
               >
-                <div className="flex flex-col gap-0.5 min-w-0">
-                  <p className="font-serif text-base sm:text-lg text-foreground leading-snug group-hover:text-foreground/70 transition-colors">
-                    {item.q}
-                  </p>
-                  <p className="font-sans text-xs font-light text-muted-foreground/60">
-                    {item.sub}
-                  </p>
+                <div className="flex items-stretch gap-3 sm:gap-4">
+                  <span className="w-1 shrink-0" style={{ backgroundColor: s.accent }} aria-hidden />
+                  <button
+                    id={btnId}
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    onClick={() => setOpenIndex(isOpen ? null : i)}
+                    className="flex items-center justify-between gap-4 flex-1 pr-4 sm:pr-5 py-4 sm:py-5 text-left"
+                  >
+                    <p className="font-serif text-base sm:text-lg text-foreground leading-snug min-w-0 flex-1">
+                      {item.q}
+                    </p>
+                    <span
+                      className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center border transition-transform"
+                      style={{
+                        borderColor: s.border,
+                        backgroundColor: s.chipBg,
+                        transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                      }}
+                      aria-hidden
+                    >
+                      <ChevronDown size={14} style={{ color: s.color }} />
+                    </span>
+                  </button>
                 </div>
-                <div
-                  className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 ml-4 group-hover:scale-110 transition-transform"
-                  style={{ backgroundColor: 'hsl(var(--stage-ttc) / 0.25)' }}
-                >
-                  <ChevronRight
-                    size={14}
-                    style={{ color: 'hsl(var(--stage-ttc-accent) / 0.6)' }}
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
+
+                {isOpen && (
+                  <div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={btnId}
+                    className="pl-5 sm:pl-6 pr-4 sm:pr-5 pb-5 sm:pb-6"
+                  >
+                    <p
+                      className="font-sans text-[14px] font-light leading-[1.7] mb-4"
+                      style={{ color: "hsl(var(--foreground) / 0.85)" }}
+                    >
+                      {item.answer}
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                      <Link
+                        to={item.readMoreHref}
+                        className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium transition-all hover:-translate-y-[1px]"
+                        style={{ backgroundColor: s.accent, color: "hsl(var(--card))" }}
+                      >
+                        <BookOpen size={13} strokeWidth={1.9} />
+                        {item.readMoreLabel}
+                        <ArrowUpRight size={12} />
+                      </Link>
+                      <Link
+                        to={item.askHref}
+                        className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium border transition-all hover:-translate-y-[1px]"
+                        style={{
+                          borderColor: s.border,
+                          backgroundColor: "hsl(var(--card))",
+                          color: s.color,
+                        }}
+                      >
+                        <Sparkles size={13} strokeWidth={1.9} />
+                        Ask more
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

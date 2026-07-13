@@ -33,6 +33,12 @@ const DueDateResults = () => {
 
   return (
     <div className="min-h-screen bg-parchment">
+      <SeoHead
+        title="Your Due Date Results | The Start of You"
+        description="See your estimated due date and pregnancy timing, then continue with calm week-by-week guidance for the stage you may be in."
+        canonical="https://thestartofyou.com/due-date-calculator"
+        noindex
+      />
       <Navbar />
       <DueDateCalculatorResult lmp={lmp} />
       <Footer />

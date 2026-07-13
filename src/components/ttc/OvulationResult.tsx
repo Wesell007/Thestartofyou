@@ -280,19 +280,105 @@ const OvulationResult = ({
                 >
                   {label}
                 </p>
-                <p className="font-serif text-[1.1rem] sm:text-[1.2rem] text-foreground leading-snug mb-1.5">
+                <p className="font-serif text-[1.35rem] sm:text-[1.5rem] text-foreground leading-snug mb-1.5">
                   {value}
                 </p>
-                <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-relaxed">
+                <p className="font-sans text-[13px] text-muted-foreground leading-relaxed">
                   {meta}
                 </p>
               </div>
             ))}
           </div>
 
-          <p className="font-serif italic text-[14.5px] text-foreground/60 leading-relaxed mt-8 max-w-2xl">
-            These dates are estimates, not guarantees. Cycles can vary from month to month.
+          <p className="font-serif italic text-[14.5px] text-muted-foreground leading-relaxed mt-8 max-w-2xl">
+            These dates are estimates, not a promise. Cycles can vary from month to month.
           </p>
+
+          {/* ── Adjust your dates panel ─────────────────────────── */}
+          <div
+            className="mt-10 rounded-[1.25rem] border bg-card p-6 sm:p-7"
+            style={{
+              borderColor: `hsl(var(${STAGE_ACCENT}) / 0.2)`,
+              boxShadow: `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 12px 30px -22px hsl(var(${STAGE_ACCENT}) / 0.24)`,
+            }}
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="max-w-md">
+                <p
+                  className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase mb-1.5"
+                  style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                >
+                  Need to adjust your dates?
+                </p>
+                <p className="font-sans text-[14px] text-muted-foreground leading-relaxed">
+                  Change your last period date or usual cycle length and recalculate your estimate.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setAdjustOpen((v) => !v)}
+                className="inline-flex items-center justify-center gap-2 rounded-pill border px-5 py-2.5 font-sans text-[13px] font-medium transition-all hover:-translate-y-0.5"
+                style={{
+                  borderColor: `hsl(var(${STAGE_ACCENT}) / 0.4)`,
+                  color: `hsl(var(${STAGE_ACCENT}))`,
+                  background: `hsl(var(${STAGE_BG}) / 0.45)`,
+                }}
+              >
+                {adjustOpen ? "Close" : "Adjust my dates"}
+              </button>
+            </div>
+
+            {adjustOpen && (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (!adjustLmp) return;
+                  const c = Math.max(20, Math.min(45, Number(adjustCycle) || 28));
+                  navigate(`${toolPath}?lmp=${adjustLmp}&cycle=${c}`);
+                  setAdjustOpen(false);
+                  setTimeout(() => {
+                    document.getElementById("results")?.scrollIntoView({ behavior: "smooth" });
+                  }, 50);
+                }}
+                className="mt-6 grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-4 items-end"
+              >
+                <label className="block">
+                  <span className="font-sans text-[11.5px] font-medium tracking-[0.06em] uppercase text-foreground/75 mb-1.5 block">
+                    First day of last period
+                  </span>
+                  <input
+                    type="date"
+                    value={adjustLmp}
+                    max={format(new Date(), "yyyy-MM-dd")}
+                    onChange={(e) => setAdjustLmp(e.target.value)}
+                    className="w-full rounded-xl border bg-parchment/60 px-3.5 py-2.5 font-sans text-[14px] text-foreground focus:outline-none focus:ring-2"
+                    style={{ borderColor: `hsl(var(${STAGE_ACCENT}) / 0.25)` }}
+                  />
+                </label>
+                <label className="block">
+                  <span className="font-sans text-[11.5px] font-medium tracking-[0.06em] uppercase text-foreground/75 mb-1.5 block">
+                    Cycle length (days)
+                  </span>
+                  <input
+                    type="number"
+                    min={20}
+                    max={45}
+                    value={adjustCycle}
+                    onChange={(e) => setAdjustCycle(Number(e.target.value))}
+                    className="w-full rounded-xl border bg-parchment/60 px-3.5 py-2.5 font-sans text-[14px] text-foreground focus:outline-none focus:ring-2"
+                    style={{ borderColor: `hsl(var(${STAGE_ACCENT}) / 0.25)` }}
+                  />
+                </label>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover hover:-translate-y-0.5 transition-all"
+                >
+                  <RefreshCw size={14} />
+                  Recalculate
+                </button>
+              </form>
+            )}
+          </div>
         </div>
       </section>
 

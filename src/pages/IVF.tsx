@@ -9,6 +9,7 @@ import IVFStages from "@/components/ivf/IVFStages";
 import IVFCommonQuestions from "@/components/ivf/IVFCommonQuestions";
 import IVFReflection from "@/components/ivf/IVFReflection";
 import IVFFinalCTA from "@/components/ivf/IVFFinalCTA";
+import SeoHead from "@/components/seo/SeoHead";
 
 // IVF hub — premium pass.
 // Hero → pathway position → orientation → editorial voice → fast help →
@@ -16,6 +17,11 @@ import IVFFinalCTA from "@/components/ivf/IVFFinalCTA";
 const IVF = () => {
   return (
     <div className="min-h-screen font-sans">
+      <SeoHead
+        title="IVF Guide | Treatment, Transfer, Two-Week Wait & Support"
+        description="Calm, practical IVF guidance for treatment timelines, embryo transfer, the two-week wait, early pregnancy after IVF and emotional support."
+        canonical="https://thestartofyou.com/ivf"
+      />
       <Navbar />
       <main>
         <IVFHero />

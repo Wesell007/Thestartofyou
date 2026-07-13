@@ -136,15 +136,17 @@ const TTCCommonQuestions = () => {
                       {item.answer}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                      <Link
-                        to={item.readMoreHref}
-                        className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium transition-all hover:-translate-y-[1px]"
-                        style={{ backgroundColor: s.accent, color: "hsl(var(--card))" }}
-                      >
-                        <BookOpen size={13} strokeWidth={1.9} />
-                        {item.readMoreLabel}
-                        <ArrowUpRight size={12} />
-                      </Link>
+                      {item.readMore && (
+                        <Link
+                          to={item.readMore.href}
+                          className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium transition-all hover:-translate-y-[1px]"
+                          style={{ backgroundColor: s.accent, color: "hsl(var(--card))" }}
+                        >
+                          <BookOpen size={13} strokeWidth={1.9} />
+                          {item.readMore.label}
+                          <ArrowUpRight size={12} />
+                        </Link>
+                      )}
                       <Link
                         to={item.askHref}
                         className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium border transition-all hover:-translate-y-[1px]"

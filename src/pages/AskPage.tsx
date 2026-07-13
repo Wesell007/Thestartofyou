@@ -328,6 +328,7 @@ const AskPage = () => {
       ? (((stageKey === "first-year" || stageKey === "recovery") && FIRST_YEAR_TOPIC_SUGGESTIONS[topic])
           || (stageKey === "family" && FAMILY_TOPIC_SUGGESTIONS[topic])
           || (stageKey === "toddler" && TODDLER_TOPIC_SUGGESTIONS[topic])
+          || (stageKey === "ttc" && TTC_TOPIC_SUGGESTIONS[topic])
           || null)
       : null;
     return (

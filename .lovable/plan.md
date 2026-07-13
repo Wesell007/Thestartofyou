@@ -44,7 +44,6 @@ Single full-width standout panel, visually distinct from topic cards (soft laven
 - Title: "IVF and early pregnancy support"
 - Body: "A calm IVF hub covering treatment timelines, transfer preparation, the two-week wait and early pregnancy after IVF."
 - Primary CTA: "Go to IVF hub" → `/ivf`
-- Secondary CTA: "View IVF timeline" → `/ivf-timeline` (route exists in `App.tsx`)
 
 Yes to including it: an IVF hub and timeline exist, and pregnancy after IVF is a real audience — but framed as optional, not a standard topic card.
 

@@ -14,7 +14,7 @@ import {
   Target,
   TestTube2,
 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import OvulationResultCalendar from "@/components/tools/OvulationResultCalendar";

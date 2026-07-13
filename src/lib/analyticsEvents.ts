@@ -43,6 +43,8 @@ export const EVENTS = {
   TTC_JOURNEY_DASHBOARD_VIEWED: "ttc_journey_dashboard_viewed",
   TTC_LOG_CREATED: "ttc_log_created",
   TTC_LOG_DELETED: "ttc_log_deleted",
+  TTC_INSIGHT_CLICKED: "ttc_insight_clicked",
+  TTC_PREGNANCY_HANDOVER_STARTED: "ttc_pregnancy_handover_started",
 } as const;
 
 
@@ -81,6 +83,8 @@ export type EventMap = {
   ttc_journey_dashboard_viewed: Record<string, never>;
   ttc_log_created: Record<string, never>;
   ttc_log_deleted: Record<string, never>;
+  ttc_insight_clicked: Record<string, never>;
+  ttc_pregnancy_handover_started: Record<string, never>;
 };
 
 

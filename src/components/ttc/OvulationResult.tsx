@@ -597,12 +597,15 @@ const OvulationResult = ({
             >
               <Bookmark size={18} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
             </div>
-            <Eyebrow>Keep this cycle</Eyebrow>
+            <Eyebrow>Save to your TTC journey</Eyebrow>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground leading-tight mb-4">
               Save this <span className="italic font-normal">cycle</span>
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed max-w-lg mx-auto">
-              Keep your fertile window, likely ovulation day and next steps in one place so you can come back to them when you need to.
+            <p className="font-sans text-[15px] text-foreground/85 leading-relaxed max-w-lg mx-auto mb-3">
+              Keep this fertile window, likely ovulation day, possible test day and next steps in one place so you can come back when you need to.
+            </p>
+            <p className="font-sans text-[14px] text-muted-foreground leading-relaxed max-w-lg mx-auto">
+              We will help you return to the right guidance for where you are in this cycle, whether you are waiting, testing or starting again.
             </p>
           </div>
 

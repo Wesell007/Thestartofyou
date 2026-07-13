@@ -31,6 +31,8 @@ import { cn } from "@/lib/utils";
 import { ttcTopics, type TTCTopicSlug } from "@/data/ttcTopicData";
 import sprigImg from "@/assets/topic-mini-sprig.png";
 import heroImg from "@/assets/ttc-hero-lifestyle.jpg";
+import TTCCommonQuestions from "@/components/ttc/TTCCommonQuestions";
+import TTCIVFPathway from "@/components/ttc/TTCIVFPathway";
 
 /* ----------------------------------------------------------- */
 /* SHARED                                                      */

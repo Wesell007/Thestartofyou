@@ -5,8 +5,7 @@ import { ChevronDown, ArrowUpRight, BookOpen, Sparkles } from "lucide-react";
 interface QItem {
   q: string;
   answer: string;
-  readMoreHref: string;
-  readMoreLabel: string;
+  readMore?: { href: string; label: string };
   askHref: string;
 }
 
@@ -15,48 +14,41 @@ const questions: QItem[] = [
     q: "When am I most fertile?",
     answer:
       "Your most fertile days are usually the days leading up to ovulation and the day of ovulation itself. Cycle tracking can help you notice your own pattern over time.",
-    readMoreHref: "/trying-to-conceive/ovulation",
-    readMoreLabel: "Read: ovulation and the fertile window",
+    readMore: { href: "/articles/fertile-window", label: "Read: the fertile window" },
     askHref: "/ask?stage=ttc&topic=fertile-window",
   },
   {
     q: "How do I track my cycle without feeling obsessed?",
     answer:
       "Tracking can be helpful, but it does not need to take over your life. Choose one or two signs that feel manageable and give yourself space from constant checking.",
-    readMoreHref: "/trying-to-conceive/cycle-tracking",
-    readMoreLabel: "Read: gentle cycle tracking",
     askHref: "/ask?stage=ttc&topic=cycle-tracking",
   },
   {
     q: "When should I take a pregnancy test?",
     answer:
       "Testing too early can make the wait feel harder. Many people get clearer results after a missed period, but timing depends on your cycle and the type of test.",
-    readMoreHref: "/trying-to-conceive/pregnancy-tests",
-    readMoreLabel: "Read: pregnancy tests and timing",
+    readMore: { href: "/articles/when-to-take-a-pregnancy-test", label: "Read: when to take a pregnancy test" },
     askHref: "/ask?stage=ttc&topic=pregnancy-tests",
   },
   {
     q: "How do I cope with the two-week wait?",
     answer:
       "The two-week wait can feel emotionally intense because there is so much uncertainty. Gentle routines, fewer repeated checks and support can help the days feel more manageable.",
-    readMoreHref: "/trying-to-conceive/two-week-wait",
-    readMoreLabel: "Read: the two-week wait",
+    readMore: { href: "/articles/two-week-wait", label: "Read: the two-week wait" },
     askHref: "/ask?stage=ttc&topic=two-week-wait",
   },
   {
     q: "When should I ask for fertility help?",
     answer:
       "It is okay to ask for advice if you are worried, have irregular cycles, known health concerns or have been trying for a while. Your GP or local service can guide you on next steps.",
-    readMoreHref: "/trying-to-conceive/fertility",
-    readMoreLabel: "Read: fertility and when to ask for help",
+    readMore: { href: "/articles/how-long-to-try-before-getting-help", label: "Read: when to ask for help" },
     askHref: "/ask?stage=ttc&topic=when-to-ask-help",
   },
   {
     q: "When should we start thinking about IVF?",
     answer:
       "IVF may become part of the conversation after tests, treatment advice or a longer time trying. It is okay to learn about it gently before you know whether it is your next step.",
-    readMoreHref: "/ivf",
-    readMoreLabel: "Explore the IVF hub",
+    readMore: { href: "/ivf", label: "Explore IVF guidance" },
     askHref: "/ask?stage=ttc&topic=ivf-next-step",
   },
 ];
@@ -144,15 +136,17 @@ const TTCCommonQuestions = () => {
                       {item.answer}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                      <Link
-                        to={item.readMoreHref}
-                        className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium transition-all hover:-translate-y-[1px]"
-                        style={{ backgroundColor: s.accent, color: "hsl(var(--card))" }}
-                      >
-                        <BookOpen size={13} strokeWidth={1.9} />
-                        {item.readMoreLabel}
-                        <ArrowUpRight size={12} />
-                      </Link>
+                      {item.readMore && (
+                        <Link
+                          to={item.readMore.href}
+                          className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium transition-all hover:-translate-y-[1px]"
+                          style={{ backgroundColor: s.accent, color: "hsl(var(--card))" }}
+                        >
+                          <BookOpen size={13} strokeWidth={1.9} />
+                          {item.readMore.label}
+                          <ArrowUpRight size={12} />
+                        </Link>
+                      )}
                       <Link
                         to={item.askHref}
                         className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium border transition-all hover:-translate-y-[1px]"

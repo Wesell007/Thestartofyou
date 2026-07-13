@@ -20,6 +20,11 @@ import SupportFinalCTA from "@/components/support/SupportFinalCTA";
 const Support = () => {
   return (
     <div className="min-h-screen bg-parchment">
+      <SeoHead
+        title="Support | The Start of You"
+        description="Find support, guidance and ways to get help with The Start of You, from account questions to using the site during your parenting journey."
+        canonical="https://thestartofyou.com/support"
+      />
       <Navbar />
       <SupportHero />
       <SupportReassurance />

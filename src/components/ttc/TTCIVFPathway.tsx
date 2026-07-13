@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles, Compass } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 const TTCIVFPathway = () => {
   return (
@@ -61,18 +61,6 @@ const TTCIVFPathway = () => {
                     size={15}
                     className="transition-transform group-hover:translate-x-0.5"
                   />
-                </Link>
-                <Link
-                  to="/ivf-timeline"
-                  className="inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 font-sans text-[13px] font-medium border transition-all hover:-translate-y-[1px]"
-                  style={{
-                    borderColor: "hsl(var(--stage-ivf-accent) / 0.35)",
-                    backgroundColor: "hsl(var(--card))",
-                    color: "hsl(var(--stage-ivf-accent))",
-                  }}
-                >
-                  <Compass size={13} strokeWidth={1.9} />
-                  View IVF timeline
                 </Link>
               </div>
             </div>

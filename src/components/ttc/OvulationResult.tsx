@@ -1,58 +1,23 @@
-import { format, addDays, differenceInCalendarDays, isAfter, isBefore } from "date-fns";
-import { ArrowRight, Bell, BellRing, Bookmark, Check, MessageCircle, Sparkles, X } from "lucide-react";
+import { addDays, format } from "date-fns";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Bell,
+  Bookmark,
+  Check,
+  CircleDot,
+  Egg,
+  Hourglass,
+  MessageCircle,
+  RefreshCw,
+  Sparkles,
+  Target,
+  TestTube2,
+} from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
-import botanicalSrc from "@/assets/botanical-corner.png";
-
-/* ── Botanical accent (more present, still elegant) ────────────────── */
-const BotanicalAccent = ({
-  className,
-  flip = false,
-  opacity = "opacity-[0.42]",
-  size = "w-[220px] md:w-[320px]",
-}: {
-  className?: string;
-  flip?: boolean;
-  opacity?: string;
-  size?: string;
-}) => (
-  <img
-    src={botanicalSrc}
-    alt=""
-    aria-hidden="true"
-    className={cn(
-      "pointer-events-none absolute select-none h-auto",
-      size,
-      opacity,
-      flip && "-scale-x-100",
-      className
-    )}
-  />
-);
-
-/* ── Sprig (visible decorative mark) ───────────────────────────────── */
-const Sprig = ({ className, tone = "sage" }: { className?: string; tone?: "sage" | "ttc" }) => (
-  <svg
-    viewBox="0 0 64 64"
-    aria-hidden="true"
-    className={cn(
-      "pointer-events-none select-none",
-      tone === "sage" ? "text-sage/85" : "text-[hsl(var(--stage-ttc-accent))]",
-      className
-    )}
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.25"
-    strokeLinecap="round"
-  >
-    <path d="M32 60 C 32 40, 32 24, 32 6" />
-    <path d="M32 46 C 24 44, 18 40, 16 32" />
-    <path d="M32 36 C 40 34, 46 30, 48 22" />
-    <path d="M32 26 C 26 24, 22 20, 21 14" />
-    <path d="M32 18 C 38 16, 42 12, 43 8" />
-  </svg>
-);
+import OvulationResultCalendar from "@/components/tools/OvulationResultCalendar";
 
 interface OvulationResultProps {
   lmp: Date;
@@ -73,6 +38,17 @@ interface SavedCycle {
 }
 
 const STORAGE_KEY = "tsoy.ttc.savedCycle";
+const STAGE_BG = "--stage-ttc";
+const STAGE_ACCENT = "--stage-ttc-accent";
+
+const Eyebrow = ({ children }: { children: React.ReactNode }) => (
+  <p
+    className="font-sans text-[11px] font-light tracking-[0.24em] uppercase mb-3"
+    style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+  >
+    {children}
+  </p>
+);
 
 const OvulationResult = ({
   lmp,
@@ -83,7 +59,6 @@ const OvulationResult = ({
   testDay,
 }: OvulationResultProps) => {
   const navigate = useNavigate();
-  const [reveal, setReveal] = useState(true);
   const [saved, setSaved] = useState(false);
   const [reminders, setReminders] = useState<Record<ReminderKey, boolean>>({
     fertile: true,
@@ -91,30 +66,22 @@ const OvulationResult = ({
     test: true,
     period: true,
   });
-  const [showTransition, setShowTransition] = useState(false);
 
-  // Expected next period
   const nextPeriod = useMemo(() => addDays(lmp, cycleLength), [lmp, cycleLength]);
-  const today = useMemo(() => new Date(), []);
-  const periodIsLate = isAfter(today, addDays(nextPeriod, 0));
-  const daysToOvulation = differenceInCalendarDays(ovulationDay, today);
-  const daysToPeriod = differenceInCalendarDays(nextPeriod, today);
+  const bestDays = useMemo(
+    () => [addDays(ovulationDay, -2), addDays(ovulationDay, -1), ovulationDay],
+    [ovulationDay],
+  );
 
-  // Best 3 days to try (ovulation -2, -1, ovulation)
-  const bestDays = [addDays(ovulationDay, -2), addDays(ovulationDay, -1), ovulationDay];
-
-  useEffect(() => {
-    const t = setTimeout(() => setReveal(false), 4200);
-    return () => clearTimeout(t);
-  }, []);
-
-  // Hydrate saved state
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
       const parsed: SavedCycle = JSON.parse(raw);
-      if (parsed.lmp === lmp.toISOString().slice(0, 10) && parsed.cycleLength === cycleLength) {
+      if (
+        parsed.lmp === lmp.toISOString().slice(0, 10) &&
+        parsed.cycleLength === cycleLength
+      ) {
         setSaved(true);
         setReminders(parsed.reminders);
       }
@@ -145,121 +112,231 @@ const OvulationResult = ({
     if (saved) persist({ reminders: next });
   };
 
-  const suggestedPrompts = [
-    "Am I timing this cycle right?",
-    "What does the fertile window actually mean?",
-    "When should I test this cycle?",
+  const askLink = (q: string, topic: string) =>
+    `/ask?stage=ttc&topic=${topic}&q=${encodeURIComponent(q)}`;
+
+  const askPrompts = [
+    { q: "Am I timing this cycle right?", topic: "fertile-window" },
+    { q: "What does this fertile window actually mean?", topic: "fertile-window" },
+    { q: "When should I test this cycle?", topic: "pregnancy-tests" },
+    { q: "What if my cycle length changes?", topic: "cycle-tracking" },
   ];
 
-  const askLink = (q: string) =>
-    `/ask?q=${encodeURIComponent(q)}&ctx=${encodeURIComponent("Trying to conceive — this cycle")}`;
+  const summaryCards: {
+    label: string;
+    value: string;
+    meta: string;
+    icon: typeof Egg;
+  }[] = [
+    {
+      label: "Fertile window",
+      value: `${format(fertileStart, "d MMM")} – ${format(fertileEnd, "d MMM")}`,
+      meta: "The days conception may be more likely.",
+      icon: CircleDot,
+    },
+    {
+      label: "Likely ovulation",
+      value: format(ovulationDay, "EEE d MMM"),
+      meta: `Around day ${cycleLength - 14} of your cycle.`,
+      icon: Egg,
+    },
+    {
+      label: "Best days to try",
+      value: `${format(bestDays[0], "d")} – ${format(bestDays[2], "d MMM")}`,
+      meta: "The two days before ovulation, and the day itself.",
+      icon: Target,
+    },
+    {
+      label: "Expected next period",
+      value: format(nextPeriod, "EEE d MMM"),
+      meta: `Based on a ${cycleLength}-day cycle.`,
+      icon: RefreshCw,
+    },
+    {
+      label: "Possible test day",
+      value: format(testDay, "EEE d MMM"),
+      meta: "Testing may be clearer from around this date.",
+      icon: TestTube2,
+    },
+  ];
 
-  const supportingDates = [
-    { label: "Likely ovulation", value: format(ovulationDay, "d MMMM"), meta: `Around day ${cycleLength - 14} of your cycle` },
-    { label: "Best days to try", value: `${format(bestDays[0], "d")} – ${format(bestDays[2], "d MMMM")}`, meta: "The two days before ovulation, and the day itself" },
-    { label: "Expected next period", value: format(nextPeriod, "d MMMM"), meta: daysToPeriod >= 0 ? `In ${daysToPeriod} days` : `${Math.abs(daysToPeriod)} days late` },
+  const meaningCards = [
+    {
+      title: "Your fertile window",
+      desc: "These are the days when conception may be more likely, based on your cycle dates.",
+    },
+    {
+      title: "Ovulation can shift",
+      desc: "Even with a regular cycle, ovulation can vary from month to month.",
+    },
+    {
+      title: "Use this as a guide",
+      desc: "This tool can help with timing, but it cannot confirm ovulation or pregnancy.",
+    },
+  ];
+
+  const todoRows = [
+    {
+      title: "Try on the best days",
+      desc: `Aim for ${format(bestDays[0], "d")}, ${format(bestDays[1], "d")} and ${format(bestDays[2], "d MMMM")}. Every other day is usually enough.`,
+    },
+    {
+      title: "Notice, but do not overtrack",
+      desc: "Signs like discharge, ovulation tests or body temperature can help, but they do not need to take over your day.",
+    },
+    {
+      title: `Test after ${format(nextPeriod, "d MMMM")}`,
+      desc: "Testing after your expected period tends to give a clearer result. Earlier tests can show a false negative.",
+    },
+    {
+      title: "Be kind to yourself if it does not happen",
+      desc: "One cycle is not a verdict. It can take time, even when timing is right.",
+    },
+  ];
+
+  const relatedGuidance = [
+    {
+      label: "Ovulation",
+      desc: "Signs, timing and your most fertile days.",
+      href: "/trying-to-conceive/ovulation",
+      icon: Egg,
+    },
+    {
+      label: "Cycle Tracking",
+      desc: "How your cycle works and how to track it without feeling overwhelmed.",
+      href: "/trying-to-conceive/cycle-tracking",
+      icon: RefreshCw,
+    },
+    {
+      label: "The Two-Week Wait",
+      desc: "Support for the wait between ovulation and testing.",
+      href: "/trying-to-conceive/two-week-wait",
+      icon: Hourglass,
+    },
+    {
+      label: "Pregnancy Tests",
+      desc: "When to test and how to read the result calmly.",
+      href: "/trying-to-conceive/pregnancy-tests",
+      icon: TestTube2,
+    },
+  ];
+
+  const reminderRows: { key: ReminderKey; label: string; date: string }[] = [
+    { key: "fertile", label: "When my fertile window opens", date: format(fertileStart, "d MMMM") },
+    { key: "ovulation", label: "Around my likely ovulation day", date: format(ovulationDay, "d MMMM") },
+    { key: "test", label: "When testing makes sense", date: format(testDay, "d MMMM") },
+    { key: "period", label: "When my next period is due", date: format(nextPeriod, "d MMMM") },
   ];
 
   return (
     <div>
-      {/* ── Primary result ──────────────────────────────────────────── */}
-      <section className="relative bg-gradient-to-b from-sage-bg/50 via-parchment to-parchment-dark pt-28 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        {/* ambient layered glows */}
-        <div className="absolute inset-x-0 top-0 h-[460px] glow-sage opacity-70 pointer-events-none" aria-hidden="true" />
-        <div className="absolute -bottom-32 right-[-10%] w-[520px] h-[520px] glow-sage opacity-50 rounded-full pointer-events-none" aria-hidden="true" />
-
-        {/* Botanical accents — confident framing */}
-        <BotanicalAccent className="top-4 -left-12 md:top-8 md:-left-4" opacity="opacity-[0.55]" size="w-[240px] md:w-[360px]" />
-        <BotanicalAccent className="top-2 -right-12 md:top-4 md:-right-4" flip opacity="opacity-[0.48]" size="w-[240px] md:w-[360px]" />
-
-        <div className="relative container mx-auto px-6 md:px-10 max-w-2xl text-center">
-          <div className="flex items-center justify-center gap-3 mb-7">
-            <Sprig className="w-5 h-5 -rotate-[35deg]" />
-            <div className="inline-flex items-center gap-2">
-              {reveal && (
-                <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
-              )}
-              <p className="font-sans text-[11px] font-light tracking-[0.24em] uppercase text-sage">
-                Here's where you are this cycle
-              </p>
-              {reveal && (
-                <Sparkles size={13} className="text-sage animate-sparkle-fade" aria-hidden="true" />
-              )}
-            </div>
-            <Sprig className="w-5 h-5 rotate-[35deg] -scale-x-100" />
-          </div>
-
-          <p className="font-serif text-lg sm:text-xl text-foreground/60 italic leading-snug mb-5">
-            Your fertile window opens
-          </p>
-          <h1
-            className={cn(
-              "font-serif text-[2.75rem] sm:text-6xl md:text-7xl text-foreground leading-[1.05] tracking-tight mb-6",
-              reveal && "animate-result-shimmer"
-            )}
-          >
-            {format(fertileStart, "d MMMM")}
-          </h1>
-          <div className="flanking-lines mb-6">
-            <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted whitespace-nowrap">
-              through {format(fertileEnd, "d MMMM")}
+      {/* ── Result hero summary ────────────────────────────────────── */}
+      <section className="relative bg-parchment pt-10 pb-14 md:pt-16 md:pb-20 overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-64 -z-0"
+          style={{
+            background: `linear-gradient(180deg, hsl(var(${STAGE_BG}) / 0.55) 0%, transparent 100%)`,
+          }}
+        />
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
+          <div className="max-w-2xl mb-10">
+            <Eyebrow>Your cycle at a glance</Eyebrow>
+            <h2 className="font-serif text-[2rem] sm:text-4xl md:text-[2.75rem] text-foreground leading-[1.08] mb-4">
+              Your fertile window <span className="italic font-normal">estimate</span>
+            </h2>
+            <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground leading-relaxed">
+              A calm view of the days that may matter most this cycle.
             </p>
           </div>
-          <p className="font-sans text-base sm:text-[17px] font-light text-foreground/65 leading-relaxed max-w-lg mx-auto mb-14">
-            A quiet map of the days ahead. Hold it gently. Bodies don't always follow the calendar, and that's part of this.
-          </p>
 
-          {/* Supporting dates — soft sage-tinted seam */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-sage-light/30 rounded-2xl overflow-hidden border border-sage-light/40 shadow-elevated">
-            {supportingDates.map((d) => (
-              <div key={d.label} className="bg-card/90 backdrop-blur-sm px-6 py-7 text-left">
-                <p className="font-sans text-[10px] font-light tracking-[0.22em] uppercase text-sage mb-2.5">
-                  {d.label}
-                </p>
-                <p className="font-serif text-lg text-foreground leading-snug mb-1.5">{d.value}</p>
-                <p className="font-sans text-xs font-light text-foreground/55 leading-relaxed">{d.meta}</p>
-              </div>
-            ))}
-          </div>
-
-          <p className="font-serif italic text-[15px] text-foreground/55 leading-relaxed mt-10 max-w-xl mx-auto">
-            These dates are a gentle estimate based on a {cycleLength}-day cycle. Ovulation can shift from month to month, and that is completely normal.
-          </p>
-        </div>
-      </section>
-
-      {/* ── What this means ─────────────────────────────────────────── */}
-      <section className="relative bg-parchment py-16 md:py-20 overflow-hidden">
-        <div className="absolute -top-px left-0 right-0 flex justify-center pointer-events-none">
-          <div className="-translate-y-1/2 bg-parchment px-3 py-1 rounded-full">
-            <Sprig className="w-7 h-7" />
-          </div>
-        </div>
-        <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
-            Understanding your results
-          </p>
-          <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-8">
-            What the fertile window means
-          </h2>
-          <div className="space-y-0">
-            {[
-              "These are the days you're most likely to conceive. Sperm can survive up to five days inside the body.",
-              "The two days before ovulation tend to matter more than ovulation day itself.",
-              "These are estimates, not guarantees. Cycles vary, and that doesn't mean anything is wrong.",
-            ].map((item, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            {summaryCards.map(({ label, value, meta, icon: Icon }) => (
               <div
-                key={i}
-                className={cn(
-                  "flex items-start gap-5 py-6",
-                  i < 2 && "border-b border-sage-light/30"
-                )}
+                key={label}
+                className="relative bg-card rounded-[1.25rem] border p-6 overflow-hidden"
+                style={{
+                  borderColor: `hsl(var(${STAGE_ACCENT}) / 0.18)`,
+                  boxShadow: `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 12px 30px -22px hsl(var(${STAGE_ACCENT}) / 0.28)`,
+                }}
               >
-                <div className="w-9 h-9 rounded-full bg-sage-bg border border-sage-light/50 flex items-center justify-center shrink-0 mt-0.5 shadow-soft">
-                  <span className="font-serif text-sm text-sage">{i + 1}</span>
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
+                  style={{
+                    background: `linear-gradient(135deg, hsl(var(${STAGE_BG})) 0%, hsl(var(${STAGE_BG}) / 0.55) 100%)`,
+                  }}
+                >
+                  <Icon size={17} strokeWidth={1.5} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
                 </div>
-                <p className="font-sans text-[15px] font-light text-foreground/75 leading-relaxed">
-                  {item}
+                <p
+                  className="font-sans text-[10.5px] font-light tracking-[0.22em] uppercase mb-2"
+                  style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                >
+                  {label}
+                </p>
+                <p className="font-serif text-[1.1rem] sm:text-[1.2rem] text-foreground leading-snug mb-1.5">
+                  {value}
+                </p>
+                <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-relaxed">
+                  {meta}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <p className="font-serif italic text-[14.5px] text-foreground/60 leading-relaxed mt-8 max-w-2xl">
+            These dates are estimates, not guarantees. Cycles can vary from month to month.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Visual cycle calendar ──────────────────────────────────── */}
+      <section className="bg-parchment pb-14 md:pb-20">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
+          <div className="mb-6 max-w-xl">
+            <Eyebrow>Your cycle calendar</Eyebrow>
+            <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
+              A gentle <span className="italic font-normal">month view</span>
+            </h2>
+            <p className="font-sans text-[14.5px] font-light text-muted-foreground leading-relaxed">
+              The days most likely to matter this cycle, mapped onto the month.
+            </p>
+          </div>
+          <OvulationResultCalendar
+            lmp={lmp}
+            fertileStart={fertileStart}
+            fertileEnd={fertileEnd}
+            ovulationDay={ovulationDay}
+            bestDays={bestDays}
+            nextPeriod={nextPeriod}
+            testDay={testDay}
+          />
+        </div>
+      </section>
+
+      {/* ── What this estimate means ───────────────────────────────── */}
+      <section className="bg-parchment pb-14 md:pb-20">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
+          <div className="mb-10 max-w-2xl">
+            <Eyebrow>Understanding your results</Eyebrow>
+            <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight">
+              What this estimate <span className="italic font-normal">means</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {meaningCards.map(({ title, desc }) => (
+              <div
+                key={title}
+                className="bg-card rounded-[1.5rem] border p-7"
+                style={{
+                  borderColor: `hsl(var(${STAGE_ACCENT}) / 0.16)`,
+                  boxShadow: `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 14px 36px -24px hsl(var(${STAGE_ACCENT}) / 0.22)`,
+                }}
+              >
+                <h3 className="font-serif text-[1.2rem] text-foreground leading-tight mb-2">
+                  {title}
+                </h3>
+                <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-relaxed">
+                  {desc}
                 </p>
               </div>
             ))}
@@ -267,149 +344,225 @@ const OvulationResult = ({
         </div>
       </section>
 
-      {/* ── What to do this cycle ───────────────────────────────────── */}
-      <section className="bg-parchment-dark py-20 md:py-28">
-        <div className="container mx-auto px-6 md:px-10 max-w-2xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
-            This cycle
-          </p>
-          <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-10">
-            What to do now
-          </h2>
-          <div className="space-y-0">
-            {[
-              {
-                title: "Try on the best days",
-                desc: `Aim for ${format(bestDays[0], "d")}, ${format(bestDays[1], "d")} and ${format(bestDays[2], "d MMMM")}. Every other day is usually enough.`,
-              },
-              {
-                title: `Test on or after ${format(testDay, "d MMMM")}`,
-                desc: "Earlier tests can show a false negative. First morning urine gives the clearest result.",
-              },
-              {
-                title: "Don't overtrack every signal",
-                desc: "Symptom spotting in the two-week wait often adds anxiety without adding clarity.",
-              },
-              {
-                title: "Be kind to yourself if it doesn't happen",
-                desc: "Healthy couples can take several cycles. One month is data, not a verdict.",
-              },
-            ].map((item, i, arr) => (
+      {/* ── What to do now ─────────────────────────────────────────── */}
+      <section className="bg-parchment pb-14 md:pb-20">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
+          <div className="mb-8">
+            <Eyebrow>This cycle</Eyebrow>
+            <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight">
+              What to do <span className="italic font-normal">now</span>
+            </h2>
+          </div>
+          <div
+            className="rounded-[1.5rem] border bg-card overflow-hidden"
+            style={{ borderColor: `hsl(var(${STAGE_ACCENT}) / 0.16)` }}
+          >
+            {todoRows.map((r, i, arr) => (
               <div
-                key={item.title}
-                className={cn(
-                  "py-7",
-                  i < arr.length - 1 && "border-b border-border/30"
-                )}
+                key={r.title}
+                className={cn("p-6 sm:p-7", i < arr.length - 1 && "border-b")}
+                style={
+                  i < arr.length - 1
+                    ? { borderColor: `hsl(var(${STAGE_ACCENT}) / 0.14)` }
+                    : undefined
+                }
               >
-                <p className="font-serif text-lg text-foreground leading-snug mb-2">{item.title}</p>
-                <p className="font-sans text-[15px] font-light text-foreground/65 leading-relaxed">{item.desc}</p>
+                <p className="font-serif text-[1.1rem] text-foreground leading-snug mb-1.5">
+                  {r.title}
+                </p>
+                <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">
+                  {r.desc}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Save this cycle (TTC green brand moment) ────────────────── */}
+      {/* ── What's happening for you? ──────────────────────────────── */}
+      <section className="bg-parchment pb-14 md:pb-20">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
+          <div className="mb-8 max-w-2xl">
+            <Eyebrow>Around your expected period</Eyebrow>
+            <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
+              What's happening <span className="italic font-normal">for you?</span>
+            </h2>
+            <p className="font-sans text-[14.5px] font-light text-muted-foreground leading-relaxed">
+              Choose the next step that fits where you are now.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <button
+              type="button"
+              onClick={() => {
+                try {
+                  localStorage.removeItem(STORAGE_KEY);
+                } catch {
+                  /* noop */
+                }
+                navigate("/ovulation-calculator#calculator");
+                setTimeout(() => {
+                  document.getElementById("calculator")?.scrollIntoView({ behavior: "smooth" });
+                }, 50);
+              }}
+              className="group text-left bg-card rounded-[1.5rem] border p-7 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+              style={{
+                borderColor: `hsl(var(${STAGE_ACCENT}) / 0.18)`,
+                boxShadow: `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 14px 36px -24px hsl(var(${STAGE_ACCENT}) / 0.22)`,
+              }}
+            >
+              <h3 className="font-serif text-[1.2rem] text-foreground leading-tight mb-2">
+                My period arrived
+              </h3>
+              <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-relaxed mb-4">
+                Start a new estimate when you are ready.
+              </p>
+              <span
+                className="inline-flex items-center gap-1.5 font-sans text-[12px] font-medium tracking-wide"
+                style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+              >
+                Start a new cycle
+                <ArrowRight size={13} />
+              </span>
+            </button>
+
+            <Link
+              to="/trying-to-conceive/pregnancy-tests"
+              className="group text-left bg-card rounded-[1.5rem] border p-7 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+              style={{
+                borderColor: `hsl(var(${STAGE_ACCENT}) / 0.18)`,
+                boxShadow: `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 14px 36px -24px hsl(var(${STAGE_ACCENT}) / 0.22)`,
+              }}
+            >
+              <h3 className="font-serif text-[1.2rem] text-foreground leading-tight mb-2">
+                My period is late
+              </h3>
+              <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-relaxed mb-4">
+                A few days late can feel intense. Learn when testing may be more useful.
+              </p>
+              <span
+                className="inline-flex items-center gap-1.5 font-sans text-[12px] font-medium tracking-wide"
+                style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+              >
+                Read pregnancy tests guidance
+                <ArrowUpRight size={13} />
+              </span>
+            </Link>
+
+            <div
+              className="text-left bg-card rounded-[1.5rem] border p-7"
+              style={{
+                borderColor: `hsl(var(--lavender) / 0.4)`,
+                boxShadow: `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 14px 36px -24px hsl(var(--lavender) / 0.3)`,
+              }}
+            >
+              <h3 className="font-serif text-[1.2rem] text-foreground leading-tight mb-2">
+                I got a positive test
+              </h3>
+              <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-relaxed mb-4">
+                Move into pregnancy guidance when you are ready.
+              </p>
+              <div className="flex flex-col gap-2">
+                <Link
+                  to={`/due-date-calculator?lmp=${lmp.toISOString().slice(0, 10)}&from=ttc`}
+                  className="inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium tracking-wide"
+                  style={{ color: `hsl(var(--lavender))` }}
+                >
+                  Calculate my due date
+                  <ArrowRight size={13} />
+                </Link>
+                <Link
+                  to="/pregnancy"
+                  className="inline-flex items-center gap-1.5 font-sans text-[12px] font-light text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Or explore pregnancy guidance
+                  <ArrowUpRight size={12} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Save this cycle ────────────────────────────────────────── */}
       <section
-        className="relative py-20 md:py-28 overflow-hidden"
+        className="relative py-16 md:py-20 overflow-hidden"
         style={{
-          background:
-            "linear-gradient(135deg, hsl(var(--stage-ttc)) 0%, hsl(var(--sage-bg)) 55%, hsl(var(--stage-ttc) / 0.7) 100%)",
+          background: `linear-gradient(135deg, hsl(var(${STAGE_BG})) 0%, hsl(var(--sage-bg)) 55%, hsl(var(${STAGE_BG}) / 0.7) 100%)`,
         }}
       >
-        <div
-          className="absolute inset-x-0 top-0 h-px"
-          style={{ background: "linear-gradient(to right, transparent, hsl(var(--stage-ttc-accent) / 0.4), transparent)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-x-0 bottom-0 h-px"
-          style={{ background: "linear-gradient(to right, transparent, hsl(var(--stage-ttc-accent) / 0.4), transparent)" }}
-          aria-hidden="true"
-        />
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[620px] glow-sage opacity-90 pointer-events-none" aria-hidden="true" />
-        <div
-          className="absolute -top-32 right-[-10%] w-[520px] h-[520px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(ellipse, hsl(var(--stage-ttc-accent) / 0.18) 0%, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <BotanicalAccent className="-bottom-6 -right-10 md:-right-2" flip opacity="opacity-[0.55]" size="w-[260px] md:w-[400px]" />
-        <BotanicalAccent className="-top-4 -left-10 md:-left-2" opacity="opacity-[0.48]" size="w-[260px] md:w-[400px]" />
-        <div className="relative container mx-auto px-6 md:px-10 max-w-2xl">
-          {/* Editorial intro */}
-          <div className="text-center mb-12">
+        <div className="relative container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
+          <div className="text-center mb-10">
             <div
-              className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-card shadow-elevated mb-6"
-              style={{ borderWidth: 1, borderStyle: "solid", borderColor: "hsl(var(--stage-ttc-accent) / 0.45)" }}
+              className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-card mb-5"
+              style={{
+                borderWidth: 1,
+                borderStyle: "solid",
+                borderColor: `hsl(var(${STAGE_ACCENT}) / 0.4)`,
+              }}
             >
-              <Bookmark size={20} style={{ color: "hsl(var(--stage-ttc-accent))" }} />
+              <Bookmark size={18} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
             </div>
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Sprig tone="ttc" className="w-5 h-5 -rotate-[35deg]" />
-              <p
-                className="font-sans text-[11px] font-light tracking-[0.24em] uppercase whitespace-nowrap"
-                style={{ color: "hsl(var(--stage-ttc-accent))" }}
-              >
-                The start of a calmer monthly rhythm
-              </p>
-              <Sprig tone="ttc" className="w-5 h-5 rotate-[35deg] -scale-x-100" />
-            </div>
-            <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
-              Save this cycle
+            <Eyebrow>Keep this cycle</Eyebrow>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground leading-tight mb-4">
+              Save this <span className="italic font-normal">cycle</span>
             </h2>
-            <p className="font-sans text-[16px] font-light text-foreground/65 leading-relaxed max-w-lg mx-auto">
-              Keep your fertile window, ovulation day and expected period in one place. We'll quietly check in on the days that matter, so you don't have to hold it all in your head.
+            <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed max-w-lg mx-auto">
+              Keep your fertile window, likely ovulation day and next steps in one place so you can come back to them when you need to.
             </p>
           </div>
 
-          {/* Reminder list — TTC-toned branded surface */}
           <div
-            className="bg-card/95 backdrop-blur-sm rounded-2xl shadow-elevated mb-8"
+            className="bg-card rounded-2xl mb-7"
             style={{
               borderWidth: 1,
               borderStyle: "solid",
-              borderColor: "hsl(var(--stage-ttc-accent) / 0.28)",
+              borderColor: `hsl(var(${STAGE_ACCENT}) / 0.25)`,
             }}
           >
-            {([
-              { key: "fertile" as const, label: "When my fertile window opens", date: format(fertileStart, "d MMMM") },
-              { key: "ovulation" as const, label: "Around my likely ovulation day", date: format(ovulationDay, "d MMMM") },
-              { key: "test" as const, label: "When testing makes sense", date: format(testDay, "d MMMM") },
-              { key: "period" as const, label: "When my next period is due", date: format(nextPeriod, "d MMMM") },
-            ]).map(({ key, label, date }, i, arr) => {
+            {reminderRows.map(({ key, label, date }, i, arr) => {
               const on = reminders[key];
               const isLast = i === arr.length - 1;
               return (
                 <button
                   key={key}
+                  type="button"
                   onClick={() => toggleReminder(key)}
-                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left transition-colors first:rounded-t-2xl last:rounded-b-2xl hover:bg-[hsl(var(--stage-ttc)/0.55)]"
+                  className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left transition-colors first:rounded-t-2xl last:rounded-b-2xl hover:bg-parchment/60"
                   style={
                     isLast
                       ? undefined
-                      : { borderBottom: "1px solid hsl(var(--stage-ttc-accent) / 0.16)" }
+                      : { borderBottom: `1px solid hsl(var(${STAGE_ACCENT}) / 0.14)` }
                   }
                 >
-                  <div className="flex items-center gap-4 min-w-0">
+                  <div className="flex items-center gap-3.5 min-w-0">
                     <div
-                      className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-colors"
+                      className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors"
                       style={
                         on
-                          ? { background: "hsl(var(--stage-ttc-accent))", color: "hsl(0 0% 100%)" }
+                          ? { background: `hsl(var(${STAGE_ACCENT}))`, color: "hsl(0 0% 100%)" }
                           : { background: "hsl(var(--parchment-deeper))", color: "hsl(var(--muted-foreground))" }
                       }
                     >
-                      {on ? <Check size={14} /> : <Bell size={13} />}
+                      {on ? <Check size={13} /> : <Bell size={12} />}
                     </div>
                     <div className="min-w-0">
-                      <p className="font-sans text-[15px] font-light text-foreground leading-tight">{label}</p>
-                      <p className="font-sans text-xs font-light text-foreground/55 mt-1">{date}</p>
+                      <p className="font-sans text-[14px] font-light text-foreground leading-tight">
+                        {label}
+                      </p>
+                      <p className="font-sans text-[11.5px] font-light text-muted-foreground mt-0.5">
+                        {date}
+                      </p>
                     </div>
                   </div>
                   <span
                     className="font-sans text-[10px] font-light tracking-[0.18em] uppercase shrink-0"
-                    style={{ color: on ? "hsl(var(--stage-ttc-accent))" : "hsl(var(--foreground) / 0.35)" }}
+                    style={{
+                      color: on
+                        ? `hsl(var(${STAGE_ACCENT}))`
+                        : "hsl(var(--foreground) / 0.35)",
+                    }}
                   >
                     {on ? "On" : "Off"}
                   </span>
@@ -418,228 +571,131 @@ const OvulationResult = ({
             })}
           </div>
 
-          {/* Primary action, centred and given space */}
           <div className="flex flex-col items-center gap-5">
             <button
+              type="button"
               onClick={handleSave}
               disabled={saved}
               className={cn(
-                "inline-flex items-center gap-2.5 rounded-pill px-9 py-4 font-sans text-[15px] font-medium transition-all shadow-cta",
+                "inline-flex items-center gap-2 rounded-pill px-8 py-3.5 font-sans text-[13.5px] font-medium transition-all shadow-cta",
                 saved
                   ? "bg-sage text-sage-foreground cursor-default"
-                  : "bg-terracotta text-terracotta-foreground hover:bg-terracotta-hover hover:scale-[1.02]"
+                  : "bg-terracotta text-terracotta-foreground hover:bg-terracotta-hover hover:-translate-y-0.5",
               )}
             >
-              {saved ? <Check size={16} /> : <Bookmark size={16} />}
+              {saved ? <Check size={15} /> : <Bookmark size={15} />}
               {saved ? "Cycle saved" : "Save this cycle"}
             </button>
 
-            {saved && (
-              <p className="font-sans text-xs font-light text-sage flex items-center gap-1.5 animate-fade-in">
-                <BellRing size={12} />
-                We'll quietly check in on the dates you've turned on.
-              </p>
-            )}
-
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-2">
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
               <Link
-                to={askLink("Help me understand this cycle")}
-                className="inline-flex items-center gap-1.5 font-sans text-sm font-light text-foreground/70 hover:text-foreground transition-colors"
+                to="/ask?stage=ttc&topic=fertile-window"
+                className="inline-flex items-center gap-1.5 font-sans text-[13px] font-light text-muted-foreground hover:text-foreground transition-colors"
               >
-                <MessageCircle size={13} />
+                <MessageCircle size={12} />
                 Ask about this cycle
               </Link>
               <Link
                 to="/trying-to-conceive"
-                className="inline-flex items-center gap-1.5 font-sans text-sm font-light text-foreground/70 hover:text-foreground transition-colors"
+                className="inline-flex items-center gap-1.5 font-sans text-[13px] font-light text-muted-foreground hover:text-foreground transition-colors"
               >
                 Read TTC guidance
-                <ArrowRight size={13} />
+                <ArrowRight size={12} />
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── End-of-cycle transition ─────────────────────────────────── */}
-      <section className="relative bg-parchment-dark py-16 md:py-20 overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sage-light/40 to-transparent" aria-hidden="true" />
-        <div className="absolute -right-20 top-10 w-[360px] h-[360px] glow-sage opacity-30 rounded-full pointer-events-none" aria-hidden="true" />
-        <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
-            When your period is due
-          </p>
-          <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-4">
-            What's happening for you?
-          </h2>
-          <p className="font-sans text-[15px] font-light text-foreground/70 leading-relaxed mb-7 max-w-xl">
-            Around {format(nextPeriod, "d MMMM")}, come back and tell us where you are. We'll point you to the right next step, gently and with no assumptions.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <button
-              onClick={() => setShowTransition(true)}
-              className="group text-left bg-card/90 backdrop-blur-sm border border-sage-light/30 rounded-2xl p-6 shadow-card-brand hover:border-sage-light/70 hover:shadow-elevated transition-all"
-            >
-              <p className="font-serif text-lg text-foreground leading-snug mb-2">My period arrived</p>
-              <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed">
-                Start the next cycle when you're ready.
-              </p>
-            </button>
-            <button
-              onClick={() => setShowTransition(true)}
-              className="group text-left bg-card/90 backdrop-blur-sm border border-sage-light/30 rounded-2xl p-6 shadow-card-brand hover:border-sage-light/70 hover:shadow-elevated transition-all"
-            >
-              <p className="font-serif text-lg text-foreground leading-snug mb-2">My period is late</p>
-              <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed">
-                A few days late is common. Here's what to do.
-              </p>
-            </button>
-            <button
-              onClick={() => setShowTransition(true)}
-              className="group text-left bg-lavender-bg/60 backdrop-blur-sm border border-lavender/40 rounded-2xl p-6 shadow-card-brand hover:border-lavender hover:shadow-elevated transition-all"
-            >
-              <p className="font-serif text-lg text-foreground leading-snug mb-2">I got a positive test</p>
-              <p className="font-sans text-sm font-light text-foreground/70 leading-relaxed">
-                Move into pregnancy tracking when you're ready.
-              </p>
-            </button>
+      {/* ── Ask about this cycle ───────────────────────────────────── */}
+      <section className="bg-parchment py-14 md:py-20">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
+          <div className="mb-8">
+            <Eyebrow>AI support</Eyebrow>
+            <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
+              Ask about <span className="italic font-normal">this cycle</span>
+            </h2>
+            <p className="font-sans text-[14.5px] font-light text-muted-foreground leading-relaxed">
+              Anything that feels unclear about timing, signs or the wait, ask here.
+            </p>
           </div>
-        </div>
-      </section>
-
-      {/* ── AI support ──────────────────────────────────────────────── */}
-      <section className="relative bg-parchment py-16 md:py-20 overflow-hidden">
-        <div className="absolute -left-24 top-0 w-[380px] h-[380px] glow-sage opacity-50 rounded-full pointer-events-none" aria-hidden="true" />
-        <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
-            AI support
-          </p>
-          <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-snug mb-4">
-            Ask about this cycle
-          </h2>
-          <p className="font-sans text-[15px] font-light text-foreground/70 leading-relaxed mb-7">
-            Anything that feels unclear about timing, signs or the wait, ask here.
-          </p>
 
           <div className="space-y-3 mb-6">
-            {suggestedPrompts.map((prompt) => (
+            {askPrompts.map(({ q, topic }) => (
               <Link
-                key={prompt}
-                to={askLink(prompt)}
-                className="group flex items-center gap-3 w-full text-left py-4 px-5 rounded-xl border border-sage-light/30 bg-card/80 hover:border-sage/50 hover:bg-card shadow-card-brand transition-all"
+                key={q}
+                to={askLink(q, topic)}
+                className="group flex items-center gap-3 w-full text-left py-4 px-5 rounded-xl bg-card border transition-all hover:-translate-y-0.5"
+                style={{ borderColor: `hsl(var(${STAGE_ACCENT}) / 0.18)` }}
               >
-                <MessageCircle size={13} className="text-sage shrink-0" />
-                <span className="font-sans text-sm font-light text-foreground/85 group-hover:text-foreground transition-colors leading-relaxed">
-                  {prompt}
+                <Sparkles
+                  size={13}
+                  className="shrink-0"
+                  style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                />
+                <span className="font-sans text-[14px] font-light text-foreground/85 group-hover:text-foreground transition-colors leading-relaxed">
+                  {q}
                 </span>
               </Link>
             ))}
           </div>
 
           <Link
-            to={askLink("I have a question about my cycle")}
-            className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
+            to="/ask?stage=ttc&topic=fertile-window"
+            className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all"
           >
-            <ArrowRight size={15} />
+            <MessageCircle size={14} />
             Ask now
           </Link>
         </div>
       </section>
 
-      {/* ── Continue your journey ───────────────────────────────────── */}
-      <section className="relative bg-parchment-dark py-16 md:py-24 overflow-hidden">
-        <BotanicalAccent className="-bottom-4 -right-12 md:-right-2" flip opacity="opacity-[0.42]" size="w-[240px] md:w-[340px]" />
-        <BotanicalAccent className="top-2 -left-16 md:-left-4" opacity="opacity-[0.30]" size="w-[200px] md:w-[280px]" />
-        <div className="relative container mx-auto px-6 md:px-10 max-w-3xl">
-          <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage mb-5">
-            Continue your journey
-          </p>
-          <div className="space-y-3">
-            {[
-              { label: "Understanding ovulation", to: "/trying-to-conceive/understanding-your-cycle" },
-              { label: "Waiting and testing", to: "/trying-to-conceive/waiting-and-testing" },
-              { label: "Timing and tracking", to: "/trying-to-conceive/timing-and-tracking" },
-            ].map((p) => (
+      {/* ── Related guidance ───────────────────────────────────────── */}
+      <section className="bg-parchment pb-16 md:pb-24">
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
+          <div className="mb-8">
+            <Eyebrow>Keep exploring</Eyebrow>
+            <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight">
+              Related <span className="italic font-normal">guidance</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {relatedGuidance.map(({ label, desc, href, icon: Icon }) => (
               <Link
-                key={p.to}
-                to={p.to}
-                className="group flex items-center justify-between py-5 px-6 rounded-xl border border-sage-light/30 bg-card/80 hover:border-sage/50 hover:bg-card shadow-card-brand transition-all"
+                key={label}
+                to={href}
+                className="group bg-card rounded-[1.5rem] border p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                style={{
+                  borderColor: `hsl(var(${STAGE_ACCENT}) / 0.16)`,
+                  boxShadow: `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 14px 36px -24px hsl(var(${STAGE_ACCENT}) / 0.22)`,
+                }}
               >
-                <span className="font-sans text-[15px] font-light text-foreground/85 group-hover:text-foreground transition-colors">
-                  {p.label}
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
+                  style={{
+                    background: `linear-gradient(135deg, hsl(var(${STAGE_BG})) 0%, hsl(var(${STAGE_BG}) / 0.55) 100%)`,
+                  }}
+                >
+                  <Icon size={17} strokeWidth={1.5} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
+                </div>
+                <h3 className="font-serif text-[1.15rem] text-foreground leading-tight mb-1.5">
+                  {label}
+                </h3>
+                <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mb-4">
+                  {desc}
+                </p>
+                <span
+                  className="inline-flex items-center gap-1.5 font-sans text-[12px] font-medium tracking-wide"
+                  style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                >
+                  Read more
+                  <ArrowUpRight size={13} />
                 </span>
-                <ArrowRight size={14} className="text-sage-muted group-hover:text-sage transition-colors" />
               </Link>
             ))}
           </div>
         </div>
       </section>
-
-      {/* ── Transition modal ────────────────────────────────────────── */}
-      {showTransition && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-foreground/30 backdrop-blur-sm"
-          onClick={() => setShowTransition(false)}
-        >
-          <div
-            className="bg-card rounded-3xl shadow-soft max-w-lg w-full p-8 md:p-10 relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setShowTransition(false)}
-              className="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center text-muted-foreground hover:bg-foreground/5 transition-colors"
-              aria-label="Close"
-            >
-              <X size={16} />
-            </button>
-
-            <p className="font-sans text-[11px] font-light tracking-[0.2em] uppercase text-sage-muted mb-3">
-              Where are you now?
-            </p>
-            <h3 className="font-serif text-2xl text-foreground leading-snug mb-4">
-              Tell us what happened this cycle
-            </h3>
-            <p className="font-sans text-sm font-light text-foreground/70 leading-relaxed mb-6">
-              No assumptions. Choose what's true for you and we'll take you to the right place — calmly.
-            </p>
-
-            <div className="space-y-2.5">
-              <button
-                onClick={() => {
-                  // Reset for next cycle: clear save, send back to inputs
-                  localStorage.removeItem(STORAGE_KEY);
-                  navigate("/trying-to-conceive#calculator");
-                }}
-                className="w-full text-left px-5 py-4 rounded-xl border border-border/50 bg-parchment/60 hover:border-sage-light/50 transition-all"
-              >
-                <p className="font-sans text-sm font-medium text-foreground mb-0.5">My period arrived</p>
-                <p className="font-sans text-xs font-light text-muted-foreground">Start a fresh cycle calculation.</p>
-              </button>
-              <Link
-                to={askLink("My period is late — what should I do?")}
-                className="block w-full text-left px-5 py-4 rounded-xl border border-border/50 bg-parchment/60 hover:border-sage-light/50 transition-all"
-              >
-                <p className="font-sans text-sm font-medium text-foreground mb-0.5">My period is late</p>
-                <p className="font-sans text-xs font-light text-muted-foreground">Get gentle guidance on what to do next.</p>
-              </Link>
-              <button
-                onClick={() => {
-                  // Move to due date flow, prefilling LMP
-                  const lmpStr = lmp.toISOString().slice(0, 10);
-                  navigate(`/due-date-calculator?lmp=${lmpStr}&from=ttc`);
-                }}
-                className="w-full text-left px-5 py-4 rounded-xl border border-lavender/40 bg-lavender-bg/30 hover:border-lavender transition-all"
-              >
-                <p className="font-sans text-sm font-medium text-foreground mb-0.5">I got a positive test</p>
-                <p className="font-sans text-xs font-light text-foreground/70">
-                  Move into the pregnancy journey — we'll calculate your due date next.
-                </p>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

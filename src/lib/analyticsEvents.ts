@@ -40,6 +40,7 @@ export const EVENTS = {
   // Wave 3 — TTC journey (common envelope only; never carry cycle-sensitive props)
   TTC_JOURNEY_SAVE_STARTED: "ttc_journey_save_started",
   TTC_JOURNEY_SETUP_COMPLETED: "ttc_journey_setup_completed",
+  TTC_JOURNEY_DASHBOARD_VIEWED: "ttc_journey_dashboard_viewed",
 } as const;
 
 export type ClickLocation = "home_hero" | "navbar";

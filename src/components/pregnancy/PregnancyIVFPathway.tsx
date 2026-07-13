@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Sparkles, Compass } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 
 const PregnancyIVFPathway = () => {
   return (
@@ -65,18 +65,6 @@ const PregnancyIVFPathway = () => {
               <Sparkles size={13} strokeWidth={1.9} />
               Go to IVF hub
               <ArrowUpRight size={12} />
-            </Link>
-            <Link
-              to="/ivf-timeline"
-              className="inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-2.5 font-sans text-[13px] font-medium border transition-all hover:-translate-y-[1px]"
-              style={{
-                borderColor: "hsl(var(--stage-ivf-accent) / 0.35)",
-                backgroundColor: "hsl(var(--card))",
-                color: "hsl(var(--stage-ivf-accent))",
-              }}
-            >
-              <Compass size={13} strokeWidth={1.9} />
-              View IVF timeline
             </Link>
           </div>
         </div>

@@ -379,8 +379,24 @@ const MyTTCJourney = () => {
           </div>
         </section>
       </main>
+
+      {userId && journey && (
+        <TTCLogEntryPanel
+          open={panelOpen}
+          onOpenChange={(o) => {
+            setPanelOpen(o);
+            if (!o) setEditing(null);
+          }}
+          userId={userId}
+          journeyId={journey.id}
+          initialDate={panelDate}
+          editing={editing}
+          onSaved={refetchLogs}
+        />
+      )}
     </div>
   );
 };
+
 
 export default MyTTCJourney;

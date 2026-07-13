@@ -19,6 +19,11 @@ import PreparingFinalCTA from "@/components/preparing/PreparingFinalCTA";
 const PreparingForBaby = () => {
   return (
     <div className="min-h-screen font-sans">
+      <SeoHead
+        title="Preparing for Baby | Birth, Home and Newborn Planning"
+        description="Practical guidance for preparing for birth, setting up your home, packing a hospital bag and getting ready for your baby's arrival."
+        canonical="https://thestartofyou.com/preparing-for-baby"
+      />
       <Navbar />
       <main>
         <PreparingHero />

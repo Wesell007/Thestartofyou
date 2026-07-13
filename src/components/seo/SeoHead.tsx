@@ -9,6 +9,7 @@ interface SeoHeadProps {
   ogType?: string;
   ogUrl?: string;
   jsonLd?: Record<string, unknown>;
+  noindex?: boolean;
 }
 
 /**

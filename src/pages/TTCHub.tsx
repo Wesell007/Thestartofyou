@@ -951,7 +951,7 @@ const TopicLibrary = () => {
             };
             const clusters: { label: string; slugs: TTCTopicSlug[] }[] = [
               { label: "Timing & testing", slugs: ["cycle-tracking", "two-week-wait", "pregnancy-tests"] },
-              { label: "Fertility & health", slugs: ["age-and-fertility", "male-fertility", "ivf-and-treatment", "conditions"] },
+              { label: "Fertility & health", slugs: ["age-and-fertility", "male-fertility", "conditions"] },
             ];
             const subsBySlug = new Map(subs.map((s) => [s.slug, s]));
 

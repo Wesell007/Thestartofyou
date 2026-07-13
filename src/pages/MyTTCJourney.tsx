@@ -273,13 +273,6 @@ const MyTTCJourney = () => {
           </div>
         </section>
 
-        {/* Focus */}
-        <section className="mb-10 sm:mb-12">
-          <TTCJourneyFocusCard stage={derivedStage} />
-        </section>
-
-
-
         {/* Gentle insights */}
         <section className="mb-10 sm:mb-12">
           <TTCJourneyInsights
@@ -290,7 +283,10 @@ const MyTTCJourney = () => {
         </section>
 
         {/* Focus */}
-        {/* (moved above — kept intentionally minimal here) */}
+        <section className="mb-10 sm:mb-12">
+          <TTCJourneyFocusCard stage={derivedStage} />
+        </section>
+
 
         {/* Guidance */}
         <section className="mb-10 sm:mb-12">

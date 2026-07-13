@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -14,17 +15,29 @@ import {
 } from "@/lib/ttcDerived";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
+import { getRecentTTCLogs, type TTCLog } from "@/lib/ttcLogs";
 import TTCJourneySummary from "@/components/ttc/journey/TTCJourneySummary";
 import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
 import TTCJourneyFocusCard from "@/components/ttc/journey/TTCJourneyFocusCard";
 import TTCJourneyGuidance from "@/components/ttc/journey/TTCJourneyGuidance";
+import TTCJourneyCalendar from "@/components/ttc/journey/TTCJourneyCalendar";
+import TTCLogEntryPanel from "@/components/ttc/journey/TTCLogEntryPanel";
+import TTCLogList from "@/components/ttc/journey/TTCLogList";
 
 type Status = "loading" | "empty" | "pregnancy_active" | "ready";
+
+const todayIso = () => format(new Date(), "yyyy-MM-dd");
 
 const MyTTCJourney = () => {
   const [status, setStatus] = useState<Status>("loading");
   const [journey, setJourney] = useState<ActiveTTCJourney | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [logs, setLogs] = useState<TTCLog[]>([]);
+  const [panelOpen, setPanelOpen] = useState(false);
+  const [panelDate, setPanelDate] = useState<string>(todayIso());
+  const [editing, setEditing] = useState<TTCLog | null>(null);
   const viewedRef = useRef(false);
+
 
   useEffect(() => {
     let cancelled = false;

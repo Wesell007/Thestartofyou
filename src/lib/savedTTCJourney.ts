@@ -38,6 +38,7 @@ export type TTCFormValues = {
 };
 
 export type ActiveTTCJourney = {
+  id: string;
   last_period_date: string | null;
   cycle_length_days: number | null;
   period_length_days: number | null;
@@ -55,6 +56,7 @@ export type ActiveTTCJourney = {
   possible_test_date: string | null;
   started_at: string | null;
 };
+
 
 export const stashPendingTTCJourney = (input: {
   lmp: Date;
@@ -158,9 +160,10 @@ export const getActiveTTCJourney = async (
   const { data: row } = await supabase
     .from("ttc_journeys")
     .select(
-      "last_period_date, cycle_length_days, period_length_days, cycle_regularity, actively_trying, uses_ovulation_tests, tracks_symptoms, support_status, ivf_consideration, stage, likely_ovulation_date, fertile_window_start, fertile_window_end, expected_period_date, possible_test_date, started_at",
+      "id, last_period_date, cycle_length_days, period_length_days, cycle_regularity, actively_trying, uses_ovulation_tests, tracks_symptoms, support_status, ivf_consideration, stage, likely_ovulation_date, fertile_window_start, fertile_window_end, expected_period_date, possible_test_date, started_at",
     )
     .eq("user_id", userId)
     .maybeSingle();
   return (row as ActiveTTCJourney) ?? null;
+
 };

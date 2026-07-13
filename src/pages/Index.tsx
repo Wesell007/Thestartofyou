@@ -17,6 +17,11 @@ const Index = () => {
   }, []);
   return (
     <div className="min-h-screen font-sans">
+      <SeoHead
+        title="The Start of You | Calm Guidance for Pregnancy and Parenthood"
+        description="A calm companion for trying to conceive, pregnancy, baby's first year, toddlerhood and family life, with practical guidance and gentle support."
+        canonical="https://thestartofyou.com/"
+      />
       <Navbar />
       <main>
         <NewHeroSection />

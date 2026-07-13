@@ -359,6 +359,50 @@ export type Database = {
         }
         Relationships: []
       }
+      ttc_logs: {
+        Row: {
+          created_at: string
+          id: string
+          journey_id: string
+          log_date: string
+          log_type: string
+          notes: string | null
+          updated_at: string
+          user_id: string
+          value: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          journey_id: string
+          log_date: string
+          log_type: string
+          notes?: string | null
+          updated_at?: string
+          user_id: string
+          value?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          journey_id?: string
+          log_date?: string
+          log_type?: string
+          notes?: string | null
+          updated_at?: string
+          user_id?: string
+          value?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ttc_logs_journey_id_fkey"
+            columns: ["journey_id"]
+            isOneToOne: false
+            referencedRelation: "ttc_journeys"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       week_photos: {
         Row: {
           caption: string | null

@@ -494,9 +494,9 @@ const OvulationResult = ({
                 } catch {
                   /* noop */
                 }
-                navigate("/ovulation-calculator#calculator");
+                navigate(toolPath);
                 setTimeout(() => {
-                  document.getElementById("calculator")?.scrollIntoView({ behavior: "smooth" });
+                  window.scrollTo({ top: 0, behavior: "smooth" });
                 }, 50);
               }}
               className="group text-left bg-card rounded-[1.5rem] border p-7 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"

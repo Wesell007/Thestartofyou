@@ -31,6 +31,8 @@ import { cn } from "@/lib/utils";
 import { ttcTopics, type TTCTopicSlug } from "@/data/ttcTopicData";
 import sprigImg from "@/assets/topic-mini-sprig.png";
 import heroImg from "@/assets/ttc-hero-lifestyle.jpg";
+import TTCCommonQuestions from "@/components/ttc/TTCCommonQuestions";
+import TTCIVFPathway from "@/components/ttc/TTCIVFPathway";
 
 /* ----------------------------------------------------------- */
 /* SHARED                                                      */
@@ -949,7 +951,7 @@ const TopicLibrary = () => {
             };
             const clusters: { label: string; slugs: TTCTopicSlug[] }[] = [
               { label: "Timing & testing", slugs: ["cycle-tracking", "two-week-wait", "pregnancy-tests"] },
-              { label: "Fertility & health", slugs: ["age-and-fertility", "male-fertility", "ivf-and-treatment", "conditions"] },
+              { label: "Fertility & health", slugs: ["age-and-fertility", "male-fertility", "conditions"] },
             ];
             const subsBySlug = new Map(subs.map((s) => [s.slug, s]));
 
@@ -1094,7 +1096,9 @@ const TTCHub = () => {
         <Hero />
         <WhatThisCovers />
         <AISupport />
+        <TTCCommonQuestions />
         <JourneyTimeline />
+        <TTCIVFPathway />
         <TopicLibrary />
         <Reassurance />
       </main>

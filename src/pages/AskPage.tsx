@@ -145,6 +145,45 @@ const TODDLER_TOPIC_SUGGESTIONS: Record<string, string[]> = {
   ],
 };
 
+const TTC_TOPIC_SUGGESTIONS: Record<string, string[]> = {
+  "fertile-window": [
+    "How do I know when my fertile window is?",
+    "What signs suggest ovulation is close?",
+    "How many days before ovulation should we try?",
+    "Can my fertile window change each cycle?",
+  ],
+  "cycle-tracking": [
+    "What is the simplest way to track my cycle?",
+    "How do I track ovulation without overthinking it?",
+    "Which cycle signs are most useful when trying to conceive?",
+    "When should I stop tracking for a while?",
+  ],
+  "pregnancy-tests": [
+    "How early can I take a pregnancy test?",
+    "What does a faint line mean?",
+    "Can testing too early give a negative result?",
+    "When should I test after ovulation?",
+  ],
+  "two-week-wait": [
+    "How do I stop overthinking during the two-week wait?",
+    "Are symptoms during the two-week wait reliable?",
+    "When is the earliest I should test?",
+    "How can I look after myself while waiting?",
+  ],
+  "when-to-ask-help": [
+    "When should we speak to a GP about fertility?",
+    "What should I mention at a fertility appointment?",
+    "What if my cycles are irregular?",
+    "What questions should we ask before fertility tests?",
+  ],
+  "ivf-next-step": [
+    "How do we know if IVF might be the next step?",
+    "What happens before starting IVF?",
+    "How can we prepare emotionally for fertility treatment?",
+    "Where should I start if IVF feels overwhelming?",
+  ],
+};
+
 
 const AskPage = () => {
   const [searchParams] = useSearchParams();
@@ -289,6 +328,7 @@ const AskPage = () => {
       ? (((stageKey === "first-year" || stageKey === "recovery") && FIRST_YEAR_TOPIC_SUGGESTIONS[topic])
           || (stageKey === "family" && FAMILY_TOPIC_SUGGESTIONS[topic])
           || (stageKey === "toddler" && TODDLER_TOPIC_SUGGESTIONS[topic])
+          || (stageKey === "ttc" && TTC_TOPIC_SUGGESTIONS[topic])
           || null)
       : null;
     return (

@@ -1,99 +1,75 @@
+## Phase 9.2f — TTC Hub UX Polish (pre-SEO)
 
-## Phase 9.2e — Family + Toddler Common Questions polish
+TTC-only polish pass. No SEO, routes, sitemap, robots, article copy, calculator logic, or other hub files touched.
 
-Roll out the First Year Common Questions accordion pattern to Family and Toddler, and extend AskPage topic suggestions to `stage=family` and `stage=toddler`.
+### Files to inspect (read-only)
+- `src/pages/TTC.tsx` — section ordering
+- `src/components/ttc/TTCCommonQuestions.tsx` — current version (replaced)
+- `src/components/ttc/TTCPathways.tsx`, `TTCFocus.tsx`, `TTCStages.tsx`, `TTCWhatThisCovers.tsx` — check where IVF currently surfaces
+- `src/data/ttcTopicData.ts` — confirm IVF topic entry
+- `src/pages/AskPage.tsx` — extend suggestion map
+- Reference only: `FamilyCommonQuestions.tsx`, `firstyear/new/FYCommonQuestions.tsx` for accordion pattern
 
-### Files to edit (only these)
-- `src/components/family/FamilyCommonQuestions.tsx` — replace with FY-pattern accordion in Family palette
-- `src/components/toddler/ToddlerCommonQuestions.tsx` — replace with FY-pattern accordion in Toddler palette
-- `src/pages/AskPage.tsx` — add Family + Toddler topic suggestion maps and broaden the gate
+### Files to edit
 
-No changes to article data, copy, SEO, routes, sitemap, robots. No Pregnancy/TTC/IVF/First Year edits (First Year read as reference only). No image generation.
+**1. `src/components/ttc/TTCCommonQuestions.tsx`** — replace
+Rewrite using the FY/Family accordion pattern in TTC green (`--stage-ttc*`). Six items:
+1. Fertile window → `/trying-to-conceive/ovulation` · `topic=fertile-window`
+2. Cycle tracking → `/trying-to-conceive/cycle-tracking` · `topic=cycle-tracking`
+3. Pregnancy tests → `/trying-to-conceive/pregnancy-tests` · `topic=pregnancy-tests`
+4. Two-week wait → `/trying-to-conceive/two-week-wait` · `topic=two-week-wait`
+5. When to ask for help → `/trying-to-conceive/fertility` · `topic=when-to-ask-help`
+6. IVF next step → `/ivf` · `topic=ivf-next-step`
 
-### 1. FamilyCommonQuestions.tsx
+Each item: question, short answer (exact copy from brief), Read more link, Ask more link `/ask?stage=ttc&topic=...`. Heading "Questions while trying to conceive"; subheading as specified. Careful wording — no medical thresholds.
 
-Rewrite using the FY structure (inline accordion, chip label, short answer, Read more pill, Ask more pill) but single-track Family palette (`--stage-family`, `--stage-family-soft`, `--stage-family-accent`, `--stage-family-deep`). Keep heading `What parents quietly wonder`. Drop the per-row "Baby"/"You" chip (single track), keep the coloured accent bar.
+**2. New `src/components/ttc/TTCIVFPathway.tsx`**
+Standout full-width feature panel (wider than topic cards, stronger border, TTC green palette, calm tone):
+- Eyebrow: CONNECTED HUB
+- Title: Explore IVF guidance
+- Description: as specified
+- Primary CTA button → `/ivf` ("Go to IVF hub")
+- Secondary text link → `/ivf-timeline` ("View IVF timeline")
+- Subtle arrow/pathway visual, no alarming tone
 
-Six items (question, short answer, readMoreHref, askHref) exactly as briefed:
-
-1. Another baby → `/family/growing-families/preparing-for-another-baby` · `/ask?stage=family&topic=another-baby`
-2. New sibling → `/family/growing-families/helping-your-child-adjust-to-a-new-sibling` · `/ask?stage=family&topic=new-sibling`
-3. Routines → `/family/family-basics/building-family-routines` · `/ask?stage=family&topic=routines`
-4. Boundaries → `/family/relationships/setting-boundaries-with-grandparents` · `/ask?stage=family&topic=boundaries`
-5. Money stress → `/family/family-basics/managing-childcare-costs-without-feeling-overwhelmed` · `/ask?stage=family&topic=money-stress`
-6. Overwhelm → `/family/relationships/sharing-the-mental-load-in-family-life` · `/ask?stage=family&topic=family-overwhelm`
-
-Read more labels: short "Read: <topic>" style matching FY.
-
-### 2. ToddlerCommonQuestions.tsx
-
-Same rewrite in Toddler palette (`--stage-toddler*`). Heading stays `What parents quietly wonder`.
-
-Six items as briefed:
-
-1. Tantrums → `/toddler/behaviour-emotions/understanding-toddler-tantrums` · `/ask?stage=toddler&topic=tantrums`
-2. Sleep → `/toddler/sleep/toddler-sleep-rhythms` · `/ask?stage=toddler&topic=sleep`
-3. Speech → `/toddler/speech-language/when-to-ask-about-speech-delay` · `/ask?stage=toddler&topic=speech`
-4. Picky eating → `/toddler/food-feeding/picky-eating-in-toddlers` · `/ask?stage=toddler&topic=picky-eating`
-5. Potty training → `/toddler/potty-learning/signs-your-child-may-be-ready-for-potty-training` · `/ask?stage=toddler&topic=potty-training`
-6. Patience → `/toddler/behaviour-emotions/helping-your-toddler-with-big-feelings` · `/ask?stage=toddler&topic=parent-patience`
-
-### 3. AskPage.tsx
-
-Both `family` and `toddler` are already registered in `aiStageStyles` — no changes to `aiStageStyles.ts`.
-
-Add two new maps next to `FIRST_YEAR_TOPIC_SUGGESTIONS`:
-
-```ts
-const FAMILY_TOPIC_SUGGESTIONS: Record<string, string[]> = {
-  "another-baby":     [...4 chips as briefed],
-  "new-sibling":      [...],
-  "routines":         [...],
-  "boundaries":       [...],
-  "money-stress":     [...],
-  "family-overwhelm": [...],
-};
-
-const TODDLER_TOPIC_SUGGESTIONS: Record<string, string[]> = {
-  "tantrums":         [...],
-  "sleep":            [...],
-  "speech":           [...],
-  "picky-eating":     [...],
-  "potty-training":   [...],
-  "parent-patience":  [...],
-};
+**3. `src/pages/TTC.tsx`** — reorder + insert
+New order:
+```text
+Hero
+WhatThisCovers
+AISupport
+CommonQuestions   ← new position (was after WhatMakesDifferent)
+Stages
+Focus
+WhatMakesDifferent
+IVFPathway        ← NEW, between Focus/Different and library
+EmotionalReminder
+Reflection
+Capture
+Pathways
+FinalCTA
 ```
+Import `TTCIVFPathway`. Keep all existing sections mounted.
 
-Chips content verbatim from the brief (four per topic).
+**4. `src/components/ttc/TTCPathways.tsx`** — de-emphasise IVF
+If the current pathways/library grid surfaces IVF as a small card, drop that single card (or swap it for a non-IVF pathway) so IVF only appears in the standout section. No other content changes.
 
-Update the `topicSuggestions` selector to pick the right map by stage:
-
+**5. `src/pages/AskPage.tsx`** — add TTC suggestions
+`ttc` already exists in `aiStageStyles`. Add `TTC_TOPIC_SUGGESTIONS` map with the six topic keys and 4 chips each (exact strings from brief). Extend the `topicSuggestions` selector:
 ```ts
-const topicSuggestions = topic
-  ? ((stageKey === "first-year" || stageKey === "recovery") && FIRST_YEAR_TOPIC_SUGGESTIONS[topic])
-    || (stageKey === "family" && FAMILY_TOPIC_SUGGESTIONS[topic])
-    || (stageKey === "toddler" && TODDLER_TOPIC_SUGGESTIONS[topic])
-    || null
-  : null;
+|| (stageKey === "ttc" && TTC_TOPIC_SUGGESTIONS[topic])
 ```
-
-Everything else in the welcome state already keys off `sc` (from `getAiStageStyle(stageKey)`) and `hasStageContext`, so Family/Toddler get the correct palette, hide generic chips, and show topic chips automatically — no other AskPage changes.
+No changes to first-year/recovery/family/toddler/generic behaviour.
 
 ### Behaviour after change
-
-- `/family` — six premium accordion questions, Family palette, correct Read more + Ask more.
-- `/toddler` — same, Toddler palette.
-- `/ask?stage=family&topic=<k>` — Family tint, blank input, no generic chips, Family topic chips.
-- `/ask?stage=toddler&topic=<k>` — Toddler tint, blank input, no generic chips, Toddler topic chips.
-- `/ask` — unchanged (generic chips).
-- `/ask?stage=first-year&topic=…`, `/ask?stage=recovery&topic=…` — unchanged.
-- `/ask?stage=toddler` (no topic) — unchanged (blank, no chips).
-- Pregnancy / TTC / IVF / First Year hubs — untouched.
+- `/trying-to-conceive`: IVF surfaces only as a clear standout pathway section; common questions accordion present with TTC green styling.
+- `/ask?stage=ttc&topic=<key>` for the 6 keys: TTC tint, blank input, generic chips hidden, TTC chips shown, no auto-submit.
+- `/ask` and other stage/topic URLs: unchanged.
 
 ### Verification
-
 - `bunx tsgo --noEmit`
-- Playwright screenshots at 1280×1800 of `/family`, `/toddler`, all 12 topic Ask URLs, plus regression on `/ask`, `/ask?stage=first-year&topic=sleep`, `/ask?stage=recovery&topic=recovery-bleeding`, `/first-year`, `/pregnancy`, `/trying-to-conceive`, `/ivf`.
-- Confirm each accordion opens, each Read more + Ask more URL matches, no mobile overflow.
+- Playwright screenshots: `/trying-to-conceive` at 1280×1800 and 375×812
+- Playwright: 6 TTC Ask URLs render TTC styling with correct chips
+- Regression: `/ask`, `/ask?stage=first-year&topic=sleep`, `/ask?stage=recovery&topic=recovery-bleeding`, `/ask?stage=family&topic=another-baby`, `/ask?stage=toddler&topic=tantrums`, `/pregnancy`, `/first-year`, `/toddler`, `/family`, `/ivf`, `/articles/complete-guide-morning-sickness`
 
-After this ships, safe to resume Phase 9.3 TTC SEO.
+After ship: safe to proceed to Phase 9.3 TTC SEO.

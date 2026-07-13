@@ -14,7 +14,7 @@ import {
   Target,
   TestTube2,
 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import OvulationResultCalendar from "@/components/tools/OvulationResultCalendar";
@@ -59,7 +59,14 @@ const OvulationResult = ({
   testDay,
 }: OvulationResultProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const toolPath = location.pathname.includes("/trying-to-conceive/")
+    ? "/trying-to-conceive/ovulation-calculator"
+    : "/ovulation-calculator";
   const [saved, setSaved] = useState(false);
+  const [adjustOpen, setAdjustOpen] = useState(false);
+  const [adjustLmp, setAdjustLmp] = useState<string>(lmp.toISOString().slice(0, 10));
+  const [adjustCycle, setAdjustCycle] = useState<number>(cycleLength);
   const [reminders, setReminders] = useState<Record<ReminderKey, boolean>>({
     fertile: true,
     ovulation: true,
@@ -222,10 +229,10 @@ const OvulationResult = ({
   ];
 
   const reminderRows: { key: ReminderKey; label: string; date: string }[] = [
-    { key: "fertile", label: "When my fertile window opens", date: format(fertileStart, "d MMMM") },
-    { key: "ovulation", label: "Around my likely ovulation day", date: format(ovulationDay, "d MMMM") },
-    { key: "test", label: "When testing makes sense", date: format(testDay, "d MMMM") },
-    { key: "period", label: "When my next period is due", date: format(nextPeriod, "d MMMM") },
+    { key: "fertile", label: "Keep a note for my fertile window", date: format(fertileStart, "d MMMM") },
+    { key: "ovulation", label: "Keep a note for likely ovulation", date: format(ovulationDay, "d MMMM") },
+    { key: "test", label: "Keep a note for possible test day", date: format(testDay, "d MMMM") },
+    { key: "period", label: "Keep a note for expected next period", date: format(nextPeriod, "d MMMM") },
   ];
 
   return (
@@ -273,19 +280,105 @@ const OvulationResult = ({
                 >
                   {label}
                 </p>
-                <p className="font-serif text-[1.1rem] sm:text-[1.2rem] text-foreground leading-snug mb-1.5">
+                <p className="font-serif text-[1.35rem] sm:text-[1.5rem] text-foreground leading-snug mb-1.5">
                   {value}
                 </p>
-                <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-relaxed">
+                <p className="font-sans text-[13px] text-muted-foreground leading-relaxed">
                   {meta}
                 </p>
               </div>
             ))}
           </div>
 
-          <p className="font-serif italic text-[14.5px] text-foreground/60 leading-relaxed mt-8 max-w-2xl">
-            These dates are estimates, not guarantees. Cycles can vary from month to month.
+          <p className="font-serif italic text-[14.5px] text-muted-foreground leading-relaxed mt-8 max-w-2xl">
+            These dates are estimates, not a promise. Cycles can vary from month to month.
           </p>
+
+          {/* ── Adjust your dates panel ─────────────────────────── */}
+          <div
+            className="mt-10 rounded-[1.25rem] border bg-card p-6 sm:p-7"
+            style={{
+              borderColor: `hsl(var(${STAGE_ACCENT}) / 0.2)`,
+              boxShadow: `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 12px 30px -22px hsl(var(${STAGE_ACCENT}) / 0.24)`,
+            }}
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="max-w-md">
+                <p
+                  className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase mb-1.5"
+                  style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                >
+                  Need to adjust your dates?
+                </p>
+                <p className="font-sans text-[14px] text-muted-foreground leading-relaxed">
+                  Change your last period date or usual cycle length and recalculate your estimate.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setAdjustOpen((v) => !v)}
+                className="inline-flex items-center justify-center gap-2 rounded-pill border px-5 py-2.5 font-sans text-[13px] font-medium transition-all hover:-translate-y-0.5"
+                style={{
+                  borderColor: `hsl(var(${STAGE_ACCENT}) / 0.4)`,
+                  color: `hsl(var(${STAGE_ACCENT}))`,
+                  background: `hsl(var(${STAGE_BG}) / 0.45)`,
+                }}
+              >
+                {adjustOpen ? "Close" : "Adjust my dates"}
+              </button>
+            </div>
+
+            {adjustOpen && (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (!adjustLmp) return;
+                  const c = Math.max(20, Math.min(45, Number(adjustCycle) || 28));
+                  navigate(`${toolPath}?lmp=${adjustLmp}&cycle=${c}`);
+                  setAdjustOpen(false);
+                  setTimeout(() => {
+                    document.getElementById("results")?.scrollIntoView({ behavior: "smooth" });
+                  }, 50);
+                }}
+                className="mt-6 grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-4 items-end"
+              >
+                <label className="block">
+                  <span className="font-sans text-[11.5px] font-medium tracking-[0.06em] uppercase text-foreground/75 mb-1.5 block">
+                    First day of last period
+                  </span>
+                  <input
+                    type="date"
+                    value={adjustLmp}
+                    max={format(new Date(), "yyyy-MM-dd")}
+                    onChange={(e) => setAdjustLmp(e.target.value)}
+                    className="w-full rounded-xl border bg-parchment/60 px-3.5 py-2.5 font-sans text-[14px] text-foreground focus:outline-none focus:ring-2"
+                    style={{ borderColor: `hsl(var(${STAGE_ACCENT}) / 0.25)` }}
+                  />
+                </label>
+                <label className="block">
+                  <span className="font-sans text-[11.5px] font-medium tracking-[0.06em] uppercase text-foreground/75 mb-1.5 block">
+                    Cycle length (days)
+                  </span>
+                  <input
+                    type="number"
+                    min={20}
+                    max={45}
+                    value={adjustCycle}
+                    onChange={(e) => setAdjustCycle(Number(e.target.value))}
+                    className="w-full rounded-xl border bg-parchment/60 px-3.5 py-2.5 font-sans text-[14px] text-foreground focus:outline-none focus:ring-2"
+                    style={{ borderColor: `hsl(var(${STAGE_ACCENT}) / 0.25)` }}
+                  />
+                </label>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover hover:-translate-y-0.5 transition-all"
+                >
+                  <RefreshCw size={14} />
+                  Recalculate
+                </button>
+              </form>
+            )}
+          </div>
         </div>
       </section>
 
@@ -401,9 +494,9 @@ const OvulationResult = ({
                 } catch {
                   /* noop */
                 }
-                navigate("/ovulation-calculator#calculator");
+                navigate(toolPath);
                 setTimeout(() => {
-                  document.getElementById("calculator")?.scrollIntoView({ behavior: "smooth" });
+                  window.scrollTo({ top: 0, behavior: "smooth" });
                 }, 50);
               }}
               className="group text-left bg-card rounded-[1.5rem] border p-7 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
@@ -504,12 +597,15 @@ const OvulationResult = ({
             >
               <Bookmark size={18} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
             </div>
-            <Eyebrow>Keep this cycle</Eyebrow>
+            <Eyebrow>Save to your TTC journey</Eyebrow>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground leading-tight mb-4">
               Save this <span className="italic font-normal">cycle</span>
             </h2>
-            <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed max-w-lg mx-auto">
-              Keep your fertile window, likely ovulation day and next steps in one place so you can come back to them when you need to.
+            <p className="font-sans text-[15px] text-foreground/85 leading-relaxed max-w-lg mx-auto mb-3">
+              Keep this fertile window, likely ovulation day, possible test day and next steps in one place so you can come back when you need to.
+            </p>
+            <p className="font-sans text-[14px] text-muted-foreground leading-relaxed max-w-lg mx-auto">
+              We will help you return to the right guidance for where you are in this cycle, whether you are waiting, testing or starting again.
             </p>
           </div>
 
@@ -548,7 +644,7 @@ const OvulationResult = ({
                       {on ? <Check size={13} /> : <Bell size={12} />}
                     </div>
                     <div className="min-w-0">
-                      <p className="font-sans text-[14px] font-light text-foreground leading-tight">
+                      <p className="font-sans text-[14px] text-foreground leading-tight">
                         {label}
                       </p>
                       <p className="font-sans text-[11.5px] font-light text-muted-foreground mt-0.5">
@@ -571,7 +667,7 @@ const OvulationResult = ({
             })}
           </div>
 
-          <div className="flex flex-col items-center gap-5">
+          <div className="flex flex-col items-center gap-4">
             <button
               type="button"
               onClick={handleSave}
@@ -584,20 +680,33 @@ const OvulationResult = ({
               )}
             >
               {saved ? <Check size={15} /> : <Bookmark size={15} />}
-              {saved ? "Cycle saved" : "Save this cycle"}
+              {saved ? (
+                "Cycle saved"
+              ) : (
+                <>
+                  <span className="hidden sm:inline">Save this cycle to my TTC journey</span>
+                  <span className="sm:hidden">Save to my TTC journey</span>
+                </>
+              )}
             </button>
 
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            {saved && (
+              <p className="font-sans text-[13.5px] text-muted-foreground text-center max-w-md leading-relaxed">
+                Cycle saved. You can come back to this estimate and your next steps whenever you need them.
+              </p>
+            )}
+
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 pt-1">
               <Link
                 to="/ask?stage=ttc&topic=fertile-window"
-                className="inline-flex items-center gap-1.5 font-sans text-[13px] font-light text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex items-center gap-1.5 font-sans text-[13px] text-muted-foreground hover:text-foreground transition-colors"
               >
                 <MessageCircle size={12} />
                 Ask about this cycle
               </Link>
               <Link
                 to="/trying-to-conceive"
-                className="inline-flex items-center gap-1.5 font-sans text-[13px] font-light text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex items-center gap-1.5 font-sans text-[13px] text-muted-foreground hover:text-foreground transition-colors"
               >
                 Read TTC guidance
                 <ArrowRight size={12} />
@@ -633,7 +742,7 @@ const OvulationResult = ({
                   className="shrink-0"
                   style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
                 />
-                <span className="font-sans text-[14px] font-light text-foreground/85 group-hover:text-foreground transition-colors leading-relaxed">
+                <span className="font-sans text-[14px] text-foreground group-hover:text-foreground transition-colors leading-relaxed">
                   {q}
                 </span>
               </Link>

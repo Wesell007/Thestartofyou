@@ -644,7 +644,7 @@ const OvulationResult = ({
                       {on ? <Check size={13} /> : <Bell size={12} />}
                     </div>
                     <div className="min-w-0">
-                      <p className="font-sans text-[14px] font-light text-foreground leading-tight">
+                      <p className="font-sans text-[14px] text-foreground leading-tight">
                         {label}
                       </p>
                       <p className="font-sans text-[11.5px] font-light text-muted-foreground mt-0.5">

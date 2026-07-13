@@ -18,6 +18,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import OvulationResultCalendar from "@/components/tools/OvulationResultCalendar";
+import { supabase } from "@/integrations/supabase/client";
+import { stashPendingTTCJourney } from "@/lib/savedTTCJourney";
+import { buildAuthUrl } from "@/lib/authIntent";
+import { trackEvent } from "@/lib/analytics";
+import { EVENTS } from "@/lib/analyticsEvents";
 
 interface OvulationResultProps {
   lmp: Date;
@@ -108,9 +113,17 @@ const OvulationResult = ({
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setSaved(true);
     persist({});
+    stashPendingTTCJourney({ lmp, cycle_length_days: cycleLength });
+    trackEvent(EVENTS.TTC_JOURNEY_SAVE_STARTED);
+    const { data } = await supabase.auth.getSession();
+    if (data.session?.user) {
+      navigate("/setup/trying-to-conceive");
+    } else {
+      navigate(buildAuthUrl("return_to_route", "/setup/trying-to-conceive"));
+    }
   };
 
   const toggleReminder = (key: ReminderKey) => {

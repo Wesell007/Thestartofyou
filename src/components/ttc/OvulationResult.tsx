@@ -59,7 +59,14 @@ const OvulationResult = ({
   testDay,
 }: OvulationResultProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const toolPath = location.pathname.includes("/trying-to-conceive/")
+    ? "/trying-to-conceive/ovulation-calculator"
+    : "/ovulation-calculator";
   const [saved, setSaved] = useState(false);
+  const [adjustOpen, setAdjustOpen] = useState(false);
+  const [adjustLmp, setAdjustLmp] = useState<string>(lmp.toISOString().slice(0, 10));
+  const [adjustCycle, setAdjustCycle] = useState<number>(cycleLength);
   const [reminders, setReminders] = useState<Record<ReminderKey, boolean>>({
     fertile: true,
     ovulation: true,

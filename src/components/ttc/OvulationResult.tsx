@@ -667,7 +667,7 @@ const OvulationResult = ({
             })}
           </div>
 
-          <div className="flex flex-col items-center gap-5">
+          <div className="flex flex-col items-center gap-4">
             <button
               type="button"
               onClick={handleSave}
@@ -680,20 +680,33 @@ const OvulationResult = ({
               )}
             >
               {saved ? <Check size={15} /> : <Bookmark size={15} />}
-              {saved ? "Cycle saved" : "Save this cycle"}
+              {saved ? (
+                "Cycle saved"
+              ) : (
+                <>
+                  <span className="hidden sm:inline">Save this cycle to my TTC journey</span>
+                  <span className="sm:hidden">Save to my TTC journey</span>
+                </>
+              )}
             </button>
 
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            {saved && (
+              <p className="font-sans text-[13.5px] text-muted-foreground text-center max-w-md leading-relaxed">
+                Cycle saved. You can come back to this estimate and your next steps whenever you need them.
+              </p>
+            )}
+
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 pt-1">
               <Link
                 to="/ask?stage=ttc&topic=fertile-window"
-                className="inline-flex items-center gap-1.5 font-sans text-[13px] font-light text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex items-center gap-1.5 font-sans text-[13px] text-muted-foreground hover:text-foreground transition-colors"
               >
                 <MessageCircle size={12} />
                 Ask about this cycle
               </Link>
               <Link
                 to="/trying-to-conceive"
-                className="inline-flex items-center gap-1.5 font-sans text-[13px] font-light text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex items-center gap-1.5 font-sans text-[13px] text-muted-foreground hover:text-foreground transition-colors"
               >
                 Read TTC guidance
                 <ArrowRight size={12} />

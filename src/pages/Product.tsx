@@ -16,6 +16,11 @@ import ProductFinalCTA from "@/components/product/ProductFinalCTA";
 const Product = () => {
   return (
     <div className="min-h-screen font-sans">
+      <SeoHead
+        title="The Start of You Journal | Save Your Parenthood Journey"
+        description="A gentle place to save questions, notes, memories and guidance from pregnancy, baby's first year, toddlerhood and family life."
+        canonical="https://thestartofyou.com/product"
+      />
       <Navbar />
       <main className="flex flex-col">
         <ProductHero />

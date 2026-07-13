@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import SeoHead from "@/components/seo/SeoHead";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import NewHeroSection from "@/components/home/NewHeroSection";

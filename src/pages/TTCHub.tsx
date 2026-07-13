@@ -1096,7 +1096,9 @@ const TTCHub = () => {
         <Hero />
         <WhatThisCovers />
         <AISupport />
+        <TTCCommonQuestions />
         <JourneyTimeline />
+        <TTCIVFPathway />
         <TopicLibrary />
         <Reassurance />
       </main>

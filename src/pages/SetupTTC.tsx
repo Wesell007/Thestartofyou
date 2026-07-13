@@ -167,9 +167,12 @@ const SetupTTC = () => {
     if (!userId) return;
 
     setSubmitting(true);
-    const result = await commitPendingTTCJourneyToDB(userId, parsed.data);
+    const result = await commitPendingTTCJourneyToDB(
+      userId,
+      parsed.data as TTCFormValues,
+    );
     setSubmitting(false);
-    if (!result.ok) {
+    if (result.ok === false) {
       if (result.reason === "pregnancy_active") {
         setMode("pregnancy_active");
         return;

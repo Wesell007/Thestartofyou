@@ -26,6 +26,11 @@ const DueDateCalculator = () => {
 
   return (
     <div className="min-h-screen bg-parchment">
+      <SeoHead
+        title="Due Date Calculator | Estimate Your Baby's Due Date"
+        description="Use our calm pregnancy due date calculator to estimate your baby's due date from your last period, cycle length or known pregnancy dates."
+        canonical="https://thestartofyou.com/due-date-calculator"
+      />
       <Navbar />
 
       {/* Hero */}

@@ -1,4 +1,4 @@
-import { addDays } from "date-fns";
+import { addDays, differenceInCalendarDays } from "date-fns";
 
 /**
  * Shared TTC derived-date helpers.
@@ -56,4 +56,41 @@ export const computeTTCStage = (today: Date, d: TTCDerivedDates): TTCStage => {
     return "fertile_window";
   }
   return "before_ovulation";
+};
+
+/**
+ * Human-readable label for a TTC stage. Keep tone gentle — no clinical
+ * or "safe/unsafe day" framing.
+ */
+export const stageLabel = (stage: TTCStage | string | null | undefined): string => {
+  switch (stage) {
+    case "before_ovulation":
+      return "Before likely ovulation";
+    case "fertile_window":
+      return "Possible fertile window";
+    case "likely_ovulation":
+      return "Likely ovulation";
+    case "two_week_wait":
+      return "Two-week wait";
+    case "test_window":
+      return "Possible test window";
+    case "expected_period":
+      return "Expected period";
+    default:
+      return "Not set yet";
+  }
+};
+
+/**
+ * Display-only cycle day (1-indexed). Returns null if the last period date
+ * is unknown or in the future.
+ */
+export const cycleDayFrom = (
+  lastPeriodDate: Date | null | undefined,
+  today: Date = new Date(),
+): number | null => {
+  if (!lastPeriodDate) return null;
+  const diff = differenceInCalendarDays(today, lastPeriodDate);
+  if (diff < 0) return null;
+  return diff + 1;
 };

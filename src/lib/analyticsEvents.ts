@@ -75,6 +75,7 @@ export type EventMap = {
   // Wave 3 — TTC journey
   ttc_journey_save_started: Record<string, never>;
   ttc_journey_setup_completed: Record<string, never>;
+  ttc_journey_dashboard_viewed: Record<string, never>;
 };
 
 export type EventName = keyof EventMap;

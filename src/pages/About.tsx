@@ -1,3 +1,4 @@
+import SeoHead from "@/components/seo/SeoHead";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AboutHero from "@/components/about/AboutHero";
@@ -13,6 +14,11 @@ import AboutCTA from "@/components/about/AboutCTA";
 const About = () => {
   return (
     <div className="min-h-screen font-sans">
+      <SeoHead
+        title="About The Start of You | Calm Support for Parenthood"
+        description="Learn about The Start of You, a calm digital companion for pregnancy, parenting, family life and the questions that come with each stage."
+        canonical="https://thestartofyou.com/about"
+      />
       <Navbar />
       <main>
         <AboutHero />

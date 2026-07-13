@@ -14,6 +14,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import OvulationResult from "@/components/ttc/OvulationResult";
+import SeoHead from "@/components/seo/SeoHead";
 
 const STAGE_BG = "--stage-ttc";
 const STAGE_ACCENT = "--stage-ttc-accent";
@@ -427,21 +428,13 @@ const OvulationCalculator = () => {
     return { lmp, cycleLength, ovulationDay, fertileStart, fertileEnd, testDay };
   }, [params]);
 
-  if (typeof document !== "undefined") {
-    document.title = "Ovulation Calculator | Find Your Fertile Window";
-    const desc =
-      "A premium, calm ovulation calculator. Estimate your fertile window and likely ovulation day based on your cycle dates.";
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.setAttribute("name", "description");
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute("content", desc);
-  }
-
   return (
     <div className="min-h-screen font-sans bg-parchment">
+      <SeoHead
+        title="Ovulation Calculator | Estimate Your Fertile Window"
+        description="Use our ovulation calculator to estimate your fertile window and likely ovulation days, with calm guidance for trying to conceive."
+        canonical="https://thestartofyou.com/ovulation-calculator"
+      />
       <Navbar />
       <main>
         <Hero />

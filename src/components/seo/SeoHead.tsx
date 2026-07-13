@@ -9,6 +9,7 @@ interface SeoHeadProps {
   ogType?: string;
   ogUrl?: string;
   jsonLd?: Record<string, unknown>;
+  noindex?: boolean;
 }
 
 /**
@@ -24,6 +25,7 @@ const SeoHead = ({
   ogType = "website",
   ogUrl,
   jsonLd,
+  noindex = false,
 }: SeoHeadProps) => {
   const resolvedOgTitle = ogTitle ?? title;
   const resolvedOgDescription = ogDescription ?? description;
@@ -38,6 +40,7 @@ const SeoHead = ({
       <meta property="og:description" content={resolvedOgDescription} />
       <meta property="og:url" content={resolvedOgUrl} />
       <meta property="og:type" content={ogType} />
+      {noindex ? <meta name="robots" content="noindex,follow" /> : null}
       {jsonLd ? (
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       ) : null}

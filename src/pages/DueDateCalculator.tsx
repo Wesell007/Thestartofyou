@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import SeoHead from "@/components/seo/SeoHead";
 import DueDateCalculatorForm from "@/components/shared/DueDateCalculatorForm";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
@@ -25,6 +26,11 @@ const DueDateCalculator = () => {
 
   return (
     <div className="min-h-screen bg-parchment">
+      <SeoHead
+        title="Due Date Calculator | Estimate Your Baby's Due Date"
+        description="Use our calm pregnancy due date calculator to estimate your baby's due date from your last period, cycle length or known pregnancy dates."
+        canonical="https://thestartofyou.com/due-date-calculator"
+      />
       <Navbar />
 
       {/* Hero */}

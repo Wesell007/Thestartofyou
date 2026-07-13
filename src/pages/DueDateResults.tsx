@@ -3,6 +3,7 @@ import { useSearchParams, Navigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import DueDateCalculatorResult from "@/components/shared/DueDateCalculatorResult";
+import SeoHead from "@/components/seo/SeoHead";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 
@@ -32,6 +33,12 @@ const DueDateResults = () => {
 
   return (
     <div className="min-h-screen bg-parchment">
+      <SeoHead
+        title="Your Due Date Results | The Start of You"
+        description="See your estimated due date and pregnancy timing, then continue with calm week-by-week guidance for the stage you may be in."
+        canonical="https://thestartofyou.com/due-date-calculator"
+        noindex
+      />
       <Navbar />
       <DueDateCalculatorResult lmp={lmp} />
       <Footer />

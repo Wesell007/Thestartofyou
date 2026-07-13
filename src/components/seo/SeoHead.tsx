@@ -25,6 +25,7 @@ const SeoHead = ({
   ogType = "website",
   ogUrl,
   jsonLd,
+  noindex = false,
 }: SeoHeadProps) => {
   const resolvedOgTitle = ogTitle ?? title;
   const resolvedOgDescription = ogDescription ?? description;

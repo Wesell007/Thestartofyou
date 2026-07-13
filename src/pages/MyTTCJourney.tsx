@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import {
   getActiveTTCJourney,
@@ -16,6 +16,7 @@ import {
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import { getRecentTTCLogs, type TTCLog } from "@/lib/ttcLogs";
+import { computeTTCInsights } from "@/lib/ttcInsights";
 import TTCJourneySummary from "@/components/ttc/journey/TTCJourneySummary";
 import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
 import TTCJourneyFocusCard from "@/components/ttc/journey/TTCJourneyFocusCard";
@@ -23,8 +24,11 @@ import TTCJourneyGuidance from "@/components/ttc/journey/TTCJourneyGuidance";
 import TTCJourneyCalendar from "@/components/ttc/journey/TTCJourneyCalendar";
 import TTCLogEntryPanel from "@/components/ttc/journey/TTCLogEntryPanel";
 import TTCLogList from "@/components/ttc/journey/TTCLogList";
+import TTCJourneyInsights from "@/components/ttc/journey/TTCJourneyInsights";
+import TTCPregnancyHandover from "@/components/ttc/journey/TTCPregnancyHandover";
 
 type Status = "loading" | "empty" | "pregnancy_active" | "ready";
+
 
 const todayIso = () => format(new Date(), "yyyy-MM-dd");
 

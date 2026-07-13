@@ -33,6 +33,7 @@ import sprigImg from "@/assets/topic-mini-sprig.png";
 import heroImg from "@/assets/ttc-hero-lifestyle.jpg";
 import TTCCommonQuestions from "@/components/ttc/TTCCommonQuestions";
 import TTCIVFPathway from "@/components/ttc/TTCIVFPathway";
+import SeoHead from "@/components/seo/SeoHead";
 
 /* ----------------------------------------------------------- */
 /* SHARED                                                      */
@@ -1091,6 +1092,11 @@ const TTCHub = () => {
 
   return (
     <div className="min-h-screen font-sans bg-parchment">
+      <SeoHead
+        title="Trying to Conceive Guide | Fertility, Ovulation & Support"
+        description="Calm, practical guidance for trying to conceive, including ovulation, fertile windows, cycle tracking, fertility health, pregnancy tests and the two-week wait."
+        canonical="https://thestartofyou.com/trying-to-conceive"
+      />
       <Navbar />
       <main>
         <Hero />

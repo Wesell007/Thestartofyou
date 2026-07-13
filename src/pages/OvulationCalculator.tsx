@@ -437,12 +437,15 @@ const OvulationCalculator = () => {
       />
       <Navbar />
       <main>
-        <Hero />
-        <CalculatorForm />
-        {data && (
-          <div id="results">
+        {data ? (
+          <div id="results" className="pt-[92px] md:pt-[112px]">
             <OvulationResult {...data} />
           </div>
+        ) : (
+          <>
+            <Hero />
+            <CalculatorForm />
+          </>
         )}
         <HowItWorks />
         <Disclaimer />

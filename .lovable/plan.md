@@ -1,37 +1,94 @@
-## Phase 9.5a — Ovulation Calculator Results UX Redesign
 
-UX-only redesign of the ovulation calculator result experience into a calm, calendar-led cycle dashboard. No SEO, route, formula, or hub changes.
+# Phase 9.5a.1 — Ovulation Calculator Results Refinement
 
-### Files to edit
-- `src/components/ttc/OvulationResult.tsx` — internal restructure. Props signature (`lmp`, `cycleLength`, `ovulationDay`, `fertileStart`, `fertileEnd`, `testDay`) unchanged, so `OvulationCalculator.tsx` stays untouched.
+Refine the result-state experience so users land on their fertile-window estimate rather than the calculator form. Sharpen typography, add a compact adjust-dates panel, and strengthen the Save-cycle CTA.
 
-### Files to create
-- `src/components/tools/OvulationResultCalendar.tsx` — monthly calendar, purely presentational, receives all dates via props.
+## Files to edit
 
-### Files NOT touched
-`src/pages/OvulationCalculator.tsx`, `src/components/seo/SeoHead.tsx`, `src/App.tsx`, all TTC hub/topic, Pregnancy, IVF, Family, First Year, Toddler files, sitemap, robots, article data, calculator formulas, route structure.
+- `src/pages/OvulationCalculator.tsx`
+- `src/components/ttc/OvulationResult.tsx`
 
-### Result experience
+## Files NOT touched
 
-1. **Hero summary** — Eyebrow "Your cycle at a glance", H1 "Your fertile window estimate", sub "A calm view of the days that may matter most this cycle." Five compact cards: Fertile window · Likely ovulation · Best days to try · Expected next period · Possible test day. Footnote: "These dates are estimates, not guarantees. Cycles can vary from month to month."
-2. **Visual cycle calendar** (new component) — month containing `ovulationDay` with prev/next month buttons. Cells highlight last period start, possible fertile window, likely ovulation, best days to try, expected period, possible test day. Legend beneath with those exact labels. TTC sage/cream palette, rounded, mobile-safe at 375px.
-3. **"What this estimate means"** — three short cards using the brief's exact copy.
-4. **"What to do now"** — four rows using the brief's copy: Try on the best days · Notice, but do not overtrack · Test after your expected period · Be kind to yourself if it does not happen.
-5. **"What's happening for you?"** — three real navigation cards (removes the modal): My period arrived → clears saved cycle + `/ovulation-calculator#calculator`; My period is late → `/trying-to-conceive/pregnancy-tests`; I got a positive test → primary `/due-date-calculator?lmp=<iso>&from=ttc`, secondary link to `/pregnancy`.
-6. **"Save this cycle"** — refreshed heading/copy, existing localStorage save + reminder toggles intact. Secondary chips: Ask → `/ask?stage=ttc&topic=fertile-window`, Read TTC guidance → `/trying-to-conceive`.
-7. **"Ask about this cycle"** — four prompt chips from brief, each linking `/ask?stage=ttc&topic=<slug>&q=<encoded>`, no auto-submit.
-8. **Related guidance** — replaces broken placeholder links with four real TTC routes: `/trying-to-conceive/ovulation`, `/cycle-tracking`, `/two-week-wait`, `/pregnancy-tests`.
+`SeoHead.tsx`, `App.tsx`, calendar component, TTC hub/topic, Pregnancy, IVF, Family, First Year, Toddler, sitemap, robots, article data, calculator formulas, route structure.
 
-### Calendar technical notes
-Props: `{ lmp, fertileStart, fertileEnd, ovulationDay, bestDays[3], nextPeriod, testDay }`. Marker priority per cell: ovulation > best-day > fertile-window > period-start > expected-period > test-day > plain. Styles use tokens `--stage-ttc`, `--stage-ttc-accent`, `--terracotta`, `--sage` only. No new colour tokens.
+## 1. Result-first page layout
 
-### Language guardrails
-Never renders "safe period", "unsafe day(s)", contraception wording, or guarantee wording. Uses "possible fertile window", "likely ovulation", "best days to try", "expected period", "possible test day".
+In `OvulationCalculator.tsx`, wrap conditionally:
 
-### Preservation guarantees
-- Formulas unchanged: `ovulationDay = lmp + cycleLength − 14`, `fertileStart = ov − 5`, `fertileEnd = ov + 1`, `testDay = ov + 15`, `nextPeriod = lmp + cycleLength`.
-- Existing localStorage save + reminder logic kept.
-- `SeoHead` on `OvulationCalculator.tsx` untouched → canonical `/ovulation-calculator`, title, description, OG unchanged. Duplicate `/trying-to-conceive/ovulation-calculator` still renders same component with same canonical.
+```tsx
+<main>
+  {data ? (
+    <div id="results" className="pt-[92px] md:pt-[112px]">
+      <OvulationResult {...data} />
+    </div>
+  ) : (
+    <>
+      <Hero />
+      <CalculatorForm />
+    </>
+  )}
+  <HowItWorks />
+  <Disclaimer />
+  <Related />
+  <PageClose />
+</main>
+```
 
-### Verification
-`bunx tsgo --noEmit` clean. Playwright at 1280×1800 and 375×812 on both calculator routes with `?lmp=2026-06-16&cycle=28`. Grep for banned language ("safe period", "unsafe day", "guaranteed") — zero hits. Regression smoke on `/trying-to-conceive`, `/trying-to-conceive/ovulation`, `/due-date-calculator`, `/due-date-results`, `/pregnancy`, `/first-year`, `/toddler`, `/family`, `/ivf`.
+The result state skips the marketing hero and full form entirely; the no-result state keeps the current calculator-first layout unchanged. Top padding compensates for the fixed navbar since the result section becomes the first paint.
+
+## 2. Adjust-dates panel
+
+Inside `OvulationResult.tsx`, add a compact panel after the summary cards (before the calendar):
+
+- Heading "Need to adjust your dates?"
+- Copy "Change your last period date or usual cycle length and recalculate your estimate."
+- Trigger button "Adjust my dates" toggles an inline form (LMP date, cycle length 20-45, "Recalculate" submit).
+- Submit uses `useLocation().pathname` to preserve the current route (canonical `/ovulation-calculator` or duplicate `/trying-to-conceive/ovulation-calculator`), pushing `?lmp=…&cycle=…`.
+- No fresh full hero form appears above the result at any point.
+
+The "My period arrived → Start a new cycle" button in the "What's happening for you?" block also switches to `location.pathname` instead of hardcoding `/ovulation-calculator`.
+
+## 3. Typography and readability
+
+Across the result component:
+
+- Remove faint opacity fades on primary copy (`text-foreground/60`, `/70`, `/85` → `text-foreground` or `text-muted-foreground`).
+- Bump key-date card values from `text-[1.1rem]` to `font-serif text-[1.35rem] sm:text-[1.5rem] text-foreground` for scannable dates.
+- Stronger meta lines: `text-[13px] text-muted-foreground` (drop `font-light` where copy is small).
+- Result hero footnote uses `text-muted-foreground` not `text-foreground/60`.
+- Ask-prompt rows: text is `text-foreground` not `text-foreground/85`.
+- Palette unchanged: TTC sage/cream via `--stage-ttc*`, sage, terracotta CTA, lavender for pregnancy handover.
+
+## 4. Save-cycle CTA rewrite
+
+Rewrite that section's copy:
+
+- Heading: "Save this cycle"
+- Sub: "Keep this fertile window, likely ovulation day, possible test day and next steps in one place so you can come back when you need to."
+- Body: "We will help you return to the right guidance for where you are in this cycle, whether you are waiting, testing or starting again."
+- Reminder rows relabelled as "Keep a note" preferences (not push-notification promises).
+- Primary CTA: "Save this cycle to my TTC journey" on desktop, "Save to my TTC journey" on mobile (responsive spans).
+- Saved state: "Cycle saved. You can come back to this estimate and your next steps whenever you need them." confirmation line under the disabled button.
+- Secondary links unchanged: "Ask about this cycle" → `/ask?stage=ttc&topic=fertile-window`, "Read TTC guidance" → `/trying-to-conceive`.
+- Save behaviour stays localStorage-only; existing hydration/toggle logic untouched.
+
+## 5. Pregnancy handover
+
+Keep the "I got a positive test" card intact: primary → `/due-date-calculator?lmp=…&from=ttc`, secondary → `/pregnancy`. Copy stays "Move into pregnancy guidance when you are ready." Position stays after Save-cycle, not above the main result.
+
+## 6. Preservation
+
+- Formulas untouched (`lmp`, `cycleLength − 14`, `−5`, `+1`, `+15`, `+cycleLength`).
+- `SeoHead` on `OvulationCalculator.tsx` untouched: title, description, canonical `https://thestartofyou.com/ovulation-calculator`.
+- Duplicate `/trying-to-conceive/ovulation-calculator` still routes to the same page with the same canonical.
+- No Article JSON-LD added.
+- Banned language absent: "safe period", "unsafe day", "guaranteed", "perfect timing".
+
+## Verification
+
+- `bunx tsgo --noEmit`.
+- Playwright at 1280×1800 and 375×812 on `/ovulation-calculator?lmp=2026-06-16&cycle=28` and `/trying-to-conceive/ovulation-calculator?lmp=2026-06-16&cycle=28` — confirm the first visible section is "Your fertile window estimate", adjust-dates panel works, calendar renders, Save CTA visible.
+- Playwright on `/ovulation-calculator` (no params) — calculator-first layout intact.
+- `rg` banned-language sweep in edited files → zero hits.
+- Regression smoke: `/trying-to-conceive`, `/trying-to-conceive/ovulation`, `/due-date-calculator`, `/due-date-results`, `/pregnancy`, `/first-year`, `/toddler`, `/family`, `/ivf`.

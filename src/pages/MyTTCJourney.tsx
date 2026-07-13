@@ -68,8 +68,14 @@ const MyTTCJourney = () => {
         return;
       }
       setJourney(row);
+      setUserId(user.id);
       setStatus("ready");
+      try {
+        const recent = await getRecentTTCLogs(user.id, row.id, 30);
+        if (!cancelled) setLogs(recent);
+      } catch { /* non-fatal */ }
     })();
+
     return () => {
       cancelled = true;
     };

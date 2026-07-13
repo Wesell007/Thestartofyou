@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -14,17 +15,29 @@ import {
 } from "@/lib/ttcDerived";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
+import { getRecentTTCLogs, type TTCLog } from "@/lib/ttcLogs";
 import TTCJourneySummary from "@/components/ttc/journey/TTCJourneySummary";
 import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
 import TTCJourneyFocusCard from "@/components/ttc/journey/TTCJourneyFocusCard";
 import TTCJourneyGuidance from "@/components/ttc/journey/TTCJourneyGuidance";
+import TTCJourneyCalendar from "@/components/ttc/journey/TTCJourneyCalendar";
+import TTCLogEntryPanel from "@/components/ttc/journey/TTCLogEntryPanel";
+import TTCLogList from "@/components/ttc/journey/TTCLogList";
 
 type Status = "loading" | "empty" | "pregnancy_active" | "ready";
+
+const todayIso = () => format(new Date(), "yyyy-MM-dd");
 
 const MyTTCJourney = () => {
   const [status, setStatus] = useState<Status>("loading");
   const [journey, setJourney] = useState<ActiveTTCJourney | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [logs, setLogs] = useState<TTCLog[]>([]);
+  const [panelOpen, setPanelOpen] = useState(false);
+  const [panelDate, setPanelDate] = useState<string>(todayIso());
+  const [editing, setEditing] = useState<TTCLog | null>(null);
   const viewedRef = useRef(false);
+
 
   useEffect(() => {
     let cancelled = false;
@@ -55,8 +68,14 @@ const MyTTCJourney = () => {
         return;
       }
       setJourney(row);
+      setUserId(user.id);
       setStatus("ready");
+      try {
+        const recent = await getRecentTTCLogs(user.id, row.id, 30);
+        if (!cancelled) setLogs(recent);
+      } catch { /* non-fatal */ }
     })();
+
     return () => {
       cancelled = true;
     };
@@ -85,6 +104,28 @@ const MyTTCJourney = () => {
     if (!journey?.last_period_date) return null;
     return cycleDayFrom(new Date(journey.last_period_date), new Date());
   }, [journey]);
+
+  const refetchLogs = useCallback(async () => {
+    if (!userId || !journey) return;
+    try {
+      const recent = await getRecentTTCLogs(userId, journey.id, 30);
+      setLogs(recent);
+    } catch { /* non-fatal */ }
+  }, [userId, journey]);
+
+  const openPanelForDate = (dateIso: string) => {
+    setEditing(null);
+    setPanelDate(dateIso);
+    setPanelOpen(true);
+  };
+
+  const openPanelForEdit = (log: TTCLog) => {
+    setEditing(log);
+    setPanelDate(log.log_date);
+    setPanelOpen(true);
+  };
+
+
 
   if (status === "loading") {
     return <div className="min-h-screen bg-parchment" />;
@@ -184,10 +225,45 @@ const MyTTCJourney = () => {
           <TTCJourneyTimeline journey={journey} />
         </section>
 
+        {/* Cycle calendar & logging */}
+        <section className="mb-10 sm:mb-12 space-y-5">
+          <div>
+            <h2 className="font-serif text-[22px] sm:text-[24px] text-foreground mb-1">
+              Cycle calendar & logging
+            </h2>
+            <p className="font-sans text-[12.5px] text-muted-foreground/85 leading-relaxed max-w-[58ch]">
+              Add a quick note about anything you'd like to remember. Only you
+              can see this. Nothing here changes your cycle estimates or
+              interprets results.
+            </p>
+          </div>
+          <TTCJourneyCalendar
+            journey={journey}
+            logs={logs}
+            onSelectDate={openPanelForDate}
+            onAddForToday={() => openPanelForDate(todayIso())}
+          />
+          <div>
+            <p
+              className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
+              style={{ color: "hsl(var(--stage-ttc-accent))" }}
+            >
+              Recent notes
+            </p>
+            <TTCLogList
+              logs={logs.slice(0, 8)}
+              onEdit={openPanelForEdit}
+              onDeleted={refetchLogs}
+            />
+          </div>
+        </section>
+
         {/* Focus */}
         <section className="mb-10 sm:mb-12">
           <TTCJourneyFocusCard stage={derivedStage} />
         </section>
+
+
 
         {/* Guidance */}
         <section className="mb-10 sm:mb-12">
@@ -303,8 +379,24 @@ const MyTTCJourney = () => {
           </div>
         </section>
       </main>
+
+      {userId && journey && (
+        <TTCLogEntryPanel
+          open={panelOpen}
+          onOpenChange={(o) => {
+            setPanelOpen(o);
+            if (!o) setEditing(null);
+          }}
+          userId={userId}
+          journeyId={journey.id}
+          initialDate={panelDate}
+          editing={editing}
+          onSaved={refetchLogs}
+        />
+      )}
     </div>
   );
 };
+
 
 export default MyTTCJourney;

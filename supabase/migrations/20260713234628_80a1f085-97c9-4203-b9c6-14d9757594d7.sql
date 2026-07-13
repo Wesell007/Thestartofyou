@@ -1,0 +1,1 @@
+REVOKE ALL ON public.ttc_logs FROM anon;

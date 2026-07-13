@@ -41,7 +41,10 @@ export const EVENTS = {
   TTC_JOURNEY_SAVE_STARTED: "ttc_journey_save_started",
   TTC_JOURNEY_SETUP_COMPLETED: "ttc_journey_setup_completed",
   TTC_JOURNEY_DASHBOARD_VIEWED: "ttc_journey_dashboard_viewed",
+  TTC_LOG_CREATED: "ttc_log_created",
+  TTC_LOG_DELETED: "ttc_log_deleted",
 } as const;
+
 
 export type ClickLocation = "home_hero" | "navbar";
 
@@ -76,6 +79,9 @@ export type EventMap = {
   ttc_journey_save_started: Record<string, never>;
   ttc_journey_setup_completed: Record<string, never>;
   ttc_journey_dashboard_viewed: Record<string, never>;
+  ttc_log_created: Record<string, never>;
+  ttc_log_deleted: Record<string, never>;
 };
+
 
 export type EventName = keyof EventMap;

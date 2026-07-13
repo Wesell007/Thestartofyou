@@ -69,17 +69,19 @@ After ship: safe to proceed to Phase 9.3 TTC SEO.
 
 ---
 
-# Phase 9.2f.2 — TTC IVF Pathway Colour Alignment
+# Phase 9.2g.1 — Remove IVF Timeline secondary button from TTC and Pregnancy IVF pathway cards
 
-Small visual correction: the TTC IVF connected pathway now uses IVF/lavender tokens (`--stage-ivf`, `--stage-ivf-accent`) instead of TTC green, so it reads as a connected IVF hub rather than another TTC topic card.
+Small UX fix: the `View IVF timeline` secondary button on both IVF connected pathway cards did not work properly and has been removed. Only the `Go to IVF hub` primary CTA remains.
 
 ## Files edited
-- `src/components/ttc/TTCIVFPathway.tsx` — swapped all colour tokens, borders, blur, buttons and card accents to IVF palette; kept existing copy, section placement and route targets
+- `src/components/ttc/TTCIVFPathway.tsx` — removed `View IVF timeline` Link and unused `Compass` import; kept IVF/lavender styling, copy, placement, and `/ivf` primary CTA
+- `src/components/pregnancy/PregnancyIVFPathway.tsx` — removed `View IVF timeline` Link and unused `Compass` import; kept IVF/lavender styling, copy, placement, and `/ivf` primary CTA
 
 ## Verification
 - `bunx tsgo --noEmit` passed
-- Playwright: `/trying-to-conceive` at 1280×1800 and 375×812 — TTC IVF pathway still appears after Fertility & health and before Common Questions; card uses IVF/lavender styling; CTAs route to `/ivf` and `/ivf-timeline`; no mobile overflow
-- Regression: `/pregnancy`, `/ivf`, `/ask?stage=ttc&topic=ivf-next-step`, `/first-year`, `/toddler`, `/family` all load
+- Playwright: `/trying-to-conceive` and `/pregnancy` at 1280×1800 and 375×812 — only `Go to IVF hub` appears, no `View IVF timeline` text remains, primary CTA links to `/ivf`, layout remains clean on both viewports
+- Regression: `/ivf`, `/first-year`, `/toddler`, `/family` all load
 
 After ship: safe to proceed to Phase 9.3 TTC SEO.
+
 

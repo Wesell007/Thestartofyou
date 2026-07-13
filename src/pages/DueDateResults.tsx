@@ -3,6 +3,7 @@ import { useSearchParams, Navigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import DueDateCalculatorResult from "@/components/shared/DueDateCalculatorResult";
+import SeoHead from "@/components/seo/SeoHead";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 

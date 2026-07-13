@@ -14,6 +14,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import OvulationResult from "@/components/ttc/OvulationResult";
+import SeoHead from "@/components/seo/SeoHead";
 
 const STAGE_BG = "--stage-ttc";
 const STAGE_ACCENT = "--stage-ttc-accent";

@@ -1,53 +1,49 @@
-# Phase 9.3 — TTC SEO Layer
+# Phase 9.4 — IVF SEO Layer
 
-SEO-only pass. No UX, routing, sitemap, robots, article data, or non-TTC files touched.
+SEO-only pass on the IVF section. No UX, routing, article data, sitemap, robots, or non-IVF files touched.
 
 ## Route confirmation (from src/App.tsx)
 
-- `/trying-to-conceive` → `TTCHub` (live canonical hub)
-- `/trying-to-conceive/legacy` → `TTC` (legacy, not canonical) — **skip**
-- `/trying-to-conceive/ovulation-calculator` → `OvulationCalculator` — **out of scope (Phase 9.5)**
-- 10 subtopic routes → subtopic wrappers under `src/pages/trying-to-conceive/`
+All expected paths match live routes — no corrections needed:
 
-`SeoHead` already exists at `src/components/seo/SeoHead.tsx` and is the only helper used.
+- `/ivf` → `IVF`
+- `/ivf-timeline` → `IVFTimeline`
+- `/ivf/before-transfer` → `IVFBeforeTransfer`
+- `/ivf/after-transfer` → `IVFAfterTransfer`
+- `/ivf/early-pregnancy` → `IVFEarlyPregnancy`
 
-## Files to edit (11)
+`SeoHead` at `src/components/seo/SeoHead.tsx` is the only helper used.
 
-1. `src/pages/TTCHub.tsx`
-2. `src/pages/trying-to-conceive/AgeAndFertility.tsx`
-3. `src/pages/trying-to-conceive/Conditions.tsx`
-4. `src/pages/trying-to-conceive/CycleTracking.tsx`
-5. `src/pages/trying-to-conceive/Fertility.tsx`
-6. `src/pages/trying-to-conceive/IVFAndTreatment.tsx`
-7. `src/pages/trying-to-conceive/MaleFertility.tsx`
-8. `src/pages/trying-to-conceive/Ovulation.tsx`
-9. `src/pages/trying-to-conceive/PreconceptionHealth.tsx`
-10. `src/pages/trying-to-conceive/PregnancyTests.tsx`
-11. `src/pages/trying-to-conceive/TwoWeekWait.tsx`
+## Files to edit (5)
 
-Not edited: `src/pages/TTC.tsx` (legacy), `src/pages/OvulationCalculator.tsx` (Phase 9.5), all non-TTC pages, `SeoHead.tsx`, `ttcTopicData.ts`, `App.tsx`, sitemap, robots.
+1. `src/pages/IVF.tsx` — hub page.
+2. `src/pages/IVFTimeline.tsx` — timeline tool page (has an early `<Navigate>` branch; SeoHead added inside the render branch that returns the layout).
+3. `src/pages/ivf/BeforeTransfer.tsx` — 5-line wrapper.
+4. `src/pages/ivf/AfterTransfer.tsx` — 5-line wrapper.
+5. `src/pages/ivf/EarlyPregnancy.tsx` — 5-line wrapper.
+
+Not edited: `ivfTopicData.ts`, `SeoHead.tsx`, `App.tsx`, all TTC / Pregnancy / Family / First Year / Toddler files, sitemap, robots.
 
 ## Implementation pattern
 
-In each page:
+Per page:
 
 1. `import SeoHead from "@/components/seo/SeoHead";`
 2. Wrap the existing returned tree in a fragment if needed.
-3. Insert `<SeoHead title=... description=... canonical=... />` as the first child. No `jsonLd`, default `ogType="website"`, no explicit `ogUrl` (falls back to canonical).
+3. Insert `<SeoHead title=... description=... canonical=... />` as the first child. No `jsonLd`, default `ogType="website"`, no `ogUrl` override (falls back to canonical).
 
-No visible layout changes. No JSON-LD. No dates, authors, or reviewer strings.
+For `IVFTimeline.tsx`, SeoHead is inserted at the top of the main rendered layout (the branch that actually shows the page), so the redirect branch stays untouched.
 
 ## SEO strings
 
-Applied verbatim from the approved list in the request (hub + 10 topics), each with its self-referencing `https://thestartofyou.com/...` canonical. Ovulation topic canonical self-references `/trying-to-conceive/ovulation`; the `/ovulation-calculator` route is left untouched and deferred to Phase 9.5 (tool intent vs guidance intent distinction preserved).
+Applied verbatim from the approved list (hub, timeline, before-transfer, after-transfer, early-pregnancy), each with its self-referencing `https://thestartofyou.com/...` canonical. No JSON-LD. No publish dates, authors, or reviewer strings.
 
 ## Verification
 
-- `bunx tsgo --noEmit`
-- Playwright at 1280×1800 and 375×812 across the hub + 10 topic routes, checking: 200 response, `document.title`, `meta[name=description]`, `link[rel=canonical]`, `og:title`, `og:description`, `og:url`, `og:type=website`, no Article JSON-LD, no console errors, no mobile overflow.
-- Confirm `/ovulation-calculator` still returns 200 (no edits).
-- Regression smoke: `/pregnancy`, `/pregnancy/week/12`, `/articles/complete-guide-morning-sickness`, `/first-year`, `/toddler`, `/family`, `/ivf`, `/ask?stage=ttc&topic=fertile-window`.
+- `bunx tsgo --noEmit`.
+- Playwright at 1280×1800 and 375×812 across all 5 IVF routes, checking: 200, `document.title`, `meta[name=description]`, `link[rel=canonical]`, `og:title`, `og:description`, `og:url`, `og:type=website`, no Article JSON-LD, no console errors, no mobile overflow.
+- Regression smoke: `/trying-to-conceive`, `/pregnancy`, `/pregnancy/week/12`, `/first-year`, `/toddler`, `/family`, `/articles/complete-guide-morning-sickness`, `/ask?stage=ttc&topic=ivf-next-step`, `/ask?stage=pregnancy&topic=early-symptoms`.
 
 ## Deliverable
 
-Summary covering: files inspected, files edited, route confirmation (TTCHub vs legacy TTC), SeoHead insertion points, hub + topic titles/descriptions, ovulation vs calculator distinction, canonical + OG strategy, JSON-LD absence, no fake dates/authors, desktop + mobile verification, meta tag verification, tsgo result, regression result, and go/no-go for Phase 9.4 IVF SEO.
+Summary covering: files inspected, files edited, confirmed IVF route structure (no corrections), SeoHead insertion points, hub / timeline / phase-page titles and descriptions, canonical + OG strategy, JSON-LD absence, no fake dates/authors, desktop + mobile verification, tsgo result, regression result, and go/no-go for Phase 9.5 Tools SEO.

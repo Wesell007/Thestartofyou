@@ -3,6 +3,15 @@ import { useSearchParams, Navigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import IVFTimelineResult from "@/components/ivf/IVFTimelineResult";
+import SeoHead from "@/components/seo/SeoHead";
+
+const TIMELINE_SEO = (
+  <SeoHead
+    title="IVF Timeline Guide | Steps, Transfer & Two-Week Wait"
+    description="A calm guide to the IVF timeline, including treatment stages, transfer preparation, waiting after transfer and what may come next."
+    canonical="https://thestartofyou.com/ivf-timeline"
+  />
+);
 
 const IVFTimeline = () => {
   const [searchParams] = useSearchParams();
@@ -28,6 +37,7 @@ const IVFTimeline = () => {
   if (!transferDate) {
     return (
       <div className="min-h-screen bg-parchment">
+        {TIMELINE_SEO}
         <Navbar />
         <section className="pt-28 pb-32 md:pt-36">
           <div className="container mx-auto px-6 md:px-10 max-w-xl text-center">
@@ -45,6 +55,7 @@ const IVFTimeline = () => {
 
   return (
     <div className="min-h-screen bg-parchment">
+      {TIMELINE_SEO}
       <Navbar />
       <IVFTimelineResult transferDate={transferDate} transferType={transferType} />
       <Footer />

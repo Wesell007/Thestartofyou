@@ -105,6 +105,28 @@ const MyTTCJourney = () => {
     return cycleDayFrom(new Date(journey.last_period_date), new Date());
   }, [journey]);
 
+  const refetchLogs = useCallback(async () => {
+    if (!userId || !journey) return;
+    try {
+      const recent = await getRecentTTCLogs(userId, journey.id, 30);
+      setLogs(recent);
+    } catch { /* non-fatal */ }
+  }, [userId, journey]);
+
+  const openPanelForDate = (dateIso: string) => {
+    setEditing(null);
+    setPanelDate(dateIso);
+    setPanelOpen(true);
+  };
+
+  const openPanelForEdit = (log: TTCLog) => {
+    setEditing(log);
+    setPanelDate(log.log_date);
+    setPanelOpen(true);
+  };
+
+
+
   if (status === "loading") {
     return <div className="min-h-screen bg-parchment" />;
   }
@@ -203,10 +225,45 @@ const MyTTCJourney = () => {
           <TTCJourneyTimeline journey={journey} />
         </section>
 
+        {/* Cycle calendar & logging */}
+        <section className="mb-10 sm:mb-12 space-y-5">
+          <div>
+            <h2 className="font-serif text-[22px] sm:text-[24px] text-foreground mb-1">
+              Cycle calendar & logging
+            </h2>
+            <p className="font-sans text-[12.5px] text-muted-foreground/85 leading-relaxed max-w-[58ch]">
+              Add a quick note about anything you'd like to remember. Only you
+              can see this. Nothing here changes your cycle estimates or
+              interprets results.
+            </p>
+          </div>
+          <TTCJourneyCalendar
+            journey={journey}
+            logs={logs}
+            onSelectDate={openPanelForDate}
+            onAddForToday={() => openPanelForDate(todayIso())}
+          />
+          <div>
+            <p
+              className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
+              style={{ color: "hsl(var(--stage-ttc-accent))" }}
+            >
+              Recent notes
+            </p>
+            <TTCLogList
+              logs={logs.slice(0, 8)}
+              onEdit={openPanelForEdit}
+              onDeleted={refetchLogs}
+            />
+          </div>
+        </section>
+
         {/* Focus */}
         <section className="mb-10 sm:mb-12">
           <TTCJourneyFocusCard stage={derivedStage} />
         </section>
+
+
 
         {/* Guidance */}
         <section className="mb-10 sm:mb-12">

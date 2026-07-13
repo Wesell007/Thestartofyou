@@ -742,7 +742,7 @@ const OvulationResult = ({
                   className="shrink-0"
                   style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
                 />
-                <span className="font-sans text-[14px] font-light text-foreground/85 group-hover:text-foreground transition-colors leading-relaxed">
+                <span className="font-sans text-[14px] text-foreground group-hover:text-foreground transition-colors leading-relaxed">
                   {q}
                 </span>
               </Link>

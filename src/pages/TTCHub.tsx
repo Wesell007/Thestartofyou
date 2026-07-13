@@ -1096,10 +1096,10 @@ const TTCHub = () => {
         <Hero />
         <WhatThisCovers />
         <AISupport />
-        <TTCCommonQuestions />
         <JourneyTimeline />
-        <TTCIVFPathway />
         <TopicLibrary />
+        <TTCIVFPathway />
+        <TTCCommonQuestions />
         <Reassurance />
       </main>
       <Footer />

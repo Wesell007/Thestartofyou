@@ -1,75 +1,63 @@
-## Phase 9.2f — TTC Hub UX Polish (pre-SEO)
+## Phase 9.2f.1 — TTC Placement + Common Questions Link Audit
 
-TTC-only polish pass. No SEO, routes, sitemap, robots, article copy, calculator logic, or other hub files touched.
+TTC-only correction. No SEO, sitemap, robots, article copy, calculator, or other-hub changes.
 
-### Files to inspect (read-only)
-- `src/pages/TTC.tsx` — section ordering
-- `src/components/ttc/TTCCommonQuestions.tsx` — current version (replaced)
-- `src/components/ttc/TTCPathways.tsx`, `TTCFocus.tsx`, `TTCStages.tsx`, `TTCWhatThisCovers.tsx` — check where IVF currently surfaces
-- `src/data/ttcTopicData.ts` — confirm IVF topic entry
-- `src/pages/AskPage.tsx` — extend suggestion map
-- Reference only: `FamilyCommonQuestions.tsx`, `firstyear/new/FYCommonQuestions.tsx` for accordion pattern
+### Files inspected
+- `src/pages/TTCHub.tsx` (live TTC hub; `TTC.tsx` is `/legacy` only)
+- `src/components/ttc/TTCCommonQuestions.tsx`
+- `src/components/ttc/TTCIVFPathway.tsx`
+- `src/App.tsx` (route map — confirms `TTCHub` is `/trying-to-conceive`)
+- `src/data/articleData.ts` (TTC article slug audit)
 
-### Files to edit
+### Issue 1 — Section order (edit `src/pages/TTCHub.tsx`)
 
-**1. `src/components/ttc/TTCCommonQuestions.tsx`** — replace
-Rewrite using the FY/Family accordion pattern in TTC green (`--stage-ttc*`). Six items:
-1. Fertile window → `/trying-to-conceive/ovulation` · `topic=fertile-window`
-2. Cycle tracking → `/trying-to-conceive/cycle-tracking` · `topic=cycle-tracking`
-3. Pregnancy tests → `/trying-to-conceive/pregnancy-tests` · `topic=pregnancy-tests`
-4. Two-week wait → `/trying-to-conceive/two-week-wait` · `topic=two-week-wait`
-5. When to ask for help → `/trying-to-conceive/fertility` · `topic=when-to-ask-help`
-6. IVF next step → `/ivf` · `topic=ivf-next-step`
+Current render (lines ~1096–1103):
+```text
+Hero → WhatThisCovers → AISupport → TTCCommonQuestions → JourneyTimeline → TTCIVFPathway → TopicLibrary → Reassurance
+```
 
-Each item: question, short answer (exact copy from brief), Read more link, Ask more link `/ask?stage=ttc&topic=...`. Heading "Questions while trying to conceive"; subheading as specified. Careful wording — no medical thresholds.
+`TopicLibrary` already contains the "Timing & testing" and "Fertility & health" groupings, so IVF pathway and Common Questions must move **after** it.
 
-**2. New `src/components/ttc/TTCIVFPathway.tsx`**
-Standout full-width feature panel (wider than topic cards, stronger border, TTC green palette, calm tone):
-- Eyebrow: CONNECTED HUB
-- Title: Explore IVF guidance
-- Description: as specified
-- Primary CTA button → `/ivf` ("Go to IVF hub")
-- Secondary text link → `/ivf-timeline` ("View IVF timeline")
-- Subtle arrow/pathway visual, no alarming tone
-
-**3. `src/pages/TTC.tsx`** — reorder + insert
-New order:
+New render order:
 ```text
 Hero
 WhatThisCovers
 AISupport
-CommonQuestions   ← new position (was after WhatMakesDifferent)
-Stages
-Focus
-WhatMakesDifferent
-IVFPathway        ← NEW, between Focus/Different and library
-EmotionalReminder
-Reflection
-Capture
-Pathways
-FinalCTA
+JourneyTimeline          (TTC journey / stages)
+TopicLibrary             (core TTC topics incl. Timing & testing, Fertility & health)
+TTCIVFPathway            ← moved here (immediately after Fertility & health group)
+TTCCommonQuestions       ← moved here (immediately after IVF pathway)
+Reassurance
 ```
-Import `TTCIVFPathway`. Keep all existing sections mounted.
 
-**4. `src/components/ttc/TTCPathways.tsx`** — de-emphasise IVF
-If the current pathways/library grid surfaces IVF as a small card, drop that single card (or swap it for a non-IVF pathway) so IVF only appears in the standout section. No other content changes.
+Only reorder the JSX in the `TTCHub` component; no other logic touched.
 
-**5. `src/pages/AskPage.tsx`** — add TTC suggestions
-`ttc` already exists in `aiStageStyles`. Add `TTC_TOPIC_SUGGESTIONS` map with the six topic keys and 4 chips each (exact strings from brief). Extend the `topicSuggestions` selector:
-```ts
-|| (stageKey === "ttc" && TTC_TOPIC_SUGGESTIONS[topic])
-```
-No changes to first-year/recovery/family/toddler/generic behaviour.
+### Issue 2 — Common Questions link audit (edit `src/components/ttc/TTCCommonQuestions.tsx`)
+
+Article-slug audit result:
+
+| Question | Real article? | Decision |
+|---|---|---|
+| Fertile window | ✓ `/articles/fertile-window` | **Read more** → article |
+| Cycle tracking | ✗ (subtopic only) | **Remove Read more button.** Keep instant answer + Ask more. |
+| Pregnancy tests | ✓ `/articles/when-to-take-a-pregnancy-test` | **Read more** → article |
+| Two-week wait | ✓ `/articles/two-week-wait` | **Read more** → article |
+| When to ask for fertility help | ✓ `/articles/how-long-to-try-before-getting-help` | **Read more** → article |
+| IVF next step | Hub, not article | **Explore IVF guidance** → `/ivf` (relabelled; icon stays) |
+
+Implementation:
+- Extend `QItem` with an optional `readMore` object (`{ href, label }`). When absent, the accordion body renders only the instant answer + Ask more chip.
+- Update the six question entries with the mapping above. IVF entry uses label "Explore IVF guidance".
+- No palette, layout, animation, or Ask-flow changes. Ask more links remain `/ask?stage=ttc&topic=<key>` for all six.
 
 ### Behaviour after change
-- `/trying-to-conceive`: IVF surfaces only as a clear standout pathway section; common questions accordion present with TTC green styling.
-- `/ask?stage=ttc&topic=<key>` for the 6 keys: TTC tint, blank input, generic chips hidden, TTC chips shown, no auto-submit.
-- `/ask` and other stage/topic URLs: unchanged.
+- `/trying-to-conceive`: IVF pathway sits after the Fertility & health group; Common Questions sits directly after IVF pathway; no misleading "Read more" labels.
+- Ask more chips + TTC Ask suggestion chips unchanged.
+- All other hubs and `/ask` variants unchanged.
 
 ### Verification
 - `bunx tsgo --noEmit`
-- Playwright screenshots: `/trying-to-conceive` at 1280×1800 and 375×812
-- Playwright: 6 TTC Ask URLs render TTC styling with correct chips
-- Regression: `/ask`, `/ask?stage=first-year&topic=sleep`, `/ask?stage=recovery&topic=recovery-bleeding`, `/ask?stage=family&topic=another-baby`, `/ask?stage=toddler&topic=tantrums`, `/pregnancy`, `/first-year`, `/toddler`, `/family`, `/ivf`, `/articles/complete-guide-morning-sickness`
+- Playwright screenshots of `/trying-to-conceive` at 1280×1800 and 375×812 to confirm order + no mobile overflow.
+- Spot-check regression routes: `/ask?stage=ttc&topic=fertile-window`, `/ask?stage=ttc&topic=ivf-next-step`, `/pregnancy`, `/first-year`, `/toddler`, `/family`, `/ivf`, `/articles/complete-guide-morning-sickness`.
 
 After ship: safe to proceed to Phase 9.3 TTC SEO.

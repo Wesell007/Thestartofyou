@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Compass } from "lucide-react";
 
 const TTCIVFPathway = () => {
   return (
@@ -8,15 +8,15 @@ const TTCIVFPathway = () => {
         <div
           className="relative rounded-3xl border-2 overflow-hidden"
           style={{
-            borderColor: "hsl(var(--stage-ttc-accent) / 0.35)",
-            backgroundColor: "hsl(var(--stage-ttc) / 0.35)",
+            borderColor: "hsl(var(--stage-ivf-accent) / 0.35)",
+            backgroundColor: "hsl(var(--stage-ivf) / 0.35)",
           }}
         >
           {/* Botanical arrow visual */}
           <div
             aria-hidden
             className="absolute -right-16 -bottom-16 w-64 h-64 rounded-full blur-3xl pointer-events-none"
-            style={{ backgroundColor: "hsl(var(--stage-ttc-accent) / 0.18)" }}
+            style={{ backgroundColor: "hsl(var(--stage-ivf-accent) / 0.18)" }}
           />
 
           <div className="relative grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-10 p-8 sm:p-10 md:p-14">
@@ -24,11 +24,11 @@ const TTCIVFPathway = () => {
               <div className="flex items-center gap-2 mb-4">
                 <span
                   className="h-px w-8"
-                  style={{ backgroundColor: "hsl(var(--stage-ttc-accent) / 0.6)" }}
+                  style={{ backgroundColor: "hsl(var(--stage-ivf-accent) / 0.6)" }}
                 />
                 <span
                   className="font-sans text-[11px] font-medium tracking-[0.24em] uppercase"
-                  style={{ color: "hsl(var(--stage-ttc-accent))" }}
+                  style={{ color: "hsl(var(--stage-ivf-accent))" }}
                 >
                   Connected hub
                 </span>
@@ -51,10 +51,11 @@ const TTCIVFPathway = () => {
                   to="/ivf"
                   className="group inline-flex items-center gap-2 rounded-full px-6 py-3 font-sans text-[13.5px] font-medium transition-all hover:-translate-y-[1px]"
                   style={{
-                    backgroundColor: "hsl(var(--stage-ttc-accent))",
+                    backgroundColor: "hsl(var(--stage-ivf-accent))",
                     color: "hsl(var(--card))",
                   }}
                 >
+                  <Sparkles size={14} strokeWidth={1.8} />
                   Go to IVF hub
                   <ArrowRight
                     size={15}
@@ -63,11 +64,15 @@ const TTCIVFPathway = () => {
                 </Link>
                 <Link
                   to="/ivf-timeline"
-                  className="inline-flex items-center gap-1.5 font-sans text-[13px] font-medium border-b border-transparent hover:border-current transition-all pb-0.5"
-                  style={{ color: "hsl(var(--stage-ttc-accent))" }}
+                  className="inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 font-sans text-[13px] font-medium border transition-all hover:-translate-y-[1px]"
+                  style={{
+                    borderColor: "hsl(var(--stage-ivf-accent) / 0.35)",
+                    backgroundColor: "hsl(var(--card))",
+                    color: "hsl(var(--stage-ivf-accent))",
+                  }}
                 >
+                  <Compass size={13} strokeWidth={1.9} />
                   View IVF timeline
-                  <ArrowRight size={12} />
                 </Link>
               </div>
             </div>
@@ -77,17 +82,17 @@ const TTCIVFPathway = () => {
               <div
                 className="w-full max-w-[260px] rounded-2xl p-6 border"
                 style={{
-                  borderColor: "hsl(var(--stage-ttc-accent) / 0.28)",
+                  borderColor: "hsl(var(--stage-ivf-accent) / 0.28)",
                   backgroundColor: "hsl(var(--card))",
                 }}
               >
                 <div
                   className="w-11 h-11 rounded-full flex items-center justify-center mb-4"
-                  style={{ backgroundColor: "hsl(var(--stage-ttc) / 0.7)" }}
+                  style={{ backgroundColor: "hsl(var(--stage-ivf) / 0.7)" }}
                 >
                   <Sparkles
                     size={18}
-                    style={{ color: "hsl(var(--stage-ttc-accent))" }}
+                    style={{ color: "hsl(var(--stage-ivf-accent))" }}
                     strokeWidth={1.8}
                   />
                 </div>

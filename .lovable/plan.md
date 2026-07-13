@@ -66,3 +66,20 @@ No edits to TTC, IVF, Family, First Year, Toddler files, `articleData.ts` conten
 - Regression: `/ask` (generic chips), `/ask?stage=ttc&topic=fertile-window`, `stage=first-year&topic=sleep`, `stage=recovery&topic=recovery-bleeding`, `stage=family&topic=another-baby`, `stage=toddler&topic=tantrums`; `/trying-to-conceive`, `/ivf`, `/first-year`, `/toddler`, `/family`, `/articles/complete-guide-morning-sickness`
 
 After ship: safe to proceed to Phase 9.3 TTC SEO.
+
+---
+
+# Phase 9.2f.2 — TTC IVF Pathway Colour Alignment
+
+Small visual correction: the TTC IVF connected pathway now uses IVF/lavender tokens (`--stage-ivf`, `--stage-ivf-accent`) instead of TTC green, so it reads as a connected IVF hub rather than another TTC topic card.
+
+## Files edited
+- `src/components/ttc/TTCIVFPathway.tsx` — swapped all colour tokens, borders, blur, buttons and card accents to IVF palette; kept existing copy, section placement and route targets
+
+## Verification
+- `bunx tsgo --noEmit` passed
+- Playwright: `/trying-to-conceive` at 1280×1800 and 375×812 — TTC IVF pathway still appears after Fertility & health and before Common Questions; card uses IVF/lavender styling; CTAs route to `/ivf` and `/ivf-timeline`; no mobile overflow
+- Regression: `/pregnancy`, `/ivf`, `/ask?stage=ttc&topic=ivf-next-step`, `/first-year`, `/toddler`, `/family` all load
+
+After ship: safe to proceed to Phase 9.3 TTC SEO.
+

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import {
   getActiveTTCJourney,
@@ -16,6 +16,7 @@ import {
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import { getRecentTTCLogs, type TTCLog } from "@/lib/ttcLogs";
+import { computeTTCInsights } from "@/lib/ttcInsights";
 import TTCJourneySummary from "@/components/ttc/journey/TTCJourneySummary";
 import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
 import TTCJourneyFocusCard from "@/components/ttc/journey/TTCJourneyFocusCard";
@@ -23,8 +24,11 @@ import TTCJourneyGuidance from "@/components/ttc/journey/TTCJourneyGuidance";
 import TTCJourneyCalendar from "@/components/ttc/journey/TTCJourneyCalendar";
 import TTCLogEntryPanel from "@/components/ttc/journey/TTCLogEntryPanel";
 import TTCLogList from "@/components/ttc/journey/TTCLogList";
+import TTCJourneyInsights from "@/components/ttc/journey/TTCJourneyInsights";
+import TTCPregnancyHandover from "@/components/ttc/journey/TTCPregnancyHandover";
 
 type Status = "loading" | "empty" | "pregnancy_active" | "ready";
+
 
 const todayIso = () => format(new Date(), "yyyy-MM-dd");
 
@@ -124,6 +128,17 @@ const MyTTCJourney = () => {
     setPanelDate(log.log_date);
     setPanelOpen(true);
   };
+
+  const handoverRef = useRef<HTMLElement | null>(null);
+  const scrollToHandover = useCallback(() => {
+    handoverRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  const insights = useMemo(() => {
+    if (!journey) return [];
+    return computeTTCInsights({ stage: derivedStage, journey, logs });
+  }, [journey, derivedStage, logs]);
+
 
 
 
@@ -258,17 +273,26 @@ const MyTTCJourney = () => {
           </div>
         </section>
 
+        {/* Gentle insights */}
+        <section className="mb-10 sm:mb-12">
+          <TTCJourneyInsights
+            insights={insights}
+            onOpenLogPanel={() => openPanelForDate(todayIso())}
+            onScrollToHandover={scrollToHandover}
+          />
+        </section>
+
         {/* Focus */}
         <section className="mb-10 sm:mb-12">
           <TTCJourneyFocusCard stage={derivedStage} />
         </section>
 
 
-
         {/* Guidance */}
         <section className="mb-10 sm:mb-12">
           <TTCJourneyGuidance stage={derivedStage} journey={journey} />
         </section>
+
 
         {/* Ask */}
         <section
@@ -334,50 +358,9 @@ const MyTTCJourney = () => {
           </Link>
         </section>
 
-        {/* Positive test soft handover */}
-        <section
-          className="rounded-[20px] px-6 sm:px-7 py-7 keepsake-surface"
-          style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.18)" }}
-        >
-          <div className="flex items-start gap-3 mb-3">
-            <div
-              className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-              style={{ background: "hsl(var(--stage-pregnancy-accent) / 0.14)" }}
-            >
-              <Sparkles size={15} style={{ color: "hsl(var(--stage-pregnancy-accent))" }} />
-            </div>
-            <div className="flex-1">
-              <p
-                className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-1"
-                style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-              >
-                If your news changes
-              </p>
-              <h2 className="font-serif text-[20px] sm:text-[22px] text-foreground mb-2 leading-snug">
-                Got a positive test?
-              </h2>
-              <p className="font-serif italic text-foreground/68 text-[15px] leading-[1.6] mb-5 max-w-[52ch]">
-                When you are ready, you can move into pregnancy guidance and
-                estimate your due date.
-              </p>
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
-                <Link
-                  to="/due-date-calculator"
-                  className="inline-flex items-center gap-2 rounded-pill px-5 py-2.5 font-sans text-sm font-medium text-white shadow-cta hover:opacity-90 transition-opacity"
-                  style={{ background: "hsl(var(--stage-pregnancy-accent))" }}
-                >
-                  Use the due date calculator <ArrowRight size={14} />
-                </Link>
-                <Link
-                  to="/pregnancy"
-                  className="font-sans text-[13.5px] text-muted-foreground hover:text-foreground transition-colors underline-offset-4 hover:underline"
-                >
-                  Explore pregnancy guidance
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Pregnancy handover */}
+        <TTCPregnancyHandover ref={handoverRef} journey={journey} />
+
       </main>
 
       {userId && journey && (

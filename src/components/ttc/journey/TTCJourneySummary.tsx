@@ -28,7 +28,7 @@ const fmt = (iso: string | null): string => {
 const fmtRange = (a: string | null, b: string | null): string => {
   if (!a || !b) return "Not set yet";
   try {
-    return `${format(new Date(a), "d MMM")} – ${format(new Date(b), "d MMM")}`;
+    return `${format(new Date(a), "d MMM")} to ${format(new Date(b), "d MMM")}`;
   } catch {
     return "Not set yet";
   }

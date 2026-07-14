@@ -186,7 +186,7 @@ const SetupTTC = () => {
 
   const ctaLabel = useMemo(() => {
     if (submitting) return null;
-    if (mode === "signed_out") return "Continue — sign in to save";
+    if (mode === "signed_out") return "Continue, sign in to save";
     if (existing) return "Update TTC setup";
     return "Save my TTC journey";
   }, [mode, existing, submitting]);

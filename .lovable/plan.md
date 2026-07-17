@@ -1,41 +1,80 @@
-## Phase 9.5g.1 — TTC Dashboard Stage Deduplication
+## Phase 9.10 — StagePage Safety and Canonical Cleanup
 
-### Problem
-`TTCJourneyInsights` and `TTCJourneyFocusCard` both key off the derived `stage`, so a user in `two_week_wait` sees "The wait can feel emotionally loud" in Insights and "You may be in the two-week wait" in Today's focus. Same theme, back-to-back.
+Scope-limited SEO/redirect pass. No content, hub, calculator formula, or TTC Journey changes.
 
-### Rule
-Today's focus owns generic stage guidance. Insights only surface a stage-based card when it adds something the focus card does not (a genuine lead-in, or a personalised trigger). Personalised, log-driven insights are always allowed.
+### 1. TTC StagePage SEO (allowlisted)
 
-### Fix (single file: `src/lib/ttcInsights.ts`)
+Edit `src/pages/StagePage.tsx`:
+- Import `SeoHead` from `@/components/seo/SeoHead`.
+- Define an explicit allowlist keyed by `${journey}/${stage}` covering only:
+  - `trying-to-conceive/understanding-your-cycle`
+  - `trying-to-conceive/timing-and-tracking`
+  - `trying-to-conceive/waiting-and-testing`
+- Each entry provides title, description, canonical (absolute `https://thestartofyou.com/...`).
+- Render `<SeoHead ... />` at the top of the returned JSX only when the current route matches the allowlist. All other wildcard routes render without `SeoHead` (unchanged behaviour). No JSON-LD, no author, no reviewedBy.
 
-Change the "4. Stage-based card" block so it no longer emits generic stage cards that duplicate Today's focus:
+Metadata values exactly as supplied in the brief.
 
-- **`two_week_wait`** → remove entirely. Today's focus already covers it.
-- **`fertile_window` / `likely_ovulation`** (`in_fertile_window` insight) → remove. Today's focus already covers it.
-- **`test_window` / `expected_period`** (`testing_soon` insight) → remove. Today's focus already covers it.
-- **`before_ovulation` + fertile window within 3 days** (`fertile_window_approaching`) → **keep**. This is genuinely anticipatory (user is not yet in the fertile window), so it complements rather than duplicates Today's focus.
+### 2. Redirect orphaned postpartum StagePage routes
 
-All log-driven insights remain untouched:
-- `positive_pregnancy_test`
-- `period_started`
-- `repeated_negative_tests`
-- `no_logs_yet`
+In `src/App.tsx`, add explicit routes above the `/:journey/:stage` wildcard:
 
-The `TTCInsightId` union will lose `in_fertile_window`, `two_week_wait`, and `testing_soon`. No other files need changes — `TTCJourneyInsights.tsx`, `TTCJourneyFocusCard.tsx`, and `MyTTCJourney.tsx` render whatever the helper returns.
+```text
+/postpartum/early-days          → /first-year/postpartum-recovery/healing-after-birth
+/postpartum/early-weeks         → /first-year/postpartum-recovery/what-recovery-can-feel-like
+/postpartum/ongoing-adjustment  → /first-year/emotional-wellbeing/feeling-like-yourself-again
+```
+
+Use `<Route path="..." element={<Navigate to="..." replace />} />`. No new pages, `/postpartum/legacy` unchanged.
+
+### 3. Redirect duplicate `/trying-to-conceive/ovulation-calculator`
+
+Replace the current duplicate route:
+
+```tsx
+<Route path="/trying-to-conceive/ovulation-calculator" element={<OvulationCalculator />} />
+```
+
+with a small inline query-preserving redirect component defined in `src/App.tsx`:
+
+```tsx
+const RedirectToOvulationCalculator = () => {
+  const { search } = useLocation();
+  return <Navigate to={`/ovulation-calculator${search}`} replace />;
+};
+```
+
+Add `useLocation` to the react-router-dom import. Calculator page, formulas, and canonical `/ovulation-calculator` untouched.
+
+### 4. Redirect duplicate `/articles/signs-of-ovulation` → `/articles/ovulation-signs`
+
+Add an explicit route above the generic `/articles/:slug`:
+
+```tsx
+<Route path="/articles/signs-of-ovulation" element={<Navigate to="/articles/ovulation-signs" replace />} />
+```
+
+No article data touched.
+
+### 5. Sitemap update
+
+Edit `scripts/generate-sitemap.ts`: extend the TTC static list with the 3 allowlisted TTC StagePage URLs (append after existing TTC entries, before assembly dedupe). Do not add postpartum, duplicate calculator, or duplicate article routes.
+
+Regenerate `public/sitemap.xml` by running the generator; verify:
+- 3 new TTC URLs present
+- no `/postpartum/*` StagePage URLs
+- no `/trying-to-conceive/ovulation-calculator`
+- no `/articles/signs-of-ovulation`
+- `/due-date-results` still absent
+- no duplicates, no query strings, valid XML
+- `public/robots.txt` unchanged (Sitemap directive still present)
+
+### 6. Verification
+
+- `bunx tsgo --noEmit`
+- Manual route checks per brief (TTC stage SEO in `<head>`, all 3 postpartum redirects, calculator redirect with query string preserved, article slug redirect, regression list of core routes).
 
 ### Files
-- Inspect: `src/lib/ttcInsights.ts`, `src/components/ttc/journey/TTCJourneyInsights.tsx`, `src/components/ttc/journey/TTCJourneyFocusCard.tsx`, `src/pages/MyTTCJourney.tsx`
-- Edit: `src/lib/ttcInsights.ts` only
 
-### Verification
-- `bunx tsgo --noEmit`
-- Walk through mental test cases:
-  1. Two-week wait, no logs → Insights empty of stage card; Today's focus shows two-week wait.
-  2. Positive test logged → positive-test insight present; no generic stage duplicate.
-  3. Period started near expected date → period-start insight present.
-  4. No logs, before ovulation with fertile window >3 days away → no-logs insight only.
-  5. Before ovulation with fertile window in 2 days → anticipatory "fertile window may be coming up" insight remains (Today's focus shows current before-ovulation state, not the upcoming window, so no duplication).
-  6. In fertile window → no fertile-window insight; Today's focus owns it.
-
-### Not touching
-Data model, logs, RLS, analytics events, SEO, sitemap, robots, calculator formulas, layout, or copy in any other component.
+Edit: `src/App.tsx`, `src/pages/StagePage.tsx`, `scripts/generate-sitemap.ts`, `public/sitemap.xml` (regenerated).
+No new files. No article data edits. No robots edits.

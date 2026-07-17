@@ -261,13 +261,15 @@ const App = () => (
           <Route path="/pregnancy/week/41" element={<Week41Page />} />
           <Route path="/pregnancy/week/42" element={<Week42Page />} />
           <Route path="/pregnancy/week/:week" element={<WeekPage />} />
+          <Route path="/articles/signs-of-ovulation" element={<Navigate to="/articles/ovulation-signs" replace />} />
           <Route path="/articles/:slug" element={<ArticlePage />} />
           <Route path="/due-date-calculator" element={<DueDateCalculator />} />
           <Route path="/due-date-results" element={<DueDateResults />} />
           <Route path="/trying-to-conceive" element={<TTCHub />} />
           <Route path="/trying-to-conceive/legacy" element={<TTC />} />
           <Route path="/ovulation-calculator" element={<OvulationCalculator />} />
-          <Route path="/trying-to-conceive/ovulation-calculator" element={<OvulationCalculator />} />
+          {/* Duplicate mount redirects to canonical /ovulation-calculator, preserving query string. */}
+          <Route path="/trying-to-conceive/ovulation-calculator" element={<RedirectToOvulationCalculator />} />
           <Route path="/trying-to-conceive/ovulation" element={<TTCOvulation />} />
           <Route path="/trying-to-conceive/preconception-health" element={<TTCPreconceptionHealth />} />
           <Route path="/trying-to-conceive/fertility" element={<TTCFertility />} />

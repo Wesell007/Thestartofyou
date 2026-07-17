@@ -133,6 +133,12 @@ const LIVE = {
   fertilityTestsMen: "/articles/fertility-tests-for-men",
   fertilityAppointment: "/articles/what-happens-at-a-fertility-appointment",
   amhTest: "/articles/amh-test-explained",
+
+  // Phase 9.12a (TTC ovulation P0)
+  howToKnowOvulating: "/articles/how-to-know-when-you-are-ovulating",
+  understandingFertileWindow: "/articles/understanding-your-fertile-window",
+  usingOvulationTests: "/articles/using-ovulation-tests",
+  cervicalMucus: "/articles/cervical-mucus-and-fertility",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────

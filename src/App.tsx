@@ -289,6 +289,10 @@ const App = () => (
           <Route path="/postpartum" element={<Navigate to="/first-year#recovery" replace />} />
           {/* Legacy Postpartum hub preserved for reuse during the First Year rebuild. */}
           <Route path="/postpartum/legacy" element={<Postpartum />} />
+          {/* Orphaned postpartum stage URLs redirect into the First Year hub (Phase 9.10). */}
+          <Route path="/postpartum/early-days" element={<Navigate to="/first-year/postpartum-recovery/healing-after-birth" replace />} />
+          <Route path="/postpartum/early-weeks" element={<Navigate to="/first-year/postpartum-recovery/what-recovery-can-feel-like" replace />} />
+          <Route path="/postpartum/ongoing-adjustment" element={<Navigate to="/first-year/emotional-wellbeing/feeling-like-yourself-again" replace />} />
           <Route path="/first-year" element={<FirstYear />} />
           {/* First Year phase bridge pages — must sit above /:journey/:stage */}
           <Route path="/first-year/0-3-months" element={<FYPhaseZeroToThree />} />

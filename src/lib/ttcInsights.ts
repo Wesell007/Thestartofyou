@@ -22,9 +22,6 @@ export type TTCInsightId =
   | "period_started"
   | "repeated_negative_tests"
   | "fertile_window_approaching"
-  | "in_fertile_window"
-  | "two_week_wait"
-  | "testing_soon"
   | "no_logs_yet";
 
 export type TTCInsight = {

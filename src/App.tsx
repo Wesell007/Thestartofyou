@@ -147,6 +147,13 @@ import { EVENTS } from "./lib/analyticsEvents.ts";
 
 const queryClient = new QueryClient();
 
+// Query-preserving redirect from the duplicate TTC ovulation calculator
+// mount to the canonical /ovulation-calculator route.
+const RedirectToOvulationCalculator = () => {
+  const { search } = useLocation();
+  return <Navigate to={`/ovulation-calculator${search}`} replace />;
+};
+
 const AnalyticsIdentityBridge = () => {
   useEffect(() => {
     let cancelled = false;

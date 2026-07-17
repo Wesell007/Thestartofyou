@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -147,6 +147,13 @@ import { EVENTS } from "./lib/analyticsEvents.ts";
 
 const queryClient = new QueryClient();
 
+// Query-preserving redirect from the duplicate TTC ovulation calculator
+// mount to the canonical /ovulation-calculator route.
+const RedirectToOvulationCalculator = () => {
+  const { search } = useLocation();
+  return <Navigate to={`/ovulation-calculator${search}`} replace />;
+};
+
 const AnalyticsIdentityBridge = () => {
   useEffect(() => {
     let cancelled = false;
@@ -254,13 +261,15 @@ const App = () => (
           <Route path="/pregnancy/week/41" element={<Week41Page />} />
           <Route path="/pregnancy/week/42" element={<Week42Page />} />
           <Route path="/pregnancy/week/:week" element={<WeekPage />} />
+          <Route path="/articles/signs-of-ovulation" element={<Navigate to="/articles/ovulation-signs" replace />} />
           <Route path="/articles/:slug" element={<ArticlePage />} />
           <Route path="/due-date-calculator" element={<DueDateCalculator />} />
           <Route path="/due-date-results" element={<DueDateResults />} />
           <Route path="/trying-to-conceive" element={<TTCHub />} />
           <Route path="/trying-to-conceive/legacy" element={<TTC />} />
           <Route path="/ovulation-calculator" element={<OvulationCalculator />} />
-          <Route path="/trying-to-conceive/ovulation-calculator" element={<OvulationCalculator />} />
+          {/* Duplicate mount redirects to canonical /ovulation-calculator, preserving query string. */}
+          <Route path="/trying-to-conceive/ovulation-calculator" element={<RedirectToOvulationCalculator />} />
           <Route path="/trying-to-conceive/ovulation" element={<TTCOvulation />} />
           <Route path="/trying-to-conceive/preconception-health" element={<TTCPreconceptionHealth />} />
           <Route path="/trying-to-conceive/fertility" element={<TTCFertility />} />
@@ -280,6 +289,10 @@ const App = () => (
           <Route path="/postpartum" element={<Navigate to="/first-year#recovery" replace />} />
           {/* Legacy Postpartum hub preserved for reuse during the First Year rebuild. */}
           <Route path="/postpartum/legacy" element={<Postpartum />} />
+          {/* Orphaned postpartum stage URLs redirect into the First Year hub (Phase 9.10). */}
+          <Route path="/postpartum/early-days" element={<Navigate to="/first-year/postpartum-recovery/healing-after-birth" replace />} />
+          <Route path="/postpartum/early-weeks" element={<Navigate to="/first-year/postpartum-recovery/what-recovery-can-feel-like" replace />} />
+          <Route path="/postpartum/ongoing-adjustment" element={<Navigate to="/first-year/emotional-wellbeing/feeling-like-yourself-again" replace />} />
           <Route path="/first-year" element={<FirstYear />} />
           {/* First Year phase bridge pages — must sit above /:journey/:stage */}
           <Route path="/first-year/0-3-months" element={<FYPhaseZeroToThree />} />

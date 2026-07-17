@@ -3,6 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { MessageCircle, PenLine, ArrowUpRight, ArrowDown, CheckCircle2 } from "lucide-react";
 import JournalPromotion from "@/components/shared/JournalPromotion";
+import SeoHead from "@/components/seo/SeoHead";
 import { ttcStages, type StageData } from "@/data/stageData";
 import { postpartumStages } from "@/data/postpartumStageData";
 import { ivfStages } from "@/data/ivfStageData";
@@ -17,6 +18,33 @@ const stageRegistry: Record<string, Record<string, StageData>> = {
   "first-year": firstYearStages,
 };
 
+// Explicit SEO allowlist for wildcard StagePage routes. Only listed routes
+// receive indexable route-aware metadata; every other stage route renders
+// without SeoHead to avoid broad wildcard indexation.
+const stageSeoAllowlist: Record<
+  string,
+  { title: string; description: string; canonical: string }
+> = {
+  "trying-to-conceive/understanding-your-cycle": {
+    title: "Understanding Your Cycle When Trying to Conceive | The Start of You",
+    description:
+      "A calm guide to understanding your cycle, fertile window and ovulation timing when you are trying to conceive.",
+    canonical: "https://thestartofyou.com/trying-to-conceive/understanding-your-cycle",
+  },
+  "trying-to-conceive/timing-and-tracking": {
+    title: "Timing and Tracking When Trying to Conceive | The Start of You",
+    description:
+      "Gentle guidance on cycle tracking, ovulation timing and using estimates without pressure when trying to conceive.",
+    canonical: "https://thestartofyou.com/trying-to-conceive/timing-and-tracking",
+  },
+  "trying-to-conceive/waiting-and-testing": {
+    title: "Waiting and Testing When Trying to Conceive | The Start of You",
+    description:
+      "Supportive guidance for the two-week wait, pregnancy testing and managing uncertainty while trying to conceive.",
+    canonical: "https://thestartofyou.com/trying-to-conceive/waiting-and-testing",
+  },
+};
+
 const StagePage = () => {
   const { journey, stage } = useParams<{ journey: string; stage: string }>();
   const stageMap = journey ? stageRegistry[journey] : undefined;
@@ -24,8 +52,18 @@ const StagePage = () => {
 
   if (!data) return <NotFound />;
 
+  const seo = stageSeoAllowlist[`${journey}/${stage}`];
+
   return (
     <div className="min-h-screen font-sans">
+      {seo ? (
+        <SeoHead
+          title={seo.title}
+          description={seo.description}
+          canonical={seo.canonical}
+          ogUrl={seo.canonical}
+        />
+      ) : null}
       <Navbar />
       <main>
         {/* 1. HERO */}

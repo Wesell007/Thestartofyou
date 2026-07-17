@@ -116,7 +116,7 @@ export const computeTTCInsights = ({
     });
   }
 
-  // 4. Stage-based card (exactly one)
+  // 4. Stage-based card (anticipatory only — Today's focus owns current-stage guidance)
   if (stage) {
     if (stage === "before_ovulation" && fertileStart) {
       const daysToStart = differenceInCalendarDays(fertileStart, today);
@@ -130,33 +130,6 @@ export const computeTTCInsights = ({
           action: { kind: "link", href: "/trying-to-conceive/ovulation" },
         });
       }
-    } else if (stage === "fertile_window" || stage === "likely_ovulation") {
-      out.push({
-        id: "in_fertile_window",
-        heading: "You may be in a more fertile part of this cycle",
-        copy:
-          "These dates are estimates, but they can help you decide when trying may feel most useful.",
-        ctaLabel: "Ask about timing",
-        action: { kind: "link", href: "/ask?stage=ttc&topic=fertile-window" },
-      });
-    } else if (stage === "two_week_wait") {
-      out.push({
-        id: "two_week_wait",
-        heading: "The wait can feel emotionally loud",
-        copy:
-          "It can be hard not to read into every sign. You can use this space to note what you want without needing to solve it today.",
-        ctaLabel: "Read two-week wait guidance",
-        action: { kind: "link", href: "/trying-to-conceive/two-week-wait" },
-      });
-    } else if (stage === "test_window" || stage === "expected_period") {
-      out.push({
-        id: "testing_soon",
-        heading: "Testing may feel more useful soon",
-        copy:
-          "Waiting until around your expected period can help reduce some of the confusion that comes with testing very early.",
-        ctaLabel: "Read pregnancy test guidance",
-        action: { kind: "link", href: "/trying-to-conceive/pregnancy-tests" },
-      });
     }
   }
 

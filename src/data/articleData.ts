@@ -15917,6 +15917,591 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── PHASE 9.12a: OVULATION P0 BATCH ────────────────────────────────────
+  // Four flagship-standard ovulation and fertile window articles that
+  // strengthen the /trying-to-conceive/ovulation pillar page.
+
+  // ─── HOW TO KNOW WHEN YOU ARE OVULATING ─────────────────────────────────
+  {
+    slug: "how-to-know-when-you-are-ovulating",
+    title: "How to know when you are ovulating",
+    metaDescription: "Calm UK guidance on the signs that may suggest ovulation is approaching or has happened, how reliable each one is, and when to ask for support.",
+    quickAnswer: "Signs that may suggest ovulation is close include clearer, stretchier cervical mucus, a small rise in libido or energy, mild one-sided pelvic twinges, and a positive ovulation test. A small, sustained rise in basal body temperature usually appears after ovulation. No single sign is exact, and some people ovulate without noticing much at all.",
+    standfirst: "Your body often gives quiet, imperfect signals around ovulation. Reading them together, gently, is more useful than chasing any single one.",
+    howThisFeels: [
+      "Scanning your body for clues every day",
+      "Hopeful when a sign appears and deflated when it doesn't",
+      "Unsure whether you are noticing something real or imagining it",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Rising oestrogen before ovulation", body: "In the days before ovulation, oestrogen rises. This may make cervical mucus wetter and stretchier, and can lift energy or libido for some people." },
+        { heading: "The LH surge", body: "A short surge in luteinising hormone (LH) triggers the egg to be released, usually about 24 to 36 hours later. Home ovulation tests look for this surge in urine." },
+        { heading: "Progesterone after ovulation", body: "Once ovulation has happened, progesterone rises and may cause a small, sustained lift in basal body temperature of around 0.2 to 0.5°C." },
+      ],
+      lessCauses: [
+        { heading: "Mittelschmerz", body: "Some people notice a brief, mild ache on one side of the lower abdomen around ovulation. It often lasts minutes to a few hours and is not felt by everyone." },
+        { heading: "Light mid-cycle spotting", body: "A small number of people notice very light spotting around ovulation. On its own it is usually nothing to worry about." },
+        { heading: "Skin, mood, or breast changes", body: "Subtle changes in skin, mood, or breast tenderness can happen around ovulation for some people. These are soft signals, not measurements." },
+      ],
+      whyItVaries: "Cycles vary, hormones vary, and bodies vary. Some people notice several clear signs each month, others ovulate regularly without noticing much at all. Neither pattern is a problem on its own.",
+    },
+    timing: { whenStarts: "Signs often appear in the two to three days leading up to ovulation.", whenEases: "Most signs settle within a day or two of the egg being released." },
+    whatItFeelsLike: [
+      "A few days of clearer, stretchier discharge",
+      "A subtle one-sided ache that comes and goes",
+      "A quiet lift in energy or interest in intimacy",
+    ],
+    whatThisMeans: "Ovulation signs point to your fertile window rather than proving a single ovulation day. Reading two or three signs together gives a clearer picture than any one on its own.",
+    normal: [
+      "Noticing one or two signs but not all of them",
+      "Signs that vary from cycle to cycle",
+      "Not noticing any obvious signs at all",
+    ],
+    seekSupport: [
+      "Cycles consistently shorter than 21 days or longer than 35 days",
+      "No periods or very few periods across several months",
+      "Trying to conceive for 12 months without success, or 6 months if you are over 35",
+    ],
+    disclaimer: "This is general guidance and is not a diagnosis. Speak to your GP if you are worried about your cycle, ovulation, or how long you have been trying.",
+    whatYouCanDo: [
+      { action: "Notice one or two signs gently, rather than all of them", reason: "Loose attention is more sustainable than daily surveillance." },
+      { action: "Pair cervical mucus with one other signal", reason: "Two signals together are usually more informative than one." },
+      { action: "Try an ovulation test for a cycle or two if you want more clarity", reason: "It can help you see the LH surge without guessing." },
+      { action: "Step back if tracking is making things harder", reason: "It is okay to take a break from tracking without losing progress." },
+    ],
+    whatHappensNext: "Once ovulation has happened, the two-week wait begins. A pregnancy test tends to be most reliable from the day of your expected period.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Ovulation and your fertile window", href: "/trying-to-conceive/ovulation" },
+        { label: "Ovulation signs", href: "/articles/ovulation-signs" },
+        { label: "Ovulation calculator", href: "/ovulation-calculator" },
+      ],
+    },
+    aiPrompts: [
+      "How do I know if I am ovulating?",
+      "What are the signs of ovulation?",
+      "Can I ovulate without noticing?",
+    ],
+    captureIntro: "Each cycle carries small noticings worth holding onto, gently.",
+    journey: ["trying-to-conceive"],
+    topics: ["body-changes", "timelines"],
+    relatedSlugs: ["understanding-your-fertile-window", "ovulation-signs", "cervical-mucus-and-fertility", "fertile-window"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/week2-ovulation.jpg", import.meta.url).href,
+      alt: "A soft botanical arrangement in muted sage tones beside a folded linen cloth and a quiet notebook.",
+    },
+    sources: [
+      { label: "Periods and fertility in the menstrual cycle", publisher: "NHS", url: "https://www.nhs.uk/conditions/periods/fertility-in-the-menstrual-cycle/" },
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Getting pregnant: How can I improve my chances?", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+    ],
+    keyTakeaways: [
+      "Ovulation signs are useful signals, not proofs of a single ovulation day.",
+      "Cervical mucus, LH tests, and a rise in basal body temperature are the most informative signs, especially in combination.",
+      "Some people ovulate regularly without noticing much, and that is not a problem on its own.",
+      "Very irregular or absent periods are worth an earlier GP conversation.",
+      "Standard UK guidance suggests speaking to a GP after 12 months of trying, or 6 months if you are over 35.",
+    ],
+    faq: [
+      { question: "Can I tell when I have ovulated with certainty?", answer: "Not from body signs alone. A sustained rise in basal body temperature after ovulation is the closest home indicator, and even that is a supportive clue rather than a formal confirmation." },
+      { question: "What if I never notice any ovulation signs?", answer: "Many people ovulate regularly without obvious signs. Regular periods roughly every 21 to 35 days are usually a reassuring sign in themselves." },
+      { question: "How does the ovulation calculator fit in?", answer: "It gives a reasonable starting estimate based on your cycle length, which you can then combine with what your body shows you across a cycle or two." },
+    ],
+    editorialSections: [
+      {
+        id: "what-ovulation-is",
+        heading: "What ovulation actually is",
+        lead: "Ovulation is the release of an egg from one of your ovaries, usually once per cycle.",
+        paragraphs: [
+          "In a typical cycle, hormones rise in the first half to mature an egg. When luteinising hormone surges, the egg is released and travels into the fallopian tube, where it can be fertilised for around 12 to 24 hours before it breaks down.",
+          "Ovulation does not always happen on day 14. In a regular cycle it usually falls around 12 to 16 days before the next period, which can shift the timing earlier or later depending on your cycle length.",
+        ],
+      },
+      {
+        id: "signs-worth-noticing",
+        heading: "Signs that may suggest ovulation is close or has happened",
+        lead: "Most useful signs fall into three groups: cervical mucus, hormone tests, and body sensations.",
+        paragraphs: [
+          "Cervical mucus tends to become clearer, wetter, and stretchier in the days before ovulation. This is often the most accessible daily signal.",
+          "Ovulation tests look for the LH surge in urine, which usually happens about 24 to 36 hours before ovulation. A rise in basal body temperature after ovulation may add a supportive clue that ovulation has already happened.",
+          "Softer signals such as a mild one-sided twinge, a lift in libido, or a change in energy or mood may also appear for some people. These are worth noticing gently, without treating them as proof.",
+        ],
+      },
+      {
+        id: "why-signs-are-not-exact",
+        heading: "Why signs are helpful but not exact",
+        lead: "Ovulation signs are averages made personal. They are informative, not definitive.",
+        paragraphs: [
+          "Hormone shifts, illness, travel, sleep changes, and stress can all soften or shift the signs your body shows. A single missing sign in one cycle does not usually mean anything is wrong.",
+          "Because of this, most people find it more useful to look at two or three signs together, and to look for patterns across a couple of cycles, rather than trying to pin ovulation to one exact day.",
+        ],
+        callout: { tone: "info", text: "A positive ovulation test suggests that ovulation is likely to happen soon. It does not confirm that ovulation has actually taken place." },
+      },
+      {
+        id: "if-cycles-are-irregular",
+        heading: "If your cycles are very irregular or absent",
+        lead: "Very irregular cycles can make ovulation harder to notice, and are worth raising sooner rather than later.",
+        paragraphs: [
+          "If your periods are consistently shorter than 21 days, longer than 35 days, or absent for months at a time, ovulation may be happening less predictably or less often. That does not mean pregnancy is impossible, but it may mean that a GP conversation is a reasonable next step.",
+          "Conditions such as PCOS, thyroid changes, or significant stress can all affect ovulation. A GP can suggest simple checks that help clarify what is happening.",
+        ],
+      },
+      {
+        id: "how-to-use-signs-without-pressure",
+        heading: "How to use signs without turning them into pressure",
+        lead: "Tracking can be useful. It can also quietly tip into surveillance.",
+        paragraphs: [
+          "One or two chosen signals, checked briefly each day, tend to be more sustainable than tracking everything. If checking signs is starting to feel like a job, it is fine to loosen your grip for a cycle.",
+          "Combining a gentle awareness of your body with the ovulation calculator can give you a reasonable sense of your fertile window without daily testing.",
+        ],
+        callout: { tone: "reassurance", text: "Not noticing many ovulation signs is common and does not mean something is wrong. Steady, imperfect attention is enough." },
+      },
+    ],
+  },
+
+  // ─── UNDERSTANDING YOUR FERTILE WINDOW ──────────────────────────────────
+  {
+    slug: "understanding-your-fertile-window",
+    title: "Understanding your fertile window",
+    metaDescription: "What the fertile window is, why it is an estimate, and how to think about timing without pressure. Calm UK guidance for trying to conceive.",
+    quickAnswer: "The fertile window is the small stretch of days in a cycle when conception is most likely. It usually covers roughly the five days before ovulation and the day of ovulation itself, because sperm can survive for a few days while an egg is only fertilisable for around 12 to 24 hours. Cycle length changes when the window falls, which is why it is always an estimate.",
+    standfirst: "The fertile window is often talked about as a single day. In practice, it is a gentler, wider stretch shaped by your cycle.",
+    howThisFeels: [
+      "Worried you might miss the right days",
+      "Trying to plan everything precisely",
+      "Wondering if a calmer approach is okay",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Sperm can survive for several days", body: "Healthy sperm may live in the reproductive tract for up to about five days, which is why intercourse in the days before ovulation can still lead to conception." },
+        { heading: "The egg has a short window", body: "Once released, the egg is fertilisable for around 12 to 24 hours. After that, the window closes until the next cycle." },
+        { heading: "The days before ovulation matter most", body: "Chances of conception are often highest from intercourse in the one to two days before ovulation, when sperm are already in place." },
+      ],
+      lessCauses: [
+        { heading: "Cycle length changes the timing", body: "Ovulation does not always fall on day 14. In a regular cycle it usually happens 12 to 16 days before the next period, so a shorter or longer cycle shifts the window." },
+        { heading: "Ovulation timing can vary between cycles", body: "Illness, travel, stress, or sleep changes may shift ovulation slightly from one cycle to the next." },
+      ],
+      whyItVaries: "The fertile window is a pattern, not a rule. Two people with the same average cycle length can still ovulate on different days of their cycle, and any one person's timing may shift a little each month.",
+    },
+    timing: { whenStarts: "The window usually opens around five days before ovulation.", whenEases: "It closes within about a day of ovulation." },
+    whatItFeelsLike: [
+      "A few days of clearer, stretchier mucus",
+      "A small temperature rise once the window has closed",
+      "A quiet sense of timing rather than a deadline",
+    ],
+    whatThisMeans: "Aiming for intercourse every one to two days across the fertile window is often more realistic than trying to hit a single day exactly. Frequency without pressure is usually the calmer approach.",
+    normal: [
+      "A fertile window of around five to six days",
+      "Some variation in timing from cycle to cycle",
+      "Not conceiving immediately even with good timing",
+    ],
+    seekSupport: [
+      "Cycles consistently shorter than 21 days or longer than 35 days",
+      "Cycles that are very unpredictable across several months",
+      "Trying to conceive for 12 months without success, or 6 months if you are over 35",
+    ],
+    disclaimer: "This is general guidance and is not a fertility assessment. Speak to your GP if cycles are irregular or if you have any concerns.",
+    whatYouCanDo: [
+      { action: "Track one gentle ovulation indicator", reason: "Cervical mucus, an ovulation test, or basal body temperature can turn a guess into a rough window." },
+      { action: "Aim for intercourse every one to two days in the window", reason: "It is more forgiving than trying to hit one exact day." },
+      { action: "Try not to save up for a single day", reason: "Regular intercourse across the window is usually more helpful than long gaps." },
+      { action: "Use the ovulation calculator as a starting point", reason: "It gives a reasonable estimate that you can adjust with what your body shows you." },
+    ],
+    whatHappensNext: "If conception has happened, implantation usually follows around 6 to 12 days later. A pregnancy test tends to be most reliable from the day of your expected period.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Ovulation and your fertile window", href: "/trying-to-conceive/ovulation" },
+        { label: "Ovulation calculator", href: "/ovulation-calculator" },
+        { label: "Fertile window", href: "/articles/fertile-window" },
+      ],
+    },
+    aiPrompts: [
+      "When is my fertile window?",
+      "How often should we try during the fertile window?",
+      "Can the fertile window shift between cycles?",
+    ],
+    captureIntro: "The shape of your cycle is worth remembering, beyond just the dates.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines"],
+    relatedSlugs: ["how-to-know-when-you-are-ovulating", "fertile-window", "cervical-mucus-and-fertility", "ovulation-signs"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-stage-timing.jpg", import.meta.url).href,
+      alt: "A soft cream calendar page beside a small sprig of dried botanical, lit by quiet morning light.",
+    },
+    sources: [
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "How long does it usually take to get pregnant?", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/how-long-it-takes-to-get-pregnant/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Getting pregnant: How can I improve my chances?", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+    ],
+    keyTakeaways: [
+      "The fertile window usually covers around the five days before ovulation and the day of ovulation itself.",
+      "Sperm can survive for several days, while the egg is fertilisable for around 12 to 24 hours.",
+      "Cycle length changes when the window falls, so the window is always an estimate.",
+      "Regular intercourse every one to two days across the window is often more useful than aiming for a single day.",
+      "Ovulation calculators and gentle body awareness both help. Neither is exact.",
+    ],
+    faq: [
+      { question: "How long is the fertile window?", answer: "It is usually around five to six days, covering the days before ovulation and the day of ovulation itself." },
+      { question: "Is the day of ovulation the most fertile day?", answer: "Often the one to two days before ovulation are most fertile, because sperm are already in place when the egg is released." },
+      { question: "Can the fertile window move between cycles?", answer: "Yes. Illness, stress, travel, and cycle length changes can all shift ovulation a little, which shifts the window with it." },
+    ],
+    editorialSections: [
+      {
+        id: "what-the-window-is",
+        heading: "What the fertile window actually is",
+        lead: "The fertile window is the small stretch of days in each cycle when conception is possible.",
+        paragraphs: [
+          "It is usually described as the roughly six-day stretch ending on the day of ovulation. That length reflects sperm survival more than anything else. Sperm can wait in the reproductive tract for a few days, so intercourse before ovulation still has a chance.",
+          "After ovulation, the window closes quickly. The egg is only fertilisable for around 12 to 24 hours, and once that time passes the window is closed until the next cycle.",
+        ],
+      },
+      {
+        id: "why-it-is-an-estimate",
+        heading: "Why the fertile window is always an estimate",
+        lead: "Even in regular cycles, the window is a pattern rather than a fixed date.",
+        paragraphs: [
+          "Ovulation timing can shift between cycles by a few days, especially during periods of stress, poor sleep, illness, or travel. Cycle length itself can vary a little from month to month for many people.",
+          "This is why apps and calculators sometimes get the exact day wrong, particularly if a cycle is longer or shorter than usual. Their strength is giving you a reasonable range, not a single perfect date.",
+        ],
+        callout: { tone: "info", text: "A calculator estimate paired with a gentle look at your body over a cycle or two is usually more informative than either on its own." },
+      },
+      {
+        id: "how-cycle-length-changes-things",
+        heading: "How cycle length changes when the window falls",
+        lead: "The second half of the cycle is more predictable than the first.",
+        paragraphs: [
+          "In a regular cycle, ovulation usually happens 12 to 16 days before the next period. That means a shorter overall cycle often has earlier ovulation, and a longer cycle often has later ovulation.",
+          "If your cycles are broadly regular but vary a little in length, expect the fertile window to shift a little too. If they vary a lot, tracking one or two ovulation signs may be more reliable than counting days.",
+        ],
+      },
+      {
+        id: "how-signs-and-tests-help",
+        heading: "How ovulation signs and tests fit in",
+        lead: "You do not need every tool. One or two supportive signals is usually enough.",
+        paragraphs: [
+          "Cervical mucus that becomes clearer and stretchier is often the most accessible daily signal. An ovulation test can add clarity by picking up the LH surge in urine before ovulation happens.",
+          "A rise in basal body temperature after ovulation can support the picture, but only after the window has already closed. It is more useful for understanding your pattern over time than for planning intercourse in the moment.",
+        ],
+      },
+      {
+        id: "timing-without-pressure",
+        heading: "Timing without turning it into pressure",
+        lead: "The most sustainable approach is often the calmest one.",
+        paragraphs: [
+          "Aiming for intercourse every one to two days across the fertile window is usually more helpful than trying to hit a single perfect day. It also tends to be less stressful.",
+          "If tracking is starting to make things heavier rather than lighter, it is okay to loosen your grip for a cycle. Regular intercourse across the wider window is a reasonable approach even without daily testing.",
+        ],
+        callout: { tone: "reassurance", text: "You do not need to time things perfectly. A calm, roughly right approach across the fertile window is usually enough." },
+      },
+    ],
+  },
+
+  // ─── HOW TO USE OVULATION TESTS ─────────────────────────────────────────
+  {
+    slug: "using-ovulation-tests",
+    title: "How to use ovulation tests",
+    metaDescription: "Calm UK guidance on how ovulation tests work, when to start testing, how to read results, and when they may not tell the full story.",
+    quickAnswer: "Ovulation tests look for a surge in luteinising hormone (LH) in your urine, which usually happens 24 to 36 hours before ovulation. A positive result suggests that ovulation is likely to happen soon. It does not confirm that ovulation has actually taken place, and results can be less clear if your cycles are irregular or if you have PCOS.",
+    standfirst: "Ovulation tests can be a helpful, calming tool. They work best when you know what they can, and cannot, tell you.",
+    howThisFeels: [
+      "Hoping the test will give you a clear answer",
+      "Confused when lines are almost but not quite the same",
+      "Anxious about testing on the right day",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Tests look for the LH surge", body: "Luteinising hormone rises sharply shortly before ovulation. Ovulation tests are designed to pick up this surge in urine, usually 24 to 36 hours before the egg is released." },
+        { heading: "A positive is a predictor", body: "A positive test suggests ovulation is likely to happen soon. It does not prove that ovulation will happen exactly on schedule, or that it has taken place." },
+        { heading: "Digital and line tests differ", body: "Digital tests usually give a clear positive or negative symbol. Line tests need you to compare the test line to a reference line, which can feel less clear on some days." },
+      ],
+      lessCauses: [
+        { heading: "PCOS and higher baseline LH", body: "Some people with PCOS have higher baseline LH levels, which can lead to positive results that do not always match ovulation. Tests may still be useful, but need more careful reading." },
+        { heading: "Very dilute urine", body: "Drinking large amounts of fluid just before testing can dilute LH and lower the reading. Most instructions suggest testing at a similar time each day and not overloading on fluids beforehand." },
+      ],
+      whyItVaries: "Cycle length and hormone patterns vary from person to person, and even between cycles. That is why ovulation tests work best as one part of a bigger picture, not as a final word on their own.",
+    },
+    timing: { whenStarts: "Testing usually starts a few days before your earliest expected ovulation, based on cycle length.", whenEases: "Most people stop testing once they see a clear positive, or when their expected fertile window has passed." },
+    whatItFeelsLike: [
+      "A quiet daily ritual",
+      "A jump of hope at the first strong line",
+      "Frustration when results feel unclear",
+    ],
+    whatThisMeans: "A positive test is a useful signal that your fertile window is open. It is not a promise. Results are most helpful when read alongside how your body feels and how your cycles usually run.",
+    normal: [
+      "Faint lines that gradually get stronger before a clear positive",
+      "Occasional cycles where you do not catch a clear surge",
+      "Results that vary a little from cycle to cycle",
+    ],
+    seekSupport: [
+      "Repeated cycles with no positive test and irregular or absent periods",
+      "Known PCOS or thyroid changes and unclear results",
+      "Trying to conceive for 12 months without success, or 6 months if you are over 35",
+    ],
+    disclaimer: "This is general guidance and is not a diagnosis. Speak to a pharmacist or GP if results are consistently confusing, or if your cycles are very irregular.",
+    whatYouCanDo: [
+      { action: "Read the instructions for your specific test", reason: "Timing, sensitivity, and how to read lines can vary between brands." },
+      { action: "Test at a similar time each day", reason: "It makes results easier to compare from day to day." },
+      { action: "Pair test results with one other sign", reason: "Cervical mucus or a rough sense of cycle length adds context." },
+      { action: "Take a break from testing if it starts to feel heavy", reason: "Ovulation tests are a support, not a duty." },
+    ],
+    whatHappensNext: "Once you see a clear positive, ovulation usually follows in the next day or two. Aiming for intercourse across the fertile window rather than only after a positive test can be more forgiving.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Ovulation and your fertile window", href: "/trying-to-conceive/ovulation" },
+        { label: "How to know when you are ovulating", href: "/articles/how-to-know-when-you-are-ovulating" },
+        { label: "Cycle tracking", href: "/trying-to-conceive/cycle-tracking" },
+      ],
+    },
+    aiPrompts: [
+      "When should I start using ovulation tests?",
+      "What does a positive ovulation test mean?",
+      "Why is my ovulation test always negative?",
+    ],
+    captureIntro: "Testing is a quiet ritual. It is worth recording gently, not obsessively.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines"],
+    relatedSlugs: ["how-to-know-when-you-are-ovulating", "understanding-your-fertile-window", "cervical-mucus-and-fertility", "ovulation-signs"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-stage-waiting.jpg", import.meta.url).href,
+      alt: "A calm wooden surface with a folded cloth, a small ceramic dish, and a sprig of eucalyptus in soft light.",
+    },
+    sources: [
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Periods and fertility in the menstrual cycle", publisher: "NHS", url: "https://www.nhs.uk/conditions/periods/fertility-in-the-menstrual-cycle/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Getting pregnant: How can I improve my chances?", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+    ],
+    keyTakeaways: [
+      "Ovulation tests detect the LH surge that usually happens 24 to 36 hours before ovulation.",
+      "A positive result suggests ovulation is likely, not that it has happened or will happen exactly on time.",
+      "Results can be less clear in irregular cycles or with conditions like PCOS.",
+      "Combining tests with one gentle body sign, such as cervical mucus, gives a fuller picture.",
+      "If tests are making things feel heavier, it is okay to pause or step back for a cycle.",
+    ],
+    faq: [
+      { question: "When should I start testing?", answer: "Most instructions suggest starting a few days before your earliest expected ovulation, based on your usual cycle length. If cycles vary, starting a little earlier can help you avoid missing the surge." },
+      { question: "Does a positive test confirm I have ovulated?", answer: "No. It suggests ovulation is likely in the next day or two. Home tests do not prove that ovulation itself has taken place." },
+      { question: "Why do I never see a positive?", answer: "It can happen for several reasons, including testing at the wrong time of day, ovulating earlier or later than expected, or having a cycle where ovulation did not happen. If this repeats across cycles, a GP conversation is a reasonable next step." },
+    ],
+    editorialSections: [
+      {
+        id: "what-tests-do",
+        heading: "What ovulation tests actually do",
+        lead: "Ovulation tests measure the LH surge that usually precedes ovulation.",
+        paragraphs: [
+          "Luteinising hormone (LH) rises steeply for a short period shortly before an egg is released. This surge is what home ovulation tests are designed to detect in urine.",
+          "Because the surge often happens 24 to 36 hours before ovulation, a positive test gives you a heads up that your fertile window is opening. It does not tell you the exact hour ovulation will happen.",
+        ],
+      },
+      {
+        id: "how-to-use-them",
+        heading: "How to use ovulation tests without over-thinking them",
+        lead: "The most useful approach is often the simplest one.",
+        paragraphs: [
+          "Read the specific instructions that come with your test. Timing of day, how much fluid to drink beforehand, and how to interpret lines can vary between brands.",
+          "Testing at a similar time each day makes results easier to compare. Many people find late morning or early afternoon works well, but any consistent time is fine.",
+          "You do not usually need to test for the whole month. Starting a few days before your earliest expected ovulation and stopping after a clear positive is usually enough.",
+        ],
+      },
+      {
+        id: "reading-results",
+        heading: "How to read results without spiralling",
+        lead: "Not every day gives a clear yes or no, and that is normal.",
+        paragraphs: [
+          "Digital tests usually give a clear positive or negative symbol. Line tests need you to compare the test line to the reference line. A positive line-test result is usually one where the test line is as dark as, or darker than, the reference line.",
+          "A gradually darkening test line across several days often reflects a rising LH surge. Faint lines that never get quite as dark as the reference line are not positive, even if they feel encouraging.",
+        ],
+        callout: { tone: "info", text: "A positive test is a predictor of ovulation, not a confirmation of it. Reading tests alongside other cycle signs helps set expectations calmly." },
+      },
+      {
+        id: "when-tests-are-less-helpful",
+        heading: "When tests may be less helpful",
+        lead: "Some cycles and conditions make tests harder to interpret.",
+        paragraphs: [
+          "Very irregular cycles can make it hard to know when to start testing. Some people with PCOS have higher baseline LH, which may show as positive-looking results that do not always match ovulation.",
+          "Illness, stress, and hormonal contraception recently stopped can also make patterns harder to read for a while. In these situations, tests can still add information, but they work best alongside a GP conversation rather than alone.",
+        ],
+      },
+      {
+        id: "when-testing-becomes-stressful",
+        heading: "When testing starts to feel stressful",
+        lead: "Ovulation tests are a support, not a duty.",
+        paragraphs: [
+          "If daily testing is starting to feel like a heavy job, it is okay to take a break. Regular intercourse every one to two days across your usual fertile window is a reasonable approach even without testing.",
+          "If you have been testing across many cycles without a clear positive, or without conceiving, a GP or fertility clinic can help you look at the wider picture. Standard UK guidance suggests seeking advice after 12 months of trying, or 6 months if you are over 35.",
+        ],
+        callout: { tone: "reassurance", text: "Ovulation tests can be a useful tool, but they are not the whole picture. Your body, your cycle, and how you feel all matter too." },
+      },
+    ],
+  },
+
+  // ─── CERVICAL MUCUS AND FERTILITY ───────────────────────────────────────
+  {
+    slug: "cervical-mucus-and-fertility",
+    title: "Cervical mucus and fertility",
+    metaDescription: "Calm UK guidance on how cervical mucus may change across your cycle, what fertile-type mucus can look like, and when to seek medical advice.",
+    quickAnswer: "Cervical mucus tends to change across a cycle. In the days before ovulation it may become clearer, wetter, and stretchier, sometimes compared to raw egg white. This pattern can suggest your fertile window is open, but it is not exact and does not confirm ovulation. Discharge that is itchy, smells unusual, or comes with pain is worth speaking to a pharmacist or GP about.",
+    standfirst: "Cervical mucus is one of the most useful home signals in a cycle, and one of the least talked about. Here is how to notice it, gently.",
+    howThisFeels: [
+      "Unsure what is fertile mucus and what is normal discharge",
+      "A bit awkward paying attention to something you have never really looked at",
+      "Hopeful when you spot a change, then unsure what it means",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Oestrogen changes the texture", body: "As oestrogen rises before ovulation, cervical mucus often becomes clearer, wetter, and stretchier. This change may help sperm move more easily." },
+        { heading: "After ovulation, progesterone shifts things", body: "Once ovulation has happened, progesterone rises and mucus often becomes thicker, drier, or less noticeable for the rest of the cycle." },
+        { heading: "Baseline discharge changes across the cycle", body: "Some level of discharge across the month is normal and healthy. Its amount and texture may shift depending on where you are in your cycle." },
+      ],
+      lessCauses: [
+        { heading: "Contraception and hormonal changes", body: "Hormonal contraception, recent changes to contraception, and breastfeeding can all affect cervical mucus patterns." },
+        { heading: "Illness, stress, or medication", body: "Being unwell, having a stressful stretch, or starting certain medications may temporarily change discharge patterns." },
+        { heading: "Infections", body: "Discharge that is itchy, smells unusual, or is unusually coloured may point to a common infection like thrush or bacterial vaginosis, which are treatable." },
+      ],
+      whyItVaries: "Everyone's baseline discharge is a little different. What matters is not matching a textbook picture but noticing how your own pattern shifts across the cycle.",
+    },
+    timing: { whenStarts: "Fertile-type mucus often appears in the days leading up to ovulation.", whenEases: "It usually thickens or fades within a day or two of ovulation." },
+    whatItFeelsLike: [
+      "A few days of noticeably wetter discharge",
+      "A stretchy, clear texture that some describe as raw egg white",
+      "A quieter, drier feeling in the second half of the cycle",
+    ],
+    whatThisMeans: "A shift towards clearer, stretchier mucus can suggest the fertile window is open. It is a supportive signal rather than proof of ovulation, and it works best read alongside other cycle information.",
+    normal: [
+      "Discharge that changes in amount and texture across the cycle",
+      "Some cycles where fertile-type mucus is very clear and others where it is subtler",
+      "A drier, quieter phase after ovulation",
+    ],
+    seekSupport: [
+      "Discharge that is itchy, sore, or smells unusual",
+      "Discharge with unusual colour, such as green or grey",
+      "Bleeding between periods or after sex that is new for you",
+    ],
+    disclaimer: "This is general guidance and is not a diagnosis. Speak to a pharmacist, GP, or sexual health service if discharge feels unusual or uncomfortable.",
+    whatYouCanDo: [
+      { action: "Check gently once a day, if you want to", reason: "A quick daily check is usually enough. You do not need to inspect every visit to the toilet." },
+      { action: "Notice the pattern across a whole cycle", reason: "Your own trend matters more than matching a textbook description." },
+      { action: "Combine mucus with one other signal if you want more clarity", reason: "Ovulation tests or basal body temperature can add context." },
+      { action: "Speak to a pharmacist or GP if something feels off", reason: "Common issues like thrush or bacterial vaginosis are treatable and worth sorting." },
+    ],
+    whatHappensNext: "If cervical mucus suggests your fertile window is open, ovulation often follows in the next day or two. After ovulation, most people notice mucus becoming thicker or drier for the rest of the cycle.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Ovulation and your fertile window", href: "/trying-to-conceive/ovulation" },
+        { label: "How to know when you are ovulating", href: "/articles/how-to-know-when-you-are-ovulating" },
+        { label: "Cycle tracking", href: "/trying-to-conceive/cycle-tracking" },
+      ],
+    },
+    aiPrompts: [
+      "What does fertile cervical mucus look like?",
+      "Does cervical mucus confirm ovulation?",
+      "When should I worry about vaginal discharge?",
+    ],
+    captureIntro: "Small daily noticings across a cycle can quietly build a real picture over time.",
+    journey: ["trying-to-conceive"],
+    topics: ["body-changes", "timelines"],
+    relatedSlugs: ["how-to-know-when-you-are-ovulating", "understanding-your-fertile-window", "using-ovulation-tests", "ovulation-signs"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-stage-cycle.jpg", import.meta.url).href,
+      alt: "A soft cream still life with a folded muslin cloth, a small ceramic bowl, and a pale botanical stem in gentle daylight.",
+    },
+    sources: [
+      { label: "Periods and fertility in the menstrual cycle", publisher: "NHS", url: "https://www.nhs.uk/conditions/periods/fertility-in-the-menstrual-cycle/" },
+      { label: "Vaginal discharge", publisher: "NHS", url: "https://www.nhs.uk/conditions/vaginal-discharge/" },
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Getting pregnant: How can I improve my chances?", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+    ],
+    keyTakeaways: [
+      "Cervical mucus often becomes clearer, wetter, and stretchier in the days before ovulation.",
+      "This change may suggest the fertile window is open, but it does not confirm ovulation.",
+      "Baseline discharge varies from person to person, so your own pattern matters more than a textbook picture.",
+      "Contraception, illness, stress, and infections can all affect mucus patterns.",
+      "Discharge that is itchy, sore, unusually coloured, or has an unusual smell is worth speaking to a pharmacist or GP about.",
+    ],
+    faq: [
+      { question: "What does fertile-type cervical mucus look like?", answer: "It is often clear, wetter, and stretchy, sometimes compared to raw egg white. It usually appears for a few days around ovulation." },
+      { question: "Can I rely on cervical mucus alone?", answer: "It is a helpful signal, especially over time, but it is not exact. Combining it with an ovulation test or a rough sense of cycle length gives a fuller picture." },
+      { question: "When should I speak to a clinician about discharge?", answer: "If discharge is itchy, sore, unusually coloured, or has an unusual smell, a pharmacist or GP can help. New bleeding between periods or after sex is also worth checking." },
+    ],
+    editorialSections: [
+      {
+        id: "what-cervical-mucus-is",
+        heading: "What cervical mucus is",
+        lead: "Cervical mucus is a normal, healthy fluid produced by glands in the cervix.",
+        paragraphs: [
+          "It changes in amount and texture across the cycle in response to hormonal shifts. Some level of discharge across the month is expected and does not mean anything is wrong.",
+          "For people trying to conceive, cervical mucus can be a useful, low-effort daily signal. It does not require a device or a test, just a gentle habit of noticing.",
+        ],
+      },
+      {
+        id: "how-it-changes",
+        heading: "How mucus tends to change across a cycle",
+        lead: "The main pattern is drier, then wetter around ovulation, then drier again.",
+        paragraphs: [
+          "After a period, many people notice a drier or less noticeable phase. As oestrogen rises before ovulation, mucus often becomes clearer, wetter, and stretchier, sometimes described as raw egg white.",
+          "After ovulation, progesterone rises and mucus often becomes thicker or less noticeable again. Some people notice a return to slightly wetter discharge just before their next period.",
+        ],
+      },
+      {
+        id: "what-fertile-mucus-may-look-like",
+        heading: "What fertile-type mucus may look or feel like",
+        lead: "The clearest sign is a change from your usual pattern, not a perfect match to a textbook picture.",
+        paragraphs: [
+          "Fertile-type mucus is often clear, slippery, and stretchy. Some people describe it as watery, others as more egg-white in texture. It may last a few hours or a few days, and can look different between cycles.",
+          "Some people never see a very clear egg-white pattern and still ovulate. Others notice it strongly some months and not others. Both experiences can be normal.",
+        ],
+        callout: { tone: "info", text: "It is the shift in your own pattern that matters most, not whether your mucus looks exactly like a description online." },
+      },
+      {
+        id: "what-can-affect-it",
+        heading: "What else can affect your discharge",
+        lead: "Mucus is sensitive to more than just ovulation.",
+        paragraphs: [
+          "Hormonal contraception, recently stopped contraception, and breastfeeding can all change mucus patterns for a time. Illness, stress, and certain medications may also affect what you see.",
+          "Sexual arousal and intercourse can add extra fluid that is not fertile mucus. Waiting until later in the day or the next morning to check can make patterns easier to read.",
+        ],
+      },
+      {
+        id: "when-to-seek-advice",
+        heading: "When discharge needs a conversation with a clinician",
+        lead: "Most discharge is normal, but some patterns are worth checking.",
+        paragraphs: [
+          "Discharge that is itchy, sore, unusually coloured (such as green or grey), or has an unusual smell may suggest an infection like thrush or bacterial vaginosis. These are common and treatable, often through a pharmacist.",
+          "New bleeding between periods, after sex, or with pelvic pain is worth a GP or sexual health service conversation, especially if it is a change for you.",
+        ],
+        callout: { tone: "gentle-warning", text: "If you notice new bleeding between periods, pain with discharge, or symptoms that do not clear up, speak to a pharmacist, GP, or sexual health service." },
+      },
+      {
+        id: "using-it-alongside-other-tools",
+        heading: "Using mucus alongside other tools",
+        lead: "Cervical mucus works well as part of a fuller picture.",
+        paragraphs: [
+          "For some people, cervical mucus alone is enough of a signal. For others, it works well alongside an ovulation test, a rough sense of cycle length, or gentle use of the ovulation calculator.",
+          "If tracking is starting to feel heavy, it is fine to check less often. A quiet daily noticing over a cycle or two usually builds a more useful picture than daily inspection.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

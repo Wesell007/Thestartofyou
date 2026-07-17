@@ -133,6 +133,12 @@ const LIVE = {
   fertilityTestsMen: "/articles/fertility-tests-for-men",
   fertilityAppointment: "/articles/what-happens-at-a-fertility-appointment",
   amhTest: "/articles/amh-test-explained",
+
+  // Phase 9.12a (TTC ovulation P0)
+  howToKnowOvulating: "/articles/how-to-know-when-you-are-ovulating",
+  understandingFertileWindow: "/articles/understanding-your-fertile-window",
+  usingOvulationTests: "/articles/using-ovulation-tests",
+  cervicalMucus: "/articles/cervical-mucus-and-fertility",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────
@@ -167,16 +173,22 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     groups: [
       {
         label: "Understanding ovulation",
-        description: "What it is, when it happens, and why it matters.",
+        description: "What ovulation is, when it happens, and what your body may show.",
         links: [
+          { label: "How to know when you are ovulating", href: LIVE.howToKnowOvulating },
+          { label: "Ovulation signs", href: LIVE.ovulationSigns },
+          { label: "Understanding your fertile window", href: LIVE.understandingFertileWindow },
+          { label: "The fertile window", href: LIVE.fertileWindow },
         ],
       },
       {
         label: "Tracking and timing",
-        description: "Practical ways to find your fertile days.",
+        description: "Practical ways to notice your fertile window without pressure.",
         links: [
-          { label: "Ovulation calculator", href: LIVE.calculator },
+          { label: "How to use ovulation tests", href: LIVE.usingOvulationTests },
+          { label: "Cervical mucus and fertility", href: LIVE.cervicalMucus },
           { label: "Cycle tracking", href: LIVE.cycleTracking },
+          { label: "Ovulation calculator", href: LIVE.calculator },
         ],
       },
     ],

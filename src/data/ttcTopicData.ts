@@ -139,6 +139,12 @@ const LIVE = {
   understandingFertileWindow: "/articles/understanding-your-fertile-window",
   usingOvulationTests: "/articles/using-ovulation-tests",
   cervicalMucus: "/articles/cervical-mucus-and-fertility",
+
+  // Phase 9.12b (TTC ovulation P1)
+  lateOvulation: "/articles/late-ovulation-and-ttc",
+  hardToPredictOvulation: "/articles/when-ovulation-is-hard-to-predict",
+  timingSexTTC: "/articles/timing-sex-when-trying-to-conceive",
+  basalBodyTemperature: "/articles/basal-body-temperature-tracking",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────
@@ -187,8 +193,19 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         links: [
           { label: "How to use ovulation tests", href: LIVE.usingOvulationTests },
           { label: "Cervical mucus and fertility", href: LIVE.cervicalMucus },
+          { label: "Basal body temperature tracking", href: LIVE.basalBodyTemperature },
           { label: "Cycle tracking", href: LIVE.cycleTracking },
           { label: "Ovulation calculator", href: LIVE.calculator },
+        ],
+      },
+      {
+        label: "When timing feels unclear",
+        description: "Support for cycles, signs or timing that do not feel easy to read.",
+        links: [
+          { label: "Late ovulation and trying to conceive", href: LIVE.lateOvulation },
+          { label: "When ovulation is hard to predict", href: LIVE.hardToPredictOvulation },
+          { label: "Timing sex when trying to conceive", href: LIVE.timingSexTTC },
+          { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
         ],
       },
     ],

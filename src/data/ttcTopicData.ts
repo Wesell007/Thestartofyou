@@ -193,8 +193,19 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         links: [
           { label: "How to use ovulation tests", href: LIVE.usingOvulationTests },
           { label: "Cervical mucus and fertility", href: LIVE.cervicalMucus },
+          { label: "Basal body temperature tracking", href: LIVE.basalBodyTemperature },
           { label: "Cycle tracking", href: LIVE.cycleTracking },
           { label: "Ovulation calculator", href: LIVE.calculator },
+        ],
+      },
+      {
+        label: "When timing feels unclear",
+        description: "Support for cycles, signs or timing that do not feel easy to read.",
+        links: [
+          { label: "Late ovulation and trying to conceive", href: LIVE.lateOvulation },
+          { label: "When ovulation is hard to predict", href: LIVE.hardToPredictOvulation },
+          { label: "Timing sex when trying to conceive", href: LIVE.timingSexTTC },
+          { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
         ],
       },
     ],

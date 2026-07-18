@@ -84,6 +84,19 @@ import ttcFertilityAppointment from "@/assets/ttc-fertility-appointment.jpg";
 import ttcConditions from "@/assets/ttc-conditions.jpg";
 import ttcPregnancyTests from "@/assets/ttc-pregnancy-tests.jpg";
 
+// Phase 9.12b.1 — distinct ovulation-cluster hero imagery
+import ttcOvulationKnow from "@/assets/ttc-ovulation-know.jpg";
+import ttcOvulationSignsJournal from "@/assets/ttc-ovulation-signs-journal.jpg";
+import ttcFertileWindowHighlighted from "@/assets/ttc-fertile-window-highlighted.jpg";
+import ttcFertileWindowCalendar from "@/assets/ttc-fertile-window-calendar.jpg";
+import ttcOvulationTestsStrips from "@/assets/ttc-ovulation-tests-strips.jpg";
+import ttcCervicalMucusBotanical from "@/assets/ttc-cervical-mucus-botanical.jpg";
+import ttcBBTThermometer from "@/assets/ttc-bbt-thermometer.jpg";
+import ttcLateOvulationClock from "@/assets/ttc-late-ovulation-clock.jpg";
+import ttcHardToPredictNotebook from "@/assets/ttc-hard-to-predict-notebook.jpg";
+import ttcTimingSexMugs from "@/assets/ttc-timing-sex-mugs.jpg";
+import ttcIrregularPeriodsCalendar from "@/assets/ttc-irregular-periods-calendar.jpg";
+
 
 
 type Img = { src: string; alt: string };
@@ -214,9 +227,9 @@ export const flagshipHeroMap: Record<string, Img> = {
   "pregnancy-after-loss": { src: cardQuiet, alt: "A reflective scene in soft daylight — the careful weight of pregnancy after loss." },
 
   // TTC-primary slugs (flagship-eligible)
-  "ovulation-signs": { src: ttcStageCycle, alt: "A calm TTC journal scene reflecting careful ovulation tracking." },
-  "signs-of-ovulation": { src: ttcStageCycle, alt: "A close editorial scene of cycle notes and a calendar — recognising ovulation." },
-  "fertile-window": { src: ttcStageTiming, alt: "A planning scene with a calendar and TTC notes — the fertile-window timing." },
+  "ovulation-signs": { src: ttcOvulationSignsJournal, alt: "An open linen journal with soft handwritten cycle notes and a sprig of dried lavender — quietly noticing the body's ovulation signs." },
+  "signs-of-ovulation": { src: ttcOvulationSignsJournal, alt: "An open linen journal with soft handwritten cycle notes and a sprig of dried lavender — quietly noticing the body's ovulation signs." },
+  "fertile-window": { src: ttcFertileWindowCalendar, alt: "A wooden desk calendar in warm morning light beside a small ceramic vase — a calm way to think about the fertile window." },
   "can-you-get-pregnant-on-your-period": { src: ttcStageCycle, alt: "A quiet cycle-tracking scene representing period-week fertility questions." },
   "how-long-implantation-takes": { src: ttcStageWaiting, alt: "A still, daylit interior reflecting the wait around implantation." },
   "two-week-wait": { src: ttcStageWaiting, alt: "A calm TTC scene representing the long fortnight of waiting." },
@@ -234,7 +247,17 @@ export const flagshipHeroMap: Record<string, Img> = {
   "amh-test-explained": { src: ttcFertilityTestsWomen, alt: "A blood-test vial and a hormone-test request slip in soft daylight — the simple set-up of an AMH test." },
   "pcos-and-trying-to-conceive": { src: ttcConditions, alt: "A reflective scene of soft knitwear, a hand resting on the lower abdomen and an open journal — living with PCOS while trying to conceive." },
   "endometriosis-and-trying-to-conceive": { src: ttcConditions, alt: "A reflective scene of soft knitwear, a hand resting on the lower abdomen and an open journal — living with endometriosis while trying to conceive." },
-  "irregular-periods-and-trying-to-conceive": { src: ttcStageCycle, alt: "A cycle journal and calendar in soft daylight — tracking ovulation when periods are irregular." },
+  "irregular-periods-and-trying-to-conceive": { src: ttcIrregularPeriodsCalendar, alt: "A paper calendar with soft sage watercolour marks scattered unevenly across the weeks — tracking ovulation when periods are irregular." },
+
+  // Phase 9.12b.1 — TTC ovulation-cluster flagship articles
+  "how-to-know-when-you-are-ovulating": { src: ttcOvulationKnow, alt: "A soft linen journal with a subtle cycle chart, pressed sage leaves and a paper calendar corner — noticing when ovulation is near." },
+  "understanding-your-fertile-window": { src: ttcFertileWindowHighlighted, alt: "A minimalist paper calendar with a soft sage-green highlighted band across a week, a eucalyptus sprig laid alongside — the shape of a fertile window." },
+  "using-ovulation-tests": { src: ttcOvulationTestsStrips, alt: "Two ovulation test strips resting on a cream linen surface beside a closed linen notebook and a sprig of rosemary — a calm, non-clinical set-up for OPKs." },
+  "cervical-mucus-and-fertility": { src: ttcCervicalMucusBotanical, alt: "A close botanical still life of soft water droplets on a green leaf in morning light — a gentle visual for cervical mucus and fertility." },
+  "basal-body-temperature-tracking": { src: ttcBBTThermometer, alt: "A digital thermometer resting on a small linen-bound bedside notebook with soft dawn light behind — the quiet morning ritual of BBT tracking." },
+  "late-ovulation-and-ttc": { src: ttcLateOvulationClock, alt: "A paper calendar with a soft sage circle drawn further into the month and a small brass clock beside it — the reality of late ovulation." },
+  "when-ovulation-is-hard-to-predict": { src: ttcHardToPredictNotebook, alt: "An open linen journal with soft cursive notes and small hand-drawn question marks — the calm reality of cycles that don't follow a tidy pattern." },
+  "timing-sex-when-trying-to-conceive": { src: ttcTimingSexMugs, alt: "Two matching ceramic mugs of tea resting side by side on a cream linen surface near a paper calendar — the quiet togetherness behind timing when trying to conceive." },
 };
 
 // ─── Section image overrides (anchors + curated extras) ────────────────────

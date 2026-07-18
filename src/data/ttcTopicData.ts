@@ -139,6 +139,12 @@ const LIVE = {
   understandingFertileWindow: "/articles/understanding-your-fertile-window",
   usingOvulationTests: "/articles/using-ovulation-tests",
   cervicalMucus: "/articles/cervical-mucus-and-fertility",
+
+  // Phase 9.12b (TTC ovulation P1)
+  lateOvulation: "/articles/late-ovulation-and-ttc",
+  hardToPredictOvulation: "/articles/when-ovulation-is-hard-to-predict",
+  timingSexTTC: "/articles/timing-sex-when-trying-to-conceive",
+  basalBodyTemperature: "/articles/basal-body-temperature-tracking",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────

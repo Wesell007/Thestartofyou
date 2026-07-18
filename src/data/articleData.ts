@@ -16651,7 +16651,7 @@ const articleDatabase: ArticleData[] = [
           "Cycles that are consistently longer than 35 days, fewer than nine periods a year, or cycles that stop altogether can point to less frequent ovulation. Conditions such as PCOS or thyroid changes are among the possibilities a GP may consider.",
           "Standard UK guidance is to speak to a GP after 12 months of trying, or 6 months if you are over 35. If you already know your cycles are very long or often absent, it is fine to ask sooner.",
         ],
-        callout: { tone: "gentle-warning", text: "If your periods have stopped for several months and you are not pregnant, please speak to your GP. This is worth checking rather than waiting out." },
+        callout: { tone: "gentle-warning", text: "If your periods have stopped for several months and pregnancy has been ruled out, please speak to your GP. This is worth checking rather than waiting out." },
       },
     ],
   },
@@ -16793,7 +16793,7 @@ const articleDatabase: ArticleData[] = [
         lead: "Tracking is helpful when it adds information and heavy when it adds pressure.",
         paragraphs: [
           "Pick one or two signals rather than everything. Cervical mucus and a short window of ovulation tests, or just cycle dates and mucus, tend to be more sustainable than daily temperature charts and multiple apps.",
-          "If tracking is starting to hurt, it is okay to loosen it. Regular, pressure-free intimacy across a wider window is often more effective than perfect timing on a single day.",
+          "If tracking is starting to hurt, it is okay to loosen it. Regular, pressure-free intimacy across a wider window is often more effective than exact timing on a single day.",
         ],
         callout: { tone: "reassurance", text: "Softening how much you track is not giving up. It is protecting the part of trying to conceive that is not about spreadsheets." },
       },
@@ -16805,7 +16805,7 @@ const articleDatabase: ArticleData[] = [
           "If your cycles are consistently shorter than 21 days or longer than 35 days, if you have fewer than nine periods a year, or if your periods have stopped for months at a time, please speak to your GP. These patterns often benefit from simple checks.",
           "Standard UK guidance is to speak to a GP after 12 months of trying, or 6 months if you are over 35. If you already know your cycles are very irregular, it is fine to ask earlier.",
         ],
-        callout: { tone: "gentle-warning", text: "If your periods have stopped for several months and you are not pregnant, please make a GP appointment. This is worth checking, not waiting out." },
+        callout: { tone: "gentle-warning", text: "If your periods have stopped for several months and pregnancy has been ruled out, please make a GP appointment. This is worth checking, not waiting out." },
       },
     ],
   },
@@ -16893,7 +16893,7 @@ const articleDatabase: ArticleData[] = [
     keyTakeaways: [
       "UK guidance suggests regular intimacy every two to three days when trying to conceive.",
       "The fertile window is a few days long, not a single day.",
-      "Consistency across the window matters more than perfect timing on one day.",
+      "Consistency across the window matters more than exact timing on one day.",
       "Softer patterns are usually kinder and often just as effective as tight schedules.",
       "If timing is affecting wellbeing or the relationship, it is fine to loosen it or ask for support.",
       "Standard UK guidance suggests speaking to a GP after 12 months of trying, or 6 months if you are over 35.",
@@ -16925,7 +16925,7 @@ const articleDatabase: ArticleData[] = [
       },
       {
         id: "frequency-over-perfection",
-        heading: "Why regular closeness beats perfect timing",
+        heading: "Why regular closeness beats exact timing",
         lead: "UK guidance is clear that consistency inside the window matters more than exact days.",
         paragraphs: [
           "NHS and NICE guidance suggests intimacy every two to three days across the cycle when trying to conceive. That rhythm covers the fertile window without turning it into a countdown.",

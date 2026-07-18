@@ -342,7 +342,13 @@ const TTCTopicPage = ({ config, heroImage }: Props) => {
         <section className="pb-16 md:pb-24">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
             <SectionLabel>Start here</SectionLabel>
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
+            <div
+              className={
+                config.startHere.length === 1
+                  ? "mt-10 flex justify-center"
+                  : "mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7"
+              }
+            >
               {config.startHere.map((item) => {
                 const img = resolveImage(item.href, item.image);
                 return (

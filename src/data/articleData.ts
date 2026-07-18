@@ -16502,6 +16502,637 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── LATE OVULATION AND TTC ─────────────────────────────────────────────
+  {
+    slug: "late-ovulation-and-ttc",
+    title: "Late ovulation and trying to conceive",
+    metaDescription: "Calm UK guidance on what late ovulation may mean when trying to conceive, why cycle timing can shift, and when to seek support.",
+    quickAnswer: "Late ovulation means the egg is released later in the cycle than usual. It can happen because of illness, stress, travel, disrupted sleep, breastfeeding, coming off contraception, or natural cycle variation. It often makes period and pregnancy test timing confusing, but on its own it does not usually mean anything is wrong. If cycles are very long or often absent, a GP conversation is a reasonable next step.",
+    standfirst: "A shift in ovulation timing can quietly change everything about a cycle: when your period is due, when a test is worth taking, and how long the wait feels. Understanding why it happens tends to take some of the panic out.",
+    howThisFeels: [
+      "Refreshing an app when a period is later than expected",
+      "Taking tests early and hoping the timing has moved",
+      "Wondering if a late cycle means something is wrong",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Illness or fever", body: "A recent infection, high temperature, or even a heavy cold can push ovulation a few days later in the cycle it happens in." },
+        { heading: "Stress and disrupted sleep", body: "Periods of higher stress, shift work, poor sleep, or travel across time zones may delay the hormone signals that trigger ovulation." },
+        { heading: "Coming off hormonal contraception", body: "Cycles can take a few months to settle into a regular pattern after stopping the pill, implant, or coil, and ovulation may be later in some of those cycles." },
+      ],
+      lessCauses: [
+        { heading: "Breastfeeding", body: "If you are still breastfeeding or recently stopped, hormonal shifts can mean ovulation returns later or less predictably for a while." },
+        { heading: "Significant weight change or intense exercise", body: "Rapid weight loss, low body weight, or very heavy training loads can delay or suppress ovulation in some people." },
+        { heading: "Underlying conditions", body: "Conditions such as PCOS or thyroid issues may make ovulation later or less predictable. A GP can suggest simple checks if this pattern repeats." },
+      ],
+      whyItVaries: "Cycle length is mostly shaped by the first half of the cycle, before ovulation. That is why the second half stays roughly the same length while the day of ovulation itself can shift from one cycle to another.",
+    },
+    timing: { whenStarts: "Late ovulation may show up as a cycle that runs a week or more longer than usual.", whenEases: "Timing often settles again within one or two cycles once the underlying trigger has passed." },
+    whatItFeelsLike: [
+      "A period that feels overdue",
+      "Repeated negative tests before the period arrives",
+      "A cycle that looks unusual compared with previous months",
+    ],
+    whatThisMeans: "Late ovulation on its own is usually a variation, not a diagnosis. It becomes more worth investigating if cycles are often very long, very short, or absent.",
+    normal: [
+      "The occasional cycle that runs longer than usual",
+      "A later cycle after illness, travel, or a stressful stretch",
+      "A few unpredictable cycles after stopping hormonal contraception",
+    ],
+    seekSupport: [
+      "Cycles consistently longer than 35 days",
+      "Fewer than nine periods a year",
+      "Trying to conceive for 12 months without success, or 6 months if you are over 35",
+    ],
+    disclaimer: "This is general guidance and is not a diagnosis. Speak to your GP if your cycles are often very long, absent, or worrying you.",
+    whatYouCanDo: [
+      { action: "Note when your period actually starts, not when you expected it", reason: "Real dates give you a truer picture of your cycle length than assumptions." },
+      { action: "Combine cycle tracking with one ovulation signal", reason: "Mucus changes or an occasional ovulation test can help you see when ovulation is actually happening." },
+      { action: "Wait for your period to be clearly late before testing repeatedly", reason: "Tests are usually more reliable from the day your period would have been due." },
+      { action: "Speak to a GP if this pattern repeats for several cycles", reason: "Simple checks can help you understand what is happening without jumping to conclusions." },
+    ],
+    whatHappensNext: "If late ovulation has pushed your period back, a pregnancy test tends to be most reliable once your period is clearly overdue. If cycles remain long or absent, a GP conversation is the next step.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Ovulation and your fertile window", href: "/trying-to-conceive/ovulation" },
+        { label: "When ovulation is hard to predict", href: "/articles/when-ovulation-is-hard-to-predict" },
+        { label: "Cycle tracking", href: "/trying-to-conceive/cycle-tracking" },
+      ],
+    },
+    aiPrompts: [
+      "What does late ovulation mean?",
+      "Can stress delay ovulation?",
+      "Why is my period late but tests are negative?",
+    ],
+    captureIntro: "Cycle changes are easier to notice when they are written down, not carried in your head.",
+    journey: ["trying-to-conceive"],
+    topics: ["body-changes", "timelines"],
+    relatedSlugs: ["when-ovulation-is-hard-to-predict", "how-to-know-when-you-are-ovulating", "using-ovulation-tests"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-stage-cycle.jpg", import.meta.url).href,
+      alt: "A quiet notebook and a folded linen cloth on a warm neutral surface with soft botanical accents.",
+    },
+    sources: [
+      { label: "Periods and fertility in the menstrual cycle", publisher: "NHS", url: "https://www.nhs.uk/conditions/periods/fertility-in-the-menstrual-cycle/" },
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Getting pregnant: How can I improve my chances?", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+    ],
+    keyTakeaways: [
+      "Late ovulation means the egg is released later in the cycle than usual.",
+      "It is often triggered by illness, stress, travel, sleep changes, or coming off contraception.",
+      "The second half of the cycle stays roughly the same length, so a late ovulation usually means a later period too.",
+      "Repeated negative tests before a delayed period may simply reflect later ovulation, not a problem.",
+      "Cycles that are consistently long, very short, or absent are worth raising with a GP.",
+      "Standard UK guidance suggests speaking to a GP after 12 months of trying, or 6 months if you are over 35.",
+    ],
+    faq: [
+      { question: "Does a late period always mean late ovulation?", answer: "Not always, but it is a common reason. Because the second half of the cycle is fairly steady, a later ovulation usually pushes the period back by roughly the same number of days." },
+      { question: "Can I still get pregnant in a cycle where I ovulated late?", answer: "Yes. Late ovulation is still ovulation, and the fertile window simply moves with it. If you are tracking, mucus changes and ovulation tests can help you spot when it is happening." },
+      { question: "When should I be worried about late ovulation?", answer: "Occasional late cycles are usually variation. If cycles are often longer than 35 days, absent for months at a time, or you have been trying for 12 months (or 6 months over 35), it is reasonable to speak to a GP." },
+    ],
+    editorialSections: [
+      {
+        id: "what-late-ovulation-means",
+        heading: "What late ovulation actually means",
+        lead: "Late ovulation is a shift in when the egg is released, not a separate condition.",
+        paragraphs: [
+          "In a typical cycle, ovulation falls around 12 to 16 days before the next period. If ovulation happens later than usual, the whole cycle tends to stretch. That is why a period that feels overdue often reflects ovulation that arrived later rather than a problem with the second half of the cycle.",
+          "One cycle running longer than usual is a common variation. A pattern of consistently long or absent cycles is what tends to be more worth exploring.",
+        ],
+      },
+      {
+        id: "why-timing-shifts",
+        heading: "Why ovulation timing can shift",
+        lead: "The hormone signals that trigger ovulation are sensitive to what is happening in your life.",
+        paragraphs: [
+          "Illness, high temperatures, poor sleep, travel across time zones, intense exercise, and stretches of high stress can all delay the LH surge that releases the egg. Coming off hormonal contraception, breastfeeding, or big weight changes may also shift ovulation for a while.",
+          "None of these are failures. They are the body responding to context. In many cases, cycles settle back to their usual rhythm within a couple of months.",
+        ],
+        callout: { tone: "info", text: "Because the second half of the cycle is fairly consistent, later ovulation usually means a later period, not a shorter luteal phase." },
+      },
+      {
+        id: "why-testing-gets-confusing",
+        heading: "Why period and test timing gets confusing",
+        lead: "Late ovulation can quietly change when a test is likely to be reliable.",
+        paragraphs: [
+          "Home pregnancy tests are usually more reliable from the day your period would have been due. If ovulation was later, that due date is later too, so a test on your usual expected date may be too early.",
+          "This is often why people see repeated negatives followed by a positive a week or so later. It is not necessarily a faulty test. It is often a cycle whose timing has moved.",
+        ],
+      },
+      {
+        id: "late-period-not-always-pregnancy",
+        heading: "When a late period does not mean pregnancy",
+        lead: "A late period can be a shifted cycle rather than an early pregnancy.",
+        paragraphs: [
+          "If you have had a delayed ovulation, your period may simply be later than expected. Repeated negative tests in this context often mean the cycle is running longer, not that a positive is being missed.",
+          "If your period does not arrive within a couple of weeks of when you expected it and tests remain negative, or you are unsure what is happening, it is fine to speak to your GP.",
+        ],
+      },
+      {
+        id: "how-tracking-can-help",
+        heading: "How ovulation tests, mucus, and tracking can help",
+        lead: "Simple tracking often makes late ovulation less confusing to read.",
+        paragraphs: [
+          "Cervical mucus changes and ovulation tests can help you see when ovulation is actually happening in a cycle, rather than assuming it lands on the same day each month. Noting the day your period actually starts, rather than when you expected it, builds a truer picture of your cycle length over time.",
+          "If you are already using the ovulation calculator, remember that it works from averages. Combining it with what your body is showing tends to be more useful than either on its own.",
+        ],
+      },
+      {
+        id: "when-to-ask-for-support",
+        heading: "When to ask for support",
+        lead: "Some patterns are worth raising with a GP, without alarm.",
+        paragraphs: [
+          "Cycles that are consistently longer than 35 days, fewer than nine periods a year, or cycles that stop altogether can point to less frequent ovulation. Conditions such as PCOS or thyroid changes are among the possibilities a GP may consider.",
+          "Standard UK guidance is to speak to a GP after 12 months of trying, or 6 months if you are over 35. If you already know your cycles are very long or often absent, it is fine to ask sooner.",
+        ],
+        callout: { tone: "gentle-warning", text: "If your periods have stopped for several months and you are not pregnant, please speak to your GP. This is worth checking rather than waiting out." },
+      },
+    ],
+  },
+
+  // ─── WHEN OVULATION IS HARD TO PREDICT ──────────────────────────────────
+  {
+    slug: "when-ovulation-is-hard-to-predict",
+    title: "When ovulation is hard to predict",
+    metaDescription: "Calm UK guidance for irregular cycles or unclear ovulation signs, with gentle ways to track without pressure and honest advice on when to ask for support.",
+    quickAnswer: "Ovulation can be hard to predict when cycles are irregular, when signs are quiet, after coming off contraception, or while breastfeeding. Conditions such as PCOS or thyroid changes can also play a part. Gentle tracking with mucus, ovulation tests, and cycle dates often helps, and a GP conversation is a reasonable next step if patterns feel unclear for a long time.",
+    standfirst: "Not every cycle reads like a textbook. If ovulation feels hard to place, the answer is usually softer attention and better context, not harder tracking.",
+    howThisFeels: [
+      "Trying every tracking method and still feeling unsure",
+      "Comparing your cycle to friends and quietly worrying",
+      "Wondering whether your body is broken",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Irregular cycles", body: "When cycles vary by more than a week or so from month to month, an average-based estimate becomes less accurate and ovulation can land in a wider window." },
+        { heading: "Quiet or unclear signs", body: "Some people have mild or subtle ovulation signs. Mucus changes may be brief, ovulation tests may be harder to read, and temperature shifts may be small." },
+        { heading: "Coming off hormonal contraception", body: "It can take a few months for cycles to settle after stopping the pill, implant, or coil, and ovulation may be less predictable in that time." },
+      ],
+      lessCauses: [
+        { heading: "Postpartum and breastfeeding", body: "After birth or while breastfeeding, cycles can return unevenly and ovulation may be harder to spot for a while." },
+        { heading: "Underlying conditions", body: "Conditions such as PCOS, thyroid changes, or premature ovarian insufficiency may affect how often and how predictably ovulation happens." },
+        { heading: "Stress, sleep, and lifestyle", body: "Long periods of stress, disrupted sleep, or big weight changes can quietly shift ovulation timing from cycle to cycle." },
+      ],
+      whyItVaries: "Ovulation is a single moment shaped by weeks of hormonal signals. When any of those signals is uneven, ovulation may still happen but be harder to notice or predict from the outside.",
+    },
+    timing: { whenStarts: "Ovulation may be hard to place from the first cycle you start paying attention.", whenEases: "Patterns often become clearer over two or three cycles of gentle tracking." },
+    whatItFeelsLike: [
+      "Tracking that feels like guesswork",
+      "Repeat ovulation tests that never clearly turn positive",
+      "A quiet worry that something is not working",
+    ],
+    whatThisMeans: "Hard to predict does not mean impossible. It usually means either the cycle needs more context or a clinician can help fill in the picture.",
+    normal: [
+      "Some variation in cycle length from month to month",
+      "Quiet or subtle ovulation signs",
+      "A few unpredictable cycles after stopping contraception or during breastfeeding",
+    ],
+    seekSupport: [
+      "Cycles consistently shorter than 21 days or longer than 35 days",
+      "Fewer than nine periods a year, or long stretches without a period",
+      "Trying to conceive for 12 months without success, or 6 months if you are over 35",
+    ],
+    disclaimer: "This is general guidance and is not a diagnosis. If your cycles or ovulation feel very unclear over time, a GP can suggest simple checks.",
+    whatYouCanDo: [
+      { action: "Track one or two signals gently, not everything at once", reason: "Overloaded tracking often adds pressure without adding clarity." },
+      { action: "Note the first day of every period", reason: "Real cycle-length data is often more useful than any single sign." },
+      { action: "Give ovulation tests a fair chance across a wider window", reason: "In longer or irregular cycles, testing across more days may catch a surge that shifts around." },
+      { action: "Step back from tracking if it is starting to hurt", reason: "It is fine to loosen tracking for a cycle without losing progress." },
+    ],
+    whatHappensNext: "If cycles remain unclear or ovulation feels hard to spot for several months, a GP can suggest simple hormone or thyroid checks and, if useful, refer you to a fertility clinic for more detailed assessment.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Ovulation and your fertile window", href: "/trying-to-conceive/ovulation" },
+        { label: "Late ovulation and trying to conceive", href: "/articles/late-ovulation-and-ttc" },
+        { label: "Fertility hub", href: "/trying-to-conceive/fertility" },
+      ],
+    },
+    aiPrompts: [
+      "Why can't I tell when I'm ovulating?",
+      "How do I track ovulation with irregular cycles?",
+      "When should I ask a GP about ovulation?",
+    ],
+    captureIntro: "Uneven cycles are easier to think about when the pattern is written down over time.",
+    journey: ["trying-to-conceive"],
+    topics: ["body-changes", "timelines"],
+    relatedSlugs: ["late-ovulation-and-ttc", "using-ovulation-tests", "cervical-mucus-and-fertility"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-stage-waiting.jpg", import.meta.url).href,
+      alt: "A warm morning still life with a mug, a folded soft cloth, and a quiet sprig of greenery.",
+    },
+    sources: [
+      { label: "Periods and fertility in the menstrual cycle", publisher: "NHS", url: "https://www.nhs.uk/conditions/periods/fertility-in-the-menstrual-cycle/" },
+      { label: "Polycystic ovary syndrome (PCOS)", publisher: "NHS", url: "https://www.nhs.uk/conditions/polycystic-ovary-syndrome-pcos/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Getting pregnant: How can I improve my chances?", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+    ],
+    keyTakeaways: [
+      "Ovulation can be hard to predict when cycles are irregular or when signs are quiet.",
+      "Coming off contraception, postpartum recovery, or breastfeeding can all make ovulation less predictable for a while.",
+      "Conditions such as PCOS or thyroid changes may affect how often ovulation happens and are worth raising with a GP.",
+      "Gentle tracking with mucus, ovulation tests, and cycle dates often builds a clearer picture over time.",
+      "Very irregular or absent cycles are worth an earlier GP conversation.",
+      "Standard UK guidance suggests speaking to a GP after 12 months of trying, or 6 months if you are over 35.",
+    ],
+    faq: [
+      { question: "Can I still be ovulating if I never see clear signs?", answer: "Yes. Some people have quiet ovulation signs even when they are ovulating regularly. Regular periods roughly every 21 to 35 days are a reassuring background signal on their own." },
+      { question: "Are ovulation tests useful if my cycles are irregular?", answer: "They can be, but you may need to test across a wider window and interpret results more carefully. Combining tests with mucus tracking often helps." },
+      { question: "Could this mean I have PCOS?", answer: "Not necessarily. PCOS is one possible reason for less predictable ovulation, but there are others. A GP can suggest simple checks if your cycles are often very long or absent." },
+    ],
+    editorialSections: [
+      {
+        id: "why-ovulation-is-hard-to-read",
+        heading: "Why ovulation can be hard to read",
+        lead: "There is often nothing wrong with the cycle. There is just less clear signal to work with.",
+        paragraphs: [
+          "Ovulation tracking is built on averages: an average cycle length, an average day for the LH surge, an average pattern of mucus. Bodies rarely fit averages exactly, and some cycles simply give quieter or more variable signals than others.",
+          "Hard to predict is not the same as not happening. Many people with unclear signs still ovulate regularly. Others ovulate less often, and that pattern is worth understanding rather than pushing through.",
+        ],
+        callout: { tone: "reassurance", text: "Not being able to place ovulation exactly does not mean your body is broken. It often means the picture needs more context, or a clinician to help fill it in." },
+      },
+      {
+        id: "irregular-cycles",
+        heading: "When cycles are irregular",
+        lead: "Cycle length that varies widely makes ovulation land in a wider window.",
+        paragraphs: [
+          "If your cycle length varies by more than a week from month to month, an average-based estimate becomes less accurate. Ovulation may still happen, but on a range of possible days rather than a predictable one.",
+          "Tracking the first day of every period, gentle mucus awareness, and testing across a wider window can all help. A separate guidance article on irregular periods and trying to conceive goes deeper into this.",
+        ],
+      },
+      {
+        id: "quiet-or-unclear-signs",
+        heading: "When signs feel quiet or unclear",
+        lead: "Some bodies whisper. That does not mean they are silent.",
+        paragraphs: [
+          "Cervical mucus changes may be brief or subtle. Ovulation tests may show borderline results. Temperature shifts may be small. Any of these can make ovulation harder to spot even when it is happening on schedule.",
+          "In these cycles, looking at two or three signals together tends to be more useful than trying to make one sign do all the work. Patterns over time often show up more clearly than any single cycle.",
+        ],
+      },
+      {
+        id: "conditions-and-life-stages",
+        heading: "Conditions and life stages that can shift things",
+        lead: "Some contexts make ovulation quieter or less predictable for a while.",
+        paragraphs: [
+          "Coming off hormonal contraception can mean a few cycles of uneven timing. Breastfeeding often keeps ovulation less predictable, especially in the earlier months. Postpartum recovery can also take time to settle into a regular rhythm.",
+          "Conditions such as PCOS, thyroid changes, or premature ovarian insufficiency may affect how often and how predictably ovulation happens. These are possibilities worth exploring with a GP if the pattern repeats, rather than diagnoses to give yourself from home.",
+        ],
+      },
+      {
+        id: "tracking-without-obsessing",
+        heading: "How to track without obsessing",
+        lead: "Tracking is helpful when it adds information and heavy when it adds pressure.",
+        paragraphs: [
+          "Pick one or two signals rather than everything. Cervical mucus and a short window of ovulation tests, or just cycle dates and mucus, tend to be more sustainable than daily temperature charts and multiple apps.",
+          "If tracking is starting to hurt, it is okay to loosen it. Regular, pressure-free intimacy across a wider window is often more effective than perfect timing on a single day.",
+        ],
+        callout: { tone: "reassurance", text: "Softening how much you track is not giving up. It is protecting the part of trying to conceive that is not about spreadsheets." },
+      },
+      {
+        id: "when-to-ask-for-help",
+        heading: "When to ask for help",
+        lead: "Some patterns are worth raising sooner rather than later.",
+        paragraphs: [
+          "If your cycles are consistently shorter than 21 days or longer than 35 days, if you have fewer than nine periods a year, or if your periods have stopped for months at a time, please speak to your GP. These patterns often benefit from simple checks.",
+          "Standard UK guidance is to speak to a GP after 12 months of trying, or 6 months if you are over 35. If you already know your cycles are very irregular, it is fine to ask earlier.",
+        ],
+        callout: { tone: "gentle-warning", text: "If your periods have stopped for several months and you are not pregnant, please make a GP appointment. This is worth checking, not waiting out." },
+      },
+    ],
+  },
+
+  // ─── TIMING SEX WHEN TRYING TO CONCEIVE ────────────────────────────────
+  {
+    slug: "timing-sex-when-trying-to-conceive",
+    title: "Timing sex when trying to conceive",
+    metaDescription: "Calm UK guidance on timing intimacy around the fertile window without turning trying to conceive into a performance task.",
+    quickAnswer: "Regular, pressure-free intimacy every two to three days across the fertile window is what UK guidance suggests when trying to conceive. Exact timing is an estimate rather than a target, and consistency across the window matters more than hitting a single day. If timing is starting to feel stressful, softer patterns are usually kinder and just as effective.",
+    standfirst: "Trying to conceive can quietly turn intimacy into a task. The gentler shape, backed by UK guidance, is regular closeness across the fertile window, not a race to a single day.",
+    howThisFeels: [
+      "Feeling on-call around the fertile window",
+      "Worrying about missing the right day",
+      "Noticing intimacy start to feel scripted",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "The fertile window is a few days long", body: "Sperm can survive in the reproductive tract for several days, so intimacy in the days leading up to ovulation may still result in conception." },
+        { heading: "Exact ovulation day is an estimate", body: "Even with tracking, the exact day of ovulation is not something home tools can pinpoint with certainty. Regular closeness across the window is more robust than trying to hit one day." },
+        { heading: "Frequency and rhythm matter", body: "UK NHS and NICE guidance suggests regular intercourse every two to three days across the cycle when trying to conceive, rather than saving up for a specific day." },
+      ],
+      lessCauses: [
+        { heading: "Pressure changes how bodies respond", body: "For many people, feeling scheduled or watched makes intimacy harder. Softening the timing often helps more than tightening it." },
+        { heading: "Partner communication", body: "Trying to conceive is shared. Small conversations about how the process feels can reduce pressure on both sides." },
+        { heading: "Known medical concerns", body: "If there are known fertility-affecting conditions on either side, a fertility clinician can give more specific timing guidance." },
+      ],
+      whyItVaries: "Bodies, cycles, and relationships are all different. What feels workable one month may feel too much the next. The best pattern is one that is honest, sustainable, and kind.",
+    },
+    timing: { whenStarts: "Timing may become a focus from the first cycle of trying.", whenEases: "Softening timing around a wider window often eases pressure within a cycle or two." },
+    whatItFeelsLike: [
+      "Suddenly noticing dates on a calendar you never used to",
+      "A quiet loss of spontaneity",
+      "Small conversations about pressure with a partner",
+    ],
+    whatThisMeans: "Timing helps, but consistency inside the window matters more than a single day. Kind, honest patterns tend to last longer and hurt less than tight schedules.",
+    normal: [
+      "Occasional cycles where timing does not quite line up",
+      "Intimacy feeling different when trying to conceive",
+      "A range of feelings from hopeful to weary",
+    ],
+    seekSupport: [
+      "Persistent low mood, anxiety, or distress around trying to conceive",
+      "Ongoing intimacy pain, low desire that feels significant, or new symptoms",
+      "Trying to conceive for 12 months without success, or 6 months if you are over 35",
+    ],
+    disclaimer: "This is general guidance and is not a diagnosis. If timing is affecting your relationship or wellbeing, a GP or fertility counsellor can help.",
+    whatYouCanDo: [
+      { action: "Aim for intimacy every two to three days across the wider window", reason: "That rhythm gives regular chances without pinning everything to one day." },
+      { action: "Use tracking as a soft guide, not a stopwatch", reason: "Mucus changes and the ovulation calculator suggest a window, not a target." },
+      { action: "Have a short honest conversation with your partner", reason: "Sharing how it feels tends to reduce pressure more than tightening the schedule." },
+      { action: "Step back for a cycle if it is hurting", reason: "One softer cycle rarely reduces the chance of conception and can help protect the relationship." },
+    ],
+    whatHappensNext: "If timing feels difficult over time or you have known fertility concerns, a GP conversation can help you plan next steps that fit your life.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Ovulation and your fertile window", href: "/trying-to-conceive/ovulation" },
+        { label: "Understanding your fertile window", href: "/articles/understanding-your-fertile-window" },
+        { label: "Ovulation calculator", href: "/ovulation-calculator" },
+      ],
+    },
+    aiPrompts: [
+      "How often should we have sex when trying to conceive?",
+      "Do we have to time it exactly around ovulation?",
+      "What if timing is making things feel stressful?",
+    ],
+    captureIntro: "How trying to conceive is feeling is worth writing down, not just carrying.",
+    journey: ["trying-to-conceive"],
+    topics: ["relationships", "timelines"],
+    relatedSlugs: ["understanding-your-fertile-window", "how-to-know-when-you-are-ovulating", "fertile-window"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-stage-timing.jpg", import.meta.url).href,
+      alt: "A warm, quiet morning scene with two mugs and soft botanical accents on a neutral surface.",
+    },
+    sources: [
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Getting pregnant: How can I improve my chances?", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+      { label: "Fertility: assessment and treatment for people with fertility problems", publisher: "RCOG", url: "https://www.rcog.org.uk/for-the-public/browse-all-patient-information-leaflets/" },
+    ],
+    keyTakeaways: [
+      "UK guidance suggests regular intimacy every two to three days when trying to conceive.",
+      "The fertile window is a few days long, not a single day.",
+      "Consistency across the window matters more than perfect timing on one day.",
+      "Softer patterns are usually kinder and often just as effective as tight schedules.",
+      "If timing is affecting wellbeing or the relationship, it is fine to loosen it or ask for support.",
+      "Standard UK guidance suggests speaking to a GP after 12 months of trying, or 6 months if you are over 35.",
+    ],
+    faq: [
+      { question: "Do we have to have sex on the exact day of ovulation?", answer: "No. Sperm can survive in the reproductive tract for several days, so intimacy in the days leading up to ovulation may still result in conception. Regular closeness across the window is more robust than aiming for one day." },
+      { question: "Is more frequent always better?", answer: "Not necessarily. UK guidance suggests every two to three days across the cycle when trying to conceive. That rhythm gives regular chances without adding pressure to be intimate every day." },
+      { question: "What if timing is making intimacy feel stressful?", answer: "That is common and worth taking seriously. Softening timing, a short honest conversation with your partner, or a cycle with less focus on tracking can all help. A GP or counsellor can support you if this pattern continues." },
+    ],
+    editorialSections: [
+      {
+        id: "timing-around-the-window",
+        heading: "Timing around the fertile window",
+        lead: "The fertile window is a small stretch of days, not a single one.",
+        paragraphs: [
+          "Because sperm can survive in the reproductive tract for several days, intimacy in the run-up to ovulation may still result in conception. That gives the fertile window a useful width, which softens how tightly you need to time things.",
+          "Regular intimacy across the wider window tends to be a kinder and more sustainable pattern than trying to catch ovulation on a single day.",
+        ],
+      },
+      {
+        id: "exact-timing-is-an-estimate",
+        heading: "Why exact timing is only an estimate",
+        lead: "Home tools can suggest a window, not confirm a day.",
+        paragraphs: [
+          "Ovulation calculators, cycle apps, mucus tracking, and ovulation tests all give useful clues about when ovulation is likely, but none of them can confirm a single moment of ovulation from home.",
+          "This is not a flaw. It is why the guidance is built around windows and rhythms rather than exact dates.",
+        ],
+        callout: { tone: "info", text: "A positive ovulation test suggests that ovulation is likely to happen soon. It does not confirm that ovulation has actually happened." },
+      },
+      {
+        id: "frequency-over-perfection",
+        heading: "Why regular closeness beats perfect timing",
+        lead: "UK guidance is clear that consistency inside the window matters more than exact days.",
+        paragraphs: [
+          "NHS and NICE guidance suggests intimacy every two to three days across the cycle when trying to conceive. That rhythm covers the fertile window without turning it into a countdown.",
+          "For many people, saving intimacy for the exact fertile day increases pressure without meaningfully increasing the chance of conception across the whole window.",
+        ],
+      },
+      {
+        id: "using-the-window-without-scripting-sex",
+        heading: "Using the window without scripting intimacy",
+        lead: "The window is a soft guide, not a schedule to enforce.",
+        paragraphs: [
+          "Some people find it helpful to loosely know when the fertile window is likely, then let intimacy happen without turning it into a nightly appointment. Others prefer not to track and instead aim for regular closeness across the whole cycle.",
+          "There is no single right pattern. The best one is the one that stays honest, kind, and sustainable across many cycles rather than one.",
+        ],
+      },
+      {
+        id: "partner-communication",
+        heading: "Talking about it as partners",
+        lead: "Trying to conceive is shared, and how it feels is worth saying out loud.",
+        paragraphs: [
+          "A short honest conversation with your partner about how the process feels can quietly reduce pressure on both sides. Naming what is heavy, or what is helping, tends to change the atmosphere more than any tracking tool.",
+          "It is also okay for either of you to want a softer cycle. Protecting the relationship is part of protecting the process.",
+        ],
+      },
+      {
+        id: "when-timing-feels-heavy",
+        heading: "What to do if timing becomes stressful",
+        lead: "Heaviness around intimacy is common when trying to conceive, and worth taking seriously.",
+        paragraphs: [
+          "If timing starts to feel like performance, or intimacy is becoming a source of tension, it is fine to loosen tracking, aim for closeness across a wider window, or take a cycle with less focus on timing at all.",
+          "If low mood, anxiety, ongoing pain during intimacy, or persistent difficulty are showing up, please speak to your GP. Fertility counsellors are also available through many clinics.",
+        ],
+        callout: { tone: "reassurance", text: "Loosening timing for a cycle is not giving up. It is often the kindest way to keep going for longer." },
+      },
+      {
+        id: "medical-support",
+        heading: "When to bring in medical support",
+        lead: "Some situations benefit from earlier guidance.",
+        paragraphs: [
+          "If either of you has known fertility-affecting conditions, previous surgery, or symptoms that worry you, an earlier conversation with a GP or fertility clinician can help you plan.",
+          "Standard UK guidance is to speak to a GP after 12 months of trying, or 6 months if you are over 35. If timing itself is causing distress, that is a reason to ask for support too.",
+        ],
+      },
+    ],
+  },
+
+  // ─── BASAL BODY TEMPERATURE TRACKING ────────────────────────────────────
+  {
+    slug: "basal-body-temperature-tracking",
+    title: "Basal body temperature tracking",
+    metaDescription: "Calm UK guidance on how basal body temperature tracking works, what it can suggest about ovulation, and its limits when trying to conceive.",
+    quickAnswer: "Basal body temperature (BBT) is your resting temperature first thing in the morning. After ovulation, progesterone often causes a small, sustained rise of around 0.2 to 0.5°C. BBT can suggest that ovulation has already happened rather than predict when it will. It works best alongside cervical mucus, ovulation tests, and cycle tracking, and is not always the right tool for everyone.",
+    standfirst: "Basal body temperature tracking is a quiet, retrospective tool. It can help you build a picture of your cycle over time, but it works best when you already know its limits.",
+    howThisFeels: [
+      "Checking a thermometer before you are fully awake",
+      "Watching daily numbers move for reasons that are not always clear",
+      "Wondering whether tracking is helping or adding pressure",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Progesterone lifts temperature after ovulation", body: "After ovulation, progesterone rises. This may cause a small, sustained lift in resting temperature of around 0.2 to 0.5°C for the rest of the cycle." },
+        { heading: "BBT is retrospective, not predictive", body: "The temperature shift only appears after ovulation, so BBT can suggest that ovulation has already happened rather than predict when it is about to." },
+        { heading: "Consistency matters more than absolute numbers", body: "Taking your temperature at roughly the same time each morning, before getting up, gives more meaningful patterns than any single reading." },
+      ],
+      lessCauses: [
+        { heading: "Many things can affect readings", body: "Poor sleep, alcohol the night before, illness, an unusually late or early reading, and even room temperature can nudge BBT up or down for reasons unrelated to ovulation." },
+        { heading: "Some cycles do not show a clear shift", body: "Not everyone sees a clean biphasic pattern. That does not necessarily mean ovulation did not happen." },
+        { heading: "It can be a heavy daily habit", body: "For some people, daily temperature tracking adds more pressure than clarity. Other signals may work better in that case." },
+      ],
+      whyItVaries: "BBT reflects many things happening in the body and environment. Progesterone is one input among several, so a single reading is rarely as informative as the pattern across a whole cycle.",
+    },
+    timing: { whenStarts: "The post-ovulation temperature shift may show a day or two after ovulation.", whenEases: "Patterns tend to make more sense once you have a couple of full cycles of readings to compare." },
+    whatItFeelsLike: [
+      "A chart that looks messy in real time and clearer in hindsight",
+      "Small numerical shifts that feel bigger than they are",
+      "A quiet sense of paying attention to your cycle",
+    ],
+    whatThisMeans: "BBT is a supportive clue, not a confirmation. Used gently, it can help you understand your cycle over time. Used tightly, it can add pressure without adding certainty.",
+    normal: [
+      "Some day-to-day variation in readings",
+      "A visible shift only after ovulation has happened",
+      "Cycles where the pattern is less clear than usual",
+    ],
+    seekSupport: [
+      "Cycles consistently shorter than 21 days or longer than 35 days",
+      "Fewer than nine periods a year",
+      "Trying to conceive for 12 months without success, or 6 months if you are over 35",
+    ],
+    disclaimer: "This is general guidance and is not a diagnosis. If your cycle or ovulation pattern is worrying you, speak to your GP.",
+    whatYouCanDo: [
+      { action: "Take your temperature before getting out of bed, at roughly the same time", reason: "Consistency gives you meaningful patterns rather than random numbers." },
+      { action: "Use a thermometer with two decimal places", reason: "BBT shifts are small, so a more precise thermometer makes patterns easier to read." },
+      { action: "Look at the whole chart, not any single reading", reason: "One high or low day rarely means anything on its own." },
+      { action: "Stop if it is adding pressure without adding clarity", reason: "BBT is one tool among several, and it is not the right one for everyone." },
+    ],
+    whatHappensNext: "If BBT patterns feel unclear over several cycles, or if you would rather stop, other signals such as cervical mucus and ovulation tests may work better. A GP can help if wider concerns show up.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Ovulation and your fertile window", href: "/trying-to-conceive/ovulation" },
+        { label: "How to know when you are ovulating", href: "/articles/how-to-know-when-you-are-ovulating" },
+        { label: "Cycle tracking", href: "/trying-to-conceive/cycle-tracking" },
+      ],
+    },
+    aiPrompts: [
+      "How does basal body temperature tracking work?",
+      "Can BBT prove that I have ovulated?",
+      "Is BBT tracking worth it if my cycles are irregular?",
+    ],
+    captureIntro: "Temperature patterns are easier to read when they are gently noticed, not obsessed over.",
+    journey: ["trying-to-conceive"],
+    topics: ["body-changes", "timelines"],
+    relatedSlugs: ["how-to-know-when-you-are-ovulating", "cervical-mucus-and-fertility", "using-ovulation-tests"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/week2-ovulation.jpg", import.meta.url).href,
+      alt: "A soft botanical arrangement in muted sage tones beside a folded linen cloth and a quiet notebook.",
+    },
+    sources: [
+      { label: "Periods and fertility in the menstrual cycle", publisher: "NHS", url: "https://www.nhs.uk/conditions/periods/fertility-in-the-menstrual-cycle/" },
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Getting pregnant: How can I improve my chances?", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+    ],
+    keyTakeaways: [
+      "Basal body temperature (BBT) is your resting temperature first thing in the morning.",
+      "After ovulation, progesterone may cause a small, sustained rise of around 0.2 to 0.5°C.",
+      "BBT is retrospective, not predictive: it can suggest ovulation has happened rather than predict when it will.",
+      "Consistency in how and when you take your temperature matters more than any single reading.",
+      "Many things can affect BBT, including sleep, alcohol, illness, and the time of the reading.",
+      "BBT works best as one signal among several, not as the only tool.",
+    ],
+    faq: [
+      { question: "Does a temperature rise confirm that I have ovulated?", answer: "A sustained rise across several days is a supportive clue that ovulation has happened, but it is not a formal confirmation. BBT is best used alongside other signals rather than on its own." },
+      { question: "Do I have to track BBT to know when I'm ovulating?", answer: "No. Cervical mucus, ovulation tests, and cycle tracking all give useful information. BBT is one option among several and is not the right tool for everyone." },
+      { question: "Is BBT tracking useful if my cycles are irregular?", answer: "It can be, but patterns may be harder to read. In irregular cycles, combining BBT with mucus and ovulation tests, and a GP conversation if needed, often works better than BBT alone." },
+    ],
+    editorialSections: [
+      {
+        id: "what-bbt-is",
+        heading: "What basal body temperature actually is",
+        lead: "BBT is your resting body temperature, taken first thing in the morning before you get up.",
+        paragraphs: [
+          "It is a slightly lower and more stable temperature than the one you would measure later in the day. Because it reflects your body at rest, small hormonal shifts can show up in it more clearly than in daytime readings.",
+          "A specific BBT thermometer with two decimal places tends to be more useful than a standard fever thermometer, because the shifts you are looking for are small.",
+        ],
+      },
+      {
+        id: "how-bbt-shifts",
+        heading: "How BBT can shift after ovulation",
+        lead: "After ovulation, progesterone often lifts your resting temperature by a small, sustained amount.",
+        paragraphs: [
+          "In many cycles, this looks like a lower stretch of readings in the first half of the cycle followed by a slightly higher stretch after ovulation, sometimes described as a biphasic pattern. The shift is usually around 0.2 to 0.5°C.",
+          "Not every cycle shows a clean biphasic pattern, and some people never see one clearly. That does not automatically mean ovulation is not happening.",
+        ],
+      },
+      {
+        id: "retrospective-not-predictive",
+        heading: "Why BBT is retrospective, not predictive",
+        lead: "This is the most important thing to understand before starting.",
+        paragraphs: [
+          "The temperature shift only appears after ovulation has happened. That means BBT can help you look back and see that ovulation likely occurred, but it will not tell you in advance when your fertile window will be.",
+          "For predicting the fertile window in advance, cervical mucus changes, ovulation tests, and the ovulation calculator tend to be more useful.",
+        ],
+        callout: { tone: "info", text: "BBT does not prove ovulation. A sustained rise is a supportive clue that ovulation has probably happened, not a formal confirmation." },
+      },
+      {
+        id: "how-to-track-if-you-choose-to",
+        heading: "How to track consistently if you choose to",
+        lead: "Consistency is what makes BBT tracking meaningful.",
+        paragraphs: [
+          "Take your temperature at roughly the same time each morning, before you get out of bed, sit up, or drink anything. Use the same thermometer and record the reading in an app or notebook.",
+          "Aim for a full cycle or two of readings before drawing conclusions. Patterns almost always make more sense when you can see the whole chart rather than any single day.",
+        ],
+      },
+      {
+        id: "why-readings-vary",
+        heading: "Common reasons readings vary",
+        lead: "BBT reflects more than just ovulation.",
+        paragraphs: [
+          "Poor sleep, alcohol the night before, illness, an unusually late or early reading, waking up warmer than usual, or changes in room temperature can all nudge BBT up or down for reasons unrelated to ovulation.",
+          "One high or low reading rarely means anything on its own. It is the shape of the whole chart across the cycle that usually carries the information.",
+        ],
+      },
+      {
+        id: "when-bbt-becomes-unhelpful",
+        heading: "When BBT becomes stressful or unhelpful",
+        lead: "It is a tool, not an obligation.",
+        paragraphs: [
+          "For some people, checking a thermometer every morning becomes a heavy start to the day, especially when readings are noisy or the pattern is unclear. If BBT is adding pressure without adding clarity, it is fine to stop.",
+          "Other signals may work better for your cycle, your life, or your temperament. There is no right way to track ovulation, only the way that is honest and sustainable for you.",
+        ],
+        callout: { tone: "gentle-warning", text: "If tracking is starting to feel like a job, please give yourself permission to pause. BBT is one option, not a requirement." },
+      },
+      {
+        id: "using-bbt-alongside-other-signals",
+        heading: "How BBT fits alongside mucus, tests, and cycle tracking",
+        lead: "BBT tends to be most useful as part of a fuller picture.",
+        paragraphs: [
+          "Cervical mucus and ovulation tests are forward-looking signals that help identify the fertile window before ovulation. BBT is a backward-looking signal that helps confirm the pattern after the fact.",
+          "Used together across a couple of cycles, they can build a richer picture than any one signal on its own. Used gently, and without turning any of them into pressure, they can help you understand your cycle in a way that supports rather than exhausts.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

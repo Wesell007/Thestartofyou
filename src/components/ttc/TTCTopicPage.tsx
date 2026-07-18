@@ -355,7 +355,9 @@ const TTCTopicPage = ({ config, heroImage }: Props) => {
                   <Link
                     key={item.href}
                     to={item.href}
-                    className="group block bg-card rounded-2xl overflow-hidden border transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)]"
+                    className={`group block bg-card rounded-2xl overflow-hidden border transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)]${
+                      config.startHere.length === 1 ? " w-full max-w-md" : ""
+                    }`}
                     style={{ borderColor: accentBorder }}
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">

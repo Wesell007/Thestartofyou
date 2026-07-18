@@ -51,6 +51,19 @@ import imgOvulation from "@/assets/week2-ovulation.jpg";
 import imgWeek1 from "@/assets/week1-cycle.jpg";
 import imgFertilisation from "@/assets/week3-fertilisation.jpg";
 
+// Phase 9.12b.1 — distinct ovulation topic imagery
+import imgOvulationKnow from "@/assets/ttc-ovulation-know.jpg";
+import imgOvulationSignsJournal from "@/assets/ttc-ovulation-signs-journal.jpg";
+import imgFertileWindowHighlighted from "@/assets/ttc-fertile-window-highlighted.jpg";
+import imgFertileWindowCalendar from "@/assets/ttc-fertile-window-calendar.jpg";
+import imgOvulationTestsStrips from "@/assets/ttc-ovulation-tests-strips.jpg";
+import imgCervicalMucusBotanical from "@/assets/ttc-cervical-mucus-botanical.jpg";
+import imgBBTThermometer from "@/assets/ttc-bbt-thermometer.jpg";
+import imgLateOvulationClock from "@/assets/ttc-late-ovulation-clock.jpg";
+import imgHardToPredictNotebook from "@/assets/ttc-hard-to-predict-notebook.jpg";
+import imgTimingSexMugs from "@/assets/ttc-timing-sex-mugs.jpg";
+import imgIrregularPeriodsCalendar from "@/assets/ttc-irregular-periods-calendar.jpg";
+
 interface Props {
   config: TTCPageConfig;
   heroImage: string;
@@ -93,9 +106,9 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/ivf": imgIVF,
   "/ivf-timeline": imgIVF,
   "/ask": imgLifestyle,
-  "/articles/signs-of-ovulation": imgOvulation,
-  "/articles/ovulation-signs": imgOvulation,
-  "/articles/fertile-window": imgTiming,
+  "/articles/signs-of-ovulation": imgOvulationSignsJournal,
+  "/articles/ovulation-signs": imgOvulationSignsJournal,
+  "/articles/fertile-window": imgFertileWindowCalendar,
   "/articles/trying-to-conceive-explained": imgJourney,
   "/articles/two-week-wait": imgWaiting,
   "/articles/when-to-take-a-pregnancy-test": imgPregTests,
@@ -111,7 +124,16 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/how-long-to-try-before-getting-help": imgFertility,
   "/articles/pcos-and-trying-to-conceive": imgConditions,
   "/articles/endometriosis-and-trying-to-conceive": imgConditions,
-  "/articles/irregular-periods-and-trying-to-conceive": imgCycle,
+  "/articles/irregular-periods-and-trying-to-conceive": imgIrregularPeriodsCalendar,
+  // Phase 9.12b.1 — distinct ovulation topic imagery
+  "/articles/how-to-know-when-you-are-ovulating": imgOvulationKnow,
+  "/articles/understanding-your-fertile-window": imgFertileWindowHighlighted,
+  "/articles/using-ovulation-tests": imgOvulationTestsStrips,
+  "/articles/cervical-mucus-and-fertility": imgCervicalMucusBotanical,
+  "/articles/basal-body-temperature-tracking": imgBBTThermometer,
+  "/articles/late-ovulation-and-ttc": imgLateOvulationClock,
+  "/articles/when-ovulation-is-hard-to-predict": imgHardToPredictNotebook,
+  "/articles/timing-sex-when-trying-to-conceive": imgTimingSexMugs,
   "/articles/fertility-tests-for-women": imgTestsWomen,
   "/articles/fertility-tests-for-men": imgTestsMen,
   "/articles/what-happens-at-a-fertility-appointment": imgAppointment,
@@ -320,14 +342,22 @@ const TTCTopicPage = ({ config, heroImage }: Props) => {
         <section className="pb-16 md:pb-24">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
             <SectionLabel>Start here</SectionLabel>
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
+            <div
+              className={
+                config.startHere.length === 1
+                  ? "mt-10 flex justify-center"
+                  : "mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7"
+              }
+            >
               {config.startHere.map((item) => {
                 const img = resolveImage(item.href, item.image);
                 return (
                   <Link
                     key={item.href}
                     to={item.href}
-                    className="group block bg-card rounded-2xl overflow-hidden border transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)]"
+                    className={`group block bg-card rounded-2xl overflow-hidden border transition-all hover:-translate-y-1 hover:shadow-[0_20px_50px_-30px_rgba(0,0,0,0.25)]${
+                      config.startHere.length === 1 ? " w-full max-w-md" : ""
+                    }`}
                     style={{ borderColor: accentBorder }}
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">

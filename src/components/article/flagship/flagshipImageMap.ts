@@ -104,6 +104,14 @@ import ttcPreconceptionVitamins from "@/assets/ttc-preconception-vitamins.jpg";
 import ttcGPAppointment from "@/assets/ttc-gp-appointment.jpg";
 import ttcStoppingContraception from "@/assets/ttc-stopping-contraception.jpg";
 
+// Phase 9.13b — preconception health completion hero imagery
+import ttcMedicationReview from "@/assets/ttc-medication-review.jpg";
+import ttcLifestyleBeforePregnancy from "@/assets/ttc-lifestyle-before-pregnancy.jpg";
+import ttcMentalWellbeingBeforePregnancy from "@/assets/ttc-mental-wellbeing-before-pregnancy.jpg";
+import ttcPartnerHealth from "@/assets/ttc-partner-health.jpg";
+import ttcSpermHealthBasics from "@/assets/ttc-sperm-health-basics.jpg";
+
+
 
 
 type Img = { src: string; alt: string };

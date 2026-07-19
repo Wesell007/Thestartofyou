@@ -149,6 +149,12 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/emotional-impact-of-ivf": imgIVF,
   "/articles/emotional-wellbeing-pregnancy": imgLifestyle,
   "/articles/perinatal-anxiety": imgLifestyle,
+  // Phase 9.13a — preconception health foundations
+  "/articles/what-to-do-before-trying-to-conceive": imgPreconceptionStart,
+  "/articles/folic-acid-before-pregnancy": imgFolicAcid,
+  "/articles/preconception-vitamins": imgPreconceptionVitamins,
+  "/articles/preconception-gp-appointment": imgGPAppointment,
+  "/articles/stopping-contraception-when-ttc": imgStoppingContraception,
 };
 
 const TOPIC_FALLBACK: Record<TTCTopicSlug, string> = {

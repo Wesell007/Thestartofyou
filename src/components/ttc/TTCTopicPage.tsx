@@ -128,7 +128,7 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/ivf": imgIVF,
   "/ivf-timeline": imgIVF,
   "/ask": imgLifestyle,
-  "/articles/signs-of-ovulation": imgOvulationSignsJournal,
+  
   "/articles/ovulation-signs": imgOvulationSignsJournal,
   "/articles/fertile-window": imgFertileWindowCalendar,
   "/articles/trying-to-conceive-explained": imgJourney,

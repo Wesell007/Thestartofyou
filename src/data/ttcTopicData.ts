@@ -159,6 +159,13 @@ const LIVE = {
   mentalWellbeingBeforePregnancy: "/articles/mental-wellbeing-before-pregnancy",
   partnerHealthBeforePregnancy: "/articles/partner-health-before-pregnancy",
   spermHealthBasics: "/articles/sperm-health-basics",
+
+  // Phase 9.14 (TTC fertility and support)
+  whenToAskFertilityHelp: "/articles/when-to-ask-for-fertility-help",
+  unexplainedFertilityConcerns: "/articles/unexplained-fertility-concerns",
+  ageAndTryingToConceive: "/articles/age-and-trying-to-conceive",
+  maleFertilityWhenTTC: "/articles/male-fertility-when-trying-to-conceive",
+  movingFromTTCToIVF: "/articles/moving-from-ttc-to-ivf",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────
@@ -325,44 +332,37 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     ],
     groups: [
       {
-        label: "Understanding fertility",
+        label: "When to ask for support",
+        description: "How to know when speaking to a GP or fertility clinic tends to help.",
         links: [
           { label: "How long to try before getting help", href: LIVE.howLongToTry },
+          { label: "When to ask for fertility help", href: LIVE.whenToAskFertilityHelp },
+          { label: "Preconception GP appointment", href: LIVE.preconceptionGPAppointment },
+          { label: "When fertility feels unexplained", href: LIVE.unexplainedFertilityConcerns },
           { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
         ],
       },
       {
-        label: "Getting checked",
-        description: "What investigations look like for both partners.",
+        label: "Understanding fertility factors",
+        description: "The parts of the picture worth understanding calmly, together.",
         links: [
-          { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
-          { label: "Fertility tests for women", href: LIVE.fertilityTestsWomen },
+          { label: "Age and trying to conceive", href: LIVE.ageAndTryingToConceive },
+          { label: "Male fertility when trying to conceive", href: LIVE.maleFertilityWhenTTC },
+          { label: "Sperm health basics", href: LIVE.spermHealthBasics },
           { label: "Fertility tests for men", href: LIVE.fertilityTestsMen },
+          { label: "Fertility tests for women", href: LIVE.fertilityTestsWomen },
           { label: "AMH test explained", href: LIVE.amhTest },
         ],
       },
       {
-        label: "When you're waiting and wondering",
-        description: "Goes deeper inside the dedicated subtopics.",
+        label: "Tests, treatment and next steps",
+        description: "What investigations, treatment conversations and next steps can look like.",
         links: [
-          { label: "The two-week wait", href: LIVE.twoWeekWait },
-          { label: "Pregnancy testing in TTC", href: LIVE.pregnancyTests },
-        ],
-      },
-      {
-        label: "After a difficult cycle",
-        description: "Early loss, trying again, and the emotional weight of TTC.",
-        links: [
+          { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
+          { label: "Moving from TTC to IVF", href: LIVE.movingFromTTCToIVF },
+          { label: "IVF and treatment", href: LIVE.ivfPage },
           { label: "Pregnancy after loss", href: LIVE.pregnancyAfterLoss },
-        ],
-      },
-      {
-        label: "Conditions and extra support",
-        links: [
-          { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
-          { label: "Age & fertility", href: LIVE.age },
-          { label: "Male fertility", href: LIVE.male },
-          { label: "Moving into IVF (treatment pathway)", href: LIVE.ivfPage },
+          { label: "The two-week wait", href: LIVE.twoWeekWait },
         ],
       },
     ],

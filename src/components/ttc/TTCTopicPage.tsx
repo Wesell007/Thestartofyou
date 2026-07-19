@@ -78,6 +78,13 @@ import imgMentalWellbeingBeforePregnancy from "@/assets/ttc-mental-wellbeing-bef
 import imgPartnerHealth from "@/assets/ttc-partner-health.jpg";
 import imgSpermHealthBasics from "@/assets/ttc-sperm-health-basics.jpg";
 
+// Phase 9.14 — fertility and support imagery
+import imgWhenToAskHelp from "@/assets/ttc-when-to-ask-help.jpg";
+import imgUnexplainedFertility from "@/assets/ttc-unexplained-fertility.jpg";
+import imgAgeAndTTC from "@/assets/ttc-age-and-ttc.jpg";
+import imgMaleFertilitySupport from "@/assets/ttc-male-fertility-support.jpg";
+import imgMovingToIVF from "@/assets/ttc-moving-to-ivf.jpg";
+
 
 interface Props {
   config: TTCPageConfig;
@@ -169,6 +176,12 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/mental-wellbeing-before-pregnancy": imgMentalWellbeingBeforePregnancy,
   "/articles/partner-health-before-pregnancy": imgPartnerHealth,
   "/articles/sperm-health-basics": imgSpermHealthBasics,
+  // Phase 9.14 — fertility and support
+  "/articles/when-to-ask-for-fertility-help": imgWhenToAskHelp,
+  "/articles/unexplained-fertility-concerns": imgUnexplainedFertility,
+  "/articles/age-and-trying-to-conceive": imgAgeAndTTC,
+  "/articles/male-fertility-when-trying-to-conceive": imgMaleFertilitySupport,
+  "/articles/moving-from-ttc-to-ivf": imgMovingToIVF,
 };
 
 const TOPIC_FALLBACK: Record<TTCTopicSlug, string> = {

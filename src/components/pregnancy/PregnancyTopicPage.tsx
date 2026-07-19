@@ -35,6 +35,9 @@ import imgSignsLabour from "@/assets/article-hero-third-signs-of-labour.jpg";
 import imgPregnancyJourney from "@/assets/pregnancy-journey.jpg";
 import imgPregnancyBump from "@/assets/pregnancy-bump.jpg";
 import imgEmotionalFirstTri from "@/assets/article-hero-emotional-first-tri.jpg";
+import imgEmotionalSelf from "@/assets/article-hero-emotional-feeling-like-yourself.jpg";
+import imgEmotionalSupport from "@/assets/article-hero-emotional-supportive-moment.jpg";
+import imgPerinatalAnxiety from "@/assets/article-hero-perinatal-anxiety.jpg";
 import imgSecondAnxiety from "@/assets/article-hero-second-anxiety.jpg";
 import imgThirdEmotional from "@/assets/article-hero-third-emotional.jpg";
 import imgTestsScans from "@/assets/article-hero-tests-scans.jpg";
@@ -49,6 +52,25 @@ import imgHospitalBag from "@/assets/article-hero-third-hospital-bag.jpg";
 import imgNursery from "@/assets/article-hero-third-nursery.jpg";
 import imgThirdSleep from "@/assets/article-hero-third-sleep.jpg";
 import imgBooties from "@/assets/pregnancy-hero-booties.jpg";
+import imgHeartburnHero from "@/assets/flagship-heartburn-hero.jpg";
+import imgAnteriorHero from "@/assets/flagship-anterior-hero.jpg";
+import imgPreparingJourney from "@/assets/preparing-journey.jpg";
+import imgPreparingCard from "@/assets/preparing-card.jpg";
+import imgGuidancePreparing from "@/assets/guidance-preparing.jpg";
+import imgGuidanceEmotional from "@/assets/guidance-card-emotional.jpg";
+// New Phase 10.1 assets — distinct topic thumbnails
+import imgFoodsToAvoid from "@/assets/article-hero-foods-to-avoid.jpg";
+import imgKeyNutrients from "@/assets/article-hero-key-nutrients.jpg";
+import imgMedicines from "@/assets/article-hero-medicines.jpg";
+import imgVaccinations from "@/assets/article-hero-vaccinations.jpg";
+import imgBookingAppt from "@/assets/article-hero-booking-appointment.jpg";
+import imgAntiD from "@/assets/article-hero-anti-d.jpg";
+import imgGTT from "@/assets/article-hero-gestational-diabetes.jpg";
+import imgDischarge from "@/assets/article-hero-discharge.jpg";
+import imgBleedingReassurance from "@/assets/article-hero-bleeding-reassurance.jpg";
+import imgInduction from "@/assets/article-hero-induction.jpg";
+import imgBirthPreferences from "@/assets/article-hero-birth-preferences.jpg";
+
 
 interface Props {
   config: PregnancyTopicPageConfig;
@@ -145,54 +167,89 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/second-trimester-complete-guide": imgSecondTri,
   "/articles/third-trimester-complete-guide": imgThirdTri,
   "/articles/signs-of-labour": imgSignsLabour,
-  "/articles/stages-of-labour": imgSignsLabour,
-  "/articles/when-to-go-in-for-labour": imgSignsLabour,
-  // Body — Phase F symptom deepening
+  "/articles/stages-of-labour": imgThirdMovement,
+  "/articles/when-to-go-in-for-labour": imgHospitalBag,
+  "/articles/mucus-plug": imgThirdSleep,
+  "/articles/show-in-pregnancy": imgThirdEmotional,
+  // Body — symptom deepening
   "/articles/back-pain-in-pregnancy": imgBodyShifts,
-  "/articles/pelvic-pain-in-pregnancy": imgBodyShifts,
-  "/articles/round-ligament-pain": imgBodyShifts,
+  "/articles/pelvic-pain-in-pregnancy": imgMovementExercise,
+  "/articles/round-ligament-pain": imgSleep,
   "/articles/braxton-hicks-contractions": imgSignsLabour,
   "/articles/shortness-of-breath-in-pregnancy": imgThirdMovement,
-  "/articles/swelling-in-pregnancy": imgThirdMovement,
-  "/articles/heartburn-in-pregnancy": imgSecondEating,
+  "/articles/swelling-in-pregnancy": imgBodyShifts,
+  "/articles/heartburn-in-pregnancy": imgHeartburnHero,
   "/articles/constipation-in-pregnancy": imgSecondEating,
+  // Body — bleeding cluster
+  "/articles/bleeding-in-early-pregnancy": imgImplantation,
+  "/articles/spotting-in-pregnancy": imgBleedingReassurance,
+  "/articles/when-to-worry-about-cramps-in-pregnancy": imgBodyShifts,
+  "/articles/discharge-in-pregnancy": imgDischarge,
+  "/articles/watery-discharge-in-pregnancy": imgSleep,
+  "/articles/leaking-fluid-in-pregnancy": imgThirdMovement,
   // Baby
   "/articles/how-your-baby-develops-in-pregnancy": imgPregnancyJourney,
   "/articles/baby-movement-in-pregnancy": imgSecondMovement,
-  "/articles/twins-and-multiples-in-pregnancy": imgPregnancyBump,
-  // Baby — Phase G deepening
-  "/articles/anterior-placenta": imgAnatomyScan,
+  "/articles/twins-and-multiples-in-pregnancy": imgPregnancyJourney,
+  "/articles/anterior-placenta": imgAnteriorHero,
   "/articles/low-lying-placenta-in-pregnancy": imgAnatomyScan,
   "/articles/breech-baby": imgThirdMovement,
   "/articles/reduced-movements-in-pregnancy": imgThirdMovement,
   "/articles/baby-hiccups-in-the-womb": imgSecondMovement,
   "/articles/measuring-big-or-small-in-pregnancy": imgPregnancyBump,
   "/articles/growth-scans-in-pregnancy": imgTestsScans,
-  "/articles/cord-around-the-neck-in-pregnancy": imgPregnancyJourney,
+  "/articles/cord-around-the-neck-in-pregnancy": imgAnatomyScan,
   // Feelings
   "/articles/emotional-wellbeing-pregnancy": imgEmotionalFirstTri,
   "/articles/anxiety-in-pregnancy": imgSecondAnxiety,
-  "/articles/the-first-trimester-emotionally": imgEmotionalFirstTri,
+  "/articles/the-first-trimester-emotionally": imgEmotionalSelf,
   "/articles/when-the-joy-doesnt-arrive-yet": imgThirdEmotional,
-  "/articles/preparing-emotionally-for-birth": imgThirdEmotional,
-  "/articles/pregnancy-after-loss": imgEmotionalFirstTri,
-  // Health & safety
+  "/articles/preparing-emotionally-for-birth": imgEmotionalSupport,
+  "/articles/pregnancy-after-loss": imgPerinatalAnxiety,
+  // Health & safety — appointments, scans and screening
   "/articles/tests-and-scans-in-pregnancy": imgTestsScans,
-  "/articles/vaccinations-in-pregnancy": imgLifestyle,
-  "/articles/medicines-in-pregnancy": imgLifestyle,
-  "/articles/foods-to-avoid-in-pregnancy": imgSecondEating,
+  "/articles/what-happens-at-booking-appointment": imgBookingAppt,
+  "/articles/dating-scan": imgTestsScans,
+  "/articles/combined-screening-test": imgAnatomyScan,
+  "/articles/nipt-in-pregnancy": imgTestsScans,
+  "/articles/20-week-anomaly-scan": imgAnatomyScan,
+  "/articles/glucose-tolerance-test": imgGTT,
+  "/articles/anti-d-injection-in-pregnancy": imgAntiD,
+  "/articles/what-if-a-scan-shows-something-unexpected": imgSecondAnxiety,
+  // Health & safety — medicines and vaccinations
+  "/articles/medicines-in-pregnancy": imgMedicines,
+  "/articles/vaccinations-in-pregnancy": imgVaccinations,
+  "/articles/paracetamol-in-pregnancy": imgMedicines,
+  "/articles/antibiotics-in-pregnancy": imgLifestyle,
+  "/articles/antacids-in-pregnancy": imgSecondEating,
+  "/articles/laxatives-in-pregnancy": imgFoodAversions,
+  "/articles/hay-fever-in-pregnancy": imgLifestyle,
+  "/articles/cold-and-flu-in-pregnancy": imgSecondAnxiety,
+  "/articles/uti-in-pregnancy": imgSleep,
+  "/articles/thrush-in-pregnancy": imgDischarge,
+  // Health & safety — staying well
+  "/articles/foods-to-avoid-in-pregnancy": imgFoodsToAvoid,
   "/articles/weight-changes-in-pregnancy": imgBodyShifts,
   // Diet & exercise
   "/articles/eating-well-in-pregnancy": imgSecondEating,
-  "/articles/key-nutrients-in-pregnancy": imgSecondEating,
+  "/articles/key-nutrients-in-pregnancy": imgKeyNutrients,
   "/articles/moving-your-body-in-pregnancy": imgMovementExercise,
   "/articles/when-you-cant-face-food-in-pregnancy": imgFoodAversions,
   // Preparing
-  "/preparing-for-baby": imgBooties,
-  "/articles/writing-a-birth-plan": imgHospitalBag,
+  "/preparing-for-baby": imgPreparingJourney,
+  "/articles/writing-a-birth-plan": imgBirthPreferences,
+  "/articles/birth-preferences": imgBirthPreferences,
   "/articles/hospital-bag-and-what-to-pack": imgHospitalBag,
   "/articles/the-space-your-baby-will-come-home-to": imgNursery,
+  "/articles/the-36-week-appointment": imgGuidancePreparing,
+  "/articles/group-b-strep-in-pregnancy": imgAntiD,
+  "/articles/external-cephalic-version": imgThirdMovement,
+  "/articles/membrane-sweep": imgGuidanceEmotional,
+  "/articles/induction-of-labour": imgInduction,
+  "/articles/what-happens-if-labour-doesnt-start": imgSignsLabour,
+  "/articles/hand-expressing-colostrum": imgPreparingCard,
 };
+
 
 const TOPIC_FALLBACK: Record<PregnancyTopicSlug, string> = {
   body: imgBodyShifts,

@@ -1,64 +1,55 @@
-## Phase 9.15 — TTC Wide QA Report
+# Phase 10.1 — Pregnancy Visual and Structural Polish
 
-### Scope
-Read-only audit across TTC hub, topic pages, all articles added in Phases 9.12a → 9.14, image mappings, breadcrumbs, editorial safety, and infrastructure preservation.
+Polish the six pregnancy topic pages so each article feels distinct and the groupings read cleanly. Content strategy, routes, articles and the Map card design stay untouched.
 
-### Files inspected
-- `src/pages/TTCHub.tsx`
-- `src/data/ttcTopicData.ts`
-- `src/data/articleData.ts`
-- `src/components/ttc/TTCTopicPage.tsx`, `TTCSubtopicPage.tsx`, `TTCIVFPathway.tsx`
-- `src/components/article/flagship/flagshipImageMap.ts`
-- `scripts/generate-sitemap.ts` (read-only)
+## Part 1 — Distinct thumbnails
 
-### Files to edit (small approved fixes only)
-- `src/data/ttcTopicData.ts` — remove unused `signsOfOvulation` constant pointing at the redirected legacy slug.
-- `src/components/ttc/TTCTopicPage.tsx` + `TTCSubtopicPage.tsx` — drop the unused image-map entries keyed on `/articles/signs-of-ovulation` (no live link references them).
+Eleven new topic-appropriate JPGs have already been generated in `src/assets/`:
 
-No article prose, no images, no calculators, no journey, no SEO/sitemap/redirects touched.
+- `article-hero-foods-to-avoid.jpg`
+- `article-hero-key-nutrients.jpg`
+- `article-hero-medicines.jpg`
+- `article-hero-vaccinations.jpg`
+- `article-hero-booking-appointment.jpg`
+- `article-hero-anti-d.jpg`
+- `article-hero-gestational-diabetes.jpg`
+- `article-hero-discharge.jpg`
+- `article-hero-bleeding-reassurance.jpg`
+- `article-hero-induction.jpg`
+- `article-hero-birth-preferences.jpg`
 
-### QA results
+`src/components/pregnancy/PregnancyTopicPage.tsx` — extend `HREF_IMAGE_MAP` with new + reused-existing assignments so no two adjacent cards share an image inside a topic:
 
-**TTC hub** — Clean. Explore TTC topics shows exactly 3 groups (Timing/testing/waiting, Health/preparation, Fertility support). Green Treatment pathways card gone. Purple `TTCIVFPathway` sits directly below, updated copy, CTA links to `/ivf`. No "More routes will be added" copy anywhere in hub.
+- Body: `heartburn-in-pregnancy` → `flagship-heartburn-hero`, `pelvic-pain` → `imgMovementExercise`, `round-ligament-pain` → `imgSleep`, `swelling` → `imgBodyShifts` (keep back-pain), `stages-of-labour` → `imgThirdMovement`, `when-to-go-in-for-labour` → `imgHospitalBag`, `mucus-plug` → `imgThirdSleep`, `show-in-pregnancy` → `imgThirdEmotional`, `bleeding-in-early-pregnancy` → `imgImplantation`, `spotting` → new `imgBleedingReassurance`, `discharge` → new `imgDischarge`, `watery-discharge` → `imgSleep`, `leaking-fluid` → `imgThirdMovement`, `when-to-worry-about-cramps` → `imgBodyShifts`.
+- Baby: `anterior-placenta` → `flagship-anterior-hero`, `low-lying-placenta` → `imgAnatomyScan`, `breech-baby` → `imgThirdMovement`, `measuring-big-or-small` → `imgPregnancyBump`, `twins-and-multiples` → `imgPregnancyJourney`.
+- Feelings: `pregnancy-after-loss` → `article-hero-perinatal-anxiety`, `the-first-trimester-emotionally` → `article-hero-emotional-feeling-like-yourself`.
+- Health & safety: `booking-appointment` → new booking JPG, `dating-scan` → `imgTestsScans`, `combined-screening-test` → `imgAnatomyScan`, `nipt-in-pregnancy` → `imgTestsScans`, `20-week-anomaly-scan` → `imgAnatomyScan`, `glucose-tolerance-test` → new GD JPG, `anti-d-injection` → new anti-D JPG, `what-if-a-scan-shows-something-unexpected` → `imgSecondAnxiety`, `medicines-in-pregnancy` → new medicines JPG, `vaccinations` → new vaccinations JPG, `paracetamol` → `imgSecondEating` reused sparingly (or medicines JPG variant), `antibiotics` → `imgLifestyle`, `antacids` → `imgSecondEating`, `laxatives` → `imgFoodAversions`, `hay-fever` → `article-hero-lifestyle`, `cold-and-flu` → `imgSecondAnxiety`, `uti-in-pregnancy` → `imgSleep`, `thrush-in-pregnancy` → new discharge JPG, `bleeding-in-early-pregnancy` → new bleeding-reassurance JPG, `leaking-fluid` → `imgThirdMovement`, `weight-changes` → `imgBodyShifts`.
+- Diet & exercise: `foods-to-avoid` → new foods-to-avoid JPG, `key-nutrients` → new key-nutrients JPG (keep `eating-well` on `imgSecondEating`).
+- Preparing: `/preparing-for-baby` → `preparing-journey`, `birth-preferences` → new birth-preferences JPG, `hospital-bag` → `imgHospitalBag`, `the-space-your-baby-will-come-home-to` → `imgNursery`, `the-36-week-appointment` → `guidance-preparing`, `group-b-strep` → `article-hero-anti-d` (soft calm hands), `external-cephalic-version` → `imgThirdMovement`, `membrane-sweep` → `guidance-card-emotional`, `induction-of-labour` → new induction JPG, `what-happens-if-labour-doesnt-start` → `imgSignsLabour`, `hand-expressing-colostrum` → `preparing-card`, `preparing-emotionally-for-birth` → `article-hero-emotional-supportive-moment` (differentiate from Feelings).
 
-**TTC topic pages** — All 10 render with clear hero, Start here, grouped sections, working calculator/Ask links. No thin pages remain. No outdated curation apology copy. No deprecated slugs surfaced in live navigation.
+## Part 2 — Structural polish (`src/data/pregnancyTopicData.ts`)
 
-**Pillar structure** — Preserved as specified:
-- Ovulation: Understanding ovulation / Tracking and timing / When timing feels unclear
-- Preconception health: Start with the basics / Health checks and planning / Everyday health and support
-- Fertility: When to ask for support / Understanding fertility factors / Tests, treatment and next steps
+- **Body** — add `fatigue-in-early-pregnancy` to "Nausea, fatigue and the early weeks". Rename all `&` labels to `and` (Nausea/Aches/Digestion/Bleeding/Late signs).
+- **Baby** — delete duplicate "Development and growth" group (its one article is already in Start here). Merge "Twins and multiples" into "Growth and scans" and rename to "Growth, scans and multiples".
+- **Feelings** — merge single-item "Looking towards birth" and "Harder experiences" into one group "Preparing for what comes next" holding both `preparing-emotionally-for-birth` and `pregnancy-after-loss`.
+- **Health & safety** — rename "Appointments, scans & screening" → "Appointments, scans and screening". Merge "Vaccinations" into "Medicines & common illnesses" and rename "Medicines and vaccinations". Trim "Bleeding, discharge & reassurance" to `bleeding-in-early-pregnancy`, `when-to-worry-about-cramps`, `leaking-fluid` and rename "Bleeding and reassurance" (removes duplication with Body). Remove `foods-to-avoid` from "Staying well day to day" (owned by Diet).
+- **Preparing** — collapse five groups into three: "Getting ready for baby" (guide + space + emotionally), "Birth planning" (preferences + hospital bag), "Late-pregnancy decisions" (unchanged).
 
-**Breadcrumbs & eyebrows** — Direct TTC subtopics (cycle-tracking, two-week-wait, pregnancy-tests, conditions) no longer nested under Fertility/Ovulation. Fertility children (male-fertility, age-and-fertility, ivf-and-treatment) correctly remain.
+## Part 3 — Existing article added
 
-**Article count checked** — 23 flagship TTC articles from Phases 9.12a → 9.14, all present with unique slugs, `reviewedBy: "Jenny Joines"`, `lastUpdated: "July 2026"`, `journey: ["trying-to-conceive"]`, quick answer, key takeaways, editorial sections, structured sources, related slugs, and mapped flagship hero images.
+`fatigue-in-early-pregnancy` inserted into Body → early weeks group (image already mapped).
 
-**Duplicate slugs** — None (137 unique).
+## Part 4 — Label consistency
 
-**Broken/deprecated links** — Only surviving reference to `/articles/signs-of-ovulation` is:
-1. an unused `signsOfOvulation` constant in `ttcTopicData.ts`
-2. two dead entries in the `HREF_IMAGE_MAP` records of the topic/subtopic components.
-None are rendered. The redirect in `App.tsx` remains untouched.
+Group labels use "and" not "&" across all six pregnancy topics. Map card labels on `/pregnancy` remain untouched (Map redesign is out of scope).
 
-**Image QA** — TTC card/hero images are appropriately varied after Phase 9.12b.1. No blocking repeats, no fake text, no clinical/harsh imagery detected in mapped assets. No regeneration needed.
+## Part 5 — Preservation
 
-**Editorial safety** — Full scan of banned TTC phrases across `articleData.ts`:
-- `"guaranteed"` — 1 hit (line 6728) in a first-trimester article, not TTC prose. Acceptable.
-- `"fertility score"` — 1 hit (line 15841) in an AMH article explicitly describing misuse ("Where it's often misused: as a general 'fertility score'"). Acceptable, educational framing.
-- No hits for: safe days, unsafe days, perfect timing, confirmed ovulation, you are pregnant, you are not pregnant.
+- No routes, sitemap, redirects, article files, SEO, calculators, TTC, IVF, or auth changes.
+- No Map redesign — only data groupings and image assignments.
+- Reviewer credit, canonical work, and 9.14.1b IVF pathway panel untouched.
 
-**Em dash rule** — Codebase-wide `—` count unchanged from previous QA baselines; no new em dashes introduced in the 9.12–9.14 batches (spot-verified on the six required sample articles).
+## Verification
 
-**Sitemap pickup** — `scripts/generate-sitemap.ts` extracts every top-level `slug:` from `articleData.ts`, so all 23 new articles are picked up automatically. No generator edits required.
-
-**Preservation** — Calculators, TTC Journey, SEO helper, sitemap generator, robots, redirects, and route files: unchanged.
-
-**tsgo** — `bunx tsgo --noEmit` passes clean.
-
-### Small fixes proposed (only if approved)
-1. Delete unused `signsOfOvulation` entry from `hrefMap` in `ttcTopicData.ts`.
-2. Remove `"/articles/signs-of-ovulation": ...` lines from `HREF_IMAGE_MAP` in `TTCTopicPage.tsx` and `TTCSubtopicPage.tsx`.
-
-These are pure dead-code deletions; no user-visible change.
-
-### Recommended next step
-TTC content system is stable, editorially clean and structurally sound. Recommendation: **continue into pregnancy-tests and two-week-wait content expansion** (Phase 9.16). No blockers.
+- `bunx tsgo --noEmit` clean.
+- Visually spot-check each topic page: no two adjacent thumbnails share an image; single-item groups are gone; label style is uniform.

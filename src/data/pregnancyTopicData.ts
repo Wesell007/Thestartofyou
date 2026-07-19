@@ -103,10 +103,11 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     groups: [
       {
-        label: "Nausea, fatigue & the early weeks",
+        label: "Nausea, fatigue and the early weeks",
         description: "The symptoms that tend to define the first trimester.",
         links: [
           { label: "Complete guide to morning sickness", href: "/articles/complete-guide-morning-sickness" },
+          { label: "Fatigue in early pregnancy", href: "/articles/fatigue-in-early-pregnancy" },
           { label: "Sleep in pregnancy", href: "/articles/sleep-in-pregnancy" },
         ],
       },
@@ -120,7 +121,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         ],
       },
       {
-        label: "Aches, pains & physical symptoms",
+        label: "Aches, pains and physical symptoms",
         description: "The everyday physical symptoms of pregnancy — what tends to be normal, what helps, and when to ask for support.",
         links: [
           { label: "Back pain in pregnancy", href: "/articles/back-pain-in-pregnancy" },
@@ -131,7 +132,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         ],
       },
       {
-        label: "Digestion & comfort",
+        label: "Digestion and comfort",
         description: "How digestion shifts in pregnancy, and what gently helps.",
         links: [
           { label: "Heartburn in pregnancy", href: "/articles/heartburn-in-pregnancy" },
@@ -139,7 +140,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         ],
       },
       {
-        label: "Bleeding, cramps & discharge",
+        label: "Bleeding, cramps and discharge",
         description: "The reassurance cluster — what's usually normal, what's worth a call, held calmly.",
         links: [
           { label: "Bleeding in early pregnancy", href: "/articles/bleeding-in-early-pregnancy" },
@@ -151,7 +152,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         ],
       },
       {
-        label: "Late pregnancy & early labour signs",
+        label: "Late pregnancy and early labour signs",
         description: "The body shifts that tend to arrive as labour gets closer.",
         links: [
           { label: "Mucus plug", href: "/articles/mucus-plug" },
@@ -162,6 +163,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         ],
       },
     ],
+
 
     weekBridge: {
       line: "Your body shifts week by week.",
@@ -201,13 +203,6 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     groups: [
       {
-        label: "Development and growth",
-        description: "How your baby unfolds across the whole of pregnancy.",
-        links: [
-          { label: "How your baby develops in pregnancy", href: "/articles/how-your-baby-develops-in-pregnancy" },
-        ],
-      },
-      {
         label: "Movement",
         description: "When movement begins, how it changes, and the moments worth raising.",
         links: [
@@ -226,22 +221,17 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         ],
       },
       {
-        label: "Growth and scans",
-        description: "How your baby's growth is monitored, and what scan findings really mean.",
+        label: "Growth, scans and multiples",
+        description: "How your baby's growth is monitored, what scan findings mean, and what's a little different with more than one baby.",
         links: [
           { label: "Measuring big or small in pregnancy", href: "/articles/measuring-big-or-small-in-pregnancy" },
           { label: "Growth scans in pregnancy", href: "/articles/growth-scans-in-pregnancy" },
           { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy" },
-        ],
-      },
-      {
-        label: "Twins and multiples",
-        description: "What's a little different when you're carrying more than one.",
-        links: [
           { label: "Twins and multiples in pregnancy", href: "/articles/twins-and-multiples-in-pregnancy" },
         ],
       },
     ],
+
 
     weekBridge: {
       line: "Your baby grows in steady, sometimes startling jumps.",
@@ -301,20 +291,15 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         ],
       },
       {
-        label: "Looking towards birth",
-        description: "Holding fear, hope, and readiness as birth gets closer.",
+        label: "Preparing for what comes next",
+        description: "Holding fear, hope, and the harder chapters as birth gets closer.",
         links: [
           { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth" },
-        ],
-      },
-      {
-        label: "Harder experiences",
-        description: "Pregnancy after loss, held with the care it deserves.",
-        links: [
           { label: "Pregnancy after loss", href: "/articles/pregnancy-after-loss" },
         ],
       },
     ],
+
 
     showSiblings: true,
     showAI: false,
@@ -357,7 +342,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     groups: [
       {
-        label: "Appointments, scans & screening",
+        label: "Appointments, scans and screening",
         description: "What's offered through pregnancy — the appointments, the scans, the screening tests, and what each one is looking for.",
         links: [
           { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy" },
@@ -372,10 +357,11 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         ],
       },
       {
-        label: "Medicines & common illnesses",
+        label: "Medicines and vaccinations",
         description: "The everyday questions — what's safe, what to avoid, and what helps when you're unwell.",
         links: [
           { label: "Medicines in pregnancy", href: "/articles/medicines-in-pregnancy" },
+          { label: "Vaccinations in pregnancy", href: "/articles/vaccinations-in-pregnancy" },
           { label: "Paracetamol in pregnancy", href: "/articles/paracetamol-in-pregnancy" },
           { label: "Antibiotics in pregnancy", href: "/articles/antibiotics-in-pregnancy" },
           { label: "Antacids in pregnancy", href: "/articles/antacids-in-pregnancy" },
@@ -387,21 +373,11 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         ],
       },
       {
-        label: "Vaccinations",
-        description: "Why certain vaccinations are recommended and when they're given.",
-        links: [
-          { label: "Vaccinations in pregnancy", href: "/articles/vaccinations-in-pregnancy" },
-        ],
-      },
-      {
-        label: "Bleeding, discharge & reassurance",
+        label: "Bleeding and reassurance",
         description: "The symptoms that prompt the most worry — held calmly, with clear guidance on when to call.",
         links: [
           { label: "Bleeding in early pregnancy", href: "/articles/bleeding-in-early-pregnancy" },
-          { label: "Spotting in pregnancy", href: "/articles/spotting-in-pregnancy" },
           { label: "When to worry about cramps in pregnancy", href: "/articles/when-to-worry-about-cramps-in-pregnancy" },
-          { label: "Discharge in pregnancy", href: "/articles/discharge-in-pregnancy" },
-          { label: "Watery discharge in pregnancy", href: "/articles/watery-discharge-in-pregnancy" },
           { label: "Leaking fluid in pregnancy", href: "/articles/leaking-fluid-in-pregnancy" },
         ],
       },
@@ -409,11 +385,11 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         label: "Staying well day to day",
         description: "The wider, in-between guidance for ordinary pregnancy days.",
         links: [
-          { label: "Foods to avoid in pregnancy", href: "/articles/foods-to-avoid-in-pregnancy" },
           { label: "Weight changes in pregnancy", href: "/articles/weight-changes-in-pregnancy" },
         ],
       },
     ],
+
 
     showSiblings: true,
     showAI: false,
@@ -522,10 +498,12 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     groups: [
       {
-        label: "Getting ready",
-        description: "The wider, calmer orientation to preparing for a baby.",
+        label: "Getting ready for baby",
+        description: "The wider orientation, the home you'll bring your baby into, and the emotional side of the run-up to birth.",
         links: [
           { label: "Preparing for baby: complete guide", href: "/preparing-for-baby" },
+          { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to" },
+          { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth" },
         ],
       },
       {
@@ -549,21 +527,8 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
           { label: "Hand expressing colostrum", href: "/articles/hand-expressing-colostrum" },
         ],
       },
-      {
-        label: "Home and early days",
-        description: "What your baby needs at home, kept simple.",
-        links: [
-          { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to" },
-        ],
-      },
-      {
-        label: "Getting ready emotionally",
-        description: "Holding the inner side of the run-up to birth.",
-        links: [
-          { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth" },
-        ],
-      },
     ],
+
 
     showSiblings: true,
     showAI: false,

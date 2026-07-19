@@ -537,7 +537,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
   "cycle-tracking": {
     slug: "cycle-tracking",
     kind: "subtopic",
-    parent: "ovulation",
     eyebrow: "Cycle tracking",
     title: "Cycle tracking",
     accentHsl: "140 22% 42%",
@@ -558,6 +557,16 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         href: LIVE.calculator,
         why: "Use your cycle dates to estimate your most fertile days.",
       },
+      {
+        title: "How to know when you are ovulating",
+        href: LIVE.howToKnowOvulating,
+        why: "The most reliable signals your body gives around ovulation.",
+      },
+      {
+        title: "Understanding your fertile window",
+        href: LIVE.understandingFertileWindow,
+        why: "What the fertile window is and how tracking connects to it.",
+      },
     ],
     groups: [
       {
@@ -567,10 +576,10 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         ],
       },
       {
-        label: "Going a little deeper",
+        label: "Common questions",
         links: [
           { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
-          { label: "Signs of ovulation (quick reference)", href: LIVE.signsOfOvulation },
+          { label: "Cervical mucus and fertility", href: LIVE.cervicalMucus },
         ],
       },
     ],
@@ -584,7 +593,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
   "pregnancy-tests": {
     slug: "pregnancy-tests",
     kind: "subtopic",
-    parent: "fertility",
     eyebrow: "Pregnancy testing in TTC",
     title: "Pregnancy testing in TTC",
     accentHsl: "16 38% 52%",
@@ -601,21 +609,33 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
+        title: "When to take a pregnancy test",
+        href: LIVE.whenToTest,
+        why: "Timing your test so the result is as reliable as possible.",
+      },
+      {
         title: "Implantation bleeding",
         href: LIVE.implantationBleeding,
         why: "What it is, what it isn't, and why it gets confused with a period.",
+      },
+      {
+        title: "Faint positive pregnancy test",
+        href: LIVE.faintPositive,
+        why: "How to read a faint line without spiralling.",
       },
     ],
     groups: [
       {
         label: "Timing your test",
         links: [
+          { label: "When to take a pregnancy test", href: LIVE.whenToTest },
         ],
       },
       {
         label: "Reading what you see",
         description: "Interpreting unclear results and ambiguous symptoms.",
         links: [
+          { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
           { label: "Implantation bleeding", href: LIVE.implantationBleeding },
         ],
       },
@@ -636,7 +656,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
   "two-week-wait": {
     slug: "two-week-wait",
     kind: "subtopic",
-    parent: "fertility",
     eyebrow: "The two-week wait",
     title: "The two-week wait",
     accentHsl: "16 38% 52%",
@@ -653,14 +672,19 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "Implantation bleeding",
-        href: LIVE.implantationBleeding,
-        why: "Often the biggest source of two-week-wait confusion.",
+        title: "The two-week wait",
+        href: LIVE.twoWeekWaitArticle,
+        why: "A calm walk-through of what's happening and how to move through it.",
       },
       {
         title: "Pregnancy testing in TTC",
         href: LIVE.pregnancyTests,
         why: "When to test, and how to read what you see.",
+      },
+      {
+        title: "Implantation bleeding",
+        href: LIVE.implantationBleeding,
+        why: "Often the biggest source of two-week-wait confusion.",
       },
     ],
     groups: [
@@ -696,7 +720,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
   conditions: {
     slug: "conditions",
     kind: "subtopic",
-    parent: "fertility",
     eyebrow: "Conditions that can affect TTC",
     title: "Conditions that can affect TTC",
     accentHsl: "200 22% 44%",
@@ -718,8 +741,13 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         why: "What PCOS means for ovulation and conception, and where to start.",
       },
       {
-        title: "How long to try before getting help",
-        href: LIVE.howLongToTry,
+        title: "Irregular periods and trying to conceive",
+        href: LIVE.irregularPeriodsTTC,
+        why: "When cycle variation is worth investigating, and what tends to help.",
+      },
+      {
+        title: "When to ask for fertility help",
+        href: LIVE.whenToAskFertilityHelp,
         why: "Honest UK guidance on when to bring fertility into a GP conversation.",
       },
     ],
@@ -728,6 +756,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Specific conditions",
         links: [
           { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
+          { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
           { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
         ],
       },

@@ -18721,6 +18721,770 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── WHEN TO ASK FOR FERTILITY HELP ────────────────────────────────────
+  {
+    slug: "when-to-ask-for-fertility-help",
+    title: "When to ask for fertility help",
+    metaDescription: "A calm UK guide to when to ask for fertility help: NHS timing guidance, when to speak to a GP sooner, what happens at a first appointment and how to prepare.",
+    quickAnswer: "As a general guide in the UK, it is usually reasonable to speak to a GP after around 12 months of trying to conceive, or after 6 months if you are 36 or older. You can ask sooner if you have specific concerns about your cycle, health or history. Asking for help is a sensible next step, not a failure.",
+    standfirst: "Asking for help is not giving up. It is a calm, sensible next step when the wait has started to feel long.",
+    howThisFeels: [
+      "Wondering if it is too soon to ask",
+      "Feeling like you should just keep waiting",
+      "Not knowing what will happen if you do ask",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "How long you have been trying", body: "NHS guidance suggests speaking to a GP after around 12 months of trying, or 6 months if you are 36 or older." },
+        { heading: "Specific concerns", body: "Irregular or absent periods, known conditions or previous treatments may be a reason to ask sooner." },
+        { heading: "Age and time", body: "Fertility naturally changes with age. This is not about pressure, more about knowing when it is reasonable to check in." },
+      ],
+      lessCauses: [
+        { heading: "Emotional load", body: "If trying to conceive is affecting how you feel day to day, that alone is a good reason to talk to a GP." },
+        { heading: "Partner concerns", body: "Health history, medicines, previous fertility or specific worries on either side can be raised at any point." },
+        { heading: "Previous pregnancy or loss", body: "If you have had recurrent miscarriage or fertility difficulties before, a GP can help think about next steps sooner." },
+      ],
+      whyItVaries: "Every couple's story is different. NHS guidance is a starting point, not a rule you must wait to reach.",
+    },
+    timing: { whenStarts: "You can ask a GP for advice at any point.", whenEases: "Once a plan is in place, the not-knowing tends to settle even if nothing has changed medically." },
+    whatItFeelsLike: [
+      "A quiet sense of relief once the appointment is booked",
+      "Feeling more in control of the next few months",
+      "Less pressure on each cycle to be the one",
+    ],
+    whatThisMeans: "Asking for fertility help does not mean anything is definitely wrong. It means you are choosing to move from waiting to gently understanding.",
+    normal: [
+      "Feeling unsure whether it is the right time",
+      "Some mixed feelings about starting the conversation",
+      "Wanting a partner to come along or not, depending on the day",
+    ],
+    seekSupport: [
+      "12 months of trying (or 6 months if you are 36 or older)",
+      "Irregular, very heavy or absent periods",
+      "Known conditions such as PCOS, endometriosis, previous cancer treatment or pelvic surgery",
+    ],
+    disclaimer: "This is general UK guidance and is not personal medical advice. A GP can help think about your specific situation.",
+    whatYouCanDo: [
+      { action: "Book a GP appointment when the timing feels reasonable", reason: "You do not need every answer first. The GP can help work out what may be useful." },
+      { action: "Write down your cycle pattern and any concerns", reason: "A short note tends to make the appointment calmer and more useful." },
+      { action: "Include your partner where relevant", reason: "Fertility involves both partners, and testing is often offered to both." },
+      { action: "Ask what a referral pathway looks like locally", reason: "NHS fertility services vary by area, so knowing the local shape helps set expectations." },
+    ],
+    whatHappensNext: "A GP will usually ask about your cycle, health and how long you have been trying. They may suggest simple checks for both partners or, where appropriate, refer you on for fertility investigations.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Fertility", href: "/trying-to-conceive/fertility" },
+        { label: "How long to try before getting help", href: "/articles/how-long-to-try-before-getting-help" },
+        { label: "What happens at a fertility appointment", href: "/articles/what-happens-at-a-fertility-appointment" },
+        { label: "Preconception GP appointment", href: "/articles/preconception-gp-appointment" },
+      ],
+    },
+    aiPrompts: [
+      "When should I ask for fertility help?",
+      "What does a fertility GP appointment involve?",
+      "Is it too soon to ask a doctor about fertility?",
+    ],
+    captureIntro: "Asking for fertility help is a calm, sensible step. It does not mean anything is definitely wrong.",
+    journey: ["trying-to-conceive"],
+    topics: ["planning"],
+    relatedSlugs: ["how-long-to-try-before-getting-help", "what-happens-at-a-fertility-appointment", "unexplained-fertility-concerns"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-when-to-ask-help.jpg", import.meta.url).href,
+      alt: "An open linen notebook with a short handwritten list, a warm mug of tea, a small paper calendar and a soft botanical sprig on cream linen in soft daylight.",
+    },
+    sources: [
+      { label: "Infertility", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/" },
+      { label: "Fertility: assessment and treatment for people with fertility problems", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/" },
+      { label: "Getting help with fertility problems", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/treatment/" },
+    ],
+    keyTakeaways: [
+      "NHS guidance suggests asking for help after around 12 months of trying, or 6 months if you are 36 or older.",
+      "You can speak to a GP sooner if you have specific concerns about your cycle or health.",
+      "Fertility involves both partners, and simple checks are usually offered to both.",
+      "Asking for help is a next step, not a failure.",
+      "A first GP appointment is usually a calm conversation about your cycle, health and history.",
+      "Referral pathways vary by area, so knowing the local shape helps set expectations.",
+    ],
+    faq: [
+      { question: "How long should I try before asking for help?", answer: "NHS guidance suggests around 12 months of regular unprotected sex, or 6 months if you are 36 or older. You can ask sooner if you have specific concerns." },
+      { question: "Do I need my partner with me for the first appointment?", answer: "Not always, but fertility involves both partners and checks are usually offered to both. It is often helpful to come together where you can." },
+      { question: "Will the GP just tell me to keep trying?", answer: "Sometimes, especially early on. They may also suggest simple checks, review your cycle and health, or start the process of a referral if appropriate." },
+    ],
+    editorialSections: [
+      {
+        id: "why-this-is-worth-asking",
+        heading: "Why this is worth asking",
+        lead: "Waiting alone with worry rarely helps.",
+        paragraphs: [
+          "Trying to conceive can quietly take up a lot of mental space. Speaking to a GP does not mean anything is definitely wrong; it means you are choosing to understand your situation rather than sit with the not-knowing.",
+          "Many people leave a first fertility appointment feeling calmer, even when nothing has changed medically.",
+        ],
+      },
+      {
+        id: "the-usual-uk-timing",
+        heading: "The usual UK timing",
+        lead: "A general guide, not a rule.",
+        paragraphs: [
+          "NHS guidance suggests speaking to a GP after around 12 months of regular unprotected sex, or 6 months if you are 36 or older.",
+          "These numbers are a starting point. If you have specific concerns, you can ask sooner without needing to wait.",
+        ],
+      },
+      {
+        id: "reasons-to-ask-sooner",
+        heading: "Reasons to ask sooner",
+        lead: "Some situations quietly earn an earlier conversation.",
+        paragraphs: [
+          "Irregular, very heavy or absent periods, known conditions like PCOS or endometriosis, previous cancer treatment, pelvic surgery, or a partner's known health concerns are all reasons to speak sooner.",
+          "So is recurrent miscarriage, or a strong feeling that something is not right.",
+        ],
+        callout: { tone: "info", text: "If your periods have stopped or become very irregular for more than a few months, please speak to a GP." },
+      },
+      {
+        id: "what-a-first-appointment-looks-like",
+        heading: "What a first appointment looks like",
+        lead: "Usually calmer than you might expect.",
+        paragraphs: [
+          "A GP will usually ask about your cycle, how long you have been trying, any conditions or medicines, and both partners' general health.",
+          "They may suggest simple blood tests, a semen analysis for the partner, or begin a referral for further investigations depending on your local pathway.",
+        ],
+      },
+      {
+        id: "how-to-prepare",
+        heading: "How to prepare",
+        lead: "A short note tends to help.",
+        paragraphs: [
+          "Jot down your recent cycle pattern, any symptoms, medicines you take, and any concerns you want to raise. If a partner can come, that is often useful.",
+          "You do not need to have all the answers. The GP will help work out what is worth checking.",
+        ],
+      },
+      {
+        id: "if-you-feel-brushed-off",
+        heading: "If you feel brushed off",
+        lead: "It is okay to ask again.",
+        paragraphs: [
+          "GPs vary, and sometimes an early appointment can feel light. If your concerns have not been addressed, it is reasonable to ask for another appointment or to speak to a different GP.",
+          "You can also ask specifically about the local fertility referral pathway.",
+        ],
+      },
+    ],
+  },
+
+  // ─── UNEXPLAINED FERTILITY CONCERNS ───────────────────────────────────
+  {
+    slug: "unexplained-fertility-concerns",
+    title: "When fertility feels unexplained",
+    metaDescription: "A calm UK guide to unexplained fertility: what the term really means, what tests may show, why it can feel harder than a clear answer and what may help next.",
+    quickAnswer: "Unexplained fertility means initial checks have not found a clear reason why conception is taking longer. It is common and does not mean nothing can be done. Further investigations, calm timing support and a conversation about next steps often help. It is also completely reasonable to grieve the lack of a clear answer.",
+    standfirst: "Unexplained is not the same as untreatable. It is the space where waiting, thinking and gentle next steps often meet.",
+    howThisFeels: [
+      "Wanting a clear reason and not getting one",
+      "Feeling stuck between hope and disappointment",
+      "Not knowing whether to keep trying naturally or push further",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Normal tests so far", body: "Cycle, hormones and simple checks have come back within typical ranges for both partners." },
+        { heading: "Timing and chance", body: "Even with everything appearing typical, conception each month sits at a lower percentage than many people expect." },
+        { heading: "Things tests do not catch", body: "Not every factor is visible on standard checks. That is part of why the label exists." },
+      ],
+      lessCauses: [
+        { heading: "Subtle patterns", body: "Some cycles or subtle ovulation patterns take longer to notice without careful tracking or specialist input." },
+        { heading: "Emotional weight", body: "The lack of a clear answer can feel harder than a diagnosis, because there is nothing obvious to work on." },
+        { heading: "Next-step decisions", body: "Deciding whether to keep trying, seek further tests, or consider treatment is its own quiet process." },
+      ],
+      whyItVaries: "Unexplained is a working label, not a final verdict. Many people go on to conceive, with or without treatment.",
+    },
+    timing: { whenStarts: "Usually after a set of initial fertility checks have come back within typical ranges.", whenEases: "Often once a next step, whether more investigation, treatment or a break, is chosen calmly." },
+    whatItFeelsLike: [
+      "A specific kind of tiredness that comes from not knowing",
+      "Wanting to make a decision but not being sure which one",
+      "Sometimes needing time away from tracking or thinking about it",
+    ],
+    whatThisMeans: "An unexplained label often means a real conversation about pace, options and what feels right for you both, rather than a fixed path.",
+    normal: [
+      "Feeling relieved that nothing serious has shown up",
+      "Also feeling frustrated that there is no clear answer",
+      "Wondering if a test has been missed",
+    ],
+    seekSupport: [
+      "Ongoing low mood, anxiety or a heavy sense of grief",
+      "Feeling stuck about next steps for more than a few months",
+      "New symptoms or a change in your cycle that was not there before",
+    ],
+    disclaimer: "This is general guidance and is not personal medical advice. A GP or fertility specialist can help think about your situation.",
+    whatYouCanDo: [
+      { action: "Ask your GP or clinic what further steps may be possible", reason: "Options often exist even when initial tests are typical." },
+      { action: "Give yourselves space to feel disappointed", reason: "Grief about a missing answer is real and reasonable." },
+      { action: "Talk about pace as a couple", reason: "Aligning on how long to keep trying, and when to consider more, tends to ease tension." },
+      { action: "Consider emotional support", reason: "Counselling, especially from someone familiar with fertility, can help hold the not-knowing." },
+    ],
+    whatHappensNext: "Depending on your situation, next steps may include further investigations, timed cycles, or a conversation about assisted treatment. There is usually more than one reasonable path.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Fertility", href: "/trying-to-conceive/fertility" },
+        { label: "When to ask for fertility help", href: "/articles/when-to-ask-for-fertility-help" },
+        { label: "What happens at a fertility appointment", href: "/articles/what-happens-at-a-fertility-appointment" },
+        { label: "Moving from TTC to IVF", href: "/articles/moving-from-ttc-to-ivf" },
+      ],
+    },
+    aiPrompts: [
+      "What does unexplained fertility mean?",
+      "Can unexplained fertility still be treated?",
+      "How do people cope with unexplained fertility?",
+    ],
+    captureIntro: "Unexplained is not untreatable. It is the space where calm next steps often begin.",
+    journey: ["trying-to-conceive"],
+    topics: ["planning"],
+    relatedSlugs: ["when-to-ask-for-fertility-help", "what-happens-at-a-fertility-appointment", "moving-from-ttc-to-ivf"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-unexplained-fertility.jpg", import.meta.url).href,
+      alt: "An open linen notebook with soft abstract ink marks and a delicate eucalyptus sprig on cream linen in soft morning light.",
+    },
+    sources: [
+      { label: "Infertility", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/" },
+      { label: "Fertility: assessment and treatment for people with fertility problems", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Unexplained infertility", publisher: "British Fertility Society", url: "https://www.britishfertilitysociety.org.uk/" },
+      { label: "Fertility treatment", publisher: "HFEA", url: "https://www.hfea.gov.uk/" },
+    ],
+    keyTakeaways: [
+      "Unexplained fertility means initial tests have not found a clear reason for delay.",
+      "It is common and does not mean nothing can be done.",
+      "The label can feel harder than a diagnosis because there is nothing obvious to fix.",
+      "Further investigations, timed support or assisted treatment may still be options.",
+      "There is usually more than one reasonable next step.",
+      "Emotional support, together or individually, often helps hold the not-knowing.",
+    ],
+    faq: [
+      { question: "What exactly does unexplained fertility mean?", answer: "It usually means standard fertility checks for both partners have come back within typical ranges, and a clear reason for delay has not been found." },
+      { question: "Is unexplained fertility permanent?", answer: "Not necessarily. Many people go on to conceive naturally, and further investigation or treatment is often an option depending on individual circumstances." },
+      { question: "Why does it feel harder than getting a diagnosis?", answer: "Because there is no obvious thing to work on, which can feel unsettling. That is a very normal reaction, and worth naming." },
+    ],
+    editorialSections: [
+      {
+        id: "what-unexplained-actually-means",
+        heading: "What unexplained actually means",
+        lead: "It is a working label, not a final answer.",
+        paragraphs: [
+          "Unexplained fertility usually means initial checks for both partners have come back within typical ranges, and no clear reason for delay has been found.",
+          "It does not mean nothing is happening. It means nothing obvious has shown up so far.",
+        ],
+      },
+      {
+        id: "why-this-can-feel-so-hard",
+        heading: "Why this can feel so hard",
+        lead: "A diagnosis is easier to react to than a shrug.",
+        paragraphs: [
+          "When there is a clear reason, there is often a clear action. Unexplained can leave you between hope and frustration, without an obvious next step to take.",
+          "That is a very human response. It is worth naming rather than pushing past.",
+        ],
+      },
+      {
+        id: "what-tests-may-and-may-not-catch",
+        heading: "What tests may and may not catch",
+        lead: "Standard checks look at a lot, but not everything.",
+        paragraphs: [
+          "Standard fertility tests usually look at cycle hormones, ovulation, tubes, uterus and a semen analysis for the partner. That covers many factors, but not all.",
+          "Subtle patterns, timing, and things not routinely tested for can still play a part. Further investigations sometimes uncover more.",
+        ],
+      },
+      {
+        id: "possible-next-steps",
+        heading: "Possible next steps",
+        lead: "There is usually more than one reasonable path.",
+        paragraphs: [
+          "Depending on your circumstances, options may include more investigations, timed intercourse support, or a conversation about assisted treatment such as IUI or IVF.",
+          "A calm conversation with a fertility specialist can help sort what is available and what feels right for you both.",
+        ],
+      },
+      {
+        id: "living-with-the-not-knowing",
+        heading: "Living with the not-knowing",
+        lead: "This is often the hardest part.",
+        paragraphs: [
+          "Taking breaks from tracking, giving yourselves permission to grieve the missing answer, and speaking to someone outside your daily circle can all help.",
+          "The absence of a clear cause does not mean the absence of a path forward.",
+        ],
+      },
+      {
+        id: "when-to-check-in-again",
+        heading: "When to check in again",
+        lead: "Nothing is fixed.",
+        paragraphs: [
+          "If new symptoms appear, if your cycle changes, or if the emotional weight starts to feel unmanageable, it is reasonable to go back to your GP or clinic.",
+          "Situations, and the options available, can quietly shift over time.",
+        ],
+      },
+    ],
+  },
+
+  // ─── AGE AND TRYING TO CONCEIVE ───────────────────────────────────────
+  {
+    slug: "age-and-trying-to-conceive",
+    title: "Age and trying to conceive",
+    metaDescription: "A calm UK guide to age and trying to conceive: how age can affect fertility, what the numbers really mean, when to ask for help sooner and how to stay grounded.",
+    quickAnswer: "Age is one factor in fertility for people with ovaries and, to a smaller extent, for people producing sperm. In general, fertility gradually changes from the mid-thirties onward. This does not mean pregnancy stops being possible; it means timing, tracking and asking for help sooner can matter more. NHS guidance suggests seeing a GP after 6 months of trying if you are 36 or older.",
+    standfirst: "Age is one factor, not the whole story. What tends to help most is honest information, calm timing and knowing when to ask.",
+    howThisFeels: [
+      "Worrying you have left it too late",
+      "Feeling weighed down by percentages and statistics",
+      "Wanting the truth without the panic",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Egg number and quality", body: "The number and quality of eggs gradually change with age, more noticeably from the mid-thirties onward." },
+        { heading: "Cycle patterns", body: "Cycles can become slightly less predictable over time. This does not mean pregnancy is not possible." },
+        { heading: "Time each month", body: "Statistically, the chance of conceiving in any single month gradually reduces with age. Over several months, chances add up." },
+      ],
+      lessCauses: [
+        { heading: "Sperm health and age", body: "Sperm health can also change slowly with age, though usually more gradually than egg quality." },
+        { heading: "Underlying conditions", body: "Some conditions become more common with age. A GP can help think about what is worth checking." },
+        { heading: "Emotional weight", body: "The feeling of a ticking clock can make TTC harder to hold calmly. That is very human." },
+      ],
+      whyItVaries: "Age is a general pattern, not a personal timeline. Many people conceive comfortably later than they expected.",
+    },
+    timing: { whenStarts: "Fertility changes are gradual, not sudden.", whenEases: "Support, testing and treatment options exist across a wide age range." },
+    whatItFeelsLike: [
+      "A quiet awareness of time without letting it dominate",
+      "A firmer sense of when to ask for help",
+      "Less pressure on each cycle to feel decisive",
+    ],
+    whatThisMeans: "Age is worth understanding calmly, not fearing. It is one factor in a larger picture that includes health, cycle, partner and simple chance.",
+    normal: [
+      "Feeling more urgency than you did in your twenties",
+      "Wanting more information than the numbers usually give",
+      "Some cycles feeling harder than others",
+    ],
+    seekSupport: [
+      "6 months of trying if you are 36 or older",
+      "Irregular, very heavy or absent periods at any age",
+      "Known conditions that may affect fertility",
+    ],
+    disclaimer: "This is general guidance and is not personal medical advice. A GP can help think about your specific situation.",
+    whatYouCanDo: [
+      { action: "Speak to a GP earlier if you are 36 or older", reason: "NHS guidance suggests a conversation after 6 months rather than 12." },
+      { action: "Focus on timing, not perfection", reason: "Getting sex in the fertile window matters more than getting every habit right." },
+      { action: "Take care of general health", reason: "Sleep, movement, nutrition and stress all support fertility as part of overall wellbeing." },
+      { action: "Talk about pace together", reason: "Deciding when to seek help is a shared conversation, not a solo one." },
+    ],
+    whatHappensNext: "A GP can help think about your cycle, general health and whether investigations or a fertility referral would be useful. Options remain across a wide age range.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Age and fertility", href: "/trying-to-conceive/age-and-fertility" },
+        { label: "Fertility", href: "/trying-to-conceive/fertility" },
+        { label: "When to ask for fertility help", href: "/articles/when-to-ask-for-fertility-help" },
+        { label: "AMH test explained", href: "/articles/amh-test-explained" },
+      ],
+    },
+    aiPrompts: [
+      "How does age affect fertility?",
+      "At what age should I speak to a GP about fertility?",
+      "Is it too late to try to conceive in my late thirties?",
+    ],
+    captureIntro: "Age is one factor, not the whole story. Calm information tends to help more than statistics.",
+    journey: ["trying-to-conceive"],
+    topics: ["planning"],
+    relatedSlugs: ["when-to-ask-for-fertility-help", "male-fertility-when-trying-to-conceive", "moving-from-ttc-to-ivf"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-age-and-ttc.jpg", import.meta.url).href,
+      alt: "An open paper calendar and a linen notebook on cream fabric with a small dried botanical sprig in soft morning light.",
+    },
+    sources: [
+      { label: "Age and fertility", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/" },
+      { label: "Fertility: assessment and treatment for people with fertility problems", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Fertility treatment 2021 preliminary trends and figures", publisher: "HFEA", url: "https://www.hfea.gov.uk/" },
+      { label: "Age and reproduction", publisher: "British Fertility Society", url: "https://www.britishfertilitysociety.org.uk/" },
+    ],
+    keyTakeaways: [
+      "Fertility changes gradually with age, more noticeably from the mid-thirties onward.",
+      "This does not mean pregnancy is not possible; timing and health still matter.",
+      "NHS guidance suggests speaking to a GP after 6 months of trying if you are 36 or older.",
+      "Sperm health can also change with age, though usually more gradually.",
+      "Support, testing and treatment options exist across a wide age range.",
+      "Calm information usually helps more than statistics on their own.",
+    ],
+    faq: [
+      { question: "At what age does fertility start to change?", answer: "Fertility changes are gradual. On average, they become more noticeable from the mid-thirties, and continue slowly from there. It is a pattern, not a cliff edge." },
+      { question: "Should I get my fertility tested if I am worried about age?", answer: "You can speak to a GP at any point. Tests like AMH give some information, but they do not tell the whole story. A conversation is often the useful first step." },
+      { question: "Is IVF more likely after 35?", answer: "It becomes a more common option for some people, but many still conceive naturally. A GP or fertility specialist can help think about what fits your situation." },
+    ],
+    editorialSections: [
+      {
+        id: "why-age-comes-up-so-much",
+        heading: "Why age comes up so much",
+        lead: "It is a real factor, and often an anxious one.",
+        paragraphs: [
+          "Age genuinely does influence fertility, but it is one of several factors, not the whole picture. It is also the one most likely to be spoken about, sometimes not very kindly.",
+          "Understanding the pattern calmly is more useful than absorbing headline statistics.",
+        ],
+      },
+      {
+        id: "what-changes-and-when",
+        heading: "What changes, and when",
+        lead: "Slow shifts, not sudden ones.",
+        paragraphs: [
+          "For people with ovaries, both the number and quality of eggs gradually change over time, becoming more noticeable from the mid-thirties.",
+          "For people producing sperm, changes are usually slower but still real. Overall health, cycle and timing all continue to matter throughout.",
+        ],
+      },
+      {
+        id: "what-the-numbers-do-and-do-not-tell-you",
+        heading: "What the numbers do and do not tell you",
+        lead: "Statistics describe populations, not individuals.",
+        paragraphs: [
+          "Age-based fertility numbers are averages across large groups. They do not tell you what will happen in your specific situation.",
+          "Two people the same age can have very different pictures. This is why an appointment tends to be more useful than a percentage.",
+        ],
+      },
+      {
+        id: "when-to-ask-for-help-sooner",
+        heading: "When to ask for help sooner",
+        lead: "The guidance shifts a little with age.",
+        paragraphs: [
+          "NHS guidance suggests speaking to a GP after around 12 months of trying, or 6 months if you are 36 or older. You can ask sooner if there are specific concerns.",
+          "Asking earlier is not overreacting; it is using the guidance as it is written.",
+        ],
+        callout: { tone: "info", text: "If you are 36 or older and have been trying for 6 months without success, it is a reasonable point to speak to a GP." },
+      },
+      {
+        id: "lifestyle-and-general-health",
+        heading: "Lifestyle and general health",
+        lead: "The basics still matter, calmly.",
+        paragraphs: [
+          "Sleep, gentle movement, moderate alcohol, not smoking and steady nutrition all support fertility as part of general health, at any age.",
+          "None of these override age, but they still support the picture. Small, kind changes over time tend to help.",
+        ],
+      },
+      {
+        id: "keeping-perspective",
+        heading: "Keeping perspective",
+        lead: "It is possible to be informed without being frightened.",
+        paragraphs: [
+          "Age is a real factor. It is not a verdict, and it is not the whole story. Many people conceive comfortably later than they expected, with or without support.",
+          "What tends to help most is honest information, calm timing, and knowing when to ask.",
+        ],
+      },
+    ],
+  },
+
+  // ─── MALE FERTILITY WHEN TRYING TO CONCEIVE ───────────────────────────
+  {
+    slug: "male-fertility-when-trying-to-conceive",
+    title: "Male fertility when trying to conceive",
+    metaDescription: "A calm UK guide to male fertility when trying to conceive: sperm health basics, lifestyle, medicines and conditions, testing and when to speak to a GP.",
+    quickAnswer: "Male fertility is a real part of the picture when trying to conceive. Sperm health, lifestyle, medicines and some health conditions can all matter. Sperm are made over roughly three months, so changes take time. A GP or sexual health clinic can help with any specific concerns, and semen analysis is often part of fertility investigations.",
+    standfirst: "Male fertility is not an afterthought. Sharing the conversation early usually makes the whole process feel more supported.",
+    howThisFeels: [
+      "Feeling like this side of things is rarely spoken about",
+      "Wanting to help but not sure how",
+      "Worrying about past habits or health",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Sperm health basics", body: "Count, movement and shape all sit within a wide typical range. Testing looks at the pattern, not a single number." },
+        { heading: "Everyday lifestyle", body: "Smoking, heavy alcohol, recreational drugs, high heat and being very sedentary can all play a part." },
+        { heading: "Time and production", body: "Sperm are produced over roughly three months, so lifestyle changes often show up gradually." },
+      ],
+      lessCauses: [
+        { heading: "Medicines and conditions", body: "Some prescription medicines, anabolic steroids, testosterone, long-term conditions and previous treatments can affect sperm production." },
+        { heading: "Age and general health", body: "Sperm health can slowly change with age. General health, sleep and stress also play a part." },
+        { heading: "Emotional load", body: "TTC is emotional work for both partners. Feeling excluded from conversations can be its own quiet weight." },
+      ],
+      whyItVaries: "Every person is different. Some things are worth checking; others are worth simply being aware of.",
+    },
+    timing: { whenStarts: "Any point in TTC is a reasonable time to start thinking about male fertility.", whenEases: "Once habits feel steady and any concerns have been raised, day-to-day life can carry on." },
+    whatItFeelsLike: [
+      "A shared conversation instead of a solo effort",
+      "Fewer surprises at fertility appointments",
+      "A calmer sense of doing this together",
+    ],
+    whatThisMeans: "Male fertility is one part of a bigger picture. Understanding it early tends to lift a lot of unspoken pressure.",
+    normal: [
+      "Not knowing much about sperm health at the start",
+      "Small dips in sample results linked to illness or stress",
+      "Feeling a mix of curiosity and awkwardness at first",
+    ],
+    seekSupport: [
+      "Regular use of anabolic steroids or testosterone",
+      "Long-term conditions or medicines that have not been reviewed",
+      "Difficulties with sexual health, function or previous fertility",
+    ],
+    disclaimer: "This is general guidance and is not personal medical advice. A GP, sexual health clinic or fertility clinic can help with specific concerns.",
+    whatYouCanDo: [
+      { action: "Take a shared, non-blaming look at lifestyle", reason: "Shared changes tend to stick better than solo effort." },
+      { action: "Speak to a GP about medicines or steroids", reason: "Some medicines, anabolic steroids and testosterone can significantly reduce sperm production." },
+      { action: "Consider a semen analysis where appropriate", reason: "This is usually one of the first tests when a couple is having difficulty conceiving." },
+      { action: "Include a partner in fertility appointments", reason: "Fertility involves both people; being in the room together often helps." },
+    ],
+    whatHappensNext: "Depending on your situation, a GP may suggest simple checks, a semen analysis, or a referral for further investigations. Any results are usually part of a wider conversation, not a single answer.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Male fertility", href: "/trying-to-conceive/male-fertility" },
+        { label: "Sperm health basics", href: "/articles/sperm-health-basics" },
+        { label: "Partner health before pregnancy", href: "/articles/partner-health-before-pregnancy" },
+        { label: "Fertility tests for men", href: "/articles/fertility-tests-for-men" },
+      ],
+    },
+    aiPrompts: [
+      "How does male fertility affect trying to conceive?",
+      "What can a partner do to support fertility?",
+      "When should a partner get a semen analysis?",
+    ],
+    captureIntro: "Male fertility is part of the picture from the start. Sharing the conversation tends to make TTC feel more supported.",
+    journey: ["trying-to-conceive"],
+    topics: ["planning"],
+    relatedSlugs: ["sperm-health-basics", "partner-health-before-pregnancy", "fertility-tests-for-men"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-male-fertility-support.jpg", import.meta.url).href,
+      alt: "Two matching ceramic mugs of tea beside an open shared notebook and a small botanical sprig on a wooden table in soft window light.",
+    },
+    sources: [
+      { label: "Infertility", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/" },
+      { label: "Fertility: assessment and treatment for people with fertility problems", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Male infertility", publisher: "British Fertility Society", url: "https://www.britishfertilitysociety.org.uk/" },
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/" },
+    ],
+    keyTakeaways: [
+      "Male fertility is part of the fertility picture, not an afterthought.",
+      "Sperm are made over roughly three months, so lifestyle changes take time to show.",
+      "Smoking, alcohol, drugs, anabolic steroids and heat can all affect sperm health.",
+      "Some medicines and long-term conditions may need a calm review.",
+      "Semen analysis is often part of first-line fertility investigations.",
+      "Sharing the conversation from the start tends to lift a lot of unspoken pressure.",
+    ],
+    faq: [
+      { question: "How can a partner support fertility day to day?", answer: "Not smoking, moderate alcohol, gentle regular movement, steady sleep, moderate caffeine and avoiding regular high heat all support sperm health as part of general wellbeing." },
+      { question: "When is a semen analysis usually offered?", answer: "It is often one of the first tests when a couple is having difficulty conceiving. A GP can arrange this, and it is often repeated because samples vary." },
+      { question: "Do steroids really matter that much?", answer: "Yes. Anabolic steroids and testosterone can significantly reduce sperm production, sometimes for months after stopping. A clinician can help think about next steps." },
+    ],
+    editorialSections: [
+      {
+        id: "why-male-fertility-matters",
+        heading: "Why male fertility matters",
+        lead: "It is part of the picture from day one.",
+        paragraphs: [
+          "For couples where one partner produces sperm, roughly half of fertility difficulties involve some element of sperm or male reproductive health.",
+          "Including it early in conversations tends to make everything feel more shared, and less like a solo project.",
+        ],
+      },
+      {
+        id: "sperm-health-in-plain-terms",
+        heading: "Sperm health in plain terms",
+        lead: "The basics are simpler than the terminology suggests.",
+        paragraphs: [
+          "Sperm health usually refers to count (roughly how many are present), motility (how well they swim) and morphology (their shape). All three sit within a wide typical range.",
+          "Testing looks at the overall pattern, not any single number in isolation. Samples also vary naturally week to week.",
+        ],
+      },
+      {
+        id: "everyday-lifestyle-and-heat",
+        heading: "Everyday lifestyle and heat",
+        lead: "The everyday picture matters more than any single day.",
+        paragraphs: [
+          "Not smoking, moderate alcohol, gentle regular movement, steady sleep and moderate caffeine all support sperm health as part of general wellbeing.",
+          "Regular high heat, such as frequent saunas or hot baths, may affect sperm production for some people. Occasional heat is unlikely to matter.",
+        ],
+      },
+      {
+        id: "medicines-conditions-and-steroids",
+        heading: "Medicines, conditions and steroids",
+        lead: "Some things are worth reviewing quietly.",
+        paragraphs: [
+          "Some prescription medicines, long-term conditions, previous cancer treatment or urological conditions can affect sperm production. A GP can help think about what is worth reviewing.",
+          "Anabolic steroids and testosterone can significantly reduce sperm production, sometimes for months after stopping. Please speak to a clinician before trying to conceive.",
+        ],
+        callout: { tone: "info", text: "Never stop a prescribed medicine without medical advice. Bring the list to your GP appointment instead." },
+      },
+      {
+        id: "testing-and-what-it-involves",
+        heading: "Testing and what it involves",
+        lead: "Usually simpler than expected.",
+        paragraphs: [
+          "A semen analysis is typically one of the first tests when a couple is having difficulty conceiving. It usually involves producing a sample at home or at a clinic, following simple instructions.",
+          "Results are often repeated over time because natural variation is common.",
+        ],
+      },
+      {
+        id: "sharing-the-emotional-load",
+        heading: "Sharing the emotional load",
+        lead: "TTC belongs to both partners.",
+        paragraphs: [
+          "Being in the room for appointments, taking on some of the mental load, and having honest conversations about how it is all feeling can genuinely help.",
+          "Fertility is not one person's story. Small shared habits often carry it through the harder weeks.",
+        ],
+      },
+    ],
+  },
+
+  // ─── MOVING FROM TTC TO IVF ───────────────────────────────────────────
+  {
+    slug: "moving-from-ttc-to-ivf",
+    title: "Moving from TTC to IVF",
+    metaDescription: "A calm UK guide to moving from trying to conceive into IVF: when the conversation usually happens, what a first fertility appointment looks like and how to prepare emotionally.",
+    quickAnswer: "Moving from trying to conceive into IVF is usually a gradual conversation, not a sudden decision. It often starts with fertility investigations, and depending on results, age and NHS or private options in your area, IVF may be suggested as a next step. It is a big shift in language, pace and feelings, and taking it slowly is okay.",
+    standfirst: "Moving into IVF is a shift, not a failure. It is often the point where waiting becomes a shared plan.",
+    howThisFeels: [
+      "A mix of relief and grief at the same time",
+      "Not knowing what will actually happen if you agree",
+      "Feeling out of sync with friends or family",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Investigations first", body: "IVF is usually discussed after initial fertility investigations for both partners have been completed or reviewed." },
+        { heading: "Length of trying and age", body: "How long you have been trying, along with age, are often part of the conversation about next steps." },
+        { heading: "Local NHS pathways", body: "NHS access to IVF varies by area. A GP or clinic can explain the local shape of what is offered." },
+      ],
+      lessCauses: [
+        { heading: "Specific medical reasons", body: "Some situations, such as blocked tubes or severe sperm factors, may lead to IVF being suggested sooner." },
+        { heading: "Previous fertility care", body: "Earlier investigations, treatments or losses can influence how quickly IVF becomes part of the conversation." },
+        { heading: "Emotional readiness", body: "Feeling ready is a real factor. It is fine to ask for time before deciding." },
+      ],
+      whyItVaries: "Every couple's route into IVF is different. What matters most is that the decision feels calm, informed and shared.",
+    },
+    timing: { whenStarts: "The conversation usually starts once fertility investigations are complete.", whenEases: "Often once a plan is agreed and the process has been clearly explained." },
+    whatItFeelsLike: [
+      "A change of language, from cycles to protocols",
+      "New appointments and a different pace",
+      "Sometimes a quiet sense of hope alongside the pressure",
+    ],
+    whatThisMeans: "Moving into IVF is not the end of trying naturally, and it is not a personal failure. It is a different kind of support.",
+    normal: [
+      "Needing time to sit with the suggestion before deciding",
+      "Grieving the version of TTC that did not work",
+      "Feeling a mix of readiness and reluctance",
+    ],
+    seekSupport: [
+      "Ongoing low mood, anxiety or grief that feels heavy",
+      "Difficult conversations or disagreement as a couple",
+      "Feeling pressured to decide before you feel ready",
+    ],
+    disclaimer: "This is general UK guidance and is not personal medical advice. A GP or fertility clinic can help think about your specific pathway.",
+    whatYouCanDo: [
+      { action: "Ask for time to think if you need it", reason: "Most decisions do not have to be made in the room." },
+      { action: "Ask about the local NHS pathway and any private options", reason: "This tends to make expectations clearer for both of you." },
+      { action: "Talk to a counsellor or fertility support service", reason: "Many clinics offer counselling as part of the process." },
+      { action: "Give yourselves permission to grieve as you plan", reason: "Both can be true at once." },
+    ],
+    whatHappensNext: "Once you have chosen to move forward, an IVF pathway usually involves a series of appointments, investigations and, if you go ahead, a treatment cycle explained step by step.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Fertility", href: "/trying-to-conceive/fertility" },
+        { label: "IVF hub", href: "/ivf" },
+        { label: "IVF timeline: what to expect", href: "/articles/ivf-timeline-what-to-expect" },
+        { label: "The emotional impact of IVF", href: "/articles/emotional-impact-of-ivf" },
+      ],
+    },
+    aiPrompts: [
+      "How do people move from trying to conceive into IVF?",
+      "What happens in a first IVF conversation?",
+      "How do I cope emotionally with starting IVF?",
+    ],
+    captureIntro: "Moving into IVF is a shift, not a failure. Taking it slowly, calmly and together often helps most.",
+    journey: ["trying-to-conceive"],
+    topics: ["planning"],
+    relatedSlugs: ["unexplained-fertility-concerns", "when-to-ask-for-fertility-help", "emotional-impact-of-ivf"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-moving-to-ivf.jpg", import.meta.url).href,
+      alt: "An open notebook with a soft hand-drawn pathway, a folded card and a small botanical sprig on cream linen in gentle morning light.",
+    },
+    sources: [
+      { label: "IVF", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/" },
+      { label: "Fertility: assessment and treatment for people with fertility problems", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Fertility treatment", publisher: "HFEA", url: "https://www.hfea.gov.uk/" },
+      { label: "Infertility", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/" },
+    ],
+    keyTakeaways: [
+      "Moving into IVF is usually a gradual conversation after fertility investigations.",
+      "How long you have been trying, age and local NHS pathways all play a part.",
+      "Some specific situations may lead to IVF being suggested sooner.",
+      "It is fine to ask for time before deciding.",
+      "IVF is a different kind of support, not a personal failure.",
+      "Counselling and fertility support services can help during the shift.",
+    ],
+    faq: [
+      { question: "How do people know when IVF is being suggested?", answer: "Usually after a series of fertility investigations, or in specific medical situations. A GP or fertility clinic will talk through the reasons and what the next steps could look like." },
+      { question: "Is IVF always the next step after unexplained fertility?", answer: "Not always. Some people are offered further investigations, timed cycles or other treatments first. It depends on individual circumstances and local pathways." },
+      { question: "How can we cope emotionally with the shift?", answer: "Give yourselves time to process, talk honestly as a couple, and consider counselling. Grief and hope often sit together at this point, and that is normal." },
+    ],
+    editorialSections: [
+      {
+        id: "the-shift-itself",
+        heading: "The shift itself",
+        lead: "This is a change in tone, not just in treatment.",
+        paragraphs: [
+          "Moving from trying to conceive into IVF is often a change in language, pace and expectations. It can feel like a big step, even when the medical reasoning is clear.",
+          "It is completely reasonable for that to bring a mix of feelings, sometimes on the same day.",
+        ],
+      },
+      {
+        id: "how-the-conversation-usually-starts",
+        heading: "How the conversation usually starts",
+        lead: "It rarely comes out of nowhere.",
+        paragraphs: [
+          "IVF is usually suggested after fertility investigations for both partners, or in specific medical situations where earlier treatment makes sense.",
+          "A GP or fertility clinic will usually talk through what has been found, what the options are, and what NHS access looks like in your area.",
+        ],
+      },
+      {
+        id: "what-affects-nhs-access",
+        heading: "What affects NHS access",
+        lead: "Local pathways vary.",
+        paragraphs: [
+          "NHS IVF access is set at a local level and varies across the UK. Age, previous children, BMI and length of trying can all affect eligibility in different areas.",
+          "A GP or fertility clinic can explain what applies locally, and what private options may exist alongside.",
+        ],
+      },
+      {
+        id: "sitting-with-the-decision",
+        heading: "Sitting with the decision",
+        lead: "Most decisions do not have to be made in the room.",
+        paragraphs: [
+          "You can ask for time to think, to speak to a counsellor, or to come back with questions written down.",
+          "A calm decision tends to feel better later than a rushed one.",
+        ],
+        callout: { tone: "info", text: "You can ask any fertility clinic for time before making a decision. That is a normal, reasonable request." },
+      },
+      {
+        id: "emotional-preparation",
+        heading: "Emotional preparation",
+        lead: "This is real work, alongside the medical steps.",
+        paragraphs: [
+          "Grief for the version of TTC you had in mind, and hope for what comes next, can sit together. Naming them tends to help.",
+          "Many clinics offer counselling as part of the process, and independent fertility counsellors are also available.",
+        ],
+      },
+      {
+        id: "what-comes-next-in-practice",
+        heading: "What comes next in practice",
+        lead: "Step by step, not all at once.",
+        paragraphs: [
+          "Once you have chosen to move forward, IVF usually involves a series of appointments, tests and, if you go ahead, a treatment cycle explained one stage at a time.",
+          "Nothing has to be understood all at once. Taking it in stages tends to be kinder.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

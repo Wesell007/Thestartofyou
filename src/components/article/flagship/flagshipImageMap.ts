@@ -111,6 +111,13 @@ import ttcMentalWellbeingBeforePregnancy from "@/assets/ttc-mental-wellbeing-bef
 import ttcPartnerHealth from "@/assets/ttc-partner-health.jpg";
 import ttcSpermHealthBasics from "@/assets/ttc-sperm-health-basics.jpg";
 
+// Phase 9.14 — fertility and support hero imagery
+import ttcWhenToAskHelp from "@/assets/ttc-when-to-ask-help.jpg";
+import ttcUnexplainedFertility from "@/assets/ttc-unexplained-fertility.jpg";
+import ttcAgeAndTTC from "@/assets/ttc-age-and-ttc.jpg";
+import ttcMaleFertilitySupport from "@/assets/ttc-male-fertility-support.jpg";
+import ttcMovingToIVF from "@/assets/ttc-moving-to-ivf.jpg";
+
 
 
 
@@ -287,6 +294,13 @@ export const flagshipHeroMap: Record<string, Img> = {
   "mental-wellbeing-before-pregnancy": { src: ttcMentalWellbeingBeforePregnancy, alt: "An open linen journal, a ceramic cup of tea and a folded cream wool blanket by a soft window with quiet morning light." },
   "partner-health-before-pregnancy": { src: ttcPartnerHealth, alt: "Two matching ceramic mugs of tea beside two small linen notebooks and a shared paper calendar on cream linen in soft morning light." },
   "sperm-health-basics": { src: ttcSpermHealthBasics, alt: "A closed linen notebook, a glass of water and a delicate eucalyptus sprig on cream linen in soft morning light." },
+
+  // Phase 9.14 — TTC fertility and support
+  "when-to-ask-for-fertility-help": { src: ttcWhenToAskHelp, alt: "An open linen notebook with a short handwritten list, a warm mug of tea and a small paper calendar on cream linen in soft daylight." },
+  "unexplained-fertility-concerns": { src: ttcUnexplainedFertility, alt: "An open linen notebook with soft abstract ink marks and a delicate eucalyptus sprig on cream linen in soft morning light." },
+  "age-and-trying-to-conceive": { src: ttcAgeAndTTC, alt: "An open paper calendar and a linen notebook on cream fabric with a small dried botanical sprig in soft morning light." },
+  "male-fertility-when-trying-to-conceive": { src: ttcMaleFertilitySupport, alt: "Two matching ceramic mugs of tea beside an open shared notebook and a small botanical sprig on a wooden table in soft window light." },
+  "moving-from-ttc-to-ivf": { src: ttcMovingToIVF, alt: "An open notebook with a soft hand-drawn pathway, a folded card and a small botanical sprig on cream linen in gentle morning light." },
 };
 
 // ─── Section image overrides (anchors + curated extras) ────────────────────

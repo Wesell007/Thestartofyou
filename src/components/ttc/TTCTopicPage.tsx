@@ -163,6 +163,12 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/preconception-vitamins": imgPreconceptionVitamins,
   "/articles/preconception-gp-appointment": imgGPAppointment,
   "/articles/stopping-contraception-when-ttc": imgStoppingContraception,
+  // Phase 9.13b — preconception health completion
+  "/articles/medication-review-before-pregnancy": imgMedicationReview,
+  "/articles/lifestyle-before-pregnancy": imgLifestyleBeforePregnancy,
+  "/articles/mental-wellbeing-before-pregnancy": imgMentalWellbeingBeforePregnancy,
+  "/articles/partner-health-before-pregnancy": imgPartnerHealth,
+  "/articles/sperm-health-basics": imgSpermHealthBasics,
 };
 
 const TOPIC_FALLBACK: Record<TTCTopicSlug, string> = {

@@ -152,6 +152,13 @@ const LIVE = {
   preconceptionVitamins: "/articles/preconception-vitamins",
   preconceptionGPAppointment: "/articles/preconception-gp-appointment",
   stoppingContraceptionTTC: "/articles/stopping-contraception-when-ttc",
+
+  // Phase 9.13b (TTC preconception health completion)
+  medicationReviewBeforePregnancy: "/articles/medication-review-before-pregnancy",
+  lifestyleBeforePregnancy: "/articles/lifestyle-before-pregnancy",
+  mentalWellbeingBeforePregnancy: "/articles/mental-wellbeing-before-pregnancy",
+  partnerHealthBeforePregnancy: "/articles/partner-health-before-pregnancy",
+  spermHealthBasics: "/articles/sperm-health-basics",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────
@@ -261,6 +268,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
           { label: "What to do before trying to conceive", href: LIVE.whatToDoBeforeTTC },
           { label: "Folic acid before pregnancy", href: LIVE.folicAcidBeforePregnancy },
           { label: "Vitamins before pregnancy", href: LIVE.preconceptionVitamins },
+          { label: "Lifestyle before pregnancy", href: LIVE.lifestyleBeforePregnancy },
         ],
       },
       {
@@ -268,8 +276,18 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         description: "When it may help to review your health, medicines or next steps with a professional.",
         links: [
           { label: "Preconception GP appointment", href: LIVE.preconceptionGPAppointment },
+          { label: "Medication review before pregnancy", href: LIVE.medicationReviewBeforePregnancy },
           { label: "Stopping contraception when trying to conceive", href: LIVE.stoppingContraceptionTTC },
           { label: "Cycle tracking", href: LIVE.cycleTracking },
+        ],
+      },
+      {
+        label: "Everyday health and support",
+        description: "Wider parts of preconception: mental wellbeing, partner health and sperm health basics.",
+        links: [
+          { label: "Mental wellbeing before pregnancy", href: LIVE.mentalWellbeingBeforePregnancy },
+          { label: "Partner health before pregnancy", href: LIVE.partnerHealthBeforePregnancy },
+          { label: "Sperm health basics", href: LIVE.spermHealthBasics },
         ],
       },
     ],

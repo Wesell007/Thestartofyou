@@ -267,7 +267,14 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         links: [
           { label: "What to do before trying to conceive", href: LIVE.whatToDoBeforeTTC },
           { label: "Folic acid before pregnancy", href: LIVE.folicAcidBeforePregnancy },
+      {
+        label: "Start with the basics",
+        description: "The first steps that can help you prepare before trying to conceive.",
+        links: [
+          { label: "What to do before trying to conceive", href: LIVE.whatToDoBeforeTTC },
+          { label: "Folic acid before pregnancy", href: LIVE.folicAcidBeforePregnancy },
           { label: "Vitamins before pregnancy", href: LIVE.preconceptionVitamins },
+          { label: "Lifestyle before pregnancy", href: LIVE.lifestyleBeforePregnancy },
         ],
       },
       {
@@ -275,8 +282,18 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         description: "When it may help to review your health, medicines or next steps with a professional.",
         links: [
           { label: "Preconception GP appointment", href: LIVE.preconceptionGPAppointment },
+          { label: "Medication review before pregnancy", href: LIVE.medicationReviewBeforePregnancy },
           { label: "Stopping contraception when trying to conceive", href: LIVE.stoppingContraceptionTTC },
           { label: "Cycle tracking", href: LIVE.cycleTracking },
+        ],
+      },
+      {
+        label: "Everyday health and support",
+        description: "Wider parts of preconception: mental wellbeing, partner health and sperm health basics.",
+        links: [
+          { label: "Mental wellbeing before pregnancy", href: LIVE.mentalWellbeingBeforePregnancy },
+          { label: "Partner health before pregnancy", href: LIVE.partnerHealthBeforePregnancy },
+          { label: "Sperm health basics", href: LIVE.spermHealthBasics },
         ],
       },
     ],

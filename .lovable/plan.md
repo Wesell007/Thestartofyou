@@ -1,45 +1,69 @@
-## Phase 9.12b.1 — Ovulation Topic Visual Polish
+## Phase 9.13a — TTC Article Batch 2A: Preconception Health Foundations
 
-Two visual issues on `/trying-to-conceive/ovulation`:
-1. Multiple cards and article heroes reuse the same ovulation illustration (`week2-ovulation.jpg` / `ttcStageCycle` / `ttcStageTiming`) via `HREF_IMAGE_MAP` in `src/components/ttc/TTCTopicPage.tsx` and `flagshipHeroMap` in `src/components/article/flagship/flagshipImageMap.ts`.
-2. Start here section grid leaves a single calculator card left-aligned.
+Publish 5 flagship-shape preconception health articles and restructure `/trying-to-conceive/preconception-health` into grouped sections so it stops feeling thin.
 
-### 1. Add 11 distinct topic-matched images to `src/assets/` (already generated this turn)
+### 1. Generate 5 preconception health images
 
-- `ttc-ovulation-know.jpg`
-- `ttc-ovulation-signs-journal.jpg`
-- `ttc-fertile-window-highlighted.jpg`
-- `ttc-fertile-window-calendar.jpg`
-- `ttc-ovulation-tests-strips.jpg`
-- `ttc-cervical-mucus-botanical.jpg`
-- `ttc-bbt-thermometer.jpg`
-- `ttc-late-ovulation-clock.jpg`
-- `ttc-hard-to-predict-notebook.jpg`
-- `ttc-timing-sex-mugs.jpg`
-- `ttc-irregular-periods-calendar.jpg`
+New assets in `src/assets/`, matching the calm sage/cream/journal aesthetic already used across TTC:
 
-All calm/premium, sage/cream/muted palette, botanical + journal-led, no clinical or explicit imagery.
+- `ttc-preconception-start.jpg` — journal, cup of tea, botanical accents
+- `ttc-folic-acid.jpg` — unbranded supplement bottle beside notebook
+- `ttc-preconception-vitamins.jpg` — soft flat-lay of unbranded vitamins and greenery
+- `ttc-gp-appointment.jpg` — calendar and notes, no medical iconography
+- `ttc-stopping-contraception.jpg` — calendar with soft botanical detail
 
-### 2. Wire images
+No brand names, no readable text, no clinical imagery.
 
-**`src/components/ttc/TTCTopicPage.tsx`** — import the 11 new assets and extend/replace entries in `HREF_IMAGE_MAP` for: how-to-know-when-you-are-ovulating, ovulation-signs, signs-of-ovulation, understanding-your-fertile-window, fertile-window, using-ovulation-tests, cervical-mucus-and-fertility, basal-body-temperature-tracking, late-ovulation-and-ttc, when-ovulation-is-hard-to-predict, timing-sex-when-trying-to-conceive, irregular-periods-and-trying-to-conceive. Keep `cycle-tracking` on `ttc-stage-cycle.jpg` and calculator card on `ttc-stage-timing.jpg`.
+### 2. Append 5 full flagship articles to `src/data/articleData.ts`
 
-**`src/components/article/flagship/flagshipImageMap.ts`** — import the same 11 assets and update `flagshipHeroMap` for the same 12 slugs (replace existing entries for `ovulation-signs`, `signs-of-ovulation`, `fertile-window`, `irregular-periods-and-trying-to-conceive`; add entries for the 8 new flagship slugs). Keep alt text descriptive and topic-specific.
+For each: `slug`, `title`, `metaDescription`, `quickAnswer`, `readTime`, `reviewedBy: "Jenny Joines"`, `lastUpdated: "July 2026"`, `journey: ["trying-to-conceive"]`, 5–6 `keyTakeaways`, 5–7 `editorialSections`, 3 `faq`, 3–5 structured `sources` (NHS, NICE, RCOG, GOV.UK, HFEA where relevant), `hero` (new asset + alt), `relatedSlugs`, `relatedStage: "trying-to-conceive"`.
 
-### 3. Centre single Start here card
+Articles:
 
-In `TTCTopicPage.tsx` Start here section, branch on `config.startHere.length === 1` to render `flex justify-center` with a max-width card wrapper (`max-w-md`); otherwise keep the existing `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3` grid. This applies to any TTC topic page with a single Start here card (currently ovulation, fertility, cycle-tracking; pregnancy-tests has one item too). All will render centred and intentional; multi-card pages unchanged.
+1. **what-to-do-before-trying-to-conceive** — starter guide: when to start, folic acid, medicines, existing conditions, lifestyle, cycle awareness, partner health, mental wellbeing, when to speak to a clinician.
+2. **folic-acid-before-pregnancy** — what it is, why it matters, when to start, standard UK guidance, higher-dose situations in careful language, signpost to GP/pharmacist.
+3. **preconception-vitamins** — folic acid as main recommended, vitamin D per UK guidance, "more is not better", supplements to check with a clinician, label reading, condition/medication interactions.
+4. **preconception-gp-appointment** — when it may help, long-term conditions, medicines, previous complications or loss, vaccinations, mental health, age or fertility concerns, what to ask, reassurance if no appointment needed.
+5. **stopping-contraception-when-ttc** — general terms for different methods, cycles returning, bleeding patterns, timing variability, fertility can return quickly for some methods, when periods take time to settle, when to seek advice, avoiding pressure to pinpoint ovulation immediately.
 
-### 4. Verify
+Internal links follow the exact map in the brief. Careful language throughout: "may / might / can / often / possible". Signposting only, no dosage instructions. UK English. No em dashes. Banned-language sweep before commit: safe/unsafe days, guaranteed, perfect timing, confirmed ovulation, you are pregnant, you are not pregnant, fertility score.
 
-- `bunx tsgo --noEmit` clean
-- Ovulation groups unchanged (Understanding / Tracking / When timing feels unclear)
-- Each ovulation-cluster card and article hero shows a distinct topic image
-- Single Start here cards centred; multi-card sections unchanged
-- No article copy, slugs, routes, calculator, TTC Journey, SEO/sitemap/robots changes
+### 3. Update `src/data/ttcTopicData.ts`
 
-### Files edited
+Extend the `LIVE` slug map:
 
-- `src/components/ttc/TTCTopicPage.tsx`
-- `src/components/article/flagship/flagshipImageMap.ts`
-- 11 new `src/assets/ttc-*.jpg` files (added this turn)
+```ts
+whatToDoBeforeTTC: "/articles/what-to-do-before-trying-to-conceive",
+folicAcidBeforePregnancy: "/articles/folic-acid-before-pregnancy",
+preconceptionVitamins: "/articles/preconception-vitamins",
+preconceptionGPAppointment: "/articles/preconception-gp-appointment",
+stoppingContraceptionTTC: "/articles/stopping-contraception-when-ttc",
+```
+
+Rebuild `ttcPageConfigs["preconception-health"].groups`:
+
+- **Start with the basics** — "The first steps that can help you prepare before trying to conceive." → what-to-do-before-trying-to-conceive, folic-acid-before-pregnancy, preconception-vitamins.
+- **Health checks and planning** — "When it may help to review your health, medicines or next steps with a professional." → preconception-gp-appointment, stopping-contraception-when-ttc, cycle-tracking (topic link, retained if currently curated).
+
+Keep `startHere`, hero, intro, AI prompts, "What this covers", colours unchanged. Remove any "curation note" that apologises for thinness.
+
+### 4. Wire card and article-hero images
+
+- `src/components/ttc/TTCTopicPage.tsx`: import the 5 new assets and add entries to `HREF_IMAGE_MAP` for the 5 new slugs.
+- `src/components/article/flagship/flagshipImageMap.ts`: import the same 5 assets and add entries to `flagshipHeroMap` for the 5 new slugs (mirrors the ovulation polish pattern).
+
+### 5. Verification
+
+- `bunx tsgo --noEmit` clean.
+- Grep new copy for em dashes and banned terms.
+- Confirm no duplicate slugs; all `relatedSlugs` resolve.
+- Spot-check regression routes listed in the brief.
+- Confirm ovulation groups, calculators, TTC Journey, SEO, sitemap, robots, redirects untouched.
+
+### Files touched
+
+- `src/data/articleData.ts` (append 5 articles)
+- `src/data/ttcTopicData.ts` (LIVE map + preconception groups)
+- `src/components/ttc/TTCTopicPage.tsx` (5 image imports + HREF_IMAGE_MAP entries)
+- `src/components/article/flagship/flagshipImageMap.ts` (5 image imports + flagshipHeroMap entries)
+- 5 new `src/assets/ttc-*.jpg`

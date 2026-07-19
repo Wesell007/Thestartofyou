@@ -152,6 +152,13 @@ const LIVE = {
   preconceptionVitamins: "/articles/preconception-vitamins",
   preconceptionGPAppointment: "/articles/preconception-gp-appointment",
   stoppingContraceptionTTC: "/articles/stopping-contraception-when-ttc",
+
+  // Phase 9.13b (TTC preconception health completion)
+  medicationReviewBeforePregnancy: "/articles/medication-review-before-pregnancy",
+  lifestyleBeforePregnancy: "/articles/lifestyle-before-pregnancy",
+  mentalWellbeingBeforePregnancy: "/articles/mental-wellbeing-before-pregnancy",
+  partnerHealthBeforePregnancy: "/articles/partner-health-before-pregnancy",
+  spermHealthBasics: "/articles/sperm-health-basics",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────

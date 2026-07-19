@@ -267,12 +267,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         links: [
           { label: "What to do before trying to conceive", href: LIVE.whatToDoBeforeTTC },
           { label: "Folic acid before pregnancy", href: LIVE.folicAcidBeforePregnancy },
-      {
-        label: "Start with the basics",
-        description: "The first steps that can help you prepare before trying to conceive.",
-        links: [
-          { label: "What to do before trying to conceive", href: LIVE.whatToDoBeforeTTC },
-          { label: "Folic acid before pregnancy", href: LIVE.folicAcidBeforePregnancy },
           { label: "Vitamins before pregnancy", href: LIVE.preconceptionVitamins },
           { label: "Lifestyle before pregnancy", href: LIVE.lifestyleBeforePregnancy },
         ],

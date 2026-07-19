@@ -35,6 +35,9 @@ import imgSignsLabour from "@/assets/article-hero-third-signs-of-labour.jpg";
 import imgPregnancyJourney from "@/assets/pregnancy-journey.jpg";
 import imgPregnancyBump from "@/assets/pregnancy-bump.jpg";
 import imgEmotionalFirstTri from "@/assets/article-hero-emotional-first-tri.jpg";
+import imgEmotionalSelf from "@/assets/article-hero-emotional-feeling-like-yourself.jpg";
+import imgEmotionalSupport from "@/assets/article-hero-emotional-supportive-moment.jpg";
+import imgPerinatalAnxiety from "@/assets/article-hero-perinatal-anxiety.jpg";
 import imgSecondAnxiety from "@/assets/article-hero-second-anxiety.jpg";
 import imgThirdEmotional from "@/assets/article-hero-third-emotional.jpg";
 import imgTestsScans from "@/assets/article-hero-tests-scans.jpg";
@@ -49,6 +52,25 @@ import imgHospitalBag from "@/assets/article-hero-third-hospital-bag.jpg";
 import imgNursery from "@/assets/article-hero-third-nursery.jpg";
 import imgThirdSleep from "@/assets/article-hero-third-sleep.jpg";
 import imgBooties from "@/assets/pregnancy-hero-booties.jpg";
+import imgHeartburnHero from "@/assets/flagship-heartburn-hero.jpg";
+import imgAnteriorHero from "@/assets/flagship-anterior-hero.jpg";
+import imgPreparingJourney from "@/assets/preparing-journey.jpg";
+import imgPreparingCard from "@/assets/preparing-card.jpg";
+import imgGuidancePreparing from "@/assets/guidance-preparing.jpg";
+import imgGuidanceEmotional from "@/assets/guidance-card-emotional.jpg";
+// New Phase 10.1 assets — distinct topic thumbnails
+import imgFoodsToAvoid from "@/assets/article-hero-foods-to-avoid.jpg";
+import imgKeyNutrients from "@/assets/article-hero-key-nutrients.jpg";
+import imgMedicines from "@/assets/article-hero-medicines.jpg";
+import imgVaccinations from "@/assets/article-hero-vaccinations.jpg";
+import imgBookingAppt from "@/assets/article-hero-booking-appointment.jpg";
+import imgAntiD from "@/assets/article-hero-anti-d.jpg";
+import imgGTT from "@/assets/article-hero-gestational-diabetes.jpg";
+import imgDischarge from "@/assets/article-hero-discharge.jpg";
+import imgBleedingReassurance from "@/assets/article-hero-bleeding-reassurance.jpg";
+import imgInduction from "@/assets/article-hero-induction.jpg";
+import imgBirthPreferences from "@/assets/article-hero-birth-preferences.jpg";
+
 
 interface Props {
   config: PregnancyTopicPageConfig;

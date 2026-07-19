@@ -280,6 +280,13 @@ export const flagshipHeroMap: Record<string, Img> = {
   "preconception-vitamins": { src: ttcPreconceptionVitamins, alt: "A soft flat-lay of an unbranded supplement bottle and pale capsules in a small ceramic dish, with sprigs of thyme on cream linen." },
   "preconception-gp-appointment": { src: ttcGPAppointment, alt: "A calm wooden desk with a paper wall calendar, a linen notebook, a small sprig of sage and a ceramic mug of tea in soft daylight." },
   "stopping-contraception-when-ttc": { src: ttcStoppingContraception, alt: "A minimalist paper calendar on cream linen with a soft pencilled arc across several weeks and a small sprig of sage beside it, in warm morning light." },
+
+  // Phase 9.13b — TTC preconception health completion
+  "medication-review-before-pregnancy": { src: ttcMedicationReview, alt: "An unbranded pill organiser resting on cream linen beside a closed linen notebook and a ceramic mug of tea in soft window light." },
+  "lifestyle-before-pregnancy": { src: ttcLifestyleBeforePregnancy, alt: "A soft kitchen table with a glass of water, a small bowl of berries, a linen notebook and a sprig of eucalyptus in warm morning light." },
+  "mental-wellbeing-before-pregnancy": { src: ttcMentalWellbeingBeforePregnancy, alt: "An open linen journal, a ceramic cup of tea and a folded cream wool blanket by a soft window with quiet morning light." },
+  "partner-health-before-pregnancy": { src: ttcPartnerHealth, alt: "Two matching ceramic mugs of tea beside two small linen notebooks and a shared paper calendar on cream linen in soft morning light." },
+  "sperm-health-basics": { src: ttcSpermHealthBasics, alt: "A closed linen notebook, a glass of water and a delicate eucalyptus sprig on cream linen in soft morning light." },
 };
 
 // ─── Section image overrides (anchors + curated extras) ────────────────────

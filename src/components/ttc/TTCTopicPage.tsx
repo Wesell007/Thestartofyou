@@ -64,6 +64,13 @@ import imgHardToPredictNotebook from "@/assets/ttc-hard-to-predict-notebook.jpg"
 import imgTimingSexMugs from "@/assets/ttc-timing-sex-mugs.jpg";
 import imgIrregularPeriodsCalendar from "@/assets/ttc-irregular-periods-calendar.jpg";
 
+// Phase 9.13a — preconception health foundations imagery
+import imgPreconceptionStart from "@/assets/ttc-preconception-start.jpg";
+import imgFolicAcid from "@/assets/ttc-folic-acid.jpg";
+import imgPreconceptionVitamins from "@/assets/ttc-preconception-vitamins.jpg";
+import imgGPAppointment from "@/assets/ttc-gp-appointment.jpg";
+import imgStoppingContraception from "@/assets/ttc-stopping-contraception.jpg";
+
 interface Props {
   config: TTCPageConfig;
   heroImage: string;
@@ -142,6 +149,12 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/emotional-impact-of-ivf": imgIVF,
   "/articles/emotional-wellbeing-pregnancy": imgLifestyle,
   "/articles/perinatal-anxiety": imgLifestyle,
+  // Phase 9.13a — preconception health foundations
+  "/articles/what-to-do-before-trying-to-conceive": imgPreconceptionStart,
+  "/articles/folic-acid-before-pregnancy": imgFolicAcid,
+  "/articles/preconception-vitamins": imgPreconceptionVitamins,
+  "/articles/preconception-gp-appointment": imgGPAppointment,
+  "/articles/stopping-contraception-when-ttc": imgStoppingContraception,
 };
 
 const TOPIC_FALLBACK: Record<TTCTopicSlug, string> = {

@@ -97,6 +97,13 @@ import ttcHardToPredictNotebook from "@/assets/ttc-hard-to-predict-notebook.jpg"
 import ttcTimingSexMugs from "@/assets/ttc-timing-sex-mugs.jpg";
 import ttcIrregularPeriodsCalendar from "@/assets/ttc-irregular-periods-calendar.jpg";
 
+// Phase 9.13a — preconception health foundations hero imagery
+import ttcPreconceptionStart from "@/assets/ttc-preconception-start.jpg";
+import ttcFolicAcid from "@/assets/ttc-folic-acid.jpg";
+import ttcPreconceptionVitamins from "@/assets/ttc-preconception-vitamins.jpg";
+import ttcGPAppointment from "@/assets/ttc-gp-appointment.jpg";
+import ttcStoppingContraception from "@/assets/ttc-stopping-contraception.jpg";
+
 
 
 type Img = { src: string; alt: string };
@@ -258,6 +265,13 @@ export const flagshipHeroMap: Record<string, Img> = {
   "late-ovulation-and-ttc": { src: ttcLateOvulationClock, alt: "A paper calendar with a soft sage circle drawn further into the month and a small brass clock beside it — the reality of late ovulation." },
   "when-ovulation-is-hard-to-predict": { src: ttcHardToPredictNotebook, alt: "An open linen journal with soft cursive notes and small hand-drawn question marks — the calm reality of cycles that don't follow a tidy pattern." },
   "timing-sex-when-trying-to-conceive": { src: ttcTimingSexMugs, alt: "Two matching ceramic mugs of tea resting side by side on a cream linen surface near a paper calendar — the quiet togetherness behind timing when trying to conceive." },
+
+  // Phase 9.13a — TTC preconception health foundations
+  "what-to-do-before-trying-to-conceive": { src: ttcPreconceptionStart, alt: "A soft journal and a cup of tea on cream linen in warm morning light, with a small sprig of eucalyptus resting nearby." },
+  "folic-acid-before-pregnancy": { src: ttcFolicAcid, alt: "A small unbranded amber glass supplement bottle resting on cream linen beside a closed linen notebook and a sprig of eucalyptus in soft window light." },
+  "preconception-vitamins": { src: ttcPreconceptionVitamins, alt: "A soft flat-lay of an unbranded supplement bottle and pale capsules in a small ceramic dish, with sprigs of thyme on cream linen." },
+  "preconception-gp-appointment": { src: ttcGPAppointment, alt: "A calm wooden desk with a paper wall calendar, a linen notebook, a small sprig of sage and a ceramic mug of tea in soft daylight." },
+  "stopping-contraception-when-ttc": { src: ttcStoppingContraception, alt: "A minimalist paper calendar on cream linen with a soft pencilled arc across several weeks and a small sprig of sage beside it, in warm morning light." },
 };
 
 // ─── Section image overrides (anchors + curated extras) ────────────────────

@@ -145,6 +145,13 @@ const LIVE = {
   hardToPredictOvulation: "/articles/when-ovulation-is-hard-to-predict",
   timingSexTTC: "/articles/timing-sex-when-trying-to-conceive",
   basalBodyTemperature: "/articles/basal-body-temperature-tracking",
+
+  // Phase 9.13a (TTC preconception health foundations)
+  whatToDoBeforeTTC: "/articles/what-to-do-before-trying-to-conceive",
+  folicAcidBeforePregnancy: "/articles/folic-acid-before-pregnancy",
+  preconceptionVitamins: "/articles/preconception-vitamins",
+  preconceptionGPAppointment: "/articles/preconception-gp-appointment",
+  stoppingContraceptionTTC: "/articles/stopping-contraception-when-ttc",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────
@@ -248,15 +255,24 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     ],
     groups: [
       {
-        label: "Where to begin",
-        description: "Foundational reading for the months before trying.",
+        label: "Start with the basics",
+        description: "The first steps that can help you prepare before trying to conceive.",
         links: [
+          { label: "What to do before trying to conceive", href: LIVE.whatToDoBeforeTTC },
+          { label: "Folic acid before pregnancy", href: LIVE.folicAcidBeforePregnancy },
+          { label: "Vitamins before pregnancy", href: LIVE.preconceptionVitamins },
+        ],
+      },
+      {
+        label: "Health checks and planning",
+        description: "When it may help to review your health, medicines or next steps with a professional.",
+        links: [
+          { label: "Preconception GP appointment", href: LIVE.preconceptionGPAppointment },
+          { label: "Stopping contraception when trying to conceive", href: LIVE.stoppingContraceptionTTC },
           { label: "Cycle tracking", href: LIVE.cycleTracking },
         ],
       },
     ],
-    curationNote:
-      "More preconception guidance is on the way. For now, ask anything specific below or speak to your GP about a preconception check.",
     aiPrompts: [
       "What should I do before trying to conceive?",
       "When should I start taking folic acid?",

@@ -145,6 +145,13 @@ const LIVE = {
   hardToPredictOvulation: "/articles/when-ovulation-is-hard-to-predict",
   timingSexTTC: "/articles/timing-sex-when-trying-to-conceive",
   basalBodyTemperature: "/articles/basal-body-temperature-tracking",
+
+  // Phase 9.13a (TTC preconception health foundations)
+  whatToDoBeforeTTC: "/articles/what-to-do-before-trying-to-conceive",
+  folicAcidBeforePregnancy: "/articles/folic-acid-before-pregnancy",
+  preconceptionVitamins: "/articles/preconception-vitamins",
+  preconceptionGPAppointment: "/articles/preconception-gp-appointment",
+  stoppingContraceptionTTC: "/articles/stopping-contraception-when-ttc",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────

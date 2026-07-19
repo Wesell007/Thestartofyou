@@ -97,6 +97,13 @@ import ttcHardToPredictNotebook from "@/assets/ttc-hard-to-predict-notebook.jpg"
 import ttcTimingSexMugs from "@/assets/ttc-timing-sex-mugs.jpg";
 import ttcIrregularPeriodsCalendar from "@/assets/ttc-irregular-periods-calendar.jpg";
 
+// Phase 9.13a — preconception health foundations hero imagery
+import ttcPreconceptionStart from "@/assets/ttc-preconception-start.jpg";
+import ttcFolicAcid from "@/assets/ttc-folic-acid.jpg";
+import ttcPreconceptionVitamins from "@/assets/ttc-preconception-vitamins.jpg";
+import ttcGPAppointment from "@/assets/ttc-gp-appointment.jpg";
+import ttcStoppingContraception from "@/assets/ttc-stopping-contraception.jpg";
+
 
 
 type Img = { src: string; alt: string };

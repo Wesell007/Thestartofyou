@@ -17925,6 +17925,802 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── MEDICATION REVIEW BEFORE PREGNANCY ─────────────────────────────────
+  {
+    slug: "medication-review-before-pregnancy",
+    title: "Medication review before pregnancy",
+    metaDescription: "A calm UK guide to reviewing your medicines before trying to conceive: prescription, over-the-counter, supplements and long-term conditions, with who to speak to.",
+    quickAnswer: "Reviewing your medicines before pregnancy can be a helpful step, especially if you take regular prescription medication, have a long-term condition, or use supplements and herbal products. Do not stop or change any prescribed medicine on your own. A GP, pharmacist, specialist or fertility clinic can help you understand what may be worth reviewing.",
+    standfirst: "A medication review is a conversation, not a warning. It is a chance to look at what you take with someone who can help you think it through.",
+    howThisFeels: [
+      "Wondering whether your regular medicine is safe in pregnancy",
+      "Worrying about stopping something that helps you feel well",
+      "Not knowing who is best to ask",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Prescription medicines", body: "Some prescription medicines may need review before pregnancy. Options often exist, and a clinician can help you weigh them together." },
+        { heading: "Over-the-counter medicines", body: "Some pain relief, cold or allergy medicines have gentler options in pregnancy. A pharmacist can talk you through what may suit you." },
+        { heading: "Supplements and herbal products", body: "Supplements, herbal remedies and high-dose vitamins are worth mentioning too, as some are not recommended before or during pregnancy." },
+      ],
+      lessCauses: [
+        { heading: "Long-term conditions", body: "Conditions such as diabetes, thyroid problems, epilepsy, asthma, high blood pressure or autoimmune conditions often benefit from a preconception review." },
+        { heading: "Mental health medication", body: "Some people worry about medication that supports their mental health. Stopping suddenly can carry its own risks, and a clinician can help you think through the picture." },
+        { heading: "New or recent prescriptions", body: "If something has changed recently, a review may be useful before you start trying." },
+      ],
+      whyItVaries: "Every prescription, condition and person is different. The point of a review is not to change everything, but to notice what may be worth a proper conversation.",
+    },
+    timing: { whenStarts: "A review may be helpful in the months before you start trying, so any changes can settle.", whenEases: "Once you and your clinician are comfortable with the plan, day-to-day life can carry on as usual." },
+    whatItFeelsLike: [
+      "A short, calm conversation with a GP or pharmacist",
+      "Reassurance that some medicines are fine to continue",
+      "A gentle plan for anything that may need a closer look",
+    ],
+    whatThisMeans: "A medication review is one of the most practical steps you can take before pregnancy. It is not about being told off; it is about giving you a clearer picture.",
+    normal: [
+      "Feeling nervous about the conversation",
+      "Being told your current medicine is fine to continue",
+      "Being offered a slightly different option to try",
+    ],
+    seekSupport: [
+      "Any thought of stopping a prescribed medicine without advice",
+      "New or worsening symptoms after any medicine change",
+      "Mental health medicines you are unsure about",
+    ],
+    disclaimer: "This is general guidance and is not personal medical advice. Do not stop or change any prescribed medicine on your own. Speak to your GP, pharmacist or specialist.",
+    whatYouCanDo: [
+      { action: "List everything you take", reason: "Prescriptions, over-the-counter medicines, supplements and herbal products all belong on the same list." },
+      { action: "Book a short GP or pharmacist appointment", reason: "You can ask for a preconception medication review; there is no need to wait for a specific reason." },
+      { action: "Bring the packaging if you can", reason: "Names, doses and brands help the conversation move faster." },
+      { action: "Do not stop anything on your own", reason: "Some medicines carry more risk if stopped suddenly than if continued while you plan." },
+    ],
+    whatHappensNext: "You may be reassured that your current medicines are fine to continue, offered a different option, or referred to a specialist. Whatever the outcome, you leave with a plan you did not have to make alone.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Preconception health", href: "/trying-to-conceive/preconception-health" },
+        { label: "Preconception GP appointment", href: "/articles/preconception-gp-appointment" },
+        { label: "What to do before trying to conceive", href: "/articles/what-to-do-before-trying-to-conceive" },
+        { label: "Vitamins before pregnancy", href: "/articles/preconception-vitamins" },
+      ],
+    },
+    aiPrompts: [
+      "Which medicines should I review before pregnancy?",
+      "Is it safe to keep taking my medication while trying to conceive?",
+      "Who can help me review my medicines before pregnancy?",
+    ],
+    captureIntro: "A medication review is a conversation, not a verdict. It often ends with less to worry about, not more.",
+    journey: ["trying-to-conceive"],
+    topics: ["planning"],
+    relatedSlugs: ["preconception-gp-appointment", "what-to-do-before-trying-to-conceive", "preconception-vitamins"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-medication-review.jpg", import.meta.url).href,
+      alt: "An unbranded pill organiser resting on cream linen beside a closed linen notebook and a ceramic mug of tea in soft window light.",
+    },
+    sources: [
+      { label: "Medicines in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/medicines/" },
+      { label: "Best Use of Medicines in Pregnancy (bumps)", publisher: "UKTIS", url: "https://www.medicinesinpregnancy.org/" },
+      { label: "Preconception advice and management", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/pre-conception-advice-management/" },
+      { label: "Planning your pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/planning-your-pregnancy/" },
+    ],
+    keyTakeaways: [
+      "A medication review before pregnancy can help you feel more informed, not more worried.",
+      "List prescription medicines, over-the-counter medicines, supplements and herbal products together.",
+      "Do not stop or change any prescribed medicine without advice from a clinician.",
+      "Long-term conditions and mental health medicines often benefit from a preconception conversation.",
+      "A GP, pharmacist or specialist can help you think it through and, where needed, refer you on.",
+      "Most people leave a review with reassurance or a gentle plan, not a long list of changes.",
+    ],
+    faq: [
+      { question: "Who should I ask for a medication review?", answer: "A GP is a good first stop. A pharmacist can help with over-the-counter medicines and supplements. If you see a specialist for a long-term condition, they can review medicines linked to that condition." },
+      { question: "Is it safe to keep taking my medicine while trying to conceive?", answer: "Often yes, but this depends on the medicine and your health. A clinician can help you weigh what is best for you. Do not stop anything on your own." },
+      { question: "What about herbal supplements or high-dose vitamins?", answer: "Some are not recommended before or during pregnancy. It is worth mentioning them, even if they feel small compared to prescription medicine." },
+    ],
+    editorialSections: [
+      {
+        id: "why-a-review-may-matter",
+        heading: "Why a review may matter",
+        lead: "A quiet look at what you take can shape the early weeks of pregnancy.",
+        paragraphs: [
+          "The earliest weeks of pregnancy often happen before people realise they are pregnant. Reviewing medicines beforehand means fewer surprises later.",
+          "A review is not about stopping things. It is about noticing what is worth a conversation and what is fine to carry on with.",
+        ],
+      },
+      {
+        id: "prescription-and-otc-medicines",
+        heading: "Prescription and over-the-counter medicines",
+        lead: "Both can be part of the same conversation.",
+        paragraphs: [
+          "Prescription medicines are often best reviewed with the clinician who prescribed them or with a GP. Some have straightforward alternatives; others may be safe to continue.",
+          "Over-the-counter medicines for pain, hay fever, sleep or cold symptoms can also be reviewed, often with a pharmacist. There are usually gentler options that suit pregnancy planning.",
+        ],
+        callout: { tone: "info", text: "This guide does not tell you which medicines to take or stop. That conversation belongs with your GP, pharmacist or specialist." },
+      },
+      {
+        id: "supplements-and-herbal-products",
+        heading: "Supplements and herbal products",
+        lead: "These often get forgotten in reviews.",
+        paragraphs: [
+          "Multivitamins, high-dose single vitamins, herbal teas, tinctures and traditional remedies all count. Some are not recommended before or during pregnancy.",
+          "It is worth mentioning what you take, even if it feels small. A pharmacist can help you sort what may be worth pausing from what is fine to continue.",
+        ],
+      },
+      {
+        id: "long-term-conditions",
+        heading: "Long-term conditions",
+        lead: "These often benefit from an early conversation.",
+        paragraphs: [
+          "Conditions such as diabetes, thyroid problems, high blood pressure, epilepsy, asthma, inflammatory conditions or autoimmune conditions often have medicines that may need review before pregnancy.",
+          "A specialist, GP or midwife can help you understand what may need adjusting and when. Many people continue their usual care with only small changes.",
+        ],
+      },
+      {
+        id: "mental-health-medication",
+        heading: "Mental health medication",
+        lead: "This is worth a careful, unrushed conversation.",
+        paragraphs: [
+          "Antidepressants, anxiety medicines and mood stabilisers are often reviewed before pregnancy. Stopping suddenly can carry its own risks, including a return of symptoms.",
+          "Your GP, mental health team or perinatal mental health service can help you look at the whole picture, including how you have felt in the past and what support may help.",
+        ],
+        callout: { tone: "info", text: "Please do not stop mental health medicine on your own. A clinician can help you weigh what is safest for you." },
+      },
+      {
+        id: "how-to-prepare-for-a-review",
+        heading: "How to prepare for a review",
+        lead: "A short list makes the appointment much more useful.",
+        paragraphs: [
+          "Write down everything you take, with names, doses and brands where possible. Bring packaging if you can.",
+          "Note your questions in advance: whether something is fine to continue, whether alternatives exist, and whether you need a specialist review.",
+        ],
+      },
+      {
+        id: "what-happens-after",
+        heading: "What often happens after",
+        lead: "Reviews rarely end with dramatic changes.",
+        paragraphs: [
+          "You may be reassured that your current medicines are fine, offered a different option, or referred to a specialist. Any change is usually planned gently, with time to settle.",
+          "You can also come back for another conversation if something shifts or if you have more questions later.",
+        ],
+      },
+    ],
+  },
+
+  // ─── LIFESTYLE BEFORE PREGNANCY ─────────────────────────────────────────
+  {
+    slug: "lifestyle-before-pregnancy",
+    title: "Lifestyle before pregnancy",
+    metaDescription: "A calm UK guide to everyday lifestyle choices before trying to conceive: smoking, alcohol, caffeine, food, movement, sleep, weight and when to ask for support.",
+    quickAnswer: "Small, steady lifestyle habits often matter more than dramatic changes. UK guidance suggests stopping smoking, avoiding alcohol when trying to conceive, keeping caffeine moderate, eating a varied diet, moving your body regularly and looking after sleep. If you have a long-term condition or want more tailored support, speak to a GP.",
+    standfirst: "Lifestyle before pregnancy is not about being perfect. It is about a few honest, sustainable habits that support your body and your partner's.",
+    howThisFeels: [
+      "Wanting to prepare without overhauling everything",
+      "Feeling unsure which changes actually matter",
+      "Worrying about past habits or timing",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Smoking and vaping", body: "Stopping smoking is one of the most helpful changes before pregnancy. UK NHS Stop Smoking services are free and can support you and a partner." },
+        { heading: "Alcohol", body: "UK guidance suggests avoiding alcohol when trying to conceive and during pregnancy, as no level is known to be safe in pregnancy." },
+        { heading: "Caffeine", body: "Keeping caffeine moderate before and during pregnancy is often suggested. That includes coffee, tea, energy drinks and some cold remedies." },
+      ],
+      lessCauses: [
+        { heading: "Food and nutrition basics", body: "A varied diet with plenty of vegetables, fruit, whole grains and protein tends to support fertility more than any specific supplement or superfood." },
+        { heading: "Movement and sleep", body: "Regular gentle movement and steady sleep often matter more than intense routines." },
+        { heading: "Weight and body size", body: "Being either very underweight or living in a larger body may affect fertility for some people. Small, kind changes can help; extreme dieting is not the answer." },
+      ],
+      whyItVaries: "Everyone starts from a different place. The most useful changes are the ones you can carry into pregnancy and beyond.",
+    },
+    timing: { whenStarts: "Any change made a few months before trying gives your body time to settle.", whenEases: "Once habits feel steady, day-to-day life can carry on without a running checklist." },
+    whatItFeelsLike: [
+      "Smaller, kinder changes rather than a full overhaul",
+      "Support from a partner where possible",
+      "A calmer relationship with food, drink and movement",
+    ],
+    whatThisMeans: "Lifestyle before pregnancy is about the shape of your everyday life, not any single week. The point is a steady starting point, not perfection.",
+    normal: [
+      "Making one or two changes at a time",
+      "Slipping back sometimes and returning gently",
+      "Feeling more aware of your habits than usual",
+    ],
+    seekSupport: [
+      "Difficulty stopping smoking, drinking or other substances",
+      "Concerns about eating, weight or your relationship with food",
+      "A long-term condition affected by lifestyle changes",
+    ],
+    disclaimer: "This is general guidance and is not personalised advice. For support around smoking, alcohol, mental health or long-term conditions, speak to a GP or an NHS service.",
+    whatYouCanDo: [
+      { action: "Pick one change at a time", reason: "Small, sustainable shifts tend to last longer than dramatic overhauls." },
+      { action: "Ask about NHS Stop Smoking support if this applies", reason: "Free support tends to work better than trying alone." },
+      { action: "Aim for variety on your plate", reason: "A mixed diet often covers more nutrients than restrictive eating." },
+      { action: "Move in ways you enjoy", reason: "Regular gentle movement supports fertility more than intense one-off efforts." },
+    ],
+    whatHappensNext: "Once basics feel steady, you can carry them into trying to conceive without turning them into pressure. A partner making changes alongside you can help both of you.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Preconception health", href: "/trying-to-conceive/preconception-health" },
+        { label: "What to do before trying to conceive", href: "/articles/what-to-do-before-trying-to-conceive" },
+        { label: "Folic acid before pregnancy", href: "/articles/folic-acid-before-pregnancy" },
+        { label: "Partner health before pregnancy", href: "/articles/partner-health-before-pregnancy" },
+        { label: "Sperm health basics", href: "/articles/sperm-health-basics" },
+      ],
+    },
+    aiPrompts: [
+      "What lifestyle changes matter before trying to conceive?",
+      "How much caffeine is okay before pregnancy?",
+      "Do I need to stop drinking alcohol while trying to conceive?",
+    ],
+    captureIntro: "Sustainable habits tend to matter more than sudden overhauls. Start with what feels possible.",
+    journey: ["trying-to-conceive"],
+    topics: ["planning"],
+    relatedSlugs: ["what-to-do-before-trying-to-conceive", "partner-health-before-pregnancy", "sperm-health-basics"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-lifestyle-before-pregnancy.jpg", import.meta.url).href,
+      alt: "A soft kitchen table with a glass of water, a small bowl of berries, a linen notebook and a sprig of eucalyptus in warm morning light.",
+    },
+    sources: [
+      { label: "Planning your pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/planning-your-pregnancy/" },
+      { label: "Alcohol in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/drinking-alcohol/" },
+      { label: "Stop smoking in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/stop-smoking/" },
+      { label: "Preconception advice and management", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/pre-conception-advice-management/" },
+    ],
+    keyTakeaways: [
+      "Small, steady changes often matter more than dramatic overhauls.",
+      "UK guidance suggests stopping smoking and avoiding alcohol when trying to conceive.",
+      "A varied everyday diet tends to support fertility more than any single supplement.",
+      "Gentle regular movement and steady sleep are part of the picture too.",
+      "Weight can matter for some people, but kind, sustainable changes are usually the most useful approach.",
+      "A partner making changes alongside you can help you both feel supported.",
+    ],
+    faq: [
+      { question: "How long before trying should I change my lifestyle?", answer: "A few months is often enough for changes to settle. If you have already started trying, changes made now still count." },
+      { question: "Do I really need to stop drinking alcohol?", answer: "UK guidance suggests avoiding alcohol when trying to conceive, as no level is known to be safe in pregnancy. If cutting back feels hard, speak to a GP." },
+      { question: "What if I am in a larger body?", answer: "Body size is one part of the picture, not the whole story. Small, kind changes to food, movement and sleep are often more useful than dieting. A GP can help if you want tailored support." },
+    ],
+    editorialSections: [
+      {
+        id: "what-lifestyle-really-means-here",
+        heading: "What lifestyle really means here",
+        lead: "This is not a purity test.",
+        paragraphs: [
+          "Lifestyle before pregnancy is the shape of your everyday life. It is what you eat and drink most days, how you sleep, how you move, how you handle stress, and what habits you share with a partner.",
+          "The most useful changes are usually the ones you can carry into pregnancy and beyond, not the ones you only manage for a week.",
+        ],
+      },
+      {
+        id: "smoking-alcohol-and-caffeine",
+        heading: "Smoking, alcohol and caffeine",
+        lead: "These get most of the attention, and for reasons.",
+        paragraphs: [
+          "Stopping smoking is one of the most helpful changes before pregnancy for you and a partner. NHS Stop Smoking services are free and can support both of you together.",
+          "UK guidance suggests avoiding alcohol when trying to conceive, and keeping caffeine moderate. That includes coffee, tea and energy drinks.",
+        ],
+      },
+      {
+        id: "food-and-nutrition-basics",
+        heading: "Food and nutrition basics",
+        lead: "Variety often matters more than any single food.",
+        paragraphs: [
+          "A varied everyday diet with vegetables, fruit, whole grains, beans, fish, dairy or dairy alternatives, and lean protein tends to support fertility more than restrictive eating.",
+          "Folic acid and vitamin D are the supplements most commonly recommended before and during pregnancy in the UK. Other supplements are not usually needed unless a clinician suggests them.",
+        ],
+      },
+      {
+        id: "movement-and-sleep",
+        heading: "Movement and sleep",
+        lead: "Regular and gentle usually beats intense and occasional.",
+        paragraphs: [
+          "Walking, swimming, cycling, yoga, dancing or anything you enjoy can all count. Regular gentle movement tends to support hormones, mood and sleep.",
+          "Sleep is easy to overlook. Steady bedtimes and calmer evenings can quietly do a lot before you even start trying.",
+        ],
+      },
+      {
+        id: "weight-and-body-size",
+        heading: "Weight and body size",
+        lead: "This is a place for kindness, not shame.",
+        paragraphs: [
+          "Being very underweight or living in a larger body may affect fertility for some people. Kind, steady changes to food, movement and sleep are often more useful than strict dieting.",
+          "If you are unsure, a GP can help you think through what may be worth working on, without making it heavier than it needs to be.",
+        ],
+      },
+      {
+        id: "chronic-conditions-and-partner-support",
+        heading: "Long-term conditions and partner support",
+        lead: "Some lifestyle changes work best inside a wider picture.",
+        paragraphs: [
+          "Long-term conditions such as diabetes, thyroid problems or high blood pressure can interact with lifestyle changes. A GP or specialist can help you shape a plan that works with your care.",
+          "A partner making changes alongside you often makes both of your changes stick. Sperm health is shaped over months, so partner lifestyle matters too.",
+        ],
+      },
+    ],
+  },
+
+  // ─── MENTAL WELLBEING BEFORE PREGNANCY ──────────────────────────────────
+  {
+    slug: "mental-wellbeing-before-pregnancy",
+    title: "Mental wellbeing before pregnancy",
+    metaDescription: "A calm UK guide to looking after your mental wellbeing before trying to conceive: anxiety, pressure, previous loss, partner communication and where to find support.",
+    quickAnswer: "Trying to conceive can feel emotional before it even begins. Anxiety, pressure, comparison and previous experiences can all sit alongside excitement. Looking after your mental wellbeing is part of preparing for pregnancy. Speak to a GP if things feel heavier than usual, and use NHS 111 or urgent support if you feel unsafe.",
+    standfirst: "Trying to conceive is emotional work as well as physical. Looking after how you feel is part of the preparation, not an extra to fit in.",
+    howThisFeels: [
+      "Feeling anxious about something that has not started yet",
+      "Pressure around timing, comparison or expectations",
+      "Carrying previous loss, treatment or difficult experiences",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Anxiety and uncertainty", body: "Trying to conceive involves a lot of unknowns. Anxiety often shows up around timing, symptoms, tests and waiting." },
+        { heading: "Pressure and expectation", body: "Family, friends, social media and even your own inner voice can add pressure that has nothing to do with your body." },
+        { heading: "Previous experiences", body: "Loss, difficult cycles, fertility treatment or hard family history can all shape how starting again feels." },
+      ],
+      lessCauses: [
+        { heading: "Existing mental health conditions", body: "Anxiety, depression, OCD, eating difficulties, PTSD and other experiences may become more noticeable when planning a pregnancy." },
+        { heading: "Relationship strain", body: "Different feelings, different timelines or the emotional weight of trying can shift how you and a partner relate." },
+        { heading: "Isolation", body: "Not everyone can be open about trying to conceive, and that quiet can make things feel heavier." },
+      ],
+      whyItVaries: "How TTC feels emotionally depends on your history, your relationships, your support and what else is happening in your life. There is no single right way to feel.",
+    },
+    timing: { whenStarts: "Emotional weight often builds before trying even begins.", whenEases: "It can ease when you have some tools, some support, and permission to feel more than one thing at a time." },
+    whatItFeelsLike: [
+      "Hope and worry sitting side by side",
+      "Feeling okay one day and overwhelmed the next",
+      "A quieter kind of tiredness that is not only physical",
+    ],
+    whatThisMeans: "Mental wellbeing before pregnancy is not about feeling calm all the time. It is about noticing what is hard, letting it exist, and knowing where support is.",
+    normal: [
+      "Fluctuating feelings from day to day",
+      "Sensitivity around symptoms, tests or family talk",
+      "Needing quiet or company at different times",
+    ],
+    seekSupport: [
+      "Persistent low mood, anxiety or panic",
+      "Feelings of hopelessness or being unable to cope",
+      "Any thought of harming yourself or that you cannot keep yourself safe — contact NHS 111 or urgent support",
+    ],
+    disclaimer: "This is general guidance and is not a diagnosis. For personal support, speak to a GP. If you feel unsafe or in crisis, contact NHS 111 or your local urgent mental health support.",
+    whatYouCanDo: [
+      { action: "Name what feels heavy, even quietly", reason: "Putting feelings into words often makes them easier to hold." },
+      { action: "Set small limits on comparison", reason: "Social feeds and family talk often push feelings up unnecessarily." },
+      { action: "Keep one calming rhythm", reason: "Walks, journaling, sleep hygiene or a weekly check-in can steady the harder days." },
+      { action: "Speak to a GP if things feel heavier than usual", reason: "Preconception is a good time to line up mental health support if you may need it." },
+    ],
+    whatHappensNext: "Preparation is not only physical. If you look after your mental wellbeing now, you carry that gently into trying and, if it comes, into pregnancy.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Preconception health", href: "/trying-to-conceive/preconception-health" },
+        { label: "What to do before trying to conceive", href: "/articles/what-to-do-before-trying-to-conceive" },
+        { label: "Timing sex when trying to conceive", href: "/articles/timing-sex-when-trying-to-conceive" },
+        { label: "Two week wait", href: "/trying-to-conceive/two-week-wait" },
+        { label: "Fertility", href: "/trying-to-conceive/fertility" },
+      ],
+    },
+    aiPrompts: [
+      "How do I stop trying to conceive from taking over my head?",
+      "Is it normal to feel anxious before trying for a baby?",
+      "Where can I get mental health support in the UK?",
+    ],
+    captureIntro: "Mental wellbeing is part of preparing for pregnancy, not something to sort out later.",
+    journey: ["trying-to-conceive"],
+    topics: ["emotional", "planning"],
+    relatedSlugs: ["what-to-do-before-trying-to-conceive", "timing-sex-when-trying-to-conceive", "partner-health-before-pregnancy"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-mental-wellbeing-before-pregnancy.jpg", import.meta.url).href,
+      alt: "An open linen journal, a ceramic cup of tea and a folded cream wool blanket by a soft window with quiet morning light.",
+    },
+    sources: [
+      { label: "Mental health support", publisher: "NHS", url: "https://www.nhs.uk/mental-health/" },
+      { label: "Where to get urgent help for mental health", publisher: "NHS", url: "https://www.nhs.uk/mental-health/advice-for-life-situations-and-events/where-to-get-urgent-help-for-mental-health/" },
+      { label: "Planning your pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/planning-your-pregnancy/" },
+      { label: "Preconception advice and management", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/pre-conception-advice-management/" },
+    ],
+    keyTakeaways: [
+      "Trying to conceive can feel emotional before anything has physically started.",
+      "Anxiety, pressure and previous experiences often sit alongside hope.",
+      "You do not need a diagnosis to reach out for support.",
+      "Small everyday rhythms can steady heavier days.",
+      "A GP can help you plan mental health support before or during trying.",
+      "If you feel unsafe, contact NHS 111 or your local urgent mental health support.",
+    ],
+    faq: [
+      { question: "Is it normal to feel anxious before trying for a baby?", answer: "Yes. Many people feel a mix of hope and anxiety before trying, especially if there has been previous loss, treatment or difficult history. Support is available if it feels too heavy to carry alone." },
+      { question: "Should I stop mental health medication before trying?", answer: "Not on your own. Stopping suddenly can carry its own risks. A GP, mental health team or perinatal mental health service can help you think it through carefully." },
+      { question: "Where can I get support in the UK?", answer: "Your GP is a good first stop. NHS talking therapies are available in most areas, and NHS 111 or local urgent mental health services can help if things feel urgent." },
+    ],
+    editorialSections: [
+      {
+        id: "why-ttc-can-feel-emotional-early",
+        heading: "Why TTC can feel emotional early",
+        lead: "The emotional part often begins before the physical part.",
+        paragraphs: [
+          "Trying to conceive brings up hopes, fears and stories about the future long before anything shows on a test.",
+          "For many people, that is why the preparation phase feels heavier than expected. It is not just about your body; it is about the shape of your life.",
+        ],
+      },
+      {
+        id: "anxiety-and-uncertainty",
+        heading: "Anxiety and uncertainty",
+        lead: "Uncertainty is part of the terrain.",
+        paragraphs: [
+          "Anxiety often clusters around timing, symptoms, tests and waiting. That does not mean something is wrong; it means you care.",
+          "Naming what is happening, and having one or two small tools ready, can help you get through the harder days without spiralling.",
+        ],
+      },
+      {
+        id: "pressure-around-timing",
+        heading: "Pressure around timing",
+        lead: "Some of the pressure is not yours to carry.",
+        paragraphs: [
+          "Family questions, social feeds, work timelines and your own inner voice can add pressure that does nothing to help your body.",
+          "It can help to set small limits, quietly. Skipping a scroll, choosing what you share, or moving a conversation on can protect your wellbeing without any drama.",
+        ],
+      },
+      {
+        id: "previous-loss-and-difficult-history",
+        heading: "Previous loss or difficult experiences",
+        lead: "Old feelings often show up again here.",
+        paragraphs: [
+          "Miscarriage, ectopic pregnancy, stillbirth, fertility treatment, difficult family history or previous mental health experiences can all shape how starting again feels.",
+          "These experiences deserve space, not silence. A GP, counsellor or specialist service can help you carry them gently rather than alone.",
+        ],
+      },
+      {
+        id: "partner-and-family-communication",
+        heading: "Partner and family communication",
+        lead: "Different people carry different feelings at different times.",
+        paragraphs: [
+          "You and a partner may not feel the same way at the same moment. Small, honest check-ins tend to help more than long, heavy conversations.",
+          "It is also okay to set boundaries with family or friends about what you share, when and how.",
+        ],
+      },
+      {
+        id: "when-to-seek-support",
+        heading: "When to seek support",
+        lead: "You do not need a crisis to reach out.",
+        paragraphs: [
+          "If your mood, anxiety, sleep or ability to cope feels worse than usual, speak to a GP. NHS talking therapies are available in most areas and often self-referral.",
+          "If you feel unsafe or in crisis, contact NHS 111 or your local urgent mental health support. You do not have to wait until things feel worse.",
+        ],
+        callout: { tone: "info", text: "If you are struggling to keep yourself safe, please contact NHS 111 or your local urgent mental health support now." },
+      },
+    ],
+  },
+
+  // ─── PARTNER HEALTH BEFORE PREGNANCY ────────────────────────────────────
+  {
+    slug: "partner-health-before-pregnancy",
+    title: "Partner health before pregnancy",
+    metaDescription: "A calm UK guide to partner health before trying to conceive: shared lifestyle changes, sleep, stress, medicines and when a partner may want to speak to a GP.",
+    quickAnswer: "Partner health is part of the picture when trying to conceive. Lifestyle, sleep, stress, medicines and long-term conditions can all matter for sperm health and overall wellbeing. Small, shared changes over a few months tend to help most. A GP or sexual health clinic can help if a partner has specific concerns.",
+    standfirst: "Preparing for pregnancy is not one person's job. Shared changes tend to stick better, and often make both of you feel supported.",
+    howThisFeels: [
+      "Wanting to prepare together but not knowing where to start",
+      "Feeling like the pressure is falling on one person",
+      "Worrying about past habits or health history",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Everyday lifestyle", body: "Smoking, vaping, alcohol, caffeine and recreational drugs can all affect fertility for either partner. Steady, kind changes tend to help most." },
+        { heading: "Sleep and stress", body: "Regular sleep, gentle movement and manageable stress support hormone balance and general wellbeing for both partners." },
+        { heading: "Weight and body size", body: "Being very underweight or living in a larger body can affect fertility for some people. Kind, gradual changes tend to help more than strict dieting." },
+      ],
+      lessCauses: [
+        { heading: "Medicines and health conditions", body: "Some prescription medicines, long-term conditions, or previous treatments can affect fertility. A GP or specialist can help review." },
+        { heading: "Anabolic steroids or testosterone", body: "These can significantly reduce sperm production. Anyone using them should speak to a clinician before trying to conceive." },
+        { heading: "Emotional load", body: "Trying to conceive is emotional work for both partners. Talking and sharing decisions helps prevent it landing on one person." },
+      ],
+      whyItVaries: "Partner health looks different for every couple. The goal is a shared, honest starting point, not identical routines.",
+    },
+    timing: { whenStarts: "Sperm are shaped over roughly three months, so changes made now often show up in a few months.", whenEases: "Once shared habits feel steady, day-to-day life can carry on without extra pressure." },
+    whatItFeelsLike: [
+      "Small habits changing together rather than alone",
+      "Fewer awkward conversations later on",
+      "A quieter, shared sense of preparation",
+    ],
+    whatThisMeans: "Partner health is not about blame. It is about making preconception feel like something you are doing together.",
+    normal: [
+      "One partner starting changes earlier than the other",
+      "Different opinions about which changes matter most",
+      "Feeling out of sync for a while as you adjust",
+    ],
+    seekSupport: [
+      "A partner using anabolic steroids, testosterone or recreational drugs regularly",
+      "Long-term conditions or medicines that have not been reviewed for fertility",
+      "Concerns about sexual health, function or previous fertility",
+    ],
+    disclaimer: "This is general guidance and is not personal medical advice. A GP, pharmacist or sexual health clinic can help with anything specific.",
+    whatYouCanDo: [
+      { action: "Talk honestly about what may need looking at", reason: "A short, kind conversation tends to move things further than nagging." },
+      { action: "Pick one shared change to start with", reason: "Doing something together tends to make it stick." },
+      { action: "Encourage a GP or pharmacist review where useful", reason: "This is especially helpful for medicines, long-term conditions or specific worries." },
+      { action: "Share the emotional load", reason: "Small check-ins help stop TTC from landing on one person." },
+    ],
+    whatHappensNext: "Over a few months, small shared changes often add up. If specific concerns come up, a partner can speak to a GP or sexual health clinic without waiting.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Preconception health", href: "/trying-to-conceive/preconception-health" },
+        { label: "Lifestyle before pregnancy", href: "/articles/lifestyle-before-pregnancy" },
+        { label: "Sperm health basics", href: "/articles/sperm-health-basics" },
+        { label: "Male fertility", href: "/trying-to-conceive/male-fertility" },
+        { label: "Fertility", href: "/trying-to-conceive/fertility" },
+      ],
+    },
+    aiPrompts: [
+      "What can a partner do to prepare before trying to conceive?",
+      "How does partner lifestyle affect fertility?",
+      "When should a partner see a GP before trying for a baby?",
+    ],
+    captureIntro: "Shared preparation tends to stick better than solo effort. Small changes together often go a long way.",
+    journey: ["trying-to-conceive"],
+    topics: ["planning"],
+    relatedSlugs: ["lifestyle-before-pregnancy", "sperm-health-basics", "what-to-do-before-trying-to-conceive"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-partner-health.jpg", import.meta.url).href,
+      alt: "Two matching ceramic mugs of tea beside two small linen notebooks and a shared paper calendar on cream linen in soft morning light.",
+    },
+    sources: [
+      { label: "Fertility problems", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/" },
+      { label: "Planning your pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/planning-your-pregnancy/" },
+      { label: "Fertility: assessment and treatment for people with fertility problems", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Male infertility guideline", publisher: "British Fertility Society", url: "https://www.britishfertilitysociety.org.uk/" },
+    ],
+    keyTakeaways: [
+      "Partner health is part of preconception, not an afterthought.",
+      "Sperm are shaped over roughly three months, so lifestyle changes take time to show up.",
+      "Smoking, alcohol, recreational drugs and anabolic steroids can all affect fertility.",
+      "Sleep, stress, general wellbeing and long-term conditions matter too.",
+      "Shared changes tend to be kinder and more sustainable than solo effort.",
+      "A GP or sexual health clinic can help with specific concerns without needing a formal referral.",
+    ],
+    faq: [
+      { question: "Does what a partner does really make a difference?", answer: "Yes. Fertility involves both people. Lifestyle, medicines and long-term conditions can all matter for sperm health and general wellbeing." },
+      { question: "How long before trying should a partner make changes?", answer: "Because sperm are shaped over roughly three months, several months before trying is often useful. Any change made now still counts." },
+      { question: "When should a partner see a GP?", answer: "If there are long-term conditions, regular medicines, anabolic steroid or testosterone use, or specific concerns about fertility or sexual health, a GP or sexual health clinic can help." },
+    ],
+    editorialSections: [
+      {
+        id: "why-partner-health-matters",
+        heading: "Why partner health matters",
+        lead: "Fertility is not one person's story.",
+        paragraphs: [
+          "For couples where one partner produces sperm, roughly half of fertility difficulties involve some element of sperm or male reproductive health. That does not mean blame; it means both partners are worth thinking about.",
+          "Even outside of fertility, preparation together tends to make the whole experience feel more shared.",
+        ],
+      },
+      {
+        id: "everyday-lifestyle-basics",
+        heading: "Everyday lifestyle basics",
+        lead: "The same ideas that support you often support a partner.",
+        paragraphs: [
+          "A varied diet, gentle regular movement, steady sleep and moderate caffeine all support general wellbeing for both partners.",
+          "Doing these together often makes them last longer than trying to change one person's habits alone.",
+        ],
+      },
+      {
+        id: "smoking-alcohol-and-drugs",
+        heading: "Smoking, alcohol and drugs",
+        lead: "This is a place for calm honesty, not judgement.",
+        paragraphs: [
+          "Smoking, heavy alcohol use and recreational drugs can all affect fertility for either partner. NHS Stop Smoking services can support both partners together.",
+          "Anabolic steroids and testosterone can significantly reduce sperm production. Anyone using them should speak to a clinician before trying to conceive.",
+        ],
+      },
+      {
+        id: "sleep-stress-and-mental-load",
+        heading: "Sleep, stress and mental load",
+        lead: "These often quietly shape a couple's TTC experience.",
+        paragraphs: [
+          "Regular sleep, movement and manageable stress support hormones and general wellbeing for both partners.",
+          "The mental load of trying to conceive, planning, tracking, worrying, remembering appointments, often falls unevenly. Small shared routines can help.",
+        ],
+      },
+      {
+        id: "medicines-and-health-conditions",
+        heading: "Medicines and health conditions",
+        lead: "Some things are worth checking calmly.",
+        paragraphs: [
+          "Long-term conditions, regular prescription medicines, previous cancer treatment, hernia surgery or urological conditions can all matter for fertility. A GP or specialist can help review what may be worth talking about.",
+          "This is not usually about stopping medicines. It is about knowing what may be worth a conversation.",
+        ],
+      },
+      {
+        id: "when-a-partner-may-want-to-see-a-gp",
+        heading: "When a partner may want to see a GP",
+        lead: "Some questions are better in a clinic than online.",
+        paragraphs: [
+          "If there are concerns about previous fertility, sexual health, function, testicular changes or long-term conditions, a GP or sexual health clinic can help.",
+          "If you have been trying for a while (often 12 months, or 6 months if over 35), NHS guidance suggests both partners have a fertility check-up together.",
+        ],
+      },
+      {
+        id: "emotional-support-and-communication",
+        heading: "Emotional support and communication",
+        lead: "The best plans usually include honest conversation.",
+        paragraphs: [
+          "Small, kind check-ins tend to help more than long heavy talks. So does agreeing what you share, and with whom.",
+          "If one partner is finding things especially hard, the same mental wellbeing support in the UK is available for both of you.",
+        ],
+      },
+    ],
+  },
+
+  // ─── SPERM HEALTH BASICS ────────────────────────────────────────────────
+  {
+    slug: "sperm-health-basics",
+    title: "Sperm health basics",
+    metaDescription: "A calm UK guide to sperm health basics: count, movement and shape in simple terms, lifestyle factors, when to ask for help and how it fits into fertility testing.",
+    quickAnswer: "Sperm health involves several things: how many sperm are produced, how well they move, and their shape. Lifestyle, heat, medicines and health conditions can all play a part. Sperm are made over roughly three months, so changes take time to show up. If you have been trying for a while or have specific concerns, a GP can help arrange a fertility check.",
+    standfirst: "Sperm health sounds technical, but the basics are simple. A few honest habits over a few months can quietly do a lot.",
+    howThisFeels: [
+      "Not knowing what sperm health really means",
+      "Worrying about past habits or lifestyle",
+      "Feeling unsure about when to get checked",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Sperm count", body: "This is roughly how many sperm are present in a sample. It sits within a wide range that varies naturally." },
+        { heading: "Sperm movement", body: "Movement (motility) is how well sperm swim. Some slower movement is normal; consistent difficulty may be worth checking." },
+        { heading: "Sperm shape", body: "Shape (morphology) is how sperm are formed. A mix of shapes is normal; testing looks at the overall picture." },
+      ],
+      lessCauses: [
+        { heading: "Lifestyle and heat", body: "Smoking, heavy alcohol use, recreational drugs, high heat (such as regular saunas or tight, warm clothing) and being very sedentary can all play a part." },
+        { heading: "Medicines and conditions", body: "Some prescription medicines, anabolic steroids, testosterone, long-term conditions and previous treatments can affect sperm production." },
+        { heading: "Time and cycles of production", body: "Sperm are produced over roughly three months, so changes made now may take a full cycle to show up in a sample." },
+      ],
+      whyItVaries: "Sperm samples can vary from week to week for many reasons, including illness, stress and general wellbeing. Testing usually looks at the pattern rather than any single result.",
+    },
+    timing: { whenStarts: "Because sperm are made over roughly three months, changes made now often show up in a few months, not straight away.", whenEases: "Once habits feel steady, day-to-day life can carry on without over-managing." },
+    whatItFeelsLike: [
+      "A few small, kind changes rather than a big overhaul",
+      "A clearer sense of what testing may involve",
+      "Less mystery around the male side of fertility",
+    ],
+    whatThisMeans: "Sperm health is one part of the fertility picture, not the whole story. Basic understanding often takes a lot of unhelpful anxiety off the table.",
+    normal: [
+      "Some natural variation between samples",
+      "Small dips linked to illness, stress or life events",
+      "A wide range of what is considered typical",
+    ],
+    seekSupport: [
+      "Regular use of anabolic steroids or testosterone",
+      "Long-term conditions, medicines or previous treatments that have not been reviewed",
+      "Trying to conceive for around 12 months, or 6 months if the partner is over 35",
+    ],
+    disclaimer: "This is general guidance and is not personal medical advice. A GP, sexual health clinic or fertility clinic can help with specific concerns.",
+    whatYouCanDo: [
+      { action: "Focus on general wellbeing", reason: "Sleep, gentle movement, moderate alcohol and not smoking support sperm health as part of overall health." },
+      { action: "Avoid regular high heat where you can", reason: "Regular saunas, hot baths or very tight warm clothing may affect sperm production for some people." },
+      { action: "Speak to a GP about medicines or steroids", reason: "Some medicines, anabolic steroids and testosterone can significantly affect sperm production." },
+      { action: "Consider a fertility check where appropriate", reason: "NHS guidance suggests a check after around 12 months of trying, or 6 months if the partner is over 35." },
+    ],
+    whatHappensNext: "Small lifestyle changes now may support sperm health over the next few months. If specific concerns come up, a GP can arrange a fertility check for both partners together.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Preconception health", href: "/trying-to-conceive/preconception-health" },
+        { label: "Partner health before pregnancy", href: "/articles/partner-health-before-pregnancy" },
+        { label: "Lifestyle before pregnancy", href: "/articles/lifestyle-before-pregnancy" },
+        { label: "Fertility tests for men", href: "/articles/fertility-tests-for-men" },
+        { label: "Male fertility", href: "/trying-to-conceive/male-fertility" },
+        { label: "Fertility", href: "/trying-to-conceive/fertility" },
+      ],
+    },
+    aiPrompts: [
+      "What affects sperm health?",
+      "How long does sperm take to be made?",
+      "When should a partner get a fertility check?",
+    ],
+    captureIntro: "Sperm health is one part of the fertility picture. Small, steady habits over a few months often go a long way.",
+    journey: ["trying-to-conceive"],
+    topics: ["planning"],
+    relatedSlugs: ["partner-health-before-pregnancy", "lifestyle-before-pregnancy", "what-to-do-before-trying-to-conceive"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-sperm-health-basics.jpg", import.meta.url).href,
+      alt: "A closed linen notebook, a glass of water and a delicate eucalyptus sprig on cream linen in soft morning light.",
+    },
+    sources: [
+      { label: "Fertility problems", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/" },
+      { label: "Fertility: assessment and treatment for people with fertility problems", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Male infertility", publisher: "British Fertility Society", url: "https://www.britishfertilitysociety.org.uk/" },
+      { label: "Planning your pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/planning-your-pregnancy/" },
+    ],
+    keyTakeaways: [
+      "Sperm health involves count, movement and shape, all sitting within a wide typical range.",
+      "Sperm are made over roughly three months, so changes made now may take a full cycle to show up.",
+      "Lifestyle, heat, medicines and health conditions can all play a part.",
+      "Anabolic steroids and testosterone can significantly reduce sperm production; a clinician can help.",
+      "Samples vary naturally, so testing looks at the pattern rather than any single result.",
+      "A GP can arrange a fertility check after around 12 months of trying, or 6 months if the partner is over 35.",
+    ],
+    faq: [
+      { question: "What does sperm health actually mean?", answer: "It usually refers to sperm count (roughly how many are present), movement (how well they swim) and shape (how they are formed), all sitting within a wide typical range." },
+      { question: "How long do lifestyle changes take to show up?", answer: "Because sperm are made over roughly three months, changes made now may take a full cycle before they show up in a sample." },
+      { question: "When should a partner get a fertility check?", answer: "NHS guidance suggests a check after around 12 months of trying, or 6 months if the partner is over 35. Sooner if there are specific concerns about health, previous treatment or medicines." },
+    ],
+    editorialSections: [
+      {
+        id: "what-sperm-health-includes",
+        heading: "What sperm health includes",
+        lead: "The basics are simpler than they sound.",
+        paragraphs: [
+          "Sperm health usually refers to a few things together: count (roughly how many sperm are present), motility (how well they swim) and morphology (their shape).",
+          "All three sit within a wide range of what is considered typical. Testing looks at the overall picture rather than any single number in isolation.",
+        ],
+      },
+      {
+        id: "how-sperm-are-made-over-time",
+        heading: "How sperm are made over time",
+        lead: "This shapes how quickly changes show up.",
+        paragraphs: [
+          "Sperm are produced continuously, over roughly three months from start to finish. That is why lifestyle changes tend to show up gradually rather than straight away.",
+          "It also explains why illness, stress or a busy period can affect a sample weeks later.",
+        ],
+      },
+      {
+        id: "lifestyle-and-heat",
+        heading: "Lifestyle and heat",
+        lead: "The everyday picture matters more than any single day.",
+        paragraphs: [
+          "Not smoking, moderate alcohol, gentle regular movement, steady sleep and manageable stress all support sperm health as part of general wellbeing.",
+          "Regular high heat, such as frequent saunas, hot baths or very tight warm clothing over long periods, may affect sperm production for some people. Occasional heat is unlikely to matter.",
+        ],
+      },
+      {
+        id: "smoking-alcohol-and-drugs",
+        heading: "Smoking, alcohol and drugs",
+        lead: "These come up often and are worth a calm mention.",
+        paragraphs: [
+          "Smoking, heavy alcohol use and recreational drugs can all affect fertility. Support is available if cutting back feels hard.",
+          "Anabolic steroids and testosterone can significantly reduce sperm production, sometimes for months after stopping. Anyone using them should speak to a clinician before trying to conceive.",
+        ],
+        callout: { tone: "info", text: "If a partner is using anabolic steroids or testosterone, please speak to a GP or specialist before trying to conceive." },
+      },
+      {
+        id: "medicines-and-health-conditions",
+        heading: "Medicines and health conditions",
+        lead: "Some things are worth reviewing quietly.",
+        paragraphs: [
+          "Some prescription medicines, long-term conditions, previous cancer treatment or urological conditions can affect sperm production. A GP or specialist can help review what may be worth talking about.",
+          "This is not usually a reason to stop any medicine. It is a reason to have the conversation.",
+        ],
+      },
+      {
+        id: "how-this-fits-into-fertility-testing",
+        heading: "How this fits into fertility testing",
+        lead: "Sperm testing is often part of a wider picture.",
+        paragraphs: [
+          "A semen analysis is usually one of the first tests when a couple is having difficulty conceiving. It is often repeated, because samples vary.",
+          "NHS guidance suggests a fertility check after around 12 months of trying, or 6 months if the partner is over 35, and sooner if there are specific concerns.",
+        ],
+      },
+      {
+        id: "keeping-perspective",
+        heading: "Keeping perspective",
+        lead: "One part of a much bigger picture.",
+        paragraphs: [
+          "Sperm health is one part of fertility, not the whole story. Cycle, ovulation, timing, general health and simple luck all matter too.",
+          "Small, steady changes now, alongside honest conversations if things do not feel right, tend to be far more useful than trying to control every variable.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

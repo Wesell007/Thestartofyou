@@ -377,7 +377,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     slug: "ivf-and-treatment",
     kind: "subtopic",
     parent: "fertility",
-    eyebrow: "IVF & fertility treatment",
+    eyebrow: "IVF and fertility treatment",
     title: "When IVF becomes the next step",
     accentHsl: "200 22% 44%",
     tintHsl: "200 30% 90%",

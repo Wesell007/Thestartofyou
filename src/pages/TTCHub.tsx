@@ -944,7 +944,6 @@ const TopicLibrary = () => {
               { label: "Timing, testing and waiting", slugs: ["ovulation", "cycle-tracking", "two-week-wait", "pregnancy-tests"] },
               { label: "Health and preparation", slugs: ["preconception-health", "conditions"] },
               { label: "Fertility support", slugs: ["fertility", "age-and-fertility", "male-fertility"] },
-              { label: "Treatment pathways", slugs: ["ivf-and-treatment"] },
             ];
             const topicsBySlug = new Map(ttcTopics.map((s) => [s.slug, s]));
 

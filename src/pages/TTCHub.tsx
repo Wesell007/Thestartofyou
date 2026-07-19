@@ -927,34 +927,26 @@ const TopicLibrary = () => {
           </p>
         </div>
 
-        {/* SUPPORTING GUIDES — text-led, two clusters, warm but secondary */}
+        {/* EXPLORE TTC TOPICS — grouped topic directory (pillars + subtopics) */}
         <div className="mt-8 md:mt-10">
           <div className="mb-10 md:mb-12 max-w-2xl">
-            <Eyebrow>Supporting guides</Eyebrow>
+            <Eyebrow>Explore</Eyebrow>
             <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-tight mb-3">
-              A curated <span className="italic font-normal">support library</span>
+              Explore <span className="italic font-normal">TTC topics</span>
             </h3>
             <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">
-              More specific TTC routes — for timing, testing, fertility, and
-              health. Secondary reading when you want to go deeper.
+              Choose the area that matches what you are trying to understand next.
             </p>
           </div>
 
           {(() => {
-            const clusterTags: Record<string, string> = {
-              "cycle-tracking": "TIMING",
-              "two-week-wait": "TIMING",
-              "pregnancy-tests": "TESTING",
-              "age-and-fertility": "HEALTH",
-              "male-fertility": "HEALTH",
-              "ivf-and-treatment": "SUPPORT",
-              conditions: "HEALTH",
-            };
             const clusters: { label: string; slugs: TTCTopicSlug[] }[] = [
-              { label: "Timing & testing", slugs: ["cycle-tracking", "two-week-wait", "pregnancy-tests"] },
-              { label: "Fertility & health", slugs: ["age-and-fertility", "male-fertility", "conditions"] },
+              { label: "Timing, testing and waiting", slugs: ["ovulation", "cycle-tracking", "two-week-wait", "pregnancy-tests"] },
+              { label: "Health and preparation", slugs: ["preconception-health", "conditions"] },
+              { label: "Fertility support", slugs: ["fertility", "age-and-fertility", "male-fertility"] },
+              { label: "Treatment pathways", slugs: ["ivf-and-treatment"] },
             ];
-            const subsBySlug = new Map(subs.map((s) => [s.slug, s]));
+            const topicsBySlug = new Map(ttcTopics.map((s) => [s.slug, s]));
 
             return clusters.map((cluster, ci) => (
               <div key={cluster.label} className={ci === 0 ? "" : "mt-12 md:mt-14"}>
@@ -964,10 +956,10 @@ const TopicLibrary = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
                   {cluster.slugs.map((slug) => {
-                    const topic = subsBySlug.get(slug);
+                    const topic = topicsBySlug.get(slug);
                     if (!topic) return null;
                     const Icon = topicIcons[topic.slug];
-                    const tag = clusterTags[topic.slug] ?? "GUIDE";
+                    const tag = cluster.label.toUpperCase();
                     return (
                       <Link
                         key={topic.slug}
@@ -1034,11 +1026,6 @@ const TopicLibrary = () => {
               </div>
             ));
           })()}
-
-          {/* Understated closing line */}
-          <p className="mt-12 md:mt-14 text-center font-serif italic text-[13.5px] text-foreground/50 leading-relaxed">
-            More routes will be added as the guide grows.
-          </p>
         </div>
       </div>
     </section>

@@ -479,7 +479,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     slug: "age-and-fertility",
     kind: "subtopic",
     parent: "fertility",
-    eyebrow: "Age & fertility",
+    eyebrow: "Age and fertility",
     title: "Age and fertility",
     accentHsl: "342 28% 52%",
     tintHsl: "345 36% 92%",
@@ -496,19 +496,24 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "What is IVF?",
-        href: LIVE.ivfPage,
-        why: "Helpful background if you're thinking about timing and possible options.",
+        title: "Age and trying to conceive",
+        href: LIVE.ageAndTryingToConceive,
+        why: "What the evidence actually says about age and fertility, without alarm.",
       },
       {
-        title: "Ask a question",
-        href: LIVE.ask,
-        why: "For anything specific to your situation that doesn't have a tidy article.",
+        title: "When to ask for fertility help",
+        href: LIVE.whenToAskFertilityHelp,
+        why: "Honest UK guidance on when it's reasonable to bring fertility into a GP conversation.",
+      },
+      {
+        title: "Preconception GP appointment",
+        href: LIVE.preconceptionGPAppointment,
+        why: "What a preconception check-in with your GP can cover.",
       },
     ],
     groups: [
       {
-        label: "Reading to start with",
+        label: "Common questions",
         links: [
           { label: "How long to try before getting help", href: LIVE.howLongToTry },
           { label: "AMH test explained", href: LIVE.amhTest },
@@ -517,8 +522,6 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         ],
       },
     ],
-    curationNote:
-      "Your situation matters more than the average — ask anything specific below.",
     aiPrompts: [
       "How does age affect fertility?",
       "When should I think about getting tested?",

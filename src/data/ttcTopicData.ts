@@ -100,7 +100,6 @@ const LIVE = {
   ask: "/ask",
 
   // Articles (live)
-  signsOfOvulation: "/articles/signs-of-ovulation",
   twoWeekWaitArticle: "/articles/two-week-wait",
   ttcExplained: "/articles/trying-to-conceive-explained",
   implantationBleeding: "/articles/implantation-bleeding",

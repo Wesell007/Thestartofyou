@@ -17133,6 +17133,798 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── WHAT TO DO BEFORE TRYING TO CONCEIVE ───────────────────────────────
+  {
+    slug: "what-to-do-before-trying-to-conceive",
+    title: "What to do before trying to conceive",
+    metaDescription: "A calm UK guide to preparing for pregnancy: folic acid, medicines, existing conditions, lifestyle basics, cycle awareness and when to speak to a GP.",
+    quickAnswer: "There is no perfect checklist, but a few small steps can help you feel ready. Start folic acid, review any long-term medicines with a GP or pharmacist, notice your cycle, and settle into calm, sustainable lifestyle habits. If you have a health condition, take medication regularly, or have questions, a preconception conversation with a clinician may be helpful.",
+    standfirst: "Preparing to try to conceive is less about perfection and more about giving your body a steady starting point.",
+    howThisFeels: [
+      "Wondering what actually matters and what is noise",
+      "Not knowing whether to book an appointment",
+      "Wanting to prepare without turning it into pressure",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Folic acid before conception", body: "Taking a daily folic acid supplement before pregnancy may lower the risk of certain conditions in early development. UK guidance suggests starting before you conceive." },
+        { heading: "Cycle awareness", body: "Knowing roughly when you ovulate and how long your cycle tends to be can help you understand your fertile window without over-managing it." },
+        { heading: "Lifestyle basics", body: "Small, steady habits around food, movement, sleep, alcohol and smoking often matter more than dramatic overhauls." },
+      ],
+      lessCauses: [
+        { heading: "Existing health conditions", body: "Long-term conditions such as diabetes, thyroid problems, epilepsy or high blood pressure may benefit from a review before pregnancy." },
+        { heading: "Medicines that need a check", body: "Some prescription and over-the-counter medicines can be reviewed with a GP or pharmacist before you start trying." },
+        { heading: "Partner health matters too", body: "Sperm health is shaped over roughly three months, so partner lifestyle, health conditions and medicines can also be worth considering." },
+      ],
+      whyItVaries: "Everyone starts trying to conceive from a different place. Some people plan for months, some decide overnight. The point is not to tick every box but to notice what may apply to you.",
+    },
+    timing: { whenStarts: "Ideally, folic acid and any medication review may begin a few months before you start trying.", whenEases: "Once the basics are in place, day-to-day life can return to normal without a checklist running in the background." },
+    whatItFeelsLike: [
+      "A quiet sense of getting ready without going overboard",
+      "A short conversation with a GP or pharmacist if something feels unclear",
+      "Everyday choices that feel supportive rather than restrictive",
+    ],
+    whatThisMeans: "Preparing to try is a soft starting line, not a test. The steps that matter most tend to be small, honest and sustainable.",
+    normal: [
+      "Feeling uncertain about whether you have done enough",
+      "Starting folic acid without any other changes",
+      "Wanting to think it through before booking a GP appointment",
+    ],
+    seekSupport: [
+      "Long-term conditions or regular medicines you have not discussed in the context of pregnancy",
+      "A previous pregnancy that ended in loss or complications",
+      "Cycles consistently shorter than 21 days, longer than 35 days, or missing altogether",
+    ],
+    disclaimer: "This is general guidance and is not a diagnosis. For personal advice, speak to a GP, midwife or pharmacist.",
+    whatYouCanDo: [
+      { action: "Start a daily folic acid supplement", reason: "UK guidance suggests taking folic acid before conception and in early pregnancy." },
+      { action: "Note the first day of your period and how long your cycle tends to be", reason: "A rough sense of your cycle helps you understand your fertile window without pressure." },
+      { action: "List any regular medicines and health conditions", reason: "A short note makes any GP or pharmacist conversation easier and more useful." },
+      { action: "Keep lifestyle changes small and steady", reason: "Sustainable habits tend to matter more than sudden overhauls." },
+    ],
+    whatHappensNext: "You do not need to feel completely ready. When you start trying, keep folic acid going, notice your cycle gently, and speak to a GP if anything about your health or cycle worries you.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Preconception health", href: "/trying-to-conceive/preconception-health" },
+        { label: "Folic acid before pregnancy", href: "/articles/folic-acid-before-pregnancy" },
+        { label: "Preconception GP appointment", href: "/articles/preconception-gp-appointment" },
+        { label: "Ovulation and your fertile window", href: "/trying-to-conceive/ovulation" },
+      ],
+    },
+    aiPrompts: [
+      "What should I do before trying to conceive?",
+      "When should I start folic acid?",
+      "Do I need to see a GP before trying for a baby?",
+    ],
+    captureIntro: "Preparing calmly is often more useful than preparing perfectly.",
+    journey: ["trying-to-conceive"],
+    topics: ["planning"],
+    relatedSlugs: ["folic-acid-before-pregnancy", "preconception-vitamins", "preconception-gp-appointment"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-preconception-start.jpg", import.meta.url).href,
+      alt: "A soft journal and a cup of tea on cream linen in warm morning light, with a small sprig of eucalyptus resting nearby.",
+    },
+    sources: [
+      { label: "Planning your pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/planning-your-pregnancy/" },
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Preconception advice and management", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/pre-conception-advice-management/" },
+      { label: "Vitamins, supplements and nutrition in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/vitamins-supplements-and-nutrition/" },
+    ],
+    keyTakeaways: [
+      "Start a daily folic acid supplement before you begin trying to conceive.",
+      "Get a rough sense of your cycle length and typical ovulation timing.",
+      "Review long-term medicines and health conditions with a GP or pharmacist where relevant.",
+      "Keep lifestyle changes small, calm and sustainable rather than dramatic.",
+      "Partner health, including sperm health, may also benefit from small changes over the months before trying.",
+      "You do not need to tick every box before starting; a few steady steps often make the biggest difference.",
+    ],
+    faq: [
+      { question: "How far in advance should I start preparing?", answer: "A few months is often enough for folic acid to be established and for any medication review to happen. There is no fixed rule, and it is fine to start when you can." },
+      { question: "Do I have to see a GP before trying?", answer: "Not always. If you are generally well and not on regular medicines, you may not need an appointment. If you have a long-term condition, take regular medicines or have specific concerns, a preconception conversation may be helpful." },
+      { question: "What if I am already trying and have not done any of this?", answer: "That is very common. Starting folic acid now, noticing your cycle, and speaking to a GP if you have any concerns is still worthwhile." },
+    ],
+    editorialSections: [
+      {
+        id: "why-a-little-preparation-helps",
+        heading: "Why a little preparation may help",
+        lead: "The months before trying are a quiet chance to give your body a steady starting point.",
+        paragraphs: [
+          "Preparing is not about being in perfect health. It is about noticing a few things that matter, so the early weeks of a possible pregnancy are supported from the start.",
+          "For most people, the useful steps are small: folic acid, a rough sense of your cycle, and a check on anything that may need a GP or pharmacist conversation.",
+        ],
+      },
+      {
+        id: "folic-acid-and-key-nutrients",
+        heading: "Folic acid and key nutrients",
+        lead: "Folic acid is the main supplement recommended before pregnancy in the UK.",
+        paragraphs: [
+          "UK guidance suggests taking a daily folic acid supplement while trying to conceive and in the first 12 weeks of pregnancy. Some people are advised to take a higher dose, and a GP or pharmacist can help if that may apply to you.",
+          "Vitamin D is also recommended for many adults in the UK, particularly in the darker months. Other supplements are not usually needed unless a clinician suggests them.",
+        ],
+        callout: { tone: "info", text: "For dose questions, especially higher-dose folic acid, speak to a GP or pharmacist. This guide does not replace personal medical advice." },
+      },
+      {
+        id: "medicines-and-conditions-to-review",
+        heading: "Medicines and conditions worth reviewing",
+        lead: "Some things are worth a short conversation before trying.",
+        paragraphs: [
+          "Long-term conditions such as diabetes, thyroid problems, high blood pressure, epilepsy, asthma, mental health conditions or autoimmune conditions may benefit from a preconception review.",
+          "Regular prescription medicines, some over-the-counter medicines, and herbal supplements are all worth mentioning. Do not stop any prescribed medicine on your own; speak to the clinician who prescribed it.",
+        ],
+      },
+      {
+        id: "cycle-awareness-and-timing",
+        heading: "Cycle awareness and gentle timing",
+        lead: "Knowing your cycle roughly is more useful than pinpointing it perfectly.",
+        paragraphs: [
+          "Making a note of the first day of your period each month, and roughly how long your cycles tend to be, is often enough to understand your fertile window.",
+          "You do not need to obsess about timing. Regular, unpressured sex across the middle of the cycle tends to be a calm approach for most people.",
+        ],
+      },
+      {
+        id: "lifestyle-basics",
+        heading: "Lifestyle basics without pressure",
+        lead: "Small, steady changes often matter more than dramatic overhauls.",
+        paragraphs: [
+          "Eating a varied diet, moving your body in ways you enjoy, prioritising sleep, and reducing alcohol and smoking are all supportive habits before pregnancy.",
+          "This is a soft starting line, not a purity test. What you can maintain over months tends to be more helpful than short bursts of intensity.",
+        ],
+      },
+      {
+        id: "partner-health-and-emotional-wellbeing",
+        heading: "Partner health and emotional wellbeing",
+        lead: "Preparing is often a shared conversation.",
+        paragraphs: [
+          "Sperm health is shaped over roughly three months, so partner lifestyle, medicines and health conditions can matter too. A shared preconception conversation with a GP is possible where helpful.",
+          "Mental and emotional wellbeing also count. Trying to conceive can be a mixture of hope, worry and pressure, and it may help to name that early rather than push through it.",
+        ],
+      },
+      {
+        id: "when-to-speak-to-a-clinician",
+        heading: "When to speak to a clinician",
+        lead: "You do not need a reason to book an appointment, but some situations often benefit from one.",
+        paragraphs: [
+          "Consider a preconception conversation if you have a long-term health condition, take regular medicines, have had previous pregnancy loss or complications, are over 35, or have concerns about your cycle or fertility.",
+          "If you have been trying for 12 months without success, or 6 months if you are over 35, speak to a GP about fertility support.",
+        ],
+      },
+    ],
+  },
+
+  // ─── FOLIC ACID BEFORE PREGNANCY ────────────────────────────────────────
+  {
+    slug: "folic-acid-before-pregnancy",
+    title: "Folic acid before pregnancy",
+    metaDescription: "A calm UK guide to folic acid before pregnancy: why it matters, when to start, standard guidance and when to speak to a GP or pharmacist about a higher dose.",
+    quickAnswer: "Folic acid is a B vitamin that supports early development in pregnancy. UK guidance suggests taking a daily folic acid supplement while trying to conceive and for the first 12 weeks of pregnancy. Some people may be advised a higher dose; a GP or pharmacist can help if that may apply to you.",
+    standfirst: "Folic acid is one of the simplest, most consistently recommended steps before pregnancy.",
+    howThisFeels: [
+      "Not being sure when to start",
+      "Wondering if a standard dose is enough for you",
+      "Feeling reassured once one small thing is settled",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Supports early development", body: "Folic acid may lower the risk of certain conditions affecting the baby's spine and nervous system in the earliest weeks of pregnancy." },
+        { heading: "Needed before you know you are pregnant", body: "The most important weeks for folic acid are very early, often before a positive test, which is why UK guidance is to start before you conceive." },
+        { heading: "Standard dose for most people", body: "For most people trying to conceive, a standard daily dose is recommended alongside a balanced diet." },
+      ],
+      lessCauses: [
+        { heading: "Some people may need a higher dose", body: "A higher dose may be recommended for people with certain health conditions, on certain medicines, with a higher BMI, or with a personal or family history of neural tube conditions. A GP or pharmacist can advise." },
+        { heading: "Diet alone may not be enough", body: "Folate is found in leafy greens, pulses and fortified foods, but it can be hard to reach the recommended level from food alone in this period, which is why a supplement is suggested." },
+        { heading: "It does not replace prescribed advice", body: "If a clinician has given you personalised guidance, follow that rather than a general recommendation." },
+      ],
+      whyItVaries: "The right dose depends on your health, medicines and history. General guidance covers most people, but personal circumstances may shift it.",
+    },
+    timing: { whenStarts: "Ideally before you start trying to conceive, and continued through the first 12 weeks of pregnancy.", whenEases: "Most people can stop the specific folic acid supplement after 12 weeks, though a pregnancy multivitamin may continue." },
+    whatItFeelsLike: [
+      "A small daily habit that quickly feels routine",
+      "A single sensible step in an uncertain time",
+      "A short chat with a pharmacist if a higher dose may be needed",
+    ],
+    whatThisMeans: "Folic acid is a low-effort, well-supported step. It does not guarantee anything, but it is one of the clearest recommendations for the months around conception.",
+    normal: [
+      "Starting folic acid a little later than planned",
+      "Occasionally missing a dose",
+      "Choosing a supplement that combines folic acid with vitamin D",
+    ],
+    seekSupport: [
+      "You have diabetes, epilepsy, coeliac disease or a higher BMI and are unsure about dose",
+      "You take medicines that may interact with folic acid",
+      "You or a family member has had a pregnancy affected by a neural tube condition",
+    ],
+    disclaimer: "This is general guidance and is not a diagnosis. For personal dose advice, speak to a GP or pharmacist.",
+    whatYouCanDo: [
+      { action: "Buy a folic acid supplement from a pharmacy or supermarket", reason: "Standard doses are widely available and inexpensive." },
+      { action: "Take it at the same time each day", reason: "A consistent routine makes it easier to remember." },
+      { action: "Ask a pharmacist if a higher dose may apply to you", reason: "A short conversation is often enough to check whether standard guidance fits." },
+      { action: "Continue through the first 12 weeks of pregnancy", reason: "The early weeks are when folic acid is most important." },
+    ],
+    whatHappensNext: "Once folic acid is in place, you can turn attention to other gentle steps: cycle awareness, lifestyle habits, and a wider preconception conversation if useful.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Preconception health", href: "/trying-to-conceive/preconception-health" },
+        { label: "What to do before trying to conceive", href: "/articles/what-to-do-before-trying-to-conceive" },
+        { label: "Vitamins before pregnancy", href: "/articles/preconception-vitamins" },
+        { label: "Preconception GP appointment", href: "/articles/preconception-gp-appointment" },
+      ],
+    },
+    aiPrompts: [
+      "When should I start taking folic acid?",
+      "How much folic acid do I need before pregnancy?",
+      "Do I need a higher dose of folic acid?",
+    ],
+    captureIntro: "One small daily step, taken calmly, is often the most useful thing you can do first.",
+    journey: ["trying-to-conceive"],
+    topics: ["nutrition", "planning"],
+    relatedSlugs: ["what-to-do-before-trying-to-conceive", "preconception-vitamins", "preconception-gp-appointment"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-folic-acid.jpg", import.meta.url).href,
+      alt: "A small unbranded amber glass supplement bottle resting on cream linen beside a closed linen notebook and a sprig of eucalyptus in soft window light.",
+    },
+    sources: [
+      { label: "Vitamins, supplements and nutrition in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/vitamins-supplements-and-nutrition/" },
+      { label: "Planning your pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/planning-your-pregnancy/" },
+      { label: "Preconception advice and management", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/pre-conception-advice-management/" },
+      { label: "Healthy Start", publisher: "GOV.UK", url: "https://www.healthystart.nhs.uk/" },
+    ],
+    keyTakeaways: [
+      "Folic acid is a B vitamin that supports very early development in pregnancy.",
+      "UK guidance is to start a daily supplement while trying to conceive and continue through the first 12 weeks.",
+      "A standard daily dose is recommended for most people.",
+      "Some people may be advised a higher dose; a GP or pharmacist can help you check.",
+      "Folic acid does not replace prescribed advice from a clinician.",
+      "A missed dose here or there is not a crisis; consistency over time is what matters.",
+    ],
+    faq: [
+      { question: "How long before trying should I start folic acid?", answer: "Ideally at least a month before trying to conceive, but starting whenever you can is worthwhile." },
+      { question: "Can I get enough folate from food alone?", answer: "Folate is found in leafy greens, pulses and fortified foods, but it can be hard to reach the recommended amount from food alone in this window. A daily supplement is the simplest way to be consistent." },
+      { question: "What if I forget a dose?", answer: "Occasional missed doses are not usually a problem. Take the next one at the normal time and continue as before." },
+    ],
+    editorialSections: [
+      {
+        id: "what-folic-acid-is",
+        heading: "What folic acid is",
+        lead: "Folic acid is a form of folate, a B vitamin the body uses in early growth and cell development.",
+        paragraphs: [
+          "Folate is found naturally in foods such as leafy greens, pulses and citrus fruit. Folic acid is the form used in supplements and in some fortified foods.",
+          "In the context of pregnancy, folic acid is one of the most consistently recommended supplements in the UK.",
+        ],
+      },
+      {
+        id: "why-it-matters-in-early-pregnancy",
+        heading: "Why it matters in early pregnancy",
+        lead: "The earliest weeks of pregnancy are when folic acid may make the biggest difference.",
+        paragraphs: [
+          "Taking folic acid before and during early pregnancy may lower the risk of certain conditions affecting the developing spine and nervous system.",
+          "These conditions form very early, often before someone knows they are pregnant, which is why starting before conception is recommended.",
+        ],
+      },
+      {
+        id: "when-to-start-and-standard-uk-guidance",
+        heading: "When to start and standard UK guidance",
+        lead: "For most people, the recommendation is simple.",
+        paragraphs: [
+          "UK guidance suggests taking a standard daily folic acid supplement while trying to conceive and continuing until the end of the twelfth week of pregnancy.",
+          "Standard doses are available from pharmacies and supermarkets without a prescription. Many pregnancy multivitamins include folic acid at the recommended level.",
+        ],
+      },
+      {
+        id: "who-may-need-a-higher-dose",
+        heading: "Who may be advised a higher dose",
+        lead: "For some people, a higher dose may be recommended, but it is a personal conversation.",
+        paragraphs: [
+          "A higher dose may be suggested for people with diabetes, epilepsy, coeliac disease, a higher BMI, certain medicines, or a personal or family history of neural tube conditions.",
+          "If any of these may apply to you, speak to a GP or pharmacist rather than adjusting a dose on your own.",
+        ],
+        callout: { tone: "info", text: "This article does not give personalised dose advice. A GP or pharmacist can help you decide what is right for you." },
+      },
+      {
+        id: "when-to-ask-a-clinician",
+        heading: "When to ask a GP or pharmacist",
+        lead: "A short conversation is often enough to feel settled.",
+        paragraphs: [
+          "If you are unsure whether standard guidance fits you, a GP or pharmacist can review your health, medicines and history and suggest what may work best.",
+          "This is also a good moment to mention any wider preconception questions, such as existing conditions, prescriptions, or previous pregnancies.",
+        ],
+      },
+      {
+        id: "keeping-it-a-calm-habit",
+        heading: "Keeping it a calm daily habit",
+        lead: "Folic acid works best as a low-key routine.",
+        paragraphs: [
+          "Taking it at the same time each day, kept somewhere visible, tends to make it easier to remember. Missing an occasional dose is not a crisis.",
+          "The goal is quiet consistency over the months around conception, not perfect adherence.",
+        ],
+      },
+    ],
+  },
+
+  // ─── PRECONCEPTION VITAMINS ─────────────────────────────────────────────
+  {
+    slug: "preconception-vitamins",
+    title: "Vitamins before pregnancy",
+    metaDescription: "A careful UK guide to vitamins before pregnancy: what is recommended, what is optional, what to avoid and when to ask a pharmacist or GP.",
+    quickAnswer: "The main supplement recommended in the UK before pregnancy is folic acid. Vitamin D is also suggested for many adults, particularly in the darker months. Most other supplements are not routinely needed and some can be worth checking with a GP or pharmacist. More is not always better.",
+    standfirst: "You do not need a cupboard of supplements to prepare for pregnancy. A small, careful set of essentials tends to be enough.",
+    howThisFeels: [
+      "Feeling overwhelmed by supplement options",
+      "Worrying about missing something important",
+      "Not knowing what is genuinely helpful and what is marketing",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Folic acid is the main recommended supplement", body: "UK guidance suggests taking a daily folic acid supplement while trying to conceive and through the first 12 weeks of pregnancy." },
+        { heading: "Vitamin D for many adults", body: "UK guidance suggests a daily vitamin D supplement for many adults, especially between October and early March when sunlight is limited." },
+        { heading: "A balanced diet covers most other needs", body: "For most people, a varied everyday diet covers other vitamins and minerals in this period." },
+      ],
+      lessCauses: [
+        { heading: "Some pregnancy multivitamins bundle both", body: "Many multivitamins marketed for pregnancy include folic acid and vitamin D at recommended levels, which can simplify things." },
+        { heading: "Some supplements are best checked first", body: "High-dose vitamin A supplements are not recommended before or during pregnancy. Herbal supplements and some over-the-counter products may also be worth checking." },
+        { heading: "Health conditions and medicines matter", body: "Some conditions and medicines can affect what is suitable, so personal advice from a GP or pharmacist may help." },
+      ],
+      whyItVaries: "Nutritional needs are shaped by diet, health, medicines and lifestyle. General guidance covers most people, but personal input can help fine-tune it.",
+    },
+    timing: { whenStarts: "Ideally when you begin thinking about trying to conceive.", whenEases: "Once folic acid and vitamin D are in place, most people do not need to add much else." },
+    whatItFeelsLike: [
+      "One or two clear daily habits instead of a stack of pills",
+      "A quiet feeling of doing enough without doing too much",
+      "A pharmacist conversation that clears things up quickly",
+    ],
+    whatThisMeans: "Supplements are useful in a targeted way. A calm, evidence-aware approach tends to work better than an anxious one.",
+    normal: [
+      "Choosing a simple pregnancy multivitamin",
+      "Choosing separate folic acid and vitamin D",
+      "Not taking anything beyond folic acid and vitamin D",
+    ],
+    seekSupport: [
+      "You take multiple supplements and are not sure what is safe together",
+      "You have a health condition that affects nutrition or absorption",
+      "You are considering a higher dose of any vitamin",
+    ],
+    disclaimer: "This is general guidance and is not a diagnosis. For personal advice, speak to a GP or pharmacist.",
+    whatYouCanDo: [
+      { action: "Choose one clear daily supplement approach", reason: "Either a pregnancy multivitamin or separate folic acid and vitamin D tends to be enough for most people." },
+      { action: "Read labels for dose and ingredients", reason: "Some products are marketed for pregnancy without matching UK guidance closely." },
+      { action: "Avoid supplements containing high-dose vitamin A", reason: "High-dose vitamin A is not recommended before or during pregnancy." },
+      { action: "Ask a pharmacist if you are unsure", reason: "Pharmacists can review your current supplements and medicines together." },
+    ],
+    whatHappensNext: "Once your supplement routine is settled, wider preconception habits and any GP conversations you may need can sit alongside it.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Preconception health", href: "/trying-to-conceive/preconception-health" },
+        { label: "Folic acid before pregnancy", href: "/articles/folic-acid-before-pregnancy" },
+        { label: "What to do before trying to conceive", href: "/articles/what-to-do-before-trying-to-conceive" },
+        { label: "Preconception GP appointment", href: "/articles/preconception-gp-appointment" },
+      ],
+    },
+    aiPrompts: [
+      "Which vitamins do I need before pregnancy?",
+      "Is a pregnancy multivitamin worth it?",
+      "Which supplements should I avoid before pregnancy?",
+    ],
+    captureIntro: "A calm, minimal supplement routine often works better than a busy one.",
+    journey: ["trying-to-conceive"],
+    topics: ["nutrition", "planning"],
+    relatedSlugs: ["folic-acid-before-pregnancy", "what-to-do-before-trying-to-conceive", "preconception-gp-appointment"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-preconception-vitamins.jpg", import.meta.url).href,
+      alt: "A soft flat-lay of an unbranded supplement bottle and pale capsules in a ceramic dish, with sprigs of thyme on cream linen.",
+    },
+    sources: [
+      { label: "Vitamins, supplements and nutrition in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/vitamins-supplements-and-nutrition/" },
+      { label: "Vitamin D", publisher: "NHS", url: "https://www.nhs.uk/conditions/vitamins-and-minerals/vitamin-d/" },
+      { label: "Preconception advice and management", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/pre-conception-advice-management/" },
+      { label: "Foods to avoid in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/keeping-well/foods-to-avoid/" },
+    ],
+    keyTakeaways: [
+      "Folic acid is the main supplement recommended in the UK before pregnancy.",
+      "Vitamin D is also suggested for many adults, especially in the darker months.",
+      "A balanced diet covers most other nutritional needs in this period.",
+      "High-dose vitamin A supplements are not recommended before or during pregnancy.",
+      "More is not always better; a targeted routine tends to work best.",
+      "A pharmacist or GP can help review supplements if you have questions or health conditions.",
+    ],
+    faq: [
+      { question: "Do I need a pregnancy multivitamin?", answer: "Not necessarily. A pregnancy multivitamin that includes folic acid and vitamin D at recommended levels can be a simple option, but separate folic acid and vitamin D also work well." },
+      { question: "Which supplements should I avoid?", answer: "High-dose vitamin A supplements are not recommended before or during pregnancy. Some herbal supplements are also worth checking with a pharmacist or GP." },
+      { question: "Can I take other supplements alongside folic acid?", answer: "Often yes, but it may help to check with a pharmacist if you take several supplements or have any health conditions or medicines." },
+    ],
+    editorialSections: [
+      {
+        id: "folic-acid-the-main-recommendation",
+        heading: "Folic acid: the main recommendation",
+        lead: "Folic acid is the clearest, most consistent supplement suggestion in the UK for the months around conception.",
+        paragraphs: [
+          "UK guidance suggests a daily folic acid supplement while trying to conceive and through the first 12 weeks of pregnancy. For most people, a standard daily dose is enough.",
+          "Some people may be advised a higher dose based on their health, medicines or history. A GP or pharmacist can help if that may apply to you.",
+        ],
+      },
+      {
+        id: "vitamin-d-and-uk-guidance",
+        heading: "Vitamin D and UK guidance",
+        lead: "Vitamin D is often suggested alongside folic acid in the UK.",
+        paragraphs: [
+          "Because sunlight in the UK is limited between October and early March, many adults are advised to take a daily vitamin D supplement during this period, or year-round if they spend little time outdoors.",
+          "Many pregnancy multivitamins already include vitamin D at a suitable level.",
+        ],
+      },
+      {
+        id: "why-more-is-not-always-better",
+        heading: "Why more is not always better",
+        lead: "It can be tempting to add more supplements, but a targeted approach is usually kinder.",
+        paragraphs: [
+          "For most people, a varied everyday diet covers other vitamins and minerals in this period. Adding several extras can cause overlap or, in some cases, higher doses than intended.",
+          "If a product promises to boost fertility, it is worth being sceptical; the evidence for specific fertility supplements is limited.",
+        ],
+      },
+      {
+        id: "supplements-to-avoid-or-check",
+        heading: "Supplements to avoid or check first",
+        lead: "A few supplements are worth being careful with.",
+        paragraphs: [
+          "High-dose vitamin A supplements, and cod liver oil, are not recommended before or during pregnancy because of their vitamin A content.",
+          "Some herbal supplements and traditional preparations are also worth checking with a pharmacist or GP before continuing.",
+        ],
+        callout: { tone: "gentle-warning", text: "If you are already taking multiple supplements, a short conversation with a pharmacist can help you simplify safely." },
+      },
+      {
+        id: "reading-labels-and-choosing-products",
+        heading: "Reading labels and choosing products",
+        lead: "Not every product marketed for pregnancy matches UK guidance closely.",
+        paragraphs: [
+          "Look for products that clearly state their folic acid and vitamin D content and match recommended daily amounts. Cheaper own-brand options often work as well as premium ones.",
+          "Storing them somewhere visible, and taking them at the same time each day, tends to make consistency easier.",
+        ],
+      },
+      {
+        id: "when-to-ask-a-pharmacist-or-gp",
+        heading: "When to ask a pharmacist or GP",
+        lead: "A short conversation can clear a lot up.",
+        paragraphs: [
+          "If you take regular medicines, have a health condition that affects nutrition or absorption, or are unsure about combining supplements, a pharmacist or GP can review the whole picture.",
+          "This is also a good moment to mention any specific concerns, such as previous pregnancy history or a suspected deficiency.",
+        ],
+      },
+    ],
+  },
+
+  // ─── PRECONCEPTION GP APPOINTMENT ───────────────────────────────────────
+  {
+    slug: "preconception-gp-appointment",
+    title: "Preconception GP appointment",
+    metaDescription: "A calm UK guide to preconception GP appointments: when it may help, what to expect, what to ask and reassurance if you do not think you need one.",
+    quickAnswer: "You do not always need a GP appointment before trying to conceive. It may be helpful if you have a long-term health condition, take regular medicines, have had a previous pregnancy loss or complications, are over 35, or have specific concerns about your health or cycle. A short conversation can cover folic acid, medicines, vaccinations and wider health.",
+    standfirst: "A preconception GP appointment is not a hurdle to clear before trying. It is a quiet check-in that some people find useful.",
+    howThisFeels: [
+      "Wondering if you are wasting the GP's time",
+      "Not knowing what to ask",
+      "Feeling more settled after one calm conversation",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Reviewing long-term conditions", body: "Conditions such as diabetes, thyroid problems, high blood pressure, epilepsy, asthma or mental health conditions may benefit from a preconception review." },
+        { heading: "Checking regular medicines", body: "A GP or pharmacist can review whether medicines are suitable for pregnancy or whether alternatives may be worth discussing." },
+        { heading: "Wider health basics", body: "Blood pressure, weight, smoking, alcohol, folic acid, vitamin D and vaccinations can all be part of a preconception conversation." },
+      ],
+      lessCauses: [
+        { heading: "Previous pregnancy history", body: "If you have had a previous pregnancy loss, a complicated pregnancy, or a baby with a specific condition, a preconception conversation may be helpful." },
+        { heading: "Age and fertility questions", body: "If you are over 35 or have concerns about how long it may take, a GP can talk through what is typical and what next steps may look like." },
+        { heading: "Mental health and support", body: "Preconception is also a chance to talk about mood, past mental health support and what may help during and after pregnancy." },
+      ],
+      whyItVaries: "The right conversation depends on your history and questions. For some people, one visit covers everything; for others, no appointment is needed at all.",
+    },
+    timing: { whenStarts: "Anytime you feel unsure, or a few months before you plan to start trying.", whenEases: "Once the conversation has happened and any actions are in place." },
+    whatItFeelsLike: [
+      "A short appointment focused on your questions",
+      "A quick medicines review with a GP or pharmacist",
+      "A referral if any specific investigations may help",
+    ],
+    whatThisMeans: "A preconception appointment is a tool, not a duty. When it helps, it can settle a lot in one conversation. When it is not needed, that is fine too.",
+    normal: [
+      "Not booking an appointment if you feel generally well",
+      "Booking one to feel settled before starting",
+      "Being told everything looks straightforward and to carry on",
+    ],
+    seekSupport: [
+      "Long-term conditions or regular medicines that have not been reviewed in the context of pregnancy",
+      "Previous pregnancy loss, stillbirth or complications",
+      "Concerns about your cycle, fertility, mental health or age",
+    ],
+    disclaimer: "This is general guidance and is not a diagnosis. For personal advice, speak to a GP, midwife or pharmacist.",
+    whatYouCanDo: [
+      { action: "Write down your questions in advance", reason: "A short list keeps the appointment focused and useful." },
+      { action: "Note any medicines and health conditions", reason: "A GP can review them more usefully with a clear list." },
+      { action: "Ask about folic acid and vitamin D", reason: "It is a natural moment to check standard preconception guidance fits you." },
+      { action: "Ask what to do if trying takes longer than expected", reason: "Knowing when to come back can lower background worry." },
+    ],
+    whatHappensNext: "If you have an appointment, you may leave with a plan, a prescription change, a referral or simple reassurance. If you do not have one, keep folic acid going and speak to a GP if anything changes.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Preconception health", href: "/trying-to-conceive/preconception-health" },
+        { label: "What to do before trying to conceive", href: "/articles/what-to-do-before-trying-to-conceive" },
+        { label: "Fertility, conception and getting support", href: "/trying-to-conceive/fertility" },
+        { label: "How long to try before getting help", href: "/articles/how-long-to-try-before-getting-help" },
+      ],
+    },
+    aiPrompts: [
+      "Do I need a GP appointment before trying to conceive?",
+      "What should I ask my GP before trying for a baby?",
+      "When should I speak to a GP about fertility?",
+    ],
+    captureIntro: "A short, calm conversation can settle a lot without over-medicalising anything.",
+    journey: ["trying-to-conceive"],
+    topics: ["planning", "care"],
+    relatedSlugs: ["what-to-do-before-trying-to-conceive", "folic-acid-before-pregnancy", "how-long-to-try-before-getting-help"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-gp-appointment.jpg", import.meta.url).href,
+      alt: "A calm wooden desk with a paper wall calendar, a linen notebook, a small sprig of sage and a ceramic mug of tea in soft daylight.",
+    },
+    sources: [
+      { label: "Planning your pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/planning-your-pregnancy/" },
+      { label: "Preconception advice and management", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/pre-conception-advice-management/" },
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+    ],
+    keyTakeaways: [
+      "A preconception GP appointment is not required, but it can help in some situations.",
+      "Long-term conditions, regular medicines and previous pregnancy history are common reasons to book one.",
+      "The appointment may cover folic acid, vitamin D, vaccinations, weight, blood pressure, and mental health.",
+      "It is a good moment to ask what to do if trying takes longer than expected.",
+      "Not needing an appointment is completely normal.",
+      "A pharmacist can help with medicines and supplement questions too.",
+    ],
+    faq: [
+      { question: "Do I have to book a preconception GP appointment?", answer: "No. Many people do not need one. It tends to help when there are long-term conditions, regular medicines, previous pregnancy complications or specific questions." },
+      { question: "What can I expect from the appointment?", answer: "A short conversation about your health, medicines, cycle and any concerns. The GP may check blood pressure, review medicines or suggest tests or vaccinations." },
+      { question: "Can my partner come too?", answer: "Yes. A shared conversation can be helpful, especially if a partner also has questions about their own health or medicines." },
+    ],
+    editorialSections: [
+      {
+        id: "when-a-preconception-appointment-may-help",
+        heading: "When a preconception appointment may help",
+        lead: "Some situations tend to make one especially useful.",
+        paragraphs: [
+          "A preconception appointment can help if you have a long-term health condition, take regular medicines, have had previous pregnancy loss or complications, are over 35, or have specific concerns about your cycle, fertility, mental health or general health.",
+          "For many people who are generally well and not on regular medicines, no appointment is needed.",
+        ],
+      },
+      {
+        id: "what-a-gp-may-cover",
+        heading: "What a GP may cover",
+        lead: "Preconception appointments are usually short but can cover a lot.",
+        paragraphs: [
+          "Common topics include folic acid, vitamin D, blood pressure, weight, smoking and alcohol, mental health, vaccinations, and any long-term conditions or medicines.",
+          "The GP may suggest a medicines review with a pharmacist, blood tests, or a referral if something specific needs a closer look.",
+        ],
+      },
+      {
+        id: "medicines-and-existing-conditions",
+        heading: "Medicines and existing conditions",
+        lead: "This is one of the most useful reasons to book an appointment.",
+        paragraphs: [
+          "Some prescription medicines may need review before pregnancy. Do not stop any prescribed medicine on your own; a GP or specialist can help you weigh the options.",
+          "Long-term conditions such as diabetes, thyroid problems, epilepsy, high blood pressure, asthma or mental health conditions often benefit from being reviewed before conception.",
+        ],
+        callout: { tone: "info", text: "This article does not tell you to change or stop any medicine. That conversation belongs with the clinician who prescribed it." },
+      },
+      {
+        id: "previous-pregnancy-history",
+        heading: "Previous pregnancy history",
+        lead: "If a previous pregnancy has been difficult, this is a good moment to talk about it.",
+        paragraphs: [
+          "Miscarriage, ectopic pregnancy, stillbirth, preterm birth or a baby with a specific condition may all be worth discussing before trying again.",
+          "A GP may offer reassurance, suggest specific steps for this pregnancy, or refer you to a specialist if that may help.",
+        ],
+      },
+      {
+        id: "age-fertility-and-mental-health",
+        heading: "Age, fertility and mental health",
+        lead: "These are common quiet worries that can benefit from a calm conversation.",
+        paragraphs: [
+          "If you are over 35, or have concerns about how long it may take, a GP can talk through what is typical and when further support may be worth considering.",
+          "Mood, anxiety, past perinatal experiences and current support can also be part of this conversation. There is no threshold to reach before mentioning them.",
+        ],
+      },
+      {
+        id: "how-to-prepare",
+        heading: "How to prepare",
+        lead: "A short list makes the appointment more useful.",
+        paragraphs: [
+          "Note your regular medicines, health conditions, any previous pregnancy history, and your questions. Bring supplement bottles if it helps.",
+          "It can also help to think about what a good outcome from the appointment would look like for you: information, reassurance, a plan, or a referral.",
+        ],
+      },
+      {
+        id: "if-you-decide-not-to-book",
+        heading: "If you decide not to book",
+        lead: "Skipping an appointment is not a failing.",
+        paragraphs: [
+          "If you feel generally well, are not on regular medicines, and do not have specific questions, it is fine to start trying without booking anything.",
+          "You can always speak to a GP later if something changes or if you have been trying for a while without success.",
+        ],
+      },
+    ],
+  },
+
+  // ─── STOPPING CONTRACEPTION WHEN TRYING TO CONCEIVE ─────────────────────
+  {
+    slug: "stopping-contraception-when-ttc",
+    title: "Stopping contraception when trying to conceive",
+    metaDescription: "A calm UK guide to stopping contraception when trying to conceive: what may happen to your cycle, how quickly fertility may return and when to seek advice.",
+    quickAnswer: "For many people, fertility may return quickly after stopping contraception, though cycles can take time to settle into a clear pattern. What happens next depends on the method, your body and your usual cycle. If periods do not return within a few months, or something feels off, speak to a GP.",
+    standfirst: "Coming off contraception can feel like a big shift. What actually happens is often quieter, and rarely follows a tidy timeline.",
+    howThisFeels: [
+      "Not knowing when your cycle will feel like your own again",
+      "Watching for signs and feeling unsure how to read them",
+      "Worrying that something is wrong when things take time",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Fertility can return quickly for many methods", body: "For many methods, fertility may return within the first cycle or two after stopping. This does not mean pregnancy happens quickly, only that the possibility is there." },
+        { heading: "Cycles may take time to settle", body: "Bleeding patterns, cycle length and ovulation timing can shift for a few months while your body finds its own rhythm." },
+        { heading: "Different methods behave differently", body: "Barrier methods and copper coils tend to have little lasting effect. Combined and progestogen-only methods may take longer for cycles to settle. Contraceptive injections can take several months to wear off in some people." },
+      ],
+      lessCauses: [
+        { heading: "Underlying cycle patterns may re-emerge", body: "If your cycles were irregular before contraception, they may return to that pattern once you stop." },
+        { heading: "Age and health can shape what happens", body: "Your general health, weight, thyroid function and stress can all influence how quickly cycles feel steady again." },
+        { heading: "Not every early cycle includes ovulation", body: "It can take a cycle or two before ovulation happens reliably, especially after some methods." },
+      ],
+      whyItVaries: "Contraception is only one input. Your own cycle, health and history all shape what happens after stopping.",
+    },
+    timing: { whenStarts: "Some people notice their cycles quickly. For others, it may take a few months to feel settled.", whenEases: "Once a few cycles have passed, patterns are usually easier to read." },
+    whatItFeelsLike: [
+      "Bleeding that is lighter, heavier, or on a different schedule than expected",
+      "A first cycle that feels unfamiliar",
+      "A slow return to something you recognise as your own",
+    ],
+    whatThisMeans: "Stopping contraception is a starting point, not a switch. Some patience with the first few cycles tends to make everything feel more manageable.",
+    normal: [
+      "A first cycle that is longer, shorter or different from usual",
+      "Spotting or lighter periods for a cycle or two",
+      "Not knowing exactly when ovulation happens in the early months",
+    ],
+    seekSupport: [
+      "No periods for three months or more after stopping contraception",
+      "Very heavy, painful or unusually irregular bleeding",
+      "Concerns about your cycle, symptoms or how you feel",
+    ],
+    disclaimer: "This is general guidance and is not a diagnosis. For personal advice about your method or your cycle, speak to a GP, pharmacist or sexual health clinic.",
+    whatYouCanDo: [
+      { action: "Note the first day of your period each month", reason: "A quiet log helps you notice patterns without turning it into pressure." },
+      { action: "Give your body a few cycles before drawing conclusions", reason: "Early cycles can be unpredictable and often settle on their own." },
+      { action: "Continue folic acid and other preconception basics", reason: "Fertility may return before you feel completely settled." },
+      { action: "Speak to a clinician if periods do not return or something feels off", reason: "A GP, pharmacist or sexual health clinic can help you understand what may be happening." },
+    ],
+    whatHappensNext: "If cycles settle over a few months, you can carry on gently with cycle awareness and preconception basics. If they do not, a conversation with a GP or sexual health clinic can help.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Preconception health", href: "/trying-to-conceive/preconception-health" },
+        { label: "What to do before trying to conceive", href: "/articles/what-to-do-before-trying-to-conceive" },
+        { label: "When ovulation is hard to predict", href: "/articles/when-ovulation-is-hard-to-predict" },
+        { label: "Cycle tracking", href: "/trying-to-conceive/cycle-tracking" },
+      ],
+    },
+    aiPrompts: [
+      "When will my periods return after stopping contraception?",
+      "How long does it take to get pregnant after coming off the pill?",
+      "Is it normal for cycles to be irregular after stopping contraception?",
+    ],
+    captureIntro: "The first few cycles rarely follow a tidy pattern. That is often just your body finding its own rhythm.",
+    journey: ["trying-to-conceive"],
+    topics: ["cycle", "planning"],
+    relatedSlugs: ["what-to-do-before-trying-to-conceive", "when-ovulation-is-hard-to-predict", "late-ovulation-and-ttc"],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-stopping-contraception.jpg", import.meta.url).href,
+      alt: "A minimalist paper calendar on cream linen with a soft pencilled arc across several weeks and a small sprig of sage beside it, in warm morning light.",
+    },
+    sources: [
+      { label: "How soon can I get pregnant after coming off the pill?", publisher: "NHS", url: "https://www.nhs.uk/common-health-questions/womens-health/how-soon-can-i-get-pregnant-after-coming-off-the-pill/" },
+      { label: "Contraception", publisher: "NHS", url: "https://www.nhs.uk/conditions/contraception/" },
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Preconception advice and management", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/pre-conception-advice-management/" },
+    ],
+    keyTakeaways: [
+      "For many methods, fertility may return quickly after stopping contraception.",
+      "Cycles can take a few months to settle into a clear pattern.",
+      "Different methods behave differently; some, such as contraceptive injections, may take longer to wear off.",
+      "Underlying cycle patterns from before contraception can re-emerge.",
+      "If periods do not return within three months, speak to a GP or sexual health clinic.",
+      "Continuing folic acid and preconception basics is worthwhile while things settle.",
+    ],
+    faq: [
+      { question: "How quickly can I get pregnant after stopping contraception?", answer: "For many methods, pregnancy is possible in the first cycle. For others, such as contraceptive injections, it can take longer for cycles to return." },
+      { question: "Is it normal for my periods to be irregular at first?", answer: "Yes, often. It can take a few cycles for bleeding patterns to settle. If they do not settle after three months, speak to a GP or sexual health clinic." },
+      { question: "Do I need to wait a while before trying?", answer: "Usually not. There is no general medical reason to wait, though some people prefer a cycle or two to notice their pattern before trying." },
+    ],
+    editorialSections: [
+      {
+        id: "what-happens-after-stopping",
+        heading: "What may happen after stopping",
+        lead: "The first few cycles after stopping contraception can be unpredictable.",
+        paragraphs: [
+          "Bleeding may be lighter, heavier, or on a different schedule than you expect. Cycle length can shift as your body finds its own rhythm.",
+          "Not every early cycle includes ovulation, and it can take a cycle or two before things feel steady.",
+        ],
+      },
+      {
+        id: "different-methods-in-general-terms",
+        heading: "Different methods in general terms",
+        lead: "Contraceptive methods behave differently after stopping.",
+        paragraphs: [
+          "Barrier methods and copper coils tend to have little lasting effect on cycles. Combined and progestogen-only methods may take a few months for cycles to settle.",
+          "Contraceptive injections can take longer to wear off, sometimes several months, before ovulation returns reliably.",
+        ],
+        callout: { tone: "info", text: "For questions about a specific method, a GP, pharmacist or sexual health clinic can give personal advice." },
+      },
+      {
+        id: "cycles-returning-and-bleeding-patterns",
+        heading: "Cycles returning and bleeding patterns",
+        lead: "The first few periods after stopping may not look like what you remember.",
+        paragraphs: [
+          "Some people notice a period within a few weeks. Others wait longer. Spotting between periods, or a slightly heavier or lighter first bleed, is common.",
+          "It often helps to note the first day of each period so you can see patterns as they emerge, rather than trying to remember.",
+        ],
+      },
+      {
+        id: "fertility-can-return-before-cycles-feel-settled",
+        heading: "Fertility can return before cycles feel settled",
+        lead: "This is one of the most important things to know.",
+        paragraphs: [
+          "For many methods, ovulation may happen before your cycle feels predictable, which means pregnancy is possible even while things still feel unfamiliar.",
+          "This is why continuing folic acid and preconception basics is worthwhile from the moment you stop.",
+        ],
+      },
+      {
+        id: "why-timing-can-vary",
+        heading: "Why timing can vary from person to person",
+        lead: "Contraception is only one part of the picture.",
+        paragraphs: [
+          "Your own cycle before contraception, your age, health, weight, thyroid function and stress levels can all shape how quickly things settle.",
+          "If your cycles were irregular before contraception, they may return to that pattern once you stop.",
+        ],
+      },
+      {
+        id: "when-to-seek-advice",
+        heading: "When to speak to a clinician",
+        lead: "Most of the time, a little patience is enough. Sometimes, extra input is helpful.",
+        paragraphs: [
+          "Speak to a GP, pharmacist or sexual health clinic if you have no periods for three months or more after stopping contraception, if bleeding is very heavy or painful, or if anything feels off.",
+          "You can also speak to a GP if you have been trying for 12 months without success, or 6 months if you are over 35.",
+        ],
+      },
+      {
+        id: "gentle-cycle-awareness",
+        heading: "Gentle cycle awareness in the meantime",
+        lead: "You do not need to pinpoint ovulation immediately.",
+        paragraphs: [
+          "Noticing the first day of your period, watching mucus changes, and paying loose attention to how you feel can build a picture over a couple of cycles without adding pressure.",
+          "Formal tools like ovulation tests or temperature tracking can come later if you find them useful.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

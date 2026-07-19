@@ -17311,7 +17311,7 @@ const articleDatabase: ArticleData[] = [
     whatHappening: {
       commonCauses: [
         { heading: "Supports early development", body: "Folic acid may lower the risk of certain conditions affecting the baby's spine and nervous system in the earliest weeks of pregnancy." },
-        { heading: "Needed before you know you are pregnant", body: "The most important weeks for folic acid are very early, often before a positive test, which is why UK guidance is to start before you conceive." },
+        { heading: "Needed in the earliest weeks", body: "The most important weeks for folic acid are very early, often before a positive test, which is why UK guidance is to start before you conceive." },
         { heading: "Standard dose for most people", body: "For most people trying to conceive, a standard daily dose is recommended alongside a balanced diet." },
       ],
       lessCauses: [

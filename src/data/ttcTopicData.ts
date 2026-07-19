@@ -446,28 +446,31 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     },
     startHere: [
       {
-        title: "Ask a question",
-        href: LIVE.ask,
-        why: "Get a calm, evidence-aware answer to anything specific.",
+        title: "Male fertility when trying to conceive",
+        href: LIVE.maleFertilityWhenTTC,
+        why: "A calm overview of the male side of conception and what genuinely helps.",
       },
       {
-        title: "Conditions that can affect TTC",
-        href: LIVE.conditions,
-        why: "An overview of health factors worth knowing about for both partners.",
+        title: "Sperm health basics",
+        href: LIVE.spermHealthBasics,
+        why: "What sperm health means in practice and where lifestyle can help.",
+      },
+      {
+        title: "Fertility tests for men",
+        href: LIVE.fertilityTestsMen,
+        why: "What semen analysis involves and when it tends to be considered.",
       },
     ],
     groups: [
       {
-        label: "Where to begin",
+        label: "Tests and next steps",
         links: [
-          { label: "Fertility tests for men", href: LIVE.fertilityTestsMen },
           { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
           { label: "Conditions that can affect TTC", href: LIVE.conditions },
+          { label: "Ask a question", href: LIVE.ask },
         ],
       },
     ],
-    curationNote:
-      "More male-fertility lifestyle guidance is on the way. For anything specific, ask below.",
     aiPrompts: [
       "What affects sperm health?",
       "How does lifestyle affect male fertility?",

@@ -30,7 +30,7 @@ const TTCIVFPathway = () => {
                   className="font-sans text-[11px] font-medium tracking-[0.24em] uppercase"
                   style={{ color: "hsl(var(--stage-ivf-accent))" }}
                 >
-                  Connected hub
+                  Treatment pathway
                 </span>
               </div>
 
@@ -38,12 +38,9 @@ const TTCIVFPathway = () => {
                 When treatment becomes part of the conversation
               </h2>
               <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed mb-3 max-w-xl">
-                If you are starting to think about fertility treatment or IVF, you can step into a
-                calmer guide built for that part of the journey.
-              </p>
-              <p className="font-sans text-sm font-light text-muted-foreground/80 leading-relaxed max-w-xl">
-                A separate IVF hub for treatment timelines, transfer preparation, the two-week wait
-                and early pregnancy after IVF.
+                If you are starting to think about fertility treatment or IVF, this connected hub
+                gives you a calmer place to understand timelines, transfer preparation, the IVF
+                two-week wait and early pregnancy after IVF.
               </p>
 
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-5 mt-7">
@@ -88,8 +85,7 @@ const TTCIVFPathway = () => {
                   A separate, calmer guide
                 </p>
                 <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-relaxed">
-                  Treatment timelines, transfer prep, the two-week wait and early pregnancy after IVF —
-                  all in one gentle place.
+                  Treatment timelines, transfer preparation and IVF-specific support in one place.
                 </p>
               </div>
             </div>

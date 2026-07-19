@@ -944,7 +944,6 @@ const TopicLibrary = () => {
               { label: "Timing, testing and waiting", slugs: ["ovulation", "cycle-tracking", "two-week-wait", "pregnancy-tests"] },
               { label: "Health and preparation", slugs: ["preconception-health", "conditions"] },
               { label: "Fertility support", slugs: ["fertility", "age-and-fertility", "male-fertility"] },
-              { label: "Treatment pathways", slugs: ["ivf-and-treatment"] },
             ];
             const topicsBySlug = new Map(ttcTopics.map((s) => [s.slug, s]));
 
@@ -963,7 +962,7 @@ const TopicLibrary = () => {
                     return (
                       <Link
                         key={topic.slug}
-                        to={topic.slug === "ivf-and-treatment" ? "/ivf" : topic.mainHref}
+                        to={topic.mainHref}
                         className="group relative flex flex-col bg-card/70 rounded-2xl border p-6 sm:p-7 transition-all duration-300 hover:bg-card hover:-translate-y-0.5"
                         style={{
                           borderColor: `hsl(var(${STAGE_ACCENT}) / 0.16)`,

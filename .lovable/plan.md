@@ -1,34 +1,58 @@
-## Pregnancy Phase 10.3 QA — findings and fix plan
+## Phase 9.16 — TTC Pregnancy Tests and Two Week Wait Expansion
 
-### What passed
-- `bunx tsgo --noEmit`: clean.
-- All 10 new article slugs (5 x 10.2a, 5 x 10.2b) present exactly once in `src/data/articleData.ts`.
-- All 10 have `reviewedBy: "Jenny Joines"`.
-- Image mappings in `PregnancyTopicPage.tsx` include all 10 new slugs with distinct dedicated assets. Eating-well / foods-to-avoid split (10.2a.1) preserved. Hospital-bag slug is the correct `hospital-bag-and-what-to-pack`.
-- Diet-and-exercise and Preparing-for-baby group placements match spec, including the Phase 10.1 collapsed structure and the new "Practical safety and planning" group.
-- Phase 10.2b articles are dash-clean and dated `July 2026`.
-- No duplicate article objects.
+### Duplicate check (verified)
+Grepped `src/data/articleData.ts` for all 6 target slugs and the near-duplicate list. Result:
+- None of the 6 target slugs exist. Safe to create.
+- Existing related-slug matches available: `implantation-bleeding` (L432), `two-week-wait` (L3018), `when-to-take-a-pregnancy-test` (L14920), `faint-positive-pregnancy-test` (L14967). These are the live slugs to use for related links.
+- Near-duplicates `testing-too-early`, `evaporation-line`, `two-week-wait-symptoms`, `spotting-after-ovulation`, `two-week-wait-anxiety` etc. do not exist.
 
-### Two rule breaches to correct (small fixes only)
+### Articles to create (6, appended to `src/data/articleData.ts`)
+All use the existing TTC flagship schema (matching Phase 9.12–9.14 objects): `slug`, `title`, `topic` (ttc), `journey: ["trying-to-conceive"]`, `metaDescription`, `standfirst`, `quickAnswer`, `hero {src, alt}`, `keyTakeaways` (5–6), `editorialSections` (5–7 with lead/paragraphs/optional callout), `normalCheck` two-column, `faq` (3), `sources` (3–5 structured), `reviewedBy: "Jenny Joines"`, `lastUpdated: "July 2026"`, `related` slugs.
 
-**1. Phase 10.2a articles carry `lastUpdated: "April 2026"` instead of the required `"July 2026"`.**
-Affects: `caffeine-in-pregnancy`, `hydration-in-pregnancy`, `cravings-and-aversions-in-pregnancy`, `pelvic-floor-exercises-in-pregnancy`, `exercise-safety-by-trimester`.
+1. `testing-too-early` — Testing too early
+2. `negative-test-but-no-period` — Negative test but no period
+3. `evaporation-line-or-faint-positive` — Evaporation line or faint positive
+4. `two-week-wait-symptoms` — Two week wait symptoms
+5. `spotting-during-the-two-week-wait` — Spotting during the two week wait
+6. `coping-with-the-two-week-wait` — Coping with the two week wait
 
-**2. Phase 10.2a articles contain em dashes in prose (~80 total across the 5 articles).** Core rule is "strictly no dashes". Phase 10.2b prose is already clean, so this is scoped to those 5 articles only.
+Editorial guardrails: UK English, no em/en dashes, no certainty language, careful (may/might/often), signpost to GP/pharmacist/clinic. No pregnancy handover from these article pages.
 
-### Fix approach
+Related links pool (verified live): `when-to-take-a-pregnancy-test`, `faint-positive-pregnancy-test`, `implantation-bleeding`, `two-week-wait`, plus each other. Will confirm any additional slug (e.g. `understanding-your-fertile-window`, `timing-sex-when-trying-to-conceive`, `when-to-ask-for-fertility-help`) with a re-grep before including.
 
-Edit `src/data/articleData.ts` only, within the line range of the 5 Phase 10.2a articles (~19485–20200):
+Sources: NHS, NICE, Tommy's, HFEA where relevant.
 
-- Replace each `lastUpdated: "April 2026"` with `lastUpdated: "July 2026"` in the 5 target objects.
-- Replace em dashes (U+2014) inside string values with a comma-space, or with a full stop when the dash joins two full sentences. Preserve numeric context (e.g. rewrite `2–5mg` en-dash ranges to `2 to 5mg` if any appear).
-- Do a final pass grepping the 5-article range for `—` and `–` to confirm zero remain.
+### Assets to create (6 new JPGs in `src/assets/`)
+Generated via imagegen (fast tier), soft-light TTC visual system, sage/cream/neutral, no brand names, no visible test lines, no distress imagery:
+- `ttc-testing-too-early.jpg`
+- `ttc-negative-test-no-period.jpg`
+- `ttc-evaporation-line.jpg`
+- `ttc-two-week-wait-symptoms.jpg`
+- `ttc-spotting-two-week-wait.jpg`
+- `ttc-coping-two-week-wait.jpg`
 
-No other files change. No new articles, images, or structural edits. TTC, IVF, First Year, Toddler, Family, calculators, Journey, routes, sitemap, robots, redirects and SEO layers stay untouched.
+### Image wiring
+- Each new article's `hero.src` points to its own dedicated asset (imported into `articleData.ts` at the top with existing TTC assets).
+- Add corresponding entries in whichever TTC topic-page `HREF_IMAGE_MAP` covers pregnancy-tests / two-week-wait subtopic cards (likely `TTCSubtopicPage` or its shared image map), preserving all Phase 9.12–9.15 mappings.
 
-### Verification after fix
+### Topic config updates (`src/data/ttcTopicData.ts`)
+Edit only the two configs at L592 (`pregnancy-tests`) and L655 (`two-week-wait`). Insert the 3 new links each into the most relevant existing groups (or a new tightly-scoped group if none fits) without restructuring other TTC topics.
 
-- Re-grep the 5 Phase 10.2a articles for em/en dashes: expect 0.
-- Re-grep the 5 for `lastUpdated: "July 2026"`: expect 5.
-- Run `bunx tsgo --noEmit`.
-- Return the full QA deliverable summary requested (hub/map/topic statuses, preservation checks, image QA, link QA, editorial safety, dash-rule, typecheck, safe-to-proceed to TTC 9.16).
+- pregnancy-tests: add Testing too early, Negative test but no period, Evaporation line or faint positive.
+- two-week-wait: add Two week wait symptoms, Spotting during the two week wait, Coping with the two week wait.
+
+### Files touched
+- `src/data/articleData.ts` — append 6 article objects + 6 asset imports.
+- `src/data/ttcTopicData.ts` — 2 config blocks updated.
+- TTC topic image-map file (identified after re-reading `TTCSubtopicPage`) — add 6 entries.
+- `src/assets/*.jpg` — 6 new files.
+
+### Explicitly not touched
+Pregnancy, IVF, First Year, Toddler, Family, routes, sitemap generator, robots, redirects, SEO infrastructure, calculators, TTC Journey, other TTC topic configs, existing image mappings.
+
+### Verification
+- `bunx tsgo --noEmit` clean.
+- Grep confirms each new slug appears exactly once as a declaration.
+- Grep confirms zero `—` / `–` in new article ranges.
+- Manual QA of `/trying-to-conceive/pregnancy-tests` and `/trying-to-conceive/two-week-wait`: 3 new cards each, distinct thumbnails, no adjacent collisions, all related links resolve.
+- Deliverable summary returned in the requested format.

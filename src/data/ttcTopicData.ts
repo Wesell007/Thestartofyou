@@ -636,6 +636,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Timing your test",
         links: [
           { label: "When to take a pregnancy test", href: LIVE.whenToTest },
+          { label: "Testing too early", href: LIVE.testingTooEarly },
         ],
       },
       {
@@ -643,7 +644,14 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         description: "Interpreting unclear results and ambiguous symptoms.",
         links: [
           { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
+          { label: "Evaporation line or faint positive", href: LIVE.evaporationLineFaintPositive },
           { label: "Implantation bleeding", href: LIVE.implantationBleeding },
+        ],
+      },
+      {
+        label: "When the answer is not clear yet",
+        links: [
+          { label: "Negative test but no period", href: LIVE.negativeTestNoPeriod },
         ],
       },
       {
@@ -659,6 +667,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       "Is it implantation bleeding or my period?",
     ],
   },
+
 
   "two-week-wait": {
     slug: "two-week-wait",

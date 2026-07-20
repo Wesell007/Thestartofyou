@@ -59,6 +59,10 @@ import imgTwoWeekWaitSymptoms from "@/assets/ttc-two-week-wait-symptoms.jpg";
 import imgSpottingTwoWeekWait from "@/assets/ttc-spotting-two-week-wait.jpg";
 import imgCopingTwoWeekWait from "@/assets/ttc-coping-two-week-wait.jpg";
 
+// Phase 9.20 (final TTC article gap batch)
+import imgTrackingWithoutOverthinking from "@/assets/ttc-tracking-without-overthinking.jpg";
+import imgThyroidAndFertility from "@/assets/ttc-thyroid-and-fertility.jpg";
+
 interface Props {
   config: TTCPageConfig;
   heroImage: string;
@@ -135,6 +139,10 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/two-week-wait-symptoms": imgTwoWeekWaitSymptoms,
   "/articles/spotting-during-the-two-week-wait": imgSpottingTwoWeekWait,
   "/articles/coping-with-the-two-week-wait": imgCopingTwoWeekWait,
+
+  // Phase 9.20
+  "/articles/tracking-without-overthinking": imgTrackingWithoutOverthinking,
+  "/articles/thyroid-and-fertility": imgThyroidAndFertility,
 };
 
 const TOPIC_FALLBACK: Record<TTCTopicSlug, string> = {

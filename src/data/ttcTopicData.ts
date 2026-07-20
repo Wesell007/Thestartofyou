@@ -173,6 +173,14 @@ const LIVE = {
   twoWeekWaitSymptoms: "/articles/two-week-wait-symptoms",
   spottingTwoWeekWait: "/articles/spotting-during-the-two-week-wait",
   copingTwoWeekWait: "/articles/coping-with-the-two-week-wait",
+
+  // Phase 9.20 (final TTC article gap batch)
+  trackingWithoutOverthinking: "/articles/tracking-without-overthinking",
+  thyroidAndFertility: "/articles/thyroid-and-fertility",
+  ttcInYour30s: "/articles/ttc-in-your-30s",
+  ttcAfter35: "/articles/ttc-after-35",
+  emotionalPressureOfAge: "/articles/emotional-pressure-of-age-when-ttc",
+  partnerSupportWhenTTC: "/articles/partner-support-when-ttc",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────

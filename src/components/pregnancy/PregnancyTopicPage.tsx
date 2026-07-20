@@ -59,6 +59,7 @@ import imgPreparingCard from "@/assets/preparing-card.jpg";
 import imgGuidancePreparing from "@/assets/guidance-preparing.jpg";
 import imgGuidanceEmotional from "@/assets/guidance-card-emotional.jpg";
 // New Phase 10.1 assets — distinct topic thumbnails
+import imgEatingWell from "@/assets/article-hero-eating-well.jpg";
 import imgFoodsToAvoid from "@/assets/article-hero-foods-to-avoid.jpg";
 import imgKeyNutrients from "@/assets/article-hero-key-nutrients.jpg";
 import imgCaffeine from "@/assets/article-hero-caffeine-pregnancy.jpg";

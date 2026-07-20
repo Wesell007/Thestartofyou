@@ -470,6 +470,13 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     ],
     groups: [
       {
+        label: "Health and support before pregnancy",
+        links: [
+          { label: "Partner health before pregnancy", href: LIVE.partnerHealthBeforePregnancy },
+          { label: "Lifestyle before pregnancy", href: LIVE.lifestyleBeforePregnancy },
+        ],
+      },
+      {
         label: "Tests and next steps",
         links: [
           { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },

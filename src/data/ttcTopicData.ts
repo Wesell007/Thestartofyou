@@ -470,6 +470,13 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     ],
     groups: [
       {
+        label: "Health and support before pregnancy",
+        links: [
+          { label: "Partner health before pregnancy", href: LIVE.partnerHealthBeforePregnancy },
+          { label: "Lifestyle before pregnancy", href: LIVE.lifestyleBeforePregnancy },
+        ],
+      },
+      {
         label: "Tests and next steps",
         links: [
           { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
@@ -577,16 +584,20 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     ],
     groups: [
       {
-        label: "Practical basics",
+        label: "Tracking your cycle",
         links: [
-          { label: "Ovulation calculator", href: LIVE.calculator },
+          { label: "Ovulation signs", href: LIVE.ovulationSigns },
+          { label: "Cervical mucus and fertility", href: LIVE.cervicalMucus },
+          { label: "Basal body temperature tracking", href: LIVE.basalBodyTemperature },
+          { label: "Using ovulation tests", href: LIVE.usingOvulationTests },
         ],
       },
       {
-        label: "Common questions",
+        label: "When cycles are unclear",
         links: [
           { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
-          { label: "Cervical mucus and fertility", href: LIVE.cervicalMucus },
+          { label: "Late ovulation and TTC", href: LIVE.lateOvulation },
+          { label: "When ovulation is hard to predict", href: LIVE.hardToPredictOvulation },
         ],
       },
     ],
@@ -641,22 +652,12 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       },
       {
         label: "Reading what you see",
-        description: "Interpreting unclear results and ambiguous symptoms.",
+        description: "Interpreting unclear results, ambiguous symptoms, and testing when the moment feels heavy.",
         links: [
           { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
           { label: "Evaporation line or faint positive", href: LIVE.evaporationLineFaintPositive },
           { label: "Implantation bleeding", href: LIVE.implantationBleeding },
-        ],
-      },
-      {
-        label: "When the answer is not clear yet",
-        links: [
           { label: "Negative test but no period", href: LIVE.negativeTestNoPeriod },
-        ],
-      },
-      {
-        label: "When the result feels heavy",
-        links: [
           { label: "Pregnancy after loss", href: LIVE.pregnancyAfterLoss },
         ],
       },
@@ -706,18 +707,12 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     groups: [
       {
         label: "Worries during the wait",
-        description: "The emotional and physical questions that surface in these days.",
+        description: "The emotional and physical questions that surface in these days, and how to hold them.",
         links: [
           { label: "Two week wait symptoms", href: LIVE.twoWeekWaitSymptoms },
           { label: "Spotting during the two week wait", href: LIVE.spottingTwoWeekWait },
-          { label: "Early pregnancy symptoms explained", href: LIVE.earlySymptoms },
-        ],
-      },
-      {
-        label: "Looking after yourself in the wait",
-        description: "Practical, calm support for the emotional side of these days.",
-        links: [
           { label: "Coping with the two week wait", href: LIVE.copingTwoWeekWait },
+          { label: "Early pregnancy symptoms explained", href: LIVE.earlySymptoms },
         ],
       },
       {
@@ -792,6 +787,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
           { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
           { label: "Fertility tests for women", href: LIVE.fertilityTestsWomen },
           { label: "Fertility tests for men", href: LIVE.fertilityTestsMen },
+          { label: "Trying again after miscarriage", href: LIVE.tryingAgain },
         ],
       },
     ],

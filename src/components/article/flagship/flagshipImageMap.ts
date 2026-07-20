@@ -118,6 +118,13 @@ import ttcAgeAndTTC from "@/assets/ttc-age-and-ttc.jpg";
 import ttcMaleFertilitySupport from "@/assets/ttc-male-fertility-support.jpg";
 import ttcMovingToIVF from "@/assets/ttc-moving-to-ivf.jpg";
 
+// Phase 10.2a — Diet & exercise gap batch hero imagery
+import heroCaffeine from "@/assets/article-hero-caffeine-pregnancy.jpg";
+import heroHydration from "@/assets/article-hero-hydration-pregnancy.jpg";
+import heroCravingsAversions from "@/assets/article-hero-cravings-aversions.jpg";
+import heroPelvicFloor from "@/assets/article-hero-pelvic-floor.jpg";
+import heroExerciseTrimester from "@/assets/article-hero-exercise-trimester.jpg";
+
 
 
 

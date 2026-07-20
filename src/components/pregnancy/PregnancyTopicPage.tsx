@@ -76,6 +76,11 @@ import imgDischarge from "@/assets/article-hero-discharge.jpg";
 import imgBleedingReassurance from "@/assets/article-hero-bleeding-reassurance.jpg";
 import imgInduction from "@/assets/article-hero-induction.jpg";
 import imgBirthPreferences from "@/assets/article-hero-birth-preferences.jpg";
+import imgSafeSleepBasics from "@/assets/article-hero-safe-sleep-basics.jpg";
+import imgCarSeatBasics from "@/assets/article-hero-car-seat-basics.jpg";
+import imgNewbornEssentials from "@/assets/article-hero-newborn-essentials.jpg";
+import imgPreparingSiblings from "@/assets/article-hero-preparing-siblings.jpg";
+import imgMaternityLeave from "@/assets/article-hero-maternity-leave.jpg";
 
 
 interface Props {
@@ -259,6 +264,11 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/induction-of-labour": imgInduction,
   "/articles/what-happens-if-labour-doesnt-start": imgSignsLabour,
   "/articles/hand-expressing-colostrum": imgPreparingCard,
+  "/articles/safe-sleep-basics": imgSafeSleepBasics,
+  "/articles/car-seat-basics": imgCarSeatBasics,
+  "/articles/baby-clothes-and-newborn-essentials": imgNewbornEssentials,
+  "/articles/preparing-siblings-for-a-new-baby": imgPreparingSiblings,
+  "/articles/maternity-leave-planning": imgMaternityLeave,
 };
 
 

@@ -787,6 +787,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
           { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
           { label: "Fertility tests for women", href: LIVE.fertilityTestsWomen },
           { label: "Fertility tests for men", href: LIVE.fertilityTestsMen },
+          { label: "Trying again after miscarriage", href: LIVE.tryingAgain },
         ],
       },
     ],

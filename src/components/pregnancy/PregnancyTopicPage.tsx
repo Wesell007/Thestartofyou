@@ -203,7 +203,7 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/reduced-movements-in-pregnancy": imgThirdMovement,
   "/articles/baby-hiccups-in-the-womb": imgSecondMovement,
   "/articles/measuring-big-or-small-in-pregnancy": imgPregnancyBump,
-  "/articles/growth-scans-in-pregnancy": imgTestsScans,
+  "/articles/growth-scans-in-pregnancy": imgAnatomyScan,
   "/articles/cord-around-the-neck-in-pregnancy": imgAnatomyScan,
   // Feelings
   "/articles/emotional-wellbeing-pregnancy": imgEmotionalFirstTri,

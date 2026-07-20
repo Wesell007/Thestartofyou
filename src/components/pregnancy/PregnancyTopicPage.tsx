@@ -61,6 +61,11 @@ import imgGuidanceEmotional from "@/assets/guidance-card-emotional.jpg";
 // New Phase 10.1 assets — distinct topic thumbnails
 import imgFoodsToAvoid from "@/assets/article-hero-foods-to-avoid.jpg";
 import imgKeyNutrients from "@/assets/article-hero-key-nutrients.jpg";
+import imgCaffeine from "@/assets/article-hero-caffeine-pregnancy.jpg";
+import imgHydration from "@/assets/article-hero-hydration-pregnancy.jpg";
+import imgCravingsAversions from "@/assets/article-hero-cravings-aversions.jpg";
+import imgPelvicFloor from "@/assets/article-hero-pelvic-floor.jpg";
+import imgExerciseTrimester from "@/assets/article-hero-exercise-trimester.jpg";
 import imgMedicines from "@/assets/article-hero-medicines.jpg";
 import imgVaccinations from "@/assets/article-hero-vaccinations.jpg";
 import imgBookingAppt from "@/assets/article-hero-booking-appointment.jpg";
@@ -233,7 +238,12 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   // Diet & exercise
   "/articles/eating-well-in-pregnancy": imgSecondEating,
   "/articles/key-nutrients-in-pregnancy": imgKeyNutrients,
+  "/articles/caffeine-in-pregnancy": imgCaffeine,
+  "/articles/hydration-in-pregnancy": imgHydration,
   "/articles/moving-your-body-in-pregnancy": imgMovementExercise,
+  "/articles/exercise-safety-by-trimester": imgExerciseTrimester,
+  "/articles/pelvic-floor-exercises-in-pregnancy": imgPelvicFloor,
+  "/articles/cravings-and-aversions-in-pregnancy": imgCravingsAversions,
   "/articles/when-you-cant-face-food-in-pregnancy": imgFoodAversions,
   // Preparing
   "/preparing-for-baby": imgPreparingJourney,

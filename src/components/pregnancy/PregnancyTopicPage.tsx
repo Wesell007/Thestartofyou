@@ -61,6 +61,11 @@ import imgGuidanceEmotional from "@/assets/guidance-card-emotional.jpg";
 // New Phase 10.1 assets — distinct topic thumbnails
 import imgFoodsToAvoid from "@/assets/article-hero-foods-to-avoid.jpg";
 import imgKeyNutrients from "@/assets/article-hero-key-nutrients.jpg";
+import imgCaffeine from "@/assets/article-hero-caffeine-pregnancy.jpg";
+import imgHydration from "@/assets/article-hero-hydration-pregnancy.jpg";
+import imgCravingsAversions from "@/assets/article-hero-cravings-aversions.jpg";
+import imgPelvicFloor from "@/assets/article-hero-pelvic-floor.jpg";
+import imgExerciseTrimester from "@/assets/article-hero-exercise-trimester.jpg";
 import imgMedicines from "@/assets/article-hero-medicines.jpg";
 import imgVaccinations from "@/assets/article-hero-vaccinations.jpg";
 import imgBookingAppt from "@/assets/article-hero-booking-appointment.jpg";

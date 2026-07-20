@@ -165,6 +165,14 @@ const LIVE = {
   ageAndTryingToConceive: "/articles/age-and-trying-to-conceive",
   maleFertilityWhenTTC: "/articles/male-fertility-when-trying-to-conceive",
   movingFromTTCToIVF: "/articles/moving-from-ttc-to-ivf",
+
+  // Phase 9.16 (TTC pregnancy tests + two week wait expansion)
+  testingTooEarly: "/articles/testing-too-early",
+  negativeTestNoPeriod: "/articles/negative-test-but-no-period",
+  evaporationLineFaintPositive: "/articles/evaporation-line-or-faint-positive",
+  twoWeekWaitSymptoms: "/articles/two-week-wait-symptoms",
+  spottingTwoWeekWait: "/articles/spotting-during-the-two-week-wait",
+  copingTwoWeekWait: "/articles/coping-with-the-two-week-wait",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────

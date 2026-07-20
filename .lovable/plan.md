@@ -1,71 +1,34 @@
-## Phase 10.2b — Preparing for Baby Gap Batch
+## Pregnancy Phase 10.3 QA — findings and fix plan
 
-Publish 5 flagship pregnancy articles into `/pregnancy/preparing-for-baby`, wire in the 5 pre-generated hero images, and place the articles into the existing grouped topic structure.
+### What passed
+- `bunx tsgo --noEmit`: clean.
+- All 10 new article slugs (5 x 10.2a, 5 x 10.2b) present exactly once in `src/data/articleData.ts`.
+- All 10 have `reviewedBy: "Jenny Joines"`.
+- Image mappings in `PregnancyTopicPage.tsx` include all 10 new slugs with distinct dedicated assets. Eating-well / foods-to-avoid split (10.2a.1) preserved. Hospital-bag slug is the correct `hospital-bag-and-what-to-pack`.
+- Diet-and-exercise and Preparing-for-baby group placements match spec, including the Phase 10.1 collapsed structure and the new "Practical safety and planning" group.
+- Phase 10.2b articles are dash-clean and dated `July 2026`.
+- No duplicate article objects.
 
-### Duplicate check (confirmed clean)
+### Two rule breaches to correct (small fixes only)
 
-Grep against `src/data/articleData.ts` for the 10 exact and near-duplicate slugs returned no matches. Safe to create all 5.
+**1. Phase 10.2a articles carry `lastUpdated: "April 2026"` instead of the required `"July 2026"`.**
+Affects: `caffeine-in-pregnancy`, `hydration-in-pregnancy`, `cravings-and-aversions-in-pregnancy`, `pelvic-floor-exercises-in-pregnancy`, `exercise-safety-by-trimester`.
 
-### Assets (already generated in `src/assets/`)
+**2. Phase 10.2a articles contain em dashes in prose (~80 total across the 5 articles).** Core rule is "strictly no dashes". Phase 10.2b prose is already clean, so this is scoped to those 5 articles only.
 
-`article-hero-safe-sleep-basics.jpg`, `article-hero-car-seat-basics.jpg`, `article-hero-newborn-essentials.jpg`, `article-hero-preparing-siblings.jpg`, `article-hero-maternity-leave.jpg`.
+### Fix approach
 
-### Article shape (matches nearby Phase 10.2a articles exactly)
+Edit `src/data/articleData.ts` only, within the line range of the 5 Phase 10.2a articles (~19485–20200):
 
-Fields per article: `slug`, `title`, `metaDescription`, `quickAnswer`, `howThisFeels`, `whatHappening { commonCauses, lessCauses, whyItVaries }`, `timing`, `whatItFeelsLike`, `whatThisMeans`, `normal`, `seekSupport`, `disclaimer`, `whatYouCanDo`, `whatHappensNext`, `relatedStage`, `aiPrompts`, `captureIntro`, `trimester`, `relatedSlugs`, `journey: ["pregnancy"]`, `topics: ["preparing"]`, `reviewedBy: "Jenny Joines"`, `lastUpdated: "July 2026"`, `keyTakeaways` (5–6), `sources` (3–5 structured `{label, publisher, url}` — the `ArticleSource` type), `faq` (3 items, field is `faq` not `faqs`), `topic: "preparing-for-baby"`, `standfirst`, `editorialSections` (5–7). UK English. No em dashes. No personalised medical, legal or safety advice. No fear-based framing.
+- Replace each `lastUpdated: "April 2026"` with `lastUpdated: "July 2026"` in the 5 target objects.
+- Replace em dashes (U+2014) inside string values with a comma-space, or with a full stop when the dash joins two full sentences. Preserve numeric context (e.g. rewrite `2–5mg` en-dash ranges to `2 to 5mg` if any appear).
+- Do a final pass grepping the 5-article range for `—` and `–` to confirm zero remain.
 
-Related-slug pool (verified live): `the-space-your-baby-will-come-home-to`, `preparing-emotionally-for-birth`, `birth-preferences`, `hospital-bag-and-what-to-pack` (verified as the actual live slug), `the-36-week-appointment`, plus the sibling new articles from this batch.
+No other files change. No new articles, images, or structural edits. TTC, IVF, First Year, Toddler, Family, calculators, Journey, routes, sitemap, robots, redirects and SEO layers stay untouched.
 
-Sources per article (all UK, structured, non-fear-based):
-- Safe sleep basics — Lullaby Trust, NHS SIDS reduction, NHS helping baby to sleep.
-- Car seat basics — GOV.UK child car seats, Good Egg Safety, NHS getting baby home, RoSPA.
-- Baby clothes and newborn essentials — NHS things you'll need, Tommy's, NCT.
-- Preparing siblings — NCT, Tommy's, NHS bringing baby home.
-- Maternity leave planning — GOV.UK maternity pay & leave, GOV.UK employers, GOV.UK Maternity Allowance, ACAS.
+### Verification after fix
 
-### Files to edit
-
-**1. `src/data/articleData.ts`** — insert the 5 article objects before the closing `];` of `articleDatabase` (line 20227). Full editorial copy already drafted and ready to paste.
-
-**2. `src/data/pregnancyTopicData.ts`** — update only the `"preparing-for-baby"` config (lines 468–540):
-- **Getting ready for baby** — append:
-  - `{ label: "Baby clothes and newborn essentials", href: "/articles/baby-clothes-and-newborn-essentials" }`
-  - `{ label: "Preparing siblings for a new baby", href: "/articles/preparing-siblings-for-a-new-baby" }`
-- **Birth planning** — unchanged.
-- **Late-pregnancy decisions** — unchanged.
-- **Practical safety and planning** — new group appended after Late-pregnancy decisions:
-  - description: "The practical decisions that quietly matter around bringing your baby home."
-  - links: Safe sleep basics, Car seat basics, Maternity leave planning
-- `startHere`, `whatThisCovers`, `showSiblings`, `showAI`, and `topicMapEntries` unchanged.
-
-**3. `src/components/pregnancy/PregnancyTopicPage.tsx`** — add 5 imports after existing pregnancy asset imports:
-```ts
-import imgSafeSleepBasics from "@/assets/article-hero-safe-sleep-basics.jpg";
-import imgCarSeatBasics from "@/assets/article-hero-car-seat-basics.jpg";
-import imgNewbornEssentials from "@/assets/article-hero-newborn-essentials.jpg";
-import imgPreparingSiblings from "@/assets/article-hero-preparing-siblings.jpg";
-import imgMaternityLeave from "@/assets/article-hero-maternity-leave.jpg";
-```
-Add 5 entries to `HREF_IMAGE_MAP` at the end of the `// Preparing` block:
-```ts
-"/articles/safe-sleep-basics": imgSafeSleepBasics,
-"/articles/car-seat-basics": imgCarSeatBasics,
-"/articles/baby-clothes-and-newborn-essentials": imgNewbornEssentials,
-"/articles/preparing-siblings-for-a-new-baby": imgPreparingSiblings,
-"/articles/maternity-leave-planning": imgMaternityLeave,
-```
-All Phase 10.1, 10.2a and 10.2a.1 mappings preserved verbatim.
-
-### Verification
-
-- `bunx tsgo --noEmit`.
-- Grep each new slug exactly once in `articleData.ts`.
-- Confirm `/pregnancy/preparing-for-baby` shows the two new Getting-ready cards and the new Practical safety and planning group with three distinct thumbnails; no adjacent-card image collisions on the page.
-
-### Out of scope
-
-TTC, IVF, First Year, Toddler, Family; routes, sitemap, robots, redirects, SEO infra; calculators; TTC Journey; Pregnancy Map design; any other pregnancy topic config or image mapping.
-
-### Final report
-
-Files inspected/edited, assets used, duplicate check result, slugs/titles created, reviewer/source/image-wiring status, Preparing for baby topic page result, Pregnancy Map / Phase 10.1 / 10.2a / 10.2a.1 / TTC / IVF / SEO preservation notes, dash-rule result, typecheck result, and whether it is safe to proceed to TTC Phase 9.16 or run final Pregnancy QA.
+- Re-grep the 5 Phase 10.2a articles for em/en dashes: expect 0.
+- Re-grep the 5 for `lastUpdated: "July 2026"`: expect 5.
+- Run `bunx tsgo --noEmit`.
+- Return the full QA deliverable summary requested (hub/map/topic statuses, preservation checks, image QA, link QA, editorial safety, dash-rule, typecheck, safe-to-proceed to TTC 9.16).

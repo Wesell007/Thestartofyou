@@ -1,57 +1,52 @@
-## Phase 10.2a — Diet and Exercise Article Gap Batch
+## Phase 10.2a.1 — Pregnancy Topic Image QA Fix
 
-Publish 5 flagship pregnancy articles into `/pregnancy/diet-and-exercise`, wire images and grouping. No routes, sitemap, TTC, IVF, or other hub changes.
+Goal: Resolve the reported duplicate thumbnail on `/pregnancy/diet-and-exercise` (Foods to avoid vs Eating well appearing identical in Start here) and sweep for any other adjacent-thumbnail collisions across the six pregnancy topic pages, before Phase 10.2b.
 
-### Step 1 — Duplicate check (must run before creation)
-Grep `src/data/articleData.ts` for candidate slugs:
-- `caffeine-in-pregnancy`
-- `hydration-in-pregnancy`
-- `cravings-and-aversions-in-pregnancy` (also check `cravings-in-pregnancy`, `food-aversions`)
-- `pelvic-floor-exercises-in-pregnancy` (also `pelvic-floor`)
-- `exercise-safety-by-trimester` (also `exercise-in-pregnancy`, `exercise-by-trimester`)
+### Confirmed current state (verified by reading source)
 
-If any exact-match slug exists → stop and report before creating.
+- `PregnancyTopicPage.tsx` renders Start here cards via `resolveImage(item.href, item.image)` — same resolver used by grouped list rows. Start here already reads `HREF_IMAGE_MAP` correctly; no code split between the two card families.
+- In `pregnancyTopicData.ts` the diet-and-exercise `startHere` items are `foods-to-avoid`, `eating-well`, `moving-your-body` (no per-item `image` override).
+- Current `HREF_IMAGE_MAP` entries:
+  - `/articles/foods-to-avoid-in-pregnancy` → `imgFoodsToAvoid` (dedicated `article-hero-foods-to-avoid.jpg`)
+  - `/articles/eating-well-in-pregnancy` → `imgSecondEating` (shared generic `article-hero-second-eating.jpg`, also used by heartburn/constipation/antacids fallbacks)
+  - `/articles/key-nutrients-in-pregnancy` → `imgKeyNutrients` ✓
+  - `/articles/moving-your-body-in-pregnancy` → `imgMovementExercise` ✓ (also used by pelvic-pain and back-pain in Body)
 
-### Step 2 — Generate 5 hero images (premium tier)
-Save to `src/assets/`:
-- `article-hero-caffeine-pregnancy.jpg` — soft-lit warm mug, botanical accents, neutral tones
-- `article-hero-hydration-pregnancy.jpg` — glass carafe of water, herbs, cream light
-- `article-hero-cravings-aversions.jpg` — calm still life of fruit/bread, sage tones
-- `article-hero-pelvic-floor.jpg` — soft-lit expectant figure seated calmly, botanicals, no clinical framing
-- `article-hero-exercise-trimester.jpg` — gentle movement/walk in soft light, cream/sage palette
+Root cause of the user-reported duplicate: `eating-well-in-pregnancy` has no dedicated hero and reuses the shared `second-eating` asset, which is visually close enough to the food-still-life of `foods-to-avoid` that Start here reads as duplicates. Start here does read `HREF_IMAGE_MAP`; the mapping just doesn't yet give `eating-well` a distinct asset.
 
-Style rules: soft light, sage/cream/warm, botanical detail, no brand names, no readable text, no clinical/fear imagery.
+### Fix
 
-### Step 3 — Author 5 flagship articles in `src/data/articleData.ts`
-Each follows the existing pregnancy flagship shape (matching e.g. `eating-well-in-pregnancy`) with:
-- slug, title, metaDescription, quickAnswer, readTime
-- `reviewedBy: "Jenny Joines"`, `lastUpdated: "July 2026"`
-- pregnancy journey/topic fields matching existing pregnancy articles
-- 5–6 keyTakeaways, 5–7 editorialSections, 3 faq items
-- relatedSlugs drawn only from live pregnancy slugs (`eating-well-in-pregnancy`, `foods-to-avoid-in-pregnancy`, `key-nutrients-in-pregnancy`, `moving-your-body-in-pregnancy`, `when-you-cant-face-food-in-pregnancy`, `complete-guide-to-morning-sickness`)
-- 3–5 structured sources (NHS, NICE, RCOG, Tommy's, GOV.UK)
-- hero image referencing the new asset
+1. Generate one new premium hero:
+   - `src/assets/article-hero-eating-well.jpg` — warm, editorial "eating well in pregnancy" still life clearly distinct from both `article-hero-foods-to-avoid.jpg` (cheese/olives on plate) and `article-hero-second-eating.jpg` (person holding quinoa bowl). Direction: a calm breakfast/lunch spread from above — wholegrain toast, fruit, yoghurt, leafy greens — soft daylight, cream/sage palette, botanical sprig, no faces, no readable text.
 
-Content intent per article as specified in the brief (caffeine limits framed in UK guidance terms; hydration cues + nausea/heat/exercise; cravings/aversions with no shame; pelvic floor awareness + signpost to pelvic health physio; trimester-shift movement guidance + warning signs).
+2. `src/components/pregnancy/PregnancyTopicPage.tsx`
+   - Import `imgEatingWell` from the new asset.
+   - Point `/articles/eating-well-in-pregnancy` at `imgEatingWell` in `HREF_IMAGE_MAP`.
 
-Editorial guardrails: UK English, no em dashes, calm hedged language ("may/might/can/often/usually"), signpost midwife/GP/pharmacist/clinician, no personalised advice.
+3. Adjacent-collision sweep for the six topic pages (Start here row + each grouped column's first ~4 items). Where two visible adjacent cards resolve to the same asset, swap one to a different already-imported asset that still fits the topic. Candidates to check based on current map:
+   - **Body**: `stages-of-labour` and `shortness-of-breath` both use `imgThirdMovement`; `back-pain` and `swelling` both use `imgBodyShifts`; `round-ligament-pain` and `watery-discharge` both use `imgSleep`. Only fix if they land adjacent within the same visible group.
+   - **Health-and-safety**: `paracetamol` and `medicines` both use `imgMedicines`; `antibiotics` and `hay-fever` both use `imgLifestyle`. Fix only if adjacent in the rendered group.
+   - **Preparing-for-baby**: `writing-a-birth-plan` and `birth-preferences` both use `imgBirthPreferences`; `what-happens-if-labour-doesnt-start` and Body's `braxton-hicks` share `imgSignsLabour` but are on different pages.
+   - **Baby / Feelings / Diet-and-exercise**: re-check after the eating-well swap.
 
-### Step 4 — Update `src/data/pregnancyTopicData.ts` (diet-and-exercise topic)
-Add new slugs to existing groups (preserve Phase 10.1 structure):
-- **Eating well** — add `caffeine-in-pregnancy`, `hydration-in-pregnancy`
-- **Movement and exercise** — add `pelvic-floor-exercises-in-pregnancy`, `exercise-safety-by-trimester`
-- **When food feels hard** — add `cravings-and-aversions-in-pregnancy`
+   For each real adjacent collision found, remap one entry to the nearest topically-appropriate already-imported asset (e.g. swap `stages-of-labour` from `imgThirdMovement` to `imgSignsLabour`; swap `paracetamol-in-pregnancy` from `imgMedicines` to `imgLifestyle` if it sits next to `medicines-in-pregnancy`). No new assets beyond the one above.
 
-If group keys differ from these labels, match to the existing Phase 10.1 group ids and rename/create only the minimum needed to hold the new items in curated form.
+### Explicitly out of scope
 
-### Step 5 — Update `src/components/pregnancy/PregnancyTopicPage.tsx`
-Import the 5 new assets and add entries to `HREF_IMAGE_MAP` mapping each new article href to its own hero image. Preserve all Phase 10.1 mappings.
+- No changes to article copy, routes, SEO, sitemap, robots, redirects.
+- No changes to TTC or IVF files.
+- No structural changes to `pregnancyTopicData.ts` groups or ordering (image map only, in the topic page component).
+- No changes to tool logic or calculator formulas.
 
-### Step 6 — Verify
-- `bunx tsgo --noEmit` clean
-- Spot-check `/pregnancy/diet-and-exercise` shows 5 new cards in the right groups with distinct images
-- Confirm each new article route renders via the standard `/articles/:slug` flagship path
-- Confirm Pregnancy Map, other pregnancy topics, TTC, IVF, sitemap, robots, routes, SEO files untouched
+### Verification
 
-### Deliverable summary at end
-Report files inspected/edited, assets created, duplicate check result, slugs/titles, reviewer + source status, image wiring, topic page result, preservation checks, dash-rule result, tsgo result, and readiness for Phase 10.2b.
+- Confirm Start here on `/pregnancy/diet-and-exercise` now shows three visibly distinct images (foods-to-avoid = cheese still life; eating-well = new wholesome spread; moving-your-body = movement image).
+- Walk each of `/pregnancy/body`, `/pregnancy/baby`, `/pregnancy/feelings`, `/pregnancy/health-and-safety`, `/pregnancy/diet-and-exercise`, `/pregnancy/preparing-for-baby` and confirm no two adjacent visible cards (Start here row or grouped list rows) share the same thumbnail.
+- Run `bunx tsgo --noEmit`.
+
+### Report at end
+
+- Whether the diet-and-exercise duplicate is fixed and Start here reads the intended mapping.
+- List of any other adjacent duplicates found and how each was remapped.
+- Files edited and asset created.
+- Typecheck result.

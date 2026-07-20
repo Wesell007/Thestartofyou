@@ -59,6 +59,7 @@ import imgPreparingCard from "@/assets/preparing-card.jpg";
 import imgGuidancePreparing from "@/assets/guidance-preparing.jpg";
 import imgGuidanceEmotional from "@/assets/guidance-card-emotional.jpg";
 // New Phase 10.1 assets — distinct topic thumbnails
+import imgEatingWell from "@/assets/article-hero-eating-well.jpg";
 import imgFoodsToAvoid from "@/assets/article-hero-foods-to-avoid.jpg";
 import imgKeyNutrients from "@/assets/article-hero-key-nutrients.jpg";
 import imgCaffeine from "@/assets/article-hero-caffeine-pregnancy.jpg";
@@ -202,7 +203,7 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/reduced-movements-in-pregnancy": imgThirdMovement,
   "/articles/baby-hiccups-in-the-womb": imgSecondMovement,
   "/articles/measuring-big-or-small-in-pregnancy": imgPregnancyBump,
-  "/articles/growth-scans-in-pregnancy": imgTestsScans,
+  "/articles/growth-scans-in-pregnancy": imgAnatomyScan,
   "/articles/cord-around-the-neck-in-pregnancy": imgAnatomyScan,
   // Feelings
   "/articles/emotional-wellbeing-pregnancy": imgEmotionalFirstTri,
@@ -236,7 +237,7 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/foods-to-avoid-in-pregnancy": imgFoodsToAvoid,
   "/articles/weight-changes-in-pregnancy": imgBodyShifts,
   // Diet & exercise
-  "/articles/eating-well-in-pregnancy": imgSecondEating,
+  "/articles/eating-well-in-pregnancy": imgEatingWell,
   "/articles/key-nutrients-in-pregnancy": imgKeyNutrients,
   "/articles/caffeine-in-pregnancy": imgCaffeine,
   "/articles/hydration-in-pregnancy": imgHydration,

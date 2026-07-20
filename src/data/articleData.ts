@@ -20951,6 +20951,923 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── TESTING TOO EARLY ────────────────────────────────────────────────────
+  {
+    slug: "testing-too-early",
+    title: "Testing too early",
+    metaDescription: "Why testing before a missed period can give unclear or negative results, how hCG builds up, and how to think about retesting calmly.",
+    quickAnswer: "A pregnancy test looks for hCG in urine. In early pregnancy hCG usually rises gradually after implantation, and it may take several more days to reach a level a home test can pick up. Testing before your period is due can give a negative result even in a cycle that later turns positive. Most tests are more reliable from the day of your expected period, and clearer again a few days after that.",
+    standfirst: "Testing early rarely gives a calmer answer. It often gives an earlier version of the same wait.",
+    howThisFeels: [
+      "Desperate to know sooner",
+      "Talking yourself into just one more test",
+      "Not trusting a negative but not trusting a positive either",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "hCG rises gradually", body: "After implantation, hCG starts at a low level and often roughly doubles every 48 hours. It needs to reach a home test's detection threshold before a line will show." },
+        { heading: "Implantation timing varies", body: "Implantation itself may happen anywhere from around 6 to 12 days after ovulation, so two people at the same cycle day can be at very different points in their hCG rise." },
+        { heading: "Test sensitivity varies", body: "Different home tests are calibrated to different hCG thresholds. Early-detection tests may pick up lower levels, but results tend to be less reliable the further you test from a missed period." },
+      ],
+      lessCauses: [
+        { heading: "Later ovulation than expected", body: "If ovulation happened later in the cycle than assumed, you may be testing earlier in real terms than the calendar suggests." },
+        { heading: "Diluted urine", body: "Drinking a lot of fluid before testing may dilute hCG in urine. First morning urine tends to give the strongest signal." },
+      ],
+      whyItVaries: "How early a test can show anything depends on when implantation happened, how quickly hCG rises, the sensitivity of the test, and how concentrated the urine is on the day.",
+    },
+    timing: {
+      whenStarts: "Some early-detection tests may pick up hCG a few days before an expected period.",
+      whenEases: "By around a week after a missed period, most true pregnancies show a clearer positive.",
+    },
+    whatItFeelsLike: [
+      "Waiting for the timer with a held breath",
+      "A negative that does not feel final",
+      "The urge to test again the next morning",
+    ],
+    whatThisMeans: "A negative test before your period is due is not a confirmed answer, and a very faint line at that stage can be hard to read. Waiting until your period is due, or a few days after, usually gives a more trustworthy result.",
+    normal: [
+      "Negative early tests followed by a positive a few days later",
+      "Faint lines that need retesting to become clearer",
+      "Feeling drawn to test again even when you know it may be too soon",
+    ],
+    seekSupport: [
+      "No period and repeated negative tests for more than two weeks past your expected date",
+      "Any positive test with heavy bleeding or severe one-sided pain",
+      "Cycles that are consistently very irregular",
+    ],
+    disclaimer: "This is general guidance and not a diagnosis. Speak to a pharmacist or GP if results are consistently confusing or if you have any concerns.",
+    whatYouCanDo: [
+      { action: "Wait until the day of your expected period if you can", reason: "It is the simplest way to give a result you can trust." },
+      { action: "Use first morning urine when you do test", reason: "hCG tends to be more concentrated then, especially early on." },
+      { action: "Retest in 48 to 72 hours if the result is unclear", reason: "hCG often rises noticeably in that time in early pregnancy." },
+      { action: "Set a testing limit for yourself", reason: "Repeated early tests often add stress without adding clarity." },
+    ],
+    whatHappensNext: "A clear positive usually leads to contacting a GP or midwife to register. A persistent negative with no period after a couple of weeks is worth a GP check to look at cycle patterns.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "When to take a pregnancy test", href: "/articles/when-to-take-a-pregnancy-test" },
+        { label: "The two week wait", href: "/articles/two-week-wait" },
+        { label: "Faint positive pregnancy test", href: "/articles/faint-positive-pregnancy-test" },
+      ],
+    },
+    aiPrompts: [
+      "How early can I take a pregnancy test?",
+      "Can a test be wrong if I test before my period?",
+      "When should I retest after a negative?",
+    ],
+    captureIntro: "The day you tested, and how it felt, is worth remembering gently.",
+    topic: undefined,
+    journey: ["trying-to-conceive"],
+    topics: ["timelines"],
+    relatedSlugs: [
+      "when-to-take-a-pregnancy-test",
+      "negative-test-but-no-period",
+      "evaporation-line-or-faint-positive",
+      "two-week-wait",
+      "faint-positive-pregnancy-test",
+    ],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-testing-too-early.jpg", import.meta.url).href,
+      alt: "A blank notebook and warm cup of tea on soft cream linen, quiet morning light.",
+    },
+    sources: [
+      { label: "Doing a pregnancy test", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/doing-a-pregnancy-test/" },
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Pregnancy tests", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/early-pregnancy/pregnancy-tests" },
+    ],
+    keyTakeaways: [
+      "hCG rises gradually after implantation and may take days to reach a level a home test can pick up.",
+      "Testing before a missed period can give a negative result even in a cycle that later turns positive.",
+      "Most tests are more reliable from the day of the expected period, and clearer a few days after.",
+      "First morning urine tends to give the strongest signal.",
+      "Repeated early testing often adds stress without adding clarity.",
+    ],
+    faq: [
+      { question: "Can I get a positive test before my period is due?", answer: "Sometimes, especially with early-detection tests. Results are less reliable the further you test from your expected period, so it is often worth confirming a few days later." },
+      { question: "Why is my test negative when I feel pregnant?", answer: "You may be testing before hCG has risen enough to show, or ovulation may have happened later than you thought. Retesting in 48 to 72 hours often gives a clearer picture." },
+      { question: "Is a digital test better for early testing?", answer: "Digital tests are usually easier to read but may be a little less sensitive than the most sensitive line tests. Both benefit from waiting until closer to your expected period." },
+    ],
+    editorialSections: [
+      {
+        id: "why-early-tests-are-hard-to-read",
+        heading: "Why early tests are hard to read",
+        lead: "In early pregnancy, hCG can be present in tiny amounts long before a home test will notice it.",
+        paragraphs: [
+          "A home pregnancy test looks for a threshold amount of hCG in urine. In the days just after implantation, hCG is usually below that threshold. It may still be rising, and a test the following week may show what a test today could not.",
+          "This is why an early negative can be misleading. It reflects what the test can see right now, not the full picture of what may be happening in the body.",
+        ],
+      },
+      {
+        id: "how-hcg-builds-up",
+        heading: "How hCG builds up in the first days",
+        lead: "hCG rises in a gradual, mostly predictable pattern once implantation has happened.",
+        paragraphs: [
+          "In early pregnancy, hCG often roughly doubles every 48 hours. A test at 9 days past ovulation may read negative when the same test at 12 days past ovulation reads clearly positive.",
+          "Because implantation itself can happen at slightly different points from one cycle to another, two people at the same cycle day may be at very different places in that rise.",
+        ],
+        callout: { tone: "info", text: "Retesting in 48 to 72 hours often turns an unclear early result into a clearer one, in either direction." },
+      },
+      {
+        id: "waiting-can-reduce-confusion",
+        heading: "Why waiting can reduce confusion",
+        lead: "Testing later is often the calmer route, not the slower one.",
+        paragraphs: [
+          "By the day of an expected period, most true pregnancies will show a positive on a standard home test. A few more days after that adds further confidence.",
+          "Waiting rarely feels natural in the middle of a two week wait, but it usually replaces several unclear results with one clearer one.",
+        ],
+      },
+      {
+        id: "what-to-do-after-an-early-negative",
+        heading: "What to do after an early negative",
+        lead: "An early negative is not a final answer.",
+        paragraphs: [
+          "If your period has not arrived, retesting after 48 to 72 hours with first morning urine is a reasonable next step. If cycles are irregular, giving it a few more days before retesting can help.",
+          "If a full period arrives, the cycle has almost certainly not led to pregnancy this time. If there is still no period after a couple of weeks past your expected date, a GP check can help look at cycle patterns.",
+        ],
+      },
+      {
+        id: "managing-the-urge-to-keep-testing",
+        heading: "Managing the urge to keep testing",
+        lead: "Testing loops rarely help, and they often make the wait harder.",
+        paragraphs: [
+          "It can help to decide in advance how often you will test, and to keep tests out of easy reach in between. Some people find that setting a single planned test date, such as the morning of a missed period, lowers the daily pull.",
+          "If testing is starting to feel heavy, stepping back for a cycle is not giving up. It is a way of protecting the calmer parts of trying to conceive.",
+        ],
+        callout: { tone: "reassurance", text: "You are allowed to slow this down. Waiting a couple more days rarely changes an outcome, and often changes how the wait feels." },
+      },
+    ],
+  },
+
+  // ─── NEGATIVE TEST BUT NO PERIOD ──────────────────────────────────────────
+  {
+    slug: "negative-test-but-no-period",
+    title: "Negative test but no period",
+    metaDescription: "Common reasons for a negative pregnancy test when your period has not arrived, how testing timing matters, and when to speak to a GP.",
+    quickAnswer: "A negative pregnancy test with no period can happen for several ordinary reasons. Ovulation may have happened later than expected, the cycle itself may be longer this month, hCG may not yet be at a level a test can pick up, or urine may have been diluted. Retesting in a few days with first morning urine, or speaking to a GP after a couple of weeks with no period, is often the calmer next step.",
+    standfirst: "A negative test with no period is confusing rather than final. There are usually gentler explanations than the ones our minds reach for.",
+    howThisFeels: [
+      "Unsure whether to feel hopeful or resigned",
+      "Frustrated at not getting a clear answer",
+      "Worried something might be wrong with your cycle",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Later ovulation than expected", body: "If ovulation happened later in the cycle than usual, your period will also arrive later. A test may still be negative simply because you are earlier in real terms than the calendar suggests." },
+        { heading: "Longer cycle this month", body: "Cycle length can vary from month to month. A cycle that is a few days longer than average is common and does not usually mean anything is wrong." },
+        { heading: "hCG below the test threshold", body: "Even in early pregnancy, hCG can take a few days more to reach a level a home test can pick up. A negative today does not always stay a negative in a few days' time." },
+      ],
+      lessCauses: [
+        { heading: "Diluted urine", body: "Testing later in the day, or after drinking a lot of fluid, may dilute hCG in urine and lower the reading." },
+        { heading: "Cycle changes from stress, illness or travel", body: "Significant stress, illness, poor sleep, or long-distance travel can sometimes delay ovulation and therefore delay a period." },
+        { heading: "Other cycle factors", body: "Recent stopping of hormonal contraception, thyroid changes, PCOS, and significant weight changes can all affect cycle length and predictability." },
+      ],
+      whyItVaries: "How reliably a test reflects what is happening depends on where you are in the cycle, when ovulation happened, and how sensitive the test is. Cycle length itself is a range, not a fixed number.",
+    },
+    timing: {
+      whenStarts: "Many negative tests with no period happen in the first few days past an expected period date.",
+      whenEases: "Most cycles resolve one way or the other within a week or so. Anything longer than two weeks past your expected period is worth a GP conversation.",
+    },
+    whatItFeelsLike: [
+      "Checking underwear more than usual",
+      "Wanting to test again straight away",
+      "Trying not to spiral about worst-case explanations",
+    ],
+    whatThisMeans: "A negative test with no period usually means either that testing has happened too early, or that ovulation has shifted and the cycle is simply longer this month. It rarely means something serious, but persistent patterns are worth checking.",
+    normal: [
+      "A cycle that runs a few days longer than usual",
+      "A negative that becomes positive a few days later",
+      "Feeling unsettled by not having a clear answer",
+    ],
+    seekSupport: [
+      "No period and repeated negative tests for more than two weeks past your expected date",
+      "Cycles that are consistently very irregular across several months",
+      "Sudden changes to cycle length alongside other new symptoms",
+    ],
+    disclaimer: "This is general guidance and does not replace medical advice. Speak to your GP if a period is more than a couple of weeks late or if you have concerns about your cycle.",
+    whatYouCanDo: [
+      { action: "Retest in 3 to 5 days with first morning urine", reason: "It gives hCG a chance to rise if a pregnancy is developing." },
+      { action: "Track cycle dates gently", reason: "Even a simple record of period start dates can show whether cycles are usually predictable for you." },
+      { action: "Look after basics like sleep and food", reason: "Sleep, food, and stress can all affect when ovulation happens and therefore when a period arrives." },
+      { action: "Speak to your GP if a period is more than two weeks late", reason: "They can look at cycle patterns and any wider factors that may be affecting timing." },
+    ],
+    whatHappensNext: "In many cases the period arrives within a few days, or a repeat test shows a clearer answer. If neither happens, a GP appointment can help work out whether anything else is going on.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Testing too early", href: "/articles/testing-too-early" },
+        { label: "When to take a pregnancy test", href: "/articles/when-to-take-a-pregnancy-test" },
+        { label: "Late ovulation and TTC", href: "/articles/late-ovulation-and-ttc" },
+      ],
+    },
+    aiPrompts: [
+      "Why is my period late but my test is negative?",
+      "Can a late ovulation cause a late period?",
+      "How long should I wait before speaking to a GP?",
+    ],
+    captureIntro: "Uncertain cycles are worth noting gently, without turning them into a story.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines"],
+    relatedSlugs: [
+      "testing-too-early",
+      "when-to-take-a-pregnancy-test",
+      "late-ovulation-and-ttc",
+      "irregular-periods-and-trying-to-conceive",
+      "two-week-wait",
+    ],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-negative-test-no-period.jpg", import.meta.url).href,
+      alt: "Soft folded cream blanket and dried lavender on a window seat in gentle morning light.",
+    },
+    sources: [
+      { label: "Doing a pregnancy test", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/doing-a-pregnancy-test/" },
+      { label: "Irregular periods", publisher: "NHS", url: "https://www.nhs.uk/conditions/irregular-periods/" },
+      { label: "Periods and fertility in the menstrual cycle", publisher: "NHS", url: "https://www.nhs.uk/conditions/periods/fertility-in-the-menstrual-cycle/" },
+      { label: "Pregnancy tests", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/early-pregnancy/pregnancy-tests" },
+    ],
+    keyTakeaways: [
+      "A negative test with no period often reflects testing timing or a slightly longer cycle rather than something wrong.",
+      "Ovulation may happen later than usual, which delays the expected period.",
+      "hCG may still be below a home test's threshold in the first days past an expected period.",
+      "Retesting in 3 to 5 days with first morning urine is a reasonable next step.",
+      "If a period is more than two weeks late, a GP conversation can help.",
+    ],
+    faq: [
+      { question: "How late can a period be with a negative test?", answer: "Cycles can vary by a few days from month to month for many people. If a period is more than two weeks past its expected date with continued negative tests, it is worth speaking to a GP." },
+      { question: "Could I still be pregnant with a negative test?", answer: "Sometimes, especially in the first days past a missed period. Retesting in a few days with first morning urine often gives a clearer answer." },
+      { question: "Can stress delay a period?", answer: "Significant stress, illness, poor sleep, or big schedule changes can sometimes delay ovulation, which delays the period that follows." },
+    ],
+    editorialSections: [
+      {
+        id: "why-this-happens",
+        heading: "Why a test can be negative when a period has not arrived",
+        lead: "Most of the time, one of a small handful of ordinary explanations is at play.",
+        paragraphs: [
+          "The most common reason is testing timing. hCG rises gradually in early pregnancy, and in the first days past a missed period it may still be too low for a home test to pick up.",
+          "The next most common reason is that ovulation happened later in the cycle than expected. If ovulation shifts, so does the expected period. The cycle is not late so much as simply longer this month.",
+        ],
+      },
+      {
+        id: "how-cycles-can-vary",
+        heading: "How cycles can vary month to month",
+        lead: "Cycle length is a range for most people, not a fixed number.",
+        paragraphs: [
+          "A cycle that runs a few days longer than usual is common and does not usually point to anything worrying. Sleep, food, stress, illness, and travel can all nudge ovulation timing.",
+          "If cycles are usually regular for you and this one feels very different, it is worth noting. One unusual cycle is common. Repeated very unpredictable cycles across several months are more useful information for a GP.",
+        ],
+        callout: { tone: "info", text: "A simple record of period start dates over a few months is often more useful than any single test result." },
+      },
+      {
+        id: "when-to-retest",
+        heading: "When to retest and how to do it",
+        lead: "A calmer retest, later, usually gives a clearer answer than several rushed ones.",
+        paragraphs: [
+          "Waiting 3 to 5 days before retesting gives hCG a chance to rise if a pregnancy is developing. Using first morning urine tends to give the strongest reading, especially early on.",
+          "Using the same brand of test can make progression easier to compare, since different tests can look slightly different at the same hCG level.",
+        ],
+      },
+      {
+        id: "when-to-speak-to-a-gp",
+        heading: "When to speak to a GP",
+        lead: "A single unusual cycle is common. A pattern is worth a conversation.",
+        paragraphs: [
+          "If a period is more than about two weeks past its expected date with continued negative tests, a GP can help work out what is going on. They may want to talk about cycle history, medications, weight changes, or other symptoms.",
+          "Persistently irregular or absent periods across several months are also worth raising, especially if you are trying to conceive or thinking about it.",
+        ],
+        callout: { tone: "reassurance", text: "Most late periods with negative tests resolve within a week or two. Asking for a GP appointment is a reasonable step, not an alarm." },
+      },
+      {
+        id: "looking-after-yourself",
+        heading: "Looking after yourself in the wait",
+        lead: "The wait between an unclear result and a clearer answer is one of the harder parts of TTC.",
+        paragraphs: [
+          "It can help to plan gentle distractions for the next few days, and to set a single retest date rather than testing daily. Talking to a partner or friend about the uncertainty, rather than trying to hold it silently, often makes the wait lighter.",
+          "There is no perfect way to sit with a cycle that has gone off script. Small kindnesses, and permission to not know yet, are usually enough.",
+        ],
+      },
+    ],
+  },
+
+  // ─── EVAPORATION LINE OR FAINT POSITIVE ───────────────────────────────────
+  {
+    slug: "evaporation-line-or-faint-positive",
+    title: "Evaporation line or faint positive",
+    metaDescription: "Why faint lines and evaporation lines can be confusing, how the reading window matters, and when to retest or speak to a pharmacist or GP.",
+    quickAnswer: "Faint lines are one of the most confusing parts of home pregnancy testing. A pink line that appears inside the test's stated reading window is usually a true positive at a low hCG level. A grey, colourless, or shadow-like line that appears after the reading window has passed is more often called an evaporation line, and is not usually a positive. Retesting in 48 to 72 hours with first morning urine often gives a clearer answer.",
+    standfirst: "Reading a faint line on a home test is one of the most disorientating moments in trying to conceive. Timing and colour matter more than most instructions make clear.",
+    howThisFeels: [
+      "Squinting at the test under different lights",
+      "Photographing it, showing others, hoping for a second opinion",
+      "Hopeful and afraid in the same breath",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "The reading window matters", body: "Home tests are designed to be read within a specific time window, often around 3 to 5 minutes. Lines that appear after that window are more likely to be evaporation lines rather than true positives." },
+        { heading: "Pink versus grey", body: "True positive lines usually have some pink or coloured dye. Evaporation lines tend to be grey, colourless, or shadow-like, caused by urine drying on the test strip." },
+        { heading: "Test sensitivity varies", body: "Different brands are calibrated to different hCG thresholds. The same hCG level can look faintly positive on one test and clearer on another." },
+      ],
+      lessCauses: [
+        { heading: "Diluted urine", body: "Drinking a lot of fluid before testing may dilute hCG. First morning urine often produces a clearer line at the same stage of pregnancy." },
+        { heading: "Very early testing", body: "Testing before a missed period, or in the first day or two after, may show a faint line simply because hCG is still low." },
+        { heading: "Chemical pregnancy", body: "A faint line that fades over the following days, or does not darken with retesting, can sometimes point to a very early loss known as a chemical pregnancy." },
+      ],
+      whyItVaries: "Faint lines depend on hCG level, urine concentration, test sensitivity, and whether the test is read inside its stated window. Two tests on the same day can look different for entirely ordinary reasons.",
+    },
+    timing: {
+      whenStarts: "Faint lines are most common in the first few days around an expected period.",
+      whenEases: "Retesting 48 to 72 hours later often makes a true positive clearer.",
+    },
+    whatItFeelsLike: [
+      "A line you can only see at certain angles",
+      "A line that is pink in some photos and grey in others",
+      "A line that darkens on the next test, or does not",
+    ],
+    whatThisMeans: "A pink line inside the reading window is usually a true positive, even faintly. A grey or shadow-like line outside the reading window is usually not. Retesting is a fair way to move from unclear to clearer.",
+    normal: [
+      "A faint positive that darkens over 48 to 72 hours",
+      "Needing to retest for confidence",
+      "A digital test still reading not pregnant while a sensitive line test shows a faint line",
+    ],
+    seekSupport: [
+      "A faint line that fades alongside bleeding heavier than a normal period",
+      "Severe one-sided pain with any positive test",
+      "Repeated faint positives followed by early bleeding",
+    ],
+    disclaimer: "This is general guidance. This article does not interpret a specific test. Speak to a pharmacist, GP, or NHS 111 if you have heavy bleeding, severe pain, or an unclear result that is not resolving.",
+    whatYouCanDo: [
+      { action: "Read the test inside its stated window", reason: "Lines that appear later are more likely to be evaporation lines." },
+      { action: "Retest in 48 to 72 hours with first morning urine", reason: "A true positive usually darkens as hCG rises." },
+      { action: "Use the same brand of test for comparison", reason: "Different tests have different dye intensities, which can make progression harder to judge across brands." },
+      { action: "Consider a digital test after another day or two", reason: "A digital reading removes some of the line-reading guesswork, though it may be slightly less sensitive." },
+      { action: "Ask a pharmacist for guidance", reason: "They can talk you through what different results tend to mean without interpreting your specific test." },
+    ],
+    whatHappensNext: "If the line darkens with retesting, the next usual step is contacting a GP or midwife to register. If it fades or bleeding starts, speaking to a GP is a reasonable step. Chemical pregnancies are common and rarely need treatment, but support is available.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Faint positive pregnancy test", href: "/articles/faint-positive-pregnancy-test" },
+        { label: "Testing too early", href: "/articles/testing-too-early" },
+        { label: "Chemical pregnancy", href: "/articles/chemical-pregnancy" },
+      ],
+    },
+    aiPrompts: [
+      "Is a faint line always a positive?",
+      "What is an evaporation line?",
+      "How can I tell if a line is real?",
+    ],
+    captureIntro: "Even unclear moments in TTC are worth writing down gently, without pressure to interpret them.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines"],
+    relatedSlugs: [
+      "faint-positive-pregnancy-test",
+      "testing-too-early",
+      "when-to-take-a-pregnancy-test",
+      "chemical-pregnancy",
+      "two-week-wait",
+    ],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-evaporation-line.jpg", import.meta.url).href,
+      alt: "A small glass of water on a pale ceramic dish with a sprig of olive leaves on cream linen.",
+    },
+    sources: [
+      { label: "Doing a pregnancy test", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/doing-a-pregnancy-test/" },
+      { label: "Signs and symptoms of pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/signs-and-symptoms-of-pregnancy/" },
+      { label: "Pregnancy tests", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/early-pregnancy/pregnancy-tests" },
+    ],
+    keyTakeaways: [
+      "A pink line inside the test's reading window is usually a true positive, even faintly.",
+      "Grey, colourless, or shadow-like lines outside the window are more often evaporation lines.",
+      "Test sensitivity varies between brands, which can affect how the same hCG level looks.",
+      "Retesting in 48 to 72 hours with first morning urine often gives a clearer picture.",
+      "A pharmacist or GP can help if results are consistently unclear.",
+    ],
+    faq: [
+      { question: "How do I know if a faint line is real?", answer: "A pink line that appears inside the test's stated reading window is usually a true positive at low hCG. A retest in 48 to 72 hours often shows whether the line is darkening." },
+      { question: "Why does a line appear after the reading window?", answer: "Urine drying on the test strip can sometimes leave a faint mark called an evaporation line. These are usually grey or colourless rather than pink and are not usually true positives." },
+      { question: "Should I trust a digital test more?", answer: "Digital tests are often easier to read but may be a little less sensitive. If a sensitive line test shows a faint positive, a digital test may still read not pregnant for a couple of days." },
+    ],
+    editorialSections: [
+      {
+        id: "reading-inside-the-window",
+        heading: "Why the reading window matters",
+        lead: "The stated time window on a home test is not a suggestion.",
+        paragraphs: [
+          "Home tests are designed to be read within a specific number of minutes, often around 3 to 5. Inside that window, a line is much more likely to reflect the presence of hCG.",
+          "Outside the window, a line can appear as urine dries on the strip. These are often called evaporation lines and are usually grey, colourless, or shadow-like rather than pink.",
+        ],
+      },
+      {
+        id: "brands-and-sensitivity",
+        heading: "How different brands and sensitivities behave",
+        lead: "Not all tests are calibrated to the same hCG threshold.",
+        paragraphs: [
+          "A more sensitive test may show a positive at a lower hCG level than a less sensitive one. The same person, testing on the same day, can see different results across brands.",
+          "This is not usually a sign that either test is wrong. It is a reminder that a single result is one snapshot, not a final answer.",
+        ],
+        callout: { tone: "info", text: "Using the same brand of test when retesting can make it easier to see whether a line is darkening over time." },
+      },
+      {
+        id: "why-lines-can-be-unclear",
+        heading: "Why lines can be unclear even in a true pregnancy",
+        lead: "Faint lines are common in the earliest days.",
+        paragraphs: [
+          "In the first days of a pregnancy, hCG is often only just crossing the threshold a home test can pick up. A faint but genuine line is common at that stage.",
+          "Diluted urine, older tests, and testing later in the day can all make a real positive look fainter than it is. Retesting with first morning urine often shows the difference.",
+        ],
+      },
+      {
+        id: "when-to-repeat-a-test",
+        heading: "When to repeat a test",
+        lead: "Retesting is often the calmest next step, not a sign of doubt.",
+        paragraphs: [
+          "Waiting 48 to 72 hours before retesting gives hCG a chance to rise if a pregnancy is developing. In a healthy early pregnancy, a repeat line often looks clearly darker.",
+          "If a line does not darken across a few tests, or fades alongside bleeding, that is worth speaking to a GP about. It does not mean you did anything wrong.",
+        ],
+      },
+      {
+        id: "when-to-speak-to-a-clinician",
+        heading: "When to speak to a pharmacist, GP, or clinic",
+        lead: "You are not expected to work this out alone.",
+        paragraphs: [
+          "A pharmacist can talk you through how different tests behave and how to think about retesting, without interpreting a specific result. A GP can help if bleeding, pain, or repeatedly unclear results are causing worry.",
+          "If a positive test is followed by heavy bleeding, severe one-sided pain, or feeling very unwell, contacting NHS 111 or a GP the same day is a reasonable step.",
+        ],
+        callout: { tone: "reassurance", text: "You are allowed to ask for help with an unclear test. It does not mean you are overreacting." },
+      },
+    ],
+  },
+
+  // ─── TWO WEEK WAIT SYMPTOMS ───────────────────────────────────────────────
+  {
+    slug: "two-week-wait-symptoms",
+    title: "Two week wait symptoms",
+    metaDescription: "Why symptoms in the two week wait can overlap with normal cycle symptoms, what progesterone does, and why symptoms alone cannot confirm pregnancy.",
+    quickAnswer: "In the two week wait, many people notice symptoms such as breast tenderness, cramping, tiredness, and mild nausea. Most of these are caused by progesterone, which rises in the second half of every cycle whether or not conception has happened. This is why symptoms alone cannot confirm pregnancy. A test taken from around the day of your expected period usually gives a more reliable answer.",
+    standfirst: "The wait between ovulation and testing is loud. Symptoms in this window are real, but they rarely mean what our minds want them to mean.",
+    howThisFeels: [
+      "Scanning your body for signs, minute by minute",
+      "Noticing symptoms you would normally miss",
+      "Second-guessing every twinge",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Progesterone rises after ovulation", body: "In the second half of every cycle, progesterone rises whether or not conception has happened. It is a common cause of many two week wait symptoms, from tender breasts to mild cramping and tiredness." },
+        { heading: "PMS and early pregnancy overlap", body: "Because both PMS and early pregnancy involve high progesterone, many symptoms feel very similar. This is not a sign that something is being missed. It is how the body is designed to work." },
+        { heading: "Symptom awareness increases", body: "During the wait, most people pay closer attention to their bodies than usual. Symptoms that would normally pass unnoticed suddenly feel meaningful, even when they are the same as any other cycle." },
+      ],
+      lessCauses: [
+        { heading: "Recent illness or poor sleep", body: "Tiredness, mild nausea, and headaches can all follow ordinary things like a virus, disrupted sleep, or a stressful week." },
+        { heading: "Changes in food, caffeine or alcohol", body: "Cutting caffeine or alcohol, or eating differently, can cause headaches or nausea that get read as pregnancy signs." },
+      ],
+      whyItVaries: "Everyone experiences their luteal phase differently, and the same person can have different symptoms from one cycle to another. This is why symptoms rarely give a clear answer on their own.",
+    },
+    timing: {
+      whenStarts: "Symptoms from rising progesterone usually appear from around 3 to 7 days past ovulation.",
+      whenEases: "Symptoms often ease around the time a period arrives, or continue if a cycle leads to pregnancy.",
+    },
+    whatItFeelsLike: [
+      "Breast tenderness that comes and goes",
+      "Cramping that could be a period arriving or not",
+      "Tiredness that feels heavier than usual",
+    ],
+    whatThisMeans: "Symptoms in the two week wait can be helpful for noticing your cycle, but they cannot confirm pregnancy on their own. A test taken from around the day of your expected period, or a few days after, is usually a more reliable answer.",
+    normal: [
+      "Cycle after cycle where symptoms feel similar whether or not conception happens",
+      "Symptoms appearing and easing without a clear pattern",
+      "A cycle where you notice almost no symptoms at all",
+    ],
+    seekSupport: [
+      "Severe one-sided pain, especially if you have a positive test",
+      "Heavy or unusual bleeding that is not a normal period for you",
+      "Symptoms that feel very different from your usual cycles across several months",
+    ],
+    disclaimer: "This is general guidance. Speak to a GP if you have severe pain, unusual bleeding, or symptoms that feel very different from your usual cycles.",
+    whatYouCanDo: [
+      { action: "Notice symptoms without turning them into predictions", reason: "It keeps the wait lighter, and it protects you from small disappointments." },
+      { action: "Wait until at least the day of your expected period to test", reason: "It is the most reliable way to get a clearer answer." },
+      { action: "Keep gentle routines going", reason: "Sleep, food, and time outdoors help the wait feel less all-consuming." },
+      { action: "Talk to a partner or friend about the wait", reason: "Sharing the load often makes the days feel shorter." },
+    ],
+    whatHappensNext: "By the day of an expected period, most true pregnancies show on a home test. If a period arrives, symptoms usually ease within a day or two. If neither happens, retesting in a few days can help.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "The two week wait", href: "/articles/two-week-wait" },
+        { label: "Coping with the two week wait", href: "/articles/coping-with-the-two-week-wait" },
+        { label: "When to take a pregnancy test", href: "/articles/when-to-take-a-pregnancy-test" },
+      ],
+    },
+    aiPrompts: [
+      "What symptoms can I have in the two week wait?",
+      "Can symptoms tell me I am pregnant?",
+      "Why do PMS and early pregnancy feel so similar?",
+    ],
+    captureIntro: "The way this wait feels is worth remembering, more than any single symptom is.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines", "emotional-wellbeing"],
+    relatedSlugs: [
+      "two-week-wait",
+      "coping-with-the-two-week-wait",
+      "spotting-during-the-two-week-wait",
+      "when-to-take-a-pregnancy-test",
+      "testing-too-early",
+    ],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-two-week-wait-symptoms.jpg", import.meta.url).href,
+      alt: "An open blank journal beside a warm cup of tea and a small sprig of chamomile in soft daylight.",
+    },
+    sources: [
+      { label: "Signs and symptoms of pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/signs-and-symptoms-of-pregnancy/" },
+      { label: "Periods and fertility in the menstrual cycle", publisher: "NHS", url: "https://www.nhs.uk/conditions/periods/fertility-in-the-menstrual-cycle/" },
+      { label: "Early pregnancy symptoms", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/early-pregnancy/pregnancy-symptoms" },
+    ],
+    keyTakeaways: [
+      "Progesterone rises after ovulation whether or not conception has happened, causing many two week wait symptoms.",
+      "PMS and early pregnancy share many of the same signs, which is why symptoms alone cannot confirm pregnancy.",
+      "Symptom awareness usually rises during the wait, which can make ordinary sensations feel significant.",
+      "A test from around the day of your expected period is more reliable than symptoms.",
+      "Severe pain or unusual bleeding is worth speaking to a GP about.",
+    ],
+    faq: [
+      { question: "Are two week wait symptoms a sign of pregnancy?", answer: "They can be, but they can also be the effects of progesterone in any luteal phase. Symptoms alone cannot confirm pregnancy. A test from around the day of your expected period is more reliable." },
+      { question: "Why do my symptoms feel exactly like PMS?", answer: "Because both PMS and early pregnancy involve rising progesterone, the two often feel very similar. This overlap is common and not a sign that anything is being missed." },
+      { question: "Should I worry if I have no symptoms?", answer: "No. Many cycles that lead to pregnancy involve almost no early symptoms, and many that do not still bring symptoms. Symptom pattern is not a reliable guide either way." },
+    ],
+    editorialSections: [
+      {
+        id: "what-progesterone-does",
+        heading: "What progesterone does in the second half of the cycle",
+        lead: "Most two week wait symptoms are caused by hormones that rise in every cycle.",
+        paragraphs: [
+          "After ovulation, the ovary releases progesterone from the corpus luteum. Progesterone prepares the uterine lining, slightly raises body temperature, and can cause tender breasts, mild bloating, cramping, and tiredness.",
+          "Because progesterone rises whether or not conception has happened, these symptoms can appear in cycles that lead to pregnancy and in cycles that lead to a period.",
+        ],
+      },
+      {
+        id: "why-pms-and-pregnancy-overlap",
+        heading: "Why PMS and early pregnancy symptoms overlap",
+        lead: "The signs feel similar because the hormone driving many of them is similar.",
+        paragraphs: [
+          "In a cycle that leads to a period, progesterone falls a few days before the bleed starts. In a cycle that leads to pregnancy, progesterone stays high. The rise itself, though, feels much the same in both.",
+          "This is why breast tenderness, cramping, and tiredness are almost impossible to interpret on their own. They are usually a story about hormones, not about outcome.",
+        ],
+        callout: { tone: "info", text: "Symptoms alone rarely tell you what a test will say. A test from around the day of your expected period usually will." },
+      },
+      {
+        id: "common-symptoms",
+        heading: "Common symptoms in the two week wait",
+        lead: "A short list is more helpful than an endless one.",
+        paragraphs: [
+          "Common experiences include tender or heavy-feeling breasts, mild cramping, bloating, tiredness, changes in appetite, mild nausea, and shifts in mood. Any of these can appear in any luteal phase.",
+          "Less common experiences include noticing changes in taste or smell, or heightened sensitivity to certain foods. These can happen in early pregnancy, but they can also happen in cycles that do not lead to pregnancy.",
+        ],
+      },
+      {
+        id: "why-symptoms-cannot-confirm",
+        heading: "Why symptoms cannot confirm pregnancy",
+        lead: "Symptoms are context, not proof.",
+        paragraphs: [
+          "There is no symptom, or combination of symptoms, that reliably distinguishes a cycle that leads to pregnancy from one that does not. Some people notice many symptoms and are not pregnant. Others notice almost none and are.",
+          "This is not a failing of the body. It is simply how much progesterone and PMS overlap. A test is the tool for the question of whether a pregnancy is developing, not the body's sensations.",
+        ],
+      },
+      {
+        id: "when-to-test",
+        heading: "When it is worth testing",
+        lead: "Timing is more useful than symptom-watching.",
+        paragraphs: [
+          "Most home tests are more reliable from the day of an expected period. Testing a few days after that adds further confidence, especially if the first test was unclear.",
+          "If you test earlier, be prepared for a result that may not be final. Retesting in 48 to 72 hours often gives a clearer answer than repeated same-day tests.",
+        ],
+        callout: { tone: "reassurance", text: "You are not missing something by not being able to read your symptoms. They are genuinely hard to read." },
+      },
+    ],
+  },
+
+  // ─── SPOTTING DURING THE TWO WEEK WAIT ───────────────────────────────────
+  {
+    slug: "spotting-during-the-two-week-wait",
+    title: "Spotting during the two week wait",
+    metaDescription: "What light spotting after ovulation may mean, why implantation bleeding is often talked about with more certainty than it deserves, and when to seek advice.",
+    quickAnswer: "Light spotting in the days after ovulation can happen for several ordinary reasons. Some people notice a small amount of bleeding around the time implantation may be occurring, but many cycles that lead to pregnancy have no spotting at all, and many cycles with spotting do not lead to pregnancy. Very heavy bleeding, severe pain, or spotting alongside dizziness or feeling unwell is worth speaking to a GP about.",
+    standfirst: "Spotting in the two week wait rarely gives a clear answer on its own. Understanding what it can and cannot tell you helps keep the wait calmer.",
+    howThisFeels: [
+      "Checking underwear more than usual",
+      "Wondering if a small mark means everything or nothing",
+      "Trying not to read too much into it",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Cycle variation", body: "Some people notice light spotting in the second half of some cycles and not others. Small amounts of light bleeding without other symptoms are often just part of that person's pattern." },
+        { heading: "Progesterone changes", body: "Rising and falling progesterone can affect the uterine lining. In some cycles this may cause a small amount of light spotting a few days before a period is due." },
+        { heading: "Implantation possibility", body: "In some cycles that lead to pregnancy, a small amount of light bleeding may happen around the time implantation may be occurring, usually 6 to 12 days past ovulation. Many pregnancies do not involve any spotting at all." },
+      ],
+      lessCauses: [
+        { heading: "Sex or a cervical check", body: "The cervix is more easily irritated during the second half of the cycle. Sex, a smear, or a pelvic exam can sometimes cause a small amount of light spotting afterwards." },
+        { heading: "Infections or cervical changes", body: "Some infections or cervical changes can cause light spotting. If spotting is frequent or comes with other symptoms, it is worth mentioning to a GP." },
+        { heading: "Missed or changed contraception", body: "If you have recently stopped hormonal contraception, cycles can be less predictable for a few months, including occasional spotting." },
+      ],
+      whyItVaries: "Spotting is a common thing that can have several ordinary explanations. This is why it rarely means what our minds want it to mean.",
+    },
+    timing: {
+      whenStarts: "If spotting is going to happen in a cycle, it often shows up somewhere between ovulation and the day a period would be due.",
+      whenEases: "Light spotting usually settles within a day or two, or leads into a period.",
+    },
+    whatItFeelsLike: [
+      "A small pink or brown mark on wiping",
+      "A few hours of very light bleeding, then nothing",
+      "Uncertainty about whether a period is starting",
+    ],
+    whatThisMeans: "Light spotting in the two week wait can mean many things, and often means very little on its own. It is not proof that implantation has happened, and it is not proof that a cycle will not lead to pregnancy.",
+    normal: [
+      "Occasional light spotting a day or two before a period arrives",
+      "Small marks after sex in the second half of the cycle",
+      "Cycles where spotting shows up, and cycles where it does not",
+    ],
+    seekSupport: [
+      "Heavy bleeding, especially with cramping stronger than a normal period",
+      "Severe one-sided pain, particularly with a positive test",
+      "Feeling dizzy, faint, or unwell alongside bleeding",
+      "Frequent spotting outside of a period across several cycles",
+    ],
+    disclaimer: "This is general guidance. Speak to a GP or NHS 111 if bleeding is heavy, painful, or comes with feeling unwell.",
+    whatYouCanDo: [
+      { action: "Note the day and how heavy the spotting is", reason: "A simple note can help a GP if you decide to talk to one later." },
+      { action: "Avoid drawing conclusions about pregnancy from spotting alone", reason: "It is genuinely not reliable in either direction." },
+      { action: "Wait until an expected period date to test if you can", reason: "Testing before then is often too early for a clear answer." },
+      { action: "Contact a GP or NHS 111 if bleeding is heavy or painful", reason: "Especially if you have a positive test or feel unwell." },
+    ],
+    whatHappensNext: "In many cycles, light spotting is followed either by a period arriving or by things settling and a test giving an answer a few days later. Persistent unusual bleeding is worth a GP conversation.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
+        { label: "The two week wait", href: "/articles/two-week-wait" },
+        { label: "Coping with the two week wait", href: "/articles/coping-with-the-two-week-wait" },
+      ],
+    },
+    aiPrompts: [
+      "What does spotting in the two week wait mean?",
+      "Is spotting a sign of implantation?",
+      "When should I speak to a GP about spotting?",
+    ],
+    captureIntro: "Small changes in a cycle are worth noting gently, without turning them into a story.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines"],
+    relatedSlugs: [
+      "implantation-bleeding",
+      "two-week-wait",
+      "coping-with-the-two-week-wait",
+      "two-week-wait-symptoms",
+      "when-to-take-a-pregnancy-test",
+    ],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-spotting-two-week-wait.jpg", import.meta.url).href,
+      alt: "Soft folded cream and blush linen napkins beside a small terracotta bowl by a bright window.",
+    },
+    sources: [
+      { label: "Vaginal bleeding", publisher: "NHS", url: "https://www.nhs.uk/conditions/vaginal-bleeding/" },
+      { label: "Signs and symptoms of pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/signs-and-symptoms-of-pregnancy/" },
+      { label: "Bleeding in early pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/early-pregnancy/bleeding-early-pregnancy" },
+    ],
+    keyTakeaways: [
+      "Light spotting after ovulation can happen for several ordinary reasons.",
+      "Some cycles that lead to pregnancy involve a small amount of spotting around implantation timing, but many do not.",
+      "Spotting is not proof of implantation, and it does not rule pregnancy out.",
+      "Heavy bleeding, severe pain, or feeling unwell alongside spotting is worth speaking to a GP or NHS 111 about.",
+      "A test around the day of an expected period usually gives a clearer answer than reading spotting.",
+    ],
+    faq: [
+      { question: "Is spotting always implantation bleeding?", answer: "No. Light spotting after ovulation can happen for several ordinary reasons, and many pregnancies do not involve any spotting at all. It is not reliable as a sign of implantation." },
+      { question: "How much spotting is normal?", answer: "A small pink or brown mark, or a few hours of very light bleeding, is often within the range of a normal cycle. Heavier bleeding, or bleeding with pain, is worth speaking to a GP about." },
+      { question: "Should I still test if I am spotting?", answer: "You can, but a test taken around the day of your expected period is usually more reliable. Spotting itself does not confirm or rule out pregnancy." },
+    ],
+    editorialSections: [
+      {
+        id: "why-spotting-happens",
+        heading: "Why spotting can happen after ovulation",
+        lead: "Small amounts of bleeding in the second half of a cycle have several ordinary explanations.",
+        paragraphs: [
+          "Shifts in progesterone, sensitivity of the cervix, and small changes in the uterine lining can all cause light spotting in the days before a period is due. For some people this is a regular part of their cycle pattern.",
+          "Because spotting can come from several places, it is often more useful as a note about your own cycle than as a signal about outcome in any single month.",
+        ],
+      },
+      {
+        id: "implantation-timing-carefully",
+        heading: "Implantation timing, held carefully",
+        lead: "Some pregnancies involve a small amount of spotting around implantation. Many do not.",
+        paragraphs: [
+          "Implantation may happen anywhere from around 6 to 12 days after ovulation. In some cycles that lead to pregnancy, a small amount of light bleeding may appear around this time.",
+          "It is often lighter and shorter than a period, and does not usually involve cramping like a period. But spotting looking a certain way is not a reliable sign that implantation has happened.",
+        ],
+        callout: { tone: "info", text: "Spotting that looks like implantation bleeding does not confirm pregnancy, and no spotting at all does not rule it out." },
+      },
+      {
+        id: "cycle-variation",
+        heading: "Cycle variation is common",
+        lead: "Your cycle is allowed to look a little different from month to month.",
+        paragraphs: [
+          "Some people spot lightly around ovulation, others in the days before a period. Some months bring spotting when other months do not. This is often within an ordinary range.",
+          "A pattern of frequent unexplained spotting across many cycles is worth mentioning to a GP, especially if it comes with other changes.",
+        ],
+      },
+      {
+        id: "when-spotting-needs-advice",
+        heading: "When spotting needs medical advice",
+        lead: "There are situations where it is worth speaking to a GP or NHS 111 the same day.",
+        paragraphs: [
+          "Heavy bleeding, especially with cramping stronger than a normal period, is worth medical advice. Severe one-sided pain, particularly with a positive test, is also worth same-day advice as it may relate to ectopic pregnancy.",
+          "Feeling dizzy, faint, or unwell alongside any bleeding is a reason to speak to a clinician promptly.",
+        ],
+      },
+      {
+        id: "how-to-think-about-testing",
+        heading: "How to think about testing after spotting",
+        lead: "Spotting is not the reason to test earlier.",
+        paragraphs: [
+          "A test taken around the day of an expected period usually gives a clearer answer than a test taken earlier just because spotting has appeared. Testing too early often leads to a result that does not settle anything.",
+          "If a period arrives in the following day or two, the spotting was likely the start of that period. If it does not, retesting after a few days is a reasonable next step.",
+        ],
+        callout: { tone: "reassurance", text: "You do not have to interpret every mark. Waiting for a clearer signal is a reasonable, kind thing to do." },
+      },
+    ],
+  },
+
+  // ─── COPING WITH THE TWO WEEK WAIT ────────────────────────────────────────
+  {
+    slug: "coping-with-the-two-week-wait",
+    title: "Coping with the two week wait",
+    metaDescription: "Practical, calm support for the emotional side of the two week wait, including testing loops, symptom checking, routines, and partner communication.",
+    quickAnswer: "The two week wait is one of the harder parts of trying to conceive for many people. Symptom checking, testing loops, and forum reading can all quietly amplify the wait. Simple things such as setting a testing date, keeping gentle routines going, protecting boundaries with apps and forums, and talking to a partner or friend can make the days feel less all-consuming. There is no perfect way to wait, and needing support does not mean anything is wrong with you.",
+    standfirst: "The wait between ovulation and testing is where most of trying to conceive lives, emotionally. It deserves more care than it usually gets.",
+    howThisFeels: [
+      "Restless and impatient",
+      "Trying not to hope, and hoping anyway",
+      "Tired of thinking about it, unable to stop",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Uncertainty is hard", body: "The wait sits between action and answer. That kind of uncertainty is genuinely tiring, even for people who usually handle waiting well." },
+        { heading: "Testing loops and symptom checking", body: "Repeated early tests and constant symptom checking can quietly increase anxiety without giving new information. It is a common pattern, not a personal failing." },
+        { heading: "Forums and comparison", body: "TTC forums, apps, and social media can be helpful in small doses and heavy in large ones. Constant comparison often makes the wait feel louder." },
+      ],
+      lessCauses: [
+        { heading: "Past losses or long TTC journeys", body: "Previous losses, longer trying journeys, or fertility investigations can make each wait feel heavier. This is normal, and it deserves gentle support." },
+        { heading: "Life circumstances", body: "Work stress, family pressure, or difficult anniversaries can amplify how the wait feels in any given cycle." },
+      ],
+      whyItVaries: "The two week wait feels different in different cycles and different lives. There is no single right way to cope, and one cycle being harder does not mean the next will be.",
+    },
+    timing: {
+      whenStarts: "Emotional weight often builds a few days after ovulation, once the possibility of pregnancy feels most present.",
+      whenEases: "For many people the intensity eases once there is an answer, whether that is a positive test, a period, or a plan to try again.",
+    },
+    whatItFeelsLike: [
+      "Time moving more slowly than usual",
+      "Small tasks feeling harder than they should",
+      "A quiet hum of hope and fear underneath everything",
+    ],
+    whatThisMeans: "Struggling in the two week wait is common and not a sign that anything is wrong with you. Small changes to routine, testing habits, and how you use forums can make a real difference.",
+    normal: [
+      "Feeling more emotional than usual in the second half of the cycle",
+      "Wanting to test earlier than you know you should",
+      "Cycles where you feel calm, and cycles where you do not",
+    ],
+    seekSupport: [
+      "Persistent low mood, anxiety, or hopelessness that lasts beyond a cycle or two",
+      "Trying to conceive that is affecting sleep, work, or relationships significantly",
+      "Feeling unable to talk about it with anyone",
+    ],
+    disclaimer: "This is general guidance and not therapy. Speak to a GP or a fertility counsellor if the emotional weight of TTC is affecting your daily life.",
+    whatYouCanDo: [
+      { action: "Set one planned testing date per cycle", reason: "It reduces daily testing loops and gives your wait a clear edge." },
+      { action: "Keep a gentle daily routine", reason: "Sleep, food, and small daily anchors help the wait feel less all-consuming." },
+      { action: "Set boundaries with forums and apps", reason: "Time limits or short breaks often make the wait quieter." },
+      { action: "Talk to a partner or trusted friend about how it feels", reason: "Sharing the load usually makes it lighter." },
+      { action: "Have a small kindness planned for the day you test", reason: "Whichever way the result goes, having something soft in place helps." },
+    ],
+    whatHappensNext: "By the end of most two week waits, there is either a period, a positive test, or a plan to retest in a few days. Either way, having a plan for the next few days often helps as much as the answer itself.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "The two week wait", href: "/articles/two-week-wait" },
+        { label: "Two week wait symptoms", href: "/articles/two-week-wait-symptoms" },
+        { label: "When to ask for fertility help", href: "/articles/when-to-ask-for-fertility-help" },
+      ],
+    },
+    aiPrompts: [
+      "How do I cope with the two week wait?",
+      "Is it normal to feel this anxious in the two week wait?",
+      "How can I stop obsessing over symptoms?",
+    ],
+    captureIntro: "The way this wait feels is often worth writing down. Not to solve it, just to give it room.",
+    journey: ["trying-to-conceive", "support"],
+    topics: ["emotional-wellbeing", "timelines"],
+    relatedSlugs: [
+      "two-week-wait",
+      "two-week-wait-symptoms",
+      "spotting-during-the-two-week-wait",
+      "testing-too-early",
+      "when-to-ask-for-fertility-help",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-coping-two-week-wait.jpg", import.meta.url).href,
+      alt: "A soft cream armchair with a knitted throw, a warm mug and a small vase of eucalyptus in gentle morning light.",
+    },
+    sources: [
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Mental health when trying for a baby", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/planning-a-pregnancy/mental-wellbeing/mental-health-when-trying-baby" },
+      { label: "Getting pregnant: coping with the emotional side", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+    ],
+    keyTakeaways: [
+      "The two week wait is one of the harder parts of TTC for many people.",
+      "Testing loops and constant symptom checking often add stress without adding clarity.",
+      "Setting a single planned testing date and taking short breaks from forums often helps.",
+      "Talking to a partner or friend usually makes the wait feel lighter.",
+      "If the emotional weight of TTC is affecting daily life, a GP or fertility counsellor can help.",
+    ],
+    faq: [
+      { question: "How do I stop testing so early?", answer: "Setting a single planned test date per cycle, keeping tests out of easy reach, and having a small distraction for testing days can all help. If early testing is a way of coping with anxiety, talking to a GP or fertility counsellor may also help." },
+      { question: "Is it normal to feel this anxious?", answer: "Feeling more emotional or anxious in the two week wait is common, and often relates as much to uncertainty as to the outcome itself. Persistent low mood or anxiety across cycles is worth mentioning to a GP." },
+      { question: "How do I talk to my partner during the wait?", answer: "Simple check-ins often help. Naming that the wait feels loud, sharing what would help this cycle, and agreeing on small rituals for testing day can make you feel less alone in it." },
+    ],
+    editorialSections: [
+      {
+        id: "why-the-wait-is-hard",
+        heading: "Why the wait can be hard, even in a settled life",
+        lead: "The two week wait mixes hope, uncertainty, and no way to speed things up.",
+        paragraphs: [
+          "The wait comes after the part you can act on and before the part that gives you an answer. That kind of stretch is genuinely tiring, even for people who usually handle uncertainty well.",
+          "Waiting well is not a personality trait. It is a set of small habits that make the wait a little less loud.",
+        ],
+      },
+      {
+        id: "testing-loops",
+        heading: "Testing loops and symptom checking",
+        lead: "Both of these are common patterns, not failings.",
+        paragraphs: [
+          "Repeated early tests often lead to unclear results, which lead to more tests. Constant symptom checking can turn ordinary sensations into signals, which usually adds worry without adding clarity.",
+          "Naming these patterns as loops, rather than as evidence, often makes them easier to loosen.",
+        ],
+        callout: { tone: "info", text: "Choosing one planned testing date, and keeping tests out of easy reach until then, often lowers the pull to test early." },
+      },
+      {
+        id: "boundaries-with-forums-and-apps",
+        heading: "Setting boundaries with forums, apps, and social media",
+        lead: "These can be a real support in small doses and heavy in large ones.",
+        paragraphs: [
+          "TTC forums, apps, and social media can offer connection and information. They can also invite constant comparison, catastrophic examples, and small daily hits of anxiety.",
+          "Some people find that a short break, a time limit, or unfollowing specific accounts during the wait makes the days feel quieter.",
+        ],
+      },
+      {
+        id: "routines-and-anchors",
+        heading: "Routines, anchors, and gentle distraction",
+        lead: "Small daily structures often carry a lot of weight in a hard wait.",
+        paragraphs: [
+          "Regular sleep, meals at roughly usual times, short walks, time outside, and small daily rituals can all give the wait a shape it does not otherwise have.",
+          "Distraction is not the same as avoidance. Watching a familiar show, reading, or being with people who do not know you are in the wait can genuinely help.",
+        ],
+      },
+      {
+        id: "partner-communication",
+        heading: "Talking with a partner or trusted person",
+        lead: "Sharing the wait usually makes it lighter.",
+        paragraphs: [
+          "It can help to name to a partner or trusted friend that the wait feels heavy this cycle, and to say what would help. Sometimes that is more conversation, sometimes it is less, sometimes it is just company.",
+          "If you are trying alone, or without a supportive partner, a fertility counsellor or an online support space can help you feel less alone in it.",
+        ],
+        callout: { tone: "reassurance", text: "You are allowed to find this hard. It is one of the more emotionally demanding parts of trying to conceive." },
+      },
+      {
+        id: "when-ttc-feels-heavy",
+        heading: "When trying to conceive is starting to feel heavy",
+        lead: "Support exists, and asking for it is a reasonable step.",
+        paragraphs: [
+          "If the emotional weight of TTC is affecting your sleep, work, or relationships, or if low mood or anxiety is not easing between cycles, speaking to a GP is a reasonable step. Fertility counsellors and specialist charities can also help.",
+          "Needing that kind of support does not mean you are not coping. It usually means you are carrying something that was always going to be heavy, and you deserve help carrying it.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

@@ -165,6 +165,14 @@ const LIVE = {
   ageAndTryingToConceive: "/articles/age-and-trying-to-conceive",
   maleFertilityWhenTTC: "/articles/male-fertility-when-trying-to-conceive",
   movingFromTTCToIVF: "/articles/moving-from-ttc-to-ivf",
+
+  // Phase 9.16 (TTC pregnancy tests + two week wait expansion)
+  testingTooEarly: "/articles/testing-too-early",
+  negativeTestNoPeriod: "/articles/negative-test-but-no-period",
+  evaporationLineFaintPositive: "/articles/evaporation-line-or-faint-positive",
+  twoWeekWaitSymptoms: "/articles/two-week-wait-symptoms",
+  spottingTwoWeekWait: "/articles/spotting-during-the-two-week-wait",
+  copingTwoWeekWait: "/articles/coping-with-the-two-week-wait",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────
@@ -628,6 +636,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Timing your test",
         links: [
           { label: "When to take a pregnancy test", href: LIVE.whenToTest },
+          { label: "Testing too early", href: LIVE.testingTooEarly },
         ],
       },
       {
@@ -635,7 +644,14 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         description: "Interpreting unclear results and ambiguous symptoms.",
         links: [
           { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
+          { label: "Evaporation line or faint positive", href: LIVE.evaporationLineFaintPositive },
           { label: "Implantation bleeding", href: LIVE.implantationBleeding },
+        ],
+      },
+      {
+        label: "When the answer is not clear yet",
+        links: [
+          { label: "Negative test but no period", href: LIVE.negativeTestNoPeriod },
         ],
       },
       {
@@ -651,6 +667,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       "Is it implantation bleeding or my period?",
     ],
   },
+
 
   "two-week-wait": {
     slug: "two-week-wait",
@@ -691,7 +708,16 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Worries during the wait",
         description: "The emotional and physical questions that surface in these days.",
         links: [
+          { label: "Two week wait symptoms", href: LIVE.twoWeekWaitSymptoms },
+          { label: "Spotting during the two week wait", href: LIVE.spottingTwoWeekWait },
           { label: "Early pregnancy symptoms explained", href: LIVE.earlySymptoms },
+        ],
+      },
+      {
+        label: "Looking after yourself in the wait",
+        description: "Practical, calm support for the emotional side of these days.",
+        links: [
+          { label: "Coping with the two week wait", href: LIVE.copingTwoWeekWait },
         ],
       },
       {

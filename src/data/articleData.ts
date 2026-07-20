@@ -19492,7 +19492,7 @@ const articleDatabase: ArticleData[] = [
     title: "Caffeine in pregnancy: how much is safe, and where it hides",
     metaDescription: "How much caffeine is safe in pregnancy? UK guidance is 200mg a day. A calm look at where it comes from, why the limit exists, and how to cut down gently.",
     quickAnswer:
-      "UK guidance is to keep caffeine to around 200mg a day in pregnancy — roughly two mugs of instant coffee, one mug of filter coffee, or four cups of tea. Caffeine also appears in green tea, cola, energy drinks, chocolate, and some cold and flu remedies. Small, mindful amounts are fine; the aim is a steady daily total, not perfection.",
+      "UK guidance is to keep caffeine to around 200mg a day in pregnancy, roughly two mugs of instant coffee, one mug of filter coffee, or four cups of tea. Caffeine also appears in green tea, cola, energy drinks, chocolate, and some cold and flu remedies. Small, mindful amounts are fine; the aim is a steady daily total, not perfection.",
     howThisFeels: [
       "Suddenly noticing how much caffeine is in ordinary things",
       "Missing the ritual of a proper morning coffee",
@@ -19511,7 +19511,7 @@ const articleDatabase: ArticleData[] = [
     },
     timing: {
       whenStarts: "Guidance applies from the moment pregnancy is confirmed.",
-      whenEases: "The 200mg limit stays the same through all three trimesters. After birth, if you're breastfeeding, small amounts of caffeine still pass into milk — most babies tolerate it fine, but keeping it moderate can help sleep.",
+      whenEases: "The 200mg limit stays the same through all three trimesters. After birth, if you're breastfeeding, small amounts of caffeine still pass into milk, most babies tolerate it fine, but keeping it moderate can help sleep.",
     },
     whatItFeelsLike: ["A small daily loss of routine", "Occasional guilt about a stronger cup"],
     whatThisMeans:
@@ -19546,7 +19546,7 @@ const articleDatabase: ArticleData[] = [
     aiPrompts: [
       "Is 200mg of caffeine a day safe in pregnancy?",
       "How much caffeine is in a cup of tea vs coffee?",
-      "I had a strong coffee before I knew I was pregnant — is that okay?",
+      "I had a strong coffee before I knew I was pregnant, is that okay?",
     ],
     captureIntro: "Small daily habits like caffeine can quietly become a source of worry. Worth noting how it feels for you.",
     trimester: [1, 2, 3],
@@ -19554,7 +19554,7 @@ const articleDatabase: ArticleData[] = [
     journey: ["pregnancy"],
     topics: ["diet"],
     reviewedBy: "Jenny Joines",
-    lastUpdated: "April 2026",
+    lastUpdated: "July 2026",
     keyTakeaways: [
       "UK guidance is up to 200mg of caffeine a day in pregnancy",
       "That's roughly two mugs of instant coffee, one filter coffee, or four cups of tea",
@@ -19563,16 +19563,16 @@ const articleDatabase: ArticleData[] = [
       "Cutting down gradually tends to be easier than stopping suddenly",
     ],
     sources: [
-      "NHS — Foods to avoid in pregnancy",
-      "RCOG — Healthy eating and vitamin supplements in pregnancy",
-      "British Nutrition Foundation — Nutrition during pregnancy",
-      "Food Standards Agency — Caffeine and pregnancy",
+      "NHS, Foods to avoid in pregnancy",
+      "RCOG, Healthy eating and vitamin supplements in pregnancy",
+      "British Nutrition Foundation, Nutrition during pregnancy",
+      "Food Standards Agency, Caffeine and pregnancy",
     ],
     faq: [
-      { question: "How much caffeine is in a normal cup of coffee?", answer: "A mug of instant coffee has around 100mg. A mug of filter coffee can have 140mg or more. A small espresso shot has around 60mg. Sizes vary by cafe and brand, so a large latte can easily be 150–200mg on its own." },
-      { question: "Does decaf count towards the limit?", answer: "Decaf still contains a very small amount of caffeine — usually 2–5mg per cup — but this doesn't meaningfully add to your daily total. Decaf is a good way to keep the ritual without the caffeine." },
-      { question: "What about green tea?", answer: "Green tea does contain caffeine — roughly 30–50mg a cup. It counts towards your daily 200mg. High intakes of green tea may also affect folate absorption, so keeping it modest is sensible in the first trimester." },
-      { question: "I had strong coffee before I knew I was pregnant — should I worry?", answer: "No. Occasional exposure before you knew, or one stronger cup on any given day, is not linked to any specific harm. What matters is your ongoing daily average from here." },
+      { question: "How much caffeine is in a normal cup of coffee?", answer: "A mug of instant coffee has around 100mg. A mug of filter coffee can have 140mg or more. A small espresso shot has around 60mg. Sizes vary by cafe and brand, so a large latte can easily be 150 to 200mg on its own." },
+      { question: "Does decaf count towards the limit?", answer: "Decaf still contains a very small amount of caffeine, usually 2 to 5mg per cup, but this doesn't meaningfully add to your daily total. Decaf is a good way to keep the ritual without the caffeine." },
+      { question: "What about green tea?", answer: "Green tea does contain caffeine, roughly 30 to 50mg a cup. It counts towards your daily 200mg. High intakes of green tea may also affect folate absorption, so keeping it modest is sensible in the first trimester." },
+      { question: "I had strong coffee before I knew I was pregnant, should I worry?", answer: "No. Occasional exposure before you knew, or one stronger cup on any given day, is not linked to any specific harm. What matters is your ongoing daily average from here." },
     ],
     topic: "diet-and-exercise",
     standfirst: "How much caffeine is really safe in pregnancy, where it hides, and a gentle way to bring your daily total inside the UK limit.",
@@ -19595,8 +19595,8 @@ const articleDatabase: ArticleData[] = [
         heading: "Where caffeine actually lives",
         lead: "Most people underestimate how much caffeine is in a normal day.",
         paragraphs: [
-          "Rough guide, per cup or serving: instant coffee 100mg, filter coffee 140mg, espresso 60mg, tea 75mg, green tea 30–50mg, cola 40mg, energy drinks 80mg or more, plain dark chocolate around 25mg per 50g bar.",
-          "Cold and flu remedies, headache tablets, and pre-workout drinks can add a surprising amount. Always check the label before taking anything new in pregnancy — see medicines in pregnancy for more.",
+          "Rough guide, per cup or serving: instant coffee 100mg, filter coffee 140mg, espresso 60mg, tea 75mg, green tea 30 to 50mg, cola 40mg, energy drinks 80mg or more, plain dark chocolate around 25mg per 50g bar.",
+          "Cold and flu remedies, headache tablets, and pre-workout drinks can add a surprising amount. Always check the label before taking anything new in pregnancy, see medicines in pregnancy for more.",
         ],
       },
       {
@@ -19604,7 +19604,7 @@ const articleDatabase: ArticleData[] = [
         heading: "A gentle way to cut down",
         lead: "Reducing caffeine works better in small, steady steps than in a single dramatic change.",
         paragraphs: [
-          "Start by adding up an honest normal day — every drink, every square of chocolate, every tablet. Most people find they're either well under, or well over, what they'd guessed.",
+          "Start by adding up an honest normal day, every drink, every square of chocolate, every tablet. Most people find they're either well under, or well over, what they'd guessed.",
           "If you're over, swap one caffeinated drink a day for a decaf or herbal alternative. Keep the ritual (the mug, the pause, the milk) so it still feels like the drink you wanted. Weekly, not daily, changes tend to stick.",
         ],
         callout: {
@@ -19617,7 +19617,7 @@ const articleDatabase: ArticleData[] = [
         heading: "If you've already had more than the limit",
         lead: "A one-off higher intake, especially before you knew you were pregnant, is not linked to any specific harm.",
         paragraphs: [
-          "The 200mg guidance is about ongoing daily average. One day of two large lattes doesn't undo a pregnancy. What matters is the pattern from here — bringing things down to a steady low, not perfect.",
+          "The 200mg guidance is about ongoing daily average. One day of two large lattes doesn't undo a pregnancy. What matters is the pattern from here, bringing things down to a steady low, not perfect.",
           "If your usual intake has been much higher, reducing gradually now is worth doing. Speak to your midwife if you're relying on caffeine to manage fatigue that feels unmanageable, or if energy drinks have become a daily habit.",
         ],
       },
@@ -19630,7 +19630,7 @@ const articleDatabase: ArticleData[] = [
     title: "Hydration in pregnancy: why fluids matter and how much to aim for",
     metaDescription: "How much water in pregnancy? Around 8-10 cups (2-2.5 litres) a day. A calm guide to hydration cues, managing nausea, and drinks that count.",
     quickAnswer:
-      "In pregnancy, aim for roughly 2 to 2.5 litres of fluid a day — around 8 to 10 cups. Water is the most efficient, but milk, decaf drinks, herbal teas, and water-rich foods all count. Steady sipping through the day works better than trying to catch up in the evening. Thirst, headaches, and dark urine are usually the first cues you need more.",
+      "In pregnancy, aim for roughly 2 to 2.5 litres of fluid a day, around 8 to 10 cups. Water is the most efficient, but milk, decaf drinks, herbal teas, and water-rich foods all count. Steady sipping through the day works better than trying to catch up in the evening. Thirst, headaches, and dark urine are usually the first cues you need more.",
     howThisFeels: [
       "Realising you've barely had a glass of water all morning",
       "Feeling thirsty in a way you haven't before",
@@ -19650,7 +19650,7 @@ const articleDatabase: ArticleData[] = [
     },
     timing: {
       whenStarts: "Hydration matters from the earliest weeks, and needs rise gently as pregnancy progresses.",
-      whenPeaks: "The third trimester tends to be when hydration matters most — for blood volume, amniotic fluid, and heat regulation.",
+      whenPeaks: "The third trimester tends to be when hydration matters most, for blood volume, amniotic fluid, and heat regulation.",
       whenEases: "After birth, needs stay high, especially if you're breastfeeding.",
     },
     whatItFeelsLike: ["A dry mouth or lips", "A dull headache in the afternoon", "Dark, strong-smelling urine", "Occasional dizziness on standing"],
@@ -19686,7 +19686,7 @@ const articleDatabase: ArticleData[] = [
     },
     aiPrompts: [
       "How much water should I drink a day in pregnancy?",
-      "I keep forgetting to drink — any tips?",
+      "I keep forgetting to drink, any tips?",
       "Do tea and milk count towards hydration?",
     ],
     captureIntro: "Hydration is quiet work but it shapes how a day feels. Worth noting when it slips.",
@@ -19695,25 +19695,25 @@ const articleDatabase: ArticleData[] = [
     journey: ["pregnancy"],
     topics: ["diet"],
     reviewedBy: "Jenny Joines",
-    lastUpdated: "April 2026",
+    lastUpdated: "July 2026",
     keyTakeaways: [
-      "Aim for 2-2.5 litres of fluid a day — roughly 8-10 cups",
+      "Aim for 2-2.5 litres of fluid a day, roughly 8-10 cups",
       "Water is best, but milk, decaf drinks, and water-rich foods all count",
       "Steady sipping through the day works better than catching up in the evening",
       "Pale-straw urine is the simplest sign you're hydrated enough",
       "Cold, fizzy, or flavoured drinks can help when plain water feels difficult",
     ],
     sources: [
-      "NHS — Drinks and cups for babies (adjacent hydration guidance)",
-      "NHS — Have a healthy diet in pregnancy",
-      "British Nutrition Foundation — Hydration",
-      "European Food Safety Authority — Dietary reference values for water",
+      "NHS, Drinks and cups for babies (adjacent hydration guidance)",
+      "NHS, Have a healthy diet in pregnancy",
+      "British Nutrition Foundation, Hydration",
+      "European Food Safety Authority, Dietary reference values for water",
     ],
     faq: [
-      { question: "Does tea count towards my daily fluid?", answer: "Yes. Caffeinated tea still contributes to your hydration — the diuretic effect is modest and doesn't cancel out the fluid. Just watch your total caffeine (keep under 200mg a day)." },
+      { question: "Does tea count towards my daily fluid?", answer: "Yes. Caffeinated tea still contributes to your hydration, the diuretic effect is modest and doesn't cancel out the fluid. Just watch your total caffeine (keep under 200mg a day)." },
       { question: "Is it possible to drink too much water in pregnancy?", answer: "Very rarely, in extreme circumstances (litres above the guidance). For almost everyone the challenge is drinking enough, not too much. If your urine is repeatedly completely clear, you can ease back slightly." },
-      { question: "Why am I so thirsty in the third trimester?", answer: "Blood volume is at its peak, amniotic fluid needs are highest, and your body works harder to regulate temperature. Increased thirst is expected — it's a helpful cue rather than a worry." },
-      { question: "I can't stop weeing — should I drink less?", answer: "Not usually. Frequent urination in pregnancy is mostly hormonal and physical (the uterus pressing on the bladder), not because you're overdrinking. Reducing fluid tends to leave you dehydrated and dizzy instead." },
+      { question: "Why am I so thirsty in the third trimester?", answer: "Blood volume is at its peak, amniotic fluid needs are highest, and your body works harder to regulate temperature. Increased thirst is expected, it's a helpful cue rather than a worry." },
+      { question: "I can't stop weeing, should I drink less?", answer: "Not usually. Frequent urination in pregnancy is mostly hormonal and physical (the uterus pressing on the bladder), not because you're overdrinking. Reducing fluid tends to leave you dehydrated and dizzy instead." },
     ],
     topic: "diet-and-exercise",
     standfirst: "Steady fluids do more for a pregnancy day than most single foods can. A gentle look at how much, what counts, and when to reach for something other than water.",
@@ -19721,7 +19721,7 @@ const articleDatabase: ArticleData[] = [
       {
         id: "why-hydration-matters",
         heading: "Why hydration matters more in pregnancy",
-        lead: "Pregnancy raises your fluid needs across the board — for blood volume, the amniotic fluid around your baby, and everyday regulation.",
+        lead: "Pregnancy raises your fluid needs across the board, for blood volume, the amniotic fluid around your baby, and everyday regulation.",
         paragraphs: [
           "Your blood volume increases by 40-50% during pregnancy, which is one of the reasons hydration needs rise. Amniotic fluid is renewed constantly and depends on your daily intake. Digestion, kidney function, and temperature regulation all lean on water too.",
           "Being well-hydrated helps with several ordinary pregnancy discomforts: constipation, headaches, tiredness, and Braxton Hicks contractions all improve when fluids are steady. It's not a cure for anything, but it consistently helps.",
@@ -19730,7 +19730,7 @@ const articleDatabase: ArticleData[] = [
       {
         id: "how-much-to-aim-for",
         heading: "How much to actually aim for",
-        lead: "Around 2 to 2.5 litres a day is the useful target — with room to move for climate, activity, and body size.",
+        lead: "Around 2 to 2.5 litres a day is the useful target, with room to move for climate, activity, and body size.",
         paragraphs: [
           "That's roughly 8 to 10 mugs or glasses. It doesn't all need to be water. Milk, decaf coffee and tea, herbal infusions, fruit juice (in moderation), soups, and water-rich foods like cucumber, melon, tomatoes and yoghurt all contribute.",
           "On hot days, after exercise, or when you've been vomiting, add an extra 500ml or so. If you're carrying twins or higher-order multiples, aim slightly higher across the day.",
@@ -19745,8 +19745,8 @@ const articleDatabase: ArticleData[] = [
         heading: "When plain water feels hard",
         lead: "First-trimester nausea can turn water into one of the worst-tasting things in the fridge. There are workarounds.",
         paragraphs: [
-          "Try cold, fizzy, or flavoured options — sparkling water with a squeeze of lemon or lime, ice-cold water with cucumber, weak squash. Ice lollies and jelly count. Watermelon, oranges, cucumber, and yoghurt all deliver fluid alongside food.",
-          "Small, frequent sips work better than large drinks when nausea is high. If you're struggling to keep any fluids down at all for more than a day, speak to your midwife or GP — persistent vomiting in pregnancy can need medical support.",
+          "Try cold, fizzy, or flavoured options, sparkling water with a squeeze of lemon or lime, ice-cold water with cucumber, weak squash. Ice lollies and jelly count. Watermelon, oranges, cucumber, and yoghurt all deliver fluid alongside food.",
+          "Small, frequent sips work better than large drinks when nausea is high. If you're struggling to keep any fluids down at all for more than a day, speak to your midwife or GP, persistent vomiting in pregnancy can need medical support.",
         ],
       },
       {
@@ -19754,8 +19754,8 @@ const articleDatabase: ArticleData[] = [
         heading: "How to make it happen without thinking",
         lead: "Hydration in pregnancy is more about environment than willpower.",
         paragraphs: [
-          "Keep a water bottle within reach at all times — by the bed, on your desk, in your bag, in the kitchen. Anchor drinks to existing habits: a glass before every meal, one when the kettle boils, one on the walk between rooms.",
-          "Set a soft target rather than a strict one. Two large water bottles across a day, for example, is easier to track than counting individual glasses. Milk with cereal, a cup of tea, a soup at lunch — they all move you closer.",
+          "Keep a water bottle within reach at all times, by the bed, on your desk, in your bag, in the kitchen. Anchor drinks to existing habits: a glass before every meal, one when the kettle boils, one on the walk between rooms.",
+          "Set a soft target rather than a strict one. Two large water bottles across a day, for example, is easier to track than counting individual glasses. Milk with cereal, a cup of tea, a soup at lunch, they all move you closer.",
         ],
         callout: {
           tone: "reassurance",
@@ -19768,7 +19768,7 @@ const articleDatabase: ArticleData[] = [
         lead: "Most hydration questions in pregnancy sit inside normal daily life. A few are worth flagging.",
         paragraphs: [
           "Speak to your midwife or GP if you can't keep fluids down for more than a day, if you're passing very dark urine alongside dizziness or a rapid heartbeat, or if sudden swelling appears in your face, hands, or feet with persistent headaches. Sudden swelling with headache and visual changes is a specific pre-eclampsia signal that needs same-day review.",
-          "Pre-existing conditions — kidney issues, hyperemesis, gestational diabetes — can change what hydration should look like for you. Personal advice from your team always overrides general guidance.",
+          "Pre-existing conditions, kidney issues, hyperemesis, gestational diabetes, can change what hydration should look like for you. Personal advice from your team always overrides general guidance.",
         ],
       },
     ],
@@ -19789,11 +19789,11 @@ const articleDatabase: ArticleData[] = [
     ],
     whatHappening: {
       commonCauses: [
-        { heading: "Hormonal shifts, especially hCG and oestrogen", body: "Rising pregnancy hormones change how your brain processes smell, taste, and reward — which is why familiar foods can suddenly repel or attract you." },
+        { heading: "Hormonal shifts, especially hCG and oestrogen", body: "Rising pregnancy hormones change how your brain processes smell, taste, and reward, which is why familiar foods can suddenly repel or attract you." },
         { heading: "Heightened sense of smell", body: "Many people develop a much sharper sense of smell in early pregnancy. This magnifies aversions and can trigger nausea before you've even eaten." },
       ],
       lessCauses: [
-        { heading: "Nutrient association, sometimes", body: "There's a longstanding folk belief that cravings signal deficiencies. Evidence for this is weak — most cravings are hormonal and psychological rather than nutritional." },
+        { heading: "Nutrient association, sometimes", body: "There's a longstanding folk belief that cravings signal deficiencies. Evidence for this is weak, most cravings are hormonal and psychological rather than nutritional." },
       ],
       whyItVaries: "Cravings and aversions vary between people and between pregnancies. What happened last time doesn't predict what happens now.",
     },
@@ -19804,7 +19804,7 @@ const articleDatabase: ArticleData[] = [
     },
     whatItFeelsLike: ["A specific, urgent want for one food", "Nausea at the smell of things you used to love", "Feeling almost obsessive about a particular taste", "Guilt about not eating 'balanced' meals"],
     whatThisMeans:
-      "Cravings and aversions are a normal part of pregnancy — not a sign of anything wrong, and rarely a signal of a specific need.",
+      "Cravings and aversions are a normal part of pregnancy, not a sign of anything wrong, and rarely a signal of a specific need.",
     normal: [
       "Wanting something sweet, salty, sour, or specific",
       "Being unable to face meat, coffee, eggs, or previously loved foods",
@@ -19812,7 +19812,7 @@ const articleDatabase: ArticleData[] = [
       "Occasional cravings for combinations that sound odd",
     ],
     seekSupport: [
-      "Craving non-food items — ice in large amounts, chalk, soil, laundry starch (called pica) — which can signal iron or zinc deficiency",
+      "Craving non-food items, ice in large amounts, chalk, soil, laundry starch (called pica), which can signal iron or zinc deficiency",
       "Aversions so severe you can barely eat for days",
       "Weight loss beyond the first weeks",
       "Cravings tied to feelings of loss of control around food that echo previous eating difficulties",
@@ -19820,7 +19820,7 @@ const articleDatabase: ArticleData[] = [
     disclaimer: "This is general guidance. Speak to your midwife if cravings or aversions are severely affecting your eating, or if you're craving non-food items.",
     whatYouCanDo: [
       { action: "Follow moderate cravings without guilt", reason: "Enjoying a wanted food usually costs nothing and often helps you eat overall." },
-      { action: "Work around aversions rather than through them", reason: "Substitute foods that offer similar nutrition — plant protein for meat, cold food for hot, sweet fruit for veg." },
+      { action: "Work around aversions rather than through them", reason: "Substitute foods that offer similar nutrition, plant protein for meat, cold food for hot, sweet fruit for veg." },
       { action: "Manage smell triggers where you can", reason: "Cold food smells less than hot; someone else cooking, or eating out, sometimes breaks a persistent aversion." },
       { action: "Tell your midwife if you're craving non-food items", reason: "Pica can be a sign of low iron or zinc and is worth a simple blood test." },
     ],
@@ -19844,24 +19844,24 @@ const articleDatabase: ArticleData[] = [
     journey: ["pregnancy"],
     topics: ["diet"],
     reviewedBy: "Jenny Joines",
-    lastUpdated: "April 2026",
+    lastUpdated: "July 2026",
     keyTakeaways: [
       "Cravings and aversions in pregnancy are common and usually hormonal",
-      "They rarely signal a specific nutrient need — most are hormonal or psychological",
+      "They rarely signal a specific nutrient need, most are hormonal or psychological",
       "First trimester tends to be strongest; the second usually eases significantly",
       "Responding to moderate cravings is fine and often helps overall eating",
       "Craving non-food items (pica) is worth mentioning to your midwife",
     ],
     sources: [
-      "NHS — Common health problems in pregnancy",
-      "British Nutrition Foundation — Nutrition during pregnancy",
-      "RCOG — Pregnancy information",
-      "NICE — Antenatal care guidance",
+      "NHS, Common health problems in pregnancy",
+      "British Nutrition Foundation, Nutrition during pregnancy",
+      "RCOG, Pregnancy information",
+      "NICE, Antenatal care guidance",
     ],
     faq: [
       { question: "Do cravings mean my body needs something?", answer: "Rarely, in the direct sense that folk wisdom suggests. Craving red meat doesn't confirm you're low in iron, and craving ice doesn't confirm anything on its own. Most cravings are hormonal shifts and reward-pathway changes. That said, cravings for non-food items (pica) are worth a blood test." },
       { question: "Is it okay to give in to sweet or fast-food cravings?", answer: "In moderation, yes. A wanted meal you can actually eat is usually better than a 'balanced' one you push away. The overall shape of your week matters more than any single meal. If you notice cravings crowding out other food entirely, that's worth thinking about." },
-      { question: "How long do aversions last?", answer: "For most people, aversions are strongest in the first trimester and ease significantly by 14-16 weeks. A small number of aversions carry through pregnancy — coffee, meat, and eggs are the most commonly persistent." },
+      { question: "How long do aversions last?", answer: "For most people, aversions are strongest in the first trimester and ease significantly by 14-16 weeks. A small number of aversions carry through pregnancy, coffee, meat, and eggs are the most commonly persistent." },
       { question: "What is pica, and should I worry?", answer: "Pica is the craving for non-food items like ice, chalk, soil, or laundry starch. It can be a sign of iron or zinc deficiency and is worth mentioning to your midwife. A simple blood test can check, and treating the underlying deficiency usually resolves it." },
     ],
     topic: "diet-and-exercise",
@@ -19872,7 +19872,7 @@ const articleDatabase: ArticleData[] = [
         heading: "Why cravings and aversions happen",
         lead: "The short answer is hormones. The longer answer is hormones, smell, and how your brain's reward pathways rewire in early pregnancy.",
         paragraphs: [
-          "Rising hCG and oestrogen in the first trimester change how you experience taste and smell. Many people develop a noticeably sharper sense of smell — helpful once, evolutionarily, for avoiding spoiled or risky food, but often overwhelming in a modern kitchen.",
+          "Rising hCG and oestrogen in the first trimester change how you experience taste and smell. Many people develop a noticeably sharper sense of smell, helpful once, evolutionarily, for avoiding spoiled or risky food, but often overwhelming in a modern kitchen.",
           "At the same time, the brain's reward system responds differently. Foods that used to feel neutral can suddenly feel wanted or repellent. This is not a sign of anything wrong, and it isn't a moral test.",
         ],
       },
@@ -19882,7 +19882,7 @@ const articleDatabase: ArticleData[] = [
         lead: "Mostly not, despite what folk wisdom suggests.",
         paragraphs: [
           "The idea that craving red meat means low iron, or craving oranges means low vitamin C, is charming but not well-supported. Studies looking at cravings against blood tests rarely find a clean link. Cravings are much more likely to be hormonal and reward-pathway shifts than nutrient calls.",
-          "There is one exception worth knowing about: pica. Cravings for non-food items — ice in large amounts, chalk, clay, soil, laundry starch — can genuinely signal iron or zinc deficiency. Mention it to your midwife and a simple blood test can check.",
+          "There is one exception worth knowing about: pica. Cravings for non-food items, ice in large amounts, chalk, clay, soil, laundry starch, can genuinely signal iron or zinc deficiency. Mention it to your midwife and a simple blood test can check.",
         ],
         callout: {
           tone: "info",
@@ -19894,7 +19894,7 @@ const articleDatabase: ArticleData[] = [
         heading: "Coping with aversions",
         lead: "Aversions can quietly narrow what you eat. Working around them, rather than pushing through, tends to work best.",
         paragraphs: [
-          "If meat has become impossible, plant proteins (beans, lentils, tofu, eggs if you can face them, dairy, nuts) can fill the same role. If hot food smells trigger nausea, cold food smells much less — sandwiches, salads, yoghurt bowls, cheese and crackers. If vegetables have become difficult, fruit and smoothies count too.",
+          "If meat has become impossible, plant proteins (beans, lentils, tofu, eggs if you can face them, dairy, nuts) can fill the same role. If hot food smells trigger nausea, cold food smells much less, sandwiches, salads, yoghurt bowls, cheese and crackers. If vegetables have become difficult, fruit and smoothies count too.",
           "Someone else cooking, eating out, or eating in a different room from where food was prepared can all break a persistent aversion. Trying a food again in a week or two often works, even when it felt impossible before.",
         ],
       },
@@ -19903,8 +19903,8 @@ const articleDatabase: ArticleData[] = [
         heading: "Eating through cravings without guilt",
         lead: "A wanted meal you can actually eat is worth more than a 'balanced' meal you push away.",
         paragraphs: [
-          "Moderate cravings — a specific meal, a favourite snack, something you're suddenly obsessed with — are safe to follow. If a bowl of cereal, a slice of toast, or a specific takeaway is what you can face on a given day, that's what you eat. Pregnancy is not the time to be strict.",
-          "The shape of a week matters more than the shape of a meal. If cravings are crowding out other food entirely, or if you're eating in a way that feels out of control in a familiar-from-before way, that's a signal to talk to your midwife or GP — not because craving is wrong, but because support is available.",
+          "Moderate cravings, a specific meal, a favourite snack, something you're suddenly obsessed with, are safe to follow. If a bowl of cereal, a slice of toast, or a specific takeaway is what you can face on a given day, that's what you eat. Pregnancy is not the time to be strict.",
+          "The shape of a week matters more than the shape of a meal. If cravings are crowding out other food entirely, or if you're eating in a way that feels out of control in a familiar-from-before way, that's a signal to talk to your midwife or GP, not because craving is wrong, but because support is available.",
         ],
         callout: {
           tone: "reassurance",
@@ -19916,7 +19916,7 @@ const articleDatabase: ArticleData[] = [
         heading: "When cravings and aversions ease",
         lead: "For most people, the second trimester quietly resets appetite.",
         paragraphs: [
-          "Cravings and aversions usually settle by around 14-16 weeks as first-trimester hormones stabilise. Some aversions carry longer — coffee, red meat, and eggs are common ones — and a smaller number persist to birth.",
+          "Cravings and aversions usually settle by around 14-16 weeks as first-trimester hormones stabilise. Some aversions carry longer, coffee, red meat, and eggs are common ones, and a smaller number persist to birth.",
           "If aversions are still severely limiting what you can eat by the second trimester, or if you're losing weight, mention it at your next appointment. Nutrition support is a normal part of antenatal care.",
         ],
       },
@@ -19929,7 +19929,7 @@ const articleDatabase: ArticleData[] = [
     title: "Pelvic floor exercises in pregnancy: a gentle, useful guide",
     metaDescription: "How and when to do pelvic floor exercises in pregnancy. A calm guide to what they are, how to do them, and when to see a women's health physio.",
     quickAnswer:
-      "Pelvic floor exercises in pregnancy help support your growing uterus, reduce the chance of leaks, and speed recovery after birth. Aim for a mix of short 'quick' squeezes and longer 'hold' squeezes, done a few times a day. It's never too late to start — even a few weeks of practice helps.",
+      "Pelvic floor exercises in pregnancy help support your growing uterus, reduce the chance of leaks, and speed recovery after birth. Aim for a mix of short 'quick' squeezes and longer 'hold' squeezes, done a few times a day. It's never too late to start, even a few weeks of practice helps.",
     howThisFeels: [
       "Not being quite sure whether you're doing them right",
       "Forgetting until you notice a leak",
@@ -19947,13 +19947,13 @@ const articleDatabase: ArticleData[] = [
       whyItVaries: "Pelvic floor strength varies hugely between people. Some notice nothing throughout pregnancy; others feel changes early. Neither is a problem.",
     },
     timing: {
-      whenStarts: "You can start pelvic floor exercises at any point in pregnancy — the earlier, the better, but any time is worth it.",
+      whenStarts: "You can start pelvic floor exercises at any point in pregnancy, the earlier, the better, but any time is worth it.",
       whenPeaks: "Third trimester is often when pelvic floor demands are highest and when good muscle awareness helps most.",
       whenEases: "After birth, pelvic floor exercises restart gently within days and become a longer-term habit. Most physios recommend continuing them for life.",
     },
-    whatItFeelsLike: ["A gentle lift and squeeze in the muscles you'd use to stop a wee", "Nothing at all, when you're doing them right — no visible movement outside", "A small effort that shouldn't leave you tense elsewhere"],
+    whatItFeelsLike: ["A gentle lift and squeeze in the muscles you'd use to stop a wee", "Nothing at all, when you're doing them right, no visible movement outside", "A small effort that shouldn't leave you tense elsewhere"],
     whatThisMeans:
-      "Pelvic floor exercises are one of the highest-return, lowest-effort things you can do in pregnancy — for how you feel now and for recovery afterwards.",
+      "Pelvic floor exercises are one of the highest-return, lowest-effort things you can do in pregnancy, for how you feel now and for recovery afterwards.",
     normal: [
       "Occasional small leaks when coughing, sneezing, or laughing",
       "Feeling heavy or pressured low down, especially in the third trimester",
@@ -19965,11 +19965,11 @@ const articleDatabase: ArticleData[] = [
       "Pelvic pain that limits movement (see pelvic girdle pain)",
       "Being unable to identify or engage the pelvic floor muscles at all",
     ],
-    disclaimer: "This is general guidance. A specialist women's health physio can assess and personalise pelvic floor work — ask your midwife or GP for a referral if you're struggling, and consider a private appointment if NHS waits are long.",
+    disclaimer: "This is general guidance. A specialist women's health physio can assess and personalise pelvic floor work, ask your midwife or GP for a referral if you're struggling, and consider a private appointment if NHS waits are long.",
     whatYouCanDo: [
       { action: "Anchor exercises to a daily habit", reason: "Doing them while brushing teeth, waiting for the kettle, or on the school run turns intention into practice." },
       { action: "Do a mix of quick squeezes and longer holds", reason: "Both fast-twitch and slow-twitch muscle work matter for continence and support." },
-      { action: "Notice — but don't tense — the muscles around them", reason: "The pelvic floor should engage on its own. Squeezing your bum, thighs, or stomach hard means you're compensating." },
+      { action: "Notice, but don't tense, the muscles around them", reason: "The pelvic floor should engage on its own. Squeezing your bum, thighs, or stomach hard means you're compensating." },
       { action: "See a women's health physio if leaks or heaviness persist", reason: "Personalised assessment is far more effective than generic advice." },
     ],
     whatHappensNext: "Pelvic floor work continues after birth. Starting now makes postnatal recovery meaningfully easier.",
@@ -19992,7 +19992,7 @@ const articleDatabase: ArticleData[] = [
     journey: ["pregnancy"],
     topics: ["diet", "body"],
     reviewedBy: "Jenny Joines",
-    lastUpdated: "April 2026",
+    lastUpdated: "July 2026",
     keyTakeaways: [
       "Pelvic floor exercises support your uterus, bladder, and bowel through pregnancy",
       "They meaningfully reduce leaks now and speed postnatal recovery",
@@ -20001,16 +20001,16 @@ const articleDatabase: ArticleData[] = [
       "See a women's health physio if leaks, heaviness, or dragging persist",
     ],
     sources: [
-      "NHS — Your pregnancy and baby guide: pelvic floor exercises",
-      "POGP (Pelvic, Obstetric and Gynaecological Physiotherapy) — Fit for pregnancy",
-      "RCOG — Physical activity and pregnancy",
-      "NICE — Postnatal care guidance",
+      "NHS, Your pregnancy and baby guide: pelvic floor exercises",
+      "POGP (Pelvic, Obstetric and Gynaecological Physiotherapy), Fit for pregnancy",
+      "RCOG, Physical activity and pregnancy",
+      "NICE, Postnatal care guidance",
     ],
     faq: [
-      { question: "How do I know I'm doing them right?", answer: "Imagine you're trying to stop passing wind and stop a wee at the same time. That gentle inner lift and squeeze is the pelvic floor. There should be no visible outward movement — no held breath, no clenched jaw, no squeezed bum. If you're not sure, a women's health physio can check with a proper assessment." },
+      { question: "How do I know I'm doing them right?", answer: "Imagine you're trying to stop passing wind and stop a wee at the same time. That gentle inner lift and squeeze is the pelvic floor. There should be no visible outward movement, no held breath, no clenched jaw, no squeezed bum. If you're not sure, a women's health physio can check with a proper assessment." },
       { question: "How many should I do?", answer: "A useful daily target is around 10 quick squeezes (a second on, a second off) and 10 longer holds (5-10 seconds each), done 3 times a day. Little and often works better than one long session." },
       { question: "Is it too late to start in the third trimester?", answer: "No. Even a few weeks of regular practice before birth helps with recovery afterwards. Starting late is far better than not starting at all." },
-      { question: "When should I see a physio?", answer: "Ask your midwife or GP for a referral to a women's health (pelvic health) physio if you have persistent leaks, a dragging or bulging feeling, pelvic pain, or if you simply can't identify the muscles. NHS waits can be long — private appointments are often 60-90 minutes and can be very useful even as a one-off." },
+      { question: "When should I see a physio?", answer: "Ask your midwife or GP for a referral to a women's health (pelvic health) physio if you have persistent leaks, a dragging or bulging feeling, pelvic pain, or if you simply can't identify the muscles. NHS waits can be long, private appointments are often 60-90 minutes and can be very useful even as a one-off." },
     ],
     topic: "diet-and-exercise",
     standfirst: "Pelvic floor exercises are simple, quiet, and one of the highest-return things you can do in pregnancy. A calm guide to what they are and how to make them stick.",
@@ -20020,7 +20020,7 @@ const articleDatabase: ArticleData[] = [
         heading: "What the pelvic floor actually does",
         lead: "The pelvic floor is a hammock of muscles slung between your pubic bone at the front and your tailbone at the back.",
         paragraphs: [
-          "It supports the uterus, bladder, and bowel, and it wraps around the openings — urethra, vagina, and anus — giving you control over what stays in and what comes out. In pregnancy, it takes on the extra weight of a growing baby, all while pregnancy hormone relaxin softens surrounding ligaments.",
+          "It supports the uterus, bladder, and bowel, and it wraps around the openings, urethra, vagina, and anus, giving you control over what stays in and what comes out. In pregnancy, it takes on the extra weight of a growing baby, all while pregnancy hormone relaxin softens surrounding ligaments.",
           "That's why leaks, heaviness, and awareness of your pelvic floor often show up in pregnancy for the first time. It's not a fault; it's the muscles doing more work than before.",
         ],
       },
@@ -20029,7 +20029,7 @@ const articleDatabase: ArticleData[] = [
         heading: "How to actually do them",
         lead: "The mechanics are simple, but easy to get subtly wrong.",
         paragraphs: [
-          "Imagine you're trying to stop passing wind and stop the flow of a wee at the same time. That gentle inward and upward lift is the pelvic floor. From the outside there should be nothing to see — no clenched bum, no held breath, no tensed stomach. Just an inner squeeze and lift.",
+          "Imagine you're trying to stop passing wind and stop the flow of a wee at the same time. That gentle inward and upward lift is the pelvic floor. From the outside there should be nothing to see, no clenched bum, no held breath, no tensed stomach. Just an inner squeeze and lift.",
           "Do a mix: fast squeezes (a second on, a second off, about 10 of them) for quick reflex strength, and long holds (5-10 seconds each, 10 of them) for sustained support. Aim for three sessions across the day. It takes under two minutes.",
         ],
         callout: {
@@ -20042,7 +20042,7 @@ const articleDatabase: ArticleData[] = [
         heading: "Making the habit stick",
         lead: "Pelvic floor exercises fail on memory, not effort.",
         paragraphs: [
-          "Anchor them to something you already do every day — brushing teeth, boiling the kettle, sitting at a red light, feeding the cat, waiting for a lift. Habit-stacked exercises get done. Diarised ones often don't.",
+          "Anchor them to something you already do every day, brushing teeth, boiling the kettle, sitting at a red light, feeding the cat, waiting for a lift. Habit-stacked exercises get done. Diarised ones often don't.",
           "Apps can help if you like a nudge. NHS Squeezy is the most widely recommended in the UK. But a phone reminder three times a day works just as well.",
         ],
       },
@@ -20052,7 +20052,7 @@ const articleDatabase: ArticleData[] = [
         lead: "Pelvic floor exercises alone don't solve everything. Sometimes personalised support is what you actually need.",
         paragraphs: [
           "Speak to your midwife or GP about a referral to a women's health (pelvic health) physiotherapist if leaks are frequent and affecting daily life, if you feel dragging or bulging low down, if you can't identify the muscles at all, or if you have pelvic pain that limits movement.",
-          "NHS waits can be long. If you can access a private appointment, a one-off 60-90 minute assessment is often transformative — you learn what's actually happening in your pelvic floor and get exercises calibrated to you. Many are covered by health insurance.",
+          "NHS waits can be long. If you can access a private appointment, a one-off 60-90 minute assessment is often transformative, you learn what's actually happening in your pelvic floor and get exercises calibrated to you. Many are covered by health insurance.",
         ],
         callout: {
           tone: "reassurance",
@@ -20086,7 +20086,7 @@ const articleDatabase: ArticleData[] = [
     ],
     whatHappening: {
       commonCauses: [
-        { heading: "Your body works differently in pregnancy", body: "Blood volume, resting heart rate, joint laxity, and balance all change. What was easy before may need adapting — not because it's dangerous, but because the mechanics have shifted." },
+        { heading: "Your body works differently in pregnancy", body: "Blood volume, resting heart rate, joint laxity, and balance all change. What was easy before may need adapting, not because it's dangerous, but because the mechanics have shifted." },
         { heading: "Trimesters bring different priorities", body: "Fatigue often limits first-trimester exercise. Second-trimester energy usually returns. Third-trimester exercise focuses on low-impact, weight-supporting movement." },
       ],
       lessCauses: [
@@ -20101,7 +20101,7 @@ const articleDatabase: ArticleData[] = [
     },
     whatItFeelsLike: ["Working slightly less hard than pre-pregnancy but still feeling good", "Being more aware of your body's limits", "Needing more recovery between sessions"],
     whatThisMeans:
-      "Exercise in pregnancy is genuinely good for you — for mood, sleep, blood pressure, back pain, birth recovery, and gestational diabetes prevention. The aim is calm, sustainable movement, not personal bests.",
+      "Exercise in pregnancy is genuinely good for you, for mood, sleep, blood pressure, back pain, birth recovery, and gestational diabetes prevention. The aim is calm, sustainable movement, not personal bests.",
     normal: [
       "Continuing exercise you were already doing before pregnancy, with modifications",
       "Slowing down in the first trimester because of tiredness or nausea",
@@ -20115,9 +20115,9 @@ const articleDatabase: ArticleData[] = [
       "Reduced fetal movement after exercise (from around 24 weeks)",
       "Regular contractions that don't ease with rest and hydration",
     ],
-    disclaimer: "This is general guidance based on UK NHS and RCOG advice. Always follow your midwife or clinician's guidance for your specific pregnancy — some conditions (placenta praevia, pre-eclampsia, cervical concerns) require adapted or reduced exercise.",
+    disclaimer: "This is general guidance based on UK NHS and RCOG advice. Always follow your midwife or clinician's guidance for your specific pregnancy, some conditions (placenta praevia, pre-eclampsia, cervical concerns) require adapted or reduced exercise.",
     whatYouCanDo: [
-      { action: "Continue exercise you were already doing, with sensible modifications", reason: "Pregnancy is generally not the time to start a new intense sport — but continuing what your body knows is well-supported." },
+      { action: "Continue exercise you were already doing, with sensible modifications", reason: "Pregnancy is generally not the time to start a new intense sport, but continuing what your body knows is well-supported." },
       { action: "Use the 'talk test' as your intensity guide", reason: "If you can hold a conversation, you're in a safe moderate zone. If you can only gasp words, ease back." },
       { action: "Adapt what needs adapting as you progress", reason: "Contact sports, activities with fall risk, and lying flat on your back become less suitable as pregnancy advances." },
       { action: "Know the warning signs and stop if they appear", reason: "Bleeding, severe pain, dizziness, and reduced movements all mean stop and contact your midwife." },
@@ -20142,19 +20142,19 @@ const articleDatabase: ArticleData[] = [
     journey: ["pregnancy"],
     topics: ["diet", "body"],
     reviewedBy: "Jenny Joines",
-    lastUpdated: "April 2026",
+    lastUpdated: "July 2026",
     keyTakeaways: [
       "Moderate exercise is safe and beneficial throughout most pregnancies",
       "The first trimester is often about doing less; the second is easiest; the third calls for lower impact",
-      "Use the talk test — able to chat while moving — as your intensity guide",
+      "Use the talk test, able to chat while moving, as your intensity guide",
       "Stop and contact your midwife for bleeding, severe pain, dizziness, or reduced movements",
       "Continuing existing activity is well-supported; starting new intense sport in pregnancy is not",
     ],
     sources: [
-      "NHS — Exercise in pregnancy",
-      "RCOG — Physical activity and pregnancy patient information",
-      "UK Chief Medical Officers — Physical activity guidelines for pregnancy",
-      "POGP — Fit for pregnancy",
+      "NHS, Exercise in pregnancy",
+      "RCOG, Physical activity and pregnancy patient information",
+      "UK Chief Medical Officers, Physical activity guidelines for pregnancy",
+      "POGP, Fit for pregnancy",
     ],
     faq: [
       { question: "Can I keep running in pregnancy?", answer: "If you were a runner before pregnancy, most guidance supports continuing at a reduced intensity for as long as it feels comfortable. Many people run into the second trimester and some into the third. Stop if you develop pelvic pain, leaks, or heaviness. Starting running as a new activity in pregnancy is not usually recommended." },
@@ -20179,8 +20179,8 @@ const articleDatabase: ArticleData[] = [
         heading: "First trimester: gentle, listen, adapt",
         lead: "The first trimester is usually about doing less than you'd like, because of tiredness and nausea.",
         paragraphs: [
-          "Your resting heart rate rises, blood volume is climbing, and fatigue often crushes motivation. This isn't a moral failing — it's the physiology of the first 12 weeks. Doing less is often exactly right.",
-          "Walking, gentle yoga or pilates, swimming, and continuing (at reduced intensity) whatever you were doing before are all sensible. Overheating is worth avoiding — no hot yoga, no long saunas, no exercising in very hot weather without hydration.",
+          "Your resting heart rate rises, blood volume is climbing, and fatigue often crushes motivation. This isn't a moral failing, it's the physiology of the first 12 weeks. Doing less is often exactly right.",
+          "Walking, gentle yoga or pilates, swimming, and continuing (at reduced intensity) whatever you were doing before are all sensible. Overheating is worth avoiding, no hot yoga, no long saunas, no exercising in very hot weather without hydration.",
         ],
         callout: {
           tone: "reassurance",
@@ -20193,7 +20193,7 @@ const articleDatabase: ArticleData[] = [
         lead: "Energy often returns in the second trimester and appetite for exercise with it.",
         paragraphs: [
           "Many people find weeks 14-28 the most exercise-friendly stretch. Bump is manageable, energy is back, nausea has usually eased. This is often the best window to establish a sustainable pregnancy movement routine.",
-          "From around 16 weeks, avoid lying flat on your back for long stretches (a wedge or an inclined bench works instead). Adapt anything that puts pressure on the front of the abdomen (deep planks, sit-ups) — a pregnancy-experienced trainer or physio can help modify. Contact sports and high fall-risk activities should be off the list by now.",
+          "From around 16 weeks, avoid lying flat on your back for long stretches (a wedge or an inclined bench works instead). Adapt anything that puts pressure on the front of the abdomen (deep planks, sit-ups), a pregnancy-experienced trainer or physio can help modify. Contact sports and high fall-risk activities should be off the list by now.",
         ],
       },
       {
@@ -20201,8 +20201,8 @@ const articleDatabase: ArticleData[] = [
         heading: "Third trimester: lower impact, more support",
         lead: "The third trimester usually calls for gentler, weight-supported movement.",
         paragraphs: [
-          "Swimming and aqua-natal classes come into their own — the water supports your bump and takes pressure off joints. Walking, pregnancy yoga and pilates, and stationary cycling are all sustainable. Running becomes uncomfortable for most people by the mid-third trimester, though some continue.",
-          "Balance changes as your centre of gravity shifts. Steps, uneven paths, and quick direction changes deserve more caution. Pelvic girdle pain, if it appears, can make some exercises worse — adapt or pause, and see a women's health physio.",
+          "Swimming and aqua-natal classes come into their own, the water supports your bump and takes pressure off joints. Walking, pregnancy yoga and pilates, and stationary cycling are all sustainable. Running becomes uncomfortable for most people by the mid-third trimester, though some continue.",
+          "Balance changes as your centre of gravity shifts. Steps, uneven paths, and quick direction changes deserve more caution. Pelvic girdle pain, if it appears, can make some exercises worse, adapt or pause, and see a women's health physio.",
         ],
         callout: {
           tone: "info",
@@ -20215,11 +20215,11 @@ const articleDatabase: ArticleData[] = [
         lead: "A short, memorable list. If any of these appear during or shortly after exercise, stop and get in touch with your maternity team.",
         paragraphs: [
           "Vaginal bleeding or fluid leak. Severe abdominal, pelvic, or chest pain. Sudden severe headache, dizziness, or fainting. Regular contractions that don't ease with rest and hydration. Reduced fetal movements after exercise (from around 24 weeks).",
-          "None of these mean exercise caused harm — they mean your body needs checking today. Contact your midwife, day assessment unit, or triage line straight away and rest until you've been reviewed.",
+          "None of these mean exercise caused harm, they mean your body needs checking today. Contact your midwife, day assessment unit, or triage line straight away and rest until you've been reviewed.",
         ],
         callout: {
           tone: "gentle-warning",
-          text: "Reduced fetal movements always need same-day assessment — don't wait to see if they return.",
+          text: "Reduced fetal movements always need same-day assessment, don't wait to see if they return.",
         },
       },
     ],

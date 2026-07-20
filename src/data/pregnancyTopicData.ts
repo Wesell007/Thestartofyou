@@ -438,6 +438,8 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
           { label: "Eating well in pregnancy", href: "/articles/eating-well-in-pregnancy" },
           { label: "Foods to avoid in pregnancy", href: "/articles/foods-to-avoid-in-pregnancy" },
           { label: "Key nutrients in pregnancy", href: "/articles/key-nutrients-in-pregnancy" },
+          { label: "Caffeine in pregnancy", href: "/articles/caffeine-in-pregnancy" },
+          { label: "Hydration in pregnancy", href: "/articles/hydration-in-pregnancy" },
         ],
       },
       {
@@ -445,12 +447,15 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         description: "What's usually safe, what to adapt, and what to leave for now.",
         links: [
           { label: "Moving your body in pregnancy", href: "/articles/moving-your-body-in-pregnancy" },
+          { label: "Exercise safety by trimester", href: "/articles/exercise-safety-by-trimester" },
+          { label: "Pelvic floor exercises in pregnancy", href: "/articles/pelvic-floor-exercises-in-pregnancy" },
         ],
       },
       {
         label: "When food feels hard",
         description: "For the days nausea, aversions, or low appetite get in the way.",
         links: [
+          { label: "Cravings and aversions in pregnancy", href: "/articles/cravings-and-aversions-in-pregnancy" },
           { label: "When you can't face food in pregnancy", href: "/articles/when-you-cant-face-food-in-pregnancy" },
           { label: "Complete guide to morning sickness", href: "/articles/complete-guide-morning-sickness" },
         ],

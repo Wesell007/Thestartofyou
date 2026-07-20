@@ -652,22 +652,12 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       },
       {
         label: "Reading what you see",
-        description: "Interpreting unclear results and ambiguous symptoms.",
+        description: "Interpreting unclear results, ambiguous symptoms, and testing when the moment feels heavy.",
         links: [
           { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
           { label: "Evaporation line or faint positive", href: LIVE.evaporationLineFaintPositive },
           { label: "Implantation bleeding", href: LIVE.implantationBleeding },
-        ],
-      },
-      {
-        label: "When the answer is not clear yet",
-        links: [
           { label: "Negative test but no period", href: LIVE.negativeTestNoPeriod },
-        ],
-      },
-      {
-        label: "When the result feels heavy",
-        links: [
           { label: "Pregnancy after loss", href: LIVE.pregnancyAfterLoss },
         ],
       },

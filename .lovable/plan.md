@@ -1,63 +1,72 @@
-## Phase 9.19 — TTC Topic Structural Polish
+## Phase 9.20 — Final TTC Article Gap Batch
 
-Edit only `src/data/ttcTopicData.ts`. No new articles, images, prose, or infrastructure.
+Add 6 flagship TTC articles closing the last gaps identified in Phase 9.18 and confirmed after 9.19 polish. No changes to Pregnancy, IVF, First Year, Toddler, Family, calculators, TTC Journey, routes, sitemap, robots, redirects or SEO infrastructure.
 
-### 1. Cycle tracking (`cycle-tracking`, L544–598)
+### Step 1 — Duplicate check (blocking)
 
-Replace the two current groups with:
+Grep `src/data/articleData.ts` for exact and near-duplicate slugs. Stop and report if any exact match is found for:
 
-- **Tracking your cycle**
-  - Ovulation signs (`LIVE.ovulationSigns`)
-  - Cervical mucus and fertility (`LIVE.cervicalMucus`)
-  - Basal body temperature tracking (`LIVE.basalBodyTemperature`)
-  - Using ovulation tests (`LIVE.usingOvulationTests`)
-- **When cycles are unclear**
-  - Irregular periods and trying to conceive (`LIVE.irregularPeriodsTTC`)
-  - Late ovulation and TTC (`LIVE.lateOvulation`)
-  - When ovulation is hard to predict (`LIVE.hardToPredictOvulation`)
+- tracking-without-overthinking / cycle-tracking-without-overthinking / tracking-while-trying-to-conceive
+- thyroid-and-fertility / thyroid-conditions-and-trying-to-conceive
+- ttc-in-your-30s / trying-to-conceive-in-your-30s
+- ttc-after-35 / trying-to-conceive-after-35
+- emotional-pressure-of-age-when-ttc / age-pressure-when-trying-to-conceive
+- partner-support-when-ttc / supporting-each-other-while-trying-to-conceive
 
-Removes the duplicated "Practical basics → Ovulation calculator" (already in Start Here). Start Here unchanged.
+Also validate every intended related slug exists live before wiring it.
 
-### 2. Conditions (`conditions`, L779–796)
+### Step 2 — Generate 6 image assets
 
-Append to existing "Knowing when to seek support" group:
-- Trying again after miscarriage (`LIVE.tryingAgain`)
+Create JPGs in `src/assets/` via imagegen (soft daylight, sage/cream/warm neutral, calm supportive, no text, no test lines, no clinical/distress imagery):
 
-No new group. `curationNote` unchanged.
+- ttc-tracking-without-overthinking.jpg
+- ttc-thyroid-and-fertility.jpg
+- ttc-in-your-30s.jpg
+- ttc-after-35.jpg
+- ttc-emotional-pressure-age.jpg
+- ttc-partner-support.jpg
 
-### 3. Male fertility (`male-fertility`, L471–480)
+### Step 3 — Append 6 flagship articles to `src/data/articleData.ts`
 
-Add a new group above the existing "Tests and next steps":
-- **Health and support before pregnancy**
-  - Partner health before pregnancy (`LIVE.partnerHealthBeforePregnancy`)
-  - Lifestyle before pregnancy (`LIVE.lifestyleBeforePregnancy`)
+Shape matches Phase 9.12–9.16 TTC flagship articles:
+`topic: "ttc"`, `journey: ["trying-to-conceive"]`, `reviewedBy: "Jenny Joines"`, `lastUpdated: "July 2026"`, metaDescription, standfirst, quickAnswer, hero, 5–6 keyTakeaways, 5–7 editorialSections, normalCheck (where used by schema), 3 FAQ, 3–5 structured sources, relatedSlugs (live only).
 
-Second link included so the group isn't a single-item group; both are calm, non-blaming, live articles. "Tests and next steps" kept as-is.
+Editorial rules: UK English; no em/en dashes; careful words (may, might, can, often, usually); signpost to GP / pharmacist / fertility clinic / clinician; no fear-based decline framing; no blame-based male-fertility framing; no certainty about pregnancy or ovulation.
 
-### 4. Pregnancy tests (`pregnancy-tests`, L634–662)
+Articles:
 
-Fold both single-item groups into their nearest neighbours:
-- Move "Negative test but no period" into **Reading what you see** (fits its "interpreting unclear results" description). Delete the "When the answer is not clear yet" group.
-- Move "Pregnancy after loss" into a renamed **Timing your test → When to test, and when it feels heavy** grouping — actually better fit: fold "Pregnancy after loss" into the existing **Reading what you see** group is thematically wrong. Instead, keep it clean: fold "Pregnancy after loss" as the closing link inside **Reading what you see** with the existing group description broadened slightly to "Interpreting unclear results, ambiguous symptoms, and testing when the moment feels heavy." Delete the "When the result feels heavy" group.
+1. **tracking-without-overthinking** — Cycle tracking without overthinking. Tracking as tool not rule; picking one or two signals; when tests/mucus/BBT feel stressful; taking breaks; when to ask for support; protecting intimacy.
+2. **thyroid-and-fertility** — Thyroid conditions and trying to conceive. Thyroid hormones in plain terms; why balance can matter for cycles and pregnancy planning; known conditions before TTC; symptoms worth discussing; medication review and bloods in general terms; when to speak to GP or specialist. Sources include British Thyroid Foundation, NHS, NICE.
+3. **ttc-in-your-30s** — Trying to conceive in your 30s. Why many try in 30s; cycle awareness; preconception health; when to ask for support; comparison/pressure; partner factors. No cliff-edge language.
+4. **ttc-after-35** — Trying to conceive after 35. Why age enters the conversation; careful timeframes for asking for help; cycle awareness; partner age/sperm health in careful terms; fertility appointment prep; emotional pressure. No guarantees, no fear.
+5. **emotional-pressure-of-age-when-ttc** — The emotional side of age when trying to conceive. Feeling behind; family/social pressure; comparing timelines; decision fatigue; partner conversations; wellbeing plus seeking help when needed. Supportive, not medical-advice piece.
+6. **partner-support-when-ttc** — Supporting each other while trying to conceive. Shared responsibility; talking about timing without blame; semen analysis/lifestyle conversations carefully; emotional differences; intimacy; asking for support together. Never frame fertility as one partner's fault.
 
-Resulting groups: **Timing your test** (2 links unchanged), **Reading what you see** (5 links: faint positive, evaporation line, implantation bleeding, negative test but no period, pregnancy after loss).
+### Step 4 — Topic placement in `src/data/ttcTopicData.ts`
 
-All Phase 9.16 slugs preserved.
+Preserve all Phase 9.19 structure.
 
-### 5. Two week wait (`two-week-wait`, L706–737)
+- **cycle-tracking**: Add `tracking-without-overthinking` into the existing **When cycles are unclear** group (avoid a single-item wellbeing group).
+- **conditions**: Add `thyroid-and-fertility` into **Specific conditions** (fulfils prior curationNote).
+- **age-and-fertility**: Restructure into three groups so the page no longer relies on the single existing age article:
+  - Understanding age and timing → `age-and-trying-to-conceive`, `ttc-in-your-30s`, `ttc-after-35`
+  - Planning and support → keep relevant existing support links
+  - The emotional side of age → `emotional-pressure-of-age-when-ttc` (fold into support group if it reads better as a single-item group)
+- **male-fertility**: Add `partner-support-when-ttc` next to the Phase 9.19 **Health and support before pregnancy** group (either extend that group or add a partnership grouping — no single-item groups).
 
-Fold "Looking after yourself in the wait" into **Worries during the wait**:
-- New link order in Worries during the wait: two-week-wait symptoms, spotting during the two week wait, coping with the two week wait, early pregnancy symptoms explained.
-- Broaden description to "The emotional and physical questions that surface in these days, and how to hold them."
+### Step 5 — Image wiring in `src/components/ttc/TTCSubtopicPage.tsx`
 
-Delete the single-item "Looking after yourself in the wait" group. Other groups unchanged.
+Import the 6 new assets and add entries to `HREF_IMAGE_MAP` for each new slug. Preserve every Phase 9.12–9.19 mapping. Do not touch pregnancy image maps.
 
-### Verification
+### Step 6 — Verify
 
-- `bunx tsgo --noEmit` clean.
-- Grep confirms all six Phase 9.16 slugs still surfaced.
-- Manual scan: no single-item groups remain (except the intentional single cross-link groups already documented in existing configs, i.e. two-week-wait's "When you're ready to test" cross-link which is retained as an intentional bridge).
+- `bunx tsgo --noEmit` → clean.
+- Grep confirms each new slug appears once as an article object.
+- Grep confirms each new slug is surfaced from the intended topic config.
+- Manual scan: no adjacent thumbnail collisions on updated pages; Phase 9.19 groups intact.
+- All `relatedSlugs` resolve to live articles.
+- No changes outside `articleData.ts`, `ttcTopicData.ts`, `TTCSubtopicPage.tsx`, and new asset files.
 
 ### Deliverable summary format
 
-Files inspected, files edited (one file), per-topic result, preservation checks (hub, IVF pathway, parent fields, image maps, Pregnancy, IVF, TTC Journey, SEO), broken link result, tsgo result, and a note that Phase 9.20 article batch remains recommended (age topic gap, thyroid gap, and cycle-tracking "tracking without overthinking" gap are not addressable by polish).
+Files inspected; files edited; assets created; duplicate check result; articles created (slugs + titles); reviewer status; source status; image wiring result; per-topic results (cycle tracking, conditions, age and fertility, male fertility); Phase 9.19 preservation; image QA result; related link result; Pregnancy / IVF / TTC Journey preservation; SEO/sitemap/robots/redirects/route preservation; dash-rule result; `bunx tsgo --noEmit` result; whether TTC is ready for final sign off.

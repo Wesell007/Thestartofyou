@@ -173,6 +173,14 @@ const LIVE = {
   twoWeekWaitSymptoms: "/articles/two-week-wait-symptoms",
   spottingTwoWeekWait: "/articles/spotting-during-the-two-week-wait",
   copingTwoWeekWait: "/articles/coping-with-the-two-week-wait",
+
+  // Phase 9.20 (final TTC article gap batch)
+  trackingWithoutOverthinking: "/articles/tracking-without-overthinking",
+  thyroidAndFertility: "/articles/thyroid-and-fertility",
+  ttcInYour30s: "/articles/ttc-in-your-30s",
+  ttcAfter35: "/articles/ttc-after-35",
+  emotionalPressureOfAge: "/articles/emotional-pressure-of-age-when-ttc",
+  partnerSupportWhenTTC: "/articles/partner-support-when-ttc",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────
@@ -474,6 +482,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         links: [
           { label: "Partner health before pregnancy", href: LIVE.partnerHealthBeforePregnancy },
           { label: "Lifestyle before pregnancy", href: LIVE.lifestyleBeforePregnancy },
+          { label: "Supporting each other while trying to conceive", href: LIVE.partnerSupportWhenTTC },
         ],
       },
       {
@@ -530,12 +539,22 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     ],
     groups: [
       {
-        label: "Common questions",
+        label: "Understanding age and timing",
+        description: "Calm, honest guidance across the ages when many people are trying to conceive.",
+        links: [
+          { label: "Age and trying to conceive", href: LIVE.ageAndTryingToConceive },
+          { label: "Trying to conceive in your 30s", href: LIVE.ttcInYour30s },
+          { label: "Trying to conceive after 35", href: LIVE.ttcAfter35 },
+        ],
+      },
+      {
+        label: "Planning and support",
+        description: "The practical steps that often help alongside age.",
         links: [
           { label: "How long to try before getting help", href: LIVE.howLongToTry },
           { label: "AMH test explained", href: LIVE.amhTest },
           { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
-          { label: "What is IVF?", href: LIVE.ivfPage },
+          { label: "The emotional side of age when trying to conceive", href: LIVE.emotionalPressureOfAge },
         ],
       },
     ],
@@ -598,6 +617,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
           { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
           { label: "Late ovulation and TTC", href: LIVE.lateOvulation },
           { label: "When ovulation is hard to predict", href: LIVE.hardToPredictOvulation },
+          { label: "Cycle tracking without overthinking", href: LIVE.trackingWithoutOverthinking },
         ],
       },
     ],
@@ -777,6 +797,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         links: [
           { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
           { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
+          { label: "Thyroid conditions and trying to conceive", href: LIVE.thyroidAndFertility },
           { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
         ],
       },
@@ -792,7 +813,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       },
     ],
     curationNote:
-      "Thyroid and fibroid-specific guidance is on the way. For anything specific, ask below or speak to your GP.",
+      "For anything specific to your health, please speak to your GP.",
     aiPrompts: [
       "Could PCOS be affecting my chances?",
       "Does endometriosis affect fertility?",

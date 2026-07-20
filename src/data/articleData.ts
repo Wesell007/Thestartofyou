@@ -21868,6 +21868,954 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── Phase 9.20 — FINAL TTC ARTICLE GAP BATCH ───────────────────────────
+
+  // ─── TRACKING WITHOUT OVERTHINKING ───────────────────────────────────────
+  {
+    slug: "tracking-without-overthinking",
+    title: "Cycle tracking without overthinking",
+    metaDescription: "How to track your cycle when trying to conceive without letting apps, tests and symptoms take over. Practical, calm and honest.",
+    quickAnswer: "Tracking your cycle can be helpful when trying to conceive, but it is a tool, not a rule. Most people do well with one or two steady signals, such as period dates and how you feel, rather than tracking everything at once. If ovulation tests, cervical mucus checks or basal body temperature start to feel stressful, it is fine to pause, simplify, or take a break. Speak to a GP if your cycles feel confusing over time, or if tracking is starting to affect how you feel day to day.",
+    standfirst: "Tracking is meant to help you notice your body. When it starts to take over, it is worth simplifying.",
+    howThisFeels: [
+      "Wondering if you are tracking enough",
+      "Feeling behind when a signal is unclear",
+      "Tired of checking apps first thing in the morning",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Tracking has become a daily task", body: "Apps, tests and symptom logs can quietly turn into a checklist. When each cycle carries five or six things to record, it often feels like work rather than awareness." },
+        { heading: "Uncertainty in the signals", body: "Ovulation tests, cervical mucus and basal body temperature can all be helpful, and they can all be unclear on any given day. Reading small variations as answers usually adds worry without adding clarity." },
+      ],
+      lessCauses: [
+        { heading: "Longer trying journeys", body: "The longer you have been trying, the more tempting it can be to add another signal or another app. This is understandable, and it does not usually make the picture clearer." },
+      ],
+      whyItVaries: "Different cycles, different bodies and different lives mean that no single tracking routine suits everyone. What worked calmly for a few months may start to feel heavy later, and the routine can shift with it.",
+    },
+    timing: {
+      whenStarts: "The overwhelm tends to build slowly, over several cycles, rather than in one week.",
+      whenEases: "Many people feel lighter within a cycle or two of simplifying what they track.",
+    },
+    whatItFeelsLike: [
+      "A quiet relief when you close an app for a day",
+      "Noticing your body more once there is less to log",
+    ],
+    whatThisMeans: "Tracking too much is not a moral failing. It usually means the tools started to run the cycle instead of supporting it. Small changes can make a real difference.",
+    normal: [
+      "Skipping a day of tracking",
+      "Wanting fewer signals rather than more",
+      "Cycles where you barely track at all",
+    ],
+    seekSupport: [
+      "Cycles that are unclear or unpredictable over several months",
+      "Tracking that is affecting sleep, mood or your relationship",
+      "Feeling unable to stop testing or checking symptoms",
+    ],
+    disclaimer: "This is general guidance, not personal medical advice. Speak to your GP or a fertility clinician if your cycles feel confusing over time, or if the emotional weight of tracking is affecting your day to day.",
+    whatYouCanDo: [
+      { action: "Choose one or two signals for the next cycle", reason: "Fewer signals often make the picture clearer, not less clear." },
+      { action: "Set gentle limits on ovulation tests", reason: "Testing on a small window of days can lower the pull to test constantly." },
+      { action: "Give yourself permission to skip days", reason: "A tracked cycle does not need to be a complete cycle to be useful." },
+      { action: "Take a full cycle off if it feels right", reason: "A break can help you notice your body again on its own terms." },
+      { action: "Talk to a GP if cycles stay confusing", reason: "Some patterns are worth a conversation, and that is not a failure of tracking." },
+    ],
+    whatHappensNext: "Most people find that a simpler routine gives them more, not less. If cycles still feel unclear after a few months, a GP or fertility clinic can help you think about next steps.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "How to know when you are ovulating", href: "/articles/how-to-know-when-you-are-ovulating" },
+        { label: "Understanding your fertile window", href: "/articles/understanding-your-fertile-window" },
+        { label: "When ovulation is hard to predict", href: "/articles/when-ovulation-is-hard-to-predict" },
+      ],
+    },
+    aiPrompts: [
+      "How do I track my cycle without becoming obsessed?",
+      "Is it okay to take a break from ovulation tests?",
+      "What should I actually track when trying to conceive?",
+    ],
+    captureIntro: "Tracking is meant to help you notice your body. Worth writing down what is starting to feel like too much.",
+    journey: ["trying-to-conceive"],
+    topics: ["cycle-tracking", "wellbeing"],
+    relatedSlugs: [
+      "how-to-know-when-you-are-ovulating",
+      "understanding-your-fertile-window",
+      "using-ovulation-tests",
+      "basal-body-temperature-tracking",
+      "when-ovulation-is-hard-to-predict",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-tracking-without-overthinking.jpg", import.meta.url).href,
+      alt: "An open cream notebook with a plain pencil resting on top, a warm mug of tea and a small eucalyptus sprig, in soft morning light.",
+    },
+    sources: [
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Getting pregnant: fertility and reproduction", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+      { label: "Mental health when trying for a baby", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/planning-a-pregnancy/mental-wellbeing/mental-health-when-trying-baby" },
+    ],
+    keyTakeaways: [
+      "Tracking is a tool, not a rule; one or two steady signals often give a clearer picture than many.",
+      "Ovulation tests, cervical mucus and BBT can all be useful, and none of them need to be tracked every day.",
+      "Taking a cycle off from tracking is a reasonable choice, not a setback.",
+      "If tracking is affecting sleep, mood or your relationship, it is worth simplifying.",
+      "Speak to a GP if cycles feel unclear over several months.",
+    ],
+    faq: [
+      { question: "Do I need to track everything to conceive?", answer: "No. Most people do well with one or two steady signals, such as period dates plus one of ovulation tests, cervical mucus or basal body temperature. Tracking everything at once often adds stress without adding information." },
+      { question: "Is it okay to take a break from tracking?", answer: "Yes. Pausing for a cycle or two can help you notice your body on its own terms. It does not usually change your chances of conceiving, and many people feel calmer for it." },
+      { question: "When should I ask a GP about my cycles?", answer: "If your cycles are consistently unclear, very short, very long or very irregular over several months, or if tracking is affecting how you feel day to day, a GP conversation is a reasonable step." },
+    ],
+    editorialSections: [
+      {
+        id: "tracking-as-a-tool",
+        heading: "Tracking as a tool, not a rule",
+        lead: "Awareness is the point. The apps and tests are only worth using when they help you notice your body.",
+        paragraphs: [
+          "Cycle tracking can support trying to conceive by helping you get a sense of when ovulation may be. It can also quietly turn into a set of daily obligations that feel more like a job than a body.",
+          "It may help to think of tracking as one lens on your cycle, not the whole picture. Some cycles need more attention, and many do not.",
+        ],
+      },
+      {
+        id: "one-or-two-signals",
+        heading: "Choosing one or two signals, not everything",
+        lead: "Fewer signals often make a clearer picture, not a smaller one.",
+        paragraphs: [
+          "Period dates are the simplest starting point. Adding one of ovulation tests, cervical mucus or basal body temperature is often enough for most cycles.",
+          "Tracking three or four signals at once can create small daily contradictions that are hard to interpret, especially in cycles that vary from month to month.",
+        ],
+        callout: { tone: "info", text: "If a signal has felt confusing for two or three cycles, it is fine to set it down for a while." },
+      },
+      {
+        id: "when-tests-feel-stressful",
+        heading: "When ovulation tests or symptom checks feel stressful",
+        lead: "Signs that a helpful tool has quietly become a heavy one.",
+        paragraphs: [
+          "Common signs include testing outside your expected fertile window, retesting the same day for reassurance, dreading opening an app, or feeling low after a negative result on a test that was never meant to be positive yet.",
+          "Simplifying often helps. That may mean testing on fewer days, moving a test out of easy reach, or unfollowing forums that add pressure.",
+        ],
+      },
+      {
+        id: "taking-a-break",
+        heading: "Taking a break from tracking",
+        lead: "A pause is not the same as giving up.",
+        paragraphs: [
+          "Some people find that a cycle without any tracking makes the next cycle feel calmer. Others prefer a lighter version, such as just noting period start and end.",
+          "Breaks tend not to change conception chances significantly, and often help intimacy and wellbeing.",
+        ],
+      },
+      {
+        id: "when-to-ask-for-support",
+        heading: "When to ask for support",
+        lead: "A conversation with a clinician is a reasonable next step, not a failure of tracking.",
+        paragraphs: [
+          "If cycles are consistently unclear over several months, or you have been trying without success for a year (or six months if you are 36 or older), a GP conversation is a reasonable next step.",
+          "If the emotional weight of tracking is affecting sleep, mood, work or your relationship, that on its own is worth mentioning to a GP or a fertility counsellor.",
+        ],
+        callout: { tone: "reassurance", text: "Asking for support does not mean anything has gone wrong. It usually means you are carrying a lot, and you deserve help carrying it." },
+      },
+    ],
+  },
+
+  // ─── THYROID AND FERTILITY ───────────────────────────────────────────────
+  {
+    slug: "thyroid-and-fertility",
+    title: "Thyroid conditions and trying to conceive",
+    metaDescription: "How thyroid conditions may affect cycles and trying to conceive, when to speak to a GP and what a preconception thyroid conversation usually involves.",
+    quickAnswer: "The thyroid gland helps regulate hormones that can affect your cycle and support a pregnancy. Thyroid conditions such as an underactive or overactive thyroid can sometimes make cycles irregular or make trying to conceive harder. If you already have a thyroid condition, a preconception review with your GP is a sensible step, as your medication or monitoring may need to change. If you have symptoms such as ongoing tiredness, weight changes, palpitations or noticeably heavier or lighter periods, a simple blood test can help work out what is going on.",
+    standfirst: "The thyroid is small, but it can quietly shape cycles, energy and pregnancy planning.",
+    howThisFeels: [
+      "Wondering if a slow feeling in your body is worth mentioning",
+      "Trying to conceive with a diagnosis that already feels like a lot",
+      "Not sure whether a symptom is your thyroid, life, or both",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "The thyroid helps regulate hormones", body: "The thyroid gland produces hormones that support metabolism, energy and menstrual cycles. When it is producing too little or too much, cycles can shift and general wellbeing can be affected." },
+        { heading: "Underactive and overactive thyroid", body: "An underactive thyroid (hypothyroidism) and an overactive thyroid (hyperthyroidism) are the two most common patterns. Both can affect cycles and pregnancy planning, and both are treatable." },
+      ],
+      lessCauses: [
+        { heading: "Autoimmune thyroid conditions", body: "Conditions such as Hashimoto's or Graves' disease may need slightly closer monitoring around trying to conceive and during pregnancy. Your GP or endocrinologist can guide this." },
+        { heading: "Thyroid changes during pregnancy", body: "Thyroid hormone needs often change in pregnancy itself, which is one reason a preconception review is helpful." },
+      ],
+      whyItVaries: "Thyroid conditions sit on a spectrum, and how much they affect cycles or trying to conceive can vary from person to person. Medication, monitoring and general health all play a part.",
+    },
+    timing: {
+      whenStarts: "Symptoms can build gradually over months, which is one reason they are often missed.",
+      whenEases: "Once treatment is in the right range, many people feel steadier within a few months, and cycles often settle too.",
+    },
+    whatItFeelsLike: [
+      "A tiredness that does not shift with sleep",
+      "Noticing cycles have quietly changed",
+      "Relief at having a name for how you have been feeling",
+    ],
+    whatThisMeans: "Thyroid balance can matter for trying to conceive, but a thyroid condition is not usually a barrier. Most people with a treated thyroid condition can conceive and carry a pregnancy well.",
+    normal: [
+      "Small energy changes across a cycle",
+      "One or two irregular cycles occasionally",
+      "Wanting a blood test for reassurance",
+    ],
+    seekSupport: [
+      "Cycles that have become consistently heavier, lighter or more irregular",
+      "Ongoing tiredness, weight changes, palpitations or feeling low",
+      "A known thyroid condition without a recent review",
+    ],
+    disclaimer: "This is general information, not a diagnosis. Speak to your GP, pharmacist or specialist about your own thyroid history, medication and blood tests before making changes.",
+    whatYouCanDo: [
+      { action: "Book a preconception GP conversation if you already have a thyroid condition", reason: "Medication doses and monitoring often need reviewing before and in early pregnancy." },
+      { action: "Ask about a simple thyroid blood test if symptoms are new", reason: "A first blood test usually looks at TSH and can guide next steps." },
+      { action: "Keep taking prescribed thyroid medication unless a clinician advises otherwise", reason: "Stopping medication without guidance can make things worse." },
+      { action: "Note cycle changes to bring to your appointment", reason: "Dates, flow and general symptoms give your GP useful context." },
+      { action: "Continue folic acid and other preconception basics", reason: "These sit alongside thyroid care rather than replacing it." },
+    ],
+    whatHappensNext: "Most people leave a preconception thyroid conversation with a clear plan: continue as you are, adjust medication, or repeat a blood test in a few weeks. Cycles often settle as treatment reaches a steady range.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Preconception GP appointment", href: "/articles/preconception-gp-appointment" },
+        { label: "Medication review before pregnancy", href: "/articles/medication-review-before-pregnancy" },
+        { label: "Irregular periods and trying to conceive", href: "/articles/irregular-periods-and-trying-to-conceive" },
+      ],
+    },
+    aiPrompts: [
+      "How does my thyroid affect trying to conceive?",
+      "Do I need a blood test before trying for a baby?",
+      "Should my thyroid medication change in pregnancy?",
+    ],
+    captureIntro: "Thyroid conversations can hold a lot of quiet worry. Worth noting what still feels unclear before your appointment.",
+    journey: ["trying-to-conceive"],
+    topics: ["conditions"],
+    relatedSlugs: [
+      "preconception-gp-appointment",
+      "medication-review-before-pregnancy",
+      "irregular-periods-and-trying-to-conceive",
+      "when-to-ask-for-fertility-help",
+      "what-to-do-before-trying-to-conceive",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-thyroid-and-fertility.jpg", import.meta.url).href,
+      alt: "A soft still life of a plain ceramic mug of water, a folded cream cloth and a small sage sprig in gentle morning daylight.",
+    },
+    sources: [
+      { label: "Underactive thyroid (hypothyroidism)", publisher: "NHS", url: "https://www.nhs.uk/conditions/underactive-thyroid-hypothyroidism/" },
+      { label: "Overactive thyroid (hyperthyroidism)", publisher: "NHS", url: "https://www.nhs.uk/conditions/overactive-thyroid-hyperthyroidism/" },
+      { label: "Thyroid disease: pregnancy", publisher: "British Thyroid Foundation", url: "https://www.btf-thyroid.org/pregnancy-and-fertility-in-thyroid-disorders" },
+      { label: "Hypothyroidism in adults", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/hypothyroidism/" },
+    ],
+    keyTakeaways: [
+      "The thyroid helps regulate hormones that can affect cycles and pregnancy.",
+      "An underactive or overactive thyroid can sometimes affect trying to conceive, and both are treatable.",
+      "A preconception review is helpful if you already have a thyroid condition.",
+      "Ongoing tiredness, weight changes, palpitations or changed cycles are worth mentioning to a GP.",
+      "Most people with a treated thyroid condition can conceive and carry a pregnancy well.",
+    ],
+    faq: [
+      { question: "Do I need a thyroid test before trying to conceive?", answer: "Routine screening is not offered to everyone, but a blood test may be sensible if you have symptoms, a family history of thyroid conditions or a personal history of pregnancy loss. Your GP can advise." },
+      { question: "Will thyroid medication change in pregnancy?", answer: "Thyroid hormone needs often increase in pregnancy, so people who take levothyroxine usually need their dose reviewed early. Your GP or specialist will guide this." },
+      { question: "Can a thyroid condition affect my cycle?", answer: "Yes. Both underactive and overactive thyroid conditions can sometimes make cycles heavier, lighter or more irregular. Cycles often settle once treatment is in a steady range." },
+    ],
+    editorialSections: [
+      {
+        id: "what-the-thyroid-does",
+        heading: "What the thyroid does, in plain terms",
+        lead: "A small gland in your neck that helps regulate hormones your body uses every day.",
+        paragraphs: [
+          "The thyroid produces hormones that influence metabolism, energy, mood and menstrual cycles. When it is producing too little or too much, several parts of daily life can feel a bit off.",
+          "Trying to conceive is one area where thyroid balance can matter. It is rarely the whole story, but it is a piece worth checking.",
+        ],
+      },
+      {
+        id: "why-it-matters-for-ttc",
+        heading: "Why thyroid balance can matter when trying to conceive",
+        lead: "Cycles, ovulation and early pregnancy can all be affected by significant imbalance.",
+        paragraphs: [
+          "An untreated underactive or overactive thyroid may sometimes make cycles irregular or affect ovulation. Once treatment is in a steady range, cycles often settle.",
+          "In pregnancy, thyroid hormones support early development. This is why preconception and early pregnancy reviews matter for people with a known thyroid condition.",
+        ],
+        callout: { tone: "info", text: "If you already take thyroid medication, book a preconception GP conversation before you start trying, or as soon as you can if you have already started." },
+      },
+      {
+        id: "known-condition",
+        heading: "If you already have a thyroid condition",
+        lead: "The main goal is a stable, monitored plan through trying to conceive and into pregnancy.",
+        paragraphs: [
+          "Your GP or specialist may want to check TSH levels before you start trying, review your medication dose and set a plan for early pregnancy monitoring.",
+          "Do not stop or change thyroid medication on your own. Small dose changes are common and safe when guided by a clinician.",
+        ],
+      },
+      {
+        id: "symptoms-worth-mentioning",
+        heading: "Symptoms that may be worth discussing with a GP",
+        lead: "None of these on their own confirm anything, and they are all worth a conversation.",
+        paragraphs: [
+          "For underactive thyroid, common features can include tiredness that does not lift, feeling cold, weight gain, low mood and heavier or more frequent periods.",
+          "For overactive thyroid, features may include weight loss, palpitations, feeling anxious or shaky, sweating and lighter or less frequent periods.",
+        ],
+      },
+      {
+        id: "tests-and-monitoring",
+        heading: "Tests and monitoring in general terms",
+        lead: "A first blood test is usually straightforward.",
+        paragraphs: [
+          "A first thyroid blood test often looks at TSH, and sometimes free T4. Results guide whether further tests, treatment or monitoring are helpful.",
+          "If you have a known condition, blood tests may be repeated more often when trying to conceive and in early pregnancy.",
+        ],
+      },
+      {
+        id: "when-to-speak-to-someone",
+        heading: "When to speak to a GP, specialist or fertility clinic",
+        lead: "Some situations are worth prioritising sooner rather than later.",
+        paragraphs: [
+          "Book a GP conversation if you have new symptoms, a known thyroid condition without a recent review, ongoing irregular cycles, or a history of pregnancy loss.",
+          "If you have been trying to conceive for a year (or six months if you are 36 or older) without success, thyroid checks may be part of a wider fertility assessment.",
+        ],
+        callout: { tone: "reassurance", text: "Most people with a treated thyroid condition go on to conceive and carry a pregnancy well." },
+      },
+    ],
+  },
+
+  // ─── TTC IN YOUR 30S ─────────────────────────────────────────────────────
+  {
+    slug: "ttc-in-your-30s",
+    title: "Trying to conceive in your 30s",
+    metaDescription: "A calm, practical guide to trying to conceive in your 30s. Cycle awareness, preconception health, when to ask for support and how to handle pressure.",
+    quickAnswer: "Many people try to conceive in their 30s, and it is a very common time to start a family. Fertility can gradually shift with age, but there is no single cliff edge. Most healthy couples in their early 30s who try regularly conceive within a year. Cycle awareness, preconception health and speaking to a GP after twelve months of trying (or sooner from 36) are the usual practical steps. Pressure and comparison can feel loud in this decade, and looking after your wellbeing is part of the picture too.",
+    standfirst: "The 30s is a common decade for trying to conceive, and it deserves calm, honest information rather than urgency.",
+    howThisFeels: [
+      "Aware of age without wanting to panic",
+      "Comparing timelines with friends or family",
+      "Trying to enjoy the process while also planning it",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Many people try in their 30s", body: "The average age at first birth in the UK has been in the early 30s for several years. You are far from alone in starting a family in this decade." },
+        { heading: "Fertility can gradually shift", body: "Fertility often changes gradually from the early 30s onwards, but the change is usually gentle rather than sudden. Most healthy couples in their early 30s who try regularly conceive within a year." },
+      ],
+      lessCauses: [
+        { heading: "Health conditions and lifestyle", body: "Some conditions, such as PCOS, endometriosis or thyroid conditions, may affect trying to conceive regardless of age. Lifestyle factors on both sides can also play a part." },
+        { heading: "Partner factors", body: "Male fertility also plays a role, and looking at both sides is usually kinder and more useful than focusing on one." },
+      ],
+      whyItVaries: "Every person, cycle and relationship is different. Time to conception varies widely, even between people in similar circumstances.",
+    },
+    timing: {
+      whenStarts: "Practical planning often starts a few months before actively trying, with folic acid and any preconception health conversations.",
+      whenEases: "For many couples in their early 30s, conception happens within the first year of trying regularly.",
+    },
+    whatItFeelsLike: [
+      "A quiet mix of hope and pressure",
+      "Wanting a plan without wanting to over-plan",
+      "Small conversations that feel bigger than they look",
+    ],
+    whatThisMeans: "Trying in your 30s is common, calm and usually goes well over time. It is reasonable to combine steady preconception care with a plan for when to ask for support.",
+    normal: [
+      "Cycles that take a few months to feel familiar",
+      "Feeling more emotional than usual across a cycle",
+      "Needing more sleep than you used to",
+    ],
+    seekSupport: [
+      "Trying for a year without success in your early 30s",
+      "Trying for six months from age 36 without success",
+      "Very irregular or missing periods",
+    ],
+    disclaimer: "This is general information, not personal medical advice. Speak to your GP about your own health, cycles and any specific concerns.",
+    whatYouCanDo: [
+      { action: "Start folic acid 400 micrograms daily before trying", reason: "It supports early development, and starting early gives it time to build up." },
+      { action: "Book a preconception GP conversation if you have any conditions or take regular medication", reason: "Reviewing your health before trying often makes trying itself simpler." },
+      { action: "Get a rough sense of your cycle", reason: "Knowing your usual cycle length helps you notice patterns and time-sensitive moments." },
+      { action: "Include your partner from the start", reason: "Fertility is shared, and preconception health matters for both of you." },
+      { action: "Set a soft time frame for when you will seek support", reason: "Twelve months (or six from 36) is the usual UK guide." },
+    ],
+    whatHappensNext: "Most couples in their early 30s conceive within the first year of trying. If it takes longer, your GP can discuss investigations, referrals and next steps calmly.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Age and trying to conceive", href: "/articles/age-and-trying-to-conceive" },
+        { label: "What to do before trying to conceive", href: "/articles/what-to-do-before-trying-to-conceive" },
+        { label: "When to ask for fertility help", href: "/articles/when-to-ask-for-fertility-help" },
+      ],
+    },
+    aiPrompts: [
+      "How does trying to conceive in my 30s usually go?",
+      "When should I speak to a GP about fertility?",
+      "What should I do before we start trying?",
+    ],
+    captureIntro: "This decade can carry a lot of quiet expectation. Worth writing down what feels loudest right now.",
+    journey: ["trying-to-conceive"],
+    topics: ["age-and-fertility"],
+    relatedSlugs: [
+      "age-and-trying-to-conceive",
+      "what-to-do-before-trying-to-conceive",
+      "preconception-gp-appointment",
+      "when-to-ask-for-fertility-help",
+      "male-fertility-when-trying-to-conceive",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-in-your-30s.jpg", import.meta.url).href,
+      alt: "A single hand loosely holding a cream mug on a wooden table beside a small vase of eucalyptus in soft window light.",
+    },
+    sources: [
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Infertility overview", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/" },
+      { label: "Age and fertility", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/age-and-fertility/" },
+      { label: "Planning a pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/planning-a-pregnancy" },
+    ],
+    keyTakeaways: [
+      "The 30s is a very common decade for trying to conceive.",
+      "Fertility can gradually shift with age, without a single cliff edge.",
+      "Most healthy couples in their early 30s who try regularly conceive within a year.",
+      "Preconception health, cycle awareness and partner health all play a part.",
+      "Speak to a GP after twelve months of trying, or after six months from age 36.",
+    ],
+    faq: [
+      { question: "Is 30 too old to start trying?", answer: "No. The 30s is a very common decade for trying to conceive in the UK. Fertility can gradually shift with age, but many couples in their early 30s who try regularly conceive within a year." },
+      { question: "How long should we try before speaking to a GP?", answer: "The usual UK guide is twelve months of regular trying without success, or six months if you are 36 or older. You can always speak to a GP sooner if you have concerns." },
+      { question: "Should my partner do anything before we start trying?", answer: "Yes. Preconception health matters for both partners. Sensible steps include a general health check, reviewing alcohol, smoking and any medications, and looking at overall wellbeing together." },
+    ],
+    editorialSections: [
+      {
+        id: "why-many-people-try-in-their-30s",
+        heading: "Why many people try in their 30s",
+        lead: "This decade has become the most common time to start a family in the UK.",
+        paragraphs: [
+          "The average age at first birth in the UK has been in the early 30s for several years. Careers, relationships and housing all play a part, and none of it is a personal failing.",
+          "The 30s is a full and reasonable decade to try to conceive. Calm, steady information tends to help more than urgency.",
+        ],
+      },
+      {
+        id: "cycle-awareness",
+        heading: "Cycle awareness in your 30s",
+        lead: "A rough sense of your cycle usually helps more than perfect tracking.",
+        paragraphs: [
+          "Knowing your usual cycle length and roughly when ovulation may happen helps you notice change and time-sensitive moments. It does not need to be complicated.",
+          "One or two steady signals, such as period dates plus ovulation tests or cervical mucus, is usually enough for most cycles.",
+        ],
+      },
+      {
+        id: "preconception-health",
+        heading: "Preconception health that actually helps",
+        lead: "Small, steady steps tend to matter more than dramatic overhauls.",
+        paragraphs: [
+          "Folic acid 400 micrograms daily, a reasonable diet, gentle activity, less alcohol, no smoking and a look at any regular medications are the sensible basics.",
+          "A short preconception GP conversation can be useful, especially if you have any conditions or take regular medication.",
+        ],
+        callout: { tone: "info", text: "Both partners benefit from preconception health, not only the person carrying the pregnancy." },
+      },
+      {
+        id: "when-to-ask-for-help",
+        heading: "When to ask for support",
+        lead: "There are UK guides that make this less of a guessing game.",
+        paragraphs: [
+          "The usual UK guide is to speak to a GP after twelve months of trying without success, or six months if you are 36 or older. You can always ask sooner if you have concerns.",
+          "Asking early does not use up a chance. It gives you information and a plan.",
+        ],
+      },
+      {
+        id: "emotional-pressure",
+        heading: "Emotional pressure and comparison",
+        lead: "The 30s can quietly carry a lot of expectation.",
+        paragraphs: [
+          "Family, friends, social media and work all bring different pressure. Comparing timelines is very common and often unhelpful.",
+          "Small boundaries, honest conversations with a partner and time away from certain conversations can make the decade feel calmer.",
+        ],
+      },
+      {
+        id: "partner-factors",
+        heading: "Partner factors, calmly",
+        lead: "Trying to conceive is shared, and looking at both sides is kinder.",
+        paragraphs: [
+          "Male fertility can also change with age and lifestyle. A conversation about both sides is more useful than focusing on one, and takes some of the quiet weight off.",
+          "If investigations begin, both partners are usually included as a matter of course.",
+        ],
+      },
+    ],
+  },
+
+  // ─── TTC AFTER 35 ────────────────────────────────────────────────────────
+  {
+    slug: "ttc-after-35",
+    title: "Trying to conceive after 35",
+    metaDescription: "Honest, calm guidance on trying to conceive after 35. When to ask for support, cycle awareness, partner factors and looking after wellbeing.",
+    quickAnswer: "Many people try to conceive after 35, and many do. Fertility can gradually shift with age, and the usual UK guide is to speak to a GP after six months of trying rather than a year. Cycle awareness, preconception health and a calm conversation about both partners tend to help more than urgency. This is a decade where honest information and steady support matter, without fear.",
+    standfirst: "Age can become part of the conversation after 35. It does not have to be the loudest voice in the room.",
+    howThisFeels: [
+      "Aware of time and trying not to spiral",
+      "Wanting honest information without fear",
+      "Ready to ask for support if it is the right step",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Fertility can gradually shift with age", body: "Fertility tends to change gradually from the mid-30s onwards. Many people still conceive naturally in their late 30s and early 40s, and many find it takes longer than it did earlier." },
+        { heading: "The UK guide changes at 36", body: "The usual UK guide is to speak to a GP after six months of trying without success from age 36, rather than a year. This is designed to give you more time, not less." },
+      ],
+      lessCauses: [
+        { heading: "Health conditions", body: "Conditions such as PCOS, endometriosis or thyroid conditions may play a role at any age. A GP can help work out what is worth investigating." },
+        { heading: "Partner age and health", body: "Male fertility can also change with age and lifestyle. Looking at both sides tends to be more useful than focusing on one." },
+      ],
+      whyItVaries: "Age is one factor in a bigger picture. Cycle, health, partner factors and simple time all play a part, and outcomes vary widely between people in similar circumstances.",
+    },
+    timing: {
+      whenStarts: "Many people who conceive after 35 do so within their first six to twelve months of trying regularly.",
+      whenEases: "A GP conversation at six months (from age 36) can settle a lot of unspoken worry and give you a plan.",
+    },
+    whatItFeelsLike: [
+      "Cycles that feel more scrutinised than they did in your 20s",
+      "A quiet relief once a plan is in place",
+      "Wanting to protect calm alongside seeking help",
+    ],
+    whatThisMeans: "Trying to conceive after 35 is common. Honest information, a slightly shorter timeline for asking for support and looking after wellbeing tend to help more than urgency.",
+    normal: [
+      "Cycles that feel a little more variable than before",
+      "Wanting fertility conversations sooner",
+      "A mix of hope and pressure in the same week",
+    ],
+    seekSupport: [
+      "Trying for six months from age 36 without success",
+      "Very irregular or missing periods",
+      "A known condition without a recent review",
+    ],
+    disclaimer: "This is general information, not a personalised assessment. Your GP can talk through your own history, tests and any next steps.",
+    whatYouCanDo: [
+      { action: "Book a GP conversation early if you are 36 or older and have been trying for six months", reason: "The UK guide is designed to give you time and information, not to rush you." },
+      { action: "Continue folic acid and preconception basics", reason: "These matter at any age and support early development." },
+      { action: "Get a rough sense of your cycle", reason: "A short cycle diary is useful context for any fertility appointment." },
+      { action: "Bring your partner into the conversation", reason: "Fertility is shared, and both sides usually benefit from a look." },
+      { action: "Protect wellbeing alongside seeking help", reason: "Support and calm are not opposites; both often help." },
+    ],
+    whatHappensNext: "A GP appointment often leads to blood tests, a short conversation with your partner and, if helpful, a referral to a fertility clinic. Many people conceive during this time; some go on to further investigations or treatment.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Age and trying to conceive", href: "/articles/age-and-trying-to-conceive" },
+        { label: "When to ask for fertility help", href: "/articles/when-to-ask-for-fertility-help" },
+        { label: "What happens at a fertility appointment", href: "/articles/what-happens-at-a-fertility-appointment" },
+      ],
+    },
+    aiPrompts: [
+      "How does trying to conceive after 35 usually go?",
+      "When should I speak to a GP about fertility after 35?",
+      "What tests might I have if we have been trying for six months?",
+    ],
+    captureIntro: "Age conversations can be quietly heavy. Worth noting what feels most on your mind before your next appointment.",
+    journey: ["trying-to-conceive"],
+    topics: ["age-and-fertility"],
+    relatedSlugs: [
+      "age-and-trying-to-conceive",
+      "when-to-ask-for-fertility-help",
+      "what-happens-at-a-fertility-appointment",
+      "preconception-gp-appointment",
+      "male-fertility-when-trying-to-conceive",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-after-35.jpg", import.meta.url).href,
+      alt: "A calm still life of an open notebook on cream linen with a small glass jar of eucalyptus and a soft throw in gentle morning light.",
+    },
+    sources: [
+      { label: "Infertility overview", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/" },
+      { label: "Fertility: assessment and treatment for people with fertility problems (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Age and fertility", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/age-and-fertility/" },
+      { label: "Planning a pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/planning-a-pregnancy" },
+    ],
+    keyTakeaways: [
+      "Many people try to conceive after 35, and many do.",
+      "The usual UK guide from age 36 is to speak to a GP after six months, not twelve.",
+      "Cycle awareness and preconception basics still matter and still help.",
+      "Male fertility and partner health are part of the conversation too.",
+      "Support and calm can sit alongside seeking help.",
+    ],
+    faq: [
+      { question: "Is 35 too old to start trying?", answer: "No. Many people conceive after 35, both naturally and with support. Fertility can gradually shift with age, but there is no single cutoff." },
+      { question: "How long should we try before seeing a GP after 35?", answer: "The usual UK guide is six months of trying without success from age 36, rather than a year. You can speak to a GP sooner if you have any concerns." },
+      { question: "What might a first fertility appointment involve?", answer: "It often includes a health history for both partners, some blood tests, and sometimes a semen analysis. If further investigations are helpful, your GP can refer you to a fertility clinic." },
+    ],
+    editorialSections: [
+      {
+        id: "why-age-becomes-part-of-the-conversation",
+        heading: "Why age can become part of the conversation",
+        lead: "Fertility often changes gradually from the mid-30s, and it is one factor rather than the whole story.",
+        paragraphs: [
+          "Cycles, ovulation quality and time to conception can all shift gently with age. Many people still conceive naturally in their late 30s and early 40s, and it may take longer than it did earlier.",
+          "Age is worth naming honestly, and it does not need to be the loudest voice in the room.",
+        ],
+      },
+      {
+        id: "timeframes-for-asking-for-help",
+        heading: "Careful timeframes for asking for help",
+        lead: "The UK guide is designed to give you time, not to rush you.",
+        paragraphs: [
+          "From age 36 onwards, the usual UK guide is to speak to a GP after six months of regular trying without success, rather than a year. Below 36, twelve months is the usual guide.",
+          "You can always ask sooner if you have specific concerns, such as irregular cycles or a known condition.",
+        ],
+        callout: { tone: "info", text: "Speaking to a GP earlier does not use up a chance. It usually adds information and a plan." },
+      },
+      {
+        id: "cycle-awareness",
+        heading: "Cycle awareness after 35",
+        lead: "A rough sense of your cycle helps more than perfect tracking.",
+        paragraphs: [
+          "Knowing your usual cycle length and roughly when ovulation may happen helps you notice change and time-sensitive moments.",
+          "One or two steady signals, such as period dates and ovulation tests or cervical mucus, are usually enough. Tracking everything at once often adds stress rather than clarity.",
+        ],
+      },
+      {
+        id: "partner-factors",
+        heading: "Partner age and sperm health, in careful terms",
+        lead: "Male fertility can also change with age and lifestyle, and both partners matter.",
+        paragraphs: [
+          "Male fertility is not fixed. It can also shift with age, lifestyle and general health. Looking at both sides is usually kinder and more useful than focusing on one.",
+          "Semen analysis is often part of a first fertility assessment and is a straightforward test.",
+        ],
+      },
+      {
+        id: "appointment-prep",
+        heading: "Preparing for a fertility appointment",
+        lead: "A little preparation makes appointments feel less pressured.",
+        paragraphs: [
+          "Useful things to bring or note include your usual cycle length, how long you have been trying, any conditions or medications, and a brief health history for both partners.",
+          "Writing down two or three questions before the appointment often helps you leave with a clearer plan.",
+        ],
+      },
+      {
+        id: "emotional-pressure",
+        heading: "Emotional pressure after 35",
+        lead: "This decade can carry quiet weight, and support matters.",
+        paragraphs: [
+          "Age can bring an internal timer that other people cannot see. Comparison, family conversations and social media can all amplify it.",
+          "Fertility counsellors, honest conversations with a partner and time away from certain conversations can all help.",
+        ],
+        callout: { tone: "reassurance", text: "Wanting information sooner is not panic; it is care." },
+      },
+    ],
+  },
+
+  // ─── EMOTIONAL PRESSURE OF AGE WHEN TTC ──────────────────────────────────
+  {
+    slug: "emotional-pressure-of-age-when-ttc",
+    title: "The emotional side of age when trying to conceive",
+    metaDescription: "The emotional weight of age, timelines and comparison while trying to conceive. Calm, supportive guidance and where to find help.",
+    quickAnswer: "The emotional side of age when trying to conceive is often heavier than the practical side. Feeling behind, comparing timelines with friends or family, and carrying quiet pressure can all make the whole experience feel harder. This does not mean anything is wrong with you. Small changes such as setting boundaries with certain conversations, talking to a partner or trusted friend, and speaking to a GP or fertility counsellor if the weight is affecting daily life can all help.",
+    standfirst: "The clock in your head is often louder than the one on the wall. Both deserve a calm response.",
+    howThisFeels: [
+      "Feeling behind, even when you know it is not helpful",
+      "Wanting to be honest without being pitied",
+      "Tired of comparing timelines with everyone else",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Family and social pressure", body: "Comments about age, timing and having children can come from family, friends, colleagues and social media. Even well-meant comments can land heavily." },
+        { heading: "Comparison with other people's timelines", body: "Other people's pregnancies, announcements and posts can create a quiet running tally in your head. This is common and it is very rarely useful." },
+      ],
+      lessCauses: [
+        { heading: "Longer trying journeys and past losses", body: "The longer you have been trying, or if you have had losses, the more each cycle can carry. This is understandable and it deserves gentle support." },
+        { heading: "Big life decisions in the background", body: "Careers, moves, relationships and finances often sit alongside trying to conceive and can add to the emotional weight." },
+      ],
+      whyItVaries: "How age feels depends on your history, your relationships, your community and your own inner voice. Some cycles feel calmer than others, and that is normal too.",
+    },
+    timing: {
+      whenStarts: "Emotional pressure can build slowly over months and years, and often becomes louder around family events or milestones.",
+      whenEases: "For many people, some of the weight lifts once boundaries are in place, a plan is agreed with a partner or a professional is involved.",
+    },
+    whatItFeelsLike: [
+      "A quiet ache around certain birthdays",
+      "Feeling both hopeful and heavy in the same conversation",
+      "Small relief when you name it out loud",
+    ],
+    whatThisMeans: "Emotional pressure around age is real. It does not mean anything is wrong with you, and it does not need to be carried alone.",
+    normal: [
+      "Wanting to skip certain family events during a hard cycle",
+      "Feeling more emotional around friends' pregnancy announcements",
+      "Cycles where you feel calm, and cycles where you do not",
+    ],
+    seekSupport: [
+      "Persistent low mood, anxiety or hopelessness beyond a cycle or two",
+      "Feeling unable to talk about it with anyone",
+      "TTC that is affecting sleep, work or your relationship significantly",
+    ],
+    disclaimer: "This is general emotional support, not therapy. Please speak to a GP or a fertility counsellor if the weight of trying to conceive is affecting your daily life.",
+    whatYouCanDo: [
+      { action: "Name what feels loudest, out loud or on paper", reason: "Naming pressure often makes it a little smaller." },
+      { action: "Set gentle boundaries with certain conversations", reason: "You do not owe updates or explanations to everyone." },
+      { action: "Agree a shared script with a partner if you have one", reason: "It helps to have one calm answer ready for common questions." },
+      { action: "Curate social media use during hard cycles", reason: "Muting or unfollowing is a small kindness, not a betrayal." },
+      { action: "Talk to a GP or fertility counsellor if it feels heavy", reason: "Support does not need to wait for a diagnosis." },
+    ],
+    whatHappensNext: "For most people, some of the emotional weight lifts once a plan is agreed with a partner or a professional. Cycles can still be hard, and support usually makes them a little easier to move through.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Age and trying to conceive", href: "/articles/age-and-trying-to-conceive" },
+        { label: "Mental wellbeing before pregnancy", href: "/articles/mental-wellbeing-before-pregnancy" },
+        { label: "When to ask for fertility help", href: "/articles/when-to-ask-for-fertility-help" },
+      ],
+    },
+    aiPrompts: [
+      "How do I cope with feeling behind when trying to conceive?",
+      "How do I handle family comments about age and babies?",
+      "Where can I find fertility counselling in the UK?",
+    ],
+    captureIntro: "The quiet weight of age is often worth writing down. Not to solve it, just to give it room.",
+    journey: ["trying-to-conceive", "support"],
+    topics: ["age-and-fertility", "emotional-wellbeing"],
+    relatedSlugs: [
+      "age-and-trying-to-conceive",
+      "mental-wellbeing-before-pregnancy",
+      "when-to-ask-for-fertility-help",
+      "coping-with-the-two-week-wait",
+      "ttc-after-35",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-emotional-pressure-age.jpg", import.meta.url).href,
+      alt: "A soft cream armchair with a knitted sage throw, a warm mug on a small tray and a small vase of eucalyptus in gentle morning light.",
+    },
+    sources: [
+      { label: "Mental health when trying for a baby", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/planning-a-pregnancy/mental-wellbeing/mental-health-when-trying-baby" },
+      { label: "Getting pregnant: coping with the emotional side", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+      { label: "Fertility counselling", publisher: "British Infertility Counselling Association", url: "https://www.bica.net/" },
+    ],
+    keyTakeaways: [
+      "Emotional pressure around age is common when trying to conceive.",
+      "Comparison and family conversations can add weight that is not always visible.",
+      "Small boundaries, honest conversations and shared plans help.",
+      "You do not have to wait for a diagnosis to ask for support.",
+      "Fertility counsellors and charities can help you carry it.",
+    ],
+    faq: [
+      { question: "Is it normal to feel behind when trying to conceive?", answer: "Yes. Many people carry a quiet sense of being behind, even when their timeline is very reasonable. Naming it, talking to a partner or a friend, and limiting comparison often helps." },
+      { question: "How do I handle family comments about age and having children?", answer: "A short, calm script that you can use in most conversations can help. You do not owe details or timelines. If certain comments keep landing badly, it is fine to ask for them to stop." },
+      { question: "When should I speak to someone professionally?", answer: "If low mood, anxiety or hopelessness are lasting beyond a cycle or two, or if trying to conceive is affecting sleep, work or your relationship, a GP or fertility counsellor is a reasonable place to start." },
+    ],
+    editorialSections: [
+      {
+        id: "feeling-behind",
+        heading: "Feeling behind, and where it comes from",
+        lead: "A common feeling, and rarely a fair one.",
+        paragraphs: [
+          "Feeling behind often comes from a mix of family history, cultural messages, social media and comparison with friends. It is very common and it is rarely a full picture.",
+          "It may help to notice when the feeling arrives, without needing to fix it in the moment.",
+        ],
+      },
+      {
+        id: "family-and-social-pressure",
+        heading: "Family and social pressure",
+        lead: "Even well-meant comments can land heavily.",
+        paragraphs: [
+          "Comments about age, timing and having children can come from people who love you. That does not always make them easier to hear.",
+          "A short, calm reply that you can use in most conversations often takes the heat out of the moment. Something like, we will share when we are ready, is enough.",
+        ],
+        callout: { tone: "info", text: "You do not owe updates, timelines or reasons to anyone." },
+      },
+      {
+        id: "comparing-timelines",
+        heading: "Comparing timelines",
+        lead: "Small comparisons can quietly add up.",
+        paragraphs: [
+          "Announcements, birthdays, weddings and social media can create a running tally in your head. This is normal and it is rarely useful.",
+          "Muting or unfollowing accounts during a hard cycle is a small kindness to yourself, not a betrayal of anyone.",
+        ],
+      },
+      {
+        id: "decision-fatigue",
+        heading: "Decision fatigue",
+        lead: "Trying to conceive can quietly add a lot of small decisions to daily life.",
+        paragraphs: [
+          "When to test, when to talk to a GP, whether to try another cycle, what to say to a family member. All of it takes energy.",
+          "It can help to agree with a partner or with yourself which decisions can wait, and to protect a little time each week that has nothing to do with trying.",
+        ],
+      },
+      {
+        id: "partner-conversations",
+        heading: "Partner conversations",
+        lead: "Sharing the weight often makes it lighter.",
+        paragraphs: [
+          "Partners sometimes carry the weight differently. Naming that difference kindly, and agreeing small shared rituals, can help both people feel less alone.",
+          "If you are trying alone, or without a supportive partner, a fertility counsellor or an online support space can help.",
+        ],
+      },
+      {
+        id: "protecting-wellbeing",
+        heading: "Protecting wellbeing while still seeking help",
+        lead: "Support and calm can sit alongside each other.",
+        paragraphs: [
+          "Speaking to a GP or fertility counsellor is not a failure of coping. It usually means you are carrying a lot and you deserve help carrying it.",
+          "Small daily anchors, gentle activity, sleep, and time away from certain conversations often help alongside professional support.",
+        ],
+        callout: { tone: "reassurance", text: "You are allowed to find this hard. Asking for support is a reasonable step." },
+      },
+    ],
+  },
+
+  // ─── PARTNER SUPPORT WHEN TTC ────────────────────────────────────────────
+  {
+    slug: "partner-support-when-ttc",
+    title: "Supporting each other while trying to conceive",
+    metaDescription: "How partners can support each other while trying to conceive. Sharing the load, talking about testing and timing, and protecting intimacy.",
+    quickAnswer: "Trying to conceive is shared, even when the physical parts fall on one person more than the other. Both partners tend to feel it, and both can help. Practical steps such as talking about timing without blame, agreeing on how to handle appointments together, protecting intimacy and knowing when to ask for support can make the experience calmer. If conversations feel stuck or heavy, a fertility counsellor or GP can help.",
+    standfirst: "Trying to conceive lands on two people, even when only one of you is tracking a cycle.",
+    howThisFeels: [
+      "Wanting to help without knowing quite how",
+      "Feeling the weight without wanting to say it",
+      "Trying to keep intimacy warm while planning around it",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "The physical parts can fall unevenly", body: "Cycle tracking, ovulation tests and pregnancy tests often sit with one partner. That does not mean the other partner is not affected." },
+        { heading: "People carry things differently", body: "One partner may want to talk more; the other may go quiet. Both are normal responses, not a lack of caring." },
+      ],
+      lessCauses: [
+        { heading: "Fertility investigations", body: "Semen analysis, blood tests or scans can add practical steps and quiet worry for both partners. This is often when partner support matters most." },
+        { heading: "Longer TTC journeys", body: "The longer you have been trying, the more each cycle can carry. Small shared rituals become more important over time." },
+      ],
+      whyItVaries: "Every relationship is different. Communication styles, past experiences and life circumstances all shape how partners support each other.",
+    },
+    timing: {
+      whenStarts: "Small tensions often start to build a few months in, or around a specific appointment or test.",
+      whenEases: "Many couples feel calmer once they have a shared way of talking about it, even if the underlying situation has not changed.",
+    },
+    whatItFeelsLike: [
+      "Wanting to be a team without keeping score",
+      "Quiet relief after an honest conversation",
+      "Small daily kindnesses that carry a lot",
+    ],
+    whatThisMeans: "Fertility is shared and it is not one partner's fault. Talking about timing, tests and feelings without blame usually helps both people feel less alone in it.",
+    normal: [
+      "Different ways of coping between partners",
+      "Feeling closer after some conversations and further apart after others",
+      "Wanting a break from talking about it for a week",
+    ],
+    seekSupport: [
+      "Conversations that keep ending in the same argument",
+      "One partner feeling shut out or blamed",
+      "TTC that is significantly affecting the relationship",
+    ],
+    disclaimer: "This is general relationship support, not couples therapy. A GP, fertility counsellor or Relate counsellor can help if things feel stuck.",
+    whatYouCanDo: [
+      { action: "Agree a regular short check-in about how each of you is doing", reason: "Small, planned conversations often prevent bigger ones later." },
+      { action: "Talk about timing without keeping score", reason: "Framing it as a shared plan tends to feel kinder than a demand." },
+      { action: "Attend appointments together where you can", reason: "It shares the load and helps you both hear the same information." },
+      { action: "Protect intimacy that is not about conceiving", reason: "Small moments that are not tied to a cycle help the relationship stay warm." },
+      { action: "Ask for support together if things feel stuck", reason: "Fertility counsellors are used to helping couples through this." },
+    ],
+    whatHappensNext: "Most couples find a version of this that suits them. A few weeks of trying different check-ins, shared rituals or professional support usually helps things settle.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Male fertility when trying to conceive", href: "/articles/male-fertility-when-trying-to-conceive" },
+        { label: "Partner health before pregnancy", href: "/articles/partner-health-before-pregnancy" },
+        { label: "Mental wellbeing before pregnancy", href: "/articles/mental-wellbeing-before-pregnancy" },
+      ],
+    },
+    aiPrompts: [
+      "How do we support each other while trying to conceive?",
+      "How do I talk to my partner about semen analysis?",
+      "How do we protect intimacy while trying for a baby?",
+    ],
+    captureIntro: "Partner conversations can quietly hold a lot. Worth noting one thing you would like to say out loud this week.",
+    journey: ["trying-to-conceive", "support"],
+    topics: ["male-fertility", "relationships"],
+    relatedSlugs: [
+      "male-fertility-when-trying-to-conceive",
+      "partner-health-before-pregnancy",
+      "sperm-health-basics",
+      "mental-wellbeing-before-pregnancy",
+      "when-to-ask-for-fertility-help",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-partner-support.jpg", import.meta.url).href,
+      alt: "Two matching cream mugs and a small vase of eucalyptus on a warm wooden kitchen table in soft morning light.",
+    },
+    sources: [
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Mental health when trying for a baby", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/planning-a-pregnancy/mental-wellbeing/mental-health-when-trying-baby" },
+      { label: "Getting pregnant: coping with the emotional side", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+      { label: "Fertility counselling", publisher: "British Infertility Counselling Association", url: "https://www.bica.net/" },
+    ],
+    keyTakeaways: [
+      "Trying to conceive is shared, even when the physical parts fall unevenly.",
+      "Talking about timing and tests without blame usually helps both partners.",
+      "Attending appointments together shares the load and the information.",
+      "Protecting intimacy that is not about conceiving helps the relationship stay warm.",
+      "Fertility counsellors can help if conversations feel stuck.",
+    ],
+    faq: [
+      { question: "How do we talk about semen analysis without it feeling loaded?", answer: "Frame it as a shared step in a shared plan, not a test of one partner. Many people find it helps to book the conversation with a GP together, so both partners hear the same information at the same time." },
+      { question: "We keep arguing about timing. What can we do?", answer: "Small, planned check-ins outside of the fertile window often help more than in-the-moment conversations. Agreeing a simple shared plan, and giving each other permission to say when it is too much, can lower the pressure." },
+      { question: "How do we look after intimacy while trying for a baby?", answer: "Protecting time together that has nothing to do with conceiving matters. Small rituals, kindness in the ordinary moments and honest conversations tend to help more than any single fix." },
+    ],
+    editorialSections: [
+      {
+        id: "shared-responsibility",
+        heading: "Trying to conceive is shared",
+        lead: "Both partners are involved, even when the physical parts fall unevenly.",
+        paragraphs: [
+          "Cycle tracking, ovulation tests and pregnancy tests often sit with one partner. That does not mean the other partner is not affected.",
+          "Framing it as a shared plan, from the start, usually helps both people feel more like a team and less like one person is carrying the load alone.",
+        ],
+      },
+      {
+        id: "talking-about-timing",
+        heading: "Talking about timing without blame",
+        lead: "Timing conversations are easier when they are planned, kind and honest.",
+        paragraphs: [
+          "Timing sex can quietly turn into pressure. Small changes such as a broader fertile window, less specific language and honest check-ins about how each of you is finding it can help.",
+          "It is fine to say that a particular cycle feels like a lot. Naming it usually takes some of the heat out of the moment.",
+        ],
+        callout: { tone: "info", text: "Neither partner is responsible for the outcome of a cycle. You are both responsible for how you look after each other along the way." },
+      },
+      {
+        id: "tests-and-lifestyle",
+        heading: "Semen analysis and lifestyle conversations",
+        lead: "These are shared health steps, not judgements.",
+        paragraphs: [
+          "Semen analysis is often part of a first fertility assessment and is a straightforward test. It is a shared step, not a verdict.",
+          "Lifestyle conversations about alcohol, smoking, weight and general health are more useful when both partners look at them together rather than one being singled out.",
+        ],
+      },
+      {
+        id: "emotional-differences",
+        heading: "Emotional differences between partners",
+        lead: "People carry things differently, and neither way is wrong.",
+        paragraphs: [
+          "One partner may want to talk more; the other may go quiet. Some people process by planning, others by taking breaks from the topic.",
+          "Naming these differences kindly, rather than treating them as evidence of not caring, tends to prevent a lot of arguments.",
+        ],
+      },
+      {
+        id: "protecting-intimacy",
+        heading: "Protecting intimacy",
+        lead: "Small moments that are not about conceiving matter a lot.",
+        paragraphs: [
+          "Trying to conceive can quietly narrow the relationship down to a schedule. Small daily kindnesses, time together that has nothing to do with a cycle, and honest conversations all help keep the relationship warm.",
+          "If intimacy has started to feel like pressure, it is fine to name that and slow things down.",
+        ],
+      },
+      {
+        id: "asking-for-support-together",
+        heading: "When to ask for support together",
+        lead: "Some conversations are easier with a third person in the room.",
+        paragraphs: [
+          "If conversations keep ending in the same argument, or one partner feels shut out or blamed, a fertility counsellor or Relate counsellor can help.",
+          "Asking for that kind of support together tends to be a strength, not a sign that something is broken.",
+        ],
+        callout: { tone: "reassurance", text: "Asking for help together often protects the relationship as much as it supports the trying." },
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

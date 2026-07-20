@@ -708,7 +708,16 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Worries during the wait",
         description: "The emotional and physical questions that surface in these days.",
         links: [
+          { label: "Two week wait symptoms", href: LIVE.twoWeekWaitSymptoms },
+          { label: "Spotting during the two week wait", href: LIVE.spottingTwoWeekWait },
           { label: "Early pregnancy symptoms explained", href: LIVE.earlySymptoms },
+        ],
+      },
+      {
+        label: "Looking after yourself in the wait",
+        description: "Practical, calm support for the emotional side of these days.",
+        links: [
+          { label: "Coping with the two week wait", href: LIVE.copingTwoWeekWait },
         ],
       },
       {

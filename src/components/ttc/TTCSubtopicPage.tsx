@@ -127,6 +127,14 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/emotional-impact-of-ivf": imgIVF,
   "/articles/emotional-wellbeing-pregnancy": imgLifestyle,
   "/articles/perinatal-anxiety": imgLifestyle,
+
+  // Phase 9.16
+  "/articles/testing-too-early": imgTestingTooEarly,
+  "/articles/negative-test-but-no-period": imgNegativeTestNoPeriod,
+  "/articles/evaporation-line-or-faint-positive": imgEvaporationLine,
+  "/articles/two-week-wait-symptoms": imgTwoWeekWaitSymptoms,
+  "/articles/spotting-during-the-two-week-wait": imgSpottingTwoWeekWait,
+  "/articles/coping-with-the-two-week-wait": imgCopingTwoWeekWait,
 };
 
 const TOPIC_FALLBACK: Record<TTCTopicSlug, string> = {

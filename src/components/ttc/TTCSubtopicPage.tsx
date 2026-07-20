@@ -51,6 +51,14 @@ import imgOvulation from "@/assets/week2-ovulation.jpg";
 import imgWeek1 from "@/assets/week1-cycle.jpg";
 import imgFertilisation from "@/assets/week3-fertilisation.jpg";
 
+// Phase 9.16 (TTC pregnancy tests + two week wait expansion)
+import imgTestingTooEarly from "@/assets/ttc-testing-too-early.jpg";
+import imgNegativeTestNoPeriod from "@/assets/ttc-negative-test-no-period.jpg";
+import imgEvaporationLine from "@/assets/ttc-evaporation-line.jpg";
+import imgTwoWeekWaitSymptoms from "@/assets/ttc-two-week-wait-symptoms.jpg";
+import imgSpottingTwoWeekWait from "@/assets/ttc-spotting-two-week-wait.jpg";
+import imgCopingTwoWeekWait from "@/assets/ttc-coping-two-week-wait.jpg";
+
 interface Props {
   config: TTCPageConfig;
   heroImage: string;

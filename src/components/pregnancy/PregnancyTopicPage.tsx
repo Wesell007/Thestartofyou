@@ -264,6 +264,11 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/induction-of-labour": imgInduction,
   "/articles/what-happens-if-labour-doesnt-start": imgSignsLabour,
   "/articles/hand-expressing-colostrum": imgPreparingCard,
+  "/articles/safe-sleep-basics": imgSafeSleepBasics,
+  "/articles/car-seat-basics": imgCarSeatBasics,
+  "/articles/baby-clothes-and-newborn-essentials": imgNewbornEssentials,
+  "/articles/preparing-siblings-for-a-new-baby": imgPreparingSiblings,
+  "/articles/maternity-leave-planning": imgMaternityLeave,
 };
 
 

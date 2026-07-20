@@ -237,7 +237,7 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/foods-to-avoid-in-pregnancy": imgFoodsToAvoid,
   "/articles/weight-changes-in-pregnancy": imgBodyShifts,
   // Diet & exercise
-  "/articles/eating-well-in-pregnancy": imgSecondEating,
+  "/articles/eating-well-in-pregnancy": imgEatingWell,
   "/articles/key-nutrients-in-pregnancy": imgKeyNutrients,
   "/articles/caffeine-in-pregnancy": imgCaffeine,
   "/articles/hydration-in-pregnancy": imgHydration,

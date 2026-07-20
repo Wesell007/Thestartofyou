@@ -509,6 +509,8 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
           { label: "Preparing for baby: complete guide", href: "/preparing-for-baby" },
           { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to" },
           { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth" },
+          { label: "Baby clothes and newborn essentials", href: "/articles/baby-clothes-and-newborn-essentials" },
+          { label: "Preparing siblings for a new baby", href: "/articles/preparing-siblings-for-a-new-baby" },
         ],
       },
       {
@@ -530,6 +532,15 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
           { label: "Induction of labour", href: "/articles/induction-of-labour" },
           { label: "What happens if labour doesn't start", href: "/articles/what-happens-if-labour-doesnt-start" },
           { label: "Hand expressing colostrum", href: "/articles/hand-expressing-colostrum" },
+        ],
+      },
+      {
+        label: "Practical safety and planning",
+        description: "The practical decisions that quietly matter around bringing your baby home.",
+        links: [
+          { label: "Safe sleep basics", href: "/articles/safe-sleep-basics" },
+          { label: "Car seat basics", href: "/articles/car-seat-basics" },
+          { label: "Maternity leave planning", href: "/articles/maternity-leave-planning" },
         ],
       },
     ],

@@ -1,52 +1,71 @@
-## Phase 10.2a.1 — Pregnancy Topic Image QA Fix
+## Phase 10.2b — Preparing for Baby Gap Batch
 
-Goal: Resolve the reported duplicate thumbnail on `/pregnancy/diet-and-exercise` (Foods to avoid vs Eating well appearing identical in Start here) and sweep for any other adjacent-thumbnail collisions across the six pregnancy topic pages, before Phase 10.2b.
+Publish 5 flagship pregnancy articles into `/pregnancy/preparing-for-baby`, wire in the 5 pre-generated hero images, and place the articles into the existing grouped topic structure.
 
-### Confirmed current state (verified by reading source)
+### Duplicate check (confirmed clean)
 
-- `PregnancyTopicPage.tsx` renders Start here cards via `resolveImage(item.href, item.image)` — same resolver used by grouped list rows. Start here already reads `HREF_IMAGE_MAP` correctly; no code split between the two card families.
-- In `pregnancyTopicData.ts` the diet-and-exercise `startHere` items are `foods-to-avoid`, `eating-well`, `moving-your-body` (no per-item `image` override).
-- Current `HREF_IMAGE_MAP` entries:
-  - `/articles/foods-to-avoid-in-pregnancy` → `imgFoodsToAvoid` (dedicated `article-hero-foods-to-avoid.jpg`)
-  - `/articles/eating-well-in-pregnancy` → `imgSecondEating` (shared generic `article-hero-second-eating.jpg`, also used by heartburn/constipation/antacids fallbacks)
-  - `/articles/key-nutrients-in-pregnancy` → `imgKeyNutrients` ✓
-  - `/articles/moving-your-body-in-pregnancy` → `imgMovementExercise` ✓ (also used by pelvic-pain and back-pain in Body)
+Grep against `src/data/articleData.ts` for the 10 exact and near-duplicate slugs returned no matches. Safe to create all 5.
 
-Root cause of the user-reported duplicate: `eating-well-in-pregnancy` has no dedicated hero and reuses the shared `second-eating` asset, which is visually close enough to the food-still-life of `foods-to-avoid` that Start here reads as duplicates. Start here does read `HREF_IMAGE_MAP`; the mapping just doesn't yet give `eating-well` a distinct asset.
+### Assets (already generated in `src/assets/`)
 
-### Fix
+`article-hero-safe-sleep-basics.jpg`, `article-hero-car-seat-basics.jpg`, `article-hero-newborn-essentials.jpg`, `article-hero-preparing-siblings.jpg`, `article-hero-maternity-leave.jpg`.
 
-1. Generate one new premium hero:
-   - `src/assets/article-hero-eating-well.jpg` — warm, editorial "eating well in pregnancy" still life clearly distinct from both `article-hero-foods-to-avoid.jpg` (cheese/olives on plate) and `article-hero-second-eating.jpg` (person holding quinoa bowl). Direction: a calm breakfast/lunch spread from above — wholegrain toast, fruit, yoghurt, leafy greens — soft daylight, cream/sage palette, botanical sprig, no faces, no readable text.
+### Article shape (matches nearby Phase 10.2a articles exactly)
 
-2. `src/components/pregnancy/PregnancyTopicPage.tsx`
-   - Import `imgEatingWell` from the new asset.
-   - Point `/articles/eating-well-in-pregnancy` at `imgEatingWell` in `HREF_IMAGE_MAP`.
+Fields per article: `slug`, `title`, `metaDescription`, `quickAnswer`, `howThisFeels`, `whatHappening { commonCauses, lessCauses, whyItVaries }`, `timing`, `whatItFeelsLike`, `whatThisMeans`, `normal`, `seekSupport`, `disclaimer`, `whatYouCanDo`, `whatHappensNext`, `relatedStage`, `aiPrompts`, `captureIntro`, `trimester`, `relatedSlugs`, `journey: ["pregnancy"]`, `topics: ["preparing"]`, `reviewedBy: "Jenny Joines"`, `lastUpdated: "July 2026"`, `keyTakeaways` (5–6), `sources` (3–5 structured `{label, publisher, url}` — the `ArticleSource` type), `faq` (3 items, field is `faq` not `faqs`), `topic: "preparing-for-baby"`, `standfirst`, `editorialSections` (5–7). UK English. No em dashes. No personalised medical, legal or safety advice. No fear-based framing.
 
-3. Adjacent-collision sweep for the six topic pages (Start here row + each grouped column's first ~4 items). Where two visible adjacent cards resolve to the same asset, swap one to a different already-imported asset that still fits the topic. Candidates to check based on current map:
-   - **Body**: `stages-of-labour` and `shortness-of-breath` both use `imgThirdMovement`; `back-pain` and `swelling` both use `imgBodyShifts`; `round-ligament-pain` and `watery-discharge` both use `imgSleep`. Only fix if they land adjacent within the same visible group.
-   - **Health-and-safety**: `paracetamol` and `medicines` both use `imgMedicines`; `antibiotics` and `hay-fever` both use `imgLifestyle`. Fix only if adjacent in the rendered group.
-   - **Preparing-for-baby**: `writing-a-birth-plan` and `birth-preferences` both use `imgBirthPreferences`; `what-happens-if-labour-doesnt-start` and Body's `braxton-hicks` share `imgSignsLabour` but are on different pages.
-   - **Baby / Feelings / Diet-and-exercise**: re-check after the eating-well swap.
+Related-slug pool (verified live): `the-space-your-baby-will-come-home-to`, `preparing-emotionally-for-birth`, `birth-preferences`, `hospital-bag-and-what-to-pack` (verified as the actual live slug), `the-36-week-appointment`, plus the sibling new articles from this batch.
 
-   For each real adjacent collision found, remap one entry to the nearest topically-appropriate already-imported asset (e.g. swap `stages-of-labour` from `imgThirdMovement` to `imgSignsLabour`; swap `paracetamol-in-pregnancy` from `imgMedicines` to `imgLifestyle` if it sits next to `medicines-in-pregnancy`). No new assets beyond the one above.
+Sources per article (all UK, structured, non-fear-based):
+- Safe sleep basics — Lullaby Trust, NHS SIDS reduction, NHS helping baby to sleep.
+- Car seat basics — GOV.UK child car seats, Good Egg Safety, NHS getting baby home, RoSPA.
+- Baby clothes and newborn essentials — NHS things you'll need, Tommy's, NCT.
+- Preparing siblings — NCT, Tommy's, NHS bringing baby home.
+- Maternity leave planning — GOV.UK maternity pay & leave, GOV.UK employers, GOV.UK Maternity Allowance, ACAS.
 
-### Explicitly out of scope
+### Files to edit
 
-- No changes to article copy, routes, SEO, sitemap, robots, redirects.
-- No changes to TTC or IVF files.
-- No structural changes to `pregnancyTopicData.ts` groups or ordering (image map only, in the topic page component).
-- No changes to tool logic or calculator formulas.
+**1. `src/data/articleData.ts`** — insert the 5 article objects before the closing `];` of `articleDatabase` (line 20227). Full editorial copy already drafted and ready to paste.
+
+**2. `src/data/pregnancyTopicData.ts`** — update only the `"preparing-for-baby"` config (lines 468–540):
+- **Getting ready for baby** — append:
+  - `{ label: "Baby clothes and newborn essentials", href: "/articles/baby-clothes-and-newborn-essentials" }`
+  - `{ label: "Preparing siblings for a new baby", href: "/articles/preparing-siblings-for-a-new-baby" }`
+- **Birth planning** — unchanged.
+- **Late-pregnancy decisions** — unchanged.
+- **Practical safety and planning** — new group appended after Late-pregnancy decisions:
+  - description: "The practical decisions that quietly matter around bringing your baby home."
+  - links: Safe sleep basics, Car seat basics, Maternity leave planning
+- `startHere`, `whatThisCovers`, `showSiblings`, `showAI`, and `topicMapEntries` unchanged.
+
+**3. `src/components/pregnancy/PregnancyTopicPage.tsx`** — add 5 imports after existing pregnancy asset imports:
+```ts
+import imgSafeSleepBasics from "@/assets/article-hero-safe-sleep-basics.jpg";
+import imgCarSeatBasics from "@/assets/article-hero-car-seat-basics.jpg";
+import imgNewbornEssentials from "@/assets/article-hero-newborn-essentials.jpg";
+import imgPreparingSiblings from "@/assets/article-hero-preparing-siblings.jpg";
+import imgMaternityLeave from "@/assets/article-hero-maternity-leave.jpg";
+```
+Add 5 entries to `HREF_IMAGE_MAP` at the end of the `// Preparing` block:
+```ts
+"/articles/safe-sleep-basics": imgSafeSleepBasics,
+"/articles/car-seat-basics": imgCarSeatBasics,
+"/articles/baby-clothes-and-newborn-essentials": imgNewbornEssentials,
+"/articles/preparing-siblings-for-a-new-baby": imgPreparingSiblings,
+"/articles/maternity-leave-planning": imgMaternityLeave,
+```
+All Phase 10.1, 10.2a and 10.2a.1 mappings preserved verbatim.
 
 ### Verification
 
-- Confirm Start here on `/pregnancy/diet-and-exercise` now shows three visibly distinct images (foods-to-avoid = cheese still life; eating-well = new wholesome spread; moving-your-body = movement image).
-- Walk each of `/pregnancy/body`, `/pregnancy/baby`, `/pregnancy/feelings`, `/pregnancy/health-and-safety`, `/pregnancy/diet-and-exercise`, `/pregnancy/preparing-for-baby` and confirm no two adjacent visible cards (Start here row or grouped list rows) share the same thumbnail.
-- Run `bunx tsgo --noEmit`.
+- `bunx tsgo --noEmit`.
+- Grep each new slug exactly once in `articleData.ts`.
+- Confirm `/pregnancy/preparing-for-baby` shows the two new Getting-ready cards and the new Practical safety and planning group with three distinct thumbnails; no adjacent-card image collisions on the page.
 
-### Report at end
+### Out of scope
 
-- Whether the diet-and-exercise duplicate is fixed and Start here reads the intended mapping.
-- List of any other adjacent duplicates found and how each was remapped.
-- Files edited and asset created.
-- Typecheck result.
+TTC, IVF, First Year, Toddler, Family; routes, sitemap, robots, redirects, SEO infra; calculators; TTC Journey; Pregnancy Map design; any other pregnancy topic config or image mapping.
+
+### Final report
+
+Files inspected/edited, assets used, duplicate check result, slugs/titles created, reviewer/source/image-wiring status, Preparing for baby topic page result, Pregnancy Map / Phase 10.1 / 10.2a / 10.2a.1 / TTC / IVF / SEO preservation notes, dash-rule result, typecheck result, and whether it is safe to proceed to TTC Phase 9.16 or run final Pregnancy QA.

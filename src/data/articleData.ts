@@ -20224,6 +20224,733 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── SAFE SLEEP BASICS ────────────────────────────────────────────────────
+  {
+    slug: "safe-sleep-basics",
+    title: "Safe sleep basics: how to set up baby sleep at home",
+    metaDescription: "A calm UK guide to safe infant sleep. Back to sleep, a clear cot, the right room, and the small everyday choices that lower risk.",
+    quickAnswer:
+      "In the UK, the safest way for a baby to sleep is on their back, in their own clear sleep space, in the same room as you for the first six months. A firm flat mattress, no pillows, no cot bumpers, no loose bedding, and a comfortably cool room (around 16 to 20 degrees) cover most of what matters. Small, consistent choices carry most of the benefit.",
+    howThisFeels: [
+      "Wanting to get this right without turning the nursery into a rulebook",
+      "Second-guessing every product recommendation you see online",
+      "Worrying about doing the wrong thing in the middle of the night",
+      "Feeling reassured once the setup is simple and familiar",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Back sleeping is the single biggest factor", body: "Placing your baby on their back for every sleep, day and night, is the most protective choice you can make. Side and front sleeping both raise risk in the early months." },
+        { heading: "A clear sleep space matters", body: "A firm flat mattress with a fitted sheet, and nothing else in the cot, keeps the airway clear and reduces overheating." },
+      ],
+      lessCauses: [
+        { heading: "Room sharing without bed sharing", body: "UK guidance is for baby to sleep in the same room as you, in their own cot or Moses basket, for at least the first six months." },
+        { heading: "Temperature and clothing", body: "Overheating is a known risk factor. A comfortably cool room and a well-fitting sleep bag or light blanket tucked below the shoulders tend to be simplest." },
+      ],
+      whyItVaries: "Advice varies slightly by baby's age, weight, and any medical conditions. Your health visitor and midwife can tailor guidance if anything about your baby is different.",
+    },
+    timing: {
+      whenStarts: "Safe sleep guidance applies from birth.",
+      whenEases: "The highest-risk window is the first six months. Guidance stays sensible well into the first year, but some rules relax as babies get older and stronger.",
+    },
+    whatItFeelsLike: ["A short mental checklist before every nap", "Getting used to how bare the cot looks"],
+    whatThisMeans:
+      "Following a small number of consistent choices has a much bigger effect than any single product. Simplicity is the point.",
+    normal: [
+      "Baby sleeping on their back, in a clear cot, in your room",
+      "Waking often to feed in the early weeks",
+      "Grunting, snuffling, and irregular breathing patterns during sleep",
+      "Preferring to be swaddled or unswaddled, depending on the baby",
+    ],
+    seekSupport: [
+      "Anything that stops your baby settling on their back that you cannot explain",
+      "Concerns about breathing pauses, colour changes, or unusually noisy breathing",
+      "Feeling so exhausted that you are falling asleep on a sofa or armchair with your baby",
+    ],
+    disclaimer: "This is general UK guidance based on NHS and Lullaby Trust advice. Speak to your midwife or health visitor about your baby's specific situation, especially if they were born prematurely or have any medical conditions.",
+    whatYouCanDo: [
+      { action: "Put your baby on their back for every sleep", reason: "Back sleeping is the single most protective choice for infant sleep." },
+      { action: "Use a firm flat mattress with a fitted sheet and nothing else in the cot", reason: "Clear sleep spaces reduce the risk of airway obstruction and overheating." },
+      { action: "Keep the room comfortably cool, around 16 to 20 degrees", reason: "Overheating is a known risk factor, particularly in the first few months." },
+      { action: "Room share for at least six months, in a separate cot or Moses basket", reason: "Room sharing without bed sharing carries the strongest evidence for reducing risk." },
+    ],
+    whatHappensNext: "Most families quickly find a small nighttime rhythm that feels familiar. The setup itself stops needing much thought.",
+    relatedStage: {
+      intro: "Safe sleep sits inside the wider work of getting ready for baby:",
+      links: [
+        { label: "Preparing for baby in pregnancy", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to", context: "How to set up a home that supports safe sleep." },
+        { label: "Baby clothes and newborn essentials", href: "/articles/baby-clothes-and-newborn-essentials", context: "What you actually need for the first weeks." },
+      ],
+    },
+    aiPrompts: [
+      "What is the safest way for a newborn to sleep in the UK?",
+      "What should be in the cot with my baby?",
+      "How warm should the room be for baby sleep?",
+    ],
+    captureIntro: "Setting up sleep can feel bigger than it needs to. Worth noting what still feels unclear.",
+    trimester: [3],
+    relatedSlugs: ["the-space-your-baby-will-come-home-to", "baby-clothes-and-newborn-essentials", "preparing-emotionally-for-birth"],
+    journey: ["pregnancy"],
+    topics: ["preparing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "Put your baby on their back for every sleep, day and night",
+      "Use a firm flat mattress with a fitted sheet and nothing else in the cot",
+      "Room share for at least six months, in a separate cot or Moses basket",
+      "Keep the room comfortably cool, around 16 to 20 degrees",
+      "Avoid cot bumpers, pillows, and loose bedding in the first year",
+    ],
+    sources: [
+      { label: "Safer sleep for babies", publisher: "The Lullaby Trust", url: "https://www.lullabytrust.org.uk/safer-sleep-advice/" },
+      { label: "Reduce the risk of sudden infant death syndrome (SIDS)", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/reduce-the-risk-of-sudden-infant-death-syndrome/" },
+      { label: "How to help your baby sleep", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/helping-your-baby-to-sleep/" },
+    ],
+    faq: [
+      { question: "Can my baby sleep in our bed?", answer: "UK guidance is that the safest place for a baby to sleep is in their own cot or Moses basket in your room. Some families choose to bed share and it can be done more safely, but there are situations where it should be avoided completely, including if either parent smokes, has been drinking, has taken medication that causes drowsiness, or if the baby was premature or small at birth. The Lullaby Trust has clear guidance if you want to bed share." },
+      { question: "What about swaddling?", answer: "Swaddling can help some babies settle, but only if done in a way that keeps hips free to move and never over the shoulders. Stop swaddling as soon as your baby shows signs of rolling. Sleep bags are a simpler alternative for many families." },
+      { question: "Are cot bumpers ever safe?", answer: "UK safe sleep guidance advises against cot bumpers, including breathable or mesh versions. Nothing loose in the cot is the simplest rule to follow." },
+    ],
+    topic: "preparing-for-baby",
+    standfirst: "A calm walk through safe infant sleep in the UK. What actually protects your baby, and what you can quietly ignore.",
+    editorialSections: [
+      {
+        id: "the-core-choices",
+        heading: "The core choices that carry most of the benefit",
+        lead: "A small number of decisions do most of the work. The rest is detail.",
+        paragraphs: [
+          "Back to sleep, every sleep. A firm flat mattress with a fitted sheet and nothing else in the cot. Room sharing without bed sharing for the first six months. A comfortably cool room. Head uncovered. These are the choices with the strongest evidence, and they are simple to remember.",
+          "None of this needs a specific product. Most cots that meet current UK safety standards, paired with a firm mattress that fits closely, are fine.",
+        ],
+        callout: {
+          tone: "info",
+          text: "The Lullaby Trust is the UK charity most focused on safe sleep. Their website is a calm, evidence-based place to check anything specific.",
+        },
+      },
+      {
+        id: "the-sleep-space",
+        heading: "Setting up the sleep space",
+        lead: "What goes in the cot matters more than what the cot looks like.",
+        paragraphs: [
+          "A firm flat mattress with a well-fitting sheet is the base. Skip cot bumpers, pillows, positioners, and loose blankets in the first year. A lightweight sleep bag in the right tog for the room temperature is often the simplest option.",
+          "For the first six months, whether that is a Moses basket, a bedside crib, or a full cot, the sleep surface itself should sit in the same room as you for daytime naps and night sleep.",
+        ],
+      },
+      {
+        id: "temperature",
+        heading: "Temperature and clothing",
+        lead: "Overheating is a known risk, so cooler tends to be safer than warmer.",
+        paragraphs: [
+          "Aim for around 16 to 20 degrees in the room where your baby sleeps. A simple room thermometer is enough. To check your baby, feel the chest or back of the neck, not the hands or feet, which are often cooler.",
+          "Layer clothing and sleep bags to the temperature of the room. In warm weather, a short-sleeved vest with a low-tog sleep bag is often enough. If the room feels warm to you, take a layer off, not add one.",
+        ],
+      },
+      {
+        id: "swaddles-slings-car-seats",
+        heading: "Swaddles, slings, and car seats",
+        lead: "Devices designed for other purposes are not designed for sleep.",
+        paragraphs: [
+          "Car seats keep babies safe in vehicles, but they are not a safe long-term sleep surface. If your baby falls asleep in a car seat, move them to a flat sleep space as soon as it is safe. Long trips are worth breaking up.",
+          "Slings can be safe for daytime naps if the baby's face is visible, kissable, chin off the chest, and airway clear. Sleeping on sofas or armchairs with a baby carries a much higher risk than the cot itself.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "If you feel yourself falling asleep while feeding on a sofa, moving to a flat bed with a clear sleep space is much safer than staying where you are.",
+        },
+      },
+      {
+        id: "what-you-do-not-need",
+        heading: "What you do not need",
+        lead: "Most sleep products marketed to new parents are not evidence-based.",
+        paragraphs: [
+          "Pods, nests, and sleep positioners have been linked to safety concerns and are not recommended for unsupervised sleep. Weighted sleep bags and blankets are also not advised in the UK. The clearer, plainer setup is usually the safest one.",
+          "It is fine to ignore most of the marketing. The core rules cover almost every situation you will meet in the early months.",
+        ],
+      },
+    ],
+  },
+
+  // ─── CAR SEAT BASICS ──────────────────────────────────────────────────────
+  {
+    slug: "car-seat-basics",
+    title: "Car seat basics: what to know before your baby's first journey",
+    metaDescription: "A calm UK guide to newborn car seats. Rear-facing, i-Size, ISOFIX, and the small everyday checks that make each journey safer.",
+    quickAnswer:
+      "In the UK, babies must travel in a rear-facing car seat that meets either R129 (i-Size) or R44 safety standards. Rear-facing is safest for as long as possible, ideally to at least 15 months. Fit matters more than price: a correctly installed seat, with harness snug and no bulky clothing under the straps, is what actually protects your baby.",
+    howThisFeels: [
+      "Feeling overwhelmed by the number of car seat brands and options",
+      "Worrying whether your car is compatible with the seat you like",
+      "Not being sure how tight the harness should feel",
+      "Wanting someone to double-check the fit before the first trip",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Rear-facing is safer for babies", body: "In a frontal collision, a rear-facing seat spreads force across the whole back, head, and neck, which are still developing. Rear-facing to at least 15 months is the UK legal minimum for i-Size seats." },
+        { heading: "Correct installation is the biggest factor", body: "Many car seats in use are fitted incorrectly. A seat that is loose in the car, or a harness that is loose on the baby, offers far less protection than the same seat correctly installed." },
+      ],
+      lessCauses: [
+        { heading: "Standards and labels can look confusing", body: "R129 (i-Size) is the newer standard, based on child height. R44 is the older standard, based on weight. Both are legal to use; new seats sold now are almost all i-Size." },
+        { heading: "ISOFIX versus belted", body: "ISOFIX is a standardised way to attach a car seat directly to the car. Belted fitting uses the car's seatbelt. Both can be safe if fitted correctly." },
+      ],
+      whyItVaries: "Not every car seat fits every car, and not every model fits every baby. Trying a seat in your own car before you buy tends to save a lot of stress later.",
+    },
+    timing: {
+      whenStarts: "You will need an infant car seat from the first journey home from hospital.",
+      whenEases: "Infant carrier seats are usually outgrown between around 9 and 15 months. A larger rear-facing seat then continues the protection.",
+    },
+    whatItFeelsLike: ["A short check before every drive", "Feeling steadier once someone has reviewed the fit"],
+    whatThisMeans:
+      "Getting the basics right, and having someone check the fit at least once, is worth more than any single feature of a specific seat.",
+    normal: [
+      "Newborns looking very small in an infant car seat",
+      "Needing to adjust harness height as your baby grows",
+      "Feeling clumsy at first when threading the harness",
+      "Not being sure whether the seat is tight enough until it is checked",
+    ],
+    seekSupport: [
+      "Any doubt about whether the seat is fitted correctly",
+      "Any collision, however small, meaning the seat needs replacing",
+      "Signs that your baby is uncomfortable, floppy, or overheating on longer trips",
+    ],
+    disclaimer: "This is general UK guidance. Specific advice about your car and your baby is best given by a trained car seat fitter or your midwife or health visitor.",
+    whatYouCanDo: [
+      { action: "Choose a seat that meets R129 (i-Size) or R44 and fits your car", reason: "Both standards are legal; the important part is a good match to your vehicle." },
+      { action: "Have the fit checked in person before your first journey", reason: "Many retailers and local schemes offer free checks; correct fitting is the single biggest safety factor." },
+      { action: "Keep the harness snug, with only two fingers of space at the chest", reason: "A loose harness reduces the protection a car seat can offer in a collision." },
+      { action: "Remove bulky coats before strapping baby in", reason: "Thick padding compresses in a collision and leaves the harness loose. A blanket over the top after strapping is a safer option." },
+    ],
+    whatHappensNext: "Most families find that after the first few journeys, the routine of harness, check, and go becomes second nature.",
+    relatedStage: {
+      intro: "Car seats sit alongside the other practical parts of getting ready:",
+      links: [
+        { label: "Preparing for baby in pregnancy", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack", context: "The other thing to have ready before the hospital." },
+        { label: "Baby clothes and newborn essentials", href: "/articles/baby-clothes-and-newborn-essentials", context: "What to have alongside the car seat for the first weeks." },
+      ],
+    },
+    aiPrompts: [
+      "What car seat do I need for a newborn in the UK?",
+      "What is i-Size and how is it different to R44?",
+      "How tight should the car seat harness be?",
+    ],
+    captureIntro: "Car seats can feel like the first big decision. Worth noting what you still want to check.",
+    trimester: [3],
+    relatedSlugs: ["hospital-bag-and-what-to-pack", "baby-clothes-and-newborn-essentials", "the-space-your-baby-will-come-home-to"],
+    journey: ["pregnancy"],
+    topics: ["preparing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "Babies must travel rear-facing in a seat that meets R129 (i-Size) or R44",
+      "Rear-facing is safest for as long as possible, ideally beyond 15 months",
+      "Correct installation matters more than any single feature",
+      "Harness should be snug with only two fingers of space at the chest",
+      "Remove bulky coats before strapping in; add a blanket over the top instead",
+      "Have the fit checked in person before your baby's first journey",
+    ],
+    sources: [
+      { label: "Child car seats: the law", publisher: "GOV.UK", url: "https://www.gov.uk/child-car-seats-the-rules" },
+      { label: "Choosing a child car seat", publisher: "Good Egg Safety", url: "https://www.goodeggcarsafety.com/" },
+      { label: "Getting your baby home from hospital", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/after-the-birth/getting-your-baby-home/" },
+      { label: "Child car seats", publisher: "RoSPA", url: "https://www.rospa.com/road-safety/advice/vehicles/child-car-seats" },
+    ],
+    faq: [
+      { question: "Can I put the car seat in the front?", answer: "You can, but only if there is no active airbag on the passenger side. Airbags are designed for adult front-seat passengers and can be dangerous for a rear-facing infant. The safest place is usually the rear middle seat if it takes a car seat, otherwise a rear side seat." },
+      { question: "Do I need to replace the seat after an accident?", answer: "UK guidance is to replace an infant car seat after any collision, even a minor one, because internal damage may not be visible. Insurance often covers this." },
+      { question: "How long can my baby be in the car seat at once?", answer: "Guidance suggests no more than two hours at a time for young babies, then a break out of the seat. Break longer journeys into shorter stretches, especially in the first few months." },
+    ],
+    topic: "preparing-for-baby",
+    standfirst: "What to look for in a car seat, how to check the fit, and the small everyday habits that make each journey safer.",
+    editorialSections: [
+      {
+        id: "the-law-and-the-standards",
+        heading: "What the law asks for",
+        lead: "Two safety standards apply in the UK, and both are legal.",
+        paragraphs: [
+          "R129, often called i-Size, is the newer European standard. It is based on your child's height and requires rear-facing use up to at least 15 months. R44 is the older standard, based on weight. Seats certified under either standard are legal, but almost all new seats sold now are i-Size.",
+          "Babies must always travel in a child car seat until they are 12 years old or 135cm tall, whichever comes first, unless a specific exemption applies. The car seat has to be right for your child's weight or height, depending on the standard it meets.",
+        ],
+      },
+      {
+        id: "choosing-a-seat",
+        heading: "Choosing a seat that fits your car and your baby",
+        lead: "The best seat is one that fits your car well, suits your baby, and you can install correctly.",
+        paragraphs: [
+          "Not every seat fits every car. ISOFIX points, seat depth, and belt paths all vary. Most reputable retailers will let you trial-fit a seat in your car before you commit. Take the time to do this.",
+          "For a newborn, an infant carrier that clicks into a base is common. They are convenient but not designed for long periods of sleep out of the car. A lie-flat carrycot is another option, especially for premature or very small babies, and can be discussed with your midwife.",
+        ],
+      },
+      {
+        id: "installing-and-checking",
+        heading: "Installing the seat and checking the fit",
+        lead: "A correctly fitted seat is what actually protects your baby. Getting a check is worth doing.",
+        paragraphs: [
+          "Many councils, retailers, and independent schemes offer free or low-cost car seat checks. Booking one before your baby is due, and again once they are here, is one of the most useful things you can do.",
+          "The seat itself should not move more than an inch side to side or front to back once installed. The harness should sit snugly against your baby's shoulders, with the chest clip at armpit level and only two fingers of space between the harness and the collarbone.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Good Egg Safety and RoSPA both publish free UK guides on car seat safety and offer clinics in many areas.",
+        },
+      },
+      {
+        id: "everyday-habits",
+        heading: "The small habits that keep the seat safer",
+        lead: "Once the seat is fitted, a few gentle habits do most of the ongoing work.",
+        paragraphs: [
+          "Take off any bulky coat or snowsuit before strapping your baby in. Padding compresses in a collision and leaves the harness loose. A blanket, cardigan, or car seat cover added after strapping keeps them warm without compromising the harness.",
+          "Check the harness height as your baby grows. Straps should come from just below the shoulders when rear-facing. Long journeys are worth breaking up, and your baby is safer moved to a flat sleep space at the end of the trip rather than left to sleep in the seat.",
+        ],
+      },
+      {
+        id: "when-things-change",
+        heading: "When the seat needs to change",
+        lead: "Babies outgrow infant carriers before they outgrow rear-facing.",
+        paragraphs: [
+          "Your baby has outgrown an infant carrier when the top of their head is level with the top of the seat, or when they exceed the weight or height limit, whichever comes first. This is usually between around 9 and 15 months, sometimes earlier for larger babies.",
+          "The safest next step is another rear-facing seat, not a forward-facing one. Rear-facing to at least 15 months is legal minimum; keeping rear-facing until around 4 years, if the seat allows, is safer still.",
+        ],
+      },
+    ],
+  },
+
+  // ─── BABY CLOTHES AND NEWBORN ESSENTIALS ─────────────────────────────────
+  {
+    slug: "baby-clothes-and-newborn-essentials",
+    title: "Baby clothes and newborn essentials: a calm UK list",
+    metaDescription: "A short, sensible UK guide to what your baby actually needs in the first weeks. Clothing sizes, feeding basics, changing, sleep, and the things you can skip.",
+    quickAnswer:
+      "For the first few weeks, most babies need very little: a handful of vests and sleepsuits in newborn and 0 to 3 month sizes, a couple of soft cardigans or a coat, muslins, nappies, and either bottle-feeding or breastfeeding basics. A flat sleep space, a car seat, and a way to carry your baby cover almost everything else. You can add more once you know your baby.",
+    howThisFeels: [
+      "Being flooded with baby product lists that all look different",
+      "Not knowing what size to buy for a baby who is not here yet",
+      "Wanting to be ready without buying things you will never use",
+      "Feeling calmer once the list becomes short",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Newborns grow quickly", body: "Most babies are in newborn or 0 to 3 month sizes for only a short time. Fewer clothes in more sizes tends to work better than a big pile of the smallest size." },
+        { heading: "Marketing makes lists longer than they need to be", body: "Many baby products solve problems that most babies do not have. Starting with a short list and adding when you actually need something works well for most families." },
+      ],
+      lessCauses: [
+        { heading: "Second-hand is often best", body: "Baby clothes are used briefly and often barely worn. Family, friends, local groups, and charity shops are excellent sources." },
+      ],
+      whyItVaries: "Season, birth size, feeding method, and whether you drive a lot all shift what is useful for your family.",
+    },
+    timing: {
+      whenStarts: "The last few weeks of pregnancy are enough time to get the essentials together.",
+      whenEases: "You will restock and adjust as your baby grows. Very few first-purchase items are used past the first three months.",
+    },
+    whatItFeelsLike: ["A short list that feels manageable", "Relief that you do not need to buy everything at once"],
+    whatThisMeans:
+      "The point of a starter list is to cover the first few weeks calmly, not to predict every future need.",
+    normal: [
+      "Buying a mix of newborn and 0 to 3 month sizes",
+      "Preferring second-hand for most clothing",
+      "Adding things once your baby is here and you know them",
+      "Ignoring a lot of the marketing around baby products",
+    ],
+    seekSupport: [
+      "Feeling under pressure to buy things you cannot afford",
+      "Any specific medical or feeding equipment your baby will need, best discussed with your midwife or health visitor",
+    ],
+    disclaimer: "This is a general starter list, not personal advice. Your midwife, health visitor, and infant feeding team can help with anything specific to your baby's situation.",
+    whatYouCanDo: [
+      { action: "Buy fewer clothes in more sizes", reason: "Babies move through newborn sizes quickly; smaller stashes waste less." },
+      { action: "Prioritise sleepsuits, vests, and muslins", reason: "These are used constantly in the early weeks and washed often." },
+      { action: "Wait to buy some items until baby arrives", reason: "Feeding equipment, dummies, and specific brands often depend on your baby." },
+      { action: "Use second-hand or borrowed items where sensible", reason: "Baby clothes are used briefly and often almost new; secondhand items are usually excellent." },
+    ],
+    whatHappensNext: "Most families settle into what they actually use within the first few weeks and quietly stop worrying about the rest of the lists.",
+    relatedStage: {
+      intro: "This sits inside the wider practical side of getting ready:",
+      links: [
+        { label: "Preparing for baby in pregnancy", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to", context: "The home setup this list fits into." },
+        { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack", context: "The much shorter list for the birth itself." },
+      ],
+    },
+    aiPrompts: [
+      "What clothes does a newborn actually need?",
+      "What size baby clothes should I buy first?",
+      "What baby products can I skip?",
+    ],
+    captureIntro: "Newborn lists can feel overwhelming. Worth noting what still feels unclear.",
+    trimester: [3],
+    relatedSlugs: ["the-space-your-baby-will-come-home-to", "hospital-bag-and-what-to-pack", "safe-sleep-basics"],
+    journey: ["pregnancy"],
+    topics: ["preparing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "A short list of vests, sleepsuits, and muslins covers most early clothing needs",
+      "Buy a mix of newborn and 0 to 3 month sizes, not lots of the smallest",
+      "Feeding, changing, and sleep basics are the core categories that matter",
+      "Wait on brand-specific items until you know your baby",
+      "Second-hand and borrowed items are often the best choice",
+    ],
+    sources: [
+      { label: "Things you'll need for your baby", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/preparing-for-the-birth/things-you-will-need-for-your-baby/" },
+      { label: "Getting ready for your baby's arrival", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/labour-and-birth/getting-ready-for-your-babys-arrival" },
+      { label: "Preparing for a new baby", publisher: "NCT", url: "https://www.nct.org.uk/pregnancy/how-you-might-be-feeling/preparing-your-new-baby" },
+    ],
+    faq: [
+      { question: "How many sleepsuits and vests do I really need?", answer: "Six to eight of each is enough for the first few weeks, especially with easy access to a washing machine. Half in newborn and half in 0 to 3 months usually works well." },
+      { question: "Do I need to buy everything before the birth?", answer: "No. Nappies, feeding equipment, and clothes in bigger sizes can all be added after your baby arrives. Focus on what you will need in the first week or two, plus the safe sleep setup and car seat." },
+      { question: "Is it worth investing in premium brands?", answer: "Usually not for clothing. Fit, fabric, and easy fastenings matter far more than the label. For a few items with a longer working life, like a car seat or pram, it can be worth spending more on something that will last." },
+    ],
+    topic: "preparing-for-baby",
+    standfirst: "A short, sensible list of what your baby actually needs in the first weeks. What is worth having, and what you can quietly ignore.",
+    editorialSections: [
+      {
+        id: "clothing",
+        heading: "Clothing: fewer items, more sizes",
+        lead: "Newborns move through the smallest sizes quickly, so a smaller stash spread across sizes tends to be more useful.",
+        paragraphs: [
+          "A workable starter list: six to eight short-sleeved vests, six to eight sleepsuits, two or three cardigans, a hat, scratch mittens if needed, and a warmer layer or coat depending on season. Half in newborn size, half in 0 to 3 months.",
+          "Front-opening sleepsuits are much easier at 3am than anything that goes over the head. Soft cottons, generous fits, and easy fastenings matter far more than the brand.",
+        ],
+      },
+      {
+        id: "feeding",
+        heading: "Feeding basics",
+        lead: "This depends on how you plan to feed, and it is fine to start light and adjust.",
+        paragraphs: [
+          "If you are planning to breastfeed, a couple of comfortable feeding bras, breast pads, and nipple balm are usually enough to start. A pump is not needed in the first few days for most families.",
+          "If you are formula feeding or mixed feeding, a small number of bottles, a formula that is right for your baby's age, and a way to sterilise are the core needs. Wait to buy a bigger stock until you know what your baby takes to.",
+        ],
+      },
+      {
+        id: "sleep",
+        heading: "Sleep setup",
+        lead: "A flat, clear sleep space is the single most important item.",
+        paragraphs: [
+          "A Moses basket, bedside crib, or full cot with a firm flat mattress and fitted sheets is enough. Two or three sheets and a couple of lightweight sleep bags in the right tog for your room cover the first few weeks.",
+          "Skip cot bumpers, pods, positioners, and nests for sleep. A plainer setup is a safer setup.",
+        ],
+        callout: {
+          tone: "info",
+          text: "The Lullaby Trust has clear UK safe sleep guidance if you want to double-check anything about the sleep space.",
+        },
+      },
+      {
+        id: "changing",
+        heading: "Changing and bath",
+        lead: "A small, quiet corner of your home is enough. You do not need a dedicated changing room.",
+        paragraphs: [
+          "A changing mat, nappies in newborn size, cotton wool or fragrance-free wipes, muslins, and a bin close by are all you really need. Nappy rash cream is worth having but not always used.",
+          "Baths do not need to happen every day. A soft towel and a plain unfragranced wash if you use one are enough. Many families wait a week or two before the first bath.",
+        ],
+      },
+      {
+        id: "on-the-go",
+        heading: "Getting out of the house",
+        lead: "A car seat, a way to carry your baby, and a small bag cover most of it.",
+        paragraphs: [
+          "A rear-facing infant car seat is a must if you use a car. A pram, pushchair, or sling covers everything else. Slings can be genuinely useful for the newborn phase; a simple stretchy wrap is often enough.",
+          "A small changing bag with a couple of nappies, a change of clothes, muslins, wipes, and a spare vest is enough to leave the house calmly.",
+        ],
+      },
+      {
+        id: "what-to-skip",
+        heading: "Things you probably do not need at first",
+        lead: "Most of the extras can wait until you meet your baby.",
+        paragraphs: [
+          "Big-brand toys, elaborate baby monitors, top-and-tail bowls, wipe warmers, dedicated baby detergents, and specialist pillows can almost always wait. Many are never used at all.",
+          "The starter list exists to reduce noise, not to become another one. If it is not in it, you probably do not need it in the first weeks.",
+        ],
+      },
+    ],
+  },
+
+  // ─── PREPARING SIBLINGS FOR A NEW BABY ────────────────────────────────────
+  {
+    slug: "preparing-siblings-for-a-new-baby",
+    title: "Preparing siblings for a new baby: gentle ways to make room",
+    metaDescription: "A calm guide to helping an older child adjust to a new baby in pregnancy. What to say, how much to explain, and how to keep their world steady.",
+    quickAnswer:
+      "The most helpful thing you can do for an older child is to keep their world familiar and to talk about the baby gently and honestly, using language that fits their age. Some regression, big feelings, and mixed emotions are normal, before and after the baby arrives. Small consistent rituals often carry more weight than big conversations.",
+    howThisFeels: [
+      "Wondering when to tell your older child about the baby",
+      "Worrying about how they will react to change",
+      "Feeling guilty about splitting your attention",
+      "Being surprised by their sudden clinginess or big feelings",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Change can feel unsettling before it happens", body: "Even young children pick up on shifts in the home, mood, and routine. Some acting out or clinginess in late pregnancy is common and does not mean anything is wrong." },
+        { heading: "Understanding is age-linked", body: "Very young children live in the now; toddlers and preschoolers understand more but still need short, simple language; school-age children often want more detail and are quietly worried about being left out." },
+      ],
+      lessCauses: [
+        { heading: "Attachment tends to be resilient", body: "Consistent care, familiar routines, and honest words tend to matter more than perfect preparation. Most siblings settle over time." },
+      ],
+      whyItVaries: "Age, temperament, family setup, and how big the change feels day to day all shape how a child responds.",
+    },
+    timing: {
+      whenStarts: "Some families tell older children early in pregnancy; others prefer to wait until the bump is visible or after the 20-week scan. Either can work.",
+      whenEases: "Most siblings settle into the new setup over the first few months, though ups and downs are normal well into the first year.",
+    },
+    whatItFeelsLike: ["A protective ache for the older child", "Small pockets of one-on-one time that feel important"],
+    whatThisMeans:
+      "You cannot pre-solve every feeling your child will have. You can keep the ground steady and stay open to whatever comes up.",
+    normal: [
+      "Regression in feeding, sleep, or toilet learning",
+      "Wanting to be babied for a while",
+      "Big feelings about small things",
+      "A mix of curiosity, affection, and jealousy over time",
+    ],
+    seekSupport: [
+      "Long-lasting distress that does not soften over weeks",
+      "Worries about your child's safety around the baby",
+      "Feeling overwhelmed by managing both children's needs",
+    ],
+    disclaimer: "This is general guidance. If you have concerns about your older child's mental health or behaviour that go beyond ordinary adjustment, your health visitor or GP can help.",
+    whatYouCanDo: [
+      { action: "Keep their routines and rituals as steady as you can", reason: "Predictability is the strongest source of security for a young child in a period of change." },
+      { action: "Use short, honest language about the baby", reason: "Simple truthful phrases are easier to trust than big theatrical explanations." },
+      { action: "Invite them in without expecting them to be excited", reason: "Space to have mixed feelings is more useful than pressure to perform delight." },
+      { action: "Protect small pockets of one-on-one time after birth", reason: "Ten focused minutes often matters more than long stretches of divided attention." },
+    ],
+    whatHappensNext: "Most siblings find their footing over the first few months. Attachment builds through everyday moments rather than a single big introduction.",
+    relatedStage: {
+      intro: "This sits alongside the emotional and practical parts of getting ready:",
+      links: [
+        { label: "Preparing for baby in pregnancy", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth", context: "The emotional preparation for you as well." },
+        { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to", context: "The physical home setup around the change." },
+      ],
+    },
+    aiPrompts: [
+      "How do I tell my toddler I am having another baby?",
+      "How can I help my child adjust to a new sibling?",
+      "Is regression after a new baby normal?",
+    ],
+    captureIntro: "Preparing another child is quiet work. Worth noting what feels tender.",
+    trimester: [2, 3],
+    relatedSlugs: ["preparing-emotionally-for-birth", "the-space-your-baby-will-come-home-to", "hospital-bag-and-what-to-pack"],
+    journey: ["pregnancy"],
+    topics: ["preparing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "Keep routines and rituals as steady as you can through pregnancy and after",
+      "Use short, honest language that fits your child's age",
+      "Some regression, clinginess, and mixed feelings are normal",
+      "Small pockets of one-on-one time carry more weight than long stretches",
+      "You do not have to make your older child excited; you can make them feel safe",
+    ],
+    sources: [
+      { label: "Helping siblings adjust to a new baby", publisher: "NCT", url: "https://www.nct.org.uk/life-parent/family-changes/helping-siblings-adjust-new-baby" },
+      { label: "Preparing your family for a new baby", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/emotional-wellbeing/preparing-family" },
+      { label: "Getting your baby home from hospital", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/after-the-birth/getting-your-baby-home/" },
+    ],
+    faq: [
+      { question: "When should I tell my older child about the baby?", answer: "There is no single right time. Some families tell older siblings early; others wait until pregnancy is more visible or after the 20-week scan. Very young children do best with a shorter run-up because time feels different at that age. Older children often appreciate being told earlier so they are not the last to know." },
+      { question: "How do I handle regression after the baby arrives?", answer: "Treat regression as a signal that your older child needs a little more closeness, not a behaviour to fix. Meet them where they are, keep boundaries kind and clear, and expect it to soften over weeks rather than days." },
+      { question: "What if my child does not seem interested in the baby?", answer: "That is common and usually fine. Interest often grows over the first year, especially once the baby starts responding. Some siblings are quietly attached without being demonstrative." },
+    ],
+    topic: "preparing-for-baby",
+    standfirst: "A gentle look at helping an older child adjust to a new baby, before and after birth, without pretending the change is smaller than it is.",
+    editorialSections: [
+      {
+        id: "when-to-tell-them",
+        heading: "When and how to tell them",
+        lead: "There is no perfect moment. Age, temperament, and family rhythm all shape the timing.",
+        paragraphs: [
+          "For very young children, closer to the birth often works better because they cannot yet hold a long wait. For older children, hearing it earlier and from you tends to feel safer than picking it up from other people.",
+          "Keep the language short and honest. There is a baby growing in my tummy. They will be here around when the leaves change. You will still be our first. Simple wins here.",
+        ],
+      },
+      {
+        id: "through-pregnancy",
+        heading: "Through pregnancy: small ways to include them",
+        lead: "Inclusion works best when it stays light and low-pressure.",
+        paragraphs: [
+          "Feeling the bump, choosing one small item for the baby, saying goodnight to the belly, or looking at their own baby pictures can help them make sense of what is happening.",
+          "It is fine if they are not interested. Some children need time. Others show love in indirect ways, like wanting to sit closer or bringing you snacks.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Mixed feelings are normal and healthy. Your child does not have to be delighted for the attachment to grow.",
+        },
+      },
+      {
+        id: "keep-routines-steady",
+        heading: "Keep the routines that already anchor them",
+        lead: "The strongest source of security in a period of change is a familiar shape to the day.",
+        paragraphs: [
+          "Bedtime rituals, favourite foods, playgroups, and the way you greet each other in the morning are quietly load-bearing. Try to keep the most important ones going as much as possible.",
+          "Big changes like starting nursery, moving room, or dropping a nap are usually easier to make well before or well after the baby arrives rather than in the weeks around it.",
+        ],
+      },
+      {
+        id: "the-early-days-after-birth",
+        heading: "The early days after the baby is here",
+        lead: "How the first meeting is handled quietly matters, but does not have to be perfect.",
+        paragraphs: [
+          "Having the baby already in a cot rather than in your arms when your older child arrives can help them feel greeted first. Many families give an easy small gift from the baby.",
+          "Regression, clinginess, sleep upsets, and big feelings are common in the first weeks. Meeting them with warmth rather than trying to correct usually works better than firmer boundaries at this point.",
+        ],
+      },
+      {
+        id: "protecting-connection",
+        heading: "Protecting connection over time",
+        lead: "Small, consistent moments of attention are what carry the relationship.",
+        paragraphs: [
+          "Ten minutes of focused, unhurried one-on-one time, even a few times a week, tends to matter more than longer stretches of divided attention. Reading, a walk, or a small ritual you have together all count.",
+          "It is okay to name what is hard. This is a lot of change for both of us, and I love you exactly the same. Older children often relax when the difficulty is acknowledged rather than glossed over.",
+        ],
+      },
+    ],
+  },
+
+  // ─── MATERNITY LEAVE PLANNING ─────────────────────────────────────────────
+  {
+    slug: "maternity-leave-planning",
+    title: "Maternity leave planning: a calm UK overview",
+    metaDescription: "A plain-language guide to planning maternity leave in the UK. Notice, timing, pay, keeping in touch days, and where to get official guidance.",
+    quickAnswer:
+      "In the UK, most employed pregnant people are entitled to up to 52 weeks of maternity leave. You can start it any time from 11 weeks before your due date, and you need to tell your employer at least 15 weeks before your due date. Statutory Maternity Pay covers 39 of those weeks for eligible employees. For anything specific to your contract, employment situation, or self-employed status, GOV.UK and your employer are the two most reliable sources.",
+    howThisFeels: [
+      "Wondering when to tell your employer",
+      "Not being sure exactly what you are entitled to",
+      "Worrying about money during the unpaid weeks",
+      "Feeling calmer once the practical bit has a rough shape",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "UK maternity leave has a legal framework", body: "Employed pregnant people are entitled to up to 52 weeks of maternity leave: 26 weeks ordinary and 26 weeks additional. Statutory Maternity Pay covers 39 weeks if you meet eligibility criteria." },
+        { heading: "Timing has clear rules", body: "You must tell your employer at least 15 weeks before your due date. Leave can start any time from 11 weeks before your due date; it will start automatically if you have a pregnancy-related absence in the four weeks before your due date." },
+      ],
+      lessCauses: [
+        { heading: "Self-employed and other statuses have different routes", body: "If you are self-employed, an agency worker, on a zero-hours contract, or recently changed jobs, entitlement is different. Maternity Allowance covers some of these situations." },
+      ],
+      whyItVaries: "Contracts often add enhanced maternity pay or extra flexibility on top of the statutory minimum. Reading your employer's maternity policy carefully is worth doing.",
+    },
+    timing: {
+      whenStarts: "Notice is due at least 15 weeks before your due date. Leave itself can start any time from 11 weeks before due date.",
+      whenEases: "You can take up to 52 weeks; most people plan a mix of full pay, statutory pay, and unpaid weeks, or return earlier if that works for them.",
+    },
+    whatItFeelsLike: ["Wanting a plan without over-planning it", "A quieter mind once the notice letter is sent"],
+    whatThisMeans:
+      "Planning maternity leave in outline early tends to reduce stress. Fine detail can be filled in as you go.",
+    normal: [
+      "Feeling unsure about timing early on",
+      "Making a rough budget for the unpaid weeks",
+      "Changing your return date closer to the time",
+      "Not knowing exactly how you will feel until baby is here",
+    ],
+    seekSupport: [
+      "Being treated unfairly at work because of pregnancy",
+      "Confusion about entitlement that your employer cannot resolve clearly",
+      "Financial pressure that feels unmanageable during unpaid weeks",
+    ],
+    disclaimer: "This is general UK information, not legal or financial advice. GOV.UK, ACAS, and Citizens Advice are the reliable places to check anything specific to your situation. Your employer's maternity policy is the other essential source.",
+    whatYouCanDo: [
+      { action: "Read your employer's maternity policy early", reason: "It often includes enhanced pay or flexibility on top of the statutory minimum." },
+      { action: "Check your entitlement on GOV.UK before your notice deadline", reason: "The 15-week notice point comes around quickly; knowing the rules first makes the conversation easier." },
+      { action: "Sketch a rough budget covering full-pay, statutory-pay, and unpaid weeks", reason: "A rough plan removes most of the financial anxiety without needing to be exact." },
+      { action: "Keep any notice or agreements in writing", reason: "A short email trail helps avoid confusion later." },
+    ],
+    whatHappensNext: "Most people settle into a plan that has some flex built in and return to it with fresh eyes once the baby is here.",
+    relatedStage: {
+      intro: "Maternity leave sits alongside the wider practical planning:",
+      links: [
+        { label: "Preparing for baby in pregnancy", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "The 36-week appointment", href: "/articles/the-36-week-appointment", context: "The main pregnancy conversation that arrives around the same time." },
+        { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth", context: "The emotional side of the run-up to leave and birth." },
+      ],
+    },
+    aiPrompts: [
+      "When can I start maternity leave in the UK?",
+      "How much is Statutory Maternity Pay?",
+      "What is a Keeping in Touch day?",
+    ],
+    captureIntro: "Maternity leave planning can hold a lot of quiet worry. Worth noting what still feels unclear.",
+    trimester: [2, 3],
+    relatedSlugs: ["preparing-emotionally-for-birth", "the-36-week-appointment", "hospital-bag-and-what-to-pack"],
+    journey: ["pregnancy"],
+    topics: ["preparing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "Employed pregnant people can take up to 52 weeks of maternity leave in the UK",
+      "You must tell your employer at least 15 weeks before your due date",
+      "Leave can start any time from 11 weeks before your due date",
+      "Statutory Maternity Pay covers 39 weeks if you meet eligibility criteria",
+      "Self-employed people may qualify for Maternity Allowance instead",
+      "Your employer's policy may enhance pay or flexibility beyond the statutory minimum",
+    ],
+    sources: [
+      { label: "Maternity pay and leave", publisher: "GOV.UK", url: "https://www.gov.uk/maternity-pay-leave" },
+      { label: "Employers: statutory maternity pay and leave", publisher: "GOV.UK", url: "https://www.gov.uk/employers-maternity-pay-leave" },
+      { label: "Maternity Allowance", publisher: "GOV.UK", url: "https://www.gov.uk/maternity-allowance" },
+      { label: "Maternity leave and pay", publisher: "ACAS", url: "https://www.acas.org.uk/maternity-leave-and-pay" },
+    ],
+    faq: [
+      { question: "When do I have to tell my employer I am pregnant?", answer: "You must tell your employer at least 15 weeks before your due date if you want maternity leave and pay. Many people share the news earlier so risk assessments and antenatal appointment time can be arranged. There is no obligation to share earlier than the 15-week point." },
+      { question: "What are Keeping in Touch days?", answer: "Keeping in Touch (KIT) days let you work up to 10 days during maternity leave without ending your leave or pay. They are optional for both sides and are useful for training, team days, or a soft check-in before you return." },
+      { question: "Can I change my return date?", answer: "Yes. If you want to return earlier than originally planned, you generally need to give your employer at least eight weeks' notice. If you want to extend your leave, the same notice usually applies. GOV.UK and your employer's policy have the specifics." },
+    ],
+    topic: "preparing-for-baby",
+    standfirst: "A plain overview of UK maternity leave: what you are entitled to, when to tell your employer, and where to go for anything specific to your situation.",
+    editorialSections: [
+      {
+        id: "the-basics",
+        heading: "The basics: leave, pay, and notice",
+        lead: "Most employees are entitled to up to 52 weeks of maternity leave, split into 26 weeks ordinary and 26 weeks additional.",
+        paragraphs: [
+          "Statutory Maternity Pay (SMP) covers 39 of those 52 weeks for eligible employees. The first 6 weeks are paid at 90 per cent of your average weekly earnings, and the following 33 weeks at the statutory rate or 90 per cent of your earnings if that is lower. The remaining 13 weeks are unpaid.",
+          "Notice matters. You must tell your employer at least 15 weeks before your due date if you want to take maternity leave and pay. Many employers appreciate earlier notice for risk assessments and cover planning, but the legal minimum is 15 weeks.",
+        ],
+        callout: {
+          tone: "info",
+          text: "This article gives a general overview of statutory entitlement. GOV.UK has the current rates and the exact rules for your situation.",
+        },
+      },
+      {
+        id: "when-to-start",
+        heading: "When to start your leave",
+        lead: "You can choose when your leave begins within a defined window.",
+        paragraphs: [
+          "The earliest you can start maternity leave is 11 weeks before your due date. Many people start closer to their due date to keep more paid weeks for after the baby arrives; others prefer to finish earlier because of energy, symptoms, or a physically demanding role.",
+          "Leave will start automatically if you have a pregnancy-related absence in the four weeks before your due date, or on the day after your baby is born if that comes first.",
+        ],
+      },
+      {
+        id: "self-employed-and-other-routes",
+        heading: "If you are self-employed or in a different setup",
+        lead: "Entitlement changes depending on how you work.",
+        paragraphs: [
+          "Self-employed people who have paid enough National Insurance contributions may be eligible for Maternity Allowance, paid for up to 39 weeks. Agency workers, people on zero-hours contracts, and those who have recently changed jobs may also qualify for Maternity Allowance rather than SMP.",
+          "GOV.UK has a short online tool to check what you are eligible for. If your situation feels complex, Citizens Advice can help you work through it without cost.",
+        ],
+      },
+      {
+        id: "planning-the-finances",
+        heading: "Planning the finances without over-planning",
+        lead: "A rough budget for the different pay tiers usually removes most of the anxiety.",
+        paragraphs: [
+          "Sketch out your monthly outgoings against the different phases: full pay if your employer enhances the first weeks, then statutory pay, then unpaid weeks. Even a rough spreadsheet clarifies where the tighter months will land.",
+          "Small early moves, like moving one direct debit or increasing savings by a small amount each month, tend to matter more than any dramatic financial plan. If money looks tight, Citizens Advice can help with benefits and grants you may not know about.",
+        ],
+      },
+      {
+        id: "keeping-in-touch-and-return",
+        heading: "Keeping in Touch days and returning to work",
+        lead: "You get some flexibility, in both directions, once your leave starts.",
+        paragraphs: [
+          "You can work up to 10 Keeping in Touch (KIT) days during maternity leave without losing pay or ending your leave. They are optional and negotiated with your employer, and often used for training, team days, or a soft return.",
+          "If you want to return earlier or later than originally planned, you generally need to give your employer at least eight weeks' notice. Requests for flexible working, part-time hours, or a phased return are also worth thinking about before you leave, even if you decide closer to the time.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "You do not have to decide your exact return date now. A rough plan with room to change is usually enough.",
+        },
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

@@ -238,7 +238,12 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   // Diet & exercise
   "/articles/eating-well-in-pregnancy": imgSecondEating,
   "/articles/key-nutrients-in-pregnancy": imgKeyNutrients,
+  "/articles/caffeine-in-pregnancy": imgCaffeine,
+  "/articles/hydration-in-pregnancy": imgHydration,
   "/articles/moving-your-body-in-pregnancy": imgMovementExercise,
+  "/articles/exercise-safety-by-trimester": imgExerciseTrimester,
+  "/articles/pelvic-floor-exercises-in-pregnancy": imgPelvicFloor,
+  "/articles/cravings-and-aversions-in-pregnancy": imgCravingsAversions,
   "/articles/when-you-cant-face-food-in-pregnancy": imgFoodAversions,
   // Preparing
   "/preparing-for-baby": imgPreparingJourney,

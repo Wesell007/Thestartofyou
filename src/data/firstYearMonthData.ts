@@ -5,7 +5,16 @@
 // Structure is deliberately article-led. Each month leads with the baby (the
 // reader's primary orientation) and weaves a strong parent thread alongside it.
 
-export type MonthSlug = "newborn" | "1-month" | "2-months" | "3-months";
+export type MonthSlug =
+  | "newborn"
+  | "1-month"
+  | "2-months"
+  | "3-months"
+  | "4-months"
+  | "5-months"
+  | "6-months"
+  | "7-months"
+  | "8-months";
 
 export interface MonthQuestion {
   question: string;

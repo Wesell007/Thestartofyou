@@ -19,7 +19,7 @@ const Product = () => {
       <SeoHead
         title="The Start of You Journal | Save Your Parenthood Journey"
         description="A gentle place to save questions, notes, memories and guidance from pregnancy, baby's first year, toddlerhood and family life."
-        canonical="https://thestartofyou.com/product"
+        canonical="https://thestartofyou.com/journal"
       />
       <Navbar />
       <main className="flex flex-col">

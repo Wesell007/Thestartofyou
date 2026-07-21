@@ -66,7 +66,7 @@ const Footer = () => {
                 { to: "/due-date-calculator", label: "Due Date Calculator" },
                 { to: "/ovulation-calculator", label: "Ovulation Calculator" },
                 { to: "/support", label: "Support" },
-                { to: "/product", label: "Journal" },
+                { to: "/journal", label: "Journal" },
               ].map(l => (
                 <li key={l.to}><Link to={l.to} className="font-sans text-sm font-light text-foreground/45 hover:text-foreground/70 transition-colors duration-200">{l.label}</Link></li>
               ))}

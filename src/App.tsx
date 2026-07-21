@@ -343,7 +343,8 @@ const App = () => (
           <Route path="/preparing-for-baby" element={<PreparingForBaby />} />
           <Route path="/support" element={<Support />} />
           <Route path="/about" element={<About />} />
-          <Route path="/product" element={<Product />} />
+          <Route path="/journal" element={<Product />} />
+          <Route path="/product" element={<Navigate to="/journal" replace />} />
           <Route path="/ask" element={<AskPage />} />
           
           <Route path="/my-week" element={<ProtectedRoute><MyWeek /></ProtectedRoute>} />

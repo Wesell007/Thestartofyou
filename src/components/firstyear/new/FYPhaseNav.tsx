@@ -43,10 +43,10 @@ const ageItems: { label: string; href: string }[] = [
   { label: "6 months", href: "/first-year/6-months" },
   { label: "7 months", href: "/first-year/7-months" },
   { label: "8 months", href: "/first-year/8-months" },
-  { label: "9 months", href: "/first-year/6-9-months" },
-  { label: "10 months", href: "/first-year/9-12-months" },
-  { label: "11 months", href: "/first-year/9-12-months" },
-  { label: "12 months", href: "/first-year/9-12-months" },
+  { label: "9 months", href: "/first-year/9-months" },
+  { label: "10 months", href: "/first-year/10-months" },
+  { label: "11 months", href: "/first-year/11-months" },
+  { label: "12 months", href: "/first-year/12-months" },
 ];
 
 const FYPhaseNav = () => {

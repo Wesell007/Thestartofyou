@@ -70,6 +70,7 @@ import IVF from "./pages/IVF.tsx";
 import Postpartum from "./pages/Postpartum.tsx";
 import FirstYear from "./pages/FirstYear.tsx";
 import FYPhaseZeroToThree from "./pages/firstyear/PhaseZeroToThree.tsx";
+import FYMonthPage from "./pages/firstyear/MonthPage.tsx";
 import FYPhaseThreeToSix from "./pages/firstyear/PhaseThreeToSix.tsx";
 import FYPhaseSixToNine from "./pages/firstyear/PhaseSixToNine.tsx";
 import FYPhaseNineToTwelve from "./pages/firstyear/PhaseNineToTwelve.tsx";
@@ -299,6 +300,11 @@ const App = () => (
           <Route path="/first-year/3-6-months" element={<FYPhaseThreeToSix />} />
           <Route path="/first-year/6-9-months" element={<FYPhaseSixToNine />} />
           <Route path="/first-year/9-12-months" element={<FYPhaseNineToTwelve />} />
+          {/* First Year month guide pages (Phase 11.8a). Must sit above /:topic/:slug. */}
+          <Route path="/first-year/newborn" element={<FYMonthPage slug="newborn" />} />
+          <Route path="/first-year/1-month" element={<FYMonthPage slug="1-month" />} />
+          <Route path="/first-year/2-months" element={<FYMonthPage slug="2-months" />} />
+          <Route path="/first-year/3-months" element={<FYMonthPage slug="3-months" />} />
           {/* First Year topic landing pages (Step 3). One reusable template,
               eight thin wrappers, four per side. Must sit above the generic
               /:journey/:stage route and the catch-all. */}

@@ -3,7 +3,8 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, Sparkles, ExternalLink }
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import type { MonthGuide, EditorialSection, FocusSection } from "@/data/firstYearMonthData";
-import { getAdjacentMonths } from "@/data/firstYearMonthData";
+import { getAdjacentMonths, getMonthImagery } from "@/data/firstYearMonthData";
+
 
 type Props = { guide: MonthGuide };
 

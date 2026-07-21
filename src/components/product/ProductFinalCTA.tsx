@@ -61,7 +61,9 @@ const ProductFinalCTA = () => {
             </div>
 
             <a
-              href="#"
+              href="https://www.amazon.co.uk/dp/B0FMJTJGQR"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center justify-center gap-2.5 w-full bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all mb-3"
             >
               Get the journal on Amazon

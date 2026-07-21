@@ -50,7 +50,9 @@ const ProductWhatItIs = () => {
             {/* Mid-page CTA */}
             <div className="flex flex-col sm:flex-row items-start gap-3">
               <a
-                href="#"
+                href="https://www.amazon.co.uk/dp/B0FMJTJGQR"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all"
               >
                 Get the journal

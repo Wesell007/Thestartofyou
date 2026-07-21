@@ -1,97 +1,78 @@
-## Phase 11.8a — First Year Month Guide System (Newborn to 3 Months)
+## Phase 11.8a.1 — First Year Month Guide Format Rework
 
-Build the shared month-guide system and publish only the first four deep month guides. No live routes or sitemap entries for 4–12m.
+Reposition the four live month guides (Newborn, 1m, 2m, 3m) from card-stacked utility pages to premium, article-led baby age guides with a strong parallel parent thread. No new routes, no 4–12m pages.
 
-### Route pattern
+### Files to edit
+- `src/data/firstYearMonthData.ts` — extend the `MonthGuide` type and rewrite content for all four months to the new depth.
+- `src/components/firstyear/month/FirstYearMonthPage.tsx` — restructure sections into an editorial flow.
+- `src/components/firstyear/new/FYPhaseNav.tsx` — update hub heading + subcopy only (keep age pills as is).
 
-Confirmed from `src/App.tsx`: existing First Year routes are lowercase hyphenated (`/first-year/0-3-months`). New routes use the same style, registered above the dynamic `/first-year/:topic/:slug` fallback (line 341):
+Only touch `src/pages/firstyear/MonthPage.tsx` if a layout wiring change is required (not expected).
 
-- `/first-year/newborn`
-- `/first-year/1-month`
-- `/first-year/2-months`
-- `/first-year/3-months`
+### Data model changes (`firstYearMonthData.ts`)
+Extend `MonthGuide` with new fields; keep old ones for continuity:
 
-### Files created
+```text
+shortVersion:  { baby, feeding, sleep, you, whenToAsk }   // renamed from atAGlance intent
+babyEditorial: { intro, subsections: [{ heading, body }] } // 5–7 subsections
+feedingSection:{ intro, points: string[], whenToAsk: string }
+sleepSection:  { intro, points: string[], safeSleep: string, whenToAsk: string }
+youEditorial:  { intro, subsections: [{ heading, body }] } // parent thread
+feelsHardIntro: string  // short reality-naming paragraph
+whatHelpsIntro: string
+```
 
-- **`src/data/firstYearMonthData.ts`** — types + data for the four published months.
-  - Exports `MONTH_ORDER: MonthSlug[]` (only the four published slugs, so prev/next chain is closed without dead links).
-  - Exports `firstYearMonths: Record<MonthSlug, MonthGuide>`.
-  - Exports `getMonthGuide(slug)` and `getAdjacentMonths(slug)` helpers.
-  - `MonthGuide` shape: `slug`, `label` (e.g. "Newborn", "1 month"), `title`, `standfirst`, `phase` (label + href to matching phase page), `atAGlance` (baby/feeding/sleep/parent/support strings), `baby[]`, `you[]`, `feelsHard[]`, `whatHelps[]`, `support[]` (each: label, when, body), `questions[]` (question, answer, optional `readMore: { label, href }` validated against `firstYearArticleData.ts`, `askTopic` slug), `related[]` (verified `/first-year/<topic>/<slug>` links), `sources[]` (label, publisher, url).
-  - All four months only. 4–12m intentionally omitted (not even as commented stubs to avoid leakage).
+Keep existing: `hero`, `phase`, `support`, `questions`, `related`, `sources`, SEO, adjacency helpers.
+Retain `atAGlance` only if still referenced elsewhere; otherwise remove.
 
-- **`src/components/firstyear/month/FirstYearMonthPage.tsx`** — shared premium page component consuming a `MonthGuide`. Reuses the visual language established by `FirstYearPhasePage.tsx` and Pregnancy week pages.
-  - **Hero**: age overline chip, serif title, standfirst, phase context row with link to the parent phase page and back to `/first-year`. Prev/next month rail (disabled state when adjacent month not yet published).
-  - **At a glance**: single premium summary card, five labelled rows (baby / feeding / sleep / you / when to ask).
-  - **Your baby this month**: PairedSection-style card with `firstyear-soft` gradient, left accent stripe, numbered rows.
-  - **You this month**: matching PairedSection-style card with `recovery-soft` gradient.
-  - **What often feels hard / What can help**: two-column premium companion cards, hairline dividers between items.
-  - **When to ask for support**: bordered parchment panel, accent dot markers, pill-styled "when" chips.
-  - **Common questions**: card list with hover-lift, each card showing question (serif), calm answer, optional "Read" pill to a verified article, and "Ask about this" pill to `/ask?stage=first-year&month=<slug>&topic=<askTopic>`. If no article fits, only Ask renders.
-  - **Related guidance**: up to 3 verified First Year article links (validated at data-build time against slugs in `firstYearArticleData.ts`).
-  - **References**: subtle `parchment-dark` panel matching the phase page pattern, numbered tabular markers, publisher + label + link.
+Rewrite all four months to hit the depth bar:
+- 1 standfirst, 1 short version, 5–7 baby subsections, dedicated feeding, dedicated sleep, parent section, 4 feels-hard, 4 what-helps, 3–4 support signposts, 4–6 questions, 3–5 UK sources (NHS, Start for Life, UNICEF Baby Friendly, Lullaby Trust, Tommy's, NCT, NICE).
 
-- **`src/pages/firstyear/MonthPage.tsx`** — thin route component. Reads the current path (or accepts an explicit `slug` prop), looks up the config via `getMonthGuide`, mounts `SeoHead` with per-month title/description/canonical, then renders `FirstYearMonthPage`. Redirects to `/first-year` if slug missing.
+### Component changes (`FirstYearMonthPage.tsx`)
+New section order:
 
-### Files edited
+```text
+1.  Hero (editorial standfirst, phase pill, prev/next, back to hub)
+2.  The short version           (premium overview card, 5 rows)
+3.  What your baby may be doing (editorial intro + 5–7 subsections with serif h3s)
+4.  Feeding this month          (dedicated editorial + points + when to ask)
+5.  Sleep this month            (dedicated editorial + safe sleep + when to ask)
+6.  You this month              (parent editorial subsections)
+7.  What often feels hard       (intro paragraph + numbered rows)
+8.  What can help               (intro paragraph + numbered rows)
+9.  When to ask for support     (existing panel, HV/GP/midwife/111)
+10. Common questions            (hub-style cards, Read + Ask)
+11. Related guidance
+12. References and guidance
+13. Foot rail prev/next
+```
 
-- **`src/App.tsx`** — import `MonthPage` and register four `<Route>` entries immediately after the existing four phase routes (lines 298–301) and before the `:topic/:slug` fallback (line 341). Each route passes its slug via a wrapper or reads it from the pathname.
-- **`src/components/firstyear/new/FYPhaseNav.tsx`** — update `ageItems` entries for Newborn, 1 month, 2 months, 3 months to point at the four new routes. Leave 4–12 months pointing at existing phase pages (as they do today) so no dead links appear.
-- **`scripts/generate-sitemap.ts`** — append only the four new paths to the `firstYearStatic` array. Regenerate `public/sitemap.xml` via the existing predev/prebuild hook.
+Visual language:
+- Editorial sections use `max-w-3xl`, serif h2 kickers, generous vertical rhythm, hairline dividers between subsections rather than card walls.
+- Feeding + Sleep get soft tinted panels (firstyear-soft / recovery-soft respectively) so the dual-track brand still reads.
+- Keep existing card treatments for Short Version, Support, Questions, Related, References.
+- No new imagery.
 
-### Content plan
+### Hub heading update (`FYPhaseNav.tsx`)
+Replace "Go to your baby's age" with:
+- Heading: `Your baby's first year, month by month`
+- Subcopy: `Choose your baby's age for a deeper guide to development, feeding, sleep, care and how this stage may feel for you.`
 
-Depth per page: rich hero standfirst, 5–7 at-a-glance points, 4–6 baby points, 4–6 parent points, 4 feelsHard, 4 whatHelps, 3–4 support signposts, 4–6 common questions, 3–5 sources.
+Keep the age pill grid and existing links (Newborn–3m to guides, 4–12m to phase hubs) untouched.
 
-- **Newborn** — first days and weeks, sleepy newborns, feeding starting, nappies, crying, safe sleep, healing after birth, asking for help early. Phase: 0–3 months.
-- **1 month** — feeding rhythms, unsettled evenings, weight checks, still-irregular sleep, parent exhaustion, recovery and confidence. Phase: 0–3 months.
-- **2 months** — more alert periods, early smiles, feeding changes, sleep fragments, postnatal check, emotional adjustment. Phase: 0–3 months.
-- **3 months** — stronger interaction, head control, first routines, sleep changes, confidence building, feeding questions. Phase: 0–3 months (upcoming 3–6m signposted in "You this month" where useful).
-
-All copy in UK English, gentle wording (may, might, can, often), no milestone pressure, no fear language, no personalised medical advice. No em/en dashes.
-
-### Common Questions — link verification
-
-Verified live First Year article routes usable in `readMore` and `related` (from `firstYearArticleData.ts`):
-
-- `/first-year/feeding/newborn-feeding-rhythms`
-- `/first-year/feeding/bottle-and-breastfeeding-questions`
-- `/first-year/sleep/newborn-sleep-expectations`
-- `/first-year/sleep/helping-your-baby-settle`
-- `/first-year/development/baby-development-in-the-first-year`
-- `/first-year/development/when-milestones-feel-uneven`
-- `/first-year/care-and-safety/baby-care-basics`
-- `/first-year/care-and-safety/safe-sleep-and-home-safety`
-- `/first-year/postpartum-recovery/healing-after-birth`
-- `/first-year/postpartum-recovery/what-recovery-can-feel-like`
-- `/first-year/emotional-wellbeing/feeling-like-yourself-again`
-- `/first-year/emotional-wellbeing/when-parenthood-feels-heavy`
-- `/first-year/body-and-hormones/body-changes-after-birth`
-- `/first-year/body-and-hormones/hormones-sweat-and-hair-loss`
-- `/first-year/checkups-and-warning-signs/postnatal-checks-and-appointments`
-- `/first-year/checkups-and-warning-signs/when-to-ask-for-help-after-birth`
-
-Only these slugs will be referenced. Ask CTAs use `/ask?stage=first-year&month=<slug>&topic=<topic>`.
-
-### References
-
-3–5 trusted UK sources per month, drawn from: NHS Baby & Toddler, NHS Postnatal, NHS Start for Life, UNICEF Baby Friendly, Lullaby Trust, Tommy's, NCT, NICE. Hub URLs preferred over guessed deep links.
-
-### SEO
-
-Per-route `SeoHead` with unique title, meta description, canonical `https://thestartofyou.com/first-year/<slug>`. Indexable. No noindex. No JSON-LD changes.
-
-### Preservation
-
-No changes to TTC, Pregnancy, IVF, Toddler, Family, calculators, journey, auth, DB, RLS, existing article content, existing phase page content, unrelated routes, robots, redirects, SEO infrastructure. No `href="#"`. Only Newborn to 3m pills updated in FYPhaseNav.
+### Guardrails
+- UK English, no em/en dashes in new copy (route hyphens fine).
+- No milestone pressure ("your baby should"), no fear language, no diagnosis.
+- Only verified live First Year article slugs in Read links; no `href="#"`.
+- No changes to routes, sitemap, robots, redirects, SEO infra, or any other stage/domain.
+- No 4–12m month pages created.
 
 ### Verification
-
 - `bunx tsgo --noEmit` passes.
-- Four routes render; prev/next chains Newborn → 1m → 2m → 3m (Newborn has no prev, 3m has no next in this phase).
-- Back-to-hub and back-to-phase links work.
-- Quick-nav pills for Newborn to 3m resolve to new routes; 4–12m pills unchanged.
-- All referenced article links exist in `firstYearArticleData.ts`.
-- Ask CTAs point at `/ask?stage=first-year&month=…&topic=…`.
-- Sitemap gains exactly four entries.
-- First Year hub and phase pages unchanged.
+- Manually load `/first-year/newborn`, `/1-month`, `/2-months`, `/3-months` and confirm new sections render.
+- Hub `/first-year` shows updated heading + subcopy above the age pills.
+- Ask CTAs point to `/ask?stage=first-year&month=<slug>&topic=<topic>`.
+- All Read links resolve to existing First Year article routes.
+
+### Deliverable
+Report on files inspected/edited, hub heading, each of the four month pages, baby focus vs parent thread balance, feeding + sleep sections, questions, Ask CTAs, article links, references, visual result, preservation checks, typecheck result, and readiness to continue with 4–12 months.

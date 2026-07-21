@@ -7,16 +7,19 @@ import { EVENTS } from "@/lib/analyticsEvents";
 import { supabase } from "@/integrations/supabase/client";
 import { getActivePregnancyJourney } from "@/lib/savedJourney";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
-import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
+import { getMyWeekContent, getWeekIdentity, getSafeAskSeed } from "@/data/myWeekContent";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
-import MyWeekChapter from "@/components/myweek/MyWeekChapter";
-import SlotOneFocus from "@/components/myweek/SlotOneFocus";
-import SlotPhotoMemory from "@/components/myweek/SlotPhotoMemory";
-import SlotReflection from "@/components/myweek/SlotReflection";
-import SlotCompanionRecall from "@/components/myweek/SlotCompanionRecall";
-import SlotWhatsNext from "@/components/myweek/SlotWhatsNext";
-import MyWeekClosing from "@/components/myweek/MyWeekClosing";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
+import SectionHero from "@/components/myweek/SectionHero";
+import SectionBabyThisWeek from "@/components/myweek/SectionBabyThisWeek";
+import SectionBodyThisWeek from "@/components/myweek/SectionBodyThisWeek";
+import SectionEmotionallyThisWeek from "@/components/myweek/SectionEmotionallyThisWeek";
+import SlotOneFocus from "@/components/myweek/SlotOneFocus";
+import SectionAskAI from "@/components/myweek/SectionAskAI";
+import SectionToolsThisWeek from "@/components/myweek/SectionToolsThisWeek";
+import SlotReflection from "@/components/myweek/SlotReflection";
+import SlotPhotoMemory from "@/components/myweek/SlotPhotoMemory";
+import SectionNextChapter from "@/components/myweek/SectionNextChapter";
 import PageLoadState from "@/components/shared/PageLoadState";
 
 const getGreeting = (d = new Date()) => {
@@ -29,15 +32,28 @@ const getGreeting = (d = new Date()) => {
 const formatDueDate = (d: Date) =>
   d.toLocaleDateString("en-GB", { day: "numeric", month: "long" });
 
-const formatRemainingTime = (dueDate: Date, currentWeek: number) => {
+const formatWeeksToGo = (dueDate: Date) => {
   const daysLeft = Math.max(differenceInDays(dueDate, new Date()), 0);
   const weeksLeft = Math.max(Math.ceil(daysLeft / 7), 0);
+  if (weeksLeft === 0) return "Any day now";
   return `${weeksLeft} ${weeksLeft === 1 ? "week" : "weeks"} to go`;
 };
 
 const computeWeek = (lmp: Date) => {
   const days = differenceInDays(new Date(), lmp);
   return Math.min(Math.max(Math.floor(days / 7) + 1, 1), MAX_PREGNANCY_WEEK);
+};
+
+const stageWhatThisMeans = (week: number): string => {
+  if (week <= 12)
+    return "Most of this early work is invisible from the outside. It is still happening.";
+  if (week <= 27)
+    return "The middle weeks often feel steadier, though every day can still hold its own weather.";
+  if (week <= 36)
+    return "Growth slows into shape and readiness now, more than it does in size.";
+  if (week <= 40)
+    return "The last weeks are quiet finishing, not falling behind.";
+  return "Going past your due date is common. Your body knows the way.";
 };
 
 type Loaded = {
@@ -68,38 +84,38 @@ const MyWeek = () => {
       setLoading(true);
       setLoadError(null);
       try {
-      const { data: sess, error: sessionError } = await supabase.auth.getSession();
-      if (sessionError) throw sessionError;
-      const user = sess.session?.user;
-      if (!user) {
-        navigate("/auth", { replace: true });
-        return;
-      }
+        const { data: sess, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) throw sessionError;
+        const user = sess.session?.user;
+        if (!user) {
+          navigate("/auth", { replace: true });
+          return;
+        }
 
-      const [{ data: profile, error: profileError }, journey] = await Promise.all([
-        supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
-        getActivePregnancyJourney(user.id, { throwOnError: true }),
-      ]);
-      if (profileError) throw profileError;
+        const [{ data: profile, error: profileError }, journey] = await Promise.all([
+          supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
+          getActivePregnancyJourney(user.id, { throwOnError: true }),
+        ]);
+        if (profileError) throw profileError;
 
-      if (cancelled) return;
+        if (cancelled) return;
 
-      if (!journey) {
-        navigate("/due-date-calculator", { replace: true });
-        return;
-      }
-      if (!profile?.first_name) {
-        navigate("/setup", { replace: true });
-        return;
-      }
+        if (!journey) {
+          navigate("/due-date-calculator", { replace: true });
+          return;
+        }
+        if (!profile?.first_name) {
+          navigate("/setup", { replace: true });
+          return;
+        }
 
-      setState({
-        userId: user.id,
-        firstName: profile.first_name,
-        currentWeek: computeWeek(journey.lmp),
-        dueDate: journey.due,
-      });
-      setLoading(false);
+        setState({
+          userId: user.id,
+          firstName: profile.first_name,
+          currentWeek: computeWeek(journey.lmp),
+          dueDate: journey.due,
+        });
+        setLoading(false);
       } catch {
         if (!cancelled) {
           setLoadError("We couldn't load your week just now. Your saved journey has not been changed.");
@@ -150,6 +166,20 @@ const MyWeek = () => {
       ? "Whatever you're feeling right now, support is here."
       : null;
 
+  const bodyText =
+    content.bodyParagraph ??
+    content.matters.find((m) => m.title.toLowerCase().includes("body"))?.body ??
+    content.matters[1]?.body ??
+    "";
+  const emotionalText =
+    content.emotionalNote ??
+    content.matters.find((m) => m.title.toLowerCase().startsWith("emotion"))?.body ??
+    content.matters[2]?.body ??
+    "";
+  const askSeed = content.safeAskSeed ?? getSafeAskSeed(currentWeek);
+  const standfirst = content.lead ?? identity.theme;
+  const whatThisMeans = stageWhatThisMeans(currentWeek);
+
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative overflow-x-hidden">
       <SeoHead
@@ -159,62 +189,56 @@ const MyWeek = () => {
         noindex
       />
       <MyWeekHeader />
-      <main className="relative mx-auto w-full max-w-[680px] md:max-w-[920px] lg:max-w-[1200px] xl:max-w-[1320px] px-4 sm:px-8 md:px-10 lg:px-14">
-        {/* Two-zone composition from md upward. Mobile = single column flow. */}
-        <div className="lg:grid lg:grid-cols-12 lg:gap-14 xl:gap-20 lg:items-start">
-          {/* LEFT — Chapter + guidance */}
-          <div className="lg:col-span-7">
-            <MyWeekChapter
-              greeting={getGreeting()}
-              firstName={firstName}
-              week={currentWeek}
-              dueDateLabel={formatDueDate(dueDate)}
-              dueDateMeta={formatRemainingTime(dueDate, currentWeek)}
-              trimesterLabel={trimesterLabel}
-              chapterTitle={identity.chapterTitle}
-              theme={identity.theme}
-              developmentCue={identity.developmentCue}
-              babyNote={identity.babyNote}
-              content={content}
-            />
-          </div>
-
-          {/* RIGHT — One contained ritual rail. Sticky on lg so it stays in
-              view as the left guidance scrolls, eliminating the empty
-              lower-right quadrant. */}
-          <aside className="lg:col-span-5 mt-10 lg:mt-0 lg:pt-24 lg:sticky lg:top-28 lg:self-start">
-            <div
-              className="relative rounded-[28px] md:rounded-[32px] px-6 sm:px-8 md:px-7 lg:px-9 py-8 sm:py-9 lg:py-10 keepsake-surface divide-y"
-              style={{
-                borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)",
-                ['--tw-divide-opacity' as string]: 1,
-              }}
-            >
-              <div
-                className="space-y-0 [&>*+*]:border-t [&>*+*]:border-[hsl(var(--stage-pregnancy-accent)/0.12)]"
-              >
-                <SlotOneFocus content={content} />
-                <SlotPhotoMemory userId={userId} week={currentWeek} chapterTitle={identity.chapterTitle} />
-                <SlotReflection content={content} userId={userId} week={currentWeek} />
-                <SlotCompanionRecall userId={userId} currentWeek={currentWeek} />
-                <SlotWhatsNext
-                  content={content}
-                  nextWeek={nextWeek}
-                  nextChapterTitle={nextIdentity?.chapterTitle}
-                  nextTheme={nextIdentity?.theme}
-                />
-              </div>
-            </div>
-          </aside>
-        </div>
-
-        {/* Chapter-closing surface — solves the lower empty space */}
-        <MyWeekClosing
+      <main className="relative mx-auto w-full max-w-[720px] lg:max-w-[880px] px-4 sm:px-8 md:px-10">
+        <SectionHero
+          greeting={getGreeting()}
           firstName={firstName}
-          currentWeek={currentWeek}
+          trimesterLabel={trimesterLabel}
+          week={currentWeek}
           chapterTitle={identity.chapterTitle}
-          nextChapterTitle={nextIdentity?.chapterTitle ?? null}
+          standfirst={standfirst}
+          dueDateLabel={formatDueDate(dueDate)}
+          weeksToGoLabel={formatWeeksToGo(dueDate)}
+        />
+
+        <SectionBabyThisWeek
+          week={currentWeek}
+          developmentCue={identity.developmentCue}
+          babyNote={identity.babyNote}
+          whatThisMeans={whatThisMeans}
+        />
+
+        {bodyText && <SectionBodyThisWeek bodyText={bodyText} />}
+
+        {emotionalText && (
+          <SectionEmotionallyThisWeek
+            emotionalText={emotionalText}
+            reflectionPrompt={content.reflection.prompt}
+          />
+        )}
+
+        <section className="relative pt-4 pb-12">
+          <div
+            className="rounded-[22px] keepsake-surface px-6 sm:px-8 py-7 sm:py-8"
+            style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)" }}
+          >
+            <SlotOneFocus content={content} />
+          </div>
+        </section>
+
+        <SectionAskAI week={currentWeek} seed={askSeed} />
+
+        <SectionToolsThisWeek week={currentWeek} />
+
+        <SlotReflection content={content} userId={userId} week={currentWeek} />
+
+        <SlotPhotoMemory userId={userId} week={currentWeek} chapterTitle={identity.chapterTitle} />
+
+        <SectionNextChapter
           nextWeek={nextWeek}
+          nextChapterTitle={nextIdentity?.chapterTitle}
+          nextTheme={nextIdentity?.theme}
+          nextPreview={content.nextPreview}
         />
       </main>
       <MyWeekFooter contextual={contextual} />

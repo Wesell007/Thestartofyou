@@ -208,6 +208,6 @@ export const deletePregnancyJourney = async (userId: string): Promise<void> => {
   const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
   if (sessionError) throw sessionError;
   if (sessionData.session?.user.id !== userId) throw new Error("Your session no longer matches this journey.");
-  const { error } = await supabase.rpc("delete_active_journey", { p_lifecycle: "pregnancy" });
+  const { error } = await (supabase.rpc as any)("delete_active_journey", { p_lifecycle: "pregnancy" });
   if (error) throw error;
 };

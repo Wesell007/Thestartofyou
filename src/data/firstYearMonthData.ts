@@ -89,9 +89,21 @@ export interface MonthGuide {
 
 // Ordered array of published slugs. Prev/next derive from this list only,
 // so the chain closes cleanly on the first and last published month.
-export const MONTH_ORDER: MonthSlug[] = ["newborn", "1-month", "2-months", "3-months"];
+export const MONTH_ORDER: MonthSlug[] = [
+  "newborn",
+  "1-month",
+  "2-months",
+  "3-months",
+  "4-months",
+  "5-months",
+  "6-months",
+  "7-months",
+  "8-months",
+];
 
 const PHASE_0_3 = { label: "0 to 3 months", href: "/first-year/0-3-months" };
+const PHASE_3_6 = { label: "3 to 6 months", href: "/first-year/3-6-months" };
+const PHASE_6_9 = { label: "6 to 9 months", href: "/first-year/6-9-months" };
 
 export const firstYearMonths: Record<MonthSlug, MonthGuide> = {
   newborn: {

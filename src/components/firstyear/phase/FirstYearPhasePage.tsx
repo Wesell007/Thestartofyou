@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowLeft } from "lucide-react";
+import { ArrowUpRight, ArrowLeft, BookOpen, Sparkles, ExternalLink } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import type { PhaseConfig } from "@/data/firstYearPhaseData";

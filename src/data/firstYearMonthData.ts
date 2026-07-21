@@ -1948,6 +1948,31 @@ export const firstYearMonthImages: Record<MonthSlug, MonthImagery> = {
     baby: { src: threeMonthBaby.url, alt: "A three month old baby holding a wooden ring toy during safe play", caption: "Head control steadies. Hands find toys. Days shape gently." },
     parent: { src: threeMonthParent.url, alt: "A parent preparing a pram cover, a small cardigan folded nearby", caption: "Getting out of the door counts as a full activity." },
   },
+  "4-months": {
+    hero: { src: fourMonthHero.url, alt: "A four month old baby smiling on a soft cream muslin in warm home light" },
+    baby: { src: fourMonthBaby.url, alt: "A four month old baby reaching for a wooden ring during calm play", caption: "Hands find everything. The world is worth grabbing." },
+    parent: { src: fourMonthParent.url, alt: "A parent's mug of tea and a folded muslin resting on a wooden kitchen counter", caption: "Rest counts, even when it looks like nothing." },
+  },
+  "5-months": {
+    hero: { src: fiveMonthHero.url, alt: "A five month old baby held upright with steady head control in a bright, calm room" },
+    baby: { src: fiveMonthBaby.url, alt: "A five month old baby grabbing a soft fabric toy during safe play", caption: "Stronger body, curious hands, a personality showing through." },
+    parent: { src: fiveMonthParent.url, alt: "An open journal and a warm mug on a linen throw in soft daylight", caption: "Small rituals for yourself still matter now." },
+  },
+  "6-months": {
+    hero: { src: sixMonthHero.url, alt: "A six month old baby sitting supported in a high chair with a small wooden spoon and cream bowl" },
+    baby: { src: sixMonthBaby.url, alt: "A six month old baby exploring a soft vegetable stick on a wooden high chair tray", caption: "First tastes, tiny mouthfuls, a lot of learning." },
+    parent: { src: sixMonthParent.url, alt: "A parent's water bottle, small notebook and folded muslin on a wooden kitchen counter", caption: "Half a year in, and you are still recovering." },
+  },
+  "7-months": {
+    hero: { src: sevenMonthHero.url, alt: "A seven month old baby on hands and knees beginning to rock, a parent's steadying hand nearby" },
+    baby: { src: sevenMonthBaby.url, alt: "A seven month old baby's hands exploring a small wooden block on a cream play mat", caption: "Every ordinary object is a lesson." },
+    parent: { src: sevenMonthParent.url, alt: "An open journal, a phone face down and a warm mug on a linen throw in soft daylight", caption: "Naming the load is the first step to sharing it." },
+  },
+  "8-months": {
+    hero: { src: eightMonthHero.url, alt: "An eight month old baby crawling on a cream rug in a bright living room while a parent watches nearby" },
+    baby: { src: eightMonthBaby.url, alt: "An eight month old baby picking up a small piece of soft banana with a pincer grasp on a high chair tray", caption: "Small fingers, big skills, growing independence." },
+    parent: { src: eightMonthParent.url, alt: "A parent's cardigan draped over the back of a chair with a small stack of baby books on a side table", caption: "Wanting a little space is not a failure of love." },
+  },
 };
 
 export function getMonthImagery(slug: MonthSlug): MonthImagery {

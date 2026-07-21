@@ -295,15 +295,40 @@ const CommonQuestions = ({
 );
 
 const PhaseEditorial = ({ text }: { text: string }) => (
-  <section className="bg-parchment py-10 md:py-14">
+  <section className="bg-parchment py-16 md:py-24">
     <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
-      <SectionLabel>What this phase can feel like</SectionLabel>
-      <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-4">
-        The honest shape of this stage.
-      </h2>
-      <p className="font-sans text-[15px] md:text-[16px] font-light text-foreground/80 leading-[1.85]">
-        {text}
-      </p>
+      <div
+        className="relative rounded-[28px] border p-10 md:p-14 text-center overflow-hidden bg-parchment-dark/70 shadow-[0_30px_80px_-50px_rgba(20,30,60,0.28)]"
+        style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.22)" }}
+      >
+        <div
+          className="absolute inset-x-0 top-0 h-24 pointer-events-none opacity-70"
+          style={{
+            backgroundImage:
+              "radial-gradient(60% 80% at 50% 0%, hsl(var(--stage-firstyear-soft) / 0.55) 0%, transparent 100%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative">
+          <span
+            className="inline-block w-10 h-[2px] rounded-full mb-5"
+            style={{ backgroundColor: "hsl(var(--stage-firstyear-accent))" }}
+            aria-hidden
+          />
+          <p
+            className="font-sans text-[11px] font-medium tracking-[0.28em] uppercase mb-4"
+            style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+          >
+            What this phase can feel like
+          </p>
+          <h2 className="font-serif italic text-2xl sm:text-3xl text-foreground leading-[1.2] mb-6 max-w-xl mx-auto">
+            The honest shape of this stage.
+          </h2>
+          <p className="font-sans text-[17px] md:text-[18px] font-light text-foreground/78 leading-[1.9] max-w-2xl mx-auto">
+            {text}
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 );

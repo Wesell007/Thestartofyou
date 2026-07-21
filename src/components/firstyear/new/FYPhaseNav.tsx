@@ -34,10 +34,10 @@ const phases = [
 
 // Secondary quick-navigation strip — supports the four phase cards, never replaces them.
 const ageItems: { label: string; href: string }[] = [
-  { label: "Newborn", href: "/first-year/0-3-months" },
-  { label: "1 month", href: "/first-year/0-3-months" },
-  { label: "2 months", href: "/first-year/0-3-months" },
-  { label: "3 months", href: "/first-year/0-3-months" },
+  { label: "Newborn", href: "/first-year/newborn" },
+  { label: "1 month", href: "/first-year/1-month" },
+  { label: "2 months", href: "/first-year/2-months" },
+  { label: "3 months", href: "/first-year/3-months" },
   { label: "4 months", href: "/first-year/3-6-months" },
   { label: "5 months", href: "/first-year/3-6-months" },
   { label: "6 months", href: "/first-year/3-6-months" },

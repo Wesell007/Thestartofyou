@@ -21,84 +21,138 @@ const askHref = (guide: MonthGuide, topic: string) =>
 
 const Hero = ({ guide }: Props) => {
   const { prev, next } = getAdjacentMonths(guide.slug);
+  const img = getMonthImagery(guide.slug);
   return (
-    <section className="relative bg-parchment pt-28 pb-14 md:pt-32 md:pb-16 overflow-hidden">
-      <div className="absolute inset-x-0 bottom-0 h-48 pointer-events-none flex">
-        <div className="w-1/2 h-full blur-3xl opacity-50" style={{ backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.26)" }} />
-        <div className="w-1/2 h-full blur-3xl opacity-50" style={{ backgroundColor: "hsl(var(--stage-recovery-soft) / 0.22)" }} />
+    <section className="relative bg-parchment pt-28 pb-16 md:pt-32 md:pb-20 overflow-hidden">
+      <div className="absolute inset-x-0 bottom-0 h-56 pointer-events-none flex">
+        <div className="w-1/2 h-full blur-3xl opacity-50" style={{ backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.28)" }} />
+        <div className="w-1/2 h-full blur-3xl opacity-50" style={{ backgroundColor: "hsl(var(--stage-recovery-soft) / 0.24)" }} />
       </div>
-      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl relative">
-        <div className="flex items-center gap-2 mb-6">
-          <span className="h-px w-7 bg-foreground/25" />
-          <span className="font-sans text-[11px] font-light tracking-[0.3em] uppercase text-foreground/65">
-            First year · Month guide
-          </span>
-        </div>
-        <p className="font-sans text-[12px] font-light tracking-[0.22em] uppercase mb-4" style={{ color: "hsl(var(--stage-firstyear-deep))" }}>
-          {guide.label}
-        </p>
-        <h1 className="font-serif text-3xl sm:text-4xl md:text-[2.6rem] text-foreground leading-[1.1] mb-5">
-          {guide.title}
-        </h1>
-        <p className="font-sans text-[16px] md:text-[17px] font-light text-muted-foreground leading-relaxed max-w-2xl">
-          {guide.standfirst}
-        </p>
-
-        <div className="mt-8 flex flex-wrap items-center gap-3 text-[12px] font-sans font-light">
-          <Link
-            to="/first-year"
-            className="inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 hover:-translate-y-[1px] transition-transform"
-            style={{ borderColor: "hsl(var(--border) / 0.7)", color: "hsl(var(--foreground) / 0.75)" }}
-          >
-            <ArrowLeft size={12} /> First year hub
-          </Link>
-          <Link
-            to={guide.phase.href}
-            className="inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 hover:-translate-y-[1px] transition-transform"
-            style={{
-              borderColor: "hsl(var(--stage-firstyear-accent) / 0.35)",
-              backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.45)",
-              color: "hsl(var(--stage-firstyear-deep))",
-            }}
-          >
-            Phase: {guide.phase.label}
-          </Link>
-        </div>
-
-        <div className="mt-8 flex items-center justify-between border-t pt-5" style={{ borderColor: "hsl(var(--border) / 0.5)" }}>
-          {prev ? (
-            <Link
-              to={`/first-year/${prev.slug}`}
-              className="group inline-flex items-center gap-2 font-sans text-[12px] font-light text-foreground/70 hover:text-foreground"
-            >
-              <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-0.5" />
-              <span>
-                <span className="block text-[10px] tracking-[0.22em] uppercase text-foreground/45">Previous</span>
-                {prev.label}
+      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-6xl relative">
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] gap-10 md:gap-14 items-center">
+          <div>
+            <div className="flex items-center gap-2 mb-6">
+              <span className="h-px w-7 bg-foreground/25" />
+              <span className="font-sans text-[11px] font-light tracking-[0.3em] uppercase text-foreground/65">
+                First year · Month guide
               </span>
-            </Link>
-          ) : (
-            <span />
-          )}
-          {next ? (
-            <Link
-              to={`/first-year/${next.slug}`}
-              className="group inline-flex items-center gap-2 font-sans text-[12px] font-light text-foreground/70 hover:text-foreground text-right"
+            </div>
+            <p className="font-sans text-[12px] font-light tracking-[0.22em] uppercase mb-4" style={{ color: "hsl(var(--stage-firstyear-deep))" }}>
+              {guide.label}
+            </p>
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-[2.75rem] text-foreground leading-[1.08] mb-5">
+              {guide.title}
+            </h1>
+            <p className="font-sans text-[16px] md:text-[17px] font-light text-muted-foreground leading-relaxed">
+              {guide.standfirst}
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3 text-[12px] font-sans font-light">
+              <Link
+                to="/first-year"
+                className="inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 hover:-translate-y-[1px] transition-transform"
+                style={{ borderColor: "hsl(var(--border) / 0.7)", color: "hsl(var(--foreground) / 0.75)" }}
+              >
+                <ArrowLeft size={12} /> First year hub
+              </Link>
+              <Link
+                to={guide.phase.href}
+                className="inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 hover:-translate-y-[1px] transition-transform"
+                style={{
+                  borderColor: "hsl(var(--stage-firstyear-accent) / 0.35)",
+                  backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.45)",
+                  color: "hsl(var(--stage-firstyear-deep))",
+                }}
+              >
+                Phase: {guide.phase.label}
+              </Link>
+            </div>
+
+            <div className="mt-8 flex items-center justify-between border-t pt-5" style={{ borderColor: "hsl(var(--border) / 0.5)" }}>
+              {prev ? (
+                <Link to={`/first-year/${prev.slug}`} className="group inline-flex items-center gap-2 font-sans text-[12px] font-light text-foreground/70 hover:text-foreground">
+                  <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-0.5" />
+                  <span>
+                    <span className="block text-[10px] tracking-[0.22em] uppercase text-foreground/45">Previous</span>
+                    {prev.label}
+                  </span>
+                </Link>
+              ) : (<span />)}
+              {next ? (
+                <Link to={`/first-year/${next.slug}`} className="group inline-flex items-center gap-2 font-sans text-[12px] font-light text-foreground/70 hover:text-foreground text-right">
+                  <span>
+                    <span className="block text-[10px] tracking-[0.22em] uppercase text-foreground/45">Next</span>
+                    {next.label}
+                  </span>
+                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+                </Link>
+              ) : (<span />)}
+            </div>
+          </div>
+
+          {/* Hero image column */}
+          <div className="relative">
+            <div
+              className="absolute -inset-4 md:-inset-6 rounded-[32px] blur-2xl opacity-70 -z-10"
+              style={{ backgroundImage: "linear-gradient(140deg, hsl(var(--stage-firstyear-soft) / 0.55), hsl(var(--stage-recovery-soft) / 0.45))" }}
+            />
+            <div
+              className="relative overflow-hidden rounded-[26px] border shadow-[0_40px_90px_-40px_rgba(20,30,60,0.35)]"
+              style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.22)" }}
             >
-              <span>
-                <span className="block text-[10px] tracking-[0.22em] uppercase text-foreground/45">Next</span>
-                {next.label}
-              </span>
-              <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          ) : (
-            <span />
-          )}
+              <img
+                src={img.hero.src}
+                alt={img.hero.alt}
+                width={1600}
+                height={1100}
+                className="w-full h-full object-cover aspect-[4/5] md:aspect-[5/6]"
+              />
+              <div
+                className="absolute inset-x-0 bottom-0 h-24 pointer-events-none"
+                style={{ backgroundImage: "linear-gradient(to top, hsl(var(--parchment) / 0.85), transparent)" }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 };
+
+/* ------------------------------------------------------- STORY IMAGE BAND */
+
+const StoryBand = ({
+  src, alt, caption, tint,
+}: { src: string; alt: string; caption: string; tint: "firstyear" | "recovery" }) => {
+  const soft = tint === "recovery" ? "var(--stage-recovery-soft)" : "var(--stage-firstyear-soft)";
+  const deep = tint === "recovery" ? "var(--stage-recovery-deep)" : "var(--stage-firstyear-deep)";
+  return (
+    <section className="bg-parchment pt-4 pb-4 md:pt-6 md:pb-6">
+      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl">
+        <figure
+          className="relative overflow-hidden rounded-[28px] border shadow-[0_36px_80px_-44px_rgba(20,30,60,0.32)]"
+          style={{ borderColor: `hsl(${soft} / 0.7)` }}
+        >
+          <img
+            src={src}
+            alt={alt}
+            loading="lazy"
+            width={1400}
+            height={1000}
+            className="w-full h-auto object-cover aspect-[16/9] md:aspect-[21/9]"
+          />
+          <figcaption
+            className="absolute bottom-4 left-4 md:bottom-6 md:left-6 max-w-md rounded-full px-4 py-2 backdrop-blur-sm font-serif italic text-[13px] md:text-[14px] leading-relaxed"
+            style={{ backgroundColor: `hsl(${soft} / 0.85)`, color: `hsl(${deep})` }}
+          >
+            {caption}
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+};
+
 
 /* -------------------------------------------------------- SHORT VERSION */
 

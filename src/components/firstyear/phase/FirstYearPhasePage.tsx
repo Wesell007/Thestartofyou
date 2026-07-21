@@ -120,101 +120,111 @@ const InPhaseAges = ({ ages }: { ages: string[] }) => (
 );
 
 const PairedSection = ({ config }: Props) => (
-  <section className="bg-parchment py-12 md:py-16">
+  <section className="bg-parchment py-16 md:py-22">
     <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7 items-stretch">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
+        {/* Baby card */}
         <div
-          className="relative overflow-hidden rounded-[22px] border p-6 md:p-8 shadow-[0_24px_60px_-40px_rgba(20,30,60,0.28)]"
+          className="relative overflow-hidden rounded-[28px] border p-8 md:p-10 shadow-[0_30px_80px_-40px_rgba(20,30,60,0.32),inset_0_1px_0_hsl(0_0%_100%/0.7)]"
           style={{
-            backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.26)",
-            borderColor: "hsl(var(--stage-firstyear-accent) / 0.2)",
+            backgroundImage:
+              "linear-gradient(135deg, hsl(var(--stage-firstyear-soft) / 0.42) 0%, hsl(var(--card)) 55%, hsl(var(--stage-firstyear-soft) / 0.22) 100%)",
+            borderColor: "hsl(var(--stage-firstyear-accent) / 0.32)",
           }}
         >
           <div
-            className="absolute -top-16 -left-16 w-52 h-52 rounded-full blur-3xl opacity-60 pointer-events-none"
-            style={{ backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.6)" }}
+            className="absolute top-0 bottom-0 left-0 w-[5px] rounded-r-full"
+            style={{ backgroundColor: "hsl(var(--stage-firstyear-accent))" }}
             aria-hidden
           />
           <div
-            className="absolute inset-x-0 top-0 h-px pointer-events-none"
-            style={{ backgroundImage: 'linear-gradient(to right, transparent, hsl(0 0% 100% / 0.7), transparent)' }}
+            className="absolute -top-20 -left-20 w-56 h-56 rounded-full blur-3xl opacity-60 pointer-events-none"
+            style={{ backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.6)" }}
             aria-hidden
           />
-          <div className="relative">
-            <div className="flex items-center gap-2 mb-2">
+          <div className="relative pl-3">
+            <div className="flex items-center gap-2 mb-3">
               <span
-                className="w-1 h-5 rounded-full"
+                className="w-1.5 h-1.5 rounded-full"
                 style={{ backgroundColor: "hsl(var(--stage-firstyear-accent))" }}
               />
               <p
-                className="font-sans text-[10px] font-light tracking-[0.25em] uppercase"
+                className="font-sans text-[11px] font-medium tracking-[0.28em] uppercase"
                 style={{ color: "hsl(var(--stage-firstyear-deep))" }}
               >
                 For your baby
               </p>
             </div>
-            <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-5">
+            <h2 className="font-serif text-2xl sm:text-[1.75rem] text-foreground leading-[1.15] mb-7">
               Baby changes in this phase
             </h2>
-            <ul className="space-y-4">
-              {config.babyChanges.map((b) => (
-                <li key={b.label}>
+            <ul className="space-y-5">
+              {config.babyChanges.map((b, i) => (
+                <li
+                  key={b.label}
+                  className={i > 0 ? "pt-5 border-t border-border/40" : ""}
+                >
                   <p
-                    className="font-sans text-[11px] font-light tracking-wider uppercase mb-1"
-                    style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+                    className="font-sans text-[11px] font-medium tracking-[0.18em] uppercase mb-1.5"
+                    style={{ color: "hsl(var(--stage-firstyear-accent))" }}
                   >
                     {b.label}
                   </p>
-                  <p className="font-sans text-[14px] font-light text-foreground/85 leading-relaxed">{b.body}</p>
+                  <p className="font-sans text-[15px] font-light text-foreground/85 leading-[1.75]">{b.body}</p>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
+        {/* Parent card */}
         <div
-          className="relative overflow-hidden rounded-[22px] border p-6 md:p-8 shadow-[0_24px_60px_-40px_rgba(60,40,55,0.24)]"
+          className="relative overflow-hidden rounded-[28px] border p-8 md:p-10 shadow-[0_30px_80px_-40px_rgba(60,40,55,0.30),inset_0_1px_0_hsl(0_0%_100%/0.7)]"
           style={{
-            backgroundColor: "hsl(var(--stage-recovery-soft) / 0.22)",
-            borderColor: "hsl(var(--stage-recovery-accent) / 0.18)",
+            backgroundImage:
+              "linear-gradient(135deg, hsl(var(--stage-recovery-soft) / 0.38) 0%, hsl(var(--card)) 55%, hsl(var(--stage-recovery-soft) / 0.2) 100%)",
+            borderColor: "hsl(var(--stage-recovery-accent) / 0.3)",
           }}
         >
           <div
-            className="absolute -top-16 -right-16 w-52 h-52 rounded-full blur-3xl opacity-55 pointer-events-none"
-            style={{ backgroundColor: "hsl(var(--stage-recovery-soft) / 0.55)" }}
+            className="absolute top-0 bottom-0 left-0 w-[5px] rounded-r-full"
+            style={{ backgroundColor: "hsl(var(--stage-recovery-accent))" }}
             aria-hidden
           />
           <div
-            className="absolute inset-x-0 top-0 h-px pointer-events-none"
-            style={{ backgroundImage: 'linear-gradient(to right, transparent, hsl(0 0% 100% / 0.65), transparent)' }}
+            className="absolute -top-20 -right-20 w-56 h-56 rounded-full blur-3xl opacity-55 pointer-events-none"
+            style={{ backgroundColor: "hsl(var(--stage-recovery-soft) / 0.55)" }}
             aria-hidden
           />
-          <div className="relative">
-            <div className="flex items-center gap-2 mb-2">
+          <div className="relative pl-3">
+            <div className="flex items-center gap-2 mb-3">
               <span
-                className="w-1 h-5 rounded-full"
+                className="w-1.5 h-1.5 rounded-full"
                 style={{ backgroundColor: "hsl(var(--stage-recovery-accent))" }}
               />
               <p
-                className="font-sans text-[10px] font-light tracking-[0.25em] uppercase"
+                className="font-sans text-[11px] font-medium tracking-[0.28em] uppercase"
                 style={{ color: "hsl(var(--stage-recovery-deep))" }}
               >
                 For you
               </p>
             </div>
-            <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-5">
+            <h2 className="font-serif text-2xl sm:text-[1.75rem] text-foreground leading-[1.15] mb-7">
               Recovery and adjustment in this phase
             </h2>
-            <ul className="space-y-4">
-              {config.parentRecovery.map((b) => (
-                <li key={b.label}>
+            <ul className="space-y-5">
+              {config.parentRecovery.map((b, i) => (
+                <li
+                  key={b.label}
+                  className={i > 0 ? "pt-5 border-t border-border/40" : ""}
+                >
                   <p
-                    className="font-sans text-[11px] font-light tracking-wider uppercase mb-1"
-                    style={{ color: "hsl(var(--stage-recovery-deep))" }}
+                    className="font-sans text-[11px] font-medium tracking-[0.18em] uppercase mb-1.5"
+                    style={{ color: "hsl(var(--stage-recovery-accent))" }}
                   >
                     {b.label}
                   </p>
-                  <p className="font-sans text-[14px] font-light text-foreground/85 leading-relaxed">{b.body}</p>
+                  <p className="font-sans text-[15px] font-light text-foreground/85 leading-[1.75]">{b.body}</p>
                 </li>
               ))}
             </ul>

@@ -179,7 +179,7 @@ export const getActivePregnancyJourney = async (
 
   // Best-effort backfill into new tables. Failures must not block the read.
   try {
-    const { error } = await supabase.rpc("save_pregnancy_journey", {
+    const { error } = await (supabase.rpc as any)("save_pregnancy_journey", {
       p_lmp_date: legacy.lmp_date,
       p_due_date: legacy.due_date,
     });

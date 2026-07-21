@@ -895,3 +895,56 @@ export function getAdjacentMonths(slug: MonthSlug): {
     next: next ? { slug: next, label: firstYearMonths[next].label } : undefined,
   };
 }
+
+// ---------------------------------------------------------------------------
+// Month imagery (added in Phase 11.8a.2). Hosted on the Lovable CDN via asset
+// pointers so the pages can load rich editorial photography without bloating
+// the repo. Keeping this off the MonthGuide interface keeps the large content
+// records untouched and lets us evolve imagery independently.
+// ---------------------------------------------------------------------------
+import newbornHero from "@/assets/first-year/months/first-year-newborn-hero.jpg.asset.json";
+import newbornBaby from "@/assets/first-year/months/first-year-newborn-baby.jpg.asset.json";
+import newbornParent from "@/assets/first-year/months/first-year-newborn-parent.jpg.asset.json";
+import oneMonthHero from "@/assets/first-year/months/first-year-1-month-hero.jpg.asset.json";
+import oneMonthBaby from "@/assets/first-year/months/first-year-1-month-baby.jpg.asset.json";
+import oneMonthParent from "@/assets/first-year/months/first-year-1-month-parent.jpg.asset.json";
+import twoMonthHero from "@/assets/first-year/months/first-year-2-month-hero.jpg.asset.json";
+import twoMonthBaby from "@/assets/first-year/months/first-year-2-month-baby.jpg.asset.json";
+import twoMonthParent from "@/assets/first-year/months/first-year-2-month-parent.jpg.asset.json";
+import threeMonthHero from "@/assets/first-year/months/first-year-3-month-hero.jpg.asset.json";
+import threeMonthBaby from "@/assets/first-year/months/first-year-3-month-baby.jpg.asset.json";
+import threeMonthParent from "@/assets/first-year/months/first-year-3-month-parent.jpg.asset.json";
+
+export interface MonthImagery {
+  hero: { src: string; alt: string };
+  baby: { src: string; alt: string; caption: string };
+  parent: { src: string; alt: string; caption: string };
+}
+
+export const firstYearMonthImages: Record<MonthSlug, MonthImagery> = {
+  newborn: {
+    hero: { src: newbornHero.url, alt: "A newborn wrapped in soft muslin, held gently in a parent's arms" },
+    baby: { src: newbornBaby.url, alt: "A newborn's tiny hand reaching towards soft light", caption: "The world is new, and being near you is enough." },
+    parent: { src: newbornParent.url, alt: "A warm mug of tea on a linen throw beside a folded muslin", caption: "Rest whenever you can, in whatever shape it comes." },
+  },
+  "1-month": {
+    hero: { src: oneMonthHero.url, alt: "A parent holding a one month old baby close to their chest in soft home light" },
+    baby: { src: oneMonthBaby.url, alt: "A one month old baby lying calmly on a cream blanket, gaze turned upward", caption: "Small moments of alert quiet begin to appear." },
+    parent: { src: oneMonthParent.url, alt: "A parent sitting quietly with a muslin over their shoulder near a bright window", caption: "The days blur. Your feelings do too. Both are allowed." },
+  },
+  "2-months": {
+    hero: { src: twoMonthHero.url, alt: "A two month old baby smiling softly on a play mat in a calm sunlit room" },
+    baby: { src: twoMonthBaby.url, alt: "A baby on a soft mat, calm and settled during gentle tummy time", caption: "First real smiles arrive, quietly at first." },
+    parent: { src: twoMonthParent.url, alt: "A parent resting near a Moses basket with a journal and warm drink", caption: "You are still recovering. That does not stop just because the days are longer." },
+  },
+  "3-months": {
+    hero: { src: threeMonthHero.url, alt: "A three month old baby smiling up at a parent held gently upright in warm home light" },
+    baby: { src: threeMonthBaby.url, alt: "A three month old baby holding a wooden ring toy during safe play", caption: "Head control steadies. Hands find toys. Days shape gently." },
+    parent: { src: threeMonthParent.url, alt: "A parent preparing a pram cover, a small cardigan folded nearby", caption: "Getting out of the door counts as a full activity." },
+  },
+};
+
+export function getMonthImagery(slug: MonthSlug): MonthImagery {
+  return firstYearMonthImages[slug];
+}
+

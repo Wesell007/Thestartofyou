@@ -70,7 +70,7 @@ const firstYearStatic = [
   "/first-year/3-6-months",
   "/first-year/6-9-months",
   "/first-year/9-12-months",
-  // Month guide pages (Phase 11.8a and 11.8b). Newborn to 8 months are published.
+  // Month guide pages (Phases 11.8a, 11.8b and 11.8c). Newborn to 12 months are published.
   "/first-year/newborn",
   "/first-year/1-month",
   "/first-year/2-months",
@@ -80,6 +80,10 @@ const firstYearStatic = [
   "/first-year/6-months",
   "/first-year/7-months",
   "/first-year/8-months",
+  "/first-year/9-months",
+  "/first-year/10-months",
+  "/first-year/11-months",
+  "/first-year/12-months",
   "/first-year/feeding",
   "/first-year/sleep",
   "/first-year/development",

@@ -14,7 +14,11 @@ export type MonthSlug =
   | "5-months"
   | "6-months"
   | "7-months"
-  | "8-months";
+  | "8-months"
+  | "9-months"
+  | "10-months"
+  | "11-months"
+  | "12-months";
 
 export interface MonthQuestion {
   question: string;
@@ -99,11 +103,16 @@ export const MONTH_ORDER: MonthSlug[] = [
   "6-months",
   "7-months",
   "8-months",
+  "9-months",
+  "10-months",
+  "11-months",
+  "12-months",
 ];
 
 const PHASE_0_3 = { label: "0 to 3 months", href: "/first-year/0-3-months" };
 const PHASE_3_6 = { label: "3 to 6 months", href: "/first-year/3-6-months" };
 const PHASE_6_9 = { label: "6 to 9 months", href: "/first-year/6-9-months" };
+const PHASE_9_12 = { label: "9 to 12 months", href: "/first-year/9-12-months" };
 
 export const firstYearMonths: Record<MonthSlug, MonthGuide> = {
   newborn: {
@@ -1868,6 +1877,823 @@ export const firstYearMonths: Record<MonthSlug, MonthGuide> = {
         "A gentle guide to your baby at 8 months. Early movement, separation anxiety, finger foods and how you may be feeling as connection deepens.",
     },
   },
+
+  "9-months": {
+    slug: "9-months",
+    label: "9 months",
+    title: "9 months old: moving, watching, holding on",
+    standfirst:
+      "By nine months, many babies are moving in their own way, watching everything you do and asking to be near you when the world feels big. This guide covers early movement, growing communication, separation feelings, feeding and sleep, and how you may be feeling as fatigue and pride sit side by side.",
+    phase: PHASE_9_12,
+    shortVersion: {
+      baby: "Moving in some way. Copying and watching closely. Clear preferences for people. Often noisier and more expressive.",
+      feeding: "Three meals a day for many babies with milk still important. Wider range of textures usually going well.",
+      sleep: "Often still disrupted. Separation feelings and new skills can affect nights and naps.",
+      you: "Tiredness may feel deep. Small pockets of you time and honest conversations both help.",
+      whenToAsk: "No movement of any kind, no response to sounds or their name, feeding refusal for days, or a baby who is unusually floppy or unwell.",
+    },
+    babyEditorial: {
+      intro:
+        "Nine months often feels like a step change. Your baby may be crawling, shuffling or rolling with purpose, and their world is widening. They are also holding on to you a little tighter as they realise how big everything is.",
+      subsections: [
+        {
+          heading: "Moving in their own way",
+          body:
+            "Crawling, commando crawling, shuffling on their bottom or rolling with intent are all ways of getting around at this age. Some babies pull to stand at the sofa. All of these are typical, and there is no single right pattern.",
+        },
+        {
+          heading: "Standing attempts",
+          body:
+            "Many babies try to pull up on low furniture, then look surprised at how tall the world feels. Steady, low surfaces and a clear floor space help. Sitting back down often comes later than getting up.",
+        },
+        {
+          heading: "Stronger communication",
+          body:
+            "Babbling can sound more like conversation now. Some babies use gestures, point at things they want, or copy simple sounds. Responding calmly, even when you cannot tell what they mean, is doing plenty.",
+        },
+        {
+          heading: "Separation anxiety",
+          body:
+            "Around this age, many babies protest when you leave the room or when someone unfamiliar holds them. This is a sign of secure attachment. Warm, short goodbyes and calm reunions usually help more than long explanations.",
+        },
+        {
+          heading: "Food exploration",
+          body:
+            "Many babies enjoy trying new textures, tastes and finger foods at nine months. Some are fussier. Offering without pressure, and eating alongside your baby when you can, tends to help more than coaxing.",
+        },
+        {
+          heading: "Sleep changes",
+          body:
+            "New skills, teeth and separation feelings can all wobble sleep for a while. Keeping the basics steady, and giving any new approach a couple of weeks, is often more useful than a sudden change.",
+        },
+        {
+          heading: "Growing personality",
+          body:
+            "You may notice clear favourites, funny reactions and small games your baby wants to play again and again. Enjoyment is not a distraction from development. It is development.",
+        },
+      ],
+    },
+    feedingSection: {
+      intro:
+        "Meals at nine months often feel more established, though appetite can vary from day to day. Milk continues to be an important part of the daily intake.",
+      points: [
+        "Three meals a day works well for many babies now, sometimes with a small snack.",
+        "A mix of soft finger foods and offered spoons lets your baby practise skills.",
+        "Cut food to reduce choking risk. Avoid whole nuts, whole grapes, cherry tomatoes and hard raw pieces.",
+        "Milk continues to be important. Breast, formula or a combination all fit here.",
+        "It is normal for appetite to change from day to day. Trust the pattern over the week, not each meal.",
+      ],
+      whenToAsk:
+        "Ask your health visitor or GP if your baby refuses all solids for weeks, is not gaining weight, or you are worried about swallowing.",
+    },
+    sleepSection: {
+      intro:
+        "Sleep at nine months can wobble as new skills and feelings arrive. Steady basics and gentle reassurance usually help most.",
+      points: [
+        "Practising new skills in the day, safely on the floor, can settle some of the night restlessness.",
+        "Most babies still have two naps around now, though timings may be shifting.",
+        "Reassurance during separation feelings is not a bad habit. It is what your baby needs from you.",
+        "If you change your approach, give it a week or two before deciding whether it is helping.",
+      ],
+      safeSleep:
+        "Continue back sleeping in a clear cot with a firm mattress and no cot bumpers, pillows or loose bedding. Once your baby can pull up in the cot, lower the mattress and remove anything they could climb on.",
+      whenToAsk:
+        "Ask for a review if your baby is much less interested in feeds, is unusually sleepy, or has fast or grunting breathing.",
+    },
+    youEditorial: {
+      intro:
+        "Nine months in, you may feel proud and worn out in the same breath. Both can be true, and neither cancels the other out.",
+      subsections: [
+        {
+          heading: "The long tiredness",
+          body:
+            "This is not the sharp exhaustion of the newborn weeks. It is a slower kind of tired that can creep up on any given day. Naming it, even to yourself, matters.",
+        },
+        {
+          heading: "Comparison pressure",
+          body:
+            "Other babies, other families and quick comments online can all leave a mark. Your baby is on their own path. What they need most is the person they already have.",
+        },
+        {
+          heading: "Confidence growing",
+          body:
+            "After nine months of knowing your baby, you are almost certainly reading them better than any book. Trust that as data.",
+        },
+        {
+          heading: "Small pockets of you",
+          body:
+            "A shower without a listener, a slow cup of tea, a short walk on your own. These small pockets keep you able to keep giving.",
+        },
+      ],
+    },
+    feelsHardIntro:
+      "Nine months in, life is often full and love is heavy in the best and hardest ways.",
+    feelsHard: [
+      "Your baby wants only you and you are quietly running low.",
+      "Every parent around you seems to be doing something different.",
+      "Sleep has wobbled again just as you thought it was steadier.",
+      "You are proud of your baby and tired of yourself at the same time.",
+    ],
+    whatHelpsIntro:
+      "Small, kind moves for yourself and your baby are often enough here.",
+    whatHelps: [
+      "A regular short window that is only yours, however small.",
+      "Slow goodbyes and calm reunions when you have to leave the room.",
+      "Sharing what is hard with one person who really listens.",
+      "Muting or unfollowing accounts that leave you comparing.",
+    ],
+    support: [
+      {
+        when: "Any time",
+        body: "Low mood, anxiety or intrusive thoughts that are not lifting. Please talk to your GP or health visitor.",
+      },
+      {
+        when: "Same day",
+        body: "A baby who is much less interested in feeds, is unusually sleepy, or has a very high or low temperature. Contact your GP, health visitor or NHS 111.",
+      },
+      {
+        when: "Urgent",
+        body: "Choking that does not clear, a very unwell looking baby, or a very difficult to rouse baby. Call 999 or go straight to A&E.",
+      },
+    ],
+    questions: [
+      {
+        question: "My baby is not crawling yet, should I worry?",
+        answer:
+          "Many babies find their own way of moving before or instead of crawling, and there is a wide typical range. Do speak to your health visitor if your baby is not moving in any way, or if you have wider concerns about their development.",
+        readMore: {
+          label: "Read: when milestones feel uneven",
+          href: "/first-year/development/when-milestones-feel-uneven",
+        },
+        askTopic: "movement-at-nine-months",
+      },
+      {
+        question: "Why is my baby suddenly clingy again?",
+        answer:
+          "Separation feelings often peak around this age and can come and go for months. It is a sign your baby feels most safe with you. Warm goodbyes, familiar comfort objects and calm reunions usually help.",
+        readMore: {
+          label: "Read: baby development in the first year",
+          href: "/first-year/development/baby-development-in-the-first-year",
+        },
+        askTopic: "separation-anxiety",
+      },
+      {
+        question: "How much milk should my baby be having now?",
+        answer:
+          "Most babies still need a good amount of milk at nine months alongside solid meals. Exact amounts vary. If you are worried about intake or weight gain, your health visitor can help you look at the whole picture.",
+        readMore: {
+          label: "Read: bottle and breastfeeding questions",
+          href: "/first-year/feeding/bottle-and-breastfeeding-questions",
+        },
+        askTopic: "milk-at-nine-months",
+      },
+      {
+        question: "How can I stop comparing my baby to others?",
+        answer:
+          "Comparison is normal and it is hard to switch off. Muting accounts that leave you feeling low, and remembering that development is uneven for almost every child, both help. Your baby is not behind for being themselves.",
+        readMore: {
+          label: "Read: when milestones feel uneven",
+          href: "/first-year/development/when-milestones-feel-uneven",
+        },
+        askTopic: "comparison-pressure",
+      },
+      {
+        question: "Is it ok that I am so tired all the time?",
+        answer:
+          "It is very common to feel a long, slow tiredness this deep into the year. Small pockets of rest, honest conversations with people close to you, and asking your GP or health visitor if it feels heavier than tiredness all matter.",
+        readMore: {
+          label: "Read: when parenthood feels heavy",
+          href: "/first-year/emotional-wellbeing/when-parenthood-feels-heavy",
+        },
+        askTopic: "parent-fatigue",
+      },
+    ],
+    related: [
+      { label: "When milestones feel uneven", kicker: "Development", href: "/first-year/development/when-milestones-feel-uneven" },
+      { label: "Baby development in the first year", kicker: "Development", href: "/first-year/development/baby-development-in-the-first-year" },
+      { label: "Helping your baby settle", kicker: "Sleep", href: "/first-year/sleep/helping-your-baby-settle" },
+    ],
+    sources: [
+      { label: "Your baby at 7 to 9 months", publisher: "NHS Start for Life", url: "https://www.nhs.uk/start-for-life/baby/baby-development/7-9-months/" },
+      { label: "Your baby's first solid foods", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/weaning-and-feeding/babys-first-solid-foods/" },
+      { label: "Baby sleep tips", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/helping-your-baby-to-sleep/" },
+      { label: "Safer sleep advice", publisher: "The Lullaby Trust", url: "https://www.lullabytrust.org.uk/safer-sleep-advice/" },
+      { label: "Feelings and relationships after having a baby", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/support-and-services/feelings-relationships-mental-health/" },
+    ],
+    seo: {
+      title: "9 month old baby guide | The Start of You",
+      description:
+        "A calm guide to your baby at 9 months. Early movement, separation anxiety, feeding, sleep and how you may be feeling as tiredness and pride sit side by side.",
+    },
+  },
+
+  "10-months": {
+    slug: "10-months",
+    label: "10 months",
+    title: "10 months old: pulling up and reaching further",
+    standfirst:
+      "By ten months, many babies are pulling up, cruising along low furniture and letting you know exactly what they want. This guide covers early cruising, finger foods, strong preferences, routines under pressure and the mental load of parenting as work or childcare often shift.",
+    phase: PHASE_9_12,
+    shortVersion: {
+      baby: "Pulling up, cruising, exploring with intent. Clear preferences and reactions. Copying sounds and actions.",
+      feeding: "Enjoying more finger foods, self feeding often preferred. Milk continues to matter.",
+      sleep: "Often still uneven. New skills, teeth and change can affect nights.",
+      you: "Mental load may feel heavier again. Sharing it and asking for what you need matters.",
+      whenToAsk: "Persistent feeding refusal, no response to sounds or name, or a baby who is unusually floppy or unwell.",
+    },
+    babyEditorial: {
+      intro:
+        "Ten months often feels busier than nine. Your baby has an opinion about most things, moves with more purpose and probably has favourite people, songs and games.",
+      subsections: [
+        {
+          heading: "Pulling up",
+          body:
+            "Low sofas, coffee tables and cot bars all become useful. Once your baby is pulling up, home safety is worth another look. Lower the cot mattress and check any furniture that could tip.",
+        },
+        {
+          heading: "Early cruising",
+          body:
+            "Some babies start to step sideways while holding on to furniture. This is a normal step before independent walking. There is no rush. Cruising can go on for weeks or months.",
+        },
+        {
+          heading: "Finger foods",
+          body:
+            "Many babies love feeding themselves at this age. Soft, easy to hold pieces work well. Cut food to reduce choking risk and stay with your baby during meals.",
+        },
+        {
+          heading: "Strong preferences",
+          body:
+            "Favourite toys, songs and people are often clear. Objections are clear too. This is not defiance. It is your baby noticing what they like and telling you.",
+        },
+        {
+          heading: "Routines under pressure",
+          body:
+            "Ten months can be when work, childcare or family visits reshape the day. Some flexibility helps, but a broadly steady rhythm of feeds, meals, naps and bedtime is a real anchor.",
+        },
+        {
+          heading: "Copying you",
+          body:
+            "Waves, claps, splashes and little sounds may all be copied back. This is early communication as much as it is play.",
+        },
+        {
+          heading: "Sleep is still uneven",
+          body:
+            "New skills and change often show up in sleep first. Reassurance, safe sleep basics and time usually help more than sudden overhauls.",
+        },
+      ],
+    },
+    feedingSection: {
+      intro:
+        "Meals at ten months are often bigger, more independent and less predictable in appetite. Milk still matters, and food is a real part of the day.",
+      points: [
+        "Three meals with a small snack works well for many babies now.",
+        "Offer a mix of finger foods and family food adapted for babies. Watch salt, sugar and choking hazards.",
+        "Let your baby have some control over what they pick up. It builds skill and interest.",
+        "Milk feeds usually stay important. Some babies drop one feed around now, most do not yet.",
+        "Refusing a food today does not mean forever. Keep offering without pressure.",
+      ],
+      whenToAsk:
+        "Ask your health visitor if your baby refuses all solids for weeks, is not gaining weight, or if you are worried about swallowing or reactions to food.",
+    },
+    sleepSection: {
+      intro:
+        "Sleep at ten months can still be broken. New skills, big feelings and any change in routine often show up here first.",
+      points: [
+        "Two naps is common. Some babies start to hold on longer between them.",
+        "Bedtimes benefit from a short, calm wind down, even ten minutes.",
+        "New standing skills can lead to wakes. Practising sitting back down in the day can help.",
+        "Try to hold changes lightly. Sleep almost always shifts again in the next month or two.",
+      ],
+      safeSleep:
+        "Keep the cot clear and the mattress low if your baby is pulling to stand. Continue back sleeping. Remove anything they could climb on or pull into the cot.",
+      whenToAsk:
+        "Ask for a review if your baby is much less interested in feeds, is unusually sleepy, or has fast or grunting breathing.",
+    },
+    youEditorial: {
+      intro:
+        "Ten months in, life often shifts around you. Work, childcare and identity questions may all sit on top of the baby days.",
+      subsections: [
+        {
+          heading: "The mental load",
+          body:
+            "The invisible planning, remembering and worrying can feel bigger now that everyone else is asking you to keep more plates spinning. Naming it out loud, even in a short conversation, is often the first step.",
+        },
+        {
+          heading: "Returning to work or childcare",
+          body:
+            "Whether you are heading back to work, using childcare, or shifting how the days are shared at home, this can bring grief, relief and everything in between. All of it is allowed.",
+        },
+        {
+          heading: "Home safety",
+          body:
+            "As your baby moves and climbs more, another slow lap of the house is worth it. Corners, hot drinks, stairs, cords and small choking hazards are usually the main areas to look at.",
+        },
+        {
+          heading: "Small things for you",
+          body:
+            "Water, protein, a short walk, five minutes off your phone. These are not luxuries at ten months. They are how you keep going.",
+        },
+      ],
+    },
+    feelsHardIntro:
+      "Ten months in, the load is often less obvious to others and just as real.",
+    feelsHard: [
+      "You are the invisible engine of everyone else's day.",
+      "Returning to work or childcare stirs up feelings you did not expect.",
+      "Your baby is on the move and the house feels less safe than it was.",
+      "You have not felt fully rested in a long time.",
+    ],
+    whatHelpsIntro:
+      "The right kind of help is specific. Naming it makes it easier to ask for.",
+    whatHelps: [
+      "One clear ask to your partner, family or friend this week.",
+      "One thing on your list you consciously drop or delay.",
+      "Ten minutes of low input time, off screens, most days.",
+      "Talking to your GP or health visitor if the tiredness feels heavier than tiredness.",
+    ],
+    support: [
+      {
+        when: "Any time",
+        body: "Low mood, anxiety, or feeling detached from your baby that is not lifting. Please talk to your GP or health visitor.",
+      },
+      {
+        when: "Same day",
+        body: "A baby who is much less interested in feeds, is unusually sleepy, or has a very high or low temperature. Contact your GP, health visitor or NHS 111.",
+      },
+      {
+        when: "Urgent",
+        body: "Choking that does not clear, a very unwell looking baby, a fall from height, or a very difficult to rouse baby. Call 999 or go straight to A&E.",
+      },
+    ],
+    questions: [
+      {
+        question: "My baby is pulling up, do I need to change the cot?",
+        answer:
+          "Once your baby can pull to stand in the cot, it is time to lower the mattress and remove anything they could climb on. Keep the cot clear and the room set up for their new reach.",
+        readMore: {
+          label: "Read: safe sleep and home safety",
+          href: "/first-year/care-and-safety/safe-sleep-and-home-safety",
+        },
+        askTopic: "cot-safety",
+      },
+      {
+        question: "Is it ok that my baby is very fussy with food?",
+        answer:
+          "Strong preferences at this age are common. Keep offering a range of foods without pressure, eat with your baby when you can, and remember appetite varies a lot day to day.",
+        readMore: {
+          label: "Read: bottle and breastfeeding questions",
+          href: "/first-year/feeding/bottle-and-breastfeeding-questions",
+        },
+        askTopic: "fussy-eating",
+      },
+      {
+        question: "How can I make going back to work easier?",
+        answer:
+          "Gentle handovers, familiar comfort objects, and steady goodbyes and reunions all help. So does giving yourself permission to feel more than one thing about it. Your baby can be safe and loved in more than one pair of hands.",
+        readMore: {
+          label: "Read: when parenthood feels heavy",
+          href: "/first-year/emotional-wellbeing/when-parenthood-feels-heavy",
+        },
+        askTopic: "returning-to-work",
+      },
+      {
+        question: "Why does sleep still feel so hard at ten months?",
+        answer:
+          "Sleep at this age is often affected by new skills, change and separation feelings. Keeping basics steady and offering reassurance usually helps more than sudden overhauls.",
+        readMore: {
+          label: "Read: helping your baby settle",
+          href: "/first-year/sleep/helping-your-baby-settle",
+        },
+        askTopic: "ten-month-sleep",
+      },
+      {
+        question: "How do I ask for more help without feeling guilty?",
+        answer:
+          "Being specific helps. A named task, a set time, a clear ask. You are not a burden for having needs at ten months in. You are a person doing important work.",
+        askTopic: "asking-for-help",
+      },
+    ],
+    related: [
+      { label: "Safe sleep and home safety", kicker: "Care and safety", href: "/first-year/care-and-safety/safe-sleep-and-home-safety" },
+      { label: "When parenthood feels heavy", kicker: "Emotional wellbeing", href: "/first-year/emotional-wellbeing/when-parenthood-feels-heavy" },
+      { label: "Baby development in the first year", kicker: "Development", href: "/first-year/development/baby-development-in-the-first-year" },
+    ],
+    sources: [
+      { label: "Your baby at 10 to 12 months", publisher: "NHS Start for Life", url: "https://www.nhs.uk/start-for-life/baby/baby-development/10-12-months/" },
+      { label: "Your baby's first solid foods", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/weaning-and-feeding/babys-first-solid-foods/" },
+      { label: "Baby safety in the home", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/babys-development/safety/baby-accidents-safety/" },
+      { label: "Safer sleep advice", publisher: "The Lullaby Trust", url: "https://www.lullabytrust.org.uk/safer-sleep-advice/" },
+    ],
+    seo: {
+      title: "10 month old baby guide | The Start of You",
+      description:
+        "A gentle guide to your baby at 10 months. Pulling up, cruising, finger foods, sleep changes and the mental load as life reshapes around a busier baby.",
+    },
+  },
+
+  "11-months": {
+    slug: "11-months",
+    label: "11 months",
+    title: "11 months old: nearly a year of you both",
+    standfirst:
+      "At eleven months, many babies are cruising, communicating in their own way and pushing gently at what independence feels like. This guide covers walking readiness, sleep and nap transitions, first birthday feelings and how to hold on to yourself as the year begins to close.",
+    phase: PHASE_9_12,
+    shortVersion: {
+      baby: "Confident on the move in their own way. Copying, pointing and using early words or sounds for many.",
+      feeding: "Fully into family food for most. Milk still matters. Preferences are strong.",
+      sleep: "Often uneven. Nap transitions may begin. First-year sleep is rarely linear.",
+      you: "Big feelings about the first year can arrive alongside the everyday load.",
+      whenToAsk: "No response to sounds or name, no purposeful movement of any kind, or a baby who is unusually floppy or unwell.",
+    },
+    babyEditorial: {
+      intro:
+        "Eleven months is a bridge month. You can see the year behind you and the toddler days coming closer. Your baby is more themselves than ever, and still very much needing you.",
+      subsections: [
+        {
+          heading: "More independence",
+          body:
+            "Some babies want to feed themselves, choose which book, decide when to be held. Small choices you can offer during the day, like which cup or which shoe, help their sense of agency.",
+        },
+        {
+          heading: "Communication",
+          body:
+            "Babbling, pointing, waving and using early words or word-like sounds are all common. Responding as if they are talking to you, even when you cannot make out the meaning, is the right thing.",
+        },
+        {
+          heading: "Frustration",
+          body:
+            "Wants outpacing skills often shows up as frustration. This is not bad behaviour. Naming what you think they want, staying close, and offering another way in usually helps more than a fix.",
+        },
+        {
+          heading: "Walking readiness",
+          body:
+            "Some babies take first steps around now. Many do not walk until well into the second year. Both are fine. Barefoot time on safe floors supports foot strength.",
+        },
+        {
+          heading: "Nap and sleep changes",
+          body:
+            "Some babies start to drop to one longer nap around now. Most do not yet. Night wakes are often part of the picture too. Watch your baby, not a chart.",
+        },
+        {
+          heading: "First birthday planning",
+          body:
+            "Whatever you do or do not do for the first birthday is fine. Your baby will not remember it. Small, calm, familiar often works better than big, loud and lots.",
+        },
+      ],
+    },
+    feedingSection: {
+      intro:
+        "Meals at eleven months are often close to family food. Milk continues to matter, and appetite can vary a lot day to day.",
+      points: [
+        "Three meals a day with a snack works well for most babies.",
+        "Adapting family meals with less salt and no added sugar is usually easier than separate cooking.",
+        "Continue to avoid choking risks like whole nuts, whole grapes, cherry tomatoes and hard raw pieces.",
+        "Milk feeds remain important. Cow's milk as a main drink is not usually recommended until twelve months.",
+        "Refusal one week, love the next is very common. Keep offering.",
+      ],
+      whenToAsk:
+        "Ask your health visitor or GP if your baby refuses all solids for weeks, is not gaining weight, or you are worried about swallowing or reactions to food.",
+    },
+    sleepSection: {
+      intro:
+        "Sleep at eleven months is rarely linear. New skills, teeth and nap changes can all show up here.",
+      points: [
+        "Some babies begin to drop to one nap. Most stay on two for now.",
+        "Signs of a nap change include one nap getting shorter or bedtime shifting.",
+        "Bedtime routines can stay short and simple. Predictability helps more than length.",
+        "If you make a change, give it a couple of weeks before deciding whether it helped.",
+      ],
+      safeSleep:
+        "Back sleeping, a clear cot with a firm mattress, and no loose bedding remain the basics. Once your baby is pulling to stand or cruising in the cot, keep the mattress low and the cot clear.",
+      whenToAsk:
+        "Ask for a review if your baby is much less interested in feeds, is unusually sleepy, or has fast or grunting breathing.",
+    },
+    youEditorial: {
+      intro:
+        "The first year has almost passed. It has been huge and quiet and hard and beautiful in turn. Your feelings about it deserve a little room.",
+      subsections: [
+        {
+          heading: "Big feelings about the year",
+          body:
+            "Grief for the newborn you lost, pride at what you have grown into, and mixed feelings about what you have given up can all arrive at once. All of them are welcome here.",
+        },
+        {
+          heading: "Not comparing timelines",
+          body:
+            "Other babies walking, talking or sleeping through the night is not a measure of you. Your baby is on their own timeline. So are you.",
+        },
+        {
+          heading: "Parent emotion",
+          body:
+            "It is fine if you feel more today than you can hold. Small conversations, small walks, small honest sentences to someone safe all help.",
+        },
+        {
+          heading: "Looking back a little",
+          body:
+            "It is fine to look back and be surprised at what you have carried. Recovery, feeding, sleep, work, relationships. It has all been happening at once.",
+        },
+      ],
+    },
+    feelsHardIntro:
+      "Nearly a year in, tiredness and tenderness can both be at their peak.",
+    feelsHard: [
+      "Everyone is asking about the first birthday and you are not sure how to feel.",
+      "Your baby is nearly not a baby and you are not sure who you are now.",
+      "Sleep, feeding or moods have wobbled again.",
+      "You have been quietly doing so much, for so long.",
+    ],
+    whatHelpsIntro:
+      "Small, honest choices help more than trying to catch up with everyone else.",
+    whatHelps: [
+      "Talking to one person about how you actually feel about the year.",
+      "Keeping the first birthday small and low pressure if that is what fits.",
+      "Ten minutes on your own most days, in whatever shape you can find.",
+      "Booking any of your own overdue checks or appointments.",
+    ],
+    support: [
+      {
+        when: "Any time",
+        body: "Low mood, anxiety, or intrusive thoughts that are not lifting. Please talk to your GP or health visitor.",
+      },
+      {
+        when: "Same day",
+        body: "A baby who is much less interested in feeds, is unusually sleepy, or has a very high or low temperature. Contact your GP, health visitor or NHS 111.",
+      },
+      {
+        when: "Urgent",
+        body: "Choking that does not clear, a very unwell looking baby, a fall from height, or a very difficult to rouse baby. Call 999 or go straight to A&E.",
+      },
+    ],
+    questions: [
+      {
+        question: "My baby is not walking yet, should I worry?",
+        answer:
+          "Many babies do not walk until well into the second year, and that is within the typical range. Do speak to your health visitor if your baby is not weight bearing at all or you have wider concerns about their movement.",
+        readMore: {
+          label: "Read: when milestones feel uneven",
+          href: "/first-year/development/when-milestones-feel-uneven",
+        },
+        askTopic: "walking-readiness",
+      },
+      {
+        question: "Should my baby be on one nap or two?",
+        answer:
+          "Most babies at eleven months are still on two naps, but some start to shift towards one longer nap. Watch your baby, not a chart. If one nap is getting shorter and bedtime is drifting, a change may be brewing.",
+        readMore: {
+          label: "Read: helping your baby settle",
+          href: "/first-year/sleep/helping-your-baby-settle",
+        },
+        askTopic: "nap-transitions",
+      },
+      {
+        question: "How should I handle the first birthday?",
+        answer:
+          "There is no right way. Small, quiet and familiar often works well for babies. Whatever fits your family is fine. Your baby will not remember the party, but they will feel the mood of the day.",
+        askTopic: "first-birthday",
+      },
+      {
+        question: "Why are my feelings so mixed right now?",
+        answer:
+          "The end of the first year can bring grief, pride, tiredness and love in the same afternoon. Mixed feelings are not a sign that something is wrong. They are honest.",
+        readMore: {
+          label: "Read: feeling like yourself again",
+          href: "/first-year/emotional-wellbeing/feeling-like-yourself-again",
+        },
+        askTopic: "end-of-first-year",
+      },
+      {
+        question: "When do I need to think about cow's milk?",
+        answer:
+          "Cow's milk as a main drink is not usually recommended until twelve months, though it can be used in cooking earlier. Ask your health visitor if you are unsure about your baby's specific situation.",
+        askTopic: "cow-milk",
+      },
+    ],
+    related: [
+      { label: "Feeling like yourself again", kicker: "Emotional wellbeing", href: "/first-year/emotional-wellbeing/feeling-like-yourself-again" },
+      { label: "When milestones feel uneven", kicker: "Development", href: "/first-year/development/when-milestones-feel-uneven" },
+      { label: "Helping your baby settle", kicker: "Sleep", href: "/first-year/sleep/helping-your-baby-settle" },
+    ],
+    sources: [
+      { label: "Your baby at 10 to 12 months", publisher: "NHS Start for Life", url: "https://www.nhs.uk/start-for-life/baby/baby-development/10-12-months/" },
+      { label: "Drinks and cups for babies", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/weaning-and-feeding/drinks-and-cups-for-babies-and-young-children/" },
+      { label: "Baby sleep tips", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/helping-your-baby-to-sleep/" },
+      { label: "Safer sleep advice", publisher: "The Lullaby Trust", url: "https://www.lullabytrust.org.uk/safer-sleep-advice/" },
+    ],
+    seo: {
+      title: "11 month old baby guide | The Start of You",
+      description:
+        "A calm guide to your baby at 11 months. Walking readiness, nap transitions, first birthday feelings and how you may be feeling as the first year closes.",
+    },
+  },
+
+  "12-months": {
+    slug: "12-months",
+    label: "12 months",
+    title: "12 months old: the first birthday and beyond",
+    standfirst:
+      "A whole year. Your baby has grown, and so have you. This guide covers walking variation, feeding transitions, communication, safety and independence, and the identity shift of parenting a one year old while looking back on the first year.",
+    phase: PHASE_9_12,
+    shortVersion: {
+      baby: "A year old and unmistakably themselves. Moving, communicating and exploring with real intent.",
+      feeding: "Family food with adjustments. Cow's milk as a main drink can begin now for many babies. Milk feeds may change.",
+      sleep: "Often still uneven. Nap changes and skill leaps continue.",
+      you: "Identity shift is real. Looking back matters. So does looking after yourself.",
+      whenToAsk: "No response to sounds or name, no purposeful movement of any kind, or a baby who is unusually floppy or unwell.",
+    },
+    babyEditorial: {
+      intro:
+        "Your baby is one. They may be walking, or nowhere near it. Chatting or quietly watching. Every path is normal. What matters most is who they are becoming, not what week they hit any single skill.",
+      subsections: [
+        {
+          heading: "Walking variation",
+          body:
+            "Some one year olds take first steps around their birthday. Many do not walk until well into the second year. Both are within typical ranges. Barefoot time on safe floors supports development.",
+        },
+        {
+          heading: "Feeding transition",
+          body:
+            "Family food with adjustments is usually the picture now. Cow's milk as a main drink can start around twelve months for many babies. Milk feeds may change or reduce, and that can bring feelings for both of you.",
+        },
+        {
+          heading: "Sleep and routines",
+          body:
+            "Sleep is often still uneven at a year. Some babies are dropping to one nap. Steady routines, calm wind downs and reasonable expectations usually help more than sudden changes.",
+        },
+        {
+          heading: "Communication",
+          body:
+            "Some one year olds have a few clear words, others babble expressively without recognisable words yet. Both are normal. Talking with your baby through the day supports language whatever the pace.",
+        },
+        {
+          heading: "Safety and independence",
+          body:
+            "As your baby moves and reaches more, another sweep of the house is worth it. Stairs, hot drinks, cords, small choking hazards, sockets and heavy furniture are the usual areas to check again.",
+        },
+        {
+          heading: "Big feelings",
+          body:
+            "Frustration, delight, joy and outrage can all appear in one hour. This is not you doing something wrong. It is your baby learning to have a mind of their own.",
+        },
+        {
+          heading: "First health checks",
+          body:
+            "Many families have a health visitor review around now. It is a good time to raise anything that has felt off, from feeding to hearing to your own mood.",
+        },
+      ],
+    },
+    feedingSection: {
+      intro:
+        "At twelve months, most babies eat a version of family food, often three meals with snacks. Milk still plays a role, but the balance may be shifting.",
+      points: [
+        "Three meals with one or two small snacks a day suits many one year olds.",
+        "Cow's milk as a main drink can usually start around this age. Continue breastfeeding for as long as it works for you both.",
+        "Continue to watch salt, sugar and choking risks. Cut foods to reduce choking risk and stay with your baby during meals.",
+        "Some babies want to feed themselves fully now. Slow, messy and imperfect is fine.",
+        "Fluctuating appetite is very common. Trust the pattern over the week.",
+      ],
+      whenToAsk:
+        "Ask your health visitor or GP if your baby refuses all solids for weeks, is not gaining weight, or you are worried about swallowing or reactions to food.",
+    },
+    sleepSection: {
+      intro:
+        "Sleep at twelve months is often steadier than a few months ago and can still wobble around skill leaps and change.",
+      points: [
+        "Some babies are on one long nap now. Most are still on two.",
+        "A short, calm bedtime routine at a similar time each night helps most families.",
+        "Night waking is still common. Reassurance is not spoiling.",
+        "Any change works better slowly and consistently, not overnight.",
+      ],
+      safeSleep:
+        "Back sleeping and a clear cot with a firm mattress remain the basics. If your baby is pulling up or climbing in the cot, keep the mattress low and the cot clear. Talk to your health visitor if you are considering moving to a different sleep space.",
+      whenToAsk:
+        "Ask for a review if your baby is much less interested in feeds, is unusually sleepy, or has fast or grunting breathing.",
+    },
+    youEditorial: {
+      intro:
+        "Being the parent of a one year old is a different chapter, even if the days still feel much like last week. It is worth pausing here.",
+      subsections: [
+        {
+          heading: "Identity shift",
+          body:
+            "You have been a parent for a whole year. You are not the same person you were. Some of the changes are visible, most are not. Both count.",
+        },
+        {
+          heading: "Looking back",
+          body:
+            "It is fine to look back at the first year with pride, grief, humour or all of them. Whatever you feel about the birth, feeding, sleep, work and your own body is allowed.",
+        },
+        {
+          heading: "Your own care",
+          body:
+            "Any overdue checks, appointments, referrals or conversations are worth booking now. This includes your body, your mood and any ongoing pain, bleeding or leaking.",
+        },
+        {
+          heading: "What next",
+          body:
+            "The toddler days do not start on the birthday. They ease in. Slow, kind pacing, for both of you, is still what fits.",
+        },
+      ],
+    },
+    feelsHardIntro:
+      "The first year does not stop being big just because the calendar has turned.",
+    feelsHard: [
+      "You are proud of your baby and quietly grieving the newborn days.",
+      "Milk feeding changes are stirring up more feelings than you expected.",
+      "Everyone wants to celebrate and you feel closer to tears than cake.",
+      "You still have not really been looked after this year.",
+    ],
+    whatHelpsIntro:
+      "The most useful thing is often the smallest one you can actually do.",
+    whatHelps: [
+      "A conversation with someone who really listens about how the year has been.",
+      "Booking any postnatal check, GP visit or referral you have put off.",
+      "Keeping the first birthday small if that is what fits, without apology.",
+      "Naming, quietly, what you are proud of in yourself this year.",
+    ],
+    support: [
+      {
+        when: "Any time",
+        body: "Low mood, anxiety, or intrusive thoughts that are not lifting. Please talk to your GP or health visitor. It is not too late to raise something you have been carrying since birth.",
+      },
+      {
+        when: "Same day",
+        body: "A baby who is much less interested in feeds, is unusually sleepy, or has a very high or low temperature. Contact your GP, health visitor or NHS 111.",
+      },
+      {
+        when: "Urgent",
+        body: "Choking that does not clear, a very unwell looking baby, a fall from height, or a very difficult to rouse baby. Call 999 or go straight to A&E.",
+      },
+    ],
+    questions: [
+      {
+        question: "My baby is a year and not walking, is this ok?",
+        answer:
+          "Many babies do not walk until well into the second year, and that is within the typical range. Do speak to your health visitor if your baby is not weight bearing at all or you have wider concerns about their movement.",
+        readMore: {
+          label: "Read: when milestones feel uneven",
+          href: "/first-year/development/when-milestones-feel-uneven",
+        },
+        askTopic: "walking-at-twelve-months",
+      },
+      {
+        question: "Can I stop breastfeeding or formula now?",
+        answer:
+          "You can begin to move to cow's milk as a main drink around this age if that fits your family. You can also carry on breastfeeding for as long as you both want to. There is no single right pattern.",
+        readMore: {
+          label: "Read: bottle and breastfeeding questions",
+          href: "/first-year/feeding/bottle-and-breastfeeding-questions",
+        },
+        askTopic: "milk-transition",
+      },
+      {
+        question: "Do I need to worry about how many words my baby has?",
+        answer:
+          "Language varies a lot at twelve months. Some babies have a few clear words, others none yet. Do speak to your health visitor if your baby is not babbling, responding to their name or turning to sounds.",
+        readMore: {
+          label: "Read: baby development in the first year",
+          href: "/first-year/development/baby-development-in-the-first-year",
+        },
+        askTopic: "words-at-twelve-months",
+      },
+      {
+        question: "The birthday feels heavier than I expected, is that normal?",
+        answer:
+          "Yes. The first birthday can bring up big feelings about the birth, the year and the person you have become. Mixed feelings are honest, not a warning sign.",
+        readMore: {
+          label: "Read: feeling like yourself again",
+          href: "/first-year/emotional-wellbeing/feeling-like-yourself-again",
+        },
+        askTopic: "first-birthday-feelings",
+      },
+      {
+        question: "Is it too late to raise something about my own recovery?",
+        answer:
+          "No. If something has been off since birth, from bleeding to leaking to mood, it is worth raising now. Your health matters as much as your baby's.",
+        readMore: {
+          label: "Read: body changes after birth",
+          href: "/first-year/body-and-hormones/body-changes-after-birth",
+        },
+        askTopic: "own-recovery",
+      },
+    ],
+    related: [
+      { label: "Baby development in the first year", kicker: "Development", href: "/first-year/development/baby-development-in-the-first-year" },
+      { label: "Body changes after birth", kicker: "Body and hormones", href: "/first-year/body-and-hormones/body-changes-after-birth" },
+      { label: "Feeling like yourself again", kicker: "Emotional wellbeing", href: "/first-year/emotional-wellbeing/feeling-like-yourself-again" },
+    ],
+    sources: [
+      { label: "Your baby at 10 to 12 months", publisher: "NHS Start for Life", url: "https://www.nhs.uk/start-for-life/baby/baby-development/10-12-months/" },
+      { label: "Drinks and cups for babies", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/weaning-and-feeding/drinks-and-cups-for-babies-and-young-children/" },
+      { label: "Your baby's first solid foods", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/weaning-and-feeding/babys-first-solid-foods/" },
+      { label: "Safer sleep advice", publisher: "The Lullaby Trust", url: "https://www.lullabytrust.org.uk/safer-sleep-advice/" },
+      { label: "Feelings and relationships after having a baby", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/support-and-services/feelings-relationships-mental-health/" },
+    ],
+    seo: {
+      title: "12 month old baby guide | The Start of You",
+      description:
+        "A gentle guide to your baby at 12 months. Walking variation, feeding transitions, first birthday feelings and the identity shift of parenting a one year old.",
+    },
+  },
 };
 
 export function getMonthGuide(slug: string): MonthGuide | undefined {
@@ -1920,6 +2746,18 @@ import sevenMonthParent from "@/assets/first-year/months/first-year-7-month-pare
 import eightMonthHero from "@/assets/first-year/months/first-year-8-month-hero.jpg.asset.json";
 import eightMonthBaby from "@/assets/first-year/months/first-year-8-month-baby.jpg.asset.json";
 import eightMonthParent from "@/assets/first-year/months/first-year-8-month-parent.jpg.asset.json";
+import nineMonthHero from "@/assets/first-year/months/first-year-9-month-hero.jpg.asset.json";
+import nineMonthBaby from "@/assets/first-year/months/first-year-9-month-baby.jpg.asset.json";
+import nineMonthParent from "@/assets/first-year/months/first-year-9-month-parent.jpg.asset.json";
+import tenMonthHero from "@/assets/first-year/months/first-year-10-month-hero.jpg.asset.json";
+import tenMonthBaby from "@/assets/first-year/months/first-year-10-month-baby.jpg.asset.json";
+import tenMonthParent from "@/assets/first-year/months/first-year-10-month-parent.jpg.asset.json";
+import elevenMonthHero from "@/assets/first-year/months/first-year-11-month-hero.jpg.asset.json";
+import elevenMonthBaby from "@/assets/first-year/months/first-year-11-month-baby.jpg.asset.json";
+import elevenMonthParent from "@/assets/first-year/months/first-year-11-month-parent.jpg.asset.json";
+import twelveMonthHero from "@/assets/first-year/months/first-year-12-month-hero.jpg.asset.json";
+import twelveMonthBaby from "@/assets/first-year/months/first-year-12-month-baby.jpg.asset.json";
+import twelveMonthParent from "@/assets/first-year/months/first-year-12-month-parent.jpg.asset.json";
 
 export interface MonthImagery {
   hero: { src: string; alt: string };
@@ -1972,6 +2810,26 @@ export const firstYearMonthImages: Record<MonthSlug, MonthImagery> = {
     hero: { src: eightMonthHero.url, alt: "An eight month old baby crawling on a cream rug in a bright living room while a parent watches nearby" },
     baby: { src: eightMonthBaby.url, alt: "An eight month old baby picking up a small piece of soft banana with a pincer grasp on a high chair tray", caption: "Small fingers, big skills, growing independence." },
     parent: { src: eightMonthParent.url, alt: "A parent's cardigan draped over the back of a chair with a small stack of baby books on a side table", caption: "Wanting a little space is not a failure of love." },
+  },
+  "9-months": {
+    hero: { src: nineMonthHero.url, alt: "A nine month old baby crawling on a cream rug in a bright, calm home" },
+    baby: { src: nineMonthBaby.url, alt: "A nine month old baby's small hand pushing up on a soft play mat", caption: "Moving in their own way, holding on to you." },
+    parent: { src: nineMonthParent.url, alt: "A parent's soft cardigan on a chair with a warm mug and picture books nearby", caption: "Long tiredness is real. So is quiet pride." },
+  },
+  "10-months": {
+    hero: { src: tenMonthHero.url, alt: "A ten month old baby pulling up to stand at a low sofa in a bright home" },
+    baby: { src: tenMonthBaby.url, alt: "A ten month old baby cruising along a low wooden bench holding on with both hands", caption: "Standing, reaching, deciding." },
+    parent: { src: tenMonthParent.url, alt: "A calm kitchen counter with a water bottle, notebook and folded muslin", caption: "Small, specific asks make room to keep going." },
+  },
+  "11-months": {
+    hero: { src: elevenMonthHero.url, alt: "An eleven month old baby standing supported at a low wooden table in a sunlit room" },
+    baby: { src: elevenMonthBaby.url, alt: "An eleven month old baby's hands holding a small wooden cup on a cream rug", caption: "Nearly a year of learning together." },
+    parent: { src: elevenMonthParent.url, alt: "An open journal, warm mug and a small dried flower sprig on a linen throw", caption: "Big feelings about the year are welcome here." },
+  },
+  "12-months": {
+    hero: { src: twelveMonthHero.url, alt: "A twelve month old baby taking a first tentative step while a parent's hand steadies gently" },
+    baby: { src: twelveMonthBaby.url, alt: "A twelve month old baby's hands exploring a soft picture book on a cream rug", caption: "A whole year of you both." },
+    parent: { src: twelveMonthParent.url, alt: "A folded linen shirt, warm cups of tea and a small photo album on a soft chair", caption: "Look back a little. It has been huge." },
   },
 };
 

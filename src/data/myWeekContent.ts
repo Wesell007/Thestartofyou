@@ -20,7 +20,22 @@ export interface MyWeekEntry {
   reflection: { prompt: string; context: string };
   /** Slot 4 — a soft forward sentence. */
   nextPreview: string;
+  /** Optional richer body paragraph for the "Your body this week" section. */
+  bodyParagraph?: string;
+  /** Optional emotional note for the "Emotionally this week" section. */
+  emotionalNote?: string;
+  /** Safe, non-diagnostic topic seed for the Ask AI CTA. */
+  safeAskSeed?: string;
 }
+
+/** Stage-safe Ask AI seed for a given week. Non-diagnostic, gentle topics only. */
+export const getSafeAskSeed = (week: number): string => {
+  const w = Math.min(Math.max(week, 1), 42);
+  if (w <= 12) return "early pregnancy this week";
+  if (w <= 27) return "second trimester this week";
+  if (w <= 40) return "third trimester this week";
+  return "going past your due date";
+};
 
 const E = (entry: MyWeekEntry): MyWeekEntry => entry;
 

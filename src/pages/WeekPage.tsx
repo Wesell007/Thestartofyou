@@ -9,6 +9,10 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PregnancyWeekSeo from "@/components/seo/PregnancyWeekSeo";
 import { getWeekData, getAdjacentWeeks, type WeekData } from "@/data/weekData";
+import WeekReflectionAsk from "@/components/week/WeekReflectionAsk";
+import WeekCommonQuestions from "@/components/week/WeekCommonQuestions";
+import WeekSources from "@/components/week/WeekSources";
+import { buildWeekQuestions, getWeekSources } from "@/data/weekSupportContent";
 
 // ── Visual assets ─────────────────────────────────────────────────────
 import journalImg from "@/assets/journal-flatlay.jpg";

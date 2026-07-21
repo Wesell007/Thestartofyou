@@ -2746,6 +2746,18 @@ import sevenMonthParent from "@/assets/first-year/months/first-year-7-month-pare
 import eightMonthHero from "@/assets/first-year/months/first-year-8-month-hero.jpg.asset.json";
 import eightMonthBaby from "@/assets/first-year/months/first-year-8-month-baby.jpg.asset.json";
 import eightMonthParent from "@/assets/first-year/months/first-year-8-month-parent.jpg.asset.json";
+import nineMonthHero from "@/assets/first-year/months/first-year-9-month-hero.jpg.asset.json";
+import nineMonthBaby from "@/assets/first-year/months/first-year-9-month-baby.jpg.asset.json";
+import nineMonthParent from "@/assets/first-year/months/first-year-9-month-parent.jpg.asset.json";
+import tenMonthHero from "@/assets/first-year/months/first-year-10-month-hero.jpg.asset.json";
+import tenMonthBaby from "@/assets/first-year/months/first-year-10-month-baby.jpg.asset.json";
+import tenMonthParent from "@/assets/first-year/months/first-year-10-month-parent.jpg.asset.json";
+import elevenMonthHero from "@/assets/first-year/months/first-year-11-month-hero.jpg.asset.json";
+import elevenMonthBaby from "@/assets/first-year/months/first-year-11-month-baby.jpg.asset.json";
+import elevenMonthParent from "@/assets/first-year/months/first-year-11-month-parent.jpg.asset.json";
+import twelveMonthHero from "@/assets/first-year/months/first-year-12-month-hero.jpg.asset.json";
+import twelveMonthBaby from "@/assets/first-year/months/first-year-12-month-baby.jpg.asset.json";
+import twelveMonthParent from "@/assets/first-year/months/first-year-12-month-parent.jpg.asset.json";
 
 export interface MonthImagery {
   hero: { src: string; alt: string };

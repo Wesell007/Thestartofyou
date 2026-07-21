@@ -1,62 +1,110 @@
 
-# Phase 11.6 — Pregnancy Week Page Polish
+# Phase 11.7 — First Year Phase Page Depth Upgrade
 
-Focused polish across the 42 hardcoded week pages (`Week1Page.tsx` … `Week42Page.tsx`) plus `WeekPage.tsx`. Visual system stays. We add three things: References, a real reflection save flow reusing the existing `reflections` table, and a hub-style Common Questions block with live article links and Ask CTAs.
+Depth and trust polish across the four First Year phase pages. Visual system stays. We deepen content in the existing data file, upgrade Common Questions to the newer article-link + Ask CTA format, and add a References block. No new routes, no new articles, no new images.
 
 ## Confirmed by reads
 
-- Each `WeekNPage.tsx` inlines its own `reflectionPrompts`, `askChips`, `faqs`, and local `ReflectionAsk` / `FAQRow` / `FAQ` components. Chip arrays are week-specific voice and stay in each page.
-- Reflection save infrastructure already exists in `SlotReflection.tsx`, writing to the `reflections` table with shape `{ user_id, week, content }` and `onConflict: "user_id,week"`. We mirror it exactly. No new tables, no RLS change.
-- `authIntent.ts` exists but is scoped to protected-route return. Signed-out reflection CTA will simply route to `/auth` with no fake save state.
-- `tsconfig` has `noUnusedLocals: false` so leaving the now-unused `useState` import in each page is safe.
+- Routes: `/first-year/0-3-months`, `/first-year/3-6-months`, `/first-year/6-9-months`, `/first-year/9-12-months`, all rendering `FirstYearPhasePage` with a `PhaseConfig` from `src/data/firstYearPhaseData.ts`.
+- Page composition today: `PhaseHero` → `InPhaseAges` → `PairedSection` (baby + parent cards) → `CommonQuestions` (plain q+a) → `FeaturedGuidance` (routes to `/ask?q=...`) → `RelatedTopics` → `Endcap`. Hero and card system are the parts to preserve verbatim.
+- First Year articles live at `/first-year/:topic/:slug`. Verified live slugs available for linking (topic in parentheses):
+  - feeding: `newborn-feeding-rhythms`, `bottle-and-breastfeeding-questions`
+  - sleep: `newborn-sleep-expectations`, `helping-your-baby-settle`
+  - development: `baby-development-in-the-first-year`, `when-milestones-feel-uneven`
+  - care-and-safety: `baby-care-basics`, `safe-sleep-and-home-safety`
+  - postpartum-recovery: `healing-after-birth`, `what-recovery-can-feel-like`
+  - emotional-wellbeing: `feeling-like-yourself-again`, `when-parenthood-feels-heavy`
+  - body-and-hormones: `body-changes-after-birth`, `hormones-sweat-and-hair-loss`
+  - checkups-and-warning-signs: `postnatal-checks-and-appointments`, `when-to-ask-for-help-after-birth`
+- Existing `commonQuestions` entries have `q` + `a` only. The Ask CTA pattern used across the site is `/ask?stage=first-year&phase=<slug>&topic=<slugified-question>`.
+- `firstYearArticleData.ts` shows only these 16 live First Year slugs — everything else must be Ask-only.
+- No em/en dashes present in new copy; existing intros for `0–3` etc use en dashes only in the `ageRange` label, which is preserved unchanged (existing content, not new copy).
 
 ## Deliverables
 
-### New shared components (`src/components/week/`)
+### Data upgrade — `src/data/firstYearPhaseData.ts`
 
-1. **`WeekSources.tsx`** — Renders "References and guidance" styled like `ArticleSources.tsx`. Numbered list, publisher + label, external links with `rel="noopener noreferrer nofollow"`. Includes the calm disclaimer sentence: "This guide is general information. Always speak to your midwife, GP or maternity unit if you are worried about symptoms or your pregnancy."
-2. **`WeekReflectionAsk.tsx`** — Replaces the bespoke `ReflectionAsk` block. Same two-card layout (sage reflection card + lavender ask card), same prompt / ask chip styling. Adds real save behaviour:
-   - On mount: `supabase.auth.getSession()` + `getActivePregnancyJourney(userId)`.
-   - **Signed out** — button label "Sign in to save this reflection" → `/auth`. Textarea usable but not persisted; helper text says so.
-   - **Signed in, no active journey** — button label "Set up your pregnancy journey" → `/due-date-calculator` (same redirect target used by `MyWeek`).
-   - **Signed in with active pregnancy journey** — button "Save to my journey"; on click writes `{ user_id, week, content }` via `.upsert(..., { onConflict: "user_id,week" })`, exactly mirroring `SlotReflection`. On success shows "Saved to your pregnancy journey." plus "View in My Week" link → `/my-week`. On error shows a calm retry line, never a fake success.
-3. **`WeekCommonQuestions.tsx`** — Hub-style card list modelled on `PregnancyCommonQuestions.tsx` using `stage-pregnancy` tokens. Each row: question, expandable answer, primary "Read: <label>" CTA when `readMore` is present, secondary "Ask more" CTA to `/ask?stage=pregnancy&week=N&topic=<slug>`.
+Extend `PhaseConfig` with four optional fields, all typed and rendered only if present so nothing else has to change:
 
-### New data file (`src/data/weekSupportContent.ts`)
+```ts
+type PhaseArticleLink = { label: string; href: string };
+type PhaseQuestion = {
+  q: string;
+  a: string;
+  readMore?: PhaseArticleLink;   // live slug only, or omitted
+  askTopic?: string;              // slug for /ask?...&topic=
+};
+type PhaseFeelsHard = { label: string; body: string };
+type PhaseWhatHelps = { label: string; body: string };
+type PhaseSupport = { label: string; body: string; when?: string };
+type PhaseSource = { label: string; publisher: string; href: string };
 
-- `getWeekSources(week)` returns 4–5 UK sources per trimester from a verified allow-list only: NHS pregnancy week-by-week hub, NHS pregnancy and baby guide, Tommy's pregnancy information, NICE NG201 antenatal care, RCOG patient information hub, GOV.UK vaccination-during-pregnancy collection (T3 only). Hub URLs only — no fabricated deep links.
-- `buildWeekQuestions(week, rawFaqs)` maps each page's existing `{q, a}` FAQ array into `WeekQuestion[]`, attaches `askTopic = slugify(q)`, and merges curated `readMore` overrides for weeks with confirmed live article slugs (seed set: 1, 20, 38; extendable). Weeks with no overrides render Ask-only, no placeholder links.
+type PhaseConfig = {
+  // existing fields unchanged
+  editorial?: string;              // "What this phase is really about"
+  feelsHard?: PhaseFeelsHard[];    // "What often feels hard"
+  whatHelps?: PhaseWhatHelps[];    // "What can help"
+  support?: PhaseSupport[];        // "When to ask for support"
+  sources?: PhaseSource[];         // "References and guidance"
+};
+```
 
-### Mechanical edit pass (43 files)
+For each of the four phases:
 
-For each `Week{1..42}Page.tsx` and `WeekPage.tsx`:
+1. Add a warm 2–3 sentence `editorial` beat aligned with the phase's emotional truth (survival/healing → rhythm → curiosity/separation → independence/identity shift).
+2. Deepen `babyChanges` and `parentRecovery` copy where thin, keeping the existing `label` + `body` shape and card layout intact. Extend `parentRecovery` on later phases to cover identity, partner/family support and return-to-work where relevant, without changing card count wildly (max 5 bullets per card to preserve spacing).
+3. Upgrade every `commonQuestions[]` entry with an `askTopic` slug, and add `readMore` only where a verified live slug from the list above genuinely answers the question. Questions with no fitting article stay Ask-only — no placeholders.
+4. Add `feelsHard[]` (4–5 items) and `whatHelps[]` (4–5 items) per phase using calm, non-prescriptive wording.
+5. Add `support[]` (3–4 items) per phase signposting health visitor, GP, midwife (0–3 only where relevant), feeding support, 111/999 for urgent symptoms. Uses `label` + `body` (+ optional `when`).
+6. Add `sources[]` (3–5 items) per phase from the trusted UK allow-list only: NHS baby/toddler and postnatal hubs, UNICEF Baby Friendly (feeding phases), Lullaby Trust (sleep-relevant phases), Tommy's postnatal mental health, NCT parent support, NICE PH37/NG194 antenatal-postnatal where relevant. Hub URLs only, no fabricated deep links.
 
-1. Insert three imports: `WeekReflectionAsk`, `WeekCommonQuestions`, `WeekSources`, and `buildWeekQuestions` + `getWeekSources` from `@/data/weekSupportContent`.
-2. Delete the local `ReflectionAsk`, `FAQRow`, `FAQ` component definitions (identified by `const NAME = ` opener and the next standalone `);` or `};` at column 0).
-3. **Keep** `reflectionPrompts`, `askChips`, and `faqs` arrays — they're consumed as props/data by the new components.
-4. In the page JSX:
-   - Replace `<ReflectionAsk />` with `<WeekReflectionAsk week={N} reflectionPrompts={reflectionPrompts} askChips={askChips} />`.
-   - Replace `<FAQ />` with `<WeekCommonQuestions week={N} questions={buildWeekQuestions(N, faqs)} />`.
-   - Insert `<WeekSources week={N} sources={getWeekSources(N)} />` immediately before `<Next />` (or the equivalent trailing section in `WeekPage.tsx`).
-5. No chip prop is left undefined. Unused imports (`Plus`, `Minus`, `useState` on some pages) are safe under current `tsconfig`.
+All new copy: UK English, no em/en dashes, no diagnosis language, no milestone pressure, no personalised medical advice. Existing prose is preserved.
 
-Applied via a small Python transformer script kept in `/tmp/` so no repo scripts are added. Each file is re-verified after transform (grep for `<ReflectionAsk`, `<FAQ`, and undefined-prop patterns) before moving on.
+### Component upgrade — `src/components/firstyear/phase/FirstYearPhasePage.tsx`
+
+Preserve `PhaseHero`, `InPhaseAges`, `PairedSection`, `FeaturedGuidance`, `RelatedTopics`, and `Endcap` exactly. Changes:
+
+1. **New `PhaseEditorial`** — a slim editorial paragraph section rendered under `PairedSection` when `config.editorial` is present. Uses existing `SectionLabel` ("What this phase can feel like"), serif h2, single narrow column. Matches spacing of the existing sections.
+2. **New `WhatFeelsHard` and `WhatHelps`** — a two-column bullet layout matching the existing paired card language but rendered as one softer parchment section (or two stacked sections on mobile). Reuses the `stage-firstyear-soft` and `stage-recovery-soft` tints already in the file so no new tokens.
+3. **New `WhenToAskForSupport`** — a compact list styled like `CommonQuestions` (label + short body, quiet rule between). No fear-based colour, uses existing border tokens.
+4. **`CommonQuestions` upgraded** — signature accepts the extended `PhaseQuestion[]`. Each row keeps the existing q + short answer, and gains a small CTA row underneath:
+   - "Read: <label>" pill link to `readMore.href` when present (styled like the existing `stage-firstyear-accent` accent used in `FeaturedGuidance`).
+   - "Ask about this" pill link to `/ask?stage=first-year&phase=<slug>&topic=<askTopic || slugify(q)>`, styled as a bordered card pill.
+   - No `href="#"` anywhere. If no `readMore`, only the Ask CTA renders.
+5. **New `PhaseSources`** — modelled on the existing `WeekSources` pattern used on pregnancy week pages: numbered list, publisher + label, external links with `target="_blank"` and `rel="noopener noreferrer nofollow"`, plus a calm disclaimer sentence: "This guide is general information. Always speak to your health visitor, GP or midwife if you are worried about you or your baby." Rendered only when `sources` is present.
+6. **Section order** inside `FirstYearPhasePage` becomes:
+
+```text
+PhaseHero
+InPhaseAges
+PairedSection
+PhaseEditorial          (new, if editorial present)
+WhatFeelsHard + WhatHelps (new, if arrays present)
+WhenToAskForSupport     (new, if support present)
+CommonQuestions         (upgraded)
+FeaturedGuidance        (unchanged)
+RelatedTopics           (unchanged)
+PhaseSources            (new, if sources present)
+Endcap                  (unchanged)
+```
+
+All new sections use the existing `bg-parchment` rhythm, `SectionLabel`, `QuietRule`, `stage-firstyear-*` and `stage-recovery-*` tokens, and the same container widths, so the visual system stays intact.
 
 ### Preserve
 
-Untouched: hero, illustrations, meta bar, at a glance, biology, body, symptoms, emotional, focus, seek support, quote, journal CTA, related guidance, next section, TTC / IVF / First Year / Toddler / Family, calculators, sitemap, robots, redirects, `SeoHead`, `PregnancyWeekSeo`, routes, `App.tsx`, `ProtectedRoute`, auth logic, database schema, RLS.
+Untouched: First Year hub (`/first-year`) including the "Twelve months, four phases" section (`FYPhaseNav`), routes, SEO, sitemap, robots, redirects, article data, article routes, TTC, Pregnancy (including week pages from Phase 11.6), IVF, Toddler, Family, calculators, Journey logic, auth logic, database schema, RLS.
 
 ### Content guardrails
 
-UK English, calm signposting to midwife/GP/maternity unit, no em/en dashes, no diagnosis language, no personalised medical advice. Dash sweep limited to text added by this phase (new component copy and any curated question answer). Existing FAQ answers pass through unchanged.
+UK English, calm signposting to health visitor / GP / midwife / 111 / 999, no em or en dashes in new copy, no diagnosis language, no personalised medical advice, no milestone pressure, no certainty language around development.
 
 ### Verification
 
 - `bunx tsgo --noEmit` must pass.
-- Manual load: `/pregnancy/week/1`, `/pregnancy/week/20`, `/pregnancy/week/38`, plus a `WeekPage`-fallback week.
-- Confirm References render with real UK URLs, Common Questions render in hub-card format with working `Read:` links (where present) and Ask CTAs, and the reflection card shows the right state per auth/journey combination with no false saved state and no `href="#"`.
-- Regression sanity: `MyWeek`, `MyJourney`, `MyTTCJourney`, `DueDateCalculator`, `OvulationCalculator` still render.
+- Manual load: `/first-year/0-3-months`, `/first-year/3-6-months`, `/first-year/6-9-months`, `/first-year/9-12-months`.
+- Confirm: hero and paired cards render identically; new editorial, feels-hard, what-helps, support, and sources sections appear; Common Questions show Read links (where present) and Ask CTAs; every Read link resolves to a live `/first-year/:topic/:slug` article; every Ask CTA hits `/ask?stage=first-year&phase=...&topic=...`; no `href="#"` anywhere on the phase pages; new copy contains zero em or en dashes.
+- Regression: `/first-year`, First Year topic pages, First Year articles, pregnancy week pages, TTC hub, IVF hub, Toddler hub, Family hub, calculators all still render.
 
 ### Deliverable summary at end
 
-Files inspected, files edited, week-page system result, sources result, reflection save result (per auth/journey state), Common Questions result, article-link result, Ask AI result, placeholder-link result, content-safety result, preservation of Journey / TTC / IVF / sitemap / robots / redirects / SEO, `bunx tsgo --noEmit` result, and launch-readiness verdict.
+Files inspected, files edited, per-phase result for 0–3 / 3–6 / 6–9 / 9–12, Common Questions result, article-link result, Ask AI result, references result, content-safety result, visual-preservation result, placeholder-link result, preservation of TTC / Pregnancy / IVF / Toddler / Family / sitemap / robots / redirects / SEO, `bunx tsgo --noEmit` result, and whether First Year phase pages are ready for final launch sign off.

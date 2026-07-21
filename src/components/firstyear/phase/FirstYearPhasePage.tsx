@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowLeft } from "lucide-react";
+import { ArrowUpRight, ArrowLeft, BookOpen, Sparkles, ExternalLink } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import type { PhaseConfig } from "@/data/firstYearPhaseData";
@@ -225,25 +225,237 @@ const PairedSection = ({ config }: Props) => (
   </section>
 );
 
-const CommonQuestions = ({ items }: { items: PhaseConfig["commonQuestions"] }) => (
+const slugify = (s: string) =>
+  s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+const CommonQuestions = ({
+  items,
+  phaseSlug,
+}: {
+  items: PhaseConfig["commonQuestions"];
+  phaseSlug: PhaseConfig["slug"];
+}) => (
   <section className="bg-parchment py-12 md:py-16">
     <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-4xl">
       <SectionLabel>Common questions</SectionLabel>
       <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-8">
         Things parents often ask in this phase.
       </h2>
-      <ul className="space-y-5">
-        {items.map((qa) => (
-          <li key={qa.q}>
-            <p className="font-serif text-[17px] text-foreground leading-snug mb-1.5">{qa.q}</p>
-            <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">{qa.a}</p>
-            <div className="mt-5"><QuietRule /></div>
-          </li>
-        ))}
+      <ul className="space-y-6">
+        {items.map((qa) => {
+          const topic = qa.askTopic ?? slugify(qa.q);
+          return (
+            <li key={qa.q}>
+              <p className="font-serif text-[17px] text-foreground leading-snug mb-1.5">{qa.q}</p>
+              <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">{qa.a}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {qa.readMore && (
+                  <Link
+                    to={qa.readMore.href}
+                    className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans text-[12px] font-medium transition-all hover:-translate-y-[1px]"
+                    style={{
+                      backgroundColor: "hsl(var(--stage-firstyear-accent))",
+                      color: "hsl(var(--card))",
+                    }}
+                  >
+                    <BookOpen size={12} strokeWidth={1.9} />
+                    Read: {qa.readMore.label}
+                    <ArrowUpRight size={11} />
+                  </Link>
+                )}
+                <Link
+                  to={`/ask?stage=first-year&phase=${phaseSlug}&topic=${topic}`}
+                  className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans text-[12px] font-medium border bg-card transition-all hover:-translate-y-[1px]"
+                  style={{
+                    borderColor: "hsl(var(--stage-firstyear-accent) / 0.28)",
+                    color: "hsl(var(--stage-firstyear-deep))",
+                  }}
+                >
+                  <Sparkles size={12} strokeWidth={1.9} />
+                  Ask about this
+                </Link>
+              </div>
+              <div className="mt-5"><QuietRule /></div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   </section>
 );
+
+const PhaseEditorial = ({ text }: { text: string }) => (
+  <section className="bg-parchment py-10 md:py-14">
+    <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
+      <SectionLabel>What this phase can feel like</SectionLabel>
+      <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-4">
+        The honest shape of this stage.
+      </h2>
+      <p className="font-sans text-[15px] md:text-[16px] font-light text-foreground/80 leading-[1.85]">
+        {text}
+      </p>
+    </div>
+  </section>
+);
+
+const FeelsAndHelps = ({
+  feels,
+  helps,
+}: {
+  feels?: PhaseConfig["feelsHard"];
+  helps?: PhaseConfig["whatHelps"];
+}) => {
+  if (!feels?.length && !helps?.length) return null;
+  return (
+    <section className="bg-parchment py-12 md:py-16">
+      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+          {feels && feels.length > 0 && (
+            <div
+              className="rounded-[22px] border p-6 md:p-7"
+              style={{
+                backgroundColor: "hsl(var(--stage-recovery-soft) / 0.2)",
+                borderColor: "hsl(var(--stage-recovery-accent) / 0.18)",
+              }}
+            >
+              <p
+                className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-2"
+                style={{ color: "hsl(var(--stage-recovery-deep))" }}
+              >
+                What often feels hard
+              </p>
+              <h3 className="font-serif text-lg sm:text-xl text-foreground leading-snug mb-5">
+                The parts people rarely name out loud.
+              </h3>
+              <ul className="space-y-4">
+                {feels.map((f) => (
+                  <li key={f.label}>
+                    <p
+                      className="font-sans text-[11px] font-light tracking-wider uppercase mb-1"
+                      style={{ color: "hsl(var(--stage-recovery-deep))" }}
+                    >
+                      {f.label}
+                    </p>
+                    <p className="font-sans text-[14px] font-light text-foreground/85 leading-relaxed">{f.body}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {helps && helps.length > 0 && (
+            <div
+              className="rounded-[22px] border p-6 md:p-7"
+              style={{
+                backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.24)",
+                borderColor: "hsl(var(--stage-firstyear-accent) / 0.2)",
+              }}
+            >
+              <p
+                className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-2"
+                style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+              >
+                What can help
+              </p>
+              <h3 className="font-serif text-lg sm:text-xl text-foreground leading-snug mb-5">
+                Small things that make this phase kinder.
+              </h3>
+              <ul className="space-y-4">
+                {helps.map((h) => (
+                  <li key={h.label}>
+                    <p
+                      className="font-sans text-[11px] font-light tracking-wider uppercase mb-1"
+                      style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+                    >
+                      {h.label}
+                    </p>
+                    <p className="font-sans text-[14px] font-light text-foreground/85 leading-relaxed">{h.body}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const WhenToAskForSupport = ({ items }: { items: PhaseConfig["support"] }) => {
+  if (!items || items.length === 0) return null;
+  return (
+    <section className="bg-parchment py-12 md:py-16">
+      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-4xl">
+        <SectionLabel>When to ask for support</SectionLabel>
+        <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-8">
+          Who to turn to, and when.
+        </h2>
+        <ul className="space-y-5">
+          {items.map((s) => (
+            <li key={s.label}>
+              <div className="flex flex-wrap items-baseline gap-2 mb-1">
+                <p className="font-serif text-[16px] text-foreground leading-snug">{s.label}</p>
+                {s.when && (
+                  <span
+                    className="font-sans text-[10px] font-light tracking-[0.2em] uppercase"
+                    style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+                  >
+                    {s.when}
+                  </span>
+                )}
+              </div>
+              <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">{s.body}</p>
+              <div className="mt-5"><QuietRule /></div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+};
+
+const PhaseSources = ({ items }: { items: PhaseConfig["sources"] }) => {
+  if (!items || items.length === 0) return null;
+  return (
+    <section className="bg-parchment py-12 md:py-14">
+      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
+        <SectionLabel>References and guidance</SectionLabel>
+        <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-6">
+          Trusted UK sources behind this guide.
+        </h2>
+        <ol className="space-y-3 mb-6">
+          {items.map((src, i) => (
+            <li key={src.href} className="flex gap-3">
+              <span
+                className="font-sans text-[11px] font-light tracking-wider shrink-0 mt-0.5"
+                style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="min-w-0">
+                <p className="font-sans text-[13px] font-light text-foreground/85 leading-relaxed">
+                  <span className="font-medium">{src.publisher}</span> — {src.label}
+                </p>
+                <a
+                  href={src.href}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="inline-flex items-center gap-1 font-sans text-[12px] font-light mt-0.5 transition-colors hover:underline"
+                  style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+                >
+                  Visit source <ExternalLink size={11} />
+                </a>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p className="font-sans text-[12px] font-light italic text-muted-foreground leading-relaxed">
+          This guide is general information. Always speak to your health visitor, GP or midwife if you are worried about you or your baby.
+        </p>
+      </div>
+    </section>
+  );
+};
 
 const FeaturedGuidance = ({ items }: { items: PhaseConfig["featuredGuidance"] }) => (
   <section className="bg-parchment py-12 md:py-16">
@@ -374,9 +586,13 @@ const FirstYearPhasePage = ({ config }: Props) => {
         <PhaseHero config={config} />
         <InPhaseAges ages={config.ages} />
         <PairedSection config={config} />
-        <CommonQuestions items={config.commonQuestions} />
+        {config.editorial && <PhaseEditorial text={config.editorial} />}
+        <FeelsAndHelps feels={config.feelsHard} helps={config.whatHelps} />
+        <WhenToAskForSupport items={config.support} />
+        <CommonQuestions items={config.commonQuestions} phaseSlug={config.slug} />
         <FeaturedGuidance items={config.featuredGuidance} />
         <RelatedTopics items={config.relatedTopics} />
+        <PhaseSources items={config.sources} />
         <Endcap />
       </main>
       <Footer />

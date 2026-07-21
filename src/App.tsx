@@ -305,6 +305,11 @@ const App = () => (
           <Route path="/first-year/1-month" element={<FYMonthPage slug="1-month" />} />
           <Route path="/first-year/2-months" element={<FYMonthPage slug="2-months" />} />
           <Route path="/first-year/3-months" element={<FYMonthPage slug="3-months" />} />
+          <Route path="/first-year/4-months" element={<FYMonthPage slug="4-months" />} />
+          <Route path="/first-year/5-months" element={<FYMonthPage slug="5-months" />} />
+          <Route path="/first-year/6-months" element={<FYMonthPage slug="6-months" />} />
+          <Route path="/first-year/7-months" element={<FYMonthPage slug="7-months" />} />
+          <Route path="/first-year/8-months" element={<FYMonthPage slug="8-months" />} />
           {/* First Year topic landing pages (Step 3). One reusable template,
               eight thin wrappers, four per side. Must sit above the generic
               /:journey/:stage route and the catch-all. */}

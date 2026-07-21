@@ -33,7 +33,7 @@ const JournalMoment = () => {
               Capture your experiences week by week. A private, thoughtful record of the journey, designed to sit alongside your digital guide.
             </p>
             <Link
-              to="/product"
+              to="/journal"
               className="inline-flex items-center gap-2.5 font-sans text-[13px] font-medium text-foreground hover:text-sage transition-colors duration-300"
             >
               Explore the journal

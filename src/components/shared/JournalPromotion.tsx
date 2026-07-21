@@ -63,7 +63,7 @@ const JournalPromotion = ({
 
             <div className="flex flex-col sm:flex-row items-start gap-3">
               <Link
-                to="/product"
+                to="/journal"
                 className="inline-flex items-center gap-3 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300"
               >
                 <span>Explore the journal</span>

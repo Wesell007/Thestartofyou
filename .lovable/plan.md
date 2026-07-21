@@ -1,41 +1,55 @@
-## Phase 11.1 — Journal Route Small Fix
 
-Make `/journal` the canonical route for the existing Product/Journal page, and keep `/product` working as a redirect. Update Navbar, Footer, canonical, and sitemap generator to match.
+# Phase 11.3 — SEO Small Fixes (revised)
 
-### Files inspected
-- `src/App.tsx` (route table)
-- `src/pages/Product.tsx` (page + `SeoHead` canonical)
-- `src/components/layout/Navbar.tsx` (temp mapping note L23–25)
-- `src/components/layout/Footer.tsx` (temp mapping L69)
-- `scripts/generate-sitemap.ts` (`core` array contains `/product`)
-- `package.json` (predev/prebuild run sitemap generator)
+Applying the user's correction: pipe separators, no dashes, in new protected route SEO titles.
 
-### Changes
+## Fix 1 — Replace `/product` with `/journal` in internal links
 
-1. **`src/App.tsx`** — mount the Product component on `/journal` and turn `/product` into a redirect. `Product` is imported once and reused; no page code is duplicated.
-   - Add `<Route path="/journal" element={<Product />} />`
-   - Change `<Route path="/product" element={<Product />} />` → `<Route path="/product" element={<Navigate to="/journal" replace />} />` (reuses the existing `Navigate` import already in the file).
+Pure `to="/product"` → `to="/journal"` swap. No copy, styling, or logic changes.
 
-2. **`src/pages/Product.tsx`** — update SEO canonical to `/journal` so `/journal` is the SEO-canonical destination (matches redirect direction). No other page content changes.
-   - `canonical="https://thestartofyou.com/product"` → `canonical="https://thestartofyou.com/journal"`
+**Components (9 files):**
+- `src/components/about/AboutCTA.tsx`
+- `src/components/about/AboutEcosystem.tsx`
+- `src/components/about/AboutJournalConnection.tsx`
+- `src/components/family/FamilyPathways.tsx`
+- `src/components/home/JournalMoment.tsx`
+- `src/components/home/JournalSection.tsx`
+- `src/components/ivf/IVFTimelineResult.tsx`
+- `src/components/pregnancy/KeepYourJourney.tsx`
+- `src/components/shared/JournalPromotion.tsx`
 
-3. **`src/components/layout/Navbar.tsx`** — point Journal at `/journal` and drop the temporary-mapping note.
-   - Change `{ label: "Journal", href: "/product" }` → `{ label: "Journal", href: "/journal" }`
-   - Remove the `// NOTE: temporary route mapping — Journal label points to /product` comment.
+**Pregnancy week pages (43 files):** `src/pages/Week1Page.tsx` … `Week42Page.tsx` and `src/pages/WeekPage.tsx`.
 
-4. **`src/components/layout/Footer.tsx`** — same swap.
-   - Change `{ to: "/product", label: "Journal" }` → `{ to: "/journal", label: "Journal" }`
+**`src/data/articleInventory.ts`:** update the single row for `product:the-start-of-you-journal` — change `route: "/product"` → `route: "/journal"`. Leave slug, keywords, notes, strategy metadata untouched.
 
-5. **`scripts/generate-sitemap.ts`** — replace `/product` with `/journal` in the `core` array so the sitemap advertises the canonical route only.
-   - `const core = ["/", "/about", "/support", "/product", "/preparing-for-baby"];` → `const core = ["/", "/about", "/support", "/journal", "/preparing-for-baby"];`
-   - `predev` will regenerate `public/sitemap.xml` on the next dev restart (standard project workflow), so `/journal` replaces `/product` in the emitted sitemap without ad-hoc edits.
+`/product` route in `src/App.tsx` stays as `<Navigate to="/journal" replace />`.
 
-### Preserved (not touched)
-TTC, Pregnancy, IVF, First Year, Toddler, Family data and components; article content; images; calculators; TTC Journey; auth/setup; robots.txt (still correct); other SEO infrastructure; the rest of the route table.
+## Fix 2 — Defensive `noindex` on protected/non-public routes
 
-### Verification
-- `bunx tsgo --noEmit` → expected clean.
-- Manual: `/journal` renders the Product experience; `/product` 302-style client redirect to `/journal`; Navbar + Footer link to `/journal`; canonical on the page is `/journal`; regenerated `public/sitemap.xml` lists `/journal` (not `/product`).
+Add `SeoHead` with `noindex` and pipe-separated titles (no dashes).
 
-### Deliverable summary
-Will report files inspected, files edited, route/Navbar/Footer/redirect/canonical/sitemap results, preservation checks, typecheck exit code, and whether it is safe to move into SEO final QA.
+- `src/pages/Auth.tsx` → `Sign in | The Start of You`
+- `src/pages/Setup.tsx` → `Setup | The Start of You`
+- `src/pages/SetupTTC.tsx` → `TTC setup | The Start of You`
+- `src/pages/MyWeek.tsx` → `My week | The Start of You`
+- `src/pages/KeptChapter.tsx` (`/my-week/:week`) → `My week | The Start of You`
+- `src/pages/MyJourney.tsx` → `My journey | The Start of You`
+- `src/pages/MyTTCJourney.tsx` → `My TTC journey | The Start of You`
+
+Each edit: add `import SeoHead from "@/components/seo/SeoHead";` and render `<SeoHead title="…" description="…" canonical="https://thestartofyou.com/<path>" noindex />` at the top of the returned JSX. No structural or logic changes.
+
+`/ttc-journey-calendar` has no matching page file in `src/pages/` — report as "no matching page found" and skip.
+
+## Preserved
+
+Content, article/topic/hub copy, calculators, Journey logic, auth, setup, ProtectedRoute, routes, redirects, sitemap generator, robots, RLS, database.
+
+## Verification
+
+- `bunx tsgo --noEmit`
+- `rg 'to="/product"' src` returns zero hits.
+- Confirm `/product` still redirects, sitemap still contains `/journal` and excludes `/product`.
+
+## Deliverable
+
+Report per phase brief: files inspected/edited, link cleanup result, week-page cleanup, inventory result, protected route noindex result, `/ttc-journey-calendar` note, preservation confirmations, typecheck result, Launch Readiness QA verdict.

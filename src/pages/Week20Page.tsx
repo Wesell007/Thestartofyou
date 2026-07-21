@@ -767,7 +767,7 @@ const Journal = () => (
               </li>
             ))}
           </ul>
-          <Link to="/product"
+          <Link to="/journal"
             className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
             Discover the journal <ArrowRight size={13} />
           </Link>

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import SeoHead from "@/components/seo/SeoHead";
 import { useNavigate } from "react-router-dom";
 import { differenceInDays } from "date-fns";
 import { trackEvent } from "@/lib/analytics";
@@ -170,6 +171,12 @@ const MyJourney = () => {
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
+      <SeoHead
+        title="My journey | The Start of You"
+        description="Your saved pregnancy journey."
+        canonical="https://thestartofyou.com/my-journey"
+        noindex
+      />
       <MyWeekHeader />
       <main className="relative mx-auto w-full max-w-[760px] px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 lg:pt-28 pb-20 sm:pb-24">
         <JourneyHeader currentWeek={currentWeek} due={due} startedAt={startedAt} />

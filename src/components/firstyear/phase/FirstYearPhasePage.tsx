@@ -245,47 +245,51 @@ const CommonQuestions = ({
   items: PhaseConfig["commonQuestions"];
   phaseSlug: PhaseConfig["slug"];
 }) => (
-  <section className="bg-parchment py-12 md:py-16">
+  <section className="bg-parchment py-16 md:py-22">
     <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-4xl">
       <SectionLabel>Common questions</SectionLabel>
-      <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-8">
+      <h2 className="font-serif text-2xl sm:text-[1.75rem] text-foreground leading-[1.15] mb-8">
         Things parents often ask in this phase.
       </h2>
-      <ul className="space-y-6">
+      <ul className="space-y-4">
         {items.map((qa) => {
           const topic = qa.askTopic ?? slugify(qa.q);
           return (
             <li key={qa.q}>
-              <p className="font-serif text-[17px] text-foreground leading-snug mb-1.5">{qa.q}</p>
-              <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">{qa.a}</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {qa.readMore && (
+              <div
+                className="group rounded-2xl border bg-card p-6 md:p-7 transition-all duration-300 hover:-translate-y-[2px] shadow-[0_8px_24px_-16px_rgba(20,30,60,0.10)] hover:shadow-[0_20px_44px_-24px_rgba(20,30,60,0.18)]"
+                style={{ borderColor: "hsl(var(--border) / 0.6)" }}
+              >
+                <p className="font-serif text-[18px] md:text-[19px] text-foreground leading-snug mb-2.5">{qa.q}</p>
+                <p className="font-sans text-[14.5px] font-light text-foreground/75 leading-[1.8]">{qa.a}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {qa.readMore && (
+                    <Link
+                      to={qa.readMore.href}
+                      className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans text-[12px] font-medium transition-all hover:-translate-y-[1px]"
+                      style={{
+                        backgroundColor: "hsl(var(--stage-firstyear-accent))",
+                        color: "hsl(var(--card))",
+                      }}
+                    >
+                      <BookOpen size={12} strokeWidth={1.9} />
+                      Read: {qa.readMore.label}
+                      <ArrowUpRight size={11} />
+                    </Link>
+                  )}
                   <Link
-                    to={qa.readMore.href}
-                    className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans text-[12px] font-medium transition-all hover:-translate-y-[1px]"
+                    to={`/ask?stage=first-year&phase=${phaseSlug}&topic=${topic}`}
+                    className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans text-[12px] font-medium border bg-card transition-all hover:-translate-y-[1px]"
                     style={{
-                      backgroundColor: "hsl(var(--stage-firstyear-accent))",
-                      color: "hsl(var(--card))",
+                      borderColor: "hsl(var(--stage-firstyear-accent) / 0.32)",
+                      color: "hsl(var(--stage-firstyear-deep))",
                     }}
                   >
-                    <BookOpen size={12} strokeWidth={1.9} />
-                    Read: {qa.readMore.label}
-                    <ArrowUpRight size={11} />
+                    <Sparkles size={12} strokeWidth={1.9} />
+                    Ask about this
                   </Link>
-                )}
-                <Link
-                  to={`/ask?stage=first-year&phase=${phaseSlug}&topic=${topic}`}
-                  className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans text-[12px] font-medium border bg-card transition-all hover:-translate-y-[1px]"
-                  style={{
-                    borderColor: "hsl(var(--stage-firstyear-accent) / 0.28)",
-                    color: "hsl(var(--stage-firstyear-deep))",
-                  }}
-                >
-                  <Sparkles size={12} strokeWidth={1.9} />
-                  Ask about this
-                </Link>
+                </div>
               </div>
-              <div className="mt-5"><QuietRule /></div>
             </li>
           );
         })}

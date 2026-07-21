@@ -103,11 +103,16 @@ export const MONTH_ORDER: MonthSlug[] = [
   "6-months",
   "7-months",
   "8-months",
+  "9-months",
+  "10-months",
+  "11-months",
+  "12-months",
 ];
 
 const PHASE_0_3 = { label: "0 to 3 months", href: "/first-year/0-3-months" };
 const PHASE_3_6 = { label: "3 to 6 months", href: "/first-year/3-6-months" };
 const PHASE_6_9 = { label: "6 to 9 months", href: "/first-year/6-9-months" };
+const PHASE_9_12 = { label: "9 to 12 months", href: "/first-year/9-12-months" };
 
 export const firstYearMonths: Record<MonthSlug, MonthGuide> = {
   newborn: {

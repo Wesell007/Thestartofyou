@@ -46,6 +46,9 @@ import emotionalImg from "@/assets/article-hero-emotional-first-tri.jpg";
 import testsScansImg from "@/assets/article-hero-tests-scans.jpg";
 import symptomsStoppingImg from "@/assets/article-hero-symptoms-stopping.jpg";
 import lifestyleImg from "@/assets/article-hero-lifestyle.jpg";
+import WeekCommonQuestions from "@/components/week/WeekCommonQuestions";
+import WeekSources from "@/components/week/WeekSources";
+import { buildWeekQuestions, getWeekSources } from "@/data/weekSupportContent";
 
 /* Shared label */
 const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; tone?: "sage" | "terracotta" | "lavender" }) => {
@@ -691,7 +694,7 @@ const Journal = () => (
               </li>
             ))}
           </ul>
-          <Link to="/product"
+          <Link to="/journal"
             className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
             Discover the journal <ArrowRight size={13} />
           </Link>
@@ -788,48 +791,6 @@ const faqs = [
     a: "There's no right time. Many people wait until after the dating scan at 11–14 weeks, when the chance of miscarriage has dropped further and they have a scan picture in hand. Others wait longer, until 16–20 weeks. Some tell close family earlier so they have support if anything goes wrong. Think about who you'd want around you if anything went wrong, not just who you want to celebrate with — the two answers can be different. There is no obligation to perform happiness on a particular timeline." },
 ];
 
-const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; defaultOpen?: boolean }) => {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border-b border-border/40 last:border-b-0">
-      <button onClick={() => setOpen(!open)}
-        className="w-full flex items-start gap-4 py-5 text-left group">
-        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-sage transition-colors leading-snug">
-          {faq.q}
-        </span>
-        <span className="w-7 h-7 rounded-full bg-sage-bg flex items-center justify-center text-sage shrink-0 mt-1">
-          {open ? <Minus size={13} /> : <Plus size={13} />}
-        </span>
-      </button>
-      {open && (
-        <p className="font-sans text-[14px] text-foreground/75 leading-[1.85] pb-6 pr-12">
-          {faq.a}
-        </p>
-      )}
-    </div>
-  );
-};
-
-const FAQ = () => (
-  <section className="bg-parchment-dark/40 py-16 md:py-24">
-    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-      <div className="mb-10 text-center">
-        <SectionLabel>Common questions</SectionLabel>
-        <h2 className="font-serif text-[1.85rem] sm:text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">
-          Common questions at 10 weeks
-        </h2>
-      </div>
-      <div className="bg-card rounded-3xl border border-border/40 shadow-card-brand p-2 md:p-4">
-        <div className="px-4 md:px-6">
-          {faqs.map((f, i) => (
-            <FAQRow key={f.q} faq={f} defaultOpen={i === 0} />
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 /* 16. NEXT */
 const Next = () => (
   <section className="bg-parchment py-16 md:py-24">
@@ -875,7 +836,8 @@ const Week10Page = () => (
     <ReflectionAsk />
     <Journal />
     <Related />
-    <FAQ />
+    <WeekCommonQuestions week={10} questions={buildWeekQuestions(10, faqs)} />
+    <WeekSources week={10} sources={getWeekSources(10)} />
     <Next />
     <Footer />
   </div>

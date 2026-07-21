@@ -51,6 +51,18 @@ import imgOvulation from "@/assets/week2-ovulation.jpg";
 import imgWeek1 from "@/assets/week1-cycle.jpg";
 import imgFertilisation from "@/assets/week3-fertilisation.jpg";
 
+// Phase 9.16 (TTC pregnancy tests + two week wait expansion)
+import imgTestingTooEarly from "@/assets/ttc-testing-too-early.jpg";
+import imgNegativeTestNoPeriod from "@/assets/ttc-negative-test-no-period.jpg";
+import imgEvaporationLine from "@/assets/ttc-evaporation-line.jpg";
+import imgTwoWeekWaitSymptoms from "@/assets/ttc-two-week-wait-symptoms.jpg";
+import imgSpottingTwoWeekWait from "@/assets/ttc-spotting-two-week-wait.jpg";
+import imgCopingTwoWeekWait from "@/assets/ttc-coping-two-week-wait.jpg";
+
+// Phase 9.20 (final TTC article gap batch)
+import imgTrackingWithoutOverthinking from "@/assets/ttc-tracking-without-overthinking.jpg";
+import imgThyroidAndFertility from "@/assets/ttc-thyroid-and-fertility.jpg";
+
 interface Props {
   config: TTCPageConfig;
   heroImage: string;
@@ -119,6 +131,18 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/emotional-impact-of-ivf": imgIVF,
   "/articles/emotional-wellbeing-pregnancy": imgLifestyle,
   "/articles/perinatal-anxiety": imgLifestyle,
+
+  // Phase 9.16
+  "/articles/testing-too-early": imgTestingTooEarly,
+  "/articles/negative-test-but-no-period": imgNegativeTestNoPeriod,
+  "/articles/evaporation-line-or-faint-positive": imgEvaporationLine,
+  "/articles/two-week-wait-symptoms": imgTwoWeekWaitSymptoms,
+  "/articles/spotting-during-the-two-week-wait": imgSpottingTwoWeekWait,
+  "/articles/coping-with-the-two-week-wait": imgCopingTwoWeekWait,
+
+  // Phase 9.20
+  "/articles/tracking-without-overthinking": imgTrackingWithoutOverthinking,
+  "/articles/thyroid-and-fertility": imgThyroidAndFertility,
 };
 
 const TOPIC_FALLBACK: Record<TTCTopicSlug, string> = {

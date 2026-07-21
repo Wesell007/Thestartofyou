@@ -20,9 +20,7 @@ const navLinks = [
   { label: "First year", href: "/first-year" },
   { label: "Toddler", href: "/toddler" },
   { label: "Family", href: "/family" },
-  // NOTE: temporary route mapping — Journal label points to /product
-  // until the route is renamed to /journal in a follow-up pass.
-  { label: "Journal", href: "/product" },
+  { label: "Journal", href: "/journal" },
 ];
 
 const Navbar = () => {

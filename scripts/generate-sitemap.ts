@@ -10,7 +10,7 @@ import { resolve } from "node:path";
 const BASE_URL = "https://thestartofyou.com";
 
 // ── Static route groups ────────────────────────────────────────────────
-const core = ["/", "/about", "/support", "/product", "/preparing-for-baby"];
+const core = ["/", "/about", "/support", "/journal", "/preparing-for-baby"];
 
 const pregnancyStatic = [
   "/pregnancy",
@@ -70,6 +70,20 @@ const firstYearStatic = [
   "/first-year/3-6-months",
   "/first-year/6-9-months",
   "/first-year/9-12-months",
+  // Month guide pages (Phases 11.8a, 11.8b and 11.8c). Newborn to 12 months are published.
+  "/first-year/newborn",
+  "/first-year/1-month",
+  "/first-year/2-months",
+  "/first-year/3-months",
+  "/first-year/4-months",
+  "/first-year/5-months",
+  "/first-year/6-months",
+  "/first-year/7-months",
+  "/first-year/8-months",
+  "/first-year/9-months",
+  "/first-year/10-months",
+  "/first-year/11-months",
+  "/first-year/12-months",
   "/first-year/feeding",
   "/first-year/sleep",
   "/first-year/development",

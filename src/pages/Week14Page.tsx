@@ -22,6 +22,9 @@ import secondEatingImg from "@/assets/article-hero-second-eating.jpg";
 import secondAnxietyImg from "@/assets/article-hero-second-anxiety.jpg";
 import secondMovementImg from "@/assets/article-hero-second-movement-exercise.jpg";
 import secondSleepImg from "@/assets/article-hero-second-sleep.jpg";
+import WeekCommonQuestions from "@/components/week/WeekCommonQuestions";
+import WeekSources from "@/components/week/WeekSources";
+import { buildWeekQuestions, getWeekSources } from "@/data/weekSupportContent";
 
 const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; tone?: "sage" | "terracotta" | "lavender" }) => {
   const toneCls = tone === "terracotta" ? "text-terracotta" : tone === "lavender" ? "text-lavender-foreground" : "text-sage";
@@ -620,7 +623,7 @@ const Journal = () => (
               </li>
             ))}
           </ul>
-          <Link to="/product" className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
+          <Link to="/journal" className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
             Discover the journal <ArrowRight size={13} />
           </Link>
         </div>
@@ -703,37 +706,6 @@ const faqs = [
     a: "The next major appointment is the anomaly scan (also called the 20-week scan), usually offered between 18 and 21 weeks. This is a much more detailed scan that checks your baby's anatomy from head to toe — heart, brain, spine, kidneys, limbs and the placenta. You'll also have a midwife appointment around 16 weeks to review any blood test results from booking-in, check blood pressure and urine, and listen to the heartbeat with a doppler. Between then and now is mostly settling-in time." },
 ];
 
-const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; defaultOpen?: boolean }) => {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border-b border-border/40 last:border-b-0">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-start gap-4 py-5 text-left group">
-        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-sage transition-colors leading-snug">{faq.q}</span>
-        <span className="w-7 h-7 rounded-full bg-sage-bg flex items-center justify-center text-sage shrink-0 mt-1">
-          {open ? <Minus size={13} /> : <Plus size={13} />}
-        </span>
-      </button>
-      {open && <p className="font-sans text-[14px] text-foreground/75 leading-[1.85] pb-6 pr-12">{faq.a}</p>}
-    </div>
-  );
-};
-
-const FAQ = () => (
-  <section className="bg-parchment-dark/40 py-16 md:py-24">
-    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-      <div className="mb-10 text-center">
-        <SectionLabel>Common questions</SectionLabel>
-        <h2 className="font-serif text-[1.85rem] sm:text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">Common questions at 14 weeks</h2>
-      </div>
-      <div className="bg-card rounded-3xl border border-border/40 shadow-card-brand p-2 md:p-4">
-        <div className="px-4 md:px-6">
-          {faqs.map((f, i) => <FAQRow key={f.q} faq={f} defaultOpen={i === 0} />)}
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 const Next = () => (
   <section className="bg-parchment py-16 md:py-24">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
@@ -775,7 +747,8 @@ const Week14Page = () => (
     <ReflectionAsk />
     <Journal />
     <Related />
-    <FAQ />
+    <WeekCommonQuestions week={14} questions={buildWeekQuestions(14, faqs)} />
+    <WeekSources week={14} sources={getWeekSources(14)} />
     <Next />
     <Footer />
   </div>

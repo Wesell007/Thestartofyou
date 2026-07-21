@@ -22,6 +22,9 @@ import thirdEmotionalImg from "@/assets/article-hero-third-emotional.jpg";
 import thirdHospitalBagImg from "@/assets/article-hero-third-hospital-bag.jpg";
 import thirdNurseryImg from "@/assets/article-hero-third-nursery.jpg";
 import thirdSignsImg from "@/assets/article-hero-third-signs-of-labour.jpg";
+import WeekCommonQuestions from "@/components/week/WeekCommonQuestions";
+import WeekSources from "@/components/week/WeekSources";
+import { buildWeekQuestions, getWeekSources } from "@/data/weekSupportContent";
 
 const SectionLabel = ({ children, tone = "terracotta" }: { children: React.ReactNode; tone?: "sage" | "terracotta" | "lavender" }) => {
   const toneCls = tone === "terracotta" ? "text-terracotta" : tone === "lavender" ? "text-lavender-foreground" : "text-sage";
@@ -628,7 +631,7 @@ const Journal = () => (
               </li>
             ))}
           </ul>
-          <Link to="/product" className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
+          <Link to="/journal" className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
             Discover the journal <ArrowRight size={13} />
           </Link>
         </div>
@@ -711,37 +714,6 @@ const faqs = [
     a: "Babies born at 29 weeks have substantially better outcomes than even two weeks earlier — survival rates are very high with neonatal care, and most go on to thrive without long-term issues, although a stay in NICU is expected and lung maturity is the main concern. None of this changes what you do this week: the things you can control are the same as for any week of late pregnancy. Pattern-aware movement check-ins. Phoning early about anything that worries you. Side-sleep. Reasonable rest. Eating well. Confirming the next appointment is in the diary. The rest is held by your team, not by you." },
 ];
 
-const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; defaultOpen?: boolean }) => {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border-b border-border/40 last:border-b-0">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-start gap-4 py-5 text-left group">
-        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-terracotta transition-colors leading-snug">{faq.q}</span>
-        <span className="w-7 h-7 rounded-full bg-stage-pregnancy/40 flex items-center justify-center text-terracotta shrink-0 mt-1">
-          {open ? <Minus size={13} /> : <Plus size={13} />}
-        </span>
-      </button>
-      {open && <p className="font-sans text-[14px] text-foreground/75 leading-[1.85] pb-6 pr-12">{faq.a}</p>}
-    </div>
-  );
-};
-
-const FAQ = () => (
-  <section className="bg-parchment-dark/40 py-16 md:py-24">
-    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-      <div className="mb-10 text-center">
-        <SectionLabel tone="terracotta">Common questions</SectionLabel>
-        <h2 className="font-serif text-[1.85rem] sm:text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">Common questions at 29 weeks</h2>
-      </div>
-      <div className="bg-card rounded-3xl border border-border/40 shadow-card-brand p-2 md:p-4">
-        <div className="px-4 md:px-6">
-          {faqs.map((f, i) => <FAQRow key={f.q} faq={f} defaultOpen={i === 0} />)}
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 const Next = () => (
   <section className="bg-parchment py-16 md:py-24">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
@@ -783,7 +755,8 @@ const Week29Page = () => (
     <ReflectionAsk />
     <Journal />
     <Related />
-    <FAQ />
+    <WeekCommonQuestions week={29} questions={buildWeekQuestions(29, faqs)} />
+    <WeekSources week={29} sources={getWeekSources(29)} />
     <Next />
     <Footer />
   </div>

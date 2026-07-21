@@ -42,7 +42,7 @@ const AboutJournalConnection = () => {
 
         <div className="flex justify-center">
           <Link
-            to="/product"
+            to="/journal"
             className="inline-flex items-center gap-2 font-sans text-sm font-light text-muted-foreground border-b border-border hover:text-foreground hover:border-foreground transition-all pb-0.5"
           >
             View the journal

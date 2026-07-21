@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import SeoHead from "@/components/seo/SeoHead";
 import { useNavigate } from "react-router-dom";
 import { differenceInDays } from "date-fns";
 import { trackEvent } from "@/lib/analytics";
@@ -151,6 +152,12 @@ const MyWeek = () => {
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative overflow-x-hidden">
+      <SeoHead
+        title="My week | The Start of You"
+        description="Your current pregnancy week chapter."
+        canonical="https://thestartofyou.com/my-week"
+        noindex
+      />
       <MyWeekHeader />
       <main className="relative mx-auto w-full max-w-[680px] md:max-w-[920px] lg:max-w-[1200px] xl:max-w-[1320px] px-4 sm:px-8 md:px-10 lg:px-14">
         {/* Two-zone composition from md upward. Mobile = single column flow. */}

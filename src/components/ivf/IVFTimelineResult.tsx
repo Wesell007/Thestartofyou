@@ -1157,7 +1157,7 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                 </div>
 
                 <Link
-                  to="/product"
+                  to="/journal"
                   className="inline-flex items-center gap-3 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all"
                 >
                   Explore the journal

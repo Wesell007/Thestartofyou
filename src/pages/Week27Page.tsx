@@ -22,6 +22,9 @@ import movementExImg from "@/assets/article-hero-second-movement-exercise.jpg";
 import sleepImg from "@/assets/article-hero-second-sleep.jpg";
 import anxietyImg from "@/assets/article-hero-second-anxiety.jpg";
 import eatingImg from "@/assets/article-hero-second-eating.jpg";
+import WeekCommonQuestions from "@/components/week/WeekCommonQuestions";
+import WeekSources from "@/components/week/WeekSources";
+import { buildWeekQuestions, getWeekSources } from "@/data/weekSupportContent";
 
 const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; tone?: "sage" | "terracotta" | "lavender" }) => {
   const toneCls = tone === "terracotta" ? "text-terracotta" : tone === "lavender" ? "text-lavender-foreground" : "text-sage";
@@ -627,7 +630,7 @@ const Journal = () => (
               </li>
             ))}
           </ul>
-          <Link to="/product" className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
+          <Link to="/journal" className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
             Discover the journal <ArrowRight size={13} />
           </Link>
         </div>
@@ -710,37 +713,6 @@ const faqs = [
     a: "Often, yes — by week 27 many parents notice Braxton-Hicks (practice contractions) several times a day. They feel like a painless tightening across the bump that lasts 30 to 60 seconds, then releases. They're often more obvious after activity, sex, or a full bladder. Drink water, lie down on your side, change position. They should ease. What's not normal is regular, painful or rhythmic tightenings, especially with bleeding, fluid loss, or lower-back pain — that needs urgent assessment for preterm labour. Phoning early is always allowed." },
 ];
 
-const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; defaultOpen?: boolean }) => {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border-b border-border/40 last:border-b-0">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-start gap-4 py-5 text-left group">
-        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-sage transition-colors leading-snug">{faq.q}</span>
-        <span className="w-7 h-7 rounded-full bg-sage-bg flex items-center justify-center text-sage shrink-0 mt-1">
-          {open ? <Minus size={13} /> : <Plus size={13} />}
-        </span>
-      </button>
-      {open && <p className="font-sans text-[14px] text-foreground/75 leading-[1.85] pb-6 pr-12">{faq.a}</p>}
-    </div>
-  );
-};
-
-const FAQ = () => (
-  <section className="bg-parchment-dark/40 py-16 md:py-24">
-    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-      <div className="mb-10 text-center">
-        <SectionLabel>Common questions</SectionLabel>
-        <h2 className="font-serif text-[1.85rem] sm:text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">Common questions at 27 weeks</h2>
-      </div>
-      <div className="bg-card rounded-3xl border border-border/40 shadow-card-brand p-2 md:p-4">
-        <div className="px-4 md:px-6">
-          {faqs.map((f, i) => <FAQRow key={f.q} faq={f} defaultOpen={i === 0} />)}
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 const Next = () => (
   <section className="bg-parchment py-16 md:py-24">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
@@ -782,7 +754,8 @@ const Week27Page = () => (
     <ReflectionAsk />
     <Journal />
     <Related />
-    <FAQ />
+    <WeekCommonQuestions week={27} questions={buildWeekQuestions(27, faqs)} />
+    <WeekSources week={27} sources={getWeekSources(27)} />
     <Next />
     <Footer />
   </div>

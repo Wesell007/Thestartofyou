@@ -1,64 +1,75 @@
-## Phase 9.15 — TTC Wide QA Report
+## Scope
 
-### Scope
-Read-only audit across TTC hub, topic pages, all articles added in Phases 9.12a → 9.14, image mappings, breadcrumbs, editorial safety, and infrastructure preservation.
+Refresh imagery across the `/pregnancy/body` ecosystem using **Nano Banana 2** (`imagegen--generate_image` with `model: "premium.gemini"`). Covers:
 
-### Files inspected
-- `src/pages/TTCHub.tsx`
-- `src/data/ttcTopicData.ts`
-- `src/data/articleData.ts`
-- `src/components/ttc/TTCTopicPage.tsx`, `TTCSubtopicPage.tsx`, `TTCIVFPathway.tsx`
-- `src/components/article/flagship/flagshipImageMap.ts`
-- `scripts/generate-sitemap.ts` (read-only)
+- The Body topic page hero
+- All **25 sub-article** hero images (and their thumbnails on the topic page — same underlying files)
 
-### Files to edit (small approved fixes only)
-- `src/data/ttcTopicData.ts` — remove unused `signsOfOvulation` constant pointing at the redirected legacy slug.
-- `src/components/ttc/TTCTopicPage.tsx` + `TTCSubtopicPage.tsx` — drop the unused image-map entries keyed on `/articles/signs-of-ovulation` (no live link references them).
+No copy, layout, routing, alt text or component changes.
 
-No article prose, no images, no calculators, no journey, no SEO/sitemap/redirects touched.
+## Approach
 
-### QA results
+Overwrite each unique underlying `.jpg` in `src/assets/` in-place. Because the app resolves each article hero and each topic thumbnail through a shared asset (via `flagshipImageMap.ts`, `ArticleHeroImage.tsx`, and `PregnancyTopicPage.tsx`'s `HREF_IMAGE_MAP`), regenerating the source `.jpg` refreshes both hero and thumbnail everywhere it is referenced.
 
-**TTC hub** — Clean. Explore TTC topics shows exactly 3 groups (Timing/testing/waiting, Health/preparation, Fertility support). Green Treatment pathways card gone. Purple `TTCIVFPathway` sits directly below, updated copy, CTA links to `/ivf`. No "More routes will be added" copy anywhere in hub.
+Regeneration parameters:
+- Model: `premium.gemini` (Nano Banana 2)
+- Dimensions: keep current framing — 1600×1067 (3:2) for editorial heroes
+- Prompts: derived from each image's existing curated `alt` text plus the site's editorial style (soft daylight, cream linen, sage/eucalyptus accents, calm UK editorial, no faces of identifiable people, no text, no logos)
 
-**TTC topic pages** — All 10 render with clear hero, Start here, grouped sections, working calculator/Ask links. No thin pages remain. No outdated curation apology copy. No deprecated slugs surfaced in live navigation.
+## Files to regenerate (unique assets, ~25)
 
-**Pillar structure** — Preserved as specified:
-- Ovulation: Understanding ovulation / Tracking and timing / When timing feels unclear
-- Preconception health: Start with the basics / Health checks and planning / Everyday health and support
-- Fertility: When to ask for support / Understanding fertility factors / Tests, treatment and next steps
+Body topic page:
+1. `src/assets/topic-body-hero.jpg`
 
-**Breadcrumbs & eyebrows** — Direct TTC subtopics (cycle-tracking, two-week-wait, pregnancy-tests, conditions) no longer nested under Fertility/Ovulation. Fertility children (male-fertility, age-and-fertility, ivf-and-treatment) correctly remain.
+Symptom & early-weeks cluster:
+2. `src/assets/article-hero-early-symptoms.jpg`
+3. `src/assets/article-hero-nausea.jpg`
+4. `src/assets/article-hero-fatigue.jpg`
+5. `src/assets/article-hero-implantation.jpg`
+6. `src/assets/article-hero-implantation-bleeding.jpg`
+7. `src/assets/article-hero-second-sleep.jpg`
 
-**Article count checked** — 23 flagship TTC articles from Phases 9.12a → 9.14, all present with unique slugs, `reviewedBy: "Jenny Joines"`, `lastUpdated: "July 2026"`, `journey: ["trying-to-conceive"]`, quick answer, key takeaways, editorial sections, structured sources, related slugs, and mapped flagship hero images.
+Trimester cluster:
+8. `src/assets/trimester-first.jpg`
+9. `src/assets/trimester-second.jpg`
+10. `src/assets/trimester-third.jpg`
 
-**Duplicate slugs** — None (137 unique).
+Aches, digestion & body cluster:
+11. `src/assets/article-hero-second-body.jpg`
+12. `src/assets/article-hero-second-movement-exercise.jpg`
+13. `src/assets/article-hero-second-eating.jpg`
+14. `src/assets/flagship-heartburn-hero.jpg`
+15. `src/assets/flagship-heartburn-anatomy.jpg`
+16. `src/assets/flagship-heartburn-pillows.jpg`
+17. `src/assets/flagship-heartburn-call.jpg`
 
-**Broken/deprecated links** — Only surviving reference to `/articles/signs-of-ovulation` is:
-1. an unused `signsOfOvulation` constant in `ttcTopicData.ts`
-2. two dead entries in the `HREF_IMAGE_MAP` records of the topic/subtopic components.
-None are rendered. The redirect in `App.tsx` remains untouched.
+Bleeding, discharge & reassurance cluster:
+18. `src/assets/article-hero-bleeding-reassurance.jpg`
+19. `src/assets/article-hero-discharge.jpg`
+20. `src/assets/guidance-card-quiet.jpg`
+21. `src/assets/guidance-card-body.jpg`
+22. `src/assets/guidance-card-comfort.jpg`
 
-**Image QA** — TTC card/hero images are appropriately varied after Phase 9.12b.1. No blocking repeats, no fake text, no clinical/harsh imagery detected in mapped assets. No regeneration needed.
+Late pregnancy & labour cluster:
+23. `src/assets/article-hero-third-signs-of-labour.jpg`
+24. `src/assets/article-hero-third-movement.jpg`
+25. `src/assets/article-hero-third-hospital-bag.jpg`
+26. `src/assets/article-hero-third-sleep.jpg`
+27. `src/assets/article-hero-third-emotional.jpg`
 
-**Editorial safety** — Full scan of banned TTC phrases across `articleData.ts`:
-- `"guaranteed"` — 1 hit (line 6728) in a first-trimester article, not TTC prose. Acceptable.
-- `"fertility score"` — 1 hit (line 15841) in an AMH article explicitly describing misuse ("Where it's often misused: as a general 'fertility score'"). Acceptable, educational framing.
-- No hits for: safe days, unsafe days, perfect timing, confirmed ovulation, you are pregnant, you are not pregnant.
+## Known cross-topic side effects (worth flagging)
 
-**Em dash rule** — Codebase-wide `—` count unchanged from previous QA baselines; no new em dashes introduced in the 9.12–9.14 batches (spot-verified on the six required sample articles).
+Some of these files are also referenced from other topics/hubs (e.g. `article-hero-second-body.jpg` is used by weight-changes and second-trimester guides; the third-trimester assets appear on the Preparing hub; `guidance-card-*` files are also used by non-body flagship articles). Regenerating them refreshes those surfaces too — but each new image is directed by the same alt/subject brief, so the semantic fit remains correct. If you want body-only isolation instead (new dedicated files + rewire the maps), say so and I'll switch to that approach.
 
-**Sitemap pickup** — `scripts/generate-sitemap.ts` extracts every top-level `slug:` from `articleData.ts`, so all 23 new articles are picked up automatically. No generator edits required.
+## Steps
 
-**Preservation** — Calculators, TTC Journey, SEO helper, sitemap generator, robots, redirects, and route files: unchanged.
+1. Regenerate each file in the list above with Nano Banana 2, one call per file, using an editorial prompt derived from the current alt text and the site's photographic style.
+2. Do a visual pass across `/pregnancy/body` and 2–3 sample article pages (e.g. `bleeding-in-early-pregnancy`, `sleep-in-pregnancy`, `heartburn-in-pregnancy`) to confirm images render and framing survives at hero + thumbnail sizes.
+3. Report back with the list of regenerated files.
 
-**tsgo** — `bunx tsgo --noEmit` passes clean.
+## Out of scope
 
-### Small fixes proposed (only if approved)
-1. Delete unused `signsOfOvulation` entry from `hrefMap` in `ttcTopicData.ts`.
-2. Remove `"/articles/signs-of-ovulation": ...` lines from `HREF_IMAGE_MAP` in `TTCTopicPage.tsx` and `TTCSubtopicPage.tsx`.
-
-These are pure dead-code deletions; no user-visible change.
-
-### Recommended next step
-TTC content system is stable, editorially clean and structurally sound. Recommendation: **continue into pregnancy-tests and two-week-wait content expansion** (Phase 9.16). No blockers.
+- Alt text, copy, routes, sitemap, SEO metadata
+- Journal / product imagery
+- Non-body topics (Baby, Feelings, Health & Safety, Diet & Exercise, Preparing)
+- The `video/journal-hero.mp4` file (still-image model can't regenerate video)

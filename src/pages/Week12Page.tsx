@@ -48,6 +48,9 @@ import testsScansImg from "@/assets/article-hero-tests-scans.jpg";
 import symptomsStoppingImg from "@/assets/article-hero-symptoms-stopping.jpg";
 import secondBodyImg from "@/assets/article-hero-second-body.jpg";
 import lifestyleImg from "@/assets/article-hero-lifestyle.jpg";
+import WeekCommonQuestions from "@/components/week/WeekCommonQuestions";
+import WeekSources from "@/components/week/WeekSources";
+import { buildWeekQuestions, getWeekSources } from "@/data/weekSupportContent";
 
 /* Shared label */
 const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; tone?: "sage" | "terracotta" | "lavender" }) => {
@@ -721,7 +724,7 @@ const Journal = () => (
               </li>
             ))}
           </ul>
-          <Link to="/product"
+          <Link to="/journal"
             className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
             Discover the journal <ArrowRight size={13} />
           </Link>
@@ -818,48 +821,6 @@ const faqs = [
     a: "Almost never reliably. The external genitals are forming but it's usually too early to tell on a standard 12-week scan. Most people find out (if they want to) at the anomaly scan around 20 weeks, or via NIPT bloods earlier if available privately." },
 ];
 
-const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; defaultOpen?: boolean }) => {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border-b border-border/40 last:border-b-0">
-      <button onClick={() => setOpen(!open)}
-        className="w-full flex items-start gap-4 py-5 text-left group">
-        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-sage transition-colors leading-snug">
-          {faq.q}
-        </span>
-        <span className="w-7 h-7 rounded-full bg-sage-bg flex items-center justify-center text-sage shrink-0 mt-1">
-          {open ? <Minus size={13} /> : <Plus size={13} />}
-        </span>
-      </button>
-      {open && (
-        <p className="font-sans text-[14px] text-foreground/75 leading-[1.85] pb-6 pr-12">
-          {faq.a}
-        </p>
-      )}
-    </div>
-  );
-};
-
-const FAQ = () => (
-  <section className="bg-parchment-dark/40 py-16 md:py-24">
-    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-      <div className="mb-10 text-center">
-        <SectionLabel>Common questions</SectionLabel>
-        <h2 className="font-serif text-[1.85rem] sm:text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">
-          Common questions at 12 weeks
-        </h2>
-      </div>
-      <div className="bg-card rounded-3xl border border-border/40 shadow-card-brand p-2 md:p-4">
-        <div className="px-4 md:px-6">
-          {faqs.map((f, i) => (
-            <FAQRow key={f.q} faq={f} defaultOpen={i === 0} />
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 /* 17. NEXT */
 const Next = () => (
   <section className="bg-parchment py-16 md:py-24">
@@ -907,7 +868,8 @@ const Week12Page = () => (
     <ReflectionAsk />
     <Journal />
     <Related />
-    <FAQ />
+    <WeekCommonQuestions week={12} questions={buildWeekQuestions(12, faqs)} />
+    <WeekSources week={12} sources={getWeekSources(12)} />
     <Next />
     <Footer />
   </div>

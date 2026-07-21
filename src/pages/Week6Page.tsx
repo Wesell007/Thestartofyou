@@ -45,6 +45,9 @@ import emotionalImg from "@/assets/article-hero-emotional-first-tri.jpg";
 import testsScansImg from "@/assets/article-hero-tests-scans.jpg";
 import implantationBleedImg from "@/assets/article-hero-implantation-bleeding.jpg";
 import symptomsStoppingImg from "@/assets/article-hero-symptoms-stopping.jpg";
+import WeekCommonQuestions from "@/components/week/WeekCommonQuestions";
+import WeekSources from "@/components/week/WeekSources";
+import { buildWeekQuestions, getWeekSources } from "@/data/weekSupportContent";
 
 /* Shared label */
 const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; tone?: "sage" | "terracotta" | "lavender" }) => {
@@ -678,7 +681,7 @@ const Journal = () => (
               </li>
             ))}
           </ul>
-          <Link to="/product"
+          <Link to="/journal"
             className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3 font-sans text-[13.5px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors w-fit">
             Discover the journal <ArrowRight size={13} />
           </Link>
@@ -775,48 +778,6 @@ const faqs = [
     a: "Whatever stays down. The classic strategy is small, frequent snacks rather than big meals — an empty stomach makes nausea worse. Try a plain biscuit before sitting up in the morning, then nibble through the day on toast, crackers, plain pasta, fruit, ice lollies, ginger biscuits or ginger tea, mashed potato, cold cereal — whatever your body accepts. Cold food often smells less, which helps. Sip water in small amounts. If liquids won't stay down, please don't wait — call your GP. Your prenatal vitamin will cover the gaps in nutrition for now; the full balanced diet catches up later." },
 ];
 
-const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; defaultOpen?: boolean }) => {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border-b border-border/40 last:border-b-0">
-      <button onClick={() => setOpen(!open)}
-        className="w-full flex items-start gap-4 py-5 text-left group">
-        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-sage transition-colors leading-snug">
-          {faq.q}
-        </span>
-        <span className="w-7 h-7 rounded-full bg-sage-bg flex items-center justify-center text-sage shrink-0 mt-1">
-          {open ? <Minus size={13} /> : <Plus size={13} />}
-        </span>
-      </button>
-      {open && (
-        <p className="font-sans text-[14px] text-foreground/75 leading-[1.85] pb-6 pr-12">
-          {faq.a}
-        </p>
-      )}
-    </div>
-  );
-};
-
-const FAQ = () => (
-  <section className="bg-parchment-dark/40 py-16 md:py-24">
-    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-      <div className="mb-10 text-center">
-        <SectionLabel>Common questions</SectionLabel>
-        <h2 className="font-serif text-[1.85rem] sm:text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">
-          Common questions at 6 weeks
-        </h2>
-      </div>
-      <div className="bg-card rounded-3xl border border-border/40 shadow-card-brand p-2 md:p-4">
-        <div className="px-4 md:px-6">
-          {faqs.map((f, i) => (
-            <FAQRow key={f.q} faq={f} defaultOpen={i === 0} />
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 /* 16. NEXT */
 const Next = () => (
   <section className="bg-parchment py-16 md:py-24">
@@ -863,7 +824,8 @@ const Week6Page = () => (
     <ReflectionAsk />
     <Journal />
     <Related />
-    <FAQ />
+    <WeekCommonQuestions week={6} questions={buildWeekQuestions(6, faqs)} />
+    <WeekSources week={6} sources={getWeekSources(6)} />
     <Next />
     <Footer />
   </div>

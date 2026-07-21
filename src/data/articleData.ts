@@ -19485,6 +19485,3337 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── CAFFEINE IN PREGNANCY ────────────────────────────────────────────────
+  {
+    slug: "caffeine-in-pregnancy",
+    title: "Caffeine in pregnancy: how much is safe, and where it hides",
+    metaDescription: "How much caffeine is safe in pregnancy? UK guidance is 200mg a day. A calm look at where it comes from, why the limit exists, and how to cut down gently.",
+    quickAnswer:
+      "UK guidance is to keep caffeine to around 200mg a day in pregnancy, roughly two mugs of instant coffee, one mug of filter coffee, or four cups of tea. Caffeine also appears in green tea, cola, energy drinks, chocolate, and some cold and flu remedies. Small, mindful amounts are fine; the aim is a steady daily total, not perfection.",
+    howThisFeels: [
+      "Suddenly noticing how much caffeine is in ordinary things",
+      "Missing the ritual of a proper morning coffee",
+      "Worrying about a cup you had before you knew you were pregnant",
+      "Feeling unsure whether tea 'counts' or how much",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Caffeine crosses the placenta", body: "Your baby cannot metabolise caffeine as quickly as you can, so it stays in their system longer. Keeping intake modest gives their body less to process." },
+        { heading: "Higher intakes carry small added risks", body: "Studies link consistently high caffeine intakes to a slightly higher risk of low birth weight and miscarriage. The 200mg limit sits well below those thresholds with room to spare." },
+      ],
+      lessCauses: [
+        { heading: "Hidden sources add up", body: "Chocolate, cola, iced teas, pre-workout drinks, and some over-the-counter cold remedies all contribute. Totalling everything is more useful than counting cups." },
+      ],
+      whyItVaries: "Caffeine content varies enormously by brew strength, cup size, and brand. A single 'coffee' can range from 50mg to over 200mg.",
+    },
+    timing: {
+      whenStarts: "Guidance applies from the moment pregnancy is confirmed.",
+      whenEases: "The 200mg limit stays the same through all three trimesters. After birth, if you're breastfeeding, small amounts of caffeine still pass into milk, most babies tolerate it fine, but keeping it moderate can help sleep.",
+    },
+    whatItFeelsLike: ["A small daily loss of routine", "Occasional guilt about a stronger cup"],
+    whatThisMeans:
+      "The 200mg rule is a ceiling, not a target. Under it, you're within the range of what UK guidance considers safe.",
+    normal: [
+      "One or two caffeinated drinks a day, within the daily limit",
+      "Switching to decaf partway through the day",
+      "Occasionally having chocolate or a small cola",
+      "A day here or there of no caffeine at all",
+    ],
+    seekSupport: [
+      "Regular high caffeine intake you're finding hard to reduce",
+      "Reliance on energy drinks for daily energy",
+      "Caffeine paired with sleep problems, palpitations, or anxiety that feel unmanageable",
+    ],
+    disclaimer: "This is general guidance based on UK NHS and RCOG advice. Speak to your midwife if you have specific concerns about caffeine intake or pregnancy medicines that contain it.",
+    whatYouCanDo: [
+      { action: "Add up a normal day's intake, including hidden sources", reason: "Most people are surprised by where their caffeine actually comes from." },
+      { action: "Swap one caffeinated drink for a decaf or herbal option", reason: "Gentle, gradual reduction tends to work better than going cold-turkey." },
+      { action: "Choose smaller cups or weaker brews", reason: "A short filter coffee can hold far less caffeine than a large latte." },
+      { action: "Check any cold, flu, or pain relief for caffeine", reason: "Some over-the-counter medicines add a surprising amount." },
+    ],
+    whatHappensNext: "Most people settle into a slightly lower, steadier caffeine pattern that feels sustainable through pregnancy.",
+    relatedStage: {
+      intro: "Caffeine sits inside the wider picture of eating and drinking in pregnancy:",
+      links: [
+        { label: "Diet and exercise in pregnancy", href: "/pregnancy/diet-and-exercise", context: "The wider topic this article belongs to." },
+        { label: "Hydration in pregnancy", href: "/articles/hydration-in-pregnancy", context: "The other side of what you drink day to day." },
+        { label: "Foods to avoid in pregnancy", href: "/articles/foods-to-avoid-in-pregnancy", context: "The wider list of what to be careful with." },
+      ],
+    },
+    aiPrompts: [
+      "Is 200mg of caffeine a day safe in pregnancy?",
+      "How much caffeine is in a cup of tea vs coffee?",
+      "I had a strong coffee before I knew I was pregnant, is that okay?",
+    ],
+    captureIntro: "Small daily habits like caffeine can quietly become a source of worry. Worth noting how it feels for you.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["hydration-in-pregnancy", "foods-to-avoid-in-pregnancy", "eating-well-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["diet"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "UK guidance is up to 200mg of caffeine a day in pregnancy",
+      "That's roughly two mugs of instant coffee, one filter coffee, or four cups of tea",
+      "Caffeine hides in green tea, cola, chocolate, energy drinks, and some medicines",
+      "Small amounts are fine; the daily total matters more than any single cup",
+      "Cutting down gradually tends to be easier than stopping suddenly",
+    ],
+    sources: [
+      "NHS, Foods to avoid in pregnancy",
+      "RCOG, Healthy eating and vitamin supplements in pregnancy",
+      "British Nutrition Foundation, Nutrition during pregnancy",
+      "Food Standards Agency, Caffeine and pregnancy",
+    ],
+    faq: [
+      { question: "How much caffeine is in a normal cup of coffee?", answer: "A mug of instant coffee has around 100mg. A mug of filter coffee can have 140mg or more. A small espresso shot has around 60mg. Sizes vary by cafe and brand, so a large latte can easily be 150 to 200mg on its own." },
+      { question: "Does decaf count towards the limit?", answer: "Decaf still contains a very small amount of caffeine, usually 2 to 5mg per cup, but this doesn't meaningfully add to your daily total. Decaf is a good way to keep the ritual without the caffeine." },
+      { question: "What about green tea?", answer: "Green tea does contain caffeine, roughly 30 to 50mg a cup. It counts towards your daily 200mg. High intakes of green tea may also affect folate absorption, so keeping it modest is sensible in the first trimester." },
+      { question: "I had strong coffee before I knew I was pregnant, should I worry?", answer: "No. Occasional exposure before you knew, or one stronger cup on any given day, is not linked to any specific harm. What matters is your ongoing daily average from here." },
+    ],
+    topic: "diet-and-exercise",
+    standfirst: "How much caffeine is really safe in pregnancy, where it hides, and a gentle way to bring your daily total inside the UK limit.",
+    editorialSections: [
+      {
+        id: "the-uk-limit",
+        heading: "The 200mg daily limit and why it exists",
+        lead: "UK guidance sits at 200mg a day. That's a ceiling, not a target, and there's real room inside it.",
+        paragraphs: [
+          "The 200mg guidance is based on studies linking higher caffeine intakes to a small increase in the risk of low birth weight and miscarriage. Under 200mg a day, evidence of harm becomes very hard to see, which is why the NHS, RCOG, and Food Standards Agency all converge on that number.",
+          "Because your baby can't process caffeine as quickly as you can, keeping the daily total modest gives their system less to handle. This is about steady, low-level exposure rather than one perfect day.",
+        ],
+        callout: {
+          tone: "info",
+          text: "The limit is the same across all three trimesters. It doesn't tighten in the third trimester or loosen in the second.",
+        },
+      },
+      {
+        id: "where-caffeine-lives",
+        heading: "Where caffeine actually lives",
+        lead: "Most people underestimate how much caffeine is in a normal day.",
+        paragraphs: [
+          "Rough guide, per cup or serving: instant coffee 100mg, filter coffee 140mg, espresso 60mg, tea 75mg, green tea 30 to 50mg, cola 40mg, energy drinks 80mg or more, plain dark chocolate around 25mg per 50g bar.",
+          "Cold and flu remedies, headache tablets, and pre-workout drinks can add a surprising amount. Always check the label before taking anything new in pregnancy, see medicines in pregnancy for more.",
+        ],
+      },
+      {
+        id: "gentle-reduction",
+        heading: "A gentle way to cut down",
+        lead: "Reducing caffeine works better in small, steady steps than in a single dramatic change.",
+        paragraphs: [
+          "Start by adding up an honest normal day, every drink, every square of chocolate, every tablet. Most people find they're either well under, or well over, what they'd guessed.",
+          "If you're over, swap one caffeinated drink a day for a decaf or herbal alternative. Keep the ritual (the mug, the pause, the milk) so it still feels like the drink you wanted. Weekly, not daily, changes tend to stick.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Withdrawal headaches are common when cutting caffeine quickly. Reducing over a week or two, rather than stopping suddenly, is much kinder to your head.",
+        },
+      },
+      {
+        id: "already-had-some",
+        heading: "If you've already had more than the limit",
+        lead: "A one-off higher intake, especially before you knew you were pregnant, is not linked to any specific harm.",
+        paragraphs: [
+          "The 200mg guidance is about ongoing daily average. One day of two large lattes doesn't undo a pregnancy. What matters is the pattern from here, bringing things down to a steady low, not perfect.",
+          "If your usual intake has been much higher, reducing gradually now is worth doing. Speak to your midwife if you're relying on caffeine to manage fatigue that feels unmanageable, or if energy drinks have become a daily habit.",
+        ],
+      },
+    ],
+  },
+
+  // ─── HYDRATION IN PREGNANCY ───────────────────────────────────────────────
+  {
+    slug: "hydration-in-pregnancy",
+    title: "Hydration in pregnancy: why fluids matter and how much to aim for",
+    metaDescription: "How much water in pregnancy? Around 8-10 cups (2-2.5 litres) a day. A calm guide to hydration cues, managing nausea, and drinks that count.",
+    quickAnswer:
+      "In pregnancy, aim for roughly 2 to 2.5 litres of fluid a day, around 8 to 10 cups. Water is the most efficient, but milk, decaf drinks, herbal teas, and water-rich foods all count. Steady sipping through the day works better than trying to catch up in the evening. Thirst, headaches, and dark urine are usually the first cues you need more.",
+    howThisFeels: [
+      "Realising you've barely had a glass of water all morning",
+      "Feeling thirsty in a way you haven't before",
+      "Wondering whether tea and squash 'count'",
+      "Trying to drink more without triggering constant trips to the loo",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Higher blood volume", body: "Your blood volume increases by around 40-50% in pregnancy. That extra fluid has to come from somewhere, so your baseline need is genuinely higher." },
+        { heading: "The amniotic fluid around your baby", body: "Amniotic fluid is renewed constantly and depends on your hydration. Staying well-hydrated supports healthy amniotic fluid volume." },
+      ],
+      lessCauses: [
+        { heading: "Nausea can make drinking feel harder", body: "First-trimester nausea sometimes makes plain water taste wrong. Cold, fizzy, or flavoured drinks often feel easier." },
+        { heading: "Warm weather and exercise raise the need further", body: "You may need an extra 500ml on hot days or after any real activity." },
+      ],
+      whyItVaries: "How much fluid you need varies by body size, climate, activity, and what you're eating. Fruit, veg, and soups all contribute.",
+    },
+    timing: {
+      whenStarts: "Hydration matters from the earliest weeks, and needs rise gently as pregnancy progresses.",
+      whenPeaks: "The third trimester tends to be when hydration matters most, for blood volume, amniotic fluid, and heat regulation.",
+      whenEases: "After birth, needs stay high, especially if you're breastfeeding.",
+    },
+    whatItFeelsLike: ["A dry mouth or lips", "A dull headache in the afternoon", "Dark, strong-smelling urine", "Occasional dizziness on standing"],
+    whatThisMeans:
+      "Good hydration is one of the simplest, most effective things you can do to feel better in pregnancy. Fatigue, headaches, constipation, and Braxton Hicks all ease with steady fluids.",
+    normal: [
+      "Passing pale-straw coloured urine several times a day",
+      "Needing to wee more often than usual, especially in the first and third trimesters",
+      "Feeling thirstier than you're used to",
+      "Waking once in the night for the loo",
+    ],
+    seekSupport: [
+      "Being unable to keep fluids down for more than a day",
+      "Very dark urine paired with dizziness or a fast heartbeat",
+      "Significant swelling that appears suddenly (with hydration guidance ask about pre-eclampsia)",
+      "Persistent headaches that don't ease with fluids and rest",
+    ],
+    disclaimer: "This is general guidance. If you have kidney concerns, hyperemesis, or other conditions affecting fluid balance, follow your clinician's advice.",
+    whatYouCanDo: [
+      { action: "Keep a water bottle in easy sight all day", reason: "Steady sipping is much more effective than trying to catch up later." },
+      { action: "Have a glass by the bed and one by the kettle", reason: "Anchoring water to existing habits makes it happen without thinking." },
+      { action: "Try cold, fizzy, or flavoured water if plain water is hard", reason: "In nausea-heavy weeks, the texture and temperature can make more difference than the drink itself." },
+      { action: "Include water-rich foods", reason: "Soup, yoghurt, cucumber, tomatoes, and fruit all top up your fluid intake." },
+    ],
+    whatHappensNext: "Most people settle into a hydration rhythm that feels sustainable. Aim for pale-straw urine as your simplest daily check.",
+    relatedStage: {
+      intro: "Hydration connects to several other parts of pregnancy care:",
+      links: [
+        { label: "Diet and exercise in pregnancy", href: "/pregnancy/diet-and-exercise", context: "The wider topic this article belongs to." },
+        { label: "Caffeine in pregnancy", href: "/articles/caffeine-in-pregnancy", context: "The other side of daily drinks." },
+        { label: "Constipation in pregnancy", href: "/articles/constipation-in-pregnancy", context: "One of the first things hydration helps with." },
+      ],
+    },
+    aiPrompts: [
+      "How much water should I drink a day in pregnancy?",
+      "I keep forgetting to drink, any tips?",
+      "Do tea and milk count towards hydration?",
+    ],
+    captureIntro: "Hydration is quiet work but it shapes how a day feels. Worth noting when it slips.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["caffeine-in-pregnancy", "constipation-in-pregnancy", "eating-well-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["diet"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "Aim for 2-2.5 litres of fluid a day, roughly 8-10 cups",
+      "Water is best, but milk, decaf drinks, and water-rich foods all count",
+      "Steady sipping through the day works better than catching up in the evening",
+      "Pale-straw urine is the simplest sign you're hydrated enough",
+      "Cold, fizzy, or flavoured drinks can help when plain water feels difficult",
+    ],
+    sources: [
+      "NHS, Drinks and cups for babies (adjacent hydration guidance)",
+      "NHS, Have a healthy diet in pregnancy",
+      "British Nutrition Foundation, Hydration",
+      "European Food Safety Authority, Dietary reference values for water",
+    ],
+    faq: [
+      { question: "Does tea count towards my daily fluid?", answer: "Yes. Caffeinated tea still contributes to your hydration, the diuretic effect is modest and doesn't cancel out the fluid. Just watch your total caffeine (keep under 200mg a day)." },
+      { question: "Is it possible to drink too much water in pregnancy?", answer: "Very rarely, in extreme circumstances (litres above the guidance). For almost everyone the challenge is drinking enough, not too much. If your urine is repeatedly completely clear, you can ease back slightly." },
+      { question: "Why am I so thirsty in the third trimester?", answer: "Blood volume is at its peak, amniotic fluid needs are highest, and your body works harder to regulate temperature. Increased thirst is expected, it's a helpful cue rather than a worry." },
+      { question: "I can't stop weeing, should I drink less?", answer: "Not usually. Frequent urination in pregnancy is mostly hormonal and physical (the uterus pressing on the bladder), not because you're overdrinking. Reducing fluid tends to leave you dehydrated and dizzy instead." },
+    ],
+    topic: "diet-and-exercise",
+    standfirst: "Steady fluids do more for a pregnancy day than most single foods can. A gentle look at how much, what counts, and when to reach for something other than water.",
+    editorialSections: [
+      {
+        id: "why-hydration-matters",
+        heading: "Why hydration matters more in pregnancy",
+        lead: "Pregnancy raises your fluid needs across the board, for blood volume, the amniotic fluid around your baby, and everyday regulation.",
+        paragraphs: [
+          "Your blood volume increases by 40-50% during pregnancy, which is one of the reasons hydration needs rise. Amniotic fluid is renewed constantly and depends on your daily intake. Digestion, kidney function, and temperature regulation all lean on water too.",
+          "Being well-hydrated helps with several ordinary pregnancy discomforts: constipation, headaches, tiredness, and Braxton Hicks contractions all improve when fluids are steady. It's not a cure for anything, but it consistently helps.",
+        ],
+      },
+      {
+        id: "how-much-to-aim-for",
+        heading: "How much to actually aim for",
+        lead: "Around 2 to 2.5 litres a day is the useful target, with room to move for climate, activity, and body size.",
+        paragraphs: [
+          "That's roughly 8 to 10 mugs or glasses. It doesn't all need to be water. Milk, decaf coffee and tea, herbal infusions, fruit juice (in moderation), soups, and water-rich foods like cucumber, melon, tomatoes and yoghurt all contribute.",
+          "On hot days, after exercise, or when you've been vomiting, add an extra 500ml or so. If you're carrying twins or higher-order multiples, aim slightly higher across the day.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Your urine colour is the simplest live check. Pale straw is well-hydrated. Dark yellow means you need more.",
+        },
+      },
+      {
+        id: "when-water-feels-hard",
+        heading: "When plain water feels hard",
+        lead: "First-trimester nausea can turn water into one of the worst-tasting things in the fridge. There are workarounds.",
+        paragraphs: [
+          "Try cold, fizzy, or flavoured options, sparkling water with a squeeze of lemon or lime, ice-cold water with cucumber, weak squash. Ice lollies and jelly count. Watermelon, oranges, cucumber, and yoghurt all deliver fluid alongside food.",
+          "Small, frequent sips work better than large drinks when nausea is high. If you're struggling to keep any fluids down at all for more than a day, speak to your midwife or GP, persistent vomiting in pregnancy can need medical support.",
+        ],
+      },
+      {
+        id: "building-the-habit",
+        heading: "How to make it happen without thinking",
+        lead: "Hydration in pregnancy is more about environment than willpower.",
+        paragraphs: [
+          "Keep a water bottle within reach at all times, by the bed, on your desk, in your bag, in the kitchen. Anchor drinks to existing habits: a glass before every meal, one when the kettle boils, one on the walk between rooms.",
+          "Set a soft target rather than a strict one. Two large water bottles across a day, for example, is easier to track than counting individual glasses. Milk with cereal, a cup of tea, a soup at lunch, they all move you closer.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "You don't need to overhaul your day. Adding one extra drink at a habit you already have (like the morning kettle) is often enough.",
+        },
+      },
+      {
+        id: "when-to-check-in",
+        heading: "When to check in with your midwife",
+        lead: "Most hydration questions in pregnancy sit inside normal daily life. A few are worth flagging.",
+        paragraphs: [
+          "Speak to your midwife or GP if you can't keep fluids down for more than a day, if you're passing very dark urine alongside dizziness or a rapid heartbeat, or if sudden swelling appears in your face, hands, or feet with persistent headaches. Sudden swelling with headache and visual changes is a specific pre-eclampsia signal that needs same-day review.",
+          "Pre-existing conditions, kidney issues, hyperemesis, gestational diabetes, can change what hydration should look like for you. Personal advice from your team always overrides general guidance.",
+        ],
+      },
+    ],
+  },
+
+  // ─── CRAVINGS AND AVERSIONS IN PREGNANCY ──────────────────────────────────
+  {
+    slug: "cravings-and-aversions-in-pregnancy",
+    title: "Cravings and aversions in pregnancy: why they happen and how to cope",
+    metaDescription: "Why do pregnancy cravings and aversions happen? A calm, non-judgemental look at the hormonal reasons and how to eat through them without guilt.",
+    quickAnswer:
+      "Cravings and food aversions in pregnancy are common, usually hormonal, and don't mean anything is wrong. They tend to be strongest in the first trimester when hormone levels shift most sharply, and often ease in the second. Responding to cravings in moderation, and working around aversions rather than fighting them, tends to work better than trying to eat 'perfectly'.",
+    howThisFeels: [
+      "Suddenly wanting a food you never eat",
+      "Being unable to face something you normally love",
+      "Feeling embarrassed about the strength of a craving",
+      "Worrying that aversions mean you're not eating enough",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Hormonal shifts, especially hCG and oestrogen", body: "Rising pregnancy hormones change how your brain processes smell, taste, and reward, which is why familiar foods can suddenly repel or attract you." },
+        { heading: "Heightened sense of smell", body: "Many people develop a much sharper sense of smell in early pregnancy. This magnifies aversions and can trigger nausea before you've even eaten." },
+      ],
+      lessCauses: [
+        { heading: "Nutrient association, sometimes", body: "There's a longstanding folk belief that cravings signal deficiencies. Evidence for this is weak, most cravings are hormonal and psychological rather than nutritional." },
+      ],
+      whyItVaries: "Cravings and aversions vary between people and between pregnancies. What happened last time doesn't predict what happens now.",
+    },
+    timing: {
+      whenStarts: "Often noticeable from around 5-6 weeks, alongside the first hormonal changes.",
+      whenPeaks: "Usually strongest in the first trimester, especially weeks 8-12.",
+      whenEases: "For most people, cravings and aversions ease significantly in the second trimester, though some carry through to birth.",
+    },
+    whatItFeelsLike: ["A specific, urgent want for one food", "Nausea at the smell of things you used to love", "Feeling almost obsessive about a particular taste", "Guilt about not eating 'balanced' meals"],
+    whatThisMeans:
+      "Cravings and aversions are a normal part of pregnancy, not a sign of anything wrong, and rarely a signal of a specific need.",
+    normal: [
+      "Wanting something sweet, salty, sour, or specific",
+      "Being unable to face meat, coffee, eggs, or previously loved foods",
+      "Aversions that shift week to week",
+      "Occasional cravings for combinations that sound odd",
+    ],
+    seekSupport: [
+      "Craving non-food items, ice in large amounts, chalk, soil, laundry starch (called pica), which can signal iron or zinc deficiency",
+      "Aversions so severe you can barely eat for days",
+      "Weight loss beyond the first weeks",
+      "Cravings tied to feelings of loss of control around food that echo previous eating difficulties",
+    ],
+    disclaimer: "This is general guidance. Speak to your midwife if cravings or aversions are severely affecting your eating, or if you're craving non-food items.",
+    whatYouCanDo: [
+      { action: "Follow moderate cravings without guilt", reason: "Enjoying a wanted food usually costs nothing and often helps you eat overall." },
+      { action: "Work around aversions rather than through them", reason: "Substitute foods that offer similar nutrition, plant protein for meat, cold food for hot, sweet fruit for veg." },
+      { action: "Manage smell triggers where you can", reason: "Cold food smells less than hot; someone else cooking, or eating out, sometimes breaks a persistent aversion." },
+      { action: "Tell your midwife if you're craving non-food items", reason: "Pica can be a sign of low iron or zinc and is worth a simple blood test." },
+    ],
+    whatHappensNext: "Most people find cravings and aversions settle by around 14-16 weeks. If they persist and are affecting how much you can eat, it's worth flagging.",
+    relatedStage: {
+      intro: "Cravings sit alongside other early-pregnancy eating questions:",
+      links: [
+        { label: "Diet and exercise in pregnancy", href: "/pregnancy/diet-and-exercise", context: "The wider topic this article belongs to." },
+        { label: "When you can't face food in pregnancy", href: "/articles/when-you-cant-face-food-in-pregnancy", context: "For the harder end of aversions and low appetite." },
+        { label: "Complete guide to morning sickness", href: "/articles/complete-guide-morning-sickness", context: "How aversions and nausea interlink." },
+      ],
+    },
+    aiPrompts: [
+      "Are pregnancy cravings a sign of a deficiency?",
+      "How do I cope with a food aversion?",
+      "Is it okay to give in to my cravings?",
+    ],
+    captureIntro: "Cravings and aversions can quietly reshape a week. Worth noting what's shifting.",
+    trimester: [1, 2],
+    relatedSlugs: ["when-you-cant-face-food-in-pregnancy", "complete-guide-morning-sickness", "eating-well-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["diet"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "Cravings and aversions in pregnancy are common and usually hormonal",
+      "They rarely signal a specific nutrient need, most are hormonal or psychological",
+      "First trimester tends to be strongest; the second usually eases significantly",
+      "Responding to moderate cravings is fine and often helps overall eating",
+      "Craving non-food items (pica) is worth mentioning to your midwife",
+    ],
+    sources: [
+      "NHS, Common health problems in pregnancy",
+      "British Nutrition Foundation, Nutrition during pregnancy",
+      "RCOG, Pregnancy information",
+      "NICE, Antenatal care guidance",
+    ],
+    faq: [
+      { question: "Do cravings mean my body needs something?", answer: "Rarely, in the direct sense that folk wisdom suggests. Craving red meat doesn't confirm you're low in iron, and craving ice doesn't confirm anything on its own. Most cravings are hormonal shifts and reward-pathway changes. That said, cravings for non-food items (pica) are worth a blood test." },
+      { question: "Is it okay to give in to sweet or fast-food cravings?", answer: "In moderation, yes. A wanted meal you can actually eat is usually better than a 'balanced' one you push away. The overall shape of your week matters more than any single meal. If you notice cravings crowding out other food entirely, that's worth thinking about." },
+      { question: "How long do aversions last?", answer: "For most people, aversions are strongest in the first trimester and ease significantly by 14-16 weeks. A small number of aversions carry through pregnancy, coffee, meat, and eggs are the most commonly persistent." },
+      { question: "What is pica, and should I worry?", answer: "Pica is the craving for non-food items like ice, chalk, soil, or laundry starch. It can be a sign of iron or zinc deficiency and is worth mentioning to your midwife. A simple blood test can check, and treating the underlying deficiency usually resolves it." },
+    ],
+    topic: "diet-and-exercise",
+    standfirst: "Cravings and aversions are one of pregnancy's stranger features. Why they happen, why they aren't a moral test, and how to eat around them.",
+    editorialSections: [
+      {
+        id: "why-they-happen",
+        heading: "Why cravings and aversions happen",
+        lead: "The short answer is hormones. The longer answer is hormones, smell, and how your brain's reward pathways rewire in early pregnancy.",
+        paragraphs: [
+          "Rising hCG and oestrogen in the first trimester change how you experience taste and smell. Many people develop a noticeably sharper sense of smell, helpful once, evolutionarily, for avoiding spoiled or risky food, but often overwhelming in a modern kitchen.",
+          "At the same time, the brain's reward system responds differently. Foods that used to feel neutral can suddenly feel wanted or repellent. This is not a sign of anything wrong, and it isn't a moral test.",
+        ],
+      },
+      {
+        id: "cravings-and-deficiency",
+        heading: "Do cravings really signal what your body needs?",
+        lead: "Mostly not, despite what folk wisdom suggests.",
+        paragraphs: [
+          "The idea that craving red meat means low iron, or craving oranges means low vitamin C, is charming but not well-supported. Studies looking at cravings against blood tests rarely find a clean link. Cravings are much more likely to be hormonal and reward-pathway shifts than nutrient calls.",
+          "There is one exception worth knowing about: pica. Cravings for non-food items, ice in large amounts, chalk, clay, soil, laundry starch, can genuinely signal iron or zinc deficiency. Mention it to your midwife and a simple blood test can check.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Craving unusual food combinations is common and safe. Craving non-food items (pica) is worth a conversation with your midwife.",
+        },
+      },
+      {
+        id: "coping-with-aversions",
+        heading: "Coping with aversions",
+        lead: "Aversions can quietly narrow what you eat. Working around them, rather than pushing through, tends to work best.",
+        paragraphs: [
+          "If meat has become impossible, plant proteins (beans, lentils, tofu, eggs if you can face them, dairy, nuts) can fill the same role. If hot food smells trigger nausea, cold food smells much less, sandwiches, salads, yoghurt bowls, cheese and crackers. If vegetables have become difficult, fruit and smoothies count too.",
+          "Someone else cooking, eating out, or eating in a different room from where food was prepared can all break a persistent aversion. Trying a food again in a week or two often works, even when it felt impossible before.",
+        ],
+      },
+      {
+        id: "eating-through-cravings",
+        heading: "Eating through cravings without guilt",
+        lead: "A wanted meal you can actually eat is worth more than a 'balanced' meal you push away.",
+        paragraphs: [
+          "Moderate cravings, a specific meal, a favourite snack, something you're suddenly obsessed with, are safe to follow. If a bowl of cereal, a slice of toast, or a specific takeaway is what you can face on a given day, that's what you eat. Pregnancy is not the time to be strict.",
+          "The shape of a week matters more than the shape of a meal. If cravings are crowding out other food entirely, or if you're eating in a way that feels out of control in a familiar-from-before way, that's a signal to talk to your midwife or GP, not because craving is wrong, but because support is available.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "You are not failing at pregnancy nutrition by having cravings or aversions. They are a normal, expected part of a normal, healthy pregnancy.",
+        },
+      },
+      {
+        id: "when-it-eases",
+        heading: "When cravings and aversions ease",
+        lead: "For most people, the second trimester quietly resets appetite.",
+        paragraphs: [
+          "Cravings and aversions usually settle by around 14-16 weeks as first-trimester hormones stabilise. Some aversions carry longer, coffee, red meat, and eggs are common ones, and a smaller number persist to birth.",
+          "If aversions are still severely limiting what you can eat by the second trimester, or if you're losing weight, mention it at your next appointment. Nutrition support is a normal part of antenatal care.",
+        ],
+      },
+    ],
+  },
+
+  // ─── PELVIC FLOOR EXERCISES IN PREGNANCY ──────────────────────────────────
+  {
+    slug: "pelvic-floor-exercises-in-pregnancy",
+    title: "Pelvic floor exercises in pregnancy: a gentle, useful guide",
+    metaDescription: "How and when to do pelvic floor exercises in pregnancy. A calm guide to what they are, how to do them, and when to see a women's health physio.",
+    quickAnswer:
+      "Pelvic floor exercises in pregnancy help support your growing uterus, reduce the chance of leaks, and speed recovery after birth. Aim for a mix of short 'quick' squeezes and longer 'hold' squeezes, done a few times a day. It's never too late to start, even a few weeks of practice helps.",
+    howThisFeels: [
+      "Not being quite sure whether you're doing them right",
+      "Forgetting until you notice a leak",
+      "Wondering if it's too late to start",
+      "Being told 'just do your pelvic floors' without any real explanation",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "The pelvic floor takes more load in pregnancy", body: "Your pelvic floor muscles support the uterus, bladder, and bowel. Pregnancy adds weight and hormonal softening (relaxin), which asks more of them." },
+        { heading: "Small leaks are common", body: "Around a third of pregnant people experience some urinary leakage, especially in the third trimester when the baby sits low." },
+      ],
+      lessCauses: [
+        { heading: "Pre-existing pelvic floor weakness", body: "Previous pregnancies, births, chronic constipation, or high-impact exercise history can all mean the pelvic floor starts pregnancy already less strong." },
+      ],
+      whyItVaries: "Pelvic floor strength varies hugely between people. Some notice nothing throughout pregnancy; others feel changes early. Neither is a problem.",
+    },
+    timing: {
+      whenStarts: "You can start pelvic floor exercises at any point in pregnancy, the earlier, the better, but any time is worth it.",
+      whenPeaks: "Third trimester is often when pelvic floor demands are highest and when good muscle awareness helps most.",
+      whenEases: "After birth, pelvic floor exercises restart gently within days and become a longer-term habit. Most physios recommend continuing them for life.",
+    },
+    whatItFeelsLike: ["A gentle lift and squeeze in the muscles you'd use to stop a wee", "Nothing at all, when you're doing them right, no visible movement outside", "A small effort that shouldn't leave you tense elsewhere"],
+    whatThisMeans:
+      "Pelvic floor exercises are one of the highest-return, lowest-effort things you can do in pregnancy, for how you feel now and for recovery afterwards.",
+    normal: [
+      "Occasional small leaks when coughing, sneezing, or laughing",
+      "Feeling heavy or pressured low down, especially in the third trimester",
+      "Some sensations of your baby sitting deeper as pregnancy progresses",
+    ],
+    seekSupport: [
+      "Persistent, frequent leaks that are affecting your daily life",
+      "A dragging or bulging sensation that feels like something is coming down",
+      "Pelvic pain that limits movement (see pelvic girdle pain)",
+      "Being unable to identify or engage the pelvic floor muscles at all",
+    ],
+    disclaimer: "This is general guidance. A specialist women's health physio can assess and personalise pelvic floor work, ask your midwife or GP for a referral if you're struggling, and consider a private appointment if NHS waits are long.",
+    whatYouCanDo: [
+      { action: "Anchor exercises to a daily habit", reason: "Doing them while brushing teeth, waiting for the kettle, or on the school run turns intention into practice." },
+      { action: "Do a mix of quick squeezes and longer holds", reason: "Both fast-twitch and slow-twitch muscle work matter for continence and support." },
+      { action: "Notice, but don't tense, the muscles around them", reason: "The pelvic floor should engage on its own. Squeezing your bum, thighs, or stomach hard means you're compensating." },
+      { action: "See a women's health physio if leaks or heaviness persist", reason: "Personalised assessment is far more effective than generic advice." },
+    ],
+    whatHappensNext: "Pelvic floor work continues after birth. Starting now makes postnatal recovery meaningfully easier.",
+    relatedStage: {
+      intro: "Pelvic floor exercises connect to several other parts of pregnancy care:",
+      links: [
+        { label: "Diet and exercise in pregnancy", href: "/pregnancy/diet-and-exercise", context: "The wider topic this article belongs to." },
+        { label: "Moving your body in pregnancy", href: "/articles/moving-your-body-in-pregnancy", context: "How pelvic floor work fits alongside wider exercise." },
+        { label: "Pelvic pain in pregnancy", href: "/articles/pelvic-pain-in-pregnancy", context: "When to think beyond pelvic floor exercises alone." },
+      ],
+    },
+    aiPrompts: [
+      "How do I do pelvic floor exercises correctly?",
+      "Is it too late to start pelvic floor exercises in pregnancy?",
+      "Should I see a women's health physio?",
+    ],
+    captureIntro: "Pelvic floor work is easy to forget until you notice a leak. Worth noting how it's tracking.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["moving-your-body-in-pregnancy", "pelvic-pain-in-pregnancy", "exercise-safety-by-trimester"],
+    journey: ["pregnancy"],
+    topics: ["diet", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "Pelvic floor exercises support your uterus, bladder, and bowel through pregnancy",
+      "They meaningfully reduce leaks now and speed postnatal recovery",
+      "Do a mix of quick squeezes and longer holds, a few times a day",
+      "Anchor them to a daily habit so they actually happen",
+      "See a women's health physio if leaks, heaviness, or dragging persist",
+    ],
+    sources: [
+      "NHS, Your pregnancy and baby guide: pelvic floor exercises",
+      "POGP (Pelvic, Obstetric and Gynaecological Physiotherapy), Fit for pregnancy",
+      "RCOG, Physical activity and pregnancy",
+      "NICE, Postnatal care guidance",
+    ],
+    faq: [
+      { question: "How do I know I'm doing them right?", answer: "Imagine you're trying to stop passing wind and stop a wee at the same time. That gentle inner lift and squeeze is the pelvic floor. There should be no visible outward movement, no held breath, no clenched jaw, no squeezed bum. If you're not sure, a women's health physio can check with a proper assessment." },
+      { question: "How many should I do?", answer: "A useful daily target is around 10 quick squeezes (a second on, a second off) and 10 longer holds (5-10 seconds each), done 3 times a day. Little and often works better than one long session." },
+      { question: "Is it too late to start in the third trimester?", answer: "No. Even a few weeks of regular practice before birth helps with recovery afterwards. Starting late is far better than not starting at all." },
+      { question: "When should I see a physio?", answer: "Ask your midwife or GP for a referral to a women's health (pelvic health) physio if you have persistent leaks, a dragging or bulging feeling, pelvic pain, or if you simply can't identify the muscles. NHS waits can be long, private appointments are often 60-90 minutes and can be very useful even as a one-off." },
+    ],
+    topic: "diet-and-exercise",
+    standfirst: "Pelvic floor exercises are simple, quiet, and one of the highest-return things you can do in pregnancy. A calm guide to what they are and how to make them stick.",
+    editorialSections: [
+      {
+        id: "what-the-pelvic-floor-does",
+        heading: "What the pelvic floor actually does",
+        lead: "The pelvic floor is a hammock of muscles slung between your pubic bone at the front and your tailbone at the back.",
+        paragraphs: [
+          "It supports the uterus, bladder, and bowel, and it wraps around the openings, urethra, vagina, and anus, giving you control over what stays in and what comes out. In pregnancy, it takes on the extra weight of a growing baby, all while pregnancy hormone relaxin softens surrounding ligaments.",
+          "That's why leaks, heaviness, and awareness of your pelvic floor often show up in pregnancy for the first time. It's not a fault; it's the muscles doing more work than before.",
+        ],
+      },
+      {
+        id: "how-to-do-them",
+        heading: "How to actually do them",
+        lead: "The mechanics are simple, but easy to get subtly wrong.",
+        paragraphs: [
+          "Imagine you're trying to stop passing wind and stop the flow of a wee at the same time. That gentle inward and upward lift is the pelvic floor. From the outside there should be nothing to see, no clenched bum, no held breath, no tensed stomach. Just an inner squeeze and lift.",
+          "Do a mix: fast squeezes (a second on, a second off, about 10 of them) for quick reflex strength, and long holds (5-10 seconds each, 10 of them) for sustained support. Aim for three sessions across the day. It takes under two minutes.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If you can't feel the muscles engaging, or if you're bearing down instead of lifting, a women's health physio can help you find them properly. A single appointment often solves it.",
+        },
+      },
+      {
+        id: "making-it-stick",
+        heading: "Making the habit stick",
+        lead: "Pelvic floor exercises fail on memory, not effort.",
+        paragraphs: [
+          "Anchor them to something you already do every day, brushing teeth, boiling the kettle, sitting at a red light, feeding the cat, waiting for a lift. Habit-stacked exercises get done. Diarised ones often don't.",
+          "Apps can help if you like a nudge. NHS Squeezy is the most widely recommended in the UK. But a phone reminder three times a day works just as well.",
+        ],
+      },
+      {
+        id: "when-to-see-a-physio",
+        heading: "When to see a women's health physio",
+        lead: "Pelvic floor exercises alone don't solve everything. Sometimes personalised support is what you actually need.",
+        paragraphs: [
+          "Speak to your midwife or GP about a referral to a women's health (pelvic health) physiotherapist if leaks are frequent and affecting daily life, if you feel dragging or bulging low down, if you can't identify the muscles at all, or if you have pelvic pain that limits movement.",
+          "NHS waits can be long. If you can access a private appointment, a one-off 60-90 minute assessment is often transformative, you learn what's actually happening in your pelvic floor and get exercises calibrated to you. Many are covered by health insurance.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Leaks and pelvic floor changes in pregnancy are extremely common. Support exists and works. Waiting quietly is not the only option.",
+        },
+      },
+      {
+        id: "after-birth",
+        heading: "What happens after birth",
+        lead: "Pelvic floor exercises don't stop at birth. They restart, gently, within days.",
+        paragraphs: [
+          "In the first week after any birth (vaginal or caesarean), starting gentle pelvic floor squeezes as soon as it feels possible helps circulation, healing, and long-term recovery. It doesn't need to be intense.",
+          "Everyone in the UK is entitled to a 6-8 week postnatal check with their GP, and any pelvic floor concerns should be raised there. A pelvic health physio referral is a normal, useful next step if things aren't settling.",
+        ],
+      },
+    ],
+  },
+
+  // ─── EXERCISE SAFETY BY TRIMESTER ─────────────────────────────────────────
+  {
+    slug: "exercise-safety-by-trimester",
+    title: "Exercise safety by trimester: what to adapt and when",
+    metaDescription: "How exercise in pregnancy changes across the trimesters. Calm, practical guidance on what's usually safe, what to adapt, and warning signs to know.",
+    quickAnswer:
+      "Most people can safely continue moderate exercise throughout pregnancy, with some adaptations along the way. The first trimester is often about doing less because of tiredness; the second is usually the easiest; the third calls for gentler, lower-impact movement. Stop and check with a clinician if you have bleeding, severe pain, dizziness, or reduced fetal movement.",
+    howThisFeels: [
+      "Wanting to keep exercising but not wanting to overdo it",
+      "Losing energy for workouts you used to love",
+      "Wondering whether a particular class is still okay",
+      "Feeling nervous about what warning signs to look for",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Your body works differently in pregnancy", body: "Blood volume, resting heart rate, joint laxity, and balance all change. What was easy before may need adapting, not because it's dangerous, but because the mechanics have shifted." },
+        { heading: "Trimesters bring different priorities", body: "Fatigue often limits first-trimester exercise. Second-trimester energy usually returns. Third-trimester exercise focuses on low-impact, weight-supporting movement." },
+      ],
+      lessCauses: [
+        { heading: "Specific pregnancy conditions may need medical guidance", body: "Placenta praevia, pre-eclampsia, threatened preterm labour, and some cervical conditions may need exercise adapted or paused. Your team will guide you." },
+      ],
+      whyItVaries: "Fitness background, pregnancy history, and how your particular pregnancy is going all shape what's right for you.",
+    },
+    timing: {
+      whenStarts: "Exercise guidance applies from the first trimester and continues throughout pregnancy.",
+      whenPeaks: "The second trimester tends to be the most exercise-friendly stretch.",
+      whenEases: "Postnatal recovery has its own gentle progression, usually starting with walking and pelvic floor work in the first weeks.",
+    },
+    whatItFeelsLike: ["Working slightly less hard than pre-pregnancy but still feeling good", "Being more aware of your body's limits", "Needing more recovery between sessions"],
+    whatThisMeans:
+      "Exercise in pregnancy is genuinely good for you, for mood, sleep, blood pressure, back pain, birth recovery, and gestational diabetes prevention. The aim is calm, sustainable movement, not personal bests.",
+    normal: [
+      "Continuing exercise you were already doing before pregnancy, with modifications",
+      "Slowing down in the first trimester because of tiredness or nausea",
+      "Needing more warm-ups and rest",
+      "Feeling breathier at the same effort level",
+    ],
+    seekSupport: [
+      "Vaginal bleeding, watery loss, or amniotic fluid leak during or after exercise",
+      "Severe headache, dizziness, or chest pain",
+      "Sudden, severe abdominal or pelvic pain",
+      "Reduced fetal movement after exercise (from around 24 weeks)",
+      "Regular contractions that don't ease with rest and hydration",
+    ],
+    disclaimer: "This is general guidance based on UK NHS and RCOG advice. Always follow your midwife or clinician's guidance for your specific pregnancy, some conditions (placenta praevia, pre-eclampsia, cervical concerns) require adapted or reduced exercise.",
+    whatYouCanDo: [
+      { action: "Continue exercise you were already doing, with sensible modifications", reason: "Pregnancy is generally not the time to start a new intense sport, but continuing what your body knows is well-supported." },
+      { action: "Use the 'talk test' as your intensity guide", reason: "If you can hold a conversation, you're in a safe moderate zone. If you can only gasp words, ease back." },
+      { action: "Adapt what needs adapting as you progress", reason: "Contact sports, activities with fall risk, and lying flat on your back become less suitable as pregnancy advances." },
+      { action: "Know the warning signs and stop if they appear", reason: "Bleeding, severe pain, dizziness, and reduced movements all mean stop and contact your midwife." },
+    ],
+    whatHappensNext: "Most people continue some form of exercise throughout pregnancy. Postnatal exercise restarts gently, tailored to how birth went and how recovery feels.",
+    relatedStage: {
+      intro: "Exercise safety sits inside a wider picture of pregnancy movement and wellbeing:",
+      links: [
+        { label: "Diet and exercise in pregnancy", href: "/pregnancy/diet-and-exercise", context: "The wider topic this article belongs to." },
+        { label: "Moving your body in pregnancy", href: "/articles/moving-your-body-in-pregnancy", context: "The everyday movement companion to this article." },
+        { label: "Pelvic floor exercises in pregnancy", href: "/articles/pelvic-floor-exercises-in-pregnancy", context: "The exercise most worth doing every day." },
+      ],
+    },
+    aiPrompts: [
+      "Can I still run in the second trimester?",
+      "What exercise should I avoid in the third trimester?",
+      "How hard should I be working out in pregnancy?",
+    ],
+    captureIntro: "Exercise in pregnancy shifts across the trimesters. Worth noting how movement feels for you.",
+    trimester: [1, 2, 3],
+    relatedSlugs: ["moving-your-body-in-pregnancy", "pelvic-floor-exercises-in-pregnancy", "hydration-in-pregnancy"],
+    journey: ["pregnancy"],
+    topics: ["diet", "body"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "Moderate exercise is safe and beneficial throughout most pregnancies",
+      "The first trimester is often about doing less; the second is easiest; the third calls for lower impact",
+      "Use the talk test, able to chat while moving, as your intensity guide",
+      "Stop and contact your midwife for bleeding, severe pain, dizziness, or reduced movements",
+      "Continuing existing activity is well-supported; starting new intense sport in pregnancy is not",
+    ],
+    sources: [
+      "NHS, Exercise in pregnancy",
+      "RCOG, Physical activity and pregnancy patient information",
+      "UK Chief Medical Officers, Physical activity guidelines for pregnancy",
+      "POGP, Fit for pregnancy",
+    ],
+    faq: [
+      { question: "Can I keep running in pregnancy?", answer: "If you were a runner before pregnancy, most guidance supports continuing at a reduced intensity for as long as it feels comfortable. Many people run into the second trimester and some into the third. Stop if you develop pelvic pain, leaks, or heaviness. Starting running as a new activity in pregnancy is not usually recommended." },
+      { question: "Is it safe to lift weights?", answer: "Yes, with adjustments. Continue lifting weights you're used to, but reduce the load, avoid holding your breath (which spikes intra-abdominal pressure), and skip lying flat on your back after about 16 weeks. A pregnancy-experienced trainer or physio can help you adapt." },
+      { question: "What's the talk test?", answer: "A simple intensity gauge: if you can hold a conversation while exercising, you're in a safe moderate zone. If you can only gasp single words, ease back until you can talk in sentences again." },
+      { question: "Which exercises should I avoid?", answer: "Contact sports (rugby, martial arts, football), high fall-risk activities (horse riding, skiing, mountain biking), scuba diving, and hot yoga are the main categories to avoid. Lying flat on your back for long periods after 16 weeks is also worth adapting." },
+    ],
+    topic: "diet-and-exercise",
+    standfirst: "Exercise in pregnancy is genuinely good for you. A calm, trimester-by-trimester look at what to keep, what to adapt, and the signs that mean stop.",
+    editorialSections: [
+      {
+        id: "the-baseline",
+        heading: "The baseline: exercise is good for pregnancy",
+        lead: "Moderate exercise across pregnancy is linked to better mood, better sleep, lower blood pressure, less back pain, easier birth recovery, and a lower risk of gestational diabetes.",
+        paragraphs: [
+          "UK guidance is to aim for around 150 minutes of moderate activity a week if you were active before pregnancy, or to build up gradually if you weren't. Walking, swimming, yoga, and pilates all count. So does gardening, dancing, and carrying a toddler up and down stairs.",
+          "The 'don't start anything new' idea is out of date. Starting light-to-moderate exercise in pregnancy is fine. What's less advised is starting a new high-intensity sport (marathon training, contact sport, heavy lifting) mid-pregnancy.",
+        ],
+      },
+      {
+        id: "first-trimester",
+        heading: "First trimester: gentle, listen, adapt",
+        lead: "The first trimester is usually about doing less than you'd like, because of tiredness and nausea.",
+        paragraphs: [
+          "Your resting heart rate rises, blood volume is climbing, and fatigue often crushes motivation. This isn't a moral failing, it's the physiology of the first 12 weeks. Doing less is often exactly right.",
+          "Walking, gentle yoga or pilates, swimming, and continuing (at reduced intensity) whatever you were doing before are all sensible. Overheating is worth avoiding, no hot yoga, no long saunas, no exercising in very hot weather without hydration.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "If all you can manage in the first trimester is a walk to the shop, that counts. Consistency matters more than intensity.",
+        },
+      },
+      {
+        id: "second-trimester",
+        heading: "Second trimester: usually the easiest window",
+        lead: "Energy often returns in the second trimester and appetite for exercise with it.",
+        paragraphs: [
+          "Many people find weeks 14-28 the most exercise-friendly stretch. Bump is manageable, energy is back, nausea has usually eased. This is often the best window to establish a sustainable pregnancy movement routine.",
+          "From around 16 weeks, avoid lying flat on your back for long stretches (a wedge or an inclined bench works instead). Adapt anything that puts pressure on the front of the abdomen (deep planks, sit-ups), a pregnancy-experienced trainer or physio can help modify. Contact sports and high fall-risk activities should be off the list by now.",
+        ],
+      },
+      {
+        id: "third-trimester",
+        heading: "Third trimester: lower impact, more support",
+        lead: "The third trimester usually calls for gentler, weight-supported movement.",
+        paragraphs: [
+          "Swimming and aqua-natal classes come into their own, the water supports your bump and takes pressure off joints. Walking, pregnancy yoga and pilates, and stationary cycling are all sustainable. Running becomes uncomfortable for most people by the mid-third trimester, though some continue.",
+          "Balance changes as your centre of gravity shifts. Steps, uneven paths, and quick direction changes deserve more caution. Pelvic girdle pain, if it appears, can make some exercises worse, adapt or pause, and see a women's health physio.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Gentle daily movement in the third trimester supports sleep, blood pressure, and mood in ways almost nothing else does. Don't stop entirely unless a clinician has asked you to.",
+        },
+      },
+      {
+        id: "warning-signs",
+        heading: "Warning signs: stop and contact your midwife",
+        lead: "A short, memorable list. If any of these appear during or shortly after exercise, stop and get in touch with your maternity team.",
+        paragraphs: [
+          "Vaginal bleeding or fluid leak. Severe abdominal, pelvic, or chest pain. Sudden severe headache, dizziness, or fainting. Regular contractions that don't ease with rest and hydration. Reduced fetal movements after exercise (from around 24 weeks).",
+          "None of these mean exercise caused harm, they mean your body needs checking today. Contact your midwife, day assessment unit, or triage line straight away and rest until you've been reviewed.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Reduced fetal movements always need same-day assessment, don't wait to see if they return.",
+        },
+      },
+    ],
+  },
+
+  // ─── SAFE SLEEP BASICS ────────────────────────────────────────────────────
+  {
+    slug: "safe-sleep-basics",
+    title: "Safe sleep basics: how to set up baby sleep at home",
+    metaDescription: "A calm UK guide to safe infant sleep. Back to sleep, a clear cot, the right room, and the small everyday choices that lower risk.",
+    quickAnswer:
+      "In the UK, the safest way for a baby to sleep is on their back, in their own clear sleep space, in the same room as you for the first six months. A firm flat mattress, no pillows, no cot bumpers, no loose bedding, and a comfortably cool room (around 16 to 20 degrees) cover most of what matters. Small, consistent choices carry most of the benefit.",
+    howThisFeels: [
+      "Wanting to get this right without turning the nursery into a rulebook",
+      "Second-guessing every product recommendation you see online",
+      "Worrying about doing the wrong thing in the middle of the night",
+      "Feeling reassured once the setup is simple and familiar",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Back sleeping is the single biggest factor", body: "Placing your baby on their back for every sleep, day and night, is the most protective choice you can make. Side and front sleeping both raise risk in the early months." },
+        { heading: "A clear sleep space matters", body: "A firm flat mattress with a fitted sheet, and nothing else in the cot, keeps the airway clear and reduces overheating." },
+      ],
+      lessCauses: [
+        { heading: "Room sharing without bed sharing", body: "UK guidance is for baby to sleep in the same room as you, in their own cot or Moses basket, for at least the first six months." },
+        { heading: "Temperature and clothing", body: "Overheating is a known risk factor. A comfortably cool room and a well-fitting sleep bag or light blanket tucked below the shoulders tend to be simplest." },
+      ],
+      whyItVaries: "Advice varies slightly by baby's age, weight, and any medical conditions. Your health visitor and midwife can tailor guidance if anything about your baby is different.",
+    },
+    timing: {
+      whenStarts: "Safe sleep guidance applies from birth.",
+      whenEases: "The highest-risk window is the first six months. Guidance stays sensible well into the first year, but some rules relax as babies get older and stronger.",
+    },
+    whatItFeelsLike: ["A short mental checklist before every nap", "Getting used to how bare the cot looks"],
+    whatThisMeans:
+      "Following a small number of consistent choices has a much bigger effect than any single product. Simplicity is the point.",
+    normal: [
+      "Baby sleeping on their back, in a clear cot, in your room",
+      "Waking often to feed in the early weeks",
+      "Grunting, snuffling, and irregular breathing patterns during sleep",
+      "Preferring to be swaddled or unswaddled, depending on the baby",
+    ],
+    seekSupport: [
+      "Anything that stops your baby settling on their back that you cannot explain",
+      "Concerns about breathing pauses, colour changes, or unusually noisy breathing",
+      "Feeling so exhausted that you are falling asleep on a sofa or armchair with your baby",
+    ],
+    disclaimer: "This is general UK guidance based on NHS and Lullaby Trust advice. Speak to your midwife or health visitor about your baby's specific situation, especially if they were born prematurely or have any medical conditions.",
+    whatYouCanDo: [
+      { action: "Put your baby on their back for every sleep", reason: "Back sleeping is the single most protective choice for infant sleep." },
+      { action: "Use a firm flat mattress with a fitted sheet and nothing else in the cot", reason: "Clear sleep spaces reduce the risk of airway obstruction and overheating." },
+      { action: "Keep the room comfortably cool, around 16 to 20 degrees", reason: "Overheating is a known risk factor, particularly in the first few months." },
+      { action: "Room share for at least six months, in a separate cot or Moses basket", reason: "Room sharing without bed sharing carries the strongest evidence for reducing risk." },
+    ],
+    whatHappensNext: "Most families quickly find a small nighttime rhythm that feels familiar. The setup itself stops needing much thought.",
+    relatedStage: {
+      intro: "Safe sleep sits inside the wider work of getting ready for baby:",
+      links: [
+        { label: "Preparing for baby in pregnancy", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to", context: "How to set up a home that supports safe sleep." },
+        { label: "Baby clothes and newborn essentials", href: "/articles/baby-clothes-and-newborn-essentials", context: "What you actually need for the first weeks." },
+      ],
+    },
+    aiPrompts: [
+      "What is the safest way for a newborn to sleep in the UK?",
+      "What should be in the cot with my baby?",
+      "How warm should the room be for baby sleep?",
+    ],
+    captureIntro: "Setting up sleep can feel bigger than it needs to. Worth noting what still feels unclear.",
+    trimester: [3],
+    relatedSlugs: ["the-space-your-baby-will-come-home-to", "baby-clothes-and-newborn-essentials", "preparing-emotionally-for-birth"],
+    journey: ["pregnancy"],
+    topics: ["preparing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "Put your baby on their back for every sleep, day and night",
+      "Use a firm flat mattress with a fitted sheet and nothing else in the cot",
+      "Room share for at least six months, in a separate cot or Moses basket",
+      "Keep the room comfortably cool, around 16 to 20 degrees",
+      "Avoid cot bumpers, pillows, and loose bedding in the first year",
+    ],
+    sources: [
+      { label: "Safer sleep for babies", publisher: "The Lullaby Trust", url: "https://www.lullabytrust.org.uk/safer-sleep-advice/" },
+      { label: "Reduce the risk of sudden infant death syndrome (SIDS)", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/reduce-the-risk-of-sudden-infant-death-syndrome/" },
+      { label: "How to help your baby sleep", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/helping-your-baby-to-sleep/" },
+    ],
+    faq: [
+      { question: "Can my baby sleep in our bed?", answer: "UK guidance is that the safest place for a baby to sleep is in their own cot or Moses basket in your room. Some families choose to bed share and it can be done more safely, but there are situations where it should be avoided completely, including if either parent smokes, has been drinking, has taken medication that causes drowsiness, or if the baby was premature or small at birth. The Lullaby Trust has clear guidance if you want to bed share." },
+      { question: "What about swaddling?", answer: "Swaddling can help some babies settle, but only if done in a way that keeps hips free to move and never over the shoulders. Stop swaddling as soon as your baby shows signs of rolling. Sleep bags are a simpler alternative for many families." },
+      { question: "Are cot bumpers ever safe?", answer: "UK safe sleep guidance advises against cot bumpers, including breathable or mesh versions. Nothing loose in the cot is the simplest rule to follow." },
+    ],
+    topic: "preparing-for-baby",
+    standfirst: "A calm walk through safe infant sleep in the UK. What actually protects your baby, and what you can quietly ignore.",
+    editorialSections: [
+      {
+        id: "the-core-choices",
+        heading: "The core choices that carry most of the benefit",
+        lead: "A small number of decisions do most of the work. The rest is detail.",
+        paragraphs: [
+          "Back to sleep, every sleep. A firm flat mattress with a fitted sheet and nothing else in the cot. Room sharing without bed sharing for the first six months. A comfortably cool room. Head uncovered. These are the choices with the strongest evidence, and they are simple to remember.",
+          "None of this needs a specific product. Most cots that meet current UK safety standards, paired with a firm mattress that fits closely, are fine.",
+        ],
+        callout: {
+          tone: "info",
+          text: "The Lullaby Trust is the UK charity most focused on safe sleep. Their website is a calm, evidence-based place to check anything specific.",
+        },
+      },
+      {
+        id: "the-sleep-space",
+        heading: "Setting up the sleep space",
+        lead: "What goes in the cot matters more than what the cot looks like.",
+        paragraphs: [
+          "A firm flat mattress with a well-fitting sheet is the base. Skip cot bumpers, pillows, positioners, and loose blankets in the first year. A lightweight sleep bag in the right tog for the room temperature is often the simplest option.",
+          "For the first six months, whether that is a Moses basket, a bedside crib, or a full cot, the sleep surface itself should sit in the same room as you for daytime naps and night sleep.",
+        ],
+      },
+      {
+        id: "temperature",
+        heading: "Temperature and clothing",
+        lead: "Overheating is a known risk, so cooler tends to be safer than warmer.",
+        paragraphs: [
+          "Aim for around 16 to 20 degrees in the room where your baby sleeps. A simple room thermometer is enough. To check your baby, feel the chest or back of the neck, not the hands or feet, which are often cooler.",
+          "Layer clothing and sleep bags to the temperature of the room. In warm weather, a short-sleeved vest with a low-tog sleep bag is often enough. If the room feels warm to you, take a layer off, not add one.",
+        ],
+      },
+      {
+        id: "swaddles-slings-car-seats",
+        heading: "Swaddles, slings, and car seats",
+        lead: "Devices designed for other purposes are not designed for sleep.",
+        paragraphs: [
+          "Car seats keep babies safe in vehicles, but they are not a safe long-term sleep surface. If your baby falls asleep in a car seat, move them to a flat sleep space as soon as it is safe. Long trips are worth breaking up.",
+          "Slings can be safe for daytime naps if the baby's face is visible, kissable, chin off the chest, and airway clear. Sleeping on sofas or armchairs with a baby carries a much higher risk than the cot itself.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "If you feel yourself falling asleep while feeding on a sofa, moving to a flat bed with a clear sleep space is much safer than staying where you are.",
+        },
+      },
+      {
+        id: "what-you-do-not-need",
+        heading: "What you do not need",
+        lead: "Most sleep products marketed to new parents are not evidence-based.",
+        paragraphs: [
+          "Pods, nests, and sleep positioners have been linked to safety concerns and are not recommended for unsupervised sleep. Weighted sleep bags and blankets are also not advised in the UK. The clearer, plainer setup is usually the safest one.",
+          "It is fine to ignore most of the marketing. The core rules cover almost every situation you will meet in the early months.",
+        ],
+      },
+    ],
+  },
+
+  // ─── CAR SEAT BASICS ──────────────────────────────────────────────────────
+  {
+    slug: "car-seat-basics",
+    title: "Car seat basics: what to know before your baby's first journey",
+    metaDescription: "A calm UK guide to newborn car seats. Rear-facing, i-Size, ISOFIX, and the small everyday checks that make each journey safer.",
+    quickAnswer:
+      "In the UK, babies must travel in a rear-facing car seat that meets either R129 (i-Size) or R44 safety standards. Rear-facing is safest for as long as possible, ideally to at least 15 months. Fit matters more than price: a correctly installed seat, with harness snug and no bulky clothing under the straps, is what actually protects your baby.",
+    howThisFeels: [
+      "Feeling overwhelmed by the number of car seat brands and options",
+      "Worrying whether your car is compatible with the seat you like",
+      "Not being sure how tight the harness should feel",
+      "Wanting someone to double-check the fit before the first trip",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Rear-facing is safer for babies", body: "In a frontal collision, a rear-facing seat spreads force across the whole back, head, and neck, which are still developing. Rear-facing to at least 15 months is the UK legal minimum for i-Size seats." },
+        { heading: "Correct installation is the biggest factor", body: "Many car seats in use are fitted incorrectly. A seat that is loose in the car, or a harness that is loose on the baby, offers far less protection than the same seat correctly installed." },
+      ],
+      lessCauses: [
+        { heading: "Standards and labels can look confusing", body: "R129 (i-Size) is the newer standard, based on child height. R44 is the older standard, based on weight. Both are legal to use; new seats sold now are almost all i-Size." },
+        { heading: "ISOFIX versus belted", body: "ISOFIX is a standardised way to attach a car seat directly to the car. Belted fitting uses the car's seatbelt. Both can be safe if fitted correctly." },
+      ],
+      whyItVaries: "Not every car seat fits every car, and not every model fits every baby. Trying a seat in your own car before you buy tends to save a lot of stress later.",
+    },
+    timing: {
+      whenStarts: "You will need an infant car seat from the first journey home from hospital.",
+      whenEases: "Infant carrier seats are usually outgrown between around 9 and 15 months. A larger rear-facing seat then continues the protection.",
+    },
+    whatItFeelsLike: ["A short check before every drive", "Feeling steadier once someone has reviewed the fit"],
+    whatThisMeans:
+      "Getting the basics right, and having someone check the fit at least once, is worth more than any single feature of a specific seat.",
+    normal: [
+      "Newborns looking very small in an infant car seat",
+      "Needing to adjust harness height as your baby grows",
+      "Feeling clumsy at first when threading the harness",
+      "Not being sure whether the seat is tight enough until it is checked",
+    ],
+    seekSupport: [
+      "Any doubt about whether the seat is fitted correctly",
+      "Any collision, however small, meaning the seat needs replacing",
+      "Signs that your baby is uncomfortable, floppy, or overheating on longer trips",
+    ],
+    disclaimer: "This is general UK guidance. Specific advice about your car and your baby is best given by a trained car seat fitter or your midwife or health visitor.",
+    whatYouCanDo: [
+      { action: "Choose a seat that meets R129 (i-Size) or R44 and fits your car", reason: "Both standards are legal; the important part is a good match to your vehicle." },
+      { action: "Have the fit checked in person before your first journey", reason: "Many retailers and local schemes offer free checks; correct fitting is the single biggest safety factor." },
+      { action: "Keep the harness snug, with only two fingers of space at the chest", reason: "A loose harness reduces the protection a car seat can offer in a collision." },
+      { action: "Remove bulky coats before strapping baby in", reason: "Thick padding compresses in a collision and leaves the harness loose. A blanket over the top after strapping is a safer option." },
+    ],
+    whatHappensNext: "Most families find that after the first few journeys, the routine of harness, check, and go becomes second nature.",
+    relatedStage: {
+      intro: "Car seats sit alongside the other practical parts of getting ready:",
+      links: [
+        { label: "Preparing for baby in pregnancy", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack", context: "The other thing to have ready before the hospital." },
+        { label: "Baby clothes and newborn essentials", href: "/articles/baby-clothes-and-newborn-essentials", context: "What to have alongside the car seat for the first weeks." },
+      ],
+    },
+    aiPrompts: [
+      "What car seat do I need for a newborn in the UK?",
+      "What is i-Size and how is it different to R44?",
+      "How tight should the car seat harness be?",
+    ],
+    captureIntro: "Car seats can feel like the first big decision. Worth noting what you still want to check.",
+    trimester: [3],
+    relatedSlugs: ["hospital-bag-and-what-to-pack", "baby-clothes-and-newborn-essentials", "the-space-your-baby-will-come-home-to"],
+    journey: ["pregnancy"],
+    topics: ["preparing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "Babies must travel rear-facing in a seat that meets R129 (i-Size) or R44",
+      "Rear-facing is safest for as long as possible, ideally beyond 15 months",
+      "Correct installation matters more than any single feature",
+      "Harness should be snug with only two fingers of space at the chest",
+      "Remove bulky coats before strapping in; add a blanket over the top instead",
+      "Have the fit checked in person before your baby's first journey",
+    ],
+    sources: [
+      { label: "Child car seats: the law", publisher: "GOV.UK", url: "https://www.gov.uk/child-car-seats-the-rules" },
+      { label: "Choosing a child car seat", publisher: "Good Egg Safety", url: "https://www.goodeggcarsafety.com/" },
+      { label: "Getting your baby home from hospital", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/after-the-birth/getting-your-baby-home/" },
+      { label: "Child car seats", publisher: "RoSPA", url: "https://www.rospa.com/road-safety/advice/vehicles/child-car-seats" },
+    ],
+    faq: [
+      { question: "Can I put the car seat in the front?", answer: "You can, but only if there is no active airbag on the passenger side. Airbags are designed for adult front-seat passengers and can be dangerous for a rear-facing infant. The safest place is usually the rear middle seat if it takes a car seat, otherwise a rear side seat." },
+      { question: "Do I need to replace the seat after an accident?", answer: "UK guidance is to replace an infant car seat after any collision, even a minor one, because internal damage may not be visible. Insurance often covers this." },
+      { question: "How long can my baby be in the car seat at once?", answer: "Guidance suggests no more than two hours at a time for young babies, then a break out of the seat. Break longer journeys into shorter stretches, especially in the first few months." },
+    ],
+    topic: "preparing-for-baby",
+    standfirst: "What to look for in a car seat, how to check the fit, and the small everyday habits that make each journey safer.",
+    editorialSections: [
+      {
+        id: "the-law-and-the-standards",
+        heading: "What the law asks for",
+        lead: "Two safety standards apply in the UK, and both are legal.",
+        paragraphs: [
+          "R129, often called i-Size, is the newer European standard. It is based on your child's height and requires rear-facing use up to at least 15 months. R44 is the older standard, based on weight. Seats certified under either standard are legal, but almost all new seats sold now are i-Size.",
+          "Babies must always travel in a child car seat until they are 12 years old or 135cm tall, whichever comes first, unless a specific exemption applies. The car seat has to be right for your child's weight or height, depending on the standard it meets.",
+        ],
+      },
+      {
+        id: "choosing-a-seat",
+        heading: "Choosing a seat that fits your car and your baby",
+        lead: "The best seat is one that fits your car well, suits your baby, and you can install correctly.",
+        paragraphs: [
+          "Not every seat fits every car. ISOFIX points, seat depth, and belt paths all vary. Most reputable retailers will let you trial-fit a seat in your car before you commit. Take the time to do this.",
+          "For a newborn, an infant carrier that clicks into a base is common. They are convenient but not designed for long periods of sleep out of the car. A lie-flat carrycot is another option, especially for premature or very small babies, and can be discussed with your midwife.",
+        ],
+      },
+      {
+        id: "installing-and-checking",
+        heading: "Installing the seat and checking the fit",
+        lead: "A correctly fitted seat is what actually protects your baby. Getting a check is worth doing.",
+        paragraphs: [
+          "Many councils, retailers, and independent schemes offer free or low-cost car seat checks. Booking one before your baby is due, and again once they are here, is one of the most useful things you can do.",
+          "The seat itself should not move more than an inch side to side or front to back once installed. The harness should sit snugly against your baby's shoulders, with the chest clip at armpit level and only two fingers of space between the harness and the collarbone.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Good Egg Safety and RoSPA both publish free UK guides on car seat safety and offer clinics in many areas.",
+        },
+      },
+      {
+        id: "everyday-habits",
+        heading: "The small habits that keep the seat safer",
+        lead: "Once the seat is fitted, a few gentle habits do most of the ongoing work.",
+        paragraphs: [
+          "Take off any bulky coat or snowsuit before strapping your baby in. Padding compresses in a collision and leaves the harness loose. A blanket, cardigan, or car seat cover added after strapping keeps them warm without compromising the harness.",
+          "Check the harness height as your baby grows. Straps should come from just below the shoulders when rear-facing. Long journeys are worth breaking up, and your baby is safer moved to a flat sleep space at the end of the trip rather than left to sleep in the seat.",
+        ],
+      },
+      {
+        id: "when-things-change",
+        heading: "When the seat needs to change",
+        lead: "Babies outgrow infant carriers before they outgrow rear-facing.",
+        paragraphs: [
+          "Your baby has outgrown an infant carrier when the top of their head is level with the top of the seat, or when they exceed the weight or height limit, whichever comes first. This is usually between around 9 and 15 months, sometimes earlier for larger babies.",
+          "The safest next step is another rear-facing seat, not a forward-facing one. Rear-facing to at least 15 months is legal minimum; keeping rear-facing until around 4 years, if the seat allows, is safer still.",
+        ],
+      },
+    ],
+  },
+
+  // ─── BABY CLOTHES AND NEWBORN ESSENTIALS ─────────────────────────────────
+  {
+    slug: "baby-clothes-and-newborn-essentials",
+    title: "Baby clothes and newborn essentials: a calm UK list",
+    metaDescription: "A short, sensible UK guide to what your baby actually needs in the first weeks. Clothing sizes, feeding basics, changing, sleep, and the things you can skip.",
+    quickAnswer:
+      "For the first few weeks, most babies need very little: a handful of vests and sleepsuits in newborn and 0 to 3 month sizes, a couple of soft cardigans or a coat, muslins, nappies, and either bottle-feeding or breastfeeding basics. A flat sleep space, a car seat, and a way to carry your baby cover almost everything else. You can add more once you know your baby.",
+    howThisFeels: [
+      "Being flooded with baby product lists that all look different",
+      "Not knowing what size to buy for a baby who is not here yet",
+      "Wanting to be ready without buying things you will never use",
+      "Feeling calmer once the list becomes short",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Newborns grow quickly", body: "Most babies are in newborn or 0 to 3 month sizes for only a short time. Fewer clothes in more sizes tends to work better than a big pile of the smallest size." },
+        { heading: "Marketing makes lists longer than they need to be", body: "Many baby products solve problems that most babies do not have. Starting with a short list and adding when you actually need something works well for most families." },
+      ],
+      lessCauses: [
+        { heading: "Second-hand is often best", body: "Baby clothes are used briefly and often barely worn. Family, friends, local groups, and charity shops are excellent sources." },
+      ],
+      whyItVaries: "Season, birth size, feeding method, and whether you drive a lot all shift what is useful for your family.",
+    },
+    timing: {
+      whenStarts: "The last few weeks of pregnancy are enough time to get the essentials together.",
+      whenEases: "You will restock and adjust as your baby grows. Very few first-purchase items are used past the first three months.",
+    },
+    whatItFeelsLike: ["A short list that feels manageable", "Relief that you do not need to buy everything at once"],
+    whatThisMeans:
+      "The point of a starter list is to cover the first few weeks calmly, not to predict every future need.",
+    normal: [
+      "Buying a mix of newborn and 0 to 3 month sizes",
+      "Preferring second-hand for most clothing",
+      "Adding things once your baby is here and you know them",
+      "Ignoring a lot of the marketing around baby products",
+    ],
+    seekSupport: [
+      "Feeling under pressure to buy things you cannot afford",
+      "Any specific medical or feeding equipment your baby will need, best discussed with your midwife or health visitor",
+    ],
+    disclaimer: "This is a general starter list, not personal advice. Your midwife, health visitor, and infant feeding team can help with anything specific to your baby's situation.",
+    whatYouCanDo: [
+      { action: "Buy fewer clothes in more sizes", reason: "Babies move through newborn sizes quickly; smaller stashes waste less." },
+      { action: "Prioritise sleepsuits, vests, and muslins", reason: "These are used constantly in the early weeks and washed often." },
+      { action: "Wait to buy some items until baby arrives", reason: "Feeding equipment, dummies, and specific brands often depend on your baby." },
+      { action: "Use second-hand or borrowed items where sensible", reason: "Baby clothes are used briefly and often almost new; secondhand items are usually excellent." },
+    ],
+    whatHappensNext: "Most families settle into what they actually use within the first few weeks and quietly stop worrying about the rest of the lists.",
+    relatedStage: {
+      intro: "This sits inside the wider practical side of getting ready:",
+      links: [
+        { label: "Preparing for baby in pregnancy", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to", context: "The home setup this list fits into." },
+        { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack", context: "The much shorter list for the birth itself." },
+      ],
+    },
+    aiPrompts: [
+      "What clothes does a newborn actually need?",
+      "What size baby clothes should I buy first?",
+      "What baby products can I skip?",
+    ],
+    captureIntro: "Newborn lists can feel overwhelming. Worth noting what still feels unclear.",
+    trimester: [3],
+    relatedSlugs: ["the-space-your-baby-will-come-home-to", "hospital-bag-and-what-to-pack", "safe-sleep-basics"],
+    journey: ["pregnancy"],
+    topics: ["preparing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "A short list of vests, sleepsuits, and muslins covers most early clothing needs",
+      "Buy a mix of newborn and 0 to 3 month sizes, not lots of the smallest",
+      "Feeding, changing, and sleep basics are the core categories that matter",
+      "Wait on brand-specific items until you know your baby",
+      "Second-hand and borrowed items are often the best choice",
+    ],
+    sources: [
+      { label: "Things you'll need for your baby", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/preparing-for-the-birth/things-you-will-need-for-your-baby/" },
+      { label: "Getting ready for your baby's arrival", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/labour-and-birth/getting-ready-for-your-babys-arrival" },
+      { label: "Preparing for a new baby", publisher: "NCT", url: "https://www.nct.org.uk/pregnancy/how-you-might-be-feeling/preparing-your-new-baby" },
+    ],
+    faq: [
+      { question: "How many sleepsuits and vests do I really need?", answer: "Six to eight of each is enough for the first few weeks, especially with easy access to a washing machine. Half in newborn and half in 0 to 3 months usually works well." },
+      { question: "Do I need to buy everything before the birth?", answer: "No. Nappies, feeding equipment, and clothes in bigger sizes can all be added after your baby arrives. Focus on what you will need in the first week or two, plus the safe sleep setup and car seat." },
+      { question: "Is it worth investing in premium brands?", answer: "Usually not for clothing. Fit, fabric, and easy fastenings matter far more than the label. For a few items with a longer working life, like a car seat or pram, it can be worth spending more on something that will last." },
+    ],
+    topic: "preparing-for-baby",
+    standfirst: "A short, sensible list of what your baby actually needs in the first weeks. What is worth having, and what you can quietly ignore.",
+    editorialSections: [
+      {
+        id: "clothing",
+        heading: "Clothing: fewer items, more sizes",
+        lead: "Newborns move through the smallest sizes quickly, so a smaller stash spread across sizes tends to be more useful.",
+        paragraphs: [
+          "A workable starter list: six to eight short-sleeved vests, six to eight sleepsuits, two or three cardigans, a hat, scratch mittens if needed, and a warmer layer or coat depending on season. Half in newborn size, half in 0 to 3 months.",
+          "Front-opening sleepsuits are much easier at 3am than anything that goes over the head. Soft cottons, generous fits, and easy fastenings matter far more than the brand.",
+        ],
+      },
+      {
+        id: "feeding",
+        heading: "Feeding basics",
+        lead: "This depends on how you plan to feed, and it is fine to start light and adjust.",
+        paragraphs: [
+          "If you are planning to breastfeed, a couple of comfortable feeding bras, breast pads, and nipple balm are usually enough to start. A pump is not needed in the first few days for most families.",
+          "If you are formula feeding or mixed feeding, a small number of bottles, a formula that is right for your baby's age, and a way to sterilise are the core needs. Wait to buy a bigger stock until you know what your baby takes to.",
+        ],
+      },
+      {
+        id: "sleep",
+        heading: "Sleep setup",
+        lead: "A flat, clear sleep space is the single most important item.",
+        paragraphs: [
+          "A Moses basket, bedside crib, or full cot with a firm flat mattress and fitted sheets is enough. Two or three sheets and a couple of lightweight sleep bags in the right tog for your room cover the first few weeks.",
+          "Skip cot bumpers, pods, positioners, and nests for sleep. A plainer setup is a safer setup.",
+        ],
+        callout: {
+          tone: "info",
+          text: "The Lullaby Trust has clear UK safe sleep guidance if you want to double-check anything about the sleep space.",
+        },
+      },
+      {
+        id: "changing",
+        heading: "Changing and bath",
+        lead: "A small, quiet corner of your home is enough. You do not need a dedicated changing room.",
+        paragraphs: [
+          "A changing mat, nappies in newborn size, cotton wool or fragrance-free wipes, muslins, and a bin close by are all you really need. Nappy rash cream is worth having but not always used.",
+          "Baths do not need to happen every day. A soft towel and a plain unfragranced wash if you use one are enough. Many families wait a week or two before the first bath.",
+        ],
+      },
+      {
+        id: "on-the-go",
+        heading: "Getting out of the house",
+        lead: "A car seat, a way to carry your baby, and a small bag cover most of it.",
+        paragraphs: [
+          "A rear-facing infant car seat is a must if you use a car. A pram, pushchair, or sling covers everything else. Slings can be genuinely useful for the newborn phase; a simple stretchy wrap is often enough.",
+          "A small changing bag with a couple of nappies, a change of clothes, muslins, wipes, and a spare vest is enough to leave the house calmly.",
+        ],
+      },
+      {
+        id: "what-to-skip",
+        heading: "Things you probably do not need at first",
+        lead: "Most of the extras can wait until you meet your baby.",
+        paragraphs: [
+          "Big-brand toys, elaborate baby monitors, top-and-tail bowls, wipe warmers, dedicated baby detergents, and specialist pillows can almost always wait. Many are never used at all.",
+          "The starter list exists to reduce noise, not to become another one. If it is not in it, you probably do not need it in the first weeks.",
+        ],
+      },
+    ],
+  },
+
+  // ─── PREPARING SIBLINGS FOR A NEW BABY ────────────────────────────────────
+  {
+    slug: "preparing-siblings-for-a-new-baby",
+    title: "Preparing siblings for a new baby: gentle ways to make room",
+    metaDescription: "A calm guide to helping an older child adjust to a new baby in pregnancy. What to say, how much to explain, and how to keep their world steady.",
+    quickAnswer:
+      "The most helpful thing you can do for an older child is to keep their world familiar and to talk about the baby gently and honestly, using language that fits their age. Some regression, big feelings, and mixed emotions are normal, before and after the baby arrives. Small consistent rituals often carry more weight than big conversations.",
+    howThisFeels: [
+      "Wondering when to tell your older child about the baby",
+      "Worrying about how they will react to change",
+      "Feeling guilty about splitting your attention",
+      "Being surprised by their sudden clinginess or big feelings",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Change can feel unsettling before it happens", body: "Even young children pick up on shifts in the home, mood, and routine. Some acting out or clinginess in late pregnancy is common and does not mean anything is wrong." },
+        { heading: "Understanding is age-linked", body: "Very young children live in the now; toddlers and preschoolers understand more but still need short, simple language; school-age children often want more detail and are quietly worried about being left out." },
+      ],
+      lessCauses: [
+        { heading: "Attachment tends to be resilient", body: "Consistent care, familiar routines, and honest words tend to matter more than perfect preparation. Most siblings settle over time." },
+      ],
+      whyItVaries: "Age, temperament, family setup, and how big the change feels day to day all shape how a child responds.",
+    },
+    timing: {
+      whenStarts: "Some families tell older children early in pregnancy; others prefer to wait until the bump is visible or after the 20-week scan. Either can work.",
+      whenEases: "Most siblings settle into the new setup over the first few months, though ups and downs are normal well into the first year.",
+    },
+    whatItFeelsLike: ["A protective ache for the older child", "Small pockets of one-on-one time that feel important"],
+    whatThisMeans:
+      "You cannot pre-solve every feeling your child will have. You can keep the ground steady and stay open to whatever comes up.",
+    normal: [
+      "Regression in feeding, sleep, or toilet learning",
+      "Wanting to be babied for a while",
+      "Big feelings about small things",
+      "A mix of curiosity, affection, and jealousy over time",
+    ],
+    seekSupport: [
+      "Long-lasting distress that does not soften over weeks",
+      "Worries about your child's safety around the baby",
+      "Feeling overwhelmed by managing both children's needs",
+    ],
+    disclaimer: "This is general guidance. If you have concerns about your older child's mental health or behaviour that go beyond ordinary adjustment, your health visitor or GP can help.",
+    whatYouCanDo: [
+      { action: "Keep their routines and rituals as steady as you can", reason: "Predictability is the strongest source of security for a young child in a period of change." },
+      { action: "Use short, honest language about the baby", reason: "Simple truthful phrases are easier to trust than big theatrical explanations." },
+      { action: "Invite them in without expecting them to be excited", reason: "Space to have mixed feelings is more useful than pressure to perform delight." },
+      { action: "Protect small pockets of one-on-one time after birth", reason: "Ten focused minutes often matters more than long stretches of divided attention." },
+    ],
+    whatHappensNext: "Most siblings find their footing over the first few months. Attachment builds through everyday moments rather than a single big introduction.",
+    relatedStage: {
+      intro: "This sits alongside the emotional and practical parts of getting ready:",
+      links: [
+        { label: "Preparing for baby in pregnancy", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth", context: "The emotional preparation for you as well." },
+        { label: "The space your baby will come home to", href: "/articles/the-space-your-baby-will-come-home-to", context: "The physical home setup around the change." },
+      ],
+    },
+    aiPrompts: [
+      "How do I tell my toddler I am having another baby?",
+      "How can I help my child adjust to a new sibling?",
+      "Is regression after a new baby normal?",
+    ],
+    captureIntro: "Preparing another child is quiet work. Worth noting what feels tender.",
+    trimester: [2, 3],
+    relatedSlugs: ["preparing-emotionally-for-birth", "the-space-your-baby-will-come-home-to", "hospital-bag-and-what-to-pack"],
+    journey: ["pregnancy"],
+    topics: ["preparing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "Keep routines and rituals as steady as you can through pregnancy and after",
+      "Use short, honest language that fits your child's age",
+      "Some regression, clinginess, and mixed feelings are normal",
+      "Small pockets of one-on-one time carry more weight than long stretches",
+      "You do not have to make your older child excited; you can make them feel safe",
+    ],
+    sources: [
+      { label: "Helping siblings adjust to a new baby", publisher: "NCT", url: "https://www.nct.org.uk/life-parent/family-changes/helping-siblings-adjust-new-baby" },
+      { label: "Preparing your family for a new baby", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/emotional-wellbeing/preparing-family" },
+      { label: "Getting your baby home from hospital", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/labour-and-birth/after-the-birth/getting-your-baby-home/" },
+    ],
+    faq: [
+      { question: "When should I tell my older child about the baby?", answer: "There is no single right time. Some families tell older siblings early; others wait until pregnancy is more visible or after the 20-week scan. Very young children do best with a shorter run-up because time feels different at that age. Older children often appreciate being told earlier so they are not the last to know." },
+      { question: "How do I handle regression after the baby arrives?", answer: "Treat regression as a signal that your older child needs a little more closeness, not a behaviour to fix. Meet them where they are, keep boundaries kind and clear, and expect it to soften over weeks rather than days." },
+      { question: "What if my child does not seem interested in the baby?", answer: "That is common and usually fine. Interest often grows over the first year, especially once the baby starts responding. Some siblings are quietly attached without being demonstrative." },
+    ],
+    topic: "preparing-for-baby",
+    standfirst: "A gentle look at helping an older child adjust to a new baby, before and after birth, without pretending the change is smaller than it is.",
+    editorialSections: [
+      {
+        id: "when-to-tell-them",
+        heading: "When and how to tell them",
+        lead: "There is no perfect moment. Age, temperament, and family rhythm all shape the timing.",
+        paragraphs: [
+          "For very young children, closer to the birth often works better because they cannot yet hold a long wait. For older children, hearing it earlier and from you tends to feel safer than picking it up from other people.",
+          "Keep the language short and honest. There is a baby growing in my tummy. They will be here around when the leaves change. You will still be our first. Simple wins here.",
+        ],
+      },
+      {
+        id: "through-pregnancy",
+        heading: "Through pregnancy: small ways to include them",
+        lead: "Inclusion works best when it stays light and low-pressure.",
+        paragraphs: [
+          "Feeling the bump, choosing one small item for the baby, saying goodnight to the belly, or looking at their own baby pictures can help them make sense of what is happening.",
+          "It is fine if they are not interested. Some children need time. Others show love in indirect ways, like wanting to sit closer or bringing you snacks.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Mixed feelings are normal and healthy. Your child does not have to be delighted for the attachment to grow.",
+        },
+      },
+      {
+        id: "keep-routines-steady",
+        heading: "Keep the routines that already anchor them",
+        lead: "The strongest source of security in a period of change is a familiar shape to the day.",
+        paragraphs: [
+          "Bedtime rituals, favourite foods, playgroups, and the way you greet each other in the morning are quietly load-bearing. Try to keep the most important ones going as much as possible.",
+          "Big changes like starting nursery, moving room, or dropping a nap are usually easier to make well before or well after the baby arrives rather than in the weeks around it.",
+        ],
+      },
+      {
+        id: "the-early-days-after-birth",
+        heading: "The early days after the baby is here",
+        lead: "How the first meeting is handled quietly matters, but does not have to be perfect.",
+        paragraphs: [
+          "Having the baby already in a cot rather than in your arms when your older child arrives can help them feel greeted first. Many families give an easy small gift from the baby.",
+          "Regression, clinginess, sleep upsets, and big feelings are common in the first weeks. Meeting them with warmth rather than trying to correct usually works better than firmer boundaries at this point.",
+        ],
+      },
+      {
+        id: "protecting-connection",
+        heading: "Protecting connection over time",
+        lead: "Small, consistent moments of attention are what carry the relationship.",
+        paragraphs: [
+          "Ten minutes of focused, unhurried one-on-one time, even a few times a week, tends to matter more than longer stretches of divided attention. Reading, a walk, or a small ritual you have together all count.",
+          "It is okay to name what is hard. This is a lot of change for both of us, and I love you exactly the same. Older children often relax when the difficulty is acknowledged rather than glossed over.",
+        ],
+      },
+    ],
+  },
+
+  // ─── MATERNITY LEAVE PLANNING ─────────────────────────────────────────────
+  {
+    slug: "maternity-leave-planning",
+    title: "Maternity leave planning: a calm UK overview",
+    metaDescription: "A plain-language guide to planning maternity leave in the UK. Notice, timing, pay, keeping in touch days, and where to get official guidance.",
+    quickAnswer:
+      "In the UK, most employed pregnant people are entitled to up to 52 weeks of maternity leave. You can start it any time from 11 weeks before your due date, and you need to tell your employer at least 15 weeks before your due date. Statutory Maternity Pay covers 39 of those weeks for eligible employees. For anything specific to your contract, employment situation, or self-employed status, GOV.UK and your employer are the two most reliable sources.",
+    howThisFeels: [
+      "Wondering when to tell your employer",
+      "Not being sure exactly what you are entitled to",
+      "Worrying about money during the unpaid weeks",
+      "Feeling calmer once the practical bit has a rough shape",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "UK maternity leave has a legal framework", body: "Employed pregnant people are entitled to up to 52 weeks of maternity leave: 26 weeks ordinary and 26 weeks additional. Statutory Maternity Pay covers 39 weeks if you meet eligibility criteria." },
+        { heading: "Timing has clear rules", body: "You must tell your employer at least 15 weeks before your due date. Leave can start any time from 11 weeks before your due date; it will start automatically if you have a pregnancy-related absence in the four weeks before your due date." },
+      ],
+      lessCauses: [
+        { heading: "Self-employed and other statuses have different routes", body: "If you are self-employed, an agency worker, on a zero-hours contract, or recently changed jobs, entitlement is different. Maternity Allowance covers some of these situations." },
+      ],
+      whyItVaries: "Contracts often add enhanced maternity pay or extra flexibility on top of the statutory minimum. Reading your employer's maternity policy carefully is worth doing.",
+    },
+    timing: {
+      whenStarts: "Notice is due at least 15 weeks before your due date. Leave itself can start any time from 11 weeks before due date.",
+      whenEases: "You can take up to 52 weeks; most people plan a mix of full pay, statutory pay, and unpaid weeks, or return earlier if that works for them.",
+    },
+    whatItFeelsLike: ["Wanting a plan without over-planning it", "A quieter mind once the notice letter is sent"],
+    whatThisMeans:
+      "Planning maternity leave in outline early tends to reduce stress. Fine detail can be filled in as you go.",
+    normal: [
+      "Feeling unsure about timing early on",
+      "Making a rough budget for the unpaid weeks",
+      "Changing your return date closer to the time",
+      "Not knowing exactly how you will feel until baby is here",
+    ],
+    seekSupport: [
+      "Being treated unfairly at work because of pregnancy",
+      "Confusion about entitlement that your employer cannot resolve clearly",
+      "Financial pressure that feels unmanageable during unpaid weeks",
+    ],
+    disclaimer: "This is general UK information, not legal or financial advice. GOV.UK, ACAS, and Citizens Advice are the reliable places to check anything specific to your situation. Your employer's maternity policy is the other essential source.",
+    whatYouCanDo: [
+      { action: "Read your employer's maternity policy early", reason: "It often includes enhanced pay or flexibility on top of the statutory minimum." },
+      { action: "Check your entitlement on GOV.UK before your notice deadline", reason: "The 15-week notice point comes around quickly; knowing the rules first makes the conversation easier." },
+      { action: "Sketch a rough budget covering full-pay, statutory-pay, and unpaid weeks", reason: "A rough plan removes most of the financial anxiety without needing to be exact." },
+      { action: "Keep any notice or agreements in writing", reason: "A short email trail helps avoid confusion later." },
+    ],
+    whatHappensNext: "Most people settle into a plan that has some flex built in and return to it with fresh eyes once the baby is here.",
+    relatedStage: {
+      intro: "Maternity leave sits alongside the wider practical planning:",
+      links: [
+        { label: "Preparing for baby in pregnancy", href: "/pregnancy/preparing-for-baby", context: "The wider topic this article belongs to." },
+        { label: "The 36-week appointment", href: "/articles/the-36-week-appointment", context: "The main pregnancy conversation that arrives around the same time." },
+        { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth", context: "The emotional side of the run-up to leave and birth." },
+      ],
+    },
+    aiPrompts: [
+      "When can I start maternity leave in the UK?",
+      "How much is Statutory Maternity Pay?",
+      "What is a Keeping in Touch day?",
+    ],
+    captureIntro: "Maternity leave planning can hold a lot of quiet worry. Worth noting what still feels unclear.",
+    trimester: [2, 3],
+    relatedSlugs: ["preparing-emotionally-for-birth", "the-36-week-appointment", "hospital-bag-and-what-to-pack"],
+    journey: ["pregnancy"],
+    topics: ["preparing"],
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    keyTakeaways: [
+      "Employed pregnant people can take up to 52 weeks of maternity leave in the UK",
+      "You must tell your employer at least 15 weeks before your due date",
+      "Leave can start any time from 11 weeks before your due date",
+      "Statutory Maternity Pay covers 39 weeks if you meet eligibility criteria",
+      "Self-employed people may qualify for Maternity Allowance instead",
+      "Your employer's policy may enhance pay or flexibility beyond the statutory minimum",
+    ],
+    sources: [
+      { label: "Maternity pay and leave", publisher: "GOV.UK", url: "https://www.gov.uk/maternity-pay-leave" },
+      { label: "Employers: statutory maternity pay and leave", publisher: "GOV.UK", url: "https://www.gov.uk/employers-maternity-pay-leave" },
+      { label: "Maternity Allowance", publisher: "GOV.UK", url: "https://www.gov.uk/maternity-allowance" },
+      { label: "Maternity leave and pay", publisher: "ACAS", url: "https://www.acas.org.uk/maternity-leave-and-pay" },
+    ],
+    faq: [
+      { question: "When do I have to tell my employer I am pregnant?", answer: "You must tell your employer at least 15 weeks before your due date if you want maternity leave and pay. Many people share the news earlier so risk assessments and antenatal appointment time can be arranged. There is no obligation to share earlier than the 15-week point." },
+      { question: "What are Keeping in Touch days?", answer: "Keeping in Touch (KIT) days let you work up to 10 days during maternity leave without ending your leave or pay. They are optional for both sides and are useful for training, team days, or a soft check-in before you return." },
+      { question: "Can I change my return date?", answer: "Yes. If you want to return earlier than originally planned, you generally need to give your employer at least eight weeks' notice. If you want to extend your leave, the same notice usually applies. GOV.UK and your employer's policy have the specifics." },
+    ],
+    topic: "preparing-for-baby",
+    standfirst: "A plain overview of UK maternity leave: what you are entitled to, when to tell your employer, and where to go for anything specific to your situation.",
+    editorialSections: [
+      {
+        id: "the-basics",
+        heading: "The basics: leave, pay, and notice",
+        lead: "Most employees are entitled to up to 52 weeks of maternity leave, split into 26 weeks ordinary and 26 weeks additional.",
+        paragraphs: [
+          "Statutory Maternity Pay (SMP) covers 39 of those 52 weeks for eligible employees. The first 6 weeks are paid at 90 per cent of your average weekly earnings, and the following 33 weeks at the statutory rate or 90 per cent of your earnings if that is lower. The remaining 13 weeks are unpaid.",
+          "Notice matters. You must tell your employer at least 15 weeks before your due date if you want to take maternity leave and pay. Many employers appreciate earlier notice for risk assessments and cover planning, but the legal minimum is 15 weeks.",
+        ],
+        callout: {
+          tone: "info",
+          text: "This article gives a general overview of statutory entitlement. GOV.UK has the current rates and the exact rules for your situation.",
+        },
+      },
+      {
+        id: "when-to-start",
+        heading: "When to start your leave",
+        lead: "You can choose when your leave begins within a defined window.",
+        paragraphs: [
+          "The earliest you can start maternity leave is 11 weeks before your due date. Many people start closer to their due date to keep more paid weeks for after the baby arrives; others prefer to finish earlier because of energy, symptoms, or a physically demanding role.",
+          "Leave will start automatically if you have a pregnancy-related absence in the four weeks before your due date, or on the day after your baby is born if that comes first.",
+        ],
+      },
+      {
+        id: "self-employed-and-other-routes",
+        heading: "If you are self-employed or in a different setup",
+        lead: "Entitlement changes depending on how you work.",
+        paragraphs: [
+          "Self-employed people who have paid enough National Insurance contributions may be eligible for Maternity Allowance, paid for up to 39 weeks. Agency workers, people on zero-hours contracts, and those who have recently changed jobs may also qualify for Maternity Allowance rather than SMP.",
+          "GOV.UK has a short online tool to check what you are eligible for. If your situation feels complex, Citizens Advice can help you work through it without cost.",
+        ],
+      },
+      {
+        id: "planning-the-finances",
+        heading: "Planning the finances without over-planning",
+        lead: "A rough budget for the different pay tiers usually removes most of the anxiety.",
+        paragraphs: [
+          "Sketch out your monthly outgoings against the different phases: full pay if your employer enhances the first weeks, then statutory pay, then unpaid weeks. Even a rough spreadsheet clarifies where the tighter months will land.",
+          "Small early moves, like moving one direct debit or increasing savings by a small amount each month, tend to matter more than any dramatic financial plan. If money looks tight, Citizens Advice can help with benefits and grants you may not know about.",
+        ],
+      },
+      {
+        id: "keeping-in-touch-and-return",
+        heading: "Keeping in Touch days and returning to work",
+        lead: "You get some flexibility, in both directions, once your leave starts.",
+        paragraphs: [
+          "You can work up to 10 Keeping in Touch (KIT) days during maternity leave without losing pay or ending your leave. They are optional and negotiated with your employer, and often used for training, team days, or a soft return.",
+          "If you want to return earlier or later than originally planned, you generally need to give your employer at least eight weeks' notice. Requests for flexible working, part-time hours, or a phased return are also worth thinking about before you leave, even if you decide closer to the time.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "You do not have to decide your exact return date now. A rough plan with room to change is usually enough.",
+        },
+      },
+    ],
+  },
+
+  // ─── TESTING TOO EARLY ────────────────────────────────────────────────────
+  {
+    slug: "testing-too-early",
+    title: "Testing too early",
+    metaDescription: "Why testing before a missed period can give unclear or negative results, how hCG builds up, and how to think about retesting calmly.",
+    quickAnswer: "A pregnancy test looks for hCG in urine. In early pregnancy hCG usually rises gradually after implantation, and it may take several more days to reach a level a home test can pick up. Testing before your period is due can give a negative result even in a cycle that later turns positive. Most tests are more reliable from the day of your expected period, and clearer again a few days after that.",
+    standfirst: "Testing early rarely gives a calmer answer. It often gives an earlier version of the same wait.",
+    howThisFeels: [
+      "Desperate to know sooner",
+      "Talking yourself into just one more test",
+      "Not trusting a negative but not trusting a positive either",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "hCG rises gradually", body: "After implantation, hCG starts at a low level and often roughly doubles every 48 hours. It needs to reach a home test's detection threshold before a line will show." },
+        { heading: "Implantation timing varies", body: "Implantation itself may happen anywhere from around 6 to 12 days after ovulation, so two people at the same cycle day can be at very different points in their hCG rise." },
+        { heading: "Test sensitivity varies", body: "Different home tests are calibrated to different hCG thresholds. Early-detection tests may pick up lower levels, but results tend to be less reliable the further you test from a missed period." },
+      ],
+      lessCauses: [
+        { heading: "Later ovulation than expected", body: "If ovulation happened later in the cycle than assumed, you may be testing earlier in real terms than the calendar suggests." },
+        { heading: "Diluted urine", body: "Drinking a lot of fluid before testing may dilute hCG in urine. First morning urine tends to give the strongest signal." },
+      ],
+      whyItVaries: "How early a test can show anything depends on when implantation happened, how quickly hCG rises, the sensitivity of the test, and how concentrated the urine is on the day.",
+    },
+    timing: {
+      whenStarts: "Some early-detection tests may pick up hCG a few days before an expected period.",
+      whenEases: "By around a week after a missed period, most true pregnancies show a clearer positive.",
+    },
+    whatItFeelsLike: [
+      "Waiting for the timer with a held breath",
+      "A negative that does not feel final",
+      "The urge to test again the next morning",
+    ],
+    whatThisMeans: "A negative test before your period is due is not a confirmed answer, and a very faint line at that stage can be hard to read. Waiting until your period is due, or a few days after, usually gives a more trustworthy result.",
+    normal: [
+      "Negative early tests followed by a positive a few days later",
+      "Faint lines that need retesting to become clearer",
+      "Feeling drawn to test again even when you know it may be too soon",
+    ],
+    seekSupport: [
+      "No period and repeated negative tests for more than two weeks past your expected date",
+      "Any positive test with heavy bleeding or severe one-sided pain",
+      "Cycles that are consistently very irregular",
+    ],
+    disclaimer: "This is general guidance and not a diagnosis. Speak to a pharmacist or GP if results are consistently confusing or if you have any concerns.",
+    whatYouCanDo: [
+      { action: "Wait until the day of your expected period if you can", reason: "It is the simplest way to give a result you can trust." },
+      { action: "Use first morning urine when you do test", reason: "hCG tends to be more concentrated then, especially early on." },
+      { action: "Retest in 48 to 72 hours if the result is unclear", reason: "hCG often rises noticeably in that time in early pregnancy." },
+      { action: "Set a testing limit for yourself", reason: "Repeated early tests often add stress without adding clarity." },
+    ],
+    whatHappensNext: "A clear positive usually leads to contacting a GP or midwife to register. A persistent negative with no period after a couple of weeks is worth a GP check to look at cycle patterns.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "When to take a pregnancy test", href: "/articles/when-to-take-a-pregnancy-test" },
+        { label: "The two week wait", href: "/articles/two-week-wait" },
+        { label: "Faint positive pregnancy test", href: "/articles/faint-positive-pregnancy-test" },
+      ],
+    },
+    aiPrompts: [
+      "How early can I take a pregnancy test?",
+      "Can a test be wrong if I test before my period?",
+      "When should I retest after a negative?",
+    ],
+    captureIntro: "The day you tested, and how it felt, is worth remembering gently.",
+    topic: undefined,
+    journey: ["trying-to-conceive"],
+    topics: ["timelines"],
+    relatedSlugs: [
+      "when-to-take-a-pregnancy-test",
+      "negative-test-but-no-period",
+      "evaporation-line-or-faint-positive",
+      "two-week-wait",
+      "faint-positive-pregnancy-test",
+    ],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-testing-too-early.jpg", import.meta.url).href,
+      alt: "A blank notebook and warm cup of tea on soft cream linen, quiet morning light.",
+    },
+    sources: [
+      { label: "Doing a pregnancy test", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/doing-a-pregnancy-test/" },
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Pregnancy tests", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/early-pregnancy/pregnancy-tests" },
+    ],
+    keyTakeaways: [
+      "hCG rises gradually after implantation and may take days to reach a level a home test can pick up.",
+      "Testing before a missed period can give a negative result even in a cycle that later turns positive.",
+      "Most tests are more reliable from the day of the expected period, and clearer a few days after.",
+      "First morning urine tends to give the strongest signal.",
+      "Repeated early testing often adds stress without adding clarity.",
+    ],
+    faq: [
+      { question: "Can I get a positive test before my period is due?", answer: "Sometimes, especially with early-detection tests. Results are less reliable the further you test from your expected period, so it is often worth confirming a few days later." },
+      { question: "Why is my test negative when I feel pregnant?", answer: "You may be testing before hCG has risen enough to show, or ovulation may have happened later than you thought. Retesting in 48 to 72 hours often gives a clearer picture." },
+      { question: "Is a digital test better for early testing?", answer: "Digital tests are usually easier to read but may be a little less sensitive than the most sensitive line tests. Both benefit from waiting until closer to your expected period." },
+    ],
+    editorialSections: [
+      {
+        id: "why-early-tests-are-hard-to-read",
+        heading: "Why early tests are hard to read",
+        lead: "In early pregnancy, hCG can be present in tiny amounts long before a home test will notice it.",
+        paragraphs: [
+          "A home pregnancy test looks for a threshold amount of hCG in urine. In the days just after implantation, hCG is usually below that threshold. It may still be rising, and a test the following week may show what a test today could not.",
+          "This is why an early negative can be misleading. It reflects what the test can see right now, not the full picture of what may be happening in the body.",
+        ],
+      },
+      {
+        id: "how-hcg-builds-up",
+        heading: "How hCG builds up in the first days",
+        lead: "hCG rises in a gradual, mostly predictable pattern once implantation has happened.",
+        paragraphs: [
+          "In early pregnancy, hCG often roughly doubles every 48 hours. A test at 9 days past ovulation may read negative when the same test at 12 days past ovulation reads clearly positive.",
+          "Because implantation itself can happen at slightly different points from one cycle to another, two people at the same cycle day may be at very different places in that rise.",
+        ],
+        callout: { tone: "info", text: "Retesting in 48 to 72 hours often turns an unclear early result into a clearer one, in either direction." },
+      },
+      {
+        id: "waiting-can-reduce-confusion",
+        heading: "Why waiting can reduce confusion",
+        lead: "Testing later is often the calmer route, not the slower one.",
+        paragraphs: [
+          "By the day of an expected period, most true pregnancies will show a positive on a standard home test. A few more days after that adds further confidence.",
+          "Waiting rarely feels natural in the middle of a two week wait, but it usually replaces several unclear results with one clearer one.",
+        ],
+      },
+      {
+        id: "what-to-do-after-an-early-negative",
+        heading: "What to do after an early negative",
+        lead: "An early negative is not a final answer.",
+        paragraphs: [
+          "If your period has not arrived, retesting after 48 to 72 hours with first morning urine is a reasonable next step. If cycles are irregular, giving it a few more days before retesting can help.",
+          "If a full period arrives, the cycle has almost certainly not led to pregnancy this time. If there is still no period after a couple of weeks past your expected date, a GP check can help look at cycle patterns.",
+        ],
+      },
+      {
+        id: "managing-the-urge-to-keep-testing",
+        heading: "Managing the urge to keep testing",
+        lead: "Testing loops rarely help, and they often make the wait harder.",
+        paragraphs: [
+          "It can help to decide in advance how often you will test, and to keep tests out of easy reach in between. Some people find that setting a single planned test date, such as the morning of a missed period, lowers the daily pull.",
+          "If testing is starting to feel heavy, stepping back for a cycle is not giving up. It is a way of protecting the calmer parts of trying to conceive.",
+        ],
+        callout: { tone: "reassurance", text: "You are allowed to slow this down. Waiting a couple more days rarely changes an outcome, and often changes how the wait feels." },
+      },
+    ],
+  },
+
+  // ─── NEGATIVE TEST BUT NO PERIOD ──────────────────────────────────────────
+  {
+    slug: "negative-test-but-no-period",
+    title: "Negative test but no period",
+    metaDescription: "Common reasons for a negative pregnancy test when your period has not arrived, how testing timing matters, and when to speak to a GP.",
+    quickAnswer: "A negative pregnancy test with no period can happen for several ordinary reasons. Ovulation may have happened later than expected, the cycle itself may be longer this month, hCG may not yet be at a level a test can pick up, or urine may have been diluted. Retesting in a few days with first morning urine, or speaking to a GP after a couple of weeks with no period, is often the calmer next step.",
+    standfirst: "A negative test with no period is confusing rather than final. There are usually gentler explanations than the ones our minds reach for.",
+    howThisFeels: [
+      "Unsure whether to feel hopeful or resigned",
+      "Frustrated at not getting a clear answer",
+      "Worried something might be wrong with your cycle",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Later ovulation than expected", body: "If ovulation happened later in the cycle than usual, your period will also arrive later. A test may still be negative simply because you are earlier in real terms than the calendar suggests." },
+        { heading: "Longer cycle this month", body: "Cycle length can vary from month to month. A cycle that is a few days longer than average is common and does not usually mean anything is wrong." },
+        { heading: "hCG below the test threshold", body: "Even in early pregnancy, hCG can take a few days more to reach a level a home test can pick up. A negative today does not always stay a negative in a few days' time." },
+      ],
+      lessCauses: [
+        { heading: "Diluted urine", body: "Testing later in the day, or after drinking a lot of fluid, may dilute hCG in urine and lower the reading." },
+        { heading: "Cycle changes from stress, illness or travel", body: "Significant stress, illness, poor sleep, or long-distance travel can sometimes delay ovulation and therefore delay a period." },
+        { heading: "Other cycle factors", body: "Recent stopping of hormonal contraception, thyroid changes, PCOS, and significant weight changes can all affect cycle length and predictability." },
+      ],
+      whyItVaries: "How reliably a test reflects what is happening depends on where you are in the cycle, when ovulation happened, and how sensitive the test is. Cycle length itself is a range, not a fixed number.",
+    },
+    timing: {
+      whenStarts: "Many negative tests with no period happen in the first few days past an expected period date.",
+      whenEases: "Most cycles resolve one way or the other within a week or so. Anything longer than two weeks past your expected period is worth a GP conversation.",
+    },
+    whatItFeelsLike: [
+      "Checking underwear more than usual",
+      "Wanting to test again straight away",
+      "Trying not to spiral about worst-case explanations",
+    ],
+    whatThisMeans: "A negative test with no period usually means either that testing has happened too early, or that ovulation has shifted and the cycle is simply longer this month. It rarely means something serious, but persistent patterns are worth checking.",
+    normal: [
+      "A cycle that runs a few days longer than usual",
+      "A negative that becomes positive a few days later",
+      "Feeling unsettled by not having a clear answer",
+    ],
+    seekSupport: [
+      "No period and repeated negative tests for more than two weeks past your expected date",
+      "Cycles that are consistently very irregular across several months",
+      "Sudden changes to cycle length alongside other new symptoms",
+    ],
+    disclaimer: "This is general guidance and does not replace medical advice. Speak to your GP if a period is more than a couple of weeks late or if you have concerns about your cycle.",
+    whatYouCanDo: [
+      { action: "Retest in 3 to 5 days with first morning urine", reason: "It gives hCG a chance to rise if a pregnancy is developing." },
+      { action: "Track cycle dates gently", reason: "Even a simple record of period start dates can show whether cycles are usually predictable for you." },
+      { action: "Look after basics like sleep and food", reason: "Sleep, food, and stress can all affect when ovulation happens and therefore when a period arrives." },
+      { action: "Speak to your GP if a period is more than two weeks late", reason: "They can look at cycle patterns and any wider factors that may be affecting timing." },
+    ],
+    whatHappensNext: "In many cases the period arrives within a few days, or a repeat test shows a clearer answer. If neither happens, a GP appointment can help work out whether anything else is going on.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Testing too early", href: "/articles/testing-too-early" },
+        { label: "When to take a pregnancy test", href: "/articles/when-to-take-a-pregnancy-test" },
+        { label: "Late ovulation and TTC", href: "/articles/late-ovulation-and-ttc" },
+      ],
+    },
+    aiPrompts: [
+      "Why is my period late but my test is negative?",
+      "Can a late ovulation cause a late period?",
+      "How long should I wait before speaking to a GP?",
+    ],
+    captureIntro: "Uncertain cycles are worth noting gently, without turning them into a story.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines"],
+    relatedSlugs: [
+      "testing-too-early",
+      "when-to-take-a-pregnancy-test",
+      "late-ovulation-and-ttc",
+      "irregular-periods-and-trying-to-conceive",
+      "two-week-wait",
+    ],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-negative-test-no-period.jpg", import.meta.url).href,
+      alt: "Soft folded cream blanket and dried lavender on a window seat in gentle morning light.",
+    },
+    sources: [
+      { label: "Doing a pregnancy test", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/doing-a-pregnancy-test/" },
+      { label: "Irregular periods", publisher: "NHS", url: "https://www.nhs.uk/conditions/irregular-periods/" },
+      { label: "Periods and fertility in the menstrual cycle", publisher: "NHS", url: "https://www.nhs.uk/conditions/periods/fertility-in-the-menstrual-cycle/" },
+      { label: "Pregnancy tests", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/early-pregnancy/pregnancy-tests" },
+    ],
+    keyTakeaways: [
+      "A negative test with no period often reflects testing timing or a slightly longer cycle rather than something wrong.",
+      "Ovulation may happen later than usual, which delays the expected period.",
+      "hCG may still be below a home test's threshold in the first days past an expected period.",
+      "Retesting in 3 to 5 days with first morning urine is a reasonable next step.",
+      "If a period is more than two weeks late, a GP conversation can help.",
+    ],
+    faq: [
+      { question: "How late can a period be with a negative test?", answer: "Cycles can vary by a few days from month to month for many people. If a period is more than two weeks past its expected date with continued negative tests, it is worth speaking to a GP." },
+      { question: "Could I still be pregnant with a negative test?", answer: "Sometimes, especially in the first days past a missed period. Retesting in a few days with first morning urine often gives a clearer answer." },
+      { question: "Can stress delay a period?", answer: "Significant stress, illness, poor sleep, or big schedule changes can sometimes delay ovulation, which delays the period that follows." },
+    ],
+    editorialSections: [
+      {
+        id: "why-this-happens",
+        heading: "Why a test can be negative when a period has not arrived",
+        lead: "Most of the time, one of a small handful of ordinary explanations is at play.",
+        paragraphs: [
+          "The most common reason is testing timing. hCG rises gradually in early pregnancy, and in the first days past a missed period it may still be too low for a home test to pick up.",
+          "The next most common reason is that ovulation happened later in the cycle than expected. If ovulation shifts, so does the expected period. The cycle is not late so much as simply longer this month.",
+        ],
+      },
+      {
+        id: "how-cycles-can-vary",
+        heading: "How cycles can vary month to month",
+        lead: "Cycle length is a range for most people, not a fixed number.",
+        paragraphs: [
+          "A cycle that runs a few days longer than usual is common and does not usually point to anything worrying. Sleep, food, stress, illness, and travel can all nudge ovulation timing.",
+          "If cycles are usually regular for you and this one feels very different, it is worth noting. One unusual cycle is common. Repeated very unpredictable cycles across several months are more useful information for a GP.",
+        ],
+        callout: { tone: "info", text: "A simple record of period start dates over a few months is often more useful than any single test result." },
+      },
+      {
+        id: "when-to-retest",
+        heading: "When to retest and how to do it",
+        lead: "A calmer retest, later, usually gives a clearer answer than several rushed ones.",
+        paragraphs: [
+          "Waiting 3 to 5 days before retesting gives hCG a chance to rise if a pregnancy is developing. Using first morning urine tends to give the strongest reading, especially early on.",
+          "Using the same brand of test can make progression easier to compare, since different tests can look slightly different at the same hCG level.",
+        ],
+      },
+      {
+        id: "when-to-speak-to-a-gp",
+        heading: "When to speak to a GP",
+        lead: "A single unusual cycle is common. A pattern is worth a conversation.",
+        paragraphs: [
+          "If a period is more than about two weeks past its expected date with continued negative tests, a GP can help work out what is going on. They may want to talk about cycle history, medications, weight changes, or other symptoms.",
+          "Persistently irregular or absent periods across several months are also worth raising, especially if you are trying to conceive or thinking about it.",
+        ],
+        callout: { tone: "reassurance", text: "Most late periods with negative tests resolve within a week or two. Asking for a GP appointment is a reasonable step, not an alarm." },
+      },
+      {
+        id: "looking-after-yourself",
+        heading: "Looking after yourself in the wait",
+        lead: "The wait between an unclear result and a clearer answer is one of the harder parts of TTC.",
+        paragraphs: [
+          "It can help to plan gentle distractions for the next few days, and to set a single retest date rather than testing daily. Talking to a partner or friend about the uncertainty, rather than trying to hold it silently, often makes the wait lighter.",
+          "There is no perfect way to sit with a cycle that has gone off script. Small kindnesses, and permission to not know yet, are usually enough.",
+        ],
+      },
+    ],
+  },
+
+  // ─── EVAPORATION LINE OR FAINT POSITIVE ───────────────────────────────────
+  {
+    slug: "evaporation-line-or-faint-positive",
+    title: "Evaporation line or faint positive",
+    metaDescription: "Why faint lines and evaporation lines can be confusing, how the reading window matters, and when to retest or speak to a pharmacist or GP.",
+    quickAnswer: "Faint lines are one of the most confusing parts of home pregnancy testing. A pink line that appears inside the test's stated reading window is usually a true positive at a low hCG level. A grey, colourless, or shadow-like line that appears after the reading window has passed is more often called an evaporation line, and is not usually a positive. Retesting in 48 to 72 hours with first morning urine often gives a clearer answer.",
+    standfirst: "Reading a faint line on a home test is one of the most disorientating moments in trying to conceive. Timing and colour matter more than most instructions make clear.",
+    howThisFeels: [
+      "Squinting at the test under different lights",
+      "Photographing it, showing others, hoping for a second opinion",
+      "Hopeful and afraid in the same breath",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "The reading window matters", body: "Home tests are designed to be read within a specific time window, often around 3 to 5 minutes. Lines that appear after that window are more likely to be evaporation lines rather than true positives." },
+        { heading: "Pink versus grey", body: "True positive lines usually have some pink or coloured dye. Evaporation lines tend to be grey, colourless, or shadow-like, caused by urine drying on the test strip." },
+        { heading: "Test sensitivity varies", body: "Different brands are calibrated to different hCG thresholds. The same hCG level can look faintly positive on one test and clearer on another." },
+      ],
+      lessCauses: [
+        { heading: "Diluted urine", body: "Drinking a lot of fluid before testing may dilute hCG. First morning urine often produces a clearer line at the same stage of pregnancy." },
+        { heading: "Very early testing", body: "Testing before a missed period, or in the first day or two after, may show a faint line simply because hCG is still low." },
+        { heading: "Chemical pregnancy", body: "A faint line that fades over the following days, or does not darken with retesting, can sometimes point to a very early loss known as a chemical pregnancy." },
+      ],
+      whyItVaries: "Faint lines depend on hCG level, urine concentration, test sensitivity, and whether the test is read inside its stated window. Two tests on the same day can look different for entirely ordinary reasons.",
+    },
+    timing: {
+      whenStarts: "Faint lines are most common in the first few days around an expected period.",
+      whenEases: "Retesting 48 to 72 hours later often makes a true positive clearer.",
+    },
+    whatItFeelsLike: [
+      "A line you can only see at certain angles",
+      "A line that is pink in some photos and grey in others",
+      "A line that darkens on the next test, or does not",
+    ],
+    whatThisMeans: "A pink line inside the reading window is usually a true positive, even faintly. A grey or shadow-like line outside the reading window is usually not. Retesting is a fair way to move from unclear to clearer.",
+    normal: [
+      "A faint positive that darkens over 48 to 72 hours",
+      "Needing to retest for confidence",
+      "A digital test still reading not pregnant while a sensitive line test shows a faint line",
+    ],
+    seekSupport: [
+      "A faint line that fades alongside bleeding heavier than a normal period",
+      "Severe one-sided pain with any positive test",
+      "Repeated faint positives followed by early bleeding",
+    ],
+    disclaimer: "This is general guidance. This article does not interpret a specific test. Speak to a pharmacist, GP, or NHS 111 if you have heavy bleeding, severe pain, or an unclear result that is not resolving.",
+    whatYouCanDo: [
+      { action: "Read the test inside its stated window", reason: "Lines that appear later are more likely to be evaporation lines." },
+      { action: "Retest in 48 to 72 hours with first morning urine", reason: "A true positive usually darkens as hCG rises." },
+      { action: "Use the same brand of test for comparison", reason: "Different tests have different dye intensities, which can make progression harder to judge across brands." },
+      { action: "Consider a digital test after another day or two", reason: "A digital reading removes some of the line-reading guesswork, though it may be slightly less sensitive." },
+      { action: "Ask a pharmacist for guidance", reason: "They can talk you through what different results tend to mean without interpreting your specific test." },
+    ],
+    whatHappensNext: "If the line darkens with retesting, the next usual step is contacting a GP or midwife to register. If it fades or bleeding starts, speaking to a GP is a reasonable step. Chemical pregnancies are common and rarely need treatment, but support is available.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Faint positive pregnancy test", href: "/articles/faint-positive-pregnancy-test" },
+        { label: "Testing too early", href: "/articles/testing-too-early" },
+        { label: "Chemical pregnancy", href: "/articles/chemical-pregnancy" },
+      ],
+    },
+    aiPrompts: [
+      "Is a faint line always a positive?",
+      "What is an evaporation line?",
+      "How can I tell if a line is real?",
+    ],
+    captureIntro: "Even unclear moments in TTC are worth writing down gently, without pressure to interpret them.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines"],
+    relatedSlugs: [
+      "faint-positive-pregnancy-test",
+      "testing-too-early",
+      "when-to-take-a-pregnancy-test",
+      "chemical-pregnancy",
+      "two-week-wait",
+    ],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-evaporation-line.jpg", import.meta.url).href,
+      alt: "A small glass of water on a pale ceramic dish with a sprig of olive leaves on cream linen.",
+    },
+    sources: [
+      { label: "Doing a pregnancy test", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/doing-a-pregnancy-test/" },
+      { label: "Signs and symptoms of pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/signs-and-symptoms-of-pregnancy/" },
+      { label: "Pregnancy tests", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/early-pregnancy/pregnancy-tests" },
+    ],
+    keyTakeaways: [
+      "A pink line inside the test's reading window is usually a true positive, even faintly.",
+      "Grey, colourless, or shadow-like lines outside the window are more often evaporation lines.",
+      "Test sensitivity varies between brands, which can affect how the same hCG level looks.",
+      "Retesting in 48 to 72 hours with first morning urine often gives a clearer picture.",
+      "A pharmacist or GP can help if results are consistently unclear.",
+    ],
+    faq: [
+      { question: "How do I know if a faint line is real?", answer: "A pink line that appears inside the test's stated reading window is usually a true positive at low hCG. A retest in 48 to 72 hours often shows whether the line is darkening." },
+      { question: "Why does a line appear after the reading window?", answer: "Urine drying on the test strip can sometimes leave a faint mark called an evaporation line. These are usually grey or colourless rather than pink and are not usually true positives." },
+      { question: "Should I trust a digital test more?", answer: "Digital tests are often easier to read but may be a little less sensitive. If a sensitive line test shows a faint positive, a digital test may still read not pregnant for a couple of days." },
+    ],
+    editorialSections: [
+      {
+        id: "reading-inside-the-window",
+        heading: "Why the reading window matters",
+        lead: "The stated time window on a home test is not a suggestion.",
+        paragraphs: [
+          "Home tests are designed to be read within a specific number of minutes, often around 3 to 5. Inside that window, a line is much more likely to reflect the presence of hCG.",
+          "Outside the window, a line can appear as urine dries on the strip. These are often called evaporation lines and are usually grey, colourless, or shadow-like rather than pink.",
+        ],
+      },
+      {
+        id: "brands-and-sensitivity",
+        heading: "How different brands and sensitivities behave",
+        lead: "Not all tests are calibrated to the same hCG threshold.",
+        paragraphs: [
+          "A more sensitive test may show a positive at a lower hCG level than a less sensitive one. The same person, testing on the same day, can see different results across brands.",
+          "This is not usually a sign that either test is wrong. It is a reminder that a single result is one snapshot, not a final answer.",
+        ],
+        callout: { tone: "info", text: "Using the same brand of test when retesting can make it easier to see whether a line is darkening over time." },
+      },
+      {
+        id: "why-lines-can-be-unclear",
+        heading: "Why lines can be unclear even in a true pregnancy",
+        lead: "Faint lines are common in the earliest days.",
+        paragraphs: [
+          "In the first days of a pregnancy, hCG is often only just crossing the threshold a home test can pick up. A faint but genuine line is common at that stage.",
+          "Diluted urine, older tests, and testing later in the day can all make a real positive look fainter than it is. Retesting with first morning urine often shows the difference.",
+        ],
+      },
+      {
+        id: "when-to-repeat-a-test",
+        heading: "When to repeat a test",
+        lead: "Retesting is often the calmest next step, not a sign of doubt.",
+        paragraphs: [
+          "Waiting 48 to 72 hours before retesting gives hCG a chance to rise if a pregnancy is developing. In a healthy early pregnancy, a repeat line often looks clearly darker.",
+          "If a line does not darken across a few tests, or fades alongside bleeding, that is worth speaking to a GP about. It does not mean you did anything wrong.",
+        ],
+      },
+      {
+        id: "when-to-speak-to-a-clinician",
+        heading: "When to speak to a pharmacist, GP, or clinic",
+        lead: "You are not expected to work this out alone.",
+        paragraphs: [
+          "A pharmacist can talk you through how different tests behave and how to think about retesting, without interpreting a specific result. A GP can help if bleeding, pain, or repeatedly unclear results are causing worry.",
+          "If a positive test is followed by heavy bleeding, severe one-sided pain, or feeling very unwell, contacting NHS 111 or a GP the same day is a reasonable step.",
+        ],
+        callout: { tone: "reassurance", text: "You are allowed to ask for help with an unclear test. It does not mean you are overreacting." },
+      },
+    ],
+  },
+
+  // ─── TWO WEEK WAIT SYMPTOMS ───────────────────────────────────────────────
+  {
+    slug: "two-week-wait-symptoms",
+    title: "Two week wait symptoms",
+    metaDescription: "Why symptoms in the two week wait can overlap with normal cycle symptoms, what progesterone does, and why symptoms alone cannot confirm pregnancy.",
+    quickAnswer: "In the two week wait, many people notice symptoms such as breast tenderness, cramping, tiredness, and mild nausea. Most of these are caused by progesterone, which rises in the second half of every cycle whether or not conception has happened. This is why symptoms alone cannot confirm pregnancy. A test taken from around the day of your expected period usually gives a more reliable answer.",
+    standfirst: "The wait between ovulation and testing is loud. Symptoms in this window are real, but they rarely mean what our minds want them to mean.",
+    howThisFeels: [
+      "Scanning your body for signs, minute by minute",
+      "Noticing symptoms you would normally miss",
+      "Second-guessing every twinge",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Progesterone rises after ovulation", body: "In the second half of every cycle, progesterone rises whether or not conception has happened. It is a common cause of many two week wait symptoms, from tender breasts to mild cramping and tiredness." },
+        { heading: "PMS and early pregnancy overlap", body: "Because both PMS and early pregnancy involve high progesterone, many symptoms feel very similar. This is not a sign that something is being missed. It is how the body is designed to work." },
+        { heading: "Symptom awareness increases", body: "During the wait, most people pay closer attention to their bodies than usual. Symptoms that would normally pass unnoticed suddenly feel meaningful, even when they are the same as any other cycle." },
+      ],
+      lessCauses: [
+        { heading: "Recent illness or poor sleep", body: "Tiredness, mild nausea, and headaches can all follow ordinary things like a virus, disrupted sleep, or a stressful week." },
+        { heading: "Changes in food, caffeine or alcohol", body: "Cutting caffeine or alcohol, or eating differently, can cause headaches or nausea that get read as pregnancy signs." },
+      ],
+      whyItVaries: "Everyone experiences their luteal phase differently, and the same person can have different symptoms from one cycle to another. This is why symptoms rarely give a clear answer on their own.",
+    },
+    timing: {
+      whenStarts: "Symptoms from rising progesterone usually appear from around 3 to 7 days past ovulation.",
+      whenEases: "Symptoms often ease around the time a period arrives, or continue if a cycle leads to pregnancy.",
+    },
+    whatItFeelsLike: [
+      "Breast tenderness that comes and goes",
+      "Cramping that could be a period arriving or not",
+      "Tiredness that feels heavier than usual",
+    ],
+    whatThisMeans: "Symptoms in the two week wait can be helpful for noticing your cycle, but they cannot confirm pregnancy on their own. A test taken from around the day of your expected period, or a few days after, is usually a more reliable answer.",
+    normal: [
+      "Cycle after cycle where symptoms feel similar whether or not conception happens",
+      "Symptoms appearing and easing without a clear pattern",
+      "A cycle where you notice almost no symptoms at all",
+    ],
+    seekSupport: [
+      "Severe one-sided pain, especially if you have a positive test",
+      "Heavy or unusual bleeding that is not a normal period for you",
+      "Symptoms that feel very different from your usual cycles across several months",
+    ],
+    disclaimer: "This is general guidance. Speak to a GP if you have severe pain, unusual bleeding, or symptoms that feel very different from your usual cycles.",
+    whatYouCanDo: [
+      { action: "Notice symptoms without turning them into predictions", reason: "It keeps the wait lighter, and it protects you from small disappointments." },
+      { action: "Wait until at least the day of your expected period to test", reason: "It is the most reliable way to get a clearer answer." },
+      { action: "Keep gentle routines going", reason: "Sleep, food, and time outdoors help the wait feel less all-consuming." },
+      { action: "Talk to a partner or friend about the wait", reason: "Sharing the load often makes the days feel shorter." },
+    ],
+    whatHappensNext: "By the day of an expected period, most true pregnancies show on a home test. If a period arrives, symptoms usually ease within a day or two. If neither happens, retesting in a few days can help.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "The two week wait", href: "/articles/two-week-wait" },
+        { label: "Coping with the two week wait", href: "/articles/coping-with-the-two-week-wait" },
+        { label: "When to take a pregnancy test", href: "/articles/when-to-take-a-pregnancy-test" },
+      ],
+    },
+    aiPrompts: [
+      "What symptoms can I have in the two week wait?",
+      "Can symptoms tell me I am pregnant?",
+      "Why do PMS and early pregnancy feel so similar?",
+    ],
+    captureIntro: "The way this wait feels is worth remembering, more than any single symptom is.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines", "emotional-wellbeing"],
+    relatedSlugs: [
+      "two-week-wait",
+      "coping-with-the-two-week-wait",
+      "spotting-during-the-two-week-wait",
+      "when-to-take-a-pregnancy-test",
+      "testing-too-early",
+    ],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-two-week-wait-symptoms.jpg", import.meta.url).href,
+      alt: "An open blank journal beside a warm cup of tea and a small sprig of chamomile in soft daylight.",
+    },
+    sources: [
+      { label: "Signs and symptoms of pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/signs-and-symptoms-of-pregnancy/" },
+      { label: "Periods and fertility in the menstrual cycle", publisher: "NHS", url: "https://www.nhs.uk/conditions/periods/fertility-in-the-menstrual-cycle/" },
+      { label: "Early pregnancy symptoms", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/early-pregnancy/pregnancy-symptoms" },
+    ],
+    keyTakeaways: [
+      "Progesterone rises after ovulation whether or not conception has happened, causing many two week wait symptoms.",
+      "PMS and early pregnancy share many of the same signs, which is why symptoms alone cannot confirm pregnancy.",
+      "Symptom awareness usually rises during the wait, which can make ordinary sensations feel significant.",
+      "A test from around the day of your expected period is more reliable than symptoms.",
+      "Severe pain or unusual bleeding is worth speaking to a GP about.",
+    ],
+    faq: [
+      { question: "Are two week wait symptoms a sign of pregnancy?", answer: "They can be, but they can also be the effects of progesterone in any luteal phase. Symptoms alone cannot confirm pregnancy. A test from around the day of your expected period is more reliable." },
+      { question: "Why do my symptoms feel exactly like PMS?", answer: "Because both PMS and early pregnancy involve rising progesterone, the two often feel very similar. This overlap is common and not a sign that anything is being missed." },
+      { question: "Should I worry if I have no symptoms?", answer: "No. Many cycles that lead to pregnancy involve almost no early symptoms, and many that do not still bring symptoms. Symptom pattern is not a reliable guide either way." },
+    ],
+    editorialSections: [
+      {
+        id: "what-progesterone-does",
+        heading: "What progesterone does in the second half of the cycle",
+        lead: "Most two week wait symptoms are caused by hormones that rise in every cycle.",
+        paragraphs: [
+          "After ovulation, the ovary releases progesterone from the corpus luteum. Progesterone prepares the uterine lining, slightly raises body temperature, and can cause tender breasts, mild bloating, cramping, and tiredness.",
+          "Because progesterone rises whether or not conception has happened, these symptoms can appear in cycles that lead to pregnancy and in cycles that lead to a period.",
+        ],
+      },
+      {
+        id: "why-pms-and-pregnancy-overlap",
+        heading: "Why PMS and early pregnancy symptoms overlap",
+        lead: "The signs feel similar because the hormone driving many of them is similar.",
+        paragraphs: [
+          "In a cycle that leads to a period, progesterone falls a few days before the bleed starts. In a cycle that leads to pregnancy, progesterone stays high. The rise itself, though, feels much the same in both.",
+          "This is why breast tenderness, cramping, and tiredness are almost impossible to interpret on their own. They are usually a story about hormones, not about outcome.",
+        ],
+        callout: { tone: "info", text: "Symptoms alone rarely tell you what a test will say. A test from around the day of your expected period usually will." },
+      },
+      {
+        id: "common-symptoms",
+        heading: "Common symptoms in the two week wait",
+        lead: "A short list is more helpful than an endless one.",
+        paragraphs: [
+          "Common experiences include tender or heavy-feeling breasts, mild cramping, bloating, tiredness, changes in appetite, mild nausea, and shifts in mood. Any of these can appear in any luteal phase.",
+          "Less common experiences include noticing changes in taste or smell, or heightened sensitivity to certain foods. These can happen in early pregnancy, but they can also happen in cycles that do not lead to pregnancy.",
+        ],
+      },
+      {
+        id: "why-symptoms-cannot-confirm",
+        heading: "Why symptoms cannot confirm pregnancy",
+        lead: "Symptoms are context, not proof.",
+        paragraphs: [
+          "There is no symptom, or combination of symptoms, that reliably distinguishes a cycle that leads to pregnancy from one that does not. Some people notice many symptoms and are not pregnant. Others notice almost none and are.",
+          "This is not a failing of the body. It is simply how much progesterone and PMS overlap. A test is the tool for the question of whether a pregnancy is developing, not the body's sensations.",
+        ],
+      },
+      {
+        id: "when-to-test",
+        heading: "When it is worth testing",
+        lead: "Timing is more useful than symptom-watching.",
+        paragraphs: [
+          "Most home tests are more reliable from the day of an expected period. Testing a few days after that adds further confidence, especially if the first test was unclear.",
+          "If you test earlier, be prepared for a result that may not be final. Retesting in 48 to 72 hours often gives a clearer answer than repeated same-day tests.",
+        ],
+        callout: { tone: "reassurance", text: "You are not missing something by not being able to read your symptoms. They are genuinely hard to read." },
+      },
+    ],
+  },
+
+  // ─── SPOTTING DURING THE TWO WEEK WAIT ───────────────────────────────────
+  {
+    slug: "spotting-during-the-two-week-wait",
+    title: "Spotting during the two week wait",
+    metaDescription: "What light spotting after ovulation may mean, why implantation bleeding is often talked about with more certainty than it deserves, and when to seek advice.",
+    quickAnswer: "Light spotting in the days after ovulation can happen for several ordinary reasons. Some people notice a small amount of bleeding around the time implantation may be occurring, but many cycles that lead to pregnancy have no spotting at all, and many cycles with spotting do not lead to pregnancy. Very heavy bleeding, severe pain, or spotting alongside dizziness or feeling unwell is worth speaking to a GP about.",
+    standfirst: "Spotting in the two week wait rarely gives a clear answer on its own. Understanding what it can and cannot tell you helps keep the wait calmer.",
+    howThisFeels: [
+      "Checking underwear more than usual",
+      "Wondering if a small mark means everything or nothing",
+      "Trying not to read too much into it",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Cycle variation", body: "Some people notice light spotting in the second half of some cycles and not others. Small amounts of light bleeding without other symptoms are often just part of that person's pattern." },
+        { heading: "Progesterone changes", body: "Rising and falling progesterone can affect the uterine lining. In some cycles this may cause a small amount of light spotting a few days before a period is due." },
+        { heading: "Implantation possibility", body: "In some cycles that lead to pregnancy, a small amount of light bleeding may happen around the time implantation may be occurring, usually 6 to 12 days past ovulation. Many pregnancies do not involve any spotting at all." },
+      ],
+      lessCauses: [
+        { heading: "Sex or a cervical check", body: "The cervix is more easily irritated during the second half of the cycle. Sex, a smear, or a pelvic exam can sometimes cause a small amount of light spotting afterwards." },
+        { heading: "Infections or cervical changes", body: "Some infections or cervical changes can cause light spotting. If spotting is frequent or comes with other symptoms, it is worth mentioning to a GP." },
+        { heading: "Missed or changed contraception", body: "If you have recently stopped hormonal contraception, cycles can be less predictable for a few months, including occasional spotting." },
+      ],
+      whyItVaries: "Spotting is a common thing that can have several ordinary explanations. This is why it rarely means what our minds want it to mean.",
+    },
+    timing: {
+      whenStarts: "If spotting is going to happen in a cycle, it often shows up somewhere between ovulation and the day a period would be due.",
+      whenEases: "Light spotting usually settles within a day or two, or leads into a period.",
+    },
+    whatItFeelsLike: [
+      "A small pink or brown mark on wiping",
+      "A few hours of very light bleeding, then nothing",
+      "Uncertainty about whether a period is starting",
+    ],
+    whatThisMeans: "Light spotting in the two week wait can mean many things, and often means very little on its own. It is not proof that implantation has happened, and it is not proof that a cycle will not lead to pregnancy.",
+    normal: [
+      "Occasional light spotting a day or two before a period arrives",
+      "Small marks after sex in the second half of the cycle",
+      "Cycles where spotting shows up, and cycles where it does not",
+    ],
+    seekSupport: [
+      "Heavy bleeding, especially with cramping stronger than a normal period",
+      "Severe one-sided pain, particularly with a positive test",
+      "Feeling dizzy, faint, or unwell alongside bleeding",
+      "Frequent spotting outside of a period across several cycles",
+    ],
+    disclaimer: "This is general guidance. Speak to a GP or NHS 111 if bleeding is heavy, painful, or comes with feeling unwell.",
+    whatYouCanDo: [
+      { action: "Note the day and how heavy the spotting is", reason: "A simple note can help a GP if you decide to talk to one later." },
+      { action: "Avoid drawing conclusions about pregnancy from spotting alone", reason: "It is genuinely not reliable in either direction." },
+      { action: "Wait until an expected period date to test if you can", reason: "Testing before then is often too early for a clear answer." },
+      { action: "Contact a GP or NHS 111 if bleeding is heavy or painful", reason: "Especially if you have a positive test or feel unwell." },
+    ],
+    whatHappensNext: "In many cycles, light spotting is followed either by a period arriving or by things settling and a test giving an answer a few days later. Persistent unusual bleeding is worth a GP conversation.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Implantation bleeding", href: "/articles/implantation-bleeding" },
+        { label: "The two week wait", href: "/articles/two-week-wait" },
+        { label: "Coping with the two week wait", href: "/articles/coping-with-the-two-week-wait" },
+      ],
+    },
+    aiPrompts: [
+      "What does spotting in the two week wait mean?",
+      "Is spotting a sign of implantation?",
+      "When should I speak to a GP about spotting?",
+    ],
+    captureIntro: "Small changes in a cycle are worth noting gently, without turning them into a story.",
+    journey: ["trying-to-conceive"],
+    topics: ["timelines"],
+    relatedSlugs: [
+      "implantation-bleeding",
+      "two-week-wait",
+      "coping-with-the-two-week-wait",
+      "two-week-wait-symptoms",
+      "when-to-take-a-pregnancy-test",
+    ],
+    productPromotion: "light",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-spotting-two-week-wait.jpg", import.meta.url).href,
+      alt: "Soft folded cream and blush linen napkins beside a small terracotta bowl by a bright window.",
+    },
+    sources: [
+      { label: "Vaginal bleeding", publisher: "NHS", url: "https://www.nhs.uk/conditions/vaginal-bleeding/" },
+      { label: "Signs and symptoms of pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/signs-and-symptoms-of-pregnancy/" },
+      { label: "Bleeding in early pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/early-pregnancy/bleeding-early-pregnancy" },
+    ],
+    keyTakeaways: [
+      "Light spotting after ovulation can happen for several ordinary reasons.",
+      "Some cycles that lead to pregnancy involve a small amount of spotting around implantation timing, but many do not.",
+      "Spotting is not proof of implantation, and it does not rule pregnancy out.",
+      "Heavy bleeding, severe pain, or feeling unwell alongside spotting is worth speaking to a GP or NHS 111 about.",
+      "A test around the day of an expected period usually gives a clearer answer than reading spotting.",
+    ],
+    faq: [
+      { question: "Is spotting always implantation bleeding?", answer: "No. Light spotting after ovulation can happen for several ordinary reasons, and many pregnancies do not involve any spotting at all. It is not reliable as a sign of implantation." },
+      { question: "How much spotting is normal?", answer: "A small pink or brown mark, or a few hours of very light bleeding, is often within the range of a normal cycle. Heavier bleeding, or bleeding with pain, is worth speaking to a GP about." },
+      { question: "Should I still test if I am spotting?", answer: "You can, but a test taken around the day of your expected period is usually more reliable. Spotting itself does not confirm or rule out pregnancy." },
+    ],
+    editorialSections: [
+      {
+        id: "why-spotting-happens",
+        heading: "Why spotting can happen after ovulation",
+        lead: "Small amounts of bleeding in the second half of a cycle have several ordinary explanations.",
+        paragraphs: [
+          "Shifts in progesterone, sensitivity of the cervix, and small changes in the uterine lining can all cause light spotting in the days before a period is due. For some people this is a regular part of their cycle pattern.",
+          "Because spotting can come from several places, it is often more useful as a note about your own cycle than as a signal about outcome in any single month.",
+        ],
+      },
+      {
+        id: "implantation-timing-carefully",
+        heading: "Implantation timing, held carefully",
+        lead: "Some pregnancies involve a small amount of spotting around implantation. Many do not.",
+        paragraphs: [
+          "Implantation may happen anywhere from around 6 to 12 days after ovulation. In some cycles that lead to pregnancy, a small amount of light bleeding may appear around this time.",
+          "It is often lighter and shorter than a period, and does not usually involve cramping like a period. But spotting looking a certain way is not a reliable sign that implantation has happened.",
+        ],
+        callout: { tone: "info", text: "Spotting that looks like implantation bleeding does not confirm pregnancy, and no spotting at all does not rule it out." },
+      },
+      {
+        id: "cycle-variation",
+        heading: "Cycle variation is common",
+        lead: "Your cycle is allowed to look a little different from month to month.",
+        paragraphs: [
+          "Some people spot lightly around ovulation, others in the days before a period. Some months bring spotting when other months do not. This is often within an ordinary range.",
+          "A pattern of frequent unexplained spotting across many cycles is worth mentioning to a GP, especially if it comes with other changes.",
+        ],
+      },
+      {
+        id: "when-spotting-needs-advice",
+        heading: "When spotting needs medical advice",
+        lead: "There are situations where it is worth speaking to a GP or NHS 111 the same day.",
+        paragraphs: [
+          "Heavy bleeding, especially with cramping stronger than a normal period, is worth medical advice. Severe one-sided pain, particularly with a positive test, is also worth same-day advice as it may relate to ectopic pregnancy.",
+          "Feeling dizzy, faint, or unwell alongside any bleeding is a reason to speak to a clinician promptly.",
+        ],
+      },
+      {
+        id: "how-to-think-about-testing",
+        heading: "How to think about testing after spotting",
+        lead: "Spotting is not the reason to test earlier.",
+        paragraphs: [
+          "A test taken around the day of an expected period usually gives a clearer answer than a test taken earlier just because spotting has appeared. Testing too early often leads to a result that does not settle anything.",
+          "If a period arrives in the following day or two, the spotting was likely the start of that period. If it does not, retesting after a few days is a reasonable next step.",
+        ],
+        callout: { tone: "reassurance", text: "You do not have to interpret every mark. Waiting for a clearer signal is a reasonable, kind thing to do." },
+      },
+    ],
+  },
+
+  // ─── COPING WITH THE TWO WEEK WAIT ────────────────────────────────────────
+  {
+    slug: "coping-with-the-two-week-wait",
+    title: "Coping with the two week wait",
+    metaDescription: "Practical, calm support for the emotional side of the two week wait, including testing loops, symptom checking, routines, and partner communication.",
+    quickAnswer: "The two week wait is one of the harder parts of trying to conceive for many people. Symptom checking, testing loops, and forum reading can all quietly amplify the wait. Simple things such as setting a testing date, keeping gentle routines going, protecting boundaries with apps and forums, and talking to a partner or friend can make the days feel less all-consuming. There is no perfect way to wait, and needing support does not mean anything is wrong with you.",
+    standfirst: "The wait between ovulation and testing is where most of trying to conceive lives, emotionally. It deserves more care than it usually gets.",
+    howThisFeels: [
+      "Restless and impatient",
+      "Trying not to hope, and hoping anyway",
+      "Tired of thinking about it, unable to stop",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Uncertainty is hard", body: "The wait sits between action and answer. That kind of uncertainty is genuinely tiring, even for people who usually handle waiting well." },
+        { heading: "Testing loops and symptom checking", body: "Repeated early tests and constant symptom checking can quietly increase anxiety without giving new information. It is a common pattern, not a personal failing." },
+        { heading: "Forums and comparison", body: "TTC forums, apps, and social media can be helpful in small doses and heavy in large ones. Constant comparison often makes the wait feel louder." },
+      ],
+      lessCauses: [
+        { heading: "Past losses or long TTC journeys", body: "Previous losses, longer trying journeys, or fertility investigations can make each wait feel heavier. This is normal, and it deserves gentle support." },
+        { heading: "Life circumstances", body: "Work stress, family pressure, or difficult anniversaries can amplify how the wait feels in any given cycle." },
+      ],
+      whyItVaries: "The two week wait feels different in different cycles and different lives. There is no single right way to cope, and one cycle being harder does not mean the next will be.",
+    },
+    timing: {
+      whenStarts: "Emotional weight often builds a few days after ovulation, once the possibility of pregnancy feels most present.",
+      whenEases: "For many people the intensity eases once there is an answer, whether that is a positive test, a period, or a plan to try again.",
+    },
+    whatItFeelsLike: [
+      "Time moving more slowly than usual",
+      "Small tasks feeling harder than they should",
+      "A quiet hum of hope and fear underneath everything",
+    ],
+    whatThisMeans: "Struggling in the two week wait is common and not a sign that anything is wrong with you. Small changes to routine, testing habits, and how you use forums can make a real difference.",
+    normal: [
+      "Feeling more emotional than usual in the second half of the cycle",
+      "Wanting to test earlier than you know you should",
+      "Cycles where you feel calm, and cycles where you do not",
+    ],
+    seekSupport: [
+      "Persistent low mood, anxiety, or hopelessness that lasts beyond a cycle or two",
+      "Trying to conceive that is affecting sleep, work, or relationships significantly",
+      "Feeling unable to talk about it with anyone",
+    ],
+    disclaimer: "This is general guidance and not therapy. Speak to a GP or a fertility counsellor if the emotional weight of TTC is affecting your daily life.",
+    whatYouCanDo: [
+      { action: "Set one planned testing date per cycle", reason: "It reduces daily testing loops and gives your wait a clear edge." },
+      { action: "Keep a gentle daily routine", reason: "Sleep, food, and small daily anchors help the wait feel less all-consuming." },
+      { action: "Set boundaries with forums and apps", reason: "Time limits or short breaks often make the wait quieter." },
+      { action: "Talk to a partner or trusted friend about how it feels", reason: "Sharing the load usually makes it lighter." },
+      { action: "Have a small kindness planned for the day you test", reason: "Whichever way the result goes, having something soft in place helps." },
+    ],
+    whatHappensNext: "By the end of most two week waits, there is either a period, a positive test, or a plan to retest in a few days. Either way, having a plan for the next few days often helps as much as the answer itself.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "The two week wait", href: "/articles/two-week-wait" },
+        { label: "Two week wait symptoms", href: "/articles/two-week-wait-symptoms" },
+        { label: "When to ask for fertility help", href: "/articles/when-to-ask-for-fertility-help" },
+      ],
+    },
+    aiPrompts: [
+      "How do I cope with the two week wait?",
+      "Is it normal to feel this anxious in the two week wait?",
+      "How can I stop obsessing over symptoms?",
+    ],
+    captureIntro: "The way this wait feels is often worth writing down. Not to solve it, just to give it room.",
+    journey: ["trying-to-conceive", "support"],
+    topics: ["emotional-wellbeing", "timelines"],
+    relatedSlugs: [
+      "two-week-wait",
+      "two-week-wait-symptoms",
+      "spotting-during-the-two-week-wait",
+      "testing-too-early",
+      "when-to-ask-for-fertility-help",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-coping-two-week-wait.jpg", import.meta.url).href,
+      alt: "A soft cream armchair with a knitted throw, a warm mug and a small vase of eucalyptus in gentle morning light.",
+    },
+    sources: [
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Mental health when trying for a baby", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/planning-a-pregnancy/mental-wellbeing/mental-health-when-trying-baby" },
+      { label: "Getting pregnant: coping with the emotional side", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+    ],
+    keyTakeaways: [
+      "The two week wait is one of the harder parts of TTC for many people.",
+      "Testing loops and constant symptom checking often add stress without adding clarity.",
+      "Setting a single planned testing date and taking short breaks from forums often helps.",
+      "Talking to a partner or friend usually makes the wait feel lighter.",
+      "If the emotional weight of TTC is affecting daily life, a GP or fertility counsellor can help.",
+    ],
+    faq: [
+      { question: "How do I stop testing so early?", answer: "Setting a single planned test date per cycle, keeping tests out of easy reach, and having a small distraction for testing days can all help. If early testing is a way of coping with anxiety, talking to a GP or fertility counsellor may also help." },
+      { question: "Is it normal to feel this anxious?", answer: "Feeling more emotional or anxious in the two week wait is common, and often relates as much to uncertainty as to the outcome itself. Persistent low mood or anxiety across cycles is worth mentioning to a GP." },
+      { question: "How do I talk to my partner during the wait?", answer: "Simple check-ins often help. Naming that the wait feels loud, sharing what would help this cycle, and agreeing on small rituals for testing day can make you feel less alone in it." },
+    ],
+    editorialSections: [
+      {
+        id: "why-the-wait-is-hard",
+        heading: "Why the wait can be hard, even in a settled life",
+        lead: "The two week wait mixes hope, uncertainty, and no way to speed things up.",
+        paragraphs: [
+          "The wait comes after the part you can act on and before the part that gives you an answer. That kind of stretch is genuinely tiring, even for people who usually handle uncertainty well.",
+          "Waiting well is not a personality trait. It is a set of small habits that make the wait a little less loud.",
+        ],
+      },
+      {
+        id: "testing-loops",
+        heading: "Testing loops and symptom checking",
+        lead: "Both of these are common patterns, not failings.",
+        paragraphs: [
+          "Repeated early tests often lead to unclear results, which lead to more tests. Constant symptom checking can turn ordinary sensations into signals, which usually adds worry without adding clarity.",
+          "Naming these patterns as loops, rather than as evidence, often makes them easier to loosen.",
+        ],
+        callout: { tone: "info", text: "Choosing one planned testing date, and keeping tests out of easy reach until then, often lowers the pull to test early." },
+      },
+      {
+        id: "boundaries-with-forums-and-apps",
+        heading: "Setting boundaries with forums, apps, and social media",
+        lead: "These can be a real support in small doses and heavy in large ones.",
+        paragraphs: [
+          "TTC forums, apps, and social media can offer connection and information. They can also invite constant comparison, catastrophic examples, and small daily hits of anxiety.",
+          "Some people find that a short break, a time limit, or unfollowing specific accounts during the wait makes the days feel quieter.",
+        ],
+      },
+      {
+        id: "routines-and-anchors",
+        heading: "Routines, anchors, and gentle distraction",
+        lead: "Small daily structures often carry a lot of weight in a hard wait.",
+        paragraphs: [
+          "Regular sleep, meals at roughly usual times, short walks, time outside, and small daily rituals can all give the wait a shape it does not otherwise have.",
+          "Distraction is not the same as avoidance. Watching a familiar show, reading, or being with people who do not know you are in the wait can genuinely help.",
+        ],
+      },
+      {
+        id: "partner-communication",
+        heading: "Talking with a partner or trusted person",
+        lead: "Sharing the wait usually makes it lighter.",
+        paragraphs: [
+          "It can help to name to a partner or trusted friend that the wait feels heavy this cycle, and to say what would help. Sometimes that is more conversation, sometimes it is less, sometimes it is just company.",
+          "If you are trying alone, or without a supportive partner, a fertility counsellor or an online support space can help you feel less alone in it.",
+        ],
+        callout: { tone: "reassurance", text: "You are allowed to find this hard. It is one of the more emotionally demanding parts of trying to conceive." },
+      },
+      {
+        id: "when-ttc-feels-heavy",
+        heading: "When trying to conceive is starting to feel heavy",
+        lead: "Support exists, and asking for it is a reasonable step.",
+        paragraphs: [
+          "If the emotional weight of TTC is affecting your sleep, work, or relationships, or if low mood or anxiety is not easing between cycles, speaking to a GP is a reasonable step. Fertility counsellors and specialist charities can also help.",
+          "Needing that kind of support does not mean you are not coping. It usually means you are carrying something that was always going to be heavy, and you deserve help carrying it.",
+        ],
+      },
+    ],
+  },
+
+  // ─── Phase 9.20 — FINAL TTC ARTICLE GAP BATCH ───────────────────────────
+
+  // ─── TRACKING WITHOUT OVERTHINKING ───────────────────────────────────────
+  {
+    slug: "tracking-without-overthinking",
+    title: "Cycle tracking without overthinking",
+    metaDescription: "How to track your cycle when trying to conceive without letting apps, tests and symptoms take over. Practical, calm and honest.",
+    quickAnswer: "Tracking your cycle can be helpful when trying to conceive, but it is a tool, not a rule. Most people do well with one or two steady signals, such as period dates and how you feel, rather than tracking everything at once. If ovulation tests, cervical mucus checks or basal body temperature start to feel stressful, it is fine to pause, simplify, or take a break. Speak to a GP if your cycles feel confusing over time, or if tracking is starting to affect how you feel day to day.",
+    standfirst: "Tracking is meant to help you notice your body. When it starts to take over, it is worth simplifying.",
+    howThisFeels: [
+      "Wondering if you are tracking enough",
+      "Feeling behind when a signal is unclear",
+      "Tired of checking apps first thing in the morning",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Tracking has become a daily task", body: "Apps, tests and symptom logs can quietly turn into a checklist. When each cycle carries five or six things to record, it often feels like work rather than awareness." },
+        { heading: "Uncertainty in the signals", body: "Ovulation tests, cervical mucus and basal body temperature can all be helpful, and they can all be unclear on any given day. Reading small variations as answers usually adds worry without adding clarity." },
+      ],
+      lessCauses: [
+        { heading: "Longer trying journeys", body: "The longer you have been trying, the more tempting it can be to add another signal or another app. This is understandable, and it does not usually make the picture clearer." },
+      ],
+      whyItVaries: "Different cycles, different bodies and different lives mean that no single tracking routine suits everyone. What worked calmly for a few months may start to feel heavy later, and the routine can shift with it.",
+    },
+    timing: {
+      whenStarts: "The overwhelm tends to build slowly, over several cycles, rather than in one week.",
+      whenEases: "Many people feel lighter within a cycle or two of simplifying what they track.",
+    },
+    whatItFeelsLike: [
+      "A quiet relief when you close an app for a day",
+      "Noticing your body more once there is less to log",
+    ],
+    whatThisMeans: "Tracking too much is not a moral failing. It usually means the tools started to run the cycle instead of supporting it. Small changes can make a real difference.",
+    normal: [
+      "Skipping a day of tracking",
+      "Wanting fewer signals rather than more",
+      "Cycles where you barely track at all",
+    ],
+    seekSupport: [
+      "Cycles that are unclear or unpredictable over several months",
+      "Tracking that is affecting sleep, mood or your relationship",
+      "Feeling unable to stop testing or checking symptoms",
+    ],
+    disclaimer: "This is general guidance, not personal medical advice. Speak to your GP or a fertility clinician if your cycles feel confusing over time, or if the emotional weight of tracking is affecting your day to day.",
+    whatYouCanDo: [
+      { action: "Choose one or two signals for the next cycle", reason: "Fewer signals often make the picture clearer, not less clear." },
+      { action: "Set gentle limits on ovulation tests", reason: "Testing on a small window of days can lower the pull to test constantly." },
+      { action: "Give yourself permission to skip days", reason: "A tracked cycle does not need to be a complete cycle to be useful." },
+      { action: "Take a full cycle off if it feels right", reason: "A break can help you notice your body again on its own terms." },
+      { action: "Talk to a GP if cycles stay confusing", reason: "Some patterns are worth a conversation, and that is not a failure of tracking." },
+    ],
+    whatHappensNext: "Most people find that a simpler routine gives them more, not less. If cycles still feel unclear after a few months, a GP or fertility clinic can help you think about next steps.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "How to know when you are ovulating", href: "/articles/how-to-know-when-you-are-ovulating" },
+        { label: "Understanding your fertile window", href: "/articles/understanding-your-fertile-window" },
+        { label: "When ovulation is hard to predict", href: "/articles/when-ovulation-is-hard-to-predict" },
+      ],
+    },
+    aiPrompts: [
+      "How do I track my cycle without becoming obsessed?",
+      "Is it okay to take a break from ovulation tests?",
+      "What should I actually track when trying to conceive?",
+    ],
+    captureIntro: "Tracking is meant to help you notice your body. Worth writing down what is starting to feel like too much.",
+    journey: ["trying-to-conceive"],
+    topics: ["cycle-tracking", "wellbeing"],
+    relatedSlugs: [
+      "how-to-know-when-you-are-ovulating",
+      "understanding-your-fertile-window",
+      "using-ovulation-tests",
+      "basal-body-temperature-tracking",
+      "when-ovulation-is-hard-to-predict",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-tracking-without-overthinking.jpg", import.meta.url).href,
+      alt: "An open cream notebook with a plain pencil resting on top, a warm mug of tea and a small eucalyptus sprig, in soft morning light.",
+    },
+    sources: [
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Getting pregnant: fertility and reproduction", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+      { label: "Mental health when trying for a baby", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/planning-a-pregnancy/mental-wellbeing/mental-health-when-trying-baby" },
+    ],
+    keyTakeaways: [
+      "Tracking is a tool, not a rule; one or two steady signals often give a clearer picture than many.",
+      "Ovulation tests, cervical mucus and BBT can all be useful, and none of them need to be tracked every day.",
+      "Taking a cycle off from tracking is a reasonable choice, not a setback.",
+      "If tracking is affecting sleep, mood or your relationship, it is worth simplifying.",
+      "Speak to a GP if cycles feel unclear over several months.",
+    ],
+    faq: [
+      { question: "Do I need to track everything to conceive?", answer: "No. Most people do well with one or two steady signals, such as period dates plus one of ovulation tests, cervical mucus or basal body temperature. Tracking everything at once often adds stress without adding information." },
+      { question: "Is it okay to take a break from tracking?", answer: "Yes. Pausing for a cycle or two can help you notice your body on its own terms. It does not usually change your chances of conceiving, and many people feel calmer for it." },
+      { question: "When should I ask a GP about my cycles?", answer: "If your cycles are consistently unclear, very short, very long or very irregular over several months, or if tracking is affecting how you feel day to day, a GP conversation is a reasonable step." },
+    ],
+    editorialSections: [
+      {
+        id: "tracking-as-a-tool",
+        heading: "Tracking as a tool, not a rule",
+        lead: "Awareness is the point. The apps and tests are only worth using when they help you notice your body.",
+        paragraphs: [
+          "Cycle tracking can support trying to conceive by helping you get a sense of when ovulation may be. It can also quietly turn into a set of daily obligations that feel more like a job than a body.",
+          "It may help to think of tracking as one lens on your cycle, not the whole picture. Some cycles need more attention, and many do not.",
+        ],
+      },
+      {
+        id: "one-or-two-signals",
+        heading: "Choosing one or two signals, not everything",
+        lead: "Fewer signals often make a clearer picture, not a smaller one.",
+        paragraphs: [
+          "Period dates are the simplest starting point. Adding one of ovulation tests, cervical mucus or basal body temperature is often enough for most cycles.",
+          "Tracking three or four signals at once can create small daily contradictions that are hard to interpret, especially in cycles that vary from month to month.",
+        ],
+        callout: { tone: "info", text: "If a signal has felt confusing for two or three cycles, it is fine to set it down for a while." },
+      },
+      {
+        id: "when-tests-feel-stressful",
+        heading: "When ovulation tests or symptom checks feel stressful",
+        lead: "Signs that a helpful tool has quietly become a heavy one.",
+        paragraphs: [
+          "Common signs include testing outside your expected fertile window, retesting the same day for reassurance, dreading opening an app, or feeling low after a negative result on a test that was never meant to be positive yet.",
+          "Simplifying often helps. That may mean testing on fewer days, moving a test out of easy reach, or unfollowing forums that add pressure.",
+        ],
+      },
+      {
+        id: "taking-a-break",
+        heading: "Taking a break from tracking",
+        lead: "A pause is not the same as giving up.",
+        paragraphs: [
+          "Some people find that a cycle without any tracking makes the next cycle feel calmer. Others prefer a lighter version, such as just noting period start and end.",
+          "Breaks tend not to change conception chances significantly, and often help intimacy and wellbeing.",
+        ],
+      },
+      {
+        id: "when-to-ask-for-support",
+        heading: "When to ask for support",
+        lead: "A conversation with a clinician is a reasonable next step, not a failure of tracking.",
+        paragraphs: [
+          "If cycles are consistently unclear over several months, or you have been trying without success for a year (or six months if you are 36 or older), a GP conversation is a reasonable next step.",
+          "If the emotional weight of tracking is affecting sleep, mood, work or your relationship, that on its own is worth mentioning to a GP or a fertility counsellor.",
+        ],
+        callout: { tone: "reassurance", text: "Asking for support does not mean anything has gone wrong. It usually means you are carrying a lot, and you deserve help carrying it." },
+      },
+    ],
+  },
+
+  // ─── THYROID AND FERTILITY ───────────────────────────────────────────────
+  {
+    slug: "thyroid-and-fertility",
+    title: "Thyroid conditions and trying to conceive",
+    metaDescription: "How thyroid conditions may affect cycles and trying to conceive, when to speak to a GP and what a preconception thyroid conversation usually involves.",
+    quickAnswer: "The thyroid gland helps regulate hormones that can affect your cycle and support a pregnancy. Thyroid conditions such as an underactive or overactive thyroid can sometimes make cycles irregular or make trying to conceive harder. If you already have a thyroid condition, a preconception review with your GP is a sensible step, as your medication or monitoring may need to change. If you have symptoms such as ongoing tiredness, weight changes, palpitations or noticeably heavier or lighter periods, a simple blood test can help work out what is going on.",
+    standfirst: "The thyroid is small, but it can quietly shape cycles, energy and pregnancy planning.",
+    howThisFeels: [
+      "Wondering if a slow feeling in your body is worth mentioning",
+      "Trying to conceive with a diagnosis that already feels like a lot",
+      "Not sure whether a symptom is your thyroid, life, or both",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "The thyroid helps regulate hormones", body: "The thyroid gland produces hormones that support metabolism, energy and menstrual cycles. When it is producing too little or too much, cycles can shift and general wellbeing can be affected." },
+        { heading: "Underactive and overactive thyroid", body: "An underactive thyroid (hypothyroidism) and an overactive thyroid (hyperthyroidism) are the two most common patterns. Both can affect cycles and pregnancy planning, and both are treatable." },
+      ],
+      lessCauses: [
+        { heading: "Autoimmune thyroid conditions", body: "Conditions such as Hashimoto's or Graves' disease may need slightly closer monitoring around trying to conceive and during pregnancy. Your GP or endocrinologist can guide this." },
+        { heading: "Thyroid changes during pregnancy", body: "Thyroid hormone needs often change in pregnancy itself, which is one reason a preconception review is helpful." },
+      ],
+      whyItVaries: "Thyroid conditions sit on a spectrum, and how much they affect cycles or trying to conceive can vary from person to person. Medication, monitoring and general health all play a part.",
+    },
+    timing: {
+      whenStarts: "Symptoms can build gradually over months, which is one reason they are often missed.",
+      whenEases: "Once treatment is in the right range, many people feel steadier within a few months, and cycles often settle too.",
+    },
+    whatItFeelsLike: [
+      "A tiredness that does not shift with sleep",
+      "Noticing cycles have quietly changed",
+      "Relief at having a name for how you have been feeling",
+    ],
+    whatThisMeans: "Thyroid balance can matter for trying to conceive, but a thyroid condition is not usually a barrier. Most people with a treated thyroid condition can conceive and carry a pregnancy well.",
+    normal: [
+      "Small energy changes across a cycle",
+      "One or two irregular cycles occasionally",
+      "Wanting a blood test for reassurance",
+    ],
+    seekSupport: [
+      "Cycles that have become consistently heavier, lighter or more irregular",
+      "Ongoing tiredness, weight changes, palpitations or feeling low",
+      "A known thyroid condition without a recent review",
+    ],
+    disclaimer: "This is general information, not a diagnosis. Speak to your GP, pharmacist or specialist about your own thyroid history, medication and blood tests before making changes.",
+    whatYouCanDo: [
+      { action: "Book a preconception GP conversation if you already have a thyroid condition", reason: "Medication doses and monitoring often need reviewing before and in early pregnancy." },
+      { action: "Ask about a simple thyroid blood test if symptoms are new", reason: "A first blood test usually looks at TSH and can guide next steps." },
+      { action: "Keep taking prescribed thyroid medication unless a clinician advises otherwise", reason: "Stopping medication without guidance can make things worse." },
+      { action: "Note cycle changes to bring to your appointment", reason: "Dates, flow and general symptoms give your GP useful context." },
+      { action: "Continue folic acid and other preconception basics", reason: "These sit alongside thyroid care rather than replacing it." },
+    ],
+    whatHappensNext: "Most people leave a preconception thyroid conversation with a clear plan: continue as you are, adjust medication, or repeat a blood test in a few weeks. Cycles often settle as treatment reaches a steady range.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Preconception GP appointment", href: "/articles/preconception-gp-appointment" },
+        { label: "Medication review before pregnancy", href: "/articles/medication-review-before-pregnancy" },
+        { label: "Irregular periods and trying to conceive", href: "/articles/irregular-periods-and-trying-to-conceive" },
+      ],
+    },
+    aiPrompts: [
+      "How does my thyroid affect trying to conceive?",
+      "Do I need a blood test before trying for a baby?",
+      "Should my thyroid medication change in pregnancy?",
+    ],
+    captureIntro: "Thyroid conversations can hold a lot of quiet worry. Worth noting what still feels unclear before your appointment.",
+    journey: ["trying-to-conceive"],
+    topics: ["conditions"],
+    relatedSlugs: [
+      "preconception-gp-appointment",
+      "medication-review-before-pregnancy",
+      "irregular-periods-and-trying-to-conceive",
+      "when-to-ask-for-fertility-help",
+      "what-to-do-before-trying-to-conceive",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-thyroid-and-fertility.jpg", import.meta.url).href,
+      alt: "A soft still life of a plain ceramic mug of water, a folded cream cloth and a small sage sprig in gentle morning daylight.",
+    },
+    sources: [
+      { label: "Underactive thyroid (hypothyroidism)", publisher: "NHS", url: "https://www.nhs.uk/conditions/underactive-thyroid-hypothyroidism/" },
+      { label: "Overactive thyroid (hyperthyroidism)", publisher: "NHS", url: "https://www.nhs.uk/conditions/overactive-thyroid-hyperthyroidism/" },
+      { label: "Thyroid disease: pregnancy", publisher: "British Thyroid Foundation", url: "https://www.btf-thyroid.org/pregnancy-and-fertility-in-thyroid-disorders" },
+      { label: "Hypothyroidism in adults", publisher: "NICE CKS", url: "https://cks.nice.org.uk/topics/hypothyroidism/" },
+    ],
+    keyTakeaways: [
+      "The thyroid helps regulate hormones that can affect cycles and pregnancy.",
+      "An underactive or overactive thyroid can sometimes affect trying to conceive, and both are treatable.",
+      "A preconception review is helpful if you already have a thyroid condition.",
+      "Ongoing tiredness, weight changes, palpitations or changed cycles are worth mentioning to a GP.",
+      "Most people with a treated thyroid condition can conceive and carry a pregnancy well.",
+    ],
+    faq: [
+      { question: "Do I need a thyroid test before trying to conceive?", answer: "Routine screening is not offered to everyone, but a blood test may be sensible if you have symptoms, a family history of thyroid conditions or a personal history of pregnancy loss. Your GP can advise." },
+      { question: "Will thyroid medication change in pregnancy?", answer: "Thyroid hormone needs often increase in pregnancy, so people who take levothyroxine usually need their dose reviewed early. Your GP or specialist will guide this." },
+      { question: "Can a thyroid condition affect my cycle?", answer: "Yes. Both underactive and overactive thyroid conditions can sometimes make cycles heavier, lighter or more irregular. Cycles often settle once treatment is in a steady range." },
+    ],
+    editorialSections: [
+      {
+        id: "what-the-thyroid-does",
+        heading: "What the thyroid does, in plain terms",
+        lead: "A small gland in your neck that helps regulate hormones your body uses every day.",
+        paragraphs: [
+          "The thyroid produces hormones that influence metabolism, energy, mood and menstrual cycles. When it is producing too little or too much, several parts of daily life can feel a bit off.",
+          "Trying to conceive is one area where thyroid balance can matter. It is rarely the whole story, but it is a piece worth checking.",
+        ],
+      },
+      {
+        id: "why-it-matters-for-ttc",
+        heading: "Why thyroid balance can matter when trying to conceive",
+        lead: "Cycles, ovulation and early pregnancy can all be affected by significant imbalance.",
+        paragraphs: [
+          "An untreated underactive or overactive thyroid may sometimes make cycles irregular or affect ovulation. Once treatment is in a steady range, cycles often settle.",
+          "In pregnancy, thyroid hormones support early development. This is why preconception and early pregnancy reviews matter for people with a known thyroid condition.",
+        ],
+        callout: { tone: "info", text: "If you already take thyroid medication, book a preconception GP conversation before you start trying, or as soon as you can if you have already started." },
+      },
+      {
+        id: "known-condition",
+        heading: "If you already have a thyroid condition",
+        lead: "The main goal is a stable, monitored plan through trying to conceive and into pregnancy.",
+        paragraphs: [
+          "Your GP or specialist may want to check TSH levels before you start trying, review your medication dose and set a plan for early pregnancy monitoring.",
+          "Do not stop or change thyroid medication on your own. Small dose changes are common and safe when guided by a clinician.",
+        ],
+      },
+      {
+        id: "symptoms-worth-mentioning",
+        heading: "Symptoms that may be worth discussing with a GP",
+        lead: "None of these on their own confirm anything, and they are all worth a conversation.",
+        paragraphs: [
+          "For underactive thyroid, common features can include tiredness that does not lift, feeling cold, weight gain, low mood and heavier or more frequent periods.",
+          "For overactive thyroid, features may include weight loss, palpitations, feeling anxious or shaky, sweating and lighter or less frequent periods.",
+        ],
+      },
+      {
+        id: "tests-and-monitoring",
+        heading: "Tests and monitoring in general terms",
+        lead: "A first blood test is usually straightforward.",
+        paragraphs: [
+          "A first thyroid blood test often looks at TSH, and sometimes free T4. Results guide whether further tests, treatment or monitoring are helpful.",
+          "If you have a known condition, blood tests may be repeated more often when trying to conceive and in early pregnancy.",
+        ],
+      },
+      {
+        id: "when-to-speak-to-someone",
+        heading: "When to speak to a GP, specialist or fertility clinic",
+        lead: "Some situations are worth prioritising sooner rather than later.",
+        paragraphs: [
+          "Book a GP conversation if you have new symptoms, a known thyroid condition without a recent review, ongoing irregular cycles, or a history of pregnancy loss.",
+          "If you have been trying to conceive for a year (or six months if you are 36 or older) without success, thyroid checks may be part of a wider fertility assessment.",
+        ],
+        callout: { tone: "reassurance", text: "Most people with a treated thyroid condition go on to conceive and carry a pregnancy well." },
+      },
+    ],
+  },
+
+  // ─── TTC IN YOUR 30S ─────────────────────────────────────────────────────
+  {
+    slug: "ttc-in-your-30s",
+    title: "Trying to conceive in your 30s",
+    metaDescription: "A calm, practical guide to trying to conceive in your 30s. Cycle awareness, preconception health, when to ask for support and how to handle pressure.",
+    quickAnswer: "Many people try to conceive in their 30s, and it is a very common time to start a family. Fertility can gradually shift with age, but there is no single cliff edge. Most healthy couples in their early 30s who try regularly conceive within a year. Cycle awareness, preconception health and speaking to a GP after twelve months of trying (or sooner from 36) are the usual practical steps. Pressure and comparison can feel loud in this decade, and looking after your wellbeing is part of the picture too.",
+    standfirst: "The 30s is a common decade for trying to conceive, and it deserves calm, honest information rather than urgency.",
+    howThisFeels: [
+      "Aware of age without wanting to panic",
+      "Comparing timelines with friends or family",
+      "Trying to enjoy the process while also planning it",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Many people try in their 30s", body: "The average age at first birth in the UK has been in the early 30s for several years. You are far from alone in starting a family in this decade." },
+        { heading: "Fertility can gradually shift", body: "Fertility often changes gradually from the early 30s onwards, but the change is usually gentle rather than sudden. Most healthy couples in their early 30s who try regularly conceive within a year." },
+      ],
+      lessCauses: [
+        { heading: "Health conditions and lifestyle", body: "Some conditions, such as PCOS, endometriosis or thyroid conditions, may affect trying to conceive regardless of age. Lifestyle factors on both sides can also play a part." },
+        { heading: "Partner factors", body: "Male fertility also plays a role, and looking at both sides is usually kinder and more useful than focusing on one." },
+      ],
+      whyItVaries: "Every person, cycle and relationship is different. Time to conception varies widely, even between people in similar circumstances.",
+    },
+    timing: {
+      whenStarts: "Practical planning often starts a few months before actively trying, with folic acid and any preconception health conversations.",
+      whenEases: "For many couples in their early 30s, conception happens within the first year of trying regularly.",
+    },
+    whatItFeelsLike: [
+      "A quiet mix of hope and pressure",
+      "Wanting a plan without wanting to over-plan",
+      "Small conversations that feel bigger than they look",
+    ],
+    whatThisMeans: "Trying in your 30s is common, calm and usually goes well over time. It is reasonable to combine steady preconception care with a plan for when to ask for support.",
+    normal: [
+      "Cycles that take a few months to feel familiar",
+      "Feeling more emotional than usual across a cycle",
+      "Needing more sleep than you used to",
+    ],
+    seekSupport: [
+      "Trying for a year without success in your early 30s",
+      "Trying for six months from age 36 without success",
+      "Very irregular or missing periods",
+    ],
+    disclaimer: "This is general information, not personal medical advice. Speak to your GP about your own health, cycles and any specific concerns.",
+    whatYouCanDo: [
+      { action: "Start folic acid 400 micrograms daily before trying", reason: "It supports early development, and starting early gives it time to build up." },
+      { action: "Book a preconception GP conversation if you have any conditions or take regular medication", reason: "Reviewing your health before trying often makes trying itself simpler." },
+      { action: "Get a rough sense of your cycle", reason: "Knowing your usual cycle length helps you notice patterns and time-sensitive moments." },
+      { action: "Include your partner from the start", reason: "Fertility is shared, and preconception health matters for both of you." },
+      { action: "Set a soft time frame for when you will seek support", reason: "Twelve months (or six from 36) is the usual UK guide." },
+    ],
+    whatHappensNext: "Most couples in their early 30s conceive within the first year of trying. If it takes longer, your GP can discuss investigations, referrals and next steps calmly.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Age and trying to conceive", href: "/articles/age-and-trying-to-conceive" },
+        { label: "What to do before trying to conceive", href: "/articles/what-to-do-before-trying-to-conceive" },
+        { label: "When to ask for fertility help", href: "/articles/when-to-ask-for-fertility-help" },
+      ],
+    },
+    aiPrompts: [
+      "How does trying to conceive in my 30s usually go?",
+      "When should I speak to a GP about fertility?",
+      "What should I do before we start trying?",
+    ],
+    captureIntro: "This decade can carry a lot of quiet expectation. Worth writing down what feels loudest right now.",
+    journey: ["trying-to-conceive"],
+    topics: ["age-and-fertility"],
+    relatedSlugs: [
+      "age-and-trying-to-conceive",
+      "what-to-do-before-trying-to-conceive",
+      "preconception-gp-appointment",
+      "when-to-ask-for-fertility-help",
+      "male-fertility-when-trying-to-conceive",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-in-your-30s.jpg", import.meta.url).href,
+      alt: "A single hand loosely holding a cream mug on a wooden table beside a small vase of eucalyptus in soft window light.",
+    },
+    sources: [
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Infertility overview", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/" },
+      { label: "Age and fertility", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/age-and-fertility/" },
+      { label: "Planning a pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/planning-a-pregnancy" },
+    ],
+    keyTakeaways: [
+      "The 30s is a very common decade for trying to conceive.",
+      "Fertility can gradually shift with age, without a single cliff edge.",
+      "Most healthy couples in their early 30s who try regularly conceive within a year.",
+      "Preconception health, cycle awareness and partner health all play a part.",
+      "Speak to a GP after twelve months of trying, or after six months from age 36.",
+    ],
+    faq: [
+      { question: "Is 30 too old to start trying?", answer: "No. The 30s is a very common decade for trying to conceive in the UK. Fertility can gradually shift with age, but many couples in their early 30s who try regularly conceive within a year." },
+      { question: "How long should we try before speaking to a GP?", answer: "The usual UK guide is twelve months of regular trying without success, or six months if you are 36 or older. You can always speak to a GP sooner if you have concerns." },
+      { question: "Should my partner do anything before we start trying?", answer: "Yes. Preconception health matters for both partners. Sensible steps include a general health check, reviewing alcohol, smoking and any medications, and looking at overall wellbeing together." },
+    ],
+    editorialSections: [
+      {
+        id: "why-many-people-try-in-their-30s",
+        heading: "Why many people try in their 30s",
+        lead: "This decade has become the most common time to start a family in the UK.",
+        paragraphs: [
+          "The average age at first birth in the UK has been in the early 30s for several years. Careers, relationships and housing all play a part, and none of it is a personal failing.",
+          "The 30s is a full and reasonable decade to try to conceive. Calm, steady information tends to help more than urgency.",
+        ],
+      },
+      {
+        id: "cycle-awareness",
+        heading: "Cycle awareness in your 30s",
+        lead: "A rough sense of your cycle usually helps more than perfect tracking.",
+        paragraphs: [
+          "Knowing your usual cycle length and roughly when ovulation may happen helps you notice change and time-sensitive moments. It does not need to be complicated.",
+          "One or two steady signals, such as period dates plus ovulation tests or cervical mucus, is usually enough for most cycles.",
+        ],
+      },
+      {
+        id: "preconception-health",
+        heading: "Preconception health that actually helps",
+        lead: "Small, steady steps tend to matter more than dramatic overhauls.",
+        paragraphs: [
+          "Folic acid 400 micrograms daily, a reasonable diet, gentle activity, less alcohol, no smoking and a look at any regular medications are the sensible basics.",
+          "A short preconception GP conversation can be useful, especially if you have any conditions or take regular medication.",
+        ],
+        callout: { tone: "info", text: "Both partners benefit from preconception health, not only the person carrying the pregnancy." },
+      },
+      {
+        id: "when-to-ask-for-help",
+        heading: "When to ask for support",
+        lead: "There are UK guides that make this less of a guessing game.",
+        paragraphs: [
+          "The usual UK guide is to speak to a GP after twelve months of trying without success, or six months if you are 36 or older. You can always ask sooner if you have concerns.",
+          "Asking early does not use up a chance. It gives you information and a plan.",
+        ],
+      },
+      {
+        id: "emotional-pressure",
+        heading: "Emotional pressure and comparison",
+        lead: "The 30s can quietly carry a lot of expectation.",
+        paragraphs: [
+          "Family, friends, social media and work all bring different pressure. Comparing timelines is very common and often unhelpful.",
+          "Small boundaries, honest conversations with a partner and time away from certain conversations can make the decade feel calmer.",
+        ],
+      },
+      {
+        id: "partner-factors",
+        heading: "Partner factors, calmly",
+        lead: "Trying to conceive is shared, and looking at both sides is kinder.",
+        paragraphs: [
+          "Male fertility can also change with age and lifestyle. A conversation about both sides is more useful than focusing on one, and takes some of the quiet weight off.",
+          "If investigations begin, both partners are usually included as a matter of course.",
+        ],
+      },
+    ],
+  },
+
+  // ─── TTC AFTER 35 ────────────────────────────────────────────────────────
+  {
+    slug: "ttc-after-35",
+    title: "Trying to conceive after 35",
+    metaDescription: "Honest, calm guidance on trying to conceive after 35. When to ask for support, cycle awareness, partner factors and looking after wellbeing.",
+    quickAnswer: "Many people try to conceive after 35, and many do. Fertility can gradually shift with age, and the usual UK guide is to speak to a GP after six months of trying rather than a year. Cycle awareness, preconception health and a calm conversation about both partners tend to help more than urgency. This is a decade where honest information and steady support matter, without fear.",
+    standfirst: "Age can become part of the conversation after 35. It does not have to be the loudest voice in the room.",
+    howThisFeels: [
+      "Aware of time and trying not to spiral",
+      "Wanting honest information without fear",
+      "Ready to ask for support if it is the right step",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Fertility can gradually shift with age", body: "Fertility tends to change gradually from the mid-30s onwards. Many people still conceive naturally in their late 30s and early 40s, and many find it takes longer than it did earlier." },
+        { heading: "The UK guide changes at 36", body: "The usual UK guide is to speak to a GP after six months of trying without success from age 36, rather than a year. This is designed to give you more time, not less." },
+      ],
+      lessCauses: [
+        { heading: "Health conditions", body: "Conditions such as PCOS, endometriosis or thyroid conditions may play a role at any age. A GP can help work out what is worth investigating." },
+        { heading: "Partner age and health", body: "Male fertility can also change with age and lifestyle. Looking at both sides tends to be more useful than focusing on one." },
+      ],
+      whyItVaries: "Age is one factor in a bigger picture. Cycle, health, partner factors and simple time all play a part, and outcomes vary widely between people in similar circumstances.",
+    },
+    timing: {
+      whenStarts: "Many people who conceive after 35 do so within their first six to twelve months of trying regularly.",
+      whenEases: "A GP conversation at six months (from age 36) can settle a lot of unspoken worry and give you a plan.",
+    },
+    whatItFeelsLike: [
+      "Cycles that feel more scrutinised than they did in your 20s",
+      "A quiet relief once a plan is in place",
+      "Wanting to protect calm alongside seeking help",
+    ],
+    whatThisMeans: "Trying to conceive after 35 is common. Honest information, a slightly shorter timeline for asking for support and looking after wellbeing tend to help more than urgency.",
+    normal: [
+      "Cycles that feel a little more variable than before",
+      "Wanting fertility conversations sooner",
+      "A mix of hope and pressure in the same week",
+    ],
+    seekSupport: [
+      "Trying for six months from age 36 without success",
+      "Very irregular or missing periods",
+      "A known condition without a recent review",
+    ],
+    disclaimer: "This is general information, not a personalised assessment. Your GP can talk through your own history, tests and any next steps.",
+    whatYouCanDo: [
+      { action: "Book a GP conversation early if you are 36 or older and have been trying for six months", reason: "The UK guide is designed to give you time and information, not to rush you." },
+      { action: "Continue folic acid and preconception basics", reason: "These matter at any age and support early development." },
+      { action: "Get a rough sense of your cycle", reason: "A short cycle diary is useful context for any fertility appointment." },
+      { action: "Bring your partner into the conversation", reason: "Fertility is shared, and both sides usually benefit from a look." },
+      { action: "Protect wellbeing alongside seeking help", reason: "Support and calm are not opposites; both often help." },
+    ],
+    whatHappensNext: "A GP appointment often leads to blood tests, a short conversation with your partner and, if helpful, a referral to a fertility clinic. Many people conceive during this time; some go on to further investigations or treatment.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Age and trying to conceive", href: "/articles/age-and-trying-to-conceive" },
+        { label: "When to ask for fertility help", href: "/articles/when-to-ask-for-fertility-help" },
+        { label: "What happens at a fertility appointment", href: "/articles/what-happens-at-a-fertility-appointment" },
+      ],
+    },
+    aiPrompts: [
+      "How does trying to conceive after 35 usually go?",
+      "When should I speak to a GP about fertility after 35?",
+      "What tests might I have if we have been trying for six months?",
+    ],
+    captureIntro: "Age conversations can be quietly heavy. Worth noting what feels most on your mind before your next appointment.",
+    journey: ["trying-to-conceive"],
+    topics: ["age-and-fertility"],
+    relatedSlugs: [
+      "age-and-trying-to-conceive",
+      "when-to-ask-for-fertility-help",
+      "what-happens-at-a-fertility-appointment",
+      "preconception-gp-appointment",
+      "male-fertility-when-trying-to-conceive",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-after-35.jpg", import.meta.url).href,
+      alt: "A calm still life of an open notebook on cream linen with a small glass jar of eucalyptus and a soft throw in gentle morning light.",
+    },
+    sources: [
+      { label: "Infertility overview", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/" },
+      { label: "Fertility: assessment and treatment for people with fertility problems (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Age and fertility", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/age-and-fertility/" },
+      { label: "Planning a pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/planning-a-pregnancy" },
+    ],
+    keyTakeaways: [
+      "Many people try to conceive after 35, and many do.",
+      "The usual UK guide from age 36 is to speak to a GP after six months, not twelve.",
+      "Cycle awareness and preconception basics still matter and still help.",
+      "Male fertility and partner health are part of the conversation too.",
+      "Support and calm can sit alongside seeking help.",
+    ],
+    faq: [
+      { question: "Is 35 too old to start trying?", answer: "No. Many people conceive after 35, both naturally and with support. Fertility can gradually shift with age, but there is no single cutoff." },
+      { question: "How long should we try before seeing a GP after 35?", answer: "The usual UK guide is six months of trying without success from age 36, rather than a year. You can speak to a GP sooner if you have any concerns." },
+      { question: "What might a first fertility appointment involve?", answer: "It often includes a health history for both partners, some blood tests, and sometimes a semen analysis. If further investigations are helpful, your GP can refer you to a fertility clinic." },
+    ],
+    editorialSections: [
+      {
+        id: "why-age-becomes-part-of-the-conversation",
+        heading: "Why age can become part of the conversation",
+        lead: "Fertility often changes gradually from the mid-30s, and it is one factor rather than the whole story.",
+        paragraphs: [
+          "Cycles, ovulation quality and time to conception can all shift gently with age. Many people still conceive naturally in their late 30s and early 40s, and it may take longer than it did earlier.",
+          "Age is worth naming honestly, and it does not need to be the loudest voice in the room.",
+        ],
+      },
+      {
+        id: "timeframes-for-asking-for-help",
+        heading: "Careful timeframes for asking for help",
+        lead: "The UK guide is designed to give you time, not to rush you.",
+        paragraphs: [
+          "From age 36 onwards, the usual UK guide is to speak to a GP after six months of regular trying without success, rather than a year. Below 36, twelve months is the usual guide.",
+          "You can always ask sooner if you have specific concerns, such as irregular cycles or a known condition.",
+        ],
+        callout: { tone: "info", text: "Speaking to a GP earlier does not use up a chance. It usually adds information and a plan." },
+      },
+      {
+        id: "cycle-awareness",
+        heading: "Cycle awareness after 35",
+        lead: "A rough sense of your cycle helps more than perfect tracking.",
+        paragraphs: [
+          "Knowing your usual cycle length and roughly when ovulation may happen helps you notice change and time-sensitive moments.",
+          "One or two steady signals, such as period dates and ovulation tests or cervical mucus, are usually enough. Tracking everything at once often adds stress rather than clarity.",
+        ],
+      },
+      {
+        id: "partner-factors",
+        heading: "Partner age and sperm health, in careful terms",
+        lead: "Male fertility can also change with age and lifestyle, and both partners matter.",
+        paragraphs: [
+          "Male fertility is not fixed. It can also shift with age, lifestyle and general health. Looking at both sides is usually kinder and more useful than focusing on one.",
+          "Semen analysis is often part of a first fertility assessment and is a straightforward test.",
+        ],
+      },
+      {
+        id: "appointment-prep",
+        heading: "Preparing for a fertility appointment",
+        lead: "A little preparation makes appointments feel less pressured.",
+        paragraphs: [
+          "Useful things to bring or note include your usual cycle length, how long you have been trying, any conditions or medications, and a brief health history for both partners.",
+          "Writing down two or three questions before the appointment often helps you leave with a clearer plan.",
+        ],
+      },
+      {
+        id: "emotional-pressure",
+        heading: "Emotional pressure after 35",
+        lead: "This decade can carry quiet weight, and support matters.",
+        paragraphs: [
+          "Age can bring an internal timer that other people cannot see. Comparison, family conversations and social media can all amplify it.",
+          "Fertility counsellors, honest conversations with a partner and time away from certain conversations can all help.",
+        ],
+        callout: { tone: "reassurance", text: "Wanting information sooner is not panic; it is care." },
+      },
+    ],
+  },
+
+  // ─── EMOTIONAL PRESSURE OF AGE WHEN TTC ──────────────────────────────────
+  {
+    slug: "emotional-pressure-of-age-when-ttc",
+    title: "The emotional side of age when trying to conceive",
+    metaDescription: "The emotional weight of age, timelines and comparison while trying to conceive. Calm, supportive guidance and where to find help.",
+    quickAnswer: "The emotional side of age when trying to conceive is often heavier than the practical side. Feeling behind, comparing timelines with friends or family, and carrying quiet pressure can all make the whole experience feel harder. This does not mean anything is wrong with you. Small changes such as setting boundaries with certain conversations, talking to a partner or trusted friend, and speaking to a GP or fertility counsellor if the weight is affecting daily life can all help.",
+    standfirst: "The clock in your head is often louder than the one on the wall. Both deserve a calm response.",
+    howThisFeels: [
+      "Feeling behind, even when you know it is not helpful",
+      "Wanting to be honest without being pitied",
+      "Tired of comparing timelines with everyone else",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Family and social pressure", body: "Comments about age, timing and having children can come from family, friends, colleagues and social media. Even well-meant comments can land heavily." },
+        { heading: "Comparison with other people's timelines", body: "Other people's pregnancies, announcements and posts can create a quiet running tally in your head. This is common and it is very rarely useful." },
+      ],
+      lessCauses: [
+        { heading: "Longer trying journeys and past losses", body: "The longer you have been trying, or if you have had losses, the more each cycle can carry. This is understandable and it deserves gentle support." },
+        { heading: "Big life decisions in the background", body: "Careers, moves, relationships and finances often sit alongside trying to conceive and can add to the emotional weight." },
+      ],
+      whyItVaries: "How age feels depends on your history, your relationships, your community and your own inner voice. Some cycles feel calmer than others, and that is normal too.",
+    },
+    timing: {
+      whenStarts: "Emotional pressure can build slowly over months and years, and often becomes louder around family events or milestones.",
+      whenEases: "For many people, some of the weight lifts once boundaries are in place, a plan is agreed with a partner or a professional is involved.",
+    },
+    whatItFeelsLike: [
+      "A quiet ache around certain birthdays",
+      "Feeling both hopeful and heavy in the same conversation",
+      "Small relief when you name it out loud",
+    ],
+    whatThisMeans: "Emotional pressure around age is real. It does not mean anything is wrong with you, and it does not need to be carried alone.",
+    normal: [
+      "Wanting to skip certain family events during a hard cycle",
+      "Feeling more emotional around friends' pregnancy announcements",
+      "Cycles where you feel calm, and cycles where you do not",
+    ],
+    seekSupport: [
+      "Persistent low mood, anxiety or hopelessness beyond a cycle or two",
+      "Feeling unable to talk about it with anyone",
+      "TTC that is affecting sleep, work or your relationship significantly",
+    ],
+    disclaimer: "This is general emotional support, not therapy. Please speak to a GP or a fertility counsellor if the weight of trying to conceive is affecting your daily life.",
+    whatYouCanDo: [
+      { action: "Name what feels loudest, out loud or on paper", reason: "Naming pressure often makes it a little smaller." },
+      { action: "Set gentle boundaries with certain conversations", reason: "You do not owe updates or explanations to everyone." },
+      { action: "Agree a shared script with a partner if you have one", reason: "It helps to have one calm answer ready for common questions." },
+      { action: "Curate social media use during hard cycles", reason: "Muting or unfollowing is a small kindness, not a betrayal." },
+      { action: "Talk to a GP or fertility counsellor if it feels heavy", reason: "Support does not need to wait for a diagnosis." },
+    ],
+    whatHappensNext: "For most people, some of the emotional weight lifts once a plan is agreed with a partner or a professional. Cycles can still be hard, and support usually makes them a little easier to move through.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Age and trying to conceive", href: "/articles/age-and-trying-to-conceive" },
+        { label: "Mental wellbeing before pregnancy", href: "/articles/mental-wellbeing-before-pregnancy" },
+        { label: "When to ask for fertility help", href: "/articles/when-to-ask-for-fertility-help" },
+      ],
+    },
+    aiPrompts: [
+      "How do I cope with feeling behind when trying to conceive?",
+      "How do I handle family comments about age and babies?",
+      "Where can I find fertility counselling in the UK?",
+    ],
+    captureIntro: "The quiet weight of age is often worth writing down. Not to solve it, just to give it room.",
+    journey: ["trying-to-conceive", "support"],
+    topics: ["age-and-fertility", "emotional-wellbeing"],
+    relatedSlugs: [
+      "age-and-trying-to-conceive",
+      "mental-wellbeing-before-pregnancy",
+      "when-to-ask-for-fertility-help",
+      "coping-with-the-two-week-wait",
+      "ttc-after-35",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-emotional-pressure-age.jpg", import.meta.url).href,
+      alt: "A soft cream armchair with a knitted sage throw, a warm mug on a small tray and a small vase of eucalyptus in gentle morning light.",
+    },
+    sources: [
+      { label: "Mental health when trying for a baby", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/planning-a-pregnancy/mental-wellbeing/mental-health-when-trying-baby" },
+      { label: "Getting pregnant: coping with the emotional side", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+      { label: "Fertility counselling", publisher: "British Infertility Counselling Association", url: "https://www.bica.net/" },
+    ],
+    keyTakeaways: [
+      "Emotional pressure around age is common when trying to conceive.",
+      "Comparison and family conversations can add weight that is not always visible.",
+      "Small boundaries, honest conversations and shared plans help.",
+      "You do not have to wait for a diagnosis to ask for support.",
+      "Fertility counsellors and charities can help you carry it.",
+    ],
+    faq: [
+      { question: "Is it normal to feel behind when trying to conceive?", answer: "Yes. Many people carry a quiet sense of being behind, even when their timeline is very reasonable. Naming it, talking to a partner or a friend, and limiting comparison often helps." },
+      { question: "How do I handle family comments about age and having children?", answer: "A short, calm script that you can use in most conversations can help. You do not owe details or timelines. If certain comments keep landing badly, it is fine to ask for them to stop." },
+      { question: "When should I speak to someone professionally?", answer: "If low mood, anxiety or hopelessness are lasting beyond a cycle or two, or if trying to conceive is affecting sleep, work or your relationship, a GP or fertility counsellor is a reasonable place to start." },
+    ],
+    editorialSections: [
+      {
+        id: "feeling-behind",
+        heading: "Feeling behind, and where it comes from",
+        lead: "A common feeling, and rarely a fair one.",
+        paragraphs: [
+          "Feeling behind often comes from a mix of family history, cultural messages, social media and comparison with friends. It is very common and it is rarely a full picture.",
+          "It may help to notice when the feeling arrives, without needing to fix it in the moment.",
+        ],
+      },
+      {
+        id: "family-and-social-pressure",
+        heading: "Family and social pressure",
+        lead: "Even well-meant comments can land heavily.",
+        paragraphs: [
+          "Comments about age, timing and having children can come from people who love you. That does not always make them easier to hear.",
+          "A short, calm reply that you can use in most conversations often takes the heat out of the moment. Something like, we will share when we are ready, is enough.",
+        ],
+        callout: { tone: "info", text: "You do not owe updates, timelines or reasons to anyone." },
+      },
+      {
+        id: "comparing-timelines",
+        heading: "Comparing timelines",
+        lead: "Small comparisons can quietly add up.",
+        paragraphs: [
+          "Announcements, birthdays, weddings and social media can create a running tally in your head. This is normal and it is rarely useful.",
+          "Muting or unfollowing accounts during a hard cycle is a small kindness to yourself, not a betrayal of anyone.",
+        ],
+      },
+      {
+        id: "decision-fatigue",
+        heading: "Decision fatigue",
+        lead: "Trying to conceive can quietly add a lot of small decisions to daily life.",
+        paragraphs: [
+          "When to test, when to talk to a GP, whether to try another cycle, what to say to a family member. All of it takes energy.",
+          "It can help to agree with a partner or with yourself which decisions can wait, and to protect a little time each week that has nothing to do with trying.",
+        ],
+      },
+      {
+        id: "partner-conversations",
+        heading: "Partner conversations",
+        lead: "Sharing the weight often makes it lighter.",
+        paragraphs: [
+          "Partners sometimes carry the weight differently. Naming that difference kindly, and agreeing small shared rituals, can help both people feel less alone.",
+          "If you are trying alone, or without a supportive partner, a fertility counsellor or an online support space can help.",
+        ],
+      },
+      {
+        id: "protecting-wellbeing",
+        heading: "Protecting wellbeing while still seeking help",
+        lead: "Support and calm can sit alongside each other.",
+        paragraphs: [
+          "Speaking to a GP or fertility counsellor is not a failure of coping. It usually means you are carrying a lot and you deserve help carrying it.",
+          "Small daily anchors, gentle activity, sleep, and time away from certain conversations often help alongside professional support.",
+        ],
+        callout: { tone: "reassurance", text: "You are allowed to find this hard. Asking for support is a reasonable step." },
+      },
+    ],
+  },
+
+  // ─── PARTNER SUPPORT WHEN TTC ────────────────────────────────────────────
+  {
+    slug: "partner-support-when-ttc",
+    title: "Supporting each other while trying to conceive",
+    metaDescription: "How partners can support each other while trying to conceive. Sharing the load, talking about testing and timing, and protecting intimacy.",
+    quickAnswer: "Trying to conceive is shared, even when the physical parts fall on one person more than the other. Both partners tend to feel it, and both can help. Practical steps such as talking about timing without blame, agreeing on how to handle appointments together, protecting intimacy and knowing when to ask for support can make the experience calmer. If conversations feel stuck or heavy, a fertility counsellor or GP can help.",
+    standfirst: "Trying to conceive lands on two people, even when only one of you is tracking a cycle.",
+    howThisFeels: [
+      "Wanting to help without knowing quite how",
+      "Feeling the weight without wanting to say it",
+      "Trying to keep intimacy warm while planning around it",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "The physical parts can fall unevenly", body: "Cycle tracking, ovulation tests and pregnancy tests often sit with one partner. That does not mean the other partner is not affected." },
+        { heading: "People carry things differently", body: "One partner may want to talk more; the other may go quiet. Both are normal responses, not a lack of caring." },
+      ],
+      lessCauses: [
+        { heading: "Fertility investigations", body: "Semen analysis, blood tests or scans can add practical steps and quiet worry for both partners. This is often when partner support matters most." },
+        { heading: "Longer TTC journeys", body: "The longer you have been trying, the more each cycle can carry. Small shared rituals become more important over time." },
+      ],
+      whyItVaries: "Every relationship is different. Communication styles, past experiences and life circumstances all shape how partners support each other.",
+    },
+    timing: {
+      whenStarts: "Small tensions often start to build a few months in, or around a specific appointment or test.",
+      whenEases: "Many couples feel calmer once they have a shared way of talking about it, even if the underlying situation has not changed.",
+    },
+    whatItFeelsLike: [
+      "Wanting to be a team without keeping score",
+      "Quiet relief after an honest conversation",
+      "Small daily kindnesses that carry a lot",
+    ],
+    whatThisMeans: "Fertility is shared and it is not one partner's fault. Talking about timing, tests and feelings without blame usually helps both people feel less alone in it.",
+    normal: [
+      "Different ways of coping between partners",
+      "Feeling closer after some conversations and further apart after others",
+      "Wanting a break from talking about it for a week",
+    ],
+    seekSupport: [
+      "Conversations that keep ending in the same argument",
+      "One partner feeling shut out or blamed",
+      "TTC that is significantly affecting the relationship",
+    ],
+    disclaimer: "This is general relationship support, not couples therapy. A GP, fertility counsellor or Relate counsellor can help if things feel stuck.",
+    whatYouCanDo: [
+      { action: "Agree a regular short check-in about how each of you is doing", reason: "Small, planned conversations often prevent bigger ones later." },
+      { action: "Talk about timing without keeping score", reason: "Framing it as a shared plan tends to feel kinder than a demand." },
+      { action: "Attend appointments together where you can", reason: "It shares the load and helps you both hear the same information." },
+      { action: "Protect intimacy that is not about conceiving", reason: "Small moments that are not tied to a cycle help the relationship stay warm." },
+      { action: "Ask for support together if things feel stuck", reason: "Fertility counsellors are used to helping couples through this." },
+    ],
+    whatHappensNext: "Most couples find a version of this that suits them. A few weeks of trying different check-ins, shared rituals or professional support usually helps things settle.",
+    relatedStage: {
+      intro: "Related:",
+      links: [
+        { label: "Male fertility when trying to conceive", href: "/articles/male-fertility-when-trying-to-conceive" },
+        { label: "Partner health before pregnancy", href: "/articles/partner-health-before-pregnancy" },
+        { label: "Mental wellbeing before pregnancy", href: "/articles/mental-wellbeing-before-pregnancy" },
+      ],
+    },
+    aiPrompts: [
+      "How do we support each other while trying to conceive?",
+      "How do I talk to my partner about semen analysis?",
+      "How do we protect intimacy while trying for a baby?",
+    ],
+    captureIntro: "Partner conversations can quietly hold a lot. Worth noting one thing you would like to say out loud this week.",
+    journey: ["trying-to-conceive", "support"],
+    topics: ["male-fertility", "relationships"],
+    relatedSlugs: [
+      "male-fertility-when-trying-to-conceive",
+      "partner-health-before-pregnancy",
+      "sperm-health-basics",
+      "mental-wellbeing-before-pregnancy",
+      "when-to-ask-for-fertility-help",
+    ],
+    productPromotion: "minimal",
+    reviewedBy: "Jenny Joines",
+    lastUpdated: "July 2026",
+    hero: {
+      src: new URL("../assets/ttc-partner-support.jpg", import.meta.url).href,
+      alt: "Two matching cream mugs and a small vase of eucalyptus on a warm wooden kitchen table in soft morning light.",
+    },
+    sources: [
+      { label: "Trying to get pregnant", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/trying-for-a-baby/trying-to-get-pregnant/" },
+      { label: "Mental health when trying for a baby", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/planning-a-pregnancy/mental-wellbeing/mental-health-when-trying-baby" },
+      { label: "Getting pregnant: coping with the emotional side", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-pregnant/" },
+      { label: "Fertility counselling", publisher: "British Infertility Counselling Association", url: "https://www.bica.net/" },
+    ],
+    keyTakeaways: [
+      "Trying to conceive is shared, even when the physical parts fall unevenly.",
+      "Talking about timing and tests without blame usually helps both partners.",
+      "Attending appointments together shares the load and the information.",
+      "Protecting intimacy that is not about conceiving helps the relationship stay warm.",
+      "Fertility counsellors can help if conversations feel stuck.",
+    ],
+    faq: [
+      { question: "How do we talk about semen analysis without it feeling loaded?", answer: "Frame it as a shared step in a shared plan, not a test of one partner. Many people find it helps to book the conversation with a GP together, so both partners hear the same information at the same time." },
+      { question: "We keep arguing about timing. What can we do?", answer: "Small, planned check-ins outside of the fertile window often help more than in-the-moment conversations. Agreeing a simple shared plan, and giving each other permission to say when it is too much, can lower the pressure." },
+      { question: "How do we look after intimacy while trying for a baby?", answer: "Protecting time together that has nothing to do with conceiving matters. Small rituals, kindness in the ordinary moments and honest conversations tend to help more than any single fix." },
+    ],
+    editorialSections: [
+      {
+        id: "shared-responsibility",
+        heading: "Trying to conceive is shared",
+        lead: "Both partners are involved, even when the physical parts fall unevenly.",
+        paragraphs: [
+          "Cycle tracking, ovulation tests and pregnancy tests often sit with one partner. That does not mean the other partner is not affected.",
+          "Framing it as a shared plan, from the start, usually helps both people feel more like a team and less like one person is carrying the load alone.",
+        ],
+      },
+      {
+        id: "talking-about-timing",
+        heading: "Talking about timing without blame",
+        lead: "Timing conversations are easier when they are planned, kind and honest.",
+        paragraphs: [
+          "Timing sex can quietly turn into pressure. Small changes such as a broader fertile window, less specific language and honest check-ins about how each of you is finding it can help.",
+          "It is fine to say that a particular cycle feels like a lot. Naming it usually takes some of the heat out of the moment.",
+        ],
+        callout: { tone: "info", text: "Neither partner is responsible for the outcome of a cycle. You are both responsible for how you look after each other along the way." },
+      },
+      {
+        id: "tests-and-lifestyle",
+        heading: "Semen analysis and lifestyle conversations",
+        lead: "These are shared health steps, not judgements.",
+        paragraphs: [
+          "Semen analysis is often part of a first fertility assessment and is a straightforward test. It is a shared step, not a verdict.",
+          "Lifestyle conversations about alcohol, smoking, weight and general health are more useful when both partners look at them together rather than one being singled out.",
+        ],
+      },
+      {
+        id: "emotional-differences",
+        heading: "Emotional differences between partners",
+        lead: "People carry things differently, and neither way is wrong.",
+        paragraphs: [
+          "One partner may want to talk more; the other may go quiet. Some people process by planning, others by taking breaks from the topic.",
+          "Naming these differences kindly, rather than treating them as evidence of not caring, tends to prevent a lot of arguments.",
+        ],
+      },
+      {
+        id: "protecting-intimacy",
+        heading: "Protecting intimacy",
+        lead: "Small moments that are not about conceiving matter a lot.",
+        paragraphs: [
+          "Trying to conceive can quietly narrow the relationship down to a schedule. Small daily kindnesses, time together that has nothing to do with a cycle, and honest conversations all help keep the relationship warm.",
+          "If intimacy has started to feel like pressure, it is fine to name that and slow things down.",
+        ],
+      },
+      {
+        id: "asking-for-support-together",
+        heading: "When to ask for support together",
+        lead: "Some conversations are easier with a third person in the room.",
+        paragraphs: [
+          "If conversations keep ending in the same argument, or one partner feels shut out or blamed, a fertility counsellor or Relate counsellor can help.",
+          "Asking for that kind of support together tends to be a strength, not a sign that something is broken.",
+        ],
+        callout: { tone: "reassurance", text: "Asking for help together often protects the relationship as much as it supports the trying." },
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

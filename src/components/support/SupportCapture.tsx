@@ -22,7 +22,7 @@ const SupportCapture = () => {
               Moments like this can be hard to process. Some people find it helpful to write things down.
             </p>
             <a
-              href="/product"
+              href="/journal"
               className="inline-flex items-center gap-2 border border-foreground/20 text-foreground rounded-pill px-5 py-2.5 font-sans text-xs font-light hover:bg-parchment-dark transition-all"
             >
               Explore the journal

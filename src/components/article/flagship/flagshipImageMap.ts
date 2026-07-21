@@ -118,6 +118,13 @@ import ttcAgeAndTTC from "@/assets/ttc-age-and-ttc.jpg";
 import ttcMaleFertilitySupport from "@/assets/ttc-male-fertility-support.jpg";
 import ttcMovingToIVF from "@/assets/ttc-moving-to-ivf.jpg";
 
+// Phase 10.2a — Diet & exercise gap batch hero imagery
+import heroCaffeine from "@/assets/article-hero-caffeine-pregnancy.jpg";
+import heroHydration from "@/assets/article-hero-hydration-pregnancy.jpg";
+import heroCravingsAversions from "@/assets/article-hero-cravings-aversions.jpg";
+import heroPelvicFloor from "@/assets/article-hero-pelvic-floor.jpg";
+import heroExerciseTrimester from "@/assets/article-hero-exercise-trimester.jpg";
+
 
 
 
@@ -170,6 +177,11 @@ export const flagshipHeroMap: Record<string, Img> = {
 
   // Movement, body & rest
   "moving-your-body-in-pregnancy": { src: heroSecondMovementExercise, alt: "A pregnant person stretching gently at home — adaptive movement in pregnancy." },
+  "caffeine-in-pregnancy": { src: heroCaffeine, alt: "A small mug of coffee alongside a herbal tea and glass of water on a wooden counter — everyday caffeine in pregnancy." },
+  "hydration-in-pregnancy": { src: heroHydration, alt: "A pregnant person pouring water into a glass in a bright kitchen — steady hydration in pregnancy." },
+  "cravings-and-aversions-in-pregnancy": { src: heroCravingsAversions, alt: "A plate of unusual food pairings on a wooden table — the felt experience of pregnancy cravings." },
+  "pelvic-floor-exercises-in-pregnancy": { src: heroPelvicFloor, alt: "A pregnant person sitting cross-legged on a yoga mat in soft daylight, hands resting on the bump — quiet pelvic floor practice." },
+  "exercise-safety-by-trimester": { src: heroExerciseTrimester, alt: "A pregnant person walking on a tree-lined path in comfortable athletic clothing — sustainable pregnancy exercise." },
   "sleep-in-pregnancy": { src: heroSecondSleep, alt: "A bed with pillows arranged for side-sleeping in late pregnancy." },
   "weight-changes-in-pregnancy": { src: heroSecondBody, alt: "A pregnant body in soft light — the changing shape of pregnancy." },
   "pelvic-pain-in-pregnancy": { src: heroSecondBody, alt: "A pregnant person resting one hand low on the pelvis — the location of pelvic-girdle pain." },

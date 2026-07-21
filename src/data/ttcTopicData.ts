@@ -165,6 +165,22 @@ const LIVE = {
   ageAndTryingToConceive: "/articles/age-and-trying-to-conceive",
   maleFertilityWhenTTC: "/articles/male-fertility-when-trying-to-conceive",
   movingFromTTCToIVF: "/articles/moving-from-ttc-to-ivf",
+
+  // Phase 9.16 (TTC pregnancy tests + two week wait expansion)
+  testingTooEarly: "/articles/testing-too-early",
+  negativeTestNoPeriod: "/articles/negative-test-but-no-period",
+  evaporationLineFaintPositive: "/articles/evaporation-line-or-faint-positive",
+  twoWeekWaitSymptoms: "/articles/two-week-wait-symptoms",
+  spottingTwoWeekWait: "/articles/spotting-during-the-two-week-wait",
+  copingTwoWeekWait: "/articles/coping-with-the-two-week-wait",
+
+  // Phase 9.20 (final TTC article gap batch)
+  trackingWithoutOverthinking: "/articles/tracking-without-overthinking",
+  thyroidAndFertility: "/articles/thyroid-and-fertility",
+  ttcInYour30s: "/articles/ttc-in-your-30s",
+  ttcAfter35: "/articles/ttc-after-35",
+  emotionalPressureOfAge: "/articles/emotional-pressure-of-age-when-ttc",
+  partnerSupportWhenTTC: "/articles/partner-support-when-ttc",
 };
 
 // ─── Pillar configs ───────────────────────────────────────────────────────
@@ -462,6 +478,14 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     ],
     groups: [
       {
+        label: "Health and support before pregnancy",
+        links: [
+          { label: "Partner health before pregnancy", href: LIVE.partnerHealthBeforePregnancy },
+          { label: "Lifestyle before pregnancy", href: LIVE.lifestyleBeforePregnancy },
+          { label: "Supporting each other while trying to conceive", href: LIVE.partnerSupportWhenTTC },
+        ],
+      },
+      {
         label: "Tests and next steps",
         links: [
           { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
@@ -515,12 +539,22 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     ],
     groups: [
       {
-        label: "Common questions",
+        label: "Understanding age and timing",
+        description: "Calm, honest guidance across the ages when many people are trying to conceive.",
+        links: [
+          { label: "Age and trying to conceive", href: LIVE.ageAndTryingToConceive },
+          { label: "Trying to conceive in your 30s", href: LIVE.ttcInYour30s },
+          { label: "Trying to conceive after 35", href: LIVE.ttcAfter35 },
+        ],
+      },
+      {
+        label: "Planning and support",
+        description: "The practical steps that often help alongside age.",
         links: [
           { label: "How long to try before getting help", href: LIVE.howLongToTry },
           { label: "AMH test explained", href: LIVE.amhTest },
           { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
-          { label: "What is IVF?", href: LIVE.ivfPage },
+          { label: "The emotional side of age when trying to conceive", href: LIVE.emotionalPressureOfAge },
         ],
       },
     ],
@@ -569,16 +603,21 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     ],
     groups: [
       {
-        label: "Practical basics",
+        label: "Tracking your cycle",
         links: [
-          { label: "Ovulation calculator", href: LIVE.calculator },
+          { label: "Ovulation signs", href: LIVE.ovulationSigns },
+          { label: "Cervical mucus and fertility", href: LIVE.cervicalMucus },
+          { label: "Basal body temperature tracking", href: LIVE.basalBodyTemperature },
+          { label: "Using ovulation tests", href: LIVE.usingOvulationTests },
         ],
       },
       {
-        label: "Common questions",
+        label: "When cycles are unclear",
         links: [
           { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
-          { label: "Cervical mucus and fertility", href: LIVE.cervicalMucus },
+          { label: "Late ovulation and TTC", href: LIVE.lateOvulation },
+          { label: "When ovulation is hard to predict", href: LIVE.hardToPredictOvulation },
+          { label: "Cycle tracking without overthinking", href: LIVE.trackingWithoutOverthinking },
         ],
       },
     ],
@@ -628,19 +667,17 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         label: "Timing your test",
         links: [
           { label: "When to take a pregnancy test", href: LIVE.whenToTest },
+          { label: "Testing too early", href: LIVE.testingTooEarly },
         ],
       },
       {
         label: "Reading what you see",
-        description: "Interpreting unclear results and ambiguous symptoms.",
+        description: "Interpreting unclear results, ambiguous symptoms, and testing when the moment feels heavy.",
         links: [
           { label: "Faint positive pregnancy test", href: LIVE.faintPositive },
+          { label: "Evaporation line or faint positive", href: LIVE.evaporationLineFaintPositive },
           { label: "Implantation bleeding", href: LIVE.implantationBleeding },
-        ],
-      },
-      {
-        label: "When the result feels heavy",
-        links: [
+          { label: "Negative test but no period", href: LIVE.negativeTestNoPeriod },
           { label: "Pregnancy after loss", href: LIVE.pregnancyAfterLoss },
         ],
       },
@@ -651,6 +688,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       "Is it implantation bleeding or my period?",
     ],
   },
+
 
   "two-week-wait": {
     slug: "two-week-wait",
@@ -689,8 +727,11 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
     groups: [
       {
         label: "Worries during the wait",
-        description: "The emotional and physical questions that surface in these days.",
+        description: "The emotional and physical questions that surface in these days, and how to hold them.",
         links: [
+          { label: "Two week wait symptoms", href: LIVE.twoWeekWaitSymptoms },
+          { label: "Spotting during the two week wait", href: LIVE.spottingTwoWeekWait },
+          { label: "Coping with the two week wait", href: LIVE.copingTwoWeekWait },
           { label: "Early pregnancy symptoms explained", href: LIVE.earlySymptoms },
         ],
       },
@@ -756,6 +797,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         links: [
           { label: "PCOS and trying to conceive", href: LIVE.pcosTTC },
           { label: "Endometriosis and trying to conceive", href: LIVE.endoTTC },
+          { label: "Thyroid conditions and trying to conceive", href: LIVE.thyroidAndFertility },
           { label: "Irregular periods and trying to conceive", href: LIVE.irregularPeriodsTTC },
         ],
       },
@@ -766,11 +808,12 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
           { label: "What happens at a fertility appointment", href: LIVE.fertilityAppointment },
           { label: "Fertility tests for women", href: LIVE.fertilityTestsWomen },
           { label: "Fertility tests for men", href: LIVE.fertilityTestsMen },
+          { label: "Trying again after miscarriage", href: LIVE.tryingAgain },
         ],
       },
     ],
     curationNote:
-      "Thyroid and fibroid-specific guidance is on the way. For anything specific, ask below or speak to your GP.",
+      "For anything specific to your health, please speak to your GP.",
     aiPrompts: [
       "Could PCOS be affecting my chances?",
       "Does endometriosis affect fertility?",

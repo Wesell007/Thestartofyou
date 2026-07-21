@@ -72,6 +72,7 @@ const IVF = lazy(() => import("./pages/IVF.tsx"));
 const Postpartum = lazy(() => import("./pages/Postpartum.tsx"));
 const FirstYear = lazy(() => import("./pages/FirstYear.tsx"));
 const FYPhaseZeroToThree = lazy(() => import("./pages/firstyear/PhaseZeroToThree.tsx"));
+const FYMonthPage = lazy(() => import("./pages/firstyear/MonthPage.tsx"));
 const FYPhaseThreeToSix = lazy(() => import("./pages/firstyear/PhaseThreeToSix.tsx"));
 const FYPhaseSixToNine = lazy(() => import("./pages/firstyear/PhaseSixToNine.tsx"));
 const FYPhaseNineToTwelve = lazy(() => import("./pages/firstyear/PhaseNineToTwelve.tsx"));
@@ -306,6 +307,20 @@ const App = () => (
           <Route path="/first-year/3-6-months" element={<FYPhaseThreeToSix />} />
           <Route path="/first-year/6-9-months" element={<FYPhaseSixToNine />} />
           <Route path="/first-year/9-12-months" element={<FYPhaseNineToTwelve />} />
+          {/* First Year month guide pages (Phase 11.8a). Must sit above /:topic/:slug. */}
+          <Route path="/first-year/newborn" element={<FYMonthPage slug="newborn" />} />
+          <Route path="/first-year/1-month" element={<FYMonthPage slug="1-month" />} />
+          <Route path="/first-year/2-months" element={<FYMonthPage slug="2-months" />} />
+          <Route path="/first-year/3-months" element={<FYMonthPage slug="3-months" />} />
+          <Route path="/first-year/4-months" element={<FYMonthPage slug="4-months" />} />
+          <Route path="/first-year/5-months" element={<FYMonthPage slug="5-months" />} />
+          <Route path="/first-year/6-months" element={<FYMonthPage slug="6-months" />} />
+          <Route path="/first-year/7-months" element={<FYMonthPage slug="7-months" />} />
+          <Route path="/first-year/8-months" element={<FYMonthPage slug="8-months" />} />
+          <Route path="/first-year/9-months" element={<FYMonthPage slug="9-months" />} />
+          <Route path="/first-year/10-months" element={<FYMonthPage slug="10-months" />} />
+          <Route path="/first-year/11-months" element={<FYMonthPage slug="11-months" />} />
+          <Route path="/first-year/12-months" element={<FYMonthPage slug="12-months" />} />
           {/* First Year topic landing pages (Step 3). One reusable template,
               eight thin wrappers, four per side. Must sit above the generic
               /:journey/:stage route and the catch-all. */}
@@ -350,8 +365,8 @@ const App = () => (
           <Route path="/preparing-for-baby" element={<PreparingForBaby />} />
           <Route path="/support" element={<Support />} />
           <Route path="/about" element={<About />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/journal" element={<Navigate to="/product" replace />} />
+          <Route path="/journal" element={<Product />} />
+          <Route path="/product" element={<Navigate to="/journal" replace />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/ask" element={<AskPage />} />

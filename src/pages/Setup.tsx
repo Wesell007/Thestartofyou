@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import SeoHead from "@/components/seo/SeoHead";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -76,6 +77,12 @@ const Setup = () => {
 
   return (
     <div className="min-h-screen bg-parchment flex items-center">
+      <SeoHead
+        title="Setup | The Start of You"
+        description="Finish setting up your Start of You account."
+        canonical="https://thestartofyou.com/setup"
+        noindex
+      />
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-md py-16">
         <div className="text-center mb-10">
           <p

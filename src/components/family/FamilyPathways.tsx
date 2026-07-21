@@ -83,7 +83,7 @@ const FamilyPathways = () => {
 
         <div className="mt-10 text-center">
           <Link
-            to="/product"
+            to="/journal"
             className="inline-flex items-center gap-2 font-sans text-[13px] font-medium tracking-wide hover:underline underline-offset-4"
             style={{ color: "hsl(var(--stage-family-accent))" }}
           >

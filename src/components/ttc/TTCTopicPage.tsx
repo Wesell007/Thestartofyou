@@ -85,6 +85,12 @@ import imgAgeAndTTC from "@/assets/ttc-age-and-ttc.jpg";
 import imgMaleFertilitySupport from "@/assets/ttc-male-fertility-support.jpg";
 import imgMovingToIVF from "@/assets/ttc-moving-to-ivf.jpg";
 
+// Phase 9.20 (final TTC article gap batch)
+import imgTTCIn30s from "@/assets/ttc-in-your-30s.jpg";
+import imgTTCAfter35 from "@/assets/ttc-after-35.jpg";
+import imgEmotionalPressureAge from "@/assets/ttc-emotional-pressure-age.jpg";
+import imgPartnerSupportTTC from "@/assets/ttc-partner-support.jpg";
+
 
 interface Props {
   config: TTCPageConfig;
@@ -182,6 +188,13 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/age-and-trying-to-conceive": imgAgeAndTTC,
   "/articles/male-fertility-when-trying-to-conceive": imgMaleFertilitySupport,
   "/articles/moving-from-ttc-to-ivf": imgMovingToIVF,
+  // Phase 9.20 — final TTC article gap batch
+  "/articles/tracking-without-overthinking": imgOvulationSignsJournal,
+  "/articles/thyroid-and-fertility": imgConditions,
+  "/articles/ttc-in-your-30s": imgTTCIn30s,
+  "/articles/ttc-after-35": imgTTCAfter35,
+  "/articles/emotional-pressure-of-age-when-ttc": imgEmotionalPressureAge,
+  "/articles/partner-support-when-ttc": imgPartnerSupportTTC,
 };
 
 const TOPIC_FALLBACK: Record<TTCTopicSlug, string> = {

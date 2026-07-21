@@ -34,19 +34,19 @@ const phases = [
 
 // Secondary quick-navigation strip — supports the four phase cards, never replaces them.
 const ageItems: { label: string; href: string }[] = [
-  { label: "Newborn", href: "/first-year/0-3-months" },
-  { label: "1 month", href: "/first-year/0-3-months" },
-  { label: "2 months", href: "/first-year/0-3-months" },
-  { label: "3 months", href: "/first-year/0-3-months" },
-  { label: "4 months", href: "/first-year/3-6-months" },
-  { label: "5 months", href: "/first-year/3-6-months" },
-  { label: "6 months", href: "/first-year/3-6-months" },
-  { label: "7 months", href: "/first-year/6-9-months" },
-  { label: "8 months", href: "/first-year/6-9-months" },
-  { label: "9 months", href: "/first-year/6-9-months" },
-  { label: "10 months", href: "/first-year/9-12-months" },
-  { label: "11 months", href: "/first-year/9-12-months" },
-  { label: "12 months", href: "/first-year/9-12-months" },
+  { label: "Newborn", href: "/first-year/newborn" },
+  { label: "1 month", href: "/first-year/1-month" },
+  { label: "2 months", href: "/first-year/2-months" },
+  { label: "3 months", href: "/first-year/3-months" },
+  { label: "4 months", href: "/first-year/4-months" },
+  { label: "5 months", href: "/first-year/5-months" },
+  { label: "6 months", href: "/first-year/6-months" },
+  { label: "7 months", href: "/first-year/7-months" },
+  { label: "8 months", href: "/first-year/8-months" },
+  { label: "9 months", href: "/first-year/9-months" },
+  { label: "10 months", href: "/first-year/10-months" },
+  { label: "11 months", href: "/first-year/11-months" },
+  { label: "12 months", href: "/first-year/12-months" },
 ];
 
 const FYPhaseNav = () => {
@@ -159,13 +159,13 @@ const FYPhaseNav = () => {
             style={{ backgroundColor: "hsl(var(--border) / 0.55)" }}
           />
           <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-3 text-foreground/45">
-            Quick navigation
+            Month by month
           </p>
           <h3 className="font-serif text-xl sm:text-[1.4rem] text-foreground leading-snug mb-2">
-            Go to your baby's age.
+            Your baby's first year, month by month.
           </h3>
           <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed max-w-xl mb-6">
-            Use this as a quick way into the phase that fits where you are now.
+            Choose your baby's age for a deeper guide to development, feeding, sleep, care and how this stage may feel for you.
           </p>
           <div className="flex flex-wrap gap-2">
             {ageItems.map((a) => (

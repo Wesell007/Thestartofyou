@@ -863,27 +863,9 @@ const WeekPage = () => {
         </div>
       </section>
 
-      {/* ───────────────────────────────────────────────────────── 15. FAQ */}
-      <section className="bg-parchment-dark/40 py-16 md:py-24">
-        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-          <div className="mb-10 text-center">
-            <SectionLabel>Common questions</SectionLabel>
-            <h2 className="font-serif text-[1.85rem] sm:text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">
-              Common questions at week {data.week}
-            </h2>
-          </div>
-          <div className="bg-card rounded-3xl border border-border/40 shadow-card-brand p-2 md:p-4">
-            <div className="px-4 md:px-6">
-              {faqs.map((f, i) => (
-                <FAQRow key={f.q} faq={f} defaultOpen={i === 0} />
-              ))}
-            </div>
-          </div>
-          <p className="font-sans text-[12px] text-foreground/55 text-center mt-6 leading-relaxed">
-            {data.disclaimer}
-          </p>
-        </div>
-      </section>
+      {/* ───────────────────────────────────────────────────────── 15. COMMON QUESTIONS + SOURCES */}
+      <WeekCommonQuestions week={data.week} questions={buildWeekQuestions(data.week, faqs)} />
+      <WeekSources week={data.week} sources={getWeekSources(data.week)} />
 
       {/* ───────────────────────────────────────────────────────── 16. NEXT WEEK CTA */}
       <section className="bg-parchment py-16 md:py-24">

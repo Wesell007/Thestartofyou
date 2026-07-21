@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import SeoHead from "@/components/seo/SeoHead";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";

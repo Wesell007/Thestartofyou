@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import SeoHead from "@/components/seo/SeoHead";
 import { useNavigate, Link } from "react-router-dom";
 import { ArrowRight, Loader2, ShieldCheck } from "lucide-react";
 import { z } from "zod";
@@ -219,6 +220,12 @@ const SetupTTC = () => {
 
   return (
     <div className="min-h-screen bg-parchment">
+      <SeoHead
+        title="TTC setup | The Start of You"
+        description="Save your trying to conceive journey."
+        canonical="https://thestartofyou.com/setup/trying-to-conceive"
+        noindex
+      />
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-xl py-14 md:py-20">
         <div className="text-center mb-10">
           <p

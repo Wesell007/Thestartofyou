@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import SeoHead from "@/components/seo/SeoHead";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { differenceInDays } from "date-fns";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -186,6 +187,12 @@ const KeptChapter = () => {
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative overflow-x-hidden">
+      <SeoHead
+        title="My week | The Start of You"
+        description="A kept chapter from your pregnancy journey."
+        canonical="https://thestartofyou.com/my-week"
+        noindex
+      />
       {/* Atmospheric wash — kept chapters live in a slightly deeper, settled tone */}
       <div
         aria-hidden="true"

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import SeoHead from "@/components/seo/SeoHead";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { Mail, ArrowRight, Loader2, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -157,6 +158,12 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen bg-parchment flex flex-col">
+      <SeoHead
+        title="Sign in | The Start of You"
+        description="Sign in to your Start of You account."
+        canonical="https://thestartofyou.com/auth"
+        noindex
+      />
       <header className="container mx-auto px-5 sm:px-6 md:px-10 pt-8">
         <Link
           to="/"

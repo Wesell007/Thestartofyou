@@ -850,10 +850,11 @@ const Week4Page = () => (
     <Week4Focus />
     <Week4SeekSupport />
     <Week4Quote />
-    <Week4ReflectionAsk />
+    <WeekReflectionAsk week={4} reflectionPrompts={reflectionPrompts} askChips={askChips} />
     <Week4Journal />
     <Week4Related />
-    <Week4FAQ />
+    <WeekCommonQuestions week={4} questions={buildWeekQuestions(4, faqs)} />
+    <WeekSources week={4} sources={getWeekSources(4)} />
     <Week4Next />
     <Footer />
   </div>

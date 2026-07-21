@@ -427,41 +427,50 @@ const WhenToAskForSupport = ({ items }: { items: PhaseConfig["support"] }) => {
 const PhaseSources = ({ items }: { items: PhaseConfig["sources"] }) => {
   if (!items || items.length === 0) return null;
   return (
-    <section className="bg-parchment py-12 md:py-14">
+    <section className="bg-parchment py-14 md:py-18">
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
         <SectionLabel>References and guidance</SectionLabel>
         <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-6">
           Trusted UK sources behind this guide.
         </h2>
-        <ol className="space-y-3 mb-6">
-          {items.map((src, i) => (
-            <li key={src.href} className="flex gap-3">
-              <span
-                className="font-sans text-[11px] font-light tracking-wider shrink-0 mt-0.5"
-                style={{ color: "hsl(var(--stage-firstyear-deep))" }}
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="min-w-0">
-                <p className="font-sans text-[13px] font-light text-foreground/85 leading-relaxed">
-                  <span className="font-medium">{src.publisher}</span> — {src.label}
-                </p>
-                <a
-                  href={src.href}
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  className="inline-flex items-center gap-1 font-sans text-[12px] font-light mt-0.5 transition-colors hover:underline"
-                  style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+        <div
+          className="rounded-2xl border p-7 md:p-9 bg-parchment-dark/70 shadow-[0_10px_30px_-24px_rgba(0,0,0,0.15)]"
+          style={{ borderColor: "hsl(var(--border) / 0.6)" }}
+        >
+          <ol className="space-y-4">
+            {items.map((src, i) => (
+              <li key={src.href} className="flex gap-4">
+                <span
+                  className="font-serif text-[13px] tabular-nums shrink-0 mt-0.5"
+                  style={{ color: "hsl(var(--stage-firstyear-accent))" }}
                 >
-                  Visit source <ExternalLink size={11} />
-                </a>
-              </div>
-            </li>
-          ))}
-        </ol>
-        <p className="font-sans text-[12px] font-light italic text-muted-foreground leading-relaxed">
-          This guide is general information. Always speak to your health visitor, GP or midwife if you are worried about you or your baby.
-        </p>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div className="min-w-0">
+                  <p className="font-sans text-[13px] font-light text-foreground/85 leading-relaxed">
+                    <span className="font-medium text-foreground/95">{src.publisher}</span>
+                    <span className="text-muted-foreground/60"> · </span>
+                    <span>{src.label}</span>
+                  </p>
+                  <a
+                    href={src.href}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="inline-flex items-center gap-1 font-sans text-[12px] font-light mt-1 transition-colors hover:underline"
+                    style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+                  >
+                    Visit source <ExternalLink size={11} />
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-6 pt-5 border-t border-border/40">
+            <p className="font-sans text-[12px] font-light italic text-muted-foreground leading-relaxed">
+              This guide is general information. Always speak to your health visitor, GP or midwife if you are worried about you or your baby.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

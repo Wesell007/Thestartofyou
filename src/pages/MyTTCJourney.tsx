@@ -209,6 +209,12 @@ const MyTTCJourney = () => {
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
+      <SeoHead
+        title="My TTC journey | The Start of You"
+        description="Your saved trying to conceive journey."
+        canonical="https://thestartofyou.com/my-ttc-journey"
+        noindex
+      />
       <main className="relative mx-auto w-full max-w-[880px] px-5 sm:px-8 md:px-10 pt-16 sm:pt-20 lg:pt-24 pb-20 sm:pb-24">
         {/* Header */}
         <header className="mb-10 sm:mb-12">

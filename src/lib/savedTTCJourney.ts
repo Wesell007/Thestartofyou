@@ -109,7 +109,7 @@ export const commitPendingTTCJourneyToDB = async (
   const stage = computeTTCStage(new Date(), derived);
   const fmt = (d: Date) => format(d, "yyyy-MM-dd");
 
-  const { data, error } = await supabase.rpc("save_ttc_journey", {
+  const { data, error } = await (supabase.rpc as any)("save_ttc_journey", {
     p_stage: stage,
     p_last_period_date: values.last_period_date,
     p_cycle_length_days: values.cycle_length_days,
@@ -127,7 +127,7 @@ export const commitPendingTTCJourneyToDB = async (
     p_possible_test_date: fmt(derived.possible_test_date),
   });
   if (error) return { ok: false, reason: "error", message: error.message };
-  if (data === "pregnancy_active") return { ok: false, reason: "pregnancy_active" };
+  if ((data as unknown) === "pregnancy_active") return { ok: false, reason: "pregnancy_active" };
 
   clearPendingTTCJourney();
   return { ok: true };

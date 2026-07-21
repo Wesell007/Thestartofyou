@@ -394,31 +394,51 @@ const FeelsAndHelps = ({
 const WhenToAskForSupport = ({ items }: { items: PhaseConfig["support"] }) => {
   if (!items || items.length === 0) return null;
   return (
-    <section className="bg-parchment py-12 md:py-16">
+    <section className="bg-parchment py-16 md:py-22">
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-4xl">
         <SectionLabel>When to ask for support</SectionLabel>
-        <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-8">
+        <h2 className="font-serif text-2xl sm:text-[1.75rem] text-foreground leading-[1.15] mb-8">
           Who to turn to, and when.
         </h2>
-        <ul className="space-y-5">
-          {items.map((s) => (
-            <li key={s.label}>
-              <div className="flex flex-wrap items-baseline gap-2 mb-1">
-                <p className="font-serif text-[16px] text-foreground leading-snug">{s.label}</p>
-                {s.when && (
+        <div
+          className="rounded-[24px] border p-7 md:p-10 bg-card shadow-[0_20px_50px_-30px_rgba(20,30,60,0.18)]"
+          style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.24)" }}
+        >
+          <ul>
+            {items.map((s, i) => (
+              <li
+                key={s.label}
+                className={i > 0 ? "pt-6 mt-6 border-t border-border/40" : ""}
+              >
+                <div className="flex gap-4">
                   <span
-                    className="font-sans text-[10px] font-light tracking-[0.2em] uppercase"
-                    style={{ color: "hsl(var(--stage-firstyear-deep))" }}
-                  >
-                    {s.when}
-                  </span>
-                )}
-              </div>
-              <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed">{s.body}</p>
-              <div className="mt-5"><QuietRule /></div>
-            </li>
-          ))}
-        </ul>
+                    className="mt-2 w-2 h-2 rounded-full shrink-0"
+                    style={{ backgroundColor: "hsl(var(--stage-firstyear-accent))" }}
+                    aria-hidden
+                  />
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2.5 mb-1.5">
+                      <p className="font-serif text-[17px] sm:text-[18px] text-foreground leading-snug">{s.label}</p>
+                      {s.when && (
+                        <span
+                          className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-sans text-[10px] font-medium tracking-[0.16em] uppercase"
+                          style={{
+                            borderColor: "hsl(var(--stage-firstyear-accent) / 0.32)",
+                            color: "hsl(var(--stage-firstyear-deep))",
+                            backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.35)",
+                          }}
+                        >
+                          {s.when}
+                        </span>
+                      )}
+                    </div>
+                    <p className="font-sans text-[14.5px] font-light text-foreground/75 leading-[1.75]">{s.body}</p>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

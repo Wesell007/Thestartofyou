@@ -318,24 +318,6 @@ const anchors = [
 /* ─────────────────────────────────────────────────────────────────────
    FAQ row
    ───────────────────────────────────────────────────────────────────── */
-const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; defaultOpen?: boolean }) => {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border-b border-border/40 last:border-b-0">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-start gap-4 py-5 text-left group">
-        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-sage transition-colors leading-snug">
-          {faq.q}
-        </span>
-        <span className="w-7 h-7 rounded-full bg-sage-bg flex items-center justify-center text-sage shrink-0 mt-1">
-          {open ? <Minus size={13} /> : <Plus size={13} />}
-        </span>
-      </button>
-      {open && (
-        <p className="font-sans text-[14px] text-foreground/75 leading-[1.85] pb-6 pr-12">{faq.a}</p>
-      )}
-    </div>
-  );
-};
 
 /* ═══════════════════════════════════════════════════════════════════════
    PAGE

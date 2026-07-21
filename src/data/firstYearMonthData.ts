@@ -2811,6 +2811,26 @@ export const firstYearMonthImages: Record<MonthSlug, MonthImagery> = {
     baby: { src: eightMonthBaby.url, alt: "An eight month old baby picking up a small piece of soft banana with a pincer grasp on a high chair tray", caption: "Small fingers, big skills, growing independence." },
     parent: { src: eightMonthParent.url, alt: "A parent's cardigan draped over the back of a chair with a small stack of baby books on a side table", caption: "Wanting a little space is not a failure of love." },
   },
+  "9-months": {
+    hero: { src: nineMonthHero.url, alt: "A nine month old baby crawling on a cream rug in a bright, calm home" },
+    baby: { src: nineMonthBaby.url, alt: "A nine month old baby's small hand pushing up on a soft play mat", caption: "Moving in their own way, holding on to you." },
+    parent: { src: nineMonthParent.url, alt: "A parent's soft cardigan on a chair with a warm mug and picture books nearby", caption: "Long tiredness is real. So is quiet pride." },
+  },
+  "10-months": {
+    hero: { src: tenMonthHero.url, alt: "A ten month old baby pulling up to stand at a low sofa in a bright home" },
+    baby: { src: tenMonthBaby.url, alt: "A ten month old baby cruising along a low wooden bench holding on with both hands", caption: "Standing, reaching, deciding." },
+    parent: { src: tenMonthParent.url, alt: "A calm kitchen counter with a water bottle, notebook and folded muslin", caption: "Small, specific asks make room to keep going." },
+  },
+  "11-months": {
+    hero: { src: elevenMonthHero.url, alt: "An eleven month old baby standing supported at a low wooden table in a sunlit room" },
+    baby: { src: elevenMonthBaby.url, alt: "An eleven month old baby's hands holding a small wooden cup on a cream rug", caption: "Nearly a year of learning together." },
+    parent: { src: elevenMonthParent.url, alt: "An open journal, warm mug and a small dried flower sprig on a linen throw", caption: "Big feelings about the year are welcome here." },
+  },
+  "12-months": {
+    hero: { src: twelveMonthHero.url, alt: "A twelve month old baby taking a first tentative step while a parent's hand steadies gently" },
+    baby: { src: twelveMonthBaby.url, alt: "A twelve month old baby's hands exploring a soft picture book on a cream rug", caption: "A whole year of you both." },
+    parent: { src: twelveMonthParent.url, alt: "A folded linen shirt, warm cups of tea and a small photo album on a soft chair", caption: "Look back a little. It has been huge." },
+  },
 };
 
 export function getMonthImagery(slug: MonthSlug): MonthImagery {

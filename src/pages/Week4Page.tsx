@@ -41,6 +41,10 @@ import emotionalImg from "@/assets/article-hero-emotional-first-tri.jpg";
 import testsScansImg from "@/assets/article-hero-tests-scans.jpg";
 import symptomsStoppingImg from "@/assets/article-hero-symptoms-stopping.jpg";
 import fatigueImg from "@/assets/article-hero-fatigue.jpg";
+import WeekReflectionAsk from "@/components/week/WeekReflectionAsk";
+import WeekCommonQuestions from "@/components/week/WeekCommonQuestions";
+import WeekSources from "@/components/week/WeekSources";
+import { buildWeekQuestions, getWeekSources } from "@/data/weekSupportContent";
 
 /* ─────────────────────────────────────────────────────────────────────
    Shared premium card primitives
@@ -854,28 +858,6 @@ const faqs = [
   { q: "How will I feel emotionally at 4 weeks?",
     a: "Anything from quiet disbelief to overwhelming emotion — sometimes both in one day. The pregnancy can feel real and unreal at the same time. There is no correct way to feel at week 4." },
 ];
-
-const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; defaultOpen?: boolean }) => {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border-b border-border/40 last:border-b-0">
-      <button onClick={() => setOpen(!open)}
-        className="w-full flex items-start gap-4 py-5 text-left group">
-        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-sage transition-colors leading-snug">
-          {faq.q}
-        </span>
-        <span className="w-7 h-7 rounded-full bg-sage-bg flex items-center justify-center text-sage shrink-0 mt-1">
-          {open ? <Minus size={13} /> : <Plus size={13} />}
-        </span>
-      </button>
-      {open && (
-        <p className="font-sans text-[14px] text-foreground/75 leading-[1.85] pb-6 pr-12">
-          {faq.a}
-        </p>
-      )}
-    </div>
-  );
-};
 
 const Week4FAQ = () => (
   <section className="bg-parchment-dark/40 py-16 md:py-24">

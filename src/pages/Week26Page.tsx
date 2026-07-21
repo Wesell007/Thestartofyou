@@ -21,6 +21,10 @@ import movementExImg from "@/assets/article-hero-second-movement-exercise.jpg";
 import sleepImg from "@/assets/article-hero-second-sleep.jpg";
 import anxietyImg from "@/assets/article-hero-second-anxiety.jpg";
 import eatingImg from "@/assets/article-hero-second-eating.jpg";
+import WeekReflectionAsk from "@/components/week/WeekReflectionAsk";
+import WeekCommonQuestions from "@/components/week/WeekCommonQuestions";
+import WeekSources from "@/components/week/WeekSources";
+import { buildWeekQuestions, getWeekSources } from "@/data/weekSupportContent";
 
 const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; tone?: "sage" | "terracotta" | "lavender" }) => {
   const toneCls = tone === "terracotta" ? "text-terracotta" : tone === "lavender" ? "text-lavender-foreground" : "text-sage";
@@ -591,53 +595,6 @@ const Quote = () => (
 const reflectionPrompts = ["What this week feels like in my body", "How my baby seems to respond", "Something I want to say to the baby", "A small kindness for myself"];
 const askChips = ["When will my baby's eyes open?", "Can my baby really hear my voice now?", "How do I sleep on my side comfortably?", "When should I phone about reduced movement?", "What happens at the 28-week appointment?"];
 
-const ReflectionAsk = () => (
-  <section className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pb-16 md:pb-24">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-sage/40 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-sage-bg flex items-center justify-center shrink-0">
-            <Leaf size={14} className="text-sage" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">A moment for reflection</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">What does this week feel like for you?</h3>
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {reflectionPrompts.map((p) => (
-            <span key={p} className="font-sans text-[11.5px] font-medium bg-sage-bg/70 text-foreground/80 rounded-full px-3 py-1.5 border border-sage/20">{p}</span>
-          ))}
-        </div>
-        <textarea rows={4} placeholder="Write your thoughts here… this is just for you." className="w-full bg-parchment/80 border border-border/40 rounded-xl px-4 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 resize-none focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all leading-relaxed" />
-        <Link to="/auth" className="inline-flex items-center gap-2 mt-4 bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-medium hover:bg-terracotta-hover transition-colors">
-          Save reflection to your journal <ArrowRight size={12} />
-        </Link>
-      </div>
-
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-lavender/50 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-lavender-bg flex items-center justify-center shrink-0">
-            <MessageCircle size={14} className="text-lavender-foreground" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">Ask about week 26</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">A question on your mind?</h3>
-          </div>
-        </div>
-        <p className="font-sans text-[13px] text-foreground/70 leading-relaxed mb-4">Get a calm, evidence-led answer tailored to where you are right now.</p>
-        <input type="text" placeholder="e.g. When will my baby's eyes open?" className="w-full bg-parchment/80 border border-border/40 rounded-full px-5 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all" />
-        <p className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-foreground/55 mt-5 mb-2.5">Popular at this stage</p>
-        <div className="flex flex-wrap gap-2">
-          {askChips.map((c) => (
-            <Link key={c} to="/ask" className="font-sans text-[12px] font-medium text-foreground/80 bg-parchment-dark/60 border border-border/40 hover:border-sage/50 hover:text-foreground px-3.5 py-1.5 rounded-full transition-colors">{c}</Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 const Journal = () => (
   <section className="bg-sage-bg/40 py-16 md:py-24 border-y border-border/30">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
@@ -746,37 +703,6 @@ const faqs = [
     a: "Yes — very common in the second half of pregnancy. They usually feel like a sudden, sharp calf cramp that wakes you up, often in the early hours, sometimes in the foot. The cause isn't fully understood — likely a combination of weight, circulation changes, fatigue and possibly minor electrolyte shifts. When one strikes, flex the foot upward (toes towards your shin) — it usually releases the cramp within seconds. Gentle calf massage afterwards and staying well hydrated through the day both help. Persistent severe cramps, or one-sided leg pain with swelling, redness or warmth, needs urgent assessment for DVT." },
 ];
 
-const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; defaultOpen?: boolean }) => {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border-b border-border/40 last:border-b-0">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-start gap-4 py-5 text-left group">
-        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-sage transition-colors leading-snug">{faq.q}</span>
-        <span className="w-7 h-7 rounded-full bg-sage-bg flex items-center justify-center text-sage shrink-0 mt-1">
-          {open ? <Minus size={13} /> : <Plus size={13} />}
-        </span>
-      </button>
-      {open && <p className="font-sans text-[14px] text-foreground/75 leading-[1.85] pb-6 pr-12">{faq.a}</p>}
-    </div>
-  );
-};
-
-const FAQ = () => (
-  <section className="bg-parchment-dark/40 py-16 md:py-24">
-    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-      <div className="mb-10 text-center">
-        <SectionLabel>Common questions</SectionLabel>
-        <h2 className="font-serif text-[1.85rem] sm:text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">Common questions at 26 weeks</h2>
-      </div>
-      <div className="bg-card rounded-3xl border border-border/40 shadow-card-brand p-2 md:p-4">
-        <div className="px-4 md:px-6">
-          {faqs.map((f, i) => <FAQRow key={f.q} faq={f} defaultOpen={i === 0} />)}
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 const Next = () => (
   <section className="bg-parchment py-16 md:py-24">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
@@ -815,10 +741,11 @@ const Week26Page = () => (
     <Focus />
     <SeekSupport />
     <Quote />
-    <ReflectionAsk />
+    <WeekReflectionAsk week={26} reflectionPrompts={reflectionPrompts} askChips={askChips} />
     <Journal />
     <Related />
-    <FAQ />
+    <WeekCommonQuestions week={26} questions={buildWeekQuestions(26, faqs)} />
+    <WeekSources week={26} sources={getWeekSources(26)} />
     <Next />
     <Footer />
   </div>

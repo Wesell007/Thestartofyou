@@ -1,110 +1,59 @@
+## Phase 11.7b — First Year Phase Page Premium Visual Polish
 
-# Phase 11.7 — First Year Phase Page Depth Upgrade
+Scope: styling and layout only. Single component edit: `src/components/firstyear/phase/FirstYearPhasePage.tsx`. Applies to all four phase routes via shared component. Hero, routes, data, and content untouched. No new assets.
 
-Depth and trust polish across the four First Year phase pages. Visual system stays. We deepen content in the existing data file, upgrade Common Questions to the newer article-link + Ask CTA format, and add a References block. No new routes, no new articles, no new images.
+### 1. Paired Baby / Parent cards (`PairedSection`)
+- Increase padding to `p-8 md:p-10`, radius `rounded-[28px]`, stronger border opacity (~0.35), premium layered shadow (`0_30px_80px_-40px` plus a soft inner highlight).
+- Add a subtle diagonal gradient background (soft blue-cream for baby, rose-cream for parent) using existing stage tokens instead of flat tint.
+- Add a visible left accent stripe (4px wide, full-height, rounded) using stage accent, replacing the small pill next to overline.
+- Card header: overline stronger (increase weight, opacity, add small filled dot marker), h2 up to `text-2xl sm:text-3xl`.
+- Body: category labels get more visual weight (medium weight, accent color at higher opacity). Body text up to `text-[15px]` with `leading-[1.75]`. Add hairline divider (`border-t border-border/40`) between items and increase spacing to `space-y-5`.
 
-## Confirmed by reads
+### 2. Editorial section (`PhaseEditorial`)
+- Wrap in a centered parchment-deeper panel: `rounded-[28px]`, subtle border, soft ambient shadow, `p-10 md:p-14`, max-w-2xl centered.
+- Small decorative rule (10px sage bar) above overline.
+- Overline centered; h2 up to `text-2xl sm:text-3xl`, italic serif variant.
+- Body text `text-[17px] md:text-[18px]`, `leading-[1.9]`, foreground/75, centered.
+- Increase section vertical rhythm to `py-16 md:py-24`.
 
-- Routes: `/first-year/0-3-months`, `/first-year/3-6-months`, `/first-year/6-9-months`, `/first-year/9-12-months`, all rendering `FirstYearPhasePage` with a `PhaseConfig` from `src/data/firstYearPhaseData.ts`.
-- Page composition today: `PhaseHero` → `InPhaseAges` → `PairedSection` (baby + parent cards) → `CommonQuestions` (plain q+a) → `FeaturedGuidance` (routes to `/ask?q=...`) → `RelatedTopics` → `Endcap`. Hero and card system are the parts to preserve verbatim.
-- First Year articles live at `/first-year/:topic/:slug`. Verified live slugs available for linking (topic in parentheses):
-  - feeding: `newborn-feeding-rhythms`, `bottle-and-breastfeeding-questions`
-  - sleep: `newborn-sleep-expectations`, `helping-your-baby-settle`
-  - development: `baby-development-in-the-first-year`, `when-milestones-feel-uneven`
-  - care-and-safety: `baby-care-basics`, `safe-sleep-and-home-safety`
-  - postpartum-recovery: `healing-after-birth`, `what-recovery-can-feel-like`
-  - emotional-wellbeing: `feeling-like-yourself-again`, `when-parenthood-feels-heavy`
-  - body-and-hormones: `body-changes-after-birth`, `hormones-sweat-and-hair-loss`
-  - checkups-and-warning-signs: `postnatal-checks-and-appointments`, `when-to-ask-for-help-after-birth`
-- Existing `commonQuestions` entries have `q` + `a` only. The Ask CTA pattern used across the site is `/ask?stage=first-year&phase=<slug>&topic=<slugified-question>`.
-- `firstYearArticleData.ts` shows only these 16 live First Year slugs — everything else must be Ask-only.
-- No em/en dashes present in new copy; existing intros for `0–3` etc use en dashes only in the `ageRange` label, which is preserved unchanged (existing content, not new copy).
+### 3. What often feels hard / What can help (`FeelsAndHelps`)
+- Cards: `rounded-[24px]`, `p-8 md:p-9`, stronger borders, soft shadow matching paired cards.
+- Warmer background tints (recovery-soft/0.3, firstyear-soft/0.32).
+- Header hierarchy: overline + h3 up to `text-xl sm:text-2xl`.
+- Each item becomes a guidance row: small numbered marker (01, 02) in accent serif on the left, label medium weight, body `text-[14.5px] leading-[1.75]`, thin divider between rows, `space-y-5`.
 
-## Deliverables
+### 4. When to ask for support (`WhenToAskForSupport`)
+- Wrap list in a bordered parchment panel (`rounded-[24px]`, border, soft shadow, `p-8 md:p-10`).
+- Each item becomes a row with a small circular accent marker (dot in accent color) on the left, label larger (`text-[17px]`), `when` chip becomes a pill with border, body foreground/75.
+- Replace `QuietRule` between items with cleaner spacing + hairline divider inside the panel.
 
-### Data upgrade — `src/data/firstYearPhaseData.ts`
+### 5. Common Questions (`CommonQuestions`)
+- Each QA becomes a card: `bg-card`, `rounded-2xl`, `border-border/40`, `shadow-[0_8px_24px_-16px_rgba(0,0,0,0.08)]`, `p-6 md:p-7`, hover lift (translate + shadow bump).
+- Question `text-[18px] md:text-[19px]` serif, answer `text-[14.5px] leading-[1.8]`.
+- CTA row unchanged in behaviour; pill styling refined for consistency with new card. Remove trailing `QuietRule`.
+- `space-y-4` between cards.
 
-Extend `PhaseConfig` with four optional fields, all typed and rendered only if present so nothing else has to change:
+### 6. Featured guidance
+- Light touch: verify section spacing (`py-16 md:py-20`), add consistent shadow/border to existing cards if flat. No content changes.
 
-```ts
-type PhaseArticleLink = { label: string; href: string };
-type PhaseQuestion = {
-  q: string;
-  a: string;
-  readMore?: PhaseArticleLink;   // live slug only, or omitted
-  askTopic?: string;              // slug for /ask?...&topic=
-};
-type PhaseFeelsHard = { label: string; body: string };
-type PhaseWhatHelps = { label: string; body: string };
-type PhaseSupport = { label: string; body: string; when?: string };
-type PhaseSource = { label: string; publisher: string; href: string };
+### 7. Related topics
+- Minor: increase top margin and pill spacing so section breathes after larger blocks.
 
-type PhaseConfig = {
-  // existing fields unchanged
-  editorial?: string;              // "What this phase is really about"
-  feelsHard?: PhaseFeelsHard[];    // "What often feels hard"
-  whatHelps?: PhaseWhatHelps[];    // "What can help"
-  support?: PhaseSupport[];        // "When to ask for support"
-  sources?: PhaseSource[];         // "References and guidance"
-};
-```
+### 8. References (`PhaseSources`)
+- Wrap in subtle `bg-parchment-dark` panel with `rounded-2xl`, thin border, `p-8`.
+- Numeric marker slightly stronger (accent color, tabular-nums).
+- Publisher label medium weight, source label muted; keep type small.
+- Disclaimer kept subtle at bottom.
 
-For each of the four phases:
+### 9. Overall rhythm
+- Standardise section padding across new sections: `py-16 md:py-22` for major blocks, `py-14 md:py-18` for lighter ones.
+- Confirm `max-w-5xl` for grid sections, `max-w-3xl` for editorial/sources, `max-w-4xl` for questions/support.
+- Ensure mobile stacking: all grids already `grid-cols-1 md:grid-cols-2`, verify padding scales down cleanly.
 
-1. Add a warm 2–3 sentence `editorial` beat aligned with the phase's emotional truth (survival/healing → rhythm → curiosity/separation → independence/identity shift).
-2. Deepen `babyChanges` and `parentRecovery` copy where thin, keeping the existing `label` + `body` shape and card layout intact. Extend `parentRecovery` on later phases to cover identity, partner/family support and return-to-work where relevant, without changing card count wildly (max 5 bullets per card to preserve spacing).
-3. Upgrade every `commonQuestions[]` entry with an `askTopic` slug, and add `readMore` only where a verified live slug from the list above genuinely answers the question. Questions with no fitting article stay Ask-only — no placeholders.
-4. Add `feelsHard[]` (4–5 items) and `whatHelps[]` (4–5 items) per phase using calm, non-prescriptive wording.
-5. Add `support[]` (3–4 items) per phase signposting health visitor, GP, midwife (0–3 only where relevant), feeding support, 111/999 for urgent symptoms. Uses `label` + `body` (+ optional `when`).
-6. Add `sources[]` (3–5 items) per phase from the trusted UK allow-list only: NHS baby/toddler and postnatal hubs, UNICEF Baby Friendly (feeding phases), Lullaby Trust (sleep-relevant phases), Tommy's postnatal mental health, NCT parent support, NICE PH37/NG194 antenatal-postnatal where relevant. Hub URLs only, no fabricated deep links.
-
-All new copy: UK English, no em/en dashes, no diagnosis language, no milestone pressure, no personalised medical advice. Existing prose is preserved.
-
-### Component upgrade — `src/components/firstyear/phase/FirstYearPhasePage.tsx`
-
-Preserve `PhaseHero`, `InPhaseAges`, `PairedSection`, `FeaturedGuidance`, `RelatedTopics`, and `Endcap` exactly. Changes:
-
-1. **New `PhaseEditorial`** — a slim editorial paragraph section rendered under `PairedSection` when `config.editorial` is present. Uses existing `SectionLabel` ("What this phase can feel like"), serif h2, single narrow column. Matches spacing of the existing sections.
-2. **New `WhatFeelsHard` and `WhatHelps`** — a two-column bullet layout matching the existing paired card language but rendered as one softer parchment section (or two stacked sections on mobile). Reuses the `stage-firstyear-soft` and `stage-recovery-soft` tints already in the file so no new tokens.
-3. **New `WhenToAskForSupport`** — a compact list styled like `CommonQuestions` (label + short body, quiet rule between). No fear-based colour, uses existing border tokens.
-4. **`CommonQuestions` upgraded** — signature accepts the extended `PhaseQuestion[]`. Each row keeps the existing q + short answer, and gains a small CTA row underneath:
-   - "Read: <label>" pill link to `readMore.href` when present (styled like the existing `stage-firstyear-accent` accent used in `FeaturedGuidance`).
-   - "Ask about this" pill link to `/ask?stage=first-year&phase=<slug>&topic=<askTopic || slugify(q)>`, styled as a bordered card pill.
-   - No `href="#"` anywhere. If no `readMore`, only the Ask CTA renders.
-5. **New `PhaseSources`** — modelled on the existing `WeekSources` pattern used on pregnancy week pages: numbered list, publisher + label, external links with `target="_blank"` and `rel="noopener noreferrer nofollow"`, plus a calm disclaimer sentence: "This guide is general information. Always speak to your health visitor, GP or midwife if you are worried about you or your baby." Rendered only when `sources` is present.
-6. **Section order** inside `FirstYearPhasePage` becomes:
-
-```text
-PhaseHero
-InPhaseAges
-PairedSection
-PhaseEditorial          (new, if editorial present)
-WhatFeelsHard + WhatHelps (new, if arrays present)
-WhenToAskForSupport     (new, if support present)
-CommonQuestions         (upgraded)
-FeaturedGuidance        (unchanged)
-RelatedTopics           (unchanged)
-PhaseSources            (new, if sources present)
-Endcap                  (unchanged)
-```
-
-All new sections use the existing `bg-parchment` rhythm, `SectionLabel`, `QuietRule`, `stage-firstyear-*` and `stage-recovery-*` tokens, and the same container widths, so the visual system stays intact.
-
-### Preserve
-
-Untouched: First Year hub (`/first-year`) including the "Twelve months, four phases" section (`FYPhaseNav`), routes, SEO, sitemap, robots, redirects, article data, article routes, TTC, Pregnancy (including week pages from Phase 11.6), IVF, Toddler, Family, calculators, Journey logic, auth logic, database schema, RLS.
-
-### Content guardrails
-
-UK English, calm signposting to health visitor / GP / midwife / 111 / 999, no em or en dashes in new copy, no diagnosis language, no personalised medical advice, no milestone pressure, no certainty language around development.
+### Preservation
+No changes to: routes, SEO, sitemap, robots, redirects, `firstYearPhaseData.ts` (unless a tiny label tweak surfaces), hero section, article data, other hubs, assets, auth, DB, RLS. No new `href="#"`. UK English, no em/en dashes.
 
 ### Verification
-
-- `bunx tsgo --noEmit` must pass.
-- Manual load: `/first-year/0-3-months`, `/first-year/3-6-months`, `/first-year/6-9-months`, `/first-year/9-12-months`.
-- Confirm: hero and paired cards render identically; new editorial, feels-hard, what-helps, support, and sources sections appear; Common Questions show Read links (where present) and Ask CTAs; every Read link resolves to a live `/first-year/:topic/:slug` article; every Ask CTA hits `/ask?stage=first-year&phase=...&topic=...`; no `href="#"` anywhere on the phase pages; new copy contains zero em or en dashes.
-- Regression: `/first-year`, First Year topic pages, First Year articles, pregnancy week pages, TTC hub, IVF hub, Toddler hub, Family hub, calculators all still render.
-
-### Deliverable summary at end
-
-Files inspected, files edited, per-phase result for 0–3 / 3–6 / 6–9 / 9–12, Common Questions result, article-link result, Ask AI result, references result, content-safety result, visual-preservation result, placeholder-link result, preservation of TTC / Pregnancy / IVF / Toddler / Family / sitemap / robots / redirects / SEO, `bunx tsgo --noEmit` result, and whether First Year phase pages are ready for final launch sign off.
+- `bunx tsgo --noEmit`
+- Manual visual check on all four phase routes at desktop + mobile widths via Playwright screenshots.
+- Confirm no broken article links (existing `qa.readMore.href` values unchanged).

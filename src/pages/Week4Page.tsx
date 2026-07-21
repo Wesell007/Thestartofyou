@@ -41,6 +41,10 @@ import emotionalImg from "@/assets/article-hero-emotional-first-tri.jpg";
 import testsScansImg from "@/assets/article-hero-tests-scans.jpg";
 import symptomsStoppingImg from "@/assets/article-hero-symptoms-stopping.jpg";
 import fatigueImg from "@/assets/article-hero-fatigue.jpg";
+import WeekReflectionAsk from "@/components/week/WeekReflectionAsk";
+import WeekCommonQuestions from "@/components/week/WeekCommonQuestions";
+import WeekSources from "@/components/week/WeekSources";
+import { buildWeekQuestions, getWeekSources } from "@/data/weekSupportContent";
 
 /* ─────────────────────────────────────────────────────────────────────
    Shared premium card primitives
@@ -662,64 +666,6 @@ const Week4Quote = () => (
 const reflectionPrompts = ["What surprised me", "What I'm afraid of", "What I want to remember", "Who I might tell first"];
 const askChips = ["Implantation bleeding", "Spotting vs. period", "Cramping at 4 weeks", "When to test again", "Telling a partner"];
 
-const Week4ReflectionAsk = () => (
-  <section className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pb-16 md:pb-24">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-sage/40 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-sage-bg flex items-center justify-center shrink-0">
-            <Leaf size={14} className="text-sage" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">A moment for reflection</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">What does this week feel like for you?</h3>
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {reflectionPrompts.map((p) => (
-            <span key={p} className="font-sans text-[11.5px] font-medium bg-sage-bg/70 text-foreground/80 rounded-full px-3 py-1.5 border border-sage/20">
-              {p}
-            </span>
-          ))}
-        </div>
-        <textarea rows={4} placeholder="Write your thoughts here… this is just for you."
-          className="w-full bg-parchment/80 border border-border/40 rounded-xl px-4 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 resize-none focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all leading-relaxed" />
-        <Link to="/auth"
-          className="inline-flex items-center gap-2 mt-4 bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-medium hover:bg-terracotta-hover transition-colors">
-          Save reflection to your journal <ArrowRight size={12} />
-        </Link>
-      </div>
-
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-lavender/50 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-lavender-bg flex items-center justify-center shrink-0">
-            <MessageCircle size={14} className="text-lavender-foreground" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">Ask about week 4</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">A question on your mind?</h3>
-          </div>
-        </div>
-        <p className="font-sans text-[13px] text-foreground/70 leading-relaxed mb-4">
-          Get a calm, evidence-led answer tailored to where you are right now.
-        </p>
-        <input type="text" placeholder="e.g. Is light pink spotting normal at 4 weeks?"
-          className="w-full bg-parchment/80 border border-border/40 rounded-full px-5 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all" />
-        <p className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-foreground/55 mt-5 mb-2.5">
-          Popular at this stage
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {askChips.map((c) => (
-            <Link key={c} to="/ask"
-              className="font-sans text-[12px] font-medium text-foreground/80 bg-parchment-dark/60 border border-border/40 hover:border-sage/50 hover:text-foreground px-3.5 py-1.5 rounded-full transition-colors">
-              {c}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-);
 
 /* ─────────────────────────────────────────────────────────────────────
    13. JOURNAL BAND — Real Start of You journal
@@ -855,47 +801,6 @@ const faqs = [
     a: "Anything from quiet disbelief to overwhelming emotion — sometimes both in one day. The pregnancy can feel real and unreal at the same time. There is no correct way to feel at week 4." },
 ];
 
-const FAQRow = ({ faq, defaultOpen = false }: { faq: { q: string; a: string }; defaultOpen?: boolean }) => {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="border-b border-border/40 last:border-b-0">
-      <button onClick={() => setOpen(!open)}
-        className="w-full flex items-start gap-4 py-5 text-left group">
-        <span className="flex-1 font-serif text-[1.05rem] md:text-[1.15rem] text-foreground group-hover:text-sage transition-colors leading-snug">
-          {faq.q}
-        </span>
-        <span className="w-7 h-7 rounded-full bg-sage-bg flex items-center justify-center text-sage shrink-0 mt-1">
-          {open ? <Minus size={13} /> : <Plus size={13} />}
-        </span>
-      </button>
-      {open && (
-        <p className="font-sans text-[14px] text-foreground/75 leading-[1.85] pb-6 pr-12">
-          {faq.a}
-        </p>
-      )}
-    </div>
-  );
-};
-
-const Week4FAQ = () => (
-  <section className="bg-parchment-dark/40 py-16 md:py-24">
-    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-      <div className="mb-10 text-center">
-        <SectionLabel>Common questions</SectionLabel>
-        <h2 className="font-serif text-[1.85rem] sm:text-[1.95rem] md:text-[2.4rem] text-foreground leading-tight">
-          Common questions at 4 weeks
-        </h2>
-      </div>
-      <div className="bg-card rounded-3xl border border-border/40 shadow-card-brand p-2 md:p-4">
-        <div className="px-4 md:px-6">
-          {faqs.map((f, i) => (
-            <FAQRow key={f.q} faq={f} defaultOpen={i === 0} />
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-);
 
 /* ─────────────────────────────────────────────────────────────────────
    16. NEXT WEEK CTA
@@ -945,10 +850,11 @@ const Week4Page = () => (
     <Week4Focus />
     <Week4SeekSupport />
     <Week4Quote />
-    <Week4ReflectionAsk />
+    <WeekReflectionAsk week={4} reflectionPrompts={reflectionPrompts} askChips={askChips} />
     <Week4Journal />
     <Week4Related />
-    <Week4FAQ />
+    <WeekCommonQuestions week={4} questions={buildWeekQuestions(4, faqs)} />
+    <WeekSources week={4} sources={getWeekSources(4)} />
     <Week4Next />
     <Footer />
   </div>

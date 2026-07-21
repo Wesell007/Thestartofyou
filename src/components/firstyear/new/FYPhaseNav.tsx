@@ -159,13 +159,13 @@ const FYPhaseNav = () => {
             style={{ backgroundColor: "hsl(var(--border) / 0.55)" }}
           />
           <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-3 text-foreground/45">
-            Quick navigation
+            Month by month
           </p>
           <h3 className="font-serif text-xl sm:text-[1.4rem] text-foreground leading-snug mb-2">
-            Go to your baby's age.
+            Your baby's first year, month by month.
           </h3>
           <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed max-w-xl mb-6">
-            Use this as a quick way into the phase that fits where you are now.
+            Choose your baby's age for a deeper guide to development, feeding, sleep, care and how this stage may feel for you.
           </p>
           <div className="flex flex-wrap gap-2">
             {ageItems.map((a) => (

@@ -86,7 +86,7 @@ const upsertPregnancyJourney = async (
   if (sessionError) throw sessionError;
   if (sessionData.session?.user.id !== userId) throw new Error("Your session no longer matches this journey.");
 
-  const { error } = await supabase.rpc("save_pregnancy_journey", {
+  const { error } = await (supabase.rpc as any)("save_pregnancy_journey", {
     p_lmp_date: lmpDate,
     p_due_date: dueDate,
   });

@@ -79,7 +79,7 @@ type QuestionOverride = {
 
 const CURATED_QUESTION_OVERRIDES: Record<number, QuestionOverride[]> = {
   1: [
-    { match: "folic acid", readMore: { href: "/articles/folic-acid-and-nutrition", label: "Read: folic acid and nutrition" } },
+    { match: "folic acid", readMore: { href: "/articles/folic-acid-before-pregnancy", label: "Read: folic acid before pregnancy" } },
     { match: "ovulation", readMore: { href: "/articles/signs-of-ovulation", label: "Read: signs of ovulation" } },
     { match: "test", readMore: { href: "/articles/testing-too-early", label: "Read: testing too early" } },
   ],
@@ -90,7 +90,7 @@ const CURATED_QUESTION_OVERRIDES: Record<number, QuestionOverride[]> = {
   ],
   38: [
     { match: "labour", readMore: { href: "/articles/signs-of-labour", label: "Read: signs of labour" } },
-    { match: "waters", readMore: { href: "/articles/waters-breaking", label: "Read: waters breaking" } },
+    { match: "waters", readMore: { href: "/articles/waters-contractions-and-show", label: "Read: waters, contractions and show" } },
     { match: "movement", readMore: { href: "/articles/baby-movement-in-pregnancy", label: "Read: baby movement in pregnancy" } },
   ],
 };

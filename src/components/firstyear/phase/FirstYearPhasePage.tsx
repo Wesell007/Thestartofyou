@@ -586,9 +586,13 @@ const FirstYearPhasePage = ({ config }: Props) => {
         <PhaseHero config={config} />
         <InPhaseAges ages={config.ages} />
         <PairedSection config={config} />
-        <CommonQuestions items={config.commonQuestions} />
+        {config.editorial && <PhaseEditorial text={config.editorial} />}
+        <FeelsAndHelps feels={config.feelsHard} helps={config.whatHelps} />
+        <WhenToAskForSupport items={config.support} />
+        <CommonQuestions items={config.commonQuestions} phaseSlug={config.slug} />
         <FeaturedGuidance items={config.featuredGuidance} />
         <RelatedTopics items={config.relatedTopics} />
+        <PhaseSources items={config.sources} />
         <Endcap />
       </main>
       <Footer />

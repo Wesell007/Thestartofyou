@@ -1,5 +1,6 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, type ComponentProps, type CSSProperties } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import AskLink from "@/components/shared/AskLink";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -87,6 +88,25 @@ const thumbFor = (href: string, fallback: string) => {
 interface Props {
   config: IVFTopicConfig;
 }
+
+type LinkProps = ComponentProps<typeof RouterLink>;
+
+// IVF data can represent an AI destination without serialising a sensitive
+// question into the URL. All ordinary destinations remain normal links.
+const Link = ({ to, ...props }: LinkProps) => {
+  if (typeof to === "string" && to.startsWith("ask:")) {
+    return (
+      <AskLink
+        {...props}
+        question={decodeURIComponent(to.slice(4))}
+        context="IVF guidance"
+        journey="ivf"
+        stage="ivf"
+      />
+    );
+  }
+  return <RouterLink to={to} {...props} />;
+};
 
 const IVFTopicPage = ({ config }: Props) => {
   const theme = IVF_THEME[config.slug];
@@ -336,7 +356,7 @@ const IVFTopicPage = ({ config }: Props) => {
                       alt=""
                       aria-hidden="true"
                       loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.03]"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     />
                   </div>
                   <span
@@ -657,7 +677,7 @@ const IVFTopicPage = ({ config }: Props) => {
                           <Link
                             to={link.href}
                             className="group/row flex items-center gap-3 py-3 px-2 -mx-2 rounded-lg transition-colors hover:[background:var(--row-hover)]"
-                            style={{ ['--row-hover' as any]: accentSoft }}
+                            style={{ "--row-hover": accentSoft } as CSSProperties}
                           >
                             <span
                               className="shrink-0 h-11 w-11 overflow-hidden rounded-lg ring-1"
@@ -668,7 +688,7 @@ const IVFTopicPage = ({ config }: Props) => {
                                 alt=""
                                 aria-hidden="true"
                                 loading="lazy"
-                                className="h-full w-full object-cover transition-transform duration-[600ms] group-hover/row:scale-[1.04]"
+                                className="h-full w-full object-cover transition-transform duration-700 group-hover/row:scale-[1.04]"
                               />
                             </span>
                             <span className="flex-1 font-sans text-[13px] font-light text-foreground/85 leading-snug group-hover/row:text-foreground transition-colors">
@@ -707,8 +727,11 @@ const IVFTopicPage = ({ config }: Props) => {
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {config.commonQuestions.slice(0, 4).map((q) => (
                   <li key={q}>
-                    <Link
-                      to={`/ask?q=${encodeURIComponent(q)}&journey=ivf&ctx=${encodeURIComponent(`IVF · ${config.eyebrow}`)}`}
+                    <AskLink
+                      question={q}
+                      journey="ivf"
+                      context={`IVF · ${config.eyebrow}`}
+                      stage="ivf"
                       className="group flex items-center gap-3 rounded-full border bg-card px-5 py-3 transition-all hover:-translate-y-0.5 hover:shadow-card-brand"
                       style={{ borderColor: accentBorder }}
                     >
@@ -726,7 +749,7 @@ const IVFTopicPage = ({ config }: Props) => {
                         className="shrink-0 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all"
                         style={{ color: accent }}
                       />
-                    </Link>
+                    </AskLink>
                   </li>
                 ))}
               </ul>

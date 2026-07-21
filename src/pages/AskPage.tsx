@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useSearchParams, Link, useNavigate } from "react-router-dom";
+import { useSearchParams, Link, useLocation, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import EditorialAnswer from "@/components/shared/EditorialAnswer";
 import { ArrowLeft, Loader2, Search, ChevronRight, Heart, BookOpen, Compass, Sparkles, Shield, ArrowUpRight } from "lucide-react";
@@ -8,6 +8,7 @@ import Footer from "@/components/layout/Footer";
 import { useAISearch } from "@/hooks/useAISearch";
 import { BotanicalAccent, StageGlow, SprigDivider, Sprig } from "@/components/shared/StageBotanical";
 import { getAiStageStyle, stageColors } from "@/lib/aiStageStyles";
+import SeoHead from "@/components/seo/SeoHead";
 
 
 const followUpPrompts = [
@@ -26,6 +27,11 @@ interface IVFLastStage {
   slug: string;
   title: string;
   href: string;
+}
+
+interface AskNavigationState {
+  question?: string;
+  context?: string;
 }
 
 const FIRST_YEAR_TOPIC_SUGGESTIONS: Record<string, string[]> = {
@@ -228,8 +234,11 @@ const PREGNANCY_TOPIC_SUGGESTIONS: Record<string, string[]> = {
 
 const AskPage = () => {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get("q") || "";
-  const context = searchParams.get("ctx") || undefined;
+  const location = useLocation();
+  const navigationState = location.state as AskNavigationState | null;
+  const legacyQuery = searchParams.get("q") || "";
+  const query = navigationState?.question || legacyQuery;
+  const context = navigationState?.context || searchParams.get("ctx") || undefined;
   const stageKey = searchParams.get("stage");
   const topic = searchParams.get("topic");
   const stage = getAiStageStyle(stageKey);
@@ -243,6 +252,19 @@ const AskPage = () => {
   const [inputFocused, setInputFocused] = useState(false);
   const [ivfStage, setIvfStage] = useState<IVFLastStage | null>(null);
 
+
+  useEffect(() => {
+    // Consume legacy query-string links without leaving private free text in
+    // browser history. New in-app navigation uses location state below.
+    if (!legacyQuery || navigationState?.question) return;
+    const safeParams = new URLSearchParams(searchParams);
+    safeParams.delete("q");
+    const suffix = safeParams.toString();
+    navigate(`/ask${suffix ? `?${suffix}` : ""}`, {
+      replace: true,
+      state: { question: legacyQuery, context },
+    });
+  }, [legacyQuery, navigationState, searchParams, navigate, context]);
 
   useEffect(() => {
     if (!isIVF) return;
@@ -304,8 +326,9 @@ const AskPage = () => {
     : relatedLinks;
 
   useEffect(() => {
-    if (query && query !== lastQueryRef.current) {
-      lastQueryRef.current = query;
+    const requestKey = `${query}\u0000${context ?? ""}`;
+    if (query && requestKey !== lastQueryRef.current) {
+      lastQueryRef.current = requestKey;
       reset();
       ask(query, context);
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -314,20 +337,28 @@ const AskPage = () => {
 
   const handleAskAgain = () => {
     if (!newQuery.trim()) return;
-    const params = new URLSearchParams({ q: newQuery.trim() });
-    if (context) params.set("ctx", context);
+    const params = new URLSearchParams();
     if (isIVF) params.set("journey", "ivf");
     if (stageKey) params.set("stage", stageKey);
+    const nextContext = [context, query ? `Previous question: ${query}` : null, answer ? `Previous answer: ${answer}` : null]
+      .filter(Boolean)
+      .join("\n\n");
     setNewQuery("");
-    navigate(`/ask?${params.toString()}`);
+    navigate(`/ask${params.toString() ? `?${params.toString()}` : ""}`, {
+      state: { question: newQuery.trim(), context: nextContext || undefined },
+    });
   };
 
   const handleSuggestion = (s: string) => {
-    const params = new URLSearchParams({ q: s });
-    if (context) params.set("ctx", context);
+    const params = new URLSearchParams();
     if (isIVF) params.set("journey", "ivf");
     if (stageKey) params.set("stage", stageKey);
-    navigate(`/ask?${params.toString()}`);
+    const nextContext = [context, query ? `Previous question: ${query}` : null, answer ? `Previous answer: ${answer}` : null]
+      .filter(Boolean)
+      .join("\n\n");
+    navigate(`/ask${params.toString() ? `?${params.toString()}` : ""}`, {
+      state: { question: s, context: nextContext || undefined },
+    });
   };
 
 
@@ -375,6 +406,7 @@ const AskPage = () => {
       : null;
     return (
       <div className="min-h-screen bg-parchment">
+        <SeoHead title="Ask for guidance | The Start of You" description="Ask for calm, AI-generated guidance for your current stage." canonical="https://thestartofyou.com/ask" noindex />
         <Navbar />
         <main className="relative pt-24 pb-24 md:pt-32 md:pb-32 overflow-hidden">
           {/* Ambient art-direction layer */}
@@ -502,6 +534,7 @@ const AskPage = () => {
 
   return (
     <div className="min-h-screen bg-parchment">
+      <SeoHead title="Your AI-generated guidance | The Start of You" description="AI-generated guidance for your question." canonical="https://thestartofyou.com/ask" noindex />
       <Navbar />
 
       <main className="relative pt-20 pb-24 md:pt-28 md:pb-32 overflow-hidden">
@@ -605,11 +638,11 @@ const AskPage = () => {
           <div className="flex items-center gap-4 mb-12">
             <div className="flex items-center gap-1.5 text-sage-muted">
               <Shield size={13} />
-              <span className="font-sans text-[11px] font-light">Medically reviewed</span>
+              <span className="font-sans text-[11px] font-light">AI-generated guidance</span>
             </div>
             <div className="w-px h-3 bg-border/40" />
             <span className="font-sans text-[11px] font-light text-muted-foreground/60">
-              AI-guided answer
+              Check important health decisions with a qualified professional
             </span>
           </div>
         </div>
@@ -754,7 +787,7 @@ const AskPage = () => {
             ══════════════════════════════════════════════════ */}
         {isDone && (
           <>
-            {/* ── Medical trust signature ── */}
+            {/* ── AI limitations signature ── */}
             <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
               <div className="flex items-center gap-3 pt-10 pb-2">
                 <div
@@ -763,7 +796,7 @@ const AskPage = () => {
                 >
                   <Shield size={12} className={tone.accentText} style={sc ? { color: sc.accent } : undefined} />
                   <p className={`font-sans text-[11px] font-light ${tone.accentText} tracking-wide`} style={sc ? { color: sc.accent } : undefined}>
-                    ✔ Medically reviewed by Jenny Joines
+                    AI-generated, not individually medically reviewed
                   </p>
                 </div>
               </div>

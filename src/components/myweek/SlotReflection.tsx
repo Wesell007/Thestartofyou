@@ -51,11 +51,14 @@ const getRecognition = (): SpeechRecognitionLike | null => {
 const SlotReflection = ({ content, userId, week }: Props) => {
   const [value, setValue] = useState("");
   const [loaded, setLoaded] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [loadAttempt, setLoadAttempt] = useState(0);
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [savedAt, setSavedAt] = useState<Date | null>(null);
   const [hasFirstWritten, setHasFirstWritten] = useState(false);
   const initialRef = useRef<string>("");
   const debounceRef = useRef<number | null>(null);
+  const valueRef = useRef("");
   // Last successfully tracked saved content. Seeded on initial hydration so
   // opening an existing reflection does not fire `reflection_saved`.
   const lastTrackedRef = useRef<string>("");
@@ -76,15 +79,22 @@ const SlotReflection = ({ content, userId, week }: Props) => {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const { data } = await supabase
+      setLoaded(false);
+      setLoadError(null);
+      const { data, error } = await supabase
         .from("reflections")
         .select("content, updated_at, first_written_content")
         .eq("user_id", userId)
         .eq("week", week)
         .maybeSingle();
       if (cancelled) return;
+      if (error) {
+        setLoadError("We couldn't load this reflection. Try again before writing so your saved words stay safe.");
+        return;
+      }
       const existing = data?.content ?? "";
       setValue(existing);
+      valueRef.current = existing;
       initialRef.current = existing;
       // Seed the analytics dedupe ref so initial hydration of an existing
       // reflection does not fire `reflection_saved`.
@@ -96,7 +106,35 @@ const SlotReflection = ({ content, userId, week }: Props) => {
     return () => {
       cancelled = true;
     };
-  }, [userId, week]);
+  }, [userId, week, loadAttempt]);
+
+  useEffect(() => {
+    valueRef.current = value;
+  }, [value]);
+
+  // Start a final best-effort write when the page is being left. This closes
+  // the debounce window without clearing or claiming success in the UI.
+  useEffect(() => () => {
+    flushLatest();
+  // flushLatest intentionally reads refs and is stable for this identity.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loaded, userId, week]);
+
+  const flushLatest = () => {
+    const latest = valueRef.current;
+    if (!loaded || latest === initialRef.current) return;
+    void supabase.from("reflections").upsert(
+      { user_id: userId, week, content: latest },
+      { onConflict: "user_id,week" },
+    );
+  };
+
+  useEffect(() => {
+    const onPageHide = () => flushLatest();
+    window.addEventListener("pagehide", onPageHide);
+    return () => window.removeEventListener("pagehide", onPageHide);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loaded, userId, week]);
 
   useEffect(() => {
     if (!loaded) return;
@@ -220,14 +258,32 @@ const SlotReflection = ({ content, userId, week }: Props) => {
         trackEvent(EVENTS.REFLECTION_SAVED);
       }
       window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2400);
+      return true;
     }
+    setSaveState("error");
+    return false;
+  };
+
+  const retrySave = async () => {
+    setSaveState("saving");
+    const { error } = await supabase.from("reflections").upsert(
+      { user_id: userId, week, content: valueRef.current },
+      { onConflict: "user_id,week" },
+    );
+    if (error) {
+      setSaveState("error");
+      return;
+    }
+    initialRef.current = valueRef.current;
+    setSavedAt(new Date());
+    setSaveState("saved");
   };
 
   const autosaveStatus =
     saveState === "saving"
-      ? "Still saving. Your words are still here."
+      ? "Saving your words…"
       : saveState === "error"
-      ? "Still saving. Your words are still here."
+      ? "Not saved yet. Your words remain on this screen."
       : savedAt
       ? "Held privately."
       : "Autosaves as you write.";
@@ -294,7 +350,14 @@ const SlotReflection = ({ content, userId, week }: Props) => {
                 "linear-gradient(to bottom, hsl(var(--stage-pregnancy-accent) / 0.6), hsl(var(--stage-pregnancy-accent) / 0.04))",
             }}
           />
-          <textarea
+          {loadError ? (
+            <div className="py-10 pl-5 sm:pl-7" role="alert">
+              <p className="font-serif italic text-[15px] text-destructive/85">{loadError}</p>
+              <button type="button" onClick={() => setLoadAttempt((n) => n + 1)} className="mt-3 font-sans text-xs underline">
+                Try loading again
+              </button>
+            </div>
+          ) : <textarea
             value={value}
             onChange={(e) => {
               setValue(e.target.value);
@@ -305,7 +368,7 @@ const SlotReflection = ({ content, userId, week }: Props) => {
             placeholder="Begin where you are."
             aria-label={`Your reflection for week ${week}`}
             className="w-full bg-transparent border-0 pl-5 sm:pl-7 pr-0 py-3 font-serif text-[18px] sm:text-[19.5px] italic font-normal text-foreground placeholder:text-foreground/35 placeholder:italic resize-none focus:outline-none leading-[1.85] min-h-[220px] caret-[hsl(var(--stage-pregnancy-accent))]"
-          />
+          />}
         </div>
 
         {/* Voice row — restrained, inside the note */}
@@ -358,7 +421,7 @@ const SlotReflection = ({ content, userId, week }: Props) => {
               className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase"
               style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
             >
-              {saveState === "saving" ? "Holding" : "Held"}
+              {saveState === "saving" ? "Saving" : saveState === "error" ? "Not saved" : savedAt ? "Held" : "Ready"}
             </span>
           </div>
           <span className="font-serif italic text-[12.5px] text-foreground/45 tracking-wide hidden sm:inline">
@@ -366,6 +429,12 @@ const SlotReflection = ({ content, userId, week }: Props) => {
           </span>
         </div>
       </div>
+
+      {saveState === "error" && (
+        <button type="button" onClick={retrySave} className="mt-3 font-sans text-xs font-medium underline">
+          Try saving again
+        </button>
+      )}
 
       {/* Inline shaping — appears only once threshold met */}
       <div className="mt-5 px-2 sm:px-4">

@@ -26,17 +26,26 @@ interface PastReflection {
 const SlotCompanionRecall = ({ userId, currentWeek }: Props) => {
   const [past, setPast] = useState<PastReflection[]>([]);
   const [loaded, setLoaded] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const { data } = await supabase
+      setLoaded(false);
+      setLoadError(false);
+      const { data, error } = await supabase
         .from("reflections")
         .select("week, content, updated_at")
         .eq("user_id", userId)
         .lt("week", currentWeek)
         .order("week", { ascending: false });
       if (cancelled) return;
+      if (error) {
+        setLoadError(true);
+        setLoaded(true);
+        return;
+      }
       const filtered = (data ?? []).filter(
         (r) => r.content && r.content.trim().length > 0
       );
@@ -46,9 +55,17 @@ const SlotCompanionRecall = ({ userId, currentWeek }: Props) => {
     return () => {
       cancelled = true;
     };
-  }, [userId, currentWeek]);
+  }, [userId, currentWeek, attempt]);
 
   if (!loaded) return null;
+  if (loadError) {
+    return (
+      <section className="relative pt-10 pb-2" role="alert">
+        <p className="font-serif italic text-sm text-foreground/60">Earlier reflections could not be loaded.</p>
+        <button type="button" onClick={() => setAttempt((n) => n + 1)} className="mt-2 font-sans text-xs underline">Try again</button>
+      </section>
+    );
+  }
   if (past.length < 2) return null;
 
   // The oldest reflection gives the strongest sense of "kept over time".

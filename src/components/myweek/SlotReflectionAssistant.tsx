@@ -11,19 +11,33 @@ interface Props {
 type Phase = "capture" | "shaping" | "review" | "error";
 
 // Minimal Web Speech API typing
+type SpeechRecognitionEventLike = {
+  resultIndex: number;
+  results: {
+    length: number;
+    [index: number]: {
+      isFinal: boolean;
+      [index: number]: { transcript: string };
+    };
+  };
+};
+
 type SpeechRecognitionLike = {
   continuous: boolean;
   interimResults: boolean;
   lang: string;
-  onresult: ((e: any) => void) | null;
-  onerror: ((e: any) => void) | null;
+  onresult: ((e: SpeechRecognitionEventLike) => void) | null;
+  onerror: ((e: unknown) => void) | null;
   onend: (() => void) | null;
   start: () => void;
   stop: () => void;
 };
 
 const getRecognition = (): SpeechRecognitionLike | null => {
-  const w = window as any;
+  const w = window as unknown as {
+    SpeechRecognition?: new () => SpeechRecognitionLike;
+    webkitSpeechRecognition?: new () => SpeechRecognitionLike;
+  };
   const Ctor = w.SpeechRecognition || w.webkitSpeechRecognition;
   if (!Ctor) return null;
   const r = new Ctor() as SpeechRecognitionLike;
@@ -69,7 +83,7 @@ const SlotReflectionAssistant = ({ week, onAccept, onClose }: Props) => {
     if (!rec) return;
     recognitionRef.current = rec;
     baseTextRef.current = raw ? raw.trimEnd() + " " : "";
-    rec.onresult = (e: any) => {
+    rec.onresult = (e: SpeechRecognitionEventLike) => {
       let interim = "";
       let final = "";
       for (let i = e.resultIndex; i < e.results.length; i++) {
@@ -170,6 +184,9 @@ const SlotReflectionAssistant = ({ week, onAccept, onClose }: Props) => {
           <>
             <p className="font-serif italic text-[14px] sm:text-[14.5px] text-foreground/60 leading-relaxed mb-5 max-w-[44ch]">
               On the days you are too tired to write, just say it out loud or type a few rough words. We'll gently shape them into a reflection in your own voice, ready for you to edit and keep.
+            </p>
+            <p className="font-sans text-[11px] text-muted-foreground leading-relaxed mb-4 max-w-[56ch]">
+              Choosing shape sends these words to our external AI provider for processing. Nothing is saved to your reflection until you review and accept it.
             </p>
 
             <div

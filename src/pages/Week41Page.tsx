@@ -34,6 +34,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PregnancyWeekSeo from "@/components/seo/PregnancyWeekSeo";
+import PublicWeekReflectionAsk from "@/components/pregnancy/PublicWeekReflectionAsk";
 import fetusImg from "@/assets/week41-fetus.jpg";
 import pumpkinImg from "@/assets/week41-pumpkin.jpg";
 import biologyImg from "@/assets/week41-biology-detail.jpg";
@@ -716,65 +717,13 @@ const reflectionPrompts = ["What I want to remember about this week", "What I'm 
 const askChips = ["What is a sweep?", "Pros and cons of induction", "Going past 42 weeks", "How to count movements", "When to phone the unit"];
 
 const ReflectionAsk = () => (
-  <section className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pb-16 md:pb-24">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-sage/40 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-sage-bg flex items-center justify-center shrink-0">
-            <Leaf size={14} className="text-sage" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">A moment for reflection</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">What does this week feel like for you?</h3>
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {reflectionPrompts.map((p) => (
-            <span key={p} className="font-sans text-[11.5px] font-medium bg-sage-bg/70 text-foreground/80 rounded-full px-3 py-1.5 border border-sage/20">
-              {p}
-            </span>
-          ))}
-        </div>
-        <textarea rows={4} placeholder="Write your thoughts here… this is just for you."
-          className="w-full bg-parchment/80 border border-border/40 rounded-xl px-4 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 resize-none focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all leading-relaxed" />
-        <Link to="/auth"
-          className="inline-flex items-center gap-2 mt-4 bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-medium hover:bg-terracotta-hover transition-colors">
-          Save reflection to your journal <ArrowRight size={12} />
-        </Link>
-      </div>
-
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-lavender/50 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-lavender-bg flex items-center justify-center shrink-0">
-            <MessageCircle size={14} className="text-lavender-foreground" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">Ask about week 41</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">A question on your mind?</h3>
-          </div>
-        </div>
-        <p className="font-sans text-[13px] text-foreground/70 leading-relaxed mb-4">
-          Get a calm, evidence-led answer tailored to where you are right now.
-        </p>
-        <input type="text" placeholder="e.g. What are the pros and cons of induction at 41 weeks?"
-          className="w-full bg-parchment/80 border border-border/40 rounded-full px-5 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all" />
-        <p className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-foreground/55 mt-5 mb-2.5">
-          Popular at this stage
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {askChips.map((c) => (
-            <Link key={c} to="/ask"
-              className="font-sans text-[12px] font-medium text-foreground/80 bg-parchment-dark/60 border border-border/40 hover:border-sage/50 hover:text-foreground px-3.5 py-1.5 rounded-full transition-colors">
-              {c}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
+  <PublicWeekReflectionAsk
+    week={41}
+    reflectionPrompts={reflectionPrompts}
+    askChips={askChips}
+  />
 );
 
-/* 15. JOURNAL */
 const Journal = () => (
   <section className="bg-sage-bg/40 py-16 md:py-24 border-y border-border/30">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
@@ -818,22 +767,22 @@ const Journal = () => (
 
 /* 16. RELATED */
 const related = [
-  { slug: "early-signs-of-labour", img: thirdSignsImg, tag: "Looking ahead",
+  { slug: "signs-of-labour", img: thirdSignsImg, tag: "Looking ahead",
     title: "The early signs of labour",
     desc: "What to watch for, what to ignore, and exactly when to call — including past your date." },
-  { slug: "baby-movements-in-pregnancy", img: thirdMovementImg, tag: "Movement",
+  { slug: "baby-movement-in-pregnancy", img: thirdMovementImg, tag: "Movement",
     title: "Movements past your due date",
     desc: "Strong and regular, even now. The single most important thing to keep your eye on." },
-  { slug: "hospital-bag-essentials", img: thirdHospitalBagImg, tag: "Practical",
+  { slug: "hospital-bag-and-what-to-pack", img: thirdHospitalBagImg, tag: "Practical",
     title: "Bag for an induction stay",
     desc: "What helps if you're induced — long charging cables, soft layers, snacks, your own pillow." },
-  { slug: "the-third-trimester-emotionally", img: thirdEmotionalImg, tag: "Emotions",
+  { slug: "emotional-wellbeing-pregnancy", img: thirdEmotionalImg, tag: "Emotions",
     title: "Past your date, emotionally",
     desc: "The unique exhaustion of going over — and how to be tender with yourself this week." },
-  { slug: "sleep-in-the-third-trimester", img: thirdSleepImg, tag: "Body",
+  { slug: "sleep-in-pregnancy", img: thirdSleepImg, tag: "Body",
     title: "Sleep when sleep is hard",
     desc: "Side-sleeping, pillows, restless legs and the broken nights of the post-dates week." },
-  { slug: "preparing-the-nursery", img: thirdNurseryImg, tag: "At home",
+  { slug: "the-space-your-baby-will-come-home-to", img: thirdNurseryImg, tag: "At home",
     title: "Coming home, whenever it is",
     desc: "What's actually needed at home for your first day with baby — even if that day is later than expected." },
 ];

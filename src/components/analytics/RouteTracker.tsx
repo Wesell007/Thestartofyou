@@ -41,8 +41,10 @@ const RouteTracker = () => {
 
   useEffect(() => {
     if (shouldSkip(location.pathname)) return;
-    trackPageView(`${location.pathname}${location.search}`);
-  }, [location.pathname, location.search]);
+    // Never send query strings: calculator dates, auth return targets and AI
+    // questions can contain private journey context.
+    trackPageView(location.pathname);
+  }, [location.pathname]);
 
   return null;
 };

@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
+import { isFutureDateOnly, parseDateOnly } from "@/lib/dateOnly";
 import {
   createTTCLog,
   updateTTCLog,
@@ -83,6 +84,10 @@ const TTCLogEntryPanel = ({
   const handleSave = async () => {
     if (!logDate) {
       toast({ title: "Pick a date", description: "Please choose a date for this log." });
+      return;
+    }
+    if (!parseDateOnly(logDate) || isFutureDateOnly(logDate)) {
+      toast({ title: "Choose a valid date", description: "Logs cannot be saved for a future date.", variant: "destructive" });
       return;
     }
     setSaving(true);

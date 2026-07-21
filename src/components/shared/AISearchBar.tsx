@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Search, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { navigateToAsk } from "@/lib/askNavigation";
 
 interface AISearchBarProps {
   placeholder?: string;
@@ -30,22 +31,15 @@ const AISearchBar = ({
   const [searching, setSearching] = useState(false);
   const navigate = useNavigate();
 
-  const buildParams = (q: string) => {
-    const params = new URLSearchParams({ q });
-    if (context) params.set("ctx", context);
-    if (stage) params.set("stage", stage);
-    return params;
-  };
-
   const handleAsk = () => {
     if (!query.trim()) return;
     setSearching(true);
-    navigate(`/ask?${buildParams(query.trim()).toString()}`);
+    navigateToAsk(navigate, query, { context, stage });
   };
 
   const handleSuggestion = (s: string) => {
     setSearching(true);
-    navigate(`/ask?${buildParams(s).toString()}`);
+    navigateToAsk(navigate, s, { context, stage });
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

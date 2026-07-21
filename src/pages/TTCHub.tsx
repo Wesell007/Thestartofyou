@@ -34,6 +34,8 @@ import heroImg from "@/assets/ttc-hero-lifestyle.jpg";
 import TTCCommonQuestions from "@/components/ttc/TTCCommonQuestions";
 import TTCIVFPathway from "@/components/ttc/TTCIVFPathway";
 import SeoHead from "@/components/seo/SeoHead";
+import AskLink from "@/components/shared/AskLink";
+import { navigateToAsk } from "@/lib/askNavigation";
 
 /* ----------------------------------------------------------- */
 /* SHARED                                                      */
@@ -311,9 +313,11 @@ const Hero = () => {
                   {commonQuestions.map((prompt, i) => {
                     const Icon = prompt.icon;
                     return (
-                      <Link
+                      <AskLink
                         key={i}
-                        to={`/ask?q=${encodeURIComponent(prompt.text)}`}
+                        question={prompt.text}
+                        context="Trying to conceive"
+                        stage="ttc"
                         className="group flex items-start gap-3 w-full text-left py-3 px-4 rounded-xl border bg-card/60 hover:bg-card transition-all"
                         style={{ borderColor: `hsl(var(${STAGE_BG}) / 0.3)` }}
                       >
@@ -331,7 +335,7 @@ const Hero = () => {
                             {prompt.sub}
                           </span>
                         </div>
-                      </Link>
+                      </AskLink>
                     );
                   })}
                 </div>
@@ -434,8 +438,7 @@ const ttcAIChips = [
 const AISupport = () => {
   const navigate = useNavigate();
   const askPrompt = (q: string) => {
-    const params = new URLSearchParams({ q, ctx: "Trying to conceive", stage: "ttc" });
-    navigate(`/ask?${params.toString()}`);
+    navigateToAsk(navigate, q, { context: "Trying to conceive", stage: "ttc" });
   };
 
   return (

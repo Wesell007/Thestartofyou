@@ -8,6 +8,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PregnancyWeekSeo from "@/components/seo/PregnancyWeekSeo";
+import PublicWeekReflectionAsk from "@/components/pregnancy/PublicWeekReflectionAsk";
 import embryoImg from "@/assets/week9-embryo.jpg";
 import grapeImg from "@/assets/week9-grape.jpg";
 import biologyImg from "@/assets/week9-biology-detail.jpg";
@@ -422,7 +423,7 @@ const Symptoms = () => (
     </div>
 
     <div className="mt-8 text-center">
-      <Link to="/articles/first-trimester-nausea" className="inline-flex items-center gap-2 font-sans text-[13.5px] font-medium text-sage hover:gap-3 transition-all">
+      <Link to="/articles/nausea-in-early-pregnancy" className="inline-flex items-center gap-2 font-sans text-[13.5px] font-medium text-sage hover:gap-3 transition-all">
         Read: surviving the peak of first-trimester sickness <ArrowRight size={13} />
       </Link>
     </div>
@@ -580,50 +581,11 @@ const reflectionPrompts = ["How my body feels today", "What I needed but couldn'
 const askChips = ["Why is week 9 so much worse?", "When does nausea peak?", "Do I have HG?", "Why am I so tired at 9 weeks?", "Is it normal to feel detached or numb?"];
 
 const ReflectionAsk = () => (
-  <section className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pb-16 md:pb-24">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-sage/40 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-sage-bg flex items-center justify-center shrink-0">
-            <Leaf size={14} className="text-sage" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">A moment for reflection</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">What does this week feel like for you?</h3>
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {reflectionPrompts.map((p) => (
-            <span key={p} className="font-sans text-[11.5px] font-medium bg-sage-bg/70 text-foreground/80 rounded-full px-3 py-1.5 border border-sage/20">{p}</span>
-          ))}
-        </div>
-        <textarea rows={4} placeholder="Write your thoughts here… this is just for you." className="w-full bg-parchment/80 border border-border/40 rounded-xl px-4 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 resize-none focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all leading-relaxed" />
-        <Link to="/auth" className="inline-flex items-center gap-2 mt-4 bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-medium hover:bg-terracotta-hover transition-colors">
-          Save reflection to your journal <ArrowRight size={12} />
-        </Link>
-      </div>
-
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-lavender/50 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-lavender-bg flex items-center justify-center shrink-0">
-            <MessageCircle size={14} className="text-lavender-foreground" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">Ask about week 9</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">A question on your mind?</h3>
-          </div>
-        </div>
-        <p className="font-sans text-[13px] text-foreground/70 leading-relaxed mb-4">Get a calm, evidence-led answer tailored to where you are right now.</p>
-        <input type="text" placeholder="e.g. How do I know if my sickness is too much?" className="w-full bg-parchment/80 border border-border/40 rounded-full px-5 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all" />
-        <p className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-foreground/55 mt-5 mb-2.5">Popular at this stage</p>
-        <div className="flex flex-wrap gap-2">
-          {askChips.map((c) => (
-            <Link key={c} to="/ask" className="font-sans text-[12px] font-medium text-foreground/80 bg-parchment-dark/60 border border-border/40 hover:border-sage/50 hover:text-foreground px-3.5 py-1.5 rounded-full transition-colors">{c}</Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
+  <PublicWeekReflectionAsk
+    week={9}
+    reflectionPrompts={reflectionPrompts}
+    askChips={askChips}
+  />
 );
 
 const Journal = () => (
@@ -660,22 +622,22 @@ const Journal = () => (
 );
 
 const related = [
-  { slug: "first-trimester-nausea", img: nauseaImg, tag: "Symptoms",
+  { slug: "nausea-in-early-pregnancy", img: nauseaImg, tag: "Symptoms",
     title: "Surviving the peak of first-trimester sickness",
     desc: "Why nausea often crests around weeks 8–10, what helps day-to-day, and when to ask about HG treatment." },
-  { slug: "first-trimester-fatigue", img: fatigueImg, tag: "Body",
+  { slug: "fatigue-in-early-pregnancy", img: fatigueImg, tag: "Body",
     title: "The fatigue nobody warns you about",
     desc: "Why energy is at its lowest in early pregnancy, what's biologically going on, and how to give yourself permission to rest." },
-  { slug: "first-trimester-emotional", img: emotionalImg, tag: "Emotions",
+  { slug: "the-first-trimester-emotionally", img: emotionalImg, tag: "Emotions",
     title: "The long quiet before 12 weeks",
     desc: "Carrying the secret, holding the worry, and the emotional weight of the wait between booking-in and the dating scan." },
-  { slug: "symptoms-stopping-in-early-pregnancy", img: symptomsStoppingImg, tag: "Reassurance",
+  { slug: "symptoms-stopping-early-pregnancy", img: symptomsStoppingImg, tag: "Reassurance",
     title: "When symptoms suddenly ease — and when they don't",
     desc: "What it means if symptoms shift this week, what's normal, and when an EPU visit is worth it for peace of mind." },
-  { slug: "first-trimester-tests-and-scans", img: testsScansImg, tag: "Care",
+  { slug: "tests-and-scans-in-pregnancy", img: testsScansImg, tag: "Care",
     title: "Booking-in with the midwife: what to expect",
     desc: "What happens at the 8–10 week appointment, what bloods are taken, and what questions to think about beforehand." },
-  { slug: "first-trimester-lifestyle", img: lifestyleImg, tag: "Lifestyle",
+  { slug: "first-trimester-complete-guide", img: lifestyleImg, tag: "Lifestyle",
     title: "Hiding pregnancy at work and with friends",
     desc: "Practical scripts for getting through the long quiet weeks before you're ready to tell people." },
 ];

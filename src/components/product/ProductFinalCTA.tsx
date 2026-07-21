@@ -1,5 +1,6 @@
 import { ExternalLink, BookOpen, Gift, Heart, Star, Package } from "lucide-react";
 import journalCoverHand from "@/assets/journal-cover-hand.jpg";
+import { JOURNAL_PURCHASE_URL } from "@/lib/productLinks";
 
 const ProductFinalCTA = () => {
   return (
@@ -61,10 +62,12 @@ const ProductFinalCTA = () => {
             </div>
 
             <a
-              href="#"
+              href={JOURNAL_PURCHASE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center justify-center gap-2.5 w-full bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all mb-3"
             >
-              Get the journal on Amazon
+              Find the journal on Amazon
               <ExternalLink size={14} />
             </a>
             <p className="font-sans text-[11px] font-light text-muted-foreground mb-4">

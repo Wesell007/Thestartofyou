@@ -26,7 +26,7 @@ const PreparingCapture = () => {
               Writing things down during this stage can help — not just plans, but what's on your mind as you get ready.
             </p>
             <a
-              href="/"
+              href="/product"
               className="inline-flex items-center gap-2 border border-foreground/20 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all"
             >
               Explore the journal

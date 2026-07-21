@@ -14,6 +14,7 @@ import { CalendarIcon, ArrowRight, ChevronDown } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { adjustLmpForCycle, estimatedLmpFromUltrasound, isPlausiblePregnancyStart } from "@/lib/pregnancyDates";
 
 type Method = "lmp" | "conception" | "ivf" | "ultrasound";
 type IVFType = "3day" | "5day";
@@ -108,6 +109,8 @@ const DueDateCalculatorForm = ({ onResult, onIVFResult, compact = false }: Props
   const [ivfType, setIvfType] = useState<IVFType>("5day");
   const [usDate, setUsDate] = useState<Date | undefined>();
   const [usWeeks, setUsWeeks] = useState("");
+  const [usDays, setUsDays] = useState("0");
+  const [validationMessage, setValidationMessage] = useState<string | null>(null);
 
   const today = new Date();
 
@@ -115,11 +118,17 @@ const DueDateCalculatorForm = ({ onResult, onIVFResult, compact = false }: Props
     if (method === "lmp") return !!lmpDate;
     if (method === "conception") return !!conceptionDate;
     if (method === "ivf") return !!ivfDate;
-    if (method === "ultrasound") return !!usDate && !!usWeeks && !isNaN(parseFloat(usWeeks));
+    if (method === "ultrasound") {
+      const weeks = Number(usWeeks);
+      const days = Number(usDays);
+      return !!usDate && Number.isInteger(weeks) && weeks >= 4 && weeks <= 40 &&
+        Number.isInteger(days) && days >= 0 && days <= 6;
+    }
     return false;
   };
 
   const handleCalculate = () => {
+    setValidationMessage(null);
     // IVF-specific routing when callback provided
     if (method === "ivf" && ivfDate && onIVFResult) {
       onIVFResult(ivfDate, ivfType);
@@ -128,18 +137,21 @@ const DueDateCalculatorForm = ({ onResult, onIVFResult, compact = false }: Props
 
     let lmp: Date | undefined;
     if (method === "lmp" && lmpDate) {
-      lmp = addDays(lmpDate, -(cycleLength - 28));
+      // Naegele's rule adjusts the 280-day estimate later for cycles longer
+      // than 28 days and earlier for shorter cycles.
+      lmp = adjustLmpForCycle(lmpDate, cycleLength);
     } else if (method === "conception" && conceptionDate) {
       lmp = addDays(conceptionDate, -14);
     } else if (method === "ivf" && ivfDate) {
       lmp = addDays(ivfDate, -(ivfType === "5day" ? 19 : 17));
-    } else if (method === "ultrasound" && usDate && usWeeks) {
-      const w = parseFloat(usWeeks);
-      if (!isNaN(w)) lmp = addDays(usDate, -(w * 7));
+    } else if (method === "ultrasound" && usDate && canCalculate()) {
+      lmp = estimatedLmpFromUltrasound(usDate, Number(usWeeks), Number(usDays));
     }
-    if (lmp && isBefore(lmp, today) && isAfter(lmp, addDays(today, -300))) {
+    if (lmp && isPlausiblePregnancyStart(lmp, today)) {
       onResult(lmp);
+      return;
     }
+    setValidationMessage("Please check the dates. The estimated start needs to be within the last 300 days and not in the future.");
   };
 
   return (
@@ -227,13 +239,27 @@ const DueDateCalculatorForm = ({ onResult, onIVFResult, compact = false }: Props
             disabledBefore={addDays(today, -300)}
           />
           <div>
-            <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-3">Weeks pregnant at scan</p>
-            <input
-              type="number" min={4} max={40} placeholder="e.g. 12"
-              value={usWeeks}
-              onChange={(e) => setUsWeeks(e.target.value)}
-              className="w-full bg-parchment border border-border/60 rounded-xl px-5 py-4 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-sage/50"
-            />
+            <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted mb-3">Pregnancy length at scan</p>
+            <div className="grid grid-cols-2 gap-3">
+              <label className="font-sans text-xs text-muted-foreground">
+                Weeks
+                <input
+                  type="number" min={4} max={40} step={1} placeholder="e.g. 12"
+                  value={usWeeks}
+                  onChange={(e) => setUsWeeks(e.target.value)}
+                  className="mt-2 w-full bg-parchment border border-border/60 rounded-xl px-5 py-4 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-sage/50"
+                />
+              </label>
+              <label className="font-sans text-xs text-muted-foreground">
+                Extra days
+                <input
+                  type="number" min={0} max={6} step={1}
+                  value={usDays}
+                  onChange={(e) => setUsDays(e.target.value)}
+                  className="mt-2 w-full bg-parchment border border-border/60 rounded-xl px-5 py-4 font-sans text-sm font-light text-foreground focus:outline-none focus:border-sage/50"
+                />
+              </label>
+            </div>
           </div>
         </>
       )}
@@ -255,6 +281,11 @@ const DueDateCalculatorForm = ({ onResult, onIVFResult, compact = false }: Props
         <p className="font-sans text-[11px] font-light text-muted-foreground/60 text-center mt-3 leading-relaxed">
           This gives an estimate, your healthcare provider may adjust your due date based on scans.
         </p>
+        {validationMessage ? (
+          <p role="alert" className="font-sans text-xs text-destructive text-center mt-3">
+            {validationMessage}
+          </p>
+        ) : null}
       </div>
     </div>
   );

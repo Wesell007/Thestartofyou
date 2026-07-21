@@ -3,146 +3,151 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-route
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
+import { lazy, Suspense, useEffect } from "react";
+import PageLoadState from "./components/shared/PageLoadState.tsx";
+const Index = lazy(() => import("./pages/Index.tsx"));
 
-import Pregnancy from "./pages/Pregnancy.tsx";
-import BodyTopic from "./pages/pregnancy/BodyTopic.tsx";
-import BabyTopic from "./pages/pregnancy/BabyTopic.tsx";
-import HealthAndSafetyTopic from "./pages/pregnancy/HealthAndSafetyTopic.tsx";
-import DietAndExerciseTopic from "./pages/pregnancy/DietAndExerciseTopic.tsx";
-import PreparingForBabyTopic from "./pages/pregnancy/PreparingForBabyTopic.tsx";
-import FeelingsTopic from "./pages/pregnancy/FeelingsTopic.tsx";
-import FirstTrimester from "./pages/trimester/FirstTrimester.tsx";
-import SecondTrimester from "./pages/trimester/SecondTrimester.tsx";
-import ThirdTrimester from "./pages/trimester/ThirdTrimester.tsx";
-import WeekPage from "./pages/WeekPage.tsx";
-import Week1Page from "./pages/Week1Page.tsx";
-import Week2Page from "./pages/Week2Page.tsx";
-import Week3Page from "./pages/Week3Page.tsx";
-import Week4Page from "./pages/Week4Page.tsx";
-import Week6Page from "./pages/Week6Page.tsx";
-import Week5Page from "./pages/Week5Page.tsx";
-import Week7Page from "./pages/Week7Page.tsx";
-import Week8Page from "./pages/Week8Page.tsx";
-import Week9Page from "./pages/Week9Page.tsx";
-import Week10Page from "./pages/Week10Page.tsx";
-import Week11Page from "./pages/Week11Page.tsx";
-import Week12Page from "./pages/Week12Page.tsx";
-import Week13Page from "./pages/Week13Page.tsx";
-import Week14Page from "./pages/Week14Page.tsx";
-import Week15Page from "./pages/Week15Page.tsx";
-import Week16Page from "./pages/Week16Page.tsx";
-import Week17Page from "./pages/Week17Page.tsx";
-import Week18Page from "./pages/Week18Page.tsx";
-import Week19Page from "./pages/Week19Page.tsx";
-import Week20Page from "./pages/Week20Page.tsx";
-import Week21Page from "./pages/Week21Page.tsx";
-import Week22Page from "./pages/Week22Page.tsx";
-import Week23Page from "./pages/Week23Page.tsx";
-import Week24Page from "./pages/Week24Page.tsx";
-import Week25Page from "./pages/Week25Page.tsx";
-import Week26Page from "./pages/Week26Page.tsx";
-import Week27Page from "./pages/Week27Page.tsx";
-import Week28Page from "./pages/Week28Page.tsx";
-import Week29Page from "./pages/Week29Page.tsx";
-import Week30Page from "./pages/Week30Page.tsx";
-import Week31Page from "./pages/Week31Page.tsx";
-import Week32Page from "./pages/Week32Page.tsx";
-import Week33Page from "./pages/Week33Page.tsx";
-import Week34Page from "./pages/Week34Page.tsx";
-import Week35Page from "./pages/Week35Page.tsx";
-import Week36Page from "./pages/Week36Page.tsx";
-import Week37Page from "./pages/Week37Page.tsx";
-import Week38Page from "./pages/Week38Page.tsx";
-import Week39Page from "./pages/Week39Page.tsx";
-import Week40Page from "./pages/Week40Page.tsx";
-import Week41Page from "./pages/Week41Page.tsx";
-import Week42Page from "./pages/Week42Page.tsx";
-import ArticlePage from "./pages/ArticlePage.tsx";
-import DueDateCalculator from "./pages/DueDateCalculator.tsx";
-import DueDateResults from "./pages/DueDateResults.tsx";
-import TTC from "./pages/TTC.tsx";
-import TTCHub from "./pages/TTCHub.tsx";
-import IVF from "./pages/IVF.tsx";
+const Pregnancy = lazy(() => import("./pages/Pregnancy.tsx"));
+const BodyTopic = lazy(() => import("./pages/pregnancy/BodyTopic.tsx"));
+const BabyTopic = lazy(() => import("./pages/pregnancy/BabyTopic.tsx"));
+const HealthAndSafetyTopic = lazy(() => import("./pages/pregnancy/HealthAndSafetyTopic.tsx"));
+const DietAndExerciseTopic = lazy(() => import("./pages/pregnancy/DietAndExerciseTopic.tsx"));
+const PreparingForBabyTopic = lazy(() => import("./pages/pregnancy/PreparingForBabyTopic.tsx"));
+const FeelingsTopic = lazy(() => import("./pages/pregnancy/FeelingsTopic.tsx"));
+const FirstTrimester = lazy(() => import("./pages/trimester/FirstTrimester.tsx"));
+const SecondTrimester = lazy(() => import("./pages/trimester/SecondTrimester.tsx"));
+const ThirdTrimester = lazy(() => import("./pages/trimester/ThirdTrimester.tsx"));
+const WeekPage = lazy(() => import("./pages/WeekPage.tsx"));
+const Week1Page = lazy(() => import("./pages/Week1Page.tsx"));
+const Week2Page = lazy(() => import("./pages/Week2Page.tsx"));
+const Week3Page = lazy(() => import("./pages/Week3Page.tsx"));
+const Week4Page = lazy(() => import("./pages/Week4Page.tsx"));
+const Week6Page = lazy(() => import("./pages/Week6Page.tsx"));
+const Week5Page = lazy(() => import("./pages/Week5Page.tsx"));
+const Week7Page = lazy(() => import("./pages/Week7Page.tsx"));
+const Week8Page = lazy(() => import("./pages/Week8Page.tsx"));
+const Week9Page = lazy(() => import("./pages/Week9Page.tsx"));
+const Week10Page = lazy(() => import("./pages/Week10Page.tsx"));
+const Week11Page = lazy(() => import("./pages/Week11Page.tsx"));
+const Week12Page = lazy(() => import("./pages/Week12Page.tsx"));
+const Week13Page = lazy(() => import("./pages/Week13Page.tsx"));
+const Week14Page = lazy(() => import("./pages/Week14Page.tsx"));
+const Week15Page = lazy(() => import("./pages/Week15Page.tsx"));
+const Week16Page = lazy(() => import("./pages/Week16Page.tsx"));
+const Week17Page = lazy(() => import("./pages/Week17Page.tsx"));
+const Week18Page = lazy(() => import("./pages/Week18Page.tsx"));
+const Week19Page = lazy(() => import("./pages/Week19Page.tsx"));
+const Week20Page = lazy(() => import("./pages/Week20Page.tsx"));
+const Week21Page = lazy(() => import("./pages/Week21Page.tsx"));
+const Week22Page = lazy(() => import("./pages/Week22Page.tsx"));
+const Week23Page = lazy(() => import("./pages/Week23Page.tsx"));
+const Week24Page = lazy(() => import("./pages/Week24Page.tsx"));
+const Week25Page = lazy(() => import("./pages/Week25Page.tsx"));
+const Week26Page = lazy(() => import("./pages/Week26Page.tsx"));
+const Week27Page = lazy(() => import("./pages/Week27Page.tsx"));
+const Week28Page = lazy(() => import("./pages/Week28Page.tsx"));
+const Week29Page = lazy(() => import("./pages/Week29Page.tsx"));
+const Week30Page = lazy(() => import("./pages/Week30Page.tsx"));
+const Week31Page = lazy(() => import("./pages/Week31Page.tsx"));
+const Week32Page = lazy(() => import("./pages/Week32Page.tsx"));
+const Week33Page = lazy(() => import("./pages/Week33Page.tsx"));
+const Week34Page = lazy(() => import("./pages/Week34Page.tsx"));
+const Week35Page = lazy(() => import("./pages/Week35Page.tsx"));
+const Week36Page = lazy(() => import("./pages/Week36Page.tsx"));
+const Week37Page = lazy(() => import("./pages/Week37Page.tsx"));
+const Week38Page = lazy(() => import("./pages/Week38Page.tsx"));
+const Week39Page = lazy(() => import("./pages/Week39Page.tsx"));
+const Week40Page = lazy(() => import("./pages/Week40Page.tsx"));
+const Week41Page = lazy(() => import("./pages/Week41Page.tsx"));
+const Week42Page = lazy(() => import("./pages/Week42Page.tsx"));
+const ArticlePage = lazy(() => import("./pages/ArticlePage.tsx"));
+const DueDateCalculator = lazy(() => import("./pages/DueDateCalculator.tsx"));
+const DueDateResults = lazy(() => import("./pages/DueDateResults.tsx"));
+const TTC = lazy(() => import("./pages/TTC.tsx"));
+const TTCHub = lazy(() => import("./pages/TTCHub.tsx"));
+const IVF = lazy(() => import("./pages/IVF.tsx"));
 // Postpartum: preserved in code for reuse, but no longer a live top-level
 // destination. /postpartum redirects into the First Year ecosystem.
 // The legacy hub is kept at /postpartum/legacy for reference during rebuild.
-import Postpartum from "./pages/Postpartum.tsx";
-import FirstYear from "./pages/FirstYear.tsx";
-import FYPhaseZeroToThree from "./pages/firstyear/PhaseZeroToThree.tsx";
-import FYPhaseThreeToSix from "./pages/firstyear/PhaseThreeToSix.tsx";
-import FYPhaseSixToNine from "./pages/firstyear/PhaseSixToNine.tsx";
-import FYPhaseNineToTwelve from "./pages/firstyear/PhaseNineToTwelve.tsx";
-import FYFeeding from "./pages/firstyear/Feeding.tsx";
-import FYSleep from "./pages/firstyear/Sleep.tsx";
-import FYDevelopment from "./pages/firstyear/Development.tsx";
-import FYCareAndSafety from "./pages/firstyear/CareAndSafety.tsx";
-import FYPostpartumRecovery from "./pages/firstyear/PostpartumRecovery.tsx";
-import FYEmotionalWellbeing from "./pages/firstyear/EmotionalWellbeing.tsx";
-import FYBodyAndHormones from "./pages/firstyear/BodyAndHormones.tsx";
-import FYCheckupsAndWarningSigns from "./pages/firstyear/CheckupsAndWarningSigns.tsx";
-import Toddler from "./pages/Toddler.tsx";
-import ToddlerDevelopmentMilestones from "./pages/toddler/DevelopmentMilestones.tsx";
-import ToddlerBehaviourEmotions from "./pages/toddler/BehaviourEmotions.tsx";
-import ToddlerSpeechLanguage from "./pages/toddler/SpeechLanguage.tsx";
-import ToddlerSleep from "./pages/toddler/Sleep.tsx";
-import ToddlerFoodFeeding from "./pages/toddler/FoodFeeding.tsx";
-import ToddlerPottyLearning from "./pages/toddler/PottyLearning.tsx";
-import ToddlerHealthSafety from "./pages/toddler/HealthSafety.tsx";
-import ToddlerPlayConnection from "./pages/toddler/PlayConnection.tsx";
-import ToddlerAge12to17 from "./pages/toddler/age/TwelveToSeventeenMonths.tsx";
-import ToddlerAge18to23 from "./pages/toddler/age/EighteenToTwentyThreeMonths.tsx";
-import ToddlerAge2y from "./pages/toddler/age/TwoYears.tsx";
-import ToddlerAge30m from "./pages/toddler/age/ThirtyMonths.tsx";
-import ToddlerAge3y from "./pages/toddler/age/ThreeYears.tsx";
-import Family from "./pages/Family.tsx";
-import FamilyGrowingFamilies from "./pages/family/GrowingFamilies.tsx";
-import FamilyRelationships from "./pages/family/Relationships.tsx";
-import FamilyBasics from "./pages/family/FamilyBasics.tsx";
-import FamilyHealthSafety from "./pages/family/HealthSafety.tsx";
-import FamilyTravelDaysOut from "./pages/family/TravelDaysOut.tsx";
-import FamilyPlayConnection from "./pages/family/PlayConnection.tsx";
-import FamilyArticle from "./pages/family/FamilyArticle.tsx";
-import FirstYearArticle from "./pages/firstyear/FirstYearArticle.tsx";
-import ToddlerArticle from "./pages/toddler/ToddlerArticle.tsx";
-import PreparingForBaby from "./pages/PreparingForBaby.tsx";
-import Support from "./pages/Support.tsx";
-import About from "./pages/About.tsx";
-import Product from "./pages/Product.tsx";
-import StagePage from "./pages/StagePage.tsx";
-import OvulationCalculator from "./pages/OvulationCalculator.tsx";
-import TTCOvulation from "./pages/ttc/Ovulation.tsx";
-import TTCPreconceptionHealth from "./pages/ttc/PreconceptionHealth.tsx";
-import TTCFertility from "./pages/ttc/Fertility.tsx";
-import TTCIVFAndTreatment from "./pages/ttc/IVFAndTreatment.tsx";
-import TTCMaleFertility from "./pages/ttc/MaleFertility.tsx";
-import TTCAgeAndFertility from "./pages/ttc/AgeAndFertility.tsx";
-import TTCCycleTracking from "./pages/ttc/CycleTracking.tsx";
-import TTCPregnancyTests from "./pages/ttc/PregnancyTests.tsx";
-import TTCTwoWeekWait from "./pages/ttc/TwoWeekWait.tsx";
-import TTCConditions from "./pages/ttc/Conditions.tsx";
-import IVFTimeline from "./pages/IVFTimeline.tsx";
-import IVFBeforeTransfer from "./pages/ivf/BeforeTransfer.tsx";
-import IVFAfterTransfer from "./pages/ivf/AfterTransfer.tsx";
-import IVFEarlyPregnancy from "./pages/ivf/EarlyPregnancy.tsx";
-import AskPage from "./pages/AskPage.tsx";
+const Postpartum = lazy(() => import("./pages/Postpartum.tsx"));
+const FirstYear = lazy(() => import("./pages/FirstYear.tsx"));
+const FYPhaseZeroToThree = lazy(() => import("./pages/firstyear/PhaseZeroToThree.tsx"));
+const FYPhaseThreeToSix = lazy(() => import("./pages/firstyear/PhaseThreeToSix.tsx"));
+const FYPhaseSixToNine = lazy(() => import("./pages/firstyear/PhaseSixToNine.tsx"));
+const FYPhaseNineToTwelve = lazy(() => import("./pages/firstyear/PhaseNineToTwelve.tsx"));
+const FYFeeding = lazy(() => import("./pages/firstyear/Feeding.tsx"));
+const FYSleep = lazy(() => import("./pages/firstyear/Sleep.tsx"));
+const FYDevelopment = lazy(() => import("./pages/firstyear/Development.tsx"));
+const FYCareAndSafety = lazy(() => import("./pages/firstyear/CareAndSafety.tsx"));
+const FYPostpartumRecovery = lazy(() => import("./pages/firstyear/PostpartumRecovery.tsx"));
+const FYEmotionalWellbeing = lazy(() => import("./pages/firstyear/EmotionalWellbeing.tsx"));
+const FYBodyAndHormones = lazy(() => import("./pages/firstyear/BodyAndHormones.tsx"));
+const FYCheckupsAndWarningSigns = lazy(() => import("./pages/firstyear/CheckupsAndWarningSigns.tsx"));
+const Toddler = lazy(() => import("./pages/Toddler.tsx"));
+const ToddlerDevelopmentMilestones = lazy(() => import("./pages/toddler/DevelopmentMilestones.tsx"));
+const ToddlerBehaviourEmotions = lazy(() => import("./pages/toddler/BehaviourEmotions.tsx"));
+const ToddlerSpeechLanguage = lazy(() => import("./pages/toddler/SpeechLanguage.tsx"));
+const ToddlerSleep = lazy(() => import("./pages/toddler/Sleep.tsx"));
+const ToddlerFoodFeeding = lazy(() => import("./pages/toddler/FoodFeeding.tsx"));
+const ToddlerPottyLearning = lazy(() => import("./pages/toddler/PottyLearning.tsx"));
+const ToddlerHealthSafety = lazy(() => import("./pages/toddler/HealthSafety.tsx"));
+const ToddlerPlayConnection = lazy(() => import("./pages/toddler/PlayConnection.tsx"));
+const ToddlerAge12to17 = lazy(() => import("./pages/toddler/age/TwelveToSeventeenMonths.tsx"));
+const ToddlerAge18to23 = lazy(() => import("./pages/toddler/age/EighteenToTwentyThreeMonths.tsx"));
+const ToddlerAge2y = lazy(() => import("./pages/toddler/age/TwoYears.tsx"));
+const ToddlerAge30m = lazy(() => import("./pages/toddler/age/ThirtyMonths.tsx"));
+const ToddlerAge3y = lazy(() => import("./pages/toddler/age/ThreeYears.tsx"));
+const Family = lazy(() => import("./pages/Family.tsx"));
+const FamilyGrowingFamilies = lazy(() => import("./pages/family/GrowingFamilies.tsx"));
+const FamilyRelationships = lazy(() => import("./pages/family/Relationships.tsx"));
+const FamilyBasics = lazy(() => import("./pages/family/FamilyBasics.tsx"));
+const FamilyHealthSafety = lazy(() => import("./pages/family/HealthSafety.tsx"));
+const FamilyTravelDaysOut = lazy(() => import("./pages/family/TravelDaysOut.tsx"));
+const FamilyPlayConnection = lazy(() => import("./pages/family/PlayConnection.tsx"));
+const FamilyArticle = lazy(() => import("./pages/family/FamilyArticle.tsx"));
+const FirstYearArticle = lazy(() => import("./pages/firstyear/FirstYearArticle.tsx"));
+const ToddlerArticle = lazy(() => import("./pages/toddler/ToddlerArticle.tsx"));
+const PreparingForBaby = lazy(() => import("./pages/PreparingForBaby.tsx"));
+const Support = lazy(() => import("./pages/Support.tsx"));
+const About = lazy(() => import("./pages/About.tsx"));
+const Product = lazy(() => import("./pages/Product.tsx"));
+const StagePage = lazy(() => import("./pages/StagePage.tsx"));
+const OvulationCalculator = lazy(() => import("./pages/OvulationCalculator.tsx"));
+const TTCOvulation = lazy(() => import("./pages/ttc/Ovulation.tsx"));
+const TTCPreconceptionHealth = lazy(() => import("./pages/ttc/PreconceptionHealth.tsx"));
+const TTCFertility = lazy(() => import("./pages/ttc/Fertility.tsx"));
+const TTCIVFAndTreatment = lazy(() => import("./pages/ttc/IVFAndTreatment.tsx"));
+const TTCMaleFertility = lazy(() => import("./pages/ttc/MaleFertility.tsx"));
+const TTCAgeAndFertility = lazy(() => import("./pages/ttc/AgeAndFertility.tsx"));
+const TTCCycleTracking = lazy(() => import("./pages/ttc/CycleTracking.tsx"));
+const TTCPregnancyTests = lazy(() => import("./pages/ttc/PregnancyTests.tsx"));
+const TTCTwoWeekWait = lazy(() => import("./pages/ttc/TwoWeekWait.tsx"));
+const TTCConditions = lazy(() => import("./pages/ttc/Conditions.tsx"));
+const IVFTimeline = lazy(() => import("./pages/IVFTimeline.tsx"));
+const IVFBeforeTransfer = lazy(() => import("./pages/ivf/BeforeTransfer.tsx"));
+const IVFAfterTransfer = lazy(() => import("./pages/ivf/AfterTransfer.tsx"));
+const IVFEarlyPregnancy = lazy(() => import("./pages/ivf/EarlyPregnancy.tsx"));
+const AskPage = lazy(() => import("./pages/AskPage.tsx"));
 
-import MyWeek from "./pages/MyWeek.tsx";
-import MyJourney from "./pages/MyJourney.tsx";
-import KeptChapter from "./pages/KeptChapter.tsx";
-import Auth from "./pages/Auth.tsx";
-import Setup from "./pages/Setup.tsx";
-import SetupTTC from "./pages/SetupTTC.tsx";
-import MyTTCJourney from "./pages/MyTTCJourney.tsx";
-import NotFound from "./pages/NotFound.tsx";
+const MyWeek = lazy(() => import("./pages/MyWeek.tsx"));
+const MyJourney = lazy(() => import("./pages/MyJourney.tsx"));
+const KeptChapter = lazy(() => import("./pages/KeptChapter.tsx"));
+const Auth = lazy(() => import("./pages/Auth.tsx"));
+const Setup = lazy(() => import("./pages/Setup.tsx"));
+const SetupTTC = lazy(() => import("./pages/SetupTTC.tsx"));
+const MyTTCJourney = lazy(() => import("./pages/MyTTCJourney.tsx"));
+const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+const Privacy = lazy(() => import("./pages/Privacy.tsx"));
+const Terms = lazy(() => import("./pages/Terms.tsx"));
+const AccountSettings = lazy(() => import("./pages/AccountSettings.tsx"));
 import ScrollToTop from "./components/layout/ScrollToTop.tsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";
 import ConsentBanner from "./components/consent/ConsentBanner.tsx";
 import RouteTracker from "./components/analytics/RouteTracker.tsx";
-import { useEffect } from "react";
 import { supabase } from "./integrations/supabase/client.ts";
 import { identify, trackEvent } from "./lib/analytics.ts";
 import { EVENTS } from "./lib/analyticsEvents.ts";
+import AppErrorBoundary from "./components/shared/AppErrorBoundary.tsx";
 
 
 const queryClient = new QueryClient();
@@ -195,16 +200,18 @@ const AnalyticsIdentityBridge = () => {
 };
 
 const App = () => (
+  <AppErrorBoundary>
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <ScrollToTop />
         <RouteTracker />
         <AnalyticsIdentityBridge />
         <ConsentBanner />
+        <Suspense fallback={<PageLoadState message="Loading page…" />}>
         <Routes>
           <Route path="/" element={<Index />} />
           
@@ -286,7 +293,7 @@ const App = () => (
           <Route path="/ivf/early-pregnancy" element={<IVFEarlyPregnancy />} />
           <Route path="/ivf-timeline" element={<IVFTimeline />} />
           {/* Step 1 redirect: Postpartum now lives inside First Year as the Recovery track. */}
-          <Route path="/postpartum" element={<Navigate to="/first-year#recovery" replace />} />
+          <Route path="/postpartum" element={<Navigate to="/first-year#recovery-topics" replace />} />
           {/* Legacy Postpartum hub preserved for reuse during the First Year rebuild. */}
           <Route path="/postpartum/legacy" element={<Postpartum />} />
           {/* Orphaned postpartum stage URLs redirect into the First Year hub (Phase 9.10). */}
@@ -344,12 +351,16 @@ const App = () => (
           <Route path="/support" element={<Support />} />
           <Route path="/about" element={<About />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/journal" element={<Navigate to="/product" replace />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="/ask" element={<AskPage />} />
           
           <Route path="/my-week" element={<ProtectedRoute><MyWeek /></ProtectedRoute>} />
           <Route path="/my-week/:week" element={<ProtectedRoute><KeptChapter /></ProtectedRoute>} />
           <Route path="/my-journey" element={<ProtectedRoute><MyJourney /></ProtectedRoute>} />
           <Route path="/my-ttc-journey" element={<ProtectedRoute><MyTTCJourney /></ProtectedRoute>} />
+          <Route path="/account" element={<ProtectedRoute><AccountSettings /></ProtectedRoute>} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/setup" element={<Setup />} />
           <Route path="/setup/trying-to-conceive" element={<SetupTTC />} />
@@ -357,9 +368,11 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
+  </AppErrorBoundary>
 );
 
 export default App;

@@ -12,11 +12,18 @@ const Setup = () => {
   const [firstName, setFirstName] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    supabase.auth.getSession().then(async ({ data }) => {
+    supabase.auth.getSession().then(async ({ data, error: sessionError }) => {
       if (cancelled) return;
+      if (sessionError) {
+        setLoadError("We couldn't check your account. Please try again.");
+        setLoading(false);
+        return;
+      }
       const u = data.session?.user;
       if (!u) {
         navigate("/auth", { replace: true });
@@ -28,14 +35,23 @@ const Setup = () => {
         await commitPendingJourneyToDB(u.id);
       } catch (e) {
         console.error(e);
+        setLoadError("We couldn't save your pregnancy dates. Please try again before continuing.");
+        setLoading(false);
+        return;
       }
       // If already has a name, skip
-      const { data: profile } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from("profiles")
         .select("first_name")
         .eq("user_id", u.id)
         .maybeSingle();
+      if (profileError) {
+        setLoadError("We couldn't load your profile. Please try again.");
+        setLoading(false);
+        return;
+      }
       if (profile?.first_name) navigate("/my-week", { replace: true });
+      setLoading(false);
     });
     return () => {
       cancelled = true;
@@ -44,7 +60,7 @@ const Setup = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!userId || !firstName.trim()) return;
+    if (!userId || loading || !firstName.trim()) return;
     setSubmitting(true);
     const { error } = await supabase
       .from("profiles")
@@ -86,6 +102,7 @@ const Setup = () => {
             <input
               type="text"
               required
+              maxLength={80}
               autoFocus
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
@@ -96,11 +113,19 @@ const Setup = () => {
           </label>
           <button
             type="submit"
-            disabled={submitting || !firstName.trim()}
+            disabled={loading || submitting || !userId || !firstName.trim()}
             className="w-full inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all disabled:opacity-60"
           >
-            {submitting ? <Loader2 size={16} className="animate-spin" /> : <>Continue to my week <ArrowRight size={14} /></>}
+            {loading || submitting ? <Loader2 size={16} className="animate-spin" /> : <>Continue to my week <ArrowRight size={14} /></>}
           </button>
+          {loadError ? (
+            <div role="alert" className="space-y-3 text-center">
+              <p className="font-sans text-xs text-destructive">{loadError}</p>
+              <button type="button" onClick={() => window.location.reload()} className="font-sans text-xs underline text-foreground">
+                Try again
+              </button>
+            </div>
+          ) : null}
         </form>
       </div>
     </div>

@@ -18,6 +18,8 @@ import { BotanicalAccent, Sprig, SprigDivider, StageGlow } from "@/components/sh
 import { stashPendingJourney } from "@/lib/savedJourney";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
+import AskLink from "@/components/shared/AskLink";
+import { navigateToAsk } from "@/lib/askNavigation";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -229,7 +231,7 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
 
   const handleAskNow = () => {
     const q = aiQuestion.trim();
-    if (q) navigate(`/ask?q=${encodeURIComponent(q)}`);
+    navigateToAsk(navigate, q, { context: `Pregnancy week ${result.currentWeek}`, stage: "pregnancy" });
   };
 
   const handleSaveJourney = () => {
@@ -369,13 +371,15 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     Save your journey
                     <ArrowRight size={16} />
                   </button>
-                  <Link
-                    to={`/ask?q=What should I know at ${result.currentWeek} weeks pregnant?`}
+                  <AskLink
+                    question={`What should I know at ${result.currentWeek} weeks pregnant?`}
+                    context={`Pregnancy week ${result.currentWeek}`}
+                    stage="pregnancy"
                     className="inline-flex items-center gap-2 font-sans text-sm font-light text-muted-foreground hover:text-sage transition-colors py-4"
                   >
                     <MessageCircle size={13} className="text-sage/60" />
                     Ask about this stage
-                  </Link>
+                  </AskLink>
                 </div>
                 <p className="font-sans text-[11px] font-light text-muted-foreground/30 leading-relaxed max-w-sm">
                   Save your stage and begin personalised guidance from week {result.currentWeek}

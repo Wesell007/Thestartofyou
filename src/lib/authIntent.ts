@@ -1,5 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import { getActivePregnancyJourney, readPendingJourney } from "@/lib/savedJourney";
+import { getActiveTTCJourney } from "@/lib/savedTTCJourney";
 
 /**
  * Auth intent model.
@@ -77,7 +78,7 @@ export const resolvePostLoginDestination = async (
   const pending = readPendingJourney();
   if (pending) return "/setup";
 
-  const journey = await getActivePregnancyJourney(userId);
+  const journey = await getActivePregnancyJourney(userId, { throwOnError: true });
   if (journey) {
     // If they have a journey but no profile name yet, finish setup first.
     const { data: profile } = await supabase
@@ -88,6 +89,9 @@ export const resolvePostLoginDestination = async (
     if (!profile?.first_name) return "/setup";
     return "/my-week";
   }
+
+  const ttcJourney = await getActiveTTCJourney(userId, { throwOnError: true });
+  if (ttcJourney) return "/my-ttc-journey";
 
   // No saved journey at all — send them into the start flow.
   return "/due-date-calculator";

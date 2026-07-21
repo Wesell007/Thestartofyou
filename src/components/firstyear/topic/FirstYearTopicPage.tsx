@@ -15,6 +15,7 @@ import {
   type FirstYearArticleTopic,
 } from "@/data/firstYearArticleData";
 import FirstYearArticleCard from "@/components/firstyear/article/FirstYearArticleCard";
+import AskLink from "@/components/shared/AskLink";
 
 // First Year topic pages are photo-led and calm. No botanical sprigs or
 // pregnancy-style decorative motifs — quietness comes from soft tints,
@@ -54,12 +55,6 @@ const THEMES: Record<"baby" | "recovery", SideTheme> = {
 };
 
 const slugToPath = (s: FirstYearTopicSlug) => `/first-year/${s}`;
-// Until per-article URLs exist, every guidance card resolves to the AI search
-// pre-seeded with the article title. The data layer can swap `href` for a real
-// article URL later without any template changes.
-const guidanceHref = (item: FirstYearFeaturedItem, side: "baby" | "recovery") =>
-  item.href ?? `/ask?q=${encodeURIComponent(item.title)}&stage=${side === "recovery" ? "recovery" : "first-year"}`;
-
 const TAG_LABEL: Record<NonNullable<FirstYearFeaturedItem["tag"]>, string> = {
   "start-here": "Start here",
   "common": "Common worry",
@@ -261,8 +256,8 @@ const FirstYearTopicPage = ({ config }: Props) => {
         </section>
 
         {/* ─── 3. GUIDANCE ───────────────────────────────────────────── */}
-        {/* Designed as a real editorial article cluster, even while cards
-            temporarily resolve to /ask?q=… behind the scenes. */}
+        {/* Designed as a real editorial article cluster; unpublished cards
+            open contextual AI guidance without placing the question in the URL. */}
         <section className="pb-16 md:pb-24">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
             <div className="mb-9 md:mb-12 flex flex-col items-start gap-4">
@@ -276,13 +271,9 @@ const FirstYearTopicPage = ({ config }: Props) => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
-              {config.featured.map((item) => (
-                <Link
-                  key={item.title}
-                  to={guidanceHref(item, config.side)}
-                  className="group block bg-card rounded-2xl overflow-hidden border transition-all hover:-translate-y-1 hover:shadow-[0_24px_60px_-32px_rgba(0,0,0,0.28)]"
-                  style={{ borderColor: accentBorder }}
-                >
+              {config.featured.map((item) => {
+                const card = (
+                  <>
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img
                       src={item.image}
@@ -329,8 +320,27 @@ const FirstYearTopicPage = ({ config }: Props) => {
                       />
                     </span>
                   </div>
-                </Link>
-              ))}
+                  </>
+                );
+                const className = "group block bg-card rounded-2xl overflow-hidden border transition-all hover:-translate-y-1 hover:shadow-[0_24px_60px_-32px_rgba(0,0,0,0.28)]";
+                const style = { borderColor: accentBorder };
+                return item.href ? (
+                  <Link key={item.title} to={item.href} className={className} style={style}>
+                    {card}
+                  </Link>
+                ) : (
+                  <AskLink
+                    key={item.title}
+                    question={item.title}
+                    context={config.title}
+                    stage={config.side === "recovery" ? "recovery" : "first-year"}
+                    className={className}
+                    style={style}
+                  >
+                    {card}
+                  </AskLink>
+                );
+              })}
             </div>
           </div>
         </section>

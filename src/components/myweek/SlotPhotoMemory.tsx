@@ -26,11 +26,13 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
   const [signedUrl, setSignedUrl] = useState<string | null>(null);
   const [storagePath, setStoragePath] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loadAttempt, setLoadAttempt] = useState(0);
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      setError(null);
       const { data, error } = await supabase
         .from("week_photos")
         .select("storage_path")
@@ -45,15 +47,19 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
       }
       if (data?.storage_path) {
         setStoragePath(data.storage_path);
-        const { data: urlData } = await supabase.storage
+        const { data: urlData, error: urlError } = await supabase.storage
           .from("weekly-photos")
           .createSignedUrl(data.storage_path, 60 * 60);
         if (cancelled) return;
-        if (urlData?.signedUrl) {
+        if (urlError) {
+          setState("error");
+          setError("Couldn't open your saved photo");
+        } else if (urlData?.signedUrl) {
           setSignedUrl(urlData.signedUrl);
           setState("loaded");
         } else {
-          setState("empty");
+          setState("error");
+          setError("Couldn't open your saved photo");
         }
       } else {
         setState("empty");
@@ -62,11 +68,18 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
     return () => {
       cancelled = true;
     };
-  }, [userId, week]);
+  }, [userId, week, loadAttempt]);
+
+  useEffect(() => {
+    if (!signedUrl) return;
+    const timer = window.setTimeout(() => setLoadAttempt((n) => n + 1), 50 * 60 * 1000);
+    return () => window.clearTimeout(timer);
+  }, [signedUrl]);
 
   const handleFiles = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
     const file = files[0];
+    const hadExistingPhoto = Boolean(storagePath && signedUrl);
     if (!file.type.startsWith("image/")) {
       setError("Please choose an image");
       return;
@@ -81,16 +94,12 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
     const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
     const path = `${userId}/${week}.${ext}`;
 
-    if (storagePath && storagePath !== path) {
-      await supabase.storage.from("weekly-photos").remove([storagePath]);
-    }
-
     const { error: uploadErr } = await supabase.storage
       .from("weekly-photos")
       .upload(path, file, { upsert: true, contentType: file.type });
 
     if (uploadErr) {
-      setState("error");
+      setState(hadExistingPhoto ? "loaded" : "error");
       setError("Couldn't save your photo");
       return;
     }
@@ -102,17 +111,30 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
         { onConflict: "user_id,week" }
       );
     if (dbErr) {
-      setState("error");
+      if (path !== storagePath) {
+        await supabase.storage.from("weekly-photos").remove([path]);
+      }
+      setState(hadExistingPhoto ? "loaded" : "error");
       setError("Couldn't save your photo");
       return;
     }
 
-    const { data: urlData } = await supabase.storage
+    const { data: urlData, error: urlError } = await supabase.storage
       .from("weekly-photos")
       .createSignedUrl(path, 60 * 60);
+    if (storagePath && storagePath !== path) {
+      await supabase.storage.from("weekly-photos").remove([storagePath]);
+    }
     setStoragePath(path);
-    setSignedUrl(urlData?.signedUrl ?? null);
-    setState("loaded");
+    if (urlError || !urlData?.signedUrl) {
+      setSignedUrl(null);
+      setState("error");
+      setError("Your photo was saved, but we couldn't display it yet.");
+    } else {
+      setSignedUrl(urlData.signedUrl);
+      setState("loaded");
+    }
+    if (fileRef.current) fileRef.current.value = "";
     // Save-action metric: fires after both upload + DB row succeed. A
     // replacement is a real new save and counts; removal does not fire.
     trackEvent(EVENTS.PHOTO_SAVED);
@@ -121,12 +143,26 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
   const handleRemove = async () => {
     if (!storagePath) return;
     setState("uploading");
-    await supabase.storage.from("weekly-photos").remove([storagePath]);
-    await supabase
+    const { error: dbError } = await supabase
       .from("week_photos")
       .delete()
       .eq("user_id", userId)
       .eq("week", week);
+    if (dbError) {
+      setState("loaded");
+      setError("Couldn't remove your photo. Please try again.");
+      return;
+    }
+    const { error: storageError } = await supabase.storage.from("weekly-photos").remove([storagePath]);
+    if (storageError) {
+      await supabase.from("week_photos").upsert(
+        { user_id: userId, week, storage_path: storagePath },
+        { onConflict: "user_id,week" },
+      );
+      setState("loaded");
+      setError("Couldn't remove your photo. Please try again.");
+      return;
+    }
     setStoragePath(null);
     setSignedUrl(null);
     setState("empty");
@@ -305,9 +341,19 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
       )}
 
       {error && (
-        <p className="font-sans text-[12.5px] font-light text-destructive mt-3">
-          {error}
-        </p>
+        <div className="mt-3" role="alert">
+          <p className="font-sans text-[12.5px] font-light text-destructive">{error}</p>
+          {state === "error" && (
+            <div className="flex gap-4 mt-2">
+              <button type="button" onClick={() => setLoadAttempt((n) => n + 1)} className="font-sans text-xs underline">
+                Try again
+              </button>
+              <button type="button" onClick={() => fileRef.current?.click()} className="font-sans text-xs underline">
+                Choose another photo
+              </button>
+            </div>
+          )}
+        </div>
       )}
     </section>
   );

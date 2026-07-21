@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { differenceInDays, addDays, format } from "date-fns";
 import { ArrowRight, MessageCircle, Shield, Check, Star, Heart, Clock, Activity, BookOpen, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import journalFlatlay from "@/assets/journal-flatlay.jpg";
 import { BotanicalAccent, Sprig, SprigDivider, StageGlow } from "@/components/shared/StageBotanical";
+import { navigateToAsk } from "@/lib/askNavigation";
 
 // ─── Types & data ─────────────────────────────────────────────────────────────
 
@@ -269,6 +270,7 @@ interface IVFTimelineResultProps {
 }
 
 const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineResultProps) => {
+  const navigate = useNavigate();
   const today = new Date();
   const dpt = differenceInDays(today, transferDate);
   const clampedDpt = Math.max(0, dpt);
@@ -1045,18 +1047,19 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                     style={{ "--tw-ring-color": "hsl(var(--stage-ivf-accent) / 0.3)" } as React.CSSProperties}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" && aiQuestion.trim()) {
-                        window.location.href = `/ask?q=${encodeURIComponent(aiQuestion)}&journey=ivf&ctx=${encodeURIComponent("IVF · Timeline")}`;
+                        navigateToAsk(navigate, aiQuestion, { journey: "ivf", context: "IVF · Timeline", stage: "ivf" });
                       }
                     }}
                   />
                 </div>
-                <Link
-                  to={`/ask?q=${encodeURIComponent(aiQuestion || "What should I know at this stage of IVF?")}&journey=ivf&ctx=${encodeURIComponent("IVF · Timeline")}`}
+                <button
+                  type="button"
+                  onClick={() => navigateToAsk(navigate, aiQuestion || "What should I know at this stage of IVF?", { journey: "ivf", context: "IVF · Timeline", stage: "ivf" })}
                   className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
                 >
                   <MessageCircle size={14} />
                   Ask now
-                </Link>
+                </button>
               </Fade>
             </div>
 

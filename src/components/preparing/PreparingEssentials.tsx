@@ -7,7 +7,7 @@ const essentials = [
 
 const PreparingEssentials = () => {
   return (
-    <section className="py-20 md:py-32" style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.4)" }}>
+    <section id="preparing-essentials" className="py-20 md:py-32 scroll-mt-24" style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.4)" }}>
       <div className="container mx-auto px-6 md:px-10 max-w-4xl">
         {/* Section header — full width, editorial */}
         <div className="mb-12 max-w-2xl">

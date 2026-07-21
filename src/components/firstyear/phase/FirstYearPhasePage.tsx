@@ -3,6 +3,7 @@ import { ArrowUpRight, ArrowLeft } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import type { PhaseConfig } from "@/data/firstYearPhaseData";
+import AskLink from "@/components/shared/AskLink";
 
 // Resolve hero asset via Vite's import.meta.glob (eager URL imports).
 const heroAssets = import.meta.glob("@/assets/firstyear-stage-*.jpg", {
@@ -248,15 +249,17 @@ const CommonQuestions = ({ items }: { items: PhaseConfig["commonQuestions"] }) =
 const FeaturedGuidance = ({ items }: { items: PhaseConfig["featuredGuidance"] }) => (
   <section className="bg-parchment py-12 md:py-16">
     <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl">
-      <SectionLabel>Featured guidance</SectionLabel>
+      <SectionLabel>Questions to explore</SectionLabel>
       <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-8">
-        A few places to start.
+        Ask for guidance shaped to this phase.
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
         {items.map((g) => (
-          <Link
+          <AskLink
             key={g.title}
-            to={`/ask?q=${encodeURIComponent(g.title)}&stage=first-year`}
+            question={g.title}
+            context="First year phase guidance"
+            stage="first-year"
             className="group relative overflow-hidden rounded-[22px] border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_58px_-32px_rgba(20,30,60,0.28)]"
             style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.18)" }}
           >
@@ -285,10 +288,10 @@ const FeaturedGuidance = ({ items }: { items: PhaseConfig["featuredGuidance"] })
                 className="inline-flex items-center gap-1 font-sans text-[11px] font-light transition-colors"
                 style={{ color: "hsl(var(--stage-firstyear-deep))" }}
               >
-                Read guidance <ArrowUpRight size={12} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                Ask about this <ArrowUpRight size={12} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </span>
             </div>
-          </Link>
+          </AskLink>
         ))}
       </div>
     </div>

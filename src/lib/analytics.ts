@@ -19,7 +19,6 @@
  * change — replace the body of `forward()`.
  */
 
-import posthog from "posthog-js";
 import {
   hasAnalyticsConsent,
   subscribeAnalyticsConsent,
@@ -44,7 +43,10 @@ const isDev = Boolean(env.DEV);
 const POSTHOG_KEY = env.VITE_POSTHOG_KEY;
 const POSTHOG_HOST = env.VITE_POSTHOG_HOST ?? "https://us.i.posthog.com";
 
+type PostHogClient = typeof import("posthog-js")["default"];
 let posthogReady = false;
+let posthogInstance: PostHogClient | null = null;
+let posthogImport: Promise<PostHogClient> | null = null;
 
 /**
  * Lazily initialise PostHog. Called only after consent is accepted, so no
@@ -52,15 +54,18 @@ let posthogReady = false;
  * session replay are explicitly disabled — this sink only receives the
  * curated events defined in analyticsEvents.ts.
  */
-const ensurePosthog = (): typeof posthog | null => {
+const ensurePosthog = async (): Promise<PostHogClient | null> => {
   if (typeof window === "undefined") return null;
   if (!POSTHOG_KEY) {
     if (isDev) {
-      // eslint-disable-next-line no-console
       console.debug("[analytics] VITE_POSTHOG_KEY missing — sink disabled");
     }
     return null;
   }
+  if (!posthogImport) {
+    posthogImport = import("posthog-js").then((module) => module.default);
+  }
+  const posthog = await posthogImport;
   if (!posthogReady) {
     posthog.init(POSTHOG_KEY, {
       api_host: POSTHOG_HOST,
@@ -75,6 +80,7 @@ const ensurePosthog = (): typeof posthog | null => {
         if (isDev) ph.debug(false);
       },
     });
+    posthogInstance = posthog;
     posthogReady = true;
   }
   return posthog;
@@ -82,12 +88,8 @@ const ensurePosthog = (): typeof posthog | null => {
 
 const forward = (kind: "event" | "pageview" | "identify", payload: unknown): void => {
   if (isDev) {
-    // eslint-disable-next-line no-console
     console.debug(`[analytics:${kind}]`, payload);
   }
-  const ph = ensurePosthog();
-  if (!ph) return;
-
   const p = payload as {
     name?: string;
     path?: string | null;
@@ -97,43 +99,46 @@ const forward = (kind: "event" | "pageview" | "identify", payload: unknown): voi
     timestamp?: string;
   };
 
-  if (kind === "event" && p.name) {
-    ph.capture(p.name, {
-      ...(p.properties ?? {}),
-      path: p.path ?? undefined,
-      anonymous_id: p.anonymous_id ?? undefined,
-    });
-    return;
-  }
-  if (kind === "pageview") {
-    ph.capture("$pageview", {
-      path: p.path ?? undefined,
-      anonymous_id: p.anonymous_id ?? undefined,
-    });
-    return;
-  }
-  if (kind === "identify") {
-    if (p.user_id) {
-      ph.identify(p.user_id, {
+  void ensurePosthog().then((ph) => {
+    if (!ph) return;
+    if (kind === "event" && p.name) {
+      ph.capture(p.name, {
+        ...(p.properties ?? {}),
+        path: p.path ?? undefined,
         anonymous_id: p.anonymous_id ?? undefined,
       });
-    } else {
-      ph.reset();
+      return;
     }
-  }
+    if (kind === "pageview") {
+      ph.capture("$pageview", {
+        path: p.path ?? undefined,
+        anonymous_id: p.anonymous_id ?? undefined,
+      });
+      return;
+    }
+    if (kind === "identify") {
+      if (p.user_id) {
+        ph.identify(p.user_id, { anonymous_id: p.anonymous_id ?? undefined });
+      } else {
+        ph.reset();
+      }
+    }
+  }).catch((error) => {
+    if (isDev) console.debug("[analytics] sink unavailable", error);
+  });
 };
 
 const dropped = (kind: string, payload: unknown): void => {
   if (isDev) {
-    // eslint-disable-next-line no-console
     console.debug(`[analytics:dropped:${kind}] consent not granted`, payload);
   }
 };
 
 const buildEnvelope = (props?: Record<string, unknown>) => {
   const identity = getIdentityContext();
-  const path =
-    typeof window !== "undefined" ? window.location.pathname + window.location.search : null;
+  // Search parameters may contain free-text health questions, dates or auth
+  // return targets. Analytics records route shape only.
+  const path = typeof window !== "undefined" ? window.location.pathname : null;
   return {
     ...identity,
     path,
@@ -175,17 +180,17 @@ if (typeof window !== "undefined") {
   subscribeAnalyticsConsent((state) => {
     if (state !== "accepted") {
       resetAnalyticsContext();
-      if (posthogReady) {
+      if (posthogReady && posthogInstance) {
         try {
-          posthog.reset();
-          posthog.opt_out_capturing();
+          posthogInstance.reset();
+          posthogInstance.opt_out_capturing();
         } catch {
           // ignore — PostHog may not be fully initialised
         }
       }
-    } else if (posthogReady) {
+    } else if (posthogReady && posthogInstance) {
       try {
-        posthog.opt_in_capturing();
+        posthogInstance.opt_in_capturing();
       } catch {
         // ignore
       }

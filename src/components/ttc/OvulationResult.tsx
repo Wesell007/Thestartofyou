@@ -23,6 +23,7 @@ import { stashPendingTTCJourney } from "@/lib/savedTTCJourney";
 import { buildAuthUrl } from "@/lib/authIntent";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
+import AskLink from "@/components/shared/AskLink";
 
 interface OvulationResultProps {
   lmp: Date;
@@ -70,7 +71,8 @@ const OvulationResult = ({
     : "/ovulation-calculator";
   const [saved, setSaved] = useState(false);
   const [adjustOpen, setAdjustOpen] = useState(false);
-  const [adjustLmp, setAdjustLmp] = useState<string>(lmp.toISOString().slice(0, 10));
+  const lmpIso = format(lmp, "yyyy-MM-dd");
+  const [adjustLmp, setAdjustLmp] = useState<string>(lmpIso);
   const [adjustCycle, setAdjustCycle] = useState<number>(cycleLength);
   const [reminders, setReminders] = useState<Record<ReminderKey, boolean>>({
     fertile: true,
@@ -91,7 +93,7 @@ const OvulationResult = ({
       if (!raw) return;
       const parsed: SavedCycle = JSON.parse(raw);
       if (
-        parsed.lmp === lmp.toISOString().slice(0, 10) &&
+        parsed.lmp === lmpIso &&
         parsed.cycleLength === cycleLength
       ) {
         setSaved(true);
@@ -100,11 +102,11 @@ const OvulationResult = ({
     } catch {
       /* noop */
     }
-  }, [lmp, cycleLength]);
+  }, [lmpIso, cycleLength]);
 
   const persist = (next: Partial<SavedCycle>) => {
     const payload: SavedCycle = {
-      lmp: lmp.toISOString().slice(0, 10),
+      lmp: lmpIso,
       cycleLength,
       savedAt: new Date().toISOString(),
       reminders,
@@ -131,9 +133,6 @@ const OvulationResult = ({
     setReminders(next);
     if (saved) persist({ reminders: next });
   };
-
-  const askLink = (q: string, topic: string) =>
-    `/ask?stage=ttc&topic=${topic}&q=${encodeURIComponent(q)}`;
 
   const askPrompts = [
     { q: "Am I timing this cycle right?", topic: "fertile-window" },
@@ -571,7 +570,7 @@ const OvulationResult = ({
               </p>
               <div className="flex flex-col gap-2">
                 <Link
-                  to={`/due-date-calculator?lmp=${lmp.toISOString().slice(0, 10)}&from=ttc`}
+                  to={`/due-date-calculator?lmp=${lmpIso}&from=ttc`}
                   className="inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium tracking-wide"
                   style={{ color: `hsl(var(--lavender))` }}
                 >
@@ -744,9 +743,12 @@ const OvulationResult = ({
 
           <div className="space-y-3 mb-6">
             {askPrompts.map(({ q, topic }) => (
-              <Link
+              <AskLink
                 key={q}
-                to={askLink(q, topic)}
+                question={q}
+                context="Trying to conceive cycle guidance"
+                stage="ttc"
+                topic={topic}
                 className="group flex items-center gap-3 w-full text-left py-4 px-5 rounded-xl bg-card border transition-all hover:-translate-y-0.5"
                 style={{ borderColor: `hsl(var(${STAGE_ACCENT}) / 0.18)` }}
               >
@@ -758,7 +760,7 @@ const OvulationResult = ({
                 <span className="font-sans text-[14px] text-foreground group-hover:text-foreground transition-colors leading-relaxed">
                   {q}
                 </span>
-              </Link>
+              </AskLink>
             ))}
           </div>
 

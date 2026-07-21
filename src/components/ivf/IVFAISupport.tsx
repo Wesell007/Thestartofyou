@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, ArrowRight } from "lucide-react";
+import { navigateToAsk } from "@/lib/askNavigation";
 
 const suggestions = [
   "Is this normal at this stage?",
@@ -16,9 +17,7 @@ const IVFAISupport = () => {
   const handleAsk = (q: string) => {
     const question = q || query;
     if (question.trim()) {
-      navigate(
-        `/ask?q=${encodeURIComponent(question.trim())}&journey=ivf&ctx=${encodeURIComponent("IVF")}&stage=ivf`
-      );
+      navigateToAsk(navigate, question, { journey: "ivf", context: "IVF", stage: "ivf" });
     }
   };
 

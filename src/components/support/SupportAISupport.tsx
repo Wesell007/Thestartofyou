@@ -1,5 +1,6 @@
 import { MessageCircle } from "lucide-react";
 import AISearchBar from "@/components/shared/AISearchBar";
+import AskLink from "@/components/shared/AskLink";
 
 const SupportAISupport = () => {
   return (
@@ -24,10 +25,16 @@ const SupportAISupport = () => {
 
           {/* Prompt chips */}
           <div className="flex flex-wrap gap-2 mb-8 justify-center">
-            {["Is this normal?", "Should I be worried?", "What should I do next?", "I don't feel like myself"].map((chip, i) => (
-              <span key={i} className="font-sans text-xs font-light bg-[hsl(var(--stage-support)/0.35)] text-foreground/70 rounded-full px-4 py-2 border border-[hsl(var(--stage-support-accent)/0.1)] hover:border-[hsl(var(--stage-support-accent)/0.3)] transition-colors cursor-pointer">
+            {["Is this normal?", "Should I be worried?", "What should I do next?", "I don't feel like myself"].map((chip) => (
+              <AskLink
+                key={chip}
+                question={chip}
+                context="Support"
+                stage="support"
+                className="font-sans text-xs font-light bg-[hsl(var(--stage-support)/0.35)] text-foreground/70 rounded-full px-4 py-2 border border-[hsl(var(--stage-support-accent)/0.1)] hover:border-[hsl(var(--stage-support-accent)/0.3)] transition-colors cursor-pointer"
+              >
                 {chip}
-              </span>
+              </AskLink>
             ))}
           </div>
 
@@ -38,7 +45,7 @@ const SupportAISupport = () => {
           />
 
           <p className="font-sans text-[10px] font-light text-muted-foreground/50 text-center mt-5">
-            ✔ Guidance reviewed by Jenny Joines
+            AI-generated guidance, not individually medically reviewed
           </p>
         </div>
       </div>

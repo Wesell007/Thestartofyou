@@ -111,12 +111,10 @@ const FirstTriRelatedReads = () => {
                 </span>
                 <h3
                   className="font-serif text-[1.1rem] text-foreground leading-snug mb-2.5 group-hover:text-sage transition-colors"
-                  // eslint-disable-next-line react/no-danger
                   dangerouslySetInnerHTML={{ __html: a.title }}
                 />
                 <p
                   className="font-sans text-[14px] text-foreground/72 leading-relaxed flex-1"
-                  // eslint-disable-next-line react/no-danger
                   dangerouslySetInnerHTML={{ __html: a.blurb }}
                 />
               </div>

@@ -1,4 +1,5 @@
 import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const PostpartumHero = () => {
   return (
@@ -56,14 +57,14 @@ const PostpartumHero = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row items-start gap-3.5 animate-fade-up [animation-delay:0.2s]">
-              <button className="flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300">
+              <Link to="/first-year#recovery-topics" className="flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300">
                 <ArrowUpRight size={15} />
                 Start your postpartum journey
-              </button>
-              <button className="flex items-center gap-2.5 border border-foreground/12 text-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-light hover:bg-parchment-dark transition-all duration-300">
+              </Link>
+              <a href="#postpartum-stages" className="flex items-center gap-2.5 border border-foreground/12 text-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-light hover:bg-parchment-dark transition-all duration-300">
                 <ArrowDown size={15} />
                 Jump to your week
-              </button>
+              </a>
             </div>
           </div>
 

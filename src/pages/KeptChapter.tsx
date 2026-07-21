@@ -11,6 +11,8 @@ import { EVENTS } from "@/lib/analyticsEvents";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import MyWeekBabyImage from "@/components/myweek/MyWeekBabyImage";
+import PageLoadState from "@/components/shared/PageLoadState";
+import NotFound from "@/pages/NotFound";
 
 /**
  * /my-week/:week — KEPT CHAPTER (preserved page).
@@ -54,6 +56,8 @@ const KeptChapter = () => {
   const navigate = useNavigate();
   const week = Number(weekParam);
   const [data, setData] = useState<Loaded | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [attempt, setAttempt] = useState(0);
   const lastFiredWeekRef = useRef<number | null>(null);
 
   const validWeek = Number.isFinite(week) && week >= 1 && week <= MAX_PREGNANCY_WEEK;
@@ -66,22 +70,22 @@ const KeptChapter = () => {
   }, [data, week, validWeek]);
 
   useEffect(() => {
-    if (!validWeek) {
-      navigate("/my-journey", { replace: true });
-      return;
-    }
+    if (!validWeek) return;
     let cancelled = false;
     (async () => {
-      const { data: sess } = await supabase.auth.getSession();
+      setLoadError(null);
+      try {
+      const { data: sess, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) throw sessionError;
       const user = sess.session?.user;
       if (!user) {
         navigate("/auth", { replace: true });
         return;
       }
-      const [{ data: profile }, journey, { data: refl }, { data: photo }, { data: allRefls }, { data: allPhotos }] =
+      const [{ data: profile, error: profileError }, journey, { data: refl, error: reflectionError }, { data: photo, error: photoError }, { data: allRefls, error: allReflectionError }, { data: allPhotos, error: allPhotoError }] =
         await Promise.all([
           supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
-          getActivePregnancyJourney(user.id),
+          getActivePregnancyJourney(user.id, { throwOnError: true }),
           supabase
             .from("reflections")
             .select("week, content, updated_at")
@@ -97,6 +101,9 @@ const KeptChapter = () => {
           supabase.from("reflections").select("week, content").eq("user_id", user.id),
           supabase.from("week_photos").select("week").eq("user_id", user.id),
         ]);
+      if (profileError || reflectionError || photoError || allReflectionError || allPhotoError) {
+        throw profileError ?? reflectionError ?? photoError ?? allReflectionError ?? allPhotoError;
+      }
       if (cancelled) return;
       if (!journey) {
         navigate("/due-date-calculator", { replace: true });
@@ -117,9 +124,10 @@ const KeptChapter = () => {
 
       let photoUrl: string | null = null;
       if (photo?.storage_path) {
-        const { data: urlData } = await supabase.storage
+        const { data: urlData, error: urlError } = await supabase.storage
           .from("weekly-photos")
           .createSignedUrl(photo.storage_path, 60 * 60);
+        if (urlError) throw urlError;
         photoUrl = urlData?.signedUrl ?? null;
       }
 
@@ -136,6 +144,11 @@ const KeptChapter = () => {
       });
       const keptWeeks = Array.from(kept).sort((a, b) => a - b);
 
+      if (!kept.has(week)) {
+        navigate("/my-journey", { replace: true });
+        return;
+      }
+
       const reflection: ReflectionLite | null =
         refl && refl.content && refl.content.trim().length > 0
           ? { week: refl.week, content: refl.content, updated_at: refl.updated_at }
@@ -147,17 +160,28 @@ const KeptChapter = () => {
         photoUrl,
         keptWeeks,
       });
+      } catch {
+        if (!cancelled) setLoadError("We couldn't open this kept chapter just now. Your memories are still saved.");
+      }
     })();
     return () => {
       cancelled = true;
     };
-  }, [week, validWeek, navigate]);
+  }, [week, validWeek, navigate, attempt]);
+
+  useEffect(() => {
+    if (!data?.photoUrl) return;
+    const timer = window.setTimeout(() => setAttempt((n) => n + 1), 50 * 60 * 1000);
+    return () => window.clearTimeout(timer);
+  }, [data?.photoUrl]);
 
   const content = useMemo(() => (validWeek ? getMyWeekContent(week) : null), [week, validWeek]);
   const identity = useMemo(() => (validWeek ? getWeekIdentity(week) : null), [week, validWeek]);
 
+  if (!validWeek) return <NotFound />;
+  if (loadError) return <PageLoadState error={loadError} onRetry={() => setAttempt((n) => n + 1)} />;
   if (!data || !content || !identity) {
-    return <div className="min-h-screen bg-parchment" />;
+    return <PageLoadState />;
   }
 
   const { reflection, photoUrl, keptWeeks } = data;

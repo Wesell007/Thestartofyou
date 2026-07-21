@@ -89,7 +89,8 @@ const IVFStages = () => {
                     loading="lazy"
                     width={640}
                     height={512}
-                    className="w-full h-full object-cover group-hover:scale-[1.045] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                    className="w-full h-full object-cover group-hover:scale-[1.045] transition-transform duration-700"
+                    style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
                   />
                   <div
                     className="pointer-events-none absolute inset-x-0 bottom-0 h-24"

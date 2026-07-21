@@ -3,5 +3,11 @@ project_id = "wogepxfipdipogyogced"
 [functions.ai-search]
 verify_jwt = false
 
+[functions.ai-reflect]
+verify_jwt = true
+
 [functions.process-email-queue]
+verify_jwt = true
+
+[functions.delete-account]
 verify_jwt = true

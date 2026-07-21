@@ -1,4 +1,4 @@
-import { PenLine } from "lucide-react";
+import PublicReflectionEditor from "@/components/shared/PublicReflectionEditor";
 
 const prompts = [
   "What has felt most present this cycle?",
@@ -59,27 +59,10 @@ const TTCReflection = () => {
                 style={{ backgroundColor: 'hsl(var(--stage-ttc) / 0.15)' }}
               />
 
-              <textarea
-                rows={5}
-                placeholder="Write your thoughts here…"
-                className="w-full bg-card border border-border/40 rounded-xl px-5 py-4 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/40 resize-none focus:outline-none focus:ring-1 focus:ring-sage/30 focus:border-sage/40 transition-all leading-relaxed"
+              <PublicReflectionEditor
+                storageKey="tsoy:ttc:legacy-reflection-draft"
+                suggestions={prompts}
               />
-
-              <div className="mt-4 flex items-center justify-between">
-                <p className="font-sans text-[10px] font-light text-muted-foreground/45">
-                  Private. Not shared.
-                </p>
-                <button
-                  className="flex items-center gap-2 rounded-pill px-6 py-3 font-sans text-sm font-light transition-all"
-                  style={{
-                    backgroundColor: 'hsl(var(--stage-ttc) / 0.3)',
-                    color: 'hsl(var(--foreground))',
-                  }}
-                >
-                  <PenLine size={13} />
-                  Capture this
-                </button>
-              </div>
             </div>
           </div>
         </div>

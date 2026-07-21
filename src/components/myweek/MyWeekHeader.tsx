@@ -1,8 +1,9 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { User, LogOut } from "lucide-react";
+import { User, LogOut, Settings } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import logoSrc from "@/assets/logo-dark.png";
+import { toast } from "@/hooks/use-toast";
 
 const MyWeekHeader = () => {
   const location = useLocation();
@@ -30,7 +31,11 @@ const MyWeekHeader = () => {
   }, []);
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast({ title: "Could not sign out", description: "Please try again.", variant: "destructive" });
+      return;
+    }
     navigate("/", { replace: true });
   };
 
@@ -63,6 +68,14 @@ const MyWeekHeader = () => {
             </button>
             {open && (
               <div className="absolute right-0 mt-2 w-44 bg-card border border-border/60 rounded-xl shadow-elevated py-1.5 overflow-hidden">
+                <Link
+                  to="/account"
+                  onClick={() => setOpen(false)}
+                  className="w-full flex items-center gap-2 px-4 py-2.5 font-sans text-[13px] font-light text-foreground/75 hover:text-foreground hover:bg-muted/40 transition-colors"
+                >
+                  <Settings size={13} strokeWidth={1.5} />
+                  Account settings
+                </Link>
                 <button
                   onClick={handleSignOut}
                   className="w-full flex items-center gap-2 px-4 py-2.5 font-sans text-[13px] font-light text-foreground/75 hover:text-foreground hover:bg-muted/40 transition-colors text-left"

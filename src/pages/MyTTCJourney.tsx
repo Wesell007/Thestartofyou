@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import {
   getActiveTTCJourney,
+  deleteTTCJourney,
   type ActiveTTCJourney,
 } from "@/lib/savedTTCJourney";
 import {
@@ -15,7 +16,7 @@ import {
 } from "@/lib/ttcDerived";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
-import { getRecentTTCLogs, type TTCLog } from "@/lib/ttcLogs";
+import { getAllTTCLogsForJourney, type TTCLog } from "@/lib/ttcLogs";
 import { computeTTCInsights } from "@/lib/ttcInsights";
 import TTCJourneySummary from "@/components/ttc/journey/TTCJourneySummary";
 import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
@@ -26,8 +27,12 @@ import TTCLogEntryPanel from "@/components/ttc/journey/TTCLogEntryPanel";
 import TTCLogList from "@/components/ttc/journey/TTCLogList";
 import TTCJourneyInsights from "@/components/ttc/journey/TTCJourneyInsights";
 import TTCPregnancyHandover from "@/components/ttc/journey/TTCPregnancyHandover";
+import TTCJourneyHeader from "@/components/ttc/journey/TTCJourneyHeader";
+import PageLoadState from "@/components/shared/PageLoadState";
+import { parseDateOnly } from "@/lib/dateOnly";
+import { toast } from "@/hooks/use-toast";
 
-type Status = "loading" | "empty" | "pregnancy_active" | "ready";
+type Status = "loading" | "error" | "empty" | "pregnancy_active" | "ready";
 
 
 const todayIso = () => format(new Date(), "yyyy-MM-dd");
@@ -40,23 +45,30 @@ const MyTTCJourney = () => {
   const [panelOpen, setPanelOpen] = useState(false);
   const [panelDate, setPanelDate] = useState<string>(todayIso());
   const [editing, setEditing] = useState<TTCLog | null>(null);
+  const [loadAttempt, setLoadAttempt] = useState(0);
+  const [logError, setLogError] = useState<string | null>(null);
+  const [deletingJourney, setDeletingJourney] = useState(false);
   const viewedRef = useRef(false);
 
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const { data } = await supabase.auth.getSession();
+      setStatus("loading");
+      try {
+      const { data, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) throw sessionError;
       const user = data.session?.user;
       if (!user) return; // ProtectedRoute handles redirect.
 
       // Check pointer first to detect an active pregnancy journey we should
       // not overwrite or replace.
-      const { data: pointer } = await supabase
+      const { data: pointer, error: pointerError } = await supabase
         .from("journeys")
         .select("lifecycle")
         .eq("user_id", user.id)
         .maybeSingle();
+      if (pointerError) throw pointerError;
 
       if (cancelled) return;
 
@@ -65,7 +77,7 @@ const MyTTCJourney = () => {
         return;
       }
 
-      const row = await getActiveTTCJourney(user.id);
+      const row = await getActiveTTCJourney(user.id, { throwOnError: true });
       if (cancelled) return;
       if (!row) {
         setStatus("empty");
@@ -73,17 +85,20 @@ const MyTTCJourney = () => {
       }
       setJourney(row);
       setUserId(user.id);
-      setStatus("ready");
-      try {
-        const recent = await getRecentTTCLogs(user.id, row.id, 30);
-        if (!cancelled) setLogs(recent);
-      } catch { /* non-fatal */ }
+      const history = await getAllTTCLogsForJourney(user.id, row.id);
+      if (!cancelled) {
+        setLogs(history);
+        setStatus("ready");
+      }
+      } catch {
+        if (!cancelled) setStatus("error");
+      }
     })();
 
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [loadAttempt]);
 
   useEffect(() => {
     if (viewedRef.current || status !== "ready") return;
@@ -96,7 +111,8 @@ const MyTTCJourney = () => {
       return (journey?.stage as TTCStage | null) ?? null;
     }
     try {
-      const lmp = new Date(journey.last_period_date);
+      const lmp = parseDateOnly(journey.last_period_date);
+      if (!lmp) return (journey.stage as TTCStage | null) ?? null;
       const derived = deriveTTCDates(lmp, journey.cycle_length_days);
       return computeTTCStage(new Date(), derived);
     } catch {
@@ -106,15 +122,19 @@ const MyTTCJourney = () => {
 
   const cycleDay = useMemo(() => {
     if (!journey?.last_period_date) return null;
-    return cycleDayFrom(new Date(journey.last_period_date), new Date());
+    const lmp = parseDateOnly(journey.last_period_date);
+    return lmp ? cycleDayFrom(lmp, new Date()) : null;
   }, [journey]);
 
   const refetchLogs = useCallback(async () => {
     if (!userId || !journey) return;
+    setLogError(null);
     try {
-      const recent = await getRecentTTCLogs(userId, journey.id, 30);
-      setLogs(recent);
-    } catch { /* non-fatal */ }
+      const history = await getAllTTCLogsForJourney(userId, journey.id);
+      setLogs(history);
+    } catch {
+      setLogError("Your change was saved, but the log list could not be refreshed. Try again to update the view.");
+    }
   }, [userId, journey]);
 
   const openPanelForDate = (dateIso: string) => {
@@ -143,12 +163,17 @@ const MyTTCJourney = () => {
 
 
   if (status === "loading") {
-    return <div className="min-h-screen bg-parchment" />;
+    return <PageLoadState message="Loading your TTC journey…" />;
+  }
+
+  if (status === "error") {
+    return <PageLoadState error="We couldn't load your TTC journey. Your saved data has not been changed." onRetry={() => setLoadAttempt((n) => n + 1)} />;
   }
 
   if (status === "pregnancy_active") {
     return (
       <div className="min-h-screen bg-parchment">
+        <TTCJourneyHeader />
         <div className="container mx-auto px-5 sm:px-6 max-w-xl py-16 md:py-24 text-center">
           <p
             className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
@@ -178,6 +203,7 @@ const MyTTCJourney = () => {
   if (status === "empty") {
     return (
       <div className="min-h-screen bg-parchment">
+        <TTCJourneyHeader />
         <div className="container mx-auto px-5 sm:px-6 max-w-xl py-16 md:py-24 text-center">
           <p
             className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
@@ -204,10 +230,28 @@ const MyTTCJourney = () => {
     );
   }
 
-  if (!journey) return <div className="min-h-screen bg-parchment" />;
+  if (!journey) return <PageLoadState error="We couldn't prepare your TTC journey." onRetry={() => setLoadAttempt((n) => n + 1)} />;
+
+  const removeJourney = async () => {
+    if (!userId || deletingJourney) return;
+    if (!window.confirm("Remove your TTC journey and all of its logs? This cannot be undone.")) return;
+    setDeletingJourney(true);
+    try {
+      await deleteTTCJourney(userId);
+      setJourney(null);
+      setLogs([]);
+      setStatus("empty");
+      toast({ title: "TTC journey removed" });
+    } catch {
+      toast({ title: "Could not remove journey", description: "Nothing was removed. Please try again.", variant: "destructive" });
+    } finally {
+      setDeletingJourney(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
+      <TTCJourneyHeader />
       <main className="relative mx-auto w-full max-w-[880px] px-5 sm:px-8 md:px-10 pt-16 sm:pt-20 lg:pt-24 pb-20 sm:pb-24">
         {/* Header */}
         <header className="mb-10 sm:mb-12">
@@ -258,6 +302,12 @@ const MyTTCJourney = () => {
             onSelectDate={openPanelForDate}
             onAddForToday={() => openPanelForDate(todayIso())}
           />
+          {logError && (
+            <div role="alert" className="flex items-center gap-3 text-sm text-destructive">
+              <span>{logError}</span>
+              <button type="button" onClick={refetchLogs} className="underline">Refresh logs</button>
+            </div>
+          )}
           <div>
             <p
               className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
@@ -360,6 +410,12 @@ const MyTTCJourney = () => {
 
         {/* Pregnancy handover */}
         <TTCPregnancyHandover ref={handoverRef} journey={journey} />
+
+        <section className="mt-10 border-t border-border/40 pt-6">
+          <button type="button" onClick={removeJourney} disabled={deletingJourney} className="font-sans text-sm text-destructive underline disabled:opacity-50">
+            {deletingJourney ? "Removing journey…" : "Remove my TTC journey"}
+          </button>
+        </section>
 
       </main>
 

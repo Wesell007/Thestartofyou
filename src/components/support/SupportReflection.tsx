@@ -1,4 +1,4 @@
-import { PenLine } from "lucide-react";
+import PublicReflectionEditor from "@/components/shared/PublicReflectionEditor";
 
 const prompts = ["What feels unclear", "What worries me most", "What I need right now", "What would help"];
 
@@ -24,15 +24,11 @@ const SupportReflection = () => {
               </div>
             </div>
             <div className="md:col-span-3 flex flex-col">
-              <textarea
-                rows={4}
+              <PublicReflectionEditor
+                storageKey="tsoy:support:reflection-draft"
+                suggestions={prompts}
                 placeholder="Write your thoughts here… this is just for you."
-                className="w-full bg-[hsl(var(--stage-support)/0.08)] border border-[hsl(var(--stage-support-accent)/0.12)] rounded-lg px-5 py-4 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/40 resize-none focus:outline-none focus:ring-1 focus:ring-[hsl(var(--stage-support-accent)/0.4)] focus:border-[hsl(var(--stage-support-accent)/0.4)] transition-all leading-relaxed flex-1"
               />
-              <button className="mt-3 flex items-center gap-2 mx-auto md:mx-0 border border-foreground/20 text-foreground rounded-pill px-5 py-2.5 font-sans text-xs font-light hover:bg-parchment transition-all">
-                <PenLine size={13} />
-                Capture this thought
-              </button>
             </div>
           </div>
         </div>

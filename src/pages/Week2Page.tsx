@@ -8,6 +8,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PregnancyWeekSeo from "@/components/seo/PregnancyWeekSeo";
+import PublicWeekReflectionAsk from "@/components/pregnancy/PublicWeekReflectionAsk";
 import ovulationImg from "@/assets/week2-ovulation.jpg";
 import pearlImg from "@/assets/week2-pearl.jpg";
 import biologyImg from "@/assets/week2-biology-detail.jpg";
@@ -515,46 +516,11 @@ const reflectionPrompts = ["What I'm hoping for this cycle", "What helped me fee
 const askChips = ["When in my cycle is the fertile window?", "How do I track ovulation?", "When can I test?", "Is mid-cycle pain normal?", "Does timing really matter?"];
 
 const ReflectionAsk = () => (
-  <section className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pb-16 md:pb-24">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-sage/40 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-sage-bg flex items-center justify-center shrink-0"><Leaf size={14} className="text-sage" /></span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">A moment for reflection</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">What does this week feel like for you?</h3>
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {reflectionPrompts.map((p) => (
-            <span key={p} className="font-sans text-[11.5px] font-medium bg-sage-bg/70 text-foreground/80 rounded-full px-3 py-1.5 border border-sage/20">{p}</span>
-          ))}
-        </div>
-        <textarea rows={4} placeholder="Write your thoughts here… this is just for you." className="w-full bg-parchment/80 border border-border/40 rounded-xl px-4 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 resize-none focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all leading-relaxed" />
-        <Link to="/auth" className="inline-flex items-center gap-2 mt-4 bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-medium hover:bg-terracotta-hover transition-colors">
-          Save reflection to your journal <ArrowRight size={12} />
-        </Link>
-      </div>
-
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-lavender/50 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-lavender-bg flex items-center justify-center shrink-0"><MessageCircle size={14} className="text-lavender-foreground" /></span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">Ask about week 2</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">A question on your mind?</h3>
-          </div>
-        </div>
-        <p className="font-sans text-[13px] text-foreground/70 leading-relaxed mb-4">Get a calm, evidence-led answer tailored to where you are right now.</p>
-        <input type="text" placeholder="e.g. How do I know if I've ovulated?" className="w-full bg-parchment/80 border border-border/40 rounded-full px-5 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all" />
-        <p className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-foreground/55 mt-5 mb-2.5">Popular at this stage</p>
-        <div className="flex flex-wrap gap-2">
-          {askChips.map((c) => (
-            <Link key={c} to="/ask" className="font-sans text-[12px] font-medium text-foreground/80 bg-parchment-dark/60 border border-border/40 hover:border-sage/50 hover:text-foreground px-3.5 py-1.5 rounded-full transition-colors">{c}</Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
+  <PublicWeekReflectionAsk
+    week={2}
+    reflectionPrompts={reflectionPrompts}
+    askChips={askChips}
+  />
 );
 
 const Journal = () => (
@@ -596,22 +562,22 @@ const Journal = () => (
 );
 
 const related = [
-  { slug: "ovulation-and-the-fertile-window", img: implantationImg, tag: "Cycle",
+  { slug: "fertile-window", img: implantationImg, tag: "Cycle",
     title: "Ovulation and the fertile window, explained",
     desc: "When ovulation actually happens, the body's signals, and why the 5–6 day window matters more than the exact day." },
-  { slug: "tracking-your-cycle", img: testsScansImg, tag: "Tracking",
+  { slug: "basal-body-temperature-tracking", img: testsScansImg, tag: "Tracking",
     title: "BBT, mucus and LH strips: how to track without obsessing",
     desc: "A calm guide to the tracking methods that actually work — and how to stop them taking over your month." },
-  { slug: "the-two-week-wait-emotionally", img: emotionalImg, tag: "Emotions",
+  { slug: "two-week-wait", img: emotionalImg, tag: "Emotions",
     title: "The two-week wait, emotionally",
     desc: "What the days between ovulation and a possible test really feel like, and how to be kinder to yourself through them." },
-  { slug: "preparing-your-body-for-pregnancy", img: lifestyleImg, tag: "Pre-conception",
+  { slug: "what-to-do-before-trying-to-conceive", img: lifestyleImg, tag: "Pre-conception",
     title: "Quietly preparing your body to conceive",
     desc: "Folic acid, alcohol, sleep and weight — the small changes that genuinely matter before a positive test." },
   { slug: "early-pregnancy-symptoms-explained", img: earlySymptomsImg, tag: "Symptoms",
     title: "When pregnancy symptoms can actually start",
     desc: "Why anything you feel in week 2 is ovulation, not pregnancy — and what the very first true signs look like." },
-  { slug: "implantation-bleeding-vs-period", img: implantationBleedImg, tag: "Spotting",
+  { slug: "implantation-bleeding", img: implantationBleedImg, tag: "Spotting",
     title: "Implantation bleeding or period?",
     desc: "Looking ahead — how to tell the difference if light spotting shows up in a week or two." },
 ];

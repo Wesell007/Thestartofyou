@@ -38,7 +38,7 @@ const stages = [
 
 const PostpartumStages = () => {
   return (
-    <section className="bg-parchment py-16 md:py-24">
+    <section id="postpartum-stages" className="bg-parchment py-16 md:py-24 scroll-mt-24">
       <div className="container mx-auto px-6 md:px-10 max-w-5xl">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-14 mb-12">
           <div className="md:col-span-2">

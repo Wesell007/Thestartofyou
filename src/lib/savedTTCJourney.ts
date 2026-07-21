@@ -98,15 +98,10 @@ export const commitPendingTTCJourneyToDB = async (
   userId: string,
   values: TTCFormValues,
 ): Promise<CommitResult> => {
-  // Guard: never overwrite an active pregnancy journey.
-  const { data: pointer } = await supabase
-    .from("journeys")
-    .select("lifecycle")
-    .eq("user_id", userId)
-    .maybeSingle();
-
-  if (pointer && pointer.lifecycle === "pregnancy") {
-    return { ok: false, reason: "pregnancy_active" };
+  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+  if (sessionError) return { ok: false, reason: "error", message: sessionError.message };
+  if (sessionData.session?.user.id !== userId) {
+    return { ok: false, reason: "error", message: "Your session no longer matches this journey." };
   }
 
   const lmp = new Date(values.last_period_date);
@@ -114,34 +109,25 @@ export const commitPendingTTCJourneyToDB = async (
   const stage = computeTTCStage(new Date(), derived);
   const fmt = (d: Date) => format(d, "yyyy-MM-dd");
 
-  const { error: ttcErr } = await supabase.from("ttc_journeys").upsert(
-    {
-      user_id: userId,
-      stage,
-      last_period_date: values.last_period_date,
-      cycle_length_days: values.cycle_length_days,
-      period_length_days: values.period_length_days ?? null,
-      cycle_regularity: values.cycle_regularity,
-      actively_trying: values.actively_trying,
-      uses_ovulation_tests: values.uses_ovulation_tests,
-      tracks_symptoms: values.tracks_symptoms,
-      support_status: values.support_status,
-      ivf_consideration: values.ivf_consideration,
-      current_cycle_start: values.last_period_date,
-      likely_ovulation_date: fmt(derived.likely_ovulation_date),
-      fertile_window_start: fmt(derived.fertile_window_start),
-      fertile_window_end: fmt(derived.fertile_window_end),
-      expected_period_date: fmt(derived.expected_period_date),
-      possible_test_date: fmt(derived.possible_test_date),
-    },
-    { onConflict: "user_id" },
-  );
-  if (ttcErr) return { ok: false, reason: "error", message: ttcErr.message };
-
-  const { error: ptrErr } = await supabase
-    .from("journeys")
-    .upsert({ user_id: userId, lifecycle: "ttc" }, { onConflict: "user_id" });
-  if (ptrErr) return { ok: false, reason: "error", message: ptrErr.message };
+  const { data, error } = await supabase.rpc("save_ttc_journey", {
+    p_stage: stage,
+    p_last_period_date: values.last_period_date,
+    p_cycle_length_days: values.cycle_length_days,
+    p_period_length_days: values.period_length_days ?? null,
+    p_cycle_regularity: values.cycle_regularity,
+    p_actively_trying: values.actively_trying,
+    p_uses_ovulation_tests: values.uses_ovulation_tests,
+    p_tracks_symptoms: values.tracks_symptoms,
+    p_support_status: values.support_status,
+    p_ivf_consideration: values.ivf_consideration,
+    p_likely_ovulation_date: fmt(derived.likely_ovulation_date),
+    p_fertile_window_start: fmt(derived.fertile_window_start),
+    p_fertile_window_end: fmt(derived.fertile_window_end),
+    p_expected_period_date: fmt(derived.expected_period_date),
+    p_possible_test_date: fmt(derived.possible_test_date),
+  });
+  if (error) return { ok: false, reason: "error", message: error.message };
+  if (data === "pregnancy_active") return { ok: false, reason: "pregnancy_active" };
 
   clearPendingTTCJourney();
   return { ok: true };
@@ -149,21 +135,32 @@ export const commitPendingTTCJourneyToDB = async (
 
 export const getActiveTTCJourney = async (
   userId: string,
+  options: { throwOnError?: boolean } = {},
 ): Promise<ActiveTTCJourney | null> => {
-  const { data: pointer } = await supabase
+  const { data: pointer, error: pointerError } = await supabase
     .from("journeys")
     .select("lifecycle")
     .eq("user_id", userId)
     .maybeSingle();
+  if (pointerError && options.throwOnError) throw pointerError;
   if (!pointer || pointer.lifecycle !== "ttc") return null;
 
-  const { data: row } = await supabase
+  const { data: row, error: rowError } = await supabase
     .from("ttc_journeys")
     .select(
       "id, last_period_date, cycle_length_days, period_length_days, cycle_regularity, actively_trying, uses_ovulation_tests, tracks_symptoms, support_status, ivf_consideration, stage, likely_ovulation_date, fertile_window_start, fertile_window_end, expected_period_date, possible_test_date, started_at",
     )
     .eq("user_id", userId)
     .maybeSingle();
+  if (rowError && options.throwOnError) throw rowError;
   return (row as ActiveTTCJourney) ?? null;
 
+};
+
+export const deleteTTCJourney = async (userId: string): Promise<void> => {
+  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+  if (sessionError) throw sessionError;
+  if (sessionData.session?.user.id !== userId) throw new Error("Your session no longer matches this journey.");
+  const { error } = await supabase.rpc("delete_active_journey", { p_lifecycle: "ttc" });
+  if (error) throw error;
 };

@@ -14,6 +14,7 @@ import {
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import type { ActiveTTCJourney } from "@/lib/savedTTCJourney";
+import { parseDateOnly } from "@/lib/dateOnly";
 
 type Props = {
   journey: ActiveTTCJourney;
@@ -36,8 +37,8 @@ const TTCPregnancyHandover = forwardRef<HTMLElement, Props>(
       trackEvent(EVENTS.TTC_PREGNANCY_HANDOVER_STARTED);
       setOpen(false);
       if (journey.last_period_date) {
-        const lmp = new Date(journey.last_period_date);
-        if (!isNaN(lmp.getTime())) {
+        const lmp = parseDateOnly(journey.last_period_date);
+        if (lmp) {
           navigate(
             `/due-date-results?lmp=${lmp.getTime()}&from=ttc-positive`,
           );

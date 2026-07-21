@@ -8,6 +8,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PregnancyWeekSeo from "@/components/seo/PregnancyWeekSeo";
+import PublicWeekReflectionAsk from "@/components/pregnancy/PublicWeekReflectionAsk";
 import fetusImg from "@/assets/week18-fetus.jpg";
 import bellpepperImg from "@/assets/week18-bellpepper.jpg";
 import biologyImg from "@/assets/week18-biology-detail.jpg";
@@ -431,7 +432,7 @@ const Symptoms = () => (
     </div>
 
     <div className="mt-8 text-center">
-      <Link to="/articles/second-trimester-body" className="inline-flex items-center gap-2 font-sans text-[13.5px] font-medium text-sage hover:gap-3 transition-all">
+      <Link to="/articles/second-trimester-complete-guide" className="inline-flex items-center gap-2 font-sans text-[13.5px] font-medium text-sage hover:gap-3 transition-all">
         Read: the mid second-trimester body shift <ArrowRight size={13} />
       </Link>
     </div>
@@ -593,50 +594,11 @@ const reflectionPrompts = ["What I'm noticing in stillness", "What the anomaly s
 const askChips = ["What does the 20-week scan check?", "Should I have felt movement by 18 weeks?", "Is it safe to find out the sex?", "How do I prep for the anomaly scan?", "Can the baby hear my voice now?"];
 
 const ReflectionAsk = () => (
-  <section className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pb-16 md:pb-24">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-sage/40 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-sage-bg flex items-center justify-center shrink-0">
-            <Leaf size={14} className="text-sage" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">A moment for reflection</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">What does this week feel like for you?</h3>
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {reflectionPrompts.map((p) => (
-            <span key={p} className="font-sans text-[11.5px] font-medium bg-sage-bg/70 text-foreground/80 rounded-full px-3 py-1.5 border border-sage/20">{p}</span>
-          ))}
-        </div>
-        <textarea rows={4} placeholder="Write your thoughts here… this is just for you." className="w-full bg-parchment/80 border border-border/40 rounded-xl px-4 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 resize-none focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all leading-relaxed" />
-        <Link to="/auth" className="inline-flex items-center gap-2 mt-4 bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-medium hover:bg-terracotta-hover transition-colors">
-          Save reflection to your journal <ArrowRight size={12} />
-        </Link>
-      </div>
-
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-lavender/50 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-lavender-bg flex items-center justify-center shrink-0">
-            <MessageCircle size={14} className="text-lavender-foreground" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">Ask about week 18</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">A question on your mind?</h3>
-          </div>
-        </div>
-        <p className="font-sans text-[13px] text-foreground/70 leading-relaxed mb-4">Get a calm, evidence-led answer tailored to where you are right now.</p>
-        <input type="text" placeholder="e.g. What does the 20-week scan check?" className="w-full bg-parchment/80 border border-border/40 rounded-full px-5 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all" />
-        <p className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-foreground/55 mt-5 mb-2.5">Popular at this stage</p>
-        <div className="flex flex-wrap gap-2">
-          {askChips.map((c) => (
-            <Link key={c} to="/ask" className="font-sans text-[12px] font-medium text-foreground/80 bg-parchment-dark/60 border border-border/40 hover:border-sage/50 hover:text-foreground px-3.5 py-1.5 rounded-full transition-colors">{c}</Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
+  <PublicWeekReflectionAsk
+    week={18}
+    reflectionPrompts={reflectionPrompts}
+    askChips={askChips}
+  />
 );
 
 const Journal = () => (
@@ -674,22 +636,22 @@ const Journal = () => (
 );
 
 const related = [
-  { slug: "second-trimester-anatomy-scan", img: anatomyScanImg, tag: "Scans",
+  { slug: "20-week-anomaly-scan", img: anatomyScanImg, tag: "Scans",
     title: "What the 20-week anomaly scan actually checks",
     desc: "What the sonographer is looking for, what they can and can't see, what the results mean — and how to manage the run-up emotionally." },
-  { slug: "second-trimester-movement", img: secondMovementImg, tag: "Movement",
+  { slug: "baby-movement-in-pregnancy", img: secondMovementImg, tag: "Movement",
     title: "What first baby movements really feel like",
     desc: "Bubbles, pops, butterflies, gas — the surprisingly subtle reality of early flutters, and what to do if you haven't felt anything yet." },
-  { slug: "second-trimester-body", img: secondBodyImg, tag: "Body",
+  { slug: "second-trimester-complete-guide", img: secondBodyImg, tag: "Body",
     title: "The mid second-trimester body shift",
     desc: "Bump rising past the navel, posture changing, heartburn arriving — what to expect physically as the body settles into being clearly pregnant." },
-  { slug: "second-trimester-anxiety", img: secondAnxietyImg, tag: "Mind",
+  { slug: "anxiety-in-pregnancy", img: secondAnxietyImg, tag: "Mind",
     title: "When the worry doesn't lift with the calendar",
     desc: "Why pregnancy anxiety can carry on past the first trimester, and how to stay grounded as the next big scan approaches." },
-  { slug: "second-trimester-sleep", img: secondSleepImg, tag: "Sleep",
+  { slug: "sleep-in-pregnancy", img: secondSleepImg, tag: "Sleep",
     title: "Setting up your sleep for the months ahead",
     desc: "Why side-sleeping matters, when to start, and the small set-up tweaks that make pregnancy sleep easier from week 18 onwards." },
-  { slug: "second-trimester-movement-exercise", img: secondMovementExImg, tag: "Movement",
+  { slug: "moving-your-body-in-pregnancy", img: secondMovementExImg, tag: "Movement",
     title: "Moving your body in the second trimester",
     desc: "What's safe, what helps, and how to use the energy lift while it's here. The simple rules for walking, yoga, swimming and strength." },
 ];

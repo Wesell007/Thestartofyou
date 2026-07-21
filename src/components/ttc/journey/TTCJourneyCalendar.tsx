@@ -15,6 +15,7 @@ import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import type { ActiveTTCJourney } from "@/lib/savedTTCJourney";
 import type { TTCLog } from "@/lib/ttcLogs";
 import { groupTTCLogsByDate, LOG_TYPE_LABEL } from "@/lib/ttcLogs";
+import { parseDateOnly } from "@/lib/dateOnly";
 
 /**
  * Cycle calendar with soft milestone chips and solid user-log markers.
@@ -51,10 +52,10 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
     const map: Record<string, Milestone[]> = {};
     for (const m of milestones) {
       if (!m.dateIso) continue;
-      try {
-        const iso = format(new Date(m.dateIso), "yyyy-MM-dd");
-        (map[iso] ||= []).push(m);
-      } catch { /* skip */ }
+      const parsed = parseDateOnly(m.dateIso);
+      if (!parsed) continue;
+      const iso = format(parsed, "yyyy-MM-dd");
+      (map[iso] ||= []).push(m);
     }
     return map;
   }, [journey]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -137,6 +138,7 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
       <div className="grid grid-cols-7 gap-1">
         {days.map((day) => {
           const iso = toIso(day);
+          const isFuture = iso > toIso(today);
           const inMonth = isSameMonth(day, visibleMonth);
           const isCurrent = isSameDay(day, today) || isToday(day);
           const dayMilestones = milestonesByDate[iso] ?? [];
@@ -147,13 +149,14 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
             format(day, "EEEE d MMMM"),
             ...dayMilestones.map((m) => m.label),
             hasLogs ? `${dayLogs.length} ${dayLogs.length === 1 ? "log" : "logs"} added` : "",
-            "Add or view log",
+            isFuture ? "Future date" : "Add or view log",
           ].filter(Boolean);
           return (
             <button
               key={iso}
               type="button"
-              onClick={() => onSelectDate(iso)}
+              onClick={() => !isFuture && onSelectDate(iso)}
+              disabled={isFuture}
               aria-label={ariaBits.join(", ")}
               className={`relative rounded-[10px] aspect-square min-h-[44px] p-1 flex flex-col items-stretch justify-between text-left transition-colors ${
                 inMonth ? "hover:bg-muted/40" : "opacity-40 hover:opacity-60"

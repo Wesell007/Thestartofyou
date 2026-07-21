@@ -1,9 +1,10 @@
-import { useParams, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getArticle } from "@/data/articleData";
 import ArticleDeepTemplate from "@/components/article/ArticleDeepTemplate";
 import ArticleLegacyPage from "@/pages/ArticleLegacyPage";
 import ArticleFlagshipTemplate from "@/components/article/flagship/ArticleFlagshipTemplate";
 import SeoHead from "@/components/seo/SeoHead";
+import NotFound from "@/pages/NotFound";
 
 // Articles forced to legacy render path (none currently).
 const LEGACY_FORCED_SLUGS = new Set<string>([]);
@@ -15,7 +16,7 @@ const ArticlePage = () => {
   const data = getArticle(slug ?? "");
 
   if (!data) {
-    return <Navigate to="/" replace />;
+    return <NotFound />;
   }
 
   // Flagship template is now the default for any article with the minimum

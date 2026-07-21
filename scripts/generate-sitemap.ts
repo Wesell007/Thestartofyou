@@ -2,7 +2,7 @@
 //
 // Reads route data straight from src/data/*.ts as text (regex extraction) so
 // the generator has no dependency on Vite path aliases at runtime. This keeps
-// it reliable under `bunx tsx` without a tsconfig-paths shim.
+// it reliable under `npx tsx` without a tsconfig-paths shim.
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";

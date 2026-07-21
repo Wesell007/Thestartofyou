@@ -13,7 +13,7 @@ const wontKnow = [
 
 const PreparingCanWait = () => {
   return (
-    <section className="py-20 md:py-32" style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.3)" }}>
+    <section id="preparing-can-wait" className="py-20 md:py-32 scroll-mt-24" style={{ backgroundColor: "hsl(var(--stage-preparing) / 0.3)" }}>
       <div className="container mx-auto px-6 md:px-10 max-w-4xl">
         {/* Header */}
         <div className="mb-12 max-w-2xl">

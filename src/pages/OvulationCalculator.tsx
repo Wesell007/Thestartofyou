@@ -1,6 +1,6 @@
 import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { useMemo, useState } from "react";
-import { parseISO, addDays, format } from "date-fns";
+import { parseISO, addDays, format, isAfter, isBefore, isValid, startOfDay } from "date-fns";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -126,6 +126,12 @@ const CalculatorForm = () => {
       setError("Please enter the first day of your last period.");
       return;
     }
+    const lmpDate = parseISO(lmp);
+    const today = startOfDay(new Date());
+    if (!isValid(lmpDate) || isAfter(lmpDate, today) || isBefore(lmpDate, addDays(today, -90))) {
+      setError("Please enter a valid period date from the last 90 days.");
+      return;
+    }
     if (cycle < 20 || cycle > 45) {
       setError("Please enter a cycle length between 20 and 45 days.");
       return;
@@ -165,6 +171,7 @@ const CalculatorForm = () => {
                 <input
                   type="date"
                   value={lmp}
+                  min={format(addDays(new Date(), -90), "yyyy-MM-dd")}
                   max={format(new Date(), "yyyy-MM-dd")}
                   onChange={(e) => setLmp(e.target.value)}
                   className="w-full rounded-xl border bg-parchment/50 px-4 py-3.5 font-sans text-[14.5px] text-foreground focus:outline-none focus:ring-2 transition-all"
@@ -416,13 +423,22 @@ const OvulationCalculator = () => {
   const data = useMemo(() => {
     const lmpStr = params.get("lmp");
     const cycleStr = params.get("cycle");
-    if (!lmpStr) return null;
+    if (!lmpStr || !/^\d{4}-\d{2}-\d{2}$/.test(lmpStr)) return null;
 
     const lmp = parseISO(lmpStr);
     const cycleLength = cycleStr ? Number(cycleStr) : 28;
+    const today = startOfDay(new Date());
+    if (
+      !isValid(lmp) ||
+      isAfter(lmp, today) ||
+      isBefore(lmp, addDays(today, -90)) ||
+      !Number.isInteger(cycleLength) ||
+      cycleLength < 20 ||
+      cycleLength > 45
+    ) return null;
     const ovulationDay = addDays(lmp, cycleLength - 14);
     const fertileStart = addDays(ovulationDay, -5);
-    const fertileEnd = addDays(ovulationDay, 1);
+    const fertileEnd = ovulationDay;
     const testDay = addDays(ovulationDay, 15);
 
     return { lmp, cycleLength, ovulationDay, fertileStart, fertileEnd, testDay };

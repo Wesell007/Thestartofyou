@@ -28,15 +28,36 @@ const navLinks = [
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [authed, setAuthed] = useState<boolean | null>(null);
+  const [accountLink, setAccountLink] = useState({ href: "/my-week", label: "My Week" });
   const location = useLocation();
 
   useEffect(() => {
     let cancelled = false;
+    const updateAccount = async (userId: string | null) => {
+      if (!userId) {
+        if (!cancelled) setAuthed(false);
+        return;
+      }
+      if (!cancelled) setAuthed(true);
+      const { data, error } = await supabase
+        .from("journeys")
+        .select("lifecycle")
+        .eq("user_id", userId)
+        .maybeSingle();
+      if (cancelled || error) return;
+      if (data?.lifecycle === "ttc") {
+        setAccountLink({ href: "/my-ttc-journey", label: "My TTC Journey" });
+      } else if (data?.lifecycle === "pregnancy") {
+        setAccountLink({ href: "/my-week", label: "My Week" });
+      } else {
+        setAccountLink({ href: "/due-date-calculator", label: "Set up journey" });
+      }
+    };
     supabase.auth.getSession().then(({ data }) => {
-      if (!cancelled) setAuthed(!!data.session?.user);
+      void updateAccount(data.session?.user?.id ?? null);
     });
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (!cancelled) setAuthed(!!session?.user);
+      void updateAccount(session?.user?.id ?? null);
     });
     return () => {
       cancelled = true;
@@ -81,10 +102,10 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center gap-6 shrink-0">
           {authed ? (
             <Link
-              to="/my-week"
+              to={accountLink.href}
               className="font-sans text-[13.5px] font-medium bg-terracotta text-terracotta-foreground px-6 py-2.5 rounded-pill hover:bg-terracotta-hover transition-all duration-300 shadow-cta"
             >
-              My Week
+              {accountLink.label}
             </Link>
           ) : (
             <>
@@ -111,6 +132,8 @@ const Navbar = () => {
           className="lg:hidden p-2.5 -mr-1 text-muted-foreground hover:text-foreground transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -118,7 +141,7 @@ const Navbar = () => {
 
       {/* Mobile drawer */}
       {mobileOpen && (
-        <div className="lg:hidden bg-parchment/98 backdrop-blur-lg border-t border-border/30 px-6 py-8 flex flex-col gap-1 animate-fade-in">
+        <div id="mobile-navigation" className="lg:hidden bg-parchment/98 backdrop-blur-lg border-t border-border/30 px-6 py-8 flex flex-col gap-1 animate-fade-in">
           {navLinks.map(({ label, href }) => (
             <Link
               key={label}
@@ -134,11 +157,11 @@ const Navbar = () => {
 
           {authed ? (
             <Link
-              to="/my-week"
+              to={accountLink.href}
               onClick={() => setMobileOpen(false)}
               className="mt-4 text-center font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-6 py-3.5 rounded-pill hover:bg-terracotta-hover transition-all shadow-cta"
             >
-              My Week
+              {accountLink.label}
             </Link>
           ) : (
             <>

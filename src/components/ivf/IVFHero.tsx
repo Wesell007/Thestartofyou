@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { format } from "date-fns";
+import { format, subDays } from "date-fns";
 import { CalendarIcon, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
@@ -89,7 +89,7 @@ const IVFHero = () => {
                       mode="single"
                       selected={transferDate}
                       onSelect={(d) => { setTransferDate(d); setOpen(false); }}
-                      disabled={(date) => date > new Date()}
+                      disabled={(date) => date > new Date() || date < subDays(new Date(), 300)}
                       initialFocus
                       className={cn("p-3 pointer-events-auto")}
                     />

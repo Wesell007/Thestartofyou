@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import AskLink from "@/components/shared/AskLink";
 
 const entries = [
   {
@@ -48,8 +49,10 @@ const SupportStartHere = () => {
         </div>
 
         {/* Featured first card */}
-        <a
-          href="#ai-support"
+        <AskLink
+          question={entries[0].thought}
+          context="Support"
+          stage="support"
           className="group block bg-card border-t-2 border-t-[hsl(var(--stage-support-accent)/0.4)] border border-[hsl(var(--stage-support-accent)/0.15)] rounded-xl p-7 md:p-9 shadow-card-brand mb-4 transition-all hover:shadow-soft"
         >
           <div className="flex items-start gap-5">
@@ -68,14 +71,16 @@ const SupportStartHere = () => {
               </span>
             </div>
           </div>
-        </a>
+        </AskLink>
 
         {/* Remaining cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {entries.slice(1).map((e, i) => (
-            <a
+            <AskLink
               key={i}
-              href="#ai-support"
+              question={e.thought}
+              context="Support"
+              stage="support"
               className="group bg-card border border-border/50 rounded-xl p-5 shadow-card-brand flex flex-col gap-3 transition-all hover:border-[hsl(var(--stage-support-accent)/0.4)] hover:shadow-soft"
             >
               <div className={`w-9 h-9 rounded-full ${e.color} flex items-center justify-center`}>
@@ -90,7 +95,7 @@ const SupportStartHere = () => {
               <span className="mt-auto pt-1 flex items-center gap-1 font-sans text-xs font-light text-[hsl(var(--stage-support-accent))] opacity-0 group-hover:opacity-100 transition-opacity">
                 Ask about this <ArrowUpRight size={12} />
               </span>
-            </a>
+            </AskLink>
           ))}
         </div>
       </div>

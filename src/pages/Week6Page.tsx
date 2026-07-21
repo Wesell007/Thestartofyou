@@ -30,6 +30,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PregnancyWeekSeo from "@/components/seo/PregnancyWeekSeo";
+import PublicWeekReflectionAsk from "@/components/pregnancy/PublicWeekReflectionAsk";
 import embryoImg from "@/assets/week6-embryo.jpg";
 import sweetpeaImg from "@/assets/week6-sweetpea.jpg";
 import biologyImg from "@/assets/week6-biology-detail.jpg";
@@ -470,7 +471,7 @@ const Symptoms = () => (
     </div>
 
     <div className="mt-8 text-center">
-      <Link to="/articles/early-pregnancy-symptoms"
+      <Link to="/articles/early-pregnancy-symptoms-explained"
         className="inline-flex items-center gap-2 font-sans text-[13.5px] font-medium text-sage hover:gap-3 transition-all">
         Read: the earliest pregnancy symptoms, week by week <ArrowRight size={13} />
       </Link>
@@ -639,65 +640,13 @@ const reflectionPrompts = ["How my body feels today", "What I most need this wee
 const askChips = ["Is it normal to have no symptoms at 6 weeks?", "When can I have an early scan?", "How bad is too bad with sickness?", "Is light spotting at 6 weeks okay?", "What does the heartbeat look like on a scan?"];
 
 const ReflectionAsk = () => (
-  <section className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pb-16 md:pb-24">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-sage/40 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-sage-bg flex items-center justify-center shrink-0">
-            <Leaf size={14} className="text-sage" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">A moment for reflection</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">What does this week feel like for you?</h3>
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {reflectionPrompts.map((p) => (
-            <span key={p} className="font-sans text-[11.5px] font-medium bg-sage-bg/70 text-foreground/80 rounded-full px-3 py-1.5 border border-sage/20">
-              {p}
-            </span>
-          ))}
-        </div>
-        <textarea rows={4} placeholder="Write your thoughts here… this is just for you."
-          className="w-full bg-parchment/80 border border-border/40 rounded-xl px-4 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 resize-none focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all leading-relaxed" />
-        <Link to="/auth"
-          className="inline-flex items-center gap-2 mt-4 bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-medium hover:bg-terracotta-hover transition-colors">
-          Save reflection to your journal <ArrowRight size={12} />
-        </Link>
-      </div>
-
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-lavender/50 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-lavender-bg flex items-center justify-center shrink-0">
-            <MessageCircle size={14} className="text-lavender-foreground" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">Ask about week 6</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">A question on your mind?</h3>
-          </div>
-        </div>
-        <p className="font-sans text-[13px] text-foreground/70 leading-relaxed mb-4">
-          Get a calm, evidence-led answer tailored to where you are right now.
-        </p>
-        <input type="text" placeholder="e.g. Should I be able to see a heartbeat at 6 weeks?"
-          className="w-full bg-parchment/80 border border-border/40 rounded-full px-5 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all" />
-        <p className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-foreground/55 mt-5 mb-2.5">
-          Popular at this stage
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {askChips.map((c) => (
-            <Link key={c} to="/ask"
-              className="font-sans text-[12px] font-medium text-foreground/80 bg-parchment-dark/60 border border-border/40 hover:border-sage/50 hover:text-foreground px-3.5 py-1.5 rounded-full transition-colors">
-              {c}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
+  <PublicWeekReflectionAsk
+    week={6}
+    reflectionPrompts={reflectionPrompts}
+    askChips={askChips}
+  />
 );
 
-/* 13. JOURNAL */
 const Journal = () => (
   <section className="bg-sage-bg/40 py-16 md:py-24 border-y border-border/30">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
@@ -741,22 +690,22 @@ const Journal = () => (
 
 /* 14. RELATED */
 const related = [
-  { slug: "first-trimester-nausea", img: nauseaImg, tag: "Symptoms",
+  { slug: "nausea-in-early-pregnancy", img: nauseaImg, tag: "Symptoms",
     title: "Nausea in early pregnancy — what helps",
     desc: "Why sickness ramps up at 6 weeks, what genuinely eases it, and the line where it becomes hyperemesis." },
-  { slug: "first-trimester-fatigue", img: fatigueImg, tag: "Body",
+  { slug: "fatigue-in-early-pregnancy", img: fatigueImg, tag: "Body",
     title: "Why early pregnancy is so exhausting",
     desc: "The biology behind first-trimester tiredness, and small things that genuinely help in week 6." },
-  { slug: "food-aversions-in-pregnancy", img: foodAversionsImg, tag: "Food",
+  { slug: "when-you-cant-face-food-in-pregnancy", img: foodAversionsImg, tag: "Food",
     title: "Food aversions, weird cravings & smell sensitivity",
     desc: "Why your favourite foods may suddenly turn your stomach — and what to eat when nothing appeals." },
-  { slug: "first-trimester-tests-and-scans", img: testsScansImg, tag: "Care",
+  { slug: "tests-and-scans-in-pregnancy", img: testsScansImg, tag: "Care",
     title: "Early scans: what they show and don't",
     desc: "When an early scan is offered, what to expect, and why not seeing a heartbeat at 6 weeks isn't a diagnosis." },
-  { slug: "implantation-bleeding-vs-period", img: implantationBleedImg, tag: "Spotting",
+  { slug: "implantation-bleeding", img: implantationBleedImg, tag: "Spotting",
     title: "Spotting in early pregnancy",
     desc: "When light bleeding can be normal, when it needs to be checked, and how the EPU works." },
-  { slug: "symptoms-stopping-in-early-pregnancy", img: symptomsStoppingImg, tag: "Reassurance",
+  { slug: "symptoms-stopping-early-pregnancy", img: symptomsStoppingImg, tag: "Reassurance",
     title: "When pregnancy symptoms suddenly stop",
     desc: "Why symptoms can ebb and flow at 6–10 weeks, what's normal, and when to seek reassurance." },
 ];

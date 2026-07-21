@@ -146,13 +146,14 @@ const LINKS = {
   testsScans: "/articles/tests-and-scans-in-pregnancy",
 };
 
-// IVF-framed `/ask?q=…` deep-link helper.
+// IVF-framed AI destination. The question is decoded into router state by the
+// page, so potentially sensitive text is never placed in browser history.
 // Used where no IVF-native article exists yet — these read as IVF-owned
 // guidance routes (the same /ask pattern used by IVFAISupport and
 // IVFCommonQuestions), never as TTC.
 // IVF-origin AI routes carry `journey=ivf` so AskPage can render with the
 // IVF lilac identity and IVF-aware return links instead of the default sage.
-const askIVF = (q: string) => `/ask?q=${encodeURIComponent(q)}&journey=ivf`;
+const askIVF = (q: string) => `ask:${encodeURIComponent(q)}`;
 
 export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
   "before-transfer": {

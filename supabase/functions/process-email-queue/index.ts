@@ -1,11 +1,14 @@
 import { sendLovableEmail } from 'npm:@lovable.dev/email-js'
 import { createClient } from 'npm:@supabase/supabase-js@2'
+import { parseEmailQueuePayload, type EmailQueuePayload } from '../_shared/validation.ts'
 
 const MAX_RETRIES = 5
 const DEFAULT_BATCH_SIZE = 10
 const DEFAULT_SEND_DELAY_MS = 200
 const DEFAULT_AUTH_TTL_MINUTES = 15
 const DEFAULT_TRANSACTIONAL_TTL_MINUTES = 60
+
+class CompletionError extends Error {}
 
 // Check if an error is a rate-limit (429) response.
 // Uses EmailAPIError.status when available (email-js >=0.x with structured errors),
@@ -60,13 +63,6 @@ async function moveToDlq(
   reason: string
 ): Promise<void> {
   const payload = msg.message
-  await supabase.from('email_send_log').insert({
-    message_id: payload.message_id,
-    template_name: (payload.label || queue) as string,
-    recipient_email: payload.to,
-    status: 'dlq',
-    error_message: reason,
-  })
   const { error } = await supabase.rpc('move_to_dlq', {
     source_queue: queue,
     dlq_name: `${queue}_dlq`,
@@ -75,10 +71,36 @@ async function moveToDlq(
   })
   if (error) {
     console.error('Failed to move message to DLQ', { queue, msg_id: msg.msg_id, reason, error })
+    throw error
+  }
+  const { error: logError } = await supabase.from('email_send_log').insert({
+    message_id: typeof payload.message_id === 'string' ? payload.message_id : null,
+    template_name: typeof payload.label === 'string' && payload.label ? payload.label : queue,
+    recipient_email: typeof payload.to === 'string' && payload.to ? payload.to : 'invalid-payload@invalid.local',
+    status: 'dlq',
+    error_message: reason.slice(0, 1000),
+  })
+  if (logError) {
+    console.error('Message moved to DLQ but audit log failed', { queue, msg_id: msg.msg_id, error: logError })
+  }
+  if (typeof payload.message_id === 'string' && payload.message_id) {
+    const { error: releaseError } = await supabase.rpc('release_email_delivery', {
+      p_message_id: payload.message_id,
+    })
+    if (releaseError) {
+      console.error('Failed to release delivery claim after DLQ move', { message_id: payload.message_id, error: releaseError })
+    }
   }
 }
 
 Deno.serve(async (req) => {
+  if (req.method !== 'POST') {
+    return new Response(
+      JSON.stringify({ error: 'Method not allowed' }),
+      { status: 405, headers: { 'Content-Type': 'application/json', Allow: 'POST' } }
+    )
+  }
+
   const apiKey = Deno.env.get('LOVABLE_API_KEY')
   const supabaseUrl = Deno.env.get('SUPABASE_URL')
   const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
@@ -114,10 +136,18 @@ Deno.serve(async (req) => {
   const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
   // 1. Check rate-limit cooldown and read queue config
-  const { data: state } = await supabase
+  const { data: state, error: stateError } = await supabase
     .from('email_send_state')
     .select('retry_after_until, batch_size, send_delay_ms, auth_email_ttl_minutes, transactional_email_ttl_minutes')
     .single()
+
+  if (stateError) {
+    console.error('Failed to load email send state', stateError)
+    return new Response(
+      JSON.stringify({ error: 'Could not load queue configuration' }),
+      { status: 503, headers: { 'Content-Type': 'application/json' } }
+    )
+  }
 
   if (state?.retry_after_until && new Date(state.retry_after_until) > new Date()) {
     return new Response(
@@ -191,7 +221,22 @@ Deno.serve(async (req) => {
 
     for (let i = 0; i < messages.length; i++) {
       const msg = messages[i]
-      const payload = msg.message
+      const rawPayload = msg.message as Record<string, unknown>
+      const payloadResult = parseEmailQueuePayload(rawPayload)
+      if (!payloadResult.ok) {
+        console.error('Invalid email queue payload', {
+          queue,
+          msg_id: msg.msg_id,
+          reason: payloadResult.error,
+        })
+        try {
+          await moveToDlq(supabase, queue, msg, `Invalid payload: ${payloadResult.error}`)
+        } catch {
+          // The queue message remains available for an operational retry.
+        }
+        continue
+      }
+      const payload: EmailQueuePayload = payloadResult.value
       const failedAttempts =
         payload?.message_id && typeof payload.message_id === 'string'
           ? (failedAttemptsByMessageId.get(payload.message_id) ?? 0)
@@ -211,41 +256,50 @@ Deno.serve(async (req) => {
             queued_at: queuedAt,
             ttl_minutes: ttlMinutes[queue],
           })
-          await moveToDlq(supabase, queue, msg, `TTL exceeded (${ttlMinutes[queue]} minutes)`)
+          try {
+            await moveToDlq(supabase, queue, msg, `TTL exceeded (${ttlMinutes[queue]} minutes)`)
+          } catch {
+            // Keep the source message for an operational retry.
+          }
           continue
         }
       }
 
       // Move to DLQ if max failed send attempts reached.
       if (failedAttempts >= MAX_RETRIES) {
-        await moveToDlq(supabase, queue, msg, `Max retries (${MAX_RETRIES}) exceeded (attempted ${failedAttempts} times)`)
+        try {
+          await moveToDlq(supabase, queue, msg, `Max retries (${MAX_RETRIES}) exceeded (attempted ${failedAttempts} times)`)
+        } catch {
+          // Keep the source message for an operational retry.
+        }
         continue
       }
 
-      // Guard: skip if another worker already sent this message (VT expired race)
-      if (payload.message_id) {
-        const { data: alreadySent } = await supabase
-          .from('email_send_log')
-          .select('id')
-          .eq('message_id', payload.message_id)
-          .eq('status', 'sent')
-          .maybeSingle()
-
-        if (alreadySent) {
-          console.warn('Skipping duplicate send (already sent)', {
+      const { data: claimState, error: claimError } = await supabase.rpc('claim_email_delivery', {
+        p_message_id: payload.message_id,
+        p_lease_seconds: 120,
+      })
+      if (claimError) {
+        console.error('Failed to claim email delivery', { queue, msg_id: msg.msg_id, error: claimError })
+        continue
+      }
+      if (claimState === 'sent') {
+        const { error: duplicateDeleteError } = await supabase.rpc('delete_email', {
+          queue_name: queue,
+          message_id: msg.msg_id,
+        })
+        if (duplicateDeleteError) {
+          console.error('Failed to delete an already-sent queue message', {
             queue,
             msg_id: msg.msg_id,
-            message_id: payload.message_id,
+            error: duplicateDeleteError,
           })
-          const { error: dupDelError } = await supabase.rpc('delete_email', {
-            queue_name: queue,
-            message_id: msg.msg_id,
-          })
-          if (dupDelError) {
-            console.error('Failed to delete duplicate message from queue', { queue, msg_id: msg.msg_id, error: dupDelError })
-          }
-          continue
         }
+        continue
+      }
+      if (claimState !== 'claimed') {
+        // Another worker owns the lease. Leave this message for a later read.
+        continue
       }
 
       try {
@@ -270,21 +324,18 @@ Deno.serve(async (req) => {
           { apiKey, sendUrl: Deno.env.get('LOVABLE_SEND_URL') }
         )
 
-        // Log success
-        await supabase.from('email_send_log').insert({
-          message_id: payload.message_id,
-          template_name: payload.label || queue,
-          recipient_email: payload.to,
-          status: 'sent',
+        // Audit success, mark the claim sent and acknowledge the PGMQ message in
+        // one database transaction. If this fails, the stable provider
+        // idempotency key makes the subsequent retry safe.
+        const { data: completed, error: completionError } = await supabase.rpc('complete_email_delivery', {
+          p_queue_name: queue,
+          p_queue_message_id: msg.msg_id,
+          p_message_id: payload.message_id,
+          p_template_name: payload.label || queue,
+          p_recipient_email: payload.to,
         })
-
-        // Delete from queue
-        const { error: delError } = await supabase.rpc('delete_email', {
-          queue_name: queue,
-          message_id: msg.msg_id,
-        })
-        if (delError) {
-          console.error('Failed to delete sent message from queue', { queue, msg_id: msg.msg_id, error: delError })
+        if (completionError || !completed) {
+          throw new CompletionError(`Email sent but completion transaction failed: ${completionError?.message ?? 'queue acknowledgement failed'}`)
         }
         totalProcessed++
       } catch (error) {
@@ -297,17 +348,27 @@ Deno.serve(async (req) => {
           error: errorMsg,
         })
 
+        if (error instanceof CompletionError) {
+          // The provider accepted the message. Keep the claim until its lease
+          // expires and retry with the same idempotency key; do not consume the
+          // provider-failure retry budget.
+          continue
+        }
+
         if (isRateLimited(error)) {
-          await supabase.from('email_send_log').insert({
+          const { error: rateLogError } = await supabase.from('email_send_log').insert({
             message_id: payload.message_id,
             template_name: payload.label || queue,
             recipient_email: payload.to,
             status: 'rate_limited',
             error_message: errorMsg.slice(0, 1000),
           })
+          if (rateLogError) {
+            console.error('Failed to record provider rate limit', { message_id: payload.message_id, error: rateLogError })
+          }
 
           const retryAfterSecs = getRetryAfterSeconds(error)
-          await supabase
+          const { error: cooldownError } = await supabase
             .from('email_send_state')
             .update({
               retry_after_until: new Date(
@@ -316,6 +377,21 @@ Deno.serve(async (req) => {
               updated_at: new Date().toISOString(),
             })
             .eq('id', 1)
+
+          const { error: releaseError } = await supabase.rpc('release_email_delivery', {
+            p_message_id: payload.message_id,
+          })
+          if (cooldownError || releaseError) {
+            console.error('Failed to persist rate-limit recovery state', {
+              message_id: payload.message_id,
+              cooldownError,
+              releaseError,
+            })
+            return new Response(
+              JSON.stringify({ processed: totalProcessed, error: 'rate_limit_state_failed' }),
+              { status: 503, headers: { 'Content-Type': 'application/json' } }
+            )
+          }
 
           // Stop processing — remaining messages stay in queue (VT expires, retried next cycle)
           return new Response(
@@ -327,7 +403,14 @@ Deno.serve(async (req) => {
         // 403 means emails are disabled for this project — retrying won't help.
         // Move straight to DLQ and stop processing the rest of the batch.
         if (isForbidden(error)) {
-          await moveToDlq(supabase, queue, msg, 'Emails disabled for this project')
+          try {
+            await moveToDlq(supabase, queue, msg, 'Emails disabled for this project')
+          } catch {
+            return new Response(
+              JSON.stringify({ processed: totalProcessed, error: 'dlq_move_failed' }),
+              { status: 503, headers: { 'Content-Type': 'application/json' } }
+            )
+          }
           return new Response(
             JSON.stringify({ processed: totalProcessed, stopped: 'emails_disabled' }),
             { headers: { 'Content-Type': 'application/json' } }
@@ -335,14 +418,29 @@ Deno.serve(async (req) => {
         }
 
         // Log non-429 failures to track real retry attempts.
-        await supabase.from('email_send_log').insert({
+        const { error: failureLogError } = await supabase.from('email_send_log').insert({
           message_id: payload.message_id,
           template_name: payload.label || queue,
           recipient_email: payload.to,
           status: 'failed',
           error_message: errorMsg.slice(0, 1000),
         })
-        if (payload?.message_id && typeof payload.message_id === 'string') {
+        if (failureLogError) {
+          console.error('Failed to record email send failure', {
+            message_id: payload.message_id,
+            error: failureLogError,
+          })
+          // Keep the claim until its lease expires. This prevents a hot retry
+          // loop while the audit database is unavailable.
+          continue
+        }
+        const { error: releaseError } = await supabase.rpc('release_email_delivery', {
+          p_message_id: payload.message_id,
+        })
+        if (releaseError) {
+          console.error('Failed to release delivery claim', { message_id: payload.message_id, error: releaseError })
+        }
+        if (payload.message_id) {
           failedAttemptsByMessageId.set(payload.message_id, failedAttempts + 1)
         }
 

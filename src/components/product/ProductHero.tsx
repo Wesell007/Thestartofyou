@@ -3,6 +3,7 @@ import journalHeroVideo from "@/assets/video/journal-hero.mp4";
 import journalCoverHand from "@/assets/journal-cover-hand.jpg";
 import botanicalTr from "@/assets/botanical-branch-tr.png";
 import botanicalBl from "@/assets/botanical-branch-bl.png";
+import { JOURNAL_PURCHASE_URL } from "@/lib/productLinks";
 
 const ProductHero = () => {
   return (
@@ -69,10 +70,12 @@ const ProductHero = () => {
         <div className="mt-10 md:mt-14 flex flex-col items-center gap-5 animate-fade-up [animation-delay:0.2s] pb-12 md:pb-16">
           <div className="flex flex-col sm:flex-row items-center gap-3">
             <a
-              href="#"
+              href={JOURNAL_PURCHASE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-9 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
             >
-              Get the journal
+              Find the journal on Amazon
               <ExternalLink size={14} />
             </a>
             <span className="inline-flex items-center gap-1.5 bg-card/70 border border-border/30 rounded-pill px-4 py-2.5 font-sans text-xs font-light text-muted-foreground">

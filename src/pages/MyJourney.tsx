@@ -14,6 +14,7 @@ import JourneyGroup from "@/components/myjourney/JourneyGroup";
 import KeptWeekRow from "@/components/myjourney/KeptWeekRow";
 import MomentCard from "@/components/myjourney/MomentCard";
 import LookingAheadCard from "@/components/myjourney/LookingAheadCard";
+import PageLoadState from "@/components/shared/PageLoadState";
 
 type ReflectionRow = {
   week: number;
@@ -47,6 +48,8 @@ const GROUPS: GroupDef[] = [
 const MyJourney = () => {
   const navigate = useNavigate();
   const [state, setState] = useState<State | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [attempt, setAttempt] = useState(0);
   const viewedRef = useRef(false);
 
   useEffect(() => {
@@ -58,21 +61,27 @@ const MyJourney = () => {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const { data: sess } = await supabase.auth.getSession();
+      setLoadError(null);
+      try {
+      const { data: sess, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) throw sessionError;
       const user = sess.session?.user;
       if (!user) {
         navigate("/auth", { replace: true });
         return;
       }
-      const [{ data: profile }, journey, { data: refls }, { data: photos }] = await Promise.all([
+      const [{ data: profile, error: profileError }, journey, { data: refls, error: reflectionError }, { data: photos, error: photoError }] = await Promise.all([
         supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
-        getActivePregnancyJourney(user.id),
+        getActivePregnancyJourney(user.id, { throwOnError: true }),
         supabase
           .from("reflections")
           .select("week, content, first_written_at")
           .eq("user_id", user.id),
         supabase.from("week_photos").select("week").eq("user_id", user.id),
       ]);
+      if (profileError) throw profileError;
+      if (reflectionError) throw reflectionError;
+      if (photoError) throw photoError;
       if (cancelled) return;
       if (!journey) {
         navigate("/due-date-calculator", { replace: true });
@@ -104,11 +113,14 @@ const MyJourney = () => {
         reflectionsByWeek,
         photoWeeks,
       });
+      } catch {
+        if (!cancelled) setLoadError("We couldn't load your saved journey just now. Nothing has been removed.");
+      }
     })();
     return () => {
       cancelled = true;
     };
-  }, [navigate]);
+  }, [navigate, attempt]);
 
   const derived = useMemo(() => {
     if (!state) return null;
@@ -140,8 +152,9 @@ const MyJourney = () => {
     return { keptWeeks, reflectionWeeks };
   }, [state]);
 
+  if (loadError) return <PageLoadState error={loadError} onRetry={() => setAttempt((n) => n + 1)} />;
   if (!state || !derived) {
-    return <div className="min-h-screen bg-parchment" />;
+    return <PageLoadState />;
   }
 
   const { currentWeek, due, startedAt, reflectionsByWeek, photoWeeks } = state;

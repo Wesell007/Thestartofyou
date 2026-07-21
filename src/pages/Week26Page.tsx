@@ -8,6 +8,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PregnancyWeekSeo from "@/components/seo/PregnancyWeekSeo";
+import PublicWeekReflectionAsk from "@/components/pregnancy/PublicWeekReflectionAsk";
 import fetusImg from "@/assets/week26-fetus.jpg";
 import lettuceImg from "@/assets/week26-lettuce.jpg";
 import biologyImg from "@/assets/week26-biology-detail.jpg";
@@ -429,7 +430,7 @@ const Symptoms = () => (
     </div>
 
     <div className="mt-8 text-center">
-      <Link to="/articles/second-trimester-body" className="inline-flex items-center gap-2 font-sans text-[13.5px] font-medium text-sage hover:gap-3 transition-all">
+      <Link to="/articles/second-trimester-complete-guide" className="inline-flex items-center gap-2 font-sans text-[13.5px] font-medium text-sage hover:gap-3 transition-all">
         Read: the late second-trimester body shift <ArrowRight size={13} />
       </Link>
     </div>
@@ -592,50 +593,11 @@ const reflectionPrompts = ["What this week feels like in my body", "How my baby 
 const askChips = ["When will my baby's eyes open?", "Can my baby really hear my voice now?", "How do I sleep on my side comfortably?", "When should I phone about reduced movement?", "What happens at the 28-week appointment?"];
 
 const ReflectionAsk = () => (
-  <section className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pb-16 md:pb-24">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-sage/40 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-sage-bg flex items-center justify-center shrink-0">
-            <Leaf size={14} className="text-sage" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">A moment for reflection</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">What does this week feel like for you?</h3>
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {reflectionPrompts.map((p) => (
-            <span key={p} className="font-sans text-[11.5px] font-medium bg-sage-bg/70 text-foreground/80 rounded-full px-3 py-1.5 border border-sage/20">{p}</span>
-          ))}
-        </div>
-        <textarea rows={4} placeholder="Write your thoughts here… this is just for you." className="w-full bg-parchment/80 border border-border/40 rounded-xl px-4 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 resize-none focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all leading-relaxed" />
-        <Link to="/auth" className="inline-flex items-center gap-2 mt-4 bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-medium hover:bg-terracotta-hover transition-colors">
-          Save reflection to your journal <ArrowRight size={12} />
-        </Link>
-      </div>
-
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-lavender/50 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-lavender-bg flex items-center justify-center shrink-0">
-            <MessageCircle size={14} className="text-lavender-foreground" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">Ask about week 26</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">A question on your mind?</h3>
-          </div>
-        </div>
-        <p className="font-sans text-[13px] text-foreground/70 leading-relaxed mb-4">Get a calm, evidence-led answer tailored to where you are right now.</p>
-        <input type="text" placeholder="e.g. When will my baby's eyes open?" className="w-full bg-parchment/80 border border-border/40 rounded-full px-5 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all" />
-        <p className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-foreground/55 mt-5 mb-2.5">Popular at this stage</p>
-        <div className="flex flex-wrap gap-2">
-          {askChips.map((c) => (
-            <Link key={c} to="/ask" className="font-sans text-[12px] font-medium text-foreground/80 bg-parchment-dark/60 border border-border/40 hover:border-sage/50 hover:text-foreground px-3.5 py-1.5 rounded-full transition-colors">{c}</Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
+  <PublicWeekReflectionAsk
+    week={26}
+    reflectionPrompts={reflectionPrompts}
+    askChips={askChips}
+  />
 );
 
 const Journal = () => (
@@ -673,22 +635,22 @@ const Journal = () => (
 );
 
 const related = [
-  { slug: "second-trimester-movement", img: movementImg, tag: "Movement",
+  { slug: "baby-movement-in-pregnancy", img: movementImg, tag: "Movement",
     title: "Pattern awareness as your baby gets stronger",
     desc: "How kicks change at 26 weeks, what counts as a real change, and exactly when to phone — without overthinking it." },
-  { slug: "second-trimester-sleep", img: sleepImg, tag: "Sleep",
+  { slug: "sleep-in-pregnancy", img: sleepImg, tag: "Sleep",
     title: "Side-sleep — the set-up that actually works",
     desc: "Why side-sleeping matters from week 28, the pillow set-up most people end up with, and how to make the transition gentle." },
-  { slug: "second-trimester-body", img: bodyImg, tag: "Body",
+  { slug: "second-trimester-complete-guide", img: bodyImg, tag: "Body",
     title: "The late second-trimester body shift",
     desc: "Bump definitely visible, fundus measurable, posture changing — what to expect physically as the third trimester comes close." },
-  { slug: "second-trimester-anxiety", img: anxietyImg, tag: "Mind",
+  { slug: "anxiety-in-pregnancy", img: anxietyImg, tag: "Mind",
     title: "When the third trimester starts to feel close",
     desc: "Why week 26 brings a particular flavour of nervous excitement — and how to be gentle with it as the practical work begins." },
-  { slug: "second-trimester-eating", img: eatingImg, tag: "Nutrition",
+  { slug: "eating-well-in-pregnancy", img: eatingImg, tag: "Nutrition",
     title: "Eating well in the second trimester",
     desc: "Iron, calcium, protein, hydration — the second-trimester triangle, and how to handle real cravings without overthinking." },
-  { slug: "second-trimester-movement-exercise", img: movementExImg, tag: "Movement",
+  { slug: "moving-your-body-in-pregnancy", img: movementExImg, tag: "Movement",
     title: "Moving your body at 26 weeks",
     desc: "What still feels good, what's worth easing off, and how to use the energy you have through the last weeks of the second trimester." },
 ];

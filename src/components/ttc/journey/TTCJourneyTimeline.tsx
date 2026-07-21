@@ -1,5 +1,6 @@
-import { format, isValid, isAfter, isBefore } from "date-fns";
+import { format, isAfter, isBefore } from "date-fns";
 import type { ActiveTTCJourney } from "@/lib/savedTTCJourney";
+import { parseDateOnly } from "@/lib/dateOnly";
 
 /**
  * A calm, non-clinical visual of the cycle milestones. Horizontal on
@@ -14,10 +15,10 @@ type Milestone = {
 
 type Props = { journey: ActiveTTCJourney };
 
-const parse = (iso: string | null): Date | null => {
-  if (!iso) return null;
-  const d = new Date(iso);
-  return isValid(d) ? d : null;
+const parse = (iso: string | null): Date | null => parseDateOnly(iso);
+const dateLabel = (iso: string | null, pattern: string) => {
+  const parsed = parse(iso);
+  return parsed ? format(parsed, pattern) : "Not set yet";
 };
 
 const TTCJourneyTimeline = ({ journey }: Props) => {
@@ -104,7 +105,7 @@ const TTCJourneyTimeline = ({ journey }: Props) => {
                   {m.label}
                 </p>
                 <p className="font-serif text-[13px] text-foreground/60 mt-0.5">
-                  {m.dateIso ? format(new Date(m.dateIso), "d MMM") : "Not set yet"}
+                  {dateLabel(m.dateIso, "d MMM")}
                 </p>
               </div>
             </div>
@@ -131,7 +132,7 @@ const TTCJourneyTimeline = ({ journey }: Props) => {
                   {m.label}
                 </p>
                 <p className="font-serif text-[13px] text-foreground/60">
-                  {m.dateIso ? format(new Date(m.dateIso), "EEE d MMM") : "Not set yet"}
+                  {dateLabel(m.dateIso, "EEE d MMM")}
                 </p>
               </div>
             </li>

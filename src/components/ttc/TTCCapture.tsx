@@ -37,7 +37,7 @@ const TTCCapture = () => {
             </div>
 
             <a
-              href="/"
+              href="/product"
               className="inline-flex items-center gap-2.5 border text-foreground rounded-pill px-7 py-3.5 font-sans text-[13px] font-light hover:bg-parchment-dark transition-all duration-300"
               style={{ borderColor: 'hsl(var(--stage-ttc-accent) / 0.25)' }}
             >

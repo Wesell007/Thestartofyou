@@ -109,7 +109,7 @@ const IVFFinalCTA = () => {
               Some people find it helps to keep their appointments, questions, and the things this stage stirs up somewhere gentle and private.
             </p>
             <Link
-              to="/journal"
+              to="/product"
               className="relative inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium transition-colors"
               style={{ color: 'hsl(var(--stage-ivf-accent))' }}
             >

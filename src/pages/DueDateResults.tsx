@@ -6,6 +6,7 @@ import DueDateCalculatorResult from "@/components/shared/DueDateCalculatorResult
 import SeoHead from "@/components/seo/SeoHead";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
+import { addDays, isAfter, isBefore, isValid, startOfDay } from "date-fns";
 
 const DueDateResults = () => {
   const [searchParams] = useSearchParams();
@@ -13,10 +14,21 @@ const DueDateResults = () => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    setReady(false);
+    setLmp(null);
     const lmpParam = searchParams.get("lmp");
     if (lmpParam) {
-      const ts = parseInt(lmpParam, 10);
-      if (!isNaN(ts)) setLmp(new Date(ts));
+      const ts = Number(lmpParam);
+      const candidate = new Date(ts);
+      const today = startOfDay(new Date());
+      if (
+        Number.isFinite(ts) &&
+        isValid(candidate) &&
+        !isAfter(candidate, today) &&
+        !isBefore(candidate, addDays(today, -300))
+      ) {
+        setLmp(candidate);
+      }
     }
     setReady(true);
   }, [searchParams]);

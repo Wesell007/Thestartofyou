@@ -1,4 +1,4 @@
-import { PenLine } from "lucide-react";
+import PublicReflectionEditor from "@/components/shared/PublicReflectionEditor";
 
 const PostpartumReflection = () => {
   return (
@@ -54,19 +54,10 @@ const PostpartumReflection = () => {
             className="p-8 sm:p-10 flex flex-col justify-center"
             style={{ backgroundColor: 'hsl(var(--stage-postpartum) / 0.12)' }}
           >
-            <textarea
-              rows={5}
-              placeholder="Write your thoughts here…"
-              className="w-full bg-background border border-border rounded-lg px-5 py-4 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 resize-none focus:outline-none focus:ring-1 transition-all leading-relaxed"
-              style={{ '--tw-ring-color': 'hsl(var(--stage-postpartum-accent) / 0.3)' } as React.CSSProperties}
+            <PublicReflectionEditor
+              storageKey="tsoy:postpartum:reflection-draft"
+              suggestions={["Exhaustion", "Gratitude", "Overwhelm", "Connection"]}
             />
-            <button
-              className="mt-4 flex items-center gap-2 border rounded-pill px-6 py-3 font-sans text-sm font-light transition-all hover:bg-background/60"
-              style={{ borderColor: 'hsl(var(--stage-postpartum-accent) / 0.3)', color: 'hsl(var(--stage-postpartum-accent))' }}
-            >
-              <PenLine size={14} />
-              Capture this thought
-            </button>
           </div>
         </div>
       </div>

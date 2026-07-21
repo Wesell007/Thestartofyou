@@ -1,14 +1,16 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { MessageCircle, PenLine, ArrowUpRight, ArrowDown, CheckCircle2 } from "lucide-react";
+import { MessageCircle, ArrowUpRight, ArrowDown, CheckCircle2 } from "lucide-react";
 import JournalPromotion from "@/components/shared/JournalPromotion";
+import PublicReflectionEditor from "@/components/shared/PublicReflectionEditor";
 import SeoHead from "@/components/seo/SeoHead";
 import { ttcStages, type StageData } from "@/data/stageData";
 import { postpartumStages } from "@/data/postpartumStageData";
 import { ivfStages } from "@/data/ivfStageData";
 import { firstYearStages } from "@/data/firstYearStageData";
 import NotFound from "@/pages/NotFound";
+import AskLink from "@/components/shared/AskLink";
 
 // Registry of all stage data by journey prefix
 const stageRegistry: Record<string, Record<string, StageData>> = {
@@ -379,9 +381,11 @@ const StagePage = () => {
             </div>
             <div className="divide-y divide-border/50">
               {data.questions.map((item, i) => (
-                <Link
+                <AskLink
                   key={i}
-                  to={`/ask?q=${encodeURIComponent(item.q)}`}
+                  question={item.q}
+                  context={`${data.journeyLabel} · ${data.title}`}
+                  stage={journey}
                   className="group flex items-center justify-between py-6 hover:pl-2 transition-all"
                 >
                   <div className="flex flex-col gap-1">
@@ -393,7 +397,7 @@ const StagePage = () => {
                   <span className="text-muted-foreground/40 group-hover:text-sage transition-colors ml-6 shrink-0 font-serif text-2xl leading-none">
                     →
                   </span>
-                </Link>
+                </AskLink>
               ))}
             </div>
           </div>
@@ -426,10 +430,10 @@ const StagePage = () => {
                   Suggested questions
                 </p>
                 {data.aiPrompts.map((q, i) => (
-                  <Link key={i} to={`/ask?q=${encodeURIComponent(q)}`} className="flex items-start gap-3 py-3 border-b border-border/40 last:border-0 hover:bg-parchment/50 transition-colors rounded px-2 -mx-2">
+                  <AskLink key={i} question={q} context={`${data.journeyLabel} · ${data.title}`} stage={journey} className="flex items-start gap-3 py-3 border-b border-border/40 last:border-0 hover:bg-parchment/50 transition-colors rounded px-2 -mx-2">
                     <MessageCircle size={14} className="text-sage mt-0.5 shrink-0" />
                     <p className="font-sans text-sm font-light text-foreground leading-relaxed">{q}</p>
-                  </Link>
+                  </AskLink>
                 ))}
               </div>
             </div>
@@ -465,15 +469,11 @@ const StagePage = () => {
               <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-5 leading-snug max-w-md mx-auto">
                 {data.reflectionPrompt}
               </h2>
-              <textarea
-                rows={4}
-                placeholder="Write your thoughts here…"
-                className="w-full mt-4 bg-background border border-border rounded-md px-5 py-4 font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 resize-none focus:outline-none focus:ring-1 focus:ring-sage focus:border-sage transition-all leading-relaxed"
-              />
-              <button className="mt-6 flex items-center gap-2 mx-auto border border-foreground/20 text-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-light hover:bg-parchment-dark transition-all">
-                <PenLine size={14} />
-                Capture this thought
-              </button>
+              <div className="mt-4 text-left">
+                <PublicReflectionEditor
+                  storageKey={`tsoy:stage:${journey}:${stage}:reflection-draft`}
+                />
+              </div>
             </div>
           </div>
         </section>

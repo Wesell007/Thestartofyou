@@ -33,6 +33,7 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PregnancyWeekSeo from "@/components/seo/PregnancyWeekSeo";
+import PublicWeekReflectionAsk from "@/components/pregnancy/PublicWeekReflectionAsk";
 import fetusImg from "@/assets/week39-fetus.jpg";
 import watermelonImg from "@/assets/week39-watermelon.jpg";
 import biologyImg from "@/assets/week39-biology-detail.jpg";
@@ -486,7 +487,7 @@ const Symptoms = () => (
     </div>
 
     <div className="mt-8 text-center">
-      <Link to="/articles/early-signs-of-labour"
+      <Link to="/articles/signs-of-labour"
         className="inline-flex items-center gap-2 font-sans text-[13.5px] font-medium text-sage hover:gap-3 transition-all">
         Read: the early signs of labour <ArrowRight size={13} />
       </Link>
@@ -696,65 +697,13 @@ const reflectionPrompts = ["What I'm hoping for", "What I'm afraid of", "What I'
 const askChips = ["Is this Braxton Hicks or labour?", "When my waters break", "How to time contractions", "If I go past my date", "What a 'show' looks like"];
 
 const ReflectionAsk = () => (
-  <section className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pb-16 md:pb-24">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-sage/40 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-sage-bg flex items-center justify-center shrink-0">
-            <Leaf size={14} className="text-sage" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">A moment for reflection</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">What does this week feel like for you?</h3>
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {reflectionPrompts.map((p) => (
-            <span key={p} className="font-sans text-[11.5px] font-medium bg-sage-bg/70 text-foreground/80 rounded-full px-3 py-1.5 border border-sage/20">
-              {p}
-            </span>
-          ))}
-        </div>
-        <textarea rows={4} placeholder="Write your thoughts here… this is just for you."
-          className="w-full bg-parchment/80 border border-border/40 rounded-xl px-4 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 resize-none focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all leading-relaxed" />
-        <Link to="/auth"
-          className="inline-flex items-center gap-2 mt-4 bg-terracotta text-terracotta-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-medium hover:bg-terracotta-hover transition-colors">
-          Save reflection to your journal <ArrowRight size={12} />
-        </Link>
-      </div>
-
-      <div className="bg-card rounded-3xl border border-border/40 border-t-2 border-t-lavender/50 p-7 sm:p-8 md:p-9 shadow-card-brand">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-9 h-9 rounded-full bg-lavender-bg flex items-center justify-center shrink-0">
-            <MessageCircle size={14} className="text-lavender-foreground" />
-          </span>
-          <div className="min-w-0">
-            <p className="font-sans text-[10.5px] font-semibold tracking-[0.24em] uppercase text-sage">Ask about week 39</p>
-            <h3 className="font-serif text-[1.3rem] sm:text-[1.35rem] text-foreground mt-0.5 leading-snug">A question on your mind?</h3>
-          </div>
-        </div>
-        <p className="font-sans text-[13px] text-foreground/70 leading-relaxed mb-4">
-          Get a calm, evidence-led answer tailored to where you are right now.
-        </p>
-        <input type="text" placeholder="e.g. Is this Braxton Hicks or real labour?"
-          className="w-full bg-parchment/80 border border-border/40 rounded-full px-5 py-3.5 font-sans text-[13.5px] text-foreground placeholder:text-foreground/45 focus:outline-none focus:border-sage focus:ring-1 focus:ring-sage/30 transition-all" />
-        <p className="font-sans text-[10.5px] font-semibold tracking-[0.22em] uppercase text-foreground/55 mt-5 mb-2.5">
-          Popular at this stage
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {askChips.map((c) => (
-            <Link key={c} to="/ask"
-              className="font-sans text-[12px] font-medium text-foreground/80 bg-parchment-dark/60 border border-border/40 hover:border-sage/50 hover:text-foreground px-3.5 py-1.5 rounded-full transition-colors">
-              {c}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
+  <PublicWeekReflectionAsk
+    week={39}
+    reflectionPrompts={reflectionPrompts}
+    askChips={askChips}
+  />
 );
 
-/* 14. JOURNAL */
 const Journal = () => (
   <section className="bg-sage-bg/40 py-16 md:py-24 border-y border-border/30">
     <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
@@ -798,22 +747,22 @@ const Journal = () => (
 
 /* 15. RELATED */
 const related = [
-  { slug: "early-signs-of-labour", img: thirdSignsImg, tag: "Looking ahead",
+  { slug: "signs-of-labour", img: thirdSignsImg, tag: "Looking ahead",
     title: "The early signs of labour",
     desc: "Braxton Hicks vs the real thing, what a 'show' looks like, and exactly when to call." },
-  { slug: "hospital-bag-essentials", img: thirdHospitalBagImg, tag: "Practical",
+  { slug: "hospital-bag-and-what-to-pack", img: thirdHospitalBagImg, tag: "Practical",
     title: "What to actually pack in your hospital bag",
     desc: "An honest, kept-list of what helps in labour, after birth, and on the journey home." },
-  { slug: "baby-movements-in-pregnancy", img: thirdMovementImg, tag: "Movement",
+  { slug: "baby-movement-in-pregnancy", img: thirdMovementImg, tag: "Movement",
     title: "Your baby's movements at 39 weeks",
     desc: "Movements should still feel strong and regular. What to notice, and when to call straight away." },
-  { slug: "sleep-in-the-third-trimester", img: thirdSleepImg, tag: "Body",
+  { slug: "sleep-in-pregnancy", img: thirdSleepImg, tag: "Body",
     title: "Sleeping in the final week",
     desc: "Side-sleeping, pillows, restless legs and the strange dreams of full term." },
-  { slug: "the-third-trimester-emotionally", img: thirdEmotionalImg, tag: "Emotions",
+  { slug: "emotional-wellbeing-pregnancy", img: thirdEmotionalImg, tag: "Emotions",
     title: "The waiting, emotionally",
     desc: "Birth fear, fierce love, the impatience of full term, and the soft grief of a life about to change." },
-  { slug: "preparing-the-nursery", img: thirdNurseryImg, tag: "At home",
+  { slug: "the-space-your-baby-will-come-home-to", img: thirdNurseryImg, tag: "At home",
     title: "Preparing your space",
     desc: "What you actually need before baby arrives, what can wait, and what nesting is best spent on." },
 ];

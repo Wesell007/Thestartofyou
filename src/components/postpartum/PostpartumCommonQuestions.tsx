@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
 import { ChevronRight, Search } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AskLink from "@/components/shared/AskLink";
+import { navigateToAsk } from "@/lib/askNavigation";
 
 const questions = [
   { q: "How long does recovery take?", sub: "What to expect and when" },
@@ -17,7 +18,7 @@ const PostpartumCommonQuestions = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (query.trim()) navigate(`/ask?q=${encodeURIComponent(query)}&stage=postpartum`);
+    navigateToAsk(navigate, query, { stage: "postpartum", context: "Postpartum" });
   };
 
   return (
@@ -70,7 +71,7 @@ const PostpartumCommonQuestions = () => {
                 {["Recovery timeline", "Sleep help", "Feeling overwhelmed"].map((chip) => (
                   <button
                     key={chip}
-                    onClick={() => navigate(`/ask?q=${encodeURIComponent(chip)}&stage=postpartum`)}
+                    onClick={() => navigateToAsk(navigate, chip, { stage: "postpartum", context: "Postpartum" })}
                     className="font-sans text-[11px] font-light px-3 py-1.5 rounded-full border transition-colors hover:bg-background/60"
                     style={{
                       borderColor: 'hsl(var(--stage-postpartum-accent) / 0.2)',
@@ -87,9 +88,11 @@ const PostpartumCommonQuestions = () => {
           {/* Right — questions list */}
           <div className="md:col-span-3">
             {questions.map((item, i) => (
-              <Link
+              <AskLink
                 key={i}
-                to={`/ask?q=${encodeURIComponent(item.q)}&stage=postpartum`}
+                question={item.q}
+                context="Postpartum"
+                stage="postpartum"
                 className="group flex items-center justify-between py-4 sm:py-5 border-b transition-all hover:pl-1"
                 style={{ borderColor: 'hsl(var(--stage-postpartum) / 0.3)' }}
               >
@@ -110,7 +113,7 @@ const PostpartumCommonQuestions = () => {
                     style={{ color: 'hsl(var(--stage-postpartum-accent) / 0.6)' }}
                   />
                 </div>
-              </Link>
+              </AskLink>
             ))}
           </div>
         </div>

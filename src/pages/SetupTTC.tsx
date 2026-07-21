@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { ArrowRight, Loader2, ShieldCheck } from "lucide-react";
 import { z } from "zod";
-import { format } from "date-fns";
+import { format, isAfter, isBefore, isValid, parseISO, startOfDay, subDays } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 import { buildAuthUrl } from "@/lib/authIntent";
 import { getActivePregnancyJourney } from "@/lib/savedJourney";
@@ -20,7 +20,13 @@ import { toast } from "sonner";
 const schema = z.object({
   last_period_date: z
     .string()
-    .min(1, "Please add the first day of your last period."),
+    .min(1, "Please add the first day of your last period.")
+    .refine((value) => /^\d{4}-\d{2}-\d{2}$/.test(value) && isValid(parseISO(value)), "Please add a valid period date.")
+    .refine((value) => {
+      const date = parseISO(value);
+      const today = startOfDay(new Date());
+      return !isAfter(date, today) && !isBefore(date, subDays(today, 90));
+    }, "Please use a period date from the last 90 days."),
   cycle_length_days: z
     .number({ invalid_type_error: "Please add your usual cycle length." })
     .int()
@@ -50,7 +56,7 @@ const schema = z.object({
   ]),
 });
 
-type Mode = "loading" | "signed_out" | "signed_in" | "pregnancy_active";
+type Mode = "loading" | "signed_out" | "signed_in" | "pregnancy_active" | "error";
 
 const RADIO = "flex items-center gap-2 text-[13.5px] font-sans text-foreground/85";
 
@@ -60,6 +66,7 @@ const SetupTTC = () => {
   const [userId, setUserId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [existing, setExisting] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const [form, setForm] = useState<TTCFormValues>({
     last_period_date: "",
@@ -79,16 +86,24 @@ const SetupTTC = () => {
     (async () => {
       const pending = getPendingTTCJourney();
       if (pending) {
-        setForm((f) => ({
-          ...f,
-          last_period_date: format(new Date(pending.lmp_ms), "yyyy-MM-dd"),
-          cycle_length_days: pending.cycle_length_days,
-          period_length_days: pending.period_length_days ?? null,
-        }));
+        const pendingDate = new Date(pending.lmp_ms);
+        if (isValid(pendingDate) && Number.isInteger(pending.cycle_length_days)) {
+          setForm((f) => ({
+            ...f,
+            last_period_date: format(pendingDate, "yyyy-MM-dd"),
+            cycle_length_days: pending.cycle_length_days,
+            period_length_days: pending.period_length_days ?? null,
+          }));
+        }
       }
 
-      const { data } = await supabase.auth.getSession();
+      const { data, error: sessionError } = await supabase.auth.getSession();
       if (cancelled) return;
+      if (sessionError) {
+        setLoadError("We couldn't check your account. Please try again.");
+        setMode("error");
+        return;
+      }
       const u = data.session?.user;
       if (!u) {
         setMode("signed_out");
@@ -96,13 +111,21 @@ const SetupTTC = () => {
       }
       setUserId(u.id);
 
-      const preg = await getActivePregnancyJourney(u.id);
-      if (preg) {
-        setMode("pregnancy_active");
+      let preg;
+      let ttc;
+      try {
+        preg = await getActivePregnancyJourney(u.id, { throwOnError: true });
+        if (preg) {
+          setMode("pregnancy_active");
+          return;
+        }
+        ttc = await getActiveTTCJourney(u.id, { throwOnError: true });
+      } catch (error) {
+        console.error(error);
+        setLoadError("We couldn't load your saved journey. Please try again.");
+        setMode("error");
         return;
       }
-
-      const ttc = await getActiveTTCJourney(u.id);
       if (ttc && ttc.last_period_date) {
         setExisting(true);
         setForm((f) => ({
@@ -138,7 +161,7 @@ const SetupTTC = () => {
   const stashCurrent = () => {
     if (!form.last_period_date) return;
     stashPendingTTCJourney({
-      lmp: new Date(form.last_period_date),
+      lmp: parseISO(form.last_period_date),
       cycle_length_days: form.cycle_length_days,
       period_length_days: form.period_length_days,
     });
@@ -192,7 +215,19 @@ const SetupTTC = () => {
   }, [mode, existing, submitting]);
 
   if (mode === "loading") {
-    return <div className="min-h-screen bg-parchment" />;
+    return <div className="min-h-screen bg-parchment flex items-center justify-center" role="status"><Loader2 className="animate-spin text-sage" aria-hidden /><span className="sr-only">Loading your TTC setup</span></div>;
+  }
+
+  if (mode === "error") {
+    return (
+      <div className="min-h-screen bg-parchment flex items-center justify-center px-6">
+        <div role="alert" className="max-w-md text-center space-y-5">
+          <h1 className="font-serif text-3xl text-foreground">We couldn't load your setup</h1>
+          <p className="font-sans text-sm text-muted-foreground">{loadError}</p>
+          <button type="button" onClick={() => window.location.reload()} className="rounded-pill bg-terracotta px-6 py-3 font-sans text-sm text-terracotta-foreground">Try again</button>
+        </div>
+      </div>
+    );
   }
 
   if (mode === "pregnancy_active") {
@@ -203,8 +238,9 @@ const SetupTTC = () => {
             You already have a pregnancy journey saved
           </h1>
           <p className="font-sans text-sm font-light text-muted-foreground/80 leading-relaxed mb-8">
-            Saving a TTC journey would replace it. You can carry on with your
-            pregnancy journey below, or update it later.
+            We will not replace your active pregnancy journey. You can carry on
+            with it below. Deliberate journey switching will be available from
+            your journey settings.
           </p>
           <Link
             to="/my-journey"
@@ -273,6 +309,8 @@ const SetupTTC = () => {
             <input
               type="date"
               required
+              min={format(subDays(new Date(), 90), "yyyy-MM-dd")}
+              max={format(new Date(), "yyyy-MM-dd")}
               value={form.last_period_date}
               onChange={(e) => set("last_period_date", e.target.value)}
               className="w-full bg-parchment border rounded-pill px-4 py-3 font-sans text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-foreground/10"

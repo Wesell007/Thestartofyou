@@ -1,12 +1,18 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 export function useAISearch() {
   const [answer, setAnswer] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
+  const requestRef = useRef(0);
 
   const ask = useCallback(async (query: string, context?: string) => {
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+    const requestId = ++requestRef.current;
     setAnswer("");
     setError(null);
     setIsLoading(true);
@@ -21,6 +27,7 @@ export function useAISearch() {
             Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
           },
           body: JSON.stringify({ query, context }),
+          signal: controller.signal,
         }
       );
 
@@ -36,26 +43,35 @@ export function useAISearch() {
       let buffer = "";
       let full = "";
 
+      const processLine = (rawLine: string) => {
+        let line = rawLine;
+        if (line.endsWith("\r")) line = line.slice(0, -1);
+        if (!line.startsWith("data: ")) return;
+        const json = line.slice(6).trim();
+        if (!json || json === "[DONE]") return;
+        const parsed = JSON.parse(json);
+        const content = parsed.choices?.[0]?.delta?.content;
+        if (content && requestRef.current === requestId) {
+          full += content;
+          setAnswer(full);
+        }
+      };
+
       while (true) {
         const { done, value } = await reader.read();
-        if (done) break;
+        if (done) {
+          buffer += decoder.decode();
+          if (buffer.trim()) processLine(buffer.trimEnd());
+          break;
+        }
         buffer += decoder.decode(value, { stream: true });
 
         let idx: number;
         while ((idx = buffer.indexOf("\n")) !== -1) {
-          let line = buffer.slice(0, idx);
+          const line = buffer.slice(0, idx);
           buffer = buffer.slice(idx + 1);
-          if (line.endsWith("\r")) line = line.slice(0, -1);
-          if (!line.startsWith("data: ")) continue;
-          const json = line.slice(6).trim();
-          if (json === "[DONE]") break;
           try {
-            const parsed = JSON.parse(json);
-            const content = parsed.choices?.[0]?.delta?.content;
-            if (content) {
-              full += content;
-              setAnswer(full);
-            }
+            processLine(line);
           } catch {
             buffer = line + "\n" + buffer;
             break;
@@ -63,17 +79,25 @@ export function useAISearch() {
         }
       }
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Something went wrong");
+      if (e instanceof DOMException && e.name === "AbortError") return;
+      if (requestRef.current === requestId) {
+        setError(e instanceof Error ? e.message : "Something went wrong");
+      }
     } finally {
-      setIsLoading(false);
+      if (requestRef.current === requestId) setIsLoading(false);
     }
   }, []);
 
   const reset = useCallback(() => {
+    abortRef.current?.abort();
+    abortRef.current = null;
+    requestRef.current += 1;
     setAnswer("");
     setError(null);
     setIsLoading(false);
   }, []);
+
+  useEffect(() => () => abortRef.current?.abort(), []);
 
   return { answer, isLoading, error, ask, reset };
 }

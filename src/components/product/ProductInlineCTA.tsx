@@ -1,4 +1,5 @@
 import { ExternalLink, BookOpen, Star } from "lucide-react";
+import { JOURNAL_PURCHASE_URL } from "@/lib/productLinks";
 
 const ProductInlineCTA = () => {
   return (
@@ -20,10 +21,12 @@ const ProductInlineCTA = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-5">
           <a
-            href="#"
+            href={JOURNAL_PURCHASE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-9 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
           >
-            Get the journal on Amazon
+            Find the journal on Amazon
             <ExternalLink size={14} />
           </a>
           <span className="inline-flex items-center gap-1.5 font-sans text-xs font-light text-muted-foreground">

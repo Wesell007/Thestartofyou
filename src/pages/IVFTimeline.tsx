@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import IVFTimelineResult from "@/components/ivf/IVFTimelineResult";
 import SeoHead from "@/components/seo/SeoHead";
+import { addDays, isAfter, isBefore, isValid, startOfDay } from "date-fns";
 
 const TIMELINE_SEO = (
   <SeoHead
@@ -20,11 +21,23 @@ const IVFTimeline = () => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    setReady(false);
+    setTransferDate(null);
+    setTransferType("5day");
     const dateParam = searchParams.get("date");
     const typeParam = searchParams.get("type");
     if (dateParam) {
-      const ts = parseInt(dateParam, 10);
-      if (!isNaN(ts)) setTransferDate(new Date(ts));
+      const ts = Number(dateParam);
+      const candidate = new Date(ts);
+      const today = startOfDay(new Date());
+      if (
+        Number.isFinite(ts) &&
+        isValid(candidate) &&
+        !isAfter(candidate, today) &&
+        !isBefore(candidate, addDays(today, -300))
+      ) {
+        setTransferDate(candidate);
+      }
     }
     if (typeParam === "3day" || typeParam === "5day") {
       setTransferType(typeParam);

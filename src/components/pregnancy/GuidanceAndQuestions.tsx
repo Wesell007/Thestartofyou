@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import AISearchBar from "@/components/shared/AISearchBar";
+import AskLink from "@/components/shared/AskLink";
 
 const questions = [
   { q: "When do symptoms start?", sub: "Understanding early pregnancy signals" },
@@ -36,9 +36,11 @@ const GuidanceAndQuestions = () => {
           <div className="md:col-span-3">
             <div className="mb-6">
               {questions.map((item, i) => (
-                <Link
+                <AskLink
                   key={i}
-                  to={`/ask?q=${encodeURIComponent(item.q)}&ctx=Pregnancy`}
+                  question={item.q}
+                  context="Pregnancy"
+                  stage="pregnancy"
                   className="group flex items-center justify-between py-4 sm:py-[18px] border-b transition-all hover:pl-1"
                   style={{ borderColor: 'hsl(var(--stage-pregnancy) / 0.4)' }}
                 >
@@ -59,7 +61,7 @@ const GuidanceAndQuestions = () => {
                       style={{ color: 'hsl(var(--stage-pregnancy-accent) / 0.6)' }}
                     />
                   </div>
-                </Link>
+                </AskLink>
               ))}
             </div>
 

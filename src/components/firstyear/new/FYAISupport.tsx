@@ -1,4 +1,5 @@
 import AISearchBar from "@/components/shared/AISearchBar";
+import AskLink from "@/components/shared/AskLink";
 
 const babyChips = ["Sleep regression", "Feeding cues", "Milestones"];
 const recoveryChips = ["Bleeding", "Mood shifts", "6-week check"];
@@ -64,9 +65,12 @@ const FYAISupport = () => {
             {/* Chip row — colour carries the meaning */}
             <div className="mt-6 flex flex-wrap items-center gap-2">
               {babyChips.map((c) => (
-                <a
+                <AskLink
                   key={c}
-                  href={`/ask?q=${encodeURIComponent(c)}&ctx=First+year+hub&journey=firstyear&stage=first-year`}
+                  question={c}
+                  context="First year hub"
+                  journey="firstyear"
+                  stage="first-year"
                   className="font-sans text-[12px] font-light px-3.5 py-1.5 rounded-full border bg-card/70 backdrop-blur-sm transition-all hover:-translate-y-[1px] hover:shadow-[0_8px_20px_-14px_rgba(20,30,60,0.5)]"
                   style={{
                     borderColor: 'hsl(var(--stage-firstyear-accent) / 0.28)',
@@ -74,12 +78,15 @@ const FYAISupport = () => {
                   }}
                 >
                   {c}
-                </a>
+                </AskLink>
               ))}
               {recoveryChips.map((c) => (
-                <a
+                <AskLink
                   key={c}
-                  href={`/ask?q=${encodeURIComponent(c)}&ctx=Postpartum+recovery&journey=recovery&stage=recovery`}
+                  question={c}
+                  context="Postpartum recovery"
+                  journey="recovery"
+                  stage="recovery"
                   className="font-sans text-[12px] font-light px-3.5 py-1.5 rounded-full border bg-card/70 backdrop-blur-sm transition-all hover:-translate-y-[1px] hover:shadow-[0_8px_20px_-14px_rgba(60,40,55,0.45)]"
                   style={{
                     borderColor: 'hsl(var(--stage-recovery-accent) / 0.28)',
@@ -87,7 +94,7 @@ const FYAISupport = () => {
                   }}
                 >
                   {c}
-                </a>
+                </AskLink>
               ))}
             </div>
           </div>

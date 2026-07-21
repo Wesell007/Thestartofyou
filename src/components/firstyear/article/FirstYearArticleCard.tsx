@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import type { CSSProperties } from "react";
 import { ChevronRight, ShieldCheck, Clock } from "lucide-react";
 import type { FirstYearArticle, FirstYearArticleTopic } from "@/data/firstYearArticleData";
 import { getFirstYearArticleImages } from "@/components/firstyear/article/firstYearArticleImages";
@@ -47,7 +48,12 @@ const FirstYearArticleCard = ({ article, tone = "baby" }: Props) => {
     ?? TOPIC_FALLBACK[article.topic];
 
   const cardClass =
-    `group relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-parchment transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_28px_60px_-32px_rgba(50,50,70,0.32)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment focus-visible:ring-[hsl(var(${accentTok})/0.5)]`;
+    "group relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-parchment transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_28px_60px_-32px_rgba(50,50,70,0.32)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment focus-visible:ring-[var(--card-ring)]";
+
+  const cardStyle = {
+    borderColor: accentBorder,
+    "--card-ring": `hsl(var(${accentTok}) / 0.5)`,
+  } as CSSProperties;
 
   const overlayGradient = `linear-gradient(160deg, hsl(var(${base}) / 0.14) 0%, transparent 50%, hsl(var(${deepTok}) / 0.22) 100%)`;
 
@@ -139,7 +145,7 @@ const FirstYearArticleCard = ({ article, tone = "baby" }: Props) => {
     return (
       <div
         className={`${cardClass} cursor-default opacity-95`}
-        style={{ borderColor: accentBorder }}
+        style={cardStyle}
         aria-disabled="true"
       >
         {inner}
@@ -151,7 +157,7 @@ const FirstYearArticleCard = ({ article, tone = "baby" }: Props) => {
     <Link
       to={`/first-year/${article.topic}/${article.slug}`}
       className={cardClass}
-      style={{ borderColor: accentBorder }}
+      style={cardStyle}
     >
       {inner}
     </Link>

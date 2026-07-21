@@ -11,6 +11,16 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+bun.lock
+bun.lockb
+test-results/
+playwright-report/
+supabase/.branches/
+supabase/.temp/
 
 # Editor directories and files
 .vscode/*

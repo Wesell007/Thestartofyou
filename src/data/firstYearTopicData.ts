@@ -4,7 +4,7 @@
 //
 // IMPORTANT (current state):
 // `featured[].href` is intentionally optional — when absent the template
-// falls back to /ask?q=<encoded title> so cards never lead to a dead URL
+// falls back to a private router-state AI question so cards never lead to a dead URL
 // while the real article layer is being written. Each card is shaped like
 // a real editorial article slot so swapping the href later is a one-line
 // change. The UI never exposes the temporary nature of the link.
@@ -66,7 +66,7 @@ export interface FirstYearFeaturedItem {
   image: string;
   /**
    * Future-proof: when the real article exists, set this to its slug.
-   * Until then, the template falls back to /ask?q=<title> behind the scenes.
+   * Until then, the template opens AI guidance with the title in private router state.
    */
   href?: string;
   /**

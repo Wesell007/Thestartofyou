@@ -83,6 +83,29 @@ export const getRecentTTCLogs = async (
   return (data ?? []) as TTCLog[];
 };
 
+/** Load the complete log history in pages so calendar navigation never shows a partial record. */
+export const getAllTTCLogsForJourney = async (
+  userId: string,
+  journeyId: string,
+): Promise<TTCLog[]> => {
+  const pageSize = 1000;
+  const rows: TTCLog[] = [];
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("ttc_logs")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("journey_id", journeyId)
+      .order("log_date", { ascending: false })
+      .order("created_at", { ascending: false })
+      .range(from, from + pageSize - 1);
+    if (error) throw error;
+    const page = (data ?? []) as TTCLog[];
+    rows.push(...page);
+    if (page.length < pageSize) return rows;
+  }
+};
+
 export const createTTCLog = async (input: TTCLogInput): Promise<TTCLog> => {
   const { data, error } = await supabase
     .from("ttc_logs")

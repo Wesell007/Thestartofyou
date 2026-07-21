@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
 import { ChevronRight, Search } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AskLink from "@/components/shared/AskLink";
+import { navigateToAsk } from "@/lib/askNavigation";
 
 const questions = [
   { q: "When will my baby sleep through the night?", sub: "Sleep patterns and development" },
@@ -17,7 +18,7 @@ const FirstYearCommonQuestions = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (query.trim()) navigate(`/ask?q=${encodeURIComponent(query)}`);
+    if (query.trim()) navigateToAsk(navigate, query, { context: "First year", stage: "first-year" });
   };
 
   return (
@@ -67,7 +68,7 @@ const FirstYearCommonQuestions = () => {
                 {["Sleep regression", "Milestones", "Routine changes", "Teething"].map((chip) => (
                   <button
                     key={chip}
-                    onClick={() => navigate(`/ask?q=${encodeURIComponent(chip)}`)}
+                    onClick={() => navigateToAsk(navigate, chip, { context: "First year", stage: "first-year" })}
                     className="font-sans text-[11px] font-light px-3 py-1.5 rounded-full border transition-colors hover:bg-background/60"
                     style={{
                       borderColor: 'hsl(var(--stage-firstyear-accent) / 0.2)',
@@ -84,9 +85,11 @@ const FirstYearCommonQuestions = () => {
           {/* Right — questions list */}
           <div className="md:col-span-3">
             {questions.map((item, i) => (
-              <Link
+              <AskLink
                 key={i}
-                to={`/ask?q=${encodeURIComponent(item.q)}`}
+                question={item.q}
+                context="First year"
+                stage="first-year"
                 className="group flex items-center justify-between py-4 sm:py-5 border-b transition-all hover:pl-1"
                 style={{ borderColor: 'hsl(var(--stage-firstyear) / 0.3)' }}
               >
@@ -102,7 +105,7 @@ const FirstYearCommonQuestions = () => {
                 >
                   <ChevronRight size={14} style={{ color: 'hsl(var(--stage-firstyear-accent) / 0.6)' }} />
                 </div>
-              </Link>
+              </AskLink>
             ))}
 
             {/* Bottom insight */}

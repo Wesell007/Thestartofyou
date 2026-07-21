@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import AskLink from "@/components/shared/AskLink";
 
 const questions = [
   { q: "How long does an IVF cycle typically take?", sub: "From stimulation to test day" },
@@ -32,9 +32,12 @@ const IVFCommonQuestions = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {questions.map((item, i) => (
-            <Link
+            <AskLink
               key={item.q}
-              to={`/ask?q=${encodeURIComponent(item.q)}&journey=ivf&ctx=${encodeURIComponent("IVF · Common questions")}`}
+              question={item.q}
+              journey="ivf"
+              context="IVF · Common questions"
+              stage="ivf"
               className="group relative flex items-center justify-between gap-4 rounded-2xl border bg-card/80 px-5 py-4 transition-all overflow-hidden"
               style={{ borderColor: 'hsl(var(--stage-ivf-accent) / 0.16)' }}
               onMouseEnter={(e) => {
@@ -72,7 +75,7 @@ const IVFCommonQuestions = () => {
                 className="shrink-0 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
                 style={{ color: 'hsl(var(--stage-ivf-accent))' }}
               />
-            </Link>
+            </AskLink>
           ))}
         </div>
       </div>

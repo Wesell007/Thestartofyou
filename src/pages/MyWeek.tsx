@@ -16,6 +16,7 @@ import SlotCompanionRecall from "@/components/myweek/SlotCompanionRecall";
 import SlotWhatsNext from "@/components/myweek/SlotWhatsNext";
 import MyWeekClosing from "@/components/myweek/MyWeekClosing";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
+import PageLoadState from "@/components/shared/PageLoadState";
 
 const getGreeting = (d = new Date()) => {
   const h = d.getHours();
@@ -49,6 +50,8 @@ const MyWeek = () => {
   const navigate = useNavigate();
   const [state, setState] = useState<Loaded | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [attempt, setAttempt] = useState(0);
   const viewedRef = useRef(false);
 
   useEffect(() => {
@@ -61,17 +64,22 @@ const MyWeek = () => {
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
-      const { data: sess } = await supabase.auth.getSession();
+      setLoading(true);
+      setLoadError(null);
+      try {
+      const { data: sess, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) throw sessionError;
       const user = sess.session?.user;
       if (!user) {
         navigate("/auth", { replace: true });
         return;
       }
 
-      const [{ data: profile }, journey] = await Promise.all([
+      const [{ data: profile, error: profileError }, journey] = await Promise.all([
         supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
-        getActivePregnancyJourney(user.id),
+        getActivePregnancyJourney(user.id, { throwOnError: true }),
       ]);
+      if (profileError) throw profileError;
 
       if (cancelled) return;
 
@@ -91,12 +99,18 @@ const MyWeek = () => {
         dueDate: journey.due,
       });
       setLoading(false);
+      } catch {
+        if (!cancelled) {
+          setLoadError("We couldn't load your week just now. Your saved journey has not been changed.");
+          setLoading(false);
+        }
+      }
     };
     load();
     return () => {
       cancelled = true;
     };
-  }, [navigate]);
+  }, [navigate, attempt]);
 
   const content = useMemo(
     () => (state ? getMyWeekContent(state.currentWeek) : null),
@@ -107,8 +121,12 @@ const MyWeek = () => {
     [state]
   );
 
-  if (loading || !state || !content || !identity) {
-    return <div className="min-h-screen bg-parchment" />;
+  if (loading) return <PageLoadState />;
+  if (loadError) {
+    return <PageLoadState error={loadError} onRetry={() => setAttempt((n) => n + 1)} />;
+  }
+  if (!state || !content || !identity) {
+    return <PageLoadState error="We couldn't prepare this week's content." onRetry={() => setAttempt((n) => n + 1)} />;
   }
 
   const { userId, firstName, currentWeek, dueDate } = state;

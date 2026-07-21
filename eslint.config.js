@@ -23,4 +23,21 @@ export default tseslint.config(
       "@typescript-eslint/no-unused-vars": "off",
     },
   },
+  {
+    files: ["src/components/ui/**/*.{ts,tsx}"],
+    rules: {
+      // shadcn modules intentionally export a component and its variants/hooks.
+      "react-refresh/only-export-components": "off",
+    },
+  },
+  {
+    files: [
+      "src/components/firstyear/topic/FirstYearTopicPage.tsx",
+      "src/components/shared/DueDateCalculatorResult.tsx",
+    ],
+    rules: {
+      // These modules expose a pure renderer/calculator alongside the page component.
+      "react-refresh/only-export-components": "off",
+    },
+  },
 );

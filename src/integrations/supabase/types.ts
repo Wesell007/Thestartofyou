@@ -438,6 +438,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      delete_active_journey: {
+        Args: { p_lifecycle: string }
+        Returns: boolean
+      }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
@@ -463,6 +467,30 @@ export type Database = {
           msg_id: number
           read_ct: number
         }[]
+      }
+      save_pregnancy_journey: {
+        Args: { p_due_date: string; p_lmp_date: string }
+        Returns: undefined
+      }
+      save_ttc_journey: {
+        Args: {
+          p_actively_trying: string
+          p_cycle_length_days: number
+          p_cycle_regularity: string
+          p_expected_period_date: string
+          p_fertile_window_end: string
+          p_fertile_window_start: string
+          p_ivf_consideration: string
+          p_last_period_date: string
+          p_likely_ovulation_date: string
+          p_period_length_days: number | null
+          p_possible_test_date: string
+          p_stage: string
+          p_support_status: string
+          p_tracks_symptoms: string
+          p_uses_ovulation_tests: string
+        }
+        Returns: string
       }
     }
     Enums: {

@@ -70,7 +70,7 @@ const ToddlerToolsResources = () => {
                       src={image.src}
                       alt={image.alt}
                       loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-[1.04]"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 group-hover:scale-[1.04]"
                     />
                     <span
                       className="pointer-events-none absolute inset-0"

@@ -1,5 +1,6 @@
 import { addDays, format } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
+import { parseDateOnly } from "@/lib/dateOnly";
 
 const PENDING_KEY = "pendingJourney";
 
@@ -81,24 +82,15 @@ const upsertPregnancyJourney = async (
   lmpDate: string,
   dueDate: string
 ): Promise<void> => {
-  const { error: pregErr } = await supabase.from("pregnancy_journeys").upsert(
-    {
-      user_id: userId,
-      lmp_date: lmpDate,
-      due_date: dueDate,
-    },
-    { onConflict: "user_id" }
-  );
-  if (pregErr) throw pregErr;
+  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+  if (sessionError) throw sessionError;
+  if (sessionData.session?.user.id !== userId) throw new Error("Your session no longer matches this journey.");
 
-  const { error: ptrErr } = await supabase.from("journeys").upsert(
-    {
-      user_id: userId,
-      lifecycle: "pregnancy",
-    },
-    { onConflict: "user_id" }
-  );
-  if (ptrErr) throw ptrErr;
+  const { error } = await supabase.rpc("save_pregnancy_journey", {
+    p_lmp_date: lmpDate,
+    p_due_date: dueDate,
+  });
+  if (error) throw error;
 
   await mirrorToLegacy(userId, lmpDate, dueDate);
 };
@@ -133,14 +125,16 @@ export const commitPendingJourneyToDB = async (userId: string) => {
  * Pages must not duplicate this logic.
  */
 export const getActivePregnancyJourney = async (
-  userId: string
+  userId: string,
+  options: { throwOnError?: boolean } = {},
 ): Promise<ActivePregnancyJourney | null> => {
   // Step 1: new tables (authoritative)
-  const { data: pointer } = await supabase
+  const { data: pointer, error: pointerError } = await supabase
     .from("journeys")
     .select("lifecycle")
     .eq("user_id", userId)
     .maybeSingle();
+  if (pointerError && options.throwOnError) throw pointerError;
 
   if (pointer) {
     if (pointer.lifecycle !== "pregnancy") {
@@ -148,17 +142,24 @@ export const getActivePregnancyJourney = async (
       // payload to surface in v1.
       return null;
     }
-    const { data: preg } = await supabase
+    const { data: preg, error: pregnancyError } = await supabase
       .from("pregnancy_journeys")
       .select("lmp_date, due_date, started_at")
       .eq("user_id", userId)
       .maybeSingle();
+    if (pregnancyError && options.throwOnError) throw pregnancyError;
     if (preg) {
+      const lmp = parseDateOnly(preg.lmp_date);
+      const due = parseDateOnly(preg.due_date);
+      if (!lmp || !due) {
+        if (options.throwOnError) throw new Error("The saved pregnancy dates are invalid.");
+        return null;
+      }
       return {
         lmp_date: preg.lmp_date,
         due_date: preg.due_date,
-        lmp: new Date(preg.lmp_date),
-        due: new Date(preg.due_date),
+        lmp,
+        due,
         started_at: preg.started_at ?? null,
         startedAt: preg.started_at ? new Date(preg.started_at) : null,
       };
@@ -167,35 +168,46 @@ export const getActivePregnancyJourney = async (
   }
 
   // Step 2: legacy fallback + opportunistic backfill
-  const { data: legacy } = await supabase
+  const { data: legacy, error: legacyError } = await supabase
     .from("saved_journeys")
     .select("lmp_date, due_date, journey_type, created_at")
     .eq("user_id", userId)
     .maybeSingle();
+  if (legacyError && options.throwOnError) throw legacyError;
 
   if (!legacy || legacy.journey_type !== "pregnancy") return null;
 
   // Best-effort backfill into new tables. Failures must not block the read.
   try {
-    await supabase
-      .from("pregnancy_journeys")
-      .upsert(
-        { user_id: userId, lmp_date: legacy.lmp_date, due_date: legacy.due_date },
-        { onConflict: "user_id" }
-      );
-    await supabase
-      .from("journeys")
-      .upsert({ user_id: userId, lifecycle: "pregnancy" }, { onConflict: "user_id" });
+    const { error } = await supabase.rpc("save_pregnancy_journey", {
+      p_lmp_date: legacy.lmp_date,
+      p_due_date: legacy.due_date,
+    });
+    if (error) throw error;
   } catch (err) {
     console.warn("[savedJourney] opportunistic backfill failed (non-fatal):", err);
   }
 
+  const legacyLmp = parseDateOnly(legacy.lmp_date);
+  const legacyDue = parseDateOnly(legacy.due_date);
+  if (!legacyLmp || !legacyDue) {
+    if (options.throwOnError) throw new Error("The saved pregnancy dates are invalid.");
+    return null;
+  }
   return {
     lmp_date: legacy.lmp_date,
     due_date: legacy.due_date,
-    lmp: new Date(legacy.lmp_date),
-    due: new Date(legacy.due_date),
+    lmp: legacyLmp,
+    due: legacyDue,
     started_at: legacy.created_at ?? null,
     startedAt: legacy.created_at ? new Date(legacy.created_at) : null,
   };
+};
+
+export const deletePregnancyJourney = async (userId: string): Promise<void> => {
+  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+  if (sessionError) throw sessionError;
+  if (sessionData.session?.user.id !== userId) throw new Error("Your session no longer matches this journey.");
+  const { error } = await supabase.rpc("delete_active_journey", { p_lifecycle: "pregnancy" });
+  if (error) throw error;
 };

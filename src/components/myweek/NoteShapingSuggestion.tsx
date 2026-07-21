@@ -29,7 +29,7 @@ interface Props {
    * or after editing). The parent writes the new text into the note and
    * is responsible for preserving first-written snapshot.
    */
-  onAccept: (shapedText: string) => void;
+  onAccept: (shapedText: string) => void | boolean | Promise<void | boolean>;
 }
 
 /**
@@ -91,10 +91,14 @@ const NoteShapingSuggestion = ({
     }
   };
 
-  const keepThis = () => {
+  const keepThis = async () => {
     const toKeep = editing ? editValue.trim() : draft.trim();
     if (!toKeep) return;
-    onAccept(toKeep);
+    const accepted = await onAccept(toKeep);
+    if (accepted === false) {
+      setSoftMessage("We couldn't save this suggestion. It is still here so you can try again.");
+      return;
+    }
     setPhase("idle");
     setDraft("");
     setEditValue("");
@@ -139,8 +143,8 @@ const NoteShapingSuggestion = ({
         </button>
         <span className="font-serif italic text-[11.5px] text-foreground/50 leading-snug">
           {lastInputWasVoice
-            ? "A quiet pass to gently shape what you spoke. Only you see the result."
-            : "A quiet pass to gently shape your words. Only you see the result."}
+            ? "Shape what you spoke using our external AI provider. Review it before saving."
+            : "Shape your words using our external AI provider. Review them before saving."}
         </span>
       </div>
     );
@@ -255,6 +259,11 @@ const NoteShapingSuggestion = ({
           Leave it
         </button>
       </div>
+      {softMessage && (
+        <p role="alert" className="mt-3 pl-4 font-serif italic text-[13px] text-destructive/80">
+          {softMessage}
+        </p>
+      )}
     </div>
   );
 };

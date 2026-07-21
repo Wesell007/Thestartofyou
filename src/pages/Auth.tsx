@@ -41,25 +41,34 @@ const Auth = () => {
     // the `onAuthStateChange` SIGNED_IN echo cannot both fire
     // `post_login_redirect`.
     let routed = false;
+    let routing = false;
     const route = async (userId: string) => {
+      if (routing || routed) return;
+      routing = true;
       try {
         await commitPendingJourneyToDB(userId);
-      } catch (e) {
-        console.error(e);
+        const target = await resolvePostLoginDestination(
+          userId,
+          effectiveIntent,
+          returnTo
+        );
+        if (cancelled || routed) return;
+        routed = true;
+        trackEvent(EVENTS.POST_LOGIN_REDIRECT);
+        navigate(target, { replace: true });
+      } catch (error) {
+        console.error(error);
+        if (!cancelled) toast.error("We couldn't load your saved journey. Please try again.");
+      } finally {
+        routing = false;
       }
-      const target = await resolvePostLoginDestination(
-        userId,
-        effectiveIntent,
-        returnTo
-      );
-      if (cancelled) return;
-      if (routed) return;
-      routed = true;
-      trackEvent(EVENTS.POST_LOGIN_REDIRECT);
-      navigate(target, { replace: true });
     };
 
-    supabase.auth.getSession().then(({ data }) => {
+    supabase.auth.getSession().then(({ data, error }) => {
+      if (error) {
+        toast.error("We couldn't check your session. Please refresh and try again.");
+        return;
+      }
       if (data.session?.user) {
         route(data.session.user.id);
       } else {
@@ -116,8 +125,8 @@ const Auth = () => {
     const { error } = await supabase.auth.signInWithOtp({
       email: email.trim(),
       options: {
-        // Allow new users — they'll create an account via the code.
-        shouldCreateUser: true,
+        // Returning sign-in must not silently create a second empty account.
+        shouldCreateUser: effectiveIntent === "start_journey",
         // Also include the magic link as a fallback in the same email.
         emailRedirectTo: buildAuthReturnUrl(),
       },
@@ -354,7 +363,9 @@ const Auth = () => {
           </div>
 
           <p className="font-sans text-[11px] font-light text-muted-foreground/40 text-center mt-6 leading-relaxed">
-            By continuing you agree to our terms. We'll never share your details.
+            By continuing you agree to our{" "}
+            <Link to="/terms" className="underline hover:text-foreground">terms</Link>.
+            {" "}Read our <Link to="/privacy" className="underline hover:text-foreground">privacy notice</Link>.
           </p>
         </div>
       </main>

@@ -546,15 +546,19 @@ const References = ({ guide }: Props) => (
 
 const FirstYearMonthPage = ({ guide }: Props) => {
   const { prev, next } = getAdjacentMonths(guide.slug);
+  const imagery = getMonthImagery(guide.slug);
   return (
     <div className="min-h-screen bg-parchment">
       <Navbar />
       <Hero guide={guide} />
       <ShortVersion guide={guide} />
       <BabySection guide={guide} />
+      <StoryBand src={imagery.baby.src} alt={imagery.baby.alt} caption={imagery.baby.caption} tint="firstyear" />
       <FeedingSection guide={guide} />
       <SleepSection guide={guide} />
+      <StoryBand src={imagery.parent.src} alt={imagery.parent.alt} caption={imagery.parent.caption} tint="recovery" />
       <YouSection guide={guide} />
+
       <FeelsAndHelps guide={guide} />
       <WhenToAsk guide={guide} />
       <CommonQuestions guide={guide} />

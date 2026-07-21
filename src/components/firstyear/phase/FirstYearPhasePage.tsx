@@ -317,36 +317,46 @@ const FeelsAndHelps = ({
 }) => {
   if (!feels?.length && !helps?.length) return null;
   return (
-    <section className="bg-parchment py-12 md:py-16">
+    <section className="bg-parchment py-16 md:py-22">
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7">
           {feels && feels.length > 0 && (
             <div
-              className="rounded-[22px] border p-6 md:p-7"
+              className="rounded-[24px] border p-8 md:p-9 shadow-[0_24px_60px_-40px_rgba(60,40,55,0.28)]"
               style={{
-                backgroundColor: "hsl(var(--stage-recovery-soft) / 0.2)",
-                borderColor: "hsl(var(--stage-recovery-accent) / 0.18)",
+                backgroundColor: "hsl(var(--stage-recovery-soft) / 0.3)",
+                borderColor: "hsl(var(--stage-recovery-accent) / 0.28)",
               }}
             >
               <p
-                className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-2"
+                className="font-sans text-[11px] font-medium tracking-[0.28em] uppercase mb-2.5"
                 style={{ color: "hsl(var(--stage-recovery-deep))" }}
               >
                 What often feels hard
               </p>
-              <h3 className="font-serif text-lg sm:text-xl text-foreground leading-snug mb-5">
+              <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-[1.2] mb-6">
                 The parts people rarely name out loud.
               </h3>
-              <ul className="space-y-4">
-                {feels.map((f) => (
-                  <li key={f.label}>
-                    <p
-                      className="font-sans text-[11px] font-light tracking-wider uppercase mb-1"
-                      style={{ color: "hsl(var(--stage-recovery-deep))" }}
-                    >
-                      {f.label}
-                    </p>
-                    <p className="font-sans text-[14px] font-light text-foreground/85 leading-relaxed">{f.body}</p>
+              <ul className="space-y-5">
+                {feels.map((f, i) => (
+                  <li
+                    key={f.label}
+                    className={i > 0 ? "pt-5 border-t border-border/40" : ""}
+                  >
+                    <div className="flex gap-4">
+                      <span
+                        className="font-serif text-[13px] tabular-nums shrink-0 mt-0.5"
+                        style={{ color: "hsl(var(--stage-recovery-accent))" }}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div className="min-w-0">
+                        <p className="font-sans text-[13px] font-medium text-foreground/90 mb-1">
+                          {f.label}
+                        </p>
+                        <p className="font-sans text-[14.5px] font-light text-foreground/80 leading-[1.75]">{f.body}</p>
+                      </div>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -355,31 +365,41 @@ const FeelsAndHelps = ({
 
           {helps && helps.length > 0 && (
             <div
-              className="rounded-[22px] border p-6 md:p-7"
+              className="rounded-[24px] border p-8 md:p-9 shadow-[0_24px_60px_-40px_rgba(20,30,60,0.28)]"
               style={{
-                backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.24)",
-                borderColor: "hsl(var(--stage-firstyear-accent) / 0.2)",
+                backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.32)",
+                borderColor: "hsl(var(--stage-firstyear-accent) / 0.28)",
               }}
             >
               <p
-                className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-2"
+                className="font-sans text-[11px] font-medium tracking-[0.28em] uppercase mb-2.5"
                 style={{ color: "hsl(var(--stage-firstyear-deep))" }}
               >
                 What can help
               </p>
-              <h3 className="font-serif text-lg sm:text-xl text-foreground leading-snug mb-5">
+              <h3 className="font-serif text-xl sm:text-2xl text-foreground leading-[1.2] mb-6">
                 Small things that make this phase kinder.
               </h3>
-              <ul className="space-y-4">
-                {helps.map((h) => (
-                  <li key={h.label}>
-                    <p
-                      className="font-sans text-[11px] font-light tracking-wider uppercase mb-1"
-                      style={{ color: "hsl(var(--stage-firstyear-deep))" }}
-                    >
-                      {h.label}
-                    </p>
-                    <p className="font-sans text-[14px] font-light text-foreground/85 leading-relaxed">{h.body}</p>
+              <ul className="space-y-5">
+                {helps.map((h, i) => (
+                  <li
+                    key={h.label}
+                    className={i > 0 ? "pt-5 border-t border-border/40" : ""}
+                  >
+                    <div className="flex gap-4">
+                      <span
+                        className="font-serif text-[13px] tabular-nums shrink-0 mt-0.5"
+                        style={{ color: "hsl(var(--stage-firstyear-accent))" }}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div className="min-w-0">
+                        <p className="font-sans text-[13px] font-medium text-foreground/90 mb-1">
+                          {h.label}
+                        </p>
+                        <p className="font-sans text-[14.5px] font-light text-foreground/80 leading-[1.75]">{h.body}</p>
+                      </div>
+                    </div>
                   </li>
                 ))}
               </ul>

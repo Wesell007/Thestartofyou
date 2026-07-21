@@ -44,7 +44,7 @@ const WeekSources = ({ week, sources }: Props) => {
                     {source.label}
                   </a>
                   <span className="text-muted-foreground/50">
-                    {" \u2014 "}
+                    {" · "}
                     {source.publisher}
                   </span>
                 </span>

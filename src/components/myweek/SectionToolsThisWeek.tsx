@@ -55,8 +55,8 @@ const TOOLS: Record<string, ToolCard> = {
   },
   kickCounter: {
     key: "kickCounter",
-    title: "Kick counter",
-    hint: "Time your baby's movements when it helps.",
+    title: "Baby movement notes",
+    hint: "A calm place to notice your baby's usual pattern.",
     icon: Footprints,
     kind: "coming-soon",
   },
@@ -79,8 +79,8 @@ const TOOLS: Record<string, ToolCard> = {
   },
   contractionCounter: {
     key: "contractionCounter",
-    title: "Contraction counter",
-    hint: "Time contractions when you need to.",
+    title: "Contraction timer",
+    hint: "Time contractions and keep notes.",
     icon: Timer,
     kind: "coming-soon",
   },

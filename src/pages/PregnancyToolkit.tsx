@@ -208,9 +208,19 @@ const PregnancyToolkit = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {MVP_TOOLS.map((t) => (
-              <MvpCard key={t.key} tool={t} />
-            ))}
+            {MVP_TOOLS.map((t) => {
+              if (t.key === "birth-plan") {
+                return (
+                  <MvpCard
+                    key={t.key}
+                    tool={t}
+                    statusText={birthPlanStatusText}
+                    to="/pregnancy-toolkit/birth-plan"
+                  />
+                );
+              }
+              return <MvpCard key={t.key} tool={t} statusText="Coming soon" />;
+            })}
           </div>
         </section>
 

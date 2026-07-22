@@ -44,6 +44,36 @@ export type Database = {
         }
         Relationships: []
       }
+      baby_movement_notes: {
+        Row: {
+          created_at: string
+          id: string
+          noted_at: string
+          notes: string | null
+          pattern_label: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          noted_at?: string
+          notes?: string | null
+          pattern_label?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          noted_at?: string
+          notes?: string | null
+          pattern_label?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       birth_plans: {
         Row: {
           answers: Json
@@ -69,6 +99,74 @@ export type Database = {
           created_at?: string
           id?: string
           notes?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      contraction_events: {
+        Row: {
+          created_at: string
+          ended_at: string | null
+          id: string
+          session_id: string
+          started_at: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          ended_at?: string | null
+          id?: string
+          session_id: string
+          started_at: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          ended_at?: string | null
+          id?: string
+          session_id?: string
+          started_at?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contraction_events_session_id_user_id_fkey"
+            columns: ["session_id", "user_id"]
+            isOneToOne: false
+            referencedRelation: "contraction_sessions"
+            referencedColumns: ["id", "user_id"]
+          },
+        ]
+      }
+      contraction_sessions: {
+        Row: {
+          created_at: string
+          ended_at: string | null
+          id: string
+          notes: string | null
+          started_at: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          ended_at?: string | null
+          id?: string
+          notes?: string | null
+          started_at?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          ended_at?: string | null
+          id?: string
+          notes?: string | null
+          started_at?: string
           updated_at?: string
           user_id?: string
         }

@@ -251,16 +251,14 @@ export const useHospitalBagSummary = () => {
         const packed = list.filter((r) => Boolean(r.packed_at)).length;
         const total = list.length;
         const percent = Math.round((packed / total) * 100);
-        const { statusFromProgress: sfp } = await import(
-          "@/lib/hospitalBagSchema"
-        );
         setProgress({
           packed,
           total,
           percent,
-          status: sfp(packed, total, true),
+          status: statusFromProgress(packed, total, true),
         });
         setHasRows(true);
+
       }
       setLoading(false);
     })();

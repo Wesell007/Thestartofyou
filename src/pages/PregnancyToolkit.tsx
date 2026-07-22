@@ -237,8 +237,19 @@ const PregnancyToolkit = () => {
                   />
                 );
               }
+              if (t.key === "hospital-bag") {
+                return (
+                  <MvpCard
+                    key={t.key}
+                    tool={t}
+                    statusText={hospitalBagStatusText}
+                    to="/pregnancy-toolkit/hospital-bag"
+                  />
+                );
+              }
               return <MvpCard key={t.key} tool={t} statusText="Coming soon" />;
             })}
+
           </div>
         </section>
 

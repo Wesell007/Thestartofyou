@@ -161,6 +161,45 @@ export type Database = {
         }
         Relationships: []
       }
+      hospital_bag_items: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          is_custom: boolean
+          item_key: string
+          label: string
+          packed_at: string | null
+          sort_order: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          id?: string
+          is_custom?: boolean
+          item_key: string
+          label: string
+          packed_at?: string | null
+          sort_order?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          is_custom?: boolean
+          item_key?: string
+          label?: string
+          packed_at?: string | null
+          sort_order?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       journeys: {
         Row: {
           lifecycle: string

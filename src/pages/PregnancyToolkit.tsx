@@ -14,6 +14,11 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { useBirthPlanSummary } from "@/hooks/useBirthPlan";
 import { statusFromCompletion, statusLabel } from "@/lib/birthPlanSchema";
+import { useHospitalBagSummary } from "@/hooks/useHospitalBag";
+import {
+  statusLabel as hbStatusLabel,
+} from "@/lib/hospitalBagSchema";
+
 import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
@@ -163,6 +168,15 @@ const PregnancyToolkit = () => {
   const birthPlanStatusText = bpLoading
     ? "Open"
     : statusLabel(statusFromCompletion(bpRow?.completion ?? 0, Boolean(bpRow)));
+  const { loading: hbLoading, progress: hbProgress, hasRows: hbHasRows } = useHospitalBagSummary();
+  const hospitalBagStatusText = hbLoading
+    ? "Open"
+    : !hbHasRows
+      ? "Not started"
+      : hbProgress.status === "ready-enough"
+        ? hbStatusLabel(hbProgress.status)
+        : `${hbProgress.packed} of ${hbProgress.total} packed`;
+
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
       <SeoHead
@@ -223,8 +237,19 @@ const PregnancyToolkit = () => {
                   />
                 );
               }
+              if (t.key === "hospital-bag") {
+                return (
+                  <MvpCard
+                    key={t.key}
+                    tool={t}
+                    statusText={hospitalBagStatusText}
+                    to="/pregnancy-toolkit/hospital-bag"
+                  />
+                );
+              }
               return <MvpCard key={t.key} tool={t} statusText="Coming soon" />;
             })}
+
           </div>
         </section>
 

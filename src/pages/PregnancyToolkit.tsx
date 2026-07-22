@@ -159,6 +159,10 @@ const FutureCard = ({ tool }: { tool: ToolCard }) => {
 };
 
 const PregnancyToolkit = () => {
+  const { loading: bpLoading, row: bpRow } = useBirthPlanSummary();
+  const birthPlanStatusText = bpLoading
+    ? "Open"
+    : statusLabel(statusFromCompletion(bpRow?.completion ?? 0, Boolean(bpRow)));
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
       <SeoHead

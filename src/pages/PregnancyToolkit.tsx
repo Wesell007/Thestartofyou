@@ -55,14 +55,14 @@ const MVP_TOOLS: ToolCard[] = [
 const FUTURE_TOOLS: ToolCard[] = [
   {
     key: "kick-counter",
-    title: "Kick counter",
-    hint: "Time your baby's movements when it helps to notice a pattern.",
+    title: "Baby movement notes",
+    hint: "A calm place to notice your baby's usual pattern.",
     icon: Footprints,
   },
   {
     key: "contraction-counter",
-    title: "Contraction counter",
-    hint: "A gentle timer for later, when you may want it.",
+    title: "Contraction timer",
+    hint: "A simple way to time contractions and keep notes.",
     icon: Timer,
   },
   {

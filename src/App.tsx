@@ -144,6 +144,8 @@ const AccountSettings = lazy(() => import("./pages/AccountSettings.tsx"));
 const PregnancyToolkit = lazy(() => import("./pages/PregnancyToolkit.tsx"));
 const PregnancyToolkitBirthPlan = lazy(() => import("./pages/PregnancyToolkitBirthPlan.tsx"));
 const PregnancyToolkitHospitalBag = lazy(() => import("./pages/PregnancyToolkitHospitalBag.tsx"));
+const PregnancyToolkitAppointments = lazy(() => import("./pages/PregnancyToolkitAppointments.tsx"));
+const PregnancyToolkitAppointmentEditor = lazy(() => import("./pages/PregnancyToolkitAppointmentEditor.tsx"));
 
 import ScrollToTop from "./components/layout/ScrollToTop.tsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";

@@ -51,15 +51,15 @@ const MVP_TOOLS: ToolCard[] = [
     hint: "Keep dates, questions and what was said in one thread.",
     icon: ClipboardList,
   },
-];
-
-const FUTURE_TOOLS: ToolCard[] = [
   {
-    key: "kick-counter",
+    key: "baby-movements",
     title: "Baby movement notes",
     hint: "A calm place to notice your baby's usual pattern.",
     icon: Footprints,
   },
+];
+
+const FUTURE_TOOLS: ToolCard[] = [
   {
     key: "contraction-counter",
     title: "Contraction timer",

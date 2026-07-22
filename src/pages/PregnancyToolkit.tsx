@@ -188,6 +188,14 @@ const PregnancyToolkit = () => {
         : apTotal === 1
           ? "1 saved"
           : `${apTotal} saved`;
+  const { loading: bmLoading, total: bmTotal } = useBabyMovementNotesSummary();
+  const babyMovementsStatusText = bmLoading
+    ? "Open"
+    : bmTotal === 0
+      ? "Not started"
+      : bmTotal === 1
+        ? "1 note saved"
+        : `${bmTotal} notes saved`;
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">

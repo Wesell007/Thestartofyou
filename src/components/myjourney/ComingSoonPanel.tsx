@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
 const items = [
   { label: "Birth plan", note: "Draft your preferences, kept in one place." },
   { label: "Hospital bag", note: "A checklist that remembers what matters." },
@@ -37,6 +40,20 @@ const ComingSoonPanel = () => {
           </li>
         ))}
       </ul>
+      <div className="mt-6 pt-5 border-t" style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.18)" }}>
+        <Link
+          to="/pregnancy-toolkit"
+          className="group inline-flex items-center gap-2 font-sans text-[11px] font-medium tracking-[0.24em] uppercase"
+          style={{ color: accent }}
+        >
+          Open your pregnancy toolkit
+          <ArrowRight
+            size={12}
+            strokeWidth={1.8}
+            className="transition-transform group-hover:translate-x-0.5"
+          />
+        </Link>
+      </div>
     </section>
   );
 };

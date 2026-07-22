@@ -141,6 +141,7 @@ const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const Privacy = lazy(() => import("./pages/Privacy.tsx"));
 const Terms = lazy(() => import("./pages/Terms.tsx"));
 const AccountSettings = lazy(() => import("./pages/AccountSettings.tsx"));
+const PregnancyToolkit = lazy(() => import("./pages/PregnancyToolkit.tsx"));
 import ScrollToTop from "./components/layout/ScrollToTop.tsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";
 import ConsentBanner from "./components/consent/ConsentBanner.tsx";

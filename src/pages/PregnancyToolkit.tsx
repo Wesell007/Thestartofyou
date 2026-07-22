@@ -277,6 +277,16 @@ const PregnancyToolkit = () => {
                   />
                 );
               }
+              if (t.key === "baby-movements") {
+                return (
+                  <MvpCard
+                    key={t.key}
+                    tool={t}
+                    statusText={babyMovementsStatusText}
+                    to="/pregnancy-toolkit/baby-movements"
+                  />
+                );
+              }
               return <MvpCard key={t.key} tool={t} statusText="Coming soon" />;
             })}
 

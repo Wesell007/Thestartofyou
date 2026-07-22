@@ -7,6 +7,8 @@ import {
   HospitalBagProgress,
   HOSPITAL_BAG_DEFAULTS,
   slugifyCustomLabel,
+  statusFromProgress,
+
 } from "@/lib/hospitalBagSchema";
 
 // Supabase generated types may not yet include hospital_bag_items.

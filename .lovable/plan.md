@@ -1,39 +1,50 @@
-Phase 12.5c builds the Baby Movement Notes page as a calm record-keeping tool. It never activates the coming-soon cards on the hub, My Week, or My Journey — that happens in 12.5e.
+# Phase 12.5c.1 — Activate Baby Movement Notes Card
 
-## Route
-- New protected route: `/pregnancy-toolkit/baby-movements`, added to `src/App.tsx` near the other toolkit routes, wrapped in `ProtectedRoute`.
-- Page uses `SeoHead` with `noindex`; not added to `scripts/generate-sitemap.ts` or `public/sitemap.xml`.
+Small scoped activation. No routes, migrations, schema, tables, safety copy, or tool logic change.
 
-## Files to create
-- `src/lib/babyMovementSchema.ts` — types, empty draft, `cleanDraft`, `isDraftEmpty`, ISO ↔ datetime-local helpers, `formatMovementDate`, pattern label suggestions ("Usual pattern", "More active than earlier", "Quieter than earlier", "Different pattern today", "Not sure"). Labels are pure text; no scoring.
-- `src/hooks/useBabyMovementNotes.ts` — mirrors `usePregnancyAppointments`:
-  - `useBabyMovementNotes()` returns `loadState`, `rows` (newest first by `noted_at`), `saveState`, `errorMessage`, `create`, `update`, `remove`, `reload`. Cast at boundary: `(supabase.from as any)("baby_movement_notes")`. Reads session for `user_id` on write. Save is blocked when both `pattern_label` and `notes` are empty. Trims text.
-  - `useBabyMovementNotesSummary()` returns `{ loading, hasRows, total, lastNoteAt }` and never writes.
-- `src/pages/PregnancyToolkitBabyMovements.tsx` — hero, persistent safety signpost, add-note form, notes list, empty state, back links. Uses `MyWeekHeader` / `MyWeekFooter` / `PageLoadState` and the pregnancy accent tokens (`--stage-pregnancy`, parchment background, `keepsake-surface`) — matches the appointments page visual language.
-- `src/components/pregnancy-toolkit/BabyMovementNoteForm.tsx` — controlled form for `noted_at` (datetime-local, defaults to now), pattern label (buttons or select), notes textarea, "Save note" button, disabled while empty or saving; also used inline for editing (accepts optional initial draft + `onCancel`).
-- `src/components/pregnancy-toolkit/BabyMovementNoteCard.tsx` — displays date, label, notes; edit expands the card into the shared form; delete uses `AlertDialog` confirmation.
+## Files inspected
+- `src/pages/PregnancyToolkit.tsx`
+- `src/components/myweek/SectionToolsThisWeek.tsx`
+- `src/hooks/useBabyMovementNotes.ts` (confirmed `useBabyMovementNotesSummary` exports `{ loading, hasRows, total, lastNoteAt }`)
+- `src/components/myjourney/*` and `src/pages/MyJourney.tsx` (no ToolkitProgressPanel exists; only `ComingSoonPanel.tsx` links to the toolkit)
 
 ## Files to edit
-- `src/App.tsx` — add the one protected route only. No other files edited.
+1. `src/pages/PregnancyToolkit.tsx`
+2. `src/components/myweek/SectionToolsThisWeek.tsx`
 
-## Behaviour
-- Row is created only when the user submits the form (no visit-time insert).
-- Notes ordered newest first by `noted_at DESC`.
-- Delete requires an explicit confirmation dialog.
-- Success/error messaging surfaced via the existing pattern; `useToast` for save/delete confirmation.
-- All internal links use real `to=` values (Back to toolkit → `/pregnancy-toolkit`, Open my week → `/my-week`). No `href="#"`.
+My Journey is not touched (no existing toolkit progress panel — creating one is out of scope per the "only if already ready" clause).
 
-## Safety signpost (rendered above the form and list, always visible, not collapsible)
-> If your baby's movements reduce, change, or stop, contact your midwife or maternity unit straight away, day or night. This is important at any time in pregnancy. This tool is a place to make notes, not a check on whether everything is okay.
+## 1) Pregnancy Toolkit hub
 
-## Copy rules
-UK English, calm, no dashes, no diagnosis / reassurance / triage / kick-count / labour-status / normal-abnormal / colour-coded urgency language.
+- Remove the `kick-counter` entry from `FUTURE_TOOLS`. Contraction timer, symptoms tracker, questions for midwife remain in the "Quiet tools for later" section unchanged.
+- Add a `baby-movements` entry to `MVP_TOOLS` (after appointment notes) using the existing `Footprints` icon, title "Baby movement notes", hint "A calm place to notice your baby's usual pattern."
+- Import and use `useBabyMovementNotesSummary`. Compute `babyMovementsStatusText`:
+  - `loading` → `"Open"`
+  - `total === 0` → `"Not started"`
+  - `total === 1` → `"1 note saved"`
+  - else → `"${total} notes saved"`
+- In the `MVP_TOOLS.map` branch, add a case for `baby-movements` that renders `<MvpCard tool={t} statusText={babyMovementsStatusText} to="/pregnancy-toolkit/baby-movements" />`.
+- Grid stays `sm:grid-cols-3` — with 4 live cards it wraps to 3 + 1 (acceptable and consistent with existing card style). No layout system rewrite.
+- No row creation from the hub (the summary hook is read-only via `useBabyMovementNotes` which does not insert).
 
-## Preserved
-Toolkit hub, My Week, My Journey toolkit panel, Birth Plan, Hospital Bag, Appointment Notes, sitemap, robots, redirects, AI logic, TTC / IVF / First Year / Toddler / Family, and all public pregnancy pages remain unchanged.
+## 2) My Week SectionToolsThisWeek
+
+- Convert `TOOLS.kickCounter` from `kind: "coming-soon"` to `kind: "live"` with `to: "/pregnancy-toolkit/baby-movements"`.
+- Keep the 3-card cap and existing week routing:
+  - week ≥ 28: `[birthPlan, appointments, kickCounter]` (now live)
+  - week ≥ 24: `[appointments, kickCounter, symptoms]` (now live)
+- Contraction timer, symptoms tracker, questions for midwife remain `coming-soon`.
+
+## Preservation checks
+- Baby Movement Notes page, safety signpost, form: unchanged.
+- Contraction Timer, Birth Plan, Hospital Bag, Appointment Notes: unchanged.
+- No new routes; `/pregnancy-toolkit/baby-movements` already registered.
+- No migrations, RLS, sitemap, robots, redirects, AI, TTC, IVF, First Year, Toddler, Family, or public pregnancy page changes.
+- No `href="#"`. No forbidden wording (no "kick counter", "10 kicks", "safe", "normal", diagnosis/triage/reassurance). UK English, no dashes in user copy.
 
 ## Verification
-`bunx tsgo --noEmit`; confirm noindex meta, route protected, no sitemap entry, save-only inserts, edit and delete flows, safety signpost visible above form on all viewport sizes.
+- `bunx tsgo --noEmit`
+- Manual: `/pregnancy-toolkit` shows Baby Movement Notes as a live clickable card linking to `/pregnancy-toolkit/baby-movements`; status reflects real note count; contraction timer still under "Quiet tools for later" and non-clickable; My Week from week 24 shows the live card.
 
 ## Recommended next phase
-Phase 12.5d: Contraction Timer hook and UI page.
+Phase 12.5d — Contraction Timer build.

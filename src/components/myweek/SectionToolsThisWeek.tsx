@@ -58,7 +58,8 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Baby movement notes",
     hint: "A calm place to notice your baby's usual pattern.",
     icon: Footprints,
-    kind: "coming-soon",
+    kind: "live",
+    to: "/pregnancy-toolkit/baby-movements",
   },
   hospitalBag: {
     key: "hospitalBag",

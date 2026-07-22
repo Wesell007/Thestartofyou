@@ -43,7 +43,8 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Appointment notes",
     hint: "Keep dates and what was said.",
     icon: ClipboardList,
-    kind: "coming-soon",
+    kind: "live",
+    to: "/pregnancy-toolkit/appointments",
   },
   symptoms: {
     key: "symptoms",

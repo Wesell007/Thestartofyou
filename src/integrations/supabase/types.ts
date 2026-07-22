@@ -221,6 +221,48 @@ export type Database = {
         }
         Relationships: []
       }
+      pregnancy_appointments: {
+        Row: {
+          appointment_at: string | null
+          appointment_type: string | null
+          created_at: string
+          follow_up: string | null
+          id: string
+          location: string | null
+          notes: string | null
+          questions: string | null
+          updated_at: string
+          user_id: string
+          week: number | null
+        }
+        Insert: {
+          appointment_at?: string | null
+          appointment_type?: string | null
+          created_at?: string
+          follow_up?: string | null
+          id?: string
+          location?: string | null
+          notes?: string | null
+          questions?: string | null
+          updated_at?: string
+          user_id: string
+          week?: number | null
+        }
+        Update: {
+          appointment_at?: string | null
+          appointment_type?: string | null
+          created_at?: string
+          follow_up?: string | null
+          id?: string
+          location?: string | null
+          notes?: string | null
+          questions?: string | null
+          updated_at?: string
+          user_id?: string
+          week?: number | null
+        }
+        Relationships: []
+      }
       pregnancy_journeys: {
         Row: {
           due_date: string

@@ -19,6 +19,7 @@ import {
   statusLabel as hbStatusLabel,
 } from "@/lib/hospitalBagSchema";
 import { useAppointmentsSummary } from "@/hooks/usePregnancyAppointments";
+import { useBabyMovementNotesSummary } from "@/hooks/useBabyMovementNotes";
 
 import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";

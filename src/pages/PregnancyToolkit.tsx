@@ -12,6 +12,8 @@ import {
   Calculator,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { useBirthPlanSummary } from "@/hooks/useBirthPlan";
+import { statusFromCompletion, statusLabel } from "@/lib/birthPlanSchema";
 import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";

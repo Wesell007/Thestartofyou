@@ -384,6 +384,9 @@ const App = () => (
           <Route path="/pregnancy-toolkit" element={<ProtectedRoute><PregnancyToolkit /></ProtectedRoute>} />
           <Route path="/pregnancy-toolkit/birth-plan" element={<ProtectedRoute><PregnancyToolkitBirthPlan /></ProtectedRoute>} />
           <Route path="/pregnancy-toolkit/hospital-bag" element={<ProtectedRoute><PregnancyToolkitHospitalBag /></ProtectedRoute>} />
+          <Route path="/pregnancy-toolkit/appointments" element={<ProtectedRoute><PregnancyToolkitAppointments /></ProtectedRoute>} />
+          <Route path="/pregnancy-toolkit/appointments/new" element={<ProtectedRoute><PregnancyToolkitAppointmentEditor /></ProtectedRoute>} />
+          <Route path="/pregnancy-toolkit/appointments/:id" element={<ProtectedRoute><PregnancyToolkitAppointmentEditor /></ProtectedRoute>} />
 
           <Route path="/account" element={<ProtectedRoute><AccountSettings /></ProtectedRoute>} />
           <Route path="/auth" element={<Auth />} />

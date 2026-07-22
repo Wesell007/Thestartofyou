@@ -77,13 +77,14 @@ const accent = "hsl(var(--stage-pregnancy-accent))";
 const softBorder = "hsl(var(--stage-pregnancy-accent) / 0.16)";
 const iconBg = "hsl(var(--stage-pregnancy) / 0.5)";
 
-const MvpCard = ({ tool }: { tool: ToolCard }) => {
+const MvpCard = ({ tool, statusText, to }: { tool: ToolCard; statusText: string; to?: string }) => {
   const Icon = tool.icon;
-  return (
+  const isLive = Boolean(to);
+  const body = (
     <div
       className="h-full rounded-[20px] keepsake-surface px-5 py-6 flex flex-col"
       style={{ borderColor: softBorder }}
-      aria-disabled="true"
+      aria-disabled={isLive ? undefined : "true"}
     >
       <span
         aria-hidden="true"
@@ -98,11 +99,32 @@ const MvpCard = ({ tool }: { tool: ToolCard }) => {
       <p className="font-sans text-[13px] font-light text-foreground/60 leading-[1.6] flex-1">
         {tool.hint}
       </p>
-      <span className="mt-4 inline-flex items-center font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/45">
-        Coming soon
+      <span
+        className="mt-4 inline-flex items-center gap-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase"
+        style={isLive ? { color: accent } : { color: "hsl(var(--foreground) / 0.45)" }}
+      >
+        {isLive ? (
+          <>
+            {statusText}
+            <ArrowRight size={11} strokeWidth={1.6} />
+          </>
+        ) : (
+          statusText
+        )}
       </span>
     </div>
   );
+  if (isLive && to) {
+    return (
+      <Link
+        to={to}
+        className="group block h-full transition-shadow hover:shadow-[0_18px_44px_-24px_hsl(var(--stage-pregnancy-accent)/0.28)]"
+      >
+        {body}
+      </Link>
+    );
+  }
+  return body;
 };
 
 const FutureCard = ({ tool }: { tool: ToolCard }) => {

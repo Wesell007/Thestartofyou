@@ -378,6 +378,7 @@ const App = () => (
           <Route path="/my-journey" element={<ProtectedRoute><MyJourney /></ProtectedRoute>} />
           <Route path="/my-ttc-journey" element={<ProtectedRoute><MyTTCJourney /></ProtectedRoute>} />
           <Route path="/pregnancy-toolkit" element={<ProtectedRoute><PregnancyToolkit /></ProtectedRoute>} />
+          <Route path="/pregnancy-toolkit/birth-plan" element={<ProtectedRoute><PregnancyToolkitBirthPlan /></ProtectedRoute>} />
           <Route path="/account" element={<ProtectedRoute><AccountSettings /></ProtectedRoute>} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/setup" element={<Setup />} />

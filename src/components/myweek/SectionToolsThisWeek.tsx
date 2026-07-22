@@ -71,7 +71,8 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Birth plan",
     hint: "Your preferences, held in one place.",
     icon: ScrollText,
-    kind: "coming-soon",
+    kind: "live",
+    to: "/pregnancy-toolkit/birth-plan",
   },
   contractionCounter: {
     key: "contractionCounter",

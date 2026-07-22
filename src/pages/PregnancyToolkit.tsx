@@ -19,6 +19,7 @@ import {
   statusLabel as hbStatusLabel,
 } from "@/lib/hospitalBagSchema";
 import { useAppointmentsSummary } from "@/hooks/usePregnancyAppointments";
+import { useBabyMovementNotesSummary } from "@/hooks/useBabyMovementNotes";
 
 import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
@@ -50,15 +51,15 @@ const MVP_TOOLS: ToolCard[] = [
     hint: "Keep dates, questions and what was said in one thread.",
     icon: ClipboardList,
   },
-];
-
-const FUTURE_TOOLS: ToolCard[] = [
   {
-    key: "kick-counter",
+    key: "baby-movements",
     title: "Baby movement notes",
     hint: "A calm place to notice your baby's usual pattern.",
     icon: Footprints,
   },
+];
+
+const FUTURE_TOOLS: ToolCard[] = [
   {
     key: "contraction-counter",
     title: "Contraction timer",
@@ -187,6 +188,14 @@ const PregnancyToolkit = () => {
         : apTotal === 1
           ? "1 saved"
           : `${apTotal} saved`;
+  const { loading: bmLoading, total: bmTotal } = useBabyMovementNotesSummary();
+  const babyMovementsStatusText = bmLoading
+    ? "Open"
+    : bmTotal === 0
+      ? "Not started"
+      : bmTotal === 1
+        ? "1 note saved"
+        : `${bmTotal} notes saved`;
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
@@ -265,6 +274,16 @@ const PregnancyToolkit = () => {
                     tool={t}
                     statusText={appointmentsStatusText}
                     to="/pregnancy-toolkit/appointments"
+                  />
+                );
+              }
+              if (t.key === "baby-movements") {
+                return (
+                  <MvpCard
+                    key={t.key}
+                    tool={t}
+                    statusText={babyMovementsStatusText}
+                    to="/pregnancy-toolkit/baby-movements"
                   />
                 );
               }

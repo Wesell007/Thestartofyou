@@ -18,6 +18,7 @@ import { useHospitalBagSummary } from "@/hooks/useHospitalBag";
 import {
   statusLabel as hbStatusLabel,
 } from "@/lib/hospitalBagSchema";
+import { useAppointmentsSummary } from "@/hooks/usePregnancyAppointments";
 
 import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
@@ -176,6 +177,16 @@ const PregnancyToolkit = () => {
       : hbProgress.status === "ready-enough"
         ? hbStatusLabel(hbProgress.status)
         : `${hbProgress.packed} of ${hbProgress.total} packed`;
+  const { loading: apLoading, total: apTotal, next: apNext } = useAppointmentsSummary();
+  const appointmentsStatusText = apLoading
+    ? "Open"
+    : apTotal === 0
+      ? "Not started"
+      : apNext
+        ? "Next appointment saved"
+        : apTotal === 1
+          ? "1 saved"
+          : `${apTotal} saved`;
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
@@ -244,6 +255,16 @@ const PregnancyToolkit = () => {
                     tool={t}
                     statusText={hospitalBagStatusText}
                     to="/pregnancy-toolkit/hospital-bag"
+                  />
+                );
+              }
+              if (t.key === "appointment-notes") {
+                return (
+                  <MvpCard
+                    key={t.key}
+                    tool={t}
+                    statusText={appointmentsStatusText}
+                    to="/pregnancy-toolkit/appointments"
                   />
                 );
               }

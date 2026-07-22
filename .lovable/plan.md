@@ -1,112 +1,73 @@
-# Phase 12.4d — Hospital Bag MVP
+# Phase 12.4e — Appointment Notes MVP
 
-Build the second Pregnancy Toolkit tool at `/pregnancy-toolkit/hospital-bag`: a calm, premium checklist backed by a new `hospital_bag_items` table with strict RLS. Defaults (**27 items**) are seeded only on first visit to the tool itself, never from the hub.
+Build the third MVP Pregnancy Toolkit tool: a calm private notebook for appointment dates, questions, notes and follow-ups. Same visual language and safety posture as Birth Plan and Hospital Bag.
 
-## Scope
+## Database
 
-In: DB migration + RLS, protected route, checklist UI, default seeding, custom items, packed toggle, progress + summary, toolkit hub card upgrade, My Week card from week 30+.
-Out: Appointment Notes, Kick/Contraction counters, Symptoms, Midwife Questions, AI memory, My Journey toolkit progress panels.
+New migration creating `public.pregnancy_appointments`:
 
-## Database (single migration)
+- Columns: `id uuid pk`, `user_id uuid not null references auth.users on delete cascade`, `appointment_at timestamptz`, `week int check (week is null or between 1 and 42)`, `appointment_type text`, `location text`, `notes text`, `questions text`, `follow_up text`, `created_at`, `updated_at`.
+- Index: `(user_id, appointment_at desc)`.
+- Grants: `select, insert, update, delete` to `authenticated`; `all` to `service_role`. No `anon`.
+- Enable RLS. Four policies, all scoped `auth.uid() = user_id` (with matching `with check` on insert/update).
+- Reuse existing `public.set_updated_at()` in a `before update` trigger. Do not create a new function.
 
-```sql
-create table public.hospital_bag_items (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid not null references auth.users(id) on delete cascade,
-  category text not null check (category in ('parent','baby','partner','documents','comfort')),
-  item_key text not null,
-  label text not null,
-  is_custom boolean not null default false,
-  packed_at timestamptz,
-  sort_order int not null default 0,
-  created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now(),
-  unique (user_id, category, item_key)
-);
+## Schema and hook
 
-grant select, insert, update, delete on public.hospital_bag_items to authenticated;
-grant all on public.hospital_bag_items to service_role;
+- `src/lib/appointmentSchema.ts`: `Appointment` type, list of soft appointment-type suggestions (Midwife appointment, Scan, Consultant appointment, GP appointment, Blood test, Other), trim/validate helpers, week validation (blank or 1–42), upcoming/past partition helper, `nextUpcoming` helper.
+- `src/hooks/usePregnancyAppointments.ts`:
+  - `useAppointments()`: list + loading/error + `create(draft)`, `update(id, patch)`, `remove(id)`.
+  - `useAppointment(id)`: single load + save/delete + loading/saving/saved/error states, "not found" state.
+  - No row created on visit; row created on first save only.
+  - Use the same safe cast boundary pattern used in `useBirthPlan`/`useHospitalBag` if generated types are stale.
+- `src/hooks/usePregnancyAppointments.ts` also exports `useAppointmentsSummary()` for the hub card (count + next upcoming).
 
-alter table public.hospital_bag_items enable row level security;
+## Routes
 
-create policy "own rows select" on public.hospital_bag_items
-  for select to authenticated using (auth.uid() = user_id);
-create policy "own rows insert" on public.hospital_bag_items
-  for insert to authenticated with check (auth.uid() = user_id);
-create policy "own rows update" on public.hospital_bag_items
-  for update to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
-create policy "own rows delete" on public.hospital_bag_items
-  for delete to authenticated using (auth.uid() = user_id);
+Register in `src/App.tsx`, all wrapped in `ProtectedRoute`:
 
-create index hospital_bag_items_user_category_idx
-  on public.hospital_bag_items (user_id, category);
+- `/pregnancy-toolkit/appointments` → `PregnancyToolkitAppointments`
+- `/pregnancy-toolkit/appointments/new` → `PregnancyToolkitAppointmentEditor` (create mode)
+- `/pregnancy-toolkit/appointments/:id` → `PregnancyToolkitAppointmentEditor` (edit mode)
 
-create trigger hospital_bag_items_set_updated_at
-  before update on public.hospital_bag_items
-  for each row execute function public.set_updated_at();
-```
+All pages `noindex` via `SeoHead`. Not added to `scripts/generate-sitemap.ts`.
 
-No anon grants. Reuses existing `public.set_updated_at()`.
+## Pages and components
 
-## Frontend files
+- `src/pages/PregnancyToolkitAppointments.tsx`: Hero, summary card (total saved, next upcoming), grouped list (Upcoming / Past or saved notes), warm empty state with CTA to `/appointments/new`. Header/footer match Birth Plan/Hospital Bag.
+- `src/pages/PregnancyToolkitAppointmentEditor.tsx`: shared editor for new + edit; delete with confirmation on edit only; back link to list; not-found state for missing/other-user rows.
+- `src/components/pregnancy-toolkit/AppointmentCard.tsx`: type, date/time (if set), week (if set), location (if set), short previews for notes / questions / follow-up, edit link.
+- `src/components/pregnancy-toolkit/AppointmentEditorForm.tsx`: fields — appointment date+time, pregnancy week, appointment type (free text with datalist of soft suggestions), location, questions, notes, follow-up. Mobile-first, simple.
 
-Create:
-- `src/lib/hospitalBagSchema.ts` — category keys + labels, the 27 default items with stable `item_key` slugs and `sort_order`, TS types (`HospitalBagCategoryKey`, `HospitalBagItemRow`, `HospitalBagStatus`), helpers `calculateProgress`, `statusFromProgress`, `statusLabel`.
-- `src/hooks/useHospitalBag.ts` — load rows for `auth.uid()`; if empty, seed the 27 defaults once via a single `upsert` on `(user_id, category, item_key)` (idempotent). Exposes `togglePacked` (optimistic, rollback on error), `addCustomItem` (trim, reject empty, slug + random suffix `item_key`, `is_custom = true`, append with `sort_order = max + 1`), `deleteCustomItem` (guards `is_custom`), computed `packed / total / percent / status`, and `loadState / saveState / errorMessage / reload`. Also exports `useHospitalBagSummary` for the hub (read-only, never seeds). Casts `supabase.from("hospital_bag_items") as any` for stale generated types.
-- `src/pages/PregnancyToolkitHospitalBag.tsx` — hero, safety line, `HospitalBagProgress`, five `HospitalBagCategory` sections, summary block, back links. `SeoHead` with `noindex`. Visual language mirrors Birth Plan.
-- `src/components/pregnancy-toolkit/HospitalBagCategory.tsx` — keepsake card per category: item rows with checkbox toggle, delete affordance only for `is_custom`, inline add-item input at bottom.
-- `src/components/pregnancy-toolkit/HospitalBagProgress.tsx` — `X of 27 packed`, percent, calm status label (Not started / A few things packed / Coming together / Nearly ready / Ready enough).
+Quiet safety line on list hero: "This is your private notebook. It is not a medical record." Optional subtle footer line about contacting midwife/GP/NHS 111/emergency services as appropriate.
 
-Edit:
-- `src/App.tsx` — lazy-import `PregnancyToolkitHospitalBag` and register `/pregnancy-toolkit/hospital-bag` inside `ProtectedRoute`, next to the Birth Plan route.
-- `src/pages/PregnancyToolkit.tsx` — Hospital Bag card becomes live `<Link>` using `useHospitalBagSummary`: Not started (no rows) → `X of 27 packed` → `Ready enough` when close to complete. No seeding from the hub.
-- `src/components/myweek/SectionToolsThisWeek.tsx` — flip `hospitalBag` to `kind: "live"` with `to: "/pregnancy-toolkit/hospital-bag"`. Adjust `getWeekTools` bands so weeks 30+ surface Hospital Bag as live (Birth Plan still live from 28+, other tools unchanged).
+## Toolkit hub
 
-Do NOT edit: `scripts/generate-sitemap.ts`, `src/integrations/supabase/client.ts`, `src/integrations/supabase/types.ts`, robots, `MyJourney`, or any TTC/IVF/First Year/Toddler/Family/public pregnancy files.
+`src/pages/PregnancyToolkit.tsx`: activate the Appointment Notes card, link to `/pregnancy-toolkit/appointments`. Status text (real only):
+- 0 rows → "Not started"
+- 1 row → "1 saved"
+- N rows → "X saved"
+- If a next upcoming exists → "Next appointment saved"
 
-## Default checklist (27 items)
+No row creation from the hub. Birth Plan and Hospital Bag remain live; future tools remain coming later.
 
-Mum or birthing parent (7): comfortable nightwear, going home clothes, maternity pads, toiletries, phone charger, water bottle, snacks.
-Baby (7): sleepsuits, vests, nappies, wipes or cotton wool, hat, blanket, going home outfit.
-Birth partner (4): snacks and drinks, phone charger, change of clothes, important contacts.
-Documents (4): maternity notes, birth plan, hospital information, important phone numbers.
-Comfort items (5): lip balm, hair ties, pillow if preferred, music or headphones, a small item that helps you feel calm.
+## My Week
 
-Total = 27.
+`src/components/myweek/SectionToolsThisWeek.tsx`: promote `appointments` from coming-soon to `live` with `to: "/pregnancy-toolkit/appointments"` from week 6 onward. Keep Birth Plan (28+) and Hospital Bag (30+). Adjust the per-week trio picks so early-pregnancy weeks (6+) surface Appointment Notes without displacing existing live tools. No `href="#"`, no dead links.
 
-## Seeding behaviour
+## Copy and safety
 
-- Toolkit hub: `select` only. Never inserts. No rows → "Not started".
-- Tool page mount: `select where user_id = auth.uid()`. If zero rows, run one `upsert` batch of the 27 defaults keyed by `(user_id, category, item_key)`. Idempotent by unique constraint; repeat visits never duplicate.
-- Seed failure surfaces a calm inline error with a retry button; page does not collapse.
+UK English, calm, no em/en dashes in user copy, no medical advice, no diagnosis/triage/pressure/shame, no false reassurance, no fake progress. Clearly framed as a private notebook, not a medical record.
 
-## Packed toggle
+## Preservation
 
-- Unchecked → `update ... set packed_at = null`.
-- Checked → `update ... set packed_at = now()`.
-- Optimistic update in the hook; rolled back on error.
-
-## Custom items
-
-- Trim label; reject empty. Generate `item_key` from slug of label + short random suffix (collision-safe against the unique constraint). `is_custom = true`. Append with `sort_order = max(existing in category) + 1`.
-- Delete only allowed when `is_custom = true`. Default items have no delete affordance in MVP.
-
-## Copy + safety
-
-UK English, calm and optional framing, no em/en dashes in user copy. Hero standfirst plus a quieter reminder that this is a guide, hospitals differ, and users can adapt it. No medical or urgent-symptom guidance inside the tool.
-
-## Visual direction
-
-Parchment background, `keepsake-surface` cards, `--stage-pregnancy-accent` tokens, serif headings, soft borders, mobile-first single column — matching `/pregnancy-toolkit` and Birth Plan.
+No changes to TTC, IVF, First Year, Toddler, Family, public pregnancy pages/weeks, calculators, setup, reflection, photo memory, `/my-journey` data, other toolkit tools, AI logic, robots, redirects, sitemap logic.
 
 ## Verification
 
-- `bunx tsgo --noEmit`
-- Manual: unauth → auth redirect; first authed visit → 27 defaults seeded, `0 of 27 packed`; toggle sets/clears `packed_at` and persists on reload; add + delete custom item; hub reflects real count without seeding; Hospital Bag card in My Week live from week 30, coming-soon before.
-- Confirm `<meta name="robots" content="noindex,follow">`.
-- Confirm `/pregnancy-toolkit/hospital-bag` not in `public/sitemap.xml`.
-- Grep new files for `href="#"` → none.
+- `bunx tsgo --noEmit` clean.
+- Manual: migration + RLS + grants; protected routes; noindex present; routes absent from `public/sitemap.xml`; visiting list/new does not create rows; first save creates row; update + delete-with-confirm work; grouping and empty state render; hub card + My Week card link correctly.
 
 ## Recommended next phase
 
-12.4e — Appointment Notes tool (relational notes with dates and follow-ups).
+12.4f — Toolkit polish + My Journey toolkit progress panel (Birth Plan, Hospital Bag, Appointments summary).

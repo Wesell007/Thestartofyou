@@ -142,6 +142,7 @@ const Privacy = lazy(() => import("./pages/Privacy.tsx"));
 const Terms = lazy(() => import("./pages/Terms.tsx"));
 const AccountSettings = lazy(() => import("./pages/AccountSettings.tsx"));
 const PregnancyToolkit = lazy(() => import("./pages/PregnancyToolkit.tsx"));
+const PregnancyToolkitBirthPlan = lazy(() => import("./pages/PregnancyToolkitBirthPlan.tsx"));
 import ScrollToTop from "./components/layout/ScrollToTop.tsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";
 import ConsentBanner from "./components/consent/ConsentBanner.tsx";
@@ -377,6 +378,7 @@ const App = () => (
           <Route path="/my-journey" element={<ProtectedRoute><MyJourney /></ProtectedRoute>} />
           <Route path="/my-ttc-journey" element={<ProtectedRoute><MyTTCJourney /></ProtectedRoute>} />
           <Route path="/pregnancy-toolkit" element={<ProtectedRoute><PregnancyToolkit /></ProtectedRoute>} />
+          <Route path="/pregnancy-toolkit/birth-plan" element={<ProtectedRoute><PregnancyToolkitBirthPlan /></ProtectedRoute>} />
           <Route path="/account" element={<ProtectedRoute><AccountSettings /></ProtectedRoute>} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/setup" element={<Setup />} />

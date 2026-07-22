@@ -71,7 +71,8 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Birth plan",
     hint: "Your preferences, held in one place.",
     icon: ScrollText,
-    kind: "coming-soon",
+    kind: "live",
+    to: "/pregnancy-toolkit/birth-plan",
   },
   contractionCounter: {
     key: "contractionCounter",
@@ -85,6 +86,7 @@ const TOOLS: Record<string, ToolCard> = {
 const getWeekTools = (week: number): ToolCard[] => {
   if (week >= 37) return [TOOLS.contractionCounter, TOOLS.hospitalBag, TOOLS.birthPlan];
   if (week >= 34) return [TOOLS.hospitalBag, TOOLS.birthPlan, TOOLS.kickCounter];
+  if (week >= 28) return [TOOLS.birthPlan, TOOLS.kickCounter, TOOLS.appointments];
   if (week >= 24) return [TOOLS.kickCounter, TOOLS.appointments, TOOLS.symptoms];
   if (week >= 13) return [TOOLS.appointments, TOOLS.symptoms, TOOLS.midwifeQuestions];
   return [TOOLS.dueDate, TOOLS.midwifeQuestions, TOOLS.appointments];

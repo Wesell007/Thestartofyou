@@ -47,8 +47,8 @@ const CurrentChapterCard = ({ currentWeek }: Props) => {
           <h2 className="font-serif font-medium text-foreground text-[1.85rem] sm:text-[2.15rem] leading-[1.05] mb-3">
             {identity.chapterTitle}
           </h2>
-          <p className="font-serif italic text-foreground/60 text-[15.5px] sm:text-[16px] leading-[1.5] mb-6 max-w-[40ch]">
-            Where you are right now.
+          <p className="font-serif italic text-foreground/62 text-[15.5px] sm:text-[16px] leading-[1.55] mb-6 max-w-[44ch]">
+            {identity.babyNote}
           </p>
           <span className="inline-flex items-center gap-2 font-sans text-[11.5px] font-medium tracking-[0.22em] uppercase text-foreground/75 group-hover:text-foreground transition-colors">
             Continue this week

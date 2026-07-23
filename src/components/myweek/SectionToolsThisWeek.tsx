@@ -51,7 +51,8 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Pregnancy Symptom Notes",
     hint: "A private place to note symptoms and questions you may want to raise.",
     icon: Activity,
-    kind: "coming-soon",
+    kind: "live",
+    to: "/pregnancy-toolkit/symptom-notes",
   },
   kickCounter: {
     key: "kickCounter",
@@ -95,8 +96,9 @@ const getWeekTools = (week: number): ToolCard[] => {
   if (week >= 28) return [TOOLS.birthPlan, TOOLS.appointments, TOOLS.kickCounter];
   if (week >= 24) return [TOOLS.appointments, TOOLS.kickCounter, TOOLS.symptoms];
   if (week >= 13) return [TOOLS.appointments, TOOLS.symptoms, TOOLS.midwifeQuestions];
-  if (week >= 6) return [TOOLS.appointments, TOOLS.dueDate, TOOLS.midwifeQuestions];
-  return [TOOLS.dueDate, TOOLS.midwifeQuestions, TOOLS.symptoms];
+  if (week >= 6) return [TOOLS.appointments, TOOLS.symptoms, TOOLS.dueDate];
+  if (week >= 4) return [TOOLS.dueDate, TOOLS.symptoms, TOOLS.midwifeQuestions];
+  return [TOOLS.dueDate, TOOLS.midwifeQuestions];
 };
 
 

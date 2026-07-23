@@ -20,6 +20,7 @@ import {
 } from "@/lib/hospitalBagSchema";
 import { useAppointmentsSummary } from "@/hooks/usePregnancyAppointments";
 import { useBabyMovementNotesSummary } from "@/hooks/useBabyMovementNotes";
+import { useContractionSessionsSummary } from "@/hooks/useContractionTimer";
 
 import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
@@ -57,15 +58,15 @@ const MVP_TOOLS: ToolCard[] = [
     hint: "A calm place to notice your baby's usual pattern.",
     icon: Footprints,
   },
+  {
+    key: "contraction-timer",
+    title: "Contraction timer",
+    hint: "Time contractions and keep notes, in one calm place.",
+    icon: Timer,
+  },
 ];
 
 const FUTURE_TOOLS: ToolCard[] = [
-  {
-    key: "contraction-counter",
-    title: "Contraction timer",
-    hint: "A simple way to time contractions and keep notes.",
-    icon: Timer,
-  },
   {
     key: "symptoms",
     title: "Symptoms tracker",

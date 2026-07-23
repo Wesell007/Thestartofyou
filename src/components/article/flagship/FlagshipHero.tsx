@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { Shield, Clock } from "lucide-react";
+import { Shield, Clock, BookOpen } from "lucide-react";
 import type { ArticleData } from "@/data/articleData";
+import { estimateReadTime } from "@/lib/readingTime";
 import { flagshipHeroMap } from "./flagshipImageMap";
 
 const TOPIC_LABELS: Record<string, string> = {
@@ -24,6 +25,22 @@ const FlagshipHero = ({ data }: Props) => {
   const topicHref = data.topic ? `/pregnancy/${data.topic}` : null;
   const primaryLabel = isIVF ? null : isTTC ? "The TTC Guide" : topicLabel;
   const primaryHref = isIVF ? null : isTTC ? "/trying-to-conceive" : topicHref;
+
+  const readTime = estimateReadTime([
+    data.standfirst,
+    data.quickAnswer,
+    data.howThisFeels,
+    data.whatHappening,
+    data.whatItFeelsLike,
+    data.whatThisMeans,
+    data.normal,
+    data.seekSupport,
+    data.whatYouCanDo,
+    data.whatHappensNext,
+    data.keyTakeaways,
+    data.editorialSections,
+    data.faq,
+  ]);
 
   // For IVF articles orientation lives in ArticleIVFContext above the hero;
   // suppress the default breadcrumb here so we don't show a misleading
@@ -79,8 +96,11 @@ const FlagshipHero = ({ data }: Props) => {
               </p>
             )}
 
-            {(data.reviewedBy || data.lastUpdated) && (
-              <div className="mt-7 sm:mt-8 flex flex-wrap items-center gap-x-5 gap-y-2">
+            <div className="mt-7 sm:mt-8 flex flex-wrap items-center gap-x-5 gap-y-2">
+                <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light text-foreground/55">
+                  <BookOpen className="w-3 h-3 text-foreground/40" />
+                  {readTime}
+                </span>
                 {data.reviewedBy && (
                   <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light text-foreground/65">
                     <Shield className="w-3 h-3 text-sage/70" />
@@ -94,7 +114,6 @@ const FlagshipHero = ({ data }: Props) => {
                   </span>
                 )}
               </div>
-            )}
           </div>
 
           {/* IMAGE */}

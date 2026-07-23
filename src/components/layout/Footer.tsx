@@ -37,7 +37,7 @@ const Footer = () => {
               />
             </Link>
             <p className="font-sans text-[14px] font-light text-foreground/50 leading-relaxed max-w-xs">
-              Your trusted companion through pregnancy, offering calm guidance and space for reflection.
+              Your trusted companion from trying to conceive through the early years, offering calm guidance and space for reflection.
             </p>
           </div>
 
@@ -49,8 +49,9 @@ const Footer = () => {
                 { to: "/trying-to-conceive", label: "Trying to Conceive" },
                 { to: "/ivf", label: "IVF" },
                 { to: "/pregnancy", label: "Pregnancy" },
-                { to: "/postpartum", label: "Postpartum" },
                 { to: "/first-year", label: "First Year" },
+                { to: "/toddler", label: "Toddler" },
+                { to: "/family", label: "Family" },
               ].map(l => (
                 <li key={l.to}><Link to={l.to} className="font-sans text-sm font-light text-foreground/45 hover:text-foreground/70 transition-colors duration-200">{l.label}</Link></li>
               ))}
@@ -62,9 +63,9 @@ const Footer = () => {
             <h4 className="font-serif text-foreground/85 text-base mb-4 md:mb-6">Resources</h4>
             <ul className="space-y-3">
               {[
-                { to: "/pregnancy", label: "Explore" },
                 { to: "/due-date-calculator", label: "Due Date Calculator" },
                 { to: "/ovulation-calculator", label: "Ovulation Calculator" },
+                { to: "/ask", label: "Ask a Question" },
                 { to: "/support", label: "Support" },
                 { to: "/journal", label: "Journal" },
               ].map(l => (
@@ -79,10 +80,10 @@ const Footer = () => {
             <ul className="space-y-3">
               {[
                 { to: "/about", label: "Our Story" },
-                { to: "/about", label: "Editorial Standards" },
-                { to: "/about", label: "Contact" },
-              ].map((l, i) => (
-                <li key={i}><Link to={l.to} className="font-sans text-sm font-light text-foreground/45 hover:text-foreground/70 transition-colors duration-200">{l.label}</Link></li>
+                { to: "/privacy", label: "Privacy" },
+                { to: "/terms", label: "Terms" },
+              ].map(l => (
+                <li key={l.to}><Link to={l.to} className="font-sans text-sm font-light text-foreground/45 hover:text-foreground/70 transition-colors duration-200">{l.label}</Link></li>
               ))}
             </ul>
           </div>

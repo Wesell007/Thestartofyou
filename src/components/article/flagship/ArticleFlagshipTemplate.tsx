@@ -8,10 +8,12 @@ import FlagshipKeyTakeawaysStrip from "./FlagshipKeyTakeawaysStrip";
 import FlagshipEditorialSections from "./FlagshipEditorialSections";
 import FlagshipNormalCheckPanel from "./FlagshipNormalCheckPanel";
 import FlagshipFAQ from "./FlagshipFAQ";
+import ArticleContents from "@/components/article/ArticleContents";
 import ArticleSources from "@/components/article/ArticleSources";
 import ArticleRelatedReads from "@/components/article/ArticleRelatedReads";
 import ArticleTopicReturn from "@/components/article/ArticleTopicReturn";
 import ArticleIVFContext from "@/components/article/ArticleIVFContext";
+import ReadingProgressBar from "@/components/shared/ReadingProgressBar";
 
 interface Props {
   data: ArticleData;
@@ -24,6 +26,7 @@ const ArticleFlagshipTemplate = ({ data }: Props) => {
   return (
     <div className="min-h-screen bg-parchment">
       <Navbar />
+      <ReadingProgressBar />
 
       {/* Light IVF orientation strip — only renders for IVF-journey articles */}
       <ArticleIVFContext data={data} />
@@ -33,6 +36,9 @@ const ArticleFlagshipTemplate = ({ data }: Props) => {
 
       {/* Two-card row directly below hero */}
       <FlagshipSummaryRow data={data} />
+
+      {/* In this article — anchored contents, same treatment as Deep articles */}
+      <ArticleContents data={data} />
 
       {/* Slim key-takeaways strip — cards, not a list */}
       <FlagshipKeyTakeawaysStrip data={data} />

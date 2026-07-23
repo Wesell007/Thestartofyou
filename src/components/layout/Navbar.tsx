@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { buildAuthUrl } from "@/lib/authIntent";
@@ -67,8 +67,27 @@ const Navbar = () => {
 
   const signInHref = buildAuthUrl("sign_in");
 
+  // Pages don't share a layout wrapper, so resolve the skip target at click
+  // time: an explicit #main-content anchor if present, otherwise <main>.
+  const handleSkipToContent = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const target =
+      document.getElementById("main-content") ?? document.querySelector("main");
+    if (!target) return;
+    e.preventDefault();
+    target.setAttribute("tabindex", "-1");
+    (target as HTMLElement).focus({ preventScroll: true });
+    target.scrollIntoView();
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/95 backdrop-blur-xl border-b border-border/30">
+      <a
+        href="#main-content"
+        onClick={handleSkipToContent}
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-4 focus:z-[60] focus:bg-terracotta focus:text-terracotta-foreground focus:px-5 focus:py-2.5 focus:rounded-pill font-sans text-sm font-medium shadow-cta"
+      >
+        Skip to content
+      </a>
       <div className="container mx-auto px-4 sm:px-6 md:px-10 h-16 lg:h-[88px] flex items-center justify-between max-w-6xl relative gap-8">
         {/* Logo */}
         <Link to="/" className="flex items-center shrink-0 mr-2">
@@ -98,6 +117,13 @@ const Navbar = () => {
 
         {/* CTA cluster — quiet sign in, anchored CTA */}
         <div className="hidden lg:flex items-center gap-6 shrink-0">
+          <Link
+            to="/ask"
+            className="inline-flex items-center gap-1.5 font-sans text-[13px] font-light text-foreground/60 hover:text-foreground transition-colors"
+          >
+            <Sparkles size={13} strokeWidth={1.8} aria-hidden />
+            Ask a question
+          </Link>
           {authed ? (
             <Link
               to={accountLink.href}
@@ -152,6 +178,15 @@ const Navbar = () => {
               {label}
             </Link>
           ))}
+
+          <Link
+            to="/ask"
+            onClick={() => setMobileOpen(false)}
+            className="font-sans text-base font-light transition-colors py-3 px-2 rounded-lg text-foreground hover:text-sage hover:bg-sage-bg/20 inline-flex items-center gap-2"
+          >
+            <Sparkles size={15} strokeWidth={1.8} className="text-sage" aria-hidden />
+            Ask a question
+          </Link>
 
           {authed ? (
             <Link

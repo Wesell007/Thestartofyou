@@ -45,10 +45,21 @@ export const EVENTS = {
   TTC_LOG_DELETED: "ttc_log_deleted",
   TTC_INSIGHT_CLICKED: "ttc_insight_clicked",
   TTC_PREGNANCY_HANDOVER_STARTED: "ttc_pregnancy_handover_started",
+
+  // Wave 4 — signed-in shell navigation (static tab id only; envelope carries path)
+  JOURNEY_NAV_CLICKED: "journey_nav_clicked",
 } as const;
 
 
 export type ClickLocation = "home_hero" | "navbar";
+
+export type JourneyNavTab =
+  | "my_week"
+  | "my_journey"
+  | "toolkit"
+  | "my_ttc_journey"
+  | "ask"
+  | "account";
 
 export type EventMap = {
   // Wave 1
@@ -85,6 +96,9 @@ export type EventMap = {
   ttc_log_deleted: Record<string, never>;
   ttc_insight_clicked: Record<string, never>;
   ttc_pregnancy_handover_started: Record<string, never>;
+
+  // Wave 4 — signed-in shell navigation
+  journey_nav_clicked: { tab: JourneyNavTab };
 };
 
 

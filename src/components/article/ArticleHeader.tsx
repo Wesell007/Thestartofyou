@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { Shield, Clock } from "lucide-react";
+import { Shield, Clock, BookOpen } from "lucide-react";
 import type { ArticleData } from "@/data/articleData";
+import { estimateReadTime } from "@/lib/readingTime";
 
 const TOPIC_LABELS: Record<string, string> = {
   body: "Your body",
@@ -19,7 +20,22 @@ const ArticleHeader = ({ data }: Props) => {
   const isIVF = data.journey?.includes("ivf");
   const topicLabel = data.topic ? TOPIC_LABELS[data.topic] : null;
   const topicHref = data.topic ? `/pregnancy/${data.topic}` : null;
-  const hasMeta = data.reviewedBy || data.lastUpdated;
+
+  const readTime = estimateReadTime([
+    data.standfirst,
+    data.quickAnswer,
+    data.howThisFeels,
+    data.whatHappening,
+    data.whatItFeelsLike,
+    data.whatThisMeans,
+    data.normal,
+    data.seekSupport,
+    data.whatYouCanDo,
+    data.whatHappensNext,
+    data.keyTakeaways,
+    data.editorialSections,
+    data.faq,
+  ]);
 
   // For IVF articles the orientation is handled by ArticleIVFContext above
   // the header — suppress the default Pregnancy breadcrumb so we don't show
@@ -74,8 +90,11 @@ const ArticleHeader = ({ data }: Props) => {
         )}
 
         {/* Editorial trust meta row */}
-        {hasMeta && (
-          <div className="mt-6 sm:mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 pb-1">
+        <div className="mt-6 sm:mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 pb-1">
+            <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light text-foreground/55">
+              <BookOpen className="w-3 h-3 text-foreground/40" />
+              {readTime}
+            </span>
             {data.reviewedBy && (
               <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light text-foreground/65">
                 <Shield className="w-3 h-3 text-sage/70" />
@@ -88,8 +107,7 @@ const ArticleHeader = ({ data }: Props) => {
                 Updated {data.lastUpdated}
               </span>
             )}
-          </div>
-        )}
+        </div>
       </div>
     </header>
   );

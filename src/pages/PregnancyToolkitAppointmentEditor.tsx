@@ -26,7 +26,7 @@ const SaveStatePill = ({ state }: { state: "idle" | "saving" | "saved" | "error"
   return (
     <span
       aria-live="polite"
-      className="fixed bottom-5 right-5 rounded-full px-4 py-1.5 font-sans text-[11.5px] font-medium tracking-[0.18em] uppercase shadow-md"
+      className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom))] md:bottom-5 right-5 rounded-full px-4 py-1.5 font-sans text-[11.5px] font-medium tracking-[0.18em] uppercase shadow-md"
       style={{
         background:
           state === "error"

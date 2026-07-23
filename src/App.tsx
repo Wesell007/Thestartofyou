@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { lazy, Suspense, useEffect } from "react";
 import PageLoadState from "./components/shared/PageLoadState.tsx";
+import JourneyBottomNav from "./components/layout/JourneyBottomNav.tsx";
+import PregnancyWeekRoute from "./pages/PregnancyWeekRoute.tsx";
 const Index = lazy(() => import("./pages/Index.tsx"));
 
 const Pregnancy = lazy(() => import("./pages/Pregnancy.tsx"));
@@ -17,49 +19,6 @@ const FeelingsTopic = lazy(() => import("./pages/pregnancy/FeelingsTopic.tsx"));
 const FirstTrimester = lazy(() => import("./pages/trimester/FirstTrimester.tsx"));
 const SecondTrimester = lazy(() => import("./pages/trimester/SecondTrimester.tsx"));
 const ThirdTrimester = lazy(() => import("./pages/trimester/ThirdTrimester.tsx"));
-const WeekPage = lazy(() => import("./pages/WeekPage.tsx"));
-const Week1Page = lazy(() => import("./pages/Week1Page.tsx"));
-const Week2Page = lazy(() => import("./pages/Week2Page.tsx"));
-const Week3Page = lazy(() => import("./pages/Week3Page.tsx"));
-const Week4Page = lazy(() => import("./pages/Week4Page.tsx"));
-const Week6Page = lazy(() => import("./pages/Week6Page.tsx"));
-const Week5Page = lazy(() => import("./pages/Week5Page.tsx"));
-const Week7Page = lazy(() => import("./pages/Week7Page.tsx"));
-const Week8Page = lazy(() => import("./pages/Week8Page.tsx"));
-const Week9Page = lazy(() => import("./pages/Week9Page.tsx"));
-const Week10Page = lazy(() => import("./pages/Week10Page.tsx"));
-const Week11Page = lazy(() => import("./pages/Week11Page.tsx"));
-const Week12Page = lazy(() => import("./pages/Week12Page.tsx"));
-const Week13Page = lazy(() => import("./pages/Week13Page.tsx"));
-const Week14Page = lazy(() => import("./pages/Week14Page.tsx"));
-const Week15Page = lazy(() => import("./pages/Week15Page.tsx"));
-const Week16Page = lazy(() => import("./pages/Week16Page.tsx"));
-const Week17Page = lazy(() => import("./pages/Week17Page.tsx"));
-const Week18Page = lazy(() => import("./pages/Week18Page.tsx"));
-const Week19Page = lazy(() => import("./pages/Week19Page.tsx"));
-const Week20Page = lazy(() => import("./pages/Week20Page.tsx"));
-const Week21Page = lazy(() => import("./pages/Week21Page.tsx"));
-const Week22Page = lazy(() => import("./pages/Week22Page.tsx"));
-const Week23Page = lazy(() => import("./pages/Week23Page.tsx"));
-const Week24Page = lazy(() => import("./pages/Week24Page.tsx"));
-const Week25Page = lazy(() => import("./pages/Week25Page.tsx"));
-const Week26Page = lazy(() => import("./pages/Week26Page.tsx"));
-const Week27Page = lazy(() => import("./pages/Week27Page.tsx"));
-const Week28Page = lazy(() => import("./pages/Week28Page.tsx"));
-const Week29Page = lazy(() => import("./pages/Week29Page.tsx"));
-const Week30Page = lazy(() => import("./pages/Week30Page.tsx"));
-const Week31Page = lazy(() => import("./pages/Week31Page.tsx"));
-const Week32Page = lazy(() => import("./pages/Week32Page.tsx"));
-const Week33Page = lazy(() => import("./pages/Week33Page.tsx"));
-const Week34Page = lazy(() => import("./pages/Week34Page.tsx"));
-const Week35Page = lazy(() => import("./pages/Week35Page.tsx"));
-const Week36Page = lazy(() => import("./pages/Week36Page.tsx"));
-const Week37Page = lazy(() => import("./pages/Week37Page.tsx"));
-const Week38Page = lazy(() => import("./pages/Week38Page.tsx"));
-const Week39Page = lazy(() => import("./pages/Week39Page.tsx"));
-const Week40Page = lazy(() => import("./pages/Week40Page.tsx"));
-const Week41Page = lazy(() => import("./pages/Week41Page.tsx"));
-const Week42Page = lazy(() => import("./pages/Week42Page.tsx"));
 const ArticlePage = lazy(() => import("./pages/ArticlePage.tsx"));
 const DueDateCalculator = lazy(() => import("./pages/DueDateCalculator.tsx"));
 const DueDateResults = lazy(() => import("./pages/DueDateResults.tsx"));
@@ -219,6 +178,7 @@ const App = () => (
         <RouteTracker />
         <AnalyticsIdentityBridge />
         <ConsentBanner />
+        <JourneyBottomNav />
         <Suspense fallback={<PageLoadState message="Loading page…" />}>
         <Routes>
           <Route path="/" element={<Index />} />
@@ -233,49 +193,7 @@ const App = () => (
           <Route path="/pregnancy/first-trimester" element={<FirstTrimester />} />
           <Route path="/pregnancy/second-trimester" element={<SecondTrimester />} />
           <Route path="/pregnancy/third-trimester" element={<ThirdTrimester />} />
-          <Route path="/pregnancy/week/1" element={<Week1Page />} />
-          <Route path="/pregnancy/week/2" element={<Week2Page />} />
-          <Route path="/pregnancy/week/3" element={<Week3Page />} />
-          <Route path="/pregnancy/week/4" element={<Week4Page />} />
-          <Route path="/pregnancy/week/5" element={<Week5Page />} />
-          <Route path="/pregnancy/week/6" element={<Week6Page />} />
-          <Route path="/pregnancy/week/7" element={<Week7Page />} />
-          <Route path="/pregnancy/week/8" element={<Week8Page />} />
-          <Route path="/pregnancy/week/9" element={<Week9Page />} />
-          <Route path="/pregnancy/week/10" element={<Week10Page />} />
-          <Route path="/pregnancy/week/11" element={<Week11Page />} />
-          <Route path="/pregnancy/week/12" element={<Week12Page />} />
-          <Route path="/pregnancy/week/13" element={<Week13Page />} />
-          <Route path="/pregnancy/week/14" element={<Week14Page />} />
-          <Route path="/pregnancy/week/15" element={<Week15Page />} />
-          <Route path="/pregnancy/week/16" element={<Week16Page />} />
-          <Route path="/pregnancy/week/17" element={<Week17Page />} />
-          <Route path="/pregnancy/week/18" element={<Week18Page />} />
-          <Route path="/pregnancy/week/19" element={<Week19Page />} />
-          <Route path="/pregnancy/week/20" element={<Week20Page />} />
-          <Route path="/pregnancy/week/21" element={<Week21Page />} />
-          <Route path="/pregnancy/week/22" element={<Week22Page />} />
-          <Route path="/pregnancy/week/23" element={<Week23Page />} />
-          <Route path="/pregnancy/week/24" element={<Week24Page />} />
-          <Route path="/pregnancy/week/25" element={<Week25Page />} />
-          <Route path="/pregnancy/week/26" element={<Week26Page />} />
-          <Route path="/pregnancy/week/27" element={<Week27Page />} />
-          <Route path="/pregnancy/week/28" element={<Week28Page />} />
-          <Route path="/pregnancy/week/29" element={<Week29Page />} />
-          <Route path="/pregnancy/week/30" element={<Week30Page />} />
-          <Route path="/pregnancy/week/31" element={<Week31Page />} />
-          <Route path="/pregnancy/week/32" element={<Week32Page />} />
-          <Route path="/pregnancy/week/33" element={<Week33Page />} />
-          <Route path="/pregnancy/week/34" element={<Week34Page />} />
-          <Route path="/pregnancy/week/35" element={<Week35Page />} />
-          <Route path="/pregnancy/week/36" element={<Week36Page />} />
-          <Route path="/pregnancy/week/37" element={<Week37Page />} />
-          <Route path="/pregnancy/week/38" element={<Week38Page />} />
-          <Route path="/pregnancy/week/39" element={<Week39Page />} />
-          <Route path="/pregnancy/week/40" element={<Week40Page />} />
-          <Route path="/pregnancy/week/41" element={<Week41Page />} />
-          <Route path="/pregnancy/week/42" element={<Week42Page />} />
-          <Route path="/pregnancy/week/:week" element={<WeekPage />} />
+          <Route path="/pregnancy/week/:week" element={<PregnancyWeekRoute />} />
           <Route path="/articles/signs-of-ovulation" element={<Navigate to="/articles/ovulation-signs" replace />} />
           <Route path="/articles/:slug" element={<ArticlePage />} />
           <Route path="/due-date-calculator" element={<DueDateCalculator />} />

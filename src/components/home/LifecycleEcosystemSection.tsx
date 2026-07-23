@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 const stages = [
   { label: "Trying to conceive", href: "/trying-to-conceive" },
   { label: "IVF", href: "/ivf" },
-  { label: "Postpartum", href: "/postpartum" },
   { label: "First year", href: "/first-year" },
+  { label: "Toddler", href: "/toddler" },
+  { label: "Family", href: "/family" },
 ];
 
 const LifecycleEcosystemSection = () => {

@@ -6,11 +6,17 @@ import heroVideoAsset from "@/assets/home-hero-video-new.mp4.asset.json";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 const NewHeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoState, setVideoState] = useState<"loading" | "playing" | "paused">("loading");
+  const [reducedMotion] = useState(prefersReducedMotion);
 
   useEffect(() => {
+    if (reducedMotion) return;
     const video = videoRef.current;
     if (!video) return;
 
@@ -50,7 +56,7 @@ const NewHeroSection = () => {
       video.removeEventListener("canplay", attemptPlay);
       video.removeEventListener("playing", onPlaying);
     };
-  }, []);
+  }, [reducedMotion]);
 
   const handleTapToPlay = useCallback(() => {
     const video = videoRef.current;
@@ -68,24 +74,34 @@ const NewHeroSection = () => {
 
   return (
     <section className="relative min-h-[92vh] md:min-h-screen overflow-hidden flex items-end md:items-center">
-      {/* Video background — always render, overlay tap-to-play if paused */}
+      {/* Video background — always render, overlay tap-to-play if paused.
+          Users who prefer reduced motion get the still image instead. */}
       <div className="absolute inset-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster={heroImage}
-          onError={() => setVideoState("paused")}
-          className="w-full h-full object-cover object-[50%_35%] md:object-[50%_45%]"
-        >
-          <source src={heroVideoAsset.url} type="video/mp4" />
-        </video>
+        {reducedMotion ? (
+          <img
+            src={heroImage}
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover object-[50%_35%] md:object-[50%_45%]"
+          />
+        ) : (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={heroImage}
+            onError={() => setVideoState("paused")}
+            className="w-full h-full object-cover object-[50%_35%] md:object-[50%_45%]"
+          >
+            <source src={heroVideoAsset.url} type="video/mp4" />
+          </video>
+        )}
 
         {/* Tap-to-play overlay when autoplay is blocked */}
-        {videoState === "paused" && (
+        {!reducedMotion && videoState === "paused" && (
           <button
             onClick={handleTapToPlay}
             className="absolute inset-0 z-10 flex items-center justify-center bg-transparent cursor-pointer"

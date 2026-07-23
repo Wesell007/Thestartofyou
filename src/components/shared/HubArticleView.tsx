@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import ReadingProgressBar from "@/components/shared/ReadingProgressBar";
 import type { ReactNode } from "react";
 
 export interface HubArticleViewArticle {
@@ -105,6 +106,7 @@ const HubArticleView = ({
   return (
     <div className="min-h-screen font-sans bg-parchment">
       <Navbar />
+      <ReadingProgressBar colorVar={tokens.accent} />
       <main className="overflow-hidden">
         {/* ─── HERO ────────────────────────────────────────────────── */}
         <section className="relative pt-8 sm:pt-12 md:pt-16 pb-14 md:pb-16">

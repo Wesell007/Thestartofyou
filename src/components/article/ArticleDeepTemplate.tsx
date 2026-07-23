@@ -14,6 +14,7 @@ import ArticleSources from "@/components/article/ArticleSources";
 import ArticleRelatedReads from "@/components/article/ArticleRelatedReads";
 import ArticleTopicReturn from "@/components/article/ArticleTopicReturn";
 import ArticleIVFContext from "@/components/article/ArticleIVFContext";
+import ReadingProgressBar from "@/components/shared/ReadingProgressBar";
 
 interface Props {
   data: ArticleData;
@@ -25,6 +26,7 @@ const ArticleDeepTemplate = ({ data }: Props) => {
   return (
     <div className="min-h-screen bg-parchment">
       <Navbar />
+      <ReadingProgressBar />
 
       {/* Light IVF orientation strip — only renders for IVF-journey articles */}
       <ArticleIVFContext data={data} />

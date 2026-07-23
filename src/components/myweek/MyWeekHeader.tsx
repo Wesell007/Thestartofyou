@@ -51,10 +51,11 @@ const MyWeekHeader = () => {
         </Link>
 
         <nav className="flex items-center gap-5 sm:gap-7" aria-label="Account navigation">
-          <Link to="/my-week" className={linkClass("/my-week")}>
+          {/* On mobile these tabs live in the fixed bottom journey nav */}
+          <Link to="/my-week" className={`hidden md:inline ${linkClass("/my-week")}`}>
             This week
           </Link>
-          <Link to="/my-journey" className={linkClass("/my-journey")}>
+          <Link to="/my-journey" className={`hidden md:inline ${linkClass("/my-journey")}`}>
             My journey
           </Link>
           <div className="relative" ref={menuRef}>

@@ -21,6 +21,7 @@ import {
 import { useAppointmentsSummary } from "@/hooks/usePregnancyAppointments";
 import { useBabyMovementNotesSummary } from "@/hooks/useBabyMovementNotes";
 import { useContractionSessionsSummary } from "@/hooks/useContractionTimer";
+import { usePregnancySymptomNotesSummary } from "@/hooks/usePregnancySymptomNotes";
 
 import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
@@ -64,15 +65,15 @@ const MVP_TOOLS: ToolCard[] = [
     hint: "Time contractions and keep notes, in one calm place.",
     icon: Timer,
   },
-];
-
-const FUTURE_TOOLS: ToolCard[] = [
   {
-    key: "symptoms",
+    key: "symptom-notes",
     title: "Pregnancy Symptom Notes",
     hint: "A private place to note symptoms and questions you may want to raise.",
     icon: Activity,
   },
+];
+
+const FUTURE_TOOLS: ToolCard[] = [
   {
     key: "midwife-questions",
     title: "Questions for midwife",
@@ -205,6 +206,14 @@ const PregnancyToolkit = () => {
       : ctTotal === 1
         ? "1 session saved"
         : `${ctTotal} sessions saved`;
+  const { loading: snLoading, total: snTotal } = usePregnancySymptomNotesSummary();
+  const symptomNotesStatusText = snLoading
+    ? "Open"
+    : snTotal === 0
+      ? "Not started"
+      : snTotal === 1
+        ? "1 note saved"
+        : `${snTotal} notes saved`;
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
@@ -303,6 +312,16 @@ const PregnancyToolkit = () => {
                     tool={t}
                     statusText={contractionTimerStatusText}
                     to="/pregnancy-toolkit/contraction-timer"
+                  />
+                );
+              }
+              if (t.key === "symptom-notes") {
+                return (
+                  <MvpCard
+                    key={t.key}
+                    tool={t}
+                    statusText={symptomNotesStatusText}
+                    to="/pregnancy-toolkit/symptom-notes"
                   />
                 );
               }

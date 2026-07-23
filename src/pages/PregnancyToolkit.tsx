@@ -69,8 +69,8 @@ const MVP_TOOLS: ToolCard[] = [
 const FUTURE_TOOLS: ToolCard[] = [
   {
     key: "symptoms",
-    title: "Symptoms tracker",
-    hint: "Notice how you feel over the weeks, without pressure.",
+    title: "Pregnancy Symptom Notes",
+    hint: "A private place to note symptoms and questions you may want to raise.",
     icon: Activity,
   },
   {

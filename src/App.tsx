@@ -108,6 +108,7 @@ const PregnancyToolkitBabyMovements = lazy(() => import("./pages/PregnancyToolki
 const PregnancyToolkitContractionTimer = lazy(() => import("./pages/PregnancyToolkitContractionTimer.tsx"));
 const PregnancyToolkitAppointmentEditor = lazy(() => import("./pages/PregnancyToolkitAppointmentEditor.tsx"));
 const PregnancyToolkitSymptomNotes = lazy(() => import("./pages/PregnancyToolkitSymptomNotes.tsx"));
+const PregnancyToolkitQuestionsForMidwife = lazy(() => import("./pages/PregnancyToolkitQuestionsForMidwife.tsx"));
 
 import ScrollToTop from "./components/layout/ScrollToTop.tsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";

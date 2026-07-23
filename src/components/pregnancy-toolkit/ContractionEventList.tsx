@@ -57,7 +57,7 @@ const ContractionEventList = ({ events }: Props) => {
                 Gap
               </span>
               <span className="block font-serif text-[15px] text-foreground/80 tabular-nums mt-1">
-                {gapMs !== null ? formatGap(gapMs) : "—"}
+                {gapMs !== null ? formatGap(gapMs) : "First"}
               </span>
             </div>
           </li>

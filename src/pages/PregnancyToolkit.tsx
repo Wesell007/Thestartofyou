@@ -197,6 +197,14 @@ const PregnancyToolkit = () => {
       : bmTotal === 1
         ? "1 note saved"
         : `${bmTotal} notes saved`;
+  const { loading: ctLoading, total: ctTotal } = useContractionSessionsSummary();
+  const contractionTimerStatusText = ctLoading
+    ? "Open"
+    : ctTotal === 0
+      ? "Not started"
+      : ctTotal === 1
+        ? "1 session saved"
+        : `${ctTotal} sessions saved`;
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
@@ -285,6 +293,16 @@ const PregnancyToolkit = () => {
                     tool={t}
                     statusText={babyMovementsStatusText}
                     to="/pregnancy-toolkit/baby-movements"
+                  />
+                );
+              }
+              if (t.key === "contraction-timer") {
+                return (
+                  <MvpCard
+                    key={t.key}
+                    tool={t}
+                    statusText={contractionTimerStatusText}
+                    to="/pregnancy-toolkit/contraction-timer"
                   />
                 );
               }

@@ -48,8 +48,8 @@ const TOOLS: Record<string, ToolCard> = {
   },
   symptoms: {
     key: "symptoms",
-    title: "Symptoms tracker",
-    hint: "Notice patterns, gently.",
+    title: "Pregnancy Symptom Notes",
+    hint: "A private place to note symptoms and questions you may want to raise.",
     icon: Activity,
     kind: "coming-soon",
   },

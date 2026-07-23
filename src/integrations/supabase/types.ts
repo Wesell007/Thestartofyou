@@ -319,6 +319,45 @@ export type Database = {
         }
         Relationships: []
       }
+      midwife_questions: {
+        Row: {
+          answer_notes: string | null
+          answered: boolean
+          appointment_id: string | null
+          category: string
+          created_at: string
+          follow_up: boolean
+          id: string
+          question: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          answer_notes?: string | null
+          answered?: boolean
+          appointment_id?: string | null
+          category: string
+          created_at?: string
+          follow_up?: boolean
+          id?: string
+          question: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          answer_notes?: string | null
+          answered?: boolean
+          appointment_id?: string | null
+          category?: string
+          created_at?: string
+          follow_up?: boolean
+          id?: string
+          question?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       pregnancy_appointments: {
         Row: {
           appointment_at: string | null
@@ -380,6 +419,45 @@ export type Database = {
           due_date?: string
           lmp_date?: string
           started_at?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      pregnancy_symptom_notes: {
+        Row: {
+          created_at: string
+          follow_up: string | null
+          id: string
+          mention_at_appointment: boolean
+          noted_at: string
+          notes: string | null
+          personal_severity: number | null
+          symptom_label: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          follow_up?: string | null
+          id?: string
+          mention_at_appointment?: boolean
+          noted_at?: string
+          notes?: string | null
+          personal_severity?: number | null
+          symptom_label: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          follow_up?: string | null
+          id?: string
+          mention_at_appointment?: boolean
+          noted_at?: string
+          notes?: string | null
+          personal_severity?: number | null
+          symptom_label?: string
           updated_at?: string
           user_id?: string
         }

@@ -20,6 +20,7 @@ import {
 } from "@/lib/hospitalBagSchema";
 import { useAppointmentsSummary } from "@/hooks/usePregnancyAppointments";
 import { useBabyMovementNotesSummary } from "@/hooks/useBabyMovementNotes";
+import { useContractionSessionsSummary } from "@/hooks/useContractionTimer";
 
 import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
@@ -57,15 +58,15 @@ const MVP_TOOLS: ToolCard[] = [
     hint: "A calm place to notice your baby's usual pattern.",
     icon: Footprints,
   },
+  {
+    key: "contraction-timer",
+    title: "Contraction timer",
+    hint: "Time contractions and keep notes, in one calm place.",
+    icon: Timer,
+  },
 ];
 
 const FUTURE_TOOLS: ToolCard[] = [
-  {
-    key: "contraction-counter",
-    title: "Contraction timer",
-    hint: "A simple way to time contractions and keep notes.",
-    icon: Timer,
-  },
   {
     key: "symptoms",
     title: "Symptoms tracker",
@@ -196,6 +197,14 @@ const PregnancyToolkit = () => {
       : bmTotal === 1
         ? "1 note saved"
         : `${bmTotal} notes saved`;
+  const { loading: ctLoading, total: ctTotal } = useContractionSessionsSummary();
+  const contractionTimerStatusText = ctLoading
+    ? "Open"
+    : ctTotal === 0
+      ? "Not started"
+      : ctTotal === 1
+        ? "1 session saved"
+        : `${ctTotal} sessions saved`;
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
@@ -287,6 +296,16 @@ const PregnancyToolkit = () => {
                   />
                 );
               }
+              if (t.key === "contraction-timer") {
+                return (
+                  <MvpCard
+                    key={t.key}
+                    tool={t}
+                    statusText={contractionTimerStatusText}
+                    to="/pregnancy-toolkit/contraction-timer"
+                  />
+                );
+              }
               return <MvpCard key={t.key} tool={t} statusText="Coming soon" />;
             })}
 
@@ -305,7 +324,7 @@ const PregnancyToolkit = () => {
               Quiet tools for later
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {FUTURE_TOOLS.map((t) => (
               <FutureCard key={t.key} tool={t} />
             ))}

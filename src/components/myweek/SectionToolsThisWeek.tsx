@@ -83,7 +83,8 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Contraction timer",
     hint: "Time contractions and keep notes.",
     icon: Timer,
-    kind: "coming-soon",
+    kind: "live",
+    to: "/pregnancy-toolkit/contraction-timer",
   },
 };
 

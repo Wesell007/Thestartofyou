@@ -95,7 +95,7 @@ export const BIRTH_PLAN_SECTIONS: BirthPlanSection[] = [
       "Try different positions",
       "Use water if available",
       "Keep the room calm",
-      "Follow my body where safe",
+      "Follow my body where possible",
     ],
     notesPlaceholder: "Any preferences around movement, positions or pace.",
   },
@@ -141,7 +141,7 @@ export const BIRTH_PLAN_SECTIONS: BirthPlanSection[] = [
     title: "Notes for your midwife",
     intro: "Anything else you would like your midwife or care team to know.",
     choices: [],
-    notesPlaceholder: "Previous experiences, worries, or things that would help you feel safe.",
+    notesPlaceholder: "Previous experiences, worries, or things that would help you feel supported.",
   },
 ];
 

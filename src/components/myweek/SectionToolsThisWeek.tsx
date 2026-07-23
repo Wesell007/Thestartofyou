@@ -33,10 +33,11 @@ const TOOLS: Record<string, ToolCard> = {
   },
   midwifeQuestions: {
     key: "midwifeQuestions",
-    title: "Questions for midwife",
-    hint: "A place to gather things to ask.",
+    title: "Questions for Midwife",
+    hint: "Save questions you want to bring to your midwife.",
     icon: MessageCircleQuestion,
-    kind: "coming-soon",
+    kind: "live",
+    to: "/pregnancy-toolkit/questions-for-midwife",
   },
   appointments: {
     key: "appointments",
@@ -93,12 +94,12 @@ const getWeekTools = (week: number): ToolCard[] => {
   if (week >= 37) return [TOOLS.contractionCounter, TOOLS.hospitalBag, TOOLS.birthPlan];
   if (week >= 34) return [TOOLS.hospitalBag, TOOLS.birthPlan, TOOLS.appointments];
   if (week >= 30) return [TOOLS.hospitalBag, TOOLS.birthPlan, TOOLS.appointments];
-  if (week >= 28) return [TOOLS.birthPlan, TOOLS.appointments, TOOLS.kickCounter];
+  if (week >= 28) return [TOOLS.birthPlan, TOOLS.kickCounter, TOOLS.midwifeQuestions];
   if (week >= 24) return [TOOLS.appointments, TOOLS.kickCounter, TOOLS.symptoms];
-  if (week >= 13) return [TOOLS.appointments, TOOLS.symptoms, TOOLS.midwifeQuestions];
-  if (week >= 6) return [TOOLS.appointments, TOOLS.symptoms, TOOLS.dueDate];
-  if (week >= 4) return [TOOLS.dueDate, TOOLS.symptoms, TOOLS.midwifeQuestions];
-  return [TOOLS.dueDate, TOOLS.midwifeQuestions];
+  if (week >= 13) return [TOOLS.appointments, TOOLS.midwifeQuestions, TOOLS.symptoms];
+  if (week >= 6) return [TOOLS.appointments, TOOLS.midwifeQuestions, TOOLS.symptoms];
+  if (week >= 4) return [TOOLS.dueDate, TOOLS.symptoms];
+  return [TOOLS.dueDate];
 };
 
 

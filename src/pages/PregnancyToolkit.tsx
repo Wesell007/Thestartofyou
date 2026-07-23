@@ -22,6 +22,7 @@ import { useAppointmentsSummary } from "@/hooks/usePregnancyAppointments";
 import { useBabyMovementNotesSummary } from "@/hooks/useBabyMovementNotes";
 import { useContractionSessionsSummary } from "@/hooks/useContractionTimer";
 import { usePregnancySymptomNotesSummary } from "@/hooks/usePregnancySymptomNotes";
+import { useMidwifeQuestionsSummary } from "@/hooks/useMidwifeQuestions";
 
 import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
@@ -71,16 +72,15 @@ const MVP_TOOLS: ToolCard[] = [
     hint: "A private place to note symptoms and questions you may want to raise.",
     icon: Activity,
   },
-];
-
-const FUTURE_TOOLS: ToolCard[] = [
   {
     key: "midwife-questions",
-    title: "Questions for midwife",
-    hint: "A place to gather things you want to ask.",
+    title: "Questions for Midwife",
+    hint: "Save questions you want to bring to your midwife or care team.",
     icon: MessageCircleQuestion,
   },
 ];
+
+const FUTURE_TOOLS: ToolCard[] = [];
 
 const accent = "hsl(var(--stage-pregnancy-accent))";
 const softBorder = "hsl(var(--stage-pregnancy-accent) / 0.16)";
@@ -214,6 +214,14 @@ const PregnancyToolkit = () => {
       : snTotal === 1
         ? "1 note saved"
         : `${snTotal} notes saved`;
+  const { loading: mqLoading, total: mqTotal } = useMidwifeQuestionsSummary();
+  const midwifeQuestionsStatusText = mqLoading
+    ? "Open"
+    : mqTotal === 0
+      ? "Not started"
+      : mqTotal === 1
+        ? "1 question saved"
+        : `${mqTotal} questions saved`;
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
@@ -325,6 +333,16 @@ const PregnancyToolkit = () => {
                   />
                 );
               }
+              if (t.key === "midwife-questions") {
+                return (
+                  <MvpCard
+                    key={t.key}
+                    tool={t}
+                    statusText={midwifeQuestionsStatusText}
+                    to="/pregnancy-toolkit/questions-for-midwife"
+                  />
+                );
+              }
               return <MvpCard key={t.key} tool={t} statusText="Coming soon" />;
             })}
 
@@ -332,23 +350,26 @@ const PregnancyToolkit = () => {
         </section>
 
         {/* Future cards */}
-        <section className="mb-14" aria-label="Coming later">
-          <div className="flex items-center gap-3 mb-5">
-            <span
-              aria-hidden="true"
-              className="block w-5 h-px"
-              style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.4)" }}
-            />
-            <p className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase text-foreground/50">
-              Quiet tools for later
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {FUTURE_TOOLS.map((t) => (
-              <FutureCard key={t.key} tool={t} />
-            ))}
-          </div>
-        </section>
+        {FUTURE_TOOLS.length > 0 ? (
+          <section className="mb-14" aria-label="Coming later">
+            <div className="flex items-center gap-3 mb-5">
+              <span
+                aria-hidden="true"
+                className="block w-5 h-px"
+                style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.4)" }}
+              />
+              <p className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase text-foreground/50">
+                Quiet tools for later
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {FUTURE_TOOLS.map((t) => (
+                <FutureCard key={t.key} tool={t} />
+              ))}
+            </div>
+          </section>
+        ) : null}
+
 
         {/* Supporting live link: due date calculator */}
         <section className="mb-14">

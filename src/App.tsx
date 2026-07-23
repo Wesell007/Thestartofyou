@@ -108,6 +108,7 @@ const PregnancyToolkitBabyMovements = lazy(() => import("./pages/PregnancyToolki
 const PregnancyToolkitContractionTimer = lazy(() => import("./pages/PregnancyToolkitContractionTimer.tsx"));
 const PregnancyToolkitAppointmentEditor = lazy(() => import("./pages/PregnancyToolkitAppointmentEditor.tsx"));
 const PregnancyToolkitSymptomNotes = lazy(() => import("./pages/PregnancyToolkitSymptomNotes.tsx"));
+const PregnancyToolkitQuestionsForMidwife = lazy(() => import("./pages/PregnancyToolkitQuestionsForMidwife.tsx"));
 
 import ScrollToTop from "./components/layout/ScrollToTop.tsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";
@@ -311,6 +312,7 @@ const App = () => (
           <Route path="/pregnancy-toolkit/baby-movements" element={<ProtectedRoute><PregnancyToolkitBabyMovements /></ProtectedRoute>} />
           <Route path="/pregnancy-toolkit/contraction-timer" element={<ProtectedRoute><PregnancyToolkitContractionTimer /></ProtectedRoute>} />
           <Route path="/pregnancy-toolkit/symptom-notes" element={<ProtectedRoute><PregnancyToolkitSymptomNotes /></ProtectedRoute>} />
+          <Route path="/pregnancy-toolkit/questions-for-midwife" element={<ProtectedRoute><PregnancyToolkitQuestionsForMidwife /></ProtectedRoute>} />
 
           <Route path="/account" element={<ProtectedRoute><AccountSettings /></ProtectedRoute>} />
           <Route path="/auth" element={<Auth />} />

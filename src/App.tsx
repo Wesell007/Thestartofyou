@@ -312,6 +312,7 @@ const App = () => (
           <Route path="/pregnancy-toolkit/baby-movements" element={<ProtectedRoute><PregnancyToolkitBabyMovements /></ProtectedRoute>} />
           <Route path="/pregnancy-toolkit/contraction-timer" element={<ProtectedRoute><PregnancyToolkitContractionTimer /></ProtectedRoute>} />
           <Route path="/pregnancy-toolkit/symptom-notes" element={<ProtectedRoute><PregnancyToolkitSymptomNotes /></ProtectedRoute>} />
+          <Route path="/pregnancy-toolkit/questions-for-midwife" element={<ProtectedRoute><PregnancyToolkitQuestionsForMidwife /></ProtectedRoute>} />
 
           <Route path="/account" element={<ProtectedRoute><AccountSettings /></ProtectedRoute>} />
           <Route path="/auth" element={<Auth />} />

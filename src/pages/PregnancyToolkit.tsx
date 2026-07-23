@@ -22,6 +22,7 @@ import { useAppointmentsSummary } from "@/hooks/usePregnancyAppointments";
 import { useBabyMovementNotesSummary } from "@/hooks/useBabyMovementNotes";
 import { useContractionSessionsSummary } from "@/hooks/useContractionTimer";
 import { usePregnancySymptomNotesSummary } from "@/hooks/usePregnancySymptomNotes";
+import { useMidwifeQuestionsSummary } from "@/hooks/useMidwifeQuestions";
 
 import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
@@ -71,16 +72,15 @@ const MVP_TOOLS: ToolCard[] = [
     hint: "A private place to note symptoms and questions you may want to raise.",
     icon: Activity,
   },
-];
-
-const FUTURE_TOOLS: ToolCard[] = [
   {
     key: "midwife-questions",
-    title: "Questions for midwife",
-    hint: "A place to gather things you want to ask.",
+    title: "Questions for Midwife",
+    hint: "Save questions you want to bring to your midwife or care team.",
     icon: MessageCircleQuestion,
   },
 ];
+
+const FUTURE_TOOLS: ToolCard[] = [];
 
 const accent = "hsl(var(--stage-pregnancy-accent))";
 const softBorder = "hsl(var(--stage-pregnancy-accent) / 0.16)";
@@ -214,6 +214,14 @@ const PregnancyToolkit = () => {
       : snTotal === 1
         ? "1 note saved"
         : `${snTotal} notes saved`;
+  const { loading: mqLoading, total: mqTotal } = useMidwifeQuestionsSummary();
+  const midwifeQuestionsStatusText = mqLoading
+    ? "Open"
+    : mqTotal === 0
+      ? "Not started"
+      : mqTotal === 1
+        ? "1 question saved"
+        : `${mqTotal} questions saved`;
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">

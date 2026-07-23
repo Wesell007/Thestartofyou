@@ -324,7 +324,7 @@ const PregnancyToolkit = () => {
               Quiet tools for later
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {FUTURE_TOOLS.map((t) => (
               <FutureCard key={t.key} tool={t} />
             ))}

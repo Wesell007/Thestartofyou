@@ -105,6 +105,7 @@ const PregnancyToolkitBirthPlan = lazy(() => import("./pages/PregnancyToolkitBir
 const PregnancyToolkitHospitalBag = lazy(() => import("./pages/PregnancyToolkitHospitalBag.tsx"));
 const PregnancyToolkitAppointments = lazy(() => import("./pages/PregnancyToolkitAppointments.tsx"));
 const PregnancyToolkitBabyMovements = lazy(() => import("./pages/PregnancyToolkitBabyMovements.tsx"));
+const PregnancyToolkitContractionTimer = lazy(() => import("./pages/PregnancyToolkitContractionTimer.tsx"));
 const PregnancyToolkitAppointmentEditor = lazy(() => import("./pages/PregnancyToolkitAppointmentEditor.tsx"));
 
 import ScrollToTop from "./components/layout/ScrollToTop.tsx";

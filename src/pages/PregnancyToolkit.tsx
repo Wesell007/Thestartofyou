@@ -80,90 +80,43 @@ const MVP_TOOLS: ToolCard[] = [
   },
 ];
 
-const FUTURE_TOOLS: ToolCard[] = [];
-
 const accent = "hsl(var(--stage-pregnancy-accent))";
 const softBorder = "hsl(var(--stage-pregnancy-accent) / 0.16)";
 const iconBg = "hsl(var(--stage-pregnancy) / 0.5)";
 
-const MvpCard = ({ tool, statusText, to }: { tool: ToolCard; statusText: string; to?: string }) => {
-  const Icon = tool.icon;
-  const isLive = Boolean(to);
-  const body = (
-    <div
-      className="h-full rounded-[20px] keepsake-surface px-5 py-6 flex flex-col"
-      style={{ borderColor: softBorder }}
-      aria-disabled={isLive ? undefined : "true"}
-    >
-      <span
-        aria-hidden="true"
-        className="flex h-9 w-9 items-center justify-center rounded-full border mb-4"
-        style={{ background: iconBg, borderColor: softBorder }}
-      >
-        <Icon size={15} strokeWidth={1.6} style={{ color: accent }} />
-      </span>
-      <h3 className="font-serif text-[1.05rem] sm:text-[1.1rem] text-foreground/88 leading-[1.25] mb-2">
-        {tool.title}
-      </h3>
-      <p className="font-sans text-[13px] font-light text-foreground/60 leading-[1.6] flex-1">
-        {tool.hint}
-      </p>
-      <span
-        className="mt-4 inline-flex items-center gap-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase"
-        style={isLive ? { color: accent } : { color: "hsl(var(--foreground) / 0.45)" }}
-      >
-        {isLive ? (
-          <>
-            {statusText}
-            <ArrowRight size={11} strokeWidth={1.6} />
-          </>
-        ) : (
-          statusText
-        )}
-      </span>
-    </div>
-  );
-  if (isLive && to) {
-    return (
-      <Link
-        to={to}
-        className="group block h-full transition-shadow hover:shadow-[0_18px_44px_-24px_hsl(var(--stage-pregnancy-accent)/0.28)]"
-      >
-        {body}
-      </Link>
-    );
-  }
-  return body;
-};
-
-const FutureCard = ({ tool }: { tool: ToolCard }) => {
+const MvpCard = ({ tool, statusText, to }: { tool: ToolCard; statusText: string; to: string }) => {
   const Icon = tool.icon;
   return (
-    <div
-      className="h-full rounded-[18px] px-5 py-5 flex flex-col opacity-80"
-      style={{
-        background: "hsl(var(--card) / 0.55)",
-        border: "1px dashed hsl(var(--stage-pregnancy-accent) / 0.24)",
-      }}
-      aria-disabled="true"
+    <Link
+      to={to}
+      className="group block h-full transition-shadow hover:shadow-[0_18px_44px_-24px_hsl(var(--stage-pregnancy-accent)/0.28)]"
     >
-      <span
-        aria-hidden="true"
-        className="flex h-8 w-8 items-center justify-center rounded-full mb-3"
-        style={{ background: iconBg }}
+      <div
+        className="h-full rounded-[20px] keepsake-surface px-5 py-6 flex flex-col"
+        style={{ borderColor: softBorder }}
       >
-        <Icon size={13} strokeWidth={1.6} style={{ color: accent }} />
-      </span>
-      <h3 className="font-serif text-[15px] text-foreground/80 leading-[1.3] mb-1.5">
-        {tool.title}
-      </h3>
-      <p className="font-serif italic text-[13px] text-foreground/55 leading-[1.55] flex-1">
-        {tool.hint}
-      </p>
-      <span className="mt-3 font-sans text-[10px] font-medium tracking-[0.28em] uppercase text-foreground/40">
-        Coming later
-      </span>
-    </div>
+        <span
+          aria-hidden="true"
+          className="flex h-9 w-9 items-center justify-center rounded-full border mb-4"
+          style={{ background: iconBg, borderColor: softBorder }}
+        >
+          <Icon size={15} strokeWidth={1.6} style={{ color: accent }} />
+        </span>
+        <h3 className="font-serif text-[1.05rem] sm:text-[1.1rem] text-foreground/88 leading-[1.25] mb-2">
+          {tool.title}
+        </h3>
+        <p className="font-sans text-[13px] font-light text-foreground/60 leading-[1.6] flex-1">
+          {tool.hint}
+        </p>
+        <span
+          className="mt-4 inline-flex items-center gap-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase"
+          style={{ color: accent }}
+        >
+          {statusText}
+          <ArrowRight size={11} strokeWidth={1.6} />
+        </span>
+      </div>
+    </Link>
   );
 };
 

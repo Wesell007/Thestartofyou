@@ -17,10 +17,8 @@ type ToolCard = {
   title: string;
   hint: string;
   icon: LucideIcon;
-} & (
-  | { kind: "live"; to: string }
-  | { kind: "coming-soon" }
-);
+  to: string;
+};
 
 const TOOLS: Record<string, ToolCard> = {
   dueDate: {
@@ -28,7 +26,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Due date calculator",
     hint: "Estimate your due date and weeks to go.",
     icon: Calculator,
-    kind: "live",
     to: "/due-date-calculator",
   },
   midwifeQuestions: {
@@ -36,7 +33,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Questions for midwife",
     hint: "Save questions for your care team.",
     icon: MessageCircleQuestion,
-    kind: "live",
     to: "/pregnancy-toolkit/questions-for-midwife",
   },
   appointments: {
@@ -44,7 +40,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Appointment notes",
     hint: "Dates, questions and what was said.",
     icon: ClipboardList,
-    kind: "live",
     to: "/pregnancy-toolkit/appointments",
   },
   symptoms: {
@@ -52,7 +47,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Pregnancy symptom notes",
     hint: "A private place for symptom notes.",
     icon: Activity,
-    kind: "live",
     to: "/pregnancy-toolkit/symptom-notes",
   },
   kickCounter: {
@@ -60,7 +54,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Baby movement notes",
     hint: "Notice your baby's usual pattern.",
     icon: Footprints,
-    kind: "live",
     to: "/pregnancy-toolkit/baby-movements",
   },
   hospitalBag: {
@@ -68,7 +61,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Hospital bag",
     hint: "Pack the essentials, calmly.",
     icon: Briefcase,
-    kind: "live",
     to: "/pregnancy-toolkit/hospital-bag",
   },
   birthPlan: {
@@ -76,7 +68,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Birth plan",
     hint: "Your preferences, in one place.",
     icon: ScrollText,
-    kind: "live",
     to: "/pregnancy-toolkit/birth-plan",
   },
   contractionCounter: {
@@ -84,7 +75,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Contraction timer",
     hint: "Time contractions calmly.",
     icon: Timer,
-    kind: "live",
     to: "/pregnancy-toolkit/contraction-timer",
   },
 };
@@ -112,7 +102,6 @@ const CardShell = ({ children }: { children: React.ReactNode }) => (
 
 const CardInner = ({ tool }: { tool: ToolCard }) => {
   const Icon = tool.icon;
-  const isComing = tool.kind === "coming-soon";
   return (
     <>
       <span
@@ -136,23 +125,15 @@ const CardInner = ({ tool }: { tool: ToolCard }) => {
         {tool.hint}
       </p>
       <span
-        className={`mt-4 inline-flex items-center gap-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase ${
-          isComing ? "text-foreground/45" : ""
-        }`}
-        style={isComing ? undefined : { color: "hsl(var(--stage-pregnancy-accent))" }}
+        className="mt-4 inline-flex items-center gap-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase"
+        style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
       >
-        {isComing ? (
-          "Coming soon"
-        ) : (
-          <>
-            Open
-            <ArrowRight
-              size={11}
-              strokeWidth={1.8}
-              className="transition-transform group-hover:translate-x-0.5"
-            />
-          </>
-        )}
+        Open
+        <ArrowRight
+          size={11}
+          strokeWidth={1.8}
+          className="transition-transform group-hover:translate-x-0.5"
+        />
       </span>
     </>
   );
@@ -182,25 +163,17 @@ const SectionToolsThisWeek = ({ week }: Props) => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {tools.map((tool) =>
-          tool.kind === "live" ? (
-            <Link
-              key={tool.key}
-              to={tool.to}
-              className="group block h-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_48px_-24px_hsl(var(--stage-pregnancy-accent)/0.32)]"
-            >
-              <CardShell>
-                <CardInner tool={tool} />
-              </CardShell>
-            </Link>
-          ) : (
-            <div key={tool.key} className="group h-full opacity-85">
-              <CardShell>
-                <CardInner tool={tool} />
-              </CardShell>
-            </div>
-          )
-        )}
+        {tools.map((tool) => (
+          <Link
+            key={tool.key}
+            to={tool.to}
+            className="group block h-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_48px_-24px_hsl(var(--stage-pregnancy-accent)/0.32)]"
+          >
+            <CardShell>
+              <CardInner tool={tool} />
+            </CardShell>
+          </Link>
+        ))}
       </div>
     </section>
   );

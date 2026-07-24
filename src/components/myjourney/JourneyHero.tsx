@@ -28,7 +28,7 @@ const JourneyHero = ({ firstName, currentWeek, due }: Props) => {
       >
         {greeting}
       </h1>
-      <p className="font-serif italic text-foreground/65 text-[1.12rem] sm:text-[1.2rem] leading-[1.55] max-w-[46ch] mb-7">
+      <p className="font-serif text-foreground/80 text-[1.12rem] sm:text-[1.2rem] leading-[1.55] max-w-[46ch] mb-7">
         Your pregnancy story, taking shape one week at a time.
       </p>
       <dl className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 max-w-[560px]">
@@ -45,7 +45,7 @@ const JourneyHero = ({ firstName, currentWeek, due }: Props) => {
             >
               {item.label}
             </dt>
-            <dd className="font-serif text-foreground/85 text-[15px] sm:text-[15.5px] leading-[1.35]">
+            <dd className="font-serif text-foreground text-[15px] sm:text-[15.5px] leading-[1.35]">
               {item.value}
             </dd>
           </div>

@@ -188,7 +188,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
       <h2 className="font-serif text-[1.4rem] sm:text-[1.55rem] text-foreground leading-[1.18] mb-2 max-w-[26ch]">
         One image to keep this week.
       </h2>
-      <p className="font-sans text-[13px] font-light italic text-foreground/55 mb-7 max-w-[42ch]">
+      <p className="font-sans text-[13.5px] font-normal text-foreground/75 mb-7 max-w-[42ch] leading-[1.6]">
         A bump photo, your hand on your belly, anything that holds the feel of this week.
       </p>
 
@@ -253,11 +253,11 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
               >
                 Week {week}
               </span>
-              <p className="font-serif italic text-[1.3rem] sm:text-[1.45rem] text-foreground/68 leading-snug max-w-[18ch]">
+              <p className="font-serif italic text-[1.3rem] sm:text-[1.45rem] text-foreground/78 leading-snug max-w-[18ch]">
                 {chapterTitle}
               </p>
-              <span className="font-sans text-[10px] font-light tracking-[0.3em] uppercase text-foreground/40 mt-5">
-                {state === "uploading" ? "Holding…" : "A frame held for this week"}
+              <span className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-foreground/55 mt-5">
+                {state === "uploading" ? "Holding" : "A frame held for this week"}
               </span>
             </div>
           </button>
@@ -268,12 +268,16 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
               type="button"
               onClick={() => fileRef.current?.click()}
               disabled={state === "uploading"}
-              className="font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-foreground/55 hover:text-foreground/85 transition-colors"
+              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-sans text-[11px] font-medium tracking-[0.22em] uppercase transition-colors hover:bg-[hsl(var(--stage-pregnancy-accent)/0.1)]"
+              style={{
+                color: "hsl(var(--stage-pregnancy-accent))",
+                border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.42)",
+              }}
             >
               {state === "uploading" ? "Saving" : "Add a photo"}
             </button>
-            <span className="flex items-center gap-1.5 text-foreground/40">
-              <Lock size={10} strokeWidth={1.6} />
+            <span className="flex items-center gap-1.5 text-foreground/60">
+              <Lock size={10} strokeWidth={1.7} />
               <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
                 Private to you
               </span>

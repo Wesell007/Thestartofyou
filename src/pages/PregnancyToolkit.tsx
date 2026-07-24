@@ -251,7 +251,7 @@ const PregnancyToolkit = () => {
           <h1 className="font-serif text-[1.9rem] sm:text-[2.25rem] leading-[1.15] text-foreground/90 mb-4">
             Your pregnancy toolkit
           </h1>
-          <p className="font-serif italic text-foreground/70 text-[15.5px] sm:text-[16px] leading-[1.65] max-w-[52ch]">
+          <p className="font-serif text-foreground/80 text-[15.5px] sm:text-[16px] leading-[1.65] max-w-[52ch]">
             A calm private space for birth preparation, practical notes and the tools you may want as pregnancy moves forward.
           </p>
         </section>

@@ -28,19 +28,19 @@ const MomentsKeptSummary = ({ reflections, photos, weeksKept }: Props) => {
         {items.map((item) => (
           <div key={item.label}>
             <p
-              className="font-serif font-medium text-foreground/90 leading-none mb-2"
+              className="font-serif font-medium text-foreground leading-none mb-2"
               style={{ fontSize: "clamp(1.7rem, 3.2vw, 2.15rem)" }}
             >
               {item.value}
             </p>
-            <p className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/55">
+            <p className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/70">
               {item.label}
             </p>
           </div>
         ))}
       </div>
       {isEmpty && (
-        <p className="font-serif italic text-foreground/60 text-[14.5px] leading-[1.55] mt-5 max-w-[46ch]">
+        <p className="font-serif text-foreground/75 text-[14.5px] leading-[1.6] mt-5 max-w-[46ch]">
           Nothing kept yet, and that's alright. Anything you save from My Week will gather here.
         </p>
       )}

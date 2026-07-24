@@ -29,12 +29,12 @@ const MomentCard = ({ week, reflection }: Props) => {
         Week {week}
       </p>
       <p
-        className="font-serif italic text-foreground/78 text-[14.5px] sm:text-[15px] leading-[1.7] border-l-2 pl-4 mb-3"
-        style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.4)" }}
+        className="font-serif italic text-foreground/85 text-[14.5px] sm:text-[15px] leading-[1.7] border-l-2 pl-4 mb-3"
+        style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
       >
         "{truncate(reflection, 160)}"
       </p>
-      <p className="font-serif italic text-foreground/45 text-[12.5px] leading-[1.5]">
+      <p className="font-serif text-foreground/65 text-[12.5px] leading-[1.5]">
         {identity.chapterTitle}
       </p>
     </Link>

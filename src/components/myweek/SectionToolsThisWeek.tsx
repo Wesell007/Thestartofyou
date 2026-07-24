@@ -17,10 +17,8 @@ type ToolCard = {
   title: string;
   hint: string;
   icon: LucideIcon;
-} & (
-  | { kind: "live"; to: string }
-  | { kind: "coming-soon" }
-);
+  to: string;
+};
 
 const TOOLS: Record<string, ToolCard> = {
   dueDate: {

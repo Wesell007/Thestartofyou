@@ -26,7 +26,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Due date calculator",
     hint: "Estimate your due date and weeks to go.",
     icon: Calculator,
-    kind: "live",
     to: "/due-date-calculator",
   },
   midwifeQuestions: {
@@ -34,7 +33,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Questions for midwife",
     hint: "Save questions for your care team.",
     icon: MessageCircleQuestion,
-    kind: "live",
     to: "/pregnancy-toolkit/questions-for-midwife",
   },
   appointments: {
@@ -42,7 +40,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Appointment notes",
     hint: "Dates, questions and what was said.",
     icon: ClipboardList,
-    kind: "live",
     to: "/pregnancy-toolkit/appointments",
   },
   symptoms: {
@@ -50,7 +47,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Pregnancy symptom notes",
     hint: "A private place for symptom notes.",
     icon: Activity,
-    kind: "live",
     to: "/pregnancy-toolkit/symptom-notes",
   },
   kickCounter: {
@@ -58,7 +54,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Baby movement notes",
     hint: "Notice your baby's usual pattern.",
     icon: Footprints,
-    kind: "live",
     to: "/pregnancy-toolkit/baby-movements",
   },
   hospitalBag: {
@@ -66,7 +61,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Hospital bag",
     hint: "Pack the essentials, calmly.",
     icon: Briefcase,
-    kind: "live",
     to: "/pregnancy-toolkit/hospital-bag",
   },
   birthPlan: {
@@ -74,7 +68,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Birth plan",
     hint: "Your preferences, in one place.",
     icon: ScrollText,
-    kind: "live",
     to: "/pregnancy-toolkit/birth-plan",
   },
   contractionCounter: {
@@ -82,7 +75,6 @@ const TOOLS: Record<string, ToolCard> = {
     title: "Contraction timer",
     hint: "Time contractions calmly.",
     icon: Timer,
-    kind: "live",
     to: "/pregnancy-toolkit/contraction-timer",
   },
 };

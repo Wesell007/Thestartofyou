@@ -102,7 +102,6 @@ const CardShell = ({ children }: { children: React.ReactNode }) => (
 
 const CardInner = ({ tool }: { tool: ToolCard }) => {
   const Icon = tool.icon;
-  const isComing = tool.kind === "coming-soon";
   return (
     <>
       <span
@@ -126,23 +125,15 @@ const CardInner = ({ tool }: { tool: ToolCard }) => {
         {tool.hint}
       </p>
       <span
-        className={`mt-4 inline-flex items-center gap-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase ${
-          isComing ? "text-foreground/45" : ""
-        }`}
-        style={isComing ? undefined : { color: "hsl(var(--stage-pregnancy-accent))" }}
+        className="mt-4 inline-flex items-center gap-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase"
+        style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
       >
-        {isComing ? (
-          "Coming soon"
-        ) : (
-          <>
-            Open
-            <ArrowRight
-              size={11}
-              strokeWidth={1.8}
-              className="transition-transform group-hover:translate-x-0.5"
-            />
-          </>
-        )}
+        Open
+        <ArrowRight
+          size={11}
+          strokeWidth={1.8}
+          className="transition-transform group-hover:translate-x-0.5"
+        />
       </span>
     </>
   );
@@ -172,25 +163,17 @@ const SectionToolsThisWeek = ({ week }: Props) => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {tools.map((tool) =>
-          tool.kind === "live" ? (
-            <Link
-              key={tool.key}
-              to={tool.to}
-              className="group block h-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_48px_-24px_hsl(var(--stage-pregnancy-accent)/0.32)]"
-            >
-              <CardShell>
-                <CardInner tool={tool} />
-              </CardShell>
-            </Link>
-          ) : (
-            <div key={tool.key} className="group h-full opacity-85">
-              <CardShell>
-                <CardInner tool={tool} />
-              </CardShell>
-            </div>
-          )
-        )}
+        {tools.map((tool) => (
+          <Link
+            key={tool.key}
+            to={tool.to}
+            className="group block h-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_48px_-24px_hsl(var(--stage-pregnancy-accent)/0.32)]"
+          >
+            <CardShell>
+              <CardInner tool={tool} />
+            </CardShell>
+          </Link>
+        ))}
       </div>
     </section>
   );

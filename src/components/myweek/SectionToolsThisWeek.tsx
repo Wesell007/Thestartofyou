@@ -33,8 +33,8 @@ const TOOLS: Record<string, ToolCard> = {
   },
   midwifeQuestions: {
     key: "midwifeQuestions",
-    title: "Questions for Midwife",
-    hint: "Save questions you want to bring to your midwife.",
+    title: "Questions for midwife",
+    hint: "Save questions for your care team.",
     icon: MessageCircleQuestion,
     kind: "live",
     to: "/pregnancy-toolkit/questions-for-midwife",
@@ -42,15 +42,15 @@ const TOOLS: Record<string, ToolCard> = {
   appointments: {
     key: "appointments",
     title: "Appointment notes",
-    hint: "Keep dates and what was said.",
+    hint: "Dates, questions and what was said.",
     icon: ClipboardList,
     kind: "live",
     to: "/pregnancy-toolkit/appointments",
   },
   symptoms: {
     key: "symptoms",
-    title: "Pregnancy Symptom Notes",
-    hint: "A private place to note symptoms and questions you may want to raise.",
+    title: "Pregnancy symptom notes",
+    hint: "A private place for symptom notes.",
     icon: Activity,
     kind: "live",
     to: "/pregnancy-toolkit/symptom-notes",
@@ -58,7 +58,7 @@ const TOOLS: Record<string, ToolCard> = {
   kickCounter: {
     key: "kickCounter",
     title: "Baby movement notes",
-    hint: "A calm place to notice your baby's usual pattern.",
+    hint: "Notice your baby's usual pattern.",
     icon: Footprints,
     kind: "live",
     to: "/pregnancy-toolkit/baby-movements",
@@ -66,16 +66,15 @@ const TOOLS: Record<string, ToolCard> = {
   hospitalBag: {
     key: "hospitalBag",
     title: "Hospital bag",
-    hint: "A quiet checklist for later.",
+    hint: "Pack the essentials, calmly.",
     icon: Briefcase,
     kind: "live",
     to: "/pregnancy-toolkit/hospital-bag",
   },
-
   birthPlan: {
     key: "birthPlan",
     title: "Birth plan",
-    hint: "Your preferences, held in one place.",
+    hint: "Your preferences, in one place.",
     icon: ScrollText,
     kind: "live",
     to: "/pregnancy-toolkit/birth-plan",
@@ -83,7 +82,7 @@ const TOOLS: Record<string, ToolCard> = {
   contractionCounter: {
     key: "contractionCounter",
     title: "Contraction timer",
-    hint: "Time contractions and keep notes.",
+    hint: "Time contractions calmly.",
     icon: Timer,
     kind: "live",
     to: "/pregnancy-toolkit/contraction-timer",
@@ -102,11 +101,10 @@ const getWeekTools = (week: number): ToolCard[] => {
   return [TOOLS.dueDate];
 };
 
-
 const CardShell = ({ children }: { children: React.ReactNode }) => (
   <div
-    className="h-full rounded-[20px] keepsake-surface px-5 py-6 flex flex-col"
-    style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)" }}
+    className="h-full rounded-[20px] keepsake-surface px-5 py-6 flex flex-col transition-all duration-300 group-hover:border-[hsl(var(--stage-pregnancy-accent)/0.28)]"
+    style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.18)" }}
   >
     {children}
   </div>
@@ -121,25 +119,25 @@ const CardInner = ({ tool }: { tool: ToolCard }) => {
         aria-hidden="true"
         className="flex h-9 w-9 items-center justify-center rounded-full border mb-4"
         style={{
-          background: "hsl(var(--stage-pregnancy) / 0.5)",
-          borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)",
+          background: "hsl(var(--stage-pregnancy) / 0.55)",
+          borderColor: "hsl(var(--stage-pregnancy-accent) / 0.24)",
         }}
       >
         <Icon
           size={15}
-          strokeWidth={1.6}
+          strokeWidth={1.7}
           style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
         />
       </span>
-      <h3 className="font-serif text-[1.05rem] sm:text-[1.1rem] text-foreground/88 leading-[1.25] mb-2">
+      <h3 className="font-serif text-[1.05rem] sm:text-[1.1rem] text-foreground leading-[1.25] mb-2">
         {tool.title}
       </h3>
-      <p className="font-sans text-[13px] font-light text-foreground/60 leading-[1.6] flex-1">
+      <p className="font-sans text-[13px] font-normal text-foreground/72 leading-[1.6] flex-1">
         {tool.hint}
       </p>
       <span
         className={`mt-4 inline-flex items-center gap-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase ${
-          isComing ? "text-foreground/40" : ""
+          isComing ? "text-foreground/45" : ""
         }`}
         style={isComing ? undefined : { color: "hsl(var(--stage-pregnancy-accent))" }}
       >
@@ -148,7 +146,11 @@ const CardInner = ({ tool }: { tool: ToolCard }) => {
         ) : (
           <>
             Open
-            <ArrowRight size={11} strokeWidth={1.6} />
+            <ArrowRight
+              size={11}
+              strokeWidth={1.8}
+              className="transition-transform group-hover:translate-x-0.5"
+            />
           </>
         )}
       </span>
@@ -185,14 +187,14 @@ const SectionToolsThisWeek = ({ week }: Props) => {
             <Link
               key={tool.key}
               to={tool.to}
-              className="group block h-full transition-shadow hover:shadow-[0_18px_44px_-24px_hsl(var(--stage-pregnancy-accent)/0.28)]"
+              className="group block h-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_48px_-24px_hsl(var(--stage-pregnancy-accent)/0.32)]"
             >
               <CardShell>
                 <CardInner tool={tool} />
               </CardShell>
             </Link>
           ) : (
-            <div key={tool.key} className="h-full opacity-80">
+            <div key={tool.key} className="group h-full opacity-85">
               <CardShell>
                 <CardInner tool={tool} />
               </CardShell>

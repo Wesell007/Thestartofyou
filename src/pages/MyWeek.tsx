@@ -7,7 +7,7 @@ import { EVENTS } from "@/lib/analyticsEvents";
 import { supabase } from "@/integrations/supabase/client";
 import { getActivePregnancyJourney } from "@/lib/savedJourney";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
-import { getMyWeekContent, getWeekIdentity, getSafeAskSeed } from "@/data/myWeekContent";
+import { getMyWeekContent, getWeekIdentity, getSafeAskSeed, getSizeCueSlug } from "@/data/myWeekContent";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import SectionHero from "@/components/myweek/SectionHero";
@@ -206,6 +206,7 @@ const MyWeek = () => {
           developmentCue={identity.developmentCue}
           babyNote={identity.babyNote}
           whatThisMeans={whatThisMeans}
+          sizeComparisonSlug={getSizeCueSlug(currentWeek) ?? undefined}
         />
 
         {bodyText && <SectionBodyThisWeek bodyText={bodyText} />}

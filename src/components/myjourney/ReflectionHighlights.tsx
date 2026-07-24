@@ -19,7 +19,7 @@ const ReflectionHighlights = ({ weeks, reflectionByWeek }: Props) => {
         >
           Reflection highlights
         </h2>
-        <p className="font-serif italic text-foreground/55 text-[14.5px] leading-[1.5]">
+        <p className="font-serif text-foreground/75 text-[14.5px] leading-[1.55]">
           A few of the things you've held onto.
         </p>
       </div>

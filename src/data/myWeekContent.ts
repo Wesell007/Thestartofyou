@@ -222,3 +222,58 @@ export const getMyWeekContent = (week: number): MyWeekEntry => {
     nextPreview: defaultNextPreviewByStage[stage],
   };
 };
+
+// ─── Size cue slugs (Baby This Week) ───────────────────────────────────────
+// Optional visual companion cue for the "About this size" line. Each slug
+// maps to an asset at `src/assets/size-cues/{slug}.png`. Weeks with `null`
+// or a slug without a matching asset render the graceful monogram fallback.
+export const sizeCueByWeek: Record<number, string | null> = {
+  1: null,
+  2: "poppy-seed",
+  3: "poppy-seed",
+  4: "sesame-seed",
+  5: "apple-seed",
+  6: "lentil",
+  7: "blueberry",
+  8: "raspberry",
+  9: "green-olive",
+  10: "strawberry",
+  11: "lime",
+  12: "plum",
+  13: "pea-pod",
+  14: null,
+  15: "apple",
+  16: "avocado",
+  17: "pear",
+  18: "sweet-pepper",
+  19: "heirloom-tomato",
+  20: "banana",
+  21: "carrot",
+  22: "spaghetti-squash",
+  23: "mango",
+  24: "ear-of-corn",
+  25: "swede",
+  26: "courgette",
+  27: "cauliflower",
+  28: "aubergine",
+  29: "butternut-squash",
+  30: "cabbage",
+  31: "coconut",
+  32: "butternut-squash",
+  33: "pineapple",
+  34: "honeydew-melon",
+  35: "pineapple",
+  36: "romaine-lettuce",
+  37: "swiss-chard",
+  38: "pumpkin",
+  39: "watermelon",
+  40: "watermelon",
+  41: null,
+  42: null,
+};
+
+export const getSizeCueSlug = (week: number): string | null => {
+  const w = Math.min(Math.max(week, 1), 42);
+  return sizeCueByWeek[w] ?? null;
+};
+

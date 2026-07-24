@@ -5,16 +5,82 @@ interface Props {
   developmentCue: string;
   babyNote: string;
   whatThisMeans: string;
+  /** Optional slug matching src/assets/size-cues/{slug}.png. Falls back to a
+   *  parchment monogram when the asset is not present. */
+  sizeComparisonSlug?: string;
 }
+
+// Resolve all size-cue asset pointers at build time. Missing slugs simply
+// don't appear in the lookup and the component falls back gracefully.
+const sizeCueModules = import.meta.glob<{ url: string }>(
+  "../../assets/size-cues/*.png.asset.json",
+  { eager: true, import: "default" },
+);
+
+const sizeCueUrlBySlug: Record<string, string> = (() => {
+  const out: Record<string, string> = {};
+  for (const [key, mod] of Object.entries(sizeCueModules)) {
+    const file = key.split("/").pop() ?? "";
+    const slug = file.replace(/\.png\.asset\.json$/, "");
+    if (slug && mod && typeof (mod as { url?: string }).url === "string") {
+      out[slug] = (mod as { url: string }).url;
+    }
+  }
+  return out;
+})();
+
+const slugToMonogram = (slug?: string): string => {
+  if (!slug) return "·";
+  const first = slug.replace(/[^a-z]/gi, "").charAt(0);
+  return first ? first.toUpperCase() : "·";
+};
+
+const SizeCue = ({ slug }: { slug?: string }) => {
+  const url = slug ? sizeCueUrlBySlug[slug] : undefined;
+  const baseStyle = {
+    background:
+      "radial-gradient(120% 90% at 50% 40%, hsl(var(--card)), hsl(var(--stage-pregnancy) / 0.35))",
+    borderColor: "hsl(var(--stage-pregnancy-accent) / 0.22)",
+  } as const;
+  if (url) {
+    return (
+      <span
+        aria-hidden="true"
+        className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full border overflow-hidden"
+        style={baseStyle}
+      >
+        <img
+          src={url}
+          alt=""
+          width={64}
+          height={64}
+          loading="lazy"
+          className="h-[42px] w-[42px] object-contain select-none"
+        />
+      </span>
+    );
+  }
+  return (
+    <span
+      aria-hidden="true"
+      className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full border font-serif text-[1.35rem] leading-none"
+      style={{ ...baseStyle, color: "hsl(var(--stage-pregnancy-accent))" }}
+    >
+      {slugToMonogram(slug)}
+    </span>
+  );
+};
 
 /**
  * Baby this week — the visual centre of My Week 2.0.
- *
- * Large fetus image on a warm wash, paired with a size cue, a two-to-three
- * sentence development note, and one calm "what this means" line. Framed
- * so a future Nano Banana image drop-in lifts the whole card.
  */
-const SectionBabyThisWeek = ({ week, developmentCue, babyNote, whatThisMeans }: Props) => {
+const SectionBabyThisWeek = ({
+  week,
+  developmentCue,
+  babyNote,
+  whatThisMeans,
+  sizeComparisonSlug,
+}: Props) => {
   return (
     <section className="relative pt-4 pb-12 sm:pb-14">
       <div className="flex items-center gap-3 mb-5">
@@ -69,13 +135,16 @@ const SectionBabyThisWeek = ({ week, developmentCue, babyNote, whatThisMeans }: 
         </div>
 
         <figcaption className="sm:col-span-6 px-6 sm:px-9 py-9 sm:py-12 flex flex-col justify-center">
-          <p
-            className="font-sans text-[10px] font-medium tracking-[0.28em] uppercase mb-4"
-            style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-          >
-            About this size
-          </p>
-          <p className="font-serif text-[1.35rem] sm:text-[1.55rem] text-foreground/88 leading-[1.22] tracking-tight mb-6 max-w-[26ch]">
+          <div className="flex items-center gap-3 mb-4">
+            <SizeCue slug={sizeComparisonSlug} />
+            <p
+              className="font-sans text-[10px] font-medium tracking-[0.28em] uppercase"
+              style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+            >
+              About this size
+            </p>
+          </div>
+          <p className="font-serif text-[1.35rem] sm:text-[1.55rem] text-foreground leading-[1.22] tracking-tight mb-6 max-w-[26ch]">
             {developmentCue}
           </p>
           <span
@@ -83,10 +152,10 @@ const SectionBabyThisWeek = ({ week, developmentCue, babyNote, whatThisMeans }: 
             className="block w-12 h-px mb-5"
             style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.5)" }}
           />
-          <p className="font-sans text-[14.5px] sm:text-[15px] font-light text-foreground/72 leading-[1.75] mb-4">
+          <p className="font-sans text-[14.5px] sm:text-[15px] font-normal text-foreground/80 leading-[1.75] mb-4">
             {babyNote}
           </p>
-          <p className="font-serif italic text-[14px] sm:text-[14.5px] text-foreground/60 leading-[1.65] max-w-[36ch]">
+          <p className="font-serif italic text-[14px] sm:text-[14.5px] text-foreground/72 leading-[1.65] max-w-[36ch]">
             {whatThisMeans}
           </p>
         </figcaption>

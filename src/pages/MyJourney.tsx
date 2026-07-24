@@ -17,7 +17,7 @@ import TrimesterTimeline from "@/components/myjourney/TrimesterTimeline";
 import KeptWeekRow from "@/components/myjourney/KeptWeekRow";
 import PhotoJournal from "@/components/myjourney/PhotoJournal";
 import ReflectionHighlights from "@/components/myjourney/ReflectionHighlights";
-import ComingSoonPanel from "@/components/myjourney/ComingSoonPanel";
+import ToolkitEntryPanel from "@/components/myjourney/ToolkitEntryPanel";
 import LookingAheadCard from "@/components/myjourney/LookingAheadCard";
 import PageLoadState from "@/components/shared/PageLoadState";
 
@@ -216,7 +216,7 @@ const MyJourney = () => {
             >
               Your timeline
             </p>
-            <p className="font-serif italic text-foreground/68 text-[15.5px] leading-[1.65] max-w-[46ch]">
+            <p className="font-serif text-foreground/80 text-[15.5px] leading-[1.65] max-w-[46ch]">
               Your journey has just begun. The weeks and reflections you keep will gather here over time.
             </p>
           </section>
@@ -228,7 +228,7 @@ const MyJourney = () => {
 
         <ReflectionHighlights weeks={reflectionWeeks} reflectionByWeek={reflectionsByWeek} />
 
-        <ComingSoonPanel />
+        <ToolkitEntryPanel />
 
         <LookingAheadCard currentWeek={currentWeek} keptCount={keptWeeks.length} />
       </main>

@@ -31,14 +31,14 @@ const LookingAheadCard = ({ currentWeek, keptCount }: Props) => {
         Looking ahead
       </p>
       {nextIdentity && nextWeek ? (
-        <p className="font-serif text-foreground/75 text-[15.5px] sm:text-[16px] leading-[1.55] mb-5 max-w-[44ch]">
-          <span className="text-foreground/90">Week {nextWeek} · {nextIdentity.chapterTitle}</span>
-          <span className="block font-serif italic text-foreground/55 text-[14px] mt-1.5">
+        <p className="font-serif text-foreground/85 text-[15.5px] sm:text-[16px] leading-[1.55] mb-5 max-w-[44ch]">
+          <span className="text-foreground">Week {nextWeek} · {nextIdentity.chapterTitle}</span>
+          <span className="block font-serif text-foreground/72 text-[14px] mt-1.5">
             {nextIdentity.theme}
           </span>
         </p>
       ) : (
-        <p className="font-serif italic text-foreground/68 text-[15.5px] leading-[1.55] mb-5 max-w-[44ch]">
+        <p className="font-serif text-foreground/80 text-[15.5px] leading-[1.55] mb-5 max-w-[44ch]">
           Your due date is near.
         </p>
       )}

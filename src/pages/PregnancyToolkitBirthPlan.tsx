@@ -160,12 +160,17 @@ const PregnancyToolkitBirthPlan = () => {
         </section>
 
         {/* Progress */}
-        <div className="mb-10">
+        <div className="mb-6">
           <BirthPlanProgress
             completion={liveCompletion}
             status={status}
             updatedAt={updatedAt}
           />
+        </div>
+
+        {/* Export actions (top) */}
+        <div className="mb-10">
+          <BirthPlanActions hasContent={hasAnyAnswered} />
         </div>
 
         {/* Sections */}
@@ -182,13 +187,19 @@ const PregnancyToolkitBirthPlan = () => {
         </div>
 
         {/* Summary */}
-        <div className="mb-10">
+        <div className="mb-6">
           <BirthPlanSummary
             answers={answers}
             completion={liveCompletion}
             updatedAt={updatedAt}
           />
         </div>
+
+        {/* Export actions (bottom, alongside summary) */}
+        <div className="mb-10">
+          <BirthPlanActions hasContent={hasAnyAnswered} />
+        </div>
+
 
         {/* Return links */}
         <section

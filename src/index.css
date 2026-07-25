@@ -447,3 +447,131 @@
     color: transparent;
   }
 }
+
+/* ============== Birth plan printable ============== */
+
+.birth-plan-printable {
+  position: absolute;
+  left: -10000px;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 18mm 16mm;
+  }
+  html, body {
+    background: #ffffff !important;
+  }
+  body * {
+    visibility: hidden !important;
+  }
+  #birth-plan-print,
+  #birth-plan-print * {
+    visibility: visible !important;
+  }
+  #birth-plan-print {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    pointer-events: auto !important;
+    color: #111111;
+    font-family: Georgia, "Times New Roman", serif;
+    padding: 0;
+  }
+  #birth-plan-print .bpp-header {
+    border-bottom: 1px solid #d8d8d8;
+    padding-bottom: 14px;
+    margin-bottom: 22px;
+  }
+  #birth-plan-print .bpp-brand {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #6a6a6a;
+    margin: 0 0 10px 0;
+  }
+  #birth-plan-print .bpp-title {
+    font-size: 32px;
+    line-height: 1.1;
+    margin: 0 0 12px 0;
+    font-weight: 500;
+  }
+  #birth-plan-print .bpp-meta {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    color: #333333;
+    margin: 0 0 12px 0;
+  }
+  #birth-plan-print .bpp-meta p {
+    margin: 0 0 2px 0;
+  }
+  #birth-plan-print .bpp-intro {
+    font-style: italic;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: #333333;
+    margin: 0;
+    max-width: 62ch;
+  }
+  #birth-plan-print .bpp-section {
+    page-break-inside: avoid;
+    margin-bottom: 18px;
+  }
+  #birth-plan-print .bpp-section-title {
+    font-size: 15px;
+    margin: 0 0 8px 0;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #ececec;
+    font-weight: 500;
+  }
+  #birth-plan-print .bpp-choices {
+    margin: 0 0 8px 0;
+    padding-left: 18px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  #birth-plan-print .bpp-choices li {
+    margin-bottom: 2px;
+  }
+  #birth-plan-print .bpp-notes {
+    margin-top: 6px;
+  }
+  #birth-plan-print .bpp-notes-label {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #6a6a6a;
+    margin: 0 0 3px 0;
+  }
+  #birth-plan-print .bpp-notes-body {
+    font-size: 12px;
+    line-height: 1.55;
+    margin: 0;
+    white-space: pre-wrap;
+  }
+  #birth-plan-print .bpp-footer {
+    margin-top: 28px;
+    padding-top: 12px;
+    border-top: 1px solid #d8d8d8;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    color: #6a6a6a;
+    display: flex;
+    justify-content: space-between;
+  }
+  #birth-plan-print .bpp-footer p {
+    margin: 0;
+  }
+}

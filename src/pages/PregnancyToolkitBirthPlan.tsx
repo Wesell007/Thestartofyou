@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import SeoHead from "@/components/seo/SeoHead";
@@ -7,12 +8,17 @@ import PageLoadState from "@/components/shared/PageLoadState";
 import BirthPlanProgress from "@/components/pregnancy-toolkit/BirthPlanProgress";
 import BirthPlanSectionCard from "@/components/pregnancy-toolkit/BirthPlanSection";
 import BirthPlanSummary from "@/components/pregnancy-toolkit/BirthPlanSummary";
+import BirthPlanActions from "@/components/pregnancy-toolkit/BirthPlanActions";
+import BirthPlanPrintable from "@/components/pregnancy-toolkit/BirthPlanPrintable";
 import { useBirthPlan } from "@/hooks/useBirthPlan";
+import { supabase } from "@/integrations/supabase/client";
+import { getActivePregnancyJourney } from "@/lib/savedJourney";
 import {
   BIRTH_PLAN_SECTIONS,
   BirthPlanSectionAnswer,
   BirthPlanSectionKey,
   calculateCompletion,
+  isSectionAnswered,
   statusFromCompletion,
 } from "@/lib/birthPlanSchema";
 
@@ -59,6 +65,42 @@ const PregnancyToolkitBirthPlan = () => {
     const nextAnswers = { ...answers, [key]: next };
     void saveAnswers(nextAnswers);
   };
+
+  const [parentName, setParentName] = useState<string | null>(null);
+  const [dueDate, setDueDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { data } = await supabase.auth.getUser();
+        const user = data.user;
+        if (!user) return;
+        const meta = (user.user_metadata ?? {}) as Record<string, unknown>;
+        const rawName =
+          (typeof meta.full_name === "string" && meta.full_name.trim()) ||
+          (typeof meta.name === "string" && meta.name.trim()) ||
+          (user.email ? user.email.split("@")[0] : "") ||
+          "";
+        if (!cancelled && rawName) setParentName(rawName);
+        const journey = await getActivePregnancyJourney(user.id);
+        if (!cancelled && journey?.due_date) {
+          const d = new Date(journey.due_date);
+          if (!Number.isNaN(d.getTime())) setDueDate(d);
+        }
+      } catch {
+        // silent — printable simply omits these fields
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const hasAnyAnswered = useMemo(
+    () => BIRTH_PLAN_SECTIONS.some((s) => isSectionAnswered(answers[s.key])),
+    [answers]
+  );
 
   if (loadState === "loading") {
     return <PageLoadState message="Opening your birth plan…" />;
@@ -118,12 +160,17 @@ const PregnancyToolkitBirthPlan = () => {
         </section>
 
         {/* Progress */}
-        <div className="mb-10">
+        <div className="mb-6">
           <BirthPlanProgress
             completion={liveCompletion}
             status={status}
             updatedAt={updatedAt}
           />
+        </div>
+
+        {/* Export actions (top) */}
+        <div className="mb-10">
+          <BirthPlanActions hasContent={hasAnyAnswered} />
         </div>
 
         {/* Sections */}
@@ -140,13 +187,19 @@ const PregnancyToolkitBirthPlan = () => {
         </div>
 
         {/* Summary */}
-        <div className="mb-10">
+        <div className="mb-6">
           <BirthPlanSummary
             answers={answers}
             completion={liveCompletion}
             updatedAt={updatedAt}
           />
         </div>
+
+        {/* Export actions (bottom, alongside summary) */}
+        <div className="mb-10">
+          <BirthPlanActions hasContent={hasAnyAnswered} />
+        </div>
+
 
         {/* Return links */}
         <section
@@ -182,6 +235,7 @@ const PregnancyToolkitBirthPlan = () => {
       </main>
       <MyWeekFooter contextual={null} />
       <SaveStatePill state={saveState} />
+      <BirthPlanPrintable answers={answers} parentName={parentName} dueDate={dueDate} />
     </div>
   );
 };

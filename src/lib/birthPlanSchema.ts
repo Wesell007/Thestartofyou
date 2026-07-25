@@ -36,6 +36,18 @@ export interface BirthPlanSection {
 
 export const BIRTH_PLAN_SECTIONS: BirthPlanSection[] = [
   {
+    key: "birth",
+    title: "Birth preferences",
+    intro: "How you would like the birth itself to be supported.",
+    choices: [
+      "Discuss assisted birth if needed",
+      "Discuss caesarean birth if needed",
+      "Explain changes to the plan",
+      "Keep me informed",
+    ],
+    notesPlaceholder: "Anything you want your care team to know about the birth itself.",
+  },
+  {
     key: "environment",
     title: "Birth environment",
     intro: "The atmosphere you would like around you, where possible.",
@@ -47,19 +59,6 @@ export const BIRTH_PLAN_SECTIONS: BirthPlanSection[] = [
       "Open to guidance on the day",
     ],
     notesPlaceholder: "Anything else about the room or atmosphere.",
-  },
-  {
-    key: "partner_support",
-    title: "Birth partner and support",
-    intro: "Who you would like with you and how they can help.",
-    choices: [
-      "Birth partner present",
-      "Support with breathing",
-      "Help asking questions",
-      "Time to discuss choices",
-      "Open to staff guidance",
-    ],
-    notesPlaceholder: "Names or specific ways your partner can support you.",
   },
   {
     key: "pain_relief",
@@ -75,16 +74,17 @@ export const BIRTH_PLAN_SECTIONS: BirthPlanSection[] = [
     notesPlaceholder: "Anything you want your care team to know about pain relief.",
   },
   {
-    key: "monitoring",
-    title: "Monitoring and interventions",
-    intro: "How you would like decisions to be shared with you.",
+    key: "partner_support",
+    title: "Birth partner and support",
+    intro: "Who you would like with you and how they can help.",
     choices: [
-      "Explain options clearly",
-      "Time to ask questions where possible",
-      "Support with decisions",
-      "Open to recommendations if needed",
+      "Birth partner present",
+      "Support with breathing",
+      "Help asking questions",
+      "Time to discuss choices",
+      "Open to staff guidance",
     ],
-    notesPlaceholder: "Anything about how you would like to be informed.",
+    notesPlaceholder: "Names or specific ways your partner can support you.",
   },
   {
     key: "labour",
@@ -100,16 +100,16 @@ export const BIRTH_PLAN_SECTIONS: BirthPlanSection[] = [
     notesPlaceholder: "Any preferences around movement, positions or pace.",
   },
   {
-    key: "birth",
-    title: "Birth preferences",
-    intro: "How you would like the birth itself to be supported.",
+    key: "monitoring",
+    title: "Monitoring and interventions",
+    intro: "How you would like decisions to be shared with you.",
     choices: [
-      "Discuss assisted birth if needed",
-      "Discuss caesarean birth if needed",
-      "Explain changes to the plan",
-      "Keep me informed",
+      "Explain options clearly",
+      "Time to ask questions where possible",
+      "Support with decisions",
+      "Open to recommendations if needed",
     ],
-    notesPlaceholder: "Anything you want your care team to know about the birth itself.",
+    notesPlaceholder: "Anything about how you would like to be informed.",
   },
   {
     key: "feeding",

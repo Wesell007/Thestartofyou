@@ -1,36 +1,31 @@
-# Phase 12.7b — Pregnancy Journey Premium Edge Polish (approved, ready to build)
+## Phase 12.8: Birth Plan Export, Print & Section Reorder — Approved Build
 
-Refinement pass only. 13 total size cue assets (1 existing + 12 generated this turn to /tmp).
+### Guardrails locked in
+- **G1**: PDF action labelled **Save as PDF** (never "Download PDF"). Zero new dependencies.
+- **G2**: When no sections are completed, both actions are `disabled` AND a visible helper line renders next to them: *"Add a few preferences before exporting your birth plan."*
+- **G3**: Section titles, prompts, choices, keys, and stored answers are untouched. Only the array order changes.
 
-## Files to edit
-- `src/data/myWeekContent.ts` — add `sizeCueByWeek` map and `getSizeCueSlug(week)` helper only. No copy edits.
-- `src/components/myweek/SectionBabyThisWeek.tsx` — optional `sizeComparisonSlug`, resolves via `import.meta.glob`; graceful parchment monogram fallback.
-- `src/components/myweek/SectionAskAI.tsx` — warmer surface + accent ring + stronger icon chip + pill CTA.
-- `src/components/myweek/SectionToolsThisWeek.tsx` — confident live-tool copy, stronger hierarchy, subtle hover lift. No status hooks in My Week.
-- `src/components/myweek/SlotPhotoMemory.tsx` — contrast + italic discipline; pill "Add a photo" affordance.
-- `src/components/myweek/MyWeekFooter.tsx` — align to content column widths; stronger link contrast; non-italic.
-- `src/components/myjourney/JourneyHero.tsx` — non-italic standfirst; contrast bumps.
-- `src/components/myjourney/PhotoJournal.tsx` — keepsake frame empty state; non-italic standfirst.
-- `src/components/myjourney/ReflectionHighlights.tsx` — non-italic standfirst.
-- `src/components/myjourney/MomentCard.tsx` — keep italic quote; strengthen chapter title contrast (non-italic).
-- `src/components/myjourney/MomentsKeptSummary.tsx` — non-italic empty helper.
-- `src/components/myjourney/LookingAheadCard.tsx` — non-italic fallback + contrast.
-- `src/pages/PregnancyToolkit.tsx` — non-italic hero standfirst only.
-- `src/pages/MyJourney.tsx` — swap `ComingSoonPanel` → new `ToolkitEntryPanel`.
-- `src/pages/MyWeek.tsx` — one narrow line: pass `sizeComparisonSlug={getSizeCueSlug(currentWeek) ?? undefined}`.
+### Files to edit
+1. `src/lib/birthPlanSchema.ts` — reorder `BIRTH_PLAN_SECTIONS` to: `birth`, `environment`, `pain_relief`, `partner_support`, `labour`, `monitoring`, `feeding`, `after_birth`, `midwife_notes`.
+2. `src/pages/PregnancyToolkitBirthPlan.tsx` — mount `<BirthPlanActions>` under the progress card and again inside the summary area; mount `<BirthPlanPrintable>` once at the end of the page (off-screen).
+3. `src/index.css` — append a `@media print` block that hides everything except `#birth-plan-print`, forces white background, black text, sensible page margins and page-break rules.
 
-## Files to create
-- `src/components/myjourney/ToolkitEntryPanel.tsx` — uses existing read-only summary hooks (birth plan, hospital bag, appointments, movements, contractions, symptoms, midwife questions). No writes.
-- 13 `.asset.json` pointers under `src/assets/size-cues/` (romaine already staged; 12 new watercolour PNGs generated to `/tmp/size-cues/`).
+### Files to create
+4. `src/components/pregnancy-toolkit/BirthPlanActions.tsx` — two buttons (**Print birth plan**, **Save as PDF**), disabled state, visible helper line when empty. Both buttons call `window.print()`. Save as PDF also fires a one-line hint toast telling the user to pick "Save as PDF" in the print dialog.
+5. `src/components/pregnancy-toolkit/BirthPlanPrintable.tsx` — hidden `#birth-plan-print` region containing: The Start of You wordmark, "Birth Plan" title, optional parent name + due date, calm intro line ("Your birth plan is a place to collect your preferences. Your care team can help you adapt it if things change."), completed sections only (heading + choices + notes), prepared date, simple footer.
 
-## Files to delete (guardrail-checked)
-- `src/components/myjourney/ComingSoonPanel.tsx` — only after `MyJourney.tsx` import is removed and `rg "ComingSoonPanel" src` returns zero hits.
+### Data sources (read-only)
+- Parent name: `supabase.auth.getUser()` → `user.user_metadata.full_name` or email local-part fallback. No new fetches beyond what auth already provides.
+- Due date: `getActivePregnancyJourney(userId)` from `src/lib/savedJourney.ts` (already exported). Silently omit if null.
+- Answers, completion, updated_at: already available from `useBirthPlan()`.
 
-## Preserved
-Routes, DB schema, migrations, RLS, auth, saved journey, reflections, photos, toolkit tool logic, AI, TTC, IVF, First Year, Toddler, Family, sitemap, robots, redirects.
+### Behaviour details
+- Empty plan (`completion === 0` or no answered sections): buttons `disabled`, aria-disabled, helper line visible directly beneath the button row.
+- Partial plan: printable renders only sections where `isSectionAnswered(answers[key])` is true, in the new order.
+- Print CSS scoped exclusively under `#birth-plan-print` and `@media print { body > *:not(...) { display:none } }` pattern — screen view is visually unchanged.
 
-## Verification
+### Verification
 - `bunx tsgo --noEmit`
-- `/my-week`, `/my-journey`, `/pregnancy-toolkit` load
-- Week 36 shows romaine cue; weeks with matching assets show correct cue; weeks without show monogram fallback; no broken images
-- No `href="#"`, em/en dashes, or diagnosis wording; mobile 375px clean
+- Manual: load `/pregnancy-toolkit/birth-plan`, confirm new order, save an answer, invoke print preview, confirm only printable region renders on white, confirm empty state disables actions and shows helper, confirm partial exports skip empty sections.
+
+Awaiting build mode to execute.

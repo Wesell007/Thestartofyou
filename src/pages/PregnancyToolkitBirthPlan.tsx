@@ -66,6 +66,42 @@ const PregnancyToolkitBirthPlan = () => {
     void saveAnswers(nextAnswers);
   };
 
+  const [parentName, setParentName] = useState<string | null>(null);
+  const [dueDate, setDueDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { data } = await supabase.auth.getUser();
+        const user = data.user;
+        if (!user) return;
+        const meta = (user.user_metadata ?? {}) as Record<string, unknown>;
+        const rawName =
+          (typeof meta.full_name === "string" && meta.full_name.trim()) ||
+          (typeof meta.name === "string" && meta.name.trim()) ||
+          (user.email ? user.email.split("@")[0] : "") ||
+          "";
+        if (!cancelled && rawName) setParentName(rawName);
+        const journey = await getActivePregnancyJourney(user.id);
+        if (!cancelled && journey?.due_date) {
+          const d = new Date(journey.due_date);
+          if (!Number.isNaN(d.getTime())) setDueDate(d);
+        }
+      } catch {
+        // silent — printable simply omits these fields
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const hasAnyAnswered = useMemo(
+    () => BIRTH_PLAN_SECTIONS.some((s) => isSectionAnswered(answers[s.key])),
+    [answers]
+  );
+
   if (loadState === "loading") {
     return <PageLoadState message="Opening your birth plan…" />;
   }

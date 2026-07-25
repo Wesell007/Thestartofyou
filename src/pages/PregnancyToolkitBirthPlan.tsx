@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import SeoHead from "@/components/seo/SeoHead";
@@ -7,12 +8,17 @@ import PageLoadState from "@/components/shared/PageLoadState";
 import BirthPlanProgress from "@/components/pregnancy-toolkit/BirthPlanProgress";
 import BirthPlanSectionCard from "@/components/pregnancy-toolkit/BirthPlanSection";
 import BirthPlanSummary from "@/components/pregnancy-toolkit/BirthPlanSummary";
+import BirthPlanActions from "@/components/pregnancy-toolkit/BirthPlanActions";
+import BirthPlanPrintable from "@/components/pregnancy-toolkit/BirthPlanPrintable";
 import { useBirthPlan } from "@/hooks/useBirthPlan";
+import { supabase } from "@/integrations/supabase/client";
+import { getActivePregnancyJourney } from "@/lib/savedJourney";
 import {
   BIRTH_PLAN_SECTIONS,
   BirthPlanSectionAnswer,
   BirthPlanSectionKey,
   calculateCompletion,
+  isSectionAnswered,
   statusFromCompletion,
 } from "@/lib/birthPlanSchema";
 

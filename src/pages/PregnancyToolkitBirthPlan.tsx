@@ -235,6 +235,7 @@ const PregnancyToolkitBirthPlan = () => {
       </main>
       <MyWeekFooter contextual={null} />
       <SaveStatePill state={saveState} />
+      <BirthPlanPrintable answers={answers} parentName={parentName} dueDate={dueDate} />
     </div>
   );
 };

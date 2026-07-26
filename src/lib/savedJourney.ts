@@ -240,3 +240,51 @@ export const deletePregnancyJourney = async (userId: string): Promise<void> => {
   const { error } = await (supabase.rpc as any)("delete_active_journey", { p_lifecycle: "pregnancy" });
   if (error) throw error;
 };
+
+/** Human-readable labels for the current status chip / row. */
+export const STATUS_LABELS: Record<PregnancyJourneyStatus, string> = {
+  active: "Active pregnancy",
+  given_birth: "You've given birth",
+  no_longer_pregnant: "Pregnancy view paused",
+  paused: "Pregnancy view paused",
+  pregnancy_loss: "Journey paused",
+};
+
+/**
+ * Update the coarse status on `pregnancy_journeys`. The only "extra" field
+ * this helper will ever write is `outcome_date`, and ONLY when
+ * `status === 'given_birth'` and an ISO date (yyyy-MM-dd) is supplied.
+ * All other statuses force `outcome_date` back to null so it can't linger.
+ *
+ * NEVER add: reason, free text, loss detail, loss date, medical info,
+ * gestation, analytics fields.
+ */
+export const updatePregnancyJourneyStatus = async (
+  userId: string,
+  payload: { status: PregnancyJourneyStatus; outcome_date?: string | null },
+): Promise<void> => {
+  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+  if (sessionError) throw sessionError;
+  if (sessionData.session?.user.id !== userId) {
+    throw new Error("Your session no longer matches this journey.");
+  }
+
+  const isValidDate = (v: unknown): v is string =>
+    typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v);
+
+  const outcomeDate =
+    payload.status === "given_birth" && isValidDate(payload.outcome_date ?? null)
+      ? (payload.outcome_date as string)
+      : null;
+
+  const { error } = await supabase
+    .from("pregnancy_journeys")
+    .update({
+      status: payload.status,
+      status_changed_at: new Date().toISOString(),
+      outcome_date: outcomeDate,
+    })
+    .eq("user_id", userId);
+  if (error) throw error;
+};
+

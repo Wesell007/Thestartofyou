@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ScrollText,
@@ -12,6 +13,12 @@ import {
   Calculator,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import {
+  getActivePregnancyJourney,
+  type PregnancyJourneyStatus,
+} from "@/lib/savedJourney";
+import { TOOLKIT_NOTES, STATUS_CHIP_LABEL } from "@/lib/journeyStatusCopy";
 import { useBirthPlanSummary } from "@/hooks/useBirthPlan";
 import { statusFromCompletion, statusLabel } from "@/lib/birthPlanSchema";
 import { useHospitalBagSummary } from "@/hooks/useHospitalBag";
@@ -121,6 +128,26 @@ const MvpCard = ({ tool, statusText, to }: { tool: ToolCard; statusText: string;
 };
 
 const PregnancyToolkit = () => {
+  const [status, setStatus] = useState<PregnancyJourneyStatus | null>(null);
+  const [revealed, setRevealed] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { data } = await supabase.auth.getSession();
+        const user = data.session?.user;
+        if (!user) return;
+        const j = await getActivePregnancyJourney(user.id);
+        if (cancelled) return;
+        setStatus(j?.status ?? null);
+      } catch {
+        /* silent */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   const { loading: bpLoading, row: bpRow } = useBirthPlanSummary();
   const birthPlanStatusText = bpLoading
     ? "Open"

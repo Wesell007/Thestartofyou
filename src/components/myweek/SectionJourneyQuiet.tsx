@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
-import { MY_WEEK_PANELS } from "@/lib/journeyStatusCopy";
+import {
+  MY_WEEK_PANELS,
+  JOURNEY_SUPPORT_LINK_LABEL,
+  JOURNEY_SUPPORT_HREF,
+} from "@/lib/journeyStatusCopy";
 
 const accent = "hsl(var(--stage-pregnancy-accent))";
 
@@ -23,12 +27,20 @@ const SectionJourneyQuiet = () => {
         <p className="font-serif text-foreground/80 text-[15.5px] leading-[1.7] max-w-[50ch] mb-8">
           {copy.body}
         </p>
-        <Link
-          to="/account-settings"
-          className="inline-flex items-center justify-center rounded-pill border border-border/60 bg-parchment px-5 py-2.5 text-sm text-foreground/85 hover:border-foreground/25 transition-colors"
-        >
-          Manage in Account Settings
-        </Link>
+        <div className="flex flex-wrap items-center gap-4">
+          <Link
+            to="/account-settings"
+            className="inline-flex items-center justify-center rounded-pill border border-border/60 bg-parchment px-5 py-2.5 text-sm text-foreground/85 hover:border-foreground/25 transition-colors"
+          >
+            Manage in Account Settings
+          </Link>
+          <Link
+            to={JOURNEY_SUPPORT_HREF}
+            className="text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
+          >
+            {JOURNEY_SUPPORT_LINK_LABEL}
+          </Link>
+        </div>
       </div>
     </section>
   );

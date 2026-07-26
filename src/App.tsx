@@ -91,6 +91,7 @@ const AskPage = lazy(() => import("./pages/AskPage.tsx"));
 
 const MyWeek = lazy(() => import("./pages/MyWeek.tsx"));
 const MyJourney = lazy(() => import("./pages/MyJourney.tsx"));
+const JourneySupport = lazy(() => import("./pages/JourneySupport.tsx"));
 const KeptChapter = lazy(() => import("./pages/KeptChapter.tsx"));
 const Auth = lazy(() => import("./pages/Auth.tsx"));
 const Setup = lazy(() => import("./pages/Setup.tsx"));
@@ -302,6 +303,7 @@ const App = () => (
           <Route path="/my-week" element={<ProtectedRoute><MyWeek /></ProtectedRoute>} />
           <Route path="/my-week/:week" element={<ProtectedRoute><KeptChapter /></ProtectedRoute>} />
           <Route path="/my-journey" element={<ProtectedRoute><MyJourney /></ProtectedRoute>} />
+          <Route path="/journey-support" element={<ProtectedRoute><JourneySupport /></ProtectedRoute>} />
           <Route path="/my-ttc-journey" element={<ProtectedRoute><MyTTCJourney /></ProtectedRoute>} />
           <Route path="/pregnancy-toolkit" element={<ProtectedRoute><PregnancyToolkit /></ProtectedRoute>} />
           <Route path="/pregnancy-toolkit/birth-plan" element={<ProtectedRoute><PregnancyToolkitBirthPlan /></ProtectedRoute>} />

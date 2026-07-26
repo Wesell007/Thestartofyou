@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { format, parseISO } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 import {
   getActivePregnancyJourney,
@@ -23,6 +24,7 @@ import StatusConfirmDialog from "./StatusConfirmDialog";
  */
 const JourneyStatusSection = ({ userId }: { userId: string }) => {
   const [status, setStatus] = useState<PregnancyJourneyStatus | null>(null);
+  const [statusChangedAt, setStatusChangedAt] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
 
@@ -38,6 +40,7 @@ const JourneyStatusSection = ({ userId }: { userId: string }) => {
     setLoading(true);
     const journey = await getActivePregnancyJourney(userId);
     setStatus(journey?.status ?? null);
+    setStatusChangedAt(journey?.status_changed_at ?? null);
     setLoading(false);
   }, [userId]);
 

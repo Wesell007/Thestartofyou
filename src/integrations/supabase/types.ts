@@ -465,6 +465,8 @@ export type Database = {
       }
       profiles: {
         Row: {
+          companion_name: string | null
+          companion_tone: string | null
           created_at: string
           first_name: string | null
           id: string
@@ -472,6 +474,8 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          companion_name?: string | null
+          companion_tone?: string | null
           created_at?: string
           first_name?: string | null
           id?: string
@@ -479,6 +483,8 @@ export type Database = {
           user_id: string
         }
         Update: {
+          companion_name?: string | null
+          companion_tone?: string | null
           created_at?: string
           first_name?: string | null
           id?: string

@@ -1,8 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { Lock, X, ImagePlus } from "lucide-react";
+import { Lock, X, ImagePlus, Pencil } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
+import {
+  CAPTION_MAX,
+  CAPTION_PLACEHOLDER,
+  captionForSave,
+  isCaptionWithinLimit,
+  normaliseCaption,
+} from "@/lib/weekCaption";
 
 interface Props {
   userId: string;

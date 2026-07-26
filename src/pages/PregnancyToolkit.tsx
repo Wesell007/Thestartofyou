@@ -236,7 +236,40 @@ const PregnancyToolkit = () => {
           </p>
         </section>
 
-        {/* MVP cards */}
+        {status && status !== "active" && (
+          <section
+            className="mb-10 rounded-[18px] keepsake-surface px-5 py-4"
+            style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.22)" }}
+          >
+            <p
+              className="font-sans text-[10.5px] font-medium tracking-[0.28em] uppercase mb-2"
+              style={{ color: accent }}
+            >
+              {STATUS_CHIP_LABEL[status]}
+            </p>
+            <p className="font-serif text-foreground/80 text-[14.5px] leading-[1.6] mb-3">
+              {TOOLKIT_NOTES[status]}{" "}
+              <Link
+                to="/account-settings"
+                className="underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
+              >
+                Manage in Account Settings
+              </Link>
+              .
+            </p>
+            {status === "pregnancy_loss" && !revealed && (
+              <button
+                type="button"
+                onClick={() => setRevealed(true)}
+                className="inline-flex items-center rounded-pill border border-border/60 bg-parchment px-4 py-2 text-sm text-foreground/85 hover:border-foreground/25 transition-colors"
+              >
+                Show my toolkit entries
+              </button>
+            )}
+          </section>
+        )}
+
+        {!(status === "pregnancy_loss" && !revealed) && (
         <section className="mb-14" aria-label="Toolkit tools">
           <div className="flex items-center gap-3 mb-5">
             <span

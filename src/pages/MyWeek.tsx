@@ -20,6 +20,7 @@ import SectionToolsThisWeek from "@/components/myweek/SectionToolsThisWeek";
 import SlotReflection from "@/components/myweek/SlotReflection";
 import SlotPhotoMemory from "@/components/myweek/SlotPhotoMemory";
 import SectionNextChapter from "@/components/myweek/SectionNextChapter";
+import SectionWeeklyReads from "@/components/myweek/SectionWeeklyReads";
 import SectionPregnancyComplete from "@/components/myweek/SectionPregnancyComplete";
 import SectionJourneyPaused from "@/components/myweek/SectionJourneyPaused";
 import SectionJourneyQuiet from "@/components/myweek/SectionJourneyQuiet";
@@ -258,6 +259,8 @@ const MyWeek = () => {
         <SectionAskAI week={currentWeek} seed={askSeed} />
 
         <SectionToolsThisWeek week={currentWeek} />
+
+        <SectionWeeklyReads week={currentWeek} />
 
         <SlotReflection content={content} userId={userId} week={currentWeek} />
 

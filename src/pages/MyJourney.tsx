@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import SeoHead from "@/components/seo/SeoHead";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { differenceInDays } from "date-fns";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
@@ -214,9 +214,17 @@ const MyJourney = () => {
             >
               {STATUS_CHIP_LABEL[status]}
             </span>
+            {status === "given_birth" && (
+              <Link
+                to="/first-year"
+                className="ml-auto text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
+              >
+                Open First Year
+              </Link>
+            )}
             <a
               href="/account-settings"
-              className="ml-auto text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
+              className={`text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground ${status === "given_birth" ? "" : "ml-auto"}`}
             >
               Manage in Account Settings
             </a>

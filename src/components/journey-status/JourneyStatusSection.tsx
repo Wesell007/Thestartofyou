@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { format, parseISO } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 import {
   getActivePregnancyJourney,
@@ -23,6 +24,7 @@ import StatusConfirmDialog from "./StatusConfirmDialog";
  */
 const JourneyStatusSection = ({ userId }: { userId: string }) => {
   const [status, setStatus] = useState<PregnancyJourneyStatus | null>(null);
+  const [statusChangedAt, setStatusChangedAt] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
 
@@ -38,6 +40,7 @@ const JourneyStatusSection = ({ userId }: { userId: string }) => {
     setLoading(true);
     const journey = await getActivePregnancyJourney(userId);
     setStatus(journey?.status ?? null);
+    setStatusChangedAt(journey?.status_changed_at ?? null);
     setLoading(false);
   }, [userId]);
 
@@ -101,10 +104,11 @@ const JourneyStatusSection = ({ userId }: { userId: string }) => {
         will be removed.
       </p>
 
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
         <span className="inline-flex items-center rounded-pill border border-border/60 bg-parchment px-3.5 py-1.5 font-sans text-[12.5px] text-foreground/80">
           {STATUS_LABELS[status]}
         </span>
+        <UpdatedAtLine changedAt={statusChangedAt} />
         {isActive ? (
           <button
             type="button"
@@ -170,6 +174,23 @@ const JourneyStatusSection = ({ userId }: { userId: string }) => {
         onConfirm={() => commit("active", null)}
       />
     </section>
+  );
+};
+
+const UpdatedAtLine = ({ changedAt }: { changedAt: string | null }) => {
+  if (!changedAt) return null;
+  let label: string | null = null;
+  try {
+    const d = parseISO(changedAt);
+    if (isNaN(d.getTime())) return null;
+    label = format(d, "d MMM yyyy");
+  } catch {
+    return null;
+  }
+  return (
+    <span className="font-sans text-[12px] text-foreground/55">
+      Updated {label}
+    </span>
   );
 };
 

@@ -32,6 +32,11 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
   const [state, setState] = useState<LoadState>("loading");
   const [signedUrl, setSignedUrl] = useState<string | null>(null);
   const [storagePath, setStoragePath] = useState<string | null>(null);
+  const [caption, setCaption] = useState<string | null>(null);
+  const [captionEditing, setCaptionEditing] = useState(false);
+  const [captionDraft, setCaptionDraft] = useState("");
+  const [captionSaving, setCaptionSaving] = useState(false);
+  const [captionError, setCaptionError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loadAttempt, setLoadAttempt] = useState(0);
   const fileRef = useRef<HTMLInputElement>(null);

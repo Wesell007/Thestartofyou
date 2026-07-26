@@ -74,8 +74,8 @@ const Setup = () => {
     if (choice === "skip") return { ok: true, value: null };
     if (choice === "custom") {
       const result = validateCompanionName(customName);
-      if (!result.ok) return { ok: false, message: result.message };
-      return { ok: true, value: result.value };
+      if (result.ok) return { ok: true, value: result.value };
+      return { ok: false, message: result.message };
     }
     const suggested = SUGGESTED_NAMES.find((n) => n.toLowerCase() === choice);
     return { ok: true, value: suggested ?? null };

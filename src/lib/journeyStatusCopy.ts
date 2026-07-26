@@ -99,3 +99,7 @@ export const TOOLKIT_NOTES = {
 
 export const GENERIC_ERROR = "Couldn't update your status. Please try again.";
 export const GENERIC_SUCCESS = "Journey status updated.";
+
+/** Shared quiet link pointing to /journey-support. */
+export const JOURNEY_SUPPORT_LINK_LABEL = "Something gentle to lean on";
+export const JOURNEY_SUPPORT_HREF = "/journey-support";

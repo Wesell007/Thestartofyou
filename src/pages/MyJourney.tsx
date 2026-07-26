@@ -222,9 +222,17 @@ const MyJourney = () => {
                 Open First Year
               </Link>
             )}
+            {status === "pregnancy_loss" && (
+              <Link
+                to={JOURNEY_SUPPORT_HREF}
+                className="ml-auto text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
+              >
+                {JOURNEY_SUPPORT_LINK_LABEL}
+              </Link>
+            )}
             <a
               href="/account-settings"
-              className={`text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground ${status === "given_birth" ? "" : "ml-auto"}`}
+              className={`text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground ${status === "given_birth" || status === "pregnancy_loss" ? "" : "ml-auto"}`}
             >
               Manage in Account Settings
             </a>

@@ -91,6 +91,7 @@ const AskPage = lazy(() => import("./pages/AskPage.tsx"));
 
 const MyWeek = lazy(() => import("./pages/MyWeek.tsx"));
 const MyJourney = lazy(() => import("./pages/MyJourney.tsx"));
+const JourneySupport = lazy(() => import("./pages/JourneySupport.tsx"));
 const KeptChapter = lazy(() => import("./pages/KeptChapter.tsx"));
 const Auth = lazy(() => import("./pages/Auth.tsx"));
 const Setup = lazy(() => import("./pages/Setup.tsx"));

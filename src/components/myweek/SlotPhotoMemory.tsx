@@ -47,7 +47,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
       setError(null);
       const { data, error } = await supabase
         .from("week_photos")
-        .select("storage_path")
+        .select("storage_path, caption")
         .eq("user_id", userId)
         .eq("week", week)
         .maybeSingle();
@@ -59,6 +59,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
       }
       if (data?.storage_path) {
         setStoragePath(data.storage_path);
+        setCaption(data.caption ?? null);
         const { data: urlData, error: urlError } = await supabase.storage
           .from("weekly-photos")
           .createSignedUrl(data.storage_path, 60 * 60);
@@ -74,6 +75,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
           setError("Couldn't open your saved photo");
         }
       } else {
+        setCaption(null);
         setState("empty");
       }
     })();

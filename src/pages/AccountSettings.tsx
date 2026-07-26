@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { deletePregnancyJourney } from "@/lib/savedJourney";
 import { deleteTTCJourney } from "@/lib/savedTTCJourney";
 import { toast } from "@/hooks/use-toast";
+import JourneyStatusSection from "@/components/journey-status/JourneyStatusSection";
 import {
   SUGGESTED_NAMES,
   TONE_OPTIONS,
@@ -304,6 +305,10 @@ const AccountSettings = () => {
               <Download size={15} /> {busy === "export" ? "Preparing…" : "Download my data"}
             </button>
           </section>
+
+          {userId && lifecycle === "pregnancy" && (
+            <JourneyStatusSection userId={userId} />
+          )}
 
           <section className="rounded-2xl border border-border/50 bg-card p-6">
             <h2 className="font-serif text-xl mb-2">Current journey</h2>

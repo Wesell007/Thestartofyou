@@ -5,7 +5,7 @@ import { differenceInDays } from "date-fns";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import { supabase } from "@/integrations/supabase/client";
-import { getActivePregnancyJourney } from "@/lib/savedJourney";
+import { getActivePregnancyJourney, type PregnancyJourneyStatus } from "@/lib/savedJourney";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import { getMyWeekContent, getWeekIdentity, getSafeAskSeed, getSizeCueSlug } from "@/data/myWeekContent";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
@@ -20,6 +20,9 @@ import SectionToolsThisWeek from "@/components/myweek/SectionToolsThisWeek";
 import SlotReflection from "@/components/myweek/SlotReflection";
 import SlotPhotoMemory from "@/components/myweek/SlotPhotoMemory";
 import SectionNextChapter from "@/components/myweek/SectionNextChapter";
+import SectionPregnancyComplete from "@/components/myweek/SectionPregnancyComplete";
+import SectionJourneyPaused from "@/components/myweek/SectionJourneyPaused";
+import SectionJourneyQuiet from "@/components/myweek/SectionJourneyQuiet";
 import PageLoadState from "@/components/shared/PageLoadState";
 
 const getGreeting = (d = new Date()) => {
@@ -61,6 +64,7 @@ type Loaded = {
   firstName: string;
   currentWeek: number;
   dueDate: Date;
+  status: PregnancyJourneyStatus;
 };
 
 const MyWeek = () => {
@@ -114,6 +118,7 @@ const MyWeek = () => {
           firstName: profile.first_name,
           currentWeek: computeWeek(journey.lmp),
           dueDate: journey.due,
+          status: journey.status,
         });
         setLoading(false);
       } catch {
@@ -146,7 +151,30 @@ const MyWeek = () => {
     return <PageLoadState error="We couldn't prepare this week's content." onRetry={() => setAttempt((n) => n + 1)} />;
   }
 
-  const { userId, firstName, currentWeek, dueDate } = state;
+  const { userId, firstName, currentWeek, dueDate, status } = state;
+
+  if (status !== "active") {
+    return (
+      <div className="min-h-screen bg-parchment-grain page-vignette relative overflow-x-hidden">
+        <SeoHead
+          title="My week | The Start of You"
+          description="Your saved pregnancy journey."
+          canonical="https://thestartofyou.com/my-week"
+          noindex
+        />
+        <MyWeekHeader />
+        <main className="relative mx-auto w-full max-w-[720px] lg:max-w-[880px] px-4 sm:px-8 md:px-10 pt-16 sm:pt-20">
+          {status === "given_birth" && <SectionPregnancyComplete />}
+          {(status === "paused" || status === "no_longer_pregnant") && (
+            <SectionJourneyPaused variant={status} />
+          )}
+          {status === "pregnancy_loss" && <SectionJourneyQuiet />}
+        </main>
+        <MyWeekFooter contextual={null} />
+      </div>
+    );
+  }
+
   const nextWeek = currentWeek < MAX_PREGNANCY_WEEK ? currentWeek + 1 : null;
   const nextIdentity = nextWeek ? getWeekIdentity(nextWeek) : null;
 

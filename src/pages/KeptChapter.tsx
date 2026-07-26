@@ -32,6 +32,7 @@ type Loaded = {
   currentWeek: number;
   reflection: ReflectionLite | null;
   photoUrl: string | null;
+  photoCaption: string | null;
   // All weeks (past, ≠ current) that have *any* kept content.
   // Used to find adjacent kept chapters for chapter-style navigation.
   keptWeeks: number[];
@@ -95,7 +96,7 @@ const KeptChapter = () => {
             .maybeSingle(),
           supabase
             .from("week_photos")
-            .select("storage_path")
+            .select("storage_path, caption")
             .eq("user_id", user.id)
             .eq("week", week)
             .maybeSingle(),
@@ -124,6 +125,7 @@ const KeptChapter = () => {
       }
 
       let photoUrl: string | null = null;
+      const photoCaption: string | null = photo?.caption ?? null;
       if (photo?.storage_path) {
         const { data: urlData, error: urlError } = await supabase.storage
           .from("weekly-photos")
@@ -159,6 +161,7 @@ const KeptChapter = () => {
         currentWeek,
         reflection,
         photoUrl,
+        photoCaption,
         keptWeeks,
       });
       } catch {

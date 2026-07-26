@@ -70,27 +70,24 @@ const Setup = () => {
     };
   }, [navigate]);
 
-  type Resolved = { ok: true; value: string | null } | { ok: false; message: string };
-  const resolveCompanionName = (): Resolved => {
-    if (choice === "skip") return { ok: true, value: null };
-    if (choice === "custom") {
-      const result = validateCompanionName(customName);
-      if (result.ok === true) return { ok: true, value: result.value };
-      return { ok: false, message: result.message };
-    }
-    const suggested = SUGGESTED_NAMES.find((n) => n.toLowerCase() === choice);
-    return { ok: true, value: suggested ?? null };
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!userId || loading || !firstName.trim()) return;
     setNameError(null);
-    const resolved = resolveCompanionName();
-    if (!resolved.ok) {
-      setNameError(resolved.message);
-      return;
+
+    let companionValue: string | null = null;
+    if (choice === "custom") {
+      const result = validateCompanionName(customName);
+      if (!result.ok) {
+        setNameError(result.message);
+        return;
+      }
+      companionValue = result.value;
+    } else if (choice !== "skip") {
+      const suggested = SUGGESTED_NAMES.find((n) => n.toLowerCase() === choice);
+      companionValue = suggested ?? null;
     }
+
     setSubmitting(true);
     const { error } = await supabase
       .from("profiles")
@@ -98,7 +95,7 @@ const Setup = () => {
         {
           user_id: userId,
           first_name: firstName.trim(),
-          companion_name: resolved.value,
+          companion_name: companionValue,
           companion_tone: tone,
         },
         { onConflict: "user_id" },

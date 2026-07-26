@@ -404,21 +404,30 @@ export type Database = {
         Row: {
           due_date: string
           lmp_date: string
+          outcome_date: string | null
           started_at: string
+          status: Database["public"]["Enums"]["pregnancy_journey_status"]
+          status_changed_at: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
           due_date: string
           lmp_date: string
+          outcome_date?: string | null
           started_at?: string
+          status?: Database["public"]["Enums"]["pregnancy_journey_status"]
+          status_changed_at?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
           due_date?: string
           lmp_date?: string
+          outcome_date?: string | null
           started_at?: string
+          status?: Database["public"]["Enums"]["pregnancy_journey_status"]
+          status_changed_at?: string | null
           updated_at?: string
           user_id?: string
         }
@@ -759,7 +768,12 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      pregnancy_journey_status:
+        | "active"
+        | "given_birth"
+        | "no_longer_pregnant"
+        | "pregnancy_loss"
+        | "paused"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -886,6 +900,14 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      pregnancy_journey_status: [
+        "active",
+        "given_birth",
+        "no_longer_pregnant",
+        "pregnancy_loss",
+        "paused",
+      ],
+    },
   },
 } as const

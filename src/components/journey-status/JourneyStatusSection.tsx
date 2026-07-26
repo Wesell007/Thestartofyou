@@ -144,6 +144,18 @@ const JourneyStatusSection = ({ userId }: { userId: string }) => {
         )}
       </div>
 
+      {isSupportStatus(status) && (
+        <p className="mt-4 font-sans text-[12.5px] text-foreground/70">
+          <Link
+            to={JOURNEY_SUPPORT_HREF}
+            className="underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
+          >
+            {JOURNEY_SUPPORT_LINK_LABEL}
+          </Link>
+        </p>
+      )}
+
+
       <ChangeStatusDialog
         open={changeOpen}
         onCancel={() => setChangeOpen(false)}

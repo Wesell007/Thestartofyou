@@ -10,6 +10,17 @@ export type PendingJourney = {
 };
 
 /**
+ * Coarse pregnancy journey status. Introduced in Phase 13.2a.
+ * Never store free-text reasons or loss-specific detail alongside this.
+ */
+export type PregnancyJourneyStatus =
+  | "active"
+  | "given_birth"
+  | "no_longer_pregnant"
+  | "pregnancy_loss"
+  | "paused";
+
+/**
  * Active pregnancy journey shape returned to UI callers.
  * Pages should treat this as the only contract — they must not know
  * which underlying table answered the read.
@@ -23,7 +34,17 @@ export type ActivePregnancyJourney = {
   started_at: string | null;
   /** Date object form of started_at, or null if unknown. */
   startedAt: Date | null;
+  /**
+   * Coarse lifecycle status. Legacy fallback reads always resolve to "active"
+   * — treat `pregnancy_journeys.status` as authoritative when present.
+   */
+  status: PregnancyJourneyStatus;
+  /** ISO timestamp of the last status change. Null for legacy fallback reads. */
+  status_changed_at: string | null;
+  /** Optional outcome date (currently reserved for future given_birth use). */
+  outcome_date: string | null;
 };
+
 
 export const stashPendingJourney = (lmp: Date) => {
   const payload: PendingJourney = { journey_type: "pregnancy", lmp_ms: lmp.getTime() };
@@ -144,7 +165,7 @@ export const getActivePregnancyJourney = async (
     }
     const { data: preg, error: pregnancyError } = await supabase
       .from("pregnancy_journeys")
-      .select("lmp_date, due_date, started_at")
+      .select("lmp_date, due_date, started_at, status, status_changed_at, outcome_date")
       .eq("user_id", userId)
       .maybeSingle();
     if (pregnancyError && options.throwOnError) throw pregnancyError;
@@ -162,6 +183,9 @@ export const getActivePregnancyJourney = async (
         due,
         started_at: preg.started_at ?? null,
         startedAt: preg.started_at ? new Date(preg.started_at) : null,
+        status: (preg.status ?? "active") as PregnancyJourneyStatus,
+        status_changed_at: preg.status_changed_at ?? null,
+        outcome_date: preg.outcome_date ?? null,
       };
     }
     // Pointer exists but payload missing — fall through to legacy fallback.
@@ -201,6 +225,11 @@ export const getActivePregnancyJourney = async (
     due: legacyDue,
     started_at: legacy.created_at ?? null,
     startedAt: legacy.created_at ? new Date(legacy.created_at) : null,
+    // Legacy fallback cannot express status. Callers must treat
+    // pregnancy_journeys.status as authoritative when present.
+    status: "active",
+    status_changed_at: null,
+    outcome_date: null,
   };
 };
 

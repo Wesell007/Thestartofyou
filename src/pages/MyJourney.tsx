@@ -5,7 +5,8 @@ import { differenceInDays } from "date-fns";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import { supabase } from "@/integrations/supabase/client";
-import { getActivePregnancyJourney } from "@/lib/savedJourney";
+import { getActivePregnancyJourney, type PregnancyJourneyStatus } from "@/lib/savedJourney";
+import { STATUS_CHIP_LABEL } from "@/lib/journeyStatusCopy";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
@@ -34,6 +35,7 @@ type State = {
   currentWeek: number;
   due: Date;
   startedAt: Date | null;
+  status: PregnancyJourneyStatus;
   reflectionsByWeek: Record<number, ReflectionRow>;
   photoWeeks: Set<number>;
   photoUrls: { week: number; url: string; caption: string | null }[];
@@ -131,6 +133,7 @@ const MyJourney = () => {
           currentWeek: computeWeek(journey.lmp),
           due: journey.due,
           startedAt: journey.startedAt,
+          status: journey.status,
           reflectionsByWeek,
           photoWeeks,
           photoUrls,
@@ -171,10 +174,12 @@ const MyJourney = () => {
   if (loadError) return <PageLoadState error={loadError} onRetry={() => setAttempt((n) => n + 1)} />;
   if (!state || !derived) return <PageLoadState />;
 
-  const { firstName, currentWeek, due, reflectionsByWeek, photoWeeks, photoUrls } = state;
+  const { firstName, currentWeek, due, status, reflectionsByWeek, photoWeeks, photoUrls } = state;
   const { keptWeeks, reflectionWeeks } = derived;
 
   const accent = "hsl(var(--stage-pregnancy-accent))";
+  const isActive = status === "active";
+  const isLoss = status === "pregnancy_loss";
 
   const renderRow = (w: number) => (
     <KeptWeekRow
@@ -196,44 +201,141 @@ const MyJourney = () => {
       />
       <MyWeekHeader />
       <main className="relative mx-auto w-full max-w-[760px] px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 lg:pt-28 pb-20 sm:pb-24">
-        <JourneyHero firstName={firstName} currentWeek={currentWeek} due={due} />
-        <TrimesterRail currentWeek={currentWeek} />
-        <CurrentChapterCard currentWeek={currentWeek} />
+        <JourneyHero firstName={firstName} currentWeek={currentWeek} due={due} variant={status} />
+
+        {!isActive && (
+          <section
+            className="rounded-[18px] keepsake-surface px-5 py-4 mb-8 flex flex-wrap items-center gap-3"
+            style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.2)" }}
+          >
+            <span
+              className="font-sans text-[10.5px] font-medium tracking-[0.28em] uppercase"
+              style={{ color: accent }}
+            >
+              {STATUS_CHIP_LABEL[status]}
+            </span>
+            <a
+              href="/account-settings"
+              className="ml-auto text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
+            >
+              Manage in Account Settings
+            </a>
+          </section>
+        )}
+
+        {isActive && (
+          <>
+            <TrimesterRail currentWeek={currentWeek} />
+            <CurrentChapterCard currentWeek={currentWeek} />
+          </>
+        )}
+
         <MomentsKeptSummary
           reflections={reflectionWeeks.length}
           photos={photoWeeks.size}
           weeksKept={keptWeeks.length}
         />
 
-        {keptWeeks.length === 0 ? (
-          <section
-            className="rounded-[20px] px-6 sm:px-7 py-7 sm:py-8 mb-12 keepsake-surface"
-            style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)" }}
-          >
-            <p
-              className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
-              style={{ color: accent }}
-            >
-              Your timeline
-            </p>
-            <p className="font-serif text-foreground/80 text-[15.5px] leading-[1.65] max-w-[46ch]">
-              Your journey has just begun. The weeks and reflections you keep will gather here over time.
-            </p>
-          </section>
-        ) : (
-          <TrimesterTimeline keptWeeks={keptWeeks} renderRow={renderRow} />
+        <JourneyKeptRegion
+          isLoss={isLoss}
+          hasKept={keptWeeks.length > 0}
+          accent={accent}
+          keptWeeks={keptWeeks}
+          reflectionWeeks={reflectionWeeks}
+          reflectionsByWeek={reflectionsByWeek}
+          photoUrls={photoUrls}
+          currentWeek={currentWeek}
+          renderRow={renderRow}
+        />
+
+        <ToolkitEntryPanel status={status} />
+
+        {isActive && (
+          <LookingAheadCard currentWeek={currentWeek} keptCount={keptWeeks.length} />
         )}
-
-        <PhotoJournal photos={photoUrls} currentWeek={currentWeek} />
-
-        <ReflectionHighlights weeks={reflectionWeeks} reflectionByWeek={reflectionsByWeek} />
-
-        <ToolkitEntryPanel />
-
-        <LookingAheadCard currentWeek={currentWeek} keptCount={keptWeeks.length} />
       </main>
       <MyWeekFooter contextual={null} />
     </div>
+  );
+};
+
+/**
+ * Kept content region: for pregnancy_loss the whole region is hidden
+ * behind a local reveal toggle. For every other status the kept content
+ * shows as before.
+ */
+const JourneyKeptRegion = ({
+  isLoss,
+  hasKept,
+  accent,
+  keptWeeks,
+  reflectionWeeks,
+  reflectionsByWeek,
+  photoUrls,
+  currentWeek,
+  renderRow,
+}: {
+  isLoss: boolean;
+  hasKept: boolean;
+  accent: string;
+  keptWeeks: number[];
+  reflectionWeeks: number[];
+  reflectionsByWeek: Record<number, ReflectionRow>;
+  photoUrls: { week: number; url: string; caption: string | null }[];
+  currentWeek: number;
+  renderRow: (w: number) => JSX.Element;
+}) => {
+  const [revealed, setRevealed] = useState(false);
+
+  if (isLoss && !revealed) {
+    return (
+      <section
+        className="rounded-[20px] px-6 sm:px-7 py-7 sm:py-8 mb-12 keepsake-surface"
+        style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)" }}
+      >
+        <p
+          className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
+          style={{ color: accent }}
+        >
+          Kept for you
+        </p>
+        <p className="font-serif text-foreground/80 text-[15.5px] leading-[1.65] max-w-[46ch] mb-5">
+          Your saved weeks, reflections and photos are here whenever you want them.
+        </p>
+        <button
+          type="button"
+          onClick={() => setRevealed(true)}
+          className="inline-flex items-center rounded-pill border border-border/60 bg-parchment px-5 py-2.5 text-sm text-foreground/85 hover:border-foreground/25 transition-colors"
+        >
+          Show what I've kept
+        </button>
+      </section>
+    );
+  }
+
+  return (
+    <>
+      {hasKept ? (
+        <TrimesterTimeline keptWeeks={keptWeeks} renderRow={renderRow} />
+      ) : (
+        <section
+          className="rounded-[20px] px-6 sm:px-7 py-7 sm:py-8 mb-12 keepsake-surface"
+          style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)" }}
+        >
+          <p
+            className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
+            style={{ color: accent }}
+          >
+            Your timeline
+          </p>
+          <p className="font-serif text-foreground/80 text-[15.5px] leading-[1.65] max-w-[46ch]">
+            Your journey has just begun. The weeks and reflections you keep will gather here over time.
+          </p>
+        </section>
+      )}
+      <PhotoJournal photos={photoUrls} currentWeek={currentWeek} />
+      <ReflectionHighlights weeks={reflectionWeeks} reflectionByWeek={reflectionsByWeek} />
+    </>
   );
 };
 

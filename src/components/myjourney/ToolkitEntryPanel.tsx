@@ -8,14 +8,17 @@ import { useBabyMovementNotesSummary } from "@/hooks/useBabyMovementNotes";
 import { useContractionSessionsSummary } from "@/hooks/useContractionTimer";
 import { usePregnancySymptomNotesSummary } from "@/hooks/usePregnancySymptomNotes";
 import { useMidwifeQuestionsSummary } from "@/hooks/useMidwifeQuestions";
+import type { PregnancyJourneyStatus } from "@/lib/savedJourney";
 
 /**
  * ToolkitEntryPanel — live entry point into the Pregnancy Toolkit from
- * /my-journey. Read-only: uses existing summary hooks and never writes.
- * Rows appear only when there is real data. Fully-empty state renders a
- * single calm line so the panel never feels broken.
+ * /my-journey. Read-only. Rows appear only when there is real data.
+ *
+ * `status` shapes the CTA label and adds a quiet subtitle for non-active
+ * journeys. Data itself is never hidden here — the reveal-toggle for the
+ * loss state lives on /pregnancy-toolkit, not in this side panel.
  */
-const ToolkitEntryPanel = () => {
+const ToolkitEntryPanel = ({ status = "active" }: { status?: PregnancyJourneyStatus }) => {
   const accent = "hsl(var(--stage-pregnancy-accent))";
 
   const { row: bpRow } = useBirthPlanSummary();
@@ -135,7 +138,11 @@ const ToolkitEntryPanel = () => {
           className="group inline-flex items-center gap-2 font-sans text-[11.5px] font-medium tracking-[0.24em] uppercase transition-colors"
           style={{ color: accent }}
         >
-          Open your pregnancy toolkit
+          {status === "paused" || status === "no_longer_pregnant"
+            ? "Open Pregnancy Toolkit"
+            : status === "given_birth" || status === "pregnancy_loss"
+              ? "Open Pregnancy Toolkit"
+              : "Open your pregnancy toolkit"}
           <ArrowRight
             size={12}
             strokeWidth={1.8}

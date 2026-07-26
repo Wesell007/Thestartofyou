@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Info } from "lucide-react";
 import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
+import PageStatusNotice from "@/components/journey-status/PageStatusNotice";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import PageLoadState from "@/components/shared/PageLoadState";
 import BabyMovementNoteForm from "@/components/pregnancy-toolkit/BabyMovementNoteForm";
@@ -48,6 +49,7 @@ const PregnancyToolkitBabyMovements = () => {
       />
       <MyWeekHeader />
       <main className="relative mx-auto w-full max-w-[820px] px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 lg:pt-28 pb-20 sm:pb-24">
+        <PageStatusNotice />
         {/* Hero */}
         <section className="mb-8 sm:mb-10">
           <div className="flex items-center gap-3 mb-5">

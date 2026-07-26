@@ -78,7 +78,7 @@ const Setup = () => {
     let companionValue: string | null = null;
     if (choice === "custom") {
       const result = validateCompanionName(customName);
-      if (!result.ok) {
+      if (result.ok === false) {
         setNameError(result.message);
         return;
       }

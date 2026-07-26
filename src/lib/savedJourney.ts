@@ -225,6 +225,11 @@ export const getActivePregnancyJourney = async (
     due: legacyDue,
     started_at: legacy.created_at ?? null,
     startedAt: legacy.created_at ? new Date(legacy.created_at) : null,
+    // Legacy fallback cannot express status. Callers must treat
+    // pregnancy_journeys.status as authoritative when present.
+    status: "active",
+    status_changed_at: null,
+    outcome_date: null,
   };
 };
 

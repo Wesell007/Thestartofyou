@@ -70,11 +70,12 @@ const Setup = () => {
     };
   }, [navigate]);
 
-  const resolveCompanionName = (): { ok: true; value: string | null } | { ok: false; message: string } => {
+  type Resolved = { ok: true; value: string | null } | { ok: false; message: string };
+  const resolveCompanionName = (): Resolved => {
     if (choice === "skip") return { ok: true, value: null };
     if (choice === "custom") {
       const result = validateCompanionName(customName);
-      if (result.ok) return { ok: true, value: result.value };
+      if (result.ok === true) return { ok: true, value: result.value };
       return { ok: false, message: result.message };
     }
     const suggested = SUGGESTED_NAMES.find((n) => n.toLowerCase() === choice);

@@ -170,7 +170,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
     const { error: storageError } = await supabase.storage.from("weekly-photos").remove([storagePath]);
     if (storageError) {
       await supabase.from("week_photos").upsert(
-        { user_id: userId, week, storage_path: storagePath },
+        { user_id: userId, week, storage_path: storagePath, caption },
         { onConflict: "user_id,week" },
       );
       setState("loaded");
@@ -179,7 +179,46 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
     }
     setStoragePath(null);
     setSignedUrl(null);
+    setCaption(null);
+    setCaptionEditing(false);
+    setCaptionDraft("");
+    setCaptionError(null);
     setState("empty");
+  };
+
+  const openCaptionEditor = () => {
+    setCaptionDraft(caption ?? "");
+    setCaptionError(null);
+    setCaptionEditing(true);
+  };
+
+  const cancelCaptionEdit = () => {
+    setCaptionEditing(false);
+    setCaptionDraft("");
+    setCaptionError(null);
+  };
+
+  const saveCaption = async () => {
+    if (!isCaptionWithinLimit(captionDraft)) {
+      setCaptionError(`${CAPTION_MAX} characters max`);
+      return;
+    }
+    setCaptionSaving(true);
+    setCaptionError(null);
+    const nextValue = captionForSave(captionDraft);
+    const { error: updateError } = await supabase
+      .from("week_photos")
+      .update({ caption: nextValue })
+      .eq("user_id", userId)
+      .eq("week", week);
+    setCaptionSaving(false);
+    if (updateError) {
+      setCaptionError("Couldn't save your caption");
+      return;
+    }
+    setCaption(nextValue);
+    setCaptionEditing(false);
+    setCaptionDraft("");
   };
 
   return (

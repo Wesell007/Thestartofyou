@@ -9,6 +9,7 @@ import { useAISearch } from "@/hooks/useAISearch";
 import { BotanicalAccent, StageGlow, SprigDivider, Sprig } from "@/components/shared/StageBotanical";
 import { getAiStageStyle, stageColors } from "@/lib/aiStageStyles";
 import SeoHead from "@/components/seo/SeoHead";
+import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 
 
 const followUpPrompts = [
@@ -247,6 +248,7 @@ const AskPage = () => {
   const lastQueryRef = useRef("");
   const navigate = useNavigate();
   const isIVF = searchParams.get("journey") === "ivf";
+  const { name: companionName } = useCompanionIdentity();
 
   const [newQuery, setNewQuery] = useState("");
   const [inputFocused, setInputFocused] = useState(false);
@@ -437,7 +439,7 @@ const AskPage = () => {
                 <Sparkles size={18} className="text-sage" style={sc ? { color: sc.accent } : undefined} />
               </div>
               <h1 className="font-serif text-[2rem] sm:text-[2.4rem] md:text-[2.75rem] text-foreground leading-[1.12] tracking-[-0.01em] mb-4">
-                What would you like to ask?
+                {companionName ? `Ask ${companionName}` : "What would you like to ask?"}
               </h1>
               <p className="font-sans text-[14.5px] font-light text-muted-foreground max-w-md mx-auto leading-relaxed">
                 Private, calm, judgement-free guidance — for any stage of your journey.

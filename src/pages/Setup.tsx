@@ -7,6 +7,14 @@ import { commitPendingJourneyToDB } from "@/lib/savedJourney";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import { toast } from "sonner";
+import {
+  SUGGESTED_NAMES,
+  TONE_OPTIONS,
+  validateCompanionName,
+  type CompanionTone,
+} from "@/lib/companion";
+
+type CompanionChoice = "skip" | "cindy" | "ava" | "mia" | "custom";
 
 const Setup = () => {
   const navigate = useNavigate();
@@ -15,6 +23,11 @@ const Setup = () => {
   const [userId, setUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
+
+  const [choice, setChoice] = useState<CompanionChoice>("skip");
+  const [customName, setCustomName] = useState("");
+  const [nameError, setNameError] = useState<string | null>(null);
+  const [tone, setTone] = useState<CompanionTone | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -31,7 +44,6 @@ const Setup = () => {
         return;
       }
       setUserId(u.id);
-      // Make sure pending journey is committed (covers magic-link arrivals)
       try {
         await commitPendingJourneyToDB(u.id);
       } catch (e) {
@@ -40,7 +52,6 @@ const Setup = () => {
         setLoading(false);
         return;
       }
-      // If already has a name, skip
       const { data: profile, error: profileError } = await supabase
         .from("profiles")
         .select("first_name")
@@ -59,13 +70,38 @@ const Setup = () => {
     };
   }, [navigate]);
 
+  const resolveCompanionName = (): { ok: true; value: string | null } | { ok: false; message: string } => {
+    if (choice === "skip") return { ok: true, value: null };
+    if (choice === "custom") {
+      const result = validateCompanionName(customName);
+      if (!result.ok) return { ok: false, message: result.message };
+      return { ok: true, value: result.value };
+    }
+    const suggested = SUGGESTED_NAMES.find((n) => n.toLowerCase() === choice);
+    return { ok: true, value: suggested ?? null };
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!userId || loading || !firstName.trim()) return;
+    setNameError(null);
+    const resolved = resolveCompanionName();
+    if (!resolved.ok) {
+      setNameError(resolved.message);
+      return;
+    }
     setSubmitting(true);
     const { error } = await supabase
       .from("profiles")
-      .upsert({ user_id: userId, first_name: firstName.trim() }, { onConflict: "user_id" });
+      .upsert(
+        {
+          user_id: userId,
+          first_name: firstName.trim(),
+          companion_name: resolved.value,
+          companion_tone: tone,
+        },
+        { onConflict: "user_id" },
+      );
     setSubmitting(false);
     if (error) {
       toast.error("Could not save. Please try again.");
@@ -74,6 +110,13 @@ const Setup = () => {
     trackEvent(EVENTS.SETUP_COMPLETED);
     navigate("/my-week", { replace: true });
   };
+
+  const pillClass = (active: boolean) =>
+    `rounded-pill border px-3.5 py-1.5 font-sans text-[12.5px] transition-colors ${
+      active
+        ? "bg-foreground/[0.06] border-foreground/40 text-foreground"
+        : "bg-parchment border-border/50 text-foreground/75 hover:border-foreground/25"
+    }`;
 
   return (
     <div className="min-h-screen bg-parchment flex items-center">
@@ -101,7 +144,7 @@ const Setup = () => {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-card border rounded-2xl p-7 md:p-8 shadow-soft space-y-4"
+          className="bg-card border rounded-2xl p-7 md:p-8 shadow-soft space-y-5"
           style={{ borderColor: "hsl(var(--border) / 0.4)" }}
         >
           <label className="block">
@@ -118,6 +161,72 @@ const Setup = () => {
               style={{ borderColor: "hsl(var(--border) / 0.5)" }}
             />
           </label>
+
+          <div className="pt-2 border-t border-border/40">
+            <p className="font-sans text-xs font-light text-muted-foreground/80 mb-1">
+              Name your companion, if you would like
+            </p>
+            <p className="font-sans text-[11.5px] font-light text-muted-foreground/70 mb-3">
+              You can skip this and change it later.
+            </p>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {(["skip", "cindy", "ava", "mia", "custom"] as CompanionChoice[]).map((opt) => (
+                <button
+                  key={opt}
+                  type="button"
+                  onClick={() => {
+                    setChoice(opt);
+                    setNameError(null);
+                  }}
+                  className={pillClass(choice === opt)}
+                >
+                  {opt === "skip"
+                    ? "Skip"
+                    : opt === "custom"
+                    ? "Custom"
+                    : opt.charAt(0).toUpperCase() + opt.slice(1)}
+                </button>
+              ))}
+            </div>
+            {choice === "custom" && (
+              <div>
+                <input
+                  type="text"
+                  value={customName}
+                  onChange={(e) => {
+                    setCustomName(e.target.value);
+                    if (nameError) setNameError(null);
+                  }}
+                  maxLength={24}
+                  placeholder="A name for your companion"
+                  className="w-full bg-parchment border rounded-pill px-4 py-2.5 font-sans text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-2 focus:ring-foreground/10"
+                  style={{ borderColor: "hsl(var(--border) / 0.5)" }}
+                />
+                {nameError && (
+                  <p role="alert" className="mt-2 font-sans text-[11.5px] text-destructive">
+                    {nameError}
+                  </p>
+                )}
+              </div>
+            )}
+
+            <p className="font-sans text-xs font-light text-muted-foreground/80 mt-4 mb-2">
+              Tone (optional)
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {TONE_OPTIONS.map((opt) => (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => setTone(tone === opt.value ? null : opt.value)}
+                  className={pillClass(tone === opt.value)}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <button
             type="submit"
             disabled={loading || submitting || !userId || !firstName.trim()}

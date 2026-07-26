@@ -165,7 +165,7 @@ export const getActivePregnancyJourney = async (
     }
     const { data: preg, error: pregnancyError } = await supabase
       .from("pregnancy_journeys")
-      .select("lmp_date, due_date, started_at")
+      .select("lmp_date, due_date, started_at, status, status_changed_at, outcome_date")
       .eq("user_id", userId)
       .maybeSingle();
     if (pregnancyError && options.throwOnError) throw pregnancyError;
@@ -183,6 +183,9 @@ export const getActivePregnancyJourney = async (
         due,
         started_at: preg.started_at ?? null,
         startedAt: preg.started_at ? new Date(preg.started_at) : null,
+        status: (preg.status ?? "active") as PregnancyJourneyStatus,
+        status_changed_at: preg.status_changed_at ?? null,
+        outcome_date: preg.outcome_date ?? null,
       };
     }
     // Pointer exists but payload missing — fall through to legacy fallback.

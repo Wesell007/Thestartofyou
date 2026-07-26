@@ -104,10 +104,11 @@ const JourneyStatusSection = ({ userId }: { userId: string }) => {
         will be removed.
       </p>
 
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
         <span className="inline-flex items-center rounded-pill border border-border/60 bg-parchment px-3.5 py-1.5 font-sans text-[12.5px] text-foreground/80">
           {STATUS_LABELS[status]}
         </span>
+        <UpdatedAtLine changedAt={statusChangedAt} />
         {isActive ? (
           <button
             type="button"

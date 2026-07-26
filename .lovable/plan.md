@@ -1,45 +1,70 @@
-# Phase 13.1a — Weekly Photo Captions (Build)
+# Phase 13.2a — Journey Status Data Model
 
-Schema check: `week_photos.caption text NULL` already exists in `src/integrations/supabase/types.ts`. **No migration.**
+Approved scope. Backend/data foundation only. No UI, AI or analytics changes. Switch to build mode to apply.
 
-## New helper
-- `src/lib/weekCaption.ts` — `CAPTION_MAX = 140`, `CAPTION_PLACEHOLDER = "Add a few words about this memory"`, `normaliseCaption` (collapse whitespace/newlines, trim), `isCaptionWithinLimit`, `captionForSave` (empty → `null`, over-limit → throw).
+## 1. Migration (single)
 
-## `src/components/myweek/SlotPhotoMemory.tsx`
-- Extend the loaded-state fetch to also `select("storage_path, caption")` and store `caption` in state.
-- Only render caption UI when `state === "loaded"` and a photo exists.
-- Below the existing `<figcaption>`, add a caption panel:
-  - **View mode**: if caption present, render it as a quiet serif line with a small "Edit" affordance. If null, render a discreet "Add a few words about this memory" button.
-  - **Edit mode**: single-line `<textarea>` (auto-resizes, 2 rows max) with live `n/140` counter. `Save` + `Cancel`. Save disabled when over 140 chars; over-limit shows inline calm error `"140 characters max"`. Newlines collapsed on save.
-  - Save path: `supabase.from("week_photos").update({ caption: captionForSave(value) }).eq("user_id", userId).eq("week", week)`. On error → inline `"Couldn't save your caption"`. Cancel restores the previous caption.
-- Photo upload path unchanged (no re-upload triggered by caption edits). Existing `handleRemove` unchanged — the row delete removes the caption with it.
+```sql
+DO $$ BEGIN
+  CREATE TYPE public.pregnancy_journey_status AS ENUM (
+    'active',
+    'given_birth',
+    'no_longer_pregnant',
+    'pregnancy_loss',
+    'paused'
+  );
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 
-## `src/components/myjourney/PhotoJournal.tsx`
-- `PhotoItem` gains optional `caption?: string | null`.
-- When present, render a second line beneath the "Week N" label, `line-clamp-1`, small tracked sans caption. Tile visually unchanged when absent.
+ALTER TABLE public.pregnancy_journeys
+  ADD COLUMN IF NOT EXISTS status public.pregnancy_journey_status NOT NULL DEFAULT 'active',
+  ADD COLUMN IF NOT EXISTS status_changed_at timestamptz,
+  ADD COLUMN IF NOT EXISTS outcome_date date;
 
-## `src/pages/MyJourney.tsx`
-- `PhotoRow` gains `caption: string | null`.
-- Extend the `week_photos` select to `"week, storage_path, caption"`.
-- Include `caption` in the `photoUrls` items passed to `<PhotoJournal>`.
+UPDATE public.pregnancy_journeys
+SET status_changed_at = COALESCE(updated_at, started_at, now())
+WHERE status_changed_at IS NULL;
+```
 
-## `src/pages/KeptChapter.tsx`
-- Extend the single-week `week_photos` select to `"storage_path, caption"`.
-- Add `caption: string | null` to `Loaded` alongside `photoUrl`.
-- In the "A moment kept" section, when caption exists, render it as a serif italic line beneath the `<img>` inside the same figure, in the existing accent-tinted style. Section remains unchanged when no caption.
+- No new RLS policy. Existing user-scoped policies cover the new columns.
+- No new grants. No `anon` access.
+- No `status_reason`, no free-text reason, no loss-detail columns, no gestation-at-loss, no loss date, no `paused_at`, no analytics columns, no `journey_id` FK on memories/toolkit/reflections/photos.
+- Idempotent: `IF NOT EXISTS` and `duplicate_object` guards make it safe to re-run in preview.
 
-## Not touched
-Routes, sitemap, robots, public pages, AI edge functions/prompts/request body, Companion Personalisation, Pregnancy Toolkit, Birth Plan, Hospital Bag, saved-journey/reflection logic, storage bucket, photo upload file rules, signed URL refresh, analytics events, TTC/IVF/First Year/Toddler/Family.
+## 2. Types
 
-## Verification
+`src/integrations/supabase/types.ts` regenerates automatically after the migration. `pregnancy_journeys.Row/Insert/Update` will gain `status`, `status_changed_at`, `outcome_date`; new enum appears under `Database.public.Enums.pregnancy_journey_status`. No manual edit.
+
+## 3. `src/lib/savedJourney.ts` (additive)
+
+- Add `export type PregnancyJourneyStatus = "active" | "given_birth" | "no_longer_pregnant" | "pregnancy_loss" | "paused";`
+- Extend `ActivePregnancyJourney` with `status: PregnancyJourneyStatus`, `status_changed_at: string | null`, `outcome_date: string | null`.
+- `getActivePregnancyJourney`: extend the `pregnancy_journeys` select to include the three new fields; populate them on the returned object.
+- Legacy `saved_journeys` fallback path: return `status: "active"`, `status_changed_at: null`, `outcome_date: null` so future callers can trust `status` without checking origin.
+- No changes to `upsertPregnancyJourney`, `mirrorToLegacy`, `commitPendingJourneyToDB`, `readPendingJourney`, `stashPendingJourney`, `clearPendingJourney`.
+- No write helper this phase.
+
+Existing consumers only destructure `lmp`, `due`, `lmp_date`, `due_date`, `started_at`, `startedAt` — the addition is non-breaking.
+
+## 4. Preservation
+
+No changes to My Week, My Journey, Pregnancy Toolkit, Birth Plan, Hospital Bag, Photo Memories, Captions, Reflections, Companion, AI backend/prompt/request, Account Settings UI, routes, sitemap, robots, public pages, TTC, IVF, First Year, Toddler, Family.
+
+## 5. Verification (after apply)
+
+- Migration applies cleanly.
+- Enum has exactly the 5 approved values.
+- All existing rows: `status = 'active'`, `status_changed_at` non-null, `outcome_date` null.
+- No new RLS policy, no `anon` grant.
+- Regenerated Supabase types.
 - `bunx tsgo --noEmit` clean.
-- Existing photos load unchanged; add-caption affordance appears for those without captions.
-- 1–140 char save persists; page refresh renders it in all three surfaces.
-- Empty save writes `NULL`.
-- Over-140 blocked with inline message (no silent truncation).
-- Newlines collapsed to spaces.
-- Caption edit does not re-upload the photo.
-- Signed URL 50-minute refresh still fires.
-- Removing the photo removes the caption (row delete unchanged).
-- No new route, no new bucket, no migration, no analytics change.
-- Caption text absent from any AI or analytics payload.
+- `/my-week`, `/my-journey`, `/pregnancy-toolkit` render identically.
+
+## 6. Order of operations (build mode)
+
+1. Apply the migration.
+2. Wait for types regeneration.
+3. Edit `src/lib/savedJourney.ts` per section 3.
+4. Run `bunx tsgo --noEmit`.
+5. Return summary.
+
+Please switch to build mode to proceed.

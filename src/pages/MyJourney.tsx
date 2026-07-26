@@ -27,7 +27,7 @@ type ReflectionRow = {
   first_written_at: string | null;
 };
 
-type PhotoRow = { week: number; storage_path: string };
+type PhotoRow = { week: number; storage_path: string; caption: string | null };
 
 type State = {
   firstName: string;
@@ -36,7 +36,7 @@ type State = {
   startedAt: Date | null;
   reflectionsByWeek: Record<number, ReflectionRow>;
   photoWeeks: Set<number>;
-  photoUrls: { week: number; url: string }[];
+  photoUrls: { week: number; url: string; caption: string | null }[];
 };
 
 const computeWeek = (lmp: Date) => {

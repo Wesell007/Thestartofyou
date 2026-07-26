@@ -10,6 +10,17 @@ export type PendingJourney = {
 };
 
 /**
+ * Coarse pregnancy journey status. Introduced in Phase 13.2a.
+ * Never store free-text reasons or loss-specific detail alongside this.
+ */
+export type PregnancyJourneyStatus =
+  | "active"
+  | "given_birth"
+  | "no_longer_pregnant"
+  | "pregnancy_loss"
+  | "paused";
+
+/**
  * Active pregnancy journey shape returned to UI callers.
  * Pages should treat this as the only contract — they must not know
  * which underlying table answered the read.
@@ -23,7 +34,17 @@ export type ActivePregnancyJourney = {
   started_at: string | null;
   /** Date object form of started_at, or null if unknown. */
   startedAt: Date | null;
+  /**
+   * Coarse lifecycle status. Legacy fallback reads always resolve to "active"
+   * — treat `pregnancy_journeys.status` as authoritative when present.
+   */
+  status: PregnancyJourneyStatus;
+  /** ISO timestamp of the last status change. Null for legacy fallback reads. */
+  status_changed_at: string | null;
+  /** Optional outcome date (currently reserved for future given_birth use). */
+  outcome_date: string | null;
 };
+
 
 export const stashPendingJourney = (lmp: Date) => {
   const payload: PendingJourney = { journey_type: "pregnancy", lmp_ms: lmp.getTime() };

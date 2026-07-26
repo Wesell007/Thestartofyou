@@ -177,4 +177,21 @@ const JourneyStatusSection = ({ userId }: { userId: string }) => {
   );
 };
 
+const UpdatedAtLine = ({ changedAt }: { changedAt: string | null }) => {
+  if (!changedAt) return null;
+  let label: string | null = null;
+  try {
+    const d = parseISO(changedAt);
+    if (isNaN(d.getTime())) return null;
+    label = format(d, "d MMM yyyy");
+  } catch {
+    return null;
+  }
+  return (
+    <span className="font-sans text-[12px] text-foreground/55">
+      Updated {label}
+    </span>
+  );
+};
+
 export default JourneyStatusSection;

@@ -4,6 +4,7 @@ import { ImagePlus } from "lucide-react";
 interface PhotoItem {
   week: number;
   url: string;
+  caption?: string | null;
 }
 
 interface Props {

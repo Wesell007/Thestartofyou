@@ -1,8 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { Lock, X, ImagePlus } from "lucide-react";
+import { Lock, X, ImagePlus, Pencil } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
+import {
+  CAPTION_MAX,
+  CAPTION_PLACEHOLDER,
+  captionForSave,
+  isCaptionWithinLimit,
+  normaliseCaption,
+} from "@/lib/weekCaption";
 
 interface Props {
   userId: string;
@@ -25,6 +32,11 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
   const [state, setState] = useState<LoadState>("loading");
   const [signedUrl, setSignedUrl] = useState<string | null>(null);
   const [storagePath, setStoragePath] = useState<string | null>(null);
+  const [caption, setCaption] = useState<string | null>(null);
+  const [captionEditing, setCaptionEditing] = useState(false);
+  const [captionDraft, setCaptionDraft] = useState("");
+  const [captionSaving, setCaptionSaving] = useState(false);
+  const [captionError, setCaptionError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loadAttempt, setLoadAttempt] = useState(0);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -35,7 +47,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
       setError(null);
       const { data, error } = await supabase
         .from("week_photos")
-        .select("storage_path")
+        .select("storage_path, caption")
         .eq("user_id", userId)
         .eq("week", week)
         .maybeSingle();
@@ -47,6 +59,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
       }
       if (data?.storage_path) {
         setStoragePath(data.storage_path);
+        setCaption(data.caption ?? null);
         const { data: urlData, error: urlError } = await supabase.storage
           .from("weekly-photos")
           .createSignedUrl(data.storage_path, 60 * 60);
@@ -62,6 +75,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
           setError("Couldn't open your saved photo");
         }
       } else {
+        setCaption(null);
         setState("empty");
       }
     })();
@@ -156,7 +170,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
     const { error: storageError } = await supabase.storage.from("weekly-photos").remove([storagePath]);
     if (storageError) {
       await supabase.from("week_photos").upsert(
-        { user_id: userId, week, storage_path: storagePath },
+        { user_id: userId, week, storage_path: storagePath, caption },
         { onConflict: "user_id,week" },
       );
       setState("loaded");
@@ -165,7 +179,46 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
     }
     setStoragePath(null);
     setSignedUrl(null);
+    setCaption(null);
+    setCaptionEditing(false);
+    setCaptionDraft("");
+    setCaptionError(null);
     setState("empty");
+  };
+
+  const openCaptionEditor = () => {
+    setCaptionDraft(caption ?? "");
+    setCaptionError(null);
+    setCaptionEditing(true);
+  };
+
+  const cancelCaptionEdit = () => {
+    setCaptionEditing(false);
+    setCaptionDraft("");
+    setCaptionError(null);
+  };
+
+  const saveCaption = async () => {
+    if (!isCaptionWithinLimit(captionDraft)) {
+      setCaptionError(`${CAPTION_MAX} characters max`);
+      return;
+    }
+    setCaptionSaving(true);
+    setCaptionError(null);
+    const nextValue = captionForSave(captionDraft);
+    const { error: updateError } = await supabase
+      .from("week_photos")
+      .update({ caption: nextValue })
+      .eq("user_id", userId)
+      .eq("week", week);
+    setCaptionSaving(false);
+    if (updateError) {
+      setCaptionError("Couldn't save your caption");
+      return;
+    }
+    setCaption(nextValue);
+    setCaptionEditing(false);
+    setCaptionDraft("");
   };
 
   return (
@@ -342,6 +395,104 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
             </span>
           </figcaption>
         </figure>
+      )}
+
+      {state === "loaded" && signedUrl && (
+        <div className="mt-4">
+          {captionEditing ? (
+            <div
+              className="rounded-[18px] px-4 py-4"
+              style={{
+                background: "hsl(var(--stage-pregnancy) / 0.14)",
+                border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.22)",
+              }}
+            >
+              <label htmlFor={`caption-${week}`} className="sr-only">
+                Caption for week {week}
+              </label>
+              <textarea
+                id={`caption-${week}`}
+                value={captionDraft}
+                onChange={(e) => {
+                  const next = e.target.value;
+                  setCaptionDraft(next);
+                  if (captionError && isCaptionWithinLimit(next)) setCaptionError(null);
+                }}
+                rows={2}
+                placeholder={CAPTION_PLACEHOLDER}
+                disabled={captionSaving}
+                className="w-full resize-none bg-transparent font-serif italic text-[14.5px] leading-[1.6] text-foreground/85 placeholder:text-foreground/40 focus:outline-none"
+              />
+              <div className="flex items-center justify-between gap-3 mt-2">
+                <span
+                  className="font-sans text-[10.5px] font-medium tracking-[0.2em] uppercase"
+                  style={{
+                    color: isCaptionWithinLimit(captionDraft)
+                      ? "hsl(var(--stage-pregnancy-accent))"
+                      : "hsl(var(--destructive))",
+                  }}
+                >
+                  {normaliseCaption(captionDraft).length}/{CAPTION_MAX}
+                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={cancelCaptionEdit}
+                    disabled={captionSaving}
+                    className="rounded-full px-3.5 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/60 hover:text-foreground/85 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={saveCaption}
+                    disabled={captionSaving || !isCaptionWithinLimit(captionDraft)}
+                    className="rounded-full px-4 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase transition-colors disabled:opacity-50"
+                    style={{
+                      color: "hsl(var(--stage-pregnancy-accent))",
+                      border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.5)",
+                    }}
+                  >
+                    {captionSaving ? "Saving" : "Save"}
+                  </button>
+                </div>
+              </div>
+              {captionError && (
+                <p className="mt-2 font-sans text-[12px] font-light text-destructive" role="alert">
+                  {captionError}
+                </p>
+              )}
+            </div>
+          ) : caption ? (
+            <div className="flex items-start justify-between gap-3 px-1">
+              <p className="font-serif italic text-foreground/75 text-[14.5px] leading-[1.65] flex-1">
+                {caption}
+              </p>
+              <button
+                type="button"
+                onClick={openCaptionEditor}
+                className="shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/55 hover:text-foreground/85 transition-colors"
+                aria-label="Edit caption"
+              >
+                <Pencil size={11} strokeWidth={1.7} />
+                Edit
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={openCaptionEditor}
+              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-sans text-[11px] font-medium tracking-[0.22em] uppercase transition-colors hover:bg-[hsl(var(--stage-pregnancy-accent)/0.1)]"
+              style={{
+                color: "hsl(var(--stage-pregnancy-accent))",
+                border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.35)",
+              }}
+            >
+              <Pencil size={11} strokeWidth={1.7} />
+              {CAPTION_PLACEHOLDER}
+            </button>
+          )}
+        </div>
       )}
 
       {error && (

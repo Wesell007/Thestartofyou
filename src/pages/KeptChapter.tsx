@@ -32,6 +32,7 @@ type Loaded = {
   currentWeek: number;
   reflection: ReflectionLite | null;
   photoUrl: string | null;
+  photoCaption: string | null;
   // All weeks (past, ≠ current) that have *any* kept content.
   // Used to find adjacent kept chapters for chapter-style navigation.
   keptWeeks: number[];
@@ -95,7 +96,7 @@ const KeptChapter = () => {
             .maybeSingle(),
           supabase
             .from("week_photos")
-            .select("storage_path")
+            .select("storage_path, caption")
             .eq("user_id", user.id)
             .eq("week", week)
             .maybeSingle(),
@@ -124,6 +125,7 @@ const KeptChapter = () => {
       }
 
       let photoUrl: string | null = null;
+      const photoCaption: string | null = photo?.caption ?? null;
       if (photo?.storage_path) {
         const { data: urlData, error: urlError } = await supabase.storage
           .from("weekly-photos")
@@ -159,6 +161,7 @@ const KeptChapter = () => {
         currentWeek,
         reflection,
         photoUrl,
+        photoCaption,
         keptWeeks,
       });
       } catch {
@@ -185,7 +188,7 @@ const KeptChapter = () => {
     return <PageLoadState />;
   }
 
-  const { reflection, photoUrl, keptWeeks } = data;
+  const { reflection, photoUrl, photoCaption, keptWeeks } = data;
   const trimester = trimesterLabelFor(week);
 
   // Adjacent KEPT chapters (not just adjacent week numbers). Calmer browsing.
@@ -412,6 +415,17 @@ const KeptChapter = () => {
                   alt={`A moment kept from week ${week} — ${identity.chapterTitle}`}
                   className="w-full h-auto max-h-[520px] object-cover block"
                 />
+                {photoCaption && (
+                  <figcaption
+                    className="px-5 sm:px-6 py-4 font-serif italic text-[14.5px] sm:text-[15px] leading-[1.65] text-foreground/75"
+                    style={{
+                      borderTop: `1px solid ${accentSoft(0.16)}`,
+                      background: tint(0.16),
+                    }}
+                  >
+                    {photoCaption}
+                  </figcaption>
+                )}
               </figure>
             </section>
           )}

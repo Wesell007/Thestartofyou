@@ -4,6 +4,7 @@ import { ImagePlus } from "lucide-react";
 interface PhotoItem {
   week: number;
   url: string;
+  caption?: string | null;
 }
 
 interface Props {
@@ -89,15 +90,22 @@ const PhotoJournal = ({ photos, currentWeek }: Props) => {
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />
-                <span
-                  className="absolute bottom-0 left-0 right-0 px-3 py-2 font-sans text-[10px] font-medium tracking-[0.24em] uppercase text-white"
+                <div
+                  className="absolute bottom-0 left-0 right-0 px-3 py-2 text-white"
                   style={{
                     background:
-                      "linear-gradient(180deg, transparent, hsl(222 14% 8% / 0.55))",
+                      "linear-gradient(180deg, transparent, hsl(222 14% 8% / 0.65))",
                   }}
                 >
-                  Week {p.week}
-                </span>
+                  <span className="block font-sans text-[10px] font-medium tracking-[0.24em] uppercase">
+                    Week {p.week}
+                  </span>
+                  {p.caption && (
+                    <span className="block font-serif italic text-[12px] leading-[1.3] text-white/90 truncate mt-0.5">
+                      {p.caption}
+                    </span>
+                  )}
+                </div>
               </Link>
             </li>
           ))}

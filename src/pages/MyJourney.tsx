@@ -27,7 +27,7 @@ type ReflectionRow = {
   first_written_at: string | null;
 };
 
-type PhotoRow = { week: number; storage_path: string };
+type PhotoRow = { week: number; storage_path: string; caption: string | null };
 
 type State = {
   firstName: string;
@@ -36,7 +36,7 @@ type State = {
   startedAt: Date | null;
   reflectionsByWeek: Record<number, ReflectionRow>;
   photoWeeks: Set<number>;
-  photoUrls: { week: number; url: string }[];
+  photoUrls: { week: number; url: string; caption: string | null }[];
 };
 
 const computeWeek = (lmp: Date) => {
@@ -81,7 +81,7 @@ const MyJourney = () => {
             .from("reflections")
             .select("week, content, first_written_at")
             .eq("user_id", user.id),
-          supabase.from("week_photos").select("week, storage_path").eq("user_id", user.id),
+          supabase.from("week_photos").select("week, storage_path, caption").eq("user_id", user.id),
         ]);
         if (profileError) throw profileError;
         if (reflectionError) throw reflectionError;
@@ -110,7 +110,7 @@ const MyJourney = () => {
         const photoRows: PhotoRow[] = (photos ?? []).filter((p): p is PhotoRow => !!p.storage_path);
         const photoWeeks = new Set<number>(photoRows.map((p) => p.week));
 
-        let photoUrls: { week: number; url: string }[] = [];
+        let photoUrls: { week: number; url: string; caption: string | null }[] = [];
         if (photoRows.length > 0) {
           const paths = photoRows.map((p) => p.storage_path);
           const { data: signed } = await supabase.storage
@@ -121,7 +121,7 @@ const MyJourney = () => {
             if (s.path && s.signedUrl) byPath.set(s.path, s.signedUrl);
           });
           photoUrls = photoRows
-            .map((p) => ({ week: p.week, url: byPath.get(p.storage_path) ?? "" }))
+            .map((p) => ({ week: p.week, url: byPath.get(p.storage_path) ?? "", caption: p.caption }))
             .filter((p) => p.url.length > 0)
             .sort((a, b) => b.week - a.week);
         }

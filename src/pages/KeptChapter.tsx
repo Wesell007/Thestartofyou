@@ -188,7 +188,7 @@ const KeptChapter = () => {
     return <PageLoadState />;
   }
 
-  const { reflection, photoUrl, keptWeeks } = data;
+  const { reflection, photoUrl, photoCaption, keptWeeks } = data;
   const trimester = trimesterLabelFor(week);
 
   // Adjacent KEPT chapters (not just adjacent week numbers). Calmer browsing.
@@ -415,6 +415,17 @@ const KeptChapter = () => {
                   alt={`A moment kept from week ${week} — ${identity.chapterTitle}`}
                   className="w-full h-auto max-h-[520px] object-cover block"
                 />
+                {photoCaption && (
+                  <figcaption
+                    className="px-5 sm:px-6 py-4 font-serif italic text-[14.5px] sm:text-[15px] leading-[1.65] text-foreground/75"
+                    style={{
+                      borderTop: `1px solid ${accentSoft(0.16)}`,
+                      background: tint(0.16),
+                    }}
+                  >
+                    {photoCaption}
+                  </figcaption>
+                )}
               </figure>
             </section>
           )}

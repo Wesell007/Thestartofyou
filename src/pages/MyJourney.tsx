@@ -6,7 +6,11 @@ import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import { supabase } from "@/integrations/supabase/client";
 import { getActivePregnancyJourney, type PregnancyJourneyStatus } from "@/lib/savedJourney";
-import { STATUS_CHIP_LABEL } from "@/lib/journeyStatusCopy";
+import {
+  STATUS_CHIP_LABEL,
+  JOURNEY_SUPPORT_HREF,
+  JOURNEY_SUPPORT_LINK_LABEL,
+} from "@/lib/journeyStatusCopy";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";

@@ -10,8 +10,12 @@ import {
 import {
   CONFIRM_COPY,
   RETURN_TO_ACTIVE_COPY,
+  JOURNEY_SUPPORT_HREF,
+  JOURNEY_SUPPORT_LINK_LABEL,
   type ChangeableStatus,
 } from "@/lib/journeyStatusCopy";
+import { Link } from "react-router-dom";
+import { isSupportStatus } from "@/data/journeySupportArticles";
 import { toast } from "@/hooks/use-toast";
 import ChangeStatusDialog from "./ChangeStatusDialog";
 import LossConfirmDialog from "./LossConfirmDialog";

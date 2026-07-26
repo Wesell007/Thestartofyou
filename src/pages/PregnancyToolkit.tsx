@@ -18,7 +18,12 @@ import {
   getActivePregnancyJourney,
   type PregnancyJourneyStatus,
 } from "@/lib/savedJourney";
-import { TOOLKIT_NOTES, STATUS_CHIP_LABEL } from "@/lib/journeyStatusCopy";
+import {
+  TOOLKIT_NOTES,
+  STATUS_CHIP_LABEL,
+  JOURNEY_SUPPORT_HREF,
+  JOURNEY_SUPPORT_LINK_LABEL,
+} from "@/lib/journeyStatusCopy";
 import { useBirthPlanSummary } from "@/hooks/useBirthPlan";
 import { statusFromCompletion, statusLabel } from "@/lib/birthPlanSchema";
 import { useHospitalBagSummary } from "@/hooks/useHospitalBag";
@@ -258,13 +263,21 @@ const PregnancyToolkit = () => {
               .
             </p>
             {status === "pregnancy_loss" && !revealed && (
-              <button
-                type="button"
-                onClick={() => setRevealed(true)}
-                className="inline-flex items-center rounded-pill border border-border/60 bg-parchment px-4 py-2 text-sm text-foreground/85 hover:border-foreground/25 transition-colors"
-              >
-                Show my toolkit entries
-              </button>
+              <div className="flex flex-wrap items-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => setRevealed(true)}
+                  className="inline-flex items-center rounded-pill border border-border/60 bg-parchment px-4 py-2 text-sm text-foreground/85 hover:border-foreground/25 transition-colors"
+                >
+                  Show my toolkit entries
+                </button>
+                <Link
+                  to={JOURNEY_SUPPORT_HREF}
+                  className="text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
+                >
+                  {JOURNEY_SUPPORT_LINK_LABEL}
+                </Link>
+              </div>
             )}
           </section>
         )}

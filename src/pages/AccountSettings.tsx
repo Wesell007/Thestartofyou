@@ -8,15 +8,34 @@ import { supabase } from "@/integrations/supabase/client";
 import { deletePregnancyJourney } from "@/lib/savedJourney";
 import { deleteTTCJourney } from "@/lib/savedTTCJourney";
 import { toast } from "@/hooks/use-toast";
+import {
+  SUGGESTED_NAMES,
+  TONE_OPTIONS,
+  validateCompanionName,
+  isCompanionTone,
+  type CompanionTone,
+} from "@/lib/companion";
 
 type Lifecycle = "pregnancy" | "ttc" | null;
+type CompanionChoice = "skip" | "cindy" | "ava" | "mia" | "custom";
+
+const suggestedFromName = (name: string | null): CompanionChoice => {
+  if (!name) return "skip";
+  const match = SUGGESTED_NAMES.find((n) => n.toLowerCase() === name.toLowerCase());
+  return (match?.toLowerCase() as CompanionChoice | undefined) ?? "custom";
+};
 
 const AccountSettings = () => {
   const navigate = useNavigate();
   const [userId, setUserId] = useState<string | null>(null);
   const [lifecycle, setLifecycle] = useState<Lifecycle>(null);
   const [loading, setLoading] = useState(true);
-  const [busy, setBusy] = useState<"export" | "journey" | "account" | null>(null);
+  const [busy, setBusy] = useState<"export" | "journey" | "account" | "companion" | null>(null);
+
+  const [companionChoice, setCompanionChoice] = useState<CompanionChoice>("skip");
+  const [customName, setCustomName] = useState("");
+  const [nameError, setNameError] = useState<string | null>(null);
+  const [tone, setTone] = useState<CompanionTone | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -29,16 +48,24 @@ const AccountSettings = () => {
       }
       const user = data.session?.user;
       if (!user) return;
-      const { data: pointer } = await supabase
-        .from("journeys")
-        .select("lifecycle")
-        .eq("user_id", user.id)
-        .maybeSingle();
-      if (active) {
-        setUserId(user.id);
-        setLifecycle(pointer?.lifecycle === "pregnancy" || pointer?.lifecycle === "ttc" ? pointer.lifecycle : null);
-        setLoading(false);
-      }
+      const [{ data: pointer }, { data: profile }] = await Promise.all([
+        supabase.from("journeys").select("lifecycle").eq("user_id", user.id).maybeSingle(),
+        supabase
+          .from("profiles")
+          .select("companion_name, companion_tone")
+          .eq("user_id", user.id)
+          .maybeSingle(),
+      ]);
+      if (!active) return;
+      setUserId(user.id);
+      setLifecycle(pointer?.lifecycle === "pregnancy" || pointer?.lifecycle === "ttc" ? pointer.lifecycle : null);
+      const savedName = profile?.companion_name?.trim() || null;
+      const savedTone = profile?.companion_tone ?? null;
+      const choice = suggestedFromName(savedName);
+      setCompanionChoice(choice);
+      if (choice === "custom" && savedName) setCustomName(savedName);
+      setTone(isCompanionTone(savedTone) ? savedTone : null);
+      setLoading(false);
     })();
     return () => { active = false; };
   }, []);
@@ -117,7 +144,65 @@ const AccountSettings = () => {
     }
   };
 
+  const saveCompanion = async () => {
+    if (!userId || busy) return;
+    setNameError(null);
+    let companionValue: string | null = null;
+    if (companionChoice === "custom") {
+      const result = validateCompanionName(customName);
+      if (result.ok === false) {
+        setNameError(result.message);
+        return;
+      }
+      companionValue = result.value;
+    } else if (companionChoice !== "skip") {
+      const suggested = SUGGESTED_NAMES.find((n) => n.toLowerCase() === companionChoice);
+      companionValue = suggested ?? null;
+    }
+    setBusy("companion");
+    const { error } = await supabase
+      .from("profiles")
+      .upsert(
+        { user_id: userId, companion_name: companionValue, companion_tone: tone },
+        { onConflict: "user_id" },
+      );
+    setBusy(null);
+    if (error) {
+      toast({ title: "Could not save your companion", variant: "destructive" });
+      return;
+    }
+    toast({ title: "Companion updated" });
+  };
+
+  const resetCompanion = async () => {
+    if (!userId || busy) return;
+    setBusy("companion");
+    const { error } = await supabase
+      .from("profiles")
+      .upsert(
+        { user_id: userId, companion_name: null, companion_tone: null },
+        { onConflict: "user_id" },
+      );
+    setBusy(null);
+    if (error) {
+      toast({ title: "Could not reset your companion", variant: "destructive" });
+      return;
+    }
+    setCompanionChoice("skip");
+    setCustomName("");
+    setTone(null);
+    setNameError(null);
+    toast({ title: "Reset to default" });
+  };
+
   if (loading) return <PageLoadState />;
+
+  const pillClass = (active: boolean) =>
+    `rounded-pill border px-3.5 py-1.5 font-sans text-[12.5px] transition-colors ${
+      active
+        ? "bg-foreground/[0.06] border-foreground/40 text-foreground"
+        : "bg-parchment border-border/50 text-foreground/75 hover:border-foreground/25"
+    }`;
 
   return (
     <div className="min-h-screen bg-parchment">
@@ -130,6 +215,88 @@ const AccountSettings = () => {
         </p>
 
         <div className="space-y-5">
+          <section className="rounded-2xl border border-border/50 bg-card p-6">
+            <h2 className="font-serif text-xl mb-2">Your companion</h2>
+            <p className="text-sm text-muted-foreground mb-5">
+              Choose a name and tone for your companion, or leave it as the quiet default.
+            </p>
+
+            <p className="font-sans text-xs font-light text-muted-foreground/80 mb-2">Companion name</p>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {(["skip", "cindy", "ava", "mia", "custom"] as CompanionChoice[]).map((opt) => (
+                <button
+                  key={opt}
+                  type="button"
+                  onClick={() => {
+                    setCompanionChoice(opt);
+                    setNameError(null);
+                  }}
+                  className={pillClass(companionChoice === opt)}
+                >
+                  {opt === "skip"
+                    ? "Skip"
+                    : opt === "custom"
+                    ? "Custom"
+                    : opt.charAt(0).toUpperCase() + opt.slice(1)}
+                </button>
+              ))}
+            </div>
+            {companionChoice === "custom" && (
+              <div className="mb-3">
+                <input
+                  type="text"
+                  value={customName}
+                  onChange={(e) => {
+                    setCustomName(e.target.value);
+                    if (nameError) setNameError(null);
+                  }}
+                  maxLength={24}
+                  placeholder="A name for your companion"
+                  className="w-full bg-parchment border rounded-pill px-4 py-2.5 font-sans text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-2 focus:ring-foreground/10"
+                  style={{ borderColor: "hsl(var(--border) / 0.5)" }}
+                />
+                {nameError && (
+                  <p role="alert" className="mt-2 font-sans text-[11.5px] text-destructive">
+                    {nameError}
+                  </p>
+                )}
+              </div>
+            )}
+
+            <p className="font-sans text-xs font-light text-muted-foreground/80 mt-4 mb-2">Tone</p>
+            <div className="flex flex-wrap gap-2 mb-5">
+              {TONE_OPTIONS.map((opt) => (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => setTone(tone === opt.value ? null : opt.value)}
+                  className={pillClass(tone === opt.value)}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={saveCompanion}
+                disabled={Boolean(busy)}
+                className="inline-flex items-center gap-2 rounded-pill bg-terracotta text-terracotta-foreground px-5 py-2.5 text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all disabled:opacity-50"
+              >
+                {busy === "companion" ? "Saving…" : "Save companion"}
+              </button>
+              <button
+                type="button"
+                onClick={resetCompanion}
+                disabled={Boolean(busy)}
+                className="text-sm text-muted-foreground underline disabled:opacity-50"
+              >
+                Reset to default
+              </button>
+            </div>
+          </section>
+
           <section className="rounded-2xl border border-border/50 bg-card p-6">
             <h2 className="font-serif text-xl mb-2">Download your data</h2>
             <p className="text-sm text-muted-foreground mb-5">Creates a JSON file containing your profile, journey details, logs, reflections and photo records.</p>

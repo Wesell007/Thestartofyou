@@ -15,6 +15,11 @@ interface Props {
 const SectionKeepThisWeek = ({ userId, week, chapterTitle }: Props) => (
   <section className="relative pt-14 pb-2">
     <SlotPhotoMemory userId={userId} week={week} chapterTitle={chapterTitle} />
+    <div
+      aria-hidden="true"
+      className="mx-auto my-8 h-px w-16"
+      style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.22)" }}
+    />
     <SlotVideoMemory userId={userId} week={week} />
   </section>
 );

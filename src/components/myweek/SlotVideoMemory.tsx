@@ -6,6 +6,7 @@ import {
   CAPTION_PLACEHOLDER,
   VIDEO_ACCEPT_ATTR,
   VIDEO_ERROR_COPY,
+  formatDuration,
   isCaptionWithinLimit,
   normaliseCaption,
 } from "@/lib/weekMedia";

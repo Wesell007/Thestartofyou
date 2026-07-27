@@ -123,6 +123,19 @@ export const probeVideoDuration = (file: File): Promise<number | null> =>
     video.src = url;
   });
 
+/**
+ * Format a duration in seconds as `m:ss`. Returns null when the value is
+ * missing, non-finite, or non-positive so callers can skip rendering the
+ * badge entirely. Pure display helper — never used for validation.
+ */
+export const formatDuration = (seconds: number | null): string | null => {
+  if (typeof seconds !== "number" || !Number.isFinite(seconds) || seconds <= 0) return null;
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${s.toString().padStart(2, "0")}`;
+};
+
+
 export {
   CAPTION_MAX,
   CAPTION_PLACEHOLDER,

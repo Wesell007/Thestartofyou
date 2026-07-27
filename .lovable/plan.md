@@ -1,84 +1,54 @@
 
-# Phase 14.8: Full Personalised Realism Variant Generation (revised)
+# Phase 14.9: Personalised Variant Asset Import and Resolver Extension
 
-Review-only image generation under `/mnt/documents/phase-14-8/`. No code, assets, `.asset.json`, resolver, wiring, migrations, routes, sitemap, analytics, or AI-prompt changes. Old 3-stage system stays.
+Import approved Light/Medium/Deep variants (Weeks 9–42) as CDN `.asset.json` pointers and extend the realism resolver to be tone-aware. No `/my-week` wiring, no Settings copy, no code deletions.
 
-## Scope
+## Sources (verified present)
 
-- Weeks 9–42 only. Weeks 1–8 stay neutral-only.
-- Tones: Light, Medium, Deep.
-- Target set: 34 weeks × 3 = 102 images.
-- Approved Phase 14.7 pilots (W12, W20, W36 × L/M/D = 9) are copied in, not regenerated.
-- **New in Phase 14.8: 93 images.**
-
-## Source strategy (corrected)
-
-Repo path `src/assets/myweek-weekly-realism/` holds `.asset.json` pointers, not raw PNGs. Sources for edit-from-default:
-
-- Primary: approved Phase 14.2 PNGs at `/mnt/documents/phase-14-2/images/`.
-- Use the `week-XX.v2.png` file where Phase 14.2b approved a v2 for that week; otherwise use `week-XX.png`.
-- In the W9–42 range, v2 applies to: **9, 13, 16, 21, 26, 31, 32, 34**. All other weeks use v1.
-- Fallback if any source is missing: fetch the CDN URL from the matching `.asset.json` pointer and use that as the edit source.
-
-Every source path is verified to exist before generation begins.
-
-## Method
-
-- Tool: `imagegen--edit_image`, model `premium.gemini` (Nano Banana 2).
-- Edit-from-default only. Never generate from scratch. Omit width/height to preserve source dimensions.
-- Prompt template per tone, applied verbatim to every week (archived under `prompts/<tone>/week-XX.md` before generation):
-
-  > "Edit only the baby's skin tone to a natural {tone-specific description}. Preserve exactly: pose, anatomy, composition, framing, crop, scale, sac boundary, cord path, wall-bloom/placenta treatment, warm paper background, in-utero lighting direction, watercolour texture, and developmental maturity. Change nothing else. Blend the skin tone naturally into the existing womb lighting with minimal shading adjustments only."
-
-  Tone-specific descriptions carried forward from Phase 14.7 approval:
-  - **Light**: warm, natural light baby skin tone. Never pale, grey, chalky, or washed out.
-  - **Medium**: natural medium brown baby skin tone with warm highlights preserved. Not oversaturated.
-  - **Deep**: natural deep brown baby skin tone. Preserve watercolour softness and visible highlights. Shadows not too heavy.
-
-## Batches (corrected)
-
-1. **A** — W9, 10, 11, 13 × L/M/D = 12
-2. **B** — W14, 15, 16, 17, 18 × L/M/D = 15
-3. **C** — W19, 21, 22, 23, 24 × L/M/D = 15
-4. **D** — W25, 26, 27, 28, 29, 30 × L/M/D = 18
-5. **E** — W31, 32, 33, 34, 35, 37 × L/M/D = 18
-6. **F** — W38, 39, 40, 41, 42 × L/M/D = 15
-
-Total: 12 + 15 + 15 + 18 + 18 + 15 = **93**.
-
-Spot-check outputs after each batch before continuing.
-
-## Output layout
-
-```
-/mnt/documents/phase-14-8/
-  images/
-    light/   week-09.png … week-42.png     (34 files incl. copied pilots)
-    medium/  week-09.png … week-42.png
-    deep/    week-09.png … week-42.png
-  sheets/
-    light-review-sheet.png                 # W9–42
-    medium-review-sheet.png                # W9–42
-    deep-review-sheet.png                  # W9–42
-    four-up-spot-checks.png                # default|light|medium|deep for W9,12,16,20,26,32,36,40,42
-    full-variant-review-sheet.png          # all tones together
-  prompts/
-    light/week-XX.md
-    medium/week-XX.md
-    deep/week-XX.md
-  notes.md
+```text
+/mnt/documents/phase-14-8/images/light/week-09.png … week-42.png   (34)
+/mnt/documents/phase-14-8/images/medium/week-09.png … week-42.png  (34)
+/mnt/documents/phase-14-8/images/deep/week-09.png … week-42.png    (34)
 ```
 
-Sheets built with Python/PIL, same pattern as Phase 14.2/14.7.
+`lovable-assets` CLI verified on PATH.
 
-## Rerun policy
+## Steps
 
-If a variant drifts on pose, face, cord, sac, crop, framing, or maturity stage, rerun once as `week-XX.v2.png` with a stricter preservation prompt. No iteration past v2 — flag for product review in `notes.md`.
+1. **Create target folders**
+   - `src/assets/myweek-weekly-realism-light/`
+   - `src/assets/myweek-weekly-realism-medium/`
+   - `src/assets/myweek-weekly-realism-deep/`
 
-## notes.md contents
+2. **Upload 102 assets.** For each tone × week (9–42):
+   ```
+   lovable-assets create --file <source> --filename week-XX.png \
+     > src/assets/myweek-weekly-realism-<tone>/week-XX.png.asset.json
+   ```
+   Write CLI stdout verbatim. No hand-written JSON. No raw PNGs committed.
 
-Per image: source default used (v1 or v2), model, pose preserved (y/n), sac/womb preserved (y/n), cord preserved (y/n), only-skin-tone-changed (y/n), any drift, pass or rerun. Plus: list of reruns, unresolved issues, final recommendation on readiness for Phase 14.9 import planning.
+3. **Extend `src/lib/myWeekRealismIllustrations.ts`.**
+   - Add `export type RealismTone = "default" | "light" | "medium" | "deep";`
+   - Build three additional `import.meta.glob` maps (light/medium/deep) using the same pattern as the existing default map. Import shape stays tolerant of `module.url` (existing pattern).
+   - Keep `resolveDefaultRealismForWeek` and `defaultRealismAltForWeek` unchanged.
+   - Add `resolveRealismForWeek(week, tone): DefaultRealismResolution`:
+     - Clamp week (same helper).
+     - `tone === "default"` OR `resolvedWeek <= 8` → default resolution.
+     - Otherwise return the tone map entry.
+     - Missing tone asset → silent fallback to default. Never throws. Never returns empty `src`.
+   - Add `export function normaliseRealismTone(value: unknown): RealismTone` — returns `light`/`medium`/`deep` on exact match, else `default`.
+   - Alt text unchanged (tone-agnostic via `defaultRealismAltForWeek`).
+
+4. **Verify**
+   - 34 pointer files in each new folder (102 total).
+   - Every pointer has non-empty `url` starting with `/__l5e/assets-v1/`.
+   - No `.png` binaries under the new folders.
+   - `src/assets/myweek-weekly-realism/` untouched.
+   - `src/assets/myweek-baby-styles/` untouched.
+   - No changes to `SectionBabyThisWeek.tsx`, `BabyIllustrationStyleField.tsx`, routes, sitemap, analytics, AI prompts, migrations.
+
+5. **Typecheck.** Run `npm run typecheck` and report the exact command and result.
 
 ## Stop point
 
-Stop after the 93 new variants, copied 9 pilot images, 5 review sheets, prompt archive, and `notes.md`. No import, no `.asset.json`, no resolver edits, no wiring, no Phase 14.9.
+After 102 pointers written, resolver extended with `resolveRealismForWeek` and `normaliseRealismTone`, and typecheck green. No `/my-week` wiring. No Phase 14.10.

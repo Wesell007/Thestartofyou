@@ -54,20 +54,39 @@ serve(async (req) => {
   const userId = userData.user.id;
 
   // Storage objects are not covered by auth.users foreign-key cascades.
-  const { data: photos, error: listError } = await admin.storage.from("weekly-photos").list(userId, { limit: 1000 });
-  if (listError) {
-    console.error("delete-account could not list photos", listError.message);
+  // Media memories are nested under {userId}/{week}/{media_type}/{uuid}.{ext},
+  // so we recurse (bounded depth) to collect direct photos AND nested media.
+  const listAllUnder = async (prefix: string, depth: number): Promise<string[] | { error: string }> => {
+    if (depth > 3) return [];
+    const { data, error } = await admin.storage.from("weekly-photos").list(prefix, { limit: 1000 });
+    if (error) return { error: error.message };
+    const out: string[] = [];
+    for (const entry of data ?? []) {
+      // Supabase returns folders as entries with id === null.
+      if (entry.id === null) {
+        const nested = await listAllUnder(`${prefix}/${entry.name}`, depth + 1);
+        if (!Array.isArray(nested)) return nested;
+        out.push(...nested);
+      } else {
+        out.push(`${prefix}/${entry.name}`);
+      }
+    }
+    return out;
+  };
+
+  const walked = await listAllUnder(userId, 0);
+  if (!Array.isArray(walked)) {
+    console.error("delete-account could not list storage", walked.error);
     return json(req, { error: "We could not remove all account data. Nothing else was deleted." }, 502);
   }
-  if (photos?.length) {
-    const { error: storageError } = await admin.storage
-      .from("weekly-photos")
-      .remove(photos.map((photo) => `${userId}/${photo.name}`));
+  if (walked.length) {
+    const { error: storageError } = await admin.storage.from("weekly-photos").remove(walked);
     if (storageError) {
-      console.error("delete-account could not remove photos", storageError.message);
+      console.error("delete-account could not remove storage objects", storageError.message);
       return json(req, { error: "We could not remove all account data. Nothing else was deleted." }, 502);
     }
   }
+
 
   const { error: deleteError } = await admin.auth.admin.deleteUser(userId);
   if (deleteError) {

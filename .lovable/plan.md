@@ -1,77 +1,80 @@
+## Phase 13.6c: Video Memory QA and UX Polish
 
-## Phase 13.6b — Video Memory MVP (approved, revised, awaiting build mode)
+Focused polish for the video memory feature shipped in 13.6b. No new features, no voice notes, no MediaRecorder, no AI, no analytics, no DB or storage changes.
 
-Adds a single video per pregnancy week alongside the existing photo on `/my-week`. Video only. No voice notes, no My Journey gallery, no AI, no analytics.
+## Files to edit
 
-### 1. New file: `src/lib/weekMedia.ts`
+- `src/components/myweek/SectionKeepThisWeek.tsx` — subtle divider between photo and video slots.
+- `src/components/myweek/SlotVideoMemory.tsx` — "Saving video..." copy, optional duration badge, tighten small-screen spacing, verify error dismissal, keep caption editor aligned with the photo editor.
+- `src/lib/weekMedia.ts` — add pure `formatDuration` helper only.
 
-Pure helpers, no React, no Supabase calls.
+No changes to: `useWeekMedia.ts`, `SlotPhotoMemory.tsx`, `weekCaption.ts`, `MyWeek.tsx`, migrations, storage, routes, sitemap, robots.
 
-- Constants: `VIDEO_MAX_BYTES = 50 * 1024 * 1024`, `VIDEO_MAX_DURATION_SECONDS = 60`, `VIDEO_ACCEPTED_MIME = ["video/mp4","video/webm","video/quicktime"]`, `VIDEO_ACCEPT_ATTR`.
-- `extensionForVideo(mime, filename)` → lowercase `mp4`/`webm`/`mov` (mime first, filename fallback via allowlist).
-- `buildMediaStoragePath(userId, week, mediaType, ext)` → `${userId}/${week}/${mediaType}/${crypto.randomUUID()}.${ext}`.
-- `probeVideoDuration(file): Promise<number | null>` — off-DOM `<video preload="metadata">` + `URL.createObjectURL`, 3s timeout, revokes URL, returns rounded seconds or `null` on unreadable/error/timeout.
-- Re-exports caption helpers from `weekCaption.ts` (no edits to that file).
-- Approved error copy exported as `VIDEO_ERROR_COPY`.
+## Changes
 
-### 2. New file: `src/hooks/useWeekMedia.ts`
+### 1. Divider — `SectionKeepThisWeek.tsx`
 
-Generic on `(week, mediaType)`; v1 only mounts `video`.
+Insert between the two slots. No wrapper heading, no "KEEP THIS WEEK", no subline.
 
-```ts
-useWeekMedia({ userId, week, mediaType: "video" }) → {
-  state: "loading" | "empty" | "uploading" | "loaded" | "error",
-  error, storagePath, signedUrl, mimeType, durationSeconds, caption,
-  upload(file), remove(), saveCaption(raw), clearError()
-}
+```tsx
+<div
+  aria-hidden="true"
+  className="mx-auto my-8 h-px w-16"
+  style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.22)" }}
+/>
 ```
 
-- Load: `week_media_memories.select(...).eq(user_id, week, media_type).maybeSingle()`; if row, sign URL for 60 min.
-- `upload`: validate mime → size → duration; new UUID path; `storage.upload(path, file, { upsert: false, contentType })`; then DB `upsert({ ..., media_type: "video" }, { onConflict: "user_id,week,media_type" })`; on DB failure, remove the just-uploaded object and revert to prior state; on success sign a fresh URL and best-effort remove old object.
-- `remove`: delete DB row → remove storage object; on storage failure re-upsert row and surface `removeFailed`.
-- `saveCaption`: validate via `isCaptionWithinLimit`, update with `captionForSave`.
-- 50-minute signed-URL refresh timer (mirrors `SlotPhotoMemory`).
-- No analytics, no AI, no MediaRecorder, no transcription.
+### 2. Uploading copy — `SlotVideoMemory.tsx`
 
-### 3. New file: `src/components/myweek/SlotVideoMemory.tsx`
+Change empty-state Add and loaded-state Replace from "Saving" → "Saving video..." (three ASCII dots) while `uploading`.
 
-Presentation + hidden file input + caption editor. States: loading / empty / uploading / loaded / error.
+### 3. Duration badge — `SlotVideoMemory.tsx` + helper in `weekMedia.ts`
 
-- Empty: calm frame with "Video of this week", helper "Add a short video from this week, if you want to keep one here.", primary "Add video" button, "Private to you" chip. Smaller than the photo frame — photo remains the protagonist.
-- Loaded: `<video controls preload="metadata" playsInline>` (no `autoPlay`, no `loop`); "Private" chip; "Replace video" and "Remove video" actions using the same visual language as the photo slot.
-- Caption editor mirrors the photo caption UI (label "Caption", 140-char counter, save/cancel).
-- All buttons `type="button"`, `aria-label` on file input trigger, visible focus.
-- File input `accept={VIDEO_ACCEPT_ATTR}`, value cleared after every attempt.
+Add pure helper:
 
-### 4. New file: `src/components/myweek/SectionKeepThisWeek.tsx`
+```ts
+export const formatDuration = (seconds: number | null): string | null => {
+  if (typeof seconds !== "number" || !Number.isFinite(seconds) || seconds <= 0) return null;
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${s.toString().padStart(2, "0")}`;
+};
+```
 
-Thin wrapper. Small uppercase label + serif "Keep this week" header (matches existing My Week section pattern). Renders `<SlotPhotoMemory />` unchanged, then `<SlotVideoMemory />`. Props: `{ userId, week, chapterTitle }`.
+Render a small quiet badge (bottom-left overlay on the loaded video) only when the formatted value is non-null. Display only; no validation, DB, or storage change.
 
-### 5. Edit: `src/pages/MyWeek.tsx`
+### 4. Small-screen spacing — `SlotVideoMemory.tsx`
 
-Inside the existing `status === "active"` branch only: replace `<SlotPhotoMemory .../>` at line 267 with `<SectionKeepThisWeek .../>`. Update imports. Nothing else moves.
+- Tighten overlay padding at `<sm`.
+- Hide the "Replace video" text label at `<sm` (icon-only, `aria-label="Replace video"` preserved). Text label restored at `sm:` and up.
+- Ensure Private badge and control cluster don't collide at 375px.
+- No desktop layout regression.
 
-### 6. Not doing
+### 5. Error dismissal — `SlotVideoMemory.tsx`
 
-Voice notes, My Journey gallery, KeptChapter, pregnancy-loss reveal, AI, transcription, auto-captions, analytics, sharing, public URLs, storage bucket/policy changes, `week_photos` schema/paths, routes, sitemap, robots, article data, `SlotPhotoMemory` internals, `weekCaption.ts`.
+Confirm both Add and Replace buttons route through `openFilePicker`, which already calls `clearError()`. No code change unless verification finds a gap.
 
-### 7. Copy compliance
+### 6. Caption editor consistency — `SlotVideoMemory.tsx`
 
-No urgent / must / essential / guaranteed / safe / unsafe / normal / "everything is okay". Approved technical recovery phrases used verbatim.
+Keep disabled/loading styling aligned with `SlotPhotoMemory.tsx`. No changes to caption rules in `weekCaption.ts`.
 
-### 8. Privacy
+## Verification
 
-Signed URLs kept in component state only. File input cleared after each attempt.
+1. `bunx tsgo --noEmit`
+2. Guard greps in `src/`: no new `MediaRecorder`, analytics, or AI imports; no route/sitemap/migration edits.
+3. Temporary Playwright smoke test under `/tmp/browser/` (no fixtures in the repo):
+   - Active `/my-week` renders both slots with divider.
+   - Unsupported MIME rejected.
+   - Small `video/webm` uploads → loaded state; duration badge visible when duration ≥ 1s.
+   - Caption add/save round-trips.
+   - Replace video works.
+   - Remove video returns to empty card.
+   - Non-active status hides `SectionKeepThisWeek`.
+   - Photo memory + captions unchanged.
+4. Manual viewport check at 375px and 1280px for overlay spacing and focus states.
 
-### 9. Verification (build mode)
+## Deliverables
 
-- `bunx tsgo --noEmit` → 0.
-- Grep: no analytics/AI imports in the four new files; no route/sitemap change; `week_photos` untouched.
-- **Manual Playwright smoke test** using a temporary in-`/tmp` generated mp4 fixture (ffmpeg-generated, ≤5s, ≤1 MB), never committed, never placed in `public/` or `src/assets/`. Covers: accepted mp4 upload, unsupported-format rejection, >60s duration rejection, replace, remove, native playback (`controls` mounted, no autoplay attribute), existing photo memory + captions still work, non-active status hides the video slot.
-- If auth is `signed_out` or `external_unmanaged`, report exactly which checks could not run; do not claim success.
-
-### 10. Files
-
-- **Create:** `src/lib/weekMedia.ts`, `src/hooks/useWeekMedia.ts`, `src/components/myweek/SlotVideoMemory.tsx`, `src/components/myweek/SectionKeepThisWeek.tsx`.
-- **Edit:** `src/pages/MyWeek.tsx`.
-- **Untouched:** `SlotPhotoMemory.tsx`, `weekCaption.ts`, other pages/components, DB schema (13.6a table already exists), storage bucket and policies.
+- Three files touched.
+- QA summary with typecheck, smoke-test outcome, and photo-regression confirmation.
+- No fixtures, tests, or scripts committed to the repo.

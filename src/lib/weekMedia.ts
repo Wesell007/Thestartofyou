@@ -31,7 +31,11 @@ export const VIDEO_ACCEPTED_MIME = [
   "video/quicktime",
 ] as const;
 
-export const VIDEO_ACCEPT_ATTR = VIDEO_ACCEPTED_MIME.join(",");
+export const VIDEO_ACCEPT_ATTR = [
+  ...VIDEO_ACCEPTED_MIME,
+  "video/*",
+].join(",");
+
 
 /** Approved error copy — used by the hook and the slot component. */
 export const VIDEO_ERROR_COPY = {

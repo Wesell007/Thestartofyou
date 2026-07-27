@@ -1,37 +1,96 @@
-## Phase 13.7g — My Week Rendering Wire-Up
+# Phase 13.7h.2 — Early and Mid Cord-Anchor Retouch
 
-Verified: `profiles` is keyed by `user_id` (matches Account Settings, Setup, useCompanionIdentity, and BabyIllustrationStyleField). The new hook will use `.eq("user_id", user.id)`.
+This phase remains a controlled, review-only image pass.
 
-### Files created
+Your clarification is now part of the plan:
+- the chat images are visual direction only
+- they are not source assets
+- they will not be copied, imported, or added to `src/assets`
+- production asset replacement is explicitly out of scope for this phase
 
-- `src/hooks/useBabyIllustrationStyle.ts`
-  - Gets session via `supabase.auth.getSession()`.
-  - Reads `profiles.baby_illustration_style` with `.eq("user_id", user.id).maybeSingle()`.
-  - Normalises via `isBabyIllustrationStyle`; anything else → `"default"`.
-  - Returns `{ style: BabyIllustrationStyle, isLoading: boolean }`.
-  - Signed-out / NULL / unknown / error → `"default"`. Never throws, never toasts, never logs, never sent to AI or analytics.
+## Confirmed source set
 
-### Files edited
+The current live personalised illustration system resolves its images from `src/assets/myweek-baby-styles/`, with the Early, Mid, and Late variants referenced in `src/lib/myWeekBabyIllustrations.ts`.
 
-- `src/components/myweek/SectionBabyThisWeek.tsx`
-  - Remove the `MyWeekBabyImage` import.
-  - Call `useBabyIllustrationStyle()` inside the component.
-  - Replace the `<MyWeekBabyImage …/>` element (line 129) with an `<img>` whose `src` = `resolveBabyIllustrationForWeek(style, week).src` and `alt` = `babyIllustrationAlt(resolved.style)`. Preserve the exact wrapper div, sizing, `relative z-10 h-full w-full`, `object-contain select-none`, `loading="eager"`, `decoding="async"`.
-  - Keep all surrounding layout, glow, ring, gradients, `figcaption`, spacing, size cue, `babyNote`, `whatThisMeans` unchanged.
+This phase will use only these approved source files as edit inputs:
 
-### Files not changed
+### Early
+- `src/assets/myweek-baby-styles/default-early.png`
+- `src/assets/myweek-baby-styles/light-early.png`
+- `src/assets/myweek-baby-styles/medium-early.png`
+- `src/assets/myweek-baby-styles/deep-early.png`
 
-- `src/pages/MyWeek.tsx`, `MyWeekBabyImage.tsx` (file preserved, just unused by this slot), Account Settings, Setup, week article pages, per-week fetus assets, size cues, biology detail images, article images, Weekly Reads, Journey Support, uploaded photos/videos, routes, sitemap, analytics files, AI files.
+### Mid
+- `src/assets/myweek-baby-styles/default-mid.png`
+- `src/assets/myweek-baby-styles/light-mid.png`
+- `src/assets/myweek-baby-styles/medium-mid.png`
+- `src/assets/myweek-baby-styles/deep-mid.png`
 
-### Behaviour
+Late is unchanged and out of scope.
 
-- NULL / `default` / unknown / loading / error → default symbolic set.
-- `light` / `medium` / `deep` → matching symbolic set.
-- Stage from week via resolver (1–13 early, 14–27 mid, 28–42 late).
-- Reset in Account Settings returns `/my-week` to default on next load.
+## Goal
 
-### Verification
+Improve the most visible realism issue in the current symbolic system by making the umbilical cord feel naturally connected to the womb wall rather than appearing to stop in fluid.
 
-- `bunx tsgo --noEmit`.
-- Manual: toggle each of the four preferences in Account Settings, then load `/my-week` at early, mid, late weeks; confirm image and alt update.
-- `rg` sweep to confirm no analytics / AI / route / sitemap files touched, and per-week fetus assets untouched.
+This is a premium symbolic retouch, not a realism rebuild.
+
+## Visual direction
+
+Apply the same artistic intent across all 8 retouches:
+- soft cord continuation
+- gentle wall-anchor
+- warmer watercolour bloom where the cord meets the womb wall
+- premium watercolour softness
+- no full placenta disc
+- no clinical diagram feel
+- no labels
+- no hard medical detail
+
+### Early direction
+- softer and more delicate than Mid
+- anchor should remain subtle and airy
+- connection should feel present, not diagrammed
+
+### Mid direction
+- slightly clearer wall-anchor than Early
+- still symbolic and painterly
+- avoid any visible clinical placenta structure
+
+## Deliverables
+
+All outputs will be written to `/mnt/documents/phase-13-7h-2/` only.
+
+### Retouched review-only image outputs
+- 8 retouched review images, one for each Early and Mid source above
+
+### Review sheets
+- `early-before-after.png`
+- `mid-before-after.png`
+- `all-stages-updated.png`
+
+### Notes
+- `notes.md`
+- explicit note of any drift or defects found during review
+
+## Output rules
+
+Do not:
+- save anything into `src/assets`
+- create `.asset.json`
+- run asset import
+- update code
+- update routes, AI, analytics, sitemap, or settings
+- close Phase 13.7
+
+## Technical details
+
+- Edit inputs come only from the existing `src/assets/myweek-baby-styles/` files listed above.
+- Retouch outputs are scratch review files under `/mnt/documents/phase-13-7h-2/`.
+- Composite before/after sheets will be assembled after the retouch pass so review is possible before any asset replacement decision.
+- The all-stage sheet will include Late only as unchanged context.
+
+## Stop point
+
+Stop immediately after the 8 review-only retouches, the three review sheets, and `notes.md` are produced.
+
+A separate later phase can handle approval and final asset replacement if the review passes.

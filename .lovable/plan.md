@@ -1,41 +1,37 @@
-# Phase 13.7h.2b — Targeted Mid Light and Mid Medium Rerun
+# Phase 13.7h.3 — Approved Cord-Anchor Asset Replacement
 
-Review-only image rerun. No code, no `src/assets` changes, no `.asset.json`, no imports, no routes/sitemap/analytics/AI/UI edits. Phase 13.7 stays open.
+Isolated asset replacement only. No code, resolver, routes, sitemap, analytics, AI, Account Settings, My Week, or `.asset.json` changes.
 
-## Scope
+## Files replaced (8 total, in `src/assets/myweek-baby-styles/`)
 
-Rerun only two Mid variants from the approved originals:
+Copy the approved retouches from `/mnt/documents/phase-13-7h-2/` over the existing PNGs, preserving filenames:
 
-- `src/assets/myweek-baby-styles/light-mid.png`
-- `src/assets/myweek-baby-styles/medium-mid.png`
+**Early (from Phase 13.7h.2)**
+- `default-early.png` ← `early/default-early.retouch.png`
+- `light-early.png` ← `early/light-early.retouch.png`
+- `medium-early.png` ← `early/medium-early.retouch.png`
+- `deep-early.png` ← `early/deep-early.retouch.png`
 
-Do not iterate from prior retouched outputs. Do not touch Late. Do not re-run Early or Mid Default/Deep.
+**Mid (Default + Deep from 13.7h.2; Light + Medium from 13.7h.2b)**
+- `default-mid.png` ← `mid/default-mid.retouch.png`
+- `light-mid.png` ← `mid/light-mid.retouch.final-candidate.png`
+- `medium-mid.png` ← `mid/medium-mid.retouch.final-candidate.png`
+- `deep-mid.png` ← `mid/deep-mid.retouch.png`
 
-## Visual direction
+## Not touched
 
-Preserve original composition, pose, framing, palette, sac shape, baby proportions, and premium watercolour finish. Only the cord termination changes.
-
-- **Mid Light** — softer, less prominent, more blended anchor. Cord clearly connected but not a visible placenta structure.
-- **Mid Medium** — softly connected cord with reduced background drift/speckling. Preserve original pose, framing, sac shape, proportions, colour balance, watercolour finish.
-
-Negative: no full placenta disc, no clinical diagram, no labels, no arrows, no text, no major pose/framing change, no new anatomy, no strong anchor blob, no heavy wall structure.
-
-## Outputs (under `/mnt/documents/phase-13-7h-2/`)
-
-1. `mid/light-mid.retouch.final-candidate.png`
-2. `mid/medium-mid.retouch.final-candidate.png`
-3. Rebuilt `sheets/mid-before-after.png` — uses approved Mid Default, new Mid Light candidate, new Mid Medium candidate, approved Mid Deep.
-4. Rebuilt `sheets/all-stages-updated.png` — approved Early row, updated Mid row (Default kept, Light new, Medium new, Deep kept), Late unchanged.
-5. Updated `notes.md` — rerun rationale for Mid Light and Mid Medium, confirmation other retouches kept, any residual drift, and confirmation that no code/assets/config/routes/sitemap/analytics/AI/UI were changed.
+- Late variants (`default-late.png`, `light-late.png`, `medium-late.png`, `deep-late.png`) — untouched.
+- `src/lib/myWeekBabyIllustrations.ts` — untouched.
+- No new `.asset.json` files created (PNGs are direct imports, not CDN assets).
 
 ## Steps
 
-1. Run `imagegen--edit_image` on `light-mid.png` with the softer-anchor prompt → save as `light-mid.retouch.final-candidate.png`.
-2. Run `imagegen--edit_image` on `medium-mid.png` with the reduced-drift soft-anchor prompt → save as `medium-mid.retouch.final-candidate.png`.
-3. Inspect both candidates. If drift or over-strong anchor recurs, one additional targeted retry per image with tuned prompt.
-4. Rebuild the two composite sheets with Python/PIL using the approved final set.
-5. Update `notes.md`.
+1. Record SHA-256 of all 12 existing files in `src/assets/myweek-baby-styles/` for verification.
+2. `cp` each of the 8 approved retouches over the target filenames.
+3. Re-hash all 12 files; confirm exactly the 8 Early+Mid hashes changed and all 4 Late hashes are identical to step 1.
+4. `git status` scoped to confirm only those 8 PNGs are modified and no other files changed.
+5. Run `bunx tsgo --noEmit`.
 
-## Stop point
+## Return
 
-Stop after the two revised Mid candidates, rebuilt sheets, and updated notes. No production asset replacement this phase.
+Replaced-files list, Late-untouched confirmation, no-code/`.asset.json`/routes/sitemap/analytics/AI changes confirmation, and typecheck result.

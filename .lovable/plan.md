@@ -1,52 +1,72 @@
-## Phase 13.7b.1 — Nano Banana Pilot Rerun (Lighter + Medium)
+## Phase 13.7c — Full Nano Banana Trimester Illustration Set (Review Only)
 
-Review-only rerun. No code, no migrations, no `src/assets/` changes, no product wiring. All output stays under `/mnt/documents/phase-13-7b-pilot/`.
+Review-only generation. No code, no migrations, no `src/assets/` changes, no product/route/UI/analytics/AI wiring. All output under `/mnt/documents/phase-13-7c-full-illustration-set/`.
 
-### Locked decisions
-- Default control stays as the default. Not renamed to lighter/medium/deep, not treated as a skin tone category. Chip label remains "Use the default illustrations".
-- Existing deep pilot is kept as-is. Only Lighter and Medium are regenerated.
-- Varied preview is not generated — it is a layout composition only.
+### Locked decisions (carried from 13.7b.1)
+- Default control stays as the default; not renamed, not treated as a skin tone category. Chip label remains "Use the default illustrations".
+- Approved mid-stage set (Lighter v2, Medium v2, existing Deep pilot) is **copied** into the new folder from `/mnt/documents/phase-13-7b-pilot/` — the live v2 files, not the archived v1 files. Mid is not regenerated.
+- Only Early and Late variants are generated now (6 new images).
+- No Varied image is generated.
 
 ### Steps
 
-1. **Archive** existing pilots (review-only folder, not `src/assets/`):
-   - `/mnt/documents/phase-13-7b-pilot/archive/pilot-myweek-baby-mid-light-v1.png`
-   - `/mnt/documents/phase-13-7b-pilot/archive/pilot-myweek-baby-mid-medium-v1.png`
+1. **Verify controls** (confirmed present in `src/assets/`):
+   - `myweek-baby-early.png`
+   - `myweek-baby-mid.png`
+   - `myweek-baby-late.png`
+   
+   Record SHA-256 before and after; they must match.
 
-2. **Regenerate** using `imagegen--edit_image` with `src/assets/myweek-baby-mid.png` as the edit input (inherits canvas, pose, framing, lighting, watercolour finish, sac colour, cream background):
+2. **Copy approved mid-stage v2** into the new folder:
+   - `/mnt/documents/phase-13-7b-pilot/pilot-myweek-baby-mid-light.png` → `myweek-baby-mid-light.png`
+   - `/mnt/documents/phase-13-7b-pilot/pilot-myweek-baby-mid-medium.png` → `myweek-baby-mid-medium.png`
+   - `/mnt/documents/phase-13-7b-pilot/pilot-myweek-baby-mid-deep.png` → `myweek-baby-mid-deep.png`
 
-   - `pilot-myweek-baby-mid-light.png` — prompt:
-     > Generate a lighter skin tone style version of the existing control image. Keep the original pink/coral amniotic sac and cream paper background unchanged. Keep the same pose, framing, lighting, composition and watercolour finish. Only adjust the baby skin tone to a soft warm ivory to light peach palette. Symbolic and gentle, not medical.
+   Do not pull from `/mnt/documents/phase-13-7b-pilot/archive/` (v1 files stay archived for reference only).
 
-   - `pilot-myweek-baby-mid-medium.png` — prompt:
-     > Generate a medium skin tone style version of the existing control image. Keep the original pink/coral amniotic sac and cream paper background unchanged. Keep the same pose, framing, lighting, composition and watercolour finish. Only adjust the baby skin tone to a warm honey to soft caramel palette. Symbolic and gentle, not medical.
+3. **Generate 6 new images** via `imagegen--edit_image`, using the matching default trimester control as the edit input. Full prompts (no ellipses):
 
-   Shared negative prompt appended to both:
-   > No text, no labels, no watermark, no logo, no clothing, no jewellery, no flags, no cultural markers, no hairstyles, no exaggerated features, no photorealism, no medical illustration, no anatomical labels, no background wash changes, no sac colour changes.
+   - **Early Lighter** → `myweek-baby-early-light.png`
+     > Generate a lighter skin tone style version of the existing early control image. Keep the original sac colour and cream paper background unchanged. Keep the same pose, framing, lighting, composition and watercolour finish. Only adjust the baby skin tone to a soft warm ivory to light peach palette. Symbolic and gentle, not medical.
+   - **Early Medium** → `myweek-baby-early-medium.png`
+     > Generate a medium skin tone style version of the existing early control image. Keep the original sac colour and cream paper background unchanged. Keep the same pose, framing, lighting, composition and watercolour finish. Only adjust the baby skin tone to a warm honey to soft caramel palette. Symbolic and gentle, not medical.
+   - **Early Deeper** → `myweek-baby-early-deep.png`
+     > Generate a deeper skin tone style version of the existing early control image. Keep the original sac colour and cream paper background unchanged. Keep the same pose, framing, lighting, composition and watercolour finish. Only adjust the baby skin tone to a warm deep cocoa to soft umber palette. Symbolic and gentle, not medical.
+   - **Late Lighter** → `myweek-baby-late-light.png`
+     > Generate a lighter skin tone style version of the existing late control image. Keep the original sac colour and cream paper background unchanged. Keep the same pose, framing, lighting, composition and watercolour finish. Only adjust the baby skin tone to a soft warm ivory to light peach palette. Symbolic and gentle, not medical.
+   - **Late Medium** → `myweek-baby-late-medium.png`
+     > Generate a medium skin tone style version of the existing late control image. Keep the original sac colour and cream paper background unchanged. Keep the same pose, framing, lighting, composition and watercolour finish. Only adjust the baby skin tone to a warm honey to soft caramel palette. Symbolic and gentle, not medical.
+   - **Late Deeper** → `myweek-baby-late-deep.png`
+     > Generate a deeper skin tone style version of the existing late control image. Keep the original sac colour and cream paper background unchanged. Keep the same pose, framing, lighting, composition and watercolour finish. Only adjust the baby skin tone to a warm deep cocoa to soft umber palette. Symbolic and gentle, not medical.
 
-3. **Not rerun**: default control, deep pilot, varied preview.
+   Shared negative prompt appended to every generation:
+   > No text, no labels, no watermark, no logo, no clothing, no jewellery, no flags, no cultural markers, no culturally specific hairstyles, no exaggerated features, no photorealism, no medical illustration, no anatomical labels, no background wash changes, no sac colour changes.
 
-4. **Rebuild review sheets** from control + revised lighter + revised medium + existing deep, labels ("Default", "Lighter", "Medium", "Deeper") placed outside panels, no text baked into images:
-   - `/mnt/documents/phase-13-7b-pilot/review-sheet-small.png` (~120px panels)
-   - `/mnt/documents/phase-13-7b-pilot/review-sheet-large.png` (~480px panels)
+4. **Build 7 review sheets** (labels outside panels; nothing baked in). Each row: Default | Lighter | Medium | Deeper.
+   - `review-sheet-early-small.png` (~120px panels)
+   - `review-sheet-early-large.png` (~480px panels)
+   - `review-sheet-mid-small.png`
+   - `review-sheet-mid-large.png`
+   - `review-sheet-late-small.png`
+   - `review-sheet-late-large.png`
+   - `review-sheet-all-large.png` (3 rows × 4 columns: Early / Mid / Late)
 
-5. **Update** `/mnt/documents/phase-13-7b-pilot/generation-notes.md` with:
-   - control SHA-256 before and after (must be identical)
-   - old lighter/medium SHA-256 (from archive)
-   - new lighter/medium SHA-256
-   - deep SHA-256 with note that it was not regenerated
-   - prompts used and output filenames
-   - drift observations (worded as "visually consistent with the control" rather than "exact match" unless comparison supports it)
-   - hygiene confirmations: no source files changed, nothing added to `src/assets/`, no migrations/AI/analytics/routes/UI wiring changed
+5. **Write** `/mnt/documents/phase-13-7c-full-illustration-set/generation-notes.md` with:
+   - control filenames + dimensions
+   - control SHA-256 before and after (must match)
+   - confirmation Lighter v2, Medium v2, and existing Deep pilot were used for mid (source SHA-256s; v1 archive not used)
+   - full prompts used for the 6 new early/late generations
+   - output filenames
+   - confirmations: exactly 6 new images generated; full set contains 9 production-candidate images; no varied image; no text/labels/watermark/logo in outputs
+   - hygiene: nothing added to `src/assets/`, no source files edited, no migrations / AI / analytics / route / UI wiring changes
+   - drift observations per trimester set, worded as "visually consistent with the control" unless comparison supports stronger claims
 
 ### Deliverables returned
-- Revised lighter image path
-- Revised medium image path
-- Unchanged deep image path
-- Updated small and large review sheet paths
-- Updated generation notes path
+- Paths to all 9 production-candidate images
+- Paths to all 7 review sheets
+- Path to `generation-notes.md`
 - Hygiene confirmation
-- Any visual issues flagged for Jenny to review
+- Visual drift or defects flagged for Jenny
 
 ### Sign-off gate
-Stop after this rerun. No data model, Account Settings UI, resolver, or `/my-week` wiring until the revised Lighter and Medium pass side-by-side review with Jenny.
+Stop after this review-only set. No data model, Account Settings UI, resolver, hooks, `/my-week` wiring, migrations, or product integration until the full 9-image set passes visual review with Jenny.

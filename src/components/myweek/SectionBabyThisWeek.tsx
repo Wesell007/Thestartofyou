@@ -1,4 +1,8 @@
-import MyWeekBabyImage from "./MyWeekBabyImage";
+import { useBabyIllustrationStyle } from "@/hooks/useBabyIllustrationStyle";
+import {
+  babyIllustrationAlt,
+  resolveBabyIllustrationForWeek,
+} from "@/lib/myWeekBabyIllustrations";
 
 interface Props {
   week: number;
@@ -81,6 +85,8 @@ const SectionBabyThisWeek = ({
   whatThisMeans,
   sizeComparisonSlug,
 }: Props) => {
+  const { style } = useBabyIllustrationStyle();
+  const resolved = resolveBabyIllustrationForWeek(style, week);
   return (
     <section className="relative pt-4 pb-12 sm:pb-14">
       <div className="flex items-center gap-3 mb-5">
@@ -126,11 +132,15 @@ const SectionBabyThisWeek = ({
               className="absolute inset-[5%] rounded-full border"
               style={{ borderColor: "hsl(var(--card) / 0.55)" }}
             />
-            <MyWeekBabyImage
-              week={week}
-              className="relative z-10 h-full w-full"
-              imgClassName="h-full w-full object-contain select-none"
-            />
+            <div className="relative z-10 h-full w-full" data-baby-week={week}>
+              <img
+                src={resolved.src}
+                alt={babyIllustrationAlt(resolved.style)}
+                loading="eager"
+                decoding="async"
+                className="h-full w-full object-contain select-none"
+              />
+            </div>
           </div>
         </div>
 

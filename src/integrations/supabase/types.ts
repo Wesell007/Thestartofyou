@@ -705,6 +705,48 @@ export type Database = {
           },
         ]
       }
+      week_media_memories: {
+        Row: {
+          caption: string | null
+          created_at: string
+          duration_seconds: number | null
+          file_size_bytes: number
+          id: string
+          media_type: string
+          mime_type: string
+          storage_path: string
+          updated_at: string
+          user_id: string
+          week: number
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          duration_seconds?: number | null
+          file_size_bytes: number
+          id?: string
+          media_type: string
+          mime_type: string
+          storage_path: string
+          updated_at?: string
+          user_id: string
+          week: number
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          duration_seconds?: number | null
+          file_size_bytes?: number
+          id?: string
+          media_type?: string
+          mime_type?: string
+          storage_path?: string
+          updated_at?: string
+          user_id?: string
+          week?: number
+        }
+        Relationships: []
+      }
       week_photos: {
         Row: {
           caption: string | null

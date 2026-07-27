@@ -116,7 +116,7 @@ const BabyIllustrationStyleField = ({ userId }: Props) => {
         A gentle visual preference for the baby illustrations shown on your weekly page.
       </p>
       <p className="text-xs text-muted-foreground mb-4 rounded-lg border border-border/40 bg-parchment/60 px-3 py-2">
-        We are upgrading My Week to a neutral week-by-week illustration set first. Your saved illustration preference is kept for the personalised version coming next.
+        Your illustration style now applies to My Week from around Week 9 onward. Earlier weeks stay neutral because early development illustrations do not show visible baby skin tone.
       </p>
 
       {loadError && (

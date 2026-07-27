@@ -9,6 +9,7 @@ import { deletePregnancyJourney } from "@/lib/savedJourney";
 import { deleteTTCJourney } from "@/lib/savedTTCJourney";
 import { toast } from "@/hooks/use-toast";
 import JourneyStatusSection from "@/components/journey-status/JourneyStatusSection";
+import BabyIllustrationStyleField from "@/components/settings/BabyIllustrationStyleField";
 import {
   SUGGESTED_NAMES,
   TONE_OPTIONS,
@@ -297,6 +298,8 @@ const AccountSettings = () => {
               </button>
             </div>
           </section>
+
+          {userId && <BabyIllustrationStyleField userId={userId} />}
 
           <section className="rounded-2xl border border-border/50 bg-card p-6">
             <h2 className="font-serif text-xl mb-2">Download your data</h2>

@@ -97,6 +97,15 @@ const BabyIllustrationStyleField = ({ userId }: Props) => {
     buttonsRef.current[next]?.focus();
   };
 
+  const previewByStyle = useMemo(() => {
+    const map = {} as Record<BabyIllustrationStyle, string>;
+    for (const s of STYLES) {
+      map[s] = resolveRealismForWeek(PREVIEW_WEEK, s).src;
+    }
+    return map;
+  }, []);
+  const previewAlt = defaultRealismAltForWeek(PREVIEW_WEEK);
+
   return (
     <section className="rounded-2xl border border-border/50 bg-card p-6">
       <h2 className="font-serif text-xl mb-2">Illustration style</h2>

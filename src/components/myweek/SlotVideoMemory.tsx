@@ -156,7 +156,7 @@ const SlotVideoMemory = ({ userId, week }: Props) => {
             }}
           >
             <Video size={12} strokeWidth={1.8} />
-            {uploading ? "Saving" : "Add video"}
+            {uploading ? "Saving video..." : "Add video"}
           </button>
         </div>
       )}

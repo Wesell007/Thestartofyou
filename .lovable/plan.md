@@ -1,47 +1,81 @@
-# Phase 13.4a — Weekly Article Suggestions Build
 
-## Files to create
+## Phase 13.4b — Weekly Reads Image Polish
 
-### `src/data/weeklyArticleSuggestions.ts`
-Exports `WeeklySuggestion` type, `EXCLUDED_FROM_WEEKLY` (23 slugs incl. `symptoms-stopping-early-pregnancy` and `anti-d-injection-in-pregnancy`, all loss/anxiety/emotional-support pieces, and condition-specific pieces), and `getWeeklySuggestions(week)`.
+Add a small top image to each `/my-week` weekly reads card, sourced from the article's existing hero image so the card matches what the user sees on the article page. No new images, no mapping changes, no AI/analytics/SEO changes.
 
-Approved mapping (max 2 per week, unmapped weeks return `[]`):
-- 5–7 → nausea-in-early-pregnancy, fatigue-in-early-pregnancy
-- 8–9 → nausea-in-early-pregnancy, the-first-trimester-emotionally
-- 10 → nipt-in-pregnancy
-- 11 → combined-screening-test
-- 12 → dating-scan
-- 13 → the-first-trimester-emotionally
-- 14–15 → sleep-in-pregnancy
-- 16–17 → round-ligament-pain
-- 18–21 → 20-week-anomaly-scan, baby-movement-in-pregnancy
-- 22–23 → back-pain-in-pregnancy
-- 24–25 → baby-movement-in-pregnancy, glucose-tolerance-test
-- 26–27 → heartburn-in-pregnancy
-- 28–29 → shortness-of-breath-in-pregnancy
-- 30–31 → hospital-bag-and-what-to-pack, writing-a-birth-plan
-- 32–33 → preparing-emotionally-for-birth, swelling-in-pregnancy
-- 34 → writing-a-birth-plan, sleep-in-pregnancy
-- 35–36 → the-36-week-appointment, hospital-bag-and-what-to-pack
-- 37 → signs-of-labour, hand-expressing-colostrum
-- 38–39 → signs-of-labour, when-to-go-in-for-labour
-- 40 → membrane-sweep, what-happens-if-labour-doesnt-start
-- 41–42 → induction-of-labour, what-happens-if-labour-doesnt-start
+### 1. Extract shared hero resolver
 
-Runtime filter: drop excluded slugs, drop slugs missing from `getArticle()`, cap at 2. All 25 mapped slugs pre-verified present.
+**New file:** `src/lib/articleHeroImage.ts`
 
-### `src/components/myweek/SectionWeeklyReads.tsx`
-Presentation only. Returns `null` when empty. Eyebrow `A LITTLE MORE FOR THIS WEEK`, serif H2, sub `Optional reading, if it feels useful.`, 1 or 2 keepsake cards (title via `getArticle`, one-line reason, `Read` CTA without arrow). Links `/articles/:slug`. No imagery/tags/carousel/reading time/AI/analytics.
+Move the following out of `src/components/article/ArticleHeroImage.tsx`:
+- All hero asset imports
+- `heroImageMap` (slug → asset)
+- `topicFallbackMap` (topic → asset)
+- `resolveArticleHero(data: ArticleData)` (same 4-step priority: per-article hero → slug map → topic fallback → final `pregnancyJourney` fallback)
 
-## File to edit
+Add:
+- `resolveArticleHeroBySlug(slug: string): { src: string; alt: string } | null`
+  - Looks up the article via `getArticle(slug)`; returns `null` if missing, otherwise delegates to `resolveArticleHero`.
 
-### `src/pages/MyWeek.tsx`
-Import `SectionWeeklyReads`. Mount between `SectionToolsThisWeek` and `SlotReflection`, inside the existing `status === "active"` render path only.
+### 2. Refactor `ArticleHeroImage`
 
-## Verification
-- `bunx tsgo --noEmit` passes.
-- Active only; hidden for given_birth/pregnancy_loss/paused/no_longer_pregnant via existing early-return branch.
-- Week 4 hidden. Max 2 cards. Internal links only. No AI/analytics imports. No forbidden phrases. No em/en dashes.
+**Edit:** `src/components/article/ArticleHeroImage.tsx`
 
-## Out of scope
-Journey Support, loss surfaces, journey status controls, AI, analytics, article data, public article pages, sitemap, robots, routes, migrations, TTC, IVF, First Year, Toddler, Family, Companion, Birth Plan, Hospital Bag, photos, captions, reflections.
+Replace the inline map and `resolveHero` with an import from `@/lib/articleHeroImage`. Rendering, alt text, credit handling, and vignette overlay unchanged.
+
+### 3. Add image slot to weekly cards
+
+**Edit:** `src/components/myweek/SectionWeeklyReads.tsx`
+
+- For each card, call `resolveArticleHeroBySlug(card.slug)`.
+- Restructure the card so the image sits flush to the top:
+
+```text
+<article rounded-[20px] keepsake-surface overflow-hidden>
+  {hero && (
+    <img
+      src={hero.src}
+      alt=""                        // decorative; title conveys meaning
+      loading="lazy"
+      className="w-full aspect-[16/9] max-h-[140px] object-cover"
+    />
+  )}
+  <div className="px-5 py-6 flex flex-col flex-1">
+    <h3>…title…</h3>
+    <p>…reason…</p>
+    <span>Read</span>
+  </div>
+</article>
+```
+
+- Keep existing border colour, hover shadow, grid (single column on mobile, 2 columns from `sm`), eyebrow, H2, sub-line, and Read CTA.
+- If `hero` is `null`, render the card body with no image and no placeholder — layout stays intact.
+
+### 4. Guardrails (not doing)
+
+- No changes to `weeklyArticleSuggestions.ts`.
+- No changes to `articleData.ts` or article routes.
+- No new image assets, no Nano Banana generation.
+- No SEO / sitemap / robots / AI / analytics changes.
+- No touching Journey Support or pregnancy-loss surfaces.
+- Section still gated to `active` pregnancy journey by its existing mount in `MyWeek.tsx`.
+
+### 5. Image coverage note
+
+Every mapped slug resolves to either a direct article hero (15 slugs) or an existing topical fallback (10 slugs like `nipt-in-pregnancy`, `dating-scan`, `induction-of-labour` → topic hub hero). No missing-image list to report; no generated assets needed.
+
+### 6. Verification
+
+- `bunx tsgo --noEmit`
+- Visual pass on `/my-week` (mobile + desktop): weekly cards show topical images, no broken icons, single-card and two-card grids both look clean.
+- Spot-check any article page (e.g. `/articles/nausea-in-early-pregnancy`) to confirm hero rendering is unchanged after the refactor.
+
+### Return summary will include
+
+- Files edited / created
+- Image source used (shared `resolveArticleHeroBySlug`)
+- Fallback behaviour (topic hero → final pregnancy fallback → null render if article missing)
+- Missing image slugs: none (all covered by existing map + topic fallbacks)
+- Mobile + desktop visual result
+- `bunx tsgo --noEmit` result
+- Any defects

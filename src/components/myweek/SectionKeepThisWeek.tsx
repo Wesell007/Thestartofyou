@@ -27,13 +27,6 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle }: Props) => (
         Keep this week
       </p>
     </div>
-    <h2 className="font-serif text-[1.55rem] sm:text-[1.75rem] text-foreground leading-[1.15] mb-2 max-w-[26ch]">
-      A little to hold onto.
-    </h2>
-    <p className="font-sans text-[13.5px] font-normal text-foreground/70 mb-4 max-w-[46ch] leading-[1.6]">
-      A photo, and if you want, a short video. Both stay private to you.
-    </p>
-
     <SlotPhotoMemory userId={userId} week={week} chapterTitle={chapterTitle} />
     <SlotVideoMemory userId={userId} week={week} />
   </section>

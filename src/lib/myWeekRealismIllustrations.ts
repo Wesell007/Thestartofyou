@@ -1,20 +1,42 @@
 /**
  * Phase 14.3 foundation: resolver for the neutral / default 42-week symbolic
- * pregnancy realism illustrations. Not wired into any page yet — Phase 14.4
- * will decide integration into /my-week.
+ * pregnancy realism illustrations. Phase 14.9 extends this with tone-aware
+ * resolution for Light, Medium, and Deep variants (Weeks 9–42 only). Weeks
+ * 1–8 always return the default (neutral) illustration regardless of tone.
+ * Not wired into any page yet — future phases will decide integration.
  */
 
 type AssetPointer = { url?: unknown };
 
-const pointerModules = import.meta.glob<AssetPointer>(
+const defaultPointerModules = import.meta.glob<AssetPointer>(
   "../assets/myweek-weekly-realism/*.png.asset.json",
+  { eager: true, import: "default" },
+);
+
+const lightPointerModules = import.meta.glob<AssetPointer>(
+  "../assets/myweek-weekly-realism-light/*.png.asset.json",
+  { eager: true, import: "default" },
+);
+
+const mediumPointerModules = import.meta.glob<AssetPointer>(
+  "../assets/myweek-weekly-realism-medium/*.png.asset.json",
+  { eager: true, import: "default" },
+);
+
+const deepPointerModules = import.meta.glob<AssetPointer>(
+  "../assets/myweek-weekly-realism-deep/*.png.asset.json",
   { eager: true, import: "default" },
 );
 
 const MIN_WEEK = 1;
 const MAX_WEEK = 42;
+const TONE_MIN_WEEK = 9;
 
-const weekToUrl: Map<number, string> = (() => {
+export type RealismTone = "default" | "light" | "medium" | "deep";
+
+const buildWeekMap = (
+  pointerModules: Record<string, AssetPointer>,
+): Map<number, string> => {
   const map = new Map<number, string>();
   for (const [path, pointer] of Object.entries(pointerModules)) {
     const match = path.match(/week-(\d{2})\.png\.asset\.json$/);
@@ -27,7 +49,12 @@ const weekToUrl: Map<number, string> = (() => {
     }
   }
   return map;
-})();
+};
+
+const weekToUrl = buildWeekMap(defaultPointerModules);
+const lightWeekToUrl = buildWeekMap(lightPointerModules);
+const mediumWeekToUrl = buildWeekMap(mediumPointerModules);
+const deepWeekToUrl = buildWeekMap(deepPointerModules);
 
 const clampWeek = (week: number): number => {
   if (!Number.isFinite(week)) return MIN_WEEK;
@@ -70,9 +97,54 @@ export function resolveDefaultRealismForWeek(
   return { src, week: resolvedWeek };
 }
 
+const toneMapFor = (tone: RealismTone): Map<number, string> | null => {
+  switch (tone) {
+    case "light":
+      return lightWeekToUrl;
+    case "medium":
+      return mediumWeekToUrl;
+    case "deep":
+      return deepWeekToUrl;
+    default:
+      return null;
+  }
+};
+
+/**
+ * Phase 14.9: Resolve a symbolic realism illustration for a given week and
+ * skin-tone preference. Weeks 1–8 always return the default (no visible baby
+ * form). Missing tone assets silently fall back to the default resolver so
+ * this function never throws and never returns an empty src.
+ */
+export function resolveRealismForWeek(
+  week: number,
+  tone: RealismTone,
+): DefaultRealismResolution {
+  const defaultResolution = resolveDefaultRealismForWeek(week);
+  if (tone === "default") return defaultResolution;
+  if (defaultResolution.week < TONE_MIN_WEEK) return defaultResolution;
+  const toneMap = toneMapFor(tone);
+  const toneUrl = toneMap?.get(defaultResolution.week);
+  if (typeof toneUrl === "string" && toneUrl.length > 0) {
+    return { src: toneUrl, week: defaultResolution.week };
+  }
+  return defaultResolution;
+}
+
+/**
+ * Normalise arbitrary input into a supported RealismTone. Unknown, null, or
+ * undefined values fall back to "default" so future wiring stays safe.
+ */
+export function normaliseRealismTone(value: unknown): RealismTone {
+  if (value === "light" || value === "medium" || value === "deep") {
+    return value;
+  }
+  return "default";
+}
+
 /**
  * Cautious alt copy. Deliberately avoids claiming exact appearance, medical
- * accuracy, or what a baby looks like at a given week.
+ * accuracy, or what a baby looks like at a given week. Tone-agnostic by design.
  */
 export function defaultRealismAltForWeek(week: number): string {
   const w = clampWeek(week);

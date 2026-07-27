@@ -133,7 +133,7 @@ const SectionBabyThisWeek = ({
             <div className="relative z-10 h-full w-full" data-baby-week={week}>
               <img
                 src={resolved.src}
-                alt={babyIllustrationAlt(resolved.style)}
+                alt={defaultRealismAltForWeek(week)}
                 loading="eager"
                 decoding="async"
                 className="h-full w-full object-contain select-none"

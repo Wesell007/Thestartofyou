@@ -1,80 +1,49 @@
-## Phase 13.6c: Video Memory QA and UX Polish
+# Phase 13.6c Final Visual Spot-Check Plan
 
-Focused polish for the video memory feature shipped in 13.6b. No new features, no voice notes, no MediaRecorder, no AI, no analytics, no DB or storage changes.
+Read-only QA. No code changes unless a real visual defect is found.
 
-## Files to edit
+## Approach
 
-- `src/components/myweek/SectionKeepThisWeek.tsx` — subtle divider between photo and video slots.
-- `src/components/myweek/SlotVideoMemory.tsx` — "Saving video..." copy, optional duration badge, tighten small-screen spacing, verify error dismissal, keep caption editor aligned with the photo editor.
-- `src/lib/weekMedia.ts` — add pure `formatDuration` helper only.
+1. Launch Playwright headless Chromium with injected Supabase session.
+2. Restore auth (cookies + localStorage) and navigate to `/my-week` on an active pregnancy journey.
+3. Upload a short test video (generated on-the-fly with ffmpeg, <5s, <5MB, H.264/MP4) so the loaded state renders with a real duration badge.
+4. Capture screenshots at two viewports:
+   - 375 x 1800 (mobile)
+   - 1280 x 1800 (desktop)
+5. For each viewport, capture:
+   - Full page shot of `/my-week`
+   - Element shot of the video slot (empty + loaded)
+   - Element shot of the divider between photo and video
+6. View each screenshot with `code--view` and verify visually.
 
-No changes to: `useWeekMedia.ts`, `SlotPhotoMemory.tsx`, `weekCaption.ts`, `MyWeek.tsx`, migrations, storage, routes, sitemap, robots.
+## Verification checklist
 
-## Changes
+- Photo slot unchanged, appears first
+- Video slot appears below photo slot
+- Subtle hairline divider between them
+- No "KEEP THIS WEEK" wrapper label visible
+- Loaded video renders duration badge (bottom-left) when duration exists
+- Duration badge does not overlap native video controls
+- Private chip does not collide with Replace / Remove controls
+- At 375px: "Replace video" is icon-only, `aria-label="Replace video"` present in DOM
+- At 1280px: "Replace video" text is visible
+- Focus states remain visible on keyboard focus (tab through controls, screenshot)
+- Overall composition still feels premium and calm
 
-### 1. Divider — `SectionKeepThisWeek.tsx`
+## Guardrail greps (read-only)
 
-Insert between the two slots. No wrapper heading, no "KEEP THIS WEEK", no subline.
+- Confirm no new imports of analytics, AI, MediaRecorder, or storage helpers were introduced beyond what already existed after 13.6c.
+- Confirm no migration files, sitemap, or route files were modified.
 
-```tsx
-<div
-  aria-hidden="true"
-  className="mx-auto my-8 h-px w-16"
-  style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.22)" }}
-/>
-```
+## Deliverable
 
-### 2. Uploading copy — `SlotVideoMemory.tsx`
+Summary in the requested shape:
+- 375px result
+- 1280px result
+- Duration badge result
+- Mobile controls result
+- Photo slot confirmation
+- Video slot confirmation
+- Defects (if any) — with screenshot paths
 
-Change empty-state Add and loaded-state Replace from "Saving" → "Saving video..." (three ASCII dots) while `uploading`.
-
-### 3. Duration badge — `SlotVideoMemory.tsx` + helper in `weekMedia.ts`
-
-Add pure helper:
-
-```ts
-export const formatDuration = (seconds: number | null): string | null => {
-  if (typeof seconds !== "number" || !Number.isFinite(seconds) || seconds <= 0) return null;
-  const m = Math.floor(seconds / 60);
-  const s = Math.floor(seconds % 60);
-  return `${m}:${s.toString().padStart(2, "0")}`;
-};
-```
-
-Render a small quiet badge (bottom-left overlay on the loaded video) only when the formatted value is non-null. Display only; no validation, DB, or storage change.
-
-### 4. Small-screen spacing — `SlotVideoMemory.tsx`
-
-- Tighten overlay padding at `<sm`.
-- Hide the "Replace video" text label at `<sm` (icon-only, `aria-label="Replace video"` preserved). Text label restored at `sm:` and up.
-- Ensure Private badge and control cluster don't collide at 375px.
-- No desktop layout regression.
-
-### 5. Error dismissal — `SlotVideoMemory.tsx`
-
-Confirm both Add and Replace buttons route through `openFilePicker`, which already calls `clearError()`. No code change unless verification finds a gap.
-
-### 6. Caption editor consistency — `SlotVideoMemory.tsx`
-
-Keep disabled/loading styling aligned with `SlotPhotoMemory.tsx`. No changes to caption rules in `weekCaption.ts`.
-
-## Verification
-
-1. `bunx tsgo --noEmit`
-2. Guard greps in `src/`: no new `MediaRecorder`, analytics, or AI imports; no route/sitemap/migration edits.
-3. Temporary Playwright smoke test under `/tmp/browser/` (no fixtures in the repo):
-   - Active `/my-week` renders both slots with divider.
-   - Unsupported MIME rejected.
-   - Small `video/webm` uploads → loaded state; duration badge visible when duration ≥ 1s.
-   - Caption add/save round-trips.
-   - Replace video works.
-   - Remove video returns to empty card.
-   - Non-active status hides `SectionKeepThisWeek`.
-   - Photo memory + captions unchanged.
-4. Manual viewport check at 375px and 1280px for overlay spacing and focus states.
-
-## Deliverables
-
-- Three files touched.
-- QA summary with typecheck, smoke-test outcome, and photo-regression confirmation.
-- No fixtures, tests, or scripts committed to the repo.
+If any real visual defect is found, I will stop and propose a minimal follow-up fix rather than editing in QA mode.

@@ -474,6 +474,9 @@ export type Database = {
       }
       profiles: {
         Row: {
+          baby_illustration_style:
+            | Database["public"]["Enums"]["baby_illustration_style"]
+            | null
           companion_name: string | null
           companion_tone: string | null
           created_at: string
@@ -483,6 +486,9 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          baby_illustration_style?:
+            | Database["public"]["Enums"]["baby_illustration_style"]
+            | null
           companion_name?: string | null
           companion_tone?: string | null
           created_at?: string
@@ -492,6 +498,9 @@ export type Database = {
           user_id: string
         }
         Update: {
+          baby_illustration_style?:
+            | Database["public"]["Enums"]["baby_illustration_style"]
+            | null
           companion_name?: string | null
           companion_tone?: string | null
           created_at?: string
@@ -810,6 +819,7 @@ export type Database = {
       }
     }
     Enums: {
+      baby_illustration_style: "default" | "light" | "medium" | "deep"
       pregnancy_journey_status:
         | "active"
         | "given_birth"
@@ -943,6 +953,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      baby_illustration_style: ["default", "light", "medium", "deep"],
       pregnancy_journey_status: [
         "active",
         "given_birth",

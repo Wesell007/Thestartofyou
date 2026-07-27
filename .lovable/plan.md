@@ -1,37 +1,19 @@
-# Phase 13.7h.3 — Approved Cord-Anchor Asset Replacement
+# Phase 14.1c: Append Approval Notes and Close Phase 14.1
 
-Isolated asset replacement only. No code, resolver, routes, sitemap, analytics, AI, Account Settings, My Week, or `.asset.json` changes.
+Single review-only file append. No `src/` changes.
 
-## Files replaced (8 total, in `src/assets/myweek-baby-styles/`)
+## Action
 
-Copy the approved retouches from `/mnt/documents/phase-13-7h-2/` over the existing PNGs, preserving filenames:
+Append the approved Phase 14.1c section to `/mnt/documents/phase-14-1/notes.md`.
 
-**Early (from Phase 13.7h.2)**
-- `default-early.png` ← `early/default-early.retouch.png`
-- `light-early.png` ← `early/light-early.retouch.png`
-- `medium-early.png` ← `early/medium-early.retouch.png`
-- `deep-early.png` ← `early/deep-early.retouch.png`
+## Content appended
 
-**Mid (Default + Deep from 13.7h.2; Light + Medium from 13.7h.2b)**
-- `default-mid.png` ← `mid/default-mid.retouch.png`
-- `light-mid.png` ← `mid/light-mid.retouch.final-candidate.png`
-- `medium-mid.png` ← `mid/medium-mid.retouch.final-candidate.png`
-- `deep-mid.png` ← `mid/deep-mid.retouch.png`
+- Approved final pilot set list (W2 v1, W4 v1, W6 v1, W8 v3, W10 v2, W12 v1, W20 v3, W36 v2).
+- Week 8 v3 verdict: Pass. Accepted.
+- Week 20 v3 verdict: Pass. Accepted for pilot approval, with a Phase 14.2 note to keep W20 and neighbouring weeks slightly softer in face and hands so they do not drift toward a born-baby portrait.
+- Confirmations: no `src/assets` additions, no code changes, no migrations, no routes changed, no sitemap changed, no analytics changed, no AI prompts changed, no existing assets replaced, saved illustration preference preserved.
+- Phase status: Phase 14.1 approved and closed. Phase 14.2 (Full 42-week Neutral/Default Realism Generation) not started — awaiting Phase 14.2 plan approval.
 
-## Not touched
+## Not in scope
 
-- Late variants (`default-late.png`, `light-late.png`, `medium-late.png`, `deep-late.png`) — untouched.
-- `src/lib/myWeekBabyIllustrations.ts` — untouched.
-- No new `.asset.json` files created (PNGs are direct imports, not CDN assets).
-
-## Steps
-
-1. Record SHA-256 of all 12 existing files in `src/assets/myweek-baby-styles/` for verification.
-2. `cp` each of the 8 approved retouches over the target filenames.
-3. Re-hash all 12 files; confirm exactly the 8 Early+Mid hashes changed and all 4 Late hashes are identical to step 1.
-4. `git status` scoped to confirm only those 8 PNGs are modified and no other files changed.
-5. Run `bunx tsgo --noEmit`.
-
-## Return
-
-Replaced-files list, Late-untouched confirmation, no-code/`.asset.json`/routes/sitemap/analytics/AI changes confirmation, and typecheck result.
+No edits to `src/`, no assets added, no `.asset.json` created, no code, migrations, routes, sitemap, analytics or AI prompts changed, no existing assets replaced, no My Week wiring, no Phase 14.2 generation.

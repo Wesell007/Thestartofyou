@@ -6,6 +6,7 @@ import {
   CAPTION_PLACEHOLDER,
   VIDEO_ACCEPT_ATTR,
   VIDEO_ERROR_COPY,
+  formatDuration,
   isCaptionWithinLimit,
   normaliseCaption,
 } from "@/lib/weekMedia";
@@ -25,6 +26,7 @@ const SlotVideoMemory = ({ userId, week }: Props) => {
     error,
     signedUrl,
     mimeType,
+    durationSeconds,
     caption,
     upload,
     remove,
@@ -154,7 +156,7 @@ const SlotVideoMemory = ({ userId, week }: Props) => {
             }}
           >
             <Video size={12} strokeWidth={1.8} />
-            {uploading ? "Saving" : "Add video"}
+            {uploading ? "Saving video..." : "Add video"}
           </button>
         </div>
       )}
@@ -176,24 +178,36 @@ const SlotVideoMemory = ({ userId, week }: Props) => {
           >
             {mimeType ? <source src={signedUrl} type={mimeType} /> : null}
           </video>
-          <div className="absolute top-3 left-3 flex items-center gap-2 px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95">
+          <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95">
             <Lock size={10} strokeWidth={1.8} />
             <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
               Private
             </span>
           </div>
-          <div className="absolute top-3 right-3 flex items-center gap-2">
+          {formatDuration(durationSeconds) && (
+            <div className="absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 px-2 py-0.5 rounded-full bg-foreground/40 backdrop-blur-md text-background/95">
+              <span className="font-sans text-[10px] font-medium tracking-[0.08em] tabular-nums">
+                {formatDuration(durationSeconds)}
+              </span>
+            </div>
+          )}
+          <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 flex items-center gap-1.5 sm:gap-2">
             <button
               type="button"
               onClick={openFilePicker}
               disabled={uploading}
-              className="px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center gap-1.5 disabled:opacity-60"
+              className="px-2 sm:px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center gap-1.5 disabled:opacity-60"
               aria-label="Replace video"
             >
               <Video size={11} strokeWidth={1.8} />
-              <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
-                {uploading ? "Saving" : "Replace video"}
+              <span className="hidden sm:inline font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
+                {uploading ? "Saving video..." : "Replace video"}
               </span>
+              {uploading && (
+                <span className="sm:hidden font-sans text-[10px] font-medium tracking-[0.18em] uppercase">
+                  Saving video...
+                </span>
+              )}
             </button>
             <button
               type="button"

@@ -152,9 +152,9 @@ const BabyIllustrationStyleField = ({ userId }: Props) => {
               }`}
             >
               <img
-                src={resolveBabyIllustration(style, "mid")}
-                alt={babyIllustrationAlt(style)}
-                className="h-16 w-16 rounded-full object-cover"
+                src={previewByStyle[style]}
+                alt={previewAlt}
+                className="h-16 w-16 rounded-full object-contain bg-parchment/60"
                 loading="lazy"
               />
               <span className="text-xs font-medium leading-tight text-foreground">

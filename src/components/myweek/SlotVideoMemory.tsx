@@ -26,6 +26,7 @@ const SlotVideoMemory = ({ userId, week }: Props) => {
     error,
     signedUrl,
     mimeType,
+    durationSeconds,
     caption,
     upload,
     remove,

@@ -1,39 +1,31 @@
-# Phase 14.3: Default Realism Asset Import and Resolver Foundation
+## Phase 14.4 — My Week Default Realism Wiring
 
-Import the approved neutral/default 42-week realism set as CDN asset pointers and add an unused resolver module. Nothing user-visible changes.
+Wire the approved 42-week neutral realism set into the Baby This Week card only. Preserve the old 3-stage system and DB preference.
 
-## Source selection
+### Changes
 
-From `/mnt/documents/phase-14-2/images/`:
-- Use `week-XX.v2.png` for weeks 7, 9, 13, 16, 21, 26, 31, 32, 34.
-- Use canonical `week-XX.png` for the remaining 33 weeks.
-- Rename every staged file to `week-01.png` … `week-42.png`.
+**1. `src/components/myweek/SectionBabyThisWeek.tsx`**
+- Replace `useBabyIllustrationStyle` + `resolveBabyIllustrationForWeek` + `babyIllustrationAlt` with `resolveDefaultRealismForWeek(week)` and `defaultRealismAltForWeek(week)` from `@/lib/myWeekRealismIllustrations`.
+- Remove the hook import and the resolver import for the old 3-stage system.
+- Keep the entire visual shell unchanged: section spacing, glow, rounded frame, radial gradient wrapper, aspect box, blur/border decorative spans, `data-baby-week`, size cue area, figcaption, `developmentCue`, `babyNote`, `whatThisMeans`, mobile/desktop grid.
+- The `<img>` swaps its `src` to `resolved.src` and `alt` to `defaultRealismAltForWeek(week)`. Keep `loading="eager"`, `decoding="async"`, and existing classes.
 
-Confirmed via `ls`: all required files (canonical 42 + the 9 v2 variants) are present.
+**2. `src/components/settings/BabyIllustrationStyleField.tsx`**
+- Add a small helper note (new `<p>`) beneath the existing preface copy:
+  > "We are upgrading My Week to a neutral week-by-week illustration set first. Your saved illustration preference is kept for the personalised version coming next."
+- Do not remove the field, the radio group, save/reset buttons, or DB writes. The preference remains editable and persisted.
 
-## Steps
+### Preservation (unchanged)
+- `profiles.baby_illustration_style` column, enum, and RLS
+- `useBabyIllustrationStyle`, `src/lib/myWeekBabyIllustrations.ts`, `src/assets/myweek-baby-styles/`
+- `MyWeekBabyImage.tsx`, `WeekIllustration.tsx`, WeekHero, WeekTimeline, Kept Chapter, Journey preview imagery
+- Public/editorial week pages, `src/assets/myweek-weekly-babies/`
+- Routes, sitemap, analytics, AI prompts, migrations
 
-1. **Stage** the 42 files to `/tmp/wr/week-XX.png` using the selection rule above.
-2. **Upload** each staged file with `lovable-assets create --file /tmp/wr/week-XX.png --filename week-XX.png` and write the CLI stdout verbatim to `src/assets/myweek-weekly-realism/week-XX.png.asset.json`. No raw PNG binaries land in the repo.
-3. **Resolver** — create `src/lib/myWeekRealismIllustrations.ts`:
-   - Use `import.meta.glob("../assets/myweek-weekly-realism/*.png.asset.json", { eager: true })` and read the `url` field (matches the existing `.asset.json` shape verified against `src/assets/size-cues/pumpkin.png.asset.json`).
-   - `resolveDefaultRealismForWeek(week: number): { src: string; week: number }` — clamp to 1–42, round, zero-pad, return `{ src, week }`. Non-finite input clamps to week 1. Missing pointer falls back to the nearest available week's URL (never throws, never returns empty string).
-   - `defaultRealismAltForWeek(week: number): string`:
-     - weeks 1–2 → `"Symbolic pregnancy illustration for week {n}, before conception."`
-     - weeks 41–42 → `"Symbolic pregnancy illustration for week {n}, gentle transition toward birth."`
-     - otherwise → `"Symbolic pregnancy illustration for week {n}."`
-   - No imports of the module from any page/component this phase.
-4. **Typecheck** — run `npm run typecheck` (falling back to `bunx tsgo --noEmit` if that isn't wired) and report the exact command and result.
+### Validation
+- Run `npm run typecheck` (fall back to `bunx tsgo --noEmit`); report the exact command and result.
+- Playwright visit `/my-week` at an early, mid, and late week if a signed-in session is available; verify image loads from Lovable Assets URL and alt text matches `defaultRealismAltForWeek`. If session injection is not available, verify via component render/typecheck and confirm resolver returns a URL for each week.
+- Confirm Account Settings still loads and the new copy renders.
 
-## Verification checklist
-
-- 42 `.asset.json` files under `src/assets/myweek-weekly-realism/`, one per week.
-- Each parses as JSON and has a `/__l5e/assets-v1/...` `url`.
-- No PNG binaries added to `src/assets/myweek-weekly-realism/`.
-- No edits to: `SectionBabyThisWeek`, `useBabyIllustrationStyle`, `myWeekBabyIllustrations.ts`, `MyWeekBabyImage.tsx`, `WeekIllustration.tsx`, Account Settings, routes, sitemap, analytics, AI prompts, migrations.
-- No deletions of `src/assets/myweek-baby-styles/`, the 3-stage resolver, or `profiles.baby_illustration_style`.
-- No Light/Medium/Deep variants generated.
-
-## Stop point
-
-Stop after the 42 pointers, resolver module, and passing typecheck. Do not wire `/my-week`. Do not begin Phase 14.4.
+### Out of scope
+No personalised Light/Medium/Deep variants, no deletions, no Phase 14.5 work.

@@ -100,8 +100,11 @@ const BabyIllustrationStyleField = ({ userId }: Props) => {
       <p className="text-sm text-muted-foreground mb-1">
         Would you like your journey illustrations to feel more personalised?
       </p>
-      <p className="text-sm text-muted-foreground mb-4">
+      <p className="text-sm text-muted-foreground mb-3">
         A gentle visual preference for the baby illustrations shown on your weekly page.
+      </p>
+      <p className="text-xs text-muted-foreground mb-4 rounded-lg border border-border/40 bg-parchment/60 px-3 py-2">
+        We are upgrading My Week to a neutral week-by-week illustration set first. Your saved illustration preference is kept for the personalised version coming next.
       </p>
 
       {loadError && (

@@ -1,49 +1,59 @@
-## Phase 13.7c.2 — Early Womb/Sac Read Rerun
+# Phase 13.7c.3 — Early Default Alignment (review-only)
 
-Review-only rerun of the three Early skin-tone variants. Goal: strengthen the surrounding form so Early clearly reads as a stage-appropriate womb/sac enclosure — premium illustrated, symbolic, non-clinical — while remaining softer and more delicate than Mid and Late. Uploaded chat reference images are visual direction only, never used as final assets. Mid and Late are not regenerated (they will be re-reviewed under the same womb-read standard in a later pass).
+## Goal
+Produce a single review-only Early **Default** candidate that adopts the approved v3 Early womb/sac enclosure style, while keeping the default (non-tone-labelled) baby appearance. Rebuild affected review sheets and update notes. No code, no `src/assets`, no product wiring.
 
-### Steps
+## Labelling clarification
+- Review sheet column label: **"Default"** (unchanged).
+- Product/user-facing copy: **"Use the default illustrations"** (unchanged; not touched in this phase since no code is edited).
+- Default is not a skin tone category and is not renamed Lighter, Medium or Deeper anywhere.
 
-1. **Verify temp input** at `/mnt/documents/phase-13-7c-full-illustration-set/_tmp/early-control-cream-clean.png`. If missing, recreate from `src/assets/myweek-baby-early.png` by cleaning the checkerboard and compositing on a clean cream paper background at original canvas size. `src/assets/myweek-baby-early.png` is not modified.
+## Steps
 
-2. **Archive current Early files** into `/mnt/documents/phase-13-7c-full-illustration-set/archive/` with suffix `-v2-halo-weak`:
-   - `myweek-baby-early-light-v2-halo-weak.png`
-   - `myweek-baby-early-medium-v2-halo-weak.png`
-   - `myweek-baby-early-deep-v2-halo-weak.png`
+1. **Confirm inputs (read-only)**
+   - Verify `_tmp/early-control-cream-clean.png` still exists as the edit input.
+   - Confirm `src/assets/myweek-baby-early.png` SHA-256 unchanged (`4afec6c6…`).
 
-3. **Regenerate three Early variants** in parallel with `imagegen--edit_image`, using the temp cream-clean input, the user-supplied per-tone prompts, and the shared negative prompt. Overwrite:
-   - `/mnt/documents/phase-13-7c-full-illustration-set/myweek-baby-early-light.png`
-   - `/mnt/documents/phase-13-7c-full-illustration-set/myweek-baby-early-medium.png`
-   - `/mnt/documents/phase-13-7c-full-illustration-set/myweek-baby-early-deep.png`
+2. **Generate one candidate via `imagegen--edit_image`**
+   - Input: `/mnt/documents/phase-13-7c-full-illustration-set/_tmp/early-control-cream-clean.png`.
+   - Output: `/mnt/documents/phase-13-7c-full-illustration-set/myweek-baby-early-default.png`.
+   - Prompt: exactly as supplied — keep default baby skin tone and default illustration feel; strengthen surrounding form to match the approved Early Lighter/Medium/Deeper womb/sac enclosure; clean cream paper background; same pose/framing/lighting/composition/watercolour finish; soft curved boundary, gentle internal warmth; softer than Mid and Late; symbolic, not medical.
+   - Negative prompt: as supplied (no checkerboard/grid/text/labels/watermark/logo/clothing/jewellery/flags/cultural markers/photorealism/clinical diagram/harsh wash/loss of watercolour feel).
+   - Only this one image is generated. Early v3 Lighter/Medium/Deeper untouched. Mid and Late untouched.
 
-4. **Visual check** each new file against the review standard: reads clearly as a womb/sac environment; softer than Mid and Late; consistent visual family (pose, framing, composition, cream background, watercolour finish unchanged); realistic without becoming clinical; premium; no checkerboard, labels, or cultural markers; only skin tone + sac form adjusted.
+3. **Visual check**
+   - Compare candidate against the three approved v3 variants.
+   - Confirm: clear curved sac boundary, gentle internal warmth, cream background preserved, watercolour finish intact, softer than Mid/Late, no baked labels/text/checkerboard, no clothing/jewellery/cultural markers.
+   - One regeneration allowed only on hard failure (checkerboard reintroduced, labels baked, harsh clinical read). Otherwise proceed.
 
-5. **Rebuild three review sheets only** (labels outside panels; Early Default column uses the cream-clean control):
-   - `review-sheet-early-small.png`
-   - `review-sheet-early-large.png`
-   - `review-sheet-all-large.png` — Early row rebuilt; Mid and Late rows copied unchanged.
+4. **Rebuild review sheets** (labels outside panels only; nothing baked into images)
+   - `review-sheet-early-small.png` — Early row: **Default (new candidate)**, Lighter v3, Medium v3, Deeper v3.
+   - `review-sheet-early-large.png` — same row, larger cell size.
+   - `review-sheet-all-large.png` — Early row uses new Default candidate; Mid and Late rows copied unchanged (Mid v2, Late v1).
+   - Reuse the existing Python sheet builder (cream canvas, column labels above panels).
 
-6. **Update `generation-notes.md`** with:
-   - Rerun reason (womb/sac enclosure needed strengthening; halo previously read too soft).
-   - Note that uploaded chat images were visual direction only, not final assets.
-   - Confirmation Early stays softer than Mid and Late.
-   - Note Mid and Late will be re-reviewed under this standard later; not regenerated here.
-   - Archived v2 paths.
-   - Confirmation `src/assets/myweek-baby-early.png` not modified.
-   - Confirmation temp cream-clean input is review-only.
-   - New SHA-256 for each revised Early variant.
-   - Confirmation Mid and Late not regenerated.
-   - Hygiene confirmation: no code, no migrations, no `src/assets` additions, no route/UI/analytics/AI/product wiring changes.
-   - Any residual visual drift for Jenny.
+5. **Update `generation-notes.md`** (append Phase 13.7c.3 section)
+   - Jenny approved the Phase 13.7c.2 Early v3 womb/sac direction.
+   - Reason: Early Default needed to match the approved Early variants' womb/sac read.
+   - Labelling note: review sheet keeps "Default"; product copy remains "Use the default illustrations".
+   - Confirm `src/assets/myweek-baby-early.png` not modified (SHA-256 unchanged).
+   - Confirm Early v3 Lighter/Medium/Deeper **not** regenerated (SHAs unchanged from Phase 13.7c.2 section).
+   - Confirm Mid and Late **not** regenerated.
+   - Record new SHA-256 for `myweek-baby-early-default.png`.
+   - Hygiene confirmation: no code, no migrations, no `src/assets`, no UI, no routes, no analytics, no AI, no product wiring; all output under `/mnt/documents/phase-13-7c-full-illustration-set/`.
+   - Note any residual drift (sac ring weight vs v3 variants, warmth balance, pose fidelity).
 
-### Hygiene
+## Deliverables (stop after these)
+- `phase-13-7c-full-illustration-set/myweek-baby-early-default.png`
+- `phase-13-7c-full-illustration-set/review-sheet-early-small.png`
+- `phase-13-7c-full-illustration-set/review-sheet-early-large.png`
+- `phase-13-7c-full-illustration-set/review-sheet-all-large.png`
+- `phase-13-7c-full-illustration-set/generation-notes.md` (Phase 13.7c.3 section appended)
+- Hygiene confirmation + residual drift notes in the reply
 
-No code edits, no migrations, no `src/assets` additions, no route/UI/analytics/AI/product wiring changes. All output stays under `/mnt/documents/phase-13-7c-full-illustration-set/`.
-
-### Stop point
-
-Stop after the Early rerun and return updated review materials. Do not proceed to build or integration.
-
-### Return
-
-Paths for the three revised Early files, the three rebuilt review sheets, the archived v2 paths, the updated `generation-notes.md`, hygiene confirmation, and any residual visual drift for Jenny.
+## Explicit non-goals
+- No edits to `src/assets/*`.
+- No regeneration of Early v3 Lighter/Medium/Deeper.
+- No regeneration of Mid or Late.
+- No code, migration, route, UI, analytics, AI, or product-wiring changes.
+- No rename of Default anywhere.

@@ -1,0 +1,43 @@
+CREATE TABLE public.week_media_memories (
+  id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  week INTEGER NOT NULL CHECK (week BETWEEN 1 AND 42),
+  media_type TEXT NOT NULL CHECK (media_type IN ('video', 'voice_note')),
+  storage_path TEXT NOT NULL,
+  mime_type TEXT NOT NULL,
+  file_size_bytes BIGINT NOT NULL CHECK (file_size_bytes > 0),
+  duration_seconds INTEGER CHECK (duration_seconds IS NULL OR duration_seconds > 0),
+  caption TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE (user_id, week, media_type)
+);
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.week_media_memories TO authenticated;
+GRANT ALL ON public.week_media_memories TO service_role;
+
+ALTER TABLE public.week_media_memories ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users view own week media"
+  ON public.week_media_memories FOR SELECT TO authenticated
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "Users insert own week media"
+  ON public.week_media_memories FOR INSERT TO authenticated
+  WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users update own week media"
+  ON public.week_media_memories FOR UPDATE TO authenticated
+  USING (auth.uid() = user_id)
+  WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users delete own week media"
+  ON public.week_media_memories FOR DELETE TO authenticated
+  USING (auth.uid() = user_id);
+
+CREATE TRIGGER week_media_memories_set_updated_at
+  BEFORE UPDATE ON public.week_media_memories
+  FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
+
+CREATE INDEX idx_week_media_memories_user_week
+  ON public.week_media_memories (user_id, week);

@@ -1,81 +1,79 @@
 
-## Phase 13.4b — Weekly Reads Image Polish
+## Phase 13.6a — Weekly Media Memories Data Foundation (Approved, revised)
 
-Add a small top image to each `/my-week` weekly reads card, sourced from the article's existing hero image so the card matches what the user sees on the article page. No new images, no mapping changes, no AI/analytics/SEO changes.
+Backend/data only. Correction incorporated: `user_id` now has `ON DELETE CASCADE` against `auth.users` so rows cannot orphan.
 
-### 1. Extract shared hero resolver
+### 1. Migration: create `public.week_media_memories`
 
-**New file:** `src/lib/articleHeroImage.ts`
+```sql
+CREATE TABLE public.week_media_memories (
+  id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  week INTEGER NOT NULL CHECK (week BETWEEN 1 AND 42),
+  media_type TEXT NOT NULL CHECK (media_type IN ('video', 'voice_note')),
+  storage_path TEXT NOT NULL,
+  mime_type TEXT NOT NULL,
+  file_size_bytes BIGINT NOT NULL CHECK (file_size_bytes > 0),
+  duration_seconds INTEGER CHECK (duration_seconds IS NULL OR duration_seconds > 0),
+  caption TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE (user_id, week, media_type)
+);
 
-Move the following out of `src/components/article/ArticleHeroImage.tsx`:
-- All hero asset imports
-- `heroImageMap` (slug → asset)
-- `topicFallbackMap` (topic → asset)
-- `resolveArticleHero(data: ArticleData)` (same 4-step priority: per-article hero → slug map → topic fallback → final `pregnancyJourney` fallback)
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.week_media_memories TO authenticated;
+GRANT ALL ON public.week_media_memories TO service_role;
+-- No anon grant.
 
-Add:
-- `resolveArticleHeroBySlug(slug: string): { src: string; alt: string } | null`
-  - Looks up the article via `getArticle(slug)`; returns `null` if missing, otherwise delegates to `resolveArticleHero`.
+ALTER TABLE public.week_media_memories ENABLE ROW LEVEL SECURITY;
 
-### 2. Refactor `ArticleHeroImage`
+CREATE POLICY "Users view own week media"   ON public.week_media_memories FOR SELECT TO authenticated USING (auth.uid() = user_id);
+CREATE POLICY "Users insert own week media" ON public.week_media_memories FOR INSERT TO authenticated WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users update own week media" ON public.week_media_memories FOR UPDATE TO authenticated USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users delete own week media" ON public.week_media_memories FOR DELETE TO authenticated USING (auth.uid() = user_id);
 
-**Edit:** `src/components/article/ArticleHeroImage.tsx`
+CREATE TRIGGER week_media_memories_set_updated_at
+BEFORE UPDATE ON public.week_media_memories
+FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 
-Replace the inline map and `resolveHero` with an import from `@/lib/articleHeroImage`. Rendering, alt text, credit handling, and vignette overlay unchanged.
-
-### 3. Add image slot to weekly cards
-
-**Edit:** `src/components/myweek/SectionWeeklyReads.tsx`
-
-- For each card, call `resolveArticleHeroBySlug(card.slug)`.
-- Restructure the card so the image sits flush to the top:
-
-```text
-<article rounded-[20px] keepsake-surface overflow-hidden>
-  {hero && (
-    <img
-      src={hero.src}
-      alt=""                        // decorative; title conveys meaning
-      loading="lazy"
-      className="w-full aspect-[16/9] max-h-[140px] object-cover"
-    />
-  )}
-  <div className="px-5 py-6 flex flex-col flex-1">
-    <h3>…title…</h3>
-    <p>…reason…</p>
-    <span>Read</span>
-  </div>
-</article>
+CREATE INDEX idx_week_media_memories_user_week
+  ON public.week_media_memories (user_id, week);
 ```
 
-- Keep existing border colour, hover shadow, grid (single column on mobile, 2 columns from `sm`), eyebrow, H2, sub-line, and Read CTA.
-- If `hero` is `null`, render the card body with no image and no placeholder — layout stays intact.
+Follows the existing `week_photos` migration conventions (same trigger, same policy shape, same grant block, no anon).
 
-### 4. Guardrails (not doing)
+### 2. Storage — unchanged
 
-- No changes to `weeklyArticleSuggestions.ts`.
-- No changes to `articleData.ts` or article routes.
-- No new image assets, no Nano Banana generation.
-- No SEO / sitemap / robots / AI / analytics changes.
-- No touching Journey Support or pregnancy-loss surfaces.
-- Section still gated to `active` pregnancy journey by its existing mount in `MyWeek.tsx`.
+Bucket `weekly-photos` stays private. No new bucket, no policy edits. Planned object path `{user_id}/{week}/{media_type}/{uuid}.{ext}` continues to satisfy the current first-segment-is-user-id RLS.
 
-### 5. Image coverage note
+### 3. `supabase/functions/delete-account/index.ts` update
 
-Every mapped slug resolves to either a direct article hero (15 slugs) or an existing topical fallback (10 slugs like `nipt-in-pregnancy`, `dating-scan`, `induction-of-labour` → topic hub hero). No missing-image list to report; no generated assets needed.
+Existing sweep uses `list(userId, { limit: 1000 })` — non-recursive, only removes direct children like `{user_id}/{week}.{ext}`. Add a small bounded recursive walker (max depth 3, covering the deepest planned path) that collects every leaf and passes them to a single `remove([...])` call. Photo behaviour unchanged (still enumerated at depth 0); new nested media covered.
+
+If listing or removal fails, preserve current safety behaviour: return a 502-style error and do NOT proceed to delete the auth user. No partial deletion.
+
+Table-row cleanup: relies on the new `ON DELETE CASCADE` from `auth.users`, matching the correction. No explicit `DELETE FROM public.week_media_memories` needed inside the function.
+
+### 4. Types
+
+`src/integrations/supabase/types.ts` auto-regenerates after the migration is applied.
+
+### 5. Not doing
+
+UI, uploads, video/voice slots, MediaRecorder, My Journey media UI, analytics, AI, transcription, sharing, public URLs, new bucket, new routes.
 
 ### 6. Verification
 
-- `bunx tsgo --noEmit`
-- Visual pass on `/my-week` (mobile + desktop): weekly cards show topical images, no broken icons, single-card and two-card grids both look clean.
-- Spot-check any article page (e.g. `/articles/nausea-in-early-pregnancy`) to confirm hero rendering is unchanged after the refactor.
+- Table + columns + checks + unique + index + trigger present.
+- `user_id` FK to `auth.users(id) ON DELETE CASCADE`.
+- RLS enabled; four owner-scoped policies bound to `authenticated`; no anon grant.
+- `week_photos`, storage buckets, and storage policies untouched (verified via `rg` over migrations).
+- Delete-account edge function deployed; recursive listing removes direct photos + nested media; failure path preserved.
+- `bunx tsgo --noEmit` passes.
 
-### Return summary will include
+### 7. Files touched
 
-- Files edited / created
-- Image source used (shared `resolveArticleHeroBySlug`)
-- Fallback behaviour (topic hero → final pregnancy fallback → null render if article missing)
-- Missing image slugs: none (all covered by existing map + topic fallbacks)
-- Mobile + desktop visual result
-- `bunx tsgo --noEmit` result
-- Any defects
+- **New:** one Supabase migration file.
+- **Edited:** `supabase/functions/delete-account/index.ts`.
+- **Auto-regenerated:** `src/integrations/supabase/types.ts`.
+- No other frontend files edited.

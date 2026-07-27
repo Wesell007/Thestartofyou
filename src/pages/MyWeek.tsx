@@ -18,7 +18,7 @@ import SlotOneFocus from "@/components/myweek/SlotOneFocus";
 import SectionAskAI from "@/components/myweek/SectionAskAI";
 import SectionToolsThisWeek from "@/components/myweek/SectionToolsThisWeek";
 import SlotReflection from "@/components/myweek/SlotReflection";
-import SlotPhotoMemory from "@/components/myweek/SlotPhotoMemory";
+import SectionKeepThisWeek from "@/components/myweek/SectionKeepThisWeek";
 import SectionNextChapter from "@/components/myweek/SectionNextChapter";
 import SectionWeeklyReads from "@/components/myweek/SectionWeeklyReads";
 import SectionPregnancyComplete from "@/components/myweek/SectionPregnancyComplete";
@@ -264,7 +264,7 @@ const MyWeek = () => {
 
         <SlotReflection content={content} userId={userId} week={currentWeek} />
 
-        <SlotPhotoMemory userId={userId} week={currentWeek} chapterTitle={identity.chapterTitle} />
+        <SectionKeepThisWeek userId={userId} week={currentWeek} chapterTitle={identity.chapterTitle} />
 
         <SectionNextChapter
           nextWeek={nextWeek}

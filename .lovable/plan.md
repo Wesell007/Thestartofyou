@@ -1,79 +1,77 @@
 
-## Phase 13.6a — Weekly Media Memories Data Foundation (Approved, revised)
+## Phase 13.6b — Video Memory MVP (approved, revised, awaiting build mode)
 
-Backend/data only. Correction incorporated: `user_id` now has `ON DELETE CASCADE` against `auth.users` so rows cannot orphan.
+Adds a single video per pregnancy week alongside the existing photo on `/my-week`. Video only. No voice notes, no My Journey gallery, no AI, no analytics.
 
-### 1. Migration: create `public.week_media_memories`
+### 1. New file: `src/lib/weekMedia.ts`
 
-```sql
-CREATE TABLE public.week_media_memories (
-  id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  week INTEGER NOT NULL CHECK (week BETWEEN 1 AND 42),
-  media_type TEXT NOT NULL CHECK (media_type IN ('video', 'voice_note')),
-  storage_path TEXT NOT NULL,
-  mime_type TEXT NOT NULL,
-  file_size_bytes BIGINT NOT NULL CHECK (file_size_bytes > 0),
-  duration_seconds INTEGER CHECK (duration_seconds IS NULL OR duration_seconds > 0),
-  caption TEXT,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-  UNIQUE (user_id, week, media_type)
-);
+Pure helpers, no React, no Supabase calls.
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON public.week_media_memories TO authenticated;
-GRANT ALL ON public.week_media_memories TO service_role;
--- No anon grant.
+- Constants: `VIDEO_MAX_BYTES = 50 * 1024 * 1024`, `VIDEO_MAX_DURATION_SECONDS = 60`, `VIDEO_ACCEPTED_MIME = ["video/mp4","video/webm","video/quicktime"]`, `VIDEO_ACCEPT_ATTR`.
+- `extensionForVideo(mime, filename)` → lowercase `mp4`/`webm`/`mov` (mime first, filename fallback via allowlist).
+- `buildMediaStoragePath(userId, week, mediaType, ext)` → `${userId}/${week}/${mediaType}/${crypto.randomUUID()}.${ext}`.
+- `probeVideoDuration(file): Promise<number | null>` — off-DOM `<video preload="metadata">` + `URL.createObjectURL`, 3s timeout, revokes URL, returns rounded seconds or `null` on unreadable/error/timeout.
+- Re-exports caption helpers from `weekCaption.ts` (no edits to that file).
+- Approved error copy exported as `VIDEO_ERROR_COPY`.
 
-ALTER TABLE public.week_media_memories ENABLE ROW LEVEL SECURITY;
+### 2. New file: `src/hooks/useWeekMedia.ts`
 
-CREATE POLICY "Users view own week media"   ON public.week_media_memories FOR SELECT TO authenticated USING (auth.uid() = user_id);
-CREATE POLICY "Users insert own week media" ON public.week_media_memories FOR INSERT TO authenticated WITH CHECK (auth.uid() = user_id);
-CREATE POLICY "Users update own week media" ON public.week_media_memories FOR UPDATE TO authenticated USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
-CREATE POLICY "Users delete own week media" ON public.week_media_memories FOR DELETE TO authenticated USING (auth.uid() = user_id);
+Generic on `(week, mediaType)`; v1 only mounts `video`.
 
-CREATE TRIGGER week_media_memories_set_updated_at
-BEFORE UPDATE ON public.week_media_memories
-FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
-
-CREATE INDEX idx_week_media_memories_user_week
-  ON public.week_media_memories (user_id, week);
+```ts
+useWeekMedia({ userId, week, mediaType: "video" }) → {
+  state: "loading" | "empty" | "uploading" | "loaded" | "error",
+  error, storagePath, signedUrl, mimeType, durationSeconds, caption,
+  upload(file), remove(), saveCaption(raw), clearError()
+}
 ```
 
-Follows the existing `week_photos` migration conventions (same trigger, same policy shape, same grant block, no anon).
+- Load: `week_media_memories.select(...).eq(user_id, week, media_type).maybeSingle()`; if row, sign URL for 60 min.
+- `upload`: validate mime → size → duration; new UUID path; `storage.upload(path, file, { upsert: false, contentType })`; then DB `upsert({ ..., media_type: "video" }, { onConflict: "user_id,week,media_type" })`; on DB failure, remove the just-uploaded object and revert to prior state; on success sign a fresh URL and best-effort remove old object.
+- `remove`: delete DB row → remove storage object; on storage failure re-upsert row and surface `removeFailed`.
+- `saveCaption`: validate via `isCaptionWithinLimit`, update with `captionForSave`.
+- 50-minute signed-URL refresh timer (mirrors `SlotPhotoMemory`).
+- No analytics, no AI, no MediaRecorder, no transcription.
 
-### 2. Storage — unchanged
+### 3. New file: `src/components/myweek/SlotVideoMemory.tsx`
 
-Bucket `weekly-photos` stays private. No new bucket, no policy edits. Planned object path `{user_id}/{week}/{media_type}/{uuid}.{ext}` continues to satisfy the current first-segment-is-user-id RLS.
+Presentation + hidden file input + caption editor. States: loading / empty / uploading / loaded / error.
 
-### 3. `supabase/functions/delete-account/index.ts` update
+- Empty: calm frame with "Video of this week", helper "Add a short video from this week, if you want to keep one here.", primary "Add video" button, "Private to you" chip. Smaller than the photo frame — photo remains the protagonist.
+- Loaded: `<video controls preload="metadata" playsInline>` (no `autoPlay`, no `loop`); "Private" chip; "Replace video" and "Remove video" actions using the same visual language as the photo slot.
+- Caption editor mirrors the photo caption UI (label "Caption", 140-char counter, save/cancel).
+- All buttons `type="button"`, `aria-label` on file input trigger, visible focus.
+- File input `accept={VIDEO_ACCEPT_ATTR}`, value cleared after every attempt.
 
-Existing sweep uses `list(userId, { limit: 1000 })` — non-recursive, only removes direct children like `{user_id}/{week}.{ext}`. Add a small bounded recursive walker (max depth 3, covering the deepest planned path) that collects every leaf and passes them to a single `remove([...])` call. Photo behaviour unchanged (still enumerated at depth 0); new nested media covered.
+### 4. New file: `src/components/myweek/SectionKeepThisWeek.tsx`
 
-If listing or removal fails, preserve current safety behaviour: return a 502-style error and do NOT proceed to delete the auth user. No partial deletion.
+Thin wrapper. Small uppercase label + serif "Keep this week" header (matches existing My Week section pattern). Renders `<SlotPhotoMemory />` unchanged, then `<SlotVideoMemory />`. Props: `{ userId, week, chapterTitle }`.
 
-Table-row cleanup: relies on the new `ON DELETE CASCADE` from `auth.users`, matching the correction. No explicit `DELETE FROM public.week_media_memories` needed inside the function.
+### 5. Edit: `src/pages/MyWeek.tsx`
 
-### 4. Types
+Inside the existing `status === "active"` branch only: replace `<SlotPhotoMemory .../>` at line 267 with `<SectionKeepThisWeek .../>`. Update imports. Nothing else moves.
 
-`src/integrations/supabase/types.ts` auto-regenerates after the migration is applied.
+### 6. Not doing
 
-### 5. Not doing
+Voice notes, My Journey gallery, KeptChapter, pregnancy-loss reveal, AI, transcription, auto-captions, analytics, sharing, public URLs, storage bucket/policy changes, `week_photos` schema/paths, routes, sitemap, robots, article data, `SlotPhotoMemory` internals, `weekCaption.ts`.
 
-UI, uploads, video/voice slots, MediaRecorder, My Journey media UI, analytics, AI, transcription, sharing, public URLs, new bucket, new routes.
+### 7. Copy compliance
 
-### 6. Verification
+No urgent / must / essential / guaranteed / safe / unsafe / normal / "everything is okay". Approved technical recovery phrases used verbatim.
 
-- Table + columns + checks + unique + index + trigger present.
-- `user_id` FK to `auth.users(id) ON DELETE CASCADE`.
-- RLS enabled; four owner-scoped policies bound to `authenticated`; no anon grant.
-- `week_photos`, storage buckets, and storage policies untouched (verified via `rg` over migrations).
-- Delete-account edge function deployed; recursive listing removes direct photos + nested media; failure path preserved.
-- `bunx tsgo --noEmit` passes.
+### 8. Privacy
 
-### 7. Files touched
+Signed URLs kept in component state only. File input cleared after each attempt.
 
-- **New:** one Supabase migration file.
-- **Edited:** `supabase/functions/delete-account/index.ts`.
-- **Auto-regenerated:** `src/integrations/supabase/types.ts`.
-- No other frontend files edited.
+### 9. Verification (build mode)
+
+- `bunx tsgo --noEmit` → 0.
+- Grep: no analytics/AI imports in the four new files; no route/sitemap change; `week_photos` untouched.
+- **Manual Playwright smoke test** using a temporary in-`/tmp` generated mp4 fixture (ffmpeg-generated, ≤5s, ≤1 MB), never committed, never placed in `public/` or `src/assets/`. Covers: accepted mp4 upload, unsupported-format rejection, >60s duration rejection, replace, remove, native playback (`controls` mounted, no autoplay attribute), existing photo memory + captions still work, non-active status hides the video slot.
+- If auth is `signed_out` or `external_unmanaged`, report exactly which checks could not run; do not claim success.
+
+### 10. Files
+
+- **Create:** `src/lib/weekMedia.ts`, `src/hooks/useWeekMedia.ts`, `src/components/myweek/SlotVideoMemory.tsx`, `src/components/myweek/SectionKeepThisWeek.tsx`.
+- **Edit:** `src/pages/MyWeek.tsx`.
+- **Untouched:** `SlotPhotoMemory.tsx`, `weekCaption.ts`, other pages/components, DB schema (13.6a table already exists), storage bucket and policies.

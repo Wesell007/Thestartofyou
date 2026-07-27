@@ -1,54 +1,47 @@
+## Phase 14.10: Wire Personalised Realism Variants into My Week
 
-# Phase 14.9: Personalised Variant Asset Import and Resolver Extension
+Wire the saved `baby_illustration_style` preference into the new week-by-week realism system on `/my-week`, and refresh the Account Settings previews to reflect the new realism variants. Preserve all layout, old assets, DB behaviour, and the old 3-stage system.
 
-Import approved Light/Medium/Deep variants (Weeks 9–42) as CDN `.asset.json` pointers and extend the realism resolver to be tone-aware. No `/my-week` wiring, no Settings copy, no code deletions.
+### File 1: `src/components/myweek/SectionBabyThisWeek.tsx`
 
-## Sources (verified present)
+Swap the image source in the Baby This Week card from default-only to tone-aware:
 
-```text
-/mnt/documents/phase-14-8/images/light/week-09.png … week-42.png   (34)
-/mnt/documents/phase-14-8/images/medium/week-09.png … week-42.png  (34)
-/mnt/documents/phase-14-8/images/deep/week-09.png … week-42.png    (34)
-```
+- Add imports: `useBabyIllustrationStyle` from `@/hooks/useBabyIllustrationStyle`, and `normaliseRealismTone`, `resolveRealismForWeek` from `@/lib/myWeekRealismIllustrations` (keep `defaultRealismAltForWeek`).
+- Remove the `resolveDefaultRealismForWeek` import.
+- Inside the component: read `const { style } = useBabyIllustrationStyle();`, compute `const tone = normaliseRealismTone(style);` and `const resolved = resolveRealismForWeek(week, tone);`.
+- Continue rendering `resolved.src` with `defaultRealismAltForWeek(week)` (tone-agnostic alt).
+- No changes to spacing, glow, wrapper, gradients, aspect box, decorative spans, `data-baby-week`, size cue area, figcaption, `developmentCue`, `babyNote`, `whatThisMeans`, or mobile/desktop layout.
 
-`lovable-assets` CLI verified on PATH.
+Weeks 1–8 and missing tone assets fall back to default automatically via the resolver's existing logic.
 
-## Steps
+### File 2: `src/components/settings/BabyIllustrationStyleField.tsx`
 
-1. **Create target folders**
-   - `src/assets/myweek-weekly-realism-light/`
-   - `src/assets/myweek-weekly-realism-medium/`
-   - `src/assets/myweek-weekly-realism-deep/`
+Replace the old 3-stage preview thumbnails and transition note with previews of the new realism system, keeping the DB write behaviour and radio-group interactions unchanged:
 
-2. **Upload 102 assets.** For each tone × week (9–42):
-   ```
-   lovable-assets create --file <source> --filename week-XX.png \
-     > src/assets/myweek-weekly-realism-<tone>/week-XX.png.asset.json
-   ```
-   Write CLI stdout verbatim. No hand-written JSON. No raw PNGs committed.
+- Replace imports from `@/lib/myWeekBabyIllustrations` (kept: `BABY_ILLUSTRATION_STYLES`, `isBabyIllustrationStyle`, `BabyIllustrationStyle`). Drop `babyIllustrationAlt` and `resolveBabyIllustration` from usage in this file.
+- Add imports: `resolveRealismForWeek`, `defaultRealismAltForWeek` from `@/lib/myWeekRealismIllustrations`.
+- Precompute a `PREVIEW_WEEK = 20` and a per-style preview URL map via `resolveRealismForWeek(20, style)` (tone-agnostic; `default` uses `"default"`).
+- Update the tile `<img>` to use the new preview URL, with `alt={defaultRealismAltForWeek(20)}` (no mention of skin tone). Adjust `object-cover` → `object-contain` and background as needed so the framed illustration reads clearly at ~64px; keep the same tile structure, focus states, and keyboard/`radiogroup` behaviour.
+- Replace the "coming next" transition paragraph with:  
+  *"Your illustration style now applies to My Week from around Week 9 onward. Earlier weeks stay neutral because early development illustrations do not show visible baby skin tone."*
+- Keep the existing symbolic disclaimer line and Save / Reset buttons unchanged.
 
-3. **Extend `src/lib/myWeekRealismIllustrations.ts`.**
-   - Add `export type RealismTone = "default" | "light" | "medium" | "deep";`
-   - Build three additional `import.meta.glob` maps (light/medium/deep) using the same pattern as the existing default map. Import shape stays tolerant of `module.url` (existing pattern).
-   - Keep `resolveDefaultRealismForWeek` and `defaultRealismAltForWeek` unchanged.
-   - Add `resolveRealismForWeek(week, tone): DefaultRealismResolution`:
-     - Clamp week (same helper).
-     - `tone === "default"` OR `resolvedWeek <= 8` → default resolution.
-     - Otherwise return the tone map entry.
-     - Missing tone asset → silent fallback to default. Never throws. Never returns empty `src`.
-   - Add `export function normaliseRealismTone(value: unknown): RealismTone` — returns `light`/`medium`/`deep` on exact match, else `default`.
-   - Alt text unchanged (tone-agnostic via `defaultRealismAltForWeek`).
+### Out of scope (unchanged)
 
-4. **Verify**
-   - 34 pointer files in each new folder (102 total).
-   - Every pointer has non-empty `url` starting with `/__l5e/assets-v1/`.
-   - No `.png` binaries under the new folders.
-   - `src/assets/myweek-weekly-realism/` untouched.
-   - `src/assets/myweek-baby-styles/` untouched.
-   - No changes to `SectionBabyThisWeek.tsx`, `BabyIllustrationStyleField.tsx`, routes, sitemap, analytics, AI prompts, migrations.
+- `MyWeekBabyImage.tsx`, `WeekIllustration.tsx`, public/editorial week pages, routes, sitemap, analytics, AI prompts, migrations.
+- `profiles.baby_illustration_style`, the enum, `useBabyIllustrationStyle`, old 3-stage assets/resolver, existing DB write behaviour — all preserved.
+- No new image generation, no asset imports, no deletions.
 
-5. **Typecheck.** Run `npm run typecheck` and report the exact command and result.
+### QA
 
-## Stop point
+- `npm run typecheck` (must pass; return exact command and result).
+- Manual verification via Playwright / preview:
+  - Settings still saves each of `default`, `light`, `medium`, `deep`.
+  - Settings tiles show new realism previews (Week 20), not the old 3-stage assets.
+  - `/my-week` at Week 36 changes image across all four preferences.
+  - `/my-week` at Weeks 1–8 stays on default regardless of preference.
+  - No broken images, no layout shift in Baby This Week.
 
-After 102 pointers written, resolver extended with `resolveRealismForWeek` and `normaliseRealismTone`, and typecheck green. No `/my-week` wiring. No Phase 14.10.
+### Stop point
+
+Stop after wiring, Settings preview update, and typecheck. Do not begin another phase.

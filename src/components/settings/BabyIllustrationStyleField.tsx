@@ -1,13 +1,15 @@
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import {
   BABY_ILLUSTRATION_STYLES,
-  babyIllustrationAlt,
   isBabyIllustrationStyle,
-  resolveBabyIllustration,
   type BabyIllustrationStyle,
 } from "@/lib/myWeekBabyIllustrations";
+import {
+  defaultRealismAltForWeek,
+  resolveRealismForWeek,
+} from "@/lib/myWeekRealismIllustrations";
 
 type Props = { userId: string };
 
@@ -19,6 +21,7 @@ const OPTION_LABELS: Record<BabyIllustrationStyle, string> = {
 };
 
 const STYLES = BABY_ILLUSTRATION_STYLES;
+const PREVIEW_WEEK = 20;
 
 const BabyIllustrationStyleField = ({ userId }: Props) => {
   const [selected, setSelected] = useState<BabyIllustrationStyle>("default");

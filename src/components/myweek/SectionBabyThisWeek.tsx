@@ -1,7 +1,9 @@
 import {
   defaultRealismAltForWeek,
-  resolveDefaultRealismForWeek,
+  normaliseRealismTone,
+  resolveRealismForWeek,
 } from "@/lib/myWeekRealismIllustrations";
+import { useBabyIllustrationStyle } from "@/hooks/useBabyIllustrationStyle";
 
 interface Props {
   week: number;
@@ -84,7 +86,9 @@ const SectionBabyThisWeek = ({
   whatThisMeans,
   sizeComparisonSlug,
 }: Props) => {
-  const resolved = resolveDefaultRealismForWeek(week);
+  const { style } = useBabyIllustrationStyle();
+  const tone = normaliseRealismTone(style);
+  const resolved = resolveRealismForWeek(week, tone);
   return (
     <section className="relative pt-4 pb-12 sm:pb-14">
       <div className="flex items-center gap-3 mb-5">

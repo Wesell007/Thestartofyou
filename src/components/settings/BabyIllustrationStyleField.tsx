@@ -1,13 +1,15 @@
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import {
   BABY_ILLUSTRATION_STYLES,
-  babyIllustrationAlt,
   isBabyIllustrationStyle,
-  resolveBabyIllustration,
   type BabyIllustrationStyle,
 } from "@/lib/myWeekBabyIllustrations";
+import {
+  defaultRealismAltForWeek,
+  resolveRealismForWeek,
+} from "@/lib/myWeekRealismIllustrations";
 
 type Props = { userId: string };
 
@@ -19,6 +21,7 @@ const OPTION_LABELS: Record<BabyIllustrationStyle, string> = {
 };
 
 const STYLES = BABY_ILLUSTRATION_STYLES;
+const PREVIEW_WEEK = 20;
 
 const BabyIllustrationStyleField = ({ userId }: Props) => {
   const [selected, setSelected] = useState<BabyIllustrationStyle>("default");
@@ -94,6 +97,15 @@ const BabyIllustrationStyleField = ({ userId }: Props) => {
     buttonsRef.current[next]?.focus();
   };
 
+  const previewByStyle = useMemo(() => {
+    const map = {} as Record<BabyIllustrationStyle, string>;
+    for (const s of STYLES) {
+      map[s] = resolveRealismForWeek(PREVIEW_WEEK, s).src;
+    }
+    return map;
+  }, []);
+  const previewAlt = defaultRealismAltForWeek(PREVIEW_WEEK);
+
   return (
     <section className="rounded-2xl border border-border/50 bg-card p-6">
       <h2 className="font-serif text-xl mb-2">Illustration style</h2>
@@ -104,7 +116,7 @@ const BabyIllustrationStyleField = ({ userId }: Props) => {
         A gentle visual preference for the baby illustrations shown on your weekly page.
       </p>
       <p className="text-xs text-muted-foreground mb-4 rounded-lg border border-border/40 bg-parchment/60 px-3 py-2">
-        We are upgrading My Week to a neutral week-by-week illustration set first. Your saved illustration preference is kept for the personalised version coming next.
+        Your illustration style now applies to My Week from around Week 9 onward. Earlier weeks stay neutral because early development illustrations do not show visible baby skin tone.
       </p>
 
       {loadError && (
@@ -140,9 +152,9 @@ const BabyIllustrationStyleField = ({ userId }: Props) => {
               }`}
             >
               <img
-                src={resolveBabyIllustration(style, "mid")}
-                alt={babyIllustrationAlt(style)}
-                className="h-16 w-16 rounded-full object-cover"
+                src={previewByStyle[style]}
+                alt={previewAlt}
+                className="h-16 w-16 rounded-full object-contain bg-parchment/60"
                 loading="lazy"
               />
               <span className="text-xs font-medium leading-tight text-foreground">

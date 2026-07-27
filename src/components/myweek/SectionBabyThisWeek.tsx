@@ -1,8 +1,7 @@
-import { useBabyIllustrationStyle } from "@/hooks/useBabyIllustrationStyle";
 import {
-  babyIllustrationAlt,
-  resolveBabyIllustrationForWeek,
-} from "@/lib/myWeekBabyIllustrations";
+  defaultRealismAltForWeek,
+  resolveDefaultRealismForWeek,
+} from "@/lib/myWeekRealismIllustrations";
 
 interface Props {
   week: number;

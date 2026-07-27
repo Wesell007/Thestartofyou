@@ -1,47 +1,45 @@
-## Phase 14.10: Wire Personalised Realism Variants into My Week
+## Phase 14 Model Verification Audit (Read-Only)
 
-Wire the saved `baby_illustration_style` preference into the new week-by-week realism system on `/my-week`, and refresh the Account Settings previews to reflect the new realism variants. Preserve all layout, old assets, DB behaviour, and the old 3-stage system.
+Confirm whether the already-generated fetus / baby realism images were produced via `imagegen--edit_image` with `premium.gemini` (Nano Banana 2), or via a different tool/model. Nothing regenerated, nothing wired.
 
-### File 1: `src/components/myweek/SectionBabyThisWeek.tsx`
+### Scope
 
-Swap the image source in the Baby This Week card from default-only to tone-aware:
+Audit these folders and any prompt archives, `notes.md`, sheet-build scripts, or metadata inside them:
 
-- Add imports: `useBabyIllustrationStyle` from `@/hooks/useBabyIllustrationStyle`, and `normaliseRealismTone`, `resolveRealismForWeek` from `@/lib/myWeekRealismIllustrations` (keep `defaultRealismAltForWeek`).
-- Remove the `resolveDefaultRealismForWeek` import.
-- Inside the component: read `const { style } = useBabyIllustrationStyle();`, compute `const tone = normaliseRealismTone(style);` and `const resolved = resolveRealismForWeek(week, tone);`.
-- Continue rendering `resolved.src` with `defaultRealismAltForWeek(week)` (tone-agnostic alt).
-- No changes to spacing, glow, wrapper, gradients, aspect box, decorative spans, `data-baby-week`, size cue area, figcaption, `developmentCue`, `babyNote`, `whatThisMeans`, or mobile/desktop layout.
+- `/mnt/documents/phase-14-1/` — pilot images (W2, 4, 6, 8, 10, 12, 20, 36 plus v2/v3 reruns)
+- `/mnt/documents/phase-14-2/` — full 42-week default set + v2 cleanup files
+- `/mnt/documents/phase-14-6/` — Phase 14.7 personalised pilot (W12/20/36 × light/medium/deep)
+- `/mnt/documents/phase-14-8/` — full 102 Light/Medium/Deep variants (W9–42)
+- `/mnt/documents/phase-14-11/` — any Deep separation pilot output, if present
 
-Weeks 1–8 and missing tone assets fall back to default automatically via the resolver's existing logic.
+### Method
 
-### File 2: `src/components/settings/BabyIllustrationStyleField.tsx`
+1. `ls -R` each folder; enumerate PNGs, `notes.md`, `prompts/`, and any build scripts.
+2. Read every `notes.md` and prompt archive for explicit model / tool references (`imagegen--edit_image`, `imagegen--generate_image`, `premium.gemini`, `premium.gpt`, `google/gemini-3.1-flash-image`, `google/gemini-3-pro-image`, `Nano Banana 2`).
+3. Cross-check against phase-by-phase summary of tool invocations (edit-from-default vs generate-from-scratch).
+4. For any image without an explicit model reference in its phase notes/prompt archive, mark it as **unverified** — do not infer.
+5. Distinguish edit-from-source (Phase 14.7, 14.8 variants) from generate-from-scratch (Phase 14.1 pilot, 14.2 defaults).
 
-Replace the old 3-stage preview thumbnails and transition note with previews of the new realism system, keeping the DB write behaviour and radio-group interactions unchanged:
+### Deliverable
 
-- Replace imports from `@/lib/myWeekBabyIllustrations` (kept: `BABY_ILLUSTRATION_STYLES`, `isBabyIllustrationStyle`, `BabyIllustrationStyle`). Drop `babyIllustrationAlt` and `resolveBabyIllustration` from usage in this file.
-- Add imports: `resolveRealismForWeek`, `defaultRealismAltForWeek` from `@/lib/myWeekRealismIllustrations`.
-- Precompute a `PREVIEW_WEEK = 20` and a per-style preview URL map via `resolveRealismForWeek(20, style)` (tone-agnostic; `default` uses `"default"`).
-- Update the tile `<img>` to use the new preview URL, with `alt={defaultRealismAltForWeek(20)}` (no mention of skin tone). Adjust `object-cover` → `object-contain` and background as needed so the framed illustration reads clearly at ~64px; keep the same tile structure, focus states, and keyboard/`radiogroup` behaviour.
-- Replace the "coming next" transition paragraph with:  
-  *"Your illustration style now applies to My Week from around Week 9 onward. Earlier weeks stay neutral because early development illustrations do not show visible baby skin tone."*
-- Keep the existing symbolic disclaimer line and Save / Reset buttons unchanged.
+Write `/mnt/documents/phase-14-model-audit.md` with:
 
-### Out of scope (unchanged)
+- Per-phase section documenting: folder, tool (`imagegen--edit_image` vs `imagegen--generate_image`), model tier (`premium.gemini` / `premium.gpt` / other), whether Nano Banana 2 is confirmed, source of evidence (notes.md line, prompt file path), and any unverified entries.
+- Summary table:
 
-- `MyWeekBabyImage.tsx`, `WeekIllustration.tsx`, public/editorial week pages, routes, sitemap, analytics, AI prompts, migrations.
-- `profiles.baby_illustration_style`, the enum, `useBabyIllustrationStyle`, old 3-stage assets/resolver, existing DB write behaviour — all preserved.
-- No new image generation, no asset imports, no deletions.
+  ```text
+  Phase | Image set | Tool | Model | Nano Banana 2 confirmed? | Evidence | Issues
+  ```
 
-### QA
+- Explicit "unverified" list if any set lacks a written model reference.
+- Recommendation on whether Phase 14.11 can proceed on the current baseline.
 
-- `npm run typecheck` (must pass; return exact command and result).
-- Manual verification via Playwright / preview:
-  - Settings still saves each of `default`, `light`, `medium`, `deep`.
-  - Settings tiles show new realism previews (Week 20), not the old 3-stage assets.
-  - `/my-week` at Week 36 changes image across all four preferences.
-  - `/my-week` at Weeks 1–8 stays on default regardless of preference.
-  - No broken images, no layout shift in Baby This Week.
+### Guardrails
+
+- No image generation, edit, regeneration, or deletion.
+- No `.asset.json` creation, no `src/` changes, no wiring, no imports.
+- Read-only tool use only (`ls`, file reads, `rg`).
 
 ### Stop point
 
-Stop after wiring, Settings preview update, and typecheck. Do not begin another phase.
+Stop after `phase-14-model-audit.md` is written. Await approval before resuming Phase 14.11 Deep separation work.

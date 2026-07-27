@@ -84,8 +84,7 @@ const SectionBabyThisWeek = ({
   whatThisMeans,
   sizeComparisonSlug,
 }: Props) => {
-  const { style } = useBabyIllustrationStyle();
-  const resolved = resolveBabyIllustrationForWeek(style, week);
+  const resolved = resolveDefaultRealismForWeek(week);
   return (
     <section className="relative pt-4 pb-12 sm:pb-14">
       <div className="flex items-center gap-3 mb-5">

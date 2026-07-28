@@ -1,56 +1,59 @@
-## Phase 14.14 (approved) — Full size-cue audit + Issues 2–4
+## Phase 14.15 — My Journey Detail Rollover Fix
 
-**22 weeks touched:** 12 nulled + 10 remapped.
+Targeted fix for the kept week detail page (`/my-week/:week`, `src/pages/KeptChapter.tsx`) so it uses the new realism resolver and displays saved videos. Scope-limited per brief: no new assets, no route/migration/RLS/upload changes.
 
-### Issue 1 — Size-cue audit
+### Root cause
 
-**Nulled (cue text preserved):** Weeks 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13.
+- `src/pages/KeptChapter.tsx` still imports `MyWeekBabyImage` (old 3-stage set from `myweek-weekly-babies/`) for the chapter header oval — this is what shows the old baby image on Week 36.
+- `KeptChapter.tsx` never queries `week_media_memories`, so saved videos are invisible in the detail view.
+- The "A moment kept" section only renders when a saved `week_photos` row exists; when a user saved only a video (Week 36), the section is skipped entirely, and the header baby illustration reads as if it were the kept moment.
 
-**Remapped with cue rewrites:**
+Out of scope (intentionally not touched this phase): `MyWeekChapter.tsx` (live /my-week), `CurrentChapterCard.tsx`, `JourneyPreviewSection.tsx` (public home preview). These are not part of the "kept week detail" surface. `MyWeekBabyImage` component stays.
 
-| Wk | Slug | Cue |
-|---|---|---|
-| 15 | `pear` | About the size of a pear, weight beginning to register. |
-| 18 | `mango` | About the curve of a mango, turning often inside you. |
-| 19 | `pear` | About the size of a pear, finding rhythm. |
-| 21 | `aubergine` | About the length of an aubergine, busy and present. |
-| 22 | `butternut-squash` | Roughly the length of a butternut squash, long, lean, real. |
-| 24 | `banana` | About the length of a banana, settling into proportion. |
-| 25 | `cauliflower` | About the size of a cauliflower, settling and stretching. |
-| 26 | `aubergine` | About the length of an aubergine, longer now than heavy. |
-| 34 | `coconut` | About the size of a coconut, settled and growing. |
-| 37 | `cabbage` | About the size of a cabbage, quiet and complete. |
+### Changes
 
-**Kept:** 16, 17, 20, 23, 27, 28, 29, 30, 31, 32, 33, 35, 36, 38, 39, 40 (assets present); 1, 14, 41, 42 (intentional null).
+**1. `src/pages/KeptChapter.tsx` — realism resolver for header**
 
-### Issue 4 — Week 37 copy
+- Drop `MyWeekBabyImage` import; import `resolveRealismForWeek`, `defaultRealismAltForWeek`, `normaliseRealismTone` from `@/lib/myWeekRealismIllustrations`.
+- Load `baby_illustration_style` in the existing `profiles` select and normalise to a tone (used for weeks 9+; weeks 1–8 fall back to default inside the resolver).
+- Replace the header oval `<MyWeekBabyImage>` with an `<img>` using the resolver URL and alt.
 
-`babyNote` → "Your baby is considered early term now, and the last weeks are part of the final stretch toward birth."
+**2. `src/pages/KeptChapter.tsx` — fetch and display saved video**
 
-### Issue 2 — My Journey imagery
+- Extend the parallel Promise to also query `week_media_memories` for `(user_id, week, media_type='video')` and create a signed URL from the `weekly-photos` bucket (mirrors existing photo signing, same 60-min TTL + 50-min re-sign timer).
+- Include weeks with a saved video in the `keptWeeks` set so navigation and the `!kept.has(week)` guard treat video-only weeks as kept chapters.
+- Update state shape: add `videoUrl: string | null`.
 
-- `MyJourney.tsx`: `useBabyIllustrationStyle()` + `normaliseRealismTone(style)`, pass `tone` to `KeptWeekRow`.
-- `KeptWeekRow.tsx`: swap `MyWeekBabyImage` for `<img>` from `resolveRealismForWeek(week, tone)` with `defaultRealismAltForWeek(week)`. Preserve frame/sizing/hover/layout. `MyWeekBabyImage` retained for other surfaces.
+**3. "A moment kept" section rewrite**
 
-### Issue 3 — Videos in My Journey
+Rules:
+- Photo only → existing photo figure.
+- Video only → `<video controls preload="metadata" playsInline muted className="w-full h-auto max-h-[520px] block" />` inside the same rounded frame, with the existing caption treatment reused if a caption is present on the video row.
+- Photo + video → render the photo figure, then a compact video tile beneath it in the same section.
+- Neither → omit the section entirely (matches current behaviour; the header realism illustration is not labelled as a saved moment).
 
-- `MyJourney.tsx`: parallel `week_media_memories` read (`media_type='video'`); sign via `weekly-photos`; feed into `keptWeeks`, `MomentsKeptSummary`, `KeptWeekRow`, `PhotoJournal`.
-- `MomentsKeptSummary.tsx`: 4th "Videos" stat, `grid-cols-2 sm:grid-cols-4`.
-- `KeptWeekRow.tsx`: `hasVideo` → discreet Video indicator.
-- `PhotoJournal.tsx`: accept `videos`, render `<video controls preload="metadata" playsInline muted>` in the same aspect-square frame; interleave by week desc; photo+video week → photo tile with small video badge; empty state → "No photos or videos kept yet."; subheading → "The weeks you have chosen to see again — photos and videos." Section title unchanged.
+**4. Previous/next kept chapter cards**
 
-### Files changed (only)
+- Already text-only (no thumbnails) in `KeptChapter.tsx`, so nothing to change. Confirm during QA.
 
-- `src/data/myWeekContent.ts`
-- `src/pages/MyJourney.tsx`
-- `src/components/myjourney/KeptWeekRow.tsx`
-- `src/components/myjourney/MomentsKeptSummary.tsx`
-- `src/components/myjourney/PhotoJournal.tsx`
+### Files touched
 
-### Not changing
-
-Realism assets, `.asset.json` files, `resolveRealismForWeek`, migrations, RLS, storage bucket, `useWeekMedia`, `SlotVideoMemory`, analytics, AI prompts, sitemap, routes, old 3-stage assets/resolver, `MyWeekBabyImage`.
+- `src/pages/KeptChapter.tsx` (only file edited).
 
 ### QA
 
-No broken monogram anywhere 1–42. /my-week W30/36/37/38 render expected produce. Week 37 copy free of "safely"/"safe"/"guaranteed"/etc. /my-journey uses realism resolver + saved preference; W1–8 default; W36 video shows + counts. Photos/reflections/kept-week logic intact. `npm run typecheck` → 0.
+- `npm run typecheck`.
+- Playwright walkthrough as authenticated user:
+  - `/my-journey` still shows Videos count = 1 and Week 36 row indicator.
+  - `/my-week/36` shows the new realism illustration in the header oval and the saved video playable under "A moment kept".
+  - `/my-week/<a photo-only week>` still shows the photo.
+  - `/my-week/<a week 1–8 kept chapter, if any>` falls back to default realism.
+  - No console errors, no broken `<img>`/`<video>`.
+
+### Return
+
+Files changed, exact components causing each defect, new selection logic for photo/video/fallback, confirmation Week 36 video is visible, confirmation old 3-stage imagery is gone from the detail surface, confirmation summary still counts videos, typecheck output, remaining defects (expected: none in scope).
+
+### Stop point
+
+Stop after fix + QA. Do not start Phase 15.

@@ -41,6 +41,19 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
   const [captionSaving, setCaptionSaving] = useState(false);
   const [captionError, setCaptionError] = useState<string | null>(null);
   const [playbackError, setPlaybackError] = useState<string | null>(null);
+  const [justSaved, setJustSaved] = useState(false);
+
+  useEffect(() => {
+    if (!justSaved) return;
+    const t = window.setTimeout(() => setJustSaved(false), 2400);
+    return () => window.clearTimeout(t);
+  }, [justSaved]);
+
+  const flashSaved = () => {
+    setJustSaved(false);
+    window.setTimeout(() => setJustSaved(true), 0);
+    onSaved?.();
+  };
 
   const openFilePicker = () => {
     clearError();
@@ -50,8 +63,9 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
   const handleFiles = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
     const file = files[0];
-    await upload(file);
+    const ok = await upload(file);
     if (fileRef.current) fileRef.current.value = "";
+    if (ok) flashSaved();
   };
 
   const openCaptionEditor = () => {
@@ -73,10 +87,11 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
     }
     setCaptionSaving(true);
     setCaptionError(null);
-    await saveCaption(captionDraft);
+    const ok = await saveCaption(captionDraft);
     setCaptionSaving(false);
     setCaptionEditing(false);
     setCaptionDraft("");
+    if (ok) flashSaved();
   };
 
   const uploading = state === "uploading";

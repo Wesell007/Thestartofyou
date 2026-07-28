@@ -58,7 +58,6 @@ type State = {
   photoUrls: { week: number; url: string; caption: string | null }[];
   videos: VideoItem[];
   voiceNotes: VoiceItem[];
-  voiceNotes: VoiceItem[];
 };
 
 const computeWeek = (lmp: Date) => {
@@ -377,6 +376,7 @@ const JourneyKeptRegion = ({
   reflectionsByWeek,
   photoUrls,
   videos,
+  voiceNotes,
   currentWeek,
   renderRow,
 }: {

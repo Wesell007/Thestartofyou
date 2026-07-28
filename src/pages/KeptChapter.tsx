@@ -97,9 +97,21 @@ const KeptChapter = () => {
         navigate("/auth", { replace: true });
         return;
       }
-      const [{ data: profile, error: profileError }, journey, { data: refl, error: reflectionError }, { data: photo, error: photoError }, { data: allRefls, error: allReflectionError }, { data: allPhotos, error: allPhotoError }] =
-        await Promise.all([
-          supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
+      const [
+        { data: profile, error: profileError },
+        journey,
+        { data: refl, error: reflectionError },
+        { data: photo, error: photoError },
+        { data: videoRow, error: videoError },
+        { data: allRefls, error: allReflectionError },
+        { data: allPhotos, error: allPhotoError },
+        { data: allVideos, error: allVideoError },
+      ] = await Promise.all([
+          supabase
+            .from("profiles")
+            .select("first_name, baby_illustration_style")
+            .eq("user_id", user.id)
+            .maybeSingle(),
           getActivePregnancyJourney(user.id, { throwOnError: true }),
           supabase
             .from("reflections")
@@ -113,11 +125,39 @@ const KeptChapter = () => {
             .eq("user_id", user.id)
             .eq("week", week)
             .maybeSingle(),
+          supabase
+            .from("week_media_memories")
+            .select("storage_path, caption, mime_type")
+            .eq("user_id", user.id)
+            .eq("week", week)
+            .eq("media_type", "video")
+            .maybeSingle(),
           supabase.from("reflections").select("week, content").eq("user_id", user.id),
           supabase.from("week_photos").select("week").eq("user_id", user.id),
+          supabase
+            .from("week_media_memories")
+            .select("week")
+            .eq("user_id", user.id)
+            .eq("media_type", "video"),
         ]);
-      if (profileError || reflectionError || photoError || allReflectionError || allPhotoError) {
-        throw profileError ?? reflectionError ?? photoError ?? allReflectionError ?? allPhotoError;
+      if (
+        profileError ||
+        reflectionError ||
+        photoError ||
+        videoError ||
+        allReflectionError ||
+        allPhotoError ||
+        allVideoError
+      ) {
+        throw (
+          profileError ??
+          reflectionError ??
+          photoError ??
+          videoError ??
+          allReflectionError ??
+          allPhotoError ??
+          allVideoError
+        );
       }
       if (cancelled) return;
       if (!journey) {
@@ -137,6 +177,8 @@ const KeptChapter = () => {
         return;
       }
 
+      const tone = normaliseRealismTone(profile?.baby_illustration_style);
+
       let photoUrl: string | null = null;
       const photoCaption: string | null = photo?.caption ?? null;
       if (photo?.storage_path) {
@@ -145,6 +187,21 @@ const KeptChapter = () => {
           .createSignedUrl(photo.storage_path, 60 * 60);
         if (urlError) throw urlError;
         photoUrl = urlData?.signedUrl ?? null;
+      }
+
+      let video: VideoLite | null = null;
+      if (videoRow?.storage_path) {
+        const { data: urlData, error: urlError } = await supabase.storage
+          .from("weekly-photos")
+          .createSignedUrl(videoRow.storage_path, 60 * 60);
+        if (urlError) throw urlError;
+        if (urlData?.signedUrl) {
+          video = {
+            url: urlData.signedUrl,
+            caption: videoRow.caption ?? null,
+            mimeType: videoRow.mime_type ?? null,
+          };
+        }
       }
 
       // Build the set of past weeks with any kept content for adjacent
@@ -157,6 +214,9 @@ const KeptChapter = () => {
       });
       (allPhotos ?? []).forEach((p) => {
         if (p.week < currentWeek) kept.add(p.week);
+      });
+      (allVideos ?? []).forEach((v) => {
+        if (v.week < currentWeek) kept.add(v.week);
       });
       const keptWeeks = Array.from(kept).sort((a, b) => a - b);
 
@@ -175,6 +235,8 @@ const KeptChapter = () => {
         reflection,
         photoUrl,
         photoCaption,
+        video,
+        tone,
         keptWeeks,
       });
       } catch {

@@ -167,6 +167,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
     // Save-action metric: fires after both upload + DB row succeed. A
     // replacement is a real new save and counts; removal does not fire.
     trackEvent(EVENTS.PHOTO_SAVED);
+    flashSaved();
   };
 
   const handleRemove = async () => {
@@ -234,6 +235,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
     setCaption(nextValue);
     setCaptionEditing(false);
     setCaptionDraft("");
+    flashSaved();
   };
 
   return (

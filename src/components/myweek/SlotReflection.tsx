@@ -11,6 +11,7 @@ interface Props {
   content: MyWeekEntry;
   userId: string;
   week: number;
+  onSaved?: () => void;
 }
 
 type SaveState = "idle" | "saving" | "saved" | "error";

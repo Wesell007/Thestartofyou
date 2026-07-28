@@ -249,7 +249,6 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
         </p>
       )}
 
-      {state === "loaded" && (
 
       {error && (
         <p

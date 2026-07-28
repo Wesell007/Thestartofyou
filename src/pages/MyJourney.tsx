@@ -25,6 +25,9 @@ import ReflectionHighlights from "@/components/myjourney/ReflectionHighlights";
 import ToolkitEntryPanel from "@/components/myjourney/ToolkitEntryPanel";
 import LookingAheadCard from "@/components/myjourney/LookingAheadCard";
 import PageLoadState from "@/components/shared/PageLoadState";
+import { useBabyIllustrationStyle } from "@/hooks/useBabyIllustrationStyle";
+import { normaliseRealismTone, type RealismTone } from "@/lib/myWeekRealismIllustrations";
+import type { VideoItem } from "@/components/myjourney/PhotoJournal";
 
 type ReflectionRow = {
   week: number;
@@ -33,6 +36,13 @@ type ReflectionRow = {
 };
 
 type PhotoRow = { week: number; storage_path: string; caption: string | null };
+type VideoRow = {
+  week: number;
+  storage_path: string;
+  caption: string | null;
+  mime_type: string;
+  duration_seconds: number | null;
+};
 
 type State = {
   firstName: string;
@@ -42,7 +52,9 @@ type State = {
   status: PregnancyJourneyStatus;
   reflectionsByWeek: Record<number, ReflectionRow>;
   photoWeeks: Set<number>;
+  videoWeeks: Set<number>;
   photoUrls: { week: number; url: string; caption: string | null }[];
+  videos: VideoItem[];
 };
 
 const computeWeek = (lmp: Date) => {

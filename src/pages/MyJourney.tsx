@@ -337,6 +337,25 @@ const MyJourney = () => {
           weeksKept={keptWeeks.length}
         />
 
+        {isActive && (
+          <>
+            <MemoryFilmEntry
+              keptWeeksCount={keptWeeks.length}
+              hasMedia={photoUrls.length + videos.length + voiceNotes.length > 0}
+              onOpen={() => setFilmOpen(true)}
+            />
+            <MemoryFilmBuilder
+              open={filmOpen}
+              onClose={() => setFilmOpen(false)}
+              firstName={firstName}
+              currentWeek={currentWeek}
+              dueLabel={format(due, "d MMMM yyyy")}
+              weeks={filmWeeks}
+            />
+          </>
+        )}
+
+
         <JourneyKeptRegion
           isLoss={isLoss}
           hasKept={keptWeeks.length > 0}

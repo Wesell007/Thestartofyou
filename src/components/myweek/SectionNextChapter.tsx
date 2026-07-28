@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
 interface Props {
   nextWeek: number | null;
   nextChapterTitle?: string;
@@ -6,9 +9,10 @@ interface Props {
 }
 
 /**
- * Small "Next chapter" preview card. Non-clickable in this phase — future
- * chapters aren't yet kept, and we're not sending users into public week
- * hub pages from the personal companion.
+ * Small "Next chapter" preview card. Non-clickable as a whole — future
+ * weeks aren't directly addressable in the companion, and we don't send
+ * users into public week hub pages from here. A single low-emphasis link
+ * routes to /my-journey so the card is still a useful navigation surface.
  */
 const SectionNextChapter = ({ nextWeek, nextChapterTitle, nextTheme, nextPreview }: Props) => {
   if (!nextWeek) return null;
@@ -47,12 +51,22 @@ const SectionNextChapter = ({ nextWeek, nextChapterTitle, nextTheme, nextPreview
             {nextTheme}
           </p>
         )}
-        <p className="font-sans text-[14.5px] font-light text-foreground/70 leading-[1.72] max-w-[52ch]">
+        <p className="font-sans text-[14.5px] font-light text-foreground/70 leading-[1.72] max-w-[52ch] mb-5">
           {nextPreview}
         </p>
+        <Link
+          to="/my-journey"
+          className="group inline-flex items-center gap-2 font-sans text-[11.5px] font-medium tracking-[0.22em] uppercase transition-colors hover:opacity-80"
+          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+        >
+          See your journey so far
+          <ArrowRight size={13} strokeWidth={1.7} className="transition-transform group-hover:translate-x-0.5" />
+        </Link>
       </div>
     </section>
   );
 };
+
+export default SectionNextChapter;
 
 export default SectionNextChapter;

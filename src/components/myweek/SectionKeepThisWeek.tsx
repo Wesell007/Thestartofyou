@@ -78,8 +78,8 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => 
 
   return (
     <section className="relative pt-14 pb-2">
-      {anyKept && (
-        <div className="flex items-center gap-3 mb-6">
+      <div className="mb-6">
+        <div className="flex items-center gap-3 mb-3">
           <span
             aria-hidden="true"
             className="block w-5 h-px"
@@ -89,10 +89,18 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => 
             className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase"
             style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
           >
-            Captured this week · {summary}
+            This week's memory
           </p>
         </div>
-      )}
+        <p className="font-serif text-foreground/70 text-[14.5px] leading-[1.6] max-w-[46ch]">
+          A reflection, a photo or a short video. Keep what feels right.
+        </p>
+        {anyKept && (
+          <p className="mt-3 font-sans text-[10.5px] font-medium tracking-[0.24em] uppercase text-foreground/55">
+            Captured this week · {summary}
+          </p>
+        )}
+      </div>
 
       <SlotReflection content={content} userId={userId} week={week} onSaved={onSaved} />
 

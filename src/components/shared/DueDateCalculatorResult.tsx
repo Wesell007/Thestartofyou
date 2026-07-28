@@ -1241,15 +1241,16 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                   one week at a time, from where you are now.
                 </p>
                 <p className="font-sans text-xs font-light text-muted-foreground/35 mb-8 max-w-xs">
-                  Saving your journey keeps your stage, personalises your guidance, and gives you somewhere to come back to.
+                  {saveCtaHelp ?? "Saving your journey keeps your stage, personalises your guidance, and gives you somewhere to come back to."}
                 </p>
 
                 <button
                   type="button"
                   onClick={handleSaveJourney}
-                  className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all"
+                  disabled={savingJourney}
+                  className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all disabled:opacity-70"
                 >
-                  Save your journey
+                  {saveCtaLabel}
                   <ArrowRight size={16} />
                 </button>
               </div>

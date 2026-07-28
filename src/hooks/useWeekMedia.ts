@@ -82,7 +82,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
       if (cancelledRef.current) return;
       if (selErr) {
         setState("error");
-        setError(VIDEO_ERROR_COPY.loadFailed);
+        setError(COPY.loadFailed);
         return;
       }
       if (!data?.storage_path) {
@@ -105,7 +105,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
       if (urlErr || !urlData?.signedUrl) {
         setSignedUrl(null);
         setState("error");
-        setError(VIDEO_ERROR_COPY.loadFailed);
+        setError(COPY.loadFailed);
       } else {
         setSignedUrl(urlData.signedUrl);
         setState("loaded");
@@ -202,7 +202,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
       if (urlErr || !urlData?.signedUrl) {
         setSignedUrl(null);
         setState("error");
-        setError(VIDEO_ERROR_COPY.loadFailed);
+        setError(COPY.loadFailed);
         return false;
       }
       setSignedUrl(urlData.signedUrl);
@@ -231,7 +231,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
       .eq("media_type", mediaType);
     if (dbErr) {
       setState("loaded");
-      setError(VIDEO_ERROR_COPY.removeFailed);
+      setError(COPY.removeFailed);
       return;
     }
 
@@ -254,7 +254,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
         { onConflict: "user_id,week,media_type" },
       );
       setState("loaded");
-      setError(VIDEO_ERROR_COPY.removeFailed);
+      setError(COPY.removeFailed);
       return;
     }
 

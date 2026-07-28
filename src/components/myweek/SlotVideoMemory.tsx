@@ -238,6 +238,19 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
         </figure>
       )}
 
+      {justSaved && state === "loaded" && (
+        <p
+          className="mt-3 font-sans text-[11px] font-medium tracking-[0.22em] uppercase transition-opacity duration-500"
+          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+          role="status"
+          aria-live="polite"
+        >
+          Saved to this week.
+        </p>
+      )}
+
+      {state === "loaded" && (
+
       {error && (
         <p
           className="mt-3 font-sans text-[12.5px] font-light text-destructive"

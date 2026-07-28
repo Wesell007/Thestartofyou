@@ -339,9 +339,35 @@ const AccountSettings = () => {
 
           <section className="rounded-2xl border border-border/50 bg-card p-6">
             <h2 className="font-serif text-xl mb-2">Current journey</h2>
-            <p className="text-sm text-muted-foreground mb-5">
+            <p className="text-sm text-muted-foreground mb-3">
               {lifecycle ? `Your active journey is ${lifecycle === "ttc" ? "trying to conceive" : "pregnancy"}.` : "You do not currently have a saved journey."}
             </p>
+            {lifecycle === "pregnancy" && pregnancyDates && (
+              <dl className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                <div>
+                  <dt className="font-sans text-[11px] tracking-[0.18em] uppercase text-muted-foreground/70">Last period</dt>
+                  <dd className="font-serif text-foreground">{pregnancyDates.lmp}</dd>
+                </div>
+                <div>
+                  <dt className="font-sans text-[11px] tracking-[0.18em] uppercase text-muted-foreground/70">Estimated due date</dt>
+                  <dd className="font-serif text-foreground">{pregnancyDates.due}</dd>
+                </div>
+              </dl>
+            )}
+            {lifecycle === "ttc" && ttcDates && (
+              <dl className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                <div>
+                  <dt className="font-sans text-[11px] tracking-[0.18em] uppercase text-muted-foreground/70">Last period</dt>
+                  <dd className="font-serif text-foreground">{ttcDates.lmp}</dd>
+                </div>
+                {ttcDates.cycle && (
+                  <div>
+                    <dt className="font-sans text-[11px] tracking-[0.18em] uppercase text-muted-foreground/70">Cycle length</dt>
+                    <dd className="font-serif text-foreground">{ttcDates.cycle} days</dd>
+                  </div>
+                )}
+              </dl>
+            )}
             {lifecycle && (
               <button type="button" onClick={removeJourney} disabled={Boolean(busy)} className="text-sm text-destructive underline disabled:opacity-50">
                 {busy === "journey" ? "Removing journey…" : "Remove this journey"}

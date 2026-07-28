@@ -1,15 +1,22 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import MyWeekBabyImage from "@/components/myweek/MyWeekBabyImage";
 import { getWeekIdentity } from "@/data/myWeekContent";
+import {
+  resolveRealismForWeek,
+  defaultRealismAltForWeek,
+  type RealismTone,
+} from "@/lib/myWeekRealismIllustrations";
 
 interface Props {
   currentWeek: number;
+  tone?: RealismTone;
 }
 
-const CurrentChapterCard = ({ currentWeek }: Props) => {
+const CurrentChapterCard = ({ currentWeek, tone = "default" }: Props) => {
   const identity = getWeekIdentity(currentWeek);
   const accent = "hsl(var(--stage-pregnancy-accent))";
+  const realism = resolveRealismForWeek(currentWeek, tone);
+  const realismAlt = defaultRealismAltForWeek(currentWeek);
 
   return (
     <Link

@@ -1,108 +1,68 @@
-## Phase 14.11 — Deep Missing-Weeks Completion (W31-35, W37-42)
+## Phase 14.11 — Final Manifest Verification and Closeout
 
-Complete Deep coverage for the 11 remaining weeks under the approved v2 Deep direction. Review-only image generation. No `src/` changes, no asset import, no `.asset.json`, no resolver or Settings changes. Do not begin Phase 14.12.
+Read-only verification pass plus a single append to `notes.md`. No `src/`, no asset import, no `.asset.json`, no resolver or Settings changes. Do not begin Phase 14.12.
 
-### Scope
+### 1. Manifest scan
 
-Generate Deep only for W31, W32, W33, W34, W35, W37, W38, W39, W40, W41, W42.
+Enumerate every file under:
 
-Do not touch W9-W30, W36, Default, Light, Medium, or any approved v2 anchor.
+- `/mnt/documents/phase-14-11/images/deep/`
+- `/mnt/documents/phase-14-11/sheets/`
+- `/mnt/documents/phase-14-11/prompts/`
+- `/mnt/documents/phase-14-11/quarantine/`
 
-### Source map (edit-from-default only)
+For each file, record: absolute path, size in bytes, and (for PNGs) whether PIL can open and verify it.
 
-Approved Phase 14.2b default v2 sources:
+Flag and list any:
 
-- W31 -> `/mnt/documents/phase-14-2/images/week-31.v2.png`
-- W32 -> `/mnt/documents/phase-14-2/images/week-32.v2.png`
-- W34 -> `/mnt/documents/phase-14-2/images/week-34.v2.png`
+- `IGNORE*` files
+- files named or resembling placeholders (e.g. `_do_not_use_placeholder*`, `placeholder*`)
+- zero-byte files
+- unreadable/corrupt PNGs (PIL `verify()` failure)
+- broken or stray JPGs
+- screenshots (`Screenshot*`, `.DS_Store`, editor previews)
+- cache files (`__pycache__`, `.cache`, `Thumbs.db`)
+- generated preview files not part of the canonical set
 
-Base defaults:
+Expected clean result: only the 34 Deep PNGs (W9-W42), the four final sheets, the 11 tone-consistent prompt markdowns (plus any earlier prompt archive), and whatever the quarantine folder legitimately holds.
 
-- W33 -> `/mnt/documents/phase-14-2/images/week-33.png`
-- W35 -> `/mnt/documents/phase-14-2/images/week-35.png`
-- W37 -> `/mnt/documents/phase-14-2/images/week-37.png`
-- W38 -> `/mnt/documents/phase-14-2/images/week-38.png`
-- W39 -> `/mnt/documents/phase-14-2/images/week-39.png`
-- W40 -> `/mnt/documents/phase-14-2/images/week-40.png`
-- W41 -> `/mnt/documents/phase-14-2/images/week-41.png`
-- W42 -> `/mnt/documents/phase-14-2/images/week-42.png`
+### 2. Final Deep file map confirmation
 
-Never edit from Medium, current Deep, proposed v1/v2, rejected v3, screenshots, sheets, cache files, generated previews, or placeholders. No generation from scratch.
+Confirm exactly one approved Deep PNG resolves per week W9-W42, matching:
 
-### Prompt
+```text
+W9-W14   -> approved .v2.png anchors
+W15-W19  -> corrected Phase 14.11 outputs
+W20      -> approved .v2.png anchor
+W21-W30  -> corrected Phase 14.11 outputs
+W31-W35  -> completed missing-weeks batch
+W36      -> approved week-36.png anchor
+W37-W42  -> completed missing-weeks batch
+```
 
-Approved v2 Deep separation prompt with the tone-consistency clause already used for W15-W30, only the week number substituted. Do not push darker. Do not create a new v3 direction. Do not rewrite the prompt.
+Report the resolved absolute path per week. Any missing or duplicated week is a blocker.
 
-Archive exact prompts to:
+### 3. Final sheets confirmation
 
-- `/mnt/documents/phase-14-11/prompts/week-31.tone-consistent.md`
-- ... through `week-42.tone-consistent.md` (skipping W36)
+Confirm these four files exist, are non-zero, and open cleanly in PIL:
 
-### Method
+- `/mnt/documents/phase-14-11/sheets/deep-final-medium-vs-approved-deep.png`
+- `/mnt/documents/phase-14-11/sheets/deep-final-four-up.png`
+- `/mnt/documents/phase-14-11/sheets/deep-final-settings-thumbnail-check.png`
+- `/mnt/documents/phase-14-11/sheets/deep-final-replacement-comparison.png`
 
-For each of the 11 weeks, call `imagegen--edit_image`:
+### 4. Notes closeout
 
-- `image_paths`: `["<approved default source above>"]`
-- `prompt`: verbatim tone-consistent v2 Deep prompt for that week
-- `target_path`: `/mnt/documents/phase-14-11/images/deep/week-XX.png`
+Append a "Phase 14.11 Closeout" section to `/mnt/documents/phase-14-11/notes.md` covering:
 
-Model: `premium.gemini` (Nano Banana 2). No other tool.
-
-### Acceptance and rerun rule
-
-Accept only if the output is clearly darker than Medium, matches the approved v2 Deep direction, and preserves pose, face, cord, sac/no-sac state, womb environment, wall bloom (if present), crop, scale, and week maturity. Reject if muddy, grey, olive, ashy, overly red, burnt, harsh, or heavy-shadowed.
-
-One rerun allowed per failing week, saved as `week-XX.v2.png` (edited from the same approved default source, same prompt). No v3 experiments.
-
-### Final Deep file map (post-batch)
-
-- W9-W14: approved `.v2.png` anchors
-- W15-W19: corrected Phase 14.11 outputs
-- W20: approved `.v2.png` anchor
-- W21-W30: corrected Phase 14.11 outputs
-- W31-W35: this batch
-- W36: approved `week-36.png` anchor
-- W37-W42: this batch
-
-Every week from W9 to W42 must resolve to exactly one approved Deep file.
-
-### Final review sheets
-
-Build from explicit absolute per-week paths only. No globs, no placeholders, no screenshots, no cache files, no generated previews.
-
-1. `/mnt/documents/phase-14-11/sheets/deep-final-medium-vs-approved-deep.png`
-   - Rows: W9-W42
-   - Columns: medium | approved deep
-
-2. `/mnt/documents/phase-14-11/sheets/deep-final-settings-thumbnail-check.png`
-   - Rows: W9-W42
-   - Columns: medium | approved deep
-   - Rendered at Account Settings preview size (~96px)
-
-3. `/mnt/documents/phase-14-11/sheets/deep-final-four-up.png` (product family confirmation)
-   - Rows: W9, W12, W16, W20, W26, W32, W36, W40, W42
-   - Columns: default | light | medium | approved deep
-
-4. `/mnt/documents/phase-14-11/sheets/deep-final-replacement-comparison.png`
-   - Rows: W9-W42
-   - Columns: medium | previous/current deep | approved deep
-   - Previous/current Deep from `/mnt/documents/phase-14-8/images/deep/week-XX.png`
-   - Approved Deep from the final approved file map above
-
-### Notes update
-
-Append to `/mnt/documents/phase-14-11/notes.md`:
-
-- the 11 missing Deep weeks were completed
-- source file used per week
-- final approved Deep file per week from W9 to W42 (single canonical map)
-- any reruns and why
-- confirmation final Deep coverage is complete for W9-W42
-- confirmation all final sheets were built from explicit absolute paths only
-- confirmation v2 remains the final Deep direction
-- confirmation v3 remains rejected
-- recommendation on readiness for product review before Phase 14.12
+- Phase 14.11 visually approved
+- v2 remains the final Deep direction
+- v3 rejected; no further darkening experiments
+- final manifest checked; no IGNORE, placeholder, broken, zero-byte, unreadable, stray screenshot, cache, or preview files in the final package
+- final Deep file map confirmed for W9-W42 (single canonical file per week)
+- four final sheets confirmed present and clean
+- recommendation: ready for Phase 14.12 Deep asset re-import planning
 
 ### Stop point
 
-Stop after the 11 missing Deep images, any required reruns, the four final review sheets, and the notes update. Do not import assets, create `.asset.json`, edit `src/`, change the resolver, change Settings, wire anything, or begin Phase 14.12. Await review approval.
+Stop after the manifest scan, map confirmation, sheet confirmation, and notes append. Await Phase 14.12 approval.

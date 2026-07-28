@@ -11,9 +11,14 @@ import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
-import MyWeekBabyImage from "@/components/myweek/MyWeekBabyImage";
 import PageLoadState from "@/components/shared/PageLoadState";
 import NotFound from "@/pages/NotFound";
+import {
+  resolveRealismForWeek,
+  defaultRealismAltForWeek,
+  normaliseRealismTone,
+  type RealismTone,
+} from "@/lib/myWeekRealismIllustrations";
 
 /**
  * /my-week/:week — KEPT CHAPTER (preserved page).

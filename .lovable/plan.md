@@ -1,107 +1,76 @@
+## Phase 15.3C — Pregnancy Memory Film, Preview Only
 
-# Phase 15.3A — Voice Notes and Memory Continuity
+Private, in-app, vertical 9:16 memory film assembled in the browser from memories already loaded by My Journey. No export, no download, no sharing, no music, no new route, no backend change.
 
-## Data model check (confirmed, no migration)
+### Confirmed current state (audited)
 
-- `public.week_media_memories.media_type` check constraint already permits `'video'` and `'voice_note'`.
-- Unique key `(user_id, week, media_type)` → one voice note per user per week.
-- Bucket `weekly-photos` already stores signed private media at `{user_id}/{week}/{media_type}/{uuid}.{ext}` — reuse for `voice_note`.
-- `WeekMediaType` in `src/lib/weekMedia.ts` already unions `"voice_note"`.
-- **No migration, no RLS change, no bucket change.**
+- `/my-journey` already loads, in one pass: reflections by week, photo URLs, videos and voice notes (each with `week`, signed `url`, `caption`, `mimeType`, `durationSeconds`), plus `firstName`, `currentWeek`, `due`, `status`, and a derived `keptWeeks` list.
+- All media is signed in a single batched `createSignedUrls` call with a 60-minute TTL. The film reuses those exact URLs — nothing new is fetched or stored.
+- `status` is a `PregnancyJourneyStatus`; `isActive = status === "active"` already exists in the page.
+- Testing is Vitest (`npm test`), with tests co-located under `src/` (e.g. `src/lib/dateOnly.test.ts`). No new framework needed.
 
-## Files changed
+### Step 1 — Pure timeline builder (built and tested before any UI)
 
-### `src/lib/weekMedia.ts` (extend)
-Add audio constants alongside video:
-- `VOICE_MAX_BYTES = 10 * 1024 * 1024` (10 MB), `VOICE_MAX_DURATION_SECONDS = 180` (3 min).
-- `VOICE_ACCEPTED_MIME` = `audio/webm|mp4|mpeg|ogg`.
-- `VOICE_RECORDER_MIME_CANDIDATES` list for `MediaRecorder.isTypeSupported` detection.
-- `baseAudioMime()`, `extensionForVoice()`.
-- `VOICE_ERROR_COPY` mirroring `VIDEO_ERROR_COPY`.
+New file `src/lib/memoryFilm.ts`. No React, no Supabase, no browser APIs. Signed URLs are passed in as opaque strings.
 
-### `src/hooks/useWeekMedia.ts` (extend)
-- Keep existing `upload(file)` (video-only, unchanged).
-- Add `uploadVoice(blob, { mimeType, durationSeconds })` used only when `mediaType === "voice_note"`:
-  - Validates MIME allowlist, byte size, duration.
-  - Uploads to `weekly-photos` at `{user}/{week}/voice_note/{uuid}.{ext}`.
-  - Upserts `week_media_memories` row on the existing unique key.
-  - On error: rolls back the freshly uploaded object.
-  - Cleans up the previous object on replace.
-- Load / caption / signed-URL / remove paths are already generic on `mediaType` — no shape change. Fix the remove roll-back MIME fallback so it uses the previous `mimeType` (falls back to `audio/webm` for voice, `video/mp4` for video) instead of always `video/mp4`.
+Input: `{ firstName, currentWeek, due, weeks: WeekMemory[], selectedWeeks: number[] }` where `WeekMemory` carries `week`, optional `reflection`, `photo`, `video`, `voice` (each with url, caption, duration).
 
-### `src/components/myweek/SlotVoiceMemory.tsx` (new)
-Fourth slot inside `SectionKeepThisWeek`, ordered after Video.
-- Title "A voice note". Subline "Record a few words for this week, in your own voice."
-- States: empty → Record; recording (mm:ss timer + Stop); preview (`<audio controls preload="metadata">`, Save / Re-record / Cancel); saved (playback + caption editor + Replace + Remove).
-- Uses `MediaRecorder` with feature detection; picks first supported MIME from `VOICE_RECORDER_MIME_CANDIDATES`. Mic access requested only on the Record tap. **No autoplay.**
-- Save confirmation "Saved to this week." matches Phase 15.1 pattern.
-- Emits `onSaved` / `onCleared` to refresh the captured indicator.
+Output: `{ beats: FilmBeat[], totalSeconds, includedWeeks, excludedForCap }` — a flat array of beats with absolute `startSeconds` and `durationSeconds`.
 
-### `src/components/myweek/SectionKeepThisWeek.tsx`
-- Add `<SlotVoiceMemory />` after `<SlotVideoMemory />`.
-- Extend `KeptState` with `voice: boolean`; also query the `voice_note` row when computing the indicator.
-- Extend `summariseKept` to include "voice note" in the joined list.
+Beat types: `cover`, `chapter`, `weekLabel`, `photo`, `video`, `voice`, `reflection`, `ending`.
 
-### `src/components/myjourney/MomentsKeptSummary.tsx`
-- Add `voiceNotes: number` prop; render new "Voice notes" tile between Videos and Weeks kept.
-- Grid becomes `grid-cols-2 sm:grid-cols-5` (or 2×3 → sm:5) so mobile stays uncrowded.
+Rules:
+- Sort ascending by week; group by week; drop any week with no saved memory; honour `selectedWeeks`.
+- Insert a `chapter` beat when the trimester changes (1–12, 13–27, 28+).
+- Per-week ordering: `weekLabel` (folded into the first visual beat where possible) → photo → video → voice → reflection.
+- Durations: cover 3s, chapter 2.5s, reflection 4s, photo 4s, video `min(duration, 6)` defaulting to 5s when duration is unknown, voice `min(duration, 10)` defaulting to 8s, ending 3s.
+- Hard cap 120s. When over, drop lowest-value beats first (reflection-only, then extra photo beats on dense weeks), keeping the first and last kept weeks and at least one beat per selected week; report what was dropped via `excludedForCap`.
+- Target 45–90s; when the journey is sparse the film is simply shorter and a `sparse` flag is returned for copy.
+- Deterministic: same input always yields the identical beat array. No `Date.now()`, no randomness.
 
-### `src/components/myjourney/KeptWeekRow.tsx`
-- Add `hasVoice?: boolean` prop.
-- Show a discreet "Voice note" indicator next to the existing Video indicator when present.
+New test file `src/lib/memoryFilm.test.ts` covering: determinism, week sorting, chapter insertion at trimester boundaries, empty weeks excluded, `selectedWeeks` filtering, cap enforcement under 120s, sparse journeys, and unknown media durations.
 
-### `src/pages/MyJourney.tsx`
-- Extend the `week_media_memories` fetch to include both `video` and `voice_note` rows in a single query (drop the `.eq("media_type", "video")` filter and bucket rows client-side by `media_type`).
-- Compute `voiceWeeks` set + `voices` signed-URL list (mirrors `videos`).
-- Pass `voiceNotes={voiceWeeks.size}` to `MomentsKeptSummary`, `hasVoice` to each `KeptWeekRow`, and `voices` to `PhotoJournal`.
-- Include `voice_note` weeks in the "any kept content" calculation.
+### Step 2 — Entry point
 
-### `src/components/myjourney/PhotoJournal.tsx`
-- Add `voices?: VoiceItem[]` prop (new exported type).
-- Extend tile union with `{ kind: "voice", … }`; render tiles as a calm audio card with a mic glyph, week badge, optional caption. Any week that already appears as a photo/video tile still gets a small "Voice" chip similar to the existing "Video" chip.
-- Clicking a voice tile opens `MediaLightbox` on the matching lightbox tile.
+New `src/components/myjourney/MemoryFilmEntry.tsx`, rendered on `/my-journey` beneath Moments Kept.
 
-### `src/components/myjourney/MediaLightbox.tsx`
-- Extend `LightboxTile` union with `{ kind: "voice"; url; caption; mimeType?; week }`.
-- Voice view: centred card, mic glyph, week badge, caption, `<audio controls preload="metadata" />`, `Open Week {week} →` link. No autoplay. Arrow-key cycling still works within the tile list.
+- Title "Create your pregnancy film", subline "Turn your saved photos, videos, voice notes and reflections into a private memory film.", button "Preview my film".
+- Shown only when `status === "active"`.
+- Requires at least 3 kept weeks and at least one photo or video or voice note; otherwise a gentle disabled state: "Keep a few more memories to create your film."
+- Hidden entirely for loss, paused, given-birth and any non-active status.
 
-### `src/pages/KeptChapter.tsx`
-- Fetch the `voice_note` row alongside the video row; sign its URL.
-- Extend the "A moment kept" section:
-  - Render present media in order **Photo → Video → Voice note**.
-  - If only one is present, show only that.
-  - Reflection block unchanged. Generated illustration is **not** labelled as a saved user moment (already the case; unchanged).
+### Step 3 — Week selection
 
-## UX rules honoured
-Voice notes are optional, calm copy, no autoplay anywhere, accessible controls, mobile-safe.
+New `src/components/myjourney/MemoryFilmBuilder.tsx` — a full-screen overlay (no new route; opened from the entry point and closable with Escape).
 
-## Out of scope
-No migrations, RLS, bucket, route, sitemap, analytics, AI prompt, illustration, keepsake export, inline AI companion, hospital bag, or birth plan changes.
+- Lists only weeks that have saved content, all ticked by default.
+- Each row shows the week number and small chips for what it contains: Photo, Video, Voice, Reflection.
+- "Play film" is disabled when nothing is selected.
+- Shows the live estimated length from `buildFilmTimeline`.
 
-## QA
+### Step 4 — Player
 
-Manual:
-- Record → preview → Save → Replace → Remove voice note on `/my-week`.
-- Captured indicator reflects voice note alone and in combination.
-- `MomentsKeptSummary` shows voice-note count.
-- Kept row shows "Voice note" indicator.
-- Photo Journal voice tile opens lightbox and plays; `Open Week {week} →` navigates.
-- `KeptChapter` shows voice player under "A moment kept".
-- Existing reflection / photo / video flows unaffected.
-- Mobile layout intact, no console errors, signed URLs valid.
+New `src/components/myjourney/MemoryFilmPlayer.tsx`.
 
-Automated:
-```
-npm run typecheck
-```
-Report exact command and result.
+- 9:16 stage, centred and letterboxed on desktop, full width on mobile, using the existing keepsake surface and pregnancy accent tokens.
+- Clock driven by `requestAnimationFrame` against `performance.now()`, accumulating elapsed time only while playing.
+- Controls: play/pause, previous beat, next beat, close. Segmented progress bar, one segment per beat.
+- Photo beats: cover-cropped still with a slow 1.00→1.04 drift, caption as a low-third when present.
+- Video beats: inline `<video>` muted by default, playing from 0, cut at the beat duration; falls back to that week's photo or the week label if it cannot play.
+- Voice beats: calm card with the week label and a simple CSS bar motif (no generated assets), audio element started on the beat, faded out at the end.
+- Reflection beats: short excerpt only, first sentence or ~120 characters at a word boundary, `font-serif` on a warm ground.
+- Cover and ending beats: name, week span and due date line, typographic only.
+- Nothing autoplays with sound before a user gesture; playback only begins after the explicit "Play film" tap.
 
-## Return handoff
-- files changed
-- confirmation `week_media_memories` supports voice notes without migration
-- recording implementation
-- save path
-- surfaces updated: My Week slot + indicator, My Journey summary + rows + Photo Journal, MediaLightbox audio, KeptChapter "A moment kept"
-- confirmation existing reflection / photo / video flows still work
-- typecheck result
-- remaining defects or blockers
+### Technical notes
+
+- No migrations, no RLS, storage, analytics, AI prompt or illustration changes.
+- No new routes: the builder and player are overlays within `/my-journey`.
+- No files are written to storage; nothing is exported or downloadable; no share link exists.
+- `MyJourney.tsx` changes are limited to composing the new entry point and passing already-loaded data down.
+
+### QA
+
+- `npm run typecheck`
+- `npx vitest run src/lib/memoryFilm.test.ts` plus the full suite
+- Playwright pass on `/my-journey` at mobile and desktop widths to confirm the entry point gating, week selection, playback of each beat type, controls, progress, and a clean console.

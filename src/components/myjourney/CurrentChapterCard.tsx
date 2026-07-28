@@ -44,7 +44,8 @@ const CurrentChapterCard = ({ currentWeek, tone = "default" }: Props) => {
               decoding="async"
               className="w-full h-full object-cover"
             />
-
+          </div>
+        </div>
         <div className="px-7 sm:px-9 py-7 sm:py-9 flex-1 min-w-0 flex flex-col justify-center">
           <p
             className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"

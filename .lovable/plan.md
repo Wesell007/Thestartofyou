@@ -1,106 +1,108 @@
-## Phase 14.11 — Deep Completion Cleanup & Tone Consistency Audit
+## Phase 14.11 — Deep Missing-Weeks Completion (W31-35, W37-42)
 
-Review-only recovery pass. No `src/` changes, no asset import, no `.asset.json`, no wiring. Do not proceed to Phase 14.12.
+Complete Deep coverage for the 11 remaining weeks under the approved v2 Deep direction. Review-only image generation. No `src/` changes, no asset import, no `.asset.json`, no resolver or Settings changes. Do not begin Phase 14.12.
 
-### 1. IGNORE placeholder cleanup & quarantine
+### Scope
 
-Search under `/mnt/documents/` (especially `phase-14-11/`, its `images/`, `images/deep/`, `sheets/`, `prompts/`) for files whose name contains any of: `IGNORE`, `ignore`, `placeholder`, `_do_not_use`, `tmp`, `probe`, `scratch`.
+Generate Deep only for W31, W32, W33, W34, W35, W37, W38, W39, W40, W41, W42.
 
-For each match:
-- Create `/mnt/documents/phase-14-11/quarantine/` if missing.
-- Move the file into `quarantine/`, preserving the basename.
-- Record the original absolute path and quarantine destination in `notes.md`.
+Do not touch W9-W30, W36, Default, Light, Medium, or any approved v2 anchor.
 
-Also inspect the currently generated Deep completion PNGs for any all-black / near-black frame that may be a hidden IGNORE placeholder (mean luminance below a low threshold) and quarantine those too, noting the detection in `notes.md`.
+### Source map (edit-from-default only)
 
-No placeholder file may appear as source, reference, or cell in any sheet, manifest, or deliverable after this step.
+Approved Phase 14.2b default v2 sources:
 
-### 2. Approved Deep v2 anchor set (locked, do not touch)
+- W31 -> `/mnt/documents/phase-14-2/images/week-31.v2.png`
+- W32 -> `/mnt/documents/phase-14-2/images/week-32.v2.png`
+- W34 -> `/mnt/documents/phase-14-2/images/week-34.v2.png`
 
-```
-week-09.v2.png
-week-10.v2.png
-week-11.v2.png
-week-12.v2.png
-week-13.v2.png
-week-14.v2.png
-week-20.v2.png
-week-36.png
-```
+Base defaults:
 
-All under `/mnt/documents/phase-14-11/images/deep/`. These define the approved Deep tone family. Never regenerate.
+- W33 -> `/mnt/documents/phase-14-2/images/week-33.png`
+- W35 -> `/mnt/documents/phase-14-2/images/week-35.png`
+- W37 -> `/mnt/documents/phase-14-2/images/week-37.png`
+- W38 -> `/mnt/documents/phase-14-2/images/week-38.png`
+- W39 -> `/mnt/documents/phase-14-2/images/week-39.png`
+- W40 -> `/mnt/documents/phase-14-2/images/week-40.png`
+- W41 -> `/mnt/documents/phase-14-2/images/week-41.png`
+- W42 -> `/mnt/documents/phase-14-2/images/week-42.png`
 
-Rejected and unusable as source/reference: any v1 Deep, any v3 Deep, Medium, screenshots, sheets, cache, previews.
+Never edit from Medium, current Deep, proposed v1/v2, rejected v3, screenshots, sheets, cache files, generated previews, or placeholders. No generation from scratch.
 
-### 3. Deep tone consistency audit
+### Prompt
 
-Enumerate every Deep file currently in `/mnt/documents/phase-14-11/images/deep/` for W9–W42 after quarantine. For each:
-- Compute mean L*, a*, b* in Lab space on the subject region.
-- Compare against nearest approved v2 anchor by maturity band:
-  - W9–W19 → nearest of W9/10/11/12/13/14 v2
-  - W20–W30 → W20 v2
-  - W31–W42 → W36 approved Deep
-- Also compare against the Medium file for the same week at `/mnt/documents/phase-14-8/images/medium/week-XX.png`.
+Approved v2 Deep separation prompt with the tone-consistency clause already used for W15-W30, only the week number substituted. Do not push darker. Do not create a new v3 direction. Do not rewrite the prompt.
 
-Assign one verdict per week:
-`pass` | `too light` | `too warm/orange` | `too olive/green` | `too grey/ashy` | `too muddy` | `too harsh` | `environment drift` | `needs rerun`.
+Archive exact prompts to:
 
-Rule set for `pass`:
-- L* not higher than anchor L* by more than a small tolerance (not lighter than v2 family).
-- Clearly darker than Medium at thumbnail size (visible ΔL after downscale to ~96px).
-- Hue within the warm-brown band of the anchor (no orange, yellow-gold, olive, green, grey, ashy).
-- Pose, sac/no-sac state, cord, wall bloom, background, maturity preserved (visual spot-check against the approved default source).
+- `/mnt/documents/phase-14-11/prompts/week-31.tone-consistent.md`
+- ... through `week-42.tone-consistent.md` (skipping W36)
 
-### 4. Required review sheets (explicit paths only)
+### Method
 
-Sheet builder must use explicit absolute path lists — no globs, no reads from `/mnt/documents/` root, `/mnt/data`, screenshots, cache, generated previews, placeholders, sheet images, or failed outputs.
+For each of the 11 weeks, call `imagegen--edit_image`:
 
-**Sheet A** — `/mnt/documents/phase-14-11/sheets/deep-tone-consistency-audit.png`
-- Rows: every generated Deep week from Phase 14.11 so far.
-- Columns: `medium | approved v2 anchor (nearest by maturity) | generated deep | verdict`.
+- `image_paths`: `["<approved default source above>"]`
+- `prompt`: verbatim tone-consistent v2 Deep prompt for that week
+- `target_path`: `/mnt/documents/phase-14-11/images/deep/week-XX.png`
 
-**Sheet B** — `/mnt/documents/phase-14-11/sheets/deep-tone-consistency-thumbnail-check.png`
-- Rendered at Account Settings preview size (~96 px).
-- Columns: `medium | generated deep`.
-- Same weeks as Sheet A.
+Model: `premium.gemini` (Nano Banana 2). No other tool.
 
-### 5. Targeted reruns (failing weeks only)
+### Acceptance and rerun rule
 
-Only rerun weeks whose verdict is not `pass`. Do not rerun approved anchors. Do not rerun passing weeks.
+Accept only if the output is clearly darker than Medium, matches the approved v2 Deep direction, and preserves pose, face, cord, sac/no-sac state, womb environment, wall bloom (if present), crop, scale, and week maturity. Reject if muddy, grey, olive, ashy, overly red, burnt, harsh, or heavy-shadowed.
 
-For each failing week:
-- Tool: `imagegen--edit_image`, model `premium.gemini` (Nano Banana 2).
-- `image_paths`: the approved Phase 14.2 default source for that week only (use the v2 default source where one exists: W9, 13, 16, 21, 26, 31, 32, 34; otherwise the base default).
-- `prompt`: the approved v2 Deep separation prompt already archived at `/mnt/documents/phase-14-11/prompts/week-XX.v2.md`, with this tone-consistency clause appended verbatim (no other edits):
+One rerun allowed per failing week, saved as `week-XX.v2.png` (edited from the same approved default source, same prompt). No v3 experiments.
 
-  > Match the approved proposed Deep v2 tone family. The result must look consistent with the approved Deep v2 anchor images, not lighter, not more orange, not more yellow-gold, not olive, not grey, and not washed out. It must remain clearly darker than Medium at thumbnail size while preserving warm premium watercolour softness.
+### Final Deep file map (post-batch)
 
-- `target_path`: overwrite `/mnt/documents/phase-14-11/images/deep/week-XX.png` (or the versioned filename already in use for that week; approved v2 anchor filenames are never overwritten).
+- W9-W14: approved `.v2.png` anchors
+- W15-W19: corrected Phase 14.11 outputs
+- W20: approved `.v2.png` anchor
+- W21-W30: corrected Phase 14.11 outputs
+- W31-W35: this batch
+- W36: approved `week-36.png` anchor
+- W37-W42: this batch
 
-Never edit from Medium, current Deep, v1, v2, v3, screenshots, sheets, or placeholders. Never generate from scratch.
+Every week from W9 to W42 must resolve to exactly one approved Deep file.
 
-Re-run Sheet A and Sheet B after reruns using the same explicit-path builder.
+### Final review sheets
 
-### 6. Notes update
+Build from explicit absolute per-week paths only. No globs, no placeholders, no screenshots, no cache files, no generated previews.
+
+1. `/mnt/documents/phase-14-11/sheets/deep-final-medium-vs-approved-deep.png`
+   - Rows: W9-W42
+   - Columns: medium | approved deep
+
+2. `/mnt/documents/phase-14-11/sheets/deep-final-settings-thumbnail-check.png`
+   - Rows: W9-W42
+   - Columns: medium | approved deep
+   - Rendered at Account Settings preview size (~96px)
+
+3. `/mnt/documents/phase-14-11/sheets/deep-final-four-up.png` (product family confirmation)
+   - Rows: W9, W12, W16, W20, W26, W32, W36, W40, W42
+   - Columns: default | light | medium | approved deep
+
+4. `/mnt/documents/phase-14-11/sheets/deep-final-replacement-comparison.png`
+   - Rows: W9-W42
+   - Columns: medium | previous/current deep | approved deep
+   - Previous/current Deep from `/mnt/documents/phase-14-8/images/deep/week-XX.png`
+   - Approved Deep from the final approved file map above
+
+### Notes update
 
 Append to `/mnt/documents/phase-14-11/notes.md`:
-- IGNORE placeholder original path(s), quarantine destination, likely cause.
-- Full list of Deep weeks audited.
-- Per-week tone verdict (before rerun).
-- List of weeks that failed tone consistency.
-- List of weeks rerun and outcome after rerun.
-- Final approved Deep file per week (absolute path) for W9–W42.
-- Confirmation that all approved Deep files match the v2 direction.
-- Confirmation that all sheets were built from explicit absolute paths only.
-- Recommendation on whether the Deep set is ready for product review.
+
+- the 11 missing Deep weeks were completed
+- source file used per week
+- final approved Deep file per week from W9 to W42 (single canonical map)
+- any reruns and why
+- confirmation final Deep coverage is complete for W9-W42
+- confirmation all final sheets were built from explicit absolute paths only
+- confirmation v2 remains the final Deep direction
+- confirmation v3 remains rejected
+- recommendation on readiness for product review before Phase 14.12
 
 ### Stop point
 
-Stop after: placeholder cleanup, quarantine, tone consistency audit, targeted reruns for failing weeks only, rebuilt review sheets, notes update. Do not proceed to Phase 14.12. Do not import assets. Do not create `.asset.json`. Do not edit `src/`. Do not wire anything.
-
-### Technical details
-
-- Luminance check for hidden placeholders: PIL `ImageStat.mean` on the greyscale image; treat mean < 8 or std < 4 as suspect.
-- Lab conversion for tone metrics: PIL `ImageCms` sRGB→Lab, mean over central 60% crop to avoid halo/background bias.
-- Downscale for thumbnail delta: PIL `Image.LANCZOS` to 96 px on the longest edge, then compare mean L*.
-- Sheet layout: PIL with a fixed manifest dict `{week: {medium, anchor, deep, verdict}}` built in code from the explicit path lists in this plan.
+Stop after the 11 missing Deep images, any required reruns, the four final review sheets, and the notes update. Do not import assets, create `.asset.json`, edit `src/`, change the resolver, change Settings, wire anything, or begin Phase 14.12. Await review approval.

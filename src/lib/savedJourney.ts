@@ -132,6 +132,21 @@ export const commitPendingJourneyToDB = async (userId: string) => {
 };
 
 /**
+ * Save an active pregnancy journey directly for a signed-in user, from an
+ * LMP date. Additive helper for the due date calculator's signed-in paths
+ * (Phase 15.1). Uses the same authoritative RPC + legacy mirror as the
+ * pending-commit path so the saved data shape does not change.
+ */
+export const saveActivePregnancyJourney = async (userId: string, lmp: Date) => {
+  const due = addDays(lmp, 280);
+  const lmpDate = format(lmp, "yyyy-MM-dd");
+  const dueDate = format(due, "yyyy-MM-dd");
+  await upsertPregnancyJourney(userId, lmpDate, dueDate);
+  clearPendingJourney();
+  return { lmp, due };
+};
+
+/**
  * Read the user's currently active pregnancy journey.
  *
  * Lookup order (all fallback/backfill logic lives here, not in pages):

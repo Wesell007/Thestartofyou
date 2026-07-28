@@ -11,9 +11,14 @@ import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
-import MyWeekBabyImage from "@/components/myweek/MyWeekBabyImage";
 import PageLoadState from "@/components/shared/PageLoadState";
 import NotFound from "@/pages/NotFound";
+import {
+  resolveRealismForWeek,
+  defaultRealismAltForWeek,
+  normaliseRealismTone,
+  type RealismTone,
+} from "@/lib/myWeekRealismIllustrations";
 
 /**
  * /my-week/:week — KEPT CHAPTER (preserved page).
@@ -28,11 +33,19 @@ import NotFound from "@/pages/NotFound";
 
 type ReflectionLite = { week: number; content: string; updated_at: string };
 
+type VideoLite = {
+  url: string;
+  caption: string | null;
+  mimeType: string | null;
+};
+
 type Loaded = {
   currentWeek: number;
   reflection: ReflectionLite | null;
   photoUrl: string | null;
   photoCaption: string | null;
+  video: VideoLite | null;
+  tone: RealismTone;
   // All weeks (past, ≠ current) that have *any* kept content.
   // Used to find adjacent kept chapters for chapter-style navigation.
   keptWeeks: number[];
@@ -84,9 +97,21 @@ const KeptChapter = () => {
         navigate("/auth", { replace: true });
         return;
       }
-      const [{ data: profile, error: profileError }, journey, { data: refl, error: reflectionError }, { data: photo, error: photoError }, { data: allRefls, error: allReflectionError }, { data: allPhotos, error: allPhotoError }] =
-        await Promise.all([
-          supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
+      const [
+        { data: profile, error: profileError },
+        journey,
+        { data: refl, error: reflectionError },
+        { data: photo, error: photoError },
+        { data: videoRow, error: videoError },
+        { data: allRefls, error: allReflectionError },
+        { data: allPhotos, error: allPhotoError },
+        { data: allVideos, error: allVideoError },
+      ] = await Promise.all([
+          supabase
+            .from("profiles")
+            .select("first_name, baby_illustration_style")
+            .eq("user_id", user.id)
+            .maybeSingle(),
           getActivePregnancyJourney(user.id, { throwOnError: true }),
           supabase
             .from("reflections")
@@ -100,11 +125,39 @@ const KeptChapter = () => {
             .eq("user_id", user.id)
             .eq("week", week)
             .maybeSingle(),
+          supabase
+            .from("week_media_memories")
+            .select("storage_path, caption, mime_type")
+            .eq("user_id", user.id)
+            .eq("week", week)
+            .eq("media_type", "video")
+            .maybeSingle(),
           supabase.from("reflections").select("week, content").eq("user_id", user.id),
           supabase.from("week_photos").select("week").eq("user_id", user.id),
+          supabase
+            .from("week_media_memories")
+            .select("week")
+            .eq("user_id", user.id)
+            .eq("media_type", "video"),
         ]);
-      if (profileError || reflectionError || photoError || allReflectionError || allPhotoError) {
-        throw profileError ?? reflectionError ?? photoError ?? allReflectionError ?? allPhotoError;
+      if (
+        profileError ||
+        reflectionError ||
+        photoError ||
+        videoError ||
+        allReflectionError ||
+        allPhotoError ||
+        allVideoError
+      ) {
+        throw (
+          profileError ??
+          reflectionError ??
+          photoError ??
+          videoError ??
+          allReflectionError ??
+          allPhotoError ??
+          allVideoError
+        );
       }
       if (cancelled) return;
       if (!journey) {
@@ -124,6 +177,8 @@ const KeptChapter = () => {
         return;
       }
 
+      const tone = normaliseRealismTone(profile?.baby_illustration_style);
+
       let photoUrl: string | null = null;
       const photoCaption: string | null = photo?.caption ?? null;
       if (photo?.storage_path) {
@@ -132,6 +187,21 @@ const KeptChapter = () => {
           .createSignedUrl(photo.storage_path, 60 * 60);
         if (urlError) throw urlError;
         photoUrl = urlData?.signedUrl ?? null;
+      }
+
+      let video: VideoLite | null = null;
+      if (videoRow?.storage_path) {
+        const { data: urlData, error: urlError } = await supabase.storage
+          .from("weekly-photos")
+          .createSignedUrl(videoRow.storage_path, 60 * 60);
+        if (urlError) throw urlError;
+        if (urlData?.signedUrl) {
+          video = {
+            url: urlData.signedUrl,
+            caption: videoRow.caption ?? null,
+            mimeType: videoRow.mime_type ?? null,
+          };
+        }
       }
 
       // Build the set of past weeks with any kept content for adjacent
@@ -144,6 +214,9 @@ const KeptChapter = () => {
       });
       (allPhotos ?? []).forEach((p) => {
         if (p.week < currentWeek) kept.add(p.week);
+      });
+      (allVideos ?? []).forEach((v) => {
+        if (v.week < currentWeek) kept.add(v.week);
       });
       const keptWeeks = Array.from(kept).sort((a, b) => a - b);
 
@@ -162,6 +235,8 @@ const KeptChapter = () => {
         reflection,
         photoUrl,
         photoCaption,
+        video,
+        tone,
         keptWeeks,
       });
       } catch {
@@ -174,10 +249,10 @@ const KeptChapter = () => {
   }, [week, validWeek, navigate, attempt]);
 
   useEffect(() => {
-    if (!data?.photoUrl) return;
+    if (!data?.photoUrl && !data?.video) return;
     const timer = window.setTimeout(() => setAttempt((n) => n + 1), 50 * 60 * 1000);
     return () => window.clearTimeout(timer);
-  }, [data?.photoUrl]);
+  }, [data?.photoUrl, data?.video]);
 
   const content = useMemo(() => (validWeek ? getMyWeekContent(week) : null), [week, validWeek]);
   const identity = useMemo(() => (validWeek ? getWeekIdentity(week) : null), [week, validWeek]);
@@ -188,7 +263,9 @@ const KeptChapter = () => {
     return <PageLoadState />;
   }
 
-  const { reflection, photoUrl, photoCaption, keptWeeks } = data;
+  const { reflection, photoUrl, photoCaption, video, tone, keptWeeks } = data;
+  const realism = resolveRealismForWeek(week, tone);
+  const realismAlt = defaultRealismAltForWeek(week);
   const trimester = trimesterLabelFor(week);
 
   // Adjacent KEPT chapters (not just adjacent week numbers). Calmer browsing.
@@ -274,11 +351,14 @@ const KeptChapter = () => {
                 border: `1px solid ${accentSoft(0.22)}`,
               }}
             >
-              <MyWeekBabyImage
-                week={week}
-                className="w-full h-full flex items-center justify-center"
-                imgClassName="w-full h-full object-cover"
+              <img
+                src={realism.src}
+                alt={realismAlt}
+                loading="eager"
+                decoding="async"
+                className="w-full h-full object-cover"
               />
+
             </div>
           </div>
 
@@ -397,39 +477,68 @@ const KeptChapter = () => {
             )}
           </section>
 
-          {/* 6. A moment kept — only when a photo exists */}
-          {photoUrl && (
-            <section className="order-3">
+          {/* 6. A moment kept — photo, video, or both */}
+          {(photoUrl || video) && (
+            <section className="order-3 space-y-5">
               <h2
-                className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-5"
+                className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-1"
                 style={{ color: accent }}
               >
                 A moment kept
               </h2>
-              <figure
-                className="rounded-[24px] overflow-hidden"
-                style={{ border: `1px solid ${accentSoft(0.16)}` }}
-              >
-                <img
-                  src={photoUrl}
-                  alt={`A moment kept from week ${week} — ${identity.chapterTitle}`}
-                  className="w-full h-auto max-h-[520px] object-cover block"
-                />
-                {photoCaption && (
-                  <figcaption
-                    className="px-5 sm:px-6 py-4 font-serif italic text-[14.5px] sm:text-[15px] leading-[1.65] text-foreground/75"
-                    style={{
-                      borderTop: `1px solid ${accentSoft(0.16)}`,
-                      background: tint(0.16),
-                    }}
-                  >
-                    {photoCaption}
-                  </figcaption>
-                )}
-              </figure>
+              {photoUrl && (
+                <figure
+                  className="rounded-[24px] overflow-hidden"
+                  style={{ border: `1px solid ${accentSoft(0.16)}` }}
+                >
+                  <img
+                    src={photoUrl}
+                    alt={`A moment kept from week ${week} — ${identity.chapterTitle}`}
+                    className="w-full h-auto max-h-[520px] object-cover block"
+                  />
+                  {photoCaption && (
+                    <figcaption
+                      className="px-5 sm:px-6 py-4 font-serif italic text-[14.5px] sm:text-[15px] leading-[1.65] text-foreground/75"
+                      style={{
+                        borderTop: `1px solid ${accentSoft(0.16)}`,
+                        background: tint(0.16),
+                      }}
+                    >
+                      {photoCaption}
+                    </figcaption>
+                  )}
+                </figure>
+              )}
+              {video && (
+                <figure
+                  className="rounded-[24px] overflow-hidden"
+                  style={{ border: `1px solid ${accentSoft(0.16)}` }}
+                >
+                  <video
+                    src={video.url}
+                    controls
+                    preload="metadata"
+                    playsInline
+                    muted
+                    className="w-full h-auto max-h-[520px] block bg-black"
+                  />
+                  {video.caption && (
+                    <figcaption
+                      className="px-5 sm:px-6 py-4 font-serif italic text-[14.5px] sm:text-[15px] leading-[1.65] text-foreground/75"
+                      style={{
+                        borderTop: `1px solid ${accentSoft(0.16)}`,
+                        background: tint(0.16),
+                      }}
+                    >
+                      {video.caption}
+                    </figcaption>
+                  )}
+                </figure>
+              )}
             </section>
           )}
         </div>
+
 
         {/* 7. Chapter context — quiet, no progress UI */}
         <section className="mt-14 sm:mt-16">

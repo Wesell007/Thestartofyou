@@ -37,13 +37,14 @@ const CurrentChapterCard = ({ currentWeek, tone = "default" }: Props) => {
             className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] rounded-full overflow-hidden flex items-center justify-center"
             style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.22)" }}
           >
-            <MyWeekBabyImage
-              week={currentWeek}
-              className="w-full h-full flex items-center justify-center"
-              imgClassName="w-full h-full object-cover"
+            <img
+              src={realism.src}
+              alt={realismAlt}
+              loading="eager"
+              decoding="async"
+              className="w-full h-full object-cover"
             />
-          </div>
-        </div>
+
         <div className="px-7 sm:px-9 py-7 sm:py-9 flex-1 min-w-0 flex flex-col justify-center">
           <p
             className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"

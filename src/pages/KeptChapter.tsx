@@ -33,11 +33,19 @@ import {
 
 type ReflectionLite = { week: number; content: string; updated_at: string };
 
+type VideoLite = {
+  url: string;
+  caption: string | null;
+  mimeType: string | null;
+};
+
 type Loaded = {
   currentWeek: number;
   reflection: ReflectionLite | null;
   photoUrl: string | null;
   photoCaption: string | null;
+  video: VideoLite | null;
+  tone: RealismTone;
   // All weeks (past, ≠ current) that have *any* kept content.
   // Used to find adjacent kept chapters for chapter-style navigation.
   keptWeeks: number[];

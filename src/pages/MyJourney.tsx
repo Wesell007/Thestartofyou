@@ -27,7 +27,7 @@ import LookingAheadCard from "@/components/myjourney/LookingAheadCard";
 import PageLoadState from "@/components/shared/PageLoadState";
 import { useBabyIllustrationStyle } from "@/hooks/useBabyIllustrationStyle";
 import { normaliseRealismTone, type RealismTone } from "@/lib/myWeekRealismIllustrations";
-import type { VideoItem } from "@/components/myjourney/PhotoJournal";
+import type { VideoItem, VoiceItem } from "@/components/myjourney/PhotoJournal";
 
 type ReflectionRow = {
   week: number;
@@ -36,8 +36,9 @@ type ReflectionRow = {
 };
 
 type PhotoRow = { week: number; storage_path: string; caption: string | null };
-type VideoRow = {
+type MediaRow = {
   week: number;
+  media_type: string;
   storage_path: string;
   caption: string | null;
   mime_type: string;
@@ -53,8 +54,10 @@ type State = {
   reflectionsByWeek: Record<number, ReflectionRow>;
   photoWeeks: Set<number>;
   videoWeeks: Set<number>;
+  voiceWeeks: Set<number>;
   photoUrls: { week: number; url: string; caption: string | null }[];
   videos: VideoItem[];
+  voiceNotes: VoiceItem[];
 };
 
 const computeWeek = (lmp: Date) => {
@@ -103,9 +106,8 @@ const MyJourney = () => {
           supabase.from("week_photos").select("week, storage_path, caption").eq("user_id", user.id),
           supabase
             .from("week_media_memories")
-            .select("week, storage_path, caption, mime_type, duration_seconds")
-            .eq("user_id", user.id)
-            .eq("media_type", "video"),
+            .select("week, media_type, storage_path, caption, mime_type, duration_seconds")
+            .eq("user_id", user.id),
         ]);
         if (profileError) throw profileError;
         if (reflectionError) throw reflectionError;
@@ -135,14 +137,19 @@ const MyJourney = () => {
         const photoRows: PhotoRow[] = (photos ?? []).filter((p): p is PhotoRow => !!p.storage_path);
         const photoWeeks = new Set<number>(photoRows.map((p) => p.week));
 
-        const videoRows: VideoRow[] = (mediaRows ?? []).filter(
-          (m): m is VideoRow => !!m.storage_path,
-        );
+        const mediaOfType = (type: string): MediaRow[] =>
+          (mediaRows ?? []).filter(
+            (m): m is MediaRow => !!m.storage_path && m.media_type === type,
+          );
+        const videoRows = mediaOfType("video");
+        const voiceRows = mediaOfType("voice_note");
         const videoWeeks = new Set<number>(videoRows.map((v) => v.week));
+        const voiceWeeks = new Set<number>(voiceRows.map((v) => v.week));
 
         const allPaths = [
           ...photoRows.map((p) => p.storage_path),
           ...videoRows.map((v) => v.storage_path),
+          ...voiceRows.map((v) => v.storage_path),
         ];
         const signedByPath = new Map<string, string>();
         if (allPaths.length > 0) {
@@ -170,6 +177,17 @@ const MyJourney = () => {
           .filter((v) => v.url.length > 0)
           .sort((a, b) => b.week - a.week);
 
+        const voiceNotes: VoiceItem[] = voiceRows
+          .map((v) => ({
+            week: v.week,
+            url: signedByPath.get(v.storage_path) ?? "",
+            caption: v.caption,
+            mimeType: v.mime_type,
+            durationSeconds: v.duration_seconds,
+          }))
+          .filter((v) => v.url.length > 0)
+          .sort((a, b) => b.week - a.week);
+
         setState({
           firstName: profile.first_name,
           currentWeek: computeWeek(journey.lmp),
@@ -179,8 +197,10 @@ const MyJourney = () => {
           reflectionsByWeek,
           photoWeeks,
           videoWeeks,
+          voiceWeeks,
           photoUrls,
           videos,
+          voiceNotes,
         });
       } catch {
         if (!cancelled) setLoadError("We couldn't load your saved journey just now. Nothing has been removed.");
@@ -193,11 +213,12 @@ const MyJourney = () => {
 
   const derived = useMemo(() => {
     if (!state) return null;
-    const { currentWeek, reflectionsByWeek, photoWeeks, videoWeeks } = state;
+    const { currentWeek, reflectionsByWeek, photoWeeks, videoWeeks, voiceWeeks } = state;
 
     const keptWeeks: number[] = [];
     for (let w = 1; w <= currentWeek; w++) {
-      const hasContent = !!reflectionsByWeek[w] || photoWeeks.has(w) || videoWeeks.has(w);
+      const hasContent =
+        !!reflectionsByWeek[w] || photoWeeks.has(w) || videoWeeks.has(w) || voiceWeeks.has(w);
       if (hasContent) keptWeeks.push(w);
     }
 
@@ -221,7 +242,19 @@ const MyJourney = () => {
   if (loadError) return <PageLoadState error={loadError} onRetry={() => setAttempt((n) => n + 1)} />;
   if (!state || !derived) return <PageLoadState />;
 
-  const { firstName, currentWeek, due, status, reflectionsByWeek, photoWeeks, videoWeeks, photoUrls, videos } = state;
+  const {
+    firstName,
+    currentWeek,
+    due,
+    status,
+    reflectionsByWeek,
+    photoWeeks,
+    videoWeeks,
+    voiceWeeks,
+    photoUrls,
+    videos,
+    voiceNotes,
+  } = state;
   const { keptWeeks, reflectionWeeks } = derived;
 
   const accent = "hsl(var(--stage-pregnancy-accent))";
@@ -235,6 +268,7 @@ const MyJourney = () => {
       reflection={reflectionsByWeek[w]?.content}
       hasPhoto={photoWeeks.has(w)}
       hasVideo={videoWeeks.has(w)}
+      hasVoiceNote={voiceWeeks.has(w)}
       tone={tone}
       isCurrentWeek={w === currentWeek}
     />
@@ -299,6 +333,7 @@ const MyJourney = () => {
           reflections={reflectionWeeks.length}
           photos={photoWeeks.size}
           videos={videoWeeks.size}
+          voiceNotes={voiceWeeks.size}
           weeksKept={keptWeeks.length}
         />
 
@@ -311,6 +346,7 @@ const MyJourney = () => {
           reflectionsByWeek={reflectionsByWeek}
           photoUrls={photoUrls}
           videos={videos}
+          voiceNotes={voiceNotes}
           currentWeek={currentWeek}
           renderRow={renderRow}
         />

@@ -1,59 +1,81 @@
-## Phase 14.15 — My Journey Detail Rollover Fix
 
-Targeted fix for the kept week detail page (`/my-week/:week`, `src/pages/KeptChapter.tsx`) so it uses the new realism resolver and displays saved videos. Scope-limited per brief: no new assets, no route/migration/RLS/upload changes.
+# Phase 15.1 — Must Fix Product Gaps
 
-### Root cause
+Approved scope. Five focused fixes. No route, migration, storage, RLS, sitemap, analytics, AI prompt, voice, export, or asset changes.
 
-- `src/pages/KeptChapter.tsx` still imports `MyWeekBabyImage` (old 3-stage set from `myweek-weekly-babies/`) for the chapter header oval — this is what shows the old baby image on Week 36.
-- `KeptChapter.tsx` never queries `week_media_memories`, so saved videos are invisible in the detail view.
-- The "A moment kept" section only renders when a saved `week_photos` row exists; when a user saved only a video (Week 36), the section is skipped entirely, and the header baby illustration reads as if it were the kept moment.
+## Fix 1 — Save confirmations on My Week
 
-Out of scope (intentionally not touched this phase): `MyWeekChapter.tsx` (live /my-week), `CurrentChapterCard.tsx`, `JourneyPreviewSection.tsx` (public home preview). These are not part of the "kept week detail" surface. `MyWeekBabyImage` component stays.
+Add a calm, inline "Saved to this week." beat after each successful save, fading after ~2.4s. No toasts.
 
-### Changes
+- `SlotReflection.tsx`: swap the footer autosave line to say `Saved to this week.` while `saveState === "saved"`, keeping the existing `Held privately.` idle text and the debounce untouched. Add optional `onSaved?: () => void` fired after each successful debounced save and shaping accept.
+- `SlotPhotoMemory.tsx`: add a `justSaved` transient (2.4s timer) set after a successful upload and a successful caption save. Render a small `Saved to this week.` line under the figure using existing type tokens. Add `onSaved?: () => void`.
+- `SlotVideoMemory.tsx`: same `justSaved` beat for upload and caption save, rendered directly under the video figure. Add `onSaved?: () => void`.
 
-**1. `src/pages/KeptChapter.tsx` — realism resolver for header**
+## Fix 2 — "Captured this week" indicator
 
-- Drop `MyWeekBabyImage` import; import `resolveRealismForWeek`, `defaultRealismAltForWeek`, `normaliseRealismTone` from `@/lib/myWeekRealismIllustrations`.
-- Load `baby_illustration_style` in the existing `profiles` select and normalise to a tone (used for weeks 9+; weeks 1–8 fall back to default inside the resolver).
-- Replace the header oval `<MyWeekBabyImage>` with an `<img>` using the resolver URL and alt.
+Header line inside `SectionKeepThisWeek.tsx` that runs three cheap reads on mount for the current `(userId, week)`:
 
-**2. `src/pages/KeptChapter.tsx` — fetch and display saved video**
+- `reflections.content` (non-empty)
+- `week_photos.storage_path`
+- `week_media_memories` where `media_type = 'video'`
 
-- Extend the parallel Promise to also query `week_media_memories` for `(user_id, week, media_type='video')` and create a signed URL from the `weekly-photos` bucket (mirrors existing photo signing, same 60-min TTL + 50-min re-sign timer).
-- Include weeks with a saved video in the `keptWeeks` set so navigation and the `!kept.has(week)` guard treat video-only weeks as kept chapters.
-- Update state shape: add `videoUrl: string | null`.
+Rendering:
+- 0 kept → hidden.
+- 1 kept → `Captured this week · reflection` (or photo/video).
+- 2 kept → `Captured this week · reflection and photo`.
+- 3 kept → `Captured this week · reflection, photo and video`.
 
-**3. "A moment kept" section rewrite**
+Styling matches the section's existing tracking-uppercase accent tick label. No banner, no icons, no counts. A `refreshKey` bumped by each slot's `onSaved` re-runs the reads.
 
-Rules:
-- Photo only → existing photo figure.
-- Video only → `<video controls preload="metadata" playsInline muted className="w-full h-auto max-h-[520px] block" />` inside the same rounded frame, with the existing caption treatment reused if a caption is present on the video row.
-- Photo + video → render the photo figure, then a compact video tile beneath it in the same section.
-- Neither → omit the section entirely (matches current behaviour; the header realism illustration is not labelled as a saved moment).
+## Fix 3 — Bind reflection into the weekly capture section
 
-**4. Previous/next kept chapter cards**
+`SectionKeepThisWeek.tsx` accepts a new `content: MyWeekEntry` prop and renders, in order: header indicator → `SlotReflection` → hairline → `SlotPhotoMemory` → hairline → `SlotVideoMemory` → footer link. Reflection keeps its own "A moment for you" heading. `MyWeek.tsx` drops its standalone `<SlotReflection>` render and passes `content` to `SectionKeepThisWeek`. No wider page-rhythm changes.
 
-- Already text-only (no thumbnails) in `KeptChapter.tsx`, so nothing to change. Confirm during QA.
+## Fix 4 — Quiet link from My Week to My Journey
 
-### Files touched
+Inside `SectionKeepThisWeek`, when the header indicator shows ≥1 kept item, render a low-emphasis footer link `See this week in My Journey →` to `/my-journey` using existing text-link styling. No modal, no forced navigation.
 
-- `src/pages/KeptChapter.tsx` (only file edited).
+## Fix 5 — De-duplicate due date and setup surfaces
 
-### QA
+**Found duplication:** `DueDateCalculatorResult.tsx` shows three "Save your journey" CTAs (lines 368, 540, 1184) that unconditionally call `stashPendingJourney(lmp)` then `navigate("/auth")`, even for signed-in users who already have a saved pregnancy journey. This bounces signed-in users back through auth and frames the exploratory calculator as a fresh setup. Setup.tsx is unchanged (existing silent auth-flow commit is fine). AccountSettings shows the active lifecycle but not the saved LMP/due date, so there is no self-serve read.
 
-- `npm run typecheck`.
-- Playwright walkthrough as authenticated user:
-  - `/my-journey` still shows Videos count = 1 and Week 36 row indicator.
-  - `/my-week/36` shows the new realism illustration in the header oval and the saved video playable under "A moment kept".
-  - `/my-week/<a photo-only week>` still shows the photo.
-  - `/my-week/<a week 1–8 kept chapter, if any>` falls back to default realism.
-  - No console errors, no broken `<img>`/`<video>`.
+**Adjustments (no data-shape or week-calc changes):**
 
-### Return
+1. Add additive helper `saveActivePregnancyJourney(userId, lmp)` in `src/lib/savedJourney.ts` that wraps the same authoritative RPC + legacy mirror used by `commitPendingJourneyToDB`.
+2. In `DueDateCalculatorResult.tsx`, resolve auth mode on mount via `supabase.auth.getSession` + `getActivePregnancyJourney`. Three states:
+   - **Signed out**: unchanged label `Save your journey` → `stashPendingJourney` + `/auth`.
+   - **Signed in, no saved journey**: label becomes `Save to my journey` → calls `saveActivePregnancyJourney` then routes to `/my-week`; falls back to stash+auth on error.
+   - **Signed in, saved journey exists**: all three primary CTAs collapse to `View My Week` → `/my-week`. A calm notice near the top of the reveal reads `You already have a saved pregnancy journey. This calculator is exploratory, so your saved dates have not changed.` plus the saved due date if available. A secondary link `Update my saved dates` opens a shadcn `AlertDialog` confirmation before calling `saveActivePregnancyJourney` and routing to `/my-week`.
+3. In `AccountSettings.tsx`, when `lifecycle === "pregnancy"`, load `getActivePregnancyJourney` and display saved LMP and due date as read-only text, plus a single `Recalculate with new dates →` link to `/due-date-calculator`. No competing CTA.
 
-Files changed, exact components causing each defect, new selection logic for photo/video/fallback, confirmation Week 36 video is visible, confirmation old 3-stage imagery is gone from the detail surface, confirmation summary still counts videos, typecheck output, remaining defects (expected: none in scope).
+## Files expected to change
 
-### Stop point
+- `src/pages/MyWeek.tsx`
+- `src/components/myweek/SectionKeepThisWeek.tsx`
+- `src/components/myweek/SlotReflection.tsx`
+- `src/components/myweek/SlotPhotoMemory.tsx`
+- `src/components/myweek/SlotVideoMemory.tsx`
+- `src/components/shared/DueDateCalculatorResult.tsx`
+- `src/pages/AccountSettings.tsx`
+- `src/lib/savedJourney.ts` (additive helper only)
 
-Stop after fix + QA. Do not start Phase 15.
+Setup.tsx is not edited.
+
+## Out of scope
+
+Voice notes, keepsake export, inline AI, unified media viewer, hospital bag/birth plan upgrades, migrations, RLS, storage, routes, sitemap, analytics events, AI prompts, illustration assets.
+
+## QA
+
+- Save a reflection → `Saved to this week.` appears then fades.
+- Upload a photo / save a caption → confirmation beat appears; upload and caption still work.
+- Upload a video / save a caption → confirmation beat appears; playback and caption still work.
+- Header indicator hidden at 0, reads correctly at 1/2/3 kept items, and refreshes after saves.
+- Reflection now renders inside the unified capture section, above photo and video.
+- `See this week in My Journey →` appears only when ≥1 kept and routes to `/my-journey`.
+- Signed-in user with saved journey sees the exploratory notice and single `View My Week` CTA; `Update my saved dates` prompts a confirmation before overwriting.
+- Signed-in user without a saved journey saves directly and lands on `/my-week` without auth bounce.
+- Signed-out user's flow is unchanged.
+- Account Settings shows saved LMP and due date when a pregnancy journey exists, with a single recalculate link.
+- Mobile layout intact; no console errors.
+- `npm run typecheck` returns exit 0; result reported.

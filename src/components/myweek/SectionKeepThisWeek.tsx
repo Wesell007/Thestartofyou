@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import SlotReflection from "@/components/myweek/SlotReflection";
 import SlotPhotoMemory from "@/components/myweek/SlotPhotoMemory";
 import SlotVideoMemory from "@/components/myweek/SlotVideoMemory";
+import SlotVoiceMemory from "@/components/myweek/SlotVoiceMemory";
 import type { MyWeekEntry } from "@/data/myWeekContent";
 
 interface Props {
@@ -13,33 +14,43 @@ interface Props {
   content: MyWeekEntry;
 }
 
-type KeptState = { reflection: boolean; photo: boolean; video: boolean };
+type KeptState = {
+  reflection: boolean;
+  photo: boolean;
+  video: boolean;
+  voice: boolean;
+};
 
 const summariseKept = (k: KeptState): string => {
   const parts: string[] = [];
   if (k.reflection) parts.push("reflection");
   if (k.photo) parts.push("photo");
   if (k.video) parts.push("video");
+  if (k.voice) parts.push("voice note");
   if (parts.length === 0) return "";
   if (parts.length === 1) return parts[0];
-  if (parts.length === 2) return `${parts[0]} and ${parts[1]}`;
-  return `${parts[0]}, ${parts[1]} and ${parts[2]}`;
+  return `${parts.slice(0, -1).join(", ")} and ${parts[parts.length - 1]}`;
 };
 
 /**
  * SectionKeepThisWeek — one unified capture section for the weekly memory
- * experience: reflection, photo, and video live together under a single
+ * experience: reflection, photo, video and voice note live together under a single
  * quiet header, with a "captured this week" indicator and a subtle link
  * back into My Journey when at least one item is kept.
  */
 const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => {
-  const [kept, setKept] = useState<KeptState>({ reflection: false, photo: false, video: false });
+  const [kept, setKept] = useState<KeptState>({
+    reflection: false,
+    photo: false,
+    video: false,
+    voice: false,
+  });
   const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const [r, p, v] = await Promise.all([
+      const [r, p, media] = await Promise.all([
         supabase
           .from("reflections")
           .select("content")
@@ -54,17 +65,19 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => 
           .maybeSingle(),
         supabase
           .from("week_media_memories")
-          .select("storage_path")
+          .select("media_type, storage_path")
           .eq("user_id", userId)
-          .eq("week", week)
-          .eq("media_type", "video")
-          .maybeSingle(),
+          .eq("week", week),
       ]);
       if (cancelled) return;
+      const rows = media.data ?? [];
+      const hasMedia = (type: string) =>
+        rows.some((row) => row.media_type === type && Boolean(row.storage_path));
       setKept({
         reflection: Boolean(r.data?.content && (r.data.content as string).trim().length > 0),
         photo: Boolean(p.data?.storage_path),
-        video: Boolean(v.data?.storage_path),
+        video: hasMedia("video"),
+        voice: hasMedia("voice_note"),
       });
     })();
     return () => {
@@ -73,7 +86,7 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => 
   }, [userId, week, refreshKey]);
 
   const onSaved = useCallback(() => setRefreshKey((n) => n + 1), []);
-  const anyKept = kept.reflection || kept.photo || kept.video;
+  const anyKept = kept.reflection || kept.photo || kept.video || kept.voice;
   const summary = summariseKept(kept);
 
   return (
@@ -93,7 +106,8 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => 
           </p>
         </div>
         <p className="font-serif text-foreground/70 text-[14.5px] leading-[1.6] max-w-[46ch]">
-          A reflection, a photo or a short video. Keep what feels right.
+          A reflection, a photo, a short video or a voice note. Keep what feels
+          right.
         </p>
         {anyKept && (
           <p className="mt-3 font-sans text-[10.5px] font-medium tracking-[0.24em] uppercase text-foreground/55">
@@ -124,6 +138,14 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => 
       />
 
       <SlotVideoMemory userId={userId} week={week} onSaved={onSaved} />
+
+      <div
+        aria-hidden="true"
+        className="mx-auto my-8 h-px w-16"
+        style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.22)" }}
+      />
+
+      <SlotVoiceMemory userId={userId} week={week} onSaved={onSaved} />
 
       {anyKept && (
         <div className="mt-10 flex justify-center">

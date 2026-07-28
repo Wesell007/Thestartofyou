@@ -351,11 +351,14 @@ const KeptChapter = () => {
                 border: `1px solid ${accentSoft(0.22)}`,
               }}
             >
-              <MyWeekBabyImage
-                week={week}
-                className="w-full h-full flex items-center justify-center"
-                imgClassName="w-full h-full object-cover"
+              <img
+                src={realism.src}
+                alt={realismAlt}
+                loading="eager"
+                decoding="async"
+                className="w-full h-full object-cover"
               />
+
             </div>
           </div>
 

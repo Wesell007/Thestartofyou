@@ -263,7 +263,9 @@ const KeptChapter = () => {
     return <PageLoadState />;
   }
 
-  const { reflection, photoUrl, photoCaption, keptWeeks } = data;
+  const { reflection, photoUrl, photoCaption, video, tone, keptWeeks } = data;
+  const realism = resolveRealismForWeek(week, tone);
+  const realismAlt = defaultRealismAltForWeek(week);
   const trimester = trimesterLabelFor(week);
 
   // Adjacent KEPT chapters (not just adjacent week numbers). Calmer browsing.

@@ -68,5 +68,3 @@ const SectionNextChapter = ({ nextWeek, nextChapterTitle, nextTheme, nextPreview
 };
 
 export default SectionNextChapter;
-
-export default SectionNextChapter;

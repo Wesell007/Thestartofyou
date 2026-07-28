@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Lock, Video, X, Play } from "lucide-react";
 import { useWeekMedia } from "@/hooks/useWeekMedia";
 import {
@@ -14,13 +14,14 @@ import {
 interface Props {
   userId: string;
   week: number;
+  onSaved?: () => void;
 }
 
 /**
  * Slot — Weekly video memory. One optional short video per week.
  * Signed-URL playback, native controls, no autoplay, no loop.
  */
-const SlotVideoMemory = ({ userId, week }: Props) => {
+const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
   const {
     state,
     error,

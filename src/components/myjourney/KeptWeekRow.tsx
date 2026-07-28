@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Video as VideoIcon } from "lucide-react";
+import { ArrowRight, AudioLines, Video as VideoIcon } from "lucide-react";
 import { getWeekIdentity } from "@/data/myWeekContent";
 import {
   defaultRealismAltForWeek,
@@ -12,6 +12,7 @@ interface Props {
   reflection?: string;
   hasPhoto: boolean;
   hasVideo?: boolean;
+  hasVoiceNote?: boolean;
   /** Saved illustration preference, normalised. */
   tone?: RealismTone;
   /** True when this row represents the live current week. Visually subordinate. */
@@ -25,7 +26,15 @@ const truncate = (s: string, max: number) => {
   return (lastSpace > max * 0.6 ? slice.slice(0, lastSpace) : slice).trimEnd() + "…";
 };
 
-const KeptWeekRow = ({ week, reflection, hasPhoto, hasVideo, tone = "default", isCurrentWeek }: Props) => {
+const KeptWeekRow = ({
+  week,
+  reflection,
+  hasPhoto,
+  hasVideo,
+  hasVoiceNote,
+  tone = "default",
+  isCurrentWeek,
+}: Props) => {
   const identity = getWeekIdentity(week);
   const accent = "hsl(var(--stage-pregnancy-accent))";
   const hasReflection = !!reflection && reflection.trim().length > 0;
@@ -87,7 +96,17 @@ const KeptWeekRow = ({ week, reflection, hasPhoto, hasVideo, tone = "default", i
                   Video
                 </span>
               )}
-              {!hasReflection && hasPhoto && !hasVideo && (
+              {hasVoiceNote && (
+                <span
+                  className="inline-flex items-center gap-1 font-sans text-[9.5px] font-medium tracking-[0.24em] uppercase"
+                  style={{ color: accent }}
+                  aria-label="Voice note kept for this week"
+                >
+                  <AudioLines size={11} strokeWidth={1.8} aria-hidden="true" />
+                  Voice
+                </span>
+              )}
+              {!hasReflection && hasPhoto && !hasVideo && !hasVoiceNote && (
                 <span
                   className="font-sans text-[9.5px] font-medium tracking-[0.24em] uppercase"
                   style={{ color: accent }}

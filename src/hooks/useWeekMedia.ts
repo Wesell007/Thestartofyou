@@ -14,9 +14,15 @@ import {
   VIDEO_ERROR_COPY,
   VIDEO_MAX_BYTES,
   VIDEO_MAX_DURATION_SECONDS,
+  VOICE_ACCEPTED_MIME,
+  VOICE_ERROR_COPY,
+  VOICE_MAX_BYTES,
+  VOICE_MAX_DURATION_SECONDS,
+  baseAudioMime,
   buildMediaStoragePath,
   captionForSave,
   extensionForVideo,
+  extensionForVoice,
   isCaptionWithinLimit,
   probeVideoDuration,
   type WeekMediaType,
@@ -48,6 +54,8 @@ interface Row {
 }
 
 export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
+  const COPY = mediaType === "voice_note" ? VOICE_ERROR_COPY : VIDEO_ERROR_COPY;
+  const fallbackMime = mediaType === "voice_note" ? "audio/webm" : "video/mp4";
   const [state, setState] = useState<WeekMediaState>("loading");
   const [error, setError] = useState<string | null>(null);
   const [storagePath, setStoragePath] = useState<string | null>(null);
@@ -74,7 +82,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
       if (cancelledRef.current) return;
       if (selErr) {
         setState("error");
-        setError(VIDEO_ERROR_COPY.loadFailed);
+        setError(COPY.loadFailed);
         return;
       }
       if (!data?.storage_path) {
@@ -97,7 +105,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
       if (urlErr || !urlData?.signedUrl) {
         setSignedUrl(null);
         setState("error");
-        setError(VIDEO_ERROR_COPY.loadFailed);
+        setError(COPY.loadFailed);
       } else {
         setSignedUrl(urlData.signedUrl);
         setState("loaded");
@@ -194,7 +202,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
       if (urlErr || !urlData?.signedUrl) {
         setSignedUrl(null);
         setState("error");
-        setError(VIDEO_ERROR_COPY.loadFailed);
+        setError(COPY.loadFailed);
         return false;
       }
       setSignedUrl(urlData.signedUrl);
@@ -203,6 +211,98 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
     },
     [userId, week, mediaType, storagePath, caption],
   );
+
+  /**
+   * Save a recorded voice note. Only valid when `mediaType === "voice_note"`.
+   * Mirrors `upload` but takes an in-memory Blob from MediaRecorder rather
+   * than a picked File, and trusts the recorder's measured duration.
+   */
+  const uploadVoice = useCallback(
+    async (
+      blob: Blob,
+      opts: { mimeType: string; durationSeconds: number },
+    ): Promise<boolean> => {
+      if (mediaType !== "voice_note") return false;
+
+      const mime = baseAudioMime(opts.mimeType || blob.type || "audio/webm");
+      if (!(VOICE_ACCEPTED_MIME as readonly string[]).includes(mime)) {
+        setError(VOICE_ERROR_COPY.unsupported);
+        return false;
+      }
+      if (blob.size <= 0) {
+        setError(VOICE_ERROR_COPY.empty);
+        return false;
+      }
+      if (blob.size > VOICE_MAX_BYTES) {
+        setError(VOICE_ERROR_COPY.tooLarge);
+        return false;
+      }
+      const duration = Math.max(1, Math.round(opts.durationSeconds));
+      if (duration > VOICE_MAX_DURATION_SECONDS) {
+        setError(VOICE_ERROR_COPY.tooLong);
+        return false;
+      }
+
+      const previousPath = storagePath;
+      const hadRow = Boolean(previousPath);
+      setError(null);
+      setState("uploading");
+
+      const path = buildMediaStoragePath(userId, week, mediaType, extensionForVoice(mime));
+
+      const { error: upErr } = await supabase.storage
+        .from(BUCKET)
+        .upload(path, blob, { upsert: false, contentType: mime });
+      if (upErr) {
+        setState(hadRow ? "loaded" : "empty");
+        setError(VOICE_ERROR_COPY.uploadFailed);
+        return false;
+      }
+
+      const { error: dbErr } = await supabase.from(TABLE).upsert(
+        {
+          user_id: userId,
+          week,
+          media_type: mediaType,
+          storage_path: path,
+          mime_type: mime,
+          file_size_bytes: blob.size,
+          duration_seconds: duration,
+          caption,
+        },
+        { onConflict: "user_id,week,media_type" },
+      );
+      if (dbErr) {
+        await supabase.storage.from(BUCKET).remove([path]);
+        setState(hadRow ? "loaded" : "empty");
+        setError(VOICE_ERROR_COPY.uploadFailed);
+        return false;
+      }
+
+      if (previousPath && previousPath !== path) {
+        await supabase.storage.from(BUCKET).remove([previousPath]);
+      }
+
+      const { data: urlData, error: urlErr } = await supabase.storage
+        .from(BUCKET)
+        .createSignedUrl(path, SIGN_TTL_SECONDS);
+      setStoragePath(path);
+      setMimeType(mime);
+      setDurationSeconds(duration);
+      if (urlErr || !urlData?.signedUrl) {
+        setSignedUrl(null);
+        setState("error");
+        setError(VOICE_ERROR_COPY.loadFailed);
+        return false;
+      }
+      setSignedUrl(urlData.signedUrl);
+      setState("loaded");
+      return true;
+    },
+    [userId, week, mediaType, storagePath, caption],
+  );
+
+
 
   const remove = useCallback(async () => {
     if (!storagePath) return;
@@ -223,7 +323,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
       .eq("media_type", mediaType);
     if (dbErr) {
       setState("loaded");
-      setError(VIDEO_ERROR_COPY.removeFailed);
+      setError(COPY.removeFailed);
       return;
     }
 
@@ -238,7 +338,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
           week,
           media_type: mediaType,
           storage_path: prev.storagePath,
-          mime_type: prev.mimeType ?? "video/mp4",
+          mime_type: prev.mimeType ?? fallbackMime,
           file_size_bytes: 1,
           duration_seconds: prev.durationSeconds,
           caption: prev.caption,
@@ -246,7 +346,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
         { onConflict: "user_id,week,media_type" },
       );
       setState("loaded");
-      setError(VIDEO_ERROR_COPY.removeFailed);
+      setError(COPY.removeFailed);
       return;
     }
 
@@ -273,7 +373,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
         .eq("week", week)
         .eq("media_type", mediaType);
       if (updErr) {
-        setError(VIDEO_ERROR_COPY.uploadFailed);
+        setError(COPY.uploadFailed);
         return false;
       }
       setCaption(next);
@@ -291,6 +391,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
     durationSeconds,
     caption,
     upload,
+    uploadVoice,
     remove,
     saveCaption,
     clearError,

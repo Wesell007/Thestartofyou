@@ -2,18 +2,26 @@ interface Props {
   reflections: number;
   photos: number;
   videos: number;
+  voiceNotes: number;
   weeksKept: number;
 }
 
-const MomentsKeptSummary = ({ reflections, photos, videos, weeksKept }: Props) => {
+const MomentsKeptSummary = ({
+  reflections,
+  photos,
+  videos,
+  voiceNotes,
+  weeksKept,
+}: Props) => {
   const accent = "hsl(var(--stage-pregnancy-accent))";
   const items = [
     { label: "Reflections", value: reflections },
     { label: "Photos", value: photos },
     { label: "Videos", value: videos },
+    { label: "Voice notes", value: voiceNotes },
     { label: "Weeks kept", value: weeksKept },
   ];
-  const isEmpty = reflections + photos + videos + weeksKept === 0;
+  const isEmpty = reflections + photos + videos + voiceNotes + weeksKept === 0;
 
   return (
     <section
@@ -26,7 +34,7 @@ const MomentsKeptSummary = ({ reflections, photos, videos, weeksKept }: Props) =
       >
         Moments kept
       </p>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
         {items.map((item) => (
           <div key={item.label}>
             <p

@@ -15,6 +15,7 @@ interface Props {
   userId: string;
   week: number;
   chapterTitle: string;
+  onSaved?: () => void;
 }
 
 type LoadState = "loading" | "empty" | "uploading" | "loaded" | "error";
@@ -28,7 +29,7 @@ type LoadState = "loading" | "empty" | "uploading" | "loaded" | "error";
  *   - The tiny "add a photo" affordance lives in the lower margin —
  *     present but never the protagonist
  */
-const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
+const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
   const [state, setState] = useState<LoadState>("loading");
   const [signedUrl, setSignedUrl] = useState<string | null>(null);
   const [storagePath, setStoragePath] = useState<string | null>(null);
@@ -39,7 +40,21 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle }: Props) => {
   const [captionError, setCaptionError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loadAttempt, setLoadAttempt] = useState(0);
+  const [justSaved, setJustSaved] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!justSaved) return;
+    const t = window.setTimeout(() => setJustSaved(false), 2400);
+    return () => window.clearTimeout(t);
+  }, [justSaved]);
+
+  const flashSaved = () => {
+    setJustSaved(false);
+    // Force re-trigger of the fade timer even if already true.
+    window.setTimeout(() => setJustSaved(true), 0);
+    onSaved?.();
+  };
 
   useEffect(() => {
     let cancelled = false;

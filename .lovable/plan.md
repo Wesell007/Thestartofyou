@@ -1,68 +1,46 @@
-## Phase 14.11 — Final Manifest Verification and Closeout
+## Phase 14.12 — Deep Asset Re-import and Pointer Replacement
 
-Read-only verification pass plus a single append to `notes.md`. No `src/`, no asset import, no `.asset.json`, no resolver or Settings changes. Do not begin Phase 14.12.
+Replace the 34 Deep `.asset.json` pointers under `src/assets/myweek-weekly-realism-deep/` with pointers to the approved Phase 14.11 Deep files. Canonical unversioned target filenames only. No resolver, wiring, Settings, route, sitemap, analytics, AI, or migration changes. Default / Light / Medium folders are not touched.
 
-### 1. Manifest scan
+### Source-to-target map
 
-Enumerate every file under:
+Sources read from `/mnt/documents/phase-14-11/images/deep/`. Targets written to `src/assets/myweek-weekly-realism-deep/week-XX.png.asset.json`.
 
-- `/mnt/documents/phase-14-11/images/deep/`
-- `/mnt/documents/phase-14-11/sheets/`
-- `/mnt/documents/phase-14-11/prompts/`
-- `/mnt/documents/phase-14-11/quarantine/`
+| Week(s) | Source | Target |
+|---------|--------|--------|
+| 09-14 | `week-{09..14}.v2.png` | `week-{09..14}.png.asset.json` |
+| 15-19 | `week-{15..19}.png` | `week-{15..19}.png.asset.json` |
+| 20 | `week-20.v2.png` | `week-20.png.asset.json` |
+| 21-35 | `week-{21..35}.png` | `week-{21..35}.png.asset.json` |
+| 36 | `week-36.png` | `week-36.png.asset.json` |
+| 37-42 | `week-{37..42}.png` | `week-{37..42}.png.asset.json` |
 
-For each file, record: absolute path, size in bytes, and (for PNGs) whether PIL can open and verify it.
+Total: 34 uploads overwriting 34 existing pointer files. No `.v2` / `.v3` filenames leak into `src/`.
 
-Flag and list any:
+### Method (per week)
 
-- `IGNORE*` files
-- files named or resembling placeholders (e.g. `_do_not_use_placeholder*`, `placeholder*`)
-- zero-byte files
-- unreadable/corrupt PNGs (PIL `verify()` failure)
-- broken or stray JPGs
-- screenshots (`Screenshot*`, `.DS_Store`, editor previews)
-- cache files (`__pycache__`, `.cache`, `Thumbs.db`)
-- generated preview files not part of the canonical set
+1. Copy the approved source to `/tmp/deep-import/week-XX.png` (normalises the filename even when the source is `.v2.png`).
+2. Run `lovable-assets create --file /tmp/deep-import/week-XX.png --filename week-XX.png`.
+3. Write the CLI stdout verbatim to `src/assets/myweek-weekly-realism-deep/week-XX.png.asset.json`, overwriting the existing pointer.
+4. No hand-editing of pointer JSON. No raw PNGs land in `src/`. No `lovable-assets delete` calls.
 
-Expected clean result: only the 34 Deep PNGs (W9-W42), the four final sheets, the 11 tone-consistent prompt markdowns (plus any earlier prompt archive), and whatever the quarantine folder legitimately holds.
+### Guardrails
 
-### 2. Final Deep file map confirmation
+- Only `src/assets/myweek-weekly-realism-deep/` is modified.
+- `myweek-weekly-realism/`, `-light/`, `-medium/` untouched.
+- `src/lib/myWeekRealismIllustrations.ts`, `SectionBabyThisWeek.tsx`, `BabyIllustrationStyleField.tsx`, `MyWeek.tsx`, routes, sitemap, analytics, AI prompts, migrations, Settings copy untouched.
+- Old 3-stage system preserved.
 
-Confirm exactly one approved Deep PNG resolves per week W9-W42, matching:
+### Verification
 
-```text
-W9-W14   -> approved .v2.png anchors
-W15-W19  -> corrected Phase 14.11 outputs
-W20      -> approved .v2.png anchor
-W21-W30  -> corrected Phase 14.11 outputs
-W31-W35  -> completed missing-weeks batch
-W36      -> approved week-36.png anchor
-W37-W42  -> completed missing-weeks batch
-```
-
-Report the resolved absolute path per week. Any missing or duplicated week is a blocker.
-
-### 3. Final sheets confirmation
-
-Confirm these four files exist, are non-zero, and open cleanly in PIL:
-
-- `/mnt/documents/phase-14-11/sheets/deep-final-medium-vs-approved-deep.png`
-- `/mnt/documents/phase-14-11/sheets/deep-final-four-up.png`
-- `/mnt/documents/phase-14-11/sheets/deep-final-settings-thumbnail-check.png`
-- `/mnt/documents/phase-14-11/sheets/deep-final-replacement-comparison.png`
-
-### 4. Notes closeout
-
-Append a "Phase 14.11 Closeout" section to `/mnt/documents/phase-14-11/notes.md` covering:
-
-- Phase 14.11 visually approved
-- v2 remains the final Deep direction
-- v3 rejected; no further darkening experiments
-- final manifest checked; no IGNORE, placeholder, broken, zero-byte, unreadable, stray screenshot, cache, or preview files in the final package
-- final Deep file map confirmed for W9-W42 (single canonical file per week)
-- four final sheets confirmed present and clean
-- recommendation: ready for Phase 14.12 Deep asset re-import planning
+- Exactly 34 pointer files remain, named `week-09.png.asset.json` … `week-42.png.asset.json`.
+- No `.v2` / `.v3` filename anywhere in `src/`.
+- No raw `.png` under `src/assets/myweek-weekly-realism-deep/`.
+- Every pointer has a non-empty `url` using the canonical `week-XX.png` filename.
+- Where the schema includes them: `content_type` is `image/png` and `size` is non-zero.
+- Spot-check the resolver (read-only) resolves W9, W20, W36, W42 through the canonical pointer filenames — no resolver changes expected.
+- Run `npm run typecheck`; return the exact command and result.
 
 ### Stop point
 
-Stop after the manifest scan, map confirmation, sheet confirmation, and notes append. Await Phase 14.12 approval.
+Stop after the 34 pointer rewrites, guardrail check, spot checks, and typecheck. Do not begin Phase 14.13. Await approval.

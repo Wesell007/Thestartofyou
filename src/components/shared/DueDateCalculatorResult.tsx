@@ -15,7 +15,8 @@ import journalFlatlay from "@/assets/journal-flatlay.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { BotanicalAccent, Sprig, SprigDivider, StageGlow } from "@/components/shared/StageBotanical";
-import { stashPendingJourney } from "@/lib/savedJourney";
+import { stashPendingJourney, saveActivePregnancyJourney, getActivePregnancyJourney } from "@/lib/savedJourney";
+import { supabase } from "@/integrations/supabase/client";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import AskLink from "@/components/shared/AskLink";
@@ -234,11 +235,64 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
     navigateToAsk(navigate, q, { context: `Pregnancy week ${result.currentWeek}`, stage: "pregnancy" });
   };
 
-  const handleSaveJourney = () => {
+  // Phase 15.1 · Fix 5: recognise auth + existing-journey state so the
+  // signed-in path doesn't push through /auth/setup again.
+  const [userId, setUserId] = useState<string | null>(null);
+  const [hasJourney, setHasJourney] = useState<boolean>(false);
+  const [savingJourney, setSavingJourney] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { data } = await supabase.auth.getSession();
+      const uid = data.session?.user?.id ?? null;
+      if (cancelled) return;
+      setUserId(uid);
+      if (uid) {
+        const existing = await getActivePregnancyJourney(uid);
+        if (!cancelled) setHasJourney(Boolean(existing));
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const handleSaveJourney = async () => {
     trackEvent(EVENTS.SAVE_JOURNEY_STARTED);
-    stashPendingJourney(lmp);
-    navigate("/auth");
+    // Not signed in → keep the original stash + auth path.
+    if (!userId) {
+      stashPendingJourney(lmp);
+      navigate("/auth");
+      return;
+    }
+    // Signed in, already has a saved journey → this result is exploratory;
+    // send the person back to their live weekly experience.
+    if (hasJourney) {
+      navigate("/my-week");
+      return;
+    }
+    // Signed in, no active journey yet → commit directly, no re-onboarding.
+    setSavingJourney(true);
+    try {
+      await saveActivePregnancyJourney(userId, lmp);
+    } finally {
+      setSavingJourney(false);
+    }
+    navigate("/my-week");
   };
+
+  // Phase 15.1 · Fix 5: derived CTA copy so all three save buttons reflect
+  // the true action for signed-in users with an already-saved journey.
+  const isExploratory = Boolean(userId && hasJourney);
+  const saveCtaLabel = savingJourney
+    ? "Saving…"
+    : isExploratory
+    ? "Open my week"
+    : "Save your journey";
+  const saveCtaHelp = isExploratory
+    ? "You already have a saved journey. This result is exploratory."
+    : null;
 
   const trimesterZones = [
     { label: "1st", start: 1, end: 12, pct: 30 },
@@ -362,13 +416,23 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
 
               {/* CTA — dominant */}
               <Fade delay={280}>
+                {saveCtaHelp && (
+                  <p
+                    className="font-sans text-[11px] font-medium tracking-[0.18em] uppercase mb-3"
+                    style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+                    role="status"
+                  >
+                    {saveCtaHelp}
+                  </p>
+                )}
                 <div className="flex flex-col sm:flex-row items-start gap-4 mb-3">
                   <button
                     type="button"
                     onClick={handleSaveJourney}
-                    className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all"
+                    disabled={savingJourney}
+                    className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all disabled:opacity-70"
                   >
-                    Save your journey
+                    {saveCtaLabel}
                     <ArrowRight size={16} />
                   </button>
                   <AskLink
@@ -538,13 +602,14 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                   <button
                     type="button"
                     onClick={handleSaveJourney}
-                    className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all self-start"
+                    disabled={savingJourney}
+                    className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all self-start disabled:opacity-70"
                   >
-                    Save your journey
+                    {saveCtaLabel}
                     <ArrowRight size={14} />
                   </button>
                   <p className="font-sans text-[11px] font-light text-muted-foreground/35 mt-3">
-                    Takes a minute to save
+                    {saveCtaHelp ?? "Takes a minute to save"}
                   </p>
                 </div>
               </div>
@@ -1176,15 +1241,16 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                   one week at a time, from where you are now.
                 </p>
                 <p className="font-sans text-xs font-light text-muted-foreground/35 mb-8 max-w-xs">
-                  Saving your journey keeps your stage, personalises your guidance, and gives you somewhere to come back to.
+                  {saveCtaHelp ?? "Saving your journey keeps your stage, personalises your guidance, and gives you somewhere to come back to."}
                 </p>
 
                 <button
                   type="button"
                   onClick={handleSaveJourney}
-                  className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all"
+                  disabled={savingJourney}
+                  className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all disabled:opacity-70"
                 >
-                  Save your journey
+                  {saveCtaLabel}
                   <ArrowRight size={16} />
                 </button>
               </div>

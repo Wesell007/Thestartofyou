@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Lock, Video, X, Play } from "lucide-react";
 import { useWeekMedia } from "@/hooks/useWeekMedia";
 import {
@@ -14,13 +14,14 @@ import {
 interface Props {
   userId: string;
   week: number;
+  onSaved?: () => void;
 }
 
 /**
  * Slot — Weekly video memory. One optional short video per week.
  * Signed-URL playback, native controls, no autoplay, no loop.
  */
-const SlotVideoMemory = ({ userId, week }: Props) => {
+const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
   const {
     state,
     error,
@@ -40,6 +41,19 @@ const SlotVideoMemory = ({ userId, week }: Props) => {
   const [captionSaving, setCaptionSaving] = useState(false);
   const [captionError, setCaptionError] = useState<string | null>(null);
   const [playbackError, setPlaybackError] = useState<string | null>(null);
+  const [justSaved, setJustSaved] = useState(false);
+
+  useEffect(() => {
+    if (!justSaved) return;
+    const t = window.setTimeout(() => setJustSaved(false), 2400);
+    return () => window.clearTimeout(t);
+  }, [justSaved]);
+
+  const flashSaved = () => {
+    setJustSaved(false);
+    window.setTimeout(() => setJustSaved(true), 0);
+    onSaved?.();
+  };
 
   const openFilePicker = () => {
     clearError();
@@ -49,8 +63,9 @@ const SlotVideoMemory = ({ userId, week }: Props) => {
   const handleFiles = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
     const file = files[0];
-    await upload(file);
+    const ok = await upload(file);
     if (fileRef.current) fileRef.current.value = "";
+    if (ok) flashSaved();
   };
 
   const openCaptionEditor = () => {
@@ -72,10 +87,11 @@ const SlotVideoMemory = ({ userId, week }: Props) => {
     }
     setCaptionSaving(true);
     setCaptionError(null);
-    await saveCaption(captionDraft);
+    const ok = await saveCaption(captionDraft);
     setCaptionSaving(false);
     setCaptionEditing(false);
     setCaptionDraft("");
+    if (ok) flashSaved();
   };
 
   const uploading = state === "uploading";
@@ -221,6 +237,18 @@ const SlotVideoMemory = ({ userId, week }: Props) => {
           </div>
         </figure>
       )}
+
+      {justSaved && state === "loaded" && (
+        <p
+          className="mt-3 font-sans text-[11px] font-medium tracking-[0.22em] uppercase transition-opacity duration-500"
+          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+          role="status"
+          aria-live="polite"
+        >
+          Saved to this week.
+        </p>
+      )}
+
 
       {error && (
         <p

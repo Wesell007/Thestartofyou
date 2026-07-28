@@ -31,6 +31,8 @@ const AccountSettings = () => {
   const navigate = useNavigate();
   const [userId, setUserId] = useState<string | null>(null);
   const [lifecycle, setLifecycle] = useState<Lifecycle>(null);
+  const [pregnancyDates, setPregnancyDates] = useState<{ lmp: string; due: string } | null>(null);
+  const [ttcDates, setTtcDates] = useState<{ lmp: string; cycle: number | null } | null>(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState<"export" | "journey" | "account" | "companion" | null>(null);
 
@@ -60,7 +62,29 @@ const AccountSettings = () => {
       ]);
       if (!active) return;
       setUserId(user.id);
-      setLifecycle(pointer?.lifecycle === "pregnancy" || pointer?.lifecycle === "ttc" ? pointer.lifecycle : null);
+      const nextLifecycle = pointer?.lifecycle === "pregnancy" || pointer?.lifecycle === "ttc" ? pointer.lifecycle : null;
+      setLifecycle(nextLifecycle);
+      // Phase 15.1 · Fix 5: surface the actual saved dates so users can
+      // sanity-check what the app has stored without re-running a calculator.
+      if (nextLifecycle === "pregnancy") {
+        const { data: preg } = await supabase
+          .from("pregnancy_journeys")
+          .select("lmp_date, due_date")
+          .eq("user_id", user.id)
+          .maybeSingle();
+        if (active && preg?.lmp_date && preg?.due_date) {
+          setPregnancyDates({ lmp: preg.lmp_date, due: preg.due_date });
+        }
+      } else if (nextLifecycle === "ttc") {
+        const { data: ttc } = await supabase
+          .from("ttc_journeys")
+          .select("last_period_date, cycle_length_days")
+          .eq("user_id", user.id)
+          .maybeSingle();
+        if (active && ttc?.last_period_date) {
+          setTtcDates({ lmp: ttc.last_period_date, cycle: ttc.cycle_length_days ?? null });
+        }
+      }
       const savedName = profile?.companion_name?.trim() || null;
       const savedTone = profile?.companion_tone ?? null;
       const choice = suggestedFromName(savedName);
@@ -315,9 +339,35 @@ const AccountSettings = () => {
 
           <section className="rounded-2xl border border-border/50 bg-card p-6">
             <h2 className="font-serif text-xl mb-2">Current journey</h2>
-            <p className="text-sm text-muted-foreground mb-5">
+            <p className="text-sm text-muted-foreground mb-3">
               {lifecycle ? `Your active journey is ${lifecycle === "ttc" ? "trying to conceive" : "pregnancy"}.` : "You do not currently have a saved journey."}
             </p>
+            {lifecycle === "pregnancy" && pregnancyDates && (
+              <dl className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                <div>
+                  <dt className="font-sans text-[11px] tracking-[0.18em] uppercase text-muted-foreground/70">Last period</dt>
+                  <dd className="font-serif text-foreground">{pregnancyDates.lmp}</dd>
+                </div>
+                <div>
+                  <dt className="font-sans text-[11px] tracking-[0.18em] uppercase text-muted-foreground/70">Estimated due date</dt>
+                  <dd className="font-serif text-foreground">{pregnancyDates.due}</dd>
+                </div>
+              </dl>
+            )}
+            {lifecycle === "ttc" && ttcDates && (
+              <dl className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                <div>
+                  <dt className="font-sans text-[11px] tracking-[0.18em] uppercase text-muted-foreground/70">Last period</dt>
+                  <dd className="font-serif text-foreground">{ttcDates.lmp}</dd>
+                </div>
+                {ttcDates.cycle && (
+                  <div>
+                    <dt className="font-sans text-[11px] tracking-[0.18em] uppercase text-muted-foreground/70">Cycle length</dt>
+                    <dd className="font-serif text-foreground">{ttcDates.cycle} days</dd>
+                  </div>
+                )}
+              </dl>
+            )}
             {lifecycle && (
               <button type="button" onClick={removeJourney} disabled={Boolean(busy)} className="text-sm text-destructive underline disabled:opacity-50">
                 {busy === "journey" ? "Removing journey…" : "Remove this journey"}

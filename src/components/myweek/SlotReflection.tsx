@@ -11,6 +11,7 @@ interface Props {
   content: MyWeekEntry;
   userId: string;
   week: number;
+  onSaved?: () => void;
 }
 
 type SaveState = "idle" | "saving" | "saved" | "error";
@@ -48,7 +49,7 @@ const getRecognition = (): SpeechRecognitionLike | null => {
  * Shaping only offers itself when the threshold is met (see useShapingThreshold).
  * First-written snapshot is captured on first shaping acceptance.
  */
-const SlotReflection = ({ content, userId, week }: Props) => {
+const SlotReflection = ({ content, userId, week, onSaved }: Props) => {
   const [value, setValue] = useState("");
   const [loaded, setLoaded] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -160,6 +161,7 @@ const SlotReflection = ({ content, userId, week }: Props) => {
         if (value.trim().length > 0 && value !== lastTrackedRef.current) {
           lastTrackedRef.current = value;
           trackEvent(EVENTS.REFLECTION_SAVED);
+          onSaved?.();
         }
         window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2400);
       }
@@ -256,6 +258,7 @@ const SlotReflection = ({ content, userId, week }: Props) => {
       if (shaped.trim().length > 0 && shaped !== lastTrackedRef.current) {
         lastTrackedRef.current = shaped;
         trackEvent(EVENTS.REFLECTION_SAVED);
+        onSaved?.();
       }
       window.setTimeout(() => setSaveState((s) => (s === "saved" ? "idle" : s)), 2400);
       return true;
@@ -284,6 +287,8 @@ const SlotReflection = ({ content, userId, week }: Props) => {
       ? "Saving your words…"
       : saveState === "error"
       ? "Not saved yet. Your words remain on this screen."
+      : saveState === "saved"
+      ? "Saved to this week."
       : savedAt
       ? "Held privately."
       : "Autosaves as you write.";

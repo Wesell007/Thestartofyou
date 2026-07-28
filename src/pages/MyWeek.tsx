@@ -17,7 +17,7 @@ import SectionEmotionallyThisWeek from "@/components/myweek/SectionEmotionallyTh
 import SlotOneFocus from "@/components/myweek/SlotOneFocus";
 import SectionAskAI from "@/components/myweek/SectionAskAI";
 import SectionToolsThisWeek from "@/components/myweek/SectionToolsThisWeek";
-import SlotReflection from "@/components/myweek/SlotReflection";
+
 import SectionKeepThisWeek from "@/components/myweek/SectionKeepThisWeek";
 import SectionNextChapter from "@/components/myweek/SectionNextChapter";
 import SectionWeeklyReads from "@/components/myweek/SectionWeeklyReads";
@@ -262,9 +262,12 @@ const MyWeek = () => {
 
         <SectionWeeklyReads week={currentWeek} />
 
-        <SlotReflection content={content} userId={userId} week={currentWeek} />
-
-        <SectionKeepThisWeek userId={userId} week={currentWeek} chapterTitle={identity.chapterTitle} />
+        <SectionKeepThisWeek
+          userId={userId}
+          week={currentWeek}
+          chapterTitle={identity.chapterTitle}
+          content={content}
+        />
 
         <SectionNextChapter
           nextWeek={nextWeek}

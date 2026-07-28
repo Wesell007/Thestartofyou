@@ -602,13 +602,14 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                   <button
                     type="button"
                     onClick={handleSaveJourney}
-                    className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all self-start"
+                    disabled={savingJourney}
+                    className="inline-flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all self-start disabled:opacity-70"
                   >
-                    Save your journey
+                    {saveCtaLabel}
                     <ArrowRight size={14} />
                   </button>
                   <p className="font-sans text-[11px] font-light text-muted-foreground/35 mt-3">
-                    Takes a minute to save
+                    {saveCtaHelp ?? "Takes a minute to save"}
                   </p>
                 </div>
               </div>

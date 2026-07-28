@@ -92,6 +92,7 @@ const MyJourney = () => {
           journey,
           { data: refls, error: reflectionError },
           { data: photos, error: photoError },
+          { data: mediaRows, error: mediaError },
         ] = await Promise.all([
           supabase.from("profiles").select("first_name").eq("user_id", user.id).maybeSingle(),
           getActivePregnancyJourney(user.id, { throwOnError: true }),
@@ -100,10 +101,16 @@ const MyJourney = () => {
             .select("week, content, first_written_at")
             .eq("user_id", user.id),
           supabase.from("week_photos").select("week, storage_path, caption").eq("user_id", user.id),
+          supabase
+            .from("week_media_memories")
+            .select("week, storage_path, caption, mime_type, duration_seconds")
+            .eq("user_id", user.id)
+            .eq("media_type", "video"),
         ]);
         if (profileError) throw profileError;
         if (reflectionError) throw reflectionError;
         if (photoError) throw photoError;
+        if (mediaError) throw mediaError;
         if (cancelled) return;
         if (!journey) {
           navigate("/due-date-calculator", { replace: true });
@@ -128,21 +135,40 @@ const MyJourney = () => {
         const photoRows: PhotoRow[] = (photos ?? []).filter((p): p is PhotoRow => !!p.storage_path);
         const photoWeeks = new Set<number>(photoRows.map((p) => p.week));
 
-        let photoUrls: { week: number; url: string; caption: string | null }[] = [];
-        if (photoRows.length > 0) {
-          const paths = photoRows.map((p) => p.storage_path);
+        const videoRows: VideoRow[] = (mediaRows ?? []).filter(
+          (m): m is VideoRow => !!m.storage_path,
+        );
+        const videoWeeks = new Set<number>(videoRows.map((v) => v.week));
+
+        const allPaths = [
+          ...photoRows.map((p) => p.storage_path),
+          ...videoRows.map((v) => v.storage_path),
+        ];
+        const signedByPath = new Map<string, string>();
+        if (allPaths.length > 0) {
           const { data: signed } = await supabase.storage
             .from("weekly-photos")
-            .createSignedUrls(paths, 60 * 60);
-          const byPath = new Map<string, string>();
+            .createSignedUrls(allPaths, 60 * 60);
           (signed ?? []).forEach((s) => {
-            if (s.path && s.signedUrl) byPath.set(s.path, s.signedUrl);
+            if (s.path && s.signedUrl) signedByPath.set(s.path, s.signedUrl);
           });
-          photoUrls = photoRows
-            .map((p) => ({ week: p.week, url: byPath.get(p.storage_path) ?? "", caption: p.caption }))
-            .filter((p) => p.url.length > 0)
-            .sort((a, b) => b.week - a.week);
         }
+
+        const photoUrls = photoRows
+          .map((p) => ({ week: p.week, url: signedByPath.get(p.storage_path) ?? "", caption: p.caption }))
+          .filter((p) => p.url.length > 0)
+          .sort((a, b) => b.week - a.week);
+
+        const videos: VideoItem[] = videoRows
+          .map((v) => ({
+            week: v.week,
+            url: signedByPath.get(v.storage_path) ?? "",
+            caption: v.caption,
+            mimeType: v.mime_type,
+            durationSeconds: v.duration_seconds,
+          }))
+          .filter((v) => v.url.length > 0)
+          .sort((a, b) => b.week - a.week);
 
         setState({
           firstName: profile.first_name,
@@ -152,7 +178,9 @@ const MyJourney = () => {
           status: journey.status,
           reflectionsByWeek,
           photoWeeks,
+          videoWeeks,
           photoUrls,
+          videos,
         });
       } catch {
         if (!cancelled) setLoadError("We couldn't load your saved journey just now. Nothing has been removed.");
@@ -165,11 +193,11 @@ const MyJourney = () => {
 
   const derived = useMemo(() => {
     if (!state) return null;
-    const { currentWeek, reflectionsByWeek, photoWeeks } = state;
+    const { currentWeek, reflectionsByWeek, photoWeeks, videoWeeks } = state;
 
     const keptWeeks: number[] = [];
     for (let w = 1; w <= currentWeek; w++) {
-      const hasContent = !!reflectionsByWeek[w] || photoWeeks.has(w);
+      const hasContent = !!reflectionsByWeek[w] || photoWeeks.has(w) || videoWeeks.has(w);
       if (hasContent) keptWeeks.push(w);
     }
 
@@ -187,10 +215,13 @@ const MyJourney = () => {
     return { keptWeeks, reflectionWeeks };
   }, [state]);
 
+  const { style: illustrationStyle } = useBabyIllustrationStyle();
+  const tone: RealismTone = normaliseRealismTone(illustrationStyle);
+
   if (loadError) return <PageLoadState error={loadError} onRetry={() => setAttempt((n) => n + 1)} />;
   if (!state || !derived) return <PageLoadState />;
 
-  const { firstName, currentWeek, due, status, reflectionsByWeek, photoWeeks, photoUrls } = state;
+  const { firstName, currentWeek, due, status, reflectionsByWeek, photoWeeks, videoWeeks, photoUrls, videos } = state;
   const { keptWeeks, reflectionWeeks } = derived;
 
   const accent = "hsl(var(--stage-pregnancy-accent))";
@@ -203,6 +234,8 @@ const MyJourney = () => {
       week={w}
       reflection={reflectionsByWeek[w]?.content}
       hasPhoto={photoWeeks.has(w)}
+      hasVideo={videoWeeks.has(w)}
+      tone={tone}
       isCurrentWeek={w === currentWeek}
     />
   );

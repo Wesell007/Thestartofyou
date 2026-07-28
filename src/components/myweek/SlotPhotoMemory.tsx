@@ -414,6 +414,17 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
         </figure>
       )}
 
+      {justSaved && (state === "loaded" || state === "empty") && (
+        <p
+          className="mt-3 font-sans text-[11px] font-medium tracking-[0.22em] uppercase transition-opacity duration-500"
+          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+          role="status"
+          aria-live="polite"
+        >
+          Saved to this week.
+        </p>
+      )}
+
       {state === "loaded" && signedUrl && (
         <div className="mt-4">
           {captionEditing ? (

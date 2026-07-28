@@ -394,6 +394,18 @@ export const buildFilmTimeline = (input: BuildFilmInput): FilmTimeline => {
     if (totalOf(kept) <= FILM_HARD_CAP_SECONDS) break;
   }
 
+  // Still over cap: drop whole weeks from the middle outwards, always keeping
+  // the first and last kept week so the arc of the journey survives.
+  while (totalOf(kept) > FILM_HARD_CAP_SECONDS) {
+    const weeksLeft = [...new Set(kept.filter((b) => b.week !== null).map((b) => b.week as number))]
+      .sort((a, b) => a - b);
+    const droppable = weeksLeft.slice(1, -1);
+    if (droppable.length === 0) break;
+    const target = droppable[Math.floor((droppable.length - 1) / 2)];
+    excludedForCap.add(target);
+    kept = kept.filter((b) => b.week !== target);
+  }
+
 
   // Remove orphaned chapter and label cards left behind by dropped content.
   const finalMiddle = kept.filter((beat, i) => {

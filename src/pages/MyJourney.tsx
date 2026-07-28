@@ -291,7 +291,7 @@ const MyJourney = () => {
         {isActive && (
           <>
             <TrimesterRail currentWeek={currentWeek} />
-            <CurrentChapterCard currentWeek={currentWeek} />
+            <CurrentChapterCard currentWeek={currentWeek} tone={tone} />
           </>
         )}
 

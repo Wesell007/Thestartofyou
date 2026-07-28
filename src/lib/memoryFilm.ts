@@ -367,42 +367,33 @@ export const buildFilmTimeline = (input: BuildFilmInput): FilmTimeline => {
   });
 
   // ── Cap enforcement ───────────────────────────────────────────────────────
+  // Drop optional beats, highest priority number first, then latest-first within
+  // that priority. Priority 0 beats are never dropped, so every selected week
+  // keeps at least one content beat.
   const fixedSeconds = cover.durationSeconds + ending.durationSeconds;
   const totalOf = (list: DraftBeat[]) =>
-    list.reduce((sum, b) => sum + b.durationSeconds, fixedSeconds);
+    Math.round(list.reduce((sum, b) => sum + b.durationSeconds, fixedSeconds) * 10) / 10;
 
-  let kept = middle;
+  let kept = [...middle];
   const excludedForCap = new Set<number>();
 
-  // Drop optional beats highest-priority-number first, never removing the last
-  // remaining content beat for a week.
   for (const dropPriority of [6, 5, 4, 3, 2]) {
-    if (totalOf(kept) <= FILM_HARD_CAP_SECONDS) break;
-    const next: DraftBeat[] = [];
-    for (const beat of kept) {
-      if (totalOf(next.concat(kept.slice(next.length))) <= FILM_HARD_CAP_SECONDS) {
-        next.push(beat);
-        continue;
+    while (totalOf(kept) > FILM_HARD_CAP_SECONDS) {
+      let removeAt = -1;
+      for (let i = kept.length - 1; i >= 0; i--) {
+        if (kept[i].priority === dropPriority) {
+          removeAt = i;
+          break;
+        }
       }
-      const isOptional = beat.priority === dropPriority && beat.priority > 0;
-      if (isOptional) {
-        if (beat.week !== null) excludedForCap.add(beat.week);
-        continue;
-      }
-      next.push(beat);
+      if (removeAt === -1) break;
+      const removed = kept[removeAt];
+      if (removed.week !== null) excludedForCap.add(removed.week);
+      kept.splice(removeAt, 1);
     }
-    kept = next;
+    if (totalOf(kept) <= FILM_HARD_CAP_SECONDS) break;
   }
 
-  // Final safety: if still over cap, trim trailing optional beats.
-  while (totalOf(kept) > FILM_HARD_CAP_SECONDS) {
-    const idx = [...kept].reverse().findIndex((b) => b.priority > 0);
-    if (idx === -1) break;
-    const removeAt = kept.length - 1 - idx;
-    const removed = kept[removeAt];
-    if (removed.week !== null) excludedForCap.add(removed.week);
-    kept = kept.filter((_, i) => i !== removeAt);
-  }
 
   // Remove orphaned chapter and label cards left behind by dropped content.
   const finalMiddle = kept.filter((beat, i) => {

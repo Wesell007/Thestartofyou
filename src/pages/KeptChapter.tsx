@@ -45,6 +45,7 @@ type Loaded = {
   photoUrl: string | null;
   photoCaption: string | null;
   video: VideoLite | null;
+  voiceNote: VideoLite | null;
   tone: RealismTone;
   // All weeks (past, ≠ current) that have *any* kept content.
   // Used to find adjacent kept chapters for chapter-style navigation.
@@ -102,10 +103,10 @@ const KeptChapter = () => {
         journey,
         { data: refl, error: reflectionError },
         { data: photo, error: photoError },
-        { data: videoRow, error: videoError },
+        { data: mediaRows, error: videoError },
         { data: allRefls, error: allReflectionError },
         { data: allPhotos, error: allPhotoError },
-        { data: allVideos, error: allVideoError },
+        { data: allMedia, error: allVideoError },
       ] = await Promise.all([
           supabase
             .from("profiles")
@@ -127,18 +128,15 @@ const KeptChapter = () => {
             .maybeSingle(),
           supabase
             .from("week_media_memories")
-            .select("storage_path, caption, mime_type")
+            .select("media_type, storage_path, caption, mime_type")
             .eq("user_id", user.id)
-            .eq("week", week)
-            .eq("media_type", "video")
-            .maybeSingle(),
+            .eq("week", week),
           supabase.from("reflections").select("week, content").eq("user_id", user.id),
           supabase.from("week_photos").select("week").eq("user_id", user.id),
           supabase
             .from("week_media_memories")
             .select("week")
-            .eq("user_id", user.id)
-            .eq("media_type", "video"),
+            .eq("user_id", user.id),
         ]);
       if (
         profileError ||
@@ -189,20 +187,27 @@ const KeptChapter = () => {
         photoUrl = urlData?.signedUrl ?? null;
       }
 
-      let video: VideoLite | null = null;
-      if (videoRow?.storage_path) {
+      const videoRow =
+        (mediaRows ?? []).find((m) => m.media_type === "video" && m.storage_path) ?? null;
+      const voiceRow =
+        (mediaRows ?? []).find((m) => m.media_type === "voice_note" && m.storage_path) ?? null;
+
+      const signMedia = async (row: typeof videoRow): Promise<VideoLite | null> => {
+        if (!row?.storage_path) return null;
         const { data: urlData, error: urlError } = await supabase.storage
           .from("weekly-photos")
-          .createSignedUrl(videoRow.storage_path, 60 * 60);
+          .createSignedUrl(row.storage_path, 60 * 60);
         if (urlError) throw urlError;
-        if (urlData?.signedUrl) {
-          video = {
-            url: urlData.signedUrl,
-            caption: videoRow.caption ?? null,
-            mimeType: videoRow.mime_type ?? null,
-          };
-        }
-      }
+        if (!urlData?.signedUrl) return null;
+        return {
+          url: urlData.signedUrl,
+          caption: row.caption ?? null,
+          mimeType: row.mime_type ?? null,
+        };
+      };
+
+      const video = await signMedia(videoRow);
+      const voiceNote = await signMedia(voiceRow);
 
       // Build the set of past weeks with any kept content for adjacent
       // chapter navigation.
@@ -215,7 +220,7 @@ const KeptChapter = () => {
       (allPhotos ?? []).forEach((p) => {
         if (p.week < currentWeek) kept.add(p.week);
       });
-      (allVideos ?? []).forEach((v) => {
+      (allMedia ?? []).forEach((v) => {
         if (v.week < currentWeek) kept.add(v.week);
       });
       const keptWeeks = Array.from(kept).sort((a, b) => a - b);
@@ -236,6 +241,7 @@ const KeptChapter = () => {
         photoUrl,
         photoCaption,
         video,
+        voiceNote,
         tone,
         keptWeeks,
       });
@@ -249,10 +255,10 @@ const KeptChapter = () => {
   }, [week, validWeek, navigate, attempt]);
 
   useEffect(() => {
-    if (!data?.photoUrl && !data?.video) return;
+    if (!data?.photoUrl && !data?.video && !data?.voiceNote) return;
     const timer = window.setTimeout(() => setAttempt((n) => n + 1), 50 * 60 * 1000);
     return () => window.clearTimeout(timer);
-  }, [data?.photoUrl, data?.video]);
+  }, [data?.photoUrl, data?.video, data?.voiceNote]);
 
   const content = useMemo(() => (validWeek ? getMyWeekContent(week) : null), [week, validWeek]);
   const identity = useMemo(() => (validWeek ? getWeekIdentity(week) : null), [week, validWeek]);
@@ -263,7 +269,7 @@ const KeptChapter = () => {
     return <PageLoadState />;
   }
 
-  const { reflection, photoUrl, photoCaption, video, tone, keptWeeks } = data;
+  const { reflection, photoUrl, photoCaption, video, voiceNote, tone, keptWeeks } = data;
   const realism = resolveRealismForWeek(week, tone);
   const realismAlt = defaultRealismAltForWeek(week);
   const trimester = trimesterLabelFor(week);
@@ -477,8 +483,8 @@ const KeptChapter = () => {
             )}
           </section>
 
-          {/* 6. A moment kept — photo, video, or both */}
-          {(photoUrl || video) && (
+          {/* 6. A moment kept — photo, video, voice note, or any combination */}
+          {(photoUrl || video || voiceNote) && (
             <section className="order-3 space-y-5">
               <h2
                 className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-1"
@@ -532,6 +538,25 @@ const KeptChapter = () => {
                     >
                       {video.caption}
                     </figcaption>
+                  )}
+                </figure>
+              )}
+              {voiceNote && (
+                <figure
+                  className="rounded-[24px] overflow-hidden px-5 sm:px-6 py-5"
+                  style={{ border: `1px solid ${accentSoft(0.16)}`, background: tint(0.1) }}
+                >
+                  <figcaption
+                    className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase mb-3"
+                    style={{ color: accent }}
+                  >
+                    Voice note
+                  </figcaption>
+                  <audio src={voiceNote.url} controls preload="metadata" className="w-full" />
+                  {voiceNote.caption && (
+                    <p className="mt-3 font-serif italic text-[14.5px] sm:text-[15px] leading-[1.65] text-foreground/75">
+                      {voiceNote.caption}
+                    </p>
                   )}
                 </figure>
               )}

@@ -391,6 +391,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
     durationSeconds,
     caption,
     upload,
+    uploadVoice,
     remove,
     saveCaption,
     clearError,

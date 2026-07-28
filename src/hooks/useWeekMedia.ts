@@ -212,6 +212,98 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
     [userId, week, mediaType, storagePath, caption],
   );
 
+  /**
+   * Save a recorded voice note. Only valid when `mediaType === "voice_note"`.
+   * Mirrors `upload` but takes an in-memory Blob from MediaRecorder rather
+   * than a picked File, and trusts the recorder's measured duration.
+   */
+  const uploadVoice = useCallback(
+    async (
+      blob: Blob,
+      opts: { mimeType: string; durationSeconds: number },
+    ): Promise<boolean> => {
+      if (mediaType !== "voice_note") return false;
+
+      const mime = baseAudioMime(opts.mimeType || blob.type || "audio/webm");
+      if (!(VOICE_ACCEPTED_MIME as readonly string[]).includes(mime)) {
+        setError(VOICE_ERROR_COPY.unsupported);
+        return false;
+      }
+      if (blob.size <= 0) {
+        setError(VOICE_ERROR_COPY.empty);
+        return false;
+      }
+      if (blob.size > VOICE_MAX_BYTES) {
+        setError(VOICE_ERROR_COPY.tooLarge);
+        return false;
+      }
+      const duration = Math.max(1, Math.round(opts.durationSeconds));
+      if (duration > VOICE_MAX_DURATION_SECONDS) {
+        setError(VOICE_ERROR_COPY.tooLong);
+        return false;
+      }
+
+      const previousPath = storagePath;
+      const hadRow = Boolean(previousPath);
+      setError(null);
+      setState("uploading");
+
+      const path = buildMediaStoragePath(userId, week, mediaType, extensionForVoice(mime));
+
+      const { error: upErr } = await supabase.storage
+        .from(BUCKET)
+        .upload(path, blob, { upsert: false, contentType: mime });
+      if (upErr) {
+        setState(hadRow ? "loaded" : "empty");
+        setError(VOICE_ERROR_COPY.uploadFailed);
+        return false;
+      }
+
+      const { error: dbErr } = await supabase.from(TABLE).upsert(
+        {
+          user_id: userId,
+          week,
+          media_type: mediaType,
+          storage_path: path,
+          mime_type: mime,
+          file_size_bytes: blob.size,
+          duration_seconds: duration,
+          caption,
+        },
+        { onConflict: "user_id,week,media_type" },
+      );
+      if (dbErr) {
+        await supabase.storage.from(BUCKET).remove([path]);
+        setState(hadRow ? "loaded" : "empty");
+        setError(VOICE_ERROR_COPY.uploadFailed);
+        return false;
+      }
+
+      if (previousPath && previousPath !== path) {
+        await supabase.storage.from(BUCKET).remove([previousPath]);
+      }
+
+      const { data: urlData, error: urlErr } = await supabase.storage
+        .from(BUCKET)
+        .createSignedUrl(path, SIGN_TTL_SECONDS);
+      setStoragePath(path);
+      setMimeType(mime);
+      setDurationSeconds(duration);
+      if (urlErr || !urlData?.signedUrl) {
+        setSignedUrl(null);
+        setState("error");
+        setError(VOICE_ERROR_COPY.loadFailed);
+        return false;
+      }
+      setSignedUrl(urlData.signedUrl);
+      setState("loaded");
+      return true;
+    },
+    [userId, week, mediaType, storagePath, caption],
+  );
+
+
+
   const remove = useCallback(async () => {
     if (!storagePath) return;
     const prev = {

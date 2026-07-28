@@ -262,9 +262,12 @@ const MyWeek = () => {
 
         <SectionWeeklyReads week={currentWeek} />
 
-        <SlotReflection content={content} userId={userId} week={currentWeek} />
-
-        <SectionKeepThisWeek userId={userId} week={currentWeek} chapterTitle={identity.chapterTitle} />
+        <SectionKeepThisWeek
+          userId={userId}
+          week={currentWeek}
+          chapterTitle={identity.chapterTitle}
+          content={content}
+        />
 
         <SectionNextChapter
           nextWeek={nextWeek}

@@ -31,6 +31,8 @@ const AccountSettings = () => {
   const navigate = useNavigate();
   const [userId, setUserId] = useState<string | null>(null);
   const [lifecycle, setLifecycle] = useState<Lifecycle>(null);
+  const [pregnancyDates, setPregnancyDates] = useState<{ lmp: string; due: string } | null>(null);
+  const [ttcDates, setTtcDates] = useState<{ lmp: string; cycle: number | null } | null>(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState<"export" | "journey" | "account" | "companion" | null>(null);
 
@@ -60,7 +62,29 @@ const AccountSettings = () => {
       ]);
       if (!active) return;
       setUserId(user.id);
-      setLifecycle(pointer?.lifecycle === "pregnancy" || pointer?.lifecycle === "ttc" ? pointer.lifecycle : null);
+      const nextLifecycle = pointer?.lifecycle === "pregnancy" || pointer?.lifecycle === "ttc" ? pointer.lifecycle : null;
+      setLifecycle(nextLifecycle);
+      // Phase 15.1 · Fix 5: surface the actual saved dates so users can
+      // sanity-check what the app has stored without re-running a calculator.
+      if (nextLifecycle === "pregnancy") {
+        const { data: preg } = await supabase
+          .from("pregnancy_journeys")
+          .select("lmp_date, due_date")
+          .eq("user_id", user.id)
+          .maybeSingle();
+        if (active && preg?.lmp_date && preg?.due_date) {
+          setPregnancyDates({ lmp: preg.lmp_date, due: preg.due_date });
+        }
+      } else if (nextLifecycle === "ttc") {
+        const { data: ttc } = await supabase
+          .from("ttc_journeys")
+          .select("last_period_date, cycle_length_days")
+          .eq("user_id", user.id)
+          .maybeSingle();
+        if (active && ttc?.last_period_date) {
+          setTtcDates({ lmp: ttc.last_period_date, cycle: ttc.cycle_length_days ?? null });
+        }
+      }
       const savedName = profile?.companion_name?.trim() || null;
       const savedTone = profile?.companion_tone ?? null;
       const choice = suggestedFromName(savedName);

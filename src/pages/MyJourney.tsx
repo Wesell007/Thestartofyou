@@ -339,6 +339,7 @@ const JourneyKeptRegion = ({
   reflectionWeeks,
   reflectionsByWeek,
   photoUrls,
+  videos,
   currentWeek,
   renderRow,
 }: {
@@ -349,6 +350,7 @@ const JourneyKeptRegion = ({
   reflectionWeeks: number[];
   reflectionsByWeek: Record<number, ReflectionRow>;
   photoUrls: { week: number; url: string; caption: string | null }[];
+  videos: VideoItem[];
   currentWeek: number;
   renderRow: (w: number) => JSX.Element;
 }) => {
@@ -367,7 +369,7 @@ const JourneyKeptRegion = ({
           Kept for you
         </p>
         <p className="font-serif text-foreground/80 text-[15.5px] leading-[1.65] max-w-[46ch] mb-5">
-          Your saved weeks, reflections and photos are here whenever you want them.
+          Your saved weeks, reflections, photos and videos are here whenever you want them.
         </p>
         <button
           type="button"
@@ -400,7 +402,7 @@ const JourneyKeptRegion = ({
           </p>
         </section>
       )}
-      <PhotoJournal photos={photoUrls} currentWeek={currentWeek} />
+      <PhotoJournal photos={photoUrls} videos={videos} currentWeek={currentWeek} />
       <ReflectionHighlights weeks={reflectionWeeks} reflectionByWeek={reflectionsByWeek} />
     </>
   );

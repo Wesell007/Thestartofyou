@@ -65,6 +65,89 @@ export const extensionForVideo = (mime: string, filename: string): string => {
   return FILENAME_EXT_ALLOWLIST.has(tail) ? tail : "mp4";
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Voice note constants — the audio memory type.
+//
+// Stored as `media_type = 'voice_note'` in `week_media_memories`, in the same
+// private `weekly-photos` bucket as video, under {user}/{week}/voice_note/…
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const VOICE_MAX_BYTES = 10 * 1024 * 1024;
+export const VOICE_MAX_DURATION_SECONDS = 180;
+
+export const VOICE_ACCEPTED_MIME = [
+  "audio/webm",
+  "audio/mp4",
+  "audio/mpeg",
+  "audio/ogg",
+] as const;
+
+/** MediaRecorder MIME candidates, most-preferred first. */
+export const VOICE_RECORDER_MIME_CANDIDATES = [
+  "audio/webm;codecs=opus",
+  "audio/webm",
+  "audio/mp4;codecs=mp4a.40.2",
+  "audio/mp4",
+  "audio/ogg;codecs=opus",
+  "audio/ogg",
+] as const;
+
+const VOICE_MIME_TO_EXT: Record<string, string> = {
+  "audio/webm": "webm",
+  "audio/mp4": "m4a",
+  "audio/mpeg": "mp3",
+  "audio/ogg": "ogg",
+};
+
+/** Reduce a full MediaRecorder mimeType ("audio/webm;codecs=opus") to its base. */
+export const baseAudioMime = (mime: string): string => {
+  const base = mime.split(";")[0]?.trim().toLowerCase() ?? "";
+  return (VOICE_ACCEPTED_MIME as readonly string[]).includes(base) ? base : "audio/webm";
+};
+
+export const extensionForVoice = (mime: string): string =>
+  VOICE_MIME_TO_EXT[baseAudioMime(mime)] ?? "webm";
+
+/** Pick the first MediaRecorder MIME this browser supports, or null. */
+export const pickVoiceRecorderMime = (): string | null => {
+  if (typeof window === "undefined") return null;
+  const MR = (window as unknown as { MediaRecorder?: typeof MediaRecorder }).MediaRecorder;
+  if (!MR) return null;
+  for (const candidate of VOICE_RECORDER_MIME_CANDIDATES) {
+    try {
+      if (typeof MR.isTypeSupported === "function" && MR.isTypeSupported(candidate)) {
+        return candidate;
+      }
+    } catch {
+      /* ignore */
+    }
+  }
+  return "";
+};
+
+/** True when this browser can record audio at all. */
+export const isVoiceRecordingSupported = (): boolean => {
+  if (typeof window === "undefined" || typeof navigator === "undefined") return false;
+  const hasRecorder = Boolean(
+    (window as unknown as { MediaRecorder?: unknown }).MediaRecorder,
+  );
+  const hasMedia = Boolean(navigator.mediaDevices?.getUserMedia);
+  return hasRecorder && hasMedia;
+};
+
+export const VOICE_ERROR_COPY = {
+  unsupported: "Voice recording isn't supported in this browser yet.",
+  micDenied: "We need microphone access to record. Allow it, then try again.",
+  recordFailed: "Recording didn't start. Try again.",
+  tooLarge: "That recording is a little too big.",
+  tooLong: "That recording is a bit longer than we support right now.",
+  empty: "We didn't catch anything. Try recording again.",
+  uploadFailed: "Couldn't save that just now.",
+  removeFailed: "Couldn't remove that just now.",
+  loadFailed: "Couldn't open your saved voice note.",
+  playbackFailed: "Couldn't play this back. Try opening again.",
+} as const;
+
 /** Build the canonical storage path for a week media object. */
 export const buildMediaStoragePath = (
   userId: string,

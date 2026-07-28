@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 
 export type LightboxTile =
   | { kind: "photo"; week: number; url: string; caption?: string | null }
-  | { kind: "video"; week: number; url: string; caption?: string | null; mimeType?: string | null };
+  | { kind: "video"; week: number; url: string; caption?: string | null; mimeType?: string | null }
+  | { kind: "voice"; week: number; url: string; caption?: string | null; mimeType?: string | null };
 
 interface Props {
   tiles: LightboxTile[];
@@ -63,7 +64,7 @@ const MediaLightbox = ({ tiles, index, onIndexChange, onClose }: Props) => {
             {tile ? `Kept memory from week ${tile.week}` : "Kept memory"}
           </DialogPrimitive.Title>
           <DialogPrimitive.Description className="sr-only">
-            Full-screen view of a saved photo or video from your pregnancy journey.
+            Full-screen view of a saved photo, video or voice note from your pregnancy journey.
           </DialogPrimitive.Description>
 
           {tile && (
@@ -105,6 +106,25 @@ const MediaLightbox = ({ tiles, index, onIndexChange, onClose }: Props) => {
                       className="max-w-full max-h-[75vh] w-auto h-auto object-contain rounded-[16px]"
                       style={{ border: "1px solid hsl(0 0% 100% / 0.12)" }}
                     />
+                  ) : tile.kind === "voice" ? (
+                    <div
+                      className="w-full max-w-[560px] rounded-[18px] px-6 py-7"
+                      style={{
+                        background: "hsl(0 0% 100% / 0.06)",
+                        border: "1px solid hsl(0 0% 100% / 0.16)",
+                      }}
+                    >
+                      <p className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase text-white/70 mb-4">
+                        Voice note
+                      </p>
+                      <audio
+                        key={tile.url}
+                        src={tile.url}
+                        controls
+                        preload="metadata"
+                        className="w-full"
+                      />
+                    </div>
                   ) : (
                     <video
                       key={tile.url}

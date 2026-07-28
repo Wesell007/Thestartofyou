@@ -15,7 +15,8 @@ import journalFlatlay from "@/assets/journal-flatlay.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { BotanicalAccent, Sprig, SprigDivider, StageGlow } from "@/components/shared/StageBotanical";
-import { stashPendingJourney } from "@/lib/savedJourney";
+import { stashPendingJourney, saveActivePregnancyJourney, getActivePregnancyJourney } from "@/lib/savedJourney";
+import { supabase } from "@/integrations/supabase/client";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import AskLink from "@/components/shared/AskLink";
@@ -234,10 +235,51 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
     navigateToAsk(navigate, q, { context: `Pregnancy week ${result.currentWeek}`, stage: "pregnancy" });
   };
 
-  const handleSaveJourney = () => {
+  // Phase 15.1 · Fix 5: recognise auth + existing-journey state so the
+  // signed-in path doesn't push through /auth/setup again.
+  const [userId, setUserId] = useState<string | null>(null);
+  const [hasJourney, setHasJourney] = useState<boolean>(false);
+  const [savingJourney, setSavingJourney] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { data } = await supabase.auth.getSession();
+      const uid = data.session?.user?.id ?? null;
+      if (cancelled) return;
+      setUserId(uid);
+      if (uid) {
+        const existing = await getActivePregnancyJourney(uid);
+        if (!cancelled) setHasJourney(Boolean(existing));
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const handleSaveJourney = async () => {
     trackEvent(EVENTS.SAVE_JOURNEY_STARTED);
-    stashPendingJourney(lmp);
-    navigate("/auth");
+    // Not signed in → keep the original stash + auth path.
+    if (!userId) {
+      stashPendingJourney(lmp);
+      navigate("/auth");
+      return;
+    }
+    // Signed in, already has a saved journey → this result is exploratory;
+    // send the person back to their live weekly experience.
+    if (hasJourney) {
+      navigate("/my-week");
+      return;
+    }
+    // Signed in, no active journey yet → commit directly, no re-onboarding.
+    setSavingJourney(true);
+    try {
+      await saveActivePregnancyJourney(userId, lmp);
+    } finally {
+      setSavingJourney(false);
+    }
+    navigate("/my-week");
   };
 
   const trimesterZones = [

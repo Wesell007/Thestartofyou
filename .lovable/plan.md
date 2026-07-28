@@ -1,46 +1,56 @@
-## Phase 14.12 — Deep Asset Re-import and Pointer Replacement
+## Phase 14.14 (approved) — Full size-cue audit + Issues 2–4
 
-Replace the 34 Deep `.asset.json` pointers under `src/assets/myweek-weekly-realism-deep/` with pointers to the approved Phase 14.11 Deep files. Canonical unversioned target filenames only. No resolver, wiring, Settings, route, sitemap, analytics, AI, or migration changes. Default / Light / Medium folders are not touched.
+**22 weeks touched:** 12 nulled + 10 remapped.
 
-### Source-to-target map
+### Issue 1 — Size-cue audit
 
-Sources read from `/mnt/documents/phase-14-11/images/deep/`. Targets written to `src/assets/myweek-weekly-realism-deep/week-XX.png.asset.json`.
+**Nulled (cue text preserved):** Weeks 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13.
 
-| Week(s) | Source | Target |
-|---------|--------|--------|
-| 09-14 | `week-{09..14}.v2.png` | `week-{09..14}.png.asset.json` |
-| 15-19 | `week-{15..19}.png` | `week-{15..19}.png.asset.json` |
-| 20 | `week-20.v2.png` | `week-20.png.asset.json` |
-| 21-35 | `week-{21..35}.png` | `week-{21..35}.png.asset.json` |
-| 36 | `week-36.png` | `week-36.png.asset.json` |
-| 37-42 | `week-{37..42}.png` | `week-{37..42}.png.asset.json` |
+**Remapped with cue rewrites:**
 
-Total: 34 uploads overwriting 34 existing pointer files. No `.v2` / `.v3` filenames leak into `src/`.
+| Wk | Slug | Cue |
+|---|---|---|
+| 15 | `pear` | About the size of a pear, weight beginning to register. |
+| 18 | `mango` | About the curve of a mango, turning often inside you. |
+| 19 | `pear` | About the size of a pear, finding rhythm. |
+| 21 | `aubergine` | About the length of an aubergine, busy and present. |
+| 22 | `butternut-squash` | Roughly the length of a butternut squash, long, lean, real. |
+| 24 | `banana` | About the length of a banana, settling into proportion. |
+| 25 | `cauliflower` | About the size of a cauliflower, settling and stretching. |
+| 26 | `aubergine` | About the length of an aubergine, longer now than heavy. |
+| 34 | `coconut` | About the size of a coconut, settled and growing. |
+| 37 | `cabbage` | About the size of a cabbage, quiet and complete. |
 
-### Method (per week)
+**Kept:** 16, 17, 20, 23, 27, 28, 29, 30, 31, 32, 33, 35, 36, 38, 39, 40 (assets present); 1, 14, 41, 42 (intentional null).
 
-1. Copy the approved source to `/tmp/deep-import/week-XX.png` (normalises the filename even when the source is `.v2.png`).
-2. Run `lovable-assets create --file /tmp/deep-import/week-XX.png --filename week-XX.png`.
-3. Write the CLI stdout verbatim to `src/assets/myweek-weekly-realism-deep/week-XX.png.asset.json`, overwriting the existing pointer.
-4. No hand-editing of pointer JSON. No raw PNGs land in `src/`. No `lovable-assets delete` calls.
+### Issue 4 — Week 37 copy
 
-### Guardrails
+`babyNote` → "Your baby is considered early term now, and the last weeks are part of the final stretch toward birth."
 
-- Only `src/assets/myweek-weekly-realism-deep/` is modified.
-- `myweek-weekly-realism/`, `-light/`, `-medium/` untouched.
-- `src/lib/myWeekRealismIllustrations.ts`, `SectionBabyThisWeek.tsx`, `BabyIllustrationStyleField.tsx`, `MyWeek.tsx`, routes, sitemap, analytics, AI prompts, migrations, Settings copy untouched.
-- Old 3-stage system preserved.
+### Issue 2 — My Journey imagery
 
-### Verification
+- `MyJourney.tsx`: `useBabyIllustrationStyle()` + `normaliseRealismTone(style)`, pass `tone` to `KeptWeekRow`.
+- `KeptWeekRow.tsx`: swap `MyWeekBabyImage` for `<img>` from `resolveRealismForWeek(week, tone)` with `defaultRealismAltForWeek(week)`. Preserve frame/sizing/hover/layout. `MyWeekBabyImage` retained for other surfaces.
 
-- Exactly 34 pointer files remain, named `week-09.png.asset.json` … `week-42.png.asset.json`.
-- No `.v2` / `.v3` filename anywhere in `src/`.
-- No raw `.png` under `src/assets/myweek-weekly-realism-deep/`.
-- Every pointer has a non-empty `url` using the canonical `week-XX.png` filename.
-- Where the schema includes them: `content_type` is `image/png` and `size` is non-zero.
-- Spot-check the resolver (read-only) resolves W9, W20, W36, W42 through the canonical pointer filenames — no resolver changes expected.
-- Run `npm run typecheck`; return the exact command and result.
+### Issue 3 — Videos in My Journey
 
-### Stop point
+- `MyJourney.tsx`: parallel `week_media_memories` read (`media_type='video'`); sign via `weekly-photos`; feed into `keptWeeks`, `MomentsKeptSummary`, `KeptWeekRow`, `PhotoJournal`.
+- `MomentsKeptSummary.tsx`: 4th "Videos" stat, `grid-cols-2 sm:grid-cols-4`.
+- `KeptWeekRow.tsx`: `hasVideo` → discreet Video indicator.
+- `PhotoJournal.tsx`: accept `videos`, render `<video controls preload="metadata" playsInline muted>` in the same aspect-square frame; interleave by week desc; photo+video week → photo tile with small video badge; empty state → "No photos or videos kept yet."; subheading → "The weeks you have chosen to see again — photos and videos." Section title unchanged.
 
-Stop after the 34 pointer rewrites, guardrail check, spot checks, and typecheck. Do not begin Phase 14.13. Await approval.
+### Files changed (only)
+
+- `src/data/myWeekContent.ts`
+- `src/pages/MyJourney.tsx`
+- `src/components/myjourney/KeptWeekRow.tsx`
+- `src/components/myjourney/MomentsKeptSummary.tsx`
+- `src/components/myjourney/PhotoJournal.tsx`
+
+### Not changing
+
+Realism assets, `.asset.json` files, `resolveRealismForWeek`, migrations, RLS, storage bucket, `useWeekMedia`, `SlotVideoMemory`, analytics, AI prompts, sitemap, routes, old 3-stage assets/resolver, `MyWeekBabyImage`.
+
+### QA
+
+No broken monogram anywhere 1–42. /my-week W30/36/37/38 render expected produce. Week 37 copy free of "safely"/"safe"/"guaranteed"/etc. /my-journey uses realism resolver + saved preference; W1–8 default; W36 video shows + counts. Photos/reflections/kept-week logic intact. `npm run typecheck` → 0.

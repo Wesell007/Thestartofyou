@@ -298,6 +298,7 @@ const MyJourney = () => {
         <MomentsKeptSummary
           reflections={reflectionWeeks.length}
           photos={photoWeeks.size}
+          videos={videoWeeks.size}
           weeksKept={keptWeeks.length}
         />
 
@@ -309,6 +310,7 @@ const MyJourney = () => {
           reflectionWeeks={reflectionWeeks}
           reflectionsByWeek={reflectionsByWeek}
           photoUrls={photoUrls}
+          videos={videos}
           currentWeek={currentWeek}
           renderRow={renderRow}
         />

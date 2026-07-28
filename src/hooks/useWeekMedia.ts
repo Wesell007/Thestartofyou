@@ -54,6 +54,8 @@ interface Row {
 }
 
 export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
+  const COPY = mediaType === "voice_note" ? VOICE_ERROR_COPY : VIDEO_ERROR_COPY;
+  const fallbackMime = mediaType === "voice_note" ? "audio/webm" : "video/mp4";
   const [state, setState] = useState<WeekMediaState>("loading");
   const [error, setError] = useState<string | null>(null);
   const [storagePath, setStoragePath] = useState<string | null>(null);

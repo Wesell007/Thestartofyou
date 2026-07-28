@@ -477,39 +477,68 @@ const KeptChapter = () => {
             )}
           </section>
 
-          {/* 6. A moment kept — only when a photo exists */}
-          {photoUrl && (
-            <section className="order-3">
+          {/* 6. A moment kept — photo, video, or both */}
+          {(photoUrl || video) && (
+            <section className="order-3 space-y-5">
               <h2
-                className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-5"
+                className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-1"
                 style={{ color: accent }}
               >
                 A moment kept
               </h2>
-              <figure
-                className="rounded-[24px] overflow-hidden"
-                style={{ border: `1px solid ${accentSoft(0.16)}` }}
-              >
-                <img
-                  src={photoUrl}
-                  alt={`A moment kept from week ${week} — ${identity.chapterTitle}`}
-                  className="w-full h-auto max-h-[520px] object-cover block"
-                />
-                {photoCaption && (
-                  <figcaption
-                    className="px-5 sm:px-6 py-4 font-serif italic text-[14.5px] sm:text-[15px] leading-[1.65] text-foreground/75"
-                    style={{
-                      borderTop: `1px solid ${accentSoft(0.16)}`,
-                      background: tint(0.16),
-                    }}
-                  >
-                    {photoCaption}
-                  </figcaption>
-                )}
-              </figure>
+              {photoUrl && (
+                <figure
+                  className="rounded-[24px] overflow-hidden"
+                  style={{ border: `1px solid ${accentSoft(0.16)}` }}
+                >
+                  <img
+                    src={photoUrl}
+                    alt={`A moment kept from week ${week} — ${identity.chapterTitle}`}
+                    className="w-full h-auto max-h-[520px] object-cover block"
+                  />
+                  {photoCaption && (
+                    <figcaption
+                      className="px-5 sm:px-6 py-4 font-serif italic text-[14.5px] sm:text-[15px] leading-[1.65] text-foreground/75"
+                      style={{
+                        borderTop: `1px solid ${accentSoft(0.16)}`,
+                        background: tint(0.16),
+                      }}
+                    >
+                      {photoCaption}
+                    </figcaption>
+                  )}
+                </figure>
+              )}
+              {video && (
+                <figure
+                  className="rounded-[24px] overflow-hidden"
+                  style={{ border: `1px solid ${accentSoft(0.16)}` }}
+                >
+                  <video
+                    src={video.url}
+                    controls
+                    preload="metadata"
+                    playsInline
+                    muted
+                    className="w-full h-auto max-h-[520px] block bg-black"
+                  />
+                  {video.caption && (
+                    <figcaption
+                      className="px-5 sm:px-6 py-4 font-serif italic text-[14.5px] sm:text-[15px] leading-[1.65] text-foreground/75"
+                      style={{
+                        borderTop: `1px solid ${accentSoft(0.16)}`,
+                        background: tint(0.16),
+                      }}
+                    >
+                      {video.caption}
+                    </figcaption>
+                  )}
+                </figure>
+              )}
             </section>
           )}
         </div>
+
 
         {/* 7. Chapter context — quiet, no progress UI */}
         <section className="mt-14 sm:mt-16">

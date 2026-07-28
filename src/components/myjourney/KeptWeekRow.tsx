@@ -1,12 +1,19 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import MyWeekBabyImage from "@/components/myweek/MyWeekBabyImage";
+import { ArrowRight, Video as VideoIcon } from "lucide-react";
 import { getWeekIdentity } from "@/data/myWeekContent";
+import {
+  defaultRealismAltForWeek,
+  resolveRealismForWeek,
+  type RealismTone,
+} from "@/lib/myWeekRealismIllustrations";
 
 interface Props {
   week: number;
   reflection?: string;
   hasPhoto: boolean;
+  hasVideo?: boolean;
+  /** Saved illustration preference, normalised. */
+  tone?: RealismTone;
   /** True when this row represents the live current week. Visually subordinate. */
   isCurrentWeek?: boolean;
 }
@@ -18,10 +25,11 @@ const truncate = (s: string, max: number) => {
   return (lastSpace > max * 0.6 ? slice.slice(0, lastSpace) : slice).trimEnd() + "…";
 };
 
-const KeptWeekRow = ({ week, reflection, hasPhoto, isCurrentWeek }: Props) => {
+const KeptWeekRow = ({ week, reflection, hasPhoto, hasVideo, tone = "default", isCurrentWeek }: Props) => {
   const identity = getWeekIdentity(week);
   const accent = "hsl(var(--stage-pregnancy-accent))";
   const hasReflection = !!reflection && reflection.trim().length > 0;
+  const resolved = resolveRealismForWeek(week, tone);
 
   return (
     <li className={isCurrentWeek ? "opacity-80" : ""}>
@@ -38,11 +46,17 @@ const KeptWeekRow = ({ week, reflection, hasPhoto, isCurrentWeek }: Props) => {
             border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.18)",
           }}
         >
-          <MyWeekBabyImage
-            week={week}
-            className="w-full h-full flex items-center justify-center"
-            imgClassName="w-full h-full object-cover"
-          />
+          {resolved.src ? (
+            <img
+              src={resolved.src}
+              alt={defaultRealismAltForWeek(week)}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <span aria-hidden="true" className="w-full h-full" />
+          )}
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-baseline justify-between gap-3 mb-1">
@@ -62,14 +76,26 @@ const KeptWeekRow = ({ week, reflection, hasPhoto, isCurrentWeek }: Props) => {
                 </span>
               )}
             </div>
-            {!hasReflection && hasPhoto && (
-              <span
-                className="font-sans text-[9.5px] font-medium tracking-[0.24em] uppercase shrink-0"
-                style={{ color: accent }}
-              >
-                Kept
-              </span>
-            )}
+            <div className="flex items-center gap-2 shrink-0">
+              {hasVideo && (
+                <span
+                  className="inline-flex items-center gap-1 font-sans text-[9.5px] font-medium tracking-[0.24em] uppercase"
+                  style={{ color: accent }}
+                  aria-label="Video kept for this week"
+                >
+                  <VideoIcon size={11} strokeWidth={1.8} aria-hidden="true" />
+                  Video
+                </span>
+              )}
+              {!hasReflection && hasPhoto && !hasVideo && (
+                <span
+                  className="font-sans text-[9.5px] font-medium tracking-[0.24em] uppercase"
+                  style={{ color: accent }}
+                >
+                  Kept
+                </span>
+              )}
+            </div>
           </div>
           {hasReflection && (
             <p className="font-serif italic text-foreground/65 text-[13.5px] sm:text-[14px] leading-[1.55] truncate">

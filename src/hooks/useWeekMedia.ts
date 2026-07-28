@@ -338,7 +338,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
           week,
           media_type: mediaType,
           storage_path: prev.storagePath,
-          mime_type: prev.mimeType ?? "video/mp4",
+          mime_type: prev.mimeType ?? fallbackMime,
           file_size_bytes: 1,
           duration_seconds: prev.durationSeconds,
           caption: prev.caption,
@@ -373,7 +373,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
         .eq("week", week)
         .eq("media_type", mediaType);
       if (updErr) {
-        setError(VIDEO_ERROR_COPY.uploadFailed);
+        setError(COPY.uploadFailed);
         return false;
       }
       setCaption(next);

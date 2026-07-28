@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import SeoHead from "@/components/seo/SeoHead";
 import { useNavigate, Link } from "react-router-dom";
-import { differenceInDays } from "date-fns";
+import { differenceInDays, format } from "date-fns";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import { supabase } from "@/integrations/supabase/client";
@@ -28,6 +28,9 @@ import PageLoadState from "@/components/shared/PageLoadState";
 import { useBabyIllustrationStyle } from "@/hooks/useBabyIllustrationStyle";
 import { normaliseRealismTone, type RealismTone } from "@/lib/myWeekRealismIllustrations";
 import type { VideoItem, VoiceItem } from "@/components/myjourney/PhotoJournal";
+import MemoryFilmEntry from "@/components/myjourney/MemoryFilmEntry";
+import MemoryFilmBuilder from "@/components/myjourney/MemoryFilmBuilder";
+import type { WeekMemory } from "@/lib/memoryFilm";
 
 type ReflectionRow = {
   week: number;
@@ -70,6 +73,7 @@ const MyJourney = () => {
   const [state, setState] = useState<State | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
+  const [filmOpen, setFilmOpen] = useState(false);
   const viewedRef = useRef(false);
 
   useEffect(() => {
@@ -233,7 +237,39 @@ const MyJourney = () => {
         return b - a;
       });
 
-    return { keptWeeks, reflectionWeeks };
+    const { photoUrls, videos, voiceNotes } = state;
+    const filmWeeks: WeekMemory[] = keptWeeks.map((w) => ({
+      week: w,
+      reflection: reflectionsByWeek[w]?.content ?? null,
+      photo: (() => {
+        const p = photoUrls.find((item) => item.week === w);
+        return p ? { url: p.url, caption: p.caption } : null;
+      })(),
+      video: (() => {
+        const v = videos.find((item) => item.week === w);
+        return v
+          ? {
+              url: v.url,
+              caption: v.caption ?? null,
+              mimeType: v.mimeType ?? null,
+              durationSeconds: v.durationSeconds ?? null,
+            }
+          : null;
+      })(),
+      voice: (() => {
+        const v = voiceNotes.find((item) => item.week === w);
+        return v
+          ? {
+              url: v.url,
+              caption: v.caption ?? null,
+              mimeType: v.mimeType ?? null,
+              durationSeconds: v.durationSeconds ?? null,
+            }
+          : null;
+      })(),
+    }));
+
+    return { keptWeeks, reflectionWeeks, filmWeeks };
   }, [state]);
 
   const { style: illustrationStyle } = useBabyIllustrationStyle();
@@ -255,7 +291,7 @@ const MyJourney = () => {
     videos,
     voiceNotes,
   } = state;
-  const { keptWeeks, reflectionWeeks } = derived;
+  const { keptWeeks, reflectionWeeks, filmWeeks } = derived;
 
   const accent = "hsl(var(--stage-pregnancy-accent))";
   const isActive = status === "active";

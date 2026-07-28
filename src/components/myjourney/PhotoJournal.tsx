@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ImagePlus, Video as VideoIcon } from "lucide-react";
+import { ImagePlus, Video as VideoIcon, Play } from "lucide-react";
+import MediaLightbox, { type LightboxTile } from "./MediaLightbox";
 
 interface PhotoItem {
   week: number;
@@ -27,6 +29,7 @@ type Tile =
 
 const PhotoJournal = ({ photos, videos = [], currentWeek }: Props) => {
   const accent = "hsl(var(--stage-pregnancy-accent))";
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const photoWeeks = new Set(photos.map((p) => p.week));
   const tiles: Tile[] = [
@@ -47,6 +50,12 @@ const PhotoJournal = ({ photos, videos = [], currentWeek }: Props) => {
         mimeType: v.mimeType ?? null,
       })),
   ].sort((a, b) => b.week - a.week);
+
+  const lightboxTiles: LightboxTile[] = tiles.map((t) =>
+    t.kind === "photo"
+      ? { kind: "photo", week: t.week, url: t.url, caption: t.caption ?? null }
+      : { kind: "video", week: t.week, url: t.url, caption: t.caption ?? null, mimeType: t.mimeType ?? null },
+  );
 
   return (
     <section className="mb-12 sm:mb-14">
@@ -109,92 +118,88 @@ const PhotoJournal = ({ photos, videos = [], currentWeek }: Props) => {
         </div>
       ) : (
         <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-          {tiles.map((t) => (
+          {tiles.map((t, i) => (
             <li key={`${t.kind}-${t.week}`}>
-              {t.kind === "photo" ? (
-                <Link
-                  to={`/my-week/${t.week}`}
-                  className="group block rounded-[16px] overflow-hidden relative aspect-square"
-                  style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.18)" }}
-                >
+              <button
+                type="button"
+                onClick={() => setOpenIndex(i)}
+                aria-label={
+                  t.kind === "photo"
+                    ? `Open photo from week ${t.week}`
+                    : `Open video from week ${t.week}`
+                }
+                className="group block w-full rounded-[16px] overflow-hidden relative aspect-square text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--stage-pregnancy-accent))] focus-visible:ring-offset-2"
+                style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.18)" }}
+              >
+                {t.kind === "photo" ? (
                   <img
                     src={t.url}
                     alt={`Photo saved in week ${t.week}`}
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
-                  {t.hasVideo && (
+                ) : (
+                  <>
+                    <video
+                      src={t.url}
+                      preload="metadata"
+                      playsInline
+                      muted
+                      className="w-full h-full object-cover pointer-events-none"
+                    />
                     <span
-                      className="absolute top-2 right-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-sans text-[9px] font-medium tracking-[0.2em] uppercase text-white"
-                      style={{ background: "hsl(222 14% 8% / 0.65)" }}
-                      aria-label="Video also kept for this week"
+                      aria-hidden="true"
+                      className="absolute inset-0 flex items-center justify-center"
                     >
-                      <VideoIcon size={10} strokeWidth={1.8} aria-hidden="true" />
-                      Video
-                    </span>
-                  )}
-                  <div
-                    className="absolute bottom-0 left-0 right-0 px-3 py-2 text-white"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, transparent, hsl(222 14% 8% / 0.65))",
-                    }}
-                  >
-                    <span className="block font-sans text-[10px] font-medium tracking-[0.24em] uppercase">
-                      Week {t.week}
-                    </span>
-                    {t.caption && (
-                      <span className="block font-serif italic text-[12px] leading-[1.3] text-white/90 truncate mt-0.5">
-                        {t.caption}
+                      <span
+                        className="inline-flex items-center justify-center h-11 w-11 rounded-full text-white"
+                        style={{
+                          background: "hsl(222 14% 8% / 0.55)",
+                          border: "1px solid hsl(0 0% 100% / 0.4)",
+                        }}
+                      >
+                        <Play size={16} strokeWidth={2} fill="currentColor" />
                       </span>
-                    )}
-                  </div>
-                </Link>
-              ) : (
-                <div
-                  className="group block rounded-[16px] overflow-hidden relative aspect-square bg-black/5"
-                  style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.18)" }}
-                >
-                  <video
-                    src={t.url}
-                    controls
-                    preload="metadata"
-                    playsInline
-                    muted
-                    className="w-full h-full object-cover"
-                  />
+                    </span>
+                  </>
+                )}
+                {(t.kind === "video" || (t.kind === "photo" && t.hasVideo)) && (
                   <span
-                    className="absolute top-2 right-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-sans text-[9px] font-medium tracking-[0.2em] uppercase text-white pointer-events-none"
+                    className="absolute top-2 right-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-sans text-[9px] font-medium tracking-[0.2em] uppercase text-white"
                     style={{ background: "hsl(222 14% 8% / 0.65)" }}
+                    aria-label={t.kind === "video" ? "Video" : "Video also kept for this week"}
                   >
                     <VideoIcon size={10} strokeWidth={1.8} aria-hidden="true" />
                     Video
                   </span>
-                  <div
-                    className="absolute bottom-0 left-0 right-0 px-3 py-2 text-white pointer-events-none"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, transparent, hsl(222 14% 8% / 0.72))",
-                    }}
-                  >
-                    <Link
-                      to={`/my-week/${t.week}`}
-                      className="block font-sans text-[10px] font-medium tracking-[0.24em] uppercase pointer-events-auto hover:underline"
-                    >
-                      Week {t.week}
-                    </Link>
-                    {t.caption && (
-                      <span className="block font-serif italic text-[12px] leading-[1.3] text-white/90 truncate mt-0.5">
-                        {t.caption}
-                      </span>
-                    )}
-                  </div>
+                )}
+                <div
+                  className="absolute bottom-0 left-0 right-0 px-3 py-2 text-white"
+                  style={{
+                    background: "linear-gradient(180deg, transparent, hsl(222 14% 8% / 0.65))",
+                  }}
+                >
+                  <span className="block font-sans text-[10px] font-medium tracking-[0.24em] uppercase">
+                    Week {t.week}
+                  </span>
+                  {t.caption && (
+                    <span className="block font-serif italic text-[12px] leading-[1.3] text-white/90 truncate mt-0.5">
+                      {t.caption}
+                    </span>
+                  )}
                 </div>
-              )}
+              </button>
             </li>
           ))}
         </ul>
       )}
+
+      <MediaLightbox
+        tiles={lightboxTiles}
+        index={openIndex}
+        onIndexChange={setOpenIndex}
+        onClose={() => setOpenIndex(null)}
+      />
     </section>
   );
 };

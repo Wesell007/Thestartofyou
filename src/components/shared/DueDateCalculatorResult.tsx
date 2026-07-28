@@ -282,6 +282,18 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
     navigate("/my-week");
   };
 
+  // Phase 15.1 · Fix 5: derived CTA copy so all three save buttons reflect
+  // the true action for signed-in users with an already-saved journey.
+  const isExploratory = Boolean(userId && hasJourney);
+  const saveCtaLabel = savingJourney
+    ? "Saving…"
+    : isExploratory
+    ? "Open my week"
+    : "Save your journey";
+  const saveCtaHelp = isExploratory
+    ? "You already have a saved journey. This result is exploratory."
+    : null;
+
   const trimesterZones = [
     { label: "1st", start: 1, end: 12, pct: 30 },
     { label: "2nd", start: 13, end: 27, pct: 37.5 },
@@ -404,13 +416,23 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
 
               {/* CTA — dominant */}
               <Fade delay={280}>
+                {saveCtaHelp && (
+                  <p
+                    className="font-sans text-[11px] font-medium tracking-[0.18em] uppercase mb-3"
+                    style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+                    role="status"
+                  >
+                    {saveCtaHelp}
+                  </p>
+                )}
                 <div className="flex flex-col sm:flex-row items-start gap-4 mb-3">
                   <button
                     type="button"
                     onClick={handleSaveJourney}
-                    className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all"
+                    disabled={savingJourney}
+                    className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-4 font-sans text-[15px] font-medium shadow-cta hover:bg-terracotta-hover hover:shadow-lg transition-all disabled:opacity-70"
                   >
-                    Save your journey
+                    {saveCtaLabel}
                     <ArrowRight size={16} />
                   </button>
                   <AskLink

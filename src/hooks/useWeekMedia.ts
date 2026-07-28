@@ -118,28 +118,28 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
   const clearError = useCallback(() => setError(null), []);
 
   const upload = useCallback(
-    async (file: File) => {
-      if (mediaType !== "video") return;
+    async (file: File): Promise<boolean> => {
+      if (mediaType !== "video") return false;
 
       // 1. MIME allowlist.
       if (!(VIDEO_ACCEPTED_MIME as readonly string[]).includes(file.type)) {
         setError(VIDEO_ERROR_COPY.unsupported);
-        return;
+        return false;
       }
       // 2. Size.
       if (file.size > VIDEO_MAX_BYTES) {
         setError(VIDEO_ERROR_COPY.tooLarge);
-        return;
+        return false;
       }
       // 3. Duration.
       const duration = await probeVideoDuration(file);
       if (duration === null) {
         setError(VIDEO_ERROR_COPY.unreadable);
-        return;
+        return false;
       }
       if (duration > VIDEO_MAX_DURATION_SECONDS) {
         setError(VIDEO_ERROR_COPY.tooLong);
-        return;
+        return false;
       }
 
       const previousPath = storagePath;
@@ -156,7 +156,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
       if (upErr) {
         setState(hadRow ? "loaded" : "empty");
         setError(VIDEO_ERROR_COPY.uploadFailed);
-        return;
+        return false;
       }
 
       const { error: dbErr } = await supabase.from(TABLE).upsert(
@@ -177,7 +177,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
         await supabase.storage.from(BUCKET).remove([path]);
         setState(hadRow ? "loaded" : "empty");
         setError(VIDEO_ERROR_COPY.uploadFailed);
-        return;
+        return false;
       }
 
       // Best-effort cleanup of the prior object after the new row succeeded.
@@ -195,10 +195,11 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
         setSignedUrl(null);
         setState("error");
         setError(VIDEO_ERROR_COPY.loadFailed);
-      } else {
-        setSignedUrl(urlData.signedUrl);
-        setState("loaded");
+        return false;
       }
+      setSignedUrl(urlData.signedUrl);
+      setState("loaded");
+      return true;
     },
     [userId, week, mediaType, storagePath, caption],
   );
@@ -258,11 +259,11 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
   }, [userId, week, mediaType, storagePath, mimeType, durationSeconds, caption]);
 
   const saveCaption = useCallback(
-    async (raw: string) => {
-      if (!storagePath) return;
+    async (raw: string): Promise<boolean> => {
+      if (!storagePath) return false;
       if (!isCaptionWithinLimit(raw)) {
         setError("Caption is a little long");
-        return;
+        return false;
       }
       const next = captionForSave(raw);
       const { error: updErr } = await supabase
@@ -273,9 +274,10 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
         .eq("media_type", mediaType);
       if (updErr) {
         setError(VIDEO_ERROR_COPY.uploadFailed);
-        return;
+        return false;
       }
       setCaption(next);
+      return true;
     },
     [userId, week, mediaType, storagePath],
   );

@@ -249,10 +249,10 @@ const KeptChapter = () => {
   }, [week, validWeek, navigate, attempt]);
 
   useEffect(() => {
-    if (!data?.photoUrl) return;
+    if (!data?.photoUrl && !data?.video) return;
     const timer = window.setTimeout(() => setAttempt((n) => n + 1), 50 * 60 * 1000);
     return () => window.clearTimeout(timer);
-  }, [data?.photoUrl]);
+  }, [data?.photoUrl, data?.video]);
 
   const content = useMemo(() => (validWeek ? getMyWeekContent(week) : null), [week, validWeek]);
   const identity = useMemo(() => (validWeek ? getWeekIdentity(week) : null), [week, validWeek]);

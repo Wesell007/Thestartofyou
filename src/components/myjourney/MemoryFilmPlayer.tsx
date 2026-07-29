@@ -323,7 +323,7 @@ const MemoryFilmPlayer = ({ beats, totalSeconds, onExit }: Props) => {
           return (
             <span
               key={b.id}
-              className="h-[3px] flex-1 overflow-hidden rounded-full bg-foreground/15"
+              className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/25"
             >
               <span
                 className="block h-full rounded-full"

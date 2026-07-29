@@ -341,7 +341,8 @@ const MemoryFilmPlayer = ({ beats, totalSeconds, onExit }: Props) => {
           onClick={() => goToBeat(index - 1)}
           disabled={index === 0}
           aria-label="Previous moment"
-          className="rounded-full border border-foreground/15 p-2 text-foreground/70 disabled:opacity-35"
+          className="rounded-full border border-white/30 p-2 text-white/85 disabled:opacity-35"
+
         >
           <ChevronLeft className="h-4 w-4" aria-hidden />
         </button>

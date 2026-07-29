@@ -38,6 +38,8 @@ const MemoryFilmPlayer = ({ beats, totalSeconds, onExit }: Props) => {
   const [elapsed, setElapsed] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [finished, setFinished] = useState(false);
+  const [videoFailedId, setVideoFailedId] = useState<string | null>(null);
+
   const rafRef = useRef<number | null>(null);
   const lastTickRef = useRef<number | null>(null);
   const mediaRef = useRef<HTMLVideoElement | HTMLAudioElement | null>(null);

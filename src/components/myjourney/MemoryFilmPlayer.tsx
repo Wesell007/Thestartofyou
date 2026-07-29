@@ -376,7 +376,7 @@ const MemoryFilmPlayer = ({ beats, totalSeconds, onExit }: Props) => {
         </button>
       </div>
 
-      <p className="mt-3 font-sans text-[11.5px] tracking-[0.18em] uppercase text-foreground/50">
+      <p className="mt-3 font-sans text-[11.5px] tracking-[0.18em] uppercase text-white/70">
         {formatFilmLength(elapsed)} / {formatFilmLength(totalSeconds)}
       </p>
     </div>

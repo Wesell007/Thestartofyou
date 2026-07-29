@@ -187,18 +187,29 @@ const MemoryFilmPlayer = ({ beats, totalSeconds, onExit }: Props) => {
           </>
         );
 
-      case "video":
+      case "video": {
+        const useStill = videoFailedId === beat.id && !!beat.fallbackPhotoUrl;
         return (
           <>
-            <video
-              key={beat.id}
-              ref={mediaRef as React.RefObject<HTMLVideoElement>}
-              src={beat.url}
-              className="h-full w-full object-cover"
-              muted
-              playsInline
-              autoPlay={playing}
-            />
+            {useStill ? (
+              <img
+                src={beat.fallbackPhotoUrl as string}
+                alt={beat.caption ?? `Saved moment from week ${beat.week}`}
+                className="h-full w-full object-cover"
+                style={driftStyle(beatProgress)}
+              />
+            ) : (
+              <video
+                key={beat.id}
+                ref={mediaRef as React.RefObject<HTMLVideoElement>}
+                src={beat.url}
+                className="h-full w-full object-cover"
+                muted
+                playsInline
+                autoPlay={playing}
+                onError={() => setVideoFailedId(beat.id)}
+              />
+            )}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-6 pb-7 pt-16">
               <WeekBadge week={beat.week} />
               {beat.caption && (
@@ -209,6 +220,8 @@ const MemoryFilmPlayer = ({ beats, totalSeconds, onExit }: Props) => {
             </div>
           </>
         );
+      }
+
 
       case "voice":
         return (

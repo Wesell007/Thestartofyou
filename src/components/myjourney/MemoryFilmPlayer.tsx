@@ -38,6 +38,8 @@ const MemoryFilmPlayer = ({ beats, totalSeconds, onExit }: Props) => {
   const [elapsed, setElapsed] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [finished, setFinished] = useState(false);
+  const [videoFailedId, setVideoFailedId] = useState<string | null>(null);
+
   const rafRef = useRef<number | null>(null);
   const lastTickRef = useRef<number | null>(null);
   const mediaRef = useRef<HTMLVideoElement | HTMLAudioElement | null>(null);
@@ -187,18 +189,29 @@ const MemoryFilmPlayer = ({ beats, totalSeconds, onExit }: Props) => {
           </>
         );
 
-      case "video":
+      case "video": {
+        const useStill = videoFailedId === beat.id && !!beat.fallbackPhotoUrl;
         return (
           <>
-            <video
-              key={beat.id}
-              ref={mediaRef as React.RefObject<HTMLVideoElement>}
-              src={beat.url}
-              className="h-full w-full object-cover"
-              muted
-              playsInline
-              autoPlay={playing}
-            />
+            {useStill ? (
+              <img
+                src={beat.fallbackPhotoUrl as string}
+                alt={beat.caption ?? `Saved moment from week ${beat.week}`}
+                className="h-full w-full object-cover"
+                style={driftStyle(beatProgress)}
+              />
+            ) : (
+              <video
+                key={beat.id}
+                ref={mediaRef as React.RefObject<HTMLVideoElement>}
+                src={beat.url}
+                className="h-full w-full object-cover"
+                muted
+                playsInline
+                autoPlay={playing}
+                onError={() => setVideoFailedId(beat.id)}
+              />
+            )}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-6 pb-7 pt-16">
               <WeekBadge week={beat.week} />
               {beat.caption && (
@@ -209,6 +222,8 @@ const MemoryFilmPlayer = ({ beats, totalSeconds, onExit }: Props) => {
             </div>
           </>
         );
+      }
+
 
       case "voice":
         return (
@@ -308,7 +323,7 @@ const MemoryFilmPlayer = ({ beats, totalSeconds, onExit }: Props) => {
           return (
             <span
               key={b.id}
-              className="h-[3px] flex-1 overflow-hidden rounded-full bg-foreground/15"
+              className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/25"
             >
               <span
                 className="block h-full rounded-full"
@@ -326,7 +341,8 @@ const MemoryFilmPlayer = ({ beats, totalSeconds, onExit }: Props) => {
           onClick={() => goToBeat(index - 1)}
           disabled={index === 0}
           aria-label="Previous moment"
-          className="rounded-full border border-foreground/15 p-2 text-foreground/70 disabled:opacity-35"
+          className="rounded-full border border-white/30 p-2 text-white/85 disabled:opacity-35"
+
         >
           <ChevronLeft className="h-4 w-4" aria-hidden />
         </button>
@@ -354,13 +370,13 @@ const MemoryFilmPlayer = ({ beats, totalSeconds, onExit }: Props) => {
           onClick={() => goToBeat(index + 1)}
           disabled={index >= beats.length - 1}
           aria-label="Next moment"
-          className="rounded-full border border-foreground/15 p-2 text-foreground/70 disabled:opacity-35"
+          className="rounded-full border border-white/30 p-2 text-white/85 disabled:opacity-35"
         >
           <ChevronRight className="h-4 w-4" aria-hidden />
         </button>
       </div>
 
-      <p className="mt-3 font-sans text-[11.5px] tracking-[0.18em] uppercase text-foreground/50">
+      <p className="mt-3 font-sans text-[11.5px] tracking-[0.18em] uppercase text-white/70">
         {formatFilmLength(elapsed)} / {formatFilmLength(totalSeconds)}
       </p>
     </div>

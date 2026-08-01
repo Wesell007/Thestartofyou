@@ -256,7 +256,7 @@ const MyWeek = () => {
           </div>
         </section>
 
-        <SectionAskAI week={currentWeek} seed={askSeed} />
+        <SectionAskAI week={currentWeek} seed={askSeed} dueDate={dueDate} />
 
         <SectionToolsThisWeek week={currentWeek} />
 

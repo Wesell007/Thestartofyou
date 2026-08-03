@@ -145,7 +145,63 @@ export const BIRTH_PLAN_SECTIONS: BirthPlanSection[] = [
   },
 ];
 
+export type BirthPlanBandId = "on_the_day" | "people" | "after_birth" | "your_words";
+
+export interface BirthPlanBand {
+  id: BirthPlanBandId;
+  title: string;
+  intro: string;
+  sectionKeys: BirthPlanSectionKey[];
+}
+
+/**
+ * Presentation-only grouping. Section keys and stored answers are unchanged.
+ */
+export const BIRTH_PLAN_BANDS: BirthPlanBand[] = [
+  {
+    id: "on_the_day",
+    title: "On the day",
+    intro: "Preferences you may want to talk through for labour and birth itself.",
+    sectionKeys: ["birth", "labour", "pain_relief", "environment"],
+  },
+  {
+    id: "people",
+    title: "People and decisions",
+    intro: "Who you would like beside you, and how you would like choices shared with you.",
+    sectionKeys: ["partner_support", "monitoring"],
+  },
+  {
+    id: "after_birth",
+    title: "After birth",
+    intro: "The first hours, and how you would like feeding to be supported.",
+    sectionKeys: ["after_birth", "feeding"],
+  },
+  {
+    id: "your_words",
+    title: "Your own words",
+    intro: "Anything else you would like to share with your midwife or care team.",
+    sectionKeys: ["midwife_notes"],
+  },
+];
+
+export const sectionsForBand = (bandId: BirthPlanBandId): BirthPlanSection[] => {
+  const band = BIRTH_PLAN_BANDS.find((b) => b.id === bandId);
+  if (!band) return [];
+  return band.sectionKeys
+    .map((key) => BIRTH_PLAN_SECTIONS.find((s) => s.key === key))
+    .filter((s): s is BirthPlanSection => Boolean(s));
+};
+
+export const answeredCount = (answer?: BirthPlanSectionAnswer): number =>
+  answer?.choices?.length ?? 0;
+
+export const bandHasAnswers = (
+  answers: BirthPlanAnswers,
+  band: BirthPlanBand
+): boolean => band.sectionKeys.some((key) => isSectionAnswered(answers[key]));
+
 export const emptyAnswer = (): BirthPlanSectionAnswer => ({ choices: [], notes: "" });
+
 
 export const isSectionAnswered = (answer?: BirthPlanSectionAnswer): boolean => {
   if (!answer) return false;

@@ -168,3 +168,38 @@ export const slugifyCustomLabel = (label: string): string => {
   const safe = base.length > 0 ? base : "item";
   return `custom-${safe}-${suffix}`;
 };
+
+/**
+ * Render-time ordering only: unpacked items first, packed items below.
+ * Never mutates stored rows or sort_order.
+ */
+export const sortItemsForDisplay = (
+  rows: HospitalBagItemRow[],
+): HospitalBagItemRow[] =>
+  [...rows].sort((a, b) => {
+    const aPacked = a.packed_at ? 1 : 0;
+    const bPacked = b.packed_at ? 1 : 0;
+    if (aPacked !== bPacked) return aPacked - bPacked;
+    if (a.sort_order !== b.sort_order) return a.sort_order - b.sort_order;
+    return a.created_at.localeCompare(b.created_at);
+  });
+
+const CATEGORY_ORDER: HospitalBagCategoryKey[] = HOSPITAL_BAG_CATEGORIES.map(
+  (c) => c.key,
+);
+
+/** Labels of the first `limit` unpacked items, in category display order. */
+export const unpackedPreview = (
+  rows: HospitalBagItemRow[],
+  limit = 5,
+): string[] => {
+  const unpacked = rows.filter((r) => !r.packed_at);
+  const ordered = [...unpacked].sort((a, b) => {
+    const ai = CATEGORY_ORDER.indexOf(a.category);
+    const bi = CATEGORY_ORDER.indexOf(b.category);
+    if (ai !== bi) return ai - bi;
+    if (a.sort_order !== b.sort_order) return a.sort_order - b.sort_order;
+    return a.created_at.localeCompare(b.created_at);
+  });
+  return ordered.slice(0, Math.max(0, limit)).map((r) => r.label);
+};

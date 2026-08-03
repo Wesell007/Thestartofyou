@@ -10,18 +10,22 @@ import BirthPlanProgress from "@/components/pregnancy-toolkit/BirthPlanProgress"
 import BirthPlanSectionCard from "@/components/pregnancy-toolkit/BirthPlanSection";
 import BirthPlanSummary from "@/components/pregnancy-toolkit/BirthPlanSummary";
 import BirthPlanActions from "@/components/pregnancy-toolkit/BirthPlanActions";
+import BirthPlanBand from "@/components/pregnancy-toolkit/BirthPlanBand";
 import BirthPlanPrintable from "@/components/pregnancy-toolkit/BirthPlanPrintable";
 import { useBirthPlan } from "@/hooks/useBirthPlan";
 import { supabase } from "@/integrations/supabase/client";
 import { getActivePregnancyJourney } from "@/lib/savedJourney";
 import {
+  BIRTH_PLAN_BANDS,
   BIRTH_PLAN_SECTIONS,
   BirthPlanSectionAnswer,
   BirthPlanSectionKey,
   calculateCompletion,
   isSectionAnswered,
+  sectionsForBand,
   statusFromCompletion,
 } from "@/lib/birthPlanSchema";
+
 
 const accent = "hsl(var(--stage-pregnancy-accent))";
 const softBorder = "hsl(var(--stage-pregnancy-accent) / 0.16)";
@@ -103,6 +107,28 @@ const PregnancyToolkitBirthPlan = () => {
     [answers]
   );
 
+  // Answered sections start collapsed. Seeded once after load, never re-seeded,
+  // so editing a section never folds it away mid-edit.
+  const [openSections, setOpenSections] = useState<Partial<Record<BirthPlanSectionKey, boolean>>>(
+    {}
+  );
+  const [seeded, setSeeded] = useState(false);
+
+  useEffect(() => {
+    if (seeded || loadState !== "loaded") return;
+    const next: Partial<Record<BirthPlanSectionKey, boolean>> = {};
+    BIRTH_PLAN_SECTIONS.forEach((s) => {
+      next[s.key] = !isSectionAnswered(answers[s.key]);
+    });
+    setOpenSections(next);
+    setSeeded(true);
+  }, [seeded, loadState, answers]);
+
+  const toggleSection = (key: BirthPlanSectionKey) => {
+    setOpenSections((prev) => ({ ...prev, [key]: !(prev[key] ?? true) }));
+  };
+
+
   if (loadState === "loading") {
     return <PageLoadState message="Opening your birth plan…" />;
   }
@@ -162,29 +188,31 @@ const PregnancyToolkitBirthPlan = () => {
         </section>
 
         {/* Progress */}
-        <div className="mb-6">
+        <div className="mb-10">
           <BirthPlanProgress
             completion={liveCompletion}
             status={status}
             updatedAt={updatedAt}
+            onPrint={hasAnyAnswered ? () => window.print() : undefined}
           />
         </div>
 
-        {/* Export actions (top) */}
-        <div className="mb-10">
-          <BirthPlanActions hasContent={hasAnyAnswered} />
-        </div>
-
-        {/* Sections */}
-        <div className="space-y-5 mb-12">
-          {BIRTH_PLAN_SECTIONS.map((section) => (
-            <BirthPlanSectionCard
-              key={section.key}
-              section={section}
-              value={answers[section.key]}
-              onChange={(next) => onSectionChange(section.key, next)}
-              disabled={saveState === "saving"}
-            />
+        {/* Sections, grouped into bands */}
+        <div className="mb-2">
+          {BIRTH_PLAN_BANDS.map((band) => (
+            <BirthPlanBand key={band.id} band={band}>
+              {sectionsForBand(band.id).map((section) => (
+                <BirthPlanSectionCard
+                  key={section.key}
+                  section={section}
+                  value={answers[section.key]}
+                  onChange={(next) => onSectionChange(section.key, next)}
+                  disabled={saveState === "saving"}
+                  open={openSections[section.key] ?? true}
+                  onToggle={() => toggleSection(section.key)}
+                />
+              ))}
+            </BirthPlanBand>
           ))}
         </div>
 
@@ -197,10 +225,11 @@ const PregnancyToolkitBirthPlan = () => {
           />
         </div>
 
-        {/* Export actions (bottom, alongside summary) */}
+        {/* Export actions */}
         <div className="mb-10">
           <BirthPlanActions hasContent={hasAnyAnswered} />
         </div>
+
 
 
         {/* Return links */}

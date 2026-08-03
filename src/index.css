@@ -528,6 +528,28 @@
     margin: 0;
     max-width: 62ch;
   }
+  #birth-plan-print .bpp-band {
+    margin-bottom: 20px;
+  }
+  #birth-plan-print .bpp-band-title {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #6a6a6a;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #d8d8d8;
+  }
+  #birth-plan-print .bpp-care-notes {
+    margin-top: 26px;
+    page-break-inside: avoid;
+  }
+  #birth-plan-print .bpp-rule {
+    border-bottom: 1px solid #dddddd;
+    height: 22px;
+  }
   #birth-plan-print .bpp-section {
     page-break-inside: avoid;
     margin-bottom: 18px;

@@ -80,13 +80,13 @@ const MVP_TOOLS: ToolCard[] = [
   },
   {
     key: "symptom-notes",
-    title: "Pregnancy Symptom Notes",
+    title: "Symptom notes",
     hint: "A private place to note symptoms and questions you may want to raise.",
     icon: Activity,
   },
   {
     key: "midwife-questions",
-    title: "Questions for Midwife",
+    title: "Questions for your midwife",
     hint: "Save questions you want to bring to your midwife or care team.",
     icon: MessageCircleQuestion,
   },

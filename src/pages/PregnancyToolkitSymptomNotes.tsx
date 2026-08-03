@@ -42,7 +42,7 @@ const PregnancyToolkitSymptomNotes = () => {
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
       <SeoHead
-        title="Pregnancy Symptom Notes | Pregnancy toolkit"
+        title="Symptom notes | Pregnancy toolkit"
         description="A private place to note pregnancy symptoms and questions you may want to raise."
         canonical="https://thestartofyou.com/pregnancy-toolkit/symptom-notes"
         noindex
@@ -66,7 +66,7 @@ const PregnancyToolkitSymptomNotes = () => {
             </p>
           </div>
           <h1 className="font-serif text-[1.9rem] sm:text-[2.25rem] leading-[1.15] text-foreground/90 mb-4">
-            Pregnancy Symptom Notes
+            Symptom notes
           </h1>
           <p className="font-serif italic text-foreground/70 text-[15.5px] sm:text-[16px] leading-[1.65] max-w-[54ch]">
             A private place to note symptoms and questions you may want to raise.

@@ -13,6 +13,11 @@ export interface HospitalBagCategoryMeta {
 
 export const HOSPITAL_BAG_CATEGORIES: HospitalBagCategoryMeta[] = [
   {
+    key: "documents",
+    label: "Documents",
+    intro: "The paperwork that can help your care team.",
+  },
+  {
     key: "parent",
     label: "Mum or birthing parent",
     intro: "Things you may want for your comfort during and after birth.",
@@ -28,16 +33,12 @@ export const HOSPITAL_BAG_CATEGORIES: HospitalBagCategoryMeta[] = [
     intro: "So the person with you feels ready to stay by your side.",
   },
   {
-    key: "documents",
-    label: "Documents",
-    intro: "The paperwork that can help your care team.",
-  },
-  {
     key: "comfort",
-    label: "Comfort items",
+    label: "After birth and comfort",
     intro: "Small things that can make the room feel more like yours.",
   },
 ];
+
 
 export interface HospitalBagDefaultItem {
   category: HospitalBagCategoryKey;

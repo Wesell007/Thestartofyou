@@ -1,77 +1,42 @@
-# Phase 15.4B Live QA Pass — results and one blocking fix
+# Phase 15.4B Backend Dependency Restore: AI Rate Limiter
 
-## Live QA result
+Plan mode blocks the migration, so this needs approval and build mode to apply. Everything below is ready to run.
 
-Signed-in, active journey, week 37, companion name "Cindy", tone "warm".
+## Why
 
-Confirmed working:
-- Inline companion card renders in the existing SectionAskAI position on /my-week.
-- Companion name appears only in UI copy (eyebrow and heading), never in the request.
-- Three prompt chips render; clicking a chip submits the question.
-- Typing a custom question submits correctly.
-- Inline loading state appears ("Finding a quiet answer…").
-- "Ask something else" fully resets the card (answer cleared, input cleared).
-- "Continue in Ask" routes to /ask?stage=pregnancy; the question and context arrive through router state, with no question or private context in the URL.
-- Mobile (390px) renders the card correctly, no console errors on load.
-- Desktop (1280px) renders correctly, no console errors on load.
-
-Not confirmable in this pass:
-- Streamed answers. Every ai-search call returned 503 (see defect below), so no answer body, no collapsed Sources block, and no chip/typed streaming could be observed.
-
-## Request privacy: confirmed
-
-Exact captured request bodies:
+All `ai-search` calls return 503 because the edge function's rate-limit check hits a missing RPC:
 
 ```text
-{"query":"What should I remember about this week?","context":"Pregnancy week 37, third trimester. Due date around 25 August. Prefers warm, gentle wording. The person is reading their personal My Week pregnancy page."}
-{"query":"Is mild backache normal now?","context":"Pregnancy week 37, third trimester. Due date around 25 August. Prefers warm, gentle wording. The person is reading their personal My Week pregnancy page."}
+ERROR ai-search rate limiter unavailable  Rate limiter returned 404
 ```
 
-Present: question, week, trimester, due day and month, tone hint, My Week page hint.
-Absent: first name, companion name, reflections, photos, videos, voice notes, memory flags, media URLs, journey history, due year.
+Verified against the live database: `to_regclass('public.ai_rate_limits')` is null and `pg_proc` has no `consume_ai_rate_limit`. The migration `supabase/migrations/20260720110000_backend_safety_and_email_delivery.sql` was never applied. This affects /ask and the inline companion equally.
 
-## Error behaviour
+## Email-delivery half: leave untouched
 
-- 503 was live-triggered (unintentionally, see defect). Behaviour was correct: the typed question stayed in the input, the calm retry message rendered, layout held, nothing was lost. The only console entries were the expected 503 resource errors.
-- 429 was not live-triggered; the code path in useAISearch and ai-search was reviewed and reports the rate-limit message the same way. Code-verified only.
-- Network failure shares the same catch branch as 503; code-verified only.
+Checked the rest of that migration against the live database. The email objects are already present (`email_send_log`, `email_send_state`, `read_email_batch`, `claim_email_delivery`, `complete_email_delivery`, `release_email_delivery`, `email_queue_dispatch`, `email_queue_wake`). Only the AI rate limiter half is missing, so nothing email-related is restored or changed here. No separate restore phase is needed.
 
-## Non-active gating: confirmed by code
+## The migration (new, forward-only)
 
-MyWeek returns early for any status other than "active" and never renders SectionAskAI, so pregnancy loss, paused, no longer pregnant and given birth all hide the companion. Only "active" reaches the card. No data was written to force statuses.
+Definitions copied verbatim from the original migration, with one addition: `GRANT ALL ON TABLE public.ai_rate_limits TO service_role` before RLS is enabled, so the table follows the required create/grant/RLS/policy ordering. The subsequent `REVOKE ALL ... FROM PUBLIC, anon, authenticated` keeps the table unreachable from the client.
 
-## Defect found (blocking, pre-existing, site-wide)
+Objects restored:
+- `public.ai_rate_limits` — `rate_key` primary key, `window_started_at`, `request_count` with a non-negative check, `updated_at`.
+- RLS enabled on the table with no policies, plus the revokes from `PUBLIC`, `anon` and `authenticated`.
+- `public.consume_ai_rate_limit(TEXT, INTEGER, INTEGER)` — security definer, `search_path = public`, unchanged body.
+- `EXECUTE` granted to `service_role` only; revoked from `PUBLIC`, `anon`, `authenticated`.
 
-AI guidance is currently down everywhere, not just in the companion card. The edge function logs show:
+No prompt changes, no new AI function, no rate-limiter bypass, no route, analytics, RLS-relaxation or companion-card changes.
 
-```text
-ERROR ai-search rate limiter unavailable Rate limiter returned 404
-```
+## Verification after it applies
 
-Cause, verified against the live database: the migration `supabase/migrations/20260720110000_backend_safety_and_email_delivery.sql` was never applied. `public.ai_rate_limits` and `public.consume_ai_rate_limit` do not exist (`to_regclass` returns null, `pg_proc` has no match), so ai-search fails its rate-limit check and returns 503 on every request. This also takes out /ask and the email delivery infrastructure created in the same migration.
+1. Database: confirm `to_regclass('public.ai_rate_limits')` is non-null and `pg_proc` finds `consume_ai_rate_limit`.
+2. Edge logs: confirm the 404 rate-limiter error stops.
+3. Live QA on /my-week with the same signed-in active journey (week 37): prompt chip streams, typed question streams, answer renders inline, Sources block appears collapsed if returned, "Ask something else" resets, "Continue in Ask" routes with no question or context in the URL.
+4. Re-capture the request bodies and confirm the payload still carries only question, week, trimester, due day and month, tone hint and page hint — no first name, companion name, reflections, photos, videos, voice notes, memory flags, media URLs or due year.
+5. /ask returns an answer again.
+6. Desktop 1280px and mobile 390px, console clean apart from controlled error cases.
+7. 429: attempt to trigger live by exceeding 12 requests in a minute now that the limiter exists; otherwise report as code-verified.
+8. Re-run `npx tsgo --noEmit -p tsconfig.json` and `npx vitest run src/lib/companionContext.test.ts` and return exact output.
 
-This is outside the QA-only scope, so nothing was changed.
-
-## Proposed fix (needs approval)
-
-1. Re-apply the missing backend objects as a new forward-only migration, copying the definitions verbatim from `20260720110000_backend_safety_and_email_delivery.sql`: the `ai_rate_limits` table with its RLS and revokes, and the `consume_ai_rate_limit` function with its `service_role` grant. Decide separately whether to also restore the email-delivery half of that migration or split it into its own step.
-2. Re-run the same live QA script to confirm chip and typed questions stream, the answer renders inside the card, and the Sources block appears collapsed.
-3. Then close Phase 15.4B.
-
-No prompt changes, no new AI functions, no RLS relaxation, no route, analytics or memory work.
-
-## Command results
-
-```text
-npx tsgo --noEmit -p tsconfig.json
-Exit code: 0 (no output)
-
-npx vitest run src/lib/companionContext.test.ts
-✓ src/lib/companionContext.test.ts (8 tests) 30ms
-Test Files  1 passed (1)
-     Tests  8 passed (8)
-```
-
-## Can Phase 15.4B be closed?
-
-Not yet. Everything owned by 15.4B passes, but end-to-end streaming cannot be demonstrated until the missing rate-limiter migration is restored.
+Phase 15.4B closes only if inline streaming is observed end to end.

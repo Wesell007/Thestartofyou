@@ -115,7 +115,7 @@ const PregnancyToolkitBirthPlan = () => {
   const [seeded, setSeeded] = useState(false);
 
   useEffect(() => {
-    if (seeded || loadState !== "ready") return;
+    if (seeded || loadState !== "loaded") return;
     const next: Partial<Record<BirthPlanSectionKey, boolean>> = {};
     BIRTH_PLAN_SECTIONS.forEach((s) => {
       next[s.key] = !isSectionAnswered(answers[s.key]);

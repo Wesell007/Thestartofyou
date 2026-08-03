@@ -9,8 +9,6 @@ interface Props {
 }
 
 const BirthPlanProgress = ({ completion, status, updatedAt, onPrint }: Props) => {
-
-const BirthPlanProgress = ({ completion, status, updatedAt }: Props) => {
   const accent = "hsl(var(--stage-pregnancy-accent))";
   const softBorder = "hsl(var(--stage-pregnancy-accent) / 0.16)";
   const label = statusLabel(status);

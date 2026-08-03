@@ -98,17 +98,19 @@ const SectionAskAI = ({ week, seed, dueDate }: Props) => {
   };
 
   const continueInAsk = () => {
-    const carried = [
-      context,
-      answer ? `Previous answer: ${answer.slice(0, 600)}` : null,
-    ]
-      .filter(Boolean)
-      .join("\n\n");
+    // The shared /ask function rejects context over 500 characters, so the
+    // carried context is stage context first, then whatever answer fits.
+    const room = COMPANION_CONTEXT_MAX_LENGTH - context.length - 20;
+    const carried =
+      answer && room > 60
+        ? `${context}\n\nPrevious answer: ${answer.slice(0, room).trimEnd()}`
+        : context;
     navigateToAsk(navigate, asked || question || seed, {
       stage: "pregnancy",
-      context: carried,
+      context: carried.slice(0, COMPANION_CONTEXT_MAX_LENGTH).trimEnd(),
     });
   };
+
 
   const { body, sources } = splitSources(answer);
 

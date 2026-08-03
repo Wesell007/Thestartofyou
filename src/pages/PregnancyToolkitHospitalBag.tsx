@@ -222,6 +222,13 @@ const PregnancyToolkitHospitalBag = () => {
           )}
         </section>
 
+        {/* Print and export */}
+        <div className="mb-10">
+          <HospitalBagActions hasContent={rows.length > 0} />
+        </div>
+
+
+
         {/* Return links */}
         <section
           className="rounded-[20px] keepsake-surface px-6 py-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between"

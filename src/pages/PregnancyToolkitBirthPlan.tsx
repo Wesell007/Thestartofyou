@@ -10,18 +10,22 @@ import BirthPlanProgress from "@/components/pregnancy-toolkit/BirthPlanProgress"
 import BirthPlanSectionCard from "@/components/pregnancy-toolkit/BirthPlanSection";
 import BirthPlanSummary from "@/components/pregnancy-toolkit/BirthPlanSummary";
 import BirthPlanActions from "@/components/pregnancy-toolkit/BirthPlanActions";
+import BirthPlanBand from "@/components/pregnancy-toolkit/BirthPlanBand";
 import BirthPlanPrintable from "@/components/pregnancy-toolkit/BirthPlanPrintable";
 import { useBirthPlan } from "@/hooks/useBirthPlan";
 import { supabase } from "@/integrations/supabase/client";
 import { getActivePregnancyJourney } from "@/lib/savedJourney";
 import {
+  BIRTH_PLAN_BANDS,
   BIRTH_PLAN_SECTIONS,
   BirthPlanSectionAnswer,
   BirthPlanSectionKey,
   calculateCompletion,
   isSectionAnswered,
+  sectionsForBand,
   statusFromCompletion,
 } from "@/lib/birthPlanSchema";
+
 
 const accent = "hsl(var(--stage-pregnancy-accent))";
 const softBorder = "hsl(var(--stage-pregnancy-accent) / 0.16)";

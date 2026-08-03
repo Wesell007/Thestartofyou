@@ -1,10 +1,14 @@
+import { Printer } from "lucide-react";
 import { BirthPlanStatus, statusLabel } from "@/lib/birthPlanSchema";
 
 interface Props {
   completion: number;
   status: BirthPlanStatus;
   updatedAt: string | null;
+  onPrint?: () => void;
 }
+
+const BirthPlanProgress = ({ completion, status, updatedAt, onPrint }: Props) => {
 
 const BirthPlanProgress = ({ completion, status, updatedAt }: Props) => {
   const accent = "hsl(var(--stage-pregnancy-accent))";

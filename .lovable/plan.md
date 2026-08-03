@@ -1,33 +1,77 @@
-## Phase 15.4 — Inline AI Companion Planning (no code changes)
+# Phase 15.4B Live QA Pass — results and one blocking fix
 
-Document: `/mnt/documents/phase-15-4-inline-ai-companion-plan.md`
+## Live QA result
 
-### Executive summary
-The companion is currently a link, not a presence: `SectionAskAI` decorates a navigation to `/ask`, and companion identity is display-only (never sent to the model). Recommendation for version one is a single inline companion card in `/my-week`, in the slot `SectionAskAI` already occupies, upgraded from a link into a working one-question surface that streams a short answer in place and hands off to `/ask` with continuity. Reuse `ai-search` unchanged so red-flag interception, NHS grounding, the safety prompt and rate limiting all carry over.
+Signed-in, active journey, week 37, companion name "Cindy", tone "warm".
 
-### Recommended inline format
-Small card with progressive disclosure — eyebrow with companion name, optional tone pill, three week-band prompt chips, one text input, inline streamed answer (visually truncated, sources shown collapsed), standing non-medical disclaimer, "Continue in Ask" and "Ask something else". No floating bubble, no bottom sheet, no chat thread, one AI entry point only.
+Confirmed working:
+- Inline companion card renders in the existing SectionAskAI position on /my-week.
+- Companion name appears only in UI copy (eyebrow and heading), never in the request.
+- Three prompt chips render; clicking a chip submits the question.
+- Typing a custom question submits correctly.
+- Inline loading state appears ("Finding a quiet answer…").
+- "Ask something else" fully resets the card (answer cleared, input cleared).
+- "Continue in Ask" routes to /ask?stage=pregnancy; the question and context arrive through router state, with no question or private context in the URL.
+- Mobile (390px) renders the card correctly, no console errors on load.
+- Desktop (1280px) renders correctly, no console errors on load.
 
-### Version one scope
-Pure `buildCompanionContext` helper with tests, week-band chip data, the inline card with full error/loading states, active-status gating, and handoff via the existing `askNavigation` contract. No new edge function, migration, RLS, analytics, prompt or route changes.
+Not confirmable in this pass:
+- Streamed answers. Every ai-search call returned 503 (see defect below), so no answer body, no collapsed Sources block, and no chip/typed streaming could be observed.
 
-### Top 10 product decisions
-1. One AI entry point in My Week, in the existing `SectionAskAI` position.
-2. Card with inline answer, not chat, bubble or sheet.
-3. Reuse `ai-search` and `useAISearch`; no companion-specific function yet.
-4. Context = week, trimester, due day/month, tone, plus a one-clause page hint.
-5. First name and companion name stay in UI copy, never in the model request.
-6. Memory-blind v1: no reflection text, no media, not even a "has memories" flag.
-7. Three question-shaped chips per week band; never symptom-led.
-8. Card renders only when journey status is `active`; sensitive states keep existing quiet surfaces.
-9. Handoff carries question + context (and optionally previous answer, clamped) into `/ask`.
-10. `ai-reflect` stays the reflection tool; the companion points to it rather than duplicating it.
+## Request privacy: confirmed
 
-### Technical risks
-500-char `context` cap (clamp and test), shared 12/min rate limit now hit from two surfaces, 503 grounding failures must preserve the typed question, inline layout shift and answer truncation at mobile width, abort/reset correctness on week change and unmount.
+Exact captured request bodies:
 
-### Privacy risks
-Drift toward sending reflections or memory flags, persona confusion from a named companion, free-text questions leaking into logs/analytics, due date as quasi-identifier (send day and month only), and answers persisting on an unattended screen.
+```text
+{"query":"What should I remember about this week?","context":"Pregnancy week 37, third trimester. Due date around 25 August. Prefers warm, gentle wording. The person is reading their personal My Week pregnancy page."}
+{"query":"Is mild backache normal now?","context":"Pregnancy week 37, third trimester. Due date around 25 August. Prefers warm, gentle wording. The person is reading their personal My Week pregnancy page."}
+```
 
-### Recommended next build phase
-Phase 15.4B: inline companion card in `/my-week` exactly as scoped above, memory-blind, with mobile/desktop QA and a live 429/503 check.
+Present: question, week, trimester, due day and month, tone hint, My Week page hint.
+Absent: first name, companion name, reflections, photos, videos, voice notes, memory flags, media URLs, journey history, due year.
+
+## Error behaviour
+
+- 503 was live-triggered (unintentionally, see defect). Behaviour was correct: the typed question stayed in the input, the calm retry message rendered, layout held, nothing was lost. The only console entries were the expected 503 resource errors.
+- 429 was not live-triggered; the code path in useAISearch and ai-search was reviewed and reports the rate-limit message the same way. Code-verified only.
+- Network failure shares the same catch branch as 503; code-verified only.
+
+## Non-active gating: confirmed by code
+
+MyWeek returns early for any status other than "active" and never renders SectionAskAI, so pregnancy loss, paused, no longer pregnant and given birth all hide the companion. Only "active" reaches the card. No data was written to force statuses.
+
+## Defect found (blocking, pre-existing, site-wide)
+
+AI guidance is currently down everywhere, not just in the companion card. The edge function logs show:
+
+```text
+ERROR ai-search rate limiter unavailable Rate limiter returned 404
+```
+
+Cause, verified against the live database: the migration `supabase/migrations/20260720110000_backend_safety_and_email_delivery.sql` was never applied. `public.ai_rate_limits` and `public.consume_ai_rate_limit` do not exist (`to_regclass` returns null, `pg_proc` has no match), so ai-search fails its rate-limit check and returns 503 on every request. This also takes out /ask and the email delivery infrastructure created in the same migration.
+
+This is outside the QA-only scope, so nothing was changed.
+
+## Proposed fix (needs approval)
+
+1. Re-apply the missing backend objects as a new forward-only migration, copying the definitions verbatim from `20260720110000_backend_safety_and_email_delivery.sql`: the `ai_rate_limits` table with its RLS and revokes, and the `consume_ai_rate_limit` function with its `service_role` grant. Decide separately whether to also restore the email-delivery half of that migration or split it into its own step.
+2. Re-run the same live QA script to confirm chip and typed questions stream, the answer renders inside the card, and the Sources block appears collapsed.
+3. Then close Phase 15.4B.
+
+No prompt changes, no new AI functions, no RLS relaxation, no route, analytics or memory work.
+
+## Command results
+
+```text
+npx tsgo --noEmit -p tsconfig.json
+Exit code: 0 (no output)
+
+npx vitest run src/lib/companionContext.test.ts
+✓ src/lib/companionContext.test.ts (8 tests) 30ms
+Test Files  1 passed (1)
+     Tests  8 passed (8)
+```
+
+## Can Phase 15.4B be closed?
+
+Not yet. Everything owned by 15.4B passes, but end-to-end streaming cannot be demonstrated until the missing rate-limiter migration is restored.

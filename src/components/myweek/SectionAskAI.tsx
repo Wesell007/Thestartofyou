@@ -4,7 +4,11 @@ import { Sparkles, ArrowRight, Loader2 } from "lucide-react";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 import { useAISearch } from "@/hooks/useAISearch";
 import { toneLabel } from "@/lib/companion";
-import { buildCompanionContext } from "@/lib/companionContext";
+import {
+  buildCompanionContext,
+  COMPANION_CONTEXT_MAX_LENGTH,
+} from "@/lib/companionContext";
+
 import { navigateToAsk } from "@/lib/askNavigation";
 
 interface Props {
@@ -30,6 +34,37 @@ const splitSources = (raw: string) => {
     sources: raw.slice(match.index + match[0].length).trim(),
   };
 };
+
+/** Renders inline markdown emphasis and bullet markers as plain typography. */
+const renderInline = (text: string) =>
+  text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith("**") && part.endsWith("**") && part.length > 4 ? (
+      <strong key={i} className="font-medium text-foreground">
+        {part.slice(2, -2)}
+      </strong>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
+  );
+
+const renderAnswerLines = (body: string) =>
+  body
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line, i) => {
+      const bullet = line.match(/^[*-]\s+(.*)$/);
+      if (bullet) {
+        return (
+          <p key={i} className="pl-4 -indent-4">
+            <span aria-hidden="true">• </span>
+            {renderInline(bullet[1])}
+          </p>
+        );
+      }
+      return <p key={i}>{renderInline(line.replace(/^#+\s*/, ""))}</p>;
+    });
+
 
 /**
  * Inline AI companion card. Sends only the coarse stage context built by
@@ -67,17 +102,19 @@ const SectionAskAI = ({ week, seed, dueDate }: Props) => {
   };
 
   const continueInAsk = () => {
-    const carried = [
-      context,
-      answer ? `Previous answer: ${answer.slice(0, 600)}` : null,
-    ]
-      .filter(Boolean)
-      .join("\n\n");
+    // The shared /ask function rejects context over 500 characters, so the
+    // carried context is stage context first, then whatever answer fits.
+    const room = COMPANION_CONTEXT_MAX_LENGTH - context.length - 20;
+    const carried =
+      answer && room > 60
+        ? `${context}\n\nPrevious answer: ${answer.slice(0, room).trimEnd()}`
+        : context;
     navigateToAsk(navigate, asked || question || seed, {
       stage: "pregnancy",
-      context: carried,
+      context: carried.slice(0, COMPANION_CONTEXT_MAX_LENGTH).trimEnd(),
     });
   };
+
 
   const { body, sources } = splitSources(answer);
 
@@ -212,9 +249,10 @@ const SectionAskAI = ({ week, seed, dueDate }: Props) => {
 
               {body && (
                 <div className="rounded-[18px] bg-background/60 px-4 py-4 sm:px-5">
-                  <p className="font-sans text-[14.5px] text-foreground/85 leading-[1.75] whitespace-pre-line">
-                    {body}
-                  </p>
+                  <div className="font-sans text-[14.5px] text-foreground/85 leading-[1.75] space-y-2">
+                    {renderAnswerLines(body)}
+                  </div>
+
                   {sources && (
                     <details className="mt-3">
                       <summary className="cursor-pointer font-sans text-[11px] tracking-[0.18em] uppercase text-foreground/45">

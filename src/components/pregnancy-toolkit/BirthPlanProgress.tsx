@@ -52,12 +52,26 @@ const BirthPlanProgress = ({ completion, status, updatedAt, onPrint }: Props) =>
         <p className="font-serif italic text-foreground/70 text-[14px]">
           {label}
         </p>
-        {updated && (
-          <p className="font-sans text-[11px] text-foreground/50">
-            Last saved {updated}
-          </p>
-        )}
+        <div className="flex items-center gap-4">
+          {updated && (
+            <p className="font-sans text-[11px] text-foreground/50">
+              Last saved {updated}
+            </p>
+          )}
+          {onPrint && (
+            <button
+              type="button"
+              onClick={onPrint}
+              className="print:hidden inline-flex items-center gap-1.5 font-sans text-[11px] font-medium tracking-[0.18em] uppercase hover:opacity-75 transition-opacity"
+              style={{ color: accent }}
+            >
+              <Printer size={12} strokeWidth={1.8} aria-hidden="true" />
+              Print
+            </button>
+          )}
+        </div>
       </div>
+
     </div>
   );
 };

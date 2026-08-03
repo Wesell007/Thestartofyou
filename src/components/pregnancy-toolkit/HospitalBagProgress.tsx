@@ -42,12 +42,19 @@ const HospitalBagProgress = ({ progress, updatedAt }: Props) => {
       <div
         className="h-1.5 w-full rounded-full overflow-hidden mb-3"
         style={{ background: "hsl(var(--stage-pregnancy) / 0.5)" }}
+        role="progressbar"
+        aria-valuenow={progress.packed}
+        aria-valuemin={0}
+        aria-valuemax={progress.total}
+        aria-valuetext={`${progress.packed} of ${progress.total} packed`}
+        aria-label="Hospital bag packing progress"
       >
         <div
           className="h-full rounded-full transition-[width] duration-500"
           style={{ width: `${progress.percent}%`, background: accent }}
         />
       </div>
+
       <div className="flex items-center justify-between gap-3">
         <p className="font-serif italic text-foreground/70 text-[14px]">
           {label}

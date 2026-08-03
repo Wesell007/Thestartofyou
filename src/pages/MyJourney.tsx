@@ -309,7 +309,10 @@ const MyJourney = () => {
 
   const accent = "hsl(var(--stage-pregnancy-accent))";
   const isActive = status === "active";
-  const isLoss = status === "pregnancy_loss";
+  // Sensitive statuses keep saved memories behind a reveal control so nothing
+  // difficult appears unprompted. Active and given-birth journeys show normally.
+  const isLoss =
+    status === "pregnancy_loss" || status === "paused" || status === "no_longer_pregnant";
 
   const renderRow = (w: number) => (
     <KeptWeekRow

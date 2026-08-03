@@ -5,10 +5,9 @@ import {
   BirthPlanRow,
   calculateCompletion,
 } from "@/lib/birthPlanSchema";
+import type { Json } from "@/integrations/supabase/types";
 
-// Supabase generated types may not yet include the birth_plans table.
-// Cast at the boundary; RLS scopes rows to auth.uid() regardless.
-const table = () => (supabase.from as any)("birth_plans");
+const table = () => supabase.from("birth_plans");
 
 export type BirthPlanLoadState = "loading" | "loaded" | "error";
 export type BirthPlanSaveState = "idle" | "saving" | "saved" | "error";
@@ -81,7 +80,7 @@ export const useBirthPlan = (): UseBirthPlanResult => {
       const completion = calculateCompletion(next);
       const payload = {
         user_id: userId,
-        answers: next,
+        answers: next as unknown as Json,
         completion,
       };
       const { data, error } = await table()

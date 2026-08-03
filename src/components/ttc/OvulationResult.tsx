@@ -124,7 +124,7 @@ const OvulationResult = ({
     if (data.session?.user) {
       navigate("/setup/trying-to-conceive");
     } else {
-      navigate(buildAuthUrl("return_to_route", "/setup/trying-to-conceive"));
+      navigate(buildAuthUrl("start_journey", "/setup/trying-to-conceive"));
     }
   };
 

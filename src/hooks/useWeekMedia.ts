@@ -114,7 +114,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
     return () => {
       cancelledRef.current = true;
     };
-  }, [userId, week, mediaType, reloadTick]);
+  }, [userId, week, mediaType, reloadTick, COPY.loadFailed]);
 
   // Refresh the signed URL well before its 60-min TTL expires.
   useEffect(() => {
@@ -209,7 +209,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
       setState("loaded");
       return true;
     },
-    [userId, week, mediaType, storagePath, caption],
+    [userId, week, mediaType, storagePath, caption, COPY.loadFailed],
   );
 
   /**
@@ -356,7 +356,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
     setDurationSeconds(null);
     setCaption(null);
     setState("empty");
-  }, [userId, week, mediaType, storagePath, mimeType, durationSeconds, caption]);
+  }, [userId, week, mediaType, storagePath, mimeType, durationSeconds, caption, COPY.removeFailed, fallbackMime]);
 
   const saveCaption = useCallback(
     async (raw: string): Promise<boolean> => {
@@ -379,7 +379,7 @@ export const useWeekMedia = ({ userId, week, mediaType }: Options) => {
       setCaption(next);
       return true;
     },
-    [userId, week, mediaType, storagePath],
+    [userId, week, mediaType, storagePath, COPY.uploadFailed],
   );
 
   return {

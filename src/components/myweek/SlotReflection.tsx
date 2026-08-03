@@ -169,7 +169,7 @@ const SlotReflection = ({ content, userId, week, onSaved }: Props) => {
     return () => {
       if (debounceRef.current) window.clearTimeout(debounceRef.current);
     };
-  }, [value, loaded, userId, week]);
+  }, [value, loaded, userId, week, onSaved]);
 
   useEffect(() => {
     return () => {

@@ -7,9 +7,7 @@ import {
   isDraftSaveable,
 } from "@/lib/babyMovementSchema";
 
-// Generated Supabase types may not yet include baby_movement_notes.
-// Cast at the boundary; RLS scopes rows to auth.uid() regardless.
-const table = () => (supabase.from as any)("baby_movement_notes");
+const table = () => supabase.from("baby_movement_notes");
 
 export type ListLoadState = "loading" | "loaded" | "error";
 export type SaveState = "idle" | "saving" | "saved" | "error";

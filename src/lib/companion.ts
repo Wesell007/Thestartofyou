@@ -33,7 +33,7 @@ export const NAME_BLOCKLIST: readonly string[] = [
 ];
 
 // Unicode letters (with combining marks), space, apostrophe, hyphen only.
-const NAME_ALLOWED_REGEX = /^[\p{L}\p{M} '\-]+$/u;
+const NAME_ALLOWED_REGEX = /^[\p{L}\p{M} '-]+$/u;
 
 export type ValidateResult =
   | { ok: true; value: string }
@@ -55,7 +55,7 @@ export function validateCompanionName(raw: string): ValidateResult {
   }
   const tokens = trimmed
     .toLowerCase()
-    .split(/[\s'\-]+/u)
+    .split(/[\s'-]+/u)
     .filter(Boolean);
   if (tokens.some((token) => NAME_BLOCKLIST.includes(token))) {
     return { ok: false, message: "Please choose a different name." };

@@ -8,9 +8,7 @@ import {
   nextUpcoming,
 } from "@/lib/appointmentSchema";
 
-// Supabase generated types may not yet include pregnancy_appointments.
-// Cast at the boundary; RLS scopes rows to auth.uid() regardless.
-const table = () => (supabase.from as any)("pregnancy_appointments");
+const table = () => supabase.from("pregnancy_appointments");
 
 export type ListLoadState = "loading" | "loaded" | "error";
 export type SaveState = "idle" | "saving" | "saved" | "error";

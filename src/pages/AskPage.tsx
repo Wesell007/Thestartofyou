@@ -879,7 +879,7 @@ const AskPage = () => {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {tailLinks.map((l) => (
                   <Link
-                    key={l.href}
+                    key={`${l.href}:${l.label}`}
                     to={l.href}
                     className={`group relative bg-card border border-border/40 rounded-2xl px-6 py-7
                       ${tone.accentBorderHover} hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300 overflow-hidden`}

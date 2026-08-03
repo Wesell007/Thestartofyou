@@ -185,7 +185,7 @@ const SetupTTC = () => {
 
     if (mode === "signed_out") {
       stashCurrent();
-      navigate(buildAuthUrl("return_to_route", "/setup/trying-to-conceive"));
+      navigate(buildAuthUrl("start_journey", "/setup/trying-to-conceive"));
       return;
     }
     if (!userId) return;

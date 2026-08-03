@@ -46,6 +46,25 @@ export const PERSONAL_NOTE_LEVELS: readonly {
 export const PERSONAL_NOTE_LABEL =
   "How much it is affecting you. Personal note only.";
 
+const PERSONAL_NOTE_TO_DATABASE: Record<PersonalNoteLevel, number> = {
+  a_little: 1,
+  noticeable: 2,
+  hard_to_ignore: 3,
+};
+
+export const personalNoteLevelToDatabase = (
+  value: PersonalNoteLevel | null,
+): number | null => value === null ? null : PERSONAL_NOTE_TO_DATABASE[value];
+
+export const personalNoteLevelFromDatabase = (
+  value: number | null,
+): PersonalNoteLevel | null => {
+  if (value === 1) return "a_little";
+  if (value === 2) return "noticeable";
+  if (value === 3) return "hard_to_ignore";
+  return null;
+};
+
 export const emptyDraft = (): PregnancySymptomNoteDraft => ({
   noted_at: new Date().toISOString(),
   symptom_label: "",

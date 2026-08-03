@@ -8,11 +8,8 @@ import {
 } from "@/lib/midwifeQuestionsSchema";
 import type { Appointment } from "@/lib/appointmentSchema";
 
-// Cast at boundary; generated types may not include this table yet. RLS
-// scopes all rows to auth.uid().
-const table = () => (supabase.from as any)("midwife_questions");
-const appointmentsTable = () =>
-  (supabase.from as any)("pregnancy_appointments");
+const table = () => supabase.from("midwife_questions");
+const appointmentsTable = () => supabase.from("pregnancy_appointments");
 
 export type ListLoadState = "loading" | "loaded" | "error";
 export type SaveState = "idle" | "saving" | "saved" | "error";

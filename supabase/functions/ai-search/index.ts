@@ -73,7 +73,7 @@ const htmlToEvidence = (html: string) => {
 };
 
 const fetchGrounding = async (urls: string[], signal: AbortSignal) => {
-  const documents = await Promise.all(urls.map(async (url) => {
+  const results = await Promise.allSettled(urls.map(async (url) => {
     const response = await fetch(url, {
       headers: { Accept: "text/html", "User-Agent": "TheStartOfYou-Guidance/1.0" },
       signal,
@@ -83,6 +83,13 @@ const fetchGrounding = async (urls: string[], signal: AbortSignal) => {
     if (evidence.length < 200) throw new Error("Grounding source returned insufficient content");
     return `<source url="${url}">\n${evidence}\n</source>`;
   }));
+
+  const documents = results
+    .filter((result): result is PromiseFulfilledResult<string> => result.status === "fulfilled")
+    .map((result) => result.value);
+  if (documents.length === 0) {
+    throw new Error("All grounding sources were unavailable");
+  }
   return documents.join("\n");
 };
 

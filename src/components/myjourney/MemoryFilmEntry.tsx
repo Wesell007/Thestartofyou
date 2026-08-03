@@ -9,9 +9,9 @@ interface Props {
 }
 
 /** Minimum kept weeks before a film is worth watching. */
-export const FILM_MIN_KEPT_WEEKS = 3;
+const FILM_MIN_KEPT_WEEKS = 3;
 
-export const isFilmReady = (keptWeeksCount: number, hasMedia: boolean) =>
+const isFilmReady = (keptWeeksCount: number, hasMedia: boolean) =>
   keptWeeksCount >= FILM_MIN_KEPT_WEEKS && hasMedia;
 
 /**

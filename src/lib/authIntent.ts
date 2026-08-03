@@ -46,18 +46,21 @@ const isSafeReturnTo = (value: string | null): value is string => {
   return isProtectedPath(value);
 };
 
-/** Build the auth URL for a given intent, preserving return_to when relevant. */
+/** Build the auth URL for a given intent, preserving a safe return target. */
 export const buildAuthUrl = (
   intent: AuthIntent,
   returnTo?: string | null
 ): string => {
   const params = new URLSearchParams();
   params.set("intent", intent);
-  if (intent === "return_to_route" && isSafeReturnTo(returnTo ?? null)) {
+  if (isSafeReturnTo(returnTo ?? null)) {
     params.set("return_to", returnTo!);
   }
   return `/auth?${params.toString()}`;
 };
+
+export const shouldCreateUserForIntent = (intent: AuthIntent): boolean =>
+  intent === "start_journey";
 
 /**
  * Resolve the post-login destination using the documented priority order:
@@ -71,7 +74,7 @@ export const resolvePostLoginDestination = async (
   intent: AuthIntent | null,
   returnTo: string | null
 ): Promise<string> => {
-  if (intent === "return_to_route" && isSafeReturnTo(returnTo)) {
+  if (isSafeReturnTo(returnTo)) {
     return returnTo;
   }
 

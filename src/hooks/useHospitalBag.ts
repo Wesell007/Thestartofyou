@@ -11,9 +11,7 @@ import {
 
 } from "@/lib/hospitalBagSchema";
 
-// Supabase generated types may not yet include hospital_bag_items.
-// Cast at the boundary; RLS scopes rows to auth.uid() regardless.
-const table = () => (supabase.from as any)("hospital_bag_items");
+const table = () => supabase.from("hospital_bag_items");
 
 export type HospitalBagLoadState = "loading" | "seeding" | "loaded" | "error";
 export type HospitalBagSaveState = "idle" | "saving" | "saved" | "error";

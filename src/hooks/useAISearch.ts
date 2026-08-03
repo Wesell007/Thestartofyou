@@ -81,7 +81,12 @@ export function useAISearch() {
     } catch (e) {
       if (e instanceof DOMException && e.name === "AbortError") return;
       if (requestRef.current === requestId) {
-        setError(e instanceof Error ? e.message : "Something went wrong");
+        const message = e instanceof Error ? e.message : "";
+        setError(
+          message && message !== "Failed to fetch" && !/networkerror/i.test(message)
+            ? message
+            : "Guidance is temporarily unavailable. Please check your connection and try again.",
+        );
       }
     } finally {
       if (requestRef.current === requestId) setIsLoading(false);

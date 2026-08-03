@@ -12,6 +12,11 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      # CI exercises the frontend with mocked backend boundaries. Production
+      # deployment must provide the real public Supabase values separately.
+      VITE_SUPABASE_URL: https://ci-test.supabase.co
+      VITE_SUPABASE_PUBLISHABLE_KEY: ci-test-public-key
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

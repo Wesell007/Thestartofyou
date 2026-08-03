@@ -9,6 +9,7 @@ import {
   parseIntent,
   parseSafeReturnTo,
   resolvePostLoginDestination,
+  shouldCreateUserForIntent,
 } from "@/lib/authIntent";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
@@ -102,7 +103,7 @@ const Auth = () => {
     // Re-encode intent + return_to so OAuth/magic-link round trips preserve them.
     const url = new URL(window.location.origin + "/auth");
     url.searchParams.set("intent", effectiveIntent);
-    if (effectiveIntent === "return_to_route" && returnTo) {
+    if (returnTo) {
       url.searchParams.set("return_to", returnTo);
     }
     return url.toString();
@@ -122,20 +123,26 @@ const Auth = () => {
   const sendCode = async (isResend = false) => {
     if (!email.trim()) return;
     setSubmitting(true);
-    // signInWithOtp without emailRedirectTo sends a 6-digit OTP code (no link).
-    const { error } = await supabase.auth.signInWithOtp({
-      email: email.trim(),
-      options: {
-        // Returning sign-in must not silently create a second empty account.
-        shouldCreateUser: effectiveIntent === "start_journey",
-        // Also include the magic link as a fallback in the same email.
-        emailRedirectTo: buildAuthReturnUrl(),
-      },
-    });
-    setSubmitting(false);
-    if (error) {
-      toast.error(error.message || "Could not send code. Please check the email and try again.");
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email: email.trim(),
+        options: {
+          // Returning sign-in must not silently create a second empty account.
+          shouldCreateUser: shouldCreateUserForIntent(effectiveIntent),
+          // The deployed email template may present a code, a link, or both.
+          emailRedirectTo: buildAuthReturnUrl(),
+        },
+      });
+      if (error) throw error;
+    } catch (error) {
+      toast.error(
+        error instanceof Error && error.message
+          ? error.message
+          : "Could not send the sign-in email. Please try again.",
+      );
       return;
+    } finally {
+      setSubmitting(false);
     }
     setStep("code-sent");
     setResendCooldown(45);
@@ -206,7 +213,7 @@ const Auth = () => {
             </h1>
             <p className="font-sans text-sm font-light text-muted-foreground/80 leading-relaxed max-w-sm mx-auto">
               {step === "code-sent"
-                ? `We've sent a 6-digit code to ${email}. It works on any device.`
+                ? `We've sent sign-in instructions to ${email}. Use the link, or enter the 6-digit code if one is shown.`
                 : isReturning
                 ? "Sign in to return to your journey."
                 : pending
@@ -363,7 +370,7 @@ const Auth = () => {
                 </form>
 
                 <p className="font-sans text-[11px] font-light text-muted-foreground/55 text-center mt-4 leading-relaxed">
-                  We'll send a 6-digit code (and a one-tap link as a backup).
+                  We'll email secure sign-in instructions. Depending on your email, you can use a link or a 6-digit code.
                 </p>
               </>
             )}

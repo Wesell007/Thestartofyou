@@ -9,10 +9,8 @@ import {
   createEmptyDraft,
 } from "@/lib/contractionTimerSchema";
 
-// Generated Supabase types may not yet include these tables.
-// Cast at the boundary; RLS scopes rows to auth.uid() regardless.
-const sessionsTable = () => (supabase.from as any)("contraction_sessions");
-const eventsTable = () => (supabase.from as any)("contraction_events");
+const sessionsTable = () => supabase.from("contraction_sessions");
+const eventsTable = () => supabase.from("contraction_events");
 
 export type SaveState = "idle" | "saving" | "saved" | "error";
 

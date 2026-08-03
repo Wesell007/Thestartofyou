@@ -5,11 +5,18 @@ import {
   PregnancySymptomNoteDraft,
   cleanDraft,
   isDraftSaveable,
+  personalNoteLevelFromDatabase,
+  personalNoteLevelToDatabase,
 } from "@/lib/pregnancySymptomNotesSchema";
+import type { Database } from "@/integrations/supabase/types";
 
-// Cast at boundary; generated types may not include this table yet. RLS
-// scopes all rows to auth.uid().
-const table = () => (supabase.from as any)("pregnancy_symptom_notes");
+const table = () => supabase.from("pregnancy_symptom_notes");
+type DatabaseSymptomNote = Database["public"]["Tables"]["pregnancy_symptom_notes"]["Row"];
+
+const fromDatabase = (row: DatabaseSymptomNote): PregnancySymptomNote => ({
+  ...row,
+  personal_severity: personalNoteLevelFromDatabase(row.personal_severity),
+});
 
 export type ListLoadState = "loading" | "loaded" | "error";
 export type SaveState = "idle" | "saving" | "saved" | "error";
@@ -66,7 +73,7 @@ export const usePregnancySymptomNotes = (): UsePregnancySymptomNotesResult => {
         setErrorMessage("We couldn't load your notes just now.");
         return;
       }
-      setRows((data as PregnancySymptomNote[] | null) ?? []);
+      setRows((data ?? []).map(fromDatabase));
       setLoadState("loaded");
     })();
     return () => {
@@ -91,7 +98,11 @@ export const usePregnancySymptomNotes = (): UsePregnancySymptomNotesResult => {
     }
     const cleaned = cleanDraft(draft);
     const { data, error } = await table()
-      .insert({ ...cleaned, user_id: userId })
+      .insert({
+        ...cleaned,
+        personal_severity: personalNoteLevelToDatabase(cleaned.personal_severity),
+        user_id: userId,
+      })
       .select("*")
       .single();
     if (error) {
@@ -99,7 +110,7 @@ export const usePregnancySymptomNotes = (): UsePregnancySymptomNotesResult => {
       setErrorMessage("We couldn't save your note.");
       return null;
     }
-    const row = data as PregnancySymptomNote;
+    const row = fromDatabase(data);
     setRows((prev) => sortNewest([row, ...prev]));
     setSaveState("saved");
     return row;
@@ -116,7 +127,10 @@ export const usePregnancySymptomNotes = (): UsePregnancySymptomNotesResult => {
       setErrorMessage(null);
       const cleaned = cleanDraft(draft);
       const { data, error } = await table()
-        .update(cleaned)
+        .update({
+          ...cleaned,
+          personal_severity: personalNoteLevelToDatabase(cleaned.personal_severity),
+        })
         .eq("id", id)
         .select("*")
         .single();
@@ -125,7 +139,7 @@ export const usePregnancySymptomNotes = (): UsePregnancySymptomNotesResult => {
         setErrorMessage("We couldn't save your changes.");
         return null;
       }
-      const row = data as PregnancySymptomNote;
+      const row = fromDatabase(data);
       setRows((prev) =>
         sortNewest(prev.map((r) => (r.id === row.id ? row : r))),
       );

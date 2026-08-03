@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Download, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import MyWeekHeader from "@/components/myweek/MyWeekHeader";
+import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import PageLoadState from "@/components/shared/PageLoadState";
+import ConfirmDialog from "@/components/shared/ConfirmDialog";
 import { supabase } from "@/integrations/supabase/client";
 import { deletePregnancyJourney } from "@/lib/savedJourney";
 import { deleteTTCJourney } from "@/lib/savedTTCJourney";
@@ -35,6 +36,7 @@ const AccountSettings = () => {
   const [ttcDates, setTtcDates] = useState<{ lmp: string; cycle: number | null } | null>(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState<"export" | "journey" | "account" | "companion" | null>(null);
+  const [confirming, setConfirming] = useState<"journey" | "account" | null>(null);
 
   const [companionChoice, setCompanionChoice] = useState<CompanionChoice>("skip");
   const [customName, setCustomName] = useState("");
@@ -109,13 +111,45 @@ const AccountSettings = () => {
         supabase.from("reflections").select("*").eq("user_id", userId),
         supabase.from("week_photos").select("*").eq("user_id", userId),
         supabase.from("archived_journeys").select("*").eq("user_id", userId),
+        // Phase 15.7: the export previously stopped here, so video memories,
+        // voice notes and every toolkit record were missing from a request
+        // for "all my data". Rows carry storage paths only — never URLs.
+        supabase.from("week_media_memories").select("*").eq("user_id", userId),
+        supabase.from("birth_plans").select("*").eq("user_id", userId),
+        supabase.from("hospital_bag_items").select("*").eq("user_id", userId),
+        supabase.from("pregnancy_appointments").select("*").eq("user_id", userId),
+        supabase.from("baby_movement_notes").select("*").eq("user_id", userId),
+        supabase.from("contraction_sessions").select("*").eq("user_id", userId),
+        supabase.from("contraction_events").select("*").eq("user_id", userId),
+        supabase.from("pregnancy_symptom_notes").select("*").eq("user_id", userId),
+        supabase.from("midwife_questions").select("*").eq("user_id", userId),
       ]);
       const error = results.find((result) => result.error)?.error;
       if (error) throw error;
-      const [profiles, journeys, pregnancy, ttc, logs, reflections, photos, archived] = results;
+      const [
+        profiles,
+        journeys,
+        pregnancy,
+        ttc,
+        logs,
+        reflections,
+        photos,
+        archived,
+        mediaMemories,
+        birthPlans,
+        hospitalBag,
+        appointments,
+        movements,
+        contractionSessions,
+        contractionEvents,
+        symptomNotes,
+        midwifeQuestions,
+      ] = results;
       const payload = {
         exported_at: new Date().toISOString(),
         account_id: userId,
+        note:
+          "This file contains every record saved to your account. Photos, videos and voice notes are stored as files; this export lists their details and storage paths, not the files themselves.",
         profile: profiles.data,
         active_journey: journeys.data,
         pregnancy_journey: pregnancy.data,
@@ -123,7 +157,16 @@ const AccountSettings = () => {
         ttc_logs: logs.data,
         reflections: reflections.data,
         photo_records: photos.data,
+        media_memories: mediaMemories.data,
         archived_journeys: archived.data,
+        birth_plan: birthPlans.data,
+        hospital_bag_items: hospitalBag.data,
+        pregnancy_appointments: appointments.data,
+        baby_movement_notes: movements.data,
+        contraction_sessions: contractionSessions.data,
+        contraction_events: contractionEvents.data,
+        symptom_notes: symptomNotes.data,
+        midwife_questions: midwifeQuestions.data,
       };
       const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" }));
       const anchor = document.createElement("a");
@@ -141,7 +184,7 @@ const AccountSettings = () => {
 
   const removeJourney = async () => {
     if (!userId || !lifecycle || busy) return;
-    if (!window.confirm(`Remove your ${lifecycle === "ttc" ? "TTC" : "pregnancy"} journey? This cannot be undone.`)) return;
+    setConfirming(null);
     setBusy("journey");
     try {
       if (lifecycle === "pregnancy") await deletePregnancyJourney(userId);
@@ -157,7 +200,7 @@ const AccountSettings = () => {
 
   const deleteAccount = async () => {
     if (busy) return;
-    if (!window.confirm("Permanently delete your account, saved journeys, reflections, logs and photos? This cannot be undone.")) return;
+    setConfirming(null);
     setBusy("account");
     try {
       const { error } = await supabase.functions.invoke("delete-account", { body: { confirmed: true } });
@@ -169,6 +212,7 @@ const AccountSettings = () => {
       setBusy(null);
     }
   };
+
 
   const saveCompanion = async () => {
     if (!userId || busy) return;
@@ -231,9 +275,9 @@ const AccountSettings = () => {
     }`;
 
   return (
-    <div className="min-h-screen bg-parchment">
-      <Navbar />
-      <main className="container mx-auto max-w-3xl px-5 sm:px-8 py-16 md:py-24">
+    <div className="min-h-screen bg-parchment-grain page-vignette relative overflow-x-hidden">
+      <MyWeekHeader />
+      <main className="relative mx-auto w-full max-w-[720px] lg:max-w-[880px] px-4 sm:px-8 md:px-10 pt-20 sm:pt-24 lg:pt-28 pb-16 sm:pb-20">
         <p className="font-sans text-[11px] tracking-[0.22em] uppercase text-terracotta mb-3">Your account</p>
         <h1 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Data and account settings</h1>
         <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-10 max-w-2xl">
@@ -327,7 +371,7 @@ const AccountSettings = () => {
 
           <section className="rounded-2xl border border-border/50 bg-card p-6">
             <h2 className="font-serif text-xl mb-2">Download your data</h2>
-            <p className="text-sm text-muted-foreground mb-5">Creates a JSON file containing your profile, journey details, logs, reflections and photo records.</p>
+            <p className="text-sm text-muted-foreground mb-5">Creates a JSON file containing everything saved to your account: your profile, journey details, logs, reflections, photo, video and voice note records, and all of your toolkit entries.</p>
             <button type="button" onClick={exportData} disabled={Boolean(busy)} className="inline-flex items-center gap-2 rounded-pill border border-border px-5 py-2.5 text-sm disabled:opacity-50">
               <Download size={15} /> {busy === "export" ? "Preparing…" : "Download my data"}
             </button>
@@ -369,7 +413,7 @@ const AccountSettings = () => {
               </dl>
             )}
             {lifecycle && (
-              <button type="button" onClick={removeJourney} disabled={Boolean(busy)} className="text-sm text-destructive underline disabled:opacity-50">
+              <button type="button" onClick={() => setConfirming("journey")} disabled={Boolean(busy)} className="text-sm text-destructive underline disabled:opacity-50">
                 {busy === "journey" ? "Removing journey…" : "Remove this journey"}
               </button>
             )}
@@ -378,13 +422,36 @@ const AccountSettings = () => {
           <section className="rounded-2xl border border-destructive/25 bg-card p-6">
             <h2 className="font-serif text-xl mb-2">Delete account</h2>
             <p className="text-sm text-muted-foreground mb-5">Permanently removes the account and its saved journeys, logs, reflections and weekly photos.</p>
-            <button type="button" onClick={deleteAccount} disabled={Boolean(busy)} className="inline-flex items-center gap-2 text-sm text-destructive underline disabled:opacity-50">
+            <button type="button" onClick={() => setConfirming("account")} disabled={Boolean(busy)} className="inline-flex items-center gap-2 text-sm text-destructive underline disabled:opacity-50">
               <Trash2 size={15} /> {busy === "account" ? "Deleting account…" : "Delete my account"}
             </button>
           </section>
         </div>
       </main>
-      <Footer />
+
+      <ConfirmDialog
+        open={confirming === "journey"}
+        onOpenChange={(next) => setConfirming(next ? "journey" : null)}
+        title={lifecycle === "ttc" ? "Remove your trying to conceive journey?" : "Remove your pregnancy journey?"}
+        description="Your saved dates and journey details will be removed from this account. Anything you have kept, such as reflections and memories, stays where it is. This cannot be undone."
+        confirmLabel="Remove journey"
+        cancelLabel="Keep my journey"
+        onConfirm={removeJourney}
+        busy={busy === "journey"}
+      />
+
+      <ConfirmDialog
+        open={confirming === "account"}
+        onOpenChange={(next) => setConfirming(next ? "account" : null)}
+        title="Permanently delete your account?"
+        description="This removes your account and everything saved to it, including your journey, reflections, photos, videos, voice notes and toolkit records. This cannot be undone. If you would like a copy first, close this and download your data."
+        confirmLabel="Delete everything"
+        cancelLabel="Cancel"
+        onConfirm={deleteAccount}
+        busy={busy === "account"}
+      />
+
+      <MyWeekFooter contextual={null} />
     </div>
   );
 };

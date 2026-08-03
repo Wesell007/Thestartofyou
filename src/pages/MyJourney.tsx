@@ -215,6 +215,20 @@ const MyJourney = () => {
     };
   }, [navigate, attempt]);
 
+  // Signed media URLs are minted for 60 minutes at load. Re-run the load a
+  // little before expiry so a long-open journey tab keeps working, matching
+  // the behaviour already in KeptChapter.
+  const hasMedia =
+    (state?.photoUrls.length ?? 0) +
+      (state?.videos.length ?? 0) +
+      (state?.voiceNotes.length ?? 0) >
+    0;
+  useEffect(() => {
+    if (!hasMedia) return;
+    const timer = window.setTimeout(() => setAttempt((n) => n + 1), 50 * 60 * 1000);
+    return () => window.clearTimeout(timer);
+  }, [hasMedia, attempt]);
+
   const derived = useMemo(() => {
     if (!state) return null;
     const { currentWeek, reflectionsByWeek, photoWeeks, videoWeeks, voiceWeeks } = state;
@@ -349,12 +363,12 @@ const MyJourney = () => {
                 {JOURNEY_SUPPORT_LINK_LABEL}
               </Link>
             )}
-            <a
-              href="/account-settings"
+            <Link
+              to="/account-settings"
               className={`text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground ${status === "given_birth" || status === "pregnancy_loss" ? "" : "ml-auto"}`}
             >
               Manage in Account Settings
-            </a>
+            </Link>
           </section>
         )}
 

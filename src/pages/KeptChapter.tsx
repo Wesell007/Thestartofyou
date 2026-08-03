@@ -4,13 +4,18 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { differenceInDays } from "date-fns";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { getActivePregnancyJourney } from "@/lib/savedJourney";
+import { getActivePregnancyJourney, type PregnancyJourneyStatus } from "@/lib/savedJourney";
 import { MAX_PREGNANCY_WEEK } from "@/data/weekData";
 import { getMyWeekContent, getWeekIdentity } from "@/data/myWeekContent";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
+import {
+  STATUS_CHIP_LABEL,
+  JOURNEY_SUPPORT_HREF,
+  JOURNEY_SUPPORT_LINK_LABEL,
+} from "@/lib/journeyStatusCopy";
 import PageLoadState from "@/components/shared/PageLoadState";
 import NotFound from "@/pages/NotFound";
 import {
@@ -50,6 +55,9 @@ type Loaded = {
   // All weeks (past, ≠ current) that have *any* kept content.
   // Used to find adjacent kept chapters for chapter-style navigation.
   keptWeeks: number[];
+  // Coarse journey status. Kept chapters are memories, so a paused or loss
+  // status must not surface them unprompted.
+  status: PregnancyJourneyStatus;
 };
 
 const computeWeek = (lmp: Date) => {
@@ -74,6 +82,9 @@ const KeptChapter = () => {
   const [data, setData] = useState<Loaded | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
+  // Phase 15.7: a kept chapter is a memory surface. When the journey is
+  // paused, ended or marks a loss, nothing is shown until the person asks.
+  const [revealed, setRevealed] = useState(false);
   const lastFiredWeekRef = useRef<number | null>(null);
 
   const validWeek = Number.isFinite(week) && week >= 1 && week <= MAX_PREGNANCY_WEEK;
@@ -244,6 +255,7 @@ const KeptChapter = () => {
         voiceNote,
         tone,
         keptWeeks,
+        status: journey.status ?? "active",
       });
       } catch {
         if (!cancelled) setLoadError("We couldn't open this kept chapter just now. Your memories are still saved.");
@@ -269,7 +281,8 @@ const KeptChapter = () => {
     return <PageLoadState />;
   }
 
-  const { reflection, photoUrl, photoCaption, video, voiceNote, tone, keptWeeks } = data;
+  const { reflection, photoUrl, photoCaption, video, voiceNote, tone, keptWeeks, status } = data;
+  const isSensitive = status !== "active" && !revealed;
   const realism = resolveRealismForWeek(week, tone);
   const realismAlt = defaultRealismAltForWeek(week);
   const trimester = trimesterLabelFor(week);
@@ -326,6 +339,43 @@ const KeptChapter = () => {
           </Link>
         </div>
 
+        {isSensitive ? (
+          <section
+            className="rounded-[18px] keepsake-surface px-5 py-6 sm:px-7 sm:py-8"
+            style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.22)" }}
+          >
+            <p
+              className="font-sans text-[10.5px] font-medium tracking-[0.28em] uppercase mb-3"
+              style={{ color: accent }}
+            >
+              {STATUS_CHIP_LABEL[status]}
+            </p>
+            <h1 className="font-serif font-medium text-foreground text-[26px] sm:text-[30px] leading-[1.15] mb-3">
+              This chapter is here whenever you want it.
+            </h1>
+            <p className="font-serif text-foreground/80 text-[15px] leading-[1.65] mb-6">
+              Your saved reflections and memories from week {week} are kept, hidden by default. Nothing has been removed.
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <button
+                type="button"
+                onClick={() => setRevealed(true)}
+                className="inline-flex items-center rounded-pill border border-border/60 bg-parchment px-4 py-2 text-sm text-foreground/85 hover:border-foreground/25 transition-colors"
+              >
+                Show this chapter
+              </button>
+              {status === "pregnancy_loss" && (
+                <Link
+                  to={JOURNEY_SUPPORT_HREF}
+                  className="text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
+                >
+                  {JOURNEY_SUPPORT_LINK_LABEL}
+                </Link>
+              )}
+            </div>
+          </section>
+        ) : (
+        <>
         {/* 2. Chapter header */}
         <header className="mb-10 sm:mb-12">
           <p
@@ -643,6 +693,8 @@ const KeptChapter = () => {
             </Link>
           </div>
         </nav>
+        </>
+        )}
       </main>
       <MyWeekFooter contextual={null} />
     </div>

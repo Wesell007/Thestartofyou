@@ -316,7 +316,14 @@ const App = () => (
           <Route path="/pregnancy-toolkit/symptom-notes" element={<ProtectedRoute><PregnancyToolkitSymptomNotes /></ProtectedRoute>} />
           <Route path="/pregnancy-toolkit/questions-for-midwife" element={<ProtectedRoute><PregnancyToolkitQuestionsForMidwife /></ProtectedRoute>} />
 
+          {/*
+            Account settings is mounted at two paths. `/account` is canonical
+            (header menu, bottom nav); `/account-settings` is the path used by
+            the journey status surfaces. An alias rather than a redirect, so
+            neither path can ever chain into the other.
+          */}
           <Route path="/account" element={<ProtectedRoute><AccountSettings /></ProtectedRoute>} />
+          <Route path="/account-settings" element={<ProtectedRoute><AccountSettings /></ProtectedRoute>} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/setup" element={<Setup />} />
           <Route path="/setup/trying-to-conceive" element={<SetupTTC />} />

@@ -23,7 +23,7 @@ interface Tab {
 
 const PREGNANCY_ROUTES = ["/my-week", "/my-journey", "/pregnancy-toolkit"];
 const TTC_ROUTES = ["/my-ttc-journey"];
-const SHARED_ROUTES = ["/account"];
+const SHARED_ROUTES = ["/account", "/account-settings"];
 
 const matchesAny = (pathname: string, prefixes: string[]) =>
   prefixes.some((p) => pathname === p || pathname.startsWith(`${p}/`));

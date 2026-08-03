@@ -819,10 +819,7 @@ export type Database = {
           retry_after_seconds: number
         }[]
       }
-      delete_active_journey: {
-        Args: { p_lifecycle: string }
-        Returns: boolean
-      }
+      delete_active_journey: { Args: { p_lifecycle: string }; Returns: boolean }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
@@ -841,6 +838,14 @@ export type Database = {
         }
         Returns: number
       }
+      read_email_batch: {
+        Args: { batch_size: number; queue_name: string; vt: number }
+        Returns: {
+          message: Json
+          msg_id: number
+          read_ct: number
+        }[]
+      }
       save_pregnancy_journey: {
         Args: { p_due_date: string; p_lmp_date: string }
         Returns: undefined
@@ -856,7 +861,7 @@ export type Database = {
           p_ivf_consideration: string
           p_last_period_date: string
           p_likely_ovulation_date: string
-          p_period_length_days: number | null
+          p_period_length_days: number
           p_possible_test_date: string
           p_stage: string
           p_support_status: string
@@ -864,14 +869,6 @@ export type Database = {
           p_uses_ovulation_tests: string
         }
         Returns: string
-      }
-      read_email_batch: {
-        Args: { batch_size: number; queue_name: string; vt: number }
-        Returns: {
-          message: Json
-          msg_id: number
-          read_ct: number
-        }[]
       }
     }
     Enums: {

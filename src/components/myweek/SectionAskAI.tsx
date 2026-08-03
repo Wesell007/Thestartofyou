@@ -212,9 +212,10 @@ const SectionAskAI = ({ week, seed, dueDate }: Props) => {
 
               {body && (
                 <div className="rounded-[18px] bg-background/60 px-4 py-4 sm:px-5">
-                  <p className="font-sans text-[14.5px] text-foreground/85 leading-[1.75] whitespace-pre-line">
-                    {body}
-                  </p>
+                  <div className="font-sans text-[14.5px] text-foreground/85 leading-[1.75] space-y-2">
+                    {renderAnswerLines(body)}
+                  </div>
+
                   {sources && (
                     <details className="mt-3">
                       <summary className="cursor-pointer font-sans text-[11px] tracking-[0.18em] uppercase text-foreground/45">

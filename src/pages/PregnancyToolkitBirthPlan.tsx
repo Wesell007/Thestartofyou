@@ -107,6 +107,28 @@ const PregnancyToolkitBirthPlan = () => {
     [answers]
   );
 
+  // Answered sections start collapsed. Seeded once after load, never re-seeded,
+  // so editing a section never folds it away mid-edit.
+  const [openSections, setOpenSections] = useState<Partial<Record<BirthPlanSectionKey, boolean>>>(
+    {}
+  );
+  const [seeded, setSeeded] = useState(false);
+
+  useEffect(() => {
+    if (seeded || loadState !== "ready") return;
+    const next: Partial<Record<BirthPlanSectionKey, boolean>> = {};
+    BIRTH_PLAN_SECTIONS.forEach((s) => {
+      next[s.key] = !isSectionAnswered(answers[s.key]);
+    });
+    setOpenSections(next);
+    setSeeded(true);
+  }, [seeded, loadState, answers]);
+
+  const toggleSection = (key: BirthPlanSectionKey) => {
+    setOpenSections((prev) => ({ ...prev, [key]: !(prev[key] ?? true) }));
+  };
+
+
   if (loadState === "loading") {
     return <PageLoadState message="Opening your birth plan…" />;
   }

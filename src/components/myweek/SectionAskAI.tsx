@@ -4,7 +4,11 @@ import { Sparkles, ArrowRight, Loader2 } from "lucide-react";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 import { useAISearch } from "@/hooks/useAISearch";
 import { toneLabel } from "@/lib/companion";
-import { buildCompanionContext } from "@/lib/companionContext";
+import {
+  buildCompanionContext,
+  COMPANION_CONTEXT_MAX_LENGTH,
+} from "@/lib/companionContext";
+
 import { navigateToAsk } from "@/lib/askNavigation";
 
 interface Props {

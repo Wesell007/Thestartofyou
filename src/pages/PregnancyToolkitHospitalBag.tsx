@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import SeoHead from "@/components/seo/SeoHead";
@@ -7,8 +8,14 @@ import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import PageLoadState from "@/components/shared/PageLoadState";
 import HospitalBagProgress from "@/components/pregnancy-toolkit/HospitalBagProgress";
 import HospitalBagCategoryCard from "@/components/pregnancy-toolkit/HospitalBagCategory";
+import HospitalBagStillToPack from "@/components/pregnancy-toolkit/HospitalBagStillToPack";
+import HospitalBagActions from "@/components/pregnancy-toolkit/HospitalBagActions";
+import HospitalBagPrintable from "@/components/pregnancy-toolkit/HospitalBagPrintable";
 import { useHospitalBag } from "@/hooks/useHospitalBag";
 import { HOSPITAL_BAG_CATEGORIES } from "@/lib/hospitalBagSchema";
+import { supabase } from "@/integrations/supabase/client";
+import { getActivePregnancyJourney } from "@/lib/savedJourney";
+
 
 const accent = "hsl(var(--stage-pregnancy-accent))";
 const softBorder = "hsl(var(--stage-pregnancy-accent) / 0.16)";
@@ -49,6 +56,39 @@ const PregnancyToolkitHospitalBag = () => {
     deleteCustomItem,
     reload,
   } = useHospitalBag();
+
+  const [parentName, setParentName] = useState<string | null>(null);
+  const [dueDate, setDueDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { data } = await supabase.auth.getUser();
+        const user = data.user;
+        if (!user) return;
+        const meta = (user.user_metadata ?? {}) as Record<string, unknown>;
+        const rawName =
+          (typeof meta.full_name === "string" && meta.full_name.trim()) ||
+          (typeof meta.name === "string" && meta.name.trim()) ||
+          (user.email ? user.email.split("@")[0] : "") ||
+          "";
+        if (!cancelled && rawName) setParentName(rawName);
+        const journey = await getActivePregnancyJourney(user.id);
+        if (!cancelled && journey?.due_date) {
+          const d = new Date(journey.due_date);
+          if (!Number.isNaN(d.getTime())) setDueDate(d);
+        }
+      } catch {
+        // silent — printable simply omits these fields
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+
 
   if (loadState === "loading" || loadState === "seeding") {
     return (
@@ -123,9 +163,15 @@ const PregnancyToolkitHospitalBag = () => {
         </section>
 
         {/* Progress */}
-        <div className="mb-10">
+        <div className="mb-6">
           <HospitalBagProgress progress={progress} updatedAt={updatedAt} />
         </div>
+
+        {/* Still to pack */}
+        <div className="mb-10">
+          <HospitalBagStillToPack rows={rows} />
+        </div>
+
 
         {/* Categories */}
         <div className="space-y-5 mb-12">
@@ -176,6 +222,13 @@ const PregnancyToolkitHospitalBag = () => {
           )}
         </section>
 
+        {/* Print and export */}
+        <div className="mb-10">
+          <HospitalBagActions hasContent={rows.length > 0} />
+        </div>
+
+
+
         {/* Return links */}
         <section
           className="rounded-[20px] keepsake-surface px-6 py-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between"
@@ -210,8 +263,10 @@ const PregnancyToolkitHospitalBag = () => {
       </main>
       <MyWeekFooter contextual={null} />
       <SaveStatePill state={saveState} />
+      <HospitalBagPrintable rows={rows} parentName={parentName} dueDate={dueDate} />
     </div>
   );
+
 };
 
 export default PregnancyToolkitHospitalBag;

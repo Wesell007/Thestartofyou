@@ -13,6 +13,11 @@ export interface HospitalBagCategoryMeta {
 
 export const HOSPITAL_BAG_CATEGORIES: HospitalBagCategoryMeta[] = [
   {
+    key: "documents",
+    label: "Documents",
+    intro: "The paperwork that can help your care team.",
+  },
+  {
     key: "parent",
     label: "Mum or birthing parent",
     intro: "Things you may want for your comfort during and after birth.",
@@ -28,16 +33,12 @@ export const HOSPITAL_BAG_CATEGORIES: HospitalBagCategoryMeta[] = [
     intro: "So the person with you feels ready to stay by your side.",
   },
   {
-    key: "documents",
-    label: "Documents",
-    intro: "The paperwork that can help your care team.",
-  },
-  {
     key: "comfort",
-    label: "Comfort items",
+    label: "After birth and comfort",
     intro: "Small things that can make the room feel more like yours.",
   },
 ];
+
 
 export interface HospitalBagDefaultItem {
   category: HospitalBagCategoryKey;
@@ -166,4 +167,39 @@ export const slugifyCustomLabel = (label: string): string => {
   const suffix = Math.random().toString(36).slice(2, 8);
   const safe = base.length > 0 ? base : "item";
   return `custom-${safe}-${suffix}`;
+};
+
+/**
+ * Render-time ordering only: unpacked items first, packed items below.
+ * Never mutates stored rows or sort_order.
+ */
+export const sortItemsForDisplay = (
+  rows: HospitalBagItemRow[],
+): HospitalBagItemRow[] =>
+  [...rows].sort((a, b) => {
+    const aPacked = a.packed_at ? 1 : 0;
+    const bPacked = b.packed_at ? 1 : 0;
+    if (aPacked !== bPacked) return aPacked - bPacked;
+    if (a.sort_order !== b.sort_order) return a.sort_order - b.sort_order;
+    return a.created_at.localeCompare(b.created_at);
+  });
+
+const CATEGORY_ORDER: HospitalBagCategoryKey[] = HOSPITAL_BAG_CATEGORIES.map(
+  (c) => c.key,
+);
+
+/** Labels of the first `limit` unpacked items, in category display order. */
+export const unpackedPreview = (
+  rows: HospitalBagItemRow[],
+  limit = 5,
+): string[] => {
+  const unpacked = rows.filter((r) => !r.packed_at);
+  const ordered = [...unpacked].sort((a, b) => {
+    const ai = CATEGORY_ORDER.indexOf(a.category);
+    const bi = CATEGORY_ORDER.indexOf(b.category);
+    if (ai !== bi) return ai - bi;
+    if (a.sort_order !== b.sort_order) return a.sort_order - b.sort_order;
+    return a.created_at.localeCompare(b.created_at);
+  });
+  return ordered.slice(0, Math.max(0, limit)).map((r) => r.label);
 };

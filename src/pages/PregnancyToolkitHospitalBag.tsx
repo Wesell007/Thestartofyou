@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import SeoHead from "@/components/seo/SeoHead";
@@ -7,8 +8,14 @@ import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import PageLoadState from "@/components/shared/PageLoadState";
 import HospitalBagProgress from "@/components/pregnancy-toolkit/HospitalBagProgress";
 import HospitalBagCategoryCard from "@/components/pregnancy-toolkit/HospitalBagCategory";
+import HospitalBagStillToPack from "@/components/pregnancy-toolkit/HospitalBagStillToPack";
+import HospitalBagActions from "@/components/pregnancy-toolkit/HospitalBagActions";
+import HospitalBagPrintable from "@/components/pregnancy-toolkit/HospitalBagPrintable";
 import { useHospitalBag } from "@/hooks/useHospitalBag";
 import { HOSPITAL_BAG_CATEGORIES } from "@/lib/hospitalBagSchema";
+import { supabase } from "@/integrations/supabase/client";
+import { getActivePregnancyJourney } from "@/lib/savedJourney";
+
 
 const accent = "hsl(var(--stage-pregnancy-accent))";
 const softBorder = "hsl(var(--stage-pregnancy-accent) / 0.16)";

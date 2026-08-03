@@ -263,8 +263,10 @@ const PregnancyToolkitHospitalBag = () => {
       </main>
       <MyWeekFooter contextual={null} />
       <SaveStatePill state={saveState} />
+      <HospitalBagPrintable rows={rows} parentName={parentName} dueDate={dueDate} />
     </div>
   );
+
 };
 
 export default PregnancyToolkitHospitalBag;

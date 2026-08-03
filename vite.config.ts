@@ -2,14 +2,18 @@ import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { resolvePublicBackendEnv } from "./scripts/public-backend-env";
+import { PUBLIC_BACKEND_DEFAULTS } from "./scripts/public-backend-defaults";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  // Development can render public pages without a backend. A production build
-  // must never silently embed placeholders because that breaks auth, journeys,
-  // storage and every Edge Function while still producing a deployable bundle.
-  const publicBackendEnv = resolvePublicBackendEnv(env, mode);
+  // Deployment builds run without the gitignored .env, so fall back to the
+  // committed publishable (non-secret) backend values. Real env vars win.
+  const publicBackendEnv = resolvePublicBackendEnv(
+    { ...PUBLIC_BACKEND_DEFAULTS, ...env },
+    mode,
+  );
+
 
   const define = Object.fromEntries(
     Object.entries(publicBackendEnv).map(([name, value]) => [

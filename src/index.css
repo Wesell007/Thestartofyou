@@ -579,4 +579,88 @@
   #birth-plan-print .bpp-footer p {
     margin: 0;
   }
+
+  #hospital-bag-print .hbp-header {
+    border-bottom: 1px solid #d8d8d8;
+    padding-bottom: 14px;
+    margin-bottom: 22px;
+  }
+  #hospital-bag-print .hbp-brand {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #6a6a6a;
+    margin: 0 0 10px 0;
+  }
+  #hospital-bag-print .hbp-title {
+    font-size: 32px;
+    line-height: 1.1;
+    margin: 0 0 12px 0;
+    font-weight: 500;
+  }
+  #hospital-bag-print .hbp-meta {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    color: #333333;
+    margin: 0 0 12px 0;
+  }
+  #hospital-bag-print .hbp-meta p {
+    margin: 0 0 2px 0;
+  }
+  #hospital-bag-print .hbp-intro {
+    font-style: italic;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: #333333;
+    margin: 0;
+    max-width: 62ch;
+  }
+  #hospital-bag-print .hbp-section {
+    page-break-inside: avoid;
+    margin-bottom: 18px;
+  }
+  #hospital-bag-print .hbp-section-title {
+    font-size: 15px;
+    margin: 0 0 8px 0;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #ececec;
+    font-weight: 500;
+  }
+  #hospital-bag-print .hbp-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  #hospital-bag-print .hbp-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 2px;
+  }
+  #hospital-bag-print .hbp-box {
+    font-size: 12px;
+    color: #444444;
+    width: 14px;
+  }
+  #hospital-bag-print .hbp-label-packed {
+    color: #6a6a6a;
+  }
+  #hospital-bag-print .hbp-footer {
+    margin-top: 28px;
+    padding-top: 12px;
+    border-top: 1px solid #d8d8d8;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    color: #6a6a6a;
+    display: flex;
+    justify-content: space-between;
+  }
+  #hospital-bag-print .hbp-footer p {
+    margin: 0;
+  }
 }
+

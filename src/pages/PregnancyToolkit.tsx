@@ -80,13 +80,13 @@ const MVP_TOOLS: ToolCard[] = [
   },
   {
     key: "symptom-notes",
-    title: "Pregnancy Symptom Notes",
+    title: "Symptom notes",
     hint: "A private place to note symptoms and questions you may want to raise.",
     icon: Activity,
   },
   {
     key: "midwife-questions",
-    title: "Questions for Midwife",
+    title: "Questions for your midwife",
     hint: "Save questions you want to bring to your midwife or care team.",
     icon: MessageCircleQuestion,
   },
@@ -262,7 +262,7 @@ const PregnancyToolkit = () => {
               </Link>
               .
             </p>
-            {status === "pregnancy_loss" && !revealed && (
+            {!revealed && (
               <div className="flex flex-wrap items-center gap-4">
                 <button
                   type="button"
@@ -271,18 +271,21 @@ const PregnancyToolkit = () => {
                 >
                   Show my toolkit entries
                 </button>
-                <Link
-                  to={JOURNEY_SUPPORT_HREF}
-                  className="text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
-                >
-                  {JOURNEY_SUPPORT_LINK_LABEL}
-                </Link>
+                {status === "pregnancy_loss" && (
+                  <Link
+                    to={JOURNEY_SUPPORT_HREF}
+                    className="text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
+                  >
+                    {JOURNEY_SUPPORT_LINK_LABEL}
+                  </Link>
+                )}
               </div>
             )}
           </section>
         )}
 
-        {!(status === "pregnancy_loss" && !revealed) && (
+        {!(status && status !== "active" && !revealed) && (
+
         <section className="mb-14" aria-label="Toolkit tools">
           <div className="flex items-center gap-3 mb-5">
             <span

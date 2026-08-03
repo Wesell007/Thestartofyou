@@ -79,7 +79,7 @@ const PregnancyToolkitQuestionsForMidwife = () => {
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative">
       <SeoHead
-        title="Questions for Midwife | Pregnancy toolkit"
+        title="Questions for your midwife | Pregnancy toolkit"
         description="Save questions you want to bring to your midwife or care team."
         canonical="https://thestartofyou.com/pregnancy-toolkit/questions-for-midwife"
         noindex
@@ -103,7 +103,7 @@ const PregnancyToolkitQuestionsForMidwife = () => {
             </p>
           </div>
           <h1 className="font-serif text-[1.9rem] sm:text-[2.25rem] leading-[1.15] text-foreground/90 mb-4">
-            Questions for Midwife
+            Questions for your midwife
           </h1>
           <p className="font-serif italic text-foreground/70 text-[15.5px] sm:text-[16px] leading-[1.65] max-w-[54ch]">
             A calm place to keep questions you want to bring to your midwife or care team.

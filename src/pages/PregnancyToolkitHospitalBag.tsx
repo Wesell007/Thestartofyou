@@ -163,9 +163,15 @@ const PregnancyToolkitHospitalBag = () => {
         </section>
 
         {/* Progress */}
-        <div className="mb-10">
+        <div className="mb-6">
           <HospitalBagProgress progress={progress} updatedAt={updatedAt} />
         </div>
+
+        {/* Still to pack */}
+        <div className="mb-10">
+          <HospitalBagStillToPack rows={rows} />
+        </div>
+
 
         {/* Categories */}
         <div className="space-y-5 mb-12">

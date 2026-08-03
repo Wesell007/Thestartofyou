@@ -31,6 +31,37 @@ const splitSources = (raw: string) => {
   };
 };
 
+/** Renders inline markdown emphasis and bullet markers as plain typography. */
+const renderInline = (text: string) =>
+  text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith("**") && part.endsWith("**") && part.length > 4 ? (
+      <strong key={i} className="font-medium text-foreground">
+        {part.slice(2, -2)}
+      </strong>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
+  );
+
+const renderAnswerLines = (body: string) =>
+  body
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line, i) => {
+      const bullet = line.match(/^[*-]\s+(.*)$/);
+      if (bullet) {
+        return (
+          <p key={i} className="pl-4 -indent-4">
+            <span aria-hidden="true">• </span>
+            {renderInline(bullet[1])}
+          </p>
+        );
+      }
+      return <p key={i}>{renderInline(line.replace(/^#+\s*/, ""))}</p>;
+    });
+
+
 /**
  * Inline AI companion card. Sends only the coarse stage context built by
  * buildCompanionContext — no name, reflection, media or memory data.

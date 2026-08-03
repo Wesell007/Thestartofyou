@@ -162,29 +162,31 @@ const PregnancyToolkitBirthPlan = () => {
         </section>
 
         {/* Progress */}
-        <div className="mb-6">
+        <div className="mb-10">
           <BirthPlanProgress
             completion={liveCompletion}
             status={status}
             updatedAt={updatedAt}
+            onPrint={hasAnyAnswered ? () => window.print() : undefined}
           />
         </div>
 
-        {/* Export actions (top) */}
-        <div className="mb-10">
-          <BirthPlanActions hasContent={hasAnyAnswered} />
-        </div>
-
-        {/* Sections */}
-        <div className="space-y-5 mb-12">
-          {BIRTH_PLAN_SECTIONS.map((section) => (
-            <BirthPlanSectionCard
-              key={section.key}
-              section={section}
-              value={answers[section.key]}
-              onChange={(next) => onSectionChange(section.key, next)}
-              disabled={saveState === "saving"}
-            />
+        {/* Sections, grouped into bands */}
+        <div className="mb-2">
+          {BIRTH_PLAN_BANDS.map((band) => (
+            <BirthPlanBand key={band.id} band={band}>
+              {sectionsForBand(band.id).map((section) => (
+                <BirthPlanSectionCard
+                  key={section.key}
+                  section={section}
+                  value={answers[section.key]}
+                  onChange={(next) => onSectionChange(section.key, next)}
+                  disabled={saveState === "saving"}
+                  open={openSections[section.key] ?? true}
+                  onToggle={() => toggleSection(section.key)}
+                />
+              ))}
+            </BirthPlanBand>
           ))}
         </div>
 
@@ -197,10 +199,11 @@ const PregnancyToolkitBirthPlan = () => {
           />
         </div>
 
-        {/* Export actions (bottom, alongside summary) */}
+        {/* Export actions */}
         <div className="mb-10">
           <BirthPlanActions hasContent={hasAnyAnswered} />
         </div>
+
 
 
         {/* Return links */}

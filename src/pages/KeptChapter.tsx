@@ -85,6 +85,7 @@ const KeptChapter = () => {
   // Phase 15.7: a kept chapter is a memory surface. When the journey is
   // paused, ended or marks a loss, nothing is shown until the person asks.
   const [revealed, setRevealed] = useState(false);
+  const [failedIllustrationSrc, setFailedIllustrationSrc] = useState<string | null>(null);
   const lastFiredWeekRef = useRef<number | null>(null);
 
   const validWeek = Number.isFinite(week) && week >= 1 && week <= MAX_PREGNANCY_WEEK;
@@ -285,6 +286,7 @@ const KeptChapter = () => {
   const isSensitive = status !== "active" && !revealed;
   const realism = resolveRealismForWeek(week, tone);
   const realismAlt = defaultRealismAltForWeek(week);
+  const imageFailed = failedIllustrationSrc === realism.src;
   const trimester = trimesterLabelFor(week);
 
   // Adjacent KEPT chapters (not just adjacent week numbers). Calmer browsing.
@@ -407,16 +409,35 @@ const KeptChapter = () => {
                 border: `1px solid ${accentSoft(0.22)}`,
               }}
             >
-              <img
-                src={realism.src}
-                alt={realismAlt}
-                loading="eager"
-                decoding="async"
-                className="w-full h-full object-cover"
-              />
-
+              {imageFailed ? (
+                <>
+                  <div
+                    aria-hidden="true"
+                    className="w-full h-full flex items-center justify-center"
+                  >
+                    <div
+                      className="w-[58%] h-[58%] rounded-full"
+                      style={{
+                        background: `radial-gradient(circle at 50% 45%, ${tint(0.65)}, ${accentSoft(0.14)} 70%, transparent 78%)`,
+                        border: `1px solid ${accentSoft(0.28)}`,
+                      }}
+                    />
+                  </div>
+                  <span className="sr-only">{realismAlt}</span>
+                </>
+              ) : (
+                <img
+                  src={realism.src}
+                  alt={realismAlt}
+                  loading="eager"
+                  decoding="async"
+                  onError={() => setFailedIllustrationSrc(realism.src)}
+                  className="w-full h-full object-cover"
+                />
+              )}
             </div>
           </div>
+
 
           {/* Adjacent kept-chapter quiet links, immediately under the header */}
           {(prevKept || nextKept) && (

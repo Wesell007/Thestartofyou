@@ -1,104 +1,129 @@
-# Phase 15.7 — Pregnancy Continuity and Correctness
+# Phase 16.0 — First Year and Postpartum Readiness Audit
 
-Low-risk correctness pass. No migrations, no RLS changes, no storage changes, no AI prompt changes, no service worker.
-
----
-
-## Audit findings (verified before planning)
-
-| # | Finding | Evidence |
-| --- | --- | --- |
-| 1 | `/account-settings` is not a registered route. Only `/account` exists. Seven links point at the missing path and land on the 404 page. | `src/App.tsx:319` is the only account route; no `Navigate` alias exists. Linking sites: `PageStatusNotice.tsx:58`, `SectionJourneyPaused.tsx:30`, `SectionJourneyQuiet.tsx:32`, `SectionPregnancyComplete.tsx:40`, `JourneySupport.tsx:131`, `MyJourney.tsx:353`, `PregnancyToolkit.tsx:258` |
-| 2 | Export payload covers 8 tables and omits 8 more. | `AccountSettings.tsx:100-127` selects `profiles`, `journeys`, `pregnancy_journeys`, `ttc_journeys`, `ttc_logs`, `reflections`, `week_photos`, `archived_journeys` only |
-| 3 | Account Settings renders `Navbar`/`Footer`, not the journey shell. | `AccountSettings.tsx:5-6`, `:235` |
-| 4 | Two native browser confirms on destructive actions. | `AccountSettings.tsx:144`, `AccountSettings.tsx:160` |
-| 5 | `KeptChapter` never reads journey status; kept memories render for every status. | `KeptChapter.tsx:41-52` `Loaded` type has no `status` field; no status branch anywhere in the file |
-| 6 | `/my-journey` signs media URLs once for 60 minutes with no refresh; `KeptChapter` refreshes at 50 minutes. | `MyJourney.tsx:158-166` one-shot `createSignedUrls(..., 60*60)`; `KeptChapter.tsx:257-261` 50-minute re-fetch timer |
-| 7 | No manifest, no icons beyond `favicon.ico`. | `public/` contains only `favicon.ico`, `placeholder.svg`, `robots.txt`, `sitemap.xml`; `index.html` has no manifest link |
-| 8 | `MyJourney.tsx:353` uses a raw `<a href>` instead of `<Link>`, forcing a full page reload. | `MyJourney.tsx:352-357` |
-
-`alert-dialog.tsx` already exists in `src/components/ui/`, so fix 4 needs no new dependency.
+Audit and planning only. No code changes in this phase. The output is a readiness assessment plus a staged build order, including the AI Companion Continuity and Memory Choice direction.
 
 ---
 
-## What will be built
+## Current state (verified)
 
-### 1. Account Settings route alias
+| Area | State today |
+| --- | --- |
+| First Year hub | Rich public editorial system: hub, phases (0-3, 3-6, 6-9, 9-12), month pages 0-12, eight topic areas, article dataset. No signed-in First Year journey surface. |
+| Postpartum hub | Public editorial page composed of 14 sections (`src/pages/Postpartum.tsx`). No signed-in surface, no recovery tools. |
+| Signed-in journey | Pregnancy only: `/my-week`, `/my-journey`, `/kept-chapter`, `/pregnancy-toolkit/*`. `journeys` and `pregnancy_journeys` carry lifecycle and status; `archived_journeys` stores completed snapshots. |
+| Companion identity | `profiles.companion_name` and `profiles.companion_tone`, read by `useCompanionIdentity`. Display only. |
+| Companion AI | `SectionAskAI` on `/my-week` plus `HubAISupport` on the First Year and Postpartum hubs. Both call the same `ai-search` function. Context is a short, non-identifying string built by `buildCompanionContext` (week, trimester, due day/month, tone, page hint), capped at 500 characters. |
+| Memory privacy | Reflections, photos, videos, voice notes, toolkit notes and birth plan answers are never sent to the AI. `companionContext.test.ts` asserts this. |
+| Birth transition | `SectionPregnancyComplete` routes a user who marks "given birth" to First Year, My Journey and Account Settings. No baby record, no date of birth, no handover, no First Year journey to land in. |
 
-Add a second route in `src/App.tsx` mounting the same `AccountSettings` element at `/account-settings`, wrapped in the same `ProtectedRoute`. An alias rather than a redirect, so both paths render directly and no loop is possible. `/account` stays the canonical path used by `MyWeekHeader` and `JourneyBottomNav`.
+**Core gap:** at the moment a pregnancy ends, the product hands the user from a personal, signed-in weekly experience to a public editorial hub. Continuity of identity, stage and companion all stop at birth.
 
-Convert `MyJourney.tsx:353` from `<a href>` to `<Link to>` so it becomes a client transition like the other six.
+---
 
-Then audit all seven link sites and confirm each resolves.
+## AI Companion Continuity and Memory Choice
 
-### 2. Complete the data export payload
+**Emotional goal: same companion, new chapter.** The companion should feel like it moved with the user, not like a new AI surface appeared.
 
-Extend the `Promise.all` in `exportData` to also read, scoped to `user_id`:
+### Language rules
 
-`week_media_memories`, `birth_plans`, `hospital_bag_items`, `pregnancy_appointments`, `baby_movement_notes`, `contraction_sessions`, `pregnancy_symptom_notes`, `midwife_questions`.
+Never describe this as machine learning, training or model memory. Approved product language:
 
-Add each to the payload under a clear key. Because every row already carries `storage_path` and never a URL, the export continues to contain storage path references only — no signed URLs, no public URLs. A short note is added to the payload explaining that media files themselves are not included in the JSON.
+- Companion memory
+- Personal context
+- What Cindy can use
+- Carry my pregnancy journey forward
 
-Read-only selects. No schema change, no RLS change, no server export, no email delivery.
+Copy must never imply private pregnancy data trains a model. The companion uses only what the user hands it, at the moment they ask.
 
-### 3. Account Settings in the journey shell
+### Transition screen (explored, not built in this phase)
 
-Swap `Navbar`/`Footer` for `MyWeekHeader`/`MyWeekFooter` and adopt the journey page frame used by `/my-week` and `/my-journey`: `bg-parchment-grain page-vignette`, the constrained content column, and top padding that clears the fixed header. All existing sections, handlers, loading state and signed-in checks stay exactly as they are.
+Shown once when pregnancy is marked complete or given birth. Three choices, no default pre-selected:
 
-`JourneyBottomNav` already treats `/account` as a shell route; `/account-settings` is added to its `SHARED_ROUTES` so the tab bar persists on the alias too.
+1. **Continue gently** — Cindy supports First Year and Postpartum using baby age, stage and page context only. No pregnancy memories or private notes are used.
+2. **Personalise Cindy with my pregnancy journey** — Cindy can use selected details the user approves: baby date of birth, birth story summary, pregnancy stage history, selected memories. Viewable, editable and switchable off at any time.
+3. **Decide later** — user enters First Year without memory-aware AI. The choice remains available in Account Settings.
 
-### 4. Replace browser confirms
+### Birth Story Handover (future concept)
 
-Introduce a small shared `ConfirmDialog` built on the existing `alert-dialog` primitive, with title, calm body copy, cancel action and a destructive confirm action. Wire it to both journey removal and account deletion via local state, so `removeJourney` and `deleteAccount` keep their current logic and only lose the `window.confirm` guard.
+A short optional form, user-authored, never auto-extracted:
 
-Copy comes from `journeyStatusCopy.ts` conventions: no alarming language, explicit about what is removed and what is not.
+- Baby date of birth
+- Baby name, optional
+- Birth story summary, optional
+- How the parent wants this chapter remembered
+- Anything they want Cindy to know
+- Anything they do not want Cindy to use
 
-### 5. KeptChapter sensitive-state branch
+The AI must not automatically read pregnancy reflections, photos, videos, voice notes, toolkit notes or birth plan notes. Carry-forward is opt-in, item by item.
 
-`getActivePregnancyJourney` already returns `status`; `KeptChapter` currently discards it. Store it on `Loaded`, then:
+### First safe AI version (recommended default)
 
-- `active` — unchanged.
-- `pregnancy_loss`, `paused`, `no_longer_pregnant` — do not render kept memories on arrival. Show the page frame plus the existing status chip and a reveal control, mirroring the `JourneyKeptRegion` pattern already used on `/my-journey`.
-- `given_birth` — consistent with `/my-journey`: content shown, with the status chip present.
+The version to actually ship first:
 
-Reuses `STATUS_CHIP_LABEL` and existing copy. Nothing is deleted or permanently hidden.
+- Same companion identity (`companion_name`)
+- Same companion tone (`companion_tone`)
+- First Year and Postpartum stage context
+- Baby age, derived from a date of birth the user gives directly
+- Page context
+- No automatic access to private memories
 
-### 6. Signed URL refresh parity on My Journey
+This is the existing `buildCompanionContext` pattern extended to a new lifecycle, with the same 500-character cap and the same memory-blind tests. Low risk, and it already delivers "same companion, new chapter".
 
-Mirror the `KeptChapter` approach exactly: add an `attempt` counter to the load effect dependency list and a 50-minute timer that increments it whenever any media is present. Photos, videos and voice notes all re-sign together in the existing single `createSignedUrls` call. Lifetime stays 60 minutes; no storage or RLS change; no public URLs.
+### Future conversational direction (assessed, gated)
 
-### 7. Manifest baseline only
+Later possibilities across pregnancy, first year and postpartum: a fuller chat interface, voice note input, spoken replies, night-time companion mode, memory summaries, user-selected memory context.
 
-Add `public/manifest.webmanifest` with the app name, short name, `theme_color` matching the existing `#f9f8f6`, background colour, and 192px and 512px icons generated from the brand logo. Link it from `index.html` alongside an `apple-touch-icon`.
+Full memory-aware AI should not be built until all of the following ship with it:
 
-No service worker, no registration code, no offline handling, no caching, no install prompt. Full installable-PWA behaviour with offline support stays out of scope and is reported as future work.
+- Clear opt-in
+- View what the companion remembers
+- Delete companion memory
+- Turn memory off
+- Sensitive content controls
+- No hidden use of private notes
+- No automatic use of loss, mental health or birth trauma content
+- Clear privacy copy
 
-### 8. AI unchanged
+### Benchmarks
 
-No changes to `companionContext.ts`, `SectionAskAI.tsx`, `useAISearch.ts`, `AskPage.tsx` or any edge function. The optional `/ask` handoff is explicitly **not** included in this phase — it belongs with the Ask shell work and is not needed for continuity correctness.
+Huckleberry for baby rhythm and tracking. Beacon for postpartum emotional support and night-time reassurance. The Start of You goes further by keeping the *same* companion across pregnancy, first year and postpartum. No copying of either product's UI, wording, branding, screenshots, feature names, layouts or flows.
+
+---
+
+## Readiness gaps beyond AI
+
+1. **No baby record.** No date of birth, so no baby age, no First Year week or month resolution, no age-aware content. This blocks everything else.
+2. **No First Year lifecycle.** `journeys.lifecycle` supports the concept but nothing writes or reads a first-year journey.
+3. **No signed-in First Year surface.** No equivalent of `/my-week` for months 0-12.
+4. **No postpartum recovery surface.** The recovery window (0-12 weeks) has editorial content but no personal tracking or reassurance surface.
+5. **Memory continuity.** Pregnancy memories live in `week_media_memories` and `week_photos` keyed by pregnancy week. First Year memories need their own keying, and the kept pregnancy chapter must stay reachable and read-only.
+6. **Sensitive states.** `pregnancy_loss`, `no_longer_pregnant` and `paused` must never be routed into a First Year or baby-age flow. The existing reveal gates set the pattern to follow.
+
+---
+
+## Recommended build order
+
+| Phase | Scope |
+| --- | --- |
+| 16.1 | Baby record foundation: date of birth, optional name, first-year lifecycle, age derivation helpers, sensitive-state guards. Migration phase. |
+| 16.2 | Birth transition screen with the three companion choices and the consent record. Copy-led, no memory reading. |
+| 16.3 | Signed-in First Year surface: month-aware personal page, memory capture, kept-chapter link back to pregnancy. |
+| 16.4 | Postpartum recovery surface for the 0-12 week window, including night-time reassurance framing. |
+| 16.5 | Companion continuity, safe version: extend `buildCompanionContext` to first-year and postpartum stages with baby age and page context only, plus memory-blind tests. |
+| 16.6 | Optional Birth Story Handover and user-selected memory context, only with the full consent controls listed above. |
 
 ---
 
 ## Technical notes
 
-- Route alias uses a duplicate `<Route>` element, not `<Navigate>`, avoiding any redirect chain.
-- The export additions are pure `select("*").eq("user_id", userId)` reads guarded by the existing combined error check, so one failing table surfaces the existing error toast rather than a partial download.
-- `ConfirmDialog` is a new file under `src/components/shared/`; it is generic and takes title, description, confirm label and an async handler.
-- The My Journey refresh timer is cleared on unmount and only starts when at least one media item resolved, matching `KeptChapter.tsx:257-261`.
-- Manifest icons are generated as PNGs into `src/assets` equivalents under `public/` so they are referenced by absolute path from `index.html`.
+- Extend `buildCompanionContext` with a lifecycle discriminator rather than adding a second context builder, so the 500-character cap and the memory-blind test suite cover both chapters.
+- Companion consent should be a stored, explicit record (choice, timestamp, and the specific items approved), not a boolean inferred from other data.
+- Baby age derivation belongs in a pure helper alongside `pregnancyDates.ts`, unit tested at week and month boundaries.
+- Every new table follows the existing pattern: `auth.uid()` scoping, explicit grants for `authenticated` and `service_role`, no `anon` CRUD.
+- No changes to the `ai-search` function contract in the safe version; only the client-built context string changes.
 
-## Files expected to change
+---
 
-`src/App.tsx`, `src/pages/AccountSettings.tsx`, `src/pages/MyJourney.tsx`, `src/pages/KeptChapter.tsx`, `src/components/layout/JourneyBottomNav.tsx`, `src/components/shared/ConfirmDialog.tsx` (new), `index.html`, `public/manifest.webmanifest` (new), `public/` icon files (new).
+## Out of scope for Phase 16.0
 
-## Verification
-
-- `npx tsgo --noEmit -p tsconfig.json`
-- Vitest run for existing suites
-- Playwright pass over `/account`, `/account-settings`, `/my-journey`, `/my-week`, one `/my-week/:week` kept chapter, `/pregnancy-toolkit`, `/pregnancy-toolkit/hospital-bag`, `/pregnancy-toolkit/birth-plan`, at desktop and mobile widths, checking console cleanliness
-- Manual crawl of all seven Account Settings links to confirm none reach the 404 page
-- Export run with the payload keys inspected for the eight added tables and no URL fields
-
-## Explicitly out of scope
-
-Memory-aware AI, sharing, notifications, service worker, offline mode, native app work, new toolkit features, redesigns.
+No migrations, no new routes, no AI prompt changes, no content generation. This phase ends with this document.

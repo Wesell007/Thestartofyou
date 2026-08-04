@@ -68,11 +68,26 @@ Babies attach to the user, not to the journey row, so a second pregnancy later d
 
 ## Twins and multiples recommendation
 
-- **Schema: multiples-ready from the start.** `babies` is already one row per baby with `birth_order` and `is_primary`. Nothing about version one blocks a second row.
-- **UI: single baby only in version one.** Setup asks for one date of birth and one optional name. All reads use the primary baby.
+Twins and multiples are a **first-class future requirement**, not an afterthought. Phase 16.1B stays backend-only, but nothing in the schema or RPC may assume one baby forever.
+
+- **Schema: multiples-ready from the start.** `babies` is one row per baby with `birth_order`, `is_primary`, optional `name` and required `date_of_birth`. No column, constraint or index caps a user at one baby: the only uniqueness is the partial index on `(user_id) where is_primary`, which enforces exactly one *displayed* baby, not one baby.
+- **UI: nothing in 16.1B.** No First Year setup UI, no pregnancy multiples UI, no My Week copy change, no baby visuals, no twin-specific pregnancy guidance.
 - **Name stays optional, permanently.** Some parents will not name for weeks, and some will not want a name stored.
-- **Date of birth is enough for the first build.** It yields age, month index, and the postpartum window — everything Phase 16.1B needs.
-- **Later, for twins:** an "add another baby" action, a baby switcher on the First Year surface, per-baby memory keying, and a decision on shared versus per-baby milestones. Because twins usually share a date of birth, age derivation needs no change at all.
+- **Date of birth is the only required field.** Twins normally share it, so age derivation needs no change at all for multiples.
+
+### RPC: Option A or Option B?
+
+**Recommended: Option B, future-ready now — `save_first_year_journey(p_babies jsonb)`.**
+
+The RPC is backend-only in 16.1B, so accepting an array costs nothing in UI complexity and removes a later breaking signature change. It validates a JSON array of `{ date_of_birth, name?, birth_order? }`, requires at least one and caps at a sane maximum (four), defaults `birth_order` to array position, and marks the lowest `birth_order` as `is_primary`. A one-element array is the version one call, so behaviour is identical to Option A today.
+
+Option A was rejected because a later `add_first_year_baby` RPC would need its own advisory locking, its own primary reassignment logic, and its own sensitive-state guard — three places to keep correct instead of one. Replacing a live single-baby signature later is also riskier than shipping the array shape while nothing calls it.
+
+### What later phases add
+
+- **Phase 16.2/16.3 — First Year setup UI:** "How many babies would you like to add?" (One baby / Twins / More than two / I'll set up one baby for now). Twins or more collect a shared date of birth by default with optional per-baby names, create one row per baby, and mark one primary. Baby switcher and per-baby dashboards wait for a later phase.
+- **A later dedicated phase — pregnancy multiples:** "Are you expecting one baby or more than one?" in pregnancy setup or Account Settings. Deliberately deferred: collecting it forces baby/babies wording, My Week copy, visuals, AI context and sensitivity rules to change together, which is far larger than 16.1B.
+
 
 ---
 

@@ -225,13 +225,13 @@ No route, page, component, sitemap, analytics or AI file changes in 16.1B.
 
 ## What should wait
 
-First Year dashboard, postpartum surfaces, baby tracking (feeding, sleep, nappies), milestones, First Year memories, the transition screen, birth story handover, memory-aware AI, consent storage, export changes, analytics events, twin UI.
+First Year dashboard, postpartum surfaces, baby tracking (feeding, sleep, nappies), milestones, First Year memories, the transition screen, birth story handover, memory-aware AI, consent storage, export changes, analytics events, First Year twins setup UI (16.2/16.3), and the pregnancy multiples question with its wording, visuals, AI-context and sensitivity knock-ons (a later dedicated phase).
 
 ---
 
 ## Final recommendation
 
-Build 16.1B as: two tables, one enum, one save RPC with a server-side sensitive-state guard, one archive-on-handover step, one pure date helper with boundary tests, and a small data-access module. Nothing user-visible ships. That is the smallest change that unblocks 16.2 onwards while leaving multiples, memory continuity and consent free to evolve.
+Build 16.1B as: two tables, one enum, one multiples-capable save RPC (`p_babies jsonb`) with a server-side sensitive-state guard, one archive-on-handover step, one pure date helper with boundary tests, and a small data-access module. Nothing user-visible ships. That is the smallest change that unblocks 16.2 onwards while making twins and multiples a supported future rather than a migration debt.
 
 **Risks and blockers**
 

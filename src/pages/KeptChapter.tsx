@@ -85,6 +85,7 @@ const KeptChapter = () => {
   // Phase 15.7: a kept chapter is a memory surface. When the journey is
   // paused, ended or marks a loss, nothing is shown until the person asks.
   const [revealed, setRevealed] = useState(false);
+  const [failedIllustrationSrc, setFailedIllustrationSrc] = useState<string | null>(null);
   const lastFiredWeekRef = useRef<number | null>(null);
 
   const validWeek = Number.isFinite(week) && week >= 1 && week <= MAX_PREGNANCY_WEEK;

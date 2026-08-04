@@ -68,11 +68,26 @@ Babies attach to the user, not to the journey row, so a second pregnancy later d
 
 ## Twins and multiples recommendation
 
-- **Schema: multiples-ready from the start.** `babies` is already one row per baby with `birth_order` and `is_primary`. Nothing about version one blocks a second row.
-- **UI: single baby only in version one.** Setup asks for one date of birth and one optional name. All reads use the primary baby.
+Twins and multiples are a **first-class future requirement**, not an afterthought. Phase 16.1B stays backend-only, but nothing in the schema or RPC may assume one baby forever.
+
+- **Schema: multiples-ready from the start.** `babies` is one row per baby with `birth_order`, `is_primary`, optional `name` and required `date_of_birth`. No column, constraint or index caps a user at one baby: the only uniqueness is the partial index on `(user_id) where is_primary`, which enforces exactly one *displayed* baby, not one baby.
+- **UI: nothing in 16.1B.** No First Year setup UI, no pregnancy multiples UI, no My Week copy change, no baby visuals, no twin-specific pregnancy guidance.
 - **Name stays optional, permanently.** Some parents will not name for weeks, and some will not want a name stored.
-- **Date of birth is enough for the first build.** It yields age, month index, and the postpartum window — everything Phase 16.1B needs.
-- **Later, for twins:** an "add another baby" action, a baby switcher on the First Year surface, per-baby memory keying, and a decision on shared versus per-baby milestones. Because twins usually share a date of birth, age derivation needs no change at all.
+- **Date of birth is the only required field.** Twins normally share it, so age derivation needs no change at all for multiples.
+
+### RPC: Option A or Option B?
+
+**Recommended: Option B, future-ready now — `save_first_year_journey(p_babies jsonb)`.**
+
+The RPC is backend-only in 16.1B, so accepting an array costs nothing in UI complexity and removes a later breaking signature change. It validates a JSON array of `{ date_of_birth, name?, birth_order? }`, requires at least one and caps at a sane maximum (four), defaults `birth_order` to array position, and marks the lowest `birth_order` as `is_primary`. A one-element array is the version one call, so behaviour is identical to Option A today.
+
+Option A was rejected because a later `add_first_year_baby` RPC would need its own advisory locking, its own primary reassignment logic, and its own sensitive-state guard — three places to keep correct instead of one. Replacing a live single-baby signature later is also riskier than shipping the array shape while nothing calls it.
+
+### What later phases add
+
+- **Phase 16.2/16.3 — First Year setup UI:** "How many babies would you like to add?" (One baby / Twins / More than two / I'll set up one baby for now). Twins or more collect a shared date of birth by default with optional per-baby names, create one row per baby, and mark one primary. Baby switcher and per-baby dashboards wait for a later phase.
+- **A later dedicated phase — pregnancy multiples:** "Are you expecting one baby or more than one?" in pregnancy setup or Account Settings. Deliberately deferred: collecting it forces baby/babies wording, My Week copy, visuals, AI context and sensitivity rules to change together, which is far larger than 16.1B.
+
 
 ---
 
@@ -102,7 +117,7 @@ Unit tests at boundaries: day 0, day 6/7, week 11/12/13 for the postpartum edge,
 - **Create the First Year journey only when the user enters a date of birth**, not automatically when pregnancy is marked given birth. Marking given birth is a status change that may happen days before the parent wants a new journey, and an auto-created empty journey would silently flip the active lifecycle away from pregnancy.
 - **The pregnancy journey stays reachable and read-only.** When First Year is created, the pregnancy journey is snapshotted into `archived_journeys` with `ended_reason = 'transitioned'`, and `first_year_journeys.archived_pregnancy_journey_id` points at it. `/kept-chapter` remains the way back.
 - **Archived pregnancy memories stay reachable** because `week_photos` and `week_media_memories` are keyed by `user_id` and pregnancy week, not by the journey pointer. Nothing needs migrating; `/kept-chapter` and the memory film keep reading them. First Year memories get their own table later rather than stretching the 1-42 week CHECK.
-- A `save_first_year_journey(p_date_of_birth, p_name)` RPC, SECURITY INVOKER, advisory-locked on the user id, does the archive-then-create in one transaction — the same shape as `save_pregnancy_journey`.
+- A `save_first_year_journey(p_babies jsonb)` RPC, SECURITY INVOKER, advisory-locked on the user id, validates the baby array, archives the pregnancy journey and creates the First Year journey plus one row per baby in one transaction — the same shape as `save_pregnancy_journey`.
 
 ---
 
@@ -177,7 +192,7 @@ One migration in 16.1B, in the required order for each new table:
 4. Partial unique index on `(user_id) where is_primary`; index on `babies(user_id)`.
 5. `set_updated_at` triggers on both tables.
 6. A validation trigger for `date_of_birth` bounds (trigger, not CHECK, because it depends on `now()`).
-7. `save_first_year_journey` and `delete_active_journey` extension, both SECURITY INVOKER, `search_path` pinned, `EXECUTE` revoked from `PUBLIC` and `anon`, granted to `authenticated` and `service_role` — matching the existing journey RPCs.
+7. `save_first_year_journey(p_babies jsonb)` and the `delete_active_journey` extension, both SECURITY INVOKER, `search_path` pinned, `EXECUTE` revoked from `PUBLIC` and `anon`, granted to `authenticated` and `service_role` — matching the existing journey RPCs. The RPC accepts one to four babies, rejects an empty array, and guarantees exactly one primary.
 
 No changes to `journeys`, `pregnancy_journeys`, `archived_journeys`, storage or existing policies.
 
@@ -203,19 +218,20 @@ No route, page, component, sitemap, analytics or AI file changes in 16.1B.
 - RPC verification: creating a First Year journey while the pregnancy status is `pregnancy_loss`, `paused` or `no_longer_pregnant` is rejected server-side.
 - Archive verification: after a handover, the pregnancy snapshot exists in `archived_journeys` with `ended_reason = 'transitioned'`, and `/kept-chapter` plus the memory film still render every pregnancy memory.
 - Lifecycle verification: `journeys.lifecycle` flips to `first_year` and `getActivePregnancyJourney` correctly returns null afterwards without erroring.
+- Multiples verification: a two-baby array creates two rows sharing a date of birth with `birth_order` 1 and 2 and exactly one primary; an empty array and an over-cap array are both rejected.
 - Full test suite, typecheck, lint and build.
 
 ---
 
 ## What should wait
 
-First Year dashboard, postpartum surfaces, baby tracking (feeding, sleep, nappies), milestones, First Year memories, the transition screen, birth story handover, memory-aware AI, consent storage, export changes, analytics events, twin UI.
+First Year dashboard, postpartum surfaces, baby tracking (feeding, sleep, nappies), milestones, First Year memories, the transition screen, birth story handover, memory-aware AI, consent storage, export changes, analytics events, First Year twins setup UI (16.2/16.3), and the pregnancy multiples question with its wording, visuals, AI-context and sensitivity knock-ons (a later dedicated phase).
 
 ---
 
 ## Final recommendation
 
-Build 16.1B as: two tables, one enum, one save RPC with a server-side sensitive-state guard, one archive-on-handover step, one pure date helper with boundary tests, and a small data-access module. Nothing user-visible ships. That is the smallest change that unblocks 16.2 onwards while leaving multiples, memory continuity and consent free to evolve.
+Build 16.1B as: two tables, one enum, one multiples-capable save RPC (`p_babies jsonb`) with a server-side sensitive-state guard, one archive-on-handover step, one pure date helper with boundary tests, and a small data-access module. Nothing user-visible ships. That is the smallest change that unblocks 16.2 onwards while making twins and multiples a supported future rather than a migration debt.
 
 **Risks and blockers**
 

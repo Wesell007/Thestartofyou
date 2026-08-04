@@ -65,6 +65,39 @@ export type Database = {
         }
         Relationships: []
       }
+      babies: {
+        Row: {
+          birth_order: number
+          created_at: string
+          date_of_birth: string
+          id: string
+          is_primary: boolean
+          name: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          birth_order?: number
+          created_at?: string
+          date_of_birth: string
+          id?: string
+          is_primary?: boolean
+          name?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          birth_order?: number
+          created_at?: string
+          date_of_birth?: string
+          id?: string
+          is_primary?: boolean
+          name?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       baby_movement_notes: {
         Row: {
           created_at: string
@@ -279,6 +312,44 @@ export type Database = {
           used_at?: string | null
         }
         Relationships: []
+      }
+      first_year_journeys: {
+        Row: {
+          archived_pregnancy_journey_id: string | null
+          source_pregnancy_lmp_date: string | null
+          started_at: string
+          status: Database["public"]["Enums"]["first_year_journey_status"]
+          status_changed_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          archived_pregnancy_journey_id?: string | null
+          source_pregnancy_lmp_date?: string | null
+          started_at?: string
+          status?: Database["public"]["Enums"]["first_year_journey_status"]
+          status_changed_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          archived_pregnancy_journey_id?: string | null
+          source_pregnancy_lmp_date?: string | null
+          started_at?: string
+          status?: Database["public"]["Enums"]["first_year_journey_status"]
+          status_changed_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "first_year_journeys_archived_pregnancy_journey_id_fkey"
+            columns: ["archived_pregnancy_journey_id"]
+            isOneToOne: false
+            referencedRelation: "archived_journeys"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       hospital_bag_items: {
         Row: {
@@ -846,6 +917,7 @@ export type Database = {
           read_ct: number
         }[]
       }
+      save_first_year_journey: { Args: { p_babies: Json }; Returns: undefined }
       save_pregnancy_journey: {
         Args: { p_due_date: string; p_lmp_date: string }
         Returns: undefined
@@ -873,6 +945,7 @@ export type Database = {
     }
     Enums: {
       baby_illustration_style: "default" | "light" | "medium" | "deep"
+      first_year_journey_status: "active" | "paused" | "completed"
       pregnancy_journey_status:
         | "active"
         | "given_birth"
@@ -1007,6 +1080,7 @@ export const Constants = {
   public: {
     Enums: {
       baby_illustration_style: ["default", "light", "medium", "deep"],
+      first_year_journey_status: ["active", "paused", "completed"],
       pregnancy_journey_status: [
         "active",
         "given_birth",

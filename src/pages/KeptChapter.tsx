@@ -408,16 +408,35 @@ const KeptChapter = () => {
                 border: `1px solid ${accentSoft(0.22)}`,
               }}
             >
-              <img
-                src={realism.src}
-                alt={realismAlt}
-                loading="eager"
-                decoding="async"
-                className="w-full h-full object-cover"
-              />
-
+              {imageFailed ? (
+                <>
+                  <div
+                    aria-hidden="true"
+                    className="w-full h-full flex items-center justify-center"
+                  >
+                    <div
+                      className="w-[58%] h-[58%] rounded-full"
+                      style={{
+                        background: `radial-gradient(circle at 50% 45%, ${tint(0.65)}, ${accentSoft(0.14)} 70%, transparent 78%)`,
+                        border: `1px solid ${accentSoft(0.28)}`,
+                      }}
+                    />
+                  </div>
+                  <span className="sr-only">{realismAlt}</span>
+                </>
+              ) : (
+                <img
+                  src={realism.src}
+                  alt={realismAlt}
+                  loading="eager"
+                  decoding="async"
+                  onError={() => setFailedIllustrationSrc(realism.src)}
+                  className="w-full h-full object-cover"
+                />
+              )}
             </div>
           </div>
+
 
           {/* Adjacent kept-chapter quiet links, immediately under the header */}
           {(prevKept || nextKept) && (

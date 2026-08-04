@@ -123,6 +123,9 @@ const AccountSettings = () => {
         supabase.from("contraction_events").select("*").eq("user_id", userId),
         supabase.from("pregnancy_symptom_notes").select("*").eq("user_id", userId),
         supabase.from("midwife_questions").select("*").eq("user_id", userId),
+        // Phase 16.1B: first year records.
+        supabase.from("first_year_journeys").select("*").eq("user_id", userId),
+        supabase.from("babies").select("*").eq("user_id", userId),
       ]);
       const error = results.find((result) => result.error)?.error;
       if (error) throw error;

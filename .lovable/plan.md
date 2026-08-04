@@ -117,7 +117,7 @@ Unit tests at boundaries: day 0, day 6/7, week 11/12/13 for the postpartum edge,
 - **Create the First Year journey only when the user enters a date of birth**, not automatically when pregnancy is marked given birth. Marking given birth is a status change that may happen days before the parent wants a new journey, and an auto-created empty journey would silently flip the active lifecycle away from pregnancy.
 - **The pregnancy journey stays reachable and read-only.** When First Year is created, the pregnancy journey is snapshotted into `archived_journeys` with `ended_reason = 'transitioned'`, and `first_year_journeys.archived_pregnancy_journey_id` points at it. `/kept-chapter` remains the way back.
 - **Archived pregnancy memories stay reachable** because `week_photos` and `week_media_memories` are keyed by `user_id` and pregnancy week, not by the journey pointer. Nothing needs migrating; `/kept-chapter` and the memory film keep reading them. First Year memories get their own table later rather than stretching the 1-42 week CHECK.
-- A `save_first_year_journey(p_date_of_birth, p_name)` RPC, SECURITY INVOKER, advisory-locked on the user id, does the archive-then-create in one transaction — the same shape as `save_pregnancy_journey`.
+- A `save_first_year_journey(p_babies jsonb)` RPC, SECURITY INVOKER, advisory-locked on the user id, validates the baby array, archives the pregnancy journey and creates the First Year journey plus one row per baby in one transaction — the same shape as `save_pregnancy_journey`.
 
 ---
 

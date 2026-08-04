@@ -218,6 +218,7 @@ No route, page, component, sitemap, analytics or AI file changes in 16.1B.
 - RPC verification: creating a First Year journey while the pregnancy status is `pregnancy_loss`, `paused` or `no_longer_pregnant` is rejected server-side.
 - Archive verification: after a handover, the pregnancy snapshot exists in `archived_journeys` with `ended_reason = 'transitioned'`, and `/kept-chapter` plus the memory film still render every pregnancy memory.
 - Lifecycle verification: `journeys.lifecycle` flips to `first_year` and `getActivePregnancyJourney` correctly returns null afterwards without erroring.
+- Multiples verification: a two-baby array creates two rows sharing a date of birth with `birth_order` 1 and 2 and exactly one primary; an empty array and an over-cap array are both rejected.
 - Full test suite, typecheck, lint and build.
 
 ---

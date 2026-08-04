@@ -13,6 +13,13 @@ REVOKE ALL ON public.first_year_journeys FROM PUBLIC;
 
 Same hardened pattern as Phase 12.6e. Existing `authenticated` and `service_role` grants stay untouched, so app behaviour is unchanged. After applying, re-read `relacl` on both tables and report the exact `anon` and `PUBLIC` result.
 
+Current state already read (`pg_class.relacl`):
+
+- `babies` and `first_year_journeys` both show `anon=arwdDxtm/postgres` — full table privileges held by `anon`.
+- Neither table has any `PUBLIC` entry, so the `PUBLIC` revokes are no-ops kept in the migration for consistency with the Phase 12.6e pattern.
+
+Default privileges (`pg_default_acl`), reported not changed: the Supabase-managed defaults for `postgres` and `supabase_admin` on the `public` schema still grant `arwdDxtm` on future tables to `anon`, `authenticated` and `service_role`. That is why every new table starts with `anon` privileges and must be revoked per table. Altering those platform-level defaults is outside the Phase 12.6e pattern and outside this phase's scope, so this phase only reports it; the per-table revoke stays the working convention.
+
 ## 2. Live signed-in verification
 
 Run against the injected signed-in test session. Capture the prior state first (`journeys`, `pregnancy_journeys`, `first_year_journeys`, `babies`, `archived_journeys`) and restore it exactly afterwards.

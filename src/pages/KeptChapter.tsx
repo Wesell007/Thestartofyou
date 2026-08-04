@@ -286,6 +286,7 @@ const KeptChapter = () => {
   const isSensitive = status !== "active" && !revealed;
   const realism = resolveRealismForWeek(week, tone);
   const realismAlt = defaultRealismAltForWeek(week);
+  const imageFailed = failedIllustrationSrc === realism.src;
   const trimester = trimesterLabelFor(week);
 
   // Adjacent KEPT chapters (not just adjacent week numbers). Calmer browsing.

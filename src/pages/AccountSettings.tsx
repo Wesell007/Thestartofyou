@@ -147,6 +147,8 @@ const AccountSettings = () => {
         contractionEvents,
         symptomNotes,
         midwifeQuestions,
+        firstYearJourney,
+        babies,
       ] = results;
       const payload = {
         exported_at: new Date().toISOString(),

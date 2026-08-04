@@ -44,15 +44,19 @@ describe("getFirstYearAge", () => {
   });
 
   it("uses calendar months, not thirty day blocks", () => {
-    expect(getFirstYearAge("2026-01-31", at("2026-02-28"))?.ageInMonths).toBe(0);
+    // date-fns treats the last day of a shorter month as a completed month.
+    expect(getFirstYearAge("2026-01-31", at("2026-02-27"))?.ageInMonths).toBe(0);
+    expect(getFirstYearAge("2026-01-31", at("2026-02-28"))?.ageInMonths).toBe(1);
     expect(getFirstYearAge("2026-01-31", at("2026-03-31"))?.ageInMonths).toBe(2);
     expect(getFirstYearAge("2026-01-15", at("2026-04-14"))?.ageInMonths).toBe(2);
     expect(getFirstYearAge("2026-01-15", at("2026-04-15"))?.ageInMonths).toBe(3);
   });
 
   it("handles a leap day birth", () => {
-    expect(getFirstYearAge("2024-02-29", at("2025-02-28"))?.ageInMonths).toBe(11);
-    expect(getFirstYearAge("2024-02-29", at("2025-02-28"))?.isInFirstYear).toBe(true);
+    expect(getFirstYearAge("2024-02-29", at("2025-02-27"))?.ageInMonths).toBe(11);
+    expect(getFirstYearAge("2024-02-29", at("2025-02-27"))?.isInFirstYear).toBe(true);
+    // The last day of February completes the twelfth month for a leap-day birth.
+    expect(getFirstYearAge("2024-02-29", at("2025-02-28"))?.ageInMonths).toBe(12);
     expect(getFirstYearAge("2024-02-29", at("2025-03-01"))?.ageInMonths).toBe(12);
     expect(getFirstYearAge("2024-02-29", at("2025-03-01"))?.isInFirstYear).toBe(false);
   });

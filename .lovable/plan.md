@@ -192,7 +192,7 @@ One migration in 16.1B, in the required order for each new table:
 4. Partial unique index on `(user_id) where is_primary`; index on `babies(user_id)`.
 5. `set_updated_at` triggers on both tables.
 6. A validation trigger for `date_of_birth` bounds (trigger, not CHECK, because it depends on `now()`).
-7. `save_first_year_journey` and `delete_active_journey` extension, both SECURITY INVOKER, `search_path` pinned, `EXECUTE` revoked from `PUBLIC` and `anon`, granted to `authenticated` and `service_role` — matching the existing journey RPCs.
+7. `save_first_year_journey(p_babies jsonb)` and the `delete_active_journey` extension, both SECURITY INVOKER, `search_path` pinned, `EXECUTE` revoked from `PUBLIC` and `anon`, granted to `authenticated` and `service_role` — matching the existing journey RPCs. The RPC accepts one to four babies, rejects an empty array, and guarantees exactly one primary.
 
 No changes to `journeys`, `pregnancy_journeys`, `archived_journeys`, storage or existing policies.
 

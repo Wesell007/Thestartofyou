@@ -48,8 +48,19 @@ Static reading of the RPC shows each of these rules present and correct, and `ca
 
 ## Plan for closing Phase 16.1B
 
-1. Apply the `anon` revoke migration above.
+1. Apply the `anon` revoke migration above (also revoking any `PUBLIC` table privileges on both tables using the same hardened pattern as Phase 12.6e).
 2. Run a live signed-in RPC exercise against the injected session: save one, two, three and four babies in turn; assert `birth_order`, names and the single primary each time; assert the four rejection cases raise; assert the sensitive-state guard rejects and `given_birth` succeeds; assert the archive row, `ended_reason`, linkage and lifecycle flip; then re-read pregnancy memories and Kept Chapter to confirm no regression. Restore the account to its prior state afterwards.
 3. Report the exact results and close the phase.
 
 No Phase 16.2 work, no First Year setup UI, no dashboard, no Postpartum surfaces, no AI continuity work.
+
+## Recorded design requirement for the first user-facing First Year / Postpartum phase
+
+Not part of Phase 16.1B. Phase 16.1B stays backend-only with no UI or colour changes. This applies from Phase 16.2 or 16.3 onward.
+
+- Signed-in First Year journey surfaces must feel visually connected to the public First Year hub, the public Postpartum hub, and the existing premium design system. They must not look like a pregnancy page with baby data added.
+- Before building First Year setup or a dashboard, audit `src/pages/FirstYear.tsx`, `src/pages/Postpartum.tsx`, `src/components/firstyear/*` and `src/pages/firstyear/*`, including the postpartum recovery, emotional wellbeing, and body and hormones topic areas, and reuse the existing colours, accents, surfaces, gradients, cards and section treatments. Existing tokens in use: `--stage-firstyear` (+ `-soft`, `-accent`, `-deep`), `--stage-recovery` (+ `-soft`, `-accent`, `-deep`), `--stage-postpartum` (+ `-accent`).
+- No new palette unless the existing hub colours turn out inconsistent or technically unusable.
+- Two lanes, one journey: "For baby" uses the First Year language (calm, warm, practical); "For you" uses the Postpartum/recovery language (softer, emotionally supportive). No hard split that makes Postpartum feel like a separate product. Framing: one First Year journey, with two sides of support.
+- Visual QA for that phase: compare against `/first-year` and `/postpartum`; colours feel connected; pregnancy colours not reused by default; the two lanes feel distinct but part of one product; mobile keeps the premium feel; no palette drift.
+

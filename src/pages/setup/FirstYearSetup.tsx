@@ -225,8 +225,22 @@ const FirstYearSetup = () => {
                 draft={draft}
                 errors={errors}
                 onCountChange={(count) => setDraft((d) => setBabyCount(d, count))}
-                onNameChange={(index, name) => setDraft((d) => setBabyName(d, index, name))}
-                onDateChange={(value) => setDraft((d) => ({ ...d, dateOfBirth: value }))}
+                onNameChange={(index, name) => {
+                  setDraft((d) => setBabyName(d, index, name));
+                  setErrors((e) => {
+                    if (!e.names?.[index]) return e;
+                    const names = { ...e.names };
+                    delete names[index];
+                    return {
+                      ...e,
+                      names: Object.keys(names).length > 0 ? names : undefined,
+                    };
+                  });
+                }}
+                onDateChange={(value) => {
+                  setDraft((d) => ({ ...d, dateOfBirth: value }));
+                  setErrors((e) => (e.dateOfBirth ? { ...e, dateOfBirth: undefined } : e));
+                }}
                 onBack={() => goTo(1)}
                 onContinue={handleBabiesContinue}
               />

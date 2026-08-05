@@ -1,5 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import SeoHead from "@/components/seo/SeoHead";
+import { canEnterFirstYearSetup } from "@/lib/firstYearJourney";
+import {
+  FIRST_YEAR_SETUP_QUIET_LINK_LABEL,
+  FIRST_YEAR_SETUP_ROUTE,
+} from "@/components/firstyear/setup/firstYearSetupConstants";
 import { useNavigate, Link } from "react-router-dom";
 import { differenceInDays, format } from "date-fns";
 import { trackEvent } from "@/lib/analytics";
@@ -352,10 +357,16 @@ const MyJourney = () => {
             </span>
             {status === "given_birth" && (
               <Link
-                to="/first-year"
+                to={
+                  canEnterFirstYearSetup(status)
+                    ? FIRST_YEAR_SETUP_ROUTE
+                    : "/first-year"
+                }
                 className="ml-auto text-sm text-foreground/75 underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
               >
-                Open First Year
+                {canEnterFirstYearSetup(status)
+                  ? FIRST_YEAR_SETUP_QUIET_LINK_LABEL
+                  : "Open First Year"}
               </Link>
             )}
             {status === "pregnancy_loss" && (

@@ -165,7 +165,7 @@ const MyWeek = () => {
         />
         <MyWeekHeader />
         <main className="relative mx-auto w-full max-w-[720px] lg:max-w-[880px] px-4 sm:px-8 md:px-10 pt-16 sm:pt-20">
-          {status === "given_birth" && <SectionPregnancyComplete />}
+          {status === "given_birth" && <SectionPregnancyComplete status={status} />}
           {(status === "paused" || status === "no_longer_pregnant") && (
             <SectionJourneyPaused variant={status} />
           )}

@@ -68,8 +68,9 @@ export const shouldCreateUserForIntent = (intent: AuthIntent): boolean =>
  * Resolve the post-login destination using the documented priority order:
  *   1. Valid return_to protected route
  *   2. Pending journey from start flow → /setup to finish activation
- *   3. Active saved pregnancy journey → /my-week
- *   4. No saved journey → /due-date-calculator (sensible start state)
+ *   3. Active First Year lifecycle → /my-first-year
+ *   4. Active saved pregnancy journey → /my-week
+ *   5. No saved journey → /due-date-calculator (sensible start state)
  */
 export const resolvePostLoginDestination = async (
   userId: string,
@@ -82,6 +83,16 @@ export const resolvePostLoginDestination = async (
 
   const pending = readPendingJourney();
   if (pending) return "/setup";
+
+  // Lifecycle pointer first: once a user has moved into their First Year the
+  // pregnancy journey no longer exists, which would otherwise look the same as
+  // never having started one.
+  const { data: pointer } = await supabase
+    .from("journeys")
+    .select("lifecycle")
+    .eq("user_id", userId)
+    .maybeSingle();
+  if (pointer?.lifecycle === "first_year") return "/my-first-year";
 
   const journey = await getActivePregnancyJourney(userId, { throwOnError: true });
   if (journey) {

@@ -97,6 +97,7 @@ const Auth = lazy(() => import("./pages/Auth.tsx"));
 const Setup = lazy(() => import("./pages/Setup.tsx"));
 const SetupTTC = lazy(() => import("./pages/SetupTTC.tsx"));
 const FirstYearSetup = lazy(() => import("./pages/setup/FirstYearSetup.tsx"));
+const MyFirstYear = lazy(() => import("./pages/firstyear/MyFirstYear.tsx"));
 const MyTTCJourney = lazy(() => import("./pages/MyTTCJourney.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const Privacy = lazy(() => import("./pages/Privacy.tsx"));

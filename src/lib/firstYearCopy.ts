@@ -1,80 +1,68 @@
 import { getFirstYearAge } from "@/lib/firstYearDates";
 
-/**
- * Display copy for the signed-in First Year surfaces.
- *
- * Pure and multiples-aware. Each baby carries its own date of birth, so a
- * shared age sentence is only ever produced when every baby really is the same
- * age. Today's setup flow saves one shared date, but nothing here assumes it.
- */
-
+/** The minimum shape the copy helpers need from a baby record. */
 export type BabyForCopy = {
   date_of_birth: string;
   name?: string | null;
-  birth_order?: number;
+  birth_order?: number | null;
 };
 
-const ORDINAL_FALLBACK = [
-  "your first baby",
-  "your second baby",
-  "your third baby",
-  "your fourth baby",
-];
+const ORDINALS = ["first", "second", "third", "fourth"];
+const COUNT_WORDS = ["", "one", "two", "three", "four"];
 
-const COUNT_WORD = ["", "baby", "two babies", "three babies", "four babies"];
-
-const cleanName = (name?: string | null): string | null => {
-  const trimmed = name?.trim();
-  return trimmed && trimmed.length > 0 ? trimmed : null;
+const cleanName = (name: string | null | undefined): string | null => {
+  const trimmed = (name ?? "").trim();
+  return trimmed.length > 0 ? trimmed : null;
 };
 
-/** Join a list into natural British prose: "a, b and c". */
-export const joinWithAnd = (parts: string[]): string => {
+const sortBabies = (babies: BabyForCopy[]): BabyForCopy[] =>
+  [...babies].sort((a, b) => (a.birth_order ?? 0) - (b.birth_order ?? 0));
+
+const ordinalLabel = (baby: BabyForCopy, index: number): string => {
+  const ordinal = ORDINALS[(baby.birth_order ?? index + 1) - 1] ?? "next";
+  return `your ${ordinal} baby`;
+};
+
+const joinNaturally = (parts: string[]): string => {
   if (parts.length === 0) return "";
   if (parts.length === 1) return parts[0];
   return `${parts.slice(0, -1).join(", ")} and ${parts[parts.length - 1]}`;
 };
 
-/** How the babies are referred to as a group, e.g. "Ada", "Ada and Mia". */
+/**
+ * Describe the babies as a subject phrase, for example "Ada", "Ada and Mia"
+ * or "your two babies" when no names were given.
+ */
 export const describeBabies = (babies: BabyForCopy[]): string => {
-  if (babies.length === 0) return "your baby";
-  const names = babies.map((b) => cleanName(b.name));
-  const namedCount = names.filter(Boolean).length;
+  const ordered = sortBabies(babies);
+  if (ordered.length === 0) return "your baby";
+  if (ordered.length === 1) return cleanName(ordered[0].name) ?? "your baby";
 
-  if (babies.length === 1) {
-    return names[0] ?? "your baby";
-  }
-  if (namedCount === 0) {
-    return `your ${COUNT_WORD[Math.min(babies.length, 4)]}`;
-  }
-  const parts = babies.map((baby, index) => {
-    const name = names[index];
-    if (name) return name;
-    const order = (baby.birth_order ?? index + 1) - 1;
-    return ORDINAL_FALLBACK[Math.min(Math.max(order, 0), 3)];
-  });
-  return joinWithAnd(parts);
+  const anyNamed = ordered.some((b) => cleanName(b.name));
+  if (!anyNamed) return `your ${COUNT_WORDS[ordered.length] ?? "own"} babies`;
+
+  return joinNaturally(ordered.map((b, i) => cleanName(b.name) ?? ordinalLabel(b, i)));
 };
 
-/** Sentence-case a subject that may start with a lower-case "your". */
-const sentenceCase = (value: string): string =>
-  value.length > 0 ? value[0].toUpperCase() + value.slice(1) : value;
-
-/** Human age phrase, e.g. "4 days old", "3 weeks old", "5 months old". */
+/**
+ * Describe an age in the gentlest unit that is still accurate: today, days,
+ * weeks, then completed calendar months.
+ */
 export const describeAge = (
   dateOfBirth: string,
   reference: Date = new Date(),
 ): string | null => {
   const age = getFirstYearAge(dateOfBirth, reference);
   if (!age) return null;
-  if (age.ageInMonths >= 1) {
-    return `${age.ageInMonths} ${age.ageInMonths === 1 ? "month" : "months"} old`;
-  }
-  if (age.ageInDays >= 7) {
-    return `${age.ageInWeeks} ${age.ageInWeeks === 1 ? "week" : "weeks"} old`;
-  }
+
   if (age.ageInDays === 0) return "here today";
-  return `${age.ageInDays} ${age.ageInDays === 1 ? "day" : "days"} old`;
+  if (age.ageInMonths >= 1) {
+    return age.ageInMonths === 1 ? "1 month old" : `${age.ageInMonths} months old`;
+  }
+  if (age.ageInWeeks >= 1) {
+    return age.ageInWeeks === 1 ? "1 week old" : `${age.ageInWeeks} weeks old`;
+  }
+  return age.ageInDays === 1 ? "1 day old" : `${age.ageInDays} days old`;
 };
 
 /** True when every baby resolves to the same age phrase. */
@@ -82,47 +70,40 @@ export const babiesShareAge = (
   babies: BabyForCopy[],
   reference: Date = new Date(),
 ): boolean => {
-  if (babies.length < 2) return true;
-  const first = describeAge(babies[0].date_of_birth, reference);
-  return babies.every((b) => describeAge(b.date_of_birth, reference) === first);
+  const ages = babies.map((b) => describeAge(b.date_of_birth, reference));
+  return ages.length > 0 && ages.every((a) => a !== null && a === ages[0]);
 };
 
 /**
- * The main age line, e.g. "Ada is 3 weeks old." When babies have different
- * ages, each is stated separately rather than asserting a false shared age.
+ * One honest sentence about how old the babies are. Multiples only get a
+ * shared age sentence when their ages actually match.
  */
 export const babyAgeSentence = (
   babies: BabyForCopy[],
   reference: Date = new Date(),
 ): string => {
-  if (babies.length === 0) return "";
-  const subject = describeBabies(babies);
+  const ordered = sortBabies(babies).filter((b) => describeAge(b.date_of_birth, reference));
+  if (ordered.length === 0) return "";
 
-  if (babiesShareAge(babies, reference)) {
-    const age = describeAge(babies[0].date_of_birth, reference);
-    if (!age) return "";
-    const verb = babies.length === 1 ? "is" : "are";
-    if (age === "here today") {
-      return `${sentenceCase(subject)} ${verb} here.`;
-    }
-    return `${sentenceCase(subject)} ${verb} ${age}.`;
+  const subject = describeBabies(ordered);
+  const plural = ordered.length > 1;
+
+  if (babiesShareAge(ordered, reference)) {
+    const age = describeAge(ordered[0].date_of_birth, reference)!;
+    if (age === "here today") return `${subject} ${plural ? "are" : "is"} here.`;
+    return `${subject} ${plural ? "are" : "is"} ${age}.`;
   }
 
-  const parts = babies
-    .map((baby, index) => {
-      const age = describeAge(baby.date_of_birth, reference);
-      if (!age) return null;
-      const name =
-        cleanName(baby.name) ??
-        ORDINAL_FALLBACK[Math.min(Math.max((baby.birth_order ?? index + 1) - 1, 0), 3)];
+  return `${joinNaturally(
+    ordered.map((b, i) => {
+      const name = cleanName(b.name) ?? ordinalLabel(b, i);
+      const age = describeAge(b.date_of_birth, reference)!;
       return age === "here today" ? `${name} is here` : `${name} is ${age}`;
-    })
-    .filter((part): part is string => part !== null);
-  if (parts.length === 0) return "";
-  return `${sentenceCase(joinWithAnd(parts))}.`;
+    }),
+  )}.`;
 };
 
-/** Supporting hero line that includes the parent. */
+/** Hero support line: the age sentence plus a line for the parent. */
 export const heroSupportLine = (
   babies: BabyForCopy[],
   reference: Date = new Date(),
@@ -131,22 +112,20 @@ export const heroSupportLine = (
   return age ? `${age} You are in a new chapter too.` : "You are in a new chapter too.";
 };
 
-/** Public month page slug for a first-year month index (0-11). */
+/** Public First Year month guide slug for a 0-11 month index. */
 export const monthPageSlug = (monthIndex: number): string => {
-  const index = Math.min(11, Math.max(0, Math.round(monthIndex)));
+  const index = Math.min(11, Math.max(0, Math.trunc(monthIndex) || 0));
   if (index === 0) return "newborn";
-  if (index === 1) return "1-month";
-  return `${index}-months`;
+  return index === 1 ? "1-month" : `${index}-months`;
 };
 
-/** Route for the public month guide matching a baby's age. */
+/** Full public route for the month guide. */
 export const monthPagePath = (monthIndex: number): string =>
   `/first-year/${monthPageSlug(monthIndex)}`;
 
-/** Friendly label for the month guide link. */
+/** Reading CTA label for the month guide. */
 export const monthPageLabel = (monthIndex: number): string => {
-  const index = Math.min(11, Math.max(0, Math.round(monthIndex)));
+  const index = Math.min(11, Math.max(0, Math.trunc(monthIndex) || 0));
   if (index === 0) return "Read the newborn guide";
-  if (index === 1) return "Read the 1 month guide";
-  return `Read the ${index} months guide`;
+  return index === 1 ? "Read the 1 month guide" : `Read the ${index} months guide`;
 };

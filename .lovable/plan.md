@@ -28,8 +28,17 @@ Existing 16.1B foundation only, unchanged: `getActiveFirstYearJourney`, `getBabi
 
 1. **Welcome hero** — "Your First Year journey has begun." plus the derived age line and "You are in a new chapter too." No date of birth shown.
 2. **Baby summary card** — name or fallback wording, derived age, multiples-aware, quiet link to the matching public month guide via `firstYearMonthIndex`.
-3. **For baby lane** — feeding, sleep, development and milestones, nappies and care, check-ups and questions, linking to `/first-year/feeding`, `/sleep`, `/development`, `/care-and-safety`, `/checkups-and-warning-signs`.
-4. **For you lane** — recovery after birth, body and hormones, emotional wellbeing, questions for your midwife, GP or health visitor, and rest and support, using existing public recovery routes only.
+3. **For baby lane** — five cards, each using the full public route, never a shortened path:
+   - Feeding rhythm → `/first-year/feeding`
+   - Sleep rhythm → `/first-year/sleep`
+   - Development and milestones → `/first-year/development`
+   - Nappies and care → `/first-year/care-and-safety`
+   - Check-ups and questions → `/first-year/checkups-and-warning-signs`
+4. **For you lane** — existing public First Year routes only, no new pages:
+   - Recovery after birth → `/first-year/postpartum-recovery`
+   - Body and hormones → `/first-year/body-and-hormones`
+   - Emotional wellbeing → `/first-year/emotional-wellbeing`
+   - Questions for your midwife, GP or health visitor → `/first-year/checkups-and-warning-signs`
 5. **Pregnancy chapter kept** — warm reassurance that the pregnancy chapter is kept, memories stay readable and kept weeks remain open. No archive or lifecycle language.
 6. **What comes next** — subtle: more support coming, nothing is tracked yet, Cindy is still here and is not using anything private.
 

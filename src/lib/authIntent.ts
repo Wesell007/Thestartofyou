@@ -25,6 +25,7 @@ export type AuthIntent = "start_journey" | "sign_in" | "return_to_route";
 export const PROTECTED_ROUTE_PREFIXES = [
   "/my-week",
   "/my-journey",
+  "/my-first-year",
   "/my-ttc-journey",
   "/setup/trying-to-conceive",
   "/setup/first-year",

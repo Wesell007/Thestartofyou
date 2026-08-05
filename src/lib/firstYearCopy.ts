@@ -23,6 +23,9 @@ const ordinalLabel = (baby: BabyForCopy, index: number): string => {
   return `your ${ordinal} baby`;
 };
 
+const capitaliseFirst = (text: string): string =>
+  text.length > 0 ? text.charAt(0).toUpperCase() + text.slice(1) : text;
+
 const joinNaturally = (parts: string[]): string => {
   if (parts.length === 0) return "";
   if (parts.length === 1) return parts[0];
@@ -90,17 +93,18 @@ export const babyAgeSentence = (
 
   if (babiesShareAge(ordered, reference)) {
     const age = describeAge(ordered[0].date_of_birth, reference)!;
-    if (age === "here today") return `${subject} ${plural ? "are" : "is"} here.`;
-    return `${subject} ${plural ? "are" : "is"} ${age}.`;
+    if (age === "here today")
+      return capitaliseFirst(`${subject} ${plural ? "are" : "is"} here.`);
+    return capitaliseFirst(`${subject} ${plural ? "are" : "is"} ${age}.`);
   }
 
-  return `${joinNaturally(
+  return capitaliseFirst(`${joinNaturally(
     ordered.map((b, i) => {
       const name = cleanName(b.name) ?? ordinalLabel(b, i);
       const age = describeAge(b.date_of_birth, reference)!;
       return age === "here today" ? `${name} is here` : `${name} is ${age}`;
     }),
-  )}.`;
+  )}.`);
 };
 
 /** Hero support line: the age sentence plus a line for the parent. */

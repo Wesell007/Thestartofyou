@@ -4,7 +4,7 @@
  */
 
 /** Where a completed First Year setup lands the user. */
-export const FIRST_YEAR_POST_SAVE_DESTINATION = "/my-journey";
+export const FIRST_YEAR_POST_SAVE_DESTINATION = "/my-first-year";
 
 /** The protected route for this flow. */
 export const FIRST_YEAR_SETUP_ROUTE = "/setup/first-year";

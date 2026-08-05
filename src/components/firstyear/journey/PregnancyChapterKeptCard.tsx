@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 type Props = {
   /** True once the pregnancy chapter has been kept for this user. */
   hasKeptChapter: boolean;
@@ -29,14 +27,6 @@ const PregnancyChapterKeptCard = ({ hasKeptChapter }: Props) => (
           ? "Nothing you wrote or saved has gone anywhere. Your weeks, photos, videos, voice notes and reflections are still yours to open whenever you want to look back."
           : "Anything you saved during pregnancy stays yours. You can look back on it whenever you want to."}
       </p>
-      <div className="mt-6">
-        <Link
-          to="/my-journey"
-          className="inline-flex items-center rounded-pill border border-border/60 bg-parchment px-5 py-2.5 font-sans text-sm text-foreground/85 transition-colors hover:border-foreground/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-        >
-          Revisit your pregnancy memories
-        </Link>
-      </div>
     </div>
   </section>
 );

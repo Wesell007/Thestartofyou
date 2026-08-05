@@ -1,10 +1,22 @@
 import { Link } from "react-router-dom";
 import { MY_WEEK_PANELS } from "@/lib/journeyStatusCopy";
+import { canEnterFirstYearSetup } from "@/lib/firstYearJourney";
+import {
+  FIRST_YEAR_SETUP_CTA_LABEL,
+  FIRST_YEAR_SETUP_ROUTE,
+} from "@/components/firstyear/setup/firstYearSetupConstants";
 
 const accent = "hsl(var(--stage-pregnancy-accent))";
 
-const SectionPregnancyComplete = () => {
+type Props = {
+  /** Current pregnancy journey status, used to guard the setup invitation. */
+  status?: string | null;
+};
+
+const SectionPregnancyComplete = ({ status }: Props) => {
   const copy = MY_WEEK_PANELS.given_birth;
+  const canStartFirstYear = canEnterFirstYearSetup(status);
+
   return (
     <section className="pt-8 pb-12">
       <div
@@ -25,11 +37,12 @@ const SectionPregnancyComplete = () => {
         </p>
         <div className="flex flex-col sm:flex-row flex-wrap gap-3">
           <Link
-            to="/first-year"
+            to={canStartFirstYear ? FIRST_YEAR_SETUP_ROUTE : "/first-year"}
             className="inline-flex items-center justify-center rounded-pill bg-terracotta text-terracotta-foreground px-5 py-2.5 text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
           >
-            Open First Year
+            {canStartFirstYear ? FIRST_YEAR_SETUP_CTA_LABEL : "Open First Year"}
           </Link>
+
           <Link
             to="/my-journey"
             className="inline-flex items-center justify-center rounded-pill border border-border/60 bg-parchment px-5 py-2.5 text-sm text-foreground/85 hover:border-foreground/25 transition-colors"

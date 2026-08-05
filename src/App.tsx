@@ -96,6 +96,7 @@ const KeptChapter = lazy(() => import("./pages/KeptChapter.tsx"));
 const Auth = lazy(() => import("./pages/Auth.tsx"));
 const Setup = lazy(() => import("./pages/Setup.tsx"));
 const SetupTTC = lazy(() => import("./pages/SetupTTC.tsx"));
+const FirstYearSetup = lazy(() => import("./pages/setup/FirstYearSetup.tsx"));
 const MyTTCJourney = lazy(() => import("./pages/MyTTCJourney.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const Privacy = lazy(() => import("./pages/Privacy.tsx"));
@@ -327,6 +328,7 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/setup" element={<Setup />} />
           <Route path="/setup/trying-to-conceive" element={<SetupTTC />} />
+          <Route path="/setup/first-year" element={<ProtectedRoute><FirstYearSetup /></ProtectedRoute>} />
           <Route path="/:journey/:stage" element={<StagePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

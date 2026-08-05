@@ -27,6 +27,7 @@ export const PROTECTED_ROUTE_PREFIXES = [
   "/my-journey",
   "/my-ttc-journey",
   "/setup/trying-to-conceive",
+  "/setup/first-year",
 ];
 
 export const isProtectedPath = (pathname: string): boolean =>

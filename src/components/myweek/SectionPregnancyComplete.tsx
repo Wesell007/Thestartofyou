@@ -1,10 +1,22 @@
 import { Link } from "react-router-dom";
 import { MY_WEEK_PANELS } from "@/lib/journeyStatusCopy";
+import { canEnterFirstYearSetup } from "@/lib/firstYearJourney";
+import {
+  FIRST_YEAR_SETUP_CTA_LABEL,
+  FIRST_YEAR_SETUP_ROUTE,
+} from "@/components/firstyear/setup/firstYearSetupConstants";
 
 const accent = "hsl(var(--stage-pregnancy-accent))";
 
-const SectionPregnancyComplete = () => {
+type Props = {
+  /** Current pregnancy journey status, used to guard the setup invitation. */
+  status?: string | null;
+};
+
+const SectionPregnancyComplete = ({ status }: Props) => {
   const copy = MY_WEEK_PANELS.given_birth;
+  const canStartFirstYear = canEnterFirstYearSetup(status);
+
   return (
     <section className="pt-8 pb-12">
       <div

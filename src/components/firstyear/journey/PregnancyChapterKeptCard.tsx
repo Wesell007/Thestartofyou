@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 type Props = {
   /** True once the pregnancy chapter has been kept for this user. */
   hasKeptChapter: boolean;

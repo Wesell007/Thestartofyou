@@ -37,11 +37,12 @@ const SectionPregnancyComplete = ({ status }: Props) => {
         </p>
         <div className="flex flex-col sm:flex-row flex-wrap gap-3">
           <Link
-            to="/first-year"
+            to={canStartFirstYear ? FIRST_YEAR_SETUP_ROUTE : "/first-year"}
             className="inline-flex items-center justify-center rounded-pill bg-terracotta text-terracotta-foreground px-5 py-2.5 text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
           >
-            Open First Year
+            {canStartFirstYear ? FIRST_YEAR_SETUP_CTA_LABEL : "Open First Year"}
           </Link>
+
           <Link
             to="/my-journey"
             className="inline-flex items-center justify-center rounded-pill border border-border/60 bg-parchment px-5 py-2.5 text-sm text-foreground/85 hover:border-foreground/25 transition-colors"

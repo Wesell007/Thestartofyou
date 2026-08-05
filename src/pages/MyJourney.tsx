@@ -124,7 +124,18 @@ const MyJourney = () => {
         if (mediaError) throw mediaError;
         if (cancelled) return;
         if (!journey) {
-          navigate("/due-date-calculator", { replace: true });
+          // A user who has moved into their First Year has no pregnancy journey
+          // row, so send them to their current chapter rather than a calculator.
+          const { data: pointer } = await supabase
+            .from("journeys")
+            .select("lifecycle")
+            .eq("user_id", user.id)
+            .maybeSingle();
+          if (cancelled) return;
+          navigate(
+            pointer?.lifecycle === "first_year" ? "/my-first-year" : "/due-date-calculator",
+            { replace: true }
+          );
           return;
         }
         if (!profile?.first_name) {

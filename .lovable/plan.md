@@ -47,7 +47,8 @@ First Year frame: `--stage-firstyear` background, `--stage-firstyear-accent` kic
 ## Files changed
 
 - `src/pages/setup/FirstYearSetup.tsx` (new)
-- `src/components/firstyear/setup/firstYearSetupSchema.ts` (new, includes `FIRST_YEAR_POST_SAVE_DESTINATION`)
+- `src/components/firstyear/setup/firstYearSetupConstants.ts` (new, holds `FIRST_YEAR_POST_SAVE_DESTINATION` and companion option labels — route constants stay out of the schema module)
+- `src/components/firstyear/setup/firstYearSetupSchema.ts` (new, pure validation logic only)
 - `src/components/firstyear/setup/StepIntro.tsx`, `StepBabies.tsx`, `StepCompanion.tsx`, `StepReview.tsx` (new)
 - `src/components/firstyear/setup/firstYearSetupSchema.test.ts` (new)
 - `src/App.tsx`, `src/lib/authIntent.ts`

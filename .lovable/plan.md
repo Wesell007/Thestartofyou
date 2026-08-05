@@ -1,158 +1,62 @@
-# Phase 16.2A — Birth to First Year Transition (Planning)
+# Phase 16.2B — Birth to First Year Transition Build
 
-Planning report only. No code, migrations, routes, UI or AI changes in this phase.
+Build the first user-facing transition from Pregnancy into the First Year journey. No schema, migration, RPC, AI or public content changes.
 
-## 1. Recommended route
+## Route and auth
 
-New protected route: **`/setup/first-year`**
+- New page `src/pages/setup/FirstYearSetup.tsx`, registered in `src/App.tsx` as a lazy protected route at `/setup/first-year`.
+- Add `/setup/first-year` to `PROTECTED_ROUTE_PREFIXES` in `src/lib/authIntent.ts` so signed out users return to the flow after sign in.
+- `SeoHead` with `noindex`. No sitemap or robots changes.
 
-Why:
-- Mirrors the existing setup convention (`/setup`, `/setup/trying-to-conceive`), so auth, layout and navigation behaviour are already understood.
-- Keeps the transition off `/my-week` and `/my-journey`, which stay as reading surfaces rather than becoming multi-step forms.
-- A dedicated route can be linked from several entry points without duplicating the flow.
+## Status guard
 
-Build-phase note: `/setup/first-year` must be added to `PROTECTED_ROUTE_PREFIXES` in `src/lib/authIntent.ts` (currently `/my-week`, `/my-journey`, `/my-ttc-journey`, `/setup/trying-to-conceive`) so sign-in returns the user to the flow.
+On mount the page reads the `journeys` pointer and the pregnancy status, then applies `canEnterFirstYearSetup(status)`:
 
-## 2. Recommended entry points
+- lifecycle already `first_year` → redirect to `FIRST_YEAR_POST_SAVE_DESTINATION`
+- `given_birth` → flow renders
+- `active` → silent redirect to `/my-week`
+- `pregnancy_loss`, `no_longer_pregnant`, `paused`, or no journey → silent redirect to `/my-journey`
 
-Audited surfaces and the recommendation for each:
+No explanatory "you cannot access this" block, no baby age copy in sensitive states. The RPC guard stays untouched.
 
-| Surface | Current given_birth behaviour | Recommendation |
-| --- | --- | --- |
-| `/my-week` → `SectionPregnancyComplete` | Shows "Pregnancy complete" panel with links to `/first-year`, `/my-journey`, Account Settings | **Primary entry point.** Replace the generic "Open First Year" public link with "Start your First Year journey" pointing at `/setup/first-year` |
-| `/my-journey` (status block, ~line 353) | Renders a given_birth block | **Secondary entry point.** One quiet link, no second full panel |
-| Account Settings → `JourneyStatusSection` | Status change only | **No entry point.** Add nothing; the status change itself should not push the user into setup |
-| `ChangeStatusDialog` (choosing "I've given birth") | Confirms and updates status | **No immediate redirect.** After confirming, the `/my-week` panel is where they find the invitation when ready. Avoids pressure at an emotional moment |
-| Kept Chapter | Sensitive/kept-state surface | **No entry point** |
-| Signed-in nav | Journey-aware | No change this phase |
+Note: `getActivePregnancyJourney` returns null once the lifecycle is no longer `pregnancy`, so the page reads the `journeys` pointer first to tell "already in First Year" apart from "no journey".
 
-## 3. Status guard plan
+## Entry points
 
-Single source of truth: `canEnterFirstYearSetup(status)` in `src/lib/firstYearJourney.ts` (`status === "given_birth"`).
+- `src/components/myweek/SectionPregnancyComplete.tsx`: takes a `status` prop from `MyWeek`, and when `canEnterFirstYearSetup(status)` passes the primary CTA becomes "Start your First Year journey" to `/setup/first-year`, replacing the generic public First Year link.
+- `src/pages/MyJourney.tsx`: in the existing `given_birth` chip row, the quiet link points to `/setup/first-year` with the same guard. No second panel.
+- Nothing added to Account Settings, `ChangeStatusDialog`, Kept Chapter or the signed in nav. No redirect after choosing "I've given birth".
 
-- Entry points render the invitation only when the predicate passes.
-- The route itself re-checks on mount: any status other than `given_birth` redirects (`active` → `/my-week`; `pregnancy_loss`, `no_longer_pregnant`, `paused` → `/my-journey`) with no explanatory "you can't do this" message.
-- If lifecycle is already `first_year`, redirect straight to the post-save destination rather than showing setup again.
-- The RPC re-enforces the guard server-side, so a stale client cannot bypass it.
-- No baby-age copy, no transition prompts, no First Year prompts anywhere in sensitive states.
+## Four step flow
 
-## 4. Proposed user flow
+One route, one step visible at a time, quiet "Step 2 of 4" line, no progress bar. Focus moves to the step heading on each change. Back, Edit and Cancel always available; the container reserves height so there is no layout shift.
 
-Four steps in one route, single-column, one step visible at a time, with progress shown as a quiet "Step 2 of 4" line (no progress bar).
+1. **Gentle intro.** "Your pregnancy chapter is kept. Your First Year can begin when you are ready." plus "Everything you saved stays exactly where it is." Actions: Begin, and Not right now which returns to `/my-week`.
+2. **Baby or babies.** Radio group: One baby, Twins, Triplets, Four babies, plus a quiet "I'll set up one baby for now". One shared date of birth, required. Optional name per baby, labelled First baby, Second baby, Third baby, Fourth baby. Birth order is row position, first row is primary. Nothing asked about birth story, birth type, feeding, mental health or trauma.
+3. **Companion choice.** "Cindy is still here. Same companion, new chapter." Options: Continue gently, Personalise Cindy with my pregnancy journey, Decide later. Session state only. The Personalise option says plainly that nothing is shared yet, that Cindy will not use private pregnancy memories yet, and that a later step will let the user choose exactly what she can use.
+4. **Review and start.** Read only summary of baby count, date of birth, names and companion choice, with Edit links to each step. States that the pregnancy chapter is kept and saved memories stay readable. Primary action "Start my First Year journey" calls `saveFirstYearJourney`, then redirects to `FIRST_YEAR_POST_SAVE_DESTINATION` with a brief success toast.
 
-**Step 1 — Gentle intro**
-- Acknowledges the pregnancy chapter, confirms everything saved is kept, states First Year can begin whenever they're ready.
-- Actions: "Begin" (primary) and "Not right now" (returns to `/my-week`).
+## Validation
 
-**Step 2 — Baby or babies**
-- "How many babies?" choice: One baby / Twins / Three / Four, plus a quiet "I'll set up one baby for now".
-- One baby: single date of birth (required) plus optional name.
-- Multiples: one shared date of birth by default, then one optional name row per baby, labelled "First baby", "Second baby"… Birth order comes from row position; the first row is primary.
-- A per-baby date of birth is deliberately deferred: the schema already stores date of birth per baby, so a later phase can add "these babies were born on different days" without a migration. Not needed for V1 because the same-day case covers almost all births.
-- Not asked in this phase: birth story, birth type, feeding method, mental health, trauma.
+Pure logic in `src/components/firstyear/setup/firstYearSetupSchema.ts`: required and valid date of birth, future dates blocked client side, sensible earliest date matching the existing database trigger, 60 character name limit, one to four babies only. Errors are gentle inline sentences tied to fields with `aria-describedby`; RPC failures map to a calm message, never a raw Postgres error.
 
-**Step 3 — Companion choice**
-- Framed as "Same companion, new chapter."
-- Three options: **Continue gently** (default), **Personalise Cindy with my pregnancy journey**, **Decide later**.
-- In this phase all three behave identically at runtime: no AI memory reading, no reflections, photos, videos, voice notes or toolkit notes sent to the AI, no birth story handover.
-- "Personalise" is presented as an intention that will be set up later, with a clear line that nothing is shared until they choose specific items.
+## Visual tokens
 
-**Step 4 — Review and start**
-- Read-only summary of baby count, date of birth, names and the companion choice, with "Edit" links back to each step.
-- Primary action calls `save_first_year_journey(p_babies jsonb)` via `saveFirstYearJourney` in `src/lib/firstYearJourney.ts`.
-- On success: pregnancy journey archived, First Year journey created, babies saved, lifecycle flipped to `first_year`.
+First Year frame: `--stage-firstyear` background, `--stage-firstyear-accent` kickers, `--stage-firstyear-deep` headings. For baby content on `--stage-firstyear-soft`. For you content on `--stage-recovery-soft` with `--stage-recovery-accent` and `--stage-recovery-deep`. `--stage-postpartum-accent` reserved for any recovery link. No pregnancy stage tokens. Existing pill CTAs, card styling, `font-serif` display and 15px body text.
 
-## 5. Copy direction
-
-Warm, calm, premium, British English, sentence case, no dashes.
-- Intro: "Your pregnancy chapter is kept. Your First Year can begin when you are ready."
-- Reassurance: "Everything you saved stays exactly where it is."
-- Companion: "Cindy is still here. Same companion, new chapter."
-- Allowed language: companion memory, personal context, what Cindy can use, carry my pregnancy journey forward.
-- Forbidden: machine learning memory, training, data training. Also no medical claims, no emergency guidance, no AI memory promise.
-
-## 6. Companion choice storage
-
-**Recommendation: no storage in Phase 16.2B.**
-
-The choice has no runtime effect this phase, and persisting a preference now would create a value the later memory-opt-in phase has to reinterpret or migrate. When the real opt-in exists (Phase 16.6), it needs an explicit consent record with a timestamp and a viewable list of what the companion can use — a richer shape than a single enum.
-
-If storage is later judged necessary, the smallest safe model is one nullable text column on `profiles` (`companion_continuity_choice`, values `continue`, `personalise`, `later`), no new table. The build phase can hold the choice in component state for the session only.
-
-## 7. Safest post-save destination
-
-The First Year dashboard does not exist yet. Recommended destination: **`/my-journey`**, which already handles a non-pregnancy lifecycle and shows the kept pregnancy chapter, with a brief success confirmation on arrival.
-
-Rejected alternatives: `/my-week` is pregnancy-week specific and would read as wrong; `/first-year` is a public marketing hub and would feel like being logged out of the journey. Build phase should route through a single constant so Phase 16.3 can repoint it to the real dashboard in one line.
-
-## 8. Visual token plan
-
-The screen must read as "one First Year journey, two sides of support", not a pregnancy page with baby fields.
-
-- Page frame and Step 1: `--stage-firstyear` background with `--stage-firstyear-accent` for kickers and `--stage-firstyear-deep` for headings.
-- "For baby" content (baby count, dates, names): `--stage-firstyear-soft` surfaces.
-- "For you" content (the recovery reassurance line and companion step framing): `--stage-recovery-soft` surface with `--stage-recovery-accent` kicker and `--stage-recovery-deep` heading.
-- `--stage-postpartum` / `--stage-postpartum-accent` reserved for any explicit postpartum recovery link, matching the existing `/postpartum` redirect target `/first-year#recovery-topics`.
-- Typography follows the existing system: `font-serif` for display text, `font-sans` for interface, 15px body, rounded pill CTAs, `keepsake-surface` style cards as used in `SectionPregnancyComplete`.
-- No pregnancy stage tokens anywhere on this screen.
-
-## 9. Files likely to change in the build phase
+## Files changed
 
 - `src/pages/setup/FirstYearSetup.tsx` (new)
-- `src/components/firstyear/setup/*` (new step components)
-- `src/App.tsx` (route registration, protected)
-- `src/lib/authIntent.ts` (add `/setup/first-year` prefix)
-- `src/components/myweek/SectionPregnancyComplete.tsx` (primary entry link)
-- `src/pages/MyJourney.tsx` (secondary quiet link in the given_birth block)
-- New unit tests for the setup form logic and guard behaviour
+- `src/components/firstyear/setup/firstYearSetupSchema.ts` (new, includes `FIRST_YEAR_POST_SAVE_DESTINATION`)
+- `src/components/firstyear/setup/StepIntro.tsx`, `StepBabies.tsx`, `StepCompanion.tsx`, `StepReview.tsx` (new)
+- `src/components/firstyear/setup/firstYearSetupSchema.test.ts` (new)
+- `src/App.tsx`, `src/lib/authIntent.ts`
+- `src/components/myweek/SectionPregnancyComplete.tsx`, `src/pages/MyWeek.tsx` (pass status prop), `src/pages/MyJourney.tsx`
 
-## 10. Files that must not change
+Unchanged: migrations, schema, RLS, RPC logic, Supabase client and types, `companionContext.ts`, `SectionAskAI.tsx`, `ai-search`, toolkit, memory components, realism assets and resolver, sitemap script, robots, public First Year and Postpartum pages. `src/lib/firstYearJourney.ts` and `firstYearDates.ts` stay as built in 16.1B.
 
-- `src/lib/firstYearJourney.ts`, `src/lib/firstYearDates.ts` (foundation is closed)
-- Any migration; no schema change is needed
-- `src/integrations/supabase/client.ts`, `types.ts`
-- AI files: `src/lib/companionContext.ts`, `src/components/myweek/SectionAskAI.tsx`, `supabase/functions/ai-search/*`
-- Pregnancy toolkit, memory, realism assets and resolver
-- `scripts/generate-sitemap.ts`, `public/robots.txt` (the route is protected and non-indexable)
-- Public `/first-year`, `/postpartum` and topic pages
+## Verification
 
-## 11. QA plans
-
-**Sensitive state QA**
-- Each of `active`, `pregnancy_loss`, `no_longer_pregnant`, `paused`: confirm no invitation renders on `/my-week` or `/my-journey`, and direct navigation to `/setup/first-year` redirects silently.
-- `given_birth`: invitation renders and the route loads.
-- Signed out: route sends the user to auth and returns them to the flow after sign in.
-- Lifecycle already `first_year`: no second setup.
-
-**Multiples QA**
-- One, two, three and four babies each save correctly with birth order matching row order and the first baby primary.
-- Shared date of birth applies to every baby.
-- Changing the count after entering names does not lose or misorder remaining rows.
-- Five or more is not reachable in the UI.
-
-**Accessibility QA**
-- Mobile-first single column, tested at 375px and desktop.
-- Every field has a visible associated label; the count choice is a proper radio group.
-- Full keyboard traversal, visible focus states, focus moved to the step heading on step change.
-- Inline validation is gentle and specific ("Please add a date of birth"), announced to screen readers, never a raw error code or Postgres message.
-- Back, Edit and Cancel are always available and never destructive without confirmation.
-- No layout shift between steps; the container reserves height.
-
-## 12. Risks and blockers
-
-- Emotional risk: appearing too soon after a status change. Mitigated by not redirecting from the status dialog.
-- Irreversibility: the save archives the pregnancy journey and flips lifecycle. Step 4 must state plainly that the pregnancy chapter is kept and readable, and the build phase should confirm there is a supported way back if a user saves in error.
-- Destination gap: `/my-journey` is a stopgap until Phase 16.3; route it through one constant.
-- Companion expectation: "Personalise" must not imply anything is happening yet.
-
-## 13. Recommended Phase 16.2B build scope
-
-1. Add `/setup/first-year` as a protected route and register the auth prefix.
-2. Build the four-step flow with First Year and recovery tokens.
-3. Multiples-ready baby setup for one to four babies, shared date of birth.
-4. Companion choice, session state only, no storage.
-5. Wire Step 4 to `saveFirstYearJourney`, redirect to `/my-journey` via a single constant.
-6. Update the two entry points, guarded by `canEnterFirstYearSetup`.
-7. Unit tests for guard and form logic, plus a live pass across the QA plans above.
-
-Explicitly out of scope: dashboards, tracking, milestones, First Year memories, birth story, memory-aware AI, AI context changes, pregnancy multiples, baby switcher. Analytics events are recommended for a later phase once the dashboard exists.
+- `npx tsgo --noEmit -p tsconfig.json`
+- Unit tests for validation, count changes and the guard predicate, plus the existing suite
+- Live QA with Playwright across sensitive states, multiples one to four, handover records (`archived_journeys` reason `transitioned`, `archived_pregnancy_journey_id` set, lifecycle flipped, no duplicate journey), accessibility at 375px and desktop, and regression on `/my-week`, `/my-journey`, Kept Chapter, Account Settings, toolkit, AI Ask and the public hubs

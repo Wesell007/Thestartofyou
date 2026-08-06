@@ -189,6 +189,9 @@ const FYHero = () => {
               Your postpartum recovery
             </Link>
           </div>
+
+          <FYStartFirstYearCTA variant="hero" />
+
         </div>
       </div>
     </section>

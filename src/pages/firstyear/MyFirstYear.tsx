@@ -17,6 +17,9 @@ import BabySummaryCard from "@/components/firstyear/journey/BabySummaryCard";
 import SupportLane, { type SupportCard } from "@/components/firstyear/journey/SupportLane";
 import PregnancyChapterKeptCard from "@/components/firstyear/journey/PregnancyChapterKeptCard";
 import WhatComesNextCard from "@/components/firstyear/journey/WhatComesNextCard";
+import TodayCard from "@/components/firstyear/journey/TodayCard";
+import { countEntriesForDate } from "@/lib/firstYearEntries";
+import { localDateKey } from "@/lib/firstYearEntriesSchema";
 
 /** For baby lane. Full public First Year routes only, never shortened paths. */
 const FOR_BABY_CARDS: SupportCard[] = [

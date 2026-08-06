@@ -69,6 +69,9 @@ const FYFinalCTA = () => {
             Your recovery <ArrowUpRight size={14} />
           </Link>
         </div>
+
+        <FYStartFirstYearCTA variant="final" />
+
       </div>
     </section>
   );

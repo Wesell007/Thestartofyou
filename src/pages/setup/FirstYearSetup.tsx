@@ -6,6 +6,10 @@ import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import { supabase } from "@/integrations/supabase/client";
 import { canEnterFirstYearSetup, saveFirstYearJourney } from "@/lib/firstYearJourney";
+import {
+  FIRST_YEAR_SETUP_COPY,
+  type FirstYearSetupMode,
+} from "@/lib/firstYearEntry";
 import StepIntro from "@/components/firstyear/setup/StepIntro";
 import StepBabies from "@/components/firstyear/setup/StepBabies";
 import StepCompanion from "@/components/firstyear/setup/StepCompanion";
@@ -26,17 +30,21 @@ import {
   type FirstYearSetupErrors,
 } from "@/components/firstyear/setup/firstYearSetupSchema";
 
-type Mode = "loading" | "ready" | "error";
+type Screen = "loading" | "ready" | "error";
 
 /**
- * Birth to First Year transition. Renders only for a pregnancy journey whose
- * status is `given_birth`. Every other state redirects silently, so no baby
- * age copy or setup prompt can appear in a sensitive state. The RPC repeats
- * these guards server-side.
+ * First Year setup with two modes.
+ *
+ *  - Transition: pregnancy journey with status `given_birth`.
+ *  - Direct: no journey pointer at all, started from the public hub.
+ *
+ * Every other state redirects silently, so no baby age copy or setup prompt
+ * can appear in a sensitive state. The RPC repeats these guards server-side.
  */
 const FirstYearSetup = () => {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<Mode>("loading");
+  const [screen, setScreen] = useState<Screen>("loading");
+  const [mode, setMode] = useState<FirstYearSetupMode>("transition");
   const [step, setStep] = useState(1);
   const [draft, setDraft] = useState<FirstYearSetupDraft>(createEmptyDraft);
   const [errors, setErrors] = useState<FirstYearSetupErrors>({});
@@ -53,7 +61,7 @@ const FirstYearSetup = () => {
       const { data, error } = await supabase.auth.getUser();
       if (cancelled) return;
       if (error || !data.user) {
-        setMode("error");
+        setScreen("error");
         return;
       }
       const userId = data.user.id;
@@ -68,14 +76,24 @@ const FirstYearSetup = () => {
         .maybeSingle();
       if (cancelled) return;
       if (pointerError) {
-        setMode("error");
+        setScreen("error");
         return;
       }
       if (pointer?.lifecycle === "first_year") {
         navigate(FIRST_YEAR_POST_SAVE_DESTINATION, { replace: true });
         return;
       }
-      if (!pointer || pointer.lifecycle !== "pregnancy") {
+      if (!pointer) {
+        // No journey pointer at all: direct First Year start from the hub.
+        setMode("direct");
+        setScreen("ready");
+        return;
+      }
+      if (pointer.lifecycle === "ttc") {
+        navigate("/my-ttc-journey", { replace: true });
+        return;
+      }
+      if (pointer.lifecycle !== "pregnancy") {
         navigate("/my-journey", { replace: true });
         return;
       }
@@ -87,7 +105,7 @@ const FirstYearSetup = () => {
         .maybeSingle();
       if (cancelled) return;
       if (pregnancyError) {
-        setMode("error");
+        setScreen("error");
         return;
       }
 
@@ -100,7 +118,8 @@ const FirstYearSetup = () => {
         navigate("/my-journey", { replace: true });
         return;
       }
-      setMode("ready");
+      setMode("transition");
+      setScreen("ready");
     })();
     return () => {
       cancelled = true;
@@ -150,7 +169,7 @@ const FirstYearSetup = () => {
     }
   };
 
-  if (mode === "loading") {
+  if (screen === "loading") {
     return (
       <div className="min-h-screen bg-parchment flex items-center justify-center" role="status">
         <Loader2 className="animate-spin text-sage" aria-hidden />
@@ -159,7 +178,7 @@ const FirstYearSetup = () => {
     );
   }
 
-  if (mode === "error") {
+  if (screen === "error") {
     return (
       <div className="min-h-screen bg-parchment flex items-center justify-center px-6">
         <div role="alert" className="max-w-md text-center space-y-5">
@@ -179,6 +198,8 @@ const FirstYearSetup = () => {
     );
   }
 
+  const copy = FIRST_YEAR_SETUP_COPY[mode];
+
   return (
     <div
       className="min-h-screen bg-parchment-grain page-vignette relative"
@@ -196,7 +217,7 @@ const FirstYearSetup = () => {
           className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-3"
           style={{ color: "hsl(var(--stage-firstyear-accent))" }}
         >
-          A new chapter
+          {copy.kicker}
         </p>
         <h1 className="sr-only">Start your First Year journey</h1>
 
@@ -216,7 +237,8 @@ const FirstYearSetup = () => {
               <StepIntro
                 ref={headingRef}
                 onBegin={() => goTo(2)}
-                onNotNow={() => navigate("/my-week")}
+                mode={mode}
+                onNotNow={() => navigate(copy.exitHref)}
               />
             )}
             {step === 2 && (
@@ -248,6 +270,7 @@ const FirstYearSetup = () => {
             {step === 3 && (
               <StepCompanion
                 ref={headingRef}
+                mode={mode}
                 value={companion}
                 onChange={setCompanion}
                 onBack={() => goTo(2)}
@@ -257,6 +280,7 @@ const FirstYearSetup = () => {
             {step === 4 && (
               <StepReview
                 ref={headingRef}
+                mode={mode}
                 draft={draft}
                 companion={companion}
                 saving={saving}
@@ -272,7 +296,7 @@ const FirstYearSetup = () => {
           <div className="pt-8">
             <button
               type="button"
-              onClick={() => navigate("/my-week")}
+              onClick={() => navigate(copy.exitHref)}
               className="font-sans text-[13px] text-foreground/60 underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
             >
               Cancel

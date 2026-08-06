@@ -430,7 +430,7 @@ const FirstYearToday = () => {
           </p>
           <Link
             to="/my-first-year"
-            className="mt-5 inline-flex items-center font-sans text-[13px] text-foreground/60 underline underline-offset-4 hover:text-foreground/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            className={`mt-5 ${INLINE_ACTION_CLASS} text-[13px]`}
           >
             Back to your First Year journey
           </Link>
@@ -445,22 +445,40 @@ const FirstYearToday = () => {
               id="lane-baby"
               className="font-serif text-[1.4rem] leading-[1.25] text-foreground/90 mb-2"
             >
-              {loaded.babies.length > 1 ? "For your babies" : "For your baby"}
+              {multiples ? "For your babies" : "For your baby"}
             </h2>
             <p className="font-sans text-[13px] leading-[1.65] text-foreground/60 mb-6 max-w-[52ch]">
               Rhythm rather than routine. Write only what helps you remember or what you might want
               to mention at a check-up.
             </p>
-            <BabySelector babies={loaded.babies} value={target} onChange={setTarget} />
+            <BabySelector babies={loaded.babies} value={target} onChange={handleTargetChange} />
+            {multiples && (
+              <>
+                <p className="font-sans text-[13px] font-medium text-foreground/75 mb-1">
+                  {writingForLabel({ allBabies, babyName: currentBabyName })}
+                </p>
+                {targetNotice && (
+                  <p className="font-sans text-[12.5px] leading-[1.6] text-foreground/55 mb-4">
+                    {targetNotice}
+                  </p>
+                )}
+              </>
+            )}
+            <p className="sr-only" role="status" aria-live="polite">
+              {babyStatus}
+            </p>
             {BABY_FIELDS.map((field) => {
               const key = babyDraftKey(field.kind);
+              const saved = hasSavedFor(field.kind);
               return (
                 <div key={field.kind}>
                   <NoteField
+                    fieldId={fieldId(field.kind)}
                     label={KIND_LABELS[field.kind]}
                     hint={field.hint}
                     placeholder={field.placeholder}
                     value={drafts[key] ?? ""}
+                    saved={saved}
                     disabled={savingKind === field.kind}
                     onChange={(value) => setDraft(key, value)}
                   />
@@ -469,9 +487,13 @@ const FirstYearToday = () => {
                       type="button"
                       onClick={() => handleSave(field.kind)}
                       disabled={savingKind === field.kind}
-                      className="inline-flex items-center rounded-pill border border-border/60 bg-parchment px-4 py-2 font-sans text-[13px] text-foreground/85 transition-colors hover:border-foreground/25 disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                      className={SAVE_BUTTON_CLASS}
                     >
-                      {savingKind === field.kind ? "Saving…" : "Save"}
+                      {saveButtonLabel({
+                        hasSaved: saved,
+                        saving: savingKind === field.kind,
+                        justSaved: justSavedKind === field.kind,
+                      })}
                     </button>
                   </div>
                 </div>
@@ -495,15 +517,21 @@ const FirstYearToday = () => {
               Your recovery matters just as much. If anything worries you about how you are feeling
               physically or emotionally, speak to your midwife, GP or health visitor.
             </p>
+            <p className="sr-only" role="status" aria-live="polite">
+              {parentStatus}
+            </p>
             {PARENT_FIELDS.map((field) => {
               const key = draftKey(field.kind, null);
+              const saved = hasSavedFor(field.kind);
               return (
                 <div key={field.kind}>
                   <NoteField
+                    fieldId={fieldId(field.kind)}
                     label={KIND_LABELS[field.kind]}
                     hint={field.hint}
                     placeholder={field.placeholder}
                     value={drafts[key] ?? ""}
+                    saved={saved}
                     disabled={savingKind === field.kind}
                     onChange={(value) => setDraft(key, value)}
                   />
@@ -512,9 +540,13 @@ const FirstYearToday = () => {
                       type="button"
                       onClick={() => handleSave(field.kind)}
                       disabled={savingKind === field.kind}
-                      className="inline-flex items-center rounded-pill border border-border/60 bg-parchment px-4 py-2 font-sans text-[13px] text-foreground/85 transition-colors hover:border-foreground/25 disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                      className={SAVE_BUTTON_CLASS}
                     >
-                      {savingKind === field.kind ? "Saving…" : "Save"}
+                      {saveButtonLabel({
+                        hasSaved: saved,
+                        saving: savingKind === field.kind,
+                        justSaved: justSavedKind === field.kind,
+                      })}
                     </button>
                   </div>
                 </div>
@@ -532,7 +564,7 @@ const FirstYearToday = () => {
               id="saved-today"
               className="font-serif text-[1.4rem] leading-[1.25] text-foreground/90 mb-4"
             >
-              Saved today
+              What you saved today
             </h2>
             {todaysEntries.length === 0 ? (
               <p className="font-serif text-[15px] leading-[1.7] text-foreground/70">
@@ -548,13 +580,22 @@ const FirstYearToday = () => {
                     <p className="font-serif text-[15px] leading-[1.7] text-foreground/85 whitespace-pre-wrap">
                       {entry.note}
                     </p>
-                    <button
-                      type="button"
-                      onClick={() => setPendingDelete(entry)}
-                      className="mt-2 font-sans text-[12.5px] text-foreground/55 underline underline-offset-4 hover:text-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                    >
-                      Remove this note
-                    </button>
+                    <div className="mt-1 flex flex-wrap items-center gap-4">
+                      <button
+                        type="button"
+                        onClick={() => handleEdit(entry)}
+                        className={INLINE_ACTION_CLASS}
+                      >
+                        Edit this note
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setPendingDelete(entry)}
+                        className={INLINE_ACTION_CLASS}
+                      >
+                        Remove this note
+                      </button>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -562,7 +603,7 @@ const FirstYearToday = () => {
           </div>
         </section>
 
-        {earlierEntries.length > 0 && (
+        {earlierDates.length > 0 && (
           <section className="pb-10" aria-labelledby="recent-notes">
             <div
               className="rounded-[22px] keepsake-surface px-6 sm:px-8 py-7 sm:py-8"
@@ -575,24 +616,36 @@ const FirstYearToday = () => {
                 Recent days
               </h2>
               <p className="font-sans text-[13px] leading-[1.65] text-foreground/60 mb-5">
-                The last few days you wrote something. Gaps are normal.
+                The last few days you wrote something. Days with nothing written are just as fine.
               </p>
-              <ul className="space-y-4">
-                {earlierEntries.map((entry) => (
-                  <li key={entry.id} className="border-b border-border/40 pb-4 last:border-0 last:pb-0">
-                    <p className="font-sans text-[12px] tracking-[0.12em] uppercase text-foreground/50 mb-1">
-                      {format(parseDateOnly(entry.entry_date) ?? new Date(), "EEE d MMM")} ·{" "}
-                      {KIND_LABELS[entry.kind]} · {babyName(entry.baby_id)}
-                    </p>
-                    <p className="font-serif text-[15px] leading-[1.7] text-foreground/85 whitespace-pre-wrap">
-                      {entry.note}
-                    </p>
-                  </li>
+              <div className="space-y-6">
+                {earlierDates.map((date) => (
+                  <div key={date}>
+                    <h3 className="font-sans text-[12px] tracking-[0.14em] uppercase text-foreground/55 mb-3">
+                      {format(parseDateOnly(date) ?? new Date(), "EEEE d MMMM")}
+                    </h3>
+                    <ul className="space-y-4">
+                      {earlierByDate[date].map((entry) => (
+                        <li
+                          key={entry.id}
+                          className="border-b border-border/40 pb-4 last:border-0 last:pb-0"
+                        >
+                          <p className="font-sans text-[12px] tracking-[0.12em] uppercase text-foreground/50 mb-1">
+                            {KIND_LABELS[entry.kind]} · {babyName(entry.baby_id)}
+                          </p>
+                          <p className="font-serif text-[15px] leading-[1.7] text-foreground/85 whitespace-pre-wrap">
+                            {entry.note}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </section>
         )}
+
       </main>
       <MyWeekFooter contextual="These notes are yours alone. If anything worries you about your baby or your own recovery, speak to your midwife, GP or health visitor." />
       <ConfirmDialog

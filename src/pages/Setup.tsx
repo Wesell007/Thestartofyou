@@ -13,8 +13,37 @@ import {
   validateCompanionName,
   type CompanionTone,
 } from "@/lib/companion";
+import { getActivePregnancyJourney, readPendingJourney } from "@/lib/savedJourney";
+import { getActiveTTCJourney } from "@/lib/savedTTCJourney";
+import type { NavLifecycle } from "@/lib/navLifecycle";
+import { resolveSetupCopy } from "@/lib/setupCopy";
 
 type CompanionChoice = "skip" | "cindy" | "ava" | "mia" | "custom";
+
+const isNavLifecycle = (value: unknown): value is NavLifecycle =>
+  value === "pregnancy" || value === "ttc" || value === "first_year";
+
+/**
+ * Lifecycle for copy purposes only. The pointer is authoritative; a pending or
+ * saved pregnancy journey and a saved TTC journey are fallbacks for users who
+ * arrive before the pointer exists. Anything unresolved stays null so the
+ * screen reads neutrally rather than assuming pregnancy.
+ */
+const resolveSetupLifecycle = async (userId: string): Promise<NavLifecycle | null> => {
+  const { data: pointer } = await supabase
+    .from("journeys")
+    .select("lifecycle")
+    .eq("user_id", userId)
+    .maybeSingle();
+  if (isNavLifecycle(pointer?.lifecycle)) return pointer.lifecycle;
+
+  if (readPendingJourney()) return "pregnancy";
+  const pregnancy = await getActivePregnancyJourney(userId);
+  if (pregnancy) return "pregnancy";
+  const ttc = await getActiveTTCJourney(userId);
+  if (ttc) return "ttc";
+  return null;
+};
 
 const Setup = () => {
   const navigate = useNavigate();
@@ -23,11 +52,13 @@ const Setup = () => {
   const [userId, setUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [lifecycle, setLifecycle] = useState<NavLifecycle | null>(null);
 
   const [choice, setChoice] = useState<CompanionChoice>("skip");
   const [customName, setCustomName] = useState("");
   const [nameError, setNameError] = useState<string | null>(null);
   const [tone, setTone] = useState<CompanionTone | null>(null);
+
 
   useEffect(() => {
     let cancelled = false;

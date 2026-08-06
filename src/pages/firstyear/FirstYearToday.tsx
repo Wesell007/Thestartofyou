@@ -245,7 +245,7 @@ const FirstYearToday = () => {
       },
       { earliestDateOfBirth: earliestDob, today },
     );
-    if (!check.ok) {
+    if (check.ok !== true) {
       toast({ title: check.message });
       return;
     }

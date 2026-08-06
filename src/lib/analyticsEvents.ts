@@ -58,8 +58,11 @@ export type JourneyNavTab =
   | "my_journey"
   | "toolkit"
   | "my_ttc_journey"
+  | "my_first_year"
+  | "pregnancy_chapter"
   | "ask"
   | "account";
+
 
 export type EventMap = {
   // Wave 1

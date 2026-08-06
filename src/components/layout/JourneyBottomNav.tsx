@@ -1,18 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   BookOpen,
   CalendarHeart,
   CircleUserRound,
   ClipboardList,
+  Heart,
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS, type JourneyNavTab } from "@/lib/analyticsEvents";
-
-type Lifecycle = "pregnancy" | "ttc";
+import { useLifecycle } from "@/lib/useLifecycle";
+import {
+  FIRST_YEAR_NAV_ROUTES,
+  PREGNANCY_NAV_ROUTES,
+  TTC_NAV_ROUTES,
+  matchesRoute,
+} from "@/lib/navLifecycle";
 
 interface Tab {
   label: string;
@@ -21,12 +26,7 @@ interface Tab {
   event: JourneyNavTab;
 }
 
-const PREGNANCY_ROUTES = ["/my-week", "/my-journey", "/pregnancy-toolkit"];
-const TTC_ROUTES = ["/my-ttc-journey"];
 const SHARED_ROUTES = ["/account", "/account-settings"];
-
-const matchesAny = (pathname: string, prefixes: string[]) =>
-  prefixes.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 
 const PREGNANCY_TABS: Tab[] = [
   { label: "This week", href: "/my-week", icon: CalendarHeart, event: "my_week" },
@@ -41,6 +41,22 @@ const TTC_TABS: Tab[] = [
   { label: "Account", href: "/account", icon: CircleUserRound, event: "account" },
 ];
 
+const firstYearTabs = (hasKeptChapter: boolean): Tab[] => [
+  { label: "First Year", href: "/my-first-year", icon: Heart, event: "my_first_year" },
+  ...(hasKeptChapter
+    ? [
+        {
+          label: "Pregnancy chapter",
+          href: "/my-pregnancy-chapter",
+          icon: BookOpen,
+          event: "pregnancy_chapter" as const,
+        },
+      ]
+    : []),
+  { label: "Account", href: "/account", icon: CircleUserRound, event: "account" },
+];
+
+
 /**
  * Mobile-only bottom navigation for signed-in journey screens. Mounted once
  * in App; decides its own visibility from the route, auth state, and the
@@ -50,49 +66,13 @@ const TTC_TABS: Tab[] = [
  */
 const JourneyBottomNav = () => {
   const { pathname } = useLocation();
-  const [authed, setAuthed] = useState(false);
-  const [fetchedLifecycle, setFetchedLifecycle] = useState<Lifecycle | null>(null);
+  const { authed, lifecycle, hasKeptChapter } = useLifecycle();
 
-  useEffect(() => {
-    let cancelled = false;
-    const update = async (userId: string | null) => {
-      if (!userId) {
-        if (!cancelled) {
-          setAuthed(false);
-          setFetchedLifecycle(null);
-        }
-        return;
-      }
-      if (!cancelled) setAuthed(true);
-      const { data, error } = await supabase
-        .from("journeys")
-        .select("lifecycle")
-        .eq("user_id", userId)
-        .maybeSingle();
-      if (cancelled || error) return;
-      setFetchedLifecycle(
-        data?.lifecycle === "ttc" || data?.lifecycle === "pregnancy" ? data.lifecycle : null,
-      );
-    };
-    supabase.auth.getSession().then(({ data }) => {
-      void update(data.session?.user?.id ?? null);
-    });
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      void update(session?.user?.id ?? null);
-    });
-    return () => {
-      cancelled = true;
-      sub.subscription.unsubscribe();
-    };
-  }, []);
-
-  const routeLifecycle: Lifecycle | null = matchesAny(pathname, TTC_ROUTES)
-    ? "ttc"
-    : matchesAny(pathname, PREGNANCY_ROUTES)
-      ? "pregnancy"
-      : null;
-  const onShellRoute = routeLifecycle !== null || matchesAny(pathname, SHARED_ROUTES);
-  const lifecycle = routeLifecycle ?? fetchedLifecycle;
+  const onShellRoute =
+    matchesRoute(pathname, FIRST_YEAR_NAV_ROUTES) ||
+    matchesRoute(pathname, PREGNANCY_NAV_ROUTES) ||
+    matchesRoute(pathname, TTC_NAV_ROUTES) ||
+    matchesRoute(pathname, SHARED_ROUTES);
   const visible = authed && onShellRoute && lifecycle !== null;
 
   // Reserve space below in-flow content (see body.has-journey-nav in index.css).
@@ -104,7 +84,13 @@ const JourneyBottomNav = () => {
 
   if (!visible) return null;
 
-  const tabs = lifecycle === "ttc" ? TTC_TABS : PREGNANCY_TABS;
+  const tabs =
+    lifecycle === "first_year"
+      ? firstYearTabs(hasKeptChapter)
+      : lifecycle === "ttc"
+        ? TTC_TABS
+        : PREGNANCY_TABS;
+
 
   return (
     <nav

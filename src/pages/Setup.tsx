@@ -273,7 +273,7 @@ const Setup = () => {
             disabled={loading || submitting || !userId || !firstName.trim()}
             className="w-full inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all disabled:opacity-60"
           >
-            {loading || submitting ? <Loader2 size={16} className="animate-spin" /> : <>Continue to my week <ArrowRight size={14} /></>}
+            {loading || submitting ? <Loader2 size={16} className="animate-spin" /> : <>{copy.cta} <ArrowRight size={14} /></>}
           </button>
           {loadError ? (
             <div role="alert" className="space-y-3 text-center">

@@ -372,18 +372,33 @@ const FirstYearToday = () => {
     );
   }
 
-  const babyName = (babyId: string | null): string => {
-    if (!babyId) return "You";
-    const index = loaded.babies.findIndex((baby) => baby.id === babyId);
-    const baby = loaded.babies[index];
-    if (!baby) return "Your baby";
-    return baby.name?.trim() ? baby.name.trim() : `Baby ${baby.birth_order ?? index + 1}`;
-  };
+  const babyName = nameForBaby;
 
   const setDraft = (key: string, value: string) =>
     setDrafts((current) => ({ ...current, [key]: value }));
 
+  const multiples = loaded.babies.length > 1;
+  const allBabies = multiples && (target || ALL_BABIES) === ALL_BABIES;
+  const currentBabyName = allBabies ? null : babyName(babyIdsForTarget[0] ?? null);
+
+  const handleTargetChange = (next: string) => {
+    setTarget(next);
+    setJustSavedKind(null);
+    setTargetNotice(
+      targetChangeNotice({
+        allBabies: next === ALL_BABIES,
+        babyName: next === ALL_BABIES ? null : babyName(next),
+      }),
+    );
+  };
+
   const earlierEntries = recent.filter((entry) => entry.entry_date !== today);
+  const earlierByDate = earlierEntries.reduce<Record<string, FirstYearEntry[]>>((acc, entry) => {
+    (acc[entry.entry_date] ||= []).push(entry);
+    return acc;
+  }, {});
+  const earlierDates = Object.keys(earlierByDate).sort().reverse();
+
 
   return (
     <div

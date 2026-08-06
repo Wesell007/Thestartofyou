@@ -43,7 +43,7 @@ lifecycle = first_year                      -> redirect /my-first-year
 lifecycle = pregnancy, status given_birth   -> mode "transition"
 lifecycle = pregnancy, status active        -> redirect /my-week
 lifecycle = pregnancy, sensitive status     -> redirect /my-journey (unchanged)
-lifecycle = ttc                             -> redirect /my-ttc-journey (confirm-first entry, see CTA table)
+lifecycle = ttc                             -> redirect /my-ttc-journey
 no journeys row at all                      -> mode "direct"
 signed out                                  -> /auth?intent=return_to_route&return_to=/setup/first-year
 ```
@@ -62,7 +62,7 @@ Add a single First Year start CTA to the public hub (a new component under `src/
 | signed in, pregnancy `given_birth` | `/setup/first-year` (transition mode) |
 | signed in, pregnancy `active` | `/my-week`, with a quiet line: "Your First Year space opens once your baby arrives." |
 | signed in, pregnancy sensitive status | no start CTA; quiet link to `/my-journey` only |
-| signed in, `ttc` | `/my-ttc-journey`, with a secondary "I have had my baby" link that goes to `/setup/first-year` where an explicit confirm step precedes save |
+| signed in, `ttc` | `/my-ttc-journey`. No First Year start path for TTC in this phase |
 
 The hub stays public and cached-friendly: the CTA renders its signed-out form first and swaps once the lightweight lifecycle read resolves, matching the existing anti-flicker pattern.
 
@@ -123,13 +123,13 @@ Live, disposable accounts only:
 3. Transition account (`given_birth`) → hub CTA and direct route both still show the original transition copy and still archive the pregnancy chapter.
 4. Pregnancy active → CTA goes to `/my-week`, direct route still redirects.
 5. Sensitive pregnancy status → no start CTA, RPC still refuses.
-6. TTC → CTA goes to `/my-ttc-journey`, explicit confirm path reaches setup.
+6. TTC → CTA goes to `/my-ttc-journey`, and `/setup/first-year` redirects there too. No direct setup for TTC.
 7. Nav, console and page errors clean on all of the above; clean up all seeded rows.
 
 ## Risks and open questions
 
 - Hub is a public marketing page; the lifecycle read must be lazy and must not delay first paint or cause layout shift.
-- TTC → First Year is the only genuinely ambiguous state; the confirm-first treatment is a proposal and can be dropped to "no CTA" if you prefer.
+- TTC → First Year transition is deliberately out of scope here and can be planned as its own phase.
 - Companion choice remains session-only in both modes, as in 16.2B.
 - Open question: should the direct CTA also appear on First Year topic pages, or hub only? Plan assumes hub only.
 

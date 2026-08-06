@@ -52,7 +52,9 @@ RLS: four owner policies scoped to `auth.uid()`, grants to `authenticated` and `
 
 ### Client
 
-New `src/lib/firstYearEntriesSchema.ts` (lane and kind unions, note and tag validation, local-calendar-date helper built on `parseDateOnly` — never `toISOString`) and `src/lib/firstYearEntries.ts` (today's entries, recent entries, upsert on the natural key, delete, and the "All babies" fan-out). Direct owner-scoped table access; no RPC unless an atomicity issue surfaces.
+New `src/lib/firstYearEntriesSchema.ts` (lane and kind unions, note and tag validation, local-calendar-date helper built on `parseDateOnly` — never `toISOString`) and `src/lib/firstYearEntries.ts` (today's entries, recent entries, save, delete, and the "All babies" fan-out).
+
+Saving does not rely on client upsert against partial unique indexes. Instead: look up the existing row by natural key (user, baby or null, date, kind), update when found, insert when not, and on a duplicate-key race refetch and update. All writes go through the table so the validation trigger always applies; no inserts bypass it. An RPC is added only if a real atomicity issue surfaces during build or QA.
 
 Analytics uses the existing consent-gated helpers: `first_year_checkin_opened`, `first_year_entry_saved`, `first_year_entry_deleted`, carrying only `lane` and `kind`.
 

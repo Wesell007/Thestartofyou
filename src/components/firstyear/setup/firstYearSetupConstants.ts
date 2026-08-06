@@ -61,3 +61,12 @@ export const BABY_ROW_LABELS = [
   "Third baby",
   "Fourth baby",
 ];
+
+/**
+ * Direct-start parents have no pregnancy journey to personalise from, so the
+ * personalisation option is not offered to them.
+ */
+export const companionOptionsForMode = (mode: "transition" | "direct") =>
+  mode === "direct"
+    ? COMPANION_OPTIONS.filter((option) => option.value !== "personalise")
+    : COMPANION_OPTIONS;

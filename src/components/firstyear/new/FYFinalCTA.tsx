@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import FYStartFirstYearCTA from "./FYStartFirstYearCTA";
 
 const FYFinalCTA = () => {
   return (
@@ -68,6 +69,9 @@ const FYFinalCTA = () => {
             Your recovery <ArrowUpRight size={14} />
           </Link>
         </div>
+
+        <FYStartFirstYearCTA variant="final" />
+
       </div>
     </section>
   );

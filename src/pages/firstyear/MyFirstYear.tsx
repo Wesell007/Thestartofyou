@@ -205,7 +205,7 @@ const MyFirstYear = () => {
           intro="Your recovery matters just as much. This side of the journey is yours."
           cards={FOR_YOU_CARDS}
         />
-        <PregnancyChapterKeptCard hasKeptChapter={state.hasKeptChapter} />
+        {state.hasKeptChapter ? <PregnancyChapterKeptCard hasKeptChapter /> : null}
         <WhatComesNextCard />
       </main>
       <MyWeekFooter contextual="If anything worries you about your baby or your own recovery, speak to your midwife, GP or health visitor." />

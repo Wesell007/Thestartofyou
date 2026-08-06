@@ -83,6 +83,10 @@ const Setup = () => {
         setLoading(false);
         return;
       }
+      const resolvedLifecycle = await resolveSetupLifecycle(u.id);
+      if (cancelled) return;
+      setLifecycle(resolvedLifecycle);
+
       const { data: profile, error: profileError } = await supabase
         .from("profiles")
         .select("first_name")
@@ -93,8 +97,11 @@ const Setup = () => {
         setLoading(false);
         return;
       }
-      if (profile?.first_name) navigate("/my-week", { replace: true });
+      if (profile?.first_name) {
+        navigate(resolveSetupCopy(resolvedLifecycle).destination, { replace: true });
+      }
       setLoading(false);
+
     });
     return () => {
       cancelled = true;

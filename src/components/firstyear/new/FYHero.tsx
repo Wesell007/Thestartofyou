@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Play } from "lucide-react";
 import firstyearHeroVideo from "@/assets/firstyear-hero-video.mp4.asset.json";
+import FYStartFirstYearCTA from "./FYStartFirstYearCTA";
 
 /**
  * Premium video hero — single dual-entry moment.

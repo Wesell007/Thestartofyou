@@ -66,49 +66,13 @@ const firstYearTabs = (hasKeptChapter: boolean): Tab[] => [
  */
 const JourneyBottomNav = () => {
   const { pathname } = useLocation();
-  const [authed, setAuthed] = useState(false);
-  const [fetchedLifecycle, setFetchedLifecycle] = useState<Lifecycle | null>(null);
+  const { authed, lifecycle, hasKeptChapter } = useLifecycle();
 
-  useEffect(() => {
-    let cancelled = false;
-    const update = async (userId: string | null) => {
-      if (!userId) {
-        if (!cancelled) {
-          setAuthed(false);
-          setFetchedLifecycle(null);
-        }
-        return;
-      }
-      if (!cancelled) setAuthed(true);
-      const { data, error } = await supabase
-        .from("journeys")
-        .select("lifecycle")
-        .eq("user_id", userId)
-        .maybeSingle();
-      if (cancelled || error) return;
-      setFetchedLifecycle(
-        data?.lifecycle === "ttc" || data?.lifecycle === "pregnancy" ? data.lifecycle : null,
-      );
-    };
-    supabase.auth.getSession().then(({ data }) => {
-      void update(data.session?.user?.id ?? null);
-    });
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      void update(session?.user?.id ?? null);
-    });
-    return () => {
-      cancelled = true;
-      sub.subscription.unsubscribe();
-    };
-  }, []);
-
-  const routeLifecycle: Lifecycle | null = matchesAny(pathname, TTC_ROUTES)
-    ? "ttc"
-    : matchesAny(pathname, PREGNANCY_ROUTES)
-      ? "pregnancy"
-      : null;
-  const onShellRoute = routeLifecycle !== null || matchesAny(pathname, SHARED_ROUTES);
-  const lifecycle = routeLifecycle ?? fetchedLifecycle;
+  const onShellRoute =
+    matchesRoute(pathname, FIRST_YEAR_NAV_ROUTES) ||
+    matchesRoute(pathname, PREGNANCY_NAV_ROUTES) ||
+    matchesRoute(pathname, TTC_NAV_ROUTES) ||
+    matchesRoute(pathname, SHARED_ROUTES);
   const visible = authed && onShellRoute && lifecycle !== null;
 
   // Reserve space below in-flow content (see body.has-journey-nav in index.css).
@@ -120,7 +84,13 @@ const JourneyBottomNav = () => {
 
   if (!visible) return null;
 
-  const tabs = lifecycle === "ttc" ? TTC_TABS : PREGNANCY_TABS;
+  const tabs =
+    lifecycle === "first_year"
+      ? firstYearTabs(hasKeptChapter)
+      : lifecycle === "ttc"
+        ? TTC_TABS
+        : PREGNANCY_TABS;
+
 
   return (
     <nav

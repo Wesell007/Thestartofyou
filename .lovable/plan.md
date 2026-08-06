@@ -32,6 +32,10 @@ Recovery, wellbeing, rest and support, and questions are journey-level and never
 
 Calm loading, empty and retry states throughout; never a raw database message.
 
+`/my-first-year/today` is added to protected auth return handling in `src/lib/authIntent.ts`, so a signed-out visitor is sent to auth and lands back on the check-in after signing in.
+
+Lifecycle-aware navigation treats the route as First Year: the First Year route list in `src/lib/navLifecycle.ts` already prefix-matches `/my-first-year`, and this is confirmed for the mobile bottom nav (`src/components/layout/JourneyBottomNav.tsx`) so no pregnancy labels appear there. Any gap found is fixed in those two files only.
+
 ## Technical details
 
 ### Migration — `public.first_year_entries`

@@ -123,7 +123,7 @@ Live, disposable accounts only:
 3. Transition account (`given_birth`) → hub CTA and direct route both still show the original transition copy and still archive the pregnancy chapter.
 4. Pregnancy active → CTA goes to `/my-week`, direct route still redirects.
 5. Sensitive pregnancy status → no start CTA, RPC still refuses.
-6. TTC → CTA goes to `/my-ttc-journey`, explicit confirm path reaches setup.
+6. TTC → CTA goes to `/my-ttc-journey`, and `/setup/first-year` redirects there too. No direct setup for TTC.
 7. Nav, console and page errors clean on all of the above; clean up all seeded rows.
 
 ## Risks and open questions

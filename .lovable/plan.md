@@ -62,7 +62,7 @@ Analytics uses the existing consent-gated helpers: `first_year_checkin_opened`, 
 
 New: the migration; `src/lib/firstYearEntries.ts`; `src/lib/firstYearEntriesSchema.ts` plus tests; `src/pages/firstyear/FirstYearToday.tsx`; `src/components/firstyear/today/*`; `src/components/firstyear/journey/TodayCard.tsx`.
 
-Edited: `src/App.tsx` (one route), `src/pages/firstyear/MyFirstYear.tsx` (Today card), `src/pages/AccountSettings.tsx` (export), `src/lib/analyticsEvents.ts`, regenerated `src/integrations/supabase/types.ts`.
+Edited: `src/App.tsx` (one route), `src/pages/firstyear/MyFirstYear.tsx` (Today card), `src/pages/AccountSettings.tsx` (export), `src/lib/authIntent.ts` (auth return), `src/lib/analyticsEvents.ts`, `src/lib/navLifecycle.ts` and `src/components/layout/JourneyBottomNav.tsx` only if nav matching needs it, regenerated `src/integrations/supabase/types.ts`.
 
 Untouched: pregnancy tables and surfaces, the pregnancy toolkit, `reflections`, `week_photos`, `week_media_memories`, public First Year and Postpartum content and routes, the sitemap script, robots, and AI companion context.
 

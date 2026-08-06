@@ -126,3 +126,83 @@ export const getBabyAge = (
   baby: Pick<BabyRecord, "date_of_birth"> | null | undefined,
   reference: Date = new Date(),
 ): FirstYearAge | null => (baby ? getFirstYearAge(baby.date_of_birth, reference) : null);
+
+/**
+ * The kept pregnancy chapter for someone who has moved into their First Year.
+ * Read-only. Owner-scoped. Never used to resume a pregnancy view.
+ */
+export type KeptPregnancyChapter = {
+  id: string;
+  /** yyyy-MM-dd when known. */
+  lmp_date: string | null;
+  due_date: string | null;
+  /** Coarse pregnancy status as it stood when the chapter was kept. */
+  status: string | null;
+  started_at: string | null;
+  ended_at: string | null;
+};
+
+type SnapshotShape = {
+  lmp_date?: string | null;
+  due_date?: string | null;
+  status?: string | null;
+  started_at?: string | null;
+};
+
+/**
+ * Only a straightforward completed pregnancy shows its memories immediately.
+ * Anything else stays behind a quiet reveal step.
+ */
+export const keptChapterNeedsReveal = (status: string | null | undefined): boolean =>
+  !(status === null || status === undefined || status === "active" || status === "given_birth");
+
+/**
+ * Read the user's kept pregnancy chapter.
+ *
+ * Primary lookup uses the reference stored on the First Year journey. Older
+ * users may not have one, so we fall back to their own most recent kept
+ * pregnancy chapter. Both reads are owner-scoped.
+ */
+export const getKeptPregnancyChapter = async (
+  userId: string,
+  options: { referenceId?: string | null; throwOnError?: boolean } = {},
+): Promise<KeptPregnancyChapter | null> => {
+  const toChapter = (row: {
+    id: string;
+    started_at: string | null;
+    ended_at: string | null;
+    snapshot: unknown;
+  }): KeptPregnancyChapter => {
+    const snapshot = (row.snapshot ?? {}) as SnapshotShape;
+    return {
+      id: row.id,
+      lmp_date: snapshot.lmp_date ?? null,
+      due_date: snapshot.due_date ?? null,
+      status: snapshot.status ?? null,
+      started_at: snapshot.started_at ?? row.started_at ?? null,
+      ended_at: row.ended_at ?? null,
+    };
+  };
+
+  if (options.referenceId) {
+    const { data, error } = await supabase
+      .from("archived_journeys")
+      .select("id, started_at, ended_at, snapshot")
+      .eq("user_id", userId)
+      .eq("id", options.referenceId)
+      .maybeSingle();
+    if (error && options.throwOnError) throw error;
+    if (data) return toChapter(data);
+  }
+
+  const { data: fallback, error: fallbackError } = await supabase
+    .from("archived_journeys")
+    .select("id, started_at, ended_at, snapshot")
+    .eq("user_id", userId)
+    .eq("lifecycle", "pregnancy")
+    .order("ended_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (fallbackError && options.throwOnError) throw fallbackError;
+  return fallback ? toChapter(fallback) : null;
+};

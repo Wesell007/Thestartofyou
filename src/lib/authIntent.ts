@@ -26,6 +26,7 @@ export const PROTECTED_ROUTE_PREFIXES = [
   "/my-week",
   "/my-journey",
   "/my-first-year",
+  "/my-pregnancy-chapter",
   "/my-ttc-journey",
   "/setup/trying-to-conceive",
   "/setup/first-year",

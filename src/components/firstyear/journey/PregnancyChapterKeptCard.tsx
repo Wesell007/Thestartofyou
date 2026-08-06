@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
 type Props = {
   /** True once the pregnancy chapter has been kept for this user. */
   hasKeptChapter: boolean;
@@ -5,7 +8,8 @@ type Props = {
 
 /**
  * Warm reassurance that the pregnancy chapter is still theirs. Deliberately
- * free of archive, snapshot or lifecycle language.
+ * free of archive, snapshot or lifecycle language. The link only appears when
+ * there is a kept chapter to open, so it can never be a dead end.
  */
 const PregnancyChapterKeptCard = ({ hasKeptChapter }: Props) => (
   <section className="pb-10">
@@ -27,6 +31,21 @@ const PregnancyChapterKeptCard = ({ hasKeptChapter }: Props) => (
           ? "Nothing you wrote or saved has gone anywhere. Your weeks, photos, videos, voice notes and reflections are still yours to open whenever you want to look back."
           : "Anything you saved during pregnancy stays yours. You can look back on it whenever you want to."}
       </p>
+      {hasKeptChapter && (
+        <Link
+          to="/my-pregnancy-chapter"
+          className="group mt-6 inline-flex items-center gap-2 font-sans text-[13.5px] font-medium underline underline-offset-4 decoration-[hsl(var(--stage-postpartum-accent)/0.5)] hover:decoration-[hsl(var(--stage-postpartum-accent))] transition-colors"
+          style={{ color: "hsl(var(--stage-postpartum-accent))" }}
+        >
+          Open your pregnancy chapter
+          <ArrowRight
+            size={14}
+            strokeWidth={1.7}
+            aria-hidden="true"
+            className="transition-transform group-hover:translate-x-0.5"
+          />
+        </Link>
+      )}
     </div>
   </section>
 );

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import FYStartFirstYearCTA from "./FYStartFirstYearCTA";
 
 const FYFinalCTA = () => {
   return (

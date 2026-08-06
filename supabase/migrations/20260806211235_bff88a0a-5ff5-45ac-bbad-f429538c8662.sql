@@ -1,0 +1,1 @@
+REVOKE ALL ON public.first_year_entries FROM anon;

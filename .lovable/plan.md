@@ -32,6 +32,10 @@ Recovery, wellbeing, rest and support, and questions are journey-level and never
 
 Calm loading, empty and retry states throughout; never a raw database message.
 
+`/my-first-year/today` is added to protected auth return handling in `src/lib/authIntent.ts`, so a signed-out visitor is sent to auth and lands back on the check-in after signing in.
+
+Lifecycle-aware navigation treats the route as First Year: the First Year route list in `src/lib/navLifecycle.ts` already prefix-matches `/my-first-year`, and this is confirmed for the mobile bottom nav (`src/components/layout/JourneyBottomNav.tsx`) so no pregnancy labels appear there. Any gap found is fixed in those two files only.
+
 ## Technical details
 
 ### Migration — `public.first_year_entries`
@@ -48,7 +52,9 @@ RLS: four owner policies scoped to `auth.uid()`, grants to `authenticated` and `
 
 ### Client
 
-New `src/lib/firstYearEntriesSchema.ts` (lane and kind unions, note and tag validation, local-calendar-date helper built on `parseDateOnly` — never `toISOString`) and `src/lib/firstYearEntries.ts` (today's entries, recent entries, upsert on the natural key, delete, and the "All babies" fan-out). Direct owner-scoped table access; no RPC unless an atomicity issue surfaces.
+New `src/lib/firstYearEntriesSchema.ts` (lane and kind unions, note and tag validation, local-calendar-date helper built on `parseDateOnly` — never `toISOString`) and `src/lib/firstYearEntries.ts` (today's entries, recent entries, save, delete, and the "All babies" fan-out).
+
+Saving does not rely on client upsert against partial unique indexes. Instead: look up the existing row by natural key (user, baby or null, date, kind), update when found, insert when not, and on a duplicate-key race refetch and update. All writes go through the table so the validation trigger always applies; no inserts bypass it. An RPC is added only if a real atomicity issue surfaces during build or QA.
 
 Analytics uses the existing consent-gated helpers: `first_year_checkin_opened`, `first_year_entry_saved`, `first_year_entry_deleted`, carrying only `lane` and `kind`.
 
@@ -56,12 +62,12 @@ Analytics uses the existing consent-gated helpers: `first_year_checkin_opened`, 
 
 New: the migration; `src/lib/firstYearEntries.ts`; `src/lib/firstYearEntriesSchema.ts` plus tests; `src/pages/firstyear/FirstYearToday.tsx`; `src/components/firstyear/today/*`; `src/components/firstyear/journey/TodayCard.tsx`.
 
-Edited: `src/App.tsx` (one route), `src/pages/firstyear/MyFirstYear.tsx` (Today card), `src/pages/AccountSettings.tsx` (export), `src/lib/analyticsEvents.ts`, regenerated `src/integrations/supabase/types.ts`.
+Edited: `src/App.tsx` (one route), `src/pages/firstyear/MyFirstYear.tsx` (Today card), `src/pages/AccountSettings.tsx` (export), `src/lib/authIntent.ts` (auth return), `src/lib/analyticsEvents.ts`, `src/lib/navLifecycle.ts` and `src/components/layout/JourneyBottomNav.tsx` only if nav matching needs it, regenerated `src/integrations/supabase/types.ts`.
 
 Untouched: pregnancy tables and surfaces, the pregnancy toolkit, `reflections`, `week_photos`, `week_media_memories`, public First Year and Postpartum content and routes, the sitemap script, robots, and AI companion context.
 
 ## QA
 
-Disposable accounts only, cleaned up afterwards. Covers: direct-start single baby (save, edit, delete, recent notes, Today card summary, export); transition user (entries save, kept pregnancy chapter still works, no pregnancy data mixing); twins (selector appears, "All babies" writes one row per baby, parent rows stay baby-free); blocked users (signed out, pregnancy, TTC, no journey); RLS cross-account read, update and delete attempts; desktop and mobile layout, keyboard flow, screen-reader labels, no console or network errors.
+Disposable accounts only, cleaned up afterwards. Covers: direct-start single baby (save, edit, delete, recent notes, Today card summary, export); transition user (entries save, kept pregnancy chapter still works, no pregnancy data mixing); twins (selector appears, "All babies" writes one row per baby, parent rows stay baby-free); duplicate prevention (saving the same kind twice on the same day updates one row); signed-out auth return landing back on `/my-first-year/today`; mobile bottom nav showing First Year labels on the route; blocked users (pregnancy, TTC, no journey); RLS cross-account read, update and delete attempts; desktop and mobile layout, keyboard flow, screen-reader labels, no console or network errors.
 
 Then: typecheck, targeted tests, full `vitest run`, production build, sitemap and dist check.

@@ -40,7 +40,7 @@ const BabySelector = ({ babies, value, onChange }: Props) => {
           return (
             <label
               key={option.value}
-              className={`cursor-pointer rounded-pill border px-4 py-2 font-sans text-[13px] transition-colors focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2 focus-within:ring-offset-background ${
+              className={`flex min-h-11 cursor-pointer items-center rounded-pill border px-5 py-2 font-sans text-[13px] transition-colors focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2 focus-within:ring-offset-background ${
                 selected
                   ? "border-sage bg-sage/12 text-foreground"
                   : "border-border/60 bg-parchment text-foreground/70 hover:border-foreground/25"

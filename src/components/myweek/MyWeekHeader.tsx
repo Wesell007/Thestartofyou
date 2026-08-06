@@ -4,14 +4,20 @@ import { User, LogOut, Settings } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import logoSrc from "@/assets/logo-dark.png";
 import { toast } from "@/hooks/use-toast";
+import { useLifecycle } from "@/lib/useLifecycle";
+import { resolveHeaderLinks, resolveHomeHref } from "@/lib/navLifecycle";
 
 const MyWeekHeader = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const { lifecycle, hasKeptChapter } = useLifecycle();
+  const homeHref = resolveHomeHref(lifecycle);
+  const links = resolveHeaderLinks(lifecycle, hasKeptChapter);
 
   const isActive = (href: string) => location.pathname === href;
+
 
   const linkClass = (href: string) =>
     `font-sans text-[13px] sm:text-[14px] tracking-wide transition-colors ${

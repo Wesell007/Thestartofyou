@@ -48,7 +48,7 @@ const MyWeekHeader = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-parchment/95 backdrop-blur-lg border-b border-border/30">
       <div className="mx-auto w-full max-w-[680px] lg:max-w-[1200px] xl:max-w-[1320px] px-5 sm:px-8 md:px-10 lg:px-12 h-14 sm:h-16 flex items-center justify-between">
-        <Link to="/my-week" className="flex items-center shrink-0">
+        <Link to={homeHref} className="flex items-center shrink-0">
           <img
             src={logoSrc}
             alt="The Start of You"
@@ -58,12 +58,12 @@ const MyWeekHeader = () => {
 
         <nav className="flex items-center gap-5 sm:gap-7" aria-label="Account navigation">
           {/* On mobile these tabs live in the fixed bottom journey nav */}
-          <Link to="/my-week" className={`hidden md:inline ${linkClass("/my-week")}`}>
-            This week
-          </Link>
-          <Link to="/my-journey" className={`hidden md:inline ${linkClass("/my-journey")}`}>
-            My journey
-          </Link>
+          {links.map(({ id, label, href }) => (
+            <Link key={id} to={href} className={`hidden md:inline ${linkClass(href)}`}>
+              {label}
+            </Link>
+          ))}
+
           <div className="relative" ref={menuRef}>
             <button
               aria-label="Account"

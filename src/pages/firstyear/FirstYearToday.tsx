@@ -118,11 +118,16 @@ const FirstYearToday = () => {
   const [todaysEntries, setTodaysEntries] = useState<FirstYearEntry[]>([]);
   const [recent, setRecent] = useState<FirstYearEntry[]>([]);
   const [savingKind, setSavingKind] = useState<EntryKind | null>(null);
+  const [justSavedKind, setJustSavedKind] = useState<EntryKind | null>(null);
   const [pendingDelete, setPendingDelete] = useState<FirstYearEntry | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [babyStatus, setBabyStatus] = useState("");
+  const [parentStatus, setParentStatus] = useState("");
+  const [targetNotice, setTargetNotice] = useState("");
 
   const today = useMemo(() => localDateKey(), []);
   const retry = useCallback(() => setAttempt((a) => a + 1), []);
+
 
   useEffect(() => {
     let cancelled = false;

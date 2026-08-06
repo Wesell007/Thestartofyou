@@ -13,8 +13,37 @@ import {
   validateCompanionName,
   type CompanionTone,
 } from "@/lib/companion";
+import { getActivePregnancyJourney, readPendingJourney } from "@/lib/savedJourney";
+import { getActiveTTCJourney } from "@/lib/savedTTCJourney";
+import type { NavLifecycle } from "@/lib/navLifecycle";
+import { resolveSetupCopy } from "@/lib/setupCopy";
 
 type CompanionChoice = "skip" | "cindy" | "ava" | "mia" | "custom";
+
+const isNavLifecycle = (value: unknown): value is NavLifecycle =>
+  value === "pregnancy" || value === "ttc" || value === "first_year";
+
+/**
+ * Lifecycle for copy purposes only. The pointer is authoritative; a pending or
+ * saved pregnancy journey and a saved TTC journey are fallbacks for users who
+ * arrive before the pointer exists. Anything unresolved stays null so the
+ * screen reads neutrally rather than assuming pregnancy.
+ */
+const resolveSetupLifecycle = async (userId: string): Promise<NavLifecycle | null> => {
+  const { data: pointer } = await supabase
+    .from("journeys")
+    .select("lifecycle")
+    .eq("user_id", userId)
+    .maybeSingle();
+  if (isNavLifecycle(pointer?.lifecycle)) return pointer.lifecycle;
+
+  if (readPendingJourney()) return "pregnancy";
+  const pregnancy = await getActivePregnancyJourney(userId);
+  if (pregnancy) return "pregnancy";
+  const ttc = await getActiveTTCJourney(userId);
+  if (ttc) return "ttc";
+  return null;
+};
 
 const Setup = () => {
   const navigate = useNavigate();
@@ -23,11 +52,13 @@ const Setup = () => {
   const [userId, setUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [lifecycle, setLifecycle] = useState<NavLifecycle | null>(null);
 
   const [choice, setChoice] = useState<CompanionChoice>("skip");
   const [customName, setCustomName] = useState("");
   const [nameError, setNameError] = useState<string | null>(null);
   const [tone, setTone] = useState<CompanionTone | null>(null);
+
 
   useEffect(() => {
     let cancelled = false;
@@ -52,6 +83,10 @@ const Setup = () => {
         setLoading(false);
         return;
       }
+      const resolvedLifecycle = await resolveSetupLifecycle(u.id);
+      if (cancelled) return;
+      setLifecycle(resolvedLifecycle);
+
       const { data: profile, error: profileError } = await supabase
         .from("profiles")
         .select("first_name")
@@ -62,8 +97,11 @@ const Setup = () => {
         setLoading(false);
         return;
       }
-      if (profile?.first_name) navigate("/my-week", { replace: true });
+      if (profile?.first_name) {
+        navigate(resolveSetupCopy(resolvedLifecycle).destination, { replace: true });
+      }
       setLoading(false);
+
     });
     return () => {
       cancelled = true;
@@ -106,8 +144,10 @@ const Setup = () => {
       return;
     }
     trackEvent(EVENTS.SETUP_COMPLETED);
-    navigate("/my-week", { replace: true });
+    navigate(copy.destination, { replace: true });
   };
+
+  const copy = resolveSetupCopy(lifecycle);
 
   const pillClass = (active: boolean) =>
     `rounded-pill border px-3.5 py-1.5 font-sans text-[12.5px] transition-colors ${
@@ -115,6 +155,8 @@ const Setup = () => {
         ? "bg-foreground/[0.06] border-foreground/40 text-foreground"
         : "bg-parchment border-border/50 text-foreground/75 hover:border-foreground/25"
     }`;
+
+
 
   return (
     <div className="min-h-screen bg-parchment flex items-center">
@@ -136,8 +178,9 @@ const Setup = () => {
             What should we call you?
           </h1>
           <p className="font-sans text-sm font-light text-muted-foreground/80 leading-relaxed max-w-sm mx-auto">
-            Just your first name. We'll use it to greet you each week.
+            {copy.helper}
           </p>
+
         </div>
 
         <form
@@ -230,7 +273,7 @@ const Setup = () => {
             disabled={loading || submitting || !userId || !firstName.trim()}
             className="w-full inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-6 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all disabled:opacity-60"
           >
-            {loading || submitting ? <Loader2 size={16} className="animate-spin" /> : <>Continue to my week <ArrowRight size={14} /></>}
+            {loading || submitting ? <Loader2 size={16} className="animate-spin" /> : <>{copy.cta} <ArrowRight size={14} /></>}
           </button>
           {loadError ? (
             <div role="alert" className="space-y-3 text-center">

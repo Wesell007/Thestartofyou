@@ -129,7 +129,7 @@ Live, disposable accounts only:
 ## Risks and open questions
 
 - Hub is a public marketing page; the lifecycle read must be lazy and must not delay first paint or cause layout shift.
-- TTC → First Year is the only genuinely ambiguous state; the confirm-first treatment is a proposal and can be dropped to "no CTA" if you prefer.
+- TTC → First Year transition is deliberately out of scope here and can be planned as its own phase.
 - Companion choice remains session-only in both modes, as in 16.2B.
 - Open question: should the direct CTA also appear on First Year topic pages, or hub only? Plan assumes hub only.
 

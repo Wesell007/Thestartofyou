@@ -144,8 +144,10 @@ const Setup = () => {
       return;
     }
     trackEvent(EVENTS.SETUP_COMPLETED);
-    navigate("/my-week", { replace: true });
+    navigate(copy.destination, { replace: true });
   };
+
+  const copy = resolveSetupCopy(lifecycle);
 
   const pillClass = (active: boolean) =>
     `rounded-pill border px-3.5 py-1.5 font-sans text-[12.5px] transition-colors ${
@@ -153,6 +155,8 @@ const Setup = () => {
         ? "bg-foreground/[0.06] border-foreground/40 text-foreground"
         : "bg-parchment border-border/50 text-foreground/75 hover:border-foreground/25"
     }`;
+
+
 
   return (
     <div className="min-h-screen bg-parchment flex items-center">

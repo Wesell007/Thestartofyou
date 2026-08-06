@@ -1,0 +1,1 @@
+DELETE FROM public.profiles WHERE user_id IN ('115b4372-f3d5-46e1-98ad-88b304dd66e5','b5aa373e-b419-4da0-a872-de2dca84f432','7911edee-74ec-4fe7-ac23-3ce05ea8f8b8','b4f4decc-5de9-4188-ad0f-680848850a01');

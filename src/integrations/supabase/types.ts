@@ -313,6 +313,56 @@ export type Database = {
         }
         Relationships: []
       }
+      first_year_entries: {
+        Row: {
+          answered: boolean
+          baby_id: string | null
+          created_at: string
+          entry_date: string
+          id: string
+          kind: string
+          lane: string
+          note: string | null
+          tags: string[]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          answered?: boolean
+          baby_id?: string | null
+          created_at?: string
+          entry_date: string
+          id?: string
+          kind: string
+          lane: string
+          note?: string | null
+          tags?: string[]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          answered?: boolean
+          baby_id?: string | null
+          created_at?: string
+          entry_date?: string
+          id?: string
+          kind?: string
+          lane?: string
+          note?: string | null
+          tags?: string[]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "first_year_entries_baby_id_fkey"
+            columns: ["baby_id"]
+            isOneToOne: false
+            referencedRelation: "babies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       first_year_journeys: {
         Row: {
           archived_pregnancy_journey_id: string | null

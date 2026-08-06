@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { addDays } from "date-fns";
 import { ArrowLeft, ChevronDown } from "lucide-react";
@@ -61,6 +61,8 @@ const MyPregnancyChapter = () => {
   const [attempt, setAttempt] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [openWeek, setOpenWeek] = useState<number | null>(null);
+  // Nothing kept for this person: a gentle state rather than a redirect.
+  const [empty, setEmpty] = useState(false);
   const [failedMedia, setFailedMedia] = useState<string[]>([]);
 
   const retry = useCallback(() => setAttempt((n) => n + 1), []);
@@ -239,9 +241,6 @@ const MyPregnancyChapter = () => {
     };
   }, [navigate, attempt]);
 
-  // Nothing kept for this person: a gentle state rather than a redirect.
-  const [empty, setEmpty] = useState(false);
-
   // Signed links are short-lived, so refresh the page data before they lapse.
   useEffect(() => {
     if (!data) return;
@@ -264,7 +263,7 @@ const MyPregnancyChapter = () => {
     return <PageLoadState message="Opening your pregnancy chapter…" />;
   }
 
-  const shell = (children: React.ReactNode) => (
+  const shell = (children: ReactNode) => (
     <div
       className="min-h-screen bg-parchment-grain page-vignette"
       style={{ backgroundColor: "hsl(var(--stage-firstyear) / 0.35)" }}

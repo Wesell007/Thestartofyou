@@ -26,7 +26,8 @@ Recovery, wellbeing, rest and support, and questions are journey-level and never
 | First Year with journey and at least one baby | Renders |
 | First Year but missing journey or babies | `/setup/first-year` |
 | Pregnancy, given birth | `/setup/first-year` |
-| Pregnancy, other states | `/my-week` |
+| Pregnancy, active or ordinary state | `/my-week` |
+| Pregnancy, sensitive status (loss, no longer pregnant, paused) | `/my-journey` |
 | TTC | `/my-ttc-journey` |
 | No journey pointer | `/due-date-calculator` |
 
@@ -46,7 +47,7 @@ Constraints: note capped at 2000 characters; at most 8 tags; baby lane requires 
 
 Indexes: `(user_id, entry_date desc)`, `(user_id, baby_id, entry_date desc)`, plus partial unique indexes on `(user_id, baby_id, entry_date, kind)` for baby rows and `(user_id, entry_date, kind)` for parent rows, so re-saving updates instead of duplicating.
 
-Validation trigger: tags must be short non-empty labels; the baby must belong to the same account; entry dates cannot precede the relevant date of birth; a generous future bound (UTC today plus one day) so no legitimate local "today" is ever rejected while the UI blocks real future dates.
+Validation trigger (enforced on every insert and update, so direct table writes are protected too, not just route guards): the row must belong to the signed-in owner; that owner's active lifecycle must be `first_year`; `baby_id` must belong to the same user; baby-lane rows require a valid `baby_id` and parent-lane rows must have none; baby and parent lanes accept only their own kinds; tags must be short non-empty labels; entry dates cannot precede the relevant date of birth; and a generous future bound (UTC today plus one day) so no legitimate local "today" is ever rejected while the UI blocks real future dates.
 
 RLS: four owner policies scoped to `auth.uid()`, grants to `authenticated` and `service_role` only, nothing to `anon`.
 

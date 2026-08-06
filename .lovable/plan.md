@@ -1,28 +1,79 @@
-# Phase 16.5B — Signed-in Navigation Lifecycle Polish (Build)
+# Phase 16.5C — Lifecycle-aware Setup/Profile Copy Polish (Plan)
 
-Navigation polish only. No route guards, schema, migrations, RLS, RPCs, AI, tracking features, memories or public page content change.
+Planning and audit only. No build.
 
-## Audit (confirmed)
+## Audit findings
 
-- `src/components/myweek/MyWeekHeader.tsx` is the shared signed-in header used by 18 pages including `MyFirstYear.tsx` and `MyPregnancyChapter.tsx`. It hardcodes logo → `/my-week`, "This week" → `/my-week`, "My journey" → `/my-journey`.
-- `src/components/layout/JourneyBottomNav.tsx` types lifecycle as `"pregnancy" | "ttc"` only and matches no First Year route, so the mobile bar does not render on `/my-first-year` or `/my-pregnancy-chapter`.
-- `src/components/layout/Navbar.tsx` authed CTA falls through to "Set up journey" → `/due-date-calculator` for `first_year`.
-- No lifecycle context exists; each nav component self-fetches `journeys.lifecycle`.
+**Which file renders "What should we call you?"**
+`src/pages/Setup.tsx` (route `/setup`, registered in `src/App.tsx` line 333, not wrapped in `ProtectedRoute` — it does its own session check and sends signed-out visitors to `/auth`).
 
-## Build
+**Helper copy**
+Hardcoded in `Setup.tsx`: "Just your first name. We'll use it to greet you each week." No copy module involved.
 
-1. **`src/lib/navLifecycle.ts` (new)** — pure resolvers: `resolveHomeHref`, `resolveHeaderLinks(lifecycle, hasKeptChapter)`, `resolvePublicAccountLink`. First Year returns "First Year" → `/my-first-year` and, only when a chapter exists, "Pregnancy chapter" → `/my-pregnancy-chapter`. Pregnancy, TTC and unknown fall back exactly as today.
-2. **`src/lib/useLifecycle.ts` (new)** — `{ authed, lifecycle, hasKeptChapter, loading }`. Reads `journeys.lifecycle`; for `first_year` only, one boolean check: `first_year_journeys.archived_pregnancy_journey_id`, falling back to a single-row `archived_journeys` existence query. No reflections, photos, media memories or signed URLs.
-3. **`MyWeekHeader.tsx`** — logo target and desktop links come from the resolvers. Account menu unchanged.
-4. **`JourneyBottomNav.tsx`** — add `first_year` to the lifecycle union, `FIRST_YEAR_ROUTES` (`/my-first-year`, `/my-pregnancy-chapter`), and `FIRST_YEAR_TABS` (First Year, Pregnancy chapter when kept, Account). Pregnancy and TTC tabs untouched.
-5. **`Navbar.tsx`** — authed CTA via `resolvePublicAccountLink`; public links untouched.
-6. **`src/lib/analyticsEvents.ts`** — extend `JourneyNavTab` with `my_first_year` and `pregnancy_chapter`. No existing event names change.
-7. **`src/lib/navLifecycle.test.ts` (new)** — pregnancy, First Year with and without a kept chapter, TTC, unknown fallback, and an assertion that First Year never links to `/my-week` or `/my-journey`.
+**CTA copy**
+Hardcoded in the submit button in `Setup.tsx`: "Continue to my week".
 
-## Not changed
+**Where it sends users after completion**
+Hardcoded `navigate("/my-week", { replace: true })` after a successful profile upsert. There is a second hardcoded pregnancy redirect earlier: if a `first_name` already exists on load, the page immediately sends the user to `/my-week`.
 
-`src/App.tsx`, `src/lib/authIntent.ts`, all route guards and journey pages, schema, migrations, RPCs, RLS, generated types, sitemap script, robots, public content, AI companion context.
+**Can it read the lifecycle pointer?**
+Yes. It already has the authenticated `user.id` and queries `profiles`; reading `journeys.lifecycle` for that user is the same access pattern used by `useLifecycle` and `authIntent`. No schema or policy change needed.
 
-## QA
+**Can it use auth intent or return path?**
+Not reliably. `/setup` is not in `PROTECTED_ROUTE_PREFIXES`, so `parseSafeReturnTo` rejects it and `/auth` never forwards a `return_to` into `/setup`. `/setup` is also reached by direct redirect from other pages, which pass no state. Intent/return path is therefore not a usable signal here.
 
-Playwright with disposable accounts: First Year with a kept chapter, First Year without one, pregnancy regression, TTC regression, signed-out public nav. Then `npx tsgo --noEmit -p tsconfig.json`, `npx vitest run`, `npm run build`, reporting sitemap and dist results.
+**Who can land here**
+- Pregnancy: yes — `authIntent` sends pending-journey users and named-less pregnancy users to `/setup`; `MyWeek.tsx` (113) and `MyJourney.tsx` (142) redirect when `first_name` is missing.
+- First Year: yes — `KeptChapter.tsx` (178) and `MyPregnancyChapter.tsx` (124) redirect to `/setup` when the profile name is missing, and both are First Year-reachable surfaces. Such a user currently gets pregnancy copy and is then thrown to `/my-week`, which does not belong to them.
+- TTC: only by direct navigation today (`MyTTCJourney.tsx` does not gate on `first_name`), but the wording and the `/my-week` landing are still wrong for them.
+
+**Can this be fixed without touching route guards?**
+Yes. Every change is inside `Setup.tsx` plus a small pure copy helper. No guard, no redirect source, no schema change.
+
+## Recommended behaviour
+
+Resolve one lifecycle value on load, then derive copy, CTA and destination from it.
+
+Lifecycle source: **pointer first, saved-journey fallback**, not return path.
+1. `journeys.lifecycle` for the user (`pregnancy` | `ttc` | `first_year`).
+2. If absent: a pending/saved pregnancy journey implies `pregnancy`; a saved TTC journey implies `ttc`.
+3. Otherwise `null` (neutral).
+
+| Lifecycle | Helper copy | CTA | Destination |
+| --- | --- | --- | --- |
+| pregnancy | Just your first name. We'll use it to greet you each week. | Continue to my week | `/my-week` |
+| first_year | Just your first name. We'll use it to greet you in your First Year space. | Continue to my First Year | `/my-first-year` |
+| ttc | Just your first name. We'll use it to greet you in your journey. | Continue to my journey | `/my-ttc-journey` |
+| unknown | Just your first name. We'll use it to greet you. | Continue | existing fallback (`/due-date-calculator`) |
+
+The same destination map applies to the early "already has a name" redirect, so a First Year user with a name is no longer bounced to `/my-week`.
+
+The `commitPendingJourneyToDB` call, its error copy, the companion name/tone block and the profile fields all stay exactly as they are.
+
+## Technical notes
+
+- New pure helper, e.g. `resolveSetupCopy(lifecycle)` returning `{ helper, cta, destination }`, placed next to `src/lib/navLifecycle.ts` (or exported from it) so it is unit-testable and components stay branch-free.
+- Reuse the existing `NavLifecycle` type.
+- Lifecycle fetch folds into the existing `getSession` effect — one extra `maybeSingle()` read, no new render pass, and the button already shows a loading state so no copy flicker.
+
+## Files that would change
+- `src/pages/Setup.tsx`
+- `src/lib/navLifecycle.ts` (or a new small `setupCopy.ts`) plus a matching unit test
+
+## Files that must not change
+`src/App.tsx`, `src/lib/authIntent.ts`, `ProtectedRoute.tsx`, `MyWeek.tsx`, `MyJourney.tsx`, `KeptChapter.tsx`, `MyPregnancyChapter.tsx`, `SetupTTC.tsx`, `FirstYearSetup.tsx`, `src/lib/companion.ts`, `AccountSettings.tsx`, migrations, RPCs, RLS, sitemap, robots, analytics.
+
+## QA plan
+- Unit test the copy/destination resolver for all four lifecycle values.
+- Throwaway-account Playwright pass: pregnancy user with no name → pregnancy copy → `/my-week`; First Year user with no name (via `/my-pregnancy-chapter` redirect) → First Year copy → `/my-first-year`; TTC user visiting `/setup` → TTC copy → `/my-ttc-journey`; user with no lifecycle → neutral copy.
+- Confirm a named First Year user hitting `/setup` lands on `/my-first-year`, not `/my-week`.
+- Signed-out `/setup` still redirects to `/auth`.
+- Pending-journey commit and its error state unchanged.
+- Typecheck, tests, production build.
+
+## Risks and open questions
+- A First Year user whose lifecycle pointer read fails would fall to neutral copy and the neutral destination rather than pregnancy wording — acceptable and safer than the current behaviour.
+- Open question: should the neutral fallback stay `/due-date-calculator`, or should it become a quiet "choose your journey" landing? Keeping the existing fallback for now unless you prefer otherwise.
+
+## Next step
+Phase 16.5D build can proceed once this is approved.

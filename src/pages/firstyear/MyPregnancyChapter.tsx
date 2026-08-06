@@ -250,9 +250,15 @@ const MyPregnancyChapter = () => {
 
   const chapterSpan = useMemo(() => {
     if (!data) return null;
-    const start = data.chapter.started_at ? new Date(data.chapter.started_at) : null;
+    // The pregnancy itself is the span worth showing, not the moment the
+    // chapter was set aside. Fall back gently when dates are incomplete.
+    const start =
+      (data.chapter.lmp_date ? parseDateOnly(data.chapter.lmp_date) : null) ??
+      (data.chapter.started_at ? new Date(data.chapter.started_at) : null);
     const end = data.chapter.ended_at ? new Date(data.chapter.ended_at) : null;
-    if (start && end) return `${formatDate(start)} to ${formatDate(end)}`;
+    if (start && end && formatDate(start) !== formatDate(end)) {
+      return `${formatDate(start)} to ${formatDate(end)}`;
+    }
     if (start) return `From ${formatDate(start)}`;
     return null;
   }, [data]);

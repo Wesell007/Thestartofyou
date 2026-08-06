@@ -178,8 +178,9 @@ const Setup = () => {
             What should we call you?
           </h1>
           <p className="font-sans text-sm font-light text-muted-foreground/80 leading-relaxed max-w-sm mx-auto">
-            Just your first name. We'll use it to greet you each week.
+            {copy.helper}
           </p>
+
         </div>
 
         <form

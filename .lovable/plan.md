@@ -62,7 +62,7 @@ Add a single First Year start CTA to the public hub (a new component under `src/
 | signed in, pregnancy `given_birth` | `/setup/first-year` (transition mode) |
 | signed in, pregnancy `active` | `/my-week`, with a quiet line: "Your First Year space opens once your baby arrives." |
 | signed in, pregnancy sensitive status | no start CTA; quiet link to `/my-journey` only |
-| signed in, `ttc` | `/my-ttc-journey`, with a secondary "I have had my baby" link that goes to `/setup/first-year` where an explicit confirm step precedes save |
+| signed in, `ttc` | `/my-ttc-journey`. No First Year start path for TTC in this phase |
 
 The hub stays public and cached-friendly: the CTA renders its signed-out form first and swaps once the lightweight lifecycle read resolves, matching the existing anti-flicker pattern.
 

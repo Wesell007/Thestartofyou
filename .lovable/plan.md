@@ -43,7 +43,7 @@ lifecycle = first_year                      -> redirect /my-first-year
 lifecycle = pregnancy, status given_birth   -> mode "transition"
 lifecycle = pregnancy, status active        -> redirect /my-week
 lifecycle = pregnancy, sensitive status     -> redirect /my-journey (unchanged)
-lifecycle = ttc                             -> redirect /my-ttc-journey (confirm-first entry, see CTA table)
+lifecycle = ttc                             -> redirect /my-ttc-journey
 no journeys row at all                      -> mode "direct"
 signed out                                  -> /auth?intent=return_to_route&return_to=/setup/first-year
 ```

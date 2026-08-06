@@ -382,7 +382,7 @@ const AccountSettings = () => {
 
           <section className="rounded-2xl border border-border/50 bg-card p-6">
             <h2 className="font-serif text-xl mb-2">Download your data</h2>
-            <p className="text-sm text-muted-foreground mb-5">Creates a JSON file containing everything saved to your account: your profile, journey details, logs, reflections, photo, video and voice note records, and all of your toolkit entries.</p>
+            <p className="text-sm text-muted-foreground mb-5">Creates a JSON file containing everything saved to your account: your profile, journey details, logs, reflections, First Year daily notes, photo, video and voice note records, and all of your toolkit entries.</p>
             <button type="button" onClick={exportData} disabled={Boolean(busy)} className="inline-flex items-center gap-2 rounded-pill border border-border px-5 py-2.5 text-sm disabled:opacity-50">
               <Download size={15} /> {busy === "export" ? "Preparing…" : "Download my data"}
             </button>

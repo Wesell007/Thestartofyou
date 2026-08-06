@@ -61,19 +61,19 @@ const BABY_FIELDS: { kind: BabyKind; hint: string; placeholder: string }[] = [
   {
     kind: "nappies",
     hint: "Only if it is useful to you or to a health visitor.",
-    placeholder: "Normal today…",
+    placeholder: "Much like yesterday…",
   },
 ];
 
 const PARENT_FIELDS: { kind: ParentKind; hint: string; placeholder: string }[] = [
   {
     kind: "recovery",
-    hint: "How your body feels today. This is not a check for anything.",
+    hint: "How your body feels today, in your own words.",
     placeholder: "Moving a little more easily…",
   },
   {
     kind: "wellbeing",
-    hint: "However you are feeling, in your own words.",
+    hint: "However you are feeling. There is no right answer here.",
     placeholder: "Tired, but steadier than last week…",
   },
   {
@@ -87,6 +87,16 @@ const PARENT_FIELDS: { kind: ParentKind; hint: string; placeholder: string }[] =
     placeholder: "Ask about feeding at the next check…",
   },
 ];
+
+const fieldId = (kind: EntryKind) => `fy-note-${kind}`;
+
+/** Shared button styling for the per-field save controls. */
+const SAVE_BUTTON_CLASS =
+  "inline-flex min-h-11 items-center rounded-pill border border-border/60 bg-parchment px-5 py-2 font-sans text-[13px] text-foreground/85 transition-colors hover:border-foreground/25 disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
+const INLINE_ACTION_CLASS =
+  "inline-flex min-h-11 items-center font-sans text-[12.5px] text-foreground/60 underline underline-offset-4 hover:text-foreground/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
 
 type Loaded = {
   userId: string;

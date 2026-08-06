@@ -80,18 +80,21 @@ const FYHero = () => {
         <source src={firstyearHeroVideo.url} type="video/mp4" />
       </video>
 
-      {/* Tap-to-play affordance when autoplay is blocked */}
+      {/* Tap-to-play affordance when autoplay is blocked.
+          The wrapper is full-bleed for positioning only and never intercepts
+          clicks; only the round badge is interactive. */}
       {videoState === "paused" && (
-        <button
-          onClick={handleTapToPlay}
-          className="absolute inset-0 z-20 flex items-center justify-center bg-transparent cursor-pointer"
-          aria-label="Play video"
-        >
-          <div className="bg-parchment/60 backdrop-blur-sm rounded-full p-4 shadow-lg hover:bg-parchment/80 transition-all duration-300">
+        <div className="absolute inset-0 z-10 pointer-events-none">
+          <button
+            onClick={handleTapToPlay}
+            className="pointer-events-auto absolute bottom-6 right-6 md:bottom-8 md:right-8 bg-parchment/60 backdrop-blur-sm rounded-full p-4 shadow-lg hover:bg-parchment/80 transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 focus-visible:ring-offset-2"
+            aria-label="Play video"
+          >
             <Play size={28} className="text-foreground/70 ml-0.5" />
-          </div>
-        </button>
+          </button>
+        </div>
       )}
+
 
       {/* Veil — desktop weighted left, mobile weighted bottom */}
       <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-parchment/80 via-parchment/40 to-parchment/0" />

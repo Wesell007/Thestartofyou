@@ -116,7 +116,7 @@ const FYHero = () => {
         />
       </div>
 
-      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl relative z-10">
+      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl relative z-20">
         <div className="max-w-[640px]">
           {/* Eyebrow */}
           <div className="flex items-center gap-2 mb-7">

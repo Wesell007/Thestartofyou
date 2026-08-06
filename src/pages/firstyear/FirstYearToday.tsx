@@ -8,6 +8,13 @@ import PageLoadState from "@/components/shared/PageLoadState";
 import ConfirmDialog from "@/components/shared/ConfirmDialog";
 import NoteField from "@/components/firstyear/today/NoteField";
 import BabySelector, { ALL_BABIES } from "@/components/firstyear/today/BabySelector";
+import {
+  saveButtonLabel,
+  saveConfirmation,
+  targetChangeNotice,
+  writingForLabel,
+} from "@/components/firstyear/today/saveLabels";
+
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import {

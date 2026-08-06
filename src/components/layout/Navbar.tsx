@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { buildAuthUrl } from "@/lib/authIntent";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
+import { resolvePublicAccountLink } from "@/lib/navLifecycle";
+
 import logoSrc from "@/assets/logo-dark.png";
 
 
@@ -26,7 +28,7 @@ const navLinks = [
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [authed, setAuthed] = useState<boolean | null>(null);
-  const [accountLink, setAccountLink] = useState({ href: "/my-week", label: "My Week" });
+  const [accountLink, setAccountLink] = useState(resolvePublicAccountLink("pregnancy"));
   const location = useLocation();
 
   useEffect(() => {
@@ -43,14 +45,15 @@ const Navbar = () => {
         .eq("user_id", userId)
         .maybeSingle();
       if (cancelled || error) return;
-      if (data?.lifecycle === "ttc") {
-        setAccountLink({ href: "/my-ttc-journey", label: "My TTC Journey" });
-      } else if (data?.lifecycle === "pregnancy") {
-        setAccountLink({ href: "/my-week", label: "My Week" });
-      } else {
-        setAccountLink({ href: "/due-date-calculator", label: "Set up journey" });
-      }
+      const lifecycle =
+        data?.lifecycle === "ttc" ||
+        data?.lifecycle === "pregnancy" ||
+        data?.lifecycle === "first_year"
+          ? data.lifecycle
+          : null;
+      setAccountLink(resolvePublicAccountLink(lifecycle));
     };
+
     supabase.auth.getSession().then(({ data }) => {
       void updateAccount(data.session?.user?.id ?? null);
     });

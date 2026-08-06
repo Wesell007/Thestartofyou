@@ -1,7 +1,9 @@
 import { forwardRef } from "react";
-import { COMPANION_OPTIONS, type CompanionChoice } from "./firstYearSetupConstants";
+import { companionOptionsForMode, type CompanionChoice } from "./firstYearSetupConstants";
+import { FIRST_YEAR_SETUP_COPY, type FirstYearSetupMode } from "@/lib/firstYearEntry";
 
 type Props = {
+  mode: FirstYearSetupMode;
   value: CompanionChoice | null;
   onChange: (value: CompanionChoice) => void;
   onBack: () => void;
@@ -13,7 +15,7 @@ type Props = {
  * stored, no AI context or prompt changes, and no pregnancy memories are read.
  */
 const StepCompanion = forwardRef<HTMLHeadingElement, Props>(
-  ({ value, onChange, onBack, onContinue }, ref) => (
+  ({ mode, value, onChange, onBack, onContinue }, ref) => (
     <div>
       <h2
         ref={ref}
@@ -21,11 +23,10 @@ const StepCompanion = forwardRef<HTMLHeadingElement, Props>(
         className="font-serif text-[1.7rem] sm:text-[2rem] leading-[1.15] mb-4 outline-none"
         style={{ color: "hsl(var(--stage-recovery-deep))" }}
       >
-        Cindy is still here. Same companion, new chapter.
+        {FIRST_YEAR_SETUP_COPY[mode].companion.heading}
       </h2>
       <p className="font-serif text-[15px] leading-[1.7] text-foreground/80 max-w-[52ch] mb-8">
-        Nothing you have written is shared with her. You choose what she can use,
-        and you can change your mind whenever you like.
+        {FIRST_YEAR_SETUP_COPY[mode].companion.body}
       </p>
 
       <fieldset className="mb-9">
@@ -35,7 +36,7 @@ const StepCompanion = forwardRef<HTMLHeadingElement, Props>(
           aria-label="How would you like Cindy to continue?"
           className="flex flex-col gap-3"
         >
-          {COMPANION_OPTIONS.map((option) => (
+          {companionOptionsForMode(mode).map((option) => (
             <label
               key={option.value}
               className="flex gap-3 rounded-[16px] border px-4 py-4 cursor-pointer transition-colors"

@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import { format } from "date-fns";
 import { parseDateOnly } from "@/lib/dateOnly";
+import { FIRST_YEAR_SETUP_COPY, type FirstYearSetupMode } from "@/lib/firstYearEntry";
 import {
   BABY_COUNT_OPTIONS,
   BABY_ROW_LABELS,
@@ -10,6 +11,7 @@ import {
 import type { FirstYearSetupDraft } from "./firstYearSetupSchema";
 
 type Props = {
+  mode: FirstYearSetupMode;
   draft: FirstYearSetupDraft;
   companion: CompanionChoice | null;
   saving: boolean;
@@ -26,7 +28,7 @@ const valueClass = "font-serif text-[15px] text-foreground/85";
 
 /** Step 4. Quiet read-only summary, then save. */
 const StepReview = forwardRef<HTMLHeadingElement, Props>(
-  ({ draft, companion, saving, saveError, onEditBabies, onEditCompanion, onBack, onSubmit }, ref) => {
+  ({ mode, draft, companion, saving, saveError, onEditBabies, onEditCompanion, onBack, onSubmit }, ref) => {
     const parsedDob = parseDateOnly(draft.dateOfBirth);
     const countLabel =
       BABY_COUNT_OPTIONS.find((o) => o.value === draft.babyCount)?.label ?? "One baby";
@@ -45,10 +47,10 @@ const StepReview = forwardRef<HTMLHeadingElement, Props>(
           className="font-serif text-[1.7rem] sm:text-[2rem] leading-[1.15] mb-4 outline-none"
           style={{ color: "hsl(var(--stage-firstyear-deep))" }}
         >
-          Ready when you are
+          {FIRST_YEAR_SETUP_COPY[mode].review.heading}
         </h2>
         <p className="font-serif text-[15px] leading-[1.7] text-foreground/80 max-w-[52ch] mb-8">
-          Your pregnancy chapter is kept, and everything you saved stays readable.
+          {FIRST_YEAR_SETUP_COPY[mode].review.intro}
         </p>
 
         <div
@@ -119,8 +121,7 @@ const StepReview = forwardRef<HTMLHeadingElement, Props>(
             <span className={valueClass}>{companionLabel}</span>
           </div>
           <p className="font-serif text-[14px] leading-[1.6] text-foreground/70 pt-3">
-            Nothing is shared with Cindy yet. Your pregnancy memories stay private
-            until you choose otherwise.
+            {FIRST_YEAR_SETUP_COPY[mode].review.companionNote}
           </p>
         </div>
 

@@ -26,7 +26,8 @@ Recovery, wellbeing, rest and support, and questions are journey-level and never
 | First Year with journey and at least one baby | Renders |
 | First Year but missing journey or babies | `/setup/first-year` |
 | Pregnancy, given birth | `/setup/first-year` |
-| Pregnancy, other states | `/my-week` |
+| Pregnancy, active or ordinary state | `/my-week` |
+| Pregnancy, sensitive status (loss, no longer pregnant, paused) | `/my-journey` |
 | TTC | `/my-ttc-journey` |
 | No journey pointer | `/due-date-calculator` |
 

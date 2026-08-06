@@ -74,6 +74,7 @@ const FOR_YOU_CARDS: SupportCard[] = [
 type State = {
   babies: BabyRecord[];
   hasKeptChapter: boolean;
+  savedToday: number;
 };
 
 /**

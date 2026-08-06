@@ -654,7 +654,7 @@ const FirstYearToday = () => {
           if (!open) setPendingDelete(null);
         }}
         title="Remove this note?"
-        description="This will delete the note from today. You can always write another one."
+        description="This removes the note from today. You can write another one whenever you like."
         confirmLabel="Remove note"
         busy={deleting}
         onConfirm={confirmDelete}

@@ -68,6 +68,6 @@ Untouched: pregnancy tables and surfaces, the pregnancy toolkit, `reflections`, 
 
 ## QA
 
-Disposable accounts only, cleaned up afterwards. Covers: direct-start single baby (save, edit, delete, recent notes, Today card summary, export); transition user (entries save, kept pregnancy chapter still works, no pregnancy data mixing); twins (selector appears, "All babies" writes one row per baby, parent rows stay baby-free); blocked users (signed out, pregnancy, TTC, no journey); RLS cross-account read, update and delete attempts; desktop and mobile layout, keyboard flow, screen-reader labels, no console or network errors.
+Disposable accounts only, cleaned up afterwards. Covers: direct-start single baby (save, edit, delete, recent notes, Today card summary, export); transition user (entries save, kept pregnancy chapter still works, no pregnancy data mixing); twins (selector appears, "All babies" writes one row per baby, parent rows stay baby-free); duplicate prevention (saving the same kind twice on the same day updates one row); signed-out auth return landing back on `/my-first-year/today`; mobile bottom nav showing First Year labels on the route; blocked users (pregnancy, TTC, no journey); RLS cross-account read, update and delete attempts; desktop and mobile layout, keyboard flow, screen-reader labels, no console or network errors.
 
 Then: typecheck, targeted tests, full `vitest run`, production build, sitemap and dist check.

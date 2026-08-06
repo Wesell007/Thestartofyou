@@ -98,6 +98,7 @@ const Setup = lazy(() => import("./pages/Setup.tsx"));
 const SetupTTC = lazy(() => import("./pages/SetupTTC.tsx"));
 const FirstYearSetup = lazy(() => import("./pages/setup/FirstYearSetup.tsx"));
 const MyFirstYear = lazy(() => import("./pages/firstyear/MyFirstYear.tsx"));
+const FirstYearToday = lazy(() => import("./pages/firstyear/FirstYearToday.tsx"));
 const MyPregnancyChapter = lazy(() => import("./pages/firstyear/MyPregnancyChapter.tsx"));
 const MyTTCJourney = lazy(() => import("./pages/MyTTCJourney.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
@@ -307,6 +308,7 @@ const App = () => (
           <Route path="/my-week/:week" element={<ProtectedRoute><KeptChapter /></ProtectedRoute>} />
           <Route path="/my-journey" element={<ProtectedRoute><MyJourney /></ProtectedRoute>} />
           <Route path="/my-first-year" element={<ProtectedRoute><MyFirstYear /></ProtectedRoute>} />
+          <Route path="/my-first-year/today" element={<ProtectedRoute><FirstYearToday /></ProtectedRoute>} />
           <Route path="/my-pregnancy-chapter" element={<ProtectedRoute><MyPregnancyChapter /></ProtectedRoute>} />
           <Route path="/journey-support" element={<ProtectedRoute><JourneySupport /></ProtectedRoute>} />
           <Route path="/my-ttc-journey" element={<ProtectedRoute><MyTTCJourney /></ProtectedRoute>} />

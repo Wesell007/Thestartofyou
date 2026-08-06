@@ -126,6 +126,8 @@ const AccountSettings = () => {
         // Phase 16.1B: first year records.
         supabase.from("first_year_journeys").select("*").eq("user_id", userId),
         supabase.from("babies").select("*").eq("user_id", userId),
+        // Phase 17B: First Year daily check-in notes.
+        supabase.from("first_year_entries").select("*").eq("user_id", userId),
       ]);
       const error = results.find((result) => result.error)?.error;
       if (error) throw error;
@@ -149,6 +151,7 @@ const AccountSettings = () => {
         midwifeQuestions,
         firstYearJourney,
         babies,
+        firstYearEntries,
       ] = results;
       const payload = {
         exported_at: new Date().toISOString(),
@@ -174,6 +177,7 @@ const AccountSettings = () => {
         midwife_questions: midwifeQuestions.data,
         first_year_journey: firstYearJourney.data,
         babies: babies.data,
+        first_year_notes: firstYearEntries.data,
       };
       const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" }));
       const anchor = document.createElement("a");

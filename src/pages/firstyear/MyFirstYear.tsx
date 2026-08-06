@@ -17,6 +17,9 @@ import BabySummaryCard from "@/components/firstyear/journey/BabySummaryCard";
 import SupportLane, { type SupportCard } from "@/components/firstyear/journey/SupportLane";
 import PregnancyChapterKeptCard from "@/components/firstyear/journey/PregnancyChapterKeptCard";
 import WhatComesNextCard from "@/components/firstyear/journey/WhatComesNextCard";
+import TodayCard from "@/components/firstyear/journey/TodayCard";
+import { countEntriesForDate } from "@/lib/firstYearEntries";
+import { localDateKey } from "@/lib/firstYearEntriesSchema";
 
 /** For baby lane. Full public First Year routes only, never shortened paths. */
 const FOR_BABY_CARDS: SupportCard[] = [
@@ -74,6 +77,7 @@ const FOR_YOU_CARDS: SupportCard[] = [
 type State = {
   babies: BabyRecord[];
   hasKeptChapter: boolean;
+  savedToday: number;
 };
 
 /**
@@ -151,9 +155,14 @@ const MyFirstYear = () => {
           return;
         }
 
+        // A quiet count only: the card never shows streaks or targets.
+        const savedToday = await countEntriesForDate(userId, localDateKey()).catch(() => 0);
+        if (cancelled) return;
+
         setState({
           babies,
           hasKeptChapter: Boolean(journey.archived_pregnancy_journey_id),
+          savedToday,
         });
       } catch {
         if (!cancelled) {
@@ -191,6 +200,7 @@ const MyFirstYear = () => {
       <main className="relative mx-auto w-full max-w-[720px] lg:max-w-[880px] px-4 sm:px-8 md:px-10 pb-6">
         <FirstYearHeroPanel babies={state.babies} />
         <BabySummaryCard babies={state.babies} />
+        <TodayCard savedToday={state.savedToday} babyCount={state.babies.length} />
         <SupportLane
           side="baby"
           kicker="For baby"

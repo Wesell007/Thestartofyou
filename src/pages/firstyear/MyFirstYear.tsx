@@ -152,9 +152,14 @@ const MyFirstYear = () => {
           return;
         }
 
+        // A quiet count only: the card never shows streaks or targets.
+        const savedToday = await countEntriesForDate(userId, localDateKey()).catch(() => 0);
+        if (cancelled) return;
+
         setState({
           babies,
           hasKeptChapter: Boolean(journey.archived_pregnancy_journey_id),
+          savedToday,
         });
       } catch {
         if (!cancelled) {

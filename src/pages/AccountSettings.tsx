@@ -151,6 +151,7 @@ const AccountSettings = () => {
         midwifeQuestions,
         firstYearJourney,
         babies,
+        firstYearEntries,
       ] = results;
       const payload = {
         exported_at: new Date().toISOString(),
@@ -176,6 +177,7 @@ const AccountSettings = () => {
         midwife_questions: midwifeQuestions.data,
         first_year_journey: firstYearJourney.data,
         babies: babies.data,
+        first_year_notes: firstYearEntries.data,
       };
       const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" }));
       const anchor = document.createElement("a");

@@ -243,12 +243,33 @@ const FirstYearToday = () => {
   const babyDraftKey = (kind: BabyKind) =>
     draftKey(kind, loaded && loaded.babies.length > 1 ? (target || ALL_BABIES) : babyIdsForTarget[0] ?? null);
 
+  const nameForBaby = (babyId: string | null): string => {
+    if (!babyId || !loaded) return "You";
+    const index = loaded.babies.findIndex((baby) => baby.id === babyId);
+    const baby = loaded.babies[index];
+    if (!baby) return "Your baby";
+    return baby.name?.trim() ? baby.name.trim() : `Baby ${baby.birth_order ?? index + 1}`;
+  };
+
+  /** True when a note is already stored today for this field and target. */
+  const hasSavedFor = (kind: EntryKind): boolean => {
+    const lane = laneForKind(kind);
+    if (lane === "parent") {
+      return todaysEntries.some((entry) => entry.kind === kind && entry.baby_id === null);
+    }
+    if (babyIdsForTarget.length === 0) return false;
+    return babyIdsForTarget.every((babyId) =>
+      todaysEntries.some((entry) => entry.kind === kind && entry.baby_id === babyId),
+    );
+  };
+
   const handleSave = async (kind: EntryKind) => {
     if (!loaded || savingKind) return;
     const lane = laneForKind(kind);
     const key = lane === "baby" ? babyDraftKey(kind as BabyKind) : draftKey(kind, null);
     const note = drafts[key] ?? "";
     const targets = lane === "baby" ? babyIdsForTarget : [null];
+    const wasExisting = hasSavedFor(kind);
 
     const check = validateEntryDraft(
       {
@@ -266,6 +287,7 @@ const FirstYearToday = () => {
     }
 
     setSavingKind(kind);
+    setJustSavedKind(null);
     try {
       if (lane === "baby") {
         await saveEntryForBabies({
@@ -285,13 +307,34 @@ const FirstYearToday = () => {
         });
       }
       await refresh(loaded.userId);
-      toast({ title: "Saved for today" });
+      const confirmation = saveConfirmation({
+        wasExisting,
+        babyNames:
+          lane === "baby" ? (targets as string[]).map((babyId) => nameForBaby(babyId)) : undefined,
+      });
+      const message = `${confirmation} · ${KIND_LABELS[kind]}`;
+      setJustSavedKind(kind);
+      if (lane === "baby") setBabyStatus(message);
+      else setParentStatus(message);
+      toast({ title: confirmation });
     } catch {
       toast({ title: "We couldn't save that just now. Please try again." });
     } finally {
       setSavingKind(null);
     }
   };
+
+  /** Bring the matching field into view and focus it for editing. */
+  const handleEdit = (entry: FirstYearEntry) => {
+    if (entry.baby_id && loaded && loaded.babies.length > 1) setTarget(entry.baby_id);
+    window.requestAnimationFrame(() => {
+      const element = document.getElementById(fieldId(entry.kind));
+      if (!element) return;
+      element.scrollIntoView({ behavior: "smooth", block: "center" });
+      (element as HTMLTextAreaElement).focus({ preventScroll: true });
+    });
+  };
+
 
   const confirmDelete = async () => {
     if (!loaded || !pendingDelete) return;

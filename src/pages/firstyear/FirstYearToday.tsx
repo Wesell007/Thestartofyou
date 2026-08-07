@@ -68,7 +68,7 @@ const BABY_FIELDS: { kind: BabyKind; hint: string; placeholder: string }[] = [
   {
     kind: "nappies",
     hint: "Only if it is useful to you or to a health visitor.",
-    placeholder: "Much like yesterday…",
+    placeholder: "Two changes this morning…",
   },
 ];
 
@@ -616,7 +616,7 @@ const FirstYearToday = () => {
                 Recent days
               </h2>
               <p className="font-sans text-[13px] leading-[1.65] text-foreground/60 mb-5">
-                The last few days you wrote something. Days with nothing written are just as fine.
+                The last few days you wrote something. Gaps are part of it.
               </p>
               <div className="space-y-6">
                 {earlierDates.map((date) => (

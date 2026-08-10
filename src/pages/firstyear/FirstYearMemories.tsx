@@ -316,8 +316,8 @@ const FirstYearMemories = () => {
         noindex
       />
       <MyWeekHeader />
-      <main className="relative mx-auto w-full max-w-[720px] px-4 sm:px-8 md:px-10 pb-6">
-        <header className="pt-8 pb-8">
+      <main className="relative mx-auto w-full max-w-[720px] px-4 sm:px-8 md:px-10 pt-16 sm:pt-20 pb-6">
+        <header className="pb-8">
           <h1 className="font-serif text-[2rem] sm:text-[2.35rem] leading-[1.15] text-foreground/90 mb-3">
             Memories
           </h1>

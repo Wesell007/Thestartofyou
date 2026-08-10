@@ -1,6 +1,6 @@
 /**
- * Expectation setting for the first signed-in First Year surface. Nothing here
- * promises a date, and nothing implies the companion is reading private notes.
+ * Expectation setting for the signed-in First Year home. Acknowledges the
+ * daily notes that already exist, and keeps anything future deliberately soft.
  */
 const WhatComesNextCard = () => (
   <section className="pb-14">
@@ -15,8 +15,11 @@ const WhatComesNextCard = () => (
         What comes next
       </h2>
       <ul className="space-y-2.5 font-sans text-[13.5px] leading-[1.7] text-foreground/70 max-w-[54ch]">
-        <li>More First Year support is on the way, a little at a time.</li>
-        <li>There is nothing to log or track here yet, and nothing you need to keep up with.</li>
+        <li>
+          Your daily notes are here whenever you want them, for your baby and for you. There is
+          nothing to keep up with.
+        </li>
+        <li>More First Year support will arrive a little at a time.</li>
         <li>
           Cindy is still here if you have a question. She answers from general guidance only
           and does not look at anything private you have written.

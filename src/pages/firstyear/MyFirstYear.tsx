@@ -18,8 +18,15 @@ import SupportLane, { type SupportCard } from "@/components/firstyear/journey/Su
 import PregnancyChapterKeptCard from "@/components/firstyear/journey/PregnancyChapterKeptCard";
 import WhatComesNextCard from "@/components/firstyear/journey/WhatComesNextCard";
 import TodayCard from "@/components/firstyear/journey/TodayCard";
-import { countEntriesForDate } from "@/lib/firstYearEntries";
+import RecentlySavedCard from "@/components/firstyear/journey/RecentlySavedCard";
+import {
+  countEntriesForDate,
+  getRecentEntries,
+  type FirstYearEntry,
+} from "@/lib/firstYearEntries";
 import { localDateKey } from "@/lib/firstYearEntriesSchema";
+import { describeBabies } from "@/lib/firstYearCopy";
+
 
 /** For baby lane. Full public First Year routes only, never shortened paths. */
 const FOR_BABY_CARDS: SupportCard[] = [
@@ -78,7 +85,9 @@ type State = {
   babies: BabyRecord[];
   hasKeptChapter: boolean;
   savedToday: number;
+  recentEntries: FirstYearEntry[];
 };
+
 
 /**
  * The signed-in First Year landing surface. One journey with two sides of
@@ -155,15 +164,20 @@ const MyFirstYear = () => {
           return;
         }
 
-        // A quiet count only: the card never shows streaks or targets.
-        const savedToday = await countEntriesForDate(userId, localDateKey()).catch(() => 0);
+        // A quiet count and a short glance back only: never streaks or targets.
+        const [savedToday, recentEntries] = await Promise.all([
+          countEntriesForDate(userId, localDateKey()).catch(() => 0),
+          getRecentEntries(userId, 7).catch((): FirstYearEntry[] => []),
+        ]);
         if (cancelled) return;
 
         setState({
           babies,
           hasKeptChapter: Boolean(journey.archived_pregnancy_journey_id),
           savedToday,
+          recentEntries,
         });
+
       } catch {
         if (!cancelled) {
           setLoadError("We couldn't open your First Year journey just now.");
@@ -200,23 +214,33 @@ const MyFirstYear = () => {
       <main className="relative mx-auto w-full max-w-[720px] lg:max-w-[880px] px-4 sm:px-8 md:px-10 pb-6">
         <FirstYearHeroPanel babies={state.babies} />
         <BabySummaryCard babies={state.babies} />
-        <TodayCard savedToday={state.savedToday} babyCount={state.babies.length} />
-        <SupportLane
-          side="baby"
-          kicker="For baby"
-          heading="Support for your baby"
-          intro="Gentle guidance for the early days and the months ahead. Nothing to keep up with."
-          cards={FOR_BABY_CARDS}
+        <TodayCard
+          savedToday={state.savedToday}
+          babyCount={state.babies.length}
+          subject={describeBabies(state.babies)}
         />
-        <SupportLane
-          side="you"
-          kicker="For you"
-          heading="Support for you"
-          intro="Your recovery matters just as much. This side of the journey is yours."
-          cards={FOR_YOU_CARDS}
-        />
+        <RecentlySavedCard entries={state.recentEntries} />
         {state.hasKeptChapter ? <PregnancyChapterKeptCard hasKeptChapter /> : null}
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
+          <SupportLane
+            side="baby"
+            kicker="For baby"
+            heading="Support for your baby"
+            intro="Gentle guidance for the early days and the months ahead. Nothing to keep up with."
+            cards={FOR_BABY_CARDS}
+            halfWidth
+          />
+          <SupportLane
+            side="you"
+            kicker="For you"
+            heading="Support for you"
+            intro="Your recovery is part of this too. This side of the journey is yours."
+            cards={FOR_YOU_CARDS}
+            halfWidth
+          />
+        </div>
         <WhatComesNextCard />
+
       </main>
       <MyWeekFooter contextual="If anything worries you about your baby or your own recovery, speak to your midwife, GP or health visitor." />
     </div>

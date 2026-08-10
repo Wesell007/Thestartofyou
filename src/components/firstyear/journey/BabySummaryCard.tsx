@@ -15,6 +15,8 @@ type Props = {
 /**
  * Baby summary. Version one shows one shared summary for every baby, with
  * multiples acknowledged in the copy. No switcher, no per-baby dashboard.
+ * Lighter than the Today card on purpose, so the two read as a pairing with
+ * today's note carrying the weight.
  */
 const BabySummaryCard = ({ babies }: Props) => {
   if (babies.length === 0) return null;
@@ -24,32 +26,30 @@ const BabySummaryCard = ({ babies }: Props) => {
   const subject = describeBabies(babies);
 
   return (
-    <section className="pb-10">
+    <section className="pb-3">
       <div
-        className="rounded-[22px] keepsake-surface px-6 sm:px-8 py-7 sm:py-8"
-        style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.2)" }}
+        className="rounded-[20px] border px-5 sm:px-7 py-5 sm:py-6"
+        style={{
+          borderColor: "hsl(var(--stage-firstyear-accent) / 0.16)",
+          backgroundColor: "hsl(var(--stage-firstyear) / 0.45)",
+        }}
       >
         <p
-          className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-4"
+          className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-2.5"
           style={{ color: "hsl(var(--stage-firstyear-accent))" }}
         >
           {babies.length > 1 ? "Your babies" : "Your baby"}
         </p>
-        <h2 className="font-serif text-[1.5rem] sm:text-[1.75rem] leading-[1.2] text-foreground/90 mb-2">
+        <h2 className="font-serif text-[1.3rem] sm:text-[1.5rem] leading-[1.2] text-foreground/90 mb-1.5">
           {subject.charAt(0).toUpperCase() + subject.slice(1)}
         </h2>
-        <p className="font-serif text-[15.5px] leading-[1.7] text-foreground/80 max-w-[48ch]">
+        <p className="font-serif text-[15px] leading-[1.7] text-foreground/80 max-w-[48ch]">
           {babyAgeSentence(babies)}
         </p>
-        {babies.length > 1 && (
-          <p className="mt-3 font-sans text-[13px] leading-[1.6] text-foreground/60 max-w-[50ch]">
-            Everything here is written for all {babies.length} of them.
-          </p>
-        )}
-        <div className="mt-6">
+        <div className="mt-2">
           <Link
             to={monthPagePath(monthIndex)}
-            className="inline-flex items-center rounded-pill border border-border/60 bg-parchment px-5 py-2.5 font-sans text-sm text-foreground/85 transition-colors hover:border-foreground/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] text-foreground/70 underline underline-offset-4 decoration-border transition-colors hover:decoration-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
           >
             {monthPageLabel(monthIndex)}
           </Link>

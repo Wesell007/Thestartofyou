@@ -128,6 +128,8 @@ const AccountSettings = () => {
         supabase.from("babies").select("*").eq("user_id", userId),
         // Phase 17B: First Year daily check-in notes.
         supabase.from("first_year_entries").select("*").eq("user_id", userId),
+        // Phase 19B: First Year memories. Text keepsakes only, never media.
+        supabase.from("first_year_memories").select("*").eq("user_id", userId),
       ]);
       const error = results.find((result) => result.error)?.error;
       if (error) throw error;
@@ -152,6 +154,7 @@ const AccountSettings = () => {
         firstYearJourney,
         babies,
         firstYearEntries,
+        firstYearMemories,
       ] = results;
       const payload = {
         exported_at: new Date().toISOString(),
@@ -178,6 +181,7 @@ const AccountSettings = () => {
         first_year_journey: firstYearJourney.data,
         babies: babies.data,
         first_year_notes: firstYearEntries.data,
+        first_year_memories: firstYearMemories.data,
       };
       const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" }));
       const anchor = document.createElement("a");

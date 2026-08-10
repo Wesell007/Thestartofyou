@@ -342,6 +342,16 @@ const FirstYearToday = () => {
     });
   };
 
+  /**
+   * Carry a saved note over to the keepsake space. Only the entry id travels:
+   * the words themselves are read back from the parent's own row on the
+   * memories page, never placed in the URL.
+   */
+  const handleKeepAsMemory = (entry: FirstYearEntry) => {
+    navigate("/my-first-year/memories", { state: { sourceEntryId: entry.id } });
+  };
+
+
 
   const confirmDelete = async () => {
     if (!loaded || !pendingDelete) return;
@@ -587,6 +597,13 @@ const FirstYearToday = () => {
                         className={INLINE_ACTION_CLASS}
                       >
                         Edit this note
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleKeepAsMemory(entry)}
+                        className={INLINE_ACTION_CLASS}
+                      >
+                        Keep this as a memory
                       </button>
                       <button
                         type="button"

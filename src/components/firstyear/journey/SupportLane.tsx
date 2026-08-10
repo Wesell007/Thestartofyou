@@ -13,13 +13,19 @@ type Props = {
   cards: SupportCard[];
   /** Which stage palette the lane uses. */
   side: "baby" | "you";
+  /**
+   * Set when the lane sits in the two-column desktop grid, so its cards stay
+   * in a single column once the lane is only half the page wide.
+   */
+  halfWidth?: boolean;
 };
 
 /**
  * A group of quiet links into existing public guidance. Purely navigational:
  * nothing here reads or writes journey data.
  */
-const SupportLane = ({ kicker, heading, intro, cards, side }: Props) => {
+const SupportLane = ({ kicker, heading, intro, cards, side, halfWidth = false }: Props) => {
+
   const accent =
     side === "baby"
       ? "hsl(var(--stage-firstyear-accent))"

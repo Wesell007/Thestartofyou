@@ -18,8 +18,15 @@ import SupportLane, { type SupportCard } from "@/components/firstyear/journey/Su
 import PregnancyChapterKeptCard from "@/components/firstyear/journey/PregnancyChapterKeptCard";
 import WhatComesNextCard from "@/components/firstyear/journey/WhatComesNextCard";
 import TodayCard from "@/components/firstyear/journey/TodayCard";
-import { countEntriesForDate } from "@/lib/firstYearEntries";
+import RecentlySavedCard from "@/components/firstyear/journey/RecentlySavedCard";
+import {
+  countEntriesForDate,
+  getRecentEntries,
+  type FirstYearEntry,
+} from "@/lib/firstYearEntries";
 import { localDateKey } from "@/lib/firstYearEntriesSchema";
+import { describeBabies } from "@/lib/firstYearCopy";
+
 
 /** For baby lane. Full public First Year routes only, never shortened paths. */
 const FOR_BABY_CARDS: SupportCard[] = [

@@ -19,11 +19,13 @@ import PregnancyChapterKeptCard from "@/components/firstyear/journey/PregnancyCh
 import WhatComesNextCard from "@/components/firstyear/journey/WhatComesNextCard";
 import TodayCard from "@/components/firstyear/journey/TodayCard";
 import RecentlySavedCard from "@/components/firstyear/journey/RecentlySavedCard";
+import MemoriesCard from "@/components/firstyear/journey/MemoriesCard";
 import {
   countEntriesForDate,
   getRecentEntries,
   type FirstYearEntry,
 } from "@/lib/firstYearEntries";
+import { getRecentMemories, type FirstYearMemory } from "@/lib/firstYearMemories";
 import { localDateKey } from "@/lib/firstYearEntriesSchema";
 import { describeBabies } from "@/lib/firstYearCopy";
 
@@ -86,6 +88,7 @@ type State = {
   hasKeptChapter: boolean;
   savedToday: number;
   recentEntries: FirstYearEntry[];
+  recentMemories: FirstYearMemory[];
 };
 
 
@@ -164,10 +167,12 @@ const MyFirstYear = () => {
           return;
         }
 
-        // A quiet count and a short glance back only: never streaks or targets.
-        const [savedToday, recentEntries] = await Promise.all([
+        // A quiet count, a short glance back, and the last kept moments only:
+        // never streaks, counts of memories, or targets.
+        const [savedToday, recentEntries, recentMemories] = await Promise.all([
           countEntriesForDate(userId, localDateKey()).catch(() => 0),
           getRecentEntries(userId, 7).catch((): FirstYearEntry[] => []),
+          getRecentMemories(userId, 2).catch((): FirstYearMemory[] => []),
         ]);
         if (cancelled) return;
 
@@ -176,6 +181,7 @@ const MyFirstYear = () => {
           hasKeptChapter: Boolean(journey.archived_pregnancy_journey_id),
           savedToday,
           recentEntries,
+          recentMemories,
         });
 
       } catch {
@@ -220,6 +226,7 @@ const MyFirstYear = () => {
           subject={describeBabies(state.babies)}
         />
         <RecentlySavedCard entries={state.recentEntries} />
+        <MemoriesCard memories={state.recentMemories} />
         {state.hasKeptChapter ? <PregnancyChapterKeptCard hasKeptChapter /> : null}
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
           <SupportLane

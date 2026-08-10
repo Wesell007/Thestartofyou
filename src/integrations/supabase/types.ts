@@ -401,6 +401,60 @@ export type Database = {
           },
         ]
       }
+      first_year_memories: {
+        Row: {
+          baby_id: string | null
+          created_at: string
+          id: string
+          memory_date: string
+          memory_scope: string
+          note: string
+          source_entry_id: string | null
+          title: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          baby_id?: string | null
+          created_at?: string
+          id?: string
+          memory_date: string
+          memory_scope?: string
+          note: string
+          source_entry_id?: string | null
+          title?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          baby_id?: string | null
+          created_at?: string
+          id?: string
+          memory_date?: string
+          memory_scope?: string
+          note?: string
+          source_entry_id?: string | null
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "first_year_memories_baby_id_fkey"
+            columns: ["baby_id"]
+            isOneToOne: false
+            referencedRelation: "babies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "first_year_memories_source_entry_id_fkey"
+            columns: ["source_entry_id"]
+            isOneToOne: false
+            referencedRelation: "first_year_entries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       hospital_bag_items: {
         Row: {
           category: string

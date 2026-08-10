@@ -40,21 +40,28 @@ const SupportLane = ({ kicker, heading, intro, cards, side, halfWidth = false }:
       : "hsl(var(--stage-recovery) / 0.5)";
 
   return (
-    <section className="pt-2 pb-8">
+    <section className="pt-1 pb-8">
       <p
         className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-3"
         style={{ color: accent }}
       >
         {kicker}
       </p>
-      <h2 className="font-serif text-[1.45rem] sm:text-[1.7rem] leading-[1.2] text-foreground/90 mb-3">
+      <h2 className="font-serif text-[1.35rem] sm:text-[1.55rem] leading-[1.2] text-foreground/90 mb-2.5">
         {heading}
       </h2>
-      <p className="font-sans text-[14px] leading-[1.7] text-foreground/70 max-w-[52ch] mb-6">
+      <p className="font-sans text-[14px] leading-[1.7] text-foreground/70 max-w-[52ch] mb-5">
         {intro}
       </p>
 
-      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+      <ul
+        className={
+          halfWidth
+            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3.5"
+            : "grid grid-cols-1 sm:grid-cols-2 gap-3.5"
+        }
+      >
+
         {cards.map((card) => (
           <li key={`${card.title}-${card.href}`}>
             <Link

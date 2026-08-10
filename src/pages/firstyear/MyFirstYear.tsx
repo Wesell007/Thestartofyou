@@ -85,7 +85,9 @@ type State = {
   babies: BabyRecord[];
   hasKeptChapter: boolean;
   savedToday: number;
+  recentEntries: FirstYearEntry[];
 };
+
 
 /**
  * The signed-in First Year landing surface. One journey with two sides of
@@ -162,15 +164,20 @@ const MyFirstYear = () => {
           return;
         }
 
-        // A quiet count only: the card never shows streaks or targets.
-        const savedToday = await countEntriesForDate(userId, localDateKey()).catch(() => 0);
+        // A quiet count and a short glance back only: never streaks or targets.
+        const [savedToday, recentEntries] = await Promise.all([
+          countEntriesForDate(userId, localDateKey()).catch(() => 0),
+          getRecentEntries(userId, 7).catch((): FirstYearEntry[] => []),
+        ]);
         if (cancelled) return;
 
         setState({
           babies,
           hasKeptChapter: Boolean(journey.archived_pregnancy_journey_id),
           savedToday,
+          recentEntries,
         });
+
       } catch {
         if (!cancelled) {
           setLoadError("We couldn't open your First Year journey just now.");

@@ -422,8 +422,8 @@ const FirstYearToday = () => {
         noindex
       />
       <MyWeekHeader />
-      <main className="relative mx-auto w-full max-w-[720px] px-4 sm:px-8 md:px-10 pb-6">
-        <header className="pt-8 pb-8">
+      <main className="relative mx-auto w-full max-w-[720px] px-4 sm:px-8 md:px-10 pt-16 sm:pt-20 pb-6">
+        <header className="pb-8">
           <p
             className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-4"
             style={{ color: "hsl(var(--stage-firstyear-accent))" }}

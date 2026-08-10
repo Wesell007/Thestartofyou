@@ -11,7 +11,7 @@ type Props = {
  * link is a quiet text link so it cannot compete with today's note.
  */
 const FirstYearHeroPanel = ({ babies }: Props) => (
-  <section className="pt-12 sm:pt-16 pb-5">
+  <section className="pt-16 sm:pt-20 pb-5">
     <p
       className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-3"
       style={{ color: "hsl(var(--stage-firstyear-accent))" }}

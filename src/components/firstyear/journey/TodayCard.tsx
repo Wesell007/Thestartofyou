@@ -38,7 +38,7 @@ const TodayCard = ({ savedToday, babyCount, subject }: Props) => (
             }, a note about your own recovery, or a question to remember for your next appointment.`}
       </p>
       <p className="mt-3 font-sans text-[13px] leading-[1.6] text-foreground/60 max-w-[50ch]">
-        Nothing here is tracked, scored or compared. Skipping days is completely fine.
+        Write as much or as little as you like. There is nothing to keep up with.
       </p>
       <div className="mt-6">
         <Link

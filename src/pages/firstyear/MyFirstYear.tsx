@@ -39,12 +39,12 @@ const FOR_BABY_CARDS: SupportCard[] = [
   },
   {
     title: "Sleep rhythm",
-    detail: "Safer sleep, wake windows and what is normal at this age.",
+    detail: "Rest rhythms, wake windows and what babies often do at this age.",
     href: "/first-year/sleep",
   },
   {
-    title: "Development and milestones",
-    detail: "What babies tend to do, without the pressure of a checklist.",
+    title: "Development",
+    detail: "What babies often do, at their own pace.",
     href: "/first-year/development",
   },
   {

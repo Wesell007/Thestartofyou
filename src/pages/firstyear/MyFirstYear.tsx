@@ -77,8 +77,8 @@ const FOR_YOU_CARDS: SupportCard[] = [
     href: "/first-year/emotional-wellbeing",
   },
   {
-    title: "Questions for your midwife, GP or health visitor",
-    detail: "What is worth raising, and how to ask for more help.",
+    title: "Questions to bring up",
+    detail: "What is worth raising with your midwife, GP or health visitor.",
     href: "/first-year/checkups-and-warning-signs",
   },
 ];

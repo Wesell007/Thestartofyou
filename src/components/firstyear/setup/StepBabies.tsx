@@ -48,33 +48,67 @@ const StepBabies = forwardRef<HTMLHeadingElement, Props>(
           aria-describedby={errors.babyCount ? "baby-count-error" : undefined}
           className="flex flex-col gap-2"
         >
-          {BABY_COUNT_OPTIONS.map((option) => (
+          {[
+            ...BABY_COUNT_OPTIONS.map((option) => ({
+              key: String(option.value),
+              label: option.label,
+              selected: draft.babyCount === option.value,
+              onSelect: () => onCountChange(option.value),
+            })),
+            {
+              key: MORE_THAN_THREE,
+              label: MORE_THAN_THREE_LABEL,
+              selected: draft.babyCount > 3,
+              onSelect: () => onCountChange(4),
+            },
+          ].map((option) => (
             <label
-              key={option.value}
+              key={option.key}
               className="flex items-center gap-3 rounded-[14px] border px-4 py-3 cursor-pointer transition-colors"
               style={{
-                borderColor:
-                  draft.babyCount === option.value
-                    ? "hsl(var(--stage-firstyear-accent) / 0.55)"
-                    : "hsl(var(--border) / 0.6)",
-                backgroundColor:
-                  draft.babyCount === option.value
-                    ? "hsl(var(--stage-firstyear-soft) / 0.5)"
-                    : "transparent",
+                borderColor: option.selected
+                  ? "hsl(var(--stage-firstyear-accent) / 0.55)"
+                  : "hsl(var(--border) / 0.6)",
+                backgroundColor: option.selected
+                  ? "hsl(var(--stage-firstyear-soft) / 0.5)"
+                  : "transparent",
               }}
             >
               <input
                 type="radio"
                 name="baby-count"
-                value={option.value}
-                checked={draft.babyCount === option.value}
-                onChange={() => onCountChange(option.value)}
+                value={option.key}
+                checked={option.selected}
+                onChange={option.onSelect}
                 className="h-4 w-4 accent-terracotta"
               />
               <span className="font-sans text-[15px] text-foreground/85">{option.label}</span>
             </label>
           ))}
         </div>
+
+        {draft.babyCount > 3 ? (
+          <div className="mt-4">
+            <label
+              htmlFor="baby-count-more"
+              className="block font-sans text-[13px] font-medium text-foreground/85 mb-2"
+            >
+              How many in total?
+            </label>
+            <select
+              id="baby-count-more"
+              value={draft.babyCount}
+              onChange={(event) => onCountChange(Number(event.target.value))}
+              className="w-full max-w-[220px] rounded-[14px] border border-border/60 bg-parchment px-4 py-3 font-sans text-[15px] text-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent"
+            >
+              <option value={4}>Four babies</option>
+            </select>
+            <p className="mt-2 font-serif text-[14px] leading-[1.6] text-foreground/70 max-w-[52ch]">
+              {BABY_LIMIT_NOTE}
+            </p>
+          </div>
+        ) : null}
+
         {errors.babyCount ? (
           <p id="baby-count-error" role="alert" className="mt-2 font-sans text-[13px] text-destructive">
             {errors.babyCount}
@@ -88,6 +122,7 @@ const StepBabies = forwardRef<HTMLHeadingElement, Props>(
           I'll set up one baby for now
         </button>
       </fieldset>
+
 
       <div className="mb-8">
         <label

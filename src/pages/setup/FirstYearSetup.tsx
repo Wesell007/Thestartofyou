@@ -78,6 +78,26 @@ const FirstYearSetup = () => {
         return;
       }
       const userId = data.user.id;
+      setUserId(userId);
+
+      // Reuse the existing profile companion fields. A saved name means the
+      // parent already met their companion, so we prefill instead of
+      // reintroducing Cindy from scratch.
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("companion_name, companion_tone")
+        .eq("user_id", userId)
+        .maybeSingle();
+      if (cancelled) return;
+      const savedName = profile?.companion_name?.trim() ?? "";
+      const savedTone = profile?.companion_tone ?? null;
+      setHasSavedName(savedName.length > 0);
+      setCompanion({
+        name: savedName.length > 0 ? savedName : "Cindy",
+        tone: isCompanionTone(savedTone) ? savedTone : "calm",
+      });
+
+
 
       // Read the lifecycle pointer first: getActivePregnancyJourney returns
       // null once the lifecycle has moved on, which would otherwise look the

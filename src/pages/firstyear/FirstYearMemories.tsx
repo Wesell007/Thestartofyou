@@ -375,7 +375,17 @@ const FirstYearMemories = () => {
             )}
           </div>
         </section>
+
+        <div className="pb-4">
+          <Link
+            to="/my-first-year"
+            className="inline-flex min-h-11 items-center font-sans text-[13px] text-foreground/60 underline underline-offset-4 hover:text-foreground/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            Back to your First Year journey
+          </Link>
+        </div>
       </main>
+
       <MyWeekFooter contextual="These memories are yours alone. You can edit or remove any of them whenever you like." />
       <ConfirmDialog
         open={Boolean(pendingDelete)}

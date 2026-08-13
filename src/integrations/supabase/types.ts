@@ -409,6 +409,11 @@ export type Database = {
           memory_date: string
           memory_scope: string
           note: string
+          photo_height: number | null
+          photo_mime: string | null
+          photo_path: string | null
+          photo_size_bytes: number | null
+          photo_width: number | null
           source_entry_id: string | null
           title: string | null
           updated_at: string
@@ -421,6 +426,11 @@ export type Database = {
           memory_date: string
           memory_scope?: string
           note: string
+          photo_height?: number | null
+          photo_mime?: string | null
+          photo_path?: string | null
+          photo_size_bytes?: number | null
+          photo_width?: number | null
           source_entry_id?: string | null
           title?: string | null
           updated_at?: string
@@ -433,6 +443,11 @@ export type Database = {
           memory_date?: string
           memory_scope?: string
           note?: string
+          photo_height?: number | null
+          photo_mime?: string | null
+          photo_path?: string | null
+          photo_size_bytes?: number | null
+          photo_width?: number | null
           source_entry_id?: string | null
           title?: string | null
           updated_at?: string

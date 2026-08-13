@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import type { BabyRecord } from "@/lib/firstYearJourney";
 import MemoryScopeSelector, { type ScopeValue } from "./MemoryScopeSelector";
+import MemoryPhotoField, { type MemoryPhotoFieldProps } from "./MemoryPhotoField";
 import {
   MEMORY_NOTE_MAX_LENGTH,
   MEMORY_TITLE_MAX_LENGTH,
@@ -31,6 +32,8 @@ type Props = {
   minDate?: string | null;
   /** Focus the note field once, when a moment is copied forward or edited. */
   focusSignal?: string | null;
+  /** Optional single photo. Omitted entirely when photos are not offered. */
+  photo?: MemoryPhotoFieldProps;
 };
 
 /**
@@ -48,6 +51,7 @@ const MemoryForm = ({
   maxDate,
   minDate,
   focusSignal,
+  photo,
 }: Props) => {
   const noteRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -149,6 +153,8 @@ const MemoryForm = ({
           className={`${FIELD_CLASS} max-w-[220px]`}
         />
       </div>
+
+      {photo && <MemoryPhotoField {...photo} disabled={saving || photo.disabled} />}
 
       <div className="flex flex-wrap items-center gap-4">
         <button

@@ -22,13 +22,22 @@ import {
 } from "@/lib/firstYearJourney";
 import { FIRST_YEAR_SETUP_ROUTE } from "@/components/firstyear/setup/firstYearSetupConstants";
 import {
+  attachMemoryPhoto,
+  clearMemoryPhoto,
   createMemory,
+  createMemoryPhotoUrl,
   deleteMemory,
   getMemories,
   getMemorySource,
   updateMemory,
   type FirstYearMemory,
 } from "@/lib/firstYearMemories";
+import {
+  MEMORY_PHOTO_ERROR_COPY,
+  checkMemoryPhotoFile,
+  prepareMemoryPhoto,
+} from "@/lib/firstYearMemoryPhoto";
+import MemoryPhotoViewer from "@/components/firstyear/memories/MemoryPhotoViewer";
 import {
   localMemoryDateKey,
   validateMemoryDraft,
@@ -65,11 +74,56 @@ const FirstYearMemories = () => {
   const [focusSignal, setFocusSignal] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [pendingDelete, setPendingDelete] = useState<FirstYearMemory | null>(null);
+  /** A newly chosen photo, held locally until the words are safely saved. */
+  const [photoDraft, setPhotoDraft] = useState<{ file: File; previewUrl: string } | null>(null);
+  /** The photo already kept on the memory being edited, if there is one. */
+  const [existingPhoto, setExistingPhoto] = useState<{ path: string; url: string | null } | null>(null);
+  const [photoRemoved, setPhotoRemoved] = useState(false);
+  const [photoBusy, setPhotoBusy] = useState(false);
+  /** Short-lived signed URLs for kept photos, keyed by stored path. */
+  const [photoUrls, setPhotoUrls] = useState<Record<string, string>>({});
+  const [viewing, setViewing] = useState<FirstYearMemory | null>(null);
   const [deleting, setDeleting] = useState(false);
   const [status, setStatus] = useState("");
 
   const today = useMemo(() => localMemoryDateKey(), []);
   const retry = useCallback(() => setAttempt((a) => a + 1), []);
+
+  /** Drop a local preview so a chosen photo never lingers in memory. */
+  const releaseDraft = useCallback((draft: { previewUrl: string } | null) => {
+    if (!draft) return;
+    try {
+      URL.revokeObjectURL(draft.previewUrl);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  /**
+   * Sign the photos we are about to show. Signed URLs are short-lived and are
+   * never stored, exported or placed in a route.
+   */
+  useEffect(() => {
+    let cancelled = false;
+    const missing = memories
+      .map((memory) => memory.photo_path)
+      .filter((path): path is string => Boolean(path) && !photoUrls[path as string]);
+    if (missing.length === 0) return;
+    (async () => {
+      const signed = await Promise.all(
+        missing.map(async (path) => [path, await createMemoryPhotoUrl(path)] as const),
+      );
+      if (cancelled) return;
+      const next: Record<string, string> = {};
+      signed.forEach(([path, url]) => {
+        if (url) next[path] = url;
+      });
+      if (Object.keys(next).length > 0) setPhotoUrls((current) => ({ ...current, ...next }));
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [memories, photoUrls]);
 
   useEffect(() => {
     let cancelled = false;
@@ -200,13 +254,17 @@ const FirstYearMemories = () => {
   const resetForm = useCallback(() => {
     setEditingId(null);
     setSourceEntryId(null);
+    releaseDraft(photoDraft);
+    setPhotoDraft(null);
+    setExistingPhoto(null);
+    setPhotoRemoved(false);
     setValues({
       title: "",
       note: "",
       memoryDate: today,
       scopeValue: loaded && loaded.babies.length > 1 ? FAMILY_VALUE : loaded?.babies[0].id ?? FAMILY_VALUE,
     });
-  }, [loaded, today]);
+  }, [loaded, today, photoDraft, releaseDraft]);
 
   const handleSubmit = async () => {
     if (!loaded || saving) return;
@@ -222,8 +280,9 @@ const FirstYearMemories = () => {
 
     setSaving(true);
     try {
+      let saved: FirstYearMemory;
       if (editingId) {
-        await updateMemory({
+        saved = await updateMemory({
           id: editingId,
           userId: loaded.userId,
           scope: check.scope,
@@ -233,7 +292,7 @@ const FirstYearMemories = () => {
           note: check.note,
         });
       } else {
-        await createMemory({
+        saved = await createMemory({
           userId: loaded.userId,
           scope: check.scope,
           babyId: check.babyId,
@@ -243,11 +302,30 @@ const FirstYearMemories = () => {
           sourceEntryId,
         });
       }
+
+      // The words are safe now. A photo problem from here never undoes them.
+      let photoIssue: string | null = null;
+      try {
+        if (photoDraft) {
+          const prepared = await prepareMemoryPhoto(photoDraft.file);
+          await attachMemoryPhoto({
+            userId: loaded.userId,
+            memoryId: saved.id,
+            prepared,
+            previousPath: saved.photo_path,
+          });
+        } else if (photoRemoved && saved.photo_path) {
+          await clearMemoryPhoto(loaded.userId, saved.id, saved.photo_path);
+        }
+      } catch {
+        photoIssue = MEMORY_PHOTO_ERROR_COPY.uploadFailed;
+      }
+
       const refreshed = await getMemories(loaded.userId);
       setMemories(refreshed);
       const message = editingId ? "Memory updated" : "Memory saved";
-      setStatus(message);
-      toast({ title: message });
+      setStatus(photoIssue ?? message);
+      toast({ title: photoIssue ?? message });
       resetForm();
     } catch {
       toast({ title: "We couldn't save that just now. Please try again." });
@@ -259,6 +337,14 @@ const FirstYearMemories = () => {
   const handleEdit = (memory: FirstYearMemory) => {
     setEditingId(memory.id);
     setSourceEntryId(null);
+    releaseDraft(photoDraft);
+    setPhotoDraft(null);
+    setPhotoRemoved(false);
+    setExistingPhoto(
+      memory.photo_path
+        ? { path: memory.photo_path, url: photoUrls[memory.photo_path] ?? null }
+        : null,
+    );
     setValues({
       title: memory.title ?? "",
       note: memory.note,
@@ -271,11 +357,41 @@ const FirstYearMemories = () => {
     setFocusSignal(`edit-${memory.id}-${Date.now()}`);
   };
 
+  const handlePhotoSelect = (file: File) => {
+    const check = checkMemoryPhotoFile(file);
+    if (check.ok !== true) {
+      toast({ title: check.message });
+      return;
+    }
+    setPhotoBusy(true);
+    try {
+      releaseDraft(photoDraft);
+      setPhotoDraft({ file, previewUrl: URL.createObjectURL(file) });
+      setPhotoRemoved(false);
+    } finally {
+      setPhotoBusy(false);
+    }
+  };
+
+  const handlePhotoRemove = () => {
+    releaseDraft(photoDraft);
+    setPhotoDraft(null);
+    if (existingPhoto) setPhotoRemoved(true);
+  };
+
   const confirmDelete = async () => {
     if (!loaded || !pendingDelete) return;
     setDeleting(true);
     try {
-      await deleteMemory(loaded.userId, pendingDelete.id);
+      const removedPath = pendingDelete.photo_path;
+      await deleteMemory(loaded.userId, pendingDelete.id, removedPath);
+      if (removedPath) {
+        setPhotoUrls((current) => {
+          const next = { ...current };
+          delete next[removedPath];
+          return next;
+        });
+      }
       if (editingId === pendingDelete.id) resetForm();
       const refreshed = await getMemories(loaded.userId);
       setMemories(refreshed);
@@ -346,6 +462,19 @@ const FirstYearMemories = () => {
               maxDate={today}
               minDate={earliestDob}
               focusSignal={focusSignal}
+              photo={{
+                previewUrl: photoDraft
+                  ? photoDraft.previewUrl
+                  : photoRemoved
+                    ? null
+                    : existingPhoto
+                      ? existingPhoto.url ?? (existingPhoto.path ? photoUrls[existingPhoto.path] ?? null : null)
+                      : null,
+                hasPhoto: Boolean(photoDraft) || (Boolean(existingPhoto) && !photoRemoved),
+                busy: photoBusy,
+                onSelect: handlePhotoSelect,
+                onRemove: handlePhotoRemove,
+              }}
             />
           </div>
         </section>
@@ -371,6 +500,8 @@ const FirstYearMemories = () => {
                 babies={loaded.babies}
                 onEdit={handleEdit}
                 onRemove={setPendingDelete}
+                photoUrls={photoUrls}
+                onOpenPhoto={setViewing}
               />
             )}
           </div>
@@ -387,13 +518,26 @@ const FirstYearMemories = () => {
       </main>
 
       <MyWeekFooter contextual="These memories are yours alone. You can edit or remove any of them whenever you like." />
+      <MemoryPhotoViewer
+        open={Boolean(viewing)}
+        onOpenChange={(open) => {
+          if (!open) setViewing(null);
+        }}
+        url={viewing?.photo_path ? photoUrls[viewing.photo_path] ?? null : null}
+        title={viewing?.title?.trim() || "A moment you kept"}
+        caption="The photo kept with this memory"
+      />
       <ConfirmDialog
         open={Boolean(pendingDelete)}
         onOpenChange={(open) => {
           if (!open) setPendingDelete(null);
         }}
         title="Remove this memory?"
-        description="This memory will be removed from your keepsakes."
+        description={
+          pendingDelete?.photo_path
+            ? "This memory and its photo will be removed from your keepsakes."
+            : "This memory will be removed from your keepsakes."
+        }
         confirmLabel="Remove memory"
         busy={deleting}
         onConfirm={confirmDelete}

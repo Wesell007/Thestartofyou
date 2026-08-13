@@ -15,45 +15,27 @@ export const FIRST_YEAR_SETUP_CTA_LABEL = "Start your First Year journey";
 /** Quiet link label used in My Journey. */
 export const FIRST_YEAR_SETUP_QUIET_LINK_LABEL = "Set up your First Year";
 
-export const TOTAL_STEPS = 4;
-
-export type CompanionChoice = "continue_gently" | "personalise" | "decide_later";
+/** Welcome, babies, stage, value, companion, review. */
+export const TOTAL_STEPS = 6;
 
 /**
- * Companion choices are session-only in this phase. Nothing is stored,
- * no profile column, no consent table, and no AI context is changed.
+ * Baby count choices. Four remains the backend limit, so "More than three"
+ * reveals a small control rather than pretending larger counts are supported.
  */
-export const COMPANION_OPTIONS: {
-  value: CompanionChoice;
-  label: string;
-  detail: string;
-}[] = [
-  {
-    value: "continue_gently",
-    label: "Continue gently",
-    detail:
-      "Cindy carries on as she is. She will answer questions about your first year without looking at anything you have written.",
-  },
-  {
-    value: "personalise",
-    label: "Personalise Cindy with my pregnancy journey",
-    detail:
-      "Nothing is shared yet. Cindy will not use your private pregnancy memories or reflections. A later step will let you choose exactly what she can use, and you will be able to change your mind at any time.",
-  },
-  {
-    value: "decide_later",
-    label: "Decide later",
-    detail: "You can make this choice another day. Nothing changes for now.",
-  },
-];
-
-/** Baby count options. Five or more is deliberately not reachable. */
 export const BABY_COUNT_OPTIONS: { value: number; label: string }[] = [
   { value: 1, label: "One baby" },
   { value: 2, label: "Twins" },
   { value: 3, label: "Triplets" },
-  { value: 4, label: "Four babies" },
 ];
+
+/** Sentinel used by the radio group only. Never saved. */
+export const MORE_THAN_THREE = "more" as const;
+
+export const MORE_THAN_THREE_LABEL = "More than three";
+
+/** Shown once the "More than three" control is revealed. */
+export const BABY_LIMIT_NOTE =
+  "We can set up four babies at the moment. If you have more, choose four for now and tell us — we will make room.";
 
 export const BABY_ROW_LABELS = [
   "First baby",
@@ -62,11 +44,46 @@ export const BABY_ROW_LABELS = [
   "Fourth baby",
 ];
 
-/**
- * Direct-start parents have no pregnancy journey to personalise from, so the
- * personalisation option is not offered to them.
- */
-export const companionOptionsForMode = (mode: "transition" | "direct") =>
-  mode === "direct"
-    ? COMPANION_OPTIONS.filter((option) => option.value !== "personalise")
-    : COMPANION_OPTIONS;
+/** Human label for any saved count, including four. */
+export const babyCountLabel = (count: number): string =>
+  BABY_COUNT_OPTIONS.find((option) => option.value === count)?.label ??
+  (count === 4 ? "Four babies" : "One baby");
+
+/** Warm, plain rows for the "what you get" step. */
+export const FIRST_YEAR_VALUE_ITEMS: { title: string; detail: string }[] = [
+  {
+    title: "A daily note",
+    detail: "A quiet place for your baby's rhythm and how you are doing.",
+  },
+  {
+    title: "Memories",
+    detail: "The small things you want to keep, written in your own words.",
+  },
+  {
+    title: "Guidance that follows your baby's age",
+    detail: "What you read shifts as the weeks and months go on.",
+  },
+  {
+    title: "Feeding, sleep, nappies and questions",
+    detail: "Plain answers when something is on your mind.",
+  },
+  {
+    title: "A place for your recovery too",
+    detail: "Your own body and mood matter here, not only the baby's.",
+  },
+];
+
+/** Only offered to transition users. */
+export const FIRST_YEAR_VALUE_ITEM_TRANSITION = {
+  title: "Your pregnancy chapter, kept",
+  detail: "Everything you saved stays readable whenever you want to open it.",
+};
+
+/** Shown to direct-start parents who have no companion name yet. */
+export const COMPANION_INTRO_POINTS: string[] = [
+  "Cindy is a calm companion inside your First Year space.",
+  "She gives gentle, plain-language support about the early months and your recovery.",
+  "Her tone is unhurried and never alarming.",
+  "She does not track anything, and she does not read your private notes.",
+  "She does not replace your midwife, GP or health visitor.",
+];

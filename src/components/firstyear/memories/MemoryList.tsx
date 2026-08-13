@@ -13,6 +13,9 @@ type Props = {
   babies: BabyRecord[];
   onEdit: (memory: FirstYearMemory) => void;
   onRemove: (memory: FirstYearMemory) => void;
+  /** Short-lived signed URLs, keyed by stored photo path. */
+  photoUrls?: Record<string, string>;
+  onOpenPhoto?: (memory: FirstYearMemory) => void;
 };
 
 /** Who a kept moment is about, in plain words. */
@@ -28,7 +31,7 @@ export const memoryScopeLabel = (memory: FirstYearMemory, babies: BabyRecord[]):
  * Kept moments, newest first, gathered under the month they belong to.
  * No counts, no streaks, no scoring: just what was saved.
  */
-const MemoryList = ({ memories, babies, onEdit, onRemove }: Props) => {
+const MemoryList = ({ memories, babies, onEdit, onRemove, photoUrls, onOpenPhoto }: Props) => {
   const months: { key: string; label: string; items: FirstYearMemory[] }[] = [];
   memories.forEach((memory) => {
     const key = memoryMonthKey(memory.memory_date);
@@ -64,6 +67,28 @@ const MemoryList = ({ memories, babies, onEdit, onRemove }: Props) => {
                   <p className="font-serif text-[15px] leading-[1.7] text-foreground/85 whitespace-pre-wrap">
                     {memory.note}
                   </p>
+                  {memory.photo_path && onOpenPhoto && (
+                    <button
+                      type="button"
+                      onClick={() => onOpenPhoto(memory)}
+                      className="mt-3 block overflow-hidden rounded-[14px] border border-border/60 bg-parchment focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    >
+                      {photoUrls?.[memory.photo_path] ? (
+                        <img
+                          src={photoUrls[memory.photo_path]}
+                          alt={`Photo kept with this memory from ${
+                            parsed ? format(parsed, "d MMMM") : memory.memory_date
+                          }`}
+                          className="h-28 w-28 object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span className="flex h-28 w-28 items-center justify-center px-2 text-center font-sans text-[12px] text-foreground/55">
+                          Photo
+                        </span>
+                      )}
+                    </button>
+                  )}
                   <div className="mt-1 flex flex-wrap items-center gap-4">
                     <button
                       type="button"

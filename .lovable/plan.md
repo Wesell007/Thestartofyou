@@ -1,34 +1,104 @@
-# Phase 21B — First Year Onboarding Upgrade Build
+# Phase 22A — First Year Photo Memories Strategy
 
-Approved scope from Phase 21A. No schema, migration, RLS, route, sitemap or robots changes.
+Audit and recommendation only. Nothing is built in this phase.
 
-## New setup flow at /setup/first-year
+## 1. Recommended product approach
 
-Six steps replace the current four:
+One optional photo per memory, attached to the words a parent already chose to keep. The photo is a companion to the note, never the subject. No gallery, no feed, no grid wall: the memories page stays a written page with the occasional small image beside an entry.
 
-1. **Welcome** — mode-aware. Transition: continuation, pregnancy chapter kept. Direct: no pregnancy mention, First Year framed as baby guidance, parent recovery, daily notes and memories.
-2. **Who has arrived?** — One baby / Twins / Triplets / More than three. Selecting "More than three" reveals a small number control capped at four, with the quiet line: "We can set up four babies at the moment. If you have more, choose four for now and tell us — we will make room." Shared date of birth, optional names, one row per baby, existing 1-4 validation and payload shape unchanged.
-3. **Your baby's stage** — read-only, derived from date of birth. Over twelve months shows: "First Year is built around the first twelve months, so some guidance may be less relevant now. You are welcome to carry on." Setup is never blocked.
-4. **What your First Year home gives you** — short warm rows: a daily note for your baby's rhythm and how you are doing; memories for the small things you want to keep; guidance that follows your baby's age; support for feeding, sleep, nappies and questions; a place for your recovery too; and, for transition users only, your pregnancy chapter kept.
-5. **Your companion** — Cindy stays the default. Uses the existing `profiles.companion_name` / `companion_tone` columns and the existing `SUGGESTED_NAMES`, `validateCompanionName` and `TONE_OPTIONS` helpers. A saved name is prefilled and can simply be kept. When no name is stored, a short introduction appears first: who Cindy is, the gentle plain-language support she gives, her unhurried tone, that she tracks nothing, that she does not read private notes, and that she does not replace a midwife, GP or health visitor. The current session-only companion choices are retired because they store nothing.
-6. **Review and start** — summary now includes baby count, names, date of birth, derived stage and companion name. Saving still goes through `save_first_year_journey` and redirects to `/my-first-year`.
+## 2. Should photo memories proceed?
 
-## Navigation changes
+Yes, and it is the right next feature.
 
-- `ScrollToTop` keeps forcing the top on PUSH navigation and skips it on POP, so browser back restores the previous scroll position. No route state, anchors or from-params.
-- "Back to your First Year journey" moves fully to the bottom on `/my-first-year/today` and `/my-first-year/memories`, with no duplicate top link. `/my-pregnancy-chapter` is left as it is.
+- Parent and emotional value: the highest-value addition to a keepsake space; a first smile is remembered in a picture more than a paragraph.
+- Privacy: already solvable. The project has a private bucket, owner-scoped storage policies, signed URLs only, and a working account-deletion sweep.
+- Cost: modest with a client-side downscale and one photo per memory.
+- Complexity: low. `SlotPhotoMemory` (weekly photo) is a proven pattern to follow.
+- Mobile: a single file input with camera capture is the whole interaction.
+- Export and deletion: both have precedent (paths in JSON, storage sweep on account delete), but deletion needs one gap closed (see section 10).
+- Brand: fits. Private, calm, parent-led, no comparison or scoring.
 
-## Technical notes
+## 3. Version one scope
 
-- New pure helper `src/lib/firstYearStage.ts` maps date of birth to newborn (0-27 days), baby (28 days to 11 months), older baby (12-23 months) and toddler (24 months and over), built on the existing `getFirstYearAge`. Stage is derived at read time and never stored.
-- New step components `StepStage.tsx` and `StepValue.tsx`; `StepIntro`, `StepBabies`, `StepCompanion` and `StepReview` are updated; `firstYearSetupConstants.ts` gains the new count options and value rows and drops `COMPANION_OPTIONS`.
-- Companion name is written to `profiles` alongside the existing journey save, using the same upsert pattern as `/setup`.
-- Focus continues to move to each step heading, errors stay announced, and the save error stays a calm sentence.
+In: one optional photo per memory; add during save; add, replace or remove on an existing memory; small preview in the memory list; a tap-to-open larger view of that one photo.
 
-## Unchanged
+Out for v1: albums, gallery feed, sharing, filters, editing, AI captions, video, multiple photos.
 
-Migrations, RLS, generated Supabase types, the `save_first_year_journey` RPC, routes in `App.tsx`, sitemap, robots, public First Year pages, Daily Check-in and Memories logic, and all Phase 20B spacing and copy other than the return-link move.
+## 4. Database approach
 
-## Verification
+Recommended: **add photo fields directly to `first_year_memories`**.
 
-Unit tests for stage boundaries (27/28 days, 11/12 months, 23/24 months), over-twelve-month messaging, the baby count reveal, and companion name validation reuse. Manual passes for direct and transition modes across one baby, twins, triplets and four babies, date-of-birth validation, review summary, save and redirect, scroll restoration on back, forward navigation still starting at the top, and back-link placement. Checked at 390px and 1440px for overflow, heading order, focus movement and console errors. Then typecheck, targeted tests, full `vitest run`, and `npm run build` with sitemap and dist reported.
+- `photo_path text null`, `photo_mime text null`, `photo_size_bytes bigint null`, `photo_width int null`, `photo_height int null`.
+- A check constraint keeping the photo columns all-null or all-present.
+- Existing RLS, grants, ownership trigger and the `auth.users` cascade already cover the row, so no new policy surface is created.
+
+Rejected: a separate `first_year_memory_media` table (only earns its keep with multiple media per memory, which is explicitly out of scope) and a general private media table (premature; `week_media_memories` already showed that a per-feature table stays simpler).
+
+If multiple photos per memory is ever wanted, the columns migrate cleanly into a child table later.
+
+## 5. Storage approach
+
+- Bucket: a new **`first-year-memories`**, private. Not reusing `weekly-photos`, whose name, path shape (`{user}/{week}/…`) and deletion sweep are pregnancy-week specific.
+- Path: `{user_id}/{memory_id}/{uuid}.{ext}` so the first segment is the user id, matching the existing policy pattern.
+- Types: `image/jpeg`, `image/png`, `image/webp`, `image/heic`/`heif` accepted at the input where the browser offers it.
+- Size: 8MB before downscale, matching the weekly photo limit.
+- Compression: client-side canvas downscale to a long edge of about 1600px, re-encoded to JPEG at ~0.82 quality. HEIC that the browser cannot decode is uploaded as-is within the size limit.
+- Thumbnails: none in v1. The list preview renders the same signed URL in a small box.
+- Signed URLs: one hour, generated on read, held in component state only, refreshed on a timer. Never stored in a table, never in a URL, never in the export file.
+- Deletion: removing a photo deletes the object then nulls the columns; removing a memory deletes the object first, then the row.
+
+## 6. RLS and storage policy approach
+
+Four owner-scoped policies on `storage.objects` for the new bucket, mirroring the weekly-photos migration exactly: select, insert, update, delete, each `bucket_id = 'first-year-memories' AND auth.uid()::text = (storage.foldername(name))[1]`. No `anon` access. No public bucket. Table-side RLS is unchanged because the photo lives on the existing memory row.
+
+## 7. UX direction
+
+- Save form: a quiet "Add a photo (optional)" control under the note. Selecting shows a small preview with "Replace" and "Remove".
+- Existing memory: the edit flow gains the same control; a memory with no photo shows the same quiet add affordance.
+- List: a small rounded thumbnail to the left of, or above, the note on narrow screens. One per entry, modest size, never a grid.
+- Larger view: tapping opens a simple dialog with the one photo and the memory's words. No swipe-through gallery.
+- Errors reuse the established warm copy shape ("That file is a little too big.").
+
+## 8. Multiples handling
+
+The existing `memory_scope` (family, all babies, one baby) is enough. The photo inherits the memory's scope; there is no separate per-photo baby tag. No extra selector, no per-baby photo lanes.
+
+## 9. Export
+
+Metadata and storage path only, consistent with the current export note. The JSON gains `photo_path`, `photo_mime`, `photo_size_bytes` and dimensions on each memory row. No signed URLs, no base64 image data, no permanent URLs. The existing explanatory line in the export file is extended to mention First Year photos. A future zip export stays out of scope.
+
+## 10. Account deletion
+
+`supabase/functions/delete-account/index.ts` currently sweeps only the `weekly-photos` bucket. Phase 22B must extend it to sweep `first-year-memories` under the same `{user_id}/` prefix with the existing recursive walk, and fail closed the same way if the sweep errors. Row deletion continues to happen through the `auth.users` cascade.
+
+## 11. Files likely to change in Phase 22B
+
+- New migration: photo columns plus check constraint on `first_year_memories`; storage policies for the new bucket (bucket itself created with the storage tool, not SQL).
+- `src/lib/firstYearMemories.ts`, `src/lib/firstYearMemoriesSchema.ts`
+- `src/pages/firstyear/FirstYearMemories.tsx`
+- `src/components/firstyear/memories/*` (memory form, `MemoryList.tsx`, a new photo field component and a new viewer dialog)
+- `src/pages/AccountSettings.tsx` (export fields and wording)
+- `supabase/functions/delete-account/index.ts`
+- `src/integrations/supabase/types.ts` (regenerated)
+- Co-located tests for the new validation helpers.
+
+## 12. Files that must not change
+
+`scripts/generate-sitemap.ts`, `public/robots.txt`, all public First Year, pregnancy, TTC, toddler and family pages, article data, the pregnancy toolkit, `week_photos` / `week_media_memories` and their components, `src/integrations/supabase/client.ts`, the Daily Check-in save logic, and AI or analytics definitions.
+
+## 13. QA plan
+
+Disposable accounts only, live account untouched. Cover: upload, replace, remove, memory delete removing the object, oversize and wrong-type rejection, HEIC on iOS Safari, signed URL expiry and refresh, a second account being unable to read the first account's object path, anon access denied, export contents containing paths and no URLs, account deletion leaving no objects in either bucket, keyboard and screen reader flow on the photo control and dialog, 390px and 1440px layout, and a clean console and network. All disposable rows, objects and auth users removed afterwards.
+
+Commands: `npx tsgo --noEmit -p tsconfig.json`, targeted tests, `npx vitest run`, `npm run build`.
+
+## 14. Risks and open questions
+
+- HEIC files cannot be downscaled or rendered by some browsers; the fallback is to upload as-is and, if it will not render, show a warm "we couldn't open that one" rather than failing silently.
+- Storage growth is unbounded per account. No quota is proposed for v1; worth revisiting once real usage exists.
+- Orphaned objects if a delete succeeds in storage but the row update fails, or the reverse. Ordering (object first, then row) keeps the worst case a harmless orphan rather than a broken image.
+- Open question: should a photo be addable to a memory created from "Keep this as a memory" in the same step, or only after saving? Recommendation is the same step, for one flow rather than two.
+
+## 15. Should Phase 22B proceed?
+
+Yes. Scope is small, the patterns exist, and the one real gap (deletion sweep for a second bucket) is identified and cheap to close.

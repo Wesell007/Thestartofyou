@@ -12,13 +12,19 @@ import {
 } from "@/lib/firstYearEntry";
 import StepIntro from "@/components/firstyear/setup/StepIntro";
 import StepBabies from "@/components/firstyear/setup/StepBabies";
-import StepCompanion from "@/components/firstyear/setup/StepCompanion";
+import StepStage from "@/components/firstyear/setup/StepStage";
+import StepValue from "@/components/firstyear/setup/StepValue";
+import StepCompanion, {
+  type CompanionDraft,
+} from "@/components/firstyear/setup/StepCompanion";
 import StepReview from "@/components/firstyear/setup/StepReview";
+import { resolveFirstYearStage } from "@/lib/firstYearStage";
+import { isCompanionTone, validateCompanionName } from "@/lib/companion";
 import {
   FIRST_YEAR_POST_SAVE_DESTINATION,
   TOTAL_STEPS,
-  type CompanionChoice,
 } from "@/components/firstyear/setup/firstYearSetupConstants";
+
 import {
   buildBabyPayload,
   createEmptyDraft,

@@ -54,7 +54,14 @@ const FirstYearSetup = () => {
   const [step, setStep] = useState(1);
   const [draft, setDraft] = useState<FirstYearSetupDraft>(createEmptyDraft);
   const [errors, setErrors] = useState<FirstYearSetupErrors>({});
-  const [companion, setCompanion] = useState<CompanionChoice | null>(null);
+  const [companion, setCompanion] = useState<CompanionDraft>({
+    name: "Cindy",
+    tone: "calm",
+  });
+  const [hasSavedName, setHasSavedName] = useState(false);
+  const [companionNameError, setCompanionNameError] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
+
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
 

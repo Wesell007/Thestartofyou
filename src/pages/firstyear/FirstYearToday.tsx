@@ -438,12 +438,6 @@ const FirstYearToday = () => {
             you. Every field is optional. Nothing is measured, scored or compared, and it is never
             advice.
           </p>
-          <Link
-            to="/my-first-year"
-            className={`mt-5 ${INLINE_ACTION_CLASS} text-[13px]`}
-          >
-            Back to your First Year journey
-          </Link>
         </header>
 
         <section className="pb-10" aria-labelledby="lane-baby">
@@ -663,7 +657,13 @@ const FirstYearToday = () => {
           </section>
         )}
 
+        <div className="pb-4">
+          <Link to="/my-first-year" className={`${INLINE_ACTION_CLASS} text-[13px]`}>
+            Back to your First Year journey
+          </Link>
+        </div>
       </main>
+
       <MyWeekFooter contextual="These notes are yours alone. If anything worries you about your baby or your own recovery, speak to your midwife, GP or health visitor." />
       <ConfirmDialog
         open={Boolean(pendingDelete)}

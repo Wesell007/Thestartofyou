@@ -12,13 +12,19 @@ import {
 } from "@/lib/firstYearEntry";
 import StepIntro from "@/components/firstyear/setup/StepIntro";
 import StepBabies from "@/components/firstyear/setup/StepBabies";
-import StepCompanion from "@/components/firstyear/setup/StepCompanion";
+import StepStage from "@/components/firstyear/setup/StepStage";
+import StepValue from "@/components/firstyear/setup/StepValue";
+import StepCompanion, {
+  type CompanionDraft,
+} from "@/components/firstyear/setup/StepCompanion";
 import StepReview from "@/components/firstyear/setup/StepReview";
+import { resolveFirstYearStage } from "@/lib/firstYearStage";
+import { isCompanionTone, validateCompanionName } from "@/lib/companion";
 import {
   FIRST_YEAR_POST_SAVE_DESTINATION,
   TOTAL_STEPS,
-  type CompanionChoice,
 } from "@/components/firstyear/setup/firstYearSetupConstants";
+
 import {
   buildBabyPayload,
   createEmptyDraft,
@@ -48,7 +54,14 @@ const FirstYearSetup = () => {
   const [step, setStep] = useState(1);
   const [draft, setDraft] = useState<FirstYearSetupDraft>(createEmptyDraft);
   const [errors, setErrors] = useState<FirstYearSetupErrors>({});
-  const [companion, setCompanion] = useState<CompanionChoice | null>(null);
+  const [companion, setCompanion] = useState<CompanionDraft>({
+    name: "Cindy",
+    tone: "calm",
+  });
+  const [hasSavedName, setHasSavedName] = useState(false);
+  const [companionNameError, setCompanionNameError] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
+
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
 
@@ -65,6 +78,26 @@ const FirstYearSetup = () => {
         return;
       }
       const userId = data.user.id;
+      setUserId(userId);
+
+      // Reuse the existing profile companion fields. A saved name means the
+      // parent already met their companion, so we prefill instead of
+      // reintroducing Cindy from scratch.
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("companion_name, companion_tone")
+        .eq("user_id", userId)
+        .maybeSingle();
+      if (cancelled) return;
+      const savedName = profile?.companion_name?.trim() ?? "";
+      const savedTone = profile?.companion_tone ?? null;
+      setHasSavedName(savedName.length > 0);
+      setCompanion({
+        name: savedName.length > 0 ? savedName : "Cindy",
+        tone: isCompanionTone(savedTone) ? savedTone : "calm",
+      });
+
+
 
       // Read the lifecycle pointer first: getActivePregnancyJourney returns
       // null once the lifecycle has moved on, which would otherwise look the
@@ -141,11 +174,31 @@ const FirstYearSetup = () => {
     setStep(Math.min(TOTAL_STEPS, Math.max(1, next)));
   }, []);
 
+  const stage = resolveFirstYearStage(draft.dateOfBirth);
+
   const handleBabiesContinue = () => {
     const nextErrors = validateDraft(draft);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
     goTo(3);
+  };
+
+  /** Validate the companion name only when one was typed. Blank is allowed. */
+  const resolveCompanionName = (): { ok: boolean; value: string | null } => {
+    const trimmed = companion.name.trim();
+    if (trimmed.length === 0) return { ok: true, value: null };
+    const result = validateCompanionName(trimmed);
+    if (result.ok === false) {
+      setCompanionNameError(result.message);
+      return { ok: false, value: null };
+    }
+    setCompanionNameError(null);
+    return { ok: true, value: result.value };
+  };
+
+  const handleCompanionContinue = () => {
+    if (!resolveCompanionName().ok) return;
+    goTo(6);
   };
 
   const handleSubmit = async () => {
@@ -155,10 +208,28 @@ const FirstYearSetup = () => {
       goTo(2);
       return;
     }
+    const companionResult = resolveCompanionName();
+    if (!companionResult.ok) {
+      goTo(5);
+      return;
+    }
     setSaving(true);
     setSaveError(null);
     try {
       await saveFirstYearJourney(buildBabyPayload(draft));
+      if (userId) {
+        // Display-only personalisation. A failure here must not lose the
+        // journey that has already saved.
+        const { error: profileError } = await supabase.from("profiles").upsert(
+          {
+            user_id: userId,
+            companion_name: companionResult.value,
+            companion_tone: companion.tone,
+          },
+          { onConflict: "user_id" },
+        );
+        if (profileError) console.error(profileError);
+      }
       toast.success("Your First Year journey has begun.");
       navigate(FIRST_YEAR_POST_SAVE_DESTINATION, { replace: true });
     } catch (error) {
@@ -168,6 +239,7 @@ const FirstYearSetup = () => {
       setSaving(false);
     }
   };
+
 
   if (screen === "loading") {
     return (
@@ -268,29 +340,53 @@ const FirstYearSetup = () => {
               />
             )}
             {step === 3 && (
-              <StepCompanion
+              <StepStage
                 ref={headingRef}
-                mode={mode}
-                value={companion}
-                onChange={setCompanion}
+                stage={stage}
+                babyCount={draft.babyCount}
                 onBack={() => goTo(2)}
                 onContinue={() => goTo(4)}
               />
             )}
             {step === 4 && (
+              <StepValue
+                ref={headingRef}
+                mode={mode}
+                onBack={() => goTo(3)}
+                onContinue={() => goTo(5)}
+              />
+            )}
+            {step === 5 && (
+              <StepCompanion
+                ref={headingRef}
+                hasSavedName={hasSavedName}
+                value={companion}
+                nameError={companionNameError}
+                onChange={(next) => {
+                  setCompanion(next);
+                  setCompanionNameError(null);
+                }}
+                onBack={() => goTo(4)}
+                onContinue={handleCompanionContinue}
+              />
+            )}
+            {step === 6 && (
               <StepReview
                 ref={headingRef}
                 mode={mode}
                 draft={draft}
-                companion={companion}
+                stage={stage}
+                companionName={companion.name}
+                companionTone={companion.tone}
                 saving={saving}
                 saveError={saveError}
                 onEditBabies={() => goTo(2)}
-                onEditCompanion={() => goTo(3)}
-                onBack={() => goTo(3)}
+                onEditCompanion={() => goTo(5)}
+                onBack={() => goTo(5)}
                 onSubmit={handleSubmit}
               />
             )}
+
           </div>
 
           <div className="pt-8">

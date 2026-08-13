@@ -16,6 +16,8 @@ Constraints:
 - size greater than zero and at most 8MB
 - width and height positive when present
 
+The existing `validate_first_year_memory` trigger is extended so a stored `photo_path` must begin with `{user_id}/{memory_id}/`, meaning a photo can never point at another account's object.
+
 No new table. Existing RLS, grants, ownership trigger and the `auth.users` cascade already cover the row, so no policy changes on the table. Types are regenerated after the migration.
 
 ## Storage

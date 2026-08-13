@@ -174,11 +174,31 @@ const FirstYearSetup = () => {
     setStep(Math.min(TOTAL_STEPS, Math.max(1, next)));
   }, []);
 
+  const stage = resolveFirstYearStage(draft.dateOfBirth);
+
   const handleBabiesContinue = () => {
     const nextErrors = validateDraft(draft);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
     goTo(3);
+  };
+
+  /** Validate the companion name only when one was typed. Blank is allowed. */
+  const resolveCompanionName = (): { ok: boolean; value: string | null } => {
+    const trimmed = companion.name.trim();
+    if (trimmed.length === 0) return { ok: true, value: null };
+    const result = validateCompanionName(trimmed);
+    if (result.ok === false) {
+      setCompanionNameError(result.message);
+      return { ok: false, value: null };
+    }
+    setCompanionNameError(null);
+    return { ok: true, value: result.value };
+  };
+
+  const handleCompanionContinue = () => {
+    if (!resolveCompanionName().ok) return;
+    goTo(6);
   };
 
   const handleSubmit = async () => {
@@ -188,10 +208,28 @@ const FirstYearSetup = () => {
       goTo(2);
       return;
     }
+    const companionResult = resolveCompanionName();
+    if (!companionResult.ok) {
+      goTo(5);
+      return;
+    }
     setSaving(true);
     setSaveError(null);
     try {
       await saveFirstYearJourney(buildBabyPayload(draft));
+      if (userId) {
+        // Display-only personalisation. A failure here must not lose the
+        // journey that has already saved.
+        const { error: profileError } = await supabase.from("profiles").upsert(
+          {
+            user_id: userId,
+            companion_name: companionResult.value,
+            companion_tone: companion.tone,
+          },
+          { onConflict: "user_id" },
+        );
+        if (profileError) console.error(profileError);
+      }
       toast.success("Your First Year journey has begun.");
       navigate(FIRST_YEAR_POST_SAVE_DESTINATION, { replace: true });
     } catch (error) {
@@ -201,6 +239,7 @@ const FirstYearSetup = () => {
       setSaving(false);
     }
   };
+
 
   if (screen === "loading") {
     return (

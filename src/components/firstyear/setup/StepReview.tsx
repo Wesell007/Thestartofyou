@@ -2,18 +2,17 @@ import { forwardRef } from "react";
 import { format } from "date-fns";
 import { parseDateOnly } from "@/lib/dateOnly";
 import { FIRST_YEAR_SETUP_COPY, type FirstYearSetupMode } from "@/lib/firstYearEntry";
-import {
-  BABY_COUNT_OPTIONS,
-  BABY_ROW_LABELS,
-  COMPANION_OPTIONS,
-  type CompanionChoice,
-} from "./firstYearSetupConstants";
+import { toneLabel, type CompanionTone } from "@/lib/companion";
+import type { FirstYearStageInfo } from "@/lib/firstYearStage";
+import { babyCountLabel, BABY_ROW_LABELS } from "./firstYearSetupConstants";
 import type { FirstYearSetupDraft } from "./firstYearSetupSchema";
 
 type Props = {
   mode: FirstYearSetupMode;
   draft: FirstYearSetupDraft;
-  companion: CompanionChoice | null;
+  stage: FirstYearStageInfo | null;
+  companionName: string;
+  companionTone: CompanionTone;
   saving: boolean;
   saveError: string | null;
   onEditBabies: () => void;
@@ -26,14 +25,26 @@ const rowClass = "flex flex-wrap items-baseline gap-x-3 gap-y-1 py-2.5 border-b 
 const labelClass = "font-sans text-[12.5px] tracking-[0.08em] uppercase text-foreground/55 min-w-[130px]";
 const valueClass = "font-serif text-[15px] text-foreground/85";
 
-/** Step 4. Quiet read-only summary, then save. */
+/** Step 6. Quiet read-only summary, then save. */
 const StepReview = forwardRef<HTMLHeadingElement, Props>(
-  ({ mode, draft, companion, saving, saveError, onEditBabies, onEditCompanion, onBack, onSubmit }, ref) => {
+  (
+    {
+      mode,
+      draft,
+      stage,
+      companionName,
+      companionTone,
+      saving,
+      saveError,
+      onEditBabies,
+      onEditCompanion,
+      onBack,
+      onSubmit,
+    },
+    ref,
+  ) => {
     const parsedDob = parseDateOnly(draft.dateOfBirth);
-    const countLabel =
-      BABY_COUNT_OPTIONS.find((o) => o.value === draft.babyCount)?.label ?? "One baby";
-    const companionLabel =
-      COMPANION_OPTIONS.find((o) => o.value === companion)?.label ?? "Decide later";
+    const countLabel = babyCountLabel(draft.babyCount);
     const names = draft.babies
       .slice(0, draft.babyCount)
       .map((baby, index) => ({ label: BABY_ROW_LABELS[index], name: baby.name.trim() }))
@@ -82,6 +93,10 @@ const StepReview = forwardRef<HTMLHeadingElement, Props>(
               {parsedDob ? format(parsedDob, "d MMMM yyyy") : draft.dateOfBirth}
             </span>
           </div>
+          <div className={rowClass}>
+            <span className={labelClass}>Stage</span>
+            <span className={valueClass}>{stage ? stage.label : "Added once we have a date"}</span>
+          </div>
           {names.length > 0 ? (
             names.map((entry) => (
               <div key={entry.label} className={rowClass}>
@@ -117,8 +132,14 @@ const StepReview = forwardRef<HTMLHeadingElement, Props>(
             </button>
           </div>
           <div className={rowClass}>
-            <span className={labelClass}>Cindy</span>
-            <span className={valueClass}>{companionLabel}</span>
+            <span className={labelClass}>Companion</span>
+            <span className={valueClass}>
+              {companionName.trim().length > 0 ? companionName.trim() : "No name for now"}
+            </span>
+          </div>
+          <div className={rowClass}>
+            <span className={labelClass}>Tone</span>
+            <span className={valueClass}>{toneLabel(companionTone)}</span>
           </div>
           <p className="font-serif text-[14px] leading-[1.6] text-foreground/70 pt-3">
             {FIRST_YEAR_SETUP_COPY[mode].review.companionNote}

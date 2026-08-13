@@ -438,12 +438,6 @@ const FirstYearToday = () => {
             you. Every field is optional. Nothing is measured, scored or compared, and it is never
             advice.
           </p>
-          <Link
-            to="/my-first-year"
-            className={`mt-5 ${INLINE_ACTION_CLASS} text-[13px]`}
-          >
-            Back to your First Year journey
-          </Link>
         </header>
 
         <section className="pb-10" aria-labelledby="lane-baby">

@@ -324,12 +324,6 @@ const FirstYearMemories = () => {
           <p className="font-serif text-[15.5px] leading-[1.75] text-foreground/80 max-w-[54ch]">
             A place to keep the little things you want to look back on.
           </p>
-          <Link
-            to="/my-first-year"
-            className="mt-5 inline-flex min-h-11 items-center font-sans text-[13px] text-foreground/60 underline underline-offset-4 hover:text-foreground/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          >
-            Back to your First Year journey
-          </Link>
         </header>
 
         <p className="sr-only" role="status" aria-live="polite">

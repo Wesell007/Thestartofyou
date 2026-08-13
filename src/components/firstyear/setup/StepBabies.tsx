@@ -1,8 +1,12 @@
 import { forwardRef } from "react";
 import {
   BABY_COUNT_OPTIONS,
+  BABY_LIMIT_NOTE,
   BABY_ROW_LABELS,
+  MORE_THAN_THREE,
+  MORE_THAN_THREE_LABEL,
 } from "./firstYearSetupConstants";
+
 import {
   MAX_BABY_NAME_LENGTH,
   type FirstYearSetupDraft,

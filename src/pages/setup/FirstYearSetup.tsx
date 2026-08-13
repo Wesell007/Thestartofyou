@@ -340,29 +340,53 @@ const FirstYearSetup = () => {
               />
             )}
             {step === 3 && (
-              <StepCompanion
+              <StepStage
                 ref={headingRef}
-                mode={mode}
-                value={companion}
-                onChange={setCompanion}
+                stage={stage}
+                babyCount={draft.babyCount}
                 onBack={() => goTo(2)}
                 onContinue={() => goTo(4)}
               />
             )}
             {step === 4 && (
+              <StepValue
+                ref={headingRef}
+                mode={mode}
+                onBack={() => goTo(3)}
+                onContinue={() => goTo(5)}
+              />
+            )}
+            {step === 5 && (
+              <StepCompanion
+                ref={headingRef}
+                hasSavedName={hasSavedName}
+                value={companion}
+                nameError={companionNameError}
+                onChange={(next) => {
+                  setCompanion(next);
+                  setCompanionNameError(null);
+                }}
+                onBack={() => goTo(4)}
+                onContinue={handleCompanionContinue}
+              />
+            )}
+            {step === 6 && (
               <StepReview
                 ref={headingRef}
                 mode={mode}
                 draft={draft}
-                companion={companion}
+                stage={stage}
+                companionName={companion.name}
+                companionTone={companion.tone}
                 saving={saving}
                 saveError={saveError}
                 onEditBabies={() => goTo(2)}
-                onEditCompanion={() => goTo(3)}
-                onBack={() => goTo(3)}
+                onEditCompanion={() => goTo(5)}
+                onBack={() => goTo(5)}
                 onSubmit={handleSubmit}
               />
             )}
+
           </div>
 
           <div className="pt-8">

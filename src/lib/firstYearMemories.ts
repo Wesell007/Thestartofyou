@@ -129,13 +129,22 @@ export const updateMemory = async (input: UpdateInput): Promise<FirstYearMemory>
   return toMemory(data);
 };
 
-export const deleteMemory = async (userId: string, id: string): Promise<void> => {
+/**
+ * Remove a kept moment. The row goes first, then the stored photo, so a
+ * storage hiccup never leaves a memory a parent thought they had removed.
+ */
+export const deleteMemory = async (
+  userId: string,
+  id: string,
+  photoPath?: string | null,
+): Promise<void> => {
   const { error } = await supabase
     .from("first_year_memories")
     .delete()
     .eq("id", id)
     .eq("user_id", userId);
   if (error) throw error;
+  if (photoPath) await removeMemoryPhotoObject(photoPath);
 };
 
 // ─────────────────────────────────────────────────────────────────────────────

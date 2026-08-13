@@ -359,7 +359,7 @@ const FirstYearMemories = () => {
 
   const handlePhotoSelect = (file: File) => {
     const check = checkMemoryPhotoFile(file);
-    if (!check.ok) {
+    if (check.ok !== true) {
       toast({ title: check.message });
       return;
     }
@@ -384,7 +384,7 @@ const FirstYearMemories = () => {
     setDeleting(true);
     try {
       const removedPath = pendingDelete.photo_path;
-      await deleteMemory(loaded.userId, pendingDelete.id);
+      await deleteMemory(loaded.userId, pendingDelete.id, removedPath);
       if (removedPath) {
         setPhotoUrls((current) => {
           const next = { ...current };

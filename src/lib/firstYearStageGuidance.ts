@@ -135,7 +135,9 @@ export const getStageGuidance = (
   }
 
   const isNewborn = age.ageInDays <= 27;
-  const monthIndex = age.firstYearMonthIndex;
+  // Past the newborn window the guide never falls back to month zero: a baby
+  // of 28 days reads the one month guide.
+  const monthIndex = isNewborn ? 0 : Math.max(1, age.firstYearMonthIndex);
   const short = getMonthGuide(monthSlugFor(monthIndex))?.shortVersion;
 
   return {

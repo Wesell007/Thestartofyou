@@ -14,6 +14,7 @@ import {
 import { FIRST_YEAR_SETUP_ROUTE } from "@/components/firstyear/setup/firstYearSetupConstants";
 import FirstYearHeroPanel from "@/components/firstyear/journey/FirstYearHeroPanel";
 import BabySummaryCard from "@/components/firstyear/journey/BabySummaryCard";
+import StageGuidanceSection from "@/components/firstyear/journey/StageGuidanceSection";
 import SupportLane, { type SupportCard } from "@/components/firstyear/journey/SupportLane";
 import PregnancyChapterKeptCard from "@/components/firstyear/journey/PregnancyChapterKeptCard";
 import WhatComesNextCard from "@/components/firstyear/journey/WhatComesNextCard";
@@ -30,18 +31,11 @@ import { localDateKey } from "@/lib/firstYearEntriesSchema";
 import { describeBabies } from "@/lib/firstYearCopy";
 
 
-/** For baby lane. Full public First Year routes only, never shortened paths. */
+/**
+ * For baby lane. Full public First Year routes only, never shortened paths.
+ * Feeding and sleep now live in the age-aware "For this stage" section.
+ */
 const FOR_BABY_CARDS: SupportCard[] = [
-  {
-    title: "Feeding rhythm",
-    detail: "Finding a pattern that works, however you are feeding.",
-    href: "/first-year/feeding",
-  },
-  {
-    title: "Sleep rhythm",
-    detail: "Rest rhythms, wake windows and what babies often do at this age.",
-    href: "/first-year/sleep",
-  },
   {
     title: "Development",
     detail: "What babies often do, at their own pace.",
@@ -220,6 +214,10 @@ const MyFirstYear = () => {
       <main className="relative mx-auto w-full max-w-[720px] lg:max-w-[880px] px-4 sm:px-8 md:px-10 pb-6">
         <FirstYearHeroPanel babies={state.babies} />
         <BabySummaryCard babies={state.babies} />
+        <StageGuidanceSection
+          dateOfBirth={state.babies[0]?.date_of_birth}
+          babyCount={state.babies.length}
+        />
         <TodayCard
           savedToday={state.savedToday}
           babyCount={state.babies.length}

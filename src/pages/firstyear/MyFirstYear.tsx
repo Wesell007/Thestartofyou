@@ -214,6 +214,10 @@ const MyFirstYear = () => {
       <main className="relative mx-auto w-full max-w-[720px] lg:max-w-[880px] px-4 sm:px-8 md:px-10 pb-6">
         <FirstYearHeroPanel babies={state.babies} />
         <BabySummaryCard babies={state.babies} />
+        <StageGuidanceSection
+          dateOfBirth={state.babies[0]?.date_of_birth}
+          babyCount={state.babies.length}
+        />
         <TodayCard
           savedToday={state.savedToday}
           babyCount={state.babies.length}

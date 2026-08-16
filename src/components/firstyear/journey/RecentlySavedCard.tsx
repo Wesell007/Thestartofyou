@@ -66,12 +66,10 @@ const RecentlySavedCard = ({ entries }: Props) => {
           ))}
         </ul>
         <div className="mt-3">
-          <Link
-            to="/my-first-year/today"
-            className="inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] text-foreground/70 underline underline-offset-4 decoration-border transition-colors hover:decoration-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-          >
+          <Link to="/my-first-year/today" className={FY_QUIET_LINK}>
             Open your notes
           </Link>
+
         </div>
       </div>
     </section>

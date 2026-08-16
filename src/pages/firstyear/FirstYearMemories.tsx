@@ -525,7 +525,7 @@ const FirstYearMemories = () => {
         }}
         url={viewing?.photo_path ? photoUrls[viewing.photo_path] ?? null : null}
         title={viewing?.title?.trim() || "A moment you kept"}
-        caption="The photo kept with this memory"
+        hasTitle={Boolean(viewing?.title?.trim())}
       />
       <ConfirmDialog
         open={Boolean(pendingDelete)}

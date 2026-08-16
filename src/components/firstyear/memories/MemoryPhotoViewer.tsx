@@ -4,15 +4,20 @@ type Props = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   url: string | null;
+  /** The memory's own title, or a calm stand-in when it has none. */
   title: string;
-  caption: string;
+  /** True when `title` is the parent's own words rather than a stand-in. */
+  hasTitle?: boolean;
 };
 
 /**
  * A single photo, opened on purpose. There is no gallery, no swiping and no
  * next photo: a parent looks at the one moment they chose to open.
+ *
+ * The alt text uses the memory title, which is already shown in the heading.
+ * Note text is never used, so nothing private is added to the image.
  */
-const MemoryPhotoViewer = ({ open, onOpenChange, url, title, caption }: Props) => (
+const MemoryPhotoViewer = ({ open, onOpenChange, url, title, hasTitle = false }: Props) => (
   <Dialog open={open} onOpenChange={onOpenChange}>
     <DialogContent className="max-w-[560px]">
       <DialogHeader>
@@ -23,7 +28,7 @@ const MemoryPhotoViewer = ({ open, onOpenChange, url, title, caption }: Props) =
       {url ? (
         <img
           src={url}
-          alt={caption}
+          alt={hasTitle ? `Photo for memory: ${title}` : "Photo saved with this memory"}
           className="max-h-[70vh] w-full rounded-[16px] border border-border/50 bg-parchment p-1.5 object-contain"
         />
       ) : (

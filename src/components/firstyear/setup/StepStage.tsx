@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
-import { BEYOND_FIRST_YEAR_NOTE, type FirstYearStageInfo } from "@/lib/firstYearStage";
+import { Link } from "react-router-dom";
+import { BEYOND_FIRST_YEAR_SETUP_NOTE, type FirstYearStageInfo } from "@/lib/firstYearStage";
 
 type Props = {
   /** Null only when the date of birth could not be read. */
@@ -43,9 +44,17 @@ const StepStage = forwardRef<HTMLHeadingElement, Props>(
             </p>
           </div>
           {stage.beyondFirstYear ? (
-            <p className="font-serif text-[15px] leading-[1.7] text-foreground/75 max-w-[52ch] mb-8">
-              {BEYOND_FIRST_YEAR_NOTE}
-            </p>
+            <div className="mb-8">
+              <p className="font-serif text-[15px] leading-[1.7] text-foreground/75 max-w-[52ch]">
+                {BEYOND_FIRST_YEAR_SETUP_NOTE}
+              </p>
+              <Link
+                to="/toddler"
+                className="mt-3 inline-flex min-h-11 items-center font-sans text-[13px] text-foreground/65 underline underline-offset-4 decoration-foreground/25 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              >
+                Look at toddler guidance
+              </Link>
+            </div>
           ) : (
             <p className="font-serif text-[15px] leading-[1.7] text-foreground/75 max-w-[52ch] mb-8">
               This is worked out from the date of birth, so it moves along on its own.

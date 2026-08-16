@@ -437,7 +437,7 @@ const AccountSettings = () => {
 
           <section className="rounded-2xl border border-destructive/25 bg-card p-6">
             <h2 className="font-serif text-xl mb-2">Delete account</h2>
-            <p className="text-sm text-muted-foreground mb-5">Permanently removes the account and its saved journeys, logs, reflections and weekly photos.</p>
+            <p className="text-sm text-muted-foreground mb-5">Permanently removes the account and everything saved to it: your saved journeys, logs and reflections, your baby details, your First Year daily notes, your First Year memories and their photo details, and every private photo, video and voice note you have stored.</p>
             <button type="button" onClick={() => setConfirming("account")} disabled={Boolean(busy)} className="inline-flex items-center gap-2 text-sm text-destructive underline disabled:opacity-50">
               <Trash2 size={15} /> {busy === "account" ? "Deleting account…" : "Delete my account"}
             </button>
@@ -460,7 +460,7 @@ const AccountSettings = () => {
         open={confirming === "account"}
         onOpenChange={(next) => setConfirming(next ? "account" : null)}
         title="Permanently delete your account?"
-        description="This removes your account and everything saved to it, including your journey, reflections, photos, videos, voice notes and toolkit records. This cannot be undone. If you would like a copy first, close this and download your data."
+        description="This removes your account and everything saved to it, including your journey, reflections, toolkit records, baby details, First Year daily notes, First Year memories and their photo details, and every private photo, video and voice note you have stored. This cannot be undone. If you would like a copy first, close this and download your data."
         confirmLabel="Delete everything"
         cancelLabel="Cancel"
         onConfirm={deleteAccount}

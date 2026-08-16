@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import SeoHead from "@/components/seo/SeoHead";
+import PageLoadState from "@/components/shared/PageLoadState";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import { supabase } from "@/integrations/supabase/client";
 import { canEnterFirstYearSetup, saveFirstYearJourney } from "@/lib/firstYearJourney";
@@ -242,31 +242,15 @@ const FirstYearSetup = () => {
 
 
   if (screen === "loading") {
-    return (
-      <div className="min-h-screen bg-parchment flex items-center justify-center" role="status">
-        <Loader2 className="animate-spin text-sage" aria-hidden />
-        <span className="sr-only">Loading your First Year setup</span>
-      </div>
-    );
+    return <PageLoadState message="Loading your First Year setup…" />;
   }
 
   if (screen === "error") {
     return (
-      <div className="min-h-screen bg-parchment flex items-center justify-center px-6">
-        <div role="alert" className="max-w-md text-center space-y-5">
-          <h1 className="font-serif text-3xl text-foreground">We couldn't open this just now</h1>
-          <p className="font-sans text-sm text-muted-foreground">
-            Please try again in a moment.
-          </p>
-          <button
-            type="button"
-            onClick={() => window.location.reload()}
-            className="rounded-pill bg-terracotta px-6 py-3 font-sans text-sm text-terracotta-foreground"
-          >
-            Try again
-          </button>
-        </div>
-      </div>
+      <PageLoadState
+        error="We couldn't open this just now. Please try again in a moment."
+        onRetry={() => window.location.reload()}
+      />
     );
   }
 
@@ -284,7 +268,7 @@ const FirstYearSetup = () => {
         noindex
       />
       <MyWeekHeader />
-      <main className="relative mx-auto w-full max-w-[680px] px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 pb-20">
+      <main className="relative mx-auto w-full max-w-[720px] px-4 sm:px-8 md:px-10 pt-16 sm:pt-20 pb-20">
         <p
           className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-3"
           style={{ color: "hsl(var(--stage-firstyear-accent))" }}
@@ -294,15 +278,28 @@ const FirstYearSetup = () => {
         <h1 className="sr-only">Start your First Year journey</h1>
 
         <div
-          className="rounded-[22px] keepsake-surface px-6 sm:px-9 py-8 sm:py-10 min-h-[520px] flex flex-col"
+          className="rounded-[22px] keepsake-surface px-6 sm:px-9 py-8 sm:py-10 min-h-[420px] flex flex-col"
           style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.2)" }}
         >
-          <p
-            className="font-sans text-[12.5px] text-foreground/55 mb-6"
-            aria-live="polite"
-          >
-            Step {step} of {TOTAL_STEPS}
-          </p>
+          <div className="mb-6">
+            <p className="font-sans text-[12.5px] text-foreground/55" aria-live="polite">
+              Step {step} of {TOTAL_STEPS}
+            </p>
+            <div className="mt-2.5 flex gap-1.5" aria-hidden="true">
+              {Array.from({ length: TOTAL_STEPS }, (_, index) => (
+                <span
+                  key={index}
+                  className="h-[3px] w-7 rounded-full transition-colors"
+                  style={{
+                    backgroundColor:
+                      index < step
+                        ? "hsl(var(--stage-firstyear-accent) / 0.55)"
+                        : "hsl(var(--stage-firstyear-accent) / 0.15)",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
 
           <div className="flex-1">
             {step === 1 && (

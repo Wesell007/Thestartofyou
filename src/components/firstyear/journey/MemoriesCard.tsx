@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { FirstYearMemory } from "@/lib/firstYearMemories";
+import { FY_QUIET_LINK } from "./firstYearStyles";
 
 type Props = {
   /** The one or two most recently kept moments, or an empty list. */
@@ -21,7 +22,7 @@ const MemoriesCard = ({ memories }: Props) => {
     .filter((line) => line.length > 0);
 
   return (
-    <section className="pb-8">
+    <section className="pb-10">
       <div className="rounded-[20px] border border-border/50 bg-background/60 px-5 sm:px-7 py-5 sm:py-6">
         <h2 className="font-serif text-[1.15rem] leading-[1.3] text-foreground/90 mb-1.5">
           Memories
@@ -42,10 +43,7 @@ const MemoriesCard = ({ memories }: Props) => {
           </ul>
         )}
         <div className="mt-3">
-          <Link
-            to="/my-first-year/memories"
-            className="inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] text-foreground/70 underline underline-offset-4 decoration-border transition-colors hover:decoration-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2"
-          >
+          <Link to="/my-first-year/memories" className={FY_QUIET_LINK}>
             {lines.length > 0 ? "Look back at your memories" : "Keep a moment"}
           </Link>
         </div>

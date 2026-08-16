@@ -22,8 +22,8 @@ Copy and presentation only. No schema, RLS, storage, route, sitemap, export or d
 
 `src/lib/firstYearStage.ts` and `src/components/firstyear/setup/StepStage.tsx`
 
-- `BEYOND_FIRST_YEAR_NOTE` extended with the next step: "First Year is built around the first twelve months, so some guidance may be less relevant now. You are welcome to carry on. If your child is older, toddler guidance may be a better fit."
-- `StepStage` renders the note as it does today, followed by a quiet text link to the existing public `/toddler` hub, opening in the same tab, with the shared setup link styling and a visible focus ring.
+- The existing note is also used by the signed-in home guidance section, so setup gets its own constant instead: `BEYOND_FIRST_YEAR_SETUP_NOTE`, reading "First Year is built around the first twelve months, so some guidance may be less relevant now. You are welcome to carry on. If your child is older, toddler guidance may be a better fit." The home note is left exactly as it is.
+- `StepStage` renders the setup note, followed by a quiet text link to the existing public `/toddler` hub (route confirmed present), in the same tab, with a visible focus ring.
 - Date validation window, stage thresholds and the ability to continue are unchanged. Nothing redirects.
 
 ## 4. Memory photo viewer alt text

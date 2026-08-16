@@ -3,6 +3,8 @@ import { format } from "date-fns";
 import { parseDateOnly } from "@/lib/dateOnly";
 import { KIND_LABELS, localDateKey } from "@/lib/firstYearEntriesSchema";
 import type { FirstYearEntry } from "@/lib/firstYearEntries";
+import { FY_QUIET_LINK } from "./firstYearStyles";
+
 
 type Props = {
   /** Recent entries, newest day first, exactly as `getRecentEntries` returns them. */

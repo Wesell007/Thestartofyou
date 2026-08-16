@@ -42,7 +42,7 @@ const SupportLane = ({ kicker, heading, intro, cards, side, halfWidth = false }:
       : "hsl(var(--stage-recovery) / 0.5)";
 
   return (
-    <section className="pt-1 pb-8">
+    <section className="pb-10">
       <p
         className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-3"
         style={{ color: accent }}

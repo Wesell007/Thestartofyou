@@ -21,6 +21,13 @@ export type FirstYearStageInfo = {
 export const BEYOND_FIRST_YEAR_NOTE =
   "First Year is built around the first twelve months, so some guidance may be less relevant now. You are welcome to carry on.";
 
+/**
+ * The same message during setup, where it helps to name the next step too.
+ * Setup only: the signed-in home guidance section keeps the shorter note.
+ */
+export const BEYOND_FIRST_YEAR_SETUP_NOTE =
+  "First Year is built around the first twelve months, so some guidance may be less relevant now. You are welcome to carry on. If your child is older, toddler guidance may be a better fit.";
+
 const STAGE_COPY: Record<FirstYearStage, { label: string; description: string }> = {
   newborn: {
     label: "Newborn",

@@ -35,7 +35,7 @@ export const MORE_THAN_THREE_LABEL = "More than three";
 
 /** Shown once the "More than three" control is revealed. */
 export const BABY_LIMIT_NOTE =
-  "We can set up four babies at the moment. If you have more, choose four for now and tell us, and we will make room.";
+  "We can set up four babies at the moment. If you have more than four, choose four for now and tell us so we can help.";
 
 export const BABY_ROW_LABELS = [
   "First baby",

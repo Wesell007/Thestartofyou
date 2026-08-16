@@ -71,7 +71,7 @@ const MemoryList = ({ memories, babies, onEdit, onRemove, photoUrls, onOpenPhoto
                     <button
                       type="button"
                       onClick={() => onOpenPhoto(memory)}
-                      className="mt-3 block overflow-hidden rounded-[14px] border border-border/60 bg-parchment focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      className="mt-3 block overflow-hidden rounded-[16px] border border-border/50 bg-parchment p-1 shadow-[0_10px_24px_-20px_rgba(50,50,70,0.5)] transition-colors hover:border-foreground/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                     >
                       {photoUrls?.[memory.photo_path] ? (
                         <img
@@ -79,11 +79,11 @@ const MemoryList = ({ memories, babies, onEdit, onRemove, photoUrls, onOpenPhoto
                           alt={`Photo kept with this memory from ${
                             parsed ? format(parsed, "d MMMM") : memory.memory_date
                           }`}
-                          className="h-28 w-28 object-cover"
+                          className="h-28 w-28 rounded-[12px] object-cover"
                           loading="lazy"
                         />
                       ) : (
-                        <span className="flex h-28 w-28 items-center justify-center px-2 text-center font-sans text-[12px] text-foreground/55">
+                        <span className="flex h-28 w-28 items-center justify-center rounded-[12px] px-2 text-center font-sans text-[12px] text-foreground/55">
                           Photo
                         </span>
                       )}

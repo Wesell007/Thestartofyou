@@ -40,7 +40,7 @@ const RecentlySavedCard = ({ entries }: Props) => {
         : "Saved recently";
 
   return (
-    <section className="pb-8">
+    <section className="pb-10">
       <div
         className="rounded-[20px] border px-5 sm:px-7 py-5 sm:py-6"
         style={{

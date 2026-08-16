@@ -7,6 +7,8 @@ import {
   type BabyForCopy,
 } from "@/lib/firstYearCopy";
 import { getFirstYearAge } from "@/lib/firstYearDates";
+import { FY_QUIET_LINK } from "./firstYearStyles";
+
 
 type Props = {
   babies: BabyForCopy[];

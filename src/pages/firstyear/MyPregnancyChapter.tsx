@@ -6,6 +6,7 @@ import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import PageLoadState from "@/components/shared/PageLoadState";
+import { FY_FOCUS_RING, FY_QUIET_LINK } from "@/components/firstyear/journey/firstYearStyles";
 import { supabase } from "@/integrations/supabase/client";
 import { parseDateOnly } from "@/lib/dateOnly";
 import { FIRST_YEAR_SETUP_ROUTE } from "@/components/firstyear/setup/firstYearSetupConstants";
@@ -285,7 +286,7 @@ const MyPregnancyChapter = () => {
         <div className="mb-8">
           <Link
             to="/my-first-year"
-            className="group inline-flex items-center gap-2 font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase text-foreground/55 hover:text-foreground/85 transition-colors"
+            className={`group inline-flex min-h-11 items-center gap-2 rounded-sm font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase text-foreground/55 hover:text-foreground/85 transition-colors ${FY_FOCUS_RING}`}
           >
             <ArrowLeft size={12} strokeWidth={1.6} className="transition-transform group-hover:-translate-x-0.5" />
             Back to your First Year
@@ -293,7 +294,7 @@ const MyPregnancyChapter = () => {
         </div>
         {children}
       </main>
-      <MyWeekFooter contextual="Nothing new is being tracked here. Your First Year journey continues separately." />
+      <MyWeekFooter contextual="Nothing new is being added here. Your First Year journey continues separately." />
     </div>
   );
 
@@ -493,6 +494,11 @@ const MyPregnancyChapter = () => {
       <p className="mt-10 font-serif italic text-[15px] leading-[1.7] text-foreground/60 max-w-[52ch]">
         This chapter stays yours. Your First Year journey continues separately.
       </p>
+      <div className="mt-8 border-t border-border/50 pt-6">
+        <Link to="/my-first-year" className={FY_QUIET_LINK}>
+          Back to your First Year journey
+        </Link>
+      </div>
     </>,
   );
 };

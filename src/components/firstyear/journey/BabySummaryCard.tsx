@@ -7,6 +7,8 @@ import {
   type BabyForCopy,
 } from "@/lib/firstYearCopy";
 import { getFirstYearAge } from "@/lib/firstYearDates";
+import { FY_QUIET_LINK } from "./firstYearStyles";
+
 
 type Props = {
   babies: BabyForCopy[];
@@ -26,7 +28,7 @@ const BabySummaryCard = ({ babies }: Props) => {
   const subject = describeBabies(babies);
 
   return (
-    <section className="pb-3">
+    <section className="pb-6">
       <div
         className="rounded-[20px] border px-5 sm:px-7 py-5 sm:py-6"
         style={{
@@ -49,8 +51,9 @@ const BabySummaryCard = ({ babies }: Props) => {
         <div className="mt-2">
           <Link
             to={monthPagePath(monthIndex)}
-            className="inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] text-foreground/70 underline underline-offset-4 decoration-border transition-colors hover:decoration-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            className={FY_QUIET_LINK}
           >
+
             {monthPageLabel(monthIndex)}
           </Link>
         </div>

@@ -24,7 +24,7 @@ type Props = {
 };
 
 const fieldClass =
-  "w-full rounded-[14px] border border-border/60 bg-parchment px-4 py-3 font-sans text-[15px] text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent";
+  "w-full rounded-[14px] border border-border/60 bg-parchment px-4 py-3 font-sans text-[15px] text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-sage focus:ring-offset-2 focus:ring-offset-transparent";
 
 /** Step 2. Baby count, one shared date of birth, optional names. */
 const StepBabies = forwardRef<HTMLHeadingElement, Props>(
@@ -103,7 +103,7 @@ const StepBabies = forwardRef<HTMLHeadingElement, Props>(
               id="baby-count-more"
               value={draft.babyCount}
               onChange={(event) => onCountChange(Number(event.target.value))}
-              className="w-full max-w-[220px] rounded-[14px] border border-border/60 bg-parchment px-4 py-3 font-sans text-[15px] text-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent"
+              className="w-full max-w-[220px] rounded-[14px] border border-border/60 bg-parchment px-4 py-3 font-sans text-[15px] text-foreground focus:outline-none focus:ring-2 focus:ring-sage focus:ring-offset-2 focus:ring-offset-transparent"
             >
               <option value={4}>Four babies</option>
             </select>

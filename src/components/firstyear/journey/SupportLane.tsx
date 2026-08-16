@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { FY_FOCUS_RING } from "./firstYearStyles";
+
 
 export type SupportCard = {
   title: string;
@@ -40,7 +42,7 @@ const SupportLane = ({ kicker, heading, intro, cards, side, halfWidth = false }:
       : "hsl(var(--stage-recovery) / 0.5)";
 
   return (
-    <section className="pt-1 pb-8">
+    <section className="pb-10">
       <p
         className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-3"
         style={{ color: accent }}
@@ -66,7 +68,7 @@ const SupportLane = ({ kicker, heading, intro, cards, side, halfWidth = false }:
           <li key={`${card.title}-${card.href}`}>
             <Link
               to={card.href}
-              className="group block h-full rounded-[18px] border px-5 py-5 transition-colors hover:border-foreground/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className={`group block h-full rounded-[18px] border px-5 py-5 transition-colors hover:border-foreground/25 ${FY_FOCUS_RING}`}
               style={{ borderColor: border, backgroundColor: wash }}
             >
               <span className="block font-serif text-[1.05rem] leading-snug text-foreground/90">

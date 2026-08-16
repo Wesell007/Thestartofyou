@@ -24,7 +24,7 @@ const MemoryPhotoViewer = ({ open, onOpenChange, url, title, caption }: Props) =
         <img
           src={url}
           alt={caption}
-          className="max-h-[70vh] w-full rounded-[16px] object-contain"
+          className="max-h-[70vh] w-full rounded-[16px] border border-border/50 bg-parchment p-1.5 object-contain"
         />
       ) : (
         <p className="font-serif text-[15px] leading-[1.7] text-foreground/75">

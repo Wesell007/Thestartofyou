@@ -128,7 +128,8 @@ const AccountSettings = () => {
         supabase.from("babies").select("*").eq("user_id", userId),
         // Phase 17B: First Year daily check-in notes.
         supabase.from("first_year_entries").select("*").eq("user_id", userId),
-        // Phase 19B: First Year memories. Text keepsakes only, never media.
+        // Phase 19B/22B: First Year memories. Words, plus the details of any photo
+        // kept with a memory. The photo files themselves are never in the JSON.
         supabase.from("first_year_memories").select("*").eq("user_id", userId),
       ]);
       const error = results.find((result) => result.error)?.error;
@@ -386,7 +387,7 @@ const AccountSettings = () => {
 
           <section className="rounded-2xl border border-border/50 bg-card p-6">
             <h2 className="font-serif text-xl mb-2">Download your data</h2>
-            <p className="text-sm text-muted-foreground mb-5">Creates a JSON file containing everything saved to your account: your profile, journey details, logs, reflections, First Year daily notes, photo, video and voice note records, and all of your toolkit entries.</p>
+            <p className="text-sm text-muted-foreground mb-5">Creates a JSON file containing everything saved to your account: your profile, journey details, logs, reflections, First Year daily notes, First Year memories and the details of any photo kept with a memory, photo, video and voice note records, and all of your toolkit entries. Files themselves are not included, only their details.</p>
             <button type="button" onClick={exportData} disabled={Boolean(busy)} className="inline-flex items-center gap-2 rounded-pill border border-border px-5 py-2.5 text-sm disabled:opacity-50">
               <Download size={15} /> {busy === "export" ? "Preparing…" : "Download my data"}
             </button>

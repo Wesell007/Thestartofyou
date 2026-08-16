@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import { FY_FOCUS_RING } from "./firstYearStyles";
 
 type Props = {
-  /** Number of notes already saved today. Shown as reassurance, never a score. */
+  /** Number of notes already saved today. Shown as reassurance, never a count to beat. */
   savedToday: number;
   babyCount: number;
   /** Natural-language subject, for example "Ada" or "Ada and Bo". */
@@ -14,7 +15,7 @@ type Props = {
  * this card entirely.
  */
 const TodayCard = ({ savedToday, babyCount, subject }: Props) => (
-  <section className="pb-8">
+  <section className="pb-10">
     <div
       className="rounded-[22px] keepsake-surface px-6 sm:px-8 py-7 sm:py-8"
       style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.3)" }}
@@ -43,8 +44,11 @@ const TodayCard = ({ savedToday, babyCount, subject }: Props) => (
       <div className="mt-6">
         <Link
           to="/my-first-year/today"
-          className="inline-flex min-h-11 items-center justify-center rounded-pill px-6 py-2.5 font-sans text-sm font-medium text-white shadow-cta transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-          style={{ backgroundColor: "hsl(var(--stage-firstyear-deep))" }}
+          className={`inline-flex min-h-11 items-center justify-center rounded-pill px-6 py-2.5 font-sans text-sm font-medium shadow-cta transition-colors ${FY_FOCUS_RING}`}
+          style={{
+            backgroundColor: "hsl(var(--stage-firstyear-deep))",
+            color: "hsl(var(--parchment))",
+          }}
         >
           {savedToday > 0 ? "Open today's notes" : "Add a note for today"}
         </Link>

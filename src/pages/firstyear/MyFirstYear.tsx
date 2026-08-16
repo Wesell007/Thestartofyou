@@ -211,7 +211,7 @@ const MyFirstYear = () => {
         noindex
       />
       <MyWeekHeader />
-      <main className="relative mx-auto w-full max-w-[720px] lg:max-w-[880px] px-4 sm:px-8 md:px-10 pb-6">
+      <main className="relative mx-auto w-full max-w-[720px] lg:max-w-[880px] px-4 sm:px-8 md:px-10 pb-4">
         <FirstYearHeroPanel babies={state.babies} />
         <BabySummaryCard babies={state.babies} />
         <StageGuidanceSection

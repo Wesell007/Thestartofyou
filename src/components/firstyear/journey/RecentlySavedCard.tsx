@@ -3,6 +3,8 @@ import { format } from "date-fns";
 import { parseDateOnly } from "@/lib/dateOnly";
 import { KIND_LABELS, localDateKey } from "@/lib/firstYearEntriesSchema";
 import type { FirstYearEntry } from "@/lib/firstYearEntries";
+import { FY_QUIET_LINK } from "./firstYearStyles";
+
 
 type Props = {
   /** Recent entries, newest day first, exactly as `getRecentEntries` returns them. */
@@ -38,7 +40,7 @@ const RecentlySavedCard = ({ entries }: Props) => {
         : "Saved recently";
 
   return (
-    <section className="pb-8">
+    <section className="pb-10">
       <div
         className="rounded-[20px] border px-5 sm:px-7 py-5 sm:py-6"
         style={{
@@ -64,12 +66,10 @@ const RecentlySavedCard = ({ entries }: Props) => {
           ))}
         </ul>
         <div className="mt-3">
-          <Link
-            to="/my-first-year/today"
-            className="inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] text-foreground/70 underline underline-offset-4 decoration-border transition-colors hover:decoration-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-          >
+          <Link to="/my-first-year/today" className={FY_QUIET_LINK}>
             Open your notes
           </Link>
+
         </div>
       </div>
     </section>

@@ -109,7 +109,7 @@ const StepCompanion = forwardRef<HTMLHeadingElement, Props>(
             aria-invalid={nameError ? true : undefined}
             aria-describedby={nameError ? "companion-name-error" : undefined}
             placeholder="A name for your companion"
-            className="w-full rounded-[14px] border border-border/60 bg-parchment px-4 py-3 font-sans text-[15px] text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent"
+            className="w-full rounded-[14px] border border-border/60 bg-parchment px-4 py-3 font-sans text-[15px] text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-sage focus:ring-offset-2 focus:ring-offset-transparent"
           />
           {nameError ? (
             <p
@@ -136,7 +136,7 @@ const StepCompanion = forwardRef<HTMLHeadingElement, Props>(
                 className={pillClass(value.tone === option.value)}
               >
                 {option.label}
-                <span className="sr-only"> — {option.hint}</span>
+                <span className="sr-only">: {option.hint}</span>
               </button>
             ))}
           </div>

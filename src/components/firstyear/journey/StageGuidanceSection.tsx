@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { getStageGuidance } from "@/lib/firstYearStageGuidance";
+import { FY_FOCUS_RING } from "./firstYearStyles";
 
 type Props = {
   /** First baby's date of birth. Renders nothing when unusable. */
@@ -16,7 +17,7 @@ const StageGuidanceSection = ({ dateOfBirth, babyCount }: Props) => {
   if (!guidance) return null;
 
   return (
-    <section className="pt-1 pb-7" aria-labelledby="for-this-stage">
+    <section className="pb-10" aria-labelledby="for-this-stage">
       <p
         className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-3"
         style={{ color: "hsl(var(--stage-firstyear-accent))" }}
@@ -38,8 +39,11 @@ const StageGuidanceSection = ({ dateOfBirth, babyCount }: Props) => {
           <li key={card.href}>
             <Link
               to={card.href}
-              className="group block h-full rounded-[18px] border bg-card/70 px-5 py-5 transition-colors hover:border-foreground/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.2)" }}
+              className={`group block h-full rounded-[18px] border px-5 py-5 transition-colors hover:border-foreground/25 ${FY_FOCUS_RING}`}
+              style={{
+                borderColor: "hsl(var(--stage-firstyear-accent) / 0.2)",
+                backgroundColor: "hsl(var(--stage-firstyear) / 0.5)",
+              }}
             >
               <span className="block font-serif text-[1.02rem] leading-snug text-foreground/90">
                 {card.title}
@@ -56,7 +60,7 @@ const StageGuidanceSection = ({ dateOfBirth, babyCount }: Props) => {
         {guidance.parentLine}{" "}
         <Link
           to={guidance.parentHref}
-          className="rounded-sm text-foreground/80 underline underline-offset-4 decoration-border transition-colors hover:decoration-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className={`rounded-sm text-foreground/80 underline underline-offset-4 decoration-border transition-colors hover:decoration-foreground/40 ${FY_FOCUS_RING}`}
         >
           {guidance.parentLabel}
         </Link>

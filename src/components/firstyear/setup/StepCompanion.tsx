@@ -136,7 +136,7 @@ const StepCompanion = forwardRef<HTMLHeadingElement, Props>(
                 className={pillClass(value.tone === option.value)}
               >
                 {option.label}
-                <span className="sr-only"> — {option.hint}</span>
+                <span className="sr-only">: {option.hint}</span>
               </button>
             ))}
           </div>

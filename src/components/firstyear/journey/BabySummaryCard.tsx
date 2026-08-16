@@ -51,8 +51,9 @@ const BabySummaryCard = ({ babies }: Props) => {
         <div className="mt-2">
           <Link
             to={monthPagePath(monthIndex)}
-            className="inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] text-foreground/70 underline underline-offset-4 decoration-border transition-colors hover:decoration-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            className={FY_QUIET_LINK}
           >
+
             {monthPageLabel(monthIndex)}
           </Link>
         </div>

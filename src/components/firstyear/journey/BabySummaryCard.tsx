@@ -28,7 +28,7 @@ const BabySummaryCard = ({ babies }: Props) => {
   const subject = describeBabies(babies);
 
   return (
-    <section className="pb-3">
+    <section className="pb-6">
       <div
         className="rounded-[20px] border px-5 sm:px-7 py-5 sm:py-6"
         style={{

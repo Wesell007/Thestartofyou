@@ -71,11 +71,14 @@ type State = {
  */
 const MyFirstYear = () => {
   const navigate = useNavigate();
+  const { name: companionNameSetting } = useCompanionIdentity();
   const [state, setState] = useState<State | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
+  const companion = companionNameSetting?.trim() || DEFAULT_COMPANION;
 
   const retry = useCallback(() => setAttempt((a) => a + 1), []);
+
 
   useEffect(() => {
     let cancelled = false;

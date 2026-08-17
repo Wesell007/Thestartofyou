@@ -43,18 +43,23 @@ const SupportLane = ({ kicker, heading, intro, cards, side, halfWidth = false }:
 
   return (
     <section className="pb-10">
-      <p
-        className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-3"
-        style={{ color: accent }}
+      <span
+        className="inline-flex items-center rounded-full px-3 py-1 font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase mb-3"
+        style={{
+          color: accent,
+          backgroundColor: wash,
+          border: `1px solid ${border}`,
+        }}
       >
         {kicker}
-      </p>
-      <h2 className="font-serif text-[1.35rem] sm:text-[1.55rem] leading-[1.2] text-foreground/90 mb-2.5">
+      </span>
+      <h2 className="font-serif text-[1.3rem] sm:text-[1.42rem] leading-[1.2] text-foreground/90 mb-2.5">
         {heading}
       </h2>
       <p className="font-sans text-[14px] leading-[1.7] text-foreground/70 max-w-[52ch] mb-5">
         {intro}
       </p>
+
 
       <ul
         className={

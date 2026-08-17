@@ -13,7 +13,6 @@ import {
 } from "@/lib/firstYearJourney";
 import { FIRST_YEAR_SETUP_ROUTE } from "@/components/firstyear/setup/firstYearSetupConstants";
 import FirstYearHeroPanel from "@/components/firstyear/journey/FirstYearHeroPanel";
-import BabySummaryCard from "@/components/firstyear/journey/BabySummaryCard";
 import StageGuidanceSection from "@/components/firstyear/journey/StageGuidanceSection";
 import SupportLane, { type SupportCard } from "@/components/firstyear/journey/SupportLane";
 import PregnancyChapterKeptCard from "@/components/firstyear/journey/PregnancyChapterKeptCard";
@@ -21,6 +20,9 @@ import WhatComesNextCard from "@/components/firstyear/journey/WhatComesNextCard"
 import TodayCard from "@/components/firstyear/journey/TodayCard";
 import RecentlySavedCard from "@/components/firstyear/journey/RecentlySavedCard";
 import MemoriesCard from "@/components/firstyear/journey/MemoriesCard";
+import FirstYearAskCompanion from "@/components/firstyear/journey/FirstYearAskCompanion";
+import ExploreGuidance from "@/components/firstyear/journey/ExploreGuidance";
+import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 import {
   countEntriesForDate,
   getRecentEntries,
@@ -28,30 +30,10 @@ import {
 } from "@/lib/firstYearEntries";
 import { getRecentMemories, type FirstYearMemory } from "@/lib/firstYearMemories";
 import { localDateKey } from "@/lib/firstYearEntriesSchema";
-import { describeBabies } from "@/lib/firstYearCopy";
+import { describeAge, describeBabies } from "@/lib/firstYearCopy";
 
-
-/**
- * For baby lane. Full public First Year routes only, never shortened paths.
- * Feeding and sleep now live in the age-aware "For this stage" section.
- */
-const FOR_BABY_CARDS: SupportCard[] = [
-  {
-    title: "Development",
-    detail: "What babies often do, at their own pace.",
-    href: "/first-year/development",
-  },
-  {
-    title: "Nappies and care",
-    detail: "Everyday care, skin, bathing and keeping things simple.",
-    href: "/first-year/care-and-safety",
-  },
-  {
-    title: "Check-ups and questions",
-    detail: "Routine checks, and signs worth asking about.",
-    href: "/first-year/checkups-and-warning-signs",
-  },
-];
+/** Default companion name when the person did not choose one. */
+const DEFAULT_COMPANION = "Cindy";
 
 /** For you lane. Existing public recovery and wellbeing routes only. */
 const FOR_YOU_CARDS: SupportCard[] = [
@@ -70,12 +52,8 @@ const FOR_YOU_CARDS: SupportCard[] = [
     detail: "Feeling like yourself again, and when to reach for support.",
     href: "/first-year/emotional-wellbeing",
   },
-  {
-    title: "Questions to bring up",
-    detail: "What is worth raising with your midwife, GP or health visitor.",
-    href: "/first-year/checkups-and-warning-signs",
-  },
 ];
+
 
 type State = {
   babies: BabyRecord[];
@@ -93,11 +71,14 @@ type State = {
  */
 const MyFirstYear = () => {
   const navigate = useNavigate();
+  const { name: companionNameSetting } = useCompanionIdentity();
   const [state, setState] = useState<State | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
+  const companion = companionNameSetting?.trim() || DEFAULT_COMPANION;
 
   const retry = useCallback(() => setAttempt((a) => a + 1), []);
+
 
   useEffect(() => {
     let cancelled = false;
@@ -212,39 +193,36 @@ const MyFirstYear = () => {
       />
       <MyWeekHeader />
       <main className="relative mx-auto w-full max-w-[720px] lg:max-w-[880px] px-4 sm:px-8 md:px-10 pb-4">
-        <FirstYearHeroPanel babies={state.babies} />
-        <BabySummaryCard babies={state.babies} />
-        <StageGuidanceSection
-          dateOfBirth={state.babies[0]?.date_of_birth}
-          babyCount={state.babies.length}
-        />
+        <FirstYearHeroPanel babies={state.babies} companionName={companion} />
         <TodayCard
           savedToday={state.savedToday}
           babyCount={state.babies.length}
           subject={describeBabies(state.babies)}
+          ageLine={
+            state.babies[0] ? describeAge(state.babies[0].date_of_birth) : null
+          }
         />
         <RecentlySavedCard entries={state.recentEntries} />
+        <FirstYearAskCompanion
+          dateOfBirth={state.babies[0]?.date_of_birth}
+          babyCount={state.babies.length}
+        />
         <MemoriesCard memories={state.recentMemories} />
+        <StageGuidanceSection
+          dateOfBirth={state.babies[0]?.date_of_birth}
+          babyCount={state.babies.length}
+        />
+        <SupportLane
+          side="you"
+          kicker="For you"
+          heading="Support for you"
+          intro="Your recovery is part of this too. This side of the journey is yours."
+          cards={FOR_YOU_CARDS}
+        />
         {state.hasKeptChapter ? <PregnancyChapterKeptCard hasKeptChapter /> : null}
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
-          <SupportLane
-            side="baby"
-            kicker="For baby"
-            heading="Support for your baby"
-            intro="Gentle guidance for the early days and the months ahead. Nothing to keep up with."
-            cards={FOR_BABY_CARDS}
-            halfWidth
-          />
-          <SupportLane
-            side="you"
-            kicker="For you"
-            heading="Support for you"
-            intro="Your recovery is part of this too. This side of the journey is yours."
-            cards={FOR_YOU_CARDS}
-            halfWidth
-          />
-        </div>
+        <ExploreGuidance />
         <WhatComesNextCard />
+
 
       </main>
       <MyWeekFooter contextual="If anything worries you about your baby or your own recovery, speak to your midwife, GP or health visitor." />

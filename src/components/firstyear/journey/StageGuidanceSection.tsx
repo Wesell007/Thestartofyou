@@ -18,21 +18,26 @@ const StageGuidanceSection = ({ dateOfBirth, babyCount }: Props) => {
 
   return (
     <section className="pb-10" aria-labelledby="for-this-stage">
-      <p
-        className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-3"
-        style={{ color: "hsl(var(--stage-firstyear-accent))" }}
+      <span
+        className="inline-flex items-center rounded-full px-3 py-1 font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase mb-3"
+        style={{
+          color: "hsl(var(--stage-firstyear-deep))",
+          backgroundColor: "hsl(var(--stage-firstyear) / 0.8)",
+          border: "1px solid hsl(var(--stage-firstyear-accent) / 0.22)",
+        }}
       >
         {guidance.kicker}
-      </p>
+      </span>
       <h2
         id="for-this-stage"
-        className="font-serif text-[1.35rem] sm:text-[1.5rem] leading-[1.2] text-foreground/90 mb-2.5"
+        className="font-serif text-[1.3rem] sm:text-[1.42rem] leading-[1.2] text-foreground/90 mb-2.5"
       >
         {guidance.heading}
       </h2>
       <p className="font-sans text-[14px] leading-[1.7] text-foreground/70 max-w-[52ch] mb-5">
         {guidance.intro}
       </p>
+
 
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 list-none p-0 m-0">
         {guidance.cards.map((card) => (

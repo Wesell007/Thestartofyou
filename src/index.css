@@ -76,6 +76,29 @@
     --stage-recovery-soft: 320 18% 87%;
     --stage-recovery-accent: 320 22% 44%;
     --stage-recovery-deep: 320 28% 30%;
+    /* First Year signed-in app surfaces — warm cream band, keepsake peach */
+    --stage-firstyear-cream: 38 42% 96%;
+    --stage-firstyear-cream-soft: 36 34% 92%;
+    --stage-firstyear-peach: 22 58% 93%;
+    --stage-firstyear-peach-soft: 20 50% 87%;
+    --stage-firstyear-peach-accent: 18 44% 38%;
+    /* Subtle gradients, reserved for the primary First Year home cards */
+    --gradient-firstyear-today: linear-gradient(
+      145deg,
+      hsl(var(--stage-firstyear) / 0.95) 0%,
+      hsl(var(--stage-firstyear-cream)) 100%
+    );
+    --gradient-firstyear-companion: linear-gradient(
+      145deg,
+      hsl(var(--sage-bg)) 0%,
+      hsl(var(--stage-firstyear-cream)) 100%
+    );
+    --gradient-firstyear-memories: linear-gradient(
+      145deg,
+      hsl(var(--stage-firstyear-peach) / 0.8) 0%,
+      hsl(var(--stage-firstyear-cream)) 100%
+    );
+
     /* Toddler ecosystem — muted apricot / pumpkin clay / warm russet.
        Dusty, warm, premium. Deliberately not bright, not CTA-like, not
        nursery, and visibly distinct from the main site terracotta CTA. */

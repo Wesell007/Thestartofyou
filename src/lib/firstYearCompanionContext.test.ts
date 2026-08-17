@@ -50,9 +50,18 @@ describe("firstYearAgeBand", () => {
 });
 
 describe("buildFirstYearCompanionContext", () => {
+  /** A date of birth roughly four months ago, relative to today. */
+  const fourMonthsAgo = () => {
+    const d = new Date();
+    d.setMonth(d.getMonth() - 4);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
+      d.getDate(),
+    ).padStart(2, "0")}`;
+  };
+
   it("includes only coarse stage facts", () => {
     const context = buildFirstYearCompanionContext({
-      dateOfBirth: "2026-01-01",
+      dateOfBirth: fourMonthsAgo(),
       babyCount: 2,
       tone: "warm",
     });
@@ -65,11 +74,10 @@ describe("buildFirstYearCompanionContext", () => {
 
   it("never carries a date of birth or private content", () => {
     const context = buildFirstYearCompanionContext({
-      dateOfBirth: "2026-01-01",
+      dateOfBirth: fourMonthsAgo(),
       babyCount: 1,
       tone: "calm",
     });
-    expect(context).not.toContain("2026-01-01");
     expect(context).not.toMatch(/\d{4}-\d{2}-\d{2}/);
     expect(context).not.toMatch(/note|memory|photo|chapter/i);
   });
@@ -82,7 +90,7 @@ describe("buildFirstYearCompanionContext", () => {
 
   it("stays within the shared context limit", () => {
     const context = buildFirstYearCompanionContext({
-      dateOfBirth: "2026-01-01",
+      dateOfBirth: fourMonthsAgo(),
       babyCount: 4,
       tone: "practical",
       pageHint: "x".repeat(600),
@@ -90,3 +98,4 @@ describe("buildFirstYearCompanionContext", () => {
     expect(context.length).toBeLessThanOrEqual(FIRST_YEAR_CONTEXT_MAX_LENGTH);
   });
 });
+

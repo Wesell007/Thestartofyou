@@ -12,6 +12,8 @@ import { navigateToAsk } from "@/lib/askNavigation";
 import {
   FY_FIELD_FOCUS_RING,
   FY_FOCUS_RING,
+  FY_HELPER,
+  FY_INTRO,
   FY_KICKER,
   FY_SHADOW_SOFT,
 } from "./firstYearStyles";

@@ -26,7 +26,7 @@ const CHIPS = [
   "How do I look after myself this week?",
 ];
 
-const accent = "hsl(var(--sage))";
+
 
 /** Splits any trailing sources block off the streamed answer. */
 const splitSources = (raw: string) => {

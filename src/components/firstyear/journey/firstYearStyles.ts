@@ -42,3 +42,25 @@ export const FY_CTA = `inline-flex min-h-11 items-center justify-center gap-2 ro
 
 /** Softer secondary pill action, used where a solid pill would compete. */
 export const FY_CTA_SOFT = `inline-flex min-h-11 items-center justify-center gap-2 rounded-pill px-6 py-2.5 font-sans text-[14px] font-semibold transition-colors ${FY_FOCUS_RING}`;
+
+// ── Phase 26B app-home surface scale ───────────────────────────────────────
+
+/** The single card radius across the First Year home. */
+export const FY_CARD_RADIUS = "rounded-[26px]";
+
+/** Inner panel radius, one step tighter than a card. */
+export const FY_INNER_RADIUS = "rounded-[18px]";
+
+/** The dominant card shadow, used once per page on Today. */
+export const FY_SHADOW_STRONG = "0 34px 70px -34px hsl(var(--stage-firstyear-ink) / 0.55)";
+
+/** The quieter card shadow used by every supporting card. */
+export const FY_SHADOW_SOFT = "0 22px 50px -36px hsl(var(--stage-firstyear-ink) / 0.4)";
+
+/** Small chip used inside the app cards, for dates and ages. */
+export const FY_CHIP =
+  "inline-flex items-center rounded-full px-3 py-1 font-sans text-[11.5px] font-medium leading-snug";
+
+/** Oversized serif display line, used once at the top of the page. */
+export const FY_DISPLAY =
+  "font-serif text-[2.4rem] sm:text-[3.1rem] leading-[1.04] text-foreground";

@@ -16,27 +16,55 @@ type Props = {
   /** First baby's date of birth. Renders nothing when unusable. */
   dateOfBirth: string | null | undefined;
   babyCount: number;
+  /** Natural-language subject, for example "Ada". Used in the heading. */
+  subject?: string;
 };
 
 const ICONS = [Baby, Moon, HeartHandshake];
+
+/** Tinted faces for the insight tiles, in order. */
+const TILE_FACES = [
+  {
+    background:
+      "linear-gradient(150deg, hsl(var(--stage-firstyear-soft) / 0.9), hsl(var(--stage-firstyear-cream)))",
+    border: "hsl(var(--stage-firstyear-accent) / 0.26)",
+    mark: "hsl(var(--stage-firstyear) / 0.95)",
+    ink: "hsl(var(--stage-firstyear-ink))",
+  },
+  {
+    background:
+      "linear-gradient(150deg, hsl(var(--stage-firstyear-hero) / 0.85), hsl(var(--stage-firstyear-cream)))",
+    border: "hsl(var(--stage-firstyear-peach-accent) / 0.24)",
+    mark: "hsl(var(--stage-firstyear-peach) / 0.95)",
+    ink: "hsl(var(--stage-firstyear-peach-accent))",
+  },
+  {
+    background:
+      "linear-gradient(150deg, hsl(var(--stage-firstyear-lilac) / 0.85), hsl(var(--stage-firstyear-cream)))",
+    border: "hsl(var(--stage-recovery-accent) / 0.24)",
+    mark: "hsl(var(--stage-recovery) / 0.95)",
+    ink: "hsl(var(--stage-recovery-deep))",
+  },
+];
 
 /**
  * Age-aware guidance for the signed-in home. Insight first, reading second:
  * short tiles derived from published month content, then one quiet onward
  * link. Purely derived at read time, and no stage is ever stored.
  */
-const StageGuidanceSection = ({ dateOfBirth, babyCount }: Props) => {
+const StageGuidanceSection = ({ dateOfBirth, babyCount, subject }: Props) => {
   const guidance = getStageGuidance(dateOfBirth, babyCount);
   if (!guidance) return null;
 
   const monthImage = firstYearMonthImages[guidance.readMore.monthSlug]?.hero.src;
+  const who = babyCount > 1 ? "your babies are" : `${subject?.trim() || "your baby"} is`;
 
   return (
     <section className="pb-10" aria-labelledby="for-this-stage">
       <span
         className={`${FY_KICKER} mb-3`}
         style={{
-          color: "hsl(var(--stage-firstyear-deep))",
+          color: "hsl(var(--stage-firstyear-ink))",
           backgroundColor: "hsl(var(--stage-firstyear) / 0.9)",
           border: "1px solid hsl(var(--stage-firstyear-accent) / 0.28)",
         }}
@@ -44,45 +72,26 @@ const StageGuidanceSection = ({ dateOfBirth, babyCount }: Props) => {
         {guidance.kicker}
       </span>
       <h2 id="for-this-stage" className={`${FY_HEADING} mb-2.5`}>
-        {guidance.heading}
+        Where {who} right now
       </h2>
       <p className={`${FY_INTRO} mb-5`}>{guidance.intro}</p>
 
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 list-none p-0 m-0">
         {guidance.insights.map((insight, index) => {
           const Icon = ICONS[index % ICONS.length];
+          const face = TILE_FACES[index % TILE_FACES.length];
           return (
             <li
               key={insight.title}
-              className="h-full rounded-[18px] border px-5 py-5"
-              style={{
-                borderColor: "hsl(var(--stage-firstyear-accent) / 0.24)",
-                background:
-                  index === 2
-                    ? "linear-gradient(145deg, hsl(var(--stage-recovery) / 0.85), hsl(var(--stage-firstyear-cream)))"
-                    : "var(--gradient-firstyear-today)",
-              }}
+              className="h-full rounded-[20px] border px-5 py-5"
+              style={{ borderColor: face.border, background: face.background }}
             >
               <span
                 aria-hidden="true"
                 className="mb-3 flex h-9 w-9 items-center justify-center rounded-full"
-                style={{
-                  backgroundColor:
-                    index === 2
-                      ? "hsl(var(--stage-recovery-soft) / 0.7)"
-                      : "hsl(var(--stage-firstyear-soft) / 0.75)",
-                }}
+                style={{ backgroundColor: face.mark }}
               >
-                <Icon
-                  size={16}
-                  strokeWidth={1.7}
-                  style={{
-                    color:
-                      index === 2
-                        ? "hsl(var(--stage-recovery-deep))"
-                        : "hsl(var(--stage-firstyear-deep))",
-                  }}
-                />
+                <Icon size={16} strokeWidth={1.7} style={{ color: face.ink }} />
               </span>
               <span className={`block ${FY_CARD_TITLE}`}>{insight.title}</span>
               <span className={`mt-1.5 block ${FY_CARD_BODY} break-words`}>{insight.body}</span>
@@ -112,16 +121,6 @@ const StageGuidanceSection = ({ dateOfBirth, babyCount }: Props) => {
           className="shrink-0 text-foreground/45 transition-transform group-hover:translate-x-0.5"
         />
       </Link>
-
-      <p className="mt-4 font-sans text-[14px] leading-[1.7] text-foreground/75 max-w-[54ch]">
-        {guidance.parentLine}{" "}
-        <Link
-          to={guidance.parentHref}
-          className={`rounded-sm text-foreground font-medium underline underline-offset-4 decoration-border transition-colors hover:decoration-foreground/50 ${FY_FOCUS_RING}`}
-        >
-          {guidance.parentLabel}
-        </Link>
-      </p>
     </section>
   );
 };

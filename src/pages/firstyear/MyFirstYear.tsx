@@ -14,7 +14,7 @@ import {
 import { FIRST_YEAR_SETUP_ROUTE } from "@/components/firstyear/setup/firstYearSetupConstants";
 import FirstYearHeroPanel from "@/components/firstyear/journey/FirstYearHeroPanel";
 import StageGuidanceSection from "@/components/firstyear/journey/StageGuidanceSection";
-import SupportLane, { type SupportCard } from "@/components/firstyear/journey/SupportLane";
+import ForYouBlock, { type ForYouCard } from "@/components/firstyear/journey/ForYouBlock";
 import PregnancyChapterKeptCard from "@/components/firstyear/journey/PregnancyChapterKeptCard";
 import WhatComesNextCard from "@/components/firstyear/journey/WhatComesNextCard";
 import TodayCard from "@/components/firstyear/journey/TodayCard";
@@ -36,7 +36,7 @@ import { describeAge, describeBabies } from "@/lib/firstYearCopy";
 const DEFAULT_COMPANION = "Cindy";
 
 /** For you lane. Existing public recovery and wellbeing routes only. */
-const FOR_YOU_CARDS: SupportCard[] = [
+const FOR_YOU_CARDS: ForYouCard[] = [
   {
     title: "Recovery after birth",
     detail: "How healing tends to go, and what to expect week by week.",
@@ -216,14 +216,9 @@ const MyFirstYear = () => {
         <StageGuidanceSection
           dateOfBirth={state.babies[0]?.date_of_birth}
           babyCount={state.babies.length}
+          subject={describeBabies(state.babies)}
         />
-        <SupportLane
-          side="you"
-          kicker="For you"
-          heading="Support for you"
-          intro="Your recovery is part of this too. This side of the journey is yours."
-          cards={FOR_YOU_CARDS}
-        />
+        <ForYouBlock cards={FOR_YOU_CARDS} />
         {state.hasKeptChapter ? <PregnancyChapterKeptCard hasKeptChapter /> : null}
         <ExploreGuidance />
         <WhatComesNextCard />

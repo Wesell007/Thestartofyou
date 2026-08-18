@@ -44,15 +44,15 @@ const ROWS: Row[] = [
 ];
 
 const ExploreGuidance = () => (
-  <section className="pb-10" aria-labelledby="explore-guidance">
+  <section className="pb-10" aria-labelledby="gentle-reading">
     <div className="border-t border-border/50 pt-6">
       <h2
-        id="explore-guidance"
+        id="gentle-reading"
         className="font-serif text-[1.2rem] leading-[1.3] text-foreground/90 mb-1.5"
       >
-        Explore guidance
+        Gentle reading
       </h2>
-      <p className="font-sans text-[13.5px] leading-[1.7] text-foreground/70 max-w-[52ch] mb-3">
+      <p className="font-sans text-[13.5px] leading-[1.7] text-foreground/70 max-w-[52ch] mb-2">
         Reading for when you want it. Nothing here needs your attention today.
       </p>
       <ul className="list-none p-0 m-0 divide-y divide-border/40">

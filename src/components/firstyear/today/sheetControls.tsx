@@ -95,10 +95,7 @@ type TimeFieldProps = {
 
 export const TimeField = ({ id, label, value, onChange }: TimeFieldProps) => (
   <div>
-    <label
-      htmlFor={id}
-      className="block font-sans text-[13px] font-medium text-foreground/80 mb-1.5"
-    >
+    <label htmlFor={id} className={`block ${SHEET_LEGEND}`}>
       {label}
     </label>
     <input
@@ -121,10 +118,7 @@ type NoteAreaProps = {
 
 export const NoteArea = ({ id, label, placeholder, value, onChange }: NoteAreaProps) => (
   <div className="mb-5">
-    <label
-      htmlFor={id}
-      className="block font-sans text-[13px] font-medium text-foreground/80 mb-1.5"
-    >
+    <label htmlFor={id} className={`block ${SHEET_LEGEND}`}>
       {label}
     </label>
     <textarea
@@ -134,7 +128,7 @@ export const NoteArea = ({ id, label, placeholder, value, onChange }: NoteAreaPr
       maxLength={CARE_NOTE_MAX_LENGTH}
       onChange={(event) => onChange(event.target.value)}
       placeholder={placeholder}
-      className={`w-full resize-none rounded-[14px] border border-border/60 bg-background px-4 py-3 font-sans text-[14.5px] leading-[1.7] text-foreground placeholder:text-muted-foreground/50 ${FY_FIELD_FOCUS_RING}`}
+      className={`w-full resize-none rounded-[14px] border border-border/60 bg-background px-4 py-3 font-sans text-[14.5px] leading-[1.7] text-foreground placeholder:text-muted-foreground/60 ${FY_FIELD_FOCUS_RING}`}
     />
   </div>
 );
@@ -147,7 +141,7 @@ type SheetActionsProps = {
 };
 
 export const SheetActions = ({ saving, editing, onCancel, extra }: SheetActionsProps) => (
-  <div className="flex flex-wrap items-center gap-3">
+  <div className="flex flex-col items-center gap-1 pt-1">
     <button
       type="submit"
       disabled={saving}
@@ -162,6 +156,7 @@ export const SheetActions = ({ saving, editing, onCancel, extra }: SheetActionsP
     {extra}
   </div>
 );
+
 
 /** Shared context handed to each logging sheet. */
 export type SheetContext = {

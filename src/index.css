@@ -88,6 +88,8 @@
     --stage-firstyear-rose: 348 44% 90%;
     --stage-firstyear-lilac: 268 34% 90%;
     --stage-firstyear-ink: 212 42% 22%;
+    /* Warm parchment app surface behind the Today page shell */
+    --stage-firstyear-today-bg: 34 40% 96%;
     /* Readable warm text on cream and light card faces */
     --stage-firstyear-text: 24 16% 24%;
     --stage-firstyear-text-soft: 24 12% 36%;

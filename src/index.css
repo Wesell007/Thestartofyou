@@ -288,6 +288,10 @@
   .bg-parchment-dark { background-color: hsl(var(--parchment-dark)); }
   .bg-parchment-deeper { background-color: hsl(var(--parchment-deeper)); }
 
+  /* First Year Today app surface */
+  .bg-fy-today { background-color: hsl(var(--stage-firstyear-today-bg)); }
+
+
   /* Shadows */
   .shadow-soft { box-shadow: var(--shadow-soft); }
   .shadow-card-brand { box-shadow: var(--shadow-card); }

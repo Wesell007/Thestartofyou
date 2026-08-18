@@ -41,18 +41,22 @@ const FOR_YOU_CARDS: SupportCard[] = [
     title: "Recovery after birth",
     detail: "How healing tends to go, and what to expect week by week.",
     href: "/first-year/postpartum-recovery",
+    topic: "postpartum-recovery",
   },
   {
     title: "Body and hormones",
     detail: "The physical changes that carry on after your baby arrives.",
     href: "/first-year/body-and-hormones",
+    topic: "body-and-hormones",
   },
   {
     title: "Emotional wellbeing",
     detail: "Feeling like yourself again, and when to reach for support.",
     href: "/first-year/emotional-wellbeing",
+    topic: "emotional-wellbeing",
   },
 ];
+
 
 
 type State = {

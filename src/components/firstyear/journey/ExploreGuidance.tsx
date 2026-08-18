@@ -2,7 +2,13 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { firstYearTopicConfigs, type FirstYearTopicSlug } from "@/data/firstYearTopicData";
 import GuideThumb from "./GuideThumb";
-import { FY_FOCUS_RING } from "./firstYearStyles";
+import {
+  FY_ARROW,
+  FY_FOCUS_RING,
+  FY_HEADING,
+  FY_ROW_BODY,
+  FY_ROW_TITLE,
+} from "./firstYearStyles";
 
 type Row = { title: string; detail: string; href: string; topic?: FirstYearTopicSlug };
 

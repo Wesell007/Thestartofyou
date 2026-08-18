@@ -55,6 +55,13 @@ const EDIT_TITLES: Record<QuickAddType, string> = {
   note: "Edit moment",
 };
 
+const DESCRIPTIONS: Record<QuickAddType, string> = {
+  feed: "Choose breast or bottle, then add anything useful. The rest is optional and stays private to you.",
+  sleep: "Start a timer or add the times you remember. The rest is optional and stays private to you.",
+  nappy: "Choose what was in the nappy, then add anything useful. The rest is optional and stays private to you.",
+  note: "Add a few words for something you want to remember from today.",
+};
+
 /**
  * The shell around each logging sheet. It holds the baby choice, validates
  * the draft and hands a clean payload back to the page.

@@ -15,23 +15,40 @@ export const FY_FIELD_FOCUS_RING =
   "focus:outline-none focus:ring-2 focus:ring-sage focus:ring-offset-2 focus:ring-offset-transparent";
 
 /** The quiet underlined text link used across the First Year cards. */
-export const FY_QUIET_LINK = `inline-flex min-h-11 items-center rounded-sm font-sans text-[14px] text-foreground/80 underline underline-offset-4 decoration-border transition-colors hover:decoration-foreground/50 ${FY_FOCUS_RING}`;
+export const FY_QUIET_LINK = `inline-flex min-h-11 items-center rounded-sm font-sans text-[14px] font-medium text-[hsl(var(--stage-firstyear-text))] underline underline-offset-4 decoration-[hsl(var(--stage-firstyear-text-soft)/0.55)] transition-colors hover:decoration-[hsl(var(--stage-firstyear-text))] ${FY_FOCUS_RING}`;
 
 // ── Typographic scale ──────────────────────────────────────────────────────
 
 /** Section heading, used once per block. */
 export const FY_HEADING =
-  "font-serif text-[1.45rem] sm:text-[1.6rem] leading-[1.2] text-foreground";
+  "font-serif text-[1.45rem] sm:text-[1.62rem] leading-[1.18] text-foreground";
 
 /** Card or tile title. */
-export const FY_CARD_TITLE = "font-serif text-[1.08rem] leading-snug text-foreground";
+export const FY_CARD_TITLE =
+  "font-serif text-[1.1rem] font-medium leading-[1.4] text-foreground";
 
 /** Body copy inside a card. */
-export const FY_CARD_BODY = "font-sans text-[13.5px] leading-[1.65] text-foreground/75";
+export const FY_CARD_BODY =
+  "font-sans text-[14px] leading-[1.65] text-[hsl(var(--stage-firstyear-text))]";
 
 /** Longer intro paragraph under a section heading. */
 export const FY_INTRO =
-  "font-sans text-[14.5px] leading-[1.72] text-foreground/80 max-w-[54ch]";
+  "font-sans text-[14.5px] leading-[1.72] text-[hsl(var(--stage-firstyear-text))] max-w-[54ch]";
+
+/** Quieter helper line: chips, captions and secondary notes. */
+export const FY_HELPER =
+  "font-sans text-[13px] leading-[1.6] font-medium text-[hsl(var(--stage-firstyear-text-soft))]";
+
+/** Title of a compact list row in the lower sections. */
+export const FY_ROW_TITLE =
+  "font-sans text-[14.5px] font-semibold leading-snug text-foreground";
+
+/** Description of a compact list row in the lower sections. */
+export const FY_ROW_BODY =
+  "font-sans text-[13.5px] leading-[1.62] text-[hsl(var(--stage-firstyear-text))]";
+
+/** Arrow glyph contrast for list rows and cards. */
+export const FY_ARROW = "text-[hsl(var(--stage-firstyear-text-soft))]";
 
 /** Uppercase kicker label. Pair with a tinted pill and a token colour. */
 export const FY_KICKER =

@@ -35,45 +35,51 @@ const MemoriesCard = ({ memories }: Props) => {
   return (
     <section className="pb-10" aria-labelledby="memories-card">
       <div
-        className="rounded-[22px] border px-5 sm:px-7 py-6 sm:py-7"
+        className="rounded-[24px] border px-5 sm:px-8 py-7 sm:py-8"
         style={{
-          borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.7)",
-          background: "var(--gradient-firstyear-memories)",
+          borderColor: "hsl(var(--stage-firstyear-peach-accent) / 0.28)",
+          background:
+            "linear-gradient(150deg, hsl(var(--stage-firstyear-peach-soft) / 0.85) 0%, hsl(var(--stage-firstyear-peach) / 0.9) 40%, hsl(var(--stage-firstyear-cream)) 100%)",
+          boxShadow: "0 24px 56px -38px hsl(var(--stage-firstyear-peach-accent) / 0.6)",
         }}
       >
-        <p
-          className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-2.5"
-          style={{ color: "hsl(var(--stage-firstyear-peach-accent))" }}
+        <span
+          className={`${FY_KICKER} mb-3`}
+          style={{
+            color: "hsl(var(--stage-firstyear-peach-accent))",
+            backgroundColor: "hsl(var(--stage-firstyear-cream))",
+            border: "1px solid hsl(var(--stage-firstyear-peach-accent) / 0.25)",
+          }}
         >
           Keepsakes
-        </p>
+        </span>
         <h2
           id="memories-card"
-          className="font-serif text-[1.3rem] sm:text-[1.45rem] leading-[1.25] text-foreground/90 mb-1.5"
+          className="font-serif text-[1.45rem] sm:text-[1.6rem] leading-[1.2] text-foreground mb-2"
         >
           Memories
         </h2>
-        <p className="font-sans text-[14px] leading-[1.7] text-foreground/70 max-w-[46ch]">
+        <p className="font-sans text-[14.5px] leading-[1.72] text-foreground/80 max-w-[46ch]">
           A place to keep the small things you want to remember, in your own words.
         </p>
 
         {lines.length > 0 && (
-          <ul className="mt-4 space-y-2.5 list-none p-0 m-0">
+          <ul className="mt-5 space-y-3 list-none p-0 m-0">
             {lines.map((line) => (
               <li key={line.key} className="flex items-start gap-3">
                 {line.date && (
                   <span
-                    className="mt-0.5 shrink-0 rounded-full px-2.5 py-0.5 font-sans text-[10.5px] tracking-[0.08em] uppercase"
+                    className="mt-0.5 shrink-0 rounded-full px-2.5 py-1 font-sans text-[10.5px] font-semibold tracking-[0.1em] uppercase"
                     style={{
                       color: "hsl(var(--stage-firstyear-peach-accent))",
                       backgroundColor: "hsl(var(--stage-firstyear-cream))",
-                      border: "1px solid hsl(var(--stage-firstyear-peach-soft) / 0.8)",
+                      border: "1px solid hsl(var(--stage-firstyear-peach-accent) / 0.25)",
                     }}
                   >
                     {line.date}
                   </span>
                 )}
-                <span className="font-serif text-[14.5px] leading-[1.6] text-foreground/80">
+                <span className="font-serif text-[15px] leading-[1.6] text-foreground/90">
                   {line.label}
                 </span>
               </li>
@@ -81,14 +87,14 @@ const MemoriesCard = ({ memories }: Props) => {
           </ul>
         )}
 
-        <div className="mt-5">
+        <div className="mt-6">
           <Link
             to="/my-first-year/memories"
-            className={`inline-flex min-h-11 items-center justify-center rounded-pill px-6 py-2.5 font-sans text-sm font-medium transition-colors ${FY_FOCUS_RING}`}
+            className={FY_CTA_SOFT}
             style={{
               backgroundColor: "hsl(var(--stage-firstyear-cream))",
               color: "hsl(var(--stage-firstyear-peach-accent))",
-              border: "1px solid hsl(var(--stage-firstyear-peach-soft))",
+              border: "1px solid hsl(var(--stage-firstyear-peach-accent) / 0.35)",
             }}
           >
             {lines.length > 0 ? "Look back at your memories" : "Keep your first moment"}
@@ -97,6 +103,7 @@ const MemoriesCard = ({ memories }: Props) => {
       </div>
     </section>
   );
+
 };
 
 export default MemoriesCard;

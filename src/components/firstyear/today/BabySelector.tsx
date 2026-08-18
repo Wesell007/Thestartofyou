@@ -7,6 +7,9 @@ type Props = {
   babies: BabyRecord[];
   value: string;
   onChange: (value: string) => void;
+  /** Override when the chooser scopes a whole day rather than one note. */
+  legend?: string;
+  hint?: string;
 };
 
 const babyLabel = (baby: BabyRecord, index: number): string =>
@@ -17,7 +20,7 @@ const babyLabel = (baby: BabyRecord, index: number): string =>
  * reader users get arrow-key selection and a single tab stop. Never shown for
  * a single baby: that note simply saves to them.
  */
-const BabySelector = ({ babies, value, onChange }: Props) => {
+const BabySelector = ({ babies, value, onChange, legend, hint }: Props) => {
   if (babies.length < 2) return null;
 
   const options = [
@@ -25,16 +28,19 @@ const BabySelector = ({ babies, value, onChange }: Props) => {
     ...babies.map((baby, index) => ({ value: baby.id, label: babyLabel(baby, index) })),
   ];
 
+  const legendText = legend ?? "Who is this note for?";
+
   return (
     <fieldset className="mb-5">
       <legend className="font-sans text-[13px] font-medium text-foreground/80 mb-2">
-        Who is this note for?
+        {legendText}
       </legend>
       <p className="font-sans text-[12.5px] leading-[1.6] text-foreground/55 mb-3">
-        Choose one, or save the same note for {describeBabies(babies)} at once. You never have to
-        write a note for each of them.
+        {hint ??
+          `Choose one, or save the same note for ${describeBabies(babies)} at once. You never have to write a note for each of them.`}
       </p>
-      <div role="radiogroup" aria-label="Who is this note for?" className="flex flex-wrap gap-2">
+      <div role="radiogroup" aria-label={legendText} className="flex flex-wrap gap-2">
+
         {options.map((option) => {
           const selected = option.value === value;
           return (

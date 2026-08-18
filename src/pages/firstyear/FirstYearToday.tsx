@@ -475,7 +475,7 @@ const FirstYearToday = () => {
 
         {!runningSleep && (
           <div className="pb-8 -mt-4">
-            <button type="button" onClick={handleStartSleep} className={INLINE_ACTION_CLASS}>
+            <button type="button" onClick={() => handleStartSleep()} className={INLINE_ACTION_CLASS}>
               Start a sleep now for {multiples && target === ALL_BABIES ? babyName(loaded.babies[0].id) : scopeLabel}
             </button>
           </div>

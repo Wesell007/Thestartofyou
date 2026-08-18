@@ -1,9 +1,9 @@
 /**
  * Shared presentation constants for the signed-in First Year surfaces.
  *
- * One focus treatment across the whole journey, so keyboard users see the same
- * ring on the home, the daily note, memories, the kept pregnancy chapter and
- * setup. Presentation only: nothing here reads or writes journey data.
+ * One focus treatment and one typographic scale across the whole journey, so
+ * the home reads as a single app surface rather than a stack of articles.
+ * Presentation only: nothing here reads or writes journey data.
  */
 
 /** Visible focus ring for links, buttons and cards. */
@@ -15,4 +15,30 @@ export const FY_FIELD_FOCUS_RING =
   "focus:outline-none focus:ring-2 focus:ring-sage focus:ring-offset-2 focus:ring-offset-transparent";
 
 /** The quiet underlined text link used across the First Year cards. */
-export const FY_QUIET_LINK = `inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] text-foreground/70 underline underline-offset-4 decoration-border transition-colors hover:decoration-foreground/40 ${FY_FOCUS_RING}`;
+export const FY_QUIET_LINK = `inline-flex min-h-11 items-center rounded-sm font-sans text-[14px] text-foreground/80 underline underline-offset-4 decoration-border transition-colors hover:decoration-foreground/50 ${FY_FOCUS_RING}`;
+
+// ── Typographic scale ──────────────────────────────────────────────────────
+
+/** Section heading, used once per block. */
+export const FY_HEADING =
+  "font-serif text-[1.45rem] sm:text-[1.6rem] leading-[1.2] text-foreground";
+
+/** Card or tile title. */
+export const FY_CARD_TITLE = "font-serif text-[1.08rem] leading-snug text-foreground";
+
+/** Body copy inside a card. */
+export const FY_CARD_BODY = "font-sans text-[13.5px] leading-[1.65] text-foreground/75";
+
+/** Longer intro paragraph under a section heading. */
+export const FY_INTRO =
+  "font-sans text-[14.5px] leading-[1.72] text-foreground/80 max-w-[54ch]";
+
+/** Uppercase kicker label. Pair with a tinted pill and a token colour. */
+export const FY_KICKER =
+  "inline-flex items-center rounded-full px-3 py-1 font-sans text-[11px] font-semibold tracking-[0.22em] uppercase";
+
+/** Solid primary pill action. Pair with token background and foreground. */
+export const FY_CTA = `inline-flex min-h-11 items-center justify-center gap-2 rounded-pill px-7 py-2.5 font-sans text-[14.5px] font-semibold shadow-cta transition-opacity hover:opacity-92 ${FY_FOCUS_RING}`;
+
+/** Softer secondary pill action, used where a solid pill would compete. */
+export const FY_CTA_SOFT = `inline-flex min-h-11 items-center justify-center gap-2 rounded-pill px-6 py-2.5 font-sans text-[14px] font-semibold transition-colors ${FY_FOCUS_RING}`;

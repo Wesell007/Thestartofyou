@@ -9,7 +9,7 @@ import {
   buildFirstYearCompanionContext,
 } from "@/lib/firstYearCompanionContext";
 import { navigateToAsk } from "@/lib/askNavigation";
-import { FY_FOCUS_RING, FY_FIELD_FOCUS_RING } from "./firstYearStyles";
+import { FY_FOCUS_RING, FY_FIELD_FOCUS_RING, FY_KICKER } from "./firstYearStyles";
 
 type Props = {
   /** First baby's date of birth, used only for a coarse age band. */
@@ -26,7 +26,7 @@ const CHIPS = [
   "How do I look after myself this week?",
 ];
 
-const accent = "hsl(var(--sage))";
+
 
 /** Splits any trailing sources block off the streamed answer. */
 const splitSources = (raw: string) => {
@@ -119,38 +119,39 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
       <div
         className="relative rounded-[24px] border px-5 sm:px-8 py-7 sm:py-8"
         style={{
-          borderColor: "hsl(var(--sage) / 0.28)",
-          background: "var(--gradient-firstyear-companion)",
-          boxShadow: "0 22px 54px -34px hsl(var(--sage) / 0.55)",
+          borderColor: "hsl(var(--sage) / 0.42)",
+          background:
+            "linear-gradient(150deg, hsl(var(--sage-bg)) 0%, hsl(var(--sage) / 0.16) 45%, hsl(var(--stage-firstyear-cream)) 100%)",
+          boxShadow: "0 26px 58px -34px hsl(var(--sage) / 0.6)",
         }}
       >
         <div className="flex items-start gap-4 sm:gap-5">
           <span
             aria-hidden="true"
-            className="mt-0.5 hidden sm:flex h-11 w-11 shrink-0 items-center justify-center rounded-full border"
-            style={{
-              backgroundColor: "hsl(var(--sage-bg))",
-              borderColor: "hsl(var(--sage) / 0.32)",
-            }}
+            className="mt-0.5 hidden sm:flex h-12 w-12 shrink-0 items-center justify-center rounded-full"
+            style={{ backgroundColor: "hsl(var(--sage))" }}
           >
-            <Sparkles size={18} strokeWidth={1.7} style={{ color: accent }} />
+            <Sparkles size={20} strokeWidth={1.8} style={{ color: "hsl(var(--parchment))" }} />
           </span>
 
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-3">
-              <p
-                className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase"
-                style={{ color: "hsl(var(--sage-muted))" }}
+              <span
+                className={FY_KICKER}
+                style={{
+                  color: "hsl(var(--parchment))",
+                  backgroundColor: "hsl(var(--sage))",
+                }}
               >
                 Ask {companion}
-              </p>
+              </span>
               {tone && (
                 <span
-                  className="inline-flex items-center rounded-full px-2 py-0.5 font-sans text-[9.5px] font-medium tracking-[0.2em] uppercase"
+                  className="inline-flex items-center rounded-full px-2.5 py-1 font-sans text-[10.5px] font-semibold tracking-[0.16em] uppercase"
                   style={{
                     color: "hsl(var(--sage-muted))",
                     backgroundColor: "hsl(var(--sage-bg))",
-                    border: "1px solid hsl(var(--sage) / 0.28)",
+                    border: "1px solid hsl(var(--sage) / 0.34)",
                   }}
                 >
                   {toneLabel(tone)}
@@ -160,14 +161,15 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
 
             <h2
               id="ask-companion"
-              className="font-serif text-[1.4rem] sm:text-[1.6rem] leading-[1.18] text-foreground/90 mb-2.5"
+              className="font-serif text-[1.5rem] sm:text-[1.7rem] leading-[1.16] text-foreground mb-2.5"
             >
               Ask {companion} about this stage
             </h2>
-            <p className="font-sans text-[14.5px] leading-[1.72] text-foreground/75 max-w-[46ch] mb-5">
+            <p className="font-sans text-[14.5px] leading-[1.72] text-foreground/80 max-w-[46ch] mb-5">
               Ask one question here and get a short answer. {companion} answers from
               general guidance only and does not read anything private you have saved.
             </p>
+
 
             {!answer && !isLoading && (
               <div className="flex flex-wrap gap-2 mb-4">

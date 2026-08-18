@@ -1,6 +1,6 @@
 import { getFirstYearAge } from "@/lib/firstYearDates";
 import { monthPagePath } from "@/lib/firstYearCopy";
-import { getMonthGuide } from "@/data/firstYearMonthData";
+import { getMonthGuide, type MonthSlug } from "@/data/firstYearMonthData";
 import { BEYOND_FIRST_YEAR_NOTE } from "@/lib/firstYearStage";
 
 /**
@@ -15,17 +15,28 @@ export type StageGuidanceCard = {
   href: string;
 };
 
+/** A short, age-aware read of where things are. Never medical advice. */
+export type StageInsight = {
+  title: string;
+  body: string;
+};
+
 export type StageGuidance = {
   kicker: string;
   heading: string;
   /** One short orientation sentence. */
   intro: string;
   cards: StageGuidanceCard[];
+  /** Insight tiles, shown before any onward link. */
+  insights: StageInsight[];
+  /** The one quiet onward read for this stage. */
+  readMore: { label: string; href: string; monthSlug: MonthSlug };
   /** Quiet line for the parent, with a single onward link. */
   parentLine: string;
   parentLabel: string;
   parentHref: string;
 };
+
 
 /** Words that must never reach the signed-in home page. */
 const BANNED = [
@@ -78,8 +89,19 @@ const FEEDING_FALLBACK =
   "However you are feeding, here is what often happens around this age.";
 const SLEEP_FALLBACK = "Rest rhythms at this age, and why they move about.";
 
-const monthSlugFor = (monthIndex: number): string =>
-  monthIndex === 0 ? "newborn" : monthIndex === 1 ? "1-month" : `${monthIndex}-months`;
+const YOU_FALLBACK =
+  "Your own days matter here too, however this stage is going for you.";
+
+const monthSlugFor = (monthIndex: number): MonthSlug =>
+  (monthIndex === 0
+    ? "newborn"
+    : monthIndex === 1
+      ? "1-month"
+      : `${monthIndex}-months`) as MonthSlug;
+
+const monthLabelFor = (monthIndex: number): string =>
+  monthIndex === 0 ? "Read the newborn guide" : `Read the ${MONTH_WORDS[monthIndex]} month guide`;
+
 
 /**
  * Build the "For this stage" content for a date of birth.
@@ -114,6 +136,7 @@ export const getStageGuidance = (
       };
 
   if (age.ageInMonths >= 12) {
+    const twelve = getMonthGuide("12-months")?.shortVersion;
     return {
       kicker: "For this stage",
       heading: "Past the first year",
@@ -130,6 +153,21 @@ export const getStageGuidance = (
           href: "/first-year/checkups-and-warning-signs",
         },
       ],
+      insights: [
+        {
+          title: "Where things are",
+          body: clean(twelve?.baby, INTRO_FALLBACK),
+        },
+        {
+          title: "For you around now",
+          body: clean(twelve?.you, YOU_FALLBACK),
+        },
+      ],
+      readMore: {
+        label: "Read the twelve month guide",
+        href: "/first-year/12-months",
+        monthSlug: "12-months",
+      },
       ...parent,
     };
   }
@@ -139,6 +177,9 @@ export const getStageGuidance = (
   // of 28 days reads the one month guide.
   const monthIndex = isNewborn ? 0 : Math.max(1, age.firstYearMonthIndex);
   const short = getMonthGuide(monthSlugFor(monthIndex))?.shortVersion;
+
+  const feeding = clean(short?.feeding, FEEDING_FALLBACK);
+  const sleep = clean(short?.sleep, SLEEP_FALLBACK);
 
   return {
     kicker: "For this stage",
@@ -152,15 +193,35 @@ export const getStageGuidance = (
       },
       {
         title: "Feeding right now",
-        detail: clean(short?.feeding, FEEDING_FALLBACK),
+        detail: feeding,
         href: "/first-year/feeding",
       },
       {
         title: "Sleep right now",
-        detail: clean(short?.sleep, SLEEP_FALLBACK),
+        detail: sleep,
         href: "/first-year/sleep",
       },
     ],
+    insights: [
+      {
+        title: "What may be changing",
+        body: clean(short?.baby, INTRO_FALLBACK),
+      },
+      {
+        title: "Feeding and sleep",
+        body: `${feeding} ${sleep}`,
+      },
+      {
+        title: "For you around now",
+        body: clean(short?.you, YOU_FALLBACK),
+      },
+    ],
+    readMore: {
+      label: monthLabelFor(monthIndex),
+      href: monthPagePath(monthIndex),
+      monthSlug: monthSlugFor(monthIndex),
+    },
     ...parent,
   };
+
 };

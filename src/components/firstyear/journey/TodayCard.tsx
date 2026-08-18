@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
-import { FY_FOCUS_RING } from "./firstYearStyles";
+import { ArrowRight } from "lucide-react";
+import { FY_CTA, FY_KICKER } from "./firstYearStyles";
+
 
 type Props = {
   /** Number of notes already saved today. Shown as reassurance, never a count to beat. */
@@ -20,40 +22,51 @@ type Props = {
 const TodayCard = ({ savedToday, babyCount, subject, ageLine }: Props) => (
   <section className="pb-6">
     <div
-      className="rounded-[24px] border px-6 sm:px-8 py-7 sm:py-9"
+      className="rounded-[26px] border px-6 sm:px-9 py-8 sm:py-10"
       style={{
-        borderColor: "hsl(var(--stage-firstyear-accent) / 0.28)",
-        background: "var(--gradient-firstyear-today)",
-        boxShadow: "0 24px 56px -34px hsl(var(--stage-firstyear-deep) / 0.55)",
+        borderColor: "hsl(var(--stage-firstyear-accent) / 0.4)",
+        background:
+          "linear-gradient(155deg, hsl(var(--stage-firstyear-soft)) 0%, hsl(var(--stage-firstyear) / 0.95) 45%, hsl(var(--stage-firstyear-cream)) 100%)",
+        boxShadow: "0 30px 64px -34px hsl(var(--stage-firstyear-deep) / 0.6)",
       }}
     >
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 mb-4">
-        <p
-          className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase"
-          style={{ color: "hsl(var(--stage-firstyear-deep))" }}
+      <div className="flex flex-wrap items-center gap-2 mb-5">
+        <span
+          className={`${FY_KICKER}`}
+          style={{
+            color: "hsl(var(--parchment))",
+            backgroundColor: "hsl(var(--stage-firstyear-deep))",
+          }}
         >
           Today
-        </p>
-        <span className="font-sans text-[12.5px] text-foreground/60">
+        </span>
+        <span
+          className="inline-flex items-center rounded-full px-2.5 py-1 font-sans text-[11.5px] font-medium leading-snug"
+          style={{
+            color: "hsl(var(--stage-firstyear-deep))",
+            backgroundColor: "hsl(var(--stage-firstyear-cream))",
+            border: "1px solid hsl(var(--stage-firstyear-accent) / 0.3)",
+          }}
+        >
           {format(new Date(), "EEEE d MMMM")}
         </span>
         {ageLine && (
           <span
-            className="inline-flex items-center rounded-full px-2.5 py-0.5 font-sans text-[11px] leading-snug"
+            className="inline-flex items-center rounded-full px-2.5 py-1 font-sans text-[11.5px] font-medium leading-snug"
             style={{
               color: "hsl(var(--stage-firstyear-deep))",
-              backgroundColor: "hsl(var(--stage-firstyear) / 0.9)",
-              border: "1px solid hsl(var(--stage-firstyear-accent) / 0.25)",
+              backgroundColor: "hsl(var(--stage-firstyear-cream))",
+              border: "1px solid hsl(var(--stage-firstyear-accent) / 0.3)",
             }}
           >
             {ageLine}
           </span>
         )}
       </div>
-      <h2 className="font-serif text-[1.6rem] sm:text-[1.9rem] leading-[1.18] text-foreground/90 mb-2">
+      <h2 className="font-serif text-[1.75rem] sm:text-[2.1rem] leading-[1.14] text-foreground mb-2.5">
         A note for {subject}
       </h2>
-      <p className="font-serif text-[15.5px] leading-[1.7] text-foreground/80 max-w-[50ch]">
+      <p className="font-serif text-[16px] leading-[1.7] text-foreground/85 max-w-[50ch]">
         {savedToday > 0
           ? savedToday === 1
             ? "You have saved one note today. You can add to it or leave it as it is."
@@ -62,23 +75,25 @@ const TodayCard = ({ savedToday, babyCount, subject, ageLine }: Props) => (
               babyCount > 1 ? " for them" : ""
             }, a note about your own recovery, or a question to remember for your next appointment.`}
       </p>
-      <p className="mt-3 font-sans text-[13px] leading-[1.6] text-foreground/60 max-w-[50ch]">
+      <p className="mt-3 font-sans text-[13.5px] leading-[1.65] text-foreground/70 max-w-[50ch]">
         Write as much or as little as you like. There is nothing to keep up with.
       </p>
-      <div className="mt-6">
+      <div className="mt-7">
         <Link
           to="/my-first-year/today"
-          className={`inline-flex min-h-11 items-center justify-center rounded-pill px-7 py-2.5 font-sans text-sm font-medium shadow-cta transition-colors ${FY_FOCUS_RING}`}
+          className={FY_CTA}
           style={{
             backgroundColor: "hsl(var(--stage-firstyear-deep))",
             color: "hsl(var(--parchment))",
           }}
         >
           {savedToday > 0 ? "Open today's notes" : "Add a note for today"}
+          <ArrowRight size={16} strokeWidth={1.8} aria-hidden="true" />
         </Link>
       </div>
     </div>
   </section>
 );
+
 
 export default TodayCard;

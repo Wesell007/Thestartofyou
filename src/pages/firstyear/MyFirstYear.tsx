@@ -41,18 +41,22 @@ const FOR_YOU_CARDS: SupportCard[] = [
     title: "Recovery after birth",
     detail: "How healing tends to go, and what to expect week by week.",
     href: "/first-year/postpartum-recovery",
+    topic: "postpartum-recovery",
   },
   {
     title: "Body and hormones",
     detail: "The physical changes that carry on after your baby arrives.",
     href: "/first-year/body-and-hormones",
+    topic: "body-and-hormones",
   },
   {
     title: "Emotional wellbeing",
     detail: "Feeling like yourself again, and when to reach for support.",
     href: "/first-year/emotional-wellbeing",
+    topic: "emotional-wellbeing",
   },
 ];
+
 
 
 type State = {
@@ -183,8 +187,9 @@ const MyFirstYear = () => {
   return (
     <div
       className="min-h-screen bg-parchment-grain page-vignette"
-      style={{ backgroundColor: "hsl(var(--stage-firstyear) / 0.35)" }}
+      style={{ backgroundColor: "hsl(var(--stage-firstyear-cream))" }}
     >
+
       <SeoHead
         title="Your First Year journey | The Start of You"
         description="Your saved First Year journey: support for your baby, and support for you."

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
 import {
+  FY_CARD_BODY,
   FY_CARD_RADIUS,
   FY_CHIP,
   FY_CTA,
@@ -66,7 +67,7 @@ const TodayCard = ({ savedToday, babyCount, subject, ageLine }: Props) => {
         <h2 className="font-serif text-[1.85rem] sm:text-[2.25rem] leading-[1.1] text-foreground mb-2.5">
           A note for {subject}
         </h2>
-        <p className="font-sans text-[14px] leading-[1.7] text-foreground/75 max-w-[50ch]">
+        <p className={`${FY_CARD_BODY} max-w-[50ch]`}>
           Write as much or as little as you like. There is nothing to keep up with.
         </p>
 
@@ -77,7 +78,7 @@ const TodayCard = ({ savedToday, babyCount, subject, ageLine }: Props) => {
             border: "1px solid hsl(var(--stage-firstyear-accent) / 0.2)",
           }}
         >
-          <p className="font-serif text-[16px] leading-[1.72] text-foreground/85 max-w-[48ch]">
+          <p className="font-serif text-[16px] leading-[1.72] text-foreground max-w-[48ch]">
             {savedToday > 0
               ? savedToday === 1
                 ? "You have saved one note today. You can add to it or leave it as it is."

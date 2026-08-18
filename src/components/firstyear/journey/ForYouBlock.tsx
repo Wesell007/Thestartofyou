@@ -72,7 +72,7 @@ const ForYouBlock = ({ cards }: Props) => (
               <span className={`mt-3 block ${FY_CARD_TITLE}`}>{card.title}</span>
               <span className={`mt-1 block ${FY_CARD_BODY}`}>{card.detail}</span>
               <span
-                className="mt-3 inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium"
+                className="mt-3 inline-flex items-center gap-1.5 font-sans text-[13px] font-semibold"
                 style={{ color: "hsl(var(--stage-recovery-deep))" }}
               >
                 Read this

@@ -45,3 +45,11 @@ All sheets keep their current fields, steps, validation and submit paths. Restyl
 - Icons come from `lucide-react`, marked `aria-hidden`.
 - No changes to `firstYearCareEvents.ts`, `firstYearCareEventsSchema.ts`, migrations, RLS, routes, sitemap or SEO.
 - Existing tests keep passing; typecheck, lint and build run before handover, plus a mobile-width and desktop-width visual pass.
+
+## Handover checks
+
+Run and report, in order: 390px screenshots of the Today page and of the Feed, Breast timer, Bottle detail, Sleep, Nappy and Moment sheets (analytics banner dismissed first), a 1440px Today screenshot, an overflow pass, console check, focus-ring check, hardcoded-colour check, copy guardrail check, `npx tsgo --noEmit -p tsconfig.json`, lint, targeted tests, `npx vitest run`, `npm run build`, then a statement on whether Phase 26C can close.
+
+## Out of scope
+
+No Memories redesign, no companion day summaries, no reminders or notifications, no predictive sleep, no bottom navigation or app-shell work, and nothing from the next phase.

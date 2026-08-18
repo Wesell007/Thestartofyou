@@ -147,9 +147,12 @@ const FeedSheet = ({ context, onStartLive, liveAvailable }: Props) => {
             ))}
           </div>
         </fieldset>
-        <button type="button" onClick={context.onClose} className={SHEET_LINK_CLASS}>
-          Cancel
-        </button>
+        <div className="flex justify-center">
+          <button type="button" onClick={context.onClose} className={SHEET_LINK_CLASS}>
+            Cancel
+          </button>
+        </div>
+
       </div>
     );
   }
@@ -329,14 +332,17 @@ const FeedSheet = ({ context, onStartLive, liveAvailable }: Props) => {
         }
       />
       {!editing && (
-        <button
-          type="button"
-          onClick={() => (mode === "breast" ? setManual(false) : setMode(null))}
-          className={`${SHEET_LINK_CLASS} mt-3`}
-        >
-          Back
-        </button>
+        <div className="mt-3 flex justify-center">
+          <button
+            type="button"
+            onClick={() => (mode === "breast" ? setManual(false) : setMode(null))}
+            className={SHEET_LINK_CLASS}
+          >
+            Back
+          </button>
+        </div>
       )}
+
     </form>
   );
 };

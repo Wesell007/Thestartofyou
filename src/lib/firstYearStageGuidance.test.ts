@@ -39,6 +39,8 @@ const surfacedText = (dob: string): string => {
     g.parentLine,
     g.parentLabel,
     ...g.cards.flatMap((c) => [c.title, c.detail]),
+    ...g.insights.flatMap((i) => [i.title, i.body]),
+    g.readMore.label,
   ].join(" ");
 };
 
@@ -116,6 +118,26 @@ describe("getStageGuidance", () => {
         expect(new RegExp(`\\b${word}\\b`).test(text), `${word} in ${dob}`).toBe(false);
       }
     }
+  });
+
+  it("carries insight tiles and one onward read at every stage", () => {
+    const newborn = getStageGuidance(daysBefore(3), 1, REF)!;
+    expect(newborn.insights).toHaveLength(3);
+    expect(newborn.readMore.href).toBe("/first-year/newborn");
+    expect(newborn.readMore.monthSlug).toBe("newborn");
+
+    const five = getStageGuidance(monthsBefore(5), 1, REF)!;
+    expect(five.insights.map((i) => i.title)).toEqual([
+      "What may be changing",
+      "Feeding and sleep",
+      "For you around now",
+    ]);
+    expect(five.readMore.href).toBe("/first-year/5-months");
+    expect(five.insights.every((i) => i.body.trim().length > 0)).toBe(true);
+
+    const beyond = getStageGuidance(monthsBefore(24), 1, REF)!;
+    expect(beyond.insights).toHaveLength(2);
+    expect(beyond.readMore.monthSlug).toBe("12-months");
   });
 
   it("flags unsuitable copy in the guard", () => {

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { parseDateOnly } from "@/lib/dateOnly";
 import type { FirstYearMemory } from "@/lib/firstYearMemories";
-import { FY_FOCUS_RING } from "./firstYearStyles";
+import { FY_CTA_SOFT, FY_KICKER } from "./firstYearStyles";
 
 type Props = {
   /** The one or two most recently kept moments, or an empty list. */

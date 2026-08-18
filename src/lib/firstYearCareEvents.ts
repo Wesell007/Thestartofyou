@@ -202,10 +202,11 @@ const patchFeed = async (
   userId: string,
   id: string,
   patch: Record<string, unknown>,
+  // The Data API types are generated; a shaped patch is validated by the trigger.
 ): Promise<CareEvent> => {
   const { data, error } = await supabase
     .from("first_year_care_events")
-    .update(patch)
+    .update(patch as never)
     .eq("id", id)
     .eq("user_id", userId)
     .select(COLUMNS)

@@ -1,4 +1,10 @@
 import { CARE_NOTE_MAX_LENGTH } from "@/lib/firstYearCareEventsSchema";
+import type {
+  AmountUnit,
+  CareEvent,
+  CareEventDraft,
+} from "@/lib/firstYearCareEventsSchema";
+import type { BabyRecord } from "@/lib/firstYearJourney";
 import {
   FY_CTA,
   FY_FIELD_FOCUS_RING,
@@ -148,3 +154,56 @@ export const SheetActions = ({ saving, editing, onCancel, extra }: SheetActionsP
     {extra}
   </div>
 );
+
+/** Shared context handed to each logging sheet. */
+export type SheetContext = {
+  babies: BabyRecord[];
+  selectedBaby: string | null;
+  onSelectBaby: (babyId: string | null) => void;
+  editing: CareEvent | null;
+  unit: AmountUnit;
+  onUnitChange: (unit: AmountUnit) => void;
+  /** Validates and saves. Resolves when the sheet can close. */
+  submit: (draft: CareEventDraft) => Promise<void>;
+  onError: (message: string) => void;
+  onClose: () => void;
+  saving: boolean;
+};
+
+export const timeValue = (date: Date): string => {
+  const pad = (part: number) => String(part).padStart(2, "0");
+  return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+};
+
+export const withTime = (base: Date, value: string): Date | null => {
+  const [hours, minutes] = value.split(":").map(Number);
+  if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return null;
+  const next = new Date(base);
+  next.setHours(hours, minutes, 0, 0);
+  return next;
+};
+
+export const babyLabel = (baby: BabyRecord, index: number): string =>
+  baby.name?.trim() ? baby.name.trim() : `Baby ${baby.birth_order ?? index + 1}`;
+
+/** Only shown when there is more than one baby on the account. */
+export const BabyChips = ({
+  babies,
+  value,
+  onChange,
+}: {
+  babies: BabyRecord[];
+  value: string | null;
+  onChange: (babyId: string | null) => void;
+}) => {
+  if (babies.length < 2) return null;
+  return (
+    <ChipGroup
+      legend="Who is this for?"
+      name="care-baby"
+      options={babies.map((baby, index) => ({ value: baby.id, label: babyLabel(baby, index) }))}
+      value={value}
+      onChange={onChange}
+    />
+  );
+};

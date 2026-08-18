@@ -19,9 +19,15 @@ type Props = {
  */
 const MemoryPhotoViewer = ({ open, onOpenChange, url, title, hasTitle = false }: Props) => (
   <Dialog open={open} onOpenChange={onOpenChange}>
-    <DialogContent className="max-w-[560px] rounded-[26px]">
+    <DialogContent
+      className="max-w-[560px] rounded-[26px] border px-6 py-7"
+      style={{
+        backgroundColor: "hsl(var(--stage-firstyear-cream))",
+        borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.8)",
+      }}
+    >
       <DialogHeader>
-        <DialogTitle className="font-serif text-[1.25rem] leading-[1.3] text-foreground/90">
+        <DialogTitle className="font-serif text-[1.35rem] leading-[1.25] text-foreground">
           {title}
         </DialogTitle>
       </DialogHeader>
@@ -29,8 +35,11 @@ const MemoryPhotoViewer = ({ open, onOpenChange, url, title, hasTitle = false }:
         <img
           src={url}
           alt={hasTitle ? `Photo for memory: ${title}` : "Photo saved with this memory"}
-          className="max-h-[70vh] w-full rounded-[18px] border bg-parchment p-2 object-contain"
-          style={{ borderColor: "hsl(var(--stage-firstyear-peach-soft))" }}
+          className="max-h-[70vh] w-full rounded-[16px] border p-3 object-contain"
+          style={{
+            backgroundColor: "hsl(var(--background))",
+            borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.8)",
+          }}
         />
       ) : (
         <p className="font-serif text-[15px] leading-[1.7] text-foreground/75">

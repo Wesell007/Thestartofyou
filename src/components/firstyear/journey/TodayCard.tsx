@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
-import { FY_FOCUS_RING } from "./firstYearStyles";
+import { ArrowRight } from "lucide-react";
+import { FY_CTA, FY_FOCUS_RING, FY_KICKER } from "./firstYearStyles";
+
 
 type Props = {
   /** Number of notes already saved today. Shown as reassurance, never a count to beat. */

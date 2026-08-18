@@ -31,6 +31,8 @@ This layers a cool blue-grey tint (`--stage-firstyear`) over the parchment grain
 
 This changes only the shell background colour, leaving every card, tile, and component untouched.
 
+If the result feels too flat, grain, vignette and any other decorative layers stay removed. The only permitted correction is a small adjustment to the HSL value of `--stage-firstyear-today-bg` (slightly warmer or cooler) until it matches the reference.
+
 ## Verification
 - Check `/my-first-year/today` at 390px and 1440px.
 - Confirm background matches the warm reference feel.

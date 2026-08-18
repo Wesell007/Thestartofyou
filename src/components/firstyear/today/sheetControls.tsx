@@ -14,7 +14,7 @@ import {
 /** Shared pieces used by each logging sheet, so every step looks the same. */
 
 export const CHIP_BASE =
-  "flex min-h-11 cursor-pointer items-center rounded-pill border px-4.5 py-2.5 font-sans text-[13.5px] font-medium transition-colors focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2 focus-within:ring-offset-background";
+  "flex min-h-11 cursor-pointer items-center rounded-pill border px-[18px] py-2.5 font-sans text-[13.5px] font-medium transition-colors focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2 focus-within:ring-offset-background";
 
 export const CHIP_SELECTED = "border-sage bg-sage/15 text-foreground";
 export const CHIP_IDLE =

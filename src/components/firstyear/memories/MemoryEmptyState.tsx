@@ -31,7 +31,7 @@ const MemoryEmptyState = ({ onOpen }: Props) => (
       onClick={onOpen}
       className={`${FY_CTA} mt-6`}
       style={{
-        backgroundColor: "hsl(var(--stage-firstyear-accent))",
+        backgroundColor: "hsl(var(--stage-firstyear-terracotta))",
         color: "hsl(var(--background))",
       }}
     >

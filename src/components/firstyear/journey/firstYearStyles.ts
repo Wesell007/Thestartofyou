@@ -196,6 +196,12 @@ export const FY_DATE_CHIP_STYLE = {
 } as const;
 
 /** Softer sheet field surface, so writing feels like a card not a form. */
+/** Terracotta primary, used on the keepsake sheet. */
+export const FY_KEEPSAKE_PRIMARY_STYLE = {
+  backgroundColor: "hsl(var(--stage-firstyear-terracotta))",
+  color: "hsl(var(--background))",
+} as const;
+
 export const FY_SHEET_FIELD_STYLE = {
   backgroundColor: "hsl(var(--stage-firstyear-cream) / 0.6)",
   borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.8)",

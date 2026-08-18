@@ -475,7 +475,7 @@ const FirstYearMemories = () => {
   return (
     <div
       className="min-h-screen bg-parchment-grain page-vignette"
-      style={{ backgroundColor: "hsl(var(--stage-firstyear) / 0.5)" }}
+      style={{ backgroundColor: "hsl(var(--stage-firstyear-cream))" }}
     >
       <SeoHead
         title="Memories | The Start of You"
@@ -497,7 +497,7 @@ const FirstYearMemories = () => {
         <header className="pb-8">
           <p
             className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-4"
-            style={{ color: "hsl(var(--stage-firstyear-accent))" }}
+            style={{ color: "hsl(var(--stage-firstyear-terracotta))" }}
           >
             Keepsakes
           </p>

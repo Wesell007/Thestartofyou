@@ -11,8 +11,8 @@ import {
   FY_SHEET_FIELD_STYLE,
   FY_SHEET_LEGEND,
   FY_SHEET_LINK,
+  FY_KEEPSAKE_PRIMARY_STYLE,
   FY_SHEET_PRIMARY,
-  FY_SHEET_PRIMARY_STYLE,
   FY_SHEET_TEXTAREA,
 } from "@/components/firstyear/journey/firstYearStyles";
 
@@ -157,7 +157,7 @@ const MemoryForm = ({
           type="submit"
           disabled={saving}
           className={FY_SHEET_PRIMARY}
-          style={FY_SHEET_PRIMARY_STYLE}
+          style={FY_KEEPSAKE_PRIMARY_STYLE}
         >
           {saving ? "Saving…" : editing ? "Save changes" : "Keep this memory"}
         </button>

@@ -6,7 +6,7 @@ Presentation-only pass over `/my-first-year/memories`. No schema, storage, uploa
 
 Before any code, a Nano Banana direction render of the refined Memories surface is produced from the attached reference, locked to the existing First Year palette, serif display type and 26px paper cards. It is shown in the report ahead of the implemented screenshots so the final UI can be compared against the approved direction. The render is a reference artefact only: it is never shipped as UI, never used as a background, never embedded as a static image, and no phone frame, mockup frame or status bar is carried into the build.
 
-
+## What changes visually
 
 **Page shell**
 - Warmer parchment field behind the content, softer vignette, wider breathing room between hero, Keep a memory card, and the shelf.

@@ -142,7 +142,7 @@ export const FY_SHEET_LINK = `${FY_FOCUS_RING} inline-flex min-h-11 items-center
 /** Full width primary action inside a sheet. */
 export const FY_SHEET_PRIMARY = `${FY_CTA} w-full disabled:opacity-60`;
 
-export const FY_SHEET_PRIMARY_STYLE = {
+export const FY_SHEET_PRIMARY_STYLE_LEGACY = {
   backgroundColor: "hsl(var(--stage-firstyear-accent))",
   color: "hsl(var(--background))",
 } as const;

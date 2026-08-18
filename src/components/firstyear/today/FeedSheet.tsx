@@ -147,9 +147,12 @@ const FeedSheet = ({ context, onStartLive, liveAvailable }: Props) => {
             ))}
           </div>
         </fieldset>
-        <button type="button" onClick={context.onClose} className={SHEET_LINK_CLASS}>
-          Cancel
-        </button>
+        <div className="flex justify-center">
+          <button type="button" onClick={context.onClose} className={SHEET_LINK_CLASS}>
+            Cancel
+          </button>
+        </div>
+
       </div>
     );
   }

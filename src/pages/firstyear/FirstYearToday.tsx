@@ -506,7 +506,7 @@ const FirstYearToday = () => {
         description="This removes the logged moment from today. You can add another whenever you like."
         confirmLabel="Remove"
         onConfirm={confirmDelete}
-        loading={deleting}
+        busy={deleting}
       />
     </div>
   );

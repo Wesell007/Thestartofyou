@@ -1,6 +1,6 @@
 import { getFirstYearAge } from "@/lib/firstYearDates";
 import { monthPagePath } from "@/lib/firstYearCopy";
-import { getMonthGuide } from "@/data/firstYearMonthData";
+import { getMonthGuide, type MonthSlug } from "@/data/firstYearMonthData";
 import { BEYOND_FIRST_YEAR_NOTE } from "@/lib/firstYearStage";
 
 /**
@@ -15,17 +15,28 @@ export type StageGuidanceCard = {
   href: string;
 };
 
+/** A short, age-aware read of where things are. Never medical advice. */
+export type StageInsight = {
+  title: string;
+  body: string;
+};
+
 export type StageGuidance = {
   kicker: string;
   heading: string;
   /** One short orientation sentence. */
   intro: string;
   cards: StageGuidanceCard[];
+  /** Insight tiles, shown before any onward link. */
+  insights: StageInsight[];
+  /** The one quiet onward read for this stage. */
+  readMore: { label: string; href: string; monthSlug: MonthSlug };
   /** Quiet line for the parent, with a single onward link. */
   parentLine: string;
   parentLabel: string;
   parentHref: string;
 };
+
 
 /** Words that must never reach the signed-in home page. */
 const BANNED = [

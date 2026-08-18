@@ -82,6 +82,12 @@
     --stage-firstyear-peach: 22 58% 93%;
     --stage-firstyear-peach-soft: 20 50% 87%;
     --stage-firstyear-peach-accent: 18 44% 38%;
+    /* Phase 26B app-home tints: hero wash, warm ink, and the "for you" band */
+    --stage-firstyear-hero: 24 66% 90%;
+    --stage-firstyear-terracotta: 16 52% 46%;
+    --stage-firstyear-rose: 348 44% 90%;
+    --stage-firstyear-lilac: 268 34% 90%;
+    --stage-firstyear-ink: 212 42% 22%;
     /* Subtle gradients, reserved for the primary First Year home cards */
     --gradient-firstyear-today: linear-gradient(
       145deg,

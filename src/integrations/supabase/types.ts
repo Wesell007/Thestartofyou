@@ -313,6 +313,71 @@ export type Database = {
         }
         Relationships: []
       }
+      first_year_care_events: {
+        Row: {
+          amount_ml: number | null
+          baby_id: string
+          created_at: string
+          ended_at: string | null
+          event_type: string
+          feed_method: string | null
+          id: string
+          metadata: Json
+          nappy_type: string | null
+          note: string | null
+          occurred_at: string
+          side: string | null
+          sleep_kind: string | null
+          started_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount_ml?: number | null
+          baby_id: string
+          created_at?: string
+          ended_at?: string | null
+          event_type: string
+          feed_method?: string | null
+          id?: string
+          metadata?: Json
+          nappy_type?: string | null
+          note?: string | null
+          occurred_at: string
+          side?: string | null
+          sleep_kind?: string | null
+          started_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount_ml?: number | null
+          baby_id?: string
+          created_at?: string
+          ended_at?: string | null
+          event_type?: string
+          feed_method?: string | null
+          id?: string
+          metadata?: Json
+          nappy_type?: string | null
+          note?: string | null
+          occurred_at?: string
+          side?: string | null
+          sleep_kind?: string | null
+          started_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "first_year_care_events_baby_id_fkey"
+            columns: ["baby_id"]
+            isOneToOne: false
+            referencedRelation: "babies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       first_year_entries: {
         Row: {
           answered: boolean

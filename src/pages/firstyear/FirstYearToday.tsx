@@ -424,10 +424,7 @@ const FirstYearToday = () => {
   const earlierDates = Object.keys(earlierByDate).sort().reverse();
 
   return (
-    <div
-      className="min-h-screen bg-parchment-grain page-vignette"
-      style={{ backgroundColor: "hsl(var(--stage-firstyear) / 0.35)" }}
-    >
+    <div className="min-h-screen bg-fy-today">
       <SeoHead
         title="Today's rhythm | The Start of You"
         description="A private daily space to log feeds, sleep, nappies and moments through your first year."

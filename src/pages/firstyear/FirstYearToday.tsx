@@ -56,7 +56,11 @@ import {
   type QuickAddType,
 } from "@/lib/firstYearCareEventsSchema";
 import { parseDateOnly } from "@/lib/dateOnly";
-import { FY_FOCUS_RING } from "@/components/firstyear/journey/firstYearStyles";
+import {
+  FY_CARD_RADIUS,
+  FY_FOCUS_RING,
+  FY_SHADOW_SOFT,
+} from "@/components/firstyear/journey/firstYearStyles";
 
 /** Sensitive pregnancy states are never routed into a baby surface. */
 const SENSITIVE_PREGNANCY_STATUSES = new Set(["pregnancy_loss", "no_longer_pregnant", "paused"]);
@@ -525,34 +529,46 @@ const FirstYearToday = () => {
         />
 
         <section className="pb-8" aria-labelledby="fy-day-note-heading">
-          <h2
-            id="fy-day-note-heading"
-            className="font-serif text-[1.28rem] leading-[1.25] text-foreground mb-2"
+          <div
+            className={`${FY_CARD_RADIUS} border px-5 py-6 sm:px-6`}
+            style={{
+              borderColor: "hsl(var(--stage-firstyear-accent) / 0.18)",
+              backgroundColor: "hsl(var(--card) / 0.86)",
+              boxShadow: FY_SHADOW_SOFT,
+            }}
           >
-            A note for today
-          </h2>
-          <p className="font-sans text-[13.5px] leading-[1.65] text-[hsl(var(--stage-firstyear-text))] mb-4 max-w-[54ch]">
-            Optional, and just for you. How the day felt, or anything you might want to mention at a
-            check-up.
-          </p>
-          <NoteField
-            fieldId={DAY_NOTE_FIELD_ID}
-            label="Today in your words"
-            placeholder="Steadier afternoon than yesterday…"
-            value={dayNote}
-            saved={dayNoteSaved}
-            disabled={savingNote}
-            onChange={setDayNote}
-          />
-          <button
-            type="button"
-            onClick={handleSaveDayNote}
-            disabled={savingNote}
-            className={SAVE_BUTTON_CLASS}
-          >
-            {savingNote ? "Saving…" : dayNoteSaved ? "Update this note" : "Save this note"}
-          </button>
+            <h2
+              id="fy-day-note-heading"
+              className="font-serif text-[1.28rem] leading-[1.25] text-foreground mb-2"
+            >
+              A note for today
+            </h2>
+            <p className="font-sans text-[13.5px] leading-[1.65] text-[hsl(var(--stage-firstyear-text))] mb-4 max-w-[54ch]">
+              Optional, and just for you. How the day felt, or anything you might want to mention at
+              a check-up.
+            </p>
+            <NoteField
+              fieldId={DAY_NOTE_FIELD_ID}
+              label="Today in your words"
+              placeholder="Steadier afternoon than yesterday…"
+              value={dayNote}
+              saved={dayNoteSaved}
+              disabled={savingNote}
+              onChange={setDayNote}
+            />
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={handleSaveDayNote}
+                disabled={savingNote}
+                className={SAVE_BUTTON_CLASS}
+              >
+                {savingNote ? "Saving…" : dayNoteSaved ? "Update this note" : "Save this note"}
+              </button>
+            </div>
+          </div>
         </section>
+
 
         <RecentDays byDate={earlierByDate} dates={earlierDates} />
 

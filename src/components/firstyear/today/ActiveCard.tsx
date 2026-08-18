@@ -10,7 +10,10 @@ import {
 import {
   FY_CARD_RADIUS,
   FY_CTA,
+  FY_EYEBROW,
   FY_SHADOW_SOFT,
+  FY_SHADOW_STRONG,
+  FY_STOPWATCH,
 } from "@/components/firstyear/journey/firstYearStyles";
 
 type Props = {
@@ -44,34 +47,36 @@ const ActiveCard = ({ runningSleep, latest, babyName, unit, onStopSleep, stoppin
     return (
       <section aria-label="Sleep in progress" className="pb-8">
         <div
-          className={`${FY_CARD_RADIUS} px-6 py-6`}
+          className={`${FY_CARD_RADIUS} border px-6 py-7`}
           style={{
-            background:
-              "linear-gradient(150deg, hsl(var(--stage-firstyear-hero)) 0%, hsl(var(--stage-firstyear)) 100%)",
-            boxShadow: FY_SHADOW_SOFT,
+            borderColor: "hsl(var(--stage-firstyear-accent) / 0.22)",
+            backgroundColor: "hsl(var(--card))",
+            boxShadow: FY_SHADOW_STRONG,
           }}
         >
-          <p className="font-sans text-[11.5px] font-semibold tracking-[0.2em] uppercase text-[hsl(var(--stage-firstyear-text-soft))]">
-            Sleeping now
-          </p>
-          <p className="font-serif text-[1.75rem] leading-[1.2] text-foreground mt-2">
-            {formatDuration(durationMinutes(start, new Date()))}
-          </p>
-          <p className="font-sans text-[13.5px] leading-[1.6] text-[hsl(var(--stage-firstyear-text))] mt-1">
-            {babyName(runningSleep.baby_id)} · started {format(new Date(start), "HH:mm")}
-          </p>
-          <button
-            type="button"
-            onClick={() => onStopSleep(runningSleep)}
-            disabled={stopping}
-            className={`${FY_CTA} mt-4 disabled:opacity-60`}
-            style={{
-              backgroundColor: "hsl(var(--stage-firstyear-accent))",
-              color: "hsl(var(--background))",
-            }}
-          >
-            {stopping ? "Saving…" : "Stop sleep"}
-          </button>
+          <div className="flex flex-wrap items-end justify-between gap-5">
+            <div className="min-w-0">
+              <p className={FY_EYEBROW}>Sleeping now</p>
+              <p className={`${FY_STOPWATCH} mt-2.5`}>
+                {formatDuration(durationMinutes(start, new Date()))}
+              </p>
+              <p className="font-sans text-[13.5px] leading-[1.6] text-[hsl(var(--stage-firstyear-text))] mt-2">
+                {babyName(runningSleep.baby_id)} · started {format(new Date(start), "HH:mm")}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => onStopSleep(runningSleep)}
+              disabled={stopping}
+              className={`${FY_CTA} w-full sm:w-auto disabled:opacity-60`}
+              style={{
+                backgroundColor: "hsl(var(--stage-firstyear-accent))",
+                color: "hsl(var(--background))",
+              }}
+            >
+              {stopping ? "Saving…" : "End sleep"}
+            </button>
+          </div>
         </div>
       </section>
     );
@@ -85,14 +90,13 @@ const ActiveCard = ({ runningSleep, latest, babyName, unit, onStopSleep, stoppin
       <div
         className={`${FY_CARD_RADIUS} border px-6 py-5`}
         style={{
-          borderColor: "hsl(var(--stage-firstyear-accent) / 0.22)",
-          backgroundColor: "hsl(var(--card))",
+          borderColor: "hsl(var(--stage-firstyear-accent) / 0.18)",
+          backgroundColor: "hsl(var(--card) / 0.86)",
+          boxShadow: FY_SHADOW_SOFT,
         }}
       >
-        <p className="font-sans text-[11.5px] font-semibold tracking-[0.2em] uppercase text-[hsl(var(--stage-firstyear-text-soft))]">
-          Last logged
-        </p>
-        <p className="font-serif text-[1.2rem] leading-[1.3] text-foreground mt-1.5">
+        <p className={FY_EYEBROW}>Last logged</p>
+        <p className="font-serif text-[1.22rem] leading-[1.3] text-foreground mt-1.5">
           {CARE_EVENT_LABELS[latest.event_type]} at {format(new Date(latest.occurred_at), "HH:mm")}
         </p>
         <p className="font-sans text-[13.5px] leading-[1.6] text-[hsl(var(--stage-firstyear-text))] mt-1">

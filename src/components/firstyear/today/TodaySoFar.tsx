@@ -1,6 +1,6 @@
 import type { AmountUnit, DaySummary } from "@/lib/firstYearCareEventsSchema";
 import { NAPPY_LABELS, formatAmount, formatDuration } from "@/lib/firstYearCareEventsSchema";
-import { FY_INNER_RADIUS } from "@/components/firstyear/journey/firstYearStyles";
+import { FY_EYEBROW, FY_INNER_RADIUS } from "@/components/firstyear/journey/firstYearStyles";
 
 type Props = {
   summary: DaySummary;
@@ -67,28 +67,26 @@ const TodaySoFar = ({ summary, unit, scopeLabel }: Props) => {
         >
           Today so far
         </h2>
-        <p className="font-sans text-[12.5px] text-[hsl(var(--stage-firstyear-text-soft))]">
+        <p className="font-sans text-[12.5px] text-[hsl(var(--stage-firstyear-text))]">
           {scopeLabel}
         </p>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {tiles.map((tile) => (
           <div
             key={tile.label}
-            className={`${FY_INNER_RADIUS} border px-4 py-3.5`}
+            className={`${FY_INNER_RADIUS} flex min-h-[104px] flex-col border px-4 py-3.5`}
             style={{
-              borderColor: "hsl(var(--stage-firstyear-accent) / 0.2)",
-              backgroundColor: "hsl(var(--card))",
+              borderColor: "hsl(var(--stage-firstyear-accent) / 0.18)",
+              backgroundColor: "hsl(var(--card) / 0.86)",
             }}
           >
-            <p className="font-sans text-[11.5px] font-semibold tracking-[0.14em] uppercase text-[hsl(var(--stage-firstyear-text-soft))]">
-              {tile.label}
-            </p>
-            <p className="font-serif text-[1.5rem] leading-[1.2] text-foreground mt-1">
+            <p className={FY_EYEBROW}>{tile.label}</p>
+            <p className="font-serif text-[1.55rem] leading-[1.15] tabular-nums text-foreground mt-1.5">
               {tile.value}
             </p>
             {tile.detail && (
-              <p className="font-sans text-[12px] leading-[1.5] text-[hsl(var(--stage-firstyear-text))] mt-0.5 break-words">
+              <p className="font-sans text-[12px] leading-[1.5] text-[hsl(var(--stage-firstyear-text))] mt-1 break-words">
                 {tile.detail}
               </p>
             )}

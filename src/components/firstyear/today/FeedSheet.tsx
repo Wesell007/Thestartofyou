@@ -18,7 +18,9 @@ import {
   ChipGroup,
   NoteArea,
   SHEET_FIELD_CLASS,
+  SHEET_LEGEND,
   SHEET_LINK_CLASS,
+  SHEET_PANEL_CLASS,
   SHEET_PRIMARY_CLASS,
   SHEET_PRIMARY_STYLE,
   SHEET_SECONDARY_CLASS,
@@ -125,18 +127,22 @@ const FeedSheet = ({ context, onStartLive, liveAvailable }: Props) => {
       <div>
         <BabyChips babies={babies} value={selectedBaby} onChange={onSelectBaby} />
         <fieldset className="mb-5">
-          <legend className="font-sans text-[13px] font-medium text-foreground/80 mb-2">
-            What type of feed?
-          </legend>
-          <div className="grid grid-cols-2 gap-2.5">
+          <legend className={SHEET_LEGEND}>What type of feed?</legend>
+          <div className="flex flex-col gap-3">
             {FEED_MODES.map((option) => (
               <button
                 key={option}
                 type="button"
                 onClick={() => setMode(option)}
-                className={`${FY_FOCUS_RING} min-h-[64px] rounded-[16px] border border-border/60 bg-parchment px-4 py-3 text-left font-sans text-[15px] font-semibold text-foreground transition-colors hover:border-foreground/25`}
+                className={SHEET_PANEL_CLASS}
+                style={{
+                  borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.9)",
+                  backgroundColor: "hsl(var(--stage-firstyear-hero) / 0.5)",
+                }}
               >
-                {FEED_MODE_LABELS[option]}
+                <span className="font-sans text-[15.5px] font-semibold text-foreground">
+                  {FEED_MODE_LABELS[option]}
+                </span>
               </button>
             ))}
           </div>
@@ -152,10 +158,10 @@ const FeedSheet = ({ context, onStartLive, liveAvailable }: Props) => {
     return (
       <div>
         <BabyChips babies={babies} value={selectedBaby} onChange={onSelectBaby} />
-        <p className="font-sans text-[13.5px] leading-[1.65] text-foreground/75 mb-4">
+        <p className="font-sans text-[13.5px] leading-[1.65] text-[hsl(var(--stage-firstyear-text))] mb-4">
           Start the side you are on now, or add a feed that has already finished.
         </p>
-        <div className="flex flex-wrap gap-2.5 mb-4">
+        <div className="flex flex-col gap-2.5 mb-4">
           {(["left", "right"] as FeedSide[]).map((side) => (
             <button
               key={side}
@@ -170,11 +176,11 @@ const FeedSheet = ({ context, onStartLive, liveAvailable }: Props) => {
           ))}
         </div>
         {!liveAvailable && (
-          <p className="font-sans text-[13px] leading-[1.6] text-foreground/70 mb-4">
+          <p className="font-sans text-[13px] leading-[1.6] text-[hsl(var(--stage-firstyear-text))] mb-4">
             A feed is already running for this baby. End it from the card on the page first.
           </p>
         )}
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-col items-center gap-1">
           <button type="button" onClick={() => setManual(true)} className={SHEET_SECONDARY_CLASS}>
             Add manually
           </button>
@@ -185,6 +191,7 @@ const FeedSheet = ({ context, onStartLive, liveAvailable }: Props) => {
       </div>
     );
   }
+
 
   const totalMinutes = Math.round((toSeconds(left) + toSeconds(right)) / 60);
 

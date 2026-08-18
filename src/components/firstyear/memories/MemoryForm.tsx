@@ -6,11 +6,16 @@ import {
   MEMORY_NOTE_MAX_LENGTH,
   MEMORY_TITLE_MAX_LENGTH,
 } from "@/lib/firstYearMemoriesSchema";
+import {
+  FY_SHEET_FIELD,
+  FY_SHEET_LEGEND,
+  FY_SHEET_LINK,
+  FY_SHEET_PRIMARY,
+  FY_SHEET_PRIMARY_STYLE,
+  FY_SHEET_TEXTAREA,
+} from "@/components/firstyear/journey/firstYearStyles";
 
 const NOTE_COUNTER_THRESHOLD = 1800;
-
-const FIELD_CLASS =
-  "w-full rounded-[14px] border border-border/60 bg-background px-4 py-3 font-sans text-[14.5px] leading-[1.7] text-foreground placeholder:text-muted-foreground/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:border-sage disabled:opacity-60";
 
 export type MemoryFormValues = {
   title: string;
@@ -19,12 +24,12 @@ export type MemoryFormValues = {
   scopeValue: ScopeValue;
 };
 
-type Props = {
+export type MemoryFormProps = {
   babies: BabyRecord[];
   values: MemoryFormValues;
   onChange: (values: MemoryFormValues) => void;
   onSubmit: () => void;
-  onCancelEdit?: () => void;
+  onCancel: () => void;
   editing: boolean;
   saving: boolean;
   /** Latest date a moment can be kept: today, as a local calendar date. */
@@ -37,22 +42,22 @@ type Props = {
 };
 
 /**
- * The "Save a moment" form. Everything except the note is optional, and
- * nothing here is measured, scored or compared.
+ * The words, and everything optional around them. Nothing here is measured or
+ * compared: it is only what a parent wanted to keep.
  */
 const MemoryForm = ({
   babies,
   values,
   onChange,
   onSubmit,
-  onCancelEdit,
+  onCancel,
   editing,
   saving,
   maxDate,
   minDate,
   focusSignal,
   photo,
-}: Props) => {
+}: MemoryFormProps) => {
   const noteRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
@@ -73,13 +78,6 @@ const MemoryForm = ({
         onSubmit();
       }}
     >
-      <h2 className="font-serif text-[1.4rem] leading-[1.25] text-foreground/90 mb-2">
-        {editing ? "Edit this memory" : "Save a moment"}
-      </h2>
-      <p className="font-sans text-[13px] leading-[1.65] text-foreground/60 mb-6 max-w-[52ch]">
-        A sentence is plenty. Write it however you would say it out loud.
-      </p>
-
       <MemoryScopeSelector
         babies={babies}
         value={values.scopeValue}
@@ -87,29 +85,7 @@ const MemoryForm = ({
       />
 
       <div className="mb-5">
-        <label
-          htmlFor="memory-title"
-          className="block font-sans text-[13px] font-medium text-foreground/80 mb-1.5"
-        >
-          Title (optional)
-        </label>
-        <input
-          id="memory-title"
-          type="text"
-          value={values.title}
-          disabled={saving}
-          maxLength={MEMORY_TITLE_MAX_LENGTH}
-          placeholder="First proper giggle"
-          onChange={(event) => set({ title: event.target.value })}
-          className={FIELD_CLASS}
-        />
-      </div>
-
-      <div className="mb-5">
-        <label
-          htmlFor="memory-note"
-          className="block font-sans text-[13px] font-medium text-foreground/80 mb-1.5"
-        >
+        <label htmlFor="memory-note" className={`block ${FY_SHEET_LEGEND}`}>
           The moment
         </label>
         <textarea
@@ -123,23 +99,39 @@ const MemoryForm = ({
           aria-describedby="memory-note-hint"
           placeholder="She fell asleep on my shoulder halfway through a song…"
           onChange={(event) => set({ note: event.target.value })}
-          className={`${FIELD_CLASS} resize-none`}
+          className={FY_SHEET_TEXTAREA}
         />
-        <p id="memory-note-hint" className="mt-1.5 font-sans text-[12.5px] leading-[1.6] text-foreground/55">
+        <p
+          id="memory-note-hint"
+          className="mt-1.5 font-sans text-[12.5px] leading-[1.6] text-[hsl(var(--stage-firstyear-text-soft))]"
+        >
           Only you will ever see this.
         </p>
         {showCounter && (
-          <p className="mt-1 font-sans text-[12px] text-foreground/55">
+          <p className="mt-1 font-sans text-[12px] text-[hsl(var(--stage-firstyear-text-soft))]">
             {values.note.length} of {MEMORY_NOTE_MAX_LENGTH} characters
           </p>
         )}
       </div>
 
-      <div className="mb-6">
-        <label
-          htmlFor="memory-date"
-          className="block font-sans text-[13px] font-medium text-foreground/80 mb-1.5"
-        >
+      <div className="mb-5">
+        <label htmlFor="memory-title" className={`block ${FY_SHEET_LEGEND}`}>
+          Title (optional)
+        </label>
+        <input
+          id="memory-title"
+          type="text"
+          value={values.title}
+          disabled={saving}
+          maxLength={MEMORY_TITLE_MAX_LENGTH}
+          placeholder="First proper giggle"
+          onChange={(event) => set({ title: event.target.value })}
+          className={`${FY_SHEET_FIELD} w-full`}
+        />
+      </div>
+
+      <div className="mb-5">
+        <label htmlFor="memory-date" className={`block ${FY_SHEET_LEGEND}`}>
           When it happened
         </label>
         <input
@@ -150,30 +142,24 @@ const MemoryForm = ({
           max={maxDate}
           min={minDate ?? undefined}
           onChange={(event) => set({ memoryDate: event.target.value })}
-          className={`${FIELD_CLASS} max-w-[220px]`}
+          className={`${FY_SHEET_FIELD} max-w-[220px]`}
         />
       </div>
 
       {photo && <MemoryPhotoField {...photo} disabled={saving || photo.disabled} />}
 
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="flex flex-col items-center gap-1 pt-1">
         <button
           type="submit"
           disabled={saving}
-          className="inline-flex min-h-11 items-center rounded-pill border border-border/60 bg-parchment px-5 py-2 font-sans text-[13px] text-foreground/85 transition-colors hover:border-foreground/25 disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className={FY_SHEET_PRIMARY}
+          style={FY_SHEET_PRIMARY_STYLE}
         >
-          {saving ? "Saving…" : editing ? "Update this memory" : "Save this memory"}
+          {saving ? "Saving…" : editing ? "Save changes" : "Keep this memory"}
         </button>
-        {editing && onCancelEdit && (
-          <button
-            type="button"
-            onClick={onCancelEdit}
-            disabled={saving}
-            className="inline-flex min-h-11 items-center font-sans text-[12.5px] text-foreground/60 underline underline-offset-4 hover:text-foreground/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          >
-            Cancel
-          </button>
-        )}
+        <button type="button" onClick={onCancel} disabled={saving} className={FY_SHEET_LINK}>
+          Cancel
+        </button>
       </div>
     </form>
   );

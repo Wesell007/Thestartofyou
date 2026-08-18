@@ -121,3 +121,37 @@ export const FY_TYPE_TINT = {
   },
 } as const;
 
+
+// ── Shared sheet surface ───────────────────────────────────────────────────
+// Neutral constants so any First Year surface can present a sheet in the same
+// language, without reaching into another surface's folder.
+
+/** Small uppercase label above a field or a chip group inside a sheet. */
+export const FY_SHEET_LEGEND =
+  "font-sans text-[11px] font-semibold tracking-[0.18em] uppercase text-[hsl(var(--stage-firstyear-text-soft))] mb-2.5";
+
+/** Single-line input inside a sheet. */
+export const FY_SHEET_FIELD = `min-h-11 rounded-[14px] border border-border/60 bg-background px-4 py-2 font-sans text-[14.5px] text-foreground ${FY_FIELD_FOCUS_RING}`;
+
+/** Multi-line input inside a sheet. */
+export const FY_SHEET_TEXTAREA = `w-full resize-none rounded-[14px] border border-border/60 bg-background px-4 py-3 font-sans text-[14.5px] leading-[1.7] text-foreground placeholder:text-muted-foreground/60 ${FY_FIELD_FOCUS_RING}`;
+
+/** Quiet underlined action inside a sheet, such as Cancel. */
+export const FY_SHEET_LINK = `${FY_FOCUS_RING} inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] text-[hsl(var(--stage-firstyear-text))] underline underline-offset-4 hover:text-foreground`;
+
+/** Full width primary action inside a sheet. */
+export const FY_SHEET_PRIMARY = `${FY_CTA} w-full disabled:opacity-60`;
+
+export const FY_SHEET_PRIMARY_STYLE = {
+  backgroundColor: "hsl(var(--stage-firstyear-accent))",
+  color: "hsl(var(--background))",
+} as const;
+
+/** Selectable pill, used for chip groups and quiet filters. */
+export const FY_CHIP_BASE =
+  "flex min-h-11 cursor-pointer items-center rounded-pill border px-[18px] py-2.5 font-sans text-[13.5px] font-medium transition-colors focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2 focus-within:ring-offset-background";
+
+export const FY_CHIP_SELECTED = "border-sage bg-sage/15 text-foreground";
+
+export const FY_CHIP_IDLE =
+  "border-border/60 bg-parchment text-[hsl(var(--stage-firstyear-text))] hover:border-foreground/25";

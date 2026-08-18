@@ -58,7 +58,7 @@ The four baby note fields (rhythm, feeding, sleep, nappies) are retired from thi
 | event_type | text not null | feed, sleep, nappy, pump, note |
 | occurred_at | timestamptz not null | the anchor time; set from `started_at` for sleep |
 | started_at / ended_at | timestamptz | sleep only; `ended_at` null means running |
-| amount_ml | numeric(6,1) | feed and pump, 0 to 2000 |
+| amount_ml | numeric(6,1) | feed and pump, optional; when supplied greater than 0 and no more than 2000 |
 | side | text | left, right, both |
 | nappy_type | text | wet, dirty, both |
 | feed_method | text | breast, bottle, expressed, formula, solids |

@@ -27,14 +27,21 @@ import { FIRST_YEAR_SETUP_ROUTE } from "@/components/firstyear/setup/firstYearSe
 import { describeBabies } from "@/lib/firstYearCopy";
 import { localDateKey, validateEntryDraft } from "@/lib/firstYearEntriesSchema";
 import { getEntriesForDate, saveEntry, type FirstYearEntry } from "@/lib/firstYearEntries";
+import BreastTimer from "@/components/firstyear/today/BreastTimer";
 import {
   deleteCareEvent,
+  endBreastFeed,
   getCareEventsForDay,
   getRecentCareEvents,
+  getRunningFeeds,
   getRunningSleeps,
+  pauseBreastFeed,
+  resumeBreastFeed,
   saveCareEvent,
+  startBreastFeed,
   startSleep,
   stopSleep,
+  switchFeedSide,
   updateCareEvent,
 } from "@/lib/firstYearCareEvents";
 import {
@@ -45,7 +52,8 @@ import {
   type AmountUnit,
   type CareEvent,
   type CareEventPayload,
-  type CareEventType,
+  type FeedSide,
+  type QuickAddType,
 } from "@/lib/firstYearCareEventsSchema";
 import { parseDateOnly } from "@/lib/dateOnly";
 import { FY_FOCUS_RING } from "@/components/firstyear/journey/firstYearStyles";
@@ -80,8 +88,10 @@ const FirstYearToday = () => {
   const [events, setEvents] = useState<CareEvent[]>([]);
   const [recentEvents, setRecentEvents] = useState<CareEvent[]>([]);
   const [runningSleeps, setRunningSleeps] = useState<CareEvent[]>([]);
+  const [runningFeeds, setRunningFeeds] = useState<CareEvent[]>([]);
   const [unit, setUnit] = useState<AmountUnit>("ml");
-  const [sheetType, setSheetType] = useState<CareEventType | null>(null);
+  const [sheetType, setSheetType] = useState<QuickAddType | null>(null);
+  const [feedBusy, setFeedBusy] = useState(false);
   const [editing, setEditing] = useState<CareEvent | null>(null);
   const [pendingDelete, setPendingDelete] = useState<CareEvent | null>(null);
   const [deleting, setDeleting] = useState(false);
@@ -161,10 +171,11 @@ const FirstYearToday = () => {
           return;
         }
 
-        const [dayEvents, recent, running, entries] = await Promise.all([
+        const [dayEvents, recent, running, feeds, entries] = await Promise.all([
           getCareEventsForDay(userId, today),
           getRecentCareEvents(userId, 7),
           getRunningSleeps(userId),
+          getRunningFeeds(userId),
           getEntriesForDate(userId, today),
         ]);
         if (cancelled) return;
@@ -176,6 +187,7 @@ const FirstYearToday = () => {
         setEvents(dayEvents);
         setRecentEvents(recent);
         setRunningSleeps(running);
+        setRunningFeeds(feeds);
         setDayNote(existingNote?.note ?? "");
         setDayNoteSaved(Boolean(existingNote));
         setLoaded({ userId, babies });
@@ -190,14 +202,16 @@ const FirstYearToday = () => {
 
   const refresh = useCallback(
     async (userId: string) => {
-      const [dayEvents, recent, running] = await Promise.all([
+      const [dayEvents, recent, running, feeds] = await Promise.all([
         getCareEventsForDay(userId, today),
         getRecentCareEvents(userId, 7),
         getRunningSleeps(userId),
+        getRunningFeeds(userId),
       ]);
       setEvents(dayEvents);
       setRecentEvents(recent);
       setRunningSleeps(running);
+      setRunningFeeds(feeds);
     },
     [today],
   );
@@ -223,7 +237,7 @@ const FirstYearToday = () => {
     setEditing(null);
   };
 
-  const handleQuickAdd = (type: CareEventType) => {
+  const handleQuickAdd = (type: QuickAddType) => {
     setEditing(null);
     setSheetType(type);
   };
@@ -244,7 +258,7 @@ const FirstYearToday = () => {
     } catch (error) {
       const message =
         typeof error === "object" && error && "code" in error && (error as { code: string }).code === "23505"
-          ? "There is already a sleep running for this baby."
+          ? "There is already a timer running for this baby."
           : "We couldn't save that just now. Please try again.";
       toast({ title: message });
     }
@@ -265,15 +279,16 @@ const FirstYearToday = () => {
     }
   };
 
-  const handleStartSleep = async () => {
+  const handleStartSleep = async (babyId?: string) => {
     if (!loaded) return;
-    const babyId = target || loaded.babies[0]?.id;
-    if (!babyId) return;
+    const id = babyId || target || loaded.babies[0]?.id;
+    if (!id) return;
     try {
-      await startSleep(loaded.userId, babyId);
+      await startSleep(loaded.userId, id);
       await refresh(loaded.userId);
       setStatus("Sleep started");
       toast({ title: "Sleep started" });
+      closeSheet();
     } catch (error) {
       const duplicate =
         typeof error === "object" && error && "code" in error && (error as { code: string }).code === "23505";
@@ -282,6 +297,42 @@ const FirstYearToday = () => {
           ? "There is already a sleep running for this baby."
           : "We couldn't start that just now. Please try again.",
       });
+    }
+  };
+
+  const handleStartBreastFeed = async (babyId: string, side: FeedSide) => {
+    if (!loaded) return;
+    try {
+      await startBreastFeed(loaded.userId, babyId, side);
+      await refresh(loaded.userId);
+      setStatus("Feed started");
+      toast({ title: "Feed started" });
+      closeSheet();
+    } catch (error) {
+      const duplicate =
+        typeof error === "object" && error && "code" in error && (error as { code: string }).code === "23505";
+      toast({
+        title: duplicate
+          ? "There is already a feed running for this baby."
+          : "We couldn't start that just now. Please try again.",
+      });
+    }
+  };
+
+  const runFeedAction = async (
+    action: () => Promise<unknown>,
+    message: string,
+  ) => {
+    if (!loaded || feedBusy) return;
+    setFeedBusy(true);
+    try {
+      await action();
+      await refresh(loaded.userId);
+      setStatus(message);
+    } catch {
+      toast({ title: "We couldn't save that just now. Please try again." });
+    } finally {
+      setFeedBusy(false);
     }
   };
 
@@ -346,6 +397,9 @@ const FirstYearToday = () => {
   const summary = summariseDay(scopedEvents);
   const runningSleep =
     runningSleeps.find((event) => !multiples || target === ALL_BABIES || event.baby_id === target) ??
+    null;
+  const runningFeed =
+    runningFeeds.find((event) => !multiples || target === ALL_BABIES || event.baby_id === target) ??
     null;
   const latest = scopedEvents[0] ?? null;
   const scopeLabel = multiples
@@ -421,7 +475,7 @@ const FirstYearToday = () => {
 
         {!runningSleep && (
           <div className="pb-8 -mt-4">
-            <button type="button" onClick={handleStartSleep} className={INLINE_ACTION_CLASS}>
+            <button type="button" onClick={() => handleStartSleep()} className={INLINE_ACTION_CLASS}>
               Start a sleep now for {multiples && target === ALL_BABIES ? babyName(loaded.babies[0].id) : scopeLabel}
             </button>
           </div>
@@ -431,12 +485,32 @@ const FirstYearToday = () => {
 
         <ActiveCard
           runningSleep={runningSleep}
-          latest={latest}
+          latest={runningFeed ? null : latest}
           babyName={babyName}
           unit={unit}
           onStopSleep={handleStopSleep}
           stopping={stopping}
         />
+
+        {runningFeed && (
+          <BreastTimer
+            feed={runningFeed}
+            babyLabel={babyName(runningFeed.baby_id)}
+            busy={feedBusy}
+            onSwitch={(side) =>
+              runFeedAction(() => switchFeedSide(loaded.userId, runningFeed, side), "Side switched")
+            }
+            onPause={() =>
+              runFeedAction(() => pauseBreastFeed(loaded.userId, runningFeed), "Feed paused")
+            }
+            onResume={(side) =>
+              runFeedAction(() => resumeBreastFeed(loaded.userId, runningFeed, side), "Feed resumed")
+            }
+            onEnd={() =>
+              runFeedAction(() => endBreastFeed(loaded.userId, runningFeed), "Feed saved")
+            }
+          />
+        )}
 
         <RhythmTimeline
           events={scopedEvents}
@@ -445,7 +519,7 @@ const FirstYearToday = () => {
           unit={unit}
           onEdit={(event) => {
             setEditing(event);
-            setSheetType(event.event_type);
+            if (event.event_type !== "pump") setSheetType(event.event_type);
           }}
           onDelete={(event) => setPendingDelete(event)}
         />
@@ -501,6 +575,10 @@ const FirstYearToday = () => {
         onUnitChange={handleUnitChange}
         onClose={closeSheet}
         onSubmit={handleSubmit}
+        onStartSleep={handleStartSleep}
+        onStartBreastFeed={handleStartBreastFeed}
+        runningSleepBabyIds={runningSleeps.map((event) => event.baby_id)}
+        runningFeedBabyIds={runningFeeds.map((event) => event.baby_id)}
         onError={(message) => toast({ title: message })}
       />
 

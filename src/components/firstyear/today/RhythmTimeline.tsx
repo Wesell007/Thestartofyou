@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import type { AmountUnit, CareEvent } from "@/lib/firstYearCareEventsSchema";
-import { CARE_EVENT_LABELS, describeEvent } from "@/lib/firstYearCareEventsSchema";
+import { CARE_EVENT_LABELS, describeEvent, isRunningBreastFeed } from "@/lib/firstYearCareEventsSchema";
 import {
   FY_FOCUS_RING,
   FY_INNER_RADIUS,
@@ -39,6 +39,8 @@ const RhythmTimeline = ({
       <ol className="space-y-2.5">
         {events.map((event) => {
           const detail = describeEvent(event, unit);
+          // A running feed is changed from its own card, never from a row.
+          const editable = !isRunningBreastFeed(event);
           return (
             <li
               key={event.id}
@@ -72,9 +74,11 @@ const RhythmTimeline = ({
                 </p>
               )}
               <div className="flex flex-wrap items-center gap-4 mt-1">
-                <button type="button" className={ACTION_CLASS} onClick={() => onEdit(event)}>
-                  Edit
-                </button>
+                {editable && (
+                  <button type="button" className={ACTION_CLASS} onClick={() => onEdit(event)}>
+                    Edit
+                  </button>
+                )}
                 <button type="button" className={ACTION_CLASS} onClick={() => onDelete(event)}>
                   Remove
                 </button>

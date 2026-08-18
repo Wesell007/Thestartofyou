@@ -27,10 +27,10 @@ const RecentDays = ({ byDate, dates }: Props) => (
           const parts = [
             summary.feeds > 0 ? `${summary.feeds} ${summary.feeds === 1 ? "feed" : "feeds"}` : null,
             summary.sleepMinutes > 0 ? `${formatDuration(summary.sleepMinutes)} sleep` : null,
+            summary.feedMinutes > 0 ? `${formatDuration(summary.feedMinutes)} feeding` : null,
             summary.nappies > 0
               ? `${summary.nappies} ${summary.nappies === 1 ? "nappy" : "nappies"}`
               : null,
-            summary.pumps > 0 ? `${summary.pumps} pumped` : null,
             summary.moments > 0
               ? `${summary.moments} ${summary.moments === 1 ? "moment" : "moments"}`
               : null,

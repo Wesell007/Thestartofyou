@@ -9,7 +9,12 @@ import {
   buildFirstYearCompanionContext,
 } from "@/lib/firstYearCompanionContext";
 import { navigateToAsk } from "@/lib/askNavigation";
-import { FY_FOCUS_RING, FY_FIELD_FOCUS_RING, FY_KICKER } from "./firstYearStyles";
+import {
+  FY_FIELD_FOCUS_RING,
+  FY_FOCUS_RING,
+  FY_KICKER,
+  FY_SHADOW_SOFT,
+} from "./firstYearStyles";
 
 type Props = {
   /** First baby's date of birth, used only for a coarse age band. */
@@ -117,12 +122,12 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
   return (
     <section className="pb-10" aria-labelledby="ask-companion">
       <div
-        className="relative rounded-[24px] border px-5 sm:px-8 py-7 sm:py-8"
+        className="relative rounded-[26px] border px-5 sm:px-8 py-7 sm:py-8"
         style={{
           borderColor: "hsl(var(--sage) / 0.42)",
           background:
-            "linear-gradient(150deg, hsl(var(--sage-bg)) 0%, hsl(var(--sage) / 0.16) 45%, hsl(var(--stage-firstyear-cream)) 100%)",
-          boxShadow: "0 26px 58px -34px hsl(var(--sage) / 0.6)",
+            "linear-gradient(152deg, hsl(var(--sage) / 0.22) 0%, hsl(var(--sage-bg)) 55%, hsl(var(--stage-firstyear-cream)) 100%)",
+          boxShadow: FY_SHADOW_SOFT,
         }}
       >
         <div className="flex items-start gap-4 sm:gap-5">

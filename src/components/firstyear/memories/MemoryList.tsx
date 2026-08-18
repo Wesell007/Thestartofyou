@@ -4,9 +4,15 @@ import type { BabyRecord } from "@/lib/firstYearJourney";
 import type { FirstYearMemory } from "@/lib/firstYearMemories";
 import { memoryMonthKey, memoryMonthLabel } from "@/lib/firstYearMemoriesSchema";
 import { babyDisplayName } from "./MemoryScopeSelector";
+import {
+  FY_CARD_RADIUS,
+  FY_CHIP,
+  FY_EYEBROW,
+  FY_FOCUS_RING,
+  FY_SHADOW_SOFT,
+} from "@/components/firstyear/journey/firstYearStyles";
 
-const INLINE_ACTION_CLASS =
-  "inline-flex min-h-11 items-center font-sans text-[12.5px] text-foreground/60 underline underline-offset-4 hover:text-foreground/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+const QUIET_ACTION_CLASS = `${FY_FOCUS_RING} inline-flex min-h-11 items-center rounded-sm font-sans text-[13px] text-[hsl(var(--stage-firstyear-text-soft))] underline underline-offset-4 transition-colors hover:text-foreground`;
 
 type Props = {
   memories: FirstYearMemory[];
@@ -29,7 +35,7 @@ export const memoryScopeLabel = (memory: FirstYearMemory, babies: BabyRecord[]):
 
 /**
  * Kept moments, newest first, gathered under the month they belong to.
- * No counts, no streaks, no scoring: just what was saved.
+ * Each one is a small paper keepsake: no counts, no streaks, nothing measured.
  */
 const MemoryList = ({ memories, babies, onEdit, onRemove, photoUrls, onOpenPhoto }: Props) => {
   const months: { key: string; label: string; items: FirstYearMemory[] }[] = [];
@@ -40,69 +46,116 @@ const MemoryList = ({ memories, babies, onEdit, onRemove, photoUrls, onOpenPhoto
     else months.push({ key, label: memoryMonthLabel(memory.memory_date), items: [memory] });
   });
 
+  const multiples = babies.length > 1;
+
   return (
-    <div className="space-y-8">
+    <div className="space-y-9">
       {months.map((month) => (
         <div key={month.key}>
-          <h3 className="font-sans text-[12px] tracking-[0.14em] uppercase text-foreground/55 mb-3">
-            {month.label}
-          </h3>
-          <ul className="space-y-5">
-            {month.items.map((memory) => {
+          <div className="mb-4 flex items-center gap-3">
+            <h3 className={FY_EYEBROW}>{month.label}</h3>
+            <span
+              aria-hidden="true"
+              className="h-px flex-1"
+              style={{ backgroundColor: "hsl(var(--stage-firstyear-peach-soft) / 0.8)" }}
+            />
+          </div>
+          <ul className="space-y-4">
+            {month.items.map((memory, index) => {
               const parsed = parseDateOnly(memory.memory_date);
+              const photoUrl = memory.photo_path ? photoUrls?.[memory.photo_path] : undefined;
+              const tilt = index % 2 === 0 ? "-rotate-1" : "rotate-1";
               return (
                 <li
                   key={memory.id}
-                  className="border-b border-border/40 pb-5 last:border-0 last:pb-0"
+                  className={`${FY_CARD_RADIUS} border px-5 py-5 sm:px-6 sm:py-6`}
+                  style={{
+                    backgroundColor: "hsl(var(--stage-firstyear-cream))",
+                    borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.9)",
+                    boxShadow: FY_SHADOW_SOFT,
+                  }}
                 >
-                  <p className="font-sans text-[12px] tracking-[0.12em] uppercase text-foreground/50 mb-1">
-                    {parsed ? format(parsed, "EEEE d MMMM") : memory.memory_date} ·{" "}
-                    {memoryScopeLabel(memory, babies)}
-                  </p>
-                  {memory.title && (
-                    <p className="font-serif text-[16.5px] leading-[1.5] text-foreground/90 mb-1">
-                      {memory.title}
-                    </p>
-                  )}
-                  <p className="font-serif text-[15px] leading-[1.7] text-foreground/85 whitespace-pre-wrap">
-                    {memory.note}
-                  </p>
+                  <div className="mb-3 flex flex-wrap items-center gap-2">
+                    <span
+                      className={FY_CHIP}
+                      style={{
+                        backgroundColor: "hsl(var(--stage-firstyear-hero) / 0.7)",
+                        color: "hsl(var(--stage-firstyear-peach-accent))",
+                      }}
+                    >
+                      {parsed ? format(parsed, "EEEE d MMMM") : memory.memory_date}
+                    </span>
+                    {multiples && (
+                      <span
+                        className={FY_CHIP}
+                        style={{
+                          backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.7)",
+                          color: "hsl(var(--stage-firstyear-deep))",
+                        }}
+                      >
+                        {memoryScopeLabel(memory, babies)}
+                      </span>
+                    )}
+                  </div>
+
                   {memory.photo_path && onOpenPhoto && (
                     <button
                       type="button"
                       onClick={() => onOpenPhoto(memory)}
-                      className="mt-3 block overflow-hidden rounded-[16px] border border-border/50 bg-parchment p-1 shadow-[0_10px_24px_-20px_rgba(50,50,70,0.5)] transition-colors hover:border-foreground/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      className={`${FY_FOCUS_RING} mb-4 block rounded-[18px] border bg-parchment p-2 pb-4 transition-transform duration-200 hover:rotate-0 ${tilt}`}
+                      style={{
+                        borderColor: "hsl(var(--stage-firstyear-peach-soft))",
+                        boxShadow: FY_SHADOW_SOFT,
+                      }}
                     >
-                      {photoUrls?.[memory.photo_path] ? (
+                      {photoUrl ? (
                         <img
-                          src={photoUrls[memory.photo_path]}
-                          alt={`Photo kept with this memory from ${
-                            parsed ? format(parsed, "d MMMM") : memory.memory_date
-                          }`}
-                          className="h-28 w-28 rounded-[12px] object-cover"
+                          src={photoUrl}
+                          alt={
+                            memory.title?.trim()
+                              ? `Photo for memory: ${memory.title.trim()}`
+                              : "Photo saved with this memory"
+                          }
                           loading="lazy"
+                          className="h-[168px] w-[168px] rounded-[12px] object-cover sm:h-[196px] sm:w-[196px]"
                         />
                       ) : (
-                        <span className="flex h-28 w-28 items-center justify-center rounded-[12px] px-2 text-center font-sans text-[12px] text-foreground/55">
-                          Photo
+                        <span className="flex h-[168px] w-[168px] items-center justify-center rounded-[12px] font-sans text-[12.5px] text-[hsl(var(--stage-firstyear-text-soft))] sm:h-[196px] sm:w-[196px]">
+                          Opening photo…
                         </span>
                       )}
+                      <span className="mt-2 block max-w-[168px] truncate text-center font-sans text-[11.5px] text-[hsl(var(--stage-firstyear-text-soft))] sm:max-w-[196px]">
+                        {memory.title?.trim() || (parsed ? format(parsed, "d MMM") : "")}
+                      </span>
                     </button>
                   )}
-                  <div className="mt-1 flex flex-wrap items-center gap-4">
+
+                  {memory.title && (
+                    <p className="mb-1.5 font-serif text-[1.12rem] leading-[1.4] text-foreground">
+                      {memory.title}
+                    </p>
+                  )}
+                  <p className="whitespace-pre-wrap font-serif text-[15.5px] leading-[1.75] text-[hsl(var(--stage-firstyear-text))]">
+                    {memory.note}
+                  </p>
+
+                  <div
+                    className="mt-4 flex flex-wrap items-center gap-5 border-t pt-3"
+                    style={{ borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.7)" }}
+                  >
                     <button
                       type="button"
                       onClick={() => onEdit(memory)}
-                      className={INLINE_ACTION_CLASS}
+                      className={QUIET_ACTION_CLASS}
                     >
-                      Edit this memory
+                      Edit
                     </button>
                     <button
                       type="button"
                       onClick={() => onRemove(memory)}
-                      className={INLINE_ACTION_CLASS}
+                      className={QUIET_ACTION_CLASS}
                     >
-                      Remove this memory
+                      Remove
                     </button>
                   </div>
                 </li>

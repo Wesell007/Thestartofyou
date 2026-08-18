@@ -5,10 +5,21 @@ import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import PageLoadState from "@/components/shared/PageLoadState";
 import ConfirmDialog from "@/components/shared/ConfirmDialog";
-import MemoryForm, { type MemoryFormValues } from "@/components/firstyear/memories/MemoryForm";
+import { type MemoryFormValues } from "@/components/firstyear/memories/MemoryForm";
+import MemorySheet from "@/components/firstyear/memories/MemorySheet";
+import MemoryHeroCard from "@/components/firstyear/memories/MemoryHeroCard";
+import MemoryEmptyState from "@/components/firstyear/memories/MemoryEmptyState";
 import MemoryList from "@/components/firstyear/memories/MemoryList";
 import {
+  FY_CHIP_BASE,
+  FY_CHIP_IDLE,
+  FY_CHIP_SELECTED,
+  FY_EYEBROW,
+  FY_FOCUS_RING,
+} from "@/components/firstyear/journey/firstYearStyles";
+import {
   FAMILY_VALUE,
+  babyDisplayName,
   draftToScopeValue,
   scopeValueToDraft,
 } from "@/components/firstyear/memories/MemoryScopeSelector";
@@ -83,6 +94,10 @@ const FirstYearMemories = () => {
   /** Short-lived signed URLs for kept photos, keyed by stored path. */
   const [photoUrls, setPhotoUrls] = useState<Record<string, string>>({});
   const [viewing, setViewing] = useState<FirstYearMemory | null>(null);
+  /** The add or edit sheet. Keeping a memory is a deliberate act. */
+  const [sheetOpen, setSheetOpen] = useState(false);
+  /** A quiet client-side filter over the memories already loaded. */
+  const [babyFilter, setBabyFilter] = useState<string>("all");
   const [deleting, setDeleting] = useState(false);
   const [status, setStatus] = useState("");
 
@@ -230,6 +245,7 @@ const FirstYearMemories = () => {
               : loaded.babies[0].id,
         });
         setFocusSignal(`source-${source.id}-${Date.now()}`);
+        setSheetOpen(true);
       } catch {
         if (!cancelled) toast({ title: "We couldn't open that note just now." });
       } finally {
@@ -327,6 +343,7 @@ const FirstYearMemories = () => {
       setStatus(photoIssue ?? message);
       toast({ title: photoIssue ?? message });
       resetForm();
+      setSheetOpen(false);
     } catch {
       toast({ title: "We couldn't save that just now. Please try again." });
     } finally {
@@ -355,6 +372,7 @@ const FirstYearMemories = () => {
           : loaded?.babies[0].id ?? FAMILY_VALUE,
     });
     setFocusSignal(`edit-${memory.id}-${Date.now()}`);
+    setSheetOpen(true);
   };
 
   const handlePhotoSelect = (file: File) => {
@@ -392,7 +410,10 @@ const FirstYearMemories = () => {
           return next;
         });
       }
-      if (editingId === pendingDelete.id) resetForm();
+      if (editingId === pendingDelete.id) {
+        resetForm();
+        setSheetOpen(false);
+      }
       const refreshed = await getMemories(loaded.userId);
       setMemories(refreshed);
       setStatus("Memory removed");
@@ -420,6 +441,37 @@ const FirstYearMemories = () => {
     ? values.scopeValue === "" ? FAMILY_VALUE : values.scopeValue
     : loaded.babies[0].id;
 
+  /** Open the sheet for a new memory, with nothing carried over. */
+  const openNewMemory = () => {
+    resetForm();
+    setFocusSignal(null);
+    setSheetOpen(true);
+  };
+
+  const closeSheet = () => {
+    resetForm();
+    setSheetOpen(false);
+  };
+
+  /**
+   * A quiet filter over what is already on the page: memories about one baby,
+   * plus the ones kept for all of them. No new queries.
+   */
+  const visibleMemories =
+    !multiples || babyFilter === "all"
+      ? memories
+      : memories.filter(
+          (memory) => memory.baby_id === babyFilter || memory.memory_scope === "all_babies",
+        );
+
+  const filterOptions = [
+    { value: "all", label: "Everyone" },
+    ...loaded.babies.map((baby, index) => ({
+      value: baby.id,
+      label: babyDisplayName(baby, index),
+    })),
+  ];
+
   return (
     <div
       className="min-h-screen bg-parchment-grain page-vignette"
@@ -433,12 +485,28 @@ const FirstYearMemories = () => {
       />
       <MyWeekHeader />
       <main className="relative mx-auto w-full max-w-[720px] px-4 sm:px-8 md:px-10 pt-16 sm:pt-20 pb-6">
-        <header className="pb-8">
-          <h1 className="font-serif text-[2rem] sm:text-[2.35rem] leading-[1.15] text-foreground/90 mb-3">
+        <div className="pb-6">
+          <Link
+            to="/my-first-year"
+            className={`${FY_FOCUS_RING} inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] text-[hsl(var(--stage-firstyear-text-soft))] underline underline-offset-4 transition-colors hover:text-foreground`}
+          >
+            Back to First Year
+          </Link>
+        </div>
+
+        <header className="pb-7">
+          <p
+            className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-4"
+            style={{ color: "hsl(var(--stage-firstyear-accent))" }}
+          >
+            Keepsakes
+          </p>
+          <h1 className="font-serif text-[2rem] sm:text-[2.35rem] leading-[1.15] text-foreground mb-3">
             Memories
           </h1>
-          <p className="font-serif text-[15.5px] leading-[1.75] text-foreground/80 max-w-[54ch]">
-            A place to keep the little things you want to look back on.
+          <p className="font-sans text-[15px] leading-[1.75] text-[hsl(var(--stage-firstyear-text))] max-w-[54ch]">
+            A place to keep the little things you want to look back on. Keep as many or as few as
+            you like.
           </p>
         </header>
 
@@ -446,75 +514,92 @@ const FirstYearMemories = () => {
           {status}
         </p>
 
-        <section className="pb-10" aria-label="Save a moment">
-          <div
-            className="rounded-[22px] keepsake-surface px-6 sm:px-8 py-7 sm:py-8"
-            style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.2)" }}
-          >
-            <MemoryForm
-              babies={loaded.babies}
-              values={{ ...values, scopeValue }}
-              onChange={setValues}
-              onSubmit={handleSubmit}
-              onCancelEdit={resetForm}
-              editing={Boolean(editingId)}
-              saving={saving}
-              maxDate={today}
-              minDate={earliestDob}
-              focusSignal={focusSignal}
-              photo={{
-                previewUrl: photoDraft
-                  ? photoDraft.previewUrl
-                  : photoRemoved
-                    ? null
-                    : existingPhoto
-                      ? existingPhoto.url ?? (existingPhoto.path ? photoUrls[existingPhoto.path] ?? null : null)
-                      : null,
-                hasPhoto: Boolean(photoDraft) || (Boolean(existingPhoto) && !photoRemoved),
-                busy: photoBusy,
-                onSelect: handlePhotoSelect,
-                onRemove: handlePhotoRemove,
-              }}
-            />
-          </div>
+        <section className="pb-9" aria-label="Keep a memory">
+          <MemoryHeroCard onOpen={openNewMemory} />
         </section>
 
-        <section className="pb-10" aria-labelledby="kept-moments">
-          <div
-            className="rounded-[22px] keepsake-surface px-6 sm:px-8 py-7 sm:py-8"
-            style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.2)" }}
-          >
-            <h2
-              id="kept-moments"
-              className="font-serif text-[1.4rem] leading-[1.25] text-foreground/90 mb-4"
+        {multiples && (
+          <section className="pb-7" aria-label="Whose memories are you looking at?">
+            <p className={`${FY_EYEBROW} mb-2.5`}>Whose memories are you looking at?</p>
+            <div
+              role="radiogroup"
+              aria-label="Whose memories are you looking at?"
+              className="flex flex-wrap gap-2"
             >
-              What you have kept
-            </h2>
-            {memories.length === 0 ? (
-              <p className="font-serif text-[15px] leading-[1.7] text-foreground/70 max-w-[52ch]">
-                Nothing kept yet. When something happens that you want to remember, save it here.
-              </p>
-            ) : (
-              <MemoryList
-                memories={memories}
-                babies={loaded.babies}
-                onEdit={handleEdit}
-                onRemove={setPendingDelete}
-                photoUrls={photoUrls}
-                onOpenPhoto={setViewing}
-              />
-            )}
-          </div>
+              {filterOptions.map((option) => {
+                const selected = option.value === babyFilter;
+                return (
+                  <label
+                    key={option.value}
+                    className={`${FY_CHIP_BASE} ${selected ? FY_CHIP_SELECTED : FY_CHIP_IDLE}`}
+                  >
+                    <input
+                      type="radio"
+                      name="first-year-memory-filter"
+                      className="sr-only"
+                      value={option.value}
+                      checked={selected}
+                      onChange={() => setBabyFilter(option.value)}
+                    />
+                    {option.label}
+                  </label>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        <section className="pb-9" aria-labelledby="kept-moments">
+          <h2 id="kept-moments" className="sr-only">
+            What you have kept
+          </h2>
+          {visibleMemories.length === 0 ? (
+            <MemoryEmptyState onOpen={openNewMemory} />
+          ) : (
+            <MemoryList
+              memories={visibleMemories}
+              babies={loaded.babies}
+              onEdit={handleEdit}
+              onRemove={setPendingDelete}
+              photoUrls={photoUrls}
+              onOpenPhoto={setViewing}
+            />
+          )}
         </section>
 
-        <div className="pb-4">
-          <Link
-            to="/my-first-year"
-            className="inline-flex min-h-11 items-center font-sans text-[13px] text-foreground/60 underline underline-offset-4 hover:text-foreground/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          >
-            Back to your First Year journey
-          </Link>
-        </div>
+        <p className="pb-4 font-sans text-[12.5px] leading-[1.6] text-[hsl(var(--stage-firstyear-text-soft))]">
+          Your memories stay private to you.
+        </p>
+
+        <MemorySheet
+          open={sheetOpen}
+          onOpenChange={(open) => {
+            if (!open) closeSheet();
+          }}
+          babies={loaded.babies}
+          values={{ ...values, scopeValue }}
+          onChange={setValues}
+          onSubmit={handleSubmit}
+          onCancel={closeSheet}
+          editing={Boolean(editingId)}
+          saving={saving}
+          maxDate={today}
+          minDate={earliestDob}
+          focusSignal={focusSignal}
+          photo={{
+            previewUrl: photoDraft
+              ? photoDraft.previewUrl
+              : photoRemoved
+                ? null
+                : existingPhoto
+                  ? existingPhoto.url ?? (existingPhoto.path ? photoUrls[existingPhoto.path] ?? null : null)
+                  : null,
+            hasPhoto: Boolean(photoDraft) || (Boolean(existingPhoto) && !photoRemoved),
+            busy: photoBusy,
+            onSelect: handlePhotoSelect,
+            onRemove: handlePhotoRemove,
+          }}
+        />
       </main>
 
       <MyWeekFooter contextual="These memories are yours alone. You can edit or remove any of them whenever you like." />

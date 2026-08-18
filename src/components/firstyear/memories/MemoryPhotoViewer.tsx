@@ -19,7 +19,7 @@ type Props = {
  */
 const MemoryPhotoViewer = ({ open, onOpenChange, url, title, hasTitle = false }: Props) => (
   <Dialog open={open} onOpenChange={onOpenChange}>
-    <DialogContent className="max-w-[560px]">
+    <DialogContent className="max-w-[560px] rounded-[26px]">
       <DialogHeader>
         <DialogTitle className="font-serif text-[1.25rem] leading-[1.3] text-foreground/90">
           {title}
@@ -29,7 +29,8 @@ const MemoryPhotoViewer = ({ open, onOpenChange, url, title, hasTitle = false }:
         <img
           src={url}
           alt={hasTitle ? `Photo for memory: ${title}` : "Photo saved with this memory"}
-          className="max-h-[70vh] w-full rounded-[16px] border border-border/50 bg-parchment p-1.5 object-contain"
+          className="max-h-[70vh] w-full rounded-[18px] border bg-parchment p-2 object-contain"
+          style={{ borderColor: "hsl(var(--stage-firstyear-peach-soft))" }}
         />
       ) : (
         <p className="font-serif text-[15px] leading-[1.7] text-foreground/75">

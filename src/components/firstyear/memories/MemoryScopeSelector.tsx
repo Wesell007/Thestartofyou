@@ -1,5 +1,11 @@
 import type { BabyRecord } from "@/lib/firstYearJourney";
 import type { MemoryScope } from "@/lib/firstYearMemoriesSchema";
+import {
+  FY_CHIP_BASE,
+  FY_CHIP_IDLE,
+  FY_CHIP_SELECTED,
+  FY_SHEET_LEGEND,
+} from "@/components/firstyear/journey/firstYearStyles";
 
 export const babyDisplayName = (baby: BabyRecord, index: number): string =>
   baby.name?.trim() ? baby.name.trim() : `Baby ${baby.birth_order ?? index + 1}`;
@@ -46,20 +52,14 @@ const MemoryScopeSelector = ({ babies, value, onChange }: Props) => {
 
   return (
     <fieldset className="mb-5">
-      <legend className="font-sans text-[13px] font-medium text-foreground/80 mb-2">
-        Who is this moment about?
-      </legend>
+      <legend className={FY_SHEET_LEGEND}>Who is this moment about?</legend>
       <div role="radiogroup" aria-label="Who is this moment about?" className="flex flex-wrap gap-2">
         {options.map((option) => {
           const selected = option.value === value;
           return (
             <label
               key={option.value}
-              className={`flex min-h-11 cursor-pointer items-center rounded-pill border px-5 py-2 font-sans text-[13px] transition-colors focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2 focus-within:ring-offset-background ${
-                selected
-                  ? "border-sage bg-sage/12 text-foreground"
-                  : "border-border/60 bg-parchment text-foreground/70 hover:border-foreground/25"
-              }`}
+              className={`${FY_CHIP_BASE} ${selected ? FY_CHIP_SELECTED : FY_CHIP_IDLE}`}
             >
               <input
                 type="radio"

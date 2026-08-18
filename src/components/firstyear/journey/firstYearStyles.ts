@@ -81,3 +81,43 @@ export const FY_CHIP =
 /** Oversized serif display line, used once at the top of the page. */
 export const FY_DISPLAY =
   "font-serif text-[2.4rem] sm:text-[3.1rem] leading-[1.04] text-foreground";
+
+// ── Phase 26C Today surface ────────────────────────────────────────────────
+
+/** Small uppercase label above a card, a tile or a sheet section. */
+export const FY_EYEBROW =
+  "font-sans text-[11px] font-semibold tracking-[0.2em] uppercase text-[hsl(var(--stage-firstyear-text-soft))]";
+
+/** Tabular stopwatch face, used on the active cards only. */
+export const FY_STOPWATCH =
+  "font-sans text-[2.4rem] sm:text-[2.75rem] font-semibold leading-[1] tabular-nums tracking-[-0.01em] text-foreground";
+
+/** One tint per care type, shared by the quick add tiles and timeline dots. */
+export const FY_TYPE_TINT = {
+  feed: {
+    background: "hsl(var(--stage-firstyear-hero) / 0.6)",
+    border: "hsl(var(--stage-firstyear-peach-soft) / 0.9)",
+    dot: "hsl(var(--stage-firstyear-terracotta))",
+  },
+  sleep: {
+    background: "hsl(var(--stage-firstyear-soft) / 0.75)",
+    border: "hsl(var(--stage-firstyear-accent) / 0.28)",
+    dot: "hsl(var(--stage-firstyear-accent))",
+  },
+  nappy: {
+    background: "hsl(var(--sage-bg))",
+    border: "hsl(var(--sage) / 0.28)",
+    dot: "hsl(var(--sage))",
+  },
+  note: {
+    background: "hsl(var(--stage-firstyear-rose) / 0.7)",
+    border: "hsl(var(--stage-firstyear-legacy-accent) / 0.26)",
+    dot: "hsl(var(--stage-firstyear-legacy-accent))",
+  },
+  pump: {
+    background: "hsl(var(--stage-firstyear-lilac) / 0.7)",
+    border: "hsl(var(--lavender) / 0.4)",
+    dot: "hsl(var(--lavender))",
+  },
+} as const;
+

@@ -61,6 +61,7 @@ Before any code, a Nano Banana direction render of the refined Memories surface 
 
 - Signed-in Playwright pass at 390px and 1440px: text shelf, photo shelf, memory sheet, empty state, desktop.
 - Functional re-checks: create, edit, remove, add/replace/remove photo, signed URL render, viewer open/close, copy-forward prefill, multiples filter if data exists.
-- Overflow, console, focus rings, hex scan on touched files, copy guardrail scan (tracker, score, milestone, normal, ideal, prediction, risk, diagnosis, symptom checker, safe, unsafe, em dashes).
+- Overflow, console, focus rings, hex scan on touched files.
+- Copy guardrail scan (tracker, score, milestone, normal, ideal, prediction, risk, diagnosis, symptom checker, safe, unsafe, em dashes), reported in two separate groups: user-facing strings that render in the UI, and internal identifiers, types, comments and class names. Only user-facing matches block closure; internal matches are listed for the record.
 - `npx tsgo --noEmit -p tsconfig.json`, targeted Memories tests, `npx vitest run`, `npm run build`.
 - Report ends with whether Phase 26D can close. No follow-on phase work.

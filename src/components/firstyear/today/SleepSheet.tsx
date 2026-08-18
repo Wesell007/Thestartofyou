@@ -143,14 +143,13 @@ const SleepSheet = ({ context, onStartNow, liveAvailable }: Props) => {
       />
       <SheetActions saving={saving} editing={Boolean(editing)} onCancel={context.onClose} />
       {!editing && (
-        <button
-          type="button"
-          onClick={() => setManual(false)}
-          className={`${SHEET_LINK_CLASS} mt-3`}
-        >
-          Back
-        </button>
+        <div className="mt-3 flex justify-center">
+          <button type="button" onClick={() => setManual(false)} className={SHEET_LINK_CLASS}>
+            Back
+          </button>
+        </div>
       )}
+
     </form>
   );
 };

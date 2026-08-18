@@ -294,7 +294,7 @@ const LogSheet = ({
                 label: FEED_METHOD_LABELS[method],
               }))}
               value={feedMethod}
-              onChange={setFeedMethod}
+              onChange={(value: FeedMethod | null) => setFeedMethod(value)}
               allowClear
             />
           )}
@@ -305,7 +305,7 @@ const LogSheet = ({
               name="care-nappy-type"
               options={NAPPY_TYPES.map((type) => ({ value: type, label: NAPPY_LABELS[type] }))}
               value={nappyType}
-              onChange={setNappyType}
+              onChange={(value: NappyType | null) => setNappyType(value)}
             />
           )}
 
@@ -315,7 +315,7 @@ const LogSheet = ({
               name="care-sleep-kind"
               options={SLEEP_KINDS.map((kind) => ({ value: kind, label: SLEEP_KIND_LABELS[kind] }))}
               value={sleepKind}
-              onChange={setSleepKind}
+              onChange={(value: SleepKind | null) => setSleepKind(value)}
               allowClear
             />
           )}
@@ -364,7 +364,7 @@ const LogSheet = ({
                 name="care-side"
                 options={SIDES.map((value) => ({ value, label: SIDE_LABELS[value] }))}
                 value={side}
-                onChange={setSide}
+                onChange={(value: Side | null) => setSide(value)}
                 allowClear
               />
             </>

@@ -15,8 +15,11 @@ Heading stays "Today's rhythm".
 
 `src/components/firstyear/today/LogSheet.tsx` — the single shared `DialogDescription` becomes per-type.
 
-- Feed, Sleep, Nappy: "Only the time is needed. Everything else is optional, and this stays private to you."
+- Feed: "Choose breast or bottle, then add anything useful. The rest is optional and stays private to you."
+- Sleep: "Start a timer or add the times you remember. The rest is optional and stays private to you."
+- Nappy: "Choose what was in the nappy, then add anything useful. The rest is optional and stays private to you."
 - Moment: "Add a few words for something you want to remember from today."
+
 
 Implemented as a small description map keyed by event type, matching the existing `TITLES` / `EDIT_TITLES` pattern. No behaviour change.
 

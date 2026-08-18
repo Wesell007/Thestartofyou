@@ -14,24 +14,31 @@ import {
 /** Shared pieces used by each logging sheet, so every step looks the same. */
 
 export const CHIP_BASE =
-  "flex min-h-11 cursor-pointer items-center rounded-pill border px-4 py-2 font-sans text-[13px] transition-colors focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2 focus-within:ring-offset-background";
+  "flex min-h-11 cursor-pointer items-center rounded-pill border px-4.5 py-2.5 font-sans text-[13.5px] font-medium transition-colors focus-within:ring-2 focus-within:ring-sage focus-within:ring-offset-2 focus-within:ring-offset-background";
 
-export const CHIP_SELECTED = "border-sage bg-sage/12 text-foreground";
+export const CHIP_SELECTED = "border-sage bg-sage/15 text-foreground";
 export const CHIP_IDLE =
-  "border-border/60 bg-parchment text-foreground/70 hover:border-foreground/25";
+  "border-border/60 bg-parchment text-[hsl(var(--stage-firstyear-text))] hover:border-foreground/25";
+
+export const SHEET_LEGEND =
+  "font-sans text-[11px] font-semibold tracking-[0.18em] uppercase text-[hsl(var(--stage-firstyear-text-soft))] mb-2.5";
 
 export const SHEET_FIELD_CLASS = `min-h-11 rounded-[14px] border border-border/60 bg-background px-4 py-2 font-sans text-[14.5px] text-foreground ${FY_FIELD_FOCUS_RING}`;
 
-export const SHEET_LINK_CLASS = `${FY_FOCUS_RING} inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] text-foreground/65 underline underline-offset-4 hover:text-foreground`;
+export const SHEET_LINK_CLASS = `${FY_FOCUS_RING} inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] text-[hsl(var(--stage-firstyear-text))] underline underline-offset-4 hover:text-foreground`;
 
-export const SHEET_PRIMARY_CLASS = `${FY_CTA} disabled:opacity-60`;
+export const SHEET_PRIMARY_CLASS = `${FY_CTA} w-full disabled:opacity-60`;
 
 export const SHEET_PRIMARY_STYLE = {
   backgroundColor: "hsl(var(--stage-firstyear-accent))",
   color: "hsl(var(--background))",
 } as const;
 
-export const SHEET_SECONDARY_CLASS = `${FY_FOCUS_RING} inline-flex min-h-11 items-center rounded-pill border border-border/60 bg-parchment px-5 py-2 font-sans text-[13.5px] text-foreground/85 transition-colors hover:border-foreground/25 disabled:opacity-60`;
+export const SHEET_SECONDARY_CLASS = `${FY_FOCUS_RING} inline-flex min-h-11 w-full items-center justify-center rounded-pill border border-border/60 bg-parchment px-5 py-2.5 font-sans text-[14px] font-medium text-foreground transition-colors hover:border-foreground/25 disabled:opacity-60`;
+
+/** Large stacked choice panel used at the first step of a sheet. */
+export const SHEET_PANEL_CLASS = `${FY_FOCUS_RING} w-full rounded-[18px] border px-5 py-4 text-left transition-colors hover:border-foreground/25`;
+
 
 type ChipGroupProps<T extends string> = {
   legend: string;

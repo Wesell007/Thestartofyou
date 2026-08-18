@@ -475,7 +475,7 @@ const FirstYearMemories = () => {
   return (
     <div
       className="min-h-screen bg-parchment-grain page-vignette"
-      style={{ backgroundColor: "hsl(var(--stage-firstyear) / 0.35)" }}
+      style={{ backgroundColor: "hsl(var(--stage-firstyear) / 0.5)" }}
     >
       <SeoHead
         title="Memories | The Start of You"
@@ -494,7 +494,7 @@ const FirstYearMemories = () => {
           </Link>
         </div>
 
-        <header className="pb-7">
+        <header className="pb-8">
           <p
             className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-4"
             style={{ color: "hsl(var(--stage-firstyear-accent))" }}
@@ -505,8 +505,7 @@ const FirstYearMemories = () => {
             Memories
           </h1>
           <p className="font-sans text-[15px] leading-[1.75] text-[hsl(var(--stage-firstyear-text))] max-w-[54ch]">
-            A place to keep the little things you want to look back on. Keep as many or as few as
-            you like.
+            Keep the small things you want to look back on. As many or as few as you like.
           </p>
         </header>
 
@@ -514,7 +513,7 @@ const FirstYearMemories = () => {
           {status}
         </p>
 
-        <section className="pb-9" aria-label="Keep a memory">
+        <section className="pb-10" aria-label="Keep a memory">
           <MemoryHeroCard onOpen={openNewMemory} />
         </section>
 
@@ -549,7 +548,7 @@ const FirstYearMemories = () => {
           </section>
         )}
 
-        <section className="pb-9" aria-labelledby="kept-moments">
+        <section className="pb-10" aria-labelledby="kept-moments">
           <h2 id="kept-moments" className="sr-only">
             What you have kept
           </h2>

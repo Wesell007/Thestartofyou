@@ -147,7 +147,7 @@ const LogSheet = ({
             {editing ? EDIT_TITLES[eventType] : TITLES[eventType]}
           </DialogTitle>
           <DialogDescription className="font-sans text-[13px] leading-[1.6]">
-            Only the time is needed. Everything else is optional, and this stays private to you.
+            {DESCRIPTIONS[eventType]}
           </DialogDescription>
         </DialogHeader>
 

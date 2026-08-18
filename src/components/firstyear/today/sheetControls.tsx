@@ -57,9 +57,10 @@ export const ChipGroup = <T extends string>({
   onChange,
   allowClear,
 }: ChipGroupProps<T>) => (
-  <fieldset className="mb-4">
-    <legend className="font-sans text-[13px] font-medium text-foreground/80 mb-2">{legend}</legend>
+  <fieldset className="mb-5">
+    <legend className={SHEET_LEGEND}>{legend}</legend>
     <div role="radiogroup" aria-label={legend} className="flex flex-wrap gap-2">
+
       {options.map((option) => {
         const selected = option.value === value;
         return (

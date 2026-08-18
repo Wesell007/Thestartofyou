@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import {
+  babyAgeSentence,
   describeAge,
   describeBabies,
   monthPageLabel,
@@ -63,11 +64,7 @@ const FirstYearHeroPanel = ({ babies, companionName }: Props) => {
         </h1>
         {babies.length > 1 && (
           <p className="font-serif text-[16px] sm:text-[17px] leading-[1.7] text-foreground/85 max-w-[46ch]">
-            {babies
-              .map((baby) => describeAge(baby.date_of_birth))
-              .filter(Boolean)
-              .slice(0, 1)
-              .join("")}
+            {babyAgeSentence(babies)}
           </p>
         )}
         <p className="font-serif text-[17px] sm:text-[18px] leading-[1.66] text-foreground/85 max-w-[44ch]">

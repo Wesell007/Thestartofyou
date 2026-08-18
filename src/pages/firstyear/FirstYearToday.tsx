@@ -56,7 +56,11 @@ import {
   type QuickAddType,
 } from "@/lib/firstYearCareEventsSchema";
 import { parseDateOnly } from "@/lib/dateOnly";
-import { FY_FOCUS_RING } from "@/components/firstyear/journey/firstYearStyles";
+import {
+  FY_CARD_RADIUS,
+  FY_FOCUS_RING,
+  FY_SHADOW_SOFT,
+} from "@/components/firstyear/journey/firstYearStyles";
 
 /** Sensitive pregnancy states are never routed into a baby surface. */
 const SENSITIVE_PREGNANCY_STATUSES = new Set(["pregnancy_loss", "no_longer_pregnant", "paused"]);

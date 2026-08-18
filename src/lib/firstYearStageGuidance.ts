@@ -136,6 +136,7 @@ export const getStageGuidance = (
       };
 
   if (age.ageInMonths >= 12) {
+    const twelve = getMonthGuide("12-months")?.shortVersion;
     return {
       kicker: "For this stage",
       heading: "Past the first year",
@@ -152,6 +153,21 @@ export const getStageGuidance = (
           href: "/first-year/checkups-and-warning-signs",
         },
       ],
+      insights: [
+        {
+          title: "Where things are",
+          body: clean(twelve?.baby, INTRO_FALLBACK),
+        },
+        {
+          title: "For you around now",
+          body: clean(twelve?.you, YOU_FALLBACK),
+        },
+      ],
+      readMore: {
+        label: "Read the twelve month guide",
+        href: "/first-year/12-months",
+        monthSlug: "12-months",
+      },
       ...parent,
     };
   }
@@ -161,6 +177,9 @@ export const getStageGuidance = (
   // of 28 days reads the one month guide.
   const monthIndex = isNewborn ? 0 : Math.max(1, age.firstYearMonthIndex);
   const short = getMonthGuide(monthSlugFor(monthIndex))?.shortVersion;
+
+  const feeding = clean(short?.feeding, FEEDING_FALLBACK);
+  const sleep = clean(short?.sleep, SLEEP_FALLBACK);
 
   return {
     kicker: "For this stage",
@@ -174,15 +193,35 @@ export const getStageGuidance = (
       },
       {
         title: "Feeding right now",
-        detail: clean(short?.feeding, FEEDING_FALLBACK),
+        detail: feeding,
         href: "/first-year/feeding",
       },
       {
         title: "Sleep right now",
-        detail: clean(short?.sleep, SLEEP_FALLBACK),
+        detail: sleep,
         href: "/first-year/sleep",
       },
     ],
+    insights: [
+      {
+        title: "What may be changing",
+        body: clean(short?.baby, INTRO_FALLBACK),
+      },
+      {
+        title: "Feeding and sleep",
+        body: `${feeding} ${sleep}`,
+      },
+      {
+        title: "For you around now",
+        body: clean(short?.you, YOU_FALLBACK),
+      },
+    ],
+    readMore: {
+      label: monthLabelFor(monthIndex),
+      href: monthPagePath(monthIndex),
+      monthSlug: monthSlugFor(monthIndex),
+    },
     ...parent,
   };
+
 };

@@ -29,7 +29,7 @@ Quick add becomes four actions: Feed, Sleep, Nappy, Moment. Pump disappears from
 
 - widen the `nappy_type` check to allow `wee`, `poo`, `both`, `dry` alongside the existing `wet`, `dirty` (old rows keep working; the UI writes only the new values and reads the old ones as wee/poo).
 - relax `first_year_care_events_sleep_shape` so a feed may also carry `started_at` and `ended_at`, keeping the rule that other types carry neither.
-- add a partial unique index for one running breast feed per baby (`event_type = 'feed' AND started_at IS NOT NULL AND ended_at IS NULL`).
+- add a partial unique index for one running breast feed per baby: `event_type = 'feed' AND started_at IS NOT NULL AND ended_at IS NULL AND metadata->>'feed_mode' = 'breast'`.
 - `event_type` keeps `pump` in the check constraint: dormant, never surfaced.
 - extend the validation trigger: require `feed_mode` in metadata for feeds, require `bottle_type` when the mode is bottle, keep nappy type and moment note required, and validate the metadata keys it owns.
 

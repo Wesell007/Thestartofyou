@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
-import { FY_CTA, FY_FOCUS_RING, FY_KICKER } from "./firstYearStyles";
+import { FY_CTA, FY_KICKER } from "./firstYearStyles";
 
 
 type Props = {

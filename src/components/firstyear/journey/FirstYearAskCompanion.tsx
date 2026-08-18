@@ -170,7 +170,7 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
             >
               Ask {companion} about this stage
             </h2>
-            <p className="font-sans text-[14.5px] leading-[1.72] text-foreground/80 max-w-[46ch] mb-5">
+            <p className={`${FY_INTRO} max-w-[46ch] mb-5`}>
               Ask one question here and get a short answer. {companion} answers from
               general guidance only and does not read anything private you have saved.
             </p>
@@ -183,7 +183,7 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
                     key={chip}
                     type="button"
                     onClick={() => submit(chip)}
-                    className={`rounded-full bg-background/50 px-3.5 py-1.5 text-left font-sans text-[12.5px] leading-snug text-foreground/80 transition-colors hover:bg-background/80 ${FY_FOCUS_RING}`}
+                    className={`rounded-full bg-background/50 px-3.5 py-1.5 text-left font-sans text-[13px] font-medium leading-snug text-foreground transition-colors hover:bg-background/80 ${FY_FOCUS_RING}`}
                     style={{ border: "1px solid hsl(var(--sage) / 0.28)" }}
                   >
                     {chip}
@@ -208,7 +208,7 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
                 onChange={(e) => setQuestion(e.target.value)}
                 placeholder={`Ask ${companion} something`}
                 maxLength={300}
-                className={`flex-1 min-w-0 rounded-full bg-background/70 px-4 py-2.5 font-sans text-[14px] text-foreground placeholder:text-foreground/45 ${FY_FIELD_FOCUS_RING}`}
+                className={`flex-1 min-w-0 rounded-full bg-background/70 px-4 py-2.5 font-sans text-[14px] text-foreground placeholder:text-foreground/60 ${FY_FIELD_FOCUS_RING}`}
                 style={{ border: "1px solid hsl(var(--sage) / 0.3)" }}
               />
               <button
@@ -231,29 +231,29 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
 
             <div aria-live="polite" className="mt-5">
               {isLoading && !answer && (
-                <p className="font-sans text-[13.5px] text-foreground/60">
+                <p className={FY_HELPER}>
                   Finding a quiet answer…
                 </p>
               )}
 
               {error && (
-                <p className="font-sans text-[13.5px] text-foreground/75 leading-relaxed">
+                <p className={`${FY_HELPER} leading-relaxed`}>
                   {error} Your question is still here, so you can try again in a moment.
                 </p>
               )}
 
               {body && (
                 <div className="rounded-[18px] bg-background/65 px-4 py-4 sm:px-5">
-                  <div className="font-sans text-[14.5px] text-foreground/85 leading-[1.75] space-y-2">
+                  <div className="font-sans text-[14.5px] text-foreground leading-[1.75] space-y-2">
                     {renderAnswerLines(body)}
                   </div>
 
                   {sources && (
                     <details className="mt-3">
-                      <summary className="cursor-pointer font-sans text-[11px] tracking-[0.18em] uppercase text-foreground/50">
+                      <summary className="cursor-pointer font-sans text-[11px] tracking-[0.18em] uppercase text-[hsl(var(--stage-firstyear-text-soft))]">
                         Sources
                       </summary>
-                      <p className="mt-2 font-sans text-[12.5px] text-foreground/60 leading-relaxed whitespace-pre-line break-words">
+                      <p className="mt-2 font-sans text-[12.5px] text-[hsl(var(--stage-firstyear-text-soft))] leading-relaxed whitespace-pre-line break-words">
                         {sources}
                       </p>
                     </details>

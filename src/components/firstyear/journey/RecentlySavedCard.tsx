@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { parseDateOnly } from "@/lib/dateOnly";
 import { KIND_LABELS, localDateKey } from "@/lib/firstYearEntriesSchema";
 import type { FirstYearEntry } from "@/lib/firstYearEntries";
-import { FY_QUIET_LINK } from "./firstYearStyles";
+import { FY_QUIET_LINK, FY_ROW_BODY } from "./firstYearStyles";
 
 
 type Props = {
@@ -58,9 +58,9 @@ const RecentlySavedCard = ({ entries }: Props) => {
           {lines.map((entry) => (
             <li
               key={entry.id}
-              className="font-sans text-[13.5px] leading-[1.65] text-foreground/75"
+              className={FY_ROW_BODY}
             >
-              <span className="text-foreground/55">{KIND_LABELS[entry.kind]}: </span>
+              <span className="font-medium text-[hsl(var(--stage-firstyear-text-soft))]">{KIND_LABELS[entry.kind]}: </span>
               {truncate((entry.note ?? "").trim())}
             </li>
           ))}

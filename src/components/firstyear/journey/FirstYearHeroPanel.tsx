@@ -8,7 +8,7 @@ import {
   type BabyForCopy,
 } from "@/lib/firstYearCopy";
 import { getFirstYearAge } from "@/lib/firstYearDates";
-import { FY_DISPLAY, FY_FOCUS_RING, FY_QUIET_LINK } from "./firstYearStyles";
+import { FY_DISPLAY, FY_FOCUS_RING, FY_HELPER, FY_QUIET_LINK } from "./firstYearStyles";
 
 type Props = {
   babies: BabyForCopy[];
@@ -63,14 +63,14 @@ const FirstYearHeroPanel = ({ babies, companionName }: Props) => {
           )}
         </h1>
         {babies.length > 1 && (
-          <p className="font-serif text-[16px] sm:text-[17px] leading-[1.7] text-foreground/85 max-w-[46ch]">
+          <p className="font-serif text-[16px] sm:text-[17px] leading-[1.7] text-foreground max-w-[46ch]">
             {babyAgeSentence(babies)}
           </p>
         )}
-        <p className="font-serif text-[17px] sm:text-[18px] leading-[1.66] text-foreground/85 max-w-[44ch]">
+        <p className="font-serif text-[17px] sm:text-[18px] leading-[1.66] text-foreground max-w-[44ch]">
           You are in a new chapter too.
         </p>
-        <p className="mt-2.5 font-sans text-[13.5px] leading-[1.7] text-foreground/65 max-w-[46ch]">
+        <p className={`mt-2.5 ${FY_HELPER} max-w-[46ch]`}>
           {companionName} is here whenever you have a question.
         </p>
         <div className="mt-3 flex flex-wrap items-center gap-x-5">
@@ -81,7 +81,7 @@ const FirstYearHeroPanel = ({ babies, companionName }: Props) => {
           )}
           <Link
             to="/first-year"
-            className={`inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] text-foreground/60 underline underline-offset-4 decoration-border transition-colors hover:decoration-foreground/40 ${FY_FOCUS_RING}`}
+            className={`inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] font-medium text-[hsl(var(--stage-firstyear-text-soft))] underline underline-offset-4 decoration-[hsl(var(--stage-firstyear-text-soft)/0.5)] transition-colors hover:decoration-[hsl(var(--stage-firstyear-text))] ${FY_FOCUS_RING}`}
           >
             Browse the First Year guide
           </Link>

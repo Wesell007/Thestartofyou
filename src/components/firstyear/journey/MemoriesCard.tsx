@@ -5,6 +5,7 @@ import type { FirstYearMemory } from "@/lib/firstYearMemories";
 import {
   FY_CARD_RADIUS,
   FY_CTA_SOFT,
+  FY_INTRO,
   FY_KICKER,
   FY_SHADOW_SOFT,
 } from "./firstYearStyles";
@@ -66,7 +67,7 @@ const MemoriesCard = ({ memories }: Props) => {
         >
           Memories
         </h2>
-        <p className="font-sans text-[14.5px] leading-[1.72] text-foreground/80 max-w-[46ch]">
+        <p className={`${FY_INTRO} max-w-[46ch]`}>
           A place to keep the small things you want to remember, in your own words.
         </p>
 
@@ -93,7 +94,7 @@ const MemoriesCard = ({ memories }: Props) => {
                     {line.date}
                   </span>
                 )}
-                <span className="block font-serif text-[15.5px] leading-[1.55] text-foreground/90 break-words">
+                <span className="block font-serif text-[15.5px] leading-[1.55] text-foreground break-words">
                   {line.label}
                 </span>
               </li>
@@ -107,7 +108,7 @@ const MemoriesCard = ({ memories }: Props) => {
               border: "1px dashed hsl(var(--stage-firstyear-peach-accent) / 0.3)",
             }}
           >
-            <p className="font-serif text-[15px] leading-[1.6] text-foreground/70">
+            <p className="font-serif text-[15px] leading-[1.6] text-foreground/90">
               Your first kept moment will sit here.
             </p>
           </div>

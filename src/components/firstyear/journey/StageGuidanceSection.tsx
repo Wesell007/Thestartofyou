@@ -4,12 +4,15 @@ import { getStageGuidance } from "@/lib/firstYearStageGuidance";
 import { firstYearMonthImages } from "@/data/firstYearMonthData";
 import GuideThumb from "./GuideThumb";
 import {
+  FY_ARROW,
   FY_CARD_BODY,
   FY_CARD_TITLE,
   FY_FOCUS_RING,
   FY_HEADING,
   FY_INTRO,
   FY_KICKER,
+  FY_ROW_BODY,
+  FY_ROW_TITLE,
 } from "./firstYearStyles";
 
 type Props = {
@@ -107,10 +110,10 @@ const StageGuidanceSection = ({ dateOfBirth, babyCount, subject }: Props) => {
       >
         <GuideThumb src={monthImage} size="sm" icon={Baby} />
         <span className="min-w-0 flex-1">
-          <span className="block font-sans text-[14.5px] font-medium leading-snug text-foreground/90">
+          <span className={`block ${FY_ROW_TITLE}`}>
             {guidance.readMore.label}
           </span>
-          <span className="mt-0.5 block font-sans text-[13px] leading-[1.6] text-foreground/65">
+          <span className={`mt-0.5 block ${FY_ROW_BODY}`}>
             A longer read for when you want it.
           </span>
         </span>
@@ -118,7 +121,7 @@ const StageGuidanceSection = ({ dateOfBirth, babyCount, subject }: Props) => {
           aria-hidden="true"
           size={16}
           strokeWidth={1.7}
-          className="shrink-0 text-foreground/45 transition-transform group-hover:translate-x-0.5"
+          className={`shrink-0 ${FY_ARROW} transition-transform group-hover:translate-x-0.5`}
         />
       </Link>
     </section>

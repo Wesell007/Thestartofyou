@@ -454,7 +454,7 @@ const FirstYearToday = () => {
           </h1>
           <p className="font-sans text-[15px] leading-[1.75] text-[hsl(var(--stage-firstyear-text))] max-w-[54ch]">
             A private place to log how the day has gone for {describeBabies(loaded.babies)}. Log as
-            much or as little as you like. Nothing is scored, compared or turned into advice.
+            much or as little as you like. This is just here to help you remember the day.
           </p>
         </header>
 

@@ -70,7 +70,7 @@ The four baby note fields (rhythm, feeding, sleep, nappies) are retired from thi
 Security and validation:
 
 - Grants to `authenticated` and `service_role` only, no `anon`. RLS enabled with four `auth.uid() = user_id` policies.
-- Trigger `validate_first_year_care_event`: actor owns the row, lifecycle is `first_year`, baby belongs to the user, no future times, nothing before the baby's date of birth, nappy needs a type, note needs words, non-sleep rows cannot carry sleep times.
+- Trigger `validate_first_year_care_event`: actor owns the row, lifecycle is `first_year`, baby belongs to the user, no future times, nothing before the baby's date of birth, nappy needs a type, only Moment events require note text (feed, sleep, nappy and pump notes stay optional), non-sleep rows cannot carry sleep times.
 - Shape constraints keep fields to their event type, and `ended_at > started_at` when present.
 - Partial unique index `(baby_id) WHERE event_type = 'sleep' AND ended_at IS NULL` enforces one running sleep per baby.
 - Indexes on `(user_id, occurred_at desc)` and `(user_id, baby_id, occurred_at desc)`.

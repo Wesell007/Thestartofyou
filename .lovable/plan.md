@@ -25,7 +25,7 @@ Implemented as a small description map keyed by event type, matching the existin
 
 ## Fix 3: Copy guardrail check
 
-Search the changed copy for: score, scored, tracker, prediction, predicts, ideal, optimal, risk, diagnosis, symptom checker, safe, unsafe, normal, abnormal, em dashes. No medical, sleep or recommendation language introduced.
+Search the changed copy for: score, scored, tracker, prediction, predicts, ideal, optimal, risk, diagnosis, symptom checker, safe, unsafe, normal, abnormal, em dashes. No medical advice, sleep advice or recommendation language introduced.
 
 ## Fix 4: Screenshots
 

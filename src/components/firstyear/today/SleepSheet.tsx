@@ -84,10 +84,10 @@ const SleepSheet = ({ context, onStartNow, liveAvailable }: Props) => {
     return (
       <div>
         <BabyChips babies={babies} value={selectedBaby} onChange={onSelectBaby} />
-        <p className="font-sans text-[13.5px] leading-[1.65] text-foreground/75 mb-4">
+        <p className="font-sans text-[13.5px] leading-[1.65] text-[hsl(var(--stage-firstyear-text))] mb-4">
           Start the timer as they settle, or add a sleep that has already finished.
         </p>
-        <div className="flex flex-wrap items-center gap-3 mb-4">
+        <div className="flex flex-col gap-2.5 mb-4">
           <button
             type="button"
             disabled={starting || !liveAvailable}
@@ -97,21 +97,27 @@ const SleepSheet = ({ context, onStartNow, liveAvailable }: Props) => {
           >
             Start sleep now
           </button>
+          <p className="text-center font-sans text-[12.5px] leading-[1.55] text-[hsl(var(--stage-firstyear-text))]">
+            This times the sleep until you end it.
+          </p>
           <button type="button" onClick={() => setManual(true)} className={SHEET_SECONDARY_CLASS}>
             Add sleep manually
           </button>
         </div>
         {!liveAvailable && (
-          <p className="font-sans text-[13px] leading-[1.6] text-foreground/70 mb-4">
+          <p className="font-sans text-[13px] leading-[1.6] text-[hsl(var(--stage-firstyear-text))] mb-4">
             A sleep is already running for this baby. End it from the card on the page first.
           </p>
         )}
-        <button type="button" onClick={context.onClose} className={SHEET_LINK_CLASS}>
-          Cancel
-        </button>
+        <div className="flex justify-center">
+          <button type="button" onClick={context.onClose} className={SHEET_LINK_CLASS}>
+            Cancel
+          </button>
+        </div>
       </div>
     );
   }
+
 
   return (
     <form onSubmit={handleSubmit}>

@@ -89,8 +89,19 @@ const FEEDING_FALLBACK =
   "However you are feeding, here is what often happens around this age.";
 const SLEEP_FALLBACK = "Rest rhythms at this age, and why they move about.";
 
-const monthSlugFor = (monthIndex: number): string =>
-  monthIndex === 0 ? "newborn" : monthIndex === 1 ? "1-month" : `${monthIndex}-months`;
+const YOU_FALLBACK =
+  "Your own days matter here too, however this stage is going for you.";
+
+const monthSlugFor = (monthIndex: number): MonthSlug =>
+  (monthIndex === 0
+    ? "newborn"
+    : monthIndex === 1
+      ? "1-month"
+      : `${monthIndex}-months`) as MonthSlug;
+
+const monthLabelFor = (monthIndex: number): string =>
+  monthIndex === 0 ? "Read the newborn guide" : `Read the ${MONTH_WORDS[monthIndex]} month guide`;
+
 
 /**
  * Build the "For this stage" content for a date of birth.

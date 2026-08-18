@@ -402,7 +402,14 @@ const FirstYearToday = () => {
 
         {multiples && (
           <div className="pb-2">
-            <BabySelector babies={loaded.babies} value={target} onChange={setTarget} />
+            <BabySelector
+              babies={loaded.babies}
+              value={target}
+              onChange={setTarget}
+              legend="Whose day are you looking at?"
+              hint="Switch between them at any time. Everything you log stays with the baby you chose."
+            />
+
           </div>
         )}
 

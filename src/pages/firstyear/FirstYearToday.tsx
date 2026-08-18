@@ -443,9 +443,9 @@ const FirstYearToday = () => {
           onDelete={(event) => setPendingDelete(event)}
         />
 
-        <section className="pb-8" aria-labelledby="fy-day-note">
+        <section className="pb-8" aria-labelledby="fy-day-note-heading">
           <h2
-            id="fy-day-note"
+            id="fy-day-note-heading"
             className="font-serif text-[1.28rem] leading-[1.25] text-foreground mb-2"
           >
             A note for today

@@ -9,7 +9,7 @@ import {
   buildFirstYearCompanionContext,
 } from "@/lib/firstYearCompanionContext";
 import { navigateToAsk } from "@/lib/askNavigation";
-import { FY_FOCUS_RING, FY_FIELD_FOCUS_RING } from "./firstYearStyles";
+import { FY_FOCUS_RING, FY_FIELD_FOCUS_RING, FY_KICKER } from "./firstYearStyles";
 
 type Props = {
   /** First baby's date of birth, used only for a coarse age band. */

@@ -187,8 +187,9 @@ const MyFirstYear = () => {
   return (
     <div
       className="min-h-screen bg-parchment-grain page-vignette"
-      style={{ backgroundColor: "hsl(var(--stage-firstyear) / 0.35)" }}
+      style={{ backgroundColor: "hsl(var(--stage-firstyear-cream))" }}
     >
+
       <SeoHead
         title="Your First Year journey | The Start of You"
         description="Your saved First Year journey: support for your baby, and support for you."

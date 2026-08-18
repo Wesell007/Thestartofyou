@@ -155,3 +155,48 @@ export const FY_CHIP_SELECTED = "border-sage bg-sage/15 text-foreground";
 
 export const FY_CHIP_IDLE =
   "border-border/60 bg-parchment text-[hsl(var(--stage-firstyear-text))] hover:border-foreground/25";
+
+// ── Phase 26D keepsake surface ─────────────────────────────────────────────
+// Shared paper language for the Memories shelf: one card surface, one polaroid
+// treatment, one month rule. Presentation only.
+
+/** The warm paper surface used by every keepsake card. */
+export const FY_PAPER_CARD_STYLE = {
+  backgroundColor: "hsl(var(--stage-firstyear-cream))",
+  borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.75)",
+  boxShadow:
+    "0 1px 0 hsl(var(--background) / 0.7) inset, 0 26px 54px -38px hsl(var(--stage-firstyear-ink) / 0.45)",
+} as const;
+
+/** The stronger peach invitation surface, used once at the top of the shelf. */
+export const FY_PEACH_INVITE_STYLE = {
+  backgroundImage:
+    "linear-gradient(155deg, hsl(var(--stage-firstyear-hero)) 0%, hsl(var(--stage-firstyear-peach-soft)) 58%, hsl(var(--stage-firstyear-hero)) 100%)",
+  borderColor: "hsl(var(--stage-firstyear-peach-soft))",
+  boxShadow:
+    "0 1px 0 hsl(var(--background) / 0.55) inset, 0 30px 60px -34px hsl(var(--stage-firstyear-ink) / 0.5)",
+} as const;
+
+/** Uppercase month heading above a group of kept moments. */
+export const FY_MONTH_HEADING =
+  "font-sans text-[11.5px] font-semibold tracking-[0.24em] uppercase text-[hsl(var(--stage-firstyear-terracotta))]";
+
+/** The paper mat around a kept photo. Tilt is applied by the caller. */
+export const FY_POLAROID_STYLE = {
+  backgroundColor: "hsl(var(--background))",
+  borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.8)",
+  boxShadow:
+    "0 18px 40px -26px hsl(var(--stage-firstyear-ink) / 0.5), 6px 6px 0 -2px hsl(var(--stage-firstyear-cream)), 6px 6px 0 -1px hsl(var(--stage-firstyear-peach-soft) / 0.6)",
+} as const;
+
+/** Warm date chip on a keepsake card. */
+export const FY_DATE_CHIP_STYLE = {
+  backgroundColor: "hsl(var(--stage-firstyear-hero) / 0.85)",
+  color: "hsl(var(--stage-firstyear-terracotta))",
+} as const;
+
+/** Softer sheet field surface, so writing feels like a card not a form. */
+export const FY_SHEET_FIELD_STYLE = {
+  backgroundColor: "hsl(var(--stage-firstyear-cream) / 0.6)",
+  borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.8)",
+} as const;

@@ -7,9 +7,11 @@ import { babyDisplayName } from "./MemoryScopeSelector";
 import {
   FY_CARD_RADIUS,
   FY_CHIP,
-  FY_EYEBROW,
+  FY_DATE_CHIP_STYLE,
   FY_FOCUS_RING,
-  FY_SHADOW_SOFT,
+  FY_MONTH_HEADING,
+  FY_PAPER_CARD_STYLE,
+  FY_POLAROID_STYLE,
 } from "@/components/firstyear/journey/firstYearStyles";
 
 const QUIET_ACTION_CLASS = `${FY_FOCUS_RING} inline-flex min-h-11 items-center rounded-sm font-sans text-[13px] text-[hsl(var(--stage-firstyear-text-soft))] underline underline-offset-4 transition-colors hover:text-foreground`;
@@ -49,18 +51,18 @@ const MemoryList = ({ memories, babies, onEdit, onRemove, photoUrls, onOpenPhoto
   const multiples = babies.length > 1;
 
   return (
-    <div className="space-y-9">
+    <div className="space-y-11">
       {months.map((month) => (
         <div key={month.key}>
-          <div className="mb-4 flex items-center gap-3">
-            <h3 className={FY_EYEBROW}>{month.label}</h3>
+          <div className="mb-5 flex items-center gap-4">
+            <h3 className={FY_MONTH_HEADING}>{month.label}</h3>
             <span
               aria-hidden="true"
               className="h-px flex-1"
-              style={{ backgroundColor: "hsl(var(--stage-firstyear-peach-soft) / 0.8)" }}
+              style={{ backgroundColor: "hsl(var(--stage-firstyear-peach-soft) / 0.7)" }}
             />
           </div>
-          <ul className="space-y-4">
+          <ul className="space-y-5">
             {month.items.map((memory, index) => {
               const parsed = parseDateOnly(memory.memory_date);
               const photoUrl = memory.photo_path ? photoUrls?.[memory.photo_path] : undefined;
@@ -68,20 +70,13 @@ const MemoryList = ({ memories, babies, onEdit, onRemove, photoUrls, onOpenPhoto
               return (
                 <li
                   key={memory.id}
-                  className={`${FY_CARD_RADIUS} border px-5 py-5 sm:px-6 sm:py-6`}
-                  style={{
-                    backgroundColor: "hsl(var(--stage-firstyear-cream))",
-                    borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.9)",
-                    boxShadow: FY_SHADOW_SOFT,
-                  }}
+                  className={`${FY_CARD_RADIUS} border px-5 py-6 sm:px-7 sm:py-7`}
+                  style={FY_PAPER_CARD_STYLE}
                 >
                   <div className="mb-3 flex flex-wrap items-center gap-2">
                     <span
                       className={FY_CHIP}
-                      style={{
-                        backgroundColor: "hsl(var(--stage-firstyear-hero) / 0.7)",
-                        color: "hsl(var(--stage-firstyear-peach-accent))",
-                      }}
+                      style={FY_DATE_CHIP_STYLE}
                     >
                       {parsed ? format(parsed, "EEEE d MMMM") : memory.memory_date}
                     </span>
@@ -102,11 +97,8 @@ const MemoryList = ({ memories, babies, onEdit, onRemove, photoUrls, onOpenPhoto
                     <button
                       type="button"
                       onClick={() => onOpenPhoto(memory)}
-                      className={`${FY_FOCUS_RING} mb-4 block rounded-[18px] border bg-parchment p-2 pb-4 transition-transform duration-200 hover:rotate-0 ${tilt}`}
-                      style={{
-                        borderColor: "hsl(var(--stage-firstyear-peach-soft))",
-                        boxShadow: FY_SHADOW_SOFT,
-                      }}
+                      className={`${FY_FOCUS_RING} mb-5 block rounded-[16px] border p-2.5 pb-5 transition-transform duration-200 hover:rotate-0 focus-visible:rotate-0 ${tilt}`}
+                      style={FY_POLAROID_STYLE}
                     >
                       {photoUrl ? (
                         <img
@@ -124,7 +116,7 @@ const MemoryList = ({ memories, babies, onEdit, onRemove, photoUrls, onOpenPhoto
                           Opening photo…
                         </span>
                       )}
-                      <span className="mt-2 block max-w-[168px] truncate text-center font-sans text-[11.5px] text-[hsl(var(--stage-firstyear-text-soft))] sm:max-w-[196px]">
+                      <span className="mt-3 block max-w-[168px] truncate text-center font-serif text-[12.5px] italic text-[hsl(var(--stage-firstyear-text-soft))] sm:max-w-[196px]">
                         {memory.title?.trim() || (parsed ? format(parsed, "d MMM") : "")}
                       </span>
                     </button>
@@ -140,7 +132,7 @@ const MemoryList = ({ memories, babies, onEdit, onRemove, photoUrls, onOpenPhoto
                   </p>
 
                   <div
-                    className="mt-4 flex flex-wrap items-center gap-5 border-t pt-3"
+                    className="mt-5 flex flex-wrap items-center gap-5 border-t pt-4"
                     style={{ borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.7)" }}
                   >
                     <button

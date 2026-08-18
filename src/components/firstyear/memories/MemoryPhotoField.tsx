@@ -1,4 +1,5 @@
 import { useId, useRef } from "react";
+import { Camera } from "lucide-react";
 import { MEMORY_PHOTO_ACCEPT_ATTR } from "@/lib/firstYearMemoryPhoto";
 import {
   FY_FOCUS_RING,
@@ -41,14 +42,17 @@ const MemoryPhotoField = ({
       {hasPhoto ? (
         <div className="flex items-center gap-4">
           <div
-            className="h-20 w-20 shrink-0 overflow-hidden rounded-[14px] border bg-parchment p-1"
-            style={{ borderColor: "hsl(var(--stage-firstyear-peach-soft))" }}
+            className="h-24 w-24 shrink-0 overflow-hidden rounded-[14px] border p-1.5"
+            style={{
+              backgroundColor: "hsl(var(--background))",
+              borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.8)",
+            }}
           >
             {previewUrl ? (
               <img
                 src={previewUrl}
                 alt="The photo kept with this memory"
-                className="h-full w-full rounded-[10px] object-cover"
+                className="h-full w-full rounded-[9px] object-cover"
                 loading="lazy"
               />
             ) : (
@@ -62,7 +66,7 @@ const MemoryPhotoField = ({
               disabled={busy || disabled}
               className={`${FY_SHEET_LINK} disabled:opacity-60`}
             >
-              Change photo
+              Replace photo
             </button>
             <button
               type="button"
@@ -80,9 +84,19 @@ const MemoryPhotoField = ({
           onClick={() => inputRef.current?.click()}
           disabled={busy || disabled}
           aria-describedby={describedBy}
-          className={`${FY_FOCUS_RING} inline-flex min-h-11 items-center rounded-pill border border-border/60 bg-parchment px-5 py-2 font-sans text-[13.5px] font-medium text-[hsl(var(--stage-firstyear-text))] transition-colors hover:border-foreground/25 disabled:opacity-60`}
+          className={`${FY_FOCUS_RING} flex h-[104px] w-[104px] flex-col items-center justify-center gap-1.5 rounded-[16px] border font-sans text-[13px] font-medium text-[hsl(var(--stage-firstyear-text))] transition-colors hover:border-foreground/20 disabled:opacity-60`}
+          style={{
+            backgroundColor: "hsl(var(--background))",
+            borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.9)",
+          }}
         >
-          {busy ? "Adding…" : "Add a photo"}
+          <Camera
+            aria-hidden="true"
+            className="h-5 w-5"
+            style={{ color: "hsl(var(--stage-firstyear-terracotta))" }}
+            strokeWidth={1.5}
+          />
+          {busy ? "Adding…" : "Add photo"}
         </button>
       )}
 
@@ -90,7 +104,7 @@ const MemoryPhotoField = ({
         id={describedBy}
         className="mt-1.5 font-sans text-[12.5px] leading-[1.6] text-[hsl(var(--stage-firstyear-text-soft))]"
       >
-        Private to you. One photo, if you want one.
+        One photo, if you want one.
       </p>
 
       <input

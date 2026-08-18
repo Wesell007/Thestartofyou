@@ -8,6 +8,7 @@ import {
 } from "@/lib/firstYearMemoriesSchema";
 import {
   FY_SHEET_FIELD,
+  FY_SHEET_FIELD_STYLE,
   FY_SHEET_LEGEND,
   FY_SHEET_LINK,
   FY_SHEET_PRIMARY,
@@ -91,7 +92,7 @@ const MemoryForm = ({
         <textarea
           id="memory-note"
           ref={noteRef}
-          rows={4}
+          rows={5}
           value={values.note}
           disabled={saving}
           required
@@ -100,6 +101,7 @@ const MemoryForm = ({
           placeholder="She fell asleep on my shoulder halfway through a song…"
           onChange={(event) => set({ note: event.target.value })}
           className={FY_SHEET_TEXTAREA}
+          style={FY_SHEET_FIELD_STYLE}
         />
         <p
           id="memory-note-hint"
@@ -127,6 +129,7 @@ const MemoryForm = ({
           placeholder="First proper giggle"
           onChange={(event) => set({ title: event.target.value })}
           className={`${FY_SHEET_FIELD} w-full`}
+          style={FY_SHEET_FIELD_STYLE}
         />
       </div>
 
@@ -143,12 +146,13 @@ const MemoryForm = ({
           min={minDate ?? undefined}
           onChange={(event) => set({ memoryDate: event.target.value })}
           className={`${FY_SHEET_FIELD} max-w-[220px]`}
+          style={FY_SHEET_FIELD_STYLE}
         />
       </div>
 
       {photo && <MemoryPhotoField {...photo} disabled={saving || photo.disabled} />}
 
-      <div className="flex flex-col items-center gap-1 pt-1">
+      <div className="flex flex-col items-center gap-2 pt-2">
         <button
           type="submit"
           disabled={saving}

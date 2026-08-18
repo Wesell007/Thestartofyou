@@ -29,7 +29,7 @@ Quick add becomes four actions: Feed, Sleep, Nappy, Moment. Pump disappears from
 
 - widen the `nappy_type` check to allow `wee`, `poo`, `both`, `dry` alongside the existing `wet`, `dirty` (old rows keep working; the UI writes only the new values and reads the old ones as wee/poo).
 - relax `first_year_care_events_sleep_shape` so a feed may also carry `started_at` and `ended_at`, keeping the rule that other types carry neither.
-- add a partial unique index for one running breast feed per baby (`event_type = 'feed' AND started_at IS NOT NULL AND ended_at IS NULL`).
+- add a partial unique index for one running breast feed per baby: `event_type = 'feed' AND started_at IS NOT NULL AND ended_at IS NULL AND metadata->>'feed_mode' = 'breast'`.
 - `event_type` keeps `pump` in the check constraint: dormant, never surfaced.
 - extend the validation trigger: require `feed_mode` in metadata for feeds, require `bottle_type` when the mode is bottle, keep nappy type and moment note required, and validate the metadata keys it owns.
 
@@ -57,4 +57,13 @@ Quick add becomes four actions: Feed, Sleep, Nappy, Moment. Pump disappears from
 
 ## Timer metadata correction (approved refinement)
 
-The breast timer metadata keys are `feed_mode`, `active_side`, `active_side_started_at`, `left_duration_seconds`, `right_duration_seconds`, `total_duration_seconds`, and `bottle_type` when the mode is bottle. A feed carries `started_at` and `ended_at` only when `feed_mode = breast`; bottle feeds carry neither, and `occurred_at` on a running breast feed anchors to the feed start. The running-feed unique index applies only to running breast feeds (`event_type = 'feed' AND ended_at IS NULL AND metadata->>'feed_mode' = 'breast'`). Switch side banks the elapsed time to the previous side, pause banks it and clears the active side, resume sets the side and `active_side_started_at`, and End feed banks any active time before writing `ended_at` and the total.
+The breast timer metadata keys are `feed_mode`, `active_side`, `active_side_started_at`, `left_duration_seconds`, `right_duration_seconds`, `total_duration_seconds`, and `bottle_type` when the mode is bottle. A feed carries `started_at` and `ended_at` only when `feed_mode = breast`; bottle feeds carry neither, and `occurred_at` on a running breast feed anchors to the feed start. The running-feed unique index predicate is exactly:
+
+```text
+event_type = 'feed'
+AND started_at IS NOT NULL
+AND ended_at IS NULL
+AND metadata->>'feed_mode' = 'breast'
+```
+
+Switch side banks the elapsed time to the previous side, pause banks it and clears the active side, resume sets the side and `active_side_started_at`, and End feed banks any active time before writing `ended_at` and the total.

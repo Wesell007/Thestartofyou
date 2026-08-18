@@ -1,5 +1,5 @@
 import type { AmountUnit, DaySummary } from "@/lib/firstYearCareEventsSchema";
-import { formatAmount, formatDuration } from "@/lib/firstYearCareEventsSchema";
+import { NAPPY_LABELS, formatAmount, formatDuration } from "@/lib/firstYearCareEventsSchema";
 import { FY_INNER_RADIUS } from "@/components/firstyear/journey/firstYearStyles";
 
 type Props = {
@@ -10,21 +10,50 @@ type Props = {
 
 /**
  * Counts and totals of what has been logged today. Factual only: nothing here
- * suggests, predicts or compares.
+ * suggests, predicts or compares. A timer still running is shown as running,
+ * never folded into a total.
  */
 const TodaySoFar = ({ summary, unit, scopeLabel }: Props) => {
   const amount = formatAmount(summary.feedMl, unit);
+  const feedDetail = [
+    summary.feedMinutes > 0 ? `${formatDuration(summary.feedMinutes)} feeding` : null,
+    amount ? `${amount} logged` : null,
+    summary.runningFeed ? "Currently feeding" : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
+  const sleepDetail = [
+    summary.sleeps > 0 ? `${summary.sleeps} logged` : null,
+    summary.runningSleep ? "Currently sleeping" : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
+  const nappyDetail = (["wee", "poo", "both", "dry"] as const)
+    .filter((type) => summary.nappyBreakdown[type] > 0)
+    .map((type) => `${summary.nappyBreakdown[type]} ${NAPPY_LABELS[type].toLowerCase()}`)
+    .join(" · ");
+
   const tiles = [
-    { label: "Feeds", value: String(summary.feeds), detail: amount ? `${amount} logged` : null },
+    {
+      label: "Feeds",
+      value: String(summary.feeds),
+      detail: feedDetail.length > 0 ? feedDetail : null,
+    },
     {
       label: "Sleep",
       value: summary.sleepMinutes > 0 ? formatDuration(summary.sleepMinutes) : "—",
-      detail: summary.sleeps > 0 ? `${summary.sleeps} logged` : null,
+      detail: sleepDetail.length > 0 ? sleepDetail : null,
     },
-    { label: "Nappies", value: String(summary.nappies), detail: null },
     {
-      label: "Pumping",
-      value: summary.pumps > 0 ? String(summary.pumps) : "—",
+      label: "Nappies",
+      value: String(summary.nappies),
+      detail: nappyDetail.length > 0 ? nappyDetail : null,
+    },
+    {
+      label: "Moments",
+      value: summary.moments > 0 ? String(summary.moments) : "—",
       detail: null,
     },
   ];
@@ -59,18 +88,13 @@ const TodaySoFar = ({ summary, unit, scopeLabel }: Props) => {
               {tile.value}
             </p>
             {tile.detail && (
-              <p className="font-sans text-[12px] leading-[1.5] text-[hsl(var(--stage-firstyear-text))] mt-0.5">
+              <p className="font-sans text-[12px] leading-[1.5] text-[hsl(var(--stage-firstyear-text))] mt-0.5 break-words">
                 {tile.detail}
               </p>
             )}
           </div>
         ))}
       </div>
-      {summary.moments > 0 && (
-        <p className="font-sans text-[13px] leading-[1.6] text-[hsl(var(--stage-firstyear-text))] mt-3">
-          {summary.moments === 1 ? "1 moment noted" : `${summary.moments} moments noted`}
-        </p>
-      )}
     </section>
   );
 };

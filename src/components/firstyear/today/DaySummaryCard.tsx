@@ -95,7 +95,7 @@ const DaySummaryCard = ({ events, day, babyLabels, dateOfBirth, babyCount }: Pro
     ask(query, context);
   };
 
-  const body = splitSources(answer);
+  const body = stripContactWording(splitSources(answer));
 
   return (
     <section className="pb-8" aria-labelledby="fy-day-summary-heading">

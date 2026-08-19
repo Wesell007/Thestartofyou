@@ -513,6 +513,14 @@ const FirstYearToday = () => {
           />
         )}
 
+        <DaySummaryCard
+          events={scopedEvents}
+          day={today}
+          babyLabels={babyLabels}
+          dateOfBirth={loaded.babies[0]?.date_of_birth ?? null}
+          babyCount={loaded.babies.length}
+        />
+
         <RhythmTimeline
           events={scopedEvents}
           babyName={babyName}

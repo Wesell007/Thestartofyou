@@ -114,7 +114,7 @@ const ReminderSheet = ({
         </DialogHeader>
 
         <form onSubmit={handleSubmit}>
-          <ChipGroup
+          <ChipGroup<ReminderType>
             legend="What is this for?"
             name="fy-reminder-type"
             options={REMINDER_TYPES.map((value) => ({
@@ -126,7 +126,7 @@ const ReminderSheet = ({
           />
 
           {multiples && (
-            <ChipGroup
+            <ChipGroup<string>
               legend="Who is this for?"
               name="fy-reminder-baby"
               options={[

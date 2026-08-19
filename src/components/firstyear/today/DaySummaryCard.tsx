@@ -43,19 +43,20 @@ const splitSources = (raw: string) => {
  */
 const CONTACT_WORDING = /\b(nhs 111|999|a&e|emergency services|call your (midwife|gp)|speak to your (midwife|gp|health visitor)|contact your (midwife|gp|health visitor|maternity))/i;
 
-const stripContactWording = (body: string) =>
-  body
-    .split(/\n{2,}/)
-    .map((block) =>
-      block
-        .split("\n")
-        .filter((line) => !CONTACT_WORDING.test(line))
-        .join("\n")
-        .trim(),
-    )
-    .filter(Boolean)
-    .join("\n\n")
-    .trim();
+const HEADINGS = /^(#+\s*)?(\*\*)?(today at a glance|what was logged|little things to remember)(\*\*)?:?$/i;
+
+const stripContactWording = (body: string) => {
+  const lines = body
+    .split("\n")
+    .filter((line) => !CONTACT_WORDING.test(line))
+    .map((line) => line.trimEnd());
+  // A heading left with nothing beneath it reads as a gap, so drop it.
+  const kept = lines.filter((line, i) => {
+    if (!HEADINGS.test(line.trim())) return true;
+    return lines.slice(i + 1).some((next) => next.trim() && !HEADINGS.test(next.trim()));
+  });
+  return kept.join("\n").trim();
+};
 
 const renderLines = (body: string) =>
   body

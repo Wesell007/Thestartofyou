@@ -308,9 +308,9 @@ const App = () => (
           <Route path="/my-week" element={<ProtectedRoute><MyWeek /></ProtectedRoute>} />
           <Route path="/my-week/:week" element={<ProtectedRoute><KeptChapter /></ProtectedRoute>} />
           <Route path="/my-journey" element={<ProtectedRoute><MyJourney /></ProtectedRoute>} />
-          <Route path="/my-first-year" element={<ProtectedRoute><MyFirstYear /></ProtectedRoute>} />
-          <Route path="/my-first-year/today" element={<ProtectedRoute><FirstYearToday /></ProtectedRoute>} />
-          <Route path="/my-first-year/memories" element={<ProtectedRoute><FirstYearMemories /></ProtectedRoute>} />
+          <Route path="/my-first-year" element={<ProtectedRoute><FirstYearAppShell><MyFirstYear /></FirstYearAppShell></ProtectedRoute>} />
+          <Route path="/my-first-year/today" element={<ProtectedRoute><FirstYearAppShell><FirstYearToday /></FirstYearAppShell></ProtectedRoute>} />
+          <Route path="/my-first-year/memories" element={<ProtectedRoute><FirstYearAppShell><FirstYearMemories /></FirstYearAppShell></ProtectedRoute>} />
           <Route path="/my-pregnancy-chapter" element={<ProtectedRoute><MyPregnancyChapter /></ProtectedRoute>} />
           <Route path="/journey-support" element={<ProtectedRoute><JourneySupport /></ProtectedRoute>} />
           <Route path="/my-ttc-journey" element={<ProtectedRoute><MyTTCJourney /></ProtectedRoute>} />

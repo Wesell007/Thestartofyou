@@ -63,6 +63,8 @@ export const resolveHeaderLinks = (
   if (lifecycle === "first_year") {
     const links: NavLink[] = [
       { id: "my_first_year", label: "First Year", href: "/my-first-year" },
+      { id: "first_year_today", label: "Today", href: "/my-first-year/today" },
+      { id: "first_year_memories", label: "Memories", href: "/my-first-year/memories" },
     ];
     if (hasKeptChapter) {
       links.push({

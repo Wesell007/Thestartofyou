@@ -535,6 +535,50 @@ export type Database = {
           },
         ]
       }
+      first_year_reminders: {
+        Row: {
+          baby_id: string | null
+          created_at: string
+          due_at: string
+          id: string
+          label: string | null
+          reminder_type: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          baby_id?: string | null
+          created_at?: string
+          due_at: string
+          id?: string
+          label?: string | null
+          reminder_type: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          baby_id?: string | null
+          created_at?: string
+          due_at?: string
+          id?: string
+          label?: string | null
+          reminder_type?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "first_year_reminders_baby_id_fkey"
+            columns: ["baby_id"]
+            isOneToOne: false
+            referencedRelation: "babies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       hospital_bag_items: {
         Row: {
           category: string

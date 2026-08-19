@@ -77,3 +77,4 @@ Browser checks at 390px and 1440px covering create, edit, mark done, remove, gro
 - Client queries filter by the signed-in `user_id` as well as relying on row level security.
 - Supabase generated types are extended only for the reminder table surface.
 - The refresh interval only updates visible due labels while the page is open and clears on unmount. No background scheduling, notifications, service worker or permission prompts.
+- Baby ownership rule: `baby_id` stays nullable. The validation trigger only checks ownership when `baby_id` is present, confirming the baby belongs to the same user on insert and update. A null `baby_id` is a valid user-level reminder, still protected by the `auth.uid() = user_id` row level security policies. Single-baby accounts are not forced to set a baby.

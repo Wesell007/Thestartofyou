@@ -22,13 +22,25 @@ describe("navLifecycle", () => {
   it("shows the pregnancy chapter link for First Year users who kept one", () => {
     expect(resolveHomeHref("first_year")).toBe("/my-first-year");
     const links = resolveHeaderLinks("first_year", true);
-    expect(links.map((l) => l.href)).toEqual(["/my-first-year", "/my-pregnancy-chapter"]);
-    expect(links.map((l) => l.label)).toEqual(["First Year", "Pregnancy chapter"]);
+    expect(links.map((l) => l.href)).toEqual([
+      "/my-first-year",
+      "/my-first-year/today",
+      "/my-first-year/memories",
+      "/my-pregnancy-chapter",
+    ]);
+    expect(links.map((l) => l.label)).toEqual([
+      "First Year",
+      "Today",
+      "Memories",
+      "Pregnancy chapter",
+    ]);
   });
 
   it("omits the pregnancy chapter link when nothing was kept", () => {
     expect(resolveHeaderLinks("first_year", false)).toEqual([
       { id: "my_first_year", label: "First Year", href: "/my-first-year" },
+      { id: "first_year_today", label: "Today", href: "/my-first-year/today" },
+      { id: "first_year_memories", label: "Memories", href: "/my-first-year/memories" },
     ]);
   });
 

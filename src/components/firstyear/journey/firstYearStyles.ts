@@ -206,3 +206,24 @@ export const FY_SHEET_FIELD_STYLE = {
   backgroundColor: "hsl(var(--stage-firstyear-cream) / 0.6)",
   borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.8)",
 } as const;
+
+// ── Phase 26F app shell navigation ─────────────────────────────────────────
+// One warm bar across the signed-in First Year spaces. It stays below sheets,
+// the photo viewer and toasts, which all sit at z-50.
+
+/** The fixed mobile bar surface. Hidden from md upwards. */
+export const FY_NAV_SURFACE =
+  "md:hidden fixed inset-x-0 bottom-0 z-40 border-t rounded-t-[22px] pt-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))] backdrop-blur-sm";
+
+export const FY_NAV_SURFACE_STYLE = {
+  backgroundColor: "hsl(var(--stage-firstyear-cream) / 0.97)",
+  borderColor: "hsl(var(--stage-firstyear-peach-soft) / 0.75)",
+  boxShadow: "0 -14px 34px -26px hsl(var(--stage-firstyear-ink) / 0.5)",
+} as const;
+
+/** A single tap target inside the bar. */
+export const FY_NAV_ITEM =
+  "flex min-h-11 w-full flex-col items-center justify-center gap-1 rounded-[14px] px-2 py-1.5 font-sans text-[11.5px] leading-none transition-colors";
+
+/** Bottom clearance so nothing sits under the fixed bar on mobile. */
+export const FY_NAV_CLEARANCE = "pb-24 md:pb-0";

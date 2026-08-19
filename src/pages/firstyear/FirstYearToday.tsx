@@ -240,6 +240,80 @@ const FirstYearToday = () => {
     [today],
   );
 
+  // ── Parent-set reminders ─────────────────────────────────────────────────
+  // Everything below is chosen by the parent. Nothing is suggested, predicted
+  // or scheduled outside the page.
+
+  const reminderError = useCallback(
+    (message: string) => {
+      toast({ title: message, variant: "destructive" });
+    },
+    [toast],
+  );
+
+  const refreshReminders = useCallback(async (userId: string) => {
+    setReminders(await getReminders(userId));
+  }, []);
+
+  const handleReminderSubmit = useCallback(
+    async (payload: ReminderPayload) => {
+      if (!loaded || savingReminder) return;
+      setSavingReminder(true);
+      try {
+        if (editingReminder) {
+          await updateReminder(loaded.userId, editingReminder.id, payload);
+          setStatus("Reminder updated");
+        } else {
+          await createReminder(loaded.userId, payload);
+          setStatus("Reminder saved");
+        }
+        await refreshReminders(loaded.userId);
+        setReminderSheetOpen(false);
+        setEditingReminder(null);
+      } catch {
+        reminderError("We couldn't save that reminder just now.");
+      } finally {
+        setSavingReminder(false);
+      }
+    },
+    [loaded, savingReminder, editingReminder, refreshReminders, reminderError],
+  );
+
+  const handleReminderToggle = useCallback(
+    async (reminder: Reminder) => {
+      if (!loaded || reminderBusyId) return;
+      setReminderBusyId(reminder.id);
+      try {
+        const next = reminder.status === "done" ? "active" : "done";
+        await setReminderStatus(loaded.userId, reminder.id, next);
+        await refreshReminders(loaded.userId);
+        setStatus(next === "done" ? "Reminder marked done" : "Reminder set as active");
+      } catch {
+        reminderError("We couldn't update that reminder just now.");
+      } finally {
+        setReminderBusyId(null);
+      }
+    },
+    [loaded, reminderBusyId, refreshReminders, reminderError],
+  );
+
+  const handleReminderRemove = useCallback(async () => {
+    if (!loaded || !pendingReminderDelete || removingReminder) return;
+    setRemovingReminder(true);
+    try {
+      await deleteReminder(loaded.userId, pendingReminderDelete.id);
+      await refreshReminders(loaded.userId);
+      setPendingReminderDelete(null);
+      setStatus("Reminder removed");
+    } catch {
+      reminderError("We couldn't remove that reminder just now.");
+    } finally {
+      setRemovingReminder(false);
+    }
+  }, [loaded, pendingReminderDelete, removingReminder, refreshReminders, reminderError]);
+
+
+
   const babyName = useCallback(
     (babyId: string): string => {
       if (!loaded) return "Your baby";

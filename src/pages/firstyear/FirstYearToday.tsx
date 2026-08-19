@@ -614,6 +614,24 @@ const FirstYearToday = () => {
           />
         )}
 
+        <RemindersCard
+          reminders={reminders}
+          babyName={babyName}
+          showBabyName={multiples}
+          busyId={reminderBusyId}
+          onAdd={() => {
+            setEditingReminder(null);
+            setReminderSheetOpen(true);
+          }}
+          onEdit={(reminder) => {
+            setEditingReminder(reminder);
+            setReminderSheetOpen(true);
+          }}
+          onToggleDone={handleReminderToggle}
+          onRemove={(reminder) => setPendingReminderDelete(reminder)}
+        />
+
+
         <DaySummaryCard
           events={scopedEvents}
           day={today}

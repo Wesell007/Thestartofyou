@@ -413,6 +413,13 @@ const FirstYearToday = () => {
       : babyName(target)
     : babyName(loaded.babies[0].id);
 
+  // Neutral labels only. Real names stay on the page and never reach the AI.
+  const babyLabels = loaded.babies.reduce<Record<string, string>>((acc, baby, index) => {
+    acc[baby.id] = `Baby ${baby.birth_order ?? index + 1}`;
+    return acc;
+  }, {});
+
+
   const earlier = recentEvents.filter((event) => {
     const key = format(new Date(event.occurred_at), "yyyy-MM-dd");
     return key !== today;

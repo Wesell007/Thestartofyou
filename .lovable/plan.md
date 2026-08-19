@@ -35,7 +35,7 @@ Reuse decision: no new AI backend, no edge function change. The Today card calls
 
 ## Consent and privacy behaviour
 
-No AI call on mount, no effect-triggered call, no background retry. The digest is only built and sent inside the button handler. Excluded from the payload: parent name, baby names, photos, photo URLs, memories, pregnancy chapter content, account details, other days' logs and the private day note.
+No AI call on mount, no effect-triggered call, no background retry. The digest is only built and sent inside the "Summarise today" button handler, never on render, in a `useEffect` or in any background process. Excluded from the payload: parent name, baby names, photos, photo URLs, memories, pregnancy chapter content, account details, other days' logs and the private day note.
 
 ## Testing
 

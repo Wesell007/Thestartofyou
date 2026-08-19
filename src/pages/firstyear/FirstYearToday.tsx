@@ -115,6 +115,13 @@ const FirstYearToday = () => {
   const [dayNoteSaved, setDayNoteSaved] = useState(false);
   const [savingNote, setSavingNote] = useState(false);
   const [status, setStatus] = useState("");
+  const [reminders, setReminders] = useState<Reminder[]>([]);
+  const [reminderSheetOpen, setReminderSheetOpen] = useState(false);
+  const [editingReminder, setEditingReminder] = useState<Reminder | null>(null);
+  const [savingReminder, setSavingReminder] = useState(false);
+  const [reminderBusyId, setReminderBusyId] = useState<string | null>(null);
+  const [pendingReminderDelete, setPendingReminderDelete] = useState<Reminder | null>(null);
+  const [removingReminder, setRemovingReminder] = useState(false);
 
   const today = useMemo(() => localDateKey(), []);
   const retry = useCallback(() => setAttempt((a) => a + 1), []);

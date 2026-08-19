@@ -15,6 +15,16 @@ import ActiveCard from "@/components/firstyear/today/ActiveCard";
 import RhythmTimeline from "@/components/firstyear/today/RhythmTimeline";
 import RecentDays from "@/components/firstyear/today/RecentDays";
 import DaySummaryCard from "@/components/firstyear/today/DaySummaryCard";
+import RemindersCard from "@/components/firstyear/today/RemindersCard";
+import ReminderSheet from "@/components/firstyear/today/ReminderSheet";
+import {
+  createReminder,
+  deleteReminder,
+  getReminders,
+  setReminderStatus,
+  updateReminder,
+} from "@/lib/firstYearReminders";
+import type { Reminder, ReminderPayload } from "@/lib/firstYearRemindersSchema";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -105,6 +115,13 @@ const FirstYearToday = () => {
   const [dayNoteSaved, setDayNoteSaved] = useState(false);
   const [savingNote, setSavingNote] = useState(false);
   const [status, setStatus] = useState("");
+  const [reminders, setReminders] = useState<Reminder[]>([]);
+  const [reminderSheetOpen, setReminderSheetOpen] = useState(false);
+  const [editingReminder, setEditingReminder] = useState<Reminder | null>(null);
+  const [savingReminder, setSavingReminder] = useState(false);
+  const [reminderBusyId, setReminderBusyId] = useState<string | null>(null);
+  const [pendingReminderDelete, setPendingReminderDelete] = useState<Reminder | null>(null);
+  const [removingReminder, setRemovingReminder] = useState(false);
 
   const today = useMemo(() => localDateKey(), []);
   const retry = useCallback(() => setAttempt((a) => a + 1), []);
@@ -176,12 +193,13 @@ const FirstYearToday = () => {
           return;
         }
 
-        const [dayEvents, recent, running, feeds, entries] = await Promise.all([
+        const [dayEvents, recent, running, feeds, entries, dueReminders] = await Promise.all([
           getCareEventsForDay(userId, today),
           getRecentCareEvents(userId, 7),
           getRunningSleeps(userId),
           getRunningFeeds(userId),
           getEntriesForDate(userId, today),
+          getReminders(userId),
         ]);
         if (cancelled) return;
 
@@ -193,6 +211,7 @@ const FirstYearToday = () => {
         setRecentEvents(recent);
         setRunningSleeps(running);
         setRunningFeeds(feeds);
+        setReminders(dueReminders);
         setDayNote(existingNote?.note ?? "");
         setDayNoteSaved(Boolean(existingNote));
         setLoaded({ userId, babies });
@@ -220,6 +239,80 @@ const FirstYearToday = () => {
     },
     [today],
   );
+
+  // ── Parent-set reminders ─────────────────────────────────────────────────
+  // Everything below is chosen by the parent. Nothing is suggested, predicted
+  // or scheduled outside the page.
+
+  const reminderError = useCallback(
+    (message: string) => {
+      toast({ title: message, variant: "destructive" });
+    },
+    [toast],
+  );
+
+  const refreshReminders = useCallback(async (userId: string) => {
+    setReminders(await getReminders(userId));
+  }, []);
+
+  const handleReminderSubmit = useCallback(
+    async (payload: ReminderPayload) => {
+      if (!loaded || savingReminder) return;
+      setSavingReminder(true);
+      try {
+        if (editingReminder) {
+          await updateReminder(loaded.userId, editingReminder.id, payload);
+          setStatus("Reminder updated");
+        } else {
+          await createReminder(loaded.userId, payload);
+          setStatus("Reminder saved");
+        }
+        await refreshReminders(loaded.userId);
+        setReminderSheetOpen(false);
+        setEditingReminder(null);
+      } catch {
+        reminderError("We couldn't save that reminder just now.");
+      } finally {
+        setSavingReminder(false);
+      }
+    },
+    [loaded, savingReminder, editingReminder, refreshReminders, reminderError],
+  );
+
+  const handleReminderToggle = useCallback(
+    async (reminder: Reminder) => {
+      if (!loaded || reminderBusyId) return;
+      setReminderBusyId(reminder.id);
+      try {
+        const next = reminder.status === "done" ? "active" : "done";
+        await setReminderStatus(loaded.userId, reminder.id, next);
+        await refreshReminders(loaded.userId);
+        setStatus(next === "done" ? "Reminder marked done" : "Reminder set as active");
+      } catch {
+        reminderError("We couldn't update that reminder just now.");
+      } finally {
+        setReminderBusyId(null);
+      }
+    },
+    [loaded, reminderBusyId, refreshReminders, reminderError],
+  );
+
+  const handleReminderRemove = useCallback(async () => {
+    if (!loaded || !pendingReminderDelete || removingReminder) return;
+    setRemovingReminder(true);
+    try {
+      await deleteReminder(loaded.userId, pendingReminderDelete.id);
+      await refreshReminders(loaded.userId);
+      setPendingReminderDelete(null);
+      setStatus("Reminder removed");
+    } catch {
+      reminderError("We couldn't remove that reminder just now.");
+    } finally {
+      setRemovingReminder(false);
+    }
+  }, [loaded, pendingReminderDelete, removingReminder, refreshReminders, reminderError]);
+
+
 
   const babyName = useCallback(
     (babyId: string): string => {
@@ -521,6 +614,24 @@ const FirstYearToday = () => {
           />
         )}
 
+        <RemindersCard
+          reminders={reminders}
+          babyName={babyName}
+          showBabyName={multiples}
+          busyId={reminderBusyId}
+          onAdd={() => {
+            setEditingReminder(null);
+            setReminderSheetOpen(true);
+          }}
+          onEdit={(reminder) => {
+            setEditingReminder(reminder);
+            setReminderSheetOpen(true);
+          }}
+          onToggleDone={handleReminderToggle}
+          onRemove={(reminder) => setPendingReminderDelete(reminder)}
+        />
+
+
         <DaySummaryCard
           events={scopedEvents}
           day={today}
@@ -622,6 +733,32 @@ const FirstYearToday = () => {
         onConfirm={confirmDelete}
         busy={deleting}
       />
+
+      <ReminderSheet
+        open={reminderSheetOpen}
+        editing={editingReminder}
+        babies={loaded.babies}
+        saving={savingReminder}
+        onClose={() => {
+          setReminderSheetOpen(false);
+          setEditingReminder(null);
+        }}
+        onSubmit={handleReminderSubmit}
+        onError={reminderError}
+      />
+
+      <ConfirmDialog
+        open={Boolean(pendingReminderDelete)}
+        onOpenChange={(open) => {
+          if (!open) setPendingReminderDelete(null);
+        }}
+        title="Remove this reminder?"
+        description="This removes the reminder you set. You can add another whenever you like."
+        confirmLabel="Remove"
+        onConfirm={handleReminderRemove}
+        busy={removingReminder}
+      />
+
     </div>
   );
 };

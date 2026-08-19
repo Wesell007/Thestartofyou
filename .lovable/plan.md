@@ -69,3 +69,11 @@ Care event schema and handlers, Cindy summary, Memories, First Year home, app sh
 ## Verification
 
 Browser checks at 390px and 1440px covering create, edit, mark done, remove, grouping, sheet layering above the bottom nav, overflow, console and focus rings; plus typecheck, targeted tests, full `vitest run` and `npm run build`.
+
+## Agreed clarifications
+
+- `due_at` is stored as `timestamptz`. The date and time fields are entered and displayed in the parent's local time, converted at the boundary. No timezone copy or settings.
+- Empty state reads "No reminders set yet." whenever future reminders could be displayed; "No reminders set for today." only when nothing at all is shown.
+- Client queries filter by the signed-in `user_id` as well as relying on row level security.
+- Supabase generated types are extended only for the reminder table surface.
+- The refresh interval only updates visible due labels while the page is open and clears on unmount. No background scheduling, notifications, service worker or permission prompts.

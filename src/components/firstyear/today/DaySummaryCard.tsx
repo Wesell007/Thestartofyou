@@ -36,6 +36,27 @@ const splitSources = (raw: string) => {
   return raw.slice(0, match.index).trim();
 };
 
+/**
+ * The shared companion endpoint appends who to contact wording to every answer.
+ * A day recap is a look back, so that wording is removed here and the fixed page
+ * footer carries it instead.
+ */
+const CONTACT_WORDING = /\b(nhs 111|999|a&e|emergency services|call your (midwife|gp)|speak to your (midwife|gp|health visitor)|contact your (midwife|gp|health visitor|maternity))/i;
+
+const stripContactWording = (body: string) =>
+  body
+    .split(/\n{2,}/)
+    .map((block) =>
+      block
+        .split("\n")
+        .filter((line) => !CONTACT_WORDING.test(line))
+        .join("\n")
+        .trim(),
+    )
+    .filter(Boolean)
+    .join("\n\n")
+    .trim();
+
 const renderLines = (body: string) =>
   body
     .split("\n")

@@ -42,6 +42,7 @@ export const CINDY_DAY_SUMMARY_GUARDRAILS = [
   "Do not diagnose, do not advise on sleep, do not predict a next feed, sleep or nappy, and do not compare the baby with typical ranges.",
   "Do not judge the day and do not use the words tracker, prediction, predicts, ideal, optimal, score, progress, risk, diagnosis, symptom checker, safe, unsafe, normal or abnormal.",
   "Use the headings Today at a glance, What was logged, and Little things to remember.",
+  "Do not add safety wording, emergency wording or who to contact, since the page already shows it.",
   "Keep it between 80 and 140 words. If only a little was logged, say so lightly and keep the recap short.",
 ].join(" ");
 

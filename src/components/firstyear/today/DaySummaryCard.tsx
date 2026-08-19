@@ -36,6 +36,28 @@ const splitSources = (raw: string) => {
   return raw.slice(0, match.index).trim();
 };
 
+/**
+ * The shared companion endpoint appends who to contact wording to every answer.
+ * A day recap is a look back, so that wording is removed here and the fixed page
+ * footer carries it instead.
+ */
+const CONTACT_WORDING = /\b(nhs 111|999|a&e|emergency services|call your (midwife|gp)|speak to your (midwife|gp|health visitor)|contact your (midwife|gp|health visitor|maternity))/i;
+
+const HEADINGS = /^(#+\s*)?(\*\*)?(today at a glance|what was logged|little things to remember)(\*\*)?:?$/i;
+
+const stripContactWording = (body: string) => {
+  const lines = body
+    .split("\n")
+    .filter((line) => !CONTACT_WORDING.test(line))
+    .map((line) => line.trimEnd());
+  // A heading left with nothing beneath it reads as a gap, so drop it.
+  const kept = lines.filter((line, i) => {
+    if (!HEADINGS.test(line.trim())) return true;
+    return lines.slice(i + 1).some((next) => next.trim() && !HEADINGS.test(next.trim()));
+  });
+  return kept.join("\n").trim();
+};
+
 const renderLines = (body: string) =>
   body
     .split("\n")
@@ -74,7 +96,7 @@ const DaySummaryCard = ({ events, day, babyLabels, dateOfBirth, babyCount }: Pro
     ask(query, context);
   };
 
-  const body = splitSources(answer);
+  const body = stripContactWording(splitSources(answer));
 
   return (
     <section className="pb-8" aria-labelledby="fy-day-summary-heading">

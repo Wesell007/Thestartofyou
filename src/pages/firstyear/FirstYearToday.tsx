@@ -14,6 +14,7 @@ import TodaySoFar from "@/components/firstyear/today/TodaySoFar";
 import ActiveCard from "@/components/firstyear/today/ActiveCard";
 import RhythmTimeline from "@/components/firstyear/today/RhythmTimeline";
 import RecentDays from "@/components/firstyear/today/RecentDays";
+import DaySummaryCard from "@/components/firstyear/today/DaySummaryCard";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";

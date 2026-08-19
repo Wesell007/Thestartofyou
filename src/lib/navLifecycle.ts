@@ -15,6 +15,8 @@ export type NavTabId =
   | "toolkit"
   | "my_ttc_journey"
   | "my_first_year"
+  | "first_year_today"
+  | "first_year_memories"
   | "pregnancy_chapter"
   | "ask"
   | "account";

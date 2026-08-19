@@ -193,12 +193,13 @@ const FirstYearToday = () => {
           return;
         }
 
-        const [dayEvents, recent, running, feeds, entries] = await Promise.all([
+        const [dayEvents, recent, running, feeds, entries, dueReminders] = await Promise.all([
           getCareEventsForDay(userId, today),
           getRecentCareEvents(userId, 7),
           getRunningSleeps(userId),
           getRunningFeeds(userId),
           getEntriesForDate(userId, today),
+          getReminders(userId),
         ]);
         if (cancelled) return;
 
@@ -210,6 +211,7 @@ const FirstYearToday = () => {
         setRecentEvents(recent);
         setRunningSleeps(running);
         setRunningFeeds(feeds);
+        setReminders(dueReminders);
         setDayNote(existingNote?.note ?? "");
         setDayNoteSaved(Boolean(existingNote));
         setLoaded({ userId, babies });

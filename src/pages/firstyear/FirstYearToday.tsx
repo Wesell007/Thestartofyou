@@ -733,6 +733,32 @@ const FirstYearToday = () => {
         onConfirm={confirmDelete}
         busy={deleting}
       />
+
+      <ReminderSheet
+        open={reminderSheetOpen}
+        editing={editingReminder}
+        babies={loaded.babies}
+        saving={savingReminder}
+        onClose={() => {
+          setReminderSheetOpen(false);
+          setEditingReminder(null);
+        }}
+        onSubmit={handleReminderSubmit}
+        onError={reminderError}
+      />
+
+      <ConfirmDialog
+        open={Boolean(pendingReminderDelete)}
+        onOpenChange={(open) => {
+          if (!open) setPendingReminderDelete(null);
+        }}
+        title="Remove this reminder?"
+        description="This removes the reminder you set. You can add another whenever you like."
+        confirmLabel="Remove"
+        onConfirm={handleReminderRemove}
+        busy={removingReminder}
+      />
+
     </div>
   );
 };

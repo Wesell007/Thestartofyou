@@ -118,6 +118,7 @@ const PregnancyToolkitQuestionsForMidwife = lazy(() => import("./pages/Pregnancy
 
 import ScrollToTop from "./components/layout/ScrollToTop.tsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";
+import FirstYearAppShell from "./components/firstyear/navigation/FirstYearAppShell.tsx";
 import ConsentBanner from "./components/consent/ConsentBanner.tsx";
 import RouteTracker from "./components/analytics/RouteTracker.tsx";
 import { supabase } from "./integrations/supabase/client.ts";

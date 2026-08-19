@@ -14,6 +14,7 @@ import TodaySoFar from "@/components/firstyear/today/TodaySoFar";
 import ActiveCard from "@/components/firstyear/today/ActiveCard";
 import RhythmTimeline from "@/components/firstyear/today/RhythmTimeline";
 import RecentDays from "@/components/firstyear/today/RecentDays";
+import DaySummaryCard from "@/components/firstyear/today/DaySummaryCard";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -412,6 +413,13 @@ const FirstYearToday = () => {
       : babyName(target)
     : babyName(loaded.babies[0].id);
 
+  // Neutral labels only. Real names stay on the page and never reach the AI.
+  const babyLabels = loaded.babies.reduce<Record<string, string>>((acc, baby, index) => {
+    acc[baby.id] = `Baby ${baby.birth_order ?? index + 1}`;
+    return acc;
+  }, {});
+
+
   const earlier = recentEvents.filter((event) => {
     const key = format(new Date(event.occurred_at), "yyyy-MM-dd");
     return key !== today;
@@ -512,6 +520,14 @@ const FirstYearToday = () => {
             }
           />
         )}
+
+        <DaySummaryCard
+          events={scopedEvents}
+          day={today}
+          babyLabels={babyLabels}
+          dateOfBirth={loaded.babies[0]?.date_of_birth ?? null}
+          babyCount={loaded.babies.length}
+        />
 
         <RhythmTimeline
           events={scopedEvents}

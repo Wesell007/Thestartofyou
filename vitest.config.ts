@@ -11,6 +11,13 @@ export default defineConfig({
     include: ["src/**/*.{test,spec}.{ts,tsx}"],
   },
   resolve: {
-    alias: { "@": path.resolve(__dirname, "./src") },
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      // Lets edge function handlers be imported and exercised under Vitest.
+      "https://deno.land/std@0.168.0/http/server.ts": path.resolve(
+        __dirname,
+        "./src/test/stubs/denoStdServe.ts",
+      ),
+    },
   },
 });

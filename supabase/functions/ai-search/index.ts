@@ -244,7 +244,7 @@ serve(async (req) => {
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         model: "google/gemini-2.5-flash",
-        messages: [{ role: "system", content: SYSTEM_PROMPT }, { role: "user", content: userContent }],
+        messages: [{ role: "system", content: modeConfig.systemPrompt }, { role: "user", content: userContent }],
         stream: true,
         max_tokens: 700,
         temperature: 0.2,

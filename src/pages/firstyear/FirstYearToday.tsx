@@ -25,6 +25,7 @@ import {
   updateReminder,
 } from "@/lib/firstYearReminders";
 import type { Reminder, ReminderPayload } from "@/lib/firstYearRemindersSchema";
+import { useReminderNotifications } from "@/hooks/useReminderNotifications";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -619,6 +620,11 @@ const FirstYearToday = () => {
           babyName={babyName}
           showBabyName={multiples}
           busyId={reminderBusyId}
+          notificationState={notificationState}
+          onEnableNotifications={() => {
+            void enableNotifications();
+          }}
+          onDisableNotifications={disableNotifications}
           onAdd={() => {
             setEditingReminder(null);
             setReminderSheetOpen(true);

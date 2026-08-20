@@ -58,6 +58,9 @@ const RemindersCard = ({
   babyName,
   showBabyName,
   busyId,
+  notificationState,
+  onEnableNotifications,
+  onDisableNotifications,
   onAdd,
   onEdit,
   onToggleDone,
@@ -91,6 +94,30 @@ const RemindersCard = ({
         <p className="font-sans text-[13.5px] leading-[1.65] text-[hsl(var(--stage-firstyear-text))] mb-5 max-w-[54ch]">
           Choose what you want to be reminded about and when. You choose the time.
         </p>
+
+        <div className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <p
+            className="font-sans text-[13px] leading-[1.6] text-[hsl(var(--stage-firstyear-text-soft))]"
+            role="status"
+          >
+            {NOTIFICATION_STATUS[notificationState]}
+          </p>
+          {(notificationState === "off" || notificationState === "requesting") && (
+            <button
+              type="button"
+              className={NOTIFY_BUTTON_CLASS}
+              disabled={notificationState === "requesting"}
+              onClick={onEnableNotifications}
+            >
+              Turn on notifications
+            </button>
+          )}
+          {notificationState === "on" && (
+            <button type="button" className={ACTION_CLASS} onClick={onDisableNotifications}>
+              Turn off
+            </button>
+          )}
+        </div>
 
         {groups.length === 0 ? (
           <p className="font-sans text-[13.5px] leading-[1.65] text-[hsl(var(--stage-firstyear-text-soft))] mb-5">

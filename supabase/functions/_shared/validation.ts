@@ -1,3 +1,5 @@
+import { type AiMode, resolveAiMode } from "./aiModes.ts";
+
 export const AI_QUERY_MAX_LENGTH = 1_000;
 export const AI_CONTEXT_MAX_LENGTH = 500;
 export const REFLECTION_MAX_LENGTH = 5_000;

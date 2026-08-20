@@ -25,6 +25,7 @@ import {
   updateReminder,
 } from "@/lib/firstYearReminders";
 import type { Reminder, ReminderPayload } from "@/lib/firstYearRemindersSchema";
+import { useReminderNotifications } from "@/hooks/useReminderNotifications";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -312,6 +313,12 @@ const FirstYearToday = () => {
     }
   }, [loaded, pendingReminderDelete, removingReminder, refreshReminders, reminderError]);
 
+  // App-open only. Permission is requested from the button, never on load.
+  const {
+    state: notificationState,
+    enable: enableNotifications,
+    disable: disableNotifications,
+  } = useReminderNotifications(loaded?.userId ?? null, reminders);
 
 
   const babyName = useCallback(
@@ -619,6 +626,11 @@ const FirstYearToday = () => {
           babyName={babyName}
           showBabyName={multiples}
           busyId={reminderBusyId}
+          notificationState={notificationState}
+          onEnableNotifications={() => {
+            void enableNotifications();
+          }}
+          onDisableNotifications={disableNotifications}
           onAdd={() => {
             setEditingReminder(null);
             setReminderSheetOpen(true);

@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { parseAiSearchBody } from "../_shared/validation.ts";
+import { DAY_RECAP_UNAVAILABLE_ANSWER, getAiModeConfig } from "../_shared/aiModes.ts";
 
 const DEFAULT_ORIGINS = [
   "https://thestartofyou.com",

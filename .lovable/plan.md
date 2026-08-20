@@ -31,7 +31,7 @@ Parents can explicitly turn on browser notifications, on this device, for remind
 - While `state === "on"`, a light interval (60s) checks the reminders passed in and fires at most one `new Notification(...)` per unseen due occurrence, marking it delivered first. Interval cleared on unmount.
 - Clicking a notification calls `window.focus()` where available. No service worker handling.
 - Defensive throughout: `Notification.requestPermission()` and `new Notification(...)` are both wrapped in guarded try/catch, so unsupported, denied or restricted environments produce no console errors. If creating a notification throws, that occurrence is marked delivered and app-open delivery stops for the session, so the same reminder is never retried on every interval.
-- The browser permission state stays the source of truth. The local preference only controls whether this app attempts app-open notifications on this device, and "Turn off" is worded to say exactly that, never that browser permission changed.
+- The browser permission state stays the source of truth, re-read on each state resolution rather than trusted from local storage. If the preference is "on" but permission has since become denied outside the app, the UI shows the blocked state and no notification is attempted. If `window.Notification` becomes unavailable or restricted, the UI shows the unsupported state and nothing retries in a loop. The local preference only means: this app may attempt app-open reminder notifications on this device while browser permission is granted, and "Turn off" is worded to say exactly that, never that browser permission changed.
 
 
 ### UI: notification control inside `Gentle reminders`

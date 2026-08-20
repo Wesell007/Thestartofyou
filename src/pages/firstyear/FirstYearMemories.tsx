@@ -36,13 +36,13 @@ import {
   attachMemoryPhoto,
   clearMemoryPhoto,
   createMemory,
-  createMemoryPhotoUrl,
   deleteMemory,
   getMemories,
   getMemorySource,
   updateMemory,
   type FirstYearMemory,
 } from "@/lib/firstYearMemories";
+import { useMemoryPhotoUrls } from "@/hooks/useMemoryPhotoUrls";
 import {
   MEMORY_PHOTO_ERROR_COPY,
   checkMemoryPhotoFile,

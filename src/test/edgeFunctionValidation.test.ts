@@ -12,13 +12,29 @@ describe("Edge Function request validation", () => {
   it("accepts a bounded AI question and optional context", () => {
     expect(parseAiSearchBody({ query: "  What happens next?  ", context: "week 8" })).toEqual({
       ok: true,
-      value: { query: "What happens next?", context: "week 8" },
+      value: { query: "What happens next?", context: "week 8", mode: "general" },
+    });
+  });
+
+  it("keeps a known mode and falls back to general otherwise", () => {
+    expect(parseAiSearchBody({ query: "Recap", mode: "first_year_day_recap" })).toEqual({
+      ok: true,
+      value: { query: "Recap", mode: "first_year_day_recap" },
+    });
+    expect(parseAiSearchBody({ query: "Recap", mode: "made_up" })).toEqual({
+      ok: true,
+      value: { query: "Recap", mode: "general" },
+    });
+    expect(parseAiSearchBody({ query: "Recap" })).toEqual({
+      ok: true,
+      value: { query: "Recap", mode: "general" },
     });
   });
 
   it("rejects empty and oversized AI questions", () => {
     expect(parseAiSearchBody({ query: " " }).ok).toBe(false);
     expect(parseAiSearchBody({ query: "x".repeat(AI_QUERY_MAX_LENGTH + 1) }).ok).toBe(false);
+    expect(parseAiSearchBody({ query: "Recap", context: "x".repeat(501) }).ok).toBe(false);
   });
 
   it("bounds reflection text and pregnancy week", () => {

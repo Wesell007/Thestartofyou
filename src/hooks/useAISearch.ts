@@ -1,5 +1,11 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import type { AiMode } from "../../supabase/functions/_shared/aiModes";
+
+export type AISearchOptions = {
+  /** Surface mode. Omitted means the shared endpoint uses its general behaviour. */
+  mode?: AiMode;
+};
 
 export function useAISearch() {
   const [answer, setAnswer] = useState("");
@@ -8,7 +14,7 @@ export function useAISearch() {
   const abortRef = useRef<AbortController | null>(null);
   const requestRef = useRef(0);
 
-  const ask = useCallback(async (query: string, context?: string) => {
+  const ask = useCallback(async (query: string, context?: string, options?: AISearchOptions) => {
     abortRef.current?.abort();
     const controller = new AbortController();
     abortRef.current = controller;
@@ -26,7 +32,11 @@ export function useAISearch() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
           },
-          body: JSON.stringify({ query, context }),
+          body: JSON.stringify({
+            query,
+            context,
+            ...(options?.mode ? { mode: options.mode } : {}),
+          }),
           signal: controller.signal,
         }
       );

@@ -33,7 +33,7 @@ Add a small pure mode module in the edge function shared folder, imported by bot
 
 - Pick the config by mode.
 - When `useGrounding` is false, skip `selectSources` and `fetchGrounding` entirely and send only the question and context. This removes the NHS evidence injection that was driving escalation wording, and also removes a 503 failure path for the recap.
-- Keep `URGENT_PATTERN` running for every mode, including the recap. It is a safety floor and a moment note could contain genuinely urgent wording.
+- Urgent handling becomes mode-aware. Other modes keep the current `URGENT_PATTERN` fixed answer unchanged. In `first_year_day_recap` the fixed 999/A&E answer is never returned: if urgent wording is detected in the digest, the endpoint streams a short controlled fallback instead of calling the model, saying only that Cindy cannot turn this entry into a simple day recap. That fallback carries no NHS 111, 999, A&E, links, sources, professional contact, emergency, advice or next-step wording. The fixed page footer and wider product guidance stay responsible for professional-help messaging.
 - Keep rate limiting, CORS, streaming and error handling unchanged.
 
 ### 4. Hook
@@ -46,11 +46,15 @@ Add a small pure mode module in the edge function shared folder, imported by bot
 
 ## Testing
 
-- New `src/test/aiModes.test.ts`: unknown/absent mode falls back to `general`; recap config has grounding off; recap prompt contains no "Sources", "NHS 111", "999", "A&E", "http" or next-step instructions; companion and pregnancy prompts keep current behaviour.
+Tests target behaviour and config, not the internal prompt wording, so a prompt line such as "do not include sources" never fails a scan.
+
+- New `src/test/aiModes.test.ts`: unknown, absent and non-string modes resolve to `general`; `first_year_day_recap` config has `useGrounding: false` while the other modes have it true; the recap fallback text for urgent input contains no NHS 111, 999, A&E, `http`, sources or next-step wording; the other modes keep the current prompt and urgent answer unchanged.
+- New endpoint-level test that exercises the request handler with a stubbed `fetch`: in recap mode no grounding request is made to any nhs.uk URL, the outgoing model request carries the recap system prompt, and the streamed response carries no appended sources or contact footer. Urgent digest input in recap mode returns the controlled fallback without reaching the model.
 - Extend `src/test/edgeFunctionValidation.test.ts`: mode parsed, unknown mode becomes `general`, existing bodies still valid, query and context caps unchanged.
-- Extend `DaySummaryCard.test.tsx`: the ask call carries `mode: "first_year_day_recap"`; still no call on render.
+- Extend `DaySummaryCard.test.tsx`: the ask call carries `mode: "first_year_day_recap"`; still no call on render; a mocked answer that includes NHS wording, a link and a sources block is still rendered clean by the defensive strip.
 - Existing `FirstYearAskCompanion` and `SectionAskAI` behaviour covered by existing tests plus a hook signature check.
 - Then `npx tsgo --noEmit -p tsconfig.json`, targeted Vitest, `npx vitest run`, `npm run build`, redeploy the `ai-search` function, and signed-in checks of `/my-first-year/today` at 390px and 1440px covering recap output, logging, reminders, the notification control, console and overflow.
+
 
 ## Out of scope
 

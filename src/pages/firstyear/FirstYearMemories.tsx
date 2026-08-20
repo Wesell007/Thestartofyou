@@ -123,7 +123,7 @@ const FirstYearMemories = () => {
     useMemo(() => memories.map((memory) => memory.photo_path), [memories]),
   );
 
-  }, [memories, photoUrls]);
+
 
   useEffect(() => {
     let cancelled = false;

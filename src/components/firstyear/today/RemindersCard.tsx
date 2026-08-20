@@ -14,9 +14,21 @@ import {
   type Reminder,
 } from "@/lib/firstYearRemindersSchema";
 
+import type { ReminderNotificationState } from "@/lib/firstYearReminderNotifications";
+
 const ACTION_CLASS = `inline-flex min-h-11 items-center rounded-sm font-sans text-[13px] text-[hsl(var(--stage-firstyear-text))] underline underline-offset-4 hover:text-foreground ${FY_FOCUS_RING}`;
 
 const ADD_BUTTON_CLASS = `inline-flex min-h-11 items-center rounded-pill border border-border/60 bg-parchment px-5 py-2 font-sans text-[13.5px] font-medium text-foreground transition-colors hover:border-foreground/25 ${FY_FOCUS_RING}`;
+
+const NOTIFY_BUTTON_CLASS = `inline-flex min-h-11 items-center rounded-pill border border-border/50 px-4 py-1.5 font-sans text-[13px] font-medium text-[hsl(var(--stage-firstyear-text))] transition-colors hover:border-foreground/20 disabled:opacity-70 ${FY_FOCUS_RING}`;
+
+const NOTIFICATION_STATUS: Record<ReminderNotificationState, string> = {
+  unsupported: "Notifications are not available in this browser.",
+  off: "Notifications are off on this device.",
+  requesting: "Turning notifications on…",
+  on: "Notifications are on for this device.",
+  blocked: "Notifications are blocked in this browser.",
+};
 
 type Props = {
   reminders: Reminder[];
@@ -24,11 +36,15 @@ type Props = {
   babyName: (babyId: string) => string;
   showBabyName: boolean;
   busyId: string | null;
+  notificationState: ReminderNotificationState;
+  onEnableNotifications: () => void;
+  onDisableNotifications: () => void;
   onAdd: () => void;
   onEdit: (reminder: Reminder) => void;
   onToggleDone: (reminder: Reminder) => void;
   onRemove: (reminder: Reminder) => void;
 };
+
 
 /**
  * Reminders the parent set for themselves.

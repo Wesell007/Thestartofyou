@@ -59,15 +59,29 @@ describe("DaySummaryCard", () => {
     expect(screen.getByText(/Add a feed, sleep, nappy or moment first/i)).toBeTruthy();
   });
 
-  it("sends only today's care events, with no names", () => {
+  it("sends only today's care events, with no names, in recap mode", () => {
     setup([event]);
     fireEvent.click(screen.getByRole("button", { name: /summarise today/i }));
     expect(askMock).toHaveBeenCalledTimes(1);
-    const [query, context] = askMock.mock.calls[0];
+    const [query, context, options] = askMock.mock.calls[0];
     expect(query).toContain("Day: 2026-08-19.");
     expect(query).toContain("Nappy");
     expect(query).not.toMatch(/photo|memory|memories|pregnancy chapter/i);
     expect(context).not.toMatch(/photo|memory|pregnancy chapter/i);
+    expect(options).toEqual({ mode: "first_year_day_recap" });
+  });
+
+  it("still strips any contact wording, link or sources block defensively", () => {
+    state = {
+      answer:
+        "Today at a glance\nOne nappy change was logged.\nIf you are worried, contact your health visitor.\n\nSources\n\nhttps://www.nhs.uk/baby/",
+      isLoading: false,
+      error: null,
+    };
+    setup([event]);
+    expect(screen.getByText(/One nappy change was logged\./i)).toBeTruthy();
+    expect(screen.queryByText(/health visitor/i)).toBeNull();
+    expect(screen.queryByText(/nhs\.uk/i)).toBeNull();
   });
 
   it("renders the summary once it arrives", () => {

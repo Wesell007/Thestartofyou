@@ -309,6 +309,8 @@ const FirstYearMemories = () => {
       try {
         if (photoDraft) {
           const prepared = await prepareMemoryPhoto(photoDraft.file);
+          // Forget the old path first, so the replaced object is never re-signed.
+          forgetPhotoPath(saved.photo_path);
           await attachMemoryPhoto({
             userId: loaded.userId,
             memoryId: saved.id,
@@ -316,6 +318,7 @@ const FirstYearMemories = () => {
             previousPath: saved.photo_path,
           });
         } else if (photoRemoved && saved.photo_path) {
+          forgetPhotoPath(saved.photo_path);
           await clearMemoryPhoto(loaded.userId, saved.id, saved.photo_path);
         }
       } catch {

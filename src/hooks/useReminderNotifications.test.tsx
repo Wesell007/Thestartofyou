@@ -73,7 +73,10 @@ describe("useReminderNotifications", () => {
   });
 
   it("requests permission only after the button is clicked", async () => {
-    requestPermission.mockResolvedValue("granted");
+    requestPermission.mockImplementation(async () => {
+      setNotification(makeNotification("granted"));
+      return "granted";
+    });
     render(<Harness reminders={[]} />);
     expect(requestPermission).not.toHaveBeenCalled();
     await act(async () => {

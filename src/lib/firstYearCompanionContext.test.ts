@@ -99,3 +99,18 @@ describe("buildFirstYearCompanionContext", () => {
   });
 });
 
+
+describe("recap context", () => {
+  it("keeps the help wording by default and drops it when asked", () => {
+    const withHint = buildFirstYearCompanionContext({ dateOfBirth: "2026-06-01" });
+    expect(withHint).toMatch(/midwife, GP or health visitor/);
+
+    const recap = buildFirstYearCompanionContext({
+      dateOfBirth: "2026-06-01",
+      pageHint: "The person is looking back over one logged day on their Today page.",
+      includeGuidanceHint: false,
+    });
+    expect(recap).not.toMatch(/midwife|GP|health visitor|speak to|contact/i);
+    expect(recap).toContain("looking back over one logged day");
+  });
+});

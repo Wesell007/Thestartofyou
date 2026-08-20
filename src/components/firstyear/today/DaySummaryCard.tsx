@@ -91,6 +91,7 @@ const DaySummaryCard = ({ events, day, babyLabels, dateOfBirth, babyCount }: Pro
       babyCount,
       tone,
       pageHint: "The person is looking back over one logged day on their Today page.",
+      includeGuidanceHint: false,
     });
     setGeneratedAt("Generated just now");
     ask(query, context, { mode: "first_year_day_recap" });

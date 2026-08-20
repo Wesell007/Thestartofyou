@@ -22,6 +22,11 @@ export interface FirstYearCompanionContextInput {
   tone?: CompanionTone | null;
   /** Optional short page hint, defaults to the First Year home hint. */
   pageHint?: string;
+  /**
+   * Recap-only surfaces set this to false so the context carries no wording
+   * about seeking help. Defaults to true, keeping existing callers unchanged.
+   */
+  includeGuidanceHint?: boolean;
 }
 
 const DEFAULT_PAGE_HINT =
@@ -56,6 +61,7 @@ export function buildFirstYearCompanionContext({
   babyCount,
   tone,
   pageHint,
+  includeGuidanceHint = true,
 }: FirstYearCompanionContextInput): string {
   const parts: string[] = ["First year after birth."];
 
@@ -72,7 +78,7 @@ export function buildFirstYearCompanionContext({
   if (tone) parts.push(toneHint(tone));
 
   parts.push(pageHint?.trim() || DEFAULT_PAGE_HINT);
-  parts.push(PRODUCT_HINT);
+  if (includeGuidanceHint) parts.push(PRODUCT_HINT);
 
   const context = parts.join(" ");
   return context.length > FIRST_YEAR_CONTEXT_MAX_LENGTH

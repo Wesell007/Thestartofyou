@@ -16,20 +16,25 @@ Unchanged warm family: `--stage-firstyear-hero`, `--stage-firstyear-peach`, `--s
 
 ## 3. Soft illustrative decoration
 
-A new decorative-only component `src/components/firstyear/journey/FirstYearHeroDecor.tsx`, rendered inside the hero with `aria-hidden` and `pointer-events-none`:
+The reference is direction only: it is never uploaded, imported, used as a background or shipped as an asset. A Nano Banana render may be used privately to lock shape language, and the shipped result is hand-built inline SVG and CSS inside the hero component. No external image assets are added.
 
-- an inline SVG wave/organic band across the base of the hero, filled with `currentColor` driven by token colours at low opacity
-- two or three tiny botanical accents (a leaf sprig and a small five-petal bloom) placed in the right and lower-left margins
-- one faint baby-footprint motif at very low opacity as a personal touch
-- the existing blurred peach/cream blobs are kept but softened so the illustration reads first
+A new decorative-only component `src/components/firstyear/journey/FirstYearHeroDecor.tsx`:
 
-All fills use `hsl(var(--token) / alpha)`. Everything is behind the text (`-z-10`-style stacking within the hero) and sized down at mobile so nothing crowds the name.
+- a soft organic peach wave band sweeping across the top of the hero, matching the reference's curved band
+- a small monogram-style disc in the top right, using the baby initial already available to the hero
+- a warm baby-footprint pair at the lower right, low opacity
+- a small bloom with two leaves beside the footprints, and a leaf sprig on the opposite side
+- the existing blurred peach blobs kept but softened so the drawn shapes read first
+
+Rules applied: root wrapper carries `aria-hidden="true"` and `pointer-events-none`, every `<svg>` carries `focusable="false"`, all fills use `hsl(var(--token) / alpha)` with no hex. Stacking stays inside the hero: the decor sits in a positioned wrapper with the text on a higher `relative z-10`, no negative z-index that could push it behind the page. On mobile the leaf sprig (and the monogram disc if space is tight) is hidden with a responsive class rather than shrinking text or changing copy.
 
 ## 4. Composition
 
 - The text column is constrained (`max-w-[34ch]` on the display line) so the right-hand decoration has clear space at 1440px.
-- At 390px the side accents shrink and the corner motifs move out of the text bounds; nothing overlaps the heading or age chip.
-- Heading, age and the two supporting lines keep their current sizes from `FY_DISPLAY` / `FY_HELPER`.
+- At 390px the remaining motifs sit clear of the text bounds; nothing overlaps the heading or age.
+- Heading, age and the two supporting lines keep their current sizes from `FY_DISPLAY` / `FY_HELPER`. Copy is unchanged.
+- Global header, app shell, bottom navigation and routing are untouched.
+
 
 ## 5. Files changed
 

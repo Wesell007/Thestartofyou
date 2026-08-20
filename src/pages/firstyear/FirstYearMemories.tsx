@@ -92,7 +92,7 @@ const FirstYearMemories = () => {
   const [photoRemoved, setPhotoRemoved] = useState(false);
   const [photoBusy, setPhotoBusy] = useState(false);
   /** Short-lived signed URLs for kept photos, keyed by stored path. */
-  const [photoUrls, setPhotoUrls] = useState<Record<string, string>>({});
+
   const [viewing, setViewing] = useState<FirstYearMemory | null>(null);
   /** The add or edit sheet. Keeping a memory is a deliberate act. */
   const [sheetOpen, setSheetOpen] = useState(false);

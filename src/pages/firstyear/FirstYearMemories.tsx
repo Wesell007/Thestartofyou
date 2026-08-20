@@ -36,13 +36,13 @@ import {
   attachMemoryPhoto,
   clearMemoryPhoto,
   createMemory,
-  createMemoryPhotoUrl,
   deleteMemory,
   getMemories,
   getMemorySource,
   updateMemory,
   type FirstYearMemory,
 } from "@/lib/firstYearMemories";
+import { useMemoryPhotoUrls } from "@/hooks/useMemoryPhotoUrls";
 import {
   MEMORY_PHOTO_ERROR_COPY,
   checkMemoryPhotoFile,
@@ -92,7 +92,7 @@ const FirstYearMemories = () => {
   const [photoRemoved, setPhotoRemoved] = useState(false);
   const [photoBusy, setPhotoBusy] = useState(false);
   /** Short-lived signed URLs for kept photos, keyed by stored path. */
-  const [photoUrls, setPhotoUrls] = useState<Record<string, string>>({});
+
   const [viewing, setViewing] = useState<FirstYearMemory | null>(null);
   /** The add or edit sheet. Keeping a memory is a deliberate act. */
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -116,29 +116,14 @@ const FirstYearMemories = () => {
 
   /**
    * Sign the photos we are about to show. Signed URLs are short-lived and are
-   * never stored, exported or placed in a route.
+   * never stored, exported or placed in a route. Paths that have been replaced
+   * or removed are treated as an expected absence, not an error.
    */
-  useEffect(() => {
-    let cancelled = false;
-    const missing = memories
-      .map((memory) => memory.photo_path)
-      .filter((path): path is string => Boolean(path) && !photoUrls[path as string]);
-    if (missing.length === 0) return;
-    (async () => {
-      const signed = await Promise.all(
-        missing.map(async (path) => [path, await createMemoryPhotoUrl(path)] as const),
-      );
-      if (cancelled) return;
-      const next: Record<string, string> = {};
-      signed.forEach(([path, url]) => {
-        if (url) next[path] = url;
-      });
-      if (Object.keys(next).length > 0) setPhotoUrls((current) => ({ ...current, ...next }));
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [memories, photoUrls]);
+  const { photoUrls, forgetPhotoPath } = useMemoryPhotoUrls(
+    useMemo(() => memories.map((memory) => memory.photo_path), [memories]),
+  );
+
+
 
   useEffect(() => {
     let cancelled = false;
@@ -324,6 +309,8 @@ const FirstYearMemories = () => {
       try {
         if (photoDraft) {
           const prepared = await prepareMemoryPhoto(photoDraft.file);
+          // Forget the old path first, so the replaced object is never re-signed.
+          forgetPhotoPath(saved.photo_path);
           await attachMemoryPhoto({
             userId: loaded.userId,
             memoryId: saved.id,
@@ -331,6 +318,7 @@ const FirstYearMemories = () => {
             previousPath: saved.photo_path,
           });
         } else if (photoRemoved && saved.photo_path) {
+          forgetPhotoPath(saved.photo_path);
           await clearMemoryPhoto(loaded.userId, saved.id, saved.photo_path);
         }
       } catch {
@@ -403,13 +391,8 @@ const FirstYearMemories = () => {
     try {
       const removedPath = pendingDelete.photo_path;
       await deleteMemory(loaded.userId, pendingDelete.id, removedPath);
-      if (removedPath) {
-        setPhotoUrls((current) => {
-          const next = { ...current };
-          delete next[removedPath];
-          return next;
-        });
-      }
+      forgetPhotoPath(removedPath);
+
       if (editingId === pendingDelete.id) {
         resetForm();
         setSheetOpen(false);

@@ -116,28 +116,13 @@ const FirstYearMemories = () => {
 
   /**
    * Sign the photos we are about to show. Signed URLs are short-lived and are
-   * never stored, exported or placed in a route.
+   * never stored, exported or placed in a route. Paths that have been replaced
+   * or removed are treated as an expected absence, not an error.
    */
-  useEffect(() => {
-    let cancelled = false;
-    const missing = memories
-      .map((memory) => memory.photo_path)
-      .filter((path): path is string => Boolean(path) && !photoUrls[path as string]);
-    if (missing.length === 0) return;
-    (async () => {
-      const signed = await Promise.all(
-        missing.map(async (path) => [path, await createMemoryPhotoUrl(path)] as const),
-      );
-      if (cancelled) return;
-      const next: Record<string, string> = {};
-      signed.forEach(([path, url]) => {
-        if (url) next[path] = url;
-      });
-      if (Object.keys(next).length > 0) setPhotoUrls((current) => ({ ...current, ...next }));
-    })();
-    return () => {
-      cancelled = true;
-    };
+  const { photoUrls, forgetPhotoPath } = useMemoryPhotoUrls(
+    useMemo(() => memories.map((memory) => memory.photo_path), [memories]),
+  );
+
   }, [memories, photoUrls]);
 
   useEffect(() => {

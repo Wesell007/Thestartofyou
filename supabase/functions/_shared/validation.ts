@@ -27,17 +27,21 @@ const boundedString = (
 
 export const parseAiSearchBody = (
   body: unknown,
-): ValidationResult<{ query: string; context?: string }> => {
+): ValidationResult<{ query: string; context?: string; mode: AiMode }> => {
   if (!isRecord(body)) return { ok: false, error: "Request body must be a JSON object." };
   const query = boundedString(body.query, "Question", 2, AI_QUERY_MAX_LENGTH);
   if (query.ok === false) return { ok: false, error: query.error };
 
+  // An absent or unknown mode is never an error: it resolves to `general`, so
+  // callers written before modes existed keep working unchanged.
+  const mode = resolveAiMode(body.mode);
+
   if (body.context === undefined || body.context === null || body.context === "") {
-    return { ok: true, value: { query: query.value } };
+    return { ok: true, value: { query: query.value, mode } };
   }
   const context = boundedString(body.context, "Context", 1, AI_CONTEXT_MAX_LENGTH);
   if (context.ok === false) return { ok: false, error: context.error };
-  return { ok: true, value: { query: query.value, context: context.value } };
+  return { ok: true, value: { query: query.value, context: context.value, mode } };
 };
 
 export const parseReflectBody = (

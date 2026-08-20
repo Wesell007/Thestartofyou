@@ -40,9 +40,11 @@ Add a small pure mode module in the edge function shared folder, imported by bot
 
 `ask(query, context?, options?)` with `options?: { mode?: AiMode }`, included in the POST body only when present. Existing two-argument callers are untouched.
 
-### 5. Today recap
+### 5. Callers
 
-`DaySummaryCard` calls `ask(query, context, { mode: "first_year_day_recap" })`. Existing client-side sources and contact stripping stays as a defensive final layer.
+`DaySummaryCard` is the only caller changed in this phase: `ask(query, context, { mode: "first_year_day_recap" })`. Existing client-side sources and contact stripping stays as a defensive final layer.
+
+`FirstYearAskCompanion`, `SectionAskAI` (pregnancy week), `AskPage` and `PublicWeekReflectionAsk` keep their current two-argument calls and therefore resolve to `general`, which uses today's prompt, grounding and urgent behaviour verbatim. Pregnancy Ask AI output is unchanged by design. The `first_year_companion` and `pregnancy_week_companion` configs are defined but left unwired; if either surface is switched in a later phase that will be reported and tested separately.
 
 ## Testing
 

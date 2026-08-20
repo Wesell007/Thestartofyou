@@ -54,7 +54,7 @@ Tests target behaviour and config, not the internal prompt wording, so a prompt 
 - New endpoint-level test that exercises the request handler with a stubbed `fetch`: in recap mode no grounding request is made to any nhs.uk URL, the outgoing model request carries the recap system prompt, and the streamed response carries no appended sources or contact footer. Urgent digest input in recap mode returns the controlled fallback without reaching the model.
 - Extend `src/test/edgeFunctionValidation.test.ts`: mode parsed, unknown mode becomes `general`, existing bodies still valid, query and context caps unchanged.
 - Extend `DaySummaryCard.test.tsx`: the ask call carries `mode: "first_year_day_recap"`; still no call on render; a mocked answer that includes NHS wording, a link and a sources block is still rendered clean by the defensive strip.
-- Existing `FirstYearAskCompanion` and `SectionAskAI` behaviour covered by existing tests plus a hook signature check.
+- `FirstYearAskCompanion` and `SectionAskAI` regression checks: each still calls `ask` with no mode argument, so the request body carries no mode and behaviour stays on `general`.
 - Then `npx tsgo --noEmit -p tsconfig.json`, targeted Vitest, `npx vitest run`, `npm run build`, redeploy the `ai-search` function, and signed-in checks of `/my-first-year/today` at 390px and 1440px covering recap output, logging, reminders, the notification control, console and overflow.
 
 

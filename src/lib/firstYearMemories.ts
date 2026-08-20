@@ -247,16 +247,50 @@ export const clearMemoryPhoto = async (
  */
 export const MEMORY_PHOTO_SIGN_TTL_SECONDS = 60 * 60;
 
-export const createMemoryPhotoUrl = async (path: string): Promise<string | null> => {
+export type SignedMemoryPhoto = {
+  url: string | null;
+  /** The object is not there any more: an expected, quiet outcome. */
+  missing: boolean;
+};
+
+/** Storage's way of saying the object has already gone. */
+const isMissingObjectError = (message: string, status?: number): boolean => {
+  const text = message.toLowerCase();
+  return (
+    status === 404 ||
+    text.includes("object not found") ||
+    text.includes("not_found") ||
+    text.includes("does not exist")
+  );
+};
+
+/**
+ * Sign one photo for viewing, treating a removed or replaced object as an
+ * expected absence rather than an error. Unexpected storage problems are still
+ * reported through the existing pattern.
+ */
+export const signMemoryPhotoUrl = async (
+  path: string | null | undefined,
+): Promise<SignedMemoryPhoto> => {
+  if (!path || !path.trim()) return { url: null, missing: true };
   const { data, error } = await supabase.storage
     .from(MEMORY_PHOTO_BUCKET)
     .createSignedUrl(path, MEMORY_PHOTO_SIGN_TTL_SECONDS);
   if (error) {
+    const status = (error as { statusCode?: string | number }).statusCode;
+    const numericStatus = typeof status === "string" ? Number(status) : status;
+    if (isMissingObjectError(error.message, numericStatus)) {
+      return { url: null, missing: true };
+    }
     console.error("first year memory photo url failed", error.message);
-    return null;
+    return { url: null, missing: false };
   }
-  return data?.signedUrl ?? null;
+  return { url: data?.signedUrl ?? null, missing: !data?.signedUrl };
 };
+
+export const createMemoryPhotoUrl = async (path: string): Promise<string | null> =>
+  (await signMemoryPhotoUrl(path)).url;
+
 
 export type MemorySource = {
   id: string;

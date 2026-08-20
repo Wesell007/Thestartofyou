@@ -93,7 +93,7 @@ const DaySummaryCard = ({ events, day, babyLabels, dateOfBirth, babyCount }: Pro
       pageHint: "The person is looking back over one logged day on their Today page.",
     });
     setGeneratedAt("Generated just now");
-    ask(query, context);
+    ask(query, context, { mode: "first_year_day_recap" });
   };
 
   const body = stripContactWording(splitSources(answer));

@@ -313,6 +313,12 @@ const FirstYearToday = () => {
     }
   }, [loaded, pendingReminderDelete, removingReminder, refreshReminders, reminderError]);
 
+  // App-open only. Permission is requested from the button, never on load.
+  const {
+    state: notificationState,
+    enable: enableNotifications,
+    disable: disableNotifications,
+  } = useReminderNotifications(loaded?.userId ?? null, reminders);
 
 
   const babyName = useCallback(

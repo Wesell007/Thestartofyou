@@ -388,13 +388,8 @@ const FirstYearMemories = () => {
     try {
       const removedPath = pendingDelete.photo_path;
       await deleteMemory(loaded.userId, pendingDelete.id, removedPath);
-      if (removedPath) {
-        setPhotoUrls((current) => {
-          const next = { ...current };
-          delete next[removedPath];
-          return next;
-        });
-      }
+      forgetPhotoPath(removedPath);
+
       if (editingId === pendingDelete.id) {
         resetForm();
         setSheetOpen(false);

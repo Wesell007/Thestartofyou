@@ -18,6 +18,7 @@ import {
   TTC_NAV_ROUTES,
   matchesRoute,
 } from "@/lib/navLifecycle";
+import { PG_NAV_ACTIVE, PG_NAV_INACTIVE } from "@/components/myweek/pregnancyStyles";
 
 interface Tab {
   label: string;
@@ -84,6 +85,7 @@ const JourneyBottomNav = () => {
 
   if (!visible) return null;
 
+  const isPregnancy = lifecycle !== "first_year" && lifecycle !== "ttc";
   const tabs =
     lifecycle === "first_year"
       ? firstYearTabs(hasKeptChapter)
@@ -106,10 +108,14 @@ const JourneyBottomNav = () => {
               to={href}
               aria-current={active ? "page" : undefined}
               onClick={() => trackEvent(EVENTS.JOURNEY_NAV_CLICKED, { tab: event })}
-              className={`flex flex-col items-center gap-1 pt-2.5 pb-2 font-sans text-[10.5px] tracking-wide transition-colors ${
+              className={`flex flex-col items-center gap-1 min-h-[56px] pt-2.5 pb-2 font-sans text-[10.5px] tracking-wide transition-colors ${
                 active
-                  ? "text-sage font-medium"
-                  : "text-foreground/55 font-light hover:text-foreground"
+                  ? isPregnancy
+                    ? PG_NAV_ACTIVE
+                    : "text-sage font-medium"
+                  : isPregnancy
+                    ? PG_NAV_INACTIVE
+                    : "text-foreground/55 font-light hover:text-foreground"
               }`}
             >
               <Icon size={19} strokeWidth={active ? 2 : 1.6} aria-hidden />

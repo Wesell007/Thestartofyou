@@ -80,6 +80,15 @@ export const resolveHeaderLinks = (
   if (lifecycle === "ttc") {
     return [{ id: "my_ttc_journey", label: "My journey", href: "/my-ttc-journey" }];
   }
+  if (lifecycle === "pregnancy") {
+    return [
+      { id: "my_week", label: "This week", href: "/my-week" },
+      { id: "my_journey", label: "My journey", href: "/my-journey" },
+      { id: "toolkit", label: "Toolkit", href: "/pregnancy-toolkit" },
+    ];
+  }
+  // Unresolved lifecycle (for example the shared account screen): keep the
+  // safe minimum so no pregnancy-only destination leaks into other contexts.
   return [
     { id: "my_week", label: "This week", href: "/my-week" },
     { id: "my_journey", label: "My journey", href: "/my-journey" },

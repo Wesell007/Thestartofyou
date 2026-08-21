@@ -4,6 +4,8 @@ import {
   resolveRealismForWeek,
 } from "@/lib/myWeekRealismIllustrations";
 import { useBabyIllustrationStyle } from "@/hooks/useBabyIllustrationStyle";
+import BabyIllustration from "./BabyIllustration";
+import { SmallSprig, WatercolourWash } from "./PregnancyDecor";
 
 interface Props {
   week: number;

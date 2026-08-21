@@ -139,7 +139,12 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => 
         style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.22)" }}
       />
 
-      <SlotVoiceMemory userId={userId} week={week} onSaved={onSaved} />
+      <div className="pregnancy-paper relative overflow-hidden rounded-[22px] px-6 sm:px-8 pt-1 pb-6 sm:pb-7">
+        <SmallSprig className="-right-4 -bottom-5 w-[84px] rotate-12" opacity={0.26} />
+        <div className="relative">
+          <SlotVoiceMemory userId={userId} week={week} onSaved={onSaved} />
+        </div>
+      </div>
 
       {anyKept && (
         <div className="mt-10 flex justify-center">

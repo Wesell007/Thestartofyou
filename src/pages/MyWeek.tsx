@@ -275,7 +275,7 @@ const MyWeek = () => {
         />
 
         <section className="relative pt-10 pb-12 sm:pt-12">
-          <JournalBridgeCard />
+          <JournalBridgeCard context="week" />
         </section>
 
         <SectionNextChapter

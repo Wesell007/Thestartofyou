@@ -32,14 +32,13 @@ const MemoryFilmEntry = ({ keptWeeksCount, hasMedia, onOpen }: Props) => {
       <WatercolourWash tone="sage" opacity={0.32} className="!absolute" />
       <SmallSprig className="right-4 -bottom-5 w-[96px] rotate-6" opacity={0.32} />
       <p
-        className="relative"
-        className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-4"
+        className="relative font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-4"
         style={{ color: accent }}
       >
         Your journey, as a film
       </p>
 
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+      <div className="relative flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <div className="max-w-[46ch]">
           <h2 className="font-serif text-foreground text-[1.45rem] sm:text-[1.6rem] leading-snug mb-2">
             Create your pregnancy film

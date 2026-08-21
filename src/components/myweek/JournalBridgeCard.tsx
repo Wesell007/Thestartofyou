@@ -10,41 +10,74 @@ import {
 import { JournalCornerMark, SmallSprig, WatercolourWash } from "./PregnancyDecor";
 
 export type JournalBridgeVariant = "owner" | "discovery";
+export type JournalBridgeContext = "week" | "journey" | "toolkit";
+export type JournalBridgeTone = "card" | "inline";
 
 interface Props {
+  /** Where the card sits, which decides the copy. */
+  context?: JournalBridgeContext;
   /**
    * "owner" speaks to someone who already has the physical journal.
-   * "discovery" is the quiet, non-selling cue for everyone else.
-   * Presentation only: no ownership state is read or written in this phase.
+   * "discovery" is the quiet cue for everyone else.
+   * Presentation only: no ownership state is read or written.
    */
   variant?: JournalBridgeVariant;
+  /** "inline" is the compact toolkit cue. */
+  tone?: JournalBridgeTone;
   className?: string;
 }
 
-const COPY: Record<
-  JournalBridgeVariant,
-  { title: string; body: string; linkLabel?: string }
-> = {
-  owner: {
+const LINK_LABEL = "See the journal";
+
+const COPY: Record<JournalBridgeContext, { title: string; body: string }> = {
+  week: {
     title: "This week also has space in your journal.",
     body: "Keep the quick moments here, and the longer story by hand.",
   },
-  discovery: {
+  journey: {
     title: "Some things are nicer written by hand.",
     body: "The physical journal gives you a place to keep this story offline too.",
-    linkLabel: "See the journal",
+  },
+  toolkit: {
+    title: "There is space for this in your journal too.",
+    body: "Use the app for quick edits, and your journal for the keepsake version.",
   },
 };
 
 /**
- * Phase 27B — quiet bridge between the app and the physical journal.
- * One card, two tones of voice, no hard sell and no purchase flow.
+ * Phase 27E — quiet bridge between the app and the physical journal.
+ * One shared component, contextual copy, no hard sell and no purchase flow.
  */
-const JournalBridgeCard = ({ variant = "discovery", className = "" }: Props) => {
-  const copy = COPY[variant];
+const JournalBridgeCard = ({
+  context = "journey",
+  variant = "discovery",
+  tone = "card",
+  className = "",
+}: Props) => {
+  const copy = COPY[context];
+
+  if (tone === "inline") {
+    return (
+      <aside
+        data-journal-bridge={variant}
+        className={`pregnancy-paper relative overflow-hidden rounded-[18px] px-5 py-4 sm:px-6 sm:py-5 ${className}`}
+      >
+        <SmallSprig className="-right-5 -bottom-6 w-[86px] rotate-12" opacity={0.28} />
+        <div className="relative flex flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+          <p className={`${PG_HELPER} max-w-[46ch]`}>
+            {copy.title} {copy.body}
+          </p>
+          <Link to="/journal" className={`${PG_QUIET_LINK} shrink-0`}>
+            {LINK_LABEL}
+          </Link>
+        </div>
+      </aside>
+    );
+  }
 
   return (
     <aside
+      data-journal-bridge={variant}
       className={`pregnancy-paper relative overflow-hidden ${PG_CARD_RADIUS} ${PG_CARD_PAD} ${className}`}
     >
       <WatercolourWash tone="sage" opacity={0.34} className="!absolute" />
@@ -62,11 +95,9 @@ const JournalBridgeCard = ({ variant = "discovery", className = "" }: Props) => 
           {copy.title}
         </p>
         <p className={`${PG_HELPER} mt-2.5 max-w-[42ch]`}>{copy.body}</p>
-        {copy.linkLabel && (
-          <Link to="/journal" className={`${PG_QUIET_LINK} mt-2`}>
-            {copy.linkLabel}
-          </Link>
-        )}
+        <Link to="/journal" className={`${PG_QUIET_LINK} mt-2`}>
+          {LINK_LABEL}
+        </Link>
       </div>
     </aside>
   );

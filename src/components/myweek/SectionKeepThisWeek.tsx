@@ -5,6 +5,7 @@ import SlotReflection from "@/components/myweek/SlotReflection";
 import SlotPhotoMemory from "@/components/myweek/SlotPhotoMemory";
 import SlotVideoMemory from "@/components/myweek/SlotVideoMemory";
 import SlotVoiceMemory from "@/components/myweek/SlotVoiceMemory";
+import { TapedFrame } from "@/components/myweek/PregnancyDecor";
 import type { MyWeekEntry } from "@/data/myWeekContent";
 
 interface Props {

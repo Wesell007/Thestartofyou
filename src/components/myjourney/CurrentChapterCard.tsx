@@ -6,6 +6,8 @@ import {
   defaultRealismAltForWeek,
   type RealismTone,
 } from "@/lib/myWeekRealismIllustrations";
+import BabyIllustration from "@/components/myweek/BabyIllustration";
+import { SmallSprig, WatercolourWash } from "@/components/myweek/PregnancyDecor";
 
 interface Props {
   currentWeek: number;

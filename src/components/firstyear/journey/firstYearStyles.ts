@@ -227,3 +227,10 @@ export const FY_NAV_ITEM =
 
 /** Bottom clearance so nothing sits under the fixed bar on mobile. */
 export const FY_NAV_CLEARANCE = "pb-24 md:pb-0";
+
+/**
+ * Published on the document while the First Year shell is mounted, so other
+ * bottom-pinned surfaces can lift themselves clear of the mobile bar.
+ */
+export const FY_NAV_INSET_VAR = "--app-bottom-nav-inset";
+export const FY_NAV_INSET_VALUE = "calc(3.75rem + env(safe-area-inset-bottom))";

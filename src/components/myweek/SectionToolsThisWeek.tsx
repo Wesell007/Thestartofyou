@@ -94,9 +94,11 @@ const getWeekTools = (week: number): ToolCard[] => {
 
 const CardShell = ({ children }: { children: React.ReactNode }) => (
   <div
-    className="h-full pregnancy-paper rounded-[22px] px-5 py-6 flex flex-col transition-colors duration-300 group-hover:border-[hsl(var(--stage-pregnancy-accent)/0.32)]"
+    className="relative h-full overflow-hidden pregnancy-paper rounded-[22px] px-5 py-6 flex flex-col transition-colors duration-300 group-hover:border-[hsl(var(--stage-pregnancy-accent)/0.32)]"
   >
-    {children}
+    <WatercolourWash tone="sage" opacity={0.22} className="!absolute" />
+    <SmallSprig className="-right-4 -bottom-5 w-[76px] rotate-12" opacity={0.24} />
+    <div className="relative flex h-full flex-col">{children}</div>
   </div>
 );
 

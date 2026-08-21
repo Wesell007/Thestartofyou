@@ -26,29 +26,22 @@ const CurrentChapterCard = ({ currentWeek, tone = "default" }: Props) => {
       className="group block rounded-[28px] pregnancy-paper overflow-hidden transition-all duration-500 hover:shadow-[0_36px_80px_-32px_hsl(var(--stage-pregnancy-accent)/0.32),0_8px_24px_-12px_hsl(222_14%_12%/0.1)] mb-14 sm:mb-16 lg:mb-20"
       style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.22)" }}
     >
-      <div className="flex flex-col sm:flex-row items-stretch">
-        <div
-          className="shrink-0 flex items-center justify-center sm:w-[200px] py-6 sm:py-8"
-          style={{
-            background:
-              "radial-gradient(circle at 50% 50%, hsl(var(--stage-pregnancy) / 0.5), hsl(var(--card)) 75%)",
-            borderBottom: "1px solid hsl(var(--stage-pregnancy-accent) / 0.14)",
-          }}
-        >
+      <div className="relative flex flex-col sm:flex-row items-stretch">
+        <WatercolourWash tone="blush" opacity={0.34} className="!absolute" />
+        <SmallSprig className="right-4 -bottom-4 w-[88px] rotate-12" opacity={0.3} />
+        <div className="relative shrink-0 flex items-center justify-center sm:w-[200px] py-6 sm:py-8">
           <div
-            className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] rounded-full overflow-hidden flex items-center justify-center"
+            className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] rounded-full overflow-hidden flex items-center justify-center bg-[hsl(var(--stage-pregnancy-cream))]"
             style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.22)" }}
           >
-            <img
+            <BabyIllustration
               src={realism.src}
               alt={realismAlt}
-              loading="eager"
-              decoding="async"
               className="w-full h-full object-cover"
             />
           </div>
         </div>
-        <div className="px-7 sm:px-9 py-7 sm:py-9 flex-1 min-w-0 flex flex-col justify-center">
+        <div className="relative px-7 sm:px-9 py-7 sm:py-9 flex-1 min-w-0 flex flex-col justify-center">
           <p
             className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
             style={{ color: accent }}

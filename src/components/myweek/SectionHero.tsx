@@ -1,4 +1,5 @@
 import { CalendarDays } from "lucide-react";
+import { BotanicalSprig, WatercolourWash } from "./PregnancyDecor";
 
 interface Props {
   greeting: string;

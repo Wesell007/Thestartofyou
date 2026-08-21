@@ -76,11 +76,19 @@ const JourneyBottomNav = () => {
     matchesRoute(pathname, SHARED_ROUTES);
   const visible = authed && onShellRoute && lifecycle !== null;
 
-  // Reserve space below in-flow content (see body.has-journey-nav in index.css).
+  // Reserve space below in-flow content (see body.has-journey-nav in index.css)
+  // and publish the bar height so other bottom-pinned surfaces (the analytics
+  // consent banner) sit above it. Both are cleared as soon as the bar hides or
+  // the route leaves the signed-in shell.
   useEffect(() => {
     if (!visible) return;
+    const root = document.documentElement;
     document.body.classList.add("has-journey-nav");
-    return () => document.body.classList.remove("has-journey-nav");
+    root.style.setProperty(NAV_INSET_VAR, NAV_INSET_VALUE);
+    return () => {
+      document.body.classList.remove("has-journey-nav");
+      root.style.removeProperty(NAV_INSET_VAR);
+    };
   }, [visible]);
 
   if (!visible) return null;

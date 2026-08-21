@@ -117,7 +117,7 @@ const JourneyBottomNav = () => {
               to={href}
               aria-current={active ? "page" : undefined}
               onClick={() => trackEvent(EVENTS.JOURNEY_NAV_CLICKED, { tab: event })}
-              className={`flex flex-col items-center gap-1 min-h-[56px] pt-2.5 pb-2 font-sans text-[10.5px] tracking-wide transition-colors ${
+              className={`flex flex-col items-center justify-center gap-1 min-h-[56px] pt-2.5 pb-2 font-sans text-[10.5px] tracking-wide transition-colors ${PG_FOCUS_RING} ${
                 active
                   ? isPregnancy
                     ? PG_NAV_ACTIVE

@@ -18,7 +18,8 @@ import {
   TTC_NAV_ROUTES,
   matchesRoute,
 } from "@/lib/navLifecycle";
-import { PG_NAV_ACTIVE, PG_NAV_INACTIVE } from "@/components/myweek/pregnancyStyles";
+import { NAV_INSET_VAR, NAV_INSET_VALUE } from "@/lib/navInset";
+import { PG_FOCUS_RING, PG_NAV_ACTIVE, PG_NAV_INACTIVE } from "@/components/myweek/pregnancyStyles";
 
 interface Tab {
   label: string;

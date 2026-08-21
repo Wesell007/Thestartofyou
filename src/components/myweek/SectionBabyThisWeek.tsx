@@ -45,12 +45,15 @@ const slugToMonogram = (slug?: string): string => {
 
 const SizeCue = ({ slug }: { slug?: string }) => {
   const url = slug ? sizeCueUrlBySlug[slug] : undefined;
+  // Phase 27D: if the size icon cannot load, fall back to the quiet monogram
+  // rather than leaving a broken image in the card.
+  const [failed, setFailed] = useState(false);
   const baseStyle = {
     background:
       "radial-gradient(120% 90% at 50% 40%, hsl(var(--card)), hsl(var(--stage-pregnancy) / 0.35))",
     borderColor: "hsl(var(--stage-pregnancy-accent) / 0.22)",
   } as const;
-  if (url) {
+  if (url && !failed) {
     return (
       <span
         aria-hidden="true"
@@ -63,6 +66,7 @@ const SizeCue = ({ slug }: { slug?: string }) => {
           width={64}
           height={64}
           loading="lazy"
+          onError={() => setFailed(true)}
           className="h-[42px] w-[42px] object-contain select-none"
         />
       </span>

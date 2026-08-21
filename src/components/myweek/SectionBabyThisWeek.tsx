@@ -1,3 +1,4 @@
+import SectionLabel from "./SectionLabel";
 import {
   defaultRealismAltForWeek,
   normaliseRealismTone,
@@ -92,20 +93,8 @@ const SectionBabyThisWeek = ({
   const tone = normaliseRealismTone(style);
   const resolved = resolveRealismForWeek(week, tone);
   return (
-    <section className="relative pt-4 pb-12 sm:pb-14">
-      <div className="flex items-center gap-3 mb-5">
-        <span
-          aria-hidden="true"
-          className="block w-5 h-px"
-          style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
-        />
-        <p
-          className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase"
-          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-        >
-          Baby this week
-        </p>
-      </div>
+    <section className="relative pt-2 pb-9 sm:pb-11">
+      <SectionLabel className="mb-5">Baby this week</SectionLabel>
 
       <figure
         className="pregnancy-paper relative grid sm:grid-cols-12 gap-0 rounded-[24px] sm:rounded-[28px] overflow-hidden"

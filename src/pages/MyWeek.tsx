@@ -248,7 +248,7 @@ const MyWeek = () => {
           />
         )}
 
-        <section className="relative pt-4 pb-12">
+        <section className="relative pt-2 pb-11 sm:pb-12">
           <div
             className="pregnancy-paper rounded-[22px] px-6 sm:px-8 py-7 sm:py-8"
           >
@@ -262,6 +262,11 @@ const MyWeek = () => {
 
         <SectionWeeklyReads week={currentWeek} />
 
+        {/* Reading this week ends here; keeping this week begins. */}
+        <div className="relative pt-6 pb-2" aria-hidden="true">
+          <div className="pregnancy-rule" />
+        </div>
+
         <SectionKeepThisWeek
           userId={userId}
           week={currentWeek}
@@ -269,7 +274,7 @@ const MyWeek = () => {
           content={content}
         />
 
-        <section className="relative pt-2 pb-12">
+        <section className="relative pt-10 pb-12 sm:pt-12">
           <JournalBridgeCard />
         </section>
 

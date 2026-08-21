@@ -1,3 +1,4 @@
+import SectionLabel from "@/components/myweek/SectionLabel";
 import { Link } from "react-router-dom";
 import { SmallSprig, WatercolourWash } from "@/components/myweek/PregnancyDecor";
 import {
@@ -146,20 +147,8 @@ const SectionToolsThisWeek = ({ week }: Props) => {
   const tools = getWeekTools(week).slice(0, 3);
 
   return (
-    <section className="relative pt-4 pb-12">
-      <div className="flex items-center gap-3 mb-5">
-        <span
-          aria-hidden="true"
-          className="block w-5 h-px"
-          style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
-        />
-        <p
-          className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase"
-          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-        >
-          Tools for this week
-        </p>
-      </div>
+    <section className="relative pt-2 pb-11 sm:pb-12">
+      <SectionLabel className="mb-5">Tools for this week</SectionLabel>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {tools.map((tool) => (

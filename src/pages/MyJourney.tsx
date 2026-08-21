@@ -345,7 +345,7 @@ const MyJourney = () => {
   );
 
   return (
-    <div className="min-h-screen bg-parchment-grain page-vignette relative">
+    <div className="min-h-screen bg-parchment-grain page-vignette relative overflow-x-hidden">
       <SeoHead
         title="My journey | The Start of You"
         description="Your saved pregnancy journey."

@@ -1,3 +1,4 @@
+import SectionLabel from "@/components/myweek/SectionLabel";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -5,7 +6,7 @@ import SlotReflection from "@/components/myweek/SlotReflection";
 import SlotPhotoMemory from "@/components/myweek/SlotPhotoMemory";
 import SlotVideoMemory from "@/components/myweek/SlotVideoMemory";
 import SlotVoiceMemory from "@/components/myweek/SlotVoiceMemory";
-import { TapedFrame } from "@/components/myweek/PregnancyDecor";
+import { SmallSprig, TapedFrame } from "@/components/myweek/PregnancyDecor";
 import type { MyWeekEntry } from "@/data/myWeekContent";
 
 interface Props {
@@ -91,21 +92,9 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => 
   const summary = summariseKept(kept);
 
   return (
-    <section className="relative pt-14 pb-2">
+    <section className="relative pt-2 pb-2">
       <div className="mb-6">
-        <div className="flex items-center gap-3 mb-3">
-          <span
-            aria-hidden="true"
-            className="block w-5 h-px"
-            style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
-          />
-          <p
-            className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase"
-            style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-          >
-            This week's memory
-          </p>
-        </div>
+        <SectionLabel className="mb-3">This week's memory</SectionLabel>
         <p className="font-serif text-foreground/70 text-[14.5px] leading-[1.6] max-w-[46ch]">
           A reflection, a photo, a short video or a voice note. Keep what feels
           right.
@@ -150,7 +139,12 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => 
         style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.22)" }}
       />
 
-      <SlotVoiceMemory userId={userId} week={week} onSaved={onSaved} />
+      <div className="pregnancy-paper relative overflow-hidden rounded-[22px] px-6 sm:px-8 pt-1 pb-6 sm:pb-7">
+        <SmallSprig className="-right-4 -bottom-5 w-[84px] rotate-12" opacity={0.26} />
+        <div className="relative">
+          <SlotVoiceMemory userId={userId} week={week} onSaved={onSaved} />
+        </div>
+      </div>
 
       {anyKept && (
         <div className="mt-10 flex justify-center">

@@ -32,12 +32,12 @@ const JourneyHero = ({ firstName, currentWeek, due, variant = "active" }: Props)
     <header className="relative mb-10 sm:mb-12">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -inset-x-6 -top-10 bottom-[-12px] -z-10 overflow-hidden rounded-[40px]"
+        className="pointer-events-none absolute -inset-x-3 sm:-inset-x-6 -top-10 bottom-[-12px] -z-10 overflow-hidden rounded-[40px] max-w-full"
       >
         <WatercolourWash tone="blush" opacity={0.5} />
       </div>
       <BotanicalSprig
-        className="-top-10 -right-4 sm:-right-8 w-[120px] sm:w-[170px] -z-10 rotate-6"
+        className="-top-10 right-0 sm:-right-8 w-[100px] sm:w-[170px] -z-10 rotate-6"
         opacity={0.45}
       />
       <p

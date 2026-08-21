@@ -210,7 +210,7 @@ const PregnancyToolkit = () => {
         : `${mqTotal} questions saved`;
 
   return (
-    <div className="min-h-screen bg-parchment-grain page-vignette relative">
+    <div className="min-h-screen bg-parchment-grain page-vignette relative overflow-x-hidden">
       <SeoHead
         title="Pregnancy toolkit | The Start of You"
         description="Your private pregnancy toolkit."
@@ -223,12 +223,12 @@ const PregnancyToolkit = () => {
         <section className="relative mb-12 sm:mb-14">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -inset-x-6 -top-10 bottom-[-12px] -z-10 overflow-hidden rounded-[40px]"
+            className="pointer-events-none absolute -inset-x-3 sm:-inset-x-6 -top-10 bottom-[-12px] -z-10 overflow-hidden rounded-[40px] max-w-full"
           >
             <WatercolourWash tone="sage" opacity={0.45} />
           </div>
           <BotanicalSprig
-            className="-top-8 -right-4 sm:-right-8 w-[110px] sm:w-[150px] -z-10 rotate-6"
+            className="-top-8 right-0 sm:-right-8 w-[92px] sm:w-[150px] -z-10 rotate-6"
             opacity={0.4}
           />
           <div className="flex items-center gap-3 mb-5">

@@ -1,3 +1,4 @@
+import SectionLabel from "./SectionLabel";
 import { WatercolourWash } from "./PregnancyDecor";
 
 interface Props {
@@ -11,20 +12,8 @@ interface Props {
  */
 const SectionEmotionallyThisWeek = ({ emotionalText, reflectionPrompt }: Props) => {
   return (
-    <section className="relative pt-4 pb-12">
-      <div className="flex items-center gap-3 mb-5">
-        <span
-          aria-hidden="true"
-          className="block w-5 h-px"
-          style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
-        />
-        <p
-          className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase"
-          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-        >
-          Emotionally this week
-        </p>
-      </div>
+    <section className="relative pt-2 pb-9 sm:pb-11">
+      <SectionLabel className="mb-5">Emotionally this week</SectionLabel>
 
       <div className="pregnancy-paper relative overflow-hidden rounded-[22px] px-6 sm:px-8 py-7 sm:py-8">
         <WatercolourWash tone="sage" opacity={0.3} className="!absolute" />

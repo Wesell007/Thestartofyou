@@ -44,7 +44,7 @@ Only generate assets if the layout needs them: at most a couple of soft watercol
 
 - Presentation only. No changes to week calculation, saved journey data, reflection or media save logic, toolkit data, Ask Cindy, First Year, public pages, schema, RLS, storage, edge functions, auth, sitemap or SEO.
 - Files expected to change: `src/index.css`, new pregnancy style module, `src/components/myweek/*`, `src/components/myjourney/*`, `src/pages/PregnancyToolkit.tsx`, `src/components/layout/JourneyBottomNav.tsx`, plus a new journal bridge component.
-- British English, no dashes in user-facing copy, no hard-sell language.
+- British English, no em dashes in user-facing copy, no hard-sell language.
 
 ## Verification
 

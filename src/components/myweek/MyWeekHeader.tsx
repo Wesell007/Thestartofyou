@@ -16,7 +16,9 @@ const MyWeekHeader = () => {
   const homeHref = resolveHomeHref(lifecycle);
   const links = resolveHeaderLinks(lifecycle, hasKeptChapter);
 
-  const isActive = (href: string) => location.pathname === href;
+  // Prefix match so a sub-route (for example /pregnancy-toolkit/birth-plan)
+  // keeps its parent tab marked as the current page.
+  const isActive = (href: string) => matchesRoute(location.pathname, [href]);
 
 
   const linkClass = (href: string) =>

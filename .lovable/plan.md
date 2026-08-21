@@ -1,51 +1,58 @@
-# Phase 27B — Nano Banana Pregnancy App Direction and Visual System
+# Phase 27B — Correction Pass (presentation only)
 
-Turn the signed-in pregnancy journey into the digital companion to the physical journal, following the attached direction board closely.
+The first pass restyled surfaces but did not raise the pregnancy journey to the Nano Banana standard. This pass generates the missing decorative artwork, fixes the broken baby illustration, and rebuilds the keepsake treatment on `/my-week`, `/my-journey`, the toolkit and the pregnancy bottom nav.
 
-## Step 1: Nano Banana direction pass (before any code)
+## Confirmed issue: the broken baby illustration
 
-Generate a small set of direction renders with Nano Banana inside Lovable, using the attached board, the journal's watercolour language, the current `/my-week` and `/my-journey` screens, and the First Year app-ready standard as inputs. The pass covers: This Week home, weekly reflection, memories and keepsakes, My Journey overview, toolkit entry cards, journal owner companion card, app-only discovery card, insert-card welcome state, and mobile navigation. This pass has now been produced (two Nano Banana boards saved to the project files) and its palette, card and photo treatments drive every step below.
+The 42 weekly realism illustrations exist only as CDN pointer files (`src/assets/myweek-weekly-realism/week-NN.png.asset.json`, all 42 present). Requesting one of those `/__l5e/assets-v1/...` URLs in the preview returns a 2.2 KB HTML document instead of a PNG, so the browser fails to decode it and falls back to alt text. The pointer data is correct; the image simply does not resolve in this environment.
 
-These renders are reference only. Nothing from the board or the journal PDF is shipped as an image, background or asset.
+Fix (presentation only): keep the pointer as the primary source, and add a graceful visual fallback so the card is never empty — a generated watercolour "baby this week" illustration behind a soft vignette, revealed by an `onError` state on the image. No change to the resolver logic, tone preference, week calculation or alt copy rules.
 
-## Step 2: Pregnancy visual system
+## Nano Banana assets to generate
 
-New `src/components/myweek/pregnancyStyles.ts` (mirroring `firstYearStyles.ts` in spirit): focus ring, quiet link, serif heading scale, eyebrow label, card body, helper line, paper card surface, journal bridge card, photo frame treatment, toolkit card, and bottom nav item style.
+Small, decorative, transparent PNGs, saved to `src/assets/pregnancy-nano/` and uploaded as Lovable asset pointers. All are decorative (`alt=""`, `aria-hidden`) except the baby fallback, which carries the existing cautious alt copy.
 
-Tokens live in `src/index.css` as HSL variables. The existing `--stage-pregnancy` and `--stage-pregnancy-accent` stay as they are; added alongside them are quiet text, soft text, blush, peach, sage-accent and paper-edge values plus one watercolour wash and one soft shadow. No hex in components.
+1. `baby-watercolour-fallback.png` — soft abstract watercolour womb/curled-form illustration in cream, blush and sage. Used as the fallback visual in the "Baby this week" card.
+2. `botanical-eucalyptus-sprig.png` and `botanical-sprig-small.png` — watercolour botanical accents for the hero corner, journey hero and journal bridge cards.
+3. `watercolour-wash-blush.png` and `watercolour-wash-sage.png` — soft wash panels behind the hero and reflection areas.
+4. `tape-strip.png` — torn washi tape strip for taped-polaroid photo/video/voice memory frames.
+5. `journal-corner-mark.png` — small ribbon/bookmark mark for the journal bridge card.
 
-Surfaces: warm cream page, paper cards at a single larger radius, low soft shadows, hairline dotted dividers, thin serif headings against readable sans body, small uppercase labels.
+Each will be reported with what it is, where it is used, why, and decorative vs content-bearing.
 
-## Step 3: `/my-week`
+## `/my-week`
 
-Restyle the existing sections without touching their data flow: warmer hero and week chapter card, softer baby, body and emotional cards, keepsake-styled reflection area, taped polaroid style for photo memory and matching frames for video and voice, warm paper toolkit tiles, and one journal companion cue placed under the weekly memory block.
+- Hero: watercolour wash panel plus a botanical sprig in the top corner, thin serif chapter title, small uppercase week/trimester label, paper due-date pill.
+- Baby this week: framed keepsake panel, illustration with the watercolour fallback, size cue kept, warmer serif/label hierarchy.
+- Body and emotional cards: paired paper cards with fine hairline rules, botanical detail, warmer ink.
+- Reflection and media capture: keepsake treatment — taped-polaroid frames for photo and video, a soft paper card with a quiet mic affordance for voice, private-to-you chip on the reflection card. Save, upload and autosave behaviour untouched.
+- Journal bridge: warmer paper card with corner mark and botanical accent, existing approved copy only.
 
-## Step 4: `/my-journey`
+## `/my-journey`
 
-Restyle hero, trimester rail, moments kept summary, photo journal preview, reflection highlights, toolkit entry, looking ahead and film cards onto the same paper card system, with a single quiet journal connection panel low on the page.
+- Story-led hero with wash and botanical accent.
+- Trimester rail and chapter cards made more tactile; current chapter card gets a distinct keepsake treatment.
+- Photo journal preview rendered as small taped prints.
+- Reflection highlights styled as saved journal fragments on paper.
+- Pregnancy film card warmed with a soft wash and a quiet play affordance.
+- Journal bridge card matched to the `/my-week` treatment.
 
-## Step 5: Toolkit entry
+## Toolkit
 
-Apply the paper card and fine line icon treatment to the toolkit index and the `Tools for this week` cards. Behaviour and routes unchanged.
+Same paper/watercolour system: warm paper cards, fine line icons in soft bubbles, dotted dividers, small uppercase labels. Behaviour, entries and data untouched.
 
-## Step 6: Journal bridge cards
+## Mobile navigation
 
-One shared presentational component with two variants: owner companion ("This week also has space in your journal.", "Keep the quick moments here, and the longer story by hand.") and app-only discovery ("Some things are nicer written by hand.", with a quiet "See the journal" link to `/journal`). Variant selection in this phase is a prop only, defaulting to discovery. No ownership field, no purchase flow, no insert-card route.
+Pregnancy bottom nav refined to feel as app-ready as the First Year nav: warmer active tint, cream paper bar, safe-area inset, 56px targets. Destinations unchanged. No fourth Memories tab.
 
-## Step 7: Mobile navigation direction
+## Constraints
 
-Restyle the existing pregnancy tabs in `JourneyBottomNav` to the board's look: warm surface, fine icons, clear active state, touch-friendly targets. Tabs and destinations stay as they are today. The board's fourth "Memories" tab is recorded as a direction note only, since no pregnancy memories route exists.
+No changes to logic, routes, data, schema, RLS, storage, AI, upload behaviour, toolkit data, Ask Cindy, First Year, public pregnancy pages, sitemap or SEO. No board image, no journal PDF pages, no scanned pages. No hardcoded hex in touched files — HSL tokens only.
 
-## Illustrations
+## Later-phase notes
 
-Only generate assets if the layout needs them: at most a couple of soft watercolour botanical accents, decorative and `aria-hidden`. No animals as characters, no mascots, no stock-style graphics. Any generated asset is reported with what, where, why and whether it is decorative.
-
-## Technical notes
-
-- Presentation only. No changes to week calculation, saved journey data, reflection or media save logic, toolkit data, Ask Cindy, First Year, public pages, schema, RLS, storage, edge functions, auth, sitemap or SEO.
-- Files expected to change: `src/index.css`, new pregnancy style module, `src/components/myweek/*`, `src/components/myjourney/*`, `src/pages/PregnancyToolkit.tsx`, `src/components/layout/JourneyBottomNav.tsx`, plus a new journal bridge component.
-- British English, no em dashes in user-facing copy, no hard-sell language.
+Pregnancy Memories tab needs a real route; journal-owner variant needs real ownership state; insert-card QR welcome needs a new route.
 
 ## Verification
 
-Playwright checks at 390px and 1440px on `/my-week`, `/my-journey` and the toolkit: no horizontal overflow, no console errors, save and upload flows still work, Ask Cindy unchanged. Then `npx tsgo --noEmit -p tsconfig.json`, targeted tests, `npx vitest run` and `npm run build`. Report follows the 24 point structure requested.
+Playwright screenshots at 390px and 1440px on `/my-week`, `/my-journey`, `/pregnancy-toolkit`; overflow and console checks; hex scan of touched files; typecheck, targeted tests, full test suite, build. Closes with the requested 20-point correction report.

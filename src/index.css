@@ -464,6 +464,31 @@
       0 4px 16px -8px hsl(222 14% 12% / 0.06);
   }
 
+  /* Phase 27B — pregnancy journal companion paper card */
+  .pregnancy-paper {
+    background:
+      linear-gradient(
+        180deg,
+        hsl(var(--card)) 0%,
+        hsl(var(--stage-pregnancy-cream)) 100%
+      );
+    border: 1px solid hsl(var(--stage-pregnancy-edge) / 0.7);
+    box-shadow: var(--shadow-pregnancy-paper);
+  }
+
+  /* Softer wash panel, used once or twice per page behind a quiet block */
+  .pregnancy-wash {
+    background-image: var(--wash-pregnancy);
+  }
+
+  /* Hairline dotted rule, echoing the journal's printed dividers */
+  .pregnancy-rule {
+    border: 0;
+    border-top: 1px dotted hsl(var(--stage-pregnancy-edge));
+  }
+
+
+
   /* Held image — premium frame for kept photographs */
   .held-image {
     box-shadow:

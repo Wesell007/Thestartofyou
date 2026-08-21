@@ -5,6 +5,7 @@ import SeoHead from "@/components/seo/SeoHead";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import PageStatusNotice from "@/components/journey-status/PageStatusNotice";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
+import JournalBridgeCard from "@/components/myweek/JournalBridgeCard";
 import PageLoadState from "@/components/shared/PageLoadState";
 import BirthPlanProgress from "@/components/pregnancy-toolkit/BirthPlanProgress";
 import BirthPlanSectionCard from "@/components/pregnancy-toolkit/BirthPlanSection";
@@ -233,6 +234,7 @@ const PregnancyToolkitBirthPlan = () => {
 
 
         {/* Return links */}
+        <JournalBridgeCard context="toolkit" tone="inline" className="mb-8" />
         <section
           className="rounded-[20px] keepsake-surface px-6 py-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between"
           style={{ borderColor: softBorder }}

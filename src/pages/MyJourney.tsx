@@ -451,7 +451,7 @@ const MyJourney = () => {
         {isActive && (
           <LookingAheadCard currentWeek={currentWeek} keptCount={keptWeeks.length} />
         )}
-        <JournalBridgeCard className="mb-12" />
+        <JournalBridgeCard context="journey" className="mb-12" />
       </main>
       <MyWeekFooter contextual={null} />
     </div>

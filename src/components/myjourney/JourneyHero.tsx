@@ -1,5 +1,6 @@
 import { format, differenceInCalendarDays } from "date-fns";
 import type { PregnancyJourneyStatus } from "@/lib/savedJourney";
+import { BotanicalSprig, WatercolourWash } from "@/components/myweek/PregnancyDecor";
 
 interface Props {
   firstName?: string;
@@ -28,7 +29,17 @@ const JourneyHero = ({ firstName, currentWeek, due, variant = "active" }: Props)
     : "Your saved weeks, reflections and photos remain here for you.";
 
   return (
-    <header className="mb-10 sm:mb-12">
+    <header className="relative mb-10 sm:mb-12">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -inset-x-6 -top-10 bottom-[-12px] -z-10 overflow-hidden rounded-[40px]"
+      >
+        <WatercolourWash tone="blush" opacity={0.5} />
+      </div>
+      <BotanicalSprig
+        className="-top-10 -right-4 sm:-right-8 w-[120px] sm:w-[170px] -z-10 rotate-6"
+        opacity={0.45}
+      />
       <p
         className="font-sans text-[10.5px] font-medium tracking-[0.32em] uppercase mb-5"
         style={{ color: accent }}

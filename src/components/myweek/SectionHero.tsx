@@ -1,4 +1,5 @@
 import { CalendarDays } from "lucide-react";
+import { BotanicalSprig, WatercolourWash } from "./PregnancyDecor";
 
 interface Props {
   greeting: string;
@@ -31,12 +32,13 @@ const SectionHero = ({
     <section className="relative pt-20 sm:pt-24 pb-8 sm:pb-10">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-16 -left-24 w-[560px] h-[440px] rounded-full blur-3xl -z-10"
-        style={{
-          background:
-            "radial-gradient(closest-side, hsl(var(--stage-pregnancy-peach) / 0.8), hsl(var(--stage-pregnancy-cream) / 0.5) 55%, transparent 80%)",
-          opacity: 0.9,
-        }}
+        className="pointer-events-none absolute -inset-x-6 -top-4 bottom-0 -z-10 overflow-hidden rounded-b-[40px]"
+      >
+        <WatercolourWash tone="blush" opacity={0.55} />
+      </div>
+      <BotanicalSprig
+        className="-top-6 -right-6 sm:-right-10 w-[130px] sm:w-[190px] -z-10 rotate-12"
+        opacity={0.45}
       />
       <p className="font-serif italic text-[13px] sm:text-[14px] text-foreground/55 tracking-wide mb-5 sm:mb-6">
         {greeting}, {firstName}.

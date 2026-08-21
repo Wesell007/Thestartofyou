@@ -1,4 +1,5 @@
 import { Film } from "lucide-react";
+import { SmallSprig, WatercolourWash } from "@/components/myweek/PregnancyDecor";
 
 interface Props {
   /** Weeks that hold at least one saved memory. */
@@ -25,17 +26,19 @@ const MemoryFilmEntry = ({ keptWeeksCount, hasMedia, onOpen }: Props) => {
 
   return (
     <section
-      className="rounded-[22px] pregnancy-paper px-6 sm:px-8 py-6 sm:py-7 mb-12 sm:mb-14"
+      className="relative overflow-hidden rounded-[22px] pregnancy-paper px-6 sm:px-8 py-6 sm:py-7 mb-12 sm:mb-14"
       style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)" }}
     >
+      <WatercolourWash tone="sage" opacity={0.32} className="!absolute" />
+      <SmallSprig className="right-4 -bottom-5 w-[96px] rotate-6" opacity={0.32} />
       <p
-        className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-4"
+        className="relative font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-4"
         style={{ color: accent }}
       >
         Your journey, as a film
       </p>
 
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+      <div className="relative flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <div className="max-w-[46ch]">
           <h2 className="font-serif text-foreground text-[1.45rem] sm:text-[1.6rem] leading-snug mb-2">
             Create your pregnancy film

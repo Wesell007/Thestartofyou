@@ -1,4 +1,5 @@
 import { Film } from "lucide-react";
+import { SmallSprig, WatercolourWash } from "@/components/myweek/PregnancyDecor";
 
 interface Props {
   /** Weeks that hold at least one saved memory. */

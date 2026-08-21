@@ -32,12 +32,12 @@ const SectionHero = ({
     <section className="relative pt-20 sm:pt-24 pb-8 sm:pb-10">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -inset-x-6 -top-4 bottom-0 -z-10 overflow-hidden rounded-b-[40px]"
+        className="pointer-events-none absolute -inset-x-3 sm:-inset-x-6 -top-4 bottom-0 -z-10 overflow-hidden rounded-b-[40px] max-w-full"
       >
         <WatercolourWash tone="blush" opacity={0.55} />
       </div>
       <BotanicalSprig
-        className="-top-6 -right-6 sm:-right-10 w-[130px] sm:w-[190px] -z-10 rotate-12"
+        className="-top-6 right-0 sm:-right-10 w-[104px] sm:w-[190px] -z-10 rotate-12"
         opacity={0.45}
       />
       <p className="font-serif italic text-[13px] sm:text-[14px] text-foreground/55 tracking-wide mb-5 sm:mb-6">

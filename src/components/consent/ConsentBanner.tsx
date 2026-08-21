@@ -29,7 +29,9 @@ const ConsentBanner = () => {
     <div
       role="region"
       aria-label="Analytics consent"
-      className="fixed inset-x-0 bottom-0 z-50 px-4 pb-4 sm:px-6 sm:pb-6 pointer-events-none"
+      // The bottom offset lifts the banner clear of a mobile app bar when one
+      // is mounted (First Year). Without that variable it sits where it always has.
+      className="fixed inset-x-0 bottom-[var(--app-bottom-nav-inset,0px)] md:bottom-0 z-50 px-4 pb-4 sm:px-6 sm:pb-6 pointer-events-none"
     >
       <div
         className="pointer-events-auto mx-auto w-full max-w-2xl bg-card border rounded-2xl shadow-soft px-5 py-5 sm:px-7 sm:py-6"

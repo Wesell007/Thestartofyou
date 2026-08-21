@@ -20,10 +20,9 @@ const SectionBodyThisWeek = ({ bodyText }: Props) => {
       </div>
 
       <div
-        className="rounded-[22px] keepsake-surface px-6 sm:px-8 py-7 sm:py-8"
-        style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)" }}
+        className="pregnancy-paper rounded-[22px] px-6 sm:px-8 py-7 sm:py-8"
       >
-        <p className="font-serif text-[1.05rem] sm:text-[1.12rem] text-foreground/80 leading-[1.75] max-w-[52ch]">
+        <p className="font-serif text-[1.05rem] sm:text-[1.12rem] text-[hsl(var(--stage-pregnancy-text))] leading-[1.75] max-w-[52ch]">
           {bodyText}
         </p>
       </div>

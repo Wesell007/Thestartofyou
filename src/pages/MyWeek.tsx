@@ -249,8 +249,7 @@ const MyWeek = () => {
 
         <section className="relative pt-4 pb-12">
           <div
-            className="rounded-[22px] keepsake-surface px-6 sm:px-8 py-7 sm:py-8"
-            style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)" }}
+            className="pregnancy-paper rounded-[22px] px-6 sm:px-8 py-7 sm:py-8"
           >
             <SlotOneFocus content={content} />
           </div>

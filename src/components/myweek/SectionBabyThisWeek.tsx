@@ -108,47 +108,36 @@ const SectionBabyThisWeek = ({
       </div>
 
       <figure
-        className="relative grid sm:grid-cols-12 gap-0 rounded-[24px] sm:rounded-[28px] overflow-hidden keepsake-surface shadow-elevated"
-        style={{
-          borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)",
-          background:
-            "linear-gradient(135deg, hsl(var(--card)), hsl(var(--stage-pregnancy) / 0.2))",
-        }}
+        className="pregnancy-paper relative grid sm:grid-cols-12 gap-0 rounded-[24px] sm:rounded-[28px] overflow-hidden"
       >
-        <div
-          className="sm:col-span-6 px-6 sm:px-8 py-10 sm:py-12 flex items-center justify-center"
-          style={{
-            background:
-              "radial-gradient(120% 90% at 50% 45%, hsl(var(--stage-pregnancy) / 0.6), transparent 78%)",
-          }}
-        >
+        <WatercolourWash tone="blush" opacity={0.35} className="!absolute" />
+        <SmallSprig className="right-3 bottom-3 z-10 w-[62px] sm:w-[76px]" opacity={0.4} />
+        <div className="relative sm:col-span-6 px-6 sm:px-8 py-10 sm:py-12 flex items-center justify-center">
           <div className="relative mx-auto aspect-[13/16] w-full max-w-[280px] sm:max-w-[320px]">
             <span
               aria-hidden="true"
-              className="absolute inset-[10%] rounded-full blur-3xl"
+              className="absolute inset-[8%] rounded-full blur-3xl"
               style={{
                 background:
-                  "radial-gradient(circle, hsl(var(--stage-pregnancy-accent) / 0.24), transparent 74%)",
+                  "radial-gradient(circle, hsl(var(--stage-pregnancy-blush) / 0.7), transparent 72%)",
               }}
             />
             <span
               aria-hidden="true"
-              className="absolute inset-[5%] rounded-full border"
-              style={{ borderColor: "hsl(var(--card) / 0.55)" }}
+              className="absolute inset-[4%] rounded-full border"
+              style={{ borderColor: "hsl(var(--stage-pregnancy-edge))" }}
             />
             <div className="relative z-10 h-full w-full" data-baby-week={week}>
-              <img
+              <BabyIllustration
                 src={resolved.src}
                 alt={defaultRealismAltForWeek(week)}
-                loading="eager"
-                decoding="async"
                 className="h-full w-full object-contain select-none"
               />
             </div>
           </div>
         </div>
 
-        <figcaption className="sm:col-span-6 px-6 sm:px-9 py-9 sm:py-12 flex flex-col justify-center">
+        <figcaption className="relative sm:col-span-6 px-6 sm:px-9 py-9 sm:py-12 flex flex-col justify-center">
           <div className="flex items-center gap-3 mb-4">
             <SizeCue slug={sizeComparisonSlug} />
             <p

@@ -112,7 +112,7 @@ const FirstYearHeroDecor = ({ initial }: Props) => {
       {/* Leaf sprig on the opposite side, simplified away on mobile. */}
       <svg
         focusable="false"
-        className="absolute bottom-4 left-2 hidden h-14 w-14 sm:block"
+        className="absolute bottom-6 right-[150px] hidden h-12 w-12 sm:block"
         viewBox="0 0 56 56"
       >
         <path

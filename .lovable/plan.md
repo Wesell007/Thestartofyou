@@ -4,7 +4,7 @@ Turn the signed-in pregnancy journey into the digital companion to the physical 
 
 ## Step 1: Nano Banana direction pass (before any code)
 
-Generate a small set of direction renders with Nano Banana inside Lovable, using the attached board, the journal's watercolour language, the current `/my-week` and `/my-journey` screens, and the First Year app-ready standard as inputs. The pass covers: This Week home, weekly reflection, memories and keepsakes, My Journey overview, toolkit entry cards, journal owner companion card, app-only discovery card, insert-card welcome state, and mobile navigation.
+Generate a small set of direction renders with Nano Banana inside Lovable, using the attached board, the journal's watercolour language, the current `/my-week` and `/my-journey` screens, and the First Year app-ready standard as inputs. The pass covers: This Week home, weekly reflection, memories and keepsakes, My Journey overview, toolkit entry cards, journal owner companion card, app-only discovery card, insert-card welcome state, and mobile navigation. This pass has now been produced (two Nano Banana boards saved to the project files) and its palette, card and photo treatments drive every step below.
 
 These renders are reference only. Nothing from the board or the journal PDF is shipped as an image, background or asset.
 

@@ -93,7 +93,7 @@ const SectionBabyThisWeek = ({
   const tone = normaliseRealismTone(style);
   const resolved = resolveRealismForWeek(week, tone);
   return (
-    <section className="relative pt-4 pb-12 sm:pb-14">
+    <section className="relative pt-2 pb-9 sm:pb-11">
       <SectionLabel className="mb-5">Baby this week</SectionLabel>
 
       <figure

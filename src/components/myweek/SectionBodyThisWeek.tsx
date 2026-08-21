@@ -7,7 +7,7 @@ interface Props {
 
 const SectionBodyThisWeek = ({ bodyText }: Props) => {
   return (
-    <section className="relative pt-4 pb-12">
+    <section className="relative pt-2 pb-9 sm:pb-11">
       <SectionLabel className="mb-5">Your body this week</SectionLabel>
 
       <div className="pregnancy-paper relative overflow-hidden rounded-[22px] px-6 sm:px-8 py-7 sm:py-8">

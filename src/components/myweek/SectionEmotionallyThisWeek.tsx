@@ -12,7 +12,7 @@ interface Props {
  */
 const SectionEmotionallyThisWeek = ({ emotionalText, reflectionPrompt }: Props) => {
   return (
-    <section className="relative pt-4 pb-12">
+    <section className="relative pt-2 pb-9 sm:pb-11">
       <SectionLabel className="mb-5">Emotionally this week</SectionLabel>
 
       <div className="pregnancy-paper relative overflow-hidden rounded-[22px] px-6 sm:px-8 py-7 sm:py-8">

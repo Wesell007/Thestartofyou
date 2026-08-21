@@ -34,7 +34,7 @@ const SectionWeeklyReads = ({ week }: Props) => {
   if (cards.length === 0) return null;
 
   return (
-    <section className="relative pt-4 pb-12">
+    <section className="relative pt-2 pb-11 sm:pb-12">
       <div className="mb-6">
         <p
           className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase mb-2"

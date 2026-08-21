@@ -147,7 +147,7 @@ const SectionToolsThisWeek = ({ week }: Props) => {
   const tools = getWeekTools(week).slice(0, 3);
 
   return (
-    <section className="relative pt-4 pb-12">
+    <section className="relative pt-2 pb-11 sm:pb-12">
       <SectionLabel className="mb-5">Tools for this week</SectionLabel>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

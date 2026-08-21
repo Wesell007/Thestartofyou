@@ -92,9 +92,9 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => 
   const summary = summariseKept(kept);
 
   return (
-    <section className="relative pt-14 pb-2">
+    <section className="relative pt-2 pb-2">
       <div className="mb-6">
-        <SectionLabel className="mb-5">This week's memory</SectionLabel>
+        <SectionLabel className="mb-3">This week's memory</SectionLabel>
         <p className="font-serif text-foreground/70 text-[14.5px] leading-[1.6] max-w-[46ch]">
           A reflection, a photo, a short video or a voice note. Keep what feels
           right.

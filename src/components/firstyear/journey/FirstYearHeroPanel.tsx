@@ -31,20 +31,11 @@ const FirstYearHeroPanel = ({ babies, companionName }: Props) => {
   const showInlineAge = babies.length === 1 && Boolean(sharedAge);
 
   return (
-    <section className="relative pt-14 sm:pt-16 pb-8">
-      {/* Decorative peach wash behind the name. */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 -top-6 h-[290px] overflow-hidden">
-        <div
-          className="absolute -left-16 top-0 h-[240px] w-[300px] rounded-full blur-[46px]"
-          style={{ backgroundColor: "hsl(var(--stage-firstyear-hero) / 0.85)" }}
-        />
-        <div
-          className="absolute right-[-70px] top-10 h-[210px] w-[260px] rounded-full blur-[52px]"
-          style={{ backgroundColor: "hsl(var(--stage-firstyear-peach) / 0.9)" }}
-        />
-      </div>
+    <section className="relative isolate mt-6 sm:mt-10 mb-2 rounded-[28px] px-5 sm:px-8 pt-16 sm:pt-20 pb-12 sm:pb-14">
+      <FirstYearHeroDecor initial={primary?.name} />
 
-      <div className="relative">
+      <div className="relative z-10 max-w-[34ch]">
+
         <p
           className="font-sans text-[10.5px] font-semibold tracking-[0.3em] uppercase mb-4"
           style={{ color: "hsl(var(--stage-firstyear-terracotta))" }}

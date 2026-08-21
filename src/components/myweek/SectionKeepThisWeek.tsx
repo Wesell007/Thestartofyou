@@ -1,3 +1,4 @@
+import SectionLabel from "@/components/myweek/SectionLabel";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -93,19 +94,7 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => 
   return (
     <section className="relative pt-14 pb-2">
       <div className="mb-6">
-        <div className="flex items-center gap-3 mb-3">
-          <span
-            aria-hidden="true"
-            className="block w-5 h-px"
-            style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
-          />
-          <p
-            className="font-sans text-[10.5px] font-medium tracking-[0.26em] uppercase"
-            style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-          >
-            This week's memory
-          </p>
-        </div>
+        <SectionLabel className="mb-5">This week's memory</SectionLabel>
         <p className="font-serif text-foreground/70 text-[14.5px] leading-[1.6] max-w-[46ch]">
           A reflection, a photo, a short video or a voice note. Keep what feels
           right.

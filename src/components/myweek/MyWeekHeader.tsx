@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import logoSrc from "@/assets/logo-dark.png";
 import { toast } from "@/hooks/use-toast";
 import { useLifecycle } from "@/lib/useLifecycle";
-import { resolveHeaderLinks, resolveHomeHref } from "@/lib/navLifecycle";
+import { matchesRoute, resolveHeaderLinks, resolveHomeHref } from "@/lib/navLifecycle";
 
 const MyWeekHeader = () => {
   const location = useLocation();
@@ -16,7 +16,9 @@ const MyWeekHeader = () => {
   const homeHref = resolveHomeHref(lifecycle);
   const links = resolveHeaderLinks(lifecycle, hasKeptChapter);
 
-  const isActive = (href: string) => location.pathname === href;
+  // Prefix match so a sub-route (for example /pregnancy-toolkit/birth-plan)
+  // keeps its parent tab marked as the current page.
+  const isActive = (href: string) => matchesRoute(location.pathname, [href]);
 
 
   const linkClass = (href: string) =>
@@ -59,7 +61,12 @@ const MyWeekHeader = () => {
         <nav className="flex items-center gap-5 sm:gap-7" aria-label="Account navigation">
           {/* On mobile these tabs live in the fixed bottom journey nav */}
           {links.map(({ id, label, href }) => (
-            <Link key={id} to={href} className={`hidden md:inline ${linkClass(href)}`}>
+            <Link
+              key={id}
+              to={href}
+              aria-current={isActive(href) ? "page" : undefined}
+              className={`hidden md:inline ${linkClass(href)}`}
+            >
               {label}
             </Link>
           ))}

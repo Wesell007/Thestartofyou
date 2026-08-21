@@ -1,22 +1,44 @@
 import { describe, expect, it } from "vitest";
 import {
   inferLifecycleFromPath,
+  matchesRoute,
   resolveHeaderLinks,
   resolveHomeHref,
   resolvePublicAccountLink,
 } from "@/lib/navLifecycle";
 
 describe("navLifecycle", () => {
-  it("keeps pregnancy navigation unchanged", () => {
+  it("gives pregnancy users the three signed-in spaces", () => {
     expect(resolveHomeHref("pregnancy")).toBe("/my-week");
     expect(resolveHeaderLinks("pregnancy")).toEqual([
       { id: "my_week", label: "This week", href: "/my-week" },
       { id: "my_journey", label: "My journey", href: "/my-journey" },
+      { id: "toolkit", label: "Toolkit", href: "/pregnancy-toolkit" },
     ]);
     expect(resolvePublicAccountLink("pregnancy")).toEqual({
       href: "/my-week",
       label: "My Week",
     });
+  });
+
+  it("never offers a memories destination on pregnancy or TTC navigation", () => {
+    for (const lifecycle of ["pregnancy", "ttc", null] as const) {
+      const links = resolveHeaderLinks(lifecycle);
+      expect(links.some((l) => l.href.includes("memories"))).toBe(false);
+      expect(links.some((l) => l.label.toLowerCase().includes("memories"))).toBe(false);
+    }
+  });
+
+  it("marks the toolkit tab active on toolkit sub-routes", () => {
+    expect(matchesRoute("/pregnancy-toolkit", ["/pregnancy-toolkit"])).toBe(true);
+    expect(matchesRoute("/pregnancy-toolkit/birth-plan", ["/pregnancy-toolkit"])).toBe(true);
+    expect(matchesRoute("/pregnancy-toolkit/appointments/new", ["/pregnancy-toolkit"])).toBe(true);
+    expect(matchesRoute("/my-week", ["/pregnancy-toolkit"])).toBe(false);
+    expect(matchesRoute("/my-week/22", ["/my-week"])).toBe(true);
+    expect(matchesRoute("/my-journey", ["/my-journey"])).toBe(true);
+    expect(matchesRoute("/pregnancy", ["/my-week", "/my-journey", "/pregnancy-toolkit"])).toBe(
+      false,
+    );
   });
 
   it("shows the pregnancy chapter link for First Year users who kept one", () => {

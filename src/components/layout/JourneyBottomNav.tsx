@@ -18,7 +18,8 @@ import {
   TTC_NAV_ROUTES,
   matchesRoute,
 } from "@/lib/navLifecycle";
-import { PG_NAV_ACTIVE, PG_NAV_INACTIVE } from "@/components/myweek/pregnancyStyles";
+import { NAV_INSET_VAR, NAV_INSET_VALUE } from "@/lib/navInset";
+import { PG_FOCUS_RING, PG_NAV_ACTIVE, PG_NAV_INACTIVE } from "@/components/myweek/pregnancyStyles";
 
 interface Tab {
   label: string;
@@ -76,11 +77,19 @@ const JourneyBottomNav = () => {
     matchesRoute(pathname, SHARED_ROUTES);
   const visible = authed && onShellRoute && lifecycle !== null;
 
-  // Reserve space below in-flow content (see body.has-journey-nav in index.css).
+  // Reserve space below in-flow content (see body.has-journey-nav in index.css)
+  // and publish the bar height so other bottom-pinned surfaces (the analytics
+  // consent banner) sit above it. Both are cleared as soon as the bar hides or
+  // the route leaves the signed-in shell.
   useEffect(() => {
     if (!visible) return;
+    const root = document.documentElement;
     document.body.classList.add("has-journey-nav");
-    return () => document.body.classList.remove("has-journey-nav");
+    root.style.setProperty(NAV_INSET_VAR, NAV_INSET_VALUE);
+    return () => {
+      document.body.classList.remove("has-journey-nav");
+      root.style.removeProperty(NAV_INSET_VAR);
+    };
   }, [visible]);
 
   if (!visible) return null;
@@ -108,7 +117,7 @@ const JourneyBottomNav = () => {
               to={href}
               aria-current={active ? "page" : undefined}
               onClick={() => trackEvent(EVENTS.JOURNEY_NAV_CLICKED, { tab: event })}
-              className={`flex flex-col items-center gap-1 min-h-[56px] pt-2.5 pb-2 font-sans text-[10.5px] tracking-wide transition-colors ${
+              className={`flex flex-col items-center justify-center gap-1 min-h-[56px] pt-2.5 pb-2 font-sans text-[10.5px] tracking-wide transition-colors ${PG_FOCUS_RING} ${
                 active
                   ? isPregnancy
                     ? PG_NAV_ACTIVE

@@ -230,7 +230,7 @@ export const FY_NAV_CLEARANCE = "pb-24 md:pb-0";
 
 /**
  * Published on the document while the First Year shell is mounted, so other
- * bottom-pinned surfaces can lift themselves clear of the mobile bar.
+ * bottom-pinned surfaces can lift themselves clear of the mobile bar. The
+ * value is shared with the journey bottom nav (see src/lib/navInset.ts).
  */
-export const FY_NAV_INSET_VAR = "--app-bottom-nav-inset";
-export const FY_NAV_INSET_VALUE = "calc(3.75rem + env(safe-area-inset-bottom))";
+export { NAV_INSET_VAR as FY_NAV_INSET_VAR, NAV_INSET_VALUE as FY_NAV_INSET_VALUE } from "@/lib/navInset";

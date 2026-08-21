@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SectionLabel from "./SectionLabel";
 import {
   defaultRealismAltForWeek,

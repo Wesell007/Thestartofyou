@@ -119,7 +119,7 @@ const SectionAskAI = ({ week, seed, dueDate }: Props) => {
   const { body, sources } = splitSources(answer);
 
   return (
-    <section className="relative pt-2 pb-11 sm:pb-13">
+    <section className="relative pt-2 pb-11 sm:pb-12">
       <div className="flex items-center gap-3 mb-5">
         <span
           aria-hidden="true"

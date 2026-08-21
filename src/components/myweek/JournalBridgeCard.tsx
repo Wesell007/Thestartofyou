@@ -7,6 +7,7 @@ import {
   PG_ICON_BUBBLE,
   PG_QUIET_LINK,
 } from "./pregnancyStyles";
+import { JournalCornerMark, SmallSprig, WatercolourWash } from "./PregnancyDecor";
 
 export type JournalBridgeVariant = "owner" | "discovery";
 
@@ -44,24 +45,29 @@ const JournalBridgeCard = ({ variant = "discovery", className = "" }: Props) => 
 
   return (
     <aside
-      className={`pregnancy-paper pregnancy-wash ${PG_CARD_RADIUS} ${PG_CARD_PAD} ${className}`}
+      className={`pregnancy-paper relative overflow-hidden ${PG_CARD_RADIUS} ${PG_CARD_PAD} ${className}`}
     >
-      <span aria-hidden="true" className={`${PG_ICON_BUBBLE} mb-4`}>
-        <BookMarked
-          size={15}
-          strokeWidth={1.6}
-          className="text-[hsl(var(--stage-pregnancy-accent))]"
-        />
-      </span>
-      <p className="font-serif text-[1.15rem] sm:text-[1.24rem] font-medium leading-[1.35] text-foreground max-w-[30ch]">
-        {copy.title}
-      </p>
-      <p className={`${PG_HELPER} mt-2.5 max-w-[46ch]`}>{copy.body}</p>
-      {copy.linkLabel && (
-        <Link to="/journal" className={`${PG_QUIET_LINK} mt-2`}>
-          {copy.linkLabel}
-        </Link>
-      )}
+      <WatercolourWash tone="sage" opacity={0.34} className="!absolute" />
+      <JournalCornerMark className="right-7 -top-1 w-[26px]" opacity={0.85} />
+      <SmallSprig className="-left-4 -bottom-5 w-[104px] -rotate-12" opacity={0.34} />
+      <div className="relative">
+        <span aria-hidden="true" className={`${PG_ICON_BUBBLE} mb-4`}>
+          <BookMarked
+            size={15}
+            strokeWidth={1.6}
+            className="text-[hsl(var(--stage-pregnancy-accent))]"
+          />
+        </span>
+        <p className="font-serif text-[1.2rem] sm:text-[1.34rem] font-medium leading-[1.32] text-foreground max-w-[26ch]">
+          {copy.title}
+        </p>
+        <p className={`${PG_HELPER} mt-2.5 max-w-[42ch]`}>{copy.body}</p>
+        {copy.linkLabel && (
+          <Link to="/journal" className={`${PG_QUIET_LINK} mt-2`}>
+            {copy.linkLabel}
+          </Link>
+        )}
+      </div>
     </aside>
   );
 };

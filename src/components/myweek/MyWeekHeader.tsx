@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import logoSrc from "@/assets/logo-dark.png";
 import { toast } from "@/hooks/use-toast";
 import { useLifecycle } from "@/lib/useLifecycle";
-import { resolveHeaderLinks, resolveHomeHref } from "@/lib/navLifecycle";
+import { matchesRoute, resolveHeaderLinks, resolveHomeHref } from "@/lib/navLifecycle";
 
 const MyWeekHeader = () => {
   const location = useLocation();

@@ -29,6 +29,7 @@ import PhotoJournal from "@/components/myjourney/PhotoJournal";
 import ReflectionHighlights from "@/components/myjourney/ReflectionHighlights";
 import ToolkitEntryPanel from "@/components/myjourney/ToolkitEntryPanel";
 import LookingAheadCard from "@/components/myjourney/LookingAheadCard";
+import JournalBridgeCard from "@/components/myweek/JournalBridgeCard";
 import PageLoadState from "@/components/shared/PageLoadState";
 import { useBabyIllustrationStyle } from "@/hooks/useBabyIllustrationStyle";
 import { normaliseRealismTone, type RealismTone } from "@/lib/myWeekRealismIllustrations";
@@ -357,7 +358,7 @@ const MyJourney = () => {
 
         {!isActive && (
           <section
-            className="rounded-[18px] keepsake-surface px-5 py-4 mb-8 flex flex-wrap items-center gap-3"
+            className="rounded-[18px] pregnancy-paper px-5 py-4 mb-8 flex flex-wrap items-center gap-3"
             style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.2)" }}
           >
             <span
@@ -450,6 +451,7 @@ const MyJourney = () => {
         {isActive && (
           <LookingAheadCard currentWeek={currentWeek} keptCount={keptWeeks.length} />
         )}
+        <JournalBridgeCard className="mb-12" />
       </main>
       <MyWeekFooter contextual={null} />
     </div>
@@ -491,7 +493,7 @@ const JourneyKeptRegion = ({
   if (isLoss && !revealed) {
     return (
       <section
-        className="rounded-[20px] px-6 sm:px-7 py-7 sm:py-8 mb-12 keepsake-surface"
+        className="rounded-[20px] px-6 sm:px-7 py-7 sm:py-8 mb-12 pregnancy-paper"
         style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)" }}
       >
         <p
@@ -521,7 +523,7 @@ const JourneyKeptRegion = ({
         <TrimesterTimeline keptWeeks={keptWeeks} renderRow={renderRow} />
       ) : (
         <section
-          className="rounded-[20px] px-6 sm:px-7 py-7 sm:py-8 mb-12 keepsake-surface"
+          className="rounded-[20px] px-6 sm:px-7 py-7 sm:py-8 mb-12 pregnancy-paper"
           style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)" }}
         >
           <p

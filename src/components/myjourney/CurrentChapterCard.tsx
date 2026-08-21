@@ -21,7 +21,7 @@ const CurrentChapterCard = ({ currentWeek, tone = "default" }: Props) => {
   return (
     <Link
       to="/my-week"
-      className="group block rounded-[28px] keepsake-surface overflow-hidden transition-all duration-500 hover:shadow-[0_36px_80px_-32px_hsl(var(--stage-pregnancy-accent)/0.32),0_8px_24px_-12px_hsl(222_14%_12%/0.1)] mb-14 sm:mb-16 lg:mb-20"
+      className="group block rounded-[28px] pregnancy-paper overflow-hidden transition-all duration-500 hover:shadow-[0_36px_80px_-32px_hsl(var(--stage-pregnancy-accent)/0.32),0_8px_24px_-12px_hsl(222_14%_12%/0.1)] mb-14 sm:mb-16 lg:mb-20"
       style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.22)" }}
     >
       <div className="flex flex-col sm:flex-row items-stretch">

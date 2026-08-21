@@ -25,7 +25,7 @@ const MomentsKeptSummary = ({
 
   return (
     <section
-      className="rounded-[22px] keepsake-surface px-6 sm:px-8 py-6 sm:py-7 mb-12 sm:mb-14"
+      className="rounded-[22px] pregnancy-paper px-6 sm:px-8 py-6 sm:py-7 mb-12 sm:mb-14"
       style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)" }}
     >
       <p

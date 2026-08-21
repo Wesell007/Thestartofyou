@@ -61,7 +61,12 @@ const MyWeekHeader = () => {
         <nav className="flex items-center gap-5 sm:gap-7" aria-label="Account navigation">
           {/* On mobile these tabs live in the fixed bottom journey nav */}
           {links.map(({ id, label, href }) => (
-            <Link key={id} to={href} className={`hidden md:inline ${linkClass(href)}`}>
+            <Link
+              key={id}
+              to={href}
+              aria-current={isActive(href) ? "page" : undefined}
+              className={`hidden md:inline ${linkClass(href)}`}
+            >
               {label}
             </Link>
           ))}

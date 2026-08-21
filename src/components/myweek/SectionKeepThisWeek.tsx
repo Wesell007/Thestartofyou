@@ -125,12 +125,14 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => 
         style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.22)" }}
       />
 
-      <SlotPhotoMemory
-        userId={userId}
-        week={week}
-        chapterTitle={chapterTitle}
-        onSaved={onSaved}
-      />
+      <TapedFrame>
+        <SlotPhotoMemory
+          userId={userId}
+          week={week}
+          chapterTitle={chapterTitle}
+          onSaved={onSaved}
+        />
+      </TapedFrame>
 
       <div
         aria-hidden="true"
@@ -138,7 +140,9 @@ const SectionKeepThisWeek = ({ userId, week, chapterTitle, content }: Props) => 
         style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.22)" }}
       />
 
-      <SlotVideoMemory userId={userId} week={week} onSaved={onSaved} />
+      <TapedFrame>
+        <SlotVideoMemory userId={userId} week={week} onSaved={onSaved} />
+      </TapedFrame>
 
       <div
         aria-hidden="true"

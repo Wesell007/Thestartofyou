@@ -219,7 +219,17 @@ const PregnancyToolkit = () => {
       <MyWeekHeader />
       <main className="relative mx-auto w-full max-w-[760px] px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 lg:pt-28 pb-20 sm:pb-24">
         {/* Hero */}
-        <section className="mb-12 sm:mb-14">
+        <section className="relative mb-12 sm:mb-14">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -inset-x-6 -top-10 bottom-[-12px] -z-10 overflow-hidden rounded-[40px]"
+          >
+            <WatercolourWash tone="sage" opacity={0.45} />
+          </div>
+          <BotanicalSprig
+            className="-top-8 -right-4 sm:-right-8 w-[110px] sm:w-[150px] -z-10 rotate-6"
+            opacity={0.4}
+          />
           <div className="flex items-center gap-3 mb-5">
             <span
               aria-hidden="true"

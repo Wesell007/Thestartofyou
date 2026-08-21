@@ -11,6 +11,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { PG_HELPER, PG_ICON_BUBBLE } from "./pregnancyStyles";
 
 type ToolCard = {
   key: string;
@@ -93,8 +94,7 @@ const getWeekTools = (week: number): ToolCard[] => {
 
 const CardShell = ({ children }: { children: React.ReactNode }) => (
   <div
-    className="h-full rounded-[20px] keepsake-surface px-5 py-6 flex flex-col transition-all duration-300 group-hover:border-[hsl(var(--stage-pregnancy-accent)/0.28)]"
-    style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.18)" }}
+    className="h-full pregnancy-paper rounded-[22px] px-5 py-6 flex flex-col transition-colors duration-300 group-hover:border-[hsl(var(--stage-pregnancy-accent)/0.32)]"
   >
     {children}
   </div>
@@ -106,11 +106,7 @@ const CardInner = ({ tool }: { tool: ToolCard }) => {
     <>
       <span
         aria-hidden="true"
-        className="flex h-9 w-9 items-center justify-center rounded-full border mb-4"
-        style={{
-          background: "hsl(var(--stage-pregnancy) / 0.55)",
-          borderColor: "hsl(var(--stage-pregnancy-accent) / 0.24)",
-        }}
+        className={`${PG_ICON_BUBBLE} mb-4`}
       >
         <Icon
           size={15}
@@ -121,7 +117,7 @@ const CardInner = ({ tool }: { tool: ToolCard }) => {
       <h3 className="font-serif text-[1.05rem] sm:text-[1.1rem] text-foreground leading-[1.25] mb-2">
         {tool.title}
       </h3>
-      <p className="font-sans text-[13px] font-normal text-foreground/72 leading-[1.6] flex-1">
+      <p className={`${PG_HELPER} flex-1`}>
         {tool.hint}
       </p>
       <span

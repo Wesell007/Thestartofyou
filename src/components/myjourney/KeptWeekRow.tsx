@@ -44,7 +44,7 @@ const KeptWeekRow = ({
     <li className={isCurrentWeek ? "opacity-80" : ""}>
       <Link
         to={`/my-week/${week}`}
-        className="group flex items-start gap-4 sm:gap-5 rounded-[18px] keepsake-surface px-4 sm:px-5 py-4 sm:py-4 transition-all hover:shadow-[0_18px_42px_-22px_hsl(var(--stage-pregnancy-accent)/0.26)]"
+        className="group flex items-start gap-4 sm:gap-5 rounded-[18px] pregnancy-paper px-4 sm:px-5 py-4 sm:py-4 transition-all hover:shadow-[0_18px_42px_-22px_hsl(var(--stage-pregnancy-accent)/0.26)]"
         style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)" }}
       >
         <div

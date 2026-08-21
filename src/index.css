@@ -61,6 +61,24 @@
     --stage-ivf-accent: 275 36% 56%;
     --stage-pregnancy: 25 30% 94%;
     --stage-pregnancy-accent: 14 50% 50%;
+    /* Phase 27B — journal companion surfaces for the signed-in pregnancy app */
+    --stage-pregnancy-cream: 36 44% 96%;
+    --stage-pregnancy-cream-soft: 34 34% 93%;
+    --stage-pregnancy-blush: 12 46% 93%;
+    --stage-pregnancy-peach: 24 58% 92%;
+    --stage-pregnancy-sage: 120 16% 88%;
+    --stage-pregnancy-sage-accent: 128 18% 38%;
+    --stage-pregnancy-edge: 24 22% 84%;
+    --stage-pregnancy-text: 22 16% 24%;
+    --stage-pregnancy-text-soft: 22 12% 40%;
+    --wash-pregnancy: radial-gradient(
+      120% 100% at 12% 0%,
+      hsl(var(--stage-pregnancy-peach) / 0.7) 0%,
+      hsl(var(--stage-pregnancy-cream) / 0.9) 46%,
+      transparent 82%
+    );
+    --shadow-pregnancy-paper: 0 26px 56px -38px hsl(var(--stage-pregnancy-text) / 0.5);
+
     --stage-postpartum: 16 24% 93%;
     --stage-postpartum-accent: 14 40% 48%;
     /* Legacy First Year tokens (kept for backwards compatibility during rebuild) */
@@ -445,6 +463,31 @@
       0 24px 60px -32px hsl(var(--stage-pregnancy-accent) / 0.22),
       0 4px 16px -8px hsl(222 14% 12% / 0.06);
   }
+
+  /* Phase 27B — pregnancy journal companion paper card */
+  .pregnancy-paper {
+    background:
+      linear-gradient(
+        180deg,
+        hsl(var(--card)) 0%,
+        hsl(var(--stage-pregnancy-cream)) 100%
+      );
+    border: 1px solid hsl(var(--stage-pregnancy-edge) / 0.7);
+    box-shadow: var(--shadow-pregnancy-paper);
+  }
+
+  /* Softer wash panel, used once or twice per page behind a quiet block */
+  .pregnancy-wash {
+    background-image: var(--wash-pregnancy);
+  }
+
+  /* Hairline dotted rule, echoing the journal's printed dividers */
+  .pregnancy-rule {
+    border: 0;
+    border-top: 1px dotted hsl(var(--stage-pregnancy-edge));
+  }
+
+
 
   /* Held image — premium frame for kept photographs */
   .held-image {

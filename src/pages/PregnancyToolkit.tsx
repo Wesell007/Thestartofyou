@@ -104,7 +104,7 @@ const MvpCard = ({ tool, statusText, to }: { tool: ToolCard; statusText: string;
       className="group block h-full transition-shadow hover:shadow-[0_18px_44px_-24px_hsl(var(--stage-pregnancy-accent)/0.28)]"
     >
       <div
-        className="h-full rounded-[20px] keepsake-surface px-5 py-6 flex flex-col"
+        className="h-full rounded-[20px] pregnancy-paper px-5 py-6 flex flex-col"
         style={{ borderColor: softBorder }}
       >
         <span
@@ -243,7 +243,7 @@ const PregnancyToolkit = () => {
 
         {status && status !== "active" && (
           <section
-            className="mb-10 rounded-[18px] keepsake-surface px-5 py-4"
+            className="mb-10 rounded-[18px] pregnancy-paper px-5 py-4"
             style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.22)" }}
           >
             <p
@@ -387,7 +387,7 @@ const PregnancyToolkit = () => {
         <section className="mb-14">
           <Link
             to="/due-date-calculator"
-            className="group inline-flex items-center gap-3 rounded-[16px] keepsake-surface px-5 py-4 transition-shadow hover:shadow-[0_18px_44px_-24px_hsl(var(--stage-pregnancy-accent)/0.28)]"
+            className="group inline-flex items-center gap-3 rounded-[16px] pregnancy-paper px-5 py-4 transition-shadow hover:shadow-[0_18px_44px_-24px_hsl(var(--stage-pregnancy-accent)/0.28)]"
             style={{ borderColor: softBorder }}
           >
             <span
@@ -416,7 +416,7 @@ const PregnancyToolkit = () => {
 
         {/* Return links */}
         <section
-          className="rounded-[20px] keepsake-surface px-6 py-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between"
+          className="rounded-[20px] pregnancy-paper px-6 py-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between"
           style={{ borderColor: softBorder }}
           aria-label="Return to your journey"
         >

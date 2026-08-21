@@ -34,7 +34,7 @@ const SectionHero = ({
         className="pointer-events-none absolute -top-16 -left-24 w-[560px] h-[440px] rounded-full blur-3xl -z-10"
         style={{
           background:
-            "radial-gradient(closest-side, hsl(var(--stage-pregnancy) / 0.75), hsl(var(--stage-pregnancy) / 0.18) 55%, transparent 78%)",
+            "radial-gradient(closest-side, hsl(var(--stage-pregnancy-peach) / 0.8), hsl(var(--stage-pregnancy-cream) / 0.5) 55%, transparent 80%)",
           opacity: 0.9,
         }}
       />
@@ -53,13 +53,12 @@ const SectionHero = ({
       >
         {chapterTitle}
       </h1>
-      <p className="font-serif italic text-[1.1rem] sm:text-[1.2rem] text-foreground/72 leading-[1.45] max-w-[36ch] mb-7 sm:mb-8">
+      <p className="font-serif italic text-[1.1rem] sm:text-[1.2rem] text-[hsl(var(--stage-pregnancy-text-soft))] leading-[1.45] max-w-[36ch] mb-7 sm:mb-8">
         {standfirst}
       </p>
 
       <div
-        className="inline-flex items-center gap-3 rounded-full keepsake-surface px-5 py-2.5"
-        style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.18)" }}
+        className="inline-flex items-center gap-3 rounded-full pregnancy-paper px-5 py-2.5"
       >
         <CalendarDays
           size={14}

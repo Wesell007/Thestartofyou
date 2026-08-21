@@ -19,7 +19,7 @@ const MomentCard = ({ week, reflection }: Props) => {
   return (
     <Link
       to={`/my-week/${week}`}
-      className="group block rounded-[20px] keepsake-surface px-5 sm:px-6 py-5 sm:py-6 transition-all hover:shadow-[0_22px_56px_-26px_hsl(var(--stage-pregnancy-accent)/0.26)]"
+      className="group block rounded-[20px] pregnancy-paper px-5 sm:px-6 py-5 sm:py-6 transition-all hover:shadow-[0_22px_56px_-26px_hsl(var(--stage-pregnancy-accent)/0.26)]"
       style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)" }}
     >
       <p

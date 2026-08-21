@@ -19,6 +19,7 @@ import SectionAskAI from "@/components/myweek/SectionAskAI";
 import SectionToolsThisWeek from "@/components/myweek/SectionToolsThisWeek";
 
 import SectionKeepThisWeek from "@/components/myweek/SectionKeepThisWeek";
+import JournalBridgeCard from "@/components/myweek/JournalBridgeCard";
 import SectionNextChapter from "@/components/myweek/SectionNextChapter";
 import SectionWeeklyReads from "@/components/myweek/SectionWeeklyReads";
 import SectionPregnancyComplete from "@/components/myweek/SectionPregnancyComplete";
@@ -249,8 +250,7 @@ const MyWeek = () => {
 
         <section className="relative pt-4 pb-12">
           <div
-            className="rounded-[22px] keepsake-surface px-6 sm:px-8 py-7 sm:py-8"
-            style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.14)" }}
+            className="pregnancy-paper rounded-[22px] px-6 sm:px-8 py-7 sm:py-8"
           >
             <SlotOneFocus content={content} />
           </div>
@@ -268,6 +268,10 @@ const MyWeek = () => {
           chapterTitle={identity.chapterTitle}
           content={content}
         />
+
+        <section className="relative pt-2 pb-12">
+          <JournalBridgeCard />
+        </section>
 
         <SectionNextChapter
           nextWeek={nextWeek}

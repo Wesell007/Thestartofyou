@@ -91,7 +91,7 @@ const ToolkitEntryPanel = ({ status = "active" }: { status?: PregnancyJourneySta
 
   return (
     <section
-      className="rounded-[22px] keepsake-surface px-6 sm:px-8 py-7 sm:py-8 mt-2 mb-12"
+      className="rounded-[22px] pregnancy-paper px-6 sm:px-8 py-7 sm:py-8 mt-2 mb-12"
       style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.2)" }}
       aria-label="From your toolkit"
     >

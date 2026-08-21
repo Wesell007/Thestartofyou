@@ -99,7 +99,7 @@ const PhotoJournal = ({ photos, videos = [], voiceNotes = [], currentWeek }: Pro
 
       {tiles.length === 0 ? (
         <div
-          className="relative rounded-[22px] keepsake-surface aspect-[5/3] sm:aspect-[16/9] flex items-center justify-center overflow-hidden"
+          className="relative rounded-[22px] pregnancy-paper aspect-[5/3] sm:aspect-[16/9] flex items-center justify-center overflow-hidden"
           style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.18)" }}
         >
           {[

@@ -9,6 +9,8 @@ import {
 } from "@/lib/firstYearCopy";
 import { getFirstYearAge } from "@/lib/firstYearDates";
 import { FY_DISPLAY, FY_FOCUS_RING, FY_HELPER, FY_QUIET_LINK } from "./firstYearStyles";
+import FirstYearHeroDecor from "./FirstYearHeroDecor";
+
 
 type Props = {
   babies: BabyForCopy[];

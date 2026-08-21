@@ -26,10 +26,13 @@ const MemoryFilmEntry = ({ keptWeeksCount, hasMedia, onOpen }: Props) => {
 
   return (
     <section
-      className="rounded-[22px] pregnancy-paper px-6 sm:px-8 py-6 sm:py-7 mb-12 sm:mb-14"
+      className="relative overflow-hidden rounded-[22px] pregnancy-paper px-6 sm:px-8 py-6 sm:py-7 mb-12 sm:mb-14"
       style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)" }}
     >
+      <WatercolourWash tone="sage" opacity={0.32} className="!absolute" />
+      <SmallSprig className="right-4 -bottom-5 w-[96px] rotate-6" opacity={0.32} />
       <p
+        className="relative"
         className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-4"
         style={{ color: accent }}
       >

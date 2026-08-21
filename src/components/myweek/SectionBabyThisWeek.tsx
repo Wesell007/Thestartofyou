@@ -38,29 +38,35 @@ const sizeCueUrlBySlug: Record<string, string> = (() => {
   return out;
 })();
 
-const slugToMonogram = (slug?: string): string => {
-  if (!slug) return "·";
-  const first = slug.replace(/[^a-z]/gi, "").charAt(0);
-  return first ? first.toUpperCase() : "·";
-};
+const SizeCueFallback = () => (
+  <span className="absolute inset-0 flex items-center justify-center">
+    <span
+      aria-hidden="true"
+      className="h-3 w-3 rounded-full"
+      style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
+    />
+  </span>
+);
 
 const SizeCue = ({ slug }: { slug?: string }) => {
   const url = slug ? sizeCueUrlBySlug[slug] : undefined;
-  // Phase 27D: if the size icon cannot load, fall back to the quiet monogram
-  // rather than leaving a broken image in the card.
+  // Phase 27D micro-fix: if the size icon cannot load or is slow to arrive,
+  // show a quiet decorative dot instead of ever revealing a broken image icon.
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const baseStyle = {
     background:
       "radial-gradient(120% 90% at 50% 40%, hsl(var(--card)), hsl(var(--stage-pregnancy) / 0.35))",
     borderColor: "hsl(var(--stage-pregnancy-accent) / 0.22)",
   } as const;
-  if (url && !failed) {
-    return (
-      <span
-        aria-hidden="true"
-        className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full border overflow-hidden"
-        style={baseStyle}
-      >
+  return (
+    <span
+      aria-hidden="true"
+      className="relative flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full border overflow-hidden"
+      style={baseStyle}
+    >
+      {(!loaded || failed) && <SizeCueFallback />}
+      {url && (
         <img
           src={url}
           alt=""
@@ -68,18 +74,12 @@ const SizeCue = ({ slug }: { slug?: string }) => {
           height={64}
           loading="lazy"
           onError={() => setFailed(true)}
-          className="h-[42px] w-[42px] object-contain select-none"
+          onLoad={() => setLoaded(true)}
+          className={`absolute inset-0 h-full w-full object-contain select-none transition-opacity duration-300 ${
+            loaded && !failed ? "opacity-100" : "opacity-0"
+          }`}
         />
-      </span>
-    );
-  }
-  return (
-    <span
-      aria-hidden="true"
-      className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full border font-serif text-[1.35rem] leading-none"
-      style={{ ...baseStyle, color: "hsl(var(--stage-pregnancy-accent))" }}
-    >
-      {slugToMonogram(slug)}
+      )}
     </span>
   );
 };

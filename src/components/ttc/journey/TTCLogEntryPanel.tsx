@@ -237,9 +237,9 @@ const TTCLogEntryPanel = ({
           </div>
 
 
-          <p className="font-sans text-[11.5px] text-muted-foreground/80 leading-relaxed">
-            Logs are for your own reference. They are private to you and are
-            not used to change your cycle estimates or interpret results.
+          <p className="font-sans text-[11.5px] text-[hsl(var(--stage-ttc-text-soft))] leading-relaxed">
+            Your notes are private to you. They are not used to change your
+            cycle estimates or interpret results.
           </p>
 
           <div className="flex items-center gap-3">
@@ -247,15 +247,15 @@ const TTCLogEntryPanel = ({
               type="button"
               onClick={handleSave}
               disabled={saving}
-              className="min-h-11 rounded-pill px-6 bg-[hsl(var(--stage-ttc-olive))] text-[hsl(var(--stage-ttc-cream))] hover:bg-[hsl(var(--stage-ttc-olive))] hover:opacity-90"
+              className={`min-h-11 rounded-pill px-6 bg-[hsl(var(--stage-ttc-olive))] text-[hsl(var(--stage-ttc-cream))] hover:bg-[hsl(var(--stage-ttc-olive))] hover:opacity-90 ${TTC_FOCUS_RING}`}
             >
               {saving && <Loader2 size={14} className="mr-2 animate-spin" />}
-              {editing ? "Save changes" : "Save note"}
+              {editing ? "Save changes" : "Save this note"}
             </Button>
             <button
               type="button"
               onClick={() => onOpenChange(false)}
-              className="inline-flex min-h-11 items-center rounded-sm px-2 font-sans text-[13px] text-[hsl(var(--stage-ttc-text-soft))] transition-colors hover:text-[hsl(var(--stage-ttc-text))]"
+              className={`inline-flex min-h-11 items-center rounded-pill border border-[hsl(var(--stage-ttc-olive)/0.32)] px-5 font-sans text-[13px] text-[hsl(var(--stage-ttc-text))] transition-colors hover:bg-[hsl(var(--stage-ttc-sage)/0.6)] ${TTC_FOCUS_RING}`}
             >
               Cancel
             </button>

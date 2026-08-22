@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 const navigate = vi.fn();
 vi.mock("react-router-dom", async () => {
@@ -24,9 +25,11 @@ const OWNER_KEY = "theStartOfYou:pregnancyJournalOwner";
 
 const renderPage = () =>
   render(
-    <MemoryRouter>
-      <JournalStart />
-    </MemoryRouter>
+    <HelmetProvider>
+      <MemoryRouter>
+        <JournalStart />
+      </MemoryRouter>
+    </HelmetProvider>
   );
 
 const signedIn = () =>

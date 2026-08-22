@@ -240,27 +240,15 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
 
   return (
     <section className="relative pt-10 pb-2">
-      {/* Section label */}
-      <div className="flex items-center gap-3 mb-5">
-        <span
-          aria-hidden="true"
-          className="block w-5 h-px"
-          style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
-        />
-        <p
-          className="font-sans text-[10.5px] font-light tracking-[0.24em] uppercase"
-          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-        >
-          A photo for this chapter
-        </p>
-      </div>
+      <SectionLabel className="mb-5">A photo for this chapter</SectionLabel>
 
       <h2 className="font-serif text-[1.4rem] sm:text-[1.55rem] text-foreground leading-[1.18] mb-2 max-w-[26ch]">
         One image to keep this week.
       </h2>
-      <p className="font-sans text-[13.5px] font-normal text-foreground/75 mb-7 max-w-[42ch] leading-[1.6]">
+      <p className={`${PG_HELPER} mb-7 max-w-[42ch]`}>
         A bump photo, your hand on your belly, anything that holds the feel of this week.
       </p>
+
 
       <input
         ref={fileRef}

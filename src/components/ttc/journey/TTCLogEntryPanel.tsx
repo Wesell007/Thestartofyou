@@ -234,16 +234,15 @@ const TTCLogEntryPanel = ({
               type="button"
               onClick={handleSave}
               disabled={saving}
-              className="rounded-pill px-5"
-              style={{ background: "hsl(var(--stage-ttc-accent))" }}
+              className="min-h-11 rounded-pill px-6 bg-[hsl(var(--stage-ttc-olive))] text-[hsl(var(--stage-ttc-cream))] hover:bg-[hsl(var(--stage-ttc-olive))] hover:opacity-90"
             >
               {saving && <Loader2 size={14} className="mr-2 animate-spin" />}
-              {editing ? "Save changes" : "Save log"}
+              {editing ? "Save changes" : "Save note"}
             </Button>
             <button
               type="button"
               onClick={() => onOpenChange(false)}
-              className="font-sans text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+              className="inline-flex min-h-11 items-center rounded-sm px-2 font-sans text-[13px] text-[hsl(var(--stage-ttc-text-soft))] transition-colors hover:text-[hsl(var(--stage-ttc-text))]"
             >
               Cancel
             </button>
@@ -252,7 +251,7 @@ const TTCLogEntryPanel = ({
           {suggestion === "period_started" && (
             <div
               className="mt-4 rounded-[14px] px-4 py-4 border"
-              style={{ borderColor: "hsl(var(--stage-ttc-accent) / 0.28)", background: "hsl(var(--stage-ttc-accent) / 0.06)" }}
+              style={{ borderColor: "hsl(var(--stage-ttc-edge))", background: "hsl(var(--stage-ttc-sage) / 0.45)" }}
             >
               <p className="font-serif text-[15px] text-foreground/85 mb-3">
                 If your period has started, you may want to refresh your TTC
@@ -262,8 +261,7 @@ const TTCLogEntryPanel = ({
               <Link
                 to="/setup/trying-to-conceive"
                 onClick={() => onOpenChange(false)}
-                className="inline-flex items-center gap-2 font-sans text-[13px] font-medium"
-                style={{ color: "hsl(var(--stage-ttc-accent))" }}
+                className="inline-flex min-h-11 items-center gap-2 font-sans text-[13px] font-medium text-[hsl(var(--stage-ttc-olive))]"
               >
                 Update TTC setup <ArrowRight size={13} />
               </Link>
@@ -292,7 +290,7 @@ const TTCLogEntryPanel = ({
                 <Link
                   to="/pregnancy"
                   onClick={() => onOpenChange(false)}
-                  className="font-sans text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+                  className="inline-flex min-h-11 items-center rounded-sm px-2 font-sans text-[13px] text-[hsl(var(--stage-ttc-text-soft))] transition-colors hover:text-[hsl(var(--stage-ttc-text))]"
                 >
                   Pregnancy guidance
                 </Link>

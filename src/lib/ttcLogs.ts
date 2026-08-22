@@ -215,3 +215,22 @@ export const LOG_VALUE_LABEL: Record<string, string> = {
   okay: "Okay",
   good: "Good",
 };
+
+/**
+ * Phase 28D — presentation-only grouping. Splits logs into the current cycle
+ * and everything earlier, using the existing log dates and the journey's
+ * current cycle start. Nothing here reads or changes cycle maths.
+ */
+export const splitTTCLogsByCycle = (
+  logs: TTCLog[],
+  cycleStartIso: string | null,
+): { thisCycle: TTCLog[]; earlier: TTCLog[] } => {
+  if (!cycleStartIso) return { thisCycle: logs, earlier: [] };
+  const thisCycle: TTCLog[] = [];
+  const earlier: TTCLog[] = [];
+  for (const log of logs) {
+    if (log.log_date >= cycleStartIso) thisCycle.push(log);
+    else earlier.push(log);
+  }
+  return { thisCycle, earlier };
+};

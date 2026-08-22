@@ -11,6 +11,7 @@ export const AI_MODES = [
   "first_year_day_recap",
   "first_year_companion",
   "pregnancy_week_companion",
+  "ttc_companion",
 ] as const;
 
 export type AiMode = (typeof AI_MODES)[number];

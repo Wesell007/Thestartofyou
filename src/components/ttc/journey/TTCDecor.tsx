@@ -1,10 +1,12 @@
-import washSrc from "@/assets/ttc-wash-sage.png";
+import washSrc from "@/assets/ttc-wash-sage-green.png";
 import sprigSrc from "@/assets/ttc-sprig-seedhead.png";
+import leafSrc from "@/assets/ttc-sprig-leaf-green.png";
 
 /**
  * Phase 28B — decorative TTC accents from the approved concept board.
+ * Phase 28B.1 — washes and sprigs lean sage and muted olive.
  *
- * Purely presentational: watercolour washes and a botanical seed head that
+ * Purely presentational: watercolour washes and botanical line drawings that
  * sit behind content. Always aria-hidden and never interactive.
  */
 
@@ -30,6 +32,20 @@ export const TTCWatercolourWash = ({ className = "", opacity = 0.5 }: DecorProps
 export const TTCBotanicalSprig = ({ className = "", opacity = 0.35 }: DecorProps) => (
   <img
     src={sprigSrc}
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    width={1024}
+    height={1024}
+    className={`pointer-events-none absolute select-none ${className}`}
+    style={{ opacity }}
+  />
+);
+
+/** Green seed head with leaves, used where a stronger TTC cue helps. */
+export const TTCBotanicalLeaf = ({ className = "", opacity = 0.4 }: DecorProps) => (
+  <img
+    src={leafSrc}
     alt=""
     aria-hidden="true"
     loading="lazy"

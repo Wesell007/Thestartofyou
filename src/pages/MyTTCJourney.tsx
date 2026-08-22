@@ -56,7 +56,7 @@ import {
   TTC_PAPER_CARD_WARM,
   TTC_SOFT_PILL,
 } from "@/components/ttc/journey/ttcStyles";
-import { TTCBotanicalSprig } from "@/components/ttc/journey/TTCDecor";
+import { TTCBotanicalSprig, TTCBotanicalLeaf } from "@/components/ttc/journey/TTCDecor";
 
 type Status = "loading" | "error" | "empty" | "pregnancy_active" | "ready";
 
@@ -363,29 +363,32 @@ const MyTTCJourney = () => {
 
 
         {/* Ask */}
-        <section className={`${TTC_PAPER_CARD_WARM} ${TTC_CARD_PAD} mb-10 sm:mb-12`}>
-          <p className={`${TTC_EYEBROW} mb-3`}>Ask Cindy</p>
-          <h2 className={`${TTC_HEADING} text-[21px] sm:text-[23px] mb-2`}>
-            Ask about this part of your cycle
-          </h2>
-          <p className={`${TTC_CARD_BODY} mb-5`}>
-            Ask a question about timing, testing, what you have noticed or what
-            may help next.
-          </p>
-          <Link
-            to={`/ask?stage=ttc&topic=${
-              derivedStage === "fertile_window" || derivedStage === "likely_ovulation"
-                ? "fertile-window"
-                : derivedStage === "two_week_wait"
-                ? "two-week-wait"
-                : derivedStage === "test_window" || derivedStage === "expected_period"
-                ? "pregnancy-tests"
-                : "cycle-tracking"
-            }`}
-            className={TTC_SOFT_PILL}
-          >
-            Ask a TTC question <ArrowRight size={14} aria-hidden="true" />
-          </Link>
+        <section className={`relative overflow-hidden ${TTC_PAPER_CARD_WARM} ${TTC_CARD_PAD} mb-10 sm:mb-12`}>
+          <TTCBotanicalLeaf className="-bottom-10 -right-6 w-[150px]" opacity={0.28} />
+          <div className="relative">
+            <p className={`${TTC_EYEBROW} mb-3`}>Ask Cindy</p>
+            <h2 className={`${TTC_HEADING} text-[21px] sm:text-[23px] mb-2`}>
+              Ask about this part of your cycle
+            </h2>
+            <p className={`${TTC_CARD_BODY} mb-5`}>
+              Ask a question about timing, testing, what you have noticed or what
+              may help next.
+            </p>
+            <Link
+              to={`/ask?stage=ttc&topic=${
+                derivedStage === "fertile_window" || derivedStage === "likely_ovulation"
+                  ? "fertile-window"
+                  : derivedStage === "two_week_wait"
+                  ? "two-week-wait"
+                  : derivedStage === "test_window" || derivedStage === "expected_period"
+                  ? "pregnancy-tests"
+                  : "cycle-tracking"
+              }`}
+              className={TTC_SOFT_PILL}
+            >
+              Ask a TTC question <ArrowRight size={14} aria-hidden="true" />
+            </Link>
+          </div>
         </section>
 
         {/* Update setup */}

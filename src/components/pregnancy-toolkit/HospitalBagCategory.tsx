@@ -131,11 +131,15 @@ const HospitalBagCategoryCard = ({
                   aria-label={isPacked ? `Mark ${item.label} as not packed` : `Mark ${item.label} as packed`}
                   onClick={() => onToggle(item.id)}
                   disabled={disabled}
-                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-colors"
-                  style={{
-                    background: isPacked ? accent : "transparent",
-                    borderColor: isPacked ? accent : "hsl(var(--stage-pregnancy-accent) / 0.35)",
-                  }}
+                  className="flex h-11 w-11 -m-2.5 shrink-0 items-center justify-center rounded-full transition-colors"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="flex h-6 w-6 items-center justify-center rounded-md border transition-colors"
+                    style={{
+                      background: isPacked ? accent : "transparent",
+                      borderColor: isPacked ? accent : "hsl(var(--stage-pregnancy-accent) / 0.35)",
+                    }}
                 >
                   {isPacked ? (
                     <Check size={13} strokeWidth={2.2} color="white" />

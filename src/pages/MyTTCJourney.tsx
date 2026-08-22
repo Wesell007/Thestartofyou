@@ -17,7 +17,7 @@ import {
 } from "@/lib/ttcDerived";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
-import { getAllTTCLogsForJourney, type TTCLog } from "@/lib/ttcLogs";
+import { getAllTTCLogsForJourney, type TTCLog, type TTCLogType } from "@/lib/ttcLogs";
 import { computeTTCInsights } from "@/lib/ttcInsights";
 import TTCJourneySummary from "@/components/ttc/journey/TTCJourneySummary";
 import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
@@ -166,9 +166,20 @@ const MyTTCJourney = () => {
 
   const openPanelForDate = (dateIso: string) => {
     setEditing(null);
+    setPanelType(undefined);
+    setPanelValue(undefined);
     setPanelDate(dateIso);
     setPanelOpen(true);
   };
+
+  const openPanelForQuickAdd = (type: TTCLogType, value?: string) => {
+    setEditing(null);
+    setPanelType(type);
+    setPanelValue(value);
+    setPanelDate(todayIso());
+    setPanelOpen(true);
+  };
+
 
   const openPanelForEdit = (log: TTCLog) => {
     setEditing(log);

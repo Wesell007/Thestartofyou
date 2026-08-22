@@ -3,6 +3,15 @@ import { Link } from "react-router-dom";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import type { TTCInsight } from "@/lib/ttcInsights";
+import {
+  TTC_CARD_TITLE,
+  TTC_EYEBROW,
+  TTC_FOCUS_RING,
+  TTC_HEADING,
+  TTC_HELPER,
+  TTC_PAPER_CARD,
+  TTC_TILE_PAD,
+} from "@/components/ttc/journey/ttcStyles";
 
 type Props = {
   insights: TTCInsight[];
@@ -27,16 +36,11 @@ const TTCJourneyInsights = ({ insights, onOpenLogPanel, onScrollToHandover }: Pr
   return (
     <section className="space-y-5">
       <div>
-        <p
-          className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
-          style={{ color: "hsl(var(--stage-ttc-accent))" }}
-        >
-          Gentle insights for this cycle
-        </p>
-        <h2 className="font-serif text-[22px] sm:text-[24px] text-foreground mb-1">
+        <p className={`${TTC_EYEBROW} mb-3`}>Gentle notes for this cycle</p>
+        <h2 className={`${TTC_HEADING} text-[22px] sm:text-[25px] mb-2`}>
           Small notes for where you may be right now
         </h2>
-        <p className="font-sans text-[12.5px] text-muted-foreground/85 leading-relaxed max-w-[58ch]">
+        <p className={`${TTC_HELPER} max-w-[58ch]`}>
           Small notes based on your saved cycle and anything you have chosen
           to log. These are estimates, not guarantees, and never a diagnosis.
         </p>
@@ -46,32 +50,25 @@ const TTCJourneyInsights = ({ insights, onOpenLogPanel, onScrollToHandover }: Pr
         {insights.map((insight) => (
           <div
             key={insight.id}
-            className="rounded-[18px] px-5 py-5 keepsake-surface flex flex-col"
-            style={{ borderColor: "hsl(var(--stage-ttc-accent) / 0.16)" }}
+            className={`${TTC_PAPER_CARD} ${TTC_TILE_PAD} flex flex-col`}
           >
-            <h3 className="font-serif text-[17px] sm:text-[18px] text-foreground leading-snug mb-2">
-              {insight.heading}
-            </h3>
-            <p className="font-sans text-[13.5px] text-foreground/72 leading-relaxed mb-4 flex-1">
-              {insight.copy}
-            </p>
+            <h3 className={`${TTC_CARD_TITLE} mb-2`}>{insight.heading}</h3>
+            <p className={`${TTC_HELPER} mb-4 flex-1`}>{insight.copy}</p>
             {insight.action.kind === "link" ? (
               <Link
                 to={insight.action.href}
                 onClick={() => trackEvent(EVENTS.TTC_INSIGHT_CLICKED)}
-                className="inline-flex items-center gap-1.5 font-sans text-[13px] font-medium self-start hover:opacity-80 transition-opacity"
-                style={{ color: "hsl(var(--stage-ttc-accent))" }}
+                className={`inline-flex min-h-11 items-center gap-1.5 self-start rounded-sm font-sans text-[13px] font-medium text-[hsl(var(--stage-ttc-olive))] transition-opacity hover:opacity-80 ${TTC_FOCUS_RING}`}
               >
-                {insight.ctaLabel} <ArrowRight size={13} />
+                {insight.ctaLabel} <ArrowRight size={13} aria-hidden="true" />
               </Link>
             ) : (
               <button
                 type="button"
                 onClick={() => handleClick(insight)}
-                className="inline-flex items-center gap-1.5 font-sans text-[13px] font-medium self-start hover:opacity-80 transition-opacity"
-                style={{ color: "hsl(var(--stage-ttc-accent))" }}
+                className={`inline-flex min-h-11 items-center gap-1.5 self-start rounded-sm font-sans text-[13px] font-medium text-[hsl(var(--stage-ttc-olive))] transition-opacity hover:opacity-80 ${TTC_FOCUS_RING}`}
               >
-                {insight.ctaLabel} <ArrowRight size={13} />
+                {insight.ctaLabel} <ArrowRight size={13} aria-hidden="true" />
               </button>
             )}
           </div>

@@ -2,6 +2,15 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import type { TTCStage } from "@/lib/ttcDerived";
 import type { ActiveTTCJourney } from "@/lib/savedTTCJourney";
+import {
+  TTC_CARD_TITLE,
+  TTC_EYEBROW,
+  TTC_HEADING,
+  TTC_HELPER,
+  TTC_PAPER_CARD,
+  TTC_TILE_PAD,
+  TTC_FOCUS_RING,
+} from "@/components/ttc/journey/ttcStyles";
 
 type Card = { key: string; title: string; blurb: string; href: string };
 
@@ -91,34 +100,21 @@ const TTCJourneyGuidance = ({ stage, journey }: Props) => {
 
   return (
     <section>
-      <p
-        className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
-        style={{ color: "hsl(var(--stage-ttc-accent))" }}
-      >
-        Guidance for you
-      </p>
-      <h2 className="font-serif text-[20px] sm:text-[22px] text-foreground mb-5">
-        Recommended reading
+      <p className={`${TTC_EYEBROW} mb-3`}>Guidance for you</p>
+      <h2 className={`${TTC_HEADING} text-[21px] sm:text-[23px] mb-5`}>
+        Helpful reading
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         {finalCards.map((c) => (
           <Link
             key={c.key}
             to={c.href}
-            className="group rounded-[18px] px-5 py-5 keepsake-surface hover:shadow-md transition-shadow flex flex-col"
-            style={{ borderColor: "hsl(var(--stage-ttc-accent) / 0.16)" }}
+            className={`group ${TTC_PAPER_CARD} ${TTC_TILE_PAD} flex flex-col transition-shadow hover:shadow-md ${TTC_FOCUS_RING}`}
           >
-            <h3 className="font-serif text-[17px] text-foreground leading-snug mb-2">
-              {c.title}
-            </h3>
-            <p className="font-sans text-[13.5px] text-muted-foreground leading-relaxed mb-4 flex-1">
-              {c.blurb}
-            </p>
-            <span
-              className="inline-flex items-center gap-1.5 font-sans text-[12.5px] font-medium group-hover:gap-2 transition-all"
-              style={{ color: "hsl(var(--stage-ttc-accent))" }}
-            >
-              Read more <ArrowRight size={13} />
+            <h3 className={`${TTC_CARD_TITLE} mb-2`}>{c.title}</h3>
+            <p className={`${TTC_HELPER} mb-4 flex-1`}>{c.blurb}</p>
+            <span className="inline-flex min-h-[24px] items-center gap-1.5 font-sans text-[12.5px] font-medium text-[hsl(var(--stage-ttc-olive))] transition-all group-hover:gap-2">
+              Read more <ArrowRight size={13} aria-hidden="true" />
             </span>
           </Link>
         ))}

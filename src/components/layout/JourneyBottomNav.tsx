@@ -20,6 +20,7 @@ import {
 } from "@/lib/navLifecycle";
 import { NAV_INSET_VAR, NAV_INSET_VALUE } from "@/lib/navInset";
 import { PG_FOCUS_RING, PG_NAV_ACTIVE, PG_NAV_INACTIVE } from "@/components/myweek/pregnancyStyles";
+import { TTC_NAV_ACTIVE, TTC_NAV_INACTIVE } from "@/components/ttc/journey/ttcStyles";
 
 interface Tab {
   label: string;
@@ -95,6 +96,7 @@ const JourneyBottomNav = () => {
   if (!visible) return null;
 
   const isPregnancy = lifecycle !== "first_year" && lifecycle !== "ttc";
+  const isTTC = lifecycle === "ttc";
   const tabs =
     lifecycle === "first_year"
       ? firstYearTabs(hasKeptChapter)
@@ -106,7 +108,11 @@ const JourneyBottomNav = () => {
   return (
     <nav
       aria-label="Journey navigation"
-      className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-parchment/95 backdrop-blur-xl border-t border-border/40 pb-[env(safe-area-inset-bottom)]"
+      className={`md:hidden fixed bottom-0 inset-x-0 z-40 backdrop-blur-xl border-t pb-[env(safe-area-inset-bottom)] ${
+        isTTC
+          ? "bg-[hsl(var(--stage-ttc-cream)/0.95)] border-[hsl(var(--stage-ttc-edge)/0.7)]"
+          : "bg-parchment/95 border-border/40"
+      }`}
     >
       <div className="grid auto-cols-fr grid-flow-col">
         {tabs.map(({ label, href, icon: Icon, event }) => {
@@ -121,10 +127,14 @@ const JourneyBottomNav = () => {
                 active
                   ? isPregnancy
                     ? PG_NAV_ACTIVE
-                    : "text-sage font-medium"
+                    : isTTC
+                      ? TTC_NAV_ACTIVE
+                      : "text-sage font-medium"
                   : isPregnancy
                     ? PG_NAV_INACTIVE
-                    : "text-foreground/55 font-light hover:text-foreground"
+                    : isTTC
+                      ? TTC_NAV_INACTIVE
+                      : "text-foreground/55 font-light hover:text-foreground"
               }`}
             >
               <Icon size={19} strokeWidth={active ? 2 : 1.6} aria-hidden />

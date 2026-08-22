@@ -22,18 +22,36 @@ describe("JournalBridgeCard", () => {
   });
 
   it("uses weekly copy in the week context", () => {
-    renderCard(<JournalBridgeCard context="week" />);
+    renderCard(<JournalBridgeCard context="week" variant="owner" />);
     expect(
       screen.getByText("Keep the quick moments here, and the longer story by hand.")
     ).toBeInTheDocument();
   });
 
+  it("keeps the discovery week cue free of ownership wording", () => {
+    const { container } = renderCard(<JournalBridgeCard context="week" />);
+    expect(
+      screen.getByText("There is a paper version of this week too.")
+    ).toBeInTheDocument();
+    expect(container.textContent ?? "").not.toContain("your journal");
+  });
+
   it("uses toolkit copy in the compact toolkit cue", () => {
     renderCard(<JournalBridgeCard context="toolkit" tone="inline" />);
     expect(
-      screen.getByText(/There is space for this in your journal too\./)
+      screen.getByText(/There is space for this in the journal too\./)
     ).toBeInTheDocument();
     expect(screen.getAllByRole("link")).toHaveLength(1);
+  });
+
+  it("uses owner wording only in the owner variant", () => {
+    const { container, unmount } = renderCard(
+      <JournalBridgeCard context="toolkit" tone="inline" variant="owner" />
+    );
+    expect(container.textContent ?? "").toContain("your journal");
+    unmount();
+    const discovery = renderCard(<JournalBridgeCard context="toolkit" tone="inline" />);
+    expect(discovery.container.textContent ?? "").not.toContain("your journal");
   });
 
   it("links to the existing /journal route in every context", () => {

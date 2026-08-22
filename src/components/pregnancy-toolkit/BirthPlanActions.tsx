@@ -30,7 +30,7 @@ const BirthPlanActions = ({ hasContent }: BirthPlanActionsProps) => {
           onClick={handlePrint}
           disabled={disabled}
           aria-disabled={disabled}
-          className="inline-flex items-center justify-center gap-2 rounded-full border px-5 py-2.5 font-sans text-[12px] font-medium tracking-[0.2em] uppercase transition-colors disabled:opacity-40 disabled:cursor-not-allowed hover:enabled:bg-[hsl(var(--stage-pregnancy)/0.35)]"
+          className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border px-5 py-2.5 font-sans text-[12px] font-medium tracking-[0.2em] uppercase transition-colors disabled:opacity-40 disabled:cursor-not-allowed hover:enabled:bg-[hsl(var(--stage-pregnancy)/0.35)]"
           style={{ color: accent, borderColor: softBorder }}
         >
           <Printer size={13} strokeWidth={1.8} aria-hidden="true" />
@@ -41,7 +41,7 @@ const BirthPlanActions = ({ hasContent }: BirthPlanActionsProps) => {
           onClick={handleSaveAsPdf}
           disabled={disabled}
           aria-disabled={disabled}
-          className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 font-sans text-[12px] font-medium tracking-[0.2em] uppercase text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:enabled:opacity-90"
+          className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-5 py-2.5 font-sans text-[12px] font-medium tracking-[0.2em] uppercase text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:enabled:opacity-90"
           style={{ background: accent }}
         >
           <FileDown size={13} strokeWidth={1.8} aria-hidden="true" />

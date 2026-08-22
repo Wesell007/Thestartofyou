@@ -56,14 +56,14 @@ const ConsentBanner = () => {
           <button
             type="button"
             onClick={() => setAnalyticsConsent("rejected")}
-            className="flex-1 inline-flex items-center justify-center rounded-pill px-5 py-2.5 font-sans text-sm font-medium border border-foreground/20 text-foreground/80 hover:bg-foreground/5 hover:text-foreground transition-all"
+            className="flex-1 inline-flex min-h-[44px] items-center justify-center rounded-pill px-5 py-2.5 font-sans text-sm font-medium border border-foreground/20 text-foreground/80 hover:bg-foreground/5 hover:text-foreground transition-all"
           >
             Reject analytics
           </button>
           <button
             type="button"
             onClick={() => setAnalyticsConsent("accepted")}
-            className="flex-1 inline-flex items-center justify-center rounded-pill px-5 py-2.5 font-sans text-sm font-medium bg-terracotta text-terracotta-foreground shadow-cta hover:bg-terracotta-hover transition-all"
+            className="flex-1 inline-flex min-h-[44px] items-center justify-center rounded-pill px-5 py-2.5 font-sans text-sm font-medium bg-terracotta text-terracotta-foreground shadow-cta hover:bg-terracotta-hover transition-all"
           >
             Accept analytics
           </button>

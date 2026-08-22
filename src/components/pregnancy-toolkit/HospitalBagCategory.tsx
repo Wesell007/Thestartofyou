@@ -131,15 +131,20 @@ const HospitalBagCategoryCard = ({
                   aria-label={isPacked ? `Mark ${item.label} as not packed` : `Mark ${item.label} as packed`}
                   onClick={() => onToggle(item.id)}
                   disabled={disabled}
-                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-colors"
-                  style={{
-                    background: isPacked ? accent : "transparent",
-                    borderColor: isPacked ? accent : "hsl(var(--stage-pregnancy-accent) / 0.35)",
-                  }}
+                  className="flex h-11 w-11 -m-2.5 shrink-0 items-center justify-center rounded-full transition-colors"
                 >
-                  {isPacked ? (
-                    <Check size={13} strokeWidth={2.2} color="white" />
-                  ) : null}
+                  <span
+                    aria-hidden="true"
+                    className="flex h-6 w-6 items-center justify-center rounded-md border transition-colors"
+                    style={{
+                      background: isPacked ? accent : "transparent",
+                      borderColor: isPacked ? accent : "hsl(var(--stage-pregnancy-accent) / 0.35)",
+                    }}
+                  >
+                    {isPacked ? (
+                      <Check size={13} strokeWidth={2.2} color="white" />
+                    ) : null}
+                  </span>
                 </button>
                 <span
                   className={`flex-1 font-sans text-[14px] leading-[1.5] ${
@@ -185,7 +190,7 @@ const HospitalBagCategoryCard = ({
           <button
             type="submit"
             disabled={disabled || draft.trim().length === 0}
-            className="inline-flex items-center gap-1 rounded-full px-3 py-1 font-sans text-[10.5px] font-medium tracking-[0.2em] uppercase transition-opacity disabled:opacity-40"
+            className="inline-flex min-h-[44px] items-center gap-1 rounded-full px-4 py-2 font-sans text-[10.5px] font-medium tracking-[0.2em] uppercase transition-opacity disabled:opacity-40"
             style={{ background: accent, color: "white" }}
           >
             <Plus size={11} strokeWidth={2} /> Add

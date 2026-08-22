@@ -355,7 +355,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
         <figure className="relative rounded-[24px] overflow-hidden held-image bg-card">
           <img
             src={signedUrl}
-            alt={`Week ${week} — ${chapterTitle}`}
+            alt={`Photo kept in week ${week}, ${chapterTitle}`}
             className="w-full max-h-[520px] object-cover"
           />
           <div

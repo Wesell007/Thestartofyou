@@ -93,7 +93,7 @@ const PhotoJournal = ({ photos, videos = [], voiceNotes = [], currentWeek }: Pro
           Photo journal
         </h2>
         <p className="font-serif text-foreground/75 text-[14.5px] leading-[1.55]">
-          The weeks you have chosen to see again — photos, videos and voice notes.
+          The weeks you have chosen to see again: photos, videos and voice notes.
         </p>
       </div>
 

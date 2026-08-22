@@ -411,20 +411,15 @@ const SlotVoiceMemory = ({ userId, week, onSaved }: Props) => {
 
       {/* Saved voice note */}
       {hasSaved && (
-        <figure
-          className="rounded-[20px] px-5 py-5 bg-card"
-          style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.18)" }}
-        >
-          <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-foreground/10 text-foreground/70">
+        <figure className="rounded-[20px] border border-[hsl(var(--stage-pregnancy-edge))] bg-card px-5 py-5">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <span className="inline-flex items-center gap-1.5 rounded-pill border border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-blush))] px-2.5 py-1 font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-[hsl(var(--stage-pregnancy-accent))]">
               <Lock size={10} strokeWidth={1.8} aria-hidden="true" />
-              <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
-                Private
-              </span>
+              Private
             </span>
             <div className="flex items-center gap-2">
               {formatDuration(durationSeconds) && (
-                <span className="font-sans text-[11px] text-foreground/60 tabular-nums">
+                <span className="font-sans text-[11px] tabular-nums text-[hsl(var(--stage-pregnancy-text-soft))]">
                   {formatDuration(durationSeconds)}
                 </span>
               )}
@@ -436,20 +431,20 @@ const SlotVoiceMemory = ({ userId, week, onSaved }: Props) => {
                   startRecording();
                 }}
                 disabled={uploading || !supported}
-                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/60 hover:text-foreground/85 transition-colors disabled:opacity-60"
+                className={PG_MEDIA_ACTION_QUIET}
                 aria-label="Replace voice note"
               >
-                <Mic size={11} strokeWidth={1.8} />
+                <Mic size={11} strokeWidth={1.8} aria-hidden="true" />
                 {uploading ? "Saving voice note..." : "Replace"}
               </button>
               <button
                 type="button"
                 onClick={remove}
                 disabled={uploading}
-                className="w-7 h-7 rounded-full bg-foreground/10 text-foreground/70 hover:bg-foreground/20 transition-colors flex items-center justify-center disabled:opacity-60"
+                className={`inline-flex h-11 w-11 items-center justify-center rounded-full border border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-blush))] text-[hsl(var(--stage-pregnancy-accent))] transition-colors hover:bg-[hsl(var(--stage-pregnancy-cream))] disabled:opacity-60`}
                 aria-label="Remove voice note"
               >
-                <X size={12} strokeWidth={1.8} />
+                <X size={13} strokeWidth={1.8} aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -469,34 +464,20 @@ const SlotVoiceMemory = ({ userId, week, onSaved }: Props) => {
 
       {/* Replace flow: recording / preview surfaced under the saved player */}
       {hasSaved && phase !== "idle" && (
-        <div
-          className="mt-3 rounded-[18px] px-5 py-4"
-          style={{
-            background: "hsl(var(--stage-pregnancy) / 0.12)",
-            border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.2)",
-          }}
-        >
+        <div className={`mt-3 ${PG_MEDIA_CAPTION_PANEL}`}>
           {phase === "recording" ? (
-            <div className="flex items-center justify-between gap-3">
-              <p className="font-serif text-[15px] text-foreground/80 tabular-nums">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <p className="font-serif text-[15px] tabular-nums text-[hsl(var(--stage-pregnancy-text))]">
                 Recording · {timer}
               </p>
-              <button
-                type="button"
-                onClick={stopRecording}
-                className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-sans text-[11px] font-medium tracking-[0.22em] uppercase"
-                style={{ color: accent, border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.42)" }}
-              >
-                <Square size={11} strokeWidth={2} fill="currentColor" />
+              <button type="button" onClick={stopRecording} className={PG_MEDIA_ACTION}>
+                <Square size={11} strokeWidth={2} fill="currentColor" aria-hidden="true" />
                 Stop
               </button>
             </div>
           ) : previewUrl ? (
             <div>
-              <p
-                className="font-sans text-[10.5px] font-medium tracking-[0.24em] uppercase mb-3"
-                style={{ color: accent }}
-              >
+              <p className="mb-3 font-sans text-[10.5px] font-medium tracking-[0.24em] uppercase text-[hsl(var(--stage-pregnancy-accent))]">
                 New recording
               </p>
               <audio key={previewUrl} src={previewUrl} controls preload="metadata" className="w-full" />
@@ -505,8 +486,7 @@ const SlotVoiceMemory = ({ userId, week, onSaved }: Props) => {
                   type="button"
                   onClick={savePreview}
                   disabled={uploading}
-                  className="rounded-full px-4 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase transition-colors disabled:opacity-60"
-                  style={{ color: accent, border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.5)" }}
+                  className={PG_MEDIA_ACTION}
                 >
                   {uploading ? "Saving voice note..." : "Replace saved note"}
                 </button>
@@ -514,10 +494,11 @@ const SlotVoiceMemory = ({ userId, week, onSaved }: Props) => {
                   type="button"
                   onClick={discardPreview}
                   disabled={uploading}
-                  className="rounded-full px-3.5 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/55 hover:text-foreground/80 transition-colors disabled:opacity-60"
+                  className={PG_MEDIA_ACTION_QUIET}
                 >
                   Keep the original
                 </button>
+
               </div>
             </div>
           ) : null}

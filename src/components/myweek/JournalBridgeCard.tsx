@@ -29,18 +29,40 @@ interface Props {
 
 const LINK_LABEL = "See the journal";
 
-const COPY: Record<JournalBridgeContext, { title: string; body: string }> = {
-  week: {
-    title: "This week also has space in your journal.",
-    body: "Keep the quick moments here, and the longer story by hand.",
+type BridgeCopy = { title: string; body: string };
+
+/**
+ * Owner copy speaks to a journal that is already on the shelf. Discovery copy
+ * stays neutral and never assumes anyone owns one. Presentation only.
+ */
+const COPY: Record<JournalBridgeVariant, Record<JournalBridgeContext, BridgeCopy>> = {
+  owner: {
+    week: {
+      title: "This week also has space in your journal.",
+      body: "Keep the quick moments here, and the longer story by hand.",
+    },
+    journey: {
+      title: "Your journal holds the longer version of this.",
+      body: "Keep the quick moments here, and the fuller story by hand.",
+    },
+    toolkit: {
+      title: "There is space for this in your journal too.",
+      body: "Use the app for quick edits, and your journal for the keepsake version.",
+    },
   },
-  journey: {
-    title: "Some things are nicer written by hand.",
-    body: "The physical journal gives you a place to keep this story offline too.",
-  },
-  toolkit: {
-    title: "There is space for this in your journal too.",
-    body: "Use the app for quick edits, and your journal for the keepsake version.",
+  discovery: {
+    week: {
+      title: "There is a paper version of this week too.",
+      body: "Some people like to keep the longer story by hand.",
+    },
+    journey: {
+      title: "Some things are nicer written by hand.",
+      body: "The physical journal gives you a place to keep this story offline too.",
+    },
+    toolkit: {
+      title: "There is space for this in the journal too.",
+      body: "Use the app for quick edits, and paper for the keepsake version.",
+    },
   },
 };
 

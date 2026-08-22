@@ -140,10 +140,11 @@ const HospitalBagCategoryCard = ({
                       background: isPacked ? accent : "transparent",
                       borderColor: isPacked ? accent : "hsl(var(--stage-pregnancy-accent) / 0.35)",
                     }}
-                >
-                  {isPacked ? (
-                    <Check size={13} strokeWidth={2.2} color="white" />
-                  ) : null}
+                  >
+                    {isPacked ? (
+                      <Check size={13} strokeWidth={2.2} color="white" />
+                    ) : null}
+                  </span>
                 </button>
                 <span
                   className={`flex-1 font-sans text-[14px] leading-[1.5] ${

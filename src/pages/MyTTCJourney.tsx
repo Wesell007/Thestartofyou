@@ -21,6 +21,7 @@ import { getAllTTCLogsForJourney, type TTCLog } from "@/lib/ttcLogs";
 import { computeTTCInsights } from "@/lib/ttcInsights";
 import TTCJourneySummary from "@/components/ttc/journey/TTCJourneySummary";
 import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
+import TTCTodayCard from "@/components/ttc/journey/TTCTodayCard";
 import TTCJourneyFocusCard from "@/components/ttc/journey/TTCJourneyFocusCard";
 import TTCJourneyGuidance from "@/components/ttc/journey/TTCJourneyGuidance";
 import TTCJourneyCalendar from "@/components/ttc/journey/TTCJourneyCalendar";

@@ -363,8 +363,9 @@ const MyTTCJourney = () => {
 
 
         {/* Ask */}
-        <section className={`${TTC_PAPER_CARD_WARM} ${TTC_CARD_PAD} mb-10 sm:mb-12`}>
-          <p className={`${TTC_EYEBROW} mb-3`}>Ask Cindy</p>
+        <section className={`relative overflow-hidden ${TTC_PAPER_CARD_WARM} ${TTC_CARD_PAD} mb-10 sm:mb-12`}>
+          <TTCBotanicalLeaf className="-bottom-10 -right-6 w-[150px]" opacity={0.28} />
+          <p className={`${TTC_EYEBROW} relative mb-3`}>Ask Cindy</p>
           <h2 className={`${TTC_HEADING} text-[21px] sm:text-[23px] mb-2`}>
             Ask about this part of your cycle
           </h2>

@@ -190,7 +190,7 @@ const HospitalBagCategoryCard = ({
           <button
             type="submit"
             disabled={disabled || draft.trim().length === 0}
-            className="inline-flex items-center gap-1 rounded-full px-3 py-1 font-sans text-[10.5px] font-medium tracking-[0.2em] uppercase transition-opacity disabled:opacity-40"
+            className="inline-flex min-h-[44px] items-center gap-1 rounded-full px-4 py-2 font-sans text-[10.5px] font-medium tracking-[0.2em] uppercase transition-opacity disabled:opacity-40"
             style={{ background: accent, color: "white" }}
           >
             <Plus size={11} strokeWidth={2} /> Add

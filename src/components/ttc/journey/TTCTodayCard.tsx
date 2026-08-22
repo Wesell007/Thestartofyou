@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { differenceInCalendarDays, format } from "date-fns";
 import type { TTCStage } from "@/lib/ttcDerived";
 import type { ActiveTTCJourney } from "@/lib/savedTTCJourney";
+import type { TTCSupportMoment } from "@/lib/ttcSupportMoment";
 import { parseDateOnly } from "@/lib/dateOnly";
 import {
   TTC_CARD_PAD,
@@ -151,10 +152,14 @@ type Props = {
   stage: TTCStage | null;
   cycleDay: number | null;
   onAddNote: () => void;
+  /** Phase 28E — optional support-aware headline for the harder moments. */
+  moment?: TTCSupportMoment | null;
 };
 
-const TTCTodayCard = ({ journey, stage, cycleDay, onAddNote }: Props) => {
+const TTCTodayCard = ({ journey, stage, cycleDay, onAddNote, moment }: Props) => {
   const copy = STAGE_COPY[stage ?? "before_ovulation"];
+  const headline = moment?.today.headline ?? copy.headline;
+  const support = moment?.today.support ?? copy.support;
   const details = buildDetails(journey, cycleDay);
 
   return (
@@ -171,10 +176,10 @@ const TTCTodayCard = ({ journey, stage, cycleDay, onAddNote }: Props) => {
           id="ttc-today-heading"
           className={`${TTC_HEADING} text-[25px] sm:text-[28px] mb-3 max-w-[22ch]`}
         >
-          {copy.headline}
+          {headline}
         </h2>
         <p className="font-serif italic text-[16px] sm:text-[17px] leading-[1.65] text-[hsl(var(--stage-ttc-text-soft))] max-w-[46ch] mb-6">
-          {copy.support}
+          {support}
         </p>
 
         <div className="flex flex-wrap items-center gap-x-5 gap-y-3 mb-6">

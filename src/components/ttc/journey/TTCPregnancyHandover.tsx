@@ -15,6 +15,17 @@ import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import type { ActiveTTCJourney } from "@/lib/savedTTCJourney";
 import { parseDateOnly } from "@/lib/dateOnly";
+import {
+  TTC_CARD_BODY,
+  TTC_CARD_PAD,
+  TTC_EYEBROW,
+  TTC_HEADING,
+  TTC_ICON_BUBBLE,
+  TTC_PAPER_CARD_WARM,
+  TTC_QUIET_LINK,
+  TTC_SOFT_PILL,
+} from "@/components/ttc/journey/ttcStyles";
+import { TTCWatercolourWash } from "@/components/ttc/journey/TTCDecor";
 
 type Props = {
   journey: ActiveTTCJourney;
@@ -51,32 +62,23 @@ const TTCPregnancyHandover = forwardRef<HTMLElement, Props>(
     return (
       <section
         ref={ref}
-        className="rounded-[20px] px-6 sm:px-7 py-7 keepsake-surface"
-        style={{ borderColor: "hsl(var(--stage-pregnancy-accent) / 0.18)" }}
+        className={`relative overflow-hidden ${TTC_PAPER_CARD_WARM} ${TTC_CARD_PAD}`}
       >
-        <div className="flex items-start gap-3 mb-3">
-          <div
-            className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{
-              background: "hsl(var(--stage-pregnancy-accent) / 0.14)",
-            }}
-          >
+        <TTCWatercolourWash className="-bottom-24 -right-16 w-[300px]" opacity={0.3} />
+        <div className="relative flex items-start gap-3 mb-3">
+          <div className={`${TTC_ICON_BUBBLE} flex-shrink-0`}>
             <Sparkles
               size={15}
-              style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+              className="text-[hsl(var(--stage-ttc-olive))]"
+              aria-hidden="true"
             />
           </div>
           <div className="flex-1">
-            <p
-              className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-1"
-              style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-            >
-              Pregnancy handover
-            </p>
-            <h2 className="font-serif text-[20px] sm:text-[22px] text-foreground mb-2 leading-snug">
+            <p className={`${TTC_EYEBROW} mb-1`}>A new chapter</p>
+            <h2 className={`${TTC_HEADING} text-[21px] sm:text-[23px] mb-2`}>
               Ready to move into pregnancy guidance?
             </h2>
-            <p className="font-serif italic text-foreground/68 text-[15px] leading-[1.6] mb-5 max-w-[52ch]">
+            <p className={`${TTC_CARD_BODY} mb-5`}>
               If you have a positive test and feel ready, we can help you move
               from TTC into pregnancy support. You will still choose what to
               save next.
@@ -85,22 +87,19 @@ const TTCPregnancyHandover = forwardRef<HTMLElement, Props>(
               <button
                 type="button"
                 onClick={() => setOpen(true)}
-                className="inline-flex items-center gap-2 rounded-pill px-5 py-2.5 font-sans text-sm font-medium text-white shadow-cta hover:opacity-90 transition-opacity"
-                style={{
-                  background: "hsl(var(--stage-pregnancy-accent))",
-                }}
+                className={TTC_SOFT_PILL}
               >
-                Start pregnancy guidance <ArrowRight size={14} />
+                Start pregnancy guidance <ArrowRight size={14} aria-hidden="true" />
               </button>
               <Link
                 to="/due-date-calculator"
-                className="font-sans text-[13.5px] text-muted-foreground hover:text-foreground transition-colors underline-offset-4 hover:underline"
+                className={TTC_QUIET_LINK}
               >
                 Use due date calculator
               </Link>
               <Link
                 to="/pregnancy"
-                className="font-sans text-[13.5px] text-muted-foreground hover:text-foreground transition-colors underline-offset-4 hover:underline"
+                className={TTC_QUIET_LINK}
               >
                 Explore pregnancy hub
               </Link>

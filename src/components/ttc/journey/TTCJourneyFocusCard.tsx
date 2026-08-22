@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import type { TTCStage } from "@/lib/ttcDerived";
+import {
+  TTC_CARD_BODY,
+  TTC_CARD_PAD,
+  TTC_EYEBROW,
+  TTC_HEADING,
+  TTC_PAPER_CARD,
+  TTC_QUIET_LINK,
+  TTC_SOFT_PILL,
+} from "@/components/ttc/journey/ttcStyles";
+import { TTCWatercolourWash } from "@/components/ttc/journey/TTCDecor";
 
 type Copy = {
   heading: string;
@@ -30,7 +40,7 @@ const STAGE_COPY: Record<TTCStage, Copy> = {
   },
   likely_ovulation: {
     heading: "Ovulation may be around now",
-    body: "Ovulation can shift, even in regular cycles. Use this as a guide rather than a guarantee.",
+    body: "Ovulation can shift, even in steady cycles. Use this as a guide rather than a guarantee.",
     primaryLabel: "Read about ovulation signs",
     primaryHref: "/articles/ovulation-signs",
     askLabel: "Ask about ovulation signs",
@@ -65,36 +75,23 @@ const STAGE_COPY: Record<TTCStage, Copy> = {
 const TTCJourneyFocusCard = ({ stage }: { stage: TTCStage | null }) => {
   const copy = STAGE_COPY[stage ?? "before_ovulation"];
   return (
-    <section
-      className="rounded-[22px] px-6 sm:px-7 py-7 sm:py-8 keepsake-surface"
-      style={{ borderColor: "hsl(var(--stage-ttc-accent) / 0.18)" }}
-    >
-      <p
-        className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
-        style={{ color: "hsl(var(--stage-ttc-accent))" }}
-      >
-        Today's focus
-      </p>
-      <h2 className="font-serif text-[22px] sm:text-[24px] leading-snug text-foreground mb-3">
-        {copy.heading}
-      </h2>
-      <p className="font-serif italic text-[15.5px] text-foreground/70 leading-[1.65] max-w-[52ch] mb-6">
-        {copy.body}
-      </p>
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
-        <Link
-          to={copy.primaryHref}
-          className="inline-flex items-center gap-2 rounded-pill px-5 py-2.5 font-sans text-sm font-medium text-white shadow-cta hover:opacity-90 transition-opacity"
-          style={{ background: "hsl(var(--stage-ttc-accent))" }}
-        >
-          {copy.primaryLabel} <ArrowRight size={14} />
-        </Link>
-        <Link
-          to={copy.askHref}
-          className="font-sans text-[13.5px] text-muted-foreground hover:text-foreground transition-colors underline-offset-4 hover:underline"
-        >
-          {copy.askLabel}
-        </Link>
+    <section className={`relative overflow-hidden ${TTC_PAPER_CARD} ${TTC_CARD_PAD}`}>
+      <TTCWatercolourWash
+        className="-bottom-24 -left-20 w-[320px]"
+        opacity={0.28}
+      />
+      <div className="relative">
+        <p className={`${TTC_EYEBROW} mb-3`}>What may be useful today</p>
+        <h2 className={`${TTC_HEADING} text-[22px] sm:text-[25px] mb-3`}>{copy.heading}</h2>
+        <p className={`${TTC_CARD_BODY} mb-6`}>{copy.body}</p>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <Link to={copy.primaryHref} className={TTC_SOFT_PILL}>
+            {copy.primaryLabel} <ArrowRight size={14} aria-hidden="true" />
+          </Link>
+          <Link to={copy.askHref} className={TTC_QUIET_LINK}>
+            {copy.askLabel}
+          </Link>
+        </div>
       </div>
     </section>
   );

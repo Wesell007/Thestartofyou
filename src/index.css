@@ -79,6 +79,27 @@
     );
     --shadow-pregnancy-paper: 0 26px 56px -38px hsl(var(--stage-pregnancy-text) / 0.5);
 
+    /* Phase 28B — signed-in TTC journey surfaces (Nano Banana board):
+       cream paper, soft sage, muted olive, blush and peach warmth. */
+    --stage-ttc-cream: 40 40% 96%;
+    --stage-ttc-cream-soft: 40 30% 93%;
+    --stage-ttc-sage: 120 16% 89%;
+    --stage-ttc-sage-soft: 120 14% 82%;
+    --stage-ttc-olive: 92 17% 34%;
+    --stage-ttc-olive-soft: 92 14% 50%;
+    --stage-ttc-blush: 8 46% 91%;
+    --stage-ttc-peach: 24 58% 92%;
+    --stage-ttc-edge: 40 20% 84%;
+    --stage-ttc-text: 90 10% 20%;
+    --stage-ttc-text-soft: 90 8% 36%;
+    --wash-ttc: radial-gradient(
+      120% 100% at 14% 0%,
+      hsl(var(--stage-ttc-sage) / 0.8) 0%,
+      hsl(var(--stage-ttc-cream) / 0.94) 48%,
+      transparent 84%
+    );
+    --shadow-ttc-paper: 0 26px 56px -38px hsl(var(--stage-ttc-text) / 0.42);
+
     --stage-postpartum: 16 24% 93%;
     --stage-postpartum-accent: 14 40% 48%;
     /* Legacy First Year tokens (kept for backwards compatibility during rebuild) */
@@ -487,6 +508,49 @@
     border-top: 1px dotted hsl(var(--stage-pregnancy-edge));
   }
 
+  /* ─── Phase 28B: TTC journey paper system ─── */
+  .ttc-paper {
+    background:
+      linear-gradient(
+        180deg,
+        hsl(var(--card)) 0%,
+        hsl(var(--stage-ttc-cream)) 100%
+      );
+    border: 1px solid hsl(var(--stage-ttc-edge) / 0.7);
+    box-shadow: var(--shadow-ttc-paper);
+  }
+
+  /* Warmer variant, used for the hopeful surfaces (handover, ask). */
+  .ttc-paper-warm {
+    background:
+      linear-gradient(
+        170deg,
+        hsl(var(--stage-ttc-peach) / 0.55) 0%,
+        hsl(var(--stage-ttc-cream)) 62%
+      );
+    border: 1px solid hsl(var(--stage-ttc-edge) / 0.7);
+    box-shadow: var(--shadow-ttc-paper);
+  }
+
+  /* Soft page wash behind the TTC journey column. */
+  .ttc-wash {
+    background-image: var(--wash-ttc);
+  }
+
+  /* Cream app surface behind the signed-in TTC shell. */
+  .ttc-app-surface {
+    background-color: hsl(var(--stage-ttc-cream));
+    background-image:
+      radial-gradient(circle at 12% 4%, hsl(var(--stage-ttc-sage) / 0.5) 0%, transparent 44%),
+      radial-gradient(circle at 88% 70%, hsl(var(--stage-ttc-peach) / 0.4) 0%, transparent 46%);
+    background-attachment: fixed, fixed;
+  }
+
+  /* Hairline dotted rule inside TTC paper cards. */
+  .ttc-rule {
+    border: 0;
+    border-top: 1px dotted hsl(var(--stage-ttc-edge));
+  }
 
 
   /* Held image — premium frame for kept photographs */

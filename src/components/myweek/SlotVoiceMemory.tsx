@@ -599,17 +599,10 @@ const SlotVoiceMemory = ({ userId, week, onSaved }: Props) => {
       {hasSaved && (
         <div className="mt-4">
           {captionEditing ? (
-            <div
-              className="rounded-[18px] px-4 py-4"
-              style={{
-                background: "hsl(var(--stage-pregnancy) / 0.14)",
-                border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.22)",
-              }}
-            >
+            <div className={PG_MEDIA_CAPTION_PANEL}>
               <label
                 htmlFor={`voice-caption-${week}`}
-                className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase"
-                style={{ color: accent }}
+                className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-[hsl(var(--stage-pregnancy-accent))]"
               >
                 Caption
               </label>
@@ -624,16 +617,15 @@ const SlotVoiceMemory = ({ userId, week, onSaved }: Props) => {
                 rows={2}
                 placeholder={CAPTION_PLACEHOLDER}
                 disabled={captionSaving}
-                className="mt-2 w-full resize-none bg-transparent font-serif italic text-[14.5px] leading-[1.6] text-foreground/85 placeholder:text-foreground/40 focus:outline-none"
+                className="mt-2 w-full resize-none bg-transparent font-serif italic text-[14.5px] leading-[1.6] text-[hsl(var(--stage-pregnancy-text))] placeholder:text-[hsl(var(--stage-pregnancy-text-soft)/0.7)] focus:outline-none"
               />
-              <div className="flex items-center justify-between gap-3 mt-2">
+              <div className="flex flex-wrap items-center justify-between gap-3 mt-2">
                 <span
-                  className="font-sans text-[10.5px] font-medium tracking-[0.2em] uppercase"
-                  style={{
-                    color: isCaptionWithinLimit(captionDraft)
-                      ? accent
-                      : "hsl(var(--destructive))",
-                  }}
+                  className={`font-sans text-[10.5px] font-medium tracking-[0.2em] uppercase ${
+                    isCaptionWithinLimit(captionDraft)
+                      ? "text-[hsl(var(--stage-pregnancy-accent))]"
+                      : "text-destructive"
+                  }`}
                 >
                   {normaliseCaption(captionDraft).length}/{CAPTION_MAX}
                 </span>
@@ -642,7 +634,7 @@ const SlotVoiceMemory = ({ userId, week, onSaved }: Props) => {
                     type="button"
                     onClick={cancelCaption}
                     disabled={captionSaving}
-                    className="rounded-full px-3.5 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/60 hover:text-foreground/85 transition-colors"
+                    className={PG_MEDIA_ACTION_QUIET}
                   >
                     Cancel
                   </button>
@@ -650,8 +642,7 @@ const SlotVoiceMemory = ({ userId, week, onSaved }: Props) => {
                     type="button"
                     onClick={submitCaption}
                     disabled={captionSaving || !isCaptionWithinLimit(captionDraft)}
-                    className="rounded-full px-4 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase transition-colors disabled:opacity-50"
-                    style={{ color: accent, border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.5)" }}
+                    className={`${PG_MEDIA_ACTION} disabled:opacity-50`}
                   >
                     {captionSaving ? "Saving" : "Save"}
                   </button>
@@ -667,23 +658,17 @@ const SlotVoiceMemory = ({ userId, week, onSaved }: Props) => {
             <button
               type="button"
               onClick={openCaptionEditor}
-              className="w-full text-left rounded-[16px] px-4 py-3 font-serif italic text-[14px] leading-[1.6] text-foreground/78 hover:text-foreground/90 transition-colors"
-              style={{
-                background: "hsl(var(--stage-pregnancy) / 0.10)",
-                border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.16)",
-              }}
+              aria-label="Edit caption"
+              className={`w-full text-left ${PG_MEDIA_CAPTION_PANEL} ${PG_MEDIA_CAPTION} transition-colors hover:bg-[hsl(var(--stage-pregnancy-cream))]`}
             >
               {caption}
             </button>
           ) : (
-            <button
-              type="button"
-              onClick={openCaptionEditor}
-              className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/60 hover:text-foreground/85 transition-colors"
-            >
+            <button type="button" onClick={openCaptionEditor} className={PG_MEDIA_ACTION_QUIET}>
               Caption
             </button>
           )}
+
         </div>
       )}
     </section>

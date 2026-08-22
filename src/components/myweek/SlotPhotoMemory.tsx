@@ -332,21 +332,17 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
           </button>
 
           {/* Quiet affordance — sits below, never the protagonist */}
-          <div className="flex items-center justify-between gap-3 px-1">
+          <div className="flex flex-wrap items-center justify-between gap-3 px-1">
             <button
               type="button"
               onClick={() => fileRef.current?.click()}
               disabled={state === "uploading"}
-              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-sans text-[11px] font-medium tracking-[0.22em] uppercase transition-colors hover:bg-[hsl(var(--stage-pregnancy-accent)/0.1)]"
-              style={{
-                color: "hsl(var(--stage-pregnancy-accent))",
-                border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.42)",
-              }}
+              className={PG_MEDIA_ACTION}
             >
               {state === "uploading" ? "Saving" : "Add a photo"}
             </button>
-            <span className="flex items-center gap-1.5 text-foreground/60">
-              <Lock size={10} strokeWidth={1.7} />
+            <span className="flex items-center gap-1.5 text-[hsl(var(--stage-pregnancy-text-soft))]">
+              <Lock size={10} strokeWidth={1.7} aria-hidden="true" />
               <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
                 Private to you
               </span>
@@ -356,9 +352,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
       )}
 
       {state === "loaded" && signedUrl && (
-        <figure
-          className="relative rounded-[24px] overflow-hidden held-image bg-card"
-        >
+        <figure className="relative rounded-[24px] overflow-hidden held-image bg-card">
           <img
             src={signedUrl}
             alt={`Week ${week} — ${chapterTitle}`}
@@ -366,52 +360,40 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              boxShadow: "inset 0 0 80px hsl(222 14% 12% / 0.08)",
-            }}
+            className="absolute inset-0 pointer-events-none shadow-[inset_0_0_80px_hsl(var(--stage-pregnancy-text)/0.1)]"
           />
-          <div className="absolute top-3 left-3 flex items-center gap-2 px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95">
-            <Lock size={10} strokeWidth={1.8} />
-            <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
-              Private
-            </span>
+          <div className={`absolute top-3 left-3 ${PG_MEDIA_OVERLAY_BADGE}`}>
+            <Lock size={10} strokeWidth={1.8} aria-hidden="true" />
+            <span>Private</span>
           </div>
           <div className="absolute top-3 right-3 flex items-center gap-2">
             <button
               type="button"
               onClick={() => fileRef.current?.click()}
-              className="px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center gap-1.5"
+              className={PG_MEDIA_OVERLAY_ACTION}
               aria-label="Replace photo"
             >
-              <ImagePlus size={11} strokeWidth={1.8} />
-              <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
-                Replace
-              </span>
+              <ImagePlus size={11} strokeWidth={1.8} aria-hidden="true" />
+              <span>Replace</span>
             </button>
             <button
               type="button"
               onClick={handleRemove}
-              className="w-7 h-7 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center justify-center"
+              className={PG_MEDIA_OVERLAY_ICON}
               aria-label="Remove photo"
             >
-              <X size={12} strokeWidth={1.8} />
+              <X size={13} strokeWidth={1.8} aria-hidden="true" />
             </button>
           </div>
-          <figcaption
-            className="px-5 py-3 border-t font-serif italic text-[12.5px] text-foreground/60 tracking-wide flex items-center justify-between"
-            style={{
-              borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)",
-              background: "hsl(var(--stage-pregnancy) / 0.18)",
-            }}
-          >
+          <figcaption className="flex items-center justify-between gap-3 border-t border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-cream)/0.7)] px-5 py-3 font-serif italic text-[12.5px] tracking-wide text-[hsl(var(--stage-pregnancy-text-soft))]">
             <span>Week {week} · {chapterTitle}</span>
-            <span className="font-sans not-italic text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/45">
+            <span className="font-sans not-italic text-[10px] font-medium tracking-[0.22em] uppercase text-[hsl(var(--stage-pregnancy-text-soft))]">
               Held privately
             </span>
           </figcaption>
         </figure>
       )}
+
 
       {justSaved && (state === "loaded" || state === "empty") && (
         <p

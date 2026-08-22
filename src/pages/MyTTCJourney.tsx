@@ -71,6 +71,8 @@ const MyTTCJourney = () => {
   const [logs, setLogs] = useState<TTCLog[]>([]);
   const [panelOpen, setPanelOpen] = useState(false);
   const [panelDate, setPanelDate] = useState<string>(todayIso());
+  const [panelType, setPanelType] = useState<TTCLogType | undefined>(undefined);
+  const [panelValue, setPanelValue] = useState<string | undefined>(undefined);
   const [editing, setEditing] = useState<TTCLog | null>(null);
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [logError, setLogError] = useState<string | null>(null);

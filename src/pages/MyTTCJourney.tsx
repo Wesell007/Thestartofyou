@@ -459,6 +459,8 @@ const MyTTCJourney = () => {
           userId={userId}
           journeyId={journey.id}
           initialDate={panelDate}
+          initialType={panelType}
+          initialValue={panelValue}
           editing={editing}
           onSaved={refetchLogs}
         />

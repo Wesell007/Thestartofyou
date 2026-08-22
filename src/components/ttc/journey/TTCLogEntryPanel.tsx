@@ -141,15 +141,16 @@ const TTCLogEntryPanel = ({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="w-full sm:max-w-md overflow-y-auto">
+      <SheetContent side="right" className="w-full sm:max-w-md overflow-y-auto ttc-paper-warm">
         <SheetHeader className="text-left">
-          <SheetTitle className="font-serif text-[22px] text-foreground">
-            {editing ? "Edit log" : "Add a log"}
+          <SheetTitle className="font-serif font-normal text-[22px] leading-[1.25] text-foreground">
+            {editing ? "Edit this note" : "Add a small note"}
           </SheetTitle>
-          <SheetDescription className="font-sans text-[13px] text-muted-foreground/85">
-            A quick note for your own reference. Only you can see this.
+          <SheetDescription className="font-sans text-[13px] text-[hsl(var(--stage-ttc-text-soft))]">
+            Write what you notice, when you feel ready. This is private to you.
           </SheetDescription>
         </SheetHeader>
+
 
         <div className="mt-6 space-y-5">
           <div>

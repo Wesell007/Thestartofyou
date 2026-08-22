@@ -10,6 +10,17 @@ import {
   isCaptionWithinLimit,
   normaliseCaption,
 } from "@/lib/weekCaption";
+import SectionLabel from "@/components/myweek/SectionLabel";
+import {
+  PG_HELPER,
+  PG_MEDIA_ACTION,
+  PG_MEDIA_ACTION_QUIET,
+  PG_MEDIA_CAPTION,
+  PG_MEDIA_CAPTION_PANEL,
+  PG_MEDIA_OVERLAY_ACTION,
+  PG_MEDIA_OVERLAY_BADGE,
+  PG_MEDIA_OVERLAY_ICON,
+} from "@/components/myweek/pregnancyStyles";
 
 interface Props {
   userId: string;
@@ -240,27 +251,15 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
 
   return (
     <section className="relative pt-10 pb-2">
-      {/* Section label */}
-      <div className="flex items-center gap-3 mb-5">
-        <span
-          aria-hidden="true"
-          className="block w-5 h-px"
-          style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
-        />
-        <p
-          className="font-sans text-[10.5px] font-light tracking-[0.24em] uppercase"
-          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-        >
-          A photo for this chapter
-        </p>
-      </div>
+      <SectionLabel className="mb-5">A photo for this chapter</SectionLabel>
 
       <h2 className="font-serif text-[1.4rem] sm:text-[1.55rem] text-foreground leading-[1.18] mb-2 max-w-[26ch]">
         One image to keep this week.
       </h2>
-      <p className="font-sans text-[13.5px] font-normal text-foreground/75 mb-7 max-w-[42ch] leading-[1.6]">
+      <p className={`${PG_HELPER} mb-7 max-w-[42ch]`}>
         A bump photo, your hand on your belly, anything that holds the feel of this week.
       </p>
+
 
       <input
         ref={fileRef}
@@ -333,21 +332,17 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
           </button>
 
           {/* Quiet affordance — sits below, never the protagonist */}
-          <div className="flex items-center justify-between gap-3 px-1">
+          <div className="flex flex-wrap items-center justify-between gap-3 px-1">
             <button
               type="button"
               onClick={() => fileRef.current?.click()}
               disabled={state === "uploading"}
-              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-sans text-[11px] font-medium tracking-[0.22em] uppercase transition-colors hover:bg-[hsl(var(--stage-pregnancy-accent)/0.1)]"
-              style={{
-                color: "hsl(var(--stage-pregnancy-accent))",
-                border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.42)",
-              }}
+              className={PG_MEDIA_ACTION}
             >
               {state === "uploading" ? "Saving" : "Add a photo"}
             </button>
-            <span className="flex items-center gap-1.5 text-foreground/60">
-              <Lock size={10} strokeWidth={1.7} />
+            <span className="flex items-center gap-1.5 text-[hsl(var(--stage-pregnancy-text-soft))]">
+              <Lock size={10} strokeWidth={1.7} aria-hidden="true" />
               <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
                 Private to you
               </span>
@@ -357,9 +352,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
       )}
 
       {state === "loaded" && signedUrl && (
-        <figure
-          className="relative rounded-[24px] overflow-hidden held-image bg-card"
-        >
+        <figure className="relative rounded-[24px] overflow-hidden held-image bg-card">
           <img
             src={signedUrl}
             alt={`Week ${week} — ${chapterTitle}`}
@@ -367,52 +360,40 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              boxShadow: "inset 0 0 80px hsl(222 14% 12% / 0.08)",
-            }}
+            className="absolute inset-0 pointer-events-none shadow-[inset_0_0_80px_hsl(var(--stage-pregnancy-text)/0.1)]"
           />
-          <div className="absolute top-3 left-3 flex items-center gap-2 px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95">
-            <Lock size={10} strokeWidth={1.8} />
-            <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
-              Private
-            </span>
+          <div className={`absolute top-3 left-3 ${PG_MEDIA_OVERLAY_BADGE}`}>
+            <Lock size={10} strokeWidth={1.8} aria-hidden="true" />
+            <span>Private</span>
           </div>
           <div className="absolute top-3 right-3 flex items-center gap-2">
             <button
               type="button"
               onClick={() => fileRef.current?.click()}
-              className="px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center gap-1.5"
+              className={PG_MEDIA_OVERLAY_ACTION}
               aria-label="Replace photo"
             >
-              <ImagePlus size={11} strokeWidth={1.8} />
-              <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
-                Replace
-              </span>
+              <ImagePlus size={11} strokeWidth={1.8} aria-hidden="true" />
+              <span>Replace</span>
             </button>
             <button
               type="button"
               onClick={handleRemove}
-              className="w-7 h-7 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center justify-center"
+              className={PG_MEDIA_OVERLAY_ICON}
               aria-label="Remove photo"
             >
-              <X size={12} strokeWidth={1.8} />
+              <X size={13} strokeWidth={1.8} aria-hidden="true" />
             </button>
           </div>
-          <figcaption
-            className="px-5 py-3 border-t font-serif italic text-[12.5px] text-foreground/60 tracking-wide flex items-center justify-between"
-            style={{
-              borderColor: "hsl(var(--stage-pregnancy-accent) / 0.16)",
-              background: "hsl(var(--stage-pregnancy) / 0.18)",
-            }}
-          >
+          <figcaption className="flex items-center justify-between gap-3 border-t border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-cream)/0.7)] px-5 py-3 font-serif italic text-[12.5px] tracking-wide text-[hsl(var(--stage-pregnancy-text-soft))]">
             <span>Week {week} · {chapterTitle}</span>
-            <span className="font-sans not-italic text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/45">
+            <span className="font-sans not-italic text-[10px] font-medium tracking-[0.22em] uppercase text-[hsl(var(--stage-pregnancy-text-soft))]">
               Held privately
             </span>
           </figcaption>
         </figure>
       )}
+
 
       {justSaved && (state === "loaded" || state === "empty") && (
         <p
@@ -428,13 +409,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
       {state === "loaded" && signedUrl && (
         <div className="mt-4">
           {captionEditing ? (
-            <div
-              className="rounded-[18px] px-4 py-4"
-              style={{
-                background: "hsl(var(--stage-pregnancy) / 0.14)",
-                border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.22)",
-              }}
-            >
+            <div className={PG_MEDIA_CAPTION_PANEL}>
               <label htmlFor={`caption-${week}`} className="sr-only">
                 Caption for week {week}
               </label>
@@ -449,16 +424,15 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
                 rows={2}
                 placeholder={CAPTION_PLACEHOLDER}
                 disabled={captionSaving}
-                className="w-full resize-none bg-transparent font-serif italic text-[14.5px] leading-[1.6] text-foreground/85 placeholder:text-foreground/40 focus:outline-none"
+                className="w-full resize-none bg-transparent font-serif italic text-[14.5px] leading-[1.6] text-[hsl(var(--stage-pregnancy-text))] placeholder:text-[hsl(var(--stage-pregnancy-text-soft)/0.7)] focus:outline-none"
               />
-              <div className="flex items-center justify-between gap-3 mt-2">
+              <div className="flex flex-wrap items-center justify-between gap-3 mt-2">
                 <span
-                  className="font-sans text-[10.5px] font-medium tracking-[0.2em] uppercase"
-                  style={{
-                    color: isCaptionWithinLimit(captionDraft)
-                      ? "hsl(var(--stage-pregnancy-accent))"
-                      : "hsl(var(--destructive))",
-                  }}
+                  className={`font-sans text-[10.5px] font-medium tracking-[0.2em] uppercase ${
+                    isCaptionWithinLimit(captionDraft)
+                      ? "text-[hsl(var(--stage-pregnancy-accent))]"
+                      : "text-destructive"
+                  }`}
                 >
                   {normaliseCaption(captionDraft).length}/{CAPTION_MAX}
                 </span>
@@ -467,7 +441,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
                     type="button"
                     onClick={cancelCaptionEdit}
                     disabled={captionSaving}
-                    className="rounded-full px-3.5 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/60 hover:text-foreground/85 transition-colors"
+                    className={PG_MEDIA_ACTION_QUIET}
                   >
                     Cancel
                   </button>
@@ -475,11 +449,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
                     type="button"
                     onClick={saveCaption}
                     disabled={captionSaving || !isCaptionWithinLimit(captionDraft)}
-                    className="rounded-full px-4 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase transition-colors disabled:opacity-50"
-                    style={{
-                      color: "hsl(var(--stage-pregnancy-accent))",
-                      border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.5)",
-                    }}
+                    className={`${PG_MEDIA_ACTION} disabled:opacity-50`}
                   >
                     {captionSaving ? "Saving" : "Save"}
                   </button>
@@ -493,33 +463,24 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
             </div>
           ) : caption ? (
             <div className="flex items-start justify-between gap-3 px-1">
-              <p className="font-serif italic text-foreground/75 text-[14.5px] leading-[1.65] flex-1">
-                {caption}
-              </p>
+              <p className={`${PG_MEDIA_CAPTION} flex-1`}>{caption}</p>
               <button
                 type="button"
                 onClick={openCaptionEditor}
-                className="shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/55 hover:text-foreground/85 transition-colors"
+                className={`${PG_MEDIA_ACTION_QUIET} shrink-0`}
                 aria-label="Edit caption"
               >
-                <Pencil size={11} strokeWidth={1.7} />
+                <Pencil size={11} strokeWidth={1.7} aria-hidden="true" />
                 Edit
               </button>
             </div>
           ) : (
-            <button
-              type="button"
-              onClick={openCaptionEditor}
-              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-sans text-[11px] font-medium tracking-[0.22em] uppercase transition-colors hover:bg-[hsl(var(--stage-pregnancy-accent)/0.1)]"
-              style={{
-                color: "hsl(var(--stage-pregnancy-accent))",
-                border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.35)",
-              }}
-            >
-              <Pencil size={11} strokeWidth={1.7} />
+            <button type="button" onClick={openCaptionEditor} className={PG_MEDIA_ACTION}>
+              <Pencil size={11} strokeWidth={1.7} aria-hidden="true" />
               {CAPTION_PLACEHOLDER}
             </button>
           )}
+
         </div>
       )}
 

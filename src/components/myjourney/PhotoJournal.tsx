@@ -143,9 +143,17 @@ const PhotoJournal = ({ photos, videos = [], voiceNotes = [], currentWeek }: Pro
           </div>
         </div>
       ) : (
-        <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+        <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
           {tiles.map((t, i) => (
-            <li key={`${t.kind}-${t.week}`}>
+            <li
+              key={`${t.kind}-${t.week}`}
+              className="relative"
+              style={{ transform: `rotate(${(i % 3) - 1 ? ((i % 3) - 1) * 0.7 : 0}deg)` }}
+            >
+              <span
+                aria-hidden="true"
+                className="absolute -top-2 left-1/2 z-10 h-4 w-12 -translate-x-1/2 -rotate-2 rounded-[2px] bg-[hsl(var(--stage-pregnancy-cream)/0.85)] shadow-sm"
+              />
               <button
                 type="button"
                 onClick={() => setOpenIndex(i)}
@@ -156,106 +164,78 @@ const PhotoJournal = ({ photos, videos = [], voiceNotes = [], currentWeek }: Pro
                       ? `Open voice note from week ${t.week}`
                       : `Open video from week ${t.week}`
                 }
-                className="group block w-full rounded-[16px] overflow-hidden relative aspect-square text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--stage-pregnancy-accent))] focus-visible:ring-offset-2"
-                style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.18)" }}
+                className="group relative block aspect-square w-full overflow-hidden rounded-[16px] border border-[hsl(var(--stage-pregnancy-edge))] bg-card p-1.5 text-left shadow-[0_10px_24px_-18px_hsl(var(--stage-pregnancy-text)/0.6)] transition-transform duration-500 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--stage-pregnancy-accent))] focus-visible:ring-offset-2"
               >
-                {t.kind === "photo" ? (
-                  <img
-                    src={t.url}
-                    alt={`Photo saved in week ${t.week}`}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                ) : t.kind === "voice" ? (
-                  <span
-                    className="absolute inset-0 flex items-center justify-center"
-                    style={{
-                      background:
-                        "linear-gradient(160deg, hsl(var(--stage-pregnancy) / 0.5), hsl(var(--card)) 85%)",
-                    }}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="inline-flex items-center justify-center h-12 w-12 rounded-full"
-                      style={{
-                        background: "hsl(var(--stage-pregnancy) / 0.35)",
-                        color: accent,
-                        border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.32)",
-                      }}
-                    >
-                      <AudioLines size={18} strokeWidth={1.7} />
-                    </span>
-                  </span>
-                ) : (
-                  <>
-                    <video
+                <span className="relative block h-full w-full overflow-hidden rounded-[11px]">
+                  {t.kind === "photo" ? (
+                    <img
                       src={t.url}
-                      preload="metadata"
-                      playsInline
-                      muted
-                      className="w-full h-full object-cover pointer-events-none"
+                      alt={`Photo saved in week ${t.week}`}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-0 flex items-center justify-center"
-                    >
+                  ) : t.kind === "voice" ? (
+                    <span className="absolute inset-0 flex items-center justify-center bg-[hsl(var(--stage-pregnancy-blush))]">
                       <span
-                        className="inline-flex items-center justify-center h-11 w-11 rounded-full text-white"
-                        style={{
-                          background: "hsl(222 14% 8% / 0.55)",
-                          border: "1px solid hsl(0 0% 100% / 0.4)",
-                        }}
+                        aria-hidden="true"
+                        className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-cream))] text-[hsl(var(--stage-pregnancy-accent))]"
                       >
-                        <Play size={16} strokeWidth={2} fill="currentColor" />
+                        <AudioLines size={18} strokeWidth={1.7} />
                       </span>
                     </span>
-                  </>
-                )}
-                {t.kind === "voice" && (
-                  <span
-                    className="absolute top-2 right-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-sans text-[9px] font-medium tracking-[0.2em] uppercase"
-                    style={{
-                      background: "hsl(var(--card) / 0.9)",
-                      color: accent,
-                      border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.28)",
-                    }}
-                  >
-                    <AudioLines size={10} strokeWidth={1.8} aria-hidden="true" />
-                    Voice
-                  </span>
-                )}
-                {(t.kind === "video" || (t.kind === "photo" && t.hasVideo)) && (
-                  <span
-                    className="absolute top-2 right-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-sans text-[9px] font-medium tracking-[0.2em] uppercase text-white"
-                    style={{ background: "hsl(222 14% 8% / 0.65)" }}
-                    aria-label={t.kind === "video" ? "Video" : "Video also kept for this week"}
-                  >
-                    <VideoIcon size={10} strokeWidth={1.8} aria-hidden="true" />
-                    Video
-                  </span>
-                )}
-                <div
-                  className={`absolute bottom-0 left-0 right-0 px-3 py-2 ${t.kind === "voice" ? "text-foreground/80" : "text-white"}`}
-                  style={{
-                    background:
-                      t.kind === "voice"
-                        ? "linear-gradient(180deg, transparent, hsl(var(--card) / 0.92))"
-                        : "linear-gradient(180deg, transparent, hsl(222 14% 8% / 0.65))",
-                  }}
-                >
-                  <span className="block font-sans text-[10px] font-medium tracking-[0.24em] uppercase">
-                    Week {t.week}
-                  </span>
-                  {t.caption && (
-                    <span className={`block font-serif italic text-[12px] leading-[1.3] truncate mt-0.5 ${t.kind === "voice" ? "text-foreground/70" : "text-white/90"}`}>
-                      {t.caption}
+                  ) : (
+                    <>
+                      <video
+                        src={t.url}
+                        preload="metadata"
+                        playsInline
+                        muted
+                        className="pointer-events-none h-full w-full object-cover"
+                      />
+                      <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center">
+                        <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[hsl(var(--stage-pregnancy-text)/0.55)] text-[hsl(var(--stage-pregnancy-cream))] backdrop-blur-md">
+                          <Play size={16} strokeWidth={2} fill="currentColor" />
+                        </span>
+                      </span>
+                    </>
+                  )}
+                  {t.kind === "voice" && (
+                    <span className="absolute top-2 right-2 inline-flex items-center gap-1 rounded-pill border border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-cream)/0.92)] px-2 py-0.5 font-sans text-[9px] font-medium tracking-[0.2em] uppercase text-[hsl(var(--stage-pregnancy-accent))]">
+                      <AudioLines size={10} strokeWidth={1.8} aria-hidden="true" />
+                      Voice
                     </span>
                   )}
-                </div>
+                  {(t.kind === "video" || (t.kind === "photo" && t.hasVideo)) && (
+                    <span
+                      className="absolute top-2 right-2 inline-flex items-center gap-1 rounded-pill bg-[hsl(var(--stage-pregnancy-text)/0.55)] px-2 py-0.5 font-sans text-[9px] font-medium tracking-[0.2em] uppercase text-[hsl(var(--stage-pregnancy-cream))] backdrop-blur-md"
+                      aria-label={t.kind === "video" ? "Video" : "Video also kept for this week"}
+                    >
+                      <VideoIcon size={10} strokeWidth={1.8} aria-hidden="true" />
+                      Video
+                    </span>
+                  )}
+                  <span
+                    className={`absolute bottom-0 left-0 right-0 px-3 py-2 ${
+                      t.kind === "voice"
+                        ? "bg-[linear-gradient(180deg,transparent,hsl(var(--stage-pregnancy-cream)/0.94))] text-[hsl(var(--stage-pregnancy-text))]"
+                        : "bg-[linear-gradient(180deg,transparent,hsl(var(--stage-pregnancy-text)/0.68))] text-[hsl(var(--stage-pregnancy-cream))]"
+                    }`}
+                  >
+                    <span className="block font-sans text-[10px] font-medium tracking-[0.24em] uppercase">
+                      Week {t.week}
+                    </span>
+                    {t.caption && (
+                      <span className="mt-0.5 block truncate font-serif italic text-[12px] leading-[1.3] opacity-90">
+                        {t.caption}
+                      </span>
+                    )}
+                  </span>
+                </span>
               </button>
             </li>
           ))}
         </ul>
+
       )}
 
       <MediaLightbox

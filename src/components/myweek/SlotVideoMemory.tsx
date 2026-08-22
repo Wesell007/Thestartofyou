@@ -10,6 +10,17 @@ import {
   isCaptionWithinLimit,
   normaliseCaption,
 } from "@/lib/weekMedia";
+import SectionLabel from "@/components/myweek/SectionLabel";
+import {
+  PG_HELPER,
+  PG_MEDIA_ACTION,
+  PG_MEDIA_ACTION_QUIET,
+  PG_MEDIA_CAPTION,
+  PG_MEDIA_CAPTION_PANEL,
+  PG_MEDIA_OVERLAY_ACTION,
+  PG_MEDIA_OVERLAY_BADGE,
+  PG_MEDIA_OVERLAY_ICON,
+} from "@/components/myweek/pregnancyStyles";
 
 interface Props {
   userId: string;
@@ -98,22 +109,10 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
 
   return (
     <section className="relative pt-8 pb-2">
-      <div className="flex items-center gap-3 mb-4">
-        <span
-          aria-hidden="true"
-          className="block w-5 h-px"
-          style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
-        />
-        <p
-          className="font-sans text-[10.5px] font-light tracking-[0.24em] uppercase"
-          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-        >
-          Video of this week
-        </p>
-      </div>
+      <SectionLabel className="mb-4">Video of this week</SectionLabel>
 
-      <p className="font-sans text-[13.5px] font-normal text-foreground/75 mb-5 max-w-[42ch] leading-[1.6]">
-        Add a short video from this week, if you want to keep one here.
+      <p className={`${PG_HELPER} mb-5 max-w-[42ch]`}>
+        A little clip to keep, if one feels right this week.
       </p>
 
       <input
@@ -126,85 +125,61 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
       />
 
       {state === "loading" && (
-        <div
-          className="rounded-[20px] bg-card/60 h-[120px] animate-pulse"
-          style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.14)" }}
-        />
+        <div className="h-[120px] animate-pulse rounded-[20px] border border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-cream)/0.6)]" />
       )}
 
       {(state === "empty" || state === "uploading") && !signedUrl && (
-        <div
-          className="rounded-[20px] px-5 py-5 flex items-center justify-between gap-4"
-          style={{
-            background:
-              "linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--stage-pregnancy) / 0.10) 100%)",
-            border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.18)",
-          }}
-        >
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-[20px] border border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-cream)/0.6)] px-5 py-5">
           <div className="flex items-center gap-3 min-w-0">
             <span
               aria-hidden="true"
-              className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
-              style={{
-                background: "hsl(var(--stage-pregnancy) / 0.22)",
-                color: "hsl(var(--stage-pregnancy-accent))",
-              }}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-blush))] text-[hsl(var(--stage-pregnancy-accent))]"
             >
               <Play size={14} strokeWidth={1.8} />
             </span>
             <div className="min-w-0">
-              <p className="font-serif italic text-[15px] text-foreground/85 leading-snug">
+              <p className="font-serif italic text-[15px] leading-snug text-[hsl(var(--stage-pregnancy-text))]">
                 A little clip to keep
               </p>
-              <p className="font-sans text-[11.5px] text-foreground/60 leading-snug mt-0.5">
-                Up to 60 seconds. Private to you.
-              </p>
+              <p className={`${PG_HELPER} mt-0.5`}>Up to 60 seconds. Private to you.</p>
             </div>
           </div>
           <button
             type="button"
             onClick={openFilePicker}
             disabled={uploading}
-            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-sans text-[11px] font-medium tracking-[0.22em] uppercase transition-colors hover:bg-[hsl(var(--stage-pregnancy-accent)/0.1)] disabled:opacity-60"
-            style={{
-              color: "hsl(var(--stage-pregnancy-accent))",
-              border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.42)",
-            }}
+            className={PG_MEDIA_ACTION}
           >
-            <Video size={12} strokeWidth={1.8} />
+            <Video size={12} strokeWidth={1.8} aria-hidden="true" />
             {uploading ? "Saving video..." : "Add video"}
           </button>
         </div>
       )}
 
+
       {state === "loaded" && signedUrl && (
-        <figure
-          className="relative rounded-[20px] overflow-hidden held-image bg-card"
-          style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.16)" }}
-        >
+        <figure className="relative overflow-hidden rounded-[20px] border border-[hsl(var(--stage-pregnancy-edge))] bg-card held-image">
           <video
             key={signedUrl}
             src={signedUrl}
             controls
             preload="metadata"
             playsInline
-            className="w-full max-h-[520px] bg-black/90"
+            className="w-full max-h-[520px] bg-[hsl(var(--stage-pregnancy-text))]"
             onError={() => setPlaybackError(VIDEO_ERROR_COPY.playbackFailed)}
             onPlay={() => setPlaybackError(null)}
           >
             {mimeType ? <source src={signedUrl} type={mimeType} /> : null}
           </video>
-          <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95">
-            <Lock size={10} strokeWidth={1.8} />
-            <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
-              Private
-            </span>
+          <div className={`absolute top-2.5 left-2.5 sm:top-3 sm:left-3 ${PG_MEDIA_OVERLAY_BADGE}`}>
+            <Lock size={10} strokeWidth={1.8} aria-hidden="true" />
+            <span>Private</span>
           </div>
           {formatDuration(durationSeconds) && (
-            <div className="absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 px-2 py-0.5 rounded-full bg-foreground/40 backdrop-blur-md text-background/95">
-              <span className="font-sans text-[10px] font-medium tracking-[0.08em] tabular-nums">
-                {formatDuration(durationSeconds)}
-              </span>
+            <div
+              className={`absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 ${PG_MEDIA_OVERLAY_BADGE} tracking-[0.08em]`}
+            >
+              <span className="tabular-nums">{formatDuration(durationSeconds)}</span>
             </div>
           )}
           <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 flex items-center gap-1.5 sm:gap-2">
@@ -212,31 +187,28 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
               type="button"
               onClick={openFilePicker}
               disabled={uploading}
-              className="px-2 sm:px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center gap-1.5 disabled:opacity-60"
+              className={PG_MEDIA_OVERLAY_ACTION}
               aria-label="Replace video"
             >
-              <Video size={11} strokeWidth={1.8} />
-              <span className="hidden sm:inline font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
+              <Video size={11} strokeWidth={1.8} aria-hidden="true" />
+              <span className="hidden sm:inline">
                 {uploading ? "Saving video..." : "Replace video"}
               </span>
-              {uploading && (
-                <span className="sm:hidden font-sans text-[10px] font-medium tracking-[0.18em] uppercase">
-                  Saving video...
-                </span>
-              )}
+              {uploading && <span className="sm:hidden">Saving video...</span>}
             </button>
             <button
               type="button"
               onClick={remove}
               disabled={uploading}
-              className="w-7 h-7 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center justify-center disabled:opacity-60"
+              className={PG_MEDIA_OVERLAY_ICON}
               aria-label="Remove video"
             >
-              <X size={12} strokeWidth={1.8} />
+              <X size={13} strokeWidth={1.8} aria-hidden="true" />
             </button>
           </div>
         </figure>
       )}
+
 
       {justSaved && state === "loaded" && (
         <p
@@ -270,17 +242,10 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
       {state === "loaded" && signedUrl && (
         <div className="mt-4">
           {captionEditing ? (
-            <div
-              className="rounded-[18px] px-4 py-4"
-              style={{
-                background: "hsl(var(--stage-pregnancy) / 0.14)",
-                border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.22)",
-              }}
-            >
+            <div className={PG_MEDIA_CAPTION_PANEL}>
               <label
                 htmlFor={`video-caption-${week}`}
-                className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase"
-                style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
+                className="font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-[hsl(var(--stage-pregnancy-accent))]"
               >
                 Caption
               </label>
@@ -295,16 +260,15 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
                 rows={2}
                 placeholder={CAPTION_PLACEHOLDER}
                 disabled={captionSaving}
-                className="mt-2 w-full resize-none bg-transparent font-serif italic text-[14.5px] leading-[1.6] text-foreground/85 placeholder:text-foreground/40 focus:outline-none"
+                className="mt-2 w-full resize-none bg-transparent font-serif italic text-[14.5px] leading-[1.6] text-[hsl(var(--stage-pregnancy-text))] placeholder:text-[hsl(var(--stage-pregnancy-text-soft)/0.7)] focus:outline-none"
               />
-              <div className="flex items-center justify-between gap-3 mt-2">
+              <div className="flex flex-wrap items-center justify-between gap-3 mt-2">
                 <span
-                  className="font-sans text-[10.5px] font-medium tracking-[0.2em] uppercase"
-                  style={{
-                    color: isCaptionWithinLimit(captionDraft)
-                      ? "hsl(var(--stage-pregnancy-accent))"
-                      : "hsl(var(--destructive))",
-                  }}
+                  className={`font-sans text-[10.5px] font-medium tracking-[0.2em] uppercase ${
+                    isCaptionWithinLimit(captionDraft)
+                      ? "text-[hsl(var(--stage-pregnancy-accent))]"
+                      : "text-destructive"
+                  }`}
                 >
                   {normaliseCaption(captionDraft).length}/{CAPTION_MAX}
                 </span>
@@ -313,7 +277,7 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
                     type="button"
                     onClick={cancelCaption}
                     disabled={captionSaving}
-                    className="rounded-full px-3.5 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/60 hover:text-foreground/85 transition-colors"
+                    className={PG_MEDIA_ACTION_QUIET}
                   >
                     Cancel
                   </button>
@@ -321,11 +285,7 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
                     type="button"
                     onClick={submitCaption}
                     disabled={captionSaving || !isCaptionWithinLimit(captionDraft)}
-                    className="rounded-full px-4 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase transition-colors disabled:opacity-50"
-                    style={{
-                      color: "hsl(var(--stage-pregnancy-accent))",
-                      border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.5)",
-                    }}
+                    className={`${PG_MEDIA_ACTION} disabled:opacity-50`}
                   >
                     {captionSaving ? "Saving" : "Save"}
                   </button>
@@ -341,23 +301,17 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
             <button
               type="button"
               onClick={openCaptionEditor}
-              className="w-full text-left rounded-[16px] px-4 py-3 font-serif italic text-[14px] leading-[1.6] text-foreground/78 hover:text-foreground/90 transition-colors"
-              style={{
-                background: "hsl(var(--stage-pregnancy) / 0.10)",
-                border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.16)",
-              }}
+              aria-label="Edit caption"
+              className={`w-full text-left ${PG_MEDIA_CAPTION_PANEL} ${PG_MEDIA_CAPTION} transition-colors hover:bg-[hsl(var(--stage-pregnancy-cream))]`}
             >
               {caption}
             </button>
           ) : (
-            <button
-              type="button"
-              onClick={openCaptionEditor}
-              className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/60 hover:text-foreground/85 transition-colors"
-            >
+            <button type="button" onClick={openCaptionEditor} className={PG_MEDIA_ACTION_QUIET}>
               Caption
             </button>
           )}
+
         </div>
       )}
     </section>

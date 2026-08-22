@@ -508,6 +508,49 @@
     border-top: 1px dotted hsl(var(--stage-pregnancy-edge));
   }
 
+  /* ─── Phase 28B: TTC journey paper system ─── */
+  .ttc-paper {
+    background:
+      linear-gradient(
+        180deg,
+        hsl(var(--card)) 0%,
+        hsl(var(--stage-ttc-cream)) 100%
+      );
+    border: 1px solid hsl(var(--stage-ttc-edge) / 0.7);
+    box-shadow: var(--shadow-ttc-paper);
+  }
+
+  /* Warmer variant, used for the hopeful surfaces (handover, ask). */
+  .ttc-paper-warm {
+    background:
+      linear-gradient(
+        170deg,
+        hsl(var(--stage-ttc-peach) / 0.55) 0%,
+        hsl(var(--stage-ttc-cream)) 62%
+      );
+    border: 1px solid hsl(var(--stage-ttc-edge) / 0.7);
+    box-shadow: var(--shadow-ttc-paper);
+  }
+
+  /* Soft page wash behind the TTC journey column. */
+  .ttc-wash {
+    background-image: var(--wash-ttc);
+  }
+
+  /* Cream app surface behind the signed-in TTC shell. */
+  .ttc-app-surface {
+    background-color: hsl(var(--stage-ttc-cream));
+    background-image:
+      radial-gradient(circle at 12% 4%, hsl(var(--stage-ttc-sage) / 0.5) 0%, transparent 44%),
+      radial-gradient(circle at 88% 70%, hsl(var(--stage-ttc-peach) / 0.4) 0%, transparent 46%);
+    background-attachment: fixed, fixed;
+  }
+
+  /* Hairline dotted rule inside TTC paper cards. */
+  .ttc-rule {
+    border: 0;
+    border-top: 1px dotted hsl(var(--stage-ttc-edge));
+  }
 
 
   /* Held image — premium frame for kept photographs */

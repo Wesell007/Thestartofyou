@@ -297,14 +297,29 @@ const MyTTCJourney = () => {
           </div>
         </header>
 
-        {/* Summary */}
+        {/* Today */}
         <section className="mb-10 sm:mb-12">
-          <TTCJourneySummary journey={journey} cycleDay={cycleDay} stage={derivedStage} />
+          <TTCTodayCard
+            journey={journey}
+            stage={derivedStage}
+            cycleDay={cycleDay}
+            onAddNote={() => openPanelForDate(todayIso())}
+          />
         </section>
 
-        {/* Timeline */}
+        {/* Cycle path */}
         <section className="mb-10 sm:mb-12">
           <TTCJourneyTimeline journey={journey} />
+        </section>
+
+        {/* What may be useful today */}
+        <section className="mb-10 sm:mb-12">
+          <TTCJourneyFocusCard stage={derivedStage} />
+        </section>
+
+        {/* Cycle details */}
+        <section className="mb-10 sm:mb-12">
+          <TTCJourneySummary journey={journey} cycleDay={cycleDay} stage={derivedStage} />
         </section>
 
         {/* Cycle calendar & logging */}
@@ -350,10 +365,7 @@ const MyTTCJourney = () => {
           />
         </section>
 
-        {/* Focus */}
-        <section className="mb-10 sm:mb-12">
-          <TTCJourneyFocusCard stage={derivedStage} />
-        </section>
+
 
 
         {/* Guidance */}

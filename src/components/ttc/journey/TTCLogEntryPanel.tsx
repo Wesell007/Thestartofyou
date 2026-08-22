@@ -171,9 +171,12 @@ const TTCLogEntryPanel = ({
           </div>
 
           <div>
-            <label className="block font-sans text-[11px] tracking-[0.15em] uppercase font-medium text-foreground/70 mb-2">
-              Type
-            </label>
+            <div className="mb-2 flex items-center justify-between gap-3">
+              <label className="font-sans text-[11px] tracking-[0.15em] uppercase font-medium text-foreground/70">
+                What is this note about
+              </label>
+              <span className={TTC_CHIP}>{LOG_TYPE_LABEL[logType]}</span>
+            </div>
             <Select
               value={logType}
               onValueChange={(v) => {
@@ -181,7 +184,7 @@ const TTCLogEntryPanel = ({
                 setValue("");
               }}
             >
-              <SelectTrigger>
+              <SelectTrigger className="min-h-11">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-background z-50">
@@ -200,7 +203,7 @@ const TTCLogEntryPanel = ({
                 Detail
               </label>
               <Select value={value} onValueChange={setValue}>
-                <SelectTrigger>
+                <SelectTrigger className="min-h-11">
                   <SelectValue placeholder="Choose an option (optional)" />
                 </SelectTrigger>
                 <SelectContent className="bg-background z-50">
@@ -219,17 +222,19 @@ const TTCLogEntryPanel = ({
               htmlFor="ttc-log-notes"
               className="block font-sans text-[11px] tracking-[0.15em] uppercase font-medium text-foreground/70 mb-2"
             >
-              Notes (optional)
+              In your words (optional)
             </label>
             <Textarea
               id="ttc-log-notes"
-              rows={3}
+              rows={6}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="Anything you want to remember."
+              placeholder="What you notice today, or anything worth remembering."
               maxLength={500}
+              className="min-h-[150px] font-serif text-[15px] leading-[1.7]"
             />
           </div>
+
 
           <p className="font-sans text-[11.5px] text-muted-foreground/80 leading-relaxed">
             Logs are for your own reference. They are private to you and are

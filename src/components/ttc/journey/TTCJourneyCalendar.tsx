@@ -17,7 +17,6 @@ import type { TTCLog } from "@/lib/ttcLogs";
 import { groupTTCLogsByDate, LOG_TYPE_LABEL } from "@/lib/ttcLogs";
 import { parseDateOnly } from "@/lib/dateOnly";
 import {
-  TTC_CHIP,
   TTC_EYEBROW,
   TTC_HEADING,
   TTC_ICON_CONTROL,

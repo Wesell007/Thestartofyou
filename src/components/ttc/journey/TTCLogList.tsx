@@ -20,6 +20,12 @@ import {
   LOG_VALUE_LABEL,
   type TTCLog,
 } from "@/lib/ttcLogs";
+import {
+  TTC_CHIP,
+  TTC_FOCUS_RING,
+  TTC_INNER_RADIUS,
+  TTC_PAPER_CARD,
+} from "@/components/ttc/journey/ttcStyles";
 
 type Props = {
   logs: TTCLog[];
@@ -50,11 +56,8 @@ const TTCLogList = ({ logs, onEdit, onDeleted }: Props) => {
 
   if (logs.length === 0) {
     return (
-      <div
-        className="rounded-[16px] px-5 py-5 keepsake-surface"
-        style={{ borderColor: "hsl(var(--stage-ttc-accent) / 0.16)" }}
-      >
-        <p className="font-serif italic text-foreground/68 text-[15px] leading-[1.6]">
+      <div className={`${TTC_INNER_RADIUS} border border-[hsl(var(--stage-ttc-edge))] bg-[hsl(var(--stage-ttc-cream-soft)/0.6)] px-5 py-5`}>
+        <p className="font-serif italic text-[15px] leading-[1.6] text-[hsl(var(--stage-ttc-text-soft))]">
           Any notes you add will appear here so you can look back gently.
         </p>
       </div>
@@ -62,11 +65,8 @@ const TTCLogList = ({ logs, onEdit, onDeleted }: Props) => {
   }
 
   return (
-    <div
-      className="rounded-[16px] keepsake-surface overflow-hidden"
-      style={{ borderColor: "hsl(var(--stage-ttc-accent) / 0.16)" }}
-    >
-      <ul className="divide-y" style={{ borderColor: "hsl(var(--stage-ttc-accent) / 0.12)" }}>
+    <div className={`${TTC_PAPER_CARD} overflow-hidden`}>
+      <ul className="divide-y divide-[hsl(var(--stage-ttc-edge)/0.7)]">
         {logs.map((log) => {
           const dateLabel = (() => {
             try {
@@ -80,26 +80,20 @@ const TTCLogList = ({ logs, onEdit, onDeleted }: Props) => {
             <li key={log.id} className="flex items-start gap-3 px-4 sm:px-5 py-4">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-sans text-[13px] font-medium text-foreground/85">
+                  <span className="font-sans text-[13px] font-medium text-[hsl(var(--stage-ttc-text))]">
                     {LOG_TYPE_NOTED_LABEL[log.log_type]}
                   </span>
                   {valueLabel && (
-                    <span
-                      className="font-sans text-[10.5px] rounded px-1.5 py-[1px] uppercase tracking-[0.05em]"
-                      style={{
-                        background: "hsl(var(--stage-ttc-accent) / 0.12)",
-                        color: "hsl(var(--stage-ttc-accent))",
-                      }}
-                    >
+                    <span className={TTC_CHIP}>
                       {valueLabel}
                     </span>
                   )}
-                  <span className="font-sans text-[12px] text-muted-foreground">
+                  <span className="font-sans text-[12px] text-[hsl(var(--stage-ttc-text-soft))]">
                     {dateLabel}
                   </span>
                 </div>
                 {log.notes && (
-                  <p className="font-serif italic text-[14px] text-foreground/70 leading-[1.55] mt-1">
+                  <p className="font-serif italic text-[14px] text-[hsl(var(--stage-ttc-text-soft))] leading-[1.55] mt-1">
                     {log.notes}
                   </p>
                 )}
@@ -109,17 +103,17 @@ const TTCLogList = ({ logs, onEdit, onDeleted }: Props) => {
                   type="button"
                   onClick={() => onEdit(log)}
                   aria-label="Edit log"
-                  className="w-8 h-8 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors flex items-center justify-center"
+                  className={`flex h-11 w-11 items-center justify-center rounded-full text-[hsl(var(--stage-ttc-text-soft))] transition-colors hover:bg-[hsl(var(--stage-ttc-sage)/0.6)] hover:text-[hsl(var(--stage-ttc-text))] ${TTC_FOCUS_RING}`}
                 >
-                  <Pencil size={13} />
+                  <Pencil size={14} aria-hidden="true" />
                 </button>
                 <button
                   type="button"
                   onClick={() => setPendingDelete(log)}
                   aria-label="Delete log"
-                  className="w-8 h-8 rounded-full text-muted-foreground hover:text-destructive hover:bg-muted/50 transition-colors flex items-center justify-center"
+                  className={`flex h-11 w-11 items-center justify-center rounded-full text-[hsl(var(--stage-ttc-text-soft))] transition-colors hover:bg-[hsl(var(--stage-ttc-sage)/0.6)] hover:text-destructive ${TTC_FOCUS_RING}`}
                 >
-                  <Trash2 size={13} />
+                  <Trash2 size={14} aria-hidden="true" />
                 </button>
               </div>
             </li>

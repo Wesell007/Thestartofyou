@@ -1,6 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
 const navigate = vi.fn();
@@ -71,7 +70,7 @@ describe("JournalStart", () => {
 
   it("sends a signed-out visitor into the existing auth start flow", async () => {
     renderPage();
-    await userEvent.click(screen.getByRole("button", { name: "Start my pregnancy journey" }));
+    fireEvent.click(screen.getByRole("button", { name: "Start my pregnancy journey" }));
     await waitFor(() => expect(navigate).toHaveBeenCalledWith("/auth?intent=start_journey"));
     expect(window.localStorage.getItem(OWNER_KEY)).toBe("true");
   });
@@ -80,21 +79,21 @@ describe("JournalStart", () => {
     signedIn();
     getActivePregnancyJourney.mockResolvedValue({ lmp: new Date(), due: new Date() });
     renderPage();
-    await userEvent.click(screen.getByRole("button", { name: "Start my pregnancy journey" }));
+    fireEvent.click(screen.getByRole("button", { name: "Start my pregnancy journey" }));
     await waitFor(() => expect(navigate).toHaveBeenCalledWith("/my-week"));
   });
 
   it("sends a signed-in user without a journey to setup", async () => {
     signedIn();
     renderPage();
-    await userEvent.click(screen.getByRole("button", { name: "Start my pregnancy journey" }));
+    fireEvent.click(screen.getByRole("button", { name: "Start my pregnancy journey" }));
     await waitFor(() => expect(navigate).toHaveBeenCalledWith("/setup"));
   });
 
   it("does not set the preference on the app-only path", async () => {
     signedIn();
     renderPage();
-    await userEvent.click(screen.getByRole("button", { name: "I do not have the journal" }));
+    fireEvent.click(screen.getByRole("button", { name: "I do not have the journal" }));
     await waitFor(() => expect(navigate).toHaveBeenCalledWith("/setup"));
     expect(window.localStorage.getItem(OWNER_KEY)).toBeNull();
   });

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import type { TTCStage } from "@/lib/ttcDerived";
+import type { TTCSupportMoment } from "@/lib/ttcSupportMoment";
 import {
   TTC_CARD_BODY,
   TTC_CARD_PAD,
@@ -72,8 +73,24 @@ const STAGE_COPY: Record<TTCStage, Copy> = {
   },
 };
 
-const TTCJourneyFocusCard = ({ stage }: { stage: TTCStage | null }) => {
-  const copy = STAGE_COPY[stage ?? "before_ovulation"];
+type Props = {
+  stage: TTCStage | null;
+  /** Phase 28E — when a support moment is active, lead with its guidance. */
+  moment?: TTCSupportMoment | null;
+};
+
+const TTCJourneyFocusCard = ({ stage, moment }: Props) => {
+  const stageCopy = STAGE_COPY[stage ?? "before_ovulation"];
+  const copy: Copy = moment
+    ? {
+        heading: moment.focus.heading,
+        body: moment.focus.body,
+        primaryLabel: moment.focus.primary.label,
+        primaryHref: moment.focus.primary.href,
+        askLabel: moment.focus.ask.label,
+        askHref: `/ask?stage=ttc&topic=${moment.focus.ask.topic}`,
+      }
+    : stageCopy;
   return (
     <section className={`relative overflow-hidden ${TTC_PAPER_CARD} ${TTC_CARD_PAD}`}>
       <TTCWatercolourWash

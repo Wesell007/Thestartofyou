@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { differenceInCalendarDays, format } from "date-fns";
 import type { TTCStage } from "@/lib/ttcDerived";
 import type { ActiveTTCJourney } from "@/lib/savedTTCJourney";
+import type { TTCSupportMoment } from "@/lib/ttcSupportMoment";
 import { parseDateOnly } from "@/lib/dateOnly";
 import {
   TTC_CARD_PAD,

@@ -67,8 +67,6 @@ const MemoryFilmEntry = ({ keptWeeksCount, hasMedia, onOpen }: Props) => {
         )}
       </div>
     </section>
-
-    </section>
   );
 };
 

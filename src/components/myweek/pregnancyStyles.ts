@@ -57,6 +57,37 @@ export const PG_ICON_BUBBLE =
 export const PG_PHOTO_FRAME =
   "rounded-[14px] border border-[hsl(var(--stage-pregnancy-edge))] bg-card p-2 shadow-[0_18px_40px_-30px_hsl(var(--stage-pregnancy-text)/0.6)]";
 
+/**
+ * Phase 27G — shared media keepsake controls.
+ *
+ * Every media action across the weekly photo, video and voice slots uses one
+ * of these so the group reads as a single set of kept moments rather than
+ * three separate upload utilities. All of them clear a 44px tap target.
+ */
+
+/** Quiet outlined action pill sitting on paper. */
+export const PG_MEDIA_ACTION = `inline-flex min-h-11 items-center justify-center gap-2 rounded-pill border border-[hsl(var(--stage-pregnancy-accent)/0.42)] px-4 py-2 font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-[hsl(var(--stage-pregnancy-accent))] transition-colors hover:bg-[hsl(var(--stage-pregnancy-accent)/0.1)] disabled:opacity-60 ${PG_FOCUS_RING}`;
+
+/** Even quieter text action, for cancel, discard and edit. */
+export const PG_MEDIA_ACTION_QUIET = `inline-flex min-h-11 items-center justify-center gap-2 rounded-pill px-4 py-2 font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-[hsl(var(--stage-pregnancy-text-soft))] transition-colors hover:text-[hsl(var(--stage-pregnancy-text))] disabled:opacity-60 ${PG_FOCUS_RING}`;
+
+/** Control that sits over saved media. Token scrim, readable on any frame. */
+export const PG_MEDIA_OVERLAY_ACTION = `inline-flex min-h-11 items-center justify-center gap-1.5 rounded-pill bg-[hsl(var(--stage-pregnancy-text)/0.55)] px-3.5 py-2 font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-[hsl(var(--stage-pregnancy-cream))] backdrop-blur-md transition-colors hover:bg-[hsl(var(--stage-pregnancy-text)/0.72)] disabled:opacity-60 ${PG_FOCUS_RING}`;
+
+/** Square variant of the overlay action, for the remove cross. */
+export const PG_MEDIA_OVERLAY_ICON = `inline-flex h-11 w-11 items-center justify-center rounded-full bg-[hsl(var(--stage-pregnancy-text)/0.55)] text-[hsl(var(--stage-pregnancy-cream))] backdrop-blur-md transition-colors hover:bg-[hsl(var(--stage-pregnancy-text)/0.72)] disabled:opacity-60 ${PG_FOCUS_RING}`;
+
+/** Non-interactive badge over saved media. */
+export const PG_MEDIA_OVERLAY_BADGE =
+  "inline-flex items-center gap-1.5 rounded-pill bg-[hsl(var(--stage-pregnancy-text)/0.5)] px-2.5 py-1 font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-[hsl(var(--stage-pregnancy-cream))] backdrop-blur-md";
+
+/** Caption panel shell shared by photo, video and voice. */
+export const PG_MEDIA_CAPTION_PANEL = `${PG_INNER_RADIUS} border border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-cream)/0.6)] px-4 py-4`;
+
+/** Small keepsake caption line. */
+export const PG_MEDIA_CAPTION =
+  "font-serif italic text-[14px] leading-[1.65] text-[hsl(var(--stage-pregnancy-text))]";
+
 /** Bottom nav tab, pregnancy tint. */
 export const PG_NAV_ACTIVE = "text-[hsl(var(--stage-pregnancy-accent))] font-medium";
 export const PG_NAV_INACTIVE =

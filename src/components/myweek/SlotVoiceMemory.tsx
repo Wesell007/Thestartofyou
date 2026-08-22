@@ -13,6 +13,14 @@ import {
   normaliseCaption,
   pickVoiceRecorderMime,
 } from "@/lib/weekMedia";
+import SectionLabel from "@/components/myweek/SectionLabel";
+import {
+  PG_HELPER,
+  PG_MEDIA_ACTION,
+  PG_MEDIA_ACTION_QUIET,
+  PG_MEDIA_CAPTION,
+  PG_MEDIA_CAPTION_PANEL,
+} from "@/components/myweek/pregnancyStyles";
 
 interface Props {
   userId: string;

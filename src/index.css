@@ -522,15 +522,17 @@
     box-shadow: var(--shadow-ttc-paper);
   }
 
-  /* Warmer variant, used for the hopeful surfaces (handover, ask). */
+  /* Warmer variant, used for the hopeful surfaces (handover, ask).
+     Phase 28B.1: sage led, with a small peach warmth note. */
   .ttc-paper-warm {
     background:
       linear-gradient(
         170deg,
-        hsl(var(--stage-ttc-peach) / 0.55) 0%,
-        hsl(var(--stage-ttc-cream)) 62%
+        hsl(var(--stage-ttc-sage) / 0.85) 0%,
+        hsl(var(--stage-ttc-sage-tint) / 0.6) 34%,
+        hsl(var(--stage-ttc-cream)) 74%
       );
-    border: 1px solid hsl(var(--stage-ttc-edge) / 0.7);
+    border: 1px solid hsl(var(--stage-ttc-olive) / 0.18);
     box-shadow: var(--shadow-ttc-paper);
   }
 
@@ -543,10 +545,12 @@
   .ttc-app-surface {
     background-color: hsl(var(--stage-ttc-cream));
     background-image:
-      radial-gradient(circle at 12% 4%, hsl(var(--stage-ttc-sage) / 0.5) 0%, transparent 44%),
-      radial-gradient(circle at 88% 70%, hsl(var(--stage-ttc-peach) / 0.4) 0%, transparent 46%);
-    background-attachment: fixed, fixed;
+      radial-gradient(circle at 12% 4%, hsl(var(--stage-ttc-sage) / 0.75) 0%, transparent 46%),
+      radial-gradient(circle at 88% 68%, hsl(var(--stage-ttc-sage-soft) / 0.42) 0%, transparent 48%),
+      radial-gradient(circle at 70% 18%, hsl(var(--stage-ttc-peach) / 0.28) 0%, transparent 40%);
+    background-attachment: fixed, fixed, fixed;
   }
+
 
   /* Hairline dotted rule inside TTC paper cards. */
   .ttc-rule {

@@ -284,41 +284,20 @@ const SlotVoiceMemory = ({ userId, week, onSaved }: Props) => {
 
   return (
     <section className="relative pt-8 pb-2">
-      <div className="flex items-center gap-3 mb-4">
-        <span
-          aria-hidden="true"
-          className="block w-5 h-px"
-          style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
-        />
-        <p
-          className="font-sans text-[10.5px] font-light tracking-[0.24em] uppercase"
-          style={{ color: accent }}
-        >
-          A voice note
-        </p>
-      </div>
+      <SectionLabel className="mb-4">A voice note</SectionLabel>
 
-      <p className="font-sans text-[13.5px] font-normal text-foreground/75 mb-5 max-w-[42ch] leading-[1.6]">
+      <p className={`${PG_HELPER} mb-5 max-w-[42ch]`}>
         Record a few words for this week, in your own voice.
       </p>
 
       {state === "loading" && (
-        <div
-          className="rounded-[20px] bg-card/60 h-[92px] animate-pulse"
-          style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.14)" }}
-        />
+        <div className="h-[92px] animate-pulse rounded-[20px] border border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-cream)/0.6)]" />
       )}
 
       {/* Empty / recording / preview — only when nothing is saved yet */}
       {state !== "loading" && !hasSaved && (
-        <div
-          className="rounded-[20px] px-5 py-5"
-          style={{
-            background:
-              "linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--stage-pregnancy) / 0.10) 100%)",
-            border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.18)",
-          }}
-        >
+        <div className="rounded-[20px] border border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-cream)/0.6)] px-5 py-5">
+
           {phase === "idle" && (
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3 min-w-0">

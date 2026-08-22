@@ -366,6 +366,19 @@ const MyTTCJourney = () => {
           <TTCJourneyFocusCard stage={derivedStage} moment={supportMoment} />
         </section>
 
+        {/* Ask your companion */}
+        <section className="mb-10 sm:mb-12">
+          <TTCAskCompanionCard
+            stage={derivedStage}
+            cycleDay={cycleDay}
+            moment={supportMoment}
+            possibleTestDate={askDates?.possible_test_date ?? null}
+            expectedPeriodDate={askDates?.expected_period_date ?? null}
+            hasRecentUnclearOrNegativeTest={askTestFlag}
+            hasRecentPeriodStarted={askPeriodFlag}
+          />
+        </section>
+
         {/* Cycle details */}
         <section className="mb-10 sm:mb-12">
           <TTCJourneySummary journey={journey} cycleDay={cycleDay} stage={derivedStage} />

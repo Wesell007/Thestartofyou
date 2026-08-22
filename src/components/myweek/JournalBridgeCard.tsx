@@ -76,7 +76,7 @@ const JournalBridgeCard = ({
   tone = "card",
   className = "",
 }: Props) => {
-  const copy = COPY[context];
+  const copy = COPY[variant][context];
 
   if (tone === "inline") {
     return (

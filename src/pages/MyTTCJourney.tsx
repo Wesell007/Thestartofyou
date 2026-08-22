@@ -32,6 +32,31 @@ import TTCJourneyHeader from "@/components/ttc/journey/TTCJourneyHeader";
 import PageLoadState from "@/components/shared/PageLoadState";
 import { parseDateOnly } from "@/lib/dateOnly";
 import { toast } from "@/hooks/use-toast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {
+  TTC_CARD_BODY,
+  TTC_CARD_PAD,
+  TTC_EYEBROW,
+  TTC_FOCUS_RING,
+  TTC_HEADING,
+  TTC_HELPER,
+  TTC_OLIVE_PILL,
+  TTC_OUTLINE_PILL,
+  TTC_PAPER_CARD,
+  TTC_PAPER_CARD_WARM,
+  TTC_SOFT_PILL,
+} from "@/components/ttc/journey/ttcStyles";
+import { TTCBotanicalSprig } from "@/components/ttc/journey/TTCDecor";
 
 type Status = "loading" | "error" | "empty" | "pregnancy_active" | "ready";
 
@@ -173,7 +198,7 @@ const MyTTCJourney = () => {
 
   if (status === "pregnancy_active") {
     return (
-      <div className="min-h-screen bg-parchment">
+      <div className="min-h-screen ttc-app-surface">
         <TTCJourneyHeader />
         <div className="container mx-auto px-5 sm:px-6 max-w-xl py-16 md:py-24 text-center">
           <p
@@ -203,28 +228,19 @@ const MyTTCJourney = () => {
 
   if (status === "empty") {
     return (
-      <div className="min-h-screen bg-parchment">
+      <div className="min-h-screen ttc-app-surface">
         <TTCJourneyHeader />
         <div className="container mx-auto px-5 sm:px-6 max-w-xl py-16 md:py-24 text-center">
-          <p
-            className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
-            style={{ color: "hsl(var(--stage-ttc-accent))" }}
-          >
-            My TTC journey
-          </p>
-          <h1 className="font-serif text-3xl md:text-[2.25rem] text-foreground leading-tight mb-3">
+          <p className={`${TTC_EYEBROW} mb-3`}>My TTC journey</p>
+          <h1 className={`${TTC_HEADING} text-3xl md:text-[2.25rem] mb-3`}>
             Let's set up your TTC journey
           </h1>
-          <p className="font-sans text-sm font-light text-muted-foreground/80 leading-relaxed max-w-md mx-auto mb-8">
+          <p className={`${TTC_HELPER} mx-auto mb-8 max-w-md`}>
             Add your cycle details so we can gently show where you may be in
-            your current cycle and what to focus on next.
+            your current cycle and what may be useful next.
           </p>
-          <Link
-            to="/setup/trying-to-conceive"
-            className="inline-flex items-center gap-2 rounded-pill px-6 py-3 font-sans text-sm font-medium text-white shadow-cta hover:opacity-90 transition-opacity"
-            style={{ background: "hsl(var(--stage-ttc-accent))" }}
-          >
-            Set up your TTC journey <ArrowRight size={14} />
+          <Link to="/setup/trying-to-conceive" className={TTC_OLIVE_PILL}>
+            Set up your TTC journey <ArrowRight size={14} aria-hidden="true" />
           </Link>
         </div>
       </div>
@@ -235,7 +251,6 @@ const MyTTCJourney = () => {
 
   const removeJourney = async () => {
     if (!userId || deletingJourney) return;
-    if (!window.confirm("Remove your TTC journey and all of its logs? This cannot be undone.")) return;
     setDeletingJourney(true);
     try {
       await deleteTTCJourney(userId);
@@ -251,7 +266,7 @@ const MyTTCJourney = () => {
   };
 
   return (
-    <div className="min-h-screen bg-parchment-grain page-vignette relative">
+    <div className="relative min-h-screen ttc-app-surface">
       <TTCJourneyHeader />
       <SeoHead
         title="My TTC journey | The Start of You"
@@ -261,24 +276,25 @@ const MyTTCJourney = () => {
       />
       <main className="relative mx-auto w-full max-w-[880px] px-5 sm:px-8 md:px-10 pt-16 sm:pt-20 lg:pt-24 pb-20 sm:pb-24">
         {/* Header */}
-        <header className="mb-10 sm:mb-12">
-          <p
-            className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
-            style={{ color: "hsl(var(--stage-ttc-accent))" }}
-          >
-            My TTC journey
-          </p>
-          <h1 className="font-serif text-3xl sm:text-[2.25rem] md:text-[2.5rem] text-foreground leading-tight mb-3">
-            Today in your TTC journey
-          </h1>
-          <p className="font-serif italic text-[16px] sm:text-[17px] text-foreground/70 leading-[1.6] max-w-[58ch] mb-4">
-            A calm view of where you may be in this cycle, what matters next
-            and where to find support.
-          </p>
-          <p className="font-sans text-[12.5px] text-muted-foreground/85 max-w-[58ch] leading-relaxed">
-            These dates are estimates, not guarantees. Cycles can vary from
-            month to month.
-          </p>
+        <header className={`relative overflow-hidden ${TTC_PAPER_CARD_WARM} ${TTC_CARD_PAD} mb-10 sm:mb-12`}>
+          <TTCBotanicalSprig
+            className="-top-8 -right-10 w-[170px] rotate-[10deg]"
+            opacity={0.24}
+          />
+          <div className="relative">
+            <p className={`${TTC_EYEBROW} mb-3`}>My TTC journey</p>
+            <h1 className={`${TTC_HEADING} text-[30px] sm:text-[2.25rem] md:text-[2.5rem] mb-3`}>
+              Today in your TTC journey
+            </h1>
+            <p className="font-serif italic text-[16px] sm:text-[17px] leading-[1.65] text-[hsl(var(--stage-ttc-text-soft))] max-w-[54ch] mb-4">
+              A calm view of where you may be in this cycle, what may help next
+              and where to find support.
+            </p>
+            <p className={`${TTC_HELPER} max-w-[58ch]`}>
+              These dates are estimates rather than certainties. Cycles can vary
+              from month to month.
+            </p>
+          </div>
         </header>
 
         {/* Summary */}
@@ -294,10 +310,10 @@ const MyTTCJourney = () => {
         {/* Cycle calendar & logging */}
         <section className="mb-10 sm:mb-12 space-y-5">
           <div>
-            <h2 className="font-serif text-[22px] sm:text-[24px] text-foreground mb-1">
-              Cycle calendar & logging
+            <h2 className={`${TTC_HEADING} text-[22px] sm:text-[25px] mb-1`}>
+              Your cycle calendar and notes
             </h2>
-            <p className="font-sans text-[12.5px] text-muted-foreground/85 leading-relaxed max-w-[58ch]">
+            <p className={`${TTC_HELPER} max-w-[58ch]`}>
               Add a quick note about anything you'd like to remember. Only you
               can see this. Nothing here changes your cycle estimates or
               interprets results.
@@ -312,16 +328,11 @@ const MyTTCJourney = () => {
           {logError && (
             <div role="alert" className="flex items-center gap-3 text-sm text-destructive">
               <span>{logError}</span>
-              <button type="button" onClick={refetchLogs} className="underline">Refresh logs</button>
+              <button type="button" onClick={refetchLogs} className={`min-h-11 rounded-sm underline underline-offset-4 ${TTC_FOCUS_RING}`}>Refresh notes</button>
             </div>
           )}
           <div>
-            <p
-              className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
-              style={{ color: "hsl(var(--stage-ttc-accent))" }}
-            >
-              Recent notes
-            </p>
+            <p className={`${TTC_EYEBROW} mb-3`}>Recent notes</p>
             <TTCLogList
               logs={logs.slice(0, 8)}
               onEdit={openPanelForEdit}
@@ -352,21 +363,14 @@ const MyTTCJourney = () => {
 
 
         {/* Ask */}
-        <section
-          className="rounded-[20px] px-6 sm:px-7 py-7 keepsake-surface mb-10 sm:mb-12"
-          style={{ borderColor: "hsl(var(--stage-ttc-accent) / 0.16)" }}
-        >
-          <p
-            className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
-            style={{ color: "hsl(var(--stage-ttc-accent))" }}
-          >
-            Ask
-          </p>
-          <h2 className="font-serif text-[20px] sm:text-[22px] text-foreground mb-2">
+        <section className={`${TTC_PAPER_CARD_WARM} ${TTC_CARD_PAD} mb-10 sm:mb-12`}>
+          <p className={`${TTC_EYEBROW} mb-3`}>Ask Cindy</p>
+          <h2 className={`${TTC_HEADING} text-[21px] sm:text-[23px] mb-2`}>
             Ask about this part of your cycle
           </h2>
-          <p className="font-serif italic text-foreground/68 text-[15px] leading-[1.6] mb-5 max-w-[52ch]">
-            Ask a question about timing, testing, symptoms or what to do next.
+          <p className={`${TTC_CARD_BODY} mb-5`}>
+            Ask a question about timing, testing, what you have noticed or what
+            may help next.
           </p>
           <Link
             to={`/ask?stage=ttc&topic=${
@@ -378,50 +382,62 @@ const MyTTCJourney = () => {
                 ? "pregnancy-tests"
                 : "cycle-tracking"
             }`}
-            className="inline-flex items-center gap-2 rounded-pill px-5 py-2.5 font-sans text-sm font-medium text-white shadow-cta hover:opacity-90 transition-opacity"
-            style={{ background: "hsl(var(--stage-ttc-accent))" }}
+            className={TTC_SOFT_PILL}
           >
-            Ask a TTC question <ArrowRight size={14} />
+            Ask a TTC question <ArrowRight size={14} aria-hidden="true" />
           </Link>
         </section>
 
         {/* Update setup */}
-        <section
-          className="rounded-[20px] px-6 sm:px-7 py-7 keepsake-surface mb-10 sm:mb-12"
-          style={{ borderColor: "hsl(var(--stage-ttc-accent) / 0.16)" }}
-        >
-          <p
-            className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
-            style={{ color: "hsl(var(--stage-ttc-accent))" }}
-          >
-            Keep it accurate
-          </p>
-          <h2 className="font-serif text-[20px] sm:text-[22px] text-foreground mb-2">
+        <section className={`${TTC_PAPER_CARD} ${TTC_CARD_PAD} mb-10 sm:mb-12`}>
+          <p className={`${TTC_EYEBROW} mb-3`}>Keep it current</p>
+          <h2 className={`${TTC_HEADING} text-[21px] sm:text-[23px] mb-2`}>
             Need to update your cycle?
           </h2>
-          <p className="font-serif italic text-foreground/68 text-[15px] leading-[1.6] mb-5 max-w-[52ch]">
+          <p className={`${TTC_CARD_BODY} mb-5`}>
             If your period started, your cycle length changed or something no
             longer looks right, you can update your TTC setup.
           </p>
           <Link
             to="/setup/trying-to-conceive"
-            className="inline-flex items-center gap-2 rounded-pill px-5 py-2.5 font-sans text-sm font-medium border transition-colors"
-            style={{
-              borderColor: "hsl(var(--stage-ttc-accent) / 0.4)",
-              color: "hsl(var(--stage-ttc-accent))",
-            }}
+            className={TTC_OUTLINE_PILL}
           >
-            Update TTC setup <ArrowRight size={14} />
+            Update TTC setup <ArrowRight size={14} aria-hidden="true" />
           </Link>
         </section>
 
         {/* Pregnancy handover */}
         <TTCPregnancyHandover ref={handoverRef} journey={journey} />
 
-        <section className="mt-10 border-t border-border/40 pt-6">
-          <button type="button" onClick={removeJourney} disabled={deletingJourney} className="font-sans text-sm text-destructive underline disabled:opacity-50">
-            {deletingJourney ? "Removing journey…" : "Remove my TTC journey"}
-          </button>
+        <section className="mt-12 border-t border-[hsl(var(--stage-ttc-edge))] pt-6">
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <button
+                type="button"
+                disabled={deletingJourney}
+                className={`inline-flex min-h-11 items-center rounded-sm font-sans text-sm text-destructive underline underline-offset-4 disabled:opacity-50 ${TTC_FOCUS_RING}`}
+              >
+                {deletingJourney ? "Removing journey…" : "Remove my TTC journey"}
+              </button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle className="font-serif">
+                  Remove your TTC journey?
+                </AlertDialogTitle>
+                <AlertDialogDescription>
+                  This removes your saved cycle details and every note you have
+                  added. It cannot be undone.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Keep my journey</AlertDialogCancel>
+                <AlertDialogAction onClick={removeJourney}>
+                  Remove journey
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </section>
 
       </main>

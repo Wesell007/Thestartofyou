@@ -21,7 +21,6 @@ const isFilmReady = (keptWeeksCount: number, hasMedia: boolean) =>
  * handles the sparse-journey disabled state.
  */
 const MemoryFilmEntry = ({ keptWeeksCount, hasMedia, onOpen }: Props) => {
-  const accent = "hsl(var(--stage-pregnancy-accent))";
   const ready = isFilmReady(keptWeeksCount, hasMedia);
 
   return (

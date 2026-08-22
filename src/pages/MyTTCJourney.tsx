@@ -319,39 +319,21 @@ const MyTTCJourney = () => {
           <TTCJourneySummary journey={journey} cycleDay={cycleDay} stage={derivedStage} />
         </section>
 
-        {/* Cycle calendar & logging */}
-        <section className="mb-10 sm:mb-12 space-y-5">
-          <div>
-            <h2 className={`${TTC_HEADING} text-[22px] sm:text-[25px] mb-1`}>
-              Your cycle calendar and notes
-            </h2>
-            <p className={`${TTC_HELPER} max-w-[58ch]`}>
-              Add a quick note about anything you'd like to remember. Only you
-              can see this. Nothing here changes your cycle estimates or
-              interprets results.
-            </p>
-          </div>
-          <TTCJourneyCalendar
+        {/* Private cycle notes */}
+        <section className="mb-10 sm:mb-12">
+          <TTCNotesSection
             journey={journey}
             logs={logs}
+            logError={logError}
+            onRetry={refetchLogs}
+            onQuickAdd={openPanelForQuickAdd}
             onSelectDate={openPanelForDate}
             onAddForToday={() => openPanelForDate(todayIso())}
+            onEdit={openPanelForEdit}
+            onDeleted={refetchLogs}
           />
-          {logError && (
-            <div role="alert" className="flex items-center gap-3 text-sm text-destructive">
-              <span>{logError}</span>
-              <button type="button" onClick={refetchLogs} className={`min-h-11 rounded-sm underline underline-offset-4 ${TTC_FOCUS_RING}`}>Refresh notes</button>
-            </div>
-          )}
-          <div>
-            <p className={`${TTC_EYEBROW} mb-3`}>Recent notes</p>
-            <TTCLogList
-              logs={logs.slice(0, 8)}
-              onEdit={openPanelForEdit}
-              onDeleted={refetchLogs}
-            />
-          </div>
         </section>
+
 
         {/* Gentle insights */}
         <section className="mb-10 sm:mb-12">

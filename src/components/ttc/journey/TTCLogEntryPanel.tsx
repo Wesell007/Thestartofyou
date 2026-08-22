@@ -41,6 +41,9 @@ type Props = {
   userId: string;
   journeyId: string;
   initialDate: string; // yyyy-MM-dd
+  /** Phase 28D — quick chips preselect an existing log type. */
+  initialType?: TTCLogType;
+  initialValue?: string;
   editing?: TTCLog | null;
   onSaved: () => void;
 };
@@ -53,6 +56,8 @@ const TTCLogEntryPanel = ({
   userId,
   journeyId,
   initialDate,
+  initialType,
+  initialValue,
   editing,
   onSaved,
 }: Props) => {
@@ -72,12 +77,13 @@ const TTCLogEntryPanel = ({
       setNotes(editing.notes ?? "");
     } else {
       setLogDate(initialDate || todayIso());
-      setLogType("note");
-      setValue("");
+      setLogType(initialType ?? "note");
+      setValue(initialValue ?? "");
       setNotes("");
     }
     setSuggestion(null);
-  }, [open, editing, initialDate]);
+  }, [open, editing, initialDate, initialType, initialValue]);
+
 
   const availableValues = LOG_TYPE_VALUES[logType] ?? [];
 

@@ -95,7 +95,7 @@ describe("computeTTCSupportMoment", () => {
       logs: [log({ log_type: "period", value: "started", log_date: "2026-03-09" })],
       today: TODAY,
     });
-    expect(moment?.note).toMatch(/does not change your saved cycle start/i);
+    expect(moment?.note).toMatch(/saved cycle start stays as it is/i);
   });
 });
 

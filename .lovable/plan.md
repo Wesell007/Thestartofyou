@@ -1,44 +1,45 @@
-# Phase 28F — Ask Cindy as a TTC Companion
+# Phase 28F — Ask companion inside the TTC journey
 
-Presentation plus one controlled AI mode addition. No schema, RLS, storage, auth, cycle maths, calculator, logging, handover, SEO, sitemap or route changes.
+Make the AI companion feel present inside `/my-ttc-journey` with a context-aware Ask surface, using the companion name the user already chose. No schema, RLS, storage, auth or cycle-logic changes.
 
-## Discovery findings (verified)
+## Companion naming (confirmed)
 
-1. `/ask` is `src/pages/AskPage.tsx`, a full public page with `SeoHead ... noindex`. It reads `stage`, `topic`, `journey` from the query string and takes the question from router `location.state` (legacy `?q=` is stripped into state so private text never stays in the URL).
-2. `/ask?stage=ttc&topic=...` already works: `TTC_TOPIC_SUGGESTIONS` covers `fertile-window`, `cycle-tracking`, `pregnancy-tests`, `two-week-wait`, `when-to-ask-help`. Unknown topics simply render no suggestions, so params are effectively allowlisted at render time.
-3. Reusable Ask surfaces today: `src/components/shared/AskLink.tsx`, `HubAISupport.tsx`, `AISearchBar.tsx`, and the inline pregnancy card `src/components/myweek/SectionAskAI.tsx`.
-4. Pregnancy passes context through `src/lib/companionContext.ts`, a pure builder capped at 500 characters that deliberately excludes names, reflection text and media. `SectionAskAI` answers inline and offers `navigateToAsk` for the full page.
-5. `supabase/functions/_shared/aiModes.ts` holds `AI_MODES` (`general`, `first_year_day_recap`, `first_year_companion`, `pregnancy_week_companion`), per-mode prompt, grounding and escalation flags. `resolveAiMode` falls back to `general` for unknown values, so an older client stays safe.
-6. Payload is `{ query, context?, mode? }`, validated in `supabase/functions/_shared/validation.ts` with bounded lengths.
-7. No TTC mode exists.
-8. Ask accepts a prefilled question via router state, and context via state or `?ctx=`.
-9. Context can be a short built string; no schema change is needed.
+The app already stores a chosen companion name and tone on the user profile, and `useCompanionIdentity()` reads it. That is the single source of truth for this phase.
 
-## What will be built
+- Heading: "Ask {name} about this part" when a name exists, otherwise "Ask about this part".
+- Button and links: "Ask {name}", fallback "Ask your companion".
+- Inline answer area and the handoff into the full Ask page use the same rule.
+- No name is ever sent to the backend or to analytics; it is display copy only.
+- No new setting, no schema change. A dedicated "change your companion name" surface, if wanted, is a separate personalisation phase.
 
-**New AI mode `ttc_companion`** in `supabase/functions/_shared/aiModes.ts`
-- New `TTC_COMPANION_PROMPT`: supportive, non-diagnostic. Explicitly forbids diagnosing, predicting or confirming pregnancy or ovulation, reading symptoms as proof, saying the person is or is not pregnant, claiming test accuracy, blanket reassurance, discouraging medical advice, fear or pressure wording. Requires "may", "could", "possible", "based on the dates you saved", dates are estimates, and pointing to a GP or clinician when the question warrants it.
-- Config: grounding on, urgent escalation answer allowed. `general` and the existing modes stay byte-identical.
+## What gets built
 
-**New helper `src/lib/ttcAskContext.ts`**
-- Pure builder returning a short capped string from existing derived state only: stage label, cycle day, active support moment id, possible test date, expected period date (day and month only), whether a recent negative or unclear test exists, whether a recent period-started log exists, and a page hint.
-- Never includes note text, log notes, names, emails or raw log rows. Booleans only for the log-derived facts.
-- Also exports the chip set: each chip has a label, a prompt, and a topic drawn only from the five existing safe topics.
+1. **A controlled `ttc_companion` AI mode**
+   A TTC-specific system prompt with strict guardrails: supportive, non-diagnostic, never confirms or rules out pregnancy or ovulation, never interprets a test result, keeps estimates framed as estimates, mentions professional help only when the person's own question raises it. Grounded like the other answer surfaces.
 
-**New component `src/components/ttc/journey/TTCAskCindyCard.tsx`**
-- Replaces the current static Ask block in `MyTTCJourney.tsx` (lines around 387 to 412), placed after the support moment and "What may be useful today", before the lower guidance and cycle-details sections.
-- Heading "Ask Cindy about this part", body "Ask about timing, testing, the wait or what may help today."
-- Prompt chips reorder by the active Phase 28E support moment (wait, possible test day, after a test result, period arrived). With a positive test noted, the card stays quiet and defers to the existing pregnancy handover, offering only a careful pregnancy guidance prompt.
-- Inline answering mirrors `SectionAskAI`: `useAISearch` with `mode: "ttc_companion"` and the built context, plus a persistent link to `/ask?stage=ttc&topic=...` carrying the question in router state.
-- Styling from `ttcStyles.ts` tokens, `ttc-paper-warm`, sage wash and botanical accents. No hex values, 44px targets, visible focus rings.
+2. **`src/lib/ttcAskContext.ts`**
+   Builds a short (500 character cap) context string from derived state only: cycle stage label, approximate cycle day, possible test day and expected period day as day-and-month, plus booleans for a recent negative/unclear test or a recent period-started note. Explicitly excludes note text, log rows, identifiers, emails, names and years. Also owns the chip list and the chip ordering rules.
 
-## Tests
+3. **`src/components/ttc/journey/TTCAskCompanionCard.tsx`**
+   Keepsake paper card in the TTC sage/olive world (cream paper, sage wash, botanical sprig), matching the 28B–28E direction. Contains prompt chips, a single question field, an inline streamed answer, "Ask something else", and "Continue in Ask". 44px minimum tap targets throughout.
 
-New `src/lib/ttcAskContext.test.ts`: context excludes note text and raw log values, uses derived stage and cycle day, chips map only to the five existing topics, support moment reorders chips, banned-copy scan over new strings.
-New assertions in the aiModes test area: `ttc_companion` resolves, and its prompt contains the non-diagnostic instructions. No existing tests rewritten.
+4. **Chip ordering by support moment**
+   The chip set is fixed and safe; only the order changes. Two-week wait leads with "Help me through the wait"; a possible test day leads with testing timing; after a negative or unclear test leads with the negative-test chip; period arrived leads with the new-cycle chip. Otherwise the stage decides.
+
+5. **Placement in `/my-ttc-journey`**
+   Sits after the support moment and Today area, before the deeper guidance, so it reads as a companion rather than a tool.
+
+6. **Full Ask handoff**
+   Uses the existing `/ask` route with only safe query params (`stage=ttc`, one of the existing TTC topics). The question and context travel in router state, never in the URL.
+
+## Technical notes
+
+- `supabase/functions/_shared/aiModes.ts`: add `ttc_companion` to `AI_MODES` and a `TTC_COMPANION_PROMPT` config entry (`useGrounding: true`, `allowUrgentEscalationAnswer: true`). The existing mode-count assertion in `src/test/aiModes.test.ts` moves from 4 to 5 and gains guardrail assertions.
+- Topics restricted to those the Ask page already knows: `two-week-wait`, `pregnancy-tests`, `cycle-tracking`, `fertile-window`, `when-to-ask-help`.
+- Reuses `useAISearch`, `navigateToAsk` / `askDestination`, `useCompanionIdentity`, `deriveTTCDates`, `computeTTCStage`, `cycleDayFrom` and the existing support-moment resolver. No new dependencies.
+- New tests: `src/lib/ttcAskContext.test.ts` covering the privacy contract (no note text, no identifiers, no year, length cap) and the chip reordering; plus the extended AI-mode guardrail tests.
+- Nano Banana composition board generated before implementation and used as the visual reference for the card.
 
 ## Verification
 
-Playwright at 390px and 1440px across `/my-ttc-journey`, `/ask?stage=ttc&topic=two-week-wait`, `/ask?stage=ttc&topic=pregnancy-tests`, `/setup/trying-to-conceive`, `/ovulation-calculator`, `/trying-to-conceive`, one TTC topic page, one TTC article, one signed-in pregnancy route and one signed-in First Year route. Then `npx tsgo --noEmit -p tsconfig.json`, `npx vitest run`, `npm run build`. Report the 28 requested items and stop.
-
-Nano Banana will be used inside Lovable to refine the Ask companion surface before implementation.
+`npx vitest run`, `npm run build`, typecheck, and a Playwright pass over `/my-ttc-journey` at mobile and desktop widths.

@@ -321,8 +321,19 @@ const MyTTCJourney = () => {
             stage={derivedStage}
             cycleDay={cycleDay}
             onAddNote={() => openPanelForDate(todayIso())}
+            moment={supportMoment}
           />
         </section>
+
+        {/* Support for this part */}
+        {supportMoment && (
+          <section className="mb-10 sm:mb-12">
+            <TTCSupportMomentCard
+              moment={supportMoment}
+              onAddNote={openPanelForQuickAdd}
+            />
+          </section>
+        )}
 
         {/* Cycle path */}
         <section className="mb-10 sm:mb-12">
@@ -331,7 +342,7 @@ const MyTTCJourney = () => {
 
         {/* What may be useful today */}
         <section className="mb-10 sm:mb-12">
-          <TTCJourneyFocusCard stage={derivedStage} />
+          <TTCJourneyFocusCard stage={derivedStage} moment={supportMoment} />
         </section>
 
         {/* Cycle details */}

@@ -10,6 +10,17 @@ import {
   isCaptionWithinLimit,
   normaliseCaption,
 } from "@/lib/weekMedia";
+import SectionLabel from "@/components/myweek/SectionLabel";
+import {
+  PG_HELPER,
+  PG_MEDIA_ACTION,
+  PG_MEDIA_ACTION_QUIET,
+  PG_MEDIA_CAPTION,
+  PG_MEDIA_CAPTION_PANEL,
+  PG_MEDIA_OVERLAY_ACTION,
+  PG_MEDIA_OVERLAY_BADGE,
+  PG_MEDIA_OVERLAY_ICON,
+} from "@/components/myweek/pregnancyStyles";
 
 interface Props {
   userId: string;

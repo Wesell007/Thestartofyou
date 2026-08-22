@@ -409,13 +409,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
       {state === "loaded" && signedUrl && (
         <div className="mt-4">
           {captionEditing ? (
-            <div
-              className="rounded-[18px] px-4 py-4"
-              style={{
-                background: "hsl(var(--stage-pregnancy) / 0.14)",
-                border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.22)",
-              }}
-            >
+            <div className={PG_MEDIA_CAPTION_PANEL}>
               <label htmlFor={`caption-${week}`} className="sr-only">
                 Caption for week {week}
               </label>
@@ -430,16 +424,15 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
                 rows={2}
                 placeholder={CAPTION_PLACEHOLDER}
                 disabled={captionSaving}
-                className="w-full resize-none bg-transparent font-serif italic text-[14.5px] leading-[1.6] text-foreground/85 placeholder:text-foreground/40 focus:outline-none"
+                className="w-full resize-none bg-transparent font-serif italic text-[14.5px] leading-[1.6] text-[hsl(var(--stage-pregnancy-text))] placeholder:text-[hsl(var(--stage-pregnancy-text-soft)/0.7)] focus:outline-none"
               />
-              <div className="flex items-center justify-between gap-3 mt-2">
+              <div className="flex flex-wrap items-center justify-between gap-3 mt-2">
                 <span
-                  className="font-sans text-[10.5px] font-medium tracking-[0.2em] uppercase"
-                  style={{
-                    color: isCaptionWithinLimit(captionDraft)
-                      ? "hsl(var(--stage-pregnancy-accent))"
-                      : "hsl(var(--destructive))",
-                  }}
+                  className={`font-sans text-[10.5px] font-medium tracking-[0.2em] uppercase ${
+                    isCaptionWithinLimit(captionDraft)
+                      ? "text-[hsl(var(--stage-pregnancy-accent))]"
+                      : "text-destructive"
+                  }`}
                 >
                   {normaliseCaption(captionDraft).length}/{CAPTION_MAX}
                 </span>
@@ -448,7 +441,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
                     type="button"
                     onClick={cancelCaptionEdit}
                     disabled={captionSaving}
-                    className="rounded-full px-3.5 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase text-foreground/60 hover:text-foreground/85 transition-colors"
+                    className={PG_MEDIA_ACTION_QUIET}
                   >
                     Cancel
                   </button>
@@ -456,11 +449,7 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
                     type="button"
                     onClick={saveCaption}
                     disabled={captionSaving || !isCaptionWithinLimit(captionDraft)}
-                    className="rounded-full px-4 py-1.5 font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase transition-colors disabled:opacity-50"
-                    style={{
-                      color: "hsl(var(--stage-pregnancy-accent))",
-                      border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.5)",
-                    }}
+                    className={`${PG_MEDIA_ACTION} disabled:opacity-50`}
                   >
                     {captionSaving ? "Saving" : "Save"}
                   </button>
@@ -474,33 +463,24 @@ const SlotPhotoMemory = ({ userId, week, chapterTitle, onSaved }: Props) => {
             </div>
           ) : caption ? (
             <div className="flex items-start justify-between gap-3 px-1">
-              <p className="font-serif italic text-foreground/75 text-[14.5px] leading-[1.65] flex-1">
-                {caption}
-              </p>
+              <p className={`${PG_MEDIA_CAPTION} flex-1`}>{caption}</p>
               <button
                 type="button"
                 onClick={openCaptionEditor}
-                className="shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-foreground/55 hover:text-foreground/85 transition-colors"
+                className={`${PG_MEDIA_ACTION_QUIET} shrink-0`}
                 aria-label="Edit caption"
               >
-                <Pencil size={11} strokeWidth={1.7} />
+                <Pencil size={11} strokeWidth={1.7} aria-hidden="true" />
                 Edit
               </button>
             </div>
           ) : (
-            <button
-              type="button"
-              onClick={openCaptionEditor}
-              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-sans text-[11px] font-medium tracking-[0.22em] uppercase transition-colors hover:bg-[hsl(var(--stage-pregnancy-accent)/0.1)]"
-              style={{
-                color: "hsl(var(--stage-pregnancy-accent))",
-                border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.35)",
-              }}
-            >
-              <Pencil size={11} strokeWidth={1.7} />
+            <button type="button" onClick={openCaptionEditor} className={PG_MEDIA_ACTION}>
+              <Pencil size={11} strokeWidth={1.7} aria-hidden="true" />
               {CAPTION_PLACEHOLDER}
             </button>
           )}
+
         </div>
       )}
 

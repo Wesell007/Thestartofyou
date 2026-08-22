@@ -16,6 +16,15 @@ import type { ActiveTTCJourney } from "@/lib/savedTTCJourney";
 import type { TTCLog } from "@/lib/ttcLogs";
 import { groupTTCLogsByDate, LOG_TYPE_LABEL } from "@/lib/ttcLogs";
 import { parseDateOnly } from "@/lib/dateOnly";
+import {
+  TTC_CHIP,
+  TTC_EYEBROW,
+  TTC_HEADING,
+  TTC_ICON_CONTROL,
+  TTC_PAPER_CARD,
+  TTC_SOFT_PILL,
+  TTC_FOCUS_RING,
+} from "@/components/ttc/journey/ttcStyles";
 
 /**
  * Cycle calendar with soft milestone chips and solid user-log markers.
@@ -70,19 +79,11 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
   const today = new Date();
 
   return (
-    <div
-      className="rounded-[20px] px-4 sm:px-6 py-6 sm:py-7 keepsake-surface"
-      style={{ borderColor: "hsl(var(--stage-ttc-accent) / 0.16)" }}
-    >
+    <div className={`${TTC_PAPER_CARD} px-4 sm:px-7 py-6 sm:py-8`}>
       <div className="flex items-center justify-between mb-5 gap-3 flex-wrap">
         <div className="min-w-0">
-          <p
-            className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-1"
-            style={{ color: "hsl(var(--stage-ttc-accent))" }}
-          >
-            Your cycle calendar
-          </p>
-          <h2 className="font-serif text-[20px] sm:text-[22px] text-foreground leading-snug">
+          <p className={`${TTC_EYEBROW} mb-1`}>Your cycle calendar</p>
+          <h2 className={`${TTC_HEADING} text-[20px] sm:text-[23px]`}>
             {format(visibleMonth, "LLLL yyyy")}
           </h2>
         </div>
@@ -91,16 +92,14 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
             type="button"
             aria-label="Previous month"
             onClick={() => setVisibleMonth((m) => addMonths(m, -1))}
-            className="w-9 h-9 rounded-full border flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-muted/40 transition-colors"
-            style={{ borderColor: "hsl(var(--stage-ttc-accent) / 0.35)" }}
+            className={TTC_ICON_CONTROL}
           >
-            <ChevronLeft size={16} />
+            <ChevronLeft size={16} aria-hidden="true" />
           </button>
           <button
             type="button"
             onClick={() => setVisibleMonth(startOfMonth(new Date()))}
-            className="rounded-full border px-3 h-9 font-sans text-[12px] font-medium text-foreground/75 hover:text-foreground transition-colors"
-            style={{ borderColor: "hsl(var(--stage-ttc-accent) / 0.35)" }}
+            className={`inline-flex min-h-11 items-center rounded-pill border border-[hsl(var(--stage-ttc-olive)/0.32)] px-4 font-sans text-[12.5px] font-medium text-[hsl(var(--stage-ttc-text))] transition-colors hover:bg-[hsl(var(--stage-ttc-sage)/0.6)] ${TTC_FOCUS_RING}`}
           >
             Today
           </button>
@@ -108,18 +107,16 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
             type="button"
             aria-label="Next month"
             onClick={() => setVisibleMonth((m) => addMonths(m, 1))}
-            className="w-9 h-9 rounded-full border flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-muted/40 transition-colors"
-            style={{ borderColor: "hsl(var(--stage-ttc-accent) / 0.35)" }}
+            className={TTC_ICON_CONTROL}
           >
-            <ChevronRight size={16} />
+            <ChevronRight size={16} aria-hidden="true" />
           </button>
           <button
             type="button"
             onClick={onAddForToday}
-            className="inline-flex items-center gap-1.5 rounded-pill px-4 h-9 font-sans text-[12.5px] font-medium text-white shadow-cta hover:opacity-90 transition-opacity"
-            style={{ background: "hsl(var(--stage-ttc-accent))" }}
+            className={`${TTC_SOFT_PILL} px-5`}
           >
-            <Plus size={14} /> Add log
+            <Plus size={14} aria-hidden="true" /> Add a note
           </button>
         </div>
       </div>
@@ -128,7 +125,7 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
           <div
             key={d}
-            className="font-sans text-[10px] tracking-[0.15em] uppercase text-muted-foreground/70 text-center"
+            className="font-sans text-[10px] tracking-[0.15em] uppercase text-[hsl(var(--stage-ttc-text-soft))] text-center"
           >
             {d}
           </div>
@@ -159,20 +156,20 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
               disabled={isFuture}
               aria-label={ariaBits.join(", ")}
               className={`relative rounded-[10px] aspect-square min-h-[44px] p-1 flex flex-col items-stretch justify-between text-left transition-colors ${
-                inMonth ? "hover:bg-muted/40" : "opacity-40 hover:opacity-60"
+                inMonth ? "hover:bg-[hsl(var(--stage-ttc-sage)/0.55)]" : "opacity-40 hover:opacity-60"
               }`}
               style={
                 isCurrent
                   ? {
-                      background: "hsl(var(--stage-ttc-accent) / 0.10)",
-                      boxShadow: "inset 0 0 0 1px hsl(var(--stage-ttc-accent) / 0.45)",
+                      background: "hsl(var(--stage-ttc-olive) / 0.10)",
+                      boxShadow: "inset 0 0 0 1px hsl(var(--stage-ttc-olive) / 0.45)",
                     }
                   : undefined
               }
             >
               <span
                 className={`font-sans text-[12px] leading-none ${
-                  isCurrent ? "font-semibold text-foreground" : "text-foreground/75"
+                  isCurrent ? "font-semibold text-[hsl(var(--stage-ttc-text))]" : "text-[hsl(var(--stage-ttc-text-soft))]"
                 }`}
               >
                 {format(day, "d")}
@@ -181,8 +178,8 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
                 <span
                   className="font-sans text-[8.5px] tracking-[0.05em] uppercase leading-tight rounded px-1 py-[1px] self-start truncate max-w-full"
                   style={{
-                    background: "hsl(var(--stage-ttc-accent) / 0.14)",
-                    color: "hsl(var(--stage-ttc-accent))",
+                    background: "hsl(var(--stage-ttc-olive) / 0.14)",
+                    color: "hsl(var(--stage-ttc-olive))",
                   }}
                   title={dayMilestones.map((m) => m.label).join(", ")}
                 >
@@ -193,12 +190,12 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
                 <span className="flex items-center gap-0.5 self-end" aria-hidden="true">
                   <span
                     className="w-1.5 h-1.5 rounded-full"
-                    style={{ background: "hsl(var(--stage-ttc-accent))" }}
+                    style={{ background: "hsl(var(--stage-ttc-olive))" }}
                   />
                   {dayLogs.length > 1 && (
                     <span
                       className="font-sans text-[9px] font-semibold"
-                      style={{ color: "hsl(var(--stage-ttc-accent))" }}
+                      style={{ color: "hsl(var(--stage-ttc-olive))" }}
                     >
                       {dayLogs.length}
                     </span>
@@ -211,13 +208,13 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
       </div>
 
       {/* Legend */}
-      <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[11.5px] text-muted-foreground">
+      <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[11.5px] text-[hsl(var(--stage-ttc-text-soft))]">
         <span className="inline-flex items-center gap-1.5">
           <span
             className="inline-block rounded px-1.5 py-[1px] font-sans text-[9px] uppercase tracking-[0.05em]"
             style={{
-              background: "hsl(var(--stage-ttc-accent) / 0.14)",
-              color: "hsl(var(--stage-ttc-accent))",
+              background: "hsl(var(--stage-ttc-olive) / 0.14)",
+              color: "hsl(var(--stage-ttc-olive))",
             }}
           >
             Chip
@@ -227,7 +224,7 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
         <span className="inline-flex items-center gap-1.5">
           <span
             className="w-2 h-2 rounded-full"
-            style={{ background: "hsl(var(--stage-ttc-accent))" }}
+            style={{ background: "hsl(var(--stage-ttc-olive))" }}
           />
           your logs
         </span>
@@ -235,8 +232,8 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
           <span
             className="w-3 h-3 rounded"
             style={{
-              boxShadow: "inset 0 0 0 1px hsl(var(--stage-ttc-accent) / 0.45)",
-              background: "hsl(var(--stage-ttc-accent) / 0.10)",
+              boxShadow: "inset 0 0 0 1px hsl(var(--stage-ttc-olive) / 0.45)",
+              background: "hsl(var(--stage-ttc-olive) / 0.10)",
             }}
           />
           today

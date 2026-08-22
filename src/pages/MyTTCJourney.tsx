@@ -24,7 +24,12 @@ import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
 import TTCTodayCard from "@/components/ttc/journey/TTCTodayCard";
 import TTCJourneyFocusCard from "@/components/ttc/journey/TTCJourneyFocusCard";
 import TTCSupportMomentCard from "@/components/ttc/journey/TTCSupportMomentCard";
-import { computeTTCSupportMoment } from "@/lib/ttcSupportMoment";
+import {
+  computeTTCSupportMoment,
+  hasRecentPeriodStarted,
+  hasRecentUnhelpfulTest,
+} from "@/lib/ttcSupportMoment";
+import TTCAskCompanionCard from "@/components/ttc/journey/TTCAskCompanionCard";
 import TTCJourneyGuidance from "@/components/ttc/journey/TTCJourneyGuidance";
 import TTCLogEntryPanel from "@/components/ttc/journey/TTCLogEntryPanel";
 import TTCNotesSection from "@/components/ttc/journey/TTCNotesSection";
@@ -206,6 +211,22 @@ const MyTTCJourney = () => {
     [derivedStage, logs],
   );
 
+  // Coarse dates for the Ask companion context. No new cycle maths: this is
+  // the same derivation the rest of the page already uses.
+  const askDates = useMemo(() => {
+    if (!journey?.last_period_date || !journey.cycle_length_days) return null;
+    const lmp = parseDateOnly(journey.last_period_date);
+    if (!lmp) return null;
+    try {
+      return deriveTTCDates(lmp, journey.cycle_length_days);
+    } catch {
+      return null;
+    }
+  }, [journey]);
+
+  const askTestFlag = useMemo(() => hasRecentUnhelpfulTest(logs), [logs]);
+  const askPeriodFlag = useMemo(() => hasRecentPeriodStarted(logs), [logs]);
+
 
 
 
@@ -345,6 +366,19 @@ const MyTTCJourney = () => {
           <TTCJourneyFocusCard stage={derivedStage} moment={supportMoment} />
         </section>
 
+        {/* Ask your companion */}
+        <section className="mb-10 sm:mb-12">
+          <TTCAskCompanionCard
+            stage={derivedStage}
+            cycleDay={cycleDay}
+            moment={supportMoment}
+            possibleTestDate={askDates?.possible_test_date ?? null}
+            expectedPeriodDate={askDates?.expected_period_date ?? null}
+            hasRecentUnclearOrNegativeTest={askTestFlag}
+            hasRecentPeriodStarted={askPeriodFlag}
+          />
+        </section>
+
         {/* Cycle details */}
         <section className="mb-10 sm:mb-12">
           <TTCJourneySummary journey={journey} cycleDay={cycleDay} stage={derivedStage} />
@@ -383,35 +417,6 @@ const MyTTCJourney = () => {
           <TTCJourneyGuidance stage={derivedStage} journey={journey} />
         </section>
 
-
-        {/* Ask */}
-        <section className={`relative overflow-hidden ${TTC_PAPER_CARD_WARM} ${TTC_CARD_PAD} mb-10 sm:mb-12`}>
-          <TTCBotanicalLeaf className="-bottom-10 -right-6 w-[150px]" opacity={0.28} />
-          <div className="relative">
-            <p className={`${TTC_EYEBROW} mb-3`}>Ask Cindy</p>
-            <h2 className={`${TTC_HEADING} text-[21px] sm:text-[23px] mb-2`}>
-              Ask about this part of your cycle
-            </h2>
-            <p className={`${TTC_CARD_BODY} mb-5`}>
-              Ask a question about timing, testing, what you have noticed or what
-              may help next.
-            </p>
-            <Link
-              to={`/ask?stage=ttc&topic=${
-                derivedStage === "fertile_window" || derivedStage === "likely_ovulation"
-                  ? "fertile-window"
-                  : derivedStage === "two_week_wait"
-                  ? "two-week-wait"
-                  : derivedStage === "test_window" || derivedStage === "expected_period"
-                  ? "pregnancy-tests"
-                  : "cycle-tracking"
-              }`}
-              className={TTC_SOFT_PILL}
-            >
-              Ask a TTC question <ArrowRight size={14} aria-hidden="true" />
-            </Link>
-          </div>
-        </section>
 
         {/* Update setup */}
         <section className={`${TTC_PAPER_CARD} ${TTC_CARD_PAD} mb-10 sm:mb-12`}>

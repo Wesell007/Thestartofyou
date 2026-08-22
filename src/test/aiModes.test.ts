@@ -27,7 +27,40 @@ describe("AI mode resolution", () => {
     expect(resolveAiMode("first_year_day_recap")).toBe("first_year_day_recap");
     expect(resolveAiMode("first_year_companion")).toBe("first_year_companion");
     expect(resolveAiMode("pregnancy_week_companion")).toBe("pregnancy_week_companion");
-    expect([...AI_MODES]).toHaveLength(4);
+    expect(resolveAiMode("ttc_companion")).toBe("ttc_companion");
+    expect([...AI_MODES]).toHaveLength(5);
+  });
+});
+
+describe("ttc_companion configuration", () => {
+  const config = getAiModeConfig("ttc_companion");
+
+  it("is grounded and may still return the urgent help answer", () => {
+    expect(config.useGrounding).toBe(true);
+    expect(config.allowUrgentEscalationAnswer).toBe(true);
+  });
+
+  it("uses its own prompt rather than the shared guidance prompt", () => {
+    expect(config.systemPrompt).not.toBe(GENERAL_SYSTEM_PROMPT);
+  });
+
+  it("bans diagnosis, prediction and test interpretation", () => {
+    const prompt = config.systemPrompt.toLowerCase();
+    for (const rule of [
+      "never say whether someone is or is not pregnant",
+      "never confirm that ovulation has happened",
+      "never interpret or reinterpret a pregnancy test result",
+      "test accuracy",
+      "blanket reassurance",
+      "do not diagnose",
+    ]) {
+      expect(prompt).toContain(rule);
+    }
+  });
+
+  it("keeps professional help available rather than gated on the question", () => {
+    expect(config.systemPrompt).toMatch(/never discourage professional advice/i);
+    expect(config.systemPrompt).toMatch(/999|nhs 111/i);
   });
 });
 

@@ -32,6 +32,7 @@ import {
   type TTCLog,
   type TTCLogType,
 } from "@/lib/ttcLogs";
+import { TTC_CHIP, TTC_FOCUS_RING } from "@/components/ttc/journey/ttcStyles";
 
 type Suggestion = "period_started" | "positive_pregnancy_test" | null;
 

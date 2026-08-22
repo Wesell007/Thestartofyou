@@ -24,9 +24,9 @@ import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
 import TTCTodayCard from "@/components/ttc/journey/TTCTodayCard";
 import TTCJourneyFocusCard from "@/components/ttc/journey/TTCJourneyFocusCard";
 import TTCJourneyGuidance from "@/components/ttc/journey/TTCJourneyGuidance";
-import TTCJourneyCalendar from "@/components/ttc/journey/TTCJourneyCalendar";
 import TTCLogEntryPanel from "@/components/ttc/journey/TTCLogEntryPanel";
-import TTCLogList from "@/components/ttc/journey/TTCLogList";
+import TTCNotesSection from "@/components/ttc/journey/TTCNotesSection";
+
 import TTCJourneyInsights from "@/components/ttc/journey/TTCJourneyInsights";
 import TTCPregnancyHandover from "@/components/ttc/journey/TTCPregnancyHandover";
 import TTCJourneyHeader from "@/components/ttc/journey/TTCJourneyHeader";

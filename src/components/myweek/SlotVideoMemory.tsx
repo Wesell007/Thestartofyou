@@ -98,22 +98,10 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
 
   return (
     <section className="relative pt-8 pb-2">
-      <div className="flex items-center gap-3 mb-4">
-        <span
-          aria-hidden="true"
-          className="block w-5 h-px"
-          style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }}
-        />
-        <p
-          className="font-sans text-[10.5px] font-light tracking-[0.24em] uppercase"
-          style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-        >
-          Video of this week
-        </p>
-      </div>
+      <SectionLabel className="mb-4">Video of this week</SectionLabel>
 
-      <p className="font-sans text-[13.5px] font-normal text-foreground/75 mb-5 max-w-[42ch] leading-[1.6]">
-        Add a short video from this week, if you want to keep one here.
+      <p className={`${PG_HELPER} mb-5 max-w-[42ch]`}>
+        A little clip to keep, if one feels right this week.
       </p>
 
       <input
@@ -126,56 +114,37 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
       />
 
       {state === "loading" && (
-        <div
-          className="rounded-[20px] bg-card/60 h-[120px] animate-pulse"
-          style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.14)" }}
-        />
+        <div className="h-[120px] animate-pulse rounded-[20px] border border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-cream)/0.6)]" />
       )}
 
       {(state === "empty" || state === "uploading") && !signedUrl && (
-        <div
-          className="rounded-[20px] px-5 py-5 flex items-center justify-between gap-4"
-          style={{
-            background:
-              "linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--stage-pregnancy) / 0.10) 100%)",
-            border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.18)",
-          }}
-        >
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-[20px] border border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-cream)/0.6)] px-5 py-5">
           <div className="flex items-center gap-3 min-w-0">
             <span
               aria-hidden="true"
-              className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
-              style={{
-                background: "hsl(var(--stage-pregnancy) / 0.22)",
-                color: "hsl(var(--stage-pregnancy-accent))",
-              }}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[hsl(var(--stage-pregnancy-edge))] bg-[hsl(var(--stage-pregnancy-blush))] text-[hsl(var(--stage-pregnancy-accent))]"
             >
               <Play size={14} strokeWidth={1.8} />
             </span>
             <div className="min-w-0">
-              <p className="font-serif italic text-[15px] text-foreground/85 leading-snug">
+              <p className="font-serif italic text-[15px] leading-snug text-[hsl(var(--stage-pregnancy-text))]">
                 A little clip to keep
               </p>
-              <p className="font-sans text-[11.5px] text-foreground/60 leading-snug mt-0.5">
-                Up to 60 seconds. Private to you.
-              </p>
+              <p className={`${PG_HELPER} mt-0.5`}>Up to 60 seconds. Private to you.</p>
             </div>
           </div>
           <button
             type="button"
             onClick={openFilePicker}
             disabled={uploading}
-            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-sans text-[11px] font-medium tracking-[0.22em] uppercase transition-colors hover:bg-[hsl(var(--stage-pregnancy-accent)/0.1)] disabled:opacity-60"
-            style={{
-              color: "hsl(var(--stage-pregnancy-accent))",
-              border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.42)",
-            }}
+            className={PG_MEDIA_ACTION}
           >
-            <Video size={12} strokeWidth={1.8} />
+            <Video size={12} strokeWidth={1.8} aria-hidden="true" />
             {uploading ? "Saving video..." : "Add video"}
           </button>
         </div>
       )}
+
 
       {state === "loaded" && signedUrl && (
         <figure

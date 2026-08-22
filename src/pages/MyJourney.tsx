@@ -30,6 +30,7 @@ import ReflectionHighlights from "@/components/myjourney/ReflectionHighlights";
 import ToolkitEntryPanel from "@/components/myjourney/ToolkitEntryPanel";
 import LookingAheadCard from "@/components/myjourney/LookingAheadCard";
 import JournalBridgeCard from "@/components/myweek/JournalBridgeCard";
+import { journalBridgeVariant } from "@/lib/journalOwner";
 import PageLoadState from "@/components/shared/PageLoadState";
 import { useBabyIllustrationStyle } from "@/hooks/useBabyIllustrationStyle";
 import { normaliseRealismTone, type RealismTone } from "@/lib/myWeekRealismIllustrations";
@@ -451,7 +452,7 @@ const MyJourney = () => {
         {isActive && (
           <LookingAheadCard currentWeek={currentWeek} keptCount={keptWeeks.length} />
         )}
-        <JournalBridgeCard context="journey" className="mb-12" />
+        <JournalBridgeCard context="journey" variant={journalBridgeVariant()} className="mb-12" />
       </main>
       <MyWeekFooter contextual={null} />
     </div>

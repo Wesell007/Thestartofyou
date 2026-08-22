@@ -5,6 +5,7 @@ import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import PageStatusNotice from "@/components/journey-status/PageStatusNotice";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import JournalBridgeCard from "@/components/myweek/JournalBridgeCard";
+import { journalBridgeVariant } from "@/lib/journalOwner";
 import PageLoadState from "@/components/shared/PageLoadState";
 import AppointmentCard from "@/components/pregnancy-toolkit/AppointmentCard";
 import { useAppointments } from "@/hooks/usePregnancyAppointments";
@@ -201,7 +202,7 @@ const PregnancyToolkitAppointments = () => {
         ) : null}
 
         {/* Return links */}
-        <JournalBridgeCard context="toolkit" tone="inline" className="mb-8" />
+        <JournalBridgeCard context="toolkit" tone="inline" variant={journalBridgeVariant()} className="mb-8" />
         <section
           className="rounded-[20px] keepsake-surface px-6 py-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between"
           style={{ borderColor: softBorder }}

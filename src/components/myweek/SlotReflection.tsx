@@ -386,7 +386,7 @@ const SlotReflection = ({ content, userId, week, onSaved }: Props) => {
             onClick={listening ? stopListening : startListening}
             disabled={!speechSupported}
             aria-pressed={listening}
-            className="self-start inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 transition-opacity disabled:opacity-40"
+            className="self-start inline-flex min-h-[44px] items-center gap-2 rounded-full px-4 py-2.5 transition-opacity disabled:opacity-40"
             style={{
               color: "hsl(var(--stage-pregnancy-accent))",
               border: `1px solid hsl(var(--stage-pregnancy-accent) / ${listening ? 0.45 : 0.28})`,

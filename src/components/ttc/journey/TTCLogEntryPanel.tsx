@@ -32,6 +32,7 @@ import {
   type TTCLog,
   type TTCLogType,
 } from "@/lib/ttcLogs";
+import { TTC_CHIP, TTC_FOCUS_RING } from "@/components/ttc/journey/ttcStyles";
 
 type Suggestion = "period_started" | "positive_pregnancy_test" | null;
 
@@ -41,6 +42,9 @@ type Props = {
   userId: string;
   journeyId: string;
   initialDate: string; // yyyy-MM-dd
+  /** Phase 28D — quick chips preselect an existing log type. */
+  initialType?: TTCLogType;
+  initialValue?: string;
   editing?: TTCLog | null;
   onSaved: () => void;
 };
@@ -53,6 +57,8 @@ const TTCLogEntryPanel = ({
   userId,
   journeyId,
   initialDate,
+  initialType,
+  initialValue,
   editing,
   onSaved,
 }: Props) => {
@@ -72,12 +78,13 @@ const TTCLogEntryPanel = ({
       setNotes(editing.notes ?? "");
     } else {
       setLogDate(initialDate || todayIso());
-      setLogType("note");
-      setValue("");
+      setLogType(initialType ?? "note");
+      setValue(initialValue ?? "");
       setNotes("");
     }
     setSuggestion(null);
-  }, [open, editing, initialDate]);
+  }, [open, editing, initialDate, initialType, initialValue]);
+
 
   const availableValues = LOG_TYPE_VALUES[logType] ?? [];
 
@@ -135,15 +142,16 @@ const TTCLogEntryPanel = ({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="w-full sm:max-w-md overflow-y-auto">
+      <SheetContent side="right" className="w-full sm:max-w-md overflow-y-auto ttc-paper-warm">
         <SheetHeader className="text-left">
-          <SheetTitle className="font-serif text-[22px] text-foreground">
-            {editing ? "Edit log" : "Add a log"}
+          <SheetTitle className="font-serif font-normal text-[22px] leading-[1.25] text-foreground">
+            {editing ? "Edit this note" : "Add a small note"}
           </SheetTitle>
-          <SheetDescription className="font-sans text-[13px] text-muted-foreground/85">
-            A quick note for your own reference. Only you can see this.
+          <SheetDescription className="font-sans text-[13px] text-[hsl(var(--stage-ttc-text-soft))]">
+            Write what you notice, when you feel ready. This is private to you.
           </SheetDescription>
         </SheetHeader>
+
 
         <div className="mt-6 space-y-5">
           <div>
@@ -164,9 +172,12 @@ const TTCLogEntryPanel = ({
           </div>
 
           <div>
-            <label className="block font-sans text-[11px] tracking-[0.15em] uppercase font-medium text-foreground/70 mb-2">
-              Type
-            </label>
+            <div className="mb-2 flex items-center justify-between gap-3">
+              <label className="font-sans text-[11px] tracking-[0.15em] uppercase font-medium text-foreground/70">
+                What is this note about
+              </label>
+              <span className={TTC_CHIP}>{LOG_TYPE_LABEL[logType]}</span>
+            </div>
             <Select
               value={logType}
               onValueChange={(v) => {
@@ -174,7 +185,7 @@ const TTCLogEntryPanel = ({
                 setValue("");
               }}
             >
-              <SelectTrigger>
+              <SelectTrigger className="min-h-11">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-background z-50">
@@ -193,7 +204,7 @@ const TTCLogEntryPanel = ({
                 Detail
               </label>
               <Select value={value} onValueChange={setValue}>
-                <SelectTrigger>
+                <SelectTrigger className="min-h-11">
                   <SelectValue placeholder="Choose an option (optional)" />
                 </SelectTrigger>
                 <SelectContent className="bg-background z-50">
@@ -212,21 +223,23 @@ const TTCLogEntryPanel = ({
               htmlFor="ttc-log-notes"
               className="block font-sans text-[11px] tracking-[0.15em] uppercase font-medium text-foreground/70 mb-2"
             >
-              Notes (optional)
+              In your words (optional)
             </label>
             <Textarea
               id="ttc-log-notes"
-              rows={3}
+              rows={6}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="Anything you want to remember."
+              placeholder="What you notice today, or anything worth remembering."
               maxLength={500}
+              className="min-h-[150px] font-serif text-[15px] leading-[1.7]"
             />
           </div>
 
-          <p className="font-sans text-[11.5px] text-muted-foreground/80 leading-relaxed">
-            Logs are for your own reference. They are private to you and are
-            not used to change your cycle estimates or interpret results.
+
+          <p className="font-sans text-[11.5px] text-[hsl(var(--stage-ttc-text-soft))] leading-relaxed">
+            Your notes are private to you. They are not used to change your
+            cycle estimates or interpret results.
           </p>
 
           <div className="flex items-center gap-3">
@@ -234,15 +247,15 @@ const TTCLogEntryPanel = ({
               type="button"
               onClick={handleSave}
               disabled={saving}
-              className="min-h-11 rounded-pill px-6 bg-[hsl(var(--stage-ttc-olive))] text-[hsl(var(--stage-ttc-cream))] hover:bg-[hsl(var(--stage-ttc-olive))] hover:opacity-90"
+              className={`min-h-11 rounded-pill px-6 bg-[hsl(var(--stage-ttc-olive))] text-[hsl(var(--stage-ttc-cream))] hover:bg-[hsl(var(--stage-ttc-olive))] hover:opacity-90 ${TTC_FOCUS_RING}`}
             >
               {saving && <Loader2 size={14} className="mr-2 animate-spin" />}
-              {editing ? "Save changes" : "Save note"}
+              {editing ? "Save changes" : "Save this note"}
             </Button>
             <button
               type="button"
               onClick={() => onOpenChange(false)}
-              className="inline-flex min-h-11 items-center rounded-sm px-2 font-sans text-[13px] text-[hsl(var(--stage-ttc-text-soft))] transition-colors hover:text-[hsl(var(--stage-ttc-text))]"
+              className={`inline-flex min-h-11 items-center rounded-pill border border-[hsl(var(--stage-ttc-olive)/0.32)] px-5 font-sans text-[13px] text-[hsl(var(--stage-ttc-text))] transition-colors hover:bg-[hsl(var(--stage-ttc-sage)/0.6)] ${TTC_FOCUS_RING}`}
             >
               Cancel
             </button>

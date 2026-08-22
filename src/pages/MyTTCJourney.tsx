@@ -23,6 +23,8 @@ import TTCJourneySummary from "@/components/ttc/journey/TTCJourneySummary";
 import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
 import TTCTodayCard from "@/components/ttc/journey/TTCTodayCard";
 import TTCJourneyFocusCard from "@/components/ttc/journey/TTCJourneyFocusCard";
+import TTCSupportMomentCard from "@/components/ttc/journey/TTCSupportMomentCard";
+import { computeTTCSupportMoment } from "@/lib/ttcSupportMoment";
 import TTCJourneyGuidance from "@/components/ttc/journey/TTCJourneyGuidance";
 import TTCLogEntryPanel from "@/components/ttc/journey/TTCLogEntryPanel";
 import TTCNotesSection from "@/components/ttc/journey/TTCNotesSection";
@@ -198,6 +200,11 @@ const MyTTCJourney = () => {
     if (!journey) return [];
     return computeTTCInsights({ stage: derivedStage, journey, logs });
   }, [journey, derivedStage, logs]);
+
+  const supportMoment = useMemo(
+    () => computeTTCSupportMoment({ stage: derivedStage, logs }),
+    [derivedStage, logs],
+  );
 
 
 

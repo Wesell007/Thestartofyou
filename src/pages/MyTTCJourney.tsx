@@ -24,7 +24,12 @@ import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
 import TTCTodayCard from "@/components/ttc/journey/TTCTodayCard";
 import TTCJourneyFocusCard from "@/components/ttc/journey/TTCJourneyFocusCard";
 import TTCSupportMomentCard from "@/components/ttc/journey/TTCSupportMomentCard";
-import { computeTTCSupportMoment } from "@/lib/ttcSupportMoment";
+import {
+  computeTTCSupportMoment,
+  hasRecentPeriodStarted,
+  hasRecentUnhelpfulTest,
+} from "@/lib/ttcSupportMoment";
+import TTCAskCompanionCard from "@/components/ttc/journey/TTCAskCompanionCard";
 import TTCJourneyGuidance from "@/components/ttc/journey/TTCJourneyGuidance";
 import TTCLogEntryPanel from "@/components/ttc/journey/TTCLogEntryPanel";
 import TTCNotesSection from "@/components/ttc/journey/TTCNotesSection";
@@ -205,6 +210,22 @@ const MyTTCJourney = () => {
     () => computeTTCSupportMoment({ stage: derivedStage, logs }),
     [derivedStage, logs],
   );
+
+  // Coarse dates for the Ask companion context. No new cycle maths: this is
+  // the same derivation the rest of the page already uses.
+  const askDates = useMemo(() => {
+    if (!journey?.last_period_date || !journey.cycle_length_days) return null;
+    const lmp = parseDateOnly(journey.last_period_date);
+    if (!lmp) return null;
+    try {
+      return deriveTTCDates(lmp, journey.cycle_length_days);
+    } catch {
+      return null;
+    }
+  }, [journey]);
+
+  const askTestFlag = useMemo(() => hasRecentUnhelpfulTest(logs), [logs]);
+  const askPeriodFlag = useMemo(() => hasRecentPeriodStarted(logs), [logs]);
 
 
 

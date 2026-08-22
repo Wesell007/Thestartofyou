@@ -52,28 +52,29 @@ export const TTC_HELPER =
 /** Quiet underlined text link. */
 export const TTC_QUIET_LINK = `inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] font-medium text-[hsl(var(--stage-ttc-text))] underline underline-offset-4 decoration-[hsl(var(--stage-ttc-text-soft)/0.5)] transition-colors hover:decoration-[hsl(var(--stage-ttc-text))] ${TTC_FOCUS_RING}`;
 
-/** Soft blush pill, the primary calm action. */
-export const TTC_SOFT_PILL = `inline-flex min-h-11 items-center justify-center gap-2 rounded-pill px-6 py-2.5 font-sans text-[14px] font-medium text-[hsl(var(--stage-ttc-text))] bg-[hsl(var(--stage-ttc-blush))] transition-colors hover:bg-[hsl(var(--stage-ttc-peach))] ${TTC_FOCUS_RING}`;
+/** Soft sage pill, the primary calm TTC action. */
+export const TTC_SOFT_PILL = `inline-flex min-h-11 items-center justify-center gap-2 rounded-pill px-6 py-2.5 font-sans text-[14px] font-medium text-[hsl(var(--stage-ttc-olive))] bg-[hsl(var(--stage-ttc-sage))] border border-[hsl(var(--stage-ttc-olive)/0.22)] transition-colors hover:bg-[hsl(var(--stage-ttc-sage-soft))] ${TTC_FOCUS_RING}`;
 
 /** Olive pill, used once per surface where a firmer action is needed. */
 export const TTC_OLIVE_PILL = `inline-flex min-h-11 items-center justify-center gap-2 rounded-pill px-6 py-2.5 font-sans text-[14px] font-medium text-[hsl(var(--stage-ttc-cream))] bg-[hsl(var(--stage-ttc-olive))] transition-opacity hover:opacity-90 ${TTC_FOCUS_RING}`;
 
 /** Outlined pill, quieter than the olive fill. */
-export const TTC_OUTLINE_PILL = `inline-flex min-h-11 items-center justify-center gap-2 rounded-pill border border-[hsl(var(--stage-ttc-olive)/0.4)] px-5 py-2.5 font-sans text-[13.5px] font-medium text-[hsl(var(--stage-ttc-olive))] transition-colors hover:bg-[hsl(var(--stage-ttc-sage)/0.55)] ${TTC_FOCUS_RING}`;
+export const TTC_OUTLINE_PILL = `inline-flex min-h-11 items-center justify-center gap-2 rounded-pill border border-[hsl(var(--stage-ttc-olive)/0.45)] px-5 py-2.5 font-sans text-[13.5px] font-medium text-[hsl(var(--stage-ttc-olive))] transition-colors hover:bg-[hsl(var(--stage-ttc-sage)/0.7)] ${TTC_FOCUS_RING}`;
 
 /** Round icon control, 44px tap target with a small visual footprint. */
-export const TTC_ICON_CONTROL = `inline-flex h-11 w-11 items-center justify-center rounded-full border border-[hsl(var(--stage-ttc-olive)/0.32)] text-[hsl(var(--stage-ttc-text))] transition-colors hover:bg-[hsl(var(--stage-ttc-sage)/0.6)] ${TTC_FOCUS_RING}`;
+export const TTC_ICON_CONTROL = `inline-flex h-11 w-11 items-center justify-center rounded-full border border-[hsl(var(--stage-ttc-olive)/0.32)] text-[hsl(var(--stage-ttc-olive))] transition-colors hover:bg-[hsl(var(--stage-ttc-sage)/0.7)] ${TTC_FOCUS_RING}`;
 
 /** Fine line icon bubble used inside cards. */
 export const TTC_ICON_BUBBLE =
-  "flex h-9 w-9 items-center justify-center rounded-full border border-[hsl(var(--stage-ttc-edge))] bg-[hsl(var(--stage-ttc-cream))]";
+  "flex h-9 w-9 items-center justify-center rounded-full border border-[hsl(var(--stage-ttc-olive)/0.22)] bg-[hsl(var(--stage-ttc-sage-tint))] text-[hsl(var(--stage-ttc-olive))]";
 
 /** Small sage chip, for milestone and value labels. */
 export const TTC_CHIP =
-  "inline-flex items-center rounded-pill bg-[hsl(var(--stage-ttc-sage)/0.7)] px-2.5 py-[2px] font-sans text-[10.5px] font-medium tracking-[0.08em] uppercase text-[hsl(var(--stage-ttc-olive))]";
+  "inline-flex items-center rounded-pill bg-[hsl(var(--stage-ttc-sage))] px-2.5 py-[2px] font-sans text-[10.5px] font-medium tracking-[0.08em] uppercase text-[hsl(var(--stage-ttc-olive))]";
 
 /** Journal-like note field surface. */
-export const TTC_NOTE_PANEL = `${TTC_INNER_RADIUS} border border-[hsl(var(--stage-ttc-edge))] bg-[hsl(var(--stage-ttc-cream-soft)/0.7)] px-4 py-4`;
+export const TTC_NOTE_PANEL = `${TTC_INNER_RADIUS} border border-[hsl(var(--stage-ttc-olive)/0.16)] bg-[hsl(var(--stage-ttc-sage-tint)/0.55)] px-4 py-4`;
+
 
 /** Soft divider between blocks inside a card. */
 export const TTC_DIVIDER = "ttc-rule my-6";

@@ -21,6 +21,7 @@ import { getAllTTCLogsForJourney, type TTCLog } from "@/lib/ttcLogs";
 import { computeTTCInsights } from "@/lib/ttcInsights";
 import TTCJourneySummary from "@/components/ttc/journey/TTCJourneySummary";
 import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
+import TTCTodayCard from "@/components/ttc/journey/TTCTodayCard";
 import TTCJourneyFocusCard from "@/components/ttc/journey/TTCJourneyFocusCard";
 import TTCJourneyGuidance from "@/components/ttc/journey/TTCJourneyGuidance";
 import TTCJourneyCalendar from "@/components/ttc/journey/TTCJourneyCalendar";
@@ -284,27 +285,38 @@ const MyTTCJourney = () => {
           <div className="relative">
             <p className={`${TTC_EYEBROW} mb-3`}>My TTC journey</p>
             <h1 className={`${TTC_HEADING} text-[30px] sm:text-[2.25rem] md:text-[2.5rem] mb-3`}>
-              Today in your TTC journey
+              Your TTC journey
             </h1>
-            <p className="font-serif italic text-[16px] sm:text-[17px] leading-[1.65] text-[hsl(var(--stage-ttc-text-soft))] max-w-[54ch] mb-4">
+            <p className="font-serif italic text-[16px] sm:text-[17px] leading-[1.65] text-[hsl(var(--stage-ttc-text-soft))] max-w-[54ch]">
               A calm view of where you may be in this cycle, what may help next
               and where to find support.
-            </p>
-            <p className={`${TTC_HELPER} max-w-[58ch]`}>
-              These dates are estimates rather than certainties. Cycles can vary
-              from month to month.
             </p>
           </div>
         </header>
 
-        {/* Summary */}
+        {/* Today */}
         <section className="mb-10 sm:mb-12">
-          <TTCJourneySummary journey={journey} cycleDay={cycleDay} stage={derivedStage} />
+          <TTCTodayCard
+            journey={journey}
+            stage={derivedStage}
+            cycleDay={cycleDay}
+            onAddNote={() => openPanelForDate(todayIso())}
+          />
         </section>
 
-        {/* Timeline */}
+        {/* Cycle path */}
         <section className="mb-10 sm:mb-12">
           <TTCJourneyTimeline journey={journey} />
+        </section>
+
+        {/* What may be useful today */}
+        <section className="mb-10 sm:mb-12">
+          <TTCJourneyFocusCard stage={derivedStage} />
+        </section>
+
+        {/* Cycle details */}
+        <section className="mb-10 sm:mb-12">
+          <TTCJourneySummary journey={journey} cycleDay={cycleDay} stage={derivedStage} />
         </section>
 
         {/* Cycle calendar & logging */}
@@ -350,10 +362,7 @@ const MyTTCJourney = () => {
           />
         </section>
 
-        {/* Focus */}
-        <section className="mb-10 sm:mb-12">
-          <TTCJourneyFocusCard stage={derivedStage} />
-        </section>
+
 
 
         {/* Guidance */}

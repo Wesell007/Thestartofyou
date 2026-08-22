@@ -79,6 +79,27 @@
     );
     --shadow-pregnancy-paper: 0 26px 56px -38px hsl(var(--stage-pregnancy-text) / 0.5);
 
+    /* Phase 28B — signed-in TTC journey surfaces (Nano Banana board):
+       cream paper, soft sage, muted olive, blush and peach warmth. */
+    --stage-ttc-cream: 40 40% 96%;
+    --stage-ttc-cream-soft: 40 30% 93%;
+    --stage-ttc-sage: 120 16% 89%;
+    --stage-ttc-sage-soft: 120 14% 82%;
+    --stage-ttc-olive: 92 17% 34%;
+    --stage-ttc-olive-soft: 92 14% 50%;
+    --stage-ttc-blush: 8 46% 91%;
+    --stage-ttc-peach: 24 58% 92%;
+    --stage-ttc-edge: 40 20% 84%;
+    --stage-ttc-text: 90 10% 20%;
+    --stage-ttc-text-soft: 90 8% 36%;
+    --wash-ttc: radial-gradient(
+      120% 100% at 14% 0%,
+      hsl(var(--stage-ttc-sage) / 0.8) 0%,
+      hsl(var(--stage-ttc-cream) / 0.94) 48%,
+      transparent 84%
+    );
+    --shadow-ttc-paper: 0 26px 56px -38px hsl(var(--stage-ttc-text) / 0.42);
+
     --stage-postpartum: 16 24% 93%;
     --stage-postpartum-accent: 14 40% 48%;
     /* Legacy First Year tokens (kept for backwards compatibility during rebuild) */

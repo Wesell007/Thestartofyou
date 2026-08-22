@@ -56,7 +56,7 @@ import {
   TTC_PAPER_CARD_WARM,
   TTC_SOFT_PILL,
 } from "@/components/ttc/journey/ttcStyles";
-import { TTCBotanicalSprig } from "@/components/ttc/journey/TTCDecor";
+import { TTCBotanicalSprig, TTCBotanicalLeaf } from "@/components/ttc/journey/TTCDecor";
 
 type Status = "loading" | "error" | "empty" | "pregnancy_active" | "ready";
 

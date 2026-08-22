@@ -158,33 +158,28 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
 
 
       {state === "loaded" && signedUrl && (
-        <figure
-          className="relative rounded-[20px] overflow-hidden held-image bg-card"
-          style={{ border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.16)" }}
-        >
+        <figure className="relative overflow-hidden rounded-[20px] border border-[hsl(var(--stage-pregnancy-edge))] bg-card held-image">
           <video
             key={signedUrl}
             src={signedUrl}
             controls
             preload="metadata"
             playsInline
-            className="w-full max-h-[520px] bg-black/90"
+            className="w-full max-h-[520px] bg-[hsl(var(--stage-pregnancy-text))]"
             onError={() => setPlaybackError(VIDEO_ERROR_COPY.playbackFailed)}
             onPlay={() => setPlaybackError(null)}
           >
             {mimeType ? <source src={signedUrl} type={mimeType} /> : null}
           </video>
-          <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95">
-            <Lock size={10} strokeWidth={1.8} />
-            <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
-              Private
-            </span>
+          <div className={`absolute top-2.5 left-2.5 sm:top-3 sm:left-3 ${PG_MEDIA_OVERLAY_BADGE}`}>
+            <Lock size={10} strokeWidth={1.8} aria-hidden="true" />
+            <span>Private</span>
           </div>
           {formatDuration(durationSeconds) && (
-            <div className="absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 px-2 py-0.5 rounded-full bg-foreground/40 backdrop-blur-md text-background/95">
-              <span className="font-sans text-[10px] font-medium tracking-[0.08em] tabular-nums">
-                {formatDuration(durationSeconds)}
-              </span>
+            <div
+              className={`absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 ${PG_MEDIA_OVERLAY_BADGE} tracking-[0.08em]`}
+            >
+              <span className="tabular-nums">{formatDuration(durationSeconds)}</span>
             </div>
           )}
           <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 flex items-center gap-1.5 sm:gap-2">
@@ -192,31 +187,28 @@ const SlotVideoMemory = ({ userId, week, onSaved }: Props) => {
               type="button"
               onClick={openFilePicker}
               disabled={uploading}
-              className="px-2 sm:px-2.5 py-1 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center gap-1.5 disabled:opacity-60"
+              className={PG_MEDIA_OVERLAY_ACTION}
               aria-label="Replace video"
             >
-              <Video size={11} strokeWidth={1.8} />
-              <span className="hidden sm:inline font-sans text-[10px] font-medium tracking-[0.22em] uppercase">
+              <Video size={11} strokeWidth={1.8} aria-hidden="true" />
+              <span className="hidden sm:inline">
                 {uploading ? "Saving video..." : "Replace video"}
               </span>
-              {uploading && (
-                <span className="sm:hidden font-sans text-[10px] font-medium tracking-[0.18em] uppercase">
-                  Saving video...
-                </span>
-              )}
+              {uploading && <span className="sm:hidden">Saving video...</span>}
             </button>
             <button
               type="button"
               onClick={remove}
               disabled={uploading}
-              className="w-7 h-7 rounded-full bg-foreground/40 backdrop-blur-md text-background/95 hover:bg-foreground/55 transition-colors flex items-center justify-center disabled:opacity-60"
+              className={PG_MEDIA_OVERLAY_ICON}
               aria-label="Remove video"
             >
-              <X size={12} strokeWidth={1.8} />
+              <X size={13} strokeWidth={1.8} aria-hidden="true" />
             </button>
           </div>
         </figure>
       )}
+
 
       {justSaved && state === "loaded" && (
         <p

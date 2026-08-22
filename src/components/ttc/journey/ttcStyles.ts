@@ -50,7 +50,7 @@ export const TTC_HELPER =
   "font-sans text-[13px] leading-[1.6] text-[hsl(var(--stage-ttc-text-soft))]";
 
 /** Quiet underlined text link. */
-export const TTC_QUIET_LINK = `inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] font-medium text-[hsl(var(--stage-ttc-text))] underline underline-offset-4 decoration-[hsl(var(--stage-ttc-text-soft)/0.5)] transition-colors hover:decoration-[hsl(var(--stage-ttc-text))] ${TTC_FOCUS_RING}`;
+export const TTC_QUIET_LINK = `inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] font-medium text-[hsl(var(--stage-ttc-olive))] underline underline-offset-4 decoration-[hsl(var(--stage-ttc-olive)/0.4)] transition-colors hover:decoration-[hsl(var(--stage-ttc-olive))] ${TTC_FOCUS_RING}`;
 
 /** Soft sage pill, the primary calm TTC action. */
 export const TTC_SOFT_PILL = `inline-flex min-h-11 items-center justify-center gap-2 rounded-pill px-6 py-2.5 font-sans text-[14px] font-medium text-[hsl(var(--stage-ttc-olive))] bg-[hsl(var(--stage-ttc-sage))] border border-[hsl(var(--stage-ttc-olive)/0.22)] transition-colors hover:bg-[hsl(var(--stage-ttc-sage-soft))] ${TTC_FOCUS_RING}`;

@@ -20,6 +20,7 @@ import SectionToolsThisWeek from "@/components/myweek/SectionToolsThisWeek";
 
 import SectionKeepThisWeek from "@/components/myweek/SectionKeepThisWeek";
 import JournalBridgeCard from "@/components/myweek/JournalBridgeCard";
+import { journalBridgeVariant } from "@/lib/journalOwner";
 import SectionNextChapter from "@/components/myweek/SectionNextChapter";
 import SectionWeeklyReads from "@/components/myweek/SectionWeeklyReads";
 import SectionPregnancyComplete from "@/components/myweek/SectionPregnancyComplete";
@@ -275,7 +276,7 @@ const MyWeek = () => {
         />
 
         <section className="relative pt-10 pb-12 sm:pt-12">
-          <JournalBridgeCard context="week" />
+          <JournalBridgeCard context="week" variant={journalBridgeVariant()} />
         </section>
 
         <SectionNextChapter

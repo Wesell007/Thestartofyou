@@ -71,6 +71,7 @@ const PreparingForBaby = lazy(() => import("./pages/PreparingForBaby.tsx"));
 const Support = lazy(() => import("./pages/Support.tsx"));
 const About = lazy(() => import("./pages/About.tsx"));
 const Product = lazy(() => import("./pages/Product.tsx"));
+const JournalStart = lazy(() => import("./pages/JournalStart.tsx"));
 const StagePage = lazy(() => import("./pages/StagePage.tsx"));
 const OvulationCalculator = lazy(() => import("./pages/OvulationCalculator.tsx"));
 const TTCOvulation = lazy(() => import("./pages/ttc/Ovulation.tsx"));

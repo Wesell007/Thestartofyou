@@ -36,6 +36,10 @@ import TTCNotesSection from "@/components/ttc/journey/TTCNotesSection";
 
 import TTCJourneyInsights from "@/components/ttc/journey/TTCJourneyInsights";
 import TTCPregnancyHandover from "@/components/ttc/journey/TTCPregnancyHandover";
+import {
+  computeTTCHandoverState,
+  TTC_HANDOVER_PAUSED,
+} from "@/lib/ttcHandoverState";
 import TTCJourneyHeader from "@/components/ttc/journey/TTCJourneyHeader";
 import PageLoadState from "@/components/shared/PageLoadState";
 import { parseDateOnly } from "@/lib/dateOnly";
@@ -224,6 +228,17 @@ const MyTTCJourney = () => {
     }
   }, [journey]);
 
+  const handoverState = useMemo(
+    () =>
+      computeTTCHandoverState({
+        hasActivePregnancy: status === "pregnancy_active",
+        logs,
+        cycleStart: journey?.last_period_date ?? null,
+      }),
+    [status, logs, journey],
+  );
+  const handoverRaised = handoverState === "positive_test_logged";
+
   const askTestFlag = useMemo(() => hasRecentUnhelpfulTest(logs), [logs]);
   const askPeriodFlag = useMemo(() => hasRecentPeriodStarted(logs), [logs]);
 
@@ -247,21 +262,20 @@ const MyTTCJourney = () => {
             className="font-sans text-[10px] font-medium tracking-[0.3em] uppercase mb-3"
             style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
           >
-            Pregnancy journey active
+            {TTC_HANDOVER_PAUSED.eyebrow}
           </p>
           <h1 className="font-serif text-3xl md:text-[2.25rem] text-foreground leading-tight mb-3">
-            Your pregnancy journey is already saved
+            {TTC_HANDOVER_PAUSED.heading}
           </h1>
           <p className="font-sans text-sm font-light text-muted-foreground/80 leading-relaxed max-w-md mx-auto mb-8">
-            To keep things simple, we show one active journey at a time. Your
-            TTC dashboard is paused while your pregnancy journey is active.
+            {TTC_HANDOVER_PAUSED.body}
           </p>
           <Link
             to="/my-journey"
             className="inline-flex items-center gap-2 rounded-pill px-6 py-3 font-sans text-sm font-medium text-white shadow-cta hover:opacity-90 transition-opacity"
             style={{ background: "hsl(var(--stage-pregnancy-accent))" }}
           >
-            Open my pregnancy journey <ArrowRight size={14} />
+            {TTC_HANDOVER_PAUSED.cta} <ArrowRight size={14} aria-hidden="true" />
           </Link>
         </div>
       </div>
@@ -343,8 +357,20 @@ const MyTTCJourney = () => {
             cycleDay={cycleDay}
             onAddNote={() => openPanelForDate(todayIso())}
             moment={supportMoment}
+            handoverRaised={handoverRaised}
           />
         </section>
+
+        {/* Raised pregnancy handover */}
+        {handoverRaised && (
+          <section className="mb-10 sm:mb-12">
+            <TTCPregnancyHandover
+              ref={handoverRef}
+              journey={journey}
+              state="positive_test_logged"
+            />
+          </section>
+        )}
 
         {/* Support for this part */}
         {supportMoment && (
@@ -376,6 +402,7 @@ const MyTTCJourney = () => {
             expectedPeriodDate={askDates?.expected_period_date ?? null}
             hasRecentUnclearOrNegativeTest={askTestFlag}
             hasRecentPeriodStarted={askPeriodFlag}
+            handoverRaised={handoverRaised}
           />
         </section>
 
@@ -437,7 +464,9 @@ const MyTTCJourney = () => {
         </section>
 
         {/* Pregnancy handover */}
-        <TTCPregnancyHandover ref={handoverRef} journey={journey} />
+        {!handoverRaised && (
+          <TTCPregnancyHandover ref={handoverRef} journey={journey} state="neutral" />
+        )}
 
         <section className="mt-12 border-t border-[hsl(var(--stage-ttc-edge))] pt-6">
           <AlertDialog>

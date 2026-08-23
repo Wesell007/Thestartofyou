@@ -36,6 +36,8 @@ interface Props {
   expectedPeriodDate?: Date | null;
   hasRecentUnclearOrNegativeTest?: boolean;
   hasRecentPeriodStarted?: boolean;
+  /** Phase 28G — chip ordering only when the pregnancy handover is raised. */
+  handoverRaised?: boolean;
 }
 
 /** Splits any trailing sources block off the streamed answer. */
@@ -92,6 +94,7 @@ const TTCAskCompanionCard = ({
   expectedPeriodDate,
   hasRecentUnclearOrNegativeTest,
   hasRecentPeriodStarted,
+  handoverRaised = false,
 }: Props) => {
   const navigate = useNavigate();
   const { name } = useCompanionIdentity();
@@ -123,7 +126,10 @@ const TTCAskCompanionCard = ({
     ],
   );
 
-  const chips = useMemo(() => ttcAskChipsFor(stage, momentId), [stage, momentId]);
+  const chips = useMemo(
+    () => ttcAskChipsFor(stage, momentId, 4, handoverRaised),
+    [stage, momentId, handoverRaised],
+  );
   const topic = useMemo(() => ttcAskTopicFor(stage, momentId), [stage, momentId]);
 
   const heading = askHeadingFor(name);

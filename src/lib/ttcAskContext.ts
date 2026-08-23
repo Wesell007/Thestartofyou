@@ -156,8 +156,12 @@ export const ttcAskChipsFor = (
   stage: TTCStage | null,
   momentId?: TTCSupportMomentId | null,
   limit = 4,
+  /** Phase 28G — order only, so Ask does not compete with a raised handover. */
+  handoverRaised = false,
 ): TTCAskChip[] => {
-  const leadLabels = momentId
+  const leadLabels = handoverRaised
+    ? ["What can I note today?"]
+    : momentId
     ? MOMENT_CHIP_ORDER[momentId]
     : (stage && STAGE_CHIP_ORDER[stage]) || [];
   const lead = leadLabels

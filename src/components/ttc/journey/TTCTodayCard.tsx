@@ -4,6 +4,7 @@ import { differenceInCalendarDays, format } from "date-fns";
 import type { TTCStage } from "@/lib/ttcDerived";
 import type { ActiveTTCJourney } from "@/lib/savedTTCJourney";
 import type { TTCSupportMoment } from "@/lib/ttcSupportMoment";
+import { TTC_HANDOVER_TODAY } from "@/lib/ttcHandoverState";
 import { parseDateOnly } from "@/lib/dateOnly";
 import {
   TTC_CARD_PAD,
@@ -154,12 +155,25 @@ type Props = {
   onAddNote: () => void;
   /** Phase 28E — optional support-aware headline for the harder moments. */
   moment?: TTCSupportMoment | null;
+  /** Phase 28G — gentle acknowledgement when the handover is raised. */
+  handoverRaised?: boolean;
 };
 
-const TTCTodayCard = ({ journey, stage, cycleDay, onAddNote, moment }: Props) => {
+const TTCTodayCard = ({
+  journey,
+  stage,
+  cycleDay,
+  onAddNote,
+  moment,
+  handoverRaised = false,
+}: Props) => {
   const copy = STAGE_COPY[stage ?? "before_ovulation"];
-  const headline = moment?.today.headline ?? copy.headline;
-  const support = moment?.today.support ?? copy.support;
+  const headline = handoverRaised
+    ? TTC_HANDOVER_TODAY.headline
+    : moment?.today.headline ?? copy.headline;
+  const support = handoverRaised
+    ? TTC_HANDOVER_TODAY.support
+    : moment?.today.support ?? copy.support;
   const details = buildDetails(journey, cycleDay);
 
   return (

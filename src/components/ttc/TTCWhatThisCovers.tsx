@@ -15,7 +15,7 @@ const hubBullets = [
 
 const TTCWhatThisCovers = () => {
   return (
-    <section className="pt-10 md:pt-14 pb-14 md:pb-20 bg-parchment">
+    <section id="ttc-hub-overview" className="pt-10 md:pt-14 pb-14 md:pb-20 bg-parchment">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         <div
           className="relative rounded-[2rem] bg-card border p-8 sm:p-10 md:p-14 overflow-hidden"

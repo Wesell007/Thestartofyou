@@ -45,8 +45,8 @@ Session-only suppression flag in `CompanionProvider` plus a `useSuppressCompanio
 
 - Vitest: banned-phrase guard over the sanitiser and over every mode prompt ("provided NHS evidence", "provided evidence", "retrieved evidence", "source material does not cover", "context provided does not include", "not covered in the evidence", "not covered by the provided sources", "I cannot provide specific information on this topic because").
 - Vitest: source-routing checks for the listed pregnancy, TTC and First Year test questions, asserting a topically relevant approved URL is selected for each.
-- Live check against the deployed function for "When will I feel the baby move?" and the other listed questions: answer is useful, no internal wording, escalation intact for reduced movements.
-- Playwright at 390px and 1440px: NotFound paths hide the launcher, panel cannot open, footer boxes >= 44px, no external links in panel answers, no horizontal overflow, no unexpected console errors.
+- Live checks against the deployed function for all eight required questions, including "Feeding cues" and "When will I feel the baby move?": useful answer, no internal or retrieval wording, no diagnosis, no false reassurance, professional-care wording where relevant, escalation intact for reduced movements.
+- Playwright at 390px and 1440px: NotFound paths hide the launcher, panel cannot open, footer boxes >= 44px, no external source links after answers on `/ask` or in the panel, no private context in the URL, no horizontal overflow, no unexpected console errors.
 - Then `npx tsgo --noEmit -p tsconfig.json`, `npx vitest run`, `npm run build`.
 
 ## Unchanged

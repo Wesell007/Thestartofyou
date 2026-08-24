@@ -136,8 +136,30 @@ const TTCJourneyGuidance = ({ stage, journey }: Props) => {
             to={c.href}
             className={`group ${TTC_PAPER_CARD} ${TTC_TILE_PAD} flex flex-col transition-shadow hover:shadow-md ${TTC_FOCUS_RING}`}
           >
-            <h3 className={`${TTC_CARD_TITLE} mb-2`}>{c.title}</h3>
-            <p className={`${TTC_HELPER} mb-4 flex-1`}>{c.blurb}</p>
+            <div className="flex items-start gap-4 sm:block">
+              <div
+                className="relative shrink-0 overflow-hidden rounded-[14px] w-[76px] h-[76px] sm:w-full sm:h-[112px] sm:mb-4"
+                style={{ boxShadow: "inset 0 0 0 1px hsl(var(--stage-ttc-olive) / 0.16)" }}
+              >
+                <img
+                  src={c.image}
+                  alt={c.alt}
+                  loading="lazy"
+                  width={640}
+                  height={360}
+                  className="h-full w-full object-cover"
+                />
+                <span
+                  className="pointer-events-none absolute inset-0"
+                  aria-hidden="true"
+                  style={{ background: "hsl(var(--stage-ttc-sage) / 0.18)" }}
+                />
+              </div>
+              <div className="min-w-0 sm:contents">
+                <h3 className={`${TTC_CARD_TITLE} mb-2`}>{c.title}</h3>
+                <p className={`${TTC_HELPER} mb-4 flex-1`}>{c.blurb}</p>
+              </div>
+            </div>
             <span className="inline-flex min-h-[24px] items-center gap-1.5 font-sans text-[12.5px] font-medium text-[hsl(var(--stage-ttc-olive))] transition-all group-hover:gap-2">
               Read more <ArrowRight size={13} aria-hidden="true" />
             </span>

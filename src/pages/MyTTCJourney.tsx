@@ -204,10 +204,6 @@ const MyTTCJourney = () => {
     handoverRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
-  const insights = useMemo(() => {
-    if (!journey) return [];
-    return computeTTCInsights({ stage: derivedStage, journey, logs });
-  }, [journey, derivedStage, logs]);
 
   const supportMoment = useMemo(
     () => computeTTCSupportMoment({ stage: derivedStage, logs }),

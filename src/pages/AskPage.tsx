@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useSearchParams, Link, useLocation, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import EditorialAnswer from "@/components/shared/EditorialAnswer";
+import { sanitiseAiAnswer, sanitiseStreamingAiAnswer, APPROVED_SOURCES_TRUST_LINE } from "@/lib/aiAnswerSafety";
 import { ArrowLeft, Loader2, Search, ChevronRight, Heart, BookOpen, Compass, Sparkles, Shield, ArrowUpRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -385,7 +386,10 @@ const AskPage = () => {
     return { quickAnswer, rest };
   };
 
-  const parsed = answer ? parseAnswer(answer) : null;
+  // Answers are cleaned before display: no internal retrieval wording, no
+  // external source links and no raw URLs reach the reader.
+  const safeAnswer = answer ? (isLoading ? sanitiseStreamingAiAnswer(answer) : sanitiseAiAnswer(answer)) : "";
+  const parsed = safeAnswer ? parseAnswer(safeAnswer) : null;
   const isDone = answer && !isLoading;
   const hasQuery = Boolean(query);
 
@@ -770,7 +774,12 @@ const AskPage = () => {
               </span>
             </div>
 
-            <EditorialAnswer markdown={parsed.rest} />
+            <EditorialAnswer markdown={parsed.rest} disableLinks />
+            {!isLoading && (
+              <p className="mt-8 font-sans text-[11px] font-light tracking-wide text-muted-foreground/70">
+                {APPROVED_SOURCES_TRUST_LINE}
+              </p>
+            )}
           </div>
         )}
 

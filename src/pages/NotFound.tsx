@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { useSuppressCompanion } from "@/components/companion/CompanionProvider";
 
 const NotFound = () => {
   const location = useLocation();
+  // The companion never appears on a 404 page.
+  useSuppressCompanion();
 
   useEffect(() => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);

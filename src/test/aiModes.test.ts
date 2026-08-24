@@ -88,10 +88,12 @@ describe("first_year_day_recap configuration", () => {
 });
 
 describe("existing modes are unchanged", () => {
-  it("general and pregnancy_week_companion keep the current prompt and urgent answer", () => {
+  it("general and pregnancy_week_companion stay grounded answer surfaces", () => {
+    expect(getAiModeConfig("general").systemPrompt).toBe(GENERAL_SYSTEM_PROMPT);
+    // Phase 29B.1: the pregnancy week companion now has its own stage-aware
+    // prompt, but the grounding and escalation behaviour is unchanged.
     for (const mode of ["general", "pregnancy_week_companion"] as const) {
       const config = getAiModeConfig(mode);
-      expect(config.systemPrompt).toBe(GENERAL_SYSTEM_PROMPT);
       expect(config.useGrounding).toBe(true);
       expect(config.allowUrgentEscalationAnswer).toBe(true);
     }

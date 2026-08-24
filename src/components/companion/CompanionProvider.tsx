@@ -50,6 +50,8 @@ interface CompanionContextValue {
   stop: () => void;
   clear: () => void;
   lastQuestion: string | null;
+  /** Register a 404 surface; returns the release function. */
+  suppress: () => () => void;
 }
 
 const CompanionContext = createContext<CompanionContextValue | null>(null);
@@ -65,15 +67,23 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   const { answer, isLoading, error, ask, reset } = useAISearch();
 
   const [open, setOpen] = useState(false);
+  // Pages that render a 404 suppress the companion for as long as they are
+  // mounted, so arbitrary unknown paths never offer guidance.
+  const [suppressedCount, setSuppressedCount] = useState(0);
   const [turns, setTurns] = useState<CompanionTurn[]>([]);
   const [lastQuestion, setLastQuestion] = useState<string | null>(null);
   const committedRef = useRef(false);
 
   const mode = useMemo(() => resolveCompanionMode(location.pathname), [location.pathname]);
   const visible = useMemo(
-    () => shouldShowCompanionLauncher(location.pathname),
-    [location.pathname],
+    () => suppressedCount === 0 && shouldShowCompanionLauncher(location.pathname),
+    [location.pathname, suppressedCount],
   );
+
+  const suppress = useCallback(() => {
+    setSuppressedCount((count) => count + 1);
+    return () => setSuppressedCount((count) => Math.max(0, count - 1));
+  }, []);
 
   const context = useMemo(
     () =>
@@ -131,8 +141,8 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<CompanionContextValue>(
     () => ({
-      open,
-      setOpen,
+      open: visible ? open : false,
+      setOpen: (next: boolean) => setOpen(next && visible),
       mode,
       visible,
       turns,
@@ -148,8 +158,10 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       stop,
       clear,
       lastQuestion,
+      suppress,
     }),
     [
+      suppress,
       open,
       mode,
       visible,
@@ -174,4 +186,18 @@ export function useCompanion(): CompanionContextValue {
   const ctx = useContext(CompanionContext);
   if (!ctx) throw new Error("useCompanion must be used inside CompanionProvider");
   return ctx;
+}
+
+/**
+ * Hide the companion launcher, and keep the panel closed, for as long as the
+ * calling page is mounted. Used by the 404 page. Safe to call outside the
+ * provider (tests, isolated renders).
+ */
+export function useSuppressCompanion(): void {
+  const ctx = useContext(CompanionContext);
+  const suppress = ctx?.suppress;
+  useEffect(() => {
+    if (!suppress) return;
+    return suppress();
+  }, [suppress]);
 }

@@ -105,43 +105,52 @@ export type TTCDayState = {
   legend: string;
   background: string;
   ink: string;
+  /** Border plus ring, combined into one box-shadow value. */
   ring: string;
+  /** Chip ground behind the short label, for legibility on deeper fills. */
+  chipBackground: string;
 };
 
 export const TTC_DAY_STATES: Record<TTCDayStateKey, TTCDayState> = {
   period: {
     short: "Period",
     legend: "Period start",
-    background: "hsl(var(--stage-ttc-blush) / 0.9)",
+    background: "hsl(var(--stage-ttc-blush))",
     ink: "hsl(var(--stage-ttc-rose))",
-    ring: "inset 0 0 0 1px hsl(var(--stage-ttc-rose) / 0.28)",
+    ring: "inset 0 0 0 1.5px hsl(var(--stage-ttc-rose) / 0.45)",
+    chipBackground: "hsl(var(--stage-ttc-cream) / 0.7)",
   },
   fertile: {
     short: "Fertile",
     legend: "Fertile window",
-    background: "hsl(var(--stage-ttc-sage) / 0.85)",
+    background: "hsl(var(--stage-ttc-sage))",
     ink: "hsl(var(--stage-ttc-olive))",
-    ring: "inset 0 0 0 1px hsl(var(--stage-ttc-olive) / 0.18)",
+    ring: "inset 0 0 0 1.5px hsl(var(--stage-ttc-olive) / 0.35)",
+    chipBackground: "hsl(var(--stage-ttc-cream) / 0.7)",
   },
   ovulation: {
     short: "Ovul",
     legend: "Likely ovulation",
-    background: "hsl(var(--stage-ttc-sage-soft) / 0.85)",
-    ink: "hsl(var(--stage-ttc-olive))",
-    ring: "inset 0 0 0 2px hsl(var(--stage-ttc-olive) / 0.55)",
+    background: "hsl(var(--stage-ttc-olive-mid))",
+    ink: "hsl(var(--stage-ttc-cream))",
+    ring: "inset 0 0 0 3px hsl(var(--stage-ttc-olive) / 0.85)",
+    chipBackground: "hsl(var(--stage-ttc-olive) / 0.45)",
   },
   test: {
     short: "Test",
     legend: "Possible test day",
-    background: "hsl(var(--stage-ttc-peach) / 0.95)",
+    background: "hsl(var(--stage-ttc-sand-fill))",
     ink: "hsl(var(--stage-ttc-sand))",
-    ring: "inset 0 0 0 1px hsl(var(--stage-ttc-sand) / 0.26)",
+    ring: "inset 0 0 0 1.5px hsl(var(--stage-ttc-sand) / 0.5)",
+    chipBackground: "hsl(var(--stage-ttc-cream) / 0.62)",
   },
   expected: {
-    short: "Period",
+    short: "Expected",
     legend: "Expected period",
-    background: "hsl(var(--stage-ttc-blush) / 0.45)",
+    background: "hsl(var(--stage-ttc-rose-fill))",
     ink: "hsl(var(--stage-ttc-rose))",
-    ring: "inset 0 0 0 2px hsl(var(--stage-ttc-rose) / 0.32)",
+    ring: "inset 0 0 0 3px hsl(var(--stage-ttc-rose) / 0.6)",
+    chipBackground: "hsl(var(--stage-ttc-cream) / 0.62)",
   },
 };
+

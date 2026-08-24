@@ -93,6 +93,10 @@
     /* Deeper state inks, used for calendar colour coding text and rings. */
     --stage-ttc-rose: 8 34% 42%;
     --stage-ttc-sand: 30 40% 34%;
+    /* Phase 28H.1 calendar state fills, kept distinct from one another. */
+    --stage-ttc-rose-fill: 8 38% 78%;
+    --stage-ttc-sand-fill: 32 60% 83%;
+    --stage-ttc-olive-mid: 94 22% 44%;
     --stage-ttc-edge: 100 16% 80%;
     --stage-ttc-text: 96 14% 18%;
     --stage-ttc-text-soft: 96 10% 34%;

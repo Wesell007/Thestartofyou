@@ -148,9 +148,12 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
           const dayMilestones = milestonesByDate[iso] ?? [];
           const dayLogs = logsByDate[iso] ?? [];
           const hasLogs = dayLogs.length > 0;
-          const dayState = dayMilestones[0]
-            ? TTC_DAY_STATES[dayMilestones[0].state]
-            : null;
+          const dayStateKey = dayMilestones[0]?.state ?? null;
+          const dayState = dayStateKey ? TTC_DAY_STATES[dayStateKey] : null;
+          const logMarkerColour =
+            dayStateKey === "ovulation"
+              ? "hsl(var(--stage-ttc-cream))"
+              : "hsl(var(--stage-ttc-olive))";
           const ariaBits = [
             format(day, "EEEE d MMMM"),
             ...dayMilestones.map((m) => m.label),
@@ -165,11 +168,11 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
           if (isCurrent) {
             cellStyle.boxShadow = [
               dayState?.ring,
-              "inset 0 0 0 2px hsl(var(--stage-ttc-olive) / 0.6)",
+              "inset 0 0 0 2px hsl(var(--stage-ttc-text) / 0.55)",
             ]
               .filter(Boolean)
               .join(", ");
-            if (!dayState) cellStyle.background = "hsl(var(--stage-ttc-olive) / 0.10)";
+            if (!dayState) cellStyle.background = "hsl(var(--stage-ttc-cream-soft))";
           }
           return (
             <button
@@ -203,29 +206,31 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
               </span>
               {dayState && (
                 <span
-                  className="font-sans text-[8.5px] font-medium tracking-[0.05em] uppercase leading-tight self-start truncate max-w-full"
-                  style={{ color: dayState.ink }}
+                  className="rounded-[5px] px-[3px] py-[1px] font-sans text-[8.5px] font-semibold tracking-[0.05em] uppercase leading-tight self-start truncate max-w-full"
+                  style={{ color: dayState.ink, background: dayState.chipBackground }}
                   title={dayMilestones.map((m) => m.label).join(", ")}
                 >
                   {dayState.short}
                 </span>
               )}
+
               {hasLogs && (
                 <span className="flex items-center gap-0.5 self-end" aria-hidden="true">
                   <span
-                    className="w-1.5 h-1.5 rounded-full"
-                    style={{ background: "hsl(var(--stage-ttc-olive))" }}
+                    className="w-2 h-2 rounded-full"
+                    style={{ background: logMarkerColour }}
                   />
                   {dayLogs.length > 1 && (
                     <span
                       className="font-sans text-[9px] font-semibold"
-                      style={{ color: "hsl(var(--stage-ttc-olive))" }}
+                      style={{ color: logMarkerColour }}
                     >
                       {dayLogs.length}
                     </span>
                   )}
                 </span>
               )}
+
             </button>
           );
         })}
@@ -234,28 +239,36 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
       {/* Legend */}
       <div className="mt-6">
         <p className={`${TTC_EYEBROW} mb-3`}>What the colours mean</p>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
           {(Object.keys(TTC_DAY_STATES) as (keyof typeof TTC_DAY_STATES)[]).map(
             (key) => {
               const state = TTC_DAY_STATES[key];
               return (
                 <li
                   key={key}
-                  className="flex items-center gap-2.5 font-sans text-[13px] leading-[1.5] text-[hsl(var(--stage-ttc-text-soft))]"
+                  className="flex items-center gap-3 font-sans text-[13.5px] leading-[1.5] text-[hsl(var(--stage-ttc-text))]"
                 >
                   <span
-                    className="inline-block h-5 w-5 shrink-0 rounded-[7px]"
+                    className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-[9px]"
                     style={{ background: state.background, boxShadow: state.ring }}
                     aria-hidden="true"
-                  />
+                  >
+                    <span
+                      className="font-sans text-[8px] font-semibold uppercase tracking-[0.04em]"
+                      style={{ color: state.ink }}
+                    >
+                      {state.short.slice(0, 3)}
+                    </span>
+                  </span>
                   {state.legend}
                 </li>
               );
             },
           )}
-          <li className="flex items-center gap-2.5 font-sans text-[13px] leading-[1.5] text-[hsl(var(--stage-ttc-text-soft))]">
+          <li className="flex items-center gap-3 font-sans text-[13.5px] leading-[1.5] text-[hsl(var(--stage-ttc-text))]">
             <span
-              className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-[7px]"
+              className="inline-flex h-7 w-7 shrink-0 items-end justify-end rounded-[9px] p-1"
+              style={{ background: "hsl(var(--stage-ttc-cream-soft))" }}
               aria-hidden="true"
             >
               <span
@@ -265,12 +278,12 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
             </span>
             Notes you have added
           </li>
-          <li className="flex items-center gap-2.5 font-sans text-[13px] leading-[1.5] text-[hsl(var(--stage-ttc-text-soft))]">
+          <li className="flex items-center gap-3 font-sans text-[13.5px] leading-[1.5] text-[hsl(var(--stage-ttc-text))]">
             <span
-              className="inline-block h-5 w-5 shrink-0 rounded-[7px]"
+              className="inline-block h-7 w-7 shrink-0 rounded-[9px]"
               style={{
-                boxShadow: "inset 0 0 0 2px hsl(var(--stage-ttc-olive) / 0.6)",
-                background: "hsl(var(--stage-ttc-olive) / 0.10)",
+                boxShadow: "inset 0 0 0 2px hsl(var(--stage-ttc-text) / 0.55)",
+                background: "hsl(var(--stage-ttc-cream-soft))",
               }}
               aria-hidden="true"
             />
@@ -281,6 +294,7 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
 
       {/* Milestone key (unique labels) */}
       {Object.values(LOG_TYPE_LABEL) && null}
+
     </div>
   );
 };

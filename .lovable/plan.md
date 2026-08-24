@@ -44,6 +44,15 @@ New Vitest coverage for: route-to-mode resolver (including never selecting `firs
 
 Playwright visual QA at 390px and 1440px across the listed routes (launcher visibility, panel open/close, streaming, chips, `/ask` fallback, no overlap/overflow, no console errors, focus visibility, 44px targets), then `npx tsgo --noEmit -p tsconfig.json`, `npx vitest run`, `npm run build`, followed by the 32-point report.
 
+Nano Banana front-end verification is part of this step and must be reported explicitly:
+
+- the exact Nano Banana asset path in `src/assets/`
+- confirmation that the board was generated and used as the reference before implementation started
+- 390px screenshots of the launcher and the opened panel
+- 1440px screenshots of the launcher and the opened panel
+- confirmation that the shipped front end matches the cream paper, sage, olive, botanical, premium editorial direction
+- confirmation that no mascot, human avatar or new visual identity was introduced
+
 ## Out of scope
 
 Voice, microphone, audio, persisted chat, chat tables, analytics events, new AI modes, prompt or edge-function changes, backend/schema/RLS/storage/auth changes, SEO or sitemap changes, hardcoded name cleanup in old files, deletion of any existing Ask surface.

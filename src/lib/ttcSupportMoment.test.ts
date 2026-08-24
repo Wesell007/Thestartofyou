@@ -116,3 +116,13 @@ describe("support moment copy", () => {
     strings.forEach((s) => expect(s).not.toMatch(american));
   });
 });
+
+describe("support moment headings", () => {
+  it("never repeats the Today card headline verbatim", () => {
+    ALL_TTC_SUPPORT_MOMENTS.forEach((m) => {
+      expect(m.heading).not.toBe(m.today.headline);
+      expect(m.focus.heading).not.toBe(m.today.headline);
+      expect(m.focus.heading).not.toBe(m.heading);
+    });
+  });
+});

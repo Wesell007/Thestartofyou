@@ -51,4 +51,4 @@ Session-only suppression flag in `CompanionProvider` plus a `useSuppressCompanio
 
 ## Unchanged
 
-Schema, RLS, storage, auth, routes, sitemap, SEO, voice, persisted chat, RAG (none added), Start of You grounding (none added), old Ask surfaces' behaviour and layout.
+Schema, RLS, storage, auth, routes, sitemap, SEO, voice, persisted chat, RAG (none added), Start of You grounding (none added). Existing AskLink entry points, journey Ask cards and old Ask surfaces remain in place; only answer rendering is adjusted to remove internal retrieval wording and external post-answer links.

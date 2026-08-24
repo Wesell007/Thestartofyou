@@ -14,6 +14,13 @@ Move source selection into `supabase/functions/_shared/aiSources.ts` (pure, unit
 
 Routing tests cover: "When will I feel the baby move?", "What can baby movements feel like?", "When should I call about reduced movements?", "What should I ask my midwife at an appointment?", "Feeding cues", "When should I ask for help with feeding?", "What can help with night waking?", "When might testing make sense?", "What can help during the two-week wait?" — each must select a topically relevant approved page, and a non-urgent question must not route to an emergency-only page.
 
+Every candidate URL has already been checked for reachability and content, and the routing table uses only the confirmed canonical addresses:
+
+- Confirmed 200: pregnancy hub, common health problems, vaginal bleeding, baby movements, keeping well, baby hub, helping your baby to sleep, fertility in the menstrual cycle, infertility, doing a pregnancy test, urgent mental health help, breastfeeding and bottle feeding hub, breastfeeding.
+- Corrected to canonical (the first drafts 301'd): antenatal care and appointments, signs that labour has begun, urgent medical help for babies and children under 5, IVF (now under `/tests-and-treatments/ivf/`).
+- Dropped as 404: the "how to breastfeed" and "breastfeeding support" deep links. Feeding questions route to the breastfeeding page plus the feeding hub instead.
+
+
 ## Fix 2: prompt and fallback wording
 
 In `aiModes.ts`:

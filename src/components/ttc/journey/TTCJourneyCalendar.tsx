@@ -23,14 +23,17 @@ import {
   TTC_PAPER_CARD,
   TTC_SOFT_PILL,
   TTC_FOCUS_RING,
+  TTC_DAY_STATES,
+  type TTCDayStateKey,
 } from "@/components/ttc/journey/ttcStyles";
 
 /**
- * Cycle calendar with soft milestone chips and solid user-log markers.
+ * Cycle calendar with soft colour-coded milestone days and solid user-log
+ * markers.
  *
  * Clickability never relies on colour alone — every actionable day is a
- * button with an accessible label. Milestones show as small sage chips;
- * user logs show as solid dots and a count for a11y contrast.
+ * button with an accessible label, and each coloured day also carries a short
+ * text chip. User logs show as solid dots and a count for a11y contrast.
  */
 
 type Props = {
@@ -40,7 +43,12 @@ type Props = {
   onAddForToday: () => void;
 };
 
-type Milestone = { key: string; label: string; short: string; dateIso: string | null };
+type Milestone = {
+  key: string;
+  label: string;
+  state: TTCDayStateKey;
+  dateIso: string | null;
+};
 
 const toIso = (d: Date) => format(d, "yyyy-MM-dd");
 
@@ -48,12 +56,12 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
   const [visibleMonth, setVisibleMonth] = useState<Date>(startOfMonth(new Date()));
 
   const milestones: Milestone[] = [
-    { key: "period", label: "Period start", short: "Period", dateIso: journey.last_period_date },
-    { key: "fw_start", label: "Fertile window", short: "Fertile", dateIso: journey.fertile_window_start },
-    { key: "ovulation", label: "Likely ovulation", short: "Ovul", dateIso: journey.likely_ovulation_date },
-    { key: "fw_end", label: "Fertile window ends", short: "Fertile", dateIso: journey.fertile_window_end },
-    { key: "test", label: "Possible test day", short: "Test", dateIso: journey.possible_test_date },
-    { key: "expected", label: "Expected period", short: "Period", dateIso: journey.expected_period_date },
+    { key: "period", label: "Period start", state: "period", dateIso: journey.last_period_date },
+    { key: "fw_start", label: "Fertile window", state: "fertile", dateIso: journey.fertile_window_start },
+    { key: "ovulation", label: "Likely ovulation", state: "ovulation", dateIso: journey.likely_ovulation_date },
+    { key: "fw_end", label: "Fertile window ends", state: "fertile", dateIso: journey.fertile_window_end },
+    { key: "test", label: "Possible test day", state: "test", dateIso: journey.possible_test_date },
+    { key: "expected", label: "Expected period", state: "expected", dateIso: journey.expected_period_date },
   ];
 
   const milestonesByDate = useMemo(() => {

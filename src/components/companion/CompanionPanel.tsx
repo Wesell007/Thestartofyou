@@ -8,7 +8,7 @@
 
 import { useNavigate } from "react-router-dom";
 import { ExternalLink, RotateCcw } from "lucide-react";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCompanion } from "./CompanionProvider";
 import { companionStyles } from "./companionStyles";
@@ -56,10 +56,12 @@ export default function CompanionPanel() {
         aria-label="Companion"
       >
         <div className="border-b border-[hsl(var(--stage-ttc-sage-soft))] px-5 pb-4 pt-5">
-          <h2 className={companionStyles.panelHeading}>{companionPanelTitle(companionName)}</h2>
-          <p className={`${companionStyles.safetyLine} mt-2`}>
+          <SheetTitle className={companionStyles.panelHeading}>
+            {companionPanelTitle(companionName)}
+          </SheetTitle>
+          <SheetDescription className={`${companionStyles.safetyLine} mt-2`}>
             {companionSafetyLine(companionName)}
-          </p>
+          </SheetDescription>
         </div>
 
         <div className="flex-1 overflow-y-auto px-5 py-5">

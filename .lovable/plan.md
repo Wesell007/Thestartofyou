@@ -2,9 +2,12 @@
 
 Add a calm, site-wide AI companion panel that reuses the existing AI system. No new backend, no prompt or schema changes, no voice, no persisted history.
 
-## Step 1: Nano Banana visual direction board
+## Step 1: Nano Banana visual direction board (mandatory, front-end binding)
 
-Generate one direction board image (Nano Banana / premium tier) before implementation, saved to `src/assets/`, showing: floating launcher, mobile bottom sheet, desktop side panel, empty state, message bubbles, starter chips, streaming state, calm error/rate-limit state, "Open full Ask page" handoff, and how the panel stacks above bottom navigation and the consent banner. Cream paper, soft sage, muted olive, gentle blush/peach, botanical detail, editorial type. No mascot, no human avatar, no new identity.
+Generate one direction board image (Nano Banana / premium tier) before implementation, saved to `src/assets/`, and report the exact asset path. The board shows: floating launcher, mobile bottom sheet, desktop side panel, empty state, message bubbles, starter chips, streaming state, calm error/rate-limit state, "Open full Ask page" handoff, and how the panel stacks above bottom navigation and the consent banner. Cream paper, soft sage, muted olive, gentle blush/peach, botanical detail, editorial type. No mascot, no human avatar, no new identity.
+
+The board is not decorative background work. It is the binding visual reference for the actual companion UI. The shipped front end must visibly reflect the board across every surface listed above: launcher, mobile sheet, desktop panel, empty state, bubbles, chips, streaming state, error and rate-limit states, Ask handoff, and stacking behaviour. Generic default styling is not acceptable. The board itself is not displayed to users unless a clear design reason emerges.
+
 
 ## Step 2: Companion logic (`src/lib/companion/`)
 

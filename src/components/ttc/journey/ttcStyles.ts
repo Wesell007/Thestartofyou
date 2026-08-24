@@ -140,8 +140,8 @@ export const TTC_DAY_STATES: Record<TTCDayStateKey, TTCDayState> = {
   expected: {
     short: "Period",
     legend: "Expected period",
-    background: "hsl(var(--stage-ttc-blush) / 0.55)",
+    background: "hsl(var(--stage-ttc-blush) / 0.45)",
     ink: "hsl(var(--stage-ttc-rose))",
-    ring: "inset 0 0 0 1px hsl(var(--stage-ttc-rose) / 0.34) ",
+    ring: "inset 0 0 0 2px hsl(var(--stage-ttc-rose) / 0.32)",
   },
 };

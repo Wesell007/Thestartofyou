@@ -157,7 +157,7 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
             hasLogs ? `${dayLogs.length} ${dayLogs.length === 1 ? "log" : "logs"} added` : "",
             isFuture ? "Future date" : "Add or view log",
           ].filter(Boolean);
-          const cellStyle: React.CSSProperties = {};
+          const cellStyle: CSSProperties = {};
           if (dayState) {
             cellStyle.background = dayState.background;
             cellStyle.boxShadow = dayState.ring;

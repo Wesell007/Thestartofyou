@@ -148,13 +148,29 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
           const dayMilestones = milestonesByDate[iso] ?? [];
           const dayLogs = logsByDate[iso] ?? [];
           const hasLogs = dayLogs.length > 0;
-          const milestoneShort = dayMilestones[0]?.short;
+          const dayState = dayMilestones[0]
+            ? TTC_DAY_STATES[dayMilestones[0].state]
+            : null;
           const ariaBits = [
             format(day, "EEEE d MMMM"),
             ...dayMilestones.map((m) => m.label),
             hasLogs ? `${dayLogs.length} ${dayLogs.length === 1 ? "log" : "logs"} added` : "",
             isFuture ? "Future date" : "Add or view log",
           ].filter(Boolean);
+          const cellStyle: React.CSSProperties = {};
+          if (dayState) {
+            cellStyle.background = dayState.background;
+            cellStyle.boxShadow = dayState.ring;
+          }
+          if (isCurrent) {
+            cellStyle.boxShadow = [
+              dayState?.ring,
+              "inset 0 0 0 2px hsl(var(--stage-ttc-olive) / 0.6)",
+            ]
+              .filter(Boolean)
+              .join(", ");
+            if (!dayState) cellStyle.background = "hsl(var(--stage-ttc-olive) / 0.10)";
+          }
           return (
             <button
               key={iso}
@@ -163,34 +179,35 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
               disabled={isFuture}
               aria-label={ariaBits.join(", ")}
               className={`relative rounded-[10px] aspect-square min-h-[44px] p-1 flex flex-col items-stretch justify-between text-left transition-colors ${
-                inMonth ? "hover:bg-[hsl(var(--stage-ttc-sage)/0.55)]" : "opacity-40 hover:opacity-60"
+                inMonth
+                  ? dayState
+                    ? "hover:opacity-90"
+                    : "hover:bg-[hsl(var(--stage-ttc-sage)/0.55)]"
+                  : "opacity-40 hover:opacity-60"
               }`}
-              style={
-                isCurrent
-                  ? {
-                      background: "hsl(var(--stage-ttc-olive) / 0.10)",
-                      boxShadow: "inset 0 0 0 1px hsl(var(--stage-ttc-olive) / 0.45)",
-                    }
-                  : undefined
-              }
+              style={Object.keys(cellStyle).length > 0 ? cellStyle : undefined}
             >
               <span
                 className={`font-sans text-[12px] leading-none ${
-                  isCurrent ? "font-semibold text-[hsl(var(--stage-ttc-text))]" : "text-[hsl(var(--stage-ttc-text-soft))]"
+                  isCurrent ? "font-semibold" : ""
                 }`}
+                style={{
+                  color: dayState
+                    ? dayState.ink
+                    : isCurrent
+                      ? "hsl(var(--stage-ttc-text))"
+                      : "hsl(var(--stage-ttc-text-soft))",
+                }}
               >
                 {format(day, "d")}
               </span>
-              {milestoneShort && (
+              {dayState && (
                 <span
-                  className="font-sans text-[8.5px] tracking-[0.05em] uppercase leading-tight rounded px-1 py-[1px] self-start truncate max-w-full"
-                  style={{
-                    background: "hsl(var(--stage-ttc-olive) / 0.14)",
-                    color: "hsl(var(--stage-ttc-olive))",
-                  }}
+                  className="font-sans text-[8.5px] font-medium tracking-[0.05em] uppercase leading-tight self-start truncate max-w-full"
+                  style={{ color: dayState.ink }}
                   title={dayMilestones.map((m) => m.label).join(", ")}
                 >
-                  {milestoneShort}
+                  {dayState.short}
                 </span>
               )}
               {hasLogs && (
@@ -215,36 +232,51 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
       </div>
 
       {/* Legend */}
-      <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[11.5px] text-[hsl(var(--stage-ttc-text-soft))]">
-        <span className="inline-flex items-center gap-1.5">
-          <span
-            className="inline-block rounded px-1.5 py-[1px] font-sans text-[9px] uppercase tracking-[0.05em]"
-            style={{
-              background: "hsl(var(--stage-ttc-olive) / 0.14)",
-              color: "hsl(var(--stage-ttc-olive))",
-            }}
-          >
-            Chip
-          </span>
-          estimated milestone
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span
-            className="w-2 h-2 rounded-full"
-            style={{ background: "hsl(var(--stage-ttc-olive))" }}
-          />
-          your logs
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span
-            className="w-3 h-3 rounded"
-            style={{
-              boxShadow: "inset 0 0 0 1px hsl(var(--stage-ttc-olive) / 0.45)",
-              background: "hsl(var(--stage-ttc-olive) / 0.10)",
-            }}
-          />
-          today
-        </span>
+      <div className="mt-6">
+        <p className={`${TTC_EYEBROW} mb-3`}>What the colours mean</p>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
+          {(Object.keys(TTC_DAY_STATES) as (keyof typeof TTC_DAY_STATES)[]).map(
+            (key) => {
+              const state = TTC_DAY_STATES[key];
+              return (
+                <li
+                  key={key}
+                  className="flex items-center gap-2.5 font-sans text-[13px] leading-[1.5] text-[hsl(var(--stage-ttc-text-soft))]"
+                >
+                  <span
+                    className="inline-block h-5 w-5 shrink-0 rounded-[7px]"
+                    style={{ background: state.background, boxShadow: state.ring }}
+                    aria-hidden="true"
+                  />
+                  {state.legend}
+                </li>
+              );
+            },
+          )}
+          <li className="flex items-center gap-2.5 font-sans text-[13px] leading-[1.5] text-[hsl(var(--stage-ttc-text-soft))]">
+            <span
+              className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-[7px]"
+              aria-hidden="true"
+            >
+              <span
+                className="h-2 w-2 rounded-full"
+                style={{ background: "hsl(var(--stage-ttc-olive))" }}
+              />
+            </span>
+            Notes you have added
+          </li>
+          <li className="flex items-center gap-2.5 font-sans text-[13px] leading-[1.5] text-[hsl(var(--stage-ttc-text-soft))]">
+            <span
+              className="inline-block h-5 w-5 shrink-0 rounded-[7px]"
+              style={{
+                boxShadow: "inset 0 0 0 2px hsl(var(--stage-ttc-olive) / 0.6)",
+                background: "hsl(var(--stage-ttc-olive) / 0.10)",
+              }}
+              aria-hidden="true"
+            />
+            Today
+          </li>
+        </ul>
       </div>
 
       {/* Milestone key (unique labels) */}

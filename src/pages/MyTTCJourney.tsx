@@ -18,7 +18,6 @@ import {
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import { getAllTTCLogsForJourney, type TTCLog, type TTCLogType } from "@/lib/ttcLogs";
-import { computeTTCInsights } from "@/lib/ttcInsights";
 import TTCJourneySummary from "@/components/ttc/journey/TTCJourneySummary";
 import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
 import TTCTodayCard from "@/components/ttc/journey/TTCTodayCard";

@@ -190,7 +190,11 @@ const App = () => (
         <AnalyticsIdentityBridge />
         <ConsentBanner />
         <JourneyBottomNav />
+        <CompanionProvider>
+        <CompanionLauncher />
+        <CompanionPanel />
         <Suspense fallback={<PageLoadState message="Loading page…" />}>
+
         <Routes>
           <Route path="/" element={<Index />} />
           

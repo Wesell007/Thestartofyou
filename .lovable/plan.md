@@ -39,3 +39,7 @@ The section headed "Small notes for where you may be right now" (`TTCJourneyInsi
 Files in scope: `src/pages/MyTTCJourney.tsx`, `src/components/ttc/journey/TTCJourneyGuidance.tsx`, `src/components/ttc/journey/TTCJourneyCalendar.tsx`, `src/components/ttc/journey/TTCNotesSection.tsx`, `src/components/ttc/journey/ttcStyles.ts`, and `src/index.css` only if new state tokens are required.
 
 Verification at 390px and 1440px across `/my-ttc-journey`, `/setup/trying-to-conceive`, `/ovulation-calculator`, `/trying-to-conceive`, one TTC topic page, one TTC article, one signed-in pregnancy route and one signed-in First Year route. Checks: 44px tap targets, no horizontal overflow, no console errors, no broken images, no hex colours, copy guardrails. Then `npx tsgo --noEmit -p tsconfig.json`, `npx vitest run` and `npm run build`.
+
+## Nano Banana visual direction step (required)
+
+Before implementation, Nano Banana is used inside Lovable to produce a visual direction board covering the Helpful reading image-card treatment, the calendar colour-coding system and the simplified notes layout. No new product image generation is required: the existing approved local TTC assets are used for the reading cards. The direction board only guides the treatment.

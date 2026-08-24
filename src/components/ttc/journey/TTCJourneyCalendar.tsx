@@ -249,17 +249,18 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
                   className="flex items-center gap-3 font-sans text-[13.5px] leading-[1.5] text-[hsl(var(--stage-ttc-text))]"
                 >
                   <span
-                    className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-[9px]"
+                    className="inline-flex h-7 w-11 shrink-0 items-center justify-center rounded-[9px]"
                     style={{ background: state.background, boxShadow: state.ring }}
                     aria-hidden="true"
                   >
                     <span
-                      className="font-sans text-[8px] font-semibold uppercase tracking-[0.04em]"
+                      className="font-sans text-[7.5px] font-semibold uppercase tracking-[0.04em]"
                       style={{ color: state.ink }}
                     >
-                      {state.short.slice(0, 3)}
+                      {state.short}
                     </span>
                   </span>
+
                   {state.legend}
                 </li>
               );

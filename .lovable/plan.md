@@ -24,3 +24,12 @@
 ## Out of scope (unchanged)
 
 Backend, prompts, schema, RLS, storage, auth, AI modes, RAG, grounding, voice, persisted chat, old Ask surfaces, routes, sitemap, SEO.
+
+## Micro-fix 3: no external source links inside the companion panel
+
+`CompanionMessageList` renders answers with the shared `EditorialAnswer`, which passes markdown straight to `ReactMarkdown`, so any `[NHS](https://...)` links or a trailing "Sources" list in the model output become clickable links inside the panel. `/ask` uses the same component, so the fix must be opt-in.
+
+- Add `src/lib/companion/companionAnswerText.ts`: strips a trailing "Sources"/"References" section and converts markdown links and bare URLs to plain text, leaving all other wording (including urgent-care and professional-care guidance) untouched. Covered by unit tests.
+- Add an optional `disableLinks` prop to `EditorialAnswer` that renders anchors as plain text. Default is `false`, so `/ask` and every existing Ask surface behave exactly as today.
+- In `CompanionMessageList`, run answer text through the sanitiser and pass `disableLinks`. Append one small non-clickable trust line under completed answers: "Guidance is checked against approved UK health sources."
+- The internal "Open full Ask page" action stays. No backend, prompt, mode, allowlist or grounding change.

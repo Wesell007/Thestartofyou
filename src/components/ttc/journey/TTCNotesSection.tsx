@@ -76,8 +76,8 @@ const TTCNotesSection = ({
             Your private cycle notes
           </h2>
           <p className={`${TTC_HELPER} max-w-[56ch]`}>
-            Small notes for this cycle, kept private to you. Add what helps and
-            leave the rest. Nothing here changes your cycle estimates.
+            Add what helps and leave the rest. You do not need to note
+            everything, and nothing here changes your cycle dates.
           </p>
 
           <div className="mt-5 flex flex-wrap gap-2">

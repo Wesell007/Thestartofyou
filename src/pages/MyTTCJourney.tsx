@@ -18,7 +18,6 @@ import {
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";
 import { getAllTTCLogsForJourney, type TTCLog, type TTCLogType } from "@/lib/ttcLogs";
-import { computeTTCInsights } from "@/lib/ttcInsights";
 import TTCJourneySummary from "@/components/ttc/journey/TTCJourneySummary";
 import TTCJourneyTimeline from "@/components/ttc/journey/TTCJourneyTimeline";
 import TTCTodayCard from "@/components/ttc/journey/TTCTodayCard";
@@ -34,7 +33,6 @@ import TTCJourneyGuidance from "@/components/ttc/journey/TTCJourneyGuidance";
 import TTCLogEntryPanel from "@/components/ttc/journey/TTCLogEntryPanel";
 import TTCNotesSection from "@/components/ttc/journey/TTCNotesSection";
 
-import TTCJourneyInsights from "@/components/ttc/journey/TTCJourneyInsights";
 import TTCPregnancyHandover from "@/components/ttc/journey/TTCPregnancyHandover";
 import {
   computeTTCHandoverState,
@@ -205,10 +203,6 @@ const MyTTCJourney = () => {
     handoverRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
-  const insights = useMemo(() => {
-    if (!journey) return [];
-    return computeTTCInsights({ stage: derivedStage, journey, logs });
-  }, [journey, derivedStage, logs]);
 
   const supportMoment = useMemo(
     () => computeTTCSupportMoment({ stage: derivedStage, logs }),
@@ -427,14 +421,6 @@ const MyTTCJourney = () => {
         </section>
 
 
-        {/* Gentle insights */}
-        <section className="mb-10 sm:mb-12">
-          <TTCJourneyInsights
-            insights={insights}
-            onOpenLogPanel={() => openPanelForDate(todayIso())}
-            onScrollToHandover={scrollToHandover}
-          />
-        </section>
 
 
 

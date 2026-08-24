@@ -2,6 +2,12 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import type { TTCStage } from "@/lib/ttcDerived";
 import type { ActiveTTCJourney } from "@/lib/savedTTCJourney";
+import ovulationImg from "@/assets/ttc-ovulation-signs-journal.jpg";
+import cycleTrackingImg from "@/assets/ttc-tracking-without-overthinking.jpg";
+import twoWeekWaitImg from "@/assets/ttc-coping-two-week-wait.jpg";
+import pregnancyTestsImg from "@/assets/ttc-pregnancy-tests.jpg";
+import fertilityImg from "@/assets/ttc-fertility-appointment.jpg";
+import ivfImg from "@/assets/ttc-ivf-treatment.jpg";
 import {
   TTC_CARD_TITLE,
   TTC_EYEBROW,
@@ -12,7 +18,14 @@ import {
   TTC_FOCUS_RING,
 } from "@/components/ttc/journey/ttcStyles";
 
-type Card = { key: string; title: string; blurb: string; href: string };
+type Card = {
+  key: string;
+  title: string;
+  blurb: string;
+  href: string;
+  image: string;
+  alt: string;
+};
 
 const CARDS: Record<string, Card> = {
   ovulation: {
@@ -20,36 +33,48 @@ const CARDS: Record<string, Card> = {
     title: "Ovulation and fertile window",
     blurb: "How your body signals ovulation and when conception is more likely.",
     href: "/trying-to-conceive/ovulation",
+    image: ovulationImg,
+    alt: "An open journal beside soft botanical stems on a cream desk",
   },
   cycle_tracking: {
     key: "cycle_tracking",
     title: "Cycle tracking",
     blurb: "Simple ways to notice your pattern without turning it into pressure.",
     href: "/trying-to-conceive/cycle-tracking",
+    image: cycleTrackingImg,
+    alt: "A calm notebook and pen resting on a linen surface",
   },
   two_week_wait: {
     key: "two_week_wait",
     title: "Two-week wait",
     blurb: "Gentle ways to move through the wait between ovulation and testing.",
     href: "/trying-to-conceive/two-week-wait",
+    image: twoWeekWaitImg,
+    alt: "A quiet corner with a warm drink and soft daylight",
   },
   pregnancy_tests: {
     key: "pregnancy_tests",
     title: "Pregnancy tests",
     blurb: "When to test, what results can mean and how to think about early testing.",
     href: "/trying-to-conceive/pregnancy-tests",
+    image: pregnancyTestsImg,
+    alt: "A pregnancy test kit resting quietly on a pale surface",
   },
   fertility: {
     key: "fertility",
     title: "Thinking about fertility support",
     blurb: "Options and questions to consider when you'd like more guidance.",
     href: "/trying-to-conceive/fertility",
+    image: fertilityImg,
+    alt: "Appointment notes and a pen on a soft clinic desk",
   },
   ivf: {
     key: "ivf",
     title: "IVF and treatment guidance",
     blurb: "Understanding the process, expectations and what to ask along the way.",
     href: "/ivf",
+    image: ivfImg,
+    alt: "Calm treatment paperwork beside a small green sprig",
   },
 };
 
@@ -111,8 +136,30 @@ const TTCJourneyGuidance = ({ stage, journey }: Props) => {
             to={c.href}
             className={`group ${TTC_PAPER_CARD} ${TTC_TILE_PAD} flex flex-col transition-shadow hover:shadow-md ${TTC_FOCUS_RING}`}
           >
-            <h3 className={`${TTC_CARD_TITLE} mb-2`}>{c.title}</h3>
-            <p className={`${TTC_HELPER} mb-4 flex-1`}>{c.blurb}</p>
+            <div className="flex items-start gap-4 sm:block">
+              <div
+                className="relative shrink-0 overflow-hidden rounded-[14px] w-[76px] h-[76px] sm:w-full sm:h-[112px] sm:mb-4"
+                style={{ boxShadow: "inset 0 0 0 1px hsl(var(--stage-ttc-olive) / 0.16)" }}
+              >
+                <img
+                  src={c.image}
+                  alt={c.alt}
+                  loading="lazy"
+                  width={640}
+                  height={360}
+                  className="h-full w-full object-cover"
+                />
+                <span
+                  className="pointer-events-none absolute inset-0"
+                  aria-hidden="true"
+                  style={{ background: "hsl(var(--stage-ttc-sage) / 0.18)" }}
+                />
+              </div>
+              <div className="min-w-0 sm:contents">
+                <h3 className={`${TTC_CARD_TITLE} mb-2`}>{c.title}</h3>
+                <p className={`${TTC_HELPER} mb-4 flex-1`}>{c.blurb}</p>
+              </div>
+            </div>
             <span className="inline-flex min-h-[24px] items-center gap-1.5 font-sans text-[12.5px] font-medium text-[hsl(var(--stage-ttc-olive))] transition-all group-hover:gap-2">
               Read more <ArrowRight size={13} aria-hidden="true" />
             </span>

@@ -90,6 +90,9 @@
     --stage-ttc-olive-soft: 95 20% 45%;
     --stage-ttc-blush: 8 40% 92%;
     --stage-ttc-peach: 30 44% 93%;
+    /* Deeper state inks, used for calendar colour coding text and rings. */
+    --stage-ttc-rose: 8 34% 42%;
+    --stage-ttc-sand: 30 40% 34%;
     --stage-ttc-edge: 100 16% 80%;
     --stage-ttc-text: 96 14% 18%;
     --stage-ttc-text-soft: 96 10% 34%;

@@ -83,3 +83,65 @@ export const TTC_DIVIDER = "ttc-rule my-6";
 export const TTC_NAV_ACTIVE = "text-[hsl(var(--stage-ttc-olive))] font-medium";
 export const TTC_NAV_INACTIVE =
   "text-[hsl(var(--stage-ttc-text-soft))] font-light hover:text-foreground";
+
+/**
+ * Phase 28H — calendar day state colours.
+ *
+ * Presentation only: a soft background, a readable ink and a short chip label
+ * for each cycle state shown on the calendar. Meaning is never carried by
+ * colour alone, and every value is a TTC token.
+ */
+export type TTCDayStateKey =
+  | "period"
+  | "fertile"
+  | "ovulation"
+  | "test"
+  | "expected";
+
+export type TTCDayState = {
+  /** Short chip label shown inside the day cell. */
+  short: string;
+  /** Plain legend wording. */
+  legend: string;
+  background: string;
+  ink: string;
+  ring: string;
+};
+
+export const TTC_DAY_STATES: Record<TTCDayStateKey, TTCDayState> = {
+  period: {
+    short: "Period",
+    legend: "Period start",
+    background: "hsl(var(--stage-ttc-blush) / 0.9)",
+    ink: "hsl(var(--stage-ttc-rose))",
+    ring: "inset 0 0 0 1px hsl(var(--stage-ttc-rose) / 0.28)",
+  },
+  fertile: {
+    short: "Fertile",
+    legend: "Fertile window",
+    background: "hsl(var(--stage-ttc-sage) / 0.85)",
+    ink: "hsl(var(--stage-ttc-olive))",
+    ring: "inset 0 0 0 1px hsl(var(--stage-ttc-olive) / 0.18)",
+  },
+  ovulation: {
+    short: "Ovul",
+    legend: "Likely ovulation",
+    background: "hsl(var(--stage-ttc-sage-soft) / 0.85)",
+    ink: "hsl(var(--stage-ttc-olive))",
+    ring: "inset 0 0 0 2px hsl(var(--stage-ttc-olive) / 0.55)",
+  },
+  test: {
+    short: "Test",
+    legend: "Possible test day",
+    background: "hsl(var(--stage-ttc-peach) / 0.95)",
+    ink: "hsl(var(--stage-ttc-sand))",
+    ring: "inset 0 0 0 1px hsl(var(--stage-ttc-sand) / 0.26)",
+  },
+  expected: {
+    short: "Period",
+    legend: "Expected period",
+    background: "hsl(var(--stage-ttc-blush) / 0.55)",
+    ink: "hsl(var(--stage-ttc-rose))",
+    ring: "inset 0 0 0 1px hsl(var(--stage-ttc-rose) / 0.34) ",
+  },
+};

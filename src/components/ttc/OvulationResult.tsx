@@ -260,9 +260,9 @@ const OvulationResult = ({
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
           <div className="max-w-2xl mb-10">
             <Eyebrow>Your cycle at a glance</Eyebrow>
-            <h2 className="font-serif text-[2rem] sm:text-4xl md:text-[2.75rem] text-foreground leading-[1.08] mb-4">
+            <h1 className="font-serif text-[2rem] sm:text-4xl md:text-[2.75rem] text-foreground leading-[1.08] mb-4">
               Your fertile window <span className="italic font-normal">estimate</span>
-            </h2>
+            </h1>
             <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground leading-relaxed">
               A calm view of the days that may matter most this cycle.
             </p>

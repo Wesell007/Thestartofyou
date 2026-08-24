@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { CalendarIcon, ArrowDown, ArrowRight, Clock, Target, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { navigateToAsk } from "@/lib/askNavigation";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import heroImg from "@/assets/ttc-hero-lifestyle.jpg";
@@ -104,7 +105,7 @@ const TTCHero = () => {
 
               <p className="font-sans text-[14.5px] sm:text-base font-light text-muted-foreground leading-relaxed mb-6 sm:mb-7 max-w-md">
                 A calm, practical guide through every stage of trying to
-                conceive — from cycle awareness to the two-week wait.
+                conceive, from cycle awareness to the two-week wait.
               </p>
 
               <div className="flex items-stretch gap-4 sm:gap-8 mb-7">
@@ -269,7 +270,14 @@ const TTCHero = () => {
                     return (
                       <button
                         key={i}
-                        className="group flex items-start gap-3 w-full text-left py-3 px-4 rounded-xl border bg-card/60 hover:bg-card transition-all"
+                        type="button"
+                        onClick={() =>
+                          navigateToAsk(navigate, prompt.text, {
+                            context: "Trying to conceive",
+                            stage: "ttc",
+                          })
+                        }
+                        className="group flex min-h-11 items-start gap-3 w-full text-left py-3 px-4 rounded-xl border bg-card/60 hover:bg-card transition-all"
                         style={{ borderColor: 'hsl(var(--stage-ttc) / 0.3)' }}
                       >
                         <div
@@ -292,7 +300,13 @@ const TTCHero = () => {
                 </div>
 
                 <button
-                  className="mt-4 flex items-center gap-2 border text-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-light hover:bg-parchment-dark transition-all w-full justify-center"
+                  type="button"
+                  onClick={() =>
+                    document
+                      .getElementById("ttc-hub-overview")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  className="mt-4 flex min-h-11 items-center gap-2 border text-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-light hover:bg-parchment-dark transition-all w-full justify-center"
                   style={{ borderColor: 'hsl(var(--stage-ttc-accent) / 0.25)' }}
                 >
                   <ArrowDown size={13} />

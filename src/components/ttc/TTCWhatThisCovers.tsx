@@ -6,16 +6,16 @@ const STAGE_ACCENT = "--stage-ttc-accent";
 
 const hubBullets = [
   "How your cycle works, what ovulation looks like, and when your fertile window opens",
-  "Cycle tracking that helps without taking over — what's useful, what's noise",
+  "Cycle tracking that helps without taking over: what's useful, what's noise",
   "Preconception health: nutrition, supplements, and small steady habits that matter",
-  "The emotional shape of trying — hope, waiting, and the weeks that feel uneven",
+  "The emotional shape of trying: hope, waiting, and the weeks that feel uneven",
   "Pregnancy tests, two-week-wait questions, and how to read what your body is telling you",
   "Honest guidance on age, conditions, male fertility, and when to seek a clinic",
 ];
 
 const TTCWhatThisCovers = () => {
   return (
-    <section className="pt-10 md:pt-14 pb-14 md:pb-20 bg-parchment">
+    <section id="ttc-hub-overview" className="pt-10 md:pt-14 pb-14 md:pb-20 bg-parchment">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         <div
           className="relative rounded-[2rem] bg-card border p-8 sm:p-10 md:p-14 overflow-hidden"
@@ -41,7 +41,7 @@ const TTCWhatThisCovers = () => {
             What this hub <span className="italic font-normal">covers</span>
           </h2>
           <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed max-w-2xl mb-3">
-            Trying to conceive isn't a checklist — it's a stretch of time with
+            Trying to conceive isn't a checklist, it's a stretch of time with
             its own questions, rhythms, and quiet uncertainty. This hub gathers
             calm, practical guidance for every part of it.
           </p>

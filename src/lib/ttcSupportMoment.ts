@@ -104,7 +104,7 @@ const TWO_WEEK_WAIT: TTCSupportMoment = {
 const POSSIBLE_TEST_DAY: TTCSupportMoment = {
   id: "possible_test_day",
   eyebrow: "Support for this part",
-  heading: "You may be near a possible test day",
+  heading: "Testing when you feel ready",
   body: "If testing feels right, take it one step at a time. If you would rather wait, that is okay too.",
   supportLine: "There is no rush, and nothing you have to decide today.",
   actions: [

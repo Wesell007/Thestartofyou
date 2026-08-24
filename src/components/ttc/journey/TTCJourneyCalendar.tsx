@@ -214,19 +214,20 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
               {hasLogs && (
                 <span className="flex items-center gap-0.5 self-end" aria-hidden="true">
                   <span
-                    className="w-1.5 h-1.5 rounded-full"
-                    style={{ background: "hsl(var(--stage-ttc-olive))" }}
+                    className="w-2 h-2 rounded-full"
+                    style={{ background: logMarkerColour }}
                   />
                   {dayLogs.length > 1 && (
                     <span
                       className="font-sans text-[9px] font-semibold"
-                      style={{ color: "hsl(var(--stage-ttc-olive))" }}
+                      style={{ color: logMarkerColour }}
                     >
                       {dayLogs.length}
                     </span>
                   )}
                 </span>
               )}
+
             </button>
           );
         })}

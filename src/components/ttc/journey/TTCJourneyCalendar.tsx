@@ -239,28 +239,36 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
       {/* Legend */}
       <div className="mt-6">
         <p className={`${TTC_EYEBROW} mb-3`}>What the colours mean</p>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
           {(Object.keys(TTC_DAY_STATES) as (keyof typeof TTC_DAY_STATES)[]).map(
             (key) => {
               const state = TTC_DAY_STATES[key];
               return (
                 <li
                   key={key}
-                  className="flex items-center gap-2.5 font-sans text-[13px] leading-[1.5] text-[hsl(var(--stage-ttc-text-soft))]"
+                  className="flex items-center gap-3 font-sans text-[13.5px] leading-[1.5] text-[hsl(var(--stage-ttc-text))]"
                 >
                   <span
-                    className="inline-block h-5 w-5 shrink-0 rounded-[7px]"
+                    className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-[9px]"
                     style={{ background: state.background, boxShadow: state.ring }}
                     aria-hidden="true"
-                  />
+                  >
+                    <span
+                      className="font-sans text-[8px] font-semibold uppercase tracking-[0.04em]"
+                      style={{ color: state.ink }}
+                    >
+                      {state.short.slice(0, 3)}
+                    </span>
+                  </span>
                   {state.legend}
                 </li>
               );
             },
           )}
-          <li className="flex items-center gap-2.5 font-sans text-[13px] leading-[1.5] text-[hsl(var(--stage-ttc-text-soft))]">
+          <li className="flex items-center gap-3 font-sans text-[13.5px] leading-[1.5] text-[hsl(var(--stage-ttc-text))]">
             <span
-              className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-[7px]"
+              className="inline-flex h-7 w-7 shrink-0 items-end justify-end rounded-[9px] p-1"
+              style={{ background: "hsl(var(--stage-ttc-cream-soft))" }}
               aria-hidden="true"
             >
               <span
@@ -270,12 +278,12 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
             </span>
             Notes you have added
           </li>
-          <li className="flex items-center gap-2.5 font-sans text-[13px] leading-[1.5] text-[hsl(var(--stage-ttc-text-soft))]">
+          <li className="flex items-center gap-3 font-sans text-[13.5px] leading-[1.5] text-[hsl(var(--stage-ttc-text))]">
             <span
-              className="inline-block h-5 w-5 shrink-0 rounded-[7px]"
+              className="inline-block h-7 w-7 shrink-0 rounded-[9px]"
               style={{
-                boxShadow: "inset 0 0 0 2px hsl(var(--stage-ttc-olive) / 0.6)",
-                background: "hsl(var(--stage-ttc-olive) / 0.10)",
+                boxShadow: "inset 0 0 0 2px hsl(var(--stage-ttc-text) / 0.55)",
+                background: "hsl(var(--stage-ttc-cream-soft))",
               }}
               aria-hidden="true"
             />
@@ -286,6 +294,7 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
 
       {/* Milestone key (unique labels) */}
       {Object.values(LOG_TYPE_LABEL) && null}
+
     </div>
   );
 };

@@ -165,11 +165,11 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
           if (isCurrent) {
             cellStyle.boxShadow = [
               dayState?.ring,
-              "inset 0 0 0 2px hsl(var(--stage-ttc-olive) / 0.6)",
+              "inset 0 0 0 2px hsl(var(--stage-ttc-text) / 0.55)",
             ]
               .filter(Boolean)
               .join(", ");
-            if (!dayState) cellStyle.background = "hsl(var(--stage-ttc-olive) / 0.10)";
+            if (!dayState) cellStyle.background = "hsl(var(--stage-ttc-cream-soft))";
           }
           return (
             <button
@@ -203,13 +203,14 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
               </span>
               {dayState && (
                 <span
-                  className="font-sans text-[8.5px] font-medium tracking-[0.05em] uppercase leading-tight self-start truncate max-w-full"
-                  style={{ color: dayState.ink }}
+                  className="rounded-[5px] px-[3px] py-[1px] font-sans text-[8.5px] font-semibold tracking-[0.05em] uppercase leading-tight self-start truncate max-w-full"
+                  style={{ color: dayState.ink, background: dayState.chipBackground }}
                   title={dayMilestones.map((m) => m.label).join(", ")}
                 >
                   {dayState.short}
                 </span>
               )}
+
               {hasLogs && (
                 <span className="flex items-center gap-0.5 self-end" aria-hidden="true">
                   <span

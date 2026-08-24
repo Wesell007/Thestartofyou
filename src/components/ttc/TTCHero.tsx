@@ -104,7 +104,7 @@ const TTCHero = () => {
 
               <p className="font-sans text-[14.5px] sm:text-base font-light text-muted-foreground leading-relaxed mb-6 sm:mb-7 max-w-md">
                 A calm, practical guide through every stage of trying to
-                conceive — from cycle awareness to the two-week wait.
+                conceive, from cycle awareness to the two-week wait.
               </p>
 
               <div className="flex items-stretch gap-4 sm:gap-8 mb-7">

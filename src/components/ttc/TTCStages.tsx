@@ -87,7 +87,7 @@ const TTCStages = () => {
             Three stages of <span className="italic font-normal">trying</span>
           </h2>
           <p className="font-sans text-sm font-light text-muted-foreground max-w-md mx-auto">
-            Each stage has its own rhythm. Choose where you are — there's no
+            Each stage has its own rhythm. Choose where you are. There is no
             wrong place to begin.
           </p>
           <div
@@ -107,9 +107,8 @@ const TTCStages = () => {
             const accentBorder = `hsl(${stage.accentHsl} / 0.20)`;
             const SprigSrc = stage.sprig === "leaf" ? sprigImg : wildflowerImg;
             return (
-              <Link
+              <article
                 key={stage.num}
-                to={`/trying-to-conceive/${stage.slug}`}
                 className="group relative bg-card rounded-2xl overflow-hidden flex flex-col border transition-all hover:-translate-y-1"
                 style={{
                   borderColor: accentBorder,
@@ -153,7 +152,12 @@ const TTCStages = () => {
                   />
 
                   <h3 className="font-serif text-[1.2rem] text-foreground leading-snug">
-                    {stage.title}
+                    <Link
+                      to={`/trying-to-conceive/${stage.slug}`}
+                      className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                    >
+                      {stage.title}
+                    </Link>
                   </h3>
                   <p className="font-sans text-[13.5px] font-light text-muted-foreground leading-relaxed">
                     {stage.sub}
@@ -168,8 +172,7 @@ const TTCStages = () => {
                       >
                         <Link
                           to={c.href}
-                          onClick={(e) => e.stopPropagation()}
-                          className="group/link flex items-center gap-2 py-2.5"
+                          className="group/link flex min-h-11 items-center gap-2 py-2.5"
                         >
                           <span className="flex-1 font-sans text-[12.5px] font-light text-foreground/80 group-hover/link:text-foreground transition-colors">
                             {c.label}
@@ -197,8 +200,10 @@ const TTCStages = () => {
                         {stage.emotion}
                       </span>
                     </div>
-                    <span
-                      className="inline-flex items-center gap-1 font-sans text-[12px] font-medium shrink-0"
+                    <Link
+                      to={`/trying-to-conceive/${stage.slug}`}
+                      aria-label={`Explore ${stage.title}`}
+                      className="inline-flex min-h-11 items-center gap-1 font-sans text-[12px] font-medium shrink-0"
                       style={{ color: accent }}
                     >
                       Explore stage
@@ -206,10 +211,10 @@ const TTCStages = () => {
                         size={12}
                         className="transition-transform group-hover:translate-x-0.5"
                       />
-                    </span>
+                    </Link>
                   </div>
                 </div>
-              </Link>
+              </article>
             );
           })}
         </div>

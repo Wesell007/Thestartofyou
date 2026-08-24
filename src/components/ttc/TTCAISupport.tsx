@@ -32,7 +32,7 @@ const TTCAISupport = () => {
             <span className="italic font-normal">gently answered.</span>
           </h2>
           <p className="font-sans text-[14.5px] font-light text-muted-foreground leading-relaxed max-w-lg mx-auto">
-            Ask anything about timing, ovulation, symptoms, or testing — and
+            Ask anything about timing, ovulation, symptoms, or testing, and
             get calm, practical guidance shaped to where you are.
           </p>
         </div>
@@ -52,7 +52,7 @@ const TTCAISupport = () => {
         </div>
 
         <p className="mt-6 font-sans text-[11.5px] font-light text-muted-foreground/65 text-center">
-          Trusted, calm guidance — never a replacement for medical advice.
+          Trusted, calm guidance, never a replacement for medical advice.
         </p>
 
         <div className="mt-10 max-w-md mx-auto text-center">

@@ -148,9 +148,12 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
           const dayMilestones = milestonesByDate[iso] ?? [];
           const dayLogs = logsByDate[iso] ?? [];
           const hasLogs = dayLogs.length > 0;
-          const dayState = dayMilestones[0]
-            ? TTC_DAY_STATES[dayMilestones[0].state]
-            : null;
+          const dayStateKey = dayMilestones[0]?.state ?? null;
+          const dayState = dayStateKey ? TTC_DAY_STATES[dayStateKey] : null;
+          const logMarkerColour =
+            dayStateKey === "ovulation"
+              ? "hsl(var(--stage-ttc-cream))"
+              : "hsl(var(--stage-ttc-olive))";
           const ariaBits = [
             format(day, "EEEE d MMMM"),
             ...dayMilestones.map((m) => m.label),

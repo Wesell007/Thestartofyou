@@ -2,9 +2,12 @@
 
 Add a calm, site-wide AI companion panel that reuses the existing AI system. No new backend, no prompt or schema changes, no voice, no persisted history.
 
-## Step 1: Nano Banana visual direction board
+## Step 1: Nano Banana visual direction board (mandatory, front-end binding)
 
-Generate one direction board image (Nano Banana / premium tier) before implementation, saved to `src/assets/`, showing: floating launcher, mobile bottom sheet, desktop side panel, empty state, message bubbles, starter chips, streaming state, calm error/rate-limit state, "Open full Ask page" handoff, and how the panel stacks above bottom navigation and the consent banner. Cream paper, soft sage, muted olive, gentle blush/peach, botanical detail, editorial type. No mascot, no human avatar, no new identity.
+Generate one direction board image (Nano Banana / premium tier) before implementation, saved to `src/assets/`, and report the exact asset path. The board shows: floating launcher, mobile bottom sheet, desktop side panel, empty state, message bubbles, starter chips, streaming state, calm error/rate-limit state, "Open full Ask page" handoff, and how the panel stacks above bottom navigation and the consent banner. Cream paper, soft sage, muted olive, gentle blush/peach, botanical detail, editorial type. No mascot, no human avatar, no new identity.
+
+The board is not decorative background work. It is the binding visual reference for the actual companion UI. The shipped front end must visibly reflect the board across every surface listed above: launcher, mobile sheet, desktop panel, empty state, bubbles, chips, streaming state, error and rate-limit states, Ask handoff, and stacking behaviour. Generic default styling is not acceptable. The board itself is not displayed to users unless a clear design reason emerges.
+
 
 ## Step 2: Companion logic (`src/lib/companion/`)
 
@@ -40,6 +43,15 @@ New Vitest coverage for: route-to-mode resolver (including never selecting `firs
 ## Step 7: Verification
 
 Playwright visual QA at 390px and 1440px across the listed routes (launcher visibility, panel open/close, streaming, chips, `/ask` fallback, no overlap/overflow, no console errors, focus visibility, 44px targets), then `npx tsgo --noEmit -p tsconfig.json`, `npx vitest run`, `npm run build`, followed by the 32-point report.
+
+Nano Banana front-end verification is part of this step and must be reported explicitly:
+
+- the exact Nano Banana asset path in `src/assets/`
+- confirmation that the board was generated and used as the reference before implementation started
+- 390px screenshots of the launcher and the opened panel
+- 1440px screenshots of the launcher and the opened panel
+- confirmation that the shipped front end matches the cream paper, sage, olive, botanical, premium editorial direction
+- confirmation that no mascot, human avatar or new visual identity was introduced
 
 ## Out of scope
 

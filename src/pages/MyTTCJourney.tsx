@@ -34,7 +34,6 @@ import TTCJourneyGuidance from "@/components/ttc/journey/TTCJourneyGuidance";
 import TTCLogEntryPanel from "@/components/ttc/journey/TTCLogEntryPanel";
 import TTCNotesSection from "@/components/ttc/journey/TTCNotesSection";
 
-import TTCJourneyInsights from "@/components/ttc/journey/TTCJourneyInsights";
 import TTCPregnancyHandover from "@/components/ttc/journey/TTCPregnancyHandover";
 import {
   computeTTCHandoverState,
@@ -427,14 +426,6 @@ const MyTTCJourney = () => {
         </section>
 
 
-        {/* Gentle insights */}
-        <section className="mb-10 sm:mb-12">
-          <TTCJourneyInsights
-            insights={insights}
-            onOpenLogPanel={() => openPanelForDate(todayIso())}
-            onScrollToHandover={scrollToHandover}
-          />
-        </section>
 
 
 

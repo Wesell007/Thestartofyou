@@ -10,27 +10,28 @@ Includes the three approved 29B micro-fixes (not yet built) plus the 29B.1 fix.
 
 ## Fix 1: topic routing for approved sources (no new infrastructure)
 
-Move source selection into `supabase/functions/_shared/aiSources.ts` (pure, unit-testable from Vitest) and widen the existing approved NHS list with pages that already exist on nhs.uk, including baby movements, antenatal appointments/checks, breastfeeding help, and baby sleep. Keep the mental-health, IVF, baby and TTC branches. Always append a broad topic-hub page so a query never lands on two narrow pages alone. No RAG, no vector search, no article ingestion, no Start of You grounding.
+Move source selection into `supabase/functions/_shared/aiSources.ts` (pure, unit-testable from Vitest) and widen the approved NHS allowlist with the routine topics that currently miss: baby movements, antenatal appointments and checks, signs of labour, breastfeeding/feeding cues and feeding support, baby sleep, and doing a pregnancy test. Keep the mental-health, IVF, baby-unwell and TTC branches, and always include a broad hub page so a question never lands on two narrow pages alone. Still static keyword routing: no RAG, no vector search, no article ingestion, no Start of You grounding.
+
+Routing tests cover: "When will I feel the baby move?", "What can baby movements feel like?", "When should I call about reduced movements?", "What should I ask my midwife at an appointment?", "Feeding cues", "When should I ask for help with feeding?", "What can help with night waking?", "When might testing make sense?", "What can help during the two-week wait?" — each must select a topically relevant approved page, and a non-urgent question must not route to an emergency-only page.
 
 ## Fix 2: prompt and fallback wording
 
 In `aiModes.ts`:
 
-- Replace the "only claims supported by the supplied evidence / say the evidence does not answer" rule with: prefer the supplied approved evidence; where it does not cover a routine, well-established point of UK maternity, fertility or infant guidance, answer carefully and generally, staying non-diagnostic and adding professional-care wording where relevant.
-- Add an explicit banned-language rule: never mention evidence, sources, retrieval, context, snippets or what was "provided" in the answer text.
-- Add the single approved refusal line for genuine inability: "I do not have enough detail to answer that safely here. It would be best to speak with your midwife, GP, health visitor or urgent care service, depending on what is happening."
-- Give `pregnancy_week_companion` its own prompt (parity with the TTC and First Year companions) instead of reusing the general prompt.
-- Keep all existing safety rules, the urgent-escalation path and `DAY_RECAP` behaviour untouched.
+- Remove the "only claims supported by the supplied evidence / say clearly that the evidence does not answer" rule. Replace with: prefer the supplied approved evidence; where it does not cover a routine, well-established point of UK maternity, fertility or infant guidance, answer carefully and generally, non-diagnostic, with professional-care wording where relevant.
+- Add a banned-language rule: never mention evidence, sources, retrieval, snippets, context or what was "provided" in the answer, and drop the required "Sources" section from the output format.
+- Single approved refusal line for genuine inability: "I do not have enough detail to answer that safely here. It would be best to speak with your midwife, GP, health visitor or urgent care service, depending on what is happening."
+- Give `pregnancy_week_companion` its own prompt instead of reusing the general one.
+- Keep urgent escalation, safety routing, day-recap behaviour, and the TTC and First Year safety rules unchanged.
 
-## Fix 3: answer post-processing (front end, both surfaces)
+## Fix 3: answer post-processing (safety net, both surfaces)
 
-Add `src/lib/aiAnswerSafety.ts`: strips internal retrieval phrasing from streamed answer text and, if a sentence is purely a retrieval-refusal, swaps it for the approved fallback line. Apply it where the answer is rendered on `/ask` and in the companion panel. Urgent-care and professional-care wording is preserved verbatim.
+`src/lib/aiAnswerSafety.ts`: strips internal retrieval phrasing, swapping a pure retrieval-refusal for the approved fallback line, and preserving urgent-care and professional-care wording. It is a net behind the routing and prompt fixes, not the primary fix, so tests cover the raw prompt/routing behaviour as well as the rendered output.
 
-## Fix 4 (29B micro-fix 3): no external links in the companion panel
+## Fix 4: no external source links after answers on `/ask` AND the companion panel
 
-- `src/lib/companion/companionAnswerText.ts`: strips a trailing "Sources"/"References" block and converts markdown links and bare URLs to plain text.
-- Optional `disableLinks` prop on `EditorialAnswer`, default `false`, so `/ask` renders exactly as today.
-- Companion panel shows the non-clickable trust line "Guidance is checked against approved UK health sources." and keeps the internal "Open full Ask page" action.
+`src/lib/answerSourceLinks.ts` (shared): strips a trailing "Sources"/"References" block and converts markdown links and bare external URLs to plain text. `EditorialAnswer` gains an optional `disableLinks` prop so anchors render as plain text. Applied on both `/ask` and the companion panel, each showing the non-clickable line "Guidance is checked against approved UK health sources." Internal navigation (follow-up prompts, journey links, "Open full Ask page") is untouched, and backend grounding is unchanged.
+
 
 ## Fix 5 (29B micro-fix 1): hide the companion on any NotFound render
 

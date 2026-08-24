@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { CalendarIcon, ArrowDown, ArrowRight, Clock, Target, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { navigateToAsk } from "@/lib/askNavigation";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import heroImg from "@/assets/ttc-hero-lifestyle.jpg";
@@ -299,7 +300,13 @@ const TTCHero = () => {
                 </div>
 
                 <button
-                  className="mt-4 flex items-center gap-2 border text-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-light hover:bg-parchment-dark transition-all w-full justify-center"
+                  type="button"
+                  onClick={() =>
+                    document
+                      .getElementById("ttc-hub-overview")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  className="mt-4 flex min-h-11 items-center gap-2 border text-foreground rounded-pill px-5 py-2.5 font-sans text-[13px] font-light hover:bg-parchment-dark transition-all w-full justify-center"
                   style={{ borderColor: 'hsl(var(--stage-ttc-accent) / 0.25)' }}
                 >
                   <ArrowDown size={13} />

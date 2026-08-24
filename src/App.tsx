@@ -126,6 +126,10 @@ import { supabase } from "./integrations/supabase/client.ts";
 import { identify, trackEvent } from "./lib/analytics.ts";
 import { EVENTS } from "./lib/analyticsEvents.ts";
 import AppErrorBoundary from "./components/shared/AppErrorBoundary.tsx";
+import { CompanionProvider } from "./components/companion/CompanionProvider.tsx";
+import CompanionLauncher from "./components/companion/CompanionLauncher.tsx";
+import CompanionPanel from "./components/companion/CompanionPanel.tsx";
+
 
 
 const queryClient = new QueryClient();
@@ -190,7 +194,11 @@ const App = () => (
         <AnalyticsIdentityBridge />
         <ConsentBanner />
         <JourneyBottomNav />
+        <CompanionProvider>
+        <CompanionLauncher />
+        <CompanionPanel />
         <Suspense fallback={<PageLoadState message="Loading page…" />}>
+
         <Routes>
           <Route path="/" element={<Index />} />
           
@@ -345,7 +353,9 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         </Suspense>
+        </CompanionProvider>
       </BrowserRouter>
+
     </TooltipProvider>
   </QueryClientProvider>
   </AppErrorBoundary>

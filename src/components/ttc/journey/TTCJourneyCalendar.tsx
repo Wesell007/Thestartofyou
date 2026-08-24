@@ -281,7 +281,7 @@ const TTCJourneyCalendar = ({ journey, logs, onSelectDate, onAddForToday }: Prop
           </li>
           <li className="flex items-center gap-3 font-sans text-[13.5px] leading-[1.5] text-[hsl(var(--stage-ttc-text))]">
             <span
-              className="inline-block h-7 w-7 shrink-0 rounded-[9px]"
+              className="inline-block h-7 w-11 shrink-0 rounded-[9px]"
               style={{
                 boxShadow: "inset 0 0 0 2px hsl(var(--stage-ttc-text) / 0.55)",
                 background: "hsl(var(--stage-ttc-cream-soft))",

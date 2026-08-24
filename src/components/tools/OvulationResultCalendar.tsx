@@ -106,7 +106,7 @@ const OvulationResultCalendar = ({
         <button
           type="button"
           onClick={() => setMonthCursor((m) => addMonths(m, -1))}
-          className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-parchment-dark transition-colors"
+          className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-parchment-dark transition-colors"
           aria-label="Previous month"
           style={{ color: "hsl(var(--stage-ttc-accent))" }}
         >
@@ -118,7 +118,7 @@ const OvulationResultCalendar = ({
         <button
           type="button"
           onClick={() => setMonthCursor((m) => addMonths(m, 1))}
-          className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-parchment-dark transition-colors"
+          className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-parchment-dark transition-colors"
           aria-label="Next month"
           style={{ color: "hsl(var(--stage-ttc-accent))" }}
         >

@@ -30,7 +30,7 @@ In `aiModes.ts`:
 
 ## Fix 4: no external source links after answers on `/ask` AND the companion panel
 
-`src/lib/answerSourceLinks.ts` (shared): strips a trailing "Sources"/"References" block and converts markdown links and bare external URLs to plain text. `EditorialAnswer` gains an optional `disableLinks` prop so anchors render as plain text. Applied on both `/ask` and the companion panel, each showing the non-clickable line "Guidance is checked against approved UK health sources." Internal navigation (follow-up prompts, journey links, "Open full Ask page") is untouched, and backend grounding is unchanged.
+`src/lib/answerSourceLinks.ts` (shared): strips a trailing "Sources"/"References" block, renders markdown link text as plain text and removes bare external URLs entirely, so users do not see raw URLs or clickable external links. `EditorialAnswer` gains an optional `disableLinks` prop so anchors render as plain text. Applied on both `/ask` and the companion panel, each showing the non-clickable line "Guidance is checked against approved UK health sources." Internal navigation (follow-up prompts, journey links, "Open full Ask page") is untouched, and backend grounding is unchanged.
 
 
 ## Fix 5 (29B micro-fix 1): hide the companion on any NotFound render

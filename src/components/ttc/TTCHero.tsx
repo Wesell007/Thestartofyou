@@ -269,7 +269,14 @@ const TTCHero = () => {
                     return (
                       <button
                         key={i}
-                        className="group flex items-start gap-3 w-full text-left py-3 px-4 rounded-xl border bg-card/60 hover:bg-card transition-all"
+                        type="button"
+                        onClick={() =>
+                          navigateToAsk(navigate, prompt.text, {
+                            context: "Trying to conceive",
+                            stage: "ttc",
+                          })
+                        }
+                        className="group flex min-h-11 items-start gap-3 w-full text-left py-3 px-4 rounded-xl border bg-card/60 hover:bg-card transition-all"
                         style={{ borderColor: 'hsl(var(--stage-ttc) / 0.3)' }}
                       >
                         <div

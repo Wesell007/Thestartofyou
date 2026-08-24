@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { parseAiSearchBody } from "../_shared/validation.ts";
 import { DAY_RECAP_UNAVAILABLE_ANSWER, getAiModeConfig } from "../_shared/aiModes.ts";
+import { selectSources } from "../_shared/aiSources.ts";
 
 const DEFAULT_ORIGINS = [
   "https://thestartofyou.com",
@@ -31,32 +32,6 @@ const json = (req: Request, body: Record<string, unknown>, status = 200, extra: 
     headers: { ...responseHeaders(req), "Content-Type": "application/json", ...extra },
   });
 
-const SOURCES = {
-  pregnancy: [
-    "https://www.nhs.uk/pregnancy/common-symptoms/common-health-problems/",
-    "https://www.nhs.uk/pregnancy/common-symptoms/vaginal-bleeding/",
-  ],
-  ttc: [
-    "https://www.nhs.uk/conditions/periods/fertility-in-the-menstrual-cycle/",
-    "https://www.nhs.uk/conditions/infertility/",
-  ],
-  ivf: ["https://www.nhs.uk/conditions/ivf/"],
-  baby: [
-    "https://www.nhs.uk/baby/health/is-your-baby-or-toddler-seriously-ill/",
-  ],
-  mentalHealth: [
-    "https://www.nhs.uk/nhs-services/mental-health-services/where-to-get-urgent-help-for-mental-health/",
-  ],
-};
-
-const selectSources = (query: string, context?: string): string[] => {
-  const text = `${query} ${context ?? ""}`.toLowerCase();
-  if (/suicid|self[- ]?harm|mental|panic|depress|anxi/.test(text)) return SOURCES.mentalHealth;
-  if (/\bivf\b|embryo|transfer|fertility treatment/.test(text)) return SOURCES.ivf;
-  if (/baby|newborn|infant|toddler|feeding|napp/.test(text)) return SOURCES.baby;
-  if (/ovulat|fertil|conceiv|period|cycle|pregnancy test/.test(text)) return SOURCES.ttc;
-  return SOURCES.pregnancy;
-};
 
 const htmlToEvidence = (html: string) => {
   const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? html;
@@ -82,7 +57,9 @@ const fetchGrounding = async (urls: string[], signal: AbortSignal) => {
     if (!response.ok) throw new Error(`Grounding source returned ${response.status}`);
     const evidence = htmlToEvidence(await response.text());
     if (evidence.length < 200) throw new Error("Grounding source returned insufficient content");
-    return `<source url="${url}">\n${evidence}\n</source>`;
+    // The URL is deliberately not passed to the model: nothing in the answer
+    // may reference or print a source address.
+    return `<background>\n${evidence}\n</background>`;
   }));
 
   const documents = results
@@ -102,23 +79,13 @@ const urgentAnswer = (query: string) => {
 
 If you may act on these thoughts or you are in immediate danger, call 999 or go to A&E now. If you can, stay with someone you trust and move away from anything you could use to hurt yourself.
 
-For urgent mental health help that is not an immediate emergency, call NHS 111 and select the mental health option.
-
-### Source
-
-https://www.nhs.uk/nhs-services/mental-health-services/where-to-get-urgent-help-for-mental-health/`;
+For urgent mental health help that is not an immediate emergency, call NHS 111 and select the mental health option.`;
   }
   return `## Please seek urgent clinical help now
 
 The symptom you described can need prompt assessment. If there is immediate danger, severe breathing difficulty, loss of consciousness, a seizure or very heavy bleeding, call 999 or go to A&E now.
 
-For reduced baby movement, contact your maternity unit immediately and do not wait until the next day. For other urgent pregnancy concerns, contact your maternity triage unit or NHS 111 now.
-
-### Sources
-
-- https://www.nhs.uk/nhs-services/urgent-and-emergency-care-services/when-to-go-to-ae/
-- https://www.nhs.uk/pregnancy/common-symptoms/vaginal-bleeding/
-- https://www.nhs.uk/pregnancy/keeping-well/your-babys-movements/`;
+For reduced baby movement, contact your maternity unit immediately and do not wait until the next day. For other urgent pregnancy concerns, contact your maternity triage unit or NHS 111 now.`;
 };
 
 const sseAnswer = (req: Request, content: string) => {
@@ -235,7 +202,7 @@ serve(async (req) => {
   const userContent = [
     "<user_question>", query, "</user_question>",
     context ? `<journey_context>\n${context}\n</journey_context>` : "",
-    evidence ? `<approved_evidence>\n${evidence}\n</approved_evidence>` : "",
+    evidence ? `<background_material>\n${evidence}\n</background_material>` : "",
   ].filter(Boolean).join("\n");
 
   try {

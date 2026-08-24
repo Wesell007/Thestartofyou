@@ -1,9 +1,15 @@
+import type React from "react";
 import ReactMarkdown from "react-markdown";
 import { Heart, LifeBuoy, Sparkles } from "lucide-react";
 import { Sprig } from "@/components/shared/StageBotanical";
 
 interface Props {
   markdown: string;
+  /**
+   * Render anchors as plain text. Used wherever AI answers are shown so no
+   * clickable external source link can reach the reader.
+   */
+  disableLinks?: boolean;
 }
 
 type ModuleTone = "neutral" | "help" | "seek" | "reassurance";
@@ -170,13 +176,18 @@ const proseClasses = `
   prose-blockquote:border-l-2 prose-blockquote:border-sage/40 prose-blockquote:pl-5 prose-blockquote:italic prose-blockquote:text-foreground/75 prose-blockquote:font-light prose-blockquote:my-7
 `;
 
-const EditorialAnswer = ({ markdown }: Props) => {
+const EditorialAnswer = ({ markdown, disableLinks = false }: Props) => {
   const modules = splitIntoModules(markdown);
+  // Answers are grounded against approved sources, but the reader is shown a
+  // plain trust line instead of links, so anchors render as plain text.
+  const mdComponents = disableLinks
+    ? ({ a: ({ children }: { children?: React.ReactNode }) => <>{children}</> } as const)
+    : undefined;
 
   if (modules.length === 0) {
     return (
       <article className={`${proseClasses} max-w-[68ch] mx-auto`}>
-        <ReactMarkdown>{markdown}</ReactMarkdown>
+        <ReactMarkdown components={mdComponents}>{markdown}</ReactMarkdown>
       </article>
     );
   }
@@ -197,7 +208,7 @@ const EditorialAnswer = ({ markdown }: Props) => {
                     </h2>
                   )}
                   <article className={proseClasses}>
-                    <ReactMarkdown>{m.body}</ReactMarkdown>
+                    <ReactMarkdown components={mdComponents}>{m.body}</ReactMarkdown>
                   </article>
                 </section>
               ))}
@@ -235,7 +246,7 @@ const EditorialAnswer = ({ markdown }: Props) => {
               </h3>
             )}
             <article className={`${proseClasses} ${meta.bulletClass} [&_ul>li]:after:border-current [&_ul>li]:after:opacity-25 ${meta.accent.replace('text-', '[&_ul>li]:after:text-')}`}>
-              <ReactMarkdown>{m.body}</ReactMarkdown>
+              <ReactMarkdown components={mdComponents}>{m.body}</ReactMarkdown>
             </article>
           </aside>
         );

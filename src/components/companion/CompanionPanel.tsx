@@ -90,15 +90,20 @@ export default function CompanionPanel() {
 
         <div className="border-t border-[hsl(var(--stage-ttc-sage-soft))] px-5 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4">
           <CompanionComposer />
-          <div className="mt-2 flex items-center justify-between">
-            <button type="button" onClick={clear} className={`${companionStyles.quietButton} inline-flex items-center gap-1 px-0`}>
+          {/* Both footer actions keep a 44px clickable height for touch. */}
+          <div className="mt-1 flex items-center justify-between">
+            <button
+              type="button"
+              onClick={clear}
+              className={`${companionStyles.quietButton} inline-flex min-h-[44px] items-center gap-1 px-0 py-3`}
+            >
               <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
               Start again
             </button>
             <button
               type="button"
               onClick={openFullAsk}
-              className={`${companionStyles.quietButton} inline-flex items-center gap-1 px-0`}
+              className={`${companionStyles.quietButton} inline-flex min-h-[44px] items-center gap-1 px-0 py-3`}
             >
               Open full Ask page
               <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />

@@ -43,10 +43,13 @@ Today `handleAskAgain` and `handleSuggestion` build a context string containing 
 ## 6. Ambiguous queries
 
 Handled in the frontend, no backend or infrastructure change.
-- New `src/lib/askClarification.ts`: a pure resolver that flags short, broad, non-urgent queries (1–3 words, no symptom/urgency wording) and maps known broad topics to a clarifying question plus chips. Seeded with milestones, feeding, sleep, symptoms, movement, testing, plus a generic fallback question.
-- Urgency guard: anything containing symptom, pain, bleeding, reduced, worried, urgent or similar wording is never treated as ambiguous and goes straight to the AI as today.
+- New `src/lib/askClarification.ts`: a pure resolver that flags short, broad, non-urgent queries (1–3 words, no concern wording) and maps known broad topics to a clarifying question plus chips. Seeded with milestones, feeding, sleep, symptoms, movement, testing, plus a generic fallback question.
+- Bare broad terms that DO get clarification: "Milestones", "Feeding", "Sleep", "Symptoms", "Movement", "Testing". The word "symptom" alone does not bypass clarification.
+- Concern guard (bypasses clarification, goes straight to the AI and its safety route): wording that suggests worry, urgency, danger, pain, bleeding, reduced or absent movement, breathing difficulty, fever, not feeding, or similar. Examples that must never be clarified: "reduced movements", "bleeding", "pain", "severe headache", "baby not feeding", "baby breathing fast", "I am worried about symptoms", "urgent", "help now".
+- The guard matches on concern signals (worried, scared, urgent, help now, emergency, pain, bleeding, reduced/no movement, breathing, fever, temperature, not feeding/eating, severe, sudden, dizzy, faint, cramp, discharge) rather than on the presence of a topic noun. A query is only clarified when it is short, matches a broad topic, and carries no concern signal.
 - When a query is flagged, `/ask` renders a clarification state instead of calling the model: warm question, chips that re-ask a specific version of the query, and the normal input below. No urgent-care fallback text appears.
 - "Milestones" -> "Do you mean pregnancy milestones, baby milestones, toddler development, or something you have noticed recently?" with chips: Pregnancy milestones / Baby milestones / Toddler development / Something I am worried about.
+
 
 ## 7. Trust line
 

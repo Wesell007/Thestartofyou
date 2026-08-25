@@ -3,7 +3,7 @@ import { useSearchParams, Link, useLocation, useNavigate } from "react-router-do
 import EditorialAnswer from "@/components/shared/EditorialAnswer";
 import { sanitiseAiAnswer, sanitiseStreamingAiAnswer, APPROVED_SOURCES_TRUST_LINE } from "@/lib/aiAnswerSafety";
 import { resolveAskClarification, type AskClarificationChip } from "@/lib/askClarification";
-import { Loader2, Search, ChevronRight, Heart, BookOpen, Compass, Sparkles, Shield, ArrowUpRight, ArrowLeft } from "lucide-react";
+import { Loader2, Search, ChevronRight, Heart, BookOpen, Compass, Sparkles, Shield, ArrowUpRight, ArrowLeft, ArrowUp } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useAISearch } from "@/hooks/useAISearch";

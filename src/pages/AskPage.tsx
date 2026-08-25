@@ -684,35 +684,94 @@ const AskPage = () => {
         </div>
 
 
+        {/* ══════════════════════════════════════════════════
+            GENTLE CLARIFICATION — broad, non-urgent question
+            ══════════════════════════════════════════════════ */}
+        {clarification && (
+          <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
+            <div
+              className="relative overflow-hidden rounded-[1.75rem] border border-sage/20 bg-card px-6 py-8 md:px-10 md:py-10 shadow-soft"
+              style={sc ? { borderColor: sc.accentBorder } : undefined}
+            >
+              <Sprig tone={tone.sprigTone} className="absolute -top-1 right-4 w-12 h-12 opacity-20" />
+              <p
+                className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow} mb-4`}
+                style={sc ? { color: sc.accent } : undefined}
+              >
+                Just so I answer the right thing
+              </p>
+              <p className="font-serif text-[1.2rem] md:text-[1.4rem] text-foreground leading-[1.45] max-w-[46ch]">
+                {clarification.question}
+              </p>
+
+              <div className="mt-7 flex flex-wrap gap-2.5">
+                {clarification.chips.map((c) => (
+                  <button
+                    key={c.label}
+                    type="button"
+                    onClick={() => handleClarificationChip(c)}
+                    className={`inline-flex min-h-[44px] items-center rounded-full border border-border/50 bg-parchment px-5 font-sans text-[13px] font-light text-foreground/80
+                      ${tone.accentBorderHover} hover:text-foreground transition-colors
+                      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40`}
+                  >
+                    {c.label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-8 border-t border-border/30 pt-6">
+                <label htmlFor="ask-clarify-input" className="sr-only">
+                  Ask in your own words
+                </label>
+                <div className="flex items-center gap-3 rounded-2xl border border-border/50 bg-parchment px-4 py-2">
+                  <Search size={16} className="shrink-0 text-sage-muted/70" style={sc ? { color: sc.accent } : undefined} />
+                  <input
+                    id="ask-clarify-input"
+                    ref={followUpInputRef}
+                    type="text"
+                    value={newQuery}
+                    onChange={(e) => setNewQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Or tell me a little more…"
+                    className="min-h-[44px] flex-1 bg-transparent font-sans text-[14px] font-light text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAskAgain}
+                    disabled={!newQuery.trim()}
+                    className="min-h-[44px] shrink-0 rounded-full bg-terracotta px-5 font-sans text-[13px] font-medium text-terracotta-foreground shadow-cta transition-colors hover:bg-terracotta-hover disabled:opacity-40 disabled:shadow-none"
+                  >
+                    Ask
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ── Loading state ── */}
         {isLoading && !answer && (
           <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
-            <div className="relative rounded-3xl overflow-hidden">
-              <div
-                className="absolute inset-0 bg-gradient-to-br from-sage-bg/40 via-card to-lavender-bg/15 pointer-events-none"
-                style={sc ? { background: `linear-gradient(135deg, ${sc.bgWash}, hsl(var(--card)) 60%, ${sc.accentSofter})` } : undefined}
-              />
-              <div
-                className="relative bg-card/85 backdrop-blur-sm border border-sage/15 rounded-3xl px-10 py-16 md:px-14 md:py-20 shadow-elevated"
-                style={sc ? { borderColor: sc.accentBorder } : undefined}
-              >
-                <div className="flex flex-col items-center text-center gap-4">
-                  <div
-                    className="w-11 h-11 rounded-full bg-sage-bg/70 flex items-center justify-center ring-4 ring-sage-bg/40"
-                    style={sc ? { backgroundColor: sc.accentSoft, boxShadow: `0 0 0 4px ${sc.accentSofter}` } : undefined}
-                  >
-                    <Loader2
-                      size={18}
-                      className="animate-spin text-sage"
-                      style={sc ? { color: sc.accent } : undefined}
-                    />
-                  </div>
-                  <div>
-                    <p className="font-serif text-lg text-foreground mb-1.5">Finding your answer</p>
-                    <p className="font-sans text-xs font-light text-muted-foreground">
-                      We're putting together guidance tailored to your question…
-                    </p>
-                  </div>
+            <div
+              className="relative overflow-hidden rounded-[1.75rem] border border-sage/15 bg-card px-6 py-12 md:px-10 md:py-16 shadow-soft"
+              style={sc ? { borderColor: sc.accentBorder } : undefined}
+            >
+              <div className="flex flex-col items-center text-center gap-4">
+                <div
+                  className="w-11 h-11 rounded-full bg-sage-bg/70 flex items-center justify-center ring-4 ring-sage-bg/40"
+                  style={sc ? { backgroundColor: sc.accentSoft, boxShadow: `0 0 0 4px ${sc.accentSofter}` } : undefined}
+                >
+                  <Loader2
+                    size={18}
+                    className="animate-spin text-sage"
+                    style={sc ? { color: sc.accent } : undefined}
+                  />
+                </div>
+                <div>
+                  <p className="font-serif text-lg text-foreground mb-1.5">Thinking this through</p>
+                  <p className="font-sans text-[13px] font-light text-muted-foreground">
+                    One moment while I put this together…
+                  </p>
                 </div>
               </div>
             </div>
@@ -729,90 +788,72 @@ const AskPage = () => {
         )}
 
         {/* ══════════════════════════════════════════════════
-            QUICK ANSWER, the hero moment — premium card
+            IN BRIEF — the short answer
             ══════════════════════════════════════════════════ */}
         {parsed?.quickAnswer && (
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-16 relative z-10">
-            <div className="relative rounded-[2rem] overflow-hidden shadow-elevated">
-              {/* Layered backgrounds */}
+          <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-12 relative z-10">
+            <div className="relative rounded-[1.75rem] overflow-hidden shadow-soft">
               <div
-                className="absolute inset-0 bg-gradient-to-br from-sage-bg/55 via-card to-lavender-bg/12 pointer-events-none"
-                style={sc ? { background: `linear-gradient(135deg, ${sc.bgWash}, hsl(var(--card)) 60%, ${sc.accentSofter})` } : undefined}
+                className="absolute inset-0 bg-gradient-to-br from-sage-bg/45 via-card to-card pointer-events-none"
+                style={sc ? { background: `linear-gradient(135deg, ${sc.bgWash}, hsl(var(--card)) 60%, hsl(var(--card)))` } : undefined}
               />
-              <div
-                className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-sage/[0.08] blur-3xl pointer-events-none"
-                style={sc ? { background: sc.accentSoft } : undefined}
-              />
-              <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-lavender/[0.06] blur-3xl pointer-events-none" />
-
-              {/* Botanical mark in corner */}
-              <Sprig tone={tone.sprigTone} className="absolute top-6 right-6 w-10 h-10 opacity-30" />
+              <Sprig tone={tone.sprigTone} className="absolute top-5 right-5 w-9 h-9 opacity-25" />
 
               <div
-                className="relative border border-sage/20 rounded-[2rem] px-7 py-10 md:px-14 md:py-14"
+                className="relative border border-sage/20 rounded-[1.75rem] px-6 py-8 md:px-10 md:py-10"
                 style={sc ? { borderColor: sc.accentBorder } : undefined}
               >
-                {/* Label */}
-                <div className="flex items-center gap-3 mb-7">
-                  <div
-                    className="w-9 h-9 rounded-full bg-sage/12 flex items-center justify-center ring-2 ring-sage/10"
-                    style={sc ? { backgroundColor: sc.accentSoft, boxShadow: `0 0 0 2px ${sc.accentSofter}` } : undefined}
+                <div className="flex items-center gap-2.5 mb-5">
+                  <Sparkles size={13} className={tone.eyebrow} style={sc ? { color: sc.accent } : undefined} />
+                  <span
+                    className={`font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow}`}
+                    style={sc ? { color: sc.accent } : undefined}
                   >
-                    <Sparkles size={14} className={tone.eyebrow} style={sc ? { color: sc.accent } : undefined} />
-                  </div>
-                  <div className="flex items-center gap-2.5">
-                    <span className={`font-sans text-[11px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow}`} style={sc ? { color: sc.accent } : undefined}>
-                      The short answer
-                    </span>
-                    <span className="h-px w-12 bg-sage/30" style={sc ? { backgroundColor: sc.accentRing } : undefined} />
-                  </div>
+                    In brief
+                  </span>
+                  <span className="h-px flex-1 bg-sage/20" style={sc ? { backgroundColor: sc.accentRing } : undefined} />
                 </div>
 
-                {/* Editorial pull-quote treatment */}
-                <p className="font-serif text-[1.25rem] md:text-[1.55rem] text-foreground leading-[1.55] max-w-2xl tracking-[-0.005em]">
-                  <span className="font-medium">{parsed.quickAnswer.split(" ").slice(0, 8).join(" ")}</span>
-                  {" "}
-                  <span className="text-foreground/85">{parsed.quickAnswer.split(" ").slice(8).join(" ")}</span>
+                <p className="font-serif text-[1.15rem] md:text-[1.35rem] text-foreground leading-[1.6] max-w-[60ch] tracking-[-0.005em]">
+                  {parsed.quickAnswer}
                 </p>
-
-                {/* Hairline detail */}
-                <div className="mt-9 pt-5 border-t border-sage/15 flex items-center justify-between gap-4">
-                  <span className="font-sans text-[11px] font-light text-sage-muted">
-                    Continue reading for the full picture
-                  </span>
-                  <span className="font-sans text-[10px] font-light tracking-widest uppercase text-sage/60">
-                    01 / 03
-                  </span>
-                </div>
               </div>
             </div>
           </div>
         )}
 
         {/* ══════════════════════════════════════════════════
-            STRUCTURED ANSWER BODY
+            MORE ON THIS — the fuller answer
             ══════════════════════════════════════════════════ */}
         {parsed?.rest && (
           <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-8 relative z-10">
-            {/* Label above body */}
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-7">
               <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-muted-foreground/70">
-                The full picture
+                More on this
               </span>
               <span className="h-px flex-1 bg-border/30" />
-              <span className="font-sans text-[10px] font-light tracking-widest uppercase text-muted-foreground/50">
-                02 / 03
-              </span>
             </div>
 
             <EditorialAnswer markdown={parsed.rest} disableLinks />
+
             {!isLoading && (
-              <p className="mt-8 font-sans text-[11px] font-light tracking-wide text-muted-foreground/70">
-                {APPROVED_SOURCES_TRUST_LINE}
-              </p>
+              <div className="mt-10 border-t border-border/30 pt-6">
+                <div className="flex items-start gap-2.5">
+                  <Sprig tone={tone.sprigTone} className="mt-0.5 w-4 h-4 shrink-0 opacity-60" />
+                  <div className="space-y-1.5">
+                    <p className="font-sans text-[12px] font-light leading-relaxed text-muted-foreground">
+                      {APPROVED_SOURCES_TRUST_LINE}
+                    </p>
+                    <p className="font-sans text-[12px] font-light leading-relaxed text-muted-foreground/80">
+                      AI-generated, not individually medically reviewed. Check important health decisions with a qualified professional.
+                    </p>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         )}
+
 
         {/* Streaming indicator */}
         {isLoading && answer && (

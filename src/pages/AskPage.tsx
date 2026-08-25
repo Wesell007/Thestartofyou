@@ -444,121 +444,96 @@ const AskPage = () => {
       <div className="min-h-screen bg-parchment">
         <SeoHead title="Ask for guidance | The Start of You" description="Ask for calm, AI-generated guidance for your current stage." canonical="https://thestartofyou.com/ask" noindex />
         <Navbar />
-        <main className="relative pt-24 pb-24 md:pt-32 md:pb-32 overflow-hidden">
-          {/* Ambient art-direction layer */}
-          {sc ? (
-            <div
-              className="absolute top-[-120px] left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full blur-3xl pointer-events-none"
-              style={{ background: sc.accentSoft }}
-              aria-hidden
-            />
-          ) : (
-            <StageGlow tone="sage" className="top-[-120px] left-1/2 -translate-x-1/2 w-[900px] h-[500px]" opacity={0.9} />
-          )}
-          <BotanicalAccent className="top-24 -left-20 md:top-16 md:-left-10 rotate-[-8deg]" opacity="opacity-[0.18]" size="w-[200px] md:w-[280px]" />
-          <BotanicalAccent flip className="bottom-32 -right-16 md:-right-6 rotate-[12deg]" opacity="opacity-[0.16]" size="w-[200px] md:w-[260px]" />
+        <main className="relative overflow-hidden pt-20 pb-16 md:pt-24 md:pb-24">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[320px] overflow-hidden md:h-[380px]">
+            {sc ? (
+              <div
+                className="absolute top-[-160px] left-1/2 h-[360px] w-[720px] -translate-x-1/2 rounded-full blur-3xl"
+                style={{ background: sc.accentSoft }}
+                aria-hidden
+              />
+            ) : (
+              <StageGlow tone="sage" className="top-[-160px] left-1/2 -translate-x-1/2 w-[720px] h-[360px]" opacity={0.85} />
+            )}
+          </div>
 
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
-            <nav className="flex items-center gap-2 font-sans text-[11px] font-light tracking-wide text-muted-foreground mb-10 uppercase">
+          <div className="relative z-10 mx-auto w-full max-w-[46rem] space-y-5 px-5 md:space-y-7 md:px-8">
+            <nav className="flex items-center gap-2 font-sans text-[11px] font-light uppercase tracking-wide text-muted-foreground">
               <Link to="/pregnancy" className="hover:text-foreground transition-colors">Explore</Link>
               <ChevronRight size={10} className="text-border" />
               <span className="text-foreground/70">Ask</span>
             </nav>
 
-            <div className="text-center mb-10">
-              <div
-                className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sage-bg/60 mb-5 ring-4 ring-sage-bg/30"
-                style={sc ? { backgroundColor: sc.accentSoft, boxShadow: `0 0 0 4px ${sc.accentSofter}` } : undefined}
-              >
-                <Sparkles size={18} className="text-sage" style={sc ? { color: sc.accent } : undefined} />
-              </div>
-              <h1 className="font-serif text-[2rem] sm:text-[2.4rem] md:text-[2.75rem] text-foreground leading-[1.12] tracking-[-0.01em] mb-4">
-                {companionName ? `Ask ${companionName}` : "What would you like to ask?"}
+            <section className="relative overflow-hidden rounded-[22px] border border-border/40 bg-card px-5 py-8 text-center shadow-soft md:px-8 md:py-10">
+              <Sprig tone="sage" className="mx-auto mb-3 h-10 w-10 opacity-60" />
+              <h1 className="font-serif text-[1.6rem] leading-[1.2] tracking-[-0.01em] text-foreground md:text-[2rem]">
+                {companionName ? `How can ${companionName} help you today?` : "How can I help you today?"}
               </h1>
-              <p className="font-sans text-[14.5px] font-light text-muted-foreground max-w-md mx-auto leading-relaxed">
-                Private, calm, judgement-free guidance — for any stage of your journey.
+              <p className="mx-auto mt-2 max-w-[46ch] font-sans text-[13.5px] font-light leading-relaxed text-muted-foreground">
+                Ask anything about trying to conceive, pregnancy, birth or parenting.
               </p>
-            </div>
 
-            <div
-              className={`relative bg-card border rounded-2xl px-5 py-4 md:px-6 md:py-5 flex items-center gap-4 transition-all duration-300 shadow-soft ${
-                inputFocused ? (sc ? "" : "border-sage/40 ring-1 ring-sage/10") : "border-border/40"
-              }`}
-              style={sc && inputFocused ? { borderColor: sc.accentBorder, boxShadow: `0 0 0 1px ${sc.accentRing}` } : undefined}
-            >
-              <Search size={16} className="text-sage-muted/70 shrink-0" style={sc ? { color: sc.accent } : undefined} />
-              <input
-                type="text"
-                value={newQuery}
-                onChange={(e) => setNewQuery(e.target.value)}
-                onKeyDown={handleKeyDown}
-                onFocus={() => setInputFocused(true)}
-                onBlur={() => setInputFocused(false)}
-                autoFocus
-                placeholder="Ask anything…"
-                className="flex-1 bg-transparent font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
-              />
-              <button
-                onClick={handleAskAgain}
-                disabled={!newQuery.trim()}
-                className="bg-terracotta text-terracotta-foreground rounded-full px-6 py-2.5 font-sans text-[13px] font-medium shadow-cta hover:bg-terracotta-hover transition-all duration-300 shrink-0 disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
-              >
-                Ask
-              </button>
-            </div>
+              <div className="mx-auto mt-6 flex max-w-[34rem] items-center gap-3 rounded-[16px] border border-border/50 bg-parchment px-4 py-2 text-left transition-all duration-300">
+                <label htmlFor="ask-welcome-input" className="sr-only">Ask your question</label>
+                <input
+                  id="ask-welcome-input"
+                  type="text"
+                  value={newQuery}
+                  onChange={(e) => setNewQuery(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  onFocus={() => setInputFocused(true)}
+                  onBlur={() => setInputFocused(false)}
+                  autoFocus
+                  placeholder="Ask your question…"
+                  className="min-h-[44px] flex-1 bg-transparent font-sans text-[14px] font-light text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
+                />
+                <button
+                  onClick={handleAskAgain}
+                  disabled={!newQuery.trim()}
+                  aria-label="Ask"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-sage text-parchment transition-colors hover:bg-sage/90 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40"
+                >
+                  <ArrowUp size={17} aria-hidden="true" />
+                </button>
+              </div>
 
-            {!hasStageContext && (
-              <div className="mt-8">
-                <p className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase text-muted-foreground/70 mb-4 text-center">
-                  Try one of these
-                </p>
-                <div className="flex flex-wrap gap-2 justify-center">
+              {!hasStageContext && (
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+                  <span className="font-sans text-[12px] font-light text-muted-foreground/80">Examples:</span>
                   {welcomeSuggestions.map((s) => (
                     <button
                       key={s}
                       onClick={() => handleSuggestion(s)}
-                      className="font-sans text-[12.5px] font-light text-foreground/75 bg-card border border-border/40 rounded-full px-4 py-2 hover:border-sage/40 hover:text-foreground hover:bg-card transition-all duration-200"
+                      className="inline-flex min-h-[44px] items-center rounded-full border border-border/40 bg-parchment px-4 font-sans text-[12.5px] font-light text-foreground/80 transition-colors hover:border-sage/40 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40"
                     >
                       {s}
                     </button>
                   ))}
                 </div>
-              </div>
-            )}
+              )}
+            </section>
 
             {topicSuggestions && (
-              <div className="mt-8">
+              <section className="relative overflow-hidden rounded-[22px] border border-border/40 bg-card px-5 py-6 shadow-soft md:px-8 md:py-8">
                 <p
-                  className="font-sans text-[10px] font-medium tracking-[0.2em] uppercase mb-4 text-center"
+                  className="mb-3 font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground/70"
                   style={sc ? { color: sc.accent } : undefined}
                 >
                   You may also want to ask
                 </p>
-                <div className="flex flex-wrap gap-2 justify-center">
+                <div className="flex flex-wrap gap-2">
                   {topicSuggestions.map((s) => (
                     <button
                       key={s}
                       onClick={() => handleSuggestion(s)}
-                      className="font-sans text-[12.5px] font-light text-foreground/80 bg-card border rounded-full px-4 py-2 transition-all duration-200 hover:text-foreground"
-                      style={
-                        sc
-                          ? { borderColor: sc.accentBorder }
-                          : undefined
-                      }
-                      onMouseEnter={(e) => {
-                        if (!sc) return;
-                        e.currentTarget.style.backgroundColor = sc.accentSofter;
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!sc) return;
-                        e.currentTarget.style.backgroundColor = "";
-                      }}
+                      className="inline-flex min-h-[44px] items-center rounded-full border border-border/40 bg-parchment px-4 font-sans text-[12.5px] font-light text-foreground/80 transition-colors hover:border-sage/40 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40"
+                      style={sc ? { borderColor: sc.accentBorder } : undefined}
                     >
                       {s}
                     </button>
                   ))}
                 </div>
-              </div>
+              </section>
             )}
           </div>
         </main>

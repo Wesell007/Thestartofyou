@@ -870,84 +870,34 @@ const AskPage = () => {
             ══════════════════════════════════════════════════ */}
         {isDone && (
           <>
-            {/* ── AI limitations signature ── */}
-            <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
-              <div className="flex items-center gap-3 pt-10 pb-2">
-                <div
-                  className={`flex items-center gap-2 ${tone.accentBgSofter} rounded-full px-4 py-2 ring-1 ${tone.accentRing}`}
-                  style={sc ? { backgroundColor: sc.accentSofter, boxShadow: `inset 0 0 0 1px ${sc.accentRing}` } : undefined}
-                >
-                  <Shield size={12} className={tone.accentText} style={sc ? { color: sc.accent } : undefined} />
-                  <p className={`font-sans text-[11px] font-light ${tone.accentText} tracking-wide`} style={sc ? { color: sc.accent } : undefined}>
-                    AI-generated, not individually medically reviewed
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* ── Reassurance, editorial reminder block ── */}
-            <div className="mt-16 mb-20 relative">
-              <div
-                className="relative bg-gradient-to-b from-sage-bg/20 via-parchment to-parchment overflow-hidden"
-                style={sc ? { background: `linear-gradient(to bottom, ${sc.bgWashSoft}, hsl(var(--parchment)) 60%, hsl(var(--parchment)))` } : undefined}
-              >
-                {/* Soft botanical flanks */}
-                <BotanicalAccent
-                  className="top-1/2 -translate-y-1/2 -left-20 md:-left-6 rotate-[-15deg]"
-                  opacity="opacity-[0.16]"
-                  size="w-[180px] md:w-[240px]"
-                />
-                <BotanicalAccent
-                  flip
-                  className="top-1/2 -translate-y-1/2 -right-20 md:-right-6 rotate-[15deg]"
-                  opacity="opacity-[0.16]"
-                  size="w-[180px] md:w-[240px]"
-                />
-
-                <div className="container mx-auto px-6 md:px-10 max-w-3xl py-16 md:py-24 relative z-10">
-                  <div className="max-w-lg mx-auto text-center">
-                    <SprigDivider tone={tone.sprigTone} className="mb-6" />
-                    <p className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-terracotta/80 mb-5">
-                      A small reminder
-                    </p>
-                    <p className="font-serif text-[1.4rem] md:text-[1.6rem] text-foreground leading-[1.4] mb-4 tracking-[-0.005em]">
-                      Whatever you're going through, it's okay to ask.
-                    </p>
-                    <p className="font-sans text-[14px] font-light text-muted-foreground leading-[1.75] max-w-md mx-auto">
-                      You're doing the right thing by looking for answers, and you don't need to have it all figured out. Trust yourself.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             {/* ── Follow-up prompts ── */}
-            <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-14 relative z-10">
+            <div className="container mx-auto px-6 md:px-10 max-w-3xl mt-14 mb-14 relative z-10">
               <div className="flex items-center gap-3 mb-6">
                 <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-muted-foreground/70">
-                  Keep exploring
+                  Ask a follow-up
                 </span>
                 <span className="h-px flex-1 bg-border/25" />
-                <span className="font-sans text-[10px] font-light tracking-widest uppercase text-muted-foreground/50">
-                  03 / 03
-                </span>
               </div>
               <div className="flex flex-wrap gap-2.5">
                 {followUpPrompts.map((p) => (
                   <button
                     key={p}
                     onClick={() => handleSuggestion(p)}
-                    className={`group inline-flex items-center gap-2.5 font-sans text-[13px] font-light text-foreground/75
-                      bg-card border border-border/40 rounded-full px-5 py-3
+                    className={`group inline-flex min-h-[44px] items-center gap-2.5 font-sans text-[13px] font-light text-foreground/75
+                      bg-card border border-border/40 rounded-full px-5
                       ${tone.accentBorderHover} hover:text-foreground hover:bg-card hover:shadow-soft
-                      transition-all duration-300`}
+                      transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40`}
                   >
                     {p}
                     <ChevronRight size={11} className={`text-border ${isIVF ? "group-hover:text-lavender" : "group-hover:text-sage"} group-hover:translate-x-0.5 transition-all`} />
                   </button>
                 ))}
               </div>
+              <p className="mt-5 font-sans text-[12.5px] font-light leading-relaxed text-muted-foreground/80">
+                Whatever you are going through, it is okay to ask.
+              </p>
             </div>
+
 
             {/* ── Continue your journey ── */}
             <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-20 relative z-10">

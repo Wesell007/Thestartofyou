@@ -641,8 +641,8 @@ const AskPage = () => {
             <span className="text-foreground/60">Your question</span>
           </nav>
 
-          {/* Stage context chip */}
-          {context && (
+          {/* Stage context chip — display label only, never conversation text */}
+          {displayContext && (
             <div className="mb-5">
               <span
                 className={`inline-flex items-center gap-1.5 ${tone.chipBg} ${tone.chipText} font-sans text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full ring-1 ${tone.chipRing}`}
@@ -652,36 +652,37 @@ const AskPage = () => {
                   className={`w-1 h-1 rounded-full ${tone.chipDot}`}
                   style={sc ? { backgroundColor: sc.accent } : undefined}
                 />
-                {context}
+                {displayContext}
               </span>
             </div>
           )}
 
           {/* Question title, editorial */}
-          <div className="mb-7">
+          <div className="mb-6">
             <p
               className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrowSoft} mb-3`}
               style={sc ? { color: sc.accent } : undefined}
             >
               You asked
             </p>
-            <h1 className="font-serif text-[1.75rem] sm:text-[2.1rem] md:text-[2.65rem] text-foreground leading-[1.1] tracking-[-0.012em]">
+            <h1 className="font-serif text-[1.75rem] sm:text-[2.1rem] md:text-[2.5rem] text-foreground leading-[1.14] tracking-[-0.012em] max-w-[24ch]">
               {query}
             </h1>
           </div>
 
-          {/* Trust bar */}
-          <div className="flex items-center gap-4 mb-12">
-            <div className="flex items-center gap-1.5 text-sage-muted">
-              <Shield size={13} />
-              <span className="font-sans text-[11px] font-light">AI-generated guidance</span>
-            </div>
-            <div className="w-px h-3 bg-border/40" />
-            <span className="font-sans text-[11px] font-light text-muted-foreground/60">
-              Check important health decisions with a qualified professional
-            </span>
-          </div>
+          {/* Quiet way back to the earlier turn — no snippet of the answer */}
+          {previousQuestion && (
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="inline-flex min-h-[44px] items-center gap-2 font-sans text-[12.5px] font-light text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40 rounded-full"
+            >
+              <ArrowLeft size={13} aria-hidden="true" />
+              Back to previous question
+            </button>
+          )}
         </div>
+
 
         {/* ── Loading state ── */}
         {isLoading && !answer && (

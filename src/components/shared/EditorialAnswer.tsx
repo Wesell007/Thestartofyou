@@ -100,6 +100,16 @@ const splitIntoModules = (md: string): AnswerModule[] => {
       return;
     }
 
+    // A plain label followed by a colon and the section body on the same line.
+    const plainLeadIn = line.match(/^\s{0,3}([A-Za-z][^:*_]{0,40}):\s+(.+)$/);
+    if (plainLeadIn && isSectionCardHeading(plainLeadIn[1])) {
+      flush();
+      currentHeading = plainLeadIn[1].trim();
+      currentBuffer.push(plainLeadIn[2].trim());
+      return;
+    }
+
+
 
     currentBuffer.push(line);
   });

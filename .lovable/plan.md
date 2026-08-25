@@ -6,7 +6,7 @@ Presentation and copy only. No backend, prompt, routing, sanitisation, schema, a
 
 `src/lib/answerSourceLinks.ts` — replace the exported `APPROVED_SOURCES_TRUST_LINE` value with:
 
-"Based on NHS and approved UK health sources. Uses medically reviewed guidance. This is not a diagnosis or a replacement for your midwife, GP or health visitor."
+"Based on NHS and approved UK health sources, including medically reviewed guidance where available. This is not a diagnosis or a replacement for your midwife, GP or health visitor."
 
 `src/pages/AskPage.tsx` — delete the second paragraph "AI-generated, not individually medically reviewed. Check important health decisions with a qualified professional." so there is one trust footer. Constant name and all sanitisation logic stay unchanged, so the companion panel picks up the new wording automatically (`CompanionMessageList.tsx` needs no edit).
 

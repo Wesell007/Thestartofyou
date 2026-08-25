@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams, Link, useLocation, useNavigate } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
 import EditorialAnswer from "@/components/shared/EditorialAnswer";
 import { sanitiseAiAnswer, sanitiseStreamingAiAnswer, APPROVED_SOURCES_TRUST_LINE } from "@/lib/aiAnswerSafety";
-import { ArrowLeft, Loader2, Search, ChevronRight, Heart, BookOpen, Compass, Sparkles, Shield, ArrowUpRight } from "lucide-react";
+import { resolveAskClarification, type AskClarificationChip } from "@/lib/askClarification";
+import { Loader2, Search, ChevronRight, Heart, BookOpen, Compass, Sparkles, Shield, ArrowUpRight, ArrowLeft } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useAISearch } from "@/hooks/useAISearch";
@@ -33,7 +33,11 @@ interface IVFLastStage {
 
 interface AskNavigationState {
   question?: string;
+  /** Context sent to the model. May carry the earlier turn of the conversation. */
   context?: string;
+  /** Short label shown to the reader. Never contains previous answer text. */
+  contextLabel?: string;
+  previousQuestion?: string;
 }
 
 const FIRST_YEAR_TOPIC_SUGGESTIONS: Record<string, string[]> = {
@@ -254,6 +258,7 @@ const AskPage = () => {
   const [newQuery, setNewQuery] = useState("");
   const [inputFocused, setInputFocused] = useState(false);
   const [ivfStage, setIvfStage] = useState<IVFLastStage | null>(null);
+  const followUpInputRef = useRef<HTMLInputElement | null>(null);
 
 
   useEffect(() => {

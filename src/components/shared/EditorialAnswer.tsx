@@ -195,15 +195,15 @@ const EditorialAnswer = ({ markdown, disableLinks = false }: Props) => {
   const blocks = groupIntoBlocks(modules);
 
   return (
-    <div className="max-w-[68ch] mx-auto space-y-12 md:space-y-16">
+    <div className="max-w-[68ch] mx-auto space-y-9 md:space-y-11">
       {blocks.map((block, blockIdx) => {
         if (block.kind === "flow") {
           return (
-            <div key={`flow-${blockIdx}`} className="space-y-10 md:space-y-12">
+            <div key={`flow-${blockIdx}`} className="space-y-8 md:space-y-9">
               {block.items.map((m, i) => (
                 <section key={i}>
                   {m.heading && (
-                    <h2 className="font-serif text-[1.55rem] md:text-[1.85rem] text-foreground leading-[1.22] tracking-[-0.014em] mb-5 md:mb-6">
+                    <h2 className="font-serif text-[1.45rem] md:text-[1.7rem] text-foreground leading-[1.25] tracking-[-0.014em] mb-4 md:mb-5">
                       {m.heading}
                     </h2>
                   )}
@@ -223,7 +223,7 @@ const EditorialAnswer = ({ markdown, disableLinks = false }: Props) => {
         return (
           <aside
             key={`callout-${blockIdx}`}
-            className={`group relative ${meta.surface} border ${meta.border} rounded-[1.75rem] px-7 py-10 md:px-12 md:py-12 shadow-[0_2px_24px_-12px_hsl(var(--foreground)/0.08)] overflow-hidden`}
+            className={`group relative ${meta.surface} border ${meta.border} rounded-[1.5rem] px-6 py-8 md:px-10 md:py-10 shadow-[0_2px_24px_-12px_hsl(var(--foreground)/0.08)] overflow-hidden`}
           >
             {/* Soft top accent line */}
             <div className={`absolute top-0 left-10 right-10 h-px ${meta.accent} opacity-20 bg-current`} />

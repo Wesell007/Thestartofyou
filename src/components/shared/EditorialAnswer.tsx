@@ -83,6 +83,14 @@ const splitIntoModules = (md: string): AnswerModule[] => {
       return;
     }
 
+    // A standalone label line, bold or plain, e.g. "What may help:".
+    const standalone = line.match(/^\s{0,3}(?:\*\*|__)?\s*([A-Za-z][^*_]*?)\s*(?:\*\*|__)?\s*:?\s*$/);
+    if (standalone && isSectionCardHeading(standalone[1])) {
+      flush();
+      currentHeading = standalone[1].trim().replace(/[:.\s]+$/, "");
+      return;
+    }
+
     const boldLeadIn = line.match(/^\s{0,3}(?:\*\*|__)([^*_]+?)(?:\*\*|__)\s*:?\s*(.*)$/);
     if (boldLeadIn && atParagraphStart(index) && isSectionCardHeading(boldLeadIn[1])) {
       flush();
@@ -91,6 +99,7 @@ const splitIntoModules = (md: string): AnswerModule[] => {
       if (remainder) currentBuffer.push(remainder);
       return;
     }
+
 
     currentBuffer.push(line);
   });

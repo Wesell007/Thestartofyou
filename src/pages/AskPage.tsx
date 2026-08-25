@@ -568,53 +568,51 @@ const AskPage = () => {
   }
 
 
+  // ── Board-derived companion surface metrics (Phase 29B.2b) ──
+  const columnClass = "relative z-10 mx-auto w-full max-w-[46rem] px-5 md:px-8";
+  const cardClass =
+    "relative overflow-hidden rounded-[22px] border border-border/40 bg-card shadow-soft";
+  const cardPad = "px-5 py-6 md:px-8 md:py-8";
+  const chipClass =
+    "inline-flex min-h-[44px] items-center rounded-full border border-border/40 bg-parchment px-4 font-sans text-[13px] font-light text-foreground/80 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40";
+  const labelClass =
+    "font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground/70";
+  const inputRowClass =
+    "flex items-center gap-3 rounded-[16px] border border-border/50 bg-parchment px-4 py-2 transition-all duration-300";
+  const sendButtonClass =
+    "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-sage text-parchment transition-colors hover:bg-sage/90 disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40";
+
   return (
     <div className="min-h-screen bg-parchment">
       <SeoHead title="Your AI-generated guidance | The Start of You" description="AI-generated guidance for your question." canonical="https://thestartofyou.com/ask" noindex />
       <Navbar />
 
-      <main className="relative pt-20 pb-24 md:pt-28 md:pb-32 overflow-hidden">
+      <main className="relative overflow-hidden pt-20 pb-16 md:pt-24 md:pb-24">
 
-        {/* ─────────────────────────────────────────────
-            ART-DIRECTED HERO BAND
-            Soft tonal wash + botanical accents framing
-            the question and quick answer.
-            ───────────────────────────────────────────── */}
-        <div className="absolute inset-x-0 top-0 h-[680px] md:h-[760px] pointer-events-none overflow-hidden">
+        {/* Soft tonal wash framing the companion column */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[320px] overflow-hidden md:h-[380px]">
           <div
-            className={`absolute inset-0 bg-gradient-to-b ${isIVF ? "from-lavender-bg/35" : "from-sage-bg/35"} via-parchment/60 to-parchment`}
+            className={`absolute inset-0 bg-gradient-to-b ${isIVF ? "from-lavender-bg/30" : "from-sage-bg/30"} via-parchment/70 to-parchment`}
             style={sc ? { background: `linear-gradient(to bottom, ${sc.bgWash}, hsl(var(--parchment)) 60%, hsl(var(--parchment)) 100%)` } : undefined}
           />
           {sc ? (
             <div
-              className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px] rounded-full blur-3xl pointer-events-none"
+              className="absolute top-[-160px] left-1/2 h-[360px] w-[720px] -translate-x-1/2 rounded-full blur-3xl"
               style={{ background: sc.accentSoft }}
               aria-hidden
             />
           ) : (
-            <StageGlow tone={tone.glow} className="top-[-200px] left-1/2 -translate-x-1/2 w-[1100px] h-[600px]" opacity={1} />
+            <StageGlow tone={tone.glow} className="top-[-160px] left-1/2 -translate-x-1/2 w-[720px] h-[360px]" opacity={0.85} />
           )}
-          <BotanicalAccent
-            className="top-24 -left-16 md:top-20 md:-left-6 rotate-[-10deg]"
-            opacity="opacity-[0.22]"
-            size="w-[200px] md:w-[300px]"
-          />
-          <BotanicalAccent
-            flip
-            className="top-40 -right-16 md:top-32 md:-right-4 rotate-[14deg]"
-            opacity="opacity-[0.18]"
-            size="w-[180px] md:w-[260px]"
-          />
         </div>
 
-        {/* ── Top frame: question context ── */}
-        <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
+        <div className={`${columnClass} space-y-5 md:space-y-7`}>
 
           {/* IVF orientation strip — only when arriving from an IVF stage */}
           {isIVF && (
             <nav
               aria-label="IVF journey context"
-              className="flex items-center gap-2 font-sans text-[11px] font-light tracking-[0.18em] uppercase text-muted-foreground/70 flex-wrap mb-6"
+              className="flex flex-wrap items-center gap-2 font-sans text-[11px] font-light uppercase tracking-[0.18em] text-muted-foreground/70"
             >
               <span className="text-foreground/55">IVF</span>
               {ivfStage && (
@@ -633,7 +631,7 @@ const AskPage = () => {
           )}
 
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 font-sans text-[11px] font-light tracking-wide text-muted-foreground mb-10 uppercase">
+          <nav className="flex items-center gap-2 font-sans text-[11px] font-light uppercase tracking-wide text-muted-foreground">
             <Link to={isIVF ? "/ivf" : "/pregnancy"} className="hover:text-foreground transition-colors">
               {isIVF ? "IVF" : "Explore"}
             </Link>
@@ -643,9 +641,9 @@ const AskPage = () => {
 
           {/* Stage context chip — display label only, never conversation text */}
           {displayContext && (
-            <div className="mb-5">
+            <div>
               <span
-                className={`inline-flex items-center gap-1.5 ${tone.chipBg} ${tone.chipText} font-sans text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full ring-1 ${tone.chipRing}`}
+                className={`inline-flex items-center gap-1.5 ${tone.chipBg} ${tone.chipText} font-sans text-[10px] font-medium uppercase tracking-widest px-3 py-1.5 rounded-full ring-1 ${tone.chipRing}`}
                 style={sc ? { backgroundColor: sc.accentSoft, color: sc.deep, boxShadow: `inset 0 0 0 1px ${sc.accentRing}` } : undefined}
               >
                 <span
@@ -657,15 +655,16 @@ const AskPage = () => {
             </div>
           )}
 
-          {/* Question title, editorial */}
-          <div className="mb-6">
-            <p
-              className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrowSoft} mb-3`}
-              style={sc ? { color: sc.accent } : undefined}
+          {/* Question bubble — compact, conversational */}
+          <div className="flex items-start gap-3">
+            <span
+              className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sage-bg/60"
+              style={sc ? { backgroundColor: sc.accentSoft } : undefined}
+              aria-hidden="true"
             >
-              You asked
-            </p>
-            <h1 className="font-serif text-[1.75rem] sm:text-[2.1rem] md:text-[2.5rem] text-foreground leading-[1.14] tracking-[-0.012em] max-w-[24ch]">
+              <Sprig tone={tone.sprigTone} className="h-4 w-4 opacity-70" />
+            </span>
+            <h1 className="rounded-[16px] border border-border/40 bg-card px-4 py-3 font-sans text-[15px] font-light leading-relaxed text-foreground shadow-soft md:text-[16px]">
               {query}
             </h1>
           </div>
@@ -675,56 +674,61 @@ const AskPage = () => {
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="inline-flex min-h-[44px] items-center gap-2 font-sans text-[12.5px] font-light text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40 rounded-full"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-full font-sans text-[12.5px] font-light text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40"
             >
               <ArrowLeft size={13} aria-hidden="true" />
               Back to previous question
             </button>
           )}
-        </div>
 
+          {/* ── Gentle clarification — broad, non-urgent question ── */}
+          {clarification && (
+            <section className={`${cardClass} ${cardPad} bg-blush-bg/40`}>
+              <BotanicalAccent
+                flip
+                className="-bottom-6 -right-6 rotate-[12deg]"
+                opacity="opacity-[0.14]"
+                size="w-[120px] md:w-[170px]"
+              />
+              <div className="relative flex items-start gap-3">
+                <span
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blush-bg/80 font-serif text-[15px] text-foreground/70"
+                  aria-hidden="true"
+                >
+                  ?
+                </span>
+                <div>
+                  <h2 className="font-serif text-[1.15rem] leading-[1.3] text-foreground md:text-[1.3rem]">
+                    Just to make sure I understand…
+                  </h2>
+                  <p className="mt-1.5 max-w-[52ch] font-sans text-[13.5px] font-light leading-relaxed text-muted-foreground">
+                    {clarification.question}
+                  </p>
+                </div>
+              </div>
 
-        {/* ══════════════════════════════════════════════════
-            GENTLE CLARIFICATION — broad, non-urgent question
-            ══════════════════════════════════════════════════ */}
-        {clarification && (
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
-            <div
-              className="relative overflow-hidden rounded-[1.75rem] border border-sage/20 bg-card px-6 py-8 md:px-10 md:py-10 shadow-soft"
-              style={sc ? { borderColor: sc.accentBorder } : undefined}
-            >
-              <Sprig tone={tone.sprigTone} className="absolute -top-1 right-4 w-12 h-12 opacity-20" />
-              <p
-                className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow} mb-4`}
-                style={sc ? { color: sc.accent } : undefined}
-              >
-                Just so I answer the right thing
-              </p>
-              <p className="font-serif text-[1.2rem] md:text-[1.4rem] text-foreground leading-[1.45] max-w-[46ch]">
-                {clarification.question}
-              </p>
-
-              <div className="mt-7 flex flex-wrap gap-2.5">
+              <div className="relative mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {clarification.chips.map((c) => (
                   <button
                     key={c.label}
                     type="button"
                     onClick={() => handleClarificationChip(c)}
-                    className={`inline-flex min-h-[44px] items-center rounded-full border border-border/50 bg-parchment px-5 font-sans text-[13px] font-light text-foreground/80
-                      ${tone.accentBorderHover} hover:text-foreground transition-colors
-                      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40`}
+                    className={`${chipClass} justify-center bg-card ${tone.accentBorderHover}`}
                   >
                     {c.label}
                   </button>
                 ))}
               </div>
 
-              <div className="mt-8 border-t border-border/30 pt-6">
+              <p className="relative mt-5 font-sans text-[12.5px] font-light text-muted-foreground/85">
+                Or you can rephrase your question.
+              </p>
+
+              <div className="relative mt-3">
                 <label htmlFor="ask-clarify-input" className="sr-only">
                   Ask in your own words
                 </label>
-                <div className="flex items-center gap-3 rounded-2xl border border-border/50 bg-parchment px-4 py-2">
-                  <Search size={16} className="shrink-0 text-sage-muted/70" style={sc ? { color: sc.accent } : undefined} />
+                <div className={`${inputRowClass} bg-card`}>
                   <input
                     id="ask-clarify-input"
                     ref={followUpInputRef}
@@ -732,291 +736,191 @@ const AskPage = () => {
                     value={newQuery}
                     onChange={(e) => setNewQuery(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder="Or tell me a little more…"
+                    placeholder="Ask in your own words…"
                     className="min-h-[44px] flex-1 bg-transparent font-sans text-[14px] font-light text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
                   />
                   <button
                     type="button"
                     onClick={handleAskAgain}
                     disabled={!newQuery.trim()}
-                    className="min-h-[44px] shrink-0 rounded-full bg-terracotta px-5 font-sans text-[13px] font-medium text-terracotta-foreground shadow-cta transition-colors hover:bg-terracotta-hover disabled:opacity-40 disabled:shadow-none"
+                    aria-label="Ask"
+                    className={sendButtonClass}
                   >
-                    Ask
+                    <ArrowUp size={17} aria-hidden="true" />
                   </button>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            </section>
+          )}
 
-        {/* ── Loading state ── */}
-        {isLoading && !answer && (
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
-            <div
-              className="relative overflow-hidden rounded-[1.75rem] border border-sage/15 bg-card px-6 py-12 md:px-10 md:py-16 shadow-soft"
-              style={sc ? { borderColor: sc.accentBorder } : undefined}
-            >
-              <div className="flex flex-col items-center text-center gap-4">
-                <div
-                  className="w-11 h-11 rounded-full bg-sage-bg/70 flex items-center justify-center ring-4 ring-sage-bg/40"
-                  style={sc ? { backgroundColor: sc.accentSoft, boxShadow: `0 0 0 4px ${sc.accentSofter}` } : undefined}
+          {/* ── Loading state ── */}
+          {isLoading && !answer && (
+            <section className={`${cardClass} ${cardPad}`}>
+              <div className="flex items-center gap-3">
+                <span
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sage-bg/70"
+                  style={sc ? { backgroundColor: sc.accentSoft } : undefined}
                 >
-                  <Loader2
-                    size={18}
-                    className="animate-spin text-sage"
-                    style={sc ? { color: sc.accent } : undefined}
-                  />
-                </div>
+                  <Loader2 size={16} className="animate-spin text-sage" style={sc ? { color: sc.accent } : undefined} />
+                </span>
                 <div>
-                  <p className="font-serif text-lg text-foreground mb-1.5">Thinking this through</p>
+                  <p className="font-serif text-[1.05rem] text-foreground">Thinking this through</p>
                   <p className="font-sans text-[13px] font-light text-muted-foreground">
                     One moment while I put this together…
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            </section>
+          )}
 
-        {/* ── Error ── */}
-        {error && (
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
-            <div className="bg-card border border-destructive/20 rounded-2xl p-8">
+          {/* ── Error ── */}
+          {error && (
+            <section className={`${cardClass} ${cardPad} border-destructive/25`}>
               <p className="font-sans text-sm font-light text-destructive">{error}</p>
-            </div>
-          </div>
-        )}
+            </section>
+          )}
 
-        {/* ══════════════════════════════════════════════════
-            IN BRIEF — the short answer
-            ══════════════════════════════════════════════════ */}
-        {parsed?.quickAnswer && (
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-12 relative z-10">
-            <div className="relative rounded-[1.75rem] overflow-hidden shadow-soft">
-              <div
-                className="absolute inset-0 bg-gradient-to-br from-sage-bg/45 via-card to-card pointer-events-none"
-                style={sc ? { background: `linear-gradient(135deg, ${sc.bgWash}, hsl(var(--card)) 60%, hsl(var(--card)))` } : undefined}
-              />
-              <Sprig tone={tone.sprigTone} className="absolute top-5 right-5 w-9 h-9 opacity-25" />
-
-              <div
-                className="relative border border-sage/20 rounded-[1.75rem] px-6 py-8 md:px-10 md:py-10"
-                style={sc ? { borderColor: sc.accentBorder } : undefined}
-              >
-                <div className="flex items-center gap-2.5 mb-5">
-                  <Sparkles size={13} className={tone.eyebrow} style={sc ? { color: sc.accent } : undefined} />
-                  <span
-                    className={`font-sans text-[10.5px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow}`}
-                    style={sc ? { color: sc.accent } : undefined}
-                  >
-                    In brief
-                  </span>
-                  <span className="h-px flex-1 bg-sage/20" style={sc ? { backgroundColor: sc.accentRing } : undefined} />
-                </div>
-
-                <p className="font-serif text-[1.15rem] md:text-[1.35rem] text-foreground leading-[1.6] max-w-[60ch] tracking-[-0.005em]">
+          {/* ── In brief — the short answer ── */}
+          {parsed?.quickAnswer && (
+            <section className={`${cardClass} ${cardPad} bg-sage-bg/25`}>
+              <Sprig tone={tone.sprigTone} className="absolute right-4 top-4 h-9 w-9 opacity-25" />
+              <div className="relative flex items-start gap-3">
+                <span
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-card"
+                  aria-hidden="true"
+                >
+                  <Sprig tone={tone.sprigTone} className="h-4 w-4 opacity-70" />
+                </span>
+                <p className="max-w-[52ch] font-serif text-[1.05rem] leading-[1.55] tracking-[-0.005em] text-foreground md:text-[1.2rem]">
                   {parsed.quickAnswer}
                 </p>
               </div>
-            </div>
-          </div>
-        )}
+            </section>
+          )}
 
-        {/* ══════════════════════════════════════════════════
-            MORE ON THIS — the fuller answer
-            ══════════════════════════════════════════════════ */}
-        {parsed?.rest && (
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-8 relative z-10">
-            <div className="flex items-center gap-3 mb-7">
-              <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-muted-foreground/70">
-                More on this
-              </span>
-              <span className="h-px flex-1 bg-border/30" />
-            </div>
+          {/* ── More on this — the fuller answer ── */}
+          {parsed?.rest && (
+            <section className={`${cardClass} ${cardPad}`}>
+              <BotanicalAccent
+                flip
+                className="-bottom-8 -right-8 rotate-[14deg]"
+                opacity="opacity-[0.14]"
+                size="w-[120px] md:w-[170px]"
+              />
+              <div className="relative">
+                <div className="mb-5 flex items-center gap-3">
+                  <span className={labelClass}>More on this</span>
+                  <span className="h-px flex-1 bg-border/30" />
+                </div>
 
-            <EditorialAnswer markdown={parsed.rest} disableLinks />
+                <EditorialAnswer markdown={parsed.rest} disableLinks />
 
-            {!isLoading && (
-              <div className="mt-10 border-t border-border/30 pt-6">
-                <div className="flex items-start gap-2.5">
-                  <Sprig tone={tone.sprigTone} className="mt-0.5 w-4 h-4 shrink-0 opacity-60" />
-                  <div className="space-y-1.5">
-                    <p className="font-sans text-[12px] font-light leading-relaxed text-muted-foreground">
+                {!isLoading && (
+                  <div className="mt-7 border-t border-border/30 pt-5 text-center">
+                    <Sprig tone={tone.sprigTone} className="mx-auto mb-2 h-5 w-5 opacity-50" />
+                    <p className="mx-auto max-w-[56ch] font-sans text-[12px] font-light leading-relaxed text-muted-foreground">
                       {APPROVED_SOURCES_TRUST_LINE}
                     </p>
-                    <p className="font-sans text-[12px] font-light leading-relaxed text-muted-foreground/80">
-                      AI-generated, not individually medically reviewed. Check important health decisions with a qualified professional.
-                    </p>
                   </div>
-                </div>
+                )}
               </div>
-            )}
-          </div>
-        )}
+            </section>
+          )}
 
-
-        {/* Streaming indicator */}
-        {isLoading && answer && (
-          <div className="container mx-auto px-6 md:px-10 max-w-3xl relative z-10">
-            <div className="flex items-center gap-2.5 mt-2 mb-8">
+          {/* Streaming indicator */}
+          {isLoading && answer && (
+            <div className="flex items-center gap-2.5">
               <Loader2 size={13} className={`animate-spin ${tone.accentText}`} style={sc ? { color: sc.accent } : undefined} />
-              <span className={`font-sans text-[11px] font-light ${tone.accentTextMuted} tracking-wide`} style={sc ? { color: sc.deepSoft } : undefined}>Still writing…</span>
+              <span className={`font-sans text-[11px] font-light tracking-wide ${tone.accentTextMuted}`} style={sc ? { color: sc.deepSoft } : undefined}>Still writing…</span>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* ══════════════════════════════════════════════════
-            POST-ANSWER SECTIONS (only when done)
-            ══════════════════════════════════════════════════ */}
-        {isDone && (
-          <>
-            {/* ── Follow-up prompts ── */}
-            <div className="container mx-auto px-6 md:px-10 max-w-3xl mt-14 mb-14 relative z-10">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-muted-foreground/70">
-                  Ask a follow-up
-                </span>
-                <span className="h-px flex-1 bg-border/25" />
-              </div>
-              <div className="flex flex-wrap gap-2.5">
-                {followUpPrompts.map((p) => (
-                  <button
-                    key={p}
-                    onClick={() => handleSuggestion(p)}
-                    className={`group inline-flex min-h-[44px] items-center gap-2.5 font-sans text-[13px] font-light text-foreground/75
-                      bg-card border border-border/40 rounded-full px-5
-                      ${tone.accentBorderHover} hover:text-foreground hover:bg-card hover:shadow-soft
-                      transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40`}
+          {/* ── Follow-up card ── */}
+          {isDone && (
+            <>
+              <section className={`${cardClass} ${cardPad}`}>
+                <Sprig tone={tone.sprigTone} className="absolute right-5 top-5 h-10 w-10 opacity-25" />
+                <div className="relative">
+                  <h2 className="font-serif text-[1.25rem] leading-[1.25] tracking-[-0.01em] text-foreground md:text-[1.45rem]">
+                    What would you like to know next?
+                  </h2>
+                  <p className="mt-1.5 max-w-[46ch] font-sans text-[13.5px] font-light leading-relaxed text-muted-foreground">
+                    Ask a follow-up or stay with this topic.
+                  </p>
+
+                  <div className={`${inputRowClass} mt-5`}
+                    style={sc && inputFocused ? { borderColor: sc.accentBorderStrong } : undefined}
                   >
-                    {p}
-                    <ChevronRight size={11} className={`text-border ${isIVF ? "group-hover:text-lavender" : "group-hover:text-sage"} group-hover:translate-x-0.5 transition-all`} />
-                  </button>
-                ))}
-              </div>
-              <p className="mt-5 font-sans text-[12.5px] font-light leading-relaxed text-muted-foreground/80">
-                Whatever you are going through, it is okay to ask.
-              </p>
-            </div>
-
-
-            {/* ── Continue your journey ── */}
-            <div className="container mx-auto px-6 md:px-10 max-w-3xl mb-20 relative z-10">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-muted-foreground/70">
-                  Continue your journey
-                </span>
-                <span className="h-px flex-1 bg-border/25" />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {tailLinks.map((l) => (
-                  <Link
-                    key={`${l.href}:${l.label}`}
-                    to={l.href}
-                    className={`group relative bg-card border border-border/40 rounded-2xl px-6 py-7
-                      ${tone.accentBorderHover} hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300 overflow-hidden`}
-                  >
-                    <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl ${isIVF ? "from-lavender-bg/40" : "from-sage-bg/40"} to-transparent rounded-bl-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
-                    <div className="flex items-start justify-between mb-3.5">
-                      <div className={`w-9 h-9 rounded-full ${tone.accentBgSoft} flex items-center justify-center ring-1 ${tone.accentRing} ${isIVF ? "group-hover:bg-lavender-bg/80" : "group-hover:bg-sage-bg/80"} transition-colors`}>
-                        <l.icon size={15} className={tone.accentText} />
-                      </div>
-                      <ArrowUpRight size={14} className={`text-border ${isIVF ? "group-hover:text-lavender" : "group-hover:text-sage"} group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all`} />
-                    </div>
-                    <p className="font-serif text-[15px] text-foreground mb-1">{l.label}</p>
-                    <p className="font-sans text-[11.5px] font-light text-muted-foreground leading-relaxed">{l.desc}</p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* ══════════════════════════════════════════════════
-                ASK ANOTHER QUESTION — continuation of the conversation
-                ══════════════════════════════════════════════════ */}
-            <div className="relative">
-              <div
-                className={`absolute inset-0 bg-gradient-to-b from-parchment ${isIVF ? "via-lavender-bg/12" : "via-sage-bg/12"} to-parchment pointer-events-none`}
-                style={sc ? { background: `linear-gradient(to bottom, hsl(var(--parchment)), ${sc.bgWashSoft} 50%, hsl(var(--parchment)))` } : undefined}
-              />
-
-              <div className="relative container mx-auto px-6 md:px-10 max-w-3xl py-14 md:py-16">
-                <div
-                  className={`relative bg-card border ${isIVF ? "border-lavender/15" : "border-sage/15"} rounded-[1.75rem] px-6 py-8 md:px-10 md:py-10 shadow-soft overflow-hidden`}
-                  style={sc ? { borderColor: sc.accentBorder } : undefined}
-                >
-                  <BotanicalAccent
-                    className="-bottom-10 -right-10 rotate-[18deg]"
-                    opacity="opacity-[0.12]"
-                    size="w-[160px] md:w-[210px]"
-                  />
-
-                  <div className="relative mb-6">
-                    <h2 className="font-serif text-[1.35rem] md:text-[1.6rem] text-foreground mb-2 leading-[1.25] tracking-[-0.01em]">
+                    <label htmlFor="ask-follow-up-input" className="sr-only">
                       Ask another question
-                    </h2>
-                    <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed max-w-[46ch]">
-                      Stay with this topic or ask about something new.
-                    </p>
+                    </label>
+                    <input
+                      id="ask-follow-up-input"
+                      ref={followUpInputRef}
+                      type="text"
+                      value={newQuery}
+                      onChange={(e) => setNewQuery(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      onFocus={() => setInputFocused(true)}
+                      onBlur={() => setInputFocused(false)}
+                      placeholder="Ask a follow-up question…"
+                      className="min-h-[44px] flex-1 bg-transparent font-sans text-[14px] font-light text-foreground placeholder:text-muted-foreground/50 focus:outline-none"
+                    />
+                    <button
+                      onClick={handleAskAgain}
+                      disabled={!newQuery.trim()}
+                      aria-label="Ask"
+                      className={sendButtonClass}
+                    >
+                      <ArrowUp size={17} aria-hidden="true" />
+                    </button>
                   </div>
 
-                  {/* Input */}
-                  <div className="relative">
-                    <div
-                      className={`relative bg-parchment border rounded-2xl px-4 py-2 flex items-center gap-3 transition-all duration-300 ${
-                        inputFocused
-                          ? `${isIVF ? "border-lavender/50 ring-2 ring-lavender/10" : "border-sage/50 ring-2 ring-sage/10"} shadow-soft`
-                          : "border-border/50"
-                      }`}
-                      style={sc && inputFocused ? { borderColor: sc.accentBorderStrong, boxShadow: `0 0 0 4px ${sc.accentSofter}` } : undefined}
-                    >
-                      <Search size={16} className={`${isIVF ? "text-lavender/60" : "text-sage-muted/60"} shrink-0`} style={sc ? { color: sc.accent } : undefined} />
-                      <label htmlFor="ask-follow-up-input" className="sr-only">
-                        Ask another question
-                      </label>
-                      <input
-                        id="ask-follow-up-input"
-                        ref={followUpInputRef}
-                        type="text"
-                        value={newQuery}
-                        onChange={(e) => setNewQuery(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        onFocus={() => setInputFocused(true)}
-                        onBlur={() => setInputFocused(false)}
-                        placeholder="Type your next question…"
-                        className="min-h-[44px] flex-1 bg-transparent font-sans text-[14px] font-light text-foreground placeholder:text-muted-foreground/50 focus:outline-none"
-                      />
-                      <button
-                        onClick={handleAskAgain}
-                        disabled={!newQuery.trim()}
-                        className="min-h-[44px] shrink-0 rounded-full bg-terracotta px-5 font-sans text-[13px] font-medium text-terracotta-foreground shadow-cta
-                          transition-colors hover:bg-terracotta-hover
-                          disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none
-                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40"
-                      >
-                        Ask
-                      </button>
-                    </div>
-
-                    {/* Suggestion chips */}
-                    <div className="flex flex-wrap gap-2 mt-5">
-                      {["Is it normal?", "What should I expect?", "I'm not sure what I'm feeling"].map((s) => (
+                  <div className="mt-6 border-t border-border/30 pt-5">
+                    <p className={`${labelClass} mb-3`}>Suggested follow-ups</p>
+                    <div className="flex flex-wrap gap-2">
+                      {followUpPrompts.map((p) => (
                         <button
-                          key={s}
-                          onClick={() => handleSuggestion(s)}
-                          className={`inline-flex min-h-[44px] items-center font-sans text-[12.5px] font-light text-muted-foreground bg-card/60 border border-border/40 rounded-full px-4
-                            ${tone.accentBorderHover} hover:text-foreground hover:bg-card transition-colors
-                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40`}
+                          key={p}
+                          onClick={() => handleSuggestion(p)}
+                          className={`${chipClass} ${tone.accentBorderHover}`}
                         >
-                          {s}
+                          {p}
                         </button>
                       ))}
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </section>
 
-          </>
-        )}
+              {/* ── Continue your journey ── */}
+              <section>
+                <div className="mb-3 flex items-center gap-3">
+                  <span className={labelClass}>Continue your journey</span>
+                  <span className="h-px flex-1 bg-border/25" />
+                </div>
+                <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+                  {tailLinks.map((l) => (
+                    <Link
+                      key={`${l.href}:${l.label}`}
+                      to={l.href}
+                      className={`group rounded-[16px] border border-border/40 bg-card px-4 py-4 transition-colors ${tone.accentBorderHover}`}
+                    >
+                      <div className="mb-2 flex items-start justify-between">
+                        <span className={`flex h-8 w-8 items-center justify-center rounded-full ${tone.accentBgSoft}`}>
+                          <l.icon size={14} className={tone.accentText} />
+                        </span>
+                        <ArrowUpRight size={13} className="text-border transition-transform group-hover:-translate-y-0.5" />
+                      </div>
+                      <p className="font-serif text-[14.5px] text-foreground">{l.label}</p>
+                      <p className="font-sans text-[11.5px] font-light leading-relaxed text-muted-foreground">{l.desc}</p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            </>
+          )}
+        </div>
       </main>
 
       <Footer />

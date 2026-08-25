@@ -186,7 +186,7 @@ const EditorialAnswer = ({ markdown, disableLinks = false }: Props) => {
 
   if (modules.length === 0) {
     return (
-      <article className={`${proseClasses} max-w-[68ch] mx-auto`}>
+      <article className={`${proseClasses} max-w-[62ch]`}>
         <ReactMarkdown components={mdComponents}>{markdown}</ReactMarkdown>
       </article>
     );

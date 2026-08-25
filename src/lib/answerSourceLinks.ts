@@ -12,7 +12,7 @@
 
 /** The non-clickable line shown in place of source links. */
 export const APPROVED_SOURCES_TRUST_LINE =
-  "Guidance is checked against approved UK health sources.";
+  "Based on NHS and approved UK health sources, including medically reviewed guidance where available. This is not a diagnosis or a replacement for your midwife, GP or health visitor.";
 
 const SOURCE_HEADING = /^\s{0,3}(?:#{1,6}\s*|\*\*\s*)?(sources?|references?|further reading|useful links?)\b\s*:?\s*\*{0,2}\s*$/i;
 

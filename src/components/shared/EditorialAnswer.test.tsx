@@ -67,4 +67,13 @@ Read [the NHS page](https://www.nhs.uk/) for more.`);
     expect(container.querySelectorAll("a")).toHaveLength(0);
     expect(container.textContent).toContain("the NHS page");
   });
+
+  it("handles plain label lines used instead of markdown headings", () => {
+    const { container } = renderAnswer(
+      "What this means:\n- Common symptoms: tiredness.\n\nWhat may help:\n- Rest when you can.\n\nWhen to seek support: Speak to your midwife if symptoms are severe.",
+    );
+    const cards = container.querySelectorAll("[data-answer-section-card]");
+    expect(cards).toHaveLength(3);
+    expect(cards[2].textContent).toContain("Speak to your midwife");
+  });
 });

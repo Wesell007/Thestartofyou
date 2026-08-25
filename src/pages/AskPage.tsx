@@ -333,42 +333,67 @@ const AskPage = () => {
       ].filter(Boolean) as typeof relatedLinks
     : relatedLinks;
 
+  // A short, broad, non-urgent question is met with a gentle clarification
+  // instead of a generated answer. Anything with concern wording is never
+  // clarified and flows to the model exactly as before.
+  const clarification = query ? resolveAskClarification(query) : null;
+
+  // Label shown to the reader. Conversation context carried for the model is
+  // never displayed, so no previous answer text can leak into the page.
+  const displayContext =
+    navigationState?.contextLabel ??
+    (context && !/Previous (question|answer):/.test(context) ? context : undefined);
+  const previousQuestion = navigationState?.previousQuestion;
+
   useEffect(() => {
     const requestKey = `${query}\u0000${context ?? ""}`;
-    if (query && requestKey !== lastQueryRef.current) {
+    if (query && !clarification && requestKey !== lastQueryRef.current) {
       lastQueryRef.current = requestKey;
       reset();
       ask(query, context);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, [query, context, ask, reset]);
+  }, [query, context, clarification, ask, reset]);
+
+  const goToQuestion = (question: string) => {
+    const params = new URLSearchParams();
+    if (isIVF) params.set("journey", "ivf");
+    if (stageKey) params.set("stage", stageKey);
+    const nextContext = [context, query ? `Previous question: ${query}` : null, answer ? `Previous answer: ${answer}` : null]
+      .filter(Boolean)
+      .join("\n\n");
+    navigate(`/ask${params.toString() ? `?${params.toString()}` : ""}`, {
+      state: {
+        question,
+        context: nextContext || undefined,
+        contextLabel: displayContext,
+        previousQuestion: query || undefined,
+      },
+    });
+  };
 
   const handleAskAgain = () => {
     if (!newQuery.trim()) return;
-    const params = new URLSearchParams();
-    if (isIVF) params.set("journey", "ivf");
-    if (stageKey) params.set("stage", stageKey);
-    const nextContext = [context, query ? `Previous question: ${query}` : null, answer ? `Previous answer: ${answer}` : null]
-      .filter(Boolean)
-      .join("\n\n");
+    const next = newQuery.trim();
     setNewQuery("");
-    navigate(`/ask${params.toString() ? `?${params.toString()}` : ""}`, {
-      state: { question: newQuery.trim(), context: nextContext || undefined },
-    });
+    goToQuestion(next);
   };
 
-  const handleSuggestion = (s: string) => {
-    const params = new URLSearchParams();
-    if (isIVF) params.set("journey", "ivf");
-    if (stageKey) params.set("stage", stageKey);
-    const nextContext = [context, query ? `Previous question: ${query}` : null, answer ? `Previous answer: ${answer}` : null]
-      .filter(Boolean)
-      .join("\n\n");
-    navigate(`/ask${params.toString() ? `?${params.toString()}` : ""}`, {
-      state: { question: s, context: nextContext || undefined },
-    });
-  };
+  const handleSuggestion = (s: string) => goToQuestion(s);
 
+  /**
+   * Clarification chips always submit a full question, so a chip can never
+   * return the reader to the same clarification card. The concern chip opens
+   * the input instead, so the person can describe what is happening.
+   */
+  const handleClarificationChip = (chip: AskClarificationChip) => {
+    if (chip.focusInput) {
+      setNewQuery(chip.question);
+      followUpInputRef.current?.focus();
+      return;
+    }
+    goToQuestion(chip.question);
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") handleAskAgain();

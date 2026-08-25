@@ -49,6 +49,9 @@ Handled in the frontend, no backend or infrastructure change.
 - The guard matches on concern signals (worried, scared, urgent, help now, emergency, pain, bleeding, reduced/no movement, breathing, fever, temperature, not feeding/eating, severe, sudden, dizzy, faint, cramp, discharge) rather than on the presence of a topic noun. A query is only clarified when it is short, matches a broad topic, and carries no concern signal.
 - When a query is flagged, `/ask` renders a clarification state instead of calling the model: warm question, chips that re-ask a specific version of the query, and the normal input below. No urgent-care fallback text appears.
 - "Milestones" -> "Do you mean pregnancy milestones, baby milestones, toddler development, or something you have noticed recently?" with chips: Pregnancy milestones / Baby milestones / Toddler development / Something I am worried about.
+- Every chip carries an explicit full question, not the chip label. Clicking a chip submits that question directly to the AI, so it can never re-enter the clarification state. Examples: "What pregnancy milestones should I know about?", "What baby milestones should I know about?", "What toddler development changes should I know about?".
+- The "Something I am worried about" chip does not submit a broad term. It focuses the input with a concern-led prompt so the person can describe what is happening in their own words; if it does submit, it submits a concern-led question that the guard treats as non-ambiguous. The same clarification card is never shown twice in a row.
+- Guaranteed by construction: the resolver only ever flags short bare topic terms, and every chip question is a full sentence well past that threshold, so chip submissions bypass clarification. A test asserts each chip question resolves to "not ambiguous".
 
 
 ## 7. Trust line

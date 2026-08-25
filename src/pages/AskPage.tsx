@@ -930,60 +930,38 @@ const AskPage = () => {
             </div>
 
             {/* ══════════════════════════════════════════════════
-                ASK SOMETHING ELSE — premium continuation moment
+                ASK ANOTHER QUESTION — continuation of the conversation
                 ══════════════════════════════════════════════════ */}
-            <div className="relative mt-8">
-              {/* Full-width premium wash */}
+            <div className="relative">
               <div
-                className={`absolute inset-0 bg-gradient-to-b from-parchment ${isIVF ? "via-lavender-bg/15" : "via-sage-bg/15"} to-parchment pointer-events-none`}
+                className={`absolute inset-0 bg-gradient-to-b from-parchment ${isIVF ? "via-lavender-bg/12" : "via-sage-bg/12"} to-parchment pointer-events-none`}
                 style={sc ? { background: `linear-gradient(to bottom, hsl(var(--parchment)), ${sc.bgWashSoft} 50%, hsl(var(--parchment)))` } : undefined}
               />
-              {sc ? (
-                <div
-                  className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px] rounded-full blur-3xl pointer-events-none"
-                  style={{ background: sc.accentSoft, opacity: 0.7 }}
-                  aria-hidden
-                />
-              ) : (
-                <StageGlow tone={tone.glow} className="top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[900px] h-[400px]" opacity={0.7} />
-              )}
 
-              <div className="relative container mx-auto px-6 md:px-10 max-w-3xl py-20 md:py-28">
+              <div className="relative container mx-auto px-6 md:px-10 max-w-3xl py-14 md:py-16">
                 <div
-                  className={`relative bg-card border ${isIVF ? "border-lavender/15" : "border-sage/15"} rounded-[2rem] px-7 py-12 md:px-14 md:py-16 shadow-elevated overflow-hidden`}
+                  className={`relative bg-card border ${isIVF ? "border-lavender/15" : "border-sage/15"} rounded-[1.75rem] px-6 py-8 md:px-10 md:py-10 shadow-soft overflow-hidden`}
                   style={sc ? { borderColor: sc.accentBorder } : undefined}
                 >
-                  {/* Botanical art-direction */}
                   <BotanicalAccent
-                    className="-top-10 -left-10 rotate-[-18deg]"
-                    opacity="opacity-[0.14]"
-                    size="w-[180px] md:w-[230px]"
-                  />
-                  <BotanicalAccent
-                    flip
                     className="-bottom-10 -right-10 rotate-[18deg]"
-                    opacity="opacity-[0.14]"
-                    size="w-[180px] md:w-[230px]"
+                    opacity="opacity-[0.12]"
+                    size="w-[160px] md:w-[210px]"
                   />
-                  <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full bg-sage/[0.06] blur-3xl pointer-events-none" />
 
-                  <div className="relative text-center mb-9">
-                    <SprigDivider tone={tone.sprigTone} className="mb-6" />
-                  <p className={`font-sans text-[10px] font-medium tracking-[0.22em] uppercase ${tone.eyebrow} mb-4`} style={sc ? { color: sc.accent } : undefined}>
-                      Your next question
-                    </p>
-                    <h2 className="font-serif text-[1.75rem] md:text-[2.1rem] text-foreground mb-3 leading-[1.2] tracking-[-0.01em]">
-                      What else is on your mind?
+                  <div className="relative mb-6">
+                    <h2 className="font-serif text-[1.35rem] md:text-[1.6rem] text-foreground mb-2 leading-[1.25] tracking-[-0.01em]">
+                      Ask another question
                     </h2>
-                    <p className="font-sans text-[14px] font-light text-muted-foreground max-w-md mx-auto leading-relaxed">
-                      Keep going — we're here for every part of the journey, no question too small.
+                    <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed max-w-[46ch]">
+                      Stay with this topic or ask about something new.
                     </p>
                   </div>
 
                   {/* Input */}
-                  <div className="relative max-w-xl mx-auto">
+                  <div className="relative">
                     <div
-                      className={`relative bg-parchment border rounded-2xl px-5 py-4 md:px-6 md:py-5 flex items-center gap-4 transition-all duration-300 ${
+                      className={`relative bg-parchment border rounded-2xl px-4 py-2 flex items-center gap-3 transition-all duration-300 ${
                         inputFocused
                           ? `${isIVF ? "border-lavender/50 ring-2 ring-lavender/10" : "border-sage/50 ring-2 ring-sage/10"} shadow-soft`
                           : "border-border/50"
@@ -991,7 +969,12 @@ const AskPage = () => {
                       style={sc && inputFocused ? { borderColor: sc.accentBorderStrong, boxShadow: `0 0 0 4px ${sc.accentSofter}` } : undefined}
                     >
                       <Search size={16} className={`${isIVF ? "text-lavender/60" : "text-sage-muted/60"} shrink-0`} style={sc ? { color: sc.accent } : undefined} />
+                      <label htmlFor="ask-follow-up-input" className="sr-only">
+                        Ask another question
+                      </label>
                       <input
+                        id="ask-follow-up-input"
+                        ref={followUpInputRef}
                         type="text"
                         value={newQuery}
                         onChange={(e) => setNewQuery(e.target.value)}
@@ -999,27 +982,29 @@ const AskPage = () => {
                         onFocus={() => setInputFocused(true)}
                         onBlur={() => setInputFocused(false)}
                         placeholder="Type your next question…"
-                        className="flex-1 bg-transparent font-sans text-sm font-light text-foreground placeholder:text-muted-foreground/50 focus:outline-none"
+                        className="min-h-[44px] flex-1 bg-transparent font-sans text-[14px] font-light text-foreground placeholder:text-muted-foreground/50 focus:outline-none"
                       />
                       <button
                         onClick={handleAskAgain}
                         disabled={!newQuery.trim()}
-                        className="bg-terracotta text-terracotta-foreground rounded-full px-6 py-2.5 font-sans text-[13px] font-medium shadow-cta
-                          hover:bg-terracotta-hover transition-all duration-300 shrink-0
-                          disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
+                        className="min-h-[44px] shrink-0 rounded-full bg-terracotta px-5 font-sans text-[13px] font-medium text-terracotta-foreground shadow-cta
+                          transition-colors hover:bg-terracotta-hover
+                          disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none
+                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40"
                       >
-                        Ask now
+                        Ask
                       </button>
                     </div>
 
                     {/* Suggestion chips */}
-                    <div className="flex flex-wrap gap-2 mt-6 justify-center">
+                    <div className="flex flex-wrap gap-2 mt-5">
                       {["Is it normal?", "What should I expect?", "I'm not sure what I'm feeling"].map((s) => (
                         <button
                           key={s}
                           onClick={() => handleSuggestion(s)}
-                          className={`font-sans text-[12px] font-light text-muted-foreground bg-card/60 border border-border/40 rounded-full px-4 py-2
-                            ${tone.accentBorderHover} hover:text-foreground hover:bg-card hover:shadow-soft transition-all duration-200`}
+                          className={`inline-flex min-h-[44px] items-center font-sans text-[12.5px] font-light text-muted-foreground bg-card/60 border border-border/40 rounded-full px-4
+                            ${tone.accentBorderHover} hover:text-foreground hover:bg-card transition-colors
+                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40`}
                         >
                           {s}
                         </button>
@@ -1029,6 +1014,7 @@ const AskPage = () => {
                 </div>
               </div>
             </div>
+
           </>
         )}
       </main>

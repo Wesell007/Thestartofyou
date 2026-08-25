@@ -12,7 +12,7 @@ interface Props {
   disableLinks?: boolean;
 }
 
-type ModuleTone = "neutral" | "help" | "seek" | "reassurance";
+type ModuleTone = "neutral" | "help" | "seek" | "reassurance" | "section";
 
 interface AnswerModule {
   tone: ModuleTone;
@@ -21,12 +21,24 @@ interface AnswerModule {
 }
 
 /**
+ * Routine top-level answer sections that render as quiet premium inner cards.
+ * Matched only against a real H2/H3 heading, never against the same wording
+ * appearing inside a sentence, bullet or nested callout.
+ */
+const SECTION_CARD_HEADINGS = ["what this means", "what may help", "when to seek support"];
+
+const isSectionCardHeading = (heading: string) =>
+  SECTION_CARD_HEADINGS.includes(heading.trim().replace(/[:.\s]+$/, "").toLowerCase());
+
+/**
  * Heuristically classify an H2/H3 heading. We deliberately collapse most
  * headings into "neutral" so the answer reads as one fluid editorial piece,
  * and reserve framed callouts for the few moments that genuinely deserve
  * stronger emphasis (help, seek, reassurance).
  */
 const classify = (heading: string): ModuleTone => {
+  // Routine answer sections take precedence so they read as calm section cards.
+  if (isSectionCardHeading(heading)) return "section";
   const h = heading.toLowerCase();
   if (/(seek|call|emergency|urgent|red flag|warning|when to (call|see|contact))/.test(h)) return "seek";
   if (/(may help|what helps|tips|practical|gentle (steps|practices)|relief|coping|do today|do now)/.test(h)) return "help";
@@ -34,7 +46,14 @@ const classify = (heading: string): ModuleTone => {
   return "neutral";
 };
 
-/** Split markdown at H2/H3 boundaries. */
+
+/**
+ * Split markdown at H2/H3 boundaries. Answers sometimes label a routine
+ * section with a bold lead-in at the very start of a paragraph instead of a
+ * markdown heading, so an approved section label in that position is treated
+ * as a section boundary too. The same wording inside a sentence, a bullet or
+ * further into a paragraph is left untouched.
+ */
 const splitIntoModules = (md: string): AnswerModule[] => {
   const lines = md.split("\n");
   const modules: AnswerModule[] = [];
@@ -53,19 +72,33 @@ const splitIntoModules = (md: string): AnswerModule[] => {
     currentHeading = undefined;
   };
 
-  for (const line of lines) {
+  const atParagraphStart = (index: number) =>
+    index === 0 || lines[index - 1].trim() === "";
+
+  lines.forEach((line, index) => {
     const headingMatch = line.match(/^(#{2,3})\s+(.+?)\s*$/);
     if (headingMatch) {
       flush();
       currentHeading = headingMatch[2].replace(/[*_`]/g, "").trim();
-    } else {
-      currentBuffer.push(line);
+      return;
     }
-  }
+
+    const boldLeadIn = line.match(/^\s{0,3}(?:\*\*|__)([^*_]+?)(?:\*\*|__)\s*:?\s*(.*)$/);
+    if (boldLeadIn && atParagraphStart(index) && isSectionCardHeading(boldLeadIn[1])) {
+      flush();
+      currentHeading = boldLeadIn[1].trim().replace(/[:.\s]+$/, "");
+      const remainder = boldLeadIn[2].trim();
+      if (remainder) currentBuffer.push(remainder);
+      return;
+    }
+
+    currentBuffer.push(line);
+  });
   flush();
 
   return modules.filter((m) => m.heading || m.body);
 };
+
 
 /**
  * Group consecutive neutral modules into a single fluid block so the body
@@ -73,6 +106,7 @@ const splitIntoModules = (md: string): AnswerModule[] => {
  */
 type Block =
   | { kind: "flow"; items: AnswerModule[] }
+  | { kind: "section"; module: AnswerModule }
   | { kind: "callout"; tone: "help" | "seek" | "reassurance"; module: AnswerModule };
 
 const groupIntoBlocks = (modules: AnswerModule[]): Block[] => {
@@ -89,6 +123,9 @@ const groupIntoBlocks = (modules: AnswerModule[]): Block[] => {
   for (const m of modules) {
     if (m.tone === "neutral") {
       flow.push(m);
+    } else if (m.tone === "section") {
+      flushFlow();
+      blocks.push({ kind: "section", module: m });
     } else {
       flushFlow();
       blocks.push({ kind: "callout", tone: m.tone, module: m });
@@ -97,6 +134,7 @@ const groupIntoBlocks = (modules: AnswerModule[]): Block[] => {
   flushFlow();
   return blocks;
 };
+
 
 type CalloutTone = "help" | "seek" | "reassurance";
 
@@ -216,7 +254,28 @@ const EditorialAnswer = ({ markdown, disableLinks = false }: Props) => {
           );
         }
 
+        if (block.kind === "section") {
+          const m = block.module;
+          return (
+            <section
+              key={`section-${blockIdx}`}
+              data-answer-section-card
+              className="rounded-[16px] border border-border/40 bg-parchment/70 px-5 py-5 md:px-6 md:py-6"
+            >
+              {m.heading && (
+                <h2 className="font-serif text-[1.1rem] md:text-[1.25rem] text-foreground leading-[1.3] tracking-[-0.01em] mb-3 md:mb-4">
+                  {m.heading}
+                </h2>
+              )}
+              <article className={`${proseClasses} prose-p:mb-4 prose-ul:my-4 prose-ol:my-4`}>
+                <ReactMarkdown components={mdComponents}>{m.body}</ReactMarkdown>
+              </article>
+            </section>
+          );
+        }
+
         const meta = calloutMeta[block.tone];
+
         const Icon = meta.Icon;
         const m = block.module;
 

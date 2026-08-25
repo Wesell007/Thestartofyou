@@ -3,11 +3,11 @@ import { useSearchParams, Link, useLocation, useNavigate } from "react-router-do
 import EditorialAnswer from "@/components/shared/EditorialAnswer";
 import { sanitiseAiAnswer, sanitiseStreamingAiAnswer, APPROVED_SOURCES_TRUST_LINE } from "@/lib/aiAnswerSafety";
 import { resolveAskClarification, type AskClarificationChip } from "@/lib/askClarification";
-import { Loader2, Search, ChevronRight, Heart, BookOpen, Compass, Sparkles, Shield, ArrowUpRight, ArrowLeft, ArrowUp } from "lucide-react";
+import { Loader2, ChevronRight, Heart, BookOpen, Compass, ArrowUpRight, ArrowLeft, ArrowUp } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useAISearch } from "@/hooks/useAISearch";
-import { BotanicalAccent, StageGlow, SprigDivider, Sprig } from "@/components/shared/StageBotanical";
+import { BotanicalAccent, StageGlow, Sprig } from "@/components/shared/StageBotanical";
 import { getAiStageStyle, stageColors } from "@/lib/aiStageStyles";
 import SeoHead from "@/components/seo/SeoHead";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";

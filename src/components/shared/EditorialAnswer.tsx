@@ -195,11 +195,11 @@ const EditorialAnswer = ({ markdown, disableLinks = false }: Props) => {
   const blocks = groupIntoBlocks(modules);
 
   return (
-    <div className="max-w-[68ch] mx-auto space-y-9 md:space-y-11">
+    <div className="max-w-[62ch] space-y-6 md:space-y-8">
       {blocks.map((block, blockIdx) => {
         if (block.kind === "flow") {
           return (
-            <div key={`flow-${blockIdx}`} className="space-y-8 md:space-y-9">
+            <div key={`flow-${blockIdx}`} className="space-y-5 md:space-y-6">
               {block.items.map((m, i) => (
                 <section key={i}>
                   {m.heading && (

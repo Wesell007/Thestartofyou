@@ -12,39 +12,50 @@ Presentation and copy only. No backend, prompt, routing, sanitisation, schema, a
 
 Unrelated surfaces (`Terms.tsx`, `SupportAISupport.tsx`) are left alone; they are not the Ask/companion answer trust line.
 
-## 2. Companion-surface composition (desktop and mobile)
+## 2. Board-derived design contract (applied literally in code)
 
-Restructure the answer route in `AskPage.tsx` so the whole answer is one contained companion column rather than a stack of full-width article bands.
+Values read off `src/assets/ask-direction-board.png` and used as the shared card system for every Ask state:
 
-- Wrap question + In brief + More on this + trust footer in a single shared column container (`max-w-[46rem]`, `px-5 md:px-8`, one wrapper instead of six repeated containers) so alignment and rhythm are consistent.
-- Question area becomes compact: keep the `h1` for accessibility but drop it to `text-[1.2rem] md:text-[1.5rem]`, tighten the eyebrow, reduce breadcrumb bottom margin from `mb-10` to `mb-6`, and place the question inside the top of the answer surface rather than as a page title over an empty band.
-- Reduce hero band height and blur-orb scale so the top wash frames the card instead of dominating an empty page.
-- Vertical rhythm: replace the `mb-12` / `mt-14 mb-14` / `mb-20` / `py-14 md:py-16` sequence with a consistent `space-y-6 md:space-y-8` inside the column, and main padding `pt-16 md:pt-20 pb-20`.
+- Column: `mx-auto w-full max-w-[46rem] px-5 md:px-8` (one wrapper, not six repeated containers).
+- Surfaces: `rounded-[22px]`, `bg-card`, hairline `border border-border/40`, `shadow-soft` only (no elevated shadows, no double glow layers).
+- Inner padding: `px-5 py-6 md:px-8 md:py-8`; nested sub-surfaces `rounded-[16px] px-4 py-4`.
+- Section spacing inside the column: `space-y-5 md:space-y-7`. Page padding `pt-20 pb-16 md:pt-24 md:pb-24`.
+- Question bubble (board panels 2, 8, 9): small sprig avatar circle `h-9 w-9 rounded-full bg-sage-bg/60` next to a `rounded-[16px] bg-parchment/80 border border-border/40 px-4 py-3` bubble.
+- One botanical accent per card, low opacity, bottom-right or top-right only, `w-[120px] md:w-[170px]`, `opacity-[0.14]`.
+- Body measure capped at `max-w-[62ch]`; short answer at `max-w-[52ch]`.
 
-## 3. Answer surfaces (card quality per the board)
+## 3. Answer state (board panels 2, 3, 4, 8, 9)
 
-- **In brief**: keep the gradient card, tighten to `px-5 py-7 md:px-9 md:py-9`, keep one sprig, cap measure at 58ch.
-- **More on this**: the fuller answer no longer floats as bare text. Place `EditorialAnswer` inside a paper card (`bg-card`, hairline `border-border/40`, `rounded-[1.5rem]`, `shadow-soft`, `px-5 py-7 md:px-9 md:py-9`) with the quiet section label inside the card top and a single low-opacity botanical accent. Body measure capped so lines stay readable at 1440px.
-- **Trust footer**: hairline rule + sprig + one line, inside the same card at its base.
-- **Loading / error**: match the same card metrics so states do not jump.
-- `EditorialAnswer.tsx`: only if needed after the card wrap, trim its outermost top spacing so it does not double-pad inside the new card. No parsing, tone, sanitisation or `disableLinks` change.
+Restructure the answer route of `src/pages/AskPage.tsx` into a single companion column.
 
-## 4. Follow-up area as "continue the conversation"
+- **Question**: the large `h1` page title is removed as a visual device. The `h1` remains for accessibility but renders as the board's compact question bubble at `text-[15px] md:text-[16px]` with the sprig avatar; breadcrumb margin drops `mb-10` -> `mb-5`; the tall hero wash shrinks from `h-[680px]/[760px]` to `h-[320px] md:h-[380px]` with a smaller blur orb, so the top of the page frames the card instead of an empty band.
+- **In brief (board panel 3)**: card with the same avatar mark, serif summary at `text-[1.05rem] md:text-[1.2rem]`, `max-w-[52ch]`, one sprig, tightened padding.
+- **More on this (board panel 4)**: `EditorialAnswer` moves inside a paper card with the label as a quiet card header, so the fuller answer never floats as bare text; one botanical accent at the card edge as in the board.
+- **Trust footer (board panel 7)**: hairline rule + centred sprig + the single approved trust line, inside the base of the same answer card.
+- Loading and error states adopt identical card metrics so states do not jump.
+- `src/components/shared/EditorialAnswer.tsx`: reduce the outer `space-y-12/16` rhythm to `space-y-6 md:space-y-8` and trim first/last child margins so it sits correctly inside the card. No parsing, tone, sanitisation or `disableLinks` change.
 
-Merge the current "Ask a follow-up" chip list and the separate "Ask another question" band into one contained follow-up card at the end of the column:
+## 4. Follow-up card (board panel 5)
 
-- heading "Ask another question", subline "Stay with this topic or ask about something new."
-- input row and starter chips in the same card, `gap-2.5`, 44px minimum height, visible `focus-visible` rings, hover raises border to the stage accent with a soft background rather than a shadow pop.
-- one reassurance line, one botanical accent, no duplicated glow layers.
-- "Continue your journey" tail links stay but move to a quieter 3-up grid below the follow-up card with reduced padding.
+Merge the current "Ask a follow-up" chip list and the separate full-bleed "Ask another question" band into one card matching the board:
 
-## 5. Clarification card parity
+- serif heading "What would you like to know next?" plus subline, botanical sprig top-right.
+- rounded input row with a circular accent send button, `min-h-[44px]`, visible `focus-visible` ring.
+- hairline divider, then "Suggested follow-ups" label and pill chips at `gap-2` with 44px targets and accent-border hover.
+- "Continue your journey" tail links stay, but as a quieter 3-up grid with reduced padding below the follow-up card.
 
-Same column width and card metrics as the answer surfaces, with the compact question area above it, chips in the shared premium chip style, input row matching the follow-up input, one sprig plus one soft botanical accent, and enough bottom spacing that it never sits tight against the footer on a short page.
+## 5. Clarification card (board panel 6)
 
-## 6. Empty state
+Rebuild to the board tile: soft blush-tinted surface, circular `?` mark, serif "Just to make sure I understand…" heading with the resolver question beneath, two-column chip grid on desktop and stacked on mobile, "Or you can rephrase your question." line above the shared input row, botanical accent right side, same column width and card metrics as the answer surfaces.
 
-Bring the empty/prompt state onto the same column width, card metrics and chip style so all three states read as one system.
+## 6. Empty state (board panel 1)
+
+Rebuild inside the same column as a single centred card: sprig mark, serif "How can I help you today?", one-line subline, the shared rounded input with circular send button, and an "Examples:" chip row using the same chip style, so all states read as one system.
+
+## 7. Nano Banana parity gate
+
+Before the report, capture Playwright screenshots at 390px and 1440px for empty, answer (short answer and More on this in frame), follow-up, clarification and urgent states, and compare each against its board panel. Any state that does not match the board's containment, radius, padding rhythm or card structure is corrected before the phase is reported. If a state cannot be matched with the current component structure, the report says exactly why instead of claiming parity.
+
 
 ## Tests
 

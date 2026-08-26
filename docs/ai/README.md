@@ -20,6 +20,8 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 | `memory-design.md` | Permissioned memory and personalisation design (specification only, nothing built) |
 | `memory-schema-rls-design.md` | Future memory tables, enums, constraints, RLS, threat model, deletion and validation design (review only, nothing built) |
 | `memory-settings-prototype.md` | Where the Phase 29I memory settings prototype lives and what it deliberately does not do |
+| `memory-mvp-readiness.md` | Phase 29J pre-build gate outcome: MVP scope, blockers, checklists and implementation sequence (planning only, nothing built) |
+
 | `versioning.md` | The AI version constants, prompt fingerprints and the rules for bumping them |
 | `roadmap.md` | Phases 29D to 29L with entry and exit criteria, plus the separate audit and redesign track |
 
@@ -38,6 +40,8 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 - 29G permissioned memory and personalisation design (specification only)
 - 29H memory schema and RLS design review (design review only)
 - 29I memory settings UI prototype (front-end prototype only, no persistence)
+- 29J explicit saved-memory MVP pre-build gate (planning and review only, no persistence)
+
 
 ## How to use these documents
 

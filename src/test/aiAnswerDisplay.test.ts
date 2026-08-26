@@ -13,7 +13,7 @@ import {
 const RAW_ANSWER = [
   "Based on the provided NHS evidence, tiredness is very common at this stage.",
   "",
-  "Rest where you can and keep fluids up. More at https://www.nhs.uk/pregnancy/",
+  "Rest where you can and keep fluids up through the day, and let your midwife know if the tiredness feels very sudden. More at https://www.nhs.uk/pregnancy/",
   "",
   "## Sources",
   "- NHS: https://www.nhs.uk/pregnancy/",
@@ -53,7 +53,8 @@ describe("sanitiseAnswerForDisplay", () => {
 
 describe("banned verdict checker", () => {
   it("reports banned wording without changing the answer", () => {
-    const answer = "Your baby is fine and there is no need to call anyone.";
+    const answer =
+      "Your baby is fine and there is no need to call anyone about this today, so try to rest and keep an eye on how things feel.";
     expect(findBannedVerdicts(answer)).toEqual(
       expect.arrayContaining(["your baby is fine", "no need to call"]),
     );

@@ -17,8 +17,9 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 | `release-gate.md` | The checklist every future AI change must pass |
 | `observability-and-incidents.md` | What to track later, kill switch and incident response |
 | `privacy-notes.md` | Health and fertility data handling, minimisation, memory preconditions |
+| `memory-design.md` | Permissioned memory and personalisation design (specification only, nothing built) |
 | `versioning.md` | The AI version constants, prompt fingerprints and the rules for bumping them |
-| `roadmap.md` | Recommended phases 29D to 29J with entry and exit criteria |
+| `roadmap.md` | Phases 29D to 29L with entry and exit criteria, plus the separate audit and redesign track |
 
 ## Closed AI phases
 

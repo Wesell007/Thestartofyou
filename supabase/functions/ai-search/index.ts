@@ -1,8 +1,14 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { parseAiSearchBody } from "../_shared/validation.ts";
 import { DAY_RECAP_UNAVAILABLE_ANSWER, getAiModeConfig } from "../_shared/aiModes.ts";
+import { AI_MODEL_ID, AI_VERSION_SUMMARY } from "../_shared/aiVersions.ts";
 import { selectSources } from "../_shared/aiSources.ts";
 import { AI_PAUSED_ANSWER, isAiDisabled, matchUrgent, urgentAnswer } from "../_shared/urgentPatterns.ts";
+
+// Internal traceability only: version data is logged once per cold start and
+// never reaches a browser or an answer.
+console.log("ai-search versions", JSON.stringify(AI_VERSION_SUMMARY));
+
 
 const DEFAULT_ORIGINS = [
   "https://thestartofyou.com",
@@ -203,7 +209,7 @@ serve(async (req) => {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
+        model: AI_MODEL_ID,
         messages: [{ role: "system", content: modeConfig.systemPrompt }, { role: "user", content: userContent }],
         stream: true,
         max_tokens: 700,

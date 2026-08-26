@@ -43,6 +43,8 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 - 29H memory schema and RLS design review (design review only)
 - 29I memory settings UI prototype (front-end prototype only, no persistence)
 - 29J explicit saved-memory MVP pre-build gate (planning and review only, no persistence)
+- Companion name personalisation cleanup (no default companion name anywhere)
+- 30A AI content grounding readiness audit (audit only, nothing built, nothing authorised)
 
 
 ## How to use these documents

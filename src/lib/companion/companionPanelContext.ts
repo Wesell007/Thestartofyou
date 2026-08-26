@@ -13,6 +13,13 @@
 import type { CompanionMode } from "./companionMode";
 import { companionRouteFamily } from "./companionMode";
 import type { CompanionTone } from "@/lib/companion";
+import {
+  buildPregnancyAiContext,
+  pregnancyToneHint,
+  resolvePregnancyPageFamily,
+  resolvePregnancyRouteWeek,
+} from "@/lib/pregnancyAiContext";
+
 
 /** Matches the existing shared cap used by the other context builders. */
 export const COMPANION_PANEL_CONTEXT_MAX_LENGTH = 500;

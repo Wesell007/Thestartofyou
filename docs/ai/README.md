@@ -17,6 +17,7 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 | `release-gate.md` | The checklist every future AI change must pass |
 | `observability-and-incidents.md` | What to track later, kill switch and incident response |
 | `privacy-notes.md` | Health and fertility data handling, minimisation, memory preconditions |
+| `versioning.md` | The AI version constants, prompt fingerprints and the rules for bumping them |
 | `roadmap.md` | Recommended phases 29D to 29J with entry and exit criteria |
 
 ## Closed AI phases
@@ -28,12 +29,16 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 - 29B.2b Ask visual parity and trust copy
 - 29B.2c "More on this" premium section cards
 - 29C this framework
+- 29D safety harness, kill switch and hard escalation gaps
+- 29E mode, prompt registry and output hygiene cleanup
 
 ## How to use these documents
 
 1. Before starting AI work, read `purpose-and-scope.md` and `safety-taxonomy.md`. If the proposed feature falls outside the supported scope, it does not get built.
 2. While building, follow `answer-patterns.md` for wording and `escalation-matrix.md` for escalation behaviour.
-3. Before shipping, work through `release-gate.md` in full and record the result in the phase report.
-4. When something goes wrong in production, follow `observability-and-incidents.md`, then add the failing prompt to `eval-dataset-v1.json` before re-release.
+3. When changing a prompt, follow `versioning.md`: update the pinned fingerprint and bump the version constants in the same commit.
+4. Before shipping, work through `release-gate.md` in full and record the result in the phase report.
+5. When something goes wrong in production, follow `observability-and-incidents.md`, then add the failing prompt to `eval-dataset-v1.json` before re-release.
 
-The evaluation dataset is data only in this phase. The harness that runs it is Phase 29D.
+The deterministic harness over the evaluation dataset runs in the normal test suite (`src/test/aiSafetyHarness.test.ts`).
+

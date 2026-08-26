@@ -9,8 +9,7 @@ import { useEffect, useRef } from "react";
 import EditorialAnswer from "@/components/shared/EditorialAnswer";
 import {
   APPROVED_SOURCES_TRUST_LINE,
-  sanitiseAiAnswer,
-  sanitiseStreamingAiAnswer,
+  sanitiseAnswerForDisplay,
 } from "@/lib/aiAnswerSafety";
 import { useCompanion } from "./CompanionProvider";
 import { companionStyles } from "./companionStyles";
@@ -57,7 +56,7 @@ export default function CompanionMessageList() {
           </div>
         ) : (
           <div key={turn.id} className={companionStyles.assistantCard}>
-            <EditorialAnswer markdown={sanitiseAiAnswer(turn.text)} disableLinks />
+            <EditorialAnswer markdown={sanitiseAnswerForDisplay(turn.text)} disableLinks />
             <p className="mt-4 font-sans text-[11px] font-light text-muted-foreground/70">
               {APPROVED_SOURCES_TRUST_LINE}
             </p>
@@ -67,7 +66,10 @@ export default function CompanionMessageList() {
 
       {streamingAnswer ? (
         <div className={companionStyles.assistantCard} aria-live="polite">
-          <EditorialAnswer markdown={sanitiseStreamingAiAnswer(streamingAnswer)} disableLinks />
+          <EditorialAnswer
+            markdown={sanitiseAnswerForDisplay(streamingAnswer, { isStreaming: true })}
+            disableLinks
+          />
         </div>
       ) : null}
 

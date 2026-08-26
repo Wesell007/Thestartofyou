@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Sparkles, ArrowRight, Loader2 } from "lucide-react";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 import { useAISearch } from "@/hooks/useAISearch";
+import { sanitiseAnswerForDisplay } from "@/lib/aiAnswerSafety";
 import { toneLabel } from "@/lib/companion";
 import {
   buildCompanionContext,
@@ -25,15 +26,6 @@ const CHIPS = [
 
 const accent = "hsl(var(--stage-pregnancy-accent))";
 
-/** Splits any trailing sources block off the streamed answer. */
-const splitSources = (raw: string) => {
-  const match = raw.match(/\n\s*(?:#+\s*)?(?:sources?|references?)\s*:?\s*\n/i);
-  if (!match || match.index === undefined) return { body: raw, sources: "" };
-  return {
-    body: raw.slice(0, match.index).trim(),
-    sources: raw.slice(match.index + match[0].length).trim(),
-  };
-};
 
 /** Renders inline markdown emphasis and bullet markers as plain typography. */
 const renderInline = (text: string) =>
@@ -116,7 +108,7 @@ const SectionAskAI = ({ week, seed, dueDate }: Props) => {
   };
 
 
-  const { body, sources } = splitSources(answer);
+  const body = sanitiseAnswerForDisplay(answer, { isStreaming: isLoading });
 
   return (
     <section className="relative pt-2 pb-11 sm:pb-12">
@@ -252,17 +244,6 @@ const SectionAskAI = ({ week, seed, dueDate }: Props) => {
                   <div className="font-sans text-[14.5px] text-foreground/85 leading-[1.75] space-y-2">
                     {renderAnswerLines(body)}
                   </div>
-
-                  {sources && (
-                    <details className="mt-3">
-                      <summary className="cursor-pointer font-sans text-[11px] tracking-[0.18em] uppercase text-foreground/45">
-                        Sources
-                      </summary>
-                      <p className="mt-2 font-sans text-[12.5px] text-foreground/55 leading-relaxed whitespace-pre-line break-words">
-                        {sources}
-                      </p>
-                    </details>
-                  )}
                 </div>
               )}
 

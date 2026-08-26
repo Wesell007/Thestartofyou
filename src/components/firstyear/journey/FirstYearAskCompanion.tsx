@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Loader2, Sparkles } from "lucide-react";
 import { useAISearch } from "@/hooks/useAISearch";
+import { sanitiseAnswerForDisplay } from "@/lib/aiAnswerSafety";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 import { toneLabel } from "@/lib/companion";
 import {
@@ -35,15 +36,6 @@ const CHIPS = [
 
 
 
-/** Splits any trailing sources block off the streamed answer. */
-const splitSources = (raw: string) => {
-  const match = raw.match(/\n\s*(?:#+\s*)?(?:sources?|references?)\s*:?\s*\n/i);
-  if (!match || match.index === undefined) return { body: raw, sources: "" };
-  return {
-    body: raw.slice(0, match.index).trim(),
-    sources: raw.slice(match.index + match[0].length).trim(),
-  };
-};
 
 const renderInline = (text: string) =>
   text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
@@ -119,7 +111,7 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
     });
   };
 
-  const { body, sources } = splitSources(answer);
+  const body = sanitiseAnswerForDisplay(answer, { isStreaming: isLoading });
 
   return (
     <section className="pb-10" aria-labelledby="ask-companion">
@@ -249,17 +241,6 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
                   <div className="font-sans text-[14.5px] text-foreground leading-[1.75] space-y-2">
                     {renderAnswerLines(body)}
                   </div>
-
-                  {sources && (
-                    <details className="mt-3">
-                      <summary className="cursor-pointer font-sans text-[11px] tracking-[0.18em] uppercase text-[hsl(var(--stage-firstyear-text-soft))]">
-                        Sources
-                      </summary>
-                      <p className="mt-2 font-sans text-[12.5px] text-[hsl(var(--stage-firstyear-text-soft))] leading-relaxed whitespace-pre-line break-words">
-                        {sources}
-                      </p>
-                    </details>
-                  )}
                 </div>
               )}
 

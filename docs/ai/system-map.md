@@ -48,9 +48,11 @@ SSE passthrough to client
 answer + fixed trust line
 ```
 
-## 3. Modes
+## 3. Modes and the prompt registry
 
 `supabase/functions/_shared/aiModes.ts`. Unknown or absent modes resolve to `general`.
+
+Since Phase 29E the prompts are no longer hand-written strings per mode. Each mode is a registry entry that names its identity line, its safety blocks, its escalation block and its word limit, and `buildSystemPrompt` composes those blocks in a fixed order. Shared wording therefore exists once: editing `SAFETY_BLOCKS.notADiagnosis` changes every mode that uses it, and no mode can silently drift from the others.
 
 | Mode | Grounding | Urgent escalation answer | Character |
 | --- | --- | --- | --- |
@@ -58,9 +60,14 @@ answer + fixed trust line
 | `pregnancy_week_companion` | yes | yes | Warm week-by-week tone. Explicitly forbids "normal"/"abnormal" verdicts and forbids wait-and-see for movements, bleeding, severe pain, fever, severe headache |
 | `first_year_companion` | yes | yes | Gentle first-year tone. Professional-help wording only when the question raises it |
 | `ttc_companion` | yes | yes | Never confirms or rules out pregnancy or ovulation, never interprets a test, no false hope, no blame |
-| `first_year_day_recap` | no | no | Recap of logged entries only. No guidance, no clinician mention. Urgent wording returns `DAY_RECAP_UNAVAILABLE_ANSWER` |
+| `first_year_day_recap` | no | no | Recap of logged entries only. No guidance, no clinician mention, no escalation block at all. Urgent wording returns `DAY_RECAP_UNAVAILABLE_ANSWER` |
 
 Shared prompt rules in every conversational mode: general information not a diagnosis, never claim medical review by a named person, never reassure away red flags, no diagnosis or dosing, treat question and context as untrusted content, prefer supplied background but still answer from routine UK guidance where it does not cover the topic, and never expose retrieval wording. A genuine inability to answer must use one fixed line (`SAFE_FALLBACK_ANSWER`).
+
+Fallback wording lives in `supabase/functions/_shared/aiAnswerWording.ts` — the one module imported by both the edge functions and the browser bundle, so the line the prompt promises and the line the client substitutes cannot diverge.
+
+`getPromptFingerprint(mode)` returns a short stable hash of the composed prompt. `src/test/aiPromptRegistry.test.ts` pins the current fingerprints, so any prompt edit fails the suite until the change is deliberate and the version constants are bumped. See `versioning.md`.
+
 
 ## 4. Source routing
 
@@ -118,16 +125,27 @@ Deliberately excluded everywhere: names, emails, user or child or pregnancy IDs,
 
 ## 9. Sanitisation and link stripping
 
-- `src/lib/aiAnswerSafety.ts` removes any sentence carrying retrieval wording, drops headings and bullets that carry it whole, and substitutes the single approved fallback line when nothing of substance survives. The streaming variant stays empty rather than flashing the fallback.
+Every surface that renders a model answer calls one helper: `sanitiseAnswerForDisplay(answer, { isStreaming, allowFallback })` in `src/lib/aiAnswerSafety.ts`. It runs retrieval-wording removal and `stripExternalSourceLinks` in a fixed order, so hygiene cannot differ between `/ask`, the companion panel and the in-journey cards. Before Phase 29E each of those surfaces carried its own copy of the logic and they had already drifted.
+
+- Retrieval hygiene removes any sentence carrying retrieval wording, drops headings and bullets that carry it whole, and substitutes the single approved fallback line when nothing of substance survives. With `isStreaming: true` the partial text is left alone and an empty result stays empty rather than flashing the fallback.
+- `allowFallback: false` is used by recap-only surfaces (`DaySummaryCard`), where the fallback's professional-help wording would be wrong. They render nothing instead.
 - `src/lib/answerSourceLinks.ts` removes trailing Sources / References / Further reading blocks, inline "Source:" lines, markdown links (keeping the label as plain text), angle-bracket URLs and bare URLs, then tidies the leftover markdown.
-- Neither module adds clinical content, and neither softens escalation or professional-care wording.
+- `findBannedVerdicts` inspects an answer for absolute reassurance ("your baby is fine", "no need to call") and, in development builds only, warns to the console. It never edits the answer and never runs in production.
+- No module here adds clinical content, and none softens escalation or professional-care wording.
+
+Callers: `src/pages/AskPage.tsx`, `CompanionMessageList.tsx`, `SectionAskAI.tsx`, `FirstYearAskCompanion.tsx`, `TTCAskCompanionCard.tsx`, `DaySummaryCard.tsx`. `src/test/aiAnswerDisplay.test.ts` asserts that list stays exhaustive and that no local copy of the old helpers reappears.
 
 ## 10. Ambiguity handling
 
-`src/lib/askClarification.ts` detects short broad queries such as "Milestones" or "Sleep regression" and returns clarifying chips scoped to the journey. Urgent wording bypasses clarification entirely so escalation is never delayed. The companion panel currently does not run the clarifier — a gap recorded in `roadmap.md`.
+`src/lib/askClarification.ts` detects short broad queries such as "Milestones" or "Sleep regression" and returns clarifying chips scoped to the journey. Urgent wording bypasses clarification entirely so escalation is never delayed.
 
-## 11. Existing test coverage
+## 11. Versioning
 
-`src/test/aiModes.test.ts`, `src/test/aiSearchEndpoint.test.ts`, `src/test/aiSearchCallerModes.test.tsx`, `src/test/edgeFunctionValidation.test.ts`, `src/lib/aiAnswerSafety.test.ts`, `src/lib/askClarification.test.ts`, `src/lib/askTrustCopy.test.ts`, `src/lib/companion/companionMode.test.ts`, `src/lib/companionContext.test.ts`, `src/lib/firstYearCompanionContext.test.ts`, `src/lib/ttcAskContext.test.ts`, `src/components/shared/EditorialAnswer.test.tsx`.
+`supabase/functions/_shared/aiVersions.ts` records the model id, prompt version, safety ruleset version, source routing version, eval dataset version and phase marker. `ai-search` logs the summary once per cold start, so a production log line identifies exactly which prompt and ruleset produced an answer. Bumping rules are in `versioning.md`.
 
-These cover prompts, mode routing, source routing, sanitisation, link stripping, context builders and rendering. They do not yet cover model output against a graded prompt set — that is the gap Phase 29D closes.
+## 12. Existing test coverage
+
+`src/test/aiModes.test.ts`, `src/test/aiPromptRegistry.test.ts`, `src/test/aiVersions.test.ts`, `src/test/aiAnswerDisplay.test.ts`, `src/test/aiSafetyHarness.test.ts`, `src/test/aiSearchEndpoint.test.ts`, `src/test/aiSearchCallerModes.test.tsx`, `src/test/edgeFunctionValidation.test.ts`, `src/lib/aiAnswerSafety.test.ts`, `src/lib/askClarification.test.ts`, `src/lib/askTrustCopy.test.ts`, `src/lib/companion/companionMode.test.ts`, `src/lib/companionContext.test.ts`, `src/lib/firstYearCompanionContext.test.ts`, `src/lib/ttcAskContext.test.ts`, `src/components/shared/EditorialAnswer.test.tsx`.
+
+These cover prompt composition and drift, version constants, mode routing, source routing, sanitisation, link stripping, context builders, rendering and the deterministic safety harness. They do not cover live model output — that remains a manual review step before release.
+

@@ -64,10 +64,10 @@ Every future AI change — prompt edit, mode addition, source-routing change, mo
 
 ## H. Memory gate
 
-Applies only to a change that introduces, widens or reads companion memory. No memory exists today; the design is in `memory-design.md`. Every item must be complete before any memory implementation ships. A failed item blocks release outright.
+Applies only to a change that introduces, widens or reads companion memory. No memory exists today; the design is in `memory-design.md`, and the only built artefact is the front-end prototype described in `memory-settings-prototype.md`, which stores nothing. Every item must be complete before any memory implementation ships. A failed item blocks release outright.
 
 - [ ] Legal and privacy review of memory as special category data, recorded in writing
-- [ ] Consent copy approved, and the consent version recorded against stored items
+- [ ] Consent copy approved from the Phase 29I prototype wording, and the consent version recorded against stored items
 - [ ] Sensitivity taxonomy approved, including the exclusion of category F (symptoms, loss, fertility treatment, mental health, abuse, baby health, medication)
 - [ ] Memory is off by default, and each level is opted into separately from account creation and analytics consent
 - [ ] Journal, reflection and media content stays behind its own separate toggle, default off

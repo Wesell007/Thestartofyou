@@ -37,7 +37,7 @@ Deliberately excluded by construction: names, emails, user IDs, child IDs, pregn
 
 ## 5. Preconditions for future memory work
 
-The full design is in `memory-design.md` (Phase 29G, specification only), and the table, policy, deletion and validation shape it implies is reviewed in `memory-schema-rls-design.md` (Phase 29H, design review only). Nothing in either is built: no schema, table, migration, RLS policy, settings screen or memory behaviour exists today. This section is the privacy summary of that design and the list of things that must exist before memory ships.
+The full design is in `memory-design.md` (Phase 29G, specification only), and the table, policy, deletion and validation shape it implies is reviewed in `memory-schema-rls-design.md` (Phase 29H, design review only). A front-end prototype of the settings surface exists at the hidden route `/prototype/memory-settings` (Phase 29I): it holds synthetic examples in local component state only, with no persistence, no Supabase access, no browser storage, no network call and no connection to the companion. Nothing else is built: no schema, table, migration, RLS policy or memory behaviour exists today. This section is the privacy summary of that design and the list of things that must exist before memory ships.
 
 Governing rules from the design:
 

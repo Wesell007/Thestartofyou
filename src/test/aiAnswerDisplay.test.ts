@@ -65,34 +65,36 @@ describe("banned verdict checker", () => {
   });
 });
 
+/** Every source file under src, read at build time by Vite. */
+const SOURCES = import.meta.glob("/src/**/*.{ts,tsx}", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+
 /** Every component that renders a model answer must use the shared helper. */
 const AI_SURFACES = [
-  "src/pages/AskPage.tsx",
-  "src/components/companion/CompanionMessageList.tsx",
-  "src/components/myweek/SectionAskAI.tsx",
-  "src/components/firstyear/journey/FirstYearAskCompanion.tsx",
-  "src/components/ttc/journey/TTCAskCompanionCard.tsx",
-  "src/components/firstyear/today/DaySummaryCard.tsx",
+  "/src/pages/AskPage.tsx",
+  "/src/components/companion/CompanionMessageList.tsx",
+  "/src/components/myweek/SectionAskAI.tsx",
+  "/src/components/firstyear/journey/FirstYearAskCompanion.tsx",
+  "/src/components/ttc/journey/TTCAskCompanionCard.tsx",
+  "/src/components/firstyear/today/DaySummaryCard.tsx",
 ];
-
-const walk = (dir: string): string[] =>
-  readdirSync(dir).flatMap((entry) => {
-    const full = `${dir}/${entry}`;
-    if (statSync(full).isDirectory()) return walk(full);
-    return /\.tsx?$/.test(entry) && !/\.(test|spec)\.tsx?$/.test(entry) ? [full] : [];
-  });
 
 describe("output hygiene is consistent across surfaces", () => {
   it("routes every AI surface through sanitiseAnswerForDisplay", () => {
     for (const file of AI_SURFACES) {
-      expect(readFileSync(file, "utf8"), file).toContain("sanitiseAnswerForDisplay");
+      expect(SOURCES[file], `${file} was not found`).toBeTypeOf("string");
+      expect(SOURCES[file], file).toContain("sanitiseAnswerForDisplay");
     }
   });
 
   it("has no local source-splitting helpers left anywhere", () => {
-    const offenders = walk("src").filter((file) =>
-      /const splitSources\s*=/.test(readFileSync(file, "utf8")),
-    );
+    const offenders = Object.entries(SOURCES)
+      .filter(([file]) => !/\.(test|spec)\.tsx?$/.test(file))
+      .filter(([, source]) => /const splitSources\s*=/.test(source))
+      .map(([file]) => file);
     expect(offenders).toEqual([]);
   });
 });

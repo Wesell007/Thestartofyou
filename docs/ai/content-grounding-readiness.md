@@ -364,3 +364,17 @@ Every review and approval field is optional in the type. "Missing" is representa
 ### Remaining blockers before any article can ground
 
 Per-article sensitivity assessment, content versioning, recorded owner distinct from reviewer, reviewed dates inside a freshness window, an agreed reviewer sign-off process, and evaluation rows covering archived, deprecated and review-lapsed cases. Phase 30D remains gated on those.
+
+## Phase 30D — registry drift guard and review queue
+
+Governance and QA only. No article approved, no AI behaviour changed, no version constant bumped.
+
+**Drift guard.** `src/test/articleGroundingDrift.test.ts` compares the registry against the live article datasets on every test run: every article slug has a record, every record maps to an existing article, there are no duplicate slugs, no record is `approved`, `listGroundingEligibleSlugs()` is empty and unknown slugs stay not approved. Failures name the drifting slugs. The datasets are imported in that test file only; the same test asserts that `articleGroundingRegistry.ts` and `articleGroundingEligibility.ts` import no `src/data/` module and no AI module, and that helper output carries a slug plus reason codes with no article text.
+
+**Coverage result.** 206 articles, 206 records, 0 missing, 0 orphaned, 0 duplicates, 0 approved.
+
+**Review queue.** `article-grounding-review-queue.md` records counts by journey, approval status, sensitivity and editorial state; the gaps (206 missing owner, content version, reviewer and reviewed date; 31 with no source list); the cautious tier order (brand and product guidance, then low-risk education, then wellbeing, then health-reviewed, then safety-sensitive, with `not_allowed` permanently excluded); and the blocked-to-candidate and candidate-to-approved exit criteria.
+
+**Review template.** `article-grounding-review-template.md` is the per-article form. Completing it does not approve an article.
+
+**Status.** Start of You article grounding remains blocked. The next gated step is tier 1 per-article review.

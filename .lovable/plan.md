@@ -6,7 +6,10 @@ Front-end prototype only. No memory behaviour, no database, no network, no stora
 
 A new hidden route `/prototype/memory-settings`, mounted in `src/App.tsx` above the catch-all and not linked from any navigation. It uses `SeoHead` with `noindex`. The sitemap generator works from explicit allowlists in `scripts/generate-sitemap.ts`, so the route is excluded without editing that script.
 
-The page reuses the existing signed-in chrome (`MyWeekHeader` / `MyWeekFooter`) for visual continuity but does no auth or Supabase work.
+Two mandatory guards:
+
+- **Companion suppressed.** `/prototype` is added to `COMPANION_HIDDEN_PREFIXES` in `src/lib/companion/companionSurface.ts`, so the launcher and panel never appear on the prototype route.
+- **No auth or Supabase chrome.** `MyWeekHeader` runs `useLifecycle` and Supabase sign-out, so it is not reused. A static prototype-only header and footer in `src/components/memory-prototype/` match the chrome visually with no auth, journey or user-data work.
 
 ## Visual direction
 

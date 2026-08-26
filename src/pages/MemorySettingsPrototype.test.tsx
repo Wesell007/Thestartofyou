@@ -10,8 +10,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import sitemapSource from "../../scripts/generate-sitemap.ts?raw";
+import appSource from "../App.tsx?raw";
+import pageSource from "./MemorySettingsPrototype.tsx?raw";
+import chromeSource from "../components/memory-prototype/PrototypeChrome.tsx?raw";
+import headerSource from "../components/myweek/MyWeekHeader.tsx?raw";
 
 const supabaseFrom = vi.fn();
 const supabaseGetSession = vi.fn();
@@ -35,7 +38,7 @@ const renderPage = () =>
     </HelmetProvider>,
   );
 
-let fetchSpy: ReturnType<typeof vi.spyOn>;
+let fetchSpy: ReturnType<typeof vi.fn>;
 let localSetSpy: ReturnType<typeof vi.spyOn>;
 let localGetSpy: ReturnType<typeof vi.spyOn>;
 let sessionSetSpy: ReturnType<typeof vi.spyOn>;
@@ -43,9 +46,10 @@ let sessionGetSpy: ReturnType<typeof vi.spyOn>;
 
 beforeEach(() => {
   vi.clearAllMocks();
-  fetchSpy = vi.spyOn(globalThis, "fetch" as never).mockImplementation((() => {
+  fetchSpy = vi.fn(() => {
     throw new Error("fetch must not be called from the memory settings prototype");
-  }) as never);
+  });
+  vi.stubGlobal("fetch", fetchSpy);
   localSetSpy = vi.spyOn(Storage.prototype, "setItem");
   localGetSpy = vi.spyOn(Storage.prototype, "getItem");
   sessionSetSpy = vi.spyOn(window.sessionStorage, "setItem");
@@ -53,6 +57,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
 
@@ -155,23 +160,15 @@ describe("MemorySettingsPrototype", () => {
   });
 
   it("keeps the prototype out of the source files and the sitemap generator", () => {
-    const sitemap = readFileSync(resolve("scripts/generate-sitemap.ts"), "utf8");
-    expect(sitemap).not.toContain("/prototype");
-    const app = readFileSync(resolve("src/App.tsx"), "utf8");
-    expect(app).toContain('path="/prototype/memory-settings"');
+    expect(sitemapSource).not.toContain("/prototype");
+    expect(appSource).toContain('path="/prototype/memory-settings"');
     // No navigation surface links to the prototype.
-    const nav = readFileSync(resolve("src/components/myweek/MyWeekHeader.tsx"), "utf8");
-    expect(nav).not.toContain("/prototype");
+    expect(headerSource).not.toContain("/prototype");
   });
 
   it("does not import the Supabase client from the prototype sources", () => {
-    const page = readFileSync(resolve("src/pages/MemorySettingsPrototype.tsx"), "utf8");
-    expect(page).not.toContain("integrations/supabase");
-    const chrome = readFileSync(
-      resolve("src/components/memory-prototype/PrototypeChrome.tsx"),
-      "utf8",
-    );
-    expect(chrome).not.toContain("integrations/supabase");
-    expect(chrome).not.toContain("useLifecycle");
+    expect(pageSource).not.toContain("integrations/supabase");
+    expect(chromeSource).not.toContain("integrations/supabase");
+    expect(chromeSource).not.toContain("useLifecycle");
   });
 });

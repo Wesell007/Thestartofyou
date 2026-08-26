@@ -2,22 +2,23 @@
 
 Governance and editorial-status resolution only. No article is approved, no article content reaches AI runtime, no RAG/retrieval/vector search/embeddings/ingestion/chunking, no prompt, mode, safety, endpoint, renderer, Ask, companion, schema, route or SEO change. `AI_SOURCE_ROUTING_VERSION` stays `30B-source-routing-v1` and `listGroundingEligibleSlugs()` stays `[]`. Phase 30G is not started.
 
-## Pre-plan evidence screen (drives the resolution outcome)
+## Evidence reconciliation (corrects the earlier draft)
 
-All 52 `unknown` registry records were traced to their source dataset:
+The earlier draft was inconsistent because it scanned `src/data/articleInventory.ts` for a `status:` field when the inventory actually uses `currentStatus:`. Corrected, verified account of the 52 originally-unknown records:
 
-- **6 records** live in `src/data/familyArticleData.ts`, which carries an explicit typed field `status: "draft" | "ready"`. All six read `status: "ready"`: `second-time-parenting`, `staying-connected-as-parents`, `calmer-evenings-after-busy-days`, `family-sick-days-at-home`, `planning-family-days-out`, `simple-family-play-ideas`. Explicit dataset status field is authoritative evidence, and `ready` is the same signal that gates sitemap inclusion. These resolve to **live**.
-- **46 records** live in `src/data/articleData.ts`. That dataset's `ArticleData` interface has **no** editorial status, draft, archived, deprecated or publication field of any kind, and none of the 46 appears in `src/data/articleInventory.ts` (51 of the 52 are absent from the inventory; the one present, `two-week-wait`, has no `status` entry that resolves it). Route existence, file existence, titles, `lastUpdated` and medical-review metadata are explicitly not accepted as evidence. These **remain unknown** and stay blocked.
+- **Appearing in `articleInventory.ts`: 1 slug — `two-week-wait`**, with two entries. The legacy entry (`id: "legacy:two-week-wait"`, `sourceFile: "src/data/articleData.ts"`, `system: "legacy-article"`) carries the inventory's explicit editorial-status field `currentStatus: "live"` with `contentState: "final"`, describing exactly the registry record in question, so it resolves to **live** (evidence category `explicit-inventory-status-field`). The second entry is a topic page (`src/data/ttcTopicData.ts`, `currentStatus: "topic-page"`), a different surface, and is not used as evidence. Presence in the inventory is not the evidence; the explicit `currentStatus` field is.
+- **6 records** live in `src/data/familyArticleData.ts`, which has the explicit typed field `status: "draft" | "ready"`. All six read `ready`, the repository's explicit publication-ready state used by the existing publication/sitemap logic: `second-time-parenting`, `staying-connected-as-parents`, `calmer-evenings-after-busy-days`, `family-sick-days-at-home`, `planning-family-days-out`, `simple-family-play-ideas`. Evidence category `explicit-dataset-status-field`. These resolve to **live**. Route existence and visual availability are not used as evidence.
+- **45 records** live in `src/data/articleData.ts`, whose `ArticleData` interface has no editorial-status, publication, draft, archived or deprecated field, and which are absent from `articleInventory.ts`. Route existence, file existence, title, description, body completeness, `lastUpdated`, medical-review metadata, source-list presence, search visibility and rendering are all rejected as evidence. These **remain unknown** and stay blocked.
 
-Expected outcome: 6 resolved to live, 0 to draft, 0 to archived, 0 to deprecated, 46 still unknown, 6 registry records changed. Post-30F editorial split: **116 live, 44 draft, 46 unknown**.
+Verified outcome: 7 resolved to live, 0 draft, 0 archived, 0 deprecated, 45 still unknown, 7 registry editorial-status changes. Post-30F split: **117 live, 44 draft, 45 unknown** of 206. All Phase 30F documents and tests use these corrected numbers only; if execution re-verification differs, the actual verified result is reported instead.
 
 ## Registry change
 
-Only the `editorialStatus` field of the 6 family records changes, `unknown` → `live`. Their `approvalStatus` stays `blocked_missing_metadata` (owner, content version, reviewer, reviewed date and sensitivity are all still absent), so nothing becomes candidate, approved or eligible. No governance field is populated anywhere: no owner, contentVersion, reviewer, reviewedDate, sensitivity, approvedBy or approvedAt is invented.
+Only the `editorialStatus` field of the 7 evidence-backed records (the 6 family records plus `two-week-wait`) changes, `unknown` → `live`. Their `approvalStatus` stays `blocked_missing_metadata` (owner, content version, reviewer, reviewed date and sensitivity all still absent), so nothing becomes candidate, approved or eligible. No governance field is populated anywhere: no owner, contentVersion, reviewer, reviewedDate, sensitivity, approvedBy or approvedAt is invented.
 
 ## New document 1 — `docs/ai/article-grounding-editorial-status-resolution.md`
 
-Metadata only, one row per originally-unknown record (all 52): slug, title, journey, topics, previous status, resolved status, evidence category, concise evidence note, registry changed yes/no, current approval status, next action. Plus totals: resolved live 6, draft 0, archived 0, deprecated 0, still unknown 46, registry records changed 6. Evidence categories used: `explicit-dataset-status-field` and `no-authoritative-status-evidence`. No article body content is reproduced.
+Metadata only, one row per originally-unknown record (all 52): slug, title, journey, topics, previous status, resolved status, evidence category, concise evidence note, registry changed yes/no, current approval status, next action. Plus totals: resolved live 7, draft 0, archived 0, deprecated 0, still unknown 45, registry records changed 7. Evidence categories used: `explicit-dataset-status-field`, `explicit-inventory-status-field` and `no-authoritative-status-evidence`. No article body, sections, prose, takeaways, summaries, images or media are reproduced.
 
 ## New document 2 — `docs/ai/article-grounding-governance.md`
 
@@ -36,15 +37,15 @@ The governance contract for blocked → candidate → approved. Roles and requir
 
 ## Tests
 
-`src/test/articleGrounding.test.ts` and `src/test/articleGroundingDrift.test.ts` stay authoritative. Added/updated assertions pin: the new editorial-status counts (116 live / 44 draft / 46 unknown of 206), the exact six slugs whose status changed, zero candidate records, zero approved records, `listGroundingEligibleSlugs() === []`, unknown slug not approved. All existing guarantees stay: full slug coverage both ways, no duplicates, no dataset imports in runtime grounding modules, metadata-only helper output, unchanged source routing and version constant, unchanged answer hygiene. Dataset imports remain test-only.
+`src/test/articleGrounding.test.ts` and `src/test/articleGroundingDrift.test.ts` stay authoritative. Added/updated assertions pin: total registry count (206), the new editorial-status counts (117 live / 44 draft / 45 unknown), the exact seven slugs whose status changed with old → new status, zero candidate records, zero approved records, `listGroundingEligibleSlugs() === []`, unknown slug not approved. All existing guarantees stay: full slug coverage both ways, no duplicates, no dataset imports in runtime grounding modules, metadata-only helper output with no body content exposed, unchanged source routing and version constant, unchanged answer hygiene. Dataset imports remain test-only.
 
 ## Documentation updates
 
-`article-grounding-review-queue.md`, `content-grounding-readiness.md`, `release-gate.md`, `system-map.md`, `roadmap.md`, `README.md` each record: Phase 30F purpose, 52 unknown investigated, 6 resolved, 46 still unknown, the governance framework and each rule set created (owner, version, reviewer, reviewed date, source-list validation, sensitivity rules, candidate authority, approval authority, review evidence), zero candidates, zero approvals, AI runtime unchanged, grounding still blocked. No document claims grounding readiness. The locked roadmap 30F → 30G → 30H → 30I → 30J → 30K → 30L → 31A is preserved unchanged.
+`article-grounding-review-queue.md`, `content-grounding-readiness.md`, `release-gate.md`, `system-map.md`, `roadmap.md`, `README.md` each record the verified outcome: Phase 30F purpose, 52 unknown investigated, the inventory evidence reconciliation, 7 resolved to live, 45 still unknown, the governance framework and each rule set created (owner, version, reviewer, reviewed date, source-list validation, sensitivity rules, candidate authority, approval authority, review evidence), the 31 articles without source lists as a standing governance gap, zero candidates, zero approvals, AI runtime unchanged, grounding still blocked. No document claims grounding readiness. The locked roadmap 30F → 30G → 30H → 30I → 30J → 30K → 30L → 31A is preserved unchanged.
 
 ## Recommendation on 30G
 
-30F closes with the governance contract defined but every article still missing owner, content version, reviewer, reviewed date and sensitivity, and 46 editorial statuses unresolved. The plan's recommendation will state whether Tier 2 can safely begin on that basis, with the unresolved-evidence gap named explicitly.
+30F closes with the governance contract defined but every article still missing owner, content version, reviewer, reviewed date and sensitivity, and 45 editorial statuses unresolved. The report will state whether Tier 2 is safe to plan next, and explicitly whether 30G could safely review only the verified-live subset while the 45 unknown records stay excluded and blocked. 30G is not started.
 
 ## Validation
 

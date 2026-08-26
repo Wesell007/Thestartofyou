@@ -142,3 +142,59 @@ describe("ai-search mode behaviour", () => {
     expect(requestedUrls.some((url) => url.includes("nhs.uk"))).toBe(true);
   });
 });
+
+describe("Phase 29D kill switch", () => {
+  afterEach(() => {
+    delete env.AI_SEARCH_DISABLED;
+  });
+
+  it("returns the calm pause answer without calling the model", async () => {
+    env.AI_SEARCH_DISABLED = "true";
+    const response = await post({ query: "What helps with heartburn?" });
+    const body = await readStream(response);
+    expect(body).toMatch(/short pause/i);
+    expect(body).not.toMatch(/https?:\/\//);
+    expect(modelBodies).toHaveLength(0);
+    expect(requestedUrls.some((url) => url.includes("ai.gateway.lovable.dev"))).toBe(false);
+    expect(requestedUrls.some((url) => url.includes("nhs.uk"))).toBe(false);
+  });
+
+  it("still escalates urgent wording while paused", async () => {
+    env.AI_SEARCH_DISABLED = "1";
+    const response = await post({ query: "My baby has blue lips" });
+    const body = await readStream(response);
+    expect(body).toMatch(ESCALATION_WORDING);
+    expect(body).not.toMatch(/short pause/i);
+    expect(modelBodies).toHaveLength(0);
+  });
+
+  it("gives recap surfaces their own controlled line while paused", async () => {
+    env.AI_SEARCH_DISABLED = "true";
+    const response = await post({ query: "Day: 2026-08-19. Logged: 2 feeds.", mode: "first_year_day_recap" });
+    expect(await readStream(response)).toBe(DAY_RECAP_UNAVAILABLE_ANSWER);
+  });
+
+  it("keeps normal behaviour when the flag is absent or false", async () => {
+    env.AI_SEARCH_DISABLED = "false";
+    await post({ query: "What helps with heartburn?" });
+    expect(modelBodies).toHaveLength(1);
+  });
+});
+
+describe("Phase 29D expanded escalation at the endpoint", () => {
+  it.each([
+    "I am pregnant and bleeding",
+    "I have a severe headache and vision changes",
+    "My waters have broken",
+    "My baby is floppy and hard to wake",
+    "My baby has a rash that does not fade",
+    "I cannot keep myself safe",
+    "Someone at home is hurting me",
+  ])("escalates %s before the model", async (query) => {
+    const response = await post({ query });
+    const body = await readStream(response);
+    expect(body).toMatch(ESCALATION_WORDING);
+    expect(body).not.toMatch(/https?:\/\//);
+    expect(modelBodies).toHaveLength(0);
+  });
+});

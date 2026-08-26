@@ -2,6 +2,7 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { parseAiSearchBody } from "../_shared/validation.ts";
 import { DAY_RECAP_UNAVAILABLE_ANSWER, getAiModeConfig } from "../_shared/aiModes.ts";
 import { selectSources } from "../_shared/aiSources.ts";
+import { AI_PAUSED_ANSWER, isAiDisabled, matchUrgent, urgentAnswer } from "../_shared/urgentPatterns.ts";
 
 const DEFAULT_ORIGINS = [
   "https://thestartofyou.com",
@@ -69,23 +70,6 @@ const fetchGrounding = async (urls: string[], signal: AbortSignal) => {
     throw new Error("All grounding sources were unavailable");
   }
   return documents.join("\n");
-};
-
-const URGENT_PATTERN = /(?:can(?:not|'t) breathe|difficulty breathing|chest pain|seizure|unconscious|passed out|heavy bleeding|soaking (?:a|one) pad|severe bleeding|want to die|kill myself|suicid|self[- ]?harm|baby (?:is )?not moving|reduced (?:baby |fetal )?movement)/i;
-
-const urgentAnswer = (query: string) => {
-  if (/want to die|kill myself|suicid|self[- ]?harm/i.test(query)) {
-    return `## Please get urgent help now
-
-If you may act on these thoughts or you are in immediate danger, call 999 or go to A&E now. If you can, stay with someone you trust and move away from anything you could use to hurt yourself.
-
-For urgent mental health help that is not an immediate emergency, call NHS 111 and select the mental health option.`;
-  }
-  return `## Please seek urgent clinical help now
-
-The symptom you described can need prompt assessment. If there is immediate danger, severe breathing difficulty, loss of consciousness, a seizure or very heavy bleeding, call 999 or go to A&E now.
-
-For reduced baby movement, contact your maternity unit immediately and do not wait until the next day. For other urgent pregnancy concerns, contact your maternity triage unit or NHS 111 now.`;
 };
 
 const sseAnswer = (req: Request, content: string) => {
@@ -174,12 +158,21 @@ serve(async (req) => {
   const { query, context, mode } = parsed.value;
   const modeConfig = getAiModeConfig(mode);
 
-  if (URGENT_PATTERN.test(query)) {
+  if (matchUrgent(query)) {
     // Recap-only surfaces never receive the escalation answer. They get a short
     // controlled fallback instead, and the model is not called at all.
     return sseAnswer(
       req,
       modeConfig.allowUrgentEscalationAnswer ? urgentAnswer(query) : DAY_RECAP_UNAVAILABLE_ANSWER,
+    );
+  }
+
+  // Phase 29D kill switch. Checked after hard escalation so a red or crisis
+  // question still receives its escalation answer while the companion is paused.
+  if (isAiDisabled(Deno.env.get("AI_SEARCH_DISABLED"))) {
+    return sseAnswer(
+      req,
+      modeConfig.allowUrgentEscalationAnswer ? AI_PAUSED_ANSWER : DAY_RECAP_UNAVAILABLE_ANSWER,
     );
   }
 

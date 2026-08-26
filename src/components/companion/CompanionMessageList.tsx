@@ -21,7 +21,7 @@ export const COMPANION_RATE_LIMIT_COPY =
   "You have asked a few questions quickly. Give it a moment, then try again.";
 
 export default function CompanionMessageList() {
-  const { turns, streamingAnswer, isLoading, error, isRateLimited, retry } = useCompanion();
+  const { turns, streamingAnswer, isLoading, error, isRateLimited, retry, send } = useCompanion();
   const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -35,6 +35,26 @@ export default function CompanionMessageList() {
           <p key={turn.id} className={companionStyles.userBubble}>
             {turn.text}
           </p>
+        ) : turn.clarification ? (
+          <div key={turn.id} className={companionStyles.paperCard}>
+            <p className="text-[14px] leading-relaxed text-[hsl(var(--stage-ttc-olive))]">
+              {turn.clarification.question}
+            </p>
+            <div className="mt-3 flex flex-col gap-2">
+              {turn.clarification.chips
+                .filter((chip) => !chip.focusInput)
+                .map((chip) => (
+                  <button
+                    key={chip.label}
+                    type="button"
+                    onClick={() => send(chip.question)}
+                    className={companionStyles.chip}
+                  >
+                    {chip.label}
+                  </button>
+                ))}
+            </div>
+          </div>
         ) : (
           <div key={turn.id} className={companionStyles.assistantCard}>
             <EditorialAnswer markdown={sanitiseAiAnswer(turn.text)} disableLinks />

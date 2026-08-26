@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { trackPageView } from "@/lib/analytics";
+import { isPrototypeRoute } from "@/lib/prototypeRoutes";
+
 
 /**
  * Single source of pageview tracking. Mounted once inside the router.

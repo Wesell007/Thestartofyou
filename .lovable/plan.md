@@ -37,15 +37,15 @@ The governance contract for blocked → candidate → approved. Roles and requir
 
 ## Tests
 
-`src/test/articleGrounding.test.ts` and `src/test/articleGroundingDrift.test.ts` stay authoritative. Added/updated assertions pin: the new editorial-status counts (116 live / 44 draft / 46 unknown of 206), the exact six slugs whose status changed, zero candidate records, zero approved records, `listGroundingEligibleSlugs() === []`, unknown slug not approved. All existing guarantees stay: full slug coverage both ways, no duplicates, no dataset imports in runtime grounding modules, metadata-only helper output, unchanged source routing and version constant, unchanged answer hygiene. Dataset imports remain test-only.
+`src/test/articleGrounding.test.ts` and `src/test/articleGroundingDrift.test.ts` stay authoritative. Added/updated assertions pin: total registry count (206), the new editorial-status counts (117 live / 44 draft / 45 unknown), the exact seven slugs whose status changed with old → new status, zero candidate records, zero approved records, `listGroundingEligibleSlugs() === []`, unknown slug not approved. All existing guarantees stay: full slug coverage both ways, no duplicates, no dataset imports in runtime grounding modules, metadata-only helper output with no body content exposed, unchanged source routing and version constant, unchanged answer hygiene. Dataset imports remain test-only.
 
 ## Documentation updates
 
-`article-grounding-review-queue.md`, `content-grounding-readiness.md`, `release-gate.md`, `system-map.md`, `roadmap.md`, `README.md` each record: Phase 30F purpose, 52 unknown investigated, 6 resolved, 46 still unknown, the governance framework and each rule set created (owner, version, reviewer, reviewed date, source-list validation, sensitivity rules, candidate authority, approval authority, review evidence), zero candidates, zero approvals, AI runtime unchanged, grounding still blocked. No document claims grounding readiness. The locked roadmap 30F → 30G → 30H → 30I → 30J → 30K → 30L → 31A is preserved unchanged.
+`article-grounding-review-queue.md`, `content-grounding-readiness.md`, `release-gate.md`, `system-map.md`, `roadmap.md`, `README.md` each record the verified outcome: Phase 30F purpose, 52 unknown investigated, the inventory evidence reconciliation, 7 resolved to live, 45 still unknown, the governance framework and each rule set created (owner, version, reviewer, reviewed date, source-list validation, sensitivity rules, candidate authority, approval authority, review evidence), the 31 articles without source lists as a standing governance gap, zero candidates, zero approvals, AI runtime unchanged, grounding still blocked. No document claims grounding readiness. The locked roadmap 30F → 30G → 30H → 30I → 30J → 30K → 30L → 31A is preserved unchanged.
 
 ## Recommendation on 30G
 
-30F closes with the governance contract defined but every article still missing owner, content version, reviewer, reviewed date and sensitivity, and 46 editorial statuses unresolved. The plan's recommendation will state whether Tier 2 can safely begin on that basis, with the unresolved-evidence gap named explicitly.
+30F closes with the governance contract defined but every article still missing owner, content version, reviewer, reviewed date and sensitivity, and 45 editorial statuses unresolved. The report will state whether Tier 2 is safe to plan next, and explicitly whether 30G could safely review only the verified-live subset while the 45 unknown records stay excluded and blocked. 30G is not started.
 
 ## Validation
 

@@ -35,6 +35,7 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 - 29E mode, prompt registry and output hygiene cleanup
 - 29F controlled pregnancy context upgrade
 - 29G permissioned memory and personalisation design (specification only)
+- 29H memory schema and RLS design review (design review only)
 
 ## How to use these documents
 

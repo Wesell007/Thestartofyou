@@ -41,8 +41,9 @@ describe("AI version constants", () => {
     });
   });
 
-  it("records the phase this cleanup shipped in", () => {
-    expect(AI_PHASE).toBe("29F");
+  it("records the phase these versions were last reviewed in", () => {
+    expect(AI_PHASE).toBe("30B");
+    expect(AI_SOURCE_ROUTING_VERSION).toBe("30B-source-routing-v1");
     expect(AI_CONTEXT_CONTRACT_VERSION).toBe("29F-context-v1");
     expect(AI_EVAL_DATASET_VERSION).toBe("eval-dataset-v1");
   });

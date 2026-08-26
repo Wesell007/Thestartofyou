@@ -18,6 +18,17 @@ Phase 29F narrowed the pregnancy surfaces to a single contract in `pregnancyAiCo
 
 Deliberately excluded by construction: names, emails, user IDs, child IDs, pregnancy IDs, journal and reflection text, note and log content, memory entries, photo, video and voice data, media URLs, exact private dates, cycle detail beyond coarse stage, and chat history.
 
+## 2b. Outbound grounding requests
+
+When a mode uses grounding, the endpoint fetches up to three pages from the fixed NHS allowlist. What those requests contain:
+
+- a plain HTTP GET to a public NHS URL, with an `Accept` header and a fixed product user agent
+- nothing else: no question text, no context string, no mode, no user, child or pregnancy identifier, no cookie, no session and no referrer carrying app state
+
+Source selection happens locally from the question and the bounded context. The external source is never told what was asked. Fetched page text is used for that single request only: it is not cached, indexed, embedded or persisted, and no fetched content is stored against a user.
+
+No user content is grounding material, and none may become grounding material. Journal, reflection, note, log, memory and media content is excluded by category, permanently. This product's own articles are not grounding material either; the requirements that would have to be met first are in `content-grounding-readiness.md` (Phase 30A, audit only), and nothing there is authorised.
+
 ## 3. What is not persisted
 
 - Companion turns live in React state only and are dropped on unmount or "Start again".

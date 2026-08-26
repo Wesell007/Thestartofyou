@@ -121,9 +121,46 @@ Phases 29D, 29E, 29F and 29G are closed. The rest are not started. Each begins o
 
 These remain valid but sit outside 29H to 29L and are not started.
 
-- **Start of You content grounding readiness audit.** Whether the site's own guidance is ready to ground answers: review status, reviewer metadata, canonical structure, freshness, eligible articles, retrieval approach, and how internal grounding coexists with the NHS allowlist. Audit only.
+- **Start of You content grounding readiness audit — CLOSED (Phase 30A).** Delivered as `content-grounding-readiness.md`: the current static keyword routing and NHS allowlist documented, coverage strengths and gaps recorded, and the criteria that this product's own content would have to meet before it could ever be grounding material. Verdict: not approved for grounding. The gated follow-on sequence is below. Audit only; nothing was implemented and nothing is authorised.
 - **Voice readiness audit.** Escalation wording in speech, latency, transcription errors on clinical wording, accessibility, microphone consent, and whether audio is ever retained. Audit only.
 - **Fable-led AI companion UI redesign.** A deeper premium companion and Ask experience. Behaviour, wording and escalation stay fixed to this framework, with the full `/ask` and panel regression set green.
+
+
+## Grounding track — recommended and gated, none started
+
+Recommended by Phase 30A. None of these is authorised: each needs its own approval before work begins, and the grounding gate in `release-gate.md` section I applies throughout.
+
+### Phase 30B — widen external source routing — FUTURE, NOT STARTED
+
+**Entry.** 30A closed, candidate URLs checked reachable and relevant, evaluation rows drafted.
+
+**Work.** Add approved sources and rules for postpartum recovery, perinatal mental health as distinct from crisis help, weaning, toddler and family. Fix the known first-match ordering collisions.
+
+**Exit.** New rules covered by routing evaluations with false-positive checks, no Red or Crisis regression, `AI_SOURCE_ROUTING_VERSION` bumped, output hygiene unchanged.
+
+### Phase 30C — article metadata and approval model — FUTURE, NOT STARTED
+
+**Entry.** 30B closed, editorial ownership agreed, reviewer capacity confirmed.
+
+**Work.** Design, then a data-layer change only: sensitivity level, content version, owner, lifecycle, closed tag vocabularies and a default-off grounding-approval flag. The AI reads nothing.
+
+**Exit.** Metadata present and required on eligible articles, lifecycle exclusion provable in tests, still zero AI usage.
+
+### Phase 30D — curated brand-answer grounding behind a flag — FUTURE, NOT STARTED
+
+**Entry.** 30C closed, the per-article criteria satisfied and recorded for every mapped article, stale-content evaluations in place.
+
+**Work.** A small hand-curated topic-to-article map for product and navigation guidance only. Never clinical, never safety-critical.
+
+**Exit.** Brand questions answered from approved content behind a feature flag, kill switch and rollback proven, no clinical use.
+
+### Phase 30E — retrieval readiness review — FUTURE, NOT STARTED
+
+**Entry.** 30D closed with production history.
+
+**Work.** Assess retrieval over an approved, versioned subset on the evidence from 30D. Review only; it may conclude retrieval is unnecessary.
+
+**Exit.** A recorded decision either way. No retrieval, vector search or embedding work starts without it.
 
 
 ## Not on the roadmap

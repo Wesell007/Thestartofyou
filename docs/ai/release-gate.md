@@ -90,4 +90,34 @@ Every item below must be complete before any memory implementation ships. A fail
 - [ ] Incident process in `observability-and-incidents.md` updated with memory-specific severities
 - [ ] Confirmed the companion cannot write memory from a conversation without an explicit user action
 
+## I. Grounding gate
 
+Applies to any change to source routing, the approved source allowlist, how background material is fetched or used, or any proposal to ground answers in this product's own content. The full assessment is in `content-grounding-readiness.md`.
+
+For a change to external source routing:
+
+- [ ] Every added URL checked reachable, UK, non-commercial and topically relevant before it is added
+- [ ] Rule ordering reviewed for collisions, and any intentional collision recorded
+- [ ] `AI_SOURCE_ROUTING_VERSION` bumped in `aiVersions.ts`
+- [ ] Routing evaluation rows added for each new or reordered rule, including false-positive checks that routine phrasing does not reach a safety or urgent-only page
+- [ ] Thin-evidence behaviour confirmed: a poor fetch degrades to a calm general answer, never a refusal and never a source complaint
+- [ ] Safety no-regression run: every Red and Crisis row still escalates, escalation-first
+- [ ] Output hygiene unchanged: no URL, source block, citation list or retrieval wording in any answer
+- [ ] Escalation still decided before source selection, fetching and the model call
+- [ ] `first_year_day_recap` still ungrounded
+
+**Start of You content grounding: blocked.** This product's own articles are not approved as grounding material. No article may be read by the AI until every item below is recorded per article, plus an explicit default-off grounding-approval flag.
+
+- [ ] Original content, medically reviewed where needed by a named reviewer
+- [ ] Reviewed date present and inside the freshness window for its sensitivity level
+- [ ] Structured source list present
+- [ ] Topic tags and journey tags present, from a closed vocabulary
+- [ ] Sensitivity level present: routine, health-relevant or safety-critical
+- [ ] Owner and reviewer recorded separately
+- [ ] Content version recorded
+- [ ] Archived and deprecated lifecycle supported in the record the AI reads, and excluded structurally
+- [ ] Grounding-approval flag present and default off, per article
+- [ ] Safety-critical content confirmed never eligible, at any review level
+- [ ] Evaluation examples added, including archived, deprecated and review-lapsed cases
+- [ ] Rollback defined and possible without a migration
+- [ ] Confirmed no user-authored content (journal, reflection, note, log, memory, media) is in the eligible set

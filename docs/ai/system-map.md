@@ -90,7 +90,18 @@ Ordered rules, first match wins:
 | 11 | baby, newborn, infant, toddler, nappy, weaning, temperature, unwell, poorly | baby | baby hub, urgent help under 5 |
 | — | no match | — | common symptoms, pregnancy hub |
 
-A relevant hub page is always appended for non-safety families, and the result is capped at three URLs. If every source fetch fails, the endpoint returns 503 rather than answering ungrounded.
+A relevant hub page is always appended for non-safety families, and the result is capped at three URLs.
+
+How the selected pages become evidence, in `ai-search/index.ts`:
+
+- Source selection and fetching happen only when `getAiModeConfig(mode).useGrounding` is true. `first_year_day_recap` never calls out.
+- Pages are fetched live per request with `Promise.allSettled`, so one broken page does not fail the others.
+- Each page is reduced to text (the `<main>` element where present, scripts, styles and tags removed, entities decoded, whitespace collapsed) and capped at 10,000 characters. Anything under 200 characters is discarded as insufficient.
+- Each surviving document is wrapped as `<background>` and passed to the model inside `<background_material>`. The URL is never passed to the model, so no answer can reference a source address.
+- If every source fetch fails, the endpoint returns 503 rather than answering ungrounded.
+- Nothing is cached, snapshotted, indexed, embedded or persisted between requests.
+
+There is no RAG, no vector search, no article ingestion and no Start of You grounding. The readiness assessment for any of that, including what must be true before this product's own articles could ever be grounding material, is in `content-grounding-readiness.md` (Phase 30A, audit only).
 
 ## 5. Safety routing
 

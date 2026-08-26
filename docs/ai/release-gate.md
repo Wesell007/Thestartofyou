@@ -73,7 +73,11 @@ Applies only to a change that introduces, widens or reads companion memory. No m
 - [ ] Journal, reflection and media content stays behind its own separate toggle, default off
 - [ ] Deletion behaviour specified and wired into `supabase/functions/delete-account/index.ts` in the same change that creates persistence
 - [ ] Export behaviour specified alongside the person's other data
-- [ ] Schema and RLS design reviewed: owner-scoped policies, grants in the same migration, no cross-journey read path
+- [ ] Schema and RLS design reviewed against `memory-schema-rls-design.md`: owner-scoped policies, grants in the same migration, no anon grant, no client `DELETE` grant, no cross-journey read path
+- [ ] Service-role access reviewed: memory is read only through one named access module, never a direct table read from an edge function, because service-role bypasses RLS
+- [ ] Deleted, disabled, paused and expired memory confirmed excluded from every read path that reaches the model
+- [ ] Category F and journal content confirmed blocked structurally, by the enum and source set, not only by a consent flag
+- [ ] The migration that creates memory tables reviewed separately, as its own change, after every item above passes
 - [ ] Audit logging approach reviewed: no question, answer, journal or health content in logs
 - [ ] No real user data used in testing; every memory case synthetic
 - [ ] Memory evaluation prompts added and passing (see `eval-dataset-v1.md`)

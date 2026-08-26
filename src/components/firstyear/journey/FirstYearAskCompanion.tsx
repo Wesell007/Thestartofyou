@@ -35,15 +35,6 @@ const CHIPS = [
 
 
 
-/** Splits any trailing sources block off the streamed answer. */
-const splitSources = (raw: string) => {
-  const match = raw.match(/\n\s*(?:#+\s*)?(?:sources?|references?)\s*:?\s*\n/i);
-  if (!match || match.index === undefined) return { body: raw, sources: "" };
-  return {
-    body: raw.slice(0, match.index).trim(),
-    sources: raw.slice(match.index + match[0].length).trim(),
-  };
-};
 
 const renderInline = (text: string) =>
   text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
-  CINDY_DAY_SUMMARY_GUARDRAILS,
+  DAY_SUMMARY_GUARDRAILS,
   DAY_SUMMARY_QUERY_MAX_LENGTH,
   buildDayRhythmDigest,
   buildDaySummaryQuery,
@@ -85,7 +85,7 @@ describe("buildDaySummaryQuery", () => {
     const digest = buildDayRhythmDigest(events, DAY);
     const query = buildDaySummaryQuery(digest);
     expect(query.length).toBeLessThanOrEqual(DAY_SUMMARY_QUERY_MAX_LENGTH);
-    expect(query).toContain(CINDY_DAY_SUMMARY_GUARDRAILS);
+    expect(query).toContain(DAY_SUMMARY_GUARDRAILS);
     expect(query).toContain(`Day: ${DAY}.`);
     expect(query).toContain("Logged: ");
   });
@@ -102,7 +102,7 @@ describe("buildDaySummaryQuery", () => {
       }),
     ];
     const digest = buildDayRhythmDigest(events, DAY);
-    const tight = buildDaySummaryQuery(digest, CINDY_DAY_SUMMARY_GUARDRAILS.length + 130);
+    const tight = buildDaySummaryQuery(digest, DAY_SUMMARY_GUARDRAILS.length + 130);
     expect(tight).not.toContain("long moment about the afternoon");
     expect(tight).toContain("Sleep");
   });

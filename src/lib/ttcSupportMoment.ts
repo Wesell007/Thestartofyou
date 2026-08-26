@@ -144,7 +144,7 @@ const AFTER_TEST_RESULT: TTCSupportMoment = {
       href: "/trying-to-conceive/pregnancy-tests",
     },
     { kind: "note", label: "Add how you feel", logType: "mood" },
-    { kind: "ask", label: "Ask Cindy", topic: "pregnancy-tests" },
+    { kind: "ask", label: "Ask your companion", topic: "pregnancy-tests" },
     { kind: "note", label: "My period arrived", logType: "period", value: "started" },
   ],
   note: "Adding a period note does not change your saved cycle start. Log it here, then update your TTC setup if you want this cycle to become the new starting point.",

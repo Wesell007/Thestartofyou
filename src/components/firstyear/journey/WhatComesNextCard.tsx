@@ -19,8 +19,8 @@ const WhatComesNextCard = () => (
         </li>
         <li>More First Year support will arrive a little at a time.</li>
         <li>
-          Cindy is still here if you have a question. She answers from general guidance only
-          and does not look at anything private you have written.
+          Your companion is still here if you have a question. It answers from general
+          guidance only and does not look at anything private you have written.
         </li>
       </ul>
     </div>

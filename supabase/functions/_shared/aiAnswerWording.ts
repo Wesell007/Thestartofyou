@@ -16,4 +16,4 @@ export const SAFE_FALLBACK_ANSWER =
  * the wider product carry professional-help messaging instead.
  */
 export const DAY_RECAP_UNAVAILABLE_ANSWER =
-  "Cindy cannot turn this entry into a simple day recap. What you logged is saved just as you wrote it.";
+  "Your companion cannot turn this entry into a simple day recap. What you logged is saved just as you wrote it.";

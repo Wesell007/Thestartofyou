@@ -119,14 +119,14 @@ export const FIRST_YEAR_SETUP_COPY: Record<FirstYearSetupMode, FirstYearSetupCop
       ],
     },
     companion: {
-      heading: "Cindy is still here. Same companion, new chapter.",
-      body: "Nothing you have written is shared with her. You choose what she can use, and you can change your mind whenever you like.",
+      heading: "Your companion is still here. Same companion, new chapter.",
+      body: "Nothing you have written is shared with your companion. You choose what it can use, and you can change your mind whenever you like.",
     },
     review: {
       heading: "Ready when you are",
       intro: "Your pregnancy chapter is kept, and everything you saved stays readable.",
       companionNote:
-        "Nothing is shared with Cindy yet. Your pregnancy memories stay private until you choose otherwise.",
+        "Nothing is shared with your companion yet. Your pregnancy memories stay private until you choose otherwise.",
     },
     exitHref: "/my-week",
   },
@@ -140,13 +140,13 @@ export const FIRST_YEAR_SETUP_COPY: Record<FirstYearSetupMode, FirstYearSetupCop
       ],
     },
     companion: {
-      heading: "Cindy is here for your first year.",
-      body: "She can answer questions whenever you need her. Nothing you write is shared with her, and you can change your mind whenever you like.",
+      heading: "Your companion is here for your first year.",
+      body: "It can answer questions whenever you need it. Nothing you write is shared with your companion, and you can change your mind whenever you like.",
     },
     review: {
       heading: "Ready when you are",
       intro: "Your First Year space starts from here.",
-      companionNote: "Nothing is shared with Cindy. Anything you write stays private to you.",
+      companionNote: "Nothing is shared with your companion. Anything you write stays private to you.",
     },
     exitHref: "/first-year",
   },

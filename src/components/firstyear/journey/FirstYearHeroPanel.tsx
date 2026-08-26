@@ -14,7 +14,8 @@ import FirstYearHeroDecor from "./FirstYearHeroDecor";
 
 type Props = {
   babies: BabyForCopy[];
-  /** Companion name, already resolved with a fallback by the caller. */
+  /** Companion subject, already resolved by the caller: a chosen name or
+   * the neutral fallback. Never a hardcoded name. */
   companionName: string;
 };
 

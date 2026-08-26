@@ -54,8 +54,9 @@ const FirstYearSetup = () => {
   const [step, setStep] = useState(1);
   const [draft, setDraft] = useState<FirstYearSetupDraft>(createEmptyDraft);
   const [errors, setErrors] = useState<FirstYearSetupErrors>({});
+  // No name by default: naming the companion is always optional.
   const [companion, setCompanion] = useState<CompanionDraft>({
-    name: "Cindy",
+    name: "",
     tone: "calm",
   });
   const [hasSavedName, setHasSavedName] = useState(false);
@@ -81,8 +82,8 @@ const FirstYearSetup = () => {
       setUserId(userId);
 
       // Reuse the existing profile companion fields. A saved name means the
-      // parent already met their companion, so we prefill instead of
-      // reintroducing Cindy from scratch.
+      // parent already met their companion, so we prefill it. With no saved
+      // name the draft stays blank rather than suggesting a default.
       const { data: profile } = await supabase
         .from("profiles")
         .select("companion_name, companion_tone")
@@ -93,7 +94,7 @@ const FirstYearSetup = () => {
       const savedTone = profile?.companion_tone ?? null;
       setHasSavedName(savedName.length > 0);
       setCompanion({
-        name: savedName.length > 0 ? savedName : "Cindy",
+        name: savedName,
         tone: isCompanionTone(savedTone) ? savedTone : "calm",
       });
 

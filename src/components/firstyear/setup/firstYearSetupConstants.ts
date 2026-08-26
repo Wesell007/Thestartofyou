@@ -81,9 +81,9 @@ export const FIRST_YEAR_VALUE_ITEM_TRANSITION = {
 
 /** Shown to direct-start parents who have no companion name yet. */
 export const COMPANION_INTRO_POINTS: string[] = [
-  "Cindy is a calm companion inside your First Year space.",
-  "She gives gentle, plain-language support about the early months and your recovery.",
-  "Her tone is unhurried and never alarming.",
-  "She does not track anything, and she does not read your private notes.",
-  "She does not replace your midwife, GP or health visitor.",
+  "Your companion is a calm presence inside your First Year space.",
+  "It gives gentle, plain-language support about the early months and your recovery.",
+  "Its tone is unhurried and never alarming.",
+  "It does not track anything, and it does not read your private notes.",
+  "It does not replace your midwife, GP or health visitor.",
 ];

@@ -23,6 +23,7 @@ import MemoriesCard from "@/components/firstyear/journey/MemoriesCard";
 import FirstYearAskCompanion from "@/components/firstyear/journey/FirstYearAskCompanion";
 import ExploreGuidance from "@/components/firstyear/journey/ExploreGuidance";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
+import { companionSentenceSubject } from "@/lib/companion/companionName";
 import {
   countEntriesForDate,
   getRecentEntries,
@@ -31,9 +32,6 @@ import {
 import { getRecentMemories, type FirstYearMemory } from "@/lib/firstYearMemories";
 import { localDateKey } from "@/lib/firstYearEntriesSchema";
 import { describeAge, describeBabies } from "@/lib/firstYearCopy";
-
-/** Default companion name when the person did not choose one. */
-const DEFAULT_COMPANION = "Cindy";
 
 /** For you lane. Existing public recovery and wellbeing routes only. */
 const FOR_YOU_CARDS: ForYouCard[] = [
@@ -79,7 +77,7 @@ const MyFirstYear = () => {
   const [state, setState] = useState<State | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
-  const companion = companionNameSetting?.trim() || DEFAULT_COMPANION;
+  const companion = companionSentenceSubject(companionNameSetting);
 
   const retry = useCallback(() => setAttempt((a) => a + 1), []);
 

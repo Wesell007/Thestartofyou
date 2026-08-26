@@ -1,22 +1,27 @@
 # AI roadmap after Phase 29C
 
-None of these phases are started. Each begins only when its entry criteria are met, and closes only when its exit criteria are met and the release gate passes.
+Phases 29D and 29E are closed. The rest are not started. Each begins only when its entry criteria are met, and closes only when its exit criteria are met and the release gate passes.
 
-## Phase 29D — evaluation harness and safety tests
+## Phase 29D — evaluation harness and safety tests — CLOSED
 
 **Entry.** 29C closed.
 
 **Work.** Turn `eval-dataset-v1.json` into a runnable harness. Two layers: a fast deterministic layer that asserts routing, category detection, sanitisation and banned phrases without calling the model, and an optional graded layer that calls the model for a sampled subset and checks escalation presence, banned wording and link absence. Add the highest-priority hard-pattern gaps from `escalation-matrix.md`, each with a false-positive check. Move the highest-risk verdict phrases into the client sanitiser with tests. Add the kill switch and a prompt and model version string.
 
-**Exit.** Deterministic layer runs in CI and is green; every Red and Crisis prompt in the dataset escalates; kill switch tested; no false positives on the Green prompts.
+**Exit.** Met. Deterministic harness runs in CI over the 94-prompt dataset, every Red and Crisis prompt escalates, the kill switch is tested, and the Green prompts produce no false positives.
 
-## Phase 29E — companion mode and prompt cleanup
+## Phase 29E — companion mode and prompt cleanup — CLOSED
 
 **Entry.** 29D harness in place, so prompt edits are measurable.
 
 **Work.** Consolidate shared prompt rules into one composed block; align tone and word limits; give the companion panel the same ambiguity handling as `/ask`; tighten the postpartum and feeding coverage that currently falls to `general`; consider a dedicated postpartum mode.
 
-**Exit.** Prompt duplication removed with no evaluation regression; panel and `/ask` behave the same for broad and urgent wording.
+**Delivered.** Prompts are now composed by a registry from shared safety, escalation, grounding and hygiene blocks, with normalised word limits and pinned fingerprints. Fallback wording has a single cross-runtime source. Every AI surface renders through one `sanitiseAnswerForDisplay` helper, replacing six drifting local copies. Explicit version constants are logged per cold start and documented in `versioning.md`.
+
+**Deferred.** A dedicated postpartum mode and wider postpartum/feeding source routing were not taken on — they change answer behaviour rather than governance, so they belong with the grounding work in 29G rather than in an infrastructure cleanup.
+
+**Exit.** Met for the governance scope. Prompt duplication removed, fingerprints pinned, no harness regression, and panel and `/ask` behave the same for broad and urgent wording.
+
 
 ## Phase 29F — controlled pregnancy context upgrade
 

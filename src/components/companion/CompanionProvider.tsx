@@ -24,11 +24,18 @@ import { resolveCompanionMode, type CompanionMode } from "@/lib/companion/compan
 import { shouldShowCompanionLauncher } from "@/lib/companion/companionSurface";
 import { buildCompanionPanelContext } from "@/lib/companion/companionPanelContext";
 import { companionStarters } from "@/lib/companion/companionStarters";
+import { resolveAskClarification, type AskClarification } from "@/lib/askClarification";
 
 export interface CompanionTurn {
   id: string;
   role: "user" | "assistant";
   text: string;
+  /**
+   * Phase 29D — set when a short, broad question was met with a gentle
+   * clarifying question instead of a model call. Session-only, like every
+   * other turn: nothing is persisted.
+   */
+  clarification?: AskClarification;
 }
 
 interface CompanionContextValue {
@@ -115,6 +122,20 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       committedRef.current = false;
       setLastQuestion(trimmed);
       setTurns((prev) => [...prev, { id: newId(), role: "user", text: trimmed }]);
+
+      // A broad single-topic term is clarified locally. The resolver already
+      // refuses to clarify anything with concern wording, so nothing that
+      // needs the safety routing is delayed here.
+      const clarification = resolveAskClarification(trimmed);
+      if (clarification) {
+        committedRef.current = true;
+        setTurns((prev) => [
+          ...prev,
+          { id: newId(), role: "assistant", text: clarification.question, clarification },
+        ]);
+        return;
+      }
+
       // Only the latest question, the bounded context and the mode.
       void ask(trimmed, context, { mode });
     },

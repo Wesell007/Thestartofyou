@@ -107,6 +107,9 @@ const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const Privacy = lazy(() => import("./pages/Privacy.tsx"));
 const Terms = lazy(() => import("./pages/Terms.tsx"));
 const AccountSettings = lazy(() => import("./pages/AccountSettings.tsx"));
+// Phase 29I — hidden, noindex, sitemap-excluded design prototype. Not linked
+// from any navigation and not connected to memory, auth or the companion.
+const MemorySettingsPrototype = lazy(() => import("./pages/MemorySettingsPrototype.tsx"));
 const PregnancyToolkit = lazy(() => import("./pages/PregnancyToolkit.tsx"));
 const PregnancyToolkitBirthPlan = lazy(() => import("./pages/PregnancyToolkitBirthPlan.tsx"));
 const PregnancyToolkitHospitalBag = lazy(() => import("./pages/PregnancyToolkitHospitalBag.tsx"));
@@ -348,6 +351,13 @@ const App = () => (
           <Route path="/setup" element={<Setup />} />
           <Route path="/setup/trying-to-conceive" element={<SetupTTC />} />
           <Route path="/setup/first-year" element={<ProtectedRoute><FirstYearSetup /></ProtectedRoute>} />
+          {/*
+            Phase 29I — hidden design prototype. Mounted above /:journey/:stage
+            so the generic stage route cannot swallow it. No navigation links
+            here, noindex in the page head, and absent from the sitemap
+            allowlists in scripts/generate-sitemap.ts.
+          */}
+          <Route path="/prototype/memory-settings" element={<MemorySettingsPrototype />} />
           <Route path="/:journey/:stage" element={<StagePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

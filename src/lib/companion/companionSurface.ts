@@ -17,6 +17,9 @@ export const COMPANION_HIDDEN_PREFIXES = [
   "/ask",
   "/auth",
   "/setup",
+  // Phase 29I — design prototypes are never allowed to imply a live companion
+  // connection, so the launcher and panel stay off every /prototype route.
+  "/prototype",
   "/not-found",
   "/404",
 ] as const;

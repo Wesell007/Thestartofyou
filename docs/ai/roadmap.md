@@ -47,13 +47,13 @@ Phases 29D, 29E, 29F and 29G are closed. The rest are not started. Each begins o
 
 **Exit.** Met. Design document complete, supporting docs updated, `npm run typecheck` and `npm run build` pass, and the phase report confirms no application code, schema, migration, RLS, route, auth, SEO or sitemap change. The privacy and legal review itself remains outstanding and is a gate item for 29J, not for this phase.
 
-## Phase 29I — memory settings UI prototype
+## Phase 29I — memory settings UI prototype — CLOSED
 
-**Entry.** 29H closed.
+**Entry.** Met. 29H closed.
 
-**Work.** Prototype the memory settings surface: level switches, the visible item list, edit, delete one, delete all, pause, the separate journal toggle default off, and the plain explanation copy. Prototype only, no persistence.
+**Work.** Front-end prototype only, at the hidden route `/prototype/memory-settings`: explanation and default-off framing, a status card, the five permission levels with sensitive memory shown as unavailable and switchless, three synthetic remembered items with edit, review and delete, pause and delete-all confirmations, a separate journal boundary card with no toggle, a sensitive information boundary, and a "What does my companion remember?" viewer across the off, empty and example states. All state is local React state. No persistence, no Supabase read or write, no browser storage, no network call, no companion connection and nothing passed into an AI request. `/prototype` was added to `COMPANION_HIDDEN_PREFIXES` so the launcher and panel never appear on the prototype, and the page uses its own static chrome rather than `MyWeekHeader`, which runs `useLifecycle` and Supabase work.
 
-**Exit.** An approved surface with consent copy signed off and the copy version recorded.
+**Exit.** Met. Surface built and reviewable, `noindex` set, route absent from navigation and from the sitemap allowlists, eleven prototype guard tests passing, and `npm test`, `npm run lint`, `npm run typecheck` and `npm run build` all pass. Consent copy sign-off and a recorded copy version remain outstanding and carry into the memory gate for 29J.
 
 ## Phase 29J — explicit saved-memory MVP
 

@@ -108,7 +108,7 @@ For a change to external source routing:
 - [ ] Escalation still decided before source selection, fetching and the model call
 - [ ] `first_year_day_recap` still ungrounded
 
-**Start of You content grounding: blocked.** (Phase 30C note: the metadata model, approval registry and default-deny eligibility helpers now exist in `src/lib/grounding/`, but no article satisfies them — `listGroundingEligibleSlugs()` returns empty, and nothing in the AI path reads them.) This product's own articles are not approved as grounding material. No article may be read by the AI until every item below is recorded per article, plus an explicit default-off grounding-approval flag.
+**Start of You content grounding: blocked.** (Phase 30C note: the metadata model, approval registry and default-deny eligibility helpers now exist in `src/lib/grounding/`, but no article satisfies them — `listGroundingEligibleSlugs()` returns empty, and nothing in the AI path reads them. Phase 30D note: registry drift is now guarded by `src/test/articleGroundingDrift.test.ts` — full 206-article coverage, no orphans, no duplicates, zero approved — and the review queue and per-article template are in `article-grounding-review-queue.md` and `article-grounding-review-template.md`. Still zero articles approved.) This product's own articles are not approved as grounding material. No article may be read by the AI until every item below is recorded per article, plus an explicit default-off grounding-approval flag.
 
 - [ ] Original content, medically reviewed where needed by a named reviewer
 - [ ] Reviewed date present and inside the freshness window for its sensitivity level
@@ -123,3 +123,5 @@ For a change to external source routing:
 - [ ] Evaluation examples added, including archived, deprecated and review-lapsed cases
 - [ ] Rollback defined and possible without a migration
 - [ ] Confirmed no user-authored content (journal, reflection, note, log, memory, media) is in the eligible set
+- [x] Registry drift guard in place: every article has a record, every record has an article, no duplicates (Phase 30D)
+- [x] Review queue and per-article review template published (Phase 30D)

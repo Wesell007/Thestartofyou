@@ -144,7 +144,17 @@ Recommended by Phase 30A. None of these is authorised: each needs its own approv
 
 **Exit.** Metadata model present, lifecycle and missing-metadata exclusion proven in tests, zero articles approved, zero AI usage, no version constant bumped. Closed after validation passed and the report confirmed no AI behaviour changed.
 
-### Phase 30D — curated brand-answer grounding behind a flag — FUTURE, NOT STARTED
+### Phase 30D — registry drift guard and review queue — CLOSED
+
+**Entry.** 30C closed with the metadata model and default-deny registry in place.
+
+**Work.** Governance and QA only. `src/test/articleGroundingDrift.test.ts` proves every article slug has a registry record, every registry record maps to a real article, there are no duplicates and nothing is approved; it is the only place article datasets are imported, and it asserts the runtime grounding modules import none. `docs/ai/article-grounding-review-queue.md` sets out the 206-article queue with counts and a cautious review order, and `docs/ai/article-grounding-review-template.md` is the per-article review form.
+
+**Exit.** Drift guard passing, full coverage confirmed, zero approved articles, no AI behaviour change, no version constant bumped. Closed.
+
+**Next gated step.** Per-article review at tier 1 (low-risk brand, navigation and product guidance) using the template. Review does not grant approval; approval is its own gated phase.
+
+### Phase 30D.1 — curated brand-answer grounding behind a flag — FUTURE, NOT STARTED
 
 **Entry.** 30C closed, the per-article criteria satisfied and recorded for every mapped article, stale-content evaluations in place.
 

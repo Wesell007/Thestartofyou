@@ -25,6 +25,8 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 | `content-grounding-readiness.md` | Phase 30A grounding audit: current source routing, coverage strengths and gaps, why Start of You content is not approved for grounding, the criteria and gated future options (audit only, nothing built) |
 | `content-grounding-readiness.md` (Phase 30B section) | The delivered widened NHS routing: sources added, routes added, collisions resolved, remaining gaps |
 | `content-grounding-readiness.md` (Phase 30C section) | The article grounding metadata model, approval statuses, sensitivity levels, default-deny rule and eligibility logic (governance only, no article connected to AI) |
+| `article-grounding-review-queue.md` | Phase 30D review queue: article counts by journey, status, sensitivity and metadata gap, cautious review order and exit criteria (governance only, zero articles approved) |
+| `article-grounding-review-template.md` | Phase 30D per-article grounding review form and its rules |
 | `versioning.md` | The AI version constants, prompt fingerprints and the rules for bumping them |
 
 | `roadmap.md` | Phases 29D to 29L with entry and exit criteria, plus the separate audit and redesign track |
@@ -43,6 +45,7 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 - 30A content grounding readiness audit
 - 30B external source routing coverage upgrade
 - 30C article grounding metadata and approval model (governance data only, zero articles approved)
+- 30D article grounding registry drift guard and review queue (governance and QA only, zero articles approved)
 - 29F controlled pregnancy context upgrade
 - 29G permissioned memory and personalisation design (specification only)
 - 29H memory schema and RLS design review (design review only)

@@ -39,13 +39,13 @@ Phases 29D, 29E, 29F and 29G are closed. The rest are not started. Each begins o
 
 **Exit.** Met. Docs complete, `npm run typecheck` and `npm run build` pass, and the phase report confirms no application code, schema, RLS, route, auth, SEO or sitemap change.
 
-## Phase 29H — memory schema and RLS design review
+## Phase 29H — memory schema and RLS design review — CLOSED
 
-**Entry.** 29G closed.
+**Entry.** Met. 29G closed.
 
-**Work.** Review, on paper, the table shape implied by the data boundary contract in `memory-design.md`: owner-scoped RLS, grants in the same migration, journey scoping, soft delete, expiry, consent version, and how deletion joins `delete-account`. No migration is written in this phase.
+**Work.** Design and review only. No migration, table, enum, index, grant, RLS policy, storage bucket, edge function or application code. Deliverable is `memory-schema-rls-design.md`: three proposed tables (`ai_memory_items`, `ai_memory_consents`, `ai_memory_events`), their enums, constraints, indexes and grants; owner-scoped RLS as pseudo-SQL with a single controlled read function; a ten-row threat model led by service-role over-read; consent, pause, deletion, expiry and account-deletion behaviour; server-side access rules for future edge functions; write-time validation; and a pre-migration review checklist. Category F stays structurally unstorable and journal content stays unbuildable. Governance docs updated to match.
 
-**Exit.** An approved schema and policy design, with the privacy and legal review recorded.
+**Exit.** Met. Design document complete, supporting docs updated, `npm run typecheck` and `npm run build` pass, and the phase report confirms no application code, schema, migration, RLS, route, auth, SEO or sitemap change. The privacy and legal review itself remains outstanding and is a gate item for 29J, not for this phase.
 
 ## Phase 29I — memory settings UI prototype
 

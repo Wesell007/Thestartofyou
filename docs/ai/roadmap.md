@@ -172,17 +172,19 @@ Recommended by Phase 30A. None of these is authorised: each needs its own approv
 
 **Exit.** Brand questions answered from approved content behind a feature flag, kill switch and rollback proven, no clinical use.
 
-### Phase 30F — grounding governance metadata and editorial status resolution — FUTURE, NOT STARTED
+### Phase 30F — grounding governance metadata and editorial status resolution — CLOSED
 
 **Entry.** 30E closed. Recommended immediate next phase on the Phase 30E findings.
 
-**Work.** Resolve the 52 unknown editorial statuses and define the governance model: content-owner rules, content-version rules, grounding-reviewer responsibility, reviewed-date rules, source-list validation requirements, candidate authority, approval authority and required review evidence.
+**Work.** Resolved the 52 unknown editorial statuses on explicit repository evidence only and defined the governance model: content-owner rules, content-version rules, grounding-reviewer responsibility, reviewed-date rules, source-list validation requirements, sensitivity decision rules, candidate authority, approval authority, required review evidence and a decision matrix across the five sensitivity levels. Published `article-grounding-governance.md` and `article-grounding-editorial-status-resolution.md`.
 
-**Exit.** Governance model recorded and editorial statuses resolved. **No article approvals in 30F.**
+**Result.** 52 investigated. 7 resolved to `live` (six `familyArticleData.ts` records with typed `status: "ready"`, plus `two-week-wait` on the inventory's explicit `currentStatus: "live"`), 0 draft, 0 archived, 0 deprecated, 45 still unknown and blocked. Registry split 117 live / 44 draft / 45 unknown of 206; 7 records changed, editorial status only. No governance metadata invented, no sensitivity assigned, no sources added, 31 records still without a source list. 0 candidates, 0 approved, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` unchanged at `30B-source-routing-v1`.
+
+**Exit.** Governance model recorded, editorial statuses resolved where evidence exists. **No article approvals in 30F.** Article grounding remains blocked.
 
 ### Phase 30G — Tier 2 low-risk general education review — FUTURE, NOT STARTED
 
-**Entry.** 30F closed. Review only; no approvals.
+**Entry.** 30F closed. Review only; no approvals. Phase 30F recommends that 30G may be planned, but only over the verified-`live` subset and only under the `article-grounding-governance.md` contract; the 45 records with unresolved editorial status stay excluded and blocked until an authoritative editorial decision resolves them, and no candidate may be set without the full candidate-authority evidence, which does not yet exist for any article.
 
 ### Phase 30H — wellbeing and sensitive support review — FUTURE, NOT STARTED
 

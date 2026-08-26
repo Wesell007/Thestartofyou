@@ -27,6 +27,8 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 | `content-grounding-readiness.md` (Phase 30C section) | The article grounding metadata model, approval statuses, sensitivity levels, default-deny rule and eligibility logic (governance only, no article connected to AI) |
 | `article-grounding-review-queue.md` | Phase 30D review queue: article counts by journey, status, sensitivity and metadata gap, cautious review order and exit criteria (governance only, zero articles approved) |
 | `article-grounding-review-template.md` | Phase 30D per-article grounding review form and its rules |
+| `article-grounding-editorial-status-resolution.md` | Phase 30F per-record editorial status resolution for the 52 unknown records: `articleInventory.ts` evidence reconciliation, 7 resolved to live, 45 still unknown, verified totals (metadata only, zero articles approved) |
+| `article-grounding-governance.md` | Phase 30F normative governance contract for blocked → candidate → approved: content owner, content version, grounding reviewer, reviewed date, source-list validation, sensitivity decision rules, candidate authority, approval authority, review evidence package and decision matrix (roles and rules only, no people assigned, no article classified) |
 | `article-grounding-tier-1-review.md` | Phase 30E Tier 1 review batch: 206 records screened (110 live, 44 draft, 52 unknown), the 12 support-journey Tier 1 corrections, six body-reviewed exclusions, zero accepted candidates, governance gaps and the recommended next phase (review only, zero articles approved) |
 | `versioning.md` | The AI version constants, prompt fingerprints and the rules for bumping them |
 
@@ -48,6 +50,7 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 - 30C article grounding metadata and approval model (governance data only, zero articles approved)
 - 30D article grounding registry drift guard and review queue (governance and QA only, zero articles approved)
 - 30E Tier 1 article grounding review batch (review only, 0 accepted candidates, 0 registry changes, zero articles approved, AI runtime unchanged, article grounding still blocked)
+- 30F grounding governance metadata and editorial status resolution (52 unknown statuses investigated, 7 resolved to live, 45 still unknown, governance contract published covering content owner, content version, grounding reviewer, reviewed date, source-list validation, sensitivity decision rules, candidate authority, approval authority and review evidence; no governance metadata invented, 0 candidates, 0 approvals, AI runtime unchanged, article grounding still blocked)
 - 29F controlled pregnancy context upgrade
 - 29G permissioned memory and personalisation design (specification only)
 - 29H memory schema and RLS design review (design review only)

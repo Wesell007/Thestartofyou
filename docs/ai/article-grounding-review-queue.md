@@ -109,3 +109,13 @@ This document remains the Phase 30D record and is not rewritten. Phase 30E adds 
 - **Scoped conclusion.** No purely product, journal or navigation article was identified among the 206 article-grounding registry records screened in Phase 30E. This applies only to this registry, not to the wider Start of You website, product, journal or navigation experience.
 - **Governance gaps unchanged.** Owner, content version, grounding reviewer and reviewed date remain recorded as Missing for all 206 records. Source-list presence is governance metadata only.
 - **Next gated step.** Phase 30F — grounding governance metadata and editorial status resolution, not Tier 2. Start of You article grounding remains blocked and the library is not grounding-ready.
+
+## Phase 30F annotation — governance and editorial status resolution
+
+This document remains the Phase 30D record. Phase 30F adds the following.
+
+- **Sections 3 and 5, editorial status.** 52 unknown records were investigated on explicit repository evidence. 7 resolved to `live`, 0 to draft, 0 to archived, 0 to deprecated, 45 remain unknown. Post-30F split: **117 live, 44 draft, 45 unknown** of 206. Per-record detail and the `articleInventory.ts` evidence reconciliation are in `article-grounding-editorial-status-resolution.md`.
+- **Sections 7 to 10, missing metadata.** Unchanged: owner, content version, grounding reviewer and reviewed date remain Missing for all 206. Nothing was invented to reduce the counts.
+- **Section 11, source lists.** Unchanged: 31 records with no source list, now a formally defined governance gap. No sources were added or rewritten.
+- **Exit criteria.** Superseded in detail by `article-grounding-governance.md`, which is now the normative contract for `blocked → candidate → approved`, including candidate authority, approval authority, the review evidence package and the sensitivity decision matrix.
+- **Result.** 0 candidate records, 0 approved records, `listGroundingEligibleSlugs()` returns `[]`. Start of You article grounding remains blocked. The next gated step is Phase 30G — Tier 2 low-risk general education review, which was not started here.

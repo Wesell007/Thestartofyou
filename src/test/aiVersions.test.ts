@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import endpointSource from "../../supabase/functions/ai-search/index.ts?raw";
 import {
+  AI_CONTEXT_CONTRACT_VERSION,
   AI_EVAL_DATASET_VERSION,
   AI_MODEL_ID,
   AI_PHASE,
@@ -9,6 +10,7 @@ import {
   AI_SOURCE_ROUTING_VERSION,
   AI_VERSION_SUMMARY,
 } from "../../supabase/functions/_shared/aiVersions";
+
 
 
 describe("AI version constants", () => {

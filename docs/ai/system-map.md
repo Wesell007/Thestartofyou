@@ -117,8 +117,9 @@ Everything below the hard pattern relies on prompt rules, not code.
 
 Built by allowlist only, capped at 500 characters:
 
-- `companionPanelContext.ts` — coarse route family plus tone.
-- `companionContext.ts` — pregnancy week, trimester label, due date day and month only, tone, short page hint.
+- `pregnancyAiContext.ts` — Phase 29F, the pregnancy context contract. The only pregnancy fields that may be sent: `journey`, `weekNumber` (1-42), `trimester` (derived from the week, never from a date), `pageFamily` (`my-week`, `week-detail`, `journey`, `toolkit`, `due-date`, `pregnancy-guidance`, `ask`), `pageTopic` (short public page label only), `toneHint` (`calm`, `practical`, `reassuring`) and `contextSource` (`route`, `savedJourney`, `page`). The builder picks each field explicitly at runtime and never spreads, stringifies or forwards the raw input, so unknown keys cannot pass through. No dates of any kind are included.
+- `companionPanelContext.ts` — coarse route family plus tone; on `pregnancy_week_companion` routes it delegates to `pregnancyAiContext.ts`.
+- `companionContext.ts` — legacy pregnancy builder retained for reference only; no surface calls it since Phase 29F.
 - `ttcAskContext.ts`, `firstYearCompanionContext.ts` — coarse stage facts.
 
 Deliberately excluded everywhere: names, emails, user or child or pregnancy IDs, reflection and note text, journal or memory content, media URLs, exact private dates, cycle detail beyond coarse stage, and chat history.
@@ -145,7 +146,7 @@ Callers: `src/pages/AskPage.tsx`, `CompanionMessageList.tsx`, `SectionAskAI.tsx`
 
 ## 12. Existing test coverage
 
-`src/test/aiModes.test.ts`, `src/test/aiPromptRegistry.test.ts`, `src/test/aiVersions.test.ts`, `src/test/aiAnswerDisplay.test.ts`, `src/test/aiSafetyHarness.test.ts`, `src/test/aiSearchEndpoint.test.ts`, `src/test/aiSearchCallerModes.test.tsx`, `src/test/edgeFunctionValidation.test.ts`, `src/lib/aiAnswerSafety.test.ts`, `src/lib/askClarification.test.ts`, `src/lib/askTrustCopy.test.ts`, `src/lib/companion/companionMode.test.ts`, `src/lib/companionContext.test.ts`, `src/lib/firstYearCompanionContext.test.ts`, `src/lib/ttcAskContext.test.ts`, `src/components/shared/EditorialAnswer.test.tsx`.
+`src/test/aiModes.test.ts`, `src/test/aiPromptRegistry.test.ts`, `src/test/aiVersions.test.ts`, `src/test/aiAnswerDisplay.test.ts`, `src/test/aiSafetyHarness.test.ts`, `src/test/aiSearchEndpoint.test.ts`, `src/test/aiSearchCallerModes.test.tsx`, `src/test/edgeFunctionValidation.test.ts`, `src/lib/aiAnswerSafety.test.ts`, `src/lib/askClarification.test.ts`, `src/lib/askTrustCopy.test.ts`, `src/lib/companion/companionMode.test.ts`, `src/lib/companionContext.test.ts`, `src/lib/pregnancyAiContext.test.ts`, `src/lib/companion/companionPanelContext.test.ts`, `src/lib/firstYearCompanionContext.test.ts`, `src/lib/ttcAskContext.test.ts`, `src/components/shared/EditorialAnswer.test.tsx`.
 
 These cover prompt composition and drift, version constants, mode routing, source routing, sanitisation, link stripping, context builders, rendering and the deterministic safety harness. They do not cover live model output — that remains a manual review step before release.
 

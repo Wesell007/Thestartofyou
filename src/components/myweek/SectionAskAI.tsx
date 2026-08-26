@@ -5,18 +5,21 @@ import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 import { useAISearch } from "@/hooks/useAISearch";
 import { sanitiseAnswerForDisplay } from "@/lib/aiAnswerSafety";
 import { toneLabel } from "@/lib/companion";
+import { COMPANION_CONTEXT_MAX_LENGTH } from "@/lib/companionContext";
 import {
-  buildCompanionContext,
-  COMPANION_CONTEXT_MAX_LENGTH,
-} from "@/lib/companionContext";
+  buildPregnancyAiContext,
+  pregnancyToneHint,
+} from "@/lib/pregnancyAiContext";
 
 import { navigateToAsk } from "@/lib/askNavigation";
 
 interface Props {
   week: number;
   seed: string;
+  /** Kept for the surrounding layout only. Never sent to the AI (Phase 29F). */
   dueDate?: Date | null;
 }
+
 
 const CHIPS = [
   "What should I remember about this week?",
@@ -59,10 +62,11 @@ const renderAnswerLines = (body: string) =>
 
 
 /**
- * Inline AI companion card. Sends only the coarse stage context built by
- * buildCompanionContext — no name, reflection, media or memory data.
+ * Inline AI companion card. Phase 29F: sends only the allowlisted pregnancy
+ * context (week, trimester, page family, tone) built by
+ * buildPregnancyAiContext — no due date, name, reflection, media or memory.
  */
-const SectionAskAI = ({ week, seed, dueDate }: Props) => {
+const SectionAskAI = ({ week, seed }: Props) => {
   const navigate = useNavigate();
   const { name, tone } = useCompanionIdentity();
   const { answer, isLoading, error, ask, reset } = useAISearch();
@@ -70,9 +74,16 @@ const SectionAskAI = ({ week, seed, dueDate }: Props) => {
   const [asked, setAsked] = useState("");
 
   const context = useMemo(
-    () => buildCompanionContext({ week, dueDate, tone }),
-    [week, dueDate, tone],
+    () =>
+      buildPregnancyAiContext({
+        weekNumber: week,
+        pageFamily: "my-week",
+        toneHint: pregnancyToneHint(tone),
+        contextSource: "page",
+      }),
+    [week, tone],
   );
+
 
   const eyebrow = name ? `Ask ${name} about this week` : "Ask AI about this week";
   const heading = name

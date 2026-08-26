@@ -13,6 +13,13 @@
 import type { CompanionMode } from "./companionMode";
 import { companionRouteFamily } from "./companionMode";
 import type { CompanionTone } from "@/lib/companion";
+import {
+  buildPregnancyAiContext,
+  pregnancyToneHint,
+  resolvePregnancyPageFamily,
+  resolvePregnancyRouteWeek,
+} from "@/lib/pregnancyAiContext";
+
 
 /** Matches the existing shared cap used by the other context builders. */
 export const COMPANION_PANEL_CONTEXT_MAX_LENGTH = 500;
@@ -60,6 +67,18 @@ export function buildCompanionPanelContext({
   pageHint,
   tone,
 }: CompanionPanelContextInput): string {
+  // Phase 29F — pregnancy routes use the dedicated safe context contract, which
+  // adds page family and route week while excluding every private field.
+  if (mode === "pregnancy_week_companion") {
+    return buildPregnancyAiContext({
+      weekNumber: resolvePregnancyRouteWeek(pathname),
+      pageFamily: resolvePregnancyPageFamily(pathname),
+      pageTopic: pageTopic ? clean(pageTopic) : undefined,
+      toneHint: pregnancyToneHint(tone),
+      contextSource: "route",
+    });
+  }
+
   const parts: string[] = [`Journey area: ${companionRouteFamily(pathname)}.`];
 
   const stage = stageLabel ? clean(stageLabel) : "";
@@ -67,6 +86,7 @@ export function buildCompanionPanelContext({
 
   const topic = pageTopic ? clean(pageTopic) : "";
   if (topic) parts.push(`Page topic: ${topic}.`);
+
 
   if (tone) parts.push(toneHint(tone));
 

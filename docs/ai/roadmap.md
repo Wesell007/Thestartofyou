@@ -1,6 +1,6 @@
 # AI roadmap after Phase 29C
 
-Phases 29D and 29E are closed. The rest are not started. Each begins only when its entry criteria are met, and closes only when its exit criteria are met and the release gate passes.
+Phases 29D, 29E and 29F are closed. The rest are not started. Each begins only when its entry criteria are met, and closes only when its exit criteria are met and the release gate passes.
 
 ## Phase 29D — evaluation harness and safety tests — CLOSED
 
@@ -23,13 +23,13 @@ Phases 29D and 29E are closed. The rest are not started. Each begins only when i
 **Exit.** Met for the governance scope. Prompt duplication removed, fingerprints pinned, no harness regression, and panel and `/ask` behave the same for broad and urgent wording.
 
 
-## Phase 29F — controlled pregnancy context upgrade
+## Phase 29F — controlled pregnancy context upgrade — CLOSED
 
-**Entry.** 29E closed. Privacy note written for each new field.
+**Entry.** Met. 29E closed, privacy note written for each new field.
 
 **Work.** Allow a slightly richer, still coarse pregnancy context: week, trimester, first or later pregnancy, and whether an appointment is imminent. No notes, no symptoms, no free text. Keep the 500-character cap.
 
-**Exit.** Answers are demonstrably more relevant on a held-out prompt set, with no new field outside the allowlist and no regression in escalation behaviour.
+**Exit.** Met. `src/lib/pregnancyAiContext.ts` defines the allowlist, the runtime picker refuses unknown keys, the due date day and month is gone from the My Week card, and the safety harness, mode routing and escalation tests are unchanged and passing.
 
 ## Phase 29G — permissioned memory design
 

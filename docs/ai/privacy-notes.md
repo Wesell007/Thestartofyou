@@ -12,7 +12,9 @@ Per request, only:
 - a bounded context string, capped at 500 characters, built by allowlist
 - the resolved mode
 
-The context builders (`companionPanelContext.ts`, `companionContext.ts`, `ttcAskContext.ts`, `firstYearCompanionContext.ts`) derive their values from the route and coarse stage facts: route family, pregnancy week and trimester, due date day and month without the year, coarse first-year age, tone preference, a short page hint.
+The context builders (`pregnancyAiContext.ts`, `companionPanelContext.ts`, `ttcAskContext.ts`, `firstYearCompanionContext.ts`) derive their values from the route and coarse stage facts: route family, pregnancy week and trimester, coarse first-year age, tone preference, a short public page label.
+
+Phase 29F narrowed the pregnancy surfaces to a single contract in `pregnancyAiContext.ts`. Allowed: `journey`, `weekNumber`, `trimester`, `pageFamily`, `pageTopic`, `toneHint`, `contextSource`. Two safeguards hold it: the builder picks each approved field explicitly at runtime and never spreads or serialises the input object, and `pageTopic` may only be a short public page label, never the person's question or any private record. The My Week card no longer sends the due date day and month; no pregnancy context now contains a date of any kind.
 
 Deliberately excluded by construction: names, emails, user IDs, child IDs, pregnancy IDs, journal and reflection text, note and log content, memory entries, photo, video and voice data, media URLs, exact private dates, cycle detail beyond coarse stage, and chat history.
 

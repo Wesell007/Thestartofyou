@@ -61,9 +61,12 @@ Phases 29D, 29E, 29F and 29G are closed. The rest are not started. Each begins o
 
 **Work.** Review and planning only. No migration, table, enum, RLS policy, edge function, application code, route, SEO change or AI behaviour change. Deliverable is `docs/ai/memory-mvp-readiness.md`, with supporting updates to `roadmap.md`, `release-gate.md` and `README.md`. The phase records honestly whether the full memory gate in `release-gate.md` is satisfiable, identifies the remaining blockers, and defines the narrow MVP scope and the future implementation sub-phases 29J.1 to 29J.4.
 
+**Review artifact.** The evidence pack in `docs/ai/memory-gate-evidence-pack.md` is produced for privacy/legal and internal product review. It is not implementation and does not itself close the gate.
+
 **MVP scope.** Category A explicit preferences and Category C explicit user-saved preferences only. User-visible saved items only. Explicit save action only. No extraction, no inference, no ordinary conversation memory, no chat history, no journal content, no sensitive content, no Category F. Feature flag off by default. Memory is not passed into AI calls until 29J.3, which is a separate future sub-phase requiring its own gate check.
 
 **Exit.** Gate reviewed, blockers named, MVP scope agreed, and sub-phases 29J.1 to 29J.4 defined. This phase does **not** mark implementation ready.
+
 
 ## Phase 29J.1 — migration and schema — FUTURE, NOT STARTED
 

@@ -21,8 +21,9 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 | `memory-schema-rls-design.md` | Future memory tables, enums, constraints, RLS, threat model, deletion and validation design (review only, nothing built) |
 | `memory-settings-prototype.md` | Where the Phase 29I memory settings prototype lives and what it deliberately does not do |
 | `memory-mvp-readiness.md` | Phase 29J pre-build gate outcome: MVP scope, blockers, checklists and implementation sequence (planning only, nothing built) |
-
+| `memory-gate-evidence-pack.md` | Review pack for privacy/legal and internal product reviewers, supporting the pre-build gate (review only, nothing built) |
 | `versioning.md` | The AI version constants, prompt fingerprints and the rules for bumping them |
+
 | `roadmap.md` | Phases 29D to 29L with entry and exit criteria, plus the separate audit and redesign track |
 
 ## Closed AI phases

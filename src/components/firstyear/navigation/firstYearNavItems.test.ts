@@ -18,7 +18,7 @@ describe("First Year navigation items", () => {
     ]);
   });
 
-  it("does not offer a guidance or Cindy destination", () => {
+  it("does not offer a guidance or companion destination", () => {
     const ids = FIRST_YEAR_NAV_ITEMS.map((item) => item.id);
     expect(ids).not.toContain("guidance");
     expect(ids).not.toContain("ask");

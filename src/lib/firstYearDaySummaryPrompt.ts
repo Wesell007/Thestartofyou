@@ -1,5 +1,5 @@
 /**
- * Pure builders for the consent-based Cindy day recap on the Today page.
+ * Pure builders for the consent-based companion day recap on the Today page.
  *
  * Nothing here calls the network. The digest is only ever built inside the
  * "Summarise today" button handler, never on render.
@@ -35,8 +35,8 @@ export const DAY_SUMMARY_QUERY_MAX_LENGTH = 1000;
 export const MOMENT_SNIPPET_MAX_LENGTH = 90;
 
 /** The instruction is never trimmed, whatever else has to go. */
-export const CINDY_DAY_SUMMARY_GUARDRAILS = [
-  "You are Cindy, a gentle First Year companion inside The Start of You.",
+export const DAY_SUMMARY_GUARDRAILS = [
+  "You are a gentle First Year companion inside The Start of You.",
   "Write a short recap of only the care events listed below for this one day.",
   "Use British English, no outside knowledge, no web search, no advice of any kind.",
   "Do not diagnose, do not advise on sleep, do not predict a next feed, sleep or nappy, and do not compare the baby with typical ranges.",
@@ -197,7 +197,7 @@ export const buildDayRhythmDigest = (
 
 const assemble = (digest: DayRhythmDigest, lines: string[]): string =>
   [
-    CINDY_DAY_SUMMARY_GUARDRAILS,
+    DAY_SUMMARY_GUARDRAILS,
     `Day: ${digest.day}.`,
     `Logged: ${digest.counts}.`,
     lines.length > 0 ? `Events:\n${lines.join("\n")}` : "Events: none logged.",

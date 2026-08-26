@@ -47,8 +47,8 @@ const StepCompanion = forwardRef<HTMLHeadingElement, Props>(
         </h2>
         <p className="font-serif text-[15px] leading-[1.7] text-foreground/80 max-w-[52ch] mb-6">
           {hasSavedName
-            ? "You can keep the name you chose, or change it here. Nothing you write is shared with her."
-            : "You can keep Cindy, choose another name, or write your own."}
+            ? "You can keep the name you chose, or change it here. Nothing you write is shared with your companion."
+            : "You can pick one of these names, write your own, or carry on with no name at all."}
         </p>
 
         {!hasSavedName ? (
@@ -124,7 +124,7 @@ const StepCompanion = forwardRef<HTMLHeadingElement, Props>(
 
         <fieldset className="mb-9">
           <legend className="font-sans text-[13px] font-medium text-foreground/85 mb-3">
-            How should she sound?
+            How should it sound?
           </legend>
           <div className="flex flex-wrap gap-2">
             {TONE_OPTIONS.map((option) => (

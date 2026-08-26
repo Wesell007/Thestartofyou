@@ -6,6 +6,10 @@ import { sanitiseAnswerForDisplay } from "@/lib/aiAnswerSafety";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 import { toneLabel } from "@/lib/companion";
 import {
+  companionAskLabel,
+  companionSentenceSubject,
+} from "@/lib/companion/companionName";
+import {
   FIRST_YEAR_CONTEXT_MAX_LENGTH,
   buildFirstYearCompanionContext,
 } from "@/lib/firstYearCompanionContext";
@@ -24,9 +28,6 @@ type Props = {
   dateOfBirth?: string | null;
   babyCount: number;
 };
-
-/** Default companion name when the person did not choose one. */
-const DEFAULT_COMPANION = "Cindy";
 
 const CHIPS = [
   "What can I expect around this age?",
@@ -78,7 +79,8 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
   const [question, setQuestion] = useState("");
   const [asked, setAsked] = useState("");
 
-  const companion = name?.trim() || DEFAULT_COMPANION;
+  const companion = companionSentenceSubject(name);
+  const askLabel = companionAskLabel(name);
 
   const context = useMemo(
     () => buildFirstYearCompanionContext({ dateOfBirth, babyCount, tone }),
@@ -142,7 +144,7 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
                   backgroundColor: "hsl(var(--sage))",
                 }}
               >
-                Ask {companion}
+                {askLabel}
               </span>
               {tone && (
                 <span
@@ -162,7 +164,7 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
               id="ask-companion"
               className="font-serif text-[1.5rem] sm:text-[1.7rem] leading-[1.16] text-foreground mb-2.5"
             >
-              Ask {companion} about this stage
+              {askLabel} about this stage
             </h2>
             <p className={`${FY_INTRO} max-w-[46ch] mb-5`}>
               Ask one question here and get a short answer. {companion} answers from
@@ -200,7 +202,7 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
                 id="first-year-companion-question"
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
-                placeholder={`Ask ${companion} something`}
+                placeholder={`${askLabel} something`}
                 maxLength={300}
                 className={`flex-1 min-w-0 rounded-full bg-background/70 px-4 py-2.5 font-sans text-[14px] text-foreground placeholder:text-foreground/60 ${FY_FIELD_FOCUS_RING}`}
                 style={{ border: "1px solid hsl(var(--sage) / 0.3)" }}

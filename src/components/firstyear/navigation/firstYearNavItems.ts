@@ -2,7 +2,7 @@
  * The signed-in First Year navigation.
  *
  * Only routes that already exist are listed here. There is no signed-in
- * guidance or reading route, and no dedicated Cindy route, so neither
+ * guidance or reading route, and no dedicated companion route, so neither
  * appears. Pure data plus a pure resolver, so active state can be tested
  * without a router.
  */

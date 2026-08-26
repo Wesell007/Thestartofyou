@@ -32,6 +32,21 @@ export function companionSubject(raw: string | null | undefined): string {
   return companionDisplayName(raw) ?? COMPANION_NEUTRAL_SUBJECT;
 }
 
+/**
+ * Subject at the start of a sentence: the chosen name, or the neutral
+ * fallback with a capital. Never a hardcoded name.
+ */
+export function companionSentenceSubject(raw: string | null | undefined): string {
+  return companionDisplayName(raw) ?? "Your companion";
+}
+
+/** Button, chip and kicker label: "Ask <name>" or "Ask your companion". */
+export function companionAskLabel(raw: string | null | undefined): string {
+  const name = companionDisplayName(raw);
+  return name ? `Ask ${name}` : "Ask your companion";
+}
+
+
 /** AI disclosure plus safety and privacy line shown in the panel. */
 export function companionSafetyLine(raw: string | null | undefined): string {
   const name = companionDisplayName(raw);

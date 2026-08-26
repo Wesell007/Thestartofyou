@@ -3,6 +3,7 @@ import { Loader2, Sparkles } from "lucide-react";
 import { useAISearch } from "@/hooks/useAISearch";
 import { sanitiseAnswerForDisplay } from "@/lib/aiAnswerSafety";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
+import { companionSentenceSubject } from "@/lib/companion/companionName";
 import {
   FY_CARD_RADIUS,
   FY_FOCUS_RING,
@@ -15,8 +16,6 @@ import {
 } from "@/lib/firstYearDaySummaryPrompt";
 import { buildFirstYearCompanionContext } from "@/lib/firstYearCompanionContext";
 import type { CareEvent } from "@/lib/firstYearCareEventsSchema";
-
-const DEFAULT_COMPANION = "Cindy";
 
 type Props = {
   /** Today's care events, already scoped to the chosen baby where relevant. */
@@ -74,7 +73,7 @@ const DaySummaryCard = ({ events, day, babyLabels, dateOfBirth, babyCount }: Pro
   const { answer, isLoading, error, ask } = useAISearch();
   const [generatedAt, setGeneratedAt] = useState<string | null>(null);
 
-  const companion = name?.trim() || DEFAULT_COMPANION;
+  const companion = companionSentenceSubject(name);
   const hasEvents = events.length > 0;
 
   const summarise = () => {

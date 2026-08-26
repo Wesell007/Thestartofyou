@@ -18,6 +18,7 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 | `observability-and-incidents.md` | What to track later, kill switch and incident response |
 | `privacy-notes.md` | Health and fertility data handling, minimisation, memory preconditions |
 | `memory-design.md` | Permissioned memory and personalisation design (specification only, nothing built) |
+| `memory-schema-rls-design.md` | Future memory tables, enums, constraints, RLS, threat model, deletion and validation design (review only, nothing built) |
 | `versioning.md` | The AI version constants, prompt fingerprints and the rules for bumping them |
 | `roadmap.md` | Phases 29D to 29L with entry and exit criteria, plus the separate audit and redesign track |
 
@@ -34,6 +35,7 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 - 29E mode, prompt registry and output hygiene cleanup
 - 29F controlled pregnancy context upgrade
 - 29G permissioned memory and personalisation design (specification only)
+- 29H memory schema and RLS design review (design review only)
 
 ## How to use these documents
 

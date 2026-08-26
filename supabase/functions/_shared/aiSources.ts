@@ -87,6 +87,23 @@ const TOPICS: Topic[] = [
     urls: [APPROVED_SOURCES.ivf, APPROVED_SOURCES.infertility],
   },
   {
+    pattern:
+      /foods? to avoid|avoid giving|\bhoney\b|choking hazard|whole nuts|too much salt|unsafe food/,
+    family: "baby",
+    urls: [APPROVED_SOURCES.foodsToAvoid, APPROVED_SOURCES.firstSolidFoods],
+  },
+  {
+    pattern: /sippy|beaker|open cup|drinks? and cups|cows'? milk|water for (?:my )?(?:baby|toddler)/,
+    family: "baby",
+    urls: [APPROVED_SOURCES.drinksAndCups, APPROVED_SOURCES.youngChildrenFood],
+  },
+  {
+    pattern:
+      /wean|solid foods?|\bsolids\b|first foods|pur[eé]e|baby[- ]?led|highchair|finger food|what (?:to|should i) feed (?:my )?(?:baby|toddler|young child)/,
+    family: "baby",
+    urls: [APPROVED_SOURCES.firstSolidFoods, APPROVED_SOURCES.youngChildrenFood],
+  },
+  {
     pattern: /\bmov(?:e|es|ed|ing|ement|ements)\b|kick|flutter|wriggl|quicken/,
     family: "pregnancy",
     urls: [APPROVED_SOURCES.movements, APPROVED_SOURCES.keepingWell],
@@ -106,7 +123,7 @@ const TOPICS: Topic[] = [
   },
   {
     pattern:
-      /after (?:the )?birth|body after birth|post[- ]?pregnancy body|postpartum|postnatal recovery|stitches|perine|pelvic floor|\bpiles\b|haemorrhoid|lochia|after[- ]?pains|c[- ]?section (?:recovery|scar|wound)|cramp\w* (?:while|when|during) (?:breast)?feed/,
+      /after (?:the )?birth|body after birth|post[- ]?pregnancy body|postpartum|postnatal recovery|stitches|perine|pelvic floor|\bpiles\b|haemorrhoid|lochia|after[- ]?pains|c[- ]?section (?:recovery|scar|wound)|exercis\w* (?:again|after)|getting fit|back to running|cramp\w* (?:while|when|during) (?:breast)?feed/,
     family: "postpartum",
     urls: [APPROVED_SOURCES.postpartumBody, APPROVED_SOURCES.postpartumFitness],
   },
@@ -119,23 +136,6 @@ const TOPICS: Topic[] = [
     pattern: /labour|contraction|waters|giving birth|induction/,
     family: "pregnancy",
     urls: [APPROVED_SOURCES.labour],
-  },
-  {
-    pattern:
-      /foods? to avoid|avoid giving|\bhoney\b|choking hazard|whole nuts|too much salt|unsafe food/,
-    family: "baby",
-    urls: [APPROVED_SOURCES.foodsToAvoid, APPROVED_SOURCES.firstSolidFoods],
-  },
-  {
-    pattern: /sippy|beaker|open cup|drinks? and cups|cows'? milk|water for (?:my )?(?:baby|toddler)/,
-    family: "baby",
-    urls: [APPROVED_SOURCES.drinksAndCups, APPROVED_SOURCES.youngChildrenFood],
-  },
-  {
-    pattern:
-      /wean|solid foods?|\bsolids\b|first foods|pur[eé]e|baby[- ]?led|highchair|finger food|what (?:to|should i) feed (?:my )?(?:baby|toddler|young child)/,
-    family: "baby",
-    urls: [APPROVED_SOURCES.firstSolidFoods, APPROVED_SOURCES.youngChildrenFood],
   },
   {
     pattern:

@@ -61,3 +61,24 @@ Every future AI change — prompt edit, mode addition, source-routing change, mo
 - [ ] Rollback is possible without a database migration
 - [ ] Model and prompt version recorded in the phase report so a regression can be attributed
 - [ ] The kill-switch route is known and tested (see `observability-and-incidents.md`)
+
+## H. Memory gate
+
+Applies only to a change that introduces, widens or reads companion memory. No memory exists today; the design is in `memory-design.md`. Every item must be complete before any memory implementation ships. A failed item blocks release outright.
+
+- [ ] Legal and privacy review of memory as special category data, recorded in writing
+- [ ] Consent copy approved, and the consent version recorded against stored items
+- [ ] Sensitivity taxonomy approved, including the exclusion of category F (symptoms, loss, fertility treatment, mental health, abuse, baby health, medication)
+- [ ] Memory is off by default, and each level is opted into separately from account creation and analytics consent
+- [ ] Journal, reflection and media content stays behind its own separate toggle, default off
+- [ ] Deletion behaviour specified and wired into `supabase/functions/delete-account/index.ts` in the same change that creates persistence
+- [ ] Export behaviour specified alongside the person's other data
+- [ ] Schema and RLS design reviewed: owner-scoped policies, grants in the same migration, no cross-journey read path
+- [ ] Audit logging approach reviewed: no question, answer, journal or health content in logs
+- [ ] No real user data used in testing; every memory case synthetic
+- [ ] Memory evaluation prompts added and passing (see `eval-dataset-v1.md`)
+- [ ] Rollback plan defined and possible without a migration
+- [ ] Memory-off kill switch defined and tested, able to disable memory reads globally without a deploy
+- [ ] Incident process in `observability-and-incidents.md` updated with memory-specific severities
+- [ ] Confirmed the companion cannot write memory from a conversation without an explicit user action
+

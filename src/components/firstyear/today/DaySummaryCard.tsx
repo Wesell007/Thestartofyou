@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Loader2, Sparkles } from "lucide-react";
 import { useAISearch } from "@/hooks/useAISearch";
+import { sanitiseAnswerForDisplay } from "@/lib/aiAnswerSafety";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 import {
   FY_CARD_RADIUS,
@@ -29,12 +30,6 @@ type Props = {
   babyCount: number;
 };
 
-/** Strips any trailing sources block the shared answer format may add. */
-const splitSources = (raw: string) => {
-  const match = raw.match(/\n\s*(?:#+\s*)?(?:sources?|references?)\s*:?\s*\n/i);
-  if (!match || match.index === undefined) return raw;
-  return raw.slice(0, match.index).trim();
-};
 
 /**
  * The shared companion endpoint appends who to contact wording to every answer.
@@ -97,7 +92,11 @@ const DaySummaryCard = ({ events, day, babyLabels, dateOfBirth, babyCount }: Pro
     ask(query, context, { mode: "first_year_day_recap" });
   };
 
-  const body = stripContactWording(splitSources(answer));
+  // Recap-only: the shared fallback line carries professional-help wording, so
+  // it is never allowed to appear here.
+  const body = stripContactWording(
+    sanitiseAnswerForDisplay(answer, { isStreaming: isLoading, allowFallback: false }),
+  );
 
   return (
     <section className="pb-8" aria-labelledby="fy-day-summary-heading">

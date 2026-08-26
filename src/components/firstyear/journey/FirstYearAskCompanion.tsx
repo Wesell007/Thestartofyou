@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Loader2, Sparkles } from "lucide-react";
 import { useAISearch } from "@/hooks/useAISearch";
+import { sanitiseAnswerForDisplay } from "@/lib/aiAnswerSafety";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 import { toneLabel } from "@/lib/companion";
 import {
@@ -110,7 +111,7 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
     });
   };
 
-  const { body, sources } = splitSources(answer);
+  const body = sanitiseAnswerForDisplay(answer, { isStreaming: isLoading });
 
   return (
     <section className="pb-10" aria-labelledby="ask-companion">

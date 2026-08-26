@@ -112,7 +112,7 @@ How the selected pages become evidence, in `ai-search/index.ts`:
 - If every source fetch fails, the endpoint returns 503 rather than answering ungrounded.
 - Nothing is cached, snapshotted, indexed, embedded or persisted between requests.
 
-There is no RAG, no vector search, no article ingestion and no Start of You grounding. The readiness assessment for any of that, including what must be true before this product's own articles could ever be grounding material, is in `content-grounding-readiness.md` (Phase 30A, audit only).
+There is no RAG, no vector search, no article ingestion and no Start of You grounding. Phase 30C added `src/lib/grounding/` (types, a 206-record metadata-only approval registry, default-deny eligibility helpers) as a governance module that is deliberately **not** on the AI path: `ai-search`, the prompts, the modes, `aiSources.ts` and the answer renderers do not import it, and it stores no article body content. The readiness assessment for any of that, including what must be true before this product's own articles could ever be grounding material, is in `content-grounding-readiness.md` (Phase 30A, audit only).
 
 ## 5. Safety routing
 

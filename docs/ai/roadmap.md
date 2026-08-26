@@ -136,13 +136,13 @@ Recommended by Phase 30A. None of these is authorised: each needs its own approv
 
 **Deliberately out of scope and still deferred.** Loss, domestic abuse and complex perinatal mental health routing, which stay separate safety-reviewed phases; Start of You article grounding, still blocked at the gate; brand-answer grounding (Phase 30D).
 
-### Phase 30C — article metadata and approval model — FUTURE, NOT STARTED
+### Phase 30C — article metadata and approval model — CLOSED, pending validation record
 
-**Entry.** 30B closed, editorial ownership agreed, reviewer capacity confirmed.
+**Entry.** 30B closed, default-deny governance model agreed.
 
-**Work.** Design, then a data-layer change only: sensitivity level, content version, owner, lifecycle, closed tag vocabularies and a default-off grounding-approval flag. The AI reads nothing.
+**Work.** Data-layer only: `src/lib/grounding/` now holds a metadata-only type model, a 206-record approval registry and default-deny eligibility helpers. No article dataset is imported, no article body content is stored, and the AI reads none of it.
 
-**Exit.** Metadata present and required on eligible articles, lifecycle exclusion provable in tests, still zero AI usage.
+**Exit.** Metadata model present, lifecycle and missing-metadata exclusion proven in tests, zero articles approved, zero AI usage, no version constant bumped. Closed after validation passed and the report confirmed no AI behaviour changed.
 
 ### Phase 30D — curated brand-answer grounding behind a flag — FUTURE, NOT STARTED
 

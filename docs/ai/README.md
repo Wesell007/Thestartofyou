@@ -40,6 +40,8 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 - 29G permissioned memory and personalisation design (specification only)
 - 29H memory schema and RLS design review (design review only)
 - 29I memory settings UI prototype (front-end prototype only, no persistence)
+- 29J explicit saved-memory MVP pre-build gate (planning and review only, no persistence)
+
 
 ## How to use these documents
 

@@ -160,6 +160,29 @@ describe("MemorySettingsPrototype", () => {
     expect(shouldShowCompanionLauncher("/my-week")).toBe(true);
   });
 
+  it("renders no analytics consent banner alongside the prototype", () => {
+    render(
+      <HelmetProvider>
+        <MemoryRouter initialEntries={["/prototype/memory-settings"]}>
+          <ConsentBanner />
+          <MemorySettingsPrototype />
+        </MemoryRouter>
+      </HelmetProvider>,
+    );
+    expect(
+      screen.getByRole("heading", { level: 1, name: /memory is off for now/i }),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/accept analytics/i)).toBeNull();
+    expect(screen.queryByText(/reject analytics/i)).toBeNull();
+    expect(localSetSpy).not.toHaveBeenCalled();
+    expect(localGetSpy).not.toHaveBeenCalled();
+    expect(sessionSetSpy).not.toHaveBeenCalled();
+    expect(sessionGetSpy).not.toHaveBeenCalled();
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(supabaseGetSession).not.toHaveBeenCalled();
+  });
+
+
   it("keeps the prototype out of the source files and the sitemap generator", () => {
     expect(sitemapSource).not.toContain("/prototype");
     expect(appSource).toContain('path="/prototype/memory-settings"');

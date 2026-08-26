@@ -92,7 +92,7 @@ describe("eligibility gates", () => {
   for (const [field, reason] of removals) {
     it(`rejects when ${String(field)} is missing`, () => {
       const record = approvedFixture();
-      delete (record as Record<string, unknown>)[field as string];
+      delete (record as unknown as Record<string, unknown>)[field as string];
       const result = evaluateGroundingEligibility(record);
       expect(result.eligible).toBe(false);
       expect(result.reasons).toContain(reason);

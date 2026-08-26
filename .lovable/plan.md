@@ -25,7 +25,7 @@ A single authoritative design document for how the companion could remember thin
 
 **Update: `docs/ai/eval-dataset-v1.md`** — documentation-only description of eleven memory evaluation scenarios (memory off, what do you remember, forget this, save a preference, sensitive health disclosure, journal-like disclosure, diagnosis request using remembered context, delete memory, cross-journey leakage, deleted-memory reuse, inferring pregnancy from private text). The JSON dataset is not modified, so the harness is unaffected.
 
-**Update: `docs/ai/roadmap.md`** — mark 29G closed on approval and record the safe sequence: 29H schema and RLS design review, 29I memory settings UI prototype, 29J explicit saved-memory MVP, 29K memory eval harness, 29L controlled rollout behind a feature flag. Fable-led companion UI redesign stays a separate track. None of these are started.
+**Update: `docs/ai/roadmap.md`** — mark 29G as pending validation during the work, not closed. It is only marked closed once the docs are complete, `npm run typecheck` and `npm run build` pass, and the report confirms no application code, schema, route, auth, SEO or sitemap change. Record the approved sequence: 29H memory schema and RLS design review, 29I memory settings UI prototype, 29J explicit saved-memory MVP, 29K memory eval harness, 29L controlled rollout behind a feature flag. The existing content-grounding audit, voice readiness audit and Fable-led companion UI redesign move to a separate track. None of these are started.
 
 ## Validation
 

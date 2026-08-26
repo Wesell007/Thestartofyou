@@ -351,6 +351,13 @@ const App = () => (
           <Route path="/setup" element={<Setup />} />
           <Route path="/setup/trying-to-conceive" element={<SetupTTC />} />
           <Route path="/setup/first-year" element={<ProtectedRoute><FirstYearSetup /></ProtectedRoute>} />
+          {/*
+            Phase 29I — hidden design prototype. Mounted above /:journey/:stage
+            so the generic stage route cannot swallow it. No navigation links
+            here, noindex in the page head, and absent from the sitemap
+            allowlists in scripts/generate-sitemap.ts.
+          */}
+          <Route path="/prototype/memory-settings" element={<MemorySettingsPrototype />} />
           <Route path="/:journey/:stage" element={<StagePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

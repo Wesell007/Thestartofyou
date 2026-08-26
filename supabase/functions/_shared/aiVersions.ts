@@ -24,8 +24,14 @@ export const AI_SOURCE_ROUTING_VERSION = "29B1-source-routing-v1";
 /** The evaluation dataset the deterministic harness runs against. */
 export const AI_EVAL_DATASET_VERSION = "eval-dataset-v1";
 
+/**
+ * Bumped whenever the allowlist of fields a client may send as context
+ * changes. Phase 29F introduced the pregnancy context contract.
+ */
+export const AI_CONTEXT_CONTRACT_VERSION = "29F-context-v1";
+
 /** The phase these versions were last reviewed in. */
-export const AI_PHASE = "29E";
+export const AI_PHASE = "29F";
 
 /** Bundled summary, logged once per cold start. Never returned to a browser. */
 export const AI_VERSION_SUMMARY = {
@@ -34,7 +40,9 @@ export const AI_VERSION_SUMMARY = {
   safety: AI_SAFETY_RULESET_VERSION,
   sourceRouting: AI_SOURCE_ROUTING_VERSION,
   evalDataset: AI_EVAL_DATASET_VERSION,
+  contextContract: AI_CONTEXT_CONTRACT_VERSION,
   phase: AI_PHASE,
 } as const;
+
 
 export type AiVersionSummary = typeof AI_VERSION_SUMMARY;

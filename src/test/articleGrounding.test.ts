@@ -197,3 +197,73 @@ describe("AI boundary", () => {
     }
   });
 });
+
+/**
+ * Phase 30F — editorial status resolution pins.
+ *
+ * Seven records moved from `unknown` to `live` on explicit repository status
+ * evidence only. Nothing else about them changed and nothing became eligible.
+ */
+const PHASE_30F_RESOLVED_TO_LIVE = [
+  "calmer-evenings-after-busy-days",
+  "family-sick-days-at-home",
+  "planning-family-days-out",
+  "second-time-parenting",
+  "simple-family-play-ideas",
+  "staying-connected-as-parents",
+  "two-week-wait",
+] as const;
+
+describe("Phase 30F editorial status resolution", () => {
+  it("keeps the total registry count at 206", () => {
+    expect(ARTICLE_GROUNDING_REGISTRY.length).toBe(206);
+  });
+
+  it("pins the post-30F editorial status counts", () => {
+    const counts = ARTICLE_GROUNDING_REGISTRY.reduce<Record<string, number>>(
+      (acc, record) => {
+        acc[record.editorialStatus] = (acc[record.editorialStatus] ?? 0) + 1;
+        return acc;
+      },
+      {},
+    );
+    expect(counts).toEqual({ live: 117, draft: 44, unknown: 45 });
+  });
+
+  it("resolved exactly the seven evidence-backed records from unknown to live", () => {
+    for (const slug of PHASE_30F_RESOLVED_TO_LIVE) {
+      const record = getArticleGroundingRecord(slug);
+      expect(record, `missing registry record: ${slug}`).toBeDefined();
+      // old: "unknown" -> new: "live"
+      expect(record!.editorialStatus).toBe("live");
+    }
+  });
+
+  it("leaves the resolved records blocked on missing governance metadata", () => {
+    for (const slug of PHASE_30F_RESOLVED_TO_LIVE) {
+      const record = getArticleGroundingRecord(slug)!;
+      expect(record.approvalStatus).toBe("blocked_missing_metadata");
+      expect(record.owner).toBeUndefined();
+      expect(record.contentVersion).toBeUndefined();
+      expect(record.reviewer).toBeUndefined();
+      expect(record.reviewedDate).toBeUndefined();
+      expect(record.sensitivity).toBeUndefined();
+      expect(record.approvedBy).toBeUndefined();
+      expect(record.approvedAt).toBeUndefined();
+      expect(isGroundingEligible(record)).toBe(false);
+    }
+  });
+
+  it("has zero candidate and zero approved records after Phase 30F", () => {
+    expect(
+      ARTICLE_GROUNDING_REGISTRY.filter((r) => r.approvalStatus === "candidate"),
+    ).toEqual([]);
+    expect(
+      ARTICLE_GROUNDING_REGISTRY.filter((r) => r.approvalStatus === "approved"),
+    ).toEqual([]);
+  });
+
+  it("returns no grounding eligible slugs", () => {
+    expect(listGroundingEligibleSlugs()).toEqual([]);
+  });
+});

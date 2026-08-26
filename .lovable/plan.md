@@ -1,40 +1,41 @@
 # Phase 30E — Tier 1 Article Grounding Review Batch
 
-Review and candidate selection only. No article is approved, no article content reaches the AI, and no AI behaviour, prompt, mode, safety rule, endpoint, source route, renderer, schema, route or version constant changes.
+Review and candidate selection only. No article approved, no article content reaching AI runtime, no RAG/retrieval/vector search/embeddings/ingestion, no prompt, mode, safety, endpoint, source-routing, renderer, Ask, companion, schema, route, SEO or AI version-constant changes. `AI_SOURCE_ROUTING_VERSION` stays `30B-source-routing-v1` and `listGroundingEligibleSlugs()` stays `[]`.
 
-## Note on the Tier 1 pool
+## Findings from the pre-plan screen (drives the whole phase)
 
-The Phase 30D queue named the 12 "support" journey records as tier 1. A pre-plan read of those records shows they are emotional and wellbeing content (perinatal anxiety, pregnancy after loss, chemical pregnancy, two-week wait, trying again after miscarriage), not brand, product or navigation guidance. Under this phase's exclusion rules they belong to a later reviewed tier, not Tier 1. Tier 1 will therefore be selected by re-screening the catalogue for genuinely non-clinical practical and product content, and the review pack will record this correction. It is possible the accepted candidate list ends up small or empty; that outcome will be reported honestly rather than padded.
-
-## Review method
-
-1. Build the shortlist from registry metadata: `editorialStatus: "live"`, not archived, not deprecated, and journey/topic tags suggesting practical or product content (family travel and days out, play and connection, preparing-for-baby practicals, product/journal guidance).
-2. Inspect each shortlisted article's body for review purposes only, checking for any symptom, diagnosis, medication, urgency, complication, illness, feeding safety, sleep safety, milestone delay, loss, mental health, safeguarding or fertility treatment content.
-3. Any article with meaningful health or safety content is excluded from Tier 1 and stays blocked.
-4. Record metadata only for each reviewed article. No body copy, sections, prose, takeaways or media are copied anywhere.
+- All 206 registry records screened on metadata. 110 are `live`; 44 draft and 52 unknown are excluded on status alone.
+- The Phase 30D Tier 1 pool (12 `support`-journey records) is emotional, loss, mental-health and fertility-pressure content, not brand or product guidance. It is corrected out of Tier 1 and recorded auditably by slug.
+- Re-screening the live set produced 6 shortlisted practical articles: `preparing-for-baby-complete-guide`, `what-to-buy-for-a-new-baby`, `the-space-your-baby-will-come-home-to`, `hospital-bag-and-what-to-pack`, `writing-a-birth-plan`, `birth-preferences`.
+- Body review of those 6 found sleep safety / SIDS, car seat safety, emergency and labour-arrival guidance, or birth clinical decision-making in every one. All six are excluded.
+- **Expected outcome: zero accepted Tier 1 candidates, zero registry changes.** The catalogue currently holds no purely product, journal or navigation article.
 
 ## Deliverable
 
-New `docs/ai/article-grounding-tier-1-review.md` with the twelve required sections: purpose, method, inclusion rules, exclusion rules, articles reviewed, accepted future candidates, exclusions, per-candidate metadata gaps, required human decisions before any approval, confirmation no article is approved, confirmation AI is not wired to article content, and the recommended next phase.
+New `docs/ai/article-grounding-tier-1-review.md`, metadata only, with the twelve required sections: purpose, method, inclusion rules, exclusion rules, articles reviewed, accepted future candidates (none), exclusions with concise reason categories plus the auditable Phase 30D correction table, per-candidate metadata gaps (empty by construction, with catalogue-wide gaps recorded), required human decisions, confirmation no article is approved, confirmation AI is not wired to article content, recommended next phase.
 
-Per-candidate fields, using the Phase 30D template: slug, title, journey, topics, current status, proposed sensitivity, proposed content owner, proposed content version, source-list status, candidate decision, reason, reviewer notes, next action. Owner, reviewer, reviewed date and content version are not invented — where absent they are recorded as missing and the article stays blocked.
+No body copy, sections, prose, takeaways, summaries, images or media are reproduced anywhere. Concise classification reasons only.
+
+## Governance metadata
+
+Owner, content version, reviewer and reviewed date are recorded as **Missing** for all 206 records. Nothing is inferred from git history, file dates, `lastUpdated`, author metadata, medical-review fields or contributor history. Source-list presence is recorded as governance metadata only and implies nothing about grounding readiness.
 
 ## Registry changes
 
-Default is no registry change. If an article is clearly low-risk and its metadata is complete enough, its `approvalStatus` may move to `candidate` only. `approved` is never set. Given that all 206 records currently lack owner, content version, reviewer and reviewed date, the expected outcome is zero status changes, with candidates recorded in the document instead.
+None. Accepted-future-candidate is a document conclusion, not a registry state, and no record moves to `candidate` while the catalogue-wide governance gaps stand. `approved` is never set.
 
 ## Docs updates
 
-`article-grounding-review-queue.md`, `content-grounding-readiness.md`, `release-gate.md`, `roadmap.md`, `README.md` — each records the Tier 1 result, candidate count, exclusion count, metadata gaps, zero approved articles, and that Start of You article grounding remains blocked.
+`article-grounding-review-queue.md` (annotated with the Tier 1 correction, not rewritten), `content-grounding-readiness.md`, `release-gate.md`, `roadmap.md`, `README.md` — each records the Phase 30E result, the 30D Tier 1 correction, 206 screened / 6 body-reviewed, zero candidates, exclusion counts, governance gaps, zero registry changes, zero approved articles, AI runtime unchanged, grounding still blocked. The roadmap's existing "Phase 30E — retrieval readiness review" future entry is renumbered so the phase numbers do not collide. No document claims the library is grounding-ready.
 
 ## Tests
 
-Existing `articleGrounding.test.ts` and `articleGroundingDrift.test.ts` stay authoritative. New tests are added only if any registry record changes; in that case an assertion pins the candidate slug set and re-asserts zero approved records. The standing guarantees must keep passing: zero approved, `listGroundingEligibleSlugs()` returns `[]`, unknown slug not approved, helpers expose no body content, runtime grounding modules import no dataset, source routing and `AI_SOURCE_ROUTING_VERSION` unchanged, answer hygiene unchanged.
+No registry change, so no new assertions are required. `articleGrounding.test.ts` and `articleGroundingDrift.test.ts` stay authoritative and must keep proving zero approved records, empty eligibility list, unknown slug not approved, metadata-only helper output, no dataset imports in runtime grounding modules, unchanged source routing and version constant, and unchanged answer hygiene.
 
 ## Validation
 
-`npm test`, `npm run lint`, `npm run typecheck`, `npm run build`. The known pre-existing lint issue in `src/integrations/supabase/previewAuthStorage.ts` is left untouched and reported as pre-existing.
+`npm test`, `npm run lint`, `npm run typecheck`, `npm run build`. The known `src/integrations/supabase/previewAuthStorage.ts` lint issue is left untouched and reported as pre-existing and out of scope.
 
 ## Report
 
-The 20 requested items, ending with the Phase 30E close verdict.
+The exact 20 requested items, with the close verdict answering all seven questions.

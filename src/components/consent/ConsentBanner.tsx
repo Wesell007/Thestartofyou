@@ -1,29 +1,39 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   getAnalyticsConsent,
   setAnalyticsConsent,
   subscribeAnalyticsConsent,
   type ConsentState,
 } from "@/lib/consent";
+import { isPrototypeRoute } from "@/lib/prototypeRoutes";
 
 /**
  * Strict opt-in analytics consent banner.
  *
  * Visible only while consent state is "unknown". Equally weighted
  * Reject / Accept actions — no dismiss, no implicit consent.
+ *
+ * Phase 29I QA — design prototype routes are fully isolated surfaces. On
+ * `/prototype/*` the banner renders nothing and, critically, the effect
+ * returns before any consent storage read or subscription.
  */
 const ConsentBanner = () => {
+  const { pathname } = useLocation();
+  const onPrototypeRoute = isPrototypeRoute(pathname);
   const [state, setState] = useState<ConsentState>("unknown");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    if (onPrototypeRoute) return;
     setState(getAnalyticsConsent());
     setMounted(true);
     return subscribeAnalyticsConsent(setState);
-  }, []);
+  }, [onPrototypeRoute]);
 
+  if (onPrototypeRoute) return null;
   if (!mounted || state !== "unknown") return null;
+
 
   return (
     <div

@@ -124,6 +124,8 @@ import ScrollToTop from "./components/layout/ScrollToTop.tsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.tsx";
 import FirstYearAppShell from "./components/firstyear/navigation/FirstYearAppShell.tsx";
 import ConsentBanner from "./components/consent/ConsentBanner.tsx";
+import { isPrototypeRoute } from "./lib/prototypeRoutes.ts";
+
 import RouteTracker from "./components/analytics/RouteTracker.tsx";
 import { supabase } from "./integrations/supabase/client.ts";
 import { identify, trackEvent } from "./lib/analytics.ts";
@@ -145,8 +147,13 @@ const RedirectToOvulationCalculator = () => {
 };
 
 const AnalyticsIdentityBridge = () => {
+  const { pathname } = useLocation();
+  // Phase 29I QA — design prototype routes do no Supabase or analytics work.
+  const onPrototypeRoute = isPrototypeRoute(pathname);
   useEffect(() => {
+    if (onPrototypeRoute) return;
     let cancelled = false;
+
     // Dedupe `auth_completed`: Supabase fires SIGNED_IN on real sign-in,
     // token refresh, tab focus / visibility, and session restore. We only
     // want to count a real sign-in. Keying on user.id means token
@@ -180,7 +187,7 @@ const AnalyticsIdentityBridge = () => {
       cancelled = true;
       sub.subscription.unsubscribe();
     };
-  }, []);
+  }, [onPrototypeRoute]);
   return null;
 };
 

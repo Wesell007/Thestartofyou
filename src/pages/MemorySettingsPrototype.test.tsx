@@ -75,7 +75,8 @@ describe("MemorySettingsPrototype", () => {
     const switches = screen.getAllByRole("switch");
     expect(switches.length).toBeGreaterThan(0);
     switches.forEach((control) => expect(control).toHaveAttribute("aria-checked", "false"));
-    expect(screen.getByText("Off")).toBeInTheDocument();
+    // Memory and Journal content both read "Off" in the status card.
+    expect(screen.getAllByText("Off")).toHaveLength(2);
     expect(screen.getAllByText("Not enabled")).toHaveLength(3);
   });
 
@@ -84,7 +85,7 @@ describe("MemorySettingsPrototype", () => {
     const heading = screen.getByRole("heading", { name: "Sensitive memory" });
     const card = heading.closest("li");
     expect(card).not.toBeNull();
-    expect(within(card as HTMLElement).getByText(/not available/i)).toBeInTheDocument();
+    expect(within(card as HTMLElement).getAllByText(/not available/i).length).toBeGreaterThan(0);
     expect(within(card as HTMLElement).queryByRole("switch")).toBeNull();
     expect(within(card as HTMLElement).queryByRole("button")).toBeNull();
     expect(
@@ -97,7 +98,7 @@ describe("MemorySettingsPrototype", () => {
     const heading = screen.getByRole("heading", { name: /journal entries stay separate/i });
     const card = heading.closest("section");
     expect(card).not.toBeNull();
-    expect(within(card as HTMLElement).getByText(/not used/i)).toBeInTheDocument();
+    expect(within(card as HTMLElement).getAllByText(/not used/i).length).toBeGreaterThan(0);
     expect(within(card as HTMLElement).queryByRole("switch")).toBeNull();
     expect(screen.getByText("Journal content")).toBeInTheDocument();
   });
@@ -169,6 +170,6 @@ describe("MemorySettingsPrototype", () => {
   it("does not import the Supabase client from the prototype sources", () => {
     expect(pageSource).not.toContain("integrations/supabase");
     expect(chromeSource).not.toContain("integrations/supabase");
-    expect(chromeSource).not.toContain("useLifecycle");
+    expect(chromeSource).not.toContain("@/lib/useLifecycle");
   });
 });

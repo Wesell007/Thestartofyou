@@ -20,6 +20,13 @@ New pure module `src/lib/pregnancyAiContext.ts` defining the only fields a pregn
 
 The module file header lists the excluded fields explicitly (due date, LMP, names, IDs, journal, notes, reflections, symptoms, media, logs, appointments, medical history) so future edits inherit the rule. The type has no index signature, so no extra field can be smuggled in.
 
+### Mandatory safeguards
+
+- **Runtime allowlist.** The builder picks `journey`, `weekNumber`, `trimester`, `pageFamily`, `pageTopic`, `toneHint` and `contextSource` one field at a time, validating each against its allowed values. The raw input object is never spread, stringified, serialised or forwarded, so unknown keys cannot pass through even when supplied by mistake.
+- **`pageTopic` is a public page label only** (for example "baby movements", "hospital bag", "week detail"). Never the user's question, symptoms, notes, journal content, reflections, appointment content, logs, medical history or any free-text record. The question is already sent separately as the prompt and is never duplicated into the context object.
+- **Excluded fields never reach the built string**, and tests prove they are ignored even when passed as extra properties.
+
+
 ## 2. Context builder
 
 `buildPregnancyAiContext(input)` returns a bounded single-paragraph string in the existing house style:
@@ -52,7 +59,7 @@ Backend, prompts, modes, versions and hygiene are untouched apart from a version
 - `supabase/functions/_shared/aiVersions.ts`: bump the context-contract marker and phase marker to 29F. No model, prompt or safety ruleset change, so prompt fingerprints stay identical.
 - `docs/ai/system-map.md`: add the pregnancy context contract to the context-builder section.
 - `docs/ai/privacy-notes.md`: record that due date day/month is no longer sent from the My Week card, and list the new allowlist.
-- `docs/ai/roadmap.md`: close 29F.
+- `docs/ai/roadmap.md`: mark 29F as in progress / pending validation during implementation, and only mark it closed once tests, lint, typecheck and build all pass.
 
 ## 5. Tests
 

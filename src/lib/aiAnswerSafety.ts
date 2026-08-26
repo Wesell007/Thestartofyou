@@ -93,3 +93,25 @@ export const sanitiseStreamingAiAnswer = (markdown: string): string => {
     .join("\n")
     .replace(/\n{3,}/g, "\n\n");
 };
+
+/**
+ * Phase 29D — verdict-ban checker. Test-only for now: it reports banned
+ * verdict wording without changing what a reader sees, because stripping
+ * these mid-answer risks damaging otherwise good guidance. Runtime
+ * enforcement is a Phase 29E decision.
+ */
+export const BANNED_VERDICT_PATTERNS: { label: string; pattern: RegExp }[] = [
+  { label: "your baby is fine", pattern: /your baby (?:is|will be) (?:fine|okay|ok)\b/i },
+  { label: "everything is okay", pattern: /everything (?:is|will be) (?:okay|ok|fine|alright)\b/i },
+  { label: "no need to call", pattern: /no need to (?:call|contact|worry|be checked)\b/i },
+  { label: "risk score", pattern: /\brisk score\b/i },
+  { label: "fertility score", pattern: /\bfertility score\b/i },
+  { label: "confirmed ovulation", pattern: /\bconfirm(?:s|ed|ing)? (?:that )?(?:you )?ovulat/i },
+  { label: "confirmed pregnancy", pattern: /\bconfirm(?:s|ed|ing)? (?:that )?(?:you are |your )?pregnan/i },
+  { label: "diagnosis", pattern: /\b(?:your|the) diagnosis is\b|\bi can diagnose\b/i },
+  { label: "symptom checker", pattern: /\bsymptom checker\b/i },
+];
+
+/** Returns the labels of any banned verdict wording found in an answer. */
+export const findBannedVerdicts = (text: string): string[] =>
+  BANNED_VERDICT_PATTERNS.filter(({ pattern }) => pattern.test(text ?? "")).map(({ label }) => label);

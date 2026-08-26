@@ -56,7 +56,7 @@ Memory must not ship until all of the following exist:
 - a strict allowlist of what can be remembered, with sensitive categories excluded rather than merely defaulted off
 - retention limits and automatic expiry: continuity in days, preferences and saved facts on a monthly review date, journey state cleared on stage change
 - export and deletion behaviour joined up with the existing account deletion flow
-- a documented answer to what memory is written to, where it lives, and who can read it, including owner-scoped RLS and grants
+- a documented answer to what memory is written to, where it lives, and who can read it, including owner-scoped RLS and grants; the reviewed answer is `memory-schema-rls-design.md`, which also blocks category F structurally rather than by flag, withholds anon and client delete grants, and confines service-role reads to one narrow access module
 - a memory-off kill switch that disables memory reads globally without a deploy
 - an evaluation set covering memory-specific failure modes: stale facts, wrong stage, wrong child, loss-insensitive recall, cross-journey leakage, and reuse of deleted memory
 

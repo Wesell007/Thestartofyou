@@ -10,8 +10,10 @@ vi.mock("@/hooks/useAISearch", () => ({
   useAISearch: () => ({ ...state, ask: askMock, reset: vi.fn() }),
 }));
 
+let identity: { name: string | null; tone: string | null } = { name: null, tone: null };
+
 vi.mock("@/hooks/useCompanionIdentity", () => ({
-  useCompanionIdentity: () => ({ name: "Cindy", tone: "warm" }),
+  useCompanionIdentity: () => ({ ...identity, loading: false }),
 }));
 
 const event: CareEvent = {
@@ -45,6 +47,7 @@ const setup = (events: CareEvent[]) =>
 describe("DaySummaryCard", () => {
   beforeEach(() => {
     askMock.mockClear();
+    identity = { name: null, tone: null };
     state = { answer: "", isLoading: false, error: null };
   });
 
@@ -88,6 +91,18 @@ describe("DaySummaryCard", () => {
     state = { answer: "Today at a glance\nOne nappy change was logged.", isLoading: false, error: null };
     setup([event]);
     expect(screen.getByText(/One nappy change was logged\./i)).toBeTruthy();
+  });
+
+  it("uses neutral companion wording when no name was chosen", () => {
+    const { container } = setup([event]);
+    expect(container.textContent).not.toMatch(/cindy/i);
+    expect(screen.getByText(/Look back with Your companion/i)).toBeTruthy();
+  });
+
+  it("shows a chosen companion name when one exists", () => {
+    identity = { name: "Wren", tone: "warm" };
+    setup([event]);
+    expect(screen.getByText(/Look back with Wren/i)).toBeTruthy();
   });
 
   it("renders the calm error state", () => {

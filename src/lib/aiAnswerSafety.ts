@@ -134,14 +134,20 @@ const warnOnBannedVerdicts = (answer: string): void => {
  * Pure helper, not a React hook. While an answer is still streaming it keeps
  * partial text intact; once the answer is complete it applies the full clean-up
  * and swaps a pure retrieval refusal for the approved fallback line.
+ *
+ * `allowFallback: false` is for recap-only surfaces, which must never show the
+ * fallback line because it carries professional-help wording.
  */
 export const sanitiseAnswerForDisplay = (
   answer: string,
-  options: { isStreaming?: boolean } = {},
+  options: { isStreaming?: boolean; allowFallback?: boolean } = {},
 ): string => {
   if (!answer?.trim()) return "";
   if (options.isStreaming) return sanitiseStreamingAiAnswer(answer);
-  const safe = sanitiseAiAnswer(answer);
+  const safe =
+    options.allowFallback === false
+      ? sanitiseStreamingAiAnswer(answer).replace(/[ \t]+$/gm, "").trim()
+      : sanitiseAiAnswer(answer);
   warnOnBannedVerdicts(safe);
   return safe;
 };

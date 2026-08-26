@@ -26,7 +26,11 @@ None. Accepted-future-candidate is a document conclusion, not a registry state, 
 
 ## Docs updates
 
-`article-grounding-review-queue.md` (annotated with the Tier 1 correction, not rewritten), `content-grounding-readiness.md`, `release-gate.md`, `roadmap.md`, `README.md` — each records the Phase 30E result, the 30D Tier 1 correction, 206 screened / 6 body-reviewed, zero candidates, exclusion counts, governance gaps, zero registry changes, zero approved articles, AI runtime unchanged, grounding still blocked. The roadmap's existing "Phase 30E — retrieval readiness review" future entry is renumbered so the phase numbers do not collide. No document claims the library is grounding-ready.
+`article-grounding-review-queue.md` (annotated with the Tier 1 correction, not rewritten), `content-grounding-readiness.md`, `release-gate.md`, `roadmap.md`, `README.md` — each records 206 screened / 110 live / 44 draft / 52 unknown, the 12 corrected 30D support records, 6 body-reviewed practical articles, zero accepted candidates, governance metadata gaps, zero registry changes, zero approved articles, AI runtime unchanged, grounding still blocked. The roadmap's existing future "Phase 30E — retrieval readiness review" is renumbered to Phase 30F with unchanged scope, all cross-references updated, no completed historical phase renumbered, and the old → new mapping stated in the completion report. No document claims the library is grounding-ready.
+
+## Recommended next phase
+
+Derived from the findings, not assumed to be Tier 2. The recommendation explicitly weighs resolving the 52 unknown editorial statuses, content ownership, content versioning, grounding reviewer responsibility, reviewed-date governance, source-list validation rules, candidate authority and approval authority before any more sensitive tier is reviewed. That phase is not started.
 
 ## Tests
 

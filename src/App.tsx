@@ -187,7 +187,7 @@ const AnalyticsIdentityBridge = () => {
       cancelled = true;
       sub.subscription.unsubscribe();
     };
-  }, []);
+  }, [onPrototypeRoute]);
   return null;
 };
 

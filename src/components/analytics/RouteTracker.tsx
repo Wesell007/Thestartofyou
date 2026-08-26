@@ -36,7 +36,11 @@ const PAGEVIEW_SKIP_EXACT = new Set<string>([
 const KEPT_CHAPTER_RE = /^\/my-week\/[^/]+\/?$/;
 
 const shouldSkip = (pathname: string) =>
-  PAGEVIEW_SKIP_EXACT.has(pathname) || KEPT_CHAPTER_RE.test(pathname);
+  // Phase 29I QA — design prototype routes emit no analytics at all.
+  isPrototypeRoute(pathname) ||
+  PAGEVIEW_SKIP_EXACT.has(pathname) ||
+  KEPT_CHAPTER_RE.test(pathname);
+
 
 const RouteTracker = () => {
   const location = useLocation();

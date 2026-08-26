@@ -184,7 +184,7 @@ Recommended by Phase 30A. None of these is authorised: each needs its own approv
 
 ### Phase 30G — Tier 2 low-risk general education review — FUTURE, NOT STARTED
 
-**Entry.** 30F closed. Review only; no approvals.
+**Entry.** 30F closed. Review only; no approvals. Phase 30F recommends that 30G may be planned, but only over the verified-`live` subset and only under the `article-grounding-governance.md` contract; the 45 records with unresolved editorial status stay excluded and blocked until an authoritative editorial decision resolves them, and no candidate may be set without the full candidate-authority evidence, which does not yet exist for any article.
 
 ### Phase 30H — wellbeing and sensitive support review — FUTURE, NOT STARTED
 

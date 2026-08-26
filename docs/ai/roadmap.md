@@ -55,29 +55,64 @@ Phases 29D, 29E, 29F and 29G are closed. The rest are not started. Each begins o
 
 **Exit.** Met. Surface built and reviewable, `noindex` set, route absent from navigation and from the sitemap allowlists, eleven prototype guard tests passing, and `npm test`, `npm run lint`, `npm run typecheck` and `npm run build` all pass. Consent copy sign-off and a recorded copy version remain outstanding and carry into the memory gate for 29J.
 
-## Phase 29J — explicit saved-memory MVP
+## Phase 29J — explicit saved-memory MVP pre-build gate — IN REVIEW
 
-**Entry.** 29H and 29I closed, and the memory gate in `release-gate.md` satisfiable.
+**Entry.** 29H and 29I closed.
 
-**Work.** The narrowest useful slice: Basic preferences and Saved by me only, written only by a deliberate user action, behind a feature flag and a memory-off kill switch. Category F rejected at write time. No journey inference, no journal use, no continuity.
+**Work.** Review and planning only. No migration, table, enum, RLS policy, edge function, application code, route, SEO change or AI behaviour change. Deliverable is `docs/ai/memory-mvp-readiness.md`, with supporting updates to `roadmap.md`, `release-gate.md` and `README.md`. The phase records honestly whether the full memory gate in `release-gate.md` is satisfiable, identifies the remaining blockers, and defines the narrow MVP scope and the future implementation sub-phases 29J.1 to 29J.4.
 
-**Exit.** Memory writes only from explicit action, full delete and pause working, deletion joined to account deletion.
+**MVP scope.** Category A explicit preferences and Category C explicit user-saved preferences only. User-visible saved items only. Explicit save action only. No extraction, no inference, no ordinary conversation memory, no chat history, no journal content, no sensitive content, no Category F. Feature flag off by default. Memory is not passed into AI calls until 29J.3, which is a separate future sub-phase requiring its own gate check.
 
-## Phase 29K — memory eval harness
+**Exit.** Gate reviewed, blockers named, MVP scope agreed, and sub-phases 29J.1 to 29J.4 defined. This phase does **not** mark implementation ready.
 
-**Entry.** 29J built behind a flag and not yet rolled out.
+## Phase 29J.1 — migration and schema — FUTURE, NOT STARTED
 
-**Work.** Turn the eleven memory scenarios in `eval-dataset-v1.md` into dataset rows and deterministic checks, with near-miss Green rows against over-triggering.
+**Entry.** 29J gate reviewed and all blockers in `memory-mvp-readiness.md` section 3 closed.
 
-**Exit.** Every memory scenario passing in CI, with cross-journey and deleted-memory leakage covered.
+**Work.** Write the single migration that creates the memory tables, enums, constraints, indexes, grants and owner-scoped RLS policies described in `memory-schema-rls-design.md`. Add the validation trigger. No application code or AI behaviour change.
 
-## Phase 29L — controlled rollout behind a feature flag
+**Exit.** Migration reviewed and approved as its own change.
 
-**Entry.** 29K green and the full memory gate passed.
+## Phase 29J.2 — memory writes and settings persistence — FUTURE, NOT STARTED
+
+**Entry.** 29J.1 migration approved.
+
+**Work.** Build explicit save, edit, soft delete, delete-all and pause paths. Wire the settings UI from Phase 29I to real persistence. The companion still does not read memory.
+
+**Exit.** Writes and settings persistence working and guarded by the feature flag and kill switch.
+
+## Phase 29J.3 — memory read path behind feature flag — FUTURE, NOT STARTED
+
+**Entry.** 29J.2 closed and the AI-readiness checklist from `memory-mvp-readiness.md` section 9 passed.
+
+**Work.** Build the single controlled access module, connect it to the companion context builder, and keep memory inside the existing 500-character context cap. Enable only when the feature flag and kill switch both permit it.
+
+**Exit.** Memory is read only for the current journey, only live items, only category A and C, and only within the context cap.
+
+## Phase 29J.4 — memory eval harness and controlled rollout — FUTURE, NOT STARTED
+
+**Entry.** 29J.3 closed.
+
+**Work.** Convert the evaluation scenarios from `eval-dataset-v1.md` into dataset rows and deterministic checks. Update `observability-and-incidents.md` with memory-specific severities. Conduct controlled rollout behind the feature flag with the kill switch live.
+
+**Exit.** Every memory scenario passing in CI, stable behaviour at each rollout stage.
+
+## Phase 29K — memory eval harness extension — FUTURE, NOT STARTED
+
+**Entry.** 29J.4 closed.
+
+**Work.** If additional cross-journey, deleted-memory leakage or service-role access cases are needed, extend the harness. Otherwise this phase may be absorbed into 29J.4.
+
+**Exit.** Every memory scenario passing in CI, including any cases added after 29J.4.
+
+## Phase 29L — controlled rollout behind a feature flag — FUTURE, NOT STARTED
+
+**Entry.** 29J.4 / 29K green and the full memory gate in `release-gate.md` section H passed.
 
 **Work.** Staged rollout with the kill switch live, monitoring in place and a rollback that needs no migration.
 
 **Exit.** Stable behaviour at each stage, with incidents and rollbacks recorded.
+
 
 ## Separate track — not part of the memory sequence
 

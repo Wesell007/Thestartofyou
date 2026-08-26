@@ -64,7 +64,11 @@ Every future AI change — prompt edit, mode addition, source-routing change, mo
 
 ## H. Memory gate
 
-Applies only to a change that introduces, widens or reads companion memory. No memory exists today; the design is in `memory-design.md`, and the only built artefact is the front-end prototype described in `memory-settings-prototype.md`, which stores nothing. Every item must be complete before any memory implementation ships. A failed item blocks release outright.
+Applies only to a change that introduces, widens or reads companion memory. No memory exists today; the design is in `memory-design.md`, the schema and RLS review is in `memory-schema-rls-design.md`, and the only built artefact is the front-end prototype described in `memory-settings-prototype.md`, which stores nothing. The Phase 29J pre-build gate outcome is recorded in `memory-mvp-readiness.md`.
+
+**Status as of Phase 29J:** this gate is **not yet satisfiable**. Several mandatory items remain outstanding. No migration, table, RLS policy, edge function, application code or AI behaviour change may be made until the gate is closed.
+
+Every item below must be complete before any memory implementation ships. A failed item blocks release outright.
 
 - [ ] Legal and privacy review of memory as special category data, recorded in writing
 - [ ] Consent copy approved from the Phase 29I prototype wording, and the consent version recorded against stored items
@@ -85,4 +89,5 @@ Applies only to a change that introduces, widens or reads companion memory. No m
 - [ ] Memory-off kill switch defined and tested, able to disable memory reads globally without a deploy
 - [ ] Incident process in `observability-and-incidents.md` updated with memory-specific severities
 - [ ] Confirmed the companion cannot write memory from a conversation without an explicit user action
+
 

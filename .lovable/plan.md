@@ -4,11 +4,11 @@ Review and candidate selection only. No article approved, no article content rea
 
 ## Findings from the pre-plan screen (drives the whole phase)
 
-- All 206 registry records screened on metadata. 110 are `live`; 44 draft and 52 unknown are excluded on status alone.
+- All 206 registry records screened on metadata: 110 `live`, 44 `draft`, 52 `unknown`. Draft and unknown stay separate categories; unknown is never treated as draft, archived or deprecated. The 52 unknown records remain blocked and are recorded as an unresolved editorial/governance issue for a later phase.
 - The Phase 30D Tier 1 pool (12 `support`-journey records) is emotional, loss, mental-health and fertility-pressure content, not brand or product guidance. It is corrected out of Tier 1 and recorded auditably by slug.
 - Re-screening the live set produced 6 shortlisted practical articles: `preparing-for-baby-complete-guide`, `what-to-buy-for-a-new-baby`, `the-space-your-baby-will-come-home-to`, `hospital-bag-and-what-to-pack`, `writing-a-birth-plan`, `birth-preferences`.
 - Body review of those 6 found sleep safety / SIDS, car seat safety, emergency and labour-arrival guidance, or birth clinical decision-making in every one. All six are excluded.
-- **Expected outcome: zero accepted Tier 1 candidates, zero registry changes.** The catalogue currently holds no purely product, journal or navigation article.
+- **Expected outcome: zero accepted Tier 1 candidates, zero registry changes.** Recorded conclusion: "No purely product, journal or navigation article was identified among the 206 article-grounding registry records screened in Phase 30E." This applies only to the registry reviewed in this phase, not to the wider website, product or journal experience.
 
 ## Deliverable
 
@@ -26,7 +26,11 @@ None. Accepted-future-candidate is a document conclusion, not a registry state, 
 
 ## Docs updates
 
-`article-grounding-review-queue.md` (annotated with the Tier 1 correction, not rewritten), `content-grounding-readiness.md`, `release-gate.md`, `roadmap.md`, `README.md` — each records the Phase 30E result, the 30D Tier 1 correction, 206 screened / 6 body-reviewed, zero candidates, exclusion counts, governance gaps, zero registry changes, zero approved articles, AI runtime unchanged, grounding still blocked. The roadmap's existing "Phase 30E — retrieval readiness review" future entry is renumbered so the phase numbers do not collide. No document claims the library is grounding-ready.
+`article-grounding-review-queue.md` (annotated with the Tier 1 correction, not rewritten), `content-grounding-readiness.md`, `release-gate.md`, `roadmap.md`, `README.md` — each records 206 screened / 110 live / 44 draft / 52 unknown, the 12 corrected 30D support records, 6 body-reviewed practical articles, zero accepted candidates, governance metadata gaps, zero registry changes, zero approved articles, AI runtime unchanged, grounding still blocked. The roadmap's existing future "Phase 30E — retrieval readiness review" is renumbered to Phase 30F with unchanged scope, all cross-references updated, no completed historical phase renumbered, and the old → new mapping stated in the completion report. No document claims the library is grounding-ready.
+
+## Recommended next phase
+
+Derived from the findings, not assumed to be Tier 2. The recommendation explicitly weighs resolving the 52 unknown editorial statuses, content ownership, content versioning, grounding reviewer responsibility, reviewed-date governance, source-list validation rules, candidate authority and approval authority before any more sensitive tier is reviewed. That phase is not started.
 
 ## Tests
 

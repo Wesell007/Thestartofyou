@@ -12,12 +12,16 @@
  */
 
 import { stripExternalSourceLinks } from "@/lib/answerSourceLinks";
+import { SAFE_FALLBACK_ANSWER } from "../../supabase/functions/_shared/aiAnswerWording";
 
 export { APPROVED_SOURCES_TRUST_LINE } from "@/lib/answerSourceLinks";
 
-/** The only approved wording for a genuine inability to answer. */
-export const SAFE_FALLBACK_ANSWER =
-  "I do not have enough detail to answer that safely here. It would be best to speak with your midwife, GP, health visitor or urgent care service, depending on what is happening.";
+/**
+ * The only approved wording for a genuine inability to answer. Re-exported
+ * from the shared edge-function module so the client and the prompt can never
+ * drift apart.
+ */
+export { SAFE_FALLBACK_ANSWER };
 
 /**
  * Wording that exposes the retrieval mechanism. Any sentence containing one

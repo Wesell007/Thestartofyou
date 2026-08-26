@@ -241,17 +241,6 @@ const FirstYearAskCompanion = ({ dateOfBirth, babyCount }: Props) => {
                   <div className="font-sans text-[14.5px] text-foreground leading-[1.75] space-y-2">
                     {renderAnswerLines(body)}
                   </div>
-
-                  {sources && (
-                    <details className="mt-3">
-                      <summary className="cursor-pointer font-sans text-[11px] tracking-[0.18em] uppercase text-[hsl(var(--stage-firstyear-text-soft))]">
-                        Sources
-                      </summary>
-                      <p className="mt-2 font-sans text-[12.5px] text-[hsl(var(--stage-firstyear-text-soft))] leading-relaxed whitespace-pre-line break-words">
-                        {sources}
-                      </p>
-                    </details>
-                  )}
                 </div>
               )}
 

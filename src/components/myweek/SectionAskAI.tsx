@@ -62,10 +62,11 @@ const renderAnswerLines = (body: string) =>
 
 
 /**
- * Inline AI companion card. Sends only the coarse stage context built by
- * buildCompanionContext — no name, reflection, media or memory data.
+ * Inline AI companion card. Phase 29F: sends only the allowlisted pregnancy
+ * context (week, trimester, page family, tone) built by
+ * buildPregnancyAiContext — no due date, name, reflection, media or memory.
  */
-const SectionAskAI = ({ week, seed, dueDate }: Props) => {
+const SectionAskAI = ({ week, seed }: Props) => {
   const navigate = useNavigate();
   const { name, tone } = useCompanionIdentity();
   const { answer, isLoading, error, ask, reset } = useAISearch();
@@ -73,9 +74,16 @@ const SectionAskAI = ({ week, seed, dueDate }: Props) => {
   const [asked, setAsked] = useState("");
 
   const context = useMemo(
-    () => buildCompanionContext({ week, dueDate, tone }),
-    [week, dueDate, tone],
+    () =>
+      buildPregnancyAiContext({
+        weekNumber: week,
+        pageFamily: "my-week",
+        toneHint: pregnancyToneHint(tone),
+        contextSource: "page",
+      }),
+    [week, tone],
   );
+
 
   const eyebrow = name ? `Ask ${name} about this week` : "Ask AI about this week";
   const heading = name

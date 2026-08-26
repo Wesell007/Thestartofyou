@@ -152,7 +152,7 @@ describe("routing invariants", () => {
 
 describe("URLs never reach the model or the reader", () => {
   it("keeps the new pages out of a displayed answer", () => {
-    const raw = `Solid foods usually suit babies from around six months. Read more at ${APPROVED_SOURCES.firstSolidFoods}\n\n## Sources\n\n- ${APPROVED_SOURCES.foodsToAvoid}`;
+    const raw = `Solid foods usually suit babies from around six months, when they can sit up, hold their head steady and bring food to their mouth. Signs vary, and it is fine to take it slowly. Read more at ${APPROVED_SOURCES.firstSolidFoods}\n\n## Sources\n\n- ${APPROVED_SOURCES.foodsToAvoid}`;
     const output = sanitiseAnswerForDisplay(raw);
     expect(output).not.toMatch(/https?:\/\/|www\./);
     expect(output.toLowerCase()).not.toContain("sources");

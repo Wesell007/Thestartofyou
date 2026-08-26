@@ -123,7 +123,7 @@ const TOPICS: Topic[] = [
   },
   {
     pattern:
-      /after (?:the )?birth|body after birth|post[- ]?pregnancy body|postpartum|postnatal recovery|stitches|perine|pelvic floor|\bpiles\b|haemorrhoid|lochia|after[- ]?pains|c[- ]?section (?:recovery|scar|wound)|exercis\w* (?:again|after)|getting fit|back to running|cramp\w* (?:while|when|during) (?:breast)?feed/,
+      /after (?:the )?birth|body after birth|post[- ]?pregnancy body|postpartum|postnatal recovery|stitches|perine|pelvic floor|\bpiles\b|haemorrhoid|lochia|after[- ]?pains|c[- ]?section (?:recovery|scar|wound)|exercis\w* (?:again|after|with a baby)|getting fit|back to running|cramp\w* (?:while|when|during) (?:breast)?feed/,
     family: "postpartum",
     urls: [APPROVED_SOURCES.postpartumBody, APPROVED_SOURCES.postpartumFitness],
   },

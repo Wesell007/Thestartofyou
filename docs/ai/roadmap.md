@@ -1,6 +1,6 @@
 # AI roadmap after Phase 29C
 
-Phases 29D, 29E and 29F are closed. The rest are not started. Each begins only when its entry criteria are met, and closes only when its exit criteria are met and the release gate passes.
+Phases 29D, 29E and 29F are closed. Phase 29G is pending validation. The rest are not started. Each begins only when its entry criteria are met, and closes only when its exit criteria are met and the release gate passes.
 
 ## Phase 29D — evaluation harness and safety tests — CLOSED
 

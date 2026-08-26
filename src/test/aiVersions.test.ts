@@ -1,6 +1,5 @@
-import { readFileSync } from "node:fs";
-import path from "node:path";
 import { describe, expect, it } from "vitest";
+import endpointSource from "../../supabase/functions/ai-search/index.ts?raw";
 import {
   AI_EVAL_DATASET_VERSION,
   AI_MODEL_ID,
@@ -11,10 +10,6 @@ import {
   AI_VERSION_SUMMARY,
 } from "../../supabase/functions/_shared/aiVersions";
 
-const endpointSource = readFileSync(
-  path.resolve(__dirname, "../../supabase/functions/ai-search/index.ts"),
-  "utf8",
-);
 
 describe("AI version constants", () => {
   it("are present and non-empty", () => {

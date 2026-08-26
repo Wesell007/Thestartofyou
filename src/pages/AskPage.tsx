@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams, Link, useLocation, useNavigate } from "react-router-dom";
 import EditorialAnswer from "@/components/shared/EditorialAnswer";
-import { sanitiseAiAnswer, sanitiseStreamingAiAnswer, APPROVED_SOURCES_TRUST_LINE } from "@/lib/aiAnswerSafety";
+import { sanitiseAnswerForDisplay, APPROVED_SOURCES_TRUST_LINE } from "@/lib/aiAnswerSafety";
 import { resolveAskClarification, type AskClarificationChip } from "@/lib/askClarification";
 import { Loader2, ChevronRight, Heart, BookOpen, Compass, ArrowUpRight, ArrowLeft, ArrowUp } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
@@ -418,7 +418,7 @@ const AskPage = () => {
 
   // Answers are cleaned before display: no internal retrieval wording, no
   // external source links and no raw URLs reach the reader.
-  const safeAnswer = answer ? (isLoading ? sanitiseStreamingAiAnswer(answer) : sanitiseAiAnswer(answer)) : "";
+  const safeAnswer = sanitiseAnswerForDisplay(answer, { isStreaming: isLoading });
   const parsed = safeAnswer ? parseAnswer(safeAnswer) : null;
   const isDone = answer && !isLoading;
   const hasQuery = Boolean(query);

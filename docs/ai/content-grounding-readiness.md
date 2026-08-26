@@ -328,3 +328,39 @@ Still open, unchanged: loss and pregnancy after loss, domestic abuse, complex pe
 ### Why Start of You article grounding remains blocked
 
 Unchanged from section 6. Article records still carry no sensitivity level, no content version, no owner distinct from reviewer, no archived or deprecated state in the record the AI would read, and no per-article grounding-approval flag. Until Phase 30C supplies that metadata, a draft or superseded article could silently become the authority behind a clinical answer, so no article is readable by the AI at any review level.
+
+## Phase 30C outcome — article grounding metadata and approval model
+
+Data and governance model only. No article is connected to the AI, nothing is ingested, and no AI behaviour changed.
+
+### Metadata model
+
+`src/lib/grounding/articleGroundingTypes.ts` defines `ArticleGroundingRecord` with exactly these fields: slug, journey, topics, sensitivity, contentVersion, owner, reviewer, reviewedDate, hasSourceList, editorialStatus, archived, deprecated, approvalStatus, approvedBy, approvedAt, approvalNotes, replacementSlug, rollbackRef.
+
+The model has no field for article body, sections, prose, takeaways, long descriptions, images or media, and none for user-authored content (journal, notes, reflections, logs, media). Those are not representable, so they cannot leak by accident.
+
+Every review and approval field is optional in the type. "Missing" is representable on purpose and must be rejected at runtime rather than assumed satisfied by the type system.
+
+### Approval statuses
+
+`not_approved`, `blocked_missing_metadata`, `blocked_draft`, `blocked_review_required`, `candidate`, `approved`, `deprecated`, `archived`. Only `approved` can ever contribute to eligibility, and no article carries it.
+
+### Sensitivity levels
+
+`low` (practical, non-clinical), `wellbeing` (emotional and experiential), `health_reviewed` (needs a named medical reviewer), `safety_sensitive` (safety, urgency or risk; strongest review), `not_allowed` (never eligible at any review level). `health_reviewed` and `safety_sensitive` additionally require a named reviewer and a source list. Category F style content stays blocked.
+
+### Registry
+
+`src/lib/grounding/articleGroundingRegistry.ts` holds 206 explicit metadata literals, compiled from the article datasets and cross-checked against `articleInventory.ts` editorial status. No article dataset is imported; nothing body-bearing is bundled. Lookup returns `undefined` for an unknown slug, and the eligibility helper treats that as not approved. Explicit coverage and default deny both apply.
+
+### Eligibility rules
+
+`src/lib/grounding/articleGroundingEligibility.ts`. An article is eligible only when all of these hold: editorial status is live, not draft, not archived, not deprecated, sensitivity present and not `not_allowed`, content version present, owner present, reviewed date present, reviewer present where sensitivity requires it, source list present where sensitivity requires it, approval status is `approved`, approvedBy present and approvedAt present. Any gap returns `eligible: false` with the full list of reason codes. Output carries a slug and reason codes only — never content.
+
+### Result
+
+`listGroundingEligibleSlugs()` returns an empty array. Zero of 206 articles are approved, and the registry contains no `approved` entry, no `approvedBy` and no `approvedAt`. Nothing in `supabase/functions/` imports any of these modules; the AI path is unchanged and `AI_SOURCE_ROUTING_VERSION` stays at `30B-source-routing-v1`.
+
+### Remaining blockers before any article can ground
+
+Per-article sensitivity assessment, content versioning, recorded owner distinct from reviewer, reviewed dates inside a freshness window, an agreed reviewer sign-off process, and evaluation rows covering archived, deprecated and review-lapsed cases. Phase 30D remains gated on those.

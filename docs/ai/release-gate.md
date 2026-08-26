@@ -108,7 +108,7 @@ For a change to external source routing:
 - [ ] Escalation still decided before source selection, fetching and the model call
 - [ ] `first_year_day_recap` still ungrounded
 
-**Start of You content grounding: blocked.** This product's own articles are not approved as grounding material. No article may be read by the AI until every item below is recorded per article, plus an explicit default-off grounding-approval flag.
+**Start of You content grounding: blocked.** (Phase 30C note: the metadata model, approval registry and default-deny eligibility helpers now exist in `src/lib/grounding/`, but no article satisfies them — `listGroundingEligibleSlugs()` returns empty, and nothing in the AI path reads them.) This product's own articles are not approved as grounding material. No article may be read by the AI until every item below is recorded per article, plus an explicit default-off grounding-approval flag.
 
 - [ ] Original content, medically reviewed where needed by a named reviewer
 - [ ] Reviewed date present and inside the freshness window for its sensitivity level

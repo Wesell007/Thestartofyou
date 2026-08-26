@@ -26,11 +26,24 @@ None. Accepted-future-candidate is a document conclusion, not a registry state, 
 
 ## Docs updates
 
-`article-grounding-review-queue.md` (annotated with the Tier 1 correction, not rewritten), `content-grounding-readiness.md`, `release-gate.md`, `roadmap.md`, `README.md` — each records 206 screened / 110 live / 44 draft / 52 unknown, the 12 corrected 30D support records, 6 body-reviewed practical articles, zero accepted candidates, governance metadata gaps, zero registry changes, zero approved articles, AI runtime unchanged, grounding still blocked. The roadmap's existing future "Phase 30E — retrieval readiness review" is renumbered to Phase 30F with unchanged scope, all cross-references updated, no completed historical phase renumbered, and the old → new mapping stated in the completion report. No document claims the library is grounding-ready.
+`article-grounding-review-queue.md` (annotated with the Tier 1 correction, not rewritten), `content-grounding-readiness.md`, `release-gate.md`, `roadmap.md`, `README.md` — each records 206 screened / 110 live / 44 draft / 52 unknown, the 12 corrected 30D support records, 6 body-reviewed practical articles, zero accepted candidates, governance metadata gaps, zero registry changes, zero approved articles, AI runtime unchanged, grounding still blocked. No document claims the library is grounding-ready.
+
+## Roadmap correction
+
+The existing future "Phase 30E — retrieval readiness review" moves to **Phase 30L — retrieval readiness review**, scope unchanged. Recorded mapping: old `Phase 30E — retrieval readiness review` → new `Phase 30L — retrieval readiness review`. No completed historical phase is renumbered; cross-references are updated consistently. Reserved post-30E sequence:
+
+- Phase 30F — Grounding Governance Metadata & Editorial Status Resolution (content-owner, content-version, grounding-reviewer, reviewed-date, source-list validation, candidate authority, approval authority, review evidence, resolution of the 52 unknown statuses; no approvals)
+- Phase 30G — Tier 2 Low-Risk General Education Review
+- Phase 30H — Wellbeing & Sensitive Support Review (where the 12 corrected support records return)
+- Phase 30I — Health-Reviewed Article Review
+- Phase 30J — Safety-Sensitive / Not-Allowed Classification
+- Phase 30K — Human Approval & Initial Approved Corpus
+- Phase 30L — Retrieval Readiness Review
+- Phase 31A — Controlled Grounded Knowledge Implementation (only after 30L passes)
 
 ## Recommended next phase
 
-Derived from the findings, not assumed to be Tier 2. The recommendation explicitly weighs resolving the 52 unknown editorial statuses, content ownership, content versioning, grounding reviewer responsibility, reviewed-date governance, source-list validation rules, candidate authority and approval authority before any more sensitive tier is reviewed. That phase is not started.
+Phase 30F, on the Phase 30E findings: 52 unresolved editorial statuses and catalogue-wide missing owner, version, reviewer and reviewed date must be settled, along with source-list validation, candidate authority and approval authority, before any more sensitive tier is reviewed. Not Tier 2. No later phase is started in 30E.
 
 ## Tests
 

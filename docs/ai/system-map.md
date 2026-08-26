@@ -172,3 +172,11 @@ Callers: `src/pages/AskPage.tsx`, `CompanionMessageList.tsx`, `SectionAskAI.tsx`
 
 These cover prompt composition and drift, version constants, mode routing, source routing, sanitisation, link stripping, context builders, rendering and the deterministic safety harness. They do not cover live model output — that remains a manual review step before release.
 
+
+## 13. Article grounding governance (outside the AI runtime)
+
+`src/lib/grounding/` holds metadata-only governance modules: `articleGroundingTypes.ts`, `articleGroundingRegistry.ts` (206 records) and `articleGroundingEligibility.ts` (default deny). **No AI code path imports them**, and they import no article dataset. `listGroundingEligibleSlugs()` returns `[]`.
+
+Phase 30F resolved 7 of the 52 unknown editorial statuses to `live` on explicit repository status evidence (six `familyArticleData.ts` records with `status: "ready"`, plus `two-week-wait` with an explicit inventory `currentStatus: "live"`); 45 remain unknown and blocked. Registry editorial split: 117 live, 44 draft, 45 unknown. 0 candidates, 0 approved.
+
+Phase 30F also published `article-grounding-governance.md`, the normative contract for `blocked → candidate → approved` (content owner, content version, grounding reviewer, reviewed date, source-list validation, sensitivity decision rules, candidate authority, approval authority, review evidence package, decision matrix), and `article-grounding-editorial-status-resolution.md`, the per-record resolution log. Neither changes AI behaviour. `src/test/articleGrounding.test.ts` and `src/test/articleGroundingDrift.test.ts` pin the counts, the changed slugs, zero candidates, zero approvals and the unchanged `AI_SOURCE_ROUTING_VERSION`.

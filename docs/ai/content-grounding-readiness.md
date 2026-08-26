@@ -396,3 +396,19 @@ Review and candidate selection only. No article approved, no article or article-
 **Governance gaps.** Owner, content version, grounding reviewer and reviewed date are recorded as Missing for all 206 records, and sensitivity is unassessed for all 206. Nothing was inferred from git history, file timestamps, `lastUpdated`, authorship, medical-review metadata or contributor history. Source-list presence is governance metadata only and implies no grounding readiness.
 
 **Recommended next phase.** Phase 30F — grounding governance metadata and editorial status resolution. Not Tier 2. The Start of You article library is not grounding-ready, and article grounding remains blocked.
+
+## Phase 30F — grounding governance metadata and editorial status resolution
+
+Governance and editorial-status resolution only. No article approved, no article or article-derived content in the AI runtime, no RAG, retrieval, vector search, embeddings, ingestion or chunking, no AI behaviour change, no version constant bumped.
+
+**Purpose.** Resolve the 52 unknown editorial statuses carried out of Phase 30E on explicit repository evidence only, and define the governance contract that must exist before any higher-sensitivity review tier can run.
+
+**Evidence reconciliation.** An earlier draft scanned `src/data/articleInventory.ts` for a `status:` field; the inventory uses `currentStatus:`. Verified: exactly one of the 52 slugs appears in the inventory, `two-week-wait`, whose legacy entry (`sourceFile: "src/data/articleData.ts"`, `system: "legacy-article"`) records `currentStatus: "live"`, `contentState: "final"`. Its second inventory entry is a TTC topic page and was not used as evidence. The other 51 slugs are absent from the inventory.
+
+**Resolution.** 52 investigated. 7 resolved to live (the six `familyArticleData.ts` records whose typed `status: "draft" | "ready"` field reads `ready`, plus `two-week-wait` on the explicit inventory `currentStatus`). 0 draft, 0 archived, 0 deprecated. 45 remain unknown: they live in `src/data/articleData.ts`, which carries no editorial-status field of any kind, and no other authoritative source resolves them. Post-30F editorial split: 117 live, 44 draft, 45 unknown of 206. Registry records changed: 7, editorial status only.
+
+**Governance framework created.** `article-grounding-governance.md` defines content-owner rules, content-version rules (a digest-backed version identifying the exact reviewed state, never `lastUpdated`), grounding-reviewer rules (distinct from editorial review and from `medicallyReviewed`), reviewed-date rules with staleness intervals by sensitivity, source-list validation rules, sensitivity decision rules, candidate authority, approval authority and the minimum review evidence package, plus a decision matrix across the five sensitivity levels. `not_allowed` is never grounding eligible.
+
+**Nothing invented.** No owner, content version, reviewer, reviewed date, sensitivity, `approvedBy` or `approvedAt` was populated. The 31 records with no source list remain a visible governance gap; no sources were added or rewritten. No article was classified for sensitivity.
+
+**Result.** 0 candidate records, 0 approved records, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`. The Start of You article library is not grounding-ready and article grounding remains blocked.

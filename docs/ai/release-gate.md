@@ -126,3 +126,8 @@ For a change to external source routing:
 - [x] Registry drift guard in place: every article has a record, every record has an article, no duplicates (Phase 30D)
 - [x] Tier 1 per-article review batch completed with zero accepted candidates and zero registry changes (Phase 30E)
 - [x] Review queue and per-article review template published (Phase 30D)
+
+**Phase 30F note.** Governance and editorial-status resolution only. 52 unknown editorial statuses investigated on explicit repository evidence: 7 resolved to `live` (six `familyArticleData.ts` records with typed `status: "ready"`, plus `two-week-wait` on the inventory's explicit `currentStatus: "live"`), 0 draft, 0 archived, 0 deprecated, 45 still unknown and blocked. Registry split now 117 live / 44 draft / 45 unknown of 206. The governance contract is published in `article-grounding-governance.md` (content owner, content version, grounding reviewer, reviewed date, source-list validation, sensitivity decision rules, candidate authority, approval authority, review evidence package, decision matrix) and the per-record log in `article-grounding-editorial-status-resolution.md`. No governance metadata was invented, no sensitivity assigned, no sources added; 31 records still have no source list. 0 candidates, 0 approved, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` unchanged. Article grounding remains blocked and the library is not grounding-ready.
+
+- [x] Governance contract for blocked → candidate → approved published, with candidate and approval authority defined (Phase 30F)
+- [x] Editorial statuses resolved where explicit repository evidence exists; 45 unresolved records remain blocked (Phase 30F)

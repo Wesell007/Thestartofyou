@@ -107,6 +107,9 @@ const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const Privacy = lazy(() => import("./pages/Privacy.tsx"));
 const Terms = lazy(() => import("./pages/Terms.tsx"));
 const AccountSettings = lazy(() => import("./pages/AccountSettings.tsx"));
+// Phase 29I — hidden, noindex, sitemap-excluded design prototype. Not linked
+// from any navigation and not connected to memory, auth or the companion.
+const MemorySettingsPrototype = lazy(() => import("./pages/MemorySettingsPrototype.tsx"));
 const PregnancyToolkit = lazy(() => import("./pages/PregnancyToolkit.tsx"));
 const PregnancyToolkitBirthPlan = lazy(() => import("./pages/PregnancyToolkitBirthPlan.tsx"));
 const PregnancyToolkitHospitalBag = lazy(() => import("./pages/PregnancyToolkitHospitalBag.tsx"));

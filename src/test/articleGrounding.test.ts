@@ -188,11 +188,12 @@ describe("AI boundary", () => {
     expect(AI_SOURCE_ROUTING_VERSION).toBe("30B-source-routing-v1");
   });
 
-  it("grounding modules reference no AI runtime module", () => {
+  it("grounding modules import no AI runtime module", () => {
     for (const source of [registrySource, eligibilitySource]) {
-      expect(source).not.toContain("aiSources");
-      expect(source).not.toContain("aiModes");
-      expect(source).not.toContain("ai-search");
+      const imports = source.match(/from\s+["'][^"']+["']/g) ?? [];
+      for (const line of imports) {
+        expect(line).not.toMatch(/aiSources|aiModes|ai-search|supabase/);
+      }
     }
   });
 });

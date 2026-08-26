@@ -98,3 +98,14 @@ Drafts, placeholders, archived and deprecated content are excluded from every ti
 ## Status
 
 Start of You article grounding remains blocked. The next gated step is per-article review using `article-grounding-review-template.md`, starting at tier 1.
+
+## Phase 30E annotation — Tier 1 correction
+
+This document remains the Phase 30D record and is not rewritten. Phase 30E adds the following corrections and findings on top of it.
+
+- **Section 12, tier 1.** "Low-risk brand, navigation and product guidance (support journey, 12 records)" was a misclassification. In this catalogue the `support` journey tag means emotional and psychological support, not product support. All 12 records are corrected out of Tier 1, remain blocked, and are queued for **Phase 30H — Wellbeing & Sensitive Support Review**. The corrected slugs are listed individually with their audit trail in `article-grounding-tier-1-review.md`, section 7.1.
+- **Section 5, editorial status.** The breakdown is 110 live, 44 draft, 52 unknown, out of 206. Draft and unknown stay separate categories. The 52 unknown records remain blocked and are recorded as an unresolved editorial and governance issue for Phase 30F.
+- **Tier 1 outcome.** Six practical live articles were body-reviewed and all six were excluded (sleep safety and SIDS, car-seat and equipment safety, labour-arrival and urgency wording, birth clinical decision-making). 0 accepted Tier 1 candidates, 0 registry changes, 0 candidate records, 0 approved articles.
+- **Scoped conclusion.** No purely product, journal or navigation article was identified among the 206 article-grounding registry records screened in Phase 30E. This applies only to this registry, not to the wider Start of You website, product, journal or navigation experience.
+- **Governance gaps unchanged.** Owner, content version, grounding reviewer and reviewed date remain recorded as Missing for all 206 records. Source-list presence is governance metadata only.
+- **Next gated step.** Phase 30F — grounding governance metadata and editorial status resolution, not Tier 2. Start of You article grounding remains blocked and the library is not grounding-ready.

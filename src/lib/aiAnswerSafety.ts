@@ -99,10 +99,9 @@ export const sanitiseStreamingAiAnswer = (markdown: string): string => {
 };
 
 /**
- * Phase 29D — verdict-ban checker. Test-only for now: it reports banned
- * verdict wording without changing what a reader sees, because stripping
- * these mid-answer risks damaging otherwise good guidance. Runtime
- * enforcement is a Phase 29E decision.
+ * Phase 29D — verdict-ban checker, promoted in Phase 29E to a development-time
+ * console warning. It still never changes what a reader sees, because
+ * stripping these mid-answer risks damaging otherwise good guidance.
  */
 export const BANNED_VERDICT_PATTERNS: { label: string; pattern: RegExp }[] = [
   { label: "your baby is fine", pattern: /your baby (?:is|will be) (?:fine|okay|ok)\b/i },
@@ -119,3 +118,31 @@ export const BANNED_VERDICT_PATTERNS: { label: string; pattern: RegExp }[] = [
 /** Returns the labels of any banned verdict wording found in an answer. */
 export const findBannedVerdicts = (text: string): string[] =>
   BANNED_VERDICT_PATTERNS.filter(({ pattern }) => pattern.test(text ?? "")).map(({ label }) => label);
+
+/** Development-only, non-blocking. Never runs in a production build. */
+const warnOnBannedVerdicts = (answer: string): void => {
+  if (!import.meta.env?.DEV) return;
+  const found = findBannedVerdicts(answer);
+  if (found.length > 0) {
+    console.warn("[ai-safety] banned verdict wording in answer:", found.join(", "));
+  }
+};
+
+/**
+ * Phase 29E — the single entry point every AI surface renders through.
+ *
+ * Pure helper, not a React hook. While an answer is still streaming it keeps
+ * partial text intact; once the answer is complete it applies the full clean-up
+ * and swaps a pure retrieval refusal for the approved fallback line.
+ */
+export const sanitiseAnswerForDisplay = (
+  answer: string,
+  options: { isStreaming?: boolean } = {},
+): string => {
+  if (!answer?.trim()) return "";
+  if (options.isStreaming) return sanitiseStreamingAiAnswer(answer);
+  const safe = sanitiseAiAnswer(answer);
+  warnOnBannedVerdicts(safe);
+  return safe;
+};
+

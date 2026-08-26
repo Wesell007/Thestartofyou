@@ -145,8 +145,13 @@ const RedirectToOvulationCalculator = () => {
 };
 
 const AnalyticsIdentityBridge = () => {
+  const { pathname } = useLocation();
+  // Phase 29I QA — design prototype routes do no Supabase or analytics work.
+  const onPrototypeRoute = isPrototypeRoute(pathname);
   useEffect(() => {
+    if (onPrototypeRoute) return;
     let cancelled = false;
+
     // Dedupe `auth_completed`: Supabase fires SIGNED_IN on real sign-in,
     // token refresh, tab focus / visibility, and session restore. We only
     // want to count a real sign-in. Keying on user.id means token

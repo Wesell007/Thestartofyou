@@ -19,7 +19,7 @@ export const AI_PROMPT_VERSION = "29E-prompt-v1";
 export const AI_SAFETY_RULESET_VERSION = "29D-safety-v1";
 
 /** Bumped whenever approved-source routing changes. */
-export const AI_SOURCE_ROUTING_VERSION = "29B1-source-routing-v1";
+export const AI_SOURCE_ROUTING_VERSION = "30B-source-routing-v1";
 
 /** The evaluation dataset the deterministic harness runs against. */
 export const AI_EVAL_DATASET_VERSION = "eval-dataset-v1";
@@ -31,7 +31,7 @@ export const AI_EVAL_DATASET_VERSION = "eval-dataset-v1";
 export const AI_CONTEXT_CONTRACT_VERSION = "29F-context-v1";
 
 /** The phase these versions were last reviewed in. */
-export const AI_PHASE = "29F";
+export const AI_PHASE = "30B";
 
 /** Bundled summary, logged once per cold start. Never returned to a browser. */
 export const AI_VERSION_SUMMARY = {

@@ -48,9 +48,11 @@ SSE passthrough to client
 answer + fixed trust line
 ```
 
-## 3. Modes
+## 3. Modes and the prompt registry
 
 `supabase/functions/_shared/aiModes.ts`. Unknown or absent modes resolve to `general`.
+
+Since Phase 29E the prompts are no longer hand-written strings per mode. Each mode is a registry entry that names its identity line, its safety blocks, its escalation block and its word limit, and `buildSystemPrompt` composes those blocks in a fixed order. Shared wording therefore exists once: editing `SAFETY_BLOCKS.notADiagnosis` changes every mode that uses it, and no mode can silently drift from the others.
 
 | Mode | Grounding | Urgent escalation answer | Character |
 | --- | --- | --- | --- |
@@ -58,9 +60,14 @@ answer + fixed trust line
 | `pregnancy_week_companion` | yes | yes | Warm week-by-week tone. Explicitly forbids "normal"/"abnormal" verdicts and forbids wait-and-see for movements, bleeding, severe pain, fever, severe headache |
 | `first_year_companion` | yes | yes | Gentle first-year tone. Professional-help wording only when the question raises it |
 | `ttc_companion` | yes | yes | Never confirms or rules out pregnancy or ovulation, never interprets a test, no false hope, no blame |
-| `first_year_day_recap` | no | no | Recap of logged entries only. No guidance, no clinician mention. Urgent wording returns `DAY_RECAP_UNAVAILABLE_ANSWER` |
+| `first_year_day_recap` | no | no | Recap of logged entries only. No guidance, no clinician mention, no escalation block at all. Urgent wording returns `DAY_RECAP_UNAVAILABLE_ANSWER` |
 
 Shared prompt rules in every conversational mode: general information not a diagnosis, never claim medical review by a named person, never reassure away red flags, no diagnosis or dosing, treat question and context as untrusted content, prefer supplied background but still answer from routine UK guidance where it does not cover the topic, and never expose retrieval wording. A genuine inability to answer must use one fixed line (`SAFE_FALLBACK_ANSWER`).
+
+Fallback wording lives in `supabase/functions/_shared/aiAnswerWording.ts` — the one module imported by both the edge functions and the browser bundle, so the line the prompt promises and the line the client substitutes cannot diverge.
+
+`getPromptFingerprint(mode)` returns a short stable hash of the composed prompt. `src/test/aiPromptRegistry.test.ts` pins the current fingerprints, so any prompt edit fails the suite until the change is deliberate and the version constants are bumped. See `versioning.md`.
+
 
 ## 4. Source routing
 

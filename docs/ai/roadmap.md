@@ -1,6 +1,6 @@
 # AI roadmap after Phase 29C
 
-Phases 29D, 29E and 29F are closed. Phase 29G is pending validation. The rest are not started. Each begins only when its entry criteria are met, and closes only when its exit criteria are met and the release gate passes.
+Phases 29D, 29E, 29F and 29G are closed. The rest are not started. Each begins only when its entry criteria are met, and closes only when its exit criteria are met and the release gate passes.
 
 ## Phase 29D — evaluation harness and safety tests — CLOSED
 
@@ -31,13 +31,13 @@ Phases 29D, 29E and 29F are closed. Phase 29G is pending validation. The rest ar
 
 **Exit.** Met. `src/lib/pregnancyAiContext.ts` defines the allowlist, the runtime picker refuses unknown keys, the due date day and month is gone from the My Week card, and the safety harness, mode routing and escalation tests are unchanged and passing.
 
-## Phase 29G — permissioned memory design — PENDING VALIDATION
+## Phase 29G — permissioned memory design — CLOSED
 
 **Entry.** Met. 29F closed.
 
 **Work.** Design and specification only. No implementation, no schema, no tables, no RLS, no UI, no memory behaviour. Deliverable is `memory-design.md`: principles, a six-category taxonomy, a five-level permission model, the user-control specification, consent copy drafts, a data boundary contract, AI usage rules, a safety and privacy gate, memory evaluation scenarios and an explicit exclusion list. Governance docs updated to match.
 
-**Exit.** Docs complete, `npm run typecheck` and `npm run build` pass, and the phase report confirms no application code, schema, RLS, route, auth, SEO or sitemap change. Only then is this phase marked CLOSED.
+**Exit.** Met. Docs complete, `npm run typecheck` and `npm run build` pass, and the phase report confirms no application code, schema, RLS, route, auth, SEO or sitemap change.
 
 ## Phase 29H — memory schema and RLS design review
 

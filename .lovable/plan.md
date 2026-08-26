@@ -6,6 +6,15 @@ Data and governance model only. No article is connected to the AI, no ingestion,
 
 Default deny. Every Start of You article is invisible to AI unless an explicit registry entry marks it approved, and no article is marked approved in this phase.
 
+## Mandatory guard: metadata only at runtime
+
+The registry and eligibility helpers never import, store, return or bundle article body content. No full article objects are imported from the datasets; records are written as explicit metadata literals.
+
+Allowed fields only: slug, journey, topics, sensitivity, contentVersion, owner, reviewer, reviewedDate, hasSourceList, editorialStatus, archived, deprecated, approvalStatus, approvedBy, approvedAt, approvalNotes, replacementSlug, rollbackRef.
+
+Never included: article body, sections, prose, takeaways, full descriptions, images or media, and any user content (journal, notes, reflections, logs, media). The record type has no field capable of holding them.
+
+
 ## What gets built
 
 ### 1. Type model — `src/lib/grounding/articleGroundingTypes.ts`

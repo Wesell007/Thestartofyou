@@ -4,11 +4,11 @@ Review and candidate selection only. No article approved, no article content rea
 
 ## Findings from the pre-plan screen (drives the whole phase)
 
-- All 206 registry records screened on metadata. 110 are `live`; 44 draft and 52 unknown are excluded on status alone.
+- All 206 registry records screened on metadata: 110 `live`, 44 `draft`, 52 `unknown`. Draft and unknown stay separate categories; unknown is never treated as draft, archived or deprecated. The 52 unknown records remain blocked and are recorded as an unresolved editorial/governance issue for a later phase.
 - The Phase 30D Tier 1 pool (12 `support`-journey records) is emotional, loss, mental-health and fertility-pressure content, not brand or product guidance. It is corrected out of Tier 1 and recorded auditably by slug.
 - Re-screening the live set produced 6 shortlisted practical articles: `preparing-for-baby-complete-guide`, `what-to-buy-for-a-new-baby`, `the-space-your-baby-will-come-home-to`, `hospital-bag-and-what-to-pack`, `writing-a-birth-plan`, `birth-preferences`.
 - Body review of those 6 found sleep safety / SIDS, car seat safety, emergency and labour-arrival guidance, or birth clinical decision-making in every one. All six are excluded.
-- **Expected outcome: zero accepted Tier 1 candidates, zero registry changes.** The catalogue currently holds no purely product, journal or navigation article.
+- **Expected outcome: zero accepted Tier 1 candidates, zero registry changes.** Recorded conclusion: "No purely product, journal or navigation article was identified among the 206 article-grounding registry records screened in Phase 30E." This applies only to the registry reviewed in this phase, not to the wider website, product or journal experience.
 
 ## Deliverable
 

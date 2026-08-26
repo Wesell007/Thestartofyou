@@ -130,13 +130,11 @@ These remain valid but sit outside 29H to 29L and are not started.
 
 Recommended by Phase 30A. None of these is authorised: each needs its own approval before work begins, and the grounding gate in `release-gate.md` section I applies throughout.
 
-### Phase 30B — widen external source routing — FUTURE, NOT STARTED
+### Phase 30B — widen external source routing — CLOSED
 
-**Entry.** 30A closed, candidate URLs checked reachable and relevant, evaluation rows drafted.
+**Delivered.** Eleven new NHS pages added to `APPROVED_SOURCES` covering postpartum physical recovery, the 6-week postnatal check, postnatal fitness, first solid foods, what to feed young children, foods to avoid, drinks and cups, learning to talk, toddler first words, toddler activities and the NHS Best Start toddler hub. Six new route groups plus a brand/product guard, with ordering fixes for the Phase 30A collisions. `AI_SOURCE_ROUTING_VERSION` bumped to `30B-source-routing-v1` and `AI_PHASE` to `30B`. 38 deterministic routing tests added in `src/test/aiSourceRouting.test.ts`.
 
-**Work.** Add approved sources and rules for postpartum recovery, perinatal mental health as distinct from crisis help, weaning, toddler and family. Fix the known first-match ordering collisions.
-
-**Exit.** New rules covered by routing evaluations with false-positive checks, no Red or Crisis regression, `AI_SOURCE_ROUTING_VERSION` bumped, output hygiene unchanged.
+**Deliberately out of scope and still deferred.** Loss, domestic abuse and complex perinatal mental health routing, which stay separate safety-reviewed phases; Start of You article grounding, still blocked at the gate; brand-answer grounding (Phase 30D).
 
 ### Phase 30C — article metadata and approval model — FUTURE, NOT STARTED
 

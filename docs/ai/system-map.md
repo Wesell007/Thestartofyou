@@ -77,18 +77,29 @@ Ordered rules, first match wins:
 
 | Order | Trigger keywords | Family | Pages |
 | --- | --- | --- | --- |
-| 1 | suicide, self-harm, mental health, panic attack, depression, anxiety | safety | urgent mental health |
-| 2 | IVF, embryo, egg collection, fertility treatment, frozen transfer | ttc | IVF, infertility |
-| 3 | move/movement, kick, flutter, wriggle, quickening | pregnancy | movements, keeping well |
-| 4 | midwife, antenatal, appointment, scan, booking, check-up, blood test | pregnancy | appointments |
-| 5 | labour, contraction, waters, giving birth, induction | pregnancy | signs of labour |
-| 6 | feed, latch, breastfeed, bottle, milk, winding, colic, hunger, cluster, cue | baby | breastfeeding, feeding hub |
-| 7 | sleep, night waking, nap, settle, drowsy, bedtime | baby | baby sleep |
-| 8 | pregnancy test, testing, test day, two-week wait, 2ww, home test | ttc | pregnancy test |
-| 9 | ovulation, fertility, conceive, period, cycle, trying for a baby, TTC | ttc | fertility, infertility |
-| 10 | bleeding, spotting, cramp, pain | pregnancy | bleeding, common symptoms |
-| 11 | baby, newborn, infant, toddler, nappy, weaning, temperature, unwell, poorly | baby | baby hub, urgent help under 5 |
+| 1 | Start of You, this app/site, my account, subscription, sign-in, password, companion name, journal feature | generic | falls through to the broad hubs, so brand questions never carry clinical grounding |
+| 2 | suicide, self-harm, mental health, panic attack, depression, can't cope, worthless | safety | urgent mental health |
+| 3 | IVF, embryo, egg collection, fertility treatment, frozen transfer | ttc | IVF, infertility |
+| 4 | foods to avoid, avoid giving, honey, choking hazard, whole nuts, too much salt, unsafe food | baby | foods to avoid, first solid foods |
+| 5 | sippy, beaker, open cup, drinks and cups, cows' milk, water for my baby | baby | drinks and cups, what to feed young children |
+| 6 | wean, solid foods, solids, first foods, purée, baby-led, highchair, finger food, what to feed my baby/toddler | baby | first solid foods, what to feed young children |
+| 7 | move/movement, kick, flutter, wriggle, quickening | pregnancy | movements, keeping well |
+| 8 | anxious, anxiety (not attached to a more specific topic) | safety | urgent mental health |
+| 9 | postnatal/6-week/8-week + check, review or appointment | postpartum | postnatal check, post-pregnancy body |
+| 10 | after the birth, post-pregnancy body, postpartum, stitches, perineum, pelvic floor, piles, haemorrhoids, lochia, afterpains, c-section recovery/scar, exercising again/after/with a baby, getting fit, cramping while feeding | postpartum | post-pregnancy body, keeping fit and healthy with a baby |
+| 11 | midwife, antenatal, appointment, scan, booking, check-up, blood test | pregnancy | appointments |
+| 12 | labour, contraction, waters, giving birth, induction | pregnancy | signs of labour |
+| 13 | first words, little sentences, learning to talk, speech, talking, babbling, no words yet, early learning | toddler | help your baby learn to talk, first words and little sentences |
+| 14 | play ideas, activities for, things to do with, toddler play, playing with my baby/toddler, bonding | toddler | activities for toddlers |
+| 15 | feed, latch, breastfeed, bottle, milk, winding, colic, hunger, cluster, cue | baby | breastfeeding, feeding hub |
+| 16 | sleep, night waking, nap, settle, drowsy, bedtime | baby | baby sleep |
+| 17 | pregnancy test, testing, test day, two-week wait, 2ww, home test | ttc | pregnancy test |
+| 18 | ovulation, fertility, conceive, period, cycle, trying for a baby, TTC | ttc | fertility, infertility |
+| 19 | bleeding, spotting, cramp, pain | pregnancy | bleeding, common symptoms |
+| 20 | baby, newborn, infant, toddler, nappy, temperature, unwell, poorly | baby | baby hub, urgent help under 5 |
 | — | no match | — | common symptoms, pregnancy hub |
+
+Ordering notes (Phase 30B): the anxiety-only rule sits below movements so "anxious about my baby's movements" still routes to movements; maternal recovery sits above the generic bleeding/cramp/pain rule so "cramping while breastfeeding" is treated as recovery, not feeding; the postnatal-check rule sits above the antenatal appointments rule; the weaning, drinks and food-safety rules sit above both movements and baby feeding; toddler speech and play sit above baby feeding and sleep. Hub families now include postpartum (baby hub) and toddler (NHS Best Start toddler hub).
 
 A relevant hub page is always appended for non-safety families, and the result is capped at three URLs.
 

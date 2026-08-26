@@ -23,6 +23,7 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 | `memory-mvp-readiness.md` | Phase 29J pre-build gate outcome: MVP scope, blockers, checklists and implementation sequence (planning only, nothing built) |
 | `memory-gate-evidence-pack.md` | Review pack for privacy/legal and internal product reviewers, supporting the pre-build gate (review only, nothing built) |
 | `content-grounding-readiness.md` | Phase 30A grounding audit: current source routing, coverage strengths and gaps, why Start of You content is not approved for grounding, the criteria and gated future options (audit only, nothing built) |
+| `content-grounding-readiness.md` (Phase 30B section) | The delivered widened NHS routing: sources added, routes added, collisions resolved, remaining gaps |
 | `versioning.md` | The AI version constants, prompt fingerprints and the rules for bumping them |
 
 | `roadmap.md` | Phases 29D to 29L with entry and exit criteria, plus the separate audit and redesign track |
@@ -38,6 +39,8 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 - 29C this framework
 - 29D safety harness, kill switch and hard escalation gaps
 - 29E mode, prompt registry and output hygiene cleanup
+- 30A content grounding readiness audit
+- 30B external source routing coverage upgrade
 - 29F controlled pregnancy context upgrade
 - 29G permissioned memory and personalisation design (specification only)
 - 29H memory schema and RLS design review (design review only)

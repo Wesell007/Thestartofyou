@@ -37,7 +37,7 @@ Deliberately excluded by construction: names, emails, user IDs, child IDs, pregn
 
 ## 5. Preconditions for future memory work
 
-The full design is in `memory-design.md` (Phase 29G, specification only). Nothing there is built: no schema, table, RLS policy, settings screen or memory behaviour exists today. This section is the privacy summary of that design and the list of things that must exist before memory ships.
+The full design is in `memory-design.md` (Phase 29G, specification only), and the table, policy, deletion and validation shape it implies is reviewed in `memory-schema-rls-design.md` (Phase 29H, design review only). Nothing in either is built: no schema, table, migration, RLS policy, settings screen or memory behaviour exists today. This section is the privacy summary of that design and the list of things that must exist before memory ships.
 
 Governing rules from the design:
 

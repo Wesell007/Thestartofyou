@@ -22,6 +22,7 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 | `memory-settings-prototype.md` | Where the Phase 29I memory settings prototype lives and what it deliberately does not do |
 | `memory-mvp-readiness.md` | Phase 29J pre-build gate outcome: MVP scope, blockers, checklists and implementation sequence (planning only, nothing built) |
 | `memory-gate-evidence-pack.md` | Review pack for privacy/legal and internal product reviewers, supporting the pre-build gate (review only, nothing built) |
+| `content-grounding-readiness.md` | Phase 30A grounding audit: current source routing, coverage strengths and gaps, why Start of You content is not approved for grounding, the criteria and gated future options (audit only, nothing built) |
 | `versioning.md` | The AI version constants, prompt fingerprints and the rules for bumping them |
 
 | `roadmap.md` | Phases 29D to 29L with entry and exit criteria, plus the separate audit and redesign track |

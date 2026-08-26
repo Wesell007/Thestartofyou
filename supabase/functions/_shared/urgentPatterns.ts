@@ -48,6 +48,9 @@ const PREGNANCY_RED_FLAGS = [
   "(?:i am|i'?m|im) bleeding",
   "bleeding (?:at|in|during)[^.?!]{0,24}(?:week|weeks|pregnan)",
   "bleeding (?:and|with) (?:pain|cramp)",
+  "pregnant and bleeding",
+  "pregnan[^?!\\n]{0,30}bleeding",
+  "bleeding[^?!\\n]{0,30}pregnan",
   // Pre-eclampsia pattern
   "severe headache",
   "bad headache[^.?!]{0,30}(?:vision|sight|lights|blurred)",
@@ -65,8 +68,8 @@ const PREGNANCY_RED_FLAGS = [
   "severe (?:abdominal |stomach |tummy )?pain",
   "pain that will not ease",
   "pain that won'?t ease",
-  "(?:temperature|fever)[^.?!]{0,40}(?:pregnan|weeks)",
-  "(?:pregnan|weeks)[^.?!]{0,40}(?:temperature of|fever)",
+  "(?:temperature|fever)[^?!\\n]{0,40}(?:pregnan|weeks)",
+  "(?:pregnan|weeks)[^?!\\n]{0,40}(?:temperature of|fever)",
   // Ectopic pattern
   "one[- ]sided pain",
   "pain on one side[^.?!]{0,30}(?:bleed|faint|shoulder)",
@@ -111,8 +114,8 @@ const BABY_RED_FLAGS = [
   "(?:face|lips|tongue) swelled",
   // Fever under three months
   "(?:newborn|new born)[^.?!]{0,30}(?:fever|temperature)",
-  "\\b(?:[1-9]|1[0-2]) week old[^.?!]{0,40}(?:fever|temperature)",
-  "\\b[1-2] month old[^.?!]{0,40}(?:fever|temperature)",
+  "\\b(?:[1-9]|1[0-2]) week old[^?!\\n]{0,40}(?:fever|temperature)",
+  "\\b[1-2] month old[^?!\\n]{0,40}(?:fever|temperature)",
   "feels very hot",
   "very hot and",
 ];

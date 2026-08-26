@@ -59,7 +59,7 @@ Backend, prompts, modes, versions and hygiene are untouched apart from a version
 - `supabase/functions/_shared/aiVersions.ts`: bump the context-contract marker and phase marker to 29F. No model, prompt or safety ruleset change, so prompt fingerprints stay identical.
 - `docs/ai/system-map.md`: add the pregnancy context contract to the context-builder section.
 - `docs/ai/privacy-notes.md`: record that due date day/month is no longer sent from the My Week card, and list the new allowlist.
-- `docs/ai/roadmap.md`: close 29F.
+- `docs/ai/roadmap.md`: mark 29F as in progress / pending validation during implementation, and only mark it closed once tests, lint, typecheck and build all pass.
 
 ## 5. Tests
 

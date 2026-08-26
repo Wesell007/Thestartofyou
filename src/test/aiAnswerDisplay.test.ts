@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, statSync } from "node:fs";
+
 import { describe, expect, it } from "vitest";
 import {
   SAFE_FALLBACK_ANSWER,

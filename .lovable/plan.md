@@ -58,7 +58,7 @@ New `supabase/functions/_shared/aiAnswerWording.ts` holding `SAFE_FALLBACK_ANSWE
 
 ## 4. Output hygiene across every surface
 
-- Extend `src/lib/aiAnswerSafety.ts` with a small `useSafeAnswer(answer, isLoading)` helper (streaming vs final sanitising in one place).
+- Extend `src/lib/aiAnswerSafety.ts` with a pure helper `sanitiseAnswerForDisplay(answer, { isStreaming })` (streaming vs final sanitising in one place). It is not a React hook and is not named like one.
 - Replace the local `splitSources` copies in `SectionAskAI.tsx`, `FirstYearAskCompanion.tsx` and `TTCAskCompanionCard.tsx` with the shared sanitiser. Rendering, layout and copy stay exactly as they are; only the string passed in changes.
 - `DaySummaryCard.tsx` keeps its recap-specific `stripContactWording` but drops its duplicate source-splitting in favour of the shared strip.
 - Promote `findBannedVerdicts` from test-only to a dev-time console warning behind `import.meta.env.DEV`, still non-blocking, so banned verdict wording surfaces during development without altering what a reader sees.

@@ -284,3 +284,47 @@ Gated sequence. Each phase begins only when its entry criteria are met. **This p
 Not started and not authorised by this phase: widening external routing, the article metadata model, curated Start of You grounding, retrieval, vector search, embeddings, RAG.
 
 Also still on the separate audit track and unaffected here: voice readiness, and the companion UI redesign. Memory remains blocked at its own gate in `memory-mvp-readiness.md`.
+
+---
+
+## 16. Phase 30B outcome — external source routing coverage upgrade (CLOSED)
+
+Phase 30B implemented the "Option A" recommendation above: widen the approved external allowlist and its routing. Nothing else in this document changed. There is still no retrieval, no vector search, no embeddings, no article ingestion and no Start of You grounding.
+
+### Sources added
+
+All eleven verified before inclusion: HTTP 200 over HTTPS, HTML (no PDFs), official `www.nhs.uk`, and non-thin after the existing `<main>` text extraction (shortest surviving page 2,137 characters, well above the 200-character discard threshold).
+
+| Key | Page | Extracted text |
+| --- | --- | --- |
+| `postpartumBody` | Your post-pregnancy body | 5,448 |
+| `postnatalCheck` | Your 6-week postnatal check | 2,988 |
+| `postpartumFitness` | Keeping fit and healthy with a baby | 7,304 |
+| `firstSolidFoods` | Baby's first solid foods | 19,499 (capped at 10,000 in use) |
+| `youngChildrenFood` | What to feed young children | 9,366 |
+| `foodsToAvoid` | Foods to avoid giving babies and young children | 5,689 |
+| `drinksAndCups` | Drinks and cups for babies and young children | 9,302 |
+| `learningToTalk` | Help your baby learn to talk | 4,983 |
+| `toddlerFirstWords` | First words and little sentences, 1 to 2 years (NHS Best Start) | 7,718 |
+| `toddlerActivities` | Activities for toddlers (NHS Best Start) | 4,398 |
+| `toddlerHub` | NHS Best Start toddler hub, used as the toddler family hub | 2,137 |
+
+Candidates rejected: three postpartum URLs that returned 404 under the older `/pregnancy/labour-and-birth/after-the-birth/` structure, several guessed Start for Life play paths that 404, and `/conditions/baby/babys-development/play-and-learning/` which resolves but extracts to only 215 characters and was dropped as effectively thin.
+
+### Routes added
+
+Six new groups plus one guard: brand and product guard, food safety, drinks and cups, weaning and solids, postnatal check, postpartum recovery, toddler speech and early learning, toddler play and activities. Two new hub families: `postpartum` (baby hub) and `toddler` (NHS Best Start toddler hub). A `generic` family returns the existing default pair so brand questions never carry clinical grounding, and never an empty source list.
+
+### Collisions resolved
+
+The bare `anxious|anxiety` trigger was split out of the crisis rule and moved below movements, so an anxious movements question routes to movements while dominant mental-health wording still routes to urgent mental health. Maternal recovery sits above the generic bleeding/cramp/pain rule, so "cramping while breastfeeding" reads as recovery rather than feeding. The postnatal-check rule sits above antenatal appointments. Weaning, drinks and food-safety sit above both movements and baby feeding, so "move my baby to an open cup" is not read as fetal movement. Toddler speech and play sit above baby feeding and sleep.
+
+### Coverage after 30B
+
+Closed: postpartum physical recovery, the 6-week check, postnatal fitness, weaning and first foods, foods to avoid, drinks and cups, what to feed young children, toddler speech and early learning, toddler play.
+
+Still open, unchanged: loss and pregnancy after loss, domestic abuse, complex perinatal mental health beyond urgent help, family stage beyond toddler, multi-topic questions, brand and product answers, and anything buried past the 10,000-character cap. The first three stay deferred to separate safety-reviewed phases; brand answers are Phase 30D.
+
+### Why Start of You article grounding remains blocked
+
+Unchanged from section 6. Article records still carry no sensitivity level, no content version, no owner distinct from reviewer, no archived or deprecated state in the record the AI would read, and no per-article grounding-approval flag. Until Phase 30C supplies that metadata, a draft or superseded article could silently become the authority behind a clinical answer, so no article is readable by the AI at any review level.

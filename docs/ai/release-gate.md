@@ -94,6 +94,8 @@ Every item below must be complete before any memory implementation ships. A fail
 
 Applies to any change to source routing, the approved source allowlist, how background material is fetched or used, or any proposal to ground answers in this product's own content. The full assessment is in `content-grounding-readiness.md`.
 
+**Status (Phase 30B, closed).** The external-routing checklist below was satisfied for the postpartum recovery, weaning and toddler routes: URLs verified reachable, HTML and non-thin; ordering collisions reviewed and recorded; `AI_SOURCE_ROUTING_VERSION` bumped to `30B-source-routing-v1`; routing tests added with false-positive checks; hygiene, escalation order and recap ungroundedness unchanged. The Start of You content block below is unchanged and still blocked.
+
 For a change to external source routing:
 
 - [ ] Every added URL checked reachable, UK, non-commercial and topically relevant before it is added

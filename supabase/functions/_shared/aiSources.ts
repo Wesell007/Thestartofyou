@@ -32,9 +32,28 @@ export const APPROVED_SOURCES = {
   ivf: "https://www.nhs.uk/tests-and-treatments/ivf/",
   mentalHealth:
     "https://www.nhs.uk/nhs-services/mental-health-services/where-to-get-urgent-help-for-mental-health/",
+  // Phase 30B — postpartum recovery, weaning and toddler coverage.
+  postpartumBody: "https://www.nhs.uk/conditions/baby/support-and-services/your-post-pregnancy-body/",
+  postnatalCheck:
+    "https://www.nhs.uk/conditions/baby/support-and-services/your-6-week-postnatal-check/",
+  postpartumFitness:
+    "https://www.nhs.uk/conditions/baby/support-and-services/keeping-fit-and-healthy-with-a-baby/",
+  firstSolidFoods: "https://www.nhs.uk/conditions/baby/weaning-and-feeding/babys-first-solid-foods/",
+  youngChildrenFood:
+    "https://www.nhs.uk/conditions/baby/weaning-and-feeding/what-to-feed-young-children/",
+  foodsToAvoid:
+    "https://www.nhs.uk/conditions/baby/weaning-and-feeding/foods-to-avoid-giving-babies-and-young-children/",
+  drinksAndCups:
+    "https://www.nhs.uk/conditions/baby/weaning-and-feeding/drinks-and-cups-for-babies-and-young-children/",
+  learningToTalk:
+    "https://www.nhs.uk/conditions/baby/babys-development/play-and-learning/help-your-baby-learn-to-talk/",
+  toddlerFirstWords:
+    "https://www.nhs.uk/best-start-in-life/toddler/learning-to-talk/first-words-and-little-sentences-1-to-2-years/",
+  toddlerActivities: "https://www.nhs.uk/best-start-in-life/toddler/activities-for-toddlers/",
+  toddlerHub: "https://www.nhs.uk/best-start-in-life/toddler/",
 } as const;
 
-type Family = "pregnancy" | "baby" | "ttc" | "safety";
+type Family = "pregnancy" | "baby" | "postpartum" | "toddler" | "ttc" | "safety" | "generic";
 
 type Topic = {
   /** Matched against the lowercased question plus bounded page context. */
@@ -49,7 +68,16 @@ type Topic = {
  */
 const TOPICS: Topic[] = [
   {
-    pattern: /suicid|self[- ]?harm|mental health|panic attack|depress|anxious|anxiety/,
+    // Brand, product and account questions must never be dressed in clinical
+    // grounding: they fall through to the broad hubs instead.
+    pattern:
+      /start of you|this (app|site|website|service)|the app\b|my account|subscription|sign[- ]?up|sign[- ]?in|log[- ]?in|password|companion name|journal feature/,
+    family: "generic",
+    urls: [],
+  },
+  {
+    pattern:
+      /suicid|self[- ]?harm|harm myself|mental health|panic attack|depress|can'?t cope|cannot cope|worthless/,
     family: "safety",
     urls: [APPROVED_SOURCES.mentalHealth],
   },
@@ -59,9 +87,45 @@ const TOPICS: Topic[] = [
     urls: [APPROVED_SOURCES.ivf, APPROVED_SOURCES.infertility],
   },
   {
+    pattern:
+      /foods? to avoid|avoid giving|\bhoney\b|choking hazard|whole nuts|too much salt|unsafe food/,
+    family: "baby",
+    urls: [APPROVED_SOURCES.foodsToAvoid, APPROVED_SOURCES.firstSolidFoods],
+  },
+  {
+    pattern: /sippy|beaker|open cup|drinks? and cups|cows'? milk|water for (?:my )?(?:baby|toddler)/,
+    family: "baby",
+    urls: [APPROVED_SOURCES.drinksAndCups, APPROVED_SOURCES.youngChildrenFood],
+  },
+  {
+    pattern:
+      /wean|solid foods?|\bsolids\b|first foods|pur[eé]e|baby[- ]?led|highchair|finger food|what (?:to|should i) feed (?:my )?(?:baby|toddler|young child)/,
+    family: "baby",
+    urls: [APPROVED_SOURCES.firstSolidFoods, APPROVED_SOURCES.youngChildrenFood],
+  },
+  {
     pattern: /\bmov(?:e|es|ed|ing|ement|ements)\b|kick|flutter|wriggl|quicken/,
     family: "pregnancy",
     urls: [APPROVED_SOURCES.movements, APPROVED_SOURCES.keepingWell],
+  },
+  {
+    // Anxiety wording that is not attached to a more specific topic. Sits below
+    // movements so "anxious about movements" still routes to movements.
+    pattern: /anxious|anxiety/,
+    family: "safety",
+    urls: [APPROVED_SOURCES.mentalHealth],
+  },
+  {
+    pattern:
+      /(?:post[- ]?natal|postnatal|6[- ]week|six[- ]week|8[- ]week|eight[- ]week)\s*(?:check|review|appointment)/,
+    family: "postpartum",
+    urls: [APPROVED_SOURCES.postnatalCheck, APPROVED_SOURCES.postpartumBody],
+  },
+  {
+    pattern:
+      /after (?:the )?birth|body after birth|post[- ]?pregnancy body|postpartum|postnatal recovery|stitches|perine|pelvic floor|\bpiles\b|haemorrhoid|lochia|after[- ]?pains|c[- ]?section (?:recovery|scar|wound)|exercis\w* (?:again|after|with a baby)|getting fit|back to running|cramp\w* (?:while|when|during) (?:breast)?feed/,
+    family: "postpartum",
+    urls: [APPROVED_SOURCES.postpartumBody, APPROVED_SOURCES.postpartumFitness],
   },
   {
     pattern: /midwife|antenatal|appointment|scan\b|booking|check[- ]?up|blood test/,
@@ -72,6 +136,18 @@ const TOPICS: Topic[] = [
     pattern: /labour|contraction|waters|giving birth|induction/,
     family: "pregnancy",
     urls: [APPROVED_SOURCES.labour],
+  },
+  {
+    pattern:
+      /first words|little sentences|learning to talk|\bspeech\b|talking|babbl|not saying (?:any )?words|words yet|early learning/,
+    family: "toddler",
+    urls: [APPROVED_SOURCES.learningToTalk, APPROVED_SOURCES.toddlerFirstWords],
+  },
+  {
+    pattern:
+      /play idea|activities for|things to do with|toddler play|playing with (?:my )?(?:baby|toddler)|bonding/,
+    family: "toddler",
+    urls: [APPROVED_SOURCES.toddlerActivities],
   },
   {
     pattern: /feed|latch|breastfe|bottle|milk|winding|colic|hunger|cluster|\bcue/,
@@ -99,7 +175,7 @@ const TOPICS: Topic[] = [
     urls: [APPROVED_SOURCES.bleeding, APPROVED_SOURCES.pregnancySymptoms],
   },
   {
-    pattern: /baby|newborn|infant|toddler|napp|weaning|temperature|unwell|poorly/,
+    pattern: /baby|newborn|infant|toddler|napp|temperature|unwell|poorly/,
     family: "baby",
     urls: [APPROVED_SOURCES.babyHub, APPROVED_SOURCES.babyUnwell],
   },
@@ -108,9 +184,11 @@ const TOPICS: Topic[] = [
 /** Broad pages used when nothing specific matches. */
 const DEFAULT_URLS = [APPROVED_SOURCES.pregnancySymptoms, APPROVED_SOURCES.pregnancyHub];
 
-const HUB_FOR_FAMILY: Record<Exclude<Family, "safety">, string> = {
+const HUB_FOR_FAMILY: Record<Exclude<Family, "safety" | "generic">, string> = {
   pregnancy: APPROVED_SOURCES.pregnancyHub,
   baby: APPROVED_SOURCES.babyHub,
+  postpartum: APPROVED_SOURCES.babyHub,
+  toddler: APPROVED_SOURCES.toddlerHub,
   ttc: APPROVED_SOURCES.fertility,
 };
 
@@ -121,7 +199,7 @@ const HUB_FOR_FAMILY: Record<Exclude<Family, "safety">, string> = {
 export const selectSources = (query: string, context?: string): string[] => {
   const text = `${query} ${context ?? ""}`.toLowerCase();
   const topic = TOPICS.find((entry) => entry.pattern.test(text));
-  if (!topic) return [...DEFAULT_URLS];
+  if (!topic || topic.family === "generic") return [...DEFAULT_URLS];
   if (topic.family === "safety") return [...topic.urls];
 
   const urls = [...topic.urls];

@@ -32,6 +32,7 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 - 29C this framework
 - 29D safety harness, kill switch and hard escalation gaps
 - 29E mode, prompt registry and output hygiene cleanup
+- 29F controlled pregnancy context upgrade
 
 ## How to use these documents
 

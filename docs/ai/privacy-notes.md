@@ -37,16 +37,29 @@ Deliberately excluded by construction: names, emails, user IDs, child IDs, pregn
 
 ## 5. Preconditions for future memory work
 
+The full design is in `memory-design.md` (Phase 29G, specification only). Nothing there is built: no schema, table, RLS policy, settings screen or memory behaviour exists today. This section is the privacy summary of that design and the list of things that must exist before memory ships.
+
+Governing rules from the design:
+
+- the companion never silently remembers anything from a conversation; memory exists only because a category was turned on or an item was deliberately saved
+- memory is permissioned, transparent, editable, deletable and reversible
+- memory is off by default; sensitive memory (category F: symptoms, loss, fertility treatment, mental health, abuse, baby health, medication) is excluded entirely and has no on switch
+- journal, reflection and media content is not used by default, and sits behind its own separate toggle
+- memory is separate from chat history, journal content and clinical records
+- memory belongs to a journey and must not cross into another one
+
 Memory must not ship until all of the following exist:
 
-- explicit opt-in, separate from account creation and from analytics consent
+- explicit opt-in per level, separate from account creation and from analytics consent, with the consent version recorded
 - a plain description of exactly what is remembered, in the person's own words where possible
-- a visible list of remembered items with per-item delete, plus delete-all
-- a strict allowlist of what can be remembered, with sensitive categories (loss, mental health, fertility diagnosis, relationships) excluded unless the person deliberately adds them
-- retention limits and automatic expiry
+- a visible list of remembered items with per-item edit, per-item delete, delete-all and pause
+- a strict allowlist of what can be remembered, with sensitive categories excluded rather than merely defaulted off
+- retention limits and automatic expiry: continuity in days, preferences and saved facts on a monthly review date, journey state cleared on stage change
 - export and deletion behaviour joined up with the existing account deletion flow
-- a documented answer to what memory is written to, where it lives, and who can read it
-- an evaluation set covering memory-specific failure modes: stale facts, wrong stage, wrong child, loss-insensitive recall
+- a documented answer to what memory is written to, where it lives, and who can read it, including owner-scoped RLS and grants
+- a memory-off kill switch that disables memory reads globally without a deploy
+- an evaluation set covering memory-specific failure modes: stale facts, wrong stage, wrong child, loss-insensitive recall, cross-journey leakage, and reuse of deleted memory
+
 
 ## 6. Loss and stage transitions
 

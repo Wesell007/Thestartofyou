@@ -26,6 +26,8 @@ vi.mock("@/integrations/supabase/client", () => ({
 }));
 
 import MemorySettingsPrototype from "./MemorySettingsPrototype";
+import ConsentBanner from "@/components/consent/ConsentBanner";
+
 import { shouldShowCompanionLauncher } from "@/lib/companion/companionSurface";
 import { PROTOTYPE_ITEMS } from "@/components/memory-prototype/memoryPrototypeData";
 

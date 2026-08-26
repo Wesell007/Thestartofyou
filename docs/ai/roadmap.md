@@ -152,23 +152,72 @@ Recommended by Phase 30A. None of these is authorised: each needs its own approv
 
 **Exit.** Drift guard passing, full coverage confirmed, zero approved articles, no AI behaviour change, no version constant bumped. Closed.
 
-**Next gated step.** Per-article review at tier 1 (low-risk brand, navigation and product guidance) using the template. Review does not grant approval; approval is its own gated phase.
+**Next gated step.** Delivered as Phase 30E below. Note the Phase 30E correction: the "support journey, 12 records" tier 1 entry in the 30D review order was a misclassification — those records are emotional support content and move to Phase 30H.
+
+### Phase 30E — Tier 1 article grounding review batch — CLOSED
+
+**Entry.** 30D closed with the drift guard and review queue in place.
+
+**Work.** Review and candidate selection only. All 206 registry records screened on metadata (110 live, 44 draft, 52 unknown — draft and unknown held as separate categories). The 12 `support`-journey records placed in Tier 1 by Phase 30D were corrected out of Tier 1 and recorded auditably by slug. Six practical `live` articles were body-reviewed for exclusion classification only: `preparing-for-baby-complete-guide`, `what-to-buy-for-a-new-baby`, `the-space-your-baby-will-come-home-to`, `hospital-bag-and-what-to-pack`, `writing-a-birth-plan`, `birth-preferences`. Deliverable is `docs/ai/article-grounding-tier-1-review.md`, metadata only.
+
+**Result.** 0 accepted Tier 1 candidates, 0 registry changes, 0 candidates, 0 approved articles. Recorded conclusion, scoped to this registry: "No purely product, journal or navigation article was identified among the 206 article-grounding registry records screened in Phase 30E." Owner, content version, grounding reviewer and reviewed date remain recorded as Missing for all 206. The 52 unknown editorial statuses stay blocked and carry to Phase 30F.
+
+**Exit.** Met. `listGroundingEligibleSlugs()` still `[]`, `AI_SOURCE_ROUTING_VERSION` still `30B-source-routing-v1`, no AI behaviour change, no version constant bumped, article grounding still blocked.
 
 ### Phase 30D.1 — curated brand-answer grounding behind a flag — FUTURE, NOT STARTED
 
-**Entry.** 30C closed, the per-article criteria satisfied and recorded for every mapped article, stale-content evaluations in place.
+**Entry.** 30C closed, the per-article criteria satisfied and recorded for every mapped article, stale-content evaluations in place. Phase 30E found no Tier 1 candidate, so this phase cannot begin before the governance work in 30F and the approvals in 30K.
 
 **Work.** A small hand-curated topic-to-article map for product and navigation guidance only. Never clinical, never safety-critical.
 
 **Exit.** Brand questions answered from approved content behind a feature flag, kill switch and rollback proven, no clinical use.
 
-### Phase 30E — retrieval readiness review — FUTURE, NOT STARTED
+### Phase 30F — grounding governance metadata and editorial status resolution — FUTURE, NOT STARTED
 
-**Entry.** 30D closed with production history.
+**Entry.** 30E closed. Recommended immediate next phase on the Phase 30E findings.
 
-**Work.** Assess retrieval over an approved, versioned subset on the evidence from 30D. Review only; it may conclude retrieval is unnecessary.
+**Work.** Resolve the 52 unknown editorial statuses and define the governance model: content-owner rules, content-version rules, grounding-reviewer responsibility, reviewed-date rules, source-list validation requirements, candidate authority, approval authority and required review evidence.
+
+**Exit.** Governance model recorded and editorial statuses resolved. **No article approvals in 30F.**
+
+### Phase 30G — Tier 2 low-risk general education review — FUTURE, NOT STARTED
+
+**Entry.** 30F closed. Review only; no approvals.
+
+### Phase 30H — wellbeing and sensitive support review — FUTURE, NOT STARTED
+
+**Entry.** 30G closed. The 12 support-journey records corrected out of Tier 1 in Phase 30E return here, under a sensitivity bar appropriate to emotional, loss, mental-health and fertility-pressure content. Review only; no approvals.
+
+### Phase 30I — health-reviewed article review — FUTURE, NOT STARTED
+
+**Entry.** 30H closed. Review only; no approvals.
+
+### Phase 30J — safety-sensitive and not-allowed classification — FUTURE, NOT STARTED
+
+**Entry.** 30I closed. Anything classified `not_allowed` stays permanently blocked. Review only; no approvals.
+
+### Phase 30K — human approval and initial approved corpus — FUTURE, NOT STARTED
+
+**Entry.** 30J closed and every governance condition from 30F satisfied per article.
+
+**Work.** The first phase in which selected articles may progress through the formal human candidate and approval process. Nothing is pre-approved before this phase.
+
+**Exit.** A recorded, minimal approved corpus with full evidence, or a recorded decision that none qualifies.
+
+### Phase 30L — retrieval readiness review — FUTURE, NOT STARTED
+
+Formerly numbered "Phase 30E — retrieval readiness review". Renumbered in Phase 30E to remove the collision; scope unchanged.
+
+**Entry.** 30K closed with an approved corpus.
+
+**Work.** Assess retrieval over an approved, versioned subset: approved corpus, content metadata, freshness and re-review controls, source and citation requirements, chunking policy, retrieval evaluation set, rollback controls and exclusion guarantees. Review only; it may conclude retrieval is unnecessary.
 
 **Exit.** A recorded decision either way. No retrieval, vector search or embedding work starts without it.
+
+### Phase 31A — controlled grounded knowledge implementation — FUTURE, NOT STARTED
+
+**Entry.** 30L passed. Only then may controlled article ingestion or retrieval work begin.
+
 
 
 ## Not on the roadmap

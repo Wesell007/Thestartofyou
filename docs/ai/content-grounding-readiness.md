@@ -378,3 +378,21 @@ Governance and QA only. No article approved, no AI behaviour changed, no version
 **Review template.** `article-grounding-review-template.md` is the per-article form. Completing it does not approve an article.
 
 **Status.** Start of You article grounding remains blocked. The next gated step is tier 1 per-article review.
+
+## Phase 30E — Tier 1 article grounding review batch
+
+Review and candidate selection only. No article approved, no article or article-derived content in the AI runtime, no RAG, retrieval, vector search, embeddings or ingestion, no AI behaviour change, no version constant bumped.
+
+**Screen.** All 206 registry records screened on metadata. Editorial status: 110 live, 44 draft, 52 unknown. Draft and unknown are held as separate categories; unknown is not treated as draft, archived or deprecated. The 52 unknown-status records remain blocked and are recorded as an unresolved editorial and governance issue for Phase 30F.
+
+**Phase 30D Tier 1 correction.** The 12 `support`-journey records that the Phase 30D review order placed in Tier 1 are emotional and psychological support content, not product or navigation guidance. All 12 are corrected out of Tier 1, recorded auditably by slug in `article-grounding-tier-1-review.md`, remain blocked, and return in Phase 30H. Phase 30D history is not rewritten.
+
+**Body review.** Six practical live articles were body-reviewed for exclusion classification only: `preparing-for-baby-complete-guide`, `what-to-buy-for-a-new-baby`, `the-space-your-baby-will-come-home-to`, `hospital-bag-and-what-to-pack`, `writing-a-birth-plan`, `birth-preferences`. Exclusion categories: sleep safety and SIDS, car-seat and equipment safety, labour-arrival and urgency wording, and birth clinical decision-making. No body copy, prose, section, takeaway, AI-ready summary, image or media was reproduced.
+
+**Result.** 0 accepted Tier 1 candidates. 0 registry changes. 0 candidate records. 0 approved articles. `listGroundingEligibleSlugs()` returns `[]` and `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`.
+
+**Scoped conclusion.** No purely product, journal or navigation article was identified among the 206 article-grounding registry records screened in Phase 30E. This applies only to the article-grounding registry reviewed in this phase, not to the wider Start of You website, product, journal or navigation experience.
+
+**Governance gaps.** Owner, content version, grounding reviewer and reviewed date are recorded as Missing for all 206 records, and sensitivity is unassessed for all 206. Nothing was inferred from git history, file timestamps, `lastUpdated`, authorship, medical-review metadata or contributor history. Source-list presence is governance metadata only and implies no grounding readiness.
+
+**Recommended next phase.** Phase 30F — grounding governance metadata and editorial status resolution. Not Tier 2. The Start of You article library is not grounding-ready, and article grounding remains blocked.

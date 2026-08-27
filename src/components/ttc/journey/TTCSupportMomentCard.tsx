@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import type { TTCLogType } from "@/lib/ttcLogs";
 import type { TTCSupportMoment } from "@/lib/ttcSupportMoment";
+import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
+import { companionAskLabel } from "@/lib/companion/companionName";
 import {
   TTC_CARD_BODY,
   TTC_CARD_PAD,

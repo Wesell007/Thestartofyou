@@ -131,3 +131,14 @@ This document remains the Phase 30D record. Phase 30G adds the following.
 - **Accepted future Tier 2 candidates (5).** `second-time-parenting`, `staying-connected-as-parents`, `calmer-evenings-after-busy-days`, `planning-family-days-out`, `simple-family-play-ideas`. All remain `blocked` in the registry; "accepted" is a review outcome only.
 - **Governance gaps.** Owner, content version, grounding reviewer, reviewed date, source list and sensitivity all Missing for the five. Nothing invented; no sensitivity written to the registry.
 - **Result.** 0 registry changes, 0 candidate records, 0 approved articles, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` unchanged at `30B-source-routing-v1`. AI runtime unchanged. Start of You article grounding remains blocked. Detail in `article-grounding-tier-2-review.md`. Next gated step: Phase 30H, not started here.
+
+## Phase 30H annotation — wellbeing and sensitive support review
+
+This document remains the Phase 30D record. Phase 30H adds the following.
+
+- **Pool.** 11 verified-live wellbeing and sensitive-support records, all body-reviewed: `emotional-wellbeing-pregnancy`, `emotional-impact-of-ivf`, `perinatal-anxiety`, `anxiety-in-pregnancy`, `pregnancy-after-loss`, `the-first-trimester-emotionally`, `when-the-joy-doesnt-arrive-yet`, `chemical-pregnancy`, `trying-again-after-miscarriage`, `preparing-emotionally-for-birth`, `two-week-wait`.
+- **Still excluded on editorial status.** `coping-with-the-two-week-wait`, `emotional-pressure-of-age-when-ttc`, `partner-support-when-ttc` remain `unknown`, were not body-reviewed, and stay reserved for Phase 30H when editorial-status eligibility permits.
+- **Outcome.** 0 accepted future wellbeing candidates. 4 routed to Phase 30I, 7 routed to Phase 30J, 0 recorded as later health/safety review required.
+- **Source-list gaps.** 3 of the 11 have no source list: `two-week-wait`, `chemical-pregnancy`, `trying-again-after-miscarriage`. Recorded as governance gaps; no sources added, rewritten or validated.
+- **Governance gaps.** Owner, content version, grounding reviewer, reviewed date, `approvedBy` and `approvedAt` remain Missing for all 11. Proposed sensitivity was recorded in documentation only, never in the registry.
+- **Result.** 0 registry changes, 0 candidate records, 0 approved articles, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` unchanged at `30B-source-routing-v1`. AI runtime unchanged. Article grounding remains blocked. Detail in `article-grounding-wellbeing-review.md`. Next gated step: Phase 30I, not started here.

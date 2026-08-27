@@ -131,3 +131,7 @@ For a change to external source routing:
 
 - [x] Governance contract for blocked → candidate → approved published, with candidate and approval authority defined (Phase 30F)
 - [x] Editorial statuses resolved where explicit repository evidence exists; 45 unresolved records remain blocked (Phase 30F)
+
+**Phase 30G note.** Tier 2 review and classification only. Funnel: 206 total; 44 draft and 45 unknown status-ineligible; 117 verified-live; minus 9 verified-live support records reserved for Phase 30H and 6 Phase 30E practical exclusions = 102 screened; 92 metadata-routed exclusions (30I 49, 30J 30, later health/safety review required 12, 30H 1) and a 10-record body-review shortlist producing 5 body-reviewed exclusions and 5 accepted future Tier 2 candidates. No registry record changed, no governance metadata invented, no sensitivity written to the registry. 0 candidates, 0 approved, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` unchanged. Article grounding remains blocked and the library is not grounding-ready.
+
+- [x] Tier 2 low-risk general education review completed with 5 accepted future candidates, 0 registry changes and 0 approvals (Phase 30G)

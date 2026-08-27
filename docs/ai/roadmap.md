@@ -206,6 +206,14 @@ Recommended by Phase 30A. None of these is authorised: each needs its own approv
 
 **Exit.** A recorded, minimal approved corpus with full evidence, or a recorded decision that none qualifies.
 
+### Phase 30G — Tier 2 low-risk general education review — COMPLETE
+
+Review and classification only. 102 verified-live records screened after removing the 9 verified-live support records and the 6 Phase 30E practical exclusions from the 117 live pool. 92 metadata-routed exclusions, 10 body-reviewed, 5 accepted future Tier 2 candidates (family-journey relational and routine education), 5 body-reviewed exclusions. 0 registry changes, 0 candidates, 0 approvals, AI runtime unchanged, article grounding still blocked. Record: `article-grounding-tier-2-review.md`.
+
+### Phase 30H — wellbeing and sensitive support review — NEXT, NOT STARTED
+
+Scope: the 9 verified-live support records, plus `preparing-emotionally-for-birth` and `two-week-wait`. The 3 unknown support records stay status-blocked until editorial status is resolved.
+
 ### Phase 30L — retrieval readiness review — FUTURE, NOT STARTED
 
 Formerly numbered "Phase 30E — retrieval readiness review". Renumbered in Phase 30E to remove the collision; scope unchanged.

@@ -412,3 +412,8 @@ Governance and editorial-status resolution only. No article approved, no article
 **Nothing invented.** No owner, content version, reviewer, reviewed date, sensitivity, `approvedBy` or `approvedAt` was populated. The 31 records with no source list remain a visible governance gap; no sources were added or rewritten. No article was classified for sensitivity.
 
 **Result.** 0 candidate records, 0 approved records, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`. The Start of You article library is not grounding-ready and article grounding remains blocked.
+
+
+## Phase 30G — Tier 2 low-risk general education review
+
+Review and classification only. Verified-live pool 117 minus 9 verified-live support records (reserved for Phase 30H when editorial-status eligibility permits) and 6 Phase 30E practical exclusions = 102 metadata-screened records. 92 metadata-routed exclusions (provisional) and 10 body-reviewed, giving 5 body-reviewed exclusions and 5 accepted future Tier 2 candidates, all family-journey relational and routine education. No article content, summary or extract reaches the AI runtime; source routing, prompts, modes and safety are unchanged. 0 candidates, 0 approvals, article grounding still blocked. Detail: `article-grounding-tier-2-review.md`.

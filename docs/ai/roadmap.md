@@ -218,11 +218,9 @@ Review and classification only. 11 verified-live records body-reviewed (the 9 re
 
 Review and classification only. 57 unique verified-live records body-reviewed (53 routed by Phase 30G, 4 by Phase 30H, no overlap). 21 accepted future health-reviewed candidates (documentation-only; registry candidate records remain 0), 33 routed to Phase 30J, 2 returned to the wellbeing stream for lower-sensitivity reconciliation, 1 recorded as later safety adjudication required. `pregnancy-after-loss` escalated from the Phase 30H 30I routing to 30J. 11 source-list gaps. 0 registry changes, 0 candidates, 0 approvals, AI runtime unchanged, article grounding still blocked. Record: `article-grounding-health-review.md`.
 
-### Phase 30J — safety-sensitive and not-allowed classification — NEXT, NOT STARTED
+### Phase 30J — safety-sensitive and not-allowed classification — COMPLETE
 
-Intake: the 33 records routed by Phase 30I, the 7 routed by Phase 30H, the 30 metadata-routed records from Phase 30G, plus the ambiguous records recorded in Phase 30I (`trying-again-after-miscarriage`, `preparing-emotionally-for-birth`, `two-week-wait`) for a definitive sensitivity decision. Review only; no approvals.
-
-
+Review and classification only. 89 unique verified-live records adjudicated from six provenance groups (30 Phase 30G direct, 12 Phase 30G later health/safety, 7 Phase 30H direct, 33 Phase 30I direct, 1 Phase 30I later safety, 6 Phase 30E practical exclusions; no overlap). Outcomes: 35 proposed `not_allowed`, 41 proposed `safety_sensitive`, 9 `health_reviewed` reconciliation required, 4 `low` reconciliation required. Live-corpus reconciliation confirmed: 5 Tier 2 candidates + 21 health-reviewed candidates + 2 wellbeing reconciliations + 89 adjudication records = 117 verified-live records. 11 source-list gaps and 11 missing `lastUpdated` values recorded. All proposals are documentation-only: 0 registry changes, 0 candidates, 0 approvals, AI runtime unchanged, article grounding still blocked. Record: `article-grounding-safety-review.md`.
 
 ### Phase 30L — retrieval readiness review — FUTURE, NOT STARTED
 

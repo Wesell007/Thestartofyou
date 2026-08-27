@@ -427,3 +427,15 @@ Review and classification only. 11 verified-live wellbeing and sensitive-support
 **Gaps.** Source list absent for `two-week-wait`, `chemical-pregnancy`, `trying-again-after-miscarriage`. Owner, content version, grounding reviewer, reviewed date, `approvedBy` and `approvedAt` Missing for all 11. Nothing invented; `medicallyReviewed`, medical reviewer, authorship, `lastUpdated` and git history were not treated as governance evidence. Proposed sensitivity is documentation-only.
 
 **Result.** 0 registry changes, 0 candidates, 0 approvals, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`, AI runtime unchanged. The Start of You article library is not grounding-ready and article grounding remains blocked. Record: `article-grounding-wellbeing-review.md`.
+
+## Phase 30I — health-reviewed article review
+
+Review and classification only. 57 unique verified-live records body-reviewed: 53 routed by Phase 30G and 4 by Phase 30H, deduplicated with no overlap. The 44 draft and 45 unknown-status records stayed outside the pool.
+
+**Outcome.** 21 accepted future health-reviewed candidates, all routine test, scan, appointment, cycle-physiology or service-pathway education with non-urgent signposting only. 33 routed to Phase 30J on obstetric red-flag triage (reduced movement, bleeding, pre-eclampsia, preterm labour, ectopic pregnancy, dehydration) or instruction-bearing content (supplement dosing, medication safety, sleep position and stillbirth risk, stop-activity rules). 2 returned to the wellbeing stream for lower-sensitivity reconciliation. 1 recorded as later safety adjudication required. `pregnancy-after-loss` was escalated from the Phase 30H 30I routing to 30J with its provenance recorded.
+
+**Candidate accounting.** "Accepted future candidate" is a documentation outcome only. Registry candidate records remain **0**; all 21 stay `blocked_missing_metadata` and invisible to the AI.
+
+**Gaps.** 11 of 57 have no source list. Owner, content version, grounding reviewer, reviewed date, `approvedBy` and `approvedAt` Missing for all 57. Existing editorial medical-review metadata (reviewer on all 57, last-updated on 48, no `medicallyReviewed` field anywhere) was captured as context and not treated as grounding-review evidence.
+
+**Result.** 0 registry changes, 0 candidates, 0 approvals, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`, AI runtime unchanged. The Start of You article library is not grounding-ready and article grounding remains blocked. Record: `article-grounding-health-review.md`.

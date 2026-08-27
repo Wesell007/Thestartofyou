@@ -202,7 +202,20 @@ All five are family-journey, relational or organisational education with no clin
 | `two-week-wait` | Symptom interpretation combined with emotionally sensitive fertility support | Phase 30H |
 | `how-your-baby-develops-in-pregnancy` | Fetal development education with reassurance around worry about development | Phase 30I |
 
-Full routing totals across the 102: Phase 30I = 51, Phase 30J = 30, later health/safety review required = 12, Phase 30H = 2, accepted = 5. 51 + 30 + 12 + 2 + 5 = 100 exclusions + ... reconciliation: 92 metadata-routed + 10 shortlisted = 102; of the 10, 5 accepted and 5 body-reviewed exclusions, giving 97 total exclusions and 5 accepted.
+Combined routing totals across all 102 screened records: Phase 30I = 51 (49 metadata-only + 2 body-reviewed... corrected: 49 metadata-only + 3 body-reviewed = 52), see the exact reconciliation below.
+
+```text
+Metadata-routed exclusions          = 92  (30I 49, 30J 30, later review 12, 30H 1)
+Body-reviewed Tier 2 exclusions     =  5  (30I 4, 30H 1)
+Accepted future Tier 2 candidates   =  5
+Total                               = 102
+
+Combined later-phase routing of the 97 exclusions:
+  Phase 30I                         = 53
+  Phase 30J                         = 30
+  later health/safety review required = 12
+  Phase 30H                         =  2
+```
 
 ## 9. Per-candidate governance gaps
 

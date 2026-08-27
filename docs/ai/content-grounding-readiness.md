@@ -417,3 +417,13 @@ Governance and editorial-status resolution only. No article approved, no article
 ## Phase 30G — Tier 2 low-risk general education review
 
 Review and classification only. Verified-live pool 117 minus 9 verified-live support records (reserved for Phase 30H when editorial-status eligibility permits) and 6 Phase 30E practical exclusions = 102 metadata-screened records. 92 metadata-routed exclusions (provisional) and 10 body-reviewed, giving 5 body-reviewed exclusions and 5 accepted future Tier 2 candidates, all family-journey relational and routine education. No article content, summary or extract reaches the AI runtime; source routing, prompts, modes and safety are unchanged. 0 candidates, 0 approvals, article grounding still blocked. Detail: `article-grounding-tier-2-review.md`.
+
+## Phase 30H — wellbeing and sensitive support review
+
+Review and classification only. 11 verified-live wellbeing and sensitive-support records body-reviewed; the 3 unknown support records (`coping-with-the-two-week-wait`, `emotional-pressure-of-age-when-ttc`, `partner-support-when-ttc`) stayed status-blocked and outside the pool.
+
+**Outcome.** 0 accepted future wellbeing candidates. 4 routed to Phase 30I (`pregnancy-after-loss`, `trying-again-after-miscarriage`, `preparing-emotionally-for-birth`, `two-week-wait`). 7 routed to Phase 30J (`emotional-wellbeing-pregnancy`, `emotional-impact-of-ivf`, `perinatal-anxiety`, `anxiety-in-pregnancy`, `the-first-trimester-emotionally`, `when-the-joy-doesnt-arrive-yet`, `chemical-pregnancy`). 0 ambiguous. A supportive tone did not qualify any record: each carried recognised conditions, treatment or referral material, or explicit crisis and urgent-care escalation.
+
+**Gaps.** Source list absent for `two-week-wait`, `chemical-pregnancy`, `trying-again-after-miscarriage`. Owner, content version, grounding reviewer, reviewed date, `approvedBy` and `approvedAt` Missing for all 11. Nothing invented; `medicallyReviewed`, medical reviewer, authorship, `lastUpdated` and git history were not treated as governance evidence. Proposed sensitivity is documentation-only.
+
+**Result.** 0 registry changes, 0 candidates, 0 approvals, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`, AI runtime unchanged. The Start of You article library is not grounding-ready and article grounding remains blocked. Record: `article-grounding-wellbeing-review.md`.

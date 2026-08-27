@@ -142,3 +142,16 @@ This document remains the Phase 30D record. Phase 30H adds the following.
 - **Source-list gaps.** 3 of the 11 have no source list: `two-week-wait`, `chemical-pregnancy`, `trying-again-after-miscarriage`. Recorded as governance gaps; no sources added, rewritten or validated.
 - **Governance gaps.** Owner, content version, grounding reviewer, reviewed date, `approvedBy` and `approvedAt` remain Missing for all 11. Proposed sensitivity was recorded in documentation only, never in the registry.
 - **Result.** 0 registry changes, 0 candidate records, 0 approved articles, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` unchanged at `30B-source-routing-v1`. AI runtime unchanged. Article grounding remains blocked. Detail in `article-grounding-wellbeing-review.md`. Next gated step: Phase 30I, not started here.
+
+## Phase 30I annotation — health-reviewed article review
+
+This document remains the Phase 30D record. Phase 30I adds the following.
+
+- **Pool.** 57 unique verified-live records: 53 routed by Phase 30G (49 metadata-routed plus 4 body-reviewed exclusions) and 4 routed by Phase 30H, with no overlap. All 57 re-verified as `live`, `archived: false`, `deprecated: false`, `approvalStatus: "blocked_missing_metadata"`, and all 57 body-reviewed.
+- **Counting note.** The Phase 30G "Phase 30I = 49" routing count covers the metadata-routed subset only; the same document's totals block records 53. Scope difference, not a routing conflict.
+- **Outcome.** 21 accepted future health-reviewed candidates (documentation-only), 33 routed to Phase 30J, 2 returned to the wellbeing stream for lower-sensitivity reconciliation (`preparing-emotionally-for-birth`, `two-week-wait`), 1 recorded as later safety adjudication required (`trying-again-after-miscarriage`).
+- **Escalated 30H routing.** `pregnancy-after-loss` was routed to 30I by Phase 30H but escalated to 30J here on body review (explicit thoughts-of-self-harm escalation route). Provenance recorded rather than the earlier decision rewritten.
+- **Source-list gaps.** 11 of the 57 have `hasSourceList: false`. No source was added, rewritten or validated.
+- **Medical-review metadata.** All 57 name a reviewer, 48 carry a last-updated date, none carries a `medicallyReviewed` field. Captured as context only; it is not grounding-review evidence.
+- **Governance gaps.** Owner, content version, grounding reviewer, reviewed date, `approvedBy` and `approvedAt` remain Missing for all 57, including the 21 accepted candidates. Proposed sensitivity is documentation-only.
+- **Result.** 0 registry changes, **0 registry candidate records**, 0 approved articles, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` unchanged at `30B-source-routing-v1`. AI runtime unchanged. Article grounding remains blocked. Detail in `article-grounding-health-review.md`. Next gated step: Phase 30J, not started here.

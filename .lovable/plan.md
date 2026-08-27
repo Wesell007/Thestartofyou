@@ -1,156 +1,148 @@
-# Phase 30J — closure-verification report
+# Phase 30K — Human Approval and Initial Approved Corpus (plan only)
 
-Verification only. No registry, runtime, routing, prompt, mode, schema, route, SEO or UI file was touched. Phase 30K not begun.
+Governance-execution phase. No runtime connection, no retrieval, no article content reaching the AI. Phase 30L is not started. Nothing below is implemented yet.
 
-## 1. Phase implemented
-Phase 30J — safety-sensitive / not-allowed classification of the 89 verified-live records routed from Phases 30E, 30G, 30H and 30I. Documentation-only proposed sensitivity; no approvals, no candidates, no registry writes.
+## 1. Exact five-record initial batch
 
-## 2. Files created
-- `docs/ai/article-grounding-safety-review.md`
+`second-time-parenting`, `staying-connected-as-parents`, `calmer-evenings-after-busy-days`, `planning-family-days-out`, `simple-family-play-ideas`. No expansion, no substitution. Every other live, draft, unknown, reconciliation, accepted-future health-reviewed, accepted-future safety-sensitive, supported not_allowed and safety-review-hold record stays outside this phase.
 
-## 3. Files modified
-- `docs/ai/article-grounding-review-queue.md`
-- `docs/ai/content-grounding-readiness.md`
-- `docs/ai/release-gate.md`
-- `docs/ai/roadmap.md`
-- `docs/ai/README.md`
+## 2. Current pre-verification findings (read now, re-verified in Gate A at execution)
 
-No source file modified. `src/lib/grounding/articleGroundingRegistry.ts` unchanged.
+All five, verified against `src/lib/grounding/articleGroundingRegistry.ts` and `src/data/familyArticleData.ts`:
 
-## 4. Provenance-group counts A-F
-A 30, B 12, C 7, D 33, E 1, F 6 — re-derived programmatically from the review document and confirmed against the registry.
+| Slug | editorialStatus | archived | deprecated | approvalStatus | sensitivity | hasSourceList | owner / contentVersion / reviewer / reviewedDate | dataset status | lastUpdated | reviewedBy |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `second-time-parenting` | live | false | false | blocked_missing_metadata | absent | false | all absent | ready | July 2026 | undefined |
+| `staying-connected-as-parents` | live | false | false | blocked_missing_metadata | absent | false | all absent | ready | July 2026 | undefined |
+| `calmer-evenings-after-busy-days` | live | false | false | blocked_missing_metadata | absent | false | all absent | ready | July 2026 | undefined |
+| `planning-family-days-out` | live | false | false | blocked_missing_metadata | absent | false | all absent | ready | July 2026 | undefined |
+| `simple-family-play-ideas` | live | false | false | blocked_missing_metadata | absent | false | all absent | ready | July 2026 | undefined |
 
-## 5. Pre-dedup provenance total
-30 + 12 + 7 + 33 + 1 + 6 = 89.
+Journeys: all `family`. Topics: `growing-families`, `relationships`, `family-basics`, `travel-days-out`, `play-connection`. Each article has 7 sections and 5 key takeaways. The family dataset record shape carries no `sources`, `references` or `medicallyReviewed` field at all, so no source metadata exists to validate and none can be attached without a data-model change.
 
-## 6. Provenance overlap
-0 overlapping slugs. Unique slug count of the union = 89, equal to the pre-dedup total.
+## 3. Source-list findings
 
-## 7. Final deduplicated verified pool
-89 records. All verified `editorialStatus: "live"`, `archived: false`, `deprecated: false`, `approvalStatus: "blocked_missing_metadata"`, neither candidate nor approved (machine-checked: `pool all blocked_missing_metadata: true`, `pool not live: []`).
+`hasSourceList` is `false` for all five, and this is re-checked in Gate C rather than inherited from Phase 30G. Under the Phase 30F contract a source list is **optional** at `low` sensitivity, but every factual claim must be attributable. Consequences:
 
-## 8. Verified Phase 30J slug list
-The 89 slugs are enumerated in section 8 of `docs/ai/article-grounding-safety-review.md`, split across the four outcome tables (35 + 41 + 9 + 4). Extraction of that document yields exactly 89 rows and 89 unique slugs, all present in the registry as live.
+- Source presence is not the gate; **claim attributability** is. Gate C requires a human to read each article and record either "no factual claim requiring attribution" or "claims present, sources required".
+- If any article is found to carry an attributable factual claim, it needs a source-remediation action before candidate status, handled as a separate approval item inside Phase 30K. Lovable researches or supplies no sources and adds none from memory.
+- A record whose required source list is missing stays blocked. Zero of five reaching approval is an acceptable outcome.
 
-## 9. Articles body-reviewed
-89 of 89. No record was classified on title, topic or provenance alone.
+## 4. Governance gaps (all five, all blocking today)
 
-## 10. Accepted future safety-sensitive candidates
-41. Listed in full in the `safety_sensitive (41)` table (e.g. `anti-d-injection-in-pregnancy`, `braxton-hicks-contractions`, `signs-of-labour`, `stages-of-labour`, `third-trimester-complete-guide`). Accepted-future only, still blocked, no registry field set.
+Missing: content owner, `contentVersion` and digest, grounding reviewer, `reviewedDate`, confirmed sensitivity, source-validation result, candidate decision, approval decision, `approvedBy`, `approvedAt`, rollback/replacement reference, eval examples (recommended at `low`, not required). That is 12 of the 16 evidence-package items unsatisfied; only slug, editorial status evidence, archived/deprecated verification and topic metadata exist mechanically.
 
-## 11. not_allowed
-35. Full list and per-record audit in section 3 below.
+## 5. Content-version and digest design
 
-## 12. health_reviewed reconciliation
-9: `anterior-placenta`, `baby-hiccups-in-the-womb`, `baby-milestones-first-year`, `cord-around-the-neck-in-pregnancy`, `faint-positive-pregnancy-test`, `how-long-implantation-takes`, `nausea-in-early-pregnancy`, `symptoms-stopping-early-pregnancy`, `when-to-take-a-pregnancy-test`.
+Uses the existing model, no new registry field unless the review below forces one.
 
-## 13. wellbeing reconciliation
-0 new. The two Phase 30I records (`preparing-emotionally-for-birth`, `two-week-wait`) sit outside the pool and remain blocked, unchanged.
+- `contentVersion` = `<slug>@1` for a first grounding review, minted **by the content owner**, never by Lovable.
+- Digest = SHA-256, hex, first 16 characters, over a canonical JSON serialisation of the reviewed article state.
+- Digest input fields (family dataset): `slug`, `title`, `description`, `intro`, ordered `sections` (heading and body), ordered `keyTakeaways`, `lastUpdated`, `status`, `reviewedBy` when present. Excluded: SEO fields, `readTime`, `relatedSlugs`, imagery and any presentational metadata.
+- Computation: a repo script, `scripts/grounding-content-digest.ts`, run on demand. It prints slug and digest only, never article text, and is not imported by any runtime module.
+- Storage: the digest lives in the per-article evidence document under `docs/ai/grounding-approvals/`, plus a machine-readable manifest `docs/ai/grounding-approvals/content-digests.json`. The registry keeps only `contentVersion`.
+- Invalidation: any change to claims, guidance, numbers, thresholds, safety wording, scope, sources, or added/removed sections mints a new version and lapses approval. Presentational-only edits do not, and the owner records them as such.
+- Drift enforcement: a new test recomputes the digest for every article that carries a `contentVersion` and fails if it differs from the manifest. That test failing is the mechanism that forces re-review.
 
-## 14. low reconciliation
-4: `birth-preferences`, `family-sick-days-at-home`, `hospital-bag-and-what-to-pack`, `writing-a-birth-plan`.
+**Schema question for approval:** no new registry field is proposed. If review at execution time shows the digest must live in the registry rather than the manifest, that is a `ArticleGroundingRecord` type change and Phase 30K stops for explicit approval before touching the type.
 
-## 15. Proposed-sensitivity breakdown
-not_allowed 35, safety_sensitive 41, health_reviewed reconciliation 9, low reconciliation 4, wellbeing reconciliation 0. Total 89, each slug exactly once.
+## 6. Human roles required
 
-## 16. Source-list and medical-review metadata
-11 pool records carry no source list: `baby-milestones-first-year`, `chemical-pregnancy`, `faint-positive-pregnancy-test`, `how-long-implantation-takes`, `nausea-in-early-pregnancy`, `symptoms-stopping-early-pregnancy`, `trying-again-after-miscarriage`, `when-to-take-a-pregnancy-test`, `your-body-after-birth`, `what-to-buy-for-a-new-baby`, `writing-a-birth-plan`. 11 records carry no `lastUpdated`, blocking staleness evaluation. Existing editorial `medicallyReviewed` / reviewer / `lastUpdated` values are recorded as observed only and were never converted into grounding governance metadata.
+- **Content owner** — a named editorial accountable person for the family journey, who explicitly accepts the assignment, mints `contentVersion`, and confirms currency.
+- **Grounding reviewer** — a named person competent in both the subject and generative failure modes, not the sole author. Confirms `low` sensitivity, signs source validation, and co-decides candidate and approval.
+- No clinical reviewer or product-safety owner is required at `low`, and none may be invented to appear thorough.
 
-## 17. Governance gaps and cumulative future candidates
-Every pool record lacks grounding owner, contentVersion, grounding reviewer, reviewedDate, approvedBy and approvedAt. None was invented. Cumulative accepted-future corpus after 30J: 5 Tier 2 + 0 wellbeing + 21 health-reviewed + 41 safety-sensitive = 67, all still blocked.
+Lovable computes and assembles only: registry state, dataset state, digests, checklists, gap lists and manifests. Lovable decides none of: owner, reviewer, sensitivity confirmation, source validation, candidate decision, approval decision, `approvedBy`, `approvedAt`, `reviewedDate`.
 
-## 18. Registry and eligibility
-Registry changes: 0. Candidates: 0. Approvals: 0. Records with any `sensitivity` field set: 0. `listGroundingEligibleSlugs()` returns `[]`.
+## 7. Sensitivity-confirmation authority (Gate D)
 
-## 19. Validation results
-| Command | Result |
-| --- | --- |
-| `npm test` | PASS — 65 files, 650 tests passed, 0 failed |
-| `npm run lint` | 11 problems: 1 error, 10 warnings. The single error is the pre-existing `src/integrations/supabase/previewAuthStorage.ts:38 prefer-const`, untouched and outside Phase 30J scope. The 10 warnings are pre-existing `react-refresh/only-export-components` notices. |
-| `npm run typecheck` | PASS — `tsc -b` clean, no diagnostics |
-| `npm run build` | PASS — built in 9.51s; only the pre-existing chunk-size advisory |
+`low` is confirmed by the **grounding reviewer**. The Phase 30G outcome is a proposal, never registry authority. Evidence presented: slug, title, journey, topic, the Phase 30G rationale, the digest and content version, the claim-attributability finding from Gate C, and the confirmation that no clinical, urgency or red-flag passage exists. The decision, date and decider are recorded in the article's evidence document; only then may `sensitivity: "low"` be written. If the reviewer disagrees and proposes a stricter level, the article leaves the initial batch immediately, no registry sensitivity is written in this phase, and it is routed to the appropriate stricter path. Ambiguity resolves stricter, never to `low`.
 
-## 20. Close verdict
-Phase 30J is substantively complete and internally consistent, with one qualification: 7 of the 35 `not_allowed` records rest on category-level reasoning that does not, on its own, affirmatively evidence that strict safety-sensitive governance would still be insufficient. Those 7 are flagged below as **classification requires human safety review** and are not reclassified here. Article grounding remains blocked.
+## 8. Source-validation process (Gate C)
 
----
+Per article: the grounding reviewer records (a) whether any factual claim requiring attribution exists, (b) whether existing sources — currently none — are sufficient, (c) which claims are unsupported, (d) whether any source is stale, broken, non-UK-authoritative or inappropriate, and (e) the validation decision with date and signatory. Presence never equals validation. Where remediation is needed, that becomes a named human action item and the record stays blocked until it completes and is re-validated.
 
-# 3. Audit of the 35 not_allowed records
+## 9. Candidate transition process (Gate F)
 
-Every row below: decision was made on body review; uncertainty alone was not used as grounds; the classification is documentation-only; no registry `sensitivity` field changed (0 records carry one); no approval field changed (0 candidates, 0 approvals). Those five confirmations are constant across all 35 and are stated once rather than repeated per row.
+Per article, independently, never as a batch operation. Candidate requires all of: editorial status `live` re-verified at execution; confirmed `low` sensitivity recorded; accepted content owner; minted `contentVersion` plus matching digest; a completed review record from `article-grounding-review-template.md`; source validation passed or formally recorded as not required; and grounding reviewer plus content owner agreement.
 
-| Slug | Criterion | Why safety_sensitive judged insufficient | Verdict |
-| --- | --- | --- | --- |
-| `antacids-in-pregnancy` | Medication / dosing | Body carries product-class and self-treatment thresholds; any paraphrase yields actionable medicines advice regardless of governance | Supported |
-| `antibiotics-in-pregnancy` | Medication / dosing | As above | Supported |
-| `cold-and-flu-in-pregnancy` | Medication / dosing | As above | Supported |
-| `hay-fever-in-pregnancy` | Medication / dosing | As above | Supported |
-| `laxatives-in-pregnancy` | Medication / dosing | As above | Supported |
-| `medicines-in-pregnancy` | Medication / dosing | As above | Supported |
-| `paracetamol-in-pregnancy` | Medication / dosing | Explicit dose and frequency material; restatement is prescribing-adjacent | Supported |
-| `thrush-in-pregnancy` | Medication / dosing | Treatment-selection thresholds | Supported |
-| `baby-movement-in-pregnancy` | Time-critical triage | Threshold and same-day contact rules; reordering or softening delays maternity triage | Supported |
-| `reduced-movements-in-pregnancy` | Time-critical triage | As above | Supported |
-| `bleeding-in-early-pregnancy` | Time-critical triage | As above | Supported |
-| `spotting-in-pregnancy` | Time-critical triage | As above | Supported |
-| `leaking-fluid-in-pregnancy` | Time-critical triage | As above | Supported |
-| `watery-discharge-in-pregnancy` | Time-critical triage | As above | Supported |
-| `swelling-in-pregnancy` | Time-critical triage | Pre-eclampsia escalation thresholds | Supported |
-| `shortness-of-breath-in-pregnancy` | Time-critical triage | Same-day / emergency thresholds | Supported |
-| `when-to-worry-about-cramps-in-pregnancy` | Time-critical triage | As above | Supported |
-| `when-to-go-in-for-labour` | Time-critical triage | Arrival-timing rules; partial answers change attendance decisions | Supported |
-| `low-lying-placenta-in-pregnancy` | Time-critical triage | Bleeding escalation rules | Supported |
-| `anxiety-in-pregnancy` | Crisis pathway | Named crisis services and harm-to-self wording; omission or reshaping of a crisis instruction is unrecoverable | Supported |
-| `perinatal-anxiety` | Crisis pathway | As above | Supported |
-| `emotional-wellbeing-pregnancy` | Crisis pathway | As above | Supported |
-| `when-the-joy-doesnt-arrive-yet` | Crisis pathway | As above | Supported |
-| `chemical-pregnancy` | Pregnancy loss | Loss sequencing and tone inseparable from safety; no source list to anchor retrieval | Supported |
-| `pregnancy-after-loss` | Pregnancy loss | Loss-and-anxiety sequencing plus escalation | Supported |
-| `trying-again-after-miscarriage` | Pregnancy loss | Post-loss decision content, no source list | Supported |
-| `what-if-a-scan-shows-something-unexpected` | Adverse findings | Adverse-result disclosure sequencing | Supported |
-| `baby-sleep-first-year` | Safe sleep / SIDS | Risk-reduction rules only safe as a complete set; partial restatement is directly hazardous | Supported |
-| `emotional-impact-of-ivf` | Crisis pathway | Documentation asserts crisis wording but does not distinguish it from other crisis-signposted wellbeing articles that were kept safety_sensitive elsewhere | **Classification requires human safety review** |
-| `the-first-trimester-emotionally` | Crisis pathway | Predominantly experiential article; crisis signposting alone is an insufficient ground under the stated threshold | **Classification requires human safety review** |
-| `postpartum-recovery-timeline` | Crisis pathway | Broad recovery explainer; documentation does not evidence why governed use would remain inappropriate | **Classification requires human safety review** |
-| `your-body-after-birth` | Crisis pathway | As above, and no source list recorded (a governance gap, not a not_allowed ground) | **Classification requires human safety review** |
-| `preparing-for-baby-complete-guide` | Safe sleep / SIDS | Safe-sleep material is one embedded part of a broad practical guide; scoped governance is not shown to be insufficient | **Classification requires human safety review** |
-| `what-to-buy-for-a-new-baby` | Safe sleep / SIDS | Equipment guide with embedded safety points; same concern | **Classification requires human safety review** |
-| `the-space-your-baby-will-come-home-to` | Safe sleep / SIDS | Nursery-preparation article with embedded safe-sleep points; same concern | **Classification requires human safety review** |
+Registry fields written at candidate transition, and only these: `sensitivity: "low"`, `contentVersion`, `owner`, `reviewer`, `reviewedDate`, `approvalStatus: "candidate"`, and `approvalNotes` pointing at the evidence document. `hasSourceList` changes only if a source list genuinely exists. `approvedBy` and `approvedAt` stay absent. Candidate confers no eligibility — the eligibility helper already rejects any status other than `approved`, and a test must prove every candidate returns `eligible: false` with `approval_status_not_approved`.
 
-28 of 35 supported as documented; 7 flagged for human safety review, left classified as `not_allowed` in the document and not silently changed.
+## 10. Approval transition process (Gate G)
 
-# 4. not_allowed threshold preservation
-No record was made `not_allowed` merely for being a serious medical topic, carrying emergency or red-flag wording, safely discussing suicide or self-harm, containing pregnancy-loss information, mentioning medication, carrying public-health guidance, covering safe sleep, needing stronger governance, or being clinically complex. 41 records with exactly those features were kept `safety_sensitive`, and 13 were allowed to de-escalate to reconciliation. Where affirmative evidence of "insufficient even under strict governance" is not demonstrated in the documentation, the record is flagged above rather than reclassified.
+A separate decision, taken after candidate status exists, never in the same operation. Authority at `low`: grounding reviewer plus content owner. Only once a real human decision is supplied does the implementation write `approvalStatus: "approved"`, `approvedBy` (the human's identity as given), `approvedAt` (the ISO timestamp of the actual decision, never generated in advance), and a rollback or replacement reference. Passing candidate requirements is not grounds for approval. Any article without a supplied human decision remains `candidate` or `blocked`.
 
-# 5. 117-live corpus reconciliation
-Machine-checked by exact unique slug: registry live = 117; pool = 89 unique; live records outside the pool = 28, exactly the 5 Tier 2 accepted-future, 21 health-reviewed accepted-future and 2 wellbeing reconciliation slugs. 5 + 21 + 2 + 89 = 117. No duplicate, no orphan.
+## 11. Exact proposed registry changes
 
-Within the 89: 35 + 41 + 9 + 4 + 0 = 89.
+Confined to at most five records in `src/lib/grounding/articleGroundingRegistry.ts`. No other record, field, type or module changes.
 
-Post-30J disposition — accepted-future: Tier 2 5, wellbeing 0, health-reviewed 21, safety-sensitive 41, total 67. Reconciliation required: wellbeing 2, health-reviewed 9, low 4, total 15. not_allowed 35. 67 + 15 + 35 = 117.
+- Gate F (per article, on evidence): `sensitivity`, `contentVersion`, `owner`, `reviewer`, `reviewedDate`, `approvalStatus` → `candidate`, `approvalNotes`.
+- Gate G (per article, on human decision): `approvalStatus` → `approved`, `approvedBy`, `approvedAt`, `rollbackRef`.
+- Registry totals stay 206 / 117 live / 44 draft / 45 unknown throughout.
+- If human evidence is absent, the correct implementation outcome is **zero registry edits**.
 
-# 6. Registry and runtime verification
-Machine output: total 206; live 117; draft 44; unknown 45; candidates 0; approved 0; records with a `sensitivity` value 0; `listGroundingEligibleSlugs()` = `[]`; `AI_SOURCE_ROUTING_VERSION` = `30B-source-routing-v1`. No article body reached the AI runtime and no article-derived runtime content exists — the drift guard asserts the grounding modules import no dataset and no AI runtime module, and the record type has no body field. No RAG, retrieval, embeddings, ingestion or chunking. No prompt, mode, safety-rule, endpoint, source-routing, Ask, companion, schema, route or SEO change. Article grounding remains blocked.
+## 12. Tests to add or update
 
-# 7. The 13-section document
-All twelve required sections are present and intact: 1 Purpose, 2 Terminology carried forward, 3 Pool reconstruction, 4 Live-corpus reconciliation audit, 5 Adjudication rules, 6 Outcome summary, 7 Outcome by provenance group, 8 Per-record adjudication, 9 Source-list gaps, 10 Reconciliation records carried forward, 11 Funnel audit, 12 Verification. The additional section is **13. Status** — a closing statement recording that Phase 30J is complete, grounding remains blocked and Phase 30K is not authorised. It is a supporting status note: no new scope, no runtime material, no article content.
+New `src/test/articleGroundingApproval.test.ts`, plus additions to the existing grounding tests:
 
-# 8. Eighteen-question close verdict
-1. Yes — pool built only from closed 30E/30G/30H/30I evidence.
-2. Yes — group A-F provenance recorded per record.
-3. Yes — deduplicated by slug (89 rows, 89 unique) before review.
-4. Yes — all 89 verified live, non-archived, non-deprecated.
-5. Yes — all 89 body-reviewed; provenance was never a substitute.
-6. Yes — 41 safety_sensitive kept distinct from 35 not_allowed.
-7. Yes — 13 records de-escalated to reconciliation rather than forced upward.
-8. Yes — editorial medical-review metadata recorded as observation only.
-9. No governance metadata was invented.
-10. Yes — proposed sensitivity stayed in documentation; 0 registry records carry a `sensitivity` value.
-11. No article became a registry candidate.
-12. No article became approved.
-13. No article body or article-derived content reached the AI runtime.
-14. Source routing did not change.
-15. `AI_SOURCE_ROUTING_VERSION` did not change.
-16. AI behaviour did not change.
-17. Yes — Start of You article grounding is still blocked.
-18. Yes, with one condition: Phase 30K is safe to plan provided the 7 flagged `not_allowed` records are resolved by human safety review before any 30K decision depends on them.
+- only the five authorised slugs differ from the Phase 30J baseline; all 201 others are byte-identical in governance fields;
+- candidate requires complete candidate evidence (sensitivity, owner, contentVersion, reviewer, reviewedDate present);
+- approved requires complete approval evidence; an approved record missing `approvedBy` or `approvedAt` fails;
+- `sensitivity` present and confirmed wherever a record is beyond blocked; `contentVersion` present and matching `<slug>@<n>`;
+- digest traceability: every record with a `contentVersion` matches the manifest digest recomputed from the dataset;
+- never eligible: draft, unknown, archived, deprecated, `not_allowed`, the 7 safety-review-hold slugs, the 15 reconciliation slugs, and any unapproved record;
+- `listGroundingEligibleSlugs()` contains only genuinely approved records with a complete package, and is a subset of the five;
+- default-deny holds for unknown slugs and for records with defaulted or missing metadata;
+- existing boundary tests still pass: runtime grounding modules import no article dataset and no AI runtime module;
+- `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`; source-routing and answer-hygiene suites unchanged.
+
+## 13. Documentation to create or update
+
+Create under `docs/ai/grounding-approvals/`: `README.md` (batch scope and rules), five per-article evidence documents named by slug, `source-validation.md`, `human-decisions.md` (owner, reviewer, sensitivity, candidate, approval decisions with dates), `content-digests.json`, `initial-approved-corpus.md` (the manifest, including a legitimate empty state), and `rollback-and-re-review.md`. Create `docs/ai/article-grounding-safety-hold.md` for the seven unresolved records. Update `docs/ai/article-grounding-review-queue.md`, `content-grounding-readiness.md`, `release-gate.md`, `roadmap.md`, `README.md`. None of these are created in this planning step.
+
+## 14. Handling incomplete or rejected records
+
+Incomplete evidence keeps a record at its current status; nothing is part-filled to make a template look complete. A reviewer rejection is recorded with reason and date, the record returns to or stays at `blocked_missing_metadata`, and it is removed from the batch. Articles progress one by one, so a rejection of one never blocks or drags along another. An initial corpus of four, one or zero approved articles is a valid Phase 30K result.
+
+## 15. The seven safety-review-hold records
+
+`emotional-impact-of-ivf`, `the-first-trimester-emotionally`, `postpartum-recovery-timeline`, `your-body-after-birth`, `preparing-for-baby-complete-guide`, `what-to-buy-for-a-new-baby`, `the-space-your-baby-will-come-home-to`. Treated as **human safety review required**, distinct from the 28 supported proposed not_allowed records and never merged back into them. They do not enter the batch, cannot become candidate, approved or eligible, are not treated as settled not_allowed for any Phase 30K decision, and are not resolved automatically. Phase 30K only documents the hold and the evidence a human reviewer would need; resolution is a separate later step.
+
+## 16. Cumulative corpus accounting
+
+Live corpus, post-30J: 5 accepted-future Tier 2 low-risk + 21 accepted-future health-reviewed + 41 accepted-future safety-sensitive + 15 reconciliation-required (2 wellbeing, 9 health-reviewed, 4 low) + 28 supported proposed not_allowed + 7 safety-review hold = **117**, matching the registry live count exactly. Registry totals: 206 = 117 live + 44 draft + 45 unknown.
+
+Phase 30K touches only the 5. The 21 health-reviewed will later need independent grounding review plus named clinical reviewer sign-off on the exact content version, validated per-claim sources, 12-month renewal and required eval coverage. The 41 safety-sensitive will later need the strictest route: independent grounding reviewer, named clinical reviewer and product-safety owner both signing the exact version, clinically co-signed source validation, 6-month renewal and mandatory eval coverage. Neither bar is weakened or shortcut by anything in Phase 30K. The 15 reconciliation records stay outside and are never silently converted; resolving them is a separate explicit human reconciliation step.
+
+## 17. Confirmation no runtime grounding occurs
+
+Phase 30K adds no RAG, retrieval, embeddings, vector search, ingestion, chunking, article-content runtime import or runtime article summary. No prompt, mode, safety-rule, endpoint, source-routing, Ask, companion, schema, route or SEO change. `AI_SOURCE_ROUTING_VERSION` stays `30B-source-routing-v1`. Approval eligibility and runtime retrieval remain separate concerns: Phase 30L is the retrieval-readiness gate and Phase 31A the first controlled grounded implementation. Even a fully approved, eligible record stays disconnected from the AI at the end of Phase 30K.
+
+## 18. Validation commands
+
+`npm test`, `npm run lint`, `npm run typecheck`, `npm run build`. Known pre-existing lint error `src/integrations/supabase/previewAuthStorage.ts:38 prefer-const` is left untouched and reported as out of scope, along with the 10 pre-existing react-refresh warnings.
+
+## 19. Implementation risks
+
+- Fabrication pressure: the strongest risk is filling a governance field to complete a package. Mitigation: zero-edit is the default outcome, and tests fail any approved record with missing evidence.
+- Digest brittleness: choosing digest inputs badly makes trivial edits lapse approvals, or worse, lets substantive edits pass. Mitigation: the field list in section 5 is fixed and documented before any digest is minted.
+- Candidate-to-approved collapse: convenience pressure to write both in one edit. Mitigation: two separate gated operations, each requiring its own recorded human decision.
+- Source ambiguity at `low`: "optional" being misread as "no attributability check". Mitigation: Gate C requires an explicit claim-attributability finding per article.
+- Batch creep: pressure to add a sixth article. Mitigation: the test asserts exactly which slugs may differ.
+- Stale pre-verification: dataset or registry state may change between this plan and execution, so Gate A re-verifies rather than trusting section 2.
+
+## 20. Explicit human decisions required from you before execution
+
+1. Named content owner for the family journey, with their explicit acceptance.
+2. Named grounding reviewer, with a competence and independence note.
+3. Confirmation, per article, of `low` sensitivity, or a stricter reclassification.
+4. Per-article claim-attributability and source-validation decision, with date and signatory.
+5. Whether any article needs source remediation before candidacy.
+6. `contentVersion` numbers minted by the owner (`<slug>@1` expected).
+7. `reviewedDate` per article, tied to the reviewed digest.
+8. Per-article candidate decision (reviewer plus owner agreement), with date.
+9. Per-article approval decision, with `approvedBy` identity and the real `approvedAt` timestamp.
+10. Rollback or replacement reference per approved article.
+11. Approval to proceed if a registry type change turns out to be required for digest storage.
+
+Until items 1 to 4 exist, Phase 30K execution can only produce Gate A to C evidence documents and zero registry changes.

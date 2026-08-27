@@ -25,6 +25,7 @@ import { COMPANION_INTRO_POINTS } from "@/components/firstyear/setup/firstYearSe
 import { ALL_TTC_SUPPORT_MOMENTS } from "@/lib/ttcSupportMoment";
 import { DAY_SUMMARY_GUARDRAILS } from "@/lib/firstYearDaySummaryPrompt";
 import { askButtonLabelFor, askHeadingFor } from "@/lib/ttcAskContext";
+import TTCSupportMomentCard from "@/components/ttc/journey/TTCSupportMomentCard";
 
 const NAME = /cindy/i;
 
@@ -128,11 +129,30 @@ describe("First Year ask companion surface", () => {
     expect(container.textContent).not.toMatch(NAME);
     expect(screen.getAllByText(/Ask your companion/i).length).toBeGreaterThan(0);
   });
+});
 
-  it("shows a chosen name when one exists", async () => {
+describe("TTC support moment card", () => {
+  const afterTestMoment = ALL_TTC_SUPPORT_MOMENTS.find((m) => m.id === "after_test_result")!;
+
+  it("uses the neutral fallback for the Ask action with no chosen name", () => {
+    identity = { name: null, tone: null };
+    render(
+      <MemoryRouter>
+        <TTCSupportMomentCard moment={afterTestMoment} onAddNote={() => {}} />
+      </MemoryRouter>,
+    );
+    expect(screen.getByText(/Ask your companion/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Ask Cindy/i)).not.toBeInTheDocument();
+  });
+
+  it("shows a chosen name on the Ask action when one exists", () => {
     identity = { name: "Wren", tone: "calm" };
-    const { container } = await renderCard();
-    expect(container.textContent).toMatch(/Ask Wren/);
-    expect(container.textContent).not.toMatch(NAME);
+    render(
+      <MemoryRouter>
+        <TTCSupportMomentCard moment={afterTestMoment} onAddNote={() => {}} />
+      </MemoryRouter>,
+    );
+    expect(screen.getByText(/Ask Wren/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Ask Cindy/i)).not.toBeInTheDocument();
   });
 });

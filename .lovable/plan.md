@@ -16,7 +16,13 @@ Excluded and untouched: the 44 draft records, the 45 unknown records, the three 
 2. **Body review of all 57** — each record reviewed against the Phase 30I health standard, including those previously body-reviewed in 30G or 30H (earlier evidence preserved, not reused as a decision).
 3. **Classification** — one documented outcome per slug: accepted future health-reviewed candidate, routed to Phase 30J, lower-sensitivity reconciliation required (low or wellbeing), or later safety adjudication required. Routine non-urgent GP/midwife signposting does not by itself trigger 30J; meaningful emergency, red-flag, safeguarding, dosing or urgent-decision content does.
 4. **Funnel audit** — 57 = candidates + 30J routes + reconciliation + later adjudication, every slug appearing exactly once.
-5. **Phase 30J backlog** — pre-30I backlog recorded separately from new 30I routing, then the expected 30J pool reported after slug-level deduplication. No 30J record is body-reviewed here.
+5. **Phase 30J backlog** — the pre-30I backlog stays auditable by provenance (30 direct 30G routes, 12 30G later health/safety review records, 7 direct 30H routes; 49 before slug deduplication). Phase 30I reports new direct 30J routes and new later-safety-adjudication records as two separate categories, never merged. The expected 30J pool is the slug-level union of all five provenance groups, deduplicated. No 30J record is body-reviewed here.
+
+## Reporting precision
+
+- "0 registry candidate records" and "0 registry approved records" are reported separately from the accepted future health-reviewed candidate count. Accepted future candidates are documentation-only outcomes and remain blocked.
+- Existing article metadata (`medicallyReviewed`, reviewer, `lastUpdated`) is recorded only where explicitly present; absent fields are recorded as "not present", never inferred as false or absent review.
+
 
 ## Deliverables
 

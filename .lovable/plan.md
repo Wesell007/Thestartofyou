@@ -54,7 +54,7 @@ No governance metadata is invented: no owner, contentVersion, grounding reviewer
 
 ## Funnel audit
 
-N (deduplicated verified pool) must equal safety-sensitive accepted + not_allowed + health_reviewed reconciliation + wellbeing reconciliation + low reconciliation, with each slug appearing exactly once. Cumulative accepted-future corpus before this phase (5 Tier 2 + 0 wellbeing + 21 health-reviewed = 26) is reported separately from Phase 30J counts.
+N (deduplicated verified pool, expected 89) must equal safety-sensitive accepted + not_allowed + health_reviewed reconciliation + wellbeing reconciliation + low reconciliation, with each slug appearing exactly once. Cumulative accepted-future corpus before this phase (5 Tier 2 + 0 wellbeing + 21 health-reviewed = 26) is reported separately from Phase 30J counts. The completion report adds per-group counts A–F, the pre-dedup total, overlap count and slugs, the final pool and slug list, confirmation every record was body-reviewed, the full outcome breakdown, and the 117-live-record corpus reconciliation.
 
 ## Files
 

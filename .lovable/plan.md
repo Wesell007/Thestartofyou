@@ -34,7 +34,10 @@ Each record receives exactly one proposed outcome:
 - `wellbeing` — reconciliation required
 - `low` — reconciliation required
 
-Enhanced scrutiny applies to mental-health and crisis content (the 7 Phase 30H routes plus `pregnancy-after-loss` if present), pregnancy-loss and fertility records, medication/supplement/dosing content, and safe sleep / activity / equipment safety. De-escalation is permitted where body evidence supports it; reconciliation findings stay blocked and do not join earlier accepted-future lists. Serious subject matter alone does not justify `not_allowed`; that outcome is reserved for content whose safe meaning depends on clinical context the grounding layer cannot preserve, or whose retrieval could override professional assessment. Where the boundary is unclear, the safer outcome is documented with the uncertainty stated.
+Enhanced scrutiny applies to mental-health and crisis content (the 7 Phase 30H routes plus `pregnancy-after-loss`, which is present in the Phase 30I set), pregnancy-loss and fertility records, medication/supplement/dosing content, and safe sleep / activity / equipment safety. De-escalation is permitted where body evidence supports it; reconciliation findings stay blocked and do not join earlier accepted-future lists.
+
+Final classification safeguard: uncertainty alone never produces `not_allowed`. A proposed `not_allowed` requires affirmative body-review evidence that the article meets the stated standard **and** that ordinary safety_sensitive governance would still be insufficient. Each proposed `not_allowed` record documents the specific criterion triggered, why safety_sensitive treatment would be insufficient, that the classification is documentation-only, and that no registry sensitivity or approval field changed. Serious subject matter, red-flag content, clinical complexity, a need for strong governance, appropriate crisis signposting, or boundary uncertainty are each insufficient on their own — those records are documented as `safety_sensitive` with later human safety/policy confirmation required.
+
 
 ## Per-record fields
 

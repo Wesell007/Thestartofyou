@@ -25,6 +25,7 @@ import { COMPANION_INTRO_POINTS } from "@/components/firstyear/setup/firstYearSe
 import { ALL_TTC_SUPPORT_MOMENTS } from "@/lib/ttcSupportMoment";
 import { DAY_SUMMARY_GUARDRAILS } from "@/lib/firstYearDaySummaryPrompt";
 import { askButtonLabelFor, askHeadingFor } from "@/lib/ttcAskContext";
+import TTCSupportMomentCard from "@/components/ttc/journey/TTCSupportMomentCard";
 
 const NAME = /cindy/i;
 

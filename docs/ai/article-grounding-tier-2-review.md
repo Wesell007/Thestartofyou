@@ -202,7 +202,7 @@ All five are family-journey, relational or organisational education with no clin
 | `two-week-wait` | Symptom interpretation combined with emotionally sensitive fertility support | Phase 30H |
 | `how-your-baby-develops-in-pregnancy` | Fetal development education with reassurance around worry about development | Phase 30I |
 
-Combined routing totals across all 102 screened records: Phase 30I = 51 (49 metadata-only + 2 body-reviewed... corrected: 49 metadata-only + 3 body-reviewed = 52), see the exact reconciliation below.
+Exact reconciliation across all 102 screened records:
 
 ```text
 Metadata-routed exclusions          = 92  (30I 49, 30J 30, later review 12, 30H 1)

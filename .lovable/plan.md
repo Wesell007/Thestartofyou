@@ -11,7 +11,27 @@ A small or zero Tier 2 result is a valid outcome. The criteria will not be relax
 ## Review pool
 
 - Start: 117 records with `editorialStatus: "live"`.
-- Excluded before review: 44 draft, 45 unknown, any archived or deprecated, the 12 support records reserved for Phase 30H, and the 6 Phase 30E practical exclusions (preparing-for-baby-complete-guide, what-to-buy-for-a-new-baby, the-space-your-baby-will-come-home-to, hospital-bag-and-what-to-pack, writing-a-birth-plan, birth-preferences), whose earlier review evidence is preserved unchanged.
+- Status-ineligible, outside the live pool: 44 draft and 45 unknown, plus anything archived or deprecated.
+- Of the 12 support records reserved conceptually for Phase 30H: 9 are verified-live and are subtracted from the 117 live pool; 3 (`coping-with-the-two-week-wait`, `emotional-pressure-of-age-when-ttc`, `partner-support-when-ttc`) remain `unknown` and are already counted inside the 45 status exclusions. Unknown support records are never double-counted, and the 3 stay status-blocked and are not body-reviewed in Phase 30G. All are "reserved for Phase 30H when editorial-status eligibility permits" — not all 12 are currently eligible.
+- The 9 verified-live support records: `emotional-wellbeing-pregnancy`, `emotional-impact-of-ivf`, `perinatal-anxiety`, `anxiety-in-pregnancy`, `pregnancy-after-loss`, `the-first-trimester-emotionally`, `when-the-joy-doesnt-arrive-yet`, `chemical-pregnancy`, `trying-again-after-miscarriage`.
+- The 6 Phase 30E practical exclusions are also removed from the verified-live pool: `preparing-for-baby-complete-guide`, `what-to-buy-for-a-new-baby`, `the-space-your-baby-will-come-home-to`, `hospital-bag-and-what-to-pack`, `writing-a-birth-plan`, `birth-preferences`. Their earlier review evidence is preserved unchanged.
+
+### Locked funnel arithmetic
+
+Recorded explicitly in `docs/ai/article-grounding-tier-2-review.md` and in the completion report:
+
+```text
+A. Total registry                       = 206
+B. Status-ineligible                    = 44 draft + 45 unknown
+C. Verified-live pool                   = 117
+D. Prior/reserved live exclusions       = 9 support + 6 Phase 30E practical
+E. Metadata-screened population         = 117 - 9 - 6 = 102
+
+E = metadata-routed exclusions + Tier 2 body-review shortlist
+Tier 2 body-review shortlist = body-reviewed Tier 2 exclusions + accepted future Tier 2 candidates
+```
+
+Every count must reconcile and every slug appears exactly once at the relevant stage. If execution re-verification finds a genuine overlap or registry discrepancy, the actual verified numbers are reported instead of forcing 102.
 
 ## Method
 

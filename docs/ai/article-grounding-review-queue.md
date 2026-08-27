@@ -119,3 +119,15 @@ This document remains the Phase 30D record. Phase 30F adds the following.
 - **Section 11, source lists.** Unchanged: 31 records with no source list, now a formally defined governance gap. No sources were added or rewritten.
 - **Exit criteria.** Superseded in detail by `article-grounding-governance.md`, which is now the normative contract for `blocked → candidate → approved`, including candidate authority, approval authority, the review evidence package and the sensitivity decision matrix.
 - **Result.** 0 candidate records, 0 approved records, `listGroundingEligibleSlugs()` returns `[]`. Start of You article grounding remains blocked. The next gated step is Phase 30G — Tier 2 low-risk general education review, which was not started here.
+
+
+## Phase 30G annotation — Tier 2 low-risk general education review
+
+This document remains the Phase 30D record. Phase 30G adds the following.
+
+- **Pool.** 206 total; 117 live / 44 draft / 45 unknown. Verified-live pool 117, minus the 9 verified-live support records reserved for Phase 30H and the 6 Phase 30E practical exclusions, gives **102 metadata-screened records**. The 3 unknown support records (`coping-with-the-two-week-wait`, `emotional-pressure-of-age-when-ttc`, `partner-support-when-ttc`) stay inside the 45 unknown status exclusions and are not double-counted or body-reviewed.
+- **Funnel.** 102 = 92 metadata-routed exclusions + 10 Tier 2 body-review shortlist. The 10 = 5 body-reviewed exclusions + 5 accepted future Tier 2 candidates.
+- **Routing of the 97 exclusions.** Phase 30I 53, Phase 30J 30, later health/safety review required 12, Phase 30H 2. Metadata-only routings are provisional, not final sensitivity classifications.
+- **Accepted future Tier 2 candidates (5).** `second-time-parenting`, `staying-connected-as-parents`, `calmer-evenings-after-busy-days`, `planning-family-days-out`, `simple-family-play-ideas`. All remain `blocked` in the registry; "accepted" is a review outcome only.
+- **Governance gaps.** Owner, content version, grounding reviewer, reviewed date, source list and sensitivity all Missing for the five. Nothing invented; no sensitivity written to the registry.
+- **Result.** 0 registry changes, 0 candidate records, 0 approved articles, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` unchanged at `30B-source-routing-v1`. AI runtime unchanged. Start of You article grounding remains blocked. Detail in `article-grounding-tier-2-review.md`. Next gated step: Phase 30H, not started here.

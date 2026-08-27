@@ -51,6 +51,7 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 - 30D article grounding registry drift guard and review queue (governance and QA only, zero articles approved)
 - 30E Tier 1 article grounding review batch (review only, 0 accepted candidates, 0 registry changes, zero articles approved, AI runtime unchanged, article grounding still blocked)
 - 30F grounding governance metadata and editorial status resolution (52 unknown statuses investigated, 7 resolved to live, 45 still unknown, governance contract published covering content owner, content version, grounding reviewer, reviewed date, source-list validation, sensitivity decision rules, candidate authority, approval authority and review evidence; no governance metadata invented, 0 candidates, 0 approvals, AI runtime unchanged, article grounding still blocked)
+- 30G Tier 2 low-risk general education review (review only, 102 verified-live records screened, 5 accepted future Tier 2 candidates, 5 body-reviewed exclusions, 92 metadata-routed provisional exclusions, 0 registry changes, 0 candidates, 0 approvals, AI runtime unchanged, article grounding still blocked)
 - 29F controlled pregnancy context upgrade
 - 29G permissioned memory and personalisation design (specification only)
 - 29H memory schema and RLS design review (design review only)

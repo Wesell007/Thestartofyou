@@ -155,3 +155,13 @@ This document remains the Phase 30D record. Phase 30I adds the following.
 - **Medical-review metadata.** All 57 name a reviewer, 48 carry a last-updated date, none carries a `medicallyReviewed` field. Captured as context only; it is not grounding-review evidence.
 - **Governance gaps.** Owner, content version, grounding reviewer, reviewed date, `approvedBy` and `approvedAt` remain Missing for all 57, including the 21 accepted candidates. Proposed sensitivity is documentation-only.
 - **Result.** 0 registry changes, **0 registry candidate records**, 0 approved articles, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` unchanged at `30B-source-routing-v1`. AI runtime unchanged. Article grounding remains blocked. Detail in `article-grounding-health-review.md`. Next gated step: Phase 30J, not started here.
+
+## Phase 30J annotation — safety-sensitive and not-allowed classification
+
+This document remains the Phase 30D record. Phase 30J adds the following.
+
+- **Pool.** 89 unique verified-live records reconstructed from closed evidence only: 30 Phase 30G direct, 12 Phase 30G later health/safety, 7 Phase 30H direct, 33 Phase 30I direct, 1 Phase 30I later safety, 6 Phase 30E practical exclusions. Pre-deduplication total 89, overlap 0.
+- **Outcome.** 35 proposed `not_allowed`, 41 proposed `safety_sensitive`, 9 `health_reviewed` reconciliation required, 4 `low` reconciliation required. All proposals are documentation-only.
+- **Corpus reconciliation.** 5 Tier 2 candidates + 21 health-reviewed candidates + 2 wellbeing reconciliations + 89 adjudication records = 117 verified-live records, matching the registry.
+- **Gaps.** 11 records with no source list, 11 with no `lastUpdated`.
+- **Result.** 0 registry changes, **0 registry candidate records**, 0 approved articles, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` unchanged at `30B-source-routing-v1`. AI runtime unchanged. Article grounding remains blocked. Detail in `article-grounding-safety-review.md`. Next gated step: Phase 30K, not started here.

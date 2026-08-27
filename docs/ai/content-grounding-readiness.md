@@ -439,3 +439,11 @@ Review and classification only. 57 unique verified-live records body-reviewed: 5
 **Gaps.** 11 of 57 have no source list. Owner, content version, grounding reviewer, reviewed date, `approvedBy` and `approvedAt` Missing for all 57. Existing editorial medical-review metadata (reviewer on all 57, last-updated on 48, no `medicallyReviewed` field anywhere) was captured as context and not treated as grounding-review evidence.
 
 **Result.** 0 registry changes, 0 candidates, 0 approvals, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`, AI runtime unchanged. The Start of You article library is not grounding-ready and article grounding remains blocked. Record: `article-grounding-health-review.md`.
+
+## Phase 30J — safety-sensitive and not-allowed classification
+
+**Scope.** Review and classification only, over the 89 verified-live records routed by Phases 30E, 30G, 30H and 30I. No approvals, no registry changes, no runtime change.
+
+**Outcome.** 35 records proposed `not_allowed` on affirmative evidence (crisis and self-harm pathways, pregnancy loss and adverse findings, medication and dosing, time-critical triage, infant safe sleep). 41 proposed `safety_sensitive`. 13 reconciliation records: 9 `health_reviewed`, 4 `low`. Uncertainty never produced `not_allowed`.
+
+**Result.** 0 registry changes, 0 candidates, 0 approvals, `listGroundingEligibleSlugs()` returns `[]`, `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`, AI runtime unchanged. With 35 of 117 verified-live records proposed for permanent block and no record holding candidate authority evidence, the Start of You article library is not grounding-ready and article grounding remains blocked. Record: `article-grounding-safety-review.md`.

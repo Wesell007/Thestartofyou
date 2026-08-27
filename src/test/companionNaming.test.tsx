@@ -129,6 +129,7 @@ describe("First Year ask companion surface", () => {
     expect(container.textContent).not.toMatch(NAME);
     expect(screen.getAllByText(/Ask your companion/i).length).toBeGreaterThan(0);
   });
+});
 
 describe("TTC support moment card", () => {
   const afterTestMoment = ALL_TTC_SUPPORT_MOMENTS.find((m) => m.id === "after_test_result")!;

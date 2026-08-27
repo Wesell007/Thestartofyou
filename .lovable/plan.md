@@ -41,3 +41,15 @@ Run `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`. The known 
 ## Close
 
 Finish with the 20-item Phase 30G completion report, including the explicit close verdict on live-only review, draft/unknown exclusion, invented metadata, candidate/approval status, AI runtime exposure, source routing, AI behaviour, blocked status, and whether Phase 30H is safe to plan next. Phase 30H is not started.
+
+## Final clarifications (approved revision)
+
+**Non-overlapping funnel.** The review is recorded as distinct stages that must reconcile, with no slug counted in two exclusion categories: A total registry 206; B status-ineligible (44 draft, 45 unknown); C verified-live pool 117; D previously reviewed or reserved live exclusions (verified-live support records reserved for 30H, plus the six Phase 30E practical exclusions); E remaining live records metadata-screened; F metadata-routed exclusions; G Tier 2 body-review shortlist; H body-reviewed Tier 2 exclusions; I accepted future Tier 2 candidates.
+
+**Support-record split.** Of the 12 support records reserved for Phase 30H, 9 are verified-live and 3 (`coping-with-the-two-week-wait`, `emotional-pressure-of-age-when-ttc`, `partner-support-when-ttc`) still carry `editorialStatus: "unknown"`. Only the verified-live 9 are subtracted from the 117 pool; the 3 unknown ones stay inside the 45 status exclusions and are not double-counted. Both exact slug sets are recorded. The roadmap wording is read as "reserved for Phase 30H when editorial-status eligibility permits" — not a guarantee that all 12 are reviewable in 30H.
+
+**Metadata routing is provisional.** Every exclusion records its review basis: `metadata-only` (with `later routing: provisional until the relevant review phase`) or `body-reviewed`. A metadata-only routing decision is never treated as a final sensitivity classification. Where metadata cannot confidently separate 30I from 30J, the routing is recorded as `later health/safety review required`.
+
+**Acceptance requires body review.** No article can become an accepted future Tier 2 candidate on metadata alone; acceptance requires body review and a genuinely low-risk general-education purpose, excluded conservatively on any doubt.
+
+These clarifications extend the sections above; every other boundary (no registry edits, no invented governance metadata, no AI/runtime change, no new tests, validation set, 20-item completion report with the expanded item detail and close verdict) is unchanged.

@@ -16,7 +16,7 @@ Rebuild the pool from five provenance groups, then deduplicate by slug:
 - Group D — Phase 30I direct 30J routes (expected 33), from `docs/ai/article-grounding-health-review.md`
 - Group E — Phase 30I later safety adjudication (`trying-again-after-miscarriage`)
 
-Pre-dedup provenance total expected: 83. The unique pool count is whatever the slug union yields; 83 is not assumed to be the answer.
+Pre-dedup provenance total expected: 83. A pre-plan extraction of the closed evidence confirms Group A = 30, Group B = 12, Group C = 7, Group D = 33, Group E = 1, with zero slug overlap, giving 83 unique slugs; all 83 verify in the registry as `live`, non-archived, non-deprecated and neither candidate nor approved. Nine of them currently have no source list. These figures are re-derived during execution rather than assumed.
 
 Each unique slug is then verified against `src/lib/grounding/articleGroundingRegistry.ts`, requiring `editorialStatus === "live"`, `archived === false`, `deprecated === false`, and an approval status that is neither candidate nor approved. Any unreconcilable provenance or ineligible record stops the phase and is reported as a discrepancy rather than substituted.
 

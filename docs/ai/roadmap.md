@@ -210,9 +210,14 @@ Recommended by Phase 30A. None of these is authorised: each needs its own approv
 
 Review and classification only. 102 verified-live records screened after removing the 9 verified-live support records and the 6 Phase 30E practical exclusions from the 117 live pool. 92 metadata-routed exclusions, 10 body-reviewed, 5 accepted future Tier 2 candidates (family-journey relational and routine education), 5 body-reviewed exclusions. 0 registry changes, 0 candidates, 0 approvals, AI runtime unchanged, article grounding still blocked. Record: `article-grounding-tier-2-review.md`.
 
-### Phase 30H — wellbeing and sensitive support review — NEXT, NOT STARTED
+### Phase 30H — wellbeing and sensitive support review — COMPLETE
 
-Scope: the 9 verified-live support records, plus `preparing-emotionally-for-birth` and `two-week-wait`. The 3 unknown support records stay status-blocked until editorial status is resolved.
+Review and classification only. 11 verified-live records body-reviewed (the 9 reserved support records plus `preparing-emotionally-for-birth` and `two-week-wait`). The 3 unknown support records stayed status-blocked and outside the pool. 0 accepted future wellbeing candidates, 4 routed to Phase 30I, 7 routed to Phase 30J, 0 later health/safety review required. 3 source-list gaps. 0 registry changes, 0 candidates, 0 approvals, AI runtime unchanged, article grounding still blocked. Record: `article-grounding-wellbeing-review.md`.
+
+### Phase 30I — health-reviewed article review — NEXT, NOT STARTED
+
+Intake now includes the 4 records routed here by Phase 30H: `pregnancy-after-loss`, `trying-again-after-miscarriage`, `preparing-emotionally-for-birth`, `two-week-wait`.
+
 
 ### Phase 30L — retrieval readiness review — FUTURE, NOT STARTED
 

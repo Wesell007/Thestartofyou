@@ -8,19 +8,26 @@ A dedicated safety adjudication of every verified-live article previously routed
 
 ## Pool reconstruction (closed evidence only)
 
-Rebuild the pool from five provenance groups, then deduplicate by slug:
+Rebuild the pool from six provenance groups, then deduplicate by slug:
 
 - Group A — Phase 30G direct 30J routes (expected 30), from `docs/ai/article-grounding-tier-2-review.md`
 - Group B — Phase 30G "later health/safety review required" (expected 12), same document
 - Group C — Phase 30H direct 30J routes (7 named slugs), from `docs/ai/article-grounding-wellbeing-review.md`
 - Group D — Phase 30I direct 30J routes (expected 33), from `docs/ai/article-grounding-health-review.md`
 - Group E — Phase 30I later safety adjudication (`trying-again-after-miscarriage`)
+- Group F — Phase 30E practical exclusions requiring final safety adjudication (6): `preparing-for-baby-complete-guide`, `what-to-buy-for-a-new-baby`, `the-space-your-baby-will-come-home-to`, `hospital-bag-and-what-to-pack`, `writing-a-birth-plan`, `birth-preferences`. Their Phase 30E exclusion reasons (sleep safety/SIDS, equipment and car-seat safety, labour-arrival material, birth clinical decision-making) are recorded as provenance only and do not pre-set any Phase 30J outcome; all six receive the same dedicated body review and may de-escalate.
 
-Pre-dedup provenance total expected: 83. A pre-plan extraction of the closed evidence confirms Group A = 30, Group B = 12, Group C = 7, Group D = 33, Group E = 1, with zero slug overlap, giving 83 unique slugs; all 83 verify in the registry as `live`, non-archived, non-deprecated and neither candidate nor approved. Nine of them currently have no source list. These figures are re-derived during execution rather than assumed.
+Pre-dedup provenance total expected: 89. A pre-plan extraction of the closed evidence confirms A = 30, B = 12, C = 7, D = 33, E = 1, F = 6, with zero slug overlap, giving 89 unique slugs; all 89 verify in the registry as `live`, non-archived, non-deprecated and neither candidate nor approved. These figures are re-derived during execution; if the union does not produce exactly 89 unique eligible records, the phase stops and reports the discrepancy.
 
-Each unique slug is then verified against `src/lib/grounding/articleGroundingRegistry.ts`, requiring `editorialStatus === "live"`, `archived === false`, `deprecated === false`, and an approval status that is neither candidate nor approved. Any unreconcilable provenance or ineligible record stops the phase and is reported as a discrepancy rather than substituted.
+Each unique slug is verified against `src/lib/grounding/articleGroundingRegistry.ts`, requiring `editorialStatus === "live"`, `archived === false`, `deprecated === false`, and an approval status that is neither candidate nor approved.
 
-Excluded: draft records, unknown records, unknown support records, the 5 Tier 2 accepted-future candidates, the 21 health-reviewed accepted-future candidates, `preparing-emotionally-for-birth`, `two-week-wait`, and any record not backed by closed 30G/30H/30I routing evidence. No topic-similarity expansion.
+## Live-corpus reconciliation audit (before body review)
+
+Prove every verified-live record is accounted for before Phase 30K planning:
+
+5 Tier 2 accepted-future + 21 health-reviewed accepted-future + 2 wellbeing reconciliation (`preparing-emotionally-for-birth`, `two-week-wait`, both still blocked) + 89 Phase 30J records = 117 verified-live records. A pre-plan slug-level check reconciles exactly, with no live record unaccounted for and no extra slug. If execution does not reconcile by exact unique slug, the phase stops and reports.
+
+Excluded: 44 draft records, 45 unknown records, the three unknown support records, the 5 Tier 2 accepted-future candidates, the 21 health-reviewed accepted-future candidates, `preparing-emotionally-for-birth`, `two-week-wait`, and anything not supported by closed 30E/30G/30H/30I evidence. No topic-similarity expansion; Group F is completion of a deferred 30E review path, not expansion.
 
 ## Review method
 
@@ -47,7 +54,7 @@ No governance metadata is invented: no owner, contentVersion, grounding reviewer
 
 ## Funnel audit
 
-N (deduplicated verified pool) must equal safety-sensitive accepted + not_allowed + health_reviewed reconciliation + wellbeing reconciliation + low reconciliation, with each slug appearing exactly once. Cumulative accepted-future corpus before this phase (5 Tier 2 + 0 wellbeing + 21 health-reviewed = 26) is reported separately from Phase 30J counts.
+N (deduplicated verified pool, expected 89) must equal safety-sensitive accepted + not_allowed + health_reviewed reconciliation + wellbeing reconciliation + low reconciliation, with each slug appearing exactly once. Cumulative accepted-future corpus before this phase (5 Tier 2 + 0 wellbeing + 21 health-reviewed = 26) is reported separately from Phase 30J counts. The completion report adds per-group counts A–F, the pre-dedup total, overlap count and slugs, the final pool and slug list, confirmation every record was body-reviewed, the full outcome breakdown, and the 117-live-record corpus reconciliation.
 
 ## Files
 

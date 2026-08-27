@@ -214,9 +214,14 @@ Review and classification only. 102 verified-live records screened after removin
 
 Review and classification only. 11 verified-live records body-reviewed (the 9 reserved support records plus `preparing-emotionally-for-birth` and `two-week-wait`). The 3 unknown support records stayed status-blocked and outside the pool. 0 accepted future wellbeing candidates, 4 routed to Phase 30I, 7 routed to Phase 30J, 0 later health/safety review required. 3 source-list gaps. 0 registry changes, 0 candidates, 0 approvals, AI runtime unchanged, article grounding still blocked. Record: `article-grounding-wellbeing-review.md`.
 
-### Phase 30I — health-reviewed article review — NEXT, NOT STARTED
+### Phase 30I — health-reviewed article review — COMPLETE
 
-Intake now includes the 4 records routed here by Phase 30H: `pregnancy-after-loss`, `trying-again-after-miscarriage`, `preparing-emotionally-for-birth`, `two-week-wait`.
+Review and classification only. 57 unique verified-live records body-reviewed (53 routed by Phase 30G, 4 by Phase 30H, no overlap). 21 accepted future health-reviewed candidates (documentation-only; registry candidate records remain 0), 33 routed to Phase 30J, 2 returned to the wellbeing stream for lower-sensitivity reconciliation, 1 recorded as later safety adjudication required. `pregnancy-after-loss` escalated from the Phase 30H 30I routing to 30J. 11 source-list gaps. 0 registry changes, 0 candidates, 0 approvals, AI runtime unchanged, article grounding still blocked. Record: `article-grounding-health-review.md`.
+
+### Phase 30J — safety-sensitive and not-allowed classification — NEXT, NOT STARTED
+
+Intake: the 33 records routed by Phase 30I, the 7 routed by Phase 30H, the 30 metadata-routed records from Phase 30G, plus the ambiguous records recorded in Phase 30I (`trying-again-after-miscarriage`, `preparing-emotionally-for-birth`, `two-week-wait`) for a definitive sensitivity decision. Review only; no approvals.
+
 
 
 ### Phase 30L — retrieval readiness review — FUTURE, NOT STARTED

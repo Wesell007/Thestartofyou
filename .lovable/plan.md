@@ -18,17 +18,23 @@ All five, read from `articleGroundingRegistry.ts` and `familyArticleData.ts`:
 | `planning-family-days-out` | live | false | false | blocked_missing_metadata | absent | false | all absent | ready | July 2026 | undefined |
 | `simple-family-play-ideas` | live | false | false | blocked_missing_metadata | absent | false | all absent | ready | July 2026 | undefined |
 
-Journeys all `family`; topics `growing-families`, `relationships`, `family-basics`, `travel-days-out`, `play-connection`; 7 sections and 5 key takeaways each. The family record shape has no `sources`, `references` or `medicallyReviewed` field.
+Journeys all `family`; topics `growing-families`, `relationships`, `family-basics`, `travel-days-out`, `play-connection`; 7 sections and 5 key takeaways each. The `FamilyArticle` type does declare an optional `sources` field, but none of the five populates it, and Phase 30K adds none.
 
 ## 3. Corrected content-digest design
 
 - Algorithm: SHA-256. The **authoritative stored value is the full 64-character hex digest**. Documentation may additionally show a short prefix for readability, clearly labelled as display-only.
 - Digest covers **substantive user-facing content only**: `slug`, `title`, `description`, `intro`, ordered section headings and bodies, ordered `keyTakeaways`, plus any further substantive user-facing content field discovered during implementation (each addition recorded in the digest specification before use).
 - Explicitly **excluded**: `lastUpdated`, `status`, `reviewedBy`, `owner`, `reviewer`, `reviewedDate`, any approval metadata, and presentational fields (`seoTitle`, `seoDescription`, `readTime`, `relatedSlugs`, imagery). A metadata-only edit therefore leaves the fingerprint unchanged.
-- Canonicalisation: stable field order, arrays in source order, JSON serialisation with normalised whitespace, documented once so the digest is reproducible.
+- Canonicalisation: fixed field order, arrays in source order, CRLF to LF line-ending normalisation, deterministic JSON serialisation with no presentation-only JSON whitespace. Substantive string content is preserved exactly: paragraphs, list formatting and meaningful line breaks are never collapsed, trimmed or rewritten for hashing.
 - Script: `scripts/grounding-content-digest.ts`, run on demand, printing slug plus full digest only. Never imported by any runtime module, never printing article text.
-- Storage: `docs/ai/grounding-approvals/content-digests.json` holds the full digest per slug and the digest-specification version. The registry stores only `contentVersion`.
+- Storage: `docs/ai/grounding-approvals/content-digests.json` holds the full digest per slug plus the pinned digest-specification version. The registry stores only `contentVersion`.
 - Versioning: `<slug>@<n>`, first authorised version `<slug>@1`. A new version is minted when the substantive content changes; approvals attach to one version and lapse when it changes.
+- A Stage 1 digest is a prepared evidence fingerprint only: not human-reviewed, not owner-authorised, not sensitivity-confirmed, not candidate, not approved, not eligible.
+
+## 3a. Append-only evidence history
+
+`source-evidence.json`, the source-validation records and the human-decision records are versioned append-only histories, never destructively overwritten state. Every source change, re-validation, reviewer decision, approval, rejection, withdrawal, replacement and re-review appends a new entry with its own identifier and timestamp, leaving the evidence behind any earlier decision fully recoverable. Every approval package remains traceable to the exact content digest, the digest-specification version, the exact source-evidence state, the source-validation decision, the reviewer identity, the review decision and time, and the approval decision and time once one exists. Stage 1 prepares these structures with blank human-decision fields and manufactures no decision.
+
 
 ## 4. Binding source evidence to the approved version
 

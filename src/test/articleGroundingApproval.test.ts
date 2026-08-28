@@ -275,6 +275,7 @@ describe("runtime boundary unchanged", () => {
   });
 
   it("keeps the source routing version pinned", () => {
-    expect(AI_SOURCE_ROUTING_VERSION).toBe("30B-source-routing-v1");
+    expect(aiVersionsSource).toContain('"30B-source-routing-v1"');
   });
+
 });

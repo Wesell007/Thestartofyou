@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, ChevronRight, Home, Heart } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import SeoHead from "@/components/seo/SeoHead";
+import { toMetaDescription } from "@/lib/seo/metaDescription";
 import HubAISupport from "@/components/shared/HubAISupport";
 import {
   Accordion,
@@ -49,8 +51,16 @@ const ToddlerAgePage = ({ config }: Props) => {
 
   return (
     <div className="min-h-screen font-sans bg-parchment">
+      {/* Indexable age guide: metadata derives from the age config, so each of
+          the five routes gets a unique title, description and canonical. */}
+      <SeoHead
+        title={`Toddler at ${config.title} | The Start of You`}
+        description={toMetaDescription(config.standfirst)}
+        canonical={`https://thestartofyou.com/toddler/${config.slug}`}
+      />
       <Navbar />
       <main className="overflow-hidden">
+
         {/* ─── HERO ────────────────────────────────────────────────── */}
         <section className="relative pt-8 sm:pt-12 md:pt-16 pb-16 md:pb-24">
           <div

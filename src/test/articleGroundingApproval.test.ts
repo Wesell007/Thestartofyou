@@ -249,9 +249,14 @@ describe("evidence store integrity", () => {
   });
 
   it("records the external-evidence eligibility gate as a blocker", () => {
-    expect(repoFile("docs/ai/grounding-approvals/README.md")).toContain(
+    const readme = repoFile("docs/ai/grounding-approvals/README.md").replace(
+      /\s+/g,
+      " ",
+    );
+    expect(readme).toContain(
       "eligibility invalidation mechanism must be resolved before Stage 4 approval",
     );
+
   });
 
   it("documents all seven held records", () => {

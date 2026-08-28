@@ -5,12 +5,46 @@ Documentation and manifests only. Nothing here is imported by any runtime
 module, prompt, mode, endpoint or AI path, and nothing here makes an article
 grounding eligible on its own.
 
-## Current state (Stage 1)
+## Current state — Stage 1 complete, Stage 2 deferred
 
 - Registry changes: **0**. `src/lib/grounding/articleGroundingRegistry.ts` is untouched.
 - Candidate records: **0**. Approved records: **0**. `listGroundingEligibleSlugs()` is `[]`.
 - Real human decisions recorded: **0**. Real source-validation events recorded: **0**.
 - `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`.
+
+## Stage 2 — DEFERRED PENDING HUMAN GOVERNANCE TEAM
+
+Phase 30K Stage 2 is deferred because the required real human governance roles
+have not yet been appointed. Content owner: TBD. Grounding reviewer: TBD.
+Editorial/medical governance team: not yet established. Sensitivity
+confirmation, claim-attributability decision, source-validation decision,
+grounding-review sign-off and `contentVersion` authorisation are all deferred.
+
+Nobody is temporarily assigned to progress the phase, and no owner or reviewer
+is inferred from founder, article author, developer, editor, git history or
+account details. This is an intentional project decision, not a failed phase.
+
+All Stage 1 evidence is preserved unchanged: the five per-article packages, the
+full SHA-256 digests, the digest specification, `content-digests.json`,
+`source-evidence.json`, the source-validation structures, the human-review
+forms, the governance-gap records, the append-only evidence architecture, the
+seven-record safety-review hold and the external-evidence eligibility blocker.
+Digests are not regenerated unless substantive article content actually
+changes; if it does, the affected Stage 1 digest and evidence package must be
+refreshed before human review.
+
+Appointing the team would not by itself make article grounding ready. Grounding
+stays blocked for multiple reasons: Stage 2 decisions unavailable, 0
+candidates, 0 approvals, the unresolved external-evidence eligibility
+invalidation mechanism below, Phase 30L not started and Phase 31A not started.
+
+**Resume condition.** Stage 2 may resume only when real people have been
+appointed and explicitly accept the roles, with at minimum: accepted content
+owner(s); accepted grounding reviewer(s); reviewer access to the exact article
+versions represented by these evidence packages; sensitivity decisions;
+claim-attributability decisions; source-validation decisions; grounding-review
+sign-off.
+
 
 ## Files
 

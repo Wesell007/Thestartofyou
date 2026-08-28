@@ -211,3 +211,31 @@ No article is assigned to any level by this matrix in Phase 30F.
 - 45 records have an unresolved editorial status (see `article-grounding-editorial-status-resolution.md`).
 - `listGroundingEligibleSlugs()` returns `[]`. `AI_SOURCE_ROUTING_VERSION` is `30B-source-routing-v1`.
 - Start of You article grounding remains blocked. This document does not make the library grounding-ready.
+
+---
+
+## L. Phase 30K initial batch — parked at the Stage 2 checkpoint
+
+The five-article initial batch (`second-time-parenting`,
+`staying-connected-as-parents`, `calmer-evenings-after-busy-days`,
+`planning-family-days-out`, `simple-family-play-ideas`) completed Stage 1
+evidence preparation and is parked at the Stage 2 human decision checkpoint.
+
+Stage 2 is **DEFERRED PENDING HUMAN GOVERNANCE TEAM**. Content owner TBD,
+grounding reviewer TBD, editorial/medical governance team not yet established.
+Sensitivity confirmation, claim-attributability, source validation,
+grounding-review sign-off and `contentVersion` authorisation are deferred. In
+line with section I, nobody is temporarily assigned and no role is inferred
+from founder, article author, developer, editor, git history or account
+details; an incomplete honest package is correct.
+
+All five remain `blocked_missing_metadata` with no sensitivity, owner,
+reviewer, `contentVersion`, `reviewedDate`, `approvedBy` or `approvedAt`.
+Human-decision events: 0. Completed source-validation events: 0. Evidence lives
+in `grounding-approvals/`, and digests are regenerated only if substantive
+article content actually changes.
+
+Appointing the team is necessary but not sufficient: the external governance
+evidence -> eligibility invalidation mechanism is still unresolved and must be
+resolved before any Stage 4 approval, and Phases 30L and 31A have not started.
+

@@ -133,6 +133,12 @@ Nothing is part-filled to complete a template. A rejection is recorded with reas
 
 Fabrication pressure on governance fields (mitigated by a zero-write first stage and failing tests); digest input drift (mitigated by a written digest specification pinned before first use); candidate-and-approval collapse (mitigated by separate stages); "optional sources" misread as "no attributability check" (mitigated by an explicit per-article finding bound to the digest); batch creep (mitigated by an authorised-slug test); stale pre-verification (mitigated by Gate A re-verification).
 
-## 17. Stop point
+## 17. Final technical clarifications
+
+- **`reviewedDate` contract preserved.** Stage 1 inspects but does not change the field's type or semantics. It stays the calendar date (`YYYY-MM-DD`) on which the exact content version passed grounding review; the precise decision time lives only in the append-only decision evidence (`decisionTimestamp`). `approvedAt` keeps its precise-timestamp contract. No timestamp of any kind is created before a real human decision.
+- **Templates are not decision events.** Stage 1 creates evidence templates, unresolved human-decision fields, reviewer checklists, source-validation templates, schemas and examples — and appends **zero** entries to the real human-decision event log and zero source-validation events. Template/unresolved state and immutable historical events are kept structurally distinct so a blank template can never be mistaken for a completed validation or decision. A real event is appended only after an actual person decides, carrying a stable unique id plus article slug, content digest, digest-spec version, contentVersion, decision type, decision maker, decision result, decision timestamp and superseded-decision reference where applicable. Historical events are never silently mutated.
+- **External-evidence eligibility gate recorded as a blocker.** Detailed validation and approval evidence living in `docs/ai/grounding-approvals/` while `listGroundingEligibleSlugs()` reads only registry fields means stale, broken, withdrawn, contradicted, superseded or otherwise invalid evidence could leave an article eligible. Stage 1 does not solve this and changes neither the registry nor the helper; it records the explicit unresolved gate "External governance evidence -> eligibility invalidation mechanism must be resolved before Stage 4 approval" in the Phase 30K evidence documentation, with candidate mechanisms listed but none chosen.
+
+## 18. Stop point
 
 Execution stops after Stage 1 with registry changes = 0, and the five evidence packages are returned for human decisions. No candidate transition, no approval, no Phase 30L work follows without a further explicit go-ahead.

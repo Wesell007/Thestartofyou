@@ -59,6 +59,12 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 - 30H wellbeing and sensitive support review (review only, 11 verified-live records body-reviewed, 3 unknown support records still excluded, 0 accepted future wellbeing candidates, 4 routed to Phase 30I, 7 routed to Phase 30J, 0 ambiguous, 3 source-list gaps, 0 registry changes, 0 candidates, 0 approvals, AI runtime unchanged, article grounding still blocked)
 - 30I health-reviewed article review (review only, 57 unique verified-live records body-reviewed, 21 accepted future health-reviewed candidates in documentation only, 0 registry candidate records, 33 routed to Phase 30J, 2 returned to the wellbeing stream, 1 later safety adjudication required, 11 source-list gaps, 0 registry changes, 0 approvals, AI runtime unchanged, article grounding still blocked)
 
+## Open AI phases
+
+- 30K human approval and initial approved corpus — **IN PROGRESS / PARKED, NOT COMPLETE**. Stage 1 COMPLETE (evidence prepared for five articles). Stage 2 DEFERRED PENDING HUMAN GOVERNANCE TEAM (content owner TBD, grounding reviewer TBD, team not yet established; nobody assigned or inferred). Stages 3 and 4 NOT STARTED. Phase 30L NOT STARTED. Phase 31A NOT STARTED. Grounding stays blocked for several independent reasons, including the unresolved external-evidence eligibility invalidation mechanism; the corpus is not approved and not grounding-ready. Record: `grounding-approvals/README.md`.
+
+## Closed AI phases (continued)
+
 - 29F controlled pregnancy context upgrade
 - 29G permissioned memory and personalisation design (specification only)
 - 29H memory schema and RLS design review (design review only)

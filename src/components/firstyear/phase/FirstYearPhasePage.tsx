@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, ArrowLeft, BookOpen, Sparkles, ExternalLink } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import SeoHead from "@/components/seo/SeoHead";
+import { toMetaDescription } from "@/lib/seo/metaDescription";
 import type { PhaseConfig } from "@/data/firstYearPhaseData";
 import AskLink from "@/components/shared/AskLink";
 
@@ -672,7 +674,15 @@ const Endcap = () => (
 const FirstYearPhasePage = ({ config }: Props) => {
   return (
     <div className="min-h-screen font-sans">
+      {/* Indexable phase page: metadata derives from the phase config, so each
+          of the four routes gets a unique title, description and canonical. */}
+      <SeoHead
+        title={`${config.title} (${config.ageRange}) | The Start of You`}
+        description={toMetaDescription(config.intro)}
+        canonical={`https://thestartofyou.com/first-year/${config.slug}`}
+      />
       <Navbar />
+
       <main>
         <PhaseHero config={config} />
         <InPhaseAges ages={config.ages} />

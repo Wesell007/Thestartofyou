@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import SeoHead from "@/components/seo/SeoHead";
 import { useSuppressCompanion } from "@/components/companion/CompanionProvider";
 
 const NotFound = () => {
@@ -17,8 +18,17 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen font-sans">
+      {/* Renders at arbitrary unknown paths: always noindex, and never a
+          canonical that would point a missing page at real content. This also
+          replaces any title/description left by the previously visited route. */}
+      <SeoHead
+        title="Page not found | The Start of You"
+        description="This page doesn't exist. Find your way back to calm, practical guidance from The Start of You."
+        noindex
+      />
       <Navbar />
       <main>
+
         <section className="relative bg-parchment pt-32 pb-28 md:pt-40 md:pb-36 overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] glow-sage" />
           <div className="container mx-auto px-6 md:px-10 max-w-2xl text-center relative z-10">

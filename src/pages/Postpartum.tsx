@@ -1,5 +1,6 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import SeoHead from "@/components/seo/SeoHead";
 import PostpartumHero from "@/components/postpartum/PostpartumHero";
 import PostpartumWhatThisIs from "@/components/postpartum/PostpartumWhatThisIs";
 import PostpartumStages from "@/components/postpartum/PostpartumStages";
@@ -18,8 +19,16 @@ import PostpartumFinalCTA from "@/components/postpartum/PostpartumFinalCTA";
 const Postpartum = () => {
   return (
     <div className="min-h-screen font-sans">
+      {/* Retained legacy page: kept for reference, never indexed, and no
+          canonical so it cannot compete with the live first year content. */}
+      <SeoHead
+        title="Postpartum (legacy) | The Start of You"
+        description="A retained earlier version of the postpartum guidance from The Start of You."
+        noindex
+      />
       <Navbar />
       <main>
+
         <PostpartumHero />
         <PostpartumWhatThisIs />
         <PostpartumStages />

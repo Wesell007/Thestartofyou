@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
 import MyWeekFooter from "@/components/myweek/MyWeekFooter";
 import PageLoadState from "@/components/shared/PageLoadState";
+import SeoHead from "@/components/seo/SeoHead";
 import ConfirmDialog from "@/components/shared/ConfirmDialog";
 import { supabase } from "@/integrations/supabase/client";
 import { deletePregnancyJourney } from "@/lib/savedJourney";
@@ -292,7 +293,14 @@ const AccountSettings = () => {
 
   return (
     <div className="min-h-screen bg-parchment-grain page-vignette relative overflow-x-hidden">
+      {/* Private account surface: never indexed, no canonical. */}
+      <SeoHead
+        title="Account settings | The Start of You"
+        description="Manage your saved records, journey and account with The Start of You."
+        noindex
+      />
       <MyWeekHeader />
+
       <main className="relative mx-auto w-full max-w-[720px] lg:max-w-[880px] px-4 sm:px-8 md:px-10 pt-20 sm:pt-24 lg:pt-28 pb-16 sm:pb-20">
         <p className="font-sans text-[11px] tracking-[0.22em] uppercase text-terracotta mb-3">Your account</p>
         <h1 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Data and account settings</h1>

@@ -1,5 +1,6 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import SeoHead from "@/components/seo/SeoHead";
 import TTCHero from "@/components/ttc/TTCHero";
 import TTCWhatThisCovers from "@/components/ttc/TTCWhatThisCovers";
 import TTCStages from "@/components/ttc/TTCStages";
@@ -16,8 +17,16 @@ import TTCFinalCTA from "@/components/ttc/TTCFinalCTA";
 const TTC = () => {
   return (
     <div className="min-h-screen font-sans">
+      {/* Retained legacy hub: kept for reference, never indexed, and no
+          canonical so it cannot compete with /trying-to-conceive. */}
+      <SeoHead
+        title="Trying to conceive (legacy) | The Start of You"
+        description="A retained earlier version of the trying to conceive hub from The Start of You."
+        noindex
+      />
       <Navbar />
       <main>
+
         {/* 1. Hero — tool-first with calculator + common questions */}
         <TTCHero />
 

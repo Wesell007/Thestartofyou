@@ -198,13 +198,23 @@ Recommended by Phase 30A. None of these is authorised: each needs its own approv
 
 **Entry.** 30I closed. Anything classified `not_allowed` stays permanently blocked. Review only; no approvals.
 
-### Phase 30K — human approval and initial approved corpus — FUTURE, NOT STARTED
+### Phase 30K — human approval and initial approved corpus — IN PROGRESS / PARKED, NOT COMPLETE
 
-**Entry.** 30J closed and every governance condition from 30F satisfied per article.
+**Entry.** Met. 30J closed and the governance contract from 30F is published.
 
-**Work.** The first phase in which selected articles may progress through the formal human candidate and approval process. Nothing is pre-approved before this phase.
+**Work.** The first phase in which selected articles may progress through the formal human candidate and approval process. Nothing is pre-approved before this phase. Staged: Stage 1 evidence preparation, Stage 2 human decision checkpoint, Stage 3 candidate transition, Stage 4 approval.
 
-**Exit.** A recorded, minimal approved corpus with full evidence, or a recorded decision that none qualifies.
+**Stage status.**
+
+- Phase 30K Stage 1 — COMPLETE. Digest specification `30K-content-digest-v1`, full 64-hex SHA-256 fingerprints and five per-article evidence packages prepared for `second-time-parenting`, `staying-connected-as-parents`, `calmer-evenings-after-busy-days`, `planning-family-days-out` and `simple-family-play-ideas`. 0 registry changes, 0 human-decision events, 0 source-validation events.
+- Phase 30K Stage 2 — DEFERRED PENDING HUMAN GOVERNANCE TEAM. The required real human governance roles have not yet been appointed: content owner TBD, grounding reviewer TBD, editorial/medical governance team not yet established. Sensitivity confirmation, claim-attributability, source-validation, grounding-review sign-off and `contentVersion` authorisation are all deferred. Nobody is temporarily assigned, and no owner or reviewer is inferred from founder, author, developer, editor, git history or account details. Intentional project decision, not a failed phase.
+- Phase 30K Stage 3 — NOT STARTED.
+- Phase 30K Stage 4 — NOT STARTED. Blocked additionally by the unresolved external governance evidence -> eligibility invalidation mechanism.
+
+**Resume condition for Stage 2.** Accepted content owner(s); accepted grounding reviewer(s); reviewer access to the exact article versions represented by the current evidence packages; sensitivity decisions; claim-attributability decisions; source-validation decisions; grounding-review sign-off. If substantive article content changes before then, the affected Stage 1 digest and evidence package must be refreshed before human review. Digests are not regenerated otherwise.
+
+**Exit.** Not met. A recorded, minimal approved corpus with full evidence, or a recorded decision that none qualifies. The article-grounding workstream is intentionally parked here while unrelated website, product and companion work continues. Article grounding remains blocked and the library is not grounding-ready.
+
 
 ### Phase 30G — Tier 2 low-risk general education review — COMPLETE
 

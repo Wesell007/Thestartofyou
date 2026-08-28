@@ -147,3 +147,48 @@ For a change to external source routing:
 - [x] Health-reviewed article review completed with 21 documentation-only accepted candidates, 0 registry candidate records, 0 registry changes and 0 approvals (Phase 30I)
 - [x] Safety-sensitive and not-allowed classification completed for all 89 remaining verified-live records, with 0 registry changes and 0 approvals (Phase 30J)
 
+
+**Phase 30K note (Stage 1 complete, Stage 2 deferred).** Stage 1 evidence
+preparation is complete for five articles: digest specification
+`30K-content-digest-v1`, full 64-hex SHA-256 fingerprints, per-article evidence
+packages, source-evidence and source-validation structures, human-review forms
+and governance-gap records, all in `grounding-approvals/`. Stage 2 is
+**DEFERRED PENDING HUMAN GOVERNANCE TEAM**: content owner TBD, grounding
+reviewer TBD, editorial/medical governance team not yet established, and
+sensitivity confirmation, claim-attributability, source validation,
+grounding-review sign-off and `contentVersion` authorisation all deferred. No
+person is temporarily assigned, and no owner or reviewer is inferred from
+founder, author, developer, editor, git history or account details. This is an
+intentional project decision, not a failed phase. Human-decision events remain
+0 and completed source-validation events remain 0. Registry unchanged: 206
+records (117 live, 44 draft, 45 unknown), 0 candidates, 0 approvals, the five
+batch articles still `blocked_missing_metadata` with no sensitivity, owner,
+reviewer, `contentVersion`, `reviewedDate`, `approvedBy` or `approvedAt`.
+`listGroundingEligibleSlugs()` returns `[]` and `AI_SOURCE_ROUTING_VERSION`
+remains `30B-source-routing-v1`.
+
+**Appointing the governance team is necessary but not sufficient.** Article
+grounding remains blocked for several independent reasons, all of which must be
+resolved separately:
+
+1. Stage 2 human governance decisions not yet available
+2. 0 candidate records
+3. 0 approved records
+4. external governance evidence -> eligibility invalidation mechanism
+   unresolved, which must be resolved before any Stage 4 approval
+5. Phase 30L (retrieval readiness review) not started
+6. Phase 31A (controlled grounded knowledge implementation) not started
+
+No grounding-readiness claim is made. Phase 30K overall is IN PROGRESS /
+PARKED, NOT COMPLETE, and the corpus is neither approved nor grounding-ready.
+
+**Resume condition for Stage 2.** Accepted content owner(s); accepted grounding
+reviewer(s); reviewer access to the exact article versions represented by the
+current evidence packages; sensitivity decisions; claim-attributability
+decisions; source-validation decisions; grounding-review sign-off. Digests are
+not regenerated unless substantive article content actually changes; if it
+does, the affected Stage 1 digest and evidence package must be refreshed before
+human review.
+
+- [ ] Phase 30K Stage 2 human governance decisions recorded (DEFERRED — no appointed content owner or grounding reviewer)
+- [ ] External governance evidence -> eligibility invalidation mechanism resolved (still open, blocks Stage 4)

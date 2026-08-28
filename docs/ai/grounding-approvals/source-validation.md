@@ -2,6 +2,11 @@
 
 Append-only event log. **Real source-validation events recorded: 0.**
 
+**Status: Stage 2 DEFERRED pending human governance team.** Source validation
+is deferred with the rest of the Stage 2 decisions: no appointed validator, no
+content owner, no grounding reviewer. No validation is performed or inferred,
+and the prepared structures below remain unresolved templates only.
+
 Nothing below is a completed validation. The template is an unresolved
 evidence state, structurally distinct from an immutable historical event, so a
 blank template can never be mistaken for a validation that happened.

@@ -2,6 +2,16 @@
 
 Stage 1 preparation. Unresolved evidence state, not a decision record.
 
+**Stage 2 status: DEFERRED pending human governance team.** The required real
+human governance roles have not yet been appointed: content owner TBD,
+grounding reviewer TBD, editorial/medical governance team not yet established.
+Sensitivity confirmation, claim-attributability, source validation,
+grounding-review sign-off and `contentVersion` authorisation are all deferred.
+Nobody is temporarily assigned or inferred. This Stage 1 evidence, including the
+digest below, is preserved unchanged; a digest is regenerated only if the
+substantive article content actually changes, in which case this package must be
+refreshed before human review. The article remains `blocked_missing_metadata`.
+
 ## 1. Re-verification (Stage 1)
 
 | Check | Value |

@@ -32,6 +32,7 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 | `article-grounding-tier-1-review.md` | Phase 30E Tier 1 review batch: 206 records screened (110 live, 44 draft, 52 unknown), the 12 support-journey Tier 1 corrections, six body-reviewed exclusions, zero accepted candidates, governance gaps and the recommended next phase (review only, zero articles approved) |
 | `article-grounding-safety-review.md` | Phase 30J safety-sensitive and not-allowed classification: 89 verified-live records adjudicated, 35 proposed `not_allowed`, 41 proposed `safety_sensitive`, 13 reconciliation records, full 117-record live-corpus reconciliation (review only, documentation-only proposals, zero registry changes, zero articles approved) |
 | `article-grounding-health-review.md` | Phase 30I health-reviewed article review: 57 verified-live records body-reviewed, 21 documentation-only accepted future candidates, 33 routed to Phase 30J, 2 wellbeing reconciliations, 1 later safety adjudication, source-list and governance gaps (review only, 0 registry candidate records, zero articles approved) |
+| `grounding-approvals/` | Phase 30K evidence store for the five-article initial batch: digest specification, full SHA-256 fingerprints, per-article evidence packages, append-only human-decision and source-validation logs (0 real events each). **Stage 1 complete, Stage 2 DEFERRED pending the human editorial/medical governance team**; owner and grounding reviewer TBD, nobody assigned or inferred, all five still `blocked_missing_metadata` |
 | `versioning.md` | The AI version constants, prompt fingerprints and the rules for bumping them |
 
 | `roadmap.md` | Phases 29D to 29L and the grounding track 30A to 30L plus 31A, with entry and exit criteria, plus the separate audit and redesign track |
@@ -57,6 +58,12 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 - 30J safety-sensitive and not-allowed classification (review only, 89 verified-live records adjudicated, 35 proposed not_allowed, 41 proposed safety_sensitive, 9 health_reviewed and 4 low reconciliation records, 117-record live-corpus reconciliation complete, 0 registry changes, 0 candidates, 0 approvals, AI runtime unchanged, article grounding still blocked)
 - 30H wellbeing and sensitive support review (review only, 11 verified-live records body-reviewed, 3 unknown support records still excluded, 0 accepted future wellbeing candidates, 4 routed to Phase 30I, 7 routed to Phase 30J, 0 ambiguous, 3 source-list gaps, 0 registry changes, 0 candidates, 0 approvals, AI runtime unchanged, article grounding still blocked)
 - 30I health-reviewed article review (review only, 57 unique verified-live records body-reviewed, 21 accepted future health-reviewed candidates in documentation only, 0 registry candidate records, 33 routed to Phase 30J, 2 returned to the wellbeing stream, 1 later safety adjudication required, 11 source-list gaps, 0 registry changes, 0 approvals, AI runtime unchanged, article grounding still blocked)
+
+## Open AI phases
+
+- 30K human approval and initial approved corpus — **IN PROGRESS / PARKED, NOT COMPLETE**. Stage 1 COMPLETE (evidence prepared for five articles). Stage 2 DEFERRED PENDING HUMAN GOVERNANCE TEAM (content owner TBD, grounding reviewer TBD, team not yet established; nobody assigned or inferred). Stages 3 and 4 NOT STARTED. Phase 30L NOT STARTED. Phase 31A NOT STARTED. Grounding stays blocked for several independent reasons, including the unresolved external-evidence eligibility invalidation mechanism; the corpus is not approved and not grounding-ready. Record: `grounding-approvals/README.md`.
+
+## Closed AI phases (continued)
 
 - 29F controlled pregnancy context upgrade
 - 29G permissioned memory and personalisation design (specification only)

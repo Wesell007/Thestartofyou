@@ -2,6 +2,12 @@
 
 Append-only event log. **Real human decisions recorded: 0.**
 
+**Status: Stage 2 DEFERRED pending human governance team.** No decision can be
+recorded because no content owner or grounding reviewer has been appointed
+(both TBD; the editorial/medical governance team is not yet established). No
+person is temporarily assigned or inferred. The log below stays empty until
+real appointed people make real decisions.
+
 Stage 1 creates templates and unresolved fields only. No blank, placeholder or
 synthetic entry is appended to the event log, because an empty template must
 never be mistaken for a decision that happened.

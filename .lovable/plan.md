@@ -84,17 +84,23 @@ value stays blank; no placeholder is written.
 | `docs/ai/grounding-approvals/human-decisions.md` | Append real events to the event log. |
 | `docs/ai/grounding-approvals/source-evidence.json` | Append new source-evidence states. |
 | `docs/ai/grounding-approvals/source-validation.md` | Append real validation events. |
-| `docs/ai/grounding-approvals/evidence-<slug>.md` | Replace unresolved fields with the recorded decisions and their event ids. |
+| `docs/ai/grounding-approvals/evidence-<slug>.md` | Show the current decision state and reference event ids. |
 | `docs/ai/grounding-approvals/README.md` | Update the counts and the stage marker. |
+
+The append-only decision and source-validation histories stay the authoritative
+record of what happened. The per-article evidence documents summarise current
+state and cite event ids; they never erase or rewrite history. A later change
+appends a new event that supersedes the earlier one by reference, and no
+previous human decision is silently edited.
 
 ## Hard boundaries
 
 - `src/lib/grounding/articleGroundingRegistry.ts` is not edited. Registry
   changes = 0, candidates = 0, approvals = 0,
   `listGroundingEligibleSlugs()` stays `[]`.
-- No `owner`, `reviewer`, `sensitivity`, `contentVersion`, `reviewedDate`,
-  `approvedBy`, `approvedAt` or `approvalStatus` is written to the registry in
-  Stage 2.
+- Nothing is written to the registry in Stage 2: not `owner`, `reviewer`,
+  `sensitivity`, `contentVersion`, `reviewedDate`, `approvalStatus`,
+  `approvedBy`, `approvedAt`, `approvalNotes` or `rollbackRef`.
 - `reviewedDate` keeps its `YYYY-MM-DD` contract; precise decision times live
   only in the decision history as `decisionTimestamp`.
 - No RAG, retrieval, embeddings, vector search, ingestion, chunking, runtime
@@ -102,6 +108,7 @@ value stays blank; no placeholder is written.
   `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`.
 - Digests are not regenerated. Any digest change requires a separate approval.
 - The seven-record safety-review hold is untouched.
+
 
 ## Open gate carried forward
 

@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
@@ -191,10 +192,21 @@ const AnalyticsIdentityBridge = () => {
   return null;
 };
 
+/**
+ * Sole global meta description. Helmet-managed so any route-level SeoHead
+ * description replaces it rather than duplicating it (the static tag that used
+ * to live in index.html could not be deduped by Helmet).
+ */
+const BRAND_FALLBACK_DESCRIPTION =
+  "The start of something different. We're here to guide you through one of the most important journeys of your life, clearly, calmly, and without overwhelm.";
+
 const App = () => (
   <AppErrorBoundary>
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <Helmet>
+        <meta name="description" content={BRAND_FALLBACK_DESCRIPTION} />
+      </Helmet>
       <Toaster />
       <Sonner />
       

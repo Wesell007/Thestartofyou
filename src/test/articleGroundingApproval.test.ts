@@ -9,15 +9,12 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import registrySource from "../lib/grounding/articleGroundingRegistry?raw";
-import eligibilitySource from "../lib/grounding/articleGroundingEligibility?raw";
 import { familyArticles } from "../data/familyArticleData";
 import {
   ARTICLE_GROUNDING_REGISTRY,
   getArticleGroundingRecord,
 } from "../lib/grounding/articleGroundingRegistry";
 import { listGroundingEligibleSlugs } from "../lib/grounding/articleGroundingEligibility";
-import { AI_SOURCE_ROUTING_VERSION } from "../../supabase/functions/_shared/aiVersions";
 import {
   DIGEST_SPEC_VERSION,
   PHASE_30K_BATCH,
@@ -26,7 +23,14 @@ import {
 } from "../../scripts/grounding-content-digest";
 
 const repoFile = (relative: string) =>
-  readFileSync(resolve(__dirname, "../..", relative), "utf8");
+  readFileSync(resolve(process.cwd(), relative), "utf8");
+
+const registrySource = repoFile("src/lib/grounding/articleGroundingRegistry.ts");
+const eligibilitySource = repoFile(
+  "src/lib/grounding/articleGroundingEligibility.ts",
+);
+const aiVersionsSource = repoFile("supabase/functions/_shared/aiVersions.ts");
+
 
 const manifest = JSON.parse(
   repoFile("docs/ai/grounding-approvals/content-digests.json"),

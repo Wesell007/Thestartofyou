@@ -1,0 +1,36 @@
+{
+  "digestSpecVersion": "30K-content-digest-v1",
+  "algorithm": "sha256",
+  "encoding": "hex",
+  "digestLength": 64,
+  "phase": "30K-stage-1",
+  "status": "prepared_evidence_fingerprint_only",
+  "notes": "A digest here is not review, authorisation, sensitivity confirmation, source validation, candidate status, approval or grounding eligibility. contentVersion labels are minted only by an explicit human decision and are absent at Stage 1.",
+  "digests": [
+    {
+      "slug": "second-time-parenting",
+      "contentDigest": "f8e6e8f692c610699d0c2ef3e80f179964c3b16d6963d9bde30d0991e0bd14a4",
+      "contentVersion": null
+    },
+    {
+      "slug": "staying-connected-as-parents",
+      "contentDigest": "7135b6012791f41360c13bbe71ba6f9fcca7c27985f75ab5dd8a912b7c1d07ea",
+      "contentVersion": null
+    },
+    {
+      "slug": "calmer-evenings-after-busy-days",
+      "contentDigest": "8834a7a97030d13141a95580b2b053fdddfdf3ca38a2d2bd9b4e5fe2331159d6",
+      "contentVersion": null
+    },
+    {
+      "slug": "planning-family-days-out",
+      "contentDigest": "3e0b7a50c41acba78fb9e539a46f071053d793ba74f81e189dbe6eec78b3864c",
+      "contentVersion": null
+    },
+    {
+      "slug": "simple-family-play-ideas",
+      "contentDigest": "b63336b3d8af2a838e5eff15f32271868878b568f7b196f4ab5b47f5d1a4aeb1",
+      "contentVersion": null
+    }
+  ]
+}

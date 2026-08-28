@@ -39,6 +39,23 @@ No person is temporarily assigned or inferred from any source.
   changes. If it changes before review, the Stage 1 digest must be regenerated
   and the evidence package refreshed before review.
 
+## Grounding is blocked for more than the human-team reason
+
+`docs/ai/release-gate.md` and the other governance docs must not imply that
+appointing the people would by itself make article grounding ready. The
+recorded blocker list is:
+
+- Stage 2 human governance decisions not yet available
+- 0 candidates
+- 0 approvals
+- external governance evidence -> eligibility invalidation mechanism unresolved
+  (must be resolved before Stage 4 approval)
+- Phase 30L not started
+- Phase 31A not started
+
+No readiness claim is made anywhere. Phase 30K overall is recorded as
+IN PROGRESS / PARKED, NOT COMPLETE.
+
 ## Preserved unchanged
 
 Five evidence packages, full 64-hex SHA-256 digests, `digest-specification.md`,
@@ -49,18 +66,26 @@ eligibility blocker.
 
 ## Hard boundaries
 
-- `src/lib/grounding/articleGroundingRegistry.ts` not edited. Candidates = 0,
-  approvals = 0, `listGroundingEligibleSlugs()` = `[]`. No sensitivity, owner,
-  reviewer, `contentVersion`, `reviewedDate`, `approvedBy` or `approvedAt` for
-  this batch. All five remain `blocked_missing_metadata`.
+- `src/lib/grounding/articleGroundingRegistry.ts` not edited. Registry total
+  206 (live 117, draft 44, unknown 45), candidates = 0, approvals = 0,
+  `listGroundingEligibleSlugs()` = `[]`. No sensitivity, owner, reviewer,
+  `contentVersion`, `reviewedDate`, `approvedBy` or `approvedAt` for this
+  batch. All five remain `blocked_missing_metadata`.
 - Article grounding stays disabled: no RAG, retrieval, embeddings, vector
   search, ingestion, chunking, article runtime imports, article-derived runtime
-  summaries, grounding prompt changes or source-routing changes.
+  summaries, prompt, mode, safety-rule, endpoint, source-routing, Ask,
+  companion, schema, route or SEO changes.
   `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`.
 - Human-decision events remain 0. Source-validation events remain 0.
 
 ## Verification
 
-Run the existing grounding tests (`articleGrounding`, `articleGroundingDrift`,
-`articleGroundingApproval`) plus lint and typecheck to confirm nothing outside
-documentation moved, and confirm `git status` shows only `docs/` changes.
+Run the `articleGrounding`, `articleGroundingDrift` and
+`articleGroundingApproval` tests, `npm run lint` and `npm run typecheck`.
+
+Diff check is scoped to this phase, not the whole tree: confirm every file this
+phase touches is under `docs/`. Any unrelated pre-existing non-doc working-tree
+change is reported separately and not treated as a Phase 30K change. The known
+pre-existing `previewAuthStorage.ts` prefer-const issue and the existing
+react-refresh warnings are left untouched.
+

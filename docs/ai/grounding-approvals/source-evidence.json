@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "30K-source-evidence-v1",
+  "model": "append-only history",
+  "rules": [
+    "Every source-evidence state is appended with its own stable stateId and never overwritten or edited in place.",
+    "A source change, correction, withdrawal, replacement or re-check appends a NEW state that references the state it supersedes.",
+    "An earlier approval always remains reconstructable from the exact state it referenced.",
+    "Stage 1 creates the structure only. It creates no sources and no completed validation."
+  ],
+  "stateFields": {
+    "stateId": "stable unique id, e.g. se-0001",
+    "slug": "article slug",
+    "contentDigest": "full 64-hex SHA-256 of the substantive content this evidence was gathered against",
+    "digestSpecVersion": "digest specification version",
+    "contentVersion": "authorised content version label, when one exists",
+    "recordedAt": "ISO timestamp of when this evidence state was recorded",
+    "recordedBy": "person who recorded this evidence state",
+    "sources": "array of { url, publisher, claimSupported, checkedOn, checkedBy }",
+    "supersedes": "stateId this state replaces, or null",
+    "supersededBy": "set only by appending a later state; never edited to hide history"
+  },
+  "states": [],
+  "realStateCount": 0
+}

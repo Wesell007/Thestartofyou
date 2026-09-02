@@ -130,7 +130,7 @@ const HubArticleView = ({
               items={[
                 { label: hubLabel, href: hubHref },
                 { label: topicLabel, href: topicHref },
-                { label: article.title, href: articleHref },
+                { label: article.title, href: `${topicHref}/${article.slug}` },
               ]}
             />
 

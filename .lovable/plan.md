@@ -1,6 +1,6 @@
 # WC-2A.1 — Logo Weight + Hero Priority
 
-The editor is still in plan mode, so no project files were changed. Approving this plan switches to implementation. Below is the exact, already-measured slice.
+The editor is locked in plan mode, so every attempt to write `src/assets/logo-dark.png` has been blocked and no project file has changed. Press Approve on this card (or switch the composer to build mode) and I will run the whole slice in one pass. Two corrections are carried in: the React prop is spelled `fetchPriority="high"`, and the invariant is 0 or 1 high-priority image per route (never more than 1), with routes that justify none reported as NO HIGH-PRIORITY IMAGE — INTENTIONAL.
 
 ## 1. Logo optimisation (measured, not estimated)
 

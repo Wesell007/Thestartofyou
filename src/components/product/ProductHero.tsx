@@ -145,17 +145,21 @@ const ProductHero = () => {
 
         {/* Video — the hero moment */}
         <div className="relative max-w-5xl mx-auto animate-fade-up [animation-delay:0.1s]">
-          <div className="relative rounded-3xl overflow-hidden shadow-elevated bg-card aspect-[16/10] md:aspect-[21/9]">
+          <div
+            ref={frameRef}
+            className="relative rounded-3xl overflow-hidden shadow-elevated bg-card aspect-[16/10] md:aspect-[21/9]"
+          >
             <video
-              src={journalHeroVideo}
+              ref={videoRef}
+              src={active ? journalHeroVideo : undefined}
               poster={journalCoverHand}
-              autoPlay
               loop
               muted
               playsInline
-              preload="metadata"
+              preload={active ? "auto" : "none"}
               className="w-full h-full object-cover"
             />
+
             {/* Soft bottom gradient for visual depth */}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent" />
           </div>

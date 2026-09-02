@@ -1,28 +1,32 @@
-# WC-2A.5 — Article Hero Thumbnail Source Selection
+# WC-2 — Final Closure Gate (Audit + Decision Only)
 
-Scope: create dedicated small thumbnail sources for the 44px article rows on the Pregnancy topic pages, and point only that slot at them. No responsive infrastructure, no loading-behaviour changes, no hero re-encoding. WC-2B, WC-2C and WC-3 stay closed.
+Approve this to switch me into build mode so I can run the measurement pass. No production code, assets, config or dependencies will be changed.
 
-## Verified current state
+## Scope
 
-- The 44 CSS px slot is in `src/components/pregnancy/PregnancyTopicPage.tsx` (grouped article lists): a `w-11 h-11` rounded box wrapping an `object-cover`, `loading="lazy"` image.
-- Its source comes from `resolveImage(link.href, link.image)`, which reads `HREF_IMAGE_MAP` (92 href to full-size hero mappings) with a per-topic `TOPIC_FALLBACK`.
-- The same map also feeds the "Start here" cards, which render at `aspect-[4/3]` roughly 370px wide — a legitimate large use that must keep the full-size hero.
-- On `/pregnancy/body` the grouped lists render 20 links (6 groups, capped at 4 each) resolving to **17 unique full-size heroes totalling 3,329,364 B** (159–222 KB each, ~1264px wide) purely for 44px display.
-- `resolveArticleHero` / `resolveArticleHeroBySlug` in `src/lib/articleHeroImage.ts` is a separate resolver used by article routes and MyWeek weekly reads; article hero rendering is untouched by this phase.
+Audit, measurement and a formal CLOSE / DO-NOT-CLOSE decision for WC-2. WC-2B, WC-2C and WC-3 are not started. Grounding files and `src/lib/grounding/*` are not touched.
 
-## Plan
+## Steps
 
-1. **Manifest** — Enumerate, per Pregnancy topic page (body, baby, feelings, health-and-safety, diet-and-exercise, preparing-for-baby), every asset resolved into the 44px slot: slug/href, asset path, dimensions, bytes, rendered CSS size desktop and mobile, DPR-3 requirement, whether the same asset is also used large elsewhere, and whether it is requested in the initial route window. Report the exact unique count. If the manifest does not reconcile, stop and report before writing files.
-2. **Size trial** — Generate temporary 192 / 256 / 320px-wide candidates from a representative set (skin detail, gradient, fine-edge, text-free scan imagery) and compare against the full-size source rendered in the real 44px slot at desktop DPR 1 and mobile DPR 3, plus a modest enlarged inspection. Select the single smallest width that stays fully sharp, including the hover/scale treatment. Only one width unless evidence forces more.
-3. **Encode** — JPEG q84, 4:4:4, progressive, optimize on, aspect ratio preserved, no crop change (CSS `object-fit` keeps doing the cropping). No WebP/AVIF.
-4. **Asset location** — New files only, in `src/assets/article-thumbnails/`, named `<source-basename>-thumb.jpg`. Originals untouched.
-5. **Source-selection change** — Add a thumbnail-specific map in `PregnancyTopicPage.tsx` keyed the same way as `HREF_IMAGE_MAP`, used only by the 44px row resolver, with graceful fallback to the existing full-size asset when a thumbnail is absent. `Start here` cards and every article route continue resolving the original hero. No article image schema redesign.
-6. **Route scope** — All six Pregnancy topic pages benefit through the one shared component. Trace whether TTC, IVF, First Year, Family and Toddler hubs use the same component and mapping; only include them if the identical defect is fixed by the same mapping, otherwise report them as separate later work.
-7. **Measurement** — `npm run build` + `npm run preview`, fresh context, cache disabled, desktop 1280x1800 DPR 1 and mobile 390x844 DPR 3, `/pregnancy/body` before vs after: LCP element/resource/bytes, total image bytes, affected thumbnail count and bytes, five largest image requests, indicative LCP, CLS, console errors, 4xx/5xx. Also classify the thumbnail requests as above-fold / near-fold / prefetched / lazy without changing loading behaviour.
-8. **Hero acceptance gate** — For representative articles confirm: topic row uses the new small source, article route still uses the original ~1264px hero at unchanged quality, no broken or oversized-thumbnail rendering.
-9. **Validation** — `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`. Pre-existing lint warnings left alone.
-10. **Report** — the 36-point completion report, including the WC-2A.5 CLOSE / DO-NOT-CLOSE verdict and whether WC-2 can close without WC-2B/WC-2C. Stop after the report.
+1. Freeze and verify the completed WC-2A state on disk: logo-dark.png (400x267, 19,165 B), journal-hero.mp4 (5,981,381 B) with poster-first two-gate loading intact, WC-2A.3-i (28 assets, 5,513,604 B), -ii (12 Journal photos, 3,768,903 B), -iii (5 week assets, 824,323 B), WC-2A.4 (3 PNG + 39 JPEG = 42, 4,620,506 B, 42/42 resolver integrity), WC-2A.5 (52 thumbnails, 822,683 B — source selection, not repository bytes removed).
+2. Restate the historical targeted-asset accounting exactly as agreed, naming which families are included and excluding WC-2A.5 originals from any "removed" figure.
+3. Build and serve the production output (`npm run build`, `npm run preview`), then measure each route in a fresh browser context with cache disabled, one independent run per route/viewport, at desktop 1280x1800 DPR1 and mobile 390x844 DPR3, using the previous rebaseline's bounded measurement window (navigation start, DOMContentLoaded, window load, LCP, window end, deferred-media request starts) rather than open-ended network idle.
+4. Routes resolved from `App.tsx`, no invented aliases: `/`, `/pregnancy`, `/pregnancy/body`, `/articles/heartburn-in-pregnancy`, `/journal`, `/pregnancy/week/17`, `/pregnancy/week/34`, `/pregnancy/week/35`, `/trying-to-conceive`, `/first-year/0-3-months`, `/family/play-connection`, `/toddler/12-17-months`, `/ivf`. Any route that does not resolve is reported, not substituted.
+5. Per-route/viewport table: LCP element and resource, LCP bytes, indicative LCP timing, deduplicated total initial bytes, image bytes, image request count, largest five image requests, JS/CSS/font bytes, CLS, console/page errors, 4xx/5xx responses. Source-file, encoded and transferred bytes kept conceptually separate.
+6. Confirm the two headline corrections: homepage image payload and MyWeek bytes/request count (stating plainly that lazy images still arrive later), and `/pregnancy/body` thumbnails in grouped rows with full-size assets preserved on Start here cards, hero LCP and article hero routes.
+7. Journal final state: poster asset and bytes, image bytes, Journal photo requests, mp4 request start, video bytes before activation, deferred behaviour, LCP, CLS. No reopening.
+8. Weeks 17, 34, 35: assets decode, image bytes, LCP selection, no regression, no reason to reopen the wider week library.
+9. Reassess WC-2B against the new state and quantify remaining over-delivery, separating meaningful route saving from diminishing return. Verdict A/B/C/D.
+10. Reassess WC-2C for genuinely premature critical-window loading, not normal lazy-load heuristics. Verdict A/B/C/D.
+11. Measure the seven decorative transparent PNGs' practical route impact and return BLOCKER or BACKLOG with evidence. No conversion.
+12. Re-measure the articleHeroImage JS chunk in the current build: filename, raw and transferred bytes, affected routes, measurable LCP/interaction impact, high-level root cause, and classification A/B/C.
+13. Diminishing-returns assessment across current LCP weights, route payloads, mobile behaviour, routes still affected and maintenance cost on a ~200-route editorial site.
+14. Apply the WC-2 closure criteria and return a verdict; any failed criterion returns DO NOT CLOSE with the exact blocker.
+15. If closing, record WC-2 CLOSED PASS with WC-2B and WC-2C explicitly NOT IMPLEMENTED — closed as non-blocking/backlog, plus a backlog record, and name the next Website Completion phase without starting it.
+16. Verify grounding preservation: `AI_SOURCE_ROUTING_VERSION = 30B-source-routing-v1`, 0 candidates, 0 approvals, `listGroundingEligibleSlugs() = []`, Phase 30K parked at Stage 2.
+17. Return the full carry-forward register (H.264 playback check, dead TrimesterHeroImage / TrimesterAbout / PregnancyTimeline / MyWeekChapter, WC-2A.3-ii Before-byte discrepancy, deployment SPA soft-404, articleHeroImage JS finding, seven decorative PNGs), adding only genuinely new findings, actioning none.
+18. Frozen-state validation: `npm test`, `npm run typecheck`, `npm run build`, plus lint to confirm the known baseline (1 prefer-const error, 10 react-refresh warnings), and a source-diff check showing no production edits from this gate.
 
-## Preserved and untouched
+## Output
 
-WC-2A.1 logo, WC-2A.2 journal hero video, WC-2A.3 optimised assets, WC-2A.4 MyWeek family (3 PNG / 39 JPEG, 42/42 resolver), the seven decorative alpha PNGs, grounding (`30B-source-routing-v1`, 0 candidates, 0 approvals, Phase 30K parked), and the full carry-forward register.
+The requested 35-point final report, ending with the WC-2 CLOSE / DO-NOT-CLOSE verdict, its exact supporting evidence, and the exact next recommended Website Completion phase. Stop after the report.

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { ExternalLink, BookOpen } from "lucide-react";
 import journalHeroVideo from "@/assets/video/journal-hero.mp4";
 import journalCoverHand from "@/assets/journal-cover-hand.jpg";
@@ -5,7 +6,111 @@ import botanicalTr from "@/assets/botanical-branch-tr.png";
 import botanicalBl from "@/assets/botanical-branch-bl.png";
 import { JOURNAL_PURCHASE_URL } from "@/lib/productLinks";
 
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 const ProductHero = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const [reducedMotion] = useState(prefersReducedMotion);
+  const [idleReady, setIdleReady] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  const active = !reducedMotion && idleReady && visible;
+
+  // Gate 1 — critical load has finished and the main thread is idle.
+  useEffect(() => {
+    if (reducedMotion) return;
+
+    let cancelled = false;
+    let idleHandle: number | undefined;
+    let fallbackTimer: number | undefined;
+
+    const open = () => {
+      if (!cancelled) setIdleReady(true);
+    };
+
+    const scheduleIdle = () => {
+      if (cancelled) return;
+      const ric = (window as Window & {
+        requestIdleCallback?: (cb: IdleRequestCallback, opts?: IdleRequestOptions) => number;
+      }).requestIdleCallback;
+      if (typeof ric === "function") {
+        idleHandle = ric(open, { timeout: 2000 });
+      } else {
+        fallbackTimer = window.setTimeout(open, 1200);
+      }
+    };
+
+    if (document.readyState === "complete") {
+      scheduleIdle();
+    } else {
+      window.addEventListener("load", scheduleIdle, { once: true });
+    }
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", scheduleIdle);
+      if (fallbackTimer !== undefined) window.clearTimeout(fallbackTimer);
+      if (idleHandle !== undefined) {
+        const cic = (window as Window & { cancelIdleCallback?: (h: number) => void }).cancelIdleCallback;
+        if (typeof cic === "function") cic(idleHandle);
+      }
+    };
+  }, [reducedMotion]);
+
+  // Gate 2 — the hero is in or near the viewport.
+  useEffect(() => {
+    if (reducedMotion) return;
+    const el = frameRef.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.01, rootMargin: "200px 0px" },
+    );
+    observer.observe(el);
+
+    return () => observer.disconnect();
+  }, [reducedMotion]);
+
+  // Both gates open — attach the source and start playback.
+  useEffect(() => {
+    if (!active) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    let cancelled = false;
+    video.muted = true;
+    const play = () => {
+      if (cancelled) return;
+      const promise = video.play();
+      if (promise !== undefined) promise.catch(() => undefined);
+    };
+
+    if (video.readyState >= 2) {
+      play();
+    } else {
+      video.addEventListener("loadeddata", play, { once: true });
+    }
+
+    return () => {
+      cancelled = true;
+      video.removeEventListener("loadeddata", play);
+    };
+  }, [active]);
+
+
   return (
     <section className="relative bg-parchment overflow-hidden">
       {/* Top spacer for navbar */}
@@ -40,17 +145,21 @@ const ProductHero = () => {
 
         {/* Video — the hero moment */}
         <div className="relative max-w-5xl mx-auto animate-fade-up [animation-delay:0.1s]">
-          <div className="relative rounded-3xl overflow-hidden shadow-elevated bg-card aspect-[16/10] md:aspect-[21/9]">
+          <div
+            ref={frameRef}
+            className="relative rounded-3xl overflow-hidden shadow-elevated bg-card aspect-[16/10] md:aspect-[21/9]"
+          >
             <video
-              src={journalHeroVideo}
+              ref={videoRef}
+              src={active ? journalHeroVideo : undefined}
               poster={journalCoverHand}
-              autoPlay
               loop
               muted
               playsInline
-              preload="metadata"
+              preload={active ? "auto" : "none"}
               className="w-full h-full object-cover"
             />
+
             {/* Soft bottom gradient for visual depth */}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent" />
           </div>

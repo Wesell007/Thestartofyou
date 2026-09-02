@@ -18,6 +18,7 @@ import {
   type ToddlerArticleTopic,
 } from "@/data/toddlerArticleData";
 import ToddlerArticleCard from "@/components/toddler/article/ToddlerArticleCard";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
 
 interface Props {
   config: ToddlerTopicConfig;
@@ -80,32 +81,16 @@ const ToddlerTopicPage = ({ config }: Props) => {
 
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
             {/* Breadcrumb outside the hero card */}
-            <nav
-              aria-label="Breadcrumb"
-              className="mb-10 md:mb-12 font-sans text-[12.5px] font-light"
-            >
-              <ol
-                className="flex items-center gap-1.5 flex-wrap"
-                style={{ color: deepSoft }}
-              >
-                <li>
-                  <Link
-                    to="/toddler"
-                    className="inline-flex items-center gap-1.5 hover:underline underline-offset-4 transition-colors"
-                    style={{ color: accent }}
-                  >
-                    <Home size={12} strokeWidth={1.8} aria-hidden />
-                    Toddler
-                  </Link>
-                </li>
-                <li aria-hidden="true">
-                  <ChevronRight size={13} strokeWidth={1.6} />
-                </li>
-                <li aria-current="page" style={{ color: deep }}>
-                  {config.title}
-                </li>
-              </ol>
-            </nav>
+            <Breadcrumbs
+              tone="section"
+              showHomeIcon
+              className="mb-10 md:mb-12 font-sans"
+              colors={{ base: deepSoft, link: accent, current: deep }}
+              items={[
+                { label: "Toddler", href: "/toddler" },
+                { label: config.title, href: `/toddler/${config.slug}` },
+              ]}
+            />
 
             {/* Parchment hero card — image-led split */}
             <div

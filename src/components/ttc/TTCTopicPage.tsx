@@ -90,6 +90,7 @@ import imgTTCIn30s from "@/assets/ttc-in-your-30s.jpg";
 import imgTTCAfter35 from "@/assets/ttc-after-35.jpg";
 import imgEmotionalPressureAge from "@/assets/ttc-emotional-pressure-age.jpg";
 import imgPartnerSupportTTC from "@/assets/ttc-partner-support.jpg";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
 
 
 interface Props {
@@ -279,16 +280,14 @@ const TTCTopicPage = ({ config, heroImage }: Props) => {
       <main className="overflow-hidden">
         {/* Breadcrumb */}
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl pt-[100px] sm:pt-[116px] md:pt-[128px]">
-          <nav
-            aria-label="Breadcrumb"
-            className="font-sans text-[12px] font-light tracking-wide text-muted-foreground"
-          >
-            <Link to="/trying-to-conceive" className="hover:text-foreground transition-colors">
-              The TTC Guide
-            </Link>
-            <span className="mx-2 opacity-50">›</span>
-            <span className="text-foreground/80">{config.eyebrow}</span>
-          </nav>
+          <Breadcrumbs
+            tone="section"
+            className="font-sans tracking-wide"
+            items={[
+              { label: "The TTC Guide", href: "/trying-to-conceive" },
+              { label: config.eyebrow, href: `/trying-to-conceive/${config.slug}` },
+            ]}
+          />
         </div>
 
         {/* 1. HERO */}

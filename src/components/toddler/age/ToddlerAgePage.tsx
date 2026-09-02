@@ -11,8 +11,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import {
   ToddlerAgeConfig,
   TODDLER_AGE_INDEX,
   TODDLER_TOPIC_LABELS,

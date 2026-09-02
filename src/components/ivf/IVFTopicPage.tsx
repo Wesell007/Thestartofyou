@@ -43,6 +43,7 @@ import imgChemical from "@/assets/ttc-chemical-pregnancy.jpg";
 import imgEmotionalCard from "@/assets/guidance-card-emotional.jpg";
 import imgSupport from "@/assets/guidance-support.jpg";
 import imgPregnancy from "@/assets/pregnancy-journey.jpg";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
 
 // Per-stage theme — all lilac family, shifted by stage
 type IVFTheme = { accentHsl: string; tintHsl: string; icon: LucideIcon };
@@ -179,16 +180,14 @@ const IVFTopicPage = ({ config }: Props) => {
       <main className="overflow-hidden">
         {/* Breadcrumb */}
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl pt-[100px] sm:pt-[116px] md:pt-[128px]">
-          <nav
-            aria-label="Breadcrumb"
-            className="font-sans text-[12px] font-light tracking-wide text-muted-foreground"
-          >
-            <Link to="/ivf" className="hover:text-foreground transition-colors">
-              IVF
-            </Link>
-            <span className="mx-2 opacity-50">›</span>
-            <span className="text-foreground/80">{config.eyebrow}</span>
-          </nav>
+          <Breadcrumbs
+            tone="section"
+            className="font-sans tracking-wide"
+            items={[
+              { label: "IVF", href: "/ivf" },
+              { label: config.eyebrow, href: `/ivf/${config.slug}` },
+            ]}
+          />
         </div>
 
         {/* HERO */}

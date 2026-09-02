@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { WeekData } from "@/data/weekData";
 import WeekIllustration from "@/components/week/WeekIllustration";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
 
 interface Props {
   data: WeekData;
@@ -18,13 +19,15 @@ const WeekHero = ({ data, prevWeek, nextWeek }: Props) => {
       <div className="bg-gradient-to-br from-sage/18 via-sage-light/25 to-lavender/15 pt-24 pb-28 md:pt-32 md:pb-36">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl text-center">
           {/* Breadcrumb */}
-          <nav className="flex items-center justify-center gap-2 mb-6 font-sans text-xs font-light text-muted-foreground tracking-wide">
-            <Link to="/pregnancy" className="hover:text-foreground transition-colors">Pregnancy</Link>
-            <span className="text-muted-foreground/40">›</span>
-            <Link to={data.trimesterPath} className="hover:text-foreground transition-colors">{data.trimesterLabel}</Link>
-            <span className="text-muted-foreground/40">›</span>
-            <span className="text-foreground font-normal">Week {data.week}</span>
-          </nav>
+          <Breadcrumbs
+            tone="section"
+            className="flex justify-center mb-6"
+            items={[
+              { label: "Pregnancy", href: "/pregnancy" },
+              { label: data.trimesterLabel, href: data.trimesterPath },
+              { label: `Week ${data.week}`, href: `/pregnancy/week/${data.week}` },
+            ]}
+          />
 
           {/* Title */}
           <h1 className="font-serif text-[2.25rem] sm:text-5xl md:text-6xl text-foreground leading-tight mb-4 tracking-tight">

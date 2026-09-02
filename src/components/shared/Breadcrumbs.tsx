@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
@@ -17,6 +17,7 @@ type BreadcrumbsProps = {
   tone?: BreadcrumbTone;
   className?: string;
   colors?: BreadcrumbColors;
+  showHomeIcon?: boolean;
 };
 
 const toneStyles: Record<BreadcrumbTone, { list: string; link: string }> = {
@@ -30,7 +31,7 @@ const toneStyles: Record<BreadcrumbTone, { list: string; link: string }> = {
   },
 };
 
-const Breadcrumbs = ({ items, tone = "article", className, colors }: BreadcrumbsProps) => {
+const Breadcrumbs = ({ items, tone = "article", className, colors, showHomeIcon = false }: BreadcrumbsProps) => {
   if (!items || items.length === 0) {
     return null;
   }
@@ -56,9 +57,12 @@ const Breadcrumbs = ({ items, tone = "article", className, colors }: Breadcrumbs
                 ) : (
                   <Link
                     to={item.href}
-                    className={styles.link}
+                    className={cn(styles.link, showHomeIcon && index === 0 && "inline-flex items-center gap-1.5")}
                     style={colors?.link ? { color: colors.link } : undefined}
                   >
+                    {showHomeIcon && index === 0 && (
+                      <Home size={12} strokeWidth={1.8} aria-hidden="true" />
+                    )}
                     {item.label}
                   </Link>
                 )}

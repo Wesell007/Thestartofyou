@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ChevronRight, Home, Heart } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronRight, Heart } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SeoHead from "@/components/seo/SeoHead";
@@ -11,6 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import {
   ToddlerAgeConfig,
   TODDLER_AGE_INDEX,
@@ -77,32 +78,16 @@ const ToddlerAgePage = ({ config }: Props) => {
           />
 
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl lg:max-w-6xl relative z-10">
-            <nav
-              aria-label="Breadcrumb"
-              className="mb-10 md:mb-12 font-sans text-[12.5px] font-light"
-            >
-              <ol
-                className="flex items-center gap-1.5 flex-wrap"
-                style={{ color: deepSoft }}
-              >
-                <li>
-                  <Link
-                    to="/toddler"
-                    className="inline-flex items-center gap-1.5 hover:underline underline-offset-4 transition-colors"
-                    style={{ color: accent }}
-                  >
-                    <Home size={12} strokeWidth={1.8} aria-hidden />
-                    Toddler
-                  </Link>
-                </li>
-                <li aria-hidden="true">
-                  <ChevronRight size={13} strokeWidth={1.6} />
-                </li>
-                <li aria-current="page" style={{ color: deep }}>
-                  {config.title}
-                </li>
-              </ol>
-            </nav>
+            <Breadcrumbs
+              tone="section"
+              showHomeIcon
+              className="mb-10 md:mb-12 font-sans"
+              colors={{ base: deepSoft, link: accent, current: deep }}
+              items={[
+                { label: "Toddler", href: "/toddler" },
+                { label: config.title, href: `/toddler/${config.slug}` },
+              ]}
+            />
 
             <div
               className="relative bg-parchment rounded-[28px] border p-6 sm:p-8 md:p-10 lg:p-12"

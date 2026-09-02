@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ChevronRight, Home, Heart } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronRight, Heart } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SeoHead from "@/components/seo/SeoHead";

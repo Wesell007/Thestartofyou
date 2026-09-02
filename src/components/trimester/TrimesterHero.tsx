@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import { Calendar, ArrowDown, ChevronRight } from "lucide-react";
+import { Calendar, ArrowDown } from "lucide-react";
 import botanicalTr from "@/assets/botanical-branch-tr.png";
 import type { TrimesterData } from "@/data/trimesterData";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";

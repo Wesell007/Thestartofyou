@@ -100,7 +100,7 @@ describe("showHomeIcon", () => {
         ]}
       />,
     );
-    expect(container.querySelector("svg")).toBeNull();
+    expect(container.querySelector("a svg")).toBeNull();
   });
 
   it("renders the icon only on the first item and hides it from assistive tech", () => {

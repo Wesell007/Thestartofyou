@@ -19,6 +19,17 @@ Generate temporary candidates in `/tmp` with ffmpeg, same duration, crop, speed,
 
 For each candidate report dimensions, codec, bitrate, exact bytes, percentage reduction, artefacts, and compatibility. Selection rule: lowest weight that still looks premium on desktop, high-DPI desktop, and mobile — inspected via extracted frames at first scene, a motion-heavy scene, skin tones, gradients/shadows, fine journal detail, and the final scene, compared against the original. If 1080p at the lower bitrates degrades visibly, step up a tier rather than shipping a soft hero. The chosen encode replaces `src/assets/video/journal-hero.mp4` in place (same path, same filename), so no import changes are needed.
 
+**Candidates already produced in `/tmp` (read-only work, project untouched):** all 1920x1080 H.264 High@4.0, yuv420p, faststart, audio stripped, same 15.05s footage.
+
+| Target | Bytes | Actual bitrate | Reduction | Y-PSNR avg / min vs original |
+| --- | --- | --- | --- | --- |
+| 2.5 Mbit/s | 4,165,692 | 2.21 Mbit/s | -88.6% | 42.09 / 38.92 |
+| 3.5 Mbit/s | 5,981,381 | 3.18 Mbit/s | -83.6% | 43.50 / 41.13 |
+| 4.5 Mbit/s | 7,784,039 | 4.13 Mbit/s | -78.7% | 44.34 / 42.50 |
+
+Frame comparisons (first scene, motion-heavy scene, skin tones, embossed journal lettering, final scene) show no visible artefacts on any tier at display size; the 2.5 tier's worst-case motion frame drops to 38.9 dB, so the intended selection is the **3.5 Mbit/s encode (5,981,381 bytes, -83.6%)** — the lowest weight that keeps a comfortable quality floor on motion for a premium hero. Final confirmation happens against the in-page rendering during implementation.
+
+
 ### 2. Poster-first loading in ProductHero
 
 Presentation-only change inside `ProductHero.tsx`:

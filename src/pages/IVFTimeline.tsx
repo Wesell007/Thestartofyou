@@ -4,6 +4,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import IVFTimelineResult from "@/components/ivf/IVFTimelineResult";
 import SeoHead from "@/components/seo/SeoHead";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import { HOME_CRUMB, IVF_CRUMB } from "@/lib/seo/journeyCrumbs";
 import { addDays, isAfter, isBefore, isValid, startOfDay } from "date-fns";
 
 const TIMELINE_SEO = (
@@ -70,6 +72,17 @@ const IVFTimeline = () => {
     <div className="min-h-screen bg-parchment">
       {TIMELINE_SEO}
       <Navbar />
+      <div className="container mx-auto px-6 md:px-10 max-w-5xl pt-24 md:pt-28">
+        <Breadcrumbs
+          tone="section"
+          className="font-sans tracking-wide"
+          items={[
+            HOME_CRUMB,
+            IVF_CRUMB,
+            { label: "IVF timeline", href: "/ivf-timeline" },
+          ]}
+        />
+      </div>
       <IVFTimelineResult transferDate={transferDate} transferType={transferType} />
       <Footer />
     </div>

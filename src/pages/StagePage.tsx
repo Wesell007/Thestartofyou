@@ -11,6 +11,8 @@ import { ivfStages } from "@/data/ivfStageData";
 import { firstYearStages } from "@/data/firstYearStageData";
 import NotFound from "@/pages/NotFound";
 import AskLink from "@/components/shared/AskLink";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import { HOME_CRUMB, TTC_CRUMB } from "@/lib/seo/journeyCrumbs";
 
 // Registry of all stage data by journey prefix
 const stageRegistry: Record<string, Record<string, StageData>> = {
@@ -47,6 +49,13 @@ const stageSeoAllowlist: Record<
   },
 };
 
+// Breadcrumb allowlist mirrors the confirmed indexable TTC stage routes.
+const breadcrumbStageAllowlist = [
+  "trying-to-conceive/understanding-your-cycle",
+  "trying-to-conceive/timing-and-tracking",
+  "trying-to-conceive/waiting-and-testing",
+];
+
 const StagePage = () => {
   const { journey, stage } = useParams<{ journey: string; stage: string }>();
   const stageMap = journey ? stageRegistry[journey] : undefined;
@@ -55,6 +64,11 @@ const StagePage = () => {
   if (!data) return <NotFound />;
 
   const seo = stageSeoAllowlist[`${journey}/${stage}`];
+  // Breadcrumbs are limited to the same confirmed TTC allowlist; generic
+  // wildcard stage output stays breadcrumb-free.
+  const showBreadcrumbs =
+    journey === "trying-to-conceive" &&
+    breadcrumbStageAllowlist.includes(`${journey}/${stage}`);
 
   return (
     <div className="min-h-screen font-sans">
@@ -74,6 +88,17 @@ const StagePage = () => {
             <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-sage-bg/30 blur-3xl" />
           </div>
           <div className="container mx-auto px-6 md:px-10 max-w-4xl relative z-10 text-center">
+            {showBreadcrumbs && (
+              <Breadcrumbs
+                tone="section"
+                className="flex justify-center mb-6 font-sans tracking-wide"
+                items={[
+                  HOME_CRUMB,
+                  TTC_CRUMB,
+                  { label: data.title, href: `/${journey}/${stage}` },
+                ]}
+              />
+            )}
             <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-4">
               {data.journeyLabel}
             </p>

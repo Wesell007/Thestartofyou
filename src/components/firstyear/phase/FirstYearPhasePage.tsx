@@ -6,6 +6,8 @@ import SeoHead from "@/components/seo/SeoHead";
 import { toMetaDescription } from "@/lib/seo/metaDescription";
 import type { PhaseConfig } from "@/data/firstYearPhaseData";
 import AskLink from "@/components/shared/AskLink";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import { HOME_CRUMB, FIRST_YEAR_CRUMB } from "@/lib/seo/journeyCrumbs";
 
 // Resolve hero asset via Vite's import.meta.glob (eager URL imports).
 const heroAssets = import.meta.glob("@/assets/firstyear-stage-*.jpg", {
@@ -48,6 +50,15 @@ const PhaseHero = ({ config }: Props) => {
       </div>
 
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl relative">
+        <Breadcrumbs
+          tone="section"
+          className="mb-8 font-sans tracking-wide"
+          items={[
+            HOME_CRUMB,
+            FIRST_YEAR_CRUMB,
+            { label: config.title, href: `/first-year/${config.slug}` },
+          ]}
+        />
         <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-14 items-center">
           <div>
             <div className="flex items-center gap-2 mb-6">

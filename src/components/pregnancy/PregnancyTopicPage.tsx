@@ -87,6 +87,8 @@ import imgMaternityLeave from "@/assets/article-hero-maternity-leave.jpg";
 interface Props {
   config: PregnancyTopicPageConfig;
 }
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import { HOME_CRUMB, PREGNANCY_CRUMB } from "@/lib/seo/journeyCrumbs";
 
 // ─── Per-topic theme system ──────────────────────────────────────────────
 // Each topic shares the same premium template but expresses its own colour,
@@ -349,6 +351,15 @@ const PregnancyTopicPage = ({ config }: Props) => {
           />
 
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">
+            <Breadcrumbs
+              tone="section"
+              className="mb-8 font-sans tracking-wide"
+              items={[
+                HOME_CRUMB,
+                PREGNANCY_CRUMB,
+                { label: config.title, href: `/pregnancy/${config.slug}` },
+              ]}
+            />
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
               {/* Left text */}
               <div className="md:col-span-6 lg:col-span-6 order-2 md:order-1">

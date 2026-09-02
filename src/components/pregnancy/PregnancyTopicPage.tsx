@@ -8,6 +8,7 @@ import {
   LIVE_TOPIC_SLUGS,
   PregnancyTopicSlug,
 } from "@/data/pregnancyTopicData";
+import { resolveRowThumb } from "@/lib/pregnancyRowThumbnails";
 
 // Hero & decorative
 import topicBodyHero from "@/assets/topic-body-hero.jpg";

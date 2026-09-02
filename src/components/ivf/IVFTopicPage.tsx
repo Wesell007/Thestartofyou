@@ -254,6 +254,7 @@ const IVFTopicPage = ({ config }: Props) => {
                     alt=""
                     aria-hidden="true"
                     loading="eager"
+                    fetchPriority="high"
                     className="relative w-full h-auto rounded-[2rem] object-cover block shadow-[0_40px_80px_-50px_rgba(0,0,0,0.4)]"
                     style={{ aspectRatio: "1 / 1" }}
                   />

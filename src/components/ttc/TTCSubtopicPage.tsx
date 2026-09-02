@@ -282,6 +282,7 @@ const TTCSubtopicPage = ({ config, heroImage }: Props) => {
                     alt=""
                     aria-hidden="true"
                     loading="eager"
+                    fetchPriority="high"
                     className="relative w-full h-auto rounded-[1.75rem] object-cover border"
                     style={{ aspectRatio: "1 / 1", borderColor: accentBorder }}
                   />

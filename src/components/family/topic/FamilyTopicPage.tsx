@@ -174,6 +174,7 @@ const FamilyTopicPage = ({ config }: Props) => {
                           width={1024}
                           height={1216}
                           loading="eager"
+                          fetchPriority="high"
                           className="absolute inset-0 h-full w-full object-cover"
                           style={{ objectPosition: "50% 40%" }}
                         />

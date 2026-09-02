@@ -17,6 +17,7 @@ const ArticleHeroImage = ({ data }: Props) => {
               src={hero.src}
               alt={hero.alt}
               loading="eager"
+              fetchPriority="high"
               decoding="async"
               className="w-full h-auto aspect-[4/3] md:aspect-[16/9] object-cover"
             />

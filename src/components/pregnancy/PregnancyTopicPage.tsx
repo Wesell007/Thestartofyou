@@ -378,6 +378,7 @@ const PregnancyTopicPage = ({ config }: Props) => {
                     width={1024}
                     height={1024}
                     loading="eager"
+                    fetchPriority="high"
                     className="relative w-full h-auto rounded-[2rem] object-cover"
                     style={{ aspectRatio: "1 / 1" }}
                   />

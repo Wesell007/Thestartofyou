@@ -130,6 +130,7 @@ const ToddlerTopicPage = ({ config }: Props) => {
                         src={config.heroImage}
                         alt={`${config.title} — Toddler`}
                         loading="eager"
+                        fetchPriority="high"
                         className="absolute inset-0 h-full w-full object-cover"
                         style={{ objectPosition: "center 30%" }}
                       />

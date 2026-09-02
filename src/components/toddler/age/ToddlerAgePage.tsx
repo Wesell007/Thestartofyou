@@ -130,6 +130,7 @@ const ToddlerAgePage = ({ config }: Props) => {
                         className="absolute inset-0 h-full w-full object-cover"
                         style={{ objectPosition: "center 30%" }}
                         loading="eager"
+                        fetchPriority="high"
                         decoding="async"
                       />
                     </div>

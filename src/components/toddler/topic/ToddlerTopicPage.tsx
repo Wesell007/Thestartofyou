@@ -87,6 +87,7 @@ const ToddlerTopicPage = ({ config }: Props) => {
               className="mb-10 md:mb-12 font-sans"
               colors={{ base: deepSoft, link: accent, current: deep }}
               items={[
+                { label: "Home", href: "/" },
                 { label: "Toddler", href: "/toddler" },
                 { label: config.title, href: `/toddler/${config.slug}` },
               ]}

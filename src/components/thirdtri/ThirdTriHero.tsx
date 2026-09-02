@@ -41,6 +41,7 @@ const ThirdTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: P
           tone="section"
           className="flex justify-center mb-7"
           items={[
+            { label: "Home", href: "/" },
             { label: "Pregnancy", href: "/pregnancy" },
             { label, href: "/pregnancy/third-trimester" },
           ]}

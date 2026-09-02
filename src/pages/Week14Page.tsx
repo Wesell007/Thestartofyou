@@ -52,8 +52,9 @@ const Hero = () => (
           tone="section"
           className="flex justify-center mb-6 sm:mb-7 font-sans text-[12px] font-normal text-foreground/65"
           items={[
+            { label: "Home", href: "/" },
             { label: "Pregnancy", href: "/pregnancy" },
-            { label: "Week by week", href: "/pregnancy/second-trimester" },
+            { label: "Second trimester", href: "/pregnancy/second-trimester" },
             { label: "Week 14", href: "/pregnancy/week/14" },
           ]}
         />

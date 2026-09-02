@@ -16,6 +16,8 @@ import {
 } from "@/data/firstYearArticleData";
 import FirstYearArticleCard from "@/components/firstyear/article/FirstYearArticleCard";
 import AskLink from "@/components/shared/AskLink";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import { HOME_CRUMB, FIRST_YEAR_CRUMB } from "@/lib/seo/journeyCrumbs";
 
 // First Year topic pages are photo-led and calm. No botanical sprigs or
 // pregnancy-style decorative motifs — quietness comes from soft tints,
@@ -155,6 +157,15 @@ const FirstYearTopicPage = ({ config }: Props) => {
             aria-hidden
           />
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">
+            <Breadcrumbs
+              tone="section"
+              className="mb-8 font-sans tracking-wide"
+              items={[
+                HOME_CRUMB,
+                FIRST_YEAR_CRUMB,
+                { label: config.title, href: slugToPath(config.slug) },
+              ]}
+            />
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-center">
               {/* Copy */}
               <div className="md:col-span-6 lg:col-span-6 order-2 md:order-1">

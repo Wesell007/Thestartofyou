@@ -126,6 +126,7 @@ const HubArticleView = ({
               className="mb-10 md:mb-12 font-sans"
               colors={{ base: deepSoft, link: accent, current: deep }}
               items={[
+                { label: "Home", href: "/" },
                 { label: hubLabel, href: hubHref },
                 { label: topicLabel, href: topicHref },
                 { label: article.title, href: `${topicHref}/${article.slug}` },

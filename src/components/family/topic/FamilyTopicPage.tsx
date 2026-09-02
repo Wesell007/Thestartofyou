@@ -126,6 +126,7 @@ const FamilyTopicPage = ({ config }: Props) => {
               className="mb-10 md:mb-12 font-sans"
               colors={{ base: deepSoft, link: accent, current: deep }}
               items={[
+                { label: "Home", href: "/" },
                 { label: "Family", href: "/family" },
                 { label: config.title, href: `/family/${config.slug}` },
               ]}

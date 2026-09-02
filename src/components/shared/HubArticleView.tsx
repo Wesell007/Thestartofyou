@@ -13,6 +13,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ReadingProgressBar from "@/components/shared/ReadingProgressBar";
 import type { ReactNode } from "react";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
 
 export interface HubArticleViewArticle {
   slug: string;
@@ -121,44 +122,17 @@ const HubArticleView = ({
             <div className={heroImage ? "grid gap-10 md:gap-12 lg:gap-16 md:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] md:items-center" : ""}>
               <div className={heroImage ? "max-w-[36rem]" : ""}>
             {/* Breadcrumb */}
-            <nav
-              aria-label="Breadcrumb"
-              className="mb-10 md:mb-12 font-sans text-[12.5px] font-light"
-            >
-              <ol
-                className="flex items-center gap-1.5 flex-wrap"
-                style={{ color: deepSoft }}
-              >
-                <li>
-                  <Link
-                    to={hubHref}
-                    className="inline-flex items-center gap-1.5 hover:underline underline-offset-4 transition-colors"
-                    style={{ color: accent }}
-                  >
-                    <Home size={12} strokeWidth={1.8} aria-hidden />
-                    {hubLabel}
-                  </Link>
-                </li>
-                <li aria-hidden>
-                  <ChevronRight size={13} strokeWidth={1.6} />
-                </li>
-                <li>
-                  <Link
-                    to={topicHref}
-                    className="hover:underline underline-offset-4 transition-colors"
-                    style={{ color: accent }}
-                  >
-                    {topicLabel}
-                  </Link>
-                </li>
-                <li aria-hidden>
-                  <ChevronRight size={13} strokeWidth={1.6} />
-                </li>
-                <li aria-current="page" style={{ color: deep }}>
-                  {article.title}
-                </li>
-              </ol>
-            </nav>
+            <Breadcrumbs
+              tone="section"
+              showHomeIcon
+              className="mb-10 md:mb-12 font-sans"
+              colors={{ base: deepSoft, link: accent, current: deep }}
+              items={[
+                { label: hubLabel, href: hubHref },
+                { label: topicLabel, href: topicHref },
+                { label: article.title, href: articleHref },
+              ]}
+            />
 
             {/* Eyebrow */}
             <div className="flex items-center gap-3 mb-5">

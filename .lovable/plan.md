@@ -1,35 +1,59 @@
-# WC-2A — Post-Optimisation Rebaseline (audit, measurement, decision only)
+# WC-2A.4 — MyWeek Illustration Asset Optimisation + Homepage Loading Fix
 
-No production code, assets, config, or dependencies change. No WC-2B, WC-2C or WC-3 work begins. The output is a report plus a verdict.
+Scope is limited to the 42 MyWeek weekly-baby illustrations, their single resolver, and the one below-fold eager-loading defect. No other assets, no responsive infrastructure, no WC-2A.5, WC-2B, WC-2C or WC-3 work.
 
-## What this phase does
+## Confirmed current state (measured this turn)
 
-1. **Freeze verification.** Re-measure the frozen WC-2A state and confirm each stated figure: `logo-dark.png` 400x267 / 19,165 B, `journal-hero.mp4` 5,981,381 B with poster-first two-gate loading intact, the 28-file WC-2A.3-i batch at 5,513,604 B, the 12-file WC-2A.3-ii batch at 3,768,903 B, the 5-file WC-2A.3-iii batch at 824,323 B. Confirm the combined targeted baseline 114,673,945 B → 16,088,211 B and report it explicitly as repository/targeted-asset weight, never as a per-route saving.
-2. **New production baseline.** `npm run build`, then serve the built output with `npm run preview`. Every measurement uses a fresh browser context with cache disabled, desktop 1280x1800 and mobile 390x844 measured in independent runs, with the mobile DPR used stated explicitly (DPR 3 for rendered-pixel requirements unless a lower value is justified and documented).
-3. **Route set resolved from `src/App.tsx`,** no invented aliases: `/`, `/pregnancy`, `/pregnancy/body`, `/articles/heartburn-in-pregnancy`, `/journal`, `/pregnancy/week/17`, `/pregnancy/week/34`, `/pregnancy/week/35`, `/trying-to-conceive`, `/first-year/0-3-months`, plus one real Family route, one real Toddler age/topic route, and one IVF route if it materially uses the shared image system.
-4. **Per route and viewport:** LCP element, LCP resource and its bytes, indicative LCP timing (labelled indicative, not field data), total transferred bytes, total image bytes, image request count, largest five image requests, JS bytes, CSS bytes, font bytes where measurable, CLS, console/page errors, and any 4xx/5xx asset responses.
-5. **Residual over-delivery.** For each LCP and significant above-fold image: source dimensions, encoded bytes, CSS rendered dimensions, physical-pixel requirement at the tested DPR, source-to-required width ratio, and a class of A appropriately sized, B mildly oversized, C materially oversized, or D severely oversized. DPR is accounted for; intrinsic-vs-CSS mismatch alone is not called waste.
-6. **Mobile over-delivery quantified** for 1920px Journal photography, 1264px hero photography, pregnancy heroes, article heroes, topic heroes, week imagery and homepage imagery: bytes transferred today, dimensions actually required at the tested mobile DPR, and realistic smaller dimensions that would still render sharply.
-7. **Temporary responsive candidates** for the highest-impact over-delivered images only, written outside `src/assets` to a scratch directory, using the proven q84 / 4:4:4 / progressive / optimised recipe at justified widths (roughly 640, 960, 1280 where the rendering requirement supports them). Report current bytes, candidate width and bytes, projected mobile and desktop saving, and a visual verdict at the intended DPR.
-8. **Modern-format experiment,** temporary only, on a very small photographic sample, using tooling already present. WebP and AVIF versus the current optimised JPEG, with bytes, visual result and incremental percentage saving. If equivalent-quality encoding cannot be done reliably with existing tooling, that is reported rather than worked around; no dependency is added and `vite-imagetools` is not installed.
-9. **Premature loading analysis.** Per route: which images are requested during initial load, whether they are above fold, whether visible in the initial viewport, whether they are legitimate LCP or near-LCP resources, and whether they could have been deferred. Bytes split into ABOVE-FOLD REQUIRED versus BELOW-FOLD REQUESTED EARLY. No lazy/eager or fetchPriority attribute is changed.
-10. **`/journal` deep dive:** poster bytes, every Journal image request with above/below fold status, eager/lazy status, source dimensions, mobile rendered dimensions, responsive-sizing potential and deferred-loading potential. Network evidence confirming `journal-hero.mp4` bytes before activation equal 0, with WC-2A.2 behaviour untouched.
-11. **Homepage deep dive:** the current largest image resources on `/` and whether residual weight comes from oversized photography, myweek-baby PNG imagery, eagerly loaded below-fold content, repeated assets, or another class.
-12. **Week pages:** use 17, 34 and 35 to judge whether the wider week-image system has a real residual problem. The 126-image library is not reopened unless measurements show one.
-13. **WC-2B decision** with quantified current mobile bytes, achievable responsive bytes, absolute and percentage saving, routes benefiting, implementation complexity and maintenance cost, ending in verdict A, B, C or D.
-14. **WC-2C decision** with quantified below-fold early bytes, routes affected, unnecessary request count and likely initial-load reduction, ending in verdict A, B, C or D.
-15. **Ordering recommendation** between WC-2B and WC-2C based on residual byte cost and user-visible impact, including the option to skip one or close WC-2.
-16. **Diminishing-returns assessment** separating meaningful user-facing gain from technical perfection, weighted towards keeping the codebase maintainable.
-17. **Boundary confirmations.** `AI_SOURCE_ROUTING_VERSION = 30B-source-routing-v1`, grounding candidates 0, approvals 0, `listGroundingEligibleSlugs() = []`, Phase 30K parked at Stage 2, with `src/lib/grounding/*` and `docs/ai/grounding-approvals/*` untouched. Source diff confirmed free of rebaseline production edits; build, typecheck and tests run only to validate the frozen baseline.
+- Directory: `src/assets/myweek-weekly-babies/`, exactly **42 files**, `myweek-baby-week-01.png` … `-42.png`.
+- Exact current total: **51,827,822 B** (reconciles to the audit reference).
+- Weeks 01–03: 520x640, **RGBA with real transparency** (alpha extrema 0–255), 127,811 / 132,320 / 136,866 B.
+- Weeks 04–42: 928x1152, **RGB, no alpha, no ICC**, ~1.0–1.56 MB each.
+- Single resolver: `src/components/myweek/MyWeekBabyImage.tsx` (`import.meta.glob` over the folder, `loading="eager"`).
+- Consumers: `src/components/home/JourneyPreviewSection.tsx` (four instances: 96/112px circle, 44px circle, 36px list rows) and `src/components/myweek/MyWeekChapter.tsx` (largest real presentation: `max-w-[296px]`, aspect 13/16 → ~296x364 CSS).
 
-## Carry-forward register (recorded, not actioned)
+Maximum physical-pixel requirement at DPR 3 for the largest consumer is ~888x1092, i.e. essentially the existing 928x1152 intrinsic size. **Masters will not be resized** — this phase fixes format/encoding only.
 
-Real-browser H.264 Journal hero playback verification before final launch; dead `TrimesterHeroImage`, `TrimesterAbout`, `PregnancyTimeline` components; the historical WC-2A.3-ii per-file Before-byte discrepancy; deployment-level SPA soft-404 HTTP 200 behaviour from WC-1.
+## Plan
 
-## Deliverable
+### 1. Manifest and reconciliation
+Produce the full 42-row manifest (filename, path, format, dimensions, colour mode, alpha, ICC, bytes, consumers, route consumers, max rendered CSS size, max DPR-3 pixel need). Stop and report if the count is not exactly 42.
 
-A single report covering all 25 requested items, ending with the WC-2B verdict, the WC-2C verdict, recommended ordering, whether WC-2 can close without WC-2B, and the exact next recommended phase. Work stops after the report.
+### 2. Suitability gate
+- Weeks 01–03 carry genuine transparency and sit on gradient/circular backgrounds → **retained as PNG**, references unchanged. They contribute only ~397 KB.
+- Weeks 04–42 (39 files, RGB, no alpha) are continuous-tone watercolour illustrations → JPEG candidates.
+
+### 3. Encoding trials (scratch only, `/tmp`)
+Representative set covering early (04, 06), mid (17, 22), late (34, 40), light and darker backgrounds, fine fetus/body edge detail and watercolour gradients. Generate per representative:
+- current PNG (reference)
+- JPEG q84 / 4:4:4 / progressive / optimise
+- JPEG q88 / 4:4:4 / progressive / optimise
+- optimised PNG comparison using existing tooling only (Pillow `optimize`), no new dependencies.
+
+### 4. Premium visual gate
+Inspect each candidate at full intrinsic view, 1:1 crop, homepage rendered size (36 / 44 / 96–112 px) and the 296px MyWeek chapter size at high DPI. Check watercolour texture, edges, gradients, shadows, banding, ringing, blocking, softness and colour shift. PSNR/SSIM reported as supporting evidence only. Select q84 if visually indistinguishable; escalate to q88 where q84 shows perceptible degradation; retain PNG for any file JPEG cannot carry cleanly, and report it.
+
+### 5. Conversion and reference update
+- Write correctly named `.jpg` files (no JPEG bytes inside `.png` names) at unchanged intrinsic dimensions.
+- Update only the MyWeek resolver so the glob covers both `.png` and `.jpg` and resolves each week to its approved file (PNG retained for weeks 01–03 plus any quality-retained file).
+- Remove only superseded, fully unreferenced MyWeek PNGs. No other asset touched.
+
+### 6. Homepage loading fix
+`MyWeekBabyImage.tsx` currently hardcodes `loading="eager"` for every instance. Add a minimal optional `priority`/`eager` prop defaulting to lazy, and keep eager only where an above-fold critical image genuinely renders. All four homepage instances are below the fold (`JourneyPreviewSection` sits after hero, value-proof and branded sections), so they become `loading="lazy"`. No IntersectionObserver, no scheduler, no shared utility, no global forcing.
+
+### 7. Measurement gate
+Production `npm run build` + `vite preview`, fresh context, cache disabled, desktop 1280x1800 DPR 1 and mobile 390x844 DPR 3, before/after on `/`. Report LCP element/resource/bytes, total image bytes, MyWeek requests and bytes in the initial window, request start times, whether below-fold MyWeek images are absent from the critical window, indicative LCP, CLS, errors. Baseline: homepage image payload 5,769,991 B, MyWeek contribution 5,126,453 B.
+
+### 8. Consumer verification
+Visually verify `/` and the largest real MyWeek consumer route (MyWeek chapter view) on desktop and mobile: correct week image, crop, dimensions, detail, colour, no broken references, no decode error, no layout shift. Confirm served content types.
+
+### 9. Validation and preservation
+`npm test`, `npm run lint`, `npm run typecheck`, `npm run build` (pre-existing warnings left unchanged). Re-verify byte-exact preservation of WC-2A.1 (19,165 B), WC-2A.2 (5,981,381 B), WC-2A.3-i (5,513,604 B), WC-2A.3-ii (3,768,903 B), WC-2A.3-iii (824,323 B) and grounding frozen at `30B-source-routing-v1` with zero candidates/approvals.
+
+### 10. Reporting
+Repository 42-file weight before → after (bytes removed, percentage) reported separately from homepage initial-load impact. Record for later, not actioned: seven decorative transparent PNGs, WC-2A.5 article hero thumbnail source selection, and the existing carry-forward register. Full 36-point completion report, then stop.
 
 ## Technical notes
 
-Measurement is scripted with the pre-installed Playwright and Python imaging tooling under a scratch directory (`/tmp/`), reading the `vite preview` production server. Candidate encodes live only in that scratch directory. No file under `src/`, no route, SEO, sitemap, robots, Vite config or `package.json` entry is modified.
+- Encoder: Pillow, already in the sandbox; `quality=84|88`, `subsampling=0`, `progressive=True`, `optimize=True`, no ICC (none present in sources).
+- Resolver change is the only source edit besides the loading attribute; page components pass no new props except an explicit eager flag if an above-fold critical case is found.
+- Expected direction: very large reduction, no exact target claimed until measured.

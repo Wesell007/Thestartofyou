@@ -39,7 +39,8 @@ describe("WC-3c canonical breadcrumb hierarchies", () => {
       "src/components/ttc/TTCSubtopicPage.tsx",
     ]) {
       const src = read(f);
-      expect(src).not.toContain("The TTC Guide");
+      // the parity-only breadcrumb label is gone (hero eyebrow copy is unrelated)
+      expect(src).not.toContain('{ label: "The TTC Guide"');
       expect(src).toContain('{ label: "Trying to conceive", href: "/trying-to-conceive" }');
       expect(src).toContain('{ label: "Home", href: "/" }');
     }

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Calendar, ArrowDown, ChevronRight } from "lucide-react";
 import botanicalTr from "@/assets/botanical-branch-tr.png";
 import type { TrimesterData } from "@/data/trimesterData";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
 
 interface Props {
   data: TrimesterData;
@@ -36,18 +37,22 @@ const TrimesterHero = ({ data }: Props) => {
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10 text-center">
         {/* Breadcrumb */}
-        <nav className="flex items-center justify-center gap-2 mb-6" aria-label="breadcrumb">
-          <Link
-            to="/pregnancy"
-            className="font-sans text-xs font-light text-muted-foreground hover:text-foreground transition-colors tracking-wide"
-          >
-            Pregnancy
-          </Link>
-          <ChevronRight size={12} className="text-muted-foreground/40" />
-          <span className="font-sans text-xs font-light text-sage tracking-wide">
-            {data.label}
-          </span>
-        </nav>
+        <Breadcrumbs
+          tone="section"
+          className="flex justify-center mb-6"
+          items={[
+            { label: "Pregnancy", href: "/pregnancy" },
+            {
+              label: data.label,
+              href:
+                data.number === 1
+                  ? "/pregnancy/first-trimester"
+                  : data.number === 2
+                    ? "/pregnancy/second-trimester"
+                    : "/pregnancy/third-trimester",
+            },
+          ]}
+        />
 
         {/* Trimester label */}
         <p className="stage-label mb-4">

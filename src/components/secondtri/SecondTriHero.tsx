@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Calendar, ArrowDown, ChevronRight } from "lucide-react";
 import botanicalTr from "@/assets/botanical-branch-tr.png";
 import botanicalBl from "@/assets/botanical-branch-bl.png";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
 
 interface Props {
   label: string;
@@ -41,21 +42,14 @@ const SecondTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: 
       />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10 text-center">
-        <nav
-          className="flex items-center justify-center gap-2 mb-7"
-          aria-label="breadcrumb"
-        >
-          <Link
-            to="/pregnancy"
-            className="font-sans text-xs font-light text-muted-foreground hover:text-foreground transition-colors tracking-wide"
-          >
-            Pregnancy
-          </Link>
-          <ChevronRight size={12} className="text-muted-foreground/40" />
-          <span className="font-sans text-xs font-light text-sage tracking-wide">
-            {label}
-          </span>
-        </nav>
+        <Breadcrumbs
+          tone="section"
+          className="flex justify-center mb-7"
+          items={[
+            { label: "Pregnancy", href: "/pregnancy" },
+            { label, href: "/pregnancy/second-trimester" },
+          ]}
+        />
 
         <p className="font-sans text-[11px] font-medium tracking-[0.28em] uppercase text-sage-muted mb-5">
           {range} · {tagline}

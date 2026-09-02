@@ -35,7 +35,7 @@ describe("migrated breadcrumb shapes", () => {
       />,
     );
     const nav = screen.getByRole("navigation", { name: "Breadcrumb" });
-    expect(within(nav).getAllByRole("listitem").length).toBe(3); // 2 crumbs + 1 separator
+    expect(within(nav).getAllByRole("listitem").length).toBe(2); // separators are aria-hidden
     expect(screen.queryByRole("link", { name: "First trimester" })).toBeNull();
   });
 

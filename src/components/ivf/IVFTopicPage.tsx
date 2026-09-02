@@ -184,6 +184,7 @@ const IVFTopicPage = ({ config }: Props) => {
             tone="section"
             className="font-sans tracking-wide"
             items={[
+              { label: "Home", href: "/" },
               { label: "IVF", href: "/ivf" },
               { label: config.eyebrow, href: `/ivf/${config.slug}` },
             ]}

@@ -40,6 +40,7 @@ const TrimesterHero = ({ data }: Props) => {
           tone="section"
           className="flex justify-center mb-6"
           items={[
+            { label: "Home", href: "/" },
             { label: "Pregnancy", href: "/pregnancy" },
             {
               label: data.label,

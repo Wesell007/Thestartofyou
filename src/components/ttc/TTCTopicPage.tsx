@@ -284,7 +284,8 @@ const TTCTopicPage = ({ config, heroImage }: Props) => {
             tone="section"
             className="font-sans tracking-wide"
             items={[
-              { label: "The TTC Guide", href: "/trying-to-conceive" },
+              { label: "Home", href: "/" },
+              { label: "Trying to conceive", href: "/trying-to-conceive" },
               { label: config.eyebrow, href: `/trying-to-conceive/${config.slug}` },
             ]}
           />

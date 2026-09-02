@@ -54,12 +54,13 @@ describe("Breadcrumbs", () => {
       </MemoryRouter>,
     );
     expect(single.queryByRole("link")).toBeNull();
+    single.unmount();
 
     const empty = render(
       <MemoryRouter>
         <Breadcrumbs items={[]} />
       </MemoryRouter>,
     );
-    expect(empty.queryByRole("navigation")).toBeNull();
+    expect(empty.container.querySelector("nav")).toBeNull();
   });
 });

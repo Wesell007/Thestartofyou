@@ -1,61 +1,51 @@
-# WC-3a — Shared Breadcrumb Foundation (implementation slice)
+# WC-3b — Existing Breadcrumb Migration (parity only)
 
-Foundation only. No production page consumes the new component in this slice.
+## Verified inventory (current source, not the audit assumption)
 
-## Files created
+Confirmed by search of `src/`:
 
-1. `src/lib/seo/breadcrumbs.ts`
-2. `src/components/shared/Breadcrumbs.tsx`
-3. `src/lib/seo/breadcrumbs.test.ts`
-4. `src/components/shared/Breadcrumbs.test.tsx`
+| # | Implementation | Routes | Hierarchy today | Style | Inline colours | Target tone |
+|---|---|---|---|---|---|---|
+| 1 | `components/trimester/TrimesterHero.tsx` | `/pregnancy/:trimester` | Pregnancy › {label} | centred, xs, sage current, ChevronRight | no (class based) | section |
+| 2 | `components/firsttri/FirstTriHero.tsx` | first trimester hub | Pregnancy › {label} | same as above | no | section |
+| 3 | `components/secondtri/SecondTriHero.tsx` | second trimester hub | Pregnancy › {label} | same | no | section |
+| 4 | `components/thirdtri/ThirdTriHero.tsx` | third trimester hub | Pregnancy › {label} | same | no | section |
+| 5 | `components/week/WeekHero.tsx` | `/pregnancy/week/:week` (generic) | Pregnancy › {trimester} › Week N | centred, xs, `›` glyph, no `<ol>`, no aria-label | no | section |
+| 6 | `pages/Week1Page.tsx` … `Week42Page.tsx` (42 files) | `/pregnancy/week/1..42` | Pregnancy › Week by week › Week N | centred, 12px, `›` glyph, `aria-label="breadcrumb"`, no `<ol>` | no | section |
+| 7 | `components/ttc/TTCTopicPage.tsx` | TTC topics | The TTC Guide › {topic} | 12px muted, `›` | no | section |
+| 8 | `components/ttc/TTCSubtopicPage.tsx` | TTC subtopics | The TTC Guide › {parent} › {page} | same | no | section |
+| 9 | `components/ivf/IVFTopicPage.tsx` | IVF topics | IVF › {eyebrow} | same | no | section |
+| 10 | `components/toddler/topic/ToddlerTopicPage.tsx` | Toddler topics | Toddler › {topic} | `<ol>`, Home icon, ChevronRight | yes (`accent`, `deep`, `deepSoft`) | section + `colors` |
+| 11 | `components/toddler/age/ToddlerAgePage.tsx` | Toddler age pages | Toddler › {age} | same | yes | section + `colors` |
+| 12 | `components/family/topic/FamilyTopicPage.tsx` | Family topics | Family › {topic} | same | yes | section + `colors` |
+| 13 | `components/shared/HubArticleView.tsx` | hub articles | {hub} › {topic/current} | same | yes | section + `colors` |
+| 14 | `components/article/ArticleHeader.tsx` | legacy article pages | The Pregnancy Map › {topic} (both links, no current crumb) | uppercase micro | no | article — see blocker |
+| 15 | `components/article/flagship/FlagshipHero.tsx` | flagship articles | The Pregnancy Map / The TTC Guide › {topic} (both links) | uppercase micro | no | article — see blocker |
 
-Files modified: none. `SeoHead`, `App.tsx`, sitemap, robots, navbar, footer, homepage, `/ask`, all existing breadcrumb consumers, companion and grounding stay untouched.
+Total distinct implementations: 15 (counting the 42 week pages as one repeated pattern; 56 files touched).
 
-## Data contract
+## Blocker to decide before migrating items 14 and 15
 
-```ts
-export type BreadcrumbItem = { label: string; href: string };
-```
+`ArticleHeader` and `FlagshipHero` render breadcrumb trails whose **last item is a link to the topic hub** — the article itself is not a crumb. The shared component always renders the final item as a non-clickable `aria-current` span, so a straight migration would silently break the topic link.
 
-Every item, including the current page, carries its canonical internal href. The component renders the final item as non-clickable; the helper still emits its absolute URL. Nothing reads `window.location`.
+Recommended handling (no shared-API change, no hierarchy change): **leave items 14 and 15 unmigrated in WC-3b** and report them as a blocked family for WC-3c, where the cross-journey `/articles/:slug` hierarchy is already scheduled for resolution. Alternative, if you prefer full coverage now, is a minimal `Breadcrumbs` addition (`trailingLink` behaviour) — that is an API expansion and per section 13 requires your explicit approval.
 
-## `src/lib/seo/breadcrumbs.ts`
+Default in this plan: defer 14 and 15, migrate 1–13.
 
-- `SITE_ORIGIN = "https://thestartofyou.com"` — audit confirmed the only other definition is `BASE_URL` in `scripts/generate-sitemap.ts`, a Node build script outside the app bundle and not importable from `src/`. The new constant is kept local to this SEO utility; no wider SEO refactor.
-- `toAbsoluteUrl(href)` — trims, passes through already-absolute `http(s)` URLs unchanged, otherwise normalises leading slashes so `/`, `pregnancy`, `//pregnancy/body` all join without duplicate slashes.
-- `buildBreadcrumbJsonLd(items)` — returns `{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [...] }` with `@type: "ListItem"`, `position` starting at 1 in visible order, `name` from `label`, `item` absolute.
+## Work
 
-No `@graph` merging and no `SeoHead` wiring — that is WC-3d.
+1. Migrate items 1–9 to `Breadcrumbs` with `tone="section"`, matching current classes via `className` (centring, margins, text size). No `colors`.
+2. Migrate items 10–13 with `tone="section"` plus the `colors` escape hatch (`base: deepSoft`, `link: accent`, `current: deep`) because those values come from stage palette variables computed at runtime. The small `Home` icon in those four is decorative and inside the link label; it will be dropped or, if visual parity requires it, reported. Preference: drop it only if it reads identically; otherwise report as a parity deviation rather than expanding the API.
+3. Remove now-dead local markup and imports (`ChevronRight`, `Home`) only where unused elsewhere in that file.
+4. Hierarchy, labels and hrefs preserved exactly; each current page gains its own canonical href as the final non-clickable crumb.
 
-## `src/components/shared/Breadcrumbs.tsx`
+## Explicitly untouched
 
-API: `{ items, tone?: "article" | "section", className?, colors? }`, default export. `colors` is an optional `{ base, link, current }` inline-colour escape hatch so WC-3b can reproduce the stage-palette crumbs that currently use inline styles.
+`SeoHead`, `App.tsx`, sitemap, robots, `/ask`, `/journal-start`, `/postpartum/legacy`, `/trying-to-conceive/legacy`, `PregnancyTopicPage`, `IVFTimeline`, TTC `StagePage`, First Year surfaces, `buildBreadcrumbJsonLd` usage, WC-2 assets, `src/lib/grounding/*`, `docs/ai/grounding-approvals/*`, `supabase/functions/_shared/ai*`.
 
-Two tones only, reproducing what already ships:
+## Verification
 
-- `article` — `text-[11px] font-light tracking-[0.12em] uppercase text-muted-foreground/70`, `gap-2`, `·` separator, `hover:text-sage`.
-- `section` — `text-[12.5px] font-light`, `gap-1.5`, `ChevronRight` (13px) separator, `hover:underline underline-offset-4`.
-
-Markup: `<nav aria-label="Breadcrumb"><ol class="flex … flex-wrap"><li>…</li></ol></nav>`. Earlier items are React Router `Link`s; the final item is a `<span aria-current="page">` and never self-links. Separators are `aria-hidden="true"` decorative spans, so `·` and `›` are never announced. Empty `items` renders `null`; a single item renders just the current-page span.
-
-Mobile: keeps `flex-wrap`, existing compact spacing and no horizontal overflow; long current-page labels wrap via `break-words` with the full accessible name intact. Links get `py-1` vertical padding for WCAG 2.2 target spacing without inflating the design; no 44px minimum is imposed. Focus uses existing focus-visible conventions only — no WC-7 work.
-
-No new colours, type scale, spacing tokens or animation. `src/components/ui/breadcrumb.tsx` stays unused; only one application-level breadcrumb abstraction is introduced.
-
-## Tests
-
-Component: nav `aria-label`, `<ol>` present, earlier items are links, final item is not a link, final item has `aria-current="page"`, separators hidden from assistive technology, single-item safety, empty-input safety, both tones render. Behavioural assertions, no full-markup snapshots.
-
-Helper: `@context`, `@type`, positions start at 1, order matches visible order, labels preserved, relative paths become absolute production URLs, `/` → `https://thestartofyou.com/`, nested joins, current page included, no double slashes, already-absolute URLs not double-prefixed, and one shared array feeding both component and helper.
-
-## Guardrails recorded, not implemented
-
-- `/articles/:slug` parents must be resolved from authoritative article data in WC-3c — the corpus spans Pregnancy, TTC and IVF, so no pathname assumptions.
-- `/ask` sitemap/indexation is NOT approved in WC-3; only a possible quiet homepage discovery point later.
-- `/journal-start` stays hidden/noindex; its product fate remains carry-forward.
-- WC-2 closed-pass state and all its carry-forward backlog items untouched.
-- Grounding untouched: `30B-source-routing-v1`, 0 candidates, 0 approvals, empty eligible list, Phase 30K parked at Stage 2.
-
-## Validation
-
-`npm test`, `npm run lint`, `npm run typecheck`, `npm run build`. Lint baseline expected unchanged (1 pre-existing `prefer-const` error, 10 react-refresh warnings); no unrelated findings fixed.
+- Representative consumer tests (week page, trimester, TTC subtopic, toddler topic, hub article) asserting hierarchy, links, final non-link, `aria-current`.
+- Playwright visual check at 1280px and 390x844 for article/week/trimester/TTC/IVF/Toddler/Family routes: typography, colour, spacing, separator, wrapping, no overflow.
+- `npm test`, `npm run lint`, `npm run typecheck`, `npm run build` against the 69 files / 696 tests baseline and the known 1 error + 10 warnings lint baseline.
+- Full 40-point completion report; stop before WC-3c.

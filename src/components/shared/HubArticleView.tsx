@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
-  ChevronRight,
   Clock,
-  Home,
   ShieldCheck,
   Sparkles,
   BookOpen,

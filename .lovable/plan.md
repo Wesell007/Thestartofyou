@@ -24,9 +24,12 @@ For each candidate report dimensions, codec, bitrate, exact bytes, percentage re
 Presentation-only change inside `ProductHero.tsx`:
 
 - The `<video>` renders with the poster and **no** `src`/`<source>` and no `autoPlay` until activated. Container, aspect ratios, rounded corners, gradient overlay, and floating spec card stay byte-identical, so layout is reserved exactly as today and there is no CLS.
-- A small local `useEffect` + `IntersectionObserver` on the hero container sets an `active` state, then the source is attached and playback starts `muted loop playsInline` (with a `play()` promise catch that leaves the poster in place if the browser refuses autoplay).
-- Proposed trigger: `threshold: 0.01`, `rootMargin: "200px 0px"` — enough lead-in that motion begins essentially as the user sees the hero, while still preventing a fetch on any route where the hero is not rendered. Observer disconnects after first activation. No polling, no new abstraction, no shared utility.
-- Reduced motion: read `window.matchMedia("(prefers-reduced-motion: reduce)")` (same pattern as `NewHeroSection`). When reduce is set, the observer never activates, the source is never attached, no download occurs, and the poster stays as a static hero.
+- Activation requires **two** conditions, both true, before the source is attached (never during initial React render, and never on the first observer callback alone):
+  1. **Critical-load gate.** After mount, wait for the window `load` event (or fire immediately if already loaded), then `requestIdleCallback(cb, { timeout: 2000 })` with a `setTimeout(cb, 1200)` fallback where `requestIdleCallback` is unavailable (Safari). This lets the poster, fonts, and critical route content take network priority first.
+  2. **Visibility gate.** A local `useEffect` + `IntersectionObserver` on the hero container with `threshold: 0.01`, `rootMargin: "200px 0px"`, so the video is never fetched on a route or scroll position where the hero is not present/near.
+- Only when both gates have opened does state flip to `active`: the source is attached and playback starts `muted loop playsInline`, with a `play()` promise catch that leaves the poster in place if the browser refuses autoplay. Observer disconnects after activation. No polling, no scheduler abstraction, no shared utility, no arbitrary long delay.
+- Reduced motion: read `window.matchMedia("(prefers-reduced-motion: reduce)")` (same pattern as `NewHeroSection`). When reduce is set, neither gate is armed, the source is never attached, no request occurs (proved by network capture), and the poster stays as a static hero.
+
 
 ### 3. Verification
 

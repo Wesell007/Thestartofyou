@@ -49,4 +49,14 @@ Untouched by design: `/`, journey hubs, `/journal`, `/about`, `/support`, `/priv
 - `Breadcrumbs.tsx` API is expected to stay unchanged (`tone`, `colors`, `showHomeIcon` already cover every case).
 - Tests: focused hierarchy tests added for Pregnancy topic, week, trimester, TTC subtopic, allowlisted StagePage, IVF timeline, First Year phase/month/topic/article, Toddler and Family articles. Legacy-article journey-mapping tests are deferred with the article migration.
 - Validation: `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`; lint must stay at the 1 pre-existing `prefer-const` error and 10 `react-refresh` warnings. Desktop plus 390x844 mobile visual checks and breadcrumb link-integrity crawl (target: 0 broken links, 0 self-links).
-- Completion report returns all 56 points, with the article-mapping gate reported as FAILED-BY-DATA and items 11 and 12 as deferred.
+- Completion report returns all 58 requested points, with the article-mapping gate reported as FAILED-BY-DATA and items 11 and 12 as deferred.
+
+## Approved scope confirmation (user decision)
+
+- `WeekHero.tsx` is confirmed dead: no further edits, no deletion, added to the dead-component carry-forward register.
+- `ArticleHeader.tsx` and `FlagshipHero.tsx` are formally deferred and remain byte-identical, recorded as "WC-3c DEFERRED — AUTHORITATIVE ARTICLE TOPIC DATA REQUIRED". No `trailingLink` or other weakening of the shared semantics; WC-3d must omit both families from BreadcrumbList.
+- The legacy article hierarchy is recorded as known IA/content-metadata debt, not a WC-3c failure, and does not hold the programme open. The proposed future `journeyTopic` field is recorded only, with the nine postpartum/preparing-for-baby/first-year/support articles flagged for a product decision.
+- TTC journey label becomes "Trying to conceive" (`/trying-to-conceive`), replacing the parity-only "The TTC Guide".
+- Tests include a regression assertion that ArticleHeader and FlagshipHero are unchanged.
+- Verification at desktop 1280px and mobile 390x844 across the listed representative routes; link-integrity gate: 0 broken parents, 0 self-links.
+

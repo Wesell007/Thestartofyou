@@ -25,3 +25,8 @@
 
 - AIC-2 — Journey Context: CLOSED PASS (structured provenance-separated context, shared personal resolver, strict server validation, ai-search deployed and smoke-tested). AIC-3 not started.
 - Debt: pregnancy-week formula still duplicated in MyWeek/MyJourney/KeptChapter (canonical helper now at src/lib/pregnancyWeek.ts, pages intentionally unrefactored).
+
+- AIC-3 — Permissioned Memory: CLOSED PASS (implementation), RELEASE STILL GATED.
+  Built: `companion_memories` table (DB-owned ownership, generated normalised value, owner-only RLS, 50-row cap, credential backstop, account-delete cascade); pure policy + intent layers, shared `useCompanionMemoryInteraction`, confirmation UI on both surfaces, `/account` management section, export inclusion; `ai-search` user-token retrieval behind authoritative `AI_MEMORY_ENABLED` with an escaped `<permissioned_memory>` block. Docs: `docs/ai/companion-memory.md`, `docs/ai/adr/ADR-AIC3.md`.
+  Flags: `VITE_COMPANION_MEMORY_ENABLED` (client UX) and `AI_MEMORY_ENABLED` (server, authoritative) are both OFF. Release remains blocked by the outstanding legal/privacy review in `docs/ai/memory-mvp-readiness.md`.
+  Deferred by design: `confirmed_suggestion` source, suggested memories, conversation history (AIC-4), emotional modelling (AIC-5), voice (AIC-6/7).

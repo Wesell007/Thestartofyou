@@ -1,55 +1,37 @@
-# WC-3e — Final Navigation / IA Corrections
+# WC-4 — Companion / Ask Experience Consolidation
 
-Three small IA corrections only. No WC-4 work, no navbar/footer/sitemap/robots/companion changes.
+Final Website Completion slice. Frontend/product consolidation only: no backend, prompt, grounding, memory, voice, journey-context, SEO or sitemap work.
 
-## 1. Redirect the superseded TTC legacy route
+## What the inventory found
 
-`src/App.tsx` line 243 currently renders the old hub:
+Two intentional AI surfaces already exist and are cleanly separated:
 
-```
-<Route path="/trying-to-conceive/legacy" element={<TTC />} />
-```
+- **Companion panel** — `src/components/companion/*` (`CompanionProvider`, `CompanionLauncher`, `CompanionPanel`), mounted site-wide, hidden on `/ask`, `/auth`, `/setup`, `/prototype`, `/404` via `shouldShowCompanionLauncher`.
+- **`/ask` full page** — `src/pages/AskPage.tsx`.
 
-Replace the element with the repository's established redirect pattern:
+Key structural finding: **no in-content CTA opens the companion panel.** Every inline Ask surface (`AISearchBar`, `HubAISupport`, `ArticleAISupport`, `WeekAISupport`, `TrimesterAISupport`, `TTCAISupport`, `FYAISupport`, `SupportAISupport`, `PregnancyAIPanel`, topic/age/phase pages, `AskLink`, journey Ask-companion cards) routes to `/ask` through the shared `src/lib/askNavigation.ts` helpers. The panel is launcher-only. So the "prefer panel for contextual ask" rule has nothing to migrate — the existing model is already coherent and stays as-is.
 
-```
-<Route path="/trying-to-conceive/legacy" element={<Navigate to="/trying-to-conceive" replace />} />
-```
+No third user-facing chat/modal surface was found. `/prototype/memory-settings` stays untouched. Personalised naming (`useCompanionIdentity`) is already used by the panel, `/ask` and journey cards; nothing hard-codes a name.
 
-The legacy page never renders. If the lazy `TTC` import becomes unused after this, remove only that now-dead import line. `/postpartum/legacy`, `/journal-start` and `/prototype/memory-settings` stay exactly as they are.
+## What actually changes (terminology only)
 
-## 2. /preparing-for-baby preflight (already-surfaced finding)
+The one genuine incoherence is language: the same product is labelled "AI Support", "AI support", "Ask a Question", "Ask anything" and "Ask now" depending on the surface. WC-4 aligns visible wording to the companion convention, with no layout, styling or behaviour change:
 
-Confirmed from current code before any edit:
+1. `Navbar.tsx` (desktop + mobile) — align the `/ask` label to the companion wording; destination stays `/ask`, no new nav item.
+2. `Footer.tsx` — "Ask a Question" aligned to the same wording; no new group, no new link.
+3. `JourneyBottomNav.tsx` — verify the "Ask" tab label/destination reads as the companion; adjust only if it does not fit the tab width.
+4. Shared eyebrow labels "AI Support" / "AI support" in `HubAISupport.tsx` and the per-journey AI-support sections — replace with companion wording where the string is a plain visible label.
+5. `AskPage.tsx` header wording — confirm it reads as the same companion the panel represents; smallest copy correction only.
+6. Homepage `JournalMoment` line from WC-3e — verified for consistency, not redesigned.
 
-- `/preparing-for-baby` is a distinct, live public route (`src/pages/PreparingForBaby.tsx`) with its own SEO title, description and self-canonical, and unique orientation content (essentials, what can wait, reflection, capture).
-- It is distinct from the Pregnancy topic route `/pregnancy/preparing-for-baby`, which is a topic index built from `pregnancyTopicData`.
-- The Pregnancy Preparing pathway **already links to it twice** in `src/data/pregnancyTopicData.ts`: as the first "Start here" entry ("Preparing for baby: complete guide", `/preparing-for-baby`) and again in the "Getting ready for baby" group.
+Anything where a copy change would force a layout change is reported as an exception instead of edited.
 
-Because contextual discovery from the Pregnancy Preparing pathway already exists, adding another link would duplicate the route in multiple places, which the brief forbids. Planned action: **no code change** for this subtask; verify the two existing links render and resolve at desktop and mobile, and report the preflight result rather than inventing a third entry point.
+## Tests
 
-## 3. Quiet homepage companion discovery
-
-The homepage (`src/pages/Index.tsx`) renders: NewHeroSection, ValueProofSection, JourneyBrandedSection, JourneyPreviewSection, LifecycleEcosystemSection, JournalMoment. None currently links to `/ask` (the existing `/ask` line lives in `CTASection`, which is not mounted on the homepage).
-
-Chosen placement: inside the existing `JournalMoment` section (guidance → keepsake → companion), directly below the existing "Explore the journal" link, using the same typography and colour tokens already in that block — one small text line, no new section, no card, no icon-only control.
-
-Copy, in the site's tone:
-
-> Need something more personal? **Ask your companion**
-
-with "Ask your companion" as the `<Link to="/ask">` text, styled with the existing muted/sage underline pattern already used elsewhere on the site so it reads as secondary to the journal CTA. Keyboard accessible by default with existing focus-visible styling; no icon-only meaning. No companion name, no query string, no companion state or behaviour change.
-
-## Boundaries held
-
-Unchanged: navbar, footer, `SeoHead`, `Breadcrumbs.tsx`, `BreadcrumbJsonLd.tsx`, `buildBreadcrumbJsonLd`, `scripts/generate-sitemap.ts`, robots, `/ask` SEO, companion launcher/panel/prompts/`ai-search`, `src/lib/grounding/*`, WC-2 assets, legacy article metadata debt.
+Focused tests (no snapshots) covering: `/ask` reachable; homepage link → `/ask`; nav (desktop + mobile) AI entry → `/ask`; footer AI entry → `/ask`; launcher opens the panel; a representative inline Ask CTA still routes to `/ask` via `askNavigation`; companion naming still comes from `useCompanionIdentity` with no hard-coded name.
 
 ## Verification
 
-- `/trying-to-conceive/legacy` lands on `/trying-to-conceive`, no loop, no legacy render.
-- Pregnancy Preparing pathway links resolve to `/preparing-for-baby`.
-- Homepage companion link resolves to `/ask`.
-- Desktop 1280px and mobile 390x844 check of homepage, Pregnancy Preparing pathway, and the redirect.
-- `npm test`, `npm run lint`, `npm run typecheck`, `npm run build` against the 716-test / 1-error / 10-warning baseline.
+Desktop 1280px and mobile 390x844 across: homepage, `/ask`, one Pregnancy, one First Year, one Toddler/Family page with an Ask entry, nav, footer, launcher. Check terminology, destination, single companion surface per interaction, no duplicate controls, no broken links.
 
-Then the 41-point completion report, and a WC-3e / WC-3 closure verdict. WC-4 not started.
+Then `npm test`, `npm run lint`, `npm run typecheck`, `npm run build` against the 716-test / 1 prefer-const / 10 react-refresh baseline, and return the 45-point completion report. AIC-1 is not started.

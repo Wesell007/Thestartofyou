@@ -1,37 +1,48 @@
-# WC-4 — Companion / Ask Experience Consolidation
+# AIC-1 — AI Companion Architecture Audit & Foundation
 
-Final Website Completion slice. Frontend/product consolidation only: no backend, prompt, grounding, memory, voice, journey-context, SEO or sitemap work.
+Audit-first slice. The verification below was done against source before writing this plan, so the plan states current state, not assumptions.
 
-## What the inventory found
+## What the audit already confirms
 
-Two intentional AI surfaces already exist and are cleanly separated:
+**One backend, one model, one safety path.** Both surfaces call `useAISearch` → `POST /functions/v1/ai-search` with the anon key, streaming SSE. The edge function owns rate limiting (12/min, 100/hour by IP+UA fingerprint via `consume_ai_rate_limit`), urgent-pattern escalation before any model call, the `AI_SEARCH_DISABLED` kill switch, mode config (`_shared/aiModes.ts`), grounding fetch (`_shared/aiSources.ts`, external pages stripped to text, URLs never given to the model), and the Lovable AI Gateway call (`AI_MODEL_ID = google/gemini-2.5-flash`). No alternate production chat endpoint exists; `ai-reflect` is a separate non-chat function.
 
-- **Companion panel** — `src/components/companion/*` (`CompanionProvider`, `CompanionLauncher`, `CompanionPanel`), mounted site-wide, hidden on `/ask`, `/auth`, `/setup`, `/prototype`, `/404` via `shouldShowCompanionLauncher`.
-- **`/ask` full page** — `src/pages/AskPage.tsx`.
+**Request contract is already single and narrow:** `{ query, context?, mode? }`, validated by `_shared/validation.ts`. No history, no IDs, no auth-derived data is sent.
 
-Key structural finding: **no in-content CTA opens the companion panel.** Every inline Ask surface (`AISearchBar`, `HubAISupport`, `ArticleAISupport`, `WeekAISupport`, `TrimesterAISupport`, `TTCAISupport`, `FYAISupport`, `SupportAISupport`, `PregnancyAIPanel`, topic/age/phase pages, `AskLink`, journey Ask-companion cards) routes to `/ask` through the shared `src/lib/askNavigation.ts` helpers. The panel is launcher-only. So the "prefer panel for contextual ask" rule has nothing to migrate — the existing model is already coherent and stays as-is.
+**Two real divergences found (the only foundation work AIC-1 needs):**
 
-No third user-facing chat/modal surface was found. `/prototype/memory-settings` stays untouched. Personalised naming (`useCompanionIdentity`) is already used by the panel, `/ask` and journey cards; nothing hard-codes a name.
+1. `AskPage` calls `ask(query, context)` with **no `mode`**, so `/ask` always runs the general prompt while the panel resolves a journey mode from the route. Same backend, different mode selection — a genuine intelligence fork.
+2. Context construction is duplicated: the panel uses `buildCompanionPanelContext`; `/ask` passes whatever arrives in router state/`ctx`, and appends `Previous question:`/`Previous answer:` strings into the same `context` field as pseudo-continuity. The panel has no continuity at all.
 
-## What actually changes (terminology only)
+Everything else (sanitisation via `sanitiseAnswerForDisplay`, identity via `useCompanionIdentity`, error/abort handling in `useAISearch`) is already shared.
 
-The one genuine incoherence is language: the same product is labelled "AI Support", "AI support", "Ask a Question", "Ask anything" and "Ask now" depending on the surface. WC-4 aligns visible wording to the companion convention, with no layout, styling or behaviour change:
+Classification: **B — mostly shared, small foundation cleanup needed.**
 
-1. `Navbar.tsx` (desktop + mobile) — align the `/ask` label to the companion wording; destination stays `/ask`, no new nav item.
-2. `Footer.tsx` — "Ask a Question" aligned to the same wording; no new group, no new link.
-3. `JourneyBottomNav.tsx` — verify the "Ask" tab label/destination reads as the companion; adjust only if it does not fit the tab width.
-4. Shared eyebrow labels "AI Support" / "AI support" in `HubAISupport.tsx` and the per-journey AI-support sections — replace with companion wording where the string is a plain visible label.
-5. `AskPage.tsx` header wording — confirm it reads as the same companion the panel represents; smallest copy correction only.
-6. Homepage `JournalMoment` line from WC-3e — verified for consistency, not redesigned.
+## Scope of this slice
 
-Anything where a copy change would force a layout change is reported as an exception instead of edited.
+### 1. Documentation (main deliverable)
 
-## Tests
+Create `docs/ai/companion-architecture.md` as the authoritative programme document, covering: surface model, both request-flow traces (all 20 audit points each), backend inventory, `ai-search` ownership, prompt-layer matrix (core identity / safety / journey / mode / preferences / context / knowledge / tools, each marked IMPLEMENTED / PARTIAL / ABSENT / COUPLED), context-field inventory (available in client? sent? used by prompt? persisted? user-controlled?), existing profile/journey data inventory, conversation-state and persistence status, identity flow, safety and grounding boundaries, NHS/external-source fallback flow, error and streaming inventory, voice-readiness coupling notes, known constraints, and the future insertion points for context, memory, continuity, safety and voice.
 
-Focused tests (no snapshots) covering: `/ask` reachable; homepage link → `/ask`; nav (desktop + mobile) AI entry → `/ask`; footer AI entry → `/ask`; launcher opens the panel; a representative inline Ask CTA still routes to `/ask` via `askNavigation`; companion naming still comes from `useCompanionIdentity` with no hard-coded name.
+ADRs recorded: ADR-AIC1-01 one brain multiple surfaces; -02 central journey-context construction; -03 memory separate from turn context and session history; -04 grounding governance independently gated; -05 voice consumes the same intelligence layer. Plus ADR-AIC1-06 recording the `/ask` missing-mode finding and its resolution.
 
-## Verification
+### 2. Minimum foundation code
 
-Desktop 1280px and mobile 390x844 across: homepage, `/ask`, one Pregnancy, one First Year, one Toddler/Family page with an Ask entry, nav, footer, launcher. Check terminology, destination, single companion surface per interaction, no duplicate controls, no broken links.
+- Add a shared companion request contract module (types + a single `askCompanion`-style helper wrapping the existing `useAISearch` call shape) so both surfaces send an identical payload and there is one place for AIC-2 to attach structured context.
+- Route `/ask` through the same mode resolution the panel uses, derived from the existing `stage`/`journey` query params and route, so mode selection stops forking. Behaviour change is limited to `/ask` now selecting the journey prompt it was always meant to use; no UI change.
+- Mark the `Previous question/answer` string-in-context pattern as a documented interim continuity mechanism owned by AIC-4, without changing it.
 
-Then `npm test`, `npm run lint`, `npm run typecheck`, `npm run build` against the 716-test / 1 prefer-const / 10 react-refresh baseline, and return the 45-point completion report. AIC-1 is not started.
+No backend, prompt, grounding, schema, RLS, memory or UI changes. Grounding stays at `30B-source-routing-v1`, 0 candidates, 0 approvals.
+
+### 3. Tests
+
+Focused tests only for what changes: mode parity between `/ask` and panel, the shared request contract shape, and that sanitisation and identity paths remain shared. No snapshots.
+
+## Validation
+
+`npm test`, `npm run lint`, `npm run typecheck`, `npm run build`, against the 73 file / 723 test baseline and the known lint baseline (1 prefer-const, 10 react-refresh). Target: 0 new findings.
+
+Then the 51-point completion report. AIC-2 will not be started.
+
+## Open question
+
+If you would rather AIC-1 be **documentation only** — leaving the `/ask` missing-mode fork recorded as a finding for AIC-2 rather than fixed now — say so and I will drop section 2 and its tests.

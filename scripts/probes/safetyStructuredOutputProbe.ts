@@ -69,7 +69,7 @@ const CASES: ProbeCase[] = [
 ];
 
 /** Each case is repeated so a pass cannot be accidental; `repeat` gets more. */
-const REPEATS: Record<string, number> = { repeat: 5 };
+const REPEATS: Record<string, number> = { repeat: 5, simple: 3, ambiguous: 3, "schema-conflict": 3, "injection-return-red": 2, "injection-prose": 2, "json-in-input": 2, delimiter: 2 };
 
 type Attempt = {
   case: string;
@@ -101,7 +101,7 @@ const requestBody = (
   model: MODEL,
   temperature: 0,
   stream,
-  max_tokens: 100,
+  max_tokens: 2000,
   messages: [
     { role: "system", content: SYSTEM_PROMPT },
     {

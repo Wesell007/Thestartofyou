@@ -93,7 +93,6 @@ const ToddlerAgePage = ({ config }: Props) => {
               showHomeIcon
               className="mb-10 md:mb-12 font-sans"
               colors={{ base: deepSoft, link: accent, current: deep }}
-
               items={breadcrumbItems}
             />
 

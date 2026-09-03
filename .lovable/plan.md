@@ -1,58 +1,55 @@
-# WC-3d — BreadcrumbList Structured Data Integration
+# WC-3e — Final Navigation / IA Corrections
 
-Add BreadcrumbList JSON-LD to the resolved breadcrumb families closed in WC-3c, derived from the exact same visible crumb arrays. No visible UI change. Legacy articles (ArticleHeader / FlagshipHero) stay excluded.
+Three small IA corrections only. No WC-4 work, no navbar/footer/sitemap/robots/companion changes.
 
-## Pre-implementation JSON-LD inventory (verified)
+## 1. Redirect the superseded TTC legacy route
 
-How JSON-LD works today:
+`src/App.tsx` line 243 currently renders the old hub:
 
-- `SeoHead` accepts a single optional `jsonLd?: Record<string, unknown>` and renders one `<script type="application/ld+json">` inside `Helmet`.
-- Only four files pass `jsonLd`: `src/pages/firstyear/FirstYearArticle.tsx`, `src/pages/toddler/ToddlerArticle.tsx`, `src/pages/family/FamilyArticle.tsx`, `src/pages/ArticlePage.tsx` (all Article-type objects, optionally with `citation`).
-- JSON-LD emitted outside `SeoHead`: `src/components/article/ArticleFAQ.tsx` and `src/components/article/flagship/FlagshipFAQ.tsx` (FAQPage, legacy article families only — excluded from WC-3d).
-- No page emits a `@graph`. No page emits more than one schema entity except legacy articles (Article via SeoHead + FAQPage via the FAQ component).
+```
+<Route path="/trying-to-conceive/legacy" element={<TTC />} />
+```
 
-Ownership split that shapes the approach: `SeoHead` is mounted by thin route wrapper pages (e.g. `pages/pregnancy/BodyTopic.tsx`, `pages/ttc/Ovulation.tsx`, `pages/trimester/*.tsx`, `components/seo/PregnancyWeekSeo.tsx`), while the visible `BreadcrumbItem[]` arrays live one level down in the shared templates (`PregnancyTopicPage`, `TTCTopicPage`, week pages, `HubArticleView`, etc.). The crumb data is not available where `SeoHead` is called.
+Replace the element with the repository's established redirect pattern:
 
-Classification of the 17 resolved families:
+```
+<Route path="/trying-to-conceive/legacy" element={<Navigate to="/trying-to-conceive" replace />} />
+```
 
-- A. No JSON-LD at all: Pregnancy topic, Pregnancy trimester, Pregnancy week, TTC topic, TTC subtopic, allowlisted TTC StagePage, IVF topic, IVF timeline, First Year phase, First Year month, First Year topic, Toddler topic, Toddler age, Family topic.
-- B. One existing schema object (Article, via `SeoHead`): First Year article, Toddler article, Family article.
-- C. Multiple entities / graph: none in the resolved set (only legacy articles, excluded).
-- D. JSON-LD outside `SeoHead`: only legacy article FAQ components, excluded.
+The legacy page never renders. If the lazy `TTC` import becomes unused after this, remove only that now-dead import line. `/postpartum/legacy`, `/journal-start` and `/prototype/memory-settings` stay exactly as they are.
 
-## Approach
+## 2. /preparing-for-baby preflight (already-surfaced finding)
 
-1. New component `src/components/seo/BreadcrumbJsonLd.tsx` — takes `items: BreadcrumbItem[]`, calls the existing `buildBreadcrumbJsonLd(items)`, renders one `<script type="application/ld+json">` via `Helmet`. Returns `null` for an empty array.
-2. In each resolved template, lift the inline crumb array into a single local `const breadcrumbItems: BreadcrumbItem[] = [...]` and pass it to both `<Breadcrumbs items={breadcrumbItems} …/>` (unchanged props otherwise) and `<BreadcrumbJsonLd items={breadcrumbItems} />`. One hierarchy source, zero duplicated labels/hrefs.
-3. `StagePage` renders `BreadcrumbJsonLd` inside the same `showBreadcrumbs` allowlist condition, so non-allowlisted `/:journey/:stage` output gains nothing.
-4. Week pages: each of the 42 live pages already declares its crumb array inline; each gets the same lift-and-pass treatment with its established trimester crumb. `WeekHero.tsx` (dead) is untouched.
+Confirmed from current code before any edit:
 
-Why not merge into `SeoHead`/`@graph`: the crumb data and `SeoHead` live in different components, and BreadcrumbList as its own top-level script is valid, standard, and keeps existing Article/FAQ schema byte-identical. So `SeoHead` is not modified, `buildBreadcrumbJsonLd` is not modified, and no `composeJsonLd` helper is created. Duplicate risk is controlled by the rule "exactly one `BreadcrumbJsonLd` per rendered route", asserted in tests and verified in the rendered DOM.
+- `/preparing-for-baby` is a distinct, live public route (`src/pages/PreparingForBaby.tsx`) with its own SEO title, description and self-canonical, and unique orientation content (essentials, what can wait, reflection, capture).
+- It is distinct from the Pregnancy topic route `/pregnancy/preparing-for-baby`, which is a topic index built from `pregnancyTopicData`.
+- The Pregnancy Preparing pathway **already links to it twice** in `src/data/pregnancyTopicData.ts`: as the first "Start here" entry ("Preparing for baby: complete guide", `/preparing-for-baby`) and again in the "Getting ready for baby" group.
 
-## Coverage
+Because contextual discovery from the Pregnancy Preparing pathway already exists, adding another link would duplicate the route in multiple places, which the brief forbids. Planned action: **no code change** for this subtask; verify the two existing links render and resolve at desktop and mobile, and report the preflight result rather than inventing a third entry point.
 
-Enabled (schema mirrors the WC-3c visible trail exactly):
+## 3. Quiet homepage companion discovery
 
-- Pregnancy topic (6), trimester (3 route pages), week (42)
-- TTC topic, TTC subtopic (`Home → Trying to conceive → Parent → Current`), allowlisted StagePage (3 routes only)
-- IVF topic, IVF timeline
-- First Year phase, month, topic, article
-- Toddler topic, age, article; Family topic, article (articles via `HubArticleView`)
+The homepage (`src/pages/Index.tsx`) renders: NewHeroSection, ValueProofSection, JourneyBrandedSection, JourneyPreviewSection, LifecycleEcosystemSection, JournalMoment. None currently links to `/ask` (the existing `/ask` line lives in `CTASection`, which is not mounted on the homepage).
 
-Excluded: `ArticleHeader`, `FlagshipHero` and all `/articles/:slug` output (byte-identical, reconfirmed by hash); every page with no visible breadcrumb (hubs, `/`, `/journal`, `/ask`, calculators, result and account surfaces).
+Chosen placement: inside the existing `JournalMoment` section (guidance → keepsake → companion), directly below the existing "Explore the journal" link, using the same typography and colour tokens already in that block — one small text line, no new section, no card, no icon-only control.
 
-## Tests
+Copy, in the site's tone:
 
-New `src/lib/seo/breadcrumbJsonLd.test.tsx` plus source-level assertions extending `canonicalBreadcrumbs.test.ts`:
+> Need something more personal? **Ask your companion**
 
-- resolved families emit exactly one BreadcrumbList; ordering, `position` starting at 1, names and absolute `https://thestartofyou.com` URLs match the visible items
-- current page present as final `ListItem`
-- Article schema still present on First Year / Toddler / Family articles alongside the BreadcrumbList; legacy FAQPage untouched
-- ArticleHeader/FlagshipHero families and non-breadcrumb hubs emit no BreadcrumbList
-- non-allowlisted StagePage emits none
+with "Ask your companion" as the `<Link to="/ask">` text, styled with the existing muted/sage underline pattern already used elsewhere on the site so it reads as secondary to the journal CTA. Keyboard accessible by default with existing focus-visible styling; no icon-only meaning. No companion name, no query string, no companion state or behaviour change.
 
-Rendered verification across the 17 representative routes at desktop and mobile: visible crumbs present, exactly one BreadcrumbList, hierarchy parity, existing schema preserved.
+## Boundaries held
 
-## Boundaries
+Unchanged: navbar, footer, `SeoHead`, `Breadcrumbs.tsx`, `BreadcrumbJsonLd.tsx`, `buildBreadcrumbJsonLd`, `scripts/generate-sitemap.ts`, robots, `/ask` SEO, companion launcher/panel/prompts/`ai-search`, `src/lib/grounding/*`, WC-2 assets, legacy article metadata debt.
 
-No visible UI change; no sitemap, robots, navbar, footer, redirect or WC-3e work; no legacy metadata population; WC-2 assets and grounding files untouched. Validation: `npm test`, lint (expect baseline 1 error / 10 warnings, 0 new), typecheck, build. Report the 49-point completion list and stop.
+## Verification
+
+- `/trying-to-conceive/legacy` lands on `/trying-to-conceive`, no loop, no legacy render.
+- Pregnancy Preparing pathway links resolve to `/preparing-for-baby`.
+- Homepage companion link resolves to `/ask`.
+- Desktop 1280px and mobile 390x844 check of homepage, Pregnancy Preparing pathway, and the redirect.
+- `npm test`, `npm run lint`, `npm run typecheck`, `npm run build` against the 716-test / 1-error / 10-warning baseline.
+
+Then the 41-point completion report, and a WC-3e / WC-3 closure verdict. WC-4 not started.

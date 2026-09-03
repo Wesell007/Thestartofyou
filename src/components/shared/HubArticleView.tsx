@@ -102,6 +102,14 @@ const HubArticleView = ({
     </div>
   );
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Home", href: "/" },
+    { label: hubLabel, href: hubHref },
+    { label: topicLabel, href: topicHref },
+    { label: article.title, href: `${topicHref}/${article.slug}` },
+  ];
+
   return (
     <div className="min-h-screen font-sans bg-parchment">
       <Navbar />

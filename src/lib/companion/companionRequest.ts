@@ -14,6 +14,7 @@
  */
 
 import { resolveCompanionMode, type CompanionMode } from "./companionMode";
+import type { JourneyContextV1 } from "../../../supabase/functions/_shared/journeyContextContract";
 
 export type { CompanionMode };
 
@@ -22,6 +23,11 @@ export interface CompanionRequest {
   query: string;
   context?: string;
   mode: CompanionMode;
+  /**
+   * AIC-2 — structured, provenance-separated journey context. Optional: when
+   * absent the request is byte-identical to the pre-AIC-2 contract.
+   */
+  journeyContext?: JourneyContextV1;
 }
 
 /**
@@ -66,15 +72,18 @@ export function buildCompanionRequest({
   query,
   context,
   mode,
+  journeyContext,
 }: {
   query: string;
   context?: string | null;
   mode: CompanionMode;
+  journeyContext?: JourneyContextV1 | null;
 }): CompanionRequest {
   const trimmedContext = context?.trim();
   return {
     query: query.trim(),
     ...(trimmedContext ? { context: trimmedContext } : {}),
     mode,
+    ...(journeyContext ? { journeyContext } : {}),
   };
 }

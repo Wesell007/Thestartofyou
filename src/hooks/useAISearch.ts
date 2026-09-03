@@ -1,10 +1,16 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { AiMode } from "../../supabase/functions/_shared/aiModes";
+import type { JourneyContextV1 } from "../../supabase/functions/_shared/journeyContextContract";
 
 export type AISearchOptions = {
   /** Surface mode. Omitted means the shared endpoint uses its general behaviour. */
   mode?: AiMode;
+  /**
+   * AIC-2 — validated structured journey context. Omitted means the request
+   * body is exactly what it was before AIC-2.
+   */
+  journeyContext?: JourneyContextV1;
 };
 
 export function useAISearch() {
@@ -36,6 +42,7 @@ export function useAISearch() {
             query,
             context,
             ...(options?.mode ? { mode: options.mode } : {}),
+            ...(options?.journeyContext ? { journeyContext: options.journeyContext } : {}),
           }),
           signal: controller.signal,
         }

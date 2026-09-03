@@ -3,6 +3,10 @@ import { parseAiSearchBody } from "../_shared/validation.ts";
 import { DAY_RECAP_UNAVAILABLE_ANSWER, getAiModeConfig } from "../_shared/aiModes.ts";
 import { AI_MODEL_ID, AI_VERSION_SUMMARY } from "../_shared/aiVersions.ts";
 import { selectSources } from "../_shared/aiSources.ts";
+import {
+  JOURNEY_CONTEXT_INSTRUCTIONS,
+  renderJourneyContextBlock,
+} from "../_shared/aiJourneyContext.ts";
 import { AI_PAUSED_ANSWER, isAiDisabled, matchUrgent, urgentAnswer } from "../_shared/urgentPatterns.ts";
 
 // Internal traceability only: version data is logged once per cold start and
@@ -161,7 +165,7 @@ serve(async (req) => {
     return json(req, { error: "Guidance is temporarily unavailable. Please try again." }, 503);
   }
 
-  const { query, context, mode } = parsed.value;
+  const { query, context, mode, journeyContext } = parsed.value;
   const modeConfig = getAiModeConfig(mode);
 
   if (matchUrgent(query)) {
@@ -198,8 +202,12 @@ serve(async (req) => {
       return json(req, { error: "Verified guidance sources are temporarily unavailable. Please try again." }, 503);
     }
   }
+  // AIC-2: the structured block is a separate, clearly named data section. The
+  // legacy freeform context stays exactly as it was.
+  const structuredJourneyContext = renderJourneyContextBlock(journeyContext);
   const userContent = [
     "<user_question>", query, "</user_question>",
+    structuredJourneyContext,
     context ? `<journey_context>\n${context}\n</journey_context>` : "",
     evidence ? `<background_material>\n${evidence}\n</background_material>` : "",
   ].filter(Boolean).join("\n");
@@ -210,7 +218,17 @@ serve(async (req) => {
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         model: AI_MODEL_ID,
-        messages: [{ role: "system", content: modeConfig.systemPrompt }, { role: "user", content: userContent }],
+        messages: [
+          {
+            role: "system",
+            // Interpretation rules live in the trusted layer, and only when
+            // structured context is actually present.
+            content: structuredJourneyContext
+              ? `${modeConfig.systemPrompt}\n\n${JOURNEY_CONTEXT_INSTRUCTIONS}`
+              : modeConfig.systemPrompt,
+          },
+          { role: "user", content: userContent },
+        ],
         stream: true,
         max_tokens: 700,
         temperature: 0.2,

@@ -1,4 +1,8 @@
 import { type AiMode, resolveAiMode } from "./aiModes.ts";
+import {
+  type JourneyContextV1,
+  parseJourneyContext,
+} from "./journeyContextContract.ts";
 
 export const AI_QUERY_MAX_LENGTH = 1_000;
 export const AI_CONTEXT_MAX_LENGTH = 500;
@@ -27,7 +31,12 @@ const boundedString = (
 
 export const parseAiSearchBody = (
   body: unknown,
-): ValidationResult<{ query: string; context?: string; mode: AiMode }> => {
+): ValidationResult<{
+  query: string;
+  context?: string;
+  mode: AiMode;
+  journeyContext?: JourneyContextV1;
+}> => {
   if (!isRecord(body)) return { ok: false, error: "Request body must be a JSON object." };
   const query = boundedString(body.query, "Question", 2, AI_QUERY_MAX_LENGTH);
   if (query.ok === false) return { ok: false, error: query.error };
@@ -36,12 +45,22 @@ export const parseAiSearchBody = (
   // callers written before modes existed keep working unchanged.
   const mode = resolveAiMode(body.mode);
 
+  // AIC-2: structured journey context is strictly optional. Absent means the
+  // request behaves exactly as it did before AIC-2; malformed is rejected
+  // rather than silently trusted.
+  const journeyContext = parseJourneyContext(body.journeyContext);
+  if (journeyContext.ok === false) return { ok: false, error: journeyContext.error };
+  const journeyPart = journeyContext.value ? { journeyContext: journeyContext.value } : {};
+
   if (body.context === undefined || body.context === null || body.context === "") {
-    return { ok: true, value: { query: query.value, mode } };
+    return { ok: true, value: { query: query.value, mode, ...journeyPart } };
   }
   const context = boundedString(body.context, "Context", 1, AI_CONTEXT_MAX_LENGTH);
   if (context.ok === false) return { ok: false, error: context.error };
-  return { ok: true, value: { query: query.value, context: context.value, mode } };
+  return {
+    ok: true,
+    value: { query: query.value, context: context.value, mode, ...journeyPart },
+  };
 };
 
 export const parseReflectBody = (

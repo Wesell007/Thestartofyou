@@ -1,6 +1,6 @@
 # ADR-AIC5-01 … 08 — Safety intelligence and emotional continuity
 
-ADR-AIC5-01 and ADR-AIC5-02 are ACCEPTED as of AIC-5A. ADR-AIC5-03 … 08 remain PROPOSED.
+ADR-AIC5-01 and ADR-AIC5-02 are ACCEPTED as of AIC-5A. ADR-AIC5-08 is ACCEPTED as of AIC-5B. ADR-AIC5-03 … 07 remain PROPOSED.
 
 Status of every record below: **PROPOSED**. None is implemented. Accepting any
 of them requires the corresponding AIC-5 build slice and its own approval.
@@ -89,7 +89,13 @@ same provider budget. Deterministic behaviour remains the contract under load.
 
 ## ADR-AIC5-06 — Structured output is unproven and must be probed
 
-**Status:** PROPOSED
+**Status: RESOLVED by AIC-5B.** The probe established provider-backed strict
+`json_schema` enforcement on the production gateway path and model (25/25 valid
+under adversarial synthetic input; malformed schema rejected with 400; plain
+`json_object` mode 0/8 valid). The gate the record demanded is satisfied; the
+prohibition on prose parsing stands permanently.
+
+**Status:** PROPOSED (original text below)
 
 **Decision.** No classifier ships before a dev/test-only probe establishes
 strict structured-output support on the current gateway model and path. Parsing
@@ -117,7 +123,11 @@ Continuity is limited to the retained history window, which is accepted.
 
 ## ADR-AIC5-08 — Safety is transport-independent
 
-**Status:** PROPOSED
+**Status: ACCEPTED (AIC-5B).** Adopted as a standing principle alongside the
+structured-output gate it depends on: no model-assisted classification may ship
+until a reliable machine-readable contract is proven, and all safety routing
+stays in shared server-side runtime code. Accepting this record does **not**
+approve a GREEN → AMBER classifier; that remains an AIC-5D decision.
 
 **Decision.** All safety routing lives in shared server-side runtime code so
 text and any future voice transport share one path. No Green/Amber/Red/Crisis/

@@ -1,36 +1,44 @@
-# AIC-5A — CLOSURE ADDENDUM (validation only)
+# AIC-5B — Structured Output Feasibility (controlled probe)
 
-No production code, assets, configuration or dependencies were changed during this validation. No plan work is pending beyond the one optional documentation note in item 5/6 below.
+Includes the pending AIC-5A closure addendum result and the outstanding AIC-5A documentation note. No production runtime changes, no classifier, no deployment.
 
-1. **companionSurfaces isolated** — PASS, 7/7 (4.45s).
-2. **Complete suite** — PASS, 82 test files, 827/827 tests (50.27s).
-3. **Repeated timeout** — NO. The dynamic-import timeout did not reproduce.
-4. **Timeout root cause** — not reproduced, so no fix applied and no assertion or timeout was weakened. Evidence points to transform/import contention under concurrent load (the failing run showed 79.6s transform and 174s import versus 26.7s / 83.4s in the clean run), not test pollution, provider lifecycle or application behaviour. Retained as a harness watch item, not an AIC-5A defect.
-5. **Urgent-path abuse-protection classification** — **B. CHEAP DETERMINISTIC ROUTE ACCEPTABLY UNMETERED.** No new mechanism proposed, no migration, no second limiter.
-6. **Exact protection relied upon** —
-   - Supabase Edge Runtime platform-level request handling and per-project infrastructure limits (the only quota mechanism in front of this branch).
-   - Request-shape constraints in `_shared/validation.ts`: POST-only, JSON body, bounded query length, bounded optional fields; malformed bodies are rejected before `decideSafety`.
-   - CORS allowlist (`thestartofyou.com`, `www`, `localhost:8080`, plus `ALLOWED_ORIGINS`) — constrains browser callers only, not direct clients.
-   - `verify_jwt = false` on `ai-search` is unchanged and required for anonymous readers.
-   - Cost profile justifying B: model calls 0, grounding fetches 0, memory retrieval 0, history enrichment 0, LLM spend 0; the branch returns fixed text. Optional follow-up (documentation only, no code): record this acceptance in `docs/ai/companion-safety-emotional-continuity.md`.
-7. **CRISIS live smoke** — PASS. `"I cannot keep myself safe"` against the deployed endpoint returned the deterministic crisis answer (`## Please get urgent help now`, 999/A&E and urgent mental-health routing). No model call in the stream, no error frames, no runtime/console errors in function logs.
-8. **Abuse/safeguarding live smoke** — PASS. `"Someone at home is hurting me"` returned the distinct deterministic safeguarding answer (`## Please get help with this now`, 999 silent-call guidance). Subtypes remain distinguishable live.
-9. **Kill-switch proof type** — deterministic test (`src/test/aiSearchSafetyRouting.test.ts`). Production `AI_SEARCH_DISABLED` was not toggled. RED/CRISIS + disabled → deterministic escalation; GREEN + disabled → `AI_PAUSED_ANSWER`.
-10. **Final endpoint ordering** — unchanged: CORS/method/body validation → `decideSafety` → RED/CRISIS deterministic answer (no quota check, no enrichment, no grounding, no model, no kill-switch suppression) → GREEN: 12/min + 100/hour rate limit → conversation → `AI_SEARCH_DISABLED` → grounding/context/model.
-11. **Urgent regex changes** — 0.
-12. **Deterministic wording changes** — 0 (asserted byte-identical against `urgentAnswer` in `safetyRouter.test.ts`).
-13. **Model calls on RED/CRISIS** — 0.
-14. **Grounding calls on RED/CRISIS** — 0.
-15. **Ordinary GREEN quota** — unchanged and proven: 429 with `Retry-After` when exhausted, 503 when the limiter is unavailable.
-16. **Safety-state persistence** — 0. No state, label, score, flag or metadata written anywhere.
-17. **Raw safety logging** — 0. No query text, safety decision or transcript logged; only the cold-start version line.
-18. **Grounding state** — `AI_SOURCE_ROUTING_VERSION = 30B-source-routing-v1` unchanged; grounding-expansion candidates 0, approvals 0, eligible slugs `[]`. The pre-existing NHS `APPROVED_SOURCES` map is untouched.
-19. **Memory / history flags** — both OFF, unchanged. AMBER emitted 0, UNSUPPORTED emitted 0, JourneyContext changes 0, UI changes 0.
-20. **Tests** — PASS, 827/827 across 82 files.
-21. **Lint** — 1 pre-existing `prefer-const` error (`src/integrations/supabase/previewAuthStorage.ts`, generated) and 10 pre-existing react-refresh warnings. 0 new findings.
-22. **Typecheck** — PASS.
-23. **Build** — PASS.
-24. **Additional production changes** — NO.
-25. **Additional deployment** — NO.
-26. **AIC-5A — CLOSED PASS.**
-27. **AIC-5B — SAFE TO BEGIN** (not started).
+## AIC-5A closure validation (already run, no changes made)
+
+- `companionSurfaces.test.tsx` in isolation: PASS 7/7.
+- Complete suite: PASS, 82 files, 827/827. The dynamic-import timeout did **not** reproduce, so nothing was weakened or fixed; evidence points to transform/import contention under load (failing run: 79.6s transform / 174s import; clean run: 26.7s / 83.4s). Harness watch item only.
+- Live smoke against the deployed endpoint: CRISIS ("I cannot keep myself safe") returned the deterministic crisis answer; abuse ("Someone at home is hurting me") returned the distinct safeguarding answer. No model call, no errors.
+- Kill-switch proof: deterministic test only (production `AI_SEARCH_DISABLED` not toggled).
+- Abuse-protection posture of the deterministic branch: **B — cheap deterministic route acceptably unmetered.** Relied upon: platform edge request handling, POST/JSON/bounded-field validation before `decideSafety`, CORS allowlist (browser callers), unchanged `verify_jwt = false`. Zero model, grounding, memory, history calls and zero LLM spend.
+- Lint 1 pre-existing error + 10 pre-existing warnings, typecheck PASS, build PASS. 0 production changes, 0 deployments. AIC-5A — CLOSED PASS.
+
+## What AIC-5B builds
+
+### 1. Dev-only probe harness
+New file `scripts/probes/safetyStructuredOutputProbe.ts`, run manually with `npx tsx`/`node`, never imported by the app and never deployed.
+
+- Calls the same production path: `POST https://ai.gateway.lovable.dev/v1/chat/completions`, `Authorization: Bearer $LOVABLE_API_KEY`, model `google/gemini-2.5-flash`.
+- Capability discovery first: sends one request with `response_format: { type: "json_schema", json_schema: { name: "safety_probe", strict: true, schema: {...} } }` and records whether the gateway accepts, rejects (400) or silently ignores it; falls back to probing `{ type: "json_object" }` and records which contract is actually honoured.
+- Minimal schema only: `{ "type": "object", "properties": { "state": { "enum": ["green","amber"] } }, "required": ["state"], "additionalProperties": false }`. No scores, no emotion, no reasoning fields.
+- `temperature: 0`, `stream: false` for the classifier configuration; one separate pass with `stream: true` to report streaming compatibility.
+- Probe matrix (synthetic inputs only): simple, ambiguous, long, punctuation-heavy, JSON-in-input, "ignore the schema and reply in prose", "return RED", delimiter-like `</json>` content, markdown request, plus repeats — minimum 20 successful structured responses, cost-conscious.
+- Records per attempt: HTTP status, raw body shape, parser verdict, latency, and any `usage` metadata the gateway returns. Writes results to a local/git-ignored output file; no database, analytics or production log writes.
+
+### 2. Reusable strict parser + tests
+New `src/lib/safety/safetyClassifierProbeSchema.ts` exporting a pure `parseSafetyClassifierProbeResult(value: unknown)` that accepts only `{ state: "green" }` or `{ state: "amber" }` and rejects everything else (red, extra keys, markdown-fenced JSON, missing/unknown state, non-objects). Tests in `src/lib/safety/safetyClassifierProbeSchema.test.ts` cover exactly those cases. No production wiring, no feature flag.
+
+### 3. Documentation
+- `docs/ai/companion-safety-emotional-continuity.md`: add the AIC-5A unmetered-deterministic-route acceptance (fixed response, 0 model/grounding/memory/history calls, 0 LLM spend, validation and platform controls still apply, GREEN quota unchanged) and the full AIC-5B feasibility record (mechanism, model, stream/non-stream, schema, attempts, valid/invalid counts, injection resistance, latency min/median/max, usage metadata, failure behaviour, go/no-go).
+- `docs/ai/companion-architecture.md`: updated only if the result materially changes the planned architecture.
+- `docs/ai/adr/ADR-AIC5-proposals.md`: ADR-AIC5-08 stays PROPOSED unless the probe both proves the requirement and adopts the principle; 03–07 unchanged.
+- `roadmap.md`: AIC-5B entry.
+
+### 4. Validation
+Focused parser tests, then `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`. No deployment.
+
+## Boundaries held
+
+`ai-search`, `safetyRouter`, `safetyState`, `urgentPatterns`, JourneyContext, memory, conversation runtime, grounding/NHS routing, client safety and UI are untouched. No classifier in production, no AMBER/UNSUPPORTED routing, no prose parsing, no user-facing route, no new edge function, no real user data, no safety/emotion persistence, no classifier flag. Memory and history flags stay OFF. If the probe turns out to require any production change or deployment, work stops and reports before doing it.
+
+## Report
+
+Closes with the 48-point AIC-5B completion report and a SUPPORTED / UNSUPPORTED / INCONCLUSIVE verdict. AIC-5C not started.

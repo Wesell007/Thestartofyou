@@ -8,8 +8,8 @@
  */
 
 import { describe, expect, it, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { fireEvent, render, screen } from "@testing-library/react";
+
 import { MemoryRouter } from "react-router-dom";
 
 import Footer from "@/components/layout/Footer";
@@ -88,7 +88,7 @@ describe("WC-4 companion panel", () => {
     );
 
     const launcher = await screen.findByRole("button", { name: /companion/i });
-    await userEvent.click(launcher);
+    fireEvent.click(launcher);
     expect(await screen.findByRole("dialog")).toBeInTheDocument();
   });
 });

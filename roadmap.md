@@ -1,8 +1,11 @@
 # Roadmap
 
-## In progress
-- WC-3c — Canonical Breadcrumb Coverage & Hierarchy — COMPLETE (see debt below)
-- WC-3d — BreadcrumbList Structured Data Integration — COMPLETE (resolved families only)
+## Completed
+- WC-3a — Shared Breadcrumb Foundation — CLOSED PASS
+- WC-3b — Existing Breadcrumb Migration — CLOSED PASS
+- WC-3c — Canonical Breadcrumb Coverage & Hierarchy — CLOSED PASS (see debt below)
+- WC-3d — BreadcrumbList Structured Data Integration — CLOSED PASS (resolved families only)
+- WC-3e — Final Navigation / IA Corrections — CLOSED PASS. WC-3 — CLOSED PASS.
 
 ## Carry-forward: dead components (do not delete without review)
 - `src/components/week/WeekHero.tsx` — unreachable; live week experience is `Week1Page…Week42Page` via `PregnancyWeekRoute.tsx`
@@ -14,4 +17,4 @@
   Proposal recorded only: optional `journeyTopic: { journey; topicSlug }` field on `ArticleData`; nine non-Pregnancy/TTC/IVF journey articles need a product decision.
 
 ## Not started
-- WC-3e, WC-4
+- WC-4 (safe to begin)

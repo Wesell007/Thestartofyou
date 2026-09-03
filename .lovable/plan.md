@@ -76,3 +76,20 @@ Other verified points: no safety state, emotion label or risk score is stored an
 - **AIC-5F** cross-surface verification, deterministic safety tests, eval-dataset extension.
 
 Missing tests to add before build: AMBER/uncertainty behaviour, unsupported routing, precedence (memory/page/history cannot lower severity), crisis-versus-clinical separation, classifier failure policy.
+
+## E. Binding clarifications accepted (approval message)
+
+- The principal gap is recorded as **AMBER absent**: the runtime distinguishes only "ordinary model path" vs "deterministic urgent bypass".
+- No single global precedence chain. Explicit safety-evidence rules instead: current turn is primary; history may add caution; journey context informs relevance not risk; memory personalises but never lowers severity; page context is never personal symptom evidence. **No context may downgrade a deterministic current-turn match** — severity may increase, never silently decrease.
+- AIC-5A wraps the existing `matchUrgent` result into an explicit state; existing regexes are not rewritten. Mismatches (abuse/safeguarding is selected inside the answer builder, not by the matcher) are documented rather than forced.
+- CRISIS audited separately from clinical RED, keeping self-harm/suicide, harm to another, immediate danger and abuse/safeguarding distinguishable.
+- AIC-5B probe is dev/test only: no production routing, no real-user classification, no flag, no prose parsing. Reports SUPPORTED / UNSUPPORTED / INCONCLUSIVE.
+- Prose-token classifiers and post-hoc inspection of the streamed answer are rejected outright. Classifier dependency is OPTIONAL; failure never resolves to GREEN.
+- GREEN is not a clinical verdict. UNSUPPORTED is a capability boundary, not "cannot diagnose".
+- `BANNED_VERDICT_PATTERNS` recorded as development detection only, not enforcement.
+- `askClarification.ts` client-side placement recorded as a voice-readiness seam for AIC-5C; clarification need stays separable from safety state.
+- Emotional/safety persistence stays 0; all four memory and history flags stay OFF; grounding stays frozen at `30B-source-routing-v1` with 0 candidates, 0 approvals, empty eligible list.
+- Preview `useCompanion` error triaged: all routes render inside `CompanionProvider`, and a live check of `/`, `/trying-to-conceive`, `/ask`, `/pregnancy`, `/first-year` and a 404 route reproduced nothing — recorded as NOT REPRODUCIBLE, re-check before build.
+- Expected production code changes 0, test changes 0; baseline stays 80 files / 794 tests.
+
+Deliverables unchanged: `docs/ai/companion-safety-emotional-continuity.md`, an update to `docs/ai/companion-architecture.md`, ADR proposals `ADR-AIC5-01`…`ADR-AIC5-08` (Proposed only), a roadmap entry, and the 62-point completion report plus the additional explicit findings requested.

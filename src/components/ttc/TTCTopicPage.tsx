@@ -598,7 +598,7 @@ const TTCTopicPage = ({ config, heroImage }: Props) => {
                   loading="lazy"
                   className="mx-auto w-10 md:w-12 opacity-60 mb-4"
                 />
-                <Eyebrow>AI Support</Eyebrow>
+                <Eyebrow>Your companion</Eyebrow>
                 <h2 className="mt-3 font-serif text-2xl md:text-3xl text-foreground leading-tight">
                   Ask anything about{" "}
                   <span className="italic font-normal">{config.eyebrow.toLowerCase()}</span>

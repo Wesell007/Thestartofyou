@@ -9,7 +9,7 @@ const links = [
   { label: "Family", desc: "Relationships, routines and growing families.", to: "/family" },
   { label: "The journal", desc: "A guided pregnancy keepsake, offline.", to: "/product" },
   { label: "Tools and calculators", desc: "Due dates, ovulation and quick answers.", to: "/due-date-calculator" },
-  { label: "AI support", desc: "Ask a question, get stage-aware support.", to: "/ask" },
+  { label: "Your companion", desc: "Ask a question, get stage-aware support.", to: "/ask" },
 ];
 
 const AboutEcosystem = () => {

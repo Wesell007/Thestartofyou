@@ -732,7 +732,7 @@ const OvulationResult = ({
       <section className="bg-parchment py-14 md:py-20">
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
           <div className="mb-8">
-            <Eyebrow>AI support</Eyebrow>
+            <Eyebrow>Your companion</Eyebrow>
             <h2 className="font-serif text-2xl sm:text-3xl text-foreground leading-tight mb-3">
               Ask about <span className="italic font-normal">this cycle</span>
             </h2>

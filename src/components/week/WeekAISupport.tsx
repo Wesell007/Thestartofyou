@@ -14,7 +14,7 @@ const WeekAISupport = ({ data }: Props) => {
           {/* Left */}
           <div>
             <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
-              AI Support
+              Your companion
             </p>
             <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
               Ask about this week

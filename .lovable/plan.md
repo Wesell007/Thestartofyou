@@ -1,51 +1,36 @@
-# AIC-5A — Deterministic Safety Foundation
+# AIC-5A — CLOSURE ADDENDUM (validation only)
 
-Build-mode approval is recorded; this card exists only because the workspace is still in plan mode. Approve it to start the build exactly as scoped below.
+No production code, assets, configuration or dependencies were changed during this validation. No plan work is pending beyond the one optional documentation note in item 5/6 below.
 
-## Pre-build gates (run before any production edit)
-
-1. Run `companionSurfaces.test.tsx` alone, then the full suite. Proceed only if clean; record the baseline as 80 files / 794 passing. If the dynamic-import timeout repeats, stop and diagnose instead of editing safety code.
-2. Re-check `/`, `/trying-to-conceive`, `/ask`, `/pregnancy`, `/first-year` and a 404 route for the `useCompanion must be used inside CompanionProvider` error. Not reproducible leaves it a watch item; reproducible stops the slice.
-
-## What gets built
-
-New shared server modules consumed only by `ai-search`:
-
-- `supabase/functions/_shared/safetyState.ts` — `SafetyState` type reserving `green | amber | red | crisis | unsupported`, with only `green`, `red`, `crisis` emitted in this slice.
-- `supabase/functions/_shared/safetyRouter.ts` — one `decideSafety(query)` returning a discriminated decision: `{ state: "green", route: "model" }`, `{ state: "red", route: "deterministic", kind: "clinical" }`, or `{ state: "crisis", route: "deterministic", kind: "crisis" | "abuse" }`, plus the fixed deterministic answer text. It wraps the existing `matchUrgent` / `urgentAnswer` machinery.
-
-`urgentPatterns.ts` keeps every regex byte-identical. The only permitted change is exposing the existing abuse selector (currently internal to `urgentAnswer`) as a minimal helper so the router can report the subtype; matching semantics stay unchanged. Expected urgent regex changes: 0.
-
-## Endpoint reordering in `ai-search/index.ts`
-
-Current order: CORS/parse → rate limit (line ~427) → `matchUrgent` (line ~459, mode may downgrade to the recap fallback) → kill switch (line ~469) → model path.
-
-New order:
-
-```text
-1. CORS + body parse
-2. deterministic safety router
-3. if RED/CRISIS: stream the deterministic answer
-   - no model call, no grounding fetch
-   - mode config cannot substitute DAY_RECAP_UNAVAILABLE_ANSWER
-   - ordinary quota exhaustion or limiter RPC failure cannot suppress it
-4. if GREEN: consume the ordinary rate limit (12/min, 100/hour unchanged; 429/503 unchanged)
-5. if GREEN: AI_SEARCH_DISABLED handling (AI_PAUSED_ANSWER)
-6. normal conversation/context/grounding/model path
-```
-
-Conversation bookkeeping (AIC-4, flags still OFF) keeps storing only visible turns and never influences severity. The limiter may still count urgent requests, but its verdict can no longer block the deterministic branch; no new rate-limit infrastructure and no migration. If implementation shows a migration is genuinely needed, stop and report.
-
-## Tests
-
-Focused deterministic tests covering: GREEN/RED/CRISIS/abuse decision mapping and zero AMBER/UNSUPPORTED emissions; no downgrade by mode, kill switch, journey/page context, memory or history fixtures; rate-limit exhausted and limiter-unavailable both still returning safety guidance while GREEN keeps 429/503; crafted recap payloads escalating and real DaySummaryCard payloads staying GREEN; kill-switch ordering; wording parity with existing answers; no new safety persistence or transcript logging. Existing `urgentPatterns`, `aiEvalDataset` and `aiSearchEndpoint` assertions stay untouched.
-
-## Explicitly out of scope
-
-No classifier or structured-output probe, no AMBER, no UNSUPPORTED consolidation, no emotional continuity, no grounding/NHS/JourneyContext change, no client sanitisation or `BANNED_VERDICT_PATTERNS` enforcement, no UI change, memory and history flags stay OFF.
-
-## Docs and closure
-
-Update `docs/ai/companion-safety-emotional-continuity.md` and `docs/ai/companion-architecture.md` with the implemented router and order after validation; move only ADR-AIC5-01 and ADR-AIC5-02 to ACCEPTED if the build supports them, leaving the rest PROPOSED.
-
-Validation: `npm test`, `npm run lint` (baseline 1 error / 10 warnings, no new findings), `npm run typecheck`, `npm run build`, then deploy `ai-search` only and run controlled smoke checks (GREEN, clinical RED, CRISIS, kill switch where safe). Then the 48-point completion report; AIC-5B is not started.
+1. **companionSurfaces isolated** — PASS, 7/7 (4.45s).
+2. **Complete suite** — PASS, 82 test files, 827/827 tests (50.27s).
+3. **Repeated timeout** — NO. The dynamic-import timeout did not reproduce.
+4. **Timeout root cause** — not reproduced, so no fix applied and no assertion or timeout was weakened. Evidence points to transform/import contention under concurrent load (the failing run showed 79.6s transform and 174s import versus 26.7s / 83.4s in the clean run), not test pollution, provider lifecycle or application behaviour. Retained as a harness watch item, not an AIC-5A defect.
+5. **Urgent-path abuse-protection classification** — **B. CHEAP DETERMINISTIC ROUTE ACCEPTABLY UNMETERED.** No new mechanism proposed, no migration, no second limiter.
+6. **Exact protection relied upon** —
+   - Supabase Edge Runtime platform-level request handling and per-project infrastructure limits (the only quota mechanism in front of this branch).
+   - Request-shape constraints in `_shared/validation.ts`: POST-only, JSON body, bounded query length, bounded optional fields; malformed bodies are rejected before `decideSafety`.
+   - CORS allowlist (`thestartofyou.com`, `www`, `localhost:8080`, plus `ALLOWED_ORIGINS`) — constrains browser callers only, not direct clients.
+   - `verify_jwt = false` on `ai-search` is unchanged and required for anonymous readers.
+   - Cost profile justifying B: model calls 0, grounding fetches 0, memory retrieval 0, history enrichment 0, LLM spend 0; the branch returns fixed text. Optional follow-up (documentation only, no code): record this acceptance in `docs/ai/companion-safety-emotional-continuity.md`.
+7. **CRISIS live smoke** — PASS. `"I cannot keep myself safe"` against the deployed endpoint returned the deterministic crisis answer (`## Please get urgent help now`, 999/A&E and urgent mental-health routing). No model call in the stream, no error frames, no runtime/console errors in function logs.
+8. **Abuse/safeguarding live smoke** — PASS. `"Someone at home is hurting me"` returned the distinct deterministic safeguarding answer (`## Please get help with this now`, 999 silent-call guidance). Subtypes remain distinguishable live.
+9. **Kill-switch proof type** — deterministic test (`src/test/aiSearchSafetyRouting.test.ts`). Production `AI_SEARCH_DISABLED` was not toggled. RED/CRISIS + disabled → deterministic escalation; GREEN + disabled → `AI_PAUSED_ANSWER`.
+10. **Final endpoint ordering** — unchanged: CORS/method/body validation → `decideSafety` → RED/CRISIS deterministic answer (no quota check, no enrichment, no grounding, no model, no kill-switch suppression) → GREEN: 12/min + 100/hour rate limit → conversation → `AI_SEARCH_DISABLED` → grounding/context/model.
+11. **Urgent regex changes** — 0.
+12. **Deterministic wording changes** — 0 (asserted byte-identical against `urgentAnswer` in `safetyRouter.test.ts`).
+13. **Model calls on RED/CRISIS** — 0.
+14. **Grounding calls on RED/CRISIS** — 0.
+15. **Ordinary GREEN quota** — unchanged and proven: 429 with `Retry-After` when exhausted, 503 when the limiter is unavailable.
+16. **Safety-state persistence** — 0. No state, label, score, flag or metadata written anywhere.
+17. **Raw safety logging** — 0. No query text, safety decision or transcript logged; only the cold-start version line.
+18. **Grounding state** — `AI_SOURCE_ROUTING_VERSION = 30B-source-routing-v1` unchanged; grounding-expansion candidates 0, approvals 0, eligible slugs `[]`. The pre-existing NHS `APPROVED_SOURCES` map is untouched.
+19. **Memory / history flags** — both OFF, unchanged. AMBER emitted 0, UNSUPPORTED emitted 0, JourneyContext changes 0, UI changes 0.
+20. **Tests** — PASS, 827/827 across 82 files.
+21. **Lint** — 1 pre-existing `prefer-const` error (`src/integrations/supabase/previewAuthStorage.ts`, generated) and 10 pre-existing react-refresh warnings. 0 new findings.
+22. **Typecheck** — PASS.
+23. **Build** — PASS.
+24. **Additional production changes** — NO.
+25. **Additional deployment** — NO.
+26. **AIC-5A — CLOSED PASS.**
+27. **AIC-5B — SAFE TO BEGIN** (not started).

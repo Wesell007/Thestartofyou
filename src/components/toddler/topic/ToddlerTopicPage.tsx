@@ -19,6 +19,8 @@ import {
 } from "@/data/toddlerArticleData";
 import ToddlerArticleCard from "@/components/toddler/article/ToddlerArticleCard";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 interface Props {
   config: ToddlerTopicConfig;
@@ -58,6 +60,13 @@ const ToddlerTopicPage = ({ config }: Props) => {
   const imagePanelShadow =
     "0 28px 60px -34px rgba(70,40,20,0.42), inset 0 1px 0 hsl(0 0% 100% / 0.55)";
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Home", href: "/" },
+    { label: "Toddler", href: "/toddler" },
+    { label: config.title, href: `/toddler/${config.slug}` },
+  ];
+
   return (
     <div className="min-h-screen font-sans bg-parchment">
       <Navbar />
@@ -81,16 +90,13 @@ const ToddlerTopicPage = ({ config }: Props) => {
 
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
             {/* Breadcrumb outside the hero card */}
+            <BreadcrumbJsonLd items={breadcrumbItems} />
             <Breadcrumbs
               tone="section"
               showHomeIcon
               className="mb-10 md:mb-12 font-sans"
               colors={{ base: deepSoft, link: accent, current: deep }}
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Toddler", href: "/toddler" },
-                { label: config.title, href: `/toddler/${config.slug}` },
-              ]}
+              items={breadcrumbItems}
             />
 
             {/* Parchment hero card — image-led split */}

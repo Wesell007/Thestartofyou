@@ -44,6 +44,8 @@ import imgEmotionalCard from "@/assets/guidance-card-emotional.jpg";
 import imgSupport from "@/assets/guidance-support.jpg";
 import imgPregnancy from "@/assets/pregnancy-journey.jpg";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 // Per-stage theme — all lilac family, shifted by stage
 type IVFTheme = { accentHsl: string; tintHsl: string; icon: LucideIcon };
@@ -174,20 +176,24 @@ const IVFTopicPage = ({ config }: Props) => {
     </div>
   );
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Home", href: "/" },
+    { label: "IVF", href: "/ivf" },
+    { label: config.eyebrow, href: `/ivf/${config.slug}` },
+  ];
+
   return (
     <div className="min-h-screen font-sans bg-parchment">
       <Navbar />
       <main className="overflow-hidden">
         {/* Breadcrumb */}
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl pt-[100px] sm:pt-[116px] md:pt-[128px]">
+          <BreadcrumbJsonLd items={breadcrumbItems} />
           <Breadcrumbs
             tone="section"
             className="font-sans tracking-wide"
-            items={[
-              { label: "Home", href: "/" },
-              { label: "IVF", href: "/ivf" },
-              { label: config.eyebrow, href: `/ivf/${config.slug}` },
-            ]}
+            items={breadcrumbItems}
           />
         </div>
 

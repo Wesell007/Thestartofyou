@@ -3,6 +3,8 @@ import { Calendar, ArrowDown } from "lucide-react";
 import botanicalTr from "@/assets/botanical-branch-tr.png";
 import botanicalBl from "@/assets/botanical-branch-bl.png";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 interface Props {
   label: string;
@@ -16,6 +18,13 @@ interface Props {
 const ThirdTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: Props) => {
   // 4 timeline markers (28, 32, 36, 40)
   const milestones = [28, 32, 36, 40];
+
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Home", href: "/" },
+    { label: "Pregnancy", href: "/pregnancy" },
+    { label, href: "/pregnancy/third-trimester" },
+  ];
 
   return (
     <section className="relative bg-parchment overflow-hidden pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24">
@@ -37,14 +46,11 @@ const ThirdTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: P
       />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10 text-center">
+        <BreadcrumbJsonLd items={breadcrumbItems} />
         <Breadcrumbs
           tone="section"
           className="flex justify-center mb-7"
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Pregnancy", href: "/pregnancy" },
-            { label, href: "/pregnancy/third-trimester" },
-          ]}
+          items={breadcrumbItems}
         />
 
         <p className="font-sans text-[11px] font-medium tracking-[0.28em] uppercase text-sage-muted mb-5">

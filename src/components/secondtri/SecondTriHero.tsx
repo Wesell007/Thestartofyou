@@ -3,6 +3,8 @@ import { Calendar, ArrowDown } from "lucide-react";
 import botanicalTr from "@/assets/botanical-branch-tr.png";
 import botanicalBl from "@/assets/botanical-branch-bl.png";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 interface Props {
   label: string;
@@ -20,6 +22,13 @@ const SecondTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: 
     Math.round(weekStart + (weekEnd - weekStart) * 0.34),
     Math.round(weekStart + (weekEnd - weekStart) * 0.62),
     weekEnd,
+  ];
+
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Home", href: "/" },
+    { label: "Pregnancy", href: "/pregnancy" },
+    { label, href: "/pregnancy/second-trimester" },
   ];
 
   return (
@@ -42,14 +51,11 @@ const SecondTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: 
       />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10 text-center">
+        <BreadcrumbJsonLd items={breadcrumbItems} />
         <Breadcrumbs
           tone="section"
           className="flex justify-center mb-7"
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Pregnancy", href: "/pregnancy" },
-            { label, href: "/pregnancy/second-trimester" },
-          ]}
+          items={breadcrumbItems}
         />
 
         <p className="font-sans text-[11px] font-medium tracking-[0.28em] uppercase text-sage-muted mb-5">

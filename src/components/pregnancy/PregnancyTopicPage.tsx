@@ -88,6 +88,8 @@ interface Props {
   config: PregnancyTopicPageConfig;
 }
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import { HOME_CRUMB, PREGNANCY_CRUMB } from "@/lib/seo/journeyCrumbs";
 
 // ─── Per-topic theme system ──────────────────────────────────────────────
@@ -335,6 +337,13 @@ const PregnancyTopicPage = ({ config }: Props) => {
     </div>
   );
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    HOME_CRUMB,
+    PREGNANCY_CRUMB,
+    { label: config.title, href: `/pregnancy/${config.slug}` },
+  ];
+
   return (
     <div className="min-h-screen font-sans bg-parchment">
       <Navbar />
@@ -351,14 +360,11 @@ const PregnancyTopicPage = ({ config }: Props) => {
           />
 
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">
+            <BreadcrumbJsonLd items={breadcrumbItems} />
             <Breadcrumbs
               tone="section"
               className="mb-8 font-sans tracking-wide"
-              items={[
-                HOME_CRUMB,
-                PREGNANCY_CRUMB,
-                { label: config.title, href: `/pregnancy/${config.slug}` },
-              ]}
+              items={breadcrumbItems}
             />
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
               {/* Left text */}

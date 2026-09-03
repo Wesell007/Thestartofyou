@@ -12,6 +12,8 @@ import { firstYearStages } from "@/data/firstYearStageData";
 import NotFound from "@/pages/NotFound";
 import AskLink from "@/components/shared/AskLink";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import { HOME_CRUMB, TTC_CRUMB } from "@/lib/seo/journeyCrumbs";
 
 // Registry of all stage data by journey prefix
@@ -70,6 +72,13 @@ const StagePage = () => {
     journey === "trying-to-conceive" &&
     breadcrumbStageAllowlist.includes(`${journey}/${stage}`);
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    HOME_CRUMB,
+    TTC_CRUMB,
+    { label: data.title, href: `/${journey}/${stage}` },
+  ];
+
   return (
     <div className="min-h-screen font-sans">
       {seo ? (
@@ -89,15 +98,14 @@ const StagePage = () => {
           </div>
           <div className="container mx-auto px-6 md:px-10 max-w-4xl relative z-10 text-center">
             {showBreadcrumbs && (
-              <Breadcrumbs
-                tone="section"
-                className="flex justify-center mb-6 font-sans tracking-wide"
-                items={[
-                  HOME_CRUMB,
-                  TTC_CRUMB,
-                  { label: data.title, href: `/${journey}/${stage}` },
-                ]}
-              />
+              <>
+                <BreadcrumbJsonLd items={breadcrumbItems} />
+                <Breadcrumbs
+                  tone="section"
+                  className="flex justify-center mb-6 font-sans tracking-wide"
+                  items={breadcrumbItems}
+                />
+              </>
             )}
             <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-4">
               {data.journeyLabel}

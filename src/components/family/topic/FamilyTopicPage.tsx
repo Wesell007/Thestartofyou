@@ -16,6 +16,8 @@ import {
 import { getFamilyArticlesByTopic, type FamilyArticleTopic } from "@/data/familyArticleData";
 import FamilyArticleImageCard from "@/components/family/article/FamilyArticleImageCard";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 interface Props {
   config: FamilyTopicConfig;
@@ -99,6 +101,13 @@ const FamilyTopicPage = ({ config }: Props) => {
   const abstractPanelShadow =
     "0 28px 60px -34px rgba(70,50,20,0.42), inset 0 1px 0 hsl(0 0% 100% / 0.6)";
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Home", href: "/" },
+    { label: "Family", href: "/family" },
+    { label: config.title, href: `/family/${config.slug}` },
+  ];
+
   return (
     <div className="min-h-screen font-sans bg-parchment">
       <Navbar />
@@ -120,16 +129,13 @@ const FamilyTopicPage = ({ config }: Props) => {
 
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
             {/* Breadcrumb */}
+            <BreadcrumbJsonLd items={breadcrumbItems} />
             <Breadcrumbs
               tone="section"
               showHomeIcon
               className="mb-10 md:mb-12 font-sans"
               colors={{ base: deepSoft, link: accent, current: deep }}
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Family", href: "/family" },
-                { label: config.title, href: `/family/${config.slug}` },
-              ]}
+              items={breadcrumbItems}
             />
 
             {/* Hero card */}

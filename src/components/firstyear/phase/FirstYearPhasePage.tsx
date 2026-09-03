@@ -7,6 +7,8 @@ import { toMetaDescription } from "@/lib/seo/metaDescription";
 import type { PhaseConfig } from "@/data/firstYearPhaseData";
 import AskLink from "@/components/shared/AskLink";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import { HOME_CRUMB, FIRST_YEAR_CRUMB } from "@/lib/seo/journeyCrumbs";
 
 // Resolve hero asset via Vite's import.meta.glob (eager URL imports).
@@ -36,6 +38,13 @@ const QuietRule = () => (
 const PhaseHero = ({ config }: Props) => {
   const imgSrc = resolveHero(config.heroImage);
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    HOME_CRUMB,
+    FIRST_YEAR_CRUMB,
+    { label: config.title, href: `/first-year/${config.slug}` },
+  ];
+
   return (
     <section className="relative bg-parchment pt-28 pb-12 md:pt-32 md:pb-16 overflow-hidden">
       <div className="absolute inset-x-0 bottom-0 h-48 pointer-events-none flex">
@@ -50,14 +59,11 @@ const PhaseHero = ({ config }: Props) => {
       </div>
 
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl relative">
+        <BreadcrumbJsonLd items={breadcrumbItems} />
         <Breadcrumbs
           tone="section"
           className="mb-8 font-sans tracking-wide"
-          items={[
-            HOME_CRUMB,
-            FIRST_YEAR_CRUMB,
-            { label: config.title, href: `/first-year/${config.slug}` },
-          ]}
+          items={breadcrumbItems}
         />
         <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-14 items-center">
           <div>

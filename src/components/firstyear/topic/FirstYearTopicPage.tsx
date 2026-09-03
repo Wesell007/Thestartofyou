@@ -17,6 +17,8 @@ import {
 import FirstYearArticleCard from "@/components/firstyear/article/FirstYearArticleCard";
 import AskLink from "@/components/shared/AskLink";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import { HOME_CRUMB, FIRST_YEAR_CRUMB } from "@/lib/seo/journeyCrumbs";
 
 // First Year topic pages are photo-led and calm. No botanical sprigs or
@@ -142,6 +144,13 @@ const FirstYearTopicPage = ({ config }: Props) => {
   // frame at every breakpoint. Falls back to a safe upper-centre default.
   const heroObjectPosition = config.heroObjectPosition ?? "center 30%";
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    HOME_CRUMB,
+    FIRST_YEAR_CRUMB,
+    { label: config.title, href: slugToPath(config.slug) },
+  ];
+
   return (
     <div className="min-h-screen font-sans bg-parchment">
       <Navbar />
@@ -157,14 +166,11 @@ const FirstYearTopicPage = ({ config }: Props) => {
             aria-hidden
           />
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">
+            <BreadcrumbJsonLd items={breadcrumbItems} />
             <Breadcrumbs
               tone="section"
               className="mb-8 font-sans tracking-wide"
-              items={[
-                HOME_CRUMB,
-                FIRST_YEAR_CRUMB,
-                { label: config.title, href: slugToPath(config.slug) },
-              ]}
+              items={breadcrumbItems}
             />
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-center">
               {/* Copy */}

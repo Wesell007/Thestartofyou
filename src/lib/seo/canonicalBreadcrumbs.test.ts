@@ -85,13 +85,28 @@ describe("WC-3c canonical breadcrumb hierarchies", () => {
     expect(src).toContain("showBreadcrumbs &&");
   });
 
-  it("emits no BreadcrumbList structured data yet", () => {
+  it("emits BreadcrumbList structured data from the same crumb array (WC-3d)", () => {
     for (const f of [
       "src/components/pregnancy/PregnancyTopicPage.tsx",
       "src/pages/StagePage.tsx",
       "src/components/shared/HubArticleView.tsx",
+      "src/pages/Week17Page.tsx",
     ]) {
-      expect(read(f)).not.toContain("buildBreadcrumbJsonLd");
+      const src = read(f);
+      // schema is mounted via the shared component, never hand-rolled
+      expect(src).not.toContain("buildBreadcrumbJsonLd");
+      expect(src).toContain('import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd"');
+      expect(src.match(/<BreadcrumbJsonLd items=\{breadcrumbItems\} \/>/g)).toHaveLength(1);
+      expect(src).toContain("items={breadcrumbItems}");
+    }
+  });
+
+  it("keeps unresolved legacy article surfaces free of BreadcrumbList schema", () => {
+    for (const f of [
+      "src/components/article/ArticleHeader.tsx",
+      "src/components/article/flagship/FlagshipHero.tsx",
+    ]) {
+      expect(read(f)).not.toContain("BreadcrumbJsonLd");
     }
   });
 

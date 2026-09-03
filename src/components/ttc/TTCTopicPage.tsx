@@ -91,6 +91,8 @@ import imgTTCAfter35 from "@/assets/ttc-after-35.jpg";
 import imgEmotionalPressureAge from "@/assets/ttc-emotional-pressure-age.jpg";
 import imgPartnerSupportTTC from "@/assets/ttc-partner-support.jpg";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 
 interface Props {
@@ -274,20 +276,24 @@ const TTCTopicPage = ({ config, heroImage }: Props) => {
     </div>
   );
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Home", href: "/" },
+    { label: "Trying to conceive", href: "/trying-to-conceive" },
+    { label: config.eyebrow, href: `/trying-to-conceive/${config.slug}` },
+  ];
+
   return (
     <div className="min-h-screen font-sans bg-parchment">
       <Navbar />
       <main className="overflow-hidden">
         {/* Breadcrumb */}
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl pt-[100px] sm:pt-[116px] md:pt-[128px]">
+          <BreadcrumbJsonLd items={breadcrumbItems} />
           <Breadcrumbs
             tone="section"
             className="font-sans tracking-wide"
-            items={[
-              { label: "Home", href: "/" },
-              { label: "Trying to conceive", href: "/trying-to-conceive" },
-              { label: config.eyebrow, href: `/trying-to-conceive/${config.slug}` },
-            ]}
+            items={breadcrumbItems}
           />
         </div>
 

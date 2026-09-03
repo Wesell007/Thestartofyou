@@ -12,6 +12,8 @@ import Footer from "@/components/layout/Footer";
 import ReadingProgressBar from "@/components/shared/ReadingProgressBar";
 import type { ReactNode } from "react";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 export interface HubArticleViewArticle {
   slug: string;
@@ -102,6 +104,14 @@ const HubArticleView = ({
     </div>
   );
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Home", href: "/" },
+    { label: hubLabel, href: hubHref },
+    { label: topicLabel, href: topicHref },
+    { label: article.title, href: `${topicHref}/${article.slug}` },
+  ];
+
   return (
     <div className="min-h-screen font-sans bg-parchment">
       <Navbar />
@@ -120,17 +130,13 @@ const HubArticleView = ({
             <div className={heroImage ? "grid gap-10 md:gap-12 lg:gap-16 md:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] md:items-center" : ""}>
               <div className={heroImage ? "max-w-[36rem]" : ""}>
             {/* Breadcrumb */}
+            <BreadcrumbJsonLd items={breadcrumbItems} />
             <Breadcrumbs
               tone="section"
               showHomeIcon
               className="mb-10 md:mb-12 font-sans"
               colors={{ base: deepSoft, link: accent, current: deep }}
-              items={[
-                { label: "Home", href: "/" },
-                { label: hubLabel, href: hubHref },
-                { label: topicLabel, href: topicHref },
-                { label: article.title, href: `${topicHref}/${article.slug}` },
-              ]}
+              items={breadcrumbItems}
             />
 
             {/* Eyebrow */}

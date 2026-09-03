@@ -26,6 +26,16 @@ import WeekCommonQuestions from "@/components/week/WeekCommonQuestions";
 import WeekSources from "@/components/week/WeekSources";
 import { buildWeekQuestions, getWeekSources } from "@/data/weekSupportContent";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
+
+// Single authoritative crumb array: feeds the visible trail and the schema.
+const breadcrumbItems: BreadcrumbItem[] = [
+  { label: "Home", href: "/" },
+  { label: "Pregnancy", href: "/pregnancy" },
+  { label: "Second trimester", href: "/pregnancy/second-trimester" },
+  { label: "Week 24", href: "/pregnancy/week/24" },
+];
 
 const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; tone?: "sage" | "terracotta" | "lavender" }) => {
   const toneCls = tone === "terracotta" ? "text-terracotta" : tone === "lavender" ? "text-lavender-foreground" : "text-sage";
@@ -48,15 +58,11 @@ const Hero = () => (
       <img src={botanicalTr} alt="" aria-hidden="true" className="pointer-events-none absolute top-20 right-0 w-[150px] lg:w-[210px] opacity-25 select-none hidden md:block" />
 
       <div className="container mx-auto px-14 sm:px-16 md:px-10 max-w-5xl relative z-10 text-center">
+        <BreadcrumbJsonLd items={breadcrumbItems} />
         <Breadcrumbs
           tone="section"
           className="flex justify-center mb-6 sm:mb-7 font-sans text-[12px] font-normal text-foreground/65"
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Pregnancy", href: "/pregnancy" },
-            { label: "Second trimester", href: "/pregnancy/second-trimester" },
-            { label: "Week 24", href: "/pregnancy/week/24" },
-          ]}
+          items={breadcrumbItems}
         />
 
         <p className="font-sans text-[11px] font-semibold tracking-[0.3em] uppercase text-sage mb-5">

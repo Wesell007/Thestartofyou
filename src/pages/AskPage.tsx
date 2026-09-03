@@ -466,6 +466,9 @@ const AskPage = () => {
 
             <section className="relative overflow-hidden rounded-[22px] border border-border/40 bg-card px-5 py-8 text-center shadow-soft md:px-8 md:py-10">
               <Sprig tone="sage" className="mx-auto mb-3 h-10 w-10 opacity-60" />
+              <p className="mb-2 font-sans text-[11px] font-light uppercase tracking-[0.2em] text-muted-foreground">
+                Ask your companion
+              </p>
               <h1 className="font-serif text-[1.6rem] leading-[1.2] tracking-[-0.01em] text-foreground md:text-[2rem]">
                 {companionName ? `How can ${companionName} help you today?` : "How can I help you today?"}
               </h1>

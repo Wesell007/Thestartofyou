@@ -39,6 +39,15 @@ const JournalMoment = () => {
               Explore the journal
               <ArrowRight size={13} />
             </Link>
+            <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mt-5">
+              Need something more personal?{" "}
+              <Link
+                to="/ask"
+                className="text-foreground underline underline-offset-4 decoration-sage/40 hover:decoration-sage transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40 rounded-sm"
+              >
+                Ask your companion
+              </Link>
+            </p>
           </div>
         </div>
       </div>

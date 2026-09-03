@@ -32,3 +32,6 @@ supabase/.temp/
 *.njsproj
 *.sln
 *.sw?
+
+# AIC-5B local probe output (never committed)
+.probe-output/

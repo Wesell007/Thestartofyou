@@ -1,6 +1,12 @@
 # ADR-AIC5-01 … 08 — Safety intelligence and emotional continuity
 
-ADR-AIC5-01 and ADR-AIC5-02 are ACCEPTED as of AIC-5A. ADR-AIC5-08 is ACCEPTED as of AIC-5B. ADR-AIC5-03 … 07 remain PROPOSED.
+ADR-AIC5-01 and ADR-AIC5-02 are ACCEPTED as of AIC-5A. ADR-AIC5-08 is ACCEPTED as
+of AIC-5B. ADR-AIC5-06 remains PROPOSED as a decision record; its open question
+(can the gateway enforce strict structured output?) was answered SUPPORTED by the
+AIC-5B probe, but the decision to depend on it is still not taken.
+ADR-AIC5-07 is ACCEPTED in its ephemeral-continuity principle as of AIC-5C: the
+clarification/boundary layer reads bounded conversation turns in-request and
+persists no derived state. ADR-AIC5-03, 04 and 05 remain PROPOSED.
 
 Status of every record below: **PROPOSED**. None is implemented. Accepting any
 of them requires the corresponding AIC-5 build slice and its own approval.
@@ -136,3 +142,33 @@ client-side clarification helper is assessed for migration in AIC-5C.
 
 **Consequences.** Voice work inherits safety unchanged. Client-only shortcuts
 must be re-homed before they can be relied on.
+
+
+## ADR-AIC5-09 — Clarification and capability boundaries are server-owned (ACCEPTED, AIC-5C)
+
+**Context.** Clarification ran in the browser and short-circuited the request, so
+it escaped the GREEN quota and the kill switch and would have to be duplicated
+for every future transport.
+
+**Decision.** One shared server boundary router owns the clarify/unsupported
+decision for every surface. It runs on the GREEN path only, after deterministic
+safety, ordinary rate limiting and `AI_SEARCH_DISABLED`, and before any grounding
+or model call. Results travel as explicit response headers; the client is
+display-only with zero decision authority.
+
+**Consequences.** Panel, `/ask` and any future voice transport receive the same
+decision from the same owner. Clarified turns are now correctly metered and
+correctly paused. Adding a transport costs a display mapping, not a rules copy.
+
+## ADR-AIC5-10 — UNSUPPORTED is precision-first and honest (ACCEPTED, AIC-5C)
+
+**Context.** A capability boundary that fires on ordinary guidance questions is
+more damaging than one that misses.
+
+**Decision.** UNSUPPORTED covers exactly two narrow categories — a professional
+act requested of the companion (diagnose, prescribe) and an external action it
+cannot perform (call, contact, book, send, access records) — and only when the
+companion itself is asked to perform the act. Anything ambiguous continues to
+the model. Every boundary answer states plainly that nothing happened, names the
+real-world route, and offers what the companion can do instead. No model call,
+no classifier, no persistence.

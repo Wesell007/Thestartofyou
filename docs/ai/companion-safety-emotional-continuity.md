@@ -548,3 +548,90 @@ Feasibility is not approval. Provider enforcement never replaces application
 validation: any future production path must still run a strict validator over
 the response. The classifier dependency remains **OPTIONAL**, and AIC-5D alone
 decides whether an extra model call per turn is justified.
+
+
+## 20. AIC-5C — Shared clarification and capability boundary
+
+### 20.1 One owner, one decision
+
+Before AIC-5C, the decision to answer a broad question with a clarifying
+question lived in the browser (`src/lib/askClarification.ts`). It ran ahead of
+the network call, so a clarified turn never reached the server: it bypassed the
+ordinary GREEN quota, bypassed `AI_SEARCH_DISABLED`, and existed only for the
+two current surfaces. Any third transport (voice in AIC-6/7) would have needed
+its own copy of the rules.
+
+AIC-5C moves that authority into the shared server layer:
+
+- `supabase/functions/_shared/clarificationRules.ts` — the exact Phase 29B.2
+  rules, unchanged: normalisation, a three-word ceiling, the concern/urgency
+  guard, filler stripping, exactly one core word, and exactly six topics
+  (`milestones`, `feeding`, `sleep`, `symptoms`, `movement`, `testing`) with
+  their existing UK-English copy.
+- `supabase/functions/_shared/companionBoundaryRules.ts` — the boundary router.
+  It returns `continue`, `clarify` (with topic) or `unsupported` (with kind).
+
+The browser now owns **zero** decision authority here. `src/lib/askClarification.ts`
+is deleted; `src/lib/companion/clarificationDisplay.ts` replaces it and does one
+thing: map a server-supplied topic to the existing card question and chips.
+
+### 20.2 Ordering
+
+The GREEN path is now:
+
+```text
+validation
+  → decideSafety            (AIC-5A, authoritative, unchanged)
+  → [RED / CRISIS return]
+  → ordinary rate limit     (GREEN only, unchanged)
+  → conversation + persistence
+  → AI_SEARCH_DISABLED      (kill switch, unchanged)
+  → bounded history load    (AIC-4 bounds, unchanged)
+  → decideBoundary          (AIC-5C, new)
+  → [clarify / unsupported return: no grounding, no model]
+  → grounding → context → memory → history → model
+```
+
+Safety keeps absolute precedence: a deterministic RED or CRISIS decision returns
+before the router is reached, so a concerning question is never met with a
+clarifying question. Quota and kill switch keep their authority over the
+boundary router, which is the behaviour the old client-side placement broke.
+
+### 20.3 Relevant history
+
+A bare topic word is not always ambiguous: after "how much sleep does a six
+month old need?", a follow-up "sleep" has a referent. `hasUsableReferent` looks
+at the last four bounded turns already loaded for the prompt (no second store,
+no extra query) and continues instead of clarifying only when the same subject
+is genuinely present. The rule is deliberately conservative: unrelated history,
+empty history, and a failed history load all read as "no referent", so the
+system clarifies rather than guessing.
+
+### 20.4 UNSUPPORTED — precision first
+
+Two narrow categories only, both matched on an explicit request that the
+companion perform the act:
+
+1. **Professional act** — being asked to diagnose or prescribe.
+2. **External action** — being asked to call or contact a clinician, book an
+   appointment, send a message, or access medical records.
+
+Guidance questions are excluded by construction: "what does my diagnosis mean?",
+"my doctor prescribed this — what is it for?", "should I call my midwife?",
+"how do I book an appointment?" and "can you help me write a message to my
+midwife?" all continue to the model. A false UNSUPPORTED is treated as worse
+than a miss, so anything ambiguous continues.
+
+Each boundary answer is honest and useful rather than a refusal: it states
+plainly that nothing was booked, sent or dialled, points to the right real-world
+route, and offers what the companion *can* do next.
+
+### 20.5 Transport
+
+Boundary results reach the browser as explicit headers —
+`X-Companion-Boundary: clarify | unsupported` and, for a clarification,
+`X-Companion-Clarification-Topic` — both added to
+`Access-Control-Expose-Headers`. No marker, tag or sentinel is ever encoded in
+the visible answer, and the client never inspects assistant prose. No safety
+state, score or reasoning is transported. Nothing about the boundary decision is
+persisted, logged raw, or sent to analytics.

@@ -8,7 +8,7 @@
  * no grounding material, no model reasoning and no auth data ever lives here.
  */
 
-import type { AskClarification } from "@/lib/askClarification";
+import type { AskClarification } from "@/lib/companion/clarificationDisplay";
 
 export type CompanionRole = "user" | "assistant";
 
@@ -28,8 +28,9 @@ export interface CompanionMessage {
   /** Opaque idempotency key for the user turn. Never a trust claim. */
   clientMessageId?: string;
   /**
-   * A locally resolved clarifying question. Display-only: it is not sent to
-   * the model as history and is not persisted server-side.
+   * AIC-5C — display metadata for a clarification the *server* decided on.
+   * Display-only: it is not sent to the model as history and is not stored as
+   * hidden conversation metadata.
    */
   clarification?: AskClarification;
 }

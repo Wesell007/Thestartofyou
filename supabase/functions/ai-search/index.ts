@@ -10,6 +10,8 @@ import {
 import { AI_PAUSED_ANSWER, isAiDisabled } from "../_shared/urgentPatterns.ts";
 import { decideSafety } from "../_shared/safetyRouter.ts";
 import { isDeterministicSafetyDecision } from "../_shared/safetyState.ts";
+import { decideBoundary } from "../_shared/companionBoundaryRules.ts";
+
 import {
   MEMORY_INSTRUCTIONS,
   renderMemoryBlock,
@@ -43,7 +45,11 @@ const responseHeaders = (req: Request) => {
   const headers: Record<string, string> = {
     "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
     // AIC-4: lets the browser learn which stored conversation an answer joined.
-    "Access-Control-Expose-Headers": "X-Conversation-Id",
+    // AIC-5C: explicit structured boundary metadata — never encoded in prose.
+    "Access-Control-Expose-Headers":
+      "X-Conversation-Id, X-Companion-Boundary, X-Companion-Clarification-Topic",
+
+
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Cache-Control": "no-store",
     Vary: "Origin",
@@ -500,12 +506,35 @@ serve(async (req) => {
     );
   }
 
+  // AIC-4: exactly one bounded history load per request. Persistent mode is
+  // server-authoritative; session mode uses the bounded transcript the browser
+  // supplied. It is resolved here so the AIC-5C boundary router can tell
+  // whether a referent already exists, without a second transcript store and
+  // without changing AIC-4 bounds. A failed load returns [], which the router
+  // reads as "no usable referent" — nothing is ever fabricated.
+  const priorTurns: ConversationTurn[] = conversation
+    ? await loadConversationTurns(req, conversation, clientMessageId)
+    : sessionHistory;
+
+  // AIC-5C: the shared capability/clarification boundary. GREEN only, after
+  // ordinary quota and the kill switch, and before any grounding or model
+  // work. Structured metadata travels in explicit headers, never in prose.
+  const boundary = decideBoundary({ query, priorTurns });
+  if (boundary.kind !== "continue") {
+    const response = await controlledAnswer(boundary.answer);
+    response.headers.set("X-Companion-Boundary", boundary.kind);
+    if (boundary.kind === "clarify") {
+      response.headers.set("X-Companion-Clarification-Topic", boundary.topic);
+    }
+    return response;
+  }
 
   const apiKey = Deno.env.get("LOVABLE_API_KEY");
   if (!apiKey) {
     console.error("ai-search configuration error: LOVABLE_API_KEY is missing");
     return json(req, { error: "Guidance is temporarily unavailable. Please try again." }, 503);
   }
+
 
   let evidence = "";
   if (modeConfig.useGrounding) {
@@ -522,12 +551,10 @@ serve(async (req) => {
   const structuredJourneyContext = renderJourneyContextBlock(journeyContext);
   // AIC-3: enrichment only, and only for a request that is going to the model.
   const permissionedMemory = await loadPermissionedMemory(req);
-  // AIC-4: exactly one history block. Persistent mode is server-authoritative;
-  // session mode uses the bounded transcript the browser supplied.
-  const priorTurns: ConversationTurn[] = conversation
-    ? await loadConversationTurns(req, conversation, clientMessageId)
-    : sessionHistory;
+  // AIC-4: exactly one history block, rendered from the turns already loaded
+  // above.
   const conversationHistory = renderConversationHistory(priorTurns);
+
   const userContent = [
     "<user_question>", query, "</user_question>",
     structuredJourneyContext,

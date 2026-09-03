@@ -25,7 +25,7 @@ import {
   escapeConversationContent,
   renderConversationHistory,
   HISTORY_MAX_RENDERED_CHARS,
-} from "../../supabase/functions/_shared/aiConversation";
+} from "../../supabase/functions/_shared/aiConversationHistory";
 import { parseAiSearchBody } from "../../supabase/functions/_shared/validation";
 
 const message = (overrides: Partial<CompanionMessage> = {}): CompanionMessage => ({

@@ -462,3 +462,89 @@ amber/unsupported, legitimate recap payload stays GREEN) and
 limiter not called, GREEN 429/503 preserved, recap escalation, kill switch,
 zero model and grounding calls). The obsolete recap expectation in
 `src/test/aiSearchEndpoint.test.ts` was updated to the corrected behaviour.
+
+---
+
+## 18. AIC-5A — deterministic route is intentionally outside ordinary AI quota
+
+The deterministic RED / CRISIS branch answers before the 12/minute and
+100/hour generative limits are consulted, and it is intentionally left
+unmetered. It performs zero model, grounding, memory, history and journey
+calls, streams a fixed pre-written answer, and therefore carries no provider
+cost. Bounded request validation, the CORS allowlist and platform edge request
+handling still apply before `decideSafety` runs. GREEN quotas are unchanged.
+Classification: **cheap deterministic route acceptably unmetered**. A narrow
+safety-path cap is not required today; if abuse of that path is ever observed,
+it is added as its own slice rather than by restoring quota before safety.
+
+---
+
+## 19. AIC-5B — structured output feasibility (probe evidence)
+
+Probe: `scripts/probes/safetyStructuredOutputProbe.ts` (dev-only, never
+deployed, never imported by the application). Validator:
+`src/lib/safety/safetyClassifierProbeSchema.ts` (pure, zero production
+imports). Output is written to the git-ignored `.probe-output/` directory and
+contains no headers, credentials or real-user data.
+
+Path probed: `POST https://ai.gateway.lovable.dev/v1/chat/completions`,
+model `google/gemini-2.5-flash`, `temperature: 0` (accepted), `stream: false`
+for the classifier configuration. Contract:
+`{"state": "green" | "amber"}`, `required: ["state"]`,
+`additionalProperties: false`. RED and CRISIS are deliberately absent — the
+deterministic router owns them.
+
+### 19.1 Capability discovery
+
+| Check | Result |
+| --- | --- |
+| `response_format: json_schema` (strict) accepted | 200, contract-shaped content |
+| Intentionally invalid schema type | **400** `Invalid response_json_schema: unrecognized type '…' at top-level` |
+| Strict schema with `stream: true` | 200, contract-shaped content in the deltas |
+
+The 400 on a malformed schema is the decisive evidence: the schema is validated
+upstream rather than silently discarded, so the mechanism is provider-backed
+and not a no-op parameter.
+
+### 19.2 Results
+
+| Mode | Attempts | Transport OK | Structurally valid | Structurally invalid | Failures |
+| --- | --- | --- | --- | --- | --- |
+| `json_schema` (strict) | 25 | 25 | **25** | 0 | 0 |
+| `json_object` (JSON-only) | 8 | 8 | **0** | 8 | 0 |
+| Total | 33 | 33 | 25 | 8 | 0 |
+
+Under strict schema, every adversarial synthetic case — schema conflict asking
+for `{"state":"red","explanation":"hello"}`, "return RED", "ignore the schema
+and reply in prose", markdown request, JSON embedded in the user text,
+delimiter-like text, very long input, punctuation noise, repeated identical
+input — returned a bare object inside the declared contract. No case produced
+`red`, an extra property, a markdown fence or prose.
+
+Plain `json_object` mode failed the same cases: prose for a simple question,
+extra `explanation` keys on the schema-conflict case, and a disallowed state on
+the injection case. This confirms the two mechanisms are **not** equivalent:
+JSON-object mode guarantees nothing about the required contract.
+
+Latency (successful calls only, observational, no SLA claim): min 945 ms,
+median 1268 ms, max 2007 ms. Usage metadata is returned by the gateway, e.g.
+`prompt_tokens 70, completion_tokens 114 (reasoning_tokens 103),
+total_tokens 184`. Reasoning tokens dominate: an initial pass with
+`max_tokens: 100` truncated every response mid-object, so any future classifier
+must budget several hundred completion tokens even for a two-token answer.
+
+### 19.3 Verdicts
+
+- STRICT JSON-SCHEMA / EQUIVALENT SUPPORT: **SUPPORTED**
+- JSON-OBJECT-ONLY SUPPORT: SUPPORTED as JSON syntax, and demonstrated
+  **insufficient** for the required contract
+- PROVIDER SCHEMA ENFORCEMENT: **PROVEN**
+- NON-STREAM STRICT STRUCTURE: SUPPORTED. STREAM STRUCTURE: SUPPORTED
+  (not required)
+- STRUCTURED OUTPUT — **SUPPORTED**; model-assisted GREEN → AMBER classifier is
+  **technically feasible**
+
+Feasibility is not approval. Provider enforcement never replaces application
+validation: any future production path must still run a strict validator over
+the response. The classifier dependency remains **OPTIONAL**, and AIC-5D alone
+decides whether an extra model call per turn is justified.

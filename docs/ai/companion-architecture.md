@@ -396,3 +396,18 @@ Carried forward from the audit, unimplemented:
 - AMBER is the principal missing state; deterministic RED and CRISIS may never
   be downgraded; any classifier stays optional; emotional and safety-state
   persistence stay at 0.
+
+### AIC-5A — deterministic safety foundation (implemented)
+
+`decideSafety(query)` in `supabase/functions/_shared/safetyRouter.ts` is the one
+server-side safety decision point for every transport. It runs immediately after
+body validation and before rate limiting, conversation persistence, the
+`AI_SEARCH_DISABLED` kill switch and any mode behaviour.
+
+RED (clinical) and CRISIS (self-harm / safeguarding) terminate the request with
+fixed, unchanged escalation wording and make zero model, grounding, memory,
+history and rate-limiter calls, so neither exhausted quota, a failing limiter,
+recap mode nor a paused companion can suppress them. GREEN keeps the previous
+path exactly, including 12/min and 100/hour limits. Safety state is
+request-runtime only: never persisted, never logged, never shown as a label.
+`amber` and `unsupported` are reserved names with no implementation.

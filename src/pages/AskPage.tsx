@@ -705,7 +705,7 @@ const AskPage = () => {
                     <span className="mr-1.5 font-normal text-foreground/70">
                       {turn.role === "user" ? "You:" : "Companion:"}
                     </span>
-                    {turn.content.length > 220 ? `${turn.content.slice(0, 217)}…` : turn.content}
+                    {previewText(turn.content)}
                   </li>
                 ))}
               </ol>

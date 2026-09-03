@@ -30,6 +30,7 @@ import { companionStarters } from "@/lib/companion/companionStarters";
 import type { AskClarification } from "@/lib/askClarification";
 import type { MemoryInteractionState } from "@/lib/companion/memory/useCompanionMemoryInteraction";
 import { useCompanionConversation } from "@/lib/companion/conversation/useCompanionConversation";
+import type { CompanionMessage } from "@/lib/companion/conversation/conversationTypes";
 
 export interface CompanionTurn {
   id: string;
@@ -65,6 +66,10 @@ interface CompanionContextValue {
   newConversation: () => void;
   /** AIC-4 — true when this thread is being stored against the account. */
   historyEnabled: boolean;
+  /** AIC-4 — the stored thread being continued, when there is one. */
+  conversationId: string | null;
+  /** AIC-4 — reopen a stored thread the person picked from their history. */
+  restoreConversation: (conversationId: string, messages: CompanionMessage[]) => void;
   lastQuestion: string | null;
   /** AIC-3 — explicit memory command state for this surface. */
   memory: {
@@ -163,6 +168,8 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       clear: conversation.clearConversation,
       newConversation: conversation.newConversation,
       historyEnabled: conversation.historyEnabled,
+      conversationId: conversation.conversationId,
+      restoreConversation: conversation.restoreConversation,
       lastQuestion: conversation.lastQuestion,
       memory: conversation.memory,
       suppress,

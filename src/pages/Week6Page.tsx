@@ -49,6 +49,16 @@ import WeekCommonQuestions from "@/components/week/WeekCommonQuestions";
 import WeekSources from "@/components/week/WeekSources";
 import { buildWeekQuestions, getWeekSources } from "@/data/weekSupportContent";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
+
+// Single authoritative crumb array: feeds the visible trail and the schema.
+const breadcrumbItems: BreadcrumbItem[] = [
+  { label: "Home", href: "/" },
+  { label: "Pregnancy", href: "/pregnancy" },
+  { label: "First trimester", href: "/pregnancy/first-trimester" },
+  { label: "Week 6", href: "/pregnancy/week/6" },
+];
 
 /* Shared label */
 const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; tone?: "sage" | "terracotta" | "lavender" }) => {
@@ -56,14 +66,6 @@ const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; 
     tone === "terracotta" ? "text-terracotta"
     : tone === "lavender" ? "text-lavender-foreground"
     : "text-sage";
-  // Single authoritative crumb array: feeds the visible trail and the schema.
-  const breadcrumbItems: BreadcrumbItem[] = [
-    { label: "Home", href: "/" },
-    { label: "Pregnancy", href: "/pregnancy" },
-    { label: "First trimester", href: "/pregnancy/first-trimester" },
-    { label: "Week 6", href: "/pregnancy/week/6" },
-  ];
-
   return (
     <div className="flex items-center gap-3 mb-3.5">
       <span className={`h-px w-7 bg-current opacity-50 ${toneCls}`} />
@@ -90,7 +92,6 @@ const Hero = () => (
         <Breadcrumbs
           tone="section"
           className="flex justify-center mb-6 sm:mb-7 font-sans text-[12px] font-normal text-foreground/65"
-
           items={breadcrumbItems}
         />
 

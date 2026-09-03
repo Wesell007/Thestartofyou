@@ -17,5 +17,8 @@
   `ArticleHeader.tsx` and `FlagshipHero.tsx` remain WC-3c/WC-3d DEFERRED — AUTHORITATIVE ARTICLE TOPIC DATA REQUIRED, so `/articles/:slug` has no visible trail and no BreadcrumbList.
   Proposal recorded only: optional `journeyTopic: { journey; topicSlug }` field on `ArticleData`; nine non-Pregnancy/TTC/IVF journey articles need a product decision.
 
+## In progress
+- AIC-1 — AI Companion Architecture Audit & Foundation (build mode approved): authoritative architecture doc `docs/ai/companion-architecture.md` + minimum shared foundation to remove the `/ask` mode fork (shared companion request boundary, shared mode resolution). Backend, prompts and grounding frozen.
+
 ## Not started
-- AIC-1 — AI Companion programme (safe to begin; not started)
+- AIC-2 Journey Context, AIC-3 Permissioned Memory, AIC-4 Conversation Continuity, AIC-5 Safety/Emotional Intelligence, AIC-6/7 Voice — do not begin before AIC-1 closes.

@@ -1,73 +1,67 @@
-# AIC-3 — Permissioned Companion Memory
+# AIC-3 — Permissioned Companion Memory (controlled MVP)
 
-## Pre-implementation audit (verified before this plan)
+Build-mode approval is registered against this plan. Approving it starts implementation; no further planning pass follows.
 
-**What exists today**
+## Pre-implementation audit (verified)
 
-- `/prototype/memory-settings` (`src/pages/MemorySettingsPrototype.tsx` + `src/components/memory-prototype/*`) is a front-end-only prototype: local React state, synthetic items, no Supabase, no fetch, no storage, `noindex`, companion suppressed, and eleven tests that lock those guards.
-- Design docs already exist and are docs-only: `memory-design.md` (taxonomy, permission levels), `memory-schema-rls-design.md` (proposed three tables, enums, triggers, RLS — all pseudo-SQL, never applied), `memory-mvp-readiness.md` (Phase 29J gate marked NOT READY), `memory-settings-prototype.md`, `release-gate.md` memory gate.
-- No memory table exists in the database. Nothing in `profiles` overlaps with memory except `companion_name` / `companion_tone` / `baby_illustration_style`, which stay with `useCompanionIdentity`.
-- `/account` (canonical) and `/account-settings` both render `AccountSettings.tsx`, already sectioned: Your companion, Download your data, Current journey, Delete account. This is the natural home for memory management.
-- `ai-search` never receives a user JWT today: `useAISearch` sends the publishable key as `Authorization`. The function verifies no user, rate-limits by hashed IP, and works fully anonymously.
-- `delete-account` verifies the caller's JWT, clears storage, then `auth.admin.deleteUser` — so a `user_id` foreign key with `on delete cascade` removes memory automatically.
-- `journeyContextContract.ts` / `aiJourneyContext.ts` (AIC-2) are the structured journey layer; memory must not enter them.
+- `/prototype/memory-settings` is front-end only: local state, synthetic items, no Supabase, no fetch, no storage, `noindex`, companion suppressed. It stays unchanged and unlinked.
+- No production memory storage exists. Nothing in `profiles` overlaps except `companion_name`, `companion_tone`, `baby_illustration_style`, which stay with `useCompanionIdentity`.
+- `/account` and `/account-settings` both render `AccountSettings.tsx`, already sectioned (Your companion, Download your data, Current journey, Delete account) — the production home for memory management.
+- `ai-search` is anonymous today: `useAISearch` sends the publishable key as `Authorization`, no user is verified, rate limiting is by hashed IP.
+- `delete-account` verifies the caller's JWT and calls `auth.admin.deleteUser`, so `on delete cascade` removes memory with the account.
+- AIC-2's `journeyContextContract.ts` / `aiJourneyContext.ts` stay the journey layer; memory never enters them.
+- The model runtime is plain SSE text with no structured tool/metadata channel, so companion-proposed memory is deferred (`confirmed_suggestion` not implemented, usage count 0).
 
-**Reuse decision:** reuse the prototype's copy, tone and component shapes; do not promote the prototype route. Build the production surface inside Account settings. No existing table is suitable, so one new table is required.
+## 1. Migration (one)
 
-**Conflict to settle at approval:** the earlier 29H/29I/29J documents hold memory behind an open legal/privacy gate and define an enum with no conversation-derived source. AIC-3 explicitly approves explicit, user-commanded memory. This plan proceeds on AIC-3's instruction and supersedes those docs, recording the supersession in the docs themselves rather than silently ignoring them. Sensitive/clinical content stays out of memory, matching the earlier design.
+`public.companion_memories`: `id`, `user_id uuid not null references auth.users(id) on delete cascade`, `category companion_memory_category not null`, `value text not null`, `normalised_value text` **generated/derived server-side**, `source companion_memory_source not null`, `created_at`, `updated_at` (+ `set_updated_at` trigger).
 
-## What gets built
+- Categories: `preference | personal_detail | plan | relationship | support_preference | other`. No clinical categories.
+- Sources: `explicit_command | settings` only.
+- `normalised_value` is derived by the database from `value` (stored generated column, or a `BEFORE INSERT OR UPDATE` trigger if the normalisation needs immutability-unsafe functions). The client never supplies it.
+- `CHECK` on trimmed `value` length 1–240.
+- Unique index on `(user_id, normalised_value)` for exact duplicate prevention.
+- Row cap of 50 per user, enforced by a trigger that takes a per-user advisory lock so concurrent writes cannot exceed it.
+- A narrow credential-shaped blocker trigger (obvious password/token/key/card patterns). Documented as a backstop only — the richer policy lives in the application, with no claim that regex classifies sensitive data completely.
+- `GRANT SELECT, INSERT, UPDATE, DELETE TO authenticated`, `GRANT ALL TO service_role`, no `anon`. RLS enabled with four owner-only policies on `auth.uid() = user_id` (with `WITH CHECK` on insert/update).
 
-### 1. Database (one migration)
+## 2. Application layers
 
-`public.companion_memories`
+- `src/lib/companion/memory/companionMemoryPolicy.ts` — pure: normalisation, category validation, length rules, prohibited-content checks (credentials/secrets, and clinical/diagnostic content, including refusing to turn "I might have anxiety" into a stored fact), duplicate rules, deterministic update eligibility. No Supabase, React or AI.
+- `src/lib/companion/memory/memoryIntent.ts` — pure, precision-first detection of "remember that X", "please remember X", "forget X", "forget that". Ambiguous input never mutates; it either continues as ordinary conversation or asks.
+- `src/lib/companion/memory/companionMemoryRepository.ts` — the only browser Supabase memory CRUD: `list`, `create`, `update`, `delete`. Uses session identity plus RLS; never accepts a caller-supplied `userId`.
+- `src/lib/companion/memory/useCompanionMemoryInteraction.ts` — one shared conversational path used by both `CompanionPanel` and `AskPage`. No parsing duplicated per surface.
 
-- `id uuid pk`, `user_id uuid not null references auth.users(id) on delete cascade`
-- `category` enum `companion_memory_category`: `preference | personal_detail | plan | relationship | support_preference | other`
-- `value text` (1–240 chars), `normalised_value text` (lowercased/trimmed, used for duplicate detection)
-- `source` enum `companion_memory_source`: `explicit_command | confirmed_suggestion | settings`
-- `created_at`, `updated_at` (+ existing `set_updated_at` trigger)
+## 3. Conversational flow
 
-Plus: `GRANT SELECT, INSERT, UPDATE, DELETE ... TO authenticated`, `GRANT ALL ... TO service_role`, no `anon` grant, RLS enabled, four owner-scoped policies (`user_id = auth.uid()` on select/insert/update/delete, with `with check` on write paths), a unique index on `(user_id, normalised_value)`, a per-user row cap and a blocker trigger rejecting credential/secret-shaped and clinical-diagnosis-shaped values. No status column, no transcript, no journey duplication, no provenance beyond `source`.
+Explicit command → intercepted before any model call → policy check → pending candidate in React state only → confirmation card ("Remember this" / "Cancel") → confirm writes exactly one row; cancel writes none. Prohibited commands are rejected locally and never sent to the model. Anonymous users get a plain sign-in explanation and no storage of any kind. Forget acts only on an unambiguously identified memory; otherwise it asks or points to the settings section. Contradiction replacement only when the target memory is matched exactly.
 
-### 2. Data + domain layers
+## 4. Server retrieval
 
-- `src/lib/companion/memory/companionMemoryRepository.ts` — the only place that touches Supabase for memory: `listMemories`, `createMemory`, `updateMemory`, `deleteMemory`, all relying on RLS and the session user, never a client-supplied id.
-- `src/lib/companion/memory/companionMemoryPolicy.ts` — pure logic: category validation, normalisation, length caps, prohibited-content rejection (passwords, tokens, card numbers, keys), duplicate resolution, update-instead-of-duplicate rules for contradictory preferences.
-- `src/lib/companion/memory/memoryIntent.ts` — pure, deterministic detection of an explicit "remember that…" / "forget that…" command from the user's own message. Application logic, not the model, decides whether a write may happen.
+`useAISearch` sends the current Supabase access token as `Authorization` when a session exists, keeping the publishable key as `apikey`; anonymous requests stay byte-identical to today. `ai-search` verifies the token with Supabase auth and, on success, queries `companion_memories` through a **user-scoped client carrying that token so RLS stays active** — no service role, no client-supplied user id. Invalid or expired tokens fall back to AI without memory; normal AI never fails because of memory.
 
-### 3. Permission flow (no silent memory)
+Bounded rendering: at most 8 memories, 240 chars each, 800 chars total; deterministic selection by category priority (`preference`, `support_preference`, then the rest) then `updated_at` descending, then `id` for stability. Rendered as a separate `<permissioned_memory>` block with narrow trusted instructions (user-approved details, use only when relevant, current message wins, authoritative journey context wins on stage facts, memory is not medical truth, never reveal internal metadata, safety overrides personalisation). No IDs, sources or timestamps. Precedence order preserved: current message → journey context → memory → page/entry context → general knowledge.
 
-- Explicit command: user says "remember that …" → deterministic parse → a **pending candidate in React state only** → an inline confirmation card showing exactly what would be saved → save on confirm, nothing on cancel.
-- Explicit confirmation: where the companion proposes a memory, the same card is used; ambiguous "okay" never counts — only pressing the confirm control does.
-- Ordinary conversation performs zero writes. Model output can never trigger a mutation.
-- Anonymous users get a plain message that remembering needs an account, with a sign-in link. No localStorage memory.
-- Forget: explicit delete of an identified memory; ambiguity asks which one.
+## 5. Feature gating
 
-### 4. Retrieval into the model (server-side, verified identity)
+Two minimal switches, no framework: `VITE_COMPANION_MEMORY_ENABLED` (client UX: settings section and conversational capture) and `AI_MEMORY_ENABLED` (server retrieval). Both default off, so the implementation can ship with production memory disabled until the privacy/legal release gate clears. They are read from one shared constant per side so the two can never disagree in a way that hides injected memory.
 
-`useAISearch` sends the user's Supabase access token in `Authorization` when a session exists, otherwise the publishable key exactly as today. `ai-search` calls `auth.getUser()` on that token; only on success does it load that user's memories with the service role scoped to the **verified** id. No `user_id` is ever accepted from the browser and no memory content is sent from the browser. Anonymous requests behave byte-identically to today.
+## 6. UI
 
-Bounded rendering: at most 8 memories, 240 chars each, 800 chars total, deterministic ordering (most recently updated first), emitted as a separate `<permissioned_memory>` block with its own trusted instruction text, never merged into `<structured_journey_context>` or legacy `<journey_context>`. Instructions state: user-approved details, use only when relevant, current message and authoritative journey state win, memory is not medical truth, safety overrides personalisation, never expose internal metadata.
+New "What your companion remembers" section in `AccountSettings.tsx` (serving both mounted paths): list, empty state, inline edit, delete via the existing `ConfirmDialog`, loading and error states, plain language, no IDs or provenance. Optional manual add using `source = settings` only if it fits the existing section pattern without extra scope; the report states whether it shipped. Confirmation card in the companion surfaces. No navbar, homepage or unrelated redesign. Verified at 1280px and 390x844 including wrapping, focus and overflow.
 
-### 5. UI (minimum)
+## 7. Docs and ADRs
 
-- New "What your companion remembers" section in `AccountSettings.tsx` (both mounted paths) — list, inline edit, delete with the existing `ConfirmDialog`, empty state, error state. No IDs or provenance shown, plain wording, existing visual system, keyboard accessible, verified at 1280px and 390x844.
-- Companion/Ask: only the confirmation card plus a concise success/failure line. No redesign of AskPage, CompanionPanel, launcher, navbar or homepage.
-- `/prototype/memory-settings` stays exactly as it is, prototype-labelled and unlinked.
+New `docs/ai/companion-memory.md`; updates to `companion-architecture.md`; explicit supersession notes in `memory-design.md`, `memory-schema-rls-design.md`, `memory-mvp-readiness.md`, `release-gate.md` that separate the superseded product/engineering block from the still-outstanding production privacy/legal release gate. Nothing historical is erased. ADR-AIC3-01 … ADR-AIC3-08 recorded, including the deferral of model-proposed suggestions.
 
-### 6. Docs and ADRs
+## 8. Tests and proofs
 
-`docs/ai/companion-memory.md` (new, full spec), `companion-architecture.md` updated, plus supersession notes in `memory-design.md`, `memory-mvp-readiness.md`, `release-gate.md`. ADR-AIC3-01 … ADR-AIC3-07 recorded.
+Focused tests across intent detection, no-write on ordinary messages, credential interception (and non-transmission to the model), clinical rejection, pending/confirm/cancel write counts, anonymous unavailability, settings list/edit/delete, duplicate prevention, deterministic update, ambiguous contradiction and ambiguous forget both refusing to guess, block separation, precedence instructions, prompt budget, no raw memory logging, and grounding/safety/identity unchanged. Cross-user SELECT/INSERT/UPDATE/DELETE rejection proven with two real test users, cleaned up afterwards. Runtime proofs that a deleted memory disappears from the next authenticated request and an edited memory replaces the old value.
 
-### 7. Tests and security proof
+## Out of scope
 
-Focused tests for: intent parsing, prohibited content, duplicates, contradictory updates, pending candidate writes nothing, confirm writes exactly one row, anonymous path, bounded prompt rendering, block separation from journey context, deletion/edit removing the old value from the rendered block, no raw memory logging, and grounding version unchanged. Cross-user isolation (read/update/delete of another user's row) is proven directly against the database with two real test users, and the rows are cleaned up afterwards.
+AIC-4 conversation persistence, AIC-5 emotional modelling, AIC-6/7 voice, embeddings/pgvector, proactive nudges, grounding governance (`30B-source-routing-v1`, 0 candidates, 0 approvals), NHS routing, identity fields, journey tables, sitemap, robots.
 
-## Out of scope (untouched)
+## Validation and closure
 
-Conversation history and thread state (AIC-4), emotional modelling (AIC-5), voice (AIC-6/7), embeddings/pgvector, proactive nudges, grounding (`30B-source-routing-v1`, 0 candidates, 0 approvals), NHS source governance, `useCompanionIdentity`, journey/profile tables, sitemap, robots, WC-1/2/3 surfaces.
-
-## Validation
-
-`npm test`, `npm run lint` (must stay at 1 pre-existing error / 10 warnings), `npm run typecheck`, `npm run build`; one migration applied; only `ai-search` deployed; desktop and mobile checks; then the 64-point completion report. AIC-4 is not started.
+`npm test`, `npm run lint` (must remain 1 pre-existing error / 10 warnings), `npm run typecheck`, `npm run build`; one migration applied; only `ai-search` deployed. The report separates AIC-3 engineering closure from production memory enablement, which stays gated. AIC-4 is not started.

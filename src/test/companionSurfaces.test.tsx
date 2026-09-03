@@ -78,6 +78,8 @@ describe("WC-4 companion panel", () => {
         import("@/components/companion/CompanionPanel"),
       ]);
 
+    window.localStorage.setItem("tsoy_consent_analytics_v1", "granted");
+
     render(
       <MemoryRouter initialEntries={["/pregnancy"]}>
         <CompanionProvider>

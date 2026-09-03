@@ -15,6 +15,7 @@ import { companionStyles } from "./companionStyles";
 import CompanionMessageList from "./CompanionMessageList";
 import CompanionComposer from "./CompanionComposer";
 import CompanionMemoryPrompt from "./CompanionMemoryPrompt";
+import CompanionHistoryList from "./CompanionHistoryList";
 import { companionPanelTitle, companionSafetyLine } from "@/lib/companion/companionName";
 import { companionAskStage } from "@/lib/companion/companionMode";
 import { askDestination, askRouteState } from "@/lib/askNavigation";
@@ -33,6 +34,10 @@ export default function CompanionPanel() {
     send,
     clear,
     memory,
+    historyEnabled,
+    conversationId,
+    restoreConversation,
+    newConversation,
   } = useCompanion();
   const isMobile = useIsMobile();
   const navigate = useNavigate();
@@ -65,6 +70,15 @@ export default function CompanionPanel() {
             {companionSafetyLine(companionName)}
           </SheetDescription>
         </div>
+
+        {/* AIC-4 — retained threads are only listed when they actually exist,
+            which means signed in with persistent history enabled. */}
+        {historyEnabled && (
+          <CompanionHistoryList
+            activeConversationId={conversationId}
+            onRestore={restoreConversation}
+          />
+        )}
 
         <div className="flex-1 overflow-y-auto px-5 py-5">
           {turns.length === 0 ? (
@@ -107,11 +121,11 @@ export default function CompanionPanel() {
           <div className="mt-1 flex items-center justify-between">
             <button
               type="button"
-              onClick={clear}
+              onClick={historyEnabled ? newConversation : clear}
               className={`${companionStyles.quietButton} inline-flex min-h-[44px] items-center gap-1 px-0 py-3`}
             >
               <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-              Start again
+              {historyEnabled ? "New conversation" : "Start again"}
             </button>
             <button
               type="button"

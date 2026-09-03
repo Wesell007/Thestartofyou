@@ -7,6 +7,7 @@ import { Loader2, ChevronRight, Heart, BookOpen, Compass, ArrowUpRight, ArrowLef
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useAISearch } from "@/hooks/useAISearch";
+import { buildCompanionRequest, resolveAskMode } from "@/lib/companion/companionRequest";
 import { BotanicalAccent, StageGlow, Sprig } from "@/components/shared/StageBotanical";
 import { getAiStageStyle, stageColors } from "@/lib/aiStageStyles";
 import SeoHead from "@/components/seo/SeoHead";
@@ -253,6 +254,9 @@ const AskPage = () => {
   const lastQueryRef = useRef("");
   const navigate = useNavigate();
   const isIVF = searchParams.get("journey") === "ivf";
+  // AIC-1 — mode comes only from the authoritative stage/journey parameters
+  // written by askNavigation. No inference from question or answer text.
+  const askMode = resolveAskMode({ stage: stageKey, journey: searchParams.get("journey") });
   const { name: companionName } = useCompanionIdentity();
 
   const [newQuery, setNewQuery] = useState("");
@@ -346,14 +350,17 @@ const AskPage = () => {
   const previousQuestion = navigationState?.previousQuestion;
 
   useEffect(() => {
-    const requestKey = `${query}\u0000${context ?? ""}`;
+    const requestKey = `${query}\u0000${context ?? ""}\u0000${askMode}`;
     if (query && !clarification && requestKey !== lastQueryRef.current) {
       lastQueryRef.current = requestKey;
       reset();
-      ask(query, context);
+      // AIC-1 — /ask uses the same shared request boundary and the same
+      // authoritative mode resolution as the site-wide companion panel.
+      const request = buildCompanionRequest({ query, context, mode: askMode });
+      ask(request.query, request.context, { mode: request.mode });
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, [query, context, clarification, ask, reset]);
+  }, [query, context, clarification, ask, reset, askMode]);
 
   const goToQuestion = (question: string) => {
     const params = new URLSearchParams();

@@ -96,13 +96,14 @@ const StagePage = () => {
           </div>
           <div className="container mx-auto px-6 md:px-10 max-w-4xl relative z-10 text-center">
             {showBreadcrumbs && (
-              <BreadcrumbJsonLd items={breadcrumbItems} />
-              <Breadcrumbs
-                tone="section"
-                className="flex justify-center mb-6 font-sans tracking-wide"
-
-                items={breadcrumbItems}
-              />
+              <>
+                <BreadcrumbJsonLd items={breadcrumbItems} />
+                <Breadcrumbs
+                  tone="section"
+                  className="flex justify-center mb-6 font-sans tracking-wide"
+                  items={breadcrumbItems}
+                />
+              </>
             )}
             <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-4">
               {data.journeyLabel}

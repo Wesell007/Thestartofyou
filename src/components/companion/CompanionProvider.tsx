@@ -28,6 +28,10 @@ import { shouldShowCompanionLauncher } from "@/lib/companion/companionSurface";
 import { buildCompanionPanelContext } from "@/lib/companion/companionPanelContext";
 import { companionStarters } from "@/lib/companion/companionStarters";
 import { resolveAskClarification, type AskClarification } from "@/lib/askClarification";
+import {
+  useCompanionMemoryInteraction,
+  type MemoryInteractionState,
+} from "@/lib/companion/memory/useCompanionMemoryInteraction";
 
 export interface CompanionTurn {
   id: string;
@@ -60,6 +64,14 @@ interface CompanionContextValue {
   stop: () => void;
   clear: () => void;
   lastQuestion: string | null;
+  /** AIC-3 — explicit memory command state for this surface. */
+  memory: {
+    state: MemoryInteractionState;
+    busy: boolean;
+    confirm: () => void;
+    cancel: () => void;
+    dismiss: () => void;
+  };
   /** Register a 404 surface; returns the release function. */
   suppress: () => () => void;
 }
@@ -121,11 +133,14 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
     setTurns((prev) => [...prev, { id: newId(), role: "assistant", text: answer }]);
   }, [isLoading, answer]);
 
+  const memory = useCompanionMemoryInteraction();
+
   const send = useCallback(
     (question: string) => {
       const trimmed = question.trim();
       if (!trimmed || isLoading) return;
       committedRef.current = false;
+      memory.dismiss();
       setLastQuestion(trimmed);
       setTurns((prev) => [...prev, { id: newId(), role: "user", text: trimmed }]);
 
@@ -145,6 +160,12 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       // Only the latest question, the bounded context and the mode, built at
       // the shared companion request boundary (AIC-1).
       void (async () => {
+        // AIC-3 — an explicit "remember"/"forget" command is handled by the
+        // application and never reaches the model.
+        if (await memory.interceptQuery(trimmed)) {
+          committedRef.current = true;
+          return;
+        }
         const personal = await ensurePersonalJourney();
         const journeyContext = buildJourneyContext({
           personal,
@@ -157,7 +178,7 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
         });
       })();
     },
-    [ask, context, ensurePersonalJourney, isLoading, location.pathname, mode],
+    [ask, context, ensurePersonalJourney, isLoading, location.pathname, memory, mode],
   );
 
   const retry = useCallback(() => {
@@ -208,6 +229,13 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       stop,
       clear,
       lastQuestion,
+      memory: {
+        state: memory.state,
+        busy: memory.busy,
+        confirm: () => void memory.confirm(),
+        cancel: memory.cancel,
+        dismiss: memory.dismiss,
+      },
       suppress,
     }),
     [
@@ -226,6 +254,7 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       stop,
       clear,
       lastQuestion,
+      memory,
     ],
   );
 

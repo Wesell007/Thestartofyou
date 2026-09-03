@@ -30,13 +30,26 @@ export function useAISearch() {
     setIsLoading(true);
 
     try {
+      // AIC-3 — when someone is signed in the request carries their verified
+      // access token so the backend can load their own permissioned memory
+      // under row-level security. Signed out, the request is exactly what it
+      // was before AIC-3, and the companion works the same way.
+      let accessToken: string | null = null;
+      try {
+        const { data } = await supabase.auth.getSession();
+        accessToken = data.session?.access_token ?? null;
+      } catch {
+        accessToken = null;
+      }
+
       const resp = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-search`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+            apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+            Authorization: `Bearer ${accessToken ?? import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
           },
           body: JSON.stringify({
             query,

@@ -4,6 +4,12 @@ Phase 29G. **Design and specification only.** Nothing in this document is built.
 
 Companion memory means facts the companion could carry between sessions. It is not chat history, not journal content and not a clinical record. Those three things stay where they are, and none of them becomes memory as a side effect of this design.
 
+> **Superseded in part by AIC-3.** The mechanism described here as unbuilt is now
+> implemented behind two feature flags — see `docs/ai/companion-memory.md` and
+> `docs/ai/adr/ADR-AIC3.md`. AIC-3 changes nothing about the release gate: memory remains
+> unreleased, and the outstanding legal and privacy review in `memory-mvp-readiness.md`
+> is still open.
+
 ## 1. Principles
 
 1. **The companion never silently remembers anything from a conversation.** Nothing said in a question, an answer or a recap becomes memory on its own. A memory exists only because the person turned a category on, or deliberately saved an item.

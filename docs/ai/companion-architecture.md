@@ -349,3 +349,18 @@ Classification before AIC-1: **B — mostly shared, small foundation cleanup
 needed.** After AIC-1: mode resolution and request construction are shared;
 `src/lib/companion/companionRequest.ts` is the single extension point AIC-2 can
 build on. AIC-2 Journey Context is safe to begin.
+
+## Permissioned memory (AIC-3)
+
+Both surfaces share one memory path: `useCompanionMemoryInteraction`, over the pure policy
+layer in `src/lib/companion/memory/`. Explicit "remember"/"forget" commands are recognised by
+the application, confirmed by the person, and written by the browser under row-level security.
+Ordinary conversation never writes, and the model neither proposes nor performs a write.
+
+In `ai-search`, memory is optional enrichment for a request that is already going to the
+model: it runs after validation, rate limiting, the urgent path and the kill switch, is gated
+by the authoritative `AI_MEMORY_ENABLED` flag, is read under the caller's verified token, and
+is rendered as an escaped `<permissioned_memory>` DATA block separate from the AIC-2
+`<structured_journey_context>` block. It fails open.
+
+Full detail: `docs/ai/companion-memory.md`. Decisions: `docs/ai/adr/ADR-AIC3.md`.

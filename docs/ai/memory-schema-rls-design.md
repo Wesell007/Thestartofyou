@@ -4,6 +4,12 @@ Phase 29H. **Design and review only.** Nothing in this document is built. No mig
 
 This document turns the data boundary contract in `memory-design.md` into a table shape, a policy model, a deletion model and a validation model that a future team can review before a migration is ever written.
 
+> **Superseded in part by AIC-3.** The mechanism described here as unbuilt is now
+> implemented behind two feature flags — see `docs/ai/companion-memory.md` and
+> `docs/ai/adr/ADR-AIC3.md`. AIC-3 changes nothing about the release gate: memory remains
+> unreleased, and the outstanding legal and privacy review in `memory-mvp-readiness.md`
+> is still open.
+
 ## 0. Scope and non-goals
 
 Carried forward unchanged from Phase 29G. This phase does not widen any of it.

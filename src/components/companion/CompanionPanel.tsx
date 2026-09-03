@@ -14,6 +14,7 @@ import { useCompanion } from "./CompanionProvider";
 import { companionStyles } from "./companionStyles";
 import CompanionMessageList from "./CompanionMessageList";
 import CompanionComposer from "./CompanionComposer";
+import CompanionMemoryPrompt from "./CompanionMemoryPrompt";
 import { companionPanelTitle, companionSafetyLine } from "@/lib/companion/companionName";
 import { companionAskStage } from "@/lib/companion/companionMode";
 import { askDestination, askRouteState } from "@/lib/askNavigation";
@@ -31,6 +32,7 @@ export default function CompanionPanel() {
     lastQuestion,
     send,
     clear,
+    memory,
   } = useCompanion();
   const isMobile = useIsMobile();
   const navigate = useNavigate();
@@ -89,6 +91,17 @@ export default function CompanionPanel() {
         </div>
 
         <div className="border-t border-[hsl(var(--stage-ttc-sage-soft))] px-5 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4">
+          {/* AIC-3 — an explicit memory command is confirmed here, never
+              written silently and never handled by the model. */}
+          <div className="mb-3 empty:mb-0">
+            <CompanionMemoryPrompt
+              state={memory.state}
+              busy={memory.busy}
+              onConfirm={memory.confirm}
+              onCancel={memory.cancel}
+              onDismiss={memory.dismiss}
+            />
+          </div>
           <CompanionComposer />
           {/* Both footer actions keep a 44px clickable height for touch. */}
           <div className="mt-1 flex items-center justify-between">

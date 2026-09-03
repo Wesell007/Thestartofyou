@@ -8,6 +8,12 @@ This document records the outcome of a pre-build review. No migration, schema, t
 
 The MVP scope is deliberately narrow: Category A explicit preferences and Category C explicit user-saved preferences only, written by a deliberate save action, visible to the user, behind a feature flag, and not passed into any AI request until a later separately approved phase.
 
+> **AIC-3 note.** The memory mechanism has since been built behind two feature flags
+> (`VITE_COMPANION_MEMORY_ENABLED` for the interface, `AI_MEMORY_ENABLED` for retrieval and
+> injection). **This gate is not closed by that work.** The blockers below, including the
+> external legal and privacy review, remain outstanding, and memory stays off until they are
+> resolved. See `docs/ai/companion-memory.md`.
+
 ## 1. Files changed
 
 - `docs/ai/memory-mvp-readiness.md` (new)

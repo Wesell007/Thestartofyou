@@ -7,6 +7,8 @@ import { Loader2, ChevronRight, Heart, BookOpen, Compass, ArrowUpRight, ArrowLef
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useAISearch } from "@/hooks/useAISearch";
+import { useCompanionMemoryInteraction } from "@/lib/companion/memory/useCompanionMemoryInteraction";
+import CompanionMemoryPrompt from "@/components/companion/CompanionMemoryPrompt";
 import { useCompanionPersonalJourney } from "@/hooks/useCompanionPersonalJourney";
 import { buildEntryContext, buildJourneyContext } from "@/lib/companion/journeyContext";
 import { buildCompanionRequest, resolveAskMode } from "@/lib/companion/companionRequest";
@@ -253,6 +255,8 @@ const AskPage = () => {
   const stage = getAiStageStyle(stageKey);
   const sc = stageColors(stage);
   const { answer, isLoading, error, ask, reset } = useAISearch();
+  // AIC-3 — the same shared memory interaction the panel uses.
+  const memory = useCompanionMemoryInteraction();
   // AIC-2 — the same shared personal resolver the panel uses.
   const { ensurePersonalJourney } = useCompanionPersonalJourney();
   const lastQueryRef = useRef("");
@@ -362,6 +366,9 @@ const AskPage = () => {
       // authoritative mode resolution as the site-wide companion panel.
       window.scrollTo({ top: 0, behavior: "smooth" });
       void (async () => {
+        // AIC-3 — an explicit "remember"/"forget" command is handled by the
+        // application and never reaches the model.
+        if (await memory.interceptQuery(query)) return;
         const personal = await ensurePersonalJourney();
         // AIC-2 — /ask carries entry provenance: where the question was asked
         // from. It never becomes a personal fact.
@@ -393,6 +400,7 @@ const AskPage = () => {
     topic,
     searchParams,
     navigationState,
+    memory,
   ]);
 
   const goToQuestion = (question: string) => {
@@ -769,6 +777,19 @@ const AskPage = () => {
                 </div>
               </div>
             </section>
+          )}
+
+          {/* ── AIC-3 memory confirmation ── */}
+          {memory.state.kind !== "idle" && (
+            <div className="mb-6">
+              <CompanionMemoryPrompt
+                state={memory.state}
+                busy={memory.busy}
+                onConfirm={() => void memory.confirm()}
+                onCancel={memory.cancel}
+                onDismiss={memory.dismiss}
+              />
+            </div>
           )}
 
           {/* ── Loading state ── */}

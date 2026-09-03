@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import askPageSource from "@/pages/AskPage.tsx?raw";
 import { APPROVED_SOURCES_TRUST_LINE, stripExternalSourceLinks } from "@/lib/answerSourceLinks";
-import { resolveAskClarification } from "@/lib/askClarification";
+import { resolveClarification } from "../../supabase/functions/_shared/clarification";
 
 describe("Ask trust copy (Phase 29B.2b)", () => {
   it("uses the single approved trust line", () => {
@@ -25,7 +25,7 @@ describe("Ask trust copy (Phase 29B.2b)", () => {
   });
 
   it("still clarifies broad questions and never clarifies concern wording", () => {
-    expect(resolveAskClarification("Milestones")).not.toBeNull();
-    expect(resolveAskClarification("When should I call about reduced movements?")).toBeNull();
+    expect(resolveClarification("Milestones")).not.toBeNull();
+    expect(resolveClarification("When should I call about reduced movements?")).toBeNull();
   });
 });

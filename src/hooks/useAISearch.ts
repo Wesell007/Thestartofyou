@@ -25,6 +25,12 @@ export type AISearchOptions = {
   sessionHistory?: Array<{ role: "user" | "assistant"; content: string }>;
   /** Called with the conversation the answer joined, when one exists. */
   onConversationId?: (conversationId: string) => void;
+  /**
+   * AIC-5C — explicit structured boundary metadata from the server. It is read
+   * from response headers only: assistant text is never parsed for markers,
+   * and no safety state, score or reasoning is transported here.
+   */
+  onBoundary?: (boundary: { kind: "clarify" | "unsupported"; clarificationTopic?: string }) => void;
 };
 
 export function useAISearch() {
@@ -90,6 +96,16 @@ export function useAISearch() {
       // joined. Absent for anonymous and session-mode requests.
       const conversationId = resp.headers.get("X-Conversation-Id");
       if (conversationId && options?.onConversationId) options.onConversationId(conversationId);
+
+      // AIC-5C — the server is the sole owner of the clarify/unsupported
+      // decision. The browser only consumes the metadata for display.
+      const boundaryKind = resp.headers.get("X-Companion-Boundary");
+      if ((boundaryKind === "clarify" || boundaryKind === "unsupported") && options?.onBoundary) {
+        options.onBoundary({
+          kind: boundaryKind,
+          clarificationTopic: resp.headers.get("X-Companion-Clarification-Topic") ?? undefined,
+        });
+      }
 
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams, Link, useLocation, useNavigate } from "react-router-dom";
 import EditorialAnswer from "@/components/shared/EditorialAnswer";
 import { sanitiseAnswerForDisplay, APPROVED_SOURCES_TRUST_LINE } from "@/lib/aiAnswerSafety";
-import { resolveAskClarification, type AskClarificationChip } from "@/lib/askClarification";
+import type { AskClarificationChip } from "@/lib/companion/clarificationDisplay";
 import { Loader2, ChevronRight, Heart, BookOpen, Compass, ArrowUpRight, ArrowLeft, ArrowUp } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -399,10 +399,14 @@ const AskPage = () => {
       ].filter(Boolean) as typeof relatedLinks
     : relatedLinks;
 
-  // A short, broad, non-urgent question is met with a gentle clarification
-  // instead of a generated answer. Anything with concern wording is never
-  // clarified and flows to the model exactly as before.
-  const clarification = query ? resolveAskClarification(query) : null;
+  // AIC-5C — clarification is decided by the server and arrives as explicit
+  // structured metadata on the shared runtime's assistant turn. The page never
+  // inspects the question text and never parses the answer prose.
+  const clarification = useMemo(() => {
+    if (isLoading) return null;
+    const last = [...conversation.messages].reverse().find((message) => message.role === "assistant");
+    return last?.clarification ?? null;
+  }, [conversation.messages, isLoading]);
 
   // Label shown to the reader. Conversation context carried for the model is
   // never displayed, so no previous answer text can leak into the page.
@@ -413,14 +417,14 @@ const AskPage = () => {
 
   useEffect(() => {
     const requestKey = `${query}\u0000${context ?? ""}\u0000${askMode}`;
-    if (query && !clarification && requestKey !== lastQueryRef.current) {
+    if (query && requestKey !== lastQueryRef.current) {
       lastQueryRef.current = requestKey;
       // AIC-1/AIC-4 — one shared runtime owns the request, so /ask and the
       // panel send an identical body for an identical question.
       window.scrollTo({ top: 0, behavior: "smooth" });
       sendRef.current(query);
     }
-  }, [query, context, clarification, askMode]);
+  }, [query, context, askMode]);
 
   const goToQuestion = (question: string) => {
     const params = new URLSearchParams();

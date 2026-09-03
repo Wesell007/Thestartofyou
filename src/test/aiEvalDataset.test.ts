@@ -10,7 +10,7 @@
 import { describe, expect, it } from "vitest";
 import dataset from "../../docs/ai/eval-dataset-v1.json";
 import { matchUrgent } from "../../supabase/functions/_shared/urgentPatterns";
-import { resolveAskClarification } from "@/lib/askClarification";
+import { resolveClarification } from "../../supabase/functions/_shared/clarification";
 
 type EvalRecord = {
   id: string;
@@ -156,7 +156,7 @@ describe("eval dataset routed against the local safety layers", () => {
   it("resolves ambiguous prompts through the clarifier, with known gaps listed", () => {
     const unresolved = records
       .filter((r) => r.expected_category === "ambiguous")
-      .filter((r) => !resolveAskClarification(r.prompt))
+      .filter((r) => !resolveClarification(r.prompt))
       .map((r) => r.prompt);
     expect(new Set(unresolved)).toEqual(
       new Set([...CLARIFICATION_KNOWN_GAPS].filter((prompt) => unresolved.includes(prompt))),
@@ -167,7 +167,7 @@ describe("eval dataset routed against the local safety layers", () => {
 
   it("never clarifies a red or crisis prompt", () => {
     for (const record of records.filter((r) => ["red", "crisis"].includes(r.expected_category))) {
-      expect(resolveAskClarification(record.prompt), record.id).toBeNull();
+      expect(resolveClarification(record.prompt), record.id).toBeNull();
     }
   });
 });

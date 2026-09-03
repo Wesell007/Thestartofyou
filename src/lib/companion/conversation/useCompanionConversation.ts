@@ -19,7 +19,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAISearch } from "@/hooks/useAISearch";
 import { buildCompanionRequest, type CompanionMode } from "@/lib/companion/companionRequest";
-import { resolveAskClarification } from "@/lib/askClarification";
+import { clarificationDisplay } from "@/lib/companion/clarificationDisplay";
 import {
   useCompanionMemoryInteraction,
   type MemoryInteractionState,
@@ -97,6 +97,9 @@ export function useCompanionConversation({
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [signedIn, setSignedIn] = useState(false);
   const committedRef = useRef(false);
+  // AIC-5C — the last boundary the *server* reported for the in-flight
+  // request. Display metadata only; the browser never decides it.
+  const boundaryRef = useRef<{ kind: "clarify" | "unsupported"; clarificationTopic?: string } | null>(null);
   const lastClientMessageIdRef = useRef<string | null>(null);
 
   const historyUi = isCompanionHistoryUiEnabled();
@@ -133,9 +136,20 @@ export function useCompanionConversation({
     if (isLoading || committedRef.current) return;
     if (!answer.trim()) return;
     committedRef.current = true;
+    const clarification =
+      boundaryRef.current?.kind === "clarify"
+        ? clarificationDisplay(boundaryRef.current.clarificationTopic)
+        : null;
     setMessages((prev) => [
       ...prev,
-      { id: newMessageId(), role: "assistant", content: answer, createdAt: new Date().toISOString(), status: "complete" },
+      {
+        id: newMessageId(),
+        role: "assistant",
+        content: answer,
+        createdAt: new Date().toISOString(),
+        status: "complete",
+        ...(clarification ? { clarification } : {}),
+      },
     ]);
   }, [isLoading, answer]);
 
@@ -161,6 +175,9 @@ export function useCompanionConversation({
         clientMessageId: request.clientMessageId,
         sessionHistory: request.sessionHistory,
         onConversationId: (id) => setConversationId(id),
+        onBoundary: (boundary) => {
+          boundaryRef.current = boundary;
+        },
       });
     },
     [ask, context, conversationId, historyEnabled, mode, resolveJourneyContext],
@@ -171,6 +188,8 @@ export function useCompanionConversation({
       const trimmed = question.trim();
       if (!trimmed || isLoading) return;
       committedRef.current = false;
+      // AIC-5C — any boundary metadata belongs to one request only.
+      boundaryRef.current = null;
       memory.dismiss();
       setLastQuestion(trimmed);
 
@@ -189,26 +208,6 @@ export function useCompanionConversation({
         },
       ]);
 
-      // A broad single-topic term is clarified locally. The resolver refuses
-      // to clarify anything with concern wording, so safety routing is never
-      // delayed here.
-      const clarification = resolveAskClarification(trimmed);
-      if (clarification) {
-        committedRef.current = true;
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: newMessageId(),
-            role: "assistant",
-            content: clarification.question,
-            createdAt: new Date().toISOString(),
-            status: "complete",
-            clarification,
-          },
-        ]);
-        return;
-      }
-
       void (async () => {
         // AIC-3 — an explicit "remember"/"forget" command is handled by the
         // application and never reaches the model or the conversation store.
@@ -225,6 +224,7 @@ export function useCompanionConversation({
   const retry = useCallback(() => {
     if (!lastQuestion || isLoading) return;
     committedRef.current = false;
+    boundaryRef.current = null;
     // The same idempotency key is reused, so a retry cannot store the question
     // twice.
     const clientMessageId = lastClientMessageIdRef.current ?? newMessageId();

@@ -27,7 +27,7 @@ import { resolvePanelMode } from "@/lib/companion/companionRequest";
 import { shouldShowCompanionLauncher } from "@/lib/companion/companionSurface";
 import { buildCompanionPanelContext } from "@/lib/companion/companionPanelContext";
 import { companionStarters } from "@/lib/companion/companionStarters";
-import type { AskClarification } from "@/lib/askClarification";
+import type { AskClarification } from "@/lib/companion/clarificationDisplay";
 import type { MemoryInteractionState } from "@/lib/companion/memory/useCompanionMemoryInteraction";
 import { useCompanionConversation } from "@/lib/companion/conversation/useCompanionConversation";
 import type { CompanionMessage } from "@/lib/companion/conversation/conversationTypes";

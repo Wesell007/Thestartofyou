@@ -18,4 +18,4 @@
   Proposal recorded only: optional `journeyTopic: { journey; topicSlug }` field on `ArticleData`; nine non-Pregnancy/TTC/IVF journey articles need a product decision.
 
 ## Not started
-- WC-4 (safe to begin)
+- AIC-1 — AI Companion programme (safe to begin; not started)

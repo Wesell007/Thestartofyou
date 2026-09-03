@@ -11,6 +11,20 @@ export type AISearchOptions = {
    * body is exactly what it was before AIC-2.
    */
   journeyContext?: JourneyContextV1;
+  /**
+   * AIC-4 — conversation continuity. `session` (the default) never writes a
+   * row; `persistent` asks the backend to store the turn against the signed-in
+   * account, and is only ever set when the history flag is on.
+   */
+  historyMode?: "session" | "persistent";
+  /** Existing account-owned conversation to continue, when there is one. */
+  conversationId?: string;
+  /** Idempotency key for the user turn, so a retry cannot duplicate it. */
+  clientMessageId?: string;
+  /** Bounded prior turns for session mode only. Ignored by persistent mode. */
+  sessionHistory?: Array<{ role: "user" | "assistant"; content: string }>;
+  /** Called with the conversation the answer joined, when one exists. */
+  onConversationId?: (conversationId: string) => void;
 };
 
 export function useAISearch() {
@@ -56,6 +70,10 @@ export function useAISearch() {
             context,
             ...(options?.mode ? { mode: options.mode } : {}),
             ...(options?.journeyContext ? { journeyContext: options.journeyContext } : {}),
+            ...(options?.historyMode ? { historyMode: options.historyMode } : {}),
+            ...(options?.conversationId ? { conversationId: options.conversationId } : {}),
+            ...(options?.clientMessageId ? { clientMessageId: options.clientMessageId } : {}),
+            ...(options?.sessionHistory?.length ? { sessionHistory: options.sessionHistory } : {}),
           }),
           signal: controller.signal,
         }
@@ -67,6 +85,11 @@ export function useAISearch() {
       }
 
       if (!resp.body) throw new Error("No response body");
+
+      // AIC-4 — the backend reports which stored conversation this answer
+      // joined. Absent for anonymous and session-mode requests.
+      const conversationId = resp.headers.get("X-Conversation-Id");
+      if (conversationId && options?.onConversationId) options.onConversationId(conversationId);
 
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();

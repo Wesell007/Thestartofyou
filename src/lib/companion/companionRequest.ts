@@ -28,6 +28,15 @@ export interface CompanionRequest {
    * absent the request is byte-identical to the pre-AIC-2 contract.
    */
   journeyContext?: JourneyContextV1;
+  /**
+   * AIC-4 — continuity layer. Kept strictly separate from `context` and from
+   * `journeyContext`: prior turns are conversation, not saved journey data and
+   * not permissioned memory.
+   */
+  historyMode: "session" | "persistent";
+  conversationId?: string;
+  clientMessageId?: string;
+  sessionHistory?: Array<{ role: "user" | "assistant"; content: string }>;
 }
 
 /**
@@ -73,17 +82,32 @@ export function buildCompanionRequest({
   context,
   mode,
   journeyContext,
+  historyMode = "session",
+  conversationId,
+  clientMessageId,
+  sessionHistory,
 }: {
   query: string;
   context?: string | null;
   mode: CompanionMode;
   journeyContext?: JourneyContextV1 | null;
+  historyMode?: "session" | "persistent";
+  conversationId?: string | null;
+  clientMessageId?: string | null;
+  sessionHistory?: Array<{ role: "user" | "assistant"; content: string }> | null;
 }): CompanionRequest {
   const trimmedContext = context?.trim();
+  // A browser transcript is only meaningful in session mode. Persistent mode
+  // is server-authoritative, so it is dropped here as well as on the backend.
+  const history = historyMode === "persistent" ? [] : (sessionHistory ?? []);
   return {
     query: query.trim(),
     ...(trimmedContext ? { context: trimmedContext } : {}),
     mode,
     ...(journeyContext ? { journeyContext } : {}),
+    historyMode,
+    ...(historyMode === "persistent" && conversationId ? { conversationId } : {}),
+    ...(clientMessageId ? { clientMessageId } : {}),
+    ...(history.length ? { sessionHistory: history } : {}),
   };
 }

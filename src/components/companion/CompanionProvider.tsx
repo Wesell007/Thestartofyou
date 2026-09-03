@@ -1,10 +1,11 @@
 /**
  * Phase 29B — site-wide companion state.
  *
- * Session-only: turns live in React state and are dropped on unmount or on
- * "Start again". Nothing is written to the database, storage, the URL,
- * analytics or logs. Each backend request sends only the latest question,
- * the bounded page context and the resolved mode. Chat history is never sent.
+ * AIC-4: the panel no longer owns its own transcript. It runs on the shared
+ * companion conversation runtime, exactly as `/ask` does, so both surfaces
+ * behave identically. Continuity is session-scoped by default; account-owned
+ * persistence only happens when the history flag is on and someone is signed
+ * in. Nothing reaches the URL, analytics or logs.
  */
 
 import {
@@ -18,20 +19,17 @@ import {
   type ReactNode,
 } from "react";
 import { useLocation } from "react-router-dom";
-import { useAISearch } from "@/hooks/useAISearch";
 import { useCompanionPersonalJourney } from "@/hooks/useCompanionPersonalJourney";
 import { buildJourneyContext, buildPageContext } from "@/lib/companion/journeyContext";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 import type { CompanionMode } from "@/lib/companion/companionMode";
-import { buildCompanionRequest, resolvePanelMode } from "@/lib/companion/companionRequest";
+import { resolvePanelMode } from "@/lib/companion/companionRequest";
 import { shouldShowCompanionLauncher } from "@/lib/companion/companionSurface";
 import { buildCompanionPanelContext } from "@/lib/companion/companionPanelContext";
 import { companionStarters } from "@/lib/companion/companionStarters";
-import { resolveAskClarification, type AskClarification } from "@/lib/askClarification";
-import {
-  useCompanionMemoryInteraction,
-  type MemoryInteractionState,
-} from "@/lib/companion/memory/useCompanionMemoryInteraction";
+import type { AskClarification } from "@/lib/askClarification";
+import type { MemoryInteractionState } from "@/lib/companion/memory/useCompanionMemoryInteraction";
+import { useCompanionConversation } from "@/lib/companion/conversation/useCompanionConversation";
 
 export interface CompanionTurn {
   id: string;
@@ -63,6 +61,10 @@ interface CompanionContextValue {
   retry: () => void;
   stop: () => void;
   clear: () => void;
+  /** AIC-4 — end this thread and begin a new one. */
+  newConversation: () => void;
+  /** AIC-4 — true when this thread is being stored against the account. */
+  historyEnabled: boolean;
   lastQuestion: string | null;
   /** AIC-3 — explicit memory command state for this surface. */
   memory: {
@@ -78,15 +80,9 @@ interface CompanionContextValue {
 
 const CompanionContext = createContext<CompanionContextValue | null>(null);
 
-const newId = () => Math.random().toString(36).slice(2);
-
-const looksRateLimited = (message: string | null): boolean =>
-  !!message && /too many requests|rate limit/i.test(message);
-
 export function CompanionProvider({ children }: { children: ReactNode }) {
   const location = useLocation();
   const identity = useCompanionIdentity();
-  const { answer, isLoading, error, ask, reset } = useAISearch();
   // AIC-2 — one shared personal resolver, awaited at submit and never blocking
   // the send indefinitely.
   const { ensurePersonalJourney } = useCompanionPersonalJourney();
@@ -95,9 +91,6 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   // Pages that render a 404 suppress the companion for as long as they are
   // mounted, so arbitrary unknown paths never offer guidance.
   const [suppressedCount, setSuppressedCount] = useState(0);
-  const [turns, setTurns] = useState<CompanionTurn[]>([]);
-  const [lastQuestion, setLastQuestion] = useState<string | null>(null);
-  const committedRef = useRef(false);
 
   const mode = useMemo(() => resolvePanelMode(location.pathname), [location.pathname]);
   const visible = useMemo(
@@ -120,95 +113,35 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
     [mode, location.pathname, identity.tone],
   );
 
+  const pathnameRef = useRef(location.pathname);
+  pathnameRef.current = location.pathname;
+  const resolveJourneyContext = useCallback(async () => {
+    const personal = await ensurePersonalJourney();
+    return buildJourneyContext({
+      personal,
+      page: buildPageContext({ pathname: pathnameRef.current }),
+    });
+  }, [ensurePersonalJourney]);
+
+  // AIC-4 — the shared runtime. Ordering, streaming, bounds, clarification and
+  // memory interception all live there rather than in this surface.
+  const conversation = useCompanionConversation({ mode, context, resolveJourneyContext });
+
   // Close the panel when moving to a route where the companion is hidden.
   useEffect(() => {
     if (!visible) setOpen(false);
   }, [visible]);
 
-  // Commit a finished stream into the session turn list.
-  useEffect(() => {
-    if (isLoading || committedRef.current) return;
-    if (!answer.trim()) return;
-    committedRef.current = true;
-    setTurns((prev) => [...prev, { id: newId(), role: "assistant", text: answer }]);
-  }, [isLoading, answer]);
-
-  const memory = useCompanionMemoryInteraction();
-
-  const send = useCallback(
-    (question: string) => {
-      const trimmed = question.trim();
-      if (!trimmed || isLoading) return;
-      committedRef.current = false;
-      memory.dismiss();
-      setLastQuestion(trimmed);
-      setTurns((prev) => [...prev, { id: newId(), role: "user", text: trimmed }]);
-
-      // A broad single-topic term is clarified locally. The resolver already
-      // refuses to clarify anything with concern wording, so nothing that
-      // needs the safety routing is delayed here.
-      const clarification = resolveAskClarification(trimmed);
-      if (clarification) {
-        committedRef.current = true;
-        setTurns((prev) => [
-          ...prev,
-          { id: newId(), role: "assistant", text: clarification.question, clarification },
-        ]);
-        return;
-      }
-
-      // Only the latest question, the bounded context and the mode, built at
-      // the shared companion request boundary (AIC-1).
-      void (async () => {
-        // AIC-3 — an explicit "remember"/"forget" command is handled by the
-        // application and never reaches the model.
-        if (await memory.interceptQuery(trimmed)) {
-          committedRef.current = true;
-          return;
-        }
-        const personal = await ensurePersonalJourney();
-        const journeyContext = buildJourneyContext({
-          personal,
-          page: buildPageContext({ pathname: location.pathname }),
-        });
-        const request = buildCompanionRequest({ query: trimmed, context, mode, journeyContext });
-        await ask(request.query, request.context, {
-          mode: request.mode,
-          journeyContext: request.journeyContext,
-        });
-      })();
-    },
-    [ask, context, ensurePersonalJourney, isLoading, location.pathname, memory, mode],
+  const turns = useMemo<CompanionTurn[]>(
+    () =>
+      conversation.messages.map((message) => ({
+        id: message.id,
+        role: message.role,
+        text: message.content,
+        ...(message.clarification ? { clarification: message.clarification } : {}),
+      })),
+    [conversation.messages],
   );
-
-  const retry = useCallback(() => {
-    if (!lastQuestion || isLoading) return;
-    committedRef.current = false;
-    void (async () => {
-      const personal = await ensurePersonalJourney();
-      const journeyContext = buildJourneyContext({
-        personal,
-        page: buildPageContext({ pathname: location.pathname }),
-      });
-      const request = buildCompanionRequest({ query: lastQuestion, context, mode, journeyContext });
-      await ask(request.query, request.context, {
-        mode: request.mode,
-        journeyContext: request.journeyContext,
-      });
-    })();
-  }, [ask, context, ensurePersonalJourney, isLoading, lastQuestion, location.pathname, mode]);
-
-  const stop = useCallback(() => {
-    reset();
-    committedRef.current = true;
-  }, [reset]);
-
-  const clear = useCallback(() => {
-    reset();
-    committedRef.current = true;
-    setTurns([]);
-    setLastQuestion(null);
-  }, [reset]);
 
   const value = useMemo<CompanionContextValue>(
     () => ({
@@ -217,45 +150,24 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       mode,
       visible,
       turns,
-      streamingAnswer: committedRef.current ? "" : answer,
-      isLoading,
-      error,
-      isRateLimited: looksRateLimited(error),
+      streamingAnswer: conversation.streamingAnswer,
+      isLoading: conversation.isLoading,
+      error: conversation.error,
+      isRateLimited: conversation.isRateLimited,
       starters: companionStarters(mode),
       companionName: identity.name,
       context,
-      send,
-      retry,
-      stop,
-      clear,
-      lastQuestion,
-      memory: {
-        state: memory.state,
-        busy: memory.busy,
-        confirm: () => void memory.confirm(),
-        cancel: memory.cancel,
-        dismiss: memory.dismiss,
-      },
+      send: conversation.send,
+      retry: conversation.retry,
+      stop: conversation.stop,
+      clear: conversation.clearConversation,
+      newConversation: conversation.newConversation,
+      historyEnabled: conversation.historyEnabled,
+      lastQuestion: conversation.lastQuestion,
+      memory: conversation.memory,
       suppress,
     }),
-    [
-      suppress,
-      open,
-      mode,
-      visible,
-      turns,
-      answer,
-      isLoading,
-      error,
-      identity.name,
-      context,
-      send,
-      retry,
-      stop,
-      clear,
-      lastQuestion,
-      memory,
-    ],
+    [suppress, open, mode, visible, turns, conversation, identity.name, context],
   );
 
   return <CompanionContext.Provider value={value}>{children}</CompanionContext.Provider>;

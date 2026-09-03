@@ -13,6 +13,12 @@ import {
   renderMemoryBlock,
   type MemoryRecord,
 } from "../_shared/aiMemory.ts";
+import {
+  CONVERSATION_HISTORY_INSTRUCTIONS,
+  HISTORY_MAX_MESSAGES,
+  renderConversationHistory,
+  type ConversationTurn,
+} from "../_shared/aiConversationHistory.ts";
 
 // Internal traceability only: version data is logged once per cold start and
 // never reaches a browser or an answer.
@@ -34,6 +40,8 @@ const responseHeaders = (req: Request) => {
   const origin = req.headers.get("origin");
   const headers: Record<string, string> = {
     "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    // AIC-4: lets the browser learn which stored conversation an answer joined.
+    "Access-Control-Expose-Headers": "X-Conversation-Id",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Cache-Control": "no-store",
     Vary: "Origin",
@@ -204,6 +212,203 @@ const loadPermissionedMemory = async (req: Request): Promise<string> => {
   }
 };
 
+/**
+ * AIC-4 — account-owned conversation continuity.
+ *
+ * Authoritative kill switch: without AI_CONVERSATION_HISTORY_ENABLED=true no
+ * row is ever written or read, whatever the browser asks for. Persistence
+ * additionally requires an explicit `historyMode: "persistent"` request and a
+ * verified user token, so an anonymous visitor can never create a row.
+ *
+ * Every call runs through PostgREST with the *user's own* token, so row-level
+ * security is the boundary. The service role is not used, and a user id is
+ * never taken from the request body.
+ */
+const isConversationHistoryEnabled = () =>
+  (Deno.env.get("AI_CONVERSATION_HISTORY_ENABLED") ?? "").trim().toLowerCase() === "true";
+
+interface ConversationContext {
+  token: string;
+  supabaseUrl: string;
+  anonKey: string;
+  conversationId: string;
+}
+
+const restHeaders = (ctx: ConversationContext, extra: Record<string, string> = {}) => ({
+  apikey: ctx.anonKey,
+  Authorization: `Bearer ${ctx.token}`,
+  "Content-Type": "application/json",
+  ...extra,
+});
+
+const verifyUserId = async (req: Request, token: string, supabaseUrl: string, anonKey: string) => {
+  const response = await fetch(`${supabaseUrl}/auth/v1/user`, {
+    headers: { apikey: anonKey, Authorization: `Bearer ${token}` },
+    signal: req.signal,
+  });
+  if (!response.ok) return null;
+  const user = await response.json();
+  return typeof user?.id === "string" ? (user.id as string) : null;
+};
+
+type ConversationSetup =
+  | { ok: true; ctx: ConversationContext | null }
+  | { ok: false; status: number; error: string };
+
+const establishConversation = async (
+  req: Request,
+  historyMode: "session" | "persistent",
+  conversationId: string | undefined,
+): Promise<ConversationSetup> => {
+  if (historyMode !== "persistent" || !isConversationHistoryEnabled()) return { ok: true, ctx: null };
+  const token = bearerToken(req);
+  const supabaseUrl = Deno.env.get("SUPABASE_URL");
+  const anonKey = Deno.env.get("SUPABASE_ANON_KEY");
+  // No verified session means no persistence at all: the request simply
+  // continues as an ordinary session-mode answer.
+  if (!token || !supabaseUrl || !anonKey) return { ok: true, ctx: null };
+
+  try {
+    const userId = await verifyUserId(req, token, supabaseUrl, anonKey);
+    if (!userId) return { ok: true, ctx: null };
+
+    if (conversationId) {
+      // A conversation the caller does not own is invisible under RLS, so this
+      // returns nothing. It is refused rather than quietly adopted.
+      const existing = await fetch(
+        `${supabaseUrl}/rest/v1/companion_conversations?select=id&id=eq.${conversationId}&limit=1`,
+        { headers: { apikey: anonKey, Authorization: `Bearer ${token}` }, signal: req.signal },
+      );
+      if (!existing.ok) return { ok: true, ctx: null };
+      const rows = await existing.json();
+      if (!Array.isArray(rows) || rows.length === 0) {
+        return { ok: false, status: 404, error: "That conversation is not available on this account." };
+      }
+      return { ok: true, ctx: { token, supabaseUrl, anonKey, conversationId } };
+    }
+
+    // `user_id` is deliberately omitted: the column defaults to auth.uid().
+    const created = await fetch(`${supabaseUrl}/rest/v1/companion_conversations`, {
+      method: "POST",
+      headers: {
+        apikey: anonKey,
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Prefer: "return=representation",
+      },
+      body: JSON.stringify({}),
+      signal: req.signal,
+    });
+    if (!created.ok) return { ok: true, ctx: null };
+    const createdRows = await created.json();
+    const newId = Array.isArray(createdRows) ? createdRows[0]?.id : null;
+    if (typeof newId !== "string") return { ok: true, ctx: null };
+    return { ok: true, ctx: { token, supabaseUrl, anonKey, conversationId: newId } };
+  } catch (error) {
+    if (req.signal.aborted) return { ok: true, ctx: null };
+    console.error("ai-search conversation unavailable", error instanceof Error ? error.name : "unknown error");
+    return { ok: true, ctx: null };
+  }
+};
+
+/** Idempotent: a retry with the same client message id inserts nothing new. */
+const persistMessage = async (
+  req: Request,
+  ctx: ConversationContext,
+  role: "user" | "assistant",
+  content: string,
+  clientMessageId?: string,
+): Promise<void> => {
+  const trimmed = content.trim();
+  if (!trimmed) return;
+  try {
+    await fetch(`${ctx.supabaseUrl}/rest/v1/companion_messages`, {
+      method: "POST",
+      headers: restHeaders(ctx, { Prefer: "resolution=ignore-duplicates,return=minimal" }),
+      body: JSON.stringify({
+        conversation_id: ctx.conversationId,
+        role,
+        content: trimmed.slice(0, 8_000),
+        ...(clientMessageId ? { client_message_id: clientMessageId } : {}),
+      }),
+    });
+  } catch (error) {
+    // Persistence never blocks an answer, and message text is never logged.
+    console.error("ai-search message not stored", error instanceof Error ? error.name : "unknown error");
+  }
+};
+
+/**
+ * Server-authoritative history: the transcript comes from the database, never
+ * from the browser. The current turn is excluded by client message id.
+ */
+const loadConversationTurns = async (
+  req: Request,
+  ctx: ConversationContext,
+  clientMessageId: string | undefined,
+): Promise<ConversationTurn[]> => {
+  try {
+    const rows = await fetch(
+      `${ctx.supabaseUrl}/rest/v1/companion_messages?select=role,content,client_message_id,created_at` +
+        `&conversation_id=eq.${ctx.conversationId}&order=created_at.desc&limit=${HISTORY_MAX_MESSAGES + 2}`,
+      { headers: restHeaders(ctx), signal: req.signal },
+    );
+    if (!rows.ok) return [];
+    const records = await rows.json();
+    if (!Array.isArray(records)) return [];
+    return records
+      .filter((row) => (row.role === "user" || row.role === "assistant") && typeof row.content === "string")
+      .filter((row) => !clientMessageId || row.client_message_id !== clientMessageId)
+      .reverse()
+      .map((row) => ({ role: row.role as "user" | "assistant", content: row.content as string }));
+  } catch (error) {
+    if (req.signal.aborted) return [];
+    console.error("ai-search history unavailable", error instanceof Error ? error.name : "unknown error");
+    return [];
+  }
+};
+
+/**
+ * Passes the provider stream straight through while accumulating the answer,
+ * so only a stream that actually completes is stored. An aborted or failed
+ * stream leaves no assistant row.
+ */
+const persistOnComplete = (
+  req: Request,
+  ctx: ConversationContext,
+  body: ReadableStream<Uint8Array>,
+): ReadableStream<Uint8Array> => {
+  const decoder = new TextDecoder();
+  let answer = "";
+  let completed = false;
+  return body.pipeThrough(
+    new TransformStream<Uint8Array, Uint8Array>({
+      transform(chunk, controller) {
+        controller.enqueue(chunk);
+        const text = decoder.decode(chunk, { stream: true });
+        for (const line of text.split("\n")) {
+          const payload = line.startsWith("data:") ? line.slice(5).trim() : "";
+          if (!payload) continue;
+          if (payload === "[DONE]") {
+            completed = true;
+            continue;
+          }
+          try {
+            const delta = JSON.parse(payload)?.choices?.[0]?.delta?.content;
+            if (typeof delta === "string") answer += delta;
+          } catch {
+            // Non-JSON keep-alive frames are ignored.
+          }
+        }
+      },
+      async flush() {
+        if (!completed || req.signal.aborted) return;
+        await persistMessage(req, ctx, "assistant", answer);
+      },
+    }),
+  );
+};
+
 serve(async (req) => {
   const headers = responseHeaders(req);
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers });
@@ -231,14 +436,30 @@ serve(async (req) => {
     return json(req, { error: "Guidance is temporarily unavailable. Please try again." }, 503);
   }
 
-  const { query, context, mode, journeyContext } = parsed.value;
+  const { query, context, mode, journeyContext, historyMode, conversationId, clientMessageId, sessionHistory } =
+    parsed.value;
   const modeConfig = getAiModeConfig(mode);
+
+  // AIC-4: the conversation is established before any answer path, so an
+  // urgent or paused reply is still visible in a stored thread. Establishing
+  // it does not load history and cannot influence safety classification.
+  const setup = await establishConversation(req, historyMode, conversationId);
+  if (!setup.ok) return json(req, { error: setup.error }, setup.status);
+  const conversation = setup.ctx;
+  const conversationHeader = conversation ? { "X-Conversation-Id": conversation.conversationId } : {};
+  if (conversation) await persistMessage(req, conversation, "user", query, clientMessageId);
+
+  const controlledAnswer = async (answer: string) => {
+    if (conversation) await persistMessage(req, conversation, "assistant", answer);
+    const response = sseAnswer(req, answer);
+    for (const [key, value] of Object.entries(conversationHeader)) response.headers.set(key, value);
+    return response;
+  };
 
   if (matchUrgent(query)) {
     // Recap-only surfaces never receive the escalation answer. They get a short
     // controlled fallback instead, and the model is not called at all.
-    return sseAnswer(
-      req,
+    return controlledAnswer(
       modeConfig.allowUrgentEscalationAnswer ? urgentAnswer(query) : DAY_RECAP_UNAVAILABLE_ANSWER,
     );
   }
@@ -246,8 +467,7 @@ serve(async (req) => {
   // Phase 29D kill switch. Checked after hard escalation so a red or crisis
   // question still receives its escalation answer while the companion is paused.
   if (isAiDisabled(Deno.env.get("AI_SEARCH_DISABLED"))) {
-    return sseAnswer(
-      req,
+    return controlledAnswer(
       modeConfig.allowUrgentEscalationAnswer ? AI_PAUSED_ANSWER : DAY_RECAP_UNAVAILABLE_ANSWER,
     );
   }
@@ -273,13 +493,21 @@ serve(async (req) => {
   const structuredJourneyContext = renderJourneyContextBlock(journeyContext);
   // AIC-3: enrichment only, and only for a request that is going to the model.
   const permissionedMemory = await loadPermissionedMemory(req);
+  // AIC-4: exactly one history block. Persistent mode is server-authoritative;
+  // session mode uses the bounded transcript the browser supplied.
+  const priorTurns: ConversationTurn[] = conversation
+    ? await loadConversationTurns(req, conversation, clientMessageId)
+    : sessionHistory;
+  const conversationHistory = renderConversationHistory(priorTurns);
   const userContent = [
     "<user_question>", query, "</user_question>",
     structuredJourneyContext,
     permissionedMemory,
+    conversationHistory,
     context ? `<journey_context>\n${context}\n</journey_context>` : "",
     evidence ? `<background_material>\n${evidence}\n</background_material>` : "",
   ].filter(Boolean).join("\n");
+
 
   try {
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
@@ -296,6 +524,7 @@ serve(async (req) => {
               modeConfig.systemPrompt,
               structuredJourneyContext ? JOURNEY_CONTEXT_INSTRUCTIONS : "",
               permissionedMemory ? MEMORY_INSTRUCTIONS : "",
+              conversationHistory ? CONVERSATION_HISTORY_INSTRUCTIONS : "",
             ].filter(Boolean).join("\n\n"),
           },
           { role: "user", content: userContent },
@@ -316,9 +545,17 @@ serve(async (req) => {
     }
     if (!response.body) return json(req, { error: "The guidance service returned no answer." }, 502);
 
-    return new Response(response.body, {
-      headers: { ...headers, "Content-Type": "text/event-stream", "X-Content-Type-Options": "nosniff" },
+    // Only a stream that reaches completion is stored.
+    const stream = conversation ? persistOnComplete(req, conversation, response.body) : response.body;
+    return new Response(stream, {
+      headers: {
+        ...headers,
+        ...conversationHeader,
+        "Content-Type": "text/event-stream",
+        "X-Content-Type-Options": "nosniff",
+      },
     });
+
   } catch (error) {
     if (req.signal.aborted) return json(req, { error: "Request cancelled." }, 499);
     console.error("ai-search provider request failed", error instanceof Error ? error.message : "unknown error");

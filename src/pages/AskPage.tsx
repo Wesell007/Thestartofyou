@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams, Link, useLocation, useNavigate } from "react-router-dom";
 import EditorialAnswer from "@/components/shared/EditorialAnswer";
 import { sanitiseAnswerForDisplay, APPROVED_SOURCES_TRUST_LINE } from "@/lib/aiAnswerSafety";
@@ -6,8 +6,7 @@ import { resolveAskClarification, type AskClarificationChip } from "@/lib/askCla
 import { Loader2, ChevronRight, Heart, BookOpen, Compass, ArrowUpRight, ArrowLeft, ArrowUp } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { useAISearch } from "@/hooks/useAISearch";
-import { useCompanionMemoryInteraction } from "@/lib/companion/memory/useCompanionMemoryInteraction";
+import { useCompanionConversation } from "@/lib/companion/conversation/useCompanionConversation";
 import CompanionMemoryPrompt from "@/components/companion/CompanionMemoryPrompt";
 import { useCompanionPersonalJourney } from "@/hooks/useCompanionPersonalJourney";
 import { buildEntryContext, buildJourneyContext } from "@/lib/companion/journeyContext";
@@ -243,6 +242,15 @@ const PREGNANCY_TOPIC_SUGGESTIONS: Record<string, string[]> = {
 
 
 
+/** Flattens a stored answer into a short, plain-text recap line. */
+const previewText = (value: string) => {
+  const plain = value
+    .replace(/[*_`#>]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  return plain.length > 220 ? `${plain.slice(0, 217)}\u2026` : plain;
+};
+
 const AskPage = () => {
   const [searchParams] = useSearchParams();
   const location = useLocation();
@@ -254,9 +262,6 @@ const AskPage = () => {
   const topic = searchParams.get("topic");
   const stage = getAiStageStyle(stageKey);
   const sc = stageColors(stage);
-  const { answer, isLoading, error, ask, reset } = useAISearch();
-  // AIC-3 — the same shared memory interaction the panel uses.
-  const memory = useCompanionMemoryInteraction();
   // AIC-2 — the same shared personal resolver the panel uses.
   const { ensurePersonalJourney } = useCompanionPersonalJourney();
   const lastQueryRef = useRef("");
@@ -266,6 +271,55 @@ const AskPage = () => {
   // written by askNavigation. No inference from question or answer text.
   const askMode = resolveAskMode({ stage: stageKey, journey: searchParams.get("journey") });
   const { name: companionName } = useCompanionIdentity();
+
+  // AIC-2 — /ask carries entry provenance: where the question was asked from.
+  // It never becomes a personal fact.
+  const journeyParam = searchParams.get("journey");
+  const contextLabel = navigationState?.contextLabel ?? null;
+  const resolveJourneyContext = useCallback(async () => {
+    const personal = await ensurePersonalJourney();
+    return buildJourneyContext({
+      personal,
+      entry: buildEntryContext({
+        stage: stageKey,
+        journey: journeyParam,
+        topic,
+        title: contextLabel,
+      }),
+    });
+  }, [contextLabel, ensurePersonalJourney, journeyParam, stageKey, topic]);
+
+  // AIC-4 — /ask runs on the same shared conversation runtime as the panel:
+  // same ordering, streaming, bounds, clarification and memory interception.
+  const conversation = useCompanionConversation({
+    mode: askMode,
+    context,
+    resolveJourneyContext,
+  });
+  const memory = conversation.memory;
+  const { isLoading, error } = conversation;
+  const sendRef = useRef(conversation.send);
+  sendRef.current = conversation.send;
+
+  // The current answer is the live stream, then the completed assistant turn.
+  const answer = useMemo(() => {
+    if (conversation.streamingAnswer) return conversation.streamingAnswer;
+    if (isLoading) return "";
+    const last = [...conversation.messages].reverse().find(
+      (message) => message.role === "assistant" && !message.clarification,
+    );
+    return last?.content ?? "";
+  }, [conversation.messages, conversation.streamingAnswer, isLoading]);
+
+  // Everything said before the question now on screen, shown compactly so the
+  // thread is visible rather than implied.
+  const earlierTurns = useMemo(() => {
+    let index = -1;
+    conversation.messages.forEach((message, position) => {
+      if (message.role === "user" && message.content === query) index = position;
+    });
+    return index > 0 ? conversation.messages.slice(0, index) : [];
+  }, [conversation.messages, query]);
 
   const [newQuery, setNewQuery] = useState("");
   const [inputFocused, setInputFocused] = useState(false);
@@ -361,59 +415,23 @@ const AskPage = () => {
     const requestKey = `${query}\u0000${context ?? ""}\u0000${askMode}`;
     if (query && !clarification && requestKey !== lastQueryRef.current) {
       lastQueryRef.current = requestKey;
-      reset();
-      // AIC-1 — /ask uses the same shared request boundary and the same
-      // authoritative mode resolution as the site-wide companion panel.
+      // AIC-1/AIC-4 — one shared runtime owns the request, so /ask and the
+      // panel send an identical body for an identical question.
       window.scrollTo({ top: 0, behavior: "smooth" });
-      void (async () => {
-        // AIC-3 — an explicit "remember"/"forget" command is handled by the
-        // application and never reaches the model.
-        if (await memory.interceptQuery(query)) return;
-        const personal = await ensurePersonalJourney();
-        // AIC-2 — /ask carries entry provenance: where the question was asked
-        // from. It never becomes a personal fact.
-        const journeyContext = buildJourneyContext({
-          personal,
-          entry: buildEntryContext({
-            stage: stageKey,
-            journey: searchParams.get("journey"),
-            topic,
-            title: navigationState?.contextLabel ?? null,
-          }),
-        });
-        const request = buildCompanionRequest({ query, context, mode: askMode, journeyContext });
-        await ask(request.query, request.context, {
-          mode: request.mode,
-          journeyContext: request.journeyContext,
-        });
-      })();
+      sendRef.current(query);
     }
-  }, [
-    query,
-    context,
-    clarification,
-    ask,
-    reset,
-    askMode,
-    ensurePersonalJourney,
-    stageKey,
-    topic,
-    searchParams,
-    navigationState,
-    memory,
-  ]);
+  }, [query, context, clarification, askMode]);
 
   const goToQuestion = (question: string) => {
     const params = new URLSearchParams();
     if (isIVF) params.set("journey", "ivf");
     if (stageKey) params.set("stage", stageKey);
-    const nextContext = [context, query ? `Previous question: ${query}` : null, answer ? `Previous answer: ${answer}` : null]
-      .filter(Boolean)
-      .join("\n\n");
+    // AIC-4 — continuity is the shared conversation, not a freeform
+    // "Previous question/answer" string stitched into page context.
     navigate(`/ask${params.toString() ? `?${params.toString()}` : ""}`, {
       state: {
         question,
-        context: nextContext || undefined,
+        context: context || undefined,
         contextLabel: displayContext,
         previousQuestion: query || undefined,
       },
@@ -681,7 +699,37 @@ const AskPage = () => {
             </div>
           )}
 
+          {/* AIC-4 — earlier turns in this conversation, shown quietly */}
+          {earlierTurns.length > 0 && (
+            <section aria-label="Earlier in this conversation" className="space-y-2">
+              <h2 className="font-sans text-[12.5px] font-light uppercase tracking-[0.08em] text-muted-foreground">
+                Earlier in this conversation
+              </h2>
+              <ol className="space-y-2">
+                {earlierTurns.map((turn) => (
+                  <li
+                    key={turn.id}
+                    className="rounded-[14px] border border-border/40 bg-card/60 px-3 py-2 font-sans text-[13.5px] font-light leading-relaxed text-muted-foreground"
+                  >
+                    <span className="mr-1.5 font-normal text-foreground/70">
+                      {turn.role === "user" ? "You:" : "Companion:"}
+                    </span>
+                    {previewText(turn.content)}
+                  </li>
+                ))}
+              </ol>
+              <button
+                type="button"
+                onClick={conversation.newConversation}
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-full font-sans text-[12.5px] font-light text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40"
+              >
+                Start a new conversation
+              </button>
+            </section>
+          )}
+
           {/* Question bubble — compact, conversational */}
+
           <div className="flex items-start gap-3">
             <span
               className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sage-bg/60"

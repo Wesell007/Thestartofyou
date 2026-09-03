@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.touch_companion_conversation() FROM PUBLIC, anon, authenticated;

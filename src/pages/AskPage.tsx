@@ -242,6 +242,15 @@ const PREGNANCY_TOPIC_SUGGESTIONS: Record<string, string[]> = {
 
 
 
+/** Flattens a stored answer into a short, plain-text recap line. */
+const previewText = (value: string) => {
+  const plain = value
+    .replace(/[*_`#>]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  return plain.length > 220 ? `${plain.slice(0, 217)}\u2026` : plain;
+};
+
 const AskPage = () => {
   const [searchParams] = useSearchParams();
   const location = useLocation();

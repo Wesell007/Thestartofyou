@@ -115,16 +115,18 @@ describe("ai-search mode behaviour", () => {
     expect(body).not.toMatch(LINK_OR_SOURCE);
   });
 
-  it("returns the controlled fallback for urgent wording in recap mode, without calling the model", async () => {
+  // AIC-5A: recap mode may no longer suppress a deterministic RED/CRISIS match.
+  it("escalates urgent wording in recap mode, without calling the model", async () => {
     const response = await post({
       query: "Day: 2026-08-19. Moment: he was unconscious for a moment.",
       mode: "first_year_day_recap",
     });
     const body = await readStream(response);
-    expect(body).toBe(DAY_RECAP_UNAVAILABLE_ANSWER);
-    expect(body).not.toMatch(ESCALATION_WORDING);
+    expect(body).toMatch(ESCALATION_WORDING);
+    expect(body).not.toBe(DAY_RECAP_UNAVAILABLE_ANSWER);
     expect(modelBodies).toHaveLength(0);
   });
+
 
   it("keeps grounding and the urgent escalation answer for callers with no mode", async () => {
     const grounded = await post({ query: "What helps with heartburn?" });

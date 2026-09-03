@@ -408,3 +408,57 @@ severity), clinical/crisis/safeguarding separation, rate-limited urgent
 availability, crafted-mode escalation, classifier failure policy.
 
 ADR proposals: `docs/ai/adr/ADR-AIC5-proposals.md`.
+
+---
+
+## 17. AIC-5A implementation record (Deterministic Safety Foundation)
+
+**Status: IMPLEMENTED — CLOSED PASS.** No model-assisted safety classification
+was introduced. AMBER and UNSUPPORTED remain unimplemented (AIC-5D / AIC-5C).
+
+### 17.1 What was added
+
+- `supabase/functions/_shared/safetyState.ts` — reserves the five-state
+  vocabulary (`green | amber | red | crisis | unsupported`) and defines the
+  discriminated `SafetyDecision`. Only `green`, `red` and `crisis` are emitted.
+- `supabase/functions/_shared/safetyRouter.ts` — `decideSafety(query)`, the
+  single server-side safety decision point. It wraps the existing Phase 29D
+  `matchUrgent` / `urgentAnswer` machinery, adds no new matching rules, no
+  thresholds and no model call.
+- `crisisSubtype` exported from `urgentPatterns.ts`, reusing the existing
+  `ABUSE_PATTERN` so crisis and safeguarding stay distinguishable. Zero regex
+  changes; all deterministic answer wording is byte-identical.
+
+### 17.2 Actual request order in `ai-search`
+
+1. CORS / method / body validation
+2. `decideSafety(query)`
+3. RED / CRISIS → deterministic branch: conversation opened best-effort, fixed
+   answer streamed. No rate-limit call, no kill-switch check, no grounding
+   fetch, no journey / memory / history enrichment, no model call.
+4. GREEN → ordinary rate limiting (12/min, 100/hour, unchanged) → conversation
+   → kill switch → grounding / context / model.
+
+### 17.3 Resolved audit gaps
+
+- **5.1 Rate limit versus urgent routing — RESOLVED.** Safety now precedes
+  quota. Deterministic answers survive quota exhaustion (429) and limiter
+  unavailability (503). Ordinary rate limiting is unchanged for GREEN.
+- **5.2 Recap mode versus escalation — RESOLVED.** The deterministic branch
+  returns `safety.answer` directly, so `allowUrgentEscalationAnswer: false` on
+  `first_year_day_recap` can no longer suppress RED or CRISIS. That flag still
+  governs the GREEN kill-switch answer only.
+- **5.3 Persistence before safety — unchanged retention observation.** Severity
+  is decided before persistence can influence anything, and no safety state,
+  label, score or flag is ever persisted or logged. History flags remain OFF.
+- **5.4 Kill switch after urgent routing — PRESERVED.** RED and CRISIS return
+  before `AI_SEARCH_DISABLED` is read.
+
+### 17.4 Coverage
+
+`src/test/safetyRouter.test.ts` (state mapping, wording equality, no
+amber/unsupported, legitimate recap payload stays GREEN) and
+`src/test/aiSearchSafetyRouting.test.ts` (quota exhausted, limiter failure,
+limiter not called, GREEN 429/503 preserved, recap escalation, kill switch,
+zero model and grounding calls). The obsolete recap expectation in
+`src/test/aiSearchEndpoint.test.ts` was updated to the corrected behaviour.

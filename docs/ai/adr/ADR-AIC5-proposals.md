@@ -1,5 +1,7 @@
 # ADR-AIC5-01 … 08 — Safety intelligence and emotional continuity
 
+ADR-AIC5-01 and ADR-AIC5-02 are ACCEPTED as of AIC-5A. ADR-AIC5-03 … 08 remain PROPOSED.
+
 Status of every record below: **PROPOSED**. None is implemented. Accepting any
 of them requires the corresponding AIC-5 build slice and its own approval.
 
@@ -9,6 +11,8 @@ Context shared by all eight: `docs/ai/companion-safety-emotional-continuity.md`
 ---
 
 ## ADR-AIC5-01 — Deterministic safety routing is authoritative
+
+**Status: ACCEPTED (AIC-5A).** Implemented as `decideSafety` in `_shared/safetyRouter.ts`, running before rate limiting, persistence, mode behaviour and the kill switch.
 
 **Status:** PROPOSED
 
@@ -25,6 +29,8 @@ model.
 ---
 
 ## ADR-AIC5-02 — Five explicit safety states
+
+**Status: ACCEPTED (AIC-5A), partially implemented.** The five-state vocabulary is reserved in `_shared/safetyState.ts`; only `green`, `red` and `crisis` are emitted. `amber` (AIC-5D) and `unsupported` (AIC-5C) remain unimplemented.
 
 **Status:** PROPOSED
 

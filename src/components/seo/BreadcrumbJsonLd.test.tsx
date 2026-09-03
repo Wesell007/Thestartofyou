@@ -81,7 +81,7 @@ describe("BreadcrumbJsonLd", () => {
         </>
       </HelmetProvider>,
     );
-    const schemas = await waitForSchemas(1);
+    const schemas = await waitForSchemas(2);
     expect(schemas.filter((s) => s["@type"] === "Article")).toHaveLength(1);
     expect(schemas.filter((s) => s["@type"] === "BreadcrumbList")).toHaveLength(1);
     expect(schemas.find((s) => s["@type"] === "Article")?.headline).toBe("Newborn feeding rhythms");

@@ -12,22 +12,22 @@ describe("Edge Function request validation", () => {
   it("accepts a bounded AI question and optional context", () => {
     expect(parseAiSearchBody({ query: "  What happens next?  ", context: "week 8" })).toEqual({
       ok: true,
-      value: { query: "What happens next?", context: "week 8", mode: "general" },
+      value: { query: "What happens next?", context: "week 8", mode: "general", historyMode: "session", sessionHistory: [] },
     });
   });
 
   it("keeps a known mode and falls back to general otherwise", () => {
     expect(parseAiSearchBody({ query: "Recap", mode: "first_year_day_recap" })).toEqual({
       ok: true,
-      value: { query: "Recap", mode: "first_year_day_recap" },
+      value: { query: "Recap", mode: "first_year_day_recap", historyMode: "session", sessionHistory: [] },
     });
     expect(parseAiSearchBody({ query: "Recap", mode: "made_up" })).toEqual({
       ok: true,
-      value: { query: "Recap", mode: "general" },
+      value: { query: "Recap", mode: "general", historyMode: "session", sessionHistory: [] },
     });
     expect(parseAiSearchBody({ query: "Recap" })).toEqual({
       ok: true,
-      value: { query: "Recap", mode: "general" },
+      value: { query: "Recap", mode: "general", historyMode: "session", sessionHistory: [] },
     });
   });
 

@@ -21,7 +21,7 @@ describe("AIC-1 companion request contract", () => {
       context: "Journey area: pregnancy.",
       mode: "pregnancy_week_companion",
     });
-    expect(Object.keys(request).sort()).toEqual(["context", "mode", "query"]);
+    expect(Object.keys(request).sort()).toEqual(["context", "historyMode", "mode", "query"]);
     expect(request.query).toBe("Is this normal?");
     expect(request.mode).toBe("pregnancy_week_companion");
   });
@@ -29,7 +29,7 @@ describe("AIC-1 companion request contract", () => {
   it("drops empty context instead of sending a blank block", () => {
     const request = buildCompanionRequest({ query: "hello", context: "   ", mode: "general" });
     expect(request.context).toBeUndefined();
-    expect(Object.keys(request).sort()).toEqual(["mode", "query"]);
+    expect(Object.keys(request).sort()).toEqual(["historyMode", "mode", "query"]);
   });
 });
 

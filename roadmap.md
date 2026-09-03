@@ -30,3 +30,6 @@
   Built: `companion_memories` table (DB-owned ownership, generated normalised value, owner-only RLS, 50-row cap, credential backstop, account-delete cascade); pure policy + intent layers, shared `useCompanionMemoryInteraction`, confirmation UI on both surfaces, `/account` management section, export inclusion; `ai-search` user-token retrieval behind authoritative `AI_MEMORY_ENABLED` with an escaped `<permissioned_memory>` block. Docs: `docs/ai/companion-memory.md`, `docs/ai/adr/ADR-AIC3.md`.
   Flags: `VITE_COMPANION_MEMORY_ENABLED` (client UX) and `AI_MEMORY_ENABLED` (server, authoritative) are both OFF. Release remains blocked by the outstanding legal/privacy review in `docs/ai/memory-mvp-readiness.md`.
   Deferred by design: `confirmed_suggestion` source, suggested memories, conversation history (AIC-4), emotional modelling (AIC-5), voice (AIC-6/7).
+
+## In progress
+- AIC-4 — Conversation Continuity: one shared conversation runtime across CompanionPanel and /ask; session continuity for anonymous and signed-in-with-persistence-off; flag-gated account-owned persistent history (`companion_conversations` / `companion_messages`, owner-only RLS with parent-conversation ownership enforcement); bounded escaped `<conversation_history>` prompt block; AskPage pseudo-continuity removal; New/Clear/Delete conversation UI; docs + ADR-AIC4-01…11. Do not begin AIC-5.

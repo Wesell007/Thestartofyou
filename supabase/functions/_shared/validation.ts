@@ -29,6 +29,37 @@ const boundedString = (
   return { ok: true, value: trimmed };
 };
 
+/** AIC-4 — bounds for a client-supplied *session* transcript. */
+export const AI_SESSION_HISTORY_MAX_MESSAGES = 10;
+export const AI_SESSION_HISTORY_MAX_MESSAGE_CHARS = 1_200;
+
+export type AiHistoryMode = "session" | "persistent";
+export interface AiSessionTurn {
+  role: "user" | "assistant";
+  content: string;
+}
+
+const parseSessionHistory = (value: unknown): ValidationResult<AiSessionTurn[]> => {
+  if (value === undefined || value === null) return { ok: true, value: [] };
+  if (!Array.isArray(value)) return { ok: false, error: "Conversation history must be a list." };
+  if (value.length > AI_SESSION_HISTORY_MAX_MESSAGES) {
+    return { ok: false, error: "Conversation history is too long." };
+  }
+  const turns: AiSessionTurn[] = [];
+  for (const entry of value) {
+    if (!isRecord(entry)) return { ok: false, error: "Conversation history is malformed." };
+    if (entry.role !== "user" && entry.role !== "assistant") {
+      return { ok: false, error: "Conversation history is malformed." };
+    }
+    const content = boundedString(entry.content, "Conversation history", 1, AI_SESSION_HISTORY_MAX_MESSAGE_CHARS);
+    if (content.ok === false) return { ok: false, error: content.error };
+    turns.push({ role: entry.role, content: content.value });
+  }
+  return { ok: true, value: turns };
+};
+
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 export const parseAiSearchBody = (
   body: unknown,
 ): ValidationResult<{
@@ -36,6 +67,10 @@ export const parseAiSearchBody = (
   context?: string;
   mode: AiMode;
   journeyContext?: JourneyContextV1;
+  historyMode: AiHistoryMode;
+  conversationId?: string;
+  clientMessageId?: string;
+  sessionHistory: AiSessionTurn[];
 }> => {
   if (!isRecord(body)) return { ok: false, error: "Request body must be a JSON object." };
   const query = boundedString(body.query, "Question", 2, AI_QUERY_MAX_LENGTH);
@@ -52,16 +87,49 @@ export const parseAiSearchBody = (
   if (journeyContext.ok === false) return { ok: false, error: journeyContext.error };
   const journeyPart = journeyContext.value ? { journeyContext: journeyContext.value } : {};
 
+  // AIC-4: conversation continuity. `session` is the default, so a caller
+  // written before AIC-4 behaves exactly as it did before.
+  const historyMode: AiHistoryMode = body.historyMode === "persistent" ? "persistent" : "session";
+
+  let conversationId: string | undefined;
+  if (body.conversationId !== undefined && body.conversationId !== null && body.conversationId !== "") {
+    if (typeof body.conversationId !== "string" || !UUID_PATTERN.test(body.conversationId)) {
+      return { ok: false, error: "Conversation reference is invalid." };
+    }
+    conversationId = body.conversationId;
+  }
+
+  let clientMessageId: string | undefined;
+  if (body.clientMessageId !== undefined && body.clientMessageId !== null && body.clientMessageId !== "") {
+    const parsedId = boundedString(body.clientMessageId, "Message reference", 8, 100);
+    if (parsedId.ok === false) return { ok: false, error: parsedId.error };
+    clientMessageId = parsedId.value;
+  }
+
+  const sessionHistoryResult = parseSessionHistory(body.sessionHistory);
+  if (sessionHistoryResult.ok === false) return { ok: false, error: sessionHistoryResult.error };
+  // A browser-supplied transcript is only ever accepted for session mode.
+  // Persistent mode is server-authoritative, so it is discarded outright.
+  const sessionHistory = historyMode === "persistent" ? [] : sessionHistoryResult.value;
+
+  const conversationPart = {
+    historyMode,
+    sessionHistory,
+    ...(conversationId ? { conversationId } : {}),
+    ...(clientMessageId ? { clientMessageId } : {}),
+  };
+
   if (body.context === undefined || body.context === null || body.context === "") {
-    return { ok: true, value: { query: query.value, mode, ...journeyPart } };
+    return { ok: true, value: { query: query.value, mode, ...journeyPart, ...conversationPart } };
   }
   const context = boundedString(body.context, "Context", 1, AI_CONTEXT_MAX_LENGTH);
   if (context.ok === false) return { ok: false, error: context.error };
   return {
     ok: true,
-    value: { query: query.value, context: context.value, mode, ...journeyPart },
+    value: { query: query.value, context: context.value, mode, ...journeyPart, ...conversationPart },
   };
 };
+
 
 export const parseReflectBody = (
   body: unknown,

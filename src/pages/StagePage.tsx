@@ -442,7 +442,7 @@ const StagePage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
               <div>
                 <p className="font-sans text-xs font-light tracking-[0.2em] uppercase text-sage-muted mb-5">
-                  AI Support
+                  Your companion
                 </p>
                 <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-6">
                   Ask anything, whenever you need

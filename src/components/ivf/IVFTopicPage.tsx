@@ -317,7 +317,7 @@ const IVFTopicPage = ({ config }: Props) => {
                 aria-hidden="true"
                 className="mx-auto mb-4 h-7 w-auto opacity-60"
               />
-              <Eyebrow>AI Support</Eyebrow>
+              <Eyebrow>Your companion</Eyebrow>
               <h2 className="mt-3 font-serif text-2xl md:text-3xl text-foreground leading-tight">
                 Ask anything about <span className="italic font-normal">{config.eyebrow.toLowerCase()}</span>
               </h2>

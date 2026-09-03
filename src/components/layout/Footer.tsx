@@ -65,7 +65,7 @@ const Footer = () => {
               {[
                 { to: "/due-date-calculator", label: "Due Date Calculator" },
                 { to: "/ovulation-calculator", label: "Ovulation Calculator" },
-                { to: "/ask", label: "Ask a Question" },
+                { to: "/ask", label: "Ask your companion" },
                 { to: "/support", label: "Support" },
                 { to: "/journal", label: "Journal" },
               ].map(l => (

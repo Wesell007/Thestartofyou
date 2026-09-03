@@ -475,7 +475,7 @@ const AISupport = () => {
           />
 
           <div className="relative z-10 px-6 sm:px-10 md:px-14 py-12 md:py-14 text-center">
-            <Eyebrow>AI support</Eyebrow>
+            <Eyebrow>Your companion</Eyebrow>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-[2.125rem] text-foreground leading-[1.15] mb-3.5">
               What's on your mind <span className="italic font-normal">right now?</span>
             </h2>

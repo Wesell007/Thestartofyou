@@ -41,7 +41,7 @@ const HubAISupport = ({
       <div className="container mx-auto px-6 md:px-10 max-w-4xl relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
           <div>
-            <p className="stage-label mb-5">AI Support</p>
+            <p className="stage-label mb-5">Your companion</p>
             <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
               {heading}
             </h2>

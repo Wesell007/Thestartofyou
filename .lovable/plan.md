@@ -1,56 +1,78 @@
-# AIC-4 — Conversation Continuity
+# AIC-5 — Emotional Continuity & Safety Intelligence (audit + architecture gate)
 
-One conversation system shared by the site-wide companion panel and `/ask`. No new long-term memory. AIC-3 memory flags stay OFF. Persistent history ships behind its own OFF-by-default flags.
+Audit only. No safety/emotion system is built in this slice. No voice, no memory changes, no conversation-runtime redesign, no grounding change.
 
-## Audit findings (verified in code)
+## A. Verified current safety path (read from source)
 
-- `CompanionProvider` holds panel messages in local React state (`CompanionTurn[]`, `{id, role, text, clarification?}`), plus `lastQuestion`, a `committedRef` guard that commits a finished stream once, and `useAISearch` for streaming/abort/retry. State dies on provider unmount; it survives route changes because the provider is mounted globally, and it survives panel close (only `open` toggles).
-- `AskPage` has no message list at all. Each question is a fresh render driven by `?q`/router state; a `lastQueryRef` request key guards duplicate submits; `reset()` then `ask()` per question.
-- Pseudo-continuity lives in `AskPage.goToQuestion`: it concatenates `Previous question: …` / `Previous answer: …` into the freeform `context` string and passes `previousQuestion` in router state for a "Back to previous question" button. Three inline cards (`TTCAskCompanionCard`, `SectionAskAI`, `FirstYearAskCompanion`) do their own local `Previous answer:` append — those are inline single-shot CTAs, out of AIC-4 scope, and stay unchanged.
-- `askNavigation` carries `{question, context}` only. `companionRequest` builds `{query, context?, mode, journeyContext?}`. `useAISearch` posts to `ai-search` with the session JWT when signed in.
-- `ai-search` order today: CORS → body validation → rate limit → kill switch → urgent match → journey context → memory (flag-gated) → grounding → model → SSE. No conversation table exists in the database.
+Request flow, in order, in `supabase/functions/ai-search/index.ts`:
 
-## What gets built
+```text
+useCompanionConversation → companionRequest → useAISearch → POST /functions/v1/ai-search
+  1 parseAiSearchBody (validation.ts)        deterministic, 400 on bad shape
+  2 consumeRateLimit (RPC, IP+UA hash)       deterministic, 429/503
+  3 establishConversation (AIC-4)            gated, never affects safety
+  4 persistMessage(user)                     only when persistent history is on
+  5 matchUrgent(query)  ← SAFETY DECISION    deterministic, bypasses the model
+  6 isAiDisabled(AI_SEARCH_DISABLED)         deterministic pause answer
+  7 selectSources + fetchGrounding (NHS)     503 when all sources fail
+  8 renderJourneyContextBlock (AIC-2)
+  9 loadPermissionedMemory (AIC-3, flag off)
+ 10 loadConversationTurns / sessionHistory (AIC-4)
+ 11 system prompt = mode prompt + trusted instruction blocks
+ 12 google/gemini-2.5-flash chat/completions, stream:true, temp 0.2
+ 13 SSE passthrough (persistOnComplete when persisting)
+ 14 client sanitiseAnswerForDisplay (aiAnswerSafety.ts) + link stripping
+```
 
-### 1. Shared conversation runtime (client)
+Confirmed safety-decision points: only steps 5, 6, 11 and 14. Steps 5/6 are the only ones that can bypass the model.
 
-- New `CompanionConversationProvider` mounted alongside `CompanionProvider` (or folded into it) owning: active conversation id, `CompanionMessage[]`, send, streaming assistant text, new conversation, clear/delete, restore.
-- Canonical contract: `{ id, role: "user" | "assistant", content, createdAt, status?: "streaming" | "complete" | "error", clientMessageId?, clarification? }`. Nothing hidden is stored — no prompts, journey context, memory, tokens.
-- `CompanionProvider` and `AskPage` both read/write this one runtime. No panel-local transcript, no `/ask`-only transcript.
-- `useAISearch` stays the only AI transport; the request gains an optional `conversationId` and, for anonymous users only, a bounded `sessionHistory` array.
+**Deterministic urgent owner:** `supabase/functions/_shared/urgentPatterns.ts` — `CRISIS_PATTERN`, `URGENT_PATTERN` (union of GENERAL / PREGNANCY / POSTPARTUM / BABY red-flag groups), `matchUrgent()`, `urgentAnswer()` with three fixed answers (crisis, abuse, clinical) plus `AI_PAUSED_ANSWER`. Matching is current-turn regex only: history, journey context, memory and grounding play no part. Recap mode receives `DAY_RECAP_UNAVAILABLE_ANSWER` instead of escalation. Tests: `src/test/urgentPatterns.test.ts` (16 positives, 7 negatives, wording bans) and `src/test/aiEvalDataset.test.ts`.
 
-### 2. Anonymous continuity
+**Safety prompt inventory:** `aiModes.ts` — `SAFETY_BLOCKS` (10 lines), `ESCALATION_BLOCKS` (4 variants), `GROUNDING_USE_RULE`, `OUTPUT_HYGIENE_RULES`, `SAFE_FALLBACK_ANSWER`; plus trusted instruction blocks for journey context, memory and conversation history. Client-side display sanitisation and `BANNED_VERDICT_PATTERNS` (dev warning only, not enforced) live in `src/lib/aiAnswerSafety.ts`. Duplication found: reassurance bans exist as prompt text (`noFalseHope`, `noPredictionPregnancy`) and again as unenforced client patterns; escalation wording exists both in prompt blocks and in the deterministic urgent answers.
 
-Provider state covers route changes and panel close/reopen. Refresh is covered by one narrowly scoped `sessionStorage` key holding only visible user/assistant messages, capped (20 messages, 2000 chars each, ~20 KB total), cleared with the browser session. No `localStorage`, no server rows for anonymous users.
+**State matrix against current behaviour:**
 
-### 3. Authenticated persistence (behind flags)
+| State | Status | Evidence |
+| --- | --- | --- |
+| GREEN | IMPLICIT | the default path; no explicit state exists |
+| AMBER | ABSENT | no mechanism between "urgent regex" and "ordinary answer"; only prompt text |
+| RED | IMPLEMENTED | `matchUrgent → "clinical"` |
+| CRISIS | PARTIAL | crisis and abuse answers exist, but share the urgent regex path and the same request branch |
+| UNSUPPORTED | PARTIAL | only `SAFE_FALLBACK_ANSWER` chosen by the model, plus clarification in `askClarification.ts` (client, `/ask` and panel) |
 
-New tables `public.companion_conversations` and `public.companion_messages`, AIC-3 ownership pattern (`user_id default auth.uid()`), owner-only RLS, GRANTs, cascade from conversation → messages and from `auth.users`. Active conversation = most recently active non-archived conversation, or the client-held id validated against ownership server-side.
+Other verified points: no safety state, emotion label or risk score is stored anywhere (0 occurrences); no raw transcript logging (error paths log error names only); panel and `/ask` share one runtime and one endpoint, so safety parity is structural; no third chat surface exists (inline Ask CTAs navigate to `/ask`).
 
-`ai-search` becomes server-authoritative for authenticated history: verify JWT, verify conversation ownership, load bounded prior messages under RLS, persist the user turn idempotently by `client_message_id`, persist the assistant turn only on a completed stream. Foreign `conversationId` → treated as no history (403-equivalent, documented), never a fallback read of another user's thread.
+**AIC-4 checks:** `AskPage.tsx` no longer builds `Previous question:` / `Previous answer:` context — it explicitly strips that shape from the display label, and continuity comes from the shared conversation runtime. `Back to previous question` is a router `navigate(-1)` affordance driven by `navigationState.previousQuestion` — a navigation label, not a continuity mechanism. Three legacy inline components (`TTCAskCompanionCard`, `FirstYearAskCompanion`, `SectionAskAI`) still append `Previous answer:` into freeform context — recorded as debt, not an AIC-4 reopen. Raw Markdown in the earlier-turn preview is already handled by `previewText()`; remaining leakage is cosmetic backlog only.
 
-### 4. Prompt integration
+**Voice readiness:** all safety logic already lives server-side in shared modules, so a future voice transport reuses it unchanged. The only coupling is `askClarification.ts`, which runs client-side and would need to move or be duplicated for voice.
 
-Separate `<conversation_history>` block, escaped content, no internal ids. Bounded: 10 messages, 1200 chars per message, 4000 chars rendered. Trusted instructions state history is prior context and the current turn wins. Precedence unchanged: system/safety > current request > journey context > memory > history > page/entry context.
+**Open runtime finding (not in scope to fix here):** a `useCompanion must be used inside CompanionProvider` error appears in preview logs; to be triaged separately.
 
-### 5. Pseudo-continuity removal
+## B. Proposed architecture (for approval, not built here)
 
-Once real history parity passes, remove the `Previous question:` / `Previous answer:` concatenation and the `previousQuestion` router-state field from `AskPage`/`askNavigation`. Only one continuity mechanism runs.
+1. **Safety router, deterministic first.** Option B: deterministic high-risk rules stay authoritative; a model-assisted classifier is considered only for the ambiguous middle. No model output may downgrade a deterministic match.
+2. **State definitions.** GREEN = routine informational/supportive, personalisation allowed. AMBER = concern needing professional input but no red-flag match; bans certainty and requires a clear "contact X" route, never a clinical threshold invented in code. RED = the existing urgent pathway, unchanged and unduplicated. CRISIS = its own deterministic route, separate from clinical urgency (mental health, self-harm, harm to another, safeguarding). UNSUPPORTED = an explicit product boundary (diagnosis requests, certainty the companion cannot give, policy conflicts), distinct from "the model does not know".
+3. **Structured output feasibility = UNKNOWN.** The endpoint uses gateway chat completions with `stream: true` and never requests `response_format`; nothing in the repo proves structured-output support. First build task is a probe. No prose regex over the streamed answer, ever.
+4. **Extra model call = only if the probe passes**, run before the answer stream, on a strict schema, with a conservative failure policy: classifier error, timeout or rate limit resolves to AMBER-style cautious handling, never GREEN.
+5. **Emotional continuity = ephemeral.** Derived from the existing bounded conversation history plus the current turn only. No table, no score, no auto-memory. Explicit self-described emotion may shape tone; inferred emotional or clinical labels are forbidden.
+6. **Precedence rule.** Current turn > history > journey context > page context > memory. Page context never evidences a personal symptom; memory never lowers escalation; journey context informs relevance, never risk.
+7. **Boundaries preserved.** Grounding stays `30B-source-routing-v1` with zero candidates/approvals; NHS routing, source stripping and the trust line unchanged; all four memory/history flags stay off.
 
-### 6. Minimal UI
+## C. Deliverables of this slice (on approval)
 
-`New conversation` and `Clear/Delete conversation` on both surfaces (panel footer replaces the existing "Start again"; `/ask` gets the same compact affordances), a restoring state, and a persistence-failure line. Single active conversation + New conversation is the MVP; no sidebar. No redesign of AskPage, panel, launcher, navbar or homepage.
+- Create `docs/ai/companion-safety-emotional-continuity.md` with the full audit, matrix, state definitions, routing architecture, failure policy, emotion rules, privacy and voice readiness, and the proposed build slices.
+- Update `docs/ai/companion-architecture.md` with a pointer and the safety-path summary.
+- Add ADR proposals `ADR-AIC5-01` … `ADR-AIC5-07` as **Proposed**, plus `ADR-AIC5-08` (structured-output feasibility must be proven before any classifier is built).
+- Record the 62-point completion report in chat.
+- No production code, no test changes expected; baseline stays 80 files / 794 tests.
 
-### 7. Flags, export, deletion
+## D. Recommended build sequence (evidence-based, for later approval)
 
-`VITE_COMPANION_HISTORY_ENABLED` (client UX) and `AI_CONVERSATION_HISTORY_ENABLED` (server authority), both default OFF. Conversations added to the account data export and covered by account deletion cascade (verified against `delete-account`). No raw message content logged anywhere.
+- **AIC-5A** shared safety-state contract + router module wrapping the existing `matchUrgent`, with crisis split from clinical. No behaviour change.
+- **AIC-5B** structured-output probe and go/no-go on model-assisted classification.
+- **AIC-5C** UNSUPPORTED route consolidated with the existing fallback and clarification logic (moved server-side for voice reuse).
+- **AIC-5D** AMBER handling: uncertainty and reassurance rules, prompt-block level first, enforcement second.
+- **AIC-5E** emotional-continuity response guidance from existing bounded history.
+- **AIC-5F** cross-surface verification, deterministic safety tests, eval-dataset extension.
 
-## Verification
-
-Two isolated test users prove no cross-user SELECT/INSERT/UPDATE/DELETE and no foreign-`conversationId` history leak; probe data cleaned. Runtime proofs for delete, double-submit idempotency, aborted stream, provider failure. Desktop 1280 and mobile 390x844 checks for handoff both directions, close/reopen, refresh, new/clear, streaming, no duplicates, no overflow.
-
-Focused tests per the AIC-4 list (runtime sharing, handoffs, anonymous session/refresh, authenticated restore, bounded history, escaping, idempotency, streaming persistence, RLS, export, cascade, separation of journey/memory, safety, grounding, identity). Then `npm test`, `npm run lint`, `npm run typecheck`, `npm run build` against the 79-file/776-test baseline with 0 new lint findings.
-
-Docs: update `docs/ai/companion-architecture.md`, create `docs/ai/companion-conversations.md`, add ADR-AIC4-01 … ADR-AIC4-08. Deploy only `ai-search` (plus export/delete functions only if they genuinely change). Grounding, NHS routing, identity, journey context and memory gating stay untouched.
-
-Closes as `AIC-4 ENGINEERING — CLOSED PASS` with `PRODUCTION CONVERSATION HISTORY — GATED`. Full 77-point report returned; AIC-5 not started.
+Missing tests to add before build: AMBER/uncertainty behaviour, unsupported routing, precedence (memory/page/history cannot lower severity), crisis-versus-clinical separation, classifier failure policy.

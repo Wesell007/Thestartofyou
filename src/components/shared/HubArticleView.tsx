@@ -12,6 +12,8 @@ import Footer from "@/components/layout/Footer";
 import ReadingProgressBar from "@/components/shared/ReadingProgressBar";
 import type { ReactNode } from "react";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 export interface HubArticleViewArticle {
   slug: string;

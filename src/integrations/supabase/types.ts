@@ -158,6 +158,39 @@ export type Database = {
         }
         Relationships: []
       }
+      companion_memories: {
+        Row: {
+          category: Database["public"]["Enums"]["companion_memory_category"]
+          created_at: string
+          id: string
+          normalised_value: string | null
+          source: Database["public"]["Enums"]["companion_memory_source"]
+          updated_at: string
+          user_id: string
+          value: string
+        }
+        Insert: {
+          category?: Database["public"]["Enums"]["companion_memory_category"]
+          created_at?: string
+          id?: string
+          normalised_value?: string | null
+          source: Database["public"]["Enums"]["companion_memory_source"]
+          updated_at?: string
+          user_id?: string
+          value: string
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["companion_memory_category"]
+          created_at?: string
+          id?: string
+          normalised_value?: string | null
+          source?: Database["public"]["Enums"]["companion_memory_source"]
+          updated_at?: string
+          user_id?: string
+          value?: string
+        }
+        Relationships: []
+      }
       contraction_events: {
         Row: {
           created_at: string
@@ -1137,6 +1170,7 @@ export type Database = {
         }
         Returns: number
       }
+      normalise_companion_memory: { Args: { p_value: string }; Returns: string }
       read_email_batch: {
         Args: { batch_size: number; queue_name: string; vt: number }
         Returns: {
@@ -1173,6 +1207,14 @@ export type Database = {
     }
     Enums: {
       baby_illustration_style: "default" | "light" | "medium" | "deep"
+      companion_memory_category:
+        | "preference"
+        | "personal_detail"
+        | "plan"
+        | "relationship"
+        | "support_preference"
+        | "other"
+      companion_memory_source: "explicit_command" | "settings"
       first_year_journey_status: "active" | "paused" | "completed"
       pregnancy_journey_status:
         | "active"
@@ -1308,6 +1350,15 @@ export const Constants = {
   public: {
     Enums: {
       baby_illustration_style: ["default", "light", "medium", "deep"],
+      companion_memory_category: [
+        "preference",
+        "personal_detail",
+        "plan",
+        "relationship",
+        "support_preference",
+        "other",
+      ],
+      companion_memory_source: ["explicit_command", "settings"],
       first_year_journey_status: ["active", "paused", "completed"],
       pregnancy_journey_status: [
         "active",

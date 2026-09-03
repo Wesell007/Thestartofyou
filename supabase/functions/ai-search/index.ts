@@ -8,6 +8,11 @@ import {
   renderJourneyContextBlock,
 } from "../_shared/aiJourneyContext.ts";
 import { AI_PAUSED_ANSWER, isAiDisabled, matchUrgent, urgentAnswer } from "../_shared/urgentPatterns.ts";
+import {
+  MEMORY_INSTRUCTIONS,
+  renderMemoryBlock,
+  type MemoryRecord,
+} from "../_shared/aiMemory.ts";
 
 // Internal traceability only: version data is logged once per cold start and
 // never reaches a browser or an answer.
@@ -138,6 +143,67 @@ const consumeRateLimit = async (req: Request): Promise<{ allowed: boolean; retry
   return { allowed: retryAfter === 0, retryAfter };
 };
 
+
+/**
+ * AIC-3 — permissioned memory retrieval.
+ *
+ * Authoritative kill switch: without AI_MEMORY_ENABLED=true nothing is
+ * queried and no memory block can exist. Identity comes only from a verified
+ * Supabase access token; a user id is never accepted from the request body.
+ * Retrieval runs through a user-scoped PostgREST call carrying that token, so
+ * row-level security stays active — the service role is not used here.
+ *
+ * Fails open: any problem means the answer is produced without memory.
+ */
+const isMemoryEnabled = () => (Deno.env.get("AI_MEMORY_ENABLED") ?? "").trim().toLowerCase() === "true";
+
+const bearerToken = (req: Request): string | null => {
+  const header = req.headers.get("authorization") ?? "";
+  const match = /^Bearer\s+(.+)$/i.exec(header.trim());
+  const token = match?.[1]?.trim();
+  if (!token) return null;
+  // The anonymous publishable key is not a user session.
+  const anonKey = Deno.env.get("SUPABASE_ANON_KEY");
+  if (anonKey && token === anonKey) return null;
+  return token;
+};
+
+const loadPermissionedMemory = async (req: Request): Promise<string> => {
+  if (!isMemoryEnabled()) return "";
+  const token = bearerToken(req);
+  if (!token) return "";
+  const supabaseUrl = Deno.env.get("SUPABASE_URL");
+  const anonKey = Deno.env.get("SUPABASE_ANON_KEY");
+  if (!supabaseUrl || !anonKey) return "";
+
+  try {
+    // 1. Verify the token with Supabase auth. Client claims are never trusted.
+    const userResponse = await fetch(`${supabaseUrl}/auth/v1/user`, {
+      headers: { apikey: anonKey, Authorization: `Bearer ${token}` },
+      signal: req.signal,
+    });
+    if (!userResponse.ok) return "";
+    const user = await userResponse.json();
+    if (!user?.id) return "";
+
+    // 2. Read through the verified user's own token so RLS applies. No
+    //    service role, no user id from the browser, no manual filter.
+    const rows = await fetch(
+      `${supabaseUrl}/rest/v1/companion_memories?select=value,category,updated_at&order=updated_at.desc&limit=24`,
+      { headers: { apikey: anonKey, Authorization: `Bearer ${token}` }, signal: req.signal },
+    );
+    if (!rows.ok) return "";
+    const records = (await rows.json()) as MemoryRecord[];
+    if (!Array.isArray(records) || records.length === 0) return "";
+    return renderMemoryBlock(records);
+  } catch (error) {
+    if (req.signal.aborted) return "";
+    // Counts only; a memory value is never logged.
+    console.error("ai-search memory unavailable", error instanceof Error ? error.name : "unknown error");
+    return "";
+  }
+};
+
 serve(async (req) => {
   const headers = responseHeaders(req);
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers });
@@ -205,9 +271,12 @@ serve(async (req) => {
   // AIC-2: the structured block is a separate, clearly named data section. The
   // legacy freeform context stays exactly as it was.
   const structuredJourneyContext = renderJourneyContextBlock(journeyContext);
+  // AIC-3: enrichment only, and only for a request that is going to the model.
+  const permissionedMemory = await loadPermissionedMemory(req);
   const userContent = [
     "<user_question>", query, "</user_question>",
     structuredJourneyContext,
+    permissionedMemory,
     context ? `<journey_context>\n${context}\n</journey_context>` : "",
     evidence ? `<background_material>\n${evidence}\n</background_material>` : "",
   ].filter(Boolean).join("\n");
@@ -223,9 +292,11 @@ serve(async (req) => {
             role: "system",
             // Interpretation rules live in the trusted layer, and only when
             // structured context is actually present.
-            content: structuredJourneyContext
-              ? `${modeConfig.systemPrompt}\n\n${JOURNEY_CONTEXT_INSTRUCTIONS}`
-              : modeConfig.systemPrompt,
+            content: [
+              modeConfig.systemPrompt,
+              structuredJourneyContext ? JOURNEY_CONTEXT_INSTRUCTIONS : "",
+              permissionedMemory ? MEMORY_INSTRUCTIONS : "",
+            ].filter(Boolean).join("\n\n"),
           },
           { role: "user", content: userContent },
         ],

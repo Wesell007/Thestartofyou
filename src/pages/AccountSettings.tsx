@@ -12,6 +12,7 @@ import { deleteTTCJourney } from "@/lib/savedTTCJourney";
 import { toast } from "@/hooks/use-toast";
 import JourneyStatusSection from "@/components/journey-status/JourneyStatusSection";
 import BabyIllustrationStyleField from "@/components/settings/BabyIllustrationStyleField";
+import CompanionMemorySection from "@/components/settings/CompanionMemorySection";
 import {
   SUGGESTED_NAMES,
   TONE_OPTIONS,
@@ -132,6 +133,8 @@ const AccountSettings = () => {
         // Phase 19B/22B: First Year memories. Words, plus the details of any photo
         // kept with a memory. The photo files themselves are never in the JSON.
         supabase.from("first_year_memories").select("*").eq("user_id", userId),
+        // AIC-3: everything the companion has been asked to remember.
+        supabase.from("companion_memories").select("*").eq("user_id", userId),
       ]);
       const error = results.find((result) => result.error)?.error;
       if (error) throw error;
@@ -157,6 +160,7 @@ const AccountSettings = () => {
         babies,
         firstYearEntries,
         firstYearMemories,
+        companionMemories,
       ] = results;
       const payload = {
         exported_at: new Date().toISOString(),
@@ -184,6 +188,7 @@ const AccountSettings = () => {
         babies: babies.data,
         first_year_notes: firstYearEntries.data,
         first_year_memories: firstYearMemories.data,
+        companion_memories: companionMemories.data,
       };
       const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" }));
       const anchor = document.createElement("a");
@@ -393,9 +398,12 @@ const AccountSettings = () => {
 
           {userId && <BabyIllustrationStyleField userId={userId} />}
 
+          {/* AIC-3 — visible, editable, removable. Gated by the client flag. */}
+          <CompanionMemorySection />
+
           <section className="rounded-2xl border border-border/50 bg-card p-6">
             <h2 className="font-serif text-xl mb-2">Download your data</h2>
-            <p className="text-sm text-muted-foreground mb-5">Creates a JSON file containing everything saved to your account: your profile, journey details, logs, reflections, First Year daily notes, First Year memories and the details of any photo kept with a memory, photo, video and voice note records, and all of your toolkit entries. Files themselves are not included, only their details.</p>
+            <p className="text-sm text-muted-foreground mb-5">Creates a JSON file containing everything saved to your account: your profile, journey details, logs, reflections, First Year daily notes, First Year memories and the details of any photo kept with a memory, photo, video and voice note records, anything your companion has been asked to remember, and all of your toolkit entries. Files themselves are not included, only their details.</p>
             <button type="button" onClick={exportData} disabled={Boolean(busy)} className="inline-flex items-center gap-2 rounded-pill border border-border px-5 py-2.5 text-sm disabled:opacity-50">
               <Download size={15} /> {busy === "export" ? "Preparing…" : "Download my data"}
             </button>

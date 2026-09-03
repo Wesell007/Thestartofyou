@@ -7,7 +7,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { capturedHandler } from "@/test/stubs/denoStdServe";
 import { AI_PAUSED_ANSWER } from "../../supabase/functions/_shared/urgentPatterns";
-import { UNSUPPORTED_ANSWERS } from "../../supabase/functions/_shared/companionBoundaryRouter";
+import { UNSUPPORTED_ANSWERS } from "../../supabase/functions/_shared/companionBoundaryRules";
 
 const ESCALATION_WORDING = /nhs\s?111|\b999\b|A&E|maternity unit|emergency|helpline/i;
 

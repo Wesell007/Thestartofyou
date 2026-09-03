@@ -10,7 +10,7 @@
 import { describe, expect, it } from "vitest";
 import dataset from "../../docs/ai/eval-dataset-v1.json";
 import { matchUrgent } from "../../supabase/functions/_shared/urgentPatterns";
-import { resolveClarification } from "../../supabase/functions/_shared/clarification";
+import { resolveClarification } from "../../supabase/functions/_shared/clarificationRules";
 
 type EvalRecord = {
   id: string;

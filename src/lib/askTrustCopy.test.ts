@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import askPageSource from "@/pages/AskPage.tsx?raw";
 import { APPROVED_SOURCES_TRUST_LINE, stripExternalSourceLinks } from "@/lib/answerSourceLinks";
-import { resolveClarification } from "../../supabase/functions/_shared/clarification";
+import { resolveClarification } from "../../supabase/functions/_shared/clarificationRules";
 
 describe("Ask trust copy (Phase 29B.2b)", () => {
   it("uses the single approved trust line", () => {

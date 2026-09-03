@@ -10,7 +10,7 @@ import {
 import { AI_PAUSED_ANSWER, isAiDisabled } from "../_shared/urgentPatterns.ts";
 import { decideSafety } from "../_shared/safetyRouter.ts";
 import { isDeterministicSafetyDecision } from "../_shared/safetyState.ts";
-import { decideBoundary } from "../_shared/companionBoundaryRouter.ts";
+import { decideBoundary } from "../_shared/companionBoundaryRules.ts";
 
 import {
   MEMORY_INSTRUCTIONS,

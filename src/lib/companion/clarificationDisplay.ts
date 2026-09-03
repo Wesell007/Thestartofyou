@@ -1,15 +1,15 @@
 /**
  * AIC-5C — clarification DISPLAY only.
  *
- * The decision to clarify is taken by the server (`_shared/clarification.ts`
- * via `_shared/companionBoundaryRouter.ts`) and reaches the browser as
+ * The decision to clarify is taken by the server (`_shared/clarificationRules.ts`
+ * via `_shared/companionBoundaryRules.ts`) and reaches the browser as
  * explicit structured metadata. Nothing here decides anything: this module
  * maps a server-provided topic to the existing card question and chips, so
  * the established clarification experience is preserved without parsing a
  * single character of assistant prose.
  */
 
-import type { ClarificationTopic } from "../../../supabase/functions/_shared/clarification";
+import type { ClarificationTopic } from "../../../supabase/functions/_shared/clarificationRules";
 
 export interface AskClarificationChip {
   /** Short chip label shown to the reader. */

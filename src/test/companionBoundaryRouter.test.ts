@@ -9,13 +9,13 @@ import { describe, expect, it } from "vitest";
 import {
   decideBoundary,
   UNSUPPORTED_ANSWERS,
-} from "../../supabase/functions/_shared/companionBoundaryRouter";
+} from "../../supabase/functions/_shared/companionBoundaryRules";
 import {
   CLARIFICATION_TOPICS,
   hasConcernWording,
   hasUsableReferent,
   resolveClarification,
-} from "../../supabase/functions/_shared/clarification";
+} from "../../supabase/functions/_shared/clarificationRules";
 
 const decide = (query: string, priorTurns?: Array<{ role: "user" | "assistant"; content: string }>) =>
   decideBoundary({ query, priorTurns });

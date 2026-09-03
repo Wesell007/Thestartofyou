@@ -7,6 +7,8 @@ import { Loader2, ChevronRight, Heart, BookOpen, Compass, ArrowUpRight, ArrowLef
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useAISearch } from "@/hooks/useAISearch";
+import { useCompanionPersonalJourney } from "@/hooks/useCompanionPersonalJourney";
+import { buildEntryContext, buildJourneyContext } from "@/lib/companion/journeyContext";
 import { buildCompanionRequest, resolveAskMode } from "@/lib/companion/companionRequest";
 import { BotanicalAccent, StageGlow, Sprig } from "@/components/shared/StageBotanical";
 import { getAiStageStyle, stageColors } from "@/lib/aiStageStyles";
@@ -251,6 +253,8 @@ const AskPage = () => {
   const stage = getAiStageStyle(stageKey);
   const sc = stageColors(stage);
   const { answer, isLoading, error, ask, reset } = useAISearch();
+  // AIC-2 — the same shared personal resolver the panel uses.
+  const { ensurePersonalJourney } = useCompanionPersonalJourney();
   const lastQueryRef = useRef("");
   const navigate = useNavigate();
   const isIVF = searchParams.get("journey") === "ivf";
@@ -356,11 +360,40 @@ const AskPage = () => {
       reset();
       // AIC-1 — /ask uses the same shared request boundary and the same
       // authoritative mode resolution as the site-wide companion panel.
-      const request = buildCompanionRequest({ query, context, mode: askMode });
-      ask(request.query, request.context, { mode: request.mode });
       window.scrollTo({ top: 0, behavior: "smooth" });
+      void (async () => {
+        const personal = await ensurePersonalJourney();
+        // AIC-2 — /ask carries entry provenance: where the question was asked
+        // from. It never becomes a personal fact.
+        const journeyContext = buildJourneyContext({
+          personal,
+          entry: buildEntryContext({
+            stage: stageKey,
+            journey: searchParams.get("journey"),
+            topic,
+            title: navigationState?.contextLabel ?? null,
+          }),
+        });
+        const request = buildCompanionRequest({ query, context, mode: askMode, journeyContext });
+        await ask(request.query, request.context, {
+          mode: request.mode,
+          journeyContext: request.journeyContext,
+        });
+      })();
     }
-  }, [query, context, clarification, ask, reset, askMode]);
+  }, [
+    query,
+    context,
+    clarification,
+    ask,
+    reset,
+    askMode,
+    ensurePersonalJourney,
+    stageKey,
+    topic,
+    searchParams,
+    navigationState,
+  ]);
 
   const goToQuestion = (question: string) => {
     const params = new URLSearchParams();

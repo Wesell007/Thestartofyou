@@ -22,3 +22,6 @@
 
 ## Not started
 - AIC-2 Journey Context (SAFE TO BEGIN), AIC-3 Permissioned Memory, AIC-4 Conversation Continuity, AIC-5 Safety/Emotional Intelligence, AIC-6/7 Voice — do not begin before AIC-1 closes.
+
+- AIC-2 — Journey Context: CLOSED PASS (structured provenance-separated context, shared personal resolver, strict server validation, ai-search deployed and smoke-tested). AIC-3 not started.
+- Debt: pregnancy-week formula still duplicated in MyWeek/MyJourney/KeptChapter (canonical helper now at src/lib/pregnancyWeek.ts, pages intentionally unrefactored).

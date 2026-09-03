@@ -19,6 +19,8 @@ import {
 } from "react";
 import { useLocation } from "react-router-dom";
 import { useAISearch } from "@/hooks/useAISearch";
+import { useCompanionPersonalJourney } from "@/hooks/useCompanionPersonalJourney";
+import { buildJourneyContext, buildPageContext } from "@/lib/companion/journeyContext";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 import type { CompanionMode } from "@/lib/companion/companionMode";
 import { buildCompanionRequest, resolvePanelMode } from "@/lib/companion/companionRequest";
@@ -73,6 +75,9 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   const location = useLocation();
   const identity = useCompanionIdentity();
   const { answer, isLoading, error, ask, reset } = useAISearch();
+  // AIC-2 — one shared personal resolver, awaited at submit and never blocking
+  // the send indefinitely.
+  const { ensurePersonalJourney } = useCompanionPersonalJourney();
 
   const [open, setOpen] = useState(false);
   // Pages that render a 404 suppress the companion for as long as they are
@@ -139,18 +144,38 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
 
       // Only the latest question, the bounded context and the mode, built at
       // the shared companion request boundary (AIC-1).
-      const request = buildCompanionRequest({ query: trimmed, context, mode });
-      void ask(request.query, request.context, { mode: request.mode });
+      void (async () => {
+        const personal = await ensurePersonalJourney();
+        const journeyContext = buildJourneyContext({
+          personal,
+          page: buildPageContext({ pathname: location.pathname }),
+        });
+        const request = buildCompanionRequest({ query: trimmed, context, mode, journeyContext });
+        await ask(request.query, request.context, {
+          mode: request.mode,
+          journeyContext: request.journeyContext,
+        });
+      })();
     },
-    [ask, context, isLoading, mode],
+    [ask, context, ensurePersonalJourney, isLoading, location.pathname, mode],
   );
 
   const retry = useCallback(() => {
     if (!lastQuestion || isLoading) return;
     committedRef.current = false;
-    const request = buildCompanionRequest({ query: lastQuestion, context, mode });
-    void ask(request.query, request.context, { mode: request.mode });
-  }, [ask, context, isLoading, lastQuestion, mode]);
+    void (async () => {
+      const personal = await ensurePersonalJourney();
+      const journeyContext = buildJourneyContext({
+        personal,
+        page: buildPageContext({ pathname: location.pathname }),
+      });
+      const request = buildCompanionRequest({ query: lastQuestion, context, mode, journeyContext });
+      await ask(request.query, request.context, {
+        mode: request.mode,
+        journeyContext: request.journeyContext,
+      });
+    })();
+  }, [ask, context, ensurePersonalJourney, isLoading, lastQuestion, location.pathname, mode]);
 
   const stop = useCallback(() => {
     reset();

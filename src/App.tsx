@@ -23,7 +23,7 @@ const ThirdTrimester = lazy(() => import("./pages/trimester/ThirdTrimester.tsx")
 const ArticlePage = lazy(() => import("./pages/ArticlePage.tsx"));
 const DueDateCalculator = lazy(() => import("./pages/DueDateCalculator.tsx"));
 const DueDateResults = lazy(() => import("./pages/DueDateResults.tsx"));
-const TTC = lazy(() => import("./pages/TTC.tsx"));
+
 const TTCHub = lazy(() => import("./pages/TTCHub.tsx"));
 const IVF = lazy(() => import("./pages/IVF.tsx"));
 // Postpartum: preserved in code for reuse, but no longer a live top-level
@@ -240,7 +240,7 @@ const App = () => (
           <Route path="/due-date-calculator" element={<DueDateCalculator />} />
           <Route path="/due-date-results" element={<DueDateResults />} />
           <Route path="/trying-to-conceive" element={<TTCHub />} />
-          <Route path="/trying-to-conceive/legacy" element={<TTC />} />
+          <Route path="/trying-to-conceive/legacy" element={<Navigate to="/trying-to-conceive" replace />} />
           <Route path="/ovulation-calculator" element={<OvulationCalculator />} />
           {/* Duplicate mount redirects to canonical /ovulation-calculator, preserving query string. */}
           <Route path="/trying-to-conceive/ovulation-calculator" element={<RedirectToOvulationCalculator />} />

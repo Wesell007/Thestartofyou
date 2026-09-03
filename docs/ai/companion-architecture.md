@@ -364,3 +364,35 @@ is rendered as an escaped `<permissioned_memory>` DATA block separate from the A
 `<structured_journey_context>` block. It fails open.
 
 Full detail: `docs/ai/companion-memory.md`. Decisions: `docs/ai/adr/ADR-AIC3.md`.
+
+## Safety intelligence and emotional continuity (AIC-5 audit)
+
+The complete verified safety path, mechanism-by-mechanism classification
+(deterministic / trusted prompt / grounding / display sanitisation / model
+judgement), the GREEN–AMBER–RED–CRISIS–UNSUPPORTED gap matrix, the safety
+evidence rules and the recommended build sequence live in
+`docs/ai/companion-safety-emotional-continuity.md`. Proposed decisions are
+recorded in `docs/ai/adr/ADR-AIC5-proposals.md` (ADR-AIC5-01 … 08, all
+PROPOSED).
+
+Summary of the audited runtime: safety decisions occur at four points only —
+deterministic urgent routing (`_shared/urgentPatterns.ts` `matchUrgent`), the
+`AI_SEARCH_DISABLED` kill switch, trusted mode prompt rules
+(`_shared/aiModes.ts`) and display sanitisation (`src/lib/aiAnswerSafety.ts`).
+Only the first two bypass the model. Both surfaces share one runtime and one
+endpoint, so safety parity is structural.
+
+Carried forward from the audit, unimplemented:
+
+- Rate limiting runs before urgent routing — a REACHABLE gap where deterministic
+  escalation is unavailable to a rate-limited caller.
+- `first_year_day_recap` suppresses escalation answers — CONDITIONALLY
+  REACHABLE only via a crafted client-supplied mode; standard product usage is
+  safe by construction.
+- With persistent history enabled, the user turn is stored before the safety
+  match — a retention observation with no current impact (both flags OFF).
+- Urgent routing runs before the kill switch — a positive property that must be
+  preserved.
+- AMBER is the principal missing state; deterministic RED and CRISIS may never
+  be downgraded; any classifier stays optional; emotional and safety-state
+  persistence stay at 0.

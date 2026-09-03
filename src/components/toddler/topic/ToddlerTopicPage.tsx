@@ -19,6 +19,8 @@ import {
 } from "@/data/toddlerArticleData";
 import ToddlerArticleCard from "@/components/toddler/article/ToddlerArticleCard";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 interface Props {
   config: ToddlerTopicConfig;

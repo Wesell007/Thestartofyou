@@ -12,6 +12,8 @@ import { firstYearStages } from "@/data/firstYearStageData";
 import NotFound from "@/pages/NotFound";
 import AskLink from "@/components/shared/AskLink";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import { HOME_CRUMB, TTC_CRUMB } from "@/lib/seo/journeyCrumbs";
 
 // Registry of all stage data by journey prefix

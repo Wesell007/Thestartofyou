@@ -5,6 +5,8 @@ import Footer from "@/components/layout/Footer";
 import type { MonthGuide, EditorialSection, FocusSection } from "@/data/firstYearMonthData";
 import { getAdjacentMonths, getMonthImagery } from "@/data/firstYearMonthData";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import { HOME_CRUMB, FIRST_YEAR_CRUMB } from "@/lib/seo/journeyCrumbs";
 
 
@@ -42,7 +44,6 @@ const Hero = ({ guide }: Props) => {
         <Breadcrumbs
           tone="section"
           className="mb-8 font-sans tracking-wide"
-
           items={breadcrumbItems}
         />
         <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] gap-10 md:gap-14 items-center">

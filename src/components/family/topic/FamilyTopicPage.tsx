@@ -16,6 +16,8 @@ import {
 import { getFamilyArticlesByTopic, type FamilyArticleTopic } from "@/data/familyArticleData";
 import FamilyArticleImageCard from "@/components/family/article/FamilyArticleImageCard";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 interface Props {
   config: FamilyTopicConfig;

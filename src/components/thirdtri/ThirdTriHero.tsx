@@ -3,6 +3,8 @@ import { Calendar, ArrowDown } from "lucide-react";
 import botanicalTr from "@/assets/botanical-branch-tr.png";
 import botanicalBl from "@/assets/botanical-branch-bl.png";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 interface Props {
   label: string;
@@ -48,7 +50,6 @@ const ThirdTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: P
         <Breadcrumbs
           tone="section"
           className="flex justify-center mb-7"
-
           items={breadcrumbItems}
         />
 

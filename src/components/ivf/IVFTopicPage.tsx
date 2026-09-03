@@ -44,6 +44,8 @@ import imgEmotionalCard from "@/assets/guidance-card-emotional.jpg";
 import imgSupport from "@/assets/guidance-support.jpg";
 import imgPregnancy from "@/assets/pregnancy-journey.jpg";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 // Per-stage theme — all lilac family, shifted by stage
 type IVFTheme = { accentHsl: string; tintHsl: string; icon: LucideIcon };
@@ -191,7 +193,6 @@ const IVFTopicPage = ({ config }: Props) => {
           <Breadcrumbs
             tone="section"
             className="font-sans tracking-wide"
-
             items={breadcrumbItems}
           />
         </div>

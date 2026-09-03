@@ -5,6 +5,8 @@ import Footer from "@/components/layout/Footer";
 import IVFTimelineResult from "@/components/ivf/IVFTimelineResult";
 import SeoHead from "@/components/seo/SeoHead";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import { HOME_CRUMB, IVF_CRUMB } from "@/lib/seo/journeyCrumbs";
 import { addDays, isAfter, isBefore, isValid, startOfDay } from "date-fns";
 
@@ -84,7 +86,6 @@ const IVFTimeline = () => {
         <Breadcrumbs
           tone="section"
           className="font-sans tracking-wide"
-
           items={breadcrumbItems}
         />
       </div>

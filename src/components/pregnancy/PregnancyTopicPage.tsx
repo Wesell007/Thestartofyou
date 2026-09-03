@@ -88,6 +88,8 @@ interface Props {
   config: PregnancyTopicPageConfig;
 }
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import { HOME_CRUMB, PREGNANCY_CRUMB } from "@/lib/seo/journeyCrumbs";
 
 // ─── Per-topic theme system ──────────────────────────────────────────────
@@ -362,7 +364,6 @@ const PregnancyTopicPage = ({ config }: Props) => {
             <Breadcrumbs
               tone="section"
               className="mb-8 font-sans tracking-wide"
-
               items={breadcrumbItems}
             />
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">

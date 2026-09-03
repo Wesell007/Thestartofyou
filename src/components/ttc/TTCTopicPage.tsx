@@ -91,6 +91,8 @@ import imgTTCAfter35 from "@/assets/ttc-after-35.jpg";
 import imgEmotionalPressureAge from "@/assets/ttc-emotional-pressure-age.jpg";
 import imgPartnerSupportTTC from "@/assets/ttc-partner-support.jpg";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 
 interface Props {
@@ -291,7 +293,6 @@ const TTCTopicPage = ({ config, heroImage }: Props) => {
           <Breadcrumbs
             tone="section"
             className="font-sans tracking-wide"
-
             items={breadcrumbItems}
           />
         </div>

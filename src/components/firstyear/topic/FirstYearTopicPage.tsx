@@ -17,6 +17,8 @@ import {
 import FirstYearArticleCard from "@/components/firstyear/article/FirstYearArticleCard";
 import AskLink from "@/components/shared/AskLink";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import { HOME_CRUMB, FIRST_YEAR_CRUMB } from "@/lib/seo/journeyCrumbs";
 
 // First Year topic pages are photo-led and calm. No botanical sprigs or
@@ -168,7 +170,6 @@ const FirstYearTopicPage = ({ config }: Props) => {
             <Breadcrumbs
               tone="section"
               className="mb-8 font-sans tracking-wide"
-
               items={breadcrumbItems}
             />
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-center">

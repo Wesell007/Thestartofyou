@@ -63,6 +63,8 @@ import imgCopingTwoWeekWait from "@/assets/ttc-coping-two-week-wait.jpg";
 import imgTrackingWithoutOverthinking from "@/assets/ttc-tracking-without-overthinking.jpg";
 import imgThyroidAndFertility from "@/assets/ttc-thyroid-and-fertility.jpg";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 
 interface Props {
   config: TTCPageConfig;
@@ -243,7 +245,6 @@ const TTCSubtopicPage = ({ config, heroImage }: Props) => {
           <Breadcrumbs
             tone="section"
             className="font-sans tracking-wide"
-
             items={breadcrumbItems}
           />
         </div>

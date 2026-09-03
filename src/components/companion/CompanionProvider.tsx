@@ -20,7 +20,8 @@ import {
 import { useLocation } from "react-router-dom";
 import { useAISearch } from "@/hooks/useAISearch";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
-import { resolveCompanionMode, type CompanionMode } from "@/lib/companion/companionMode";
+import type { CompanionMode } from "@/lib/companion/companionMode";
+import { buildCompanionRequest, resolvePanelMode } from "@/lib/companion/companionRequest";
 import { shouldShowCompanionLauncher } from "@/lib/companion/companionSurface";
 import { buildCompanionPanelContext } from "@/lib/companion/companionPanelContext";
 import { companionStarters } from "@/lib/companion/companionStarters";

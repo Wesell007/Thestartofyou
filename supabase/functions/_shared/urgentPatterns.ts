@@ -142,6 +142,15 @@ export const matchUrgent = (query: string): UrgentMatch => {
 const ABUSE_PATTERN =
   /(?:someone (?:at home )?(?:is )?(?:hurting|hitting|threatening) me|(?:partner|husband|wife|boyfriend|girlfriend) (?:hurt|hurts|hit|hits|is hurting|is hitting|is threatening) me|afraid of my (?:partner|husband|wife|boyfriend)|domestic abuse|not safe at home)/i;
 
+/**
+ * AIC-5A — the existing abuse/safeguarding discriminator, exposed so the shared
+ * safety router can report the crisis subtype. Matching semantics are unchanged:
+ * this is the same test `urgentAnswer` already performs internally.
+ */
+export const crisisSubtype = (query: string): "crisis" | "abuse" =>
+  ABUSE_PATTERN.test(query) ? "abuse" : "crisis";
+
+
 const CRISIS_ANSWER = `## Please get urgent help now
 
 If you may act on these thoughts or you are in immediate danger, call 999 or go to A&E now. If you can, stay with someone you trust and move away from anything you could use to hurt yourself.

@@ -7,7 +7,9 @@ import {
   JOURNEY_CONTEXT_INSTRUCTIONS,
   renderJourneyContextBlock,
 } from "../_shared/aiJourneyContext.ts";
-import { AI_PAUSED_ANSWER, isAiDisabled, matchUrgent, urgentAnswer } from "../_shared/urgentPatterns.ts";
+import { AI_PAUSED_ANSWER, isAiDisabled } from "../_shared/urgentPatterns.ts";
+import { decideSafety } from "../_shared/safetyRouter.ts";
+import { isDeterministicSafetyDecision } from "../_shared/safetyState.ts";
 import {
   MEMORY_INSTRUCTIONS,
   renderMemoryBlock,
@@ -423,6 +425,52 @@ serve(async (req) => {
   const parsed = parseAiSearchBody(rawBody);
   if (!parsed.ok) return json(req, { error: parsed.error }, 400);
 
+  const { query, context, mode, journeyContext, historyMode, conversationId, clientMessageId, sessionHistory } =
+    parsed.value;
+  const modeConfig = getAiModeConfig(mode);
+
+  // AIC-5A: the deterministic safety decision is taken immediately after body
+  // validation, before rate limiting, before the kill switch and before any
+  // mode behaviour. Nothing downstream may downgrade a RED or CRISIS result.
+  const safety = decideSafety(query);
+
+  // AIC-4 semantics are preserved on both branches: the conversation is
+  // established and the visible user turn stored before any answer is sent.
+  // Establishing it never influences safety severity, and on the deterministic
+  // branch a persistence failure can never suppress the safety answer.
+  const openConversation = async () => {
+    const setup = await establishConversation(req, historyMode, conversationId);
+    if (!setup.ok) return { ok: false as const, status: setup.status, error: setup.error };
+    if (setup.ctx) await persistMessage(req, setup.ctx, "user", query, clientMessageId);
+    return { ok: true as const, ctx: setup.ctx };
+  };
+
+  const sendControlled = async (answer: string, ctx: ConversationContext | null) => {
+    if (ctx) await persistMessage(req, ctx, "assistant", answer);
+    const response = sseAnswer(req, answer);
+    if (ctx) response.headers.set("X-Conversation-Id", ctx.conversationId);
+    return response;
+  };
+
+  if (isDeterministicSafetyDecision(safety)) {
+    // No model call, no grounding fetch, no journey/memory/history enrichment,
+    // and no ordinary AI quota check: this branch returns fixed controlled text
+    // that quota exhaustion or limiter failure must never be able to suppress.
+    let ctx: ConversationContext | null = null;
+    try {
+      const opened = await openConversation();
+      if (opened.ok) ctx = opened.ctx;
+    } catch {
+      ctx = null;
+    }
+    try {
+      return await sendControlled(safety.answer, ctx);
+    } catch {
+      return sseAnswer(req, safety.answer);
+    }
+  }
+
+  // GREEN only: ordinary generative rate limiting is unchanged (12/min, 100/hour).
   try {
     const rateLimit = await consumeRateLimit(req);
     if (!rateLimit.allowed) {
@@ -436,41 +484,22 @@ serve(async (req) => {
     return json(req, { error: "Guidance is temporarily unavailable. Please try again." }, 503);
   }
 
-  const { query, context, mode, journeyContext, historyMode, conversationId, clientMessageId, sessionHistory } =
-    parsed.value;
-  const modeConfig = getAiModeConfig(mode);
-
-  // AIC-4: the conversation is established before any answer path, so an
-  // urgent or paused reply is still visible in a stored thread. Establishing
-  // it does not load history and cannot influence safety classification.
-  const setup = await establishConversation(req, historyMode, conversationId);
+  const setup = await openConversation();
   if (!setup.ok) return json(req, { error: setup.error }, setup.status);
   const conversation = setup.ctx;
   const conversationHeader = conversation ? { "X-Conversation-Id": conversation.conversationId } : {};
-  if (conversation) await persistMessage(req, conversation, "user", query, clientMessageId);
 
-  const controlledAnswer = async (answer: string) => {
-    if (conversation) await persistMessage(req, conversation, "assistant", answer);
-    const response = sseAnswer(req, answer);
-    for (const [key, value] of Object.entries(conversationHeader)) response.headers.set(key, value);
-    return response;
-  };
+  const controlledAnswer = (answer: string) => sendControlled(answer, conversation);
 
-  if (matchUrgent(query)) {
-    // Recap-only surfaces never receive the escalation answer. They get a short
-    // controlled fallback instead, and the model is not called at all.
-    return controlledAnswer(
-      modeConfig.allowUrgentEscalationAnswer ? urgentAnswer(query) : DAY_RECAP_UNAVAILABLE_ANSWER,
-    );
-  }
-
-  // Phase 29D kill switch. Checked after hard escalation so a red or crisis
-  // question still receives its escalation answer while the companion is paused.
+  // Phase 29D kill switch, GREEN path only. RED and CRISIS have already
+  // returned above, so a high-risk question still gets its deterministic
+  // answer while the companion is paused.
   if (isAiDisabled(Deno.env.get("AI_SEARCH_DISABLED"))) {
     return controlledAnswer(
       modeConfig.allowUrgentEscalationAnswer ? AI_PAUSED_ANSWER : DAY_RECAP_UNAVAILABLE_ANSWER,
     );
   }
+
 
   const apiKey = Deno.env.get("LOVABLE_API_KEY");
   if (!apiKey) {

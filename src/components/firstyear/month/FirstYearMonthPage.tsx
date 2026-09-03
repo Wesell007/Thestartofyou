@@ -24,6 +24,13 @@ const askHref = (guide: MonthGuide, topic: string) =>
 const Hero = ({ guide }: Props) => {
   const { prev, next } = getAdjacentMonths(guide.slug);
   const img = getMonthImagery(guide.slug);
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    HOME_CRUMB,
+    FIRST_YEAR_CRUMB,
+    { label: guide.label, href: `/first-year/${guide.slug}` },
+  ];
+
   return (
     <section className="relative bg-parchment pt-28 pb-16 md:pt-32 md:pb-20 overflow-hidden">
       <div className="absolute inset-x-0 bottom-0 h-56 pointer-events-none flex">
@@ -31,14 +38,12 @@ const Hero = ({ guide }: Props) => {
         <div className="w-1/2 h-full blur-3xl opacity-50" style={{ backgroundColor: "hsl(var(--stage-recovery-soft) / 0.24)" }} />
       </div>
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-6xl relative">
+        <BreadcrumbJsonLd items={breadcrumbItems} />
         <Breadcrumbs
           tone="section"
           className="mb-8 font-sans tracking-wide"
-          items={[
-            HOME_CRUMB,
-            FIRST_YEAR_CRUMB,
-            { label: guide.label, href: `/first-year/${guide.slug}` },
-          ]}
+
+          items={breadcrumbItems}
         />
         <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] gap-10 md:gap-14 items-center">
           <div>

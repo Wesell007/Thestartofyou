@@ -50,6 +50,13 @@ const ToddlerAgePage = ({ config }: Props) => {
   const prev = config.previousAge ? TODDLER_AGE_INDEX[config.previousAge] : null;
   const next = config.nextAge ? TODDLER_AGE_INDEX[config.nextAge] : null;
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Home", href: "/" },
+    { label: "Toddler", href: "/toddler" },
+    { label: config.title, href: `/toddler/${config.slug}` },
+  ];
+
   return (
     <div className="min-h-screen font-sans bg-parchment">
       {/* Indexable age guide: metadata derives from the age config, so each of
@@ -78,16 +85,14 @@ const ToddlerAgePage = ({ config }: Props) => {
           />
 
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl lg:max-w-6xl relative z-10">
+            <BreadcrumbJsonLd items={breadcrumbItems} />
             <Breadcrumbs
               tone="section"
               showHomeIcon
               className="mb-10 md:mb-12 font-sans"
               colors={{ base: deepSoft, link: accent, current: deep }}
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Toddler", href: "/toddler" },
-                { label: config.title, href: `/toddler/${config.slug}` },
-              ]}
+
+              items={breadcrumbItems}
             />
 
             <div

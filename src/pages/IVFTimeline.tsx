@@ -68,19 +68,24 @@ const IVFTimeline = () => {
     );
   }
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    HOME_CRUMB,
+    IVF_CRUMB,
+    { label: "IVF timeline", href: "/ivf-timeline" },
+  ];
+
   return (
     <div className="min-h-screen bg-parchment">
       {TIMELINE_SEO}
       <Navbar />
       <div className="container mx-auto px-6 md:px-10 max-w-5xl pt-24 md:pt-28">
+        <BreadcrumbJsonLd items={breadcrumbItems} />
         <Breadcrumbs
           tone="section"
           className="font-sans tracking-wide"
-          items={[
-            HOME_CRUMB,
-            IVF_CRUMB,
-            { label: "IVF timeline", href: "/ivf-timeline" },
-          ]}
+
+          items={breadcrumbItems}
         />
       </div>
       <IVFTimelineResult transferDate={transferDate} transferType={transferType} />

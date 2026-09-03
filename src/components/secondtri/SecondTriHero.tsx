@@ -22,6 +22,13 @@ const SecondTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: 
     weekEnd,
   ];
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Home", href: "/" },
+    { label: "Pregnancy", href: "/pregnancy" },
+    { label, href: "/pregnancy/second-trimester" },
+  ];
+
   return (
     <section className="relative bg-parchment overflow-hidden pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-32 md:pb-20 lg:pt-36 lg:pb-24">
       <div className="absolute inset-0 pointer-events-none">
@@ -42,14 +49,12 @@ const SecondTriHero = ({ label, range, tagline, subtitle, weekStart, weekEnd }: 
       />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl relative z-10 text-center">
+        <BreadcrumbJsonLd items={breadcrumbItems} />
         <Breadcrumbs
           tone="section"
           className="flex justify-center mb-7"
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Pregnancy", href: "/pregnancy" },
-            { label, href: "/pregnancy/second-trimester" },
-          ]}
+
+          items={breadcrumbItems}
         />
 
         <p className="font-sans text-[11px] font-medium tracking-[0.28em] uppercase text-sage-muted mb-5">

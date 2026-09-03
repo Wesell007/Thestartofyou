@@ -223,23 +223,28 @@ const TTCSubtopicPage = ({ config, heroImage }: Props) => {
     </div>
   );
 
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Home", href: "/" },
+    { label: "Trying to conceive", href: "/trying-to-conceive" },
+    ...(parent
+      ? [{ label: parent.eyebrow, href: `/trying-to-conceive/${parent.slug}` }]
+      : []),
+    { label: config.eyebrow, href: `/trying-to-conceive/${config.slug}` },
+  ];
+
   return (
     <div className="min-h-screen font-sans bg-parchment">
       <Navbar />
       <main className="overflow-hidden">
         {/* Breadcrumb */}
         <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pt-[100px] sm:pt-[116px] md:pt-[128px]">
+          <BreadcrumbJsonLd items={breadcrumbItems} />
           <Breadcrumbs
             tone="section"
             className="font-sans tracking-wide"
-            items={[
-              { label: "Home", href: "/" },
-              { label: "Trying to conceive", href: "/trying-to-conceive" },
-              ...(parent
-                ? [{ label: parent.eyebrow, href: `/trying-to-conceive/${parent.slug}` }]
-                : []),
-              { label: config.eyebrow, href: `/trying-to-conceive/${config.slug}` },
-            ]}
+
+            items={breadcrumbItems}
           />
         </div>
 

@@ -55,6 +55,14 @@ const SectionLabel = ({ children, tone = "sage" }: { children: React.ReactNode; 
     tone === "terracotta" ? "text-terracotta"
     : tone === "lavender" ? "text-lavender-foreground"
     : "text-sage";
+  // Single authoritative crumb array: feeds the visible trail and the schema.
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Home", href: "/" },
+    { label: "Pregnancy", href: "/pregnancy" },
+    { label: "First trimester", href: "/pregnancy/first-trimester" },
+    { label: "Week 3", href: "/pregnancy/week/3" },
+  ];
+
   return (
     <div className="flex items-center gap-3 mb-3.5">
       <span className={`h-px w-7 bg-current opacity-50 ${toneCls}`} />
@@ -77,15 +85,12 @@ const Hero = () => (
         className="pointer-events-none absolute top-20 right-0 w-[150px] lg:w-[210px] opacity-25 select-none hidden md:block" />
 
       <div className="container mx-auto px-14 sm:px-16 md:px-10 max-w-5xl relative z-10 text-center">
+        <BreadcrumbJsonLd items={breadcrumbItems} />
         <Breadcrumbs
           tone="section"
           className="flex justify-center mb-6 sm:mb-7 font-sans text-[12px] font-normal text-foreground/65"
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Pregnancy", href: "/pregnancy" },
-            { label: "First trimester", href: "/pregnancy/first-trimester" },
-            { label: "Week 3", href: "/pregnancy/week/3" },
-          ]}
+
+          items={breadcrumbItems}
         />
 
         <p className="font-sans text-[11px] font-semibold tracking-[0.3em] uppercase text-lavender-foreground mb-5">

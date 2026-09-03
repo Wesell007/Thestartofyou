@@ -1,5 +1,5 @@
 import { describe, expect, it, afterEach } from "vitest";
-import { render, cleanup } from "@testing-library/react";
+import { render, cleanup, waitFor } from "@testing-library/react";
 import { HelmetProvider } from "react-helmet-async";
 import BreadcrumbJsonLd from "./BreadcrumbJsonLd";
 import SeoHead from "./SeoHead";
@@ -17,7 +17,10 @@ const readSchemas = () =>
     JSON.parse(node.textContent ?? "{}"),
   );
 
-const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
+const waitForSchemas = async (count: number) => {
+  await waitFor(() => expect(readSchemas()).toHaveLength(count));
+  return readSchemas();
+};
 
 afterEach(() => {
   cleanup();
@@ -31,7 +34,7 @@ describe("BreadcrumbJsonLd", () => {
         <BreadcrumbJsonLd items={[]} />
       </HelmetProvider>,
     );
-    await flush();
+    await new Promise((r) => setTimeout(r, 20));
     expect(readSchemas()).toHaveLength(0);
   });
 
@@ -41,9 +44,7 @@ describe("BreadcrumbJsonLd", () => {
         <BreadcrumbJsonLd items={items} />
       </HelmetProvider>,
     );
-    await flush();
-
-    const schemas = readSchemas();
+    const schemas = await waitForSchemas(1);
     const breadcrumbLists = schemas.filter((s) => s["@type"] === "BreadcrumbList");
     expect(breadcrumbLists).toHaveLength(1);
 
@@ -80,9 +81,7 @@ describe("BreadcrumbJsonLd", () => {
         </>
       </HelmetProvider>,
     );
-    await flush();
-
-    const schemas = readSchemas();
+    const schemas = await waitForSchemas(1);
     expect(schemas.filter((s) => s["@type"] === "Article")).toHaveLength(1);
     expect(schemas.filter((s) => s["@type"] === "BreadcrumbList")).toHaveLength(1);
     expect(schemas.find((s) => s["@type"] === "Article")?.headline).toBe("Newborn feeding rhythms");
@@ -94,7 +93,7 @@ describe("BreadcrumbJsonLd", () => {
         <BreadcrumbJsonLd items={[{ label: "</script><b>x", href: "/x" }]} />
       </HelmetProvider>,
     );
-    await flush();
+    await waitForSchemas(1);
 
     const node = document.head.querySelector('script[type="application/ld+json"]');
     expect(node?.textContent).not.toContain("</script>");

@@ -104,7 +104,7 @@ describe("WC-3c canonical breadcrumb hierarchies", () => {
   it("keeps unresolved legacy article surfaces free of BreadcrumbList schema", () => {
     for (const f of [
       "src/components/article/ArticleHeader.tsx",
-      "src/components/flagship/FlagshipHero.tsx",
+      "src/components/article/flagship/FlagshipHero.tsx",
     ]) {
       expect(read(f)).not.toContain("BreadcrumbJsonLd");
     }

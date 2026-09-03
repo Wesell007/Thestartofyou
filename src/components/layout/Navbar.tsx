@@ -125,7 +125,7 @@ const Navbar = () => {
             className="inline-flex items-center gap-1.5 font-sans text-[13px] font-light text-foreground/60 hover:text-foreground transition-colors"
           >
             <Sparkles size={13} strokeWidth={1.8} aria-hidden />
-            Ask a question
+            Companion
           </Link>
           {authed ? (
             <Link
@@ -188,7 +188,7 @@ const Navbar = () => {
             className="font-sans text-base font-light transition-colors py-3 px-2 rounded-lg text-foreground hover:text-sage hover:bg-sage-bg/20 inline-flex items-center gap-2"
           >
             <Sparkles size={15} strokeWidth={1.8} className="text-sage" aria-hidden />
-            Ask a question
+            Companion
           </Link>
 
           {authed ? (

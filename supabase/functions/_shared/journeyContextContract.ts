@@ -155,6 +155,7 @@ const unknownKeys = (record: Record<string, unknown>, allowed: readonly string[]
 export const sanitiseJourneyText = (value: string): string =>
   value
     // deno-lint-ignore no-control-regex
+    // eslint-disable-next-line no-control-regex -- stripping control characters is the point
     .replace(/[\u0000-\u001f\u007f]/g, " ")
     .replace(/[<>]/g, " ")
     .replace(/\s+/g, " ")

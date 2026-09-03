@@ -1,98 +1,73 @@
-# AIC-2 — Journey Context
+# AIC-3 — Permissioned Companion Memory
 
-Give both companion surfaces structured, minimal, provenance-separated journey context. Layer 1 only: no memory, no history, no emotional state, no voice, no UI redesign.
+## Pre-implementation audit (verified before this plan)
 
-## Source audit (verified in code before planning)
+**What exists today**
 
-Authoritative personal sources found:
+- `/prototype/memory-settings` (`src/pages/MemorySettingsPrototype.tsx` + `src/components/memory-prototype/*`) is a front-end-only prototype: local React state, synthetic items, no Supabase, no fetch, no storage, `noindex`, companion suppressed, and eleven tests that lock those guards.
+- Design docs already exist and are docs-only: `memory-design.md` (taxonomy, permission levels), `memory-schema-rls-design.md` (proposed three tables, enums, triggers, RLS — all pseudo-SQL, never applied), `memory-mvp-readiness.md` (Phase 29J gate marked NOT READY), `memory-settings-prototype.md`, `release-gate.md` memory gate.
+- No memory table exists in the database. Nothing in `profiles` overlaps with memory except `companion_name` / `companion_tone` / `baby_illustration_style`, which stay with `useCompanionIdentity`.
+- `/account` (canonical) and `/account-settings` both render `AccountSettings.tsx`, already sectioned: Your companion, Download your data, Current journey, Delete account. This is the natural home for memory management.
+- `ai-search` never receives a user JWT today: `useAISearch` sends the publishable key as `Authorization`. The function verifies no user, rate-limits by hashed IP, and works fully anonymously.
+- `delete-account` verifies the caller's JWT, clears storage, then `auth.admin.deleteUser` — so a `user_id` foreign key with `on delete cascade` removes memory automatically.
+- `journeyContextContract.ts` / `aiJourneyContext.ts` (AIC-2) are the structured journey layer; memory must not enter them.
 
-| Journey | Source | Auth | Explicit? | Notes |
-|---|---|---|---|---|
-| Active journey pointer | `journeys.lifecycle` (`pregnancy` / `ttc` / `first_year`) via `getActivePregnancyJourney`, `getActiveTTCJourney`, `getActiveFirstYearJourney`, `useLifecycle` | authenticated only | yes | single row per user, no ambiguity |
-| Pregnancy | `pregnancy_journeys` (lmp_date, due_date, status) with legacy `saved_journeys` fallback | authenticated | yes | status may be `given_birth` / `loss` / `paused` — only `active` yields personal stage |
-| TTC | `ttc_journeys` (stage, support_status, ivf_consideration, cycle dates) | authenticated | yes | user-picked enums |
-| IVF | no separate IVF journey record; only `ttc_journeys.ivf_consideration = in_treatment` | authenticated | yes | treated as TTC journey + `ivf` stage flag, not a separate journey type |
-| First Year | `journeys.lifecycle = first_year` + `babies` (date_of_birth, is_primary, birth_order) | authenticated | yes | multiple babies possible; `is_primary` is the authoritative active selection |
-| Toddler / Family / Postpartum | no personal journey record exists | — | — | classified UNAVAILABLE, never sent as personal |
+**Reuse decision:** reuse the prototype's copy, tone and component shapes; do not promote the prototype route. Build the production surface inside Account settings. No existing table is suitable, so one new table is required.
 
-Derivation utilities:
-- First Year / postpartum age: `getFirstYearAge` in `src/lib/firstYearDates.ts` (canonical, reused as-is).
-- Pregnancy week: currently duplicated verbatim in `MyWeek.tsx:49`, `MyJourney.tsx:75`, `KeptChapter.tsx:65` — identical formula, no discrepancy. AIC-2 adds one shared pure helper with the same formula and unit tests; existing pages are not refactored in this slice (recorded as debt).
-- Trimester label: existing `trimesterLabel` in `src/lib/companionContext.ts`.
+**Conflict to settle at approval:** the earlier 29H/29I/29J documents hold memory behind an open legal/privacy gate and define an enum with no conversation-derived source. AIC-3 explicitly approves explicit, user-commanded memory. This plan proceeds on AIC-3's instruction and supersedes those docs, recording the supersession in the docs themselves rather than silently ignoring them. Sensitive/clinical content stays out of memory, matching the earlier design.
 
-Existing freeform `context?: string`: panel uses `buildCompanionPanelContext` (route-derived only); `/ask` uses page context plus the `Previous question:` / `Previous answer:` pseudo-continuity. Pseudo-continuity stays untouched (AIC-4).
+## What gets built
 
-Backend logging audit: `ai-search` logs only version summary, provider status codes and error messages — no request body. No redaction change needed; a test will lock this in.
+### 1. Database (one migration)
 
-## Contract
+`public.companion_memories`
 
-`JourneyContextV1` (new, `src/lib/companion/journeyContext.ts`):
+- `id uuid pk`, `user_id uuid not null references auth.users(id) on delete cascade`
+- `category` enum `companion_memory_category`: `preference | personal_detail | plan | relationship | support_preference | other`
+- `value text` (1–240 chars), `normalised_value text` (lowercased/trimmed, used for duplicate detection)
+- `source` enum `companion_memory_source`: `explicit_command | confirmed_suggestion | settings`
+- `created_at`, `updated_at` (+ existing `set_updated_at` trigger)
 
-```ts
-{
-  version: 1,
-  personal?: {
-    journey: "pregnancy" | "trying-to-conceive" | "first-year",
-    stage?: string,          // e.g. "week 24", "second trimester" handled below
-    week?: number,           // pregnancy only, 1-42
-    trimester?: "first" | "second" | "third",
-    ageMonths?: number,      // first year only, 0-11
-    ttcStage?: string,       // authoritative enum only
-    ivf?: true               // only when ivf_consideration === "in_treatment"
-  },
-  page?: { journey?, pageType?, topic?, title?, week?, month? },
-  entry?: { topic?, title?, journey?, stage? }
-}
-```
+Plus: `GRANT SELECT, INSERT, UPDATE, DELETE ... TO authenticated`, `GRANT ALL ... TO service_role`, no `anon` grant, RLS enabled, four owner-scoped policies (`user_id = auth.uid()` on select/insert/update/delete, with `with check` on write paths), a unique index on `(user_id, normalised_value)`, a per-user row cap and a blocker trigger rejecting credential/secret-shaped and clinical-diagnosis-shaped values. No status column, no transcript, no journey duplication, no provenance beyond `source`.
 
-Hard rules encoded in the builder: page/entry never populate `personal`; no due date, DOB, email, user id, record id or profile object is ever included; ambiguous multi-baby state (more than one baby with no `is_primary`) omits `personal.ageMonths`; non-active pregnancy status omits personal pregnancy stage.
+### 2. Data + domain layers
 
-## Client work
+- `src/lib/companion/memory/companionMemoryRepository.ts` — the only place that touches Supabase for memory: `listMemories`, `createMemory`, `updateMemory`, `deleteMemory`, all relying on RLS and the session user, never a client-supplied id.
+- `src/lib/companion/memory/companionMemoryPolicy.ts` — pure logic: category validation, normalisation, length caps, prohibited-content rejection (passwords, tokens, card numbers, keys), duplicate resolution, update-instead-of-duplicate rules for contradictory preferences.
+- `src/lib/companion/memory/memoryIntent.ts` — pure, deterministic detection of an explicit "remember that…" / "forget that…" command from the user's own message. Application logic, not the model, decides whether a write may happen.
 
-1. `src/lib/companion/journeyContext.ts` — pure types + `buildJourneyContext({ personalSource, page, entry })`, plus derivation guards. No React, no Supabase.
-2. `src/lib/companion/journeyPersonalSource.ts` + `useCompanionPersonalJourney()` — one authenticated read of the existing helpers (`getActivePregnancyJourney`, `getActiveTTCJourney`, `getActiveFirstYearJourney` / `getPrimaryBaby`), returning the minimal derived personal shape. Anonymous → `null`. No new tables, no caching layer beyond React state.
-3. `src/lib/companion/companionRequest.ts` — extend `CompanionRequest` and `buildCompanionRequest` with optional `journeyContext`. Still pure; no network.
-4. `src/hooks/useAISearch.ts` — accept optional `journeyContext` in `AISearchOptions` and include it in the existing single fetch body. Remains the sole executor; zero new fetch clients.
-5. `CompanionProvider.tsx` — build `page` context from the route (reusing existing route resolvers) and attach personal context from the shared hook.
-6. `AskPage.tsx` — build `entry` context from existing `stage`/`journey`/`topic` params and router state, attach the same personal context. Pseudo-continuity string untouched. Mode resolution unchanged.
-7. `src/lib/askNavigation.ts` — small optional extension so CTAs may pass semantic entry info (topic/title) through existing router state; direct `/ask` with no state must keep working. No sensitive query strings.
+### 3. Permission flow (no silent memory)
 
-Freeform `context` is left in place; duplicates are only removed if parity tests prove exact duplication.
+- Explicit command: user says "remember that …" → deterministic parse → a **pending candidate in React state only** → an inline confirmation card showing exactly what would be saved → save on confirm, nothing on cancel.
+- Explicit confirmation: where the companion proposes a memory, the same card is used; ambiguous "okay" never counts — only pressing the confirm control does.
+- Ordinary conversation performs zero writes. Model output can never trigger a mutation.
+- Anonymous users get a plain message that remembering needs an account, with a sign-in link. No localStorage memory.
+- Forget: explicit delete of an identified memory; ambiguity asks which one.
 
-## Backend work
+### 4. Retrieval into the model (server-side, verified identity)
 
-8. `supabase/functions/_shared/validation.ts` — extend `parseAiSearchBody` to accept optional `journeyContext`: strict version check, enum allowlists, bounded strings, numeric range checks (week 1-42, month 0-11), rejection of unknown keys, nested objects and arrays. Requests without it stay valid.
-9. `supabase/functions/_shared/aiJourneyContext.ts` (new) — deterministic renderer producing one small block, e.g.
+`useAISearch` sends the user's Supabase access token in `Authorization` when a session exists, otherwise the publishable key exactly as today. `ai-search` calls `auth.getUser()` on that token; only on success does it load that user's memories with the service role scoped to the **verified** id. No `user_id` is ever accepted from the browser and no memory content is sent from the browser. Anonymous requests behave byte-identically to today.
 
-```text
-<journey_details>
-Saved journey details (from the person's own saved profile):
-- Journey: Pregnancy
-- Current stage: Week 24 (second trimester)
-Current content they are viewing:
-- Topic: Sleep during pregnancy
-Use these only when relevant. Page content is not a personal fact...
-</journey_details>
-```
+Bounded rendering: at most 8 memories, 240 chars each, 800 chars total, deterministic ordering (most recently updated first), emitted as a separate `<permissioned_memory>` block with its own trusted instruction text, never merged into `<structured_journey_context>` or legacy `<journey_context>`. Instructions state: user-approved details, use only when relevant, current message and authoritative journey state win, memory is not medical truth, safety overrides personalisation, never expose internal metadata.
 
-plus the fixed interpretation rules (current message overrides saved context for this answer only, no persistence implied, never expose internal labels, safety rules win).
+### 5. UI (minimum)
 
-10. `ai-search/index.ts` — insert the rendered block as its own segment in `userContent`, between the question and the existing `<journey_context>` freeform block, before `<background_material>`. Urgent matching, kill switch, rate limiting, grounding and mode prompts are unchanged and still run first. Deploy `ai-search` only.
+- New "What your companion remembers" section in `AccountSettings.tsx` (both mounted paths) — list, inline edit, delete with the existing `ConfirmDialog`, empty state, error state. No IDs or provenance shown, plain wording, existing visual system, keyboard accessible, verified at 1280px and 390x844.
+- Companion/Ask: only the confirmation card plus a concise success/failure line. No redesign of AskPage, CompanionPanel, launcher, navbar or homepage.
+- `/prototype/memory-settings` stays exactly as it is, prototype-labelled and unlinked.
 
-## Tests
+### 6. Docs and ADRs
 
-Focused tests (no large snapshots) covering: contract validation accept/reject, backwards compatibility without `journeyContext`, builder personal/page separation, pregnancy derived week/trimester, first-year derived month, ambiguous-baby omission, IVF-with-general-mode, anonymous route ≠ personal, personal/page disagreement, no-data fallback, exclusion of due date / DOB / ids from the payload, panel↔`/ask` personal parity, renderer output appearing exactly once, safety and grounding paths unchanged, no raw context logging, precedence instruction present.
+`docs/ai/companion-memory.md` (new, full spec), `companion-architecture.md` updated, plus supersession notes in `memory-design.md`, `memory-mvp-readiness.md`, `release-gate.md`. ADR-AIC3-01 … ADR-AIC3-07 recorded.
 
-## Docs
+### 7. Tests and security proof
 
-- Update `docs/ai/companion-architecture.md` with the AIC-2 flow and exact prompt insertion point.
-- New `docs/ai/companion-journey-context.md` with the contract, provenance, minimisation, precedence, ambiguity rules, validation, rendering, privacy guarantees and scenarios.
-- ADR-AIC2-01 … ADR-AIC2-06 recorded.
+Focused tests for: intent parsing, prohibited content, duplicates, contradictory updates, pending candidate writes nothing, confirm writes exactly one row, anonymous path, bounded prompt rendering, block separation from journey context, deletion/edit removing the old value from the rendered block, no raw memory logging, and grounding version unchanged. Cross-user isolation (read/update/delete of another user's row) is proven directly against the database with two real test users, and the rows are cleaned up afterwards.
 
-## Out of scope (unchanged)
+## Out of scope (untouched)
 
-AIC-3 memory, AIC-4 continuity, AIC-5 emotion, AIC-6/7 voice, aiModes expansion, grounding version `30B-source-routing-v1`, NHS source governance, `useCompanionIdentity`, memory settings prototype, all UI structure.
+Conversation history and thread state (AIC-4), emotional modelling (AIC-5), voice (AIC-6/7), embeddings/pgvector, proactive nudges, grounding (`30B-source-routing-v1`, 0 candidates, 0 approvals), NHS source governance, `useCompanionIdentity`, journey/profile tables, sitemap, robots, WC-1/2/3 surfaces.
 
 ## Validation
 
-`npm test`, `npm run lint` (baseline 1 prefer-const error, 10 react-refresh warnings), `npm run typecheck`, `npm run build`, then `ai-search` deployment and a live non-emergency smoke test on both surfaces. Full 57-point report returned at the end.
+`npm test`, `npm run lint` (must stay at 1 pre-existing error / 10 warnings), `npm run typecheck`, `npm run build`; one migration applied; only `ai-search` deployed; desktop and mobile checks; then the 64-point completion report. AIC-4 is not started.

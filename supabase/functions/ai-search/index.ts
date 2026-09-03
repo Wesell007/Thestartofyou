@@ -18,7 +18,7 @@ import {
   HISTORY_MAX_MESSAGES,
   renderConversationHistory,
   type ConversationTurn,
-} from "../_shared/aiConversation.ts";
+} from "../_shared/aiConversationHistory.ts";
 
 // Internal traceability only: version data is logged once per cold start and
 // never reaches a browser or an answer.

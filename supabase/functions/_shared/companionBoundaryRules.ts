@@ -22,7 +22,7 @@ import {
   hasUsableReferent,
   resolveClarification,
   type ClarificationTopic,
-} from "./clarification.ts";
+} from "./clarificationRules.ts";
 
 export type UnsupportedKind =
   | "diagnosis"
@@ -213,4 +213,4 @@ export const decideBoundary = ({ query, priorTurns }: BoundaryInput): BoundaryDe
   return { kind: "continue" };
 };
 
-export type { ClarificationTopic } from "./clarification.ts";
+export type { ClarificationTopic } from "./clarificationRules.ts";

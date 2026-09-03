@@ -93,3 +93,12 @@ Missing tests to add before build: AMBER/uncertainty behaviour, unsupported rout
 - Expected production code changes 0, test changes 0; baseline stays 80 files / 794 tests.
 
 Deliverables unchanged: `docs/ai/companion-safety-emotional-continuity.md`, an update to `docs/ai/companion-architecture.md`, ADR proposals `ADR-AIC5-01`…`ADR-AIC5-08` (Proposed only), a roadmap entry, and the 62-point completion report plus the additional explicit findings requested.
+
+## F. Additional audit gates (final approval message) — findings already verified
+
+- **Rate limit vs urgent routing: REACHABLE.** `consumeRateLimit` runs before `matchUrgent` in `ai-search/index.ts`; a caller over 12/min or 100/hour receives a 429 (or 503 when the limiter itself is unavailable) and never reaches deterministic RED/CRISIS/abuse routing. Recorded as an **AIC-5 BUILD SAFETY GAP**; options to assess (no production change now): run the deterministic safety match before ordinary rate-limit rejection, or add a separate tightly bounded urgent-path allowance. Rate limiting is not removed.
+- **Recap mode vs escalation: CONDITIONALLY REACHABLE.** Only `first_year_day_recap` sets `allowUrgentEscalationAnswer: false`. `matchUrgent` runs first, but a match in that mode returns `DAY_RECAP_UNAVAILABLE_ANSWER` instead of escalation. The only UI caller is `DaySummaryCard`, which composes structured recap text rather than free user input, and `resolveCompanionMode` never returns recap — so the normal product paths are safe by construction; a crafted request could still suppress escalation. Recorded as an AIC-5 Build item, not fixed here.
+- **Persistence before safety:** with persistent history enabled, the user turn is stored before `matchUrgent`, and the deterministic escalation answer is stored too. Flags are OFF, so there is no release impact today; recorded as a retention/privacy design observation, with the default policy that urgent turns are stored like any other visible turn. No safety labels or risk scores are persisted.
+- **Kill-switch ordering (positive property):** `matchUrgent` runs before the `AI_SEARCH_DISABLED` check, so generative answering can be paused while deterministic urgent and crisis guidance remains available. Ordering unchanged.
+
+The audit document will carry all four findings, and the AIC-5 build recommendation will place the rate-limit interaction ahead of the other slices.

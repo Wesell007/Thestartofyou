@@ -130,17 +130,13 @@ const HubArticleView = ({
             <div className={heroImage ? "grid gap-10 md:gap-12 lg:gap-16 md:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] md:items-center" : ""}>
               <div className={heroImage ? "max-w-[36rem]" : ""}>
             {/* Breadcrumb */}
+            <BreadcrumbJsonLd items={breadcrumbItems} />
             <Breadcrumbs
               tone="section"
               showHomeIcon
               className="mb-10 md:mb-12 font-sans"
               colors={{ base: deepSoft, link: accent, current: deep }}
-              items={[
-                { label: "Home", href: "/" },
-                { label: hubLabel, href: hubHref },
-                { label: topicLabel, href: topicHref },
-                { label: article.title, href: `${topicHref}/${article.slug}` },
-              ]}
+              items={breadcrumbItems}
             />
 
             {/* Eyebrow */}
